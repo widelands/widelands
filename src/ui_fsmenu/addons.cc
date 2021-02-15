@@ -711,13 +711,18 @@ bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
 		return true;
 	}
 
+	if (!info.matches_widelands_version()) {
+		// incompatible
+		return false;
+	}
+
 	if (!filter_category_.at(info.category)->get_state()) {
 		// wrong category
 		return false;
 	}
 
-	if (filter_verified_.get_state() && (!info.verified || !info.matches_widelands_version())) {
-		// not verified or wrong version
+	if (filter_verified_.get_state() && !info.verified) {
+		// not verified
 		return false;
 	}
 
@@ -871,7 +876,7 @@ void AddOnsCtrl::rebuild() {
 void AddOnsCtrl::update_dependency_errors() {
 	std::vector<std::string> warn_requirements;
 	for (auto addon = AddOns::g_addons.begin(); addon != AddOns::g_addons.end(); ++addon) {
-		if (!addon->second && AddOns::kAddOnCategories.at(addon->first.category).can_disable_addons) {
+		if (!addon->second) {
 			// Disabled, so we don't care about dependencies
 			continue;
 		}
@@ -894,8 +899,7 @@ void AddOnsCtrl::update_dependency_errors() {
 				    addon->first.descname() % requirement)
 				      .str());
 			} else {
-				if (!search_result->second &&
-				    AddOns::kAddOnCategories.at(search_result->first.category).can_disable_addons) {
+				if (!search_result->second) {
 					warn_requirements.push_back(
 					   (boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled")) %
 					    addon->first.descname() % search_result->first.descname())
@@ -1320,8 +1324,7 @@ void AddOnsCtrl::autofix_dependencies() {
 // Step 1: Enable all dependencies
 step1:
 	for (const AddOns::AddOnState& addon_to_fix : AddOns::g_addons) {
-		if (addon_to_fix.second ||
-		    !AddOns::kAddOnCategories.at(addon_to_fix.first.category).can_disable_addons) {
+		if (addon_to_fix.second) {
 			bool anything_changed = false;
 			bool found = false;
 			for (const std::string& requirement : addon_to_fix.first.requirements) {
@@ -1422,7 +1425,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                3 * kRowButtonSize,
                2 * kRowButtonSize + 3 * kRowButtonSpacing),
      info_(info),
-     enabled_(enabled || !AddOns::kAddOnCategories.at(info.category).can_disable_addons),
+     enabled_(enabled),
      uninstall_(this,
                 "uninstall",
                 0,
@@ -1432,9 +1435,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                 UI::ButtonStyle::kFsMenuSecondary,
                 g_image_cache->get("images/wui/menus/exit.png"),
                 _("Uninstall")),
-     toggle_enabled_(
-        AddOns::kAddOnCategories.at(info.category).can_disable_addons ?
-           new UI::Button(this,
+     toggle_enabled_(this,
                           "on-off",
                           0,
                           0,
@@ -1444,8 +1445,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                           g_image_cache->get(enabled ? "images/ui_basic/checkbox_checked.png" :
                                                        "images/ui_basic/checkbox_empty.png"),
                           enabled ? _("Disable") : _("Enable"),
-                          UI::Button::VisualState::kFlat) :
-           nullptr),
+                          UI::Button::VisualState::kFlat),
      category_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
@@ -1485,22 +1485,20 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 
 	uninstall_.sigclicked.connect(
 	   [ctrl, info]() { uninstall(ctrl, info, !ctrl->is_remote(info.internal_name)); });
-	if (toggle_enabled_) {
-		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
-			enabled_ = !enabled_;
-			for (auto& pair : AddOns::g_addons) {
-				if (pair.first.internal_name == info.internal_name) {
-					pair.second = !pair.second;
-					toggle_enabled_->set_pic(
-					   g_image_cache->get(pair.second ? "images/ui_basic/checkbox_checked.png" :
-					                                    "images/ui_basic/checkbox_empty.png"));
-					toggle_enabled_->set_tooltip(pair.second ? _("Disable") : _("Enable"));
-					return ctrl->update_dependency_errors();
-				}
+	toggle_enabled_.sigclicked.connect([this, ctrl, info]() {
+		enabled_ = !enabled_;
+		for (auto& pair : AddOns::g_addons) {
+			if (pair.first.internal_name == info.internal_name) {
+				pair.second = !pair.second;
+				toggle_enabled_.set_pic(
+				   g_image_cache->get(pair.second ? "images/ui_basic/checkbox_checked.png" :
+				                                    "images/ui_basic/checkbox_empty.png"));
+				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
+				return ctrl->update_dependency_errors();
 			}
-			NEVER_HERE();
-		});
-	}
+		}
+		NEVER_HERE();
+	});
 	category_.set_handle_mouse(true);
 	category_.set_tooltip(
 	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info.category).descname())
@@ -1526,10 +1524,8 @@ void InstalledAddOnRow::layout() {
 	uninstall_.set_size(kRowButtonSize, kRowButtonSize);
 	category_.set_size(kRowButtonSize, kRowButtonSize);
 	version_.set_size(3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize);
-	if (toggle_enabled_) {
-		toggle_enabled_->set_size(kRowButtonSize, kRowButtonSize);
-		toggle_enabled_->set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
-	}
+	toggle_enabled_.set_size(kRowButtonSize, kRowButtonSize);
+	toggle_enabled_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	category_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
 	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
 	version_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing,

@@ -50,7 +50,6 @@ struct AddOnCategoryInfo {
 	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
-	bool can_disable_addons;
 };
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.

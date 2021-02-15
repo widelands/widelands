@@ -59,6 +59,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	update_win_conditions();
 	update_peaceful_mode();
 	update_custom_starting_positions();
+	update_warn_desyning_addon();
 	update();
 	layout();
 }
