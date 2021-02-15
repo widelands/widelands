@@ -34,11 +34,11 @@
 namespace AddOns {
 
 // Taken from data/campaigns/campaigns.lua
-const std::map<std::string, std::string> kDifficultyIcons = {
-   {"Easy.", "images/ui_fsmenu/easy.png"},
-   {"Medium.", "images/ui_fsmenu/medium.png"},
+const std::unordered_map<std::string, std::string> kDifficultyIcons = {
+   {"Challenging.", "images/ui_fsmenu/challenging.png"},
    {"Hard.", "images/ui_fsmenu/hard.png"},
-   {"Challenging.", "images/ui_fsmenu/challenging.png"}};
+   {"Medium.", "images/ui_fsmenu/medium.png"},
+   {"Easy.", "images/ui_fsmenu/easy.png"}};
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,

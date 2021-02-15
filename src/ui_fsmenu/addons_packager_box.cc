@@ -350,14 +350,14 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
 		}
 	}
 
-	icon_difficulty_.selected.connect([this]() { edited(); });
-	tribe_select_.selected.connect([this]() { edited(); });
-	difficulty_.changed.connect([this]() { edited(); });
+	icon_difficulty_.selected.connect([this]() { edited_difficulty_icon(); });
+	difficulty_.changed.connect([this]() { edited_difficulty(); });
 	short_desc_.changed.connect([this]() { edited(); });
+	tribe_select_.selected.connect([this]() { edited(); });
 	maps_box_.set_modified_callback([this]() { edited(); });
 
 	difficulty_.set_tooltip(_("The campaigns difficulty. One word."));
-	short_desc_.set_tooltip(_("Short description, which will be appeded to the difficulty."));
+	short_desc_.set_tooltip(_("Short description, which will be appended to the difficulty."));
 
 	difficulty_hbox_.add(&difficulty_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	difficulty_hbox_.add_space(kSpacing);
@@ -372,6 +372,33 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
 	add(&tribe_select_, UI::Box::Resizing::kFullSize);
 	add_space(kSpacing);
 	add(&maps_box_, UI::Box::Resizing::kExpandBoth);
+}
+
+std::string CampaignAddOnsPackagerBox::reverse_icon_lookup(const std::string& value) {
+	// Reverse map lookup
+	auto result = std::find_if(
+	   AddOns::kDifficultyIcons.begin(), AddOns::kDifficultyIcons.end(),
+	   [&value](const std::pair<std::string, std::string>& pair) { return pair.second == value; });
+	assert(result != AddOns::kDifficultyIcons.end());
+	return result->first;
+}
+
+void CampaignAddOnsPackagerBox::edited_difficulty_icon() {
+	if (difficulty_.text() == last_difficulty_) {
+		// Transfer icon to editbox
+		last_difficulty_ = reverse_icon_lookup(icon_difficulty_.get_selected());
+		difficulty_.set_text(last_difficulty_);
+	}
+	edited();
+}
+
+void CampaignAddOnsPackagerBox::edited_difficulty() {
+	if (AddOns::kDifficultyIcons.count(difficulty_.text())) {
+		// Transfer editbox to icon
+		last_difficulty_ = difficulty_.text();
+		icon_difficulty_.select(AddOns::kDifficultyIcons.at(last_difficulty_));
+	}
+	edited();
 }
 
 void CampaignAddOnsPackagerBox::edited() {
@@ -408,6 +435,7 @@ void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 		selected_->set_difficulty_icon(AddOns::kDifficultyIcons.at("Easy."));
 	}
 	icon_difficulty_.select(metadata.difficulty_icon);
+	last_difficulty_ = reverse_icon_lookup(metadata.difficulty_icon);
 
 	maps_box_.load_addon(a);
 }

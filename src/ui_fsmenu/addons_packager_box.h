@@ -93,11 +93,15 @@ public:
 
 private:
 	void edited();
+	void edited_difficulty_icon();
+	void edited_difficulty();
+	std::string reverse_icon_lookup(const std::string& value);
 	MapsAddOnsPackagerBox maps_box_;
 	UI::Box difficulty_hbox_;
 	UI::Dropdown<std::string> tribe_select_, icon_difficulty_;
 	UI::EditBox difficulty_, short_desc_;
 	UI::Textarea difficulty_label_;
+	std::string last_difficulty_;
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 
