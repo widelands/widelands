@@ -384,7 +384,7 @@ std::string CampaignAddOnsPackagerBox::reverse_icon_lookup(const std::string& va
 }
 
 void CampaignAddOnsPackagerBox::edited_difficulty_icon() {
-	if (difficulty_.text() == last_difficulty_) {
+	if (difficulty_.text().empty() || difficulty_.text() == last_difficulty_) {
 		// Transfer icon to editbox
 		last_difficulty_ = reverse_icon_lookup(icon_difficulty_.get_selected());
 		difficulty_.set_text(last_difficulty_);
