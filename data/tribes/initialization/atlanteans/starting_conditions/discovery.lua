@@ -31,16 +31,14 @@
 --    **func**: A standardized function to determine whether to share this start condition between players (Shared Kingdom)
 --              It needs to be declared like this: ``func = function(player, shared_in_start)``.
 --              Later in the code it is necessary to use the result (Variable ``shared_in_start``) to share the starting field
---              together with the start condition.
---              Example:
---              .. code-block:: lua
+--              together with the start condition. 
+--              Example::
 --
 --              if shared_in_start then
 --                 sf = shared_in_start
 --              else
 --                 player:allow_workers("all")
 --              end
---              ...
 --
 -- After these declarations the lua commands to define the initial mapobjects for the player follow.
 --
