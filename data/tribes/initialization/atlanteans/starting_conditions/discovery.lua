@@ -39,9 +39,9 @@
 -- .. code-block:: lua
 --
 -- include "scripting/starting_conditions.lua"
-
+--
 -- push_textdomain("tribes")
-
+--
 -- init = {
 --    -- TRANSLATORS: This is the name of a starting condition
 --    descname = _ "Discovery",
