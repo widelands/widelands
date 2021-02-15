@@ -52,10 +52,6 @@ void MainMenuLoadMap::clicked_ok() {
 		set_current_directory(mapdata.filename);
 		fill_table();
 	} else {
-		// Prevent description notes from reaching a subscriber
-		// other than the one they're meant for
-		egbase_.delete_world_and_tribes();
-
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 		eia.egbase().create_loader_ui({"editor"}, true, "", editor_splash_image());
 		eia.load(mapdata.filename);
