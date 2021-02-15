@@ -50,6 +50,9 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
+
+int32_t Descriptions::instances_ = 0;
+
 Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
@@ -68,6 +71,7 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
         [this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) { check(note); })),
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
+	instances_++;
 
 	// Immediately preload and register all add-on units. Better to do this
 	// very early than to risk crashes because it was done too late…
@@ -117,7 +121,11 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
 }
 
 Descriptions::~Descriptions() {
-	if (g_sh != nullptr) {
+	// We might have multiple Descriptions instances
+	// so the sounds should only go with the last one
+	// to prevent "Sound effect does not exist" errors
+	instances_--;
+	if (g_sh != nullptr && 0 == instances_) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
 	}
 }
