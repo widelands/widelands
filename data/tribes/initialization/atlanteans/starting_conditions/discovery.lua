@@ -17,7 +17,7 @@
 --
 --    **tooltip**: A short description of the starting condition. Should contain essential hints if necessary.
 --
---    **map_tags**: *Optional* A table with map tags that are required for this starting condition.
+--    **map_tags**: *Optional* A table with map tags that are required for this starting condition,
 --                  e.g. ``{ "seafaring" }`` if the starting conditions needs a seafaring map.
 --                  If present, the starting condition can only be selected by the user if the map contains *all* listed tags.
 --
