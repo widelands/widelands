@@ -115,6 +115,7 @@ public:
 
 	// The terrain which certain workers can transform this terrain into.
 	const std::string& enhancement() const;
+	void set_enhancement(const std::string&);
 
 private:
 	const std::string name_;

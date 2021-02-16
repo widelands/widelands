@@ -1,25 +1,21 @@
-dirname = "tribes/workers/frisians/stonemason/"
+dirname = "tribes/workers/frisians/claydigger/"
 
 push_textdomain("scenario_fri03.wmf")
 
 descriptions:new_worker_type {
-   name = "frisians_debris_stonemason",
+   name = "frisians_diker",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext ("frisians_worker", "Debris Stonemason"),
+   descname = pgettext ("frisians_worker", "Diker"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      frisians_carrier = 1,
-      pick = 1
-   },
-
    programs = {
-      quarry = {
-         "findobject=attrib:debris radius:11",
-         "walk=object",
-         "animate=hacking duration:20s",
-         "callobject=remove",
+      dike = {
+         "findspace=size:swim radius:6 terraform",
+         "walk=coords",
+         "animate=dig duration:30s",
+         "terraform",
+         "animate=dig duration:30s",
          "return"
       }
    },
@@ -44,15 +40,15 @@ descriptions:new_worker_type {
          directional = true,
          hotspot = {10, 26}
       },
-      hacking = {
-         fps = 10,
+      dig = {
+         fps = 20,
          frames = 10,
          columns = 5,
          rows = 2,
-         hotspot = {17, 31}
+         hotspot = {15, 20}
       },
    },
-   animations = { idle = { hotspot = {8, 23}}},
+   animations = {idle = {hotspot = {8, 23}}}
 }
 
 pop_textdomain()

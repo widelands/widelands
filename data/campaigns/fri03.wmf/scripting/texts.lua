@@ -35,15 +35,6 @@ obj_north = {
    ),
 }
 
-obj_debris_quarry = {
-   name = "debris_quarry",
-   title=_"Remove the debris",
-   number = 1,
-   body = objective_text(_"Build a Debris Quarry",
-      li(_[[Remove the debris between the two ports by building a debris quarry.]])
-   ),
-}
-
 obj_atl = {
    name = "atl",
    title=_"Destroy Angadthur’s Palace",
@@ -133,15 +124,18 @@ intro_6 = {
       _([[We must not fail. The future of my people depends on me.]])),
 }
 
+diker = {
+   title = _"Diking",
+   body=claus(_"Gaining Land",
+      -- TRANSLATORS: Claus Lembeck – Diker
+      _([[This island is a bit too small and cramped for my liking. There is an experienced diker among my people, and he has suggested to use some logs to construct breakwaters, which will allow us to seize some extra land from the sea. It will be a slow and expensive business, and I hope we will not stay on this island much, but at least we should consider it.]])),
+}
+
 port_1 = {
    title = _"Port Space Found",
    body=claus(_"One step closer to the North",
       -- TRANSLATORS: Claus Lembeck – Port Space 1
-      _([[My soldiers report they have found a port space! Now we need to build a port and a shipyard and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Claus Lembeck – Port Space 1
-      _([[Would you believe it, but the port space is right next to the place from which we started our search, but there is a narrow strip of debris making it necessary to take a long detour. We should build a debris quarry to remove this debris.]]))
-      .. new_objectives(obj_north, obj_debris_quarry),
+      _([[My soldiers report they have found a port space! Now we need to build a port and a shipyard and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])),
 }
 port_2 = {
    title = _"A Strange Island",

@@ -23,43 +23,15 @@ port_desert_s = map:get_field(42, 243)
 port_desert_n = map:get_field(4, 235)
 port_north = map:get_field(20, 162)
 
-local field = map:get_field(1, 456)
-obstacles_1 = {field}
-for i=1, 14 do
-   field = field.brn
-   table.insert(obstacles_1, field)
+descriptions = wl.Descriptions()
+for i,terrain in pairs(descriptions.terrain_descriptions) do
+   descriptions:modify_unit("terrain", terrain.name, "enhancement", "")
 end
--- NOCOM: The obstacle-related scripting <2> and <3> is to ensure that the red and yellow
--- players don't reach the port spaces too soon. If testers report that this is a problem,
--- this code will be uncommented, else removed.
--- (Note to self: Don't forget to adjust mission_thread and starting_conditions!)
--- obstacles_1 is used to ensure the player doesn’t reach the first port space
--- before he owns the whole southern island.
-
--- obstacles_2 = {
---    map:get_field(19, 401),
---    map:get_field(21, 399),
---    map:get_field(22, 397),
---    map:get_field(23, 397),
---    map:get_field(25, 395),
---    map:get_field(26, 393),
---    map:get_field(27, 389),
---    map:get_field(28, 389),
---    map:get_field(30, 389),
---    map:get_field(31, 386),
---    map:get_field(29, 384),
---    map:get_field(31, 383),
--- }
--- field = map:get_field(15, 164)
--- obstacles_3 = {field}
--- for i=1, 11 do
---    field = field.trn
---    table.insert(obstacles_3, field)
--- end
--- for i=1, 10 do
---    field = field.brn
---    table.insert(obstacles_3, field)
--- end
+descriptions:modify_unit("terrain", "winter_water", "enhancement", "summer_beach")
+descriptions:modify_unit("terrain", "ice_floes",    "enhancement", "ice")
+descriptions:modify_unit("terrain", "ice_floes2",   "enhancement", "ice")
+descriptions:modify_unit("terrain", "ice",          "enhancement", "summer_beach")
+descriptions:modify_unit("terrain", "summer_beach", "enhancement", "summer_steppe_barren")
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

@@ -49,6 +49,10 @@ function mission_thread()
    -- This objective stays active until the player meets the Empire
    local o_north = add_campaign_objective(obj_north)
 
+   sleep(10 * 60 * 1000)
+   campaign_message_box(diker)
+   p1:allow_buildings({"frisians_dikers_house"})
+
    -- Wait until the first port space is found (and reachable)
    while true do
       sleep(2341)
@@ -75,32 +79,11 @@ function mission_thread()
       end
    end
    p1:conquer(port_south, 4)
-   p1:allow_buildings({"frisians_debris_quarry"})
    scroll_to_field(port_south)
    campaign_message_box(port_1)
-   run(function()
-      local o_debris = add_campaign_objective(obj_debris_quarry)
-      while true do
-         local all_debris_gone = true
-         for i,f in pairs(obstacles_1) do
-            if f.immovable and f.immovable.descr.name == "debris00" then
-               all_debris_gone = false
-               break
-            end
-         end
-         if all_debris_gone then
-            set_objective_done(o_debris)
-            return
-         end
-         sleep(5000)
-      end
-   end)
 
    -- Wait for the player to build a port on the Volcano Island
    while not (port_volcano.immovable and port_volcano.immovable.descr.name == "frisians_port") do sleep(2341) end
---    for i,f in pairs(obstacles_2) do
---       f.immovable:remove()
---    end
    scroll_to_field(port_volcano)
    sleep(2000)
    campaign_message_box(port_2)
@@ -162,9 +145,6 @@ function mission_thread()
 
    -- Wait for the player to build a port on the Northern Shore
    while not (port_north.immovable and port_north.immovable.descr.name == "frisians_port") do sleep(2341) end
---    for i,f in pairs(obstacles_3) do
---       f.immovable:remove()
---    end
    scroll_to_field(port_north)
    sleep(1000)
    campaign_message_box(port_6)

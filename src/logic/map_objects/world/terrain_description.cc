@@ -120,17 +120,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		}
 	}
 
-	if (table.has_key("enhancement")) {
-		enhancement_ = table.get_string("enhancement");
-		if (enhancement_ == name_) {
-			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
-		}
-		// Ensure terrain exists and is loaded
-		Notifications::publish(
-		   NoteMapObjectDescription(enhancement_, NoteMapObjectDescription::LoadType::kObject));
-	} else {
-		enhancement_ = "";
-	}
+	set_enhancement(table.has_key("enhancement") ? table.get_string("enhancement") : "");
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
@@ -183,6 +173,18 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 			SDL_FreeSurface(sdl_surface);
 		}
 		add_texture(g_image_cache->get(texture_paths()[j]));
+	}
+}
+
+void TerrainDescription::set_enhancement(const std::string& e) {
+	if (enhancement_ == name_) {
+		throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
+	}
+	// Ensure terrain exists and is loaded
+	enhancement_ = e;
+	if (!enhancement_.empty()) {
+		Notifications::publish(
+		   NoteMapObjectDescription(enhancement_, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 

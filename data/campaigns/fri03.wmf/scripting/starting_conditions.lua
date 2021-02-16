@@ -1,18 +1,8 @@
--- Map
-
-for i,f in pairs( -- array_combine(
-   obstacles_1 --,
---    obstacles_2,
---    obstacles_3 )
-) do
-   map:place_immovable("debris00", f)
-end
-
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
 p1:allow_buildings("all")
-p1:forbid_buildings({"frisians_debris_quarry"})
+p1:forbid_buildings({"frisians_dikers_house"})
 hq = p1:place_building("frisians_port", map.player_slots[1].starting_field, false, true)
 hq:set_wares {
    log = 40,
@@ -51,7 +41,8 @@ hq:set_workers {
    frisians_stonemason = 4,
    frisians_reindeer = 2,
    frisians_miner = 4,
-   frisians_charcoal_burner = 3
+   frisians_charcoal_burner = 3,
+   frisians_diker = 1
 }
 local soldiers = {35, 20, 5}
 hq:set_soldiers({0,0,0,0}, soldiers[difficulty])
@@ -128,6 +119,7 @@ soldiers = {
    {{1,4,2,2}, 50},
 }
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
+p2:conquer(map.player_slots[2].starting_field.brn.bln.brn.bln.brn.bln.brn.bln, 10)
 
 -- =======================================================================
 --                                 Player 3
@@ -139,7 +131,7 @@ p3:forbid_buildings {
    "empire_fortress",
 }
 
-hq = p3:place_building("empire_port", map.player_slots[3].starting_field, false, true)
+hq = p3:place_building("empire_port_large", map.player_slots[3].starting_field, false, true)
 hq:set_wares {
    log = 80,
    granite = 40,

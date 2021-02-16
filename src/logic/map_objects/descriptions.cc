@@ -346,6 +346,9 @@ const ShipDescr* Descriptions::get_ship_descr(DescriptionIndex index) const {
 const TerrainDescription* Descriptions::get_terrain_descr(DescriptionIndex index) const {
 	return terrains_->get_mutable(index);
 }
+TerrainDescription* Descriptions::get_mutable_terrain_descr(DescriptionIndex index) const {
+	return terrains_->get_mutable(index);
+}
 const TerrainDescription* Descriptions::get_terrain_descr(const std::string& name) const {
 	DescriptionIndex const i = terrains_->get_index(name);
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
