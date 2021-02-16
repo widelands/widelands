@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for New World
+--              New World starting conditions for Barbarians
 -- =======================================================================
 
 include "scripting/starting_conditions.lua"

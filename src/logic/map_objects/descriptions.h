@@ -212,6 +212,8 @@ private:
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
+
+	static uint32_t instances_;
 };
 
 }  // namespace Widelands
