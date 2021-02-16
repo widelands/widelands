@@ -2,7 +2,7 @@
 -- .. _lua_tribes_tribes_start_conditions:
 --
 -- Starting Conditions
--- ================
+-- ===================
 --
 -- The starting conditions a tribe can use are listed in the tribes :ref:`init.lua <lua_tribes_tribes_init>` file.
 --
