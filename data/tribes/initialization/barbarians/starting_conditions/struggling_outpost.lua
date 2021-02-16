@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Hardcore Starting conditions for Barbarians
+--    Hardcore (Struggling Outpost) starting conditions for Barbarians
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

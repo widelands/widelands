@@ -1,5 +1,5 @@
 -- =======================================================================
---              Hardcore Starting Conditions for Amazons
+--      Hardcore (Struggling Outpost) starting conditions for Amazons
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

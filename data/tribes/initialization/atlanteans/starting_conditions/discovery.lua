@@ -1,34 +1,34 @@
 -- RST
 -- .. _lua_tribes_tribes_start_conditions:
 --
--- Start Conditions
+-- Starting Conditions
 -- ================
 --
--- The start conditions a tribe can use are listed in the tribes :ref:`init.lua <lua_tribes_tribes_init>` file.
+-- The starting conditions a tribe can use are listed in the tribes :ref:`init.lua <lua_tribes_tribes_init>` file.
 --
 -- They are defined in their definition files named as follows and located in
 -- ``data/tribes/initialization/<tribe_name>/starting_conditions/<start_condition_name>.lua``.
 --
 -- .. function:: init
 --
---    This function initializes the start condition.
+--    This function initializes the starting condition.
 --
---    :arg table: This table contains all the data needed to initialize the start condition.
+--    :arg table: This table contains all the data needed to initialize the starting condition.
 --                It contains the following entries:
 --
---    **descname**: The localized name of the start condition.
+--    **descname**: The localized name of the starting condition.
 --
---    **tooltip**: A short description of the start condition. Should contain essential hints if necessary.
+--    **tooltip**: A short description of the starting condition. Should contain essential hints if necessary.
 --
---    **map_tags**: *Optional* A table with map tags that are required for this startcondition.
---                  e.g. ``{ "seafaring" }`` if the start conditions needs a seafaring map.
---                  If present, the start condition can only be selected by the user if the map contains *all* listed tags.
+--    **map_tags**: *Optional* A table with map tags that are required for this starting condition.
+--                  e.g. ``{ "seafaring" }`` if the starting conditions needs a seafaring map.
+--                  If present, the starting condition can only be selected by the user if the map contains *all* listed tags.
 --
 --    **incompatible_wc**: *Optional* A table with strings containing the paths of win conditions that are incompatible with this
---                         start condition, e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the start condition
+--                         starting condition, e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the starting condition
 --                         is incompatible with the win condition "HQ Hunter".
 --
---    **func**: A standardized function to determine whether to share this start condition between players (Shared Kingdom)
+--    **func**: A standardized function to determine whether to share this starting condition between players (Shared Kingdom)
 --              It needs to be declared like this: ``func = function(player, shared_in_start)``.
 --              Later in the code it is necessary to use the result (Variable ``shared_in_start``) to share the starting field
 --              together with the start condition.
@@ -108,7 +108,7 @@
 
 
 -- =======================================================================
---                 Start conditions for Discovery
+--                 Discovery starting conditions for Atlanteans
 -- =======================================================================
 
 include "scripting/starting_conditions.lua"

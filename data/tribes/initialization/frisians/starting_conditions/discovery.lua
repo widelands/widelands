@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Discovery
+--             Discovery starting conditions for Frisians
 -- =======================================================================
 
 include "scripting/starting_conditions.lua"
