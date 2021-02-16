@@ -27,7 +27,7 @@
 --
 --    **func**: A standardized function to determine whether to share this starting condition between players (Shared Kingdom)
 --              It needs to be declared like this: ``func = function(player, shared_in_start)``.
---              Later in the code it is necessary to use the result (Variable ``shared_in_start``) to share the starting field
+--              Later in the code it is necessary to use the result (variable ``shared_in_start``) to share the starting field
 --              together with the start condition.
 --              Example::
 --
