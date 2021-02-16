@@ -4,7 +4,7 @@
 -- Starting Conditions
 -- ===================
 --
--- The starting conditions a tribe can use are listed in the tribes :ref:`init.lua <lua_tribes_tribes_init>` file.
+-- The starting conditions a tribe can use are listed in the tribe’s :ref:`init.lua <lua_tribes_tribes_init>` file.
 --
 -- They are defined in their definition files named as follows and located in
 -- ``data/tribes/initialization/<tribe_name>/starting_conditions/<starting_condition_name>.lua``.
