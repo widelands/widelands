@@ -1087,6 +1087,12 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
 			install_translation(n, remote.internal_name);
 		}
+		for (auto& pair : AddOns::g_addons) {
+			if (pair.first.internal_name == remote.internal_name) {
+				pair.first.i18n_version = remote.i18n_version;
+				break;
+			}
+		}
 		Profile prof(kAddOnLocaleVersions.c_str());
 		prof.pull_section("global").set_natural(remote.internal_name.c_str(), remote.i18n_version);
 		prof.write(kAddOnLocaleVersions.c_str(), false);
@@ -1104,8 +1110,10 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 	g_fs->fs_unlink(temp_dir);
 
 	if (needs_restart) {
+		w.set_visible(false);
 		inform_about_restart(remote.descname());
 	}
+	rebuild();
 }
 
 static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
@@ -1500,7 +1508,15 @@ public:
 			own_voting_.selected.connect([this]() {
 				const unsigned old_vote = current_vote_;
 				current_vote_ = own_voting_.get_selected();
-				parent_.net().vote(info_.internal_name, username(), password(), current_vote_);
+				try {
+					parent_.net().vote(info_.internal_name, username(), password(), current_vote_);
+				} catch (const std::exception& e) {
+					UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+						(boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
+						UI::WLMessageBox::MBoxType::kOk);
+					w.run<UI::Panel::Returncodes>();
+					return;
+				}
 				if (old_vote > 0) {
 					assert(info_.votes[old_vote - 1] > 0);
 					--info_.votes[old_vote - 1];
@@ -1517,7 +1533,15 @@ public:
 				return;
 			}
 			const std::string& name = username();
-			parent_.net().comment(info_, name, password(), message);
+			try {
+				parent_.net().comment(info_, name, password(), message);
+			} catch (const std::exception& e) {
+				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+					(boost::format(_("The comment could not be submitted.\nError code: %s")) % e.what()).str(),
+					UI::WLMessageBox::MBoxType::kOk);
+				w.run<UI::Panel::Returncodes>();
+				return;
+			}
 			info_.user_comments.push_back(AddOns::AddOnComment{name, message, info_.version, std::time(nullptr)});
 			update_comments_text();
 			comment_->set_text("");

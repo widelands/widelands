@@ -119,7 +119,7 @@ private:
 	NetAddons& net_;
 };
 
-constexpr unsigned kCurrentListVersion = 3;
+constexpr unsigned kCurrentListVersion = 4;
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	init();
 	CrashGuard guard(*this);
@@ -174,6 +174,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 				break;
 			}
 		}
+
+		read_line();  // NOCOM min_wl_version
+		read_line();  // NOCOM max_wl_version
+		read_line();  // NOCOM sync_safe ( == "true")
 
 		for (int j = std::stoi(read_line()); j > 0; --j) {
 			const std::string s1 = read_line();
@@ -300,7 +304,11 @@ int NetAddons::get_vote(const std::string& addon, const std::string& username, c
 		send += '\n';
 		write(client_socket_, send.c_str(), send.size());
 
-		v = stoi(read_line());
+		const std::string line = read_line();
+		if (line == "ACCESSDENIED") {
+			return -1;
+		}
+		v = stoi(line);
 		assert(v >= 0);
 		assert(v <= kMaxRating);
 
@@ -312,57 +320,49 @@ int NetAddons::get_vote(const std::string& addon, const std::string& username, c
 	return v;
 }
 void NetAddons::vote(const std::string& addon, const std::string& username, const std::string& password, const unsigned vote) {
-	try {
-		assert(vote <= kMaxRating);
-		init();
-		std::string send = "CMD_VOTE ";
-		send += addon;
-		send += ' ';
-		send += username;
-		send += ' ';
-		send += password;
-		send += ' ';
-		send += std::to_string(vote);
-		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
-		// no reply from the server
-	} catch (...) {
-		// ignore
-	}
+	assert(vote <= kMaxRating);
+	init();
+	std::string send = "CMD_VOTE ";
+	send += addon;
+	send += ' ';
+	send += username;
+	send += ' ';
+	send += password;
+	send += ' ';
+	send += std::to_string(vote);
+	send += '\n';
+	write(client_socket_, send.c_str(), send.size());
+	check_endofstream();
 }
 void NetAddons::comment(const AddOnInfo& addon, const std::string& username, const std::string& password, const std::string& message) {
-	try {
-		init();
-		std::string send = "CMD_COMMENT ";
-		send += addon.internal_name;
-		send += ' ';
-		send += username;
-		send += ' ';
-		send += password;
-		send += ' ';
-		send += version_to_string(addon.version, false);
-		send += ' ';
-		{
-			unsigned whitespace = 0;
-			size_t pos = 0;
-			for (;;) {
-				pos = message.find(' ', pos);
-				if (pos == std::string::npos) {
-					break;
-				}
-				++whitespace;
-				++pos;
+	init();
+	std::string send = "CMD_COMMENT ";
+	send += addon.internal_name;
+	send += ' ';
+	send += username;
+	send += ' ';
+	send += password;
+	send += ' ';
+	send += version_to_string(addon.version, false);
+	send += ' ';
+	{
+		unsigned whitespace = 0;
+		size_t pos = 0;
+		for (;;) {
+			pos = message.find(' ', pos);
+			if (pos == std::string::npos) {
+				break;
 			}
-			send += std::to_string(whitespace);
+			++whitespace;
+			++pos;
 		}
-		send += ' ';
-		send += message;
-		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
-		// no reply from the server
-	} catch (...) {
-		// ignore
+		send += std::to_string(whitespace);
 	}
+	send += ' ';
+	send += message;
+	send += '\n';
+	write(client_socket_, send.c_str(), send.size());
+	check_endofstream();
 }
 
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
