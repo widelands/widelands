@@ -25,7 +25,7 @@
 --                         starting condition, e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the starting condition
 --                         is incompatible with the win condition "HQ Hunter".
 --
---    **func**: A standardized function to determine whether to share this starting condition between players (Shared Kingdom)
+--    **func**: A standardized function to determine whether to share this starting condition between players (Shared Kingdom).
 --              It needs to be declared like this: ``func = function(player, shared_in_start)``.
 --              Later in the code it is necessary to use the result (variable ``shared_in_start``) to share the starting field
 --              together with the starting condition.
