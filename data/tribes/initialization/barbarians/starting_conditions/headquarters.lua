@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Headquarters
+--             Headquarters starting conditions for Barbarians
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
