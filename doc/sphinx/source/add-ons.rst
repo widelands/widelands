@@ -104,7 +104,7 @@ starting_condition
 ~~~~~~~~~~~~~~~~~~
 A starting condition script. May define the same starting conditions for any number of tribes.
 
-The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in :ref:`data/tribes/initialization/*/starting_conditions/*.lua <lua_tribes_tribes_start_conditions>`.
+The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in :ref:`data/tribes/initialization/<tribename>/starting_conditions/*.lua <lua_tribes_tribes_start_conditions>`.
 
 
 theme
