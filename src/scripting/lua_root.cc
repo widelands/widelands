@@ -729,6 +729,13 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 
 		LuaTable t(L);
 		tribe_descr.load_helptexts(descrs.get_mutable_worker_descr(di), t);
+
+		// Update the player's worker statistics
+		iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
+			if (&player->tribe() == &tribe_descr) {
+				player->init_statistics();
+			}
+		}
 	} else if (property == "add_building") {
 		const std::string buildingname = luaL_checkstring(L, 5);
 		Notifications::publish(Widelands::NoteMapObjectDescription(
