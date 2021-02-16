@@ -37,7 +37,7 @@
 --                    player:allow_workers("all")
 --                 end
 --
--- After these declarations the lua commands to define the initial mapobjects for the player follow.
+-- After these declarations the Lua function calls to create the initial map objects for the player follow.
 --
 -- To make the UI texts translatable, we also need to push/pop the correct textdomain.
 --
