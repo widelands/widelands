@@ -13,9 +13,6 @@
 --
 --    This function initializes the starting condition.
 --
---    :arg table: This table contains all the data needed to initialize the starting condition.
---                It contains the following entries:
---
 --    **descname**: The localized name of the starting condition.
 --
 --    **tooltip**: A short description of the starting condition. Should contain essential hints if necessary.
