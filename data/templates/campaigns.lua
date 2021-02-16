@@ -17,6 +17,7 @@ local r = {
          -- campaign's difficulty description.
          descname = _"Easy.",
          -- An image to represent the difficulty level
+         -- Available: easy, medium, hard, challenging
          image = "images/ui_fsmenu/easy.png",
       },
    },
