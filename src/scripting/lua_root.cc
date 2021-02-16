@@ -893,16 +893,18 @@ void LuaDescriptions::do_modify_ship(lua_State* L, const std::string&, const std
 void LuaDescriptions::do_modify_critter(lua_State* L, const std::string&, const std::string&) {
 	report_error(L, "modify_unit for critters not yet supported");
 }
-void LuaDescriptions::do_modify_terrain(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_terrain(lua_State* L,
+                                        const std::string& unit_name,
+                                        const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::TerrainDescription& terrain = *descrs.get_mutable_terrain_descr(descrs.safe_terrain_index(unit_name));
+	Widelands::TerrainDescription& terrain =
+	   *descrs.get_mutable_terrain_descr(descrs.safe_terrain_index(unit_name));
 
 	if (property == "enhancement") {
 		terrain.set_enhancement(luaL_checkstring(L, 5));
 	} else {
-		report_error(
-		   L, "modify_unit not supported yet for terrain property '%s'", property.c_str());
+		report_error(L, "modify_unit not supported yet for terrain property '%s'", property.c_str());
 	}
 }
 void LuaDescriptions::do_modify_immovable(lua_State* L, const std::string&, const std::string&) {

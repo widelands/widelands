@@ -8,7 +8,7 @@ descriptions:new_productionsite_type {
    descname = pgettext("frisians_building", "Diker’s House"),
    icon = dirname .. "menu.png",
    size = "big",
-   
+
    buildcost = {
       brick = 2,
       log = 5,
