@@ -199,7 +199,7 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 	return false;
 }
 
-bool EditBox::handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32_t) {
+bool EditBox::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	// state != 0 -> mouse button is pressed
 	if (state && get_can_focus()) {
 		select_until(m_->caret);
@@ -208,7 +208,7 @@ bool EditBox::handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32
 		return true;
 	}
 
-	return false;
+	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
 void EditBox::set_caret_to_cursor_pos(int32_t cursor_pos_x) {
