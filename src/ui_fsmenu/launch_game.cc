@@ -52,7 +52,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      0,
                      _("Configure this game"),
                      UI::Align::kCenter),
-     warn_desyning_addon_(
+     warn_desyncing_addon_(
         &right_column_content_box_,
         0,
         0,
@@ -108,7 +108,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      settings_(settings),
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false) {
-	warn_desyning_addon_.set_visible(false);
+	warn_desyncing_addon_.set_visible(false);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
@@ -134,7 +134,7 @@ LaunchGame::~LaunchGame() {
 void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(1 * kPadding);
-	right_column_content_box_.add(&warn_desyning_addon_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(4 * kPadding);
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * kPadding);
@@ -165,14 +165,14 @@ void LaunchGame::layout() {
 	map_details_.force_new_dimensions(right_column_width_, standard_height_);
 }
 
-void LaunchGame::update_warn_desyning_addon() {
+void LaunchGame::update_warn_desyncing_addon() {
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && !pair.first.sync_safe) {
-			warn_desyning_addon_.set_visible(true);
+			warn_desyncing_addon_.set_visible(true);
 			return;
 		}
 	}
-	warn_desyning_addon_.set_visible(false);
+	warn_desyncing_addon_.set_visible(false);
 }
 
 void LaunchGame::update_peaceful_mode() {

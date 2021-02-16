@@ -254,7 +254,7 @@ bool AddOnInfo::matches_widelands_version() const {
 	const std::string& wl_version = build_id();
 	// Two cases. Either we have a release version such as "1.0".
 	// Or we have a development version such as "1.0~git25169[9d77594@master]" –
-	// is then considered oldier than the version string before the '~'
+	// which is then considered older than the version string before the '~'
 	// but newer than any version less than that.
 	const size_t tilde = wl_version.find('~');
 	if (tilde == std::string::npos) {
