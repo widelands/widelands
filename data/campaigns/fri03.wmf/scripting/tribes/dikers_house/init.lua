@@ -1,3 +1,4 @@
+-- TODO(Nordfriese): Create graphics
 dirname = "tribes/buildings/productionsites/barbarians/weaving_mill/"
 
 push_textdomain("scenario_fri03.wmf")
@@ -9,13 +10,16 @@ descriptions:new_productionsite_type {
    size = "big",
    
    buildcost = {
+      brick = 2,
       log = 5,
       granite = 2,
       reed = 2
    },
    return_on_dismantle = {
+      brick = 1,
+      reed = 1,
       log = 2,
-      granite = 2
+      granite = 1
    },
 
    animation_directory = dirname,
@@ -46,7 +50,7 @@ descriptions:new_productionsite_type {
          actions = {
             "consume=log:3",
             "callworker=dike",
-            "sleep=duration:20s"
+            "sleep=duration:30s"
          }
       },
    },

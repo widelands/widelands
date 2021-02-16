@@ -8,7 +8,7 @@ local result = {
          name = "frisians_dikers_house",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
-            purpose = pgettext("frisians_building", "Removes various obstacles from the ground.")
+            purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea.")
          }
       }},
       workers_order = {{{

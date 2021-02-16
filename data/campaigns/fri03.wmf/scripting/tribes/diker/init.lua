@@ -11,11 +11,11 @@ descriptions:new_worker_type {
 
    programs = {
       dike = {
-         "findspace=size:swim radius:6 terraform",
+         "findspace=size:swim radius:5 terraform",
          "walk=coords",
-         "animate=dig duration:30s",
+         "animate=dig duration:40s",
          "terraform",
-         "animate=dig duration:30s",
+         "animate=dig duration:40s",
          "return"
       }
    },
