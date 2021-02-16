@@ -75,7 +75,8 @@ protected:
 	void setup_temp_dir();
 	void cleanup_temp_dir();
 
-	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_, max_wl_version_;
+	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
+	   max_wl_version_;
 	AddOnCategory category_;
 
 	std::string directory_, backup_path_;
