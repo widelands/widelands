@@ -212,7 +212,7 @@ private:
 	std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
 
-	static int32_t instances_;
+	static uint32_t instances_;
 };
 
 }  // namespace Widelands

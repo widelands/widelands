@@ -51,7 +51,7 @@
 
 namespace Widelands {
 
-int32_t Descriptions::instances_ = 0;
+uint32_t Descriptions::instances_ = 0;
 
 Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
@@ -124,6 +124,7 @@ Descriptions::~Descriptions() {
 	// We might have multiple Descriptions instances
 	// so the sounds should only go with the last one
 	// to prevent "Sound effect does not exist" errors
+	assert(instances_ > 0);
 	instances_--;
 	if (g_sh != nullptr && 0 == instances_) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
