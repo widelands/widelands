@@ -50,7 +50,7 @@ private:
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;
 	DifferentialPlotArea* plot_economy_;
-	std::vector<uint8_t> color_map_;  // Maps ware index to colors
+	std::map<Widelands::DescriptionIndex, uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
 
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
