@@ -41,25 +41,31 @@ public:
 	// May throw a WLWarning, if it fails
 	virtual bool write_to_disk();
 
-	const std::string& get_internal_name() {
+	const std::string& get_internal_name() const {
 		return internal_name_;
 	}
-	const std::string& get_descname() {
+	const std::string& get_descname() const {
 		return descname_;
 	}
-	const std::string& get_description() {
+	const std::string& get_description() const {
 		return description_;
 	}
-	const std::string& get_author() {
+	const std::string& get_author() const {
 		return author_;
 	}
-	const std::string& get_version() {
+	const std::string& get_version() const {
 		return version_;
+	}
+	const std::string& get_min_wl_version() const {
+		return min_wl_version_;
+	}
+	const std::string& get_max_wl_version() const {
+		return max_wl_version_;
 	}
 	void set_version(const std::string& version) {
 		version_ = version;
 	}
-	AddOnCategory get_category() {
+	AddOnCategory get_category() const {
 		return category_;
 	}
 
@@ -69,7 +75,7 @@ protected:
 	void setup_temp_dir();
 	void cleanup_temp_dir();
 
-	std::string internal_name_, descname_, description_, author_, version_;
+	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_, max_wl_version_;
 	AddOnCategory category_;
 
 	std::string directory_, backup_path_;
