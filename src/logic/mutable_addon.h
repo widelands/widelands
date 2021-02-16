@@ -78,6 +78,10 @@ protected:
 	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
 	   max_wl_version_;
 	AddOnCategory category_;
+	/*
+	 * The `sync_safe` property is not stored here because all new or updated add-ons
+	 * should by default be marked as sync-unsafe until approved by a reviewer.
+	 */
 
 	std::string directory_, backup_path_;
 };
