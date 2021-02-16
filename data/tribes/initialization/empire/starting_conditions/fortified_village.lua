@@ -1,12 +1,12 @@
 -- =======================================================================
---                 Empire Fortified Village Starting Conditions
+--            Fortified Village starting conditions for Empire
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
 push_textdomain("tribes")
 
-local r = {
+init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
    -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
@@ -123,4 +123,4 @@ local r = {
    end
 }
 pop_textdomain()
-return r
+return init
