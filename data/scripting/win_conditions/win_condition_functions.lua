@@ -72,17 +72,12 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
             s:destroy()
          end
          -- now collect the warehouses/ports/milsites including constructionsites a player has
-         for idx,building in ipairs(p.tribe.buildings) do
-            if building.type_name == "warehouse" then
-               for i,site in pairs(p:get_constructionsites(building.name)) do
-                  table.insert(fields, site.fields[1])
-               end
+         for name,allowed in pairs(p.allowed_buildings) do
+            for i,site in pairs(p:get_constructionsites(name)) do
+               table.insert(fields, site.fields[1])
             end
-            if building.type_name == "militarysite" then
-               for i,site in pairs(p:get_constructionsites(building.name)) do
-                  table.insert(fields, site.fields[1])
-               end
-               for i,site in pairs(p:get_buildings(building.name)) do
+            for i,site in pairs(p:get_buildings(name)) do
+               if site.descr.type_name == "militarysite" then
                   table.insert(fields, site.fields[1])
                end
             end

@@ -1,12 +1,12 @@
 -- =======================================================================
---                Hardcore Starting conditions for Empire
+--      Hardcore (Struggling Outpost) starting conditions for Empire
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
 push_textdomain("tribes")
 
-local r = {
+init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Struggling Outpost",
    -- TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
@@ -56,4 +56,4 @@ local r = {
 end
 }
 pop_textdomain()
-return r
+return init

@@ -1,12 +1,12 @@
 -- =======================================================================
---                 Empire Village Starting Conditions
+--                 Village starting conditions for Empire
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
 push_textdomain("tribes")
 
-local r = {
+init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Village",
    -- TRANSLATORS: This is the tooltip for the "Village" starting condition
@@ -93,4 +93,4 @@ prefilled_buildings(plr, { "empire_headquarters", sf.x, sf.y,
    end
 }
 pop_textdomain()
-return r
+return init

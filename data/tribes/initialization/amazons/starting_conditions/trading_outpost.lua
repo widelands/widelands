@@ -1,5 +1,5 @@
 -- =======================================================================
---           Trading Outpost Starting Conditions for the amazons
+--           Trading Outpost starting conditions for Amazons
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

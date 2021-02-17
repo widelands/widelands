@@ -1,12 +1,12 @@
 -- =======================================================================
---                Minimum Starting conditions for Empire
+--          Minimum (Poor Hamlet) starting conditions for Empire
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
 push_textdomain("tribes")
 
-local r = {
+init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Poor Hamlet",
    -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
@@ -52,4 +52,4 @@ local r = {
    end
 }
 pop_textdomain()
-return r
+return init
