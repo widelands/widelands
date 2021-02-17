@@ -1,5 +1,5 @@
 -- =======================================================================
---              Minimum Starting Conditions for Amazons
+--         Minimum (Poor Hamlet) starting conditions for Amazons
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
@@ -25,7 +25,7 @@ init = {
          wares = {
             log = 4,
             rubber = 1,
-            --Woodcutter, sawyer, toolsmith:
+            --Woodcutter, stonecutter, jungle preserver, liana cutter, stonecarver:
             felling_ax = 1,
             pick = 1,
             shovel =1 ,
@@ -40,7 +40,7 @@ init = {
 
       player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
-      player:send_to_inbox(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
+      player:send_to_inbox(_"Be careful", _"You only have exactly the wares for each tool you will need to start your economy. Make sure no unneeded tool is created.")
 
       check_trees_rocks_poor_hamlet(player, sf, "amazons_warehouse", {granite = 3}, {log = 3, rope = 1})
    end
