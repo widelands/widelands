@@ -199,10 +199,14 @@ SDL_GLContext initialize(
 		std::vector<std::string> version_vector;
 		boost::split(version_vector, version_string, boost::is_any_of(". "));
 		if (version_vector.size() >= 2) {
-			// The shading language version has been detected properly. Exit if the shading language
-			// version is too old.
-			const int major_version = boost::lexical_cast<int>(version_vector.front());
-			const int minor_version = boost::lexical_cast<int>(version_vector.at(1));
+			// The version has been detected properly. Exit if the version is too old.
+			int major_version, minor_version;
+			try {
+				major_version = std::stol(version_vector[0]);
+				minor_version = std::stol(version_vector[1]);
+			} catch (...) {
+				error();
+			}
 			if (major_version < required_major_version ||
 			    (major_version == required_major_version && minor_version < required_minor_version)) {
 				show_opengl_error_and_exit(
@@ -226,8 +230,7 @@ SDL_GLContext initialize(
 			// before conversion
 			std::regex re("\\d+");
 			if (std::regex_match(version_string, re)) {
-				const int major_version = boost::lexical_cast<int>(version_string);
-				if (major_version < required_major_version + 1) {
+				if (std::stol(version_string) < required_major_version + 1) {
 					show_opengl_error_and_exit(
 					   (boost::format("Widelands won’t work because your graphics driver is too old.\n"
 					                  "The %s needs to be version %u.%u or newer.") %
