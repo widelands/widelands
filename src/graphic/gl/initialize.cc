@@ -199,14 +199,14 @@ SDL_GLContext initialize(
 		std::vector<std::string> version_vector;
 		boost::split(version_vector, version_string, boost::is_any_of(". "));
 		if (version_vector.size() >= 2) {
-			// The version has been detected properly. Exit if the version is too old.
-			int major_version, minor_version;
+			int major_version = 0, minor_version = 0;
 			try {
-				major_version = std::stol(version_vector[0]);
-				minor_version = std::stol(version_vector[1]);
+				major_version = std::stoi(version_vector[0]);
+				minor_version = std::stoi(version_vector[1]);
 			} catch (...) {
 				error();
 			}
+			// The version has been detected properly. Exit if the version is too old.
 			if (major_version < required_major_version ||
 			    (major_version == required_major_version && minor_version < required_minor_version)) {
 				show_opengl_error_and_exit(
