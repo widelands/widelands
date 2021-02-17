@@ -45,7 +45,8 @@ namespace AddOns {
 // All networking-related code in this file is inspired by
 // https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
 
-void NetAddons::init() {
+constexpr unsigned kCurrentProtocolVersion = 4;
+void NetAddons::init(const std::string& username, const std::string& password) {
 	if (initialized_) {
 		// already initialized
 		return;
@@ -62,7 +63,35 @@ void NetAddons::init() {
 		throw wexception("Unable to connect to the server");
 	}
 
+	std::string send = std::to_string(kCurrentProtocolVersion);
+	send += '\n';
+	send += i18n::get_locale();
+	send += '\n';
+	send += username;
+	send += '\n';
+	send += password;
+	send += "\nENDOFSTREAM\n";
+	write(client_socket_, send.c_str(), send.size());
+	check_endofstream();
+
 	initialized_ = true;
+}
+
+void NetAddons::quit_connection() {
+	if (!initialized_) {
+		return;
+	}
+	initialized_ = false;
+	close(client_socket_);
+}
+
+NetAddons::~NetAddons() {
+	quit_connection();
+}
+
+void NetAddons::set_login(const std::string& username, const std::string& password) {
+	quit_connection();
+	init(username, password);
 }
 
 std::string NetAddons::read_line() {
@@ -97,7 +126,23 @@ void NetAddons::read_file(const long length, const std::string& out) {
 void NetAddons::check_endofstream() {
 	const std::string text = read_line();
 	if (text != "ENDOFSTREAM") {
-		throw wexception("Expected end of stream, received '%s'", text.c_str());
+		throw wexception("Expected end of stream, received: '%s'", text.c_str());
+	}
+}
+
+static void check_checksum(const std::string& path, const std::string& checksum) {
+	FileRead fr;
+	fr.open(*g_fs, path);
+	const size_t bytes = fr.get_size();
+	std::unique_ptr<char[]> complete(new char[bytes]);
+	fr.data_complete(complete.get(), bytes);
+	SimpleMD5Checksum md5sum;
+	md5sum.data(complete.get(), bytes);
+	md5sum.finish_checksum();
+	const std::string md5 = md5sum.get_checksum().str();
+	if (checksum != md5) {
+		throw wexception("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
+		                 path.c_str(), md5.c_str(), checksum.c_str());
 	}
 }
 
@@ -106,20 +151,26 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n) : net_(n) {
+	explicit CrashGuard(NetAddons& n) : net_(n), ok_(false) {
 		assert(net_.initialized_);
-		net_.initialized_ = false;
 	}
 	void ok() {
-		assert(!net_.initialized_);
-		net_.initialized_ = true;
+		assert(net_.initialized_);
+		assert(!ok_);
+		ok_ = true;
+	}
+	~CrashGuard() {
+		assert(net_.initialized_);
+		if (!ok_) {
+			net_.quit_connection();
+		}
 	}
 
 private:
 	NetAddons& net_;
+	bool ok_;
 };
 
-constexpr unsigned kCurrentListVersion = 4;
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	init();
 	CrashGuard guard(*this);
@@ -140,11 +191,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		AddOnInfo& a = result_vector[i];
 		{
 			std::string send = "CMD_INFO ";
-			send += std::to_string(kCurrentListVersion);
-			send += ' ';
 			send += a.internal_name;
-			send += ' ';
-			send += i18n::get_locale();
 			send += '\n';
 			write(client_socket_, send.c_str(), send.size());
 		}
@@ -234,6 +281,7 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 	for (long i = -1 /* top-level directory is not counted */; i < nr_dirs; ++i) {
 		for (long j = std::stol(read_line()); j > 0; --j) {
 			const std::string filename = read_line();
+			const std::string checksum = read_line();
 			const long length = std::stol(read_line());
 			std::string relative_path;
 			if (i >= 0) {
@@ -258,6 +306,7 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 				fw.data(buffer.get(), l);
 			} while (nr_bytes_read < length);
 			fw.write(*g_fs, out);
+			check_checksum(out, checksum);
 		}
 	}
 
@@ -280,16 +329,19 @@ void NetAddons::download_i18n(const std::string& name, const std::string& direct
 	init_fn("", nr_translations);
 	for (long i = 0; i < nr_translations; ++i) {
 		const std::string filename = read_line();
+		const std::string checksum = read_line();
 		progress(filename.substr(0, filename.find('.')), i);
 		const long length = std::stol(read_line());
-		read_file(length, directory + FileSystem::file_separator() + filename);
+		const std::string out = directory + FileSystem::file_separator() + filename;
+		read_file(length, out);
+		check_checksum(out, checksum);
 	}
 
 	check_endofstream();
 	guard.ok();
 }
 
-int NetAddons::get_vote(const std::string& addon, const std::string& username, const std::string& password) {
+int NetAddons::get_vote(const std::string& addon) {
 	int v;
 	try {
 		init();
@@ -297,10 +349,6 @@ int NetAddons::get_vote(const std::string& addon, const std::string& username, c
 
 		std::string send = "CMD_GET_VOTE ";
 		send += addon;
-		send += ' ';
-		send += username;
-		send += ' ';
-		send += password;
 		send += '\n';
 		write(client_socket_, send.c_str(), send.size());
 
@@ -319,29 +367,21 @@ int NetAddons::get_vote(const std::string& addon, const std::string& username, c
 	}
 	return v;
 }
-void NetAddons::vote(const std::string& addon, const std::string& username, const std::string& password, const unsigned vote) {
+void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	assert(vote <= kMaxRating);
 	init();
 	std::string send = "CMD_VOTE ";
 	send += addon;
-	send += ' ';
-	send += username;
-	send += ' ';
-	send += password;
 	send += ' ';
 	send += std::to_string(vote);
 	send += '\n';
 	write(client_socket_, send.c_str(), send.size());
 	check_endofstream();
 }
-void NetAddons::comment(const AddOnInfo& addon, const std::string& username, const std::string& password, const std::string& message) {
+void NetAddons::comment(const AddOnInfo& addon, const std::string& message) {
 	init();
 	std::string send = "CMD_COMMENT ";
 	send += addon.internal_name;
-	send += ' ';
-	send += username;
-	send += ' ';
-	send += password;
 	send += ' ';
 	send += version_to_string(addon.version, false);
 	send += ' ';
@@ -381,8 +421,10 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		g_fs->ensure_directory_exists(temp_dirname);
 		const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 
+		const std::string checksum = read_line();
 		const long filesize = stoi(read_line());
 		read_file(filesize, output);
+		check_checksum(output, checksum);
 
 		check_endofstream();
 		guard.ok();

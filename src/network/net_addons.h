@@ -29,6 +29,7 @@ namespace AddOns {
 struct NetAddons {
 	NetAddons() : initialized_(false), client_socket_(0) {
 	}
+	~NetAddons();
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<AddOnInfo> refresh_remotes();
@@ -49,15 +50,18 @@ struct NetAddons {
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
 
 	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
-	int get_vote(const std::string& addon, const std::string& username, const std::string& password);
-	void vote(const std::string& addon, const std::string& username, const std::string& password, unsigned vote);
-	void comment(const AddOnInfo& addon, const std::string& username, const std::string& password, const std::string& message);
+	int get_vote(const std::string& addon);
+	void vote(const std::string& addon, unsigned vote);
+	void comment(const AddOnInfo& addon, const std::string& message);
+
+	void set_login(const std::string& username, const std::string& password);
 
 private:
 	friend struct CrashGuard;
 
 	// Open the connection if it was not open yet; throws an error if this fails
-	void init();
+	void init(const std::string& username = std::string(), const std::string& password = std::string());
+	void quit_connection();
 
 	// Set the URL (whitespace-safe) and adjust the timeout values.
 	// void set_url_and_timeout(std::string);

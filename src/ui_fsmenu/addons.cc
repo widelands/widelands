@@ -31,11 +31,13 @@
 #include "graphic/style_manager.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "network/crypto.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/progressbar.h"
 #include "ui_fsmenu/addons_packager.h"
+#include "ui_fsmenu/login_box.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
@@ -115,6 +117,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                       fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                       fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                       _("Add-On Manager")),
+     fsmm_(fsmm),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      warn_requirements_(
@@ -253,7 +256,15 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                       0,
                       0,
                       UI::ButtonStyle::kFsMenuSecondary,
-                      _("Launch the add-ons packager…")) {
+                      _("Launch the add-ons packager…")),
+     login_button_(this,
+                   "login",
+                   0,
+                   0,
+                   0,
+                   0,
+                   UI::ButtonStyle::kFsMenuSecondary,
+                   "") {
 
 	dev_box_.add(
 	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -557,6 +568,12 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
 
+	if (get_config_bool("registered", false)) {
+		set_login(get_config_string("nickname", ""), get_config_string("password_sha1", ""), false);
+	}
+	login_button_.sigclicked.connect([this]() { login_button_clicked(); });
+	update_login_button(login_button_);
+
 	do_not_layout_on_resolution_change();
 	center_to_parent();
 	refresh_remotes();
@@ -572,6 +589,66 @@ AddOnsCtrl::~AddOnsCtrl() {
 	}
 	set_config_string("addons", text);
 	write_config();
+}
+
+
+void AddOnsCtrl::login_button_clicked() {
+	if (username_.empty()) {
+		UI::UniqueWindow::Registry r;
+		LoginBox b(fsmm_, r, LoginBox::Mode::kAddOnServer);
+		if (b.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			return;
+		}
+		set_login(b.get_nickname(), crypto::sha1(b.get_password()), true);
+	} else {
+		set_login("", "", false);
+	}
+	update_login_button(login_button_);
+}
+void AddOnsCtrl::update_login_button(UI::Button& b) {
+	if (username_.empty()) {
+		b.set_title(_("Not logged in"));
+		b.set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload your own add-ons."));
+	} else {
+		b.set_title((boost::format(_("Logged in as %s")) % username_).str());
+		b.set_tooltip(_("Click to log out"));
+	}
+}
+
+void AddOnsCtrl::set_login(const std::string& username, const std::string& password, const bool show_error) {
+	if (password.empty() != username.empty()) {
+		return;
+	}
+
+	username_ = username;
+	try {
+		net().set_login(username, password);
+
+		if (!username.empty()) {
+			set_config_string("nickname", username);
+			set_config_bool("registered", true);
+			set_config_string("password_sha1", password);
+		}
+	} catch (const std::exception& e) {
+		if (username.empty()) {
+			log_err("set_login (''): server error (%s)", e.what());
+			if (show_error) {
+				UI::WLMessageBox m(
+					   get_parent(), UI::WindowStyle::kFsMenu, _("Server Error"),
+					   _("Unable to connect to the server."), UI::WLMessageBox::MBoxType::kOk);
+					m.run<UI::Panel::Returncodes>();
+			}
+		} else {
+			log_err("set_login as '%s': access denied (%s)", username.c_str(), e.what());
+			if (show_error) {
+				UI::WLMessageBox m(
+				   get_parent(), UI::WindowStyle::kFsMenu, _("Wrong Password"),
+				   _("The specified username or password is incorrect."), UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+			}
+			set_login("", "", show_error);
+		}
+	}
 }
 
 inline const AddOns::AddOnInfo& AddOnsCtrl::selected_installed_addon() const {
@@ -648,7 +725,7 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 
 void AddOnsCtrl::refresh_remotes() {
 	try {
-		remotes_ = network_handler_.refresh_remotes();
+		remotes_ = net().refresh_remotes();
 	} catch (const std::exception& e) {
 		const std::string title = _("Server Connection Error");
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
@@ -955,6 +1032,9 @@ void AddOnsCtrl::layout() {
 		browse_addons_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(),
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
+
+		login_button_.set_size(get_inner_w() / 4, login_button_.get_h());
+		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
 	}
 
 	UI::Window::layout();
@@ -1455,13 +1535,7 @@ public:
 	     voting_stats_summary_(&box_votes_,
 	                           UI::PanelStyle::kFsMenu,
 	                           UI::FontStyle::kFsMenuLabel,
-	                           info.number_of_votes() ?
-	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                                      "Average rating: %1$.3f (%2$u votes)",
-	                                                      info.number_of_votes())) %
-	                               info.average_rating() % info.number_of_votes())
-	                                 .str() :
-	                              _("No votes yet"),
+	                           "",
 	                           UI::Align::kCenter),
 	     screenshot_next_(&box_screenies_buttons_,
 	                      "next_screenshot",
@@ -1489,9 +1563,16 @@ public:
 	             0,
 	             UI::ButtonStyle::kFsMenuSecondary,
 	             _("Submit comment")),
-	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
+	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     login_button_(this,
+                   "login",
+                   0,
+                   0,
+                   0,
+                   0,
+                   UI::ButtonStyle::kFsMenuSecondary,
+                   "") {
 
-		update_comments_text();
 		comment_->set_text("");
 		ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
@@ -1499,42 +1580,35 @@ public:
 		for (unsigned i = 1; i <= 10; ++i) {
 			own_voting_.add(std::to_string(i), i);
 		}
-		current_vote_ = parent_.net().get_vote(info_.internal_name, username(), password());
-		if (current_vote_ < 0) {
-			own_voting_.set_tooltip("Please log in to vote");
-			own_voting_.set_enabled(false);
-		} else {
-			own_voting_.select(current_vote_);
-			own_voting_.selected.connect([this]() {
-				const unsigned old_vote = current_vote_;
-				current_vote_ = own_voting_.get_selected();
-				try {
-					parent_.net().vote(info_.internal_name, username(), password(), current_vote_);
-				} catch (const std::exception& e) {
-					UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-						(boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
-						UI::WLMessageBox::MBoxType::kOk);
-					w.run<UI::Panel::Returncodes>();
-					return;
-				}
-				if (old_vote > 0) {
-					assert(info_.votes[old_vote - 1] > 0);
-					--info_.votes[old_vote - 1];
-				}
-				if (current_vote_ > 0) {
-					++info_.votes[current_vote_ - 1];
-				}
-				parent_.rebuild();
-			});
-		}
+		own_voting_.selected.connect([this]() {
+			const unsigned old_vote = current_vote_;
+			current_vote_ = own_voting_.get_selected();
+			try {
+				parent_.net().vote(info_.internal_name, current_vote_);
+			} catch (const std::exception& e) {
+				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+					(boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
+					UI::WLMessageBox::MBoxType::kOk);
+				w.run<UI::Panel::Returncodes>();
+				return;
+			}
+			if (old_vote > 0) {
+				assert(info_.votes[old_vote - 1] > 0);
+				--info_.votes[old_vote - 1];
+			}
+			if (current_vote_ > 0) {
+				++info_.votes[current_vote_ - 1];
+			}
+			update_data();
+			parent_.rebuild();
+		});
 		submit_.sigclicked.connect([this]() {
 			const std::string message = comment_->get_text();
 			if (message.empty()) {
 				return;
 			}
-			const std::string& name = username();
 			try {
-				parent_.net().comment(info_, name, password(), message);
+				parent_.net().comment(info_, message);
 			} catch (const std::exception& e) {
 				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					(boost::format(_("The comment could not be submitted.\nError code: %s")) % e.what()).str(),
@@ -1542,8 +1616,8 @@ public:
 				w.run<UI::Panel::Returncodes>();
 				return;
 			}
-			info_.user_comments.push_back(AddOns::AddOnComment{name, message, info_.version, std::time(nullptr)});
-			update_comments_text();
+			info_.user_comments.push_back(AddOns::AddOnComment{parent_.username(), message, info_.version, std::time(nullptr)});
+			update_data();
 			comment_->set_text("");
 			parent_.rebuild();
 		});
@@ -1566,27 +1640,20 @@ public:
 		box_comments_.add(&submit_, UI::Box::Resizing::kFullSize);
 
 		voting_stats_.add_inf_space();
-		uint32_t most_votes = 1;
-		for (uint32_t v : info_.votes) {
-			most_votes = std::max(most_votes, v);
-		}
-		for (unsigned vote = 1; vote <= AddOns::kMaxRating; ++vote) {
+		for (unsigned i = 0; i < AddOns::kMaxRating; ++i) {
 			UI::Box* box =
 			   new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
-			UI::ProgressBar* bar =
+			voting_bars_[i] =
 			   new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0,
 			                       UI::ProgressBar::Vertical);
-			bar->set_total(most_votes);
-			bar->set_state(info_.votes[vote - 1]);
-			bar->set_show_percent(false);
-
-			UI::Textarea* label =
+			voting_bars_[i]->set_show_percent(false);
+			voting_txt_[i] =
 			   new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel,
-			                    std::to_string(vote), UI::Align::kCenter);
+			                    "", UI::Align::kCenter);
 
-			box->add(bar, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+			box->add(voting_bars_[i], UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 			box->add_space(kRowButtonSpacing);
-			box->add(label, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			box->add(voting_txt_[i], UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			voting_stats_.add(box, UI::Box::Resizing::kExpandBoth);
 			voting_stats_.add_inf_space();
 		}
@@ -1598,9 +1665,7 @@ public:
 		box_votes_.add(&own_voting_, UI::Box::Resizing::kFullSize);
 		box_votes_.add_space(kRowButtonSpacing);
 
-		tabs_.add("comments", (boost::format(_("Comments (%u)")) % info_.user_comments.size()).str(),
-		          &box_comments_);
-
+		tabs_.add("comments", "", &box_comments_);
 		if (nr_screenshots_) {
 			tabs_.add("screenshots",
 			          (boost::format(_("Screenshots (%u)")) % info_.screenshots.size()).str(),
@@ -1613,9 +1678,7 @@ public:
 		} else {
 			box_screenies_.set_visible(false);
 		}
-
-		tabs_.add(
-		   "votes", (boost::format(_("Votes (%u)")) % info_.number_of_votes()).str(), &box_votes_);
+		tabs_.add("votes", "", &box_votes_);
 
 		main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 		main_box_.add_space(kRowButtonSpacing);
@@ -1627,7 +1690,17 @@ public:
 		screenshot_next_.sigclicked.connect([this]() { next_screenshot(1); });
 		screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
 
+		login_button_.sigclicked.connect([this]() {
+			parent_.login_button_clicked();
+			parent_.update_login_button(login_button_);
+			login_changed();
+		});
+		parent_.update_login_button(login_button_);
+		login_changed();
+
+		update_data();
 		main_box_.set_size(get_inner_w(), get_inner_h());
+		layout();
 	}
 
 	void on_resolution_changed_note(const GraphicResolutionChanged& note) override {
@@ -1637,6 +1710,14 @@ public:
 		   parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
 		set_pos(Vector2i(parent_.get_x() + kRowButtonSize, parent_.get_y() + kRowButtonSize));
 		main_box_.set_size(get_inner_w(), get_inner_h());
+	}
+
+	void layout() override {
+		if (!is_minimal()) {
+			login_button_.set_size(get_inner_w() / 4, login_button_.get_h());
+			login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
+		}
+		UI::Window::layout();
 	}
 
 private:
@@ -1690,15 +1771,26 @@ private:
 		}
 	}
 
-	// NOCOM login
-	std::string username() {
-		return "Hello";
-	}
-	std::string password() {
-		return "World";
-	}
+	void update_data() {
+		(*tabs_.tabs().begin())->set_title((boost::format(_("Comments (%u)")) % info_.user_comments.size()).str());
+		(*tabs_.tabs().rbegin())->set_title((boost::format(_("Votes (%u)")) % info_.number_of_votes()).str());
 
-	void update_comments_text() {
+		voting_stats_summary_.set_text(info_.number_of_votes() ?
+	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                                                      "Average rating: %1$.3f (%2$u votes)",
+	                                                      info_.number_of_votes())) % info_.average_rating() % info_.number_of_votes()).str() :
+	                              _("No votes yet"));
+
+		uint32_t most_votes = 1;
+		for (uint32_t v : info_.votes) {
+			most_votes = std::max(most_votes, v);
+		}
+		for (unsigned i = 0; i < AddOns::kMaxRating; ++i) {
+			voting_bars_[i]->set_total(most_votes);
+			voting_bars_[i]->set_state(info_.votes[i]);
+			voting_txt_[i]->set_text(std::to_string(i + 1));
+		}
+
 		std::string text = "<rt><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(info_.user_comments.empty() ?
@@ -1707,7 +1799,6 @@ private:
 		                               "%u comment:", "%u comments:", info_.user_comments.size())) %
 		                            info_.user_comments.size())
 		                              .str());
-
 		for (const auto& comment : info_.user_comments) {
 			text += "</p><vspace gap=32><p>";
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
@@ -1721,9 +1812,25 @@ private:
 			text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			           .as_font_tag(comment.message);
 		}
-
 		text += "</p></rt>";
 		txt_.set_text(text);
+	}
+
+	void login_changed() {
+		current_vote_ = parent_.net().get_vote(info_.internal_name);
+		if (current_vote_ < 0) {
+			submit_.set_enabled(false);
+			submit_.set_tooltip(_("Please log in to comment"));
+			own_voting_.set_enabled(false);
+			own_voting_.set_tooltip(_("Please log in to vote"));
+			own_voting_.select(0);
+		} else {
+			submit_.set_enabled(true);
+			submit_.set_tooltip("");
+			own_voting_.set_enabled(true);
+			own_voting_.set_tooltip("");
+			own_voting_.select(current_vote_);
+		}
 	}
 
 	AddOnsCtrl& parent_;
@@ -1742,8 +1849,10 @@ private:
 
 	UI::MultilineEditbox* comment_;
 	UI::Dropdown<uint8_t> own_voting_;
+	UI::ProgressBar* voting_bars_[AddOns::kMaxRating];
+	UI::Textarea* voting_txt_[AddOns::kMaxRating];
 	UI::Textarea screenshot_stats_, screenshot_descr_, voting_stats_summary_;
-	UI::Button screenshot_next_, screenshot_prev_, submit_, ok_;
+	UI::Button screenshot_next_, screenshot_prev_, submit_, ok_, login_button_;
 };
 std::map<std::pair<std::string, std::string>, std::string>
    RemoteInteractionWindow::downloaded_screenshots_cache_;

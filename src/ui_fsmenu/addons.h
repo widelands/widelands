@@ -115,6 +115,13 @@ public:
 	}
 	bool is_remote(const std::string& name) const;
 
+	const std::string& username() const {
+		return username_;
+	}
+	void set_login(const std::string& username, const std::string& password, bool show_error);
+	void update_login_button(UI::Button&);
+	void login_button_clicked();
+
 protected:
 	void layout() override;
 	void think() override;
@@ -131,6 +138,7 @@ private:
 		kNewest
 	};
 
+	MainMenu& fsmm_;
 	UI::Box main_box_, buttons_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::Panel tabs_placeholder_;
@@ -145,7 +153,7 @@ private:
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
-	   move_up_, move_down_, move_bottom_, launch_packager_;
+	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_;
 
 	void category_filter_changed(AddOns::AddOnCategory);
 	void check_enable_move_buttons();
@@ -159,6 +167,8 @@ private:
 	std::vector<AddOns::AddOnInfo> remotes_;
 	void refresh_remotes();
 	bool matches_filter(const AddOns::AddOnInfo&);
+
+	std::string username_, password_;
 
 	void inform_about_restart(const std::string&);
 };
