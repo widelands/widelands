@@ -1,5 +1,5 @@
 -- =======================================================================
---                 amazons Fortified Village Starting Conditions
+--             Fortified Village starting conditions for Amazons
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
