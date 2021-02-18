@@ -19,6 +19,9 @@ An add-on contains a plain-text ini-style file called ``addons`` with the follow
 * ``version``: The version number (1 for new add-ons)
 * ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition", "theme"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on.
+* ``min_wl_version`` *Optional*: The oldest Widelands version required by this add-on.
+* ``max_wl_version`` *Optional*: The newest Widelands version supported by this add-on.
+* ``sync_safe`` *Optional*: A boolean indicating that this add-on will not desync in replays and network games. This should not be set by the add-on author.
 
 The entries for ``name``, ``description`` and ``author`` can optionally be marked for translation with '_'. They may also contain richtext tags.
 
@@ -104,7 +107,7 @@ starting_condition
 ~~~~~~~~~~~~~~~~~~
 A starting condition script. May define the same starting conditions for any number of tribes.
 
-The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/initialization/*/starting_conditions/*.lua``.
+The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/initialization/<tribename>/starting_conditions/*.lua`` (see :doc:`autogen_lua_tribes_defining_discovery`).
 
 
 theme
@@ -137,7 +140,7 @@ Add-on upgrades may break compatibility between versions; therefore, savegames a
 Verification
 ------------
 
-Add-ons can potentially contain harmful or offensive content. The Widelands development team will attempt to moderate add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-on manager’s Filter tab.
+Add-ons can potentially contain harmful or offensive content. The Widelands development team will attempt to moderate add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The moderators will also decide which add-ons will be marked as ``sync_safe``. The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-on manager’s Filter tab.
 
 
 Translating

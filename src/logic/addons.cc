@@ -27,6 +27,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "build_info.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
@@ -42,26 +43,25 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
-   {AddOnCategory::kTribes,
-    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png"}},
+   {AddOnCategory::kTribes, AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                                              "images/wui/stats/menu_tab_wares_warehouse.png"}},
    {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
-                                             "images/wui/menus/toggle_immovables.png", true}},
-   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
-                                              "images/logos/WL-Editor-32.png", true}},
+                                             "images/wui/menus/toggle_immovables.png"}},
+   {AddOnCategory::kScript,
+    AddOnCategoryInfo{"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png"}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png", false}},
+                                            "images/wui/menus/toggle_minimap.png"}},
    {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                                                "images/wui/messages/messages_warfare.png", false}},
+                                                "images/wui/messages/messages_warfare.png"}},
    {AddOnCategory::kWinCondition,
-    AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
-                      "images/wui/menus/objectives.png", false}},
+    AddOnCategoryInfo{
+       "win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png"}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}},
-   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png", false}}};
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png"}},
+   {AddOnCategory::kTheme,
+    AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
 
@@ -246,6 +246,37 @@ double AddOnInfo::average_rating() const {
 	return (total > 0) ? (sum / total) : 0;
 }
 
+bool AddOnInfo::matches_widelands_version() const {
+	if (min_wl_version.empty() && max_wl_version.empty()) {
+		return true;
+	}
+
+	const std::string& wl_version = build_id();
+	// Two cases. Either we have a release version such as "1.0".
+	// Or we have a development version such as "1.0~git25169[9d77594@master]" –
+	// which is then considered older than the version string before the '~'
+	// but newer than any version less than that.
+	const size_t tilde = wl_version.find('~');
+	if (tilde == std::string::npos) {
+		AddOnVersion wl = string_to_version(wl_version);
+		if (!min_wl_version.empty() && wl < string_to_version(min_wl_version)) {
+			return false;
+		}
+		if (!max_wl_version.empty() && wl > string_to_version(max_wl_version)) {
+			return false;
+		}
+	} else {
+		AddOnVersion next_wl = string_to_version(wl_version.substr(0, tilde));
+		if (!min_wl_version.empty() && next_wl <= string_to_version(min_wl_version)) {
+			return false;
+		}
+		if (!max_wl_version.empty() && next_wl > string_to_version(max_wl_version)) {
+			return false;
+		}
+	}
+	return true;
+}
+
 AddOnInfo preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(
 	   g_fs->make_sub_file_system(kAddOnDir + FileSystem::file_separator() + name));
@@ -282,6 +313,9 @@ AddOnInfo preload_addon(const std::string& name) {
 	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
 	               get_category(s.get_safe_string("category")),
 	               {},
+	               s.get_bool("sync_safe", false),
+	               s.get_string("min_wl_version", ""),
+	               s.get_string("max_wl_version", ""),
 	               false,
 	               {{}, {}, {}, {}},
 	               {},
