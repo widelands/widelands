@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Be Trzy <byaqya@gmail.com>, 2020
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-10-23 07:56+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-01-15 09:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -33,38 +33,42 @@ msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
 msgstr "Użycie: widelands <opcja0>=<wartość0> ... <opcjaN>=<wartośćN>"
 
 #: ../../src/wlapplication_messages.cc:43
+msgid "       widelands <save.wgf>/<replay.wrpl>"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
 msgstr "Opcje:"
 
-#: ../../src/wlapplication_messages.cc:44
+#: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr "--<nazwa-pozycji-ustawień>=wartość nadpisuje dowolne ustawienie\npliku konfiguracyjnego"
 
-#: ../../src/wlapplication_messages.cc:45
+#: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
 msgstr "Uwaga: Nowa wartość zostanie zapisana do pliku konfiguracyjnego"
 
-#: ../../src/wlapplication_messages.cc:47
+#: ../../src/wlapplication_messages.cc:48
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr "--datadir=KATALOG Użyj podanego katalogu jako katalogu danych\nwidelands"
 
-#: ../../src/wlapplication_messages.cc:50
+#: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr "--homedir=KATALOG Użyj podanego katalogu jako katalogu opcji,\nzapisów gry i powtórek widelands"
 
-#: ../../src/wlapplication_messages.cc:54
+#: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
 msgstr "Domyślny to ~/.widelands"
 
-#: ../../src/wlapplication_messages.cc:56
+#: ../../src/wlapplication_messages.cc:57
 msgid "                      Default is %USERPROFILE%\\.widelands"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:58
+#: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
@@ -74,14 +78,14 @@ msgstr ""
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:65
+#: ../../src/wlapplication_messages.cc:66
 msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
 msgstr "--coredump=[true|false]\nTworzy coredump przy naruszeniu ochrony pamięci zamiast\nkorzystać z SDL"
 
-#: ../../src/wlapplication_messages.cc:69
+#: ../../src/wlapplication_messages.cc:70
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
@@ -96,62 +100,68 @@ msgstr "--language=[de_DE|pl_PL|...]\nLocale do użycia."
 #. multiplayer
 #. * TRANSLATORS: games to make sure that there is no mismatch between the
 #. players.
-#: ../../src/wlapplication_messages.cc:78
+#: ../../src/wlapplication_messages.cc:79
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
 msgstr "--write_syncstreams=[true|false]\nTworzy pliki zrzutu strumienia synchronizacji pomocne\nw odpluskwianiu gier sieciowych."
 
-#: ../../src/wlapplication_messages.cc:81
+#: ../../src/wlapplication_messages.cc:82
 msgid " --autosave=[...]     Automatically save each n minutes"
 msgstr "--autosave=[...] Zapisuj automatycznie co n minut"
 
-#: ../../src/wlapplication_messages.cc:82
+#: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
 msgstr "--rolling_autosave=[...]\nUżywaj tej liczby plików przy rotacyjnych autozapisach"
 
-#: ../../src/wlapplication_messages.cc:85
+#: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
 msgstr " --metaserver=[...]\n                      Połącz się z innym metaserverem do gier internetowych."
 
-#: ../../src/wlapplication_messages.cc:88
+#: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
 msgstr " --metaserverport=[...]\n                      Numer portu metaservera do gier internetowych."
 
 #: ../../src/wlapplication_messages.cc:92
+msgid ""
+" --addon_server=[...]\n"
+"                      Connect to a different github repository                      and branch from the add-ons manager."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
 msgstr "--nosound Uruchamia grę bez dźwięku."
 
-#: ../../src/wlapplication_messages.cc:94
+#: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr "--nozip Nie zapisuj plików jako binarnych archiwów zip."
 
-#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:103
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr "--editor Uruchamia edytor Widelands bezpośrednio.\nMożesz dodać =NAZWAPLIKU, by bezpośrednio\nwczytać mapę NAZWAPLIKU w edytorze."
 
-#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:107
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
 msgstr "--ai_training Włącza tryb treningowy SI. Skocz pod adres \nhttps://www.widelands.org/wiki/Ai%20Training/\n po pełny opis logiki treningowej SI. "
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:111
 msgid ""
 " --auto_speed         In multiplayer games only, this will keep\n"
 "                      adjusting the game speed automatically,\n"
@@ -159,17 +169,21 @@ msgid ""
 "                      --ai_training."
 msgstr " --auto_speed         Tylko w grach wieloosobowych automatycznie\n dostosowuje prędkość gry, w zależności od FPS. Przydatne w połączeniu z\n--ai_training."
 
-#: ../../src/wlapplication_messages.cc:111
+#: ../../src/wlapplication_messages.cc:116
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr "--scenario=NAZWAPLIKU Bezpośrednio uruchamia mapę NAZWAPLIKU jako\nmapę scenariusza."
 
-#: ../../src/wlapplication_messages.cc:114
+#: ../../src/wlapplication_messages.cc:119
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr "--loadgame=NAZWAPLIKU Bezpośrednio wczytuje zapis gry NAZWAPLIKU."
 
-#: ../../src/wlapplication_messages.cc:115
+#: ../../src/wlapplication_messages.cc:120
+msgid " --replay=FILENAME    Directly loads the replay FILENAME."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:121
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -179,7 +193,7 @@ msgstr "--script=FILENAME Uruchom podany skrypt Lua po inicjalizacji.\nPoprawny 
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:127
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -187,7 +201,7 @@ msgid ""
 "                      not connected to a road."
 msgstr "--auto_roadbuild_mode=[true|false]\nPrzełącza automatyczne przechodzenie\ndo trybu budowy drogi po umieszczeniu\nflagi nie połączonej z drogą."
 
-#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:133
 msgid "Graphic options:"
 msgstr "Opcje graficzne:"
 
@@ -195,22 +209,22 @@ msgstr "Opcje graficzne:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:138
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr "--fullscreen=[true|false]\nPrzełącza korzystanie z pełnego ekranu."
 
-#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:142
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr "--xres=[...] Szerokość okna w pikselach."
 
-#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:143
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr "--yres=[...] Wysokość okna w pikselach."
 
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:144
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     Maksymalna liczba klatek na sekundę w grze."
 
@@ -218,17 +232,17 @@ msgstr " --maxfps=[5 ...]     Maksymalna liczba klatek na sekundę w grze."
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:143
+#: ../../src/wlapplication_messages.cc:149
 msgid "Options for the internal window manager:"
 msgstr "Opcje wewnętrznego menedżera okien:"
 
-#: ../../src/wlapplication_messages.cc:144
+#: ../../src/wlapplication_messages.cc:150
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr " --animate_map_panning=[yes|no]\n                      Czy automatyczne ruchy mapy powinny być animowane."
 
-#: ../../src/wlapplication_messages.cc:147
+#: ../../src/wlapplication_messages.cc:153
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -240,7 +254,7 @@ msgstr "--border_snap_distance=[0 ...]\nPrzesuń okno do krawędzi ekranu\ngdy k
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:161
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -248,7 +262,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr "--dock_windows_to_edges=[true|false]\nPrzełącza chowanie krawędzi okna\numieszczonego przy krawędzi ekranu."
 
-#: ../../src/wlapplication_messages.cc:160
+#: ../../src/wlapplication_messages.cc:166
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -256,7 +270,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr "--panel_snap_distance=[0 ...]\nPrzesuń okno do krawędzi panelu\ngdy krawędź okna jest w tej odległości\nod krawędzi panelu."
 
-#: ../../src/wlapplication_messages.cc:165
+#: ../../src/wlapplication_messages.cc:171
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -264,15 +278,23 @@ msgid ""
 "                      panel."
 msgstr "--snap_windows_only_when_overlapping=[yes|no]\nPrzesuwaj okno do krawędzi panelu\ntylko, jeśli okno nachodzi na panel."
 
-#: ../../src/wlapplication_messages.cc:171
+#: ../../src/wlapplication_messages.cc:177
 msgid " --verbose            Enable verbose debug messages"
 msgstr "--verbose Włącz gadatliwe informacje debugowania"
 
-#: ../../src/wlapplication_messages.cc:172
+#: ../../src/wlapplication_messages.cc:178
 msgid " --help               Show this help"
 msgstr "--help Wyświetl tę pomoc"
 
-#: ../../src/wlapplication_messages.cc:173
+#: ../../src/wlapplication_messages.cc:180
+msgid ""
+" <save.wgf>/<replay.wrpl> \n"
+"                      Directly loads the given savegame or replay. Useful for\n"
+"                      .wgf/.wrpl file extension association. Does not work with\n"
+"                      other options. Also see --loadgame/--replay."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:186
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-02 22:57+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-01 15:02+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,7 @@ msgstr "Pro více informací se lze podívat do nápovědy k dané budově, kter
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr "Abys zjistil, jak tví vojáci pokročili s výcvikem, můžeš se podívat na jejich ikony. Jsou upravovány pomocí červených teček:"
+msgstr "To, jak tví vojáci pokročili s výcvikem, můžeš zjistit, když se podíváš na jejich ikony. Jsou upravovány pomocí červených teček:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
 msgid ""
@@ -348,7 +348,7 @@ msgstr "Výborně! Chata průzkumníka je postavená, zatímco je průzkumník n
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr "Za prvé na svou výpravu bude potřebovat něco k jídlu. Naštěstí máme ve skladu nějaké malé porce jídla."
+msgstr "Za prvé na svou výpravu bude potřebovat něco k jídlu. Naštěstí máme ve skladu nějaké malé svačiny."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""

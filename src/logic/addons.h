@@ -24,6 +24,7 @@
 #include <functional>
 #include <map>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace AddOns {
@@ -50,7 +51,6 @@ struct AddOnCategoryInfo {
 	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
-	bool can_disable_addons;
 };
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
@@ -76,6 +76,12 @@ struct AddOnComment {
 constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
+	/*
+	 * When adding any new add-on properties that are stored in the `addon` file,
+	 * be sure to add them to MutableAddon as well so they are preserved/updated
+	 * correctly when saving an add-on in the packager.
+	 */
+
 	std::string internal_name;  // "cool_feature.wad"
 
 	std::string unlocalized_descname;
@@ -93,7 +99,11 @@ struct AddOnInfo {
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
-	bool verified;  // Only valid for Remote add-ons
+	bool sync_safe;              // Whether this add-on will not desync in MP and replays.
+	std::string min_wl_version;  // Minimum required Widelands version, or "" if invalid.
+	std::string max_wl_version;  // Maximum supported Widelands version, or "" if invalid.
+
+	bool verified;  // Only valid for Remote add-ons.
 
 	AddOnFileList file_list;  // Get rid of this ASAP
 	std::map<std::string /* name */, std::string /* description */> screenshots;
@@ -107,6 +117,7 @@ struct AddOnInfo {
 	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
 
+	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
 	double average_rating() const;
 };
@@ -115,6 +126,7 @@ struct AddOnInfo {
 using AddOnState = std::pair<AddOnInfo, bool>;
 extern std::vector<AddOnState> g_addons;
 
+extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
 AddOnCategory get_category(const std::string&);
 

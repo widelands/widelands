@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Headquarters
+--             Headquarters starting conditions for Frisians
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

@@ -7,6 +7,7 @@ return {
    dirname .. "artifacts.lua",
    dirname .. "territorial_time.lua",
    dirname .. "territorial_lord.lua",
+   dirname .. "hq_hunter.lua",
    dirname .. "defeat_all.lua",
    dirname .. "endless_game.lua",
    dirname .. "endless_game_fogless.lua",

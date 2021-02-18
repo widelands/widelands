@@ -62,7 +62,9 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "logic/training_wheels.h"
+#endif
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -147,7 +149,9 @@ Game::Game()
      scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_wanted_(false),
+#endif
      replay_(false) {
 	Economy::initialize_serial();
 }
@@ -216,7 +220,9 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
 	// Replays can't handle scenarios
 	set_write_replay(false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_wanted_ = false;
+#endif
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader) {
@@ -374,6 +380,8 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
@@ -381,6 +389,7 @@ void Game::init_savegame(const GameSettings& settings) {
 			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
 			log_dbg("Training wheel from savegame");
 		}
+#endif
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -423,6 +432,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
@@ -430,6 +440,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
 			log_dbg("Training wheel from savegame");
 		}
+#endif
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -463,6 +474,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	}
 }
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 bool Game::acquire_training_wheel_lock(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		return training_wheels_->acquire_lock(objective);
@@ -497,6 +509,7 @@ bool Game::training_wheels_wanted() const {
 std::string Game::active_training_wheel() const {
 	return training_wheels_ ? training_wheels_->current_objective() : "";
 }
+#endif
 
 /**
  * Called for every game after loading (from a savegame or just from a map
@@ -543,6 +556,27 @@ bool Game::run(StartGameType const start_game_type,
 	}
 
 	if (start_game_type != StartGameType::kSaveGame) {
+		// Check whether we need to disable replays because of add-ons.
+		// For savegames this has already been done by the game class packet.
+		if (writereplay_) {
+			for (const AddOns::AddOnInfo& a : enabled_addons()) {
+				if (!a.sync_safe) {
+					set_write_replay(false);
+					break;
+				}
+			}
+			if (writereplay_) {
+				// We need to check all enabled add-ons as well because enabled_addons() does
+				// not contain e.g. desync-prone starting condition or win condition add-ons.
+				for (const auto& pair : AddOns::g_addons) {
+					if (pair.second && !pair.first.sync_safe) {
+						set_write_replay(false);
+						break;
+					}
+				}
+			}
+		}
+
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */
@@ -550,13 +584,17 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 			training_wheels_wanted_ =
 			   get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
+#endif
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
 			set_write_replay(false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 			training_wheels_wanted_ = false;
+#endif
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
@@ -620,6 +658,7 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
 	// for marking them as solved if a scenario teaches the same content.
 	if (training_wheels_wanted_) {
@@ -634,6 +673,7 @@ bool Game::run(StartGameType const start_game_type,
 			writereplay_ = false;
 		}
 	}
+#endif
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
@@ -670,12 +710,14 @@ bool Game::run(StartGameType const start_game_type,
 
 	remove_loader_ui();
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
 	// user switched off the option
 	if (training_wheels_ != nullptr && training_wheels_wanted_) {
 		log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
 		training_wheels_->run_objectives();
 	}
+#endif
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 

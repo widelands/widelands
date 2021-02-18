@@ -1,15 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# Daniel Muñoz <dani_m_1991@hotmail.com>, 2021
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016,2019
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
 # GunChleoc, 2016
 # Gontzal M. Pujana <juchuf@gmail.com>, 2018
 # Javier Mora <morehash@gmail.com>, 2015
 # Gontzal M. Pujana <juchuf@gmail.com>, 2015
-# Kiibakun, 2015
+# Kiba, 2015
+# Kiba, 2021
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 # Madkat Here, 2015-2016
@@ -23,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-12 12:24+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-07 22:55+0000\n"
+"Last-Translator: Daniel Muñoz <dani_m_1991@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -258,7 +260,7 @@ msgstr ""
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
 msgctxt "amazons_building"
-msgid "Your soldiers have occupied your warriors’ delling."
+msgid "Your soldiers have occupied your warriors’ dwelling."
 msgstr ""
 
 #. TRANSLATORS: Message sent by an Amazon military site
@@ -295,31 +297,31 @@ msgstr "Castillo"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Tus soldados han ocupado tu castillo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
 msgctxt "atlanteans_building"
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Tu castillo ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
 msgctxt "atlanteans_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Tu castillo está siendo atacado."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:159
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en el castillo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en el castillo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
@@ -331,31 +333,31 @@ msgstr "Cuartel"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Tus soldados han ocupado tu cuartel."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Tu cuartel ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
 msgctxt "atlanteans_building"
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Tu cuartel está siendo atacado."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en el cuartel."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en el cuartel."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
@@ -367,19 +369,19 @@ msgstr "Casa de guardia"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Tus soldados han ocupado tu casa de guardia."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Tu casa de guardia ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Tu casa de guardia está siendo atacada."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
@@ -583,31 +585,31 @@ msgstr "Fortaleza"
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:71
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Tus soldados han ocupado tu fortaleza."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:73
 msgctxt "barbarians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Tu fortaleza ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:75
 msgctxt "barbarians_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Tu fortaleza está siendo atacada."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:77
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la fortaleza."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:79
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en la fortaleza."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -1180,7 +1182,6 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
@@ -1250,7 +1251,6 @@ msgstr ""
 msgid "working"
 msgstr "trabajando"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1334,17 +1334,17 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Cocoa Farm"
-msgstr ""
+msgstr "Plantación de cacao"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:54
 msgid "planting cocoa"
-msgstr ""
+msgstr "plantando cacao"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:62
 msgid "harvesting cocoa"
-msgstr ""
+msgstr "cosechando cacao"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
 msgctxt "amazons_building"
@@ -1670,10 +1670,15 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:63
 msgid "scouting"
 msgstr "explorando"
 
@@ -1699,6 +1704,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1710,6 +1716,8 @@ msgstr ""
 msgid "making a shovel"
 msgstr "fabricando una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1719,6 +1727,7 @@ msgstr "fabricando una pala"
 msgid "making a felling ax"
 msgstr "la fabricación del hacha de talar"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1733,6 +1742,8 @@ msgstr "fabricando un pico"
 msgid "making a machete"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1743,6 +1754,7 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "fabricando utensilios de cocina"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1760,9 +1772,9 @@ msgstr "fabricando un martillo"
 msgid "making a chisel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1798,12 +1810,12 @@ msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
 msgid "cutting granite"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
@@ -1811,7 +1823,7 @@ msgstr ""
 msgid "No Rocks"
 msgstr "Sin Rocas"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
@@ -1819,7 +1831,7 @@ msgstr "Sin Rocas"
 msgid "Out of Rocks"
 msgstr "Sin rocas"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:58
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
 msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
@@ -1916,8 +1928,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -5290,10 +5302,6 @@ msgstr ""
 msgid "Cocoa Tree (old)"
 msgstr ""
 
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:81
-msgid "Cocoa Tree"
-msgstr ""
-
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
@@ -5624,8 +5632,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldado"
+msgstr[1] "%1% soldados"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -7196,7 +7204,7 @@ msgstr ""
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Chocolate"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
@@ -7322,7 +7330,7 @@ msgstr "Oro"
 #: ../../data/tribes/wares/gold_dust/init.lua:8
 msgctxt "ware"
 msgid "Gold Dust"
-msgstr ""
+msgstr "Polvo de oro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_ore/init.lua:8
@@ -7388,7 +7396,7 @@ msgstr "Yelmo de guerra"
 #: ../../data/tribes/wares/helmet_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Helmet"
-msgstr ""
+msgstr "Casco de madera"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
@@ -7461,7 +7469,7 @@ msgstr "Tronco"
 #: ../../data/tribes/wares/machete/init.lua:8
 msgctxt "ware"
 msgid "Machete"
-msgstr ""
+msgstr "Machete"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble/init.lua:8
@@ -7546,13 +7554,13 @@ msgstr "Caña"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "Cuerda"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr ""
+msgstr "Goma"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8
@@ -7936,7 +7944,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr ""
+msgstr "Maestro leñador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:89
@@ -8140,7 +8148,7 @@ msgstr "Herrero"
 #: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
-msgstr "Herrero Maestro"
+msgstr "Maestro herrero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/brewer/init.lua:8
@@ -8536,7 +8544,7 @@ msgstr "Panadero"
 #: ../../data/tribes/workers/frisians/baker_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Baker"
-msgstr "Maestro Panadero"
+msgstr "Maestro panadero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/beekeeper/init.lua:8
@@ -8560,7 +8568,7 @@ msgstr "Herrero"
 #: ../../data/tribes/workers/frisians/blacksmith_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Blacksmith"
-msgstr "Maestro Herrero"
+msgstr "Maestro herrero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brewer/init.lua:8
@@ -8572,7 +8580,7 @@ msgstr "Cervecero"
 #: ../../data/tribes/workers/frisians/brewer_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Brewer"
-msgstr "Maestro Cervecero"
+msgstr "Maestro cervecero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brickmaker/init.lua:8
@@ -8662,7 +8670,7 @@ msgstr "Minero"
 #: ../../data/tribes/workers/frisians/miner_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Miner"
-msgstr "Maestro Minero"
+msgstr "Maestro minero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:8
@@ -8698,7 +8706,7 @@ msgstr "Costurera"
 #: ../../data/tribes/workers/frisians/seamstress_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Seamstress"
-msgstr "Maestra Costurera"
+msgstr "Maestra costurera"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/shipwright/init.lua:8

@@ -1,9 +1,9 @@
 {
 	"name": "Widelands",
-	"category": "策略游戏",
-	"tagline": "即时策略游戏",
+	"category": "战略 游戏",
+	"tagline": "即时战略游戏",
 	"description":[
-		"作为小部落的摄政王， 你的任务是让部落发展壮大。 每个成员会尽力生产资源，促进增长。",
-		"Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you."
+		"你是一个小型的宗族摄政王，你的任务是建立一个不断增长的定居点。你们宗族的每一个成员都会尽自己的一份力量来生产更多的资源来促进这种增长。 ",
+		"Widelands提供了单人游戏模式，讲述了部族的战役和他们在Widelands世界中挣扎求存的故事。然而，当你通过互联网或局域网与朋友联合起来一起建立新的帝国时 – 或者是在战争的沙场中互相残杀时，定居就从真正意义上开始了。Widelands也提供了人工智能前来向你发起挑战。"
 	]
 }

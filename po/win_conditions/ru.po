@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -8,6 +8,7 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Sergey Trofimov <sarg@sarg.org.ru>, 2021
 # Viktor S <awsswa59@gmail.com>, 2018-2020
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-07-23 07:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-01-17 12:39+0000\n"
+"Last-Translator: Sergey Trofimov <sarg@sarg.org.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -249,7 +250,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Каждый игрок или команда пытается захватить более половины площади карты. Победителем станет тот, кто сможет удерживать эту зону в течение не менее 20 минут, или тот, кто имеет наибольшую территорию после 4 часов, в зависимости от того, что наступит раньше. Если выбран мирный режим, игра заканчивается, если один игрок имеет больше земли, чем любой другой игрок мог бы получить."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-05 17:17+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-01-28 08:16+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -361,7 +361,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "V této hře začínáš na malém kousku země s jen pár surovinami. S jejich pomocí vybuduješ říši s tisíci obyvateli. Na své cestě k tomuto cíli buduješ hospodářství, objevuješ nová území ve svém okolí a čelíš soupeřícím kmenům."
+msgstr "V této hře začínáš na malém kousku země jen s pár surovinami. S jejich pomocí vybuduješ říši s tisíci obyvateli. Na své cestě k tomuto cíli buduješ hospodářství, objevuješ nová území ve svém okolí a čelíš soupeřícím kmenům."
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
@@ -512,6 +512,29 @@ msgid ""
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Napravo můžeš najít informace o zvolené mapě nebo uložené hře. Tlačítko vedle názvu mapy umožňuje hostiteli hry vybrat jinou mapu. Dále hostitel může nastavit výherní podmínku a samozřejmě také zahájit hru, jakmile jsou všichni s nastavením spokojeni."
+
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"them."
+msgstr "Amazonky milují stromy. Postav dostatek chat ochránkyň džungle, aby byl stromů dostatek."
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an amazon economy. Build rare tree "
+"plantations to plant these special trees."
+msgstr "Vzácné dřeviny představují páteř amazonského hospodářství. Postav plantáž vzácných dřevin pro jejich výsadbu."
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
+"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr "Vzácné dřeviny jsou káceny zkušenými dřevorubkyněmi, které přebývají v chýších dřevorubkyň vylepšených na chaty na těžbu vzácných dřevin. Ty už netěží obvyklé druhy dřevin. Předem si jejich umístění dobře naplánuj."
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr "Jídlo je sušeno za pomoci dřevěného uhlí. Zajisti jeho stabilní přísun."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
