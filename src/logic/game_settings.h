@@ -137,7 +137,7 @@ struct GameSettings {
 			}
 		}
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.category == AddOns::AddOnCategory::kWinCondition) {
+			if (pair.first.category == AddOns::AddOnCategory::kWinCondition && pair.second) {
 				const std::string filename = kAddOnDir + g_fs->file_separator() +
 				                             pair.first.internal_name + g_fs->file_separator() +
 				                             "init.lua";
