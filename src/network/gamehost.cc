@@ -1819,6 +1819,19 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.unsigned_8(NETCMD_HELLO);
 	packet.unsigned_8(NETWORK_PROTOCOL_VERSION);
 	packet.unsigned_32(client.usernum);
+	{
+		std::vector<const AddOns::AddOnInfo*> enabled_addons;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.second && pair.first.category != AddOns::AddOnCategory::kTheme) {
+				enabled_addons.push_back(&pair.first);
+			}
+		}
+		packet.unsigned_32(enabled_addons.size());
+		for (const AddOns::AddOnInfo* a : enabled_addons) {
+			packet.string(a->internal_name);
+			packet.string(AddOns::version_to_string(a->version, false));
+		}
+	}
 	d->net->send(client.sock_id, packet);
 	// even if the network protocol is the same, the data might be different.
 	if (client.build_id != build_id()) {

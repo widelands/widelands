@@ -56,6 +56,20 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
+struct AddOnsGuard {
+	AddOnsGuard() : former_addons_(AddOns::g_addons) {
+	}
+	~AddOnsGuard() {
+		reset();
+	}
+	void reset() {
+		AddOns::g_addons = former_addons_;
+	}
+
+private:
+	const std::vector<AddOns::AddOnState> former_addons_;
+};
+
 struct GameClientImpl {
 	bool internet_;
 
@@ -97,6 +111,10 @@ struct GameClientImpl {
 
 	/** File that is eventually transferred via the network if not found at the other side */
 	std::unique_ptr<NetTransferFile> file_;
+
+	// This ensures that we can modify `g_addons` in any way we like
+	// and that it is reset to the initial state after our game ends.
+	AddOnsGuard addons_guard_;
 
 	void send_hello();
 	void send_player_command(Widelands::PlayerCommand*);
@@ -240,7 +258,7 @@ void GameClient::run(std::unique_ptr<GameController>& ptr) {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, ptr, d->internet_);
+	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, ptr, d->internet_);
 }
 
 void GameClient::do_run() {
@@ -651,6 +669,29 @@ void GameClient::handle_hello(RecvPacket& packet) {
 	}
 	d->settings.usernum = packet.unsigned_32();  // TODO(Klaus Halfmann): usernum is int8_t.
 	d->settings.playernum = -1;
+
+	d->addons_guard_.reset();
+	std::vector<AddOns::AddOnState> new_g_addons;
+	for (size_t i = packet.unsigned_32(); i; --i) {
+		const std::string name = packet.string();
+		const AddOns::AddOnVersion v = AddOns::string_to_version(packet.string());
+		AddOns::AddOnVersion found;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.internal_name == name) {
+				found = pair.first.version;
+				new_g_addons.push_back(std::make_pair(pair.first, true));
+				break;
+			}
+		}
+		if (found.empty()) {
+			throw wexception("Add-on '%s' required by host not found", name.c_str());
+		}
+		if (found != v) {
+			throw wexception("Add-on '%s' installed at version %s but host uses version %s", name.c_str(),
+					AddOns::version_to_string(found, false).c_str(), AddOns::version_to_string(v, false).c_str());
+		}
+	}
+	AddOns::g_addons = new_g_addons;
 }
 
 /**
@@ -1144,7 +1185,13 @@ void GameClient::disconnect(const std::string& reason,
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
 	if (d->modal) {
-		d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
+		if (d->modal->is_modal()) {
+			d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
+		} else {
+			capsule_.menu().show_messagebox(_("Disconnected"), (boost::format(_("The connection with the host was lost for the following reason:\n%s")) %
+					(arg.empty() ? NetworkGamingMessages::get_message(reason) : NetworkGamingMessages::get_message(reason, arg))).str());
+			d->modal->die();
+		}
 	}
 	d->modal = nullptr;
 }
