@@ -51,7 +51,6 @@ struct AddOnCategoryInfo {
 	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
-	bool can_disable_addons;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
@@ -72,7 +71,13 @@ struct AddOnComment {
 constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
-	std::string internal_name;  ///< "cool_feature.wad"
+	/*
+	 * When adding any new add-on properties that are stored in the `addon` file,
+	 * be sure to add them to MutableAddon as well so they are preserved/updated
+	 * correctly when saving an add-on in the packager.
+	 */
+
+	std::string internal_name;  // "cool_feature.wad"
 
 	std::string unlocalized_descname;
 	std::string unlocalized_description;
@@ -88,6 +93,10 @@ struct AddOnInfo {
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
+	bool sync_safe;              // Whether this add-on will not desync in MP and replays.
+	std::string min_wl_version;  // Minimum required Widelands version, or "" if invalid.
+	std::string max_wl_version;  // Maximum supported Widelands version, or "" if invalid.
+
 	std::map<std::string /* name */, std::string /* description */> screenshots;
 
 	bool verified;                 ///< Only valid for Remote add-ons.
@@ -98,6 +107,7 @@ struct AddOnInfo {
 	uint32_t votes[kMaxRating];    ///< Total number of votes for each of the ratings 1-10.
 	std::vector<AddOnComment> user_comments;
 
+	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
 	double average_rating() const;
 };

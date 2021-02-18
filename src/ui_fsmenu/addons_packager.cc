@@ -353,14 +353,17 @@ void AddOnsPackager::clicked_new_addon() {
 		   {1, 0, 0},
 		   0,
 		   category.get_selected(),
-		   {},  // Requirements
+		   {},     // Requirements
+		   false,  // sync-safe
+		   "",     // min WL version
+		   "",     // max WL version
 		   /* Everything below is used only for remote add-ons. */
-		   {},  // Screenies
-		   false,
-		   0,   // Size
-		   "",  // Uploader
-		   0,   // Timestamp
-		   0,   // Downloads
+		   {},     // Screenies
+		   false,  // verified
+		   0,      // Size
+		   "",     // Uploader
+		   0,      // Timestamp
+		   0,      // Downloads
 		   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Votes
 		   {}  // Comments
 		   };

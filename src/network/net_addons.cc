@@ -222,9 +222,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			}
 		}
 
-		read_line();  // NOCOM min_wl_version
-		read_line();  // NOCOM max_wl_version
-		read_line();  // NOCOM sync_safe ( == "true")
+		a.min_wl_version = read_line();
+		a.max_wl_version = read_line();
+		a.sync_safe = (read_line() == "true");
 
 		for (int j = std::stoi(read_line()); j > 0; --j) {
 			const std::string s1 = read_line();
