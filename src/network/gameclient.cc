@@ -859,6 +859,8 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			           "I can not handle the file."));
 			d->net->send(s);
 		}
+		// Notify UI to refresh the map data
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 	}
 }
 

@@ -87,10 +87,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (settings().savegame) {
 			return settings().players.at(number).state != PlayerSettings::State::kClosed;
 		} else if (settings().scenario) {
-			return ((settings().players.at(number).state == PlayerSettings::State::kOpen ||
-			         settings().players.at(number).state == PlayerSettings::State::kHuman) &&
-			        settings().players.at(number).closeable) ||
-			       settings().players.at(number).state == PlayerSettings::State::kClosed;
+			return settings().players.at(number).state != PlayerSettings::State::kComputer;
 		}
 		return true;
 	}
@@ -1857,8 +1854,6 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
 	write_setting_all_players(packet);
 	d->net->send(client.sock_id, packet);
-	// Map changes are finished here
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLUSERS);
