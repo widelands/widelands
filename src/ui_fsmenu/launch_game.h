@@ -61,6 +61,8 @@ protected:
 	void update_peaceful_mode();
 	/// Enables or disables the custom_starting_positions checkbox.
 	void update_custom_starting_positions();
+	/// Hides or shows the desync warning.
+	void update_warn_desyncing_addon();
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
@@ -83,7 +85,8 @@ protected:
 	void layout() override;
 
 	MapDetailsBox map_details_;
-	UI::Textarea configure_game;
+	UI::Textarea configure_game_;
+	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	UI::Button* choose_map_;
