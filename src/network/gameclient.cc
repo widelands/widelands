@@ -687,8 +687,9 @@ void GameClient::handle_hello(RecvPacket& packet) {
 			throw wexception("Add-on '%s' required by host not found", name.c_str());
 		}
 		if (found != v) {
-			throw wexception("Add-on '%s' installed at version %s but host uses version %s", name.c_str(),
-					AddOns::version_to_string(found, false).c_str(), AddOns::version_to_string(v, false).c_str());
+			throw wexception("Add-on '%s' installed at version %s but host uses version %s",
+			                 name.c_str(), AddOns::version_to_string(found, false).c_str(),
+			                 AddOns::version_to_string(v, false).c_str());
 		}
 	}
 	AddOns::g_addons = new_g_addons;
@@ -1188,8 +1189,13 @@ void GameClient::disconnect(const std::string& reason,
 		if (d->modal->is_modal()) {
 			d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
 		} else {
-			capsule_.menu().show_messagebox(_("Disconnected"), (boost::format(_("The connection with the host was lost for the following reason:\n%s")) %
-					(arg.empty() ? NetworkGamingMessages::get_message(reason) : NetworkGamingMessages::get_message(reason, arg))).str());
+			capsule_.menu().show_messagebox(
+			   _("Disconnected"),
+			   (boost::format(
+			       _("The connection with the host was lost for the following reason:\n%s")) %
+			    (arg.empty() ? NetworkGamingMessages::get_message(reason) :
+			                   NetworkGamingMessages::get_message(reason, arg)))
+			      .str());
 			d->modal->die();
 		}
 	}
