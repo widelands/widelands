@@ -1,5 +1,5 @@
 -- =======================================================================
---                amazons Village Starting Conditions
+--                Village starting conditions for Amazons
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

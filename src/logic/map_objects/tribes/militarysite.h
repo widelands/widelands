@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -197,7 +197,7 @@ private:
 	Time next_swap_soldiers_time_;
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
-	std::vector<std::map<int, std::string>> statistics_string_cache_;
+	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_;
 };
 }  // namespace Widelands
 

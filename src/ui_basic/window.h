@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -145,12 +145,12 @@ protected:
 	}
 
 	const WindowStyle window_style_;
-	const WindowStyleInfo& window_style_info_;
-	const FontStyleInfo& title_style_;
+	const WindowStyleInfo& window_style_info() const;
+	const FontStyleInfo& title_style() const;
+
+	virtual void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
 private:
-	void on_resolution_changed_note(const GraphicResolutionChanged& note);
-
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_;

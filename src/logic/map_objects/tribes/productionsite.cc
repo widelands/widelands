@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -795,6 +795,21 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 	}
 }
 
+void ProductionSite::set_next_program_override(Game& game,
+                                               const std::string& name,
+                                               MapObject* extra_data) {
+	program_start(game, name, true, extra_data);
+}
+
+bool ProductionSite::has_forced_state() const {
+	for (const State& s : stack_) {
+		if (s.flags & State::StateFlags::kStateFlagIgnoreStopped) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void ProductionSite::find_and_start_next_program(Game& game) {
 	program_start(game, MapObjectProgram::kMainProgram);
 }
@@ -811,7 +826,8 @@ void ProductionSite::program_act(Game& game) {
 	// 'Stop' of building is considered only when starting
 	// new productions cycle. Otherwise it can lead to consumption
 	// of input wares without producing anything
-	if (is_stopped_ && state.ip == 0) {
+	if (is_stopped_ && state.ip == 0 &&
+	    !(state.flags & State::StateFlags::kStateFlagIgnoreStopped)) {
 		program_end(game, ProgramResult::kFailed);
 		program_timer_ = true;
 		program_time_ = schedule_act(game, Duration(20000));
@@ -999,12 +1015,23 @@ void ProductionSite::program_step(Game& game, const Duration& delay, ProgramResu
 /**
  * Push the given program onto the stack and schedule acting.
  */
-void ProductionSite::program_start(Game& game, const std::string& program_name) {
+void ProductionSite::program_start(Game& game,
+                                   const std::string& program_name,
+                                   bool force,
+                                   MapObject* extra_data) {
 	State state;
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
 	state.phase = ProgramResult::kNone;
+	state.objvar = extra_data;
+
+	if (force) {
+		state.flags |= State::StateFlags::kStateFlagIgnoreStopped;
+	}
+	if (extra_data) {
+		state.flags |= State::StateFlags::kStateFlagHasExtraData;
+	}
 
 	stack_.push_back(state);
 

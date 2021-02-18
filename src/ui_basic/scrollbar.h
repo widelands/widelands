@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,9 +102,10 @@ private:
 	uint32_t time_nextact_;
 	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
 
-	const Image* pic_minus_;                  ///< left/up
-	const Image* pic_plus_;                   ///< right/down
-	const UI::PanelStyleInfo* button_style_;  // Background color and texture. Not owned.
+	const Image* pic_minus_;  ///< left/up
+	const Image* pic_plus_;   ///< right/down
+
+	const UI::PanelStyleInfo& button_style() const;  // Background color and texture.
 };
 }  // namespace UI
 

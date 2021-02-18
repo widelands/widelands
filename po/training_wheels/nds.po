@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2020
+# Benedikt Straub <benedikt-straub@web.de>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2020\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,27 +25,27 @@ msgstr ""
 #: ../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "Rüümte tum Bauen"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
-msgstr ""
+msgstr "Wi wollen Husen bauen, daarmit wi Waren produzeren könen."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "Laat uns also rutfinnen, waar wi daar Rüümte för hebben."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "Klick dat »Wiesen/Verbargen«-Menü an."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "Köör »Wies Rüümte tum Bauen« ut."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "Nu könen wi sehn, waar Husen un Fahnen baut worden könen."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -53,29 +53,31 @@ msgstr ""
 #: ../../data/scripting/training_wheels/flags.lua:83
 #: ../../data/scripting/training_wheels/init.lua:168
 msgid "Flags"
-msgstr ""
+msgstr "Fahnen"
 
 #: ../../data/scripting/training_wheels/flags.lua:63
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
 msgstr ""
+"Diene Lastendragers könen Waren fixer transporteren, wenn se de Last delen "
+"könen."
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "Klick dat Fahnen-Teken an."
 
 #: ../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "Klick de Fahnen-Knoop an."
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "Nu kiek na, of du noch mehr Fahnen up dienen Straten bauen kannst,"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
 msgid "Welcome"
-msgstr ""
+msgstr "Willkomen"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:147
@@ -87,12 +89,12 @@ msgstr "Upgaven"
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "Boomstammen & Straten"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:163
 msgid "Rocks"
-msgstr ""
+msgstr "Stenen"
 
 #: ../../data/scripting/training_wheels/logs.lua:115
 #: ../../data/scripting/training_wheels/rocks.lua:115
@@ -126,6 +128,8 @@ msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"Wenn du de »Strg«-Tast drückt hollst, as du up de twede Fahn klickst, worden"
+" noch mehr Fahnen up diener Straat baut, wenn dat gaht."
 
 #: ../../data/scripting/training_wheels/logs.lua:125
 #: ../../data/scripting/training_wheels/logs.lua:175
@@ -154,13 +158,15 @@ msgstr "Klick up de Knoop för dat Huus …"
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "… un klick dann de Fahn vör de Huus, waar du henbauen willst, an."
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
+"Hunnert! Bold produzeren wi Boomstammen, wat wi bruken, um noch mehr Husen "
+"to bauen."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
@@ -203,46 +209,57 @@ msgstr ""
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
+"As du dat doost, kiek the Billers an, um to sehn, of de Straat so flack as "
+"mögelk is:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "De Landskupp is hier flack. Diene Lastendragers sünd hier bannig fix."
 
 #: ../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"Hier mutt man eene lütte Schüünte uplopen. Diene Arbeiders sünd hier een "
+"bietje langsamer, wenn se uplopen, un een bietje gauer, wenn se runnerlopen."
 
 #: ../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"De Verbinnung tüsken deesen Felden is unbannig stuuv. In eener Richtung sünd"
+" de Arbeiders gewaltig fell, in de anner överut flau."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "Flint"
 
 #: ../../data/scripting/training_wheels/rocks.lua:131
 msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
-msgstr ""
+msgstr "Du muttst dien Volk mit Flint versörgen. Bau bidde deeses Huus:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"… un klick dann de farvigen Billers up de Kaart an, um de Verloop vun diener"
+" Straat fasttoleggen, bit du to de Fahn vör de Huus, waar du henbauen "
+"willst, kummst."
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
+"Hunnert! Bold produzeren wi Flint, wat wi bruken, um noch mehr Husen to "
+"bauen."
 
 #: ../../data/scripting/training_wheels/welcome.lua:20
 #: ../../data/scripting/training_wheels/welcome.lua:24

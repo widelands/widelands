@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,7 +102,9 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
      player_(nullptr),
      tribe_(nullptr),
      attackers_count_(0),
-     next_ai_think_(0),
+     // Delay initialization to allow scenario scripts
+     // to load custom units/buildings at gametime 0
+     next_ai_think_(1),
      scheduler_delay_counter_(0),
      wood_policy_(WoodPolicy::kAllowRangers),
      numof_psites_in_constr(0),
@@ -240,15 +242,14 @@ DefaultAI::~DefaultAI() {
  * General behaviour is defined here.
  */
 void DefaultAI::think() {
-
-	if (tribe_ == nullptr) {
-		late_initialization();
-	}
-
 	const Time& gametime = game().get_gametime();
 
 	if (next_ai_think_ > gametime) {
 		return;
+	}
+
+	if (tribe_ == nullptr) {
+		late_initialization();
 	}
 
 	// AI now thinks twice in a seccond, if the game engine allows this

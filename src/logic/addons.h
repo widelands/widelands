@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,10 @@
 #include <functional>
 #include <map>
 #include <string>
+#include <unordered_map>
 #include <vector>
+
+namespace AddOns {
 
 enum class AddOnCategory {
 	kNone,
@@ -35,7 +38,7 @@ enum class AddOnCategory {
 	kCampaign,
 	kWinCondition,
 	kStartingCondition,
-	kTheme  // not yet implemented
+	kTheme
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.
@@ -51,30 +54,39 @@ struct AddOnCategoryInfo {
 	bool can_disable_addons;
 };
 
-constexpr uint32_t kNotInstalled = 0;
-
-// Required add-ons for an add-on, map, or savegame with the recommended version
-using AddOnRequirements = std::vector<std::pair<std::string, uint32_t>>;
-
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
 	std::vector<std::string> directories, files, locales, checksums;
 };
 
+using AddOnVersion = std::vector<uint32_t>;
+std::string version_to_string(const AddOnVersion&, bool localize = true);
+AddOnVersion string_to_version(std::string);
+// Returns true if and only if version `compare` is newer than version `base`
+bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare);
+
+// Required add-ons for an add-on, map, or savegame with the recommended version
+using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
+
 struct AddOnComment {
 	std::string username, message;
-	uint32_t version;  // The version on which the user commented
+	AddOnVersion version;  // The version on which the user commented
 	std::time_t timestamp;
 };
+
+constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
 	std::string internal_name;  // "cool_feature.wad"
 
-	std::function<std::string()> descname;     // "Cool Feature"
-	std::function<std::string()> description;  // "This add-on is a really cool feature."
-	std::function<std::string()> author;       // "The Widelands Bunnybot"
+	std::string unlocalized_descname;
+	std::string unlocalized_description;
+	std::string unlocalized_author;
+	std::function<std::string()> descname;
+	std::function<std::string()> description;
+	std::function<std::string()> author;
 
-	uint32_t version;       // Add-on version
+	AddOnVersion version;   // Add-on version (e.g. 1.2.3)
 	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)
 
 	AddOnCategory category;
@@ -85,6 +97,7 @@ struct AddOnInfo {
 	bool verified;  // Only valid for Remote add-ons
 
 	AddOnFileList file_list;  // Get rid of this ASAP
+	std::map<std::string /* name */, std::string /* description */> screenshots;
 
 	uint32_t total_file_size;     // total size of all files, in bytes
 	std::string upload_username;  // who uploaded (may be different from author)
@@ -92,15 +105,18 @@ struct AddOnInfo {
 	// TODO(Nordfriese): These are not yet implemented on the server-side
 	std::time_t upload_timestamp;  // date and time when this version was uploaded
 	uint32_t download_count;       // total times downloaded
-	uint32_t votes;                // total number of votes
-	float average_rating;          // average rating between 1.0 and 10.0 (0 if no votes)
+	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
+
+	uint32_t number_of_votes() const;
+	double average_rating() const;
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
 using AddOnState = std::pair<AddOnInfo, bool>;
 extern std::vector<AddOnState> g_addons;
 
+extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
 AddOnCategory get_category(const std::string&);
 
@@ -111,5 +127,7 @@ std::string check_requirements(const AddOnRequirements&);
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
 AddOnInfo preload_addon(const std::string&);
+
+}  // namespace AddOns
 
 #endif  // end of include guard: WL_LOGIC_ADDONS_H

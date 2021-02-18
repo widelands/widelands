@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,9 @@
 namespace UI {
 struct ProgressWindow;
 }
-class FullscreenMenuLaunchGame;
+namespace FsMenu {
+class LaunchGame;
+}
 class InteractiveBase;
 class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
@@ -68,7 +70,7 @@ struct NoteFieldPossession {
 class EditorGameBase {
 public:
 	friend class InteractiveBase;
-	friend class FullscreenMenuLaunchGame;
+	friend class LaunchGame;
 	friend struct GameClassPacket;
 
 	explicit EditorGameBase(LuaInterface* lua);
@@ -98,6 +100,7 @@ public:
 	void remove_player(PlayerNumber);
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
+	                   const RGBColor&,
 	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
@@ -121,7 +124,8 @@ public:
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
 	                                     const std::string& theme,
-	                                     const std::string& background);
+	                                     const std::string& background,
+	                                     UI::Panel* parent = nullptr);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
@@ -215,10 +219,10 @@ public:
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
-	std::vector<AddOnInfo>& enabled_addons() {
+	std::vector<AddOns::AddOnInfo>& enabled_addons() {
 		return enabled_addons_;
 	}
-	const std::vector<AddOnInfo>& enabled_addons() const {
+	const std::vector<AddOns::AddOnInfo>& enabled_addons() const {
 		return enabled_addons_;
 	}
 
@@ -290,7 +294,7 @@ private:
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
 
-	std::vector<AddOnInfo> enabled_addons_;
+	std::vector<AddOns::AddOnInfo> enabled_addons_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

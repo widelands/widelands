@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,6 +50,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 
 	void
 	force_new_dimensions(uint32_t max_width, uint32_t max_height, uint32_t standard_element_height);
+	void update_players();
 
 private:
 	void reset();
@@ -68,7 +69,6 @@ private:
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;
 	void update_clients();
-	void update_players();
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H

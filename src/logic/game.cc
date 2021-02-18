@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,9 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "logic/training_wheels.h"
+#endif
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -147,7 +149,9 @@ Game::Game()
      scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_wanted_(false),
+#endif
      replay_(false) {
 	Economy::initialize_serial();
 }
@@ -216,7 +220,9 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
 	// Replays can't handle scenarios
 	set_write_replay(false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_wanted_ = false;
+#endif
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader) {
@@ -226,7 +232,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	// Need to do this first so we can set the theme and background.
 	maploader->preload_map(true, &enabled_addons());
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
+	                 map().get_background_theme(), map().get_background());
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -244,7 +251,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}
-		add_player(p, 0, tribe, map().get_scenario_player_name(p));
+		add_player(p, 0, kPlayerColors[p - 1], tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
@@ -298,8 +305,8 @@ void Game::init_newgame(const GameSettings& settings) {
 			continue;
 		}
 
-		add_player(i + 1, playersettings.initialization_index, playersettings.tribe,
-		           playersettings.name, playersettings.team);
+		add_player(i + 1, playersettings.initialization_index, playersettings.color,
+		           playersettings.tribe, playersettings.name, playersettings.team);
 		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
@@ -373,6 +380,8 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
@@ -380,12 +389,20 @@ void Game::init_savegame(const GameSettings& settings) {
 			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
 			log_dbg("Training wheel from savegame");
 		}
+#endif
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
 
 		gl.load_game(settings.multiplayer);
+
+		if (!gl.did_postload_addons()) {
+			// Discover the links between resources and geologist flags,
+			// dependencies of productionsites etc.
+			postload_addons();
+		}
+
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
 			const PlayerSettings& playersettings = settings.players[i];
@@ -410,11 +427,12 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		// Need to do this first so we can set the theme and background
 		gl.preload_game(gpdp);
 
-		create_loader_ui({"general_game", "singleplayer"}, false, gpdp.get_background_theme(),
+		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
 		                 gpdp.get_background());
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
@@ -422,19 +440,22 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
 			log_dbg("Training wheel from savegame");
 		}
+#endif
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
 
 		player_nr = gpdp.get_player_nr();
-		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
+		InteractivePlayer* ipl = new InteractivePlayer(*this, get_config_section(), player_nr, false);
+		set_ibase(ipl);
 
 		gl.load_game();
 
 		if (!gl.did_postload_addons()) {
 			postload_addons();
 		}
+		ipl->info_panel_fast_forward_message_queue();
 	}
 
 	// Store the filename for further saves
@@ -453,6 +474,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	}
 }
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 bool Game::acquire_training_wheel_lock(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		return training_wheels_->acquire_lock(objective);
@@ -487,6 +509,7 @@ bool Game::training_wheels_wanted() const {
 std::string Game::active_training_wheel() const {
 	return training_wheels_ ? training_wheels_->current_objective() : "";
 }
+#endif
 
 /**
  * Called for every game after loading (from a savegame or just from a map
@@ -528,8 +551,11 @@ bool Game::run(StartGameType const start_game_type,
 
 	InteractivePlayer* ipl = get_ipl();
 
-	if (start_game_type != StartGameType::kSaveGame) {
+	if (replay || start_game_type != StartGameType::kSaveGame) {
 		postload_addons();
+	}
+
+	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */
@@ -537,13 +563,17 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 			training_wheels_wanted_ =
 			   get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
+#endif
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
 			set_write_replay(false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 			training_wheels_wanted_ = false;
+#endif
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
@@ -588,8 +618,8 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 		} else {
 			// Run all selected add-on scripts (not in scenarios)
-			for (const AddOnInfo& addon : enabled_addons()) {
-				if (addon.category == AddOnCategory::kScript) {
+			for (const AddOns::AddOnInfo& addon : enabled_addons()) {
+				if (addon.category == AddOns::AddOnCategory::kScript) {
 					enqueue_command(new CmdLuaScript(
 					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
 					                                    addon.internal_name +
@@ -607,6 +637,7 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
 	// for marking them as solved if a scenario teaches the same content.
 	if (training_wheels_wanted_) {
@@ -621,6 +652,7 @@ bool Game::run(StartGameType const start_game_type,
 			writereplay_ = false;
 		}
 	}
+#endif
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
@@ -657,12 +689,14 @@ bool Game::run(StartGameType const start_game_type,
 
 	remove_loader_ui();
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
 	// user switched off the option
 	if (training_wheels_ != nullptr && training_wheels_wanted_) {
 		log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
 		training_wheels_->run_objectives();
 	}
+#endif
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 
@@ -859,8 +893,8 @@ void Game::send_player_build_waterway(int32_t pid, Path& path) {
 	send_player_command(new CmdBuildWaterway(get_gametime(), pid, path));
 }
 
-void Game::send_player_flagaction(Flag& flag) {
-	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
+void Game::send_player_flagaction(Flag& flag, FlagJob::Type t) {
+	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag, t));
 }
 
 void Game::send_player_start_stop_building(Building& building) {

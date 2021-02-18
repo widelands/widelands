@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,6 +65,7 @@ public:
 	 */
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
+	                   const RGBColor&,
 	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);

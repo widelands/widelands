@@ -30,6 +30,7 @@ wl_library(logic_game_settings
     game_settings.h
     player_end_result.h
   DEPENDS
+    graphic_color
     io_filesystem
     logic_addons
     logic_constants
@@ -49,6 +50,7 @@ wl_library(logic_single_player_game_settings
     ai
     base_exceptions
     base_i18n
+    graphic_playercolor
     logic_game_settings
     logic_tribe_basic_info
 )
@@ -89,13 +91,18 @@ wl_library(logic_addons
   SRCS
     addons.cc
     addons.h
+    mutable_addon.cc
+    mutable_addon.h
   DEPENDS
     base_i18n
     base_exceptions
     base_log
+    io_fileread
     io_filesystem
     io_profile
     logic_filesystem_constants
+    logic_map
+    map_io
 )
 
 wl_library(logic_objectives

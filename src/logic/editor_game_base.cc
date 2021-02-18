@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,9 +82,6 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 	init_addons(false);
 
-	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
-	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
-
 	// Ensure descriptions are registered
 	descriptions();
 }
@@ -93,13 +90,14 @@ EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
 }
 
-static inline bool addon_initially_enabled(AddOnCategory c) {
-	return c == AddOnCategory::kTribes || c == AddOnCategory::kWorld || c == AddOnCategory::kScript;
+static inline bool addon_initially_enabled(AddOns::AddOnCategory c) {
+	return c == AddOns::AddOnCategory::kTribes || c == AddOns::AddOnCategory::kWorld ||
+	       c == AddOns::AddOnCategory::kScript;
 }
 void EditorGameBase::init_addons(bool world_only) {
 	enabled_addons_.clear();
-	for (const auto& pair : g_addons) {
-		if (pair.second && (world_only ? pair.first.category == AddOnCategory::kWorld :
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && (world_only ? pair.first.category == AddOns::AddOnCategory::kWorld :
 		                                 addon_initially_enabled(pair.first.category))) {
 			enabled_addons_.push_back(pair.first);
 		}
@@ -242,12 +240,13 @@ void EditorGameBase::remove_player(PlayerNumber plnum) {
 /// @see PlayerManager class
 Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    uint8_t const initialization_index,
+                                   const RGBColor& pc,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
 	Notifications::publish(UI::NoteLoadingMessage(
 	   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
-	return player_manager_->add_player(player_number, initialization_index, tribe, name, team);
+	return player_manager_->add_player(player_number, initialization_index, pc, tribe, name, team);
 }
 
 Player* EditorGameBase::get_player(const int32_t n) const {
@@ -309,8 +308,9 @@ void EditorGameBase::postload_addons() {
 	assert(lua_);
 	assert(descriptions_);
 
-	for (const AddOnInfo& info : enabled_addons_) {
-		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
+	for (const AddOns::AddOnInfo& info : enabled_addons_) {
+		if (info.category == AddOns::AddOnCategory::kWorld ||
+		    info.category == AddOns::AddOnCategory::kTribes) {
 			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
 			                         FileSystem::file_separator() + "postload.lua");
 			if (g_fs->file_exists(script)) {
@@ -330,9 +330,10 @@ void EditorGameBase::postload_addons() {
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
                                                      bool show_game_tips,
                                                      const std::string& theme,
-                                                     const std::string& background) {
+                                                     const std::string& background,
+                                                     UI::Panel* parent) {
 	assert(!has_loader_ui());
-	loader_ui_.reset(new UI::ProgressWindow(theme, background));
+	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background));
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ static const uint32_t colors_length = sizeof(colors) / sizeof(RGBColor);
 
 struct StatisticWaresDisplay : public AbstractWaresDisplay {
 private:
-	std::vector<uint8_t>& color_map_;
+	std::map<Widelands::DescriptionIndex, uint8_t>& color_map_;
 
 public:
 	StatisticWaresDisplay(UI::Panel* const parent,
@@ -74,7 +74,7 @@ public:
 	                      int32_t const y,
 	                      const Widelands::TribeDescr& tribe,
 	                      std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
-	                      std::vector<uint8_t>& color_map)
+	                      std::map<Widelands::DescriptionIndex, uint8_t>& color_map)
 	   : AbstractWaresDisplay(
 	        parent, x, y, tribe, Widelands::wwWARE, true, std::move(callback_function)),
 	     color_map_(color_map) {
@@ -89,9 +89,7 @@ protected:
 	}
 
 	RGBColor info_color_for_ware(Widelands::DescriptionIndex const ware) override {
-		size_t index = static_cast<size_t>(ware);
-
-		return colors[color_map_[index]];
+		return colors[color_map_.at(ware)];
 	}
 };
 
@@ -112,8 +110,9 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	const Widelands::TribeDescr& player_tribe = parent.get_player()->tribe();
 
 	// Init color sets
-	color_map_.resize(player_tribe.get_nrwares());
-	std::fill(color_map_.begin(), color_map_.end(), kInactiveColorIndex);
+	for (Widelands::DescriptionIndex d : player_tribe.wares()) {
+		color_map_[d] = kInactiveColorIndex;
+	}
 	active_colors_.resize(colors_length);
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
 

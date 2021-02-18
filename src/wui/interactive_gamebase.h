@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,8 @@ public:
 	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
+
+	void show_watch_window(Widelands::Bob&);
 
 	bool try_show_ship_window();
 	bool is_multiplayer() {

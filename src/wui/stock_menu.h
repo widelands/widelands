@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,10 +36,10 @@ struct StockMenu : public UI::UniqueWindow {
 
 private:
 	InteractivePlayer& player_;
-	WaresDisplay* all_wares_;
-	WaresDisplay* all_workers_;
-	WaresDisplay* warehouse_wares_;
-	WaresDisplay* warehouse_workers_;
+	StockMenuWaresDisplay* all_wares_;
+	StockMenuWaresDisplay* all_workers_;
+	StockMenuWaresDisplay* warehouse_wares_;
+	StockMenuWaresDisplay* warehouse_workers_;
 
 	void fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type);
 	void fill_warehouse_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type);

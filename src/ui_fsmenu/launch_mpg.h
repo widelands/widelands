@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,33 +30,43 @@
 #include "wui/game_chat_panel.h"
 
 struct ChatProvider;
+struct MapData;
+namespace Widelands {
+class Game;
+}
+
 namespace FsMenu {
+
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
  *
  */
-class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
+class LaunchMPG : public LaunchGame {
 public:
-	FullscreenMenuLaunchMPG(FullscreenMenuMain&,
-	                        GameSettingsProvider*,
-	                        GameController*,
-	                        ChatProvider&,
-	                        Widelands::EditorGameBase& egbase);
-	~FullscreenMenuLaunchMPG() override = default;
+	LaunchMPG(
+	   MenuCapsule&,
+	   GameSettingsProvider&,
+	   GameController&,
+	   ChatProvider&,
+	   Widelands::Game&,
+	   std::unique_ptr<GameController>& delete_on_cancel,
+	   bool game_done_on_cancel,
+	   const std::function<void()>& callback = []() {});
+	~LaunchMPG() override;
 
 	void think() override;
 	void refresh();
 
+	void clicked_select_map_callback(const MapData*, bool);
+
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
 
 private:
 	void layout() override;
-	bool clicked_select_map() override;
-	void select_map();
-	void select_saved_game();
+	void clicked_select_map() override;
+	void clicked_select_savegame() override;
 	void win_condition_selected() override;
 
 	void set_scenario_values();
@@ -65,12 +75,16 @@ private:
 	void help_clicked();
 	void map_changed();
 
+	std::function<void()> callback_;
+	bool game_done_on_cancel_;
+	std::unique_ptr<GameController>& delete_on_cancel_;
+
 	UI::Button help_button_;
 
-	std::unique_ptr<UI::FullscreenHelpWindow> help_;
+	std::unique_ptr<HelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
-	GameChatPanel chat_;
-	Widelands::EditorGameBase& egbase_;  // Not owned
+	std::unique_ptr<GameChatPanel> chat_;
+	Widelands::Game& game_;  // Not owned
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };

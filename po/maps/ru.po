@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
-"PO-Revision-Date: 2020-09-11 11:59+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2020-11-29 22:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -332,16 +332,16 @@ msgid ""
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Большие строительные площадки редки на этих маленьких островах. Строительство больших зданий на них - ваш приоритет. Иногда вам потребуются большие военные строения, чтобы расширить территорию до следующего острова. ИИ будет работать плохо."
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+#: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
 msgstr ""
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautiful land. Try every player!"
+#: ../../data/maps/Astoria_2.R.wmf/elemental:9
+msgid "pbuczny@gmail.com – edited by Nordfriese"
 msgstr ""
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:9
-msgid "pbuczny@gmail.com – edited by Nordfriese"
+#: ../../data/maps/Astoria_2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
 msgstr ""
 
 #: ../../data/maps/Atoll.wmf/elemental:8
@@ -374,16 +374,16 @@ msgid ""
 "another confrontation."
 msgstr "Что это — игра природы, или создание помешанного на играх бога? Это безумное поле боя ждет двух противников для нового столкновения."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:8
+#: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
 msgstr "Остров кометы"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:9
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
+#: ../../data/maps/Comet_Island.wmf/elemental:9
+#: ../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
 msgstr "Nasenbaer – под редакцией king_of_nowhere"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:10
+#: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -392,7 +392,7 @@ msgid ""
 "of this island before other tribes will follow."
 msgstr "В нескольких милях напротив побережья Гериона находится небольшой безымянный остров. До сих пор вы не видели никаких причин, чтобы плыть туда, но вчера с небес пришел большой огненный шар, и ударил в центр острова. Что это — знак богов? Поверив в это, вы надеетесь, что ваше племя найти на этом острове сокровище, прежде чем спохватятся другие племена."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:11
+#: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
@@ -410,19 +410,19 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Спустя много лет после падения метеорита в горы, в кратере расцвела жизнь. И теперь два племени сражаются за богатые ресурсы."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Пересекая горизонт"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
 msgstr ""
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Снарядите корабль и плывите к горизонту."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr ""
 
@@ -437,11 +437,11 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Четыре племени бороться с их ближайшим соседом, чтобы первыми добраться до превосходящей всякое воображение горы золота. Но сумеют ли двое уцелевших мудро распорядиться ресурсами?"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+#: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr ""
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:10
+#: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
@@ -450,7 +450,7 @@ msgid ""
 " to the death with your enemies, it may as well be in a beautiful place."
 msgstr ""
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:11
+#: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
 "The mountains have an abundance of flat ground. Unfortunately, most of it is"
 " vertical – use the little building space you have wisely. A fortress at the"
@@ -481,27 +481,27 @@ msgstr ""
 msgid "v0.2"
 msgstr ""
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:10
+#: ../../data/maps/Europa.wmf/elemental:8
+msgid "Europa 1.2"
+msgstr ""
+
+#: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr ""
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:8
-msgid "Europa 1.1"
-msgstr ""
-
-#: ../../data/maps/Fellowships_v2.wmf/elemental:8
+#: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
 msgstr "Братства"
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:10
+#: ../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
 msgstr "Корабли ваши лучшие друзья. Стартовые позиции схожи, поэтому карта должна быть честной для всех."
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:11
+#: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
@@ -562,21 +562,21 @@ msgid ""
 "sources. III: Each mountain contains only one resource."
 msgstr "I: Воду можно найти вдоль реки. II: Дополнительные источники воды отмечены снеговиками. III: Каждая гора содержит только один ресурс."
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:8
+#: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
 msgstr "Полнолуние"
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:10
+#: ../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
 msgstr "То ли это последний день солнцестояния, то ли полнолуние, что-то движет эти племена к их последнему испытанию."
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
+#: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Ледниковое озеро"
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
+#: ../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
@@ -617,11 +617,11 @@ msgid ""
 "neighbor has begun to expand."
 msgstr "На протяжении веков, вы жили мирно бок о бок с другим племенем на соседнем острове. Но, похоже, этот мир подходит к концу — ваш сосед задумал расширить свои владения."
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
 msgstr "Короли и Королевы"
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
@@ -639,15 +639,15 @@ msgid ""
 "two hostile tribes have arrived at its shores…"
 msgstr "Это озеро, в глубине самых древних лесов, издавна славится своей красотой и безмятежностью. Тем не менее, теперь, когда две враждебных племени объявились на его берегах, святость озера была нарушена..."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
+#: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "Последняя крепость"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
+#: ../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
 msgstr "Другой варвар - под редакцией king_of_nowhere"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
+#: ../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
@@ -660,7 +660,7 @@ msgid ""
 "living space is also a hard and small place to live."
 msgstr "Капризные Боги не отвечают на наши молитвы. Вместо этого, солнечные лучи сильно нагрели Землю и вызвали таяние ледников; людей поглотила бездна. Но двум оставшимся в живых племенам удалось укрыться на последнем клочке земли, высоко в величественных горах. И хотя Боги смилостивились, и климат вновь стал прохладнее, вода продолжала прибывать и пребывать. К последнему безопасному месту – самому высокому горному массиву, где золота и пространства хватит только для одного племени – ведут два противоположных пути. Но помните, будьте осторожны ... это последнее жизненное пространство, оно невелико и выживать здесь трудно."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+#: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
 msgstr "Не забудьте позаботиться о запасах древесины, она понадобится им."
 
@@ -674,14 +674,14 @@ msgid ""
 "all over the map."
 msgstr "Четыре племени дерутся за доминирование в суровом районе. Ресурсы разбросаны по всей карте."
 
-#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+#: ../../data/maps/Long_long_way.wmf/elemental:8
+msgid "Long, long way v2"
+msgstr ""
+
+#: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
-
-#: ../../data/maps/Long, long v2.wmf/elemental:8 way
-msgid "Long, long way v2"
 msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
@@ -717,11 +717,11 @@ msgid ""
 "maze, and what can be found inside?"
 msgstr "В воздухе повисли два больших вопроса: кто создал этот невероятно большой лабиринт и что скрывается внутри?"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+#: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
 msgstr ""
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+#: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
 " find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
@@ -858,17 +858,17 @@ msgid ""
 " no other way but to occupy the land of your enemies."
 msgstr "Очередное странное испытание богов. Похоже, добраться до другой стороны, можно только заняв землю ваших врагов."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:8
+#: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
 msgstr "Нил"
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:10
+#: ../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr "Река всегда была источником пищи и транспортной артерией. И вот теперь, восемь империй сразятся за контроль над этой землёй."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:11
+#: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
@@ -922,11 +922,11 @@ msgstr "Могучие горы делят этот край на три изо�
 msgid "Water can be found around the lakes."
 msgstr "Воду можно найти вокруг озёр."
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:8
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr "Вместе мы сила"
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:10
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -951,11 +951,11 @@ msgid ""
 " explore enough resources to compete with its opponents."
 msgstr "Шесть прекрасных островов, расположенные вблизи от трех вулканов,  привлекают поселенцев, чтобы начать новую жизнь. Вам откроются пустыни и быстрорастущие леса. Но победить в конкурентной борьбе сможет только то племя, которое утвердит свое господство на море."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr "Двойные лагуны"
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
@@ -964,7 +964,7 @@ msgid ""
 " well-known reason."
 msgstr "Когда поднялся ветер, и на этих покинутых близнецах-лагунах были созданы первые дюны, никто не ожидал, что два племен, которые отчаянно ищут больше ресурсов для поддержки своих бесконечных войн, встретятся в этом забытом месте одновременно и по одной и той же хорошо известной причине."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."

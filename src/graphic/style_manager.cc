@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,66 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
+#include "graphic/image_io.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
-StyleManager* g_style_manager;
+constexpr const char* const kDefaultTemplate = "templates/default/";
+static std::string g_template_dir;
+static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
+StyleManager* g_style_manager(nullptr);  // points to an entry in `g_style_managers`
+
+const std::string& template_dir() {
+	return g_template_dir;
+}
+void set_template_dir(std::string dir) {
+	if (dir.empty()) {
+		// Empty string means "use default"
+		dir = kDefaultTemplate;
+	}
+
+	if (dir.back() != '/') {
+		dir += '/';
+	}
+
+	if (!g_fs->is_directory(dir)) {
+		if (dir == kDefaultTemplate) {
+			throw wexception("Default template directory '%s' does not exist!", dir.c_str());
+		}
+		log_warn("set_template_dir: template directory '%s' does not exist, using default template",
+		         dir.c_str());
+		dir = kDefaultTemplate;
+	}
+
+	if (g_template_dir == dir) {
+		// nothing to do
+		return;
+	}
+
+	g_template_dir = dir;
+
+	auto it = g_style_managers.find(g_template_dir);
+	if (it != g_style_managers.end()) {
+		g_style_manager = it->second.get();
+	} else {
+		g_style_manager = new StyleManager();
+		g_style_managers[g_template_dir] = std::unique_ptr<StyleManager>(g_style_manager);
+	}
+}
+
+const Image& load_safe_template_image(const std::string& path) {
+	try {
+		return *g_image_cache->get(template_dir() + path);
+	} catch (const ImageNotFound& error) {
+		log_warn(
+		   "Template image '%s' not found, using fallback image (%s)", path.c_str(), error.what());
+		return *g_image_cache->get("images/novalue.png");
+	}
+}
 
 namespace {
 // Read RGB(A) color from LuaTable
@@ -102,7 +156,7 @@ StyleManager::StyleManager() {
 
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(
-	   lua.run_script((boost::format("%1%init.lua") % kTemplateDir).str()));
+	   lua.run_script((boost::format("%1%init.lua") % template_dir()).str()));
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
@@ -396,7 +450,10 @@ void StyleManager::set_building_statistics_style(const LuaTable& table) {
 	   read_rgb_color(*colors_table->get_table("neutral")),
 	   read_rgb_color(*colors_table->get_table("low")),
 	   read_rgb_color(*colors_table->get_table("medium")),
-	   read_rgb_color(*colors_table->get_table("high"))));
+	   read_rgb_color(*colors_table->get_table("high")),
+	   read_rgb_color(*colors_table->get_table("low_alt")),
+	   read_rgb_color(*colors_table->get_table("medium_alt")),
+	   read_rgb_color(*colors_table->get_table("high_alt"))));
 }
 
 void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table) {

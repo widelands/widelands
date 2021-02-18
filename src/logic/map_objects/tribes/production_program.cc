@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -993,6 +993,9 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 	ProductionSite::State& state = psite.top_state();
 	if (state.phase == ProgramResult::kNone) {
 		worker.start_task_program(game, program());
+		if (state.flags & ProductionSite::State::StateFlags::kStateFlagHasExtraData) {
+			worker.top_state().objvar1 = state.objvar;
+		}
 		state.phase = ProgramResult::kFailed;
 		return true;
 	}

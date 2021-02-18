@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
 namespace LuaUi {
@@ -82,7 +83,9 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPanel, indicate),
+#endif
    {nullptr, nullptr},
 };
 
@@ -285,7 +288,8 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	return 2;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: indicate(on)
 
       Show/Hide an arrow that points to this panel. You can only point to 1 panel at the same time.
@@ -321,6 +325,7 @@ int LuaPanel::indicate(lua_State* L) {
 	}
 	return 2;
 }
+#endif
 
 /*
  * C Functions
@@ -404,7 +409,9 @@ const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
    METHOD(LuaDropdown, highlight_item),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
+#endif
    METHOD(LuaDropdown, select),
    {nullptr, nullptr},
 };
@@ -497,7 +504,8 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	return 0;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: indicate_item(index)
 
       :arg index: the index of the item to indicate, starting from ``1``
@@ -548,6 +556,7 @@ int LuaDropdown::indicate_item(lua_State* L) {
 
 	return 0;
 }
+#endif
 
 /* RST
    .. method:: select()
@@ -1040,8 +1049,27 @@ static int L_get_user_input_allowed(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. method:: get_shortcut(name)
+
+   Returns the keyboard shortcut with the given name.
+
+   :returns: The human-readable and localized shortcut.
+   :rtype: :class:`string`
+*/
+static int L_get_shortcut(lua_State* L) {
+	const std::string name = luaL_checkstring(L, -1);
+	try {
+		lua_pushstring(L, shortcut_string_for(shortcut_from_string(name), false).c_str());
+	} catch (const WException& e) {
+		report_error(L, "Unable to query shortcut for '%s': %s", name.c_str(), e.what());
+	}
+	return 1;
+}
+
 const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
                                        {"get_user_input_allowed", &L_get_user_input_allowed},
+                                       {"get_shortcut", &L_get_shortcut},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2020 by the Widelands Development Team
+ * Copyright (C) 2012-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #ifndef WL_WLAPPLICATION_OPTIONS_H
 #define WL_WLAPPLICATION_OPTIONS_H
+
+#include <SDL_keyboard.h>
 
 #include "io/profile.h"
 
@@ -73,6 +75,144 @@ void set_config_string(const std::string& name, const std::string& value);
 void set_config_string(const std::string& section,
                        const std::string& name,
                        const std::string& value);
+
+// Keyboard shortcuts. The order in which they are defined here
+// defines the order in which they appear in the options menu.
+enum class KeyboardShortcut : uint16_t {
+	k__Begin = 0,
+
+	kMainMenu__Begin = k__Begin,
+	kMainMenuSP = kMainMenu__Begin,
+	kMainMenuNew,
+	kMainMenuRandomMatch,
+	kMainMenuCampaign,
+	kMainMenuTutorial,
+	kMainMenuLoad,
+	kMainMenuContinuePlaying,
+	kMainMenuMP,
+	kMainMenuLobby,
+	kMainMenuLogin,
+	kMainMenuLAN,
+	kMainMenuE,
+	kMainMenuEditorNew,
+	kMainMenuEditorRandom,
+	kMainMenuEditorLoad,
+	kMainMenuContinueEditing,
+	kMainMenuReplay,
+	kMainMenuOptions,
+	kMainMenuAddons,
+	kMainMenuAbout,
+	kMainMenuQuit,
+	kMainMenu__End = kMainMenuQuit,
+
+	kCommon__Begin = kMainMenu__End + 1,
+	kCommonFullscreen = kCommon__Begin,
+	kCommonScreenshot,
+	kCommonTextCut,
+	kCommonTextCopy,
+	kCommonTextPaste,
+	kCommonSelectAll,
+	kCommonDeleteItem,
+	kCommonTooltipAccessibilityMode,
+	kCommonEncyclopedia,
+	kCommonBuildhelp,
+	kCommonMinimap,
+	kCommonZoomIn,
+	kCommonZoomOut,
+	kCommonZoomReset,
+	kCommonQuicknavPrev,
+	kCommonQuicknavNext,
+	kCommon__End = kCommonQuicknavNext,
+
+	kEditor__Begin = kCommon__End + 1,
+	kEditorMenu = kEditor__Begin,
+	kEditorSave,
+	kEditorLoad,
+	kEditorUndo,
+	kEditorRedo,
+	kEditorTools,
+	kEditorInfo,
+	kEditorPlayers,
+	kEditorShowhideGrid,
+	kEditorShowhideImmovables,
+	kEditorShowhideCritters,
+	kEditorShowhideResources,
+	kEditor__End = kEditorShowhideResources,
+
+	kInGame__Begin = kEditor__End + 1,
+	kInGameSave = kInGame__Begin,
+	kInGameChat,
+	kInGameMessages,
+	kInGameObjectives,
+	kInGameShowhideCensus,
+	kInGameShowhideStats,
+	kInGameShowhideSoldiers,
+	kInGameShowhideBuildings,
+	kInGameShowhideWorkareas,
+	kInGameStatsGeneral,
+	kInGameStatsWares,
+	kInGameStatsBuildings,
+	kInGameStatsStock,
+	kInGameStatsSoldiers,
+	kInGameStatsSeafaring,
+	kInGamePause,
+	kInGameSpeedUp,
+	kInGameSpeedUpSlow,
+	kInGameSpeedUpFast,
+	kInGameSpeedDown,
+	kInGameSpeedDownSlow,
+	kInGameSpeedDownFast,
+	kInGameSpeedReset,
+	kInGameScrollToHQ,
+	kInGameMessagesGoto,
+	kInGameMessagesFilterAll,
+	kInGameMessagesFilterGeologists,
+	kInGameMessagesFilterEconomy,
+	kInGameMessagesFilterSeafaring,
+	kInGameMessagesFilterWarfare,
+	kInGameMessagesFilterScenario,
+	kInGameSeafaringstatsGotoShip,
+	kInGameSeafaringstatsWatchShip,
+	kInGameSeafaringstatsOpenShipWindow,
+	kInGameSeafaringstatsOpenShipWindowAndGoto,
+	kInGameSeafaringstatsFilterAll,
+	kInGameSeafaringstatsFilterIdle,
+	kInGameSeafaringstatsFilterShipping,
+	kInGameSeafaringstatsFilterExpWait,
+	kInGameSeafaringstatsFilterExpScout,
+	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameQuicknavSet1,
+	kInGameQuicknavGoto1,
+	kInGameQuicknavSet2,
+	kInGameQuicknavGoto2,
+	kInGameQuicknavSet3,
+	kInGameQuicknavGoto3,
+	kInGameQuicknavSet4,
+	kInGameQuicknavGoto4,
+	kInGameQuicknavSet5,
+	kInGameQuicknavGoto5,
+	kInGameQuicknavSet6,
+	kInGameQuicknavGoto6,
+	kInGameQuicknavSet7,
+	kInGameQuicknavGoto7,
+	kInGameQuicknavSet8,
+	kInGameQuicknavGoto8,
+	kInGameQuicknavSet9,
+	kInGameQuicknavGoto9,
+	kInGame__End = kInGameQuicknavGoto9,
+
+	k__End = kInGame__End
+};
+bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
+SDL_Keysym get_shortcut(KeyboardShortcut);
+SDL_Keysym get_default_shortcut(KeyboardShortcut);
+bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
+bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
+void init_shortcuts(bool force_defaults = false);
+std::string to_string(KeyboardShortcut);
+KeyboardShortcut shortcut_from_string(const std::string&);
+std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
+std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 
 /*
  * Sets the directory where to read/write kConfigFile.

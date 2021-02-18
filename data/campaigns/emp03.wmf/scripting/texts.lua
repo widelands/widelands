@@ -421,7 +421,10 @@ saledus_5 = {
       _([[But the following objective is even more important:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and have a look at what is going on up there.]]))
+      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and have a look at what is going on up there.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[In any case we should be careful with our ports. To defend them against possible enemies we should send some soldiers to each new port, until we can protect them with some military buildings.]]))
       .. new_objectives(obj_build_expedition_ports),
    posy=1,
    w=550,

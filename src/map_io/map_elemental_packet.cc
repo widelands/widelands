@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->set_nrplayers(s.get_int("nr_players"));
 			map->set_name(s.get_string("name"));
 			map->set_author(s.get_string("author"));
+			map->set_localize_author(s.get_val("author")->get_translate());
 			map->set_description(s.get_string("descr"));
 			map->set_hint(s.get_string("hint", ""));
 			map->set_background(s.get_string("background", ""));
@@ -81,7 +82,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
 					map->required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), std::strtol(version.c_str(), nullptr, 10)));
+					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -159,10 +160,14 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_int("map_w", map.get_width());
 	global_section.set_int("map_h", map.get_height());
 	global_section.set_int("nr_players", nr_players);
-	global_section.set_string("name", map.get_name());
-	global_section.set_string("author", map.get_author());
-	global_section.set_string("descr", map.get_description());
-	global_section.set_string("hint", map.get_hint());
+	global_section.set_translated_string("name", map.get_name());
+	if (map.get_localize_author()) {
+		global_section.set_translated_string("author", map.get_author());
+	} else {
+		global_section.set_string("author", map.get_author());
+	}
+	global_section.set_translated_string("descr", map.get_description());
+	global_section.set_translated_string("hint", map.get_hint());
 	if (!map.get_background().empty()) {
 		global_section.set_string("background", map.get_background());
 	}
@@ -172,12 +177,12 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	std::string addons;
-	for (const AddOnInfo& addon : egbase.enabled_addons()) {
-		if (addon.category == AddOnCategory::kWorld) {
+	for (const AddOns::AddOnInfo& addon : egbase.enabled_addons()) {
+		if (addon.category == AddOns::AddOnCategory::kWorld) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
-			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
+			addons += addon.internal_name + ':' + AddOns::version_to_string(addon.version, false);
 		}
 	}
 	global_section.set_string("addons", addons);

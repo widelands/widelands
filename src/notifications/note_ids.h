@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 // one place.
 enum class NoteId : uint32_t {
 	ChatMessage,
-	LogMessage,
 	Immovable,
 	ConstructionsiteEnhanced,
 	FieldPossession,
@@ -47,7 +46,8 @@ enum class NoteId : uint32_t {
 	MapObjectDescription,
 	MapObjectDescriptionTypeCheck,
 	LoadingMessage,
-	Panel
+	Panel,
+	PlayerDetailsEvent
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

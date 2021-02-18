@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,6 +111,7 @@ public:
 	DescriptionIndex carrier() const;
 	DescriptionIndex carrier2() const;
 	DescriptionIndex geologist() const;
+	DescriptionIndex scouts_house() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
 	DescriptionIndex ferry() const;
@@ -219,14 +220,15 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex builder_;    // The builder for this tribe
-	DescriptionIndex carrier_;    // The basic carrier for this tribe
-	DescriptionIndex carrier2_;   // Additional carrier for busy roads
-	DescriptionIndex geologist_;  // This tribe's geologist worker
-	DescriptionIndex soldier_;    // The soldier that this tribe uses
-	DescriptionIndex ship_;       // The ship that this tribe uses
-	DescriptionIndex ferry_;      // The ferry that this tribe uses
-	DescriptionIndex port_;       // The port that this tribe uses
+	DescriptionIndex builder_;       // The builder for this tribe
+	DescriptionIndex carrier_;       // The basic carrier for this tribe
+	DescriptionIndex carrier2_;      // Additional carrier for busy roads
+	DescriptionIndex geologist_;     // This tribe's geologist worker
+	DescriptionIndex soldier_;       // The soldier that this tribe uses
+	DescriptionIndex ship_;          // The ship that this tribe uses
+	DescriptionIndex ferry_;         // The ferry that this tribe uses
+	DescriptionIndex port_;          // The port that this tribe uses
+	DescriptionIndex scouts_house_;  // This tribe's scout's house/hut
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

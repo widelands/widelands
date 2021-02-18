@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,12 +85,14 @@ public:
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
 	// payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.
 	void set_training_wheel_indicator_pos(const Vector2i& pos);
 	// Indicate the given field coordinates to the player by painting an arrow. Set to
 	// FCoords::null() to switch it off.
 	void set_training_wheel_indicator_field(const Widelands::FCoords& field);
+#endif
 
 private:
 	// For referencing the items in statisticsmenu_
@@ -122,12 +124,14 @@ private:
 
 	const Image* grid_marker_pic_;
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Arrow image for indicating a position for training wheels
 	const Image* training_wheel_indicator_pic_;
 	// Field position to indicate for training wheels
 	Widelands::FCoords training_wheel_indicator_field_;
 	// Arrow image for indicating a UI::Panel for training wheels
 	std::unique_ptr<UI::Icon> training_wheel_indicator_icon_;
+#endif
 
 	void draw_immovables_for_visible_field(const Widelands::EditorGameBase&,
 	                                       const FieldsToDraw::Field&,

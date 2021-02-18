@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -495,33 +495,37 @@ void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSav
 
 /*** Cmd_FlagAction ***/
 CmdFlagAction::CmdFlagAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
-	des.unsigned_8();
-	serial = des.unsigned_32();
+	type_ = static_cast<FlagJob::Type>(des.unsigned_8());
+	serial_ = des.unsigned_32();
 }
 
 void CmdFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (upcast(Flag, flag, game.objects().get_object(serial))) {
+	if (upcast(Flag, flag, game.objects().get_object(serial_))) {
 		if (flag->get_owner() == player) {
-			player->flagaction(*flag);
+			player->flagaction(*flag, type_);
 		}
 	}
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_8(0);
-	ser.unsigned_32(serial);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
+	ser.unsigned_32(serial_);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 2;
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 3;
 
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
+			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
+			// TODO(Nordfriese): Savegame compatibility
+			type_ = packet_version < 3 ? FlagJob::Type::kGeologist :
+			                             static_cast<FlagJob::Type>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFlagAction", packet_version, kCurrentPacketVersionCmdFlagAction);
@@ -536,7 +540,8 @@ void CmdFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(type_));
 }
 
 /*** Cmd_StartStopBuilding ***/

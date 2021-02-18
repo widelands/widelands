@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,10 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
-Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addons)
+
+uint32_t Descriptions::instances_ = 0;
+
+Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -68,13 +71,15 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
         [this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) { check(note); })),
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
+	instances_++;
 
 	// Immediately preload and register all add-on units. Better to do this
 	// very early than to risk crashes because it was done too late…
 
 	assert(lua_);
-	for (const AddOnInfo& info : addons) {
-		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
+	for (const AddOns::AddOnInfo& info : addons) {
+		if (info.category == AddOns::AddOnCategory::kWorld ||
+		    info.category == AddOns::AddOnCategory::kTribes) {
 			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
 			                         FileSystem::file_separator() + "preload.lua");
 			if (g_fs->file_exists(script)) {
@@ -84,12 +89,12 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 		}
 	}
 
-	for (const AddOnInfo& info : addons) {
-		if (info.category == AddOnCategory::kWorld) {
+	for (const AddOns::AddOnInfo& info : addons) {
+		if (info.category == AddOns::AddOnCategory::kWorld) {
 			description_manager_->register_directory(
 			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
 			   DescriptionManager::RegistryCaller::kWorldAddon);
-		} else if (info.category == AddOnCategory::kTribes) {
+		} else if (info.category == AddOns::AddOnCategory::kTribes) {
 			description_manager_->register_directory(
 			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
 			   DescriptionManager::RegistryCaller::kTribeAddon);
@@ -116,7 +121,12 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 }
 
 Descriptions::~Descriptions() {
-	if (g_sh != nullptr) {
+	// We might have multiple Descriptions instances
+	// so the sounds should only go with the last one
+	// to prevent "Sound effect does not exist" errors
+	assert(instances_ > 0);
+	instances_--;
+	if (g_sh != nullptr && 0 == instances_) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
 	}
 }

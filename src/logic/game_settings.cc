@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,4 +47,9 @@ bool GameSettings::is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber sha
 bool GameSettings::uncloseable(PlayerSlot slot) const {
 	return (scenario && !players.at(slot).closeable) ||
 	       (savegame && players.at(slot).state != PlayerSettings::State::kClosed);
+}
+
+bool GameSettingsProvider::can_change_player_color(const uint8_t number) {
+	// Whether we can change a slot's color follows the same rules as whether we can change a team
+	return can_change_player_team(number);
 }

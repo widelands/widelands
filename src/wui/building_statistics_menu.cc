@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -442,14 +442,14 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
 	owned_labels_[id] =
 	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
 	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
-	owned_labels_[id]->set_style(style_.building_statistics_button_font());
+	owned_labels_[id]->set_style_override(style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
 	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
 	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
-	productivity_labels_[id]->set_style(style_.building_statistics_button_font());
+	productivity_labels_[id]->set_style_override(style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 
@@ -758,7 +758,7 @@ void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
                                            const RGBColor& color) {
 	UI::FontStyleInfo style(style_.building_statistics_button_font());
 	style.set_color(color);
-	textarea->set_style(style);
+	textarea->set_style_override(style);
 	textarea->set_text(text);
 	textarea->set_visible(true);
 }

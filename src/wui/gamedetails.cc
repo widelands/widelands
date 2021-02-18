@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -184,8 +184,8 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 
 	description =
 	   (boost::format("%s%s") % description %
-	    as_heading_with_content(
-	       _("Add-Ons:"), check_requirements(gamedata.required_addons), panel_style_, false, true))
+	    as_heading_with_content(_("Add-Ons:"), AddOns::check_requirements(gamedata.required_addons),
+	                            panel_style_, false, true))
 	      .str();
 
 	std::string filename = gamedata.filename;

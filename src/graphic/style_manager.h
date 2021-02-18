@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,13 @@
 #include "graphic/styles/window_style.h"
 #include "scripting/lua_table.h"
 
-constexpr const char* const kTemplateDir = "templates/default/";
+const std::string& template_dir();
+void set_template_dir(std::string);
+
+// Load the specified image. If it does not exist,
+// print a warning and use a fallback image.
+// `path` is relative to the template directory.
+const Image& load_safe_template_image(const std::string& path);
 
 class StyleManager {
 public:

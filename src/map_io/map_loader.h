@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,9 +42,9 @@ public:
 
 	// If `addons` is not null, this function will also disable all world add-ons
 	// in that vector and enable the ones required by the map.
-	virtual int32_t preload_map(bool as_scenario, std::vector<AddOnInfo>* addons) = 0;
+	virtual int32_t preload_map(bool as_scenario, std::vector<AddOns::AddOnInfo>* addons) = 0;
 	virtual int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType) = 0;
-	virtual int32_t load_map_for_render(EditorGameBase&, std::vector<AddOnInfo>*) {
+	virtual int32_t load_map_for_render(EditorGameBase&, std::vector<AddOns::AddOnInfo>*) {
 		// cannot load map for rendering only -> no map preview
 		return 1;
 	}

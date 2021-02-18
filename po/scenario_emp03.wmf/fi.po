@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # GunChleoc, 2018
-# Jukka Pakarinen, 2020
+# Jukka Pakarinen, 2019
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Jukka Pakarinen, 2020\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,15 +27,15 @@ msgstr "Rakenna ensimmäinen etuvartioasemasi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr "Ensimmäinen Etuvartioasema"
+msgstr "Ensimmäinen etuvartioasema"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
-"Rakenna etuvartioasema keltaisella talokuvake väliaikaisesta päämajastasi "
-"itään."
+"Rakenna etuvartioasema keltaiselle talokuvakkeelle väliaikaisesta "
+"päämajastasi itään."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
@@ -75,7 +76,7 @@ msgstr "Pienennä marmoripylväiden kysyntä arvoon 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr "Pienennä Marmoripylväiden Kysyntää"
+msgstr "Pienennä marmoripylväiden kysyntää"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
@@ -180,7 +181,7 @@ msgstr "Tuota kultaa lähettääksesi tutkimusmatkoja"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
-msgstr "Kultatuotanto"
+msgstr "Kullan tuotanto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
@@ -304,7 +305,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
-msgstr "Haaksirikkoutui Taas"
+msgstr "Jälleen haaksirikkoutuneena"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
@@ -330,7 +331,7 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
-"Näytää tosiaankin siltä, että olemme rantautuneen hyvin pienelle saarelle, "
+"Näytää tosiaankin siltä, että olemme rantautuneen hyvin pienelle saarelle "
 "jossa on vähän tilaa."
 
 #. TRANSLATORS: Lutius - Diary
@@ -339,9 +340,9 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
-"Tilanteen tekee vielä pahemmaksi se, että maa jonka näemme on kivien ja "
-"puiden peitossa. Pelkään pahoin ettemme kykene löytämään tarvittavia "
-"resursseja uuden aluksen rakentamiseksi."
+"Tilanteen tekee vielä pahemmaksi se, että näkemämme maa on kivien ja puiden "
+"peitossa. Pelkään pahoin ettemme kykene löytämään tarvittavia materiaaleja "
+"uuden aluksen rakentamiseksi."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
@@ -349,13 +350,12 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
-"En todellakaan tiedä pääsemmekö ja miten, takaisin kotiin. Ja sota vain "
-"jatkuu ilman meitä. Toivottavasti sotilastoverimme puollustavat "
-"keisarikuntaamme hyvin."
+"En todellakaan tiedä pääsemmekö takaisin kotiin. Ja sota vain jatkuu ilman "
+"meitä. Toivottavasti sotilastoverimme puolustavat keisarikuntaamme hyvin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:227
 msgid "No Sight"
-msgstr "Ei Näkymää"
+msgstr "Ei havaintoa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:257
 msgid "Rocks, Nothing but Rocks"
-msgstr "Kivikkoa, Ja Vain Kivikkoa"
+msgstr "Kivikkoa, ja vain kivikkoa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:258
 msgid "Saledus speaks with a sigh of relief…"
@@ -436,14 +436,14 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
-"Vaikka tämä onkin hyvä askel eteenpäin, en kykene näkemään juurikaan tilaa "
-"rakennuksille. Koko saari on täynnä kivikkoa. Kuinka voisimme koskaan "
-"rakentaa uutta alusta tai saada edes alkeellista infrastruktuuria "
-"tehdäksemme elämästämme miellyttävämmän."
+"Vaikka tämä onkin hyvä askel eteenpäin, rakennuksille ei kuitenkaan ole "
+"tilaa. Koko saari on täynnä kivikkoa. Kuinka voisimme koskaan rakentaa uutta"
+" alusta tai saada edes alkeellista infrastruktuuria tehdäksemme elämästämme "
+"miellyttävämmän?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
-msgstr "Amalean Suunnitelma"
+msgstr "Amalean suunnitelma"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
@@ -455,9 +455,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
-"Lutius, tämä saattaa näyttää hyvin vaikealta, mutta me voimme tehdä sen. "
+"Lutius, tämä saattaa näyttää hyvin vaikealta, mutta onnistumme kyllä. "
 "Ensinnäkin, me tarvitsemme kärsivällisyyttä kuten myös nopeutta ja tässä "
-"maailman kolkassa toimivan suunnitelman."
+"maailmankolkassa toimivan suunnitelman."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:275
@@ -465,7 +465,7 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
-"Luulempa meidän tarvitsevan paljastaa hieman rakennustilaa leikkaamalla "
+"Luulenpa että meidän täytyy raivata hieman tilaa rakennuksille louhimalla "
 "kivikkoa kivilouhoksella."
 
 #. TRANSLATORS: Amalea
@@ -475,9 +475,9 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
-"Lisäksi sillä saisimme graniittia ja jonkin verran marmoria uuden maailmamme"
-" rakentamiseen. Voimme käyttää niitä heti kun rakennuksille on riittävästi "
-"tilaa."
+"Lisäksi sillä saisimme graniittia ja jonkin verran marmoria uuden "
+"valtakuntamme rakentamiseen. Voimme käyttää niitä heti kun rakennuksille on "
+"riittävästi tilaa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
@@ -494,8 +494,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
-"Hyviä uutisia kansalta, Lutius. Sain viesti, että meidän ensimmäinen "
-"kivilouhos on aloittanut tänään toimintansa."
+"Hyviä uutisia kansalta, Lutius! Sain tiedon, että ensimmäinen "
+"kivilouhoksemme on aloittanut tänään toimintansa."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:292
@@ -503,7 +503,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
-"Ehkä on viisainta odottaa kunnes se on paljastanut jonkin verran tilaa ja "
+"Ehkä olisi viisainta odottaa kunnes se on raivannut jonkin verran tilaa, ja "
 "sitten rakennetaan alkeellinen rakennusmateriaaliteollisuus."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
@@ -526,8 +526,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
-"Olen huomannut, että kivenhakkaaja on aloittanut työnsä, viimeinkin. Hän "
-"leikkaa niin monta marmoripylvästä kuin alkeellisen talouden asetuksissa "
+"Olen huomannut, että kivenhakkaaja on vihdoin aloittanut työnsä. Hän "
+"valmistaa niin monta marmoripylvästä kuin alkeellisen talouden asetuksissa "
 "pyydämme."
 
 #. TRANSLATORS: Amalea
@@ -538,7 +538,7 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
-"Mutta siinä on eräs hankaluus, jos kulutamme kaikki marmorimme pylväisiin, "
+"Mutta siinä on yksi vika: jos kulutamme kaikki marmorimme pylväisiin, "
 "marmori loppuu. Joten meidän pitäisi pienentää marmoripylväiden määrää "
 "talouden asetuksissa. Arvelen, että neljän pylvään reservi saattaisi olla "
 "sopiva tilanteeseen."
@@ -550,7 +550,7 @@ msgstr "Amalea Näyttää Iloiselta"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr "Minulla on nyt loistavaa edistystä kerrottavana."
+msgstr "Minulla on nyt loistavia uutisia!"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -559,7 +559,7 @@ msgid ""
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
 "Minulle selvisi, että puunhakkaajan talon ja sahan rakennustyöt on saatu "
-"tehtyä, joten me voimme aloittaa tukkien hankkimisen ja tehdä niistä "
+"tehtyä, joten me voimme aloittaa tukkien hakkaamisen ja tehdä niistä "
 "lautoja."
 
 #. TRANSLATORS: Amalea
@@ -586,7 +586,7 @@ msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
 msgstr ""
-"Herra, mietiskelin juuri matkaamme kotiin. On äärimmäisen tärkeää rakentaa "
+"Herra, mietiskelin juuri kotimatkaamme. On äärimmäisen tärkeää rakentaa "
 "satama aluksiemme lastaamiseksi ja tutkimusmatkan aloittamiseksi."
 
 #. TRANSLATORS: Saledus

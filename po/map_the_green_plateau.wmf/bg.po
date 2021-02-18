@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021
 # Любомир Василев, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
-"PO-Revision-Date: 2017-09-21 23:33+0000\n"
-"Last-Translator: Любомир Василев\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-13 20:40+0000\n"
+"Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr "Най-после! Направихме първата си стъпка към победата! Миналата нощ, стъпихме на забранения остров и победихме няколкото пазачи, които пазеха северозападната част на острова. Сигурен съм, че никой от военачалниците не ни е засякъл досега, така че трябва да сме тихи и да изградим инфраструктурата си. Скоро ще сме достатъчно силни, за да ги нападнем."
+msgstr "Най-после! Направихме първата си стъпка към победата! Миналата нощ, стъпихме на забранения остров и победихме пазачите, които пазеха северозападната част на острова. Сигурен съм, че никой от военачалниците не ни е засякъл досега, така че трябва да сме тихи и да изградим инфраструктурата си. Скоро ще сме достатъчно силни, за да ги нападнем."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:23
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:25
@@ -128,7 +129,7 @@ msgstr "Ъруин е победен"
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
-msgstr "Страхотно! Ъруин се предаде когато вида как последните му сгради рухват. Един силен военачалник по-малко на този остров!"
+msgstr "Страхотно! Ъруин се предаде когато видя как последните му сгради рухват. Един силен военачалник по-малко на този остров!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Jomo Defeated"
@@ -138,7 +139,7 @@ msgstr "Джомо е победен"
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
-msgstr "Страхотно! Джомо се предаде когато вида как последните му сгради рухват. Един силен военачалник по-малко на този остров!"
+msgstr "Страхотно! Джомо се предаде когато видя как последните му сгради рухват. Един силен военачалник по-малко на този остров!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid "Last Briefing"
@@ -152,10 +153,10 @@ msgstr "Победа!"
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
-msgstr "Най-после! Островът е само наш. Сега само трябва да го защитаваме по-добре от военачалниците."
+msgstr "Най-после! Островът е наш. Сега само трябва да го защитаваме по-добре от военачалниците."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:108
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"
-msgstr "Поздравления! Вие завършихте този сценарий. Можете да продължите да играете, ако искате!"
+msgstr "Поздравления! Вие завършихте този сценарий. Може да продължите играта, ако искате!"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,6 +78,8 @@ public:
 	int set_see_all(lua_State* L);
 	int get_allow_additional_expedition_items(lua_State* L);
 	int set_allow_additional_expedition_items(lua_State* L);
+	int get_hidden_from_general_statistics(lua_State* L);
+	int set_hidden_from_general_statistics(lua_State* L);
 
 	/*
 	 * Lua methods
@@ -92,13 +94,16 @@ public:
 	int reveal_fields(lua_State* L);
 	int hide_fields(lua_State* L);
 	int mark_scenario_as_solved(lua_State* L);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int acquire_training_wheel_lock(lua_State* L);
 	int release_training_wheel_lock(lua_State* L);
 	int mark_training_wheel_as_solved(lua_State* L);
 	int run_training_wheel(lua_State* L);
 	int skip_training_wheel(lua_State* L);
+#endif
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
+	int get_constructionsites(lua_State* L);
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
@@ -114,6 +119,7 @@ private:
 	                         const Widelands::TribeDescr&,
 	                         std::vector<Widelands::DescriptionIndex>&);
 	int allow_forbid_buildings(lua_State* L, bool);
+	int do_get_buildings(lua_State* L, bool);
 };
 
 class LuaObjective : public LuaGameModuleClass {

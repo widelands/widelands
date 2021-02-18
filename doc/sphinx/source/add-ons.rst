@@ -6,37 +6,29 @@ The Widelands add-on system is still under development. In particular, Widelands
 Structure
 ---------
 
-An add-on is a directory (never a zip-compressed file!) with the extension ``*.wad``. Add-ons have to be placed in the ``addons`` subdirectory of the home directory to be found by the game.
+An add-on is a directory (never a zip-compressed file!) with the extension ``*.wad``. Add-ons have to be placed in the ``addons`` subdirectory of the Widelands home directory to be found by the game.
 
 The ``addons`` File
 -------------------
 
 An add-on contains a plain-text ini-style file called ``addons`` with the following entries in the ``global`` section:
 
-* ``name``: The untranslated name of the add-on
-* ``description``: The untranslated long description
-* ``author``: The add-on’s author(s) untranslated name(s)
+* ``name``: The name of the add-on
+* ``description``: The long description
+* ``author``: The add-on’s author(s) name(s)
 * ``version``: The version number (1 for new add-ons)
 * ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition", "theme"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on.
 
-Optional additional entries that are required to make the name, description and/or author translatable:
-
-* ``i18n_name``: Identical to ``name`` but marked for translation with '_'
-* ``i18n_description``: Identical to ``description`` but marked for translation with '_'
-* ``i18n_author``: Identical to ``author`` but marked for translation with '_'
-
-Only ``name``, ``description`` and ``author`` can be marked for translation. They may also contain richtext tags.
+The entries for ``name``, ``description`` and ``author`` can optionally be marked for translation with '_'. They may also contain richtext tags.
 
 Example:
 
 .. code-block:: ini
 
    [global]
-   name="Fishy"
-   i18n_name=_"Fishy"
-   description="Adds the highest amount of fish to every map node that can hold fish."
-   i18n_description=_"Adds the highest amount of fish to every map node that can hold fish."
+   name=_"Fishy"
+   description=_"Adds the highest amount of fish to every map node that can hold fish."
    author="Nordfriese"
    version="1"
    category="script"
@@ -67,9 +59,9 @@ If the add-on introduces one or more new tribes, it will additionally need to co
 
 world
 ~~~~~
-A script that modifies world units, namely terrains, critter, or resources. You can modify existing units and create new ones.
+A script that modifies world units, namely terrains, critters, immovables, or resources. You can modify existing units and create new ones.
 
-The structure of world add-ons is identical to the structure of tribe add-ons (``register.lua`` files, ``init.lua`` files, optional ``preload.lua`` and/or ``postload.lua``; no ``tribes.lua`` though).
+The structure of world add-ons is identical to the structure of tribe add-ons (``register.lua`` files, ``init.lua`` files, optional ``preload.lua`` and/or ``postload.lua``; no ``tribes`` directory though).
 
 Additionally, a world add-on has to contain a script called ``editor.lua`` which will be used to expose any new types to the editor interface. For details see the official editor init script ``data/world/init.lua``. Note that this script needs to be present even if no new units are added.
 
@@ -112,12 +104,12 @@ starting_condition
 ~~~~~~~~~~~~~~~~~~
 A starting condition script. May define the same starting conditions for any number of tribes.
 
-The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/initialization/*/starting_conditions/*.lua``.
+The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/initialization/<tribename>/starting_conditions/*.lua`` (see :doc:`autogen_lua_tribes_defining_discovery`).
 
 
 theme
 ~~~~~
-A UI theme. This type of add-on is not implemented yet.
+A UI theme. See :doc:`themes` for details.
 
 
 Restrictions

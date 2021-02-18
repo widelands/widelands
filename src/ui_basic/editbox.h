@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"
 
 #define CHAT_HISTORY_SIZE 5
@@ -52,14 +51,14 @@ struct EditBox : public Panel {
 	void set_text(const std::string&);
 	void set_max_length(int);
 	void set_font_scale(float scale);
-	void set_font_style(const UI::FontStyleInfo& style);
-	void set_font_style_and_margin(const UI::FontStyleInfo& style, int margin);
 
 	void activate_history(bool activate) {
 		history_active_ = activate;
 	}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_textinput(const std::string& text) override;
 
@@ -97,13 +96,16 @@ private:
 	std::string history_[CHAT_HISTORY_SIZE];
 	bool password_;
 	bool warning_;
-	uint32_t snap_to_char(uint32_t cursor);
+	uint32_t snap_to_char(uint32_t cursor) const;
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;
 	uint32_t prev_char(uint32_t cursor) const;
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 	void delete_selected_text();
 	void copy_selected_text();
+	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
+	int calculate_text_width(int pos) const;
+	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;
 };
 }  // namespace UI
 

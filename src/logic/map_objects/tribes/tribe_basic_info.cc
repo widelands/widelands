@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,18 +45,29 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 		for (const std::string& script_path : starting_conditions->array_entries<std::string>()) {
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
+			// TODO(hessenfarmer): This initialization code is duplicated in Addons below and in
+			// gameclient
+			//                      Should be puled out to a common class
 			std::set<std::string> tags;
+			std::set<std::string> incompatible_wc;
 			if (script_table->has_key("map_tags")) {
 				std::unique_ptr<LuaTable> t = script_table->get_table("map_tags");
 				for (int key : t->keys<int>()) {
 					tags.insert(t->get_string(key));
 				}
 			}
+			if (script_table->has_key("incompatible_wc")) {
+				std::unique_ptr<LuaTable> w = script_table->get_table("incompatible_wc");
+				for (int key : w->keys<int>()) {
+					incompatible_wc.insert(w->get_string(key));
+				}
+			}
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
-			                                         script_table->get_string("tooltip"), tags));
+			                                         script_table->get_string("tooltip"), tags,
+			                                         incompatible_wc));
 		}
-		for (const auto& pair : g_addons) {
-			if (pair.first.category == AddOnCategory::kStartingCondition) {
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition) {
 				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
 				                                pair.first.internal_name +
 				                                FileSystem::file_separator() + name + ".lua";
@@ -65,16 +76,24 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 				}
 				std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 				script_table->do_not_warn_about_unaccessed_keys();
+				// TODO(hessenfarmer): Needs to be pulled out as it is duplicated
 				std::set<std::string> tags;
+				std::set<std::string> incompatible_wc;
 				if (script_table->has_key("map_tags")) {
 					std::unique_ptr<LuaTable> t = script_table->get_table("map_tags");
 					for (int key : t->keys<int>()) {
 						tags.insert(t->get_string(key));
 					}
 				}
-				initializations.push_back(Initialization(script_path,
-				                                         script_table->get_string("descname"),
-				                                         script_table->get_string("tooltip"), tags));
+				if (script_table->has_key("incompatible_wc")) {
+					std::unique_ptr<LuaTable> w = script_table->get_table("incompatible_wc");
+					for (int key : w->keys<int>()) {
+						incompatible_wc.insert(w->get_string(key));
+					}
+				}
+				initializations.push_back(
+				   Initialization(script_path, script_table->get_string("descname"),
+				                  script_table->get_string("tooltip"), tags, incompatible_wc));
 			}
 		}
 	} catch (const WException& e) {
@@ -102,8 +121,8 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 
-	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kTribes && pair.second) {
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.first.category == AddOns::AddOnCategory::kTribes && pair.second) {
 			const std::string dirname = kAddOnDir + FileSystem::file_separator() +
 			                            pair.first.internal_name + FileSystem::file_separator() +
 			                            "tribes";

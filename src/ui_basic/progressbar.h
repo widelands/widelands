@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,6 +53,10 @@ public:
 	}
 	void set_total(uint32_t);
 
+	void set_show_percent(bool p) {
+		show_percent_ = p;
+	}
+
 protected:
 	void draw(RenderTarget&) override;
 
@@ -60,7 +64,9 @@ private:
 	uint32_t orientation_;
 	uint32_t state_;  ///< state_ is [0..total_]
 	uint32_t total_;  ///< maximum progress
-	const UI::ProgressbarStyleInfo& progress_style_;
+	const UI::PanelStyle progress_style_;
+	const UI::ProgressbarStyleInfo& progress_style() const;
+	bool show_percent_;
 };
 }  // namespace UI
 

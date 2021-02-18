@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/player.h"
 #include "ui_basic/window.h"
 
 constexpr int kWareMenuInfoSize = 12;
@@ -441,6 +442,8 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	const Vector2i p = ware_position(id);
 	dst.blit(p, style.icon_background_image());
+	dst.fill_rect(Recti(p.x, p.y, w, style.icon_background_image()->height()),
+	              draw_ware_background_overlay(id), BlendMode::Default);
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
@@ -505,6 +508,78 @@ WaresDisplay::WaresDisplay(UI::Panel* const parent,
    : AbstractWaresDisplay(parent, x, y, tribe, type, selectable) {
 }
 
+StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
+                                             const int32_t x,
+                                             const int32_t y,
+                                             const Widelands::Player& p,
+                                             const Widelands::WareWorker type)
+   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p), solid_icon_backgrounds_(true) {
+}
+
+std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {
+	const std::string text = WaresDisplay::info_for_ware(di);
+	if (solid_icon_backgrounds_) {
+		return text;
+	}
+
+	const uint32_t current_amount = amount_of(di);
+	if (current_amount >= 1000) {
+		// Not enough space to show an indicator.
+		// This only happens with very large amounts where the trend is not super-important anyway…
+		return text;
+	}
+
+	// Indicate trend over the last 5 minutes
+	const std::vector<uint32_t>& history = get_type() == Widelands::wwWARE ?
+	                                          *player_.get_ware_stock_statistics(di) :
+	                                          *player_.get_worker_stock_statistics(di);
+	const size_t nr_entries = history.size();
+
+	if (!nr_entries) {
+		// No records yet
+		return text;
+	}
+
+	const size_t kSampleEntriesForTrend = 5 * 60 * 1000 / Widelands::kStatisticsSampleTime.get();
+	const uint32_t last_amount =
+	   history[nr_entries < kSampleEntriesForTrend ? nr_entries - 1 :
+	                                                 nr_entries - kSampleEntriesForTrend];
+
+	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
+	const std::string indicator =
+	   current_amount < last_amount ?
+	      StyleManager::color_tag(_("↓"), colors.alternative_low_color()) :
+	      current_amount > last_amount ?
+	      StyleManager::color_tag(_("↑"), colors.alternative_high_color()) :
+	      StyleManager::color_tag(_("="), colors.alternative_medium_color());
+	return (boost::format(_("%1$s%2$s")) % text % indicator).str();
+}
+
+RGBAColor
+StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::DescriptionIndex di) {
+	if (solid_icon_backgrounds_) {
+		return WaresDisplay::draw_ware_background_overlay(di);
+	}
+	if (get_type() == Widelands::wwWARE) {
+		if (!player_.tribe().get_ware_descr(di)->has_demand_check(player_.tribe().name())) {
+			return WaresDisplay::draw_ware_background_overlay(di);
+		}
+	} else {
+		if (!player_.tribe().get_worker_descr(di)->has_demand_check()) {
+			return WaresDisplay::draw_ware_background_overlay(di);
+		}
+	}
+
+	const uint32_t amount = amount_of(di);
+	const uint32_t target = player_.get_total_economy_target(get_type(), di);
+	const RGBColor& color =
+	   amount < target ?
+	      g_style_manager->building_statistics_style().alternative_low_color() :
+	      amount > target ? g_style_manager->building_statistics_style().alternative_high_color() :
+	                        g_style_manager->building_statistics_style().alternative_medium_color();
+	return RGBAColor(color.r, color.g, color.b, 80);
+}
+
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {
 	return g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal).info_background();
 }
@@ -533,12 +608,16 @@ std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	return (boost::format(unit_suffixes[size]) % amount).str();
 }
 
-std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
-	int totalstock = 0;
+uint32_t WaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
+	uint32_t totalstock = 0;
 	for (const Widelands::WareList* warelist : warelists_) {
 		totalstock += warelist->stock(ware);
 	}
-	return get_amount_string(totalstock);
+	return totalstock;
+}
+
+std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
+	return get_amount_string(amount_of(ware));
 }
 
 /*

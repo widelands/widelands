@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -321,7 +321,11 @@ MapView::MapView(
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
-     dragging_(false) {
+     dragging_(false),
+     edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&
+                     get_config_bool("edge_scrolling", false)),
+     is_scrolling_x_(0),
+     is_scrolling_y_(0) {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
@@ -516,6 +520,11 @@ bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	return false;
 }
 
+constexpr int16_t kEdgeScrollingMargin = 40;
+constexpr int16_t kEdgeScrollingSpeedSlow = 2;
+constexpr int16_t kEdgeScrollingSpeedNormal = 20;
+constexpr int16_t kEdgeScrollingSpeedFast = 80;
+
 bool MapView::handle_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	last_mouse_pos_.x = x;
@@ -529,8 +538,41 @@ bool MapView::handle_mousemove(
 		}
 	}
 
+	is_scrolling_x_ = edge_scrolling_ ?
+	                     x < kEdgeScrollingMargin ? -1 : x > get_w() - kEdgeScrollingMargin ? 1 : 0 :
+	                     0;
+	is_scrolling_y_ = edge_scrolling_ ?
+	                     y < kEdgeScrollingMargin ? -1 : y > get_h() - kEdgeScrollingMargin ? 1 : 0 :
+	                     0;
+
 	track_sel(Vector2i(x, y));
+
 	return false;
+}
+
+void MapView::think() {
+	UI::Panel::think();
+	if (!dragging_ && (is_scrolling_x_ != 0 || is_scrolling_y_ != 0)) {
+		// We should be a child of the IBase
+		assert(get_parent());
+		assert(!get_parent()->get_parent());
+
+		const Vector2i mouse = get_parent()->get_mouse_position();
+		std::vector<UI::Panel*> all_children_at_mouse;
+		get_parent()->find_all_children_at(mouse.x, mouse.y, all_children_at_mouse);
+		assert(all_children_at_mouse.size() >
+		       1);  // At least we and the info panel overlay should be there
+		if (all_children_at_mouse.size() > 2) {
+			// Mouse is over another panel
+			return;
+		}
+
+		const int16_t speed =
+		   (SDL_GetModState() & KMOD_CTRL) ?
+		      kEdgeScrollingSpeedFast :
+		      (SDL_GetModState() & KMOD_SHIFT) ? kEdgeScrollingSpeedSlow : kEdgeScrollingSpeedNormal;
+		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
+	}
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
@@ -670,35 +712,21 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (scroll_map()) {
 		return true;
 	}
-	if (!(code.mod & KMOD_CTRL)) {
-		return false;
-	}
 
-	switch (code.sym) {
-	case SDLK_KP_PLUS:
-	case SDLK_PLUS:
-	case SDLK_EQUALS:
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomIn, code)) {
 		increase_zoom();
 		return true;
-
-	case SDLK_KP_MINUS:
-	case SDLK_MINUS:
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomOut, code)) {
 		decrease_zoom();
 		return true;
-
-	case SDLK_KP_0:
-		if (!(code.mod & KMOD_NUM)) {
-			return false;
-		}
-		FALLS_THROUGH;
-	case SDLK_0:
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomReset, code)) {
 		reset_zoom();
 		return true;
-
-	default:
-		return false;
 	}
-	NEVER_HERE();
+
+	return false;
 }
 
 MapView::TimestampedView MapView::animation_target_view() const {

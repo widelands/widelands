@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	explicit Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>&);
+	explicit Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>&);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
@@ -211,6 +211,8 @@ private:
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
+
+	static uint32_t instances_;
 };
 
 }  // namespace Widelands

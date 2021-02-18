@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 void MapFlagdataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
@@ -55,7 +55,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 5 && packet_version <= kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
@@ -64,11 +64,12 @@ void MapFlagdataPacket::read(FileSystem& fs,
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					// TODO(Nordfriese): Saveloading compatibility:
-					// Change this line when we next increase the packet version:
-					flag.animstart_ = Time(fr.unsigned_16());
-					// SHOULD BE: flag.animstart_ = Time(fr);
-					// (same below)
+					// TODO(Nordfriese): Savegame compatibility
+					if (packet_version < 6) {
+						flag.animstart_ = Time(fr.unsigned_16());
+					} else {
+						flag.animstart_ = Time(fr);
+					}
 
 					{
 						FCoords building_position = map.get_fcoords(flag.position_);
@@ -133,7 +134,9 @@ void MapFlagdataPacket::read(FileSystem& fs,
 						uint16_t const nr_jobs = fr.unsigned_16();
 						assert(flag.flag_jobs_.empty());
 						for (uint16_t i = 0; i < nr_jobs; ++i) {
-							Flag::FlagJob f;
+							FlagJob f;
+							f.type = packet_version < 6 ? FlagJob::Type::kGeologist :
+							                              static_cast<FlagJob::Type>(fr.unsigned_8());
 							if (fr.unsigned_8()) {
 								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
 								f.request->read(fr, dynamic_cast<Game&>(egbase), mol);
@@ -143,6 +146,8 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							f.program = fr.c_string();
 							flag.flag_jobs_.push_back(f);
 						}
+
+						flag.act_pending_ = packet_version >= 6 && fr.unsigned_8();
 
 						mol.mark_object_as_loaded(flag);
 					}
@@ -177,11 +182,7 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 			//  Owner is already written in the existanz packet.
 
 			//  Animation is set by creator.
-			// TODO(Nordfriese): Saveloading compatibility:
-			// Change this line when we next increase the packet version:
-			fw.unsigned_16(flag->animstart_.get());
-			// SHOULD BE: flag->animstart_.save(fw);
-			// (same above)
+			flag->animstart_.save(fw);
 
 			//  Roads are not saved, they are set on load.
 
@@ -219,19 +220,20 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				assert(mos.is_object_known(*obj));
 				fw.unsigned_32(mos.get_object_file_index(*obj));
 			}
-			const Flag::FlagJobs& flag_jobs = flag->flag_jobs_;
-			fw.unsigned_16(flag_jobs.size());
 
-			for (const Flag::FlagJob& temp_job : flag_jobs) {
-				if (temp_job.request) {
+			fw.unsigned_16(flag->flag_jobs_.size());
+			for (const FlagJob& job : flag->flag_jobs_) {
+				fw.unsigned_8(static_cast<uint8_t>(job.type));
+				if (job.request) {
 					fw.unsigned_8(1);
-					temp_job.request->write(fw, dynamic_cast<Game&>(egbase), mos);
+					job.request->write(fw, dynamic_cast<Game&>(egbase), mos);
 				} else {
 					fw.unsigned_8(0);
 				}
-
-				fw.string(temp_job.program);
+				fw.string(job.program);
 			}
+
+			fw.unsigned_8(flag->act_pending_ ? 1 : 0);
 
 			mos.mark_object_as_saved(*flag);
 		}

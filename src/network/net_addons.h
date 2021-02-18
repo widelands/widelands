@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,8 @@
 
 #include "logic/addons.h"
 
+namespace AddOns {
+
 // The add-on related networking functions defined here use the CURL lib.
 // Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
 // Con: Additional dependency – this is the only place in our code where libcurl is used
@@ -54,6 +56,9 @@ struct NetAddons {
 	std::string
 	download_i18n(const std::string& addon, const std::string& checksum, const std::string& locale);
 
+	// Download the given screenshot for the given add-on
+	std::string download_screenshot(const std::string& addon, const std::string& screenie);
+
 private:
 	// Open the connection if it was not open yet; throws an error if this fails
 	void init();
@@ -63,5 +68,7 @@ private:
 
 	CURL* curl_;
 };
+
+}  // namespace AddOns
 
 #endif  // end of include guard: WL_NETWORK_NET_ADDONS_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,10 +63,14 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			background_ = s.get_safe_string("background");
 			// TODO(Nordfriese): Savegame compatibility
 			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0. `kCurrentPacketVersion` will
+       // then need to be increased, and the minimum version for the following two values updated
+       // accordingly.
 			training_wheels_wanted_ =
 			   (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
 			active_training_wheel_ =
 			   (packet_version < 9 ? "" : s.get_safe_string("active_training_wheel"));
+#endif
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
 			number_of_players_ = s.get_safe_int("player_amount");
@@ -88,7 +92,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
 					required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), std::strtol(version.c_str(), nullptr, 10)));
+					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -137,17 +141,20 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
 	                                              game.game_controller()->get_game_type() :
 	                                              GameController::GameType::kReplay));
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	s.set_string("active_training_wheel", game.active_training_wheel());
 	s.set_bool("training_wheels", game.training_wheels_wanted());
+#endif
 
 	std::string addons;
-	for (const AddOnInfo& addon : game.enabled_addons()) {
-		if (addon.category == AddOnCategory::kTribes || addon.category == AddOnCategory::kWorld ||
-		    addon.category == AddOnCategory::kScript) {
+	for (const AddOns::AddOnInfo& addon : game.enabled_addons()) {
+		if (addon.category == AddOns::AddOnCategory::kTribes ||
+		    addon.category == AddOns::AddOnCategory::kWorld ||
+		    addon.category == AddOns::AddOnCategory::kScript) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
-			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
+			addons += addon.internal_name + ':' + AddOns::version_to_string(addon.version, false);
 		}
 	}
 	s.set_string("addons", addons);

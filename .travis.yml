@@ -1,40 +1,20 @@
 os: osx
 osx_image: xcode10.1
-
-addons:
-  apt:
-    packages:
-      - libboost-dev
-      - libboost-regex-dev
-      - libboost-system-dev
-      - libboost-test-dev
-      - libcurl4-openssl-dev
-      - libglew-dev
-      - libicu-dev
-      - libpng-dev
-      - libsdl2-dev
-      - libsdl2-image-dev
-      - libsdl2-mixer-dev
-      - libsdl2-ttf-dev
-      - zlib1g-dev
-  homebrew:
-    packages:
-      - ccache
-      - glew
-      - sdl2
-      - sdl2_image
-      - sdl2_mixer
-      - sdl2_ttf
-      - icu4c
-    update: true
+  
+install:
+  - brew unlink gettext && brew link --force gettext
+  - HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
 
 before_script:
   - >
     if [ "$TRAVIS_OS_NAME" = osx ]; then \
       # icu4c cannot be forced
       export ICU_ROOT="$(brew --prefix icu4c)" && \
-      # add ccache and brew to the PATH variable
-      export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH"; \
+      # add ccache and gettext to the PATH variable
+      export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH" && \
+      # Fix opengl path
+      mkdir -p /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks && \
+      ln -s /System/Library/Frameworks/OpenGL.framework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework; \
     fi
 
 branches:

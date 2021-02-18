@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,21 +34,13 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace {
-
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
-bool inline copy_paste_modifier() {
-#ifdef __APPLE__
-	return (SDL_GetModState() & KMOD_GUI);
-#else
-	return (SDL_GetModState() & KMOD_CTRL);
-#endif
-}
-
 }  // namespace
 
 namespace UI {
@@ -56,10 +48,9 @@ namespace UI {
 struct EditBoxImpl {
 	enum class Mode { kNormal, kSelection };
 
-	explicit EditBoxImpl(const UI::TextPanelStyleInfo& init_style)
-	   : background_style(&init_style.background()),
-	     font_style(&init_style.font()),
-	     margin(init_style.background().margin()),
+	explicit EditBoxImpl(const UI::PanelStyle s)
+	   : style(s),
+	     margin(background_style().margin()),
 	     font_scale(1.0f),
 	     maxLength(1),
 	     caret(0),
@@ -71,11 +62,17 @@ struct EditBoxImpl {
 	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
 
+	const UI::PanelStyle style;
+
 	/// Background color and texture
-	const UI::PanelStyleInfo* background_style;
+	inline const UI::PanelStyleInfo& background_style() const {
+		return g_style_manager->editbox_style(style).background();
+	}
 
 	/// Font style
-	const UI::FontStyleInfo* font_style;
+	inline const UI::FontStyleInfo& font_style() const {
+		return g_style_manager->editbox_style(style).font();
+	}
 
 	/// Margin around the test
 	int margin;
@@ -115,7 +112,7 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
            w,
            text_height(g_style_manager->editbox_style(style).font()) +
               2 * g_style_manager->editbox_style(style).background().margin()),
-     m_(new EditBoxImpl(g_style_manager->editbox_style(style))),
+     m_(new EditBoxImpl(style)),
      history_active_(false),
      history_position_(-1),
      password_(false),
@@ -172,7 +169,7 @@ void EditBox::set_text(const std::string& t) {
  */
 void EditBox::set_max_length(int const n) {
 	m_->maxLength =
-	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(*m_->font_style), n);
+	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(m_->font_style()), n);
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
@@ -187,29 +184,79 @@ void EditBox::set_font_scale(float scale) {
 	m_->font_scale = scale;
 }
 
-void EditBox::set_font_style(const UI::FontStyleInfo& style) {
-	m_->font_style = &style;
-	const int new_height = text_height(style) + 2 * m_->margin;
-	set_size(get_w(), new_height);
-	set_desired_size(get_w(), new_height);
-}
-
-void EditBox::set_font_style_and_margin(const UI::FontStyleInfo& style, int margin) {
-	m_->margin = margin;
-	set_font_style(style);
-}
-
 /**
  * The mouse was clicked on this editbox
  */
-bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		reset_selection();
+		set_caret_to_cursor_pos(x);
 		focus();
 		clicked();
 		return true;
 	}
 
 	return false;
+}
+
+bool EditBox::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+	// state != 0 -> mouse button is pressed
+	if (state && get_can_focus()) {
+		select_until(m_->caret);
+		set_caret_to_cursor_pos(x);
+		select_until(m_->caret);
+		return true;
+	}
+
+	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
+}
+
+void EditBox::set_caret_to_cursor_pos(int32_t cursor_pos_x) {
+	if (m_->text.empty() || cursor_pos_x <= kMarginX) {
+		set_caret_pos(0);
+		return;
+	}
+
+	int text_w = text_width(m_->text, m_->font_style(), m_->font_scale);
+
+	// mouse coordinate cursor_pos_x=0 means leftmost spot in editbox but text starts with margin ->
+	// adjust
+	cursor_pos_x -= kMarginX;
+
+	double x_relative = static_cast<double>(cursor_pos_x - m_->scrolloffset) / text_w;
+	if (x_relative > 1) {
+		set_caret_pos(m_->text.size());
+		return;
+	}
+
+	// initial guess of approx_caret_pos which works well already if all characters would be of same
+	// width
+	int approx_caret_pos = x_relative * m_->text.size();
+
+	approx_caret_pos = approximate_cursor(cursor_pos_x, approx_caret_pos);
+
+	set_caret_pos(approx_caret_pos);
+}
+int EditBox::approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const {
+	static constexpr int error = 4;
+
+	// approximate using the first guess as start and increasing/decreasing text until error is small
+	int text_w = calculate_text_width(approx_caret_pos);
+	if (cursor_pos_x > text_w) {
+		while (cursor_pos_x - text_w > error) {
+			text_w = calculate_text_width(++approx_caret_pos);
+		}
+	} else if (cursor_pos_x < text_w) {
+		while (text_w - cursor_pos_x > error) {
+			text_w = calculate_text_width(--approx_caret_pos);
+		}
+	}
+	return snap_to_char(approx_caret_pos);
+}
+int EditBox::calculate_text_width(int pos) const {
+	std::string prefix = m_->text.substr(0, snap_to_char(pos));
+	int prefix_width = text_width(prefix, m_->font_style(), m_->font_scale) + m_->scrolloffset;
+	return prefix_width;
 }
 
 /**
@@ -220,37 +267,32 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-		case SDLK_v:
-			if (copy_paste_modifier() && SDL_HasClipboardText()) {
-				if (m_->mode == EditBoxImpl::Mode::kSelection) {
-					delete_selected_text();
-				}
-				handle_textinput(SDL_GetClipboardText());
-				return true;
-			}
-			return false;
-		case SDLK_c:
-			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
-				copy_selected_text();
-				return true;
-			}
-			return false;
-
-		case SDLK_a:
-			if (copy_paste_modifier()) {
-				m_->selection_start = 0;
-				m_->selection_end = m_->text.size();
-				m_->mode = EditBoxImpl::Mode::kSelection;
-				return true;
-			}
-			return false;
-		case SDLK_x:
-			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
-				copy_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && SDL_HasClipboardText()) {
+			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
 			}
-			return false;
+			handle_textinput(SDL_GetClipboardText());
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
+		    m_->mode == EditBoxImpl::Mode::kSelection) {
+			copy_selected_text();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
+		    m_->mode == EditBoxImpl::Mode::kSelection) {
+			copy_selected_text();
+			delete_selected_text();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
+			m_->selection_start = 0;
+			m_->selection_end = m_->text.size();
+			m_->mode = EditBoxImpl::Mode::kSelection;
+			return true;
+		}
+
+		switch (code.sym) {
 		case SDLK_ESCAPE:
 			cancel();
 			return true;
@@ -469,7 +511,7 @@ void EditBox::delete_selected_text() {
 }
 
 void EditBox::draw(RenderTarget& dst) {
-	draw_background(dst, *m_->background_style);
+	draw_background(dst, m_->background_style());
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2 && !warning_) {
@@ -511,7 +553,7 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
-	FontStyleInfo scaled_style(*m_->font_style);
+	FontStyleInfo scaled_style(m_->font_style());
 	scaled_style.set_size(scaled_style.size() * m_->font_scale);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_editor_richtext_paragraph(
@@ -560,9 +602,9 @@ void EditBox::draw(RenderTarget& dst) {
 		}
 
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
-		int caret_x = text_width(line_to_caret, *m_->font_style, m_->font_scale);
+		int caret_x = text_width(line_to_caret, m_->font_style(), m_->font_scale);
 
-		const uint16_t fontheight = text_height(*m_->font_style, m_->font_scale);
+		const uint16_t fontheight = text_height(m_->font_style(), m_->font_scale);
 
 		const Image* caret_image =
 		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
@@ -599,9 +641,9 @@ void EditBox::highlight_selection(RenderTarget& dst,
 	std::string text_before_selection = m_->text.substr(0, start);
 
 	Vector2i selection_start = Vector2i(
-	   text_width(text_before_selection, *m_->font_style, m_->font_scale) + point.x, point.y);
+	   text_width(text_before_selection, m_->font_style(), m_->font_scale) + point.x, point.y);
 	Vector2i selection_end =
-	   Vector2i(text_width(selected_text, *m_->font_style, m_->font_scale), fontheight);
+	   Vector2i(text_width(selected_text, m_->font_style(), m_->font_scale), fontheight);
 	if (m_->scrolloffset != 0) {
 		selection_start.x += m_->scrolloffset;
 	}
@@ -618,7 +660,7 @@ void EditBox::reset_selection() {
 /**
  * Return the starting offset of the (multi-byte) character that @p cursor points to.
  */
-uint32_t EditBox::snap_to_char(uint32_t cursor) {
+uint32_t EditBox::snap_to_char(uint32_t cursor) const {
 	while (cursor > 0 && Utf8::is_utf8_extended(m_->text[cursor])) {
 		--cursor;
 	}
@@ -686,8 +728,8 @@ void EditBox::check_caret() {
 	}
 	std::string leftstr(m_->text, 0, m_->caret);
 	std::string rightstr(m_->text, m_->caret, std::string::npos);
-	int32_t leftw = text_width(leftstr, *m_->font_style, m_->font_scale);
-	int32_t rightw = text_width(rightstr, *m_->font_style, m_->font_scale);
+	int32_t leftw = text_width(leftstr, m_->font_style(), m_->font_scale);
+	int32_t rightw = text_width(rightstr, m_->font_style(), m_->font_scale);
 
 	int32_t caretpos = 0;
 

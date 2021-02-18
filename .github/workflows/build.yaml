@@ -24,7 +24,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-openssl-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
+        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -75,7 +75,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-openssl-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy python-yaml -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -103,6 +103,8 @@ jobs:
         config:
           - Release
           - Debug
+        os:
+          - ubuntu-20.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
           - clang-10
@@ -111,14 +113,26 @@ jobs:
           - clang-6.0
           - g++-10
           - g++-9
-          - g++-6
-          - g++-5
-    runs-on: ubuntu-latest
+        include:
+          # Some compilers need an older ubuntu version to run correctly
+          - compiler: g++-5
+            os: ubuntu-18.04
+            config: Debug
+          - compiler: g++-5
+            os: ubuntu-18.04
+            config: Release
+          - compiler: g++-6
+            os: ubuntu-18.04
+            config: Debug
+          - compiler: g++-6
+            os: ubuntu-18.04
+            config: Release
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-openssl-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -190,7 +204,7 @@ jobs:
         } else {
           $env:bits = "32"
         }
-        $env:curl = "7.73.0"
+        $env:curl = "7.74.0"
         $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
         curl -Lo curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
         unzip curl.zip

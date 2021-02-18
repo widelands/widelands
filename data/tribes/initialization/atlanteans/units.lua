@@ -182,6 +182,8 @@
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 --
+--    **scouts_house**:  The internal name of the tribe's scout's hut or house. This unit needs to be defined in the ``buildings`` table too.
+--
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
 --    .. code-block:: lua
@@ -1350,7 +1352,9 @@ descriptions:new_tribe {
          name = "atlanteans_port",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
-            purpose = pgettext("atlanteans_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+            purpose = pgettext("atlanteans_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
+            -- TRANSLATORS: Note helptext for an atlantean warehouse: Port
+            note = pgettext("atlanteans_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
          }
       },
 
@@ -1713,6 +1717,7 @@ descriptions:new_tribe {
    carrier = "atlanteans_carrier",
    carrier2 = "atlanteans_horse",
    geologist = "atlanteans_geologist",
+   scouts_house = "atlanteans_scouts_house",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
    ferry = "atlanteans_ferry",

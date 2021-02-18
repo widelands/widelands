@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -301,6 +301,7 @@ void SinglePlayerStartTypeDropdown::fill() {
 			tags = map.get_tags();
 		}
 	}
+
 	for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 		const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 		bool matches_tags = true;
@@ -310,7 +311,8 @@ void SinglePlayerStartTypeDropdown::fill() {
 				break;
 			}
 		}
-		if (matches_tags) {
+		if (matches_tags &&
+		    !addme.incompatible_win_conditions.count(settings_->get_win_condition_script())) {
 			dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
 			              _(addme.tooltip));
 		}

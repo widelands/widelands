@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,6 +182,7 @@ public:
 	void building_icon_mouse_out(Widelands::DescriptionIndex);
 	void building_icon_mouse_in(Widelands::DescriptionIndex);
 	void act_geologist();
+	void act_scout();
 	void act_mark_removal();
 	void act_unmark_removal();
 	void act_attack();  /// Launch the attack
@@ -199,7 +200,8 @@ private:
 	                       const char* picname,
 	                       void (FieldActionWindow::*fn)(),
 	                       const std::string& tooltip_text,
-	                       bool repeating = false);
+	                       bool repeating = false,
+	                       bool enabled = true);
 	void reset_mouse_and_die();
 
 	void clear_overlapping_workareas();
@@ -246,6 +248,7 @@ constexpr const char* const kImgButtonWatchField = "images/wui/fieldaction/menu_
 constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
 constexpr const char* const kImgButtonAbort = "images/wui/menu_abort.png";
 constexpr const char* const kImgButtonGeologist = "images/wui/fieldaction/menu_geologist.png";
+constexpr const char* const kImgButtonScout = "images/wui/menus/watch_follow.png";
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
 constexpr const char* const kImgButtonUnmarkRemoval =
    "images/wui/fieldaction/menu_unmark_removal.png";
@@ -437,6 +440,19 @@ void FieldActionWindow::add_buttons_auto() {
 				if (can_act) {
 					add_button(buildbox, "geologist", kImgButtonGeologist,
 					           &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
+
+					const bool enabled = flag->get_economy(Widelands::wwWORKER)
+					                        ->has_building(flag->owner().tribe().scouts_house());
+					add_button(buildbox, "scout", kImgButtonScout, &FieldActionWindow::act_scout,
+					           enabled ? _("Send scout to explore surroundings") :
+					                     (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
+					                      g_style_manager->font_style(UI::FontStyle::kDisabled)
+					                         .as_font_tag(_("Send scout to explore surroundings")) %
+					                      g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+					                         .as_font_tag(_("You need to connect this flag to a scout's "
+					                                        "house before you can send a scout here.")))
+					                        .str(),
+					           false, enabled);
 				}
 			}
 		} else {
@@ -542,8 +558,6 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
-	fastclick_ = false;
-
 	for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
 		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid** ppgrid;
@@ -619,6 +633,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 		// Add it to the grid
 		(*ppgrid)->add(building_index);
+		fastclick_ = false;
 	}
 
 	// Add all necessary tabs
@@ -699,10 +714,12 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           const char* const picname,
                                           void (FieldActionWindow::*fn)(),
                                           const std::string& tooltip_text,
-                                          bool repeating) {
+                                          bool repeating,
+                                          bool enabled) {
 	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
 	                                     g_image_cache->get(picname), tooltip_text);
 	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
+	button.set_enabled(enabled);
 	button.set_repeating(repeating);
 	box->add(&button);
 
@@ -1024,13 +1041,20 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 /*
 ===============
-Call a geologist on this flag.
+Call a geologist or scout on this flag.
 ===============
 */
 void FieldActionWindow::act_geologist() {
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Widelands::Flag, flag, game->map().get_immovable(node_))) {
-		game->send_player_flagaction(*flag);
+		game->send_player_flagaction(*flag, Widelands::FlagJob::Type::kGeologist);
+	}
+	reset_mouse_and_die();
+}
+void FieldActionWindow::act_scout() {
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Widelands::Flag, flag, game->map().get_immovable(node_))) {
+		game->send_player_flagaction(*flag, Widelands::FlagJob::Type::kScout);
 	}
 	reset_mouse_and_die();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,6 +63,7 @@ public:
 	int get_type(lua_State*);
 	int get_scenario_difficulty(lua_State*);
 	int get_interactive_player(lua_State*);
+	int get_win_condition(lua_State*);
 
 	/*
 	 * Lua methods

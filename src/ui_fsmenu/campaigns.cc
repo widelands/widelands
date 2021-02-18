@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,8 +57,8 @@ Campaigns::Campaigns() {
 	// Now load the campaign info
 	LuaInterface lua;
 	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
-	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kCampaign) {
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.first.category == AddOns::AddOnCategory::kCampaign) {
 			campaign_config_scripts.push_back(kAddOnDir + FileSystem::file_separator() +
 			                                  pair.first.internal_name + FileSystem::file_separator() +
 			                                  "campaigns.lua");

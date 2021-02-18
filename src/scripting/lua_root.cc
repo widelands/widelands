@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,7 +89,7 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, win_condition),      {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -212,6 +212,17 @@ int LuaGame::get_type(lua_State* L) {
 		lua_pushstring(L, "undefined");
 		break;
 	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: win_condition
+
+      (RO) The (unlocalized) name of the game's win condition, e.g. :const:`"Endless Game"`.
+      For scenarios this is :const:`"Scenario"`.
+*/
+int LuaGame::get_win_condition(lua_State* L) {
+	lua_pushstring(L, get_game(L).get_win_condition_displayname().c_str());
 	return 1;
 }
 
@@ -718,6 +729,13 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 
 		LuaTable t(L);
 		tribe_descr.load_helptexts(descrs.get_mutable_worker_descr(di), t);
+
+		// Update the player's worker statistics
+		iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
+			if (&player->tribe() == &tribe_descr) {
+				player->init_statistics();
+			}
+		}
 	} else if (property == "add_building") {
 		const std::string buildingname = luaL_checkstring(L, 5);
 		Notifications::publish(Widelands::NoteMapObjectDescription(
@@ -759,6 +777,8 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 
 	if (property == "experience") {
 		worker_descr.set_needed_experience(luaL_checkuint32(L, 5));
+	} else if (property == "becomes") {
+		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
 	} else if (property == "programs") {
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string prog_name = luaL_checkstring(L, 6);
@@ -858,6 +878,9 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			report_error(
 			   L, "modify_unit - productionsite - programs: invalid command '%s'", cmd.c_str());
 		}
+	} else if (property == "enhancement") {
+		std::unique_ptr<LuaTable> tbl(new LuaTable(L));
+		psdescr.set_enhancement(descrs, *tbl);
 	} else {
 		report_error(
 		   L, "modify_unit not supported yet for productionsite property '%s'", property.c_str());

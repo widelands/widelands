@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,9 @@ constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 /// Filesystem names and intervals for savegames
 const std::string kSaveDir = "save";
 const std::string kCampVisFile = "save/campaigns.conf";
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 constexpr const char* const kTrainingWheelsFile = "save/training_wheels.conf";
+#endif
 const std::string kSavegameExtension = ".wgf";
 const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes

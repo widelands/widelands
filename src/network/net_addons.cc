@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,9 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
+#include "wlapplication_options.h"
+
+namespace AddOns {
 
 // silence warnings triggered by curl.h
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
@@ -84,7 +87,12 @@ refresh_remotes_callback(char* received_data, size_t, const size_t char_count, s
 	return char_count;
 }
 
-constexpr uint16_t kCurrentListVersion = 1;
+static inline std::string get_addons_server_name() {
+	return std::string("https://raw.githubusercontent.com/") +
+	       get_config_string("addon_server", "widelands/wl_addons_server/master") + "/";
+}
+
+constexpr unsigned kCurrentListVersion = 2;
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
 	// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
@@ -100,7 +108,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	std::vector<AddOnInfo> result_vector;
 
-	set_url_and_timeout("https://raw.githubusercontent.com/widelands/wl_addons_server/master/list");
+	// For backwards compatibility, the server keeps multiple versions of the list
+	set_url_and_timeout(get_addons_server_name() + "list_" + std::to_string(kCurrentListVersion));
 
 	std::string output;
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &output);
@@ -129,7 +138,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	};
 	auto next_number = [next_word](std::string& str) {
 		const std::string word = next_word(str);
-		return std::strtol(word.c_str(), nullptr, 10);
+		return std::strtoll(word.c_str(), nullptr, 10);
 	};
 
 	const uint16_t list_version = next_number(output);
@@ -147,6 +156,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		const std::string descname = next_word(output);
 		const std::string descr = next_word(output);
 		const std::string author = next_word(output);
+		info.unlocalized_descname = descname;
+		info.unlocalized_description = descr;
+		info.unlocalized_author = author;
 		info.descname = [descname]() { return descname; };
 		info.description = [descr]() { return descr; };
 		info.author = [author]() { return author; };
@@ -154,41 +166,19 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		info.upload_timestamp = next_number(output);
 		info.download_count = next_number(output);
-		info.votes = next_number(output);
-		{
-			std::string word = next_word(output);
-			info.average_rating = std::strtof(word.c_str(), nullptr);
-
-			// Some locales require the string to use a comma instead of a period as decimal point.
-			// C++11 doesn't seem to have an easy way around this, and I don't want to mess
-			// with the locale setting. So we use snprintf to check whether the string was
-			// converted correctly, and if it wasn't we replace the period with a comma.
-			const size_t len = word.length() + 1;
-			char buffer[16];
-			std::snprintf(buffer, len, "%f", static_cast<double>(info.average_rating));
-			if (word != buffer) {
-				const size_t pos = word.find('.');
-				if (pos == std::string::npos) {
-					throw wexception("Floating point conversion: Expected decimal point");
-				}
-				word.at(pos) = ',';
-				info.average_rating = std::strtof(word.c_str(), nullptr);
-				std::snprintf(buffer, len, "%f", static_cast<double>(info.average_rating));
-				if (word != buffer) {
-					throw wexception(
-					   "Floating point conversion: Only period and comma as decimal points supported");
-				}
-			}
+		for (uint32_t& vote : info.votes) {
+			vote = next_number(output);
 		}
+
 		for (size_t comments = next_number(output); comments; --comments) {
 			const std::string name = next_word(output);
 			const std::string msg = next_word(output);
-			const uint32_t v = next_number(output);
+			const std::string v = next_word(output);
 			const uint32_t t = next_number(output);
-			info.user_comments.push_back(AddOnComment{name, msg, v, t});
+			info.user_comments.push_back(AddOnComment{name, msg, string_to_version(v), t});
 		}
 
-		info.version = next_number(output);
+		info.version = string_to_version(next_word(output));
 		info.i18n_version = next_number(output);
 		info.total_file_size = next_number(output);
 
@@ -216,6 +206,11 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			                 static_cast<unsigned>(info.file_list.files.size()),
 			                 static_cast<unsigned>(info.file_list.locales.size()),
 			                 static_cast<unsigned>(info.file_list.checksums.size()));
+		}
+		for (size_t screenies = next_number(output); screenies; --screenies) {
+			const std::string s_name = next_word(output);
+			const std::string s_descr = next_word(output);
+			info.screenshots[s_name] = s_descr;
 		}
 
 		info.verified = next_word(output) == "verified";
@@ -264,9 +259,7 @@ void NetAddons::download_addon_file(const std::string& name,
                                     const std::string& output) {
 	init();
 
-	set_url_and_timeout(
-	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/addons/") +
-	   name);
+	set_url_and_timeout(get_addons_server_name() + "addons/" + name);
 
 	FileWrite fw;
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
@@ -294,9 +287,7 @@ std::string NetAddons::download_i18n(const std::string& name,
 	const std::string output =
 	   temp_dirname + FileSystem::file_separator() + locale + kTempFileExtension;
 
-	set_url_and_timeout(
-	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/i18n/") +
-	   name + "/" + locale);
+	set_url_and_timeout(get_addons_server_name() + "i18n/" + name + "/" + locale);
 
 	FileWrite fw;
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
@@ -315,4 +306,28 @@ std::string NetAddons::download_i18n(const std::string& name,
 	return output;
 }
 
+std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
+	init();
+
+	std::string temp_dirname =
+	   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
+	g_fs->ensure_directory_exists(temp_dirname);
+
+	const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
+
+	set_url_and_timeout(get_addons_server_name() + "screenshots/" + name + "/" + screenie);
+
+	FileWrite fw;
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
+	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &fw);
+
+	const CURLcode res = curl_easy_perform(curl_);
+
+	fw.write(*g_fs, output);
+
+	return res == CURLE_OK ? output : "";
+}
+
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")
+
+}  // namespace AddOns

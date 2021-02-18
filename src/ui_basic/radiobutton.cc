@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ Radiobutton::~Radiobutton() {
  * button states.
  */
 void Radiobutton::button_clicked() {
-	group_.set_state(id_);
+	group_.set_state(id_, true);
 	play_click();
 }
 
@@ -110,10 +110,13 @@ int32_t Radiogroup::add_button(Panel* const parent,
  * Change the state and set button states to reflect the change.
  *
  * Args: state  the ID of the checked button (-1 means don't check any button)
+ *       send_signal Whether to trigger the `clicked`, `changed` and `changedto` signals.
  */
-void Radiogroup::set_state(int32_t const state) {
+void Radiogroup::set_state(int32_t const state, const bool send_signal) {
 	if (state == state_) {
-		clicked();
+		if (send_signal) {
+			clicked();
+		}
 		return;
 	}
 
@@ -121,8 +124,10 @@ void Radiogroup::set_state(int32_t const state) {
 		btn->set_state(btn->id_ == state);
 	}
 	state_ = state;
-	changed();
-	changedto(state);
+	if (send_signal) {
+		changed();
+		changedto(state);
+	}
 }
 
 /**

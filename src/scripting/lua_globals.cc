@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -231,8 +231,13 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 */
 static int L__(lua_State* L) {
 	if (const TextdomainInfo* td = current_textdomain(L)) {
-		i18n::Textdomain dom(td->first);
-		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		if (td->second) {
+			i18n::AddOnTextdomain dom(td->first);
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		} else {
+			i18n::Textdomain dom(td->first);
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		}
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	}
@@ -264,6 +269,7 @@ static int L_ngettext(lua_State* L) {
 	}
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
 		lua_pushstring(L, dngettext(td->first.c_str(), msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
@@ -290,6 +296,7 @@ static int L_pgettext(lua_State* L) {
 	const char* msgid = luaL_checkstring(L, 2);
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
 		lua_pushstring(L, dpgettext_expr(td->first.c_str(), msgctxt, msgid));
 	} else {
 		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
@@ -325,6 +332,7 @@ static int L_npgettext(lua_State* L) {
 	}
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
 		lua_pushstring(L, dnpgettext_expr(td->first.c_str(), msgctxt, msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));

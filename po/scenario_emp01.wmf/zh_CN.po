@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Roy Luo <1598359376@qq.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2020-12-22 15:49+0000\n"
+"Last-Translator: Roy Luo <1598359376@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,86 +19,86 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "修建一座木质碉堡"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
-msgstr ""
+msgstr "木质碉堡"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "在森林东侧的红房子标志处建一座木质碉堡，位于你的临时总部的右边。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "修建一间伐木房屋"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "伐木房屋"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr ""
+msgstr "在红房子标志处修建一间伐木房屋，位于你的临时总部南边。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "修建两间伐木房屋和一座锯木厂。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "两间伐木房屋和一座锯木厂。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr ""
+msgstr "一旦有足够的空间，再修建两间或者更多伐木房屋和一座锯木厂。 "
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "修建一间护林小屋"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
-msgstr ""
+msgstr "护林小屋"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr ""
+msgstr "修建一间护林小屋来保护这个岛屿上的木材资源。 "
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr ""
+msgstr "修建一座采石场"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
-msgstr ""
+msgstr "采石场"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "在南边修建一座采石场，从岩石中采集一些花岗石和大理石。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "这些物品可在今后用作建筑材料。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "黑夜"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "卢图斯日记"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -105,7 +106,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "我们的帝国到底发生了什么？我真的在问这个问题–为什么我的国王禁止我与那个丑陋而又野蛮的部族作战，那个部族一开始与我们友善相处，后来却在最黑暗的夜晚袭击了我们的军队？ "
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -115,7 +116,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "我被派往北部边境巡逻，率领着一支150人的军队。那里靠近Galdin山脉，在一片美丽而又古老的广袤森林里。很快，我们就遇到了一个野蛮部族，他们一开始与我们友善相处，我们的几个人甚至和他们做了交易，他们的孩子来找我们，想要我们干净整洁的制服和武器。"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -126,7 +127,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "我们在那个地区的第五个晚上，他们无缘无故地袭击了我们。我被俘获到了他们的部族首领那里，我发现自己失去了几十个好弟兄。他一边朝我吐唾沫，一边嘲笑我，并且叫我永远离开这片土地。他不想要新的土地，也不想要我们的土地，但他告诉我，这片森林是他们的土地 –他们会一直呆在自己的地盘上，直到最后一个族人的灵魂被夺走！ "
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -135,7 +136,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr ""
+msgstr "三个星期后，我回到 Fremil 接受国王的训示。他对野蛮人非常愤怒，却禁止对这些部族进行任何攻击。他认为我们的军队太弱了，以至于无法在与野蛮人的战争中存活下来。"
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -144,11 +145,11 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "尽管如此，我还是认为，如果不与这些野蛮人作战，我是无法洗刷耻辱的。所以，我乘船离开Fremil去向南方的某个地方，为自己寻找一个新的世界伴随着新生活。现在我正和我的家人，一些朋友，以及我最勇敢的战士们一起航行在Perl海湾。 "
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
-msgstr ""
+msgstr "波涛汹涌的大海"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:99
@@ -157,23 +158,23 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "似乎在Perl海湾航行是我们犯下的最大过错之一。上天惩罚我们，将我们推入一场黑暗的狂风暴雨之中。我真的不知道海浪高过我们的船舷已经过去了多少时间，但现在到船舱外面去仍无异于自杀。"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr ""
+msgstr "我们的船严重受损，进水越来越多。如果我们能够这个漆黑的夜晚浩劫余生，我们将永远感激众神。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:108
 msgid "Survivors"
-msgstr ""
+msgstr "幸存者"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "最后，众神与我们同在！"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -181,7 +182,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr ""
+msgstr "我们在一个不知名的海滩靠岸，找到了生长在海岸上的棕榈树，得以片刻宁静的休息。但这已经是最好的了。事实上：当我今早醒来时，我们的周围除了沙子之外一无所有。 "
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -189,15 +190,15 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "我们似乎真的停靠在了这片遥远的沙漠中仅存的棕榈树下。我担心，我们的船只得不到及时有效的修理与帮助。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "A Foreboding"
-msgstr ""
+msgstr "不祥的预感"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr " 塞勒杜斯焦急地环顾四周…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
@@ -205,7 +206,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr ""
+msgstr "陛下，我担心我们在这片异乡的土地上并不安全。谁知道会有什么可怕的生物生活在森林的另一边，在那片辽阔的沙漠里？如果这些生物进入树林等待时机攻击我们呢？"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -213,7 +214,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr ""
+msgstr "好吧，也许我的恐惧被误导了，但是在森林里保持警惕总是不会错的  – 这样我们就可以提前发现潜在的敌人。"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -221,51 +222,51 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "你真应该在森林的东部修建一座木质碉堡。那样的话，我的一个手下就可以在黑暗中守望，保护我们免受这些生物的伤害。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
-msgstr ""
+msgstr "一切平安"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "塞勒杜斯松了一口气说…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "陛下，我看到木质碉堡的建造已经完成，所以我指派了一名我方最优秀的战士去驻守沙漠。"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr ""
+msgstr "这是一个很好的进步。现在我们感觉安全了一点，可以期待修葺我们的船只。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Young Amalea"
-msgstr ""
+msgstr "年轻的亚玛利亚"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "亚玛利亚微笑着..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "你好，卢图斯！我刚在外面遇见了塞勒杜斯。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "他告诉了我关于木质碉堡的事。好吧，我不认为我们现在需要更多的木质碉堡 – 相反，我们现在可以集中精力做些其他事情。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -273,11 +274,11 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "显而易见，我们需要木材来修理我们的船。所以，我昨天穿过森林，打算找个好地方修建一间伐木房屋，在我们的临时总部南边找到了一个合适的地方。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "亚玛利亚建议…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -286,7 +287,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "我得到的消息说我们的第一个伐木工人今天已经开始工作了，等他清理出足够的空间再建造两个伐木房屋的话，我们就可以砍伐更多原木了。这也许是个不错的主意。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -295,30 +296,30 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "但不幸的是，这些原木对修理我们的船毫无用处 – 我们需要把它们改成厚木板，每艘船和每一栋更大的建筑物都需要这些厚木板。所以我们应该在一有足够空间的条件下就立即修建一座锯木厂。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "亚玛利亚进来了…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "我有两件重要的事要谈…首先是好消息： "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "我注意到锯木厂的已经建造完成，所以我们可以开始把伐木工人砍伐来的原木改制成厚木板。 "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "但坏消息是我们的伐木工人以惊人的速度砍伐，这个岛上几乎没有树了。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -326,42 +327,42 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "这些树为我们提供了庇护所，用以躲避从沙漠席卷而来的沙尘暴。在炎热的日子里提供树荫，庇护是许多温顺的动物。我们不应该把这座岛屿变成沙漠。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "卢图斯，请找一位能够看护树苗的人来帮我们种树吧。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "考虑将来"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
-msgstr ""
+msgstr "塞勒杜斯注释..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "陛下，我想到了这块土地南岸还有一些岩石。也许我们可以开采一些有用的花岗石和漂亮的大理石。"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr ""
+msgstr "修理我们的船需要花费几个星期的时间，可是不管怎样，我们现在收获的资源将是我们在另一片土地上修建坚固而巨大的建筑物的基础。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:210
 msgid "A Step Forward"
-msgstr ""
+msgstr "向前一步"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "塞勒杜斯看起来很兴奋…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
@@ -369,16 +370,16 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "陛下，今天我们离我们的第一座城堡更近了。南部的采石场今天已开始工作，不久将为我们提供花岗石和美丽的大理石。"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "现在我们真的可以期待在另外一个岛上定居了。 "
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Mission Complete"
-msgstr ""
+msgstr "任务完成"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:224
@@ -386,41 +387,41 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr ""
+msgstr "今天我收到消息说我们的船只已经全部修好了。此时，我们的人正忙着在把所有东西都装上我们刚修好的船，希望它能够比上次表现的更好。 "
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr ""
+msgstr "今晚将是我们在这个岛上的最后一夜。明天早上我们将离开，寻找一个新的地方来继续我们的漂泊。"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "我仍然在想我们是否还能够再见到 Fremil。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "你已经完成了本次任务。如果你愿意的话，你可以继续玩下去，也可以继续下一个任务。"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:237
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "平安半岛"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "塞勒杜斯讲话："
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "陛下，你让这个半岛变得非常安全，现在是时候继续前进了！"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,6 +123,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	button_box_.add_inf_space();
 
 	display_mode_.selected.connect([this]() { fill_table(); });
+	table_.cancel.connect([this]() { die(); });
 
 	move_to_top();
 }
@@ -169,8 +170,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		// In the toplevel directory we also need to include add-on maps –
 		// but only in the load screen, not in the save screen!
 		if (include_addon_maps_) {
-			for (auto& addon : g_addons) {
-				if (addon.first.category == AddOnCategory::kMaps) {
+			for (auto& addon : AddOns::g_addons) {
+				if (addon.first.category == AddOns::AddOnCategory::kMaps) {
 					for (const std::string& mapname : g_fs->list_directory(
 					        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
 						files.insert(mapname);

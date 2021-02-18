@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
 using Widelands::Message;
@@ -126,13 +127,14 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	   g_image_cache->get("images/wui/messages/message_archived.png"), _("Show Archive"));
 	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
 
-	centerviewbtn_ =
-	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
-	                  g_image_cache->get("images/wui/menus/goto.png"),
-	                  as_tooltip_text_with_hotkey(
-	                     /** TRANSLATORS: Tooltip in the messages window */
-	                     _("Center main mapview on location"), "g", UI::PanelStyle::kWui));
+	centerviewbtn_ = new UI::Button(
+	   this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
+	   archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
+	   g_image_cache->get("images/wui/menus/goto.png"),
+	   as_tooltip_text_with_hotkey(
+	      /** TRANSLATORS: Tooltip in the messages window */
+	      _("Center main mapview on location"),
+	      shortcut_string_for(KeyboardShortcut::kInGameMessagesGoto), UI::PanelStyle::kWui));
 	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
 	centerviewbtn_->set_enabled(false);
 
@@ -243,11 +245,24 @@ void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Mess
 	}
 
 	assert(iplayer().player().messages()[id] == &message);
-	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Mode::kArchive) != (status == Message::Status::kArchived)) {
 		toggle_mode();
 	}
+
+	if (auto* entry = list->find(id.value())) {
+		const uintptr_t e = reinterpret_cast<uintptr_t>(entry->entry());
+		for (uint32_t i = 0; i < list->size(); ++i) {
+			if (e == (*list)[i]) {
+				list->clear_selections();
+				list->scroll_to_item(i);
+				list->select(i);
+				return;
+			}
+		}
+		NEVER_HERE();
+	}
+
 	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value());
 	update_record(te, message);
 	list->sort();
@@ -368,107 +383,45 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 	if (code.sym == SDLK_ESCAPE) {
 		return UI::Window::handle_key(true, code);
 	}
+
 	if (down) {
-		switch (code.sym) {
-		// Don't forget to change the tooltips if any of these get reassigned
-		case SDLK_g:
+		if (matches_shortcut(KeyboardShortcut::kCommonDeleteItem, code)) {
+			archive_or_restore();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesGoto, code)) {
 			if (centerviewbtn_->enabled()) {
 				center_view();
 			}
 			return true;
-
-		case SDLK_KP_0:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_0:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kAllMessages);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_1:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_1:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kGeologists);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_2:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_2:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kEconomy);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_3:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_3:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kSeafaring);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_4:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_4:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kWarfare);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_5:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_5:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kScenario);
-				return true;
-			}
-			return false;
-
-		case SDLK_DELETE:
-			archive_or_restore();
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterAll, code)) {
+			filter_messages(Widelands::Message::Type::kAllMessages);
 			return true;
-		case SDLK_TAB:
-			// trigger some default handling here to avoid an endless loop
-			// (if not handled here then handling is passed down to the table 'list',
-			// but tables pass tab key handling back to their parents)
-			return UI::Panel::handle_key(down, code);
-		case SDL_SCANCODE_KP_PERIOD:
-		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		default:
-			break;  // not handled
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterGeologists, code)) {
+			filter_messages(Widelands::Message::Type::kGeologists);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterEconomy, code)) {
+			filter_messages(Widelands::Message::Type::kEconomy);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterSeafaring, code)) {
+			filter_messages(Widelands::Message::Type::kSeafaring);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterWarfare, code)) {
+			filter_messages(Widelands::Message::Type::kWarfare);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterScenario, code)) {
+			filter_messages(Widelands::Message::Type::kScenario);
+			return true;
 		}
 	}
 
-	return list->handle_key(down, code);
+	return UI::Panel::handle_key(down, code);
 }
 
 void GameMessageMenu::archive_or_restore() {
@@ -570,7 +523,8 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
-		   _("Show all messages"), pgettext("hotkey", "Alt+0"), UI::PanelStyle::kWui));
+		   _("Show all messages"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll),
+		   UI::PanelStyle::kWui));
 	}
 }
 
@@ -580,19 +534,25 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show geologists' messages only"), pgettext("hotkey", "Alt+1"), UI::PanelStyle::kWui));
+	   _("Show geologists' messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists),
+	   UI::PanelStyle::kWui));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show economy messages only"), pgettext("hotkey", "Alt+2"), UI::PanelStyle::kWui));
+	   _("Show economy messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy), UI::PanelStyle::kWui));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show seafaring messages only"), pgettext("hotkey", "Alt+3"), UI::PanelStyle::kWui));
+	   _("Show seafaring messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring), UI::PanelStyle::kWui));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show warfare messages only"), pgettext("hotkey", "Alt+4"), UI::PanelStyle::kWui));
+	   _("Show warfare messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare), UI::PanelStyle::kWui));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show scenario messages only"), pgettext("hotkey", "Alt+5"), UI::PanelStyle::kWui));
+	   _("Show scenario messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario), UI::PanelStyle::kWui));
 }
 
 /**
@@ -688,8 +648,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		}
 		break;
 	}
-	archivebtn_->set_tooltip(
-	   as_tooltip_text_with_hotkey(button_tooltip,
-	                               /** TRANSLATORS: Del is the "Delete" key on the keyboard */
-	                               pgettext("hotkey", "Del"), UI::PanelStyle::kWui));
+	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem),
+	   UI::PanelStyle::kWui));
 }

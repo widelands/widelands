@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
-"PO-Revision-Date: 2020-10-02 08:02+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-13 15:47+0000\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +44,7 @@ msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr "Olen perustanut pienen kylän, jossa on kaikkein tärkeimmät rakennukset. Sinulla on myös tarpeeksi tuotteita, joten sinun ei tarvitse huolehtia aseiden tuotannosta. Oikeassa pelissä, sinulla ei tule olemaan tätä nautintoa."
+msgstr "Olen perustanut pienen kylän jossa on kaikki tärkeimmät rakennukset. Sinulla on myös tarpeeksi varusteita, joten sinun ei tarvitse huolehtia aseiden tuotannosta. Oikeassa pelissä sinulla ei tule olemaan tätä ylellisyyttä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid "Soldiers’ abilities"
@@ -55,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Uudet sotilaat luodaan eritavalla tavallisista työntekijöistä: rekrytoidut kävelevät varastolta (tai sinun päämajasta) kasarmille, missä he saavat peruskoulutuksen ja muuttuvat sotilaiksi. Tavalliset Barbaarisotilaat eivät käytä haarniskoja, he tarvitsevat ainoastaan kirveitä."
+msgstr "Uudet sotilaat luodaan eri tavalla kuin tavalliset työläiset : värvätyt kävelevät varastolta (tai päämajastasi) kasarmille, missä he saavat peruskoulutuksen ja muuttuvat sotilaiksi. Tavalliset barbaarisotilaat eivät käytä haarniskoja, he tarvitsevat ainoastaan kirveitä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -64,7 +65,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "Katso sotilaita, jotka ovat matkalla meidän sotilasrakennuksiin. He näyttävät erilaisilta tavallisiin työntekijöihin verratuna: heidän yläpuolella on iskunkestopalkit, jotka kertovat jäljellä olevan iskunkeston ja heillä on neljä symbolia, jotka symbolisoivat kunkin sotilaan tämänhetkistä tasoa neljässä eri kategoriassa: terveys, hyökkäys, puolustus ja väistely."
+msgstr "Katso sotilaita, jotka ovat matkalla sotilasrakennuksiimme. He näyttävät erilaisilta tavallisiin työntekijöihin verratuna: heidän yläpuolellaan on terveyspalkit, jotka kertovat jäljellä olevan terveyden ja heillä on neljä symbolia, jotka kuvaavat kunkin sotilaan tämänhetkistä tasoa neljässä eri kategoriassa: terveys, hyökkäys, puolustus ja väistely."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
@@ -72,7 +73,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Jos Barbaarisotilas on täysin koulutettu, hänellä on tason %1% terveys, %2% hyökkäys, %3% puolustus ja %4% väistely. Silloin se on pelottava sotilas! Yksilöllisillä kyvyillä on seuraavat merkitykset:"
+msgstr "Jos barbaarisotilas on täysin koulutettu, hänellä on tason %1% terveys, %2% hyökkäys, %3% puolustus ja %4% väistely. Yksilöllisillä kyvyillä on seuraavat merkitykset:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"

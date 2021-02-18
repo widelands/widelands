@@ -12,12 +12,12 @@ descriptions:new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {5, 35} },
-      bridge_normal_e = { hotspot = {-2, 11} },
-      bridge_busy_e = { hotspot = {-2, 11} },
-      bridge_normal_se = { hotspot = {5, 2} },
-      bridge_busy_se = { hotspot = {5, 2} },
-      bridge_normal_sw = { hotspot = {36, 6} },
-      bridge_busy_sw = { hotspot = {36, 3} }
+      bridge_normal_e =  { hotspot = {-1, 15}},
+      bridge_busy_e =    { hotspot = {-1, 15}},
+      bridge_normal_se = { hotspot = {5, 4}},
+      bridge_busy_se =   { hotspot = {5, 4}},
+      bridge_normal_sw = { hotspot = {40, 1}},
+      bridge_busy_sw =   { hotspot = {40, 1}}
    },
    spritesheets = {
       flag = {
@@ -29,7 +29,7 @@ descriptions:new_tribe {
       }
    },
 
-   bridge_height = 8,
+   bridge_height = 6,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {
@@ -73,7 +73,7 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Log, part 1
                   pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
                   -- TRANSLATORS: Helptext for an amazon ware: Log, part 2
-                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. They are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
+                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. The resulting logs are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
                }
             }
          },
@@ -164,7 +164,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Cassava Root
-                  pgettext("amazons_ware", "Cassava roots are a special kind of root produced at cassava farms. The Amazons like their strong taste for making bread and they also feed their tapirs with them.")
+                  pgettext("amazons_ware", "Cassava roots are a special kind of root produced at cassava root plantations. The Amazons like their strong taste for making bread and they also feed their tapirs with them.")
                }
             }
          },
@@ -174,7 +174,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
-                  pgettext("amazons_ware", "Cocoa beans are gathered from cocoa bushes by a cocoa farmer. They are used for producing chocolate.")
+                  pgettext("amazons_ware", "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used for producing chocolate.")
                }
             }
          },
@@ -185,7 +185,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Bread
-                  pgettext("amazons_ware", "This tasty bread is made in cookeries out of cassava root and water. It is the basic ingredient of a ration that is made by a food preserver. Soldiers like it too.")
+                  pgettext("amazons_ware", "This tasty bread is made in cassava root cookeries out of cassava root and water. It is the basic ingredient of a ration that is made by a food preserver. Soldiers like it too.")
                }
             }
          },
@@ -206,7 +206,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Fish
-                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -216,9 +216,9 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Meat, part 1
-                  pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
+                  pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunter-gatherers."),
                   -- TRANSLATORS: Helptext for an amazon ware: Meat, part 2
-                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -229,7 +229,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Ration, part 1
-                  pgettext("amazons_ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
+                  pgettext("amazons_ware", "A small bite to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on her scouting trips."),
                   -- TRANSLATORS: Helptext for an amazon ware: Ration, part 2
                   pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried using a charcoal fire.")
                }
@@ -348,7 +348,7 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 1
                   pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stone carver. In combination with a tunic, it is the equipment to fit out young soldiers."),
                   -- TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
-                  pgettext("amazons_ware", "It is used by the amazon hunters as well.")
+                  pgettext("amazons_ware", "It is used by the amazon hunter-gatherers as well.")
                }
             }
          },
@@ -1239,7 +1239,9 @@ descriptions:new_tribe {
          name = "amazons_port",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon warehouse: Port
-            purpose = pgettext("amazons_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+            purpose = pgettext("amazons_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
+            -- TRANSLATORS: Note helptext for an amazon warehouse: Port
+            note = pgettext("amazons_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
          }
       },
 
@@ -1393,7 +1395,7 @@ descriptions:new_tribe {
          name = "amazons_food_preserver",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
-            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and miners."),
+            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Food Preserver
             performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 17):bformat(17))
          }
@@ -1595,18 +1597,11 @@ descriptions:new_tribe {
    carrier = "amazons_carrier",
    carrier2 = "amazons_tapir",
    geologist = "amazons_geologist",
+   scouts_house = "amazons_scouts_hut",
    soldier = "amazons_soldier",
    ship = "amazons_ship",
    ferry = "amazons_ferry",
    port = "amazons_port",
-
-   toolbar = {
-      left_corner = image_dirname .. "toolbar_left_corner.png",
-      left = image_dirname .. "toolbar_left.png",
-      center = image_dirname .. "toolbar_center.png",
-      right = image_dirname .. "toolbar_right.png",
-      right_corner = image_dirname .. "toolbar_right_corner.png"
-   }
 }
 
 pop_textdomain()

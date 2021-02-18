@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,6 +136,7 @@ Map::Map()
      scenario_types_(NO_SCENARIO),
      width_(0),
      height_(0),
+     localize_author_(false),
      pathfieldmgr_(new PathfieldManager),
      allows_seafaring_(false),
      waterway_max_length_(0) {
@@ -511,6 +512,7 @@ void Map::create_empty_map(const EditorGameBase& egbase,
 	set_size(w, h);
 	set_name(name);
 	set_author(author);
+	set_localize_author(false);  // no author i18n markup by default
 	set_description(description);
 	set_nrplayers(0);
 	{
@@ -970,6 +972,10 @@ void Map::set_filename(const std::string& filename) {
 
 void Map::set_author(const std::string& author) {
 	author_ = author;
+}
+
+void Map::set_localize_author(const bool l) {
+	localize_author_ = l;
 }
 
 void Map::set_name(const std::string& name) {
@@ -1722,13 +1728,10 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		}
 	}
 
-	if (cnt_mineable == 6) {
-		if (ismine) {
-			*ismine = true;
-		}
-		return BaseImmovable::SMALL;
+	if (ismine) {
+		*ismine = (cnt_mineable == 6);
 	}
-	if (cnt_mineable || cnt_walkable) {
+	if ((cnt_mineable && cnt_mineable < 6) || cnt_walkable) {
 		return BaseImmovable::NONE;
 	}
 
@@ -1753,9 +1756,6 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		}
 	}
 
-	if (ismine) {
-		*ismine = false;
-	}
 	return buildsize;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,10 +88,11 @@ struct GamePreloadPacket : public GameDataPacket {
 	 * and players can not influence the world of existing maps.
 	 * Tribes add-ons however are selected when starting a new game.
 	 */
-	const AddOnRequirements& required_addons() const {
+	const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	const std::string& get_active_training_wheel() const {
 		return active_training_wheel_;
 	}
@@ -99,6 +100,7 @@ struct GamePreloadPacket : public GameDataPacket {
 	bool get_training_wheels_wanted() const {
 		return training_wheels_wanted_ || !active_training_wheel_.empty();
 	}
+#endif
 
 private:
 	std::string minimap_path_;
@@ -106,9 +108,11 @@ private:
 	std::string background_;
 	std::string background_theme_;
 	std::string win_condition_;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::string active_training_wheel_;
 	// Initializing everything to make cppcheck happy.
 	bool training_wheels_wanted_ = false;
+#endif
 	Time gametime_ = Time(0);
 	uint8_t player_nr_ = 0U;  // The local player idx
 	uint8_t number_of_players_ = 0U;
@@ -116,7 +120,7 @@ private:
 	time_t savetimestamp_ = 0;
 	GameController::GameType gametype_ = GameController::GameType::kUndefined;
 	// Required add-ons with the recommended version
-	AddOnRequirements required_addons_;
+	AddOns::AddOnRequirements required_addons_;
 };
 }  // namespace Widelands
 

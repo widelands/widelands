@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 
 #include "base/md5.h"
 #include "base/random.h"
+#include "economy/flag_job.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
@@ -53,7 +54,9 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 class TrainingWheels;
+#endif
 enum class StockPolicy;
 
 enum {
@@ -197,6 +200,7 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	bool acquire_training_wheel_lock(const std::string& objective);
 	void release_training_wheel_lock();
 	void mark_training_wheel_as_solved(const std::string& objective);
@@ -205,6 +209,7 @@ public:
 
 	bool training_wheels_wanted() const;
 	std::string active_training_wheel() const;
+#endif
 
 	void postload() override;
 
@@ -264,7 +269,7 @@ public:
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
 	void send_player_build_waterway(int32_t, Path&);
-	void send_player_flagaction(Flag&);
+	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
@@ -428,8 +433,10 @@ private:
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::unique_ptr<TrainingWheels> training_wheels_;
 	bool training_wheels_wanted_;
+#endif
 
 	bool replay_;
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,8 @@ public:
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
-	void set_style(const UI::FontStyleInfo& style);
+	void set_style(FontStyle);
+	void set_style_override(const FontStyleInfo&);
 	void set_font_scale(float scale);
 
 protected:
@@ -111,7 +112,10 @@ private:
 	std::string text_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	const FontStyleInfo* font_style_;
+	FontStyle font_style_;
+	const FontStyleInfo* font_style_override_;
+	const FontStyleInfo& font_style() const;
+
 	float font_scale_;
 	int fixed_width_;
 };

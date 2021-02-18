@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,8 @@ Flag::Flag()
      ware_capacity_(8),
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
-     always_call_for_flag_(nullptr) {
+     always_call_for_flag_(nullptr),
+     act_pending_(false) {
 	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 }
 
@@ -125,7 +126,8 @@ Flag::Flag(EditorGameBase& egbase,
      ware_capacity_(8),
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
-     always_call_for_flag_(nullptr) {
+     always_call_for_flag_(nullptr),
+     act_pending_(false) {
 	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 
 	set_owner(owning_player);
@@ -203,7 +205,7 @@ void Flag::set_economy(Economy* const e, WareWorker type) {
 	}
 
 	for (const FlagJob& temp_job : flag_jobs_) {
-		if (temp_job.request->get_type() == type) {
+		if (temp_job.request && temp_job.request->get_type() == type) {
 			temp_job.request->set_economy(e);
 		}
 	}
@@ -910,15 +912,79 @@ void Flag::destroy(EditorGameBase& egbase) {
 	PlayerImmovable::destroy(egbase);
 }
 
+void Flag::receive_worker(Game&, Worker&) {
+	// Callback when a requested scout arrives.
+	// He knows what to do next by himself, nothing to do for us currently.
+}
+
+void Flag::do_schedule_act(Game& game, const Duration& d) {
+	if (act_pending_) {
+		return;
+	}
+	act_pending_ = true;
+	schedule_act(game, d);
+}
+
+void Flag::act(Game& game, uint32_t) {
+	assert(act_pending_);
+	act_pending_ = false;
+
+	bool need_act = false;
+	for (auto it = flag_jobs_.begin(); it != flag_jobs_.end();) {
+		bool erase = false;
+		if (it->type == FlagJob::Type::kScout) {
+			ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(
+			   *this, owner().tribe().scouts_house(), true);
+			if (ps) {
+				Worker* worker = ps->working_positions()[0].worker.get(game);
+				assert(worker);
+				if (!worker->top_state().objvar1.is_set() && worker->get_location(game) == ps &&
+				    !ps->has_forced_state()) {
+					// Success! Tell the productionsite to instruct its worker
+					// to come and scout here the next time he goes to work.
+					ps->set_next_program_override(game, "targeted_scouting", this);
+					get_owner()->show_watch_window(game, *worker);
+					erase = true;
+				} else {
+					// No scout is in the building just now. Try again a bit later
+					need_act = true;
+				}
+			} else {
+				// No scout's house found
+				need_act = true;
+			}
+		}
+		if (erase) {
+			it = flag_jobs_.erase(it);
+		} else {
+			++it;
+		}
+	}
+
+	if (need_act) {
+		do_schedule_act(game, Duration(1000));
+	}
+}
+
 /**
  * Add a new flag job to request the worker with the given ID,
  * and to execute the given program once it's completed.
  */
-void Flag::add_flag_job(Game&, DescriptionIndex const workerware, const std::string& programname) {
+void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
 	FlagJob j;
 
-	j.request = new Request(*this, workerware, Flag::flag_job_request_callback, wwWORKER);
-	j.program = programname;
+	j.request = nullptr;
+	j.type = t;
+	switch (t) {
+	case FlagJob::Type::kGeologist:
+		j.program = "expedition";
+		j.request =
+		   new Request(*this, owner().tribe().geologist(), Flag::flag_job_request_callback, wwWORKER);
+		break;
+	case FlagJob::Type::kScout:
+		do_schedule_act(game, Duration(10));
+		break;
+	}
 
 	flag_jobs_.push_back(j);
 }

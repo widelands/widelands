@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2019
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
-"PO-Revision-Date: 2020-10-11 07:12+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2020-11-29 22:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -328,17 +328,17 @@ msgid ""
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Tha raointean togail mòra gann sna h-eileanan beaga seo. Thoir am prìomhachas air togalaichean mòra annta. Feumaidh tu togalach mòr an airm a thogail aig amannan mus ruig thu an t-ath-eilean. Cha dèid gu math leis an IF."
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+#: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
 msgstr "Astoria 2"
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautiful land. Try every player!"
-msgstr "Cluich eaconamach fhada air tìr àlainn. Feuch gach cluicheadair!"
-
-#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+#: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
 msgstr "pbuczny@gmail.com – air a dheasachadh le Nordfriese"
+
+#: ../../data/maps/Astoria_2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Cluich eaconamach fhada air tìr àlainn. Feuch gach cluicheadair!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -370,16 +370,16 @@ msgid ""
 "another confrontation."
 msgstr "Ge b’ e gleus annasach an nàdair no cruthachadh aig dia craicte (agus dèidheil air geamannan) a th’ ann, tha am blàr seo a’ feitheamh ri dithis nàmhad ach an dèid iad an aghaidh càch a chèile."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:8
+#: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
 msgstr "Eilean na comaid"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:9
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
+#: ../../data/maps/Comet_Island.wmf/elemental:9
+#: ../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
 msgstr "Nasenbaer – air a dheasachadh le king_of_nowhere"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:10
+#: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -388,7 +388,7 @@ msgid ""
 "of this island before other tribes will follow."
 msgstr "Tha eilean beag gun ainm beagan mhìltean air falbh o oirthir Gherion. Cha robh adhbhar gus a sheòladh ann gu ruige seo, ach thàinig bàla teine sìos às na speuran an-dè is laigh e ann am meadhan an eilein. An e samhla o na diathan a th’ ann? Cha chreid thu nach eil is tha thu ’n dòchas gun lorg do threubh ulaidh an eilein seo mus dig treubha eile a-nall."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:11
+#: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
@@ -406,19 +406,19 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Tha beartas de bheatha san t-sloc aimsir às dèidh dreag a’ tuiteam air na beanntan. Tha dà threubh a’ dèanamh sabaid an tòir air na stòrasan."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Thairis air an fhàire"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
 msgstr "Kristin – air a dheasachadh le 3plus4i"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Cruinnich sgioba is seòl dhan aineolach."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr "Cha ghabh am mapa seo a bhuannachadh leis a’ chumha buaidhe “fèin-fhlaitheach”."
 
@@ -433,11 +433,11 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Tha ceithir treubhan ann an còmhstri leis an nàbaidh as fhaisge gus am beinn òir a ruigsinn ro chàch ’s an dùil air saoibhreas do-chreidsinneach. Ach an urrainn dhan dà dhiubh a dh’fhuiricheas na stòrasan a cho-roinneadh gu glic?"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+#: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr "Na Dolaimitich 3.0"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:10
+#: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
@@ -446,7 +446,7 @@ msgid ""
 " to the death with your enemies, it may as well be in a beautiful place."
 msgstr "’S e na Dolaimitich a th’ ann an seud nan Alpannan agus chaidh iad ainmeachadh mar Làrach Dualchas na Cruinne air sàilleabh am bòidhchead. Tha am mapa seo ag atharrais an sgìre eadar Cortina d’Ampezzo gu ear-thuath agus Canazei gu iar-dheas cho math ’s a ghabhas. Ma tha agad ri dian-strì an aghaidh do nàimhdean, nach b’ fheàirrde thu seo a dhèanamh am badeigin àlainn?"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:11
+#: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
 "The mountains have an abundance of flat ground. Unfortunately, most of it is"
 " vertical – use the little building space you have wisely. A fortress at the"
@@ -477,27 +477,27 @@ msgstr "Ionadan tòiseachaidh cothromach airson trì cluicheadairean."
 msgid "v0.2"
 msgstr "(tionndadh 0.2)"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:10
+#: ../../data/maps/Europa.wmf/elemental:8
+msgid "Europa 1.2"
+msgstr ""
+
+#: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr "Mapa glè mhòr na Roinn-eòrpa. Ghorm = An t-Suain, Dearg = An Eadailt, Buidhe = An Spàinnt, Uaine = An Tuirc, Dubh = An Ruis, Orains = Sasainn, Purpaidh = An Fhraing, Gheal = A’ Phòlainn"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:8
-msgid "Europa 1.1"
-msgstr "An Roinn-Eòrpa 1.1"
-
-#: ../../data/maps/Fellowships_v2.wmf/elemental:8
+#: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
 msgstr "Càirdeasan nan long"
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:10
+#: ../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
 msgstr "’S e na longan a th’ anns na caraidean as fhearr dhut. Tha na h-ionadan tòiseachaidh coltach ri chèile, mar sin tha sinn an dùil gum bi am mapa cothromach."
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:11
+#: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
@@ -558,21 +558,21 @@ msgid ""
 "sources. III: Each mountain contains only one resource."
 msgstr "Gliocas I: Lorgaidh tu uisge ri taobh na h-aibhne. Gliocas II: Comharraichidh bodaich-shneachda barrachd stòrasan uisge dhut. Gliocas III: Chan eil ach aon seòrsa de stòrais anns gach beinn."
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:8
+#: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
 msgstr "Làn-ghealach"
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:10
+#: ../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
 msgstr "Ge b’ e an grian-stad as ùire no galar na gealaich a th’ ann, tha rudeigin a’ gluasad nan treubhan seo a dh’ionnsaigh na gàbhail deireannaich aca."
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
+#: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Loch reòite"
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
+#: ../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
@@ -613,11 +613,11 @@ msgid ""
 "neighbor has begun to expand."
 msgstr "Bhiodh sìth am measg an dà threubh san dà eilean fad linntean. Thàinig crìoch air a-nis a-rèir coltais ’s do nàbaidh a’ tòiseachadh air a ranntair a leudachadh."
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
 msgstr "Rìghrean is bànrighrean"
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
@@ -635,15 +635,15 @@ msgid ""
 "two hostile tribes have arrived at its shores…"
 msgstr "Tha an loch seo sna coilltean as àrsaidh cliùiteach airson a bhòidhchead ’s sìthe. Co-dhiù, chaidh briseadh a-steach air a naomhachd a-nis on a ràinig dà threubh nàimhdeil a chladach…"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
+#: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "An dùn mu dheireadh"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
+#: ../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
 msgstr "Another Barbarian – air a dheasachadh le king_of_nowhere"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
+#: ../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
@@ -656,7 +656,7 @@ msgid ""
 "living space is also a hard and small place to live."
 msgstr "Cha do fhreagair na diathan baogaideach ri ar n-ùrnaighean. Rinn solas na grèine an talamh nas teotha na gabhadh creidinn ’na àite, leagh na h-eigh-shruthan agus thuit daoine dhan doimhne. Ach a-nis – àird sna beanntan mòra air a’ phìos mu dheireadh dhen tìr – fhuair dà threubh fasgadh. Ged tha an aimsir air fàs nas fhionnaire a-rithist on a ghabh na diathan truaghas orra, tha an t-uisge ag èirigh gun sgur fhathast. Cha dèid ach dà shlighe suas dhan àite shàbhailte mu dheireadh – mullaich as àirde a’ mhonaidh far nach foghainn an rum ’s an òr ach airson aon treubh. Ach thoir an aire… ’s e àite beag cruaidh a tha san àite-chòmhnaidh mu dheireadh seo."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+#: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
 msgstr "Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
 
@@ -670,15 +670,15 @@ msgid ""
 "all over the map."
 msgstr "Tha ceithir treubhan a’ strì ach an gabh iad làmh an uachdair air sgìre lom. Tha stòrasan sgapte air feadh a’ mhapa."
 
-#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+#: ../../data/maps/Long_long_way.wmf/elemental:8
+msgid "Long, long way v2"
+msgstr "An rathad glè, glè fhada 2"
+
+#: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
 msgstr "Tha rathad glè, glè fhada romhad mus ceannsaich thu na h-eileanan uile. Gura math a thèid leat!"
-
-#: ../../data/maps/Long, long v2.wmf/elemental:8 way
-msgid "Long, long way v2"
-msgstr "An rathad glè, glè fhada 2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -713,11 +713,11 @@ msgid ""
 "maze, and what can be found inside?"
 msgstr "Tha dà cheist mhòr ann: Cò chruthaich am mòr-chuartan do-chreidsinneach seo agus dè tha na bhroinn?"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+#: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
 msgstr "Dùbhlan gun mheatailt 2"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+#: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
 " find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
@@ -854,17 +854,17 @@ msgid ""
 " no other way but to occupy the land of your enemies."
 msgstr "Seo deuchainn neònach eile a thug na diathan dhut. Chan eil dòigh ann gus an taobh thall a ruigsinn ach ma cheannsaicheas tu dùthaich do nàmhad."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:8
+#: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
 msgstr "An Nìl"
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:10
+#: ../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr "Sholaireadh an abhainn biadh ’s conaltradh a-riamh ach nì ceithir ìmpireachdan a’ strì airson smachd air an tìr seo a-nis."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:11
+#: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
@@ -918,11 +918,11 @@ msgstr "Tha an tìr seo sgaraichte ann an trì gleanntan torrach le beanntan mò
 msgid "Water can be found around the lakes."
 msgstr "Lorgaidh tu uisge timcheall air na lochan."
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:8
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr "Làidir còmhla"
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:10
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -947,11 +947,11 @@ msgid ""
 " explore enough resources to compete with its opponents."
 msgstr "Tha sia eileanan àlainn faisg air trì beanntan-teine mòra a’ tàladh tuinichean gus beatha ùr a thòiseachadh. Tha fàsaichean ’s coilltean torrach a’ feitheamh orra. Co-dhiù no co-dheth, cha chruinnich do threubh stòrasan gu leòr gus seasamh an aghaidh càich mus fhàs ur cabhlach làidir air na cuantan."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr "Dà lagùn"
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
@@ -960,7 +960,7 @@ msgid ""
 " well-known reason."
 msgstr "Nuair a dh’èirich a’ ghaoth a rinn a’ chiad dùin-ghainmhich air oir an dà lagùn a rach à cuimhne o chionn fhada, cha bhiodhte an dùil gun ruigeadh dà threubh an t-àite trèigte seo aig an aon àm ’s air an aon adhbhar – an toir air stòrasan gus taic èiginneach a chur ris na cogaidhean gun sgur aca."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,12 +26,12 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -419,6 +419,17 @@ bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
+		if (is_multiselect_ && !empty() &&
+		    matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
+			multiselect_.clear();
+			for (uint32_t i = 0; i < size(); ++i) {
+				toggle_entry(i);
+			}
+			selection_ = 0;
+			selected(0);
+			return true;
+		}
+
 		switch (code.sym) {
 		case SDLK_ESCAPE:
 			cancel();
@@ -435,17 +446,6 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 			}
 			return true;
 
-		case SDLK_a:
-			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
-				multiselect_.clear();
-				for (uint32_t i = 0; i < size(); ++i) {
-					toggle_entry(i);
-				}
-				selection_ = 0;
-				selected(0);
-				return true;
-			}
-			break;
 		case SDLK_KP_8:
 			if (code.mod & KMOD_NUM) {
 				break;
