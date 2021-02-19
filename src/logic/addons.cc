@@ -28,6 +28,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
@@ -312,6 +313,9 @@ AddOnInfo preload_addon(const std::string& name) {
 	               string_to_version(s.get_safe_string("version")),
 	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
 	               get_category(s.get_safe_string("category")),
+	               g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
+	               		kAddOnDir + FileSystem::file_separator() + name + FileSystem::file_separator() + kAddOnIconFile
+	               		: kAddOnCategories.at(i.category).icon),
 	               {},  // Requirements (will be initialized later)
 	               s.get_bool("sync_safe", false),
 	               s.get_string("min_wl_version", ""),

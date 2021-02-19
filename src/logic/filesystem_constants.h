@@ -78,6 +78,7 @@ const std::string kCampaignDataExtension = ".wcd";
 const std::string kAddOnDir = "addons";
 const std::string kAddOnExtension = ".wad";
 const std::string kAddOnMainFile = "addon";
+const std::string kAddOnIconFile = "icon.png";
 const std::string kAddOnLocaleDir = "addons_i18n";
 const std::string kAddOnLocaleVersions = "addons_i18n_versions";
 

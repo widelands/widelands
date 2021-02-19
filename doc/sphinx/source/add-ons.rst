@@ -39,6 +39,8 @@ Example:
 
 .. highlight:: default
 
+The add-on directory may additionally contain an optional PNG file ``icon.png`` which will be shown in the add-ons manager. This image should be square and not larger than 64×64 pixels. If it is not present, the add-on’s category’s representative icon will be used instead.
+
 Categories
 ----------
 - `tribes`_

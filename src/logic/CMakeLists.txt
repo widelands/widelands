@@ -98,6 +98,7 @@ wl_library(logic_addons
     base_exceptions
     base_log
     build_info
+    graphic_image_cache
     io_fileread
     io_filesystem
     io_profile

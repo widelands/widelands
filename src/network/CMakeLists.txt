@@ -51,6 +51,7 @@ wl_library(network
     build_info
     chat
     game_io
+    graphic_image_cache
     io_fileread
     io_filesystem
     io_stream

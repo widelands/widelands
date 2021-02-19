@@ -744,8 +744,9 @@ void AddOnsCtrl::refresh_remotes() {
 		                              {},
 		                              0,
 		                              AddOns::AddOnCategory::kNone,
+		                              g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon),
 		                              {},
-		                              false,
+		                              true,
 		                              "",
 		                              "",
 	                                  {},
@@ -1399,6 +1400,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                                   "images/ui_basic/checkbox_empty.png"),
                      enabled ? _("Disable") : _("Enable"),
                      UI::Button::VisualState::kFlat),
+     icon_(this,
+               UI::PanelStyle::kFsMenu,
+               info_.icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
@@ -1474,6 +1478,9 @@ void InstalledAddOnRow::layout() {
 	}
 	set_desired_size(get_w(), 2 * kRowButtonSize + 3 * kRowButtonSpacing);
 
+	const int icon_size = 2 * kRowButtonSize + kRowButtonSpacing;
+	icon_.set_size(icon_size, icon_size);
+	icon_.set_pos(Vector2i(0, kRowButtonSpacing));
 	uninstall_.set_size(kRowButtonSize, kRowButtonSize);
 	category_.set_size(kRowButtonSize, kRowButtonSize);
 	version_.set_size(3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize);
@@ -1483,9 +1490,8 @@ void InstalledAddOnRow::layout() {
 	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
 	version_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing,
 	                          kRowButtonSize + 3 * kRowButtonSpacing));
-	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing),
-	              2 * kRowButtonSize + 3 * kRowButtonSpacing);
-	txt_.set_pos(Vector2i(0, 0));
+	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing) - icon_size, 2 * kRowButtonSize + 3 * kRowButtonSpacing);
+	txt_.set_pos(Vector2i(icon_size, 0));
 }
 
 void InstalledAddOnRow::draw(RenderTarget& r) {
@@ -1933,6 +1939,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::ButtonStyle::kFsMenuSecondary,
                "…",
                _("Comments and Votes")),
+     icon_(this,
+               UI::PanelStyle::kFsMenu,
+               info_.icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
@@ -2130,6 +2139,9 @@ void RemoteAddOnRow::layout() {
 	        &install_, &uninstall_, &interact_, &upgrade_, &category_, &version_, &verified_}) {
 		p->set_size(kRowButtonSize, kRowButtonSize);
 	}
+	const int icon_size = 2 * kRowButtonSize + kRowButtonSpacing;
+	icon_.set_size(icon_size, icon_size);
+	icon_.set_pos(Vector2i(0, kRowButtonSpacing));
 	version_.set_size(
 	   3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize - kRowButtonSpacing);
 	version_.set_pos(Vector2i(
@@ -2142,8 +2154,8 @@ void RemoteAddOnRow::layout() {
 	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
 	verified_.set_pos(
 	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
-	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
-	txt_.set_pos(Vector2i(0, 0));
+	txt_.set_size(get_w() - icon_size - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
+	txt_.set_pos(Vector2i(icon_size, 0));
 	bottom_row_left_.set_size(
 	   get_w() / 2 - kRowButtonSpacing, kRowButtonSize - 2 * kRowButtonSpacing);
 	bottom_row_right_.set_size(get_w() / 2 - kRowButtonSpacing, bottom_row_left_.get_h());

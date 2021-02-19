@@ -56,7 +56,7 @@ private:
 	AddOns::AddOnInfo info_;
 	bool enabled_;
 	UI::Button uninstall_, toggle_enabled_;
-	UI::Icon category_;
+	UI::Icon icon_, category_;
 	UI::Textarea version_;
 	UI::MultilineTextarea txt_;
 };
@@ -81,7 +81,7 @@ struct RemoteAddOnRow : public UI::Panel {
 private:
 	AddOns::AddOnInfo info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
-	UI::Icon category_, verified_;
+	UI::Icon icon_, category_, verified_;
 	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
 	UI::MultilineTextarea txt_;
 

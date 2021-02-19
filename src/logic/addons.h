@@ -27,6 +27,8 @@
 #include <unordered_map>
 #include <vector>
 
+class Image;
+
 namespace AddOns {
 
 enum class AddOnCategory {
@@ -89,6 +91,7 @@ struct AddOnInfo {
 	AddOnVersion version;   ///< Add-on version (e.g. 1.2.3)
 	uint32_t i18n_version;  ///< (see doc/sphinx/source/add-ons.rst)
 	AddOnCategory category;
+	const Image* icon;  ///< A little icon to display in the add-ons manager.
 
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active

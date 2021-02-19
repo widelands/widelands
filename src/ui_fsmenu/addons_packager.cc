@@ -353,6 +353,7 @@ void AddOnsPackager::clicked_new_addon() {
 		   {1, 0, 0},
 		   0,
 		   category.get_selected(),
+		   g_image_cache->get(AddOns::kAddOnCategories.at(category.get_selected()).icon),
 		   {},     // Requirements
 		   false,  // sync-safe
 		   "",     // min WL version

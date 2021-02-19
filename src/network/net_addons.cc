@@ -34,6 +34,7 @@
 #include "base/i18n.h"
 #include "base/md5.h"
 #include "base/wexception.h"
+#include "graphic/image_cache.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
@@ -252,6 +253,19 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			}
 		}
 		a.verified = read_line() == "verified";
+
+		const std::string icon_checksum = read_line();
+		const long icon_file_size = std::stol(read_line());
+		if (icon_file_size <= 0) {
+			a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
+		} else {
+			const std::string path = kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
+					std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
+			read_file(icon_file_size, path);
+			check_checksum(path, icon_checksum);
+			a.icon = g_image_cache->get(path);
+			g_fs->fs_unlink(path);
+		}
 
 		check_endofstream();
 	}
