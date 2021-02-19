@@ -275,14 +275,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 		type_dropdown_.clear();
 		// AIs
-		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-			type_dropdown_.add(_(impl->descname),
-			                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-			                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
+		if (settings.allows_ais(id_)) {
+			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
+				type_dropdown_.add(_(impl->descname),
+				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+				                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
+			}
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+			type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
+			                   g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 		}
-		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
-		                   g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 
 		// Slot state. Only add shared_in if there are viable slots
 		if (settings.is_shared_usable(id_, settings.find_shared(id_))) {
@@ -291,8 +293,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			                   _("Shared in"));
 		}
 
-		// Do not close a player in savegames or scenarios
-		if (!settings.uncloseable(id_)) {
+		// Do not close a player in savegames or scenarios, but add an visual entry for the client
+		if (!settings.uncloseable(id_) || !settings_->can_change_player_state(id_)) {
 			type_dropdown_.add(_("Closed"), "closed", g_image_cache->get("images/ui_basic/stop.png"),
 			                   false, _("Closed"));
 		}
