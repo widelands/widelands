@@ -118,9 +118,9 @@ public:
 protected:
 	std::string parse_requirements() override;
 	size_t do_recursively_create_filesystem_structure(const std::string& dir,
-	                                                const DirectoryTree& tree,
-	                                                bool dry_run,
-	                                                const ProgressFunction&);
+	                                                  const DirectoryTree& tree,
+	                                                  bool dry_run,
+	                                                  const ProgressFunction&);
 	DirectoryTree tree_;
 
 private:

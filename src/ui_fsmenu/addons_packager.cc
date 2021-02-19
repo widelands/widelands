@@ -522,14 +522,14 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon, ProgressIn
 
 	try {
 		return m->write_to_disk(
-			[&w](size_t i) {
-				w.progressbar().set_state(0);
-				w.progressbar().set_total(i);
-			},
-			[this, &w](size_t i) {
-				w.progressbar().set_state(w.progressbar().get_state() + i);
-				do_redraw_now();
-			});
+		   [&w](size_t i) {
+			   w.progressbar().set_state(0);
+			   w.progressbar().set_total(i);
+		   },
+		   [this, &w](size_t i) {
+			   w.progressbar().set_state(w.progressbar().get_state() + i);
+			   do_redraw_now();
+		   });
 	} catch (const WLWarning& e) {
 		main_menu_.show_messagebox(
 		   _("Error Writing Addon"),

@@ -37,30 +37,34 @@
 
 namespace AddOns {
 
-static size_t do_recursively_copy_file_or_directory(const std::string& source,
-                                                  const std::string& dest,
-	                                                const bool dry_run,
-	                                                const MutableAddOn::ProgressFunction& callback) {
+static size_t
+do_recursively_copy_file_or_directory(const std::string& source,
+                                      const std::string& dest,
+                                      const bool dry_run,
+                                      const MutableAddOn::ProgressFunction& callback) {
 	size_t result = 0;
 	if (g_fs->is_directory(source)) {
-		if (!dry_run) { g_fs->ensure_directory_exists(dest); }
+		if (!dry_run) {
+			g_fs->ensure_directory_exists(dest);
+		}
 		for (const std::string& file : g_fs->list_directory(source)) {
 			result += do_recursively_copy_file_or_directory(
-			   file, dest + FileSystem::file_separator() + FileSystem::fs_filename(file.c_str()), dry_run, callback);
+			   file, dest + FileSystem::file_separator() + FileSystem::fs_filename(file.c_str()),
+			   dry_run, callback);
 		}
 	} else {
 		result++;
 		if (!dry_run) {
-		FileRead fr;
-		fr.open(*g_fs, source);
-		const size_t bytes = fr.get_size();
-		std::unique_ptr<char[]> data(new char[bytes]);
-		fr.data_complete(data.get(), bytes);
+			FileRead fr;
+			fr.open(*g_fs, source);
+			const size_t bytes = fr.get_size();
+			std::unique_ptr<char[]> data(new char[bytes]);
+			fr.data_complete(data.get(), bytes);
 
-		FileWrite fw;
-		fw.data(data.get(), bytes);
-		fw.write(*g_fs, dest);
-		callback(1);
+			FileWrite fw;
+			fw.data(data.get(), bytes);
+			fw.write(*g_fs, dest);
+			callback(1);
 		}
 	}
 	return result;
@@ -242,14 +246,16 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 }
 
 size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
-                                                           const DirectoryTree& tree,
-	                                                const bool dry_run,
-	                                                const ProgressFunction& callback) {
+                                                             const DirectoryTree& tree,
+                                                             const bool dry_run,
+                                                             const ProgressFunction& callback) {
 	size_t result = 0;
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
-		if (!dry_run) { g_fs->ensure_directory_exists(subdir); }
+		if (!dry_run) {
+			g_fs->ensure_directory_exists(subdir);
+		}
 		result += do_recursively_create_filesystem_structure(subdir, pair.second, dry_run, callback);
 	}
 
@@ -351,7 +357,8 @@ void CampaignAddon::do_recursively_add_scenarios(std::string& scenarios,
 	}
 }
 
-bool CampaignAddon::write_to_disk(const ProgressFunction& initfn, const ProgressFunction& callback) {
+bool CampaignAddon::write_to_disk(const ProgressFunction& initfn,
+                                  const ProgressFunction& callback) {
 	setup_temp_dir();
 
 	if (!MutableAddOn::write_to_disk(initfn, callback)) {
