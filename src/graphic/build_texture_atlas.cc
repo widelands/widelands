@@ -124,7 +124,9 @@ build_texture_atlas(const int max_size,
 	// New terrains defined by world add-ons need to be in the same texture atlas
 	// as all other terrains. So we just put all add-on images into this atlas…
 	for (const std::string& dir : g_fs->list_directory(kAddOnDir)) {
-		const std::string file = dir + FileSystem::file_separator() + kAddOnMainFile;
+		std::string file = dir;
+		file += FileSystem::file_separator();
+		file += kAddOnMainFile;
 		Profile profile(file.c_str());
 		if (strcmp(profile.get_safe_section("global").get_safe_string("category"), "world") == 0) {
 			find_images(dir, &all_images, &first_atlas_images);
