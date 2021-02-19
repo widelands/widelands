@@ -41,12 +41,17 @@ Widelands::PlayerNumber GameSettings::find_shared(PlayerSlot slot) const {
 }
 
 bool GameSettings::is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const {
-	return shared <= players.size() && (shared - 1) != slot;
+	return !scenario && shared <= players.size() && (shared - 1) != slot;
 }
 
 bool GameSettings::uncloseable(PlayerSlot slot) const {
 	return (scenario && !players.at(slot).closeable) ||
 	       (savegame && players.at(slot).state != PlayerSettings::State::kClosed);
+}
+
+bool GameSettings::allows_ais(PlayerSlot slot) const {
+	// In scenarios, AIs can only be configured by the scenario script
+	return !scenario || players.at(slot).state == PlayerSettings::State::kComputer;
 }
 
 bool GameSettingsProvider::can_change_player_color(const uint8_t number) {
