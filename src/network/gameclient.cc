@@ -576,7 +576,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		d->settings.users.push_back(*new UserSettings());
+		d->settings.users.push_back(UserSettings());
 	}
 
 	d->settings.users.at(number).name = packet.string();
@@ -859,6 +859,8 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			           "I can not handle the file."));
 			d->net->send(s);
 		}
+		// Notify UI to refresh the map data
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 	}
 }
 

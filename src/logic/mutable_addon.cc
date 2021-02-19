@@ -98,6 +98,8 @@ MutableAddOn::MutableAddOn(const AddOnInfo& a)
      description_(a.unlocalized_description),
      author_(a.unlocalized_author),
      version_(AddOns::version_to_string(a.version, false)),
+     min_wl_version_(a.min_wl_version),
+     max_wl_version_(a.max_wl_version),
      category_(a.category),
      directory_(kAddOnDir + FileSystem::file_separator() + internal_name_) {
 }
@@ -172,6 +174,8 @@ bool MutableAddOn::write_to_disk() {
 	s.set_string("version", version_);
 	s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
 	s.set_string("requires", requires);
+	s.set_string("min_wl_version", min_wl_version_);
+	s.set_string("max_wl_version", max_wl_version_);
 
 	p.write(profile_path().c_str(), false);
 

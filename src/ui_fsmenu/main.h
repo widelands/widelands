@@ -138,6 +138,7 @@ private:
 	void set_button_visibility(bool);
 
 	void action(MenuTarget);
+	bool check_desyncing_addon();
 
 	MenuCapsule menu_capsule_;
 	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;

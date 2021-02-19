@@ -67,7 +67,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			                                         incompatible_wc));
 		}
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition) {
+			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition && pair.second) {
 				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
 				                                pair.first.internal_name +
 				                                FileSystem::file_separator() + name + ".lua";
