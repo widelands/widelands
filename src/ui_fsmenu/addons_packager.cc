@@ -28,6 +28,7 @@
 #include "logic/filesystem_constants.h"
 #include "logic/mutable_addon.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/progressbar.h"
 #include "ui_basic/text_prompt.h"
 #include "ui_fsmenu/addons.h"
 #include "wlapplication.h"
@@ -494,6 +495,18 @@ void AddOnsPackager::clicked_write_changes() {
 	}
 }
 
+struct WaitWindow : public UI::Window {
+	explicit WaitWindow(UI::Panel* parent, const std::string& name) :
+			UI::Window(&parent->get_topmost_forefather(), UI::WindowStyle::kFsMenu, "wait", 0, 0, parent->get_w() / 2, kButtonSize,
+				(boost::format(_("Writing Add-On ‘%s’…")) % name).str()),
+			bar(this, UI::PanelStyle::kFsMenu, 0, 0, get_inner_w(), get_inner_h(), UI::ProgressBar::Horizontal) {
+		center_to_parent();
+	}
+	void die() override {}
+
+	UI::ProgressBar bar;
+};
+
 bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	AddOns::MutableAddOn* m = mutable_addons_.at(addon).get();
 
@@ -515,11 +528,15 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 
 	try {
-		UI::WLMessageBox msg(&main_menu_, UI::WindowStyle::kFsMenu, _("Write Addons"),
-		                     _("Please be patient while your changes are written."),
-		                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-		do_redraw_now();
-		return m->write_to_disk();
+		WaitWindow w(this, addon);
+		return m->write_to_disk(
+			[&w](size_t i) {
+				w.bar.set_total(i);
+			},
+			[this, &w](size_t i) {
+				w.bar.set_state(w.bar.get_state() + i);
+				do_redraw_now();
+			});
 	} catch (const WLWarning& e) {
 		main_menu_.show_messagebox(
 		   _("Error Writing Addon"),

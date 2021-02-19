@@ -39,7 +39,8 @@ public:
 	                 const std::string& description,
 	                 const std::string& version);
 	// May throw a WLWarning, if it fails
-	virtual bool write_to_disk();
+	using ProgressFunction = std::function<void(size_t)>;
+	virtual bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback);
 
 	const std::string& get_internal_name() const {
 		return internal_name_;
@@ -104,7 +105,7 @@ public:
 class MapsAddon : public MutableAddOn {
 public:
 	explicit MapsAddon(const AddOnInfo& a);
-	bool write_to_disk() override;
+	bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback) override;
 
 	struct DirectoryTree {
 		std::map<std::string /* file name in add-on */, std::string /* path of source map */> maps;
@@ -116,8 +117,10 @@ public:
 
 protected:
 	std::string parse_requirements() override;
-	void do_recursively_create_filesystem_structure(const std::string& dir,
-	                                                const DirectoryTree& tree);
+	size_t do_recursively_create_filesystem_structure(const std::string& dir,
+	                                                const DirectoryTree& tree,
+	                                                bool dry_run,
+	                                                const ProgressFunction&);
 	DirectoryTree tree_;
 
 private:
@@ -128,7 +131,7 @@ private:
 class CampaignAddon : public MapsAddon {
 public:
 	explicit CampaignAddon(const AddOnInfo& a);
-	bool write_to_disk() override;
+	bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback) override;
 	bool luafile_exists();
 
 	struct CampaignInfo {
@@ -179,7 +182,7 @@ public:
 class ThemeAddon : public MutableAddOn {
 public:
 	using MutableAddOn::MutableAddOn;
-	bool write_to_disk() override;
+	bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback) override;
 };
 
 }  // namespace AddOns
