@@ -33,6 +33,7 @@
 namespace FsMenu {
 
 class AddOnsCtrl;
+struct ProgressIndicatorWindow;
 
 class AddOnsPackager : public UI::Window {
 public:
@@ -80,7 +81,7 @@ private:
 	void clicked_delete_addon();
 	void clicked_discard_changes();
 	void clicked_write_changes();
-	bool do_write_addon_to_disk(const std::string& addon);
+	bool do_write_addon_to_disk(const std::string& addon, ProgressIndicatorWindow&);
 
 	bool update_in_progress_;
 };

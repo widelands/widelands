@@ -33,6 +33,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
@@ -41,7 +42,33 @@
 namespace FsMenu {
 
 class AddOnsCtrl;
-struct ProgressIndicatorWindow;
+
+struct ProgressIndicatorWindow : public UI::Window {
+	ProgressIndicatorWindow(UI::Panel* parent, const std::string& title);
+	~ProgressIndicatorWindow() override = default;
+
+	void set_message_1(const std::string& msg) {
+		txt1_.set_text(msg);
+	}
+	void set_message_2(const std::string& msg) {
+		txt2_.set_text(msg);
+	}
+	UI::ProgressBar& progressbar() {
+		return progress_;
+	}
+
+	// Bit complex design for the two download_xxx functions to ensure the
+	// progress indicator window stays responsive during downloading
+	std::function<void(const std::string&)> action_when_thinking;
+	std::vector<std::string> action_params;
+	bool die_after_last_action;
+	void think() override;
+
+private:
+	UI::Box box_;
+	UI::Textarea txt1_, txt2_;
+	UI::ProgressBar progress_;
+};
 
 struct InstalledAddOnRow : public UI::Panel {
 	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOns::AddOnInfo&, bool enabled);

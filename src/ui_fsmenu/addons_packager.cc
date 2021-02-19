@@ -464,8 +464,12 @@ void AddOnsPackager::clicked_write_changes() {
 	UI::WLMessageBox m(&main_menu_, UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg,
 	                   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 	if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+		ProgressIndicatorWindow w(this, _("Writing Add-Ons…"));
+		w.set_message_1(_("Please be patient while your changes are written."));
 		std::set<std::string> errors;
 		for (const auto& pair : addons_with_changes_) {
+			w.set_message_2(pair.first);
+			do_redraw_now();
 			if (pair.second) {
 				// Delete existing add-on
 				const std::string directory = kAddOnDir + FileSystem::file_separator() + pair.first;
@@ -474,11 +478,12 @@ void AddOnsPackager::clicked_write_changes() {
 				}
 			} else {
 				// Write add-on
-				if (!do_write_addon_to_disk(pair.first)) {
+				if (!do_write_addon_to_disk(pair.first, w)) {
 					errors.insert(pair.first);
 				}
 			}
 		}
+		w.set_message_2("");
 
 		// Clear list of changes, and re-insert failed add-ons
 		addons_with_changes_.clear();
@@ -495,19 +500,7 @@ void AddOnsPackager::clicked_write_changes() {
 	}
 }
 
-struct WaitWindow : public UI::Window {
-	explicit WaitWindow(UI::Panel* parent, const std::string& name) :
-			UI::Window(&parent->get_topmost_forefather(), UI::WindowStyle::kFsMenu, "wait", 0, 0, parent->get_w() / 2, kButtonSize,
-				(boost::format(_("Writing Add-On ‘%s’…")) % name).str()),
-			bar(this, UI::PanelStyle::kFsMenu, 0, 0, get_inner_w(), get_inner_h(), UI::ProgressBar::Horizontal) {
-		center_to_parent();
-	}
-	void die() override {}
-
-	UI::ProgressBar bar;
-};
-
-bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
+bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon, ProgressIndicatorWindow& w) {
 	AddOns::MutableAddOn* m = mutable_addons_.at(addon).get();
 
 	// Check that the version string is valid and beautify it
@@ -528,13 +521,13 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 
 	try {
-		WaitWindow w(this, addon);
 		return m->write_to_disk(
 			[&w](size_t i) {
-				w.bar.set_total(i);
+				w.progressbar().set_state(0);
+				w.progressbar().set_total(i);
 			},
 			[this, &w](size_t i) {
-				w.bar.set_state(w.bar.get_state() + i);
+				w.progressbar().set_state(w.progressbar().get_state() + i);
 				do_redraw_now();
 			});
 	} catch (const WLWarning& e) {

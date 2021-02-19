@@ -34,7 +34,6 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_basic/progressbar.h"
 #include "ui_fsmenu/addons_packager.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -51,82 +50,59 @@ constexpr const char* const kDocumentationURL = "https://www.widelands.org/docum
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
-struct ProgressIndicatorWindow : public UI::Window {
-	ProgressIndicatorWindow(AddOnsCtrl* parent, const std::string& title)
-	   : UI::Window(parent->get_parent(),
-	                UI::WindowStyle::kFsMenu,
-	                "progress",
-	                0,
-	                0,
-	                parent->get_inner_w() - 2 * kRowButtonSize,
-	                2 * kRowButtonSize,
-	                title),
-	     die_after_last_action(false),
-	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
-	     txt1_(&box_,
-	           UI::PanelStyle::kFsMenu,
-	           UI::FontStyle::kFsMenuInfoPanelHeading,
-	           "",
-	           UI::Align::kCenter),
-	     txt2_(&box_,
-	           UI::PanelStyle::kFsMenu,
-	           UI::FontStyle::kFsMenuInfoPanelParagraph,
-	           "",
-	           UI::Align::kLeft),
-	     progress_(&box_,
-	               UI::PanelStyle::kFsMenu,
-	               0,
-	               0,
-	               get_w(),
-	               kRowButtonSize,
-	               UI::ProgressBar::Horizontal) {
+ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
+   : UI::Window(&parent->get_topmost_forefather(),
+                UI::WindowStyle::kFsMenu,
+                "progress",
+                0,
+                0,
+                parent->get_inner_w() - 2 * kRowButtonSize,
+                2 * kRowButtonSize,
+                title),
+     die_after_last_action(false),
+     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
+     txt1_(&box_,
+           UI::PanelStyle::kFsMenu,
+           UI::FontStyle::kFsMenuInfoPanelHeading,
+           "",
+           UI::Align::kCenter),
+     txt2_(&box_,
+           UI::PanelStyle::kFsMenu,
+           UI::FontStyle::kFsMenuInfoPanelParagraph,
+           "",
+           UI::Align::kLeft),
+     progress_(&box_,
+               UI::PanelStyle::kFsMenu,
+               0,
+               0,
+               get_w(),
+               kRowButtonSize,
+               UI::ProgressBar::Horizontal) {
 
-		box_.add(&txt1_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kRowButtonSpacing);
-		box_.add(&txt2_, UI::Box::Resizing::kFullSize);
-		box_.add_space(2 * kRowButtonSpacing);
-		box_.add(&progress_, UI::Box::Resizing::kFullSize);
+	box_.add(&txt1_, UI::Box::Resizing::kFullSize);
+	box_.add_space(kRowButtonSpacing);
+	box_.add(&txt2_, UI::Box::Resizing::kFullSize);
+	box_.add_space(2 * kRowButtonSpacing);
+	box_.add(&progress_, UI::Box::Resizing::kFullSize);
 
-		set_center_panel(&box_);
-		center_to_parent();
-	}
-	~ProgressIndicatorWindow() override = default;
+	set_center_panel(&box_);
+	center_to_parent();
+}
 
-	void set_message_1(const std::string& msg) {
-		txt1_.set_text(msg);
-	}
-	void set_message_2(const std::string& msg) {
-		txt2_.set_text(msg);
-	}
-	UI::ProgressBar& progressbar() {
-		return progress_;
-	}
+void ProgressIndicatorWindow::think() {
+	UI::Window::think();
 
-	// Bit complex design for the two download_xxx functions to ensure the
-	// progress indicator window stays responsive during downloading
-	std::function<void(const std::string&)> action_when_thinking;
-	std::vector<std::string> action_params;
-	bool die_after_last_action;
-	void think() override {
-		UI::Window::think();
+	if (action_params.empty()) {
+		end_modal(UI::Panel::Returncodes::kOk);
+	} else {
+		action_when_thinking(*action_params.begin());
 
-		if (action_params.empty()) {
+		action_params.erase(action_params.begin());
+		if (action_params.empty() && die_after_last_action) {
 			end_modal(UI::Panel::Returncodes::kOk);
-		} else {
-			action_when_thinking(*action_params.begin());
-
-			action_params.erase(action_params.begin());
-			if (action_params.empty() && die_after_last_action) {
-				end_modal(UI::Panel::Returncodes::kOk);
-			}
 		}
 	}
-
-private:
-	UI::Box box_;
-	UI::Textarea txt1_, txt2_;
-	UI::ProgressBar progress_;
-};
+}
 
 AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
    : UI::UniqueWindow(&fsmm,
