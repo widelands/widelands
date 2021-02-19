@@ -300,7 +300,7 @@ void MapSelect::fill_table() {
 	} else {
 		// In the toplevel directory we also need to include add-on maps
 		for (auto& addon : AddOns::g_addons) {
-			if (addon.first.category == AddOns::AddOnCategory::kMaps) {
+			if (addon.first.category == AddOns::AddOnCategory::kMaps && addon.second) {
 				for (const std::string& mapname : g_fs->list_directory(
 				        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
 					files.insert(mapname);
