@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -108,8 +108,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "Následne vyberte/stlačte 'Budovy'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "Možno použiť aj klávesovú skratku „b“."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -253,10 +254,11 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
+#, lua-format
 msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
+"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
 "quickly."
-msgstr "Do tohto okna sa ďalej možno rýchlo dostať pomocou klávesovej skratky „i“ (znamená „inventár“)."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152

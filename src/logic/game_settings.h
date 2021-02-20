@@ -161,6 +161,8 @@ struct GameSettings {
 	bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
 	/// Savegame slots and certain scenario slots can't be closed
 	bool uncloseable(PlayerSlot slot) const;
+	/// AIs cannot be changed in scenarios
+	bool allows_ais(PlayerSlot slot) const;
 
 	/// Number of player position of the host player
 	int16_t playernum;

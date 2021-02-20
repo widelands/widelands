@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -305,7 +305,7 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
-"Buďiž velebeno božstvo! Právě jsme dosáhli stabilní výroby nástrojů. Nyní "
+"Budiž velebeno božstvo! Právě jsme dosáhli stabilní výroby nástrojů. Nyní "
 "již není nic, co by bránilo našemu hospodářství v rozvoji."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:216
@@ -436,7 +436,7 @@ msgid ""
 "since you left."
 msgstr ""
 "Jak jste si jistě již mohli všimnout, zdejší poměry se od vašeho posledního "
-"odhodu velmi zhoršily."
+"odchodu velmi zhoršily."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
 msgid "A Long Story"
@@ -731,7 +731,7 @@ msgid ""
 "This is offering us more options to get the shambles in our economy solved."
 msgstr ""
 "Toto nám dává větší prostor pro nápravu té spouště, s kterou se v rámci "
-"našho hospodářství potýkáme."
+"našeho hospodářství potýkáme."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:381
@@ -1105,7 +1105,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is Positively Surprised"
-msgstr "Amalea je přijemně překvapena"
+msgstr "Amalea je příjemně překvapena"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:532
 msgid "Amalea is celebrating a happy event…"

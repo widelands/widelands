@@ -271,17 +271,19 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
+					std::string name, desc;
+					// Prevent propagation of the textdomain
 					if (t->has_key("textdomain")) {
 						i18n::AddOnTextdomain td(t->get_string("textdomain"));
-						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script,
-						                            nullptr, win_condition_script == last_win_condition_,
-						                            t->get_string("description"));
+						name = _(t->get_string("name"));
+						desc = t->get_string("description");
 					} else {
 						i18n::Textdomain td("win_conditions");
-						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script,
-						                            nullptr, win_condition_script == last_win_condition_,
-						                            t->get_string("description"));
+						name = _(t->get_string("name"));
+						desc = t->get_string("description");
 					}
+					win_condition_dropdown_.add(name, win_condition_script, nullptr,
+					                            win_condition_script == last_win_condition_, desc);
 				}
 			} catch (LuaTableKeyError& e) {
 				log_err("Launch Game: Error loading win condition: %s %s\n",

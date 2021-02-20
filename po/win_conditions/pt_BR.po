@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-07-23 07:48+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -128,12 +128,12 @@ msgid_plural "Total: %i points"
 msgstr[0] "Total: %i ponto"
 msgstr[1] "Total: %i pontos"
 
-#: ../../data/scripting/win_conditions/collectors.lua:193
+#: ../../data/scripting/win_conditions/collectors.lua:194
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Status da Equipe %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:195
+#: ../../data/scripting/win_conditions/collectors.lua:196
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -145,24 +145,36 @@ msgid "Autocrat"
 msgstr "Autocrata"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
-msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "A tribo ou equipa que conseguir derrotar todas as outras vence o jogo!"
+msgid ""
+"The tribe or team that can defeat all others wins the game! This means the "
+"opponents do not have any headquarters, ports or warehouses left."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/endless_game.lua:15
+#: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
 msgstr "Jogo Infinito"
 
-#: ../../data/scripting/win_conditions/endless_game.lua:17
+#: ../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
 msgstr "Este é um jogo infinito sem regras."
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
 msgid "Endless Game (no fog)"
 msgstr "Jogo sem fim (sem nevoeiro)"
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Este é um jogo sem fim e sem regras. Nevoeiro de guerra esta desabilitado."
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:16
+msgid "HQ Hunter"
+msgstr ""
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:18
+msgid ""
+"The tribe or team that can find and destroy all other headquarters wins the "
+"game! Does not work with starting conditions without headquarters."
+msgstr ""
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
@@ -237,8 +249,8 @@ msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:300
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:305
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:329
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:334
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -246,21 +258,21 @@ msgstr[0] "%i minuto"
 msgstr[1] "%i minutos"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:302
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:331
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:308
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:337
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% hora"
 msgstr[1] "%1% horas"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:311
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:340
 #, lua-format
 msgid "The game will end in %s."
 msgstr "O jogo vai terminar em %s."
@@ -323,9 +335,9 @@ msgstr "Agora que você é um gnomo de madeira que gosta de grandes florestas, a
 msgid "Trees owned"
 msgstr "Arvores possuídas"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:63
-#: ../../data/scripting/win_conditions/wood_gnome.lua:83
-#: ../../data/scripting/win_conditions/wood_gnome.lua:88
+#: ../../data/scripting/win_conditions/wood_gnome.lua:64
+#: ../../data/scripting/win_conditions/wood_gnome.lua:86
+#: ../../data/scripting/win_conditions/wood_gnome.lua:91
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -333,16 +345,16 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:66
+#: ../../data/scripting/win_conditions/wood_gnome.lua:67
 msgid "%1$s has %2$s at the moment."
 msgstr ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:85
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "%1$s had %2$s."
 msgstr ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
+#: ../../data/scripting/win_conditions/wood_gnome.lua:94
 msgid "The winner is %1$s with %2$s."
 msgstr "O vencedor é %1$scom %2$s."
