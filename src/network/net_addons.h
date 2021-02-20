@@ -52,7 +52,7 @@ struct NetAddons {
 	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
 	int get_vote(const std::string& addon);
 	void vote(const std::string& addon, unsigned vote);
-	void comment(const AddOnInfo& addon, const std::string& message);
+	void comment(const AddOnInfo& addon, std::string message);
 
 	void set_login(const std::string& username, const std::string& password);
 

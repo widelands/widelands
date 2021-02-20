@@ -1642,7 +1642,7 @@ public:
 			parent_.rebuild();
 		});
 		submit_.sigclicked.connect([this]() {
-			const std::string message = comment_->get_text();
+			std::string message = comment_->get_text();
 			if (message.empty()) {
 				return;
 			}
@@ -1654,6 +1654,14 @@ public:
 					UI::WLMessageBox::MBoxType::kOk);
 				w.run<UI::Panel::Returncodes>();
 				return;
+			}
+
+			for (;;) {
+				size_t pos = message.find('\n');
+				if (pos == std::string::npos) {
+					break;
+				}
+				message.replace(pos, 1, "<br>");
 			}
 			info_.user_comments.push_back(AddOns::AddOnComment{parent_.username(), message, info_.version, std::time(nullptr)});
 			update_data();

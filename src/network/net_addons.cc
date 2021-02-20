@@ -248,7 +248,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			int newlines = std::stoi(read_line());
 			a.user_comments[j].message = read_line();
 			for (; newlines > 0; --newlines) {
-				a.user_comments[j].message += '\n';
+				a.user_comments[j].message += "<br>";
 				a.user_comments[j].message += read_line();
 			}
 		}
@@ -392,7 +392,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	write(client_socket_, send.c_str(), send.size());
 	check_endofstream();
 }
-void NetAddons::comment(const AddOnInfo& addon, const std::string& message) {
+void NetAddons::comment(const AddOnInfo& addon, std::string message) {
 	init();
 	std::string send = "CMD_COMMENT ";
 	send += addon.internal_name;
@@ -411,6 +411,16 @@ void NetAddons::comment(const AddOnInfo& addon, const std::string& message) {
 			++pos;
 		}
 		send += std::to_string(whitespace);
+
+		pos = 0;
+		for (;;) {
+			pos = message.find('\n', pos);
+			if (pos == std::string::npos) {
+				break;
+			}
+			message.at(pos) = '\0';
+			++pos;
+		}
 	}
 	send += ' ';
 	send += message;
