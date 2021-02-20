@@ -1,5 +1,4 @@
--- TODO(Nordfriese): Create graphics
-dirname = "tribes/buildings/productionsites/barbarians/weaving_mill/"
+dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_fri03.wmf")
 
@@ -22,16 +21,23 @@ descriptions:new_productionsite_type {
       granite = 1
    },
 
-   animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 36, 74 },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {75, 95},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 36, 74 },
-      },
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {75, 76}
+      }
    },
 
    working_positions = {
