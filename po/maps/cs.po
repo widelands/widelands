@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-01 14:45+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-15 08:09+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +182,7 @@ msgstr "Když vaše živobytí závisí na moři, je to neustálý boj. Své o t
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
-msgstr "Ještě nezavedeno"
+msgstr "Chybí"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -190,7 +190,7 @@ msgstr "Nikdo"
 
 #: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr "Je nám líto, ale tato mapa nebyla ještě implementována."
+msgstr "Je nám líto, ale tato mapa zatím nebyla dokončena."
 
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -410,7 +410,7 @@ msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět 
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
-msgstr "Překračování horizontu"
+msgstr "Až za obzor"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
@@ -418,22 +418,11 @@ msgstr "Kristin – upravil 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr "Zmocni se lodi a pluj k horizontu."
+msgstr "Naloď svou posádku a pluj k obzoru."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr "Za výherní podmínky \"Autokrat\" nelze tuto mapu vyhrát."
-
-#: ../../data/maps/Desert_Tournament.wmf/elemental:8
-msgid "Desert Tournament"
-msgstr "Pouštní turnaj"
-
-#: ../../data/maps/Desert_Tournament.wmf/elemental:10
-msgid ""
-"Four tribes struggle with their nearest neighbor to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr "Čtyři kmeny bojují se svými nejbližšími sousedy o dobytí zlaté hory, která v sobě skrývá neskutečné bohatství. Budou však dva přeživší kmeny schopné se o bohatství rozumně rozdělit?"
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
@@ -600,7 +589,6 @@ msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr "Z podzimu se stala zima. Některé věci zmrzly, ale válka ne."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "Startovní pozice jsou po směru hodinových ručiček."
 
@@ -624,7 +612,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr "Stará báje vypráví, že těchto sedmero království, která po věky vzkvétala, se jednoho dne pohrouží do zničují války. Byla tvá poslední zrada tou pomyslnou poslední kapkou, aby proroctví došlo svého naplnění?"
+msgstr "Stará báje vypráví, že těchto sedmero království, která po věky vzkvétala, se jednoho dne pohrouží do zničující války. Byla tvá poslední zrada tou pomyslnou poslední kapkou, aby proroctví došlo svého naplnění?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -635,7 +623,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr "Toto jezero, v hloubi nejstaršího lesa, je již dlouhou dobu známo svou krásou a přímo idilickým klidem. Jeho klidné vody se nyní zčeřily, když dva znepřátelené kmeny dorazily k jeho břehům..."
+msgstr "Toto jezero v hloubi nejstarších pralesů bylo po dlouhou dobu známo svou krásou a přímo idylickým klidem. Jeho klidné vody se nyní zčeřily, když dva znepřátelené kmeny dorazily k jeho břehům..."
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
@@ -671,6 +659,19 @@ msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
 msgstr "Čtyři kmeny bojují o nadvládu v nehostinné oblasti. Suroviny jsou roztroušené po celé mapě."
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:8
+msgid "Lesser Ring 1.2"
+msgstr "Nepodstatný kruh 1.2"
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:10
+msgid ""
+"A fair 8-player map with natural geographic features dividing land. The "
+"geographic features are meant to be somewhat realistic with rivers flowing "
+"from glaciers in the mountains through hills and flatlands into the sea. "
+"Gold is a much rarer resource compared to coal and iron. Different resources"
+" are often found at some distance to each other."
+msgstr "Mapa pro osm hráčů, jejíž území je rozčleněno přírodními hranicemi. Ty reflektují přírodní zákonitosti, jako třeba řeky sbírající vodu z ledovců a tekoucí z kopců nížinami do moře. Zlato je v porovnání s uhlím a železnou rudou poměrně vzácné. Jednotlivé zdroje se často nachází ne přímo hned vedle sebe."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -737,7 +738,7 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr "Pouze jeden malý kopec ve středu mapy spojuje čtyři soupeřící kmeny. Doveď svou armádu na kopec a vybuduj obrovskou pevnost, jako důkaz své svrchovanosti!"
+msgstr "Pouze jeden malý kopec ve středu mapy spojuje území čtyř soupeřících kmenů. Vydej se svou armádou přímo tam a na důkaz své svrchovanosti na tomto kopci vybuduj obrovskou pevnost!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
@@ -768,17 +769,16 @@ msgid ""
 "handful of big rivers."
 msgstr "Mystická země plná různorodých krajin, které jsou všechny protkány několika velkými řekami."
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:8
-msgid "The Ancient Sun of Fire"
-msgstr "Pradávné ohnivé slunce"
+#: ../../data/maps/Sandy_Passes.wmf/elemental:9
+msgid "Sandy Passes"
+msgstr "Písečná úžina"
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:10
+#: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
-"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others"
-" followed in its wake."
-msgstr "Po stovky let byl tento ostrov považován za svatyni Bohů. Dosud nikdy na něj nevstoupila lidská noha. Až nyní se našel jeden kmen natolik smělý, že osídlil pobřeží tohoto ostrova. A poté je následovalo i mnoho dalších."
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr "Čtyři kmeny bojují se svými nejbližšími sousedy o dobytí zlaté hory, která v sobě skrývá neskutečné bohatství. Budou však dva přeživší kmeny schopné se o bohatství rozumně rozdělit?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
@@ -844,7 +844,7 @@ msgid ""
 "wonderful and mighty treasure in their middle – The Green Plateau, which is "
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
-msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný a mocný poklad - Zelenou pláň. Je nesmírně těžké ji dobýt, ale tak snadné zas ztratit. Jestli ji chceš pro sebe, musís se o ní utkat s ostatními."
+msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný, moc propůjčující poklad – Zelenou pláň. Je nesmírně těžké ji dobýt, ale snadné ji zase ztratit. Jestli ji chceš pro sebe, měj se před druhými kmeny na pozoru."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -891,7 +891,7 @@ msgstr "Horský průsmyk"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Dva princové se usadili na různých stranách tohoto pohoří. Nyní rozšiřují své země a ani jeden z nich netuší, že v této krajině nejsou sami!"
+msgstr "Dva princi se usadili na odvrácených stranách tohoto pohoří. Nyní rozšiřují svá území a ani jeden z nich netuší, že v této krajině nejsou sami!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -918,7 +918,7 @@ msgstr "Majestátní pohoří rozdělují tuto zemi do tří úrodných údolí.
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr "Vodu lze naléz v okolí jezer."
+msgstr "Vodu lze nalézt v okolí jezer."
 
 #: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
@@ -951,7 +951,7 @@ msgstr "V okolí tří velkých sopek pobízí osadníky šestice malebných ost
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
-msgstr "Dvojtá laguna"
+msgstr "Dvojitá laguna"
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
@@ -960,7 +960,7 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr "Když první vítr zafokal a první duny byly zformovány na těchto zapomenutých lagunách, nikdo nečekal, že zde, na tomto bohem opuštěném místě a ze stejného důvodu, skončí dva kmeny, zoufale prahnoucí po surovinách na ukončení jejich nekonečné války."
+msgstr "Když zavál vítr a první duny se proměnily v tyto opuštěné laguny, nikdo nemohl čekat, že se dva kmeny hledající stále nové zdroje pro vedení nekonečných válek setkají v ten samý čas na tomto ztraceném místě, aby naplnily svou nepokrytě projevovanou vůli."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
