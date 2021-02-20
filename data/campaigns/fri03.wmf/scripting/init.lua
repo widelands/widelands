@@ -25,14 +25,14 @@ port_north = map:get_field(20, 162)
 
 descriptions = wl.Descriptions()
 for i,terrain in pairs(descriptions.terrain_descriptions) do
-   descriptions:modify_unit("terrain", terrain.name, "enhancement", "")
+   descriptions:modify_unit("terrain", terrain.name, "enhancement", "", "")
 end
-descriptions:modify_unit("terrain", "summer_water", "enhancement", "summer_beach")
-descriptions:modify_unit("terrain", "winter_water", "enhancement", "summer_beach")
-descriptions:modify_unit("terrain", "ice_floes",    "enhancement", "ice")
-descriptions:modify_unit("terrain", "ice_floes2",   "enhancement", "ice")
-descriptions:modify_unit("terrain", "ice",          "enhancement", "summer_beach")
-descriptions:modify_unit("terrain", "summer_beach", "enhancement", "summer_steppe_barren")
+descriptions:modify_unit("terrain", "summer_water", "enhancement", "", "summer_beach")
+descriptions:modify_unit("terrain", "winter_water", "enhancement", "", "summer_beach")
+descriptions:modify_unit("terrain", "ice_floes",    "enhancement", "", "ice")
+descriptions:modify_unit("terrain", "ice_floes2",   "enhancement", "", "ice")
+descriptions:modify_unit("terrain", "ice",          "enhancement", "", "summer_beach")
+descriptions:modify_unit("terrain", "summer_beach", "enhancement", "", "summer_steppe_barren")
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

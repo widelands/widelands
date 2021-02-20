@@ -902,7 +902,8 @@ void LuaDescriptions::do_modify_terrain(lua_State* L,
 	   *descrs.get_mutable_terrain_descr(descrs.safe_terrain_index(unit_name));
 
 	if (property == "enhancement") {
-		terrain.set_enhancement(luaL_checkstring(L, 5));
+		// Argument number 5 is ignored for forward compatibility
+		terrain.set_enhancement(luaL_checkstring(L, 6));
 	} else {
 		report_error(L, "modify_unit not supported yet for terrain property '%s'", property.c_str());
 	}
