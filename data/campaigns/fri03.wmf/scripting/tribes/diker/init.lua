@@ -1,4 +1,4 @@
-dirname = "tribes/workers/frisians/claydigger/"
+dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_fri03.wmf")
 
@@ -13,9 +13,9 @@ descriptions:new_worker_type {
       dike = {
          "findspace=size:swim radius:5 terraform",
          "walk=coords",
-         "animate=dig duration:40s",
+         "animate=work duration:60s",
          "terraform",
-         "animate=dig duration:40s",
+         "animate=work duration:20s",
          "return"
       }
    },
@@ -40,7 +40,7 @@ descriptions:new_worker_type {
          directional = true,
          hotspot = {10, 26}
       },
-      dig = {
+      work = {
          fps = 20,
          frames = 10,
          columns = 5,
@@ -48,7 +48,7 @@ descriptions:new_worker_type {
          hotspot = {15, 20}
       },
    },
-   animations = {idle = {hotspot = {8, 23}}}
+   animations = {idle = {hotspot = {8, 26}}}
 }
 
 pop_textdomain()

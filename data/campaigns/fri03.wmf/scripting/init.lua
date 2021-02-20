@@ -27,6 +27,7 @@ descriptions = wl.Descriptions()
 for i,terrain in pairs(descriptions.terrain_descriptions) do
    descriptions:modify_unit("terrain", terrain.name, "enhancement", "")
 end
+descriptions:modify_unit("terrain", "summer_water", "enhancement", "summer_beach")
 descriptions:modify_unit("terrain", "winter_water", "enhancement", "summer_beach")
 descriptions:modify_unit("terrain", "ice_floes",    "enhancement", "ice")
 descriptions:modify_unit("terrain", "ice_floes2",   "enhancement", "ice")
