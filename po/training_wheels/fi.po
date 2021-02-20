@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,12 +180,16 @@ msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
 msgstr ""
+"Voit avata ja sulkea tämän ikkunan klikkaamalla ‘Tavoitteet’ -nappia "
+"työkaluvalikosta näytön alareunassa."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
+"Kuten missä tahansa ikkunassa, voit sulkea myös ‘Tavoitteet’ -ikkunan hiiren"
+" oikealla näppäimellä."
 
 #: ../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
