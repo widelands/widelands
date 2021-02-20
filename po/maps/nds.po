@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-11-30 09:34+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 14:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -424,17 +424,6 @@ msgstr "Rüst dien Schipp ut un seil tum Kimm."
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr "Deese Kaart kann mit de Upgaav tum Winnen »Dwingelant« nich wunnen worden."
 
-#: ../../data/maps/Desert_Tournament.wmf/elemental:8
-msgid "Desert Tournament"
-msgstr "Wüüsten-Weddstried"
-
-#: ../../data/maps/Desert_Tournament.wmf/elemental:10
-msgid ""
-"Four tribes struggle with their nearest neighbor to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr "Veer Völker fechten mit hör anner Naber, um as eerster de Barg vull Gold to raken, wat Riekdoom tum nich Utmeten verspreckt. Aver könen de twee Överlevers de Mineraale klook delen?"
-
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr "Dolomiten 3.0"
@@ -600,7 +589,6 @@ msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr "Harvst is Winter worden. Vööl is froren, de Krieg is 't nich."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "Anfangs-Steden sünd rechtsrum"
 
@@ -671,6 +659,19 @@ msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
 msgstr "Veer Völker strieden um de Heerskupp in eener düllen Kuntrei. Mineraale sünd över de hele Kaart verstreit."
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:8
+msgid "Lesser Ring 1.2"
+msgstr "Minner Ring 1.2"
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:10
+msgid ""
+"A fair 8-player map with natural geographic features dividing land. The "
+"geographic features are meant to be somewhat realistic with rivers flowing "
+"from glaciers in the mountains through hills and flatlands into the sea. "
+"Gold is a much rarer resource compared to coal and iron. Different resources"
+" are often found at some distance to each other."
+msgstr "Eene gerechte 8-Spelers-Kaart, waar dat Land vun natürelken Landskuppen updeelt word. Deese sünd haast echt, mit Stroomen, wat ut Iesfelden in de Bargen dör Höchten un flacke Lannen in de See föhren. Gold is een bannig nauers Mineraal as Köhl un Iesen. Verschedene Mineraale sünd mennigmaal een Deel vuneenanner weg."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -768,17 +769,16 @@ msgid ""
 "handful of big rivers."
 msgstr "Een wunnerlikes Land, vull vun verschedenen Landskuppen, wat all vun eenigen groten Stromen krüüzt worden."
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:8
-msgid "The Ancient Sun of Fire"
-msgstr "De steenolle Füür-Sünn"
+#: ../../data/maps/Sandy_Passes.wmf/elemental:9
+msgid "Sandy Passes"
+msgstr "Sandpassen"
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:10
+#: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
-"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others"
-" followed in its wake."
-msgstr "Hunnerte Jahren weer deese Insel een Hilligdoom för de Gotten. Keen Minsk hett 't jemaals waagt, hier eenen Foot hentosetten. Aver nu dat een Volk driest genoog weer,  sük an de Küst vun deeser Insel daaltolaten, komen völe anner na."
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr "Veer Völker fechten mit hör anner Naber, um as eerster de Barg vull Gold to raken, wat Riekdoom tum nich Utmeten verspreckt. Aver könen de twee Överlevers de Mineraale klook delen?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"

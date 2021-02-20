@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Aina Vaipoissa <vaippaheppu@gmail.com>, 2020
-# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-01-15 09:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-19 16:25+0000\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Klikkaa 'OK' painiketta tai paina ‘Enter’ -painiketta näppäimistö
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:12
 msgid "Nice And Easy Does It All the Time"
-msgstr "Eikö olekin kivaa ja helppoa"
+msgstr "Eikö olekin kivaa ja helppoa?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:14
 msgid ""
@@ -39,7 +39,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr "Olen pahoillani, mutta minun täytyy poistaa tämä taas. Saatamme tarvita tätä aluetta myöhemmin. Jos olen sinun mielestäsi liian hidas, saatat haluta pelata tätä peliä oikeasti ja löytää kaikki omin neuvoin. Muussa tapauksessa pyydän pysyttele mukanani, en ole enää niitä kaikkein nuorimpia ja nopeimpia."
+msgstr "Olen pahoillani, mutta minun täytyy taas purkaa tämä. Saatamme tarvita tätä aluetta myöhemmin. Jos etenemme mielestäsi liian hitaasti, sinun kannattaa ehkä jättää tämä harjoituspeli väliin ja löytää kaikki omin neuvoin oikeassa pelissä. Muussa tapauksessa koeta kestää, en ole enää niitä kaikkein nuorimpia ja nopeimpia."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
@@ -63,13 +63,13 @@ msgstr "Widelands on hidastempoisesti kehittyvä strategiapeli, jossa painotetaa
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "You will be guided through this tutorial by objectives"
-msgstr "Sinua ohjataan tässä opetusohjelmassa tavoitetta kohti."
+msgstr "Sinua opastetaan tässä opetuspelissä eri tavoittein."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "Follow the intructions in the objective below so that I can show you where "
 "to find them."
-msgstr "Seuraa tavoitteisiin liittyviä ohjeita alhaalta , jotta voin näyttää mistä löydät ne."
+msgstr "Seuraa tavoitteisiin liittyviä ohjeita alhaalta, jotta voin näyttää mistä ne löytyvät."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 msgid "Objectives and how to close this window"
@@ -83,19 +83,19 @@ msgstr "Ikkunan sulkeminen"
 msgid ""
 "This is the ‘Objectives’ window. You can return to this window for "
 "instructions at any time."
-msgstr "Tämä on ‘Tavoitteet’ ikkuna. Voit palata tämän ikkunan ohjeisiin milloin tahansa."
+msgstr "Tämä on ‘Tavoitteet’ -ikkuna. Voit palata tähän ikkunaan milloin tahansa saadaksesi ohjeita."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
-msgstr "Voit avata ja sulke tämän ikkunan klikkaamalla ‘Tavoitteet’ nappia työkaluvalikosta ruudun alareunassa."
+msgstr "Voit avata ja sulkea tämän ikkunan klikkaamalla ‘Tavoitteet’ -nappia työkaluvalikosta näytön alareunassa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
-msgstr "Kuten missä tahansa ikkunassa, voit myös sulkea ‘Tavoitteet’ ikkunan oikeanpuoleisella hiiren napilla."
+msgstr "Kuten missä tahansa ikkunassa, voit sulkea myös ‘Tavoitteet’ -ikkunan hiiren oikealla näppäimellä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -116,7 +116,7 @@ msgstr "Näytä rakennuspaikat"
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr "Puunhakkaajan mökkiä varten täytyy etsiä sopiva paikka. Helpoiten se löytyy aktivoimalla 'Näytä Rakennusalueet. Sen voi tehdä kahdella tavalla:"
+msgstr "Puunhakkaajan mökkiä varten täytyy etsiä sopiva paikka. Helpoiten se löytyy aktivoimalla 'Näytä Rakennuspaikat. Sen voi tehdä kahdella tavalla:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -144,7 +144,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have a different "
 "economy, strength and weaknesses, but the general gameplay is the same for "
 "all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Widelands-pelissä on viisi eri heimoa: barbaarit, Imperiumi, atlantislaiset, friisit ja amatsonit. Joka heimolla on erilainen talous, sekä omat vahvuutensa ja heikkoutensa. Peliä pelataan kuitenkin yleisesti ottaen samalla tavalla kaikilla heimoilla. Tällä kertaa pelaamme barbaareilla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -156,36 +156,36 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr "Tavallisesti peli aloitetaan yhdellä päämajalla. Se on iso rakennus, jonka edessä on sininen lippu. Päämaja on varasto, johon varastoidaan tuotteita, työntekijöitä ja sotilaita. Joitakin tuotteita tarvitaan talojen ja muiden varastojen rakentamiseen. Tuotteet eivät säily varastossa ikuisesti, joten sinun pitää täydentää sitä. Pelin alussa kaikkein tärkempiä tuotteita ovat yleisimmät rakennustavarat: kaadetut puut ja graniitti. Kannattaa varmistaa ettei kaadetut puut pääse loppumaan. Sitä varten tarvitaan puunhakkaaja ja hänelle mökki oleskeluun."
+msgstr "Pelin alussa on tavallisesti yksi päämaja. Se on iso rakennus, jonka edessä on sininen lippu. Päämaja on varasto, johon varastoidaan tuotteita, työntekijöitä ja sotilaita. Joitakin tuotteita käytetään rakennusmateriaalina ja toisia muiden tuotteiden valmistukseen. Päämajan varastot eivät tule tietenkään riittämään ikuisesti, joten varastoa tulee täydentää. Pelin alussa tärkeimmät tuotteet ovat perusrakennusmateriaalit, kuten tukit ja graniitti. On tärkeää etteivät tukit pääse loppumaan; sen varmistamme rakentamalla puunhakkaajan mökin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:79
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr "Puunhakkaajan mökkiä varten täytyy etsiä sopiva paikka. Helpoiten se löytyy aktivoimalla 'Näytä Rakennuspaikat'."
+msgstr "Puunhakkaajan mökille täytyy etsiä sopiva paikka. Helpoiten se löytyy aktivoimalla 'Näytä Rakennuspaikat'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
 "Left-click the ‘OK’ button to close this window. I'll show you where the "
 "menu is and where to show and hide the building spaces."
-msgstr ""
+msgstr "Klikkaa ‘OK’ hiiren vasemmalla näppäimellä sulkeaksesi tämän ikkunan. Näytän mistä valikko löytyy ja kuinka rakennuspaikat saadaan näkyviin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
 "Note that you cannot close this window by right-clicking on it. I have "
 "blocked this so that you will not close it by accident and miss important "
 "information."
-msgstr "Huomaathan ettet voi sulkea tätä ikkuna oikenpuoleisella hiiren napilla. Olen estänyt sen ettet vahingossa sulje sitä ja menetä tärkeitä ohjeita."
+msgstr "Huomaathan ettet voi sulkea tätä ikkunaa hiiren oikealla näppäimellä. Olen estänyt sen, ettei tärkeitä tietoja jää huomaamatta jos vahingossa suljet sen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Laita nyt rakennuspaikat näkyviin, jotta voimme sijoittaa ensimmäisen rakennuksemme."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"
-msgstr "Puunhakkaajan paikka"
+msgstr "Paikka puunhakkajalle"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:105
 msgid ""
@@ -194,7 +194,7 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr "Hyvinhän se meni! Tulen kertomaan noista symboleista hetken kuluttua. Ensin kuitenkin näytän miten voit rakentaa puunhakkaajan mökin ja kuinka yhdistää sen tiellä. Puunhakkaajan mökille näyttäisi olevan sopiva paikka puiden lähellä. Tulen kertomaan mitä aion tehdä ja sitten pyydän sinua painamaan 'OK' painiketta, jotta voin havainnollistaa sen."
+msgstr "Hyvinhän se meni! Selitän hetken kuluttua mitä nuo symbolit tarkoittavat. Ensin kuitenkin näytän miten voit rakentaa puunhakkaajan mökin ja kuinka yhdistää siihen tien. Puunhakkaajan mökille näyttäisi olevan sopiva paikka puiden lähellä. Tulen kertomaan mitä aion tehdä ja sitten pyydän sinua painamaan 'OK' painiketta, jotta voin havainnollistaa sen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:112
 msgid "Building the Lumberjack"
@@ -208,13 +208,13 @@ msgid ""
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr "Ensin painan kuviota, johon haluan puunhakkaajan mökin rakentaa. Sinne ilmestyy ruutu, josta voin valita mökin rakennusten joukosta. Koska valitsen keltaisen rakennussymboolin - mikä tarkoittaa, että alueella voi olla pieniä ja keskisuuria rakennuksia - minulle näytetään kaikki keskisuuret rakennukset, joten valitsen pienten rakennuksien välilehden. Sitten valitsen puunhakkaajan mökin."
+msgstr "Ensin klikkaan symbolia johon haluan rakentaa puunhakkaajan mökin. Näyttöön ilmestyy ruutu, josta voin valita mökin rakennusten joukosta. Koska valitsen keltaisen rakennussymbolin - mikä tarkoittaa, että alueella voi olla pieniä ja keskisuuria rakennuksia – minulle näytetään kaikki keskisuuret rakennukset, joten valitsen pienten rakennuksien välilehden. Sitten valitsen puunhakkaajan mökin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:117
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr "Paina 'OK' painikettta ja katso esimerkkiäni. Tulen etenemään hyvin hitaasti: Painan - sitten valitsen välilehden  - ja lopulta valitsen rakennuksen."
+msgstr "Paina 'OK' -painiketta seurataksesi esimerkkiäni. Tulen etenemään hyvin hitaasti: Klikkaan – sitten valitsen välilehden – ja lopulta valitsen rakennuksen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:136
@@ -227,7 +227,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "Se ei kuitenkaan vielä rakennu. Sitä varten minun pitää yhdistää puunhakkaajan mökki muuhun tieverkostoon. Heti rakennustyömaan tilauksen jälkeen siirryin automaattisesti tienrakennusmoodiin, joten minun täytyy vain painaa sinistä lippua päämajan edessä."
+msgstr "Sitä ei kuitenkaan voi rakentaa vielä. Sitä varten minun pitää yhdistää puunhakkaajan mökki muuhun tieverkostoon. Heti rakennustyömaan alettua siirryin automaattisesti tienrakennustilaan, joten minun täytyy vain klikata sinistä lippua päämajan edessä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:140
 msgid ""
@@ -237,20 +237,20 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr "Se ei kuitenkaan vielä rakennu. Sitä varten minun pitää yhdistää puunhakkaajan mökki muuhun tieverkostoon. Olet kytkenyt 'Aloita tien rakentamninen lipun asettamisen jälkeen' valinnan pois päältä. (Valitse 'Asetukset' Widelandsin päävalikosta muuttaaksesi sitä). Siksi olen siirtynyt  tienrakennustilaan manuaalisesti. Tulen myöhemmin kertomaan kuinka se tehdään. Tien rakentamiseksi minun täytyy nyt vain painaa sinistä lippua päämajani edessä."
+msgstr "Sitä ei kuitenkaan voi rakentaa vielä. Sitä varten minun pitää yhdistää puunhakkaajan mökki muuhun tieverkostoon. Olet kytkenyt 'Aloita tien rakentaminen lipun asettamisen jälkeen' valinnan pois päältä. (Valitse 'Asetukset' Widelandsin päävalikosta muuttaaksesi sitä). Sen vuoksi olen siirtynyt  tienrakennustilaan manuaalisesti. Tulen myöhemmin kertomaan kuinka se tehdään. Tien rakentamiseksi minun täytyy nyt vain klikata sinistä lippua päämajani edessä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr "Puunhakkaajan luomisen odottelu"
+msgstr "Odotellaan puunhakkajan mökin valmistumista"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:153
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Katso tarkasti kuinka rakentaja lähtee päämajasta ja menee rakennustyömaalle. Sen lisäksi kantaja menee paikalleen kahden sinisen lipun välille ja kantaa tuotteita siniseltä lipulta toiselle."
+msgstr "Katsohan kuinka rakentaja lähtee päämajasta ja menee rakennustyömaalle. Myös kantaja menee paikalleen kahden sinisen lipun väliin ja kantaa materiaaleja siniseltä lipulta toiselle."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid "Build a flag to divide the road to the lumberjack"
@@ -258,30 +258,30 @@ msgstr "Aseta lippu jakamaan tie kohti puunhakkaajaa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:164
 msgid "Build a Flag on the Road"
-msgstr "Rakenna lippu tielle"
+msgstr "Pystytä tielle lippu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:165
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "Mitä lyhyempiä tien osat ovat, sen nopeammin tuotteet tulee toimitetuksi perille. Sitä varten sinun tulee varmistaa, että teissäsi on niin paljon lippuja kuin mahdollista."
+msgstr "Mitä lyhyempiä tien osat ovat, sitä nopeammin materiaalit voidaan toimittaa perille. Sitä varten sinun tulee varmistaa, että teilläsi on mahdollisimman paljon lippuja."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:166
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr "Rakenna nyt sininen lippu puoleen väliin tietä yhdistääksesi päämajasi puunhakkaajasi mökille."
+msgstr "Pystytä nyt sininen lippu tien puoliväliin yhdistääksesi päämajasi puunhakkaajasi mökkiin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr "Rakentaaksesi lipun, klikkaa keltaista lippukuvaketta juuri sijoitettujen kahden sinisen lipun välistä ja sitten klikkaa pystytä lippu kuvaketta."
+msgstr "Pystyttääksesi lipun, klikkaa keltaista lippukuvaketta juuri sijoitettujen kahden sinisen lipun välissä ja sitten klikkaa 'pystytä lippu' -kuvaketta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:173
 msgid "Placing Another Flag"
-msgstr "Lipun asettaminen"
+msgstr "Toisen lipun pystyttäminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:177
 msgid ""
@@ -301,7 +301,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Nyt olet jakanut tien kahteen osaan kahdelle kantajalle. Se tarkoittaa vähemmän työtä kantajalle ja suurempaa suorituskykyä meille. Siksi sinun kannattaa aina asettaa mahdollisimman monta lippua teillesi."
+msgstr "Nyt olet jakanut tien kahteen osaan kahdelle kantajalle. Näin työ sujuu tehokkaammin ja kantajamme eivät rasitu liikaa . Siksi sinun kannattaa aina asettaa mahdollisimman monta lippua teillesi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
