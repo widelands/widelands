@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-09-04 08:25+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -34,11 +34,6 @@ msgid "Help"
 msgstr "Help"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgctxt "hotkey"
-msgid "Esc"
-msgstr ""
-
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr "Toggle main menu"
@@ -73,21 +68,11 @@ msgstr "Activate information tool"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:32
-msgctxt "hotkey"
-msgid "Ctrl + L"
-msgstr "Ctrl + L"
-
-#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr "Load map"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgctxt "hotkey"
-msgid "Ctrl + S"
-msgstr "Ctrl + S"
-
 #: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr "Save map"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-02 08:08+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-17 08:28+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1168,7 +1168,7 @@ msgstr "Manioková kuchyně"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
-#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:215
@@ -1237,6 +1237,7 @@ msgstr "Manioková kuchyně"
 msgid "working"
 msgstr "vaření"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1272,7 +1273,7 @@ msgstr "sklízení maniokové hlízy"
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
 msgid "No Fields"
-msgstr "Žádné pole"
+msgstr "Žádná pole"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1758,9 +1759,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1874,7 +1875,7 @@ msgid "Tapir Farm"
 msgstr "Tapíří farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
-#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:61
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
 msgctxt "amazons_building"
 msgid "breeding tapir"
 msgstr "chování tapíra"
@@ -1916,6 +1917,7 @@ msgstr "Stan ochránkyně fauny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -3144,7 +3146,7 @@ msgid "Barracks"
 msgstr "Kasárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:49
 msgctxt "empire_building"
 msgid "recruiting soldier"
 msgstr "verbování"
@@ -3929,7 +3931,7 @@ msgstr "Pekárna na medový chléb"
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:77
 msgid "baking honey bread"
-msgstr "pečení medového chléba"
+msgstr "pečení medového chleba"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:8
@@ -5523,19 +5525,19 @@ msgid ""
 "an economy. Warning: the AI can’t successfully start from this."
 msgstr "Začni hru jen se skladem a nejzákladnějším minimem pro rozběh hospodářství. Pozor: UI za těchto podmínek nedokáže úspěšně zahájit hru."
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid "Be careful"
 msgstr "Dávej pozor"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
@@ -5581,7 +5583,7 @@ msgstr "Obchodní stanice"
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr "Pokud tomuto hráči dojdou potřebné suroviny, budou zdarma doplněny"
+msgstr "Pokud hráči dochází důležité suroviny, jsou zdarma doplněny"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -7754,7 +7756,7 @@ msgstr "Dvojitý trojzubec"
 #: ../../data/tribes/wares/trident_heavy_double/init.lua:8
 msgctxt "ware"
 msgid "Heavy Double Trident"
-msgstr "Těžký dvojitý trozubec"
+msgstr "Těžký dvojitý trojzubec"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/trident_light/init.lua:8
