@@ -7,7 +7,7 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016,2019
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
 # GunChleoc, 2016
-# Gontzal M. Pujana <juchuf@gmail.com>, 2018
+# Gontzal M. Pujana <juchuf@gmail.com>, 2018,2021
 # Javier Mora <morehash@gmail.com>, 2015
 # Gontzal M. Pujana <juchuf@gmail.com>, 2015
 # Kiba, 2015
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-07 22:55+0000\n"
-"Last-Translator: Daniel Muñoz <dani_m_1991@hotmail.com>\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-15 10:08+0000\n"
+"Last-Translator: Gontzal M. Pujana <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1182,7 +1182,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
-#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:215
@@ -1251,6 +1251,7 @@ msgstr ""
 msgid "working"
 msgstr "trabajando"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1686,7 +1687,7 @@ msgstr "explorando"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
 msgctxt "amazons_building"
 msgid "Shipyard"
-msgstr ""
+msgstr "Astillero"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
@@ -1772,9 +1773,9 @@ msgstr "fabricando un martillo"
 msgid "making a chisel"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1888,7 +1889,7 @@ msgid "Tapir Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
-#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:61
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
 msgctxt "amazons_building"
 msgid "breeding tapir"
 msgstr ""
@@ -1930,6 +1931,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -1982,7 +1984,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/youth_gathering/init.lua:60
 msgctxt "amazons_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "reclutando soldado"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:171
@@ -3158,7 +3160,7 @@ msgid "Barracks"
 msgstr "Barracones"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:49
 msgctxt "empire_building"
 msgid "recruiting soldier"
 msgstr "reclutando soldado"
@@ -4225,7 +4227,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "mejorando evasión de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
@@ -4237,7 +4239,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "mejorando vida de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
@@ -4261,7 +4263,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "mejorando defensa de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
@@ -5305,7 +5307,7 @@ msgstr ""
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Árbol muerto"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:80
@@ -5529,19 +5531,19 @@ msgid ""
 "an economy. Warning: the AI can’t successfully start from this."
 msgstr ""
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid "Be careful"
 msgstr "Ten cuidado"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
@@ -7144,7 +7146,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pan"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -7794,7 +7796,7 @@ msgstr "Lana"
 #: ../../data/tribes/workers/amazons/builder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Builder"
-msgstr ""
+msgstr "Constructor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/carrier/init.lua:8
@@ -7842,7 +7844,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
 msgctxt "amazons_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Geólogo"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_digger/init.lua:8

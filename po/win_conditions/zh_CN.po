@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-01-19 12:33+0000\n"
-"Last-Translator: Roy Luo <1598359376@qq.com>\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -125,12 +125,12 @@ msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "总计：%i 点"
 
-#: ../../data/scripting/win_conditions/collectors.lua:193
+#: ../../data/scripting/win_conditions/collectors.lua:194
 #, lua-format
 msgid "Status for Team %d"
 msgstr "%d团队的状态"
 
-#: ../../data/scripting/win_conditions/collectors.lua:195
+#: ../../data/scripting/win_conditions/collectors.lua:196
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -141,24 +141,36 @@ msgid "Autocrat"
 msgstr "独裁者"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
-msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "能打败所有其他人的部族或团队获胜！"
+msgid ""
+"The tribe or team that can defeat all others wins the game! This means the "
+"opponents do not have any headquarters, ports or warehouses left."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/endless_game.lua:15
+#: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
 msgstr "无休止的游戏"
 
-#: ../../data/scripting/win_conditions/endless_game.lua:17
+#: ../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
 msgstr "这是一场没有规则的无休止游戏。"
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
 msgid "Endless Game (no fog)"
 msgstr "无限游戏（雾战关闭）"
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "这是一场没有规则的无休止游戏。雾战模式已关闭。"
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:16
+msgid "HQ Hunter"
+msgstr ""
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:18
+msgid ""
+"The tribe or team that can find and destroy all other headquarters wins the "
+"game! Does not work with starting conditions without headquarters."
+msgstr ""
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
@@ -231,27 +243,27 @@ msgstr "每一个游戏玩家或团队都试图获得地图面积一半以上的
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:300
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:305
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:329
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:334
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i分钟"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:302
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:331
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1%小时%2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:308
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:337
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1%小时"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:311
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:340
 #, lua-format
 msgid "The game will end in %s."
 msgstr "游戏将在%s结束。"
@@ -314,25 +326,25 @@ msgstr "作为木材守护神，你深爱着大森林，所以你的任务是在
 msgid "Trees owned"
 msgstr "拥有的树木"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:63
-#: ../../data/scripting/win_conditions/wood_gnome.lua:83
-#: ../../data/scripting/win_conditions/wood_gnome.lua:88
+#: ../../data/scripting/win_conditions/wood_gnome.lua:64
+#: ../../data/scripting/win_conditions/wood_gnome.lua:86
+#: ../../data/scripting/win_conditions/wood_gnome.lua:91
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i树木"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:66
+#: ../../data/scripting/win_conditions/wood_gnome.lua:67
 msgid "%1$s has %2$s at the moment."
 msgstr "%1$s目前拥有%2$s。"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:85
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "%1$s had %2$s."
 msgstr "%1$s拥有%2$s。"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
+#: ../../data/scripting/win_conditions/wood_gnome.lua:94
 msgid "The winner is %1$s with %2$s."
 msgstr "胜利者是%1$s和%2$s。"

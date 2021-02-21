@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-01 20:26+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-15 19:55+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -372,7 +372,7 @@ msgstr "Pohyb pohledem po mapě"
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr "Pohyb pohledem je zkladním předpokladem ke kompletnímu přehled o celém tvém hospodářství. Ve Widelands jsou tři způsoby, jak pohybovat svým pohledem."
+msgstr "Pohyb pohledem je základním předpokladem pro kompletní přehled o celém tvém hospodářství. Ve Widelands jsou tři způsoby, jak pohybovat svým pohledem."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:260
 msgid "The first one is to use the cursor keys on your keyboard."
@@ -383,7 +383,7 @@ msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr "Druhý je obvyklejší a rychlejší: stikni a podrž pravé tlačítko myši kdekoliv na mapě, pak pohybuj myší a sleduj posun pohledu."
+msgstr "Druhý je obvyklejší a rychlejší: stiskni a podrž pravé tlačítko myši kdekoliv na mapě, pak pohybuj myší a sleduj posun pohledu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:262
 msgid ""
@@ -400,7 +400,7 @@ msgstr "Pohyb pohledem pomocí kurzorových šipek"
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
-msgstr "Pohledem je možné pohybovat třemi způsoby. Prvním způsobem je použítí šipek na klávesnici. Zkus si to."
+msgstr "Pohledem je možné pohybovat třemi způsoby. Prvním způsobem je použití šipek na klávesnici. Zkus si to."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
 msgid "Some Rocks Were Found"
@@ -431,7 +431,7 @@ msgstr "Jednoduše klikni pravým tlačítkem kdekoliv na mapu a podrž ho, poto
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
 msgid "Other Ways to Move the View"
-msgstr "JIné způsoby pohybu pohledu"
+msgstr "Další způsoby pohybu pohledem"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Excellent. Now there is a faster way to move, using the mouse instead."
@@ -897,7 +897,7 @@ msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
-msgstr "Výborně. Pamatuješ si, jak se zavírají okna? Jednoduše na ně klikni pravým tlačítkem myši. To funguje se všemi okny s vyjímkou příběhových oken, jako je toto. Jen do toho, vyzkoušej si to."
+msgstr "Výborně. Pamatuješ si, jak se zavírají okna? Jednoduše na ně musíš kliknout pravým tlačítkem myši. To funguje pro všechna okna s výjimkou příběhových oken, jako je toto. Jen do toho, vyzkoušej si to."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 msgid ""
@@ -1051,7 +1051,7 @@ msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr "Tímto končí první tutorial. Pro snazší zvládnutí hry navrhuji zkusit další tutoriály. Každý z nich se zaměřuje na jiné téma."
+msgstr "Tímto končí první tutoriál. Pro snazší zvládnutí hry navrhuji zkusit další tutoriály. Každý z nich se zaměřuje na jiné téma."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:650
 msgid ""
