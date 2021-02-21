@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-11-29 22:45+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -423,17 +423,6 @@ msgstr "선박에 사람들을 태우고 지평선으로 항해하십시오."
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr "이 지도는 ‘전제 군주’ 승리 조건으로는 이길 수 없습니다."
 
-#: ../../data/maps/Desert_Tournament.wmf/elemental:8
-msgid "Desert Tournament"
-msgstr "사막 토너먼트"
-
-#: ../../data/maps/Desert_Tournament.wmf/elemental:10
-msgid ""
-"Four tribes struggle with their nearest neighbor to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr "4곳의 부족이 가장 가까운 이웃과 믿음을 초월한 재물을 약속할 금광산에 먼저 도착하기위해 고심합니다. 하지만 남은 두곳이 자원을 현명하게 공유 할 수 있겠습니까?"
-
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr "돌로미티 3.0"
@@ -599,7 +588,6 @@ msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr "가을은 곳 겨울이 되었습니다. 어떤 것들은 꽁꽁 얼어 있지만 전쟁은 얼지 않습니다."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "시작 위치는 시계 방향입니다"
 
@@ -670,6 +658,19 @@ msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
 msgstr "삭막한 지역에서 지배를 위해 싸우고 있는 4개의 부족. 자원은 지도 전체에 흩어져 있습니다."
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:8
+msgid "Lesser Ring 1.2"
+msgstr ""
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:10
+msgid ""
+"A fair 8-player map with natural geographic features dividing land. The "
+"geographic features are meant to be somewhat realistic with rivers flowing "
+"from glaciers in the mountains through hills and flatlands into the sea. "
+"Gold is a much rarer resource compared to coal and iron. Different resources"
+" are often found at some distance to each other."
+msgstr ""
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -767,17 +768,16 @@ msgid ""
 "handful of big rivers."
 msgstr "다양한 풍경들로 가득한 신비한 땅들, 한줌의 큰 강이 모든 땅들을 가로질러 흐릅니다."
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:8
-msgid "The Ancient Sun of Fire"
-msgstr "고대의 불의 태양"
+#: ../../data/maps/Sandy_Passes.wmf/elemental:9
+msgid "Sandy Passes"
+msgstr ""
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:10
+#: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
-"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others"
-" followed in its wake."
-msgstr "수백 년 동안, 이 섬은 신의 성역으로 유지되었습니다. 어떤 사람도 그곳에 함부로 발을 내 딛을수 없었습니다. 그러나 마침내 한 부족이 그 섬의 해안에 정착할 만큼 뻔뻔해지자 많은 다른 부족들이 그 뒤를 따랐습니다."
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr "4곳의 부족이 가장 가까운 이웃과 믿음을 초월한 재물을 약속할 금광산에 먼저 도착하기위해 고심합니다. 하지만 남은 두곳이 자원을 현명하게 공유 할 수 있겠습니까?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
