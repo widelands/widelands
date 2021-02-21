@@ -75,6 +75,7 @@ SUPPRESSED_CHECKS = {
     '[hicpp-vararg]',
     '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
     '[llvm-qualified-auto]',
+    '[llvmlibc-callee-namespace]',
     '[misc-macro-parentheses]',
     '[misc-non-private-member-variables-in-classes]',
     '[misc-redundant-expression]',
