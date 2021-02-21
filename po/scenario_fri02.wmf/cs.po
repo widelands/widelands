@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -71,7 +71,7 @@ msgstr "Výcvik a recyklace"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
-msgstr "Recykuj zbraně na kov"
+msgstr "Recykluj zbraně na kov"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
@@ -350,7 +350,7 @@ msgid ""
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
 "Narazili jsme tu na nějakou skupinku zdejších domorodců. Uvítali nás máváním"
-" svých seker a svým jazykem přípomínajícím výkřiky pomatenců."
+" svých seker a svým jazykem připomínajícím výkřiky pomatenců."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:151
@@ -378,7 +378,7 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
-"Mí průzkumníci už nedávají žádné zprávy o známkách jekéhokoliv života v "
+"Mí průzkumníci už nedávají žádné zprávy o známkách jakéhokoli života v "
 "okolí. Začneme budovat nový domov zde."
 
 #. TRANSLATORS: Reebaud – Introduction 3
@@ -420,7 +420,7 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
-"Průzkumnící přináší zprávy, že země na severu jsou drsné kopce, malebné na "
+"Průzkumníci přináší zprávy, že země na severu jsou drsné kopce, malebné na "
 "pohled, ale nevhodné na stavbu. Zkusme se tedy podívat, co objevíme na jihu."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:179
@@ -607,9 +607,9 @@ msgid ""
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
 "I přesto mohou doly dál těžit, ale jejich produktivita těžby uhlí nebo rudy "
-"bude dvacetkrát nižší, respektice desetkrát v případě, pokud by se jednalo o"
+"bude dvacetkrát nižší, respektive desetkrát v případě, pokud by se jednalo o"
 " vytěžené hlubinné doly. Pravděpodobně se budeš chtít připravit na zvýšenou "
-"časovovou náročnost těžby a na nárůst poptávky po jídle."
+"časovou náročnost těžby a na nárůst poptávky po jídle."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
@@ -733,7 +733,7 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
-"Pokud zde hledáš žívot v míru, není pro tebe volby v tom, zda jim dovolit "
+"Pokud zde hledáš život v míru, není pro tebe volby v tom, zda jim dovolit "
 "zde žít. Má-li ti Císařství pomoci vyhnat je pryč, požadujeme tvou podporu."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
@@ -836,7 +836,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:328
 msgid "The Scout Discovered Something"
-msgstr "Průzkůmníkovo odhalení"
+msgstr "Průzkumníkovo odhalení"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "Our scout returned"
