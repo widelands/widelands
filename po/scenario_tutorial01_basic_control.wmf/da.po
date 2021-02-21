@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-10-23 07:56+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-01-15 09:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -136,11 +136,11 @@ msgstr "Lad os gå i gang!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
-"There are four different tribes in Widelands: the Barbarians, the Empire, "
-"the Atlanteans and the Frisians. All tribes have a different economy, "
-"strength and weaknesses, but the general gameplay is the same for all. We "
-"will play the Barbarians for now."
-msgstr "Der er fire forskellige stammer i Widelands: barbarerne, imperiet, atlanterne og friserne. Alle stammer har forskellig økonomi, styrker og svagheder, men det generelle spil er ens for alle. Vi spiller nu som barbarerne."
+"There are five different tribes in Widelands: the Barbarians, the Empire, "
+"the Atlanteans, the Frisians and the Amazons. All tribes have a different "
+"economy, strength and weaknesses, but the general gameplay is the same for "
+"all. We will play the Barbarians for now."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""

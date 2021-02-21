@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,16 +26,20 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			game.gametime_ = Time(fr);
 			game.scenario_difficulty_ = fr.unsigned_32();
+			// TODO(Nordfriese): Savegame compatibility
+			if (packet_version >= 5 && fr.unsigned_8() == 0) {
+				game.set_write_replay(false);
+			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -63,6 +67,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	game.gametime_.save(fw);
 
 	fw.unsigned_32(game.scenario_difficulty_);
+	fw.unsigned_8(game.writereplay_ ? 1 : 0);
 
 	// TODO(sirver,trading): save/load trade_agreements and related data.
 

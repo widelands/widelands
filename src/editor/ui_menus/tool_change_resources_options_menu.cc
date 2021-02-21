@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,7 +101,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	box_.add(&resources_box_, UI::Box::Resizing::kFullSize);
 	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());
 
-	radiogroup_.set_state(increase_tool_.get_cur_res());
+	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
 
 	radiogroup_.changed.connect([this]() { change_resource(); });
 	radiogroup_.clicked.connect([this]() { change_resource(); });

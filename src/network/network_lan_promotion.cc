@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,11 +65,9 @@ int get_ip_version(const boost::asio::ip::udp& version) {
 
 /*** class LanBase ***/
 /**
- * \internal
- * In an ideal world, we would use the same code with boost asio for all three operating systems.
- * Unfortunately, it isn't that easy and we need some platform specific code.
- * For IPv4, windows needs a special case: For Linux and Apple we have to iterate over all assigned
- * IPv4
+ * \internal In an ideal world, we would use the same code with boost asio for all three operating
+ * systems. Unfortunately, it isn't that easy and we need some platform specific code. For IPv4,
+ * windows needs a special case: For Linux and Apple we have to iterate over all assigned IPv4
  * addresses (e.g. 192.168.1.68), transform them to broadcast addresses (e.g. 192.168.1.255) and
  * send our
  * packets to those addresses. For windows, we simply can send to 255.255.255.255.
@@ -393,10 +391,10 @@ LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 	gameinfo.version = LAN_PROMOTION_PROTOCOL_VERSION;
 	gameinfo.state = LAN_GAME_OPEN;
 
-	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion));
+	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion) - 1);
 	gameinfo.gameversion[sizeof(gameinfo.gameversion) - 1] = '\0';
 
-	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname));
+	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname) - 1);
 	gameinfo.hostname[sizeof(gameinfo.hostname) - 1] = '\0';
 }
 
@@ -435,7 +433,7 @@ void LanGamePromoter::run() {
 }
 
 void LanGamePromoter::set_map(char const* map) {
-	strncpy(gameinfo.map, map, sizeof(gameinfo.map));
+	strncpy(gameinfo.map, map, sizeof(gameinfo.map) - 1);
 	gameinfo.map[sizeof(gameinfo.map) - 1] = '\0';
 
 	needupdate = true;

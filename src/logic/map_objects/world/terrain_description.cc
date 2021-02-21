@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,7 +148,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 	frame_length_ = kFrameLength;
 	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
-	} else if (texture_paths_.size() == 1) {
+	}
+	if (texture_paths_.size() == 1) {
 		if (table.has_key("fps")) {
 			throw GameDataError("Terrain %s with one images must not have fps.", name_.c_str());
 		}

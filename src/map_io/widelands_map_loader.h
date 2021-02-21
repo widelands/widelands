@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,9 +39,9 @@ struct WidelandsMapLoader : public MapLoader {
 	WidelandsMapLoader(FileSystem* fs, Map*);
 	~WidelandsMapLoader() override;
 
-	int32_t preload_map(bool) override;
+	int32_t preload_map(bool, std::vector<AddOns::AddOnInfo>*) override;
 	int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType load_type) override;
-	int32_t load_map_for_render(EditorGameBase&) override;
+	int32_t load_map_for_render(EditorGameBase&, std::vector<AddOns::AddOnInfo>*) override;
 
 	MapObjectLoader* get_map_object_loader() {
 		return mol_.get();

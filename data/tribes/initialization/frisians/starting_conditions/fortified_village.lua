@@ -1,16 +1,18 @@
 -- =======================================================================
---                 frisians Fortified Village Starting Conditions
+--            Fortified Village starting conditions for Frisians
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
 push_textdomain("tribes")
 
-local r = {
+init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
    -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
    tooltip = _"Start the game with a fortified military installation",
+   incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+
    func =  function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
@@ -157,4 +159,4 @@ local r = {
    end
 }
 pop_textdomain()
-return r
+return init

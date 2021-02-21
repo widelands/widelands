@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,6 +83,7 @@ public:
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;
+	AddOns::AddOnRequirements required_addons;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDATA_H

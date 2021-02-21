@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,12 @@ public:
 	const BillOfMaterials& input_workers() const {
 		return input_workers_;
 	}
+	BillOfMaterials& mutable_input_wares() {
+		return input_wares_;
+	}
+	BillOfMaterials& mutable_input_workers() {
+		return input_workers_;
+	}
 	using Output = std::set<DescriptionIndex>;
 	const Output& output_ware_types() const {
 		return output_ware_types_;
@@ -162,6 +168,9 @@ public:
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs& programs() const {
+		return programs_;
+	}
+	Programs& mutable_programs() {
 		return programs_;
 	}
 
@@ -380,6 +389,14 @@ public:
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
+	// This function forces the productionsite to interrupt whatever it is doing ASAP,
+	// and start the specified program immediately afterwards. If that program expects
+	// some extra data, this data needs to be provided as the third parameter.
+	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
+	// Returns `true` if `set_next_program_override()` has been called recently
+	// and the force-started program has not terminated yet.
+	bool has_forced_state() const;
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -390,7 +407,8 @@ protected:
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
 		ProgramResult phase;               ///< micro-step index (instruction dependent)
-		uint32_t flags;                    ///< pfXXX flags
+		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
+		uint32_t flags;  ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -433,7 +451,10 @@ protected:
 	                  const Duration& delay = Duration(10),
 	                  ProgramResult phase = ProgramResult::kNone);
 
-	void program_start(Game&, const std::string& program_name);
+	void program_start(Game&,
+	                   const std::string& program_name,
+	                   bool force = false,
+	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 

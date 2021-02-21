@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -149,7 +149,8 @@ MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_
 		throw GameDataError("Expected a number >= %d but found \"%s\"", min_value, input.c_str());
 	}
 	if (value > max_value) {
-		throw GameDataError("Expected a number <= %ld but found \"%s\"", max_value, input.c_str());
+		throw GameDataError(
+		   "Expected a number <= %" PRIi64 " but found \"%s\"", max_value, input.c_str());
 	}
 	return result;
 }

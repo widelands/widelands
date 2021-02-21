@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -279,6 +279,22 @@ uint32_t WordWrap::width() const {
  */
 uint32_t WordWrap::height() const {
 	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
+}
+
+uint32_t WordWrap::line_index(int32_t y) const {
+	return std::min(size_t((y - 2 * kLineMargin) / text_height(fontsize_)), lines_.size() - 1);
+}
+uint32_t WordWrap::offset_of_line_at(int32_t y) const {
+	return line_offset(line_index(y));
+}
+std::string WordWrap::text_of_line_at(int32_t y) const {
+	size_t line_idx = line_index(y);
+	line_idx = std::min(line_idx, lines_.size() - 1);
+	return lines_[line_idx].text;
+}
+
+int WordWrap::text_width_of(std::string& text) const {
+	return text_width(text, fontsize_);
 }
 
 /**

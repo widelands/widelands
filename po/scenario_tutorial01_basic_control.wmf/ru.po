@@ -1,11 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Sergey Trofimov <sarg@sarg.org.ru>, 2021
 # Viktor S <awsswa59@gmail.com>, 2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Евгений Кривошеев <euja@yandex.ru>, 2019
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-10-23 07:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-01-17 13:13+0000\n"
+"Last-Translator: Sergey Trofimov <sarg@sarg.org.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,13 +119,13 @@ msgstr "Показать места строительства"
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Нам нужно найти подходящее место для хижины дровосека. Чтобы упростить задачу, мы можем активировать \"Показать места строительства\".\nЭто можно сделать двумя способами:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
 "Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
 "‘Show / Hide’ menu."
-msgstr ""
+msgstr "Нажмите пробел чтобы активировать их или выберите \"Показать места строительства\" в меню \"Показать / Скрыть\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid "Show the building spaces now."
@@ -142,11 +143,11 @@ msgstr "Давайте начнём!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
-"There are four different tribes in Widelands: the Barbarians, the Empire, "
-"the Atlanteans and the Frisians. All tribes have a different economy, "
-"strength and weaknesses, but the general gameplay is the same for all. We "
-"will play the Barbarians for now."
-msgstr ""
+"There are five different tribes in Widelands: the Barbarians, the Empire, "
+"the Atlanteans, the Frisians and the Amazons. All tribes have a different "
+"economy, strength and weaknesses, but the general gameplay is the same for "
+"all. We will play the Barbarians for now."
+msgstr "В Widelands есть пять различных племён: Варвары, Империя, Атланты, Фризы и Амазонцы. Экономика каждого племени отлична от других, у каждого племени также свои достоинства и недостатки, но процесс игры одинаков для всех. Начнём играть варварами."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -170,14 +171,14 @@ msgstr "Мы должны найти подходящее место для Хи
 msgid ""
 "Left-click the ‘OK’ button to close this window. I'll show you where the "
 "menu is and where to show and hide the building spaces."
-msgstr ""
+msgstr "Нажмите ЛКМ на кнопку \"ОК\" чтобы закрыть это окно. Я покажу где находится это меню и где можно скрыть и показать места строительства."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
 "Note that you cannot close this window by right-clicking on it. I have "
 "blocked this so that you will not close it by accident and miss important "
 "information."
-msgstr ""
+msgstr "Обратите внимание, что вы не можете закрыть это окно нажав ПКМ. Я отключил эту возможность, чтобы вы не случайно не закрыли окно и не пропустили важную информацию."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
@@ -290,7 +291,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "Великолепно работают, правда?! Но бедному носильщику приходится ходить слишком далеко. Мы можем облегчить ему жизнь (и поднять эффективность перемещения товаров), поставив еще один синий флаг на дороге. Теперь вы попробуйте."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:188
 msgid ""
@@ -313,7 +314,7 @@ msgstr "Давайте проверим степень готовности"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Нажмите на строительную площадку чтобы посмотреть на неё."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
@@ -778,7 +779,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘s’ key on the keyboard."
-msgstr ""
+msgstr "Показать или скрыть надписи статистики построек, вы можете выбрав \"Показать статистику\" в меню \"Показать/Скрыть\" внизу или нажав \"s\" на клавиатуре."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
@@ -813,7 +814,7 @@ msgstr "Заархивируйте свои входящие сообщения.
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "Продолжайте нажимать кнопку \"Архивировать выбранное сообщение\" пока все сообщения не будут отправлены в архив и список не очистится."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:532
 msgid ""
@@ -869,7 +870,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr ""
+msgstr "В данный момент у вас есть два сообщения. Первое, которое вы в сейчас читаете, и то, в котором говорится, что новый штаб был добавлен к вашему хозяйству. Давайте научимся архивировать сообщения:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Close the messages window"

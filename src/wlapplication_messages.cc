@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2020 by the Widelands Development Team
+ * Copyright (C) 2012-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,8 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	                .str()
 	          << endl
 	          << endl;
-	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl << endl;
+	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl;
+	std::cout << _("       widelands <save.wgf>/<replay.wrpl>") << endl << endl;
 	std::cout << _("Options:") << endl << endl;
 	std::cout << _(" --<config-entry-name>=value overwrites any config file setting") << endl
 	          << _("                      Note: New value will be written to config file") << endl
@@ -88,6 +89,10 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << _(" --metaserverport=[...]\n"
 	               "                      Port number of the metaserver for internet gaming.")
 	          << endl
+	          << _(" --addon_server=[...]\n"
+	               "                      Connect to a different github repository"
+	               "                      and branch from the add-ons manager.")
+	          << endl
 	          << endl
 	          << _(" --nosound            Starts the game with sound disabled.") << endl
 	          << endl
@@ -112,6 +117,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      map.")
 	          << endl
 	          << _(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << endl
+	          << _(" --replay=FILENAME    Directly loads the replay FILENAME.") << endl
 	          << _(" --script=FILENAME    Run the given Lua script after initialization.\n"
 	               "                      Only valid with --scenario, --loadgame, or --editor.")
 	          << endl
@@ -170,6 +176,13 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl;
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
+	std::cout
+	   << _(" <save.wgf>/<replay.wrpl> \n"
+	        "                      Directly loads the given savegame or replay. Useful for\n"
+	        "                      .wgf/.wrpl file extension association. Does not work with\n"
+	        "                      other options. Also see --loadgame/--replay.")
+	   << endl
+	   << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
 	               "        https://www.widelands.org/\n\n"
 	               "Hope you enjoy this game!")

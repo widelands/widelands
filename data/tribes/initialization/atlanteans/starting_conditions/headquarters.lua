@@ -1,5 +1,5 @@
 -- =======================================================================
---              Headquarters Starting Conditions for Atlanteans
+--           Headquarters starting conditions for Atlanteans
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

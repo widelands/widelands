@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
  * Create all the buttons etc...
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map"), true) {
 	set_current_directory(curdir_);
 
 	table_.selected.connect([this](unsigned) { entry_selected(); });
@@ -52,8 +52,12 @@ void MainMenuLoadMap::clicked_ok() {
 		set_current_directory(mapdata.filename);
 		fill_table();
 	} else {
+		// Prevent description notes from reaching a subscriber
+		// other than the one they're meant for
+		egbase_.delete_world_and_tribes();
+
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-		eia.egbase().create_loader_ui({"editor"}, true, "", kEditorSplashImage);
+		eia.egbase().create_loader_ui({"editor"}, true, "", editor_splash_image());
 		eia.load(mapdata.filename);
 		// load() will delete us.
 		eia.egbase().remove_loader_ui();

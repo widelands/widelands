@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,9 +40,14 @@ struct GameLoader {
 	int32_t preload_game(GamePreloadPacket&);
 	int32_t load_game(bool multiplayer = false);
 
+	bool did_postload_addons() const {
+		return did_postload_addons_;
+	}
+
 private:
 	FileSystem& fs_;
 	Game& game_;
+	bool did_postload_addons_;
 };
 }  // namespace Widelands
 

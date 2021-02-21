@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -222,6 +222,27 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	buf += as_listitem(
 	   (boost::format(_("Description: %s")) % richtext_escape(map->get_description())).str(),
 	   font_style);
+
+	{
+		std::string addons;
+		const size_t nr_addons = parent.egbase().enabled_addons().size();
+		if (nr_addons == 0) {
+			/** TRANSLATORS: No add-ons enabled */
+			addons = _("(none)");
+		} else {
+			for (size_t i = 0; i < nr_addons; ++i) {
+				if (addons.empty()) {
+					addons = parent.egbase().enabled_addons()[i].descname();
+				} else {
+					addons = (boost::format(_("%1$s; %2$s")) % addons %
+					          parent.egbase().enabled_addons()[i].descname())
+					            .str();
+				}
+			}
+		}
+		buf += as_listitem(
+		   (boost::format(_("Enabled Add-Ons: %s")) % richtext_escape(addons)).str(), font_style);
+	}
 
 	multiline_textarea->set_text(as_richtext(buf));
 

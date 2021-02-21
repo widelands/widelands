@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1369,11 +1369,7 @@ StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
 }
 
 StockPolicy Warehouse::get_stock_policy(WareWorker waretype, DescriptionIndex wareindex) const {
-	if (waretype == wwWORKER) {
-		return get_worker_policy(wareindex);
-	} else {
-		return get_ware_policy(wareindex);
-	}
+	return waretype == wwWORKER ? get_worker_policy(wareindex) : get_ware_policy(wareindex);
 }
 
 void Warehouse::set_ware_policy(DescriptionIndex ware, StockPolicy policy) {
@@ -1457,7 +1453,11 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 		pair.second = get_worker_policy(pair.first);
 	}
 	settings->launch_expedition = portdock_ && portdock_->expedition_started();
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	// On modern compilers a simple 'return settings;' would've been fine.
+	return std::unique_ptr<const BuildingSettings>(std::move(settings));
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {

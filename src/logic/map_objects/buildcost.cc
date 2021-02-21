@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,8 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& d
 		if (value < 1) {
 			throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
 			                    "tables are allowed if you wish to have an amount of 0.");
-		} else if (value > 255) {
+		}
+		if (value > 255) {
 			throw GameDataError("Ware count needs to be <= 255.");
 		}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,8 @@ void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const) {
 
 	wml_ = new WidelandsMapLoader(fs.make_sub_file_system("map"), game.mutable_map());
 
-	wml_->preload_map(true);
+	wml_->preload_map(
+	   true, nullptr /* add-ons should already have been loaded by GamePreloadPacket */);
 
 	//  DONE, mapfs gets deleted by WidelandsMapLoader.
 }

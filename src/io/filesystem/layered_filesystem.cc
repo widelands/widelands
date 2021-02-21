@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/wexception.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/streamread.h"
 
@@ -235,8 +236,13 @@ FileSystem* LayeredFileSystem::make_sub_file_system(const std::string& dirname) 
 		}
 	}
 
-	throw wexception("LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
-	                 paths_error_message(dirname).c_str());
+	try {
+		return &FileSystem::create(canonicalize_name(dirname));
+	} catch (const FileError&) {
+		throw FileNotFoundError(
+		   "LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
+		   paths_error_message(dirname));
+	}
 }
 
 /**
@@ -321,5 +327,8 @@ std::string LayeredFileSystem::paths_error_message(const std::string& filename) 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		message += "\n    " + (*it)->get_basename() + FileSystem::file_separator() + filename;
 	}
+
+	message += "\n    " + canonicalize_name(filename);
+
 	return message;
 }

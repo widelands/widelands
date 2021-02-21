@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "ui_basic/textarea.h"
 #include "wui/inputqueuedisplay.h"
+#include "wui/interactive_gamebase.h"
 
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
@@ -163,6 +164,14 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 	think();
 }
 
+void ProductionSiteWindow::clicked_watch() {
+	if (Widelands::ProductionSite* p = production_site_.get(ibase()->egbase())) {
+		if (upcast(InteractiveGameBase, igb, ibase())) {
+			igb->show_watch_window(*p->working_positions()[0].worker.get(ibase()->egbase()));
+		}
+	}
+}
+
 void ProductionSiteWindow::think() {
 	// BuildingWindow::think() will call die in case we are no longer in
 	// existance.
@@ -171,6 +180,11 @@ void ProductionSiteWindow::think() {
 	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
+	}
+
+	if (watch_button_) {
+		watch_button_->set_enabled(
+		   production_site->working_positions()[0].worker.get(ibase()->egbase()));
 	}
 
 	// If we have pending requests, update table each tick.

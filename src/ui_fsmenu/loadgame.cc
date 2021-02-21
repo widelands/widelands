@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,21 +22,35 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "build_info.h"
+#include "logic/replay.h"
+#include "logic/replay_game_controller.h"
+#include "ui_basic/messagebox.h"
+#include "ui_fsmenu/main.h"
+#include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/gamedetails.h"
+#include "wui/interactive_spectator.h"
+
 namespace FsMenu {
-FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
-                                               Widelands::Game& g,
-                                               GameSettingsProvider* gsp,
-                                               bool is_replay)
-   : TwoColumnsFullNavigationMenu(
-        fsmm, "choose_game", is_replay ? _("Choose Replay") : _("Choose Game")),
+
+LoadGame::LoadGame(MenuCapsule& fsmm,
+                   Widelands::Game& g,
+                   GameSettingsProvider& gsp,
+                   bool take_ownership_of_game_and_settings,
+                   bool is_replay,
+                   const std::function<void(const std::string&)>& callback)
+   : TwoColumnsFullNavigationMenu(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
+     game_(g),
+     settings_(gsp),
+     take_ownership_of_game_and_settings_(take_ownership_of_game_and_settings),
+     callback_on_ok_(callback),
      load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
                       LoadOrSaveGame::FileType::kReplay :
-                      (gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
-                                                     LoadOrSaveGame::FileType::kGameSinglePlayer),
+                      (gsp.settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
+                                                    LoadOrSaveGame::FileType::kGameSinglePlayer),
                    UI::PanelStyle::kFsMenu,
                    UI::WindowStyle::kFsMenu,
                    true,
@@ -66,13 +80,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		back_.set_tooltip(_("Return to the main menu"));
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
-		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+		back_.set_tooltip(gsp.settings().multiplayer ? _("Return to the multiplayer game setup") :
+		                                               _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
 	load_or_save_.table().double_clicked.connect([this](unsigned) { clicked_ok(); });
 
@@ -88,11 +100,19 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
-void FullscreenMenuLoadGame::layout() {
+
+LoadGame::~LoadGame() {
+	if (take_ownership_of_game_and_settings_) {
+		delete &game_;
+		delete &settings_;
+	}
+}
+
+void LoadGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	load_or_save_.delete_button()->set_desired_size(0, standard_height_);
 }
-void FullscreenMenuLoadGame::think() {
+void LoadGame::think() {
 	TwoColumnsFullNavigationMenu::think();
 
 	if (update_game_details_) {
@@ -102,7 +122,7 @@ void FullscreenMenuLoadGame::think() {
 	}
 }
 
-void FullscreenMenuLoadGame::toggle_filenames() {
+void LoadGame::toggle_filenames() {
 	showing_filenames_ = show_filenames_->get_state();
 	set_config_bool("display_replay_filenames", showing_filenames_);
 
@@ -119,7 +139,7 @@ void FullscreenMenuLoadGame::toggle_filenames() {
 	entry_selected();
 }
 
-void FullscreenMenuLoadGame::clicked_ok() {
+void LoadGame::clicked_ok() {
 	if (load_or_save_.table().selections().size() != 1) {
 		return;
 	}
@@ -129,13 +149,51 @@ void FullscreenMenuLoadGame::clicked_ok() {
 		load_or_save_.change_directory_to(gamedata->filename);
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
-			filename_ = gamedata->filename;
-			end_modal<MenuTarget>(MenuTarget::kOk);
+			if (!take_ownership_of_game_and_settings_) {
+				callback_on_ok_(gamedata->filename);
+				die();
+				return;
+			}
+
+			if (is_replay_ && gamedata->version != build_id()) {
+				UI::WLMessageBox w(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Version Mismatch"),
+				                   _("This replay was created with a different Widelands version. It "
+				                     "might be compatible, but will more likely desync or even fail to "
+				                     "load.\n\nPlease do not report any bugs that occur while watching "
+				                     "this replay.\n\nDo you want to load the replay anyway?"),
+				                   UI::WLMessageBox::MBoxType::kOkCancel);
+				if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+					return;
+				}
+			}
+
+			capsule_.set_visible(false);
+
+			try {
+				if (is_replay_) {
+					game_.create_loader_ui({"general_game"}, true, settings_.settings().map_theme,
+					                       settings_.settings().map_background);
+
+					game_.set_ibase(new InteractiveSpectator(game_, get_config_section()));
+					game_.set_write_replay(false);
+
+					ReplayGameController rgc(game_, gamedata->filename);
+					game_.save_handler().set_allow_saving(false);
+
+					game_.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
+
+				} else {
+					game_.run_load_game(gamedata->filename, "");
+				}
+			} catch (const std::exception& e) {
+				WLApplication::emergency_save(&capsule_.menu(), game_, e.what());
+			}
+			return_to_main_menu();
 		}
 	}
 }
 
-void FullscreenMenuLoadGame::entry_selected() {
+void LoadGame::entry_selected() {
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	if (load_or_save_.has_selection()) {
 		// Update during think() instead of every keypress
@@ -145,33 +203,19 @@ void FullscreenMenuLoadGame::entry_selected() {
 	}
 }
 
-void FullscreenMenuLoadGame::fill_table() {
+void LoadGame::fill_table() {
 	load_or_save_.set_show_filenames(showing_filenames_);
 	load_or_save_.fill_table();
 }
 
-const std::string& FullscreenMenuLoadGame::filename() const {
-	return filename_;
-}
-
-bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
+bool LoadGame::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
 	}
-
-	switch (code.sym) {
-	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM) {
-			break;
-		}
-		FALLS_THROUGH;
-	case SDLK_DELETE:
+	if (matches_shortcut(KeyboardShortcut::kCommonDeleteItem, code)) {
 		load_or_save_.clicked_delete();
 		return true;
-	default:
-		break;
 	}
-
 	return TwoColumnsFullNavigationMenu::handle_key(down, code);
 }
 }  // namespace FsMenu

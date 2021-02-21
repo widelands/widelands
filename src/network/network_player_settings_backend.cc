@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,4 +89,12 @@ void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id, Widelands::Tea
 		return;
 	}
 	s->set_player_team(id, team);
+}
+
+/// Sets the colo for the player slot
+void NetworkPlayerSettingsBackend::set_player_color(PlayerSlot id, const RGBColor& c) {
+	if (id >= s->settings().players.size()) {
+		return;
+	}
+	s->set_player_color(id, c);
 }

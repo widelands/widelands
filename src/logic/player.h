@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "economy/flag_job.h"
 #include "graphic/color.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
@@ -71,6 +72,7 @@ public:
 	Player(EditorGameBase&,
 	       PlayerNumber,
 	       uint8_t initialization_index,
+	       const RGBColor&,
 	       const TribeDescr& tribe,
 	       const std::string& name);
 	~Player() = default;
@@ -103,6 +105,9 @@ public:
 		get_messages()->set_message_status(id, status);
 	}
 
+	// Open a watch window following the given bob, provided that this is the interactive player.
+	void show_watch_window(Game&, Bob&);
+
 	const std::set<Serial>& ships() const;
 	void add_ship(Serial ship);
 	void remove_ship(Serial ship);
@@ -119,11 +124,15 @@ public:
 	TeamNumber team_number() const {
 		return team_number_;
 	}
-	const RGBColor& get_playercolor() const {
-		return kPlayerColors[player_number_ - 1];
-	}
 	const TribeDescr& tribe() const {
 		return tribe_;
+	}
+
+	const RGBColor& get_playercolor() const {
+		return playercolor_;
+	}
+	void set_playercolor(const RGBColor& c) {
+		playercolor_ = c;
 	}
 
 	const std::string& get_name() const {
@@ -214,7 +223,7 @@ public:
 	struct Field {
 		Field()
 		   : military_influence(0),
-		     vision(0),
+		     vision(VisibleState::kUnexplored),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),
@@ -497,7 +506,7 @@ public:
 	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
 	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
 	void bulldoze(PlayerImmovable&, bool recurse = false);
-	void flagaction(Flag&);
+	void flagaction(Flag&, FlagJob::Type);
 	void start_stop_building(PlayerImmovable&);
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
@@ -514,6 +523,8 @@ public:
 	Economy* get_economy(Widelands::Serial serial) const;
 	bool has_economy(Widelands::Serial serial) const;
 
+	Quantity get_total_economy_target(WareWorker, DescriptionIndex) const;
+
 	uint32_t get_current_produced_statistics(uint8_t);
 
 	// Military stuff
@@ -523,8 +534,10 @@ public:
 	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void
-	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
+	void enemyflagaction(const Flag&,
+	                     PlayerNumber attacker,
+	                     const std::vector<Widelands::Soldier*>&,
+	                     bool allow_conquer);
 
 	uint32_t casualties() const {
 		return casualties_;
@@ -571,6 +584,7 @@ public:
 	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex const) const;
 
 	void init_statistics();
 	void read_statistics(FileRead&, uint16_t packet_version);
@@ -625,8 +639,13 @@ public:
 	bool additional_expedition_items_allowed() const {
 		return allow_additional_expedition_items_;
 	}
-	void set_allow_additional_expedition_items(bool allow) {
+	void set_allow_additional_expedition_items(const bool allow) {
 		allow_additional_expedition_items_ = allow;
+	}
+
+	void set_hidden_from_general_statistics(bool);
+	bool is_hidden_from_general_statistics() const {
+		return hidden_from_general_statistics_;
 	}
 
 private:
@@ -650,6 +669,7 @@ private:
 	uint8_t initialization_index_;
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
+	RGBColor playercolor_;
 	TeamNumber team_number_;
 	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 	bool see_all_;
@@ -700,7 +720,7 @@ private:
 	 * life of the game, indexed as
 	 * ware_stocks_[ware_id][time_index]
 	 */
-	StatisticsMap ware_stocks_;
+	StatisticsMap ware_stocks_, worker_stocks_;
 
 	std::set<DescriptionIndex> muted_building_types_;
 
@@ -725,11 +745,25 @@ private:
 
 	bool allow_additional_expedition_items_;
 
+	bool hidden_from_general_statistics_;
+
 	FxId message_fx_;
 	FxId attack_fx_;
 	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
+};
+
+struct NotePlayerDetailsEvent {
+	CAN_BE_SENT_AS_NOTE(NoteId::PlayerDetailsEvent)
+
+	enum class Event { kGeneralStatisticsVisibilityChanged };
+
+	const Event event;
+	Player& player;
+
+	NotePlayerDetailsEvent(const Event e, Player& p) : event(e), player(p) {
+	}
 };
 
 void find_former_buildings(const Descriptions& descriptions,

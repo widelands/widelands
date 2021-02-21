@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for New World
+--               New World starting conditions for Frisians
 -- =======================================================================
 
 include "scripting/starting_conditions.lua"
@@ -12,6 +12,7 @@ init = {
    -- TRANSLATORS: This is the tooltip for the "New World" starting condition
    tooltip = _"Start the game with seven ships full of wares on the ocean",
    map_tags = {"seafaring"},
+   incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
 
    func = function(player, shared_in_start)
 

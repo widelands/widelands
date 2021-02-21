@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,11 @@
 #include "ui_fsmenu/main.h"
 #include "wui/sound_options.h"
 
-class FullscreenMenuOptions;
 class Section;
+
+namespace FsMenu {
+
+class Options;
 
 class OptionsCtrl {
 public:
@@ -49,6 +52,7 @@ public:
 		bool inputgrab;
 		uint32_t maxfps;
 		bool sdl_cursor;
+		std::string theme;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -70,8 +74,12 @@ public:
 		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
+		bool edge_scrolling;
+		bool tooltip_accessibility_mode;
 		int32_t display_flags;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		bool training_wheels;
+#endif
 
 		// Language options
 		std::string language;
@@ -80,24 +88,24 @@ public:
 		uint32_t active_tab;
 	};
 
-	explicit OptionsCtrl(FullscreenMenuMain&, Section&);
+	explicit OptionsCtrl(MainMenu&, Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 
 private:
 	Section& opt_section_;
-	FullscreenMenuMain& parent_;
-	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
+	MainMenu& parent_;
+	std::unique_ptr<Options> opt_dialog_;
 };
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class FullscreenMenuOptions : public UI::Window {
+class Options : public UI::Window {
 public:
-	explicit FullscreenMenuOptions(FullscreenMenuMain&, OptionsCtrl::OptionsStruct opt);
+	explicit Options(MainMenu&, OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
 
 	bool handle_key(bool, SDL_Keysym) override;
@@ -123,9 +131,7 @@ private:
 
 	// UI elements
 	UI::TabPanel tabs_;
-	UI::Box box_interface_;
-	UI::Box box_interface_left_;
-	UI::Box box_windows_;
+	UI::Box box_interface_, box_interface_hbox_, box_interface_vbox_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
 	UI::Box box_newgame_;
@@ -134,17 +140,20 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<int> resolution_dropdown_;
+	UI::Dropdown<std::string> theme_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
+	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
 
-	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
 	UI::Checkbox dock_windows_to_edges_;
 	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
+
+	UI::Button configure_keyboard_;
 
 	// Sound options
 	SoundOptions sound_options_;
@@ -170,10 +179,13 @@ private:
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
+	UI::Checkbox edge_scrolling_;
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	UI::Box training_wheels_box_;
 	UI::Checkbox training_wheels_;
 	UI::Button training_wheels_button_;
+#endif
 
 	OptionsCtrl::OptionsStruct os_;
 
@@ -199,5 +211,7 @@ private:
 	};
 	std::map<std::string, LanguageEntry> language_entries_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,12 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-class FullscreenMenuMain;
+namespace FsMenu {
+
+class MainMenu;
 
 struct LoginBox : public UI::UniqueWindow {
-	explicit LoginBox(FullscreenMenuMain&, UI::UniqueWindow::Registry&);
+	explicit LoginBox(MainMenu&, UI::UniqueWindow::Registry&);
 
 	void think() override;
 
@@ -56,7 +58,7 @@ private:
 	void verify_input();
 	bool check_password();
 
-	FullscreenMenuMain& fsmm_;
+	MainMenu& fsmm_;
 
 	UI::Box main_box_, hbox_, buttons_box_, vbox1_, vbox2_;
 	UI::Button b_login_, b_cancel_;
@@ -65,5 +67,7 @@ private:
 	UI::Textarea ta_nickname_, ta_password_;
 	UI::MultilineTextarea register_account_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_LOGIN_BOX_H

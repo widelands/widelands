@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,10 +42,13 @@ struct MultilineEditbox : public Panel {
 
 	void focus(bool topcaller = true) override;
 
+	void layout() override;
+
 protected:
 	void draw(RenderTarget&) override;
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32_t) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_textinput(const std::string& text) override;
 
@@ -56,6 +59,9 @@ private:
 	void select_until(uint32_t end) const;
 	struct Data;
 	std::unique_ptr<Data> d_;
+	void set_caret_to_cursor_pos(int32_t x, int32_t y);
+	int calculate_text_width(std::string& text, int pos) const;
+	int approximate_cursor(std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
 };
 }  // namespace UI
 

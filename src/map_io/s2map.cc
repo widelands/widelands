@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -370,8 +370,20 @@ S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
-int32_t S2MapLoader::preload_map(bool const scenario) {
+int32_t S2MapLoader::preload_map(bool const scenario, std::vector<AddOns::AddOnInfo>* addons) {
 	assert(get_state() != State::kLoaded);
+
+	// s2 maps don't have world add-ons
+	// (UNTESTED because I don't have an s2 map to test this with)
+	if (addons) {
+		for (auto it = addons->begin(); it != addons->end();) {
+			if (it->category == AddOns::AddOnCategory::kWorld) {
+				it = addons->erase(it);
+			} else {
+				++it;
+			}
+		}
+	}
 
 	map_.cleanup();
 
@@ -561,6 +573,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//   owner == 4 -> grey
 	//   owner == 6 -> green
 	//   owner == 6 -> orange
+	// TODO(hessenfarmer): this comment is not correct section 6 determines how the values of section
+	// 5 are to be interpreted. Solution is working more the less though
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 6 (Ways) not found");
@@ -686,6 +700,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  0x49-4f == iron 1-7
 	//  0x41-47 == coal 1-7
 	//  0x59-5f == granite 1-7
+	// fish and ground water are ignored here as they are infinite in S2 and not in widelands
+	// fish an water are defaulted per terrain in widelands game, so it is safe to ignore them
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 12 (Resources) not found");
@@ -712,7 +728,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				res = "resource_gold";
 				amount = value & 7;
 				break;
-			case 0x59:
+			case 0x58:
 				res = "resource_stones";
 				amount = value & 7;
 				break;

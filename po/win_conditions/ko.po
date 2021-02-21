@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-08-17 08:55+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,28 +110,28 @@ msgstr "당신은 당신 창고의 귀중한 물품으로부터 점수를 얻습
 msgid "Points"
 msgstr "점수"
 
-#: ../../data/scripting/win_conditions/collectors.lua:134
+#: ../../data/scripting/win_conditions/collectors.lua:154
 #, lua-format
 msgid "Status for %s"
 msgstr "%s 의 상태"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:147
+#: ../../data/scripting/win_conditions/collectors.lua:167
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:151
+#: ../../data/scripting/win_conditions/collectors.lua:171
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "총계: %i 포인트"
 
-#: ../../data/scripting/win_conditions/collectors.lua:173
+#: ../../data/scripting/win_conditions/collectors.lua:194
 #, lua-format
 msgid "Status for Team %d"
 msgstr "팀 %d 의 상태"
 
-#: ../../data/scripting/win_conditions/collectors.lua:175
+#: ../../data/scripting/win_conditions/collectors.lua:196
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -142,24 +142,36 @@ msgid "Autocrat"
 msgstr "전제군주"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
-msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "다른 모두를 패배시키는 부족이나 팀이 게임에서 승리합니다!"
+msgid ""
+"The tribe or team that can defeat all others wins the game! This means the "
+"opponents do not have any headquarters, ports or warehouses left."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/endless_game.lua:15
+#: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
 msgstr "끝없는 게임"
 
-#: ../../data/scripting/win_conditions/endless_game.lua:17
+#: ../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
 msgstr "무규칙의 끝없는 게임입니다."
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
 msgid "Endless Game (no fog)"
 msgstr "끝없는 게임 (안개 없음)"
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "무규칙의 끝없는 게임입니다. 전장의 안개가 비활성화합니다."
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:16
+msgid "HQ Hunter"
+msgstr ""
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:18
+msgid ""
+"The tribe or team that can find and destroy all other headquarters wins the "
+"game! Does not work with starting conditions without headquarters."
+msgstr ""
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
@@ -232,27 +244,27 @@ msgstr "각 선수나 편은 지도 영역의 절반 이상을 얻으려고 합�
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:300
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:305
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:329
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:334
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 분"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:302
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:331
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1%시간 %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:308
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:337
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% 시간"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:311
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:340
 #, lua-format
 msgid "The game will end in %s."
 msgstr "게임이 %s 안에 종료합니다."
@@ -315,25 +327,25 @@ msgstr "당신은 숲 요정으로서 큰 숲을 좋아하기에, 다른 플레�
 msgid "Trees owned"
 msgstr "보유한 나무"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:63
-#: ../../data/scripting/win_conditions/wood_gnome.lua:83
-#: ../../data/scripting/win_conditions/wood_gnome.lua:88
+#: ../../data/scripting/win_conditions/wood_gnome.lua:64
+#: ../../data/scripting/win_conditions/wood_gnome.lua:86
+#: ../../data/scripting/win_conditions/wood_gnome.lua:91
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i 나무"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:66
+#: ../../data/scripting/win_conditions/wood_gnome.lua:67
 msgid "%1$s has %2$s at the moment."
 msgstr "지금 %1$s 이 %2$s 을 보유합니다."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:85
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "%1$s had %2$s."
 msgstr "%1$s 이 %2$s 을 보유했습니다."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
+#: ../../data/scripting/win_conditions/wood_gnome.lua:94
 msgid "The winner is %1$s with %2$s."
 msgstr "승자는 %2$s 을 보유한 %1$s 입니다."

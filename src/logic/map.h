@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
+#include "logic/addons.h"
 #include "logic/field.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -281,6 +282,7 @@ public:
 
 	void set_filename(const std::string& filename);
 	void set_author(const std::string& author);
+	void set_localize_author(bool);
 	void set_name(const std::string& name);
 	void set_description(const std::string& description);
 	void set_hint(const std::string& hint);
@@ -305,6 +307,9 @@ public:
 	}
 	const std::string& get_author() const {
 		return author_;
+	}
+	bool get_localize_author() const {
+		return localize_author_;
 	}
 	const std::string& get_name() const {
 		return name_;
@@ -610,6 +615,10 @@ public:
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
+	const AddOns::AddOnRequirements& required_addons() const {
+		return required_addons_;
+	}
+
 protected:
 	/// Calculate map compatibility information for the website if it wasn't defined in the map
 	/// packet. If is_post_one_world is true, this map wasn't created for a specific world (Widelands
@@ -649,6 +658,7 @@ private:
 	int16_t height_;
 	std::string filename_;
 	std::string author_;
+	bool localize_author_;
 	std::string name_;
 	std::string description_;
 	std::string hint_;
@@ -681,6 +691,8 @@ private:
 	std::set<FCoords> valuable_fields_;
 
 	MapVersion map_version_;
+
+	AddOns::AddOnRequirements required_addons_;
 };
 
 /*

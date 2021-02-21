@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-08-25 12:24+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,8 +111,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "그런 다음 ‘건물’을 선택합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "아니면 단축키 ‘b’ 를 사용하셔도 됩니다."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -256,10 +257,11 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "그런 다음 ‘재고’를 선택합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
+#, lua-format
 msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
+"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
 "quickly."
-msgstr "빠르게 창에 접근하려면 단축키 ‘i’ (‘inventory’ 에서 따온) 를 사용하실 수도 있습니다."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152

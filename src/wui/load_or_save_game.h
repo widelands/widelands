@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
-	friend class FullscreenMenuLoadGame;
+	friend class LoadGame;
 	friend struct GameMainMenuSaveGame;
 
 public:

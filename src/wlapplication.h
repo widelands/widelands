@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,15 +32,16 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 
 #include "base/vector.h"
 
-class FullscreenMenuMain;
-struct SinglePlayerGameSettingsProvider;
-
+namespace UI {
+class Panel;
+}
 namespace Widelands {
 class Game;
 }
@@ -136,6 +137,8 @@ struct WLApplication {
 
 	void run();
 
+	static void initialize_g_addons();
+
 	/// \warning true if an external entity wants us to quit
 	bool should_die() const {
 		return should_die_;
@@ -177,23 +180,11 @@ struct WLApplication {
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
-	void mainmenu();
-
-	bool mainmenu_tutorial(FullscreenMenuMain&);
-	void mainmenu_singleplayer();
-	void mainmenu_multiplayer(FullscreenMenuMain&, bool internet);
-	void mainmenu_editor();
-	bool new_random_game(FullscreenMenuMain&);
-	bool new_game(FullscreenMenuMain&,
-	              Widelands::Game&,
-	              SinglePlayerGameSettingsProvider&,
-	              bool preconfigured,
-	              bool* canceled = nullptr);
-	bool load_game(FullscreenMenuMain&, std::string filename = "");
-	bool campaign_game(FullscreenMenuMain&);
-	bool replay(FullscreenMenuMain*);
-
-	static void emergency_save(Widelands::Game&);
+	static void emergency_save(UI::Panel*,
+	                           Widelands::Game&,
+	                           const std::string& error,
+	                           uint8_t player = 1,
+	                           bool replace_ctrl = true);
 
 private:
 	WLApplication(int argc, char const* const* argv);

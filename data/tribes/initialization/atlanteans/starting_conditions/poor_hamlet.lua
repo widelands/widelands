@@ -1,16 +1,18 @@
 -- =======================================================================
---              Minimum Starting Conditions for Atlanteans
+--      Minimum (Poor Hamlet) starting conditions for Atlanteans
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
 push_textdomain("tribes")
 
-local r = {
+init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Poor Hamlet",
    -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
    tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can’t successfully start from this.",
+   incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+
    func =  function(player, shared_in_start)
       local sf = wl.Game().map.player_slots[player.number].starting_field
       if shared_in_start then
@@ -51,4 +53,4 @@ local r = {
    end
 }
 pop_textdomain()
-return r
+return init

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -170,7 +170,8 @@ protected:
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::ButtonStyleInfo* button_style_;  // Background color and texture. Not owned.
+	UI::ButtonStyle button_style_;  // Background color and texture.
+	const UI::ButtonStyleInfo& button_style() const;
 };
 
 }  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,10 @@
 
 #include "game_io/game_preload_packet.h"
 
+#include <cstdlib>
 #include <memory>
 
+#include "base/log.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -41,6 +43,8 @@ constexpr const char* kMinimapFilename = "minimap.png";
 // Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 std::string GamePreloadPacket::get_localized_win_condition() const {
 	const std::string result = _(win_condition_);
+	// TODO(Nordfriese): If the win condition is defined in an add-on, we should store that
+	// add-on's textdomain in the file and use it instead for retrieving the translation
 	i18n::Textdomain td("win_conditions");
 	return _(result);
 }
@@ -59,10 +63,14 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			background_ = s.get_safe_string("background");
 			// TODO(Nordfriese): Savegame compatibility
 			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0. `kCurrentPacketVersion` will
+       // then need to be increased, and the minimum version for the following two values updated
+       // accordingly.
 			training_wheels_wanted_ =
 			   (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
 			active_training_wheel_ =
 			   (packet_version < 9 ? "" : s.get_safe_string("active_training_wheel"));
+#endif
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
 			number_of_players_ = s.get_safe_int("player_amount");
@@ -72,6 +80,25 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			}
 			savetimestamp_ = static_cast<time_t>(s.get_natural("savetimestamp"));
 			gametype_ = static_cast<GameController::GameType>(s.get_natural("gametype"));
+
+			required_addons_.clear();
+			for (std::string addons = s.get_string("addons", ""); !addons.empty();) {
+				const size_t commapos = addons.find(',');
+				const std::string substring = addons.substr(0, commapos);
+				const size_t colonpos = addons.find(':');
+				if (colonpos == std::string::npos) {
+					log_warn(
+					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+				} else {
+					const std::string version = substring.substr(colonpos + 1);
+					required_addons_.push_back(std::make_pair(
+					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
+				}
+				if (commapos == std::string::npos) {
+					break;
+				}
+				addons = addons.substr(commapos + 1);
+			}
 		} else {
 			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -114,8 +141,23 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
 	                                              game.game_controller()->get_game_type() :
 	                                              GameController::GameType::kReplay));
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	s.set_string("active_training_wheel", game.active_training_wheel());
 	s.set_bool("training_wheels", game.training_wheels_wanted());
+#endif
+
+	std::string addons;
+	for (const AddOns::AddOnInfo& addon : game.enabled_addons()) {
+		if (addon.category == AddOns::AddOnCategory::kTribes ||
+		    addon.category == AddOns::AddOnCategory::kWorld ||
+		    addon.category == AddOns::AddOnCategory::kScript) {
+			if (!addons.empty()) {
+				addons += ',';
+			}
+			addons += addon.internal_name + ':' + AddOns::version_to_string(addon.version, false);
+		}
+	}
+	s.set_string("addons", addons);
 
 	prof.write("preload", false, fs);
 

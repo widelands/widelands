@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,8 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 			if (row_ > hollow_area_.radius) {
 				phase_ = Phase::kNone;
 				return true;  // early out
-			} else if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
+			}
+			if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
 				phase_ = Phase::kBottom;
 			}
 

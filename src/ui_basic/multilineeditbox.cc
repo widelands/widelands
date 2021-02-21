@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,14 +28,8 @@
 #include "graphic/wordwrap.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
-namespace {
-bool inline copy_paste_modifier() {
-#ifdef __APPLE__
-	return SDL_GetModState() & KMOD_GUI;
-#endif
-	return SDL_GetModState() & KMOD_CTRL;
-}
-}  // namespace
+#include "wlapplication_options.h"
+
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
@@ -47,7 +41,10 @@ struct MultilineEditbox::Data {
 	std::string text;
 
 	/// Background color and texture + font style
-	const UI::TextPanelStyleInfo& style;
+	PanelStyle style;
+	inline const UI::TextPanelStyleInfo& get_style() const {
+		return g_style_manager->editbox_style(style);
+	}
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -74,7 +71,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&, const TextPanelStyleInfo& style);
+	explicit Data(MultilineEditbox&);
 	void refresh_ww();
 
 	void update();
@@ -93,6 +90,8 @@ struct MultilineEditbox::Data {
 
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 
+	uint32_t snap_to_char(std::string& txt, uint32_t cursor);
+
 private:
 	MultilineEditbox& owner;
 };
@@ -101,30 +100,30 @@ private:
  * Initialize an editbox that supports multiline strings.
  */
 MultilineEditbox::MultilineEditbox(
-   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : Panel(parent, style, x, y, w, h), d_(new Data(*this, g_style_manager->editbox_style(style))) {
+   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const UI::PanelStyle style)
+   : Panel(parent, style, x, y, w, h), d_(new Data(*this)) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
 	set_handle_textinput();
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& init_style)
+MultilineEditbox::Data::Data(MultilineEditbox& o)
    : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), o.panel_style_),
-     style(init_style),
+     style(o.panel_style_),
      cursor_pos(0),
      caret_image_path(o.panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
                                                            "images/ui_basic/caret_fs.png"),
-     lineheight(text_height(style.font())),
+     lineheight(text_height(get_style().font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
-                          (text_height(style.font()) * text_height(style.font())),
+                          (text_height(get_style().font()) * text_height(get_style().font())),
                        std::numeric_limits<int32_t>::max())),
      mode(Mode::kNormal),
      selection_start(0),
      selection_end(0),
      ww_valid(false),
-     ww(style.font().size(), style.font().color(), o.get_w()),
+     ww(get_style().font().size(), get_style().font().color(), o.get_w()),
      owner(o) {
 	scrollbar.moved.connect([&o](int32_t a) { o.scrollpos_changed(a); });
 
@@ -159,6 +158,11 @@ void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
+void MultilineEditbox::layout() {
+	Panel::layout();
+	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+}
+
 /**
  * Return the text currently stored by the editbox.
  */
@@ -179,7 +183,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(0);
+	d_->set_cursor_pos(d_->text.size());
 	d_->update();
 	d_->scroll_cursor_into_view();
 
@@ -226,7 +230,6 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
  * Find the starting byte of the next character
  */
 uint32_t MultilineEditbox::Data::next_char(uint32_t cursor) {
-	assert(cursor <= text.size());
 
 	if (cursor >= text.size()) {
 		return cursor;
@@ -249,15 +252,77 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 	return cursor;
 }
 
+uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor) {
+	while (cursor > 0 && Utf8::is_utf8_extended(txt[cursor])) {
+		--cursor;
+	}
+	return cursor;
+}
+
 /**
  * The mouse was clicked on this editbox
  */
-bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		d_->reset_selection();
+		set_caret_to_cursor_pos(x, y);
 		focus();
 		return true;
 	}
 	return false;
+}
+bool MultilineEditbox::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+	// state != 0 -> mouse button is pressed
+	if (state && get_can_focus()) {
+		select_until(d_->cursor_pos);
+		set_caret_to_cursor_pos(x, y);
+		select_until(d_->cursor_pos);
+		return true;
+	}
+
+	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
+}
+void MultilineEditbox::set_caret_to_cursor_pos(int32_t x, int32_t y) {
+	y += d_->scrollbar.get_scrollpos();
+
+	unsigned previous_line_index = d_->ww.offset_of_line_at(y);
+
+	std::string line = d_->ww.text_of_line_at(y);
+	int total_line_width = d_->ww.text_width_of(line);
+
+	if (x > total_line_width) {
+		// clicked end of line
+		d_->set_cursor_pos(previous_line_index + line.size());
+		return;
+	}
+	int current_line_index = approximate_cursor(line, x, 0);
+
+	d_->set_cursor_pos(previous_line_index + current_line_index);
+}
+
+int MultilineEditbox::approximate_cursor(std::string& line,
+                                         int32_t cursor_pos_x,
+                                         int approx_caret_pos) const {
+	static constexpr int error = 4;
+
+	// approximate using the first guess as start and increasing/decreasing text until error is small
+	int text_w = calculate_text_width(line, approx_caret_pos);
+	if (cursor_pos_x > text_w) {
+		while (cursor_pos_x - text_w > error) {
+			text_w = calculate_text_width(line, ++approx_caret_pos);
+		}
+	} else if (cursor_pos_x < text_w) {
+		while (text_w - cursor_pos_x > error) {
+			text_w = calculate_text_width(line, --approx_caret_pos);
+		}
+	}
+	return d_->snap_to_char(line, approx_caret_pos);
+}
+
+int MultilineEditbox::calculate_text_width(std::string& text, int pos) const {
+	std::string prefix = text.substr(0, d_->snap_to_char(text, pos));
+	return d_->ww.text_width_of(prefix);
 }
 
 /**
@@ -265,37 +330,32 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
  */
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-		case SDLK_v:
-			if (copy_paste_modifier() && SDL_HasClipboardText()) {
-				if (d_->mode == Data::Mode::kSelection) {
-					delete_selected_text();
-				}
-				handle_textinput(SDL_GetClipboardText());
-				return true;
-			}
-			return false;
-		case SDLK_c:
-			if (copy_paste_modifier() && d_->mode == Data::Mode::kSelection) {
-				copy_selected_text();
-				return true;
-			}
-			return false;
-		case SDLK_a:
-			if (copy_paste_modifier()) {
-				d_->selection_start = 0;
-				d_->selection_end = d_->text.size();
-				d_->mode = Data::Mode::kSelection;
-				return true;
-			}
-			return false;
-		case SDLK_x:
-			if (copy_paste_modifier() && d_->mode == Data::Mode::kSelection) {
-				copy_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && SDL_HasClipboardText()) {
+			if (d_->mode == Data::Mode::kSelection) {
 				delete_selected_text();
-				return true;
 			}
-			return false;
+			handle_textinput(SDL_GetClipboardText());
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
+		    d_->mode == Data::Mode::kSelection) {
+			copy_selected_text();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
+		    d_->mode == Data::Mode::kSelection) {
+			copy_selected_text();
+			delete_selected_text();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
+			d_->selection_start = 0;
+			d_->selection_end = d_->text.size();
+			d_->mode = Data::Mode::kSelection;
+			return true;
+		}
+
+		switch (code.sym) {
 		case SDLK_TAB:
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
@@ -569,7 +629,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	draw_background(dst, d_->style.background());
+	draw_background(dst, d_->get_style().background());
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

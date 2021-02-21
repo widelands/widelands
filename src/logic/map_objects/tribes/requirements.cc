@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -177,14 +177,13 @@ bool RequireAttribute::check(const MapObject& obj) const {
 		int32_t const value = obj.get_training_attribute(at);
 
 		return value >= min && value <= max;
-	} else {
-		int32_t value = 0;
-		value += obj.get_training_attribute(TrainingAttribute::kHealth);
-		value += obj.get_training_attribute(TrainingAttribute::kAttack);
-		value += obj.get_training_attribute(TrainingAttribute::kDefense);
-		value += obj.get_training_attribute(TrainingAttribute::kEvade);
-		return value >= min && value <= max;
 	}
+	int32_t value = 0;
+	value += obj.get_training_attribute(TrainingAttribute::kHealth);
+	value += obj.get_training_attribute(TrainingAttribute::kAttack);
+	value += obj.get_training_attribute(TrainingAttribute::kDefense);
+	value += obj.get_training_attribute(TrainingAttribute::kEvade);
+	return value >= min && value <= max;
 }
 
 void RequireAttribute::write(FileWrite& fw, EditorGameBase&, MapObjectSaver&) const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ private:
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;
 	DifferentialPlotArea* plot_economy_;
-	std::vector<uint8_t> color_map_;  // Maps ware index to colors
+	std::map<Widelands::DescriptionIndex, uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
 
 	void cb_changed_to(Widelands::DescriptionIndex, bool);

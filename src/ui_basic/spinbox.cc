@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2020 by the Widelands Development Team
+ * Copyright (C) 2009-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -377,9 +377,8 @@ int32_t SpinBox::get_value() const {
 	if (type_ == SpinBox::Type::kValueList) {
 		if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
 			return sbi_->values.at(sbi_->value);
-		} else {
-			return -1;
 		}
+		return -1;
 	} else {
 		return sbi_->value;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -242,6 +242,12 @@ private:
 		bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
 		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+		void set_allow_conquer(PlayerNumber, bool) const override {
+			// Warehouses can never be conquered
+		}
+		bool get_allow_conquer(PlayerNumber) const override {
+			return false;
+		}
 
 	private:
 		Warehouse* const warehouse_;

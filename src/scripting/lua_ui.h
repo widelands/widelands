@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,9 @@ public:
 	 * Lua Methods
 	 */
 	int get_descendant_position(lua_State* L);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int indicate(lua_State* L);
+#endif
 
 	/*
 	 * C Methods

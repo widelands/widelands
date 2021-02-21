@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,11 @@
 #ifndef WL_GAME_IO_GAME_PRELOAD_PACKET_H
 #define WL_GAME_IO_GAME_PRELOAD_PACKET_H
 
+#include <vector>
+
 #include "base/times.h"
 #include "game_io/game_data_packet.h"
+#include "logic/addons.h"
 #include "logic/game_controller.h"
 
 namespace Widelands {
@@ -72,6 +75,24 @@ struct GamePreloadPacket : public GameDataPacket {
 		return gametype_;
 	}
 
+	/* NOTE: Info about enabled *world* add-ons is saved in the Map by MapElemental
+	 * packet, and additionally info about enabled *tribes and world* add-ons is
+	 * saved in the GamePreload packet.
+	 * On game loading, the game loader will dis- or enable *tribe and world* add-ons
+	 * as requested by the GamePreload packet. That packet is also used to display
+	 * compatibility warnings in the game loading screens.
+	 * The add-on info stored in the Map(Elemental packet) is ignored during loading.
+	 * The map selection screens in main menu and editor will need to take care
+	 * to use the info stored there to dis- and enable *world* add-ons as required.
+	 * As a side effect, the choice of *world* add-ons is left to the map maker,
+	 * and players can not influence the world of existing maps.
+	 * Tribes add-ons however are selected when starting a new game.
+	 */
+	const AddOns::AddOnRequirements& required_addons() const {
+		return required_addons_;
+	}
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	const std::string& get_active_training_wheel() const {
 		return active_training_wheel_;
 	}
@@ -79,6 +100,7 @@ struct GamePreloadPacket : public GameDataPacket {
 	bool get_training_wheels_wanted() const {
 		return training_wheels_wanted_ || !active_training_wheel_.empty();
 	}
+#endif
 
 private:
 	std::string minimap_path_;
@@ -86,15 +108,19 @@ private:
 	std::string background_;
 	std::string background_theme_;
 	std::string win_condition_;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::string active_training_wheel_;
 	// Initializing everything to make cppcheck happy.
 	bool training_wheels_wanted_ = false;
+#endif
 	Time gametime_ = Time(0);
 	uint8_t player_nr_ = 0U;  // The local player idx
 	uint8_t number_of_players_ = 0U;
 	std::string version_;
 	time_t savetimestamp_ = 0;
 	GameController::GameType gametype_ = GameController::GameType::kUndefined;
+	// Required add-ons with the recommended version
+	AddOns::AddOnRequirements required_addons_;
 };
 }  // namespace Widelands
 

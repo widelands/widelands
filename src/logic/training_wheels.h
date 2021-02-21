@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
  *
  */
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #ifndef WL_LOGIC_TRAINING_WHEELS_H
 #define WL_LOGIC_TRAINING_WHEELS_H
 
@@ -151,3 +152,4 @@ private:
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_TRAINING_WHEELS_H
+#endif

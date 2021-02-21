@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2020
+# Juanjo, 2015-2021
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-07-25 19:07+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 16:19+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -75,13 +75,13 @@ msgstr "També distribuïm la GPL com a un document de text junt amb el Wideland
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "En Linux, podreu trobar un document anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
+msgstr "En Linux, podreu trobar un document anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en la carpeta de la instal·lació (com ara «%1%»)."
 
 #: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "En Windows, podreu trobar el fitxer anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest fitxer."
+msgstr "En Windows, podreu trobar el fitxer anomenat «COPYING.txt» en la carpeta d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest fitxer."
 
 #: ../../data/txts/LICENSE.lua:20
 msgid ""
@@ -390,7 +390,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X, els fitxers de repetició es desen al directori «%s». En Windows, al directori «replays» on està instal·lat el Widelands."
+msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X, els fitxers de repetició es desen a la carpeta «%s». En Windows, a la carpeta «replays» on està instal·lat el Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:41
@@ -402,20 +402,10 @@ msgstr "%s:"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgctxt "hotkey"
-msgid "Space"
-msgstr "Espai"
-
-#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Commuta entre mostrar o ocultar els espais de construcció"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:57
-msgctxt "hotkey"
-msgid "Ctrl + F"
-msgstr "Ctrl+F"
-
 #: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Commuta el mode pantalla completa (si el sistema operatiu ho permet)"
@@ -424,6 +414,11 @@ msgstr "Commuta el mode pantalla completa (si el sistema operatiu ho permet)"
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Commuta la finestra del minimapa"
+
+#: ../../data/txts/help/common_helptexts.lua:75
+#: ../../data/txts/help/common_helptexts.lua:84
+msgid "%1% / %2%"
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -509,6 +504,29 @@ msgid ""
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Podeu veure la informació del mapa seleccionat o de la partida desada a la banda dreta. Un botó que hi ha al costat del mapa permet a l'amfitrió canviar de mapa. A més a més, l'amfitrió pot triar les condicions de victòria i pot començar la partida tan bon punt tots els jugadors estan preparats."
+
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"them."
+msgstr "Les amazones estimen els arbres. Construïu prou cabanes de les conservadores de la jungla."
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an amazon economy. Build rare tree "
+"plantations to plant these special trees."
+msgstr "Els boscos exòtics són el moll de l'os de l'economia amazona. Construïu plantacions d'arbres per aconseguir-ne."
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
+"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr "Els arbres exòtics els tallen llenyataires amb experiència que viuen en cabanes de llenyataires d'arbres exòtics. No tallen arbres normals. Cal que planifiqueu la seva situació adequadament."
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr "El menjar es seca gràcies al foc de carbó. Assegureu-vos un bon subministrament."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -637,171 +655,138 @@ msgstr "Per produir maons necessiteu granit. Per produir granit, necessitareu un
 msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr "Construïu sempre una casa de guarda forestal, així eviteu quedar-vos sense troncs."
 
-#: ../../data/txts/tips/general_game.lua:6
+#: ../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "La construcció començarà després que es construeixi un camí fins a l'obra."
 
-#: ../../data/txts/tips/general_game.lua:10
+#: ../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Assegureu-vos d'enviar un geòleg abans de construir un pou o una mina."
 
-#: ../../data/txts/tips/general_game.lua:14
+#: ../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "El vostre territori es pot expandir construint diferents edificis militars: guardes sentinella, fortaleses, barracons, etc."
 
-#: ../../data/txts/tips/general_game.lua:18
+#: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
 msgstr "Els miners només treballaran si se'ls subministra aliment."
 
-#: ../../data/txts/tips/general_game.lua:22
+#: ../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Dividiu els camins en seccions més curtes plantant-hi algunes banderes. Això farà més curts els temps de transport de béns."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/general_game.lua:27
+#: ../../data/txts/tips/general_game.lua:28
 #, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
 msgstr "Teniu algun dubte? Podeu trobar les nostres PMF, el wiki i el fòrum de la comunitat en %s (en anglès)."
 
-#: ../../data/txts/tips/general_game.lua:31
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
 msgstr "Useu els botons de prioritat en les finestres d'edifici per ajustar el subministrament d'un bé específic. Prement Ctrl mentre feu clic, s'ajustaran les quantitats de tots els béns alhora."
 
-#: ../../data/txts/tips/general_game.lua:35
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "Useu el menú «Configurar economia» per ajustar la quantitat desitjada de béns. S'hi pot accedir per la finestra de bandera."
 
-#: ../../data/txts/tips/general_game.lua:39
+#: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘N’ for News to access the "
-"messages window, then use ‘G’ for Go To, and the Delete key to archive "
+"Manage your messages more efficiently: press ‘%1%’ for News to access the "
+"messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
 "messages."
-msgstr "Gestioneu els vostres missatges eficientment: premeu «n» («News», en anglès) per obrir la finestra de missatges, la tecla «g» («go to», en anglès) per anar al lloc relacionat amb el missatge i la tecla «Supr» per arxivar missatges."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "1-9"
-msgstr "1-9"
-
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "Ctrl + (1-9)"
-msgstr "Ctrl+(1-9)"
-
-#: ../../data/txts/tips/general_game.lua:43
+#: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
 msgstr "Useu %1% per guardar ubicacions importants i premeu %2% per tornar-hi ràpidament."
 
-#: ../../data/txts/tips/general_game.lua:47
+#: ../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Si destruïu una bandera o camí mentre manteniu premuda la tecla Ctrl, s'eliminaran totes les banderes fins a la primera cruïlla."
 
-#: ../../data/txts/tips/general_game.lua:51
+#: ../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
 msgstr "Els soldats nous es recluten al quarter. Les seves habilitats es poden millorar en llocs d'entrenament."
 
-#: ../../data/txts/tips/general_game.lua:55
+#: ../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Si us agrada viure al límit, prement la tecla Ctrl mentre cliqueu ampliar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
 
-#: ../../data/txts/tips/general_game.lua:59
-msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "Premeu la tecla «i» (inventari) per obrir o tancar la finestra d'estoc."
+#: ../../data/txts/tips/general_game.lua:61
+#, lua-format
+msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
+msgstr "Premeu la tecla «%s» per obrir o tancar la finestra d'estoc."
 
-#: ../../data/txts/tips/general_game.lua:63
+#: ../../data/txts/tips/general_game.lua:65
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr "Una economia consisteix d'edificis, treballadors, béns i xarxa de comunicació. Els subministraments i les demandes dels edificis es realitzen segons les necessitats de la colònia."
 
-#: ../../data/txts/tips/general_game.lua:67
+#: ../../data/txts/tips/general_game.lua:69
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Alguns edificis, com les masoveries, tenen una àrea de treball molt petita. Si l'edifici està envoltat d'arbres, banderes, camins i altres, l'edifici no serà productiu."
 
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl + (+/-)"
-msgstr "Ctrl+(+/-)"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl + 0"
-msgstr "Ctrl+0"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "Apropa/Allunya la vista amb la roda del ratolí o %1%. Premeu %2% per reiniciar l'apropament de la vista."
-
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
-"visited locations."
-msgstr "Useu les tecles «,» (coma) i «.» (punt) per saltar ràpidament a alguns llocs visitats recentment."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl + (Page Up/Page Down)"
-msgstr "Ctrl+(Av/Re Pàg)"
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Page Up/Page Down"
-msgstr "Re/Av Pàg"
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift + (Page Up/Page Down)"
-msgstr "Maj+(Av/Re Pàg)"
-
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:80
 msgid ""
-"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
-"adjust speed smoothly."
-msgstr "Accelereu o alentiu la partida amb %1%. Useu %2% per accelerar-la més ràpidament. %3% ajustarà la velocitat més suaument."
+"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
+"locations."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:84
+msgid ""
+"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
+"%5%/%6% will adjust speed smoothly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Tecles de cursor"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl+Tecles de cursor"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Moveu el mapa amb %1%. Amb %2% el moureu més de pressa i amb %3% el moureu més a poc a poc."
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Maj+Tecles de cursor"
 
-#: ../../data/txts/tips/general_game.lua:87
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

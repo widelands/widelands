@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -203,6 +203,7 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "ticks",
                                            "push_textdomain",
                                            "pop_textdomain",
+                                           "npgettext",
                                            nullptr};
 
 /**

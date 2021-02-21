@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,9 +62,9 @@ constexpr uint16_t kCurrentPacketVersion = 7;
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
-constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
+constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
                                  EditorGameBase& egbase,
@@ -578,6 +578,15 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8();
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8();
 
+			// TODO(Nordfriese): Savegame compatibility
+			if (packet_version >= 7) {
+				for (uint8_t i = fr.unsigned_8(); i; --i) {
+					const PlayerNumber p = fr.unsigned_8();
+					const bool b = fr.unsigned_8();
+					militarysite.attack_target_.allow_conquer_[p] = b;
+				}
+			}
+
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Militarysite", packet_version,
 			                            kCurrentPacketVersionMilitarysite);
@@ -815,7 +824,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionTrainingsite) {
+		if (packet_version >= 6 && packet_version <= kCurrentPacketVersionTrainingsite) {
 
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -888,6 +897,13 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			assert(16 > somebits);
 			trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 			trainingsite.request_open_since_ = Time(fr);
+
+			// TODO(Niektory): Savegame compatibility
+			if (packet_version >= 7) {
+				trainingsite.checked_soldier_training_.attribute =
+				   static_cast<TrainingAttribute>(fr.unsigned_8());
+				trainingsite.checked_soldier_training_.level = fr.unsigned_8();
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);
@@ -1224,6 +1240,12 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 	militarysite.next_swap_soldiers_time_.save(fw);
 	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
 	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);
+
+	fw.unsigned_8(militarysite.attack_target_.allow_conquer_.size());
+	for (const auto& pair : militarysite.attack_target_.allow_conquer_) {
+		fw.unsigned_8(pair.first);
+		fw.unsigned_8(pair.second ? 1 : 0);
+	}
 }
 
 void MapBuildingdataPacket::write_productionsite(const ProductionSite& productionsite,
@@ -1383,6 +1405,9 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(somebits);
 	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);
 	trainingsite.request_open_since_.save(fw);
+
+	fw.unsigned_8(static_cast<uint8_t>(trainingsite.checked_soldier_training_.attribute));
+	fw.unsigned_8(trainingsite.checked_soldier_training_.level);
 
 	// DONE
 }

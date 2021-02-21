@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Febryan 45 Mappers <muhammadfebryan1208@gmail.com>, 2019-2020
+# Febryan 45 Mappers <muhammadfebryan1208@gmail.com>, 2019-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-09-12 12:00+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-01-27 13:08+0000\n"
 "Last-Translator: Febryan 45 Mappers <muhammadfebryan1208@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/widelands/widelands/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -445,7 +445,7 @@ msgstr "Semoga Satul menghangatkan kamu berdua. Loftomor, kamu telah menjadi ars
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
-msgstr ""
+msgstr "Loftomor Berbicara"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:200
@@ -457,11 +457,11 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Semoga Satul menghangatkanmu, Jundlina! Sesuatu yang paling penting dalam membangun pemukiman adalah bahan-bahan bangunan. Ada beberapa pohon disini, Jadi kita perlu membangun rumah untuk penebang kayu dan juga untuk , jadi kita tidak akan kehabisan pohon. Oh, dan kita jangan melupakan penggergajian, sebab kebanyakan bangunan tidak bisa dibuat dari kayu sendirian. Bangunan yang kuat juga membutuhkan granit, tetapi ada banyak ke timur laut sini; kita hanya butuh untuk membangun sebuah tambang dan tukang batuku akan pergi untuk bekerja dengan segera."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
-msgstr ""
+msgstr "Sidolus Berbicara"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -471,17 +471,17 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "Semoga Satul menghangatkanmu, Jundlina! Saya setuju dengan apa yang Loftomor mengusulkan. Kita butuh suplai yang terjamin bagi bahan-bahan bangunan untuk kita harus memperluas wilayah kita secepatnya. Saya tidak akan merasa aman di pulau ini selama kita tidak melihat semua pantainya. Saya membawa banyak orang ahli dari Atlantis. Kekuatan militer tersedia. Kita hanya butuh beberapa rumah untuk tinggal."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina is Satisfied"
-msgstr ""
+msgstr "Jundlina sudah puas."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
-msgstr ""
+msgstr "Memoar Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:217
@@ -490,17 +490,17 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr ""
+msgstr "Infrastruktur bangunan kita sudah selesai dan saya menghabiskan beberapa waktu meyakinkan agar semua orang bekerja sama. Sekarang, ada masalah mendesak lainnya. saya memanggil Colionder, juru masak saya, belakang saya untuk mendapatkan bantuan dia dengan merapikan beberapa suatu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
-msgstr ""
+msgstr "Colionder Datang"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr ""
+msgstr "Semoga Satul menghangatkanmu, Jundlina!. Bisakah saya menjadi melayani apa saja untukmu atau tuhan?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:226
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
@@ -510,7 +510,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "Jundlina Membalas"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:229
@@ -520,11 +520,11 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr ""
+msgstr "Semoga Satul menghangatkanmu juga, Colionder. Ya, aku bertanya-tanya jika adakah cara supaya kita bisa sentralisasi produksi makanan kita.Kita kehilangan banyak produktivitas karena rakyat kita sudah terbiasa untuk membuat makanan mereka sendiri. Saya merasa jika kita bisa memisahkan tanggung jawab, itu akan lebih baik untuk kita semua. Saya ingin pikiranmu untuk ini."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
-msgstr ""
+msgstr "Colionder Berpikir"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:235
@@ -533,7 +533,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr ""
+msgstr "Ahh, tapi saya pikir ini sangat mustahil untuk berubah. Persiapan dan memakan makanan adalah sesuatu yang tertanam dalam diri kita Atlantean – Ini sebuah upacara yang kita butuhkan untuk kita baik-baik saja. Jadi saya kira kita tidak bisa mengambil ini jauh semuanya dari individual."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -543,7 +543,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr ""
+msgstr "Tapi kita mungkin mencari kompromi di antara: untukku, membuat roti adlah tugas yang merepotkan; Saya merasa pendekatan yang lebih industri akan membantu disini. Saya untuk ini akan menyenangkan untuk mempunyai roti segar diantarkan kerumahku setiap hari."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:241
@@ -554,32 +554,32 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr ""
+msgstr "Oooh dan yang sangat penting: pengasapan ikan dan daging untuk membersihkan mereka dan menambah rasa mereka sangatlah mengerikan. Rumah saya sudah penuh asap dan bau untuk minggu setelahnya. Tidakkah kau berpikir bahwa ini bisa diselesaikan di bangunan khusus yang dimana efek samping tidak dipedulikan? Saya pikir dua sesuatu itu akan diterima oleh rakyat dan akan mengurangi waktu masak tanpa menghilangkan ritual."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:245
 msgid "Jundlina Agrees"
-msgstr ""
+msgstr "Jundlina Setuju"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Kata-katamu terdengar bijak bagiku, Coliondor, Lalu jadikanlah itu."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Jundlina is Reviewing the Reports"
-msgstr ""
+msgstr "Jundlina sedang Meninjau Laporan-Laporan"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "Sepertinya produksi makanan kita telah selesai dan semua orang bekerja sama dengan baik. Ini sudah mulai seperti rumah disini."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "Seseorang Datang ke Jundlina"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:266

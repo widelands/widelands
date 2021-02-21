@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -116,7 +116,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 
 	// Add all AI types
 	for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-		type_dropdown_.add(impl->descname, impl->name, g_image_cache->get(impl->icon_filename), false,
+		type_dropdown_.add(_(impl->descname), impl->name, g_image_cache->get(impl->icon_filename),
+		                   false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
 		                   (boost::format(_("Replace player with %s")) % impl->descname).str());

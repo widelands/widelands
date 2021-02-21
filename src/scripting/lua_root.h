@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,6 +63,7 @@ public:
 	int get_type(lua_State*);
 	int get_scenario_difficulty(lua_State*);
 	int get_interactive_player(lua_State*);
+	int get_win_condition(lua_State*);
 
 	/*
 	 * Lua methods
@@ -123,6 +124,7 @@ public:
 	 */
 	int get_immovable_descriptions(lua_State* L);
 	int get_terrain_descriptions(lua_State* L);
+	int get_worker_descriptions(lua_State*);
 
 	/*
 	 * Lua methods
@@ -146,9 +148,24 @@ public:
 	int new_warehouse_type(lua_State* L);
 	int new_worker_type(lua_State* L);
 
+	int modify_unit(lua_State* L);
+
 	/*
 	 * C methods
 	 */
+
+	void do_modify_tribe(lua_State* L, const std::string& name, const std::string& property);
+	void do_modify_trainingsite(lua_State* L, const std::string&, const std::string&);
+	void do_modify_productionsite(lua_State* L, const std::string&, const std::string&);
+	void do_modify_militarysite(lua_State* L, const std::string&, const std::string&);
+	void do_modify_warehouse(lua_State* L, const std::string&, const std::string&);
+	void do_modify_worker(lua_State* L, const std::string&, const std::string&);
+	void do_modify_ware(lua_State* L, const std::string&, const std::string&);
+	void do_modify_immovable(lua_State* L, const std::string&, const std::string&);
+	void do_modify_resource(lua_State* L, const std::string&, const std::string&);
+	void do_modify_terrain(lua_State* L, const std::string&, const std::string&);
+	void do_modify_critter(lua_State* L, const std::string&, const std::string&);
+	void do_modify_ship(lua_State* L, const std::string&, const std::string&);
 };
 
 // TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,22 +26,25 @@
 #include "graphic/image_cache.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_fsmenu/campaigns.h"
+#include "ui_fsmenu/main.h"
+#include "wlapplication.h"
+
 namespace FsMenu {
+
 /**
- * FullscreenMenuScenarioSelect UI.
+ * ScenarioSelect UI.
  *
  * Loads a list of all visible maps of selected campaign or all tutorials and
  * lets the user choose one.
  */
-FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm,
-                                                           CampaignData* camp)
-   : TwoColumnsFullNavigationMenu(
-        fsmm, "choose_scenario", camp ? _("Choose Scenario") : _("Choose Tutorial")),
+ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
+   : TwoColumnsFullNavigationMenu(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
@@ -140,41 +143,57 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	table_.cancel.connect([this]() { clicked_back(); });
 }
 
-void FullscreenMenuScenarioSelect::layout() {
+void ScenarioSelect::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	scenario_difficulty_.set_desired_size(0, standard_height_);
 }
 
-std::string FullscreenMenuScenarioSelect::get_map() {
+// Resolves the add-on prefix into a usable path or prefixes the path with the campaign directory
+static std::string resolve_and_fix_cross_file(const std::string& path) {
+	const size_t colonpos = path.find(':');
+	if (colonpos == std::string::npos) {
+		// normal case
+		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + path);
+	} else {
+		// add-on
+		return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
+		                                        path.substr(colonpos + 1));
+	}
+}
+
+std::string ScenarioSelect::get_map() {
 	if (set_has_selection()) {
-		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" +
-		                                        scenarios_data_.at(table_.get_selected()).path);
+		return resolve_and_fix_cross_file(scenarios_data_.at(table_.get_selected()).path);
 	}
 	return "";
 }
 
-uint32_t FullscreenMenuScenarioSelect::get_difficulty() const {
-	return scenario_difficulty_.get_selected();
-}
-
-bool FullscreenMenuScenarioSelect::set_has_selection() {
+bool ScenarioSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
 
-void FullscreenMenuScenarioSelect::clicked_ok() {
-	if (!table_.has_selection()) {
+void ScenarioSelect::clicked_ok() {
+	if (!table_.has_selection() || !scenarios_data_[table_.get_selected()].playable) {
 		return;
 	}
-	const ScenarioData& scenario_data = scenarios_data_[table_.get_selected()];
-	if (!scenario_data.playable) {
-		return;
+
+	capsule_.set_visible(false);
+	Widelands::Game game;
+	try {
+		if (scenario_difficulty_.has_selection()) {
+			game.set_scenario_difficulty(scenario_difficulty_.get_selected());
+		}
+		game.run_splayer_scenario_direct(get_map(), "");
+	} catch (const std::exception& e) {
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what());
 	}
-	end_modal<MenuTarget>(MenuTarget::kOk);
+
+	return_to_main_menu();
 }
 
-void FullscreenMenuScenarioSelect::entry_selected() {
+void ScenarioSelect::entry_selected() {
 	if (set_has_selection()) {
 		const ScenarioData& scenario_data = scenarios_data_[table_.get_selected()];
 		scenario_details_.update(scenario_data);
@@ -187,7 +206,7 @@ void FullscreenMenuScenarioSelect::entry_selected() {
 /**
  * fill the campaign-map list
  */
-void FullscreenMenuScenarioSelect::fill_table() {
+void ScenarioSelect::fill_table() {
 	if (is_tutorial_) {
 		// Load the tutorials
 		LuaInterface lua;
@@ -215,8 +234,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 	for (size_t i = 0; i < scenarios_data_.size(); ++i) {
 		// Get details info from maps
 		ScenarioData* scenario_data = &scenarios_data_.at(i);
-		const std::string full_path =
-		   g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + scenario_data->path);
+		const std::string full_path = resolve_and_fix_cross_file(scenario_data->path);
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(full_path));
 		if (!ml) {
@@ -225,7 +243,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		}
 
 		map.set_filename(full_path);
-		ml->preload_map(true);
+		ml->preload_map(true, nullptr);
 
 		{
 			i18n::Textdomain td("maps");

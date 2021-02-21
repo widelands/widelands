@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,21 +23,17 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wui/suggested_teams_box.h"
 
 class MapDetailsBox : public UI::Box {
 public:
-	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding);
+	MapDetailsBox(Panel* parent, uint32_t padding);
 	~MapDetailsBox() override = default;
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
 	void update_from_savegame(GameSettingsProvider* settings);
-
-	/// passed callback is called when the select map button is clicked
-	void set_select_map_action(const std::function<void()>& action);
 
 	void force_new_dimensions(uint32_t width, uint32_t height);
 
@@ -47,13 +43,11 @@ public:
 
 private:
 	int padding_;
-	bool preconfigured_;
 
 	UI::Textarea title_;
 	UI::Box title_box_;
 	UI::Box content_box_;
 	UI::Textarea map_name_;
-	UI::Button select_map_;
 	UI::MultilineTextarea map_description_;
 	UI::SuggestedTeamsBox suggested_teams_box_;
 

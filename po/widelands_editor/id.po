@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Febryan 45 Mappers <muhammadfebryan1208@gmail.com>, 2020
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-09-04 08:25+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Indonesian (http://www.transifex.com/widelands/widelands/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -33,11 +33,6 @@ msgid "Help"
 msgstr "Bantuan"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgctxt "hotkey"
-msgid "Esc"
-msgstr "Esc"
-
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr "beralih ke menu utama"
@@ -72,21 +67,11 @@ msgstr "Aktivasi alat informasi"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:32
-msgctxt "hotkey"
-msgid "Ctrl + L"
-msgstr "Ctrl + L"
-
-#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr "Memuat peta"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgctxt "hotkey"
-msgid "Ctrl + S"
-msgstr "Ctrl + S"
-
 #: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr "Simpan Peta"

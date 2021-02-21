@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@ struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	                      UI::UniqueWindow::Registry& registry,
 	                      const std::string& name,
 	                      const std::string& title,
+	                      bool addons,
 	                      bool show_empty_dirs = false,
 	                      const std::string& basedir = kMapsDir);
 
@@ -71,6 +72,7 @@ protected:
 	std::vector<MapData> maps_data_;
 
 	// Side panel with details about the currently selected map
+	Widelands::EditorGameBase egbase_;
 	UI::Box map_details_box_;
 	MapDetails map_details_;
 
@@ -89,6 +91,7 @@ protected:
 	// Settings data
 	const std::string basedir_;
 	std::string curdir_;
+	bool include_addon_maps_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H

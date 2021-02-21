@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -168,6 +168,13 @@ public:
 		return built_over_immovable_;
 	}
 
+	const std::string& get_owning_tribe() const {
+		return owning_tribe_;
+	}
+	void set_owning_tribe(const std::string&);
+
+	void set_enhancement(Descriptions&, LuaTable&);
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
@@ -197,6 +204,8 @@ private:
 	AI::BuildingHints hints_;  // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
+
+	std::string owning_tribe_;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t vision_range_;

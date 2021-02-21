@@ -9,6 +9,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "frisians",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {8, 26} },
@@ -1505,7 +1506,9 @@ descriptions:new_tribe {
          name = "frisians_port",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian warehouse: Port
-            purpose = pgettext("frisians_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+            purpose = pgettext("frisians_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
+            -- TRANSLATORS: Note helptext for an frisian warehouse: Port
+            note = pgettext("frisians_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
          }
       },
 
@@ -2161,17 +2164,23 @@ descriptions:new_tribe {
    carrier = "frisians_carrier",
    carrier2 = "frisians_reindeer",
    geologist = "frisians_geologist",
+   scouts_house = "frisians_scouts_house",
    soldier = "frisians_soldier",
    ship = "frisians_ship",
    ferry = "frisians_ferry",
    port = "frisians_port",
 
    toolbar = {
-      left_corner = image_dirname .. "toolbar_left.png",
-      left = image_dirname .. "toolbar_main.png",
-      center = image_dirname .. "toolbar_center.png",
-      right = image_dirname .. "toolbar_main.png",
-      right_corner = image_dirname .. "toolbar_right.png"
+      bottom_left_corner  = image_dirname .. "toolbar_left.png",
+      bottom_left         = image_dirname .. "toolbar_main.png",
+      bottom_center       = image_dirname .. "toolbar_center.png",
+      bottom_right        = image_dirname .. "toolbar_main.png",
+      bottom_right_corner = image_dirname .. "toolbar_right.png",
+      top_left_corner     = image_dirname .. "toolbar_left.png",
+      top_left            = image_dirname .. "toolbar_main.png",
+      top_center          = image_dirname .. "toolbar_center.png",
+      top_right           = image_dirname .. "toolbar_main.png",
+      top_right_corner    = image_dirname .. "toolbar_right.png",
    }
 }
 

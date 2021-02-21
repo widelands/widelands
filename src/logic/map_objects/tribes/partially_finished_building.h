@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,11 @@
 #include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 
+namespace LuaMaps {
+class LuaConstructionSite;
+class LuaDismantleSite;
+}  // namespace LuaMaps
+
 namespace Widelands {
 
 /*
@@ -35,6 +40,8 @@ dismantlesites.
 class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
+	friend class LuaMaps::LuaConstructionSite;
+	friend class LuaMaps::LuaDismantleSite;
 
 public:
 	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);

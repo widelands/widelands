@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,13 +65,17 @@ public:
 		return representative_image_;
 	}
 
+	void set_max_amount(ResourceAmount r) {
+		max_amount_ = r;
+	}
+
 private:
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;
 	const uint32_t timeout_ms_;
 	const uint32_t timeout_radius_;
-	const ResourceAmount max_amount_;
+	ResourceAmount max_amount_;
 	const std::string representative_image_;
 	std::vector<EditorPicture> editor_pictures_;
 

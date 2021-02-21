@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,7 @@ public:
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
 	void push_arg(const std::string&);
+	void push_arg(int);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();

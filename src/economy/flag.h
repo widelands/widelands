@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,13 +25,13 @@
 #include <iterator>
 
 #include "base/macros.h"
+#include "economy/flag_job.h"
 #include "economy/routing_node.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
-class Request;
 struct RoadBase;
 struct Road;
 struct Waterway;
@@ -163,8 +163,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void remove_ware(EditorGameBase&, WareInstance* const);
 
-	void add_flag_job(Game&, DescriptionIndex workerware, const std::string& programname);
-
 	void log_general_info(const EditorGameBase&) const override;
 
 	/**
@@ -172,6 +170,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	 * After reaching this value, the pure FIFO approach is applied
 	 */
 	static constexpr uint8_t kMaxTransferPriority = 16;
+
+	void add_flag_job(Game&, FlagJob::Type);
+
+	void act(Game&, uint32_t) override;
+
+	void receive_worker(Game&, Worker&) override;
 
 protected:
 	bool init(EditorGameBase&) override;
@@ -199,11 +203,6 @@ private:
 		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
 	};
 
-	struct FlagJob {
-		Request* request;
-		std::string program;
-	};
-
 	Coords position_;
 	Time animstart_;
 
@@ -223,6 +222,8 @@ private:
 
 	using FlagJobs = std::list<FlagJob>;
 	FlagJobs flag_jobs_;
+	bool act_pending_;
+	void do_schedule_act(Game&, const Duration&);
 };
 
 extern FlagDescr g_flag_descr;

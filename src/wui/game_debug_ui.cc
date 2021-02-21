@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -208,7 +208,7 @@ void FieldDebugWindow::think() {
 		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
 
 		Widelands::Vision const vision = player_field.vision;
-		str += (boost::format("  vision: %u\n") % vision).str();
+		str += (boost::format("  vision: %u\n") % vision.value()).str();
 		{
 			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
@@ -257,6 +257,8 @@ void FieldDebugWindow::think() {
 		} else {
 			if (vision.is_revealed()) {
 				str += "  permanently revealed\n";
+			} else if (vision.is_hidden()) {
+				str += "  permanently hidden\n";
 			}
 			str += (boost::format("  seen %u times\n") % vision.seers()).str();
 		}

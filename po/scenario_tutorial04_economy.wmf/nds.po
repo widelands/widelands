@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-17 22:42+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,8 +106,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "Klick dann up »Husen«."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "Du kannst ok de Handigtaste »B« bruken."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr "Du kannst ok de Handigtaste »%s« bruken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -251,10 +252,11 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Klick dann up »Bestand«."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
+#, lua-format
 msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
+"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
 "quickly."
-msgstr "Du kannst ok de Handigtaste »I« (as in »In Kraamhusen«) bruken, um deeses Fenster stracks opentomaken."
+msgstr "Du kannst ok de Handigtaste »%s« (as in »In Kraamhusen«) bruken, um deeses Fenster stracks opentomaken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -848,7 +850,7 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr "Indeem du de Ent-Tahl ännerst kannst du fastleggen, to wat för Waren of Warktüüg diene Mineraale (im Bispööl Iesen) verarbeidt worden sallen of of du se lever behollst, bit du weetst, för wat du se bruukst."
+msgstr "Indeem du de Enn-Tahl ännerst kannst du fastleggen, to wat för Waren of Warktüüg diene Mineraale (im Bispööl Iesen) verarbeidt worden sallen of of du se lever behollst, bit du weetst, för wat du se bruukst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
 msgid ""

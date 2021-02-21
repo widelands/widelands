@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # FvZ, 2020
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -109,8 +109,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "Kies daarna ‘Gebouwen’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "Je kan ook de sneltoets ‘b’ gebruiken."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -254,10 +255,11 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Kies daarna ‘Voorraad’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
+#, lua-format
 msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
+"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
 "quickly."
-msgstr "Je kan ook de sneltoets ‘i’ (van ‘inventaris’) gebruiken om dit venster snel te openen."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152

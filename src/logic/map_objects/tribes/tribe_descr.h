@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,6 +66,7 @@ public:
 
 	const std::string& name() const;
 	const std::string& descname() const;
+	const std::string& military_capacity_script() const;
 
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
@@ -75,6 +76,11 @@ public:
 	const std::set<DescriptionIndex>& workers() const;
 	const std::set<DescriptionIndex>& immovables() const;
 	const ResourceIndicatorSet& resource_indicators() const;
+
+	std::set<DescriptionIndex>& mutable_wares();
+	std::set<DescriptionIndex>& mutable_workers();
+	std::set<DescriptionIndex>& mutable_buildings();
+	std::set<DescriptionIndex>& mutable_immovables();
 
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
@@ -98,6 +104,7 @@ public:
 	DescriptionIndex carrier() const;
 	DescriptionIndex carrier2() const;
 	DescriptionIndex geologist() const;
+	DescriptionIndex scouts_house() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
 	DescriptionIndex ferry() const;
@@ -128,8 +135,14 @@ public:
 	const WaresOrder& wares_order() const {
 		return wares_order_;
 	}
+	WaresOrder& mutable_wares_order() {
+		return wares_order_;
+	}
 
 	const WaresOrder& workers_order() const {
+		return workers_order_;
+	}
+	WaresOrder& mutable_workers_order() {
 		return workers_order_;
 	}
 
@@ -143,6 +156,13 @@ public:
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
+
+	// Read helptext from Lua table
+	void load_helptexts(MapObjectDescr*, const LuaTable&);
+
+	// Make sure that everything is there and that dependencies are calculated.
+	// This needs to be called exactly once during postloading.
+	void finalize_loading(Descriptions& descriptions);
 
 private:
 	// Helper functions for loading everything in the constructor
@@ -158,8 +178,6 @@ private:
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname,
 	                                      Descriptions& descriptions);
-	// Make sure that everything is there and that dependencies are calculated
-	void finalize_loading(Descriptions& descriptions);
 	// Helper function to calculate trainingsites proportions for the AI
 	void calculate_trainingsites_proportions(const Descriptions& descriptions);
 
@@ -167,6 +185,7 @@ private:
 
 	const std::string name_;
 	const std::string descname_;
+	const std::string military_capacity_script_;
 	const Descriptions& descriptions_;
 
 	uint32_t frontier_animation_id_;
@@ -194,14 +213,15 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex builder_;    // The builder for this tribe
-	DescriptionIndex carrier_;    // The basic carrier for this tribe
-	DescriptionIndex carrier2_;   // Additional carrier for busy roads
-	DescriptionIndex geologist_;  // This tribe's geologist worker
-	DescriptionIndex soldier_;    // The soldier that this tribe uses
-	DescriptionIndex ship_;       // The ship that this tribe uses
-	DescriptionIndex ferry_;      // The ferry that this tribe uses
-	DescriptionIndex port_;       // The port that this tribe uses
+	DescriptionIndex builder_;       // The builder for this tribe
+	DescriptionIndex carrier_;       // The basic carrier for this tribe
+	DescriptionIndex carrier2_;      // Additional carrier for busy roads
+	DescriptionIndex geologist_;     // This tribe's geologist worker
+	DescriptionIndex soldier_;       // The soldier that this tribe uses
+	DescriptionIndex ship_;          // The ship that this tribe uses
+	DescriptionIndex ferry_;         // The ferry that this tribe uses
+	DescriptionIndex port_;          // The port that this tribe uses
+	DescriptionIndex scouts_house_;  // This tribe's scout's house/hut
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

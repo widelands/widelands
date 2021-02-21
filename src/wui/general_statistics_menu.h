@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,10 @@
 #ifndef WL_WUI_GENERAL_STATISTICS_MENU_H
 #define WL_WUI_GENERAL_STATISTICS_MENU_H
 
+#include <memory>
+
 #include "graphic/playercolor.h"
+#include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
@@ -50,15 +53,21 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 
 private:
 	Registry* my_registry_;
-	UI::Box box_;
+	UI::Box box_, player_buttons_box_;
 	WuiPlotArea plot_;
 	UI::Radiogroup radiogroup_;
 	int32_t selected_information_;
 	UI::Button* cbs_[kMaxPlayers];
 	uint32_t ndatasets_;
+	Widelands::Game& game_;
+
+	void create_player_buttons();
+	std::unique_ptr<Notifications::Subscriber<Widelands::NotePlayerDetailsEvent>> subscriber_;
 
 	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
+	void show_or_hide_plot(int32_t playernumber, bool show);
+	void save_state_to_registry();
 };
 
 #endif  // end of include guard: WL_WUI_GENERAL_STATISTICS_MENU_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,19 +83,19 @@ Units get_suggested_unit(uint32_t game_time, bool is_generic = false) {
 	if (is_generic) {
 		if (game_time > 4 * kDays) {
 			return Units::kDayGeneric;
-		} else if (game_time > 4 * kHours) {
-			return Units::kHourGeneric;
-		} else {
-			return Units::kMinutesGeneric;
 		}
+		if (game_time > 4 * kHours) {
+			return Units::kHourGeneric;
+		}
+		return Units::kMinutesGeneric;
 	} else {
 		if (game_time > 4 * kDays) {
 			return Units::kDayNarrow;
-		} else if (game_time > 4 * kHours) {
-			return Units::kHourNarrow;
-		} else {
-			return Units::kMinutesNarrow;
 		}
+		if (game_time > 4 * kHours) {
+			return Units::kHourNarrow;
+		}
+		return Units::kMinutesNarrow;
 	}
 }
 
@@ -382,9 +382,8 @@ uint32_t WuiPlotArea::get_plot_time() const {
 			time_ms += -(time_ms % (15 * kMinutes)) + 15 * kMinutes;
 		}
 		return time_ms;
-	} else {
-		return time_in_ms[time_];
 	}
+	return time_in_ms[time_];
 }
 
 /**

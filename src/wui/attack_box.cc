@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 
 constexpr Duration kUpdateTimeInGametimeMs = Duration(500);  //  half a second, gametime
@@ -174,7 +175,6 @@ void AttackBox::update_attack(bool action_on_panel) {
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
-	attack_button_->set_enabled(soldiers_slider_->get_value() > 0);
 
 	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value()));
 
@@ -255,6 +255,17 @@ void AttackBox::init() {
 		                UI::FontStyle::kWuiTooltip))
 		      .str());
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
+	}
+
+	const Widelands::BaseImmovable* i = map_.get_immovable(*node_coordinates_);
+	if (i && i->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+		do_not_conquer_.reset(
+		   new UI::Checkbox(&mainbox, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
+		                    _("Destroy the target building instead of conquering it")));
+		do_not_conquer_->set_state(
+		   !dynamic_cast<const Widelands::MilitarySite&>(*i).attack_target()->get_allow_conquer(
+		      player_->player_number()));
+		mainbox.add(do_not_conquer_.get(), UI::Box::Resizing::kFullSize);
 	}
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
@@ -359,9 +370,8 @@ Widelands::Extent AttackBox::ListOfSoldiers::size() const {
 	}
 	if (restricted_row_number_) {
 		return Widelands::Extent(rows, current_size_);
-	} else {
-		return Widelands::Extent(current_size_, rows);
 	}
+	return Widelands::Extent(current_size_, rows);
 }
 
 void AttackBox::ListOfSoldiers::update_desired_size() {

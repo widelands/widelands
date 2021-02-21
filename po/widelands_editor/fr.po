@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-09-17 11:34+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,11 +36,6 @@ msgid "Help"
 msgstr "Aide"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgctxt "hotkey"
-msgid "Esc"
-msgstr "Sortie"
-
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr "Bascule vers le menu principal"
@@ -75,21 +70,11 @@ msgstr "Active l'outil d'information"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:32
-msgctxt "hotkey"
-msgid "Ctrl + L"
-msgstr "Ctrl+L"
-
-#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr "Charger une Carte"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgctxt "hotkey"
-msgid "Ctrl + S"
-msgstr "Ctrl+S"
-
 #: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr "Enregistrer la Carte"

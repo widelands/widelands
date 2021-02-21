@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,6 @@
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
-#include "graphic/style_manager.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -45,7 +44,7 @@
 
 class EditorTool;
 
-const static std::string kEditorSplashImage = std::string(kTemplateDir) + "loadscreens/editor.jpg";
+std::string editor_splash_image();
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
@@ -144,10 +143,7 @@ public:
 	// all tools should be reset. Otherwise, something else happened that
 	// requires the UI to be completely recalculated, for example the origin of
 	// the map has changed.
-	enum class MapWas {
-		kGloballyMutated,
-		kReplaced,
-	};
+	enum class MapWas { kGloballyMutated, kReplaced, kResized };
 	void map_changed(const MapWas& action);
 
 	// Access to the tools.

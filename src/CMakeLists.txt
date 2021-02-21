@@ -113,9 +113,9 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_text
-    graphic_text_layout
     io_filesystem
     logic
+    logic_addons
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller
@@ -126,12 +126,7 @@ wl_library(widelands_ball_of_mud
     network
     sound
     ui_basic
-    ui_fsmenu_gameloading
-    ui_fsmenu_main
-    ui_fsmenu_maploading
-    ui_fsmenu_misc
-    ui_fsmenu_network
-    ui_fsmenu_options
+    ui_fsmenu
     widelands_options
     wui
 )
@@ -141,10 +136,13 @@ wl_library(widelands_options
     wlapplication_options.cc
     wlapplication_options.h
   DEPENDS
+    base_i18n
     base_log
+    graphic_text_layout
     io_filesystem
     io_profile
     logic_filesystem_constants
+  USES_SDL2
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

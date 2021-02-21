@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2019
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-10-11 07:09+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -113,17 +113,17 @@ msgstr "Gheibh thu puingean airson batharan prìseil sna taighean-stòrais agad.
 msgid "Points"
 msgstr "Puingean"
 
-#: ../../data/scripting/win_conditions/collectors.lua:134
+#: ../../data/scripting/win_conditions/collectors.lua:154
 #, lua-format
 msgid "Status for %s"
 msgstr "An staid airson %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:147
+#: ../../data/scripting/win_conditions/collectors.lua:167
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:151
+#: ../../data/scripting/win_conditions/collectors.lua:171
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
@@ -132,12 +132,12 @@ msgstr[1] "Iomlan: %i phuing"
 msgstr[2] "Iomlan: %i puingean"
 msgstr[3] "Iomlan: %i puing"
 
-#: ../../data/scripting/win_conditions/collectors.lua:173
+#: ../../data/scripting/win_conditions/collectors.lua:194
 #, lua-format
 msgid "Status for Team %d"
 msgstr "An staid airson Sgioba %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:175
+#: ../../data/scripting/win_conditions/collectors.lua:196
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -151,24 +151,36 @@ msgid "Autocrat"
 msgstr "Fèin-fhlaitheach"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
-msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "Buannaichidh an treubh no sgioba a chuireas ruaig air càch!"
+msgid ""
+"The tribe or team that can defeat all others wins the game! This means the "
+"opponents do not have any headquarters, ports or warehouses left."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/endless_game.lua:15
+#: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
 msgstr "Gun chrìch"
 
-#: ../../data/scripting/win_conditions/endless_game.lua:17
+#: ../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
 msgstr "Seo geama gun chrìch is gun riaghailtean."
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
 msgid "Endless Game (no fog)"
 msgstr "Gun chrìch no ceò"
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
+#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Seo geama gun chrìch is gun riaghailtean. Tha ceò a’ chogaidh à comas."
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:16
+msgid "HQ Hunter"
+msgstr ""
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:18
+msgid ""
+"The tribe or team that can find and destroy all other headquarters wins the "
+"game! Does not work with starting conditions without headquarters."
+msgstr ""
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
@@ -247,8 +259,8 @@ msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth dhe ro
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:300
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:305
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:329
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:334
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -258,7 +270,7 @@ msgstr[2] "%i mionaidean"
 msgstr[3] "%i mionaid"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:302
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:331
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% uair ’s %2%"
@@ -267,7 +279,7 @@ msgstr[2] "%1% uairean ’s %2%"
 msgstr[3] "%1% uair ’s %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:308
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:337
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% uair"
@@ -276,7 +288,7 @@ msgstr[2] "%1% uairean"
 msgstr[3] "%1% uair"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:311
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:340
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Thig an geama gu crìch an ceann %s."
@@ -339,9 +351,9 @@ msgstr "On a tha thu ’nad ghille-dubh, tha thu measail air coilltean mòra. Ma
 msgid "Trees owned"
 msgstr "Na craobhan a th’ agad"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:63
-#: ../../data/scripting/win_conditions/wood_gnome.lua:83
-#: ../../data/scripting/win_conditions/wood_gnome.lua:88
+#: ../../data/scripting/win_conditions/wood_gnome.lua:64
+#: ../../data/scripting/win_conditions/wood_gnome.lua:86
+#: ../../data/scripting/win_conditions/wood_gnome.lua:91
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -351,16 +363,16 @@ msgstr[2] "%i craobhan"
 msgstr[3] "%i craobh"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:66
+#: ../../data/scripting/win_conditions/wood_gnome.lua:67
 msgid "%1$s has %2$s at the moment."
 msgstr "Tha %2$s aig %1$s an-dràsta."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:85
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "%1$s had %2$s."
 msgstr "Bha %2$s aig %1$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
+#: ../../data/scripting/win_conditions/wood_gnome.lua:94
 msgid "The winner is %1$s with %2$s."
 msgstr "Bhuannaich %1$s is %2$s aige."

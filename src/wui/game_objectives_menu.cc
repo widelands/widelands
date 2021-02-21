@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,8 @@ void GameObjectivesMenu::think() {
 					list.add(obj.descname(), obj);
 				}
 				break;
-			} else if (&list[j] == &obj) {  //  the objective is in our list
+			}
+			if (&list[j] == &obj) {  //  the objective is in our list
 				if (!should_show) {
 					list.remove(j);
 				} else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {

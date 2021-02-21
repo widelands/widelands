@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,10 @@ public:
 		                    MiniMapLayer::Road | MiniMapLayer::Building),
 		     minimap_type(MiniMapType::kStaticViewWindow) {
 		}
+
+		MiniMap* get_window() const {
+			return dynamic_cast<MiniMap*>(window);
+		}
 	};
 
 	MiniMap(InteractiveBase& parent, Registry*);
@@ -48,6 +52,7 @@ public:
 	void set_view(const Rectf& rect) {
 		view_.set_view(rect);
 	}
+	void check_boundaries();
 
 private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
@@ -56,7 +61,6 @@ private:
 	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
-	void check_boundaries();
 
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the

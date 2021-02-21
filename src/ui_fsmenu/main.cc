@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,21 +25,37 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/random.h"
 #include "build_info.h"
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/about.h"
+#include "ui_fsmenu/addons.h"
+#include "ui_fsmenu/campaign_select.h"
+#include "ui_fsmenu/internet_lobby.h"
+#include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/login_box.h"
+#include "ui_fsmenu/mapselect.h"
+#include "ui_fsmenu/netsetup_lan.h"
+#include "ui_fsmenu/options.h"
+#include "ui_fsmenu/random_game.h"
+#include "ui_fsmenu/scenario_select.h"
+#include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/mapdata.h"
 #include "wui/savegameloader.h"
+
+namespace FsMenu {
 
 constexpr uint32_t kInitialFadeoutDelay = 2500;
 constexpr uint32_t kInitialFadeoutDuration = 4000;
@@ -48,7 +64,7 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
-int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
 		return std::max(800, get_w() * 4 / 5);
@@ -60,28 +76,28 @@ int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLa
 	}
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
 		return std::max(600, get_h() * 4 / 5);
 	case UI::Window::WindowLayoutID::kFsMenuAbout:
 		return std::max(500, get_h() * 4 / 5);
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
-		return std::max(400, get_h() / 2);
+		return std::max(450, get_h() / 2);
 	default:
 		NEVER_HERE();
 	}
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
 	return (get_w() - calc_desired_window_width(id)) / 2 - UI::Window::kVerticalBorderThickness;
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
-FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
+MainMenu::MainMenu(const bool skip_init)
    : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
@@ -145,13 +161,12 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                 0,
                 "",
                 UI::Align::kCenter),
-     splashscreen_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/splash.jpg")),
-     title_image_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/logo.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
      draw_image_(0),
      last_image_(0),
      visible_(true),
+     menu_capsule_(*this),
      auto_log_(false) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -159,17 +174,17 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 		   layout();
 	   });
 
-	singleplayer_.selected.connect(
-	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
-	multiplayer_.selected.connect([this]() { end_modal<MenuTarget>(multiplayer_.get_selected()); });
-	editor_.selected.connect([this]() { end_modal<MenuTarget>(editor_.get_selected()); });
-	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
-	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
-	   end_modal<MenuTarget>(MenuTarget::kAddOns);
-	}); */
-	options_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOptions); });
-	about_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kAbout); });
-	exit_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kExit); });
+	// Load backgrounds, logos etc
+	update_template();
+
+	singleplayer_.selected.connect([this]() { action(singleplayer_.get_selected()); });
+	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
+	editor_.selected.connect([this]() { action(editor_.get_selected()); });
+	replay_.sigclicked.connect([this]() { action(MenuTarget::kReplay); });
+	addons_.sigclicked.connect([this]() { action(MenuTarget::kAddOns); });
+	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
+	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
+	exit_.sigclicked.connect([this]() { action(MenuTarget::kExit); });
 
 	vbox1_.add(&singleplayer_, UI::Box::Resizing::kFullSize);
 	vbox1_.add_inf_space();
@@ -187,41 +202,72 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	vbox2_.add_inf_space();
 	vbox2_.add(&exit_, UI::Box::Resizing::kFullSize);
 
-	addons_.set_enabled(false);  // Not yet implemented
-
-	for (const std::string& img :
-	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/mainmenu")) {
-		images_.push_back(img);
-	}
-	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
-
-	if (first_ever_init) {
+	if (!skip_init) {
 		init_time_ = SDL_GetTicks();
 		set_button_visibility(false);
-	} else {
-		last_image_exchange_time_ = SDL_GetTicks();
 	}
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
+	r_about_.open_window = [this]() { new About(*this, r_about_); };
+	r_addons_.open_window = [this]() { new AddOnsCtrl(*this, r_about_); };
 
 	focus();
 	set_labels();
 	layout();
 }
 
-using MapEntry = std::pair<MapData, Widelands::MapVersion>;
-static void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
+void MainMenu::update_template() {
+	UI::Panel::update_template();
+
+	splashscreen_ = &load_safe_template_image("loadscreens/splash.jpg");
+	title_image_ = &load_safe_template_image("loadscreens/logo.png");
+
+	images_.clear();
+	for (const std::string& img : g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
+		images_.push_back(img);
+	}
+	if (images_.empty()) {
+		log_warn("No main menu backgrounds found, using fallback image");
+		images_.push_back("images/logos/wl-ico-128.png");
+	}
+
+	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
+	last_image_exchange_time_ = 0;
+}
+
+void MainMenu::show_messagebox(const std::string& messagetitle, const std::string& errormessage) {
+	UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(errormessage),
+	                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+	mmb.run<UI::Panel::Returncodes>();
+}
+
+void MainMenu::become_modal_again(UI::Panel& prevmodal) {
+	if (dynamic_cast<const UI::Window*>(&prevmodal) == nullptr) {
+		// Ensure the image is not exchanged directly after returning to the main menu –
+		// but only after returning from the game or editor and not from the options window.
+		last_image_exchange_time_ = SDL_GetTicks();
+		if (last_image_exchange_time_ > kImageExchangeDuration) {
+			last_image_exchange_time_ -= kImageExchangeDuration;
+		} else {
+			last_image_exchange_time_ = 0;
+		}
+	}
+}
+
+void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& results) {
 	Widelands::Map map;
 	for (const std::string& file : g_fs->list_directory(directory)) {
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
 		if (ml) {
 			try {
 				map.set_filename(file);
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
+					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
+					                           MapData::MapType::kScenario :
+					                           MapData::MapType::kNormal;
 					results.push_back(MapEntry(
-					   MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames),
-					   map.version()));
+					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()));
 				}
 			} catch (...) {
 				// invalid file – silently ignore
@@ -232,21 +278,34 @@ static void find_maps(const std::string& directory, std::vector<MapEntry>& resul
 	}
 }
 
-void FullscreenMenuMain::set_labels() {
+void MainMenu::set_labels() {
+	{
+		// TODO(Nordfriese): Code duplication, the same code is used in InteractiveBase
+		Section& global_s = get_config_section();
+		set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
+		set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
+		set_snap_windows_only_when_overlapping(
+		   global_s.get_bool("snap_windows_only_when_overlapping", false));
+		set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
+	}
+
 	singleplayer_.clear();
 	multiplayer_.clear();
 	editor_.clear();
 
-	singleplayer_.add(
-	   _("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"), "N");
+	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"),
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew));
 	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr, false,
-	                  _("Create a new random match"), "Z");
-	singleplayer_.add(
-	   _("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"), "H");
+	                  _("Create a new random match"),
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuRandomMatch));
+	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"),
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuCampaign));
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
-	                  _("Play one of our beginners’ tutorials"), "T");
-	singleplayer_.add(
-	   _("Load Game"), MenuTarget::kLoadGame, nullptr, false, _("Continue a saved game"), "L");
+	                  _("Play one of our beginners’ tutorials"),
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuTutorial));
+	singleplayer_.add(_("Load Game"), MenuTarget::kLoadGame, nullptr, false,
+	                  _("Continue a saved game"),
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuLoad));
 
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
@@ -296,23 +355,27 @@ void FullscreenMenuMain::set_labels() {
 			        .as_font_tag(newest_singleplayer->savedatestring))
 			       .str())
 			      .str(),
-			   "C");
+			   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
 		}
 	}
 
 	multiplayer_.add(_("Online Game"), MenuTarget::kMetaserver, nullptr, false,
-	                 _("Join the Widelands lobby"), "J");
+	                 _("Join the Widelands lobby"),
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLobby));
 	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings, nullptr, false,
-	                 _("Log in as a registered user"), "U");
-	multiplayer_.add(
-	   _("LAN / Direct IP"), MenuTarget::kLan, nullptr, false, _("Play a private online game"), "P");
+	                 _("Log in as a registered user"),
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin));
+	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
+	                 _("Play a private online game"),
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN));
 
-	editor_.add(
-	   _("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"), "K");
+	editor_.add(_("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"),
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew));
 	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
-	            _("Create a new random map"), "Y");
-	editor_.add(
-	   _("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"), "B");
+	            _("Create a new random map"),
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorRandom));
+	editor_.add(_("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"),
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorLoad));
 
 	{
 		filename_for_continue_editing_ = "";
@@ -353,7 +416,7 @@ void FullscreenMenuMain::set_labels() {
 			                 .as_font_tag(last_edited->first.description))
 			                .str())
 			               .str(),
-			            "W");
+			            shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing));
 		}
 	}
 
@@ -361,29 +424,36 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.set_label(_("Multiplayer…"));
 	editor_.set_label(_("Editor…"));
 	singleplayer_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Begin or load a single-player campaign or free game"), "S", UI::PanelStyle::kFsMenu));
+	   _("Begin or load a single-player campaign or free game"),
+	   shortcut_string_for(KeyboardShortcut::kMainMenuSP), UI::PanelStyle::kFsMenu));
 	multiplayer_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Play with your friends over the internet"), "M", UI::PanelStyle::kFsMenu));
-	editor_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Launch the map editor"), "E", UI::PanelStyle::kFsMenu));
+	   _("Play with your friends over the internet"),
+	   shortcut_string_for(KeyboardShortcut::kMainMenuMP), UI::PanelStyle::kFsMenu));
+	editor_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Launch the map editor"), shortcut_string_for(KeyboardShortcut::kMainMenuE),
+	   UI::PanelStyle::kFsMenu));
 
 	replay_.set_title(_("Watch Replay"));
 	replay_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Watch the replay of an old game"), "R", UI::PanelStyle::kFsMenu));
+	   _("Watch the replay of an old game"), shortcut_string_for(KeyboardShortcut::kMainMenuReplay),
+	   UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
-	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
-	   as_tooltip_text_with_hotkey(
-	      "This feature is still under development", "A", UI::PanelStyle::kFsMenu));
+	addons_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Install and manage add-ons"), shortcut_string_for(KeyboardShortcut::kMainMenuAddons),
+	   UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Technical and game-related settings"), "O", UI::PanelStyle::kFsMenu));
+	   _("Technical and game-related settings"),
+	   shortcut_string_for(KeyboardShortcut::kMainMenuOptions), UI::PanelStyle::kFsMenu));
 	about_.set_title(_("About Widelands"));
 	about_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Readme, License, and Credits"), pgettext("hotkey", "F1"), UI::PanelStyle::kFsMenu));
+	   _("Readme, License, and Credits"), shortcut_string_for(KeyboardShortcut::kMainMenuAbout),
+	   UI::PanelStyle::kFsMenu));
 	exit_.set_title(_("Exit Widelands"));
 	exit_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Quit the game"), pgettext("hotkey", "Esc"), UI::PanelStyle::kFsMenu));
+	   _("Quit the game"), shortcut_string_for(KeyboardShortcut::kMainMenuQuit),
+	   UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
@@ -396,7 +466,7 @@ void FullscreenMenuMain::set_labels() {
 	      .str());
 }
 
-void FullscreenMenuMain::set_button_visibility(const bool v) {
+void MainMenu::set_button_visibility(const bool v) {
 	if (visible_ == v) {
 		return;
 	}
@@ -407,7 +477,7 @@ void FullscreenMenuMain::set_button_visibility(const bool v) {
 	version_.set_visible(v);
 }
 
-bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
+bool MainMenu::handle_mousepress(uint8_t, int32_t, int32_t) {
 	if (init_time_ != kNoSplash) {
 		init_time_ = kNoSplash;
 		return true;
@@ -415,100 +485,131 @@ bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
 	return false;
 }
 
-bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
+bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
+	// Forward all keys to the open window if there is one
+	bool has_open_window = false;
+	for (UI::UniqueWindow::Registry* r : {&r_login_, &r_about_, &r_addons_}) {
+		if (r->window) {
+			has_open_window = true;
+			if (r->window->handle_key(down, code)) {
+				return true;
+			}
+		}
+	}
+	if (menu_capsule_.is_visible()) {
+		has_open_window = true;
+		if (menu_capsule_.handle_key(down, code)) {
+			return true;
+		}
+	}
+	if (has_open_window) {
+		// If any window is open, block all keypresses to prevent accidentally triggering hotkeys
+		return true;
+	}
+
 	if (down) {
 		bool fell_through = false;
 		if (init_time_ != kNoSplash) {
 			init_time_ = kNoSplash;
 			fell_through = true;
 		}
-		switch (code.sym) {
-		case SDLK_ESCAPE:
+
+		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
+			if (matches_shortcut(k, code)) {
+				action(t);
+				return true;
+			}
+			return false;
+		};
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuNew, MenuTarget::kNewGame)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoad, MenuTarget::kLoadGame)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplay, MenuTarget::kReplay)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuTutorial, MenuTarget::kTutorial)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuRandomMatch, MenuTarget::kRandomGame)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuCampaign, MenuTarget::kCampaign)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLobby, MenuTarget::kMetaserver)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLAN, MenuTarget::kLan)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuAddons, MenuTarget::kAddOns)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuOptions, MenuTarget::kOptions)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuAbout, MenuTarget::kAbout)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorNew, MenuTarget::kEditorNew)) {
+			return true;
+		}
+		if (check_match_shortcut(
+		       KeyboardShortcut::kMainMenuEditorRandom, MenuTarget::kEditorRandom)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorLoad, MenuTarget::kEditorLoad)) {
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuSP, code)) {
+			singleplayer_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuMP, code)) {
+			multiplayer_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuE, code)) {
+			editor_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
 			if (!fell_through) {
 				end_modal<MenuTarget>(MenuTarget::kBack);
 				return true;
 			}
-			break;
-		case SDLK_t:
-			end_modal<MenuTarget>(MenuTarget::kTutorial);
-			return true;
-		case SDLK_c:
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuContinuePlaying, code)) {
 			if (!filename_for_continue_playing_.empty()) {
-				end_modal<MenuTarget>(MenuTarget::kContinueLastsave);
+				action(MenuTarget::kContinueLastsave);
 				return true;
 			}
-			break;
-		case SDLK_w:
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuContinueEditing, code)) {
 			if (!filename_for_continue_editing_.empty()) {
-				end_modal<MenuTarget>(MenuTarget::kEditorContinue);
+				action(MenuTarget::kEditorContinue);
 				return true;
 			}
-			break;
-		case SDLK_n:
-			end_modal<MenuTarget>(MenuTarget::kNewGame);
-			return true;
-		case SDLK_z:
-			end_modal<MenuTarget>(MenuTarget::kRandomGame);
-			return true;
-		case SDLK_h:
-			end_modal<MenuTarget>(MenuTarget::kCampaign);
-			return true;
-		case SDLK_l:
-			end_modal<MenuTarget>(MenuTarget::kLoadGame);
-			return true;
-		case SDLK_j:
-			end_modal<MenuTarget>(MenuTarget::kMetaserver);
-			return true;
-		case SDLK_u:
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuLogin, code)) {
 			show_internet_login();
 			return true;
-		case SDLK_p:
-			end_modal<MenuTarget>(MenuTarget::kLan);
-			return true;
-		/* case SDLK_a:
-			end_modal<MenuTarget>(MenuTarget::kAddOns);
-			return true; */
-		case SDLK_o:
-			end_modal<MenuTarget>(MenuTarget::kOptions);
-			return true;
-		case SDLK_r:
-			end_modal<MenuTarget>(MenuTarget::kReplay);
-			return true;
-		case SDLK_F1:
-			end_modal<MenuTarget>(MenuTarget::kAbout);
-			return true;
-		case SDLK_k:
-			end_modal<MenuTarget>(MenuTarget::kEditorNew);
-			return true;
-		case SDLK_y:
-			end_modal<MenuTarget>(MenuTarget::kEditorRandom);
-			return true;
-		case SDLK_b:
-			end_modal<MenuTarget>(MenuTarget::kEditorLoad);
-			return true;
-		case SDLK_s:
-			singleplayer_.toggle();
-			return true;
-		case SDLK_m:
-			multiplayer_.toggle();
-			return true;
-		case SDLK_e:
-			editor_.toggle();
-			return true;
-		case SDLK_F3:
-			// Easter egg: Press F3 to exchange the background immediately :-)
+		}
+		if (code.sym == SDLK_BACKSPACE && (code.mod & (KMOD_CTRL | KMOD_SHIFT))) {
+			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
 			                                                         last_image_exchange_time_);
 			return true;
-		default:
-			break;
 		}
 	}
 	return UI::Panel::handle_key(down, code);
 }
 
-inline Rectf FullscreenMenuMain::image_pos(const Image& i) {
+inline Rectf MainMenu::image_pos(const Image& i) {
 	return UI::fit_image(i.width(), i.height(), get_w(), get_h());
 }
 
@@ -518,7 +619,7 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
 }
 
-inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
+inline float MainMenu::calc_opacity(const uint32_t time) {
 	return last_image_ == draw_image_ ?
 	          1.f :
 	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
@@ -534,7 +635,7 @@ inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
  * We skip straight to the last phase 4 if we are returning from some other FsMenu screen.
  */
 
-void FullscreenMenuMain::draw(RenderTarget& r) {
+void MainMenu::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
@@ -561,9 +662,11 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	assert(time >= last_image_exchange_time_);
 	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
 		last_image_ = draw_image_;
-		do {
-			draw_image_ = std::rand() % images_.size();  // NOLINT
-		} while (draw_image_ == last_image_);
+		if (images_.size() > 1) {
+			do {
+				draw_image_ = std::rand() % images_.size();  // NOLINT
+			} while (draw_image_ == last_image_);
+		}
 		last_image_exchange_time_ = time;
 	}
 
@@ -597,10 +700,10 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	const Rectf rect = title_pos();
 	do_draw_image(
 	   r, Rectf(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f),
-	   title_image_, 1.f);
+	   *title_image_, 1.f);
 }
 
-void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
+void MainMenu::draw_overlay(RenderTarget& r) {
 	if (init_time_ == kNoSplash) {
 		// overlays are needed only during the first three phases
 		return;
@@ -612,7 +715,7 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		                         1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
 		                                  kInitialFadeoutDuration :
 		                         1.f;
-		do_draw_image(r, image_pos(splashscreen_), splashscreen_, opacity);
+		do_draw_image(r, image_pos(*splashscreen_), *splashscreen_, opacity);
 	} else {
 		const unsigned opacity =
 		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
@@ -621,13 +724,13 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	}
 }
 
-inline Rectf FullscreenMenuMain::title_pos() {
+inline Rectf MainMenu::title_pos() {
 	const float imgh = box_rect_.y / 3.f;
-	const float imgw = imgh * title_image_.width() / title_image_.height();
+	const float imgw = imgh * title_image_->width() / title_image_->height();
 	return Rectf((get_w() - imgw) / 2.f, buth_, imgw, imgh);
 }
 
-void FullscreenMenuMain::layout() {
+void MainMenu::layout() {
 	butw_ = get_inner_w() / 5;
 	buth_ = get_inner_h() / 25;
 	padding_ = buth_ / 3;
@@ -686,18 +789,161 @@ void FullscreenMenuMain::layout() {
 	}
 }
 
+bool MainMenu::check_desyncing_addon() {
+	for (const auto& pair : AddOns::g_addons) {
+		if (!pair.first.sync_safe && pair.second) {
+			UI::WLMessageBox mmb(
+			   this, UI::WindowStyle::kFsMenu, _("Desyncing Add-On Found"),
+			   _("An enabled add-on is known to cause desyncs. Proceed at your own risk."),
+			   UI::WLMessageBox::MBoxType::kOkCancel);
+			return mmb.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk;
+		}
+	}
+	return false;
+}
+
+void MainMenu::action(const MenuTarget t) {
+	singleplayer_.set_list_visibility(false);
+	multiplayer_.set_list_visibility(false);
+	editor_.set_list_visibility(false);
+
+	switch (t) {
+
+	case MenuTarget::kExit:
+		end_modal<MenuTarget>(MenuTarget::kBack);
+		break;
+
+	case MenuTarget::kOptions: {
+		OptionsCtrl o(*this, get_config_section());
+		break;
+	}
+	case MenuTarget::kAddOns:
+		r_addons_.toggle();
+		break;
+	case MenuTarget::kAbout:
+		r_about_.toggle();
+		break;
+	case MenuTarget::kOnlineGameSettings:
+		r_login_.toggle();
+		break;
+
+	case MenuTarget::kReplay:
+		menu_capsule_.clear_content();
+		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(),
+		             true, true);
+		break;
+	case MenuTarget::kLoadGame:
+		menu_capsule_.clear_content();
+		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(),
+		             true, false);
+		break;
+
+	case MenuTarget::kNewGame:
+		menu_capsule_.clear_content();
+		new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr,
+		              *new Widelands::Game());
+		break;
+
+	case MenuTarget::kRandomGame:
+		menu_capsule_.clear_content();
+		new RandomGame(menu_capsule_);
+		break;
+
+	case MenuTarget::kContinueLastsave:
+		if (!filename_for_continue_playing_.empty()) {
+			Widelands::Game game;
+			game.set_ai_training_mode(get_config_bool("ai_training", false));
+			SinglePlayerGameSettingsProvider sp;
+			try {
+				game.run_load_game(filename_for_continue_playing_, "");
+			} catch (const std::exception& e) {
+				WLApplication::emergency_save(this, game, e.what());
+			}
+			// Update the Continue button in case a new savegame was created
+			set_labels();
+		}
+		break;
+
+	case MenuTarget::kTutorial:
+		menu_capsule_.clear_content();
+		new ScenarioSelect(menu_capsule_, nullptr);
+		break;
+	case MenuTarget::kCampaign:
+		menu_capsule_.clear_content();
+		new CampaignSelect(menu_capsule_);
+		break;
+
+	case MenuTarget::kLan:
+		if (check_desyncing_addon()) {
+			break;
+		}
+		menu_capsule_.clear_content();
+		g_sh->change_music("ingame", 1000);
+		new NetSetupLAN(menu_capsule_);
+		break;
+	case MenuTarget::kMetaserver: {
+		if (check_desyncing_addon()) {
+			break;
+		}
+		menu_capsule_.clear_content();
+
+		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+		if (tribeinfos.empty()) {
+			show_messagebox(_("No tribes found!"),
+			                _("No tribes found in data/tribes/initialization/[tribename]/init.lua."));
+			break;
+		}
+
+		internet_login(false);
+
+		get_config_string("nickname", nickname_);
+		// Only change the password if we use a registered account
+		if (register_) {
+			get_config_string("password_sha1", password_);
+		}
+
+		g_sh->change_music("ingame", 1000);
+		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
+	} break;
+
+	case MenuTarget::kEditorNew:
+		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+		set_labels();
+		break;
+	case MenuTarget::kEditorRandom:
+		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+		set_labels();
+		break;
+	case MenuTarget::kEditorLoad:
+		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+		set_labels();
+		break;
+	case MenuTarget::kEditorContinue: {
+		if (!filename_for_continue_editing_.empty()) {
+			EditorInteractive::run_editor(
+			   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			set_labels();
+		}
+		break;
+	}
+
+	default:
+		throw wexception("Invalid MenuTarget %d", static_cast<int>(t));
+	}
+}
+
 /// called if the user is not registered
-void FullscreenMenuMain::show_internet_login(const bool modal) {
+void MainMenu::show_internet_login(const bool modal) {
 	r_login_.create();
 	if (modal) {
-		r_login_.window->run<int>();
+		r_login_.window->run<MenuTarget>();
 		r_login_.destroy();
 	}
 }
-void FullscreenMenuMain::internet_login_callback() {
+void MainMenu::internet_login_callback() {
 	if (auto_log_) {
 		auto_log_ = false;
-		internet_login();
+		internet_login(true);
 	}
 }
 
@@ -711,7 +957,7 @@ void FullscreenMenuMain::internet_login_callback() {
  *
  * This fullscreen menu ends it's modality.
  */
-void FullscreenMenuMain::internet_login() {
+void MainMenu::internet_login(const bool launch_metaserver) {
 	nickname_ = get_config_string("nickname", "");
 	password_ = get_config_string("password_sha1", "no_password_set");
 	register_ = get_config_bool("registered", false);
@@ -733,13 +979,13 @@ void FullscreenMenuMain::internet_login() {
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in()) {
-		end_modal<MenuTarget>(MenuTarget::kMetaserver);
+		if (launch_metaserver) {
+			action(MenuTarget::kMetaserver);
+		}
 	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
-		UI::WLMessageBox wmb(
-		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
-		wmb.run<UI::Panel::Returncodes>();
+		show_messagebox(_("Error!"), msg.msg);
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
@@ -748,3 +994,5 @@ void FullscreenMenuMain::internet_login() {
 		show_internet_login(true);
 	}
 }
+
+}  //  namespace FsMenu

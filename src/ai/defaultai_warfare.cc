@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2020 by the Widelands Development Team
+ * Copyright (C) 2009-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -626,7 +626,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	   enemy_sites[best_target].attack_counter + 1,
 	   (gametime - enemy_sites[best_target].last_time_attacked).get() / 1000);
 
-	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
+	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers, true);
 	assert(player_->is_seeing(
 	   Widelands::Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
@@ -780,15 +780,17 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
+		bool inputs_are_substitutes = false;
 		for (Widelands::InputQueue* queue : tso.site->inputqueues()) {
 			if (queue->get_type() != Widelands::wwWARE) {
 				continue;
 			}
 			if (tso.bo->substitute_inputs.count(queue->get_index()) > 0) {
+				inputs_are_substitutes = true;
 				filled += queue->get_filled();
 			}
 		}
-		if (filled < 5) {
+		if (filled < 5 && inputs_are_substitutes) {
 			shortage += 5 - filled;
 		}
 

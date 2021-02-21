@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/style_manager.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -36,6 +37,10 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+
+namespace {
+constexpr size_t kNoOfStatisticsStringCases = 4;
+}  // namespace
 
 namespace Widelands {
 
@@ -78,9 +83,10 @@ Quantity MilitarySite::SoldierControl::soldier_capacity() const {
 void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
-	assert(military_site_->capacity_ != capacity);
-	military_site_->capacity_ = capacity;
-	military_site_->update_soldier_request();
+	if (military_site_->capacity_ != capacity) {
+		military_site_->capacity_ = capacity;
+		military_site_->update_soldier_request();
+	}
 }
 
 void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
@@ -250,7 +256,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// we still hold the bigger military presence in that area (e.g. if there
 	// is a fortress one or two points away from our sentry, the fortress has
 	// a higher presence and thus the enemy can just burn down the sentry.
-	if (military_site_->military_presence_kept(game)) {
+	if (!get_allow_conquer(enemy->owner().player_number()) ||
+	    military_site_->military_presence_kept(game)) {
 		// Okay we still got the higher military presence, so the attacked
 		// militarysite will be destroyed.
 		military_site_->set_defeating_player(enemy->owner().player_number());
@@ -346,7 +353,9 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
                                                              SoldierPreference::kRookies),
      next_swap_soldiers_time_(Time(0)),
      soldier_upgrade_try_(false),
-     doing_upgrade_request_(false) {
+     doing_upgrade_request_(false),
+     // Initialize vector capacity for statistics string cache
+     statistics_string_cache_(kNoOfStatisticsStringCases) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -366,35 +375,84 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
+	// Use Lua script to generate the capacity string for the given number of stationed and present
+	// soldiers. The index is according to the conditions determined by the caller and ranges [0,
+	// kNoOfStatisticsStringCases - 1].
+	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
+		assert(idx < kNoOfStatisticsStringCases);
+		std::tuple<int, int, int> cache_key(pres, stat, capacity_);
+		auto it = statistics_string_cache_[idx].find(cache_key);
+		if (it != statistics_string_cache_[idx].end()) {
+			return it->second;
+		} else {
+			const std::string& military_capacity_script = owner().tribe().military_capacity_script();
+			// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
+			if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
+				try {
+					LuaInterface lua;
+					std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
+					std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+					cr->push_arg(pres);
+					cr->push_arg(stat);
+					cr->push_arg(capacity_);
+					cr->resume();
+					std::string new_string = cr->pop_string();
+					statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
+					return new_string;
+				} catch (LuaError& err) {
+					log_err("Failed to read soldier capacity for building '%s': %s",
+					        descr().name().c_str(), err.what());
+					return std::string();
+				}
+			}
+		}
+		return std::string();
+	};
+
+	// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0 and remove
+	// fallbacks to tribe-independent strings
 	if (present == stationed) {
 		if (capacity_ > stationed) {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
-			      stationed % (capacity_ - stationed))
-			        .str();
+			*s = read_capacity_string(present, stationed, 0);
+			if (s->empty()) {
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
+				 * number of soldier slots in the building */
+				*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
+				      stationed % (capacity_ - stationed))
+				        .str();
+			}
 		} else {
-			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
+			*s = read_capacity_string(present, stationed, 1);
+			if (s->empty()) {
+				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
+				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed)
+				        .str();
+			}
 		}
 	} else {
 		if (capacity_ > stationed) {
-
-			*s = (boost::format(
-			         /** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			         /** TRANSLATORS: %2% are currently open soldier slots in the building */
-			         /** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
-			         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
-			      present % (stationed - present) % (capacity_ - stationed))
-			        .str();
+			*s = read_capacity_string(present, stationed, 2);
+			if (s->empty()) {
+				*s = (boost::format(
+				         /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
+				            currently open soldier slots in the building. %3% is the maximum number of
+				            soldier slots in the building */
+				         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
+				      present % (stationed - present) % (capacity_ - stationed))
+				        .str();
+			}
 		} else {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
-			      present % (stationed - present))
-			        .str();
+			*s = read_capacity_string(present, stationed, 3);
+			if (s->empty()) {
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
+				 * open soldier slots in the building */
+				*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
+				      present % (stationed - present))
+				        .str();
+			}
 		}
 	}
+
 	*s = StyleManager::color_tag(
 	   // Line break to make Codecheck happy.
 	   *s, g_style_manager->building_statistics_style().medium_color());
@@ -517,7 +575,8 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
 			if (SoldierPreference::kHeroes == soldier_preference_ && old_level >= new_level) {
 				return false;
-			} else if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
+			}
+			if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
 				return false;
 			}
 		}
@@ -794,7 +853,7 @@ void MilitarySite::remove_worker(Worker& w) {
 	Building::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w)) {
-		pop_soldier_job(soldier, nullptr);
+		pop_soldier_job(soldier);
 	}
 
 	update_soldier_request();
@@ -817,7 +876,8 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack(game, *building);
 				return true;
-			} else if (upcast(Soldier, opponent, enemy)) {
+			}
+			if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->get_battle()) {
 					soldier->start_task_defense(game, stayhome);
 					if (stayhome) {
@@ -1021,7 +1081,11 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	// On modern compilers a simple 'return settings;' would've been fine.
+	return std::unique_ptr<const BuildingSettings>(std::move(settings));
 }
 
 // setters

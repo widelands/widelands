@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, style, x, y, w, h),
      text_(text),
-     font_style_(&g_style_manager->font_style(
-        style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel)),
+     font_style_(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel),
      font_scale_(1.0f),
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
@@ -54,18 +53,21 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
 
-	scrollbar_.set_singlestepsize(text_height(*font_style_, font_scale_));
+	scrollbar_.set_singlestepsize(text_height(font_style(), font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
 }
 
-void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
-	font_style_ = &style;
+inline const FontStyleInfo& MultilineTextarea::font_style() const {
+	return g_style_manager->font_style(font_style_);
+}
+void MultilineTextarea::set_style(const FontStyle style) {
+	font_style_ = style;
 	recompute();
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
-	scrollbar_.set_singlestepsize(text_height(*font_style_, font_scale_));
+	scrollbar_.set_singlestepsize(text_height(font_style(), font_scale_));
 	recompute();
 }
 
@@ -142,7 +144,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * font_style_->size() * font_scale_);
+	scrollbar_.set_pagesize(get_h() - 2 * font_style().size() * font_scale_);
 }
 
 /**
@@ -206,7 +208,7 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
 
-	FontStyleInfo scaled_style(*font_style_);
+	FontStyleInfo scaled_style(font_style());
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	return as_richtext_paragraph(temp, scaled_style, align_);

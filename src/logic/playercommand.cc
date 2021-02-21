@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -516,33 +516,37 @@ void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSav
 
 /*** Cmd_FlagAction ***/
 CmdFlagAction::CmdFlagAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
-	des.unsigned_8();
-	serial = des.unsigned_32();
+	type_ = static_cast<FlagJob::Type>(des.unsigned_8());
+	serial_ = des.unsigned_32();
 }
 
 void CmdFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (upcast(Flag, flag, game.objects().get_object(serial))) {
+	if (upcast(Flag, flag, game.objects().get_object(serial_))) {
 		if (flag->get_owner() == player) {
-			player->flagaction(*flag);
+			player->flagaction(*flag, type_);
 		}
 	}
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_8(0);
-	ser.unsigned_32(serial);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
+	ser.unsigned_32(serial_);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 2;
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 3;
 
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
+			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
+			// TODO(Nordfriese): Savegame compatibility
+			type_ = packet_version < 3 ? FlagJob::Type::kGeologist :
+			                             static_cast<FlagJob::Type>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFlagAction", packet_version, kCurrentPacketVersionCmdFlagAction);
@@ -557,7 +561,8 @@ void CmdFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(type_));
 }
 
 /*** Cmd_StartStopBuilding ***/
@@ -1773,36 +1778,37 @@ void CmdChangeSoldierCapacity::write(FileWrite& fw, EditorGameBase& egbase, MapO
 /*** Cmd_EnemyFlagAction ***/
 
 CmdEnemyFlagAction::CmdEnemyFlagAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
-	des.unsigned_8();
-	serial = des.unsigned_32();
-	des.unsigned_8();
+	serial_ = des.unsigned_32();
 	const uint32_t number = des.unsigned_32();
-	soldiers.clear();
+	soldiers_.clear();
 	for (uint32_t i = 0; i < number; ++i) {
-		soldiers.push_back(des.unsigned_32());
+		soldiers_.push_back(des.unsigned_32());
 	}
+	allow_conquer_ = des.unsigned_8();
 }
 
 void CmdEnemyFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
 
-	if (upcast(Flag, flag, game.objects().get_object(serial))) {
-		log_info_time(game.get_gametime(),
-		              "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-		              "number=%" PRIuS "\n",
-		              player->player_number(), flag->owner().player_number(), soldiers.size());
+	if (upcast(Flag, flag, game.objects().get_object(serial_))) {
+		if (g_verbose) {
+			log_info_time(game.get_gametime(),
+			              "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+			              "number=%" PRIuS "\n",
+			              player->player_number(), flag->owner().player_number(), soldiers_.size());
+		}
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner())) {
 				for (Widelands::Coords& coords : building->get_positions(game)) {
 					if (player->is_seeing(Map::get_index(coords, game.map().get_width()))) {
 						std::vector<Soldier*> result;
-						for (Serial s : soldiers) {
+						for (Serial s : soldiers_) {
 							if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
 								result.push_back(soldier);
 							}
 						}
-						player->enemyflagaction(*flag, sender(), result);
+						player->enemyflagaction(*flag, sender(), result, allow_conquer_);
 						return;
 					}
 				}
@@ -1816,43 +1822,48 @@ void CmdEnemyFlagAction::execute(Game& game) {
 
 void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_8(1);
-	ser.unsigned_32(serial);
-	ser.unsigned_8(sender());
-	ser.unsigned_32(soldiers.size());
-	for (Serial s : soldiers) {
+	ser.unsigned_32(serial_);
+	ser.unsigned_32(soldiers_.size());
+	for (Serial s : soldiers_) {
 		ser.unsigned_32(s);
 	}
+	ser.unsigned_8(allow_conquer_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 4;
+constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 5;
 
 void CmdEnemyFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
+		// TODO(Nordfriese): Savegame compatibility
 		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 3) {
 			PlayerCommand::read(fr, egbase, mol);
-			fr.unsigned_8();
-			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-			fr.unsigned_8();
+			if (packet_version < 5) {
+				fr.unsigned_8();
+			}
+			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
+			if (packet_version < 5) {
+				fr.unsigned_8();
+			}
 
-			soldiers.clear();
+			soldiers_.clear();
 			if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
 				const uint32_t number = fr.unsigned_32();
 				for (uint32_t i = 0; i < number; ++i) {
-					soldiers.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
+					soldiers_.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
 				}
 			} else {
 				const uint8_t number = fr.unsigned_8();
-				upcast(Flag, flag, egbase.objects().get_object(serial));
+				upcast(Flag, flag, egbase.objects().get_object(serial_));
 				assert(flag);
 				std::vector<Soldier*> result;
 				egbase.get_player(sender())->find_attack_soldiers(*flag, &result, number);
 				assert(result.size() == number);
 				for (const auto& s : result) {
-					soldiers.push_back(s->serial());
+					soldiers_.push_back(s->serial());
 				}
 			}
+			allow_conquer_ = packet_version < 5 || fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnemyFlagAction", packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
@@ -1867,18 +1878,17 @@ void CmdEnemyFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_16(kCurrentPacketVersionCmdEnemyFlagAction);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-	// Now action
-	fw.unsigned_8(0);
 
 	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 
 	// Now param
-	fw.unsigned_8(sender());
-	fw.unsigned_32(soldiers.size());
-	for (Serial s : soldiers) {
+	fw.unsigned_32(soldiers_.size());
+	for (Serial s : soldiers_) {
 		fw.unsigned_32(mos.get_object_file_index(*egbase.objects().get_object(s)));
 	}
+
+	fw.unsigned_8(allow_conquer_ ? 1 : 0);
 }
 
 /*** struct PlayerMessageCommand ***/

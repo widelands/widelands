@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,36 +25,32 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapdetailsbox.h"
 #include "ui_fsmenu/menu.h"
 
 class GameController;
 class LuaInterface;
+
 namespace FsMenu {
+
 static constexpr double scale_factor = 1.3;
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public TwoColumnsFullNavigationMenu {
+class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuLaunchGame(FullscreenMenuMain&,
-	                         GameSettingsProvider*,
-	                         GameController*,
-	                         bool preconfigured = false);
-	~FullscreenMenuLaunchGame() override;
+	LaunchGame(MenuCapsule&, GameSettingsProvider&, GameController*, bool preconfigured, bool mpg);
+	~LaunchGame() override;
 
 	GameSettingsProvider& settings() const {
-		assert(settings_);
-		return *settings_;
+		return settings_;
 	}
 
 protected:
-	void clicked_ok() override = 0;
-	void clicked_back() override = 0;
-	virtual bool clicked_select_map() = 0;
-
 	LuaInterface* lua_;
+
+	virtual void clicked_select_map() = 0;
+	virtual void clicked_select_savegame() = 0;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this
 	/// is a scenario or a savegame.
@@ -65,6 +61,8 @@ protected:
 	void update_peaceful_mode();
 	/// Enables or disables the custom_starting_positions checkbox.
 	void update_custom_starting_positions();
+	/// Hides or shows the desync warning.
+	void update_warn_desyncing_addon();
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
@@ -86,13 +84,16 @@ protected:
 
 	void layout() override;
 
-	MapDetailsBox map_details;
-	UI::Textarea configure_game;
+	MapDetailsBox map_details_;
+	UI::Textarea configure_game_;
+	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
+	UI::Button* choose_map_;
+	UI::Button* choose_savegame_;
 	std::string last_win_condition_;
 
-	GameSettingsProvider* settings_;
+	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_;

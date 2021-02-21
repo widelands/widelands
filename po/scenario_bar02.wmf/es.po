@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Adrián Magro <nomeapelidos@gmail.com>, 2016
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
 # GunChleoc, 2016
-# Thadah D. Denyse <juchuf@gmail.com>, 2015
+# Gontzal M. Pujana <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
-# Thadah D. Denyse <juchuf@gmail.com>, 2017-2018
+# Gontzal M. Pujana <juchuf@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"

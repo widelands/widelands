@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,8 @@ public:
 	// Input output for the global game state.
 	void read_global_env(FileRead&, Widelands::MapObjectLoader&, uint32_t);
 	uint32_t write_global_env(FileWrite&, Widelands::MapObjectSaver&);
+	void read_textdomain_stack(FileRead&);
+	void write_textdomain_stack(FileWrite&);
 
 private:
 	std::unique_ptr<GameFactory> factory_;

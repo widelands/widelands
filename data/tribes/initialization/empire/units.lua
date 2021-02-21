@@ -9,6 +9,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "empire",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
@@ -1135,7 +1136,9 @@ descriptions:new_tribe {
          name = "empire_port",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire warehouse: Port
-            purpose = pgettext("empire_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+            purpose = pgettext("empire_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
+            -- TRANSLATORS: Note helptext for an empire warehouse: Port
+            note = pgettext("empire_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
          }
       },
 
@@ -1572,6 +1575,7 @@ descriptions:new_tribe {
    carrier = "empire_carrier",
    carrier2 = "empire_donkey",
    geologist = "empire_geologist",
+   scouts_house = "empire_scouts_house",
    soldier = "empire_soldier",
    ship = "empire_ship",
    ferry = "empire_ferry",

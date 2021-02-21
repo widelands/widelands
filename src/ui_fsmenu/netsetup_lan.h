@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,9 @@
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
+#include <memory>
+
+#include "logic/game_controller.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -28,9 +31,9 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
 namespace FsMenu {
-class FullscreenMenuNetSetupLAN : public TwoColumnsBasicNavigationMenu {
+class NetSetupLAN : public TwoColumnsBasicNavigationMenu {
 public:
-	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
+	explicit NetSetupLAN(MenuCapsule&);
 
 	void think() override;
 
@@ -40,11 +43,6 @@ public:
 	 * modified
 	 */
 	bool get_host_address(NetAddress* addr);
-
-	/**
-	 * \return the name chosen by the player
-	 */
-	const std::string& get_playername();
 
 protected:
 	void clicked_ok();
@@ -68,6 +66,8 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
+
+	std::unique_ptr<GameController> running_game_;
 
 	// Left Column
 	UI::Textarea label_opengames_;

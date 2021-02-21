@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@ struct MultilineTextarea : public Panel {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
-	void set_style(const FontStyleInfo& style);
+	void set_style(FontStyle);
 	void set_font_scale(float scale);
 
 	// Drawing and event handlers
@@ -93,7 +93,8 @@ private:
 
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	const FontStyleInfo* font_style_;
+	FontStyle font_style_;
+	const FontStyleInfo& font_style() const;
 	float font_scale_;
 
 	const Align align_;

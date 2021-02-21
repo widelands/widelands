@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,13 +89,16 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, release_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
    METHOD(LuaPlayer, run_training_wheel),
    METHOD(LuaPlayer, skip_training_wheel),
+#endif
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
+   METHOD(LuaPlayer, get_constructionsites),
    METHOD(LuaPlayer, get_suitability),
    METHOD(LuaPlayer, allow_workers),
    METHOD(LuaPlayer, switchplayer),
@@ -116,6 +119,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, tribe),
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
+   PROP_RW(LuaPlayer, hidden_from_general_statistics),
    {nullptr, nullptr, nullptr},
 };
 
@@ -295,6 +299,21 @@ int LuaPlayer::get_allow_additional_expedition_items(lua_State* L) {
 }
 int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
 	get(L, get_egbase(L)).set_allow_additional_expedition_items(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: hidden_from_general_statistics
+
+      (RW) Whether this player's existence and statistics are not
+      disclosed to other players in the general statistics menu.
+*/
+int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L)).is_hidden_from_general_statistics());
+	return 1;
+}
+int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
+	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -620,9 +639,10 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. The fields will remain
-      visible until they are hidden again. See also :ref:`field_animations` for
-      animated revealing.
+      Make these fields visible for the current player. The fields will remain visible until they
+      are hidden again by :meth:`hide_fields`, even if they are not in vision range of any
+      buildings or workers.
+      See also :ref:`field_animations` for animated revealing.
 
       :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
@@ -648,14 +668,18 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 /* RST
    .. method:: hide_fields(fields[, unexplore = false])
 
-      Make these fields hidden for the current player if they are not
-      seen by a military building. See also :ref:`field_animations` for
-      animated hiding.
+      Undo the effect of :meth:`reveal_fields` on these fields for the current player and
+      optionally completely hide them.
+      See also :ref:`field_animations` for animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored
+         and will not be seen by buildings or workers until they are revealed again
+         by :meth:`reveal_fields`.
+         If `false`, They will no longer be permanently visible, but can still be seen by
+         buildings or workers (own or allied), and the player will remember the last seen state.
       :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
@@ -665,10 +689,9 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode =
-	   (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	      Widelands::HideOrRevealFieldMode::kHideAndForget :
-	      Widelands::HideOrRevealFieldMode::kHide;
+	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                                                 Widelands::HideOrRevealFieldMode::kHide :
+	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
@@ -703,7 +726,8 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	return 0;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: acquire_training_wheel_lock(name)
 
       Try to mark the given training wheel as the active one.
@@ -724,7 +748,7 @@ int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
 	return 1;
 }
 
-/* RST
+/* R#S#T
    .. method:: release_training_wheel_lock()
 
       Mark the current training wheel as no longer active without solving it.
@@ -735,7 +759,7 @@ int LuaPlayer::release_training_wheel_lock(lua_State* L) {
 	return 0;
 }
 
-/* RST
+/* R#S#T
    .. method:: mark_training_wheel_as_solved(name)
 
       Marks a global training wheel objective as solved. Also releases the lock.
@@ -753,7 +777,7 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 	return 0;
 }
 
-/* RST
+/* R#S#T
    .. method:: run_training_wheel(name[, force])
 
       Trigger running a training wheel. This function will skip the dependency check, so the given
@@ -779,7 +803,7 @@ int LuaPlayer::run_training_wheel(lua_State* L) {
 	return 0;
 }
 
-/* RST
+/* R#S#T
    .. method:: skip_training_wheel(name)
 
       Skips the execution of a training wheel and activates the training wheels that depend on it.
@@ -797,6 +821,7 @@ int LuaPlayer::skip_training_wheel(lua_State* L) {
 	get_game(L).skip_training_wheel(luaL_checkstring(L, 2));
 	return 0;
 }
+#endif
 
 /* RST
    .. method:: get_ships()
@@ -834,52 +859,24 @@ int LuaPlayer::get_ships(lua_State* L) {
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_buildings(lua_State* L) {
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Player& p = get(L, egbase);
+	return do_get_buildings(L, false);
+}
 
-	// if only one string, convert to array so that we can use
-	// parse_building_list
-	bool return_array = true;
-	if (lua_isstring(L, -1)) {
-		const char* name = luaL_checkstring(L, -1);
-		lua_pop(L, 1);
-		lua_newtable(L);
-		lua_pushuint32(L, 1);
-		lua_pushstring(L, name);
-		lua_rawset(L, -3);
-		return_array = false;
-	}
+/* RST
+   .. method:: get_constructionsites(which)
 
-	std::vector<Widelands::DescriptionIndex> houses;
-	parse_building_list(L, p.tribe(), houses);
+      which can be either a single name or an array of names. In the first
+      case, the method returns an array of all constructionsites that the player has
+      of this kind. If which is an array, the function returns a table of
+      (name,array of buildings) pairs.
 
-	lua_newtable(L);
-
-	uint32_t cidx = 1;
-	for (const Widelands::DescriptionIndex& house : houses) {
-		const std::vector<Widelands::Player::BuildingStats>& vec = p.get_building_statistics(house);
-
-		if (return_array) {
-			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
-			lua_newtable(L);
-			cidx = 1;
-		}
-
-		for (const auto& stats : vec) {
-			if (stats.is_constructionsite) {
-				continue;
-			}
-
-			lua_pushuint32(L, cidx++);
-			LuaMaps::upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
-			lua_rawset(L, -3);
-		}
-
-		if (return_array) {
-			lua_rawset(L, -3);
-		}
-	}
-	return 1;
+      :type which: name of constructionsites building or array of building names
+      :rtype which: :class:`string` or :class:`array`
+      :returns: information about the players constructionsites
+      :rtype: :class:`array` or :class:`table`
+*/
+int LuaPlayer::get_constructionsites(lua_State* L) {
+	return do_get_buildings(L, true);
 }
 
 /* RST
@@ -1103,6 +1100,55 @@ int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
 		p.allow_building_type(house, allow);
 	}
 	return 0;
+}
+
+int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& p = get(L, egbase);
+
+	// if only one string, convert to array so that we can use
+	// parse_building_list
+	bool return_array = true;
+	if (lua_isstring(L, -1)) {
+		const char* name = luaL_checkstring(L, -1);
+		lua_pop(L, 1);
+		lua_newtable(L);
+		lua_pushuint32(L, 1);
+		lua_pushstring(L, name);
+		lua_rawset(L, -3);
+		return_array = false;
+	}
+
+	std::vector<Widelands::DescriptionIndex> houses;
+	parse_building_list(L, p.tribe(), houses);
+
+	lua_newtable(L);
+
+	uint32_t cidx = 1;
+	for (const Widelands::DescriptionIndex& house : houses) {
+		const std::vector<Widelands::Player::BuildingStats>& vec = p.get_building_statistics(house);
+
+		if (return_array) {
+			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
+			lua_newtable(L);
+			cidx = 1;
+		}
+
+		for (const auto& stats : vec) {
+			if (csites ^ stats.is_constructionsite) {
+				continue;
+			}
+
+			lua_pushuint32(L, cidx++);
+			LuaMaps::upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
+			lua_rawset(L, -3);
+		}
+
+		if (return_array) {
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
 }
 
 /* RST

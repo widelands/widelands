@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2016-2019
@@ -8,15 +8,15 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-07-23 08:00+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-16 20:59+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -408,20 +408,10 @@ msgstr "%s:"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgctxt "hotkey"
-msgid "Space"
-msgstr "LEERTASTE"
-
-#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Schaltet die Bauhilfe ein und aus"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:57
-msgctxt "hotkey"
-msgid "Ctrl + F"
-msgstr "STRG + F"
-
 #: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem erlaubt)"
@@ -430,6 +420,11 @@ msgstr "Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem e
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Öffnet/schließt die Minikarte"
+
+#: ../../data/txts/help/common_helptexts.lua:75
+#: ../../data/txts/help/common_helptexts.lua:84
+msgid "%1% / %2%"
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -515,6 +510,29 @@ msgid ""
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Du kannst auf der rechten Seite Informationen über die ausgewählte Karte oder den Spielstand sehen. Eine Schaltfläche neben der Karte erlaubt dem Host, die Karte zu ändern. Des Weiteren kann der Host eine Siegbedingung setzten und das Spiel starten, sobald alle Spieler bereit sind."
+
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"them."
+msgstr "Amazonen lieben Bäume. Baue genügend Hütten für Dschungelbewahrerinnen, um immer genügend davon zu haben."
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an amazon economy. Build rare tree "
+"plantations to plant these special trees."
+msgstr "Seltene Hölzer sind das Rückgrat einer Amazonenwirtschaft. Baue Edelbaumpflanzungen um diese speziellen Bäume zu pflanzen."
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
+"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr "Edelbäume werden von erfahrenen Holzfällerinnen gefällt, deren Holzfällhütten zu Edelbaumfällhüttem ausgebaut wurden. Allerdings hören sie auf normale Bäume zu fällen. Plane ihre örtliche Verteilung vor."
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr "Nahrung wird mit Holzkohlefeuern getrocknet. Sichere eine kontinuierliche Versorgung damit. "
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -643,171 +661,138 @@ msgstr "Um Ziegel zu produzieren, brauchst du Stein; für Stein brauchst du eine
 msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr "Baue immer ein Forsthaus, damit du immer genug Stämme hast."
 
-#: ../../data/txts/tips/general_game.lua:6
+#: ../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "Erst wenn eine Straße die Baustelle erreicht, kann mit dem Bau begonnen werden."
 
-#: ../../data/txts/tips/general_game.lua:10
+#: ../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Sende erst einen Geologen zur Bodenerkundung aus, bevor du Minen oder Brunnen baust."
 
-#: ../../data/txts/tips/general_game.lua:14
+#: ../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "Dein Gebiet kannst du durch Errichten verschiedener Militärgebäude wie Wachposten, Baracken oder Festungen vergrößern."
 
-#: ../../data/txts/tips/general_game.lua:18
+#: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
 msgstr "Bergleute arbeiten nur, wenn sie mit genügend Nahrung versorgt werden."
 
-#: ../../data/txts/tips/general_game.lua:22
+#: ../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Teile deine Straßen durch Flaggen in viele kleine Teile auf. Das wird den Transport der Waren beschleunigen."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/general_game.lua:27
+#: ../../data/txts/tips/general_game.lua:28
 #, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
 msgstr "Hast du weitere Fragen? Auf %s findest du unsere FAQs, das Wiki und natürlich unsere Gemeinschaftsforen."
 
-#: ../../data/txts/tips/general_game.lua:31
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
 msgstr "Benutze die Prioritätsschaltflächen in den Gebäudefenstern, um die Anlieferung von speziellen Waren zu steuern. STRG + Klick steuert alle Waren gleichzeitig."
 
-#: ../../data/txts/tips/general_game.lua:35
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "Benutze das Menü „Wirtschaftseinstellungen“ um den gewünschten Lagerbestand für Waren zu definieren. Du findest es im Flaggenmenü."
 
-#: ../../data/txts/tips/general_game.lua:39
+#: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘N’ for News to access the "
-"messages window, then use ‘G’ for Go To, and the Delete key to archive "
+"Manage your messages more efficiently: press ‘%1%’ for News to access the "
+"messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
 "messages."
-msgstr "Verwalte deine Nachrichten effizienter: Drücke „N“, um in das Nachrichten-Fenster zu gelangen, verwende dann „G“, um zum betreffenden Ort zu gehen, und die ENTF-Taste zum Ablegen der Nachrichten."
+msgstr "Verwalte deine Nachrichten effizienter: Drücke „%1%“, um in das Nachrichten-Fenster zu gelangen, verwende dann „%2%“, um zum betreffenden Ort zu gehen, und die „%3%“-Taste zum Ablegen der Nachrichten."
 
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "1-9"
-msgstr "1-9"
-
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "Ctrl + (1-9)"
-msgstr "STRG + (1-9)"
-
-#: ../../data/txts/tips/general_game.lua:43
+#: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
 msgstr "Drücke %1%, um wichtige Orte zu speichern, und drücke dann %2%, um sie wieder aufzurufen."
 
-#: ../../data/txts/tips/general_game.lua:47
+#: ../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Durch das Drücken der STRG-Taste beim Entfernen einer Straße werden alle Flaggen bis zur nächsten Kreuzung entfernt."
 
-#: ../../data/txts/tips/general_game.lua:51
+#: ../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
 msgstr "Neue Soldaten werden in Kasernen rekrutiert. Ihre Fertigkeiten können sie dann in den Ausbildungsgebäuden verbessern."
 
-#: ../../data/txts/tips/general_game.lua:55
+#: ../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Drückst du STRG, während du auf die Schaltfläche zum Ausbauen, Abreißen oder Zerstören eines Gebäudes klickst, wird das Bestätigungsfenster übersprungen."
 
-#: ../../data/txts/tips/general_game.lua:59
-msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "Drücke „I“, um das Lagerfenster schnell zu öffnen und zu schließen."
+#: ../../data/txts/tips/general_game.lua:61
+#, lua-format
+msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
+msgstr "Drücke „%s“, um das Lagerfenster schnell zu öffnen und zu schließen."
 
-#: ../../data/txts/tips/general_game.lua:63
+#: ../../data/txts/tips/general_game.lua:65
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr "Eine Wirtschaft umfasst alle Gebäude und Flaggen, die durch Straßen verbunden sind. Angebot und Nachfrage der einzelnen Gebäude werden in der jeweiligen Wirtschaft gehandhabt."
 
-#: ../../data/txts/tips/general_game.lua:67
+#: ../../data/txts/tips/general_game.lua:69
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Manche Gebäude, wie zum Beispiel Bauernhöfe, haben einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie zu dicht von Straßen oder Bäumen umgeben sind."
 
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl + (+/-)"
-msgstr "STRG + (+/-)"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl + 0"
-msgstr "STRG + 0"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "Du kannst mit dem Mausrad oder %1% rein- und rauszoomen. Drücke %2%, um den Zoomfaktor zurückzusetzen."
-
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
-"visited locations."
-msgstr "Verwende die ‘,’ (Komma) und ‘.’ (Punkt) Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+msgstr "Du kannst mit dem Mausrad oder %1%/ %2% rein- und rauszoomen. Drücke %3%, um den Zoomfaktor zurückzusetzen."
 
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl + (Page Up/Page Down)"
-msgstr "STRG + (BILD AUF/BILD AB)"
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Page Up/Page Down"
-msgstr "BILD AUF/BILD AB"
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift + (Page Up/Page Down)"
-msgstr "UMSCHALT + (BILD AUF/BILD AB)"
-
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:80
 msgid ""
-"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
-"adjust speed smoothly."
-msgstr "Erhöhe oder verringere die Spielgeschwindigkeit mit %1%. Nutze %2% für große Änderungen, %3% wird die Geschwindigkeit langsam ändern."
+"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
+"locations."
+msgstr "Verwende die ‘%1$s’  und ‘%2$s’ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:84
+msgid ""
+"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
+"%5%/%6% will adjust speed smoothly."
+msgstr "Erhöhe oder verringere die Spielgeschwindigkeit mit %1%/%2%. Nutze %3%/%4% für große Änderungen, %5%/%6% wird die Geschwindigkeit langsam ändern."
+
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Pfeiltasten"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "STRG + Pfeiltasten"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Bewege die Kartenansicht mit %1%. Mit %2% wird die Bewegung schneller, mit %3% wird die Bewegung langsamer."
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "UMSCHALT + Pfeiltasten"
 
-#: ../../data/txts/tips/general_game.lua:87
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

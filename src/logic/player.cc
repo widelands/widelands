@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,10 +136,12 @@ void find_former_buildings(const Descriptions& descriptions,
 Player::Player(EditorGameBase& the_egbase,
                PlayerNumber const plnum,
                uint8_t const initialization_index,
+               const RGBColor& pc,
                const TribeDescr& tribe_descr,
                const std::string& name)
    : egbase_(the_egbase),
      initialization_index_(initialization_index),
+     playercolor_(pc),
      team_number_(0),
      see_all_(false),
      player_number_(plnum),
@@ -154,6 +156,7 @@ Player::Player(EditorGameBase& the_egbase,
      fields_(nullptr),
      is_picking_custom_starting_position_(false),
      allow_additional_expedition_items_(true),
+     hidden_from_general_statistics_(false),
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
@@ -184,7 +187,7 @@ Player::Player(EditorGameBase& the_egbase,
 	// Subscribe to NoteFieldTerrainChanged.
 	field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>(
 	   [this](const NoteFieldTerrainChanged& note) {
-		   if (is_seeing(note.map_index)) {
+		   if (fields_[note.map_index].vision == VisibleState::kVisible) {
 			   rediscover_node(egbase().map(), note.fc);
 		   }
 	   });
@@ -401,6 +404,14 @@ void Player::update_team_players() {
 	update_team_vision_whole_map();
 }
 
+void Player::show_watch_window(Game& game, Bob& b) {
+	if (InteractivePlayer* const iplayer = game.get_ipl()) {
+		if (&iplayer->player() == this) {
+			iplayer->show_watch_window(b);
+		}
+	}
+}
+
 /*
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
@@ -588,10 +599,9 @@ Road* Player::build_road(const Path& path) {
 				}
 			}
 			return &Road::create(egbase(), *start, *end, path);
-		} else {
-			log_warn_time(
-			   egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 		}
+		log_warn_time(
+		   egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 	} else {
 		log_warn_time(
 		   egbase().get_gametime(), "%i: building road, missed start flag\n", player_number());
@@ -658,10 +668,9 @@ Waterway* Player::build_waterway(const Path& path) {
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
-		} else {
-			log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
-			              static_cast<unsigned int>(player_number()));
 		}
+		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
+		              static_cast<unsigned int>(player_number()));
 	} else {
 		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
 		              static_cast<unsigned int>(player_number()));
@@ -800,9 +809,8 @@ Building* Player::build(Coords c,
 
 	if (constructionsite) {
 		return &egbase().warp_constructionsite(c, player_number_, idx, false, former_buildings);
-	} else {
-		return &descr->create(egbase(), this, c, false, false, former_buildings);
 	}
+	return &descr->create(egbase(), this, c, false, false, former_buildings);
 }
 
 /*
@@ -1062,9 +1070,9 @@ void Player::enhance_or_dismantle(Building* building,
 Perform an action on the given flag.
 ===============
 */
-void Player::flagaction(Flag& flag) {
+void Player::flagaction(Flag& flag, FlagJob::Type t) {
 	if (flag.get_owner() == this) {  //  Additional security check.
-		flag.add_flag_job(dynamic_cast<Game&>(egbase()), tribe().geologist(), "expedition");
+		flag.add_flag_job(dynamic_cast<Game&>(egbase()), t);
 	}
 }
 
@@ -1245,16 +1253,16 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 // to attack, so pretending we have more types is pointless.
 void Player::enemyflagaction(const Flag& flag,
                              PlayerNumber const attacker,
-                             const std::vector<Widelands::Soldier*>& soldiers) {
+                             const std::vector<Widelands::Soldier*>& soldiers,
+                             const bool allow_conquer) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());
-	} else if (soldiers.empty()) {
-		log_warn_time(egbase().get_gametime(), "enemyflagaction: no soldiers given\n");
 	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
+					attack_target->set_allow_conquer(player_number(), allow_conquer);
 					for (Soldier* temp_attacker : soldiers) {
 						assert(temp_attacker);
 						assert(temp_attacker->get_owner() == this);
@@ -1337,7 +1345,8 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						map_object_descr = nullptr;
 						FCoords main_coords = map.get_fcoords(building->get_position());
 						Field& field_main = fields_[main_coords.field - &first_map_field];
-						if (field_main.vision != VisibleState::kVisible) {
+						if (field_main.vision != VisibleState::kVisible &&
+						    !field_main.vision.is_hidden()) {
 							rediscover_node(map, main_coords);
 							field_main.time_node_last_unseen = egbase().get_gametime();
 							field_main.vision = Vision(VisibleState::kPreviouslySeen);
@@ -1400,12 +1409,15 @@ void Player::see_node(const MapIndex i) {
 	assert(fields_.get() <= &field);
 	assert(&field < fields_.get() + map.max_index());
 
-	if (!field.vision.is_visible()) {
+	if (!field.vision.is_visible() && !field.vision.is_hidden()) {
 		field.vision = VisibleState::kVisible;
 		rediscover_node(map, map.get_fcoords(map[i]));
 	}
 	field.vision.increment_seers();
 	assert(field.vision.seers() > 0);
+	if (field.vision.is_hidden()) {
+		return;
+	}
 
 	for (PlayerNumber player_number : team_players_) {
 		if (Player* team_player = egbase().get_player(player_number)) {
@@ -1423,6 +1435,9 @@ void Player::unsee_node(MapIndex const i) {
 
 	assert(field.vision.seers() > 0);
 	field.vision.decrement_seers();
+	if (field.vision.is_hidden()) {
+		return;
+	}
 	assert(field.vision.is_visible());
 
 	if (!field.vision.is_seen_by_us()) {
@@ -1474,6 +1489,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		if (field.vision.is_revealed()) {
 			break;
 		}
+		field.vision.set_hidden(false);
 		if (!field.vision.is_visible()) {
 			field.vision = VisibleState::kVisible;
 			rediscover_node(map, map.get_fcoords(map[i]));
@@ -1484,12 +1500,13 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		for (PlayerNumber player_number : team_players_) {
 			if (Player* team_player = egbase().get_player(player_number)) {
 				team_player->force_update_team_vision(i, true);
-				assert(team_player->fields()[i].vision.is_visible());
+				assert(team_player->fields()[i].vision.is_visible() ||
+				       team_player->fields()[i].vision.is_hidden());
 			}
 		}
 		break;
 
-	case HideOrRevealFieldMode::kHide:
+	case HideOrRevealFieldMode::kUnreveal:
 		if (!field.vision.is_revealed()) {
 			break;
 		}
@@ -1509,19 +1526,25 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 			for (PlayerNumber player_number : team_players_) {
 				if (Player* team_player = egbase().get_player(player_number)) {
 					team_player->force_update_team_vision(i, false);
-					assert(team_player->fields()[i].vision == VisibleState::kPreviouslySeen);
+					assert(team_player->fields()[i].vision == VisibleState::kPreviouslySeen ||
+					       team_player->fields()[i].vision.is_hidden());
 				}
 			}
 		}
 		break;
 
-	case HideOrRevealFieldMode::kHideAndForget:
-		hide_or_reveal_field(coords, HideOrRevealFieldMode::kHide);
-		if (field.vision == VisibleState::kPreviouslySeen) {
-			field.vision = VisibleState::kUnexplored;
+	case HideOrRevealFieldMode::kHide:
+		if (field.vision.is_hidden()) {
+			break;
+		}
+		field.vision.set_hidden(true);
+		for (PlayerNumber player_number : team_players_) {
+			if (Player* team_player = egbase().get_player(player_number)) {
+				team_player->update_team_vision(i);
+			}
 		}
 		assert(!field.vision.is_revealed());
-		assert(field.vision != VisibleState::kPreviouslySeen);
+		assert(field.vision == VisibleState::kUnexplored);
 		break;
 	}
 }
@@ -1530,7 +1553,7 @@ void Player::force_update_team_vision(MapIndex const i, bool visible) {
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
-	if (field.vision.is_seen_by_us()) {
+	if (field.vision.is_seen_by_us() || field.vision.is_hidden()) {
 		return;
 	}
 
@@ -1552,7 +1575,7 @@ void Player::update_team_vision(MapIndex const i) {
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
-	if (field.vision.is_seen_by_us()) {
+	if (field.vision.is_seen_by_us() || field.vision.is_hidden()) {
 		return;
 	}
 
@@ -1586,11 +1609,25 @@ void Player::update_team_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	for (MapIndex i = 0; i < max; ++i) {
-		if (fields_[i].vision.is_seen_by_us()) {
+		if (fields_[i].vision.is_seen_by_us() || fields_[i].vision.is_hidden()) {
 			continue;
 		}
 		update_team_vision(i);
 	}
+}
+
+Quantity Player::get_total_economy_target(const WareWorker ww, const DescriptionIndex di) const {
+	Quantity total = 0;
+	for (const auto& economy : economies()) {
+		if (economy.second->type() == ww && !economy.second->warehouses().empty()) {
+			const auto& t = economy.second->target_quantity(di);
+			if (t.permanent == kEconomyTargetInfinity) {
+				return kEconomyTargetInfinity;
+			}
+			total += t.permanent;
+		}
+	}
+	return total;
 }
 
 /**
@@ -1602,19 +1639,28 @@ void Player::sample_statistics() {
 	assert(ware_productions_.size() == tribe().wares().size());
 	assert(ware_consumptions_.size() == tribe().wares().size());
 	assert(ware_stocks_.size() == tribe().wares().size());
+	assert(worker_stocks_.size() == tribe().workers().size());
 
 	// Calculate stocks
-	std::map<DescriptionIndex, Quantity> stocks;
+	std::map<DescriptionIndex, Quantity> ware_stocks, worker_stocks;
 	for (DescriptionIndex idx : tribe().wares()) {
-		stocks.insert(std::make_pair(idx, 0U));
+		ware_stocks.insert(std::make_pair(idx, 0U));
+	}
+	for (DescriptionIndex idx : tribe().workers()) {
+		worker_stocks.insert(std::make_pair(idx, 0U));
 	}
 
 	for (const auto& economy : economies()) {
-		if (economy.second->type() == wwWARE) {
-			for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+			if (economy.second->type() == wwWARE) {
 				const Widelands::WareList& wares = warehouse->get_wares();
 				for (DescriptionIndex idx : tribe().wares()) {
-					stocks.at(idx) += wares.stock(idx);
+					ware_stocks.at(idx) += wares.stock(idx);
+				}
+			} else {
+				const Widelands::WareList& workers = warehouse->get_workers();
+				for (DescriptionIndex idx : tribe().workers()) {
+					worker_stocks.at(idx) += workers.stock(idx);
 				}
 			}
 		}
@@ -1628,7 +1674,10 @@ void Player::sample_statistics() {
 		ware_consumptions_.at(idx).push_back(current_consumed_statistics_.at(idx));
 		current_consumed_statistics_.at(idx) = 0;
 
-		ware_stocks_.at(idx).push_back(stocks.at(idx));
+		ware_stocks_.at(idx).push_back(ware_stocks.at(idx));
+	}
+	for (DescriptionIndex idx : tribe().workers()) {
+		worker_stocks_.at(idx).push_back(worker_stocks.at(idx));
 	}
 }
 
@@ -1686,6 +1735,12 @@ Player::get_ware_consumption_statistics(DescriptionIndex const ware) const {
 const std::vector<uint32_t>* Player::get_ware_stock_statistics(DescriptionIndex const ware) const {
 	assert(tribe().has_ware(ware));
 	return &ware_stocks_.at(ware);
+}
+
+const std::vector<uint32_t>*
+Player::get_worker_stock_statistics(DescriptionIndex const worker) const {
+	assert(tribe().has_worker(worker));
+	return &worker_stocks_.at(worker);
 }
 
 const Player::BuildingStatsVector&
@@ -1828,11 +1883,18 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	const auto it = forbid_attack_.find(who);
 	if (forbid ^ (it == forbid_attack_.end())) {
 		return;
-	} else if (forbid) {
+	}
+	if (forbid) {
 		forbid_attack_.emplace(who);
 	} else {
 		forbid_attack_.erase(it);
 	}
+}
+
+void Player::set_hidden_from_general_statistics(const bool hide) {
+	hidden_from_general_statistics_ = hide;
+	Notifications::publish(NotePlayerDetailsEvent(
+	   NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged, *this));
 }
 
 /**
@@ -1875,6 +1937,7 @@ void Player::init_statistics() {
 	ware_consumptions_.clear();
 	ware_productions_.clear();
 	ware_stocks_.clear();
+	worker_stocks_.clear();
 
 	for (DescriptionIndex ware_index : tribe().wares()) {
 		current_produced_statistics_.insert(std::make_pair(ware_index, 0U));
@@ -1883,6 +1946,9 @@ void Player::init_statistics() {
 		ware_productions_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
 		ware_stocks_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
 	}
+	for (DescriptionIndex di : tribe().workers()) {
+		worker_stocks_.insert(std::make_pair(di, std::vector<Quantity>()));
+	}
 }
 
 /**
@@ -1890,15 +1956,15 @@ void Player::init_statistics() {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) {
+void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](StatisticsMap* stats, const DescriptionIndex ware_index,
-	                                      const std::string& stats_string,
-	                                      const std::string& description) {
+	const auto parse_stats = [&nr_entries](StatisticsMap* stats, const DescriptionIndex ware_index,
+	                                       const std::string& stats_string,
+	                                       const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
 			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
@@ -1964,7 +2030,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) 
 		}
 	}
 
-	// Read stock statistics
+	// Read ware stock statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -1979,7 +2045,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) 
 		const std::string& stats_string = fr.c_string();
 		try {
 			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
-			parse_stats(&ware_stocks_, idx, stats_string, "stock");
+			parse_stats(&ware_stocks_, idx, stats_string, "ware_stock");
 		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
 			              player_number(), name.c_str());
@@ -1987,7 +2053,31 @@ void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) 
 		}
 	}
 
-	// All statistics should have the same size
+	// Read worker stock statistics
+	// TODO(Nordfriese): Savegame compatibility
+	uint16_t nr_workers = packet_version >= 29 ? fr.unsigned_16() : 0;
+	nr_entries = packet_version >= 29 ? fr.unsigned_16() : 0;
+	assert(tribe().workers().size() >= nr_workers);
+
+	for (DescriptionIndex idx : tribe().workers()) {
+		worker_stocks_[idx].resize(nr_entries);
+	}
+
+	for (uint16_t i = 0; i < nr_workers; ++i) {
+		const std::string name = fr.c_string();
+		const std::string& stats_string = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_worker(name);
+			parse_stats(&worker_stocks_, idx, stats_string, "worker_stock");
+		} catch (const GameDataError&) {
+			log_warn_time(egbase().get_gametime(),
+			              "Player %u stock statistics: unknown worker name %s", player_number(),
+			              name.c_str());
+			continue;
+		}
+	}
+
+	// All statistics (except worker stock) should have the same size
 	assert(ware_productions_.size() == ware_consumptions_.size());
 	assert(ware_productions_.begin()->second.size() == ware_consumptions_.begin()->second.size());
 
@@ -2025,7 +2115,9 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	const Descriptions& descriptions = egbase().descriptions();
 	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
+	const std::set<DescriptionIndex>& tribe_workers = tribe().workers();
 	const size_t nr_wares = tribe_wares.size();
+	const size_t nr_workers = tribe_workers.size();
 
 	// Write produce statistics
 	fw.unsigned_16(nr_wares);
@@ -2047,13 +2139,22 @@ void Player::write_statistics(FileWrite& fw) const {
 		write_stats(ware_consumptions_, ware_index);
 	}
 
-	// Write stock statistics
+	// Write ware stock statistics
 	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_stocks_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(descriptions.get_ware_descr(ware_index)->name());
 		write_stats(ware_stocks_, ware_index);
+	}
+
+	// Write worker stock statistics
+	fw.unsigned_16(nr_workers);
+	fw.unsigned_16(worker_stocks_.begin()->second.size());
+
+	for (const DescriptionIndex worker_index : tribe_workers) {
+		fw.c_string(descriptions.get_worker_descr(worker_index)->name());
+		write_stats(worker_stocks_, worker_index);
 	}
 }
 

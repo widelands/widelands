@@ -13,25 +13,25 @@ local r = {
       h2(_"Keyboard Shortcuts") ..
       p(
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey("F1"), _"Help") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("encyclopedia")), _"Help") ..
          -- TRANSLATORS: This is an access key combination.
-         dl(help_format_hotkey(pgettext("hotkey", "Esc")), _"Toggle main menu") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_menu")), _"Toggle main menu") ..
          -- TRANSLATORS: This is an access key combination. The hotkey is 't'
-         dl(help_format_hotkey("T"), _"Toggle tools menu") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_tools")), _"Toggle tools menu") ..
          toggle_minimap_hotkey ..
          toggle_building_spaces_hotkey ..
          -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
-         dl(help_format_hotkey("P"), _"Toggle player menu") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_players")), _"Toggle player menu") ..
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey("Ctrl + Z"), _"Undo") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_undo")), _"Undo") ..
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey("Ctrl + Y"), _"Redo") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_redo")), _"Redo") ..
          -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
-         dl(help_format_hotkey("I"), _"Activate information tool") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_info")), _"Activate information tool") ..
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey(pgettext("hotkey", "Ctrl + L")), _"Load map") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_load")), _"Load map") ..
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey(pgettext("hotkey", "Ctrl + S")), _"Save map") ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("editor_save")), _"Save map") ..
             toggle_fullscreen_hotkey
       ) ..
 

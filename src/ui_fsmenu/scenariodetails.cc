@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,6 +69,12 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		description = (boost::format("%s%s") % description %
 		               as_content(scenariodata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
+
+		// Do we want to show add-on conflicts info for campaigns or scenarios?
+		// The official ones don't use add-ons, and add-on campaigns will tell users
+		// in the add-on manager if there are dependency problems.
+		// Plus, ScenarioData currently does not preload the scenario map, so fetching
+		// add-ons info there would introduce additional complexity.
 
 		description = (boost::format("<rt>%s</rt>") % description).str();
 		descr_.set_text(description);

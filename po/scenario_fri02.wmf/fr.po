@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -7,14 +7,16 @@
 # zecas <jjorge@free.fr>, 2018
 # Renaud Bouchard, 2019
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
+# C138, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
+"Last-Translator: C138, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +27,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -300,6 +302,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"J'ai commencé à croire que le voyage ne finirait jamais. Je n'ai aucune idée"
+" de combien de temps nous étions en mer, secoués par des tempêtes "
+"déchaînées… cela devait faire des mois."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -310,6 +315,12 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Les tempêtes ont maintenu une prise ferme sur le navire tout au long de "
+"notre voyage. Il n'y avait guère de jour où nous ne nous demandions pas si "
+"ce serait notre dernier. Nous avons été obligés de délester les métaux "
+"précieux que nous avions emportés avec nous à la mer pour stabiliser le "
+"navire, ayant l'impression qu'il s'agissait d'un sacrifice sordide aux dieux"
+" pour nous donner l'espoir de vivre encore quelques heures."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -319,6 +330,11 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Les quelques outils que nous avons réussi à récupérer de Langeness n'ont pas"
+" bien résisté. Les pioches des mineurs se sont révélées particulièrement "
+"fragiles et nous avons dû les jeter dans l’océan quand il est devenu évident"
+" qu’elles avaient été tellement corrodées par le sel de mer que nous ne "
+"pourrions plus rien tirer d’elles."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134

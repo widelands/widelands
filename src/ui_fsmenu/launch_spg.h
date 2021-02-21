@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,37 +26,42 @@
 #include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/singleplayersetupbox.h"
 
+struct MapData;
 namespace Widelands {
 class Game;
 }
-namespace FsMenu {
-class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
-public:
-	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
-	                        GameSettingsProvider*,
-	                        Widelands::EditorGameBase& egbase,
-	                        bool preconfigured,
-	                        GameController* = nullptr);
-	~FullscreenMenuLaunchSPG() override = default;
 
-	void start() override;
+namespace FsMenu {
+
+class LaunchSPG : public LaunchGame {
+public:
+	LaunchSPG(MenuCapsule&,
+	          GameSettingsProvider&,
+	          Widelands::Game&,
+	          const MapData* /* nullptr for preconfigured games */,
+	          bool scenario);
+	~LaunchSPG() override = default;
 
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
-	bool clicked_select_map() override;
+	void clicked_select_map() override {
+		NEVER_HERE();  // not available in singleplayer
+	}
+	void clicked_select_savegame() override {
+		NEVER_HERE();  // not available in singleplayer
+	}
 
 private:
 	void win_condition_selected() override;
 	void layout() override;
 
-	SinglePlayerSetupBox player_setup;
+	SinglePlayerSetupBox player_setup_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void update();
 	void enforce_player_names_and_tribes(const Widelands::Map& map);
 	const bool preconfigured_;
-	Widelands::EditorGameBase& egbase_;  // Not owned
+	Widelands::Game& game_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

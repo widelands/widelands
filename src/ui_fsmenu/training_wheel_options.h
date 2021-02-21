@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
  *
  */
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #ifndef WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 #define WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 
@@ -29,6 +30,8 @@
 
 class LuaInterface;
 
+namespace FsMenu {
+
 /**
  * @brief The TrainingWheelOptions class presents buttons to the user to reset the progress for
  * individual training wheels.
@@ -36,6 +39,8 @@ class LuaInterface;
 class TrainingWheelOptions : public UI::Window {
 public:
 	explicit TrainingWheelOptions(Panel* parent);
+
+	bool handle_key(bool, SDL_Keysym) override;
 
 private:
 	struct Entry {
@@ -50,6 +55,8 @@ private:
 		UI::Checkbox* checkbox;
 	};
 
+	void clicked_ok();
+
 	void toggle_mark_unmark_all_button();
 
 	std::unique_ptr<LuaInterface> lua_;
@@ -60,4 +67,7 @@ private:
 	bool mark_unmark_state_;
 };
 
+}  // namespace FsMenu
+
 #endif  // end of include guard: WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
+#endif

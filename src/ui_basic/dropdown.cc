@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,8 +142,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		push_button_->sigclicked.connect([this]() { toggle_list(); });
 	}
 	button_box_.set_size(w, get_h());
-	list_->clicked.connect([this]() { set_value(); });
-	list_->clicked.connect([this]() { toggle_list(); });
+	list_->clicked.connect([this]() {
+		set_value();
+		close();
+	});
 
 	if (push_button_) {
 		push_button_->set_can_focus(false);

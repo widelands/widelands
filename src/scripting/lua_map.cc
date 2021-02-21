@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
+#include "economy/waterway.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
@@ -718,6 +719,89 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 	   get_egbase(L).mutable_descriptions()->load_tribe(tribename));
 }
 
+std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
+	switch (p) {
+	case Widelands::SoldierPreference::kHeroes:
+		return "heroes";
+	case Widelands::SoldierPreference::kRookies:
+		return "rookies";
+	}
+	NEVER_HERE();
+}
+
+Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) {
+	if (p == "heroes") {
+		return Widelands::SoldierPreference::kHeroes;
+	} else if (p == "rookies") {
+		return Widelands::SoldierPreference::kRookies;
+	} else {
+		throw wexception("Invalid soldier preference '%s'", p.c_str());
+	}
+}
+
+// Transforms the given warehouse policy to a string which is used by the lua code
+void wh_policy_to_string(lua_State* L, Widelands::StockPolicy p) {
+	switch (p) {
+	case Widelands::StockPolicy::kNormal:
+		lua_pushstring(L, "normal");
+		break;
+	case Widelands::StockPolicy::kPrefer:
+		lua_pushstring(L, "prefer");
+		break;
+	case Widelands::StockPolicy::kDontStock:
+		lua_pushstring(L, "dontstock");
+		break;
+	case Widelands::StockPolicy::kRemove:
+		lua_pushstring(L, "remove");
+		break;
+	}
+}
+// Transforms the given string from the lua code to a warehouse policy
+Widelands::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
+	std::string str = luaL_checkstring(L, index);
+	if (str == "normal") {
+		return Widelands::StockPolicy::kNormal;
+	} else if (str == "prefer") {
+		return Widelands::StockPolicy::kPrefer;
+	} else if (str == "dontstock") {
+		return Widelands::StockPolicy::kDontStock;
+	} else if (str == "remove") {
+		return Widelands::StockPolicy::kRemove;
+	} else {
+		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
+	}
+}
+
+Widelands::WarePriority string_to_priority(const std::string& p) {
+	if (p == "normal") {
+		return Widelands::WarePriority::kNormal;
+	} else if (p == "low") {
+		return Widelands::WarePriority::kLow;
+	} else if (p == "very_low") {
+		return Widelands::WarePriority::kVeryLow;
+	} else if (p == "high") {
+		return Widelands::WarePriority::kHigh;
+	} else if (p == "very_high") {
+		return Widelands::WarePriority::kVeryHigh;
+	} else {
+		throw wexception("Invalid ware priority '%s'", p.c_str());
+	}
+}
+std::string priority_to_string(const Widelands::WarePriority& priority) {
+	if (priority == Widelands::WarePriority::kVeryLow) {
+		return "very_low";
+	} else if (priority == Widelands::WarePriority::kLow) {
+		return "low";
+	} else if (priority == Widelands::WarePriority::kHigh) {
+		return "high";
+	} else if (priority == Widelands::WarePriority::kVeryHigh) {
+		return "very_high";
+	} else if (priority == Widelands::WarePriority::kNormal) {
+		return "normal";
+	}
+	NEVER_HERE();
+}
+
 }  // namespace
 
 /*
@@ -775,7 +859,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
-#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(*dynamic_cast<Widelands::k*>(mo)))
+#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(dynamic_cast<Widelands::k&>(*mo)))
 int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	if (!mo) {
 		return 0;
@@ -806,10 +890,10 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 		return CAST_TO_LUA(Road);
 	case Widelands::MapObjectType::WATERWAY:
 		// TODO(Nordfriese): not yet implemented
-		return CAST_TO_LUA(Road);
+		return to_lua<LuaRoad>(L, new LuaRoad(dynamic_cast<Widelands::Waterway&>(*mo)));
 	case Widelands::MapObjectType::ROADBASE:
 		// TODO(Nordfriese): not yet implemented
-		return CAST_TO_LUA(Road);
+		return to_lua<LuaRoad>(L, new LuaRoad(dynamic_cast<Widelands::RoadBase&>(*mo)));
 	case Widelands::MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
 
@@ -818,8 +902,7 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
 		return CAST_TO_LUA(ConstructionSite);
 	case Widelands::MapObjectType::DISMANTLESITE:
-		// TODO(sirver): not yet implemented.
-		return CAST_TO_LUA(Building);
+		return CAST_TO_LUA(DismantleSite);
 	case Widelands::MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(Warehouse);
 	case Widelands::MapObjectType::MARKET:
@@ -1092,6 +1175,57 @@ HasInputs
       .. code-block:: lua
 
          if b.valid_inputs then b:set_inputs(b.valid_inputs) end
+*/
+
+/* RST
+   .. method:: set_priority(ware, prio [, cs_setting = false])
+
+      Sets the priority for the given ware inputqueue.
+
+      :arg ware: ware name
+      :type ware: :class:`string`
+      :arg prio: The new priority. One of "very_low", "low", "normal", "high", or "very_high".
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+                       settings to apply after construction.
+*/
+
+/* RST
+   .. method:: get_priority(ware [, cs_setting = false])
+
+      Returns the priority for the given ware inputqueue. See also :meth:`set_priority`.
+
+      :arg ware: ware name
+      :type ware: :class:`string`
+      :returns: :class:`string`
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+                       settings to apply after construction.
+*/
+
+/* RST
+   .. method:: set_desired_fill(item, fill [, cs_setting = false])
+
+      Sets the desired fill for the given ware or worker inputqueue, as if the player had clicked
+      the increase/decrease buttons.
+
+      :arg item: ware or worker name
+      :type ware: :class:`string`
+      :arg fill: desired fill
+      :type ware: :class:`integer`
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+                       settings to apply after construction.
+*/
+
+/* RST
+   .. method:: get_desired_fill(item, fill [, cs_setting = false])
+
+      Returns the desired fill for the given ware or worker inputqueue. See also
+      :meth:`set_desired_fill`.
+
+      :arg item: ware or worker name
+      :type ware: :class:`string`
+      :returns: :class:`integer`
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+                       settings to apply after construction.
 */
 
 /* RST
@@ -4640,6 +4774,7 @@ const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
    METHOD(LuaFlag, set_wares),
    METHOD(LuaFlag, get_wares),
+   METHOD(LuaFlag, send_geologist),
    {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
@@ -4851,6 +4986,17 @@ int LuaFlag::get_wares(lua_State* L) {
 	}
 
 	return 1;
+}
+
+/* RST
+   .. method:: send_geologist()
+
+      Send a geologist to explore the surroundings of this flag.
+*/
+int LuaFlag::send_geologist(lua_State* L) {
+	Widelands::Flag& f = *get(L, get_egbase(L));
+	f.get_owner()->flagaction(f, Widelands::FlagJob::Type::kGeologist);
+	return 0;
 }
 
 /*
@@ -5072,6 +5218,7 @@ Building
 */
 const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
+   METHOD(LuaBuilding, dismantle),
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
@@ -5102,6 +5249,17 @@ int LuaBuilding::get_flag(lua_State* L) {
  ==========================================================
  */
 
+/* RST
+   .. method:: dismantle([keep_wares = false])
+
+      Instantly turn this building into a dismantlesite.
+*/
+int LuaBuilding::dismantle(lua_State* L) {
+	Widelands::Building* bld = get(L, get_egbase(L));
+	bld->get_owner()->dismantle_building(bld, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -5116,18 +5274,28 @@ ConstructionSite
 
    Child of: :class:`Building`
 
-   A ConstructionSite as it appears in Game. This is only a minimal wrapping at
-   the moment.
+   A construction site as it appears in the game.
 
    More properties are available through this object's
    :class:`ConstructionSiteDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaConstructionSite::className[] = "ConstructionSite";
 const MethodType<LuaConstructionSite> LuaConstructionSite::Methods[] = {
+   METHOD(LuaConstructionSite, get_priority),
+   METHOD(LuaConstructionSite, set_priority),
+   METHOD(LuaConstructionSite, get_desired_fill),
+   METHOD(LuaConstructionSite, set_desired_fill),
+   METHOD(LuaConstructionSite, get_setting_warehouse_policy),
+   METHOD(LuaConstructionSite, set_setting_warehouse_policy),
    {nullptr, nullptr},
 };
 const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
    PROP_RO(LuaConstructionSite, building),
+   PROP_RW(LuaConstructionSite, has_builder),
+   PROP_RW(LuaConstructionSite, setting_soldier_capacity),
+   PROP_RW(LuaConstructionSite, setting_soldier_preference),
+   PROP_RW(LuaConstructionSite, setting_launch_expedition),
+   PROP_RW(LuaConstructionSite, setting_stopped),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5144,6 +5312,372 @@ const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
 int LuaConstructionSite::get_building(lua_State* L) {
 	lua_pushstring(L, get(L, get_egbase(L))->building().name());
 	return 1;
+}
+
+/* RST
+   .. attribute:: has_builder
+
+      (RW) Whether this constructionsite has a builder. Changing this setting causes the worker to
+      be instantly deleted or to be created from thin air.
+*/
+int LuaConstructionSite::get_has_builder(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L))->builder_.is_set());
+	return 1;
+}
+int LuaConstructionSite::set_has_builder(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::PartiallyFinishedBuilding& cs = *get(L, egbase);
+	const bool arg = luaL_checkboolean(L, -1);
+	if (cs.builder_.is_set()) {
+		if (!arg) {
+			cs.builder_.get(egbase)->remove(egbase);
+			cs.builder_ = nullptr;
+			cs.set_seeing(false);
+			if (upcast(Widelands::Game, g, &egbase)) {
+				cs.request_builder(*g);
+			}
+		}
+	} else if (arg) {
+		assert(cs.builder_request_);
+		delete cs.builder_request_;
+		cs.builder_request_ = nullptr;
+		Widelands::Worker& w = egbase.descriptions()
+		                          .get_worker_descr(cs.owner().tribe().builder())
+		                          ->create(egbase, cs.get_owner(), &cs, cs.get_position());
+		cs.builder_ = &w;
+		if (upcast(Widelands::Game, g, &egbase)) {
+			w.start_task_buildingwork(*g);
+		}
+		cs.set_seeing(true);
+	}
+	return 0;
+}
+
+/* RST
+   .. attribute:: setting_launch_expedition
+
+      (RW) Only valid for ports under construction. Whether an expedition will be launched
+      immediately upon completion.
+*/
+int LuaConstructionSite::get_setting_launch_expedition(lua_State* L) {
+	if (upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings())) {
+		lua_pushboolean(L, ws->launch_expedition);
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
+	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a warehouse");
+	}
+	ws->launch_expedition = luaL_checkboolean(L, -1);
+	return 0;
+}
+
+/* RST
+   .. attribute:: setting_stopped
+
+      (RW) Only valid for productionsites and trainingsites under construction. Whether this
+      building will be initially stopped after completion.
+*/
+int LuaConstructionSite::get_setting_stopped(lua_State* L) {
+	if (upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings())) {
+		lua_pushboolean(L, ps->stopped);
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+int LuaConstructionSite::set_setting_stopped(lua_State* L) {
+	upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
+	if (!ps) {
+		report_error(L, "This constructionsite will not become a productionsite");
+	}
+	ps->stopped = luaL_checkboolean(L, -1);
+	return 0;
+}
+
+/* RST
+   .. attribute:: setting_soldier_preference
+
+      (RW) Only valid for militarysites under construction. "heroes" if this site will prefer heroes
+      after completion; "rookies" otherwise.
+*/
+int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
+	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
+		lua_pushstring(
+		   L, soldier_preference_to_string(ms->prefer_heroes ? Widelands::SoldierPreference::kHeroes :
+		                                                       Widelands::SoldierPreference::kRookies)
+		         .c_str());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
+	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
+	if (!ms) {
+		report_error(L, "This constructionsite will not become a militarysite");
+	}
+	try {
+		ms->prefer_heroes = string_to_soldier_preference(luaL_checkstring(L, -1)) ==
+		                    Widelands::SoldierPreference::kHeroes;
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+   .. attribute:: setting_soldier_capacity
+
+      (RW) Only valid for militarysites and trainingsites under construction. The desired number of
+      soldiers stationed here after completion.
+*/
+int LuaConstructionSite::get_setting_soldier_capacity(lua_State* L) {
+	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
+	upcast(Widelands::TrainingsiteSettings, ts, get(L, get_egbase(L))->get_settings());
+	assert(!ms || !ts);
+	if (!ms && !ts) {
+		lua_pushnil(L);
+	} else {
+		lua_pushuint32(L, ms ? ms->desired_capacity : ts->desired_capacity);
+	}
+	return 1;
+}
+int LuaConstructionSite::set_setting_soldier_capacity(lua_State* L) {
+	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
+	upcast(Widelands::TrainingsiteSettings, ts, get(L, get_egbase(L))->get_settings());
+	assert(!ms || !ts);
+	if (!ms && !ts) {
+		report_error(
+		   L, "This constructionsite will become neither a militarysite nor a trainingsite");
+	}
+	(ms ? ms->desired_capacity : ts->desired_capacity) = luaL_checkuint32(L, -1);
+	return 0;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+// documented in parent class
+int LuaConstructionSite::get_priority(lua_State* L) {
+	const Widelands::DescriptionIndex item =
+	   get_egbase(L).descriptions().safe_ware_index(luaL_checkstring(L, 2));
+	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
+		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
+		for (const auto& pair : ps->ware_queues) {
+			if (pair.first == item) {
+				lua_pushstring(L, priority_to_string(pair.second.priority));
+				return 1;
+			}
+		}
+		NEVER_HERE();
+	}
+	lua_pushstring(
+	   L, priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
+	return 1;
+}
+int LuaConstructionSite::set_priority(lua_State* L) {
+	const Widelands::DescriptionIndex item =
+	   get_egbase(L).descriptions().safe_ware_index(luaL_checkstring(L, 2));
+	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
+		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
+		for (auto& pair : ps->ware_queues) {
+			if (pair.first == item) {
+				try {
+					pair.second.priority = string_to_priority(luaL_checkstring(L, 3));
+				} catch (const WException& e) {
+					report_error(L, "%s", e.what());
+				}
+				return 0;
+			}
+		}
+		NEVER_HERE();
+	}
+	try {
+		get(L, get_egbase(L))
+		   ->set_priority(Widelands::wwWARE, item, string_to_priority(luaL_checkstring(L, 3)));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+int LuaConstructionSite::get_desired_fill(lua_State* L) {
+	const std::string itemname = luaL_checkstring(L, 2);
+	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
+	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
+		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
+		for (const auto& pair : is_ware ? ps->ware_queues : ps->worker_queues) {
+			if (pair.first == item) {
+				lua_pushuint32(L, pair.second.desired_fill);
+				return 1;
+			}
+		}
+		NEVER_HERE();
+	}
+	lua_pushuint32(
+	   L, get(L, get_egbase(L))
+	         ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	         .get_max_fill());
+	return 1;
+}
+int LuaConstructionSite::set_desired_fill(lua_State* L) {
+	const std::string itemname = luaL_checkstring(L, 2);
+	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
+	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
+		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
+		for (auto& pair : is_ware ? ps->ware_queues : ps->worker_queues) {
+			if (pair.first == item) {
+				pair.second.desired_fill = luaL_checkuint32(L, 3);
+				return 0;
+			}
+		}
+		NEVER_HERE();
+	}
+	get(L, get_egbase(L))
+	   ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	   .set_max_fill(luaL_checkuint32(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: get_setting_warehouse_policy(wareworker)
+
+      Only valid for warehouses under construction. Returns the stock policy to apply to the given
+      ware or worker after completion.
+*/
+int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
+	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
+	if (!ws) {
+		lua_pushnil(L);
+		return 1;
+	}
+	const std::string itemname = luaL_checkstring(L, 2);
+	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
+	wh_policy_to_string(
+	   L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
+	return 1;
+}
+/* RST
+   .. method:: set_setting_warehouse_policy(wareworker, policystring)
+
+      Only valid for warehouses under construction. Sets the stock policy to apply to the given ware
+      or worker after completion. Valid argument strings are documented in
+      `Warehouse.set_warehouse_policies`.
+*/
+int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
+	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a warehouse");
+	}
+	const std::string itemname = luaL_checkstring(L, 2);
+	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
+	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
+	   string_to_wh_policy(L, 3);
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
+DismantleSite
+-----------------
+
+.. class:: DismantleSite
+
+   Child of: :class:`Building`
+
+   A dismantle site as it appears in the game.
+
+   More properties are available through this object's
+   :class:`DismantleSiteDescription`, which you can access via :any:`MapObject.descr`.
+*/
+const char LuaDismantleSite::className[] = "DismantleSite";
+const MethodType<LuaDismantleSite> LuaDismantleSite::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaDismantleSite> LuaDismantleSite::Properties[] = {
+   PROP_RW(LuaDismantleSite, has_builder),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+   .. attribute:: has_builder
+
+      (RW) Whether this dismantlesite has a builder. Changing this setting causes the worker to be
+      instantly deleted, or to be created from thin air.
+*/
+int LuaDismantleSite::get_has_builder(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L))->builder_.is_set());
+	return 1;
+}
+int LuaDismantleSite::set_has_builder(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::PartiallyFinishedBuilding& cs = *get(L, egbase);
+	const bool arg = luaL_checkboolean(L, -1);
+	if (cs.builder_.is_set()) {
+		if (!arg) {
+			cs.builder_.get(egbase)->remove(egbase);
+			cs.builder_ = nullptr;
+			cs.set_seeing(false);
+			if (upcast(Widelands::Game, g, &egbase)) {
+				cs.request_builder(*g);
+			}
+		}
+	} else if (arg) {
+		assert(cs.builder_request_);
+		delete cs.builder_request_;
+		cs.builder_request_ = nullptr;
+		Widelands::Worker& w = egbase.descriptions()
+		                          .get_worker_descr(cs.owner().tribe().builder())
+		                          ->create(egbase, cs.get_owner(), &cs, cs.get_position());
+		cs.builder_ = &w;
+		if (upcast(Widelands::Game, g, &egbase)) {
+			w.start_task_buildingwork(*g);
+		}
+		cs.set_seeing(true);
+	}
+	return 0;
 }
 
 /*
@@ -5321,39 +5855,6 @@ int LuaWarehouse::set_workers(lua_State* L) {
 		}
 	}
 	return 0;
-}
-
-// Transforms the given warehouse policy to a string which is used by the lua code
-inline void wh_policy_to_string(lua_State* L, Widelands::StockPolicy p) {
-	switch (p) {
-	case Widelands::StockPolicy::kNormal:
-		lua_pushstring(L, "normal");
-		break;
-	case Widelands::StockPolicy::kPrefer:
-		lua_pushstring(L, "prefer");
-		break;
-	case Widelands::StockPolicy::kDontStock:
-		lua_pushstring(L, "dontstock");
-		break;
-	case Widelands::StockPolicy::kRemove:
-		lua_pushstring(L, "remove");
-		break;
-	}
-}
-// Transforms the given string from the lua code to a warehouse policy
-inline Widelands::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
-	std::string str = luaL_checkstring(L, index);
-	if (str == "normal") {
-		return Widelands::StockPolicy::kNormal;
-	} else if (str == "prefer") {
-		return Widelands::StockPolicy::kPrefer;
-	} else if (str == "dontstock") {
-		return Widelands::StockPolicy::kDontStock;
-	} else if (str == "remove") {
-		return Widelands::StockPolicy::kRemove;
-	} else {
-		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
-	}
 }
 
 inline bool do_set_ware_policy(Widelands::Warehouse* wh,
@@ -5656,6 +6157,10 @@ const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
    METHOD(LuaProductionSite, get_inputs),
    METHOD(LuaProductionSite, get_workers),
    METHOD(LuaProductionSite, set_workers),
+   METHOD(LuaProductionSite, get_priority),
+   METHOD(LuaProductionSite, set_priority),
+   METHOD(LuaProductionSite, get_desired_fill),
+   METHOD(LuaProductionSite, set_desired_fill),
    METHOD(LuaProductionSite, toggle_start_stop),
 
    {nullptr, nullptr},
@@ -5833,6 +6338,47 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
 	return 1;
 }
 
+// documented in parent class
+int LuaProductionSite::get_priority(lua_State* L) {
+	lua_pushstring(
+	   L, priority_to_string(
+	         get(L, get_egbase(L))
+	            ->get_priority(Widelands::wwWARE, get_egbase(L).descriptions().safe_ware_index(
+	                                                 luaL_checkstring(L, 2)))));
+	return 1;
+}
+int LuaProductionSite::set_priority(lua_State* L) {
+	try {
+		get(L, get_egbase(L))
+		   ->set_priority(Widelands::wwWARE,
+		                  get_egbase(L).descriptions().safe_ware_index(luaL_checkstring(L, 2)),
+		                  string_to_priority(luaL_checkstring(L, 3)));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+int LuaProductionSite::get_desired_fill(lua_State* L) {
+	const std::string item = luaL_checkstring(L, 2);
+	const bool is_ware = get_egbase(L).descriptions().ware_exists(item);
+	lua_pushuint32(L, get(L, get_egbase(L))
+	                     ->inputqueue(is_ware ? get_egbase(L).descriptions().safe_ware_index(item) :
+	                                            get_egbase(L).descriptions().safe_worker_index(item),
+	                                  is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	                     .get_max_fill());
+	return 1;
+}
+int LuaProductionSite::set_desired_fill(lua_State* L) {
+	const std::string item = luaL_checkstring(L, 2);
+	const bool is_ware = get_egbase(L).descriptions().ware_exists(item);
+	get(L, get_egbase(L))
+	   ->inputqueue(is_ware ? get_egbase(L).descriptions().safe_ware_index(item) :
+	                          get_egbase(L).descriptions().safe_worker_index(item),
+	                is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	   .set_max_fill(luaL_checkuint32(L, 3));
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -5942,6 +6488,8 @@ const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
    PROP_RO(LuaMilitarySite, max_soldiers),
+   PROP_RW(LuaMilitarySite, soldier_preference),
+   PROP_RW(LuaMilitarySite, capacity),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5975,6 +6523,40 @@ int LuaMilitarySite::set_soldiers(lua_State* L) {
 	return do_set_soldiers(L, ms->get_position(), ms->mutable_soldier_control(), ms->get_owner());
 }
 
+/* RST
+   .. attribute:: capacity
+
+      (RW) The number of soldiers meant to be stationed here.
+*/
+int LuaMilitarySite::set_capacity(lua_State* L) {
+	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
+	return 0;
+}
+int LuaMilitarySite::get_capacity(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	return 1;
+}
+
+/* RST
+   .. attribute:: soldier_preference
+
+      (RW) "heroes" if this site prefers heroes; "rookies" otherwise.
+*/
+int LuaMilitarySite::get_soldier_preference(lua_State* L) {
+	lua_pushstring(
+	   L, soldier_preference_to_string(get(L, get_egbase(L))->get_soldier_preference()).c_str());
+	return 1;
+}
+int LuaMilitarySite::set_soldier_preference(lua_State* L) {
+	try {
+		get(L, get_egbase(L))
+		   ->set_soldier_preference(string_to_soldier_preference(luaL_checkstring(L, -1)));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -6002,6 +6584,7 @@ const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
 };
 const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
    PROP_RO(LuaTrainingSite, max_soldiers),
+   PROP_RW(LuaTrainingSite, capacity),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6013,6 +6596,20 @@ const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
 
 // documented in parent class
 int LuaTrainingSite::get_max_soldiers(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	return 1;
+}
+
+/* RST
+   .. attribute:: capacity
+
+      (RW) The number of soldiers meant to be stationed here.
+*/
+int LuaTrainingSite::set_capacity(lua_State* L) {
+	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
+	return 0;
+}
+int LuaTrainingSite::get_capacity(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
 }
@@ -6688,9 +7285,9 @@ const MethodType<LuaSoldier> LuaSoldier::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaSoldier> LuaSoldier::Properties[] = {
-   PROP_RO(LuaSoldier, attack_level), PROP_RO(LuaSoldier, defense_level),
-   PROP_RO(LuaSoldier, health_level), PROP_RO(LuaSoldier, evade_level),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaSoldier, attack_level),   PROP_RO(LuaSoldier, defense_level),
+   PROP_RO(LuaSoldier, health_level),   PROP_RO(LuaSoldier, evade_level),
+   PROP_RW(LuaSoldier, current_health), {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -6742,6 +7339,35 @@ int LuaSoldier::get_evade_level(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: current_health
+
+      (RW) This soldier's current number of hitpoints left.
+*/
+int LuaSoldier::get_current_health(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_current_health());
+	return 1;
+}
+int LuaSoldier::set_current_health(lua_State* L) {
+	Widelands::Soldier& s = *get(L, get_egbase(L));
+
+	const uint32_t ch = luaL_checkuint32(L, -1);
+	if (ch == 0) {
+		report_error(L, "Soldier.current_health must be greater than 0");
+	}
+
+	const uint32_t maxhealth =
+	   s.descr().get_base_health() + s.get_health_level() * s.descr().get_health_incr_per_level();
+	if (ch > maxhealth) {
+		report_error(
+		   L, "Soldier.current_health %u must not be greater than %u for %s with health level %u", ch,
+		   maxhealth, s.descr().name().c_str(), s.get_health_level());
+	}
+
+	s.set_current_health(ch);
+	return 0;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -6771,7 +7397,10 @@ Field
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
    METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), METHOD(LuaField, indicate),
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+   METHOD(LuaField, indicate),
+#endif
    {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
@@ -7348,7 +7977,8 @@ int LuaField::has_max_caps(lua_State* L) {
 	return 1;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: indicate(on)
 
       Show/Hide an arrow that points to this field. You can only point to 1 field at the same time.
@@ -7376,6 +8006,7 @@ int LuaField::indicate(lua_State* L) {
 	}
 	return 2;
 }
+#endif
 
 /*
  ==========================================================
@@ -7647,6 +8278,13 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaConstructionSite, LuaPlayerImmovable>(L);
 	add_parent<LuaConstructionSite, LuaBaseImmovable>(L);
 	add_parent<LuaConstructionSite, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaDismantleSite>(L, "map", true);
+	add_parent<LuaDismantleSite, LuaBuilding>(L);
+	add_parent<LuaDismantleSite, LuaPlayerImmovable>(L);
+	add_parent<LuaDismantleSite, LuaBaseImmovable>(L);
+	add_parent<LuaDismantleSite, LuaMapObject>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaWarehouse>(L, "map", true);

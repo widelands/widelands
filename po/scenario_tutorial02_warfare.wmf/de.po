@@ -1,11 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Bamstam, 2015
 # Elisabeth Jäger, 2016-2017
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-10-02 10:09+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-06 16:17+0000\n"
+"Last-Translator: Lennard Hofmann <lennard.hofmann@web.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -310,11 +311,11 @@ msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr "Du kannst natürlich dein Glück probieren und in eine beliebige Richtung expandieren, aber das ist riskant. Der sichere Weg ist einen Kundschafter zu nutzen um die unentdeckten Gegenden der Karte zu erkunden. Was wenn er einen Berg findet der vor Gold strotzt?"
+msgstr "Du kannst natürlich dein Glück probieren und in eine beliebige Richtung expandieren, aber das ist riskant. Der sichere Weg ist einen Kundschafter zu nutzen, um die unentdeckten Gegenden der Karte zu erkunden. Was wenn er einen Berg findet, der vor Gold strotzt?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr "Wir werden eine Kundschafterhütte benötigen um die Erkundung zu beginnen. Sie ist ein kleines Gebäude."
+msgstr "Wir werden eine Kundschafterhütte benötigen, um die Erkundung zu beginnen. Sie ist ein kleines Gebäude."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid "Build a scout’s hut."
@@ -392,7 +393,7 @@ msgstr "Wie du siehst können Kundschafter wirklich weit gehen. Zum Glück sind 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr "Du kannst die Minikarte verwenden um den Erkundungsfortschritt zu sehen."
+msgstr "Du kannst die Minikarte verwenden, um den Erkundungsfortschritt zu sehen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""

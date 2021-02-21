@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,6 +54,7 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 		int32_t const packet_version = prof.get_safe_section("global").get_int("packet_version");
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			i18n::Textdomain td("widelands");
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				Section& s = prof.get_safe_section(
@@ -84,6 +85,7 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
+	i18n::Textdomain td("widelands");
 	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {

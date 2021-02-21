@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 by the Widelands Development Team
+ * Copyright (C) 2019-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1548,12 +1548,18 @@ Duration ShippingSchedule::update(Game& game) {
 		std::list<PortDock*> candidates;
 		uint32_t fewest = std::numeric_limits<uint32_t>::max();
 		for (const auto& pair : ships_per_port) {
-			if (pair.second < fewest) {
-				fewest = pair.second;
-				candidates.clear();
+			fewest = std::min(fewest, pair.second);
+		}
+		for (PortDock* pd : fleet_.get_ports()) {
+			bool is_candidate = true;
+			for (auto& pair : ships_per_port) {
+				if (pair.first == pd) {
+					is_candidate = pair.second == fewest;
+					break;
+				}
 			}
-			if (pair.second == fewest) {
-				candidates.push_back(pair.first);
+			if (is_candidate) {
+				candidates.push_back(pd);
 			}
 		}
 		assert(!candidates.empty());

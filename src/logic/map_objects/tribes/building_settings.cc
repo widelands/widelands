@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -183,10 +183,8 @@ BuildingSettings* BuildingSettings::load(Game& game, const TribeDescr& tribe, Fi
 			}
 			result->read(game, fr);
 			return result;
-		} else {
-			throw UnhandledVersionError(
-			   "BuildingSettings_load", packet_version, kCurrentPacketVersion);
 		}
+		throw UnhandledVersionError("BuildingSettings_load", packet_version, kCurrentPacketVersion);
 	} catch (const WException& e) {
 		throw GameDataError("BuildingSettings_load: %s", e.what());
 	}

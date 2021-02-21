@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -617,17 +617,16 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			                       (work_steptime_ - game.get_gametime()).get());
 			builder_idle_ = false;
 			return true;
-		} else {
-			// TODO(fweber): cause "construction sounds" to be played -
-			// perhaps dependent on kind of construction?
-
-			++work_completed_;
-			if (work_completed_ >= work_steps_) {
-				schedule_destroy(game);
-			}
-
-			working_ = false;
 		}
+		// TODO(fweber): cause "construction sounds" to be played -
+		// perhaps dependent on kind of construction?
+
+		++work_completed_;
+		if (work_completed_ >= work_steps_) {
+			schedule_destroy(game);
+		}
+
+		working_ = false;
 	}
 
 	// Fetch wares from flag

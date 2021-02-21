@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,8 +98,9 @@ void MiniMap::View::set_zoom(const bool zoom) {
 bool MiniMap::View::can_zoom() {
 	const Widelands::Map& map = ibase_.egbase().map();
 	// The zoomed MiniMap needs to fit into: height - windows boarders - button height. -> 60px
-	return !(scale_map(map, true) == 1 ||
-	         map.get_height() * scale_map(map, true) > ibase_.get_h() - 60);
+	const auto scale = scale_map(map, true);
+	return (scale > 1 && map.get_width() * scale <= ibase_.get_w() - 60 &&
+	        map.get_height() * scale <= ibase_.get_h() - 60);
 }
 
 /*
@@ -122,10 +123,12 @@ destructor
 ===============
 */
 inline uint32_t MiniMap::number_of_buttons_per_row() const {
-	return 6;
+	// Six buttons need at least 120 pixels.
+	return view_.get_w() < 120 ? 3 : 6;
 }
 inline uint32_t MiniMap::number_of_button_rows() const {
-	return 1;
+	// Use two rows if there are less than 120 pixels available.
+	return view_.get_w() < 120 ? 2 : 1;
 }
 inline uint32_t MiniMap::but_w() const {
 	return view_.get_w() / number_of_buttons_per_row();
@@ -234,18 +237,23 @@ void MiniMap::toggle(MiniMapLayer const button) {
 
 void MiniMap::resize() {
 	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
-	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
+	// Read number of rows after the zoom.
+	const uint32_t rows = number_of_button_rows();
+	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());
 	button_owner.set_pos(Vector2i(but_w() * 1, view_.get_h()));
 	button_owner.set_size(but_w(), but_h());
 	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h()));
 	button_flags.set_size(but_w(), but_h());
-	button_roads.set_pos(Vector2i(but_w() * 3, view_.get_h()));
+	button_roads.set_pos(
+	   Vector2i(but_w() * (3 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_roads.set_size(but_w(), but_h());
-	button_bldns.set_pos(Vector2i(but_w() * 4, view_.get_h()));
+	button_bldns.set_pos(
+	   Vector2i(but_w() * (4 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(Vector2i(but_w() * 5, view_.get_h()));
+	button_zoom.set_pos(
+	   Vector2i(but_w() * (5 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_zoom.set_size(but_w(), but_h());
 	button_zoom.set_enabled(view_.can_zoom());
 

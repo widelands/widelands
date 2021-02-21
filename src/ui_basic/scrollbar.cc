@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,10 +61,13 @@ Scrollbar::Scrollbar(Panel* const parent,
      pic_minus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_left.png" :
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_right.png" :
-                                          "images/ui_basic/scrollbar_down.png")),
-     button_style_(g_style_manager->scrollbar_style(style)) {
+                                          "images/ui_basic/scrollbar_down.png")) {
 	set_thinks(true);
 	layout();
+}
+
+inline const UI::PanelStyleInfo& Scrollbar::button_style() const {
+	return *g_style_manager->scrollbar_style(panel_style_);
 }
 
 /**
@@ -250,7 +253,7 @@ void Scrollbar::action(Area const area) {
 }
 
 void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
-	draw_background(dst, r.cast<int>(), *button_style_);
+	draw_background(dst, r.cast<int>(), button_style());
 
 	// Draw the picture
 	const Image* pic = nullptr;

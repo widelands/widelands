@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,9 +48,9 @@
 #include "network/participantlist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -101,7 +101,6 @@ struct GameClientImpl {
 	void send_hello();
 	void send_player_command(Widelands::PlayerCommand*);
 
-	bool run_map_menu(GameClient* parent);
 	void run_game(InteractiveGameBase* igb);
 
 	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow&);
@@ -122,27 +121,6 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
 	s.unsigned_32(game->get_gametime().get());
 	pc->serialize(s);
 	net->send(s);
-}
-
-/**
- * Show and run() the fullscreen menu for setting map and mapsettings.
- *
- *  @return true to indicate that run is done.
- */
-bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FsMenu::FullscreenMenuLaunchMPG lgm(
-	   parent->fullscreen_menu_main(), parent, parent, *parent, *game);
-	modal = &lgm;
-	MenuTarget code = lgm.run<MenuTarget>();
-	modal = nullptr;
-	if (code == MenuTarget::kBack) {
-		// if this is an internet game, tell the metaserver that client is back in the lobby.
-		if (internet_) {
-			InternetGaming::ref().set_game_done();
-		}
-		return true;
-	}
-	return false;
 }
 
 /**
@@ -197,12 +175,13 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(FullscreenMenuMain& fsmm,
+GameClient::GameClient(FsMenu::MenuCapsule& c,
+                       std::unique_ptr<GameController>& ptr,
                        const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl), fsmm_(fsmm) {
+   : d(new GameClientImpl), capsule_(c) {
 
 	d->internet_ = internet;
 
@@ -241,6 +220,8 @@ GameClient::GameClient(FullscreenMenuMain& fsmm,
 
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
+
+	run(ptr);
 }
 
 GameClient::~GameClient() {
@@ -252,45 +233,47 @@ GameClient::~GameClient() {
 	delete d;
 }
 
-void GameClient::run() {
-
+void GameClient::run(std::unique_ptr<GameController>& ptr) {
 	d->send_hello();
 	d->settings.multiplayer = true;
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	if (d->run_map_menu(this)) {
-		return;  // did not select a Map ...
-	}
+	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, ptr, d->internet_);
+}
 
+void GameClient::do_run() {
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
+	capsule_.set_visible(false);
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
 		UI::ProgressWindow& loader_ui =
-		   game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
+		   game.create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
 		d->run_game(igb);
 
-	} catch (...) {
-		WLApplication::emergency_save(game);
+	} catch (const std::exception& e) {
+		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
+		WLApplication::emergency_save(&parent, game, e.what());
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
-		// We will bounce back to the main menu, so we better log out
 		if (d->internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
-		throw;
 	}
+
+	// Quit
+	capsule_.die();
 }
 
 void GameClient::think() {
@@ -422,6 +405,20 @@ void GameClient::set_player_tribe(uint8_t number,
 	s.unsigned_8(number);
 	s.string(tribe);
 	s.unsigned_8(random_tribe ? 1 : 0);
+	d->net->send(s);
+}
+
+void GameClient::set_player_color(const uint8_t number, const RGBColor& c) {
+	if ((number != d->settings.playernum)) {
+		return;
+	}
+
+	SendPacket s;
+	s.unsigned_8(NETCMD_SETTING_CHANGECOLOR);
+	s.unsigned_8(number);
+	s.unsigned_8(c.r);
+	s.unsigned_8(c.g);
+	s.unsigned_8(c.b);
 	d->net->send(s);
 }
 
@@ -566,6 +563,9 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.random_ai = packet.unsigned_8();
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
+	player.color.r = packet.unsigned_8();
+	player.color.g = packet.unsigned_8();
+	player.color.b = packet.unsigned_8();
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
@@ -576,7 +576,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		d->settings.users.push_back(*new UserSettings());
+		d->settings.users.push_back(UserSettings());
 	}
 
 	d->settings.users.at(number).name = packet.string();
@@ -859,6 +859,8 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			           "I can not handle the file."));
 			d->net->send(s);
 		}
+		// Notify UI to refresh the map data
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 	}
 }
 
@@ -877,15 +879,24 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			std::string const initialization_script = packet.string();
 			std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 			t->do_not_warn_about_unaccessed_keys();
+			// TODO(hessenfarmer): Needs to be pulled out as it is duplicated to tribe_basic_info.cc
 			std::set<std::string> tags;
+			std::set<std::string> incompatible_wc;
 			if (t->has_key("map_tags")) {
 				std::unique_ptr<LuaTable> tt = t->get_table("map_tags");
 				for (int key : tt->keys<int>()) {
 					tags.insert(tt->get_string(key));
 				}
 			}
+			if (t->has_key("incompatible_wc")) {
+				std::unique_ptr<LuaTable> w = t->get_table("incompatible_wc");
+				for (int key : w->keys<int>()) {
+					incompatible_wc.insert(w->get_string(key));
+				}
+			}
 			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
-			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags));
+			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags,
+			   incompatible_wc));
 		}
 		d->settings.tribes.push_back(info);
 	}
@@ -1043,10 +1054,10 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		d->settings.custom_starting_positions = packet.unsigned_8();
 		break;
 	case NETCMD_LAUNCH:
-		if (!d->modal || d->game) {
+		if (d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		d->modal->end_modal<MenuTarget>(MenuTarget::kOk);
+		do_run();
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
@@ -1126,34 +1137,16 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	bool const trysave = showmsg && d->game;
-
-	if (showmsg && d->modal) {  // can only show a message with a valid modal parent window
-		std::string msg;
-		if (arg.empty()) {
-			msg = NetworkGamingMessages::get_message(reason);
-		} else {
-			msg = NetworkGamingMessages::get_message(reason, arg);
-		}
-
-		if (trysave) {
-			/** TRANSLATORS: %s contains an error message. */
-			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
-		}
-
-		UI::WLMessageBox mmb(d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg,
-		                     UI::WLMessageBox::MBoxType::kOk);
-		mmb.run<UI::Panel::Returncodes>();
-	}
-
-	if (trysave) {
-		WLApplication::emergency_save(*d->game);
+	if (showmsg && d->game) {
+		// WLApplication::emergency_save(d->modal, *d->game, msg);
+		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+		                                     NetworkGamingMessages::get_message(reason, arg).c_str());
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
 	if (d->modal) {
-		d->modal->end_modal<MenuTarget>(MenuTarget::kBack);
+		d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
 	}
 	d->modal = nullptr;
 }

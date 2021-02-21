@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -227,6 +227,7 @@ void Box::layout() {
 		scrollbar_->set_steps(totaldepth - pagesize);
 		scrollbar_->set_singlestepsize(Scrollbar::kSize);
 		scrollbar_->set_pagesize(pagesize);
+		scrollbar_->set_force_draw(force_scrolling_);
 	} else {
 		scrollbar_.reset();
 	}

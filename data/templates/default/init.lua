@@ -419,6 +419,9 @@ return {
          low = productivity_colors["low"],
          medium = productivity_colors["medium"],
          high = productivity_colors["high"],
+         low_alt = {200, 100, 100},
+         medium_alt = {230, 230, 10},
+         high_alt = {50, 225, 50},
       }
    },
 
@@ -598,6 +601,13 @@ return {
          size = 16,
          bold = true,
          shadow = true
+      },
+      italic = {
+         color = { 238, 238, 238 },
+         face = "serif",
+         size = fs_font_size,
+         italic = true,
+         shadow = true,
       },
       -- Displayed in the loading screens
       fsmenu_gametip = {

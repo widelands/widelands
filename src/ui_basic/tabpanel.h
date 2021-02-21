@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,6 +60,8 @@ struct Tab : public NamedPanel {
 	bool active();
 	void activate();
 
+	void set_title(const std::string&);
+
 private:
 	// Leave handling the mouse move to the TabPanel.
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override {
@@ -72,6 +74,7 @@ private:
 	uint32_t id;
 
 	const Image* pic;
+	FontStyle font_style_;
 	std::shared_ptr<const UI::RenderedText> rendered_title;
 	std::string tooltip;
 	Panel* panel;
@@ -157,7 +160,8 @@ private:
 	size_t active_;     ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
 
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+	const UI::TabPanelStyle background_style_;  // Background color and texture. Not owned.
+	const UI::PanelStyleInfo& background_style() const;
 };
 }  // namespace UI
 

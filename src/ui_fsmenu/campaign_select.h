@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,11 +29,9 @@ namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign
  */
-class FullscreenMenuCampaignSelect : public TwoColumnsFullNavigationMenu {
+class CampaignSelect : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuCampaignSelect(FullscreenMenuMain&, Campaigns* campvis);
-
-	size_t get_campaign_index() const;
+	explicit CampaignSelect(MenuCapsule&);
 
 protected:
 	void clicked_ok() override;
@@ -50,7 +48,7 @@ private:
 
 	CampaignDetails campaign_details_;
 
-	Campaigns* campaigns_;
+	Campaigns campaigns_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

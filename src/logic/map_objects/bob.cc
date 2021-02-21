@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -645,7 +645,8 @@ void Bob::movepath_update(Game& game, State& state) {
 	if (static_cast<Path::StepVector::size_type>(state.ivar1) >= path->get_nsteps()) {
 		assert(position_ == path->get_end());
 		return pop_task(game);  //  success
-	} else if (state.ivar1 == state.ivar3) {
+	}
+	if (state.ivar1 == state.ivar3) {
 		// We have stepped all steps that we were asked for.
 		// This is some kind of success, though we do not are were we wanted
 		// to go
@@ -704,11 +705,10 @@ void Bob::move_update(Game& game, State&) {
 	if (walkend_ <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
-	} else {
-		//  Only end the task once we've actually completed the step
-		// Ignore signals until then
-		return schedule_act(game, walkend_ - game.get_gametime());
 	}
+	//  Only end the task once we've actually completed the step
+	// Ignore signals until then
+	return schedule_act(game, walkend_ - game.get_gametime());
 }
 
 // Calculates the actual position to draw on from the base node position. This

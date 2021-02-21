@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: 66c17387c1d6640720971b8ab706da27_0feead1, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -256,8 +256,8 @@ msgstr "Путешествие домой"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:619
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Diary of Lutius"
 msgstr "Дневник Люциуса"
 
@@ -744,7 +744,7 @@ msgid "We Should Explore the Islands"
 msgstr "Мы должны исследовать острова"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:413
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:456
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:459
 msgid "Saledus is excited…"
 msgstr "Саледус взволнован..."
 
@@ -784,16 +784,24 @@ msgstr ""
 "севера. Если я не сильно ошибаюсь, я слышу варварские военные барабаны. Так "
 "что нам лучше сходить и посмотреть, что там происходит."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:432
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:427
+msgid ""
+"In any case we should be careful with our ports. To defend them against "
+"possible enemies we should send some soldiers to each new port, until we can"
+" protect them with some military buildings."
+msgstr ""
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea Advises"
 msgstr "Амалия советует"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:436
 msgid "Amalea looks thoughtful…"
 msgstr "Амалия погрузилась в раздумья"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:438
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
 "they have to use all our remaining gold for building the port. So, we won’t "
@@ -805,13 +813,13 @@ msgstr ""
 "будет построен."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:438
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
 msgstr "А проблема в том, что для отправки экспедиции нам нужно золото."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:444
 msgid ""
 "Fortunately, I spotted a mountain which looks very promising and seems to "
 "have some mining resources. Perhaps we should send some geologists to "
@@ -822,7 +830,7 @@ msgstr ""
 " поиска руды."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:444
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:447
 msgid ""
 "I strongly recommend building a production chain for mining and melting some"
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
@@ -833,7 +841,7 @@ msgstr ""
 "домик рыболова или домик охотника и литейная. И, конечно же, сами шахты."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:447
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:450
 msgid ""
 "If there are difficulties with building all the buildings needed, we should "
 "think about all we have learned so far. We can cut down all the rocks. We "
@@ -846,16 +854,16 @@ msgstr ""
 "строительные участки, или даже демонтировать некоторые военные здания, чтобы"
 " получить больше места для нашей промышленности."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:455
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:458
 msgid "We Should Conquer All the Islands"
 msgstr "Мы должны завоевать все острова"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:458
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:461
 msgid "Now it is time to conquer the islands."
 msgstr "Настало время захватить острова."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:463
 msgid ""
 "Let’s finish the Barbarians off and provide a nice colony to the caesar of "
 "our empire."
@@ -863,16 +871,16 @@ msgstr ""
 "Давайте покончим с варварами и создадим славную колонию для нашей великой "
 "империи."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:468
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
 msgstr "Удача Амалии"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
 msgstr "Амалия гордится достижениями..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:474
 msgid ""
 "Lutius, we have just solved another problem. We managed to melt enough gold "
 "to send out at least three expeditions. Perhaps we might even keep some gold"
@@ -883,7 +891,7 @@ msgstr ""
 "что золота хватит,  чтобы сделать украшения."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:474
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:477
 msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
@@ -891,16 +899,16 @@ msgstr ""
 "Я просто шучу. Конечно, мы должны сохранить как можно больше золота для "
 "строительство арены и других зданий для обучения наших солдат."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:480
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
 msgstr "Амалия довольна"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:481
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
 msgstr "Амалия довольна тем, что мы будем решать все наши задачи"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:486
 msgid ""
 "Well done so far. Now we will not produce more marble columns than needed. I"
 " really think we will need this economy feature quite often to adjust our "
@@ -913,7 +921,7 @@ msgstr ""
 "работать тогда, когда будет достигнуто заданное в настройках количество"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:489
 msgid ""
 "For example, it might be a good idea to produce a reasonable amount of a "
 "ware and afterwards dismantle the building to gain space for another "
@@ -923,16 +931,16 @@ msgstr ""
 "необходимых товаров, а затем демонтировать здание, чтобы получить место для "
 "другого строения"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid "Amalea’s Reminder"
 msgstr "Напоминание Амалии"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:493
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:496
 msgid "Amalea is shaking her head…"
 msgstr "Амалия качает головой ..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:498
 msgid ""
 "Lutius. I really appreciate that you and Saledus are so concerned about our "
 "security. But I think we could use the little space on this island better "
@@ -943,7 +951,7 @@ msgstr ""
 "пространство на этом острове лучше, чем строить много военных зданий."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:501
 msgid ""
 "I strongly recommend dismantling most of them to be able to build industrial"
 " buildings. I don’t think there is much danger on this island, but if you "
@@ -956,20 +964,20 @@ msgstr ""
 "держать часовые или блокгаузы рядом с береговой линией."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:504
 msgid "But be careful not to waste any bigger building spots."
 msgstr "Но будьте осторожны, не растратьте крупные строительные площадки."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
 msgid "Amalea’s Excited"
 msgstr "Амалия в восторге"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:508
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:511
 msgid "Amalea is looking forward to the exploration…"
 msgstr "Амалия с нетерпением ждет разведки ..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
 msgid ""
 "Lutius. We have made so much progress so far. I am glad to hear that we have"
 " many ships now."
@@ -978,7 +986,7 @@ msgstr ""
 "кораблей."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:516
 msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
@@ -987,7 +995,7 @@ msgstr ""
 "найти больше земли и в итоге получить больше ресурсов."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:519
 msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
@@ -995,17 +1003,17 @@ msgstr ""
 "Было бы особенно полезно найти больше мрамора для добычи - либо в скалистых "
 "областях, либо в горах."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid "Amalea is Very Content"
 msgstr "Амалия очень довольна"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:525
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:528
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:537
 msgid "Amalea is clapping her hands…"
 msgstr "Амалия хлопает в ладоши..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:530
 msgid ""
 "Lutius. Well done. Well done. We have discovered all possible port locations"
 " in the complete region. Now we can strengthen our economy and we will "
@@ -1015,12 +1023,12 @@ msgstr ""
 " постройки порта в этом регионе. Теперь мы можем укрепить нашу экономику и "
 "скоро нам удастся отправиться домой."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid "Amalea’s Counsel"
 msgstr "Совещание у Амалии"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:539
 msgid ""
 "Salve Lutius. We just completed our weaving mill. Now we are very close to "
 "taking to the sea again. However, I thought it would be helpful to remind "
@@ -1031,7 +1039,7 @@ msgstr ""
 "было бы полезно напомнить вам, что производство кораблей - это не "
 "единственная отрасль, которая нуждается в сукне."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:541
 msgid ""
 "We need some cloth as well for producing armor in our armor smithy. We need "
 "it to build some of the training buildings for our soldiers. And most "
@@ -1041,7 +1049,7 @@ msgstr ""
 "оно потребуется для постройки тренировочных комплексов для наших солдат. И, "
 "наконец, самое важное и срочное - нам нужно отправлять экспедиции."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:540
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid ""
 "Therefore, I really recommend that we check our stock of cloth quite "
 "regularly to ensure that we keep enough cloth in reserve to send out some "
@@ -1055,16 +1063,16 @@ msgstr ""
 "думаю, что запас от шести до девяти тюков на две-три экспедиции, будет "
 "вполне достаточным."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:546
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid "Victory is Ours"
 msgstr "Победа за нами"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
 msgstr "Саледус ликует..."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:552
 msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
@@ -1072,20 +1080,20 @@ msgstr ""
 "Сир, мы наконец-то победили варваров в этом регионе. А кроме того, мы "
 "построили прекрасную колонию для нашей империи."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "The king will be very pleased with our victory."
 msgstr "Король будет очень доволен вашей победой."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:557
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
 msgstr "Подношения Нептуну"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
 msgstr "Саледус очень грустен и обеспокоен..."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:563
 msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
@@ -1093,7 +1101,7 @@ msgstr ""
 "Сир, мы добились многого, чтобы наконец-то вернуться домой. Но есть одна "
 "вещь, о которой мне нужно сообщить:"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:565
 msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
@@ -1101,7 +1109,7 @@ msgstr ""
 "Как мы уже знаем по опыту предыдущих путешествий, очень важно умилостивить "
 "богов и особенно Нептуна, чтобы получить защиту в предстоящем путешествии."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:567
 msgid ""
 "Unfortunately, we lost our holy shrine of Neptune in the great storm, so we "
 "can’t worship him well. I think we should search the whole region to see if "
@@ -1111,7 +1119,7 @@ msgstr ""
 "не можем достойно ему преклоняться. Думаю, что нам нужно обыскать весь "
 "регион, чтобы попробовать возвратить все шесть частей святыни."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:569
 msgid ""
 "To ease the search, I have crafted some models of the pieces as you can see."
 " You can give them to our soldiers and sailors to look for them."
@@ -1119,16 +1127,16 @@ msgstr ""
 "Для облегчения поисков я предлагаю изготовить несколько моделей потерянных "
 "частей. Вы можете раздать их нашим солдатам и морякам, чтобы они их искали."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:574
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid "Praise, Praise, Praise"
 msgstr "Хвала, Хвала, Хвала"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:575
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:578
 msgid "Saledus is happily worshipping…"
 msgstr "Саледус удовлетворенно кланяется..."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:580
 msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
@@ -1136,7 +1144,7 @@ msgstr ""
 "Сир, мы восстановили Святыню Нептуна. Теперь мы можем получить его защиту "
 "для нашего путешествия."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:579
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid ""
 "Oh great Neptune, safeguard our journey! Oh great Neptune, let the winds be "
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
@@ -1146,16 +1154,16 @@ msgstr ""
 "ветра по нашему курсу! О великий Нептун, сохрани нас от морских созданий! О "
 "великий Нептун, ..."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:585
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Unpleasant Discoveries"
 msgstr "Неприятные открытия"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:586
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:589
 msgid "Saledus looks very worried…"
 msgstr "Саледус выглядит очень обеспокоенным ..."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:591
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
 "somewhat worried that we will have to fight against them before we are ready"
@@ -1165,16 +1173,16 @@ msgstr ""
 "обеспокоен тем, что нам придется сражаться против них, прежде чем мы будем к"
 " этому готовы."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:594
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Train Faster, Train Harder"
 msgstr "Тренируйтесь быстрее, тренируйтесь жестче!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:598
 msgid "Saledus is demanding some discipline"
 msgstr "Саледус требует определенной дисциплины"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:600
 msgid ""
 "Sire, we have all buildings available for training our soldiers, but we "
 "should increase our efforts to train them to the highest level and to train "
@@ -1184,7 +1192,7 @@ msgstr ""
 "должны приложить усилия, чтобы обучить их до наивысшего уровня и обучить "
 "большинство из них."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:599
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:602
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
@@ -1192,16 +1200,16 @@ msgstr ""
 "Чтобы это сделать нам нужно много пайков, много железа и много золота. "
 "Поэтому, у нас куча трудностей, с которыми необходимо разобраться."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:605
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Training Infrastructure is Needed"
 msgstr "Нужна тренировочная инфраструктура"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:606
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
 msgstr "У Саледуса есть проблемы с безопасностью"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:611
 msgid ""
 "Sire, we need to train some of our people to serve in your great army. It is"
 " important to increase the number of our soldiers as fast as we can. And we "
@@ -1211,7 +1219,7 @@ msgstr ""
 "армии. Важно увеличить число наших солдат так быстро насколько это возможно."
 " И мы должны хорошо их обучить, чтобы улучшить их боевые навыки."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:610
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:613
 msgid ""
 "Therefore, we need to build a full training infrastructure despite the "
 "limited space available. We need some barracks, a training camp and an arena"
@@ -1221,12 +1229,12 @@ msgstr ""
 "ограниченное пространство. Нам нужны казармы, тренировочный лагерь, а также "
 "арена или колизей."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:618
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid "Time to get Home Again"
 msgstr "Время снова обрести дом."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
 msgid ""
 "Yes my fellow soldiers, we have done it! We have met all the challenges that"
 " were put in front of us. But my heart is still with our home. We shall set "
@@ -1236,11 +1244,11 @@ msgstr ""
 " Но мое сердце все еще не на месте. Мы должны отплыть домой как можно "
 "скорее, чтобы помочь защитить Империю от варварского племени."
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid "Victory"
 msgstr "Победа"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:623
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:626
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
@@ -1249,17 +1257,17 @@ msgstr ""
 "перейти к следующей миссии."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:633
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "Наконец-то, мы обнаружили часть нашей святыни. Хвала Нептуну!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Мы обнаружили ещё одну часть нашей святыни. Хвала Нептуну!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:641
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1269,7 +1277,7 @@ msgstr[2] "Нам нужно найти ещё %d частей нашей свя
 msgstr[3] "Нам нужно найти ещё %d частей нашей святыни."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1277,6 +1285,6 @@ msgstr ""
 "Наконец-то мы обнаружили последнюю часть нашей святыни. Теперь мы можем "
 "восстановить её, чтобы поклоняться нашему Богу. Хвала Нептуну!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Artifact Found"
 msgstr "Найден артефакт"
