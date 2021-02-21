@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-01-15 10:53+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-19 14:43+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1166,7 +1166,7 @@ msgstr "Maniok-Wuddel-Köök"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
-#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:215
@@ -1235,6 +1235,7 @@ msgstr "Maniok-Wuddel-Köök"
 msgid "working"
 msgstr "to Warken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1347,51 +1348,51 @@ msgstr "Naiheree"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
 msgid "sewing a tunic"
-msgstr ""
+msgstr "eenen Umhang to naihen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
 msgid "making a light wooden armor"
-msgstr ""
+msgstr "eenen Lichtholt-Wapenrock to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
 msgid "making a wooden helmet"
-msgstr ""
+msgstr "eenen Holthelm to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "eenen Soldatsken-Umhang to naihen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:117
 msgid "making sturdy boots"
-msgstr ""
+msgstr "Gode Stevels to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:128
 msgid "making swift boots"
-msgstr ""
+msgstr "Gaue Stevels to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
 msgid "making hero boots"
-msgstr ""
+msgstr "Heldenstevels to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
 msgid "making a padded vest"
-msgstr ""
+msgstr "eene Beslaan West to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:161
 msgid "making a padded protector"
-msgstr ""
+msgstr "eenen Beslaan Schütter to maken"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
@@ -1756,9 +1757,9 @@ msgstr "eenen Klöpper to maken"
 msgid "making a chisel"
 msgstr "eenen Beitel to maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1768,25 +1769,25 @@ msgstr "Nadels to maken"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 msgid "making a stone bowl"
-msgstr ""
+msgstr "eene Steenschöttel to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
 msgid "making a wooden spear"
-msgstr ""
+msgstr "eene Holtpieke to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
 msgid "making a stone-tipped spear"
-msgstr ""
+msgstr "eene Flintspitz-Pieke to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
 msgid "making a hardened spear"
-msgstr ""
+msgstr "eene Haartholt-Pieke to maken"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
@@ -1820,7 +1821,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "De Flinthauerske, de bi deese Flinthauerske-Kaat warkt, hett keene Stenen tum Ofboen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -1863,19 +1864,19 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "De Ader vun deesem Steen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Tapir Farm"
-msgstr ""
+msgstr "Tapirtüchteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
-#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:61
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
 msgctxt "amazons_building"
 msgid "breeding tapir"
-msgstr ""
+msgstr "Tapiren to tüchten"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
@@ -1910,10 +1911,11 @@ msgstr "De Lastendragerske, de bi deese Well warkt, kann keen Water in de Nabers
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr ""
+msgstr "Fauna-Wahrderske-Telt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -1923,13 +1925,13 @@ msgstr "Fisse to tüchten"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
 msgid "releasing game"
-msgstr ""
+msgstr "Deerten freeitolaten"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Woodcutter’s Hut"
-msgstr ""
+msgstr "Boomslagerske-Kaat"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:50
@@ -1954,19 +1956,19 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr ""
+msgstr "De Boomslagerske, de bi deese Boomslagerske-Kaat warkt, hett keene Bomen in de Arbeidsgewest. Riet dat Huus platt of brann 't of, of boo eene Waldwahrderske-Kaat."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/youth_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Youth Gathering"
-msgstr ""
+msgstr "Snöttbaartens-Versammeln"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/amazons/youth_gathering/init.lua:60
 msgctxt "amazons_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "eene Soldatske antohüren"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:171
@@ -3142,7 +3144,7 @@ msgid "Barracks"
 msgstr "Kasern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:49
 msgctxt "empire_building"
 msgid "recruiting soldier"
 msgstr "eenen Soldaten antohüren"
@@ -4182,7 +4184,7 @@ msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Ofsla
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
 msgctxt "amazons_building"
 msgid "Training Glade"
-msgstr ""
+msgstr "Övenshain"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
@@ -4203,56 +4205,56 @@ msgstr "to slapen"
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Soldatsken-Utwieken vun Stand 0 to Stand 1 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Soldatsken-Utwieken vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr ""
+msgstr "Soldatsken-Utwieken vun Stand 2 to Stand 3 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Soldatsken-Gesundheid vun Stand 0 to Stand 1 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Soldatsken-Gesundheid vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Soldatsken-Gesundheid vun Stand 2 to Stand 3 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Soldatsken-Verteidigung vun Stand 0 to Stand 1 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Soldatsken-Verteidigung vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
 msgctxt "amazons_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Keene Soldatske tum utbilden!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4260,25 +4262,25 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Keene Soldatske för deese Lehre is funden worden!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Soldatsken-Versammeln"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Soldatsken-Angriff vun Stand 0 to Stand 1 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Soldatsken-Angriff vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
@@ -4316,7 +4318,7 @@ msgstr "Soldaten-Angriff vun Stand 3 to Stand 4 to verbetern"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Keen Soldat tum utbilden!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4324,7 +4326,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Keen Soldat för deese Lehre is funden worden!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4386,7 +4388,7 @@ msgstr "Soldaten-Utwieken vun Stand 1 to Stand 2 to verbetern"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:218
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Keen Soldat tum utbilden!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4394,7 +4396,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:220
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Keen Soldat för deese Lehre is funden worden!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -4469,7 +4471,7 @@ msgstr "Soldaten-Utwieken vun Stand 0 to Stand 1 to verbetern"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Keen Soldat tum utbilden!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4478,7 +4480,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Keen Soldat för deese Lehre is funden worden!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4587,7 +4589,7 @@ msgstr "Soldaten-Gesundheid vun Stand 1 to Stand 2 to verbetern"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
 msgctxt "frisians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Keen Soldat tum utbilden!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4595,7 +4597,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Keen Soldat för deese Lehre is funden worden!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -4637,19 +4639,19 @@ msgstr "Soldaten-Verteidigung vun Stand 0 to Stand 1 to verbetern"
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Raadhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
 msgctxt "amazons_building"
 msgid "Port"
-msgstr ""
+msgstr "Muu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Kraamhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -4960,31 +4962,31 @@ msgstr "Swartwuddels-Acker (ganz lütt)"
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (harvested)"
-msgstr ""
+msgstr "Maniok-Feld (arnt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (medium)"
-msgstr ""
+msgstr "Maniok-Feld (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (ripe)"
-msgstr ""
+msgstr "Maniok-Feld (riep)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (small)"
-msgstr ""
+msgstr "Maniok-Feld (lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (tiny)"
-msgstr ""
+msgstr "Maniok-Feld (ganz lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5232,7 +5234,7 @@ msgstr "Schipp-Baustee"
 #: ../../data/tribes/immovables/trees/balsa/init.lua:236
 #: ../../data/tribes/immovables/trees/balsa/init.lua:314
 msgid "Balsa Tree (Sapling)"
-msgstr ""
+msgstr "Balsaboom (Kiensel)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:98
@@ -5240,7 +5242,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:254
 #: ../../data/tribes/immovables/trees/balsa/init.lua:332
 msgid "Balsa Tree (Pole)"
-msgstr ""
+msgstr "Balsaboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:116
@@ -5248,7 +5250,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:272
 #: ../../data/tribes/immovables/trees/balsa/init.lua:350
 msgid "Balsa Tree (Mature)"
-msgstr ""
+msgstr "Balsaboom (Riep)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:134
@@ -5256,7 +5258,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:290
 #: ../../data/tribes/immovables/trees/balsa/init.lua:368
 msgid "Balsa Tree (Old)"
-msgstr ""
+msgstr "Balsaboom (Old)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:136
@@ -5264,32 +5266,32 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:292
 #: ../../data/tribes/immovables/trees/balsa/init.lua:370
 msgid "Balsa Tree"
-msgstr ""
+msgstr "Balsaboom"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:8
 msgid "Cocoa Tree (sapling)"
-msgstr ""
+msgstr "Kakaoboom (Kiensel)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:32
 msgid "Cocoa Tree (pole)"
-msgstr ""
+msgstr "Kakaoboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:56
 msgid "Cocoa Tree (mature)"
-msgstr ""
+msgstr "Kakaoboom (Riep)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:80
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "Kakaoboom (Old)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Doder Boom"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:80
@@ -5297,7 +5299,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:236
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:314
 msgid "Ironwood Tree (Sapling)"
-msgstr ""
+msgstr "Iesenholtboom (Kiensel)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:98
@@ -5305,7 +5307,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:254
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:332
 msgid "Ironwood Tree (Pole)"
-msgstr ""
+msgstr "Iesenholtboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:116
@@ -5313,7 +5315,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:272
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:350
 msgid "Ironwood Tree (Mature)"
-msgstr ""
+msgstr "Iesenholtboom (Riep)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:134
@@ -5321,7 +5323,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:290
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:368
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr "Iesenholtboom (Old)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:136
@@ -5329,7 +5331,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:292
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:370
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "Iesenholtboom"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:80
@@ -5337,7 +5339,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:236
 #: ../../data/tribes/immovables/trees/rubber/init.lua:314
 msgid "Rubber Tree (Sapling)"
-msgstr ""
+msgstr "Gummiboom (Kiensel)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:98
@@ -5345,7 +5347,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:254
 #: ../../data/tribes/immovables/trees/rubber/init.lua:332
 msgid "Rubber Tree (Pole)"
-msgstr ""
+msgstr "Gummiboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:116
@@ -5353,7 +5355,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:272
 #: ../../data/tribes/immovables/trees/rubber/init.lua:350
 msgid "Rubber Tree (Mature)"
-msgstr ""
+msgstr "Gummiboom (Riep)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:134
@@ -5361,7 +5363,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:290
 #: ../../data/tribes/immovables/trees/rubber/init.lua:368
 msgid "Rubber Tree (Old)"
-msgstr ""
+msgstr "Gummiboom (Old)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:136
@@ -5369,7 +5371,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:292
 #: ../../data/tribes/immovables/trees/rubber/init.lua:370
 msgid "Rubber Tree"
-msgstr ""
+msgstr "Gummiboom"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -5412,12 +5414,12 @@ msgstr "De Widelands Entwickeln-Klottje"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons (experimental)"
-msgstr ""
+msgstr "Amazonen (noch nich stevig)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid ""
 "The people of the amazonian jungle. This tribe is still under development."
-msgstr ""
+msgstr "De Lüü vun de amazoonsk Walden. Deeses Volk word noch entwickelt."
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -5425,16 +5427,16 @@ msgstr ""
 msgctxt "amazons_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldatske (+%2%)"
+msgstr[1] "%1% Soldatsken (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
 msgctxt "amazons_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldatske"
+msgstr[1] "%1% Soldatsken"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5443,8 +5445,8 @@ msgstr[1] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldatske (+%3%)"
+msgstr[1] "%1%(+%2%) Soldatsken (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5452,8 +5454,8 @@ msgstr[1] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldatske"
+msgstr[1] "%1%(+%2%) Soldatsken"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5511,21 +5513,21 @@ msgstr "Nares Dörp"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "Begünn dat Speel mit nix as eenem Kraamhuus un so minn Waren as würrelk nödig, um eene Wirtschaft uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid "Be careful"
 msgstr "Pass up"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
@@ -5550,7 +5552,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr ""
+msgstr "Begünn dat Speel mit dienem Raadhuus un blot een paar Waren, um eene Wirtschaft uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5608,16 +5610,16 @@ msgstr "Deeses Volk kennt man vun de ollsten Vertellsels: De Söhnen un Dochters
 msgctxt "atlanteans_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat (+%2%)"
+msgstr[1] "%1% Soldaten (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat"
+msgstr[1] "%1% Soldaten"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5626,8 +5628,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat (+%3%)"
+msgstr[1] "%1%(+%2%) Soldaten (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5635,8 +5637,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat"
+msgstr[1] "%1%(+%2%) Soldaten"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
@@ -5686,16 +5688,16 @@ msgstr "De furchtbaaren Lüü vun de Lannen im Oosten."
 msgctxt "barbarians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat (+%2%)"
+msgstr[1] "%1% Soldaten (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
 msgctxt "barbarians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat"
+msgstr[1] "%1% Soldaten"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5704,8 +5706,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat (+%3%)"
+msgstr[1] "%1%(+%2%) Soldaten (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5713,8 +5715,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat"
+msgstr[1] "%1%(+%2%) Soldaten"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5731,16 +5733,16 @@ msgstr "Dat is de Kultuur vun de Latiensken Riek."
 msgctxt "empire_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat (+%2%)"
+msgstr[1] "%1% Soldaten (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
 msgctxt "empire_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat"
+msgstr[1] "%1% Soldaten"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5749,8 +5751,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat (+%3%)"
+msgstr[1] "%1%(+%2%) Soldaten (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5758,8 +5760,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat"
+msgstr[1] "%1%(+%2%) Soldaten"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5776,16 +5778,16 @@ msgstr "De Lüü vun de wööste Noordseeküst!"
 msgctxt "frisians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat (+%2%)"
+msgstr[1] "%1% Soldaten (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
 msgctxt "frisians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Soldat"
+msgstr[1] "%1% Soldaten"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5794,8 +5796,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat (+%3%)"
+msgstr[1] "%1%(+%2%) Soldaten (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5803,8 +5805,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) Soldat"
+msgstr[1] "%1%(+%2%) Soldaten"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -5845,49 +5847,49 @@ msgstr "Faste Dingen"
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Schipp"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:41
 msgctxt "shipname"
 msgid "Orinoco"
-msgstr ""
+msgstr "Orinoko"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:43
 msgctxt "shipname"
 msgid "Amazonas"
-msgstr ""
+msgstr "Amazonas"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:45
 msgctxt "shipname"
 msgid "Abacaxis"
-msgstr ""
+msgstr "Abacaxis"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:47
 msgctxt "shipname"
 msgid "Anchicayá"
-msgstr ""
+msgstr "Anchicayá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:49
 msgctxt "shipname"
 msgid "Guáitara"
-msgstr ""
+msgstr "Guáitara"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:51
 msgctxt "shipname"
 msgid "Iscuandé"
-msgstr ""
+msgstr "Iscuandé"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:53
 msgctxt "shipname"
 msgid "Putumayo"
-msgstr ""
+msgstr "Putumayo"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:83
@@ -7020,7 +7022,7 @@ msgstr "Helm"
 #: ../../data/tribes/wares/armor_wooden/init.lua:8
 msgctxt "ware"
 msgid "Light Wooden Armor"
-msgstr ""
+msgstr "Lichtholt-Wapenrock"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
@@ -7062,7 +7064,7 @@ msgstr "Ridderext"
 #: ../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr ""
+msgstr "Balsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/barley/init.lua:8
@@ -7110,25 +7112,25 @@ msgstr "Haartholt"
 #: ../../data/tribes/wares/boots_hero/init.lua:8
 msgctxt "ware"
 msgid "Hero Boots"
-msgstr ""
+msgstr "Heldenstevels"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_sturdy/init.lua:8
 msgctxt "ware"
 msgid "Sturdy Boots"
-msgstr ""
+msgstr "Gode Stevels"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_swift/init.lua:8
 msgctxt "ware"
 msgid "Swift Boots"
-msgstr ""
+msgstr "Gaue Stevels"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Brood"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -7176,19 +7178,19 @@ msgstr "Emmers"
 #: ../../data/tribes/wares/cassavaroot/init.lua:8
 msgctxt "ware"
 msgid "Cassava Root"
-msgstr ""
+msgstr "Maniok-Wuddel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chisel/init.lua:8
 msgctxt "ware"
 msgid "Chisel"
-msgstr ""
+msgstr "Beitel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Schokolaa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
@@ -7212,7 +7214,7 @@ msgstr "Köhl"
 #: ../../data/tribes/wares/cocoa_beans/init.lua:8
 msgctxt "ware"
 msgid "Cocoa Beans"
-msgstr ""
+msgstr "Kakaobohnen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/corn/init.lua:8
@@ -7314,7 +7316,7 @@ msgstr "Gold"
 #: ../../data/tribes/wares/gold_dust/init.lua:8
 msgctxt "ware"
 msgid "Gold Dust"
-msgstr ""
+msgstr "Goldstoff"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_ore/init.lua:8
@@ -7380,7 +7382,7 @@ msgstr "Kriegshelm"
 #: ../../data/tribes/wares/helmet_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Helmet"
-msgstr ""
+msgstr "Holthelm"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
@@ -7428,7 +7430,7 @@ msgstr "Iesenkluut"
 #: ../../data/tribes/wares/ironwood/init.lua:8
 msgctxt "ware"
 msgid "Ironwood"
-msgstr ""
+msgstr "Iesenholt"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:8
@@ -7441,7 +7443,7 @@ msgstr "Besteck"
 #: ../../data/tribes/wares/liana/init.lua:8
 msgctxt "ware"
 msgid "Liana"
-msgstr ""
+msgstr "Boomreep"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/log/init.lua:8
@@ -7453,7 +7455,7 @@ msgstr "Boomstamm"
 #: ../../data/tribes/wares/machete/init.lua:8
 msgctxt "ware"
 msgid "Machete"
-msgstr ""
+msgstr "Mest"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble/init.lua:8
@@ -7513,7 +7515,7 @@ msgstr "Planken"
 #: ../../data/tribes/wares/protector_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Protector"
-msgstr ""
+msgstr "Beslaan Schütter"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:8
@@ -7538,13 +7540,13 @@ msgstr "Reit"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "Tau"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr ""
+msgstr "Gummi elasticum"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8
@@ -7622,7 +7624,7 @@ msgstr "Gode Pieke"
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Haartholt-Pieke"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
@@ -7634,7 +7636,7 @@ msgstr "Sware Pieke"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "Flintspitz-Pieke"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -7664,7 +7666,7 @@ msgstr "Spinnenstoff"
 #: ../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "Steenschöttel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -7736,19 +7738,19 @@ msgstr "Stahl-Dreespitz"
 #: ../../data/tribes/wares/tunic/init.lua:8
 msgctxt "ware"
 msgid "Tunic"
-msgstr ""
+msgstr "Umhang"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/vest_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Vest"
-msgstr ""
+msgstr "Beslaan West"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Coat"
-msgstr ""
+msgstr "Soldatsken-Umhang"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/water/init.lua:8
@@ -7778,157 +7780,157 @@ msgstr "Wulle"
 #: ../../data/tribes/workers/amazons/builder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Builder"
-msgstr ""
+msgstr "Baukeerlske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/carrier/init.lua:8
 msgctxt "amazons_worker"
 msgid "Carrier"
-msgstr ""
+msgstr "Lastendragerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cassava Farmer"
-msgstr ""
+msgstr "Maniok-Buurske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
 msgctxt "amazons_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Holtköhlbrannerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cocoa Farmer"
-msgstr ""
+msgstr "Kakao-Buurske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cook/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cook"
-msgstr ""
+msgstr "Kööksch"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/dressmaker/init.lua:8
 msgctxt "amazons_worker"
 msgid "Dressmaker"
-msgstr ""
+msgstr "Naihsterke"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Fähr"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
 msgctxt "amazons_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Schattsökerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_digger/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Digger"
-msgstr ""
+msgstr "Goldwascherske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr ""
+msgstr "Gold-Smelterske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Hunter-Gatherer"
-msgstr ""
+msgstr "Jägerske-Pottjerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr ""
+msgstr "Beste Waldwahrderske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr ""
+msgstr "Waldwahrderske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "Boomreep-Slagerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
 msgctxt "amazons_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Bespejerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8
 msgctxt "amazons_worker"
 msgid "Shipwright"
-msgstr ""
+msgstr "Schippebauerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldatske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "Flintbeitelske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "Flinthauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir"
-msgstr ""
+msgstr "Tapir"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir Breeder"
-msgstr ""
+msgstr "Tapirtüchterske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Mesterske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
 msgctxt "amazons_worker"
 msgid "Wilderness Keeper"
-msgstr ""
+msgstr "Fauna-Wahrderske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Boomslagerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr ""
+msgstr "Beste Boomslagerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:89
