@@ -557,6 +557,27 @@ bool Game::run(StartGameType const start_game_type,
 	}
 
 	if (start_game_type != StartGameType::kSaveGame) {
+		// Check whether we need to disable replays because of add-ons.
+		// For savegames this has already been done by the game class packet.
+		if (writereplay_) {
+			for (const AddOns::AddOnInfo& a : enabled_addons()) {
+				if (!a.sync_safe) {
+					set_write_replay(false);
+					break;
+				}
+			}
+			if (writereplay_) {
+				// We need to check all enabled add-ons as well because enabled_addons() does
+				// not contain e.g. desync-prone starting condition or win condition add-ons.
+				for (const auto& pair : AddOns::g_addons) {
+					if (pair.second && !pair.first.sync_safe) {
+						set_write_replay(false);
+						break;
+					}
+				}
+			}
+		}
+
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */

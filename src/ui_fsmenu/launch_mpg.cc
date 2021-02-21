@@ -328,8 +328,8 @@ void LaunchMPG::set_scenario_values() {
 		return;
 	}
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		settings_.set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
 		settings_.set_player_closeable(i, map.get_scenario_player_closeable(i + 1));
+		settings_.set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
 		const std::string& ai = map.get_scenario_player_ai(i + 1);
 		if (!ai.empty()) {
 			settings_.set_player_state(i, PlayerSettings::State::kComputer);

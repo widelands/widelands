@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-11-29 22:45+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 13:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -427,17 +427,6 @@ msgstr "Equipaggia la tua nave e salpa verso l'orizzonte"
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr ""
 
-#: ../../data/maps/Desert_Tournament.wmf/elemental:8
-msgid "Desert Tournament"
-msgstr "Torneo del deserto"
-
-#: ../../data/maps/Desert_Tournament.wmf/elemental:10
-msgid ""
-"Four tribes struggle with their nearest neighbor to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr "Quattro tribù lottano con il loro vicino più prossimo per essere i primi a raggiungere la montagna d'oro, che promette ricchezze oltre ogni limite. Ma riusciranno le due che rimarranno a dividersi le risorse in maniera saggia?"
-
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr ""
@@ -603,7 +592,6 @@ msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr "L' autunno diventò inverno. Molte cose si congelarono, ma non la guerra."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "Le posizioni di partenza sono in senso orario"
 
@@ -674,6 +662,19 @@ msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
 msgstr "Quattro tribù in lotta per il predominio in una zona desolata. Le risorse sono sparsi in tutta la mappa."
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:8
+msgid "Lesser Ring 1.2"
+msgstr ""
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:10
+msgid ""
+"A fair 8-player map with natural geographic features dividing land. The "
+"geographic features are meant to be somewhat realistic with rivers flowing "
+"from glaciers in the mountains through hills and flatlands into the sea. "
+"Gold is a much rarer resource compared to coal and iron. Different resources"
+" are often found at some distance to each other."
+msgstr ""
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -771,17 +772,16 @@ msgid ""
 "handful of big rivers."
 msgstr "Una terra mistica, piena di paesaggi diversi, che sono tutti attraversati da una manciata di grandi fiumi."
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:8
-msgid "The Ancient Sun of Fire"
-msgstr "L'antico sole di fuoco"
+#: ../../data/maps/Sandy_Passes.wmf/elemental:9
+msgid "Sandy Passes"
+msgstr ""
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:10
+#: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
-"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others"
-" followed in its wake."
-msgstr "Per centinaia di anni quest'isola fu conservata come un santuario degli Dei. Nessun essere umano si era mai avventurato per mettervi piede. Ma adesso che una tribù è stata così sfacciata da insediarsi sulla costa dell'isola, molti altri li hanno seguiti."
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr "Quattro tribù lottano con il loro vicino più prossimo per essere i primi a raggiungere la montagna d'oro, che promette ricchezze oltre ogni limite. Ma riusciranno le due che rimarranno a dividersi le risorse in maniera saggia?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"

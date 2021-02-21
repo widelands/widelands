@@ -97,6 +97,7 @@ wl_library(logic_addons
     base_i18n
     base_exceptions
     base_log
+    build_info
     io_fileread
     io_filesystem
     io_profile

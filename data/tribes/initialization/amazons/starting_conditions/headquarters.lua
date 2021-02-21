@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Headquarters
+--             Headquarters starting conditions for Amazons
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

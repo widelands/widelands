@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-01-28 08:16+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-15 19:32+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgstr "Poskytni prosím také informaci, na jakém operačním systému je Wide
 
 #: ../../data/txts/README.lua:31
 msgid "Which map you were playing when the bug occurred."
-msgstr "Kterou mapu jsi hrál, když jsi na chybu narazi."
+msgstr "Při hraní které mapy se chyba objevila."
 
 #: ../../data/txts/README.lua:32
 msgid ""
@@ -405,20 +405,10 @@ msgstr "%s:"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgctxt "hotkey"
-msgid "Space"
-msgstr "Mezerník"
-
-#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Přepínání stavebních míst"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:57
-msgctxt "hotkey"
-msgid "Ctrl + F"
-msgstr "Ctrl + F"
-
 #: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Přepíná režim celé obrazovky (pokud je operačním systémem podporováno)"
@@ -427,6 +417,11 @@ msgstr "Přepíná režim celé obrazovky (pokud je operačním systémem podpor
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Přepíná minimapu"
+
+#: ../../data/txts/help/common_helptexts.lua:75
+#: ../../data/txts/help/common_helptexts.lua:84
+msgid "%1% / %2%"
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -600,7 +595,7 @@ msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Přiržení Shift umožní první alternativní užití zvoleného nástroje. To je obvykle opakem běžného užití (např. umožní smazání místo umístění objektu)."
+msgstr "Přidržení Shift umožní první alternativní užití zvoleného nástroje. To je obvykle opakem běžného užití (např. umožní smazání místo umístění objektu)."
 
 #: ../../data/txts/tips/editor.lua:23
 msgid ""
@@ -663,171 +658,138 @@ msgstr "Na výrobu cihel potřebuješ žulu; na získání žuly potřebuješ lo
 msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly klády."
 
-#: ../../data/txts/tips/general_game.lua:6
+#: ../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "Stavba začne teprve poté, až bude ke staveništi postavena cesta."
 
-#: ../../data/txts/tips/general_game.lua:10
+#: ../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Předtím než postavíš důl nebo studnu, pošli na vyhlédnuté místo geologa."
 
-#: ../../data/txts/tips/general_game.lua:14
+#: ../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "Své území můžeš rozšiřovat stavěním různých vojenských budov - strážnic, pevností, malých pevností, atd."
 
-#: ../../data/txts/tips/general_game.lua:18
+#: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
 msgstr "Horníci pracují pouze pokud jsou zásobováni jídlem."
 
-#: ../../data/txts/tips/general_game.lua:22
+#: ../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Rozděl svoje cesty pomocí vlajek na kratší úseky. Zrychlí to přepravu surovin."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/general_game.lua:27
+#: ../../data/txts/tips/general_game.lua:28
 #, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
 msgstr "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdeš na %s."
 
-#: ../../data/txts/tips/general_game.lua:31
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
 msgstr "V oknech budov lze nastavit prioritu doručování vybraných surovin. Přidržením Ctrl dojde k provedení změny nastavení u všech surovin současně."
 
-#: ../../data/txts/tips/general_game.lua:35
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "Použij nabídku \"nastavení hospodářství\" pro nastavení cílového množství zásob daných surovin. Nabídka je přístupná pomocí tlačítka v okně vlajky."
 
-#: ../../data/txts/tips/general_game.lua:39
+#: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘N’ for News to access the "
-"messages window, then use ‘G’ for Go To, and the Delete key to archive "
+"Manage your messages more efficiently: press ‘%1%’ for News to access the "
+"messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
 "messages."
-msgstr "Práci se zprávami lze zvládat efektivněji. Stiskni \"n\" pro přístup k oknu zpráv a poté \"g\" pro přemístění k předmětu zprávy. Klávesa \"Delete\" zprávy archivuje."
+msgstr "Práci se zprávami lze zvládat efektivněji. Stiskni \"%1%\" pro přístup k oknu zpráv a poté \"%2%\" pro přemístění k předmětu zprávy. Klávesa \"%3%\" zprávy archivuje."
 
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "1-9"
-msgstr "1-9"
-
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "Ctrl + (1-9)"
-msgstr "Ctrl + (1-9)"
-
-#: ../../data/txts/tips/general_game.lua:43
+#: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
 msgstr "Stisk %1% uloží tvou aktuální pozici a následný stisk %2% tě na tuto pozici znovu přemístí."
 
-#: ../../data/txts/tips/general_game.lua:47
+#: ../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Odebráním cesty se stisknutým Ctrl můžeš odebrat všechny vlajky až k první křižovatce."
 
-#: ../../data/txts/tips/general_game.lua:51
+#: ../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
 msgstr "Noví vojáci jsou verbováni v kasárnách. Jejich dovednosti lze zlepšit na cvičištích."
 
-#: ../../data/txts/tips/general_game.lua:55
+#: ../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Jestli miluješ nebezpečí, přidržení Ctrl při kliknutí na vylepšení, rozebrání nebo znišení stavby přeskočí potvrzovací dialog."
+msgstr "Jestli miluješ nebezpečí, přidržení Ctrl při kliknutí na vylepšení, rozebrání nebo zničení stavby přeskočí potvrzovací dialog."
 
-#: ../../data/txts/tips/general_game.lua:59
-msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "Stikni klávesu \"i\" pro rychlé přepnutí zobrazení okna zásob."
+#: ../../data/txts/tips/general_game.lua:61
+#, lua-format
+msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
+msgstr "Stiskni klávesu \"%s\" pro rychlé přepnutí zobrazení okna zásob."
 
-#: ../../data/txts/tips/general_game.lua:63
+#: ../../data/txts/tips/general_game.lua:65
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr "Hospodářství se skládá ze staveb a vlajek propojených cestami. Zásobování a uspokojování poptávky budov je realizováno v rámci celého takto propojeného hospodářství ."
 
-#: ../../data/txts/tips/general_game.lua:67
+#: ../../data/txts/tips/general_game.lua:69
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Některé budovy, jako například obilné pole, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
 
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl + (+/-)"
-msgstr "Ctrl + (+/-)"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl + 0"
-msgstr "Ctrl + 0"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "Přibliž/oddal mapu kolečkem myši nebo %1%. Pro výchozí přiblížení stiskni %2%."
-
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
-"visited locations."
-msgstr "Použij klávesnic ‘,’ (čárky) a ‘.’ (tečky) k rychlému přesunu mezi naposledy navštívenými místy na mapě."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+msgstr "Přibliž/oddal mapu kolečkem myši nebo pomocí %1%/%2%. Pro výchozí přiblížení stiskni %3%."
 
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl + (Page Up/Page Down)"
-msgstr "Ctrl + (Page Up/Page Down)"
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Page Up/Page Down"
-msgstr "Page Up/Page Down"
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift + (Page Up/Page Down)"
-msgstr "Shift + (Page Up/Page Down)"
-
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:80
 msgid ""
-"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
-"adjust speed smoothly."
-msgstr "Zrychluj nebo zpomaluj tempo hry pomocí %1%. Použij %2% pro výraznější změnu tempa a %3% pro pozvolnější změnu tempa."
+"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
+"locations."
+msgstr "Použij klávesnic \"%1$s\" a \"%2$s\" k rychlému přesunu mezi naposledy navštívenými místy na mapě."
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:84
+msgid ""
+"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
+"%5%/%6% will adjust speed smoothly."
+msgstr "Zrychluj nebo zpomaluj tempo hry pomocí %1%/%2%. Použij %3%/%4% pro výraznější změnu tempa a %5%/%6% pro pozvolnější změnu tempa."
+
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Kurzorové šipky na klávesnici"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + klávesy šipek"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "%1% pohybují pohledem po mapě. %2% pohyb zrychluje. %3% pohyb zpomaluje."
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + klávesy šipek"
 
-#: ../../data/txts/tips/general_game.lua:87
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
