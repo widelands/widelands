@@ -26,6 +26,14 @@ descriptions:new_productionsite_type {
    animation_directory = dirname,
    -- TODO(Nordfriese): Make animations.
    animations = {idle = {hotspot = {51, 71}}},
+   spritesheets = {
+      build = {
+         hotspot = {51, 71},
+         frames = 3,
+         columns = 1,
+         rows = 3
+      }
+   },
 
    aihints = {
       very_weak_ai_limit = 1,
