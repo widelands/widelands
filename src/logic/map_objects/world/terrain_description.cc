@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/world/terrain_description.h"
 
+#include <memory>
+
 #include <SDL_surface.h>
 
 #include "base/i18n.h"
@@ -120,7 +122,12 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		}
 	}
 
-	set_enhancement(table.has_key("enhancement") ? table.get_string("enhancement") : "");
+	if (table.has_key("enhancement")) {
+		std::unique_ptr<LuaTable> t = table.get_table("enhancement");
+		for (const std::string& key : t->keys<std::string>()) {
+			set_enhancement(key, t->get_string(key));
+		}
+	}
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
@@ -176,15 +183,24 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 	}
 }
 
-void TerrainDescription::set_enhancement(const std::string& e) {
-	if (enhancement_ == name_) {
+void TerrainDescription::set_enhancement(const std::string& cat, const std::string& e) {
+	if (e == name_) {
 		throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
 	}
+
+	if (e.empty()) {
+		auto it = enhancement_.find(cat);
+		if (it != enhancement_.end()) {
+			enhancement_.erase(it);
+		}
+		return;
+	}
+
 	// Ensure terrain exists and is loaded
-	enhancement_ = e;
-	if (!enhancement_.empty()) {
+	enhancement_[cat] = e;
+	if (!e.empty()) {
 		Notifications::publish(
-		   NoteMapObjectDescription(enhancement_, NoteMapObjectDescription::LoadType::kObject));
+		   NoteMapObjectDescription(e, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 
@@ -284,8 +300,9 @@ int TerrainDescription::fertility() const {
 	return fertility_;
 }
 
-const std::string& TerrainDescription::enhancement() const {
-	return enhancement_;
+std::string TerrainDescription::enhancement(const std::string& key) const {
+	const auto it = enhancement_.find(key);
+	return it == enhancement_.end() ? "" : it->second;
 }
 
 void TerrainDescription::set_minimap_color(const RGBColor& color) {

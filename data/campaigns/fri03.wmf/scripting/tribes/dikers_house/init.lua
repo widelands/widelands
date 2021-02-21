@@ -54,6 +54,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start diking because ...
          descname = _"diking",
          actions = {
+            "callworker=check",
             "consume=log:3",
             "callworker=dike",
             "sleep=duration:30s"

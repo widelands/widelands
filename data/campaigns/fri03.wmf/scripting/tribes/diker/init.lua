@@ -10,11 +10,14 @@ descriptions:new_worker_type {
    vision_range = 2,
 
    programs = {
+      check = {
+         "findspace=size:swim radius:5 terraform:diking",
+      },
       dike = {
-         "findspace=size:swim radius:5 terraform",
+         "findspace=size:swim radius:5 terraform:diking",
          "walk=coords",
          "animate=work duration:60s",
-         "terraform",
+         "terraform=diking",
          "animate=work duration:20s",
          "return"
       }

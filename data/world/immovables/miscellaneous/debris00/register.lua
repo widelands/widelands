@@ -1,3 +1,3 @@
 return {
-   debris00 = {"debris"}
+   debris00 = {}
 }

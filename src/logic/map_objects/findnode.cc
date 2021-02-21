@@ -105,12 +105,12 @@ bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coor
 	const Map& map = egbase.map();
 	const Descriptions& descriptions = egbase.descriptions();
 	return !(
-	   descriptions.get_terrain_descr(coord.field->terrain_d())->enhancement().empty() &&
-	   descriptions.get_terrain_descr(coord.field->terrain_r())->enhancement().empty() &&
-	   descriptions.get_terrain_descr(map.tl_n(coord).field->terrain_d())->enhancement().empty() &&
-	   descriptions.get_terrain_descr(map.tl_n(coord).field->terrain_r())->enhancement().empty() &&
-	   descriptions.get_terrain_descr(map.tr_n(coord).field->terrain_d())->enhancement().empty() &&
-	   descriptions.get_terrain_descr(map.l_n(coord).field->terrain_r())->enhancement().empty());
+	   descriptions.get_terrain_descr(coord.field->terrain_d())->enhancement(category_).empty() &&
+	   descriptions.get_terrain_descr(coord.field->terrain_r())->enhancement(category_).empty() &&
+	   descriptions.get_terrain_descr(map.tl_n(coord).field->terrain_d())->enhancement(category_).empty() &&
+	   descriptions.get_terrain_descr(map.tl_n(coord).field->terrain_r())->enhancement(category_).empty() &&
+	   descriptions.get_terrain_descr(map.tr_n(coord).field->terrain_d())->enhancement(category_).empty() &&
+	   descriptions.get_terrain_descr(map.l_n(coord).field->terrain_r())->enhancement(category_).empty());
 }
 
 bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {

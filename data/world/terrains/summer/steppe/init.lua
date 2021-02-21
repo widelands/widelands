@@ -13,7 +13,7 @@ wl.Descriptions():new_terrain_type{
    humidity = 400,
    fertility = 400,
 
-   enhancement = "summer_mountain_meadow"
+   enhancement = { amazons = "summer_mountain_meadow" }
 }
 
 pop_textdomain()

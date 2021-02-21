@@ -6,7 +6,7 @@ wl.Descriptions():new_immovable_type{
    name = "debris00",
    descname = _ "Debris",
    size = "small",
-   programs = {remove = {"remove="}},
+   programs = {},
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),

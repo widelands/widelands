@@ -49,7 +49,7 @@ function mission_thread()
    -- This objective stays active until the player meets the Empire
    local o_north = add_campaign_objective(obj_north)
 
-   sleep(10 * 60 * 1000)
+   sleep(20 * 60 * 1000)
    campaign_message_box(diker)
    p1:allow_buildings({"frisians_dikers_house"})
 
