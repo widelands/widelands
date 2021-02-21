@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-01-05 18:32+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-18 10:51+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -35,11 +35,6 @@ msgstr "Nápověda"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/scripting/editor/editor_controls.lua:18
-msgctxt "hotkey"
-msgid "Esc"
-msgstr "Esc"
-
-#: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr "Zapnout hlavní nabídku"
 
@@ -51,7 +46,7 @@ msgstr "Zapnout menu nástroje"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:24
 msgid "Toggle player menu"
-msgstr "Zapnout menu hráče"
+msgstr "Zobrazit nastavení hráčů"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -73,21 +68,11 @@ msgstr "Zapnout režim zobrazení informací"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:32
-msgctxt "hotkey"
-msgid "Ctrl + L"
-msgstr "Ctrl + L"
-
-#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr "Nahrát mapu"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgctxt "hotkey"
-msgid "Ctrl + S"
-msgstr "Ctrl + S"
-
 #: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr "Uložit mapu"
@@ -178,13 +163,13 @@ msgstr "Widelands editor"
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr "Tento editor je pro hráče, kteří mají zájem o vytváření vlastních map pro Widelands."
+msgstr "Tento editor má za cíl umožnit tvoření vlastních map pro hru Widelands těm, kdo o to mají zájem."
 
 #: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Jak vidíš, na tomto editoru je ještě spousta práce. Spolu s tím jak se bude editor zlepšovat, budou popisky delší a detailnější."
+msgstr "Jak si můžeš všimnout, na tomto editoru se neustále intenzivně pracuje. S tím, jak se bude editor zlepšovat, bude i tento popis delší a úplnější."
 
 #: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."

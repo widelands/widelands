@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-01 14:07+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-15 21:12+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -108,8 +108,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "Poté zvol \"Budovy\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "Také můžeš použít klávesu \"b\"."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr "Můžeš také použít klávesovou zkratku \"%s\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -253,10 +254,11 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Poté zvol \"Zásoby\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
+#, lua-format
 msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
+"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
 "quickly."
-msgstr "Můžeš také použít klávesu \"i\" (jako \"Inventory\") pro rychlejší přístup k oknu."
+msgstr "Můžeš také použít klávesovou zkratku \"%s\" (jako \"Inventory\") pro rychlejší přístup k oknu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -433,7 +435,7 @@ msgstr "Jak získat pomoc"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr "Občas může být těžké zorietovat se v mých radách nebo poznámkách. Například se můžeš ptát: \"Proč potřebujeme na získání vojáků malé svačiny?\""
+msgstr "Občas může být těžké zorientovat se v mých radách nebo poznámkách. Například se můžeš ptát: \"Proč potřebujeme na získání vojáků malé svačiny?\""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -458,7 +460,7 @@ msgstr "Voják potřebuje dřevěný oštěp a přilbu – pokud to víme, můž
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr "Použij encykopedii pro získání informace o tom, jak rekrutovat nové vojáky."
+msgstr "Použij encyklopedii pro získání informace o tom, jak rekrutovat nové vojáky."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
@@ -522,7 +524,7 @@ msgstr "Záložka \"Budovy\" obsahuje všechny podstatné informace o budovách 
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr "A konečně záložka \"Pevné předměty\" obsahuje infornaci o prvcích mapy, na které lze ve hře narazit a které pracovníci na mapu umisťují."
+msgstr "A konečně záložka \"Pevné předměty\" obsahuje informaci o prvcích mapy, na které lze ve hře narazit a které pracovníci na mapu umisťují."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
@@ -592,7 +594,7 @@ msgstr "Suroviny v budově uskladněné jsou v plné barvě."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr "Chybějící zboží je znázorměno šedou."
+msgstr "Chybějící zboží je znázorněno šedě."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
@@ -663,7 +665,7 @@ msgstr "Prověř zdraví svého hospodářství"
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr "Třetí záložka zobrazuje zdraví hospodářství tj. přírustky/úbytky surovin. Pokud je hodnota kladná, zmanená to, že zásoby rostou."
+msgstr "Třetí záložka zobrazuje zdraví hospodářství tj. přírůstky/úbytky surovin. Pokud je hodnota kladná, znamená to, že zásoby rostou."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid "Now try this out. You can also compare it with the two previous tabs."
@@ -929,7 +931,7 @@ msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
-msgstr "Výborně. Teď máme dostatek mramorových sloupů, takže pokud se obejví nepřítel, můžeme se opevnit. Ale nemyslím si, že to bude nutné. Zatím se žádný nepřítel neukázal."
+msgstr "Výborně. Teď máme dostatek mramorových sloupů, takže pokud se objeví nepřítel, můžeme se opevnit. Ale nemyslím si, že to bude nutné. Zatím se žádný nepřítel neukázal."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
 msgid ""

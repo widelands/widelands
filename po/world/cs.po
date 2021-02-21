@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-01-28 10:01+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-14 23:44+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -349,7 +349,7 @@ msgstr "Suchý strom"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:5
 msgid "Fallen Tree"
-msgstr "Spadlý strom"
+msgstr "Pokácený strom"
 
 #: ../../data/world/immovables/trees/larch/init.lua:14
 msgid "Larch (Sapling)"
