@@ -123,6 +123,7 @@ public:
 	const ShipDescr* get_ship_descr(DescriptionIndex index) const;
 	const TerrainDescription* get_terrain_descr(DescriptionIndex index) const;
 	const TerrainDescription* get_terrain_descr(const std::string& name) const;
+	TerrainDescription* get_mutable_terrain_descr(DescriptionIndex index) const;
 	const WareDescr* get_ware_descr(DescriptionIndex index) const;
 	WareDescr* get_mutable_ware_descr(DescriptionIndex index) const;
 	const WorkerDescr* get_worker_descr(DescriptionIndex index) const;

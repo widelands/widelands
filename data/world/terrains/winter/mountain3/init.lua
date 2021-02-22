@@ -13,7 +13,7 @@ wl.Descriptions():new_terrain_type{
    humidity = 300,
    fertility = 50,
 
-   enhancement = "winter_forested_mountain2"
+   enhancement = { amazons = "winter_forested_mountain2" }
 }
 
 pop_textdomain()
