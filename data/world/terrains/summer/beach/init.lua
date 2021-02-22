@@ -12,6 +12,7 @@ wl.Descriptions():new_terrain_type{
    temperature = 120,
    humidity = 600,
    fertility = 200,
+   enhancement = { diking = "summer_steppe_barren" }
 }
 
 pop_textdomain()

@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/world/terrain_description.h"
 
+#include <memory>
+
 #include <SDL_surface.h>
 
 #include "base/i18n.h"
@@ -121,15 +123,10 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 	}
 
 	if (table.has_key("enhancement")) {
-		enhancement_ = table.get_string("enhancement");
-		if (enhancement_ == name_) {
-			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
+		std::unique_ptr<LuaTable> t = table.get_table("enhancement");
+		for (const std::string& key : t->keys<std::string>()) {
+			set_enhancement(key, t->get_string(key));
 		}
-		// Ensure terrain exists and is loaded
-		Notifications::publish(
-		   NoteMapObjectDescription(enhancement_, NoteMapObjectDescription::LoadType::kObject));
-	} else {
-		enhancement_ = "";
 	}
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
@@ -183,6 +180,27 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 			SDL_FreeSurface(sdl_surface);
 		}
 		add_texture(g_image_cache->get(texture_paths()[j]));
+	}
+}
+
+void TerrainDescription::set_enhancement(const std::string& cat, const std::string& e) {
+	if (e == name_) {
+		throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
+	}
+
+	if (e.empty()) {
+		auto it = enhancement_.find(cat);
+		if (it != enhancement_.end()) {
+			enhancement_.erase(it);
+		}
+		return;
+	}
+
+	// Ensure terrain exists and is loaded
+	enhancement_[cat] = e;
+	if (!e.empty()) {
+		Notifications::publish(
+		   NoteMapObjectDescription(e, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 
@@ -282,8 +300,9 @@ int TerrainDescription::fertility() const {
 	return fertility_;
 }
 
-const std::string& TerrainDescription::enhancement() const {
-	return enhancement_;
+std::string TerrainDescription::enhancement(const std::string& key) const {
+	const auto it = enhancement_.find(key);
+	return it == enhancement_.end() ? "" : it->second;
 }
 
 void TerrainDescription::set_minimap_color(const RGBColor& color) {
