@@ -13,7 +13,7 @@ wl.Descriptions():new_terrain_type{
    humidity = 750,
    fertility = 300,
 
-   enhancement = "tundra_taiga"
+   enhancement = { amazons = "tundra_taiga" }
 }
 
 pop_textdomain()
