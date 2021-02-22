@@ -124,6 +124,7 @@ def parse_args():
 def main():
     """Walk a directory and use command line tools to optimize all png files in
     it."""
+
     if sys.version_info[0] < 3:
         sys.exit("At least python version 3 is needed.")
 
