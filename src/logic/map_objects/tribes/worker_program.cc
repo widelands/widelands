@@ -372,7 +372,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 findspace
 ^^^^^^^^^
 .. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
-   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform:\<category\>]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -404,8 +404,8 @@ findspace
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
 
-   :arg empty terraform: Find only nodes where at least one adjacent triangle has
-      terrain that can be enhanced
+   :arg string terraform: Find only nodes where at least one adjacent triangle has
+      terrain that can be enhanced.
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -447,8 +447,8 @@ findspace
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
  * iparam6 = Forester retries
- * iparam7 = whether the "terraform" flag is set
  * sparam1 = Resource
+ * sparamv = The terraform category (if any)
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
 	act->function = &Worker::run_findspace;
@@ -460,6 +460,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam6 = 1;
 	act->iparam7 = 0;
 	act->sparam1 = "";
+	act->sparamv = {};
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
@@ -482,7 +483,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
 			} else if (item.first == "terraform") {
-				act->iparam7 = 1;
+				act->sparamv.push_back(item.second);
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
 			} else if (item.first == "space") {
@@ -814,24 +815,25 @@ void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std:
 /* RST
 terraform
 ^^^^^^^^^
-.. function:: terraform
+.. function:: terraform=\<category\>
 
    Turns the terrain of one of the triangles around the current node into its
    enhancement terrain. Example::
 
       terraform = {
-         "findspace=size:terraform radius:6",
+         "findspace=size:any radius:6 terraform:amazons",
          "walk=coords",
          "animate=dig duration:2s",
-         "terraform",
+         "terraform=amazons",
          "return"
       }
 */
 void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() > 1) {
-		throw wexception("terraform takes no arguments");
+	if (cmd.size() != 1) {
+		throw wexception("Usage: terraform=<category>");
 	}
 	act->function = &Worker::run_terraform;
+	act->sparam1 = cmd[0];
 }
 
 /* RST
