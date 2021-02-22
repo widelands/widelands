@@ -374,6 +374,6 @@ def main():
 if __name__ == '__main__':
 
     if sys.version_info[0] < 3:
-        sys.exit("At least python version 3 is needed.")
+        sys.exit('At least python version 3 is needed.')
 
     main()
