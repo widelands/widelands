@@ -32,9 +32,6 @@
 
 namespace FsMenu {
 
-class AddOnsCtrl;
-struct ProgressIndicatorWindow;
-
 class AddOnsPackager : public UI::Window {
 public:
 	explicit AddOnsPackager(MainMenu&, AddOnsCtrl&);
