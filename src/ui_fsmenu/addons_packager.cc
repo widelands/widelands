@@ -239,12 +239,14 @@ void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 		addons_.add(pair.first, pair.first,
 		            g_image_cache->get(AddOns::kAddOnCategories.at(pair.second->get_category()).icon),
 		            pair.first == select);
-		pair.second->set_callbacks([this](const size_t i) {
+		pair.second->set_callbacks(
+		   [this](const size_t i) {
 			   progress_window_.progressbar().set_state(0);
 			   progress_window_.progressbar().set_total(i);
 		   },
 		   [this](const size_t i) {
-			   progress_window_.progressbar().set_state(progress_window_.progressbar().get_state() + i);
+			   progress_window_.progressbar().set_state(progress_window_.progressbar().get_state() +
+			                                            i);
 			   do_redraw_now();
 		   });
 	}

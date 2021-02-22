@@ -37,10 +37,9 @@
 
 namespace AddOns {
 
-size_t
-MutableAddOn::do_recursively_copy_file_or_directory(const std::string& source,
-                                      const std::string& dest,
-                                      const bool dry_run) {
+size_t MutableAddOn::do_recursively_copy_file_or_directory(const std::string& source,
+                                                           const std::string& dest,
+                                                           const bool dry_run) {
 	size_t result = 0;
 	if (g_fs->is_directory(source)) {
 		if (!dry_run) {
