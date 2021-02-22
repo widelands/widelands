@@ -12,7 +12,6 @@ import subprocess
 import sys
 import tempfile
 
-
 def log(text):
     """Write text without newline to stdout and flush."""
     sys.stdout.write(text)
@@ -125,6 +124,9 @@ def parse_args():
 def main():
     """Walk a directory and use command line tools to optimize all png files in
     it."""
+    if sys.version_info[0] < 3:
+        sys.exit("At least python version 3 is needed.")
+
     args = parse_args()
 
     # The filter function returns an iterator only, so we stick the results into a list for iterating multiple times.
@@ -139,11 +141,14 @@ def main():
     pngs = collect_pngs(args.directory, args.prefix)
 
     for pidx, png in enumerate(pngs):
-        log('(%i/%i) Who improves %s? ' % (pidx + 1, len(pngs), png))
-        for tool in tools:
-            tool(png)
-        log('\n')
-
+        if len(tools):
+            log('(%i/%i) Who improves %s? ' % (pidx + 1, len(pngs), png))
+            for tool in tools:
+                tool(png)
+            log('\n')
+        else:
+            sys.exit("\nPlease install at least one of the above png-tools!")
+                
 
 if __name__ == '__main__':
     main()
