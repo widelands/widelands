@@ -1,0 +1,14 @@
+# Automatically created by Widelands 1.0~git25156[27a9c00@fri-03-new] (Debug)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="512"
+nr_players="3"
+name=_"Friends in Need"
+author="Nordfriese"
+descr=_"Reebaud and his tribe are living happily in the North. Meanwhile, the countries they have left behind are all but peaceful, and an old friend is in desperate need for their help…"
+hint=
+background="campaigns/fri03.wmf/pics/background.jpg"
+tags="seafaring,unbalanced"
+addons=
