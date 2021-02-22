@@ -38,9 +38,13 @@ public:
 	                 const std::string& author,
 	                 const std::string& description,
 	                 const std::string& version);
-	// May throw a WLWarning, if it fails
 	using ProgressFunction = std::function<void(size_t)>;
-	virtual bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback);
+	void set_callbacks(const ProgressFunction& init, const ProgressFunction& progress) {
+		callback_init_ = init;
+		callback_progress_ = progress;
+	}
+	// May throw a WLWarning, if it fails
+	virtual bool write_to_disk();
 
 	const std::string& get_internal_name() const {
 		return internal_name_;
@@ -75,6 +79,9 @@ protected:
 	std::string profile_path();
 	void setup_temp_dir();
 	void cleanup_temp_dir();
+	size_t do_recursively_copy_file_or_directory(const std::string& source,
+	                                             const std::string& dest,
+	                                             const bool dry_run);
 
 	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
 	   max_wl_version_;
@@ -85,6 +92,8 @@ protected:
 	 */
 
 	std::string directory_, backup_path_;
+
+	ProgressFunction callback_init_, callback_progress_;
 };
 
 class WorldAddon : public MutableAddOn {
@@ -105,7 +114,7 @@ public:
 class MapsAddon : public MutableAddOn {
 public:
 	explicit MapsAddon(const AddOnInfo& a);
-	bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback) override;
+	bool write_to_disk() override;
 
 	struct DirectoryTree {
 		std::map<std::string /* file name in add-on */, std::string /* path of source map */> maps;
@@ -119,8 +128,7 @@ protected:
 	std::string parse_requirements() override;
 	size_t do_recursively_create_filesystem_structure(const std::string& dir,
 	                                                  const DirectoryTree& tree,
-	                                                  bool dry_run,
-	                                                  const ProgressFunction&);
+	                                                  bool dry_run);
 	DirectoryTree tree_;
 
 private:
@@ -131,7 +139,7 @@ private:
 class CampaignAddon : public MapsAddon {
 public:
 	explicit CampaignAddon(const AddOnInfo& a);
-	bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback) override;
+	bool write_to_disk() override;
 	bool luafile_exists();
 
 	struct CampaignInfo {
@@ -182,7 +190,7 @@ public:
 class ThemeAddon : public MutableAddOn {
 public:
 	using MutableAddOn::MutableAddOn;
-	bool write_to_disk(const ProgressFunction& init, const ProgressFunction& callback) override;
+	bool write_to_disk() override;
 };
 
 }  // namespace AddOns

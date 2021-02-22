@@ -158,6 +158,7 @@ private:
 		kNewest
 	};
 
+	MainMenu& fsmm_;
 	UI::Box main_box_, buttons_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::Panel tabs_placeholder_;

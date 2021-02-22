@@ -27,8 +27,8 @@
 #include "logic/mutable_addon.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
+#include "ui_fsmenu/addons.h"
 #include "ui_fsmenu/addons_packager_box.h"
-#include "ui_fsmenu/main.h"
 
 namespace FsMenu {
 
@@ -81,9 +81,10 @@ private:
 	void clicked_delete_addon();
 	void clicked_discard_changes();
 	void clicked_write_changes();
-	bool do_write_addon_to_disk(const std::string& addon, ProgressIndicatorWindow&);
+	bool do_write_addon_to_disk(const std::string& addon);
 
 	bool update_in_progress_;
+	ProgressIndicatorWindow progress_window_;
 };
 
 }  // namespace FsMenu
