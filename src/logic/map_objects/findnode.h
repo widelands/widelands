@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDNODE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDNODE_H
 
+#include <string>
+
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -190,8 +192,11 @@ private:
 
 /// Accepts a node where at least 1 adjacent triangle has enhancable terrain
 struct FindNodeTerraform {
-	FindNodeTerraform() = default;
+	FindNodeTerraform(const std::string& c) : category_(c) {
+	}
 	bool accept(const EditorGameBase&, const FCoords&) const;
+
+	const std::string category_;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable

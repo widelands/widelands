@@ -140,10 +140,10 @@
 --            fertility = 700,
 --
 --    **enhancement**
---        *Optional*. The terrain this terrain can be turned into by buildings like
+--        *Optional*. The terrains this terrain can be turned into by buildings like
 --        the amazon gardening center. Example::
 --
---            enhancement = "summer_meadow3",
+--            enhancement = { amazons = "summer_meadow3" },
 --
 -- For making the UI texts translateable, we also need to push/pop the correct textdomain.
 --
@@ -165,7 +165,7 @@
 --       temperature = 80,
 --       humidity = 100,
 --       fertility = 100,
---       enhancement = "summer_forested_mountain1"
+--       enhancement = { amazons = "summer_forested_mountain1" }
 --    }
 --
 --    pop_textdomain()
