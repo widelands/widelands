@@ -673,7 +673,8 @@ void GameClient::handle_hello(RecvPacket& packet) {
 	d->addons_guard_.reset();
 	std::vector<AddOns::AddOnState> new_g_addons;
 	std::set<std::string> missing_addons;
-	std::map<std::string, std::pair<std::string /* installed */, std::string /* host */>> wrong_version_addons;
+	std::map<std::string, std::pair<std::string /* installed */, std::string /* host */>>
+	   wrong_version_addons;
 	for (size_t i = packet.unsigned_32(); i; --i) {
 		const std::string name = packet.string();
 		const AddOns::AddOnVersion v = AddOns::string_to_version(packet.string());
@@ -688,18 +689,25 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		if (found.empty()) {
 			missing_addons.insert(name);
 		} else if (found != v) {
-			wrong_version_addons[name] = std::make_pair(AddOns::version_to_string(found, false), AddOns::version_to_string(v, false));
+			wrong_version_addons[name] = std::make_pair(
+			   AddOns::version_to_string(found, false), AddOns::version_to_string(v, false));
 		}
 	}
 	if (!missing_addons.empty() || !wrong_version_addons.empty()) {
 		const size_t nr = missing_addons.size() + wrong_version_addons.size();
-		std::string message = (boost::format(ngettext("%u add-on mismatch detected:\n", "%u add-on mismatches detected:\n", nr)) % nr).str();
+		std::string message = (boost::format(ngettext("%u add-on mismatch detected:\n",
+		                                              "%u add-on mismatches detected:\n", nr)) %
+		                       nr)
+		                         .str();
 		for (const std::string& name : missing_addons) {
-			message = (boost::format(_("%1$s\n· ‘%2$s’ required by host not found")) % message % name).str();
+			message =
+			   (boost::format(_("%1$s\n· ‘%2$s’ required by host not found")) % message % name).str();
 		}
 		for (const auto& pair : wrong_version_addons) {
-			message = (boost::format(_("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s"))
-					% message % pair.first % pair.second.first % pair.second.second).str();
+			message = (boost::format(
+			              _("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s")) %
+			           message % pair.first % pair.second.first % pair.second.second)
+			             .str();
 		}
 		throw WLWarning("", "%s", message.c_str());
 	}
