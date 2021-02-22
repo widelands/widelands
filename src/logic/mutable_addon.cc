@@ -37,25 +37,35 @@
 
 namespace AddOns {
 
-static void do_recursively_copy_file_or_directory(const std::string& source,
-                                                  const std::string& dest) {
+size_t MutableAddOn::do_recursively_copy_file_or_directory(const std::string& source,
+                                                           const std::string& dest,
+                                                           const bool dry_run) {
+	size_t result = 0;
 	if (g_fs->is_directory(source)) {
-		g_fs->ensure_directory_exists(dest);
+		if (!dry_run) {
+			g_fs->ensure_directory_exists(dest);
+		}
 		for (const std::string& file : g_fs->list_directory(source)) {
-			do_recursively_copy_file_or_directory(
-			   file, dest + FileSystem::file_separator() + FileSystem::fs_filename(file.c_str()));
+			result += do_recursively_copy_file_or_directory(
+			   file, dest + FileSystem::file_separator() + FileSystem::fs_filename(file.c_str()),
+			   dry_run);
 		}
 	} else {
-		FileRead fr;
-		fr.open(*g_fs, source);
-		const size_t bytes = fr.get_size();
-		std::unique_ptr<char[]> data(new char[bytes]);
-		fr.data_complete(data.get(), bytes);
+		result++;
+		if (!dry_run) {
+			FileRead fr;
+			fr.open(*g_fs, source);
+			const size_t bytes = fr.get_size();
+			std::unique_ptr<char[]> data(new char[bytes]);
+			fr.data_complete(data.get(), bytes);
 
-		FileWrite fw;
-		fw.data(data.get(), bytes);
-		fw.write(*g_fs, dest);
+			FileWrite fw;
+			fw.data(data.get(), bytes);
+			fw.write(*g_fs, dest);
+			callback_progress_(1);
+		}
 	}
+	return result;
 }
 
 static std::string read_text_file(const std::string& filename) {
@@ -158,6 +168,9 @@ std::string MutableAddOn::parse_requirements() {
 }
 
 bool MutableAddOn::write_to_disk() {
+	callback_init_(1);
+	callback_progress_(0);
+
 	// Step 1: Gather the requirements of all contained maps
 	const std::string requirements = parse_requirements();
 
@@ -179,6 +192,7 @@ bool MutableAddOn::write_to_disk() {
 
 	p.write(profile_path().c_str(), false);
 
+	callback_progress_(1);
 	return true;
 }
 
@@ -229,25 +243,35 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 	}
 }
 
-void MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
-                                                           const DirectoryTree& tree) {
+size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
+                                                             const DirectoryTree& tree,
+                                                             const bool dry_run) {
+	size_t result = 0;
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
-		g_fs->ensure_directory_exists(subdir);
-		do_recursively_create_filesystem_structure(subdir, pair.second);
+		if (!dry_run) {
+			g_fs->ensure_directory_exists(subdir);
+		}
+		result += do_recursively_create_filesystem_structure(subdir, pair.second, dry_run);
 	}
 
 	// Maps
 	for (const auto& pair : tree.maps) {
+		result++;
+		if (dry_run) {
+			continue;
+		}
+
 		std::string source_path = pair.second;
 		assert(source_path.size() > kWidelandsMapExtension.size());
 		assert(source_path.compare(source_path.size() - kWidelandsMapExtension.size(),
 		                           kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0);
 
 		do_recursively_copy_file_or_directory(
-		   source_path, dir + FileSystem::file_separator() + pair.first);
+		   source_path, dir + FileSystem::file_separator() + pair.first, dry_run);
 	}
+	return result;
 }
 
 void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree) {
@@ -270,7 +294,8 @@ bool MapsAddon::write_to_disk() {
 	}
 
 	// Create the directory structure and copy the maps
-	do_recursively_create_filesystem_structure(directory_, tree_);
+	callback_init_(do_recursively_create_filesystem_structure(directory_, tree_, true));
+	do_recursively_create_filesystem_structure(directory_, tree_, false);
 
 	cleanup_temp_dir();
 
@@ -341,7 +366,8 @@ bool CampaignAddon::write_to_disk() {
 	}
 
 	// Create the directory structure and copy the maps
-	do_recursively_create_filesystem_structure(directory_, tree_);
+	callback_init_(do_recursively_create_filesystem_structure(directory_, tree_, true) + 1);
+	do_recursively_create_filesystem_structure(directory_, tree_, false);
 
 	// Modify campaigns.lua
 	std::string scenario_list;
@@ -352,7 +378,7 @@ bool CampaignAddon::write_to_disk() {
 	std::string luafile_in = backup_path_ + FileSystem::file_separator() + "campaigns.lua";
 	if (g_fs->file_exists(luafile_in)) {
 		// Make a backup in case the user unintentionally overwrites his modifications
-		do_recursively_copy_file_or_directory(luafile_in, luafile_out + ".backup");
+		do_recursively_copy_file_or_directory(luafile_in, luafile_out + ".backup", false);
 	} else {
 		luafile_in = "templates/campaigns.lua";
 		init = true;
@@ -382,6 +408,7 @@ bool CampaignAddon::write_to_disk() {
 
 	cleanup_temp_dir();
 
+	callback_progress_(1);
 	return true;
 }
 
@@ -392,7 +419,8 @@ bool ThemeAddon::write_to_disk() {
 
 	if (!g_fs->file_exists(directory_ + FileSystem::file_separator() + "init.lua")) {
 		// Copy default theme into addon folder as starting point
-		do_recursively_copy_file_or_directory("templates/default/", directory_);
+		callback_init_(do_recursively_copy_file_or_directory("templates/default/", directory_, true));
+		do_recursively_copy_file_or_directory("templates/default/", directory_, false);
 	}
 
 	return true;
