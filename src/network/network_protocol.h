@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 26,
+	NETWORK_PROTOCOL_VERSION = 27,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -84,6 +84,8 @@ enum : uint8_t {
 	 * payload:
 	 * \li unsigned_8:  protocol version
 	 * \li unsigned_32: 0-based user number for the client
+	 * \li unsigned_32: number of enabled add-ons
+	 * \li for each enabled add-on: the add-on's name (string) and version (string)
 	 *
 	 * \note The host may override the client's chosen name in a subsequent
 	 * \ref NETCMD_SETTING_ALLPLAYERS or \ref NETCMD_SETTING_PLAYER packet.
