@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 
+
 def log(text):
     """Write text without newline to stdout and flush."""
     sys.stdout.write(text)
@@ -125,7 +126,7 @@ def main():
     """Walk a directory and use command line tools to optimize all png files in
     it."""
     if sys.version_info[0] < 3:
-        sys.exit("At least python version 3 is needed.")
+        sys.exit('At least python version 3 is needed.')
 
     args = parse_args()
 
@@ -147,8 +148,8 @@ def main():
                 tool(png)
             log('\n')
         else:
-            sys.exit("\nPlease install at least one of the above png-tools!")
-                
+            sys.exit('\nPlease install at least one of the above png-tools!')
+
 
 if __name__ == '__main__':
     main()
