@@ -38,13 +38,13 @@ descriptions:new_worker_type {
          "return"
       },
       check = {
-         "findspace=size:any radius:6 terraform",
+         "findspace=size:any radius:6 terraform:amazons",
       },
       terraform = {
-         "findspace=size:any radius:6 terraform",
+         "findspace=size:any radius:6 terraform:amazons",
          "walk=coords",
          "animate=dig duration:2s",
-         "terraform",
+         "terraform=amazons",
          "animate=dig duration:2s",
          "return"
       },
