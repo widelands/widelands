@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 #define WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 
+#include <map>
+
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
@@ -114,7 +116,8 @@ public:
 	int fertility() const;
 
 	// The terrain which certain workers can transform this terrain into.
-	const std::string& enhancement() const;
+	std::string enhancement(const std::string& category) const;
+	void set_enhancement(const std::string& category, const std::string& terrain);
 
 private:
 	const std::string name_;
@@ -128,7 +131,7 @@ private:
 	int temperature_;
 	int fertility_;
 	int humidity_;
-	std::string enhancement_;
+	std::map<std::string, std::string> enhancement_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;
 	RGBColor minimap_colors_[256];
