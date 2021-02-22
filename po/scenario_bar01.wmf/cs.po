@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-01 14:11+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-15 17:09+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -271,14 +271,14 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Geologa pošleš na průzkum vodních zdrojů tak, že klineš na vlajku v oblasti, kterou chceš, aby prohledal. Potom klikneš na tlačítko \"Provést průzkum nerostných a podzemních zdrojů\"."
+msgstr "Geologa pošleš na průzkum vodních zdrojů tak, že klikneš na vlajku v oblasti, kterou chceš, aby prohledal. Potom klikneš na tlačítko \"Provést průzkum nerostných a podzemních zdrojů\"."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "Uhlí lze získat postavením milíře na dřevené uhlí nebo dolu na uhlí. Pálení klád na dřevěné uhlí je zdlouhavé. Milíř na dřevěné uhlí je vhodné stavět jen v případě, když už uhlí není k dispozici."
+msgstr "Uhlí lze získat postavením milíře na dřevěné uhlí nebo dolu na uhlí. Pálení klád na dřevěné uhlí je zdlouhavé. Milíř na dřevěné uhlí je vhodné stavět jen v případě, když už uhlí není k dispozici."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
@@ -501,14 +501,14 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr "Ale nikdy nezapomeň - tyto lesy jsou naším dědictvím, svěřené nám našimi předky. Musíme je respektovata pečovat o ně. Co si vezmeme, musíme navrátit zase zpět."
+msgstr "Ale nikdy nezapomeň, tyto lesy jsou naším dědictvím, svěřené nám našimi předky. Musíme si jich vážit a pečovat o ně. Co si vezmeme, musíme vrátit zase zpět."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "Abychom nahradili stormy, které jsme pokáceli, je třeba postavit chaty pro lesníky. Nejlépe poblíž chat dřevorubců."
+msgstr "Abychom nahradili stromy, které jsme pokáceli, je třeba postavit chaty pro lesníky. Nejlépe poblíž chat dřevorubců."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
@@ -746,7 +746,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "Severně od velké hory je rozlehlá pláň. Proč nevyužít místo, které nám matka přiroda darovala, a nepostavit tam obilné pole? Já bych si zcela jistě dal čerstvě upečené chlebové placky..."
+msgstr "Severně od velké hory je rozlehlá pláň. Proč nevyužít místo, které nám matka příroda poskytla, a nepostavit tam obilné pole? Já bych si pro zpestření jídelníčku na čerstvě upečené chlebové placce určitě pochutnal..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
@@ -896,7 +896,7 @@ msgstr "Khantrukhovi spadl kámen ze srdce…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Báječné! Střechy už netečou a máme materiálu, no, na jakoukoli budovu si jen zamanem!"
+msgstr "Báječné! Střechy už netečou a máme dostatek materiálu, na jakoukoli budovu si jen zamaneme!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
@@ -1031,4 +1031,4 @@ msgstr "Žili jednoduchý a bezstarostný život, díky lovu a farmaření. Neby
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr "Obávají se však, že válka zuřicí v okolí Al’thunranu toto všechno změní. Proto se rozhodli, že se k nám připojí v naději, že jeden druhému pomůžeme."
+msgstr "Obávají se však, že válka zuřící v okolí Al’thunranu znamená konec takového života. Proto se rozhodli, že se k nám připojí, a doufají, že si můžeme navzájem pomoci."

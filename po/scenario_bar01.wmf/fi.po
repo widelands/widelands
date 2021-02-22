@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-20 17:20+0000\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,25 +36,25 @@ msgstr "Rakenna metsänvartijan maja metsurin tuvan lähelle."
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Luonnollisesti, puut kasvavat hitaasti. Varmistaaksesi, että saat riittävästi kaadettuja puita, sinun täytyy luoda metsänvartijoita."
+msgstr "Luonnollisesti puut kasvavat hitaasti. Varmistaaksesi että saat riittävästi tukkeja, sinun täytyy värvätä metsänvartijoita."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr "Laajennu koilliseen ja rakenna kivilouhos"
+msgstr "Laajenna koilliseen ja rakenna kivilouhos"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr "Laajenna aluettasi kivistä katsoen koillisen suuntaan"
+msgstr "Laajenna aluettasi kivistä katsoen koilliseen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Rakenna sotarakennuksia (kuten vartiomökkejä ja rajalinnoituksia) laajentaaksesi aluettasi."
+msgstr "Rakenna sotilasrakennuksia (kuten vartiomökkejä ja rajalinnoituksia) laajentaaksesi aluettasi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Mene kivikasoille koilliseen, ja usuta kivenhakkaaja niiden kimppuun."
+msgstr "Mene kivikasoille koilliseen, ja rakenna sinne kivilouhos."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
@@ -75,7 +76,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr "Tehdäksesi niin, sijoita lippu vuoren sivulle idässä (vaikka vuorimaastoon, ei vuoriniitylle). Kun klikkaat uuden lipun päällä, voit lähettää geologis sinne. Koska lippu on vuorella, geologit tulee etsimään malmia; muussa tapauksessa, he etsivät vettä. Sitten rakenna kaivos molemmille resurssityypeille, jotka he tulevat löytämään, valikoi sopiva kaivos rakennettavaksi:"
+msgstr "Tehdäksesi niin, sijoita lippu vuoren sivulle idässä (vuorimaastoon, ei vuoriniitylle). Voit lähettää geologin klikkaamalla uutta lippua. Koska lippu on vuorella, geologit etsivät malmeja; muussa tapauksessa he etsisivät vettä. Rakenna sitten oikeantyyppinen kaivos molemmille heidän löytämilleen resurssityypeille:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
@@ -121,11 +122,11 @@ msgstr "mitään ei löytynyt"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Kaivoksia voi rakentaa vuoristoiseen maisemaan. Sopivat paikat näytetään oranssein kaivoskuvin."
+msgstr "Kaivoksia voi rakentaa vuoristoiseen maisemaan. Sopivat paikat näytetään oranssein kaivossymbolein."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr "Toimita kaivostyöläisillesi ruokaa"
+msgstr "Toimita kaivosmiehillesi ruokaa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
@@ -133,20 +134,20 @@ msgstr "Rakenna metsästäjän maja, riistanvartijan maja ja krouvi"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr "Pystyäkseen työskentelemään, sinun kaivostyöläiset tarvitsevat ruokaa."
+msgstr "Kaivosmiehesi tarvitsevat ruokaa pystyäkseen työskentelemään."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Mesästäjä voi metsästää eläimiä, samalla riistanvartija estää niiden kannan romahtamisen. Liha käsitellään krouvissa kaivostyöläistesi aterioiksi."
+msgstr "Metsästäjä voi metsästää eläimiä, samalla kun riistanvartija estää niiden kannan romahtamisen. Liha käsitellään krouvissa kaivosmiestesi aterioiksi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Tämä on vain ensimmäinen esimerkki tavarasta, joka pitää jalostaa ennen kuin se voidaan käyttää jossakin toisessa rakennuksessa – esimerkkejä tulee vielä lisää."
+msgstr "Tämä on vain ensimmäinen esimerkki tuotteesta joka pitää jalostaa ennen kuin se voidaan käyttää jossakin toisessa rakennuksessa – esimerkkejä tulee vielä lisää."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
@@ -163,7 +164,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Muut tavat tuottaa ruokaa – erilaista ruokaa – ovat kalastajat ja maatilat. Maatilojen vehnä täytyy käsitellä veden kanssa leipomossa ennen kuin siitä tulee syötävää. Parhaan tuoton saat rakentamalla sen kohtaan, josta geologi on löytänyt vesisuonen."
+msgstr "Muut tavat tuottaa ruokaa – erilaisia ruokia – ovat kalastajat ja maatilat. Maatilojen vehnä täytyy käsitellä veden kanssa leipomossa ennen kuin siitä tulee syötävää. Parhaan tuottavuuden saat rakentamalla sen kohtaan josta geologi on löytänyt vesisuonen."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -177,7 +178,7 @@ msgstr "Rakenna sulattamo"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Kaivostyöläisesi kaivama rautamalmi ei ole vielä käyttökelpoista – Se täytyy sulattaa ensin raudaksi."
+msgstr "Kaivosmiestesi kaivama rautamalmi ei ole vielä käyttökelpoista – se täytyy sulattaa ensin raudaksi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
@@ -191,7 +192,7 @@ msgstr "Laajenna kaivosta ja krouvia sekä rakenna pienpanimo."
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Laajenna hiilikaivosta tai rautakaivosta keskisyväksi kaivokseksi sekä laajenna krouvista kestikievariksi."
+msgstr "Laajenna hiilikaivos tai rautakaivos keskisyväksi kaivokseksi sekä laajenna krouvi kestikievariksi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
@@ -203,7 +204,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Tavallinen kaivos voi kaivaa vain noin kolmanneksen kaikista resursseista, jotka ovat sen alla; siksi se täytyy laajentaa keskisyväksi kaivokseksi, jotta se toimisi kunnolla. Laajentaaksesi rakennusta, valitse se ja sitten klikkaa haluamaasi painiketta avautuvasta ruudusta."
+msgstr "Tavallinen kaivos voi louhia vain noin kolmanneksen kaikista resursseista jotka ovat sen alapuolella; siksi se täytyy laajentaa keskisyväksi kaivokseksi jotta se toimisi kunnolla. Laajentaaksesi rakennusta, valitse se ja sitten klikkaa asianmukaista painiketta avautuvasta ruudusta."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -211,7 +212,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Työntekijät saavat kokemusta onnistuneesta työstä. Riittävällä kokemuksella heistä tulee kehittyneemipiä työntekijöitä, jotka ovat tarpeellisia laajennettujen rakennuksien toiminnassa. Älä laajenna rakennusta ennen kuin sinulla on riittävästi kokeneita työntekijöitä laajennetun rakennuksen toiminnan pyörittämiseksi!"
+msgstr "Työntekijät saavat kokemusta onnistuneesta työstä. Riittävällä kokemuksella heistä tulee kehittyneempiä työntekijöitä, jotka ovat tarpeen laajennettujen rakennuksien toiminnassa. Älä laajenna rakennusta ennen kuin sinulla on riittävästi kokeneita työntekijöitä laajennetun rakennuksen toiminnan pyörittämiseksi!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -219,14 +220,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Sellaisilla rakennuksilla on tavallisesti suurempi tarve kuin tavallisisen tyyppisillä rakennuksilla – esimerkiksi, keskisyvät kaivokset tarvitsevat välipaloja ruoka-annoksien sijaan. Sinu tulee laajentaa krouvisi kestikievariksi pystyäksesi tuottamaan välipaloja pitaleivästä JA toisen asteen ruuasta (liha ja kala) JA oluesta."
+msgstr "Sellaisilla rakennuksilla on tavallisesti korkeampi vaatimustaso kuin tavallisen tyyppisillä rakennuksilla – esimerkiksi keskisyvät kaivokset tarvitsevat välipaloja ruoka-annoksien sijaan. Sinun tulee laajentaa krouvisi kestikievariksi pystyäksesi tuottamaan välipaloja pitaleivästä JA toisentyyppisestä ruoasta (liha ja kala) JA oluesta."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Toki sinä saatat laajentaa kaikki kaivokset keskisyviksi kaivoksiksi heti kun sinulla on tarvittavat työntekijät – suuremmat kaivokset toimivat hieman nopeammin, toisaalta pienemmät kaivokset tarvitsevat halvempaa ruokaa. On sinusta kiinni millaisen strategian valitset."
+msgstr "Voit toki laajentaa kaikki kaivokset keskisyviksi kaivoksiksi heti kun sinulla on tarvittavat työntekijät – suuremmat kaivokset toimivat hieman nopeammin, mutta toisaalta pienemmät kaivokset tarvitsevat halvempaa ruokaa. On sinusta kiinni minkä strategian valitset."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
@@ -241,7 +242,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Suuremmat ja paremmat rakennukset – mukaanlukien kaikki sotarakennukset – rarvitsevat parempia rakennusmateriaaleja. Niitä ei voi rakentaa pelkistä kaadetuista puista. Kaadetut puut pitää ensin käsitellä lämpöpuuksi puunkovettamossa. Muista aina rakentaa puunkovettamo ennen kuin sinulta loppuu lämpöpuu, koska ilman sitä et voi laajentaa."
+msgstr "Suuremmat ja paremmat rakennukset – mukaan lukien kaikki sotilasrakennukset – tarvitsevat parempia rakennusmateriaaleja. Niitä ei voi rakentaa pelkistä tukeista. Tukit pitää ensin käsitellä lämpöpuuksi puunkovettamossa. Muista aina rakentaa puunkovettamo ennen kuin sinulta loppuu lämpöpuu, koska ilman sitä et voi laajentaa."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -257,7 +258,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Paremmat rakennukset saattavat myös vaatia muita kehittyneitä materiaaleja lämpöpuun sijaa. Yksi sellainen on laasti, jota tuotetan graniitista, vedestä ja hiilestä kalkinpolttajan toimesta."
+msgstr "Paremmat rakennukset saattavat myös vaatia muita kehittyneitä materiaaleja lämpöpuun sijasta. Yksi sellainen on laasti, jota kalkinpolttaja valmistaa graniitista, vedestä ja hiilestä."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -271,20 +272,20 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Lähettääksesi geologin etsimään vettä, klikkaa yhtä lippua alueella, jolle haluat hänen menevän etsimään ja sitten painiketta tekstillä 'Lähetä geologi tutkimaan aluetta'."
+msgstr "Klikkaa lippua alueella jolla haluat geologin etsivän vettä, ja klikkaa sitten painiketta tekstillä 'Lähetä geologi tutkimaan aluetta'."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "Hiiltä voidaan hankkia rakentamalla miillu tai hiilikaivos. Kaadettujen puiden polttaminen miilulla on hidasta. Sinun tuliisi rakentaa miilu vain silloin, kun hiiltä ei ole saatavilla."
+msgstr "Hiiltä voidaan hankkia rakentamalla miilu tai hiilikaivos. Tukkien polttaminen miilulla on hidasta, joten miilu tulisi rakentaa vain silloin kun hiilikaivoksen rakentaminen ei ole mahdollista."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Rakenna kalkinpolttouuni ja kaivo. Vaihtoehtoisesti rakenna joko miilu tai hiilikaivos hiilen toimittamiseksi."
+msgstr "Rakenna kalkinpolttouuni ja kaivo. Rakenna näiden lisäksi joko miilu tai hiilikaivos hiilen tuottamiseksi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
@@ -297,7 +298,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr "Kolmas välttämätön materiaali kehittyneille rakennuksille on ruoikko, jota käytetään kattojen päällystämiseen. Ruoikkoa kasvattaa puutarhanhoitaja rakennuksensa ympärillä, eli ruokotarhassa."
+msgstr "Kolmas välttämätön materiaali kehittyneille rakennuksille ovat ruo'ot, joita käytetään kattojen päällystämiseen. Puutarhuri kasvattaa ruokoja ruokotarhassa. "
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -322,11 +323,11 @@ msgstr "Härkiä kasvatetaan karjatiloilla vehnällä ja vedellä."
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr "Tarina Alkaa"
+msgstr "Tarina alkaa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr "Thorn huokaisee…"
+msgstr "Thron huokaa…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
@@ -346,7 +347,7 @@ msgstr "Soturini metsästävät päivisin ja makaavat valveilla öisin, kuunnell
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr "Näemme tänne kilometrien päähän kuinka hirveät liekit nielevät Al'thunranin."
+msgstr "Näemme tänne kilometrien päähän kuinka raivoisat liekit nielevät Al'thunranin."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -361,7 +362,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr "Isäni luut lepäävät levossa maassa, jossa hän muinoin päätti veren tunteettoman vuodatuksen, mikä oli saanut alkunsa keskuudestamme. Se painaa mieltäni, että hänen rauhansa kesti ainoastaan yhden sukupolven."
+msgstr "Isäni luut lepäävät maalla, jolla hän muinoin päätti keskuudessamme virinneen tunteettoman verenvuodatuksen. On tuskallista että hänen aikaansaamansa rauha kesti ainoastaan yhden sukupolven ajan."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -370,7 +371,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr "Boldreth, uskollinen kumppanini ja ystäväni on rauhan lähde ja lohtu minulle näinä synkkinä aikoina. Hän pitää mieleni virkeänä ja nuo soturini hereillä, estäen myös ahneuden tai epätoivon tuhoamasta sidettämme välillämme."
+msgstr "Boldreth, uskollinen kumppanini ja ystäväni suo minulle rauhaa ja lohtua näinä synkkinä aikoina. Hän pitää minun ja soturieni mielialan korkeana, estäen ahneuden ja epätoivon tuhoamasta sidettä välillämme."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -378,16 +379,16 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr "Kuten isäni sanoi minulle, on aikoja jolloin taistella ja aikoja jolloin levätä ja odottaa, yrittäen olla nukahtamatta tai kuolematta ennen kuin oikea aika koittaa. Ja sitä minä haluan."
+msgstr "Kuten isäni sanoi minulle, on aikoja jolloin taistella ja aikoja jolloin levätä ja odottaa, yrittäen olla nukahtamatta tai kuolematta ennen kuin oikea aika koittaa. Joten minä odotan."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
-msgstr "Thron Pohdiskelee Sotaa"
+msgstr "Thron pohdiskelee sotaa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
-msgstr "Thorn pyörittää päätään…"
+msgstr "Thron pudistaa päätään…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
@@ -404,7 +405,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "Heidän kertomat tarinat meidänlaisten teoista ovat surullista kuultavaa. Olen viettänyt monia öitä saamatta unta, levottomana ja väsyneempänä kuin mitä olisin koskaan voinut kuvitella. Sen lisäksi aina kun suljen silmäni, näen isäni rakentaman linnan, liekeissä. Valtaistuin Puiden Keskellä, meidän suvun yhtenäisyyden ja rauhan symbolista tuli kiila, joka kiilaa meidät erilleen toisistamme."
+msgstr "Heidän kertomansa tarinat veljiemme teoista ovat surullista kuultavaa. Olen valvonut levottomana lukemattomia öitä, vasyneempänä kuin kuvitella saattaa. Kuitenkin aina silmäni sulkiessani näen isäni rakentaman linnakkeen tuhoutuvan liekeissä. Valtaistuin puiden keskellä, sukumme yhtenäisyyden ja rauhan symboli, on ajamassa meidät erilleen."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:202
@@ -423,11 +424,11 @@ msgstr "Tänään metsästäjäni toivat eteeni miehen, naisen ja pienen lapsen,
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr "Nousta vasten ketä tahansa, joka uhkaa meidän olemassaoloa, vaikka se olisikin omiesi verta ja mieltä?"
+msgstr "Pitäisikö nousta ketä tahansa olemassaoloamme uhkaavaa vastaan, vaikka hän olisikin samaa lihaa ja verta?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
-msgstr "Thron Pohtii Tulevaisuutta"
+msgstr "Thron pohtii tulevaisuutta"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:214
@@ -437,7 +438,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Boldreth näyttää yhä levottomammalta päivien kuluessa. Joukkojemme taisteluhenki murenee vähä vähältä kylmän kauden lähestyessä; asummehan yhä vaivaisissa majoissa ja kasarmeissa. En uskonut meidän viipyvän täällä erämaassa näin kauan - mutta enhän myöskään uskonut veljieni ryhtyvän tähän järjettömään taistoon tai jatkavan sitä näin pitkään."
+msgstr "Boldreth näyttää päivä päivältä levottomammalta. Joukkojemme taisteluhenki murenee vähä vähältä talven lähestyessä; asummehan yhä vaivaisissa majoissa ja kasarmeissa. En aikonut viipyä täällä erämaassa näin pitkään – mutta enhän myöskään uskonut veljieni jatkavan tätä järjetöntä taistelua näin pitkään."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -461,7 +462,7 @@ msgstr "Vanha mies kertoo…"
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr "Terve, päällikkö. Olen Khantrukh ja olen nähnyt monen talven väistyvän. Jos sallit, autan neuvoineni sinua johtamaan heimoamme läpi näiden synkkien päivien."
+msgstr "Tervehdys, päällikkö. Olen Khantrukh ja olen nähnyt monen talven väistyvän. Jos sallit, autan neuvoineni sinua johtamaan heimomme läpi näiden synkkien aikojen."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:228
@@ -469,7 +470,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr "VAin jumalat tietävät kuinka kkauan meidän täytyy pysyä täällä piilossa. Soturit toivovat, että joku päivä marssisimme takaisin kunniakkaasti, mutta epäilen vahvasti ettei se tule tapahtumaan lähiaikoina. Ja päiväthän ovat vielä lyhyitä ja kylmiä…"
+msgstr "Jumalat yksin tietävät kuinka kauan meidän on vielä piileskeltävä täällä. Soturit ovat toiveikkaita, että kunniakkaan paluumme aika koittaa päivänä minä hyvänsä, mutta epäilen vahvasti ettei se tule tapahtumaan ihan äkkiä. Päivätkin ovat vielä kylmiä ja lyhyitä..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -493,7 +494,7 @@ msgstr "Khantrukh muistuttaa…"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr "Ymmärrän että olet jo rakentanut kivilouhoksen ja kaksi puunhakkaajan mökkiä. Se on hyvä alku, jos haluamme olla täällä pidempäänkin."
+msgstr "Näen että olet jo rakentanut kivilouhoksen ja kaksi puunhakkaajan mökkiä. Se on hyvä alku, jos haluamme viipyä täällä pidempäänkin."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -501,14 +502,14 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr "Mutta älä koskaan unohda – nämä metsät ovat meidän perintömme, jonka esiisämme antoivat meille hoidettavaksi. Meidän täytyy aina kunnioittaa ja huolehtia niistä heidän puolesta. Se mitä otamme, meidän on myös annettava se takaisin."
+msgstr "Mutta älä koskaan unohda – nämä metsät ovat meidän perintömme esi-isiltämme. Meidän täytyy aina kunnioittaa niitä ja huolehtia niistä. Se mitä otamme, on myös annettava takaisin."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "Joten korvataksemme puut jotka me kaadamme, miedän pitää rakentaa joitakin metsänvartijan majoija, etupäässä puunhakkaajan mökkien vierelle."
+msgstr "Korvataksemme kaatamamme puut, meidän tulisi rakentaa muutama metsänvartijan maja, etupäässä puunhakkaajan mökkien lähettyville."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
@@ -525,14 +526,14 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr "Toisen unettoman yön aikana, menin ylös kukkulalle ja katsoin kohti pohjoista. Tulet vielä paloivat, tyydyttäen heidän himoaan isäni perinnön yllä."
+msgstr "Menin ylös kukkulalle jälleen yhden unettoman yön aikana ja katsoin kohti pohjoista. Tuli paloi edelleen, ahmien isäni perintöä."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr "Ne ovat jatkuva muistutus siitä miksi meidän täytyy täällä piileksiä... ja miksi meidän täytyy lopulta palata!"
+msgstr "Se on jatkuva muistutus siitä miksi piileskelemme täällä... ja miksi meidän täytyy lopulta palata!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
@@ -544,14 +545,14 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr "Taas kerran, nousin isäni haudalle, pyhään lehtoon, Kal’mavrathin valtavan huipun juurelle. Minä vain seisoin siellä, enkä tuntenut kuinka aika kului ja kylmä sade valui alas pimentyneeltä taivaalta…"
+msgstr "Taas kerran nousin isäni haudalle pyhään lehtoon, Kal’mavrathin valtavan tornin juurelle. Siellä minä vain seisoin, huomaamatta ajankulua ja tuntematta kylmien pisaroiden putoilua synkältä taivaalta..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr "Jotenkin se tuntui kuin olisin jättämässä jäähyväisiä. Ensimmäistä kertaa, ihmettelin mitä tulevaisuus saattaisi minulle tuoda…"
+msgstr "Jotenkin se tuntui kuin olisin ollut jättämässä jäähyväisiä. Ensimmäistä kertaa pohdin mitä tulevaisuudella voisi olla minulle tarjottavana…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
@@ -566,7 +567,7 @@ msgstr "Thron sanoo huomaavaisesti…"
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr "Joku aika sitten, Boldreth tuli luokseni. Hänen neuvonta oli siirtyä johonkin paikkaan lähemmäksi kotia – sopiaksemme heti, kun veljieni sotajoukot näyttäisivät horjuvan."
+msgstr "Jonkin aikaa sitten Boldreth saapui luokseni. Hän neuvoi meitä siirtymään lähemmäs kotia – iskemään heti kun veljiemme sotajoukot vähänkin herpaantuisivat."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -575,7 +576,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr "Mutta kun katsoin yli metsien, saatoin silti nähdä mustaa savua taivaalla. Tiedän – se on vielä liian aikaista ja mitä hän toivoo ei tule tapahtumaan lähiaikoina. Hän voi silti olla oikeassa, mutta pelkään verilöylyä, joka palaisi liian nopeasti molempien puolien aiheuttamana…"
+msgstr "Mutta saatoin silti nähdä mustan savun nousevan taivaalle katsoessani metsien yli. Tiedän – on vielä liian aikaista, ja hänen toiveensa ei tule toteutumaan lähiaikoina. Silti hän saattaa olla oikeassa, mutta pelkään verilöylyä jonka liian varhainen paluumme saisi aikaan."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
@@ -612,7 +613,7 @@ msgstr "Uskollinen kumppanisi"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
-msgstr "Urhollinen Boldreth astuu puolellesi..."
+msgstr "Urhollinen Boldreth astuu vierellesi..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
@@ -621,7 +622,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr "Eli haluat meidän valmistautuvan jäämään näihin metsiin pidemmäksi aikaa, Thron? Ymmärrän viisauden jäämisessä, mutta silti sydämeni halajaa kunniakasta paluuta Al’thunraniin. Olemme liian pitkään odottaneet, kun samaan aikaa veljemme ovat taistelleet taistelutantereella ja meidän kirveemme sekä miekkamme ovat alkaneet ruostua."
+msgstr "Eli haluat siis että valmistaudumme jäämään näihin metsiin pidemmäksi aikaa, Thron? Ymmärrän että tänne jääminen saattaisi olla viisasta, mutta silti sydämeni halajaa kunniakasta paluuta Al’thunraniin. Olemme odottaneet liian pitkään, kun samaan aikaa veljemme ovat taistelleet meidän kirveidemme ja miekkojemme ruostuessa."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
@@ -633,7 +634,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr "Pyydän anteeksi, päällikköni, mutta minun on puhuttava kanssasi vakavasta ongelmasta. Kivet leirimme lähistöllä pienenevät nopeasti työläistemme hakkujen kuluttamina, ja ei kestä kauaakaan ennen kuin ne ovat loppuneet."
+msgstr "Pyydän anteeksi, päällikköni, mutta minun on puhuttava kanssasi vakavasta ongelmasta. Kivet leirimme lähistöllä vähenevät nopeasti työläistemme hakkujen kuluttamina, ja ei kestä kauankaan kunnes ne ovat loppuneet."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"

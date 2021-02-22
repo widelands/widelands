@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-01-15 09:10+0000\n"
-"PO-Revision-Date: 2021-02-01 15:02+0000\n"
+"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"PO-Revision-Date: 2021-02-16 04:58+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -275,7 +275,7 @@ msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr "Toto vybavení je vyráběho v kovárně z uhlí, železa a někdy zlata. Více se o tom dozvíš v druhém scénáři barbarské kampaně."
+msgstr "Toto vybavení je vyráběno v kovárně z uhlí, železa a někdy zlata. Více se o tom dozvíš v druhém scénáři barbarské kampaně."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
@@ -426,7 +426,7 @@ msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Když rozšiřuješ své území v neobsazené oblasi, můžeš nastavit preferenci vojenských budov na slabé vojáky. Když plánuješ útočit, pošli na své hranice cvičené hrdiny. Budovy, které dobudeš, vždy preferují hrdiny, pokud preferenci nezměníš."
+msgstr "Když rozšiřuješ své území v neobsazené oblasti, můžeš nastavit preferenci vojenských budov na slabé vojáky. Když plánuješ útočit, pošli na své hranice cvičené hrdiny. Budovy, které dobudeš, vždy preferují hrdiny, pokud preferenci nezměníš."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Soldier capacity"
@@ -443,7 +443,7 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr "Ještě je tu jeden způsob, jak řídit vojenský potenciál budovy, a to velikost posádky, která budovu obývá. Stačí kliknout na tlačítka šipkek pro zvýšení, nebo snížení požadovaného počtu vojáků. Každá budova má svou maximální kapacitu. V případě hradby je to například pět."
+msgstr "Ještě je tu jeden způsob, jak řídit vojenský potenciál budovy, a to velikost posádky, která budovu obývá. Stačí kliknout na tlačítka šipek pro zvýšení nebo snížení požadovaného počtu vojáků. Každá budova má svou maximální kapacitu. V případě hradby je to například pět."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
@@ -455,7 +455,7 @@ msgstr "Pokud chceš poslat některého vojáka pryč, stačí na něj kliknout.
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr "Dovol mi také vysvětlit, co znamenají čísla ve statistikách. Řetězec může obsahovat až tři údaje, t.j. ‘1 (+5) vojáků (+2)’."
+msgstr "Pojďme si také vysvětlit, co znamenají čísla ve statistikách. Řetězec může obsahovat až tři údaje, např. \"1 (+5) voják (+2)\"."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
@@ -469,7 +469,7 @@ msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr "Druhé číslo říká, kolik dalších vojáků budovu obývá, ale jsou v současné chvíli mimo budovu. Těch pět vojáků možná útoči na nepřítele. Vrátí se, až dosáhnou úspěchu."
+msgstr "Druhé číslo říká, kolik dalších vojáků budovu obývá, ale jsou v současné chvíli mimo budovu. Těch pět vojáků možná útočí na nepřítele. Vrátí se, až dosáhnou úspěchu."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
@@ -520,7 +520,7 @@ msgstr "Rozeber ji."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Při této příležitost se také můžeš lépe seznámi s dalšími volbami: nastavení hrdinů/bačkor a kapacitou."
+msgstr "Při této příležitost se také můžeš lépe seznámit s dalšími volbami: nastavení hrdinů/bačkor a kapacitou."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
@@ -576,7 +576,7 @@ msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr "Tví vojáci pevnost po dobu výstavby opustí. To způsobí, že pevnost ztratí svůj vojenstvý význam, jak bylo popisováno výše."
+msgstr "Tví vojáci pevnost po dobu výstavby opustí. To způsobí, že pevnost ztratí svůj vojenský význam, jak bylo popisováno výše."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
 msgid "Enhance your fortress to a citadel now."

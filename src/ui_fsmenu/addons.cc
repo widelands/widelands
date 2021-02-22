@@ -35,7 +35,6 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_basic/progressbar.h"
 #include "ui_fsmenu/addons_packager.h"
 #include "ui_fsmenu/login_box.h"
 #include "wlapplication.h"
@@ -53,61 +52,43 @@ constexpr const char* const kDocumentationURL = "https://www.widelands.org/docum
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
-struct ProgressIndicatorWindow : public UI::Window {
-	ProgressIndicatorWindow(AddOnsCtrl* parent, const std::string& title)
-	   : UI::Window(parent->get_parent(),
-	                UI::WindowStyle::kFsMenu,
-	                "progress",
-	                0,
-	                0,
-	                parent->get_inner_w() - 2 * kRowButtonSize,
-	                2 * kRowButtonSize,
-	                title),
-	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
-	     txt1_(&box_,
-	           UI::PanelStyle::kFsMenu,
-	           UI::FontStyle::kFsMenuInfoPanelHeading,
-	           "",
-	           UI::Align::kCenter),
-	     txt2_(&box_,
-	           UI::PanelStyle::kFsMenu,
-	           UI::FontStyle::kFsMenuInfoPanelParagraph,
-	           "",
-	           UI::Align::kLeft),
-	     progress_(&box_,
-	               UI::PanelStyle::kFsMenu,
-	               0,
-	               0,
-	               get_w(),
-	               kRowButtonSize,
-	               UI::ProgressBar::Horizontal) {
+ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
+   : UI::Window(parent,
+                UI::WindowStyle::kFsMenu,
+                "progress",
+                0,
+                0,
+                parent->get_inner_w() - 2 * kRowButtonSize,
+                2 * kRowButtonSize,
+                title),
+     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
+     txt1_(&box_,
+           UI::PanelStyle::kFsMenu,
+           UI::FontStyle::kFsMenuInfoPanelHeading,
+           "",
+           UI::Align::kCenter),
+     txt2_(&box_,
+           UI::PanelStyle::kFsMenu,
+           UI::FontStyle::kFsMenuInfoPanelParagraph,
+           "",
+           UI::Align::kLeft),
+     progress_(&box_,
+               UI::PanelStyle::kFsMenu,
+               0,
+               0,
+               get_w(),
+               kRowButtonSize,
+               UI::ProgressBar::Horizontal) {
 
-		box_.add(&txt1_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kRowButtonSpacing);
-		box_.add(&txt2_, UI::Box::Resizing::kFullSize);
-		box_.add_space(2 * kRowButtonSpacing);
-		box_.add(&progress_, UI::Box::Resizing::kFullSize);
+	box_.add(&txt1_, UI::Box::Resizing::kFullSize);
+	box_.add_space(kRowButtonSpacing);
+	box_.add(&txt2_, UI::Box::Resizing::kFullSize);
+	box_.add_space(2 * kRowButtonSpacing);
+	box_.add(&progress_, UI::Box::Resizing::kFullSize);
 
-		set_center_panel(&box_);
-		center_to_parent();
-	}
-	~ProgressIndicatorWindow() override = default;
-
-	void set_message_1(const std::string& msg) {
-		txt1_.set_text(msg);
-	}
-	void set_message_2(const std::string& msg) {
-		txt2_.set_text(msg);
-	}
-	UI::ProgressBar& progressbar() {
-		return progress_;
-	}
-
-private:
-	UI::Box box_;
-	UI::Textarea txt1_, txt2_;
-	UI::ProgressBar progress_;
-};
+	set_center_panel(&box_);
+	center_to_parent();
+}
 
 AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
    : UI::UniqueWindow(&fsmm,
@@ -471,7 +452,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 					      .str();
 				}
 			}
-			UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
+			UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
 			                   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -534,8 +515,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 
-	launch_packager_.sigclicked.connect([this, &fsmm]() {
-		AddOnsPackager a(fsmm, *this);
+	launch_packager_.sigclicked.connect([this]() {
+		AddOnsPackager a(fsmm_, *this);
 		a.run<int>();
 
 		// Perhaps add-ons were created or deleted
@@ -591,7 +572,6 @@ AddOnsCtrl::~AddOnsCtrl() {
 	write_config();
 }
 
-
 void AddOnsCtrl::login_button_clicked() {
 	if (username_.empty()) {
 		UI::UniqueWindow::Registry r;
@@ -634,16 +614,17 @@ void AddOnsCtrl::set_login(const std::string& username, const std::string& passw
 			log_err("set_login (''): server error (%s)", e.what());
 			if (show_error) {
 				UI::WLMessageBox m(
-					   get_parent(), UI::WindowStyle::kFsMenu, _("Server Error"),
-					   _("Unable to connect to the server."), UI::WLMessageBox::MBoxType::kOk);
+					   &fsmm_, UI::WindowStyle::kFsMenu, _("Server Error"),
+					   (boost::format(_("Unable to connect to the server.\nError message:\n%s")) % e.what()).str(),
+					   UI::WLMessageBox::MBoxType::kOk);
 					m.run<UI::Panel::Returncodes>();
 			}
 		} else {
 			log_err("set_login as '%s': access denied (%s)", username.c_str(), e.what());
 			if (show_error) {
 				UI::WLMessageBox m(
-				   get_parent(), UI::WindowStyle::kFsMenu, _("Wrong Password"),
-				   _("The specified username or password is incorrect."), UI::WLMessageBox::MBoxType::kOk);
+				   &fsmm_, UI::WindowStyle::kFsMenu, _("Wrong Password"),
+				   _("The entered username or password is incorrect."), UI::WLMessageBox::MBoxType::kOk);
 				m.run<UI::Panel::Returncodes>();
 			}
 			set_login("", "", show_error);
@@ -1058,7 +1039,7 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 }
 
 inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
-	UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Note"),
+	UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Note"),
 	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
 	                                    "otherwise you may experience graphical glitches.")) %
 	                    name.c_str())
@@ -1105,7 +1086,7 @@ static void install_translation(const std::string& temp_locale_path,
 
 // TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's requirements
 void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool only_translations) {
-	ProgressIndicatorWindow w(this, remote.descname());
+	ProgressIndicatorWindow w(&fsmm_, remote.descname());
 	w.set_message_1((boost::format(_("Downloading ‘%s’…")) % remote.descname()).str());
 
 	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + remote.internal_name + kTempFileExtension;
@@ -1128,7 +1109,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 			log_err("install addon %s: %s", remote.internal_name.c_str(), e.what());
 			w.set_visible(false);
 			UI::WLMessageBox m(
-			   get_parent(), UI::WindowStyle::kFsMenu, _("Error"),
+			   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(
 				   _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
 				     "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
@@ -1188,7 +1169,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		log_err("install translations for %s: %s", remote.internal_name.c_str(), e.what());
 		w.set_visible(false);
 		UI::WLMessageBox m(
-		   get_parent(), UI::WindowStyle::kFsMenu, _("Error"),
+		   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
 		       _("The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
 		         "the translations will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
@@ -1207,7 +1188,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
-		   ctrl, UI::WindowStyle::kFsMenu, _("Uninstall"),
+		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   (boost::format(local ?
 		                     _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
@@ -1304,7 +1285,7 @@ step1:
 		}
 		if (!found) {
 			UI::WLMessageBox w(
-			   this, UI::WindowStyle::kFsMenu, _("Error"),
+			   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The required add-on ‘%s’ could not be found on the server.")) %
 			    addon_to_install)
 			      .str(),
@@ -2032,7 +2013,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
-			   ctrl, UI::WindowStyle::kFsMenu, _("Install"),
+			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
 			   (boost::format(_("Are you certain that you want to install this add-on?\n\n"
 			                    "%1$s\n"
 			                    "by %2$s\n"
@@ -2055,7 +2036,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
-			   ctrl, UI::WindowStyle::kFsMenu, _("Upgrade"),
+			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
 			   (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
 			                    "%1$s\n"
 			                    "by %2$s\n"

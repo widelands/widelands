@@ -13,7 +13,7 @@ wl.Descriptions():new_terrain_type{
    humidity = 800,
    fertility = 100,
 
-   enhancement = "taiga"
+   enhancement = { amazons = "taiga" }
 }
 
 pop_textdomain()
