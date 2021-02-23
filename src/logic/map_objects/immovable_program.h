@@ -171,7 +171,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	                 const std::vector<std::string>& lines,
 	                 ImmovableDescr& immovable);
 
-	~ImmovableProgram() {
+	~ImmovableProgram() override {
 	}
 
 	size_t size() const {
