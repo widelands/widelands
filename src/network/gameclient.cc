@@ -1218,11 +1218,7 @@ void GameClient::disconnect(const std::string& reason,
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
 	if (d->modal) {
-		if (d->modal->is_modal()) {
-			d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
-		} else {
-			d->modal->die();
-		}
+		d->modal->die();
 	}
 	d->modal = nullptr;
 }
