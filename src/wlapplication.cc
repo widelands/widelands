@@ -587,18 +587,23 @@ void WLApplication::run() {
 
 					Section& player_section = profile.get_safe_section(key);
 					settings.set_player_team(p, player_section.get_safe_natural("team"));
-					settings.set_player_color(p, RGBColor(player_section.get_safe_int("color")));
+					settings.set_player_color(p, player_section.has_val("playercolor") ? RGBColor(player_section.get_safe_int("playercolor")) : kPlayerColors[p]);
 
 					std::string tribe = player_section.get_safe_string("tribe");
 					settings.set_player_tribe(p, tribe, tribe.empty());
 					tribe = settings.settings().players[p].tribe;
 
 					const std::string& init_script_name = player_section.get_safe_string("init");
+					const std::string addon = (init_script_name.size() > kAddOnExtension.size() && init_script_name.compare(
+						init_script_name.size() - kAddOnExtension.size(), kAddOnExtension.size(), kAddOnExtension) == 0)
+						? (kAddOnDir + FileSystem::file_separator() + init_script_name) : "";
 					bool found_init = false;
 					const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
 					for (unsigned i = 0; i < t.initializations.size(); ++i) {
-						if (init_script_name ==
-						    FileSystem::fs_filename(t.initializations[i].script.c_str())) {
+						if (addon.empty() ?
+						    init_script_name ==
+						    FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+						    t.initializations[i].script.compare(0, addon.size(), addon) == 0) {
 							settings.set_player_init(p, i);
 							found_init = true;
 							break;
@@ -1252,16 +1257,16 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("replay");
 	}
 
-	if (commandline_.count("new_from_template")) {
+	if (commandline_.count("new_game_from_template")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("new_from_template can not be combined with other actions");
+			throw wexception("new_game_from_template can not be combined with other actions");
 		}
-		filename_ = commandline_["new_from_template"];
+		filename_ = commandline_["new_game_from_template"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --new_from_template");
+			throw wexception("empty value of command line parameter --new_game_from_template");
 		}
 		game_type_ = GameType::kFromTemplate;
-		commandline_.erase("new_from_template");
+		commandline_.erase("new_game_from_template");
 	}
 
 	if (commandline_.count("loadgame")) {

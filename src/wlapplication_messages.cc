@@ -113,9 +113,10 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      depending on FPS. Useful in conjunction with\n"
 	               "                      --ai_training.")
 	          << endl
-	          << _(" --new_from_template=FILENAME\n"
+	          << _(" --new_game_from_template=FILENAME\n"
 	               "                      Directly create a new singleplayer game\n"
-	               "                      from the given template file.")
+	               "                      configured in the given file. An example can\n"
+	               "                      be found in `data/templates/new_game_template`.")
 	          << endl
 	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"

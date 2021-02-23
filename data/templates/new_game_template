@@ -1,18 +1,28 @@
+# Section `global`: General game settings.
 [global]
+# The player number of the interactive player.
 interactive_player="1"
+# The win condition script. The path must be relative to the `data` directory or the Widelands home directory.
 win_condition="scripting/win_conditions/endless_game.lua"
+# Whether peaceful mode and custom starting positions mode are enabled.
 peaceful="false"
 custom_starting_positions="false"
+# The map file to use, relative to the `data` directory or the Widelands home directory.
 map="maps/Lake_of_Tranquility.wmf"
 
+# Section `player_i`: Settings for the i-th player.
 [player_1]
+# Player tribe (empty means random tribe).
 tribe=
+# Tne filename of the starting condition script (without path), or the internal name of the add-on defining the starting condition.
 init="headquarters.lua"
+# Team number (0 means no team).
 team="0"
-color="0x161BA7"
+# The hex value of the player's player color (optional).
+playercolor="0x161BA7"
 
 [player_2]
 tribe=
 init="headquarters.lua"
 team="0"
-color="0xF3E928"
+playercolor="0xF3E928"
