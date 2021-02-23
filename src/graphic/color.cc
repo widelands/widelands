@@ -27,6 +27,12 @@ RGBColor::RGBColor() : RGBColor(0, 0, 0) {
 RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) : r(R), g(G), b(B) {
 }
 
+RGBColor::RGBColor(const uint32_t hex)
+   : r((hex & 0xff0000) >> 16),
+     g((hex & 0xff00) >> 8),
+     b((hex & 0xff)) {
+}
+
 std::string RGBColor::hex_value() const {
 	return (boost::format("%02x%02x%02x") % int(r) % int(g) % int(b)).str();
 }

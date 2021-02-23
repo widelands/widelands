@@ -562,6 +562,79 @@ void WLApplication::run() {
 			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(nullptr, game, e.what());
 		}
+	} else if (game_type_ == GameType::kFromTemplate) {
+		Widelands::Game game;
+		SinglePlayerGameSettingsProvider settings;
+		bool allow_emergency_save = false;
+		try {
+			Profile profile(filename_.c_str());
+			Section& section = profile.get_safe_section("global");
+			{
+				const std::string mapfile = section.get_safe_string("map");
+				Widelands::Map map;
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfile);
+				if (!ml) {
+					throw wexception("Invalid map file '%s'", mapfile.c_str());
+				}
+				ml->preload_map(true, nullptr);
+				const int nr_players = map.get_nrplayers();
+				settings.set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
+				settings.set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(), nr_players, false);
+				for (int p = 0; p < nr_players; ++p) {
+					std::string key = "player_";
+					key += std::to_string(p + 1);
+
+					Section& player_section = profile.get_safe_section(key);
+					settings.set_player_team(p, player_section.get_safe_natural("team"));
+					settings.set_player_color(p, RGBColor(player_section.get_safe_int("color")));
+
+					std::string tribe = player_section.get_safe_string("tribe");
+					settings.set_player_tribe(p, tribe, tribe.empty());
+					tribe = settings.settings().players[p].tribe;
+
+					const std::string& init_script_name = player_section.get_safe_string("init");
+					bool found_init = false;
+					const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
+					for (unsigned i = 0; i < t.initializations.size(); ++i) {
+						if (init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str())) {
+							settings.set_player_init(p, i);
+							found_init = true;
+							break;
+						}
+					}
+					if (!found_init) {
+						throw wexception("Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
+					}
+				}
+			}
+
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (settings.has_players_tribe()) {
+				tipstexts.push_back(settings.get_players_tribe());
+			}
+			game.create_loader_ui(
+			   tipstexts, true, settings.settings().map_theme, settings.settings().map_background);
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+			const int playernumber = section.get_safe_positive("interactive_player");
+			settings.set_win_condition_script(section.get_safe_string("win_condition"));
+			settings.set_peaceful_mode(section.get_safe_bool("peaceful"));
+			settings.set_custom_starting_positions(section.get_safe_bool("custom_starting_positions"));
+			game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
+
+			SinglePlayerGameController ctrl(game, true, playernumber);
+			game.set_game_controller(&ctrl);
+			game.init_newgame(settings.settings());
+			allow_emergency_save = true;
+			game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+		} catch (const Widelands::GameDataError& e) {
+			log_err("Gane not started: Game data error: %s\n", e.what());
+		} catch (const std::exception& e) {
+			log_err("Fatal exception: %s\n", e.what());
+			if (allow_emergency_save) {
+				emergency_save(nullptr, game, e.what());
+			}
+		}
 	} else {
 		g_sh->change_music("intro");
 
@@ -1174,6 +1247,18 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		game_type_ = GameType::kReplay;
 		commandline_.erase("replay");
+	}
+
+	if (commandline_.count("new_from_template")) {
+		if (game_type_ != GameType::kNone) {
+			throw wexception("new_from_template can not be combined with other actions");
+		}
+		filename_ = commandline_["new_from_template"];
+		if (filename_.empty()) {
+			throw wexception("empty value of command line parameter --new_from_template");
+		}
+		game_type_ = GameType::kFromTemplate;
+		commandline_.erase("new_from_template");
 	}
 
 	if (commandline_.count("loadgame")) {

@@ -221,7 +221,7 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
-	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame };
+	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame, kFromTemplate };
 	GameType game_type_;
 
 	/// True if left and right mouse button should be swapped
