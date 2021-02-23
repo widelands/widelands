@@ -604,7 +604,7 @@ void WLApplication::run() {
 						addon = kAddOnDir;
 						addon += FileSystem::file_separator();
 						addon += init_script_name;
-				    }
+					}
 					bool found_init = false;
 					const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
 					for (unsigned i = 0; i < t.initializations.size(); ++i) {
