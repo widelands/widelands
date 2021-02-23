@@ -10,8 +10,3 @@ name=_"Smugglers"
 author="Nasenbaer,SirVer"
 descr=_"Your well established smuggling routes suddenly got busy: two other tribes have appeared and now a rivalry among smugglers has started. Which team will be the first to smuggle a certain number of wares?"
 tags="official,balanced"
-
-[teams00]
-team1=0,1
-team2=2,3
-#  blue, red vs. yellow, green
