@@ -28,8 +28,8 @@
 #include "logic/filesystem_constants.h"
 #include "logic/mutable_addon.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/progressbar.h"
 #include "ui_basic/text_prompt.h"
-#include "ui_fsmenu/addons.h"
 #include "wlapplication.h"
 
 namespace FsMenu {
@@ -107,7 +107,10 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
      addons_(&box_left_, 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
-     update_in_progress_(false) {
+     update_in_progress_(false),
+     progress_window_(this, _("Writing Add-Ons…")) {
+	progress_window_.set_visible(false);
+	progress_window_.set_message_1(_("Please be patient while your changes are written."));
 
 	box_left_buttons_.add_inf_space();
 	box_left_buttons_.add(&addon_new_);
@@ -236,6 +239,16 @@ void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 		addons_.add(pair.first, pair.first,
 		            g_image_cache->get(AddOns::kAddOnCategories.at(pair.second->get_category()).icon),
 		            pair.first == select);
+		pair.second->set_callbacks(
+		   [this](const size_t i) {
+			   progress_window_.progressbar().set_state(0);
+			   progress_window_.progressbar().set_total(i);
+		   },
+		   [this](const size_t i) {
+			   progress_window_.progressbar().set_state(progress_window_.progressbar().get_state() +
+			                                            i);
+			   do_redraw_now();
+		   });
 	}
 	addon_selected();
 }
@@ -463,8 +476,13 @@ void AddOnsPackager::clicked_write_changes() {
 	UI::WLMessageBox m(&main_menu_, UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg,
 	                   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 	if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+		progress_window_.center_to_parent();
+		progress_window_.move_to_top();
+		progress_window_.set_visible(true);
 		std::set<std::string> errors;
 		for (const auto& pair : addons_with_changes_) {
+			progress_window_.set_message_2(pair.first);
+			do_redraw_now();
 			if (pair.second) {
 				// Delete existing add-on
 				const std::string directory = kAddOnDir + FileSystem::file_separator() + pair.first;
@@ -478,6 +496,7 @@ void AddOnsPackager::clicked_write_changes() {
 				}
 			}
 		}
+		progress_window_.set_message_2("");
 
 		// Clear list of changes, and re-insert failed add-ons
 		addons_with_changes_.clear();
@@ -491,6 +510,8 @@ void AddOnsPackager::clicked_write_changes() {
 
 		// Update the global catalogue
 		WLApplication::initialize_g_addons();
+
+		progress_window_.set_visible(false);
 	}
 }
 
@@ -515,10 +536,6 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 
 	try {
-		UI::WLMessageBox msg(&main_menu_, UI::WindowStyle::kFsMenu, _("Write Addons"),
-		                     _("Please be patient while your changes are written."),
-		                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-		do_redraw_now();
 		return m->write_to_disk();
 	} catch (const WLWarning& e) {
 		main_menu_.show_messagebox(
