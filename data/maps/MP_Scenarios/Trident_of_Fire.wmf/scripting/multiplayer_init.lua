@@ -18,52 +18,23 @@ map = game.map
 include "map:scripting/map_editing.lua"
 include "map:scripting/initial_conditions.lua"
 
+-- Identify the players which have been closed and must be replaced by AI players.
+-- 'map.player_slots' always lists all 8 player slots, and its 'tribe_name' property tells us whether the slot is used or closed.
+-- 'game.players' contains only the non-closed players. The indexing may therefore be off.
+local nr_closed_slots = (#map.player_slots - #game.players)
 hp1 = 0
 hp2 = 0
 hp3 = 0
-
---Identify the players which have been closed and must be replaced by AI players
-if map.player_slots[1].tribe_name == map.player_slots[4].tribe_name then
-   hp1 = 1
-   if map.player_slots[2].tribe_name == map.player_slots[5].tribe_name then
-      hp2 = 2
-      if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
-         hp3 = 3
-      end
-   end
-else
-   if map.player_slots[2].tribe_name == map.player_slots[5].tribe_name then
-      hp2 = 1
-      if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
-         hp3 = 2
-      end
-   else
-      if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
-         hp3 = 1
-      end
-   end
-end
-
-if hp1 == 0 then
-   AIp1 = math.max(hp2,hp3) + 1
-else
-   AIp1 = 0
-end
-if hp2 == 0 then
-   AIp2 = math.max(hp1,hp3,AIp1) + 1
-else
-   AIp2 = 0
-end
-if hp3 == 0 then
-   AIp3 = 3
-else
-   AIp3 = 0
-end
-AIp4 = 4
-AIp5 = 5
-AIp6 = 6
-
-
+AIp1 = 0
+AIp2 = 0
+AIp3 = 0
+AIp4 = 4 - nr_closed_slots
+AIp5 = 5 - nr_closed_slots
+AIp6 = 6 - nr_closed_slots
+local index = 0
+if map.player_slots[1].tribe_name == "" then AIp1 = AIp4 else index = index + 1; hp1 = index end
+if map.player_slots[2].tribe_name == "" then AIp2 = AIp5 else index = index + 1; hp2 = index end
+if map.player_slots[3].tribe_name == "" then AIp3 = AIp6 else index = index + 1; hp3 = index end
 
 -- field coordinates human players
 hp1_f_hq = map:get_field(116,37)
