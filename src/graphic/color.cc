@@ -28,9 +28,7 @@ RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) : r(R), g(
 }
 
 RGBColor::RGBColor(const uint32_t hex)
-   : r((hex & 0xff0000) >> 16),
-     g((hex & 0xff00) >> 8),
-     b((hex & 0xff)) {
+   : r((hex & 0xff0000) >> 16), g((hex & 0xff00) >> 8), b((hex & 0xff)) {
 }
 
 std::string RGBColor::hex_value() const {

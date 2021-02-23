@@ -115,7 +115,9 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --new_from_template=FILENAME\n"
 	               "                      Directly create a new singleplayer game\n"
-	               "                      from the given template file.") << endl << endl
+	               "                      from the given template file.")
+	          << endl
+	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 	               "                      map.")
 	          << endl

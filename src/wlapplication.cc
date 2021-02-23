@@ -579,7 +579,8 @@ void WLApplication::run() {
 				ml->preload_map(true, nullptr);
 				const int nr_players = map.get_nrplayers();
 				settings.set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
-				settings.set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(), nr_players, false);
+				settings.set_map(map.get_name(), mapfile, map.get_background_theme(),
+				                 map.get_background(), nr_players, false);
 				for (int p = 0; p < nr_players; ++p) {
 					std::string key = "player_";
 					key += std::to_string(p + 1);
@@ -596,14 +597,16 @@ void WLApplication::run() {
 					bool found_init = false;
 					const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
 					for (unsigned i = 0; i < t.initializations.size(); ++i) {
-						if (init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str())) {
+						if (init_script_name ==
+						    FileSystem::fs_filename(t.initializations[i].script.c_str())) {
 							settings.set_player_init(p, i);
 							found_init = true;
 							break;
 						}
 					}
 					if (!found_init) {
-						throw wexception("Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
+						throw wexception("Invalid starting condition '%s' for player %d",
+						                 init_script_name.c_str(), p + 1);
 					}
 				}
 			}
