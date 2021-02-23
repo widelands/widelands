@@ -597,12 +597,14 @@ void WLApplication::run() {
 					tribe = settings.settings().players[p].tribe;
 
 					const std::string& init_script_name = player_section.get_safe_string("init");
-					const std::string addon =
-					   (init_script_name.size() > kAddOnExtension.size() &&
+					std::string addon;
+					if (init_script_name.size() > kAddOnExtension.size() &&
 					    init_script_name.compare(init_script_name.size() - kAddOnExtension.size(),
-					                             kAddOnExtension.size(), kAddOnExtension) == 0) ?
-					      (kAddOnDir + FileSystem::file_separator() + init_script_name) :
-					      "";
+					                             kAddOnExtension.size(), kAddOnExtension) == 0) {
+						addon = kAddOnDir;
+						addon += FileSystem::file_separator();
+						addon += init_script_name;
+				    }
 					bool found_init = false;
 					const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
 					for (unsigned i = 0; i < t.initializations.size(); ++i) {
