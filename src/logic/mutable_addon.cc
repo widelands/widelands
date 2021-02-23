@@ -158,13 +158,13 @@ std::string MutableAddOn::parse_requirements() {
 	bool dir_exists = g_fs->file_exists(directory);
 	const std::string profile_path = directory + FileSystem::file_separator() + kAddOnMainFile;
 
-	std::string requires;
+	std::string requirements;
 	if (dir_exists) {
 		Profile p;
 		p.read(profile_path.c_str());
-		requires = p.get_safe_section("global").get_safe_string("requires");
+		requirements = p.get_safe_section("global").get_safe_string("requires");
 	}
-	return requires;
+	return requirements;
 }
 
 bool MutableAddOn::write_to_disk() {
@@ -172,7 +172,7 @@ bool MutableAddOn::write_to_disk() {
 	callback_progress_(0);
 
 	// Step 1: Gather the requirements of all contained maps
-	std::string requires = parse_requirements();
+	const std::string requirements = parse_requirements();
 
 	// Step 2: Create the addons directory
 	g_fs->ensure_directory_exists(directory_);
@@ -186,7 +186,7 @@ bool MutableAddOn::write_to_disk() {
 	s.set_translated_string("author", author_);
 	s.set_string("version", version_);
 	s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
-	s.set_string("requires", requires);
+	s.set_string("requires", requirements);
 	s.set_string("min_wl_version", min_wl_version_);
 	s.set_string("max_wl_version", max_wl_version_);
 
@@ -203,7 +203,7 @@ MapsAddon::MapsAddon(const AddOnInfo& a) : MutableAddOn(a) {
 std::string MapsAddon::parse_requirements() {
 	// · For maps, we need to gather the information regarding the maps' required add-ons
 	//   before writing the profile so we can generate the correct `requires` string.
-	std::string requires;
+	std::string requirements;
 	std::vector<std::string> req;
 	try {
 		parse_map_requirements(tree_, req);
@@ -211,13 +211,13 @@ std::string MapsAddon::parse_requirements() {
 		throw WLWarning("", _("A map file is invalid:\n%s"), e.what());
 	}
 	if (const size_t nr = req.size()) {
-		requires = req[0];
+		requirements = req[0];
 		for (size_t i = 1; i < nr; ++i) {
-			requires += ',';
-			requires += req[i];
+			requirements += ',';
+			requirements += req[i];
 		}
 	}
-	return requires;
+	return requirements;
 }
 
 void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req) {
