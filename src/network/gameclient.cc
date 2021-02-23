@@ -1198,17 +1198,12 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	if (showmsg && d->game) {
-		// WLApplication::emergency_save(d->modal, *d->game, msg);
-		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-		                                     NetworkGamingMessages::get_message(reason, arg).c_str());
-	}
-
-	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
-	// double free.
-	if (d->modal) {
-		if (d->modal->is_modal()) {
-			d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
+	if (showmsg) {
+		if (d->game) {
+			// WLApplication::emergency_save(d->modal, *d->game, msg);
+			throw wexception("%s", arg.empty() ?
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
 		} else {
 			capsule_.menu().show_messagebox(
 			   _("Disconnected"),
@@ -1217,6 +1212,15 @@ void GameClient::disconnect(const std::string& reason,
 			    (arg.empty() ? NetworkGamingMessages::get_message(reason) :
 			                   NetworkGamingMessages::get_message(reason, arg)))
 			      .str());
+		}
+	}
+
+	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
+	// double free.
+	if (d->modal) {
+		if (d->modal->is_modal()) {
+			d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
+		} else {
 			d->modal->die();
 		}
 	}
