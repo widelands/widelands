@@ -41,8 +41,8 @@ class MenuCapsule;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  *
- * @param internet TODO(Klaus Halfmann): true: coonnect into the open internet via proxy, false
- * connect locally / via IP.
+ * @param internet \c true connect to the relay on the internet,
+ *                 \c false connect locally / directly via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(FsMenu::MenuCapsule&,
@@ -146,6 +146,7 @@ private:
 	void handle_chat(RecvPacket& packet);
 	void handle_system_message(RecvPacket& packet);
 	void handle_desync(RecvPacket& packet);
+	void handle_rtt_response(RecvPacket& packet);
 	void handle_packet(RecvPacket& packet);
 
 	void handle_network();

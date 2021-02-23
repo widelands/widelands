@@ -171,12 +171,25 @@ public:
 	bool is_ingame() const;
 
 	/**
+	 * Allows the UI to inform the game logic that RTT updates are wanted.
+	 * Only useful for game clients, game hosts always have the current RTTs.
+	 * @param enabled If \c true, request the collected RTTs from the game
+	 *                host periodically.
+	 */
+	void enable_participant_rtt_updates(bool enabled);
+
+	/**
+	 * Returns whether the game logic should update the RTTs.
+	 * @return \c true if the current RTTs should be fetched from the game host.
+	 */
+	bool participant_rtt_updates_enabled() const;
+
+	/**
 	 * Returns the ping time of the participant.
 	 * Returned is the time that it took the client to return a PING request by the network
 	 * relay (the RTT = Round Trip Time).
+	 * A value of 255 means that the value has not been ascertained yet or is higher than 255ms.
 	 * For AI participant the result is undefined.
-	 * In network games that don't use the network relay the result is undefined.
-	 * @warning Currently this method isn't implemented yet and always returns 0.
 	 * @param participant The index of the participant to get data about.
 	 * @return The RTT in milliseconds for this participant up to 255ms.
 	 */
@@ -187,9 +200,20 @@ public:
 
 	/**
 	 * Called when the RTT for a participant changed.
-	 * Passed parameters are the participant index and the new RTT.
 	 */
-	boost::signals2::signal<void(int16_t, uint8_t)> participant_updated_rtt;
+	boost::signals2::signal<void()> participants_updated_rtt;
+
+	/**
+	 * Can be called by the UI when a participant should be kicked.
+	 * @param participant The participant ID of the to be kicked user.
+	 */
+	boost::signals2::signal<void(int16_t participant)> participants_kick;
+
+	/**
+	 * Can be called by the UI when the local user wants to whisper to another user.
+	 * @param participant The participant ID of the user to talk to.
+	 */
+	boost::signals2::signal<void(int16_t participant)> participants_whisper;
 
 private:
 	/**
@@ -230,6 +254,9 @@ private:
 	const std::string& localplayername_;
 	/// Counts of current participants
 	ParticipantCounts participant_counts_;
+	/// Whether the GameClient should request RTT updates from the GameHost.
+	// Currently not used on the host
+	bool rtt_updates_enabled_;
 };
 
 #endif  // WL_NETWORK_PARTICIPANTLIST_H

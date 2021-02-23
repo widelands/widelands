@@ -1,3 +1,16 @@
+wl_library(wui_player_list
+  SRCS
+    game_player_list_menu.cc
+    game_player_list_menu.h
+  DEPENDS
+    base_i18n
+    graphic_image_cache
+    graphic_playercolor
+    logic_constants
+    network
+    ui_basic
+)
+
 wl_library(wui_sound_options
   SRCS
     sound_options.cc
@@ -356,6 +369,7 @@ wl_library(wui
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_player_list
     wui_sound_options
     wui_waresdisplay
 )

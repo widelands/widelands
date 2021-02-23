@@ -54,6 +54,7 @@ struct GameChatPanel : public UI::Panel {
 	}
 	void set_edit_text(const std::string& text) {
 		editbox.set_text(text);
+		select_recipient();
 	}
 
 	bool handle_key(bool down, SDL_Keysym code) override;

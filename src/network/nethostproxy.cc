@@ -31,6 +31,7 @@ bool NetHostProxy::is_connected(const ConnectionId id) const {
 }
 
 void NetHostProxy::close(const ConnectionId id) {
+	std::lock_guard<std::mutex> lock(mutex_);
 	auto iter_client = clients_.find(id);
 	if (iter_client == clients_.end()) {
 		// Not connected anyway
@@ -47,8 +48,7 @@ void NetHostProxy::close(const ConnectionId id) {
 }
 
 bool NetHostProxy::try_accept(ConnectionId* new_id) {
-	// Always read all available data into buffers
-	receive_commands();
+	std::lock_guard<std::mutex> lock(mutex_);
 
 	for (auto& entry : clients_) {
 		if (entry.second.state_ == Client::State::kConnecting) {
@@ -61,7 +61,7 @@ bool NetHostProxy::try_accept(ConnectionId* new_id) {
 }
 
 std::unique_ptr<RecvPacket> NetHostProxy::try_receive(const ConnectionId id) {
-	receive_commands();
+	std::lock_guard<std::mutex> lock(mutex_);
 
 	// Check whether client is not (yet) connected
 	if (clients_.count(id) == 0 || clients_.at(id).state_ == Client::State::kConnecting) {
@@ -95,18 +95,17 @@ void NetHostProxy::send(const ConnectionId id, const SendPacket& packet, NetPrio
 void NetHostProxy::send(const std::vector<ConnectionId>& ids,
                         const SendPacket& packet,
                         NetPriority priority) {
+	std::lock_guard<std::mutex> lock(mutex_);
 	if (ids.empty()) {
 		return;
 	}
 
-	receive_commands();
-
 	std::vector<uint8_t> active_ids;
 	for (ConnectionId id : ids) {
 		if (is_connected(id)) {
-			// This should be but is not always the case. It can happen that we receive a client
-			// disconnect
-			// on receive_commands() above and the GameHost did not have the chance to react to it yet.
+			// This should be but is not always the case. It can happen that we receive
+			// a client disconnect on receive_commands() and the GameHost did not
+			// have the chance to react to it yet.
 			active_ids.push_back(id);
 		}
 	}
@@ -117,6 +116,16 @@ void NetHostProxy::send(const std::vector<ConnectionId>& ids,
 
 	active_ids.push_back(0);
 	conn_->send(priority, RelayCommand::kToClients, active_ids, packet);
+}
+
+void NetHostProxy::request_rtt_update() {
+	std::lock_guard<std::mutex> lock(mutex_);
+	conn_->send(NetPriority::kNormal, RelayCommand::kRoundTripTimeRequest);
+}
+
+uint8_t NetHostProxy::get_client_rtt(ConnectionId id) {
+	std::lock_guard<std::mutex> lock(mutex_);
+	return pings_.get_rtt(id);
 }
 
 NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
@@ -135,75 +144,83 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->send(NetPriority::kNormal, RelayCommand::kHello, kRelayProtocolVersion, name, password);
 
 	// Wait 10 seconds for an answer
-	time_t endtime = time(nullptr) + 10;
-	while (!BufferedConnection::Peeker(conn_.get()).cmd()) {
-		if (time(nullptr) > endtime) {
-			log_err("[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
-			conn_->close();
-			conn_.reset();
-			return;
-		}
-	}
-
+	const time_t endtime = time(nullptr) + 10;
 	RelayCommand cmd;
-	conn_->receive(&cmd);
-
-	if (cmd != RelayCommand::kWelcome) {
-		log_err("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
-		        "instead of Welcome (%i)\n",
-		        static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
-		conn_->close();
-		conn_.reset();
-		return;
-	}
-
-	// Check version
-	endtime = time(nullptr) + 10;
-	while (!BufferedConnection::Peeker(conn_.get()).uint8_t()) {
+	for (;;) {
 		if (time(nullptr) > endtime) {
-			log_err("[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (1): No welcome from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
 		}
-	}
-	uint8_t relay_proto_version;
-	conn_->receive(&relay_proto_version);
-	if (relay_proto_version != kRelayProtocolVersion) {
-		log_err(
-		   "[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of "
-		   "our version %i\n",
-		   static_cast<uint8_t>(relay_proto_version), static_cast<uint8_t>(kRelayProtocolVersion));
-		conn_->close();
-		conn_.reset();
-		return;
-	}
-
-	// Check game name
-	endtime = time(nullptr) + 10;
-	while (!BufferedConnection::Peeker(conn_.get()).string()) {
-		if (time(nullptr) > endtime) {
-			log_err("[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
+		// Peeker has to be created inside the loop to reset it to the beginning of the input buffer
+		BufferedConnection::Peeker peek(conn_.get());
+		if (!(peek.cmd(&cmd) && peek.uint8_t())) {
+			// Not enough received yet. Do a "mini sleep" and try again
+			std::this_thread::yield();
+			continue;
+		}
+		if (cmd == RelayCommand::kPing) {
+			// Got a ping before the welcome. Handle it
+			conn_->receive(&cmd);
+			uint8_t seq;
+			conn_->receive(&seq);
+			// Reply with a pong
+			conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
+		} else if (cmd == RelayCommand::kWelcome) {
+			// It is the expected welcome message. Check whether it is complete
+			if (!peek.string()) {
+				// Command not complete yet
+				std::this_thread::yield();
+				continue;
+			}
+			// It is complete! Handle it
+			// Receive the command code for real (that is, remove it from the buffer)
+			conn_->receive(&cmd);
+			// Check version
+			uint8_t relay_proto_version;
+			conn_->receive(&relay_proto_version);
+			if (relay_proto_version != kRelayProtocolVersion) {
+				log_err("[NetHostProxy] Handshaking error (2): Relay server uses protocol "
+				        "version %i instead of our version %i\n",
+				        static_cast<uint8_t>(relay_proto_version),
+				        static_cast<uint8_t>(kRelayProtocolVersion));
+				conn_->close();
+				conn_.reset();
+				return;
+			}
+			// Check game name
+			std::string game_name;
+			conn_->receive(&game_name);
+			if (game_name != name) {
+				log_err("[NetHostProxy] Handshaking error (3): Relay wants to connect us to "
+				        "game '%s' instead of our game '%s'\n",
+				        game_name.c_str(), name.c_str());
+				conn_->close();
+				conn_.reset();
+				return;
+			}
+			// Everything is fine, leave the loop
+			break;
+		} else {
+			// Unexpected command. Maybe it is no relay server?
+			log_err("[NetHostProxy] Handshaking error (4): Received command code %i from "
+			        "relay server instead of welcome (%i)\n",
+			        static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
 			conn_->close();
 			conn_.reset();
 			return;
 		}
-	}
-	std::string game_name;
-	conn_->receive(&game_name);
-	if (game_name != name) {
-		log_err(
-		   "[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of "
-		   "our game '%s'\n",
-		   game_name.c_str(), name.c_str());
-		conn_->close();
-		conn_.reset();
-		return;
-	}
+	}  // End for (;;) waiting for kWelcome
+
+	conn_->data_received.connect([this]() { receive_commands(); });
+	receive_commands();
+
 	log_info("[NetHostProxy] Handshaking with relay server done\n");
 }
 
 void NetHostProxy::receive_commands() {
+	std::lock_guard<std::mutex> lock(mutex_);
 	if (!conn_->is_connected()) {
 		// Seems the connection broke at some time. Set all clients to disconnected
 		for (auto iter_client = clients_.begin(); iter_client != clients_.end();) {
@@ -221,86 +238,127 @@ void NetHostProxy::receive_commands() {
 
 	// Receive all available commands
 	RelayCommand cmd;
-	BufferedConnection::Peeker peek(conn_.get());
-	if (!peek.cmd(&cmd)) {
-		// No command to receive
-		return;
-	}
-	switch (cmd) {
-	case RelayCommand::kDisconnect:
-		if (peek.string()) {
-			// Command is completely in the buffer, handle it
-			conn_->receive(&cmd);
-			std::string reason;
-			conn_->receive(&reason);
-			conn_->close();
-			// Set all clients to offline
-			for (auto& entry : clients_) {
-				entry.second.state_ = Client::State::kDisconnected;
-			}
+	for (;;) {
+		BufferedConnection::Peeker peek(conn_.get());
+		if (!peek.cmd(&cmd)) {
+			// No command to receive
+			return;
 		}
-		break;
-	case RelayCommand::kConnectClient:
-		if (peek.uint8_t()) {
-			conn_->receive(&cmd);
-			uint8_t id;
-			conn_->receive(&id);
-#ifndef NDEBUG
-			auto result = clients_.emplace(
-			   std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
-			assert(result.second);
-#else
-			clients_.emplace(
-			   std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
-#endif
-		}
-		break;
-	case RelayCommand::kDisconnectClient:
-		if (peek.uint8_t()) {
-			conn_->receive(&cmd);
-			uint8_t id;
-			conn_->receive(&id);
-			const auto client = clients_.find(id);
-			if (client != clients_.end()) {
-				// As of a race condition this may not always work
-				client->second.state_ = Client::State::kDisconnected;
-			}
-		}
-		break;
-	case RelayCommand::kFromClient:
-		if (peek.uint8_t() && peek.recvpacket()) {
-			conn_->receive(&cmd);
-			uint8_t id;
-			conn_->receive(&id);
-			std::unique_ptr<RecvPacket> packet(new RecvPacket);
-			conn_->receive(packet.get());
-			const auto client = clients_.find(id);
-			if (client != clients_.end()) {
-				client->second.received_.push(std::move(packet));
+		switch (cmd) {
+		case RelayCommand::kDisconnect:
+			if (peek.string()) {
+				// Command is completely in the buffer, handle it
+				conn_->receive(&cmd);
+				std::string reason;
+				conn_->receive(&reason);
+				conn_->close();
+				// Set all clients to offline
+				for (auto& entry : clients_) {
+					entry.second.state_ = Client::State::kDisconnected;
+				}
+				break;
 			} else {
-				log_warn("[NetHostProxy] Received packed from unknown client");
+				// It will be a kDisconnect, but it isn't complete yet. Abort for now.
+				return;
 			}
-		}
-		break;
-	case RelayCommand::kPing:
-		if (peek.uint8_t()) {
+		case RelayCommand::kConnectClient:
+			if (peek.uint8_t()) {
+				conn_->receive(&cmd);
+				uint8_t id;
+				conn_->receive(&id);
+#ifndef NDEBUG
+				auto result = clients_.emplace(
+				   std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
+				assert(result.second);
+#else
+				clients_.emplace(
+				   std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
+#endif
+				break;
+			} else {
+				return;
+			}
+		case RelayCommand::kDisconnectClient:
+			if (peek.uint8_t()) {
+				conn_->receive(&cmd);
+				uint8_t id;
+				conn_->receive(&id);
+				const auto client = clients_.find(id);
+				if (client != clients_.end()) {
+					// As of a race condition this may not always work
+					client->second.state_ = Client::State::kDisconnected;
+				}
+				break;
+			} else {
+				return;
+			}
+		case RelayCommand::kFromClient:
+			if (peek.uint8_t() && peek.recvpacket()) {
+				conn_->receive(&cmd);
+				uint8_t id;
+				conn_->receive(&id);
+				std::unique_ptr<RecvPacket> packet(new RecvPacket);
+				conn_->receive(packet.get());
+				const auto client = clients_.find(id);
+				if (client != clients_.end()) {
+					client->second.received_.push(std::move(packet));
+				} else {
+					log_warn("[NetHostProxy] Received packet from unknown client");
+				}
+				break;
+			} else {
+				return;
+			}
+		case RelayCommand::kPing:
+			if (peek.uint8_t()) {
+				conn_->receive(&cmd);
+				uint8_t seq;
+				conn_->receive(&seq);
+				// Reply with a pong
+				conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
+				break;
+			} else {
+				return;
+			}
+		case RelayCommand::kRoundTripTimeResponse:
+			uint8_t length_list;
+			// Check if enough data is available
+			if (peek.uint8_t(&length_list)) {
+				for (uint8_t i = 0; i < length_list * 3; i++) {
+					if (!peek.uint8_t()) {
+						return;
+					}
+				}
+			} else {
+				return;
+			}
+			// Enough data is there, get it
+			uint8_t id;
+			uint8_t rtt;
+			uint8_t last;
 			conn_->receive(&cmd);
-			uint8_t seq;
-			conn_->receive(&seq);
-			// Reply with a pong
-			conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
+			conn_->receive(&length_list);
+			for (uint8_t i = 0; i < length_list; i++) {
+				conn_->receive(&id);
+				conn_->receive(&rtt);
+				conn_->receive(&last);
+				// We are fetching the data once per second. So if the time of the last
+				// received ping is greater than one second, ignore the old rtt result and
+				// add a "missed ping" rtt of 255
+				if (last >= 1) {
+					pings_.register_rtt(id, 255);
+				} else {
+					pings_.register_rtt(id, rtt);
+				}
+			}
+			break;
+		default:
+			// Other commands should not be possible.
+			// Then is either something wrong with the protocol or there is an implementation mistake
+			log_err("[NetHostProxy] Received command code %i from relay server, "
+			        " do not know what to do with it\n",
+			        static_cast<uint8_t>(cmd));
+			NEVER_HERE();
 		}
-		break;
-	case RelayCommand::kRoundTripTimeResponse:
-		conn_->ignore_rtt_response();
-		break;
-	default:
-		// Other commands should not be possible.
-		// Then is either something wrong with the protocol or there is an implementation mistake
-		log_err(
-		   "[NetHostProxy] Received command code %i from relay server, do not know what to do with "
-		   "it\n",
-		   static_cast<uint8_t>(cmd));
-		NEVER_HERE();
 	}
 }

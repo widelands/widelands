@@ -48,6 +48,7 @@
 #include "network/participantlist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "ui_fsmenu/main.h"
@@ -96,6 +97,9 @@ struct GameClientImpl {
 	/// Data for the last time message we sent.
 	Time lasttimestamp;
 	uint32_t lasttimestamp_realtime;
+
+	/// The time in ms the last RTT update was requested
+	uint32_t next_rtt_update;
 
 	/// The real target speed, in milliseconds per second.
 	/// This is always set by the server
@@ -176,6 +180,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	time.reset(game->get_gametime());
 	lasttimestamp = game->get_gametime();
 	lasttimestamp_realtime = SDL_GetTicks();
+	next_rtt_update = SDL_GetTicks() + RTT_UPDATE_INTERVAL;
 
 	modal = igb;
 
@@ -238,6 +243,12 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
+	d->participants->participants_whisper.connect([this](uint8_t participant) {
+		if (d->game && d->game->get_igbase()) {
+			d->game->get_igbase()->open_chat_window(
+			   "@" + d->participants->get_participant_name(participant) + " ");
+		}
+	});
 
 	run(ptr);
 }
@@ -305,14 +316,21 @@ void GameClient::think() {
 			d->time.think(d->realspeed);
 		}
 
+		const uint32_t curtime = SDL_GetTicks();
 		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
-			uint32_t curtime = SDL_GetTicks();
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL) {
 				send_time();
 			}
+		}
+
+		if (d->participants->participant_rtt_updates_enabled() && d->next_rtt_update < curtime) {
+			d->next_rtt_update = curtime + RTT_UPDATE_INTERVAL;
+			SendPacket s;
+			s.unsigned_8(NETCMD_RTT_REQUEST);
+			d->net->send(s);
 		}
 	}
 }
@@ -718,10 +736,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
  * Give a pong for a ping
  */
 void GameClient::handle_ping(RecvPacket&) {
-	SendPacket s;
-	s.unsigned_8(NETCMD_PONG);
-	d->net->send(s);
-
+	// Don't need to send PONG here, already done in NetClient
 	log_info("[Client] Pong!\n");
 }
 
@@ -1049,6 +1064,14 @@ void GameClient::handle_desync(RecvPacket&) {
 	}
 }
 
+void GameClient::handle_rtt_response(RecvPacket& packet) {
+	for (UserSettings& user : d->settings.users) {
+		user.rtt = packet.unsigned_8();
+	}
+	// Update the UI
+	d->participants->participants_updated_rtt();
+}
+
 /**
  * Handle one packet received from the host.
  *
@@ -1141,6 +1164,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		return handle_system_message(packet);
 	case NETCMD_INFO_DESYNC:
 		return handle_desync(packet);
+	case NETCMD_RTT_RESPONSE:
+		return handle_rtt_response(packet);
 	default:
 		throw ProtocolException(cmd);
 	}
@@ -1156,16 +1181,16 @@ void GameClient::handle_network() {
 	}
 	try {
 		assert(d->net != nullptr);
-		// Check if the connection is still open
-		if (!d->net->is_connected()) {
-			disconnect("CONNECTION_LOST", "", false);
-			return;
-		}
 		// Process all available packets
 		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
 		while (packet) {
 			handle_packet(*packet);
 			packet = d->net->try_receive();
+		}
+		// Check if the connection is still open
+		if (!d->net->is_connected()) {
+			disconnect("CONNECTION_LOST", "", false);
+			return;
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
@@ -1198,10 +1223,21 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	if (showmsg && d->game) {
-		// WLApplication::emergency_save(d->modal, *d->game, msg);
-		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-		                                     NetworkGamingMessages::get_message(reason, arg).c_str());
+	if (d->modal) {
+		if (reason == "SERVER_LEFT" || reason == "KICKED" || reason == "CONNECTION_LOST") {
+			// TODO(Notabilis): Probably some (but not all?) reasons from network_gaming_messages.cc
+			// should be handled here as well without throwing an exception
+			UI::WLMessageBox m(d->modal, UI::WindowStyle::kFsMenu, _("The game ended"),
+			                   arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+			                                 NetworkGamingMessages::get_message(reason, arg).c_str(),
+			                   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		} else if (showmsg && d->game) {
+			// WLApplication::emergency_save(d->modal, *d->game, msg);
+			throw wexception("%s", arg.empty() ?
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
+		}
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a

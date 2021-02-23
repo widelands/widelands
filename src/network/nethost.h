@@ -21,10 +21,12 @@
 #define WL_NETWORK_NETHOST_H
 
 #include <memory>
+#include <queue>
 #include <thread>
 
 #include "network/bufferedconnection.h"
 #include "network/nethost_interface.h"
+#include "network/pingtracker.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
@@ -62,6 +64,21 @@ public:
 	 */
 	void stop_listening();
 
+	/**
+	 * Register that a PING has been send to a client.
+	 * The matching PONG will be handled by the NetHost class itself.
+	 * @param id The id of the connection the ping was send through
+	 * @param seq The sequence number of the ping
+	 */
+	void register_ping(ConnectionId id, uint8_t seq);
+
+	/**
+	 * Retrieve the calculated RTT (round-trip-time) after a few PING/PONG messages were exchanged.
+	 * @param id The id of the connection to get the RTT for
+	 * @return The RTT up to 254ms. 255 means no value is known or it is too large
+	 */
+	uint8_t get_rtt(ConnectionId id);
+
 private:
 	/**
 	 * Returns whether the server is started and is listening.
@@ -82,6 +99,12 @@ private:
 	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
 
 	/**
+	 * Called asynchronous by a BufferedConnection if new data arrives.
+	 * Checks whether a RecvPacket can be created out of the data and adds it to the buffer.
+	 */
+	void handle_data(ConnectionId id);
+
+	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
 	 * \param port The port to listen on.
@@ -98,9 +121,21 @@ private:
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
+	struct Client {
+		Client() = default;
+		Client(BufferedConnection* c) : conn(c), packets() {
+		}
+		/// The network connection to the client
+		std::unique_ptr<BufferedConnection> conn;
+		/// A buffer of received packets, parsed from the bytestring and ready to be delivered
+		std::queue<std::unique_ptr<RecvPacket>> packets;
+		/// A mutex avoiding concurrent access to the connection or packets list
+		std::mutex mutex;
+	};
+
 	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
-	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
+	std::map<NetHostInterface::ConnectionId, NetHost::Client> clients_;
 	/// The next client id that will be used
 	NetHostInterface::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
@@ -120,8 +155,12 @@ private:
 	/// The new connections the acceptor accepted. Will be moved to clients_
 	/// when try_accept() is called by the using class.
 	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
-	/// A mutex avoiding concurrent access to accept_queue_.
+	/// A mutex avoiding concurrent access to accept_queue_
 	std::mutex mutex_accept_;
+	/// The PingTracker that manages the times of the PINGs and PONGs transmitted
+	PingTracker pings_;
+	/// A mutex protecting the PingTracker pings_
+	std::mutex mutex_pings_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

@@ -302,12 +302,15 @@ struct HostChatProvider : public ChatProvider {
 				         /** TRANSLATORS: Available host command */
 				         _("/endForcedPause        -  Return game to normal speed."))
 				           .str();
+				// Send output only to host, the other players shouldn't receive it
+				c.recipient = h->get_local_playername();
 			}
 
 			// Announce
 			else if (cmd == "announce") {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
+					c.recipient = h->get_local_playername();
 				} else {
 					if (!arg2.empty()) {
 						arg1 += " " + arg2;
@@ -329,6 +332,7 @@ struct HostChatProvider : public ChatProvider {
 						c.msg += arg2;
 					}
 				}
+				c.recipient = h->get_local_playername();
 			}
 
 			// Kick
@@ -357,6 +361,7 @@ struct HostChatProvider : public ChatProvider {
 						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
+				c.recipient = h->get_local_playername();
 			}
 
 			// Acknowledge kick
@@ -373,6 +378,7 @@ struct HostChatProvider : public ChatProvider {
 						c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 					}
 				}
+				c.recipient = h->get_local_playername();
 				kickUser = "";
 				kickReason = "";
 			}
@@ -381,6 +387,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "forcePause") {
 				if (h->forced_pause()) {
 					c.msg = _("Pause was already forced - game should be paused.");
+					c.recipient = h->get_local_playername();
 				} else {
 					c.msg = "HOST FORCED THE GAME TO PAUSE!";
 					h->force_pause();
@@ -391,6 +398,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "endForcedPause") {
 				if (!h->forced_pause()) {
 					c.msg = _("There is no forced pause - nothing to end.");
+					c.recipient = h->get_local_playername();
 				} else {
 					c.msg = "HOST ENDED THE FORCED GAME PAUSE!";
 					h->end_forced_pause();
@@ -400,6 +408,7 @@ struct HostChatProvider : public ChatProvider {
 			// Default
 			else {
 				c.msg = _("Invalid command! Type /help for a list of commands.");
+				c.recipient = h->get_local_playername();
 			}
 		}
 		h->send(c);
@@ -470,6 +479,14 @@ struct GameHostImpl {
 	Time pseudo_networktime;
 	int32_t last_heartbeat;
 
+	/// Timestamp in milliseconds of last RTT update.
+	/// For internet games, this is the time we received the update from the relay the last time.
+	/// For local games we update the RTT times continuous but inform others / the UI regularly.
+	int32_t last_rtt_update;
+
+	/// The sequence number used for pings
+	uint8_t last_ping_seq;
+
 	/// The networktime we committed to by sending it across the network.
 	Time committed_networktime;
 
@@ -508,6 +525,8 @@ struct GameHostImpl {
 	     game(nullptr),
 	     pseudo_networktime(0),
 	     last_heartbeat(0),
+	     last_rtt_update(0),
+	     last_ping_seq(0),
 	     committed_networktime(0),
 	     waiting(false),
 	     lastframe(0),
@@ -577,10 +596,28 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 	hostuser.name = playername;
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
+	if (!internet) {
+		// It is a LAN game, so the RTT between the host and, well, the host is 0 milliseconds
+		hostuser.rtt = 0;
+	}
 	d->settings.users.push_back(hostuser);
 	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
+	d->participants->participants_kick.connect([this](uint8_t participant) {
+		int32_t client = check_client(d->participants->get_participant_name(participant));
+		assert(client >= 0);
+		// Something must be passed as reason since otherwise
+		// the message formatting at the receiver doesn't work.
+		// Reason is the same as when the /kick command is used without providing a reason
+		kick_user(client, "No reason given!");
+	});
+	d->participants->participants_whisper.connect([this](uint8_t participant) {
+		if (d->game && d->game->get_igbase()) {
+			d->game->get_igbase()->open_chat_window(
+			   "@" + d->participants->get_participant_name(participant) + " ");
+		}
+	});
 
 	run(ptr);
 }
@@ -731,6 +768,7 @@ void GameHost::run_callback() {
 		}
 		d->pseudo_networktime = game_->get_gametime();
 		d->time.reset(d->pseudo_networktime);
+		// SDL_GetTicks() returns milliseconds since initialization of the SDL library
 		d->lastframe = SDL_GetTicks();
 		d->last_heartbeat = d->lastframe;
 
@@ -808,6 +846,41 @@ void GameHost::think() {
 
 		for (AI::ComputerPlayer* cp : d->computerplayers) {
 			cp->think();
+		}
+
+		if (curtime - d->last_rtt_update >= RTT_UPDATE_INTERVAL) {
+			d->last_rtt_update = SDL_GetTicks();
+			if (internet_) {
+				// If we are in an online game, get the RTT updates from the relay
+				NetHostProxy* proxy = dynamic_cast<NetHostProxy*>(d->net.get());
+				assert(proxy != nullptr);
+				// Handle the current state
+				// user 0 and ConnectionId=1 (see relay code) is the host
+				d->settings.users[0].rtt = proxy->get_client_rtt(1u);
+				for (const Client& c : d->clients) {
+					d->settings.users[c.usernum].rtt = proxy->get_client_rtt(c.sock_id);
+				}
+				// Request new RTTs
+				proxy->request_rtt_update();
+			} else {
+				// A local game. Update the clients
+				// Request new pongs from all clients
+				SendPacket send_packet;
+				send_packet.unsigned_8(NETCMD_PING);
+				d->last_ping_seq = (d->last_ping_seq == 255) ? 0 : d->last_ping_seq + 1;
+				send_packet.unsigned_8(d->last_ping_seq);
+				broadcast(send_packet, NetPriority::kPing);
+				NetHost* nethost = dynamic_cast<NetHost*>(d->net.get());
+				assert(nethost != nullptr);
+				for (const Client& client : d->clients) {
+					if (client.usernum != UserSettings::not_connected()) {
+						nethost->register_ping(client.sock_id, d->last_ping_seq);
+					}
+				}
+			}
+			// Send signal to UI that the RTTs have been updated
+			assert(d->participants);
+			d->participants->participants_updated_rtt();
 		}
 	}
 }
@@ -1619,7 +1692,7 @@ void GameHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
-void GameHost::broadcast(const SendPacket& packet) {
+void GameHost::broadcast(const SendPacket& packet, NetPriority priority) {
 	std::vector<NetHostInterface::ConnectionId> receivers;
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
@@ -1627,7 +1700,7 @@ void GameHost::broadcast(const SendPacket& packet) {
 			receivers.push_back(client.sock_id);
 		}
 	}
-	d->net->send(receivers, packet);
+	d->net->send(receivers, packet, priority);
 }
 
 void GameHost::write_setting_map(SendPacket& packet) {
@@ -2226,10 +2299,21 @@ void GameHost::handle_network() {
 	// to keep the sockets up and running
 	if ((forced_pause_ || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(nullptr);
+		d->last_rtt_update = SDL_GetTicks();
 
 		SendPacket send_packet;
 		send_packet.unsigned_8(NETCMD_PING);
-		broadcast(send_packet);
+		d->last_ping_seq = (d->last_ping_seq == 255) ? 0 : d->last_ping_seq + 1;
+		send_packet.unsigned_8(d->last_ping_seq);
+		broadcast(send_packet, NetPriority::kPing);
+		if (!internet_) {
+			for (const Client& client : d->clients) {
+				if (client.usernum != UserSettings::not_connected()) {
+					dynamic_cast<NetHost*>(d->net.get())
+					   ->register_ping(client.sock_id, d->last_ping_seq);
+				}
+			}
+		}
 	}
 
 	reaper();
@@ -2450,7 +2534,14 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 
 	switch (cmd) {
 	case NETCMD_PONG:
-		log_info("[Host]: Client %u: got pong\n", client_num);
+		// The ping was send either on last rtt update or due to a pause
+		if (!internet_) {
+			d->settings.users[client.usernum].rtt =
+			   dynamic_cast<NetHost*>(d->net.get())->get_rtt(client.sock_id);
+		}
+		if (forced_pause_) {
+			log_info("[Host]: Client %u: got pong\n", client_num);
+		}
 		break;
 
 	case NETCMD_SETTING_CHANGETRIBE:
@@ -2479,6 +2570,8 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 		return handle_new_file(client);
 	case NETCMD_FILE_PART:
 		return handle_file_part(client, r);
+	case NETCMD_RTT_REQUEST:
+		return handle_rtt_request(client);
 
 	case NETCMD_SETTING_MAP:
 	case NETCMD_SETTING_PLAYER:
@@ -2523,6 +2616,17 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		d->settings.users[client.usernum].ready = true;
 		broadcast_setting_user(client.usernum);
 	}
+}
+
+void GameHost::handle_rtt_request(Client& client) {
+	SendPacket packet;
+	if (packet.get_size() == 0) {
+		packet.unsigned_8(NETCMD_RTT_RESPONSE);
+		for (const UserSettings& user : d->settings.users) {
+			packet.unsigned_8(user.rtt);
+		}
+	}
+	d->net->send(client.sock_id, packet);
 }
 
 void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {
@@ -2573,7 +2677,8 @@ void GameHost::disconnect_client(uint32_t const client_number,
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
-	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" &&
+	if (client.playernum != UserSettings::not_connected() &&
+	    client.playernum != UserSettings::none() && reason != "SERVER_LEFT" &&
 	    reason != "SERVER_CRASHED" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {

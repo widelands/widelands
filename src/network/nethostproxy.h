@@ -21,9 +21,11 @@
 #define WL_NETWORK_NETHOSTPROXY_H
 
 #include <memory>
+#include <thread>
 
 #include "network/bufferedconnection.h"
 #include "network/nethost_interface.h"
+#include "network/pingtracker.h"
 
 /**
  * Represents a host in-game, but talks through the 'wlnr' relay binary.
@@ -58,6 +60,17 @@ public:
 	          const SendPacket& packet,
 	          NetPriority priority = NetPriority::kNormal) override;
 
+	/// Request the newest RTT measurements from the relay.
+	void request_rtt_update();
+
+	/**
+	 * Retrieves the newest RTT measurment from the local cache for a certain client.
+	 * @param id The client to retrieve the id for. id=1 is the host.
+	 *           See Client::sock_id in gamehost.cc
+	 * @return The RTT between relay and client in milliseconds. 255 signifies a too large value.
+	 */
+	uint8_t get_client_rtt(ConnectionId id);
+
 private:
 	/**
 	 * Tries to connect to the relay at the given address.
@@ -70,8 +83,13 @@ private:
 	             const std::string& name,
 	             const std::string& password);
 
+	/**
+	 * Callback called by the BufferedConnection when some data is received.
+	 * Transforms the received relay packets into "LAN" actions.
+	 */
 	void receive_commands();
 
+	/// The connection used by this class to talk to the relay
 	std::unique_ptr<BufferedConnection> conn_;
 
 	/// A list of clients which want to connect.
@@ -103,6 +121,10 @@ private:
 	};
 	/// The connected clients
 	std::map<ConnectionId, Client> clients_;
+	/// The PingTracker that stores the rtt replies received from the relay
+	PingTracker pings_;
+	/// A big mutex avoiding concurrent receive from network and fetching from game
+	mutable std::mutex mutex_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOSTPROXY_H

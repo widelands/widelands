@@ -106,6 +106,16 @@ BufferedConnection::create_unconnected() {
 
 BufferedConnection::~BufferedConnection() {
 	close();
+	// If we call join() inside our thread it crash
+	assert(std::this_thread::get_id() != asio_thread_.get_id());
+	if (asio_thread_.joinable()) {
+		try {
+			asio_thread_.join();
+		} catch (const std::invalid_argument&) {
+			// Thread probably stopped between joinable() and join()
+		}
+	}
+	// The thread should be stopped now
 	assert(!asio_thread_.joinable());
 }
 
@@ -129,15 +139,6 @@ void BufferedConnection::close() {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 	assert(io_service_.stopped());
-	if (asio_thread_.joinable()) {
-		try {
-			asio_thread_.join();
-		} catch (const std::invalid_argument&) {
-			// Thread probably stopped between joinable() and join()
-		}
-	}
-	// The thread should be stopped now
-	assert(!asio_thread_.joinable());
 	// Close the socket
 	if (socket_.is_open()) {
 		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
@@ -209,15 +210,15 @@ void BufferedConnection::start_sending() {
 	}
 
 	// Find something to send
-	std::queue<std::vector<uint8_t>>* nonempty_queue = nullptr;
+	uint8_t nonempty_queue = std::numeric_limits<uint8_t>::max();
 	for (auto& entry : buffers_to_send_) {
 		if (!entry.second.empty()) {
-			nonempty_queue = &entry.second;
+			nonempty_queue = entry.first;
 			break;
 		}
 	}
 
-	if (nonempty_queue == nullptr) {
+	if (nonempty_queue == std::numeric_limits<uint8_t>::max()) {
 		// Nothing (further) to send (right now)
 		return;
 	}
@@ -225,24 +226,36 @@ void BufferedConnection::start_sending() {
 	currently_sending_ = true;
 	lock.unlock();
 
+	if (nonempty_queue == NetPriority::kPing) {
+		// Normally, TCP collects data for some (short) time before sending a larger data burst.
+		// This is done to reduce the overhead by the 40 byte header as much as possible.
+		// Normally, this isn't a problem for most transactions, but waiting for more data
+		// to arrive is a quite bad idea when trying to send or answer a timed ping packet.
+		// So: Disable the artifical delay when sending packets with the kPing priority
+		socket_.set_option(boost::asio::ip::tcp::no_delay(true));
+	}
+
 	// Start writing to the socket. This might block if the network buffer within
 	// the operating system is currently full.
 	// When done with sending, call the lambda method defined below
 	boost::asio::async_write(
-	   socket_, boost::asio::buffer(nonempty_queue->front()),
+	   socket_, boost::asio::buffer(buffers_to_send_[nonempty_queue].front()),
 #ifndef NDEBUG
 	   [this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
 #else
 	   [this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
 #endif
+		   if (nonempty_queue == NetPriority::kPing) {
+			   socket_.set_option(boost::asio::ip::tcp::no_delay(false));
+		   }
 		   std::unique_lock<std::mutex> lock2(mutex_send_);
 		   currently_sending_ = false;
 		   if (!ec) {
 			   // No error: Remove the buffer from the queue
-			   assert(nonempty_queue != nullptr);
-			   assert(!nonempty_queue->empty());
-			   assert(nonempty_queue->front().size() == length);
-			   nonempty_queue->pop();
+			   assert(nonempty_queue != std::numeric_limits<uint8_t>::max());
+			   assert(!buffers_to_send_[nonempty_queue].empty());
+			   assert(buffers_to_send_[nonempty_queue].front().size() == length);
+			   buffers_to_send_[nonempty_queue].pop();
 			   lock2.unlock();
 			   // Try to send some more data
 			   start_sending();
@@ -264,7 +277,6 @@ void BufferedConnection::start_receiving() {
 	if (!is_connected()) {
 		return;
 	}
-
 	socket_.async_read_some(
 	   boost::asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
 	   [this](boost::system::error_code ec, std::size_t length) {
@@ -277,7 +289,9 @@ void BufferedConnection::start_receiving() {
 				   receive_buffer_.push_back(asio_receive_buffer_[i]);
 			   }
 			   lock.unlock();
-			   // Try to send some more data
+			   // Notify about received data
+			   data_received();
+			   // Try to receive some more data
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
@@ -304,7 +318,7 @@ void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket
 		// Ignore error. When it fails, chat messages will lag while transmitting files,
 		// but nothing really bad happens
 		if (ec) {
-			log_warn("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
+			log_warn("[BufferedConnection] Failed to reduce send buffer size\n");
 		}
 	}
 }
@@ -358,36 +372,4 @@ void BufferedConnection::notify_connected() {
 		io_service_.run();
 		log_info("[BufferedConnection] Stopping networking thread\n");
 	});
-}
-
-void BufferedConnection::ignore_rtt_response() {
-
-	// TODO(Notabilis): Implement GUI with display of RTTs and possibility to kick lagging players
-	//                  See https://github.com/widelands/widelands/issues/3236
-	// TODO(Notabilis): Move this method somewhere where it makes sense.
-
-	uint8_t length_list = 0;
-	RelayCommand cmd;
-	uint8_t tmp;
-
-	Peeker peek(this);
-	peek.cmd(&cmd);
-	assert(cmd == RelayCommand::kRoundTripTimeResponse);
-
-	bool data_complete = peek.uint8_t(&length_list);
-	// Each list element consists of three uint8_t
-	for (uint8_t i = 0; i < length_list * 3; i++) {
-		data_complete = data_complete && peek.uint8_t();
-	}
-	if (!data_complete) {
-		// Some part of this packet is still missing. Try again later
-		return;
-	}
-
-	// Packet completely in buffer, fetch it and ignore it
-	receive(&cmd);  // Cmd
-	receive(&tmp);  // Length
-	for (uint8_t i = 0; i < length_list * 3; i++) {
-		receive(&tmp);  // Parts of the list. See relay_protocol.h
-	}
 }

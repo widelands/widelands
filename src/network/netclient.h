@@ -32,7 +32,6 @@
  * This class only tries to create a single socket, either for IPv4 and IPv6.
  * Which is used depends on what kind of address is given on call to connect().
  */
-// This class is currently only an interface wrapper for BufferedConnection
 class NetClient : public NetClientInterface {
 public:
 	/**
@@ -58,7 +57,18 @@ private:
 	 */
 	explicit NetClient(const NetAddress& host);
 
+	/**
+	 * Called asynchronous by a BufferedConnection if new data arrives.
+	 * Checks whether a RecvPacket can be created out of the data and adds it to the buffer.
+	 */
+	void handle_data();
+
 	std::unique_ptr<BufferedConnection> conn_;
+
+	/// A buffer of received packets, parsed from the bytestring and ready to be delivered
+	std::queue<std::unique_ptr<RecvPacket>> packets_;
+	/// A mutex avoiding concurrent access to the packets list or the connection
+	std::mutex mutex_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

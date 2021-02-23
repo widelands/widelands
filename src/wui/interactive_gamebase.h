@@ -65,6 +65,8 @@ public:
 	void start() override;
 	void toggle_mainmenu();
 
+	bool open_chat_window(const std::string& initial_text = "");
+
 protected:
 	// For referencing the items in showhidemenu_
 	enum class ShowHideEntry {
@@ -93,6 +95,7 @@ protected:
 
 	// All unique menu windows
 	struct GameMenuWindows {
+		UI::UniqueWindow::Registry playerlist;
 		UI::UniqueWindow::Registry sound_options;
 		UI::UniqueWindow::Registry savegame;
 
@@ -119,6 +122,7 @@ protected:
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
+		kPlayerList,
 #ifndef NDEBUG  //  only in debug builds
 		kScriptConsole,
 #endif
