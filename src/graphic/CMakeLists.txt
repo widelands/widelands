@@ -56,6 +56,8 @@ wl_library(graphic_build_texture_atlas
     graphic_surface
     graphic_texture_atlas
     io_filesystem
+    io_profile
+    logic_filesystem_constants
 )
 
 wl_library(graphic_image_io

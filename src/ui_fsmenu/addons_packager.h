@@ -27,12 +27,10 @@
 #include "logic/mutable_addon.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
+#include "ui_fsmenu/addons.h"
 #include "ui_fsmenu/addons_packager_box.h"
-#include "ui_fsmenu/main.h"
 
 namespace FsMenu {
-
-class AddOnsCtrl;
 
 class AddOnsPackager : public UI::Window {
 public:
@@ -83,6 +81,7 @@ private:
 	bool do_write_addon_to_disk(const std::string& addon);
 
 	bool update_in_progress_;
+	ProgressIndicatorWindow progress_window_;
 };
 
 }  // namespace FsMenu
