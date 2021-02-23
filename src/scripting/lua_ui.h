@@ -172,7 +172,7 @@ public:
 	}
 	explicit LuaTab(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaTab() {
+	~LuaTab() override {
 	}
 
 	/*
@@ -204,7 +204,7 @@ public:
 	}
 	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaWindow() {
+	~LuaWindow() override {
 	}
 
 	/*
