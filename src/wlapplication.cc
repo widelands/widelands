@@ -496,7 +496,10 @@ void WLApplication::initialize_g_addons() {
 	}
 }
 
-static void init_one_player_from_template(const unsigned p, SinglePlayerGameSettingsProvider& settings, Section& player_section, const Widelands::Map& map) {
+static void init_one_player_from_template(const unsigned p,
+                                          SinglePlayerGameSettingsProvider& settings,
+                                          Section& player_section,
+                                          const Widelands::Map& map) {
 	settings.set_player_team(p, player_section.get_natural("team", 0));
 	if (player_section.has_val("playercolor")) {
 		std::string colorstr = player_section.get_safe_string("playercolor");
@@ -517,8 +520,7 @@ static void init_one_player_from_template(const unsigned p, SinglePlayerGameSett
 	settings.set_player_tribe(p, tribe, tribe.empty());
 	tribe = settings.settings().players[p].tribe;
 
-	const std::string& init_script_name =
-	   player_section.get_string("init", "headquarters.lua");
+	const std::string& init_script_name = player_section.get_string("init", "headquarters.lua");
 	std::string addon;
 	if (FileSystem::filename_ext(init_script_name) == kAddOnExtension) {
 		addon = kAddOnDir;
@@ -532,8 +534,7 @@ static void init_one_player_from_template(const unsigned p, SinglePlayerGameSett
 	const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
 	for (unsigned i = 0; i < t.initializations.size(); ++i) {
 		if (addon.empty() ?
-		       init_script_name ==
-		          FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
 		       addon == t.initializations[i].script) {
 			settings.set_player_init(p, i);
 			found_init = true;
@@ -541,8 +542,8 @@ static void init_one_player_from_template(const unsigned p, SinglePlayerGameSett
 		}
 	}
 	if (!found_init) {
-		throw wexception("Invalid starting condition '%s' for player %d",
-		                 init_script_name.c_str(), p + 1);
+		throw wexception(
+		   "Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
 	}
 }
 
@@ -582,8 +583,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	const int playernumber = section.get_positive("interactive_player", 1);
 	settings.set_peaceful_mode(section.get_bool("peaceful", false));
-	settings.set_custom_starting_positions(
-	   section.get_bool("custom_starting_positions", false));
+	settings.set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
 
 	{
 		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
@@ -611,8 +611,8 @@ void WLApplication::init_and_run_game_from_template() {
 		ml->preload_map(true, nullptr);
 		const int nr_players = map.get_nrplayers();
 		settings.set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
-		settings.set_map(map.get_name(), mapfile, map.get_background_theme(),
-			             map.get_background(), nr_players, false);
+		settings.set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(),
+		                 nr_players, false);
 		for (int p = 0; p < nr_players; ++p) {
 			std::string key = "player_";
 			key += std::to_string(p + 1);
