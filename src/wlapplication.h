@@ -208,6 +208,8 @@ private:
 	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
 
+	void init_and_run_game_from_template();
+
 	bool redirect_output(std::string path = "");
 
 	/**

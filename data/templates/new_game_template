@@ -20,6 +20,9 @@ win_condition="endless_game.lua"
 peaceful="false"
 custom_starting_positions="false"
 
+# Comma-separated list of the add-ons to enable. Default: All disabled.
+addons=
+
 # Section `player_i`: Settings for the i-th player. If any value (or a whole section) is missing, default settings will be used.
 [player_1]
 
