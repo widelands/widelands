@@ -1302,12 +1302,16 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
-			if (upcast(Warehouse, wh, b)) {
-				if (PortDock* p = wh->get_portdock()) {
-					// Update in case the expedition was ready previously and now lacks a ware again
-					p->expedition_bootstrap()->check_is_ready(game);
+			try {
+				b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+				if (upcast(Warehouse, wh, b)) {
+					if (PortDock* p = wh->get_portdock()) {
+						// Update in case the expedition was ready previously and now lacks a ware again
+						p->expedition_bootstrap()->check_is_ready(game);
+					}
 				}
+			} catch (const std::exception& e) {
+				log_err("Skipped CmdSetInputMaxFill command: %s", e.what());
 			}
 		}
 	}
