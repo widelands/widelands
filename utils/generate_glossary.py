@@ -19,7 +19,6 @@ The resulting file then needs to be uploaded manually to Transifex as well.
 """
 
 from collections import defaultdict
-from subprocess import call, check_output, CalledProcessError
 import os.path
 import re
 import subprocess
@@ -61,7 +60,6 @@ def load_extracted_glossary(glossary_file, locale):
     result = defaultdict(GlossaryEntry)
     counter = 0
     term_index = 0
-    comment_index = 0
     for row in read_csv_file(glossary_file):
         # Detect the column indices
         if counter == 0:
@@ -81,7 +79,7 @@ def load_extracted_glossary(glossary_file, locale):
             entry.term = row[term_index].strip()
             entry.translation = row[translation_index].strip()
             # Remove source information with fuzzy matches
-            regex = re.compile('(.+)( \{.*\})(.*)')
+            regex = re.compile(r'(.+)( \{.*\})(.*)')
             match = regex.match(entry.translation)
             while match:
                 entry.translation = match.group(1) + match.group(3)
@@ -112,7 +110,7 @@ def load_transifex_glossary(glossary_file, locale):
                     term_index = colum_counter
                 elif header == 'comment':
                     term_comment_index = colum_counter
-                elif header == 'translation_' + locale or header == locale:
+                elif header in ('translation_' + locale, locale):
                     translation_index = colum_counter
                 elif header == 'comment_' + locale:
                     comment_index = colum_counter
@@ -202,23 +200,29 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
 
         try:
             # We need shell=True for the wildcards.
-            poterminology_result = check_output(
-                ['poterminology ' + input_path + ' -o ' + pot_path], stderr=subprocess.STDOUT, shell=True)
-            if 'Error' in poterminology_result:
+            poterminology_result = subprocess.run(
+                ['poterminology ' + input_path + ' -o ' + pot_path], capture_output=True, shell=True, text=True, check=True)
+            if poterminology_result.returncode != 0:
                 print('Error running poterminology:\n  FILE: ' + input_path + '\n  OUTPUT PATH: ' +
-                      output_path + '\n  ' + poterminology_result.split('\n', 1)[1])
+                      output_path + '\n  ' + poterminology_result.stderr)
                 return False
 
-        except CalledProcessError:
+        except subprocess.CalledProcessError:
             print('Failed to run poterminology:\n  FILE: ' + input_path + '\n  OUTPUT PATH: ' +
-                  output_path + '\n  ' + poterminology_result.split('\n', 1)[1])
+                  output_path + '\n  ' + poterminology_result.stderr)
             return False
 
         # Convert to csv for easy parsing
         csv_file = os.path.join(temp_path, 'glossary_' + locale + '.csv')
-        call(['po2csv', '--progress=none', pot_path, csv_file])
+        subprocess.run(['po2csv', '--progress=none',
+                        pot_path, csv_file], check=True)
         # The po file is no longer needed, delete it.
         os.remove(pot_path)
+
+        # Some translations were removed but are still part of the glossary
+        if not os.path.isfile(csv_file):
+            print('No translations found for locale: ', locale)
+            continue
 
         transifex_glossary = load_transifex_glossary(input_glossary, locale)
         extracted_glossary = load_extracted_glossary(csv_file, locale)
@@ -246,8 +250,8 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
     source_terms = load_transifex_source_terms(input_glossary)
     # Collect all translations for each source term
     for key in source_terms:
-        result = result + '"%s","%s","%s",' % (source_terms[key].term.replace('"', '""'), source_terms[
-                                               key].wordclass.replace('"', '""'), source_terms[key].term_comment.replace('"', '""'))
+        result = result + '"%s","%s","%s",' % (source_terms[key].term.replace(
+            '"', '""'), source_terms[key].wordclass.replace('"', '""'), source_terms[key].term_comment.replace('"', '""'))
         for locale in locales:
             glossary = glossaries[locale]
             translation = ''
@@ -298,7 +302,7 @@ def main():
         if len(sys.argv) == 4:
             locale = sys.argv[3]
 
-        if (not (os.path.exists(input_glossary) and os.path.isfile(input_glossary))):
+        if not (os.path.exists(input_glossary) and os.path.isfile(input_glossary)):
             print('There is no glossary file at ' + input_glossary)
             return 1
 
