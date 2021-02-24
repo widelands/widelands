@@ -496,7 +496,7 @@ void WLApplication::initialize_g_addons() {
 	}
 }
 
-static void init_one_player_from_template(const unsigned p,
+static void init_one_player_from_template(unsigned p,
                                           SinglePlayerGameSettingsProvider& settings,
                                           Section& player_section,
                                           const Widelands::Map& map) {
