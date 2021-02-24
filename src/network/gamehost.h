@@ -132,13 +132,14 @@ struct GameHost : public GameController {
 		return forced_pause_;
 	}
 
-private:
-	DISALLOW_COPY_AND_ASSIGN(GameHost);
-
 	void send_system_message_code(const std::string&,
 	                              const std::string& a = "",
 	                              const std::string& b = "",
 	                              const std::string& c = "");
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(GameHost);
+
 	void request_sync_reports();
 	void check_sync_reports();
 	void sync_report_callback();
@@ -163,6 +164,7 @@ private:
 	void handle_speed(Client& client, RecvPacket& r);
 	void handle_new_file(Client& client);
 	void handle_file_part(Client& client, RecvPacket& r);
+	void handle_system_message(RecvPacket&);
 
 	void handle_packet(uint32_t i, RecvPacket&);
 	void handle_network();

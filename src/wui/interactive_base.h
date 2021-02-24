@@ -324,6 +324,8 @@ protected:
 
 	ChatProvider* chat_provider_;
 
+	void broadcast_cheating_message();
+
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
 #endif

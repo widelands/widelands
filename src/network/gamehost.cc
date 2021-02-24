@@ -2488,6 +2488,8 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 		return handle_new_file(client);
 	case NETCMD_FILE_PART:
 		return handle_file_part(client, r);
+	case NETCMD_SYSTEM_MESSAGE_CODE:
+		return handle_system_message(r);
 
 	case NETCMD_SETTING_MAP:
 	case NETCMD_SETTING_PLAYER:
@@ -2505,6 +2507,19 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	default:
 		throw ProtocolException(cmd);
 	}
+}
+
+void GameHost::handle_system_message(RecvPacket& packet) {
+	const std::string code = packet.string();
+	const std::string arg1 = packet.string();
+	const std::string arg2 = packet.string();
+	const std::string arg3 = packet.string();
+	if (code != "CHEAT") {
+		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
+		        arg1.c_str(), arg2.c_str(), arg3.c_str());
+		throw DisconnectException("MALFORMED_COMMANDS");
+	}
+	send_system_message_code(code, arg1, arg2, arg3);
 }
 
 /** Handle uploading part of a file  */

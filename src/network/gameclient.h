@@ -121,6 +121,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
+	void send_cheating_info();
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(GameClient);
 
