@@ -571,21 +571,23 @@ void WLApplication::run() {
 			Section& section = profile.get_safe_section("global");
 			const int playernumber = section.get_positive("interactive_player", 1);
 			settings.set_peaceful_mode(section.get_bool("peaceful", false));
-			settings.set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
+			settings.set_custom_starting_positions(
+			   section.get_bool("custom_starting_positions", false));
 
 			{
 				std::string wc_name = section.get_string("win_condition", "endless_game.lua");
 				std::string script;
 				if (wc_name.size() > kAddOnExtension.size() &&
-						wc_name.compare(wc_name.size() - kAddOnExtension.size(), kAddOnExtension.size(), kAddOnExtension) == 0) {
+				    wc_name.compare(wc_name.size() - kAddOnExtension.size(), kAddOnExtension.size(),
+				                    kAddOnExtension) == 0) {
 					script = kAddOnDir;
 					script += FileSystem::file_separator();
 					script += wc_name;
 					script += FileSystem::file_separator();
 					script += "init.lua";
-			    } else {
-			    	script = "scripting/win_conditions/";
-			    	script += wc_name;
+				} else {
+					script = "scripting/win_conditions/";
+					script += wc_name;
 				}
 				settings.set_win_condition_script(script);
 			}
@@ -622,11 +624,13 @@ void WLApplication::run() {
 						settings.set_player_color(p, kPlayerColors[p]);
 					}
 
-					std::string tribe = player_section.get_string("tribe", map.get_scenario_player_tribe(p + 1).c_str());
+					std::string tribe =
+					   player_section.get_string("tribe", map.get_scenario_player_tribe(p + 1).c_str());
 					settings.set_player_tribe(p, tribe, tribe.empty());
 					tribe = settings.settings().players[p].tribe;
 
-					const std::string& init_script_name = player_section.get_string("init", "headquarters.lua");
+					const std::string& init_script_name =
+					   player_section.get_string("init", "headquarters.lua");
 					std::string addon;
 					if (init_script_name.size() > kAddOnExtension.size() &&
 					    init_script_name.compare(init_script_name.size() - kAddOnExtension.size(),
