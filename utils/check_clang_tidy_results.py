@@ -75,6 +75,7 @@ SUPPRESSED_CHECKS = {
     '[hicpp-vararg]',
     '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
     '[llvm-qualified-auto]',
+    '[llvmlibc-callee-namespace]',
     '[misc-macro-parentheses]',
     '[misc-non-private-member-variables-in-classes]',
     '[misc-redundant-expression]',
@@ -106,7 +107,7 @@ SUPPRESSED_CHECKS = {
     '[readability-redundant-member-init]',
     '[readability-redundant-smartptr-get]',
     '[readability-simplify-boolean-expr]',
-    '[readability-uppercase-literal-suffix]',
+    '[readability-uppercase-literal-suffix]'
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
