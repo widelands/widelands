@@ -569,6 +569,27 @@ void WLApplication::run() {
 		try {
 			Profile profile(filename_.c_str());
 			Section& section = profile.get_safe_section("global");
+			const int playernumber = section.get_positive("interactive_player", 1);
+			settings.set_peaceful_mode(section.get_bool("peaceful", false));
+			settings.set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
+
+			{
+				std::string wc_name = section.get_string("win_condition", "endless_game.lua");
+				std::string script;
+				if (wc_name.size() > kAddOnExtension.size() &&
+						wc_name.compare(wc_name.size() - kAddOnExtension.size(), kAddOnExtension.size(), kAddOnExtension) == 0) {
+					script = kAddOnDir;
+					script += FileSystem::file_separator();
+					script += wc_name;
+					script += FileSystem::file_separator();
+					script += "init.lua";
+			    } else {
+			    	script = "scripting/win_conditions/";
+			    	script += wc_name;
+				}
+				settings.set_win_condition_script(script);
+			}
+
 			{
 				const std::string mapfile = section.get_safe_string("map");
 				Widelands::Map map;
@@ -585,18 +606,27 @@ void WLApplication::run() {
 					std::string key = "player_";
 					key += std::to_string(p + 1);
 
-					Section& player_section = profile.get_safe_section(key);
-					settings.set_player_team(p, player_section.get_safe_natural("team"));
-					settings.set_player_color(
-					   p, player_section.has_val("playercolor") ?
-					         RGBColor(player_section.get_safe_int("playercolor")) :
-					         kPlayerColors[p]);
+					Section& player_section = profile.pull_section(key.c_str());
+					settings.set_player_team(p, player_section.get_natural("team", 0));
+					if (player_section.has_val("playercolor")) {
+						std::string colorstr = player_section.get_safe_string("playercolor");
+						char* color;
+						RGBColor result;
+						result.r = std::strtol(colorstr.c_str(), &color, 10);
+						++color;
+						result.g = std::strtol(color, &color, 10);
+						++color;
+						result.b = std::strtol(color, &color, 10);
+						settings.set_player_color(p, result);
+					} else {
+						settings.set_player_color(p, kPlayerColors[p]);
+					}
 
-					std::string tribe = player_section.get_safe_string("tribe");
+					std::string tribe = player_section.get_string("tribe", map.get_scenario_player_tribe(p + 1).c_str());
 					settings.set_player_tribe(p, tribe, tribe.empty());
 					tribe = settings.settings().players[p].tribe;
 
-					const std::string& init_script_name = player_section.get_safe_string("init");
+					const std::string& init_script_name = player_section.get_string("init", "headquarters.lua");
 					std::string addon;
 					if (init_script_name.size() > kAddOnExtension.size() &&
 					    init_script_name.compare(init_script_name.size() - kAddOnExtension.size(),
@@ -632,10 +662,6 @@ void WLApplication::run() {
 			   tipstexts, true, settings.settings().map_theme, settings.settings().map_background);
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-			const int playernumber = section.get_safe_positive("interactive_player");
-			settings.set_win_condition_script(section.get_safe_string("win_condition"));
-			settings.set_peaceful_mode(section.get_safe_bool("peaceful"));
-			settings.set_custom_starting_positions(section.get_safe_bool("custom_starting_positions"));
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
 
 			SinglePlayerGameController ctrl(game, true, playernumber);
