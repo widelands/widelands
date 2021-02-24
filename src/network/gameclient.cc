@@ -411,6 +411,16 @@ void GameClient::set_map(
 	// client is not allowed to do this
 }
 
+void GameClient::send_cheating_info() {
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
+	packet.string("CHEAT");
+	packet.string(d->localplayername);
+	packet.string("");
+	packet.string("");
+	d->net->send(packet);
+}
+
 void GameClient::set_player_tribe(uint8_t number,
                                   const std::string& tribe,
                                   bool const random_tribe) {
@@ -1198,17 +1208,12 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	if (showmsg && d->game) {
-		// WLApplication::emergency_save(d->modal, *d->game, msg);
-		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-		                                     NetworkGamingMessages::get_message(reason, arg).c_str());
-	}
-
-	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
-	// double free.
-	if (d->modal) {
-		if (d->modal->is_modal()) {
-			d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
+	if (showmsg) {
+		if (d->game) {
+			// WLApplication::emergency_save(d->modal, *d->game, msg);
+			throw wexception("%s", arg.empty() ?
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
 		} else {
 			capsule_.menu().show_messagebox(
 			   _("Disconnected"),
@@ -1217,8 +1222,13 @@ void GameClient::disconnect(const std::string& reason,
 			    (arg.empty() ? NetworkGamingMessages::get_message(reason) :
 			                   NetworkGamingMessages::get_message(reason, arg)))
 			      .str());
-			d->modal->die();
 		}
+	}
+
+	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
+	// double free.
+	if (d->modal) {
+		d->modal->die();
 	}
 	d->modal = nullptr;
 }
