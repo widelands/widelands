@@ -22,6 +22,8 @@ local r = {
       dirname .. "starting_conditions/village.lua";
       dirname .. "starting_conditions/poor_hamlet.lua";
       dirname .. "starting_conditions/struggling_outpost.lua";
+      dirname .. "starting_conditions/discovery.lua";
+      dirname .. "starting_conditions/new_world.lua";
    }
 }
 pop_textdomain()

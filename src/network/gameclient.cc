@@ -395,6 +395,16 @@ void GameClient::set_map(
 	// client is not allowed to do this
 }
 
+void GameClient::send_cheating_info() {
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
+	packet.string("CHEAT");
+	packet.string(d->localplayername);
+	packet.string("");
+	packet.string("");
+	d->net->send(packet);
+}
+
 void GameClient::set_player_tribe(uint8_t number,
                                   const std::string& tribe,
                                   bool const random_tribe) {
