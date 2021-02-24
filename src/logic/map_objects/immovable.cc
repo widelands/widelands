@@ -254,7 +254,9 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
 	}
 	collected_by_.insert(prodsite);
 	for (const std::string& immo : became_from_) {
-		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(immo))
+		const DescriptionIndex immovable_index = descriptions.immovable_index(immo);
+		assert(immovable_index != Widelands::INVALID_INDEX);
+		descriptions.get_mutable_immovable_descr(immovable_index)
 		   ->add_collected_by(descriptions, prodsite);
 	}
 }
@@ -551,7 +553,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		if (has_former_building) {
 			Player* owner = imm.get_owner();
 			if (owner) {
-				DescriptionIndex idx = owner->tribe().safe_building_index(fr.string());
+				DescriptionIndex idx = egbase().mutable_descriptions()->load_building(fr.string());
 				if (owner->tribe().has_building(idx)) {
 					imm.set_former_building(*owner->tribe().get_building_descr(idx));
 				}

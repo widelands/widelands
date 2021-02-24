@@ -336,9 +336,8 @@ Create a construction site for this type of building
 ===============
 */
 Building& BuildingDescr::create_constructionsite() const {
-	BuildingDescr const* const descr =
-	   descriptions_.get_building_descr(descriptions_.safe_building_index("constructionsite"));
-	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descr->create_object());
+	ConstructionSite& csite =
+	   dynamic_cast<ConstructionSite&>(descriptions_.constructionsite()->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -624,6 +623,9 @@ std::string Building::info_string(const InfoStringFormat& format) {
 InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const, const Request*) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
+bool Building::has_inputqueue(DescriptionIndex, WareWorker) const {
+	return false;
+}
 
 /*
 ===============
@@ -816,6 +818,9 @@ void Building::set_priority(const WareWorker type,
 		}
 	}
 }
+bool Building::has_ware_priority(DescriptionIndex ware_index) const {
+	return ware_priorities_.count(ware_index);
+}
 
 void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
@@ -841,7 +846,7 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 void Building::add_worker(Worker& worker) {
 	// Builders should make partially finished building see, but not finished buildings.
 	// So we prevent builders from seeing here and override this in PartiallyFinishedBuilding.
-	if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
+	if (owner().tribe().worker_index(worker.descr().name()) != owner().tribe().builder()) {
 		set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
@@ -916,8 +921,7 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             const Duration& throttle_time,
                             uint32_t throttle_radius) {
-	if (mute_messages() ||
-	    owner().is_muted(game.descriptions().safe_building_index(descr().name()))) {
+	if (mute_messages() || owner().is_muted(game.descriptions().building_index(descr().name()))) {
 		return;
 	}
 

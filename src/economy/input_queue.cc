@@ -138,13 +138,14 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
+		Descriptions* descriptions = game.mutable_descriptions();
 		if (packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
-				index_ = game.descriptions().safe_ware_index(fr.c_string());
+				index_ = descriptions->load_ware(fr.c_string());
 			} else {
 				assert(type_ == wwWORKER);
-				index_ = game.descriptions().safe_worker_index(fr.c_string());
+				index_ = descriptions->load_worker(fr.c_string());
 			}
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();

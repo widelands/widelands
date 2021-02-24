@@ -57,6 +57,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			const Map& map = egbase.map();
+			Descriptions* descriptions = egbase.mutable_descriptions();
 			uint16_t const width = map.get_width();
 			uint16_t const height = map.get_height();
 			FCoords c;
@@ -72,11 +73,8 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 						//  Get the tribe and the building index.
 						if (Player* const player = egbase.get_safe_player(p)) {
-							Notifications::publish(NoteMapObjectDescription(
-							   name, NoteMapObjectDescription::LoadType::kObject));
-
 							const TribeDescr& tribe = player->tribe();
-							const DescriptionIndex index = tribe.safe_building_index(name);
+							const DescriptionIndex index = descriptions->load_building(name);
 							const BuildingDescr* bd = tribe.get_building_descr(index);
 							// Check if tribe has this building itself
 							// OR alternatively if this building might be a conquered militarysite
@@ -101,7 +99,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 							// TODO(Nordfriese): Savegame compatibility
 							if (packet_version <= 3) {
 								// In newer versions this info lives in MapBuildingDataPacket
-								read_priorities(*building, fr);
+								read_priorities(egbase, *building, fr);
 							}
 						} else {
 							throw GameDataError("player %u does not exist", p);
@@ -165,24 +163,26 @@ void MapBuildingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 }
 
 // TODO(Nordfriese): Savegame compatibility. Delete this function after v1.0
-void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
+void MapBuildingPacket::read_priorities(EditorGameBase& egbase, Building& building, FileRead& fr) {
 	// TODO(unknown): savegame compatibility
 	fr.unsigned_32();  // unused, was base_priority which is unused. Remove after b20.
 
-	const TribeDescr& tribe = building.owner().tribe();
-	Widelands::DescriptionIndex ware_type;
-	// read ware type
+	Descriptions* descriptions = egbase.mutable_descriptions();
+
+	// read ware/worker type
+	Widelands::DescriptionIndex ware_type = INVALID_INDEX;
 	while (0xff != (ware_type = fr.unsigned_8())) {
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.unsigned_8();
 		for (uint8_t i = 0; i < count; ++i) {
-			DescriptionIndex idx;
-			if (wwWARE == ware_type) {
-				idx = tribe.safe_ware_index(fr.c_string());
-			} else if (wwWORKER == ware_type) {
-				idx = tribe.safe_worker_index(fr.c_string());
-			} else {
-				throw GameDataError("unrecognized ware type %d while reading priorities", ware_type);
+			DescriptionIndex idx = Widelands::INVALID_INDEX;
+			switch (ware_type) {
+			case WareWorker::wwWARE:
+				idx = descriptions->load_ware(fr.c_string());
+				break;
+			case WareWorker::wwWORKER:
+				idx = descriptions->load_worker(fr.c_string());
+				break;
 			}
 
 			// convert old priority constants

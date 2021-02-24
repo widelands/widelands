@@ -195,6 +195,17 @@ ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, c
 	throw wexception("%s (%u) (building %s) has no WaresQueue for %u", descr().name().c_str(),
 	                 serial(), building_->name().c_str(), wi);
 }
+bool ConstructionSite::has_inputqueue(DescriptionIndex wi, WareWorker type) const {
+	if (type != wwWARE) {
+		return false;
+	}
+	for (WaresQueue* ware : consume_wares_) {
+		if (ware->get_index() == wi) {
+			return true;
+		}
+	}
+	return false;
+}
 
 /*
 ===============

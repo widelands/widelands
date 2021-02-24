@@ -620,6 +620,7 @@ public:
 	uint32_t count_soldiers_e(unsigned) const;
 
 	bool is_muted(DescriptionIndex di) const {
+		assert(di != Widelands::INVALID_INDEX);
 		return muted_building_types_.count(di);
 	}
 	void set_muted(DescriptionIndex, bool mute);

@@ -56,6 +56,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber const nr_players = egbase.map().get_nrplayers();
 			upcast(Game const, game, &egbase);
+			Descriptions* descriptions = egbase.mutable_descriptions();
 
 			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, egbase, player) {
@@ -64,7 +65,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game) {
-					for (DescriptionIndex i = 0; i < game->descriptions().nr_buildings(); ++i) {
+					for (DescriptionIndex i = 0; i < descriptions->nr_buildings(); ++i) {
 						player->allow_building_type(i, false);
 					}
 				}
@@ -75,7 +76,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 					bool allowed;
 					while (const char* const name = s.get_next_bool(nullptr, &allowed)) {
 						try {
-							const DescriptionIndex index = tribe.safe_building_index(name);
+							const DescriptionIndex index = descriptions->load_building(name);
 							player->allow_building_type(index, allowed);
 						} catch (const GameDataError&) {
 							log_warn("MapAllowedBuildingTypesPacket - tribe %s does not define "

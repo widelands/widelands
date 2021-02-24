@@ -356,6 +356,7 @@ public:
 	}
 
 	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	bool has_inputqueue(DescriptionIndex, WareWorker type) const override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

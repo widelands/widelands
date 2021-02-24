@@ -272,6 +272,7 @@ public:
 	/// to get info about a queue. Currently disambiguation is used only by warehouse
 	/// code because expedition bootstraps may have multiple queues for the same item.
 	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*);
+	virtual bool has_inputqueue(DescriptionIndex, WareWorker) const;
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
@@ -291,6 +292,7 @@ public:
 
 	const WarePriority& get_priority(WareWorker, DescriptionIndex) const;
 	void set_priority(WareWorker, DescriptionIndex, const WarePriority&);
+	bool has_ware_priority(DescriptionIndex ware_index) const;
 
 	/**
 	 * The former buildings vector keeps track of all former buildings

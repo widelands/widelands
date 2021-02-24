@@ -944,8 +944,9 @@ int LuaPlayerBase::place_ship(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Player& player = get(L, egbase);
 
-	const Widelands::ShipDescr* descr = egbase.descriptions().get_ship_descr(player.tribe().ship());
-	Widelands::Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
+	const Widelands::DescriptionIndex ship_index = player.tribe().ship();
+	assert(ship_index != Widelands::INVALID_INDEX);
+	Widelands::Bob& ship = egbase.create_ship(c->coords(), ship_index, &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &ship);
 

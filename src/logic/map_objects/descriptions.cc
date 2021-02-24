@@ -169,6 +169,29 @@ size_t Descriptions::nr_workers() const {
 	return workers_->size();
 }
 
+const std::string& Descriptions::name(DescriptionIndex index, MapObjectType type) const {
+	switch (type) {
+	case MapObjectType::CRITTER:
+		return get_critter_descr(index)->name();
+	case MapObjectType::RESOURCE:
+		return get_resource_descr(index)->name();
+	case MapObjectType::TERRAIN:
+		return get_terrain_descr(index)->name();
+	case MapObjectType::IMMOVABLE:
+		return get_immovable_descr(index)->name();
+	case MapObjectType::BUILDING:
+		return get_building_descr(index)->name();
+	case MapObjectType::SHIP:
+		return get_ship_descr(index)->name();
+	case MapObjectType::WARE:
+		return get_ware_descr(index)->name();
+	case MapObjectType::WORKER:
+		return get_worker_descr(index)->name();
+	default:
+		NEVER_HERE();
+	}
+}
+
 bool Descriptions::ware_exists(const std::string& warename) const {
 	return wares_->exists(warename) != nullptr;
 }
@@ -200,92 +223,6 @@ bool Descriptions::tribe_exists(DescriptionIndex index) const {
 	return tribes_->get_mutable(index) != nullptr;
 }
 
-DescriptionIndex Descriptions::safe_building_index(const std::string& buildingname) const {
-	DescriptionIndex result = building_index(buildingname);
-	if (result == Widelands::INVALID_INDEX) {
-		result = building_index(compatibility_table_->lookup_building(buildingname));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown building '%s'", buildingname.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_critter_index(const std::string& crittername) const {
-	DescriptionIndex const result = critter_index(crittername);
-
-	if (result == INVALID_INDEX) {
-		throw GameDataError("Unknown critter '%s'", crittername.c_str());
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_immovable_index(const std::string& immovablename) const {
-	DescriptionIndex result = immovable_index(immovablename);
-	if (result == Widelands::INVALID_INDEX) {
-		result = immovable_index(compatibility_table_->lookup_immovable(immovablename));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown immovable '%s'", immovablename.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcename) const {
-	DescriptionIndex result = resource_index(resourcename);
-	if (result == INVALID_INDEX) {
-		result = resource_index(compatibility_table_->lookup_resource(resourcename));
-		if (result == INVALID_INDEX) {
-			throw GameDataError("Unknown resource '%s'", resourcename.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_ship_index(const std::string& shipname) const {
-	DescriptionIndex result = ship_index(shipname);
-	if (result == INVALID_INDEX) {
-		result = ship_index(compatibility_table_->lookup_ship(shipname));
-		if (result == INVALID_INDEX) {
-			throw GameDataError("Unknown ship '%s'", shipname.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_terrain_index(const std::string& terrainname) const {
-	DescriptionIndex result = terrain_index(terrainname);
-	if (result == INVALID_INDEX) {
-		result = terrain_index(compatibility_table_->lookup_terrain(terrainname));
-		if (result == INVALID_INDEX) {
-			throw GameDataError("Unknown terrain '%s'", terrainname.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_tribe_index(const std::string& tribename) const {
-	const DescriptionIndex result = tribe_index(tribename);
-	if (!tribe_exists(result)) {
-		throw GameDataError("Unknown tribe '%s'", tribename.c_str());
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_ware_index(const std::string& warename) const {
-	DescriptionIndex result = ware_index(warename);
-	if (result == Widelands::INVALID_INDEX) {
-		result = ware_index(compatibility_table_->lookup_ware(warename));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown ware '%s'", warename.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_worker_index(const std::string& workername) const {
-	DescriptionIndex result = worker_index(workername);
-	if (result == Widelands::INVALID_INDEX) {
-		result = worker_index(compatibility_table_->lookup_worker(workername));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown worker '%s'", workername.c_str());
-		}
-	}
-	return result;
-}
-
 DescriptionIndex Descriptions::building_index(const std::string& buildingname) const {
 	return buildings_->get_index(buildingname);
 }
@@ -297,7 +234,6 @@ DescriptionIndex Descriptions::immovable_index(const std::string& immovablename)
 }
 DescriptionIndex Descriptions::resource_index(const std::string& resourcename) const {
 	// TODO(GunChleoc): Having "none" in the backend here is bad design.
-	// I think we have this for supporting LuaField::get_resource only, but we need to verify this.
 	return resourcename != "none" ? resources_->get_index(resourcename) : Widelands::kNoResource;
 }
 DescriptionIndex Descriptions::ship_index(const std::string& shipname) const {
@@ -426,12 +362,18 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 	case MapObjectType::CARRIER:
 		workers_->add(new CarrierDescr(type_descname, table, *this));
 		break;
-	case MapObjectType::CONSTRUCTIONSITE:
-		buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
-		break;
-	case MapObjectType::DISMANTLESITE:
-		buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
-		break;
+	case MapObjectType::CONSTRUCTIONSITE: {
+		Widelands::DescriptionIndex constructionsite_index =
+		   buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
+		constructionsite_ =
+		   dynamic_cast<const ConstructionSiteDescr*>(get_building_descr(constructionsite_index));
+	} break;
+	case MapObjectType::DISMANTLESITE: {
+		Widelands::DescriptionIndex dismantlesite_index =
+		   buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
+		dismantlesite_ =
+		   dynamic_cast<const DismantleSiteDescr*>(get_building_descr(dismantlesite_index));
+	} break;
 	case MapObjectType::FERRY:
 		workers_->add(new FerryDescr(type_descname, table, *this));
 		break;
@@ -510,67 +452,64 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 	} catch (WException& e) {
 		throw GameDataError("Error while loading tribe '%s': %s", tribename.c_str(), e.what());
 	}
-	return safe_tribe_index(tribename);
+	return tribe_index(tribename);
+}
+
+template <typename T>
+DescriptionIndex Descriptions::load_description(const DescriptionMaintainer<T>& maintainer,
+                                                const std::string& objectname,
+                                                MapObjectType type) {
+	const std::string& looked_up_name = compatibility_table_->lookup(objectname, type);
+	description_manager_->load_description(looked_up_name);
+	return maintainer.get_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
-	const std::string& looked_up_name = compatibility_table_->lookup_building(buildingname);
-	description_manager_->load_description(looked_up_name);
-	return safe_building_index(looked_up_name);
+	return load_description(*buildings_, buildingname, MapObjectType::BUILDING);
 }
 
 DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
-	const std::string& looked_up_name = compatibility_table_->lookup_critter(crittername);
-	description_manager_->load_description(looked_up_name);
-	return safe_critter_index(looked_up_name);
+	return load_description(*critters_, crittername, MapObjectType::CRITTER);
 }
 
 DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) {
-	const std::string& looked_up_name = compatibility_table_->lookup_immovable(immovablename);
-	description_manager_->load_description(looked_up_name);
-	return safe_immovable_index(looked_up_name);
+	return load_description(*immovables_, immovablename, MapObjectType::IMMOVABLE);
 }
 
 DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
-	const std::string& looked_up_name = compatibility_table_->lookup_resource(resourcename);
-	description_manager_->load_description(looked_up_name);
-	return safe_resource_index(looked_up_name);
+	// TODO(GunChleoc): Having "none" in the backend here is bad design.
+	if (resourcename == "none") {
+		return Widelands::kNoResource;
+	}
+	return load_description(*resources_, resourcename, MapObjectType::RESOURCE);
 }
 
 DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
-	const std::string& looked_up_name = compatibility_table_->lookup_ship(shipname);
-	description_manager_->load_description(looked_up_name);
-	return safe_ship_index(looked_up_name);
+	return load_description(*ships_, shipname, MapObjectType::SHIP);
 }
 
 DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
-	const std::string& looked_up_name = compatibility_table_->lookup_terrain(terrainname);
-	description_manager_->load_description(looked_up_name);
-	return safe_terrain_index(looked_up_name);
+	return load_description(*terrains_, terrainname, MapObjectType::TERRAIN);
 }
 
 DescriptionIndex Descriptions::load_ware(const std::string& warename) {
-	const std::string& looked_up_name = compatibility_table_->lookup_ware(warename);
-	description_manager_->load_description(looked_up_name);
-	return safe_ware_index(looked_up_name);
+	return load_description(*wares_, warename, MapObjectType::WARE);
 }
 
 DescriptionIndex Descriptions::load_worker(const std::string& workername) {
-	const std::string& looked_up_name = compatibility_table_->lookup_worker(workername);
-	description_manager_->load_description(looked_up_name);
-	return safe_worker_index(looked_up_name);
+	return load_description(*workers_, workername, MapObjectType::WORKER);
 }
 
 std::pair<WareWorker, DescriptionIndex>
 Descriptions::load_ware_or_worker(const std::string& objectname) const {
-	std::string looked_up_name = compatibility_table_->lookup_ware(objectname);
+	std::string looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::WARE);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
 	const DescriptionIndex wai = ware_index(looked_up_name);
 	if (wai != Widelands::INVALID_INDEX) {
 		return std::make_pair(WareWorker::wwWARE, wai);
 	}
-	looked_up_name = compatibility_table_->lookup_worker(objectname);
+	looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::WORKER);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject));
 	const DescriptionIndex woi = worker_index(looked_up_name);
@@ -581,14 +520,14 @@ Descriptions::load_ware_or_worker(const std::string& objectname) const {
 }
 std::pair<bool, DescriptionIndex>
 Descriptions::load_building_or_immovable(const std::string& objectname) const {
-	std::string looked_up_name = compatibility_table_->lookup_building(objectname);
+	std::string looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::BUILDING);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
 	const DescriptionIndex bi = building_index(looked_up_name);
 	if (bi != Widelands::INVALID_INDEX) {
 		return std::make_pair(true, bi);
 	}
-	looked_up_name = compatibility_table_->lookup_immovable(objectname);
+	looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::IMMOVABLE);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject));
 	const DescriptionIndex ii = immovable_index(looked_up_name);
@@ -615,6 +554,19 @@ void Descriptions::set_old_world_name(const std::string& name) {
 		compatibility_table_ =
 		   std::unique_ptr<DescriptionsCompatibilityTable>(new OneWorldLegacyLookupTable(name));
 	}
+}
+
+const ConstructionSiteDescr* Descriptions::constructionsite() const {
+	if (constructionsite_ == nullptr) {
+		throw GameDataError("The 'constructionsite' building description was not loaded");
+	}
+	return constructionsite_;
+}
+const DismantleSiteDescr* Descriptions::dismantlesite() const {
+	if (dismantlesite_ == nullptr) {
+		throw GameDataError("The 'dismantlesite' building description was not loaded");
+	}
+	return dismantlesite_;
 }
 
 #define CHECK_FACTORY(addon, unit_type)                                                            \

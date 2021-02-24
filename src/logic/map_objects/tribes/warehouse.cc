@@ -1165,7 +1165,9 @@ void Warehouse::create_worker(Game& game, DescriptionIndex const worker) {
 			// Update statistics accordingly
 			get_owner()->ware_consumed(id_ware, buildcost.second);
 		} else {
-			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);
+			const DescriptionIndex worker_index = owner().tribe().worker_index(input);
+			assert(worker_index != Widelands::INVALID_INDEX);
+			remove_workers(worker_index, buildcost.second);
 		}
 	}
 
@@ -1432,6 +1434,14 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return r ? portdock_->expedition_bootstrap()->inputqueue(*r) :
 	           portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+}
+bool Warehouse::has_inputqueue(DescriptionIndex wi, WareWorker type) const {
+	for (const auto& queue : portdock_->expedition_bootstrap()->queues(false)) {
+		if (queue->get_index() == wi && queue->get_type() == type) {
+			return true;
+		}
+	}
+	return false;
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {

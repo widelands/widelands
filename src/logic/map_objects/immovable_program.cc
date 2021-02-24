@@ -177,8 +177,9 @@ static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>>
 
 void ImmovableProgram::postload_immovable_relations(const Descriptions& descriptions) {
 	for (const auto& pair : immovable_relations_) {
-		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(pair.second))
-		   ->add_became_from(pair.first);
+		const DescriptionIndex immovable_index = descriptions.immovable_index(pair.second);
+		assert(immovable_index != Widelands::INVALID_INDEX);
+		descriptions.get_mutable_immovable_descr(immovable_index)->add_became_from(pair.first);
 	}
 	immovable_relations_.clear();
 }

@@ -2244,6 +2244,12 @@ int LuaMapObjectDescription::helptexts(lua_State* L) {
 	return 1;
 }
 
+// Sets the description pointer for a MapObjectDescription type
+#define UNPERSIST_DESCRIPTION(L, type, name)                                                       \
+	Widelands::Descriptions* descriptions = get_egbase(L).mutable_descriptions();                   \
+	Widelands::DescriptionIndex idx = descriptions->load_##type(name);                              \
+	set_description_pointer(descriptions->get_##type##_descr(idx));
+
 /* RST
 ImmovableDescription
 --------------------
@@ -2276,9 +2282,7 @@ void LuaImmovableDescription::__persist(lua_State* L) {
 void LuaImmovableDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_immovable_index(name);
-	set_description_pointer(descriptions.get_immovable_descr(idx));
+	UNPERSIST_DESCRIPTION(L, immovable, name);
 }
 
 /* RST
@@ -2467,9 +2471,7 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_building_index(name);
-	set_description_pointer(descriptions.get_building_descr(idx));
+	UNPERSIST_DESCRIPTION(L, building, name);
 }
 
 /*
@@ -3015,7 +3017,8 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 		lua_pushint32(L, index++);
 		const Widelands::ProductionSiteDescr* descr =
 		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
-		      descriptions.get_building_descr(descriptions.safe_building_index(site)));
+		      descriptions.get_building_descr(descriptions.building_index(site)));
+		assert(descr != nullptr);
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -3038,7 +3041,8 @@ int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L)
 		lua_pushint32(L, index++);
 		const Widelands::ProductionSiteDescr* descr =
 		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
-		      decriptions.get_building_descr(decriptions.safe_building_index(site)));
+		      decriptions.get_building_descr(decriptions.building_index(site)));
+		assert(descr != nullptr);
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -3571,9 +3575,7 @@ void LuaShipDescription::__persist(lua_State* L) {
 void LuaShipDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_ship_index(name);
-	set_description_pointer(descriptions.get_ship_descr(idx));
+	UNPERSIST_DESCRIPTION(L, ship, name);
 }
 
 /*
@@ -3613,9 +3615,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_ware_index(name);
-	set_description_pointer(descriptions.get_ware_descr(idx));
+	UNPERSIST_DESCRIPTION(L, ware, name);
 }
 
 /*
@@ -3667,7 +3667,8 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	if (descriptions.tribe_exists(tribename)) {
-		const Widelands::DescriptionIndex& ware_index = descriptions.safe_ware_index(get()->name());
+		const Widelands::DescriptionIndex& ware_index = descriptions.ware_index(get()->name());
+		assert(ware_index != Widelands::INVALID_INDEX);
 		int tribeindex = descriptions.tribe_index(tribename);
 		lua_pushboolean(
 		   L, descriptions.get_tribe_descr(tribeindex)->is_construction_material(ware_index));
@@ -3738,9 +3739,7 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_worker_index(name);
-	set_description_pointer(descriptions.get_worker_descr(idx));
+	UNPERSIST_DESCRIPTION(L, worker, name);
 }
 
 /*
@@ -4019,10 +4018,7 @@ void LuaResourceDescription::__persist(lua_State* L) {
 void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	const Widelands::ResourceDescription* descr =
-	   descriptions.get_resource_descr(descriptions.safe_resource_index(name));
-	set_description_pointer(descr);
+	UNPERSIST_DESCRIPTION(L, resource, name);
 }
 
 /*
@@ -4140,7 +4136,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	set_description_pointer(get_egbase(L).descriptions().get_terrain_descr(name));
+	UNPERSIST_DESCRIPTION(L, terrain, name);
 }
 
 /*
@@ -4271,6 +4267,8 @@ int LuaTerrainDescription::get_valid_resources(lua_State* L) {
  METHODS
  ==========================================================
  */
+
+#undef UNPERSIST_DESCRIPTION
 
 /* RST
 Economy

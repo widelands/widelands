@@ -37,7 +37,7 @@ struct MapBuildingPacket {
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 protected:
-	void read_priorities(Building&, FileRead&);
+	void read_priorities(EditorGameBase& egbase, Building&, FileRead&);
 };
 }  // namespace Widelands
 

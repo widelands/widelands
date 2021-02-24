@@ -31,12 +31,13 @@
 #include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
 
-class DescriptionsCompatibilityTable;
-
 namespace Widelands {
 
 class BuildingDescr;
+class ConstructionSiteDescr;
 class CritterDescr;
+class DescriptionsCompatibilityTable;
+class DismantleSiteDescr;
 class ImmovableDescr;
 class ResourceDescription;
 class ShipDescr;
@@ -64,6 +65,8 @@ public:
 	size_t nr_wares() const;
 	size_t nr_workers() const;
 
+	const std::string& name(DescriptionIndex index, MapObjectType type) const;
+
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;
@@ -74,33 +77,6 @@ public:
 	bool ware_exists(DescriptionIndex index) const;
 	bool worker_exists(const std::string& workername) const;
 	bool worker_exists(DescriptionIndex index) const;
-
-	/// Returns the index for 'buildingname' and throws an exception if the building can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_building_index(const std::string& buildingname) const;
-	/// Returns the index for 'crittername' and throws an exception if the critter can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_critter_index(const std::string& crittername) const;
-	/// Returns the index for 'immovablename' and throws an exception if the immovable can't be
-	/// found. This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
-	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_resource_index(const std::string& warename) const;
-	/// Returns the index for 'shipname' and throws an exception if the ship can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_ship_index(const std::string& shipname) const;
-	/// Returns the index for 'terrainname' and throws an exception if the terrain can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_terrain_index(const std::string& terrainname) const;
-	/// Returns the index for 'tribename' and throws an exception if the tribe can't be found.
-	DescriptionIndex safe_tribe_index(const std::string& tribename) const;
-	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_ware_index(const std::string& warename) const;
-	/// Returns the index for 'workername' and throws an exception if the worker can't be found.
-	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_worker_index(const std::string& workername) const;
 
 	DescriptionIndex building_index(const std::string& buildingname) const;
 	DescriptionIndex critter_index(const std::string& crittername) const;
@@ -187,7 +163,18 @@ public:
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
 
+	/// We have 1 global constructionsite, so we can have a direct accessor for defining &
+	/// saveloading
+	const ConstructionSiteDescr* constructionsite() const;
+	/// We have 1 global dismantlesite, so we can have a direct accessor for defining & saveloading
+	const DismantleSiteDescr* dismantlesite() const;
+
 private:
+	template <typename T>
+	DescriptionIndex load_description(const DescriptionMaintainer<T>&,
+	                                  const std::string& objectname,
+	                                  MapObjectType type);
+
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
@@ -198,6 +185,9 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 	std::unique_ptr<DescriptionsCompatibilityTable> compatibility_table_;
+
+	const ConstructionSiteDescr* constructionsite_;  // Owned by buildings_
+	const DismantleSiteDescr* dismantlesite_;        // Owned by buildings_
 
 	uint32_t largest_workarea_;
 

@@ -81,6 +81,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 		return;
 	}
 
+	Descriptions* descriptions = egbase.mutable_descriptions();
+
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
@@ -139,7 +141,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					for (size_t i = (packet_version >= 7 ? fr.unsigned_32() : 0); i; --i) {
 						const std::string warename(fr.string());
 						building.set_priority(
-						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
+						   wwWARE, descriptions->load_ware(warename), WarePriority(fr));
 					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
@@ -157,12 +159,13 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
 							DescriptionIndex oldidx = INVALID_INDEX;
+
 							// TODO(Nordfriese): `type.empty()` is only allowed for
 							// savegame compatibility, disallow after v1.0
 							if (type.empty() || type == "building") {
-								oldidx = building.owner().tribe().safe_building_index(map_object_name);
+								oldidx = descriptions->load_building(map_object_name);
 							} else if (type == "immovable") {
-								oldidx = building.owner().tribe().immovable_index(map_object_name);
+								oldidx = descriptions->load_immovable(map_object_name);
 								building.was_immovable_ =
 								   building.owner().tribe().get_immovable_descr(oldidx);
 							} else {
@@ -175,8 +178,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						}
 					} else {
 						while (fr.unsigned_8()) {
-							DescriptionIndex oldidx =
-							   building.owner().tribe().safe_building_index(fr.c_string());
+							DescriptionIndex oldidx = descriptions->load_building(fr.c_string());
 							building.old_buildings_.push_back(std::make_pair(oldidx, true));
 						}
 					}
@@ -255,7 +257,8 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketPFBuilding) {
 			const TribeDescr& tribe = pfb.owner().tribe();
-			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
+			pfb.building_ =
+			   tribe.get_building_descr(game.mutable_descriptions()->load_building(fr.c_string()));
 
 			delete pfb.builder_request_;
 			if (fr.unsigned_8()) {
@@ -326,11 +329,11 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 			constructionsite.fetchfromflag_ = fr.signed_32();
 
 			if (packet_version >= 4) {
+				Descriptions* descriptions = game.mutable_descriptions();
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
 					constructionsite.info_.intermediates.push_back(
-					   game.descriptions().get_building_descr(
-					      game.descriptions().safe_building_index(fr.c_string())));
+					   descriptions->get_building_descr(descriptions->load_building(fr.c_string())));
 				}
 				constructionsite.settings_.reset(
 				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
@@ -376,8 +379,10 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			warehouse.init_containers(*player);
 			const TribeDescr& tribe = player->tribe();
 
+			Descriptions* descriptions = game.mutable_descriptions();
+
 			while (fr.unsigned_8()) {
-				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());
+				const DescriptionIndex& id = descriptions->load_ware(fr.c_string());
 				Quantity amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
@@ -389,7 +394,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 			}
 			while (fr.unsigned_8()) {
-				const DescriptionIndex& id = game.mutable_descriptions()->load_worker(fr.c_string());
+				const DescriptionIndex& id = descriptions->load_worker(fr.c_string());
 				uint32_t amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
@@ -431,15 +436,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					break;
 				}
 				const Time next_spawn(fr);
-				DescriptionIndex const worker_index = tribe.safe_worker_index(worker_typename);
-				if (!game.descriptions().worker_exists(worker_index)) {
-					log_warn("%s %u has a next_spawn time for nonexistent "
-					         "worker type \"%s\" set to %u, ignoring\n",
-					         warehouse.descr().name().c_str(), warehouse.serial(),
-					         worker_typename.c_str(), next_spawn.get());
-					continue;
-				}
-				if (!tribe.get_worker_descr(worker_index)->buildcost().empty()) {
+				const DescriptionIndex worker_index = descriptions->load_worker(worker_typename);
+				if (!descriptions->get_worker_descr(worker_index)->buildcost().empty()) {
 					log_warn("%s %u has a next_spawn time for worker type "
 					         "\"%s\", that costs something to build, set to %u, "
 					         "ignoring\n",
@@ -473,7 +471,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			while (nr_planned_workers--) {
 				warehouse.planned_workers_.push_back(Warehouse::PlannedWorkers());
 				Warehouse::PlannedWorkers& pw = warehouse.planned_workers_.back();
-				pw.index = tribe.safe_worker_index(fr.c_string());
+				pw.index = descriptions->load_worker(fr.c_string());
 				pw.amount = fr.unsigned_32();
 
 				uint32_t nr_requests = fr.unsigned_32();

@@ -254,9 +254,12 @@ CmdBuild::CmdBuild(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 }
 
 void CmdBuild::execute(Game& game) {
-	// Empty former_buildings vector since it's a new csite.
-	FormerBuildings former_buildings;
-	game.get_player(sender())->build(coords, bi, true, former_buildings);
+	// TODO(GunChleoc): Savegame compatibility, remove condition after v1.0
+	if (bi != Widelands::INVALID_INDEX) {
+		// Empty former_buildings vector since it's a new csite.
+		FormerBuildings former_buildings;
+		game.get_player(sender())->build(coords, bi, true, former_buildings);
+	}
 }
 
 void CmdBuild::serialize(StreamWrite& ser) {
@@ -265,19 +268,37 @@ void CmdBuild::serialize(StreamWrite& ser) {
 	write_coords_32(&ser, coords);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdBuild = 1;
+constexpr uint16_t kCurrentPacketVersionCmdBuild = 2;
 
 void CmdBuild::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdBuild) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdBuild) {
 			PlayerCommand::read(fr, egbase, mol);
-			bi = fr.unsigned_16();
+			if (packet_version == 1) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 1 after v1.0
+				bi = fr.unsigned_16();
+			} else {
+				bi = egbase.mutable_descriptions()->load_building(fr.string());
+			}
 			coords = read_coords_32(&fr, egbase.map().extent());
 		} else {
 			throw UnhandledVersionError("CmdBuild", packet_version, kCurrentPacketVersionCmdBuild);
 		}
-
+		if (packet_version == 1) {
+			if (!egbase.get_player(sender())->tribe().has_building(bi)) {
+				bi = Widelands::INVALID_INDEX;
+				log_warn("Player does not have building with index %d. Ignoring build command.", bi);
+			} else {
+				const int size = egbase.descriptions().get_building_descr(bi)->get_size();
+				if ((egbase.map().get_fcoords(coords).field->get_caps() & size) < size) {
+					bi = Widelands::INVALID_INDEX;
+					log_warn(
+					   "Building with index %d does not fit on selected field. Ignoring build command.",
+					   bi);
+				}
+			}
+		}
 	} catch (const WException& e) {
 		throw GameDataError("build: %s", e.what());
 	}
@@ -288,7 +309,7 @@ void CmdBuild::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos)
 	fw.unsigned_16(kCurrentPacketVersionCmdBuild);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-	fw.unsigned_16(bi);
+	fw.string(egbase.descriptions().name(bi, MapObjectType::BUILDING));
 	write_coords_32(&fw, coords);
 }
 
@@ -712,7 +733,11 @@ CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des)
 void CmdExpeditionConfig::execute(Game& game) {
 	if (upcast(PortDock, pd, game.objects().get_object(serial))) {
 		if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
-			x->demand_additional_item(game, type, index, add);
+			// TODO(GunChleoc): Savegame compatibility, remove this condition after v1.0
+			if ((type == wwWARE && pd->owner().tribe().has_ware(index)) ||
+			    (type == wwWORKER && pd->owner().tribe().has_worker(index))) {
+				x->demand_additional_item(game, type, index, add);
+			}
 		}
 	}
 }
@@ -725,16 +750,27 @@ void CmdExpeditionConfig::serialize(StreamWrite& ser) {
 	ser.unsigned_8(add ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdExpeditionConfig = 1;
+constexpr uint16_t kCurrentPacketVersionCmdExpeditionConfig = 2;
 
 void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdExpeditionConfig) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdExpeditionConfig) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PortDock>(fr.unsigned_32(), mol);
-			type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
-			index = fr.unsigned_32();
+			if (packet_version == 1) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 1 after v1.0
+				type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+				index = fr.unsigned_32();
+			} else {
+				if (fr.unsigned_8() == 0) {
+					type = wwWARE;
+					index = egbase.mutable_descriptions()->load_ware(fr.string());
+				} else {
+					type = wwWORKER;
+					index = egbase.mutable_descriptions()->load_worker(fr.string());
+				}
+			}
 			add = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -750,7 +786,8 @@ void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 	fw.unsigned_8(type == wwWARE ? 0 : 1);
-	fw.unsigned_32(index);
+	fw.string(type == wwWARE ? egbase.descriptions().name(index, MapObjectType::WARE) :
+	                           egbase.descriptions().name(index, MapObjectType::WORKER));
 	fw.unsigned_8(add ? 1 : 0);
 }
 
@@ -769,6 +806,10 @@ void CmdEnhanceBuilding::execute(Game& game) {
 			cs->enhance(game);
 		}
 	} else if (upcast(Building, building, mo)) {
+		if (bi_ != Widelands::INVALID_INDEX && bi_ != building->descr().enhancement()) {
+			// TODO(GunChleoc): Savegame compatibility, remove this assignment after v1.0
+			bi_ = building->descr().enhancement();
+		}
 		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);
 	}
 }
@@ -780,15 +821,25 @@ void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
 	ser.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 2;
+constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 3;
 
 void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdEnhanceBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			bi_ = fr.unsigned_16();
+			if (packet_version == 2) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 2 after v1.0
+				bi_ = fr.unsigned_16();
+			} else {
+				std::string buildingname = fr.string();
+				if (buildingname.empty()) {
+					bi_ = Widelands::INVALID_INDEX;
+				} else {
+					bi_ = egbase.mutable_descriptions()->load_building(buildingname);
+				}
+			}
 			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -802,7 +853,11 @@ void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_16(kCurrentPacketVersionCmdEnhanceBuilding);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_16(bi_);
+	if (bi_ == Widelands::INVALID_INDEX) {
+		fw.string("");
+	} else {
+		fw.string(egbase.descriptions().name(bi_, MapObjectType::BUILDING));
+	}
 	fw.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
@@ -1194,17 +1249,21 @@ void CmdSetWarePriority::execute(Game& game) {
 						return;
 					}
 				}
-				NEVER_HERE();
+				// TODO(GunChleoc): Savegame compatibility, add NEVER_HERE(); after v1.0
 			}
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
-			psite->set_priority(WareWorker(type_), index_, priority_);
+			// TODO(GunChleoc): Savegame compatibility, remove condition & has_ware_priority function
+			// after v1.0
+			if (psite->has_ware_priority(index_)) {
+				psite->set_priority(WareWorker(type_), index_, priority_);
+			}
 		}
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 2;
+constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 3;
 
 void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetWarePriority);
@@ -1213,7 +1272,7 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.unsigned_8(static_cast<uint8_t>(type_));
-	fw.signed_32(index_);
+	fw.string(egbase.descriptions().name(index_, MapObjectType::WARE));
 	priority_.write(fw);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1221,11 +1280,19 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetWarePriority) {
+		if (packet_version > 2 && packet_version <= kCurrentPacketVersionCmdSetWarePriority) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			type_ = WareWorker(fr.unsigned_8());
-			index_ = fr.signed_32();
+			if (packet_version == 2) {
+				index_ = fr.signed_32();
+			} else {
+				if (type_ == WareWorker::wwWARE) {
+					index_ = egbase.mutable_descriptions()->load_ware(fr.string());
+				} else {
+					index_ = egbase.mutable_descriptions()->load_worker(fr.string());
+				}
+			}
 			priority_ = WarePriority(fr);
 			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
@@ -1302,7 +1369,14 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+			// TODO(GunChleoc): Savegame compatibility. Remove has_inputqueue function and else branch
+			// after v1.0
+			if (b->has_inputqueue(index_, type_)) {
+				b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+			} else {
+				log_warn("Building %s has no input queue for index %d, skipping max fill command",
+				         b->descr().name().c_str(), index_);
+			}
 			if (upcast(Warehouse, wh, b)) {
 				if (PortDock* p = wh->get_portdock()) {
 					// Update in case the expedition was ready previously and now lacks a ware again
@@ -1313,7 +1387,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 3;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 4;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1321,8 +1395,9 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.signed_32(index_);
 	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
+	fw.string(type_ == wwWARE ? egbase.descriptions().name(index_, MapObjectType::WARE) :
+	                            egbase.descriptions().name(index_, MapObjectType::WORKER));
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1330,14 +1405,23 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			index_ = fr.signed_32();
+			if (packet_version == 3) {
+				// TODO(GunChleoc): Savegame compatibility. Remove after v1.0.
+				index_ = fr.signed_32();
+			}
 			if (fr.unsigned_8() == 0) {
 				type_ = wwWARE;
+				if (packet_version > 3) {
+					index_ = egbase.mutable_descriptions()->load_ware(fr.string());
+				}
 			} else {
 				type_ = wwWORKER;
+				if (packet_version > 3) {
+					index_ = egbase.mutable_descriptions()->load_worker(fr.string());
+				}
 			}
 			max_fill_ = fr.unsigned_32();
 			is_constructionsite_setting_ = fr.unsigned_8();
@@ -1887,9 +1971,10 @@ void CmdSetStockPolicy::execute(Game& game) {
 		MapObject* mo = game.objects().get_object(warehouse_);
 		if (upcast(ConstructionSite, cs, mo)) {
 			if (upcast(WarehouseSettings, s, cs->get_settings())) {
-				if (isworker_) {
+				// TODO(GunChleoc): Savegame compatibility, remove count checks after v1.0
+				if (isworker_ && s->worker_preferences.count(ware_) == 1) {
 					s->worker_preferences[ware_] = policy_;
-				} else {
+				} else if (s->ware_preferences.count(ware_) == 1) {
 					s->ware_preferences[ware_] = policy_;
 				}
 			}
@@ -1902,18 +1987,19 @@ void CmdSetStockPolicy::execute(Game& game) {
 			}
 
 			if (isworker_) {
-				if (!(game.descriptions().worker_exists(ware_))) {
-					log_warn_time(game.get_gametime(),
-					              "Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(),
-					              ware_);
+				if (!(warehouse->owner().tribe().has_worker(ware_))) {
+					log_warn_time(
+					   game.get_gametime(),
+					   "Cmd_SetStockPolicy: sender %u, worker %u not used by player's tribe\n", sender(),
+					   ware_);
 					return;
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
-				if (!(game.descriptions().ware_exists(ware_))) {
+				if (!(warehouse->owner().tribe().has_ware(ware_))) {
 					log_warn_time(game.get_gametime(),
-					              "Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(),
-					              ware_);
+					              "Cmd_SetStockPolicy: sender %u, ware %u not used by player's tribe\n",
+					              sender(), ware_);
 					return;
 				}
 				warehouse->set_ware_policy(ware_, policy_);
@@ -1937,16 +2023,22 @@ void CmdSetStockPolicy::serialize(StreamWrite& ser) {
 	ser.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 1;
+constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 2;
 
 void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionCmdSetStockPolicy) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdSetStockPolicy) {
 			PlayerCommand::read(fr, egbase, mol);
 			warehouse_ = fr.unsigned_32();
 			isworker_ = fr.unsigned_8();
-			ware_ = DescriptionIndex(fr.unsigned_8());
+			if (packet_version == 3) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 3 after v1.0
+				ware_ = DescriptionIndex(fr.unsigned_8());
+			} else {
+				ware_ = isworker_ ? egbase.mutable_descriptions()->load_worker(fr.string()) :
+				                    egbase.mutable_descriptions()->load_ware(fr.string());
+			}
 			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
@@ -1962,7 +2054,8 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(warehouse_);
 	fw.unsigned_8(isworker_);
-	fw.unsigned_8(ware_);
+	fw.string(isworker_ ? egbase.descriptions().name(ware_, MapObjectType::WORKER) :
+	                      egbase.descriptions().name(ware_, MapObjectType::WARE));
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
@@ -2042,7 +2135,8 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 void CmdToggleMuteMessages::execute(Game& game) {
 	if (upcast(Building, b, game.objects().get_object(building_))) {
 		if (all_) {
-			const DescriptionIndex di = game.descriptions().safe_building_index(b->descr().name());
+			const DescriptionIndex di = game.descriptions().building_index(b->descr().name());
+			assert(di != Widelands::INVALID_INDEX);
 			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
 		} else {
 			b->set_mute_messages(!b->mute_messages());

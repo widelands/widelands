@@ -46,10 +46,10 @@ struct BuildingSettings {
 	virtual ~BuildingSettings() {
 	}
 
-	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&);
+	static BuildingSettings* load(Game&, const TribeDescr&, FileRead&);
 
 	virtual void save(const Game&, FileWrite&) const;
-	virtual void read(const Game&, FileRead&);
+	virtual void read(Game&, FileRead&);
 
 	virtual void apply(const BuildingSettings&) {
 	}
@@ -68,7 +68,7 @@ struct ProductionsiteSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(Game&, FileRead&) override;
 
 	struct InputQueueSetting {
 		const uint32_t max_fill;
@@ -87,7 +87,7 @@ struct MilitarysiteSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(Game&, FileRead&) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -101,7 +101,7 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(Game&, FileRead&) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -114,7 +114,7 @@ struct WarehouseSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(Game&, FileRead&) override;
 
 	std::map<DescriptionIndex, StockPolicy> ware_preferences;
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
