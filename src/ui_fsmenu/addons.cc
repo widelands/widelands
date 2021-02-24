@@ -1488,6 +1488,7 @@ void RemoteAddOnRow::draw(RenderTarget& r) {
 
 static std::string time_string(const std::time_t& time) {
 	std::ostringstream oss("");
+	oss.imbue(std::locale(i18n::get_locale()));
 	oss << std::put_time(std::localtime(&time), "%c");
 	return oss.str();
 }
