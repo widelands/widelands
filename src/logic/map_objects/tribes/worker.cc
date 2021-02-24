@@ -611,8 +611,8 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam3) {
 		functor.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 	}
-	if (action.iparam7) {
-		functor.add(FindNodeTerraform());
+	for (const std::string& terraform : action.sparamv) {
+		functor.add(FindNodeTerraform(terraform));
 	}
 
 	if (!map.find_reachable_fields(game, area, &list, cstep, functor)) {
@@ -974,7 +974,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	return true;
 }
 
-bool Worker::run_terraform(Game& game, State& state, const Action&) {
+bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	const Descriptions& descriptions = game.descriptions();
 	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
 	const FCoords f = get_position();
@@ -984,32 +984,32 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	game.map().get_ln(f, &ln);
 
 	DescriptionIndex di = descriptions.terrain_index(
-	   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement());
+	   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
 	}
 	di = descriptions.terrain_index(
-	   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement());
+	   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
 	}
 	di = descriptions.terrain_index(
-	   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement());
+	   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
 	}
 	di = descriptions.terrain_index(
-	   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement());
+	   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
 	}
 	di = descriptions.terrain_index(
-	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement());
+	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
 	}
 	di = descriptions.terrain_index(
-	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement());
+	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
 	}
