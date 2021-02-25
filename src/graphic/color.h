@@ -27,6 +27,7 @@
 struct RGBColor {
 	RGBColor(uint8_t R, uint8_t G, uint8_t B);
 	RGBColor(const RGBColor& other) = default;
+	explicit RGBColor(uint32_t);
 
 	// Initializes the color to black.
 	RGBColor();
