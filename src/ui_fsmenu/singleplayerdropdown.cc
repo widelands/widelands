@@ -132,15 +132,16 @@ void SinglePlayerTribeDropdown::selection_action() {
 	}
 }
 
-SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(SinglePlayerActivePlayerGroup* parent,
-                                                               const std::string& name,
-                                                               int32_t x,
-                                                               int32_t y,
-                                                               uint32_t w,
+SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(
+   SinglePlayerActivePlayerGroup* parent,
+   const std::string& name,
+   int32_t x,
+   int32_t y,
+   uint32_t w,
 
-                                                               int button_dimension,
-                                                               GameSettingsProvider* const settings,
-                                                               PlayerSlot id)
+   int button_dimension,
+   GameSettingsProvider* const settings,
+   PlayerSlot id)
    : SinglePlayerDropdown<std::string>(parent,
                                        name,
                                        x,

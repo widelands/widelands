@@ -130,7 +130,7 @@ build_texture_atlas(const int max_size,
 		file += kAddOnMainFile;
 		Profile profile(file.c_str());
 		const std::string category = profile.get_safe_section("global").get_safe_string("category");
-		if (category== "world") {
+		if (category == "world") {
 			find_images(dir, &all_images, &first_atlas_images);
 		} else if (category == "tribes") {
 			std::string tribes_dir = dir;
