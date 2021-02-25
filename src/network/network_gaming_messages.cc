@@ -166,4 +166,5 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %1$s to %2$s");
 	ngmessages["PLAYER_DEFEATED"] = _("The player ‘%s’ was defeated and became a spectator.");
 	ngmessages["CLIENT_HUNG"] = _("Client %1$s did not answer for more than %2$s.");
+	ngmessages["CHEAT"] = _("Client %s is cheating!");
 }

@@ -2,25 +2,25 @@
 #
 #===- run-clang-tidy.py - Parallel clang-tidy runner ---------*- python -*--===#
 #
-#                     The LLVM Compiler Infrastructure
-#
-# This file is distributed under the University of Illinois Open Source
-# License. See LICENSE.TXT for details.
+# Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #
 #===------------------------------------------------------------------------===#
 # FIXME: Integrate with clang-tidy-diff.py
-#
 #===------------------------------------------------------------------------===#
 #
 # Downloaded from https://github.com/llvm-mirror/clang-tools-extra/blob/master/clang-tidy/tool/run-clang-tidy.py
-# Version 38b98640c3820151aa4aba16c5b7797ec8c8b3e7
+# Version 1c8cadde7ea4ca20a449edcffe10d23b612fe5d6
 #
 #===------------------------------------------------------------------------===#
 # HOW TO RUN THIS TOOL
 #
 # 1. Install the needed libraries. On Ubuntu, this is:
 #
-#       sudo apt-get install clang clang-tidy python-yaml
+#       sudo apt install clang clang-tidy python-yaml
+#
+#    If you wish to use the autofix, you'll need the clang-tools package too.
 #
 # 2. Run compile.sh to create the build directory. You can abort this pretty quick.
 #
@@ -31,21 +31,17 @@
 #
 #    This will give you a file 'build/compile_commands.json'
 #
-# 4. In 'build/compile_commands.json', do replace-all with an empty string
-#    for the following switches that would clutter the result with warnings:
+# 4. Run the tool from the 'build' directory with:
 #
-#        -Wlogical-op
-#        -Wsync-nand
-#        -Wtrampolines
-#        -fext-numeric-literals
-#
-# 5. Run the tool from the 'build' directory with:
-#
-#        python ../utils/run-clang-tidy.py -checks=*,-llvm-*,-cppcoreguidelines-pro-type-vararg,-cppcoreguidelines-pro-type-const-cast,-readability-named-parameter > ../clang-tidy.log
+#        python ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* > ../clang-tidy.log
 #
 #    Results will then be in 'clang-tidy.log'
 #
-# 6. You can pick which warnings you want with the checks parameter.
+# 5. You can pick which warnings you want with the checks parameter.
+#
+# 6. For seeing only warnings that were cleared previously, run from the widelands main directory:
+#
+#        utils/check_clang_tidy_results.py clang-tidy.log
 #
 # 7. Documentation is available at:
 #
@@ -55,6 +51,7 @@
 #
 #===------------------------------------------------------------------------===#
 #
+
 
 """
 Parallel clang-tidy runner
@@ -94,7 +91,11 @@ import sys
 import tempfile
 import threading
 import traceback
-import yaml
+
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 is_py2 = sys.version[0] == '2'
 
@@ -122,14 +123,12 @@ def make_absolute(f, directory):
 
 
 def get_tidy_invocation(f, clang_tidy_binary, checks, tmpdir, build_path,
-                        header_filter, extra_arg, extra_arg_before, quiet):
+                        header_filter, extra_arg, extra_arg_before, quiet,
+                        config):
     """Gets a command line for clang-tidy."""
     start = [clang_tidy_binary]
     if header_filter is not None:
         start.append('-header-filter=' + header_filter)
-    else:
-        # Show warnings in all in-project headers by default.
-        start.append('-header-filter=^' + build_path + '/.*')
     if checks:
         start.append('-checks=' + checks)
     if tmpdir is not None:
@@ -146,6 +145,8 @@ def get_tidy_invocation(f, clang_tidy_binary, checks, tmpdir, build_path,
     start.append('-p=' + build_path)
     if quiet:
         start.append('-quiet')
+    if config:
+        start.append('-config=' + config)
     start.append(f)
     return start
 
@@ -198,16 +199,26 @@ def apply_fixes(args, tmpdir):
     subprocess.call(invocation)
 
 
-def run_tidy(args, tmpdir, build_path, queue):
+def run_tidy(args, tmpdir, build_path, queue, lock, failed_files):
     """Takes filenames out of queue and runs clang-tidy on them."""
     while True:
         name = queue.get()
         invocation = get_tidy_invocation(name, args.clang_tidy_binary, args.checks,
                                          tmpdir, build_path, args.header_filter,
                                          args.extra_arg, args.extra_arg_before,
-                                         args.quiet)
-        sys.stdout.write(' '.join(invocation) + '\n')
-        subprocess.call(invocation)
+                                         args.quiet, args.config)
+
+        proc = subprocess.Popen(
+            invocation, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, err = proc.communicate()
+        if proc.returncode != 0:
+            failed_files.append(name)
+        with lock:
+            sys.stdout.write(' '.join(invocation) +
+                             '\n' + output.decode('utf-8'))
+            if len(err) > 0:
+                sys.stdout.flush()
+                sys.stderr.write(err.decode('utf-8'))
         queue.task_done()
 
 
@@ -225,14 +236,23 @@ def main():
     parser.add_argument('-checks', default=None,
                         help='checks filter, when not specified, use clang-tidy '
                         'default')
+    parser.add_argument('-config', default=None,
+                        help='Specifies a configuration in YAML/JSON format: '
+                        '  -config="{Checks: \'*\', '
+                        '                       CheckOptions: [{key: x, '
+                        '                                       value: y}]}" '
+                        'When the value is empty, clang-tidy will '
+                        'attempt to find a file named .clang-tidy for '
+                        'each source file in its parent directories.')
     parser.add_argument('-header-filter', default=None,
                         help='regular expression matching the names of the '
                         'headers to output diagnostics from. Diagnostics from '
                         'the main file of each translation unit are always '
                         'displayed.')
-    parser.add_argument('-export-fixes', metavar='filename', dest='export_fixes',
-                        help='Create a yaml file to store suggested fixes in, '
-                        'which can be applied with clang-apply-replacements.')
+    if yaml:
+        parser.add_argument('-export-fixes', metavar='filename', dest='export_fixes',
+                            help='Create a yaml file to store suggested fixes in, '
+                            'which can be applied with clang-apply-replacements.')
     parser.add_argument('-j', type=int, default=0,
                         help='number of tidy instances to be run in parallel.')
     parser.add_argument('files', nargs='*', default=['.*'],
@@ -270,7 +290,12 @@ def main():
         if args.checks:
             invocation.append('-checks=' + args.checks)
         invocation.append('-')
-        print(subprocess.check_output(invocation))
+        if args.quiet:
+            # Even with -quiet we still want to check if we can call clang-tidy.
+            with open(os.devnull, 'w') as dev_null:
+                subprocess.check_call(invocation, stdout=dev_null)
+        else:
+            subprocess.check_call(invocation)
     except:
         print('Unable to run clang-tidy.', file=sys.stderr)
         sys.exit(1)
@@ -285,19 +310,23 @@ def main():
         max_task = multiprocessing.cpu_count()
 
     tmpdir = None
-    if args.fix or args.export_fixes:
+    if args.fix or (yaml and args.export_fixes):
         check_clang_apply_replacements_binary(args)
         tmpdir = tempfile.mkdtemp()
 
     # Build up a big regexy filter from all command line arguments.
     file_name_re = re.compile('|'.join(args.files))
 
+    return_code = 0
     try:
         # Spin up a bunch of tidy-launching threads.
         task_queue = queue.Queue(max_task)
+        # List of files with a non-zero return code.
+        failed_files = []
+        lock = threading.Lock()
         for _ in range(max_task):
             t = threading.Thread(target=run_tidy,
-                                 args=(args, tmpdir, build_path, task_queue))
+                                 args=(args, tmpdir, build_path, task_queue, lock, failed_files))
             t.daemon = True
             t.start()
 
@@ -308,6 +337,8 @@ def main():
 
         # Wait for all threads to be done.
         task_queue.join()
+        if len(failed_files):
+            return_code = 1
 
     except KeyboardInterrupt:
         # This is a sad hack. Unfortunately subprocess goes
@@ -317,8 +348,7 @@ def main():
             shutil.rmtree(tmpdir)
         os.kill(0, 9)
 
-    return_code = 0
-    if args.export_fixes:
+    if yaml and args.export_fixes:
         print('Writing fixes to ' + args.export_fixes + ' ...')
         try:
             merge_replacement_files(tmpdir, args.export_fixes)
@@ -342,4 +372,8 @@ def main():
 
 
 if __name__ == '__main__':
+
+    if sys.version_info[0] < 3:
+        sys.exit('At least python version 3 is needed.')
+
     main()
