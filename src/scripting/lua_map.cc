@@ -1919,7 +1919,8 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
    .. attribute:: resource_indicators
 
       (RO) the table ``resource_indicators`` as defined in the tribe's ``units.lua``.
-      See `data/tribes/initializations/atlanteans/units.lua` for more information on the table structure.
+      See `data/tribes/initializations/atlanteans/units.lua` for more information on the table
+   structure.
 */
 int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -1941,7 +1942,8 @@ int LuaTribeDescription::get_resource_indicators(lua_State* L) {
    .. attribute:: collectors_points_table
 
       (RO) the ``collectors_points_table`` as defined in the tribe's `units.lua`.
-      See `data/tribes/initializations/atlanteans/units.lua` for more information on the table structure.
+      See `data/tribes/initializations/atlanteans/units.lua` for more information on the table
+   structure.
 */
 int LuaTribeDescription::get_collectors_points_table(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
