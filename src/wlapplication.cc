@@ -499,6 +499,153 @@ void WLApplication::initialize_g_addons() {
 	}
 }
 
+static void init_one_player_from_template(unsigned p,
+                                          SinglePlayerGameSettingsProvider& settings,
+                                          Section& player_section,
+                                          const Widelands::Map& map) {
+	settings.set_player_team(p, player_section.get_natural("team", 0));
+	if (player_section.has_val("playercolor")) {
+		std::string colorstr = player_section.get_safe_string("playercolor");
+		char* color;
+		RGBColor result;
+		result.r = std::strtol(colorstr.c_str(), &color, 10);
+		++color;
+		result.g = std::strtol(color, &color, 10);
+		++color;
+		result.b = std::strtol(color, &color, 10);
+		settings.set_player_color(p, result);
+	} else {
+		settings.set_player_color(p, kPlayerColors[p]);
+	}
+
+	std::string tribe =
+	   player_section.get_string("tribe", map.get_scenario_player_tribe(p + 1).c_str());
+	settings.set_player_tribe(p, tribe, tribe.empty());
+	tribe = settings.settings().players[p].tribe;
+
+	const std::string& init_script_name = player_section.get_string("init", "headquarters.lua");
+	std::string addon;
+	if (FileSystem::filename_ext(init_script_name) == kAddOnExtension) {
+		addon = kAddOnDir;
+		addon += FileSystem::file_separator();
+		addon += init_script_name;
+		addon += FileSystem::file_separator();
+		addon += tribe;
+		addon += ".lua";
+	}
+	bool found_init = false;
+	const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
+	for (unsigned i = 0; i < t.initializations.size(); ++i) {
+		if (addon.empty() ?
+		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+		       addon == t.initializations[i].script) {
+			settings.set_player_init(p, i);
+			found_init = true;
+			break;
+		}
+	}
+	if (!found_init) {
+		throw wexception(
+		   "Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
+	}
+}
+
+void WLApplication::init_and_run_game_from_template() {
+	AddOns::AddOnsGuard ag;
+
+	Profile profile(filename_.c_str());
+	Section& section = profile.get_safe_section("global");
+
+	std::vector<AddOns::AddOnState> new_g_addons;
+	for (std::string addons = section.get_string("addons", ""); !addons.empty();) {
+		const size_t commapos = addons.find(',');
+		std::string name;
+		if (commapos == std::string::npos) {
+			name = addons;
+			addons = "";
+		} else {
+			name = addons.substr(0, commapos);
+			addons = addons.substr(commapos + 1);
+		}
+		bool found = false;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.internal_name == name) {
+				found = true;
+				new_g_addons.push_back(std::make_pair(pair.first, true));
+				break;
+			}
+		}
+		if (!found) {
+			throw wexception("Add-on '%s' not found", name.c_str());
+		}
+	}
+	AddOns::g_addons = new_g_addons;
+
+	Widelands::Game game;
+	SinglePlayerGameSettingsProvider settings;
+
+	const int playernumber = section.get_positive("interactive_player", 1);
+	settings.set_peaceful_mode(section.get_bool("peaceful", false));
+	settings.set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
+
+	{
+		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
+		std::string script;
+		if (FileSystem::filename_ext(wc_name) == kAddOnExtension) {
+			script = kAddOnDir;
+			script += FileSystem::file_separator();
+			script += wc_name;
+			script += FileSystem::file_separator();
+			script += "init.lua";
+		} else {
+			script = "scripting/win_conditions/";
+			script += wc_name;
+		}
+		settings.set_win_condition_script(script);
+	}
+
+	{
+		const std::string mapfile = section.get_safe_string("map");
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfile);
+		if (!ml) {
+			throw wexception("Invalid map file '%s'", mapfile.c_str());
+		}
+		ml->preload_map(true, nullptr);
+		const int nr_players = map.get_nrplayers();
+		settings.set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
+		settings.set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(),
+		                 nr_players, false);
+		for (int p = 0; p < nr_players; ++p) {
+			std::string key = "player_";
+			key += std::to_string(p + 1);
+			init_one_player_from_template(p, settings, profile.pull_section(key.c_str()), map);
+		}
+	}
+
+	std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+	if (settings.has_players_tribe()) {
+		tipstexts.push_back(settings.get_players_tribe());
+	}
+	game.create_loader_ui(
+	   tipstexts, true, settings.settings().map_theme, settings.settings().map_background);
+	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
+
+	SinglePlayerGameController ctrl(game, true, playernumber);
+	game.set_game_controller(&ctrl);
+	game.init_newgame(settings.settings());
+	try {
+		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+	} catch (const Widelands::GameDataError& e) {
+		log_err("Game not started: Game data error: %s\n", e.what());
+	} catch (const std::exception& e) {
+		log_err("Fatal exception: %s\n", e.what());
+		emergency_save(nullptr, game, e.what());
+	}
+}
+
 /**
  * The main loop. Plain and Simple.
  */
@@ -567,6 +714,8 @@ void WLApplication::run() {
 			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(nullptr, game, e.what());
 		}
+	} else if (game_type_ == GameType::kFromTemplate) {
+		init_and_run_game_from_template();
 	} else {
 		g_sh->change_music("intro");
 
@@ -1182,6 +1331,18 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		game_type_ = GameType::kReplay;
 		commandline_.erase("replay");
+	}
+
+	if (commandline_.count("new_game_from_template")) {
+		if (game_type_ != GameType::kNone) {
+			throw wexception("new_game_from_template can not be combined with other actions");
+		}
+		filename_ = commandline_["new_game_from_template"];
+		if (filename_.empty()) {
+			throw wexception("empty value of command line parameter --new_game_from_template");
+		}
+		game_type_ = GameType::kFromTemplate;
+		commandline_.erase("new_game_from_template");
 	}
 
 	if (commandline_.count("loadgame")) {

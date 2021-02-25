@@ -5,16 +5,12 @@ on:
       - master
 jobs:
   mirror:
+    if: github.repository == 'widelands/widelands'
     name: Synchronizing Launchpad trunk with GitHub master
     runs-on: ubuntu-latest
     steps:
     - name: Setting up bazaar
       run: |
-        if ! [ "$GITHUB_REPOSITORY" == "widelands/widelands" ]
-        then
-          echo "Launchpad mirror should run only from widelands:master, not from fork $GITHUB_REPOSITORY"
-          exit 1
-        fi
         sudo apt-get update
         sudo apt-get install bzr
         mkdir ~/.ssh || true
