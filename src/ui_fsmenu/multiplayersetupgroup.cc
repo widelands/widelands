@@ -275,7 +275,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 		type_dropdown_.clear();
 		// AIs
-		if (settings.allows_ais(id_)) {
+		if (settings.allows_ais(id_) && settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 				type_dropdown_.add(_(impl->descname),
 				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
@@ -395,8 +395,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
 		} else {
 			for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
-				tribes_dropdown_.add(tribeinfo.descname, tribeinfo.name,
-				                     g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
+				if (player_setting.state != PlayerSettings::State::kComputer || tribeinfo.suited_for_ai) {
+					tribes_dropdown_.add(tribeinfo.descname, tribeinfo.name,
+						                 g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
+				}
 			}
 
 			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",

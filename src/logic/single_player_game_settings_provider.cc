@@ -191,10 +191,13 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 	PlayerSettings& player = s.players[number];
 	player.random_tribe = random_tribe;
 
-	if (random_tribe) {
+	while (random_tribe) {
 		uint8_t num_tribes = s.tribes.size();
 		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = s.tribes.at(random).name;
+		if (player.state != PlayerSettings::State::kComputer || s.get_tribeinfo(actual_tribe).suited_for_ai) {
+			break;
+		}
 	}
 
 	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
