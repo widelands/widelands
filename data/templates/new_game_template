@@ -1,0 +1,45 @@
+# A game template file defines basic information for a singleplayer game.
+# A new singleplayer game with the specifications set here can then started using
+#    ./widelands --new_game_from_template=<TEMPLATE_FILE>
+# where TEMPLATE_FILE must be a path relative to the Widelands data directory or your Widelands home directory.
+# To find the location of your home directory, see https://www.widelands.org/wiki/Technical%20FAQ/#where-are-my-maps-and-savegames-stored
+
+# Section `global`: General game settings.
+[global]
+
+# The map file to use, relative to the `data` directory or the Widelands home directory. This is the only mandatory entry.
+map="maps/Lake_of_Tranquility.wmf"
+
+# The player number of the interactive player. Default: 1.
+interactive_player="1"
+
+# The filename of the win condition script (without path), or the internal name of the add-on defining the win condition. Default: Endless Game.
+win_condition="endless_game.lua"
+
+# Whether peaceful mode and custom starting positions mode are enabled. Default: false.
+peaceful="false"
+custom_starting_positions="false"
+
+# Comma-separated list of the add-ons to enable. Default: All disabled.
+addons=
+
+# Section `player_i`: Settings for the i-th player. If any value (or a whole section) is missing, default settings will be used.
+[player_1]
+
+# Player tribe (empty means random tribe). Default: Map's tribe.
+tribe=
+
+# The filename of the starting condition script (without path), or the internal name of the add-on defining the starting condition. Default: Headquarters.
+init="headquarters.lua"
+
+# Team number (0 means no team). Default: 0.
+team="0"
+
+# The comma-separated R,G,B values of the player's player color. Default: The i-th scenario player color.
+playercolor="26,23,162"
+
+[player_2]
+tribe=
+init="headquarters.lua"
+team="0"
+playercolor="238,229,22"

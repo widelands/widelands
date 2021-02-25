@@ -90,7 +90,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      Port number of the metaserver for internet gaming.")
 	          << endl
 	          << _(" --addon_server=[...]\n"
-	               "                      Connect to a different github repository"
+	               "                      Connect to a different github repository\n"
 	               "                      and branch from the add-ons manager.")
 	          << endl
 	          << endl
@@ -112,6 +112,12 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      adjusting the game speed automatically,\n"
 	               "                      depending on FPS. Useful in conjunction with\n"
 	               "                      --ai_training.")
+	          << endl
+	          << _(" --new_game_from_template=FILENAME\n"
+	               "                      Directly create a new singleplayer game\n"
+	               "                      configured in the given file. An example can\n"
+	               "                      be found in `data/templates/new_game_template`.")
+	          << endl
 	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 	               "                      map.")
