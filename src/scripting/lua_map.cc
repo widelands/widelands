@@ -1786,6 +1786,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, wares),
    PROP_RO(LuaTribeDescription, workers),
    PROP_RO(LuaTribeDescription, directory),
+   PROP_RO(LuaTribeDescription, collectors_points_table),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1917,8 +1918,8 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 /* RST
    .. attribute:: resource_indicators
 
-      (RO) the table `resource_indicators` as defined in the tribe's `tribename.lua`.
-      See `data/tribes/atlanteans.lua` for more information on the table structure.
+      (RO) the table ``resource_indicators`` as defined in the tribe's ``units.lua``.
+      See `data/tribes/initializations/atlanteans/units.lua` for more information on the table structure.
 */
 int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -1931,6 +1932,30 @@ int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 			lua_pushstring(L, tribe.get_immovable_descr(resi.second)->name());
 			lua_settable(L, -3);
 		}
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: collectors_points_table
+
+      (RO) the ``collectors_points_table`` as defined in the tribe's `units.lua`.
+      See `data/tribes/initializations/atlanteans/units.lua` for more information on the table structure.
+*/
+int LuaTribeDescription::get_collectors_points_table(lua_State* L) {
+	const Widelands::TribeDescr& tribe = *get();
+	lua_newtable(L);
+	int index = 0;
+	for (const auto& pair : tribe.collectors_points_table()) {
+		lua_pushinteger(L, ++index);
+		lua_newtable(L);
+		lua_pushstring(L, "ware");
+		lua_pushstring(L, pair.first);
+		lua_settable(L, -3);
+		lua_pushstring(L, "points");
+		lua_pushinteger(L, pair.second);
+		lua_settable(L, -3);
 		lua_settable(L, -3);
 	}
 	return 1;

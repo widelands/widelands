@@ -165,6 +165,10 @@ public:
 		return buildings_built_over_immovables_;
 	}
 
+	const std::vector<std::pair<std::string, int>>& collectors_points_table() const {
+		return collectors_points_table_;
+	}
+
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
@@ -238,6 +242,7 @@ private:
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
 	WaresOrder workers_order_;
+	std::vector<std::pair<std::string, int>> collectors_points_table_;
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
