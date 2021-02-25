@@ -4140,7 +4140,8 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	set_description_pointer(get_egbase(L).descriptions().get_terrain_descr(name));
+	const Widelands::Descriptions& desc = get_egbase(L).descriptions();
+	set_description_pointer(desc.get_terrain_descr(desc.safe_terrain_index(name)));
 }
 
 /*
