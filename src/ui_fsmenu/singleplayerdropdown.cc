@@ -91,7 +91,7 @@ void SinglePlayerTribeDropdown::rebuild() {
 		for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 			if (player_setting.state != PlayerSettings::State::kComputer || tribeinfo.suited_for_ai) {
 				dropdown_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
-					          false, tribeinfo.tooltip);
+				              false, tribeinfo.tooltip);
 			}
 		}
 		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
@@ -133,16 +133,15 @@ void SinglePlayerTribeDropdown::selection_action() {
 	}
 }
 
-SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(
-   UI::Panel* parent,
-   const std::string& name,
-   int32_t x,
-   int32_t y,
-   uint32_t w,
+SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+                                                               const std::string& name,
+                                                               int32_t x,
+                                                               int32_t y,
+                                                               uint32_t w,
 
-   int button_dimension,
-   GameSettingsProvider* const settings,
-   PlayerSlot id)
+                                                               int button_dimension,
+                                                               GameSettingsProvider* const settings,
+                                                               PlayerSlot id)
    : SinglePlayerDropdown<std::string>(parent,
                                        name,
                                        x,
@@ -173,11 +172,11 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	if (settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 			dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-				          g_image_cache->get(impl->icon_filename), false, _(impl->descname));
+			              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 		dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
-			          g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
+		              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 	}
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */
