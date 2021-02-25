@@ -19,6 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include <cstring>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -1783,6 +1785,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, soldier),
    PROP_RO(LuaTribeDescription, wares),
    PROP_RO(LuaTribeDescription, workers),
+   PROP_RO(LuaTribeDescription, directory),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1941,6 +1944,19 @@ int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 
 int LuaTribeDescription::get_name(lua_State* L) {
 	lua_pushstring(L, get()->name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: directory
+
+         (RO) a :class:`string` with the path of the tribe's initialization scripts
+*/
+
+int LuaTribeDescription::get_directory(lua_State* L) {
+	std::string path = get()->basic_info().script;
+	path = path.substr(0, path.size() - strlen(FileSystem::fs_filename(path.c_str())));
+	lua_pushstring(L, path.c_str());
 	return 1;
 }
 

@@ -30,6 +30,11 @@ function get_frisian_tips()
    return tips
 end
 
+function get_addon_tribe_tips(tribe)
+   include "txts/tips/frisians.lua"
+   return tips
+end
+
 function get_singleplayer_tips()
    include "txts/tips/singleplayer.lua"
    return tips
@@ -54,21 +59,18 @@ return {
       local text = h2(_"General")
       text = text .. format_tips(get_general_tips())
 
-      if (tribename == "amazons") then
-         text = text .. h2(_"Amazons")
-         text = text .. format_tips(get_amazon_tips())
-      elseif (tribename == "atlanteans") then
-         text = text .. h2(_"Atlanteans")
-         text = text .. format_tips(get_atlantean_tips())
-      elseif (tribename == "barbarians") then
-         text = text .. h2(_"Barbarians")
-         text = text .. format_tips(get_barbarian_tips())
-      elseif (tribename == "empire") then
-         text = text .. h2(_"Empire")
-         text = text .. format_tips(get_empire_tips())
-      elseif (tribename == "frisians") then
-         text = text .. h2(_"Frisians")
-         text = text .. format_tips(get_frisian_tips())
+      if tribename ~= nil and tribename ~= "" then
+         local descr = wl.Game():get_tribe_description(tribename)
+         local scriptpath = descr.directory
+         if scriptpath:find("addons") == 1 then
+            include(scriptpath .. "tips.lua")
+         else
+            include("txts/tips/" .. tribename .. ".lua")
+         end
+         if tips then
+            text = text .. h2(descr.descname) .. format_tips(tips)
+            tips = nil
+         end
       end
 
       if (game_type == "singleplayer") then

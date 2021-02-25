@@ -135,7 +135,11 @@ public:
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
 	const Widelands::TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
-		return initializations_.at(index);
+		return basic_info_.initializations.at(index);
+	}
+
+	const Widelands::TribeBasicInfo& basic_info() const {
+		return basic_info_;
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
@@ -238,7 +242,7 @@ private:
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
 
-	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
+	Widelands::TribeBasicInfo basic_info_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };

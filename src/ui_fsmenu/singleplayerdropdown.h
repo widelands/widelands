@@ -26,9 +26,11 @@
 #include "logic/game_settings.h"
 #include "ui_basic/dropdown.h"
 
+class SinglePlayerActivePlayerGroup;
+
 template <typename T> class SinglePlayerDropdown {
 public:
-	SinglePlayerDropdown(UI::Panel* parent,
+	SinglePlayerDropdown(SinglePlayerActivePlayerGroup* parent,
 	                     const std::string& name,
 	                     int32_t x,
 	                     int32_t y,
@@ -41,7 +43,8 @@ public:
 	                     UI::ButtonStyle button_style,
 	                     GameSettingsProvider* const settings,
 	                     PlayerSlot id)
-	   : dropdown_(parent,
+	   : parent_group_(*parent),
+	     dropdown_(parent,
 	               name,
 	               x,
 	               y,
@@ -80,6 +83,7 @@ public:
 	}
 
 protected:
+	SinglePlayerActivePlayerGroup& parent_group_;
 	UI::Dropdown<T> dropdown_;
 	GameSettingsProvider* const settings_;
 	PlayerSlot const id_;
@@ -95,7 +99,7 @@ private:
 
 class SinglePlayerTribeDropdown : public SinglePlayerDropdown<std::string> {
 public:
-	SinglePlayerTribeDropdown(UI::Panel* parent,
+	SinglePlayerTribeDropdown(SinglePlayerActivePlayerGroup* parent,
 	                          const std::string& name,
 	                          int32_t x,
 	                          int32_t y,
@@ -111,7 +115,7 @@ private:
 
 class SinglePlayerPlayerTypeDropdown : public SinglePlayerDropdown<std::string> {
 public:
-	SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+	SinglePlayerPlayerTypeDropdown(SinglePlayerActivePlayerGroup* parent,
 	                               const std::string& name,
 	                               int32_t x,
 	                               int32_t y,
@@ -129,7 +133,7 @@ private:
 
 class SinglePlayerStartTypeDropdown : public SinglePlayerDropdown<uintptr_t> {
 public:
-	SinglePlayerStartTypeDropdown(UI::Panel* parent,
+	SinglePlayerStartTypeDropdown(SinglePlayerActivePlayerGroup* parent,
 	                              const std::string& name,
 	                              int32_t x,
 	                              int32_t y,
@@ -147,7 +151,7 @@ private:
 
 class SinglePlayerTeamDropdown : public SinglePlayerDropdown<uintptr_t> {
 public:
-	SinglePlayerTeamDropdown(UI::Panel* parent,
+	SinglePlayerTeamDropdown(SinglePlayerActivePlayerGroup* parent,
 	                         const std::string& name,
 	                         int32_t x,
 	                         int32_t y,

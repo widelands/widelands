@@ -28,13 +28,14 @@
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "map_io/map_loader.h"
+#include "ui_fsmenu/singleplayersetupbox.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 #define RANDOM "random"
 constexpr const char* const kClosed = "closed";
 constexpr const char* const kHuman_player = "human_player";
 
-SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
+SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(SinglePlayerActivePlayerGroup* parent,
                                                      const std::string& name,
                                                      int32_t x,
                                                      int32_t y,
@@ -127,10 +128,11 @@ void SinglePlayerTribeDropdown::selection_action() {
 			const std::string& selected = dropdown_.get_selected();
 			settings_->set_player_tribe(id_, selected, selected == RANDOM);
 		}
+		parent_group_.update();
 	}
 }
 
-SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(SinglePlayerActivePlayerGroup* parent,
                                                                const std::string& name,
                                                                int32_t x,
                                                                int32_t y,
@@ -241,7 +243,7 @@ void SinglePlayerPlayerTypeDropdown::selection_action() {
 	}
 }
 
-SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
+SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(SinglePlayerActivePlayerGroup* parent,
                                                              const std::string& name,
                                                              int32_t x,
                                                              int32_t y,
@@ -327,7 +329,7 @@ void SinglePlayerStartTypeDropdown::selection_action() {
 		settings_->set_player_init(id_, dropdown_.get_selected());
 	}
 }
-SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
+SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(SinglePlayerActivePlayerGroup* parent,
                                                    const std::string& name,
                                                    int32_t x,
                                                    int32_t y,

@@ -156,7 +156,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX),
      scouts_house_(Widelands::INVALID_INDEX),
-     initializations_(info.initializations) {
+     basic_info_(info) {
 	log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums");
 

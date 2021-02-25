@@ -121,15 +121,24 @@ build_texture_atlas(const int max_size,
 	// For UI elements mostly, but we get more than we need really.
 	find_images("images", &all_images, &first_atlas_images);
 
-	// New terrains defined by world add-ons need to be in the same texture atlas
-	// as all other terrains. So we just put all add-on images into this atlas…
+	// New terrains defined by world add-ons, and road images defined by tribe add-ons,
+	// need to be in the same texture atlas as all other terrains and roads.
+	// So we put all world images and all tribe-initialization images into this atlas.
 	for (const std::string& dir : g_fs->list_directory(kAddOnDir)) {
 		std::string file = dir;
 		file += FileSystem::file_separator();
 		file += kAddOnMainFile;
 		Profile profile(file.c_str());
-		if (strcmp(profile.get_safe_section("global").get_safe_string("category"), "world") == 0) {
+		const std::string category = profile.get_safe_section("global").get_safe_string("category");
+		if (category== "world") {
 			find_images(dir, &all_images, &first_atlas_images);
+		} else if (category == "tribes") {
+			std::string tribes_dir = dir;
+			tribes_dir += FileSystem::file_separator();
+			tribes_dir += "tribes";
+			if (g_fs->is_directory(tribes_dir)) {
+				find_images(tribes_dir, &all_images, &first_atlas_images);
+			}
 		}
 	}
 
