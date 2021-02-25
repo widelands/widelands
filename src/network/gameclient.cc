@@ -56,20 +56,6 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-struct AddOnsGuard {
-	AddOnsGuard() : former_addons_(AddOns::g_addons) {
-	}
-	~AddOnsGuard() {
-		reset();
-	}
-	void reset() {
-		AddOns::g_addons = former_addons_;
-	}
-
-private:
-	const std::vector<AddOns::AddOnState> former_addons_;
-};
-
 struct GameClientImpl {
 	bool internet_;
 
@@ -112,9 +98,7 @@ struct GameClientImpl {
 	/** File that is eventually transferred via the network if not found at the other side */
 	std::unique_ptr<NetTransferFile> file_;
 
-	// This ensures that we can modify `g_addons` in any way we like
-	// and that it is reset to the initial state after our game ends.
-	AddOnsGuard addons_guard_;
+	AddOns::AddOnsGuard addons_guard_;
 
 	void send_hello();
 	void send_player_command(Widelands::PlayerCommand*);
@@ -409,6 +393,16 @@ void GameClient::next_player_state(uint8_t) {
 void GameClient::set_map(
    const std::string&, const std::string&, const std::string&, const std::string&, uint32_t, bool) {
 	// client is not allowed to do this
+}
+
+void GameClient::send_cheating_info() {
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
+	packet.string("CHEAT");
+	packet.string(d->localplayername);
+	packet.string("");
+	packet.string("");
+	d->net->send(packet);
 }
 
 void GameClient::set_player_tribe(uint8_t number,

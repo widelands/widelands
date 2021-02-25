@@ -131,6 +131,22 @@ unsigned count_all_dependencies(const std::string&, const std::map<std::string, 
 
 AddOnInfo preload_addon(const std::string&);
 
+// This guard allows you to modify `g_addons` in any way you like
+// and ensures that it is reset to the initial state later.
+struct AddOnsGuard {
+	AddOnsGuard() : former_addons_(g_addons) {
+	}
+	~AddOnsGuard() {
+		reset();
+	}
+	void reset() {
+		g_addons = former_addons_;
+	}
+
+private:
+	const std::vector<AddOnState> former_addons_;
+};
+
 }  // namespace AddOns
 
 #endif  // end of include guard: WL_LOGIC_ADDONS_H

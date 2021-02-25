@@ -30,7 +30,10 @@ def main():
             for line in lines:
                 match = regex.match(line)
                 if match:
-                    line = match.group(1) + '-' + year + match.group(3)
+                    if match.group(1).endswith(year):
+                        line = match.group(1) + match.group(3)
+                    else:
+                        line = match.group(1) + '-' + year + match.group(3)
                 new_lines.append(line.rstrip() + '\n')
             write_text_file(filename, ''.join(new_lines))
 

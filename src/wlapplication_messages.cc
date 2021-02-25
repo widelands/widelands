@@ -91,7 +91,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --addon_server_ip=[...]\n"
 	               " --addon_server_port=[...]\n"
-	               "                      Connect to a different server or port"
+	               "                      Connect to a different server or port\n"
 	               "                      from the add-ons manager.") << endl
 	          << endl
 	          << endl
@@ -113,6 +113,12 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      adjusting the game speed automatically,\n"
 	               "                      depending on FPS. Useful in conjunction with\n"
 	               "                      --ai_training.")
+	          << endl
+	          << _(" --new_game_from_template=FILENAME\n"
+	               "                      Directly create a new singleplayer game\n"
+	               "                      configured in the given file. An example can\n"
+	               "                      be found in `data/templates/new_game_template`.")
+	          << endl
 	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 	               "                      map.")
