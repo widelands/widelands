@@ -144,7 +144,7 @@ init = {
          log = 3,
          granite = 4,
          planks = 2,
-         spidercloth = 3,
+         iron = 3,
          atlanteans_stonecutter = 2,
          atlanteans_soldier = 1,
       },
