@@ -216,10 +216,13 @@ static int L_file_exists(lua_State* L) {
 	return 1;
 }
 
-const static struct luaL_Reg path[] = {
-   {"basename", &L_basename},         {"dirname", &L_dirname},
-   {"list_files", &L_list_files},     {"list_directory", &L_list_directory},
-   {"is_directory", &L_is_directory}, {"file_exists", &L_file_exists}, {nullptr, nullptr}};
+const static struct luaL_Reg path[] = {{"basename", &L_basename},
+                                       {"dirname", &L_dirname},
+                                       {"list_files", &L_list_files},
+                                       {"list_directory", &L_list_directory},
+                                       {"is_directory", &L_is_directory},
+                                       {"file_exists", &L_file_exists},
+                                       {nullptr, nullptr}};
 
 void luaopen_path(lua_State* L) {
 	luaL_newlib(L, path);

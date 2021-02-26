@@ -286,7 +286,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_setting = settings.players[id_];
 		type_dropdown_.clear();
 		// AIs
-		if (settings.allows_ais(id_) && (settings.get_tribeinfo(player_setting.tribe).suited_for_ai || !has_tribe_access())) {
+		if (settings.allows_ais(id_) &&
+		    (settings.get_tribeinfo(player_setting.tribe).suited_for_ai || !has_tribe_access())) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 				type_dropdown_.add(_(impl->descname),
 				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
