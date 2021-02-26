@@ -5,36 +5,6 @@ function get_general_tips()
    return tips
 end
 
-function get_amazon_tips()
-   include "txts/tips/amazons.lua"
-   return tips
-end
-
-function get_atlantean_tips()
-   include "txts/tips/atlanteans.lua"
-   return tips
-end
-
-function get_barbarian_tips()
-   include "txts/tips/barbarians.lua"
-   return tips
-end
-
-function get_empire_tips()
-   include "txts/tips/empire.lua"
-   return tips
-end
-
-function get_frisian_tips()
-   include "txts/tips/frisians.lua"
-   return tips
-end
-
-function get_addon_tribe_tips(tribe)
-   include "txts/tips/frisians.lua"
-   return tips
-end
-
 function get_singleplayer_tips()
    include "txts/tips/singleplayer.lua"
    return tips
@@ -62,14 +32,19 @@ return {
       if tribename ~= nil and tribename ~= "" then
          local descr = wl.Game():get_tribe_description(tribename)
          local scriptpath = descr.directory
+         local p
          if scriptpath:find("addons") == 1 then
-            include(scriptpath .. "tips.lua")
+            p = scriptpath .. "tips.lua"
          else
-            include("txts/tips/" .. tribename .. ".lua")
+            p = "txts/tips/" .. tribename .. ".lua"
          end
-         if tips then
-            text = text .. h2(descr.descname) .. format_tips(tips)
+         if path.file_exists(p) then
             tips = nil
+            include(p)
+            if tips then
+               text = text .. h2(descr.descname) .. format_tips(tips)
+               tips = nil
+            end
          end
       end
 

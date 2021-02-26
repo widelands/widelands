@@ -74,9 +74,9 @@ void GameTips::load_tips(const std::string& name) {
 		for (const Widelands::TribeBasicInfo& tribe : Widelands::get_all_tribeinfos()) {
 			if (tribe.name == name) {
 				if (tribe.script.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
-					filename = tribe.script;
-					const std::string fname = FileSystem::fs_filename(filename.c_str());
-					filename.replace(filename.size() - fname.size(), fname.size(), "tips.lua");
+					filename = FileSystem::fs_dirname(tribe.script);
+					filename += FileSystem::file_separator();
+					filename += "tips.lua";
 				}
 				break;
 			}
