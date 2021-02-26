@@ -265,7 +265,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			n->set_player_state(id_, state);
 
 			const GameSettings& settings = settings_->settings();
-			if (state == PlayerSettings::State::kComputer && !settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
+			if (state == PlayerSettings::State::kComputer &&
+			    !settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 				for (const Widelands::TribeBasicInfo& t : settings.tribes) {
 					if (t.suited_for_ai) {
 						n->set_player_tribe(id_, t.name);
