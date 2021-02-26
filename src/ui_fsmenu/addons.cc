@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/warning.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
@@ -52,6 +53,24 @@ constexpr const char* const kDocumentationURL = "https://www.widelands.org/docum
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
+static std::string time_string(const std::time_t& time) {
+	std::ostringstream oss("");
+	oss.imbue(std::locale(i18n::get_locale()));
+	oss << std::put_time(std::localtime(&time), "%c");
+	return oss.str();
+}
+static std::string filesize_string(const uint32_t bytes) {
+	if (bytes > 1000000000) {
+		return (boost::format(_("%.2f GB")) % (bytes / 1000000000.f)).str();
+	} else if (bytes > 1000000) {
+		return (boost::format(_("%.2f MB")) % (bytes / 1000000.f)).str();
+	} else if (bytes > 1000) {
+		return (boost::format(_("%.2f kB")) % (bytes / 1000.f)).str();
+	} else {
+		return (boost::format(_("%u bytes")) % bytes).str();
+	}
+}
+
 ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
    : UI::Window(parent,
                 UI::WindowStyle::kFsMenu,
@@ -62,16 +81,22 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
                 2 * kRowButtonSize,
                 title),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
+     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      txt1_(&box_,
            UI::PanelStyle::kFsMenu,
            UI::FontStyle::kFsMenuInfoPanelHeading,
            "",
            UI::Align::kCenter),
-     txt2_(&box_,
+     txt2_(&hbox_,
            UI::PanelStyle::kFsMenu,
            UI::FontStyle::kFsMenuInfoPanelParagraph,
            "",
            UI::Align::kLeft),
+     txt3_(&hbox_,
+           UI::PanelStyle::kFsMenu,
+           UI::FontStyle::kFsMenuInfoPanelParagraph,
+           "",
+           UI::Align::kRight),
      progress_(&box_,
                UI::PanelStyle::kFsMenu,
                0,
@@ -80,9 +105,11 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
                kRowButtonSize,
                UI::ProgressBar::Horizontal) {
 
+	hbox_.add(&txt2_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add(&txt3_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&txt1_, UI::Box::Resizing::kFullSize);
 	box_.add_space(kRowButtonSpacing);
-	box_.add(&txt2_, UI::Box::Resizing::kFullSize);
+	box_.add(&hbox_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kRowButtonSpacing);
 	box_.add(&progress_, UI::Box::Resizing::kFullSize);
 
@@ -1097,14 +1124,23 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 
 	bool needs_restart = false;
 	if (!only_translations) {
+		bool success = false;
 		g_fs->ensure_directory_exists(temp_dir);
 		try {
+			const std::string size = filesize_string(remote.total_file_size);
 			w.progressbar().set_total(remote.total_file_size);
-			net().download_addon(remote.internal_name, temp_dir, [this, &w](const std::string& f, const long l) {
+			net().download_addon(remote.internal_name, temp_dir, [this, &w, size](const std::string& f, const long l) {
 				w.set_message_2(f);
+				w.set_message_3((boost::format(_("%1% / %2%")) % filesize_string(l) % size).str());
 				w.progressbar().set_state(l);
 				do_redraw_now();
+				if (w.is_dying()) {
+					throw WLWarning("", "Operation cancelled by user.");
+				}
 			});
+			success = true;
+		} catch (const WLWarning& e) {
+			log_info("install addon %s: %s", remote.internal_name.c_str(), e.what());
 		} catch (const std::exception& e) {
 			log_err("install addon %s: %s", remote.internal_name.c_str(), e.what());
 			w.set_visible(false);
@@ -1115,6 +1151,8 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 				     "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
+		}
+		if (!success) {
 			g_fs->fs_unlink(temp_dir);
 			return;
 		}
@@ -1145,11 +1183,18 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 	try {
 		w.progressbar().set_state(0);
 		w.progressbar().set_total(1);
-		net().download_i18n(remote.internal_name, temp_dir, [this, &w](const std::string& f, const long l) {
+		long nr_translations = 0;
+		w.set_message_3("");
+		net().download_i18n(remote.internal_name, temp_dir, [this, &w, &nr_translations](const std::string& f, const long l) {
 			w.set_message_2(f);
+			w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_translations).str());
 			w.progressbar().set_state(l);
 			do_redraw_now();
-		}, [this, &w](const std::string&, const long l) {
+			if (w.is_dying()) {
+				throw WLWarning("", "Operation cancelled by user.");
+			}
+		}, [this, &w, &nr_translations](const std::string&, const long l) {
+			nr_translations = l;
 			w.progressbar().set_total(l);
 		});
 
@@ -1165,6 +1210,8 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		Profile prof(kAddOnLocaleVersions.c_str());
 		prof.pull_section("global").set_natural(remote.internal_name.c_str(), remote.i18n_version);
 		prof.write(kAddOnLocaleVersions.c_str(), false);
+	} catch (const WLWarning& e) {
+		log_info("install translations for %s: %s", remote.internal_name.c_str(), e.what());
 	} catch (const std::exception& e) {
 		log_err("install translations for %s: %s", remote.internal_name.c_str(), e.what());
 		w.set_visible(false);
@@ -1484,24 +1531,6 @@ void InstalledAddOnRow::draw(RenderTarget& r) {
 void RemoteAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.brighten_rect(Recti(0, 0, get_w(), get_h()), -20);
-}
-
-static std::string time_string(const std::time_t& time) {
-	std::ostringstream oss("");
-	oss.imbue(std::locale(i18n::get_locale()));
-	oss << std::put_time(std::localtime(&time), "%c");
-	return oss.str();
-}
-static std::string filesize_string(const uint32_t bytes) {
-	if (bytes > 1000000000) {
-		return (boost::format(_("%.2f GB")) % (bytes / 1000000000.f)).str();
-	} else if (bytes > 1000000) {
-		return (boost::format(_("%.2f MB")) % (bytes / 1000000.f)).str();
-	} else if (bytes > 1000) {
-		return (boost::format(_("%.2f kB")) % (bytes / 1000.f)).str();
-	} else {
-		return (boost::format(_("%u bytes")) % bytes).str();
-	}
 }
 
 class RemoteInteractionWindow : public UI::Window {

@@ -369,7 +369,7 @@ protected:
 	// Never call this function, except when you need Widelands to stay responsive
 	// during a costly operation and you can guarantee that it will not interfere
 	// with the "normal" graphics refreshing done periodically from `Panel::do_run`.
-	void do_redraw_now();
+	void do_redraw_now(bool handle_input = true);
 
 private:
 	bool handles_mouse() const {

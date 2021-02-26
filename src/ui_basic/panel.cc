@@ -180,14 +180,21 @@ Panel& Panel::get_topmost_forefather() {
 	return *forefather;
 }
 
-void Panel::do_redraw_now() {
+void Panel::do_redraw_now(const bool handle_input) {
 	Panel& ff = get_topmost_forefather();
 	RenderTarget& rt = *g_gr->get_render_target();
+	WLApplication* const app = WLApplication::get();
+
+	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
+	                                       Panel::ui_mousemove,  Panel::ui_key,
+	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
+	if (handle_input) {
+		app->handle_input(&input_callback);
+	}
 
 	ff.do_draw(rt);
 
 	if (g_mouse_cursor->is_visible()) {
-		WLApplication* const app = WLApplication::get();
 		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
 		g_mouse_cursor->draw(rt, app->get_mouse_position());
 
@@ -254,7 +261,7 @@ int Panel::do_run() {
 		}
 
 		if (start_time >= next_draw_time) {
-			do_redraw_now();
+			do_redraw_now(false);
 			next_draw_time = start_time + draw_delay;
 		}
 

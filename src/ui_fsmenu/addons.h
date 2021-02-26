@@ -53,13 +53,16 @@ struct ProgressIndicatorWindow : public UI::Window {
 	void set_message_2(const std::string& msg) {
 		txt2_.set_text(msg);
 	}
+	void set_message_3(const std::string& msg) {
+		txt3_.set_text(msg);
+	}
 	UI::ProgressBar& progressbar() {
 		return progress_;
 	}
 
 private:
-	UI::Box box_;
-	UI::Textarea txt1_, txt2_;
+	UI::Box box_, hbox_;
+	UI::Textarea txt1_, txt2_, txt3_;
 	UI::ProgressBar progress_;
 };
 
