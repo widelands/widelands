@@ -46,7 +46,6 @@ namespace FsMenu {
 constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
 
-constexpr const char* const kSubmitAddOnsURL = "https://www.widelands.org/forum/topic/5073/";
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
 
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
@@ -178,6 +177,17 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                  UI::DropdownType::kTextual,
                  UI::PanelStyle::kFsMenu,
                  UI::ButtonStyle::kFsMenuSecondary),
+     upload_addon_(&dev_box_,
+                   "upload",
+				 0,
+				 0,
+				 get_inner_w() / 2,
+				 8,
+				 kRowButtonSize,
+				 _("Choose add-on to upload…"),
+				 UI::DropdownType::kTextualMenu,
+				 UI::PanelStyle::kFsMenu,
+				 UI::ButtonStyle::kFsMenuSecondary),
      filter_reset_(&browse_addons_buttons_inner_box_2_,
                    "f_reset",
                    0,
@@ -302,37 +312,15 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-	      (boost::format("<rt><p>%1$s</p></rt>") %
+	      (boost::format("<rt><p>%s</p></rt>") %
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	          .as_font_tag(
-	             (boost::format(_("Uploading add-ons to the server from within Widelands is not "
-	                              "implemented yet. To upload your add-ons, please zip the add-on "
-	                              "directory in your file browser, then open our add-on submission "
-	                              "website %s in your browser and attach the zip file.")) %
-	              underline_tag(kSubmitAddOnsURL))
-	                .str()))
-	         .str(),
+	          .as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu. It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead. The Widelands Development Team will review your add-on soon after uploading; they may have further inquiries, therefore please check the inbox of your Widelands user profile page frequently."))).str(),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
-	auto add_button = [this](const std::string& url) {
-		UI::Button* b =
-		   new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-#if SDL_VERSION_ATLEAST(2, 0, 14)
-		                  _("Open Link")
-#else
-		                  _("Copy Link")
-#endif
-		   );
-		b->sigclicked.connect([url]() {
-#if SDL_VERSION_ATLEAST(2, 0, 14)
-			SDL_OpenURL(url.c_str());
-#else
-			SDL_SetClipboardText(url.c_str());
-#endif
-		});
-		dev_box_.add(b);
-	};
-	add_button(kSubmitAddOnsURL);
+	dev_box_.add(&upload_addon_);
+	upload_addon_.selected.connect([this]() {
+		upload_addon(*upload_addon_.get_selected());
+	});
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
@@ -347,7 +335,24 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	         .str(),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
-	add_button(kDocumentationURL);
+	{
+		UI::Button* b =
+		   new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+		                  _("Open Link")
+#else
+		                  _("Copy Link")
+#endif
+		   );
+		b->sigclicked.connect([]() {
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+			SDL_OpenURL(kDocumentationURL);
+#else
+			SDL_SetClipboardText(kDocumentationURL);
+#endif
+		});
+		dev_box_.add(b);
+	}
 
 	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
@@ -616,9 +621,13 @@ void AddOnsCtrl::update_login_button(UI::Button& b) {
 	if (username_.empty()) {
 		b.set_title(_("Not logged in"));
 		b.set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload your own add-ons."));
+		upload_addon_.set_enabled(false);
+		upload_addon_.set_tooltip(_("Please log in to upload add-ons"));
 	} else {
 		b.set_title((boost::format(_("Logged in as %s")) % username_).str());
 		b.set_tooltip(_("Click to log out"));
+		upload_addon_.set_enabled(true);
+		upload_addon_.set_tooltip("");
 	}
 }
 
@@ -821,6 +830,7 @@ void AddOnsCtrl::rebuild() {
 	browse_.clear();
 	assert(installed_addons_box_.get_nritems() == 0);
 	assert(browse_addons_box_.get_nritems() == 0);
+	upload_addon_.clear();
 
 	size_t index = 0;
 	for (const auto& pair : AddOns::g_addons) {
@@ -831,6 +841,7 @@ void AddOnsCtrl::rebuild() {
 		   new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second);
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
+		upload_addon_.add(pair.first.descname(), &pair.first, pair.first.icon, false, pair.first.internal_name);
 	}
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
@@ -935,6 +946,7 @@ void AddOnsCtrl::rebuild() {
 		}
 		upgrade_all_.set_tooltip(text);
 	}
+
 	update_dependency_errors();
 }
 
@@ -1109,6 +1121,38 @@ static void install_translation(const std::string& temp_locale_path,
 
 	assert(g_fs->file_exists(new_locale_path));
 	assert(!g_fs->file_exists(temp_locale_path));
+}
+
+void AddOnsCtrl::upload_addon(const AddOns::AddOnInfo& addon) {
+	upload_addon_.set_list_visibility(false);
+	ProgressIndicatorWindow w(&fsmm_, addon.descname());
+	w.set_message_1((boost::format(_("Uploading ‘%s’…")) % addon.descname()).str());
+	try {
+		long nr_files = 0;
+		net().upload_addon(addon.internal_name, [this, &w, &nr_files](const std::string& f, const long l) {
+			w.set_message_2(f);
+			w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_files).str());
+			w.progressbar().set_state(l);
+			do_redraw_now();
+			if (w.is_dying()) {
+				throw WLWarning("", "Operation cancelled by user.");
+			}
+		}, [this, &w, &nr_files](const std::string&, const long l) {
+			w.progressbar().set_total(l);
+			nr_files = l;
+		});
+	} catch (const WLWarning& e) {
+		log_info("upload addon %s: %s", addon.internal_name.c_str(), e.what());
+	} catch (const std::exception& e) {
+		log_err("upload addon %s: %s", addon.internal_name.c_str(), e.what());
+		w.set_visible(false);
+		UI::WLMessageBox m(
+		   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
+		   (boost::format(
+			   _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s")) % addon.internal_name % e.what()).str(),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
 }
 
 // TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's requirements

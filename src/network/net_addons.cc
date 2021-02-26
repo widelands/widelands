@@ -429,6 +429,87 @@ void NetAddons::comment(const AddOnInfo& addon, std::string message) {
 	check_endofstream();
 }
 
+static size_t gather_addon_content(const std::string& current_dir, const std::string& prefix, std::map<std::string, std::set<std::string>>& result) {
+	result[prefix] = {};
+	size_t nr_files = 0;
+	for (const std::string& f : g_fs->list_directory(current_dir)) {
+		if (g_fs->is_directory(f)) {
+			std::string str = prefix;
+			str += FileSystem::file_separator();
+			str += FileSystem::fs_filename(f.c_str());
+			nr_files += gather_addon_content(f, str, result);
+		} else {
+			result[prefix].insert(FileSystem::fs_filename(f.c_str()));
+			++nr_files;
+		}
+	}
+	return nr_files;
+}
+
+void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress, const CallbackFn& init_fn) {
+	init();
+
+	std::map<std::string /* content */, std::set<std::string> /* files in this directory */> content;
+	{
+		std::string dir = kAddOnDir;
+		dir += FileSystem::file_separator();
+		dir += name;
+		init_fn("", gather_addon_content(dir, "", content));
+	}
+
+	std::string send = "CMD_SUBMIT ";
+	send += name;
+	send += '\n';
+	write(client_socket_, send.c_str(), send.size());
+
+	send = std::to_string(content.size());
+	send += '\n';
+	for (const auto& pair : content) {
+		send += pair.first;
+		send += '\n';
+	}
+	write(client_socket_, send.c_str(), send.size());
+
+	long state = 0;
+	for (const auto& pair : content) {
+		send = std::to_string(pair.second.size());
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
+		for (const std::string& file : pair.second) {
+			std::string full_path = kAddOnDir;
+			full_path += FileSystem::file_separator();
+			full_path += name;
+			full_path += pair.first;
+			full_path += FileSystem::file_separator();
+			full_path += file;
+			progress(full_path, state++);
+
+			FileRead fr;
+			fr.open(*g_fs, full_path);
+			const size_t bytes = fr.get_size();
+			std::unique_ptr<char[]> complete(new char[bytes]);
+			fr.data_complete(complete.get(), bytes);
+			SimpleMD5Checksum md5sum;
+			md5sum.data(complete.get(), bytes);
+			md5sum.finish_checksum();
+
+			send = file;
+			send += '\n';
+			send += md5sum.get_checksum().str();
+			send += '\n';
+			send += std::to_string(bytes);
+			send += '\n';
+			write(client_socket_, send.c_str(), send.size());
+			write(client_socket_, complete.get(), bytes);
+		}
+	}
+
+	send = "ENDOFSTREAM\n";
+	write(client_socket_, send.c_str(), send.size());
+
+	check_endofstream();
+}
+
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
 	try {
 		init();

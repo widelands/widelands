@@ -44,7 +44,7 @@ struct NetAddons {
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
 	// The filename of the created MO files is guaranteed to be in the format
 	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	void download_i18n(const std::string& addon, const std::string& directory, const CallbackFn&, const CallbackFn&);
+	void download_i18n(const std::string& addon, const std::string& directory, const CallbackFn& progress, const CallbackFn& init_fn);
 
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
@@ -52,7 +52,9 @@ struct NetAddons {
 	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
 	int get_vote(const std::string& addon);
 	void vote(const std::string& addon, unsigned vote);
+
 	void comment(const AddOnInfo& addon, std::string message);
+	void upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
 
 	void set_login(const std::string& username, const std::string& password);
 

@@ -121,6 +121,7 @@ public:
 	void update_dependency_errors();
 
 	void install_or_upgrade(const AddOns::AddOnInfo&, bool only_translations);
+	void upload_addon(const AddOns::AddOnInfo&);
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -174,6 +175,7 @@ private:
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
+	UI::Dropdown<const AddOns::AddOnInfo*> upload_addon_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
 	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_;
 
