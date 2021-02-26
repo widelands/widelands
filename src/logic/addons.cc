@@ -193,7 +193,6 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 			    list)
 			      .str(),
 			   true);
-			;
 		}
 	}
 }

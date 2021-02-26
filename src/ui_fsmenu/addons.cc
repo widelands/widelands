@@ -416,6 +416,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		refresh_remotes();
 		tabs_.activate(1);
 	});
+	tabs_.sigclicked.connect([this]() {
+		if (remotes_.empty() && tabs_.active() == 1) {
+			refresh_remotes();
+		}
+	});
 	autofix_dependencies_.sigclicked.connect([this]() { autofix_dependencies(); });
 
 	filter_reset_.sigclicked.connect([this]() {
@@ -557,7 +562,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	do_not_layout_on_resolution_change();
 	center_to_parent();
-	refresh_remotes();
+	rebuild();
 }
 
 AddOnsCtrl::~AddOnsCtrl() {

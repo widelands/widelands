@@ -66,7 +66,7 @@ bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare);
 
 // Required add-ons for an add-on, map, or savegame with the recommended version
 using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
-using AddOnConflict = std::pair<std::string, bool>;
+using AddOnConflict = std::pair<std::string /* localized_message */, bool /* has_conflicts */>;
 
 struct AddOnComment {
 	std::string username, message;

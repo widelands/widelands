@@ -40,7 +40,7 @@ struct NetAddons {
 	~NetAddons();
 
 	// Fetch the list of all available add-ons from the server
-	const std::vector<AddOnInfo>& refresh_remotes();
+	std::vector<AddOnInfo> refresh_remotes();
 
 	// Requests the file with the given name (e.g. "cool_feature.wad/init.lua")
 	// from the server and downloads it to the given canonical location.
@@ -67,10 +67,6 @@ private:
 	void set_url_and_timeout(std::string);
 
 	CURL* curl_;
-
-	// Do not download the list every time the addon menu is opened
-	static uint32_t last_refresh_;
-	static std::vector<AddOnInfo> remotes_;
 };
 
 }  // namespace AddOns
