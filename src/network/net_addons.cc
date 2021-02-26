@@ -24,6 +24,7 @@
 #include <cstring>
 #include <memory>
 
+#include <SDL_timer.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -42,6 +43,9 @@ CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 // all CURL-related code is inspired by
 // https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
+
+uint32_t NetAddons::last_refresh_ = 0;
+std::vector<AddOnInfo> NetAddons::remotes_;
 
 void NetAddons::init() {
 	if (curl_) {
@@ -93,7 +97,8 @@ static inline std::string get_addons_server_name() {
 }
 
 constexpr unsigned kCurrentListVersion = 3;
-std::vector<AddOnInfo> NetAddons::refresh_remotes() {
+constexpr uint32_t kRefreshPeriod = 600000;  // Only refresh every 10min
+const std::vector<AddOnInfo>& NetAddons::refresh_remotes() {
 	// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
 	// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
 	// to be maintained by hand there which is exceedlingly fragile and messy.
@@ -104,9 +109,13 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	// And we would not need to store a list of all files contained in every add-on
 	// in the global catalogue. Both is not possible with such a dummy server.
 
+	if ((last_refresh_ > 0) && (SDL_GetTicks() - last_refresh_ < kRefreshPeriod)) {
+		return remotes_;
+	}
+
 	init();
 
-	std::vector<AddOnInfo> result_vector;
+	remotes_.clear();
 
 	// For backwards compatibility, the server keeps multiple versions of the list
 	set_url_and_timeout(get_addons_server_name() + "list_" + std::to_string(kCurrentListVersion));
@@ -218,10 +227,11 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		info.verified = next_word(output) == "verified";
 
-		result_vector.push_back(info);
+		remotes_.push_back(info);
 	}
 
-	return result_vector;
+	last_refresh_ = SDL_GetTicks();
+	return remotes_;
 }
 
 static void check_downloaded_file(const std::string& path, const std::string& checksum) {
