@@ -154,6 +154,19 @@ expedition2 = {
    )
 }
 
+expedition2a = {
+   position = "topright",
+   title = _"I am going on a trip and I am taking … with me.",
+   body = (
+      h1(_"Additional Items") ..
+      p(_[[During an expedition, we might need some more wares then just the ones to build a new port.]]) ..
+      li_image("map:Additional.png",
+         join_sentences(_[[You can take some aditional wares, soldiers or workers with you on an expedition. You can define them by filling the empty slots below the primary Wares to build the port.]],
+         _[[Just click on the empty slots and then scroll through the list to choose the additional item.]])) ..
+      p(_[[Now try this out. A small dot in red, green or yellow tells you whether the item is on its way, has arrived or isn't available.]])
+   )
+}
+
 obj_expedition_start = {
    name = "start_expedition",
    title = _"Expedition",
