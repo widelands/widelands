@@ -1351,7 +1351,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	PlayerSettings& player = d->settings.players.at(number);
 
-	// TODDO(k.halfmann): check this logic, will tribe "survive" when random is selected?
+	// TODO(k.halfmann): check this logic, will tribe "survive" when random is selected?
 	if (player.tribe == tribe && player.random_tribe == random_tribe) {
 		return;
 	}
@@ -1359,10 +1359,14 @@ void GameHost::set_player_tribe(uint8_t const number,
 	std::string actual_tribe = tribe;
 	player.random_tribe = random_tribe;
 
-	if (random_tribe) {
+	while (random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
 		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
+		if (player.state != PlayerSettings::State::kComputer ||
+		    d->settings.get_tribeinfo(actual_tribe).suited_for_ai) {
+			break;
+		}
 	}
 
 	for (const Widelands::TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
