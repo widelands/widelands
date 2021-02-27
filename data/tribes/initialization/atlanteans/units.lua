@@ -22,6 +22,8 @@
 -- * **script**: File path to the :ref:`units.lua <lua_tribes_tribes_units>` file
 --   that configures which units the tribe is using
 -- * **starting_conditions**: A table of file paths to starting condition Lua scripts
+-- * **collectors_points_table**: An array of tables of warename-integer pairs used by the Collectors win condition.
+-- * **suited_for_ai** (optional, defaults to ``true``): Whether it is allowed to assign this tribe to AI players.
 --
 
 -- And now the documentation for this file
@@ -282,6 +284,19 @@ descriptions:new_tribe {
    },
 
    bridge_height = 8,
+
+   collectors_points_table = {
+      { ware = "gold", points = 3},
+      { ware = "trident_light", points = 2},
+      { ware = "trident_long", points = 3},
+      { ware = "trident_steel", points = 4},
+      { ware = "trident_double", points = 7},
+      { ware = "trident_heavy_double", points = 8},
+      { ware = "shield_steel", points = 4},
+      { ware = "shield_advanced", points = 7},
+      { ware = "tabard", points = 1},
+      { ware = "tabard_golden", points = 5},
+   },
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {
