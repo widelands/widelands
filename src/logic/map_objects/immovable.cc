@@ -517,8 +517,6 @@ Load/save support
 ==============================
 */
 
-// TODO(Nordfriese): This is an awful design that should be refactored on occasion.
-constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 9;
 constexpr uint8_t kCurrentPacketVersionImmovable = 11;
 
 // Supporting older versions for map loading
@@ -543,18 +541,11 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	imm.position_ = read_coords_32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.position_);
 
-	if (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings) {
-		bool has_former_building = true;
-		if (packet_version > 10) {
-			has_former_building = fr.unsigned_8();
-		}
-		if (has_former_building) {
-			Player* owner = imm.get_owner();
-			if (owner) {
-				DescriptionIndex idx = owner->tribe().safe_building_index(fr.string());
-				if (owner->tribe().has_building(idx)) {
-					imm.set_former_building(*owner->tribe().get_building_descr(idx));
-				}
+	if (packet_version > 7 && (packet_version < 11 || fr.unsigned_8())) {
+		if (Player* owner = imm.get_owner()) {
+			DescriptionIndex idx = owner->tribe().safe_building_index(fr.string());
+			if (owner->tribe().has_building(idx)) {
+				imm.set_former_building(*owner->tribe().get_building_descr(idx));
 			}
 		}
 	}
@@ -612,10 +603,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	} else {
 		imm.program_step_ = Time(fr.signed_32());
 	}
-	imm.growth_delay_ =
-	   packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 9 : 8) ?
-	      Duration(fr) :
-	      Duration(0);
+	imm.growth_delay_ = packet_version >= 9 ? Duration(fr) : Duration(0);
 
 	if (packet_version >= 3 && packet_version <= 5) {
 		imm.reserved_by_worker_ = fr.unsigned_8();
@@ -626,8 +614,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
 		}
 	}
-	if (packet_version >=
-	    (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 10 : 9)) {
+	if (packet_version >= 10) {
 		for (uint8_t i = fr.unsigned_8(); i; --i) {
 			imm.marked_for_removal_.insert(fr.unsigned_8());
 		}

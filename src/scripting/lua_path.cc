@@ -201,10 +201,28 @@ static int L_is_directory(lua_State* L) {
 	return 1;
 }
 
-const static struct luaL_Reg path[] = {
-   {"basename", &L_basename},         {"dirname", &L_dirname},
-   {"list_files", &L_list_files},     {"list_directory", &L_list_directory},
-   {"is_directory", &L_is_directory}, {nullptr, nullptr}};
+/* RST
+.. function:: file_exists(filename)
+
+   Checks whether the given filename points to a file or directory.
+
+   :type filename: class:`string`
+   :arg filename: The filename to check.
+
+   :returns: ``true`` if the given path is a file or directory.
+*/
+static int L_file_exists(lua_State* L) {
+	lua_pushboolean(L, g_fs->file_exists(luaL_checkstring(L, -1)));
+	return 1;
+}
+
+const static struct luaL_Reg path[] = {{"basename", &L_basename},
+                                       {"dirname", &L_dirname},
+                                       {"list_files", &L_list_files},
+                                       {"list_directory", &L_list_directory},
+                                       {"is_directory", &L_is_directory},
+                                       {"file_exists", &L_file_exists},
+                                       {nullptr, nullptr}};
 
 void luaopen_path(lua_State* L) {
 	luaL_newlib(L, path);

@@ -135,7 +135,11 @@ public:
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
 	const Widelands::TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
-		return initializations_.at(index);
+		return basic_info_.initializations.at(index);
+	}
+
+	const Widelands::TribeBasicInfo& basic_info() const {
+		return basic_info_;
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
@@ -159,6 +163,10 @@ public:
 	// Warning: Do not use pointer arithmetics in logic code!
 	const std::set<const BuildingDescr*>& buildings_built_over_immovables() const {
 		return buildings_built_over_immovables_;
+	}
+
+	const std::vector<std::pair<std::string, int>>& collectors_points_table() const {
+		return collectors_points_table_;
 	}
 
 	// The custom toolbar imageset if any. Can be nullptr.
@@ -234,11 +242,12 @@ private:
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
 	WaresOrder workers_order_;
+	std::vector<std::pair<std::string, int>> collectors_points_table_;
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
 
-	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
+	Widelands::TribeBasicInfo basic_info_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };
