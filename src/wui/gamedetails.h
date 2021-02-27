@@ -50,6 +50,10 @@ public:
 		return button_box_;
 	}
 
+	bool has_conflicts() const {
+		return has_conflicts_;
+	}
+
 private:
 	/// Layout the information on screen
 	void layout() override;
@@ -61,6 +65,7 @@ private:
 
 	const Mode mode_;
 	const int padding_;
+	bool has_conflicts_;
 
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
