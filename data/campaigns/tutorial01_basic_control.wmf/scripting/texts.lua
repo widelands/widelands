@@ -6,8 +6,6 @@
 -- General messages
 -- ================
 
-local close_story_window_instructions = _[[Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close this window.]]
-
 scold_player = {
    title = _"Nice And Easy Does It All the Time",
    body = (
@@ -24,35 +22,24 @@ scold_player = {
 -- Starting Infos
 -- ==============
 
-obj_initial_close_story_window = {
-   name = "initial_close_story_window",
-   title=_"Close this window",
-   number = 1,
-   body = objective_text(_"Close this window",
-      li(close_story_window_instructions)
-   )
-}
 initial_message_01 = {
    title = _"Welcome to the Widelands Tutorial!",
    body = (
       h1(_"Welcome to Widelands!") ..
       li_image("images/logos/wl-ico-64.png",
-         _[[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction. This tutorial will guide you through the basics of the game.]]) ..
-      li_arrow(_[[You will be guided through this tutorial by objectives]]) ..
-      li(_[[Follow the intructions in the objective below so that I can show you where to find them.]])
+         _[[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction.]]) ..
+      li_arrow(_[[You will be guided through this tutorial by objectives]])
    )
 }
 
 obj_initial_close_objectives_window = {
    name = "obj_initial_close_objectives_window",
-   title=_"Objectives and how to close this window",
+   title=_"Objectives and how to handle them",
    number = 1,
-   body = objective_text(_"Closing this window",
-      p(_[[This is the ‘Objectives’ window. You can return to this window for instructions at any time.]]) ..
-      li_image("images/wui/menus/objectives.png", _[[ You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]]) ..
-      li_arrow(_[[Like any other window, you can also close the ‘Objectives’ window by right-clicking on it.]]) ..
-      li_arrow(_[[When you have accomplished an objective, it will disappear from the list above.]]) ..
-      li(_[[Try it out.]])
+   body = objective_text(_"Handling of the ‘Objectives’ window",
+      li_image("images/wui/menus/objectives.png", _[[ You can open and close the ‘Objectives’ window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]]) ..
+      li_arrow(_[[Like any other window, you can also close the window by right-clicking on it.]]) ..
+      li_arrow(_[[When you have accomplished an objective, it will disappear from the list.]])
    )
 }
 
@@ -61,7 +48,7 @@ obj_initial_toggle_building_spaces = {
    title=_"Show building spaces",
    number = 1,
    body = objective_text(_"Show building spaces",
-      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this:]]) ..
+      p(_[[Activate ‘Show Building Spaces’. There are two ways you can do this:]]) ..
       li_image("images/wui/menus/showhide.png", _[[Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the ‘Show / Hide’ menu.]]) ..
       li(_[[Show the building spaces now.]])
    )
@@ -75,10 +62,9 @@ initial_message_02 = {
       h1(_"Let’s dive right in!") ..
       li_image("tribes/initialization/barbarians/images/icon.png",
          _[[There are five different tribes in Widelands: the Barbarians, the Empire, the Atlanteans, the Frisians and the Amazons. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
-      li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
+      li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the initial wares will not last forever, so you must make sure to replenish them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
       p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’.]]) ..
-      li(_[[Left-click the ‘OK’ button to close this window. I'll show you where the menu is and where to show and hide the building spaces.]]) ..
-      li_arrow(_[[Note that you cannot close this window by right-clicking on it. I have blocked this so that you will not close it by accident and miss important information.]])
+      li(_[[I'll show you where the menu is and where to show and hide the building spaces.]])
    )
 }
 
@@ -88,7 +74,7 @@ initial_message_03 = {
    field = sf,
    body = (
       h1(_"Let’s dive right in!") ..
-      li_object("barbarians_lumberjacks_hut", _[[Now that I have shown you where to show and hide the building spaces, please switch them on so that we can place our first building.]], plr.color)
+      li_image("images/wui/menus/showhide.png", _[[Now that I have shown you where to show and hide the building spaces, please switch them on so that we can place our first building.]], plr.color)
    )
 }
 
@@ -124,8 +110,7 @@ lumberjack_message_03a = {
    title = _"Building a Connecting Road",
    position = "topright",
    body = (
-      li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. After ordering the construction site, I was automatically put into road building mode, so all I have to do is click on the blue flag in front of my headquarters.]]) ..
-      li(close_story_window_instructions)
+      li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. After ordering the construction site, I was automatically put into road building mode, so all I have to do is click on the blue flag in front of my headquarters.]])
    ),
    show_instantly = true,
    h = 200,
@@ -137,8 +122,7 @@ lumberjack_message_03b = {
    position = "topright",
    body = (
       li_image("images/wui/fieldaction/menu_tab_buildroad.png",
-         _[[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. You have disabled the option ‘Start building road after placing a flag’ (to change that, choose ‘Options’ in the Widelands main menu). Therefore, I have entered the road building mode manually. I will tell you later how to do that. To build the road, all I have to do now is click on the blue flag in front of my headquarters.]]) ..
-         li(close_story_window_instructions)
+         _[[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. You have disabled the option ‘Start building road after placing a flag’ (to change that, choose ‘Options’ in the Widelands main menu). Therefore, I have entered the road building mode manually. I will tell you later how to do that. To build the road, all I have to do now is click on the blue flag in front of my headquarters.]])
    ),
    show_instantly = true,
    h = 250,
@@ -150,8 +134,7 @@ lumberjack_message_04 = {
    position = "topright",
    body = (
       li_object("barbarians_builder",
-         _[[Now watch closely while a builder leaves the headquarters and goes to the construction site. Also, a carrier will take position in between the two blue flags and carry wares from one blue flag to the other.]], plr.color) ..
-         li(close_story_window_instructions)
+         _[[Now watch closely while a builder leaves the headquarters and goes to the construction site. Also, a carrier will take position in between the two blue flags and carry wares from one blue flag to the other.]], plr.color)
    ),
    h = 200,
    w = 350
@@ -186,8 +169,7 @@ lumberjack_message_06 = {
    body = (
       li_image("images/wui/fieldaction/menu_tab_buildroad.png",
          _[[I wanted to teach you how to build new flags, but it seems you have already found out on your own. Well done!]]) ..
-      p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
-      li(close_story_window_instructions)
+      p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]])
    ),
    h = 250,
    w = 350
@@ -220,8 +202,7 @@ lumberjack_message_07b = {
    body = (
       li_image("images/wui/buildings/toggle_workarea.png",
          _[[This button toggles showing the building’s work area. When the lumberjack leaves the building to look for trees to fell, he will only look for them within this area. Let me show you how perfect this spot is.]]) ..
-      p(_[[Close the construction site window when you have seen enough.]]) ..
-      li(close_story_window_instructions)
+      p(_[[Close the construction site window when you have seen enough.]])
    ),
    h = 250,
    w = 350
@@ -254,46 +235,23 @@ lumberjack_message_09 = {
 -- Moving the mapview
 -- ==================
 
-local moving_view_instructions =
-   h2(_"Moving Your View") ..
-   p(_[[Moving your view is essential to get a complete overview of your whole economy. There are three ways to move your view in Widelands.]]) ..
-   li_arrow(_[[The first one is to use the cursor keys on your keyboard.]]) ..
-   li_arrow(_[[The second one is the more common and faster one: press-and-hold the right mouse button anywhere on the map, then move your mouse around and you’ll see the view scroll.]]) ..
-   li_arrow(_[[The third one is to use the minimap. It is especially useful for traveling big distances.]])
-
-
-obj_moving_keyboard = {
+obj_moving = {
    name = "move_view_with_cursor_keys",
-   title=_"Move your view with the cursor keys",
+   title=_"Moving the View",
    number = 1,
-   body = objective_text(_"Move your view with the cursor keys",
-      li(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) .. moving_view_instructions
+   body = objective_text(_"Move your view",
+      p(_[[Moving your view is essential to get a complete overview of your whole economy. There are three ways to move your view in Widelands.]]) ..
+      li_arrow(_[[The first one is to use the cursor keys on your keyboard.]]) ..
+      li_arrow(_[[The second one is the more common and faster one: press-and-hold the right mouse button anywhere on the map, then move your mouse around and you’ll see the view scroll.]]) ..
+      li_arrow(_[[The third one is to use the minimap. It is especially useful for traveling big distances.]])
    ),
 }
-tell_about_keyboard_move = {
+tell_about_move = {
    title = _"Some Rocks Were Found",
    body = (
       h1(_"Getting a Quarry Up") ..
       li_object("greenland_rocks6",
          _[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]])
-   ),
-   h = 450,
-}
-
-obj_moving_right_drag = {
-   name = "move_view_with_mouse",
-   title=_"Move your view with the mouse",
-   number = 1,
-   body = objective_text(_"Move your view with the mouse",
-      li(_[[Simply right-click-and-hold anywhere on the map, then drag the mouse and instead of the cursor, the view will be moved. Try it.]]) .. moving_view_instructions
-   ),
-}
-tell_about_right_drag_move = {
-   title = _"Moving Your View",
-   body = (
-      h1(_"Other Ways to Move the View") ..
-      li_image("images/ui_basic/cursor_click.png",
-         _[[Excellent. Now there is a faster way to move, using the mouse instead.]])
    ),
    h = 450,
 }
