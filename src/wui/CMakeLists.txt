@@ -207,6 +207,9 @@ wl_library(wui_game_tips
     graphic
     graphic_fonthandler
     graphic_text_layout
+    io_filesystem
+    logic_filesystem_constants
+    logic_tribe_basic_info
     scripting_lua_table
     scripting_lua_interface
     ui_basic

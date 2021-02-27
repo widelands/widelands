@@ -34,7 +34,8 @@ namespace Widelands {
 TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
    : name(table->get_string("name")),
      icon(table->get_string("icon")),
-     script(table->get_string("script")) {
+     script(table->get_string("script")),
+     suited_for_ai(!table->has_key("suited_for_ai") || table->get_bool("suited_for_ai")) {
 	try {
 		author = table->get_string("author");
 		descname = table->get_string("descname");
@@ -46,8 +47,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
 			// TODO(hessenfarmer): This initialization code is duplicated in Addons below and in
-			// gameclient
-			//                      Should be puled out to a common class
+			// gameclient. Should be pulled out to a common class.
 			std::set<std::string> tags;
 			std::set<std::string> incompatible_wc;
 			if (script_table->has_key("map_tags")) {

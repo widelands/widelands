@@ -31,6 +31,20 @@ descriptions:new_tribe {
 
    bridge_height = 6,
 
+   collectors_points_table = {
+      { ware = "gold", points = 12},
+      { ware = "spear_stone_tipped", points = 1},
+      { ware = "spear_hardened", points = 1},
+      { ware = "helmet_wooden", points = 1},
+      { ware = "warriors_coat", points = 16},
+      { ware = "tunic", points = 1},
+      { ware = "vest_padded", points = 2},
+      { ware = "protector_padded", points = 17},
+      { ware = "boots_sturdy", points = 1},
+      { ware = "boots_swift", points = 1},
+      { ware = "boots_hero", points = 16},
+   },
+
    -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
