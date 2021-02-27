@@ -156,7 +156,8 @@ expedition2 = {
 
 expedition2a = {
    position = "topright",
-   title = _"I am going on a trip and I am taking … with me.",
+   -- TRANSLATORS: This refers to a memory game
+   title = _"I packed my bag and in it I put …",
    body = (
       h1(_"Additional Items") ..
       p(_[[It might be useful to take some more wares with us than just the ones to build a new port. That way we will be able to start constructing new buildings as soon as the port has been constructed.]]) ..
