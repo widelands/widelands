@@ -75,6 +75,7 @@ public:
 		bool game_clock;
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
+		bool ctrl_preserve_wares;
 		bool tooltip_accessibility_mode;
 		int32_t display_flags;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -180,6 +181,7 @@ private:
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
+	UI::Checkbox ctrl_preserve_wares_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	UI::Box training_wheels_box_;

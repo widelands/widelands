@@ -31,6 +31,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "ui_basic/tabpanel.h"
+#include "wlapplication_options.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/helpwindow.h"
@@ -461,7 +462,8 @@ void BuildingWindow::act_dismantle() {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			if (game_) {
-				game_->send_player_dismantle(*building, false);
+				game_->send_player_dismantle(*building,
+				                             get_config_bool("ctrl_preserve_wares", true));
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -534,8 +536,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		assert(construction_site);
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (game_) {
-				game_->send_player_enhance_building(
-				   *construction_site, construction_site->building().enhancement(), false);
+				game_->send_player_enhance_building(*construction_site,
+				                                    construction_site->building().enhancement(),
+				                                    get_config_bool("ctrl_preserve_wares", true));
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -549,7 +552,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
 			if (game_) {
-				game_->send_player_enhance_building(*building, id, false);
+				game_->send_player_enhance_building(*building,
+				                                    id,
+				                                    get_config_bool("ctrl_preserve_wares", true));
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
