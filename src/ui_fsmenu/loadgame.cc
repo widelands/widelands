@@ -119,6 +119,7 @@ void LoadGame::think() {
 		// Call performance heavy draw_minimap function only during think
 		update_game_details_ = false;
 		load_or_save_.entry_selected();
+		ok_.set_enabled(!load_or_save_.game_details()->has_conflicts());
 	}
 }
 
@@ -140,7 +141,8 @@ void LoadGame::toggle_filenames() {
 }
 
 void LoadGame::clicked_ok() {
-	if (load_or_save_.table().selections().size() != 1) {
+	if (load_or_save_.game_details()->has_conflicts() ||
+	    load_or_save_.table().selections().size() != 1) {
 		return;
 	}
 
@@ -194,7 +196,8 @@ void LoadGame::clicked_ok() {
 }
 
 void LoadGame::entry_selected() {
-	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
+	ok_.set_enabled(!load_or_save_.game_details()->has_conflicts() &&
+	                load_or_save_.table().selections().size() == 1);
 	if (load_or_save_.has_selection()) {
 		// Update during think() instead of every keypress
 		update_game_details_ = true;
