@@ -10,7 +10,7 @@ descriptions:new_immovable_type {
    icon = dirname .. "menu.png",
    programs = {
       main = {
-         "animate=idle duration:41m40s",
+         "animate=idle duration:20m50s",
          "remove=",
       },
       harvest = {
