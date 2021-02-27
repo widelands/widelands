@@ -161,9 +161,9 @@ expedition2a = {
       h1(_"Additional Items") ..
       p(_[[During an expedition, we might need some more wares then just the ones to build a new port.]]) ..
       li_image("map:Additional.png",
-         join_sentences(_[[You can take some aditional wares, soldiers or workers with you on an expedition. You can define them by filling the empty slots below the primary Wares to build the port.]],
+         join_sentences(_[[You can take some additional wares, soldiers, or workers with you on an expedition. You can define them by filling the empty slots below the primary wares to build the port.]],
          _[[Just click on the empty slots and then scroll through the list to choose the additional item.]])) ..
-      p(_[[Now try this out. A small dot in red, green or yellow tells you whether the item is on its way, has arrived or isn't available.]])
+      p(_[[Now try this out. A small dot in green, yellow, or red tells you whether the item has arrived, is on its way or is not available respectively.]])
    )
 }
 
