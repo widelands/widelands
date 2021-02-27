@@ -156,7 +156,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX),
      scouts_house_(Widelands::INVALID_INDEX),
-     initializations_(info.initializations) {
+     basic_info_(info) {
 	log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums");
 
@@ -210,6 +210,17 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		log_info("┃    Finalizing");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
+		}
+
+		std::unique_ptr<LuaTable> collectors_points_table =
+		   table.get_table("collectors_points_table");
+		for (int key : collectors_points_table->keys<int>()) {
+			std::unique_ptr<LuaTable> t = collectors_points_table->get_table(key);
+			const std::string ware = t->get_string("ware");
+			if (!has_ware(descriptions.safe_ware_index(ware))) {
+				throw GameDataError("Collectors: Tribe does not use ware '%s'", ware.c_str());
+			}
+			collectors_points_table_.push_back(std::make_pair(ware, t->get_int("points")));
 		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());

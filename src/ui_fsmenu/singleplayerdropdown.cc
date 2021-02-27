@@ -89,8 +89,10 @@ void SinglePlayerTribeDropdown::rebuild() {
 		dropdown_.set_enabled(dropdown_.size() > 1);
 	} else {
 		for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
-			dropdown_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
-			              false, tribeinfo.tooltip);
+			if (player_setting.state != PlayerSettings::State::kComputer || tribeinfo.suited_for_ai) {
+				dropdown_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+				              false, tribeinfo.tooltip);
+			}
 		}
 		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
 		              g_image_cache->get("images/ui_fsmenu/random.png"), false,
@@ -127,6 +129,7 @@ void SinglePlayerTribeDropdown::selection_action() {
 			const std::string& selected = dropdown_.get_selected();
 			settings_->set_player_tribe(id_, selected, selected == RANDOM);
 		}
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 	}
 }
 
@@ -166,13 +169,15 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	const GameSettings& settings = settings_->settings();
 	dropdown_.clear();
 	// AIs
-	for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-		dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-		              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
+	if (settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
+		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
+			dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+			              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
+		}
+		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
+		              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 	}
-	/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-	dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
-	              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */
 	   _("You"), kHuman_player, g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));

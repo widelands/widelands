@@ -31,6 +31,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
+#include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -65,7 +68,20 @@ GameTips::~GameTips() {
 void GameTips::load_tips(const std::string& name) {
 	try {
 		LuaInterface lua;
-		std::unique_ptr<LuaTable> table(lua.run_script("txts/tips/" + name + ".lua"));
+		std::string filename = "txts/tips/";
+		filename += name;
+		filename += ".lua";
+		for (const Widelands::TribeBasicInfo& tribe : Widelands::get_all_tribeinfos()) {
+			if (tribe.name == name) {
+				if (tribe.script.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
+					filename = FileSystem::fs_dirname(tribe.script);
+					filename += FileSystem::file_separator();
+					filename += "tips.lua";
+				}
+				break;
+			}
+		}
+		std::unique_ptr<LuaTable> table(lua.run_script(filename));
 		std::unique_ptr<LuaTable> tip_table;
 		for (const int key : table->keys<int>()) {
 			tip_table = table->get_table(key);

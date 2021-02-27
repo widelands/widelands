@@ -64,6 +64,8 @@ struct TribeBasicInfo {
 	std::string descname;
 	/// Basic information about this tribe
 	std::string tooltip;
+	/// Whether the AI should be allowed to use this tribe.
+	const bool suited_for_ai;
 
 	std::vector<Initialization> initializations;
 };
