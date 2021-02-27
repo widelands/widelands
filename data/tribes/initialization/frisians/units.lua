@@ -32,6 +32,19 @@ descriptions:new_tribe {
 
    bridge_height = 8,
 
+   collectors_points_table = {
+      { ware = "gold", points = 3},
+      { ware = "sword_short", points = 2},
+      { ware = "sword_long", points = 3},
+      { ware = "sword_broad", points = 6},
+      { ware = "sword_double", points = 7},
+      { ware = "helmet", points = 2},
+      { ware = "helmet_golden", points = 7},
+      { ware = "fur_garment", points = 2},
+      { ware = "fur_garment_studded", points = 3},
+      { ware = "fur_garment_golden", points = 6},
+   },
+
    -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
