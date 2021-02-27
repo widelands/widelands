@@ -266,8 +266,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			const GameSettings& settings = settings_->settings();
 			const std::string& tribe = settings.players[id_].tribe;
-			if (state == PlayerSettings::State::kComputer &&
-			    tribe.empty() && !settings.get_tribeinfo(tribe).suited_for_ai) {
+			if (state == PlayerSettings::State::kComputer && tribe.empty() &&
+			    !settings.get_tribeinfo(tribe).suited_for_ai) {
 				for (const Widelands::TribeBasicInfo& t : settings.tribes) {
 					if (t.suited_for_ai) {
 						n->set_player_tribe(id_, t.name);
@@ -290,7 +290,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type_dropdown_.clear();
 		// AIs
 		if (settings.allows_ais(id_) &&
-		    (player_setting.tribe.empty() || settings.get_tribeinfo(player_setting.tribe).suited_for_ai || !has_tribe_access())) {
+		    (player_setting.tribe.empty() ||
+		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || !has_tribe_access())) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 				type_dropdown_.add(_(impl->descname),
 				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
