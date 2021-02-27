@@ -159,7 +159,7 @@ expedition2a = {
    title = _"I am going on a trip and I am taking … with me.",
    body = (
       h1(_"Additional Items") ..
-      p(_[[During an expedition, we might need some more wares then just the ones to build a new port.]]) ..
+      p(_[[It might be useful to take some more wares with us than just the ones to build a new port. That way we will be able to start constructing new buildings as soon as the port has been constructed.]]) ..
       li_image("map:Additional.png",
          join_sentences(_[[You can take some additional wares, soldiers, or workers with you on an expedition. You can define them by filling the empty slots below the primary wares to build the port.]],
          _[[Just click on the empty slots and then scroll through the list to choose the additional item.]])) ..
