@@ -417,7 +417,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		tabs_.activate(1);
 	});
 	tabs_.sigclicked.connect([this]() {
-		if (remotes_.empty() && tabs_.active() == 1) {
+		if (tabs_.active() == 1 && remotes_.size() <= 1) {
 			refresh_remotes();
 		}
 	});
@@ -971,6 +971,10 @@ void AddOnsCtrl::layout() {
 }
 
 bool AddOnsCtrl::is_remote(const std::string& name) const {
+	if (remotes_.size() <= 1) {
+		// No data available
+		return true;
+	}
 	for (const AddOns::AddOnInfo& r : remotes_) {
 		if (r.internal_name == name) {
 			return true;
