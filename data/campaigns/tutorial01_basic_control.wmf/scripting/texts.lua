@@ -38,7 +38,7 @@ obj_initial_close_objectives_window = {
    number = 1,
    body = objective_text(_"Handling of the ‘Objectives’ window",
       li_image("images/wui/menus/objectives.png", _[[ You can open and close the ‘Objectives’ window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]]) ..
-      li_arrow(_[[Like any other window, you can also close the window by right-clicking on it.]]) ..
+      li_arrow(_[[Like most other windows, you can also close the window by right-clicking on it.]]) ..
       li_arrow(_[[When you have accomplished an objective, it will disappear from the list.]])
    )
 }
