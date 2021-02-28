@@ -6,7 +6,7 @@
 # wl-zocker, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2009
 # Raymond Vetter, 2016
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
 # Venatrix, 2015
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 10:31+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,7 +166,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Erweitere deine Werkzeugschmiede zu einer Axtschmiede, um Waffen produzieren zu können, und errichte eine zweite Werkzeugschmiede, um die Werkzeugproduktion sicherzustellen. Wenn der Schmied seine nächste Stufe (Meisterschmied) erreicht, kannst du die Axtschmiede sogar zu einer Waffenschmiede ausbauen, die zusätzliche Waffen produziert."
+msgstr "Erweitere deine Werkzeugschmiede zu einer Axtschmiede, um Waffen herstellen zu können, und errichte eine zweite Werkzeugschmiede, um die Werkzeugproduktion sicherzustellen. Wenn der Schmied seine nächste Stufe (Meisterschmied) erreicht, kannst du die Axtschmiede sogar zu einer Waffenschmiede erweitern, die zusätzliche Waffen produziert."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
@@ -577,7 +577,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Unsere Geologen haben noch viele weitere Vorkommen von Eisenerz, Kohle und sogar Gold gefunden. Wir sollten unsere derzeitigen Minen ausbauen, sobald unsere Bergleute erfahrener sind. Wir sollten einige weitere Minen, eine größere Nahrungsversorgung, um unsere Männer immer mit genügend Nahrung zu versorgen, und eine größere weiterverarbeitende Industrie bauen. Aber das ist noch nicht alles – die meisten unserer Soldaten sind recht jung und haben weder eine gute Waffe noch sind sie gut ausgebildet. Wir sollten Ausbildungsgebäude bauen, um sie auf ihre zukünftigen Aufgaben vorzubereiten."
+msgstr "Unsere Geologen haben noch viele weitere Vorkommen von Eisenerz, Kohle und sogar Gold gefunden. Wir sollten unsere derzeitigen Minen erweitern, sobald unsere Bergleute erfahrener sind. Wir sollten einige weitere Minen, eine größere Nahrungsversorgung, um unsere Männer immer mit genügend Nahrung zu versorgen, und eine größere weiterverarbeitende Industrie bauen. Aber das ist noch nicht alles – die meisten unserer Soldaten sind recht jung und haben weder eine gute Waffe noch sind sie gut ausgebildet. Wir sollten Ausbildungsgebäude bauen, um sie auf ihre zukünftigen Aufgaben vorzubereiten."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327

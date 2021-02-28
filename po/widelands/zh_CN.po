@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-02-14 13:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-21 07:20+0000\n"
+"Last-Translator: Roy Luo <1598359376@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +46,7 @@ msgstr "%1$s or %2$s"
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:593 ../../data/scripting/richtext.lua:598
 #: ../../src/base/i18n.cc:374 ../../src/base/i18n.cc:383
-#: ../../src/logic/addons.cc:150
+#: ../../src/logic/addons.cc:157
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s,%2$s"
@@ -131,7 +131,7 @@ msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:319
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:321
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:201
 msgid "No AI"
 msgstr "没有人工智能"
@@ -266,8 +266,8 @@ msgstr "十一月"
 msgid "Dec"
 msgstr "十二月"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -279,12 +279,12 @@ msgstr "主菜单"
 msgid "Tools"
 msgstr "工具"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -429,7 +429,7 @@ msgstr "添加或删除港口空间"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:323
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:633
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:635
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:162
 msgid "Players"
 msgstr "玩家"
@@ -471,10 +471,10 @@ msgstr "信息"
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -622,8 +622,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:74
 msgid "walkable"
@@ -727,7 +727,7 @@ msgid "Author: %s"
 msgstr "作者：%s"
 
 #: ../../src/editor/tools/info_tool.cc:223
-#: ../../src/ui_fsmenu/addons_packager_box.cc:149
+#: ../../src/ui_fsmenu/addons_packager_box.cc:151
 #: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:111
 #, c-format
 msgid "Description: %s"
@@ -767,7 +767,7 @@ msgid "Current: %s"
 msgstr "当前：%s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:969 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "错误！"
@@ -775,7 +775,7 @@ msgstr "错误！"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:75
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
-#: ../../src/ui_fsmenu/addons_packager_box.cc:93 ../../src/wui/mapdata.cc:182
+#: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:182
 msgid "My Maps"
 msgstr "我的地图"
 
@@ -809,7 +809,7 @@ msgstr "显示"
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
 #: ../../src/ui_basic/messagebox.cc:102 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:224 ../../src/ui_fsmenu/addons.cc:1629
+#: ../../src/ui_fsmenu/addons.cc:224 ../../src/ui_fsmenu/addons.cc:1662
 #: ../../src/ui_fsmenu/addons_packager.cc:108
 #: ../../src/ui_fsmenu/helpwindow.cc:57
 #: ../../src/ui_fsmenu/keyboard_options.cc:132 ../../src/ui_fsmenu/menu.cc:145
@@ -856,7 +856,7 @@ msgid "Click player to remove"
 msgstr "点击玩家以删除"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons_packager_box.cc:269
+#: ../../src/ui_fsmenu/addons_packager_box.cc:271
 #: ../../src/wui/economy_options_window.cc:663
 #: ../../src/wui/load_or_save_game.cc:52
 msgid "Delete"
@@ -868,7 +868,7 @@ msgstr "删除这项建议的团队阵容"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons_packager.cc:74
-#: ../../src/ui_fsmenu/addons_packager_box.cc:54
+#: ../../src/ui_fsmenu/addons_packager_box.cc:56
 msgid "+"
 msgstr "+"
 
@@ -877,7 +877,7 @@ msgid "Add a player to this team"
 msgstr "添加一个游戏玩家到这个团队"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:320
-#: ../../src/logic/addons.cc:56
+#: ../../src/logic/addons.cc:64
 msgid "Theme"
 msgstr "主题"
 
@@ -1097,7 +1097,7 @@ msgid "Player"
 msgstr "玩家"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1738
+#: ../../src/network/gamehost.cc:1735
 #, c-format
 msgid "Computer %u"
 msgstr "计算机 %u"
@@ -1222,7 +1222,7 @@ msgstr "玩家 %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:185
-#: ../../src/ui_fsmenu/addons_packager_box.cc:308
+#: ../../src/ui_fsmenu/addons_packager_box.cc:314
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 #: ../../src/ui_fsmenu/campaigndetails.cc:58
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:181
@@ -1231,14 +1231,14 @@ msgid "Tribe"
 msgstr "部族"
 
 #: ../../src/editor/ui_menus/player_menu.cc:193
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:400
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:402
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:95
 msgctxt "tribe"
 msgid "Random"
 msgstr "随机"
 
 #: ../../src/editor/ui_menus/player_menu.cc:195
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:402
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:404
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgid "The tribe will be selected at random"
 msgstr "随机选择部族"
@@ -1334,12 +1334,12 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:291 ../../src/ui_basic/dropdown.cc:343
 #: ../../src/ui_basic/dropdown.cc:410 ../../src/ui_basic/dropdown.cc:418
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:309
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:311
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:192
 msgid "%1%: %2%"
 msgstr "%1%:%2%"
@@ -1508,115 +1508,115 @@ msgstr "没有"
 msgid "off"
 msgstr "关闭"
 
-#: ../../src/logic/addons.cc:38 ../../src/ui_basic/dropdown.cc:343
-#: ../../src/ui_basic/dropdown.cc:345 ../../src/ui_fsmenu/addons.cc:1179
-#: ../../src/ui_fsmenu/addons.cc:1235 ../../src/ui_fsmenu/addons.cc:1358
-#: ../../src/ui_fsmenu/addons.cc:2028 ../../src/ui_fsmenu/launch_mpg.cc:294
+#: ../../src/logic/addons.cc:46 ../../src/ui_basic/dropdown.cc:343
+#: ../../src/ui_basic/dropdown.cc:345 ../../src/ui_fsmenu/addons.cc:1186
+#: ../../src/ui_fsmenu/addons.cc:1242 ../../src/ui_fsmenu/addons.cc:1364
+#: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
 #: ../../src/wlapplication.cc:1275
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/logic/addons.cc:40
+#: ../../src/logic/addons.cc:47
 msgid "Tribes"
 msgstr "部落"
 
-#: ../../src/logic/addons.cc:42
+#: ../../src/logic/addons.cc:49
 msgid "World"
 msgstr "世界"
 
-#: ../../src/logic/addons.cc:44
+#: ../../src/logic/addons.cc:52
 msgid "Script"
 msgstr "脚本"
 
-#: ../../src/logic/addons.cc:46
+#: ../../src/logic/addons.cc:53
 msgid "Map Set"
 msgstr "地图设置"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:48 ../../src/ui_fsmenu/campaigndetails.cc:49
+#: ../../src/logic/addons.cc:55 ../../src/ui_fsmenu/campaigndetails.cc:49
 msgid "Campaign"
 msgstr "战役"
 
-#: ../../src/logic/addons.cc:51
+#: ../../src/logic/addons.cc:59
 msgid "Win Condition"
 msgstr "胜利条件"
 
-#: ../../src/logic/addons.cc:54
+#: ../../src/logic/addons.cc:61
 msgid "Starting Condition"
 msgstr "起始条件"
 
-#: ../../src/logic/addons.cc:67
+#: ../../src/logic/addons.cc:74
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:122
+#: ../../src/logic/addons.cc:129
 msgid "No conflicts"
 msgstr "没有冲突"
 
-#: ../../src/logic/addons.cc:127
+#: ../../src/logic/addons.cc:134
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (预期版本 %2$s, 找到 %3$s)"
 
-#: ../../src/logic/addons.cc:132 ../../src/logic/addons.cc:168
+#: ../../src/logic/addons.cc:139 ../../src/logic/addons.cc:175
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (预期版本 %3$s,找到 %4$s)"
 
-#: ../../src/logic/addons.cc:137
+#: ../../src/logic/addons.cc:144
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u 错误的附件版本: %2$s"
 
-#: ../../src/logic/addons.cc:153
+#: ../../src/logic/addons.cc:160
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$u 缺少附件: %2$s"
 
-#: ../../src/logic/addons.cc:161
+#: ../../src/logic/addons.cc:168
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (缺少)"
 
-#: ../../src/logic/addons.cc:163
+#: ../../src/logic/addons.cc:170
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (缺少)"
 
-#: ../../src/logic/addons.cc:172
+#: ../../src/logic/addons.cc:179
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s 和 %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:174
+#: ../../src/logic/addons.cc:181
 #, c-format
 msgid "%u missing add-on"
 msgstr "%u 缺少附件"
 
-#: ../../src/logic/addons.cc:174
+#: ../../src/logic/addons.cc:181
 #, c-format
 msgid "%u missing add-ons"
 msgstr "%u 缺少附件"
 
-#: ../../src/logic/addons.cc:177
+#: ../../src/logic/addons.cc:184
 #, c-format
 msgid "%u add-on with wrong version"
 msgstr "%u 错误的附件版本"
 
-#: ../../src/logic/addons.cc:178
+#: ../../src/logic/addons.cc:185
 #, c-format
 msgid "%u add-ons with wrong version"
 msgstr "%u 错误的附件版本"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:192
+#: ../../src/logic/addons.cc:199
 msgid "None"
 msgstr "没有"
 
-#: ../../src/logic/addons.cc:196
+#: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (版本 %3$s)"
@@ -1657,26 +1657,26 @@ msgid "Initializing game…"
 msgstr "初始化游戏"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:562
+#: ../../src/logic/game.cc:583
 msgid "Creating player infrastructure…"
 msgstr "创建玩家基础设施…"
 
-#: ../../src/logic/game.cc:579 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:600 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "缺少起始位置"
 
-#: ../../src/logic/game.cc:580 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:601 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands不能开始游戏，因为玩家%u缺少起始位置。\n你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
 
-#: ../../src/logic/game.cc:1049
+#: ../../src/logic/game.cc:1070
 msgid "Trade Offer"
 msgstr "交易报价"
 
-#: ../../src/logic/game.cc:1051
+#: ../../src/logic/game.cc:1072
 msgid "This market has received a new trade offer."
 msgstr "这个市场收到了新的交易报价。"
 
@@ -2255,12 +2255,12 @@ msgstr "可开采的"
 msgid "unwalkable"
 msgstr "不可行走的"
 
-#: ../../src/logic/mutable_addon.cc:160
+#: ../../src/logic/mutable_addon.cc:197
 #, c-format
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "地图文件已经失效：\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
@@ -2436,8 +2436,8 @@ msgstr "初始化地图对象"
 msgid "Checking map"
 msgstr "检查地图"
 
-#: ../../src/network/gameclient.cc:132 ../../src/network/gamehost.cc:704
-#: ../../src/ui_fsmenu/launch_spg.cc:165
+#: ../../src/network/gameclient.cc:132 ../../src/network/gamehost.cc:701
+#: ../../src/ui_fsmenu/launch_spg.cc:166
 msgid "Preparing game…"
 msgstr "准备游戏…"
 
@@ -2463,121 +2463,121 @@ msgid ""
 "not handle the file."
 msgstr "/me 已检查收到的文件。虽然md5值校验成功，但我无法处理该文件。"
 
-#: ../../src/network/gamehost.cc:294
+#: ../../src/network/gamehost.cc:291
 msgid "Available host commands are:"
 msgstr "可用的主机命令包括："
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:296
+#: ../../src/network/gamehost.cc:293
 msgid "/help  -  Shows this help"
 msgstr "/help  -  显示此项帮助"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:298
+#: ../../src/network/gamehost.cc:295
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <msg>  -  以公告形式发送聊天信息（系统聊天）"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:300
+#: ../../src/network/gamehost.cc:297
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <name> <reason>  -  警告用户 <name> 因为 <reason>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:302
+#: ../../src/network/gamehost.cc:299
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <name> <reason>  -  踢出用户 <name> 因为 <reason>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:304
+#: ../../src/network/gamehost.cc:301
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause            -  强制游戏暂停。"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:306
+#: ../../src/network/gamehost.cc:303
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause        -  恢复游戏到正常速度。"
 
-#: ../../src/network/gamehost.cc:313
+#: ../../src/network/gamehost.cc:310
 msgid "Wrong use, should be: /announce <message>"
 msgstr "错误使用, 应该是: /announce <message>"
 
-#: ../../src/network/gamehost.cc:325
+#: ../../src/network/gamehost.cc:322
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "错误使用, 应该是: /warn <name> <reason>"
 
-#: ../../src/network/gamehost.cc:329 ../../src/network/gamehost.cc:353
+#: ../../src/network/gamehost.cc:326 ../../src/network/gamehost.cc:350
 #, c-format
 msgid "The client %s could not be found."
 msgstr "找不到 %s 客户端。"
 
-#: ../../src/network/gamehost.cc:340
+#: ../../src/network/gamehost.cc:337
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "错误使用, 应该是: /kick <name> <reason>"
 
-#: ../../src/network/gamehost.cc:351
+#: ../../src/network/gamehost.cc:348
 msgid "You can not kick yourself!"
 msgstr "你不能踢出自己！"
 
-#: ../../src/network/gamehost.cc:357
+#: ../../src/network/gamehost.cc:354
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "你确定你想提出 %s?"
 
-#: ../../src/network/gamehost.cc:359
+#: ../../src/network/gamehost.cc:356
 #, c-format
 msgid "The stated reason was: %s"
 msgstr " 所的述理由是： %s"
 
-#: ../../src/network/gamehost.cc:360
+#: ../../src/network/gamehost.cc:357
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "如果是，输入: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:368
+#: ../../src/network/gamehost.cc:365
 msgid "Kick acknowledgement cancelled: No name given!"
 msgstr "踢出确认取消: 没有指定的名字！"
 
-#: ../../src/network/gamehost.cc:370
+#: ../../src/network/gamehost.cc:367
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "错误使用, 应该是: /ack_kick <name>"
 
-#: ../../src/network/gamehost.cc:376
+#: ../../src/network/gamehost.cc:373
 msgid "Kick acknowledgement cancelled: Wrong name given!"
 msgstr "踢出确认取消: 没有指定的名字！"
 
-#: ../../src/network/gamehost.cc:386
+#: ../../src/network/gamehost.cc:383
 msgid "Pause was already forced - game should be paused."
 msgstr "已经强制暂停 - 游戏应该暂停。"
 
-#: ../../src/network/gamehost.cc:396
+#: ../../src/network/gamehost.cc:393
 msgid "There is no forced pause - nothing to end."
 msgstr "没有强制暂停 - 没有什么可结束的。"
 
-#: ../../src/network/gamehost.cc:405
+#: ../../src/network/gamehost.cc:402
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "无效命令！ 输入 /help  获取命令列表。"
 
-#: ../../src/network/gamehost.cc:550
+#: ../../src/network/gamehost.cc:547
 msgid "Failed to host the server!"
 msgstr "服务器创建主机失败！"
 
-#: ../../src/network/gamehost.cc:551
+#: ../../src/network/gamehost.cc:548
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "Widelands不能开始服务器托管。\n 这不应该发生，而且你很可能对此无能为力。 请报告软件错误 "
 
-#: ../../src/network/gamehost.cc:559
+#: ../../src/network/gamehost.cc:556
 msgid "Failed to start the server!"
 msgstr "服务器启动失败！"
 
-#: ../../src/network/gamehost.cc:560
+#: ../../src/network/gamehost.cc:557
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Widelands不能启动服务。\n 可能其它的进程已经在我们的端口上运行服务器了 "
 
-#: ../../src/network/gamehost.cc:1967
+#: ../../src/network/gamehost.cc:1962
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3156,11 +3156,11 @@ msgstr "将选中的附件移到底部"
 
 #: ../../src/ui_fsmenu/addons.cc:277
 msgid "Launch the add-ons packager…"
-msgstr ""
+msgstr "启动附加组件打包程序…"
 
 #: ../../src/ui_fsmenu/addons.cc:281
 msgid "Tools for Add-Ons Developers"
-msgstr ""
+msgstr "附加组件开发者工具"
 
 #: ../../src/ui_fsmenu/addons.cc:289
 msgid ""
@@ -3181,11 +3181,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:323
 msgid "Open Link"
-msgstr ""
+msgstr "打开链接"
 
 #: ../../src/ui_fsmenu/addons.cc:325
 msgid "Copy Link"
-msgstr ""
+msgstr "拷贝链接"
 
 #: ../../src/ui_fsmenu/addons.cc:345
 #, c-format
@@ -3196,7 +3196,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:375
 msgid "Development"
-msgstr ""
+msgstr "发展"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons.cc:378
@@ -3260,8 +3260,8 @@ msgid ""
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) by %3$s"
 
-#: ../../src/ui_fsmenu/addons.cc:480 ../../src/ui_fsmenu/addons.cc:1964
-#: ../../src/ui_fsmenu/addons.cc:1988
+#: ../../src/ui_fsmenu/addons.cc:480 ../../src/ui_fsmenu/addons.cc:1998
+#: ../../src/ui_fsmenu/addons.cc:2022
 msgid "NOT VERIFIED"
 msgstr "尚未验证"
 
@@ -3290,95 +3290,95 @@ msgid ""
 "Message: %s"
 msgstr "不能从服务器获取可用的附件列表！ <br> 错误消息： %s"
 
-#: ../../src/ui_fsmenu/addons.cc:762
+#: ../../src/ui_fsmenu/addons.cc:770
 #, c-format
 msgid "Installed (%u)"
 msgstr "已安装 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:839
+#: ../../src/ui_fsmenu/addons.cc:847
 #, c-format
 msgid "Browse (%u)"
 msgstr "浏览 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:849
+#: ../../src/ui_fsmenu/addons.cc:857
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "全部升级 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:852
+#: ../../src/ui_fsmenu/addons.cc:860
 msgid "No upgrades are available for your installed add-ons"
 msgstr "你安装的附加组件没有可用的升级"
 
-#: ../../src/ui_fsmenu/addons.cc:855
+#: ../../src/ui_fsmenu/addons.cc:863
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgstr " 升级如下 %u 附件： "
 
-#: ../../src/ui_fsmenu/addons.cc:856
+#: ../../src/ui_fsmenu/addons.cc:864
 #, c-format
 msgid "Upgrade the following %u add-ons:"
 msgstr " 升级如下 %u 附件： "
 
-#: ../../src/ui_fsmenu/addons.cc:861
+#: ../../src/ui_fsmenu/addons.cc:869
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons.cc:890
+#: ../../src/ui_fsmenu/addons.cc:898
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· ‘%1$s’ 需要 ‘%2$s’ 找不到"
 
-#: ../../src/ui_fsmenu/addons.cc:897
+#: ../../src/ui_fsmenu/addons.cc:904
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· ‘%1$s’ 需要 ‘%2$s’ 已禁用"
 
-#: ../../src/ui_fsmenu/addons.cc:904
+#: ../../src/ui_fsmenu/addons.cc:911
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· ‘%1$s’ 需要 ‘%2$s’ 下面列出了所需的附加组件"
 
-#: ../../src/ui_fsmenu/addons.cc:924
+#: ../../src/ui_fsmenu/addons.cc:931
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· ‘%1$s’ 首先需要  ‘%2$s’ 然后需要  ‘%3$s’, 但它们排列顺序不对 "
 
-#: ../../src/ui_fsmenu/addons.cc:950
+#: ../../src/ui_fsmenu/addons.cc:957
 #, c-format
 msgid "%u Dependency Error"
 msgstr "%u 依赖项错误"
 
-#: ../../src/ui_fsmenu/addons.cc:950
+#: ../../src/ui_fsmenu/addons.cc:957
 #, c-format
 msgid "%u Dependency Errors"
 msgstr "%u 依赖项错误"
 
-#: ../../src/ui_fsmenu/addons.cc:955
+#: ../../src/ui_fsmenu/addons.cc:962
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "存在依赖错误的附件可能无法正常工作，或者阻止加载游戏和地图。"
 
-#: ../../src/ui_fsmenu/addons.cc:994
+#: ../../src/ui_fsmenu/addons.cc:1001
 msgid "Note"
 msgstr "注意"
 
-#: ../../src/ui_fsmenu/addons.cc:995
+#: ../../src/ui_fsmenu/addons.cc:1002
 #, c-format
 msgid ""
 "Please restart Widelands before you use the add-on ‘%s’, otherwise you may "
 "experience graphical glitches."
 msgstr "请在使用附件 ‘%s’ 之前重新启动Widelands，否则你可能会遇到图形显示方面故障。 "
 
-#: ../../src/ui_fsmenu/addons.cc:1141
+#: ../../src/ui_fsmenu/addons.cc:1148
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "正在下载 ‘%s’…"
 
-#: ../../src/ui_fsmenu/addons.cc:1181
+#: ../../src/ui_fsmenu/addons.cc:1188
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3387,12 +3387,12 @@ msgid ""
 "%2$s"
 msgstr "附加组件 ‘%1$s’ 不能从服务器下载， 将跳过安装/升级此附件。 错误信息： %2$s "
 
-#: ../../src/ui_fsmenu/addons.cc:1195
+#: ../../src/ui_fsmenu/addons.cc:1202
 #, c-format
 msgid "Downloading translations for ‘%s’…"
 msgstr "正在下载 ‘%s’ 的翻译…"
 
-#: ../../src/ui_fsmenu/addons.cc:1236
+#: ../../src/ui_fsmenu/addons.cc:1243
 #, c-format
 msgid ""
 "The translation files for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations for this add-on will be skipped.\n"
@@ -3401,12 +3401,12 @@ msgid ""
 "%2$s"
 msgstr "附加组件的翻译文件 ‘%1$s’ 不能从服务器下载， 将跳过安装/升级此附件的翻译文件。 错误信息： %2$s "
 
-#: ../../src/ui_fsmenu/addons.cc:1260 ../../src/ui_fsmenu/addons.cc:1409
-#: ../../src/ui_fsmenu/addons.cc:1865
+#: ../../src/ui_fsmenu/addons.cc:1267 ../../src/ui_fsmenu/addons.cc:1448
+#: ../../src/ui_fsmenu/addons.cc:1898
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../../src/ui_fsmenu/addons.cc:1262
+#: ../../src/ui_fsmenu/addons.cc:1269
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3420,7 +3420,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1269
+#: ../../src/ui_fsmenu/addons.cc:1276
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3432,169 +3432,189 @@ msgid ""
 "%5$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1359
+#: ../../src/ui_fsmenu/addons.cc:1365
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "在服务器上找不到所需的附加组件 ‘%s’ 。"
 
-#: ../../src/ui_fsmenu/addons.cc:1421 ../../src/ui_fsmenu/addons.cc:1471
+#: ../../src/ui_fsmenu/addons.cc:1401
+msgid ""
+"This add-on is known to cause desyncs in multiplayer games and replays."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons.cc:1408
+#, c-format
+msgid "Requires a Widelands version of at least %s."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons.cc:1412
+#, c-format
+msgid "Requires a Widelands version of at most %s."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons.cc:1416
+#, c-format
+msgid "Requires a Widelands version of at least %1$s and at most %2$s."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons.cc:1458 ../../src/ui_fsmenu/addons.cc:1507
 msgid "Disable"
 msgstr "禁用"
 
-#: ../../src/ui_fsmenu/addons.cc:1421 ../../src/ui_fsmenu/addons.cc:1471
+#: ../../src/ui_fsmenu/addons.cc:1458 ../../src/ui_fsmenu/addons.cc:1507
 msgid "Enable"
 msgstr "启用"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1435 ../../src/ui_fsmenu/addons.cc:1890
+#: ../../src/ui_fsmenu/addons.cc:1471 ../../src/ui_fsmenu/addons.cc:1923
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1448 ../../src/ui_fsmenu/addons.cc:1930
+#: ../../src/ui_fsmenu/addons.cc:1484 ../../src/ui_fsmenu/addons.cc:1963
 #: ../../src/wui/stock_menu.cc:59
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1452 ../../src/ui_fsmenu/addons.cc:1934
+#: ../../src/ui_fsmenu/addons.cc:1488 ../../src/ui_fsmenu/addons.cc:1967
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1455 ../../src/ui_fsmenu/addons.cc:1938
+#: ../../src/ui_fsmenu/addons.cc:1491 ../../src/ui_fsmenu/addons.cc:1971
 #, c-format
 msgid "by %s"
 msgstr "by %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1480 ../../src/ui_fsmenu/addons.cc:2019
+#: ../../src/ui_fsmenu/addons.cc:1515 ../../src/ui_fsmenu/addons.cc:2053
 #, c-format
 msgid "Category: %s"
 msgstr " 类别： %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1485 ../../src/ui_fsmenu/addons.cc:2023
+#: ../../src/ui_fsmenu/addons.cc:1520 ../../src/ui_fsmenu/addons.cc:2057
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "版本： %1$s+%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1534
+#: ../../src/ui_fsmenu/addons.cc:1567
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1536
+#: ../../src/ui_fsmenu/addons.cc:1569
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1538
+#: ../../src/ui_fsmenu/addons.cc:1571
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1540
+#: ../../src/ui_fsmenu/addons.cc:1573
 #, c-format
 msgid "%u bytes"
 msgstr "%u 字节"
 
-#: ../../src/ui_fsmenu/addons.cc:1578
+#: ../../src/ui_fsmenu/addons.cc:1611
 msgid "Your vote"
 msgstr "你的选票"
 
-#: ../../src/ui_fsmenu/addons.cc:1596 ../../src/ui_fsmenu/addons.cc:2044
+#: ../../src/ui_fsmenu/addons.cc:1629 ../../src/ui_fsmenu/addons.cc:2078
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] "平均评级： %1$.3f (%2$u votes)"
 
-#: ../../src/ui_fsmenu/addons.cc:1601 ../../src/ui_fsmenu/addons.cc:2049
+#: ../../src/ui_fsmenu/addons.cc:1634 ../../src/ui_fsmenu/addons.cc:2083
 msgid "No votes yet"
 msgstr "还没有投票"
 
-#: ../../src/ui_fsmenu/addons.cc:1611
+#: ../../src/ui_fsmenu/addons.cc:1644
 msgid "Next screenshot"
 msgstr "下一个屏幕快照"
 
-#: ../../src/ui_fsmenu/addons.cc:1620
+#: ../../src/ui_fsmenu/addons.cc:1653
 msgid "Previous screenshot"
 msgstr "上一个屏幕快照"
 
-#: ../../src/ui_fsmenu/addons.cc:1628
+#: ../../src/ui_fsmenu/addons.cc:1661
 msgid "Submit comment"
 msgstr "提交评论"
 
-#: ../../src/ui_fsmenu/addons.cc:1634
+#: ../../src/ui_fsmenu/addons.cc:1667
 msgid "No comments yet."
 msgstr "还没有评论"
 
-#: ../../src/ui_fsmenu/addons.cc:1636
+#: ../../src/ui_fsmenu/addons.cc:1669
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u 评论："
 
-#: ../../src/ui_fsmenu/addons.cc:1646
+#: ../../src/ui_fsmenu/addons.cc:1679
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "‘%1$s’ 对版本发表了评论 %2$s:"
 
-#: ../../src/ui_fsmenu/addons.cc:1660
+#: ../../src/ui_fsmenu/addons.cc:1693
 msgid "Not voted"
 msgstr "未投票"
 
-#: ../../src/ui_fsmenu/addons.cc:1720
+#: ../../src/ui_fsmenu/addons.cc:1753
 #, c-format
 msgid "Comments (%u)"
 msgstr "注释 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1725
+#: ../../src/ui_fsmenu/addons.cc:1758
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "屏幕快照 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1737
+#: ../../src/ui_fsmenu/addons.cc:1770
 #, c-format
 msgid "Votes (%u)"
 msgstr "投票 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1778
+#: ../../src/ui_fsmenu/addons.cc:1811
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u/%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1808
+#: ../../src/ui_fsmenu/addons.cc:1841
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "由于出现错误，无法从服务器获取此屏幕快照。 "
 
-#: ../../src/ui_fsmenu/addons.cc:1847 ../../src/ui_fsmenu/addons.cc:1956
+#: ../../src/ui_fsmenu/addons.cc:1880 ../../src/ui_fsmenu/addons.cc:1990
 msgid "Install"
 msgstr "安装"
 
-#: ../../src/ui_fsmenu/addons.cc:1856 ../../src/ui_fsmenu/addons.cc:1979
+#: ../../src/ui_fsmenu/addons.cc:1889 ../../src/ui_fsmenu/addons.cc:2013
 msgid "Upgrade"
 msgstr "升级"
 
-#: ../../src/ui_fsmenu/addons.cc:1874
+#: ../../src/ui_fsmenu/addons.cc:1907
 msgid "Comments and Votes"
 msgstr "评论和投票"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1916
+#: ../../src/ui_fsmenu/addons.cc:1949
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s ⬇%2$u  ★ %3$s  “” %4$u ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1939
+#: ../../src/ui_fsmenu/addons.cc:1972
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "by %1$s (由 %2$s 上传)"
 
-#: ../../src/ui_fsmenu/addons.cc:1957
+#: ../../src/ui_fsmenu/addons.cc:1991
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3607,11 +3627,11 @@ msgid ""
 "%6$s\n"
 msgstr "你确定要安装此附件吗？\n\n%1$s\nby %2$s\n%3$s\n版本 %4$s\n类别 ：%5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:1964 ../../src/ui_fsmenu/addons.cc:1988
+#: ../../src/ui_fsmenu/addons.cc:1998 ../../src/ui_fsmenu/addons.cc:2022
 msgid "Verified"
 msgstr "已验证"
 
-#: ../../src/ui_fsmenu/addons.cc:1980
+#: ../../src/ui_fsmenu/addons.cc:2014
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3625,35 +3645,35 @@ msgid ""
 "%7$s\n"
 msgstr "你确定真的想要升级这些附加组件？ \n%1$s \nby %2$s \n %3$s \n已安装的版本: %4$s \n可用版本： %5$s \n类别： %6$s \n%7$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:2030
+#: ../../src/ui_fsmenu/addons.cc:2064
 msgid "Verified by the Widelands Development Team"
 msgstr "由Widelands开发团队验证"
 
-#: ../../src/ui_fsmenu/addons.cc:2031
+#: ../../src/ui_fsmenu/addons.cc:2065
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Widelands开发团队尚未检查此附加组件。我们不能保证它不包含有害的或是不礼貌的内容 "
 
-#: ../../src/ui_fsmenu/addons.cc:2038
+#: ../../src/ui_fsmenu/addons.cc:2072
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] "总计： %u 字节"
 
-#: ../../src/ui_fsmenu/addons.cc:2041
+#: ../../src/ui_fsmenu/addons.cc:2075
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] "%u 下载"
 
-#: ../../src/ui_fsmenu/addons.cc:2050
+#: ../../src/ui_fsmenu/addons.cc:2084
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
 msgstr[0] "%u 评论"
 
-#: ../../src/ui_fsmenu/addons.cc:2052
+#: ../../src/ui_fsmenu/addons.cc:2086
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -3661,14 +3681,14 @@ msgstr[0] "%u屏幕快照"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:48
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "附加组件打包程序"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:75
 msgid "New add-on"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:83
-#: ../../src/ui_fsmenu/addons_packager_box.cc:72
+#: ../../src/ui_fsmenu/addons_packager_box.cc:74
 msgid "–"
 msgstr ""
 
@@ -3682,65 +3702,65 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:100
 msgid "Save changes"
-msgstr ""
+msgstr "保存更改"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:129
 msgid "Name:"
-msgstr ""
+msgstr "姓名："
 
 #: ../../src/ui_fsmenu/addons_packager.cc:134
 msgid "Author:"
-msgstr ""
+msgstr "作者："
 
 #: ../../src/ui_fsmenu/addons_packager.cc:139
 msgid "Version:"
-msgstr ""
+msgstr "版本："
 
-#: ../../src/ui_fsmenu/addons_packager.cc:291
+#: ../../src/ui_fsmenu/addons_packager.cc:296
 msgid "New Add-On"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:292
+#: ../../src/ui_fsmenu/addons_packager.cc:297
 msgid "Enter the name for the new add-on."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:294
+#: ../../src/ui_fsmenu/addons_packager.cc:299
 msgid "Category"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:313
-#: ../../src/ui_fsmenu/addons_packager.cc:328
+#: ../../src/ui_fsmenu/addons_packager.cc:318
 #: ../../src/ui_fsmenu/addons_packager.cc:333
-#: ../../src/ui_fsmenu/addons_packager_box.cc:249
-#: ../../src/ui_fsmenu/addons_packager_box.cc:255
+#: ../../src/ui_fsmenu/addons_packager.cc:338
+#: ../../src/ui_fsmenu/addons_packager_box.cc:251
+#: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "Invalid Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:313
-#: ../../src/ui_fsmenu/addons_packager_box.cc:249
+#: ../../src/ui_fsmenu/addons_packager.cc:318
+#: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid, please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:328
+#: ../../src/ui_fsmenu/addons_packager.cc:333
 msgid "An add-on with this internal name already exists."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:333
+#: ../../src/ui_fsmenu/addons_packager.cc:338
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:372
+#: ../../src/ui_fsmenu/addons_packager.cc:380
 msgid "Delete Add-on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:374
+#: ../../src/ui_fsmenu/addons_packager.cc:382
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:375
+#: ../../src/ui_fsmenu/addons_packager.cc:383
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -3748,7 +3768,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:396
+#: ../../src/ui_fsmenu/addons_packager.cc:404
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -3758,31 +3778,31 @@ msgid_plural ""
 "be discarded."
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:406
-#: ../../src/ui_fsmenu/addons_packager.cc:429
-#: ../../src/ui_fsmenu/addons_packager.cc:450
+#: ../../src/ui_fsmenu/addons_packager.cc:414
+#: ../../src/ui_fsmenu/addons_packager.cc:437
+#: ../../src/ui_fsmenu/addons_packager.cc:458
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:409
+#: ../../src/ui_fsmenu/addons_packager.cc:417
 msgid "Quit Packager"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:423
+#: ../../src/ui_fsmenu/addons_packager.cc:431
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:432
+#: ../../src/ui_fsmenu/addons_packager.cc:440
 msgid "Discard Changes"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:444
+#: ../../src/ui_fsmenu/addons_packager.cc:452
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -3791,108 +3811,135 @@ msgid_plural ""
 "disk?"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:453
+#: ../../src/ui_fsmenu/addons_packager.cc:460
+msgid ""
+"\n"
+"\n"
+"Warning: If you manually edited any files in this add-on, your changes may be overwritten!"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons_packager.cc:463
 msgid "Confirm Saving"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:499
+#: ../../src/ui_fsmenu/addons_packager.cc:509
 msgid "Invalid Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:501
+#: ../../src/ui_fsmenu/addons_packager.cc:511
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:508
+#: ../../src/ui_fsmenu/addons_packager.cc:518
 msgid "Write Addons"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:509
+#: ../../src/ui_fsmenu/addons_packager.cc:519
 msgid "Please be patient while your changes are written."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:515
+#: ../../src/ui_fsmenu/addons_packager.cc:525
 msgid "Error Writing Addon"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:516
+#: ../../src/ui_fsmenu/addons_packager.cc:526
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
 "%2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:55
+#: ../../src/ui_fsmenu/addons_packager_box.cc:57
 msgid "Add selected map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:63
+#: ../../src/ui_fsmenu/addons_packager_box.cc:65
 msgid "*"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:64
+#: ../../src/ui_fsmenu/addons_packager_box.cc:66
 msgid "Create subdirectory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:73
+#: ../../src/ui_fsmenu/addons_packager_box.cc:75
 msgid "Remove selected map or directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:85
+#: ../../src/ui_fsmenu/addons_packager_box.cc:87
 msgid "Directory Tree"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:136
+#: ../../src/ui_fsmenu/addons_packager_box.cc:138
 #: ../../src/ui_fsmenu/main.cc:400
 #, c-format
 msgid "Name: %s"
 msgstr "名称：%s"
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:140
+#: ../../src/ui_fsmenu/addons_packager_box.cc:142
 #: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
 #, c-format
 msgid "Size: %s"
 msgstr "大小：%s"
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:143
+#: ../../src/ui_fsmenu/addons_packager_box.cc:145
 #: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:145
+#: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:106
 #, c-format
 msgid "Players: %s"
 msgstr "玩家：%s"
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:173
+#: ../../src/ui_fsmenu/addons_packager_box.cc:175
 msgid "Top-level directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:235
+#: ../../src/ui_fsmenu/addons_packager_box.cc:237
 msgid "New Directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:236
+#: ../../src/ui_fsmenu/addons_packager_box.cc:238
 msgid "Enter the name for the new directory."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:255
+#: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "A directory with this name already exists."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:272
+#: ../../src/ui_fsmenu/addons_packager_box.cc:274
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:275
+#: ../../src/ui_fsmenu/addons_packager_box.cc:277
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
+msgstr ""
+
+#. * TRANSLATORS: Header for campaign difficulty
+#: ../../src/ui_fsmenu/addons_packager_box.cc:325
+#: ../../src/ui_fsmenu/campaign_select.cc:48
+#: ../../src/ui_fsmenu/campaigndetails.cc:63
+#: ../../src/ui_fsmenu/scenario_select.cc:68
+msgid "Difficulty"
+msgstr "难度"
+
+#: ../../src/ui_fsmenu/addons_packager_box.cc:334
+msgid "Difficulty:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons_packager_box.cc:359
+msgid "The campaigns difficulty. One word."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons_packager_box.cc:360
+msgid "Short description, which will be appended to the difficulty."
 msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:34
@@ -3913,13 +3960,6 @@ msgstr "开始这个战役"
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 msgid "Diff."
 msgstr "难度."
-
-#. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/campaign_select.cc:48
-#: ../../src/ui_fsmenu/campaigndetails.cc:63
-#: ../../src/ui_fsmenu/scenario_select.cc:68
-msgid "Difficulty"
-msgstr "难度"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 msgid "Tribe Name"
@@ -4081,80 +4121,85 @@ msgstr "启动游戏"
 msgid "Configure this game"
 msgstr "配置游戏"
 
-#: ../../src/ui_fsmenu/launch_game.cc:67
+#: ../../src/ui_fsmenu/launch_game.cc:65
+msgid ""
+"An enabled add-on is known to cause desyncs. No replay will be written."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:81
 msgid "Peaceful mode"
 msgstr "和平模式"
 
-#: ../../src/ui_fsmenu/launch_game.cc:71
+#: ../../src/ui_fsmenu/launch_game.cc:85
 msgid "Custom starting positions"
 msgstr "自定义起始位置"
 
-#: ../../src/ui_fsmenu/launch_game.cc:80
+#: ../../src/ui_fsmenu/launch_game.cc:94
 msgid "Change map…"
 msgstr "更换地图..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:90
+#: ../../src/ui_fsmenu/launch_game.cc:104
 msgid "Change saved game…"
 msgstr "更改保存的游戏..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:106
+#: ../../src/ui_fsmenu/launch_game.cc:121
 msgid "Start game"
 msgstr "开始游戏"
 
-#: ../../src/ui_fsmenu/launch_game.cc:159
+#: ../../src/ui_fsmenu/launch_game.cc:186
 msgid "The relations between players are set by the scenario"
 msgstr "玩家之间的关系由场景决定"
 
-#: ../../src/ui_fsmenu/launch_game.cc:161
+#: ../../src/ui_fsmenu/launch_game.cc:188
 msgid "The relations between players are set by the saved game"
 msgstr "玩家之间的关系由保存的游戏设置"
 
-#: ../../src/ui_fsmenu/launch_game.cc:163
+#: ../../src/ui_fsmenu/launch_game.cc:190
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "所选的胜利条件不允许和平比赛模式"
 
-#: ../../src/ui_fsmenu/launch_game.cc:165
+#: ../../src/ui_fsmenu/launch_game.cc:192
 msgid "Forbid fighting between players"
 msgstr "玩家之间禁止战斗"
 
-#: ../../src/ui_fsmenu/launch_game.cc:176
+#: ../../src/ui_fsmenu/launch_game.cc:203
 msgid "The starting positions are set by the scenario"
 msgstr "起始位置由场景决定"
 
-#: ../../src/ui_fsmenu/launch_game.cc:178
+#: ../../src/ui_fsmenu/launch_game.cc:205
 msgid "The starting positions are set by the saved game"
 msgstr "起始位置由已保存的游戏设定"
 
-#: ../../src/ui_fsmenu/launch_game.cc:181
+#: ../../src/ui_fsmenu/launch_game.cc:208
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "允许玩家在游戏开始时选择自己的起始位置"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:188
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:445
+#: ../../src/ui_fsmenu/launch_game.cc:215
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:447
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:276
 #: ../../src/wui/map_tags.cc:44 ../../src/wui/mapdetails.cc:139
 msgid "Scenario"
 msgstr "方案"
 
-#: ../../src/ui_fsmenu/launch_game.cc:189
+#: ../../src/ui_fsmenu/launch_game.cc:216
 msgid "Win condition is set through the scenario"
 msgstr "胜利条件由剧本设置"
 
-#: ../../src/ui_fsmenu/launch_game.cc:195
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:449
+#: ../../src/ui_fsmenu/launch_game.cc:222
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:451
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:280
 msgid "Saved Game"
 msgstr "保存游戏"
 
-#: ../../src/ui_fsmenu/launch_game.cc:197
+#: ../../src/ui_fsmenu/launch_game.cc:224
 msgid "The game is a saved game – the win condition was set before."
 msgstr "此游戏是保存的游戏，胜利条件已经设置。"
 
-#: ../../src/ui_fsmenu/launch_game.cc:266
+#: ../../src/ui_fsmenu/launch_game.cc:295
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
@@ -4184,11 +4229,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "警告：\n你选择的游戏存档是一个文件夹。这种情况在你设置\"nozip\"选项为true或者手工解压缩了游戏存档时会出现。\nWidelands不能传输文件夹到其他客户端，请选择另一个游戏存档或者压缩文件夹内容为zip文件。"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:212 ../../src/ui_fsmenu/launch_spg.cc:124
+#: ../../src/ui_fsmenu/launch_mpg.cc:212 ../../src/ui_fsmenu/launch_spg.cc:125
 msgid "File not found"
 msgstr "文件未找到"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:213 ../../src/ui_fsmenu/launch_spg.cc:125
+#: ../../src/ui_fsmenu/launch_mpg.cc:213 ../../src/ui_fsmenu/launch_spg.cc:126
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -4476,11 +4521,19 @@ msgid ""
 "General Public License V2.0"
 msgstr "(C)%1%-%2% Widelands 开发团队。基于GNU  General Public License V2.0 许可。"
 
-#: ../../src/ui_fsmenu/main.cc:873 ../../src/ui_fsmenu/netsetup_lan.cc:318
+#: ../../src/ui_fsmenu/main.cc:796
+msgid "Desyncing Add-On Found"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:797
+msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:892 ../../src/ui_fsmenu/netsetup_lan.cc:318
 msgid "No tribes found!"
 msgstr "找不到部落！"
 
-#: ../../src/ui_fsmenu/main.cc:874 ../../src/ui_fsmenu/netsetup_lan.cc:319
+#: ../../src/ui_fsmenu/main.cc:893 ../../src/ui_fsmenu/netsetup_lan.cc:319
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
@@ -4579,7 +4632,7 @@ msgid "Spectator"
 msgstr "观众"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:170
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:309
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:311
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:149
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:192
 msgid "Type"
@@ -4592,60 +4645,60 @@ msgid "Team"
 msgstr "小队"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:284
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:285
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:286
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:174
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:175
 msgid "Random AI"
 msgstr "随机 AI"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:289
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:291
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:293
 msgid "Shared in"
 msgstr "共享给"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:296
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:297
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:298
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:299
 #: ../../src/ui_fsmenu/netsetup_lan.cc:221
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:183
 msgid "Closed"
 msgstr "关闭"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:301
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:303
 #: ../../src/ui_fsmenu/netsetup_lan.cc:218
 msgid "Open"
 msgstr "开放"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:309
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:311
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:192
 msgid "Human"
 msgstr "人类"
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:386
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:388
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:83
 #, c-format
 msgid "Shared in Player %u"
 msgstr "共享给玩家 %u"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:446
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:448
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:277
 msgid "Start type is set via the scenario"
 msgstr "起始类型通过场景设置"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:518
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:520
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 msgid "No Team"
 msgstr "没有团队"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:524
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:526
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:372
 #, c-format
 msgid "Team %d"
 msgstr "团队 %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:624
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:626
 msgid "Clients"
 msgstr "客户端"
 
@@ -4977,18 +5030,18 @@ msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
 msgid "Tutorial"
 msgstr "教程"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:168
 msgid "Author"
 msgstr "作者"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:171
 msgid "Authors"
 msgstr "作者"
@@ -5279,9 +5332,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -5696,7 +5749,7 @@ msgstr "退出游戏"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
-#: ../../src/wui/game_client_disconnected.cc:122
+#: ../../src/wui/game_client_disconnected.cc:123
 #, c-format
 msgid "Replace player with %s"
 msgstr "使用%s替换游戏玩家"
@@ -6264,7 +6317,7 @@ msgstr "士兵"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:310 ../../src/wui/stock_menu.cc:37
-#: ../../src/wui/ware_statistics_menu.cc:154 ../../src/wui/waresdisplay.cc:82
+#: ../../src/wui/ware_statistics_menu.cc:153 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "存货"
 
@@ -7029,15 +7082,15 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:76
 msgid "Yellow:"
-msgstr ""
+msgstr "黄色："
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Green:"
-msgstr ""
+msgstr "绿色："
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Stock is higher than the target"
-msgstr ""
+msgstr "库存高于目标"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:85
@@ -7048,19 +7101,19 @@ msgstr "组队建议"
 msgid "Soldiers in training"
 msgstr "训练中的士兵"
 
-#: ../../src/wui/ware_statistics_menu.cc:106
+#: ../../src/wui/ware_statistics_menu.cc:104
 msgid "Ware Statistics"
 msgstr "物品统计"
 
-#: ../../src/wui/ware_statistics_menu.cc:134
+#: ../../src/wui/ware_statistics_menu.cc:133
 msgid "Production"
 msgstr "生产"
 
-#: ../../src/wui/ware_statistics_menu.cc:141
+#: ../../src/wui/ware_statistics_menu.cc:140
 msgid "Consumption"
 msgstr "消费"
 
-#: ../../src/wui/ware_statistics_menu.cc:148
+#: ../../src/wui/ware_statistics_menu.cc:147
 msgid "Economy health"
 msgstr "经济健康"
 
@@ -7098,20 +7151,20 @@ msgstr "探险"
 
 #: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
-msgstr ""
+msgstr "↓"
 
 #: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
-msgstr ""
+msgstr "↑"
 
 #: ../../src/wui/waresdisplay.cc:554
 msgid "="
-msgstr ""
+msgstr "="
 
 #: ../../src/wui/waresdisplay.cc:555
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
