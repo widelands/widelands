@@ -7,16 +7,16 @@
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2018
 # Simon S. <sim.sta@icloud.com>, 2019
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Lennard Hofmann <lennard.hofmann@web.de>, 2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,10 +99,10 @@ msgid ""
 "cycle. You need to stop the blacksmithy until at least two iron are stored "
 "in its input queue."
 msgstr ""
-"Die Schmiede produziert eine Spitzhacke nur in ihrem zweiten "
-"Produktionszyklus. Wenn sie immer nur mit einem Eisenbarren ausgestattet "
-"ist, erreicht sie möglicherweise niemals diesen Zyklus. Du musst die "
-"Schmiede stillegen, bis sie mindestens zwei Eisen zur Verfügung hat."
+"Die Schmiede stellt eine Spitzhacke nur in ihrem zweiten Produktionszyklus "
+"her. Wenn sie immer nur mit einem Eisenbarren ausgestattet ist, erreicht sie"
+" möglicherweise niemals diesen Zyklus. Du musst die Schmiede stillegen, bis "
+"sie mindestens zwei Eisen zur Verfügung hat."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
@@ -118,7 +118,7 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
-"Baue eine Fischzucht, um Fisch zu produzieren. Die Fischzucht braucht die "
+"Baue eine Fischzucht, um Fisch zu züchten. Die Fischzucht braucht die "
 "Löcher, die von einer Lehmgrube hinterlassen wurden, um sie als Teiche zu "
 "verwenden, in denen Fische gezüchtet werden. Nur ein Fischer, der bei einer "
 "Fischzucht arbeitet, kann aus diesen Teichen angeln."
@@ -489,7 +489,7 @@ msgid ""
 "stuck like this forever! You must come up with a solution."
 msgstr ""
 "Das sind schreckliche Neuigkeiten! Ohne Eisen oder einer Möglichkeit, neues "
-"Eisen zu produzieren, werden wir hier für immer festsitzen! Dir muss eine "
+"Eisen herzustellen, werden wir hier für immer festsitzen! Dir muss eine "
 "Lösung einfallen."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
@@ -790,9 +790,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
-"30 Holzstämme, 40 Steinblöcke, 30 Fische, 30 Krüge mit Bier, 150 "
-"Wassereimer, 40 Rationen, 10 Mahlzeiten, 30 Kohlebrocken, 40 Brocken "
-"Eisenerz, 20 Eisenbarren, 20 Brocken Golderz und 10 Goldbarren."
+"30 Stämme, 40 Steinblöcke, 30 Fische, 30 Krüge mit Bier, 150 Wassereimer, 40"
+" Rationen, 10 Mahlzeiten, 30 Kohlebrocken, 40 Brocken Eisenerz, 20 "
+"Eisenbarren, 20 Brocken Golderz und 10 Goldbarren."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:301
