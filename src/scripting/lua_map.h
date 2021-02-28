@@ -147,6 +147,8 @@ public:
 	int get_soldier(lua_State*);
 	int get_wares(lua_State*);
 	int get_workers(lua_State*);
+	int get_directory(lua_State*);
+	int get_collectors_points_table(lua_State*);
 
 	/*
 	 * Lua methods

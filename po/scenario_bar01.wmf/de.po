@@ -7,7 +7,7 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
 # Venatrix, 2015
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 10:17+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -207,7 +207,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Eine normale Mine kann nur etwa ein Drittel aller Rohstoffe ausbeuten, die in ihrem Bereich liegen; danach muss sie zur tiefen Mine ausgebaut werden, um weiter arbeiten zu können. Um ein Gebäude auszubauen, wähle es aus und klicke auf die entsprechende Schaltfläche im dann erscheinenden Fenster."
+msgstr "Eine normale Mine kann nur etwa ein Drittel aller Rohstoffe ausbeuten, die in ihrem Bereich liegen; danach muss sie zur tiefen Mine erweitert werden, um weiter arbeiten zu können. Um ein Gebäude zu erweitern, wähle es aus und klicke auf die entsprechende Schaltfläche im dann erscheinenden Fenster."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -223,14 +223,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Solche Gebäude haben normalerweise höhere Anforderungen als der Basistyp dieses Gebäudes – zum Beispiel brauchen tiefe Minen Snacks statt Rationen. Du musst deine Taverne zu einem Wirtshaus ausbauen, um Snacks aus Fladenbrot UND einer zweiten Art von Nahrung (Fleisch oder Fisch) UND Bier herzustellen."
+msgstr "Solche Gebäude haben normalerweise höhere Anforderungen als der Basistyp dieses Gebäudes – zum Beispiel brauchen tiefe Minen Snacks statt Rationen. Du musst deine Taverne zu einem Wirtshaus erweitern, um Snacks aus Fladenbrot UND einer zweiten Art von Nahrung (Fleisch oder Fisch) UND Bier herzustellen."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Du kannst natürlich alle Minen sofort zu tiefen Minen ausbauen, wenn du die benötigten Arbeiter hast. Größere Minen arbeiten ein bisschen schneller, kleinere Minen benötigen billigeres Essen. Es liegt an dir, welche Strategie du bevorzugst."
+msgstr "Du kannst natürlich alle Minen sofort zu tiefen Minen erweitern, wenn du die benötigten Arbeiter hast. Größere Minen arbeiten ein bisschen schneller, kleinere Minen benötigen billigeres Essen. Es liegt an dir, welche Strategie du bevorzugst."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99

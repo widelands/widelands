@@ -48,98 +48,6 @@ local r = {
       end
    end
 
-   -- The list of wares that give points
-   local point_table = {
-      barbarians = {
-         gold = 3,
-         ax = 2,
-         ax_sharp = 3,
-         ax_broad = 4,
-         ax_bronze = 4,
-         ax_battle = 6,
-         ax_warriors = 10,
-         helmet = 2,
-         helmet_mask = 3,
-         helmet_warhelm = 6,
-      },
-      barbarians_order = {
-         "gold", "ax", "ax_sharp", "ax_broad", "ax_bronze", "ax_battle",
-         "ax_warriors", "helmet", "helmet_mask", "helmet_warhelm",
-      },
-
-      empire = {
-         gold = 3,
-         spear_wooden = 1,
-         spear = 3,
-         spear_advanced = 4,
-         spear_heavy = 7,
-         spear_war = 8,
-         armor_helmet = 2,
-         armor = 3,
-         armor_chain = 4,
-         armor_gilded = 8,
-      },
-      empire_order = {
-         "gold", "spear_wooden", "spear", "spear_advanced", "spear_heavy",
-         "spear_war", "armor_helmet", "armor", "armor_chain", "armor_gilded"
-      },
-
-      frisians = {
-         gold = 3,
-         sword_short = 2,
-         sword_long = 3,
-         sword_broad = 6,
-         sword_double = 7,
-         helmet = 2,
-         helmet_golden = 7,
-         fur_garment = 2,
-         fur_garment_studded = 3,
-         fur_garment_golden = 6,
-      },
-      frisians_order = {
-         "gold", "sword_short", "sword_long", "sword_broad", "sword_double",
-         "helmet", "helmet_golden", "fur_garment", "fur_garment_studded", "fur_garment_golden"
-      },
-
-      atlanteans = {
-         gold = 3,
-         trident_light = 2,
-         trident_long = 3,
-         trident_steel = 4,
-         trident_double = 7,
-         trident_heavy_double = 8,
-         shield_steel = 4,
-         shield_advanced = 7,
-         tabard = 1,
-         tabard_golden = 5,
-      },
-      atlanteans_order = {
-         "gold", "trident_light", "trident_long", "trident_steel",
-         "trident_double", "trident_heavy_double", "shield_steel",
-         "shield_advanced", "tabard", "tabard_golden"
-       },
-
-      amazons = {
-         gold = 12,
-         spear_wooden = 0,
-         spear_stone_tipped = 1,
-         spear_hardened = 1,
-         helmet_wooden = 1,
-         warriors_coat = 16,
-         tunic = 1,
-         vest_padded = 2,
-         protector_padded = 17,
-         boots_sturdy = 1,
-         boots_swift = 1,
-         boots_hero = 16
-      },
-      amazons_order = {
-         "gold", "spear_wooden", "spear_stone_tipped", "spear_hardened",
-         "helmet_wooden", "warriors_coat", "tunic", "vest_padded",
-         "protector_padded", "boots_sturdy", "boots_swift", "boots_hero"
-       },
-   }
-
    -- Calculate the momentary points for a list of players
    local function _calc_points(players)
       push_textdomain("win_conditions")
@@ -147,25 +55,27 @@ local r = {
       local descr = ""
 
       for idx, plr in ipairs(players) do
-         local bs = array_combine(
-            plr:get_buildings(plr.tribe_name .. "_headquarters"), plr:get_buildings(plr.tribe_name .. "_warehouse"), plr:get_buildings(plr.tribe_name .. "_port")
-         )
+         local bs = {}
+         for name,allowed in pairs(plr.allowed_buildings) do
+            if wl.Game():get_building_description(name).type_name == "warehouse" then
+               bs = array_combine(bs, plr:get_buildings(name))
+            end
+         end
 
          descr = descr .. h2((_"Status for %s"):format(plr.name))
          local points = 0
-         for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
-            local value = point_table[plr.tribe_name][ware]
+         for idx,pair in ipairs(plr.tribe.collectors_points_table) do
             local count = 0
             for idx,b in ipairs(bs) do
-               count = count + b:get_wares(ware)
+               count = count + b:get_wares(pair.ware)
             end
-            local lpoints = count * value
+            local lpoints = count * pair.points
             points = points + lpoints
 
-            local warename = wl.Game():get_ware_description(ware).descname
+            local warename = wl.Game():get_ware_description(pair.ware).descname
             -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
             descr = descr .. li(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
-               warename, value, count, lpoints
+               warename, pair.points, count, lpoints
             )
          end
          descr = descr .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)

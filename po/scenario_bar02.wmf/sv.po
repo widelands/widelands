@@ -5,13 +5,14 @@
 # D M <hunter12@home.se>, 2017
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
+# Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 20:29+0000\n"
+"Last-Translator: Martin Eriksson <nils.martin.andreas@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -362,7 +363,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Jag har skickat män för att möta Kalitath i hans fästning. Han har barrikaderat huvudstadens tidigare huvudingång och försöker bygga upp en belägringsmur runt Al'thunran. Han kommer inte att låta någon komma vare sig in i eller ut ur staden medan belägringen håller stånd. Änsålänge har han inte svarat på några av mina meddelanden. Men jag kommer inte spilla något tid medans jag väntar. Jag kommer att fortsätta träna mina soldater och förbereda oss för strid."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"

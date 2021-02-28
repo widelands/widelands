@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
 "PO-Revision-Date: 2021-02-14 13:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -266,8 +266,8 @@ msgstr "Каждый игрок или команда пытается захв�
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:324
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:329
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:334
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -277,7 +277,7 @@ msgstr[2] "%i минут"
 msgstr[3] "%i минут"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:331
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:326
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% час %2%"
@@ -286,7 +286,7 @@ msgstr[2] "%1% часов %2%"
 msgstr[3] "%1%часов%2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:337
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:332
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% час"
@@ -295,7 +295,7 @@ msgstr[2] "%1% часов"
 msgstr[3] "%1% часов"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:340
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:335
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Игра закончится через %s."

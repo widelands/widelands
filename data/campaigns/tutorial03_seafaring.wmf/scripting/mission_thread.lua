@@ -81,6 +81,9 @@ function expedition()
       return false
    end
 
+   sleep(10000)
+   campaign_message_box(expedition2a)
+
    while not _ship_ready_for_expedition() do sleep(1000) end
    set_objective_done(o)
 
