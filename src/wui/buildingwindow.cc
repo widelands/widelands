@@ -534,8 +534,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		assert(construction_site);
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (game_) {
-				game_->send_player_enhance_building(
-				   *construction_site, construction_site->building().enhancement(), (SDL_GetModState() & KMOD_SHIFT) == 0);
+				game_->send_player_enhance_building(*construction_site,
+				                                    construction_site->building().enhancement(),
+				                                    (SDL_GetModState() & KMOD_SHIFT) == 0);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -549,7 +550,8 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
 			if (game_) {
-				game_->send_player_enhance_building(*building, id, (SDL_GetModState() & KMOD_SHIFT) == 0);
+				game_->send_player_enhance_building(
+				   *building, id, (SDL_GetModState() & KMOD_SHIFT) == 0);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
