@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-02-20 18:15+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-21 15:55+0000\n"
 "Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgstr "Haastava."
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr "Toinen imperiumi"
+msgstr "Toinen keisarikunta"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
@@ -99,7 +99,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "Chat’Karuthin kuollessa hän oli jo vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä sekä sotaherra armeijalle, joka voisi peitota minkä tahansa viholisen, joka haluaisi tulla muinaisiin metsiin. Vaikka hänen mahtavan valtakauden lopussa Chat’Karuth valitsi vanhimman poikansa, Thornin, seuraavaksi heimon sotaherraksi – päätös jätti hänen muut poikaansa pettyneiksi. Ja vanha sotaherra tiesi sen. Kuten hänen isänsä opasti häntä, Thorn jätti Al’thunran pääkaupungin, Thronen kodin metsän keskellä ja vetäyty joukkoineen kukkuloille, missä hän hautasi isänsä ruumiin. Siellä hän vannoi jumalan nimeen ja hänen isän henkeen, että hän tulisi palauttamaan järjestyksen. Sillä aikaa hänen veljensä ovat raivonneet sokeasti Thornia ja muutamia Al’thunran rajoja turvaamaan jätettyjä joukkoja vastaan, nuori sotaherra etsi tapaa koota jälleen hänen kunnianhimoiset veljensä ja pakottaa heimot marssimaan yhteisen lipun alla."
+msgstr "Chat’Karuthin kuollessa hän oli jo vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä, sekä sotaherra armeijalle joka voisi peitota minkä tahansa vihollisen, joka rohkenisi tulla muinaisiin metsiin. Chat’Karuth valitsi mahtavan valtakautensa lopussa vanhimman poikansa Thronin seuraajakseen sotaherrana – se oli päätös joka aiheutti mielipahaa hänen muissa pojissaan. Ja vanha sotaherra tiesi sen. Kuten hänen isänsä oli opastanut, Thron jätti Al’thunran pääkaupungin, jossa lepäsi valtaistuin puiden keskellä, ja vetäytyi joukkoineen kukkuloille, jonne hän hautasi isänsä. Siellä hän vannoi isänsä ja Jumalien nimeen, että hän palaisi takaisin ja palauttaisi järjestyksen valtakuntaan. Sillä aikaa kun hänen veljensä ovat raivonneet sokeasti Thornia ja muutamia Al’thunranin rajoja turvaamaan jätettyjä joukkoja vastaan, on nuori sotaherra etsinyt tapaa koota jälleen kunnianhimoiset veljensä yhteen ja saada heimot marssimaan yhteisen lipun alla."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -109,7 +109,7 @@ msgstr "Maanpaon Kuukaudet"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr "Tutustumme Imperiumiin."
+msgstr "Tutustumme Keisarikuntaan."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -124,7 +124,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "Kuusi vuotta sitten, Lutius – nuori Imperiumin kenraali – lähetettiin etulinjaan pohjoisten metsien taakse 150 sotilaan kera, missä barbaariheimot olivat ylittämässä Imperiumin maita, joita Lutiuksen tehtävänä oli puolustaa. Aluksi kaikkialla oli rauhallista. Hän jopa jutteli muutamien barbaarilasten kanssa ja ajatteli rauhallista elämää – rintarinnan näiden muinaisten ihmisen kanssa. Hän alkoi tuntea olonsa turvalliseksi ja hänen armeijansa tarkkaavaisuus alkoi horjua, pois mahdollisesta vihollisesta. Se oli heidän virheensä. Eräänä maaliskuisena yönä hänen valmistautumatonta armeijaansa vastaan hyökkäsi 100:n barbaarin vahvuinen armeija tehden heistä selvää jälkeä. Vain hän ja kourallinen hänen sotilaistaan selviytyi."
+msgstr "Kuusi vuotta sitten, Lutius – nuori kenraali Keisarikunnassa – lähetettiin etulinjaan pohjoisten metsien taakse 150 sotilaan kera, missä barbaariheimot olivat ylittämässä Keisarikunnan maita, joita Lutiuksen tehtävänä oli puolustaa. Aluksi kaikkialla oli rauhallista. Hän jopa jutteli muutamien barbaarilasten kanssa ja pohti rauhallista elämää – rintarinnan näiden muinaisten ihmisen kanssa. Hän alkoi tuntea olonsa turvalliseksi ja hänen armeijansa tarkkaavaisuus alkoi horjua, pois mahdollisesta vihollisesta. Se oli heidän virheensä. Eräänä maaliskuisena yönä hänen valmistautumatonta armeijaansa vastaan hyökkäsi 100:n barbaarin vahvuinen armeija tehden heistä selvää jälkeä. Vain hän ja kourallinen hänen sotilaistaan selviytyi."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -134,7 +134,7 @@ msgstr "Tulta päin"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr "Tutustuminen Atlanstislaisiin."
+msgstr "Tutustumme Atlantislaisiin."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -144,7 +144,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Kun heidän Jumalansa menetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja hänen kansan saamasta toisesta mahdollisuudesta, mistä tulisi legendojen aihe. Johtaen jäljelle pääneet Atlantislaiset uuteen tulevaisuuteen, maailman toiseen osaan, Jundlinasta tuli hänen aikansa kaikkein mahtavin ihminen, mutta kalliilla hinnalla: hänen inhimillisyydellä ja sielulla."
+msgstr "Kun heidän Jumalansa menetetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja että hänen kansansa saisi uuden mahdollisuuden. Tästä tulisi legendojen aihe. Johtaessaan jäljelle jääneet Atlantislaiset uuteen maailmaan, Jundlinasta tuli aikansa mahtavin ihminen. Mutta hän joutui maksamaan tästä kalliisti: hän menetti inhimillisyytensä ja sielunsa."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
@@ -154,7 +154,7 @@ msgstr "Vedestä Jääksi"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr "Tutustuminen Vapaamielisiin"
+msgstr "Tutustumme Vapaamielisiin"
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
@@ -180,7 +180,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr "Merestä eläminen on yhtä taistelua ja vielä enemmän se on sitä Pohjoisella Vapaamielenmeren rannikolla. Oliko viimeisin myrskytulva, yksi tuhoisimmista miesmuistiin, mitään muuta kuin taas yksi esimerkki vastoinkäymisistä, joita kaikkien Vapaamielisten täytyy kohdata – tai oliko se jumalten muistutus siitä, että heimo, joka vasta asettui tänne, täytyy etsiä kokonaan uusi koti?"
+msgstr "Merestä eläminen on jatkuvaa taistelua ja eritoten se on sitä Pohjoisen Vapaamielenmeren rannikolla. Oliko viimeisin myrskytulva, yksi tuhoisimmista miesmuistiin, mitään muuta kuin taas yksi esimerkki vastoinkäymisistä, joita kaikkien Vapaamielisten on kohdattava – vai oliko se Jumalten muistutus siitä, että heimon, joka vasta asettui tänne, täytyy etsiä kokonaan uusi koti?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -205,7 +205,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Hävittyään tärkeän taistelun barbaareja vastaan, mikä johti suuren osan Keisarikunnan maiden menettämiseen,  Lutius jättää Fremilin aloittaakseen uuden elämän. Mutta hänen kohtalokseen, hänen laivansa joutuu kovaan myrskyyn, joka lähes tuhoaa sen. Vain hyvällä onnella hän pystyy rantautumaan vaurioituneella laivallaan asuttamattomalle rannalle ja pelastamaan hänen kansansa. Toistaiseksi."
+msgstr "Hävittyään tärkeän taistelun barbaareja vastaan, joka johti suuren osan Keisarikunnan maiden menettämiseen, Lutius jättää Fremilin aloittaakseen uuden elämän. Kohtalo puuttuu kuitenkin peliin ja hänen hänen laivansa melkein tuhoutuu kovassa myrskyssä. Vain hyvällä onnella hän onnistuu rantautumaan vaurioituneella aluksellaan ja pelastamaan oman kansansa."
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -238,7 +238,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr "Kotiin palattua, Lutiuksella ja hänen miehistöllä on vastassa rapakuntoinen talous. Talouden pullonkaulojen selvittäminen tulee olemaan äärimmäisen tärkeässä osassa Keisarikunnan loistokkuuden palauttamiseksi."
+msgstr "Kotiin palattuaan Lutiuksella ja hänen miehistöllään on vastassaan huonossa jamassa oleva talous, jonka pullonkaulojen selvittäminen tulee olemaan äärimmäisen tärkeässä osassa Keisarikunnan loistokkuuden palauttamisessa."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -251,7 +251,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr "Vuonna 1362, Pohjioisen Vapaamielistensaarien asukkaiden hiljainen ja rauhantahtoinen elämä häiriintyy yhdestä suurimmasta myrskytulvasta miesmuistiin: Saint Marcelluksen Tulvasta. Onko se mitään muuta kuin taas yksi myrsky lisää, vai onko se merkki jumalilta, että Langenessin saaren Vapaamielisten yhteisöä ei haluta tänne?"
+msgstr "Vuonna 1362, yksi suurimmista myrskytulvista miesmuistiin, pyhän Marcelluksen tulva häiritsee Pohjoisten Vapaamielissaarien asukkaiden hiljaista ja rauhaisaa elämää. Onko se taas vain yksi myrsky lisää, vai onko se merkki Jumalilta että Langenessin saaren Vapaamielisten yhteisöä ei haluta tänne?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -261,13 +261,13 @@ msgstr "Tämä skenaario on asetettu historialliseen kontekstiin, mutta suurin o
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr "Jäinen Tervehdys"
+msgstr "Jäätävä vastaanotto"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr "Reebaud ja hänen heimonsa on saapunut pohjoiseen. Mutta heidän saapuminen jäisen aron ja lumen peittämien vuorien väliin on vähemmän mieluinen…"
+msgstr "Reebaud heimoineen on saapunut Pohjoiseen. Mutta heidän vastaanottonsa jäisen aron ja lumen peittämien vuorien välimaastoon on kaikkea muuta kuin lämmin…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -298,7 +298,7 @@ msgstr "Merenkäynti"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr "Tässä opetuspelissä opit merenkäynnistä, mikä tarkoittaa kuinka käsitellä laivoja ja satamia sekä lauttoja ja lauttareittejä."
+msgstr "Tässä opetuspelissä opit merenkäynnistä, joka käsittää laivojen ja satamien käsittelyn, sekä lauttojen ja lauttareittien operoinnin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -308,7 +308,7 @@ msgstr "Talous"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "Tämä opetuspeli opettaa sinulle mitä asetuksia Widelands tarjoaa talouden säätämiseksi. Näitä suositellaan hieman kokeneemmille pelaajille."
+msgstr "Tässä opetuspelissä opit mitä asetuksia Widelands tarjoaa talouden säätämiseksi. Näitä suositellaan hieman kokeneemmille pelaajille."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -323,14 +323,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Ruotsin ja Suomen välissä sijaitsee saaristomeri. Tämä erittäin kaunis alue ei ole maata eikä merta, vaan molempia. Muutaman sadan kilometrin sisällä on ainakin 50,000 saarta ja luotoa, joista monen eivät ole muutamaa eekkeriä suurempia. Ilmasto on melko leuto, ottaen huomioon phjoisen sijaintinsa; viljeltävää maata, marjoja on yltäkyllin sekä kalaa runsaasti. Tämän alueen pieni ihmispopulaatio ei koskaan ole kärsinyt nälästä. Etkö sinä sotaisa roisto voisi jättää tätä pientä paratiisia rauhaan?"
+msgstr "Ruotsin ja Suomen välissä sijaitsee saaristomeri. Tämä erittäin kaunis alue ei ole maata eikä merta, vaan molempia. Muutaman sadan kilometrin säteellä on ainakin 50 000 saarta ja luotoa, joista monet eivät ole muutamaa neliömetriä suurempia. Ilmasto on melko leuto, ottaen huomioon pohjoisen sijaintinsa; viljeltävää maata, marjoja on yltäkyllin sekä kalaa runsaasti. Tämän alueen pieni ihmispopulaatio ei koskaan ole kärsinyt nälästä. Ettekö te sotaisat roistot voisi jättää tätä pientä paratiisia rauhaan?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "Laajat maapalat ovat harvinaisia noilla pienillä saarilla. Priorisoi suurten rakennusten rakentaminen niille. Joskus tulet tarvitsemaan suuren sotarakennuksen laajentaaksesi seuraavalle saarelle asti. Tekoäly suoriutunee huonosti."
+msgstr "Laajat maa-alueet ovat harvinaisia noilla pienillä saarilla. Aseta suurten rakennusten rakentaminen niillä etusijalle. Joskus tulet tarvitsemaan suuren sotilasrakennuksen laajentaaksesi seuraavalle saarelle asti. Tekoäly suoriutunee siellä huonosti."
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
@@ -350,7 +350,7 @@ msgstr "Atolli"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
-msgstr "Kuka on suuren atollin oikea kuningas?"
+msgstr "Kuka tulee olemaan suuren atollin todellinen kuningas?"
 
 #: ../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
@@ -361,7 +361,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "On hautinto asettua tämän maaseudun rakoilevaan kauneuteen. Mutta tavat näden laajojen maa-alueen ympäröimiseksi ovat pitkät ja mutkittelevat, joten on helppoa päätyä erehdyksessä vieraiden heimojen alueille."
+msgstr "On ilo asettua tälle kauniille maaseudulle, mutta näillä laajoilla on helppoa eksyä vieraiden heimojen alueille."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"

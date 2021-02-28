@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-02-15 17:51+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-27 18:58+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "Dostal jsem za úkol s armádou 150 mužů strážit severní hranici, která se táhne na sever od pohoří Galdin rozlehlým, prastarým a nádherným hvozdem. Nedlouho potom, jsme se setkali s barbarským kmenem, který se zpočátku choval přátelsky. Někteří muži s nimi dokonce obchodovali a jejich děti se k nám přišly podívat na naše čisté a upravené uniformy a zbraně."
+msgstr "Dostal jsem za úkol s armádou 150 mužů strážit severní hranici, která se táhne rozlehlým, prastarým a nádherným hvozdem poblíž pohoří Galdin. Nedlouho na to jsme se setkali s barbarským kmenem, který se zpočátku choval přátelsky. Někteří muži s nimi dokonce obchodovali a jejich děti se k nám přišly podívat na naše čisté a upravené uniformy a zbraně."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -130,7 +130,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Ale o páté noci v oblasti na nás bez varování zaútočili. Ztratil jsem desítky dobrých mužů, byl uvězněn a nakonec předveden před jejich náčelníka. Plivl na mě, vysmál se mi a vyhnal se slovy, ať se v těchto zemích už nikdy neukazuji. Řekl, že nechce nové pořádky, nechce naše pořádky, že TENTO les patří odedávna jim a jejich zůstane, dokud si duchové nevezmou duši posledního z jeho národa!"
+msgstr "Ale páté noci v oblasti na nás bez varování zaútočili. Ztratil jsem desítky dobrých mužů, byl uvězněn a nakonec předveden před jejich náčelníka. Plivl na mě, vysmál se mi a vyhnal mě se slovy, ať se v těchto zemích už nikdy neukazuji. Řekl, že nechce nové pořádky, nechce naše pořádky, že TENTO les patří odedávna jim a jejich zůstane, dokud si duchové nevezmou duši posledního z jejich národa!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87

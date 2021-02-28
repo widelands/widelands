@@ -43,6 +43,7 @@ GameDetails::GameDetails(Panel* parent,
    : UI::Box(parent, style, 0, 0, UI::Box::Vertical),
      mode_(mode),
      padding_(4),
+     has_conflicts_(false),
      name_label_(this,
                  0,
                  0,
@@ -182,11 +183,12 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_))
 	                 .str();
 
-	description =
-	   (boost::format("%s%s") % description %
-	    as_heading_with_content(_("Add-Ons:"), AddOns::check_requirements(gamedata.required_addons),
-	                            panel_style_, false, true))
-	      .str();
+	AddOns::AddOnConflict addons = AddOns::check_requirements(gamedata.required_addons);
+	has_conflicts_ = addons.second;
+
+	description = (boost::format("%s%s") % description %
+	               as_heading_with_content(_("Add-Ons:"), addons.first, panel_style_, false, true))
+	                 .str();
 
 	std::string filename = gamedata.filename;
 	// Remove first directory from filename. This will be the save/ or replays/ folder

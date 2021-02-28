@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-01-31 09:45+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-26 15:28+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Toto je Widelands Build %s"
 
 #: ../../src/wlapplication_messages.cc:42
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Použití: widelands <přepínač0>=<hodnota0> ... <přepínačN>=<hodnotaN>"
+msgstr "Použití: widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "       widelands <save.wgf>/<replay.wrpl>"
@@ -38,41 +38,41 @@ msgstr "       widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr "Možnosti:"
+msgstr "Volby:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=hodnota přepíše jakékoli nastavení v konfiguračním souboru"
+msgstr " --<config-entry-name>=hodnota přepíše aktuální nastavení konfiguračního souboru"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr "Poznámka: Nová hodnota bude zapsána do konfiguračního souboru"
+msgstr "                      Poznámka: Nová hodnota bude zapsána do\n                      konfiguračního souboru"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr "--datadir=DIRNAME Použij určený adresář pro Widelands\ndatové soubory"
+msgstr " --datadir=DIRNAME    Použij zvolený adresář pro Widelands\n                      datové soubory"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr "--homedir=DIRNAME Použij určený adresář pro Widelands config,\nuložené hry a záznamy"
+msgstr " --homedir=DIRNAME    Použij zvolený adresář pro Widelands\n                      konfigurační soubory, uložené hry a záznamy"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
-msgstr "Výchozí je ~/.widelands"
+msgstr "                      Výchozí je ~/.widelands"
 
 #: ../../src/wlapplication_messages.cc:57
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr ""
+msgstr "                      Výchozí  je %USERPROFILE%\\.widelands"
 
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr ""
+msgstr " --localedir=DIRNAME  Použij zvolený adresář pro Widelands\n                      místní soubory"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -83,13 +83,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr " --coredump=[true|false]\n                      Generuje core dump při segfault chybě místo použití SDL"
+msgstr " --coredump=[ano|ne]\n                      Generuje výpis paměti při porušení ochrany paměti\n                      (segfault) místo použití SDL"
 
 #: ../../src/wlapplication_messages.cc:70
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr "--language=[de_DE|sv_SE|...]\nJaký jazyk se má použít."
+msgstr " --language=[de_DE|sv_SE|...]\n                      Nastaví místní jazyk."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -104,7 +104,7 @@ msgstr "--language=[de_DE|sv_SE|...]\nJaký jazyk se má použít."
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr " --write_syncstreams=[true|false]\n                      Vytvořit syncstream dump soubory pro debugování síťových her."
+msgstr " --write_syncstreams=[ano|ne]\n                      Vytváří soubory s výpisem syncstreems, určené pro\n                      kontrolu desynchronizací při ladění síťových her."
 
 #: ../../src/wlapplication_messages.cc:82
 msgid " --autosave=[...]     Automatically save each n minutes"
@@ -114,25 +114,25 @@ msgstr " --autosave=[...]  Automaticky ukládá každých n minut"
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...] Použij uvedený počet souborů pro postupné autosave"
+msgstr " --rolling_autosave=[...]\n                      Počet posledních zpětně uchovávaných souborů\n                      automatického uložení"
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Umožňuje připojení k vybranému metaserveru pro\n                      hru přes internet."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Umožňuje zadat číslo portu metaserveru pro hru\n                      přes internet."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --addon_server=[...]\n"
 "                      Connect to a different github repository                      and branch from the add-ons manager."
-msgstr ""
+msgstr " --addon_server=[...]\n                      Připojí se k alternativnímu Github repozitáři a\n                      zpřístupní ho v rámci Správce rozšíření."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
@@ -141,7 +141,7 @@ msgstr " --nosound            Spustí hru bez zvuku."
 #: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr " --fail-on-lua-error  Vynutí pád aplikace Widelands v případě\n                      výskytu chyby Lua."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
@@ -152,14 +152,14 @@ msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr " --editor             Přímo spustí editor Widelands.\n                      Můžeš přidat =SOUBOR který přímo nahraje\n                      mapu SOUBOR do editoru."
+msgstr " --editor             Spustí Editor Widelands. Může být doplněno\n                      o =FILENAME pro přímé načtení vybrané mapy s\n                      názvem FILENAME."
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr " --ai_training        Aktivuje režim AI training. Stránka\n                      https://www.widelands.org/wiki/Ai%20Training/\n                      obsahuje podrobnější informace k jeho využití."
 
 #: ../../src/wlapplication_messages.cc:111
 msgid ""
@@ -167,7 +167,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr " --auto_speed         Pouze pro hru více hráčů, automaticky\n                      přizpůsobuje rychlost hry v závislosti na FPS.\n                      Výborné ve spojení s\n                      --ai_training."
+msgstr " --auto_speed         Pouze pro hru více hráčů, automaticky\n                      upravuje rychlost hry podle snímkové frekvence\n                      (FPS). Praktické ve spojení s --ai_training."
 
 #: ../../src/wlapplication_messages.cc:116
 msgid ""
@@ -177,17 +177,17 @@ msgstr " --scenario=SOUBOR    Přímo spustí mapu SOUBOR jako mapu\n           
 
 #: ../../src/wlapplication_messages.cc:119
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=SOUBOR    Přímo nahraje uloženou hru SOUBOR."
+msgstr " --loadgame=FILENAME  Načte uloženou hru s názvem FILENAME."
 
 #: ../../src/wlapplication_messages.cc:120
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr ""
+msgstr " --replay=FILENAME    Načte záznam s názvem FILENAME."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr "--script=FILENAME Spusti uvedený Lua skript po inicializaci.\nPlatné pouze s volbami --scenario, --loadgame nebo --editor."
+msgstr " --script=FILENAME    Spustí zadaný Lua script po inicializaci.\n                      Funkční pouze v kombinaci s --scenario, --loadgame\n                      a --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -199,7 +199,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr "--auto_roadbuild_mode=[true|false]\nUrčuje, zda spustit mód stavění cest automaticky po umístění vlajky, která není napojená na cestu."
+msgstr " --auto_roadbuild_mode=[ano|ne]\n                      Po umístění vlajky, která není napojena na síť cest,\n                      nastaví automatickou aktivaci režimu stavby cesty."
 
 #: ../../src/wlapplication_messages.cc:133
 msgid "Graphic options:"
@@ -214,19 +214,19 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr "--fullscreen=[true|false]\nZda hru spustit v celoobrazovkém režimu."
+msgstr " --fullscreen=[ano|ne]\n                      Přepnout do režimu celé obrazovky."
 
 #: ../../src/wlapplication_messages.cc:142
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr "--xres=[...] Šířka okna v pixelech."
+msgstr " --xres=[...]         Nastaví šířku okna v pixelech."
 
 #: ../../src/wlapplication_messages.cc:143
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr "--yres=[...] Výška okna v pixelech."
+msgstr " --yres=[...]         Nastaví výšku okna v pixelech."
 
 #: ../../src/wlapplication_messages.cc:144
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 ...]     Nastaví maximální snímkovou frekvenci."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -240,7 +240,7 @@ msgstr "Volby pro interního správce oken:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr " --animate_map_panning=[yes|no]\n                      Měly by být animovány automatické pohyby mapy."
+msgstr " --animate_map_panning=[ano|ne]\n                      Animace automatických pohybů mapy."
 
 #: ../../src/wlapplication_messages.cc:153
 msgid ""
@@ -248,7 +248,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr "--border_snap_distance=[0 ...]\nPřichytit okno k okraji obrazovky jakmile\nse okraj okna dostane do této vzdálenosti\nod okraje obrazovky."
+msgstr " --border_snap_distance=[0 ...]\n                      Jakmile se okraj okna přiblíží na zadanou\n                      vzdálenost k okraji okna obrazovky, dojde\n                      k přichycení okraje okna k okraji obrazovky."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -260,7 +260,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr "--dock_windows_to_edges=[true|false]\nZruší okraj okna na okraji obrazovky, když je okraj okna blízko okraji obrazovky."
+msgstr " --dock_windows_to_edges=[ano|ne]\n                      Zmenší rozměr okna podle okraje obrazovky,\n                      pokud narazí okraj okna na okraj obrazovky."
 
 #: ../../src/wlapplication_messages.cc:166
 msgid ""
@@ -268,7 +268,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr "--panel_snap_distance=[0 ...]\nPřichytit okno k okraji panelu jakmile se\nokraj okna dostane do této vzdálenosti\nod okraje jiného panelu."
+msgstr " --panel_snap_distance=[0 ...]\n                      Přichytit okno k okraji panelu pokud se okraj okna\n                      dostane na zadanou vzdálenost od okraje panelu."
 
 #: ../../src/wlapplication_messages.cc:171
 msgid ""
@@ -276,11 +276,11 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr "--snap_windows_only_when_overlapping=[yes|no]\nPřichytit okno k okraji panelu pouze\npokud se okno a panel překrývají."
+msgstr " --snap_windows_only_when_overlapping=[ano|ne]\n                      Přichytit okno k okraji panelu pouze, pokud se okno\n                      a panel překrývají."
 
 #: ../../src/wlapplication_messages.cc:177
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose povolí verbose ladící zprávy"
+msgstr " --verbose            Povolí generování podrobných ladících zpráv"
 
 #: ../../src/wlapplication_messages.cc:178
 msgid " --help               Show this help"
@@ -292,7 +292,7 @@ msgid ""
 "                      Directly loads the given savegame or replay. Useful for\n"
 "                      .wgf/.wrpl file extension association. Does not work with\n"
 "                      other options. Also see --loadgame/--replay."
-msgstr ""
+msgstr " <save.wgf>/<replay.wrpl> \n                      Přímo načte zadanou uloženou hru nebo záznam.\n                      Praktické z důvodu rozeznávání přípon .wgf/.wrpl.\n                      V ostatních případech nefunguje. Případně\n                      také --loadgame/--replay."
 
 #: ../../src/wlapplication_messages.cc:186
 msgid ""
