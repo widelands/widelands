@@ -874,7 +874,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
-	opt.ctrl_preserve_wares = opt_section_.get_bool("ctrl_preserve_wares", true);
+	opt.ctrl_preserve_wares = opt_section_.get_bool("ctrl_preserve_wares", false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 #endif

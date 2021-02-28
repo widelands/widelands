@@ -1056,7 +1056,7 @@ bool WLApplication::init_settings() {
 	get_config_int("toolbar_pos", 0);
 	get_config_bool("numpad_diagonalscrolling", false);
 	get_config_bool("edge_scrolling", false);
-	get_config_bool("ctrl_preserve_wares", true);
+	get_config_bool("ctrl_preserve_wares", false);
 	get_config_bool("tooltip_accessibility_mode", false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	get_config_bool("training_wheels", true);

@@ -463,7 +463,7 @@ void BuildingWindow::act_dismantle() {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			if (game_) {
 				game_->send_player_dismantle(*building,
-				                             get_config_bool("ctrl_preserve_wares", true));
+				                             get_config_bool("ctrl_preserve_wares", false));
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -538,7 +538,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 			if (game_) {
 				game_->send_player_enhance_building(*construction_site,
 				                                    construction_site->building().enhancement(),
-				                                    get_config_bool("ctrl_preserve_wares", true));
+				                                    get_config_bool("ctrl_preserve_wares", false));
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -554,7 +554,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 			if (game_) {
 				game_->send_player_enhance_building(*building,
 				                                    id,
-				                                    get_config_bool("ctrl_preserve_wares", true));
+				                                    get_config_bool("ctrl_preserve_wares", false));
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
