@@ -28,7 +28,7 @@ initial_message_01 = {
       h1(_"Welcome to Widelands!") ..
       li_image("images/logos/wl-ico-64.png",
          _[[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction.]]) ..
-      li_arrow(_[[You will be guided through this tutorial by objectives]])
+      li_arrow(_[[You will be guided through this tutorial by objectives.]])
    )
 }
 
