@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-02-17 08:28+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-25 14:11+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1239,7 +1239,6 @@ msgstr "vaření"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1706,8 +1705,6 @@ msgstr "vyrábění lopaty"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1716,7 +1713,6 @@ msgstr "vyrábění těžební sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1917,7 +1913,6 @@ msgstr "Stan ochránkyně fauny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -5534,14 +5529,10 @@ msgid "Be careful"
 msgstr "Dávej pozor"
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid ""
-"You have only one iron for each tool you will need to start your economy. "
-"Make sure no unneeded tool is created."
-msgstr "Máš jen jedno železo na každý nástroj, který budeš potřebovat pro start hospodářství. Postarej se, aby nebyl vyroben žádný nepotřebný nástroj."
+"You only have exactly the wares for each tool you will need to start your "
+"economy. Make sure no unneeded tool is created."
+msgstr "Máš přesně tolik surovin, aby bylo možné vyrobit všechny nástroje, které budeš potřebovat pro start hospodářství. Dej si pozor, aby nebyl vyroben žádný nepotřebný nástroj."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5659,7 +5650,60 @@ msgstr[2] "%1%(+%2%) vojáků"
 msgstr[3] "%1%(+%2%) vojáků"
 
 #. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
+#. TRANSLATORS: This is the name of a starting condition
+#. descname = _ "Discovery",
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#. tooltip = _"Start the game with three ships on the ocean and only a handful
+#. of supplies",
+#. map_tags = {"seafaring"},
+#. incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+#. func = function(player, shared_in_start)
+#. local map = wl.Game().map
+#. local sf = map.player_slots[player.number].starting_field
+#. if shared_in_start then
+#. sf = shared_in_start
+#. else
+#. player:allow_workers("all")
+#. end
+#. launch_expeditions(player, {
+#. {
+#. log = 4,
+#. granite = 1,
+#. planks = 2,
+#. spidercloth = 3,
+#. atlanteans_woodcutter = 3,
+#. atlanteans_forester = 2,
+#. atlanteans_soldier = 1,
+#. },
+#. {
+#. log = 3,
+#. granite = 4,
+#. planks = 2,
+#. spidercloth = 3,
+#. atlanteans_stonecutter = 2,
+#. atlanteans_soldier = 1,
+#. },
+#. {
+#. iron = 2,
+#. atlanteans_soldier = 1,
+#. atlanteans_geologist = 1,
+#. atlanteans_miner = 3,
+#. atlanteans_smelter = 2,
+#. atlanteans_toolsmith = 1,
+#. atlanteans_baker = 2,
+#. atlanteans_smoker = 2,
+#. atlanteans_fisher = 1,
+#. },
+#. })
+#. end
+#. }
+#. pop_textdomain()
+#. return init
+#. =======================================================================
+#. Discovery starting conditions for Atlanteans
+#. =======================================================================
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:117
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
@@ -5667,7 +5711,7 @@ msgid "Discovery"
 msgstr "Mořeplavec objevitel"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:119
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
@@ -5690,6 +5734,15 @@ msgstr "Nový Svět"
 #: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
 msgstr "Zahaj hru se sedmi loďmi plnými zboží uprostřed oceánu"
+
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Máš jen jedno železo na každý nástroj, který budeš potřebovat pro start hospodářství. Postarej se, aby nebyl vyroben žádný nepotřebný nástroj."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
@@ -5895,13 +5948,13 @@ msgstr "Loď"
 #: ../../data/tribes/ships/amazons/init.lua:41
 msgctxt "shipname"
 msgid "Orinoco"
-msgstr "Orinoco"
+msgstr "Orinoko"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:43
 msgctxt "shipname"
 msgid "Amazonas"
-msgstr "Amazonas"
+msgstr "Amazonka"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:45
@@ -5949,25 +6002,25 @@ msgstr "Abaco"
 #: ../../data/tribes/ships/atlanteans/init.lua:109
 msgctxt "shipname"
 msgid "Agate"
-msgstr "Agate"
+msgstr "Achát"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:111
 msgctxt "shipname"
 msgid "Alexandrite"
-msgstr "Alexandrite"
+msgstr "Alexandrit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:113
 msgctxt "shipname"
 msgid "Amber"
-msgstr "Amber"
+msgstr "Jantar"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:115
 msgctxt "shipname"
 msgid "Amethyst"
-msgstr "Amethyst"
+msgstr "Ametyst"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:117
@@ -5985,13 +6038,13 @@ msgstr "Antigua"
 #: ../../data/tribes/ships/atlanteans/init.lua:121
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr "Aquamarine"
+msgstr "Akvamarín"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:123
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr "Atlantean’s Stronghold"
+msgstr "Mořská hvězdice"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:125
@@ -6039,19 +6092,19 @@ msgstr "Caicos"
 #: ../../data/tribes/ships/atlanteans/init.lua:139
 msgctxt "shipname"
 msgid "Cassiterite"
-msgstr "Cassiterite"
+msgstr "Cínovec"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:141
 msgctxt "shipname"
 msgid "Cat’s Eye"
-msgstr "Cat’s Eye"
+msgstr "Kočičí oko"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:143
 msgctxt "shipname"
 msgid "Citrine"
-msgstr "Citrine"
+msgstr "Citrín"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:145
@@ -6063,7 +6116,7 @@ msgstr "Colionder"
 #: ../../data/tribes/ships/atlanteans/init.lua:147
 msgctxt "shipname"
 msgid "Dominica"
-msgstr "Dominica"
+msgstr "Dominika"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:149
@@ -6075,7 +6128,7 @@ msgstr "Eleuthera"
 #: ../../data/tribes/ships/atlanteans/init.lua:151
 msgctxt "shipname"
 msgid "Emerald"
-msgstr "Emerald"
+msgstr "Smaragd"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:153
@@ -6087,7 +6140,7 @@ msgstr "Grenada"
 #: ../../data/tribes/ships/atlanteans/init.lua:155
 msgctxt "shipname"
 msgid "Guadeloupe"
-msgstr "Guadeloupe"
+msgstr "Guadalupe"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:157
@@ -6111,19 +6164,19 @@ msgstr "Juventud"
 #: ../../data/tribes/ships/atlanteans/init.lua:163
 msgctxt "shipname"
 msgid "King Ajanthul"
-msgstr "King Ajanthul"
+msgstr "Král Ajanthul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:165
 msgctxt "shipname"
 msgid "King Askandor"
-msgstr "King Askandor"
+msgstr "Král Askandor"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:167
 msgctxt "shipname"
 msgid "Kitts"
-msgstr "Kitts"
+msgstr "Svatý Kryštof"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:169
@@ -6135,13 +6188,13 @@ msgstr "Loftomor"
 #: ../../data/tribes/ships/atlanteans/init.lua:171
 msgctxt "shipname"
 msgid "Malachite"
-msgstr "Malachite"
+msgstr "Malachit"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:173
 msgctxt "shipname"
 msgid "Martinique"
-msgstr "Martinique"
+msgstr "Martinik"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:175
@@ -6153,13 +6206,13 @@ msgstr "Montserrat"
 #: ../../data/tribes/ships/atlanteans/init.lua:177
 msgctxt "shipname"
 msgid "Moonstone"
-msgstr "Moonstone"
+msgstr "Měsíční kámen"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:179
 msgctxt "shipname"
 msgid "Mystic Quartz"
-msgstr "Mystic Quartz"
+msgstr "Křišťál"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:181
@@ -6177,7 +6230,7 @@ msgstr "Nevis"
 #: ../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Obsidian"
-msgstr "Obsidian"
+msgstr "Obsidián"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:187
@@ -6207,13 +6260,13 @@ msgstr "Ostur"
 #: ../../data/tribes/ships/atlanteans/init.lua:195
 msgctxt "shipname"
 msgid "Pearl"
-msgstr "Pearl"
+msgstr "Perla"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:197
 msgctxt "shipname"
 msgid "Sapphire"
-msgstr "Sapphire"
+msgstr "Safír"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:199
@@ -6231,13 +6284,13 @@ msgstr "Sidolus"
 #: ../../data/tribes/ships/atlanteans/init.lua:203
 msgctxt "shipname"
 msgid "Sphalerite"
-msgstr "Sphalerite"
+msgstr "Sfalerit"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:205
 msgctxt "shipname"
 msgid "Spider"
-msgstr "Spider"
+msgstr "Nohatka"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:207
@@ -6255,7 +6308,7 @@ msgstr "Sunstone"
 #: ../../data/tribes/ships/atlanteans/init.lua:211
 msgctxt "shipname"
 msgid "Tiger Eye"
-msgstr "Tiger Eye"
+msgstr "Tygří oko"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:213
@@ -6279,7 +6332,7 @@ msgstr "Tortuga"
 #: ../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Tourmaline"
-msgstr "Tourmaline"
+msgstr "Turmalín"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:221
@@ -6297,13 +6350,13 @@ msgstr "Loď"
 #: ../../data/tribes/ships/barbarians/init.lua:28
 msgctxt "shipname"
 msgid "Agilaz"
-msgstr "Agilaz"
+msgstr "Egil"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:30
 msgctxt "shipname"
 msgid "Aslaug"
-msgstr "Aslaug"
+msgstr "Kráka"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:32
@@ -6315,13 +6368,13 @@ msgstr "Baldr"
 #: ../../data/tribes/ships/barbarians/init.lua:34
 msgctxt "shipname"
 msgid "Bear"
-msgstr "Bear"
+msgstr "Medvěd"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:36
 msgctxt "shipname"
 msgid "Beowulf"
-msgstr "Beowulf"
+msgstr "Frigg"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:38
@@ -6393,25 +6446,25 @@ msgstr "Ingeld"
 #: ../../data/tribes/ships/barbarians/init.lua:60
 msgctxt "shipname"
 msgid "Karl Hundason"
-msgstr "Karl Hundason"
+msgstr "Dagaz"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:62
 msgctxt "shipname"
 msgid "Khantrukh"
-msgstr "Khantrukh"
+msgstr "Jilm"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:64
 msgctxt "shipname"
 msgid "Lynx"
-msgstr "Lynx"
+msgstr "Rys"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:66
 msgctxt "shipname"
 msgid "Mani"
-msgstr "Mani"
+msgstr "Týr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:68
@@ -6423,7 +6476,7 @@ msgstr "Odin"
 #: ../../data/tribes/ships/barbarians/init.lua:70
 msgctxt "shipname"
 msgid "Red Fox"
-msgstr "Red Fox"
+msgstr "Červená liška"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
 #: ../../data/tribes/ships/barbarians/init.lua:72
@@ -6483,19 +6536,19 @@ msgstr "Vili"
 #: ../../data/tribes/ships/barbarians/init.lua:90
 msgctxt "shipname"
 msgid "Volf"
-msgstr "Volf"
+msgstr "Vlk"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:92
 msgctxt "shipname"
 msgid "Wild Boar"
-msgstr "Wild Boar"
+msgstr "Kanec"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:94
 msgctxt "shipname"
 msgid "Wolverine"
-msgstr "Wolverine"
+msgstr "Vlčí tlapa"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:96
@@ -6633,7 +6686,7 @@ msgstr "Domitianus"
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Empire Glory"
-msgstr "Empire Glory"
+msgstr "Imperia"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
@@ -6657,31 +6710,31 @@ msgstr "Gallus"
 #: ../../data/tribes/ships/empire/init.lua:76
 msgctxt "shipname"
 msgid "Ianus"
-msgstr "Ianus"
+msgstr "Janus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:78
 msgctxt "shipname"
 msgid "Iulius Caesar"
-msgstr "Iulius Caesar"
+msgstr "Julius Caesar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Iuno"
-msgstr "Iuno"
+msgstr "Juno"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:82
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr "Iupiter"
+msgstr "Jupiter"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Latium"
-msgstr "Latium"
+msgstr "Lazio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:86
@@ -6711,7 +6764,7 @@ msgstr "Lutius"
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
 msgid "Marble"
-msgstr "Marble"
+msgstr "Diskobolos"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:96
@@ -6729,7 +6782,7 @@ msgstr "Minerva"
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
 msgid "Neptune"
-msgstr "Neptune"
+msgstr "Neptun"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:102
@@ -6819,7 +6872,7 @@ msgstr "Thyrrenia"
 #: ../../data/tribes/ships/empire/init.lua:130
 msgctxt "shipname"
 msgid "Tiberius"
-msgstr "Tiberius"
+msgstr "Tibera"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:132
