@@ -112,7 +112,7 @@ function build_lumberjack()
 
    blocker:lift_blocks()
 
-   sleep(30000)
+   sleep(20000)
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
@@ -323,7 +323,7 @@ function second_quarry()
 end
 
 function census_and_statistics()
-   sleep(15000)
+   sleep(10000)
 
    local blocker = UserInputDisabler:new()
    close_windows()

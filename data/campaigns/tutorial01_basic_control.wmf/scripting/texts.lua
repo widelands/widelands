@@ -49,7 +49,7 @@ obj_initial_toggle_building_spaces = {
    number = 1,
    body = objective_text(_"Show building spaces",
       p(_[[Activate ‘Show Building Spaces’. There are two ways you can do this:]]) ..
-      li_image("images/wui/menus/showhide.png", _[[Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the ‘Show / Hide’ menu.]]) ..
+      li_image("images/wui/menus/showhide.png", _[[Press ‘%s’ to toggle them, or select ‘Show Building Spaces’ in the ‘Show / Hide’ menu.]]:bformat(wl.ui.get_shortcut("buildhelp"))) ..
       li(_[[Show the building spaces now.]])
    )
 }
@@ -263,7 +263,7 @@ obj_moving_minimap = {
    body = objective_text(_"Learn to use the minimap",
       li(_[[Try moving around by clicking on the minimap]]) ..
       li(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
-      li(_[[When you are ready to continue, close the minimap by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click also works.]])
+      li(_[[When you are ready to continue, close the minimap by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-click also works.]]:bformat(wl.ui.get_shortcut("minimap")))
    ),
 }
 tell_about_minimap_1 = {
@@ -273,7 +273,7 @@ tell_about_minimap_1 = {
       li_image("images/wui/menus/toggle_minimap.png",
          p(_[[Very good. And now about the minimap. ]]) ..
          -- TRANSLATORS it = the minimap
-         p(_[[You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]])) ..
+         p(_[[You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu at the bottom of the screen or simply by using the keyboard shortcut ‘%s’.]]:bformat(wl.ui.get_shortcut("minimap")))) ..
       -- TRANSLATORS it = the minimap
       li_arrow(_[[I will open it for you.]])
    ),
@@ -310,7 +310,7 @@ obj_build_a_quarry = {
    number = 1,
    body = objective_text(_"Build a Quarry",
       li(_[[There are some rocks to the west of your headquarters. Build a quarry right next to them.]]) ..
-      li_image("images/wui/overlays/small.png", _[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press Space for that).]]) ..
+      li_image("images/wui/overlays/small.png", _[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press ‘%s’ for that).]]:bformat(wl.ui.get_shortcut("buildhelp"))) ..
       li_arrow(_[[Just click on any house symbol next to the rocks, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
    ),
 }
@@ -437,7 +437,7 @@ census_and_statistics_00 = {
    title = _"Census and Statistics",
    body = (
       li_image("images/wui/menus/toggle_census.png", _[[While we wait, I’ll quickly show you another useful feature. It is sometimes hard to tell all the buildings apart. Widelands offers a feature to show label texts called the ‘census’ over the buildings.]]) ..
-      li_arrow(_[[In order to show or hide the building census labels, you can select the ‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘c’ key on the keyboard.]]) ..
+      li_arrow(_[[In order to show or hide the building census labels, you can select the ‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘%s’ key on the keyboard.]]:bformat(wl.ui.get_shortcut("game_showhide_census"))) ..
       p(_[[Let me enable the census for you.]])
    ),
    position = "topright",
@@ -450,7 +450,7 @@ obj_show_statistics = {
    title=_"Show the building statistics",
    number = 1,
    body = objective_text(_"Show the building statistics",
-      li_arrow(_[[In order to show or hide the building statistics labels, you can select the ‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘s’ key on the keyboard.]])
+      li_arrow(_[[In order to show or hide the building statistics labels, you can select the ‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘%s’ key on the keyboard.]]:bformat(wl.ui.get_shortcut("game_showhide_stats")))
    )
 }
 census_and_statistics_01 = {
@@ -487,7 +487,7 @@ obj_archive_all_messages = {
       li(_[[Archive all your messages in your inbox now.]]) ..
       li_image("images/wui/messages/message_archive.png", _[[Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]]) ..
       li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
-      li_arrow(_[[You can toggle the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically.]]) ..
+      li_arrow(_[[You can toggle the message window by pressing ‘%s’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically.]]:bformat(wl.ui.get_shortcut("game_messages"))) ..
       li_arrow(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]])
    )
 }
@@ -508,7 +508,7 @@ obj_close_message_window = {
    title=_"Close the messages window",
    number = 1,
    body = objective_text(_"Close the Messages Window",
-      p(_[[All windows in Widelands (except story mesage windows showing ‘OK’) can be closed by right-clicking into them. Some windows can also be toggled with the buttons and menus at the very bottom of the screen.]]) ..
+      p(_[[All windows in Widelands (except story message windows showing ‘OK’) can be closed by right-clicking into them. Some windows can also be toggled with the buttons and menus at the very bottom of the screen.]]) ..
       li(_[[Close the messages window now by right-clicking into it.]])
    )
 }
