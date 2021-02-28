@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -126,7 +126,7 @@ msgstr "Errichte eine Werft, um Schiffe für unsere Flotte herzustellen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
-msgstr "produziere Weizen"
+msgstr "Produziere Weizen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
@@ -194,7 +194,7 @@ msgstr "Goldproduktion"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
-"Produziere mindesten sechs Goldbarren, um deine Umgebung besiedeln zu "
+"Stelle mindesten sechs Goldbarren her, um deine Umgebung besiedeln zu "
 "können."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:138
@@ -752,7 +752,7 @@ msgid ""
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
 "Möglicherweise ist es eine gute Idee, die Werft anzuhalten, bis wir Stoff "
-"zur Verfügung haben, damit wir kein Holz verschwenden."
+"zur Verfügung haben, damit wir keine Stämme oder Bretter verschwenden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
