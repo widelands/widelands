@@ -169,8 +169,8 @@ void SavegameLoader::add_time_info(SavegameData& gamedata,
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    month (short name) day (number),
 			      year (number). This is part of a list. */
-			   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
-			    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+			   (boost::format(_("saved on %1$s %2$u, %3$u")) % localize_month(savedate->tm_mon) %
+			    savedate->tm_mday % (1900 + savedate->tm_year))
 			      .str();
 		}
 	}
