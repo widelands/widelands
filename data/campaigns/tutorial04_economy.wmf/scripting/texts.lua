@@ -50,7 +50,7 @@ obj_open_building_stats = {
       li(_[[Open the building statistics window for an overview over the buildings you have.]]) ..
       li_image("images/wui/menus/statistics.png", _[[First, you will have to open the ‘Statistics’ menu at the bottom of the screen.]]) ..
       li_image("images/wui/menus/statistics_buildings.png", _[[Afterwards, choose ‘Buildings’.]]) ..
-      li_arrow(_[[You can also use the hotkey ‘%s’.]]:bformat(wl.ui.get_shortcut("game_stats_buildings")))
+      li_arrow(_([[You can also use the hotkey ‘%s’.]]):bformat(wl.ui.get_shortcut("game_stats_buildings")))
    )
 }
 building_stats = {
@@ -124,7 +124,7 @@ obj_open_inventory = {
       p(_[[The stock window gives you an overview over the wares you currently have.]]) ..
       li_image("images/wui/menus/statistics.png", _[[First, you will have to open the ‘Statistics’ menu at the bottom of the screen.]]) ..
       li_image("images/wui/menus/statistics_stock.png", _[[Afterwards, choose ‘Stock’.]]) ..
-      li_arrow(_[[You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window quickly.]]:bformat(wl.ui.get_shortcut("game_stats_stock")))
+      li_arrow(_([[You can also use the hotkey ‘%s’ to access this window quickly.]]):bformat(wl.ui.get_shortcut("game_stats_stock")))
    )
 }
 inventory1 = {
@@ -246,7 +246,7 @@ obj_open_encyclopedia = {
       li_image("images/ui_basic/menu_help.png", _[[The encyclopedia window contains the in-game help and an encyclopedia of the tribe you’re currently playing.]]) ..
       -- TRANSLATORS: "it" refers to the encyclopedia window
       li(_[[Open it. You can access it via the button at the bottom of the screen.]]) ..
-      li_arrow(_[[Alternatively, you can access it directly with the ‘F1’ key.]])
+      li_arrow(_([[Alternatively, you can access it directly with the ‘%s’ key.]]):bformat(wl.ui.get_shortcut("encyclopedia")))
    )
 }
 ware_encyclopedia = {
@@ -317,8 +317,8 @@ building_priority_settings = {
    body = (
       h1(_[[Send the wares where they’re needed]]) ..
       li_object("empire_marblemine", p(_[[Great. Our taverns have now been built up and are supplying us with rations.]]) ..
-         p(_[[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its window. In the wares tab, behind every ware, you can see ‘traffic lights’.]]) ..
-         p(_[[When you click on the red dot (low priority), the corresponding ware gets delivered less frequently. Green means that as many wares as possible should be delivered to this building, maybe because it produces something important.]]) ..
+         p(_[[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its window. In the wares tab, behind every ware, you can see a slider.]]) ..
+         p(_[[When you move the slider to the blue area on the left side (low priority), the corresponding ware gets delivered less frequently. Red (right side) means that as many wares as possible should be delivered to this building, maybe because it produces something important.]]) ..
          p(_[[The actual supply state is indicated by varying colors of the ware icons themselves:]]) ..
          li(_[[Wares stored in the building are shown in full color.]]) ..
          li(_[[Missing wares are greyed out.]]) ..

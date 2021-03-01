@@ -242,7 +242,7 @@ void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 		pair.second->set_callbacks(
 		   [this](const size_t i) {
 			   progress_window_.progressbar().set_state(0);
-			   progress_window_.progressbar().set_total(i);
+			   progress_window_.progressbar().set_total(std::max<size_t>(i, 1));
 		   },
 		   [this](const size_t i) {
 			   progress_window_.progressbar().set_state(progress_window_.progressbar().get_state() +

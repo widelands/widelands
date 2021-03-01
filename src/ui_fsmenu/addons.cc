@@ -442,6 +442,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		refresh_remotes();
 		tabs_.activate(1);
 	});
+	tabs_.sigclicked.connect([this]() {
+		if (tabs_.active() == 1 && remotes_.size() <= 1) {
+			refresh_remotes();
+		}
+	});
 	autofix_dependencies_.sigclicked.connect([this]() { autofix_dependencies(); });
 
 	filter_reset_.sigclicked.connect([this]() {
@@ -589,7 +594,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	do_not_layout_on_resolution_change();
 	center_to_parent();
-	refresh_remotes();
+	rebuild();
 }
 
 AddOnsCtrl::~AddOnsCtrl() {
@@ -1069,6 +1074,10 @@ void AddOnsCtrl::layout() {
 }
 
 bool AddOnsCtrl::is_remote(const std::string& name) const {
+	if (remotes_.size() <= 1) {
+		// No data available
+		return true;
+	}
 	for (const AddOns::AddOnInfo& r : remotes_) {
 		if (r.internal_name == name) {
 			return true;

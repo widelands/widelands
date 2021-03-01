@@ -105,7 +105,7 @@ bool is_newer_version(const AddOnVersion& a, const AddOnVersion& b) {
 	return s_a < s_b;
 }
 
-static std::string check_requirements_conflicts(const AddOnRequirements& required_addons) {
+static AddOnConflict check_requirements_conflicts(const AddOnRequirements& required_addons) {
 	std::set<std::string> addons_missing;
 	std::map<std::string, std::pair<AddOnVersion, AddOnVersion>> addons_wrong_version;
 	for (const auto& requirement : required_addons) {
@@ -127,7 +127,7 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 
 	if (addons_missing.empty()) {
 		if (addons_wrong_version.empty()) {
-			return _("No conflicts");
+			return std::make_pair(_("No conflicts"), false);
 		} else {
 			std::string list;
 			for (const auto& a : addons_wrong_version) {
@@ -142,11 +142,13 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 					      .str();
 				}
 			}
-			return (boost::format(ngettext("%1$u add-on with wrong version: %2$s",
-			                               "%1$u add-ons with wrong version: %2$s",
-			                               addons_wrong_version.size())) %
-			        addons_wrong_version.size() % list)
-			   .str();
+			// Wrong versions might work, so do not forbid loading
+			return std::make_pair((boost::format(ngettext("%1$u add-on with wrong version: %2$s",
+			                                              "%1$u add-ons with wrong version: %2$s",
+			                                              addons_wrong_version.size())) %
+			                       addons_wrong_version.size() % list)
+			                         .str(),
+			                      false);
 		}
 	} else {
 		if (addons_wrong_version.empty()) {
@@ -158,10 +160,12 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 					list = (boost::format(_("%1$s, %2$s")) % list % a).str();
 				}
 			}
-			return (boost::format(ngettext("%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s",
-			                               addons_missing.size())) %
-			        addons_missing.size() % list)
-			   .str();
+			return std::make_pair(
+			   (boost::format(ngettext(
+			       "%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s", addons_missing.size())) %
+			    addons_missing.size() % list)
+			      .str(),
+			   true);
 		} else {
 			std::string list;
 			for (const std::string& a : addons_missing) {
@@ -177,33 +181,34 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 				    a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
 				      .str();
 			}
-			return (boost::format(_("%1$s and %2$s: %3$s")) %
-			        (boost::format(ngettext(
-			            _("%u missing add-on"), _("%u missing add-ons"), addons_missing.size())) %
-			         addons_missing.size())
-			           .str() %
-			        (boost::format(ngettext(_("%u add-on with wrong version"),
-			                                _("%u add-ons with wrong version"),
-			                                addons_missing.size())) %
-			         addons_missing.size())
-			           .str() %
-			        list)
-			   .str();
+			return std::make_pair(
+			   (boost::format(_("%1$s and %2$s: %3$s")) %
+			    (boost::format(
+			        ngettext(_("%u missing add-on"), _("%u missing add-ons"), addons_missing.size())) %
+			     addons_missing.size())
+			       .str() %
+			    (boost::format(ngettext(_("%u add-on with wrong version"),
+			                            _("%u add-ons with wrong version"), addons_missing.size())) %
+			     addons_missing.size())
+			       .str() %
+			    list)
+			      .str(),
+			   true);
 		}
 	}
 }
 
-std::string check_requirements(const AddOnRequirements& required_addons) {
+AddOnConflict check_requirements(const AddOnRequirements& required_addons) {
 	const size_t nr_req = required_addons.size();
 	if (nr_req == 0) {
 		/** TRANSLATORS: This map or savegame uses no add-ons */
-		return _("None");
+		return std::make_pair(_("None"), false);
 	}
-	std::string result = check_requirements_conflicts(required_addons);
+	AddOnConflict result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result = (boost::format(_("%1$s<br>· %2$s (version %3$s)")) % result % pair.first %
-		          version_to_string(pair.second))
-		            .str();
+		result.first = (boost::format(_("%1$s<br>· %2$s (version %3$s)")) % result.first %
+		                pair.first % version_to_string(pair.second))
+		                  .str();
 	}
 	return result;
 }

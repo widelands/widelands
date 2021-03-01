@@ -37,12 +37,12 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Manage your messages more efficiently: press ‘%1%’ for News to access the messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages.":bformat(
+      text = _("Manage your messages more efficiently: press ‘%1%’ for News to access the messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."):bformat(
          wl.ui.get_shortcut("game_messages"), wl.ui.get_shortcut("game_msg_goto"), wl.ui.get_shortcut("delete")),
       seconds = 6
    },
    {
-      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(help_set_landmarks_hotkeys(), help_goto_landmarks_hotkeys()),
+      text = _("Press %1% to store important locations, then press %2% to recall them."):bformat(help_set_landmarks_hotkeys(), help_goto_landmarks_hotkeys()),
       seconds = 4
    },
    {
@@ -58,7 +58,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Press ‘%s’ to quickly toggle the display of your stock inventory.":bformat(wl.ui.get_shortcut("game_stats_stock")),
+      text = _("Press ‘%s’ to quickly toggle the display of your stock inventory."):bformat(wl.ui.get_shortcut("game_stats_stock")),
       seconds = 4
    },
    {
@@ -70,18 +70,18 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom.":bformat(
+      text = _("Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."):bformat(
          wl.ui.get_shortcut("zoom_in"),
          wl.ui.get_shortcut("zoom_out"),
          wl.ui.get_shortcut("zoom_reset")),
       seconds = 3
    },
    {
-      text = _"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited locations.":bformat(wl.ui.get_shortcut("quicknav_prev"), wl.ui.get_shortcut("quicknav_next")),
+      text = _("Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited locations."):bformat(wl.ui.get_shortcut("quicknav_prev"), wl.ui.get_shortcut("quicknav_next")),
       seconds = 3
    },
    {
-      text = _"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; %5%/%6% will adjust speed smoothly.":bformat(
+      text = _("Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; %5%/%6% will adjust speed smoothly."):bformat(
          wl.ui.get_shortcut("game_speed_up"),
          wl.ui.get_shortcut("game_speed_down"),
          wl.ui.get_shortcut("game_speed_up_fast"),
@@ -91,7 +91,7 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Move map view using %1%. %2% will move the view faster, %3% moves slowly.":bformat(pgettext("hotkey", "Arrow keys"), pgettext("hotkey", "Ctrl + Arrow keys"), pgettext("hotkey", "Shift + Arrow keys")),
+      text = _("Move map view using %1%. %2% will move the view faster, %3% moves slowly."):bformat(pgettext("hotkey", "Arrow keys"), pgettext("hotkey", "Ctrl + Arrow keys"), pgettext("hotkey", "Shift + Arrow keys")),
       seconds = 4
    },
    {

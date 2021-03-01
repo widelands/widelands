@@ -63,6 +63,7 @@ bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare);
 
 // Required add-ons for an add-on, map, or savegame with the recommended version
 using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
+using AddOnConflict = std::pair<std::string /* localized_message */, bool /* has_conflicts */>;
 
 struct AddOnComment {
 	std::string username, message;
@@ -125,7 +126,7 @@ AddOnCategory get_category(const std::string&);
 
 // Creates a string informing about missing or wrong-version add-ons
 // for use in map- and savegame selection screens
-std::string check_requirements(const AddOnRequirements&);
+AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 

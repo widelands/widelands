@@ -75,7 +75,7 @@ obj_battlearena = {
    number = 1,
    body = objective_text(_"Build a battle arena",
       li(_[[Build a battle arena. It is a big building.]]) ..
-      li_arrow(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
+      li_arrow(_([[Since the construction will take some time, you can change the game speed using %1$s and %2$s.]]):bformat(wl.ui.get_shortcut("game_speed_up"), wl.ui.get_shortcut("game_speed_down")))
    )
 }
 
