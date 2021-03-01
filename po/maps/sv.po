@@ -4,13 +4,14 @@
 # Translators:
 # D M <hunter12@home.se>, 2017
 # GunChleoc, 2014
+# Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 20:21+0000\n"
+"Last-Translator: Martin Eriksson <nils.martin.andreas@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,32 +52,32 @@ msgstr "Den här guiden förklarar hur du hanterar militära byggnader och trän
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Lätt."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Mellan."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Svår."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Utmanande."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Den Andra Imperiet"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Introducerar Barbarerna."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -94,17 +95,17 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "När Chat'Karuth dog var han en gammal man, far till tre starka och ambitiösa söner och krigsherre över en arme som kunde matcha vilken fiende som helst som ville starta en strid mot de uråldriga skogarna. I slutet av sitt ärorika styre valde Chat'Karuth sin äldste son, Thron, att efterträda honom som stammens krigsherre – ett beslut som gjorde hans två bröder missnöjda. Den gamla krigsherren visste detta. Precis som hans far instruerade honom så lämnade Thron huvudstaden i Al’thunran, hemmet för Tronen mellan träden och drog tillbaka sina trupper till de höga kullarna där han begravde sin fars kropp. Där svor han till gudarna och sin faders ande att han skulle återvända för att återställa ordningen. Medan hans bröder krigar i raseri mot Thron och de få trupper han lämnade kvar för att säkra Al’thunrans gränser försöker den unga krigsherren återförena sina ambitiösa bröder och tvinga stammarna att åter igen förenas under en gemensam flagga."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Månaderna i exil"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Introducerar Imperiet."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -119,17 +120,17 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "För sex månader sedan skickades Lutius – en ung general i Imperiet – med 150 soldater till gränsen bortom de norra skogarna där Barbarstammar inkräktade på land som hölls av Imperiet. Hans uppgift var att försvara Imperiets mark. Först var allt lugnt. Han pratade till och med med några av Barbarernas barn och trodde på ett fredfullt liv – sida vid sida med detta ålderdomliga folk. Han började känna sig säkrare och hans arme började tappa fokus på den möjliga fienden. Det var deras fall. En natt i mars attackerades hans oförberedda arme av 100 av Barbarernas infanterister och blev helt krossade. Bara Lutius och en handfull av hans soldater undkom med livet i behåll."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Flykten mot elden"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Introducerar Atlanterna."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -139,32 +140,32 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "När deras gud förlorade tron på Atlanterna och dränkte deras ö blev en kvinnas kamp för rättvisa, och en andra chans för hennes folk, underlag för legender. När hon ledde de återstående Atlanterna in i en ny framtid i en ny del av världen blev Jundlina den mäktigaste människan i sin tid, men till ett högt pris: hennes mänsklighet och själ."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Från Vatten till Is"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Introducerar Friserna."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Sjöman (komplicerad)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../data/campaigns/campaigns.lua:117
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Rorsman (Väldigt Svår)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Kapten (Omöjlig)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -175,7 +176,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Att leva av vad havet ger är en konstant kamp, än mer för de Frisiska invånarna vid Nordsjöns kust. Var den senaste stormfloden, den mest  ödeläggande i mannaminne, bara ännu ett exempel på Frisernas vedermödor – eller ett tecken från gudarna att en stam som precis stadgat sig här måste ge sig ut och leta efter ett nytt hem? "
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -216,28 +217,28 @@ msgstr "Till sist reparerades skeppet, så Lutius och hans folk fortsatte sitt s
 
 #: ../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptunus Hämnd"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "På vägen hem för att försvara Imperiet blev Lucius mannar överumplade av gudarnas vilja."
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Överraskning!"
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "När Lutius och hans mannar återvänder hem finner de en ekonomi på ruinens brant. För att kunna återställa Imperiet till sin forna glans är det av yttersta vikt att lösa flaskhalsarna i ekonomin."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Den Stora Stormfloden"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -246,23 +247,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "1362 stördes det stillsamma och fridfulla livet hos invånarna i de Norra Frisiska Öarna av en av de största stormfloderna i mannaminne: Sankt Marcellus Översvämning. Är det bara ännu en storm, eller ett tecken från Gudarna att det Frisiska sammhället på Langeness-öarna inte är välkommet där?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Detta scenario utspelar sig i en historisk kontext, men det mesta av handlingen är fiktiv."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Ett Kyligt Välkomnande"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud och hans stam har anlänt till Norden. Men deras ankomst mellan den frusna tundran och de snötäckta bergen är allt annat än välkommen.."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -283,7 +284,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "I denna handledning kommer du att få lära dig krigandets hemligheter: hur du framställer soldater, hur du tränar dem och hur du skickar ut dem i krig. Spaning kommer också att ingå."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -293,7 +294,7 @@ msgstr "Sjöfart"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "I denna handledning kommer du att få lära dig sjöfart, det vill säga hur skepp och hamnar hanteras, samt färjor och farleder."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -419,7 +420,7 @@ msgstr "Bemanna fartygen och segla mot horisonten."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr ""
+msgstr "Denna karta går inte att vinna i med 'Autocrat' satt som vinnande mål."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
@@ -441,7 +442,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it's the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Bergen har ett överflöd att platt yta. Tyvärr är det mesta vertikalt – använd den lilla mark du har till ditt förfogande klokt. En fästning vid mynningen till ett smalt bergspass kan vara ett formidabelt hinder för en avancerande fiendearmé – använd terrängen till din fördel. Hugg ner alla träd och expandera varhelst du kan – det är det enda sättet att få plats med ovärderliga farmer."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -459,21 +460,21 @@ msgstr ""
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Jämlika startvillkor för tre spelare."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "Europa 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "En gigantisk Europeisk karta. Blå = Sverige, Röd = Italien, Gul = Spanien, Grön = Turkiet, Svart = Ryssland, Orange = England, Lila = Frankrike, Vit = Polen"
 
 #: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -659,7 +660,7 @@ msgstr "Fyra stammar kämpar för dominans i ett kalt område. Resurser är utsp
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Mindre Ring 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -672,13 +673,13 @@ msgstr ""
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Lång, lång väg v2"
 
 #: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr ">Vart då? Tusentals mil härifrån.<[Porgy och Bess] Du måste färdas lång, lång väg för att erövra alla öar. Lycka till!"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -715,7 +716,7 @@ msgstr "Två stora frågor kretsar kring platsen: Vem skapade denna otroligt sto
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Ingen Metall utmaning v2"
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
@@ -768,7 +769,7 @@ msgstr "Ett mystiskt land, fullt av olika landskap, som genomskärs av en handfu
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Sandiga Passager"
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -979,7 +980,7 @@ msgstr "Många vackra gröna öar väntar den som vågar korsa de tusen vågorna
 msgid ""
 "Take care not to build your ships in the lagoons. They cannot pass through "
 "the reefs to the main ocean, where your ports are located."
-msgstr ""
+msgstr "Se till att inte bygga dina skepp i laguner. De kan inte segla genom reven ut till havet, där dina hamnar ligger."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

@@ -146,7 +146,7 @@ TribeBasicInfo get_tribeinfo(const std::string& tribename) {
 			return info;
 		}
 	}
-	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
+	throw GameDataError("The tribe '%s' does not exist.", tribename.c_str());
 }
 
 bool tribe_exists(const std::string& tribename, std::vector<TribeBasicInfo> tribeinfos) {

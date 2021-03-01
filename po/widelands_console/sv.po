@@ -4,13 +4,14 @@
 # Translators:
 # D M <hunter12@home.se>, 2017
 # GunChleoc, 2014
+# Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-01-15 09:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 20:48+0000\n"
+"Last-Translator: Martin Eriksson <nils.martin.andreas@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +43,7 @@ msgstr " --<config-entry-name>=VÄRDE skriver över inställningar i konfigurati
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr ""
+msgstr "Notera: Det nya värdet kommer att skrivas till konfigurations-filen"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -62,13 +63,13 @@ msgstr "                      Standardalternativet är ~/.widelands"
 
 #: ../../src/wlapplication_messages.cc:57
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr ""
+msgstr "                      Standardalternativet är %USERPROFILE%\\.widelands"
 
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr ""
+msgstr " --localedir=KATALOG    Använd den specifierade katalogen för widelands\nspråkkonventionsfiler"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -116,19 +117,19 @@ msgstr "--rolling_autosave=[...]\nAnvänd de här filerna för rullande automats
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Anslut till en annan metaserver för spel över internet."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Portnummer på metaservern för spel över internet."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --addon_server=[...]\n"
 "                      Connect to a different github repository                      and branch from the add-ons manager."
-msgstr ""
+msgstr " --addon_server=[...]\n                      Anslut till ett annat github repository                      och branch i tilläggs-hanteraren"
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
@@ -137,7 +138,7 @@ msgstr " --nosound Startar spelet med ljud avstängt."
 #: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr " --fail-on-lua-error  Tvinga Widelands att krasha när ett Lua fel inträffar."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
@@ -155,7 +156,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr " --ai_training        Aktiverar träninsläge för AI. Se\n                      https://www.widelands.org/wiki/Ai%20Training/\n                      för en komplett beskrivning av logiken för AI träning."
 
 #: ../../src/wlapplication_messages.cc:111
 msgid ""
@@ -163,7 +164,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr ""
+msgstr " --auto_speed         Endast i fler-spelar-läge, denna inställning\n                       kommer att justera spelhastigheten automatiskt,\n                      beroende på FPS. Användbart i kombination med\n                      --ai_training."
 
 #: ../../src/wlapplication_messages.cc:116
 msgid ""
@@ -177,7 +178,7 @@ msgstr " --loadgame=FILNAMN  Starta direkt det sparade spelet FILNAMN."
 
 #: ../../src/wlapplication_messages.cc:120
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr ""
+msgstr " --replay=FILNAMN    Startar omedelbart återuppspelingsfilen FILNAMN."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
@@ -296,4 +297,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Buggrapporter? Förslag? Gå in på projektets hemsida:\n        https://www.widelands.org/\n\nHoppas du gillar spelet!"
