@@ -33,9 +33,7 @@ namespace FsMenu {
 class MainMenu;
 
 struct LoginBox : public UI::UniqueWindow {
-	enum class Mode { kMetaserver, kAddOnServer };
-
-	explicit LoginBox(MainMenu&, UI::UniqueWindow::Registry&, Mode);
+	explicit LoginBox(MainMenu&, UI::UniqueWindow::Registry&);
 
 	void think() override;
 
@@ -61,7 +59,6 @@ private:
 	bool check_password();
 
 	MainMenu& fsmm_;
-	const Mode mode_;
 
 	UI::Box main_box_, hbox_, buttons_box_, vbox1_, vbox2_;
 	UI::Button b_login_, b_cancel_;

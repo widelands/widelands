@@ -37,7 +37,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_fsmenu/addons_packager.h"
-#include "ui_fsmenu/login_box.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
@@ -52,6 +51,12 @@ constexpr const char* const kDocumentationURL = "https://www.widelands.org/docum
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
+static std::string underline_tag(const std::string& text) {
+	std::string str = "<font underline=true>";
+	str += text;
+	str += "</font>";
+	return str;
+}
 static std::string time_string(const std::time_t& time) {
 	std::ostringstream oss("");
 	oss.imbue(std::locale(i18n::get_locale()));
@@ -69,6 +74,114 @@ static std::string filesize_string(const uint32_t bytes) {
 		return (boost::format(_("%u bytes")) % bytes).str();
 	}
 }
+
+class AddOnsLoginBox : public UI::Window {
+public:
+	explicit AddOnsLoginBox(AddOnsCtrl& ctrl)
+	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
+                "login", 0, 0, 100, 100, _("Login")),
+     password_sha1_(get_config_string("password_sha1", "")),
+     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     left_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     right_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     username_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
+     password_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
+     ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     reset_(&buttons_box_, "reset", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Reset"))
+	{
+		UI::MultilineTextarea* m = new UI::MultilineTextarea(
+		   &box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
+		m->set_text((boost::format(_("In order to use a registered account, you need an account on the Widelands website. Please log in at %s and set an online gaming password on your profile page.")) % "\n\nhttps://widelands.org/accounts/register/\n\n").str());
+
+		left_box_.add_inf_space();
+		left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+				_("Username:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+		left_box_.add_inf_space();
+		left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+				_("Password:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+		left_box_.add_inf_space();
+
+		right_box_.add(&username_, UI::Box::Resizing::kExpandBoth);
+		right_box_.add_space(kRowButtonSpacing);
+		right_box_.add(&password_, UI::Box::Resizing::kExpandBoth);
+
+		hbox_.add(&left_box_, UI::Box::Resizing::kFullSize);
+		hbox_.add_space(kRowButtonSpacing);
+		hbox_.add(&right_box_, UI::Box::Resizing::kExpandBoth);
+
+		buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_space(kRowButtonSpacing);
+		buttons_box_.add(&reset_, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_space(kRowButtonSpacing);
+		buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+
+		box_.add(&hbox_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(m, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+
+		ok_.sigclicked.connect([this]() { ok(); });
+		username_.ok.connect([this]() { ok(); });
+		password_.ok.connect([this]() { ok(); });
+		cancel_.sigclicked.connect([this]() { die(); });
+		username_.cancel.connect([this]() { die(); });
+		password_.cancel.connect([this]() { die(); });
+		reset_.sigclicked.connect([this]() {
+			password_.set_can_focus(false);
+			reset();
+			password_.set_can_focus(true);
+		});
+		password_.set_password(true);
+
+		reset();
+		set_center_panel(&box_);
+		center_to_parent();
+	}
+
+	const std::string& get_username() const {
+		return username_.text();
+	}
+	std::string get_password() const {
+		const std::string& p = password_.text();
+		return (p.empty() || p == password_sha1_) ? p : crypto::sha1(p);
+	}
+
+	void think() override {
+		UI::Window::think();
+		ok_.set_enabled(!username_.text().empty() && !password_.text().empty());
+		if (!password_sha1_.empty() && password_.has_focus() && password_.text() == password_sha1_) {
+			password_.set_text("");
+		}
+	}
+
+private:
+	const std::string password_sha1_;
+	UI::Box box_, hbox_, left_box_, right_box_, buttons_box_;
+	UI::EditBox username_, password_;
+	UI::Button ok_, cancel_, reset_;
+
+	void ok() {
+		if (!username_.text().empty() && !password_.text().empty()) {
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+		}
+	}
+
+	void reset() {
+		if (get_config_bool("registered", false)) {
+			username_.set_text(get_config_string("nickname", ""));
+			password_.set_text(password_sha1_);
+		} else {
+			username_.set_text("");
+			password_.set_text("");
+		}
+	}
+};
 
 ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
    : UI::Window(parent,
@@ -303,12 +416,6 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSpacing);
 	dev_box_.add(&launch_packager_);
 	dev_box_.add_space(kRowButtonSize);
-	auto underline_tag = [](const std::string& text) {
-		std::string str = "<font underline=true>";
-		str += text;
-		str += "</font>";
-		return str;
-	};
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
@@ -612,11 +719,11 @@ AddOnsCtrl::~AddOnsCtrl() {
 void AddOnsCtrl::login_button_clicked() {
 	if (username_.empty()) {
 		UI::UniqueWindow::Registry r;
-		LoginBox b(fsmm_, r, LoginBox::Mode::kAddOnServer);
+		AddOnsLoginBox b(*this);
 		if (b.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
-		set_login(b.get_nickname(), crypto::sha1(b.get_password()), true);
+		set_login(b.get_username(), b.get_password(), true);
 	} else {
 		set_login("", "", false);
 	}

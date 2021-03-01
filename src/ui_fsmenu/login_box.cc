@@ -33,11 +33,10 @@ namespace FsMenu {
 
 constexpr int8_t kMargin = 6;
 
-LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r, Mode m)
+LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kFsMenu, "login_box", &r, 500, 290, _("Online Game Settings")),
      fsmm_(parent),
-     mode_(m),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      hbox_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
@@ -108,12 +107,7 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r, Mode m)
 	cb_register_.clickedto.connect([this](bool) { clicked_register(); });
 
 	eb_nickname_.set_text(get_config_string("nickname", _("nobody")));
-	if (mode_ == Mode::kMetaserver) {
-		cb_register_.set_state(get_config_bool("registered", false));
-	} else {
-		cb_register_.set_enabled(false);
-		cb_register_.set_state(true);
-	}
+	cb_register_.set_state(get_config_bool("registered", false));
 	eb_password_.set_password(true);
 
 	if (registered()) {
@@ -141,28 +135,20 @@ void LoginBox::think() {
  * called, if "login" is pressed.
  */
 void LoginBox::clicked_ok() {
-	switch (mode_) {
-	case Mode::kAddOnServer:
-		return end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-
-	case Mode::kMetaserver:
-		if (cb_register_.get_state()) {
-			if (check_password()) {
-				set_config_string("nickname", eb_nickname_.text());
-				set_config_bool("registered", true);
-				fsmm_.internet_login_callback();
-				die();
-			}
-		} else {
+	if (cb_register_.get_state()) {
+		if (check_password()) {
 			set_config_string("nickname", eb_nickname_.text());
-			set_config_bool("registered", false);
-			set_config_string("password_sha1", "");
+			set_config_bool("registered", true);
 			fsmm_.internet_login_callback();
 			die();
 		}
-		return;
+	} else {
+		set_config_string("nickname", eb_nickname_.text());
+		set_config_bool("registered", false);
+		set_config_string("password_sha1", "");
+		fsmm_.internet_login_callback();
+		die();
 	}
-	NEVER_HERE();
 }
 
 /// Called if "cancel" was pressed
@@ -172,9 +158,6 @@ void LoginBox::clicked_back() {
 
 /// Called when nickname was changed
 void LoginBox::change_playername() {
-	if (mode_ != Mode::kMetaserver) {
-		return;
-	}
 	cb_register_.set_state(false);
 	eb_password_.set_can_focus(false);
 	eb_password_.set_text("");

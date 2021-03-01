@@ -207,7 +207,7 @@ MainMenu::MainMenu(const bool skip_init)
 		set_button_visibility(false);
 	}
 
-	r_login_.open_window = [this]() { new LoginBox(*this, r_login_, LoginBox::Mode::kMetaserver); };
+	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
 	r_about_.open_window = [this]() { new About(*this, r_about_); };
 	r_addons_.open_window = [this]() { new AddOnsCtrl(*this, r_about_); };
 
