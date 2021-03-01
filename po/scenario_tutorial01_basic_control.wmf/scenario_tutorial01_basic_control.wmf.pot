@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-28 12:24+0000\n"
+"POT-Creation-Date: 2021-03-01 09:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -110,9 +110,10 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
+#, lua-format
 msgid ""
-"Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
-"‘Show / Hide’ menu."
+"Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
+"Hide’ menu."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
@@ -333,13 +334,12 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:236
 msgid ""
-"If you want things to go faster, simply use the Page Up key on your keyboard "
-"to increase the game speed. You can use Page Down to make the game slower "
-"again."
+"If you want things to go faster, simply use the %1$s key on your keyboard to "
+"increase the game speed. You can use %2$s to make the game slower again."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
-msgid "Change is rapid with pressed Ctrl and smooth with pressed Shift."
+msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
@@ -443,10 +443,11 @@ msgid "Play around a bit with the different overlays (roads, flags, etc.)"
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:308
+#, lua-format
 msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
-"Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click "
-"also works."
+"Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
+"click also works."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
@@ -459,9 +460,10 @@ msgid "Very good. And now about the minimap. "
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
+#, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu "
-"at the bottom of the screen or simply by using the keyboard shortcut ‘m’."
+"at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
@@ -739,10 +741,11 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
+#, lua-format
 msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
-"bottom, or press the ‘c’ key on the keyboard."
+"bottom, or press the ‘%s’ key on the keyboard."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
@@ -761,10 +764,11 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
+#, lua-format
 msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘s’ key on the keyboard."
+"the ‘%s’ key on the keyboard."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
@@ -809,14 +813,16 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:533
+#, lua-format
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or "
-"press Ctrl + A to select them all."
+"press %s to select them all."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:534
+#, lua-format
 msgid ""
-"You can toggle the message window by pressing ‘n’ or clicking the second "
+"You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
 msgstr ""
