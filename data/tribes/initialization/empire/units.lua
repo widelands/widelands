@@ -1285,7 +1285,7 @@ descriptions:new_tribe {
          name = "empire_inn",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire production site: Inn
-            purpose = pgettext("empire_building", "Prepares rations for scouts and rations and snacks to feed the miners in all mines."),
+            purpose = pgettext("empire_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines."),
             -- TRANSLATORS: Performance helptext for an empire production site: Inn
             performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs %2% on average to prepare one ration or one meal."):bformat(format_minutes_seconds(1, 25), format_seconds(48))
          }

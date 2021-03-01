@@ -1143,7 +1143,7 @@ void AddOnsCtrl::update_dependency_errors() {
 		   (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
 		    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		       .as_font_tag((boost::format(ngettext(
-		                        _("%u Dependency Error"), _("%u Dependency Errors"), nr_warnings)) %
+		                        "%u Dependency Error", "%u Dependency Errors", nr_warnings)) %
 		                     nr_warnings)
 		                       .str()) %
 		    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list))

@@ -328,7 +328,7 @@ void AddOnsPackager::clicked_new_addon() {
 
 		if (name.empty() || !FileSystem::is_legal_filename(name)) {
 			main_menu_.show_messagebox(
-			   _("Invalid Name"), _("This name is invalid, please choose a different name."));
+			   _("Invalid Name"), _("This name is invalid. Please choose a different name."));
 			continue;
 		}
 
