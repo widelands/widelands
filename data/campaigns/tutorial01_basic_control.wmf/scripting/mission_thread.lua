@@ -2,8 +2,6 @@
 -- Mission thread
 -- ================
 
-local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
-
 local function wait_for_quarry_road_connection(field, cs, objective)
    -- Wait till the construction site is connected to the headquarters
    sleep(10 * wl.Game().desired_speed)
@@ -44,8 +42,7 @@ function starting_infos()
    sleep(1000)
 
    -- Welcome and teach objectives
-   local o = campaign_message_with_objective(initial_message_01, obj_initial_close_story_window)
-   set_objective_done(o, 100)
+   objective_to_explain_objectives = campaign_message_with_objective(initial_message_01, obj_initial_close_objectives_window)
 
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
@@ -115,7 +112,7 @@ function build_lumberjack()
 
    blocker:lift_blocks()
 
-   sleep(30000)
+   sleep(20000)
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
@@ -171,7 +168,7 @@ end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   local o = campaign_message_with_objective(tell_about_keyboard_move, obj_moving_keyboard)
+   local o = campaign_message_with_objective(tell_about_move, obj_moving)
 
    function _wait_for_move()
       local center_map_pixel = wl.ui.MapView().center_map_pixel
@@ -184,10 +181,6 @@ function learn_to_move()
    _wait_for_move()
    set_objective_done(o)
 
-   o = campaign_message_with_objective(tell_about_right_drag_move, obj_moving_right_drag)
-
-   _wait_for_move()
-   set_objective_done(o)
 
    -- Teach the minimap
    campaign_message_box(tell_about_minimap_1)
@@ -330,7 +323,7 @@ function second_quarry()
 end
 
 function census_and_statistics()
-   sleep(15000)
+   sleep(10000)
 
    local blocker = UserInputDisabler:new()
    close_windows()
