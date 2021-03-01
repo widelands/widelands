@@ -27,11 +27,16 @@ Widelands::TribeBasicInfo GameSettings::get_tribeinfo(const std::string& tribena
 			return info;
 		}
 	}
-	throw Widelands::GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
+	throw Widelands::GameDataError("The tribe '%s' does not exist.", tribename.c_str());
 }
 
-Widelands::PlayerNumber GameSettings::find_shared(PlayerSlot slot) const {
-	Widelands::PlayerNumber result = 1;
+Widelands::PlayerNumber GameSettings::find_shared(const PlayerSlot slot) const {
+	Widelands::PlayerNumber result = players[slot].shared_in;
+	if (result > 0 && result <= players.size() &&
+	    PlayerSettings::can_be_shared(players.at(result - 1).state)) {
+		return result;
+	}
+	result = 1;
 	for (; result <= players.size(); ++result) {
 		if (PlayerSettings::can_be_shared(players.at(result - 1).state) && (result - 1) != slot) {
 			break;
