@@ -81,26 +81,29 @@ local r = {
       local found_artifact = {
          -- TRANSLATORS: Keep this as short as possible. You can also translate this as "New artifact"
          title = _"Artifact Found",
-         body = p(_[[Your team found a new artifact.]])
+         body_team = p(_[[Your team found a new artifact.]])
+         body_single = p(_[[You found a new artifact.]])
       }
       local lost_artifact = {
          -- TRANSLATORS: Keep this as short as possible.
          title = _"Artifact Lost",
-         body = p(_[[One of your team’s artifacts was stolen by an enemy.]])
+         body_team = p(_[[One of your team’s artifacts was stolen by an enemy.]])
+         body_single = p(_[[One of your artifacts was stolen by an enemy.]])
       }
       local stole_artifact = {
          -- TRANSLATORS: Keep this as short as possible.
          title = _"Artifact Conquered",
-         body = p(_[[Your team stole an artifact from an enemy.]])
+         body_team = p(_[[Your team stole an artifact from an enemy.]])
+         body_single = p(_[[You stole an artifact from an enemy.]])
       }
 
       local function _broadcast_to_team(player, msg, f)
          if player.team == 0 then
-            player:send_to_inbox(msg.title, msg.body, {msg, field = f})
+            player:send_to_inbox(msg.title, msg.body_single, {msg, field = f})
          else
             for idx, plr in ipairs(plrs) do
                if plr.team == player.team then
-                  plr:send_to_inbox(msg.title, msg.body, {msg, field = f})
+                  plr:send_to_inbox(msg.title, msg.body_team, {msg, field = f})
                end
             end
          end
