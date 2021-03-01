@@ -473,6 +473,7 @@
 - Campaign editing (#4678)
 - Multiplayer setup UI fixes (#4691)
 - Set minimal progress value in add-on packager (#4714)
+- Toggle preserve wares default behaviour with Shift (#4719)
 
 
 ### Internationalization
@@ -512,6 +513,7 @@
 - Add missing textdomain calls (#4643, #4652)
 - Localize timestamps of remote add-ons (#4700)
 - Send localized cheating messages (#4462)
+- Fix Transifex String Issues (#4723)
 
 
 ### Help and Documentation
