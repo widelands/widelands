@@ -826,7 +826,8 @@ void AddOnsCtrl::rebuild() {
 		}
 		browse_.push_back(r);
 	}
-	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") : (boost::format(_("Browse (%u)")) % index).str());
+	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") :
+	                                        (boost::format(_("Browse (%u)")) % index).str());
 
 	if (installed_addons_inner_wrapper_.get_scrollbar() && scrollpos_i) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);

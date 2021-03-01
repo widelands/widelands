@@ -442,14 +442,16 @@ void AddOnsPackager::clicked_discard_changes() {
 
 	std::string msg;
 	if (addons_with_changes_.size() == 1) {
-		msg = (boost::format(_("Do you really want to discard all changes to the add-on ‘%s’?")) % addons_with_changes_.begin()->first).str();
+		msg = (boost::format(_("Do you really want to discard all changes to the add-on ‘%s’?")) %
+		       addons_with_changes_.begin()->first)
+		         .str();
 	} else {
-		msg = (boost::format(ngettext(
-			                  "Do you really want to discard all changes to the following %u add-on?",
-			                  "Do you really want to discard all changes to the following %u add-ons?",
-			                  addons_with_changes_.size())) %
-			               addons_with_changes_.size())
-			                 .str();
+		msg = (boost::format(
+		          ngettext("Do you really want to discard all changes to the following %u add-on?",
+		                   "Do you really want to discard all changes to the following %u add-ons?",
+		                   addons_with_changes_.size())) %
+		       addons_with_changes_.size())
+		         .str();
 		for (const auto& str : addons_with_changes_) {
 			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 		}
@@ -467,14 +469,17 @@ void AddOnsPackager::clicked_write_changes() {
 
 	std::string msg;
 	if (addons_with_changes_.size() == 1) {
-		msg = (boost::format(_("Do you really want to commit all changes to the add-on ‘%s’ to disk?")) % addons_with_changes_.begin()->first).str();
+		msg =
+		   (boost::format(_("Do you really want to commit all changes to the add-on ‘%s’ to disk?")) %
+		    addons_with_changes_.begin()->first)
+		      .str();
 	} else {
-		msg = (boost::format(
-			   ngettext("Do you really want to commit all changes to the following %u add-on to disk?",
-			            "Do you really want to commit all changes to the following %u add-ons to disk?",
-			            addons_with_changes_.size())) %
-			addons_with_changes_.size())
-			  .str();
+		msg = (boost::format(ngettext(
+		          "Do you really want to commit all changes to the following %u add-on to disk?",
+		          "Do you really want to commit all changes to the following %u add-ons to disk?",
+		          addons_with_changes_.size())) %
+		       addons_with_changes_.size())
+		         .str();
 		for (const auto& str : addons_with_changes_) {
 			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 		}
