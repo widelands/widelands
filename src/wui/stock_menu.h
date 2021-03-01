@@ -20,9 +20,15 @@
 #ifndef WL_WUI_STOCK_MENU_H
 #define WL_WUI_STOCK_MENU_H
 
+#include "ui_basic/checkbox.h"
+#include "ui_basic/box.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/waresdisplay.h"
 
+namespace UI {
+struct BuildingStatisticsStyleInfo;
+}
 class InteractivePlayer;
 
 /*
@@ -33,9 +39,14 @@ struct StockMenu : public UI::UniqueWindow {
 	StockMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
 	void think() override;
+	void layout() override;
 
 private:
 	InteractivePlayer& player_;
+	const UI::BuildingStatisticsStyleInfo& colors_;
+	UI::Box main_box_;
+	UI::TabPanel tabs_;
+	UI::Checkbox solid_icon_backgrounds_;
 	StockMenuWaresDisplay* all_wares_;
 	StockMenuWaresDisplay* all_workers_;
 	StockMenuWaresDisplay* warehouse_wares_;
