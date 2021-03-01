@@ -40,6 +40,7 @@ MAINPOTS = [
                      '../../data/txts/tips/*.tip']),
     ('widelands/widelands', [
         '../../src/wlapplication.cc',
+        '../../src/wlapplication_options.cc',
         '../../src/*/*.cc',
         '../../src/*/*/*.cc',
         '../../src/*/*/*/*.cc',
@@ -110,6 +111,7 @@ ITERATIVEPOTS = [
       '../../data/campaigns/%(name)s/objective',
       '../../data/campaigns/%(name)s/scripting/*.lua',
       '../../data/campaigns/%(name)s/scripting/*/*.lua',
+      '../../data/campaigns/%(name)s/scripting/*/*/*.lua',
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/',

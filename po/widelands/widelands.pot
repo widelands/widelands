@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-28 12:24+0000\n"
+"POT-Creation-Date: 2021-03-01 09:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -121,7 +121,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:334
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:336
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
 msgstr ""
@@ -404,7 +404,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:323
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:651
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:653
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:162
 msgid "Players"
 msgstr ""
@@ -591,8 +591,8 @@ msgstr ""
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1189,14 +1189,14 @@ msgid "Tribe"
 msgstr ""
 
 #: ../../src/editor/ui_menus/player_menu.cc:193
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:418
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:420
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgctxt "tribe"
 msgid "Random"
 msgstr ""
 
 #: ../../src/editor/ui_menus/player_menu.cc:195
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:420
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:422
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random"
 msgstr ""
@@ -1292,12 +1292,12 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:291 ../../src/ui_basic/dropdown.cc:343
 #: ../../src/ui_basic/dropdown.cc:410 ../../src/ui_basic/dropdown.cc:418
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:324
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:326
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
 msgstr ""
@@ -4179,7 +4179,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:215
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:463
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:465
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:281 ../../src/wui/map_tags.cc:44
 #: ../../src/wui/mapdetails.cc:139
@@ -4191,7 +4191,7 @@ msgid "Win condition is set through the scenario"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:222
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:467
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:469
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:285
 msgid "Saved Game"
 msgstr ""
@@ -4636,7 +4636,7 @@ msgid "Spectator"
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:170
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:324
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:326
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:152
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Type"
@@ -4649,60 +4649,60 @@ msgid "Team"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:299
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:300
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:301
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:302
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:305
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:307
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:309
 msgid "Shared in"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:312
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:313
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:314
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:315
 #: ../../src/ui_fsmenu/netsetup_lan.cc:221
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:317
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:319
 #: ../../src/ui_fsmenu/netsetup_lan.cc:218
 msgid "Open"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:324
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:326
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Human"
 msgstr ""
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:401
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:403
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:83
 #, c-format
 msgid "Shared in Player %u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:464
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:466
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:282
 msgid "Start type is set via the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:536
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:538
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:371
 msgid "No Team"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:542
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:544
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:377
 #, c-format
 msgid "Team %d"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:642
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:644
 msgid "Clients"
 msgstr ""
 
@@ -5028,16 +5028,16 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:168
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1 author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1 author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:171
 msgid "Authors"
 msgstr ""
@@ -5331,9 +5331,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
