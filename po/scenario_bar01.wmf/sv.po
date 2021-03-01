@@ -6,13 +6,14 @@
 # Fredrik Pettersson <luno@iaofredde.net>, 2006
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 20:25+0000\n"
+"Last-Translator: Martin Eriksson <nils.martin.andreas@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +78,7 @@ msgstr "För att göra det, placera en flagga på bergets östra sida (i bergste
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "lite kol"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -85,7 +86,7 @@ msgstr "mycket kol"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "lite järn"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -93,7 +94,7 @@ msgstr "mycket järn"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "lite guld"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -101,7 +102,7 @@ msgstr "mycket guld"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "lite granit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -161,7 +162,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Andra sätt att producera mat – olika typer av mat – är fiskare och bondgårdar. Vetet från bondgårdarna måste förädlas tillsammans med vatten i ett bageri innan det blir ätbart. Du kan skaffa vatten genom att bygga en brunn på en plats där dina geologer har hittat en vattenkälla."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -295,7 +296,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "Det tredje materialet som behövs till förbättrade byggnader är vass, vilket används för att täcka taken. Vass planteras på vassfält av trädgårdsmästare runtom sin byggnad."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129

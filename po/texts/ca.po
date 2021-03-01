@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2021-02-14 16:19+0000\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 15:20+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -708,7 +708,7 @@ msgid ""
 "Manage your messages more efficiently: press ‘%1%’ for News to access the "
 "messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
 "messages."
-msgstr ""
+msgstr "Gestioneu els vostres missatges eficientment: premeu «%1%» («News», en anglès) per obrir la finestra de missatges, la tecla «%2%» («go to», en anglès) per anar al lloc relacionat amb el missatge i la tecla «%3%» per arxivar missatges."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -752,19 +752,19 @@ msgstr "Alguns edificis, com les masoveries, tenen una àrea de treball molt pet
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Apropa/Allunya la vista amb la roda del ratolí o %1%/%2%. Premeu %3% per reiniciar l'apropament de la vista."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Useu les tecles «%1$s» i «%2$s» per saltar ràpidament a alguns llocs visitats recentment."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Accelereu o alentiu la partida amb %1%/%2%. Useu %3%/%4% per accelerar-la. %5%/%6% l'alentirà."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"

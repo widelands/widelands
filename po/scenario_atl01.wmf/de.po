@@ -10,7 +10,7 @@
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014-2015
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-14 13:34+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"PO-Revision-Date: 2021-02-24 10:40+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,7 +151,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Die Weber produzieren Spinnenstoff und Wappenröcke in der Weberei. Spinnenstoff wird zum Bau einiger Gebäude und zur Herstellung von Kleidung benötigt, wohingegen Wappenröcke die Uniformen der Soldaten sind. Die Weberei benötigt Goldgarn und Spinnenseide als Ausgangsmaterial. Spinnenseide wird in der Spinnenfarm und Goldgarn in der Goldspinnerei aus Gold hergestellt."
+msgstr "Die Weber stellen Spinnenstoff und Wappenröcke in der Weberei her. Spinnenstoff wird zum Bau einiger Gebäude und zur Herstellung von Kleidung benötigt, wohingegen Wappenröcke die Uniformen der Soldaten sind. Die Weberei benötigt Goldgarn und Spinnenseide als Ausgangsmaterial. Spinnenseide wird in der Spinnenfarm und Goldgarn in der Goldspinnerei aus Gold hergestellt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
@@ -237,7 +237,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "Wie alle anderen Stämme können auch die Atlanter ihre Soldaten ausbilden: Das Verlies bildet den Angriff aus – die Hauptfähigkeit der Atlanter – und das Labyrinth bildet die Verteidigung und das Ausweichen aus und verbessert die Lebenspunkte. Die Waren, die von der Industrie produziert werden, werden für die Ausbildung der Soldaten in diesen beiden Gebäuden verwendet."
+msgstr "Wie alle anderen Stämme können auch die Atlanter ihre Soldaten ausbilden: Das Verlies bildet den Angriff aus – die Hauptfähigkeit der Atlanter – und das Labyrinth bildet die Verteidigung und das Ausweichen aus und verbessert die Lebenspunkte. Die Waren, die von der Industrie hergestellt werden, werden für die Ausbildung der Soldaten in diesen beiden Gebäuden verwendet."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
