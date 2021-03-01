@@ -31,35 +31,40 @@ static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png
 static const char pic_tab_wares_warehouse[] = "images/wui/stats/menu_tab_wares_warehouse.png";
 static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_workers_warehouse.png";
 
-static inline std::string color_tag(const RGBColor& c, const std::string& text1, const std::string& text2) {
+static inline std::string
+color_tag(const RGBColor& c, const std::string& text1, const std::string& text2) {
 	return (boost::format(_("%1$s %2$s")) % StyleManager::color_tag(text1, c) % text2).str();
 }
 
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
      player_(plr),
-	 colors_(g_style_manager->building_statistics_style()),
+     colors_(g_style_manager->building_statistics_style()),
      main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      tabs_(&main_box_, UI::TabPanelStyle::kWuiDark),
      solid_icon_backgrounds_(
-	   &main_box_, UI::PanelStyle::kWui, Vector2i::zero(),
-	   /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with
-	      different background colors; each icon's color indicates whether the stock is higher or
-	      lower than the economy target setting. Very little space is available. */
-	   _("Evaluate"),
-	   (boost::format("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>") %
-	    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-	       .as_font_tag(_("Compare stocked amounts to economy target quantities")) %
-	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-	       .as_font_tag(color_tag(
-	          colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
-	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-	       .as_font_tag(color_tag(
-	          colors_.alternative_medium_color(), _("Yellow:"), _("Stock is equal to the target"))) %
-	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-	       .as_font_tag(color_tag(
-	          colors_.alternative_high_color(), _("Green:"), _("Stock is higher than the target"))))
-	      .str()) {
+        &main_box_,
+        UI::PanelStyle::kWui,
+        Vector2i::zero(),
+        /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with
+           different background colors; each icon's color indicates whether the stock is higher or
+           lower than the economy target setting. Very little space is available. */
+        _("Evaluate"),
+        (boost::format("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>") %
+         g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+            .as_font_tag(_("Compare stocked amounts to economy target quantities")) %
+         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+            .as_font_tag(color_tag(
+               colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
+         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+            .as_font_tag(color_tag(colors_.alternative_medium_color(),
+                                   _("Yellow:"),
+                                   _("Stock is equal to the target"))) %
+         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+            .as_font_tag(color_tag(colors_.alternative_high_color(),
+                                   _("Green:"),
+                                   _("Stock is higher than the target"))))
+           .str()) {
 	set_center_panel(&main_box_);
 
 	all_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE);

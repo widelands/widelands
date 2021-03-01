@@ -20,8 +20,8 @@
 #ifndef WL_WUI_STOCK_MENU_H
 #define WL_WUI_STOCK_MENU_H
 
-#include "ui_basic/checkbox.h"
 #include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/waresdisplay.h"
