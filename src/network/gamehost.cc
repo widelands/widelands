@@ -497,6 +497,9 @@ struct GameHostImpl {
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
+	// Clients whose sockets need closing on next think().
+	std::set<Client*> close_sockets_for;
+
 	explicit GameHostImpl(GameHost* const h)
 	   : localdesiredspeed(0),
 	     participants(nullptr),
@@ -589,6 +592,11 @@ GameHost::~GameHost() {
 	clear_computer_players();
 
 	while (!d->clients.empty()) {
+		for (Client* client : d->close_sockets_for) {
+			d->net->close(client->sock_id);
+			client->sock_id = 0;
+		}
+		d->close_sockets_for.clear();
 		disconnect_client(0, "SERVER_LEFT");
 		reaper();
 	}
@@ -775,6 +783,12 @@ void GameHost::run_callback() {
 }
 
 void GameHost::think() {
+	for (Client* client : d->close_sockets_for) {
+		d->net->close(client->sock_id);
+		client->sock_id = 0;
+	}
+	d->close_sockets_for.clear();
+
 	handle_network();
 
 	if (d->game) {
@@ -2589,6 +2603,9 @@ void GameHost::disconnect_client(uint32_t const client_number,
 	assert(client_number < d->clients.size());
 
 	Client& client = d->clients.at(client_number);
+	if (d->close_sockets_for.count(&client)) {
+		return;
+	}
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
@@ -2652,8 +2669,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 			d->net->send(client.sock_id, packet);
 		}
 
-		d->net->close(client.sock_id);
-		client.sock_id = 0;
+		d->close_sockets_for.insert(&client);
 	}
 
 	if (d->game) {

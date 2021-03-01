@@ -264,6 +264,9 @@ void GameClient::do_run() {
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
 		d->run_game(igb);
 
+	} catch (const WLWarning& e) {
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, true, false);
+		d->game = nullptr;
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
 		WLApplication::emergency_save(&parent, game, e.what());
@@ -273,6 +276,7 @@ void GameClient::do_run() {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
 	}
+	d->modal = nullptr;
 
 	// Quit
 	capsule_.die();
@@ -1161,6 +1165,8 @@ void GameClient::handle_network() {
 			handle_packet(*packet);
 			packet = d->net->try_receive();
 		}
+	} catch (const WLWarning&) {
+		throw;
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
 	} catch (const ProtocolException& e) {
@@ -1194,7 +1200,11 @@ void GameClient::disconnect(const std::string& reason,
 
 	if (showmsg) {
 		if (d->game) {
-			// WLApplication::emergency_save(d->modal, *d->game, msg);
+			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
+				throw WLWarning("", "%s", arg.empty() ?
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
+			}
 			throw wexception("%s", arg.empty() ?
 			                          NetworkGamingMessages::get_message(reason).c_str() :
 			                          NetworkGamingMessages::get_message(reason, arg).c_str());
