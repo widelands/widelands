@@ -69,7 +69,7 @@ obj_supply_murilius = {
       li(_"30 × Coal") ..
       li(_"40 × Iron Ore") ..
       li(_"20 × Iron") ..
-      li(_"30 × Gold Ore") ..
+      li(_"20 × Gold Ore") ..
       li(_"10 × Gold") ..
       -- TRANSLATORS: Continues from "Decide whether you want to work with Murilius against the Barbarians. If so, fill his warehouse with these wares: [list of wares]"
       p(_([[Otherwise, just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]))
