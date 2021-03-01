@@ -47,10 +47,20 @@ namespace AddOns {
 // https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
 
 constexpr unsigned kCurrentProtocolVersion = 4;
-void NetAddons::init(const std::string& username, const std::string& password) {
+void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
 		// already initialized
 		return;
+	}
+	if (username.empty()) {
+		username = last_username_;
+	} else {
+		last_username_ = "";
+	}
+	if (password.empty()) {
+		password = last_password_;
+	} else {
+		last_password_ = "";
 	}
 
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -76,6 +86,8 @@ void NetAddons::init(const std::string& username, const std::string& password) {
 	check_endofstream();
 
 	initialized_ = true;
+	last_username_ = username;
+	last_password_ = password;
 }
 
 void NetAddons::quit_connection() {
@@ -116,7 +128,7 @@ void NetAddons::read_file(const long length, const std::string& out) {
 	do {
 		long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
 		if (l < 1) {
-			throw wexception("Connection interrupted or server crashed");
+			throw wexception("Connection interrupted");
 		}
 		nr_bytes_read += l;
 		fw.data(buffer.get(), l);
@@ -127,7 +139,7 @@ void NetAddons::read_file(const long length, const std::string& out) {
 void NetAddons::check_endofstream() {
 	const std::string text = read_line();
 	if (text != "ENDOFSTREAM") {
-		throw wexception("Expected end of stream, received: '%s'", text.c_str());
+		throw wexception("Expected end of stream, received:\n%s", text.c_str());
 	}
 }
 
@@ -313,7 +325,7 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 				progress(relative_path, progress_state);
 				long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
-					throw wexception("Connection interrupted or server crashed");
+					throw wexception("Connection interrupted");
 				}
 				nr_bytes_read += l;
 				progress_state += l;
@@ -384,6 +396,7 @@ int NetAddons::get_vote(const std::string& addon) {
 void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	assert(vote <= kMaxRating);
 	init();
+	CrashGuard guard(*this);
 	std::string send = "CMD_VOTE ";
 	send += addon;
 	send += ' ';
@@ -391,9 +404,11 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	send += '\n';
 	write(client_socket_, send.c_str(), send.size());
 	check_endofstream();
+	guard.ok();
 }
 void NetAddons::comment(const AddOnInfo& addon, std::string message) {
 	init();
+	CrashGuard guard(*this);
 	std::string send = "CMD_COMMENT ";
 	send += addon.internal_name;
 	send += ' ';
@@ -427,6 +442,7 @@ void NetAddons::comment(const AddOnInfo& addon, std::string message) {
 	send += '\n';
 	write(client_socket_, send.c_str(), send.size());
 	check_endofstream();
+	guard.ok();
 }
 
 static size_t gather_addon_content(const std::string& current_dir, const std::string& prefix, std::map<std::string, std::set<std::string>>& result) {
@@ -457,6 +473,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 		init_fn("", gather_addon_content(dir, "", content));
 	}
 
+	CrashGuard guard(*this);
 	std::string send = "CMD_SUBMIT ";
 	send += name;
 	send += '\n';
@@ -508,6 +525,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 	write(client_socket_, send.c_str(), send.size());
 
 	check_endofstream();
+	guard.ok();
 }
 
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {

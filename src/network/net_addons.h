@@ -62,7 +62,7 @@ private:
 	friend struct CrashGuard;
 
 	// Open the connection if it was not open yet; throws an error if this fails
-	void init(const std::string& username = std::string(), const std::string& password = std::string());
+	void init(std::string username = std::string(), std::string password = std::string());
 	void quit_connection();
 
 	// Set the URL (whitespace-safe) and adjust the timeout values.
@@ -73,6 +73,7 @@ private:
 	void read_file(long length, const std::string& out);
 	void check_endofstream();
 
+	std::string last_username_, last_password_;
 	bool initialized_;
 	int client_socket_;
 };
