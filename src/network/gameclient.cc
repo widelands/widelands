@@ -1201,9 +1201,9 @@ void GameClient::disconnect(const std::string& reason,
 	if (showmsg) {
 		if (d->game) {
 			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
-				throw WLWarning("", "%s", arg.empty() ?
-			                          NetworkGamingMessages::get_message(reason).c_str() :
-			                          NetworkGamingMessages::get_message(reason, arg).c_str());
+				throw WLWarning("", "%s",
+				                arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+				                              NetworkGamingMessages::get_message(reason, arg).c_str());
 			}
 			throw wexception("%s", arg.empty() ?
 			                          NetworkGamingMessages::get_message(reason).c_str() :
