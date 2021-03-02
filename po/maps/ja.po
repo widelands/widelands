@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -264,6 +264,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "リーボードと彼の率いる一団は北の地に着いた。しかし、凍てついた草原と雪山の間の地に到着した彼らはどうやら全く歓迎されていないようで……"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -704,6 +715,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "あなたが確立させた密輸ルートが急に混雑するようになりました。二つのライバル部族が現れ、密輸業者間への競合が起こったのです。決められた量の物資の密輸を一番最初に成し遂げるのはどのチームでしょうか？"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "炎のトライデント"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "三つの大きな火山の近く、六つのすてきな島々が入植者を待っています。砂漠や容易に育つ森はすぐに見つかるでしょう。しかし、敵と戦うために必要な資源を得るには海軍の力が必要になってくるでしょう。"
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "神秘の迷路"
@@ -934,18 +957,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "クロー諸島の四つの港は長年に渡って交易を続けて来ました。自分達が生産できない必要な物資を互いに交換していたのです。この交易によって四つの港、そしてクロー諸島の住民の間には友好的な関係が築かれていました ── 最近までは。というのも、二つの港が連合し、排他的な同盟関係を構築し、残り二つにも同じようにするように要求したのです。長く続いた平和は突然崩壊し、今は開戦の時を待つばかりです……"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "炎のトライデント"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "三つの大きな火山の近く、六つのすてきな島々が入植者を待っています。砂漠や容易に育つ森はすぐに見つかるでしょう。しかし、敵と戦うために必要な資源を得るには海軍の力が必要になってくるでしょう。"
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

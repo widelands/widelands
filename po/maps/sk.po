@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -264,6 +264,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud a jeho kmeň dorazil na sever. Ich príchod však medzi zamrznutými stepami a snehom pokrytými kopcami nie je vítaný."
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -704,6 +715,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Na vašich osvedčených pašeráckych cestách je odrazu rušno: objavili sa ďalšie dva kmene a medzi pašerákmi nastalo súperenie. Ktorému tímu sa ako prvému podarí prepašovať určité množstvo výrobkov?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Ohnivý trojzubec"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "V blízkosti troch veľkých sopiek šesť nádherných ostrovov pozýva osadníkov, aby začali nový život. Púšte a rýchlo rastúci les čakajú na svoje objavenie. Váš kmeň bude schopný preskúmať dostatok zdrojov na to, aby mohol súperiť so svojimi protivníkmi, len ak sa stane námornou veľmocou."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mystický labyrint"
@@ -934,18 +957,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Štyri veľké prístavy na ostrovoch Craw medzi sebou obchodovali odnepamäti. Každý z nich potreboval suroviny, ktoré nemohol získať na svojom území, a za to poskytoval iným suroviny, ktoré im chýbali. Vďaka týmto obchodom panovali medzi prístavmi a ľuďmi žijúcimi na ostrovoch Craw nemalo priateľské styky – až donedávna, keď sa dva prístavy spojili do osobitnej obchodnej aliancie, čo prinútilo zvyšné dve konať rovnako. Odrazu sa zdá, že je len otázkou času, kým medzi prístavmi vypuknú prvé boje a naruší sa pokojný život, ktorý vydržal tak dlho…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Ohnivý trojzubec"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "V blízkosti troch veľkých sopiek šesť nádherných ostrovov pozýva osadníkov, aby začali nový život. Púšte a rýchlo rastúci les čakajú na svoje objavenie. Váš kmeň bude schopný preskúmať dostatok zdrojov na to, aby mohol súperiť so svojimi protivníkmi, len ak sa stane námornou veľmocou."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

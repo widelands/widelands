@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -263,6 +263,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "里波特和他的部族已经到达了北方。但是他们来到冰冻的草原和白雪覆盖的山脉之间却不那么受欢迎…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -703,6 +714,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "你建立完善的走私路线突然变得繁忙起来：另外两个部族出现了，现在走私者之间的竞争已经开始。哪一个走私团队将首先私运货物达到一定数量？"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "火之三叉戟"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "在三座主要火山附近，六座可爱的岛屿正在邀请定居者开始新的生活。沙漠和快速生长的森林等着被发现。但只有拥有强大的海上力量，你的部族才能发掘足够的资源与对手展开竞争。"
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "神秘迷宫"
@@ -933,18 +956,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "克劳群岛四个大港口之间的货物贸易由来已久。他们都需要自己领土上无法生产的资源，作为交换，他们也提供了己方的资源给那些需要的人们。在这些贸易的基础上，四个港口和克劳群岛上的居民之间非常友好的商业往来很常见– 直到最近，当两个港口联合起来组成一个排他性的贸易联盟，迫使其他两个港口也做了同样的事情。突然之间，港口之间即将展开第一次对决似乎只是时间问题，已经持续了这么长时间的宁静生活即将被打破…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "火之三叉戟"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "在三座主要火山附近，六座可爱的岛屿正在邀请定居者开始新的生活。沙漠和快速生长的森林等着被发现。但只有拥有强大的海上力量，你的部族才能发掘足够的资源与对手展开竞争。"
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

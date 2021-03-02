@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 14:15+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 14:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -266,6 +266,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aver hör Ankunft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr "Fründe in Nood"
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr "Reebaud un sien Volk leven glückelk im Noorden. In de Tüskentied sün de Lannen, de se achter sik laten hebben, all anner as freedsaam, un een oller Fründ bruukt nödig hör Hülp …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -706,6 +717,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Diene goden, ollen Smuggelpadden sünd up eenmaal besig worden: Twee anner Völker sünd ankomen un een Wettstried tüsken Smuggel-Lüü hett begunnen. Welke Klottje is de eerste, wat eene wisse Tahl vun Waren smuggelt?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Füür-Dreespitz"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Dicht bi dree groten Füürbargen laden sess feine Insels Lüde in, een nejes Leven to begünnen. Sandlannen un een Wald, wat fell wasst, wachten, dat man se finnt. Aver blot as Seefahrt-Meister kann dien Volk genoog Mineraale kriegen, um mit sienen Feinden klaartoworden."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Wunnerlike Dwaalweg"
@@ -936,18 +959,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "De feer machtigen Muden vun de Kraw-Insels hebben ewig lang hör Waren tüskeneenanner hannelt. Se bruken all Mineraale, wat se nich in hör eegen Gewest produzeren könen, un hebben daarför anner Mineraale liefert an de, well deese nich produzeren könen. Um deesen Hannel weren all de Muden un de Lüü up de Kraw-Insels fründelk miteenanner umgahn – bit vör körter Tied twee vun de Muden een Hannels-Ofmaken truffen hebben, wat de anner twee dwungen hett, dat ok to maken. Nu is dat up eenmaal nich mehr tum Ofwennen, dat de eersten Kriegen tüsken de Muden dat freedsame Leven verneelen, wat so lang anhollen hett …"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Füür-Dreespitz"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Dicht bi dree groten Füürbargen laden sess feine Insels Lüde in, een nejes Leven to begünnen. Sandlannen un een Wald, wat fell wasst, wachten, dat man se finnt. Aver blot as Seefahrt-Meister kann dien Volk genoog Mineraale kriegen, um mit sienen Feinden klaartoworden."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

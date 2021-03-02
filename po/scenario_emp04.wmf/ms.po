@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Language-Team: Malay (https://www.transifex.com/widelands/teams/35159/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -1328,6 +1328,11 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
@@ -1409,4 +1414,33 @@ msgctxt "empire_building"
 msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
+msgctxt "empire_building"
+msgid "Mill"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
+msgctxt "empire_building"
+msgid "Temple of Vesta"
+msgstr ""
+
+#. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
+msgctxt "empire_building"
+msgid "No soldier to train!"
+msgstr ""
+
+#. TRANSLATORS: Empire training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
+msgctxt "empire_building"
+msgid "No soldier found for this training level!"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
+msgctxt "empire_building"
+msgid "Well"
 msgstr ""
