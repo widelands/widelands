@@ -198,7 +198,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 6,
-   trainer_patience = 3,
+   trainer_patience = 6,
 
    messages = {
       -- TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned

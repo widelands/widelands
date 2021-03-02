@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-21 15:52+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 15:07+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -265,6 +265,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "En Reebaud i la seva tribu han arribat al nord. Però la seva arribada entre estepes gèlides i les muntanyes cobertes de neu no ha sigut ben acollida…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr "Amics en la necessitat"
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -705,6 +716,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Se'ls gira feina a les vostres rutes de contraban: han aparegut dues tribus més i ha començat la rivalitat entre contrabandistes. Quin equip serà el primer a passar de contraban el nombre determinat de béns?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Trident de foc"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Al voltant de tres grans volcans, sis illes inviten els colons a començar-hi una nova vida. Els deserts i un bosc que creix ràpidament esperen per ser explorats. Però només podreu aconseguir prou recursos per competir amb els oponents si la vostra tribu es converteix en una potència naval."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "El laberint místic"
@@ -935,18 +958,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Els quatre imponents ports de les illes Craw han comerciat entre ells durant segles. Tots necessitaven béns que no podien produir en el seu territori i els intercanviaven amb altres tribus. Un comerç amistós era habitual fins que dos ports han unit forces per formar una aliança comercial, forçant les altres dues a fer el mateix. De sobte, sembla qüestió de temps que comencin les primeres lluites entre els ports i trenquin la pau que tant ha durat."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Trident de foc"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Al voltant de tres grans volcans, sis illes inviten els colons a començar-hi una nova vida. Els deserts i un bosc que creix ràpidament esperen per ser explorats. Però només podreu aconseguir prou recursos per competir amb els oponents si la vostra tribu es converteix en una potència naval."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

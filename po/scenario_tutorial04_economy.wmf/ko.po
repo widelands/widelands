@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -258,9 +258,7 @@ msgstr "그런 다음 ‘재고’를 선택합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
-msgid ""
-"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
-"quickly."
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
@@ -423,8 +421,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "열어보십시오. 화면하단의 단추를 통해 접근 할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "또는 ‘F1’키를 사용하여 직접 접근 할 수 있습니다."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -574,16 +573,16 @@ msgstr "훌륭합니다. 선술집들이 지어졌고 야전식량을 공급하�
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "지금 이 순간, 모든 광산들이 야전식량을 공급받고 있습니다. 특별한 광산에 우선권을 주고 싶다면, 그냥 창을 여십시오. 물품 탭에서, 모든 물품 뒤에, ‘신호등’을 볼 수 있습니다."
+"tab, behind every ware, you can see a slider."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "빨간 점 (낮은 우선권) 을 클릭할 때, 해당하는 물품은 덜 자주 배달됩니다. 초록은 가능한 한 많은 물품을, 아마도 무언가 중요한 것을 생산하는 건물로 배달해야 하는 것을 의미합니다."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""

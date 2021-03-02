@@ -333,7 +333,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 16,
+   trainer_patience = 32,
 
    messages = {
       -- TRANSLATORS: Atlantean training site tooltip when it has no soldiers assigned

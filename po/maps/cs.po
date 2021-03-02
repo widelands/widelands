@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-28 09:05+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 13:14+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -266,6 +266,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Rýbaud a jeho kmen dorazili na Sever. Ale jejich příjezd do zamrzlých stepí a sněhem pokrytých hor není zrovna přívětivý…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr "Přátelé v nouzi"
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -706,6 +717,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Tvé dobře prochozené pašovací cesty se najednou zaplnily: další dva kmeny se zapojily do pašování a najednou si začali pašeráci konkurovat. Kdo propašuje určitý počet surovin jako první?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Ohnivý trojzubec"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "V okolí tří velkých sopek pobízí osadníky šestice malebných ostrovů k vybudování nového života. Pouště a bujný les už čekají na prozkoumání. Ale pouze pokud se staneš námořní velmocí, bude mít tvůj kmen šanci získat dostatek surovin, aby mohl čelit svým soupeřům."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mystický labyrint"
@@ -936,18 +959,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Čtyři impozantní přístavy na ostrovech Craw mezi sebou odjakživa čile obchodovaly. Každý potřeboval dovézt suroviny, které na svém území nemohl získat, a na oplátku poskytoval ostatním suroviny, kterých měl dostatek. Vzhledem k těmto obchodním vztahům byly i politické a mezilidské vztahy na ostrovech Craw vždy velmi přátelské. A to až donedávna, než spolu dva z přístavů uzavřely exkluzivní obchodní alianci, čímž donutily druhé dva přístavy ke stejnému kroku. Najednou to vypadá, že je pouze otázkou času, než se mezi přístavy rozpoutají první boje a otřesou mírumilovným soužitím, které zatím vydrželo tak dlouho..."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Ohnivý trojzubec"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "V okolí tří velkých sopek pobízí osadníky šestice malebných ostrovů k vybudování nového života. Pouště a bujný les už čekají na prozkoumání. Ale pouze pokud se staneš námořní velmocí, bude mít tvůj kmen šanci získat dostatek surovin, aby mohl čelit svým soupeřům."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

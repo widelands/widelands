@@ -7,6 +7,7 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
+# Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-20 22:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 07:55+0000\n"
+"Last-Translator: Marcin S <dzidek1003@o2.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortification"
-msgstr ""
+msgstr "Fortyfikacja"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
@@ -66,7 +67,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Forteca"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
@@ -174,7 +175,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Tower"
-msgstr ""
+msgstr "Wieża"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:58
@@ -1359,7 +1360,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
 msgid "making a light wooden armor"
-msgstr ""
+msgstr "Tworzenie lekkiej zbroi drewnianej"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
@@ -1531,7 +1532,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:66
 msgid "No Game, No Fish"
-msgstr ""
+msgstr "Brak zwierzyny, brak ryb"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:68
@@ -1707,9 +1708,9 @@ msgstr ""
 msgid "making a shovel"
 msgstr "produkcja łopaty"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1718,6 +1719,7 @@ msgstr "produkcja topora drwala"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1730,8 +1732,6 @@ msgstr "produkcja kilofa"
 msgid "making a machete"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1830,7 +1830,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr ""
+msgstr "Kopalnia kamienia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1918,6 +1918,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -3146,7 +3147,7 @@ msgid "Barracks"
 msgstr "Kwatera zaciężnika"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:57
 msgctxt "empire_building"
 msgid "recruiting soldier"
 msgstr "zaciąg żołnierza"
@@ -4641,7 +4642,7 @@ msgstr "szkolenie obrony żołnierza z poziomu 0 do poziomu 1"
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Kwatera główna"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
@@ -4653,7 +4654,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Magazyn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -5468,6 +5469,78 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. TRANSLATORS: This is the name of a starting condition
+#. TRANSLATORS: This is the name of a starting condition
+#. descname = _ "Discovery",
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#. tooltip = _"Start the game with three ships on the ocean and only a handful
+#. of supplies",
+#. map_tags = {"seafaring"},
+#. incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+#. func = function(player, shared_in_start)
+#. local map = wl.Game().map
+#. local sf = map.player_slots[player.number].starting_field
+#. if shared_in_start then
+#. sf = shared_in_start
+#. else
+#. player:allow_workers("all")
+#. end
+#. launch_expeditions(player, {
+#. {
+#. log = 4,
+#. granite = 1,
+#. planks = 2,
+#. spidercloth = 3,
+#. atlanteans_woodcutter = 3,
+#. atlanteans_forester = 2,
+#. atlanteans_soldier = 1,
+#. },
+#. {
+#. log = 3,
+#. granite = 4,
+#. planks = 2,
+#. spidercloth = 3,
+#. atlanteans_stonecutter = 2,
+#. atlanteans_soldier = 1,
+#. },
+#. {
+#. iron = 2,
+#. atlanteans_soldier = 1,
+#. atlanteans_geologist = 1,
+#. atlanteans_miner = 3,
+#. atlanteans_smelter = 2,
+#. atlanteans_toolsmith = 1,
+#. atlanteans_baker = 2,
+#. atlanteans_smoker = 2,
+#. atlanteans_fisher = 1,
+#. },
+#. })
+#. end
+#. }
+#. pop_textdomain()
+#. return init
+#. =======================================================================
+#. Discovery starting conditions for Atlanteans
+#. =======================================================================
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:117
+#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
+msgid "Discovery"
+msgstr "Odkrywanie"
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:119
+#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr "Zaczniesz grę z trzema statkami na oceanie i jedynie garstką towarów"
+
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:11
@@ -5503,6 +5576,24 @@ msgstr "Kwatera główna"
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "Zaczniesz grę jedynie z kwaterą główną."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
+msgid "New World"
+msgstr "Nowy Świat"
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr "Zaczniesz grę z siedmioma statkami pełnymi towarów na oceanie"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:11
@@ -5653,92 +5744,6 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
-
-#. TRANSLATORS: This is the name of a starting condition
-#. TRANSLATORS: This is the name of a starting condition
-#. descname = _ "Discovery",
-#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-#. tooltip = _"Start the game with three ships on the ocean and only a handful
-#. of supplies",
-#. map_tags = {"seafaring"},
-#. incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
-#. func = function(player, shared_in_start)
-#. local map = wl.Game().map
-#. local sf = map.player_slots[player.number].starting_field
-#. if shared_in_start then
-#. sf = shared_in_start
-#. else
-#. player:allow_workers("all")
-#. end
-#. launch_expeditions(player, {
-#. {
-#. log = 4,
-#. granite = 1,
-#. planks = 2,
-#. spidercloth = 3,
-#. atlanteans_woodcutter = 3,
-#. atlanteans_forester = 2,
-#. atlanteans_soldier = 1,
-#. },
-#. {
-#. log = 3,
-#. granite = 4,
-#. planks = 2,
-#. spidercloth = 3,
-#. atlanteans_stonecutter = 2,
-#. atlanteans_soldier = 1,
-#. },
-#. {
-#. iron = 2,
-#. atlanteans_soldier = 1,
-#. atlanteans_geologist = 1,
-#. atlanteans_miner = 3,
-#. atlanteans_smelter = 2,
-#. atlanteans_toolsmith = 1,
-#. atlanteans_baker = 2,
-#. atlanteans_smoker = 2,
-#. atlanteans_fisher = 1,
-#. },
-#. })
-#. end
-#. }
-#. pop_textdomain()
-#. return init
-#. =======================================================================
-#. Discovery starting conditions for Atlanteans
-#. =======================================================================
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:117
-#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
-msgid "Discovery"
-msgstr "Odkrywanie"
-
-#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:119
-#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
-msgid ""
-"Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Zaczniesz grę z trzema statkami na oceanie i jedynie garstką towarów"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
-msgid "New World"
-msgstr "Nowy Świat"
-
-#. TRANSLATORS: This is the tooltip for the "New World" starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
-msgid "Start the game with seven ships full of wares on the ocean"
-msgstr "Zaczniesz grę z siedmioma statkami pełnymi towarów na oceanie"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5995,7 +6000,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:83
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Statek"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:107
@@ -6349,7 +6354,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Statek"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:28
@@ -6565,7 +6570,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:8
 msgctxt "empire_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Statek"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:28
@@ -6925,7 +6930,7 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Statek"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:45
@@ -7230,7 +7235,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Chleb"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -7290,7 +7295,7 @@ msgstr ""
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Czekolada"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
