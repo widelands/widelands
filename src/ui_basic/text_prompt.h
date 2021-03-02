@@ -27,7 +27,7 @@
 
 namespace UI {
 
-/** A compact modal dialog with a caption, an editbox and optionally morw widgets. */
+/** A compact modal dialog with a caption, an editbox, and optionally more widgets. */
 class TextPrompt : public UI::Window {
 public:
 	explicit TextPrompt(UI::Panel& parent,

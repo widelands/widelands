@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2020-10-05 12:56+0000\n"
-"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 12:22+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -346,7 +346,7 @@ msgid "Dead Tree"
 msgstr ""
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:5
-msgid "Fallen Tree"
+msgid "Felled Tree"
 msgstr ""
 
 #: ../../data/world/immovables/trees/larch/init.lua:14

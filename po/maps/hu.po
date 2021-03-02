@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -267,6 +267,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud és a törzse megérkeztek Északra. De az érkezésük a fagyott sztyeppék és a hóval borított hegyek között minden csak nem biztató…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -707,6 +718,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "A régóta működő csempészútvonalaidon hirtelen nagy lett a forgalom: két másik törzs jelent meg, és versengés indult a csempészek között. Melyik csapat csempészik át hamarabb egy bizonyos mennyiségű árut?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "A tűz szigonya"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Három nagy vulkán környékén hat kedves sziget csalogatja a telepeseket, hogy ott kezdjenek új életet. Sivatagok és egy gyorsan gyarapodó erdő vár felfedezésre. De ahhoz, hogy több forrásod legyen, mint ellenfeleidnek, törzsednek vízi hatalomra kell szert tennie."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Titokzatos labirintus"
@@ -937,18 +960,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "A Rák-szigetek négy nagy kikötője időtlen idők óta kereskedett egymással. Mindnyájuknak kellettek nyersanyagok, melyekkel nem rendelkeztek, cserébe olyat adtak, amije a másiknak nem volt. Erre a csereberére egy igen barátságos kereskedelem épült a négy kikötő és a Rák-szigetek népei között – egészen addig, míg utóbb két kikötő kizárólagos kereskedelmi szerződést nem kötött egymással, ugyanilyenbe kényszerítve ezzel a másik kettőt. Hirtelen úgy látszik, már csak idő kérdése, hogy a kikötők közötti első harcok szétzilálják a békét, mi oly sokáig tartott…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "A tűz szigonya"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Három nagy vulkán környékén hat kedves sziget csalogatja a telepeseket, hogy ott kezdjenek új életet. Sivatagok és egy gyorsan gyarapodó erdő vár felfedezésre. De ahhoz, hogy több forrásod legyen, mint ellenfeleidnek, törzsednek vízi hatalomra kell szert tennie."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

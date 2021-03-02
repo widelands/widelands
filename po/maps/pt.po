@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -267,6 +267,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud  e a sua tribo chegaram ao norte. Mas a sua chegada entre as estepes congeladas e as montanhas cobertas de neve é menos do que bem-vinda…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -707,6 +718,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "As tuas lucrativas rotas de contrabando subitamente são interrompidas: Duas outras tribos começaram a rivalizar com as tuas. Qual equipa poderá contrabandear primeiro um certo número de mercadorias?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Tridente de Fogo"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Em redor de três grandes vulcões, seis lindas ilhas convidam os colonos a começar uma nova vida. Há desertos e uma floresta em crescimento rápido para descobrir. Mas só desenvolvendo a navegação vai permitir à sua tribo de competir com as outras."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Labirinto místico"
@@ -937,18 +960,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Os quatro portos esplêndidos das ilhas Craw estão a comercializar as suas mercadorias por anos entre si. Todos eles precisam de recursos, os quais não podem produzir no seu próprio território e provêm recursos aos outros que estes não podem produzir eles mesmos. Com base nestas trocas um comércio muito amigável fora estabelecido entre os quatro portos e o povo das ilhas Craw – até que dois dos portos uniram-se numa aliança mercantil exclusiva, forçando aos outros dois a fazerem o mesmo. De repente era apenas uma questão de tempo, até que a guerra entre os portos estremecerá a ilha outrora pacifica …"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Tridente de Fogo"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Em redor de três grandes vulcões, seis lindas ilhas convidam os colonos a começar uma nova vida. Há desertos e uma floresta em crescimento rápido para descobrir. Mas só desenvolvendo a navegação vai permitir à sua tribo de competir com as outras."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

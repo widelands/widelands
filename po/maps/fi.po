@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-21 15:55+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -268,6 +268,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud heimoineen on saapunut Pohjoiseen. Mutta heidän vastaanottonsa jäisen aron ja lumen peittämien vuorien välimaastoon on kaikkea muuta kuin lämmin…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -708,6 +719,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Sinun hyvin vakiintuneet salakuljetusreittisi vilkastuvat yllättäin: kaksi muuta heimoa ovat ilmestyneet apajille ja kilpailu on nyt alkanut olemaan kovaa. Mikä ryhmä tulee olemaan ensimmäinen, joka salakuljettaa tietyn määrän tuotteita?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Tulen kolminaisuus"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Kolmen suurimman tulivuoren läheisyydessä, kuusi viehättävää saarta kutsuvat uudisasukkaita aloittamaan uuden elämän. Aavikot ja nopeasti kasvavat metsät odottavat löytämistään. Mutta vain tulemalla merivoimien suurvallaksi heimosi kykenee hankkimaan riittävästi resursseja vastustajan hoitamiseksi."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mystinen sokkelo"
@@ -938,18 +961,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Neljä Craw Saarien mahtavaa satamaa ovat käyneet tavarakauppaa toistensa kanssa ikuisuuksia. Heistä kaikki tarvitsevat resursseja, joita he eivät pysty omalla alueellaan itse tuottamaan ja vaihtokauppana tarjoavat muita resursseja, joita muut eivät pysty tuottamaan. Perustuen tähän kaupankäyntiin, näiden neljän sataman välillä oli hyvin ystävällismieliset kauppasuhteet ja ihmiset elivät onnellisina Craw Saarilla – kunnes aivan äskettäin, kaksi satamista yhdistyivät muodostaen yhteisen kauppaliiton, mikä pakotti myös kahden muun muodostamaan liiton. Lopulta, oli vain ajan kysymys milloin ensimmäiset taistelut rikkoisivat näiden satamien niin pitkään kestäneen rauhallisen elinolon…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Tulen kolminaisuus"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Kolmen suurimman tulivuoren läheisyydessä, kuusi viehättävää saarta kutsuvat uudisasukkaita aloittamaan uuden elämän. Aavikot ja nopeasti kasvavat metsät odottavat löytämistään. Mutta vain tulemalla merivoimien suurvallaksi heimosi kykenee hankkimaan riittävästi resursseja vastustajan hoitamiseksi."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
