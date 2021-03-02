@@ -40,6 +40,7 @@ MAINPOTS = [
                      '../../data/txts/tips/*.tip']),
     ('widelands/widelands', [
         '../../src/wlapplication.cc',
+        '../../src/wlapplication_options.cc',
         '../../src/*/*.cc',
         '../../src/*/*/*.cc',
         '../../src/*/*/*/*.cc',

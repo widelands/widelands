@@ -826,7 +826,8 @@ void AddOnsCtrl::rebuild() {
 		}
 		browse_.push_back(r);
 	}
-	tabs_.tabs()[1]->set_title((boost::format(_("Browse (%u)")) % index).str());
+	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") :
+	                                        (boost::format(_("Browse (%u)")) % index).str());
 
 	if (installed_addons_inner_wrapper_.get_scrollbar() && scrollpos_i) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
@@ -936,7 +937,7 @@ void AddOnsCtrl::update_dependency_errors() {
 		   (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
 		    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		       .as_font_tag((boost::format(ngettext(
-		                        _("%u Dependency Error"), _("%u Dependency Errors"), nr_warnings)) %
+		                        "%u Dependency Error", "%u Dependency Errors", nr_warnings)) %
 		                     nr_warnings)
 		                       .str()) %
 		    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list))

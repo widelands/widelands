@@ -7,6 +7,7 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # Jakub Magnowski <qoiutek@gmail.com>, 2018
+# Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2016,2018-2019
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 08:02+0000\n"
+"Last-Translator: Marcin S <dzidek1003@o2.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -272,6 +273,17 @@ msgid ""
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud i jego plemię przybyli na Północ. Ale ich przybycie między zamarzniętymi stepami a pokrytymi śniegiem górami jest nie do przyjęcia…"
 
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr "Przyjaciele w potrzebie"
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
+
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
 msgstr "Podstawy sterowania"
@@ -419,7 +431,7 @@ msgstr "W stronę horyzontu"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – edytowane przez 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -475,7 +487,7 @@ msgstr "v0.2"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "Europa 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
@@ -711,6 +723,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Utworzone przez Ciebie szlaki przemytnicze nagle stały się tłoczne - pojawiły się dwa nowe plemiona rozpoczynając rywalizację pomiędzy przemytnikami. Który zespół jako pierwszy zdoła przemycić dość towarów?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Ognisty trójząb"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Uroczy archipelag wysp w pobliżu trzech potężnych wulkanów kusi swym pięknem osadników szukających nowego początku. Pustynie, lecz i szybko rozprzestrzeniające się lasy czekają na odkrycie. Tylko stając się morską potęgą zdołasz wydrzeć wyspom dla swojego plemienia surowce potrzebne, by podbić swoich przeciwników."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mistyczny labirynt"
@@ -941,18 +965,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Cztery potężne porty Wysp Crawa handlowały pomiędzy sobą od wieków. Każdy z nich potrzebował surowców nieosiągalnych na jego terenach, w zamian handlując własnymi unikalnymi wyrobami. Ekonomia oparta na tym handlu umacniała przyjaźń między portami oraz ludźmi zamieszkującymi wyspy - do czasu, gdy dwa z portów podpisały traktat o wzajemnej wyłączności handlu swoimi towarami, co zmusiło dwa pozostałe porty do podobnego aliansu. Wygląda na to, że wojna jest nieunikniona..."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Ognisty trójząb"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Uroczy archipelag wysp w pobliżu trzech potężnych wulkanów kusi swym pięknem osadników szukających nowego początku. Pustynie, lecz i szybko rozprzestrzeniające się lasy czekają na odkrycie. Tylko stając się morską potęgą zdołasz wydrzeć wyspom dla swojego plemienia surowce potrzebne, by podbić swoich przeciwników."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

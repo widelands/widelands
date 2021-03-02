@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Juanjo, 2020\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -173,8 +173,8 @@ msgid "20 × Iron"
 msgstr "20 × Ferro"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
-msgid "30 × Gold Ore"
-msgstr "30 × Mineral d'or"
+msgid "20 × Gold Ore"
+msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
@@ -1069,3 +1069,9 @@ msgid ""
 msgstr ""
 "Els treballadors i soldats hi trobaran refugi. També emmagatzema béns i "
 "eines."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
+msgctxt "frisians_building"
+msgid "Empire Warehouse"
+msgstr ""

@@ -328,7 +328,7 @@ void AddOnsPackager::clicked_new_addon() {
 
 		if (name.empty() || !FileSystem::is_legal_filename(name)) {
 			main_menu_.show_messagebox(
-			   _("Invalid Name"), _("This name is invalid, please choose a different name."));
+			   _("Invalid Name"), _("This name is invalid. Please choose a different name."));
 			continue;
 		}
 
@@ -440,14 +440,21 @@ void AddOnsPackager::die() {
 void AddOnsPackager::clicked_discard_changes() {
 	assert(!addons_with_changes_.empty());
 
-	std::string msg = (boost::format(ngettext(
-	                      "Do you really want to discard all changes to the following %u add-on?",
-	                      "Do you really want to discard all changes to the following %u add-ons?",
-	                      addons_with_changes_.size())) %
-	                   addons_with_changes_.size())
-	                     .str();
-	for (const auto& str : addons_with_changes_) {
-		msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
+	std::string msg;
+	if (addons_with_changes_.size() == 1) {
+		msg = (boost::format(_("Do you really want to discard all changes to the add-on ‘%s’?")) %
+		       addons_with_changes_.begin()->first)
+		         .str();
+	} else {
+		msg = (boost::format(
+		          ngettext("Do you really want to discard all changes to the following %u add-on?",
+		                   "Do you really want to discard all changes to the following %u add-ons?",
+		                   addons_with_changes_.size())) %
+		       addons_with_changes_.size())
+		         .str();
+		for (const auto& str : addons_with_changes_) {
+			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
+		}
 	}
 
 	UI::WLMessageBox m(&main_menu_, UI::WindowStyle::kFsMenu, _("Discard Changes"), msg,
@@ -460,15 +467,22 @@ void AddOnsPackager::clicked_discard_changes() {
 void AddOnsPackager::clicked_write_changes() {
 	assert(!addons_with_changes_.empty());
 
-	std::string msg =
-	   (boost::format(
-	       ngettext("Do you really want to commit all changes to the following %u add-on to disk?",
-	                "Do you really want to commit all changes to the following %u add-ons to disk?",
-	                addons_with_changes_.size())) %
-	    addons_with_changes_.size())
-	      .str();
-	for (const auto& str : addons_with_changes_) {
-		msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
+	std::string msg;
+	if (addons_with_changes_.size() == 1) {
+		msg =
+		   (boost::format(_("Do you really want to commit all changes to the add-on ‘%s’ to disk?")) %
+		    addons_with_changes_.begin()->first)
+		      .str();
+	} else {
+		msg = (boost::format(ngettext(
+		          "Do you really want to commit all changes to the following %u add-on to disk?",
+		          "Do you really want to commit all changes to the following %u add-ons to disk?",
+		          addons_with_changes_.size())) %
+		       addons_with_changes_.size())
+		         .str();
+		for (const auto& str : addons_with_changes_) {
+			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
+		}
 	}
 	msg += _("\n\nWarning: If you manually edited any files in this add-on, your changes may be "
 	         "overwritten!");
