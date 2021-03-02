@@ -133,6 +133,7 @@
 - fix a variable conflict (#4701)
 - Discovery and New World starting conditions for amazons (#4705)
 - Make atlantean Discovery start easier (#4709)
+- 3588 fix artifact messages (#4727)
 
 
 ### Maps
@@ -301,6 +302,7 @@
     - Disallow AI players for unsuited tribes
     - Update tribe dropdown when setting AI
 - Shorten the ripe stage of barley fields (#4712)
+- doubled trainers patience due to cycles failing quicker (#4726)
 
 
 ### User Interface
@@ -513,7 +515,7 @@
 - Add missing textdomain calls (#4643, #4652)
 - Localize timestamps of remote add-ons (#4700)
 - Send localized cheating messages (#4462)
-- Fix Transifex String Issues (#4723)
+- Fix Transifex String Issues (#4723, #4728)
 
 
 ### Help and Documentation
