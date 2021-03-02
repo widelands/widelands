@@ -118,7 +118,8 @@ def generate_translation_stats(po_dir, output_file):
 
     # The total goes in a [global] section and is identical for all locales
     result = '[global]\n'
-    result = '{}total={}\n\n'.format(result, list(locale_stats.values())[0].total)
+    result = '{}total={}\n\n'.format(
+        result, list(locale_stats.values())[0].total)
     # Write translation stats for all locales
     for locale in (sorted(list(locale_stats.keys()), key=str.lower)):
         entry = locale_stats[locale]
