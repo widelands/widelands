@@ -61,7 +61,7 @@ def generate_translation_stats(po_dir, output_file):
             # We need shell=True, otherwise we get "No such file or directory".
             stats_output = check_output(
                 ['pocount ' + subdir + ' --csv'], stderr=subprocess.STDOUT, shell=True)
-            if 'ERROR' in stats_output:
+            if b'ERROR' in stats_output:
                 print('\nError running pocount:\n' + stats_output.split('\n', 0)
                       [0]) + '\nAborted creating translation statistics.'
                 return 1
