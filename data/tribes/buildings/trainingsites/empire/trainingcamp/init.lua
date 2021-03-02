@@ -205,7 +205,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 12,
-   trainer_patience = 12,
+   trainer_patience = 24,
 
    messages = {
       -- TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
