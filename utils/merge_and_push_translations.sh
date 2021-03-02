@@ -56,7 +56,7 @@ set -x
 tx pull -fa
 
 # Update authors file
-utils/update_authors.py
+python3 utils/update_authors.py
 if [ $? -eq 0 ] ; then
   echo "Updated authors";
 else
@@ -65,7 +65,7 @@ else
 fi
 
 # Update appdata
-utils/update_appdata.py
+python3 utils/update_appdata.py
 if [ $? -eq 0 ] ; then
   echo "Updated appdata";
 else
@@ -74,10 +74,10 @@ else
 fi
 
 # Update catalogs
-utils/buildcat.py
+python3 utils/buildcat.py
 
 # Update statistics
-utils/update_translation_stats.py
+python3 utils/update_translation_stats.py
 if [ $? -eq 0 ] ; then
   echo "Updated translation stats";
 else
@@ -86,8 +86,8 @@ else
 fi
 
 # Fix formatting for Lua
-python utils/fix_formatting.py --lua --dir data/i18n
-python utils/fix_formatting.py --lua --dir data/txts
+python3 utils/fix_formatting.py --lua --dir data/i18n
+python3 utils/fix_formatting.py --lua --dir data/txts
 
 # Undo one-liner diffs in po directory - these are pure timestamps with no other content
 set +x

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -265,6 +265,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "리바우드와 그의 부족은 북쪽에 도착했다. 하지만 얼어붙은 건조 초원지대와 눈 덮인 산 사이에 도착한 것은 환영할 만한 것이 못됩니다…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -705,6 +716,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "당신의 잘 정립 된 밀수 경로가 갑자기 바빴습니다. 다른 두 부족이 나타나서 이제는 밀수꾼들 간의 경쟁이 시작되었습니다. 어느 단체가 먼저 특정 수의 상품을 밀수 할 수 있을까요?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "불의 삼지창"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "세곳의 화산 근처에 여섯곳의 아름다운 섬들이 이주자들에게 새로운 삶을 시작하도록 권유하고 있습니다. 사막과 빨리 자라는 숲이 발견되기를 기다립니다. 그러나 해군의 군사력에 의해서만 당신의 부족이 적들과 경쟁 할 수 있는 충분한 자원을 탐색 할 수 있을 것입니다."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "신비한 미로"
@@ -935,18 +958,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "크라우 섬들의 네곳의 막강한 항구는 오랫동안 상호간에 상품을 거래해왔습니다. 그들 모두는 자신들의 영역에서 생산할 수 없는 자원을 필요로 했고, 대신 그들은 생산 할수 없는 사람들에게 다른 자원을 제공했습니다. 이러한 거래를 바탕으로 네곳의 항구와 크라우 섬에 살고있는 사람들사이에 매우 우호적인 교역이 이뤄졌습니다. – 최근까지만해도 독점적인 무역을 형성하기위해 두개의 항구가 연합했을때, 다른 두 곳도 똑같이 하도록 강요했습니다. 갑자기, 항구들 사이의 첫 번째 전투가 너무 오랫동안 지속되어 온 평화로운 삶을 망치는 것은 단지 시간 문제일 것입니다…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "불의 삼지창"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "세곳의 화산 근처에 여섯곳의 아름다운 섬들이 이주자들에게 새로운 삶을 시작하도록 권유하고 있습니다. 사막과 빨리 자라는 숲이 발견되기를 기다립니다. 그러나 해군의 군사력에 의해서만 당신의 부족이 적들과 경쟁 할 수 있는 충분한 자원을 탐색 할 수 있을 것입니다."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

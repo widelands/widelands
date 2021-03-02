@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -270,6 +270,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud y su tribu han llegado al Norte. Pero su arribo entre las estepas congeladas y las montañas cubiertas de nieve no es bienvenida..."
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -710,6 +721,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Sus rutas de contrabando bien establecidas de repente se pusieron atareadas: otras dos tribus han aparecido y una nueva rivalidad entre los contrabandistas ha empezado. ¿Qué equipo será el primero para contrabandear un cierto número de mercancías?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Tridente de Fuego"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "En la vecindad de tres grandes volcanes, seis encantadoras islas invitan a los colonos a empezar una nueva vida. Desiertos y un bosque de rápido crecimiento esperan ser descubiertos. Pero solo convertirse en potencia naval permitirá a tu tribu explorar suficientes recursos para competir con sus oponentes."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "El Laberinto Místico"
@@ -940,18 +963,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Los cuatro puertos poderosos de las Islas Craw han estado comerciando sus bienes entre sí por años. Todos los recursos necesarios que no podían producir en su propio territorio y a cambio proporcionaban otros recursos a los que no podían producirlos. Gracias a estos negocios, el comercio amable era común entre los cuatro puertos y las personas que vivían en las Islas Craw - hasta hace poco, cuando dos de los puertos se unieron para formar una alianza comercial exclusiva, obligando a los otros dos a hacer lo mismo. De repente, parece sólo cuestión de tiempo antes de que las primeras luchas entre los puertos rompan la vida pacífica que ha durado tanto tiempo ..."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Tridente de Fuego"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "En la vecindad de tres grandes volcanes, seis encantadoras islas invitan a los colonos a empezar una nueva vida. Desiertos y un bosque de rápido crecimiento esperan ser descubiertos. Pero solo convertirse en potencia naval permitirá a tu tribu explorar suficientes recursos para competir con sus oponentes."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

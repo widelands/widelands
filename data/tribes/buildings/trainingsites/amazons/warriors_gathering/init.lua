@@ -115,7 +115,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 9,
+   trainer_patience = 18,
 
    messages = {
       -- TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned

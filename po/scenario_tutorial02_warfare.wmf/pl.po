@@ -6,6 +6,7 @@
 # GunChleoc, 2018
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Sebastian Janus <sebek89@gmail.com>, 2015
 # tombox <wptom@wp.pl>, 2016
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2020-10-02 08:02+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 07:17+0000\n"
+"Last-Translator: Marcin S <dzidek1003@o2.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,8 +178,8 @@ msgstr "Zbuduj arenę bitewną. To duży budynek."
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using Page Up and Page Down."
-msgstr "Budowa trochę zajmie - możesz przyspieszyć grę za pomocą klawiszy Page Up i Page Down."
+"using %1$s and %2$s."
+msgstr "Budowa trochę zajmie - możesz przyspieszyć grę za pomocą klawiszy %1$s i %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"

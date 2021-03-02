@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python3
 # encoding: utf-8
 
 
@@ -60,7 +60,10 @@ def generate_translation_stats(po_dir, output_file):
         try:
             # We need shell=True, otherwise we get "No such file or directory".
             stats_output = check_output(
-                ['pocount ' + subdir + ' --csv'], stderr=subprocess.STDOUT, shell=True)
+                ['pocount ' + subdir + ' --csv'],
+                encoding='utf-8',
+                stderr=subprocess.STDOUT,
+                shell=True)
             if 'ERROR' in stats_output:
                 print('\nError running pocount:\n' + stats_output.split('\n', 0)
                       [0]) + '\nAborted creating translation statistics.'
@@ -115,15 +118,14 @@ def generate_translation_stats(po_dir, output_file):
 
     # The total goes in a [global] section and is identical for all locales
     result = '[global]\n'
-    result = result + 'total=' + \
-        str(locale_stats[locale_stats.keys()[0]].total) + '\n\n'
-
+    result = '{}total={}\n\n'.format(
+        result, list(locale_stats.values())[0].total)
     # Write translation stats for all locales
-    for locale in sorted(locale_stats.keys(), key=str.lower):
+    for locale in (sorted(list(locale_stats.keys()), key=str.lower)):
         entry = locale_stats[locale]
         print(locale + '\t' + str(entry.total) + '\t' + str(entry.translated))
-        result = result + '[' + locale + ']\n'
-        result = result + 'translated=' + str(entry.translated) + '\n\n'
+        result = '{}[{}]\n'.format(result, locale)
+        result = '{}translated={}\n\n'.format(result, str(entry.translated))
 
     with open(output_file, 'w+') as destination:
         destination.write(result[:-1])  # Strip the final \n
@@ -148,4 +150,7 @@ def main():
 
 
 if __name__ == '__main__':
+    if sys.version_info[0] < 3:
+        sys.exit('At least python version 3 is needed.')
+
     sys.exit(main())
