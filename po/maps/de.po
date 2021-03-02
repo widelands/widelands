@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-24 10:32+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 14:01+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -271,6 +271,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud und sein Stamm sind im Norden angekommen. Ihre Ankunft zwischen den gefrorenen Steppen und den schneebedeckten Bergen ist jedoch alles andere als erwünscht …"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr "Freunde in Not"
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr "Reebaud und sein Stamm leben glücklich im Norden. In der Zwischenzeit waren die Lande die sie zurückließen alles andere als friedlich, und ein alter Freund braucht dringend ihre Hilfe…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -711,6 +722,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Deine gut funktionierenden Schmuggelrouten sind plötzlich gestört: Zwei weitere Stämme sind aufgetaucht und machen dir die Macht streitig. Welches Team wird zuerst eine bestimmte Anzahl an Waren schmuggeln können?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Dreizack des Feuers"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "In der Umgebung von drei großen Vulkanen liegen sechs liebliche Inseln, die einen jeden Siedler dazu einzuladen scheinen, hier ein neues Leben zu beginnen. Wüsten und schnell wachsende Wälder warten darauf, entdeckt zu werden. Doch nur durch den Aufbau einer Seemacht wird es deinem Stamm möglich sein, genug Rohstoffe zu erhaschen, um mit deinen Mitstreitern mithalten zu können."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Geheimnisvolles Labyrinth"
@@ -941,18 +964,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Die vier mächtigen Häfen der Krallen-Inseln haben seit Ewigkeiten untereinander Handel getrieben. Ein jeder von ihnen brauchte Rohstoffe, die er auf seinem Gebiet nicht selbst herstellen konnte und konnte zugleich Rohstoffe bieten, die den anderen fehlten. Aufgrund dieser Handel war immer eine sehr freundliche Beziehung zwischen den Häfen und den Bewohnern der Krallen-Inseln üblich – bis sich vor Kurzem zwei der Häfen zu einer exklusiven Handelsallianz zusammenschlossen, was die beiden anderen zwang, es ihnen gleichzutun. Plötzlich scheint es nur noch eine Sache der Zeit zu sein, bis die ersten Kämpfe zwischen den Häfen das friedliche Leben zersört, das so lange auf den Inseln vorgeherrscht hatte …"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Dreizack des Feuers"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "In der Umgebung von drei großen Vulkanen liegen sechs liebliche Inseln, die einen jeden Siedler dazu einzuladen scheinen, hier ein neues Leben zu beginnen. Wüsten und schnell wachsende Wälder warten darauf, entdeckt zu werden. Doch nur durch den Aufbau einer Seemacht wird es deinem Stamm möglich sein, genug Rohstoffe zu erhaschen, um mit deinen Mitstreitern mithalten zu können."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-24 20:21+0000\n"
-"Last-Translator: Martin Eriksson <nils.martin.andreas@gmail.com>\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,6 +264,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud och hans stam har anlänt till Norden. Men deras ankomst mellan den frusna tundran och de snötäckta bergen är allt annat än välkommen.."
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -704,6 +715,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Dina väl inarbetade smugglingsrutter blir plötsligt överbelastade: två andra stammar har dykt upp och nu har det blivit rivalitet mellan smugglarna. Vilket lag kommer att bli det första att smuggla en viss mängd varor?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Treudd i lågor"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "I närheten av tre stora vulkaner inbjuder sex underbara öar nybyggare att starta ett nytt liv. Öknar och en snabbt växande skog väntar på att bli upptäckta. Men bara genom att bli mäktiga sjöfarare kan din stam få möjlighet att leta upp tillräckligt med resurser för att kunna konkurrera mot motståndarna."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mystisk labyrint"
@@ -934,18 +957,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Craw-öarnas fyra mäktiga hamnar har handlat med gods sinsemellan under lång tid. De behöver alla resurser som de inte själva kan producera inom sitt eget territorium. I utbyte mot detta har de tillhandahållit andra resurser till dem som inte kan producera dessa. Baserat på handeln var ett väldigt vänligt varuutbyte det normala mellan de fyra hamnarna och folket som levde på Craw-öarna. Detta fram till nyligen, då två av hamnarna slog sig samman i en exklusiv handelsallians och tvingade de andra två att göra detsamma. Plötsligt verkar det som det bara är en fråga om tid innan de första striderna mellan hamnarna kommer att krossa det fridfulla livet som har varat så länge..."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Treudd i lågor"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "I närheten av tre stora vulkaner inbjuder sex underbara öar nybyggare att starta ett nytt liv. Öknar och en snabbt växande skog väntar på att bli upptäckta. Men bara genom att bli mäktiga sjöfarare kan din stam få möjlighet att leta upp tillräckligt med resurser för att kunna konkurrera mot motståndarna."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

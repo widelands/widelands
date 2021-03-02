@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 16:42+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:33+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -126,8 +126,9 @@ msgstr " --metaserverport=[...]\n                      Número del port del meta
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --addon_server=[...]\n"
-"                      Connect to a different github repository                      and branch from the add-ons manager."
-msgstr " --addon_server=[...]\n                      Connecta amb un dipòsit GitHub diferent                      i crea una branca del gestor de complements."
+"                      Connect to a different github repository\n"
+"                      and branch from the add-ons manager."
+msgstr ""
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
@@ -166,19 +167,27 @@ msgstr " --auto_speed         Aquesta opció permet ajustar la\n                
 
 #: ../../src/wlapplication_messages.cc:116
 msgid ""
+" --new_game_from_template=FILENAME\n"
+"                      Directly create a new singleplayer game\n"
+"                      configured in the given file. An example can\n"
+"                      be found in `data/templates/new_game_template`."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:122
+msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=ARXMAPA  Comença directament el mapa \n                      ARXMAPA com a mapa de la partida."
 
-#: ../../src/wlapplication_messages.cc:119
+#: ../../src/wlapplication_messages.cc:125
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=NOMPARTIDA  Directament carrega la partida guardada amb el nom «NOMPARTIDA»."
 
-#: ../../src/wlapplication_messages.cc:120
+#: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
 msgstr " --replay=NOMFITXER    Carrega i repeteix la partida NOMFITXER."
 
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:127
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -188,7 +197,7 @@ msgstr " --script=ARXSCRIPT    Executa l'script Lua donat\n                     
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:133
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -196,7 +205,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      Habilita/deshabilita l'entrada automàtica\n                      al mode de construcció de camins\n                      quan es planta una bandera."
 
-#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:139
 msgid "Graphic options:"
 msgstr "Opcions gràfiques:"
 
@@ -204,22 +213,22 @@ msgstr "Opcions gràfiques:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      Empra o no la pantalla sencera per\n                      al joc."
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:148
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[…]         Amplada de la finestra en píxels."
 
-#: ../../src/wlapplication_messages.cc:143
+#: ../../src/wlapplication_messages.cc:149
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[…]         Alçada de la finestra en píxels."
 
-#: ../../src/wlapplication_messages.cc:144
+#: ../../src/wlapplication_messages.cc:150
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     Nombre màxim de fotogrames per segon."
 
@@ -227,17 +236,17 @@ msgstr " --maxfps=[5 ...]     Nombre màxim de fotogrames per segon."
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:155
 msgid "Options for the internal window manager:"
 msgstr "Opcions per al gestor de finestres intern:"
 
-#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:156
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr "--animate_map_panning=[yes|no]\nAnima els moviments automàtics del mapa."
 
-#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:159
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -249,7 +258,7 @@ msgstr " --border_snap_distance=[0 …]\n                      Acobla la finestr
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:161
+#: ../../src/wlapplication_messages.cc:167
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -257,7 +266,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Habilita/deshabilita l'acoblament a la vora\n                      de la pantalla quan la vora d'alguna finestra\n                      estigui a prop de la vora de la pantalla."
 
-#: ../../src/wlapplication_messages.cc:166
+#: ../../src/wlapplication_messages.cc:172
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -265,7 +274,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 …]\n                      Moure una finestra cap a la vora del plafó\n                      quan la vora i el plafó estigui a menys\n                      distància de la definida per aquesta opció."
 
-#: ../../src/wlapplication_messages.cc:171
+#: ../../src/wlapplication_messages.cc:177
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -273,15 +282,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Habilita/deshabilita l'acoblament de\n                      finestres al plafó quan la finestra i el\n                      plafó estiguin prou a prop o se superposin."
 
-#: ../../src/wlapplication_messages.cc:177
+#: ../../src/wlapplication_messages.cc:183
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Habilita els missatges de\n                      depuració descriptius"
 
-#: ../../src/wlapplication_messages.cc:178
+#: ../../src/wlapplication_messages.cc:184
 msgid " --help               Show this help"
 msgstr " --help               Mostra aquesta ajuda"
 
-#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:186
 msgid ""
 " <save.wgf>/<replay.wrpl> \n"
 "                      Directly loads the given savegame or replay. Useful for\n"
@@ -289,7 +298,7 @@ msgid ""
 "                      other options. Also see --loadgame/--replay."
 msgstr " <save.wgf>/<replay.wrpl> \n                      Carrega la desada o repetició. Útil per l'associació\n                      de fitxers amb extensions .wgf/.wrpl. No funciona amb\n                      altres opcions. Vegeu també --loadgame/--replay."
 
-#: ../../src/wlapplication_messages.cc:186
+#: ../../src/wlapplication_messages.cc:192
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

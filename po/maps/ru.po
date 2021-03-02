@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -268,6 +268,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Ребауд и его племя прибыли на Север. Но их прибывание между замерзшими степями и заснеженными горами не приветствуется ..."
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -708,6 +719,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Ваши проверенные контрабандные маршруты перекрыты: появились два других племени, что привело к соперничеству между контрабандистами. Какая команда первой переправит определенное количество товаров?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Огненный трезубец"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Шесть прекрасных островов, расположенные вблизи от трех вулканов,  привлекают поселенцев, чтобы начать новую жизнь. Вам откроются пустыни и быстрорастущие леса. Но победить в конкурентной борьбе сможет только то племя, которое утвердит свое господство на море."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Таинственный лабиринт"
@@ -938,18 +961,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Четыре могучих гавани островов Кроу веками торговали своими товарами друг с другом. Все они нуждаются в ресурсах, которые не могут добыть на своей территории и обменивают свои ресурсы на те, в которых нуждаются. Таким образом, обитателей островов Кроу и их четыре гавани связывала дружественная и взаимовыгодная торговля. Однако недавно, две гавани объединились, и сформировали особый торговый союз, вынуждая двух других сделать то же самое. Похоже, начало войны между портами — это вопрос ближайшего времени, и мирная жизнь, которая длилась так долго, развеется как дым..."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Огненный трезубец"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Шесть прекрасных островов, расположенные вблизи от трех вулканов,  привлекают поселенцев, чтобы начать новую жизнь. Вам откроются пустыни и быстрорастущие леса. Но победить в конкурентной борьбе сможет только то племя, которое утвердит свое господство на море."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
