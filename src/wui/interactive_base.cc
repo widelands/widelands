@@ -281,7 +281,7 @@ void InteractiveBase::rebuild_mapview_menu() {
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
+	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut));
 

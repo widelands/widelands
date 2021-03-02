@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-18 16:22+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 12:34+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Künstelk Schatten"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Söök ollde Künstelk Schatten. Wenn all funnen sünd, winnt de Speler of Klottje dat hett de meeste dat Speel."
+msgstr "Söök olle Künstelk Schatten. Wenn all funnen sünd, winnt de Speler of Klottje, wat de meesten hett, dat Speel."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
@@ -46,7 +46,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr "Deese Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde schriev eenen Fehler-Bericht unner %s un geev diene Versioon vun Widelands un de Naam vun de Kaart, dat de laden wullst, an."
+msgstr "Deese Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde schriev eenen Fehler-Bericht unner %s un geev diene Versioon vun Widelands un de Naam vun de Kaart, wat du laden wullst, an."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -56,46 +56,58 @@ msgstr "Künstelk Schatten funnen"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "Your team found a new artifact."
-msgstr "Dien Klottje hett een’n nejen Künstelk Schatten funnen."
+msgstr "Dien Klottje hett een nejen Künstelk Schatten funnen."
+
+#: ../../data/scripting/win_conditions/artifacts.lua:85
+msgid "You found a new artifact."
+msgstr "Du hest een nejen Künstelk Schatten funnen."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:88
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "Artifact Lost"
 msgstr "Künstelk Schatten verloren"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr "Een Künstelk Schatten, dat to diene Klottje hööde, is vun Feinden klaut worden."
+msgstr "Een vun dien Klottje hör Künstelk Schatten is vun Feinden klaut worden."
+
+#: ../../data/scripting/win_conditions/artifacts.lua:91
+msgid "One of your artifacts was stolen by an enemy."
+msgstr "Een vun dien Künstelk Schatten is vun Feinden klaut worden."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:93
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Artifact Conquered"
 msgstr "Künstelk Schatten innohmen"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:94
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "Your team stole an artifact from an enemy."
 msgstr "Dien Klottje hett een Künstelk Schatten vun Feinden klaut."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:177
+#: ../../data/scripting/win_conditions/artifacts.lua:97
+msgid "You stole an artifact from an enemy."
+msgstr "Du hest een Künstelk Schatten vun Feinden klaut."
+
+#: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
 msgstr "Översicht:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
-#: ../../data/scripting/win_conditions/artifacts.lua:193
+#: ../../data/scripting/win_conditions/artifacts.lua:183
+#: ../../data/scripting/win_conditions/artifacts.lua:196
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] "%i künstelker Schatt"
-msgstr[1] "%i künstelke Schatten"
+msgstr[0] "%i künstelk Schatt"
+msgstr[1] "%i künstelk Schatten"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:185
 msgid "%1$s owns %2$s."
 msgstr "%1$s hett %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:195
+#: ../../data/scripting/win_conditions/artifacts.lua:198
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Klottje %1$i (%2$s) hett %3$s."
 
@@ -113,29 +125,29 @@ msgstr "Du kriggst Punkten för dürabele Waren in diene Kraamhusen. De Speler m
 msgid "Points"
 msgstr "Punkten"
 
-#: ../../data/scripting/win_conditions/collectors.lua:154
+#: ../../data/scripting/win_conditions/collectors.lua:65
 #, lua-format
 msgid "Status for %s"
 msgstr "Tostand för %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:167
+#: ../../data/scripting/win_conditions/collectors.lua:77
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) × %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:81
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "All tosamen: %i Punkt"
 msgstr[1] "All tosamen: %i Punkten"
 
-#: ../../data/scripting/win_conditions/collectors.lua:194
+#: ../../data/scripting/win_conditions/collectors.lua:104
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Tostand för Klottje %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:196
+#: ../../data/scripting/win_conditions/collectors.lua:106
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

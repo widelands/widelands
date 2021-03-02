@@ -4,14 +4,15 @@
 # 
 # Translators:
 # tombox <wptom@wp.pl>, 2018
+# Marcin S <dzidek1003@o2.pl>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: tombox <wptom@wp.pl>, 2018\n"
+"Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -313,7 +314,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:228
 msgid "Victory"
-msgstr ""
+msgstr "Zwycięstwo"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:229
 msgid ""
@@ -1334,6 +1335,11 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr "Browar"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
@@ -1416,3 +1422,32 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
+msgctxt "empire_building"
+msgid "Mill"
+msgstr "Młyn"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
+msgctxt "empire_building"
+msgid "Temple of Vesta"
+msgstr "Świątynia Vesty"
+
+#. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
+msgctxt "empire_building"
+msgid "No soldier to train!"
+msgstr "Brak żołnierzy do treningu!"
+
+#. TRANSLATORS: Empire training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
+msgctxt "empire_building"
+msgid "No soldier found for this training level!"
+msgstr "Nie znaleziono żołnierzy dla tego poziomu treningu!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
+msgctxt "empire_building"
+msgid "Well"
+msgstr "Studnia"

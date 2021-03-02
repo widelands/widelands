@@ -272,9 +272,9 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Gold, part 1
-                  pgettext("amazons_ware", "Gold is the most valuable of all metals,"),
+                  pgettext("amazons_ware", "Gold is the most valuable of all metals."),
                   -- TRANSLATORS: Helptext for an amazon ware: Gold, part 2
-                  pgettext("amazons_ware", "and it is smelted out of gold dust. It is produced by the furnace and used by the dressmaker and for special buildings.")
+                  pgettext("amazons_ware", "It is smelted out of gold dust by the furnace and used by the dressmaker and for special buildings.")
                }
             }
          },
@@ -285,7 +285,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Charcoal, part 1
-                  pgettext("amazons_ware", "Charcoal produced out of logs by a charcoal burner. The Amazons use charcoal for drying their food and for smelting gold.")
+                  pgettext("amazons_ware", "Charcoal is produced out of logs by a charcoal burner. The Amazons use charcoal for drying their food and for smelting gold.")
                }
             }
          },
@@ -1438,7 +1438,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Tapir Farm
             purpose = pgettext("amazons_building", "Breeds tapirs for adding them to the transportation system."),
             -- TRANSLATORS: Note helptext for an amazon production site: Tapir Farm
-            note = pgettext ("amazons_building", "Tapirs help to prevent trafic jams on highly used roads.")
+            note = pgettext ("amazons_building", "Tapirs help to prevent traffic jams on highly used roads.")
          }
       },
       {
@@ -1505,7 +1505,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
             purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Patrol Post
-            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send her away.")
          }
       },
       {
@@ -1523,7 +1523,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Warriors’ Dwelling
             purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Warriors’ Dwelling
-            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send her away.")
          }
       },
       {
@@ -1532,7 +1532,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Tower
             purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Tower
-            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send her away.")
          }
       },
       {
@@ -1541,7 +1541,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Observation Tower
             purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Observation Tower
-            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send her away.")
          }
       },
       {
@@ -1550,7 +1550,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Fortress
             purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Fortress
-            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send her away.")
          }
       },
       {
@@ -1559,7 +1559,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Fortification
             purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Fortification
-            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send her away.")
          }
       },
 

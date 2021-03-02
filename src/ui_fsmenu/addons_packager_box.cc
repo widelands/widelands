@@ -248,7 +248,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			     name.compare(name.size() - kWidelandsMapExtension.size(),
 			                  kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0)) {
 				main_menu_.show_messagebox(
-				   _("Invalid Name"), _("This name is invalid, please choose a different name."));
+				   _("Invalid Name"), _("This name is invalid. Please choose a different name."));
 				continue;
 			}
 
