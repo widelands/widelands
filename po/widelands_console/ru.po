@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-01-15 09:56+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -132,7 +132,8 @@ msgstr " --metaserverport=[...]\n                      Номер порта у 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --addon_server=[...]\n"
-"                      Connect to a different github repository                      and branch from the add-ons manager."
+"                      Connect to a different github repository\n"
+"                      and branch from the add-ons manager."
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:97
@@ -172,19 +173,27 @@ msgstr " --auto_speed         Только для мультиплеера, по
 
 #: ../../src/wlapplication_messages.cc:116
 msgid ""
+" --new_game_from_template=FILENAME\n"
+"                      Directly create a new singleplayer game\n"
+"                      configured in the given file. An example can\n"
+"                      be found in `data/templates/new_game_template`."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:122
+msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=FILENAME  Запускает карту FILENAME в качестве карты\nсценария."
 
-#: ../../src/wlapplication_messages.cc:119
+#: ../../src/wlapplication_messages.cc:125
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=FILENAME  загружает сохранение игры FILENAME."
 
-#: ../../src/wlapplication_messages.cc:120
+#: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:127
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -194,7 +203,7 @@ msgstr " --script=FILENAME    Запускает данный Lua-скрипт �
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:133
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -202,7 +211,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\nИспользуется для входа в режим строительства дороги\nавтоматически, сразу после размещения флага,\nне связанного с  дорогами."
 
-#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:139
 msgid "Graphic options:"
 msgstr "Настройки графики:"
 
@@ -210,22 +219,22 @@ msgstr "Настройки графики:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\nИспользуется для того чтобы запустить игровое окно\nво весь экран."
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:148
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Ширина окна в пикселях."
 
-#: ../../src/wlapplication_messages.cc:143
+#: ../../src/wlapplication_messages.cc:149
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Высота окна в пикселях."
 
-#: ../../src/wlapplication_messages.cc:144
+#: ../../src/wlapplication_messages.cc:150
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     Максимально кадров в секунду \"FPS\" в игре."
 
@@ -233,17 +242,17 @@ msgstr " --maxfps=[5 ...]     Максимально кадров в секун�
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:155
 msgid "Options for the internal window manager:"
 msgstr "Настройки внутреннего оконного менеджера:"
 
-#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:156
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr " --animate_map_panning=[yes|no]\n                      Следует ли анимировать автоматические движения карты."
 
-#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:159
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -255,7 +264,7 @@ msgstr " --border_snap_distance=[0 ...]\nПрилепить окно к краю
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:161
+#: ../../src/wlapplication_messages.cc:167
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -263,7 +272,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\nУбирает границу окна обращенную\nк краю экрана, когда край окна\nнаходится рядом с краем экрана."
 
-#: ../../src/wlapplication_messages.cc:166
+#: ../../src/wlapplication_messages.cc:172
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -271,7 +280,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\nПеремещает окно к краю панели,\nкогда край окна оказывается на\nуказанном расстоянии от края панели."
 
-#: ../../src/wlapplication_messages.cc:171
+#: ../../src/wlapplication_messages.cc:177
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -279,15 +288,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\nПеремещает окно к краю панели,\nтолько если окно перекрывает панель."
 
-#: ../../src/wlapplication_messages.cc:177
+#: ../../src/wlapplication_messages.cc:183
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Включить подробные сообщения отладки"
 
-#: ../../src/wlapplication_messages.cc:178
+#: ../../src/wlapplication_messages.cc:184
 msgid " --help               Show this help"
 msgstr " --help               Показать справку"
 
-#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:186
 msgid ""
 " <save.wgf>/<replay.wrpl> \n"
 "                      Directly loads the given savegame or replay. Useful for\n"
@@ -295,7 +304,7 @@ msgid ""
 "                      other options. Also see --loadgame/--replay."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:186
+#: ../../src/wlapplication_messages.cc:192
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

@@ -6,16 +6,16 @@
 # GunChleoc, 2016
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2020-09-04 08:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 14:52+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -351,7 +351,7 @@ msgid "Dead Tree"
 msgstr "Toter Baum"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:5
-msgid "Fallen Tree"
+msgid "Felled Tree"
 msgstr "Gefällter Baum"
 
 #: ../../data/world/immovables/trees/larch/init.lua:14

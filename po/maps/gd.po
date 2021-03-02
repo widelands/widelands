@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -264,6 +264,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Ràinig Reebaud ’s a threubh an taobh tuath. Co-dhiù, chan eil fàilte bhlàth romhpa air an steip reòite is na monaidhean sneachdach…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -704,6 +715,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Dh’fhàs na slighean cùiltearachd stèidhichte agad trang gu h-obann: nochd dà threubh eile ’s tha còmhstri am measg an luchd-cùiltearachd air a tòiseachadh. Cò an sgioba a mhalairteas uiread de bhathar ro chàch?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Muirgheadh an teine"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Tha sia eileanan àlainn faisg air trì beanntan-teine mòra a’ tàladh tuinichean gus beatha ùr a thòiseachadh. Tha fàsaichean ’s coilltean torrach a’ feitheamh orra. Co-dhiù no co-dheth, cha chruinnich do threubh stòrasan gu leòr gus seasamh an aghaidh càich mus fhàs ur cabhlach làidir air na cuantan."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Cuartan rùnach"
@@ -934,18 +957,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Bhiodh na ceithir puirt mòra aig Eileanan a’ Ghiabain a’ malart le chèile o chionn linntean. Bhiodh iad uile feumach air stòrasan nach fhaigheadh iad air an ranntair aca fhèin ’s thugadh iad stòrasan dhan fheadhainn nach b’ urrainn an dèanamh. Bhiodh malart càirdeil glè chumanta eadar na sluaghan a tha beò air Eileanan a’ Ghiabain – ach dh’aontaich dà phort dhiubh ri caidreachas malairt às-dùnach o chionn goirid a dh’èignich gun dèanadh an dà phort eile caidreachas mar an ceudna. Gu h-obann, tha coltas nach fhada gus an tòisich sabaid eadar na puirt a mhilleas am beatha sìtheil a mhair cho fada…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Muirgheadh an teine"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Tha sia eileanan àlainn faisg air trì beanntan-teine mòra a’ tàladh tuinichean gus beatha ùr a thòiseachadh. Tha fàsaichean ’s coilltean torrach a’ feitheamh orra. Co-dhiù no co-dheth, cha chruinnich do threubh stòrasan gu leòr gus seasamh an aghaidh càich mus fhàs ur cabhlach làidir air na cuantan."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

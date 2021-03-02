@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -261,9 +261,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
-msgid ""
-"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
-"quickly."
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
@@ -426,8 +424,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "Открой это. Вы можете получить к нему доступ через кнопку в нижней части экрана."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "Кроме того, вы можете получить к нему прямой доступ с помощью клавиши «F1»."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -577,16 +576,16 @@ msgstr "Прекрасно. Наши таверны уже созданы и с�
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "В настоящее время все шахты снабжаются пайками. Если вы хотите установить приоритеты для отдельной шахты, вам просто нужно открыть ее окно. На вкладке \"Товары\" после наименования Товара можно видеть \"светофоры\"."
+"tab, behind every ware, you can see a slider."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "Щелчком по красной точке (низкий приоритет), соответствующий товар будет доставляется реже. Зеленый означает, что столько товаров, сколько это возможно будет доставлено в это здание, возможно для того, что она производит что-то важное."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""

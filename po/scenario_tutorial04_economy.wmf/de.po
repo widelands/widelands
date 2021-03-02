@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-24 10:45+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 10:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -262,10 +262,8 @@ msgstr "Wähle danach „Lager“."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
-msgid ""
-"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
-"quickly."
-msgstr "Du kannst auch das Tastenkürzel „%s“ (wie „Inventar“) verwenden, um das Fenster schnell zu erreichen."
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
+msgstr "Du kannst auch das Tastenkürzel „%s“ verwenden, um das Fenster schnell zu erreichen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -427,8 +425,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "Öffne es. Du kannst es über die Schaltfläche unten am Bildschirm aufrufen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "Alternativ kannst du es auch direkt mit der „F1“-Taste öffnen."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr "Alternativ kannst du es auch direkt mit der „%s“-Taste öffnen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -578,16 +577,16 @@ msgstr "Großartig. Unsere Tavernen sind jetzt fertig und versorgen uns mit Rati
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "Im Moment werden alle Minen mit Rationen beliefert. Wenn du eine bestimmte Mine priorisieren willst, musst du einfach nur ihr Fenster öffnen. Im Warenreiter siehst du hinter jeder Ware eine „Ampel“."
+"tab, behind every ware, you can see a slider."
+msgstr "Im Moment werden alle Minen mit Rationen beliefert. Wenn du eine bestimmte Mine priorisieren willst, musst du einfach nur ihr Fenster öffnen. Im Warenreiter siehst du hinter jeder Ware einen Schieberegler."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "Wenn du auf den roten Punkt (niedrige Priorität) klickst, wird die entsprechende Ware weniger häufig dorthin gebracht. Grün heißt, dass so viele Waren wie möglich zu diesem Gebäude gebracht werden sollen, vielleicht weil es etwas wichtiges produziert."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr "Wenn du den Schieberegler in die blaue Region (niedrige Priorität) nach links schiebst, wird die entsprechende Ware weniger häufig dorthin gebracht. Rot (rechte Seite) heißt, dass so viele Waren wie möglich zu diesem Gebäude gebracht werden sollen, vielleicht weil es etwas wichtiges produziert."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""

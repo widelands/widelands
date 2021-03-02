@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-21 21:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -274,6 +274,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud et sa tribu sont arrivé dans le Nord. Mais leur arrivée entre les steppes glacées et les montagnes couvertes de neiges est moins que bienvenue..."
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -714,6 +725,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Vos itinéraires de contrebande bien établies ont soudainement été occupés : deux autres tribus ont fait leur apparition et maintenant une rivalité entre trafiquants a commencé. Quelle équipe sera la première à introduire clandestinement un certain nombre de marchandises?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Trident de Feu"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Dans les parages de trois grands volcans, six belles îles invitent les colons à commencer une nouvelle vie. Des déserts et une forêt croissant rapidement attendent d'être découverts. Mais il faudra que votre tribu devienne une grande puissance navale afin d'être en mesure d'explorer suffisamment de ressources afin de  rivaliser avec ses adversaires."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Le Labyrinthe Mystique"
@@ -944,18 +967,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "Les quatre puissants ports des îles Craw se sont échangés leurs biens durant des siècles. Chacun d'entre eux avait besoin de ressources qu'ils ne pouvaient produire sur leur territoire et fournissaient des ressources que les autres ne pouvaient produire en échange. Sur la base de ces échanges un commerce très amical et commun aux quatre ports et les personnes vivant sur ​​les îles Craw – jusqu'à ce que récemment deux des ports concluent une alliance de commerce exclusif, ce qui obligea les deux autres à faire de même. Tout à coup, il semble que cela ne soit qu'une plus qu'une question de temps pour que les premiers combats entre les ports ne perturbent la vie paisible qui avait duré si longtemps..."
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Trident de Feu"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Dans les parages de trois grands volcans, six belles îles invitent les colons à commencer une nouvelle vie. Des déserts et une forêt croissant rapidement attendent d'être découverts. Mais il faudra que votre tribu devienne une grande puissance navale afin d'être en mesure d'explorer suffisamment de ressources afin de  rivaliser avec ses adversaires."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-24 15:25+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-02 12:22+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,30 +56,42 @@ msgstr "S'ha trobat un artefacte"
 msgid "Your team found a new artifact."
 msgstr "El vostre equip ha trobat un nou artefacte."
 
+#: ../../data/scripting/win_conditions/artifacts.lua:85
+msgid "You found a new artifact."
+msgstr ""
+
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:88
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "Artifact Lost"
 msgstr "S'ha perdut un artefacte"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Els enemics han robat un dels artefactes del vostre equip."
 
+#: ../../data/scripting/win_conditions/artifacts.lua:91
+msgid "One of your artifacts was stolen by an enemy."
+msgstr ""
+
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:93
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Artifact Conquered"
 msgstr "Artefacte conquerit"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:94
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "Your team stole an artifact from an enemy."
 msgstr "El vostre equip ha robat un artefacte a l'enemic."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:177
+#: ../../data/scripting/win_conditions/artifacts.lua:97
+msgid "You stole an artifact from an enemy."
+msgstr ""
+
+#: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
 msgstr "Resum:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
-#: ../../data/scripting/win_conditions/artifacts.lua:193
+#: ../../data/scripting/win_conditions/artifacts.lua:183
+#: ../../data/scripting/win_conditions/artifacts.lua:196
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -87,13 +99,13 @@ msgstr[0] "%i artefacte"
 msgstr[1] "%i artefactes"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:185
 msgid "%1$s owns %2$s."
 msgstr "%1$s té %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:195
+#: ../../data/scripting/win_conditions/artifacts.lua:198
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "L'equip %1$i (%2$s) té %3$s."
 
@@ -111,29 +123,29 @@ msgstr "Aconseguireu punts per béns valuosos en els teus magatzems. Guanyarà e
 msgid "Points"
 msgstr "Punts"
 
-#: ../../data/scripting/win_conditions/collectors.lua:154
+#: ../../data/scripting/win_conditions/collectors.lua:65
 #, lua-format
 msgid "Status for %s"
 msgstr "Estat del %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:167
+#: ../../data/scripting/win_conditions/collectors.lua:77
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s: %2$i punts/unitat x %3$i unitats = %4$i punts"
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:81
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Total: %i punt"
 msgstr[1] "Total: %i punts"
 
-#: ../../data/scripting/win_conditions/collectors.lua:194
+#: ../../data/scripting/win_conditions/collectors.lua:104
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Estat de l'equip %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:196
+#: ../../data/scripting/win_conditions/collectors.lua:106
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

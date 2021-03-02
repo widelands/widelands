@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2020
+# Benedikt Straub <benedikt-straub@web.de>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2020\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -172,8 +172,8 @@ msgid "20 × Iron"
 msgstr "20 × Iesen"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
-msgid "30 × Gold Ore"
-msgstr "30 × Goldkluut"
+msgid "20 × Gold Ore"
+msgstr "20 × Goldkluut"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
@@ -1088,3 +1088,9 @@ msgid ""
 " tools."
 msgstr ""
 "Brengt diene Lüü un Soldaten unner un verwahrt diene Waren un anner Kraam."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
+msgctxt "frisians_building"
+msgid "Empire Warehouse"
+msgstr "Rieks-Kraamhuus"

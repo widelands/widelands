@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -256,9 +256,7 @@ msgstr "Tagh “An stòras” an uairsin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
-msgid ""
-"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
-"quickly."
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
@@ -421,8 +419,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "Fosgail i. Gheibh thu greim oirre leis a’ phutan aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "Air neo inntrig gu dìreach i leis an iuchair “F1”."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -572,16 +571,16 @@ msgstr "Taghta. Tha na taighean-tàirn againn air an togail a-nis agus a’ toir
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "Tha thu a’ cur greimeagan dhan a h-uile mèinn an-dràsta. Ma tha thu airson prìomhachas a thoirt air aon dhiubh gu sònraichte, feumaidh tu an uinneag aice fhosgladh. Ann an taba a’ bhathair, an cois gach bathair, chì thu “solasan-trafaig.”"
+"tab, behind every ware, you can see a slider."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "Ma nì thu briogadh air an dotag dhearg (prìomhachas ìseal) thèid am bathar co-cheangailte rithe a lìbhrigeadh as ainneimhe. Is ciall dha dh’uaine gun dèid na ghabhas dhen bhathar a lìbhrigeadh dhan togalach ud, ’s dòcha air sgàth ’s gun dèan e rudeigin cudromach."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
