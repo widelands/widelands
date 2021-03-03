@@ -2,8 +2,8 @@ name: Translations Update
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 3:00 a.m.
-    - cron: '0 3 * * *'
+    # Daily at 2:00 a.m.
+    - cron: '0 2 * * *'
 jobs:
   update:
     if: github.repository == 'widelands/widelands'
@@ -23,4 +23,4 @@ jobs:
         git config --global user.name "The Widelands Translations Bot"
         git config --global user.email "bunnybot@widelands.org"
         ./utils/merge_and_push_translations.sh
-        git push https://bunnybot:${{ secrets.GITHUB_TOKEN }}@github.com/widelands/widelands.git master
+        git push https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/widelands/widelands.git master
