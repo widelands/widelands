@@ -1078,7 +1078,8 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 		inform_about_restart(remote.descname());
 		break;
 	case AddOns::AddOnCategory::kTheme: {
-		WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
+		WLApplication::update_ui_theme(
+		   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
 		get_topmost_forefather().template_directory_changed();
 		break;
 	}
@@ -1136,7 +1137,8 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 				break;
 			case AddOns::AddOnCategory::kTheme:
 				if (template_dir() == (kAddOnDir + '/' + remote.internal_name + '/')) {
-					WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
+					WLApplication::update_ui_theme(
+					   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
 					get_topmost_forefather().template_directory_changed();
 				}
 				break;
@@ -1307,7 +1309,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 		if (it->first.internal_name == info.internal_name) {
 			AddOns::g_addons.erase(it);
 			if (info.category == AddOns::AddOnCategory::kTheme &&
-				template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
+			    template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
 				WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
@@ -1511,8 +1513,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
 					WLApplication::update_ui_theme(pair.second ?
-							WLApplication::UpdateThemeAction::kEnableArgument : WLApplication::UpdateThemeAction::kAutodetect,
-							pair.first.internal_name);
+					                                  WLApplication::UpdateThemeAction::kEnableArgument :
+					                                  WLApplication::UpdateThemeAction::kAutodetect,
+					                               pair.first.internal_name);
 					get_topmost_forefather().template_directory_changed();
 					ctrl->rebuild();
 				}
