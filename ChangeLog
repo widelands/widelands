@@ -481,7 +481,6 @@
 ### Internationalization
 
 - Fix some bugs flagged up by the translation validator
-- String fixes (#4005)
 - Ship Localization (#4040)
     - Localize shipnames
     - Shipname consistency in network games
@@ -515,7 +514,7 @@
 - Add missing textdomain calls (#4643, #4652)
 - Localize timestamps of remote add-ons (#4700)
 - Send localized cheating messages (#4462)
-- Fix Transifex String Issues (#4723, #4728)
+- Fixed string issues (#4005, #4723, #4728, #4731)
 
 
 ### Help and Documentation
@@ -723,7 +722,7 @@
     - Show messagebox to player instead of crashing
 - Get rid of code duplication in `lua_root.cc` (#4419)
 - Use `unique_ptr` for building settings (#4448)
-- Python 3 compatibility and modernizing; Ensure utils directory works with Python3 (#4546)
+- Python 3 compatibility and modernizing; Ensure utils directory works with Python3 (#4546, #4730)
 
 
 
