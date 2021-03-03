@@ -113,7 +113,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 3,
+   trainer_patience = 6,
 
    messages = {
       -- TRANSLATORS: Barbarian training site tooltip when it has no soldiers assigned

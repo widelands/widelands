@@ -9,16 +9,16 @@
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
 # Elisabeth Jäger, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-06 16:17+0000\n"
-"Last-Translator: Lennard Hofmann <lennard.hofmann@web.de>\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 10:32+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -180,8 +180,8 @@ msgstr "Baue eine Arena. Sie ist ein großes Gebäude."
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using Page Up and Page Down."
-msgstr "Da das Bauen einige Zeit in Anspruch nehmen kann, kannst du die Spielgeschwindigkeit mit BILD AUF und BILD AB verändern."
+"using %1$s and %2$s."
+msgstr "Da das Bauen einige Zeit in Anspruch nehmen kann, kannst du die Spielgeschwindigkeit mit %1$s und %2$s verändern."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
