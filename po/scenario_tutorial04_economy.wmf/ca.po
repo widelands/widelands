@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-24 15:17+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -254,10 +254,8 @@ msgstr "Després, escolliu «Estoc»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
-msgid ""
-"You can also use the hotkey ‘%s’ (as in ’inventory’) to access this window "
-"quickly."
-msgstr "També podeu usar la drecera de teclat «%s» (d'inventari) per accedir a la finestra ràpidament."
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -419,8 +417,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "Obriu-la. Podeu accedir-hi amb el botó de la part de baix de la pantalla."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "També podeu fer-ho amb la tecla «F1»."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -570,16 +569,16 @@ msgstr "Genial. Hem acabat les tavernes i ara ja subministren racions."
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "Ara mateix, totes les mines tenen racions. Si voleu prioritzar una mina concreta, només cal obrir-ne la finestra. A la pestanya de béns, darrere cada bé, podreu veure un «semàfor»."
+"tab, behind every ware, you can see a slider."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "Quan feu clic en el punt roig (prioritat baixa), el bé corresponent es destinarà aquí amb menys freqüència que a altres edificis que també necessitin aquest bé. El botó verd indica que s'hi destinin tants béns com sigui possible. Aquest botó és útil per accelerar la producció en edificis que produeixin alguna cosa important."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-02-20 18:27+0000\n"
-"PO-Revision-Date: 2021-02-14 13:50+0000\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-02-28 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -265,6 +265,17 @@ msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud en zijn stam zijn aangekomen in het Noorden. Maar hun aankomst tussen de bevroren steppen en de besneeuwde bergen is niet welkom..."
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -705,6 +716,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "Jouw goed verankerde smokkelroutes krijgen het plotseling druk: twee andere stammen zijn verschenen en er is nu rivaliteit onder smokkelaars begonnen.  Welk team zal de eerste zijn om een bepaald aantal goederen te smokkelen?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "Vuurdrietand"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "In de omgeving van drie grote vulkanen nodigen zes lieflijke eilanden kolonisten uit een nieuw leven te beginnen. Woestijnen en een snel groeiend bos wachten erop te worden ontdekt. Maar slechts door een zeemacht te worden zal jouw stam ertoe in staat zijn voldoende delfstoffen te ontdekken om met haar tegenstanders te kunnen wedijveren."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mystiek Labyrint"
@@ -935,18 +958,6 @@ msgid ""
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
 msgstr "De vier machtige havens van de Craweilanden verhandelden al eeuwenlang hun goederen met elkaar.  Elk van hen had grondstoffen nodig, die zij niet op hun eigen territorium konden maken en verschafte in ruil grondstoffen die de ander niet kon maken.  Op basis van deze handel was een zeer vriendschappelijke commercie gebruikelijk tussen de vier havens en de mensen die op de Craweilanden woonden – totdat onlangs twee van de havens zich verenigden in een exclusieve alliantie, wat de andere twee ertoe dwong hetzelfde te doen.  Plotseling lijkt het slechts een kwestie van tijd dat de eerste gevechten tussen de havens het vreedzame leven dat zolang had geduurd zullen opschudden…"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "Vuurdrietand"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "In de omgeving van drie grote vulkanen nodigen zes lieflijke eilanden kolonisten uit een nieuw leven te beginnen. Woestijnen en een snel groeiend bos wachten erop te worden ontdekt. Maar slechts door een zeemacht te worden zal jouw stam ertoe in staat zijn voldoende delfstoffen te ontdekken om met haar tegenstanders te kunnen wedijveren."
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

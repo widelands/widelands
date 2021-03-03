@@ -1,0 +1,797 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2021 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Benedikt Straub <benedikt-straub@web.de>, 2021
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nds\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:31
+msgid "Get to the North"
+msgstr "Gah na Noorden"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:33
+msgid "Go North"
+msgstr "Gah na Noorden"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:34
+msgid "Sail to the North as far as possible, as fast as you can."
+msgstr "Seil tum Noorden so wied as dat gaht, so fix as dat gaht."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:40
+msgid "Destroy Angadthur’s Palace"
+msgstr "Verneel Angadtuur sien Palast"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:42
+msgid "Destroy the Atlantean Headquarters and Build a Port"
+msgstr "Verneel dat atlantiske Raadhuus un bau eene Muu"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:43
+msgid ""
+"Build a port on the northern shore of the island. The port space is located "
+"under Angadthur’s Headquarters."
+msgstr ""
+"Bau eene Muu up de noordelken Küst vun de Insel. De Rüümte för Muden liggt "
+"unner Angadtuur sien Raadhuus."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:50
+msgid "Pay or Fight"
+msgstr "Tahlen of Kämpen"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:52
+msgid "Pay the Empire or Destroy Their Port"
+msgstr "Betahl dat Riek of verneel hör Muu"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:53
+#, lua-format
+msgid ""
+"Gather %d gold bar in your northernmost port to obtain a passage from Marcus"
+" Caius Iniucundus."
+msgid_plural ""
+"Gather %d gold bars in your northernmost port to obtain a passage from "
+"Marcus Caius Iniucundus."
+msgstr[0] ""
+"Sammel %d Stang Gold in dee noordelkste Muu, um vun Marcus Caius Injucundus "
+"eene Överfahrt to kopen."
+msgstr[1] ""
+"Sammel %d Stangen Gold in dee noordelkste Muu, um vun Marcus Caius "
+"Injucundus eene Överfahrt to kopen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:56
+msgid ""
+"Alternatively, you can destroy his port to build one of your own in it’s "
+"place."
+msgstr "Of du kannst siene Muu verneelen un daar sülvst eene bauen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:57
+msgid ""
+"All soldiers who are present on the Northern island when you embark will "
+"accompany you."
+msgstr ""
+"All Soldaten, well up de noordelk Insel sünd, wenn dju lössfahrst, gahn mit "
+"di."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:58
+msgid "You have two hours to accomplish this objective."
+msgstr "Du hest twee Stünnen, um deese Upgaav daan to kregen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:68
+msgid "Introduction"
+msgstr "Inföhren"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:69
+msgid "Welcome back!"
+msgstr "Willkomen torügg!"
+
+#. TRANSLATORS: Claus Lembeck – Introduction 1
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:71
+msgid ""
+"We have been sailing North for weeks until we reached this shore. Not one of"
+" my numerous seamaps gives me the information what lies beyond this point."
+msgstr ""
+"Wi seilen siet Weken na Noorden un sünd uplest an deeser Küst ankomen. Nich "
+"eene vun mienen völen Seekaarten wiest mi, wat achter deeser Stee liggt."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 1
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:74
+msgid ""
+"Only one thing is certain: We must find a port space on the northern coast "
+"of this land belt to launch an expedition and continue sailing North."
+msgstr ""
+"Blot een Ding is wiss: Wi mutten eene Rüümte för Muden up de noordelken Küst"
+" vun deesem Inselring finnen, um eene Söök uttostafferen un wieder na "
+"Noorden to seilen."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 1
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:77
+msgid ""
+"I want to find my old friend Reebaud as fast as I can. Every minute of "
+"idleness pains me as I imagine Atterdag gleefully trampling the green "
+"marshes of my Föhr under his dastard foot… Let’s make haste."
+msgstr ""
+"Ick will mien ollen Fründ Reebaud so fix finden as mögelk. Elkeen Menüüt in "
+"Nixdoon dood mi sehr, as ick mi vörstell, wo Atterdag bliede de grönen "
+"Marschen vun mien Föhr unner sienem mallen Foot vertrampelt … Wi mutten "
+"futtmaken."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:82
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:100
+msgid "Eight Weeks Ago"
+msgstr "Vör acht Weken"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:83
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:101
+msgid "An unfair fight"
+msgstr "Een ungerechter Kamp"
+
+#. TRANSLATORS: Claus Lembeck – Introduction 2
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
+msgid ""
+"But forgive me. I did not even introduce myself yet. I am Claus Lembeck, the"
+" knight who rules the island of Föhr… or I did until I was forced out by the"
+" conqueror."
+msgstr ""
+"Aver vergiff mi. Ick hebb mich nich maal vörstellt. Ick bün Claus Lembeck, "
+"de Ridder, well de Insel Föhr regeeert … of dat hebb ick, bit de Winner mi "
+"utdreven hett."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 2
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:88
+msgid ""
+"The island was prospering under my rule, and my subjects loved and respected"
+" me. They even built me a new castle as a gift. And then Atterdag came."
+msgstr ""
+"De Insel gung dat good as ick regeert hebb, un miene Lüü hebben mi leevt un "
+"acht. Se hebben mi sogaar as eene Gaav een nejes Slött baut. Un dann kaam "
+"Atterdag."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 3
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:94
+msgid ""
+"Atterdag! The King of the Danish Empire, and my sworn enemy. Many times did "
+"I aid the dukes of the mainland as they defended themselves against his "
+"thirst for war and conquest, and most times we fought him off. But eight "
+"weeks ago he landed with some of his allies and a large and well-trained "
+"army on my own island, Föhr, and sought to seize it."
+msgstr ""
+"Atterdag! De König vun dat Däänsk Riek, un mien sworen Feind. Mennigmaal "
+"hebb ick de Herzogen up de Höövdland bistahn, as se sik tegen sien Dörst vör"
+" Krieg un Innehmen wehrt hebben. un meestens hebben wi hüm ok manntjet. Aver"
+" vör acht Weken is he mit een paar vun sienen Fründen up miener eegen Insel."
+" Föhr, lannt, un hett versöcht, 't intonehmen."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 3
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:97
+msgid ""
+"And I must speak the bitter admission – he succeeded. The fighting lasted "
+"five and thirty days, and every morning and evening yet another ship arrived"
+" from Denmark bringing in another troop of soldiers. How could I hope to "
+"compete against such odds? In the end I had no choice but to escape with my "
+"son Henneke and a few of my closest followers while Atterdag now calls Föhr "
+"another piece of his growing empire."
+msgstr ""
+"Un leidergotts mutt ick 't togeven – dat hett he daan kregen. Dat kämpen "
+"hett fiev un dörtig Dagen düürt, un elkeen Mörgen un elkeen Avend is al weer"
+" een Schipp ut Dänemark ankomen un hett al weer een Trupp Soldaten brocht. "
+"Wo kann ick man tegen sülke Kansen bestehn? Uplest hebb ick keen anner Wahl "
+"hebbt, as mit mienem Sohn Henneke un een paar vun mien besten Fründen "
+"uttonaihen, un för Atterdag is Föhr nu noch een anner Deel vun sien wassend "
+"Riek."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 4
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:103
+msgid "But I will not accept defeat!"
+msgstr "Aver ick geev nich up!"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
+msgid "Dark Future"
+msgstr "Dunker Tokunft"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:116
+msgid "Reconquest"
+msgstr "Torüggnehmen"
+
+#. TRANSLATORS: Claus Lembeck – Introduction 5
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:109
+msgid ""
+"It is evident that alone, I cannot hope to defeat this arch-enemy. Nor would"
+" those I fought alongside many a time be able to help me, seeing that we "
+"were always hard-pressed to repel Atterdag; and this latest assault of his "
+"proved that he was never even truly trying to win until now. He was merely "
+"toying with us. No, if I am to stand a chance of winning against him I need "
+"to find a greater force to aid my cause."
+msgstr ""
+"Man sücht licht, dat ick alleen nich to hopen bruukt, deesen mallen Feind to"
+" manntjen. Un deese, well ick faaktieden holpen hebb, könen mi wiss ok nich "
+"hülpen, man dat weer alltieden bannig swaar vlr uns, hüm torüggtoslagen, un "
+"deese leste Slacht wiest, dat he bit nu nich maal im Eernst versöcht hat, to"
+" winnen. He hett blot mit uns spöölt. Nee, wenn ich eene Kans hebben will, "
+"tegen hüm to wünnen, mutt ick eene beter Fors finnen, um mi bitostahn."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 5
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:112
+msgid ""
+"And such a force it is I am seeking out now. Reebaud, the chieftain of a "
+"small but strong frisian community whom I once befriended; his haughty pride"
+" and his tremendous skill in battle are unmatched in all parts of the known "
+"world. If anyone can stand up to Atterdag, it must be him."
+msgstr ""
+"Un sülk eene Fors söök ik nu up. Reebaud, de Anföhrer vun eener lütten aver "
+"machtigen freesk Gemeend, mit well ick maal Fründe weer; sien hoogmodig "
+"Stolt un siene unbannige Künne im Kamp gifft dat in elkeen Deel vun de "
+"bekennte Welt nich noch eenmaal. Wenn elkeen tegen Atterdag stahn kann, mutt"
+" 't hüm sien."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
+msgid ""
+"When I went to ask him for his help I was met with a sore disappointment "
+"though. He and his men no longer live in Northern Frisia but have chosen to "
+"found a new settlement in the far North where no men have ever dared to "
+"settle before. The bravery for so bold an undertaking is also something I "
+"would expect from nobody but him."
+msgstr ""
+"As ick hüm för Hülp upsöken wullt, hebb ick man eenen groten Daalslag "
+"funnen. He un siene Lüü leven nich mehr in Noordfreeskland, sünnern hebben "
+"sik een nejes Dörp wied im Noorden baut, waar keen Minsk jemaals tovör sik "
+"daaltolaten waagt hett. De Kuraag för sülk een Unnernehmen kann ok nüms as "
+"hüm hebben."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
+msgid ""
+"It is a bravery we must attempt to copy, for there is but one course of "
+"action we can take. We must sail to the North and find my old friend "
+"Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
+" the evil Dane."
+msgstr ""
+"'t is eene Kuraag, wat wi versöken mutten, natomaken, denn 't gifft blot een"
+" Ding, wat wi doon könen. Wi mutten na Noorden seilen un mienen ollen Fründ "
+"Reebaud finnen, un hüm övertügen, Soldaten mit mi to schicken, um mien leves"
+" Föhr vun de mallen Dään freitomaken."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:124
+msgid "We must not fail. The future of my people depends on me."
+msgstr "Wi düren nich verseggen. De Tokunft vun mien Volk hangt vun mi of."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
+msgid "Diking"
+msgstr "Dieken"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:129
+msgid "Gaining Land"
+msgstr "Land winnen"
+
+#. TRANSLATORS: Claus Lembeck – Diker
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:131
+msgid ""
+"This island is a bit too small and cramped for my liking. There is an "
+"experienced diker among my people, and he has suggested to use some logs to "
+"construct breakwaters, which will allow us to seize some extra land from the"
+" sea. It will be a slow and expensive business, and I hope we will not stay "
+"on this island much, but at least we should consider it."
+msgstr ""
+"Deese Insel is een bietje to lütt un eng för mien Gefall. Unner mienen Lüü "
+"is een Diekbauer mit vööl Erfahrung, un he hett vörslagen, eenige "
+"Boomstammen tu bruken, um Lahnungen to bauen, wat uns verlöövt, mehr Land "
+"vun de See to winnen. Dat word langsaam gahn un düür sien, un ick hoop, dat "
+"wi nich lang up de Insel blieven mutten, aver wi sallen daar tominnst över "
+"nadenken."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:135
+msgid "Port Space Found"
+msgstr "Rüümte för Muden funnen"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
+msgid "One step closer to the North"
+msgstr "Een Stapp naher bi'm Noorden"
+
+#. TRANSLATORS: Claus Lembeck – Port Space 1
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
+msgid ""
+"My soldiers report they have found a port space! Now we need to build a port"
+" and a shipyard and start an expedition. Of course, we’ll have to build a "
+"complete seafaring economy first, with a shipyard and a weaving mill. But "
+"don’t waste too much time perfecting our economy – all that matters is that "
+"we get to the North soon."
+msgstr ""
+"Miene Soldaten mellen, dat se Rüümte för Muden funnen hebben! Nu mutten wi "
+"eene Muu un eene Warft bauen un eene Söök begünnen. Natürelk mutten wi eerst"
+" eene kumpleete Seefahrt-Wirtschaft upbauen, mit Warft un Spinnweelmöhlen. "
+"Aver bruuk nich to lang daarmit to, de Wirtschaft perfekt to maken – all wat"
+" tellt, is, dat wi fix tum Noorden komen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
+msgid "A Strange Island"
+msgstr "Eene wunnerlike Insel"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:142
+msgid "An apprehension"
+msgstr "Een Vörgeföhl"
+
+#. TRANSLATORS: Claus Lembeck – Port Space 2
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
+msgid ""
+"We have landed on a strange island. The ground is hard and black and steep, "
+"and the air smells burnt. The beach is the color of ashes, and the sand "
+"itself feels malevolent, as though a lindworm was cowering beneath it, "
+"waiting to pounce on any living creature foolish enough to come here. I can "
+"hardly put into words my feeling of apprehension. I do not know what there "
+"is to be afraid of, but we must be very cautious in any case as we cross it."
+" Hopefully, we will reach the opposite side of the island soon."
+msgstr ""
+"Wi sünd up eener wunnerliken Insel lannt. De Eer is haard un swaart un "
+"stuuv, un de Lücht rökelt verbrannt. De Strand hett de Farv vun Aske, un de "
+"Sand sülvst föhlt sik naar an, as of daar een Lindwurm unner luurt un wacht,"
+" up de eerst levig Wesen to springen, well dumm genoog is, na hier to komen."
+" Ick kann mien slimmes Vörgeföhl kuum in Woorte faten. Ick weet nich, vör "
+"wat wi Bang wesen mutten, aver wi mutten bannig good uppassen, as to de "
+"anner Sied gahn. Ick hoop, dat wi fix to de anner Küst vun de Insel komen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:154
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:275
+msgid "Strangers"
+msgstr "Frömden"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:230
+msgid "Who are they?"
+msgstr "Well sünd se?"
+
+#. TRANSLATORS: Henneke Lembeck – Strangers 1
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:151
+msgid ""
+"Our soldiers have sighted strangers. Their buildings do not look like any I "
+"have seen before. I wonder who they are."
+msgstr ""
+"Uns' Soldaten hebben Frömde to sehn kregen. Hör Husen sehn anners ut as "
+"elkeen, wat ick jemaals sehn hebb. Ick fraag mi, well se sünd."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:155
+msgid "Who are you?"
+msgstr "Well weest jo?"
+
+#. TRANSLATORS: Angadthur – Strangers 2
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:157
+msgid ""
+"Be greeted, foreigners! I am Angadthur, the King of this miraculous island, "
+"a descendant of the legendary King Ajanthul the First of Atlantis himself. "
+"Be welcome to me, if you will be our friends!"
+msgstr ""
+"Weest begrööt, Frömden! Ick bün Angadtuur, de König vun deeser fantastisken "
+"Insel, een Nafahr vun de legendäär König Ajanthul de Eerste vun Atlantis "
+"sülvst. Weest mi willkomen, wenn jo uns' Fründe wesen wullt!"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:173
+msgid "Greetings to the King!"
+msgstr "Grööt de König!"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 3
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:163
+msgid ""
+"Peace, King Angadthur! I am Claus Lembeck, and this is my son Henneke. We "
+"are searching for my old friend Reebaud, who has left our country several "
+"years ago to seek out a new home in the far North. If I may ask, have you "
+"heard of him before, and can you tell us where to find him?"
+msgstr ""
+"Free, König Angadtuur! Ick bün Claus Lembeck, un dat is mien Sohn Henneke. "
+"Wi söken na uns' ollen Fründ Reebaud, well uns' Land vör een paar Jahren "
+"verlaten hett, um eene neje Heimaad in Noorden to bauen. Wenn ick jo fragen "
+"dür, hest du al vun hüm höört, un kannst du uns seggen, waar wi hüm finnen?"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:261
+msgid "Greetings"
+msgstr "Grööt"
+
+#. TRANSLATORS: Angadthur – Strangers 4
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:169
+msgid ""
+"Of course you may ask. Ask whatever you like. Why do you ask whether you may"
+" ask?"
+msgstr ""
+"Natürelk dürst du fragen. Fraag all wat du willst. Waarum fraagst du, of du "
+"fragen dürst?"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 5
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:175
+msgid ""
+"It’s a figure of speech that is considered polite among our people, that’s "
+"all. Very well, I’ll ask properly: Do you know where we can find my friend "
+"Reebaud?"
+msgstr ""
+"Dat is eene Seggwies, wat bi uns' Lüü as höflich ansehn word, mehr nich. "
+"Also good, ick fraag nu recht: Weetst du, waar wi mien Fründ Reebaud finnen "
+"könen?"
+
+#. TRANSLATORS: Angadthur – Strangers 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:181
+msgid ""
+"I am sorry to disappoint you, Sir Lembeck, but I have never heard this name "
+"before and can therefore give you no news of him. As for your intent of "
+"travelling to the North – I am afraid there is but one suitable location for"
+" a port on this island other than the one where you did land, and it is "
+"located directly under my palace."
+msgstr ""
+"'t dood mi Leid, dir deese Antwoord to geven, Heer Lembeck, aber ick heeb "
+"deesen Naam nienich tovör höört un kann di nix vun hüm seggen. Un wat dien "
+"Vörhaven, na Noorden to gahn, anbelangt – ick fürcht mi, 't gifft blot eene "
+"Stee för eene Muu up deeser Insel buten de eene, waar du ankomen büst, un "
+"deese Stee liggt stracks unner mien Palast."
+
+#. TRANSLATORS: Angadthur – Strangers 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:184
+msgid ""
+"As it so happens, my soldiers are bored with never having anything to do. "
+"Let us perform a contest of arms, shall we? You may send your soldiers to "
+"try and destroy my palace. I am certain that you will not stand a chance, "
+"and therefore I promise I will pray to the gods to bless your journey if you"
+" do succeed."
+msgstr ""
+"Aver dat is nu so, dat miene Soldaten sik langwielen, wiel se hier nienich "
+"wat do doon kregen. Laat uns doch eenen Wettstried vun Wapen maken! Du "
+"kannst diene Soldaten schicken, dat se versöken, mienen Palast oftobrannen. "
+"Ick bün wiss, dat du keene Kans hest, un daarum geev ick di mien Woord, dat "
+"ick de Gotten beden sall, diene Fahrt to segen, wenn du dat doch daan "
+"kriggst."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
+msgid "Congratulations"
+msgstr "Glückwunsk"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
+msgid "May Satul bless you"
+msgstr "Satuul sall di segen"
+
+#. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:191
+msgid ""
+"You have gotten past my best guards and burnt down my palace, which I "
+"believed to be impossible. You must be very powerful, and favoured by the "
+"gods. You have most certainly deserved your victory. I congratulate you and "
+"wish you well for your voyage. May Satul keep you safe!"
+msgstr ""
+"Du hest miene besten Wachen manntjet un mienen Palast verneelt, un ick hebb "
+"glöövt, dat dat nich passeren kann. Du muttst unbannig machtig sien, un de "
+"Segen vun de Gotten hebben. Du hest deesen Sieg würrelk verdeent. Ick "
+"beglückwünsk jo un wünsk jo all Segen för jo Fahrt. Satuul sall jo schütten!"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:195
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
+msgid "In the Ice Desert"
+msgstr "In de Ieswüüst"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
+msgid "The next island"
+msgstr "Anner Insel"
+
+#. TRANSLATORS: Henneke Lembeck – Port Space 3
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
+msgid ""
+"We seem to be getting closer to the North. A desert of ice! I did not know "
+"such a thing even exists. But I doubt anybody could live here; I fear we "
+"will not discover anything useful on this island."
+msgstr ""
+"Wi komen dichter to de Noorden. Eene Wüüst ut Ies! Ick hebb nich weten, dat "
+"'t sülk een Ding gifft. Aver ick gloov nich, dat elkeen hier leven kann; ick"
+" bün bang, dat wi hier nix nützelkes finnen."
+
+#. TRANSLATORS: Claus Lembeck – Port Space 4
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
+msgid ""
+"It doesn’t matter. Let’s just find the next port space quickly, so we can "
+"continue our journey."
+msgstr ""
+"Dat maakt nix. Laat uns blot fix de anner Rüümte för Muden finnen, dat wi "
+"wiederseilen könen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
+msgid "Port space found"
+msgstr "Rüümte för Muden funnen"
+
+#. TRANSLATORS: Claus Lembeck – Port Space 5
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
+msgid ""
+"We have found a port space on the island. Now we can leave this cold and "
+"bleak ice desert and continue sailing."
+msgstr ""
+"Wi hebben Rüümte för Muden up de Insel funnen. Nu könen wi deese kolle, lege"
+" Ieswüüst verlaten un wiederseilen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
+msgid "The North"
+msgstr "De Noorden"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
+msgid "In the North"
+msgstr "Im Noorden"
+
+#. TRANSLATORS: Henneke Lembeck – Port Space 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
+msgid ""
+"Yes, this looks more like what I imagine the North should look like. The "
+"meadows are still green here, but the patches of snow are getting larger and"
+" larger the further North one can look."
+msgstr ""
+"Jau, dat sücht al ehr so ut, as ick gloov, wo de Noorden utsehn sall. De "
+"Meden sünd hier noch gröön, aver de Placken vun Sneei worden groter un "
+"groter as man wieder na Noorden kiekt."
+
+#. TRANSLATORS: Claus Lembeck – Port Space 7
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:224
+msgid ""
+"It does look good, but it might be just another island. Let’s continue "
+"travelling quickly."
+msgstr ""
+"'t sücht good ut, aver villicht is 't blot al weer eene Insel. Laat uns fix "
+"wiedergahn."
+
+#. TRANSLATORS: Henneke Lembeck – Strangers 1
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:232
+msgid ""
+"Our soldiers have sighted strangers again. I wonder whether they are similar"
+" to the strange King who congratulated us on destroying his palace."
+msgstr ""
+"Uns' Soldaten hebben weer Frömde to sehn kregen. Ick fraag mi, of se wull so"
+" sünd as de komisk König, well uns beglückwünsket hett, as wi sien Palast "
+"verneelt hebben."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
+msgid "No troubles, please"
+msgstr "Bidde keen Stried"
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 2
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:238
+msgid ""
+"Greetings, Strangers! I am Marcus Caius Iniucundus, a legate of the Empire. "
+"Is this your island? We are only passing through, I hope you don’t mind. We "
+"don’t want any trouble."
+msgstr ""
+"Weest grööt, Frömden! Ick bün Marcus Caius Injucundus, een Legaat vum Riek. "
+"Is dat diene Insel? Wi reisen blot dör, ick hoop, dat maakt jo nix ut. Wi "
+"wullen keenen Stried."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
+msgid "Travellers"
+msgstr "Reiselüü"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 3
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:244
+msgid ""
+"Peace, Sir Iniucundus! I am Claus Lembeck, and this is my son Henneke. We "
+"are just passing through as well. You are a legate, you say? You must be "
+"getting around a lot. Have you heard news of my old friend Reebaud? I only "
+"know that he is living in the North, can you tell us where to find him?"
+msgstr ""
+"Free, Heer Iniucundus! Ick bün Claus Lembeck, un dat is mien Sohn Henneke. "
+"Wi sünd ok blot bi'm Dörreisen. Du büst een Legaat, seggst du? Du muttst "
+"völe Lannen kennen. Hest du Narichten vun mien ollen Fründ Reebaud höört? "
+"Ick weet blot, dat he im Noorden leevt, weetst du, waar wi hüm finnen könen?"
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 4
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:250
+msgid ""
+"I am glad to hear you want peace. I am sorry, but I have not heard the name "
+"of Reebaud before. If you want to go to the North, however, we have the same"
+" destination, for that is exactly where I am travelling on official business"
+" from the Capital. We are currently preparing a ship to set sail. We can "
+"take you with us if you wish, provided you can pay for the passage."
+msgstr ""
+"Ick höör geern, dat jo Free wullt. 't dood mi Leid, aber ick hebb de Naam "
+"Reebaud bit nu noch nich höört. Aver wenn jp na Noorden gahn wullt, hebben "
+"wi dat sülve Enn, denn dat is ok waar ick för offizielle Dingen ut de "
+"Höövdstadt henreis. Wi maken jüüst een Schipp klaar, um lösstoseilen. Wi "
+"könen jo mitnehmen, wenn jo wullt, wenn jo för de Fahrt betahlen könnt."
+
+#. TRANSLATORS: Claus Lembeck – Strangers 5
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
+msgid ""
+"We thank you for your offer! What is the price you demand? And, if you don’t"
+" mind my asking, may I know what business you are employed on?"
+msgstr ""
+"Wi danken di för dat Angebood! Wat is de Pries, wat jo verlangt? Un, wenn "
+"ick fragen dür, dür ick weten, wat deese offiziellen Dingen sünd, mit wat do"
+" to doon hest?"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
+#, lua-format
+msgid "%d piece of gold."
+msgid_plural "%d pieces of gold."
+msgstr[0] "%d Stang Gold."
+msgstr[1] "%d Stangen Gold."
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
+msgid ""
+"I know it seems much, but the Senate did not furnish me with much money for "
+"this expedition, so I must admit I am in need of some."
+msgstr ""
+"Ick weet, wat dat vööl is, aver de Senaat hett mi nich mit vööl Geld för "
+"deese Upgaav utstaffeert, un ick mutt togeven, dat ick welkes bruuk."
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
+msgid ""
+"The purpose of my journey is to seek out the Proconsule of the Province The "
+"Northern Lands, who has neglected to pay his taxes for several years "
+"running. My task is to give this Murilius a good telling-off, and if I "
+"discover he failed to pay out of greed rather than necessity, I am to bring "
+"him back to the Capital in chains. I must say, I am rather happy to be given"
+" this task, for I have a good chance of being appointed Proconsule in his "
+"stead if I succeed."
+msgstr ""
+"Miene Reis deent daarto, de Prokonsul vun de Noordlannen-Provinz to finnen, "
+"well siene Stüren mennig Jahren in Folg nich betahlt hett. Miene Upgaav is, "
+"deesen Murilius ördentlik torechttowiesen, un wenn ick utfinn, dat he de "
+"Stüren ut Gierigheid un nich ut Nood nich tahlt hett, dann sall ick hüm in "
+"Ketten to de Höövdstadt torüggbringen. Ick bün recht blied, dat ick deese "
+"Upgaav kregen hebb, denn ick hebb eene gode Kans, in deesem Fall tum nejen "
+"Prokonsul beropen to worden."
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 6
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
+msgid ""
+"But back to the topic of your passage. There is only one place on the "
+"northern coast of this island where a port can be built. So you do not "
+"really have an alternative to purchasing a passage on my galley. But my "
+"astrologers report that a terrible storm is gathering that will make sea "
+"travel impossible for a long time. We must set sail within two hours, and "
+"whoever is still on the island after that time will not leave it anytime "
+"soon."
+msgstr ""
+"Aver torügg to de Fahrt. 't gifft blot ene Stee up de noordelk Küst vun "
+"deeser Insel, waar man eene Muu bauen kann. Di hest also nich würrelk eene "
+"anner Wahl, as eene Fahrt up miener Galeer to kopen. Aver mien Astroloog "
+"mellt mi, dat een gräsiger Störm kummt, wat Seefahr för lange Tied unmögelk "
+"maken word. Wi mutten in de anner twee Stünnen lössseilen, un well dann noch"
+" up de Insel is word se nich so bold weer verlaten."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
+msgid "Decide"
+msgstr "Köör ut"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 7
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:278
+msgid ""
+"He seems happy enough to offer us a passage, but the price is exorbitant. We"
+" may as well destroy his port and build one of our own. I wonder what would "
+"be better…"
+msgstr ""
+"He freit sik man, uns eene Fahrt antobeden, aber de Pries is leep baldadig. "
+"Wi könen ok siene Muu ofbrannen un sülst eene bauen. Ick fraag mi, wat wull "
+"beter is …"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
+msgid "Victory"
+msgstr "Sieg"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
+msgid "Victory!"
+msgstr "Sieg!"
+
+#. TRANSLATORS: Claus Lembeck – victory
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:287
+msgid ""
+"We have conquered the port! We are already building a ship, and then, we "
+"will finally be travelling to the actual far North. Although we still heard "
+"no news of Reebaud, I am confident that we will find him soon. Then he will "
+"grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
+msgstr ""
+"Wi hebben de Muu innhomen! Wi bauen all een Schipp, un dann reisen wi uplest"
+" all de Weg tum Noorden. Wi hebben twaar noch keene Naricht vun Reebaud, "
+"aver ick bün getroost, dat wi hüm bold finnen. Dann word he uns hülpen, un "
+"ick haal mi Föhr vun de Rover Atterdag torügg!"
+
+#. TRANSLATORS: M. C. Iniucundus – victory
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
+msgid ""
+"You have paid for the passage with pure gold. Now it is only right that you "
+"get it. Our ship is ready, you may embark!"
+msgstr ""
+"Du hest de Fahrt mit blankem Gold betahlt. Nu gehöört sik dat, dat du se ok "
+"kriggst. Uns' Schipp is klaar, gaht an Boord!"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
+msgid "You Have Lost"
+msgstr "Du hest verloren"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
+msgid "Goodbye!"
+msgstr "Tschüss!"
+
+#. TRANSLATORS: M. C. Iniucundus – victory
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
+msgid ""
+"You have taken too long. We must set sail now, and then the storm will not "
+"permit you to leave this island. I am sorry for you, but the weather doesn’t"
+" wait. Goodbye."
+msgstr ""
+"Dat düürt to lang. Wi mutten nu lössseilen, un dann lett de Störm jo de "
+"Insel nich mehr verlaten 't dood mi Leid för jo, aver dat Weer wacht nich. "
+"Tschüss."
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr "Diekbauer"
+
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr "Diekbauer-Huus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
+msgid "diking"
+msgstr "to dieken"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
+msgctxt "empire_building"
+msgid "Port"
+msgstr "Muu"
+
+#. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
+msgctxt "frisians_building"
+msgid "Constructs breakwaters nearby to gain new land from the sea."
+msgstr "Baut Lahnungen in de Naberskupp, um Land vun de See to winnen."
+
+#. TRANSLATORS: Purpose helptext for a frisian worker: Diker
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
+msgctxt "frisians_worker"
+msgid "Constructs breakwaters to gain new land from the sea."
+msgstr "Baut Lahnungen, um Land vun de See to winnen."
+
+#. TRANSLATORS: Purpose helptext for an empire warehouse: Port
+#: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+"Deent tum Begünnen vun Hannel un Söken över Seefahrt. Brengt ok diene Lüü un"
+" Soldaten unner un verwahrt diene Waren un anner Kraam."

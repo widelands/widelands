@@ -135,7 +135,7 @@ port_1 = {
    title = _"Port Space Found",
    body=claus(_"One step closer to the North",
       -- TRANSLATORS: Claus Lembeck – Port Space 1
-      _([[My soldiers report they have found a port space! Now we need to build a port and a shipyard and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])),
+      _([[My soldiers report they have found a port space! Now we need to build a port and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])),
 }
 port_2 = {
    title = _"A Strange Island",
