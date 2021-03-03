@@ -1,0 +1,26 @@
+name: Translations Update
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 3:00 a.m.
+    - cron: '0 3 * * *'
+jobs:
+  update:
+    if: github.repository == 'widelands/widelands'
+    name: Fetch translations and update catalogs
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+    - name: Installing dependencies
+      run: sudo apt-get install gettext transifex-client translate-toolkit
+    - name: Synchronizing translations
+      run: |
+        echo "${{ secrets.TXAUTH }}" > ~/.transifexrc
+        git config --global user.name "The Widelands Translations Bot"
+        git config --global user.email "bunnybot@widelands.org"
+        ./utils/merge_and_push_translations.sh
+        git push https://bunnybot:${{ secrets.GITHUB_TOKEN }}@github.com/widelands/widelands.git master

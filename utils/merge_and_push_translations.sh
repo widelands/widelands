@@ -116,7 +116,6 @@ git add data/i18n/translation_stats.conf || true
 
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."
-git push https://github.com/widelands/widelands.git master
 
 # Push catalogs to Transifex
 tx push -s
