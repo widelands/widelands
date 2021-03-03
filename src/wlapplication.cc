@@ -413,8 +413,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
 
-	set_template_dir(get_config_string("theme", ""));
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 }
@@ -452,6 +450,59 @@ WLApplication::~WLApplication() {
 	}
 
 	SDL_Quit();
+}
+
+void WLApplication::update_ui_theme(const UpdateThemeAction action, std::string arg) {
+	AddOns::AddOnState* previously_enabled = nullptr;
+	std::list<AddOns::AddOnState*> installed;
+	for (AddOns::AddOnState& s : AddOns::g_addons) {
+		if (s.first.category == AddOns::AddOnCategory::kTheme) {
+			if (s.second) {
+				previously_enabled = &s;
+			}
+			s.second = false;
+			installed.push_back(&s);
+		}
+	}
+
+	switch (action) {
+	case UpdateThemeAction::kEnableArgument:
+		for (AddOns::AddOnState* s : installed) {
+			if (s->first.internal_name == arg) {
+				s->second = true;
+				set_template_dir(kAddOnDir + '/' + arg + '/');
+				set_config_string("theme", arg);
+				return;
+			}
+		}
+		NEVER_HERE();
+
+	case UpdateThemeAction::kLoadFromConfig:
+		arg = get_config_string("theme", "");
+		if (arg.empty()) {
+			return set_template_dir("");
+		}
+		for (AddOns::AddOnState* s : installed) {
+			if (s->first.internal_name == arg) {
+				s->second = true;
+				set_template_dir(kAddOnDir + '/' + arg + '/');
+				return;
+			}
+		}
+		log_warn("Theme '%s' not found", arg.c_str());
+		FALLS_THROUGH;
+	case UpdateThemeAction::kAutodetect:
+		if (!previously_enabled) {
+			set_config_string("theme", "");
+			set_template_dir("");
+			return;
+		}
+		previously_enabled->second = true;
+		set_config_string("theme", previously_enabled->first.internal_name);
+		set_template_dir(kAddOnDir + '/' + previously_enabled->first.internal_name + '/');
+		return;
+	}
+	NEVER_HERE();
 }
 
 void WLApplication::initialize_g_addons() {
@@ -494,6 +545,7 @@ void WLApplication::initialize_g_addons() {
 			}
 		}
 	}
+	update_ui_theme(UpdateThemeAction::kLoadFromConfig);
 }
 
 static void init_one_player_from_template(unsigned p,

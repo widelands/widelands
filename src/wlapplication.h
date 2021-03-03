@@ -138,6 +138,8 @@ struct WLApplication {
 	void run();
 
 	static void initialize_g_addons();
+	enum class UpdateThemeAction { kEnableArgument, kLoadFromConfig, kAutodetect };
+	static void update_ui_theme(UpdateThemeAction, std::string = "");
 
 	/// \warning true if an external entity wants us to quit
 	bool should_die() const {

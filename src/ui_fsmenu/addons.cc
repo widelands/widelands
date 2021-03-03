@@ -1078,10 +1078,8 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 		inform_about_restart(remote.descname());
 		break;
 	case AddOns::AddOnCategory::kTheme: {
-		const std::string theme = kAddOnDir + '/' + remote.internal_name + '/';
-		set_template_dir(theme);
+		WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
 		get_topmost_forefather().template_directory_changed();
-		set_config_string("theme", theme);
 		break;
 	}
 	default:
@@ -1131,9 +1129,19 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 	for (auto& pair : AddOns::g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
 			pair.first = AddOns::preload_addon(remote.internal_name);
-			if (remote.category == AddOns::AddOnCategory::kWorld) {
+			switch (remote.category) {
+			case AddOns::AddOnCategory::kWorld:
 				pair.second = false;
 				inform_about_restart(remote.descname());
+				break;
+			case AddOns::AddOnCategory::kTheme:
+				if (template_dir() == (kAddOnDir + '/' + remote.internal_name + '/')) {
+					WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
+					get_topmost_forefather().template_directory_changed();
+				}
+				break;
+			default:
+				break;
 			}
 			return;
 		}
@@ -1286,13 +1294,6 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 		}
 	}
 
-	if (info.category == AddOns::AddOnCategory::kTheme &&
-	    template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
-		// When uninstalling the active theme, fall back to default theme
-		set_template_dir("");
-		ctrl->get_topmost_forefather().template_directory_changed();
-	}
-
 	// Delete the add-on…
 	g_fs->fs_unlink(kAddOnDir + FileSystem::file_separator() + info.internal_name);
 
@@ -1305,6 +1306,11 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 	for (auto it = AddOns::g_addons.begin(); it != AddOns::g_addons.end(); ++it) {
 		if (it->first.internal_name == info.internal_name) {
 			AddOns::g_addons.erase(it);
+			if (info.category == AddOns::AddOnCategory::kTheme &&
+				template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
+				WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kAutodetect);
+				ctrl->get_topmost_forefather().template_directory_changed();
+			}
 			return ctrl->rebuild();
 		}
 	}
@@ -1503,6 +1509,13 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				                                              "images/ui_basic/checkbox_checked.png" :
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
+				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
+					WLApplication::update_ui_theme(pair.second ?
+							WLApplication::UpdateThemeAction::kEnableArgument : WLApplication::UpdateThemeAction::kAutodetect,
+							pair.first.internal_name);
+					get_topmost_forefather().template_directory_changed();
+					ctrl->rebuild();
+				}
 				return ctrl->update_dependency_errors();
 			}
 		}
