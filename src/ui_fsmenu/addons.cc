@@ -1073,8 +1073,19 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
 		                                          remote.category != AddOns::AddOnCategory::kWorld));
 	}
-	if (remote.category == AddOns::AddOnCategory::kWorld) {
+	switch (remote.category) {
+	case AddOns::AddOnCategory::kWorld:
 		inform_about_restart(remote.descname());
+		break;
+	case AddOns::AddOnCategory::kTheme: {
+		const std::string theme = kAddOnDir + '/' + remote.internal_name + '/';
+		set_template_dir(theme);
+		get_topmost_forefather().template_directory_changed();
+		set_config_string("theme", theme);
+		break;
+	}
+	default:
+		break;
 	}
 }
 

@@ -77,6 +77,10 @@ Statebox::Statebox(Panel* const parent,
 	layout();
 }
 
+void Statebox::update_template() {
+	layout();  // update rendered_text_
+}
+
 void Statebox::layout() {
 	// We only need to relayout if we have text and the available width changed
 	if ((flags_ & Has_Text)) {

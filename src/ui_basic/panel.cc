@@ -574,7 +574,7 @@ void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleI
 void Panel::template_directory_changed() {
 	update_template();
 	for (Panel* child = first_child_; child; child = child->next_) {
-		child->update_template();
+		child->template_directory_changed();
 	}
 }
 
