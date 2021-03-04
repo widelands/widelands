@@ -27,6 +27,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "logic/filesystem_constants.h"
+
 namespace AddOns {
 
 enum class AddOnCategory {
@@ -122,6 +124,14 @@ struct AddOnInfo {
 	uint32_t number_of_votes() const;
 	double average_rating() const;
 };
+
+inline static std::string theme_addon_template_dir(const std::string& name) {
+	std::string s = kAddOnDir;
+	s += '/';
+	s += name;
+	s += '/';
+	return s;
+}
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
 using AddOnState = std::pair<AddOnInfo, bool>;

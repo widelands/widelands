@@ -30,7 +30,6 @@
 #include "build_info.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
-#include "logic/filesystem_constants.h"
 
 namespace AddOns {
 

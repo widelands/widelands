@@ -1136,7 +1136,7 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 				inform_about_restart(remote.descname());
 				break;
 			case AddOns::AddOnCategory::kTheme:
-				if (template_dir() == (kAddOnDir + '/' + remote.internal_name + '/')) {
+				if (template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
 					WLApplication::update_ui_theme(
 					   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
 					get_topmost_forefather().template_directory_changed();
@@ -1309,7 +1309,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 		if (it->first.internal_name == info.internal_name) {
 			AddOns::g_addons.erase(it);
 			if (info.category == AddOns::AddOnCategory::kTheme &&
-			    template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
+			    template_dir() == AddOns::theme_addon_template_dir(info.internal_name)) {
 				WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}

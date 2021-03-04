@@ -470,7 +470,7 @@ void WLApplication::update_ui_theme(const UpdateThemeAction action, std::string 
 		for (AddOns::AddOnState* s : installed) {
 			if (s->first.internal_name == arg) {
 				s->second = true;
-				set_template_dir(kAddOnDir + '/' + arg + '/');
+				set_template_dir(AddOns::theme_addon_template_dir(arg));
 				set_config_string("theme", arg);
 				return;
 			}
@@ -485,7 +485,7 @@ void WLApplication::update_ui_theme(const UpdateThemeAction action, std::string 
 		for (AddOns::AddOnState* s : installed) {
 			if (s->first.internal_name == arg) {
 				s->second = true;
-				set_template_dir(kAddOnDir + '/' + arg + '/');
+				set_template_dir(AddOns::theme_addon_template_dir(arg));
 				return;
 			}
 		}
@@ -499,7 +499,7 @@ void WLApplication::update_ui_theme(const UpdateThemeAction action, std::string 
 		}
 		previously_enabled->second = true;
 		set_config_string("theme", previously_enabled->first.internal_name);
-		set_template_dir(kAddOnDir + '/' + previously_enabled->first.internal_name + '/');
+		set_template_dir(AddOns::theme_addon_template_dir(previously_enabled->first.internal_name));
 		return;
 	}
 	NEVER_HERE();
