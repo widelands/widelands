@@ -1,0 +1,28 @@
+# Automatically created by Widelands 1.0~git25215[a5a8e45@master] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Claus Lembeck"
+tribe="frisians"
+ai=
+closeable="false"
+
+[player_2]
+name="Reebaud"
+tribe="frisians"
+ai=
+closeable="false"
+
+[player_3]
+name="Marcus Caius Iniucundus"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_4]
+name="Linthesilea"
+tribe="amazons"
+ai=
+closeable="false"

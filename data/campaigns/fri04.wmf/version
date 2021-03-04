@@ -1,0 +1,12 @@
+# Automatically created by Widelands 1.0~git25215[a5a8e45@master] (Release)
+
+[global]
+map_source_url=
+map_release=
+map_creator_version="bzr8448[frisians]"
+map_version_major="0"
+map_version_minor="2"
+map_version_timestamp="1614857587"
+packet_version="1"
+packet_compatibility="1"
+needs_widelands_version_after="20"

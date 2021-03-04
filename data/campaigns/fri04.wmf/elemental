@@ -1,0 +1,15 @@
+# Automatically created by Widelands 1.0~git25215[a5a8e45@master] (Release)
+
+[global]
+packet_version="1"
+map_w="208"
+map_h="208"
+nr_players="4"
+name=_"Two Friends Reunited"
+author="Nordfriese"
+descr=_"Claus and Henneke Lembeck have reached the North at last. But will they be able to convince Reebaud to send them aid?"
+hint=
+background="campaigns/fri04.wmf/pics/background.jpg"
+theme="winter"
+tags="seafaring,unbalanced"
+addons=
