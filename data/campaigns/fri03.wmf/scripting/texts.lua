@@ -135,7 +135,7 @@ port_1 = {
    title = _"Port Space Found",
    body=claus(_"One step closer to the North",
       -- TRANSLATORS: Claus Lembeck – Port Space 1
-      _([[My soldiers report they have found a port space! Now we need to build a port and a shipyard and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])),
+      _([[My soldiers report they have found a port space! Now we need to build a port and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])),
 }
 port_2 = {
    title = _"A Strange Island",
@@ -286,7 +286,7 @@ victory_fight = {
       -- TRANSLATORS: Claus Lembeck – victory
       _([[We have conquered the port! We are already building a ship, and then, we will finally be travelling to the actual far North. Although we still heard no news of Reebaud, I am confident that we will find him soon. Then he will grant us aid, and I will reconquer Föhr from the usurper Atterdag!]]))
       .. objective_text(_"Congratulations",
-      [[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
 }
 victory_pay = {
    title =_ "Victory",
@@ -294,7 +294,7 @@ victory_pay = {
       -- TRANSLATORS: M. C. Iniucundus – victory
       _([[You have paid for the passage with pure gold. Now it is only right that you get it. Our ship is ready, you may embark!]]))
       .. objective_text(_"Congratulations",
-      [[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
 }
 timeout_1 = {
    title = _"You Have Lost",
@@ -302,5 +302,5 @@ timeout_1 = {
       -- TRANSLATORS: M. C. Iniucundus – victory
       _([[You have taken too long. We must set sail now, and then the storm will not permit you to leave this island. I am sorry for you, but the weather doesn’t wait. Goodbye.]]))
       .. objective_text(_"You Have Lost",
-      [[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]]),
+      _[[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]]),
 }
