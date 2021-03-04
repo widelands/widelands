@@ -1376,6 +1376,9 @@ void InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 }
 
 void InteractiveBase::broadcast_cheating_message() {
+	if (!get_game()) {
+		return;  // Editor
+	}
 	if (upcast(GameHost, h, game().game_controller())) {
 		h->send_system_message_code(
 		   "CHEAT", player_number() ? game().player(player_number()).get_name() : "");
