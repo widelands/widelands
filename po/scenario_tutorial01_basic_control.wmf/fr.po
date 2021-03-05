@@ -3,7 +3,7 @@
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2019
-# David D, 2018
+# David D, 2018,2021
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-03-02 12:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 10:16+0000\n"
+"Last-Translator: David D\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,36 +53,36 @@ msgstr "Bienvenue dans Widelands !"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands est un jeu de stratégie lent et progressif orienté vers la construction plutôt que sur la destruction."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Vous allez être guidé à travers ce tutoriel par des objectifs."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Objectifs et comment les gérer"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Gestion de la fenêtre \"Objectifs\""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Vous pouvez ouvrir et fermer la fenêtre \"Objectifs\" en cliquant sur le bouton \"Objectifs\" situé dans la barre du bas de l'écran. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Comme la plupart des fenêtres, vous pouvez fermer cette fenêtre en faisant un clic droit dessus."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Quand vous aurez accompli un objectif, il disparaîtra de la liste."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
@@ -91,14 +91,14 @@ msgstr "Affichez les espaces de construction"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Activez \"Montrer les espaces de construction\" Vous pouvez le faire de deux façons :"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Pressez %s pour les basculer, ou sélectionnez \"Montrer les espaces de construction\" dans le menu \"Montrer / Cacher\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
@@ -132,7 +132,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Vous commencez habituellement la partie avec un quartier général. C'est le gros édifice avec le drapeau bleu devant. Le quartier général stocke les marchandises, les travailleurs et les soldats. Certaines marchandises sont requises pour la construction de maisons, d'autres pour produire d'autres biens. Évidemment, les marchandises de départ ne dureront pas éternellement, il vous faut donc vous assurer de les remplacer. Les marchandises les plus importantes au début de la partie sont les matériaux de construction de base : troncs et pierre brute. Assurons-nous que nous ne manquerons pas de troncs. Pour cela, nous avons besoin d'un bûcheron et d'une cabane pour l'héberger."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -144,7 +144,7 @@ msgstr "Nous devons trouver un endroit approprié pour construire la cabane de b
 msgid ""
 "I'll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Je vais vous montrer où se trouve le menu et où se trouvent les espaces de construction."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -162,7 +162,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Allez-y. Tout d'abord, laissez-moi vous montrer comment construire une cabane de bûcheron et la relier à une route. Il y a un emplacement idéal pour un bûcheron juste à côté de ces arbres. Je vais décrire les étapes que je vais suivre, et vous les montrer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -172,13 +172,13 @@ msgstr "Construction de la cabane de bûcheron"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Tout d’abord, je vais faire un clic-gauche sur le symbole où je veux que la cabane de bûcheron soit construite. Une fenêtre apparaîtra dans laquelle je pourrais choisir entre les bâtiments."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "La cabane de bûcheron est un petit bâtiment, alors je vais ensuite sélectionner l’onglet des petits bâtiments. Ensuite, je vais choisir la cabane de bûcheron."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -308,11 +308,11 @@ msgstr "Bien joué ! Attendons que la cabane soit finie."
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Si vous voulez aller plus vite, appuyez simplement sur la touche %1$s de votre clavier pour augmenter la vitesse du jeu. Vous pouvez utiliser %2$s pour ralentir le jeu à nouveau."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Le changement est rapide avec %1$s/%2$s et lent avec %3$s/%4$s."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
@@ -327,11 +327,11 @@ msgstr "Excellent. La cabane du bûcheron est terminée. un bûcheron va mainten
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Bouger la vue"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Bougez votre vue"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -391,7 +391,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Quand vous êtes prêt à continuer, fermez la mini-carte en utilisant le même bouton ou bien \"%s\". Bien sur, un clic-droit marchera aussi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
@@ -412,7 +412,7 @@ msgstr "Très bien. Et maintenant voyons la mini-carte."
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Vous pouvez l’ouvrir en sélectionnant l’entrée \"Afficher la mini-carte\" dans le menu \"Affichage de la carte\" en bas de l’écran ou simplement en utilisant le raccourci clavier \"%s\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -453,7 +453,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "La carrière est un petit bâtiment comme la cabane du bûcheron. Vous pouvez donc la construire sur n'importe quel emplacement affichant une maison rouge, jaune ou verte lorsque l'aide à la construction est activée (appuyez sur ‘%s’ pour cela)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -475,7 +475,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Soyez sûr de voir les espaces de construction, puis cliquez sur l'espace où vous voulez que soit votre construction, choisissez la à partir de la fenêtre qui apparaît, ainsi elle sera placée."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -571,7 +571,7 @@ msgstr "Connectez votre site de construction"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Reliez votre chantier de carrière à votre siège social par une route."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -625,7 +625,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Vos travailleurs n’aiment pas traverser le pays à pied. Vous devez construire une route entre votre quartier général et le chantier de construction afin que les transporteurs puissent transporter des marchandises."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
@@ -683,7 +683,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Pendant que nous attendons, je vais vous montrer rapidement une autre fonctionnalité utile. Il est parfois difficile de distinguer les bâtiments. Widelands offre une fonctionnalité pour afficher sur les bâtiments des textes d'étiquette appelés le \"recensement\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -691,7 +691,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Pour afficher ou masquer les étiquettes de recensement des bâtiments, vous pouvez sélectionner l'entrée «Afficher le recensement» / «Masquer le recensement» dans le menu «Afficher / Masquer» en bas, ou appuyer sur la touche «%s» du clavier."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -708,7 +708,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Pour afficher ou masquer les libellés des statistiques de construction, vous pouvez sélectionner l'entrée \"Afficher les statistiques\" dans le menu \"Afficher / Masquer\" en bas, ou appuyez sur la touche \"%s\" du clavier."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -750,7 +750,7 @@ msgstr "Continuez à cliquer sur le bouton \"Archiver le message sélectionné\"
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Vous pouvez aussi garder la touche Ctrl ou Shift enfoncée pour sélectionner de multiples messages, ou appuyer sur%s pour les sélectionner tous."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #, lua-format
@@ -758,7 +758,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Vous pouvez basculer la fenêtre de message en appuyant sur \"%s\" ou en cliquant sur le deuxième bouton de la droite tout en bas de l'écran. Le message le plus récent sera automatiquement marqué pour vous."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -810,7 +810,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Toutes les fenêtres de Widelands (sauf les fenêtres de l'histoire affichant \"OK\") peuvent être fermées en cliquant dessus avec le bouton droit. Certaines fenêtres peuvent également être affichées/cachées avec les boutons et les menus tout en bas de l'écran."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -823,7 +823,7 @@ msgstr "Fermeture des fenêtres"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Excellent. Nous devons maintenant nous concentrer sur d’autres choses."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -887,14 +887,14 @@ msgstr "Agrandissez votre territoire"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Construisez un bâtiment militaire sur votre frontière. Choisissez celui que vous aimez le plus."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "La guérite est le seul site militaire qui va sur un petit terrain à bâtir. Si votre bûcheron a dégagé assez d'espace, vous pourrez aussi construire un plus grand bâtiment militaire."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
@@ -926,7 +926,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Étendre son territoire est aussi simple que la construction d'un bâtiment militaire près de vos frontières. Les Barbares disposent de plusieurs bâtiments militaires différents : guérites, barricades, tours, et forteresses. Plus le bâtiment est grand, plus il coûte cher à construire, plus il conquiert de terrain autour de lui et plus le nombre de soldats qui y sont stationnés est important. Les bâtiments ont également différents champs de vision : ceux qui disposent d'une tour peuvent voir plus loin que les autres."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""
