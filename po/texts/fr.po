@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-02-25 12:13+0000\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 13:12+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -716,7 +716,7 @@ msgid ""
 "Manage your messages more efficiently: press ‘%1%’ for News to access the "
 "messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
 "messages."
-msgstr ""
+msgstr "Gérez vos messages plus efficacement : pressez '%1%' pour accéder à la fenêtre des messages, utilisez alors '%2%' pour aller au lieu, et la touche ‘%3%’  pour archiver les messages."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -743,7 +743,7 @@ msgstr "Si vous aimez vivre dangereusement, appuyez sur « Ctrl » pendant que v
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Appuyer sur « %s » pour basculer rapidement vers la fenêtre de l'inventaire."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
