@@ -46,6 +46,9 @@
 - Seafaring tutorial: Explain additional expedition items feature (#4711)
 - Fix hotkeys in tutorials (#4720)
 - Basic Tutorial fixes (#4717)
+- Fri03 Fixes (#4738)
+    - Fix duplicate soldier detection
+    - Add missing translation markups
 
 
 ### Scripting
@@ -303,6 +306,7 @@
     - Update tribe dropdown when setting AI
 - Shorten the ripe stage of barley fields (#4712)
 - doubled trainers patience due to cycles failing quicker (#4726)
+- renamed Youth Gathering to Initiation Site (#4739)
 
 
 ### User Interface
@@ -515,6 +519,7 @@
 - Localize timestamps of remote add-ons (#4700)
 - Send localized cheating messages (#4462)
 - Fixed string issues (#4005, #4723, #4728, #4731)
+- Catch exception on invalid locale (#4725)
 
 
 ### Help and Documentation
