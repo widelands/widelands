@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-03-02 17:43+0000\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 09:46+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -329,7 +329,7 @@ msgstr "Nová náhodná mapa"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:377 ../../src/wlapplication_options.cc:343
 msgid "Load Map"
-msgstr "Nahrát mapu"
+msgstr "Načíst mapu"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:213
@@ -3364,7 +3364,7 @@ msgstr "Filtruj rozšíření pomocí jména"
 #: ../../src/ui_fsmenu/addons.cc:382
 #, c-format
 msgid "Toggle category ‘%s’"
-msgstr "Přepni kategorii ‘%s’"
+msgstr "Přepnout zobrazení pro „%s“"
 
 #: ../../src/ui_fsmenu/addons.cc:453
 #, c-format
@@ -3419,7 +3419,7 @@ msgstr "Instalováno (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:829
 msgid "Browse"
-msgstr ""
+msgstr "Procházet dostupné"
 
 #: ../../src/ui_fsmenu/addons.cc:830
 #, c-format
@@ -3947,7 +3947,7 @@ msgstr "Opustit Packager"
 #: ../../src/ui_fsmenu/addons_packager.cc:445
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr ""
+msgstr "Opravdu chceš zrušit všechny změny provedené v rozšíření „%s“?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:450
 #, c-format
@@ -3966,7 +3966,7 @@ msgstr "Zrušit změny"
 #: ../../src/ui_fsmenu/addons_packager.cc:473
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr ""
+msgstr "Opravdu chceš uložit všechny změny provedené v rozšíření „%s“?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:478
 #, c-format
@@ -4446,7 +4446,7 @@ msgstr "Návrat do nastavení hry pro více hráčů"
 
 #: ../../src/ui_fsmenu/loadgame.cc:84 ../../src/ui_fsmenu/mapselect.cc:69
 msgid "Return to the single player menu"
-msgstr "Návrat do menu hry jednoho hráče"
+msgstr "Návrat do nastavení hry jednoho hráče"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Load this game"
@@ -5199,18 +5199,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:168
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:171
 msgid "Authors"
 msgstr "Autoři"
@@ -5304,7 +5304,7 @@ msgstr "Omlouváme se, ale z následujícího důvodu nebylo možné nouzové ul
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Singleplayer"
-msgstr ""
+msgstr "Hra jednoho hráče"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Multiplayer"
@@ -5312,15 +5312,15 @@ msgstr "Hra více hráčů"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Editor – Load Map"
-msgstr ""
+msgstr "Editor – Načíst mapu"
 
 #: ../../src/wlapplication_options.cc:208
 msgid "Editor – New Map"
-msgstr ""
+msgstr "Editor – Nová mapa"
 
 #: ../../src/wlapplication_options.cc:213
 msgid "Editor – New Random Map"
-msgstr ""
+msgstr "Editor – Nová náhodná mapa"
 
 #: ../../src/wlapplication_options.cc:231
 msgid "About"
@@ -5328,7 +5328,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:248
 msgid "Internet Login"
-msgstr ""
+msgstr "Internetové přihlášení"
 
 #: ../../src/wlapplication_options.cc:259
 msgid "Toggle Buildhelp"
@@ -5336,7 +5336,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Přepnout zobrazení minimapy"
 
 #: ../../src/wlapplication_options.cc:269
 msgid "Encyclopedia"
@@ -5344,23 +5344,23 @@ msgstr "Encyklopedie"
 
 #: ../../src/wlapplication_options.cc:273
 msgid "Cut Text"
-msgstr ""
+msgstr "Vyjmout text"
 
 #: ../../src/wlapplication_options.cc:277
 msgid "Copy Text"
-msgstr ""
+msgstr "Kopírovat text"
 
 #: ../../src/wlapplication_options.cc:281
 msgid "Paste Text"
-msgstr ""
+msgstr "Vložit text"
 
 #: ../../src/wlapplication_options.cc:285
 msgid "Select All"
-msgstr ""
+msgstr "Vybrat vše"
 
 #: ../../src/wlapplication_options.cc:290
 msgid "Delete Item"
-msgstr ""
+msgstr "Odstranit položku"
 
 #: ../../src/wlapplication_options.cc:295
 msgid "Tooltip Accessibility Mode Key"
@@ -5368,7 +5368,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:300
 msgid "Toggle Fullscreen"
-msgstr ""
+msgstr "Přepnout režim celé obrazovky"
 
 #: ../../src/wlapplication_options.cc:305
 msgid "Take Screenshot"
@@ -5388,31 +5388,31 @@ msgstr "Obnovit přiblížení"
 
 #: ../../src/wlapplication_options.cc:325
 msgid "Jump to Next Location"
-msgstr ""
+msgstr "Jít na následující pozici"
 
 #: ../../src/wlapplication_options.cc:330
 msgid "Jump to Previous Location"
-msgstr ""
+msgstr "Jít na předchozí pozici"
 
 #: ../../src/wlapplication_options.cc:335
 msgid "Menu"
-msgstr ""
+msgstr "Nabídka"
 
 #: ../../src/wlapplication_options.cc:359
 msgid "Info Tool"
-msgstr ""
+msgstr "Nástroj zobrazení informací"
 
 #: ../../src/wlapplication_options.cc:363
 msgid "Players Menu"
-msgstr ""
+msgstr "Nastavení hráčů"
 
 #: ../../src/wlapplication_options.cc:368
 msgid "Toggle Grid"
-msgstr ""
+msgstr "Přepnout zobrazení mřížky"
 
 #: ../../src/wlapplication_options.cc:373
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Přepnout zobrazení pevných předmětů"
 
 #: ../../src/wlapplication_options.cc:378
 msgid "Toggle Critters"
@@ -5420,27 +5420,27 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:383
 msgid "Toggle Resources"
-msgstr ""
+msgstr "Přepnout zobrazení surovin"
 
 #: ../../src/wlapplication_options.cc:389
 msgid "Toggle Census"
-msgstr ""
+msgstr "Přepnout zobrazení popisů budov"
 
 #: ../../src/wlapplication_options.cc:394
 msgid "Toggle Statistics Labels"
-msgstr ""
+msgstr "Přepnout zobrazení statistiky budov"
 
 #: ../../src/wlapplication_options.cc:399
 msgid "Toggle Soldier Levels"
-msgstr ""
+msgstr "Přepnout zobrazení úrovně vojáků"
 
 #: ../../src/wlapplication_options.cc:404
 msgid "Toggle Buildings Visibility"
-msgstr ""
+msgstr "Přepnout viditelnost budov"
 
 #: ../../src/wlapplication_options.cc:409
 msgid "Toggle Overlapping Workareas"
-msgstr ""
+msgstr "Přepnout zobrazení překryvu pracovních oblastí"
 
 #: ../../src/wlapplication_options.cc:414
 #: ../../src/wui/general_statistics_menu.cc:47
@@ -5459,7 +5459,7 @@ msgstr "Statistiky budov"
 
 #: ../../src/wlapplication_options.cc:429
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Okno zásob"
 
 #: ../../src/wlapplication_options.cc:434
 #: ../../src/wui/soldier_statistics_menu.cc:35
@@ -5522,81 +5522,81 @@ msgstr "Uložit hru"
 
 #: ../../src/wlapplication_options.cc:504
 msgid "Messages: Go to Location"
-msgstr ""
+msgstr "Zprávy: Jít na pozici"
 
 #: ../../src/wlapplication_options.cc:509
 msgid "Messages: Show "
-msgstr ""
+msgstr "Zprávy: Zobrazit"
 
 #: ../../src/wlapplication_options.cc:514
 msgid "Messages: Show Geologists’ Messages"
-msgstr ""
+msgstr "Zprávy: Zobrazit zprávy o nalezených zdrojích surovin"
 
 #: ../../src/wlapplication_options.cc:519
 msgid "Messages: Show Economy Messages"
-msgstr ""
+msgstr "Zprávy: Zobrazit zprávy hospodářství"
 
 #: ../../src/wlapplication_options.cc:524
 msgid "Messages: Show Seafaring Messages"
-msgstr ""
+msgstr "Zprávy: Zobrazit námořní zprávy"
 
 #: ../../src/wlapplication_options.cc:529
 msgid "Messages: Show Military Messages"
-msgstr ""
+msgstr "Zprávy: Zobrazit vojenské zprávy"
 
 #: ../../src/wlapplication_options.cc:534
 msgid "Messages: Show Scenario Messages"
-msgstr ""
+msgstr "Zprávy: Zobrazit zprávy scénáře"
 
 #: ../../src/wlapplication_options.cc:539
 msgid "Seafaring: Go to Ship"
-msgstr ""
+msgstr "Mořeplavba: Jít k lodi"
 
 #: ../../src/wlapplication_options.cc:544
 msgid "Seafaring: Watch Ship"
-msgstr ""
+msgstr "Mořeplavba: Sledovat loď"
 
 #: ../../src/wlapplication_options.cc:549
 msgid "Seafaring: Open Ship Window"
-msgstr ""
+msgstr "Mořeplavba: Otevřít okno lodě"
 
 #: ../../src/wlapplication_options.cc:554
 msgid "Seafaring: Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Mořeplavba: Otevřít okno lodě a jít k lodi"
 
 #: ../../src/wlapplication_options.cc:559
 msgid "Seafaring: Show All Ships"
-msgstr ""
+msgstr "Mořeplavba: Zobrazit všechny lodě"
 
 #: ../../src/wlapplication_options.cc:564
 msgid "Seafaring: Show Idle Ships"
-msgstr ""
+msgstr "Mořeplavba: Zobrazit nevyužité lodě"
 
 #: ../../src/wlapplication_options.cc:569
 msgid "Seafaring: Show Transport Ships"
-msgstr ""
+msgstr "Mořeplavba: Zobrazit lodě převážející zboží a dělníky"
 
 #: ../../src/wlapplication_options.cc:574
 msgid "Seafaring: Show Waiting Expeditions"
-msgstr ""
+msgstr "Mořeplavba: Zobrazit čekající výpravy"
 
 #: ../../src/wlapplication_options.cc:579
 msgid "Seafaring: Show Scouting Expeditions"
-msgstr ""
+msgstr "Mořeplavba: Zobrazit probíhající výpravy"
 
 #: ../../src/wlapplication_options.cc:584
 msgid "Seafaring: Show Expeditions with Port Spaces"
-msgstr ""
+msgstr "Mořeplavba: Zobrazit výpravy, které našly místo pro přístav"
 
 #: ../../src/wlapplication_options.cc:589
 #, c-format
 msgid "Set Landmark #%d"
-msgstr ""
+msgstr "Nastavit pozici č.%d"
 
 #: ../../src/wlapplication_options.cc:594
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr ""
+msgstr "Jít na pozici č.%d"
 
 #: ../../src/wlapplication_options.cc:734
 msgctxt "hotkey"
@@ -5611,12 +5611,12 @@ msgstr "Alt"
 #: ../../src/wlapplication_options.cc:741
 msgctxt "hotkey"
 msgid "Cmd"
-msgstr ""
+msgstr "Cmd"
 
 #: ../../src/wlapplication_options.cc:743
 msgctxt "hotkey"
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: ../../src/wlapplication_options.cc:747
 msgctxt "hotkey"
@@ -5826,9 +5826,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6311,17 +6311,17 @@ msgstr "Zobrazit pouze zprávy o nově nalezených zdrojích surovin"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:542
 msgid "Show economy messages only"
-msgstr "Zobrazit pouze zprávy o hospodářství"
+msgstr "Zobrazit pouze zprávy hospodářství"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:546
 msgid "Show seafaring messages only"
-msgstr "Zobrazit pouze námořní správy"
+msgstr "Zobrazit pouze námořní zprávy"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:550
 msgid "Show warfare messages only"
-msgstr "Zobrazit pouze válečné zprávy"
+msgstr "Zobrazit pouze vojenské zprávy"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:554
@@ -6776,8 +6776,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Námořní"
