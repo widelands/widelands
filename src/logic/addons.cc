@@ -24,7 +24,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -62,6 +61,18 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
                       "tribes/buildings/warehouses/atlanteans/headquarters/menu.png"}},
    {AddOnCategory::kTheme,
     AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
+
+i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename) {
+	if (mapfilename.compare(0, kAddOnDir.size(), kAddOnDir) != 0) {
+		return new i18n::Textdomain("maps");
+	}
+	mapfilename = mapfilename.substr(kAddOnDir.size() + 1);
+	const size_t pos = std::min(mapfilename.find('/'), mapfilename.find('\\'));
+	if (pos != std::string::npos) {
+		mapfilename = mapfilename.substr(0, pos);
+	}
+	return new i18n::AddOnTextdomain(mapfilename);
+}
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
 

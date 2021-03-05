@@ -404,7 +404,7 @@ void LaunchMPG::load_map_info() {
 
 	map.set_filename(settings_.settings().mapfilename);
 	{
-		i18n::Textdomain td("maps");
+		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_correct_textdomain(settings_.settings().mapfilename));
 		ml->preload_map(true, nullptr);
 	}
 

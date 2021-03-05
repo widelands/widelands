@@ -34,6 +34,8 @@ void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
 	nrplayers = boost::lexical_cast<std::string>(static_cast<unsigned int>(input_nrplayers));
 }
 void SavegameData::set_mapname(const std::string& input_mapname) {
+	// TODO(Nordfriese): If the map was defined by an add-on, use that add-on's textdomain
+	// instead (if available). We'll need to store the add-on name in the savegame for this.
 	i18n::Textdomain td("maps");
 	mapname = _(input_mapname);
 }

@@ -19,6 +19,8 @@
 
 #include "wui/mapdata.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "io/filesystem/filesystem.h"
@@ -50,7 +52,7 @@ MapData::MapData(const Widelands::Map& map,
              init_maptype,
              init_displaytype) {
 
-	i18n::Textdomain td("maps");
+	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_correct_textdomain(init_filename));
 	if (!map.get_name().empty()) {
 		name = map.get_name();
 		localized_name = _(name);
