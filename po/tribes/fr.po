@@ -6,7 +6,7 @@
 # Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # C138, 2021
-# David D, 2018
+# David D, 2018,2021
 # GunChleoc, 2016
 # GunChleoc, 2014
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-02-20 22:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 09:31+0000\n"
+"Last-Translator: David D\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1251,8 +1251,8 @@ msgstr "Cuisinier de racines de Manioc"
 msgid "working"
 msgstr "travaille"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1704,7 +1704,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Atelier de pierre"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1725,7 +1724,6 @@ msgstr "construit une pelle"
 msgid "making a felling ax"
 msgstr "construit une cognée"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1750,7 +1748,6 @@ msgstr "Construit une machette"
 msgid "making kitchen tools"
 msgstr "construit des ustensiles de cuisine"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -5628,7 +5625,7 @@ msgstr "Soyez prudent"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Vous avez seulement une marchandise pour chaque outil dont vous aurez besoin pour démarrer votre économie. Assurez vous qu'aucun outil inutile ne soit produit."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11

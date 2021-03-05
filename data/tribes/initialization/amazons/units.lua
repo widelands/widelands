@@ -1415,12 +1415,12 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "amazons_youth_gathering",
+         name = "amazons_initiation_site",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an amazon production site: Youth Gathering
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Initiation Site
             purpose = pgettext("amazons_building", "Equips recruits and trains them as soldiers."),
-            -- TRANSLATORS: Performance helptext for an amazon production site: Youth Gathering
-            performance = pgettext("amazons_building", "The youth gathering needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+            -- TRANSLATORS: Performance helptext for an amazon production site: Initiation Site
+            performance = pgettext("amazons_building", "The initiation site needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
       {
