@@ -1415,7 +1415,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			if ((code.mod & KMOD_CTRL) && (code.mod & KMOD_SHIFT)) {
 				if (cheat_mode_enabled_) {
 					cheat_mode_enabled_ = false;
-				} else {
+				} else if (!omnipotent()) {
 					broadcast_cheating_message();
 					cheat_mode_enabled_ = true;
 				}
