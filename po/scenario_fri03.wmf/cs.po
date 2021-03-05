@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -51,11 +51,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:50
 msgid "Pay or Fight"
-msgstr ""
+msgstr "Zaplať, nebo zaútoč"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:52
 msgid "Pay the Empire or Destroy Their Port"
-msgstr ""
+msgstr "Zaplať Císařství, nebo znič jeho přístav"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 #, lua-format
@@ -66,21 +66,31 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
+"Uskladni ve svém nejsevernějším přístavu %d zlatý prut na plavbu na lodi "
+"Marca Caia Obávaného."
 msgstr[1] ""
+"Uskladni ve svém nejsevernějším přístavu %d zlaté pruty na plavbu na lodi "
+"Marca Caia Obávaného."
 msgstr[2] ""
+"Uskladni ve svém nejsevernějším přístavu %d zlatých prutů na plavbu na lodi "
+"Marca Caia Obávaného."
 msgstr[3] ""
+"Uskladni ve svém nejsevernějším přístavu %d zlatých prutů na plavbu na lodi "
+"Marca Caia Obávaného."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:56
 msgid ""
 "Alternatively, you can destroy his port to build one of your own in it’s "
 "place."
-msgstr ""
+msgstr "Případně můžeš zničit jeho přístav a postavit na jeho místě vlastní."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:57
 msgid ""
 "All soldiers who are present on the Northern island when you embark will "
 "accompany you."
 msgstr ""
+"Všichni vojáci, které budeš mít na severním ostrově při svém nalodění k "
+"dispozici, tě doprovodí."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:58
 msgid "You have two hours to accomplish this objective."
@@ -452,6 +462,10 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"Ale je tomu tak, že mí vojáci jsou znuděni, cítí se být zbytečnými. Změřme "
+"své síly! Dejte rozkaz svým vojákům ať srovnají můj palác se zemí. Jsem si "
+"jistý, že nemáte šanci na úspěch, a proto vám slibuji, že se budu přimlouvat"
+" u našeho božstva za zdárný konec vaší cesty, pokud v klání uspějete."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
@@ -471,17 +485,21 @@ msgid ""
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
 msgstr ""
+"Podařilo se vám překonat mé nejlepší stráže a změnit můj palác v trosky, což"
+" se zdálo být nemožné. Určitě jste velmi udatní a božstva stojí při vás. Je "
+"jisté, že jste si vítězství zasloužili. Blahopřeji vám tedy a přeji úspěch "
+"vaší cestě. Satul vás ochraňuj!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "Ledové pláně"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
 msgid "The next island"
-msgstr ""
+msgstr "Další ostrov"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
@@ -490,6 +508,9 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
+"Zdá se, že jsme už jsme opravdu blízko úplnému severu. Ledové pláně! "
+"Překvapuje mě, že něco takového opravdu existuje. Ale velmi pochybuji, že by"
+" tu někdo mohl žít. Obávám se, že tu žádnou pomoc nenajdeme."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
@@ -497,10 +518,12 @@ msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
 msgstr ""
+"Nedá se jinak. Musíme rychle najít další místo na přístav, abychom mohli "
+"pokračovat v cestě."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
-msgstr ""
+msgstr "Místo na přístav nalezeno"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
@@ -508,16 +531,18 @@ msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
 msgstr ""
+"Nalezli jsme místo vhodné pro přístav. Nyní můžeme opustit tuto studenou "
+"ledovou pustinu a pokračovat v plavbě."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
 msgid "The North"
-msgstr ""
+msgstr "Sever"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
 msgid "In the North"
-msgstr ""
+msgstr "Na severu"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
@@ -526,6 +551,9 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
+"Ano, takto si představuji dálný sever. Stále tu lze spatřit zelené louky, "
+"ale sněhová pole se směrem k severu stávají většími a většími, kam až oko "
+"dohlédne."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:224
@@ -533,6 +561,8 @@ msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
 msgstr ""
+"To vypadá nadějně, ale mohl by to být zase jen další ostrov. Musíme rychle "
+"pokračovat v cestě."
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:232
@@ -540,10 +570,13 @@ msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
+"Naši vojáci opět zahlédli nějaké místní obyvatele. Zajímalo by mě, zda se "
+"podobají tomu podivínskému králi, který nám blahopřál, když jsme zničili "
+"jeho palác."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
-msgstr ""
+msgstr "Hlavně ne problémy"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:238
@@ -552,11 +585,14 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
+"Buďte pozdraveni, cizinci! Jsem Marcus Caius Obávaný, vyslanec Císařství. "
+"Patří tento ostrov vám? Pouze tudy procházíme, snad vám to není proti vůli. "
+"Nepřejeme si žádné problémy."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
 msgid "Travellers"
-msgstr ""
+msgstr "Náhodní cestující"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:244
@@ -566,6 +602,10 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
+"Mír s Vámi, Vážený pane Obávaný! Mé jméno je Nils Zemmek a toto je můj syn "
+"Hennek. Také tudy pouze procházíme. Říkáte, že jste vyslancem? To jste "
+"určitě často na cestách. Neslyšel jste tedy o mém ztraceném příteli "
+"Rýbaudovi? Pouze vím, že odešel na sever, nevíte, kde ho najít?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:250
@@ -576,6 +616,11 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Těší mě, že nejsme nepřáteli. Bohužel o nikom jménem Rýbaud jsem doposud "
+"neslyšel. Pokud směřujete na sever, pak máme stejnou cestu, protože tam jsem"
+" byl vyslán hlavním městem na svou misi. Právě chystáme loď k další plavbě. "
+"Můžete plout s námi, pokud si přejete, za předpokladu, že nám máte čím "
+"zaplatit za cestu."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
@@ -583,15 +628,17 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
+"Děkuji vám za nabídku! Co za cestu požadujete? A mohu se s vaším dovolením "
+"zeptat, co je cílem vaší cesty?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d prut zlata."
+msgstr[1] "%d pruty zlata."
+msgstr[2] "%d prutů zlata."
+msgstr[3] "%d prutů zlata."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -599,6 +646,9 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Chápu, že to pro vás může být hodně, ale pravda je taková, že mi Senát "
+"neposkytl příliš prostředků na takovouto výpravu, takže bychom nějaké "
+"potřebovali."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -611,6 +661,12 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"Důvodem mé cesty je vyhledat prokonsula Severních zemí, který už několik let"
+" odmítá odvádět daň. Mým úkolem je Muriliovi dobře domluvit, pokud se "
+"prokáže, že je to zapříčiněno spíše jeho nedostatečnou štědrostí než jeho "
+"nouzí. Mým úkolem je postarat se o jeho cestu do hlavního města v řetězech. "
+"Řekl bych, že to není úplně špatný úkol. Pokud v něm uspěji, je velmi "
+"pravděpodobné, že se stanu novým prokonsulem."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -623,10 +679,16 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"Ale zpět k vaší cestě. Na severním pobřeží tohoto ostrova je jen jedno místo"
+" pro stavbu přístavu. Takže pokud chcete pokračovat, nic jiného vám nezbývá "
+"než zaplatit za cestu na mé galéře. Navíc moji astrologové mě varují, že se "
+"schyluje k hrozivé bouři, která na delší dobu plavbu po moři znemožní. "
+"Musíme vyplout do dvou hodin. A každý, kdo na ostrově v tu chvíli zůstane, "
+"ho jen tak brzy neopustí."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
-msgstr ""
+msgstr "Rozhodni se"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:278
@@ -635,6 +697,9 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Vypadá to, že nám opravdu chce pomoci se odtud dostat, ale ta suma je "
+"astronomická. Mohli bychom také zničit jeho přístav a postavit si vlastní. "
+"Nevím, co je lepší…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
@@ -665,6 +730,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Zaplatil jsi za cestu ryzím zlatem. Opravdu si ji zasloužíš. Naše loď je "
+"připravena, můžeš se nalodit!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
@@ -682,40 +749,43 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"Nestihli jste to. My musíme nyní vyplout a vám bouře nedovolí opustit tento "
+"ostrov. Mrzí mě to, ale počasí nečeká. Sbohem."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Stavitel hrází"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Domek stavitele hrází"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "stavění zátaras"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Přístav"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
 msgstr ""
+"Staví ve svém okolí vlnolamy, které umožňují získávat zem na úkor moře."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Staví vlnolamy, které umožňují získávat zem na úkor moře."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -724,3 +794,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Slouží jako výchozí bod pro zámořskou kolonizaci a obchod. Dále skladuje tvé"
+" vojáky, dělníky, suroviny a nástroje."

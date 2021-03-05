@@ -8,7 +8,7 @@
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # C138, 2020
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2017-2018
+# David D, 2017-2018,2021
 # GunChleoc, 2016,2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # finki boy, 2015
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-03-02 12:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 13:16+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1445,7 +1445,7 @@ msgstr "Il y a un problème inconnu en lisant les informations du pilote graphiq
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "Widelands ne fonctionnera pas car nous n'avons pas été capable de détecter la version d'OpenGL."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1464,7 +1464,7 @@ msgstr "Widelands ne fonctionnera pas car votre pilote graphique est trop vieux.
 #: ../../src/graphic/gl/initialize.cc:223
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "La version de %1$u nécessite d'être la version %2$u.%3$u ou supérieure."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1472,15 +1472,15 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Le %1$s nécessite d'être en version %2$u.%3$u ou plus récente."
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:309
 msgid "Shading Language"
-msgstr ""
+msgstr "Langage de shading"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -2316,7 +2316,7 @@ msgstr "impraticable"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Un fichier de carte est invalide :\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
@@ -2522,14 +2522,14 @@ msgstr[1] ""
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n· ‘%2$s’ requis par l'hôte n'a pas pu être trouvé"
 
 #: ../../src/network/gameclient.cc:702
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n· ‘%2$s’ installé en version %3$s mais l'hôte utilise la version %4$s"
 
 #: ../../src/network/gameclient.cc:871
 msgid "/me 's file failed md5 checksumming."
@@ -2543,14 +2543,14 @@ msgstr "/me a vérifié le fichier reçu. Bien que la vérification md5 soit ré
 
 #: ../../src/network/gameclient.cc:1203
 msgid "Disconnected"
-msgstr ""
+msgstr "Déconnecté"
 
 #: ../../src/network/gameclient.cc:1205
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "La connexion avec l’hôte a été perdue pour la raison suivante :\n%s"
 
 #: ../../src/network/gamehost.cc:291
 msgid "Available host commands are:"
@@ -3053,7 +3053,7 @@ msgstr "Le client %1$s n'a pas répondu depuis plus de %2$s."
 #: ../../src/network/network_gaming_messages.cc:169
 #, c-format
 msgid "Client %s is cheating!"
-msgstr ""
+msgstr "Le client %s triche !"
 
 #: ../../src/network/network_lan_promotion.cc:362
 msgid "Failed to use the local network!"
@@ -3280,11 +3280,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:300
 msgid "Open Link"
-msgstr ""
+msgstr "Ouvrir lien"
 
 #: ../../src/ui_fsmenu/addons.cc:302
 msgid "Copy Link"
-msgstr ""
+msgstr "Copier lien"
 
 #: ../../src/ui_fsmenu/addons.cc:322
 #, c-format
@@ -3295,7 +3295,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:352
 msgid "Development"
-msgstr ""
+msgstr "Développement "
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons.cc:355
@@ -3397,7 +3397,7 @@ msgstr "Installé (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:829
 msgid "Browse"
-msgstr ""
+msgstr "Naviguer"
 
 #: ../../src/ui_fsmenu/addons.cc:830
 #, c-format
@@ -3454,8 +3454,8 @@ msgstr "· ‘%1$s’ nécessite d'abord ‘%2$s’ et ‘%3$s’, mais ils sont
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Erreur de dépendance"
+msgstr[1] "%u Erreurs de dépendances"
 
 #: ../../src/ui_fsmenu/addons.cc:945
 msgid ""
@@ -3546,17 +3546,17 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1395
 #, c-format
 msgid "Requires a Widelands version of at least %s."
-msgstr ""
+msgstr "Nécessite une version Widelands d’au moins %s."
 
 #: ../../src/ui_fsmenu/addons.cc:1399
 #, c-format
 msgid "Requires a Widelands version of at most %s."
-msgstr ""
+msgstr "Nécessite une version Widelands d’au plus %s."
 
 #: ../../src/ui_fsmenu/addons.cc:1403
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
-msgstr ""
+msgstr "Nécessite une version de Widelands d’au moins %1$s et d'au plus %2$s."
 
 #: ../../src/ui_fsmenu/addons.cc:1445 ../../src/ui_fsmenu/addons.cc:1494
 msgid "Disable"
@@ -5157,18 +5157,18 @@ msgstr "Chemin de fichier tutorial.lua invalide dans campaigns.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriel"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:168
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:171
 msgid "Authors"
 msgstr "Auteurs"
@@ -5262,11 +5262,11 @@ msgstr "Nous sommes désolés, mais Widelands n'a pas été dans la possibilité
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Singleplayer"
-msgstr ""
+msgstr "Joueur solo"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Multiplayer"
-msgstr ""
+msgstr "Multi-joueur"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Editor – Load Map"
@@ -5302,23 +5302,23 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:273
 msgid "Cut Text"
-msgstr ""
+msgstr "Couper texte"
 
 #: ../../src/wlapplication_options.cc:277
 msgid "Copy Text"
-msgstr ""
+msgstr "Copier texte"
 
 #: ../../src/wlapplication_options.cc:281
 msgid "Paste Text"
-msgstr ""
+msgstr "Coller texte"
 
 #: ../../src/wlapplication_options.cc:285
 msgid "Select All"
-msgstr ""
+msgstr "Sélectionner tout"
 
 #: ../../src/wlapplication_options.cc:290
 msgid "Delete Item"
-msgstr ""
+msgstr "Supprimer article"
 
 #: ../../src/wlapplication_options.cc:295
 msgid "Tooltip Accessibility Mode Key"
@@ -5326,19 +5326,19 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:300
 msgid "Toggle Fullscreen"
-msgstr ""
+msgstr "Basculer en plein-écran"
 
 #: ../../src/wlapplication_options.cc:305
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Prendre capture d'écran"
 
 #: ../../src/wlapplication_options.cc:310
 msgid "Zoom In"
-msgstr ""
+msgstr "Zoom avant"
 
 #: ../../src/wlapplication_options.cc:315
 msgid "Zoom Out"
-msgstr ""
+msgstr "Zoom arrière"
 
 #: ../../src/wlapplication_options.cc:320
 msgid "Reset Zoom"
@@ -5354,7 +5354,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:335
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: ../../src/wlapplication_options.cc:359
 msgid "Info Tool"
@@ -5564,7 +5564,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:737
 msgctxt "hotkey"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: ../../src/wlapplication_options.cc:741
 msgctxt "hotkey"
@@ -5574,17 +5574,17 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:743
 msgctxt "hotkey"
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: ../../src/wlapplication_options.cc:747
 msgctxt "hotkey"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: ../../src/wlapplication_options.cc:752
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../src/wui/actionconfirm.cc:186
 msgid "Destroy building?"
@@ -5782,9 +5782,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivité faible :"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6618,7 +6618,7 @@ msgstr "Réinitialiser le zoom"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:276
 msgid "Zoom –"
-msgstr ""
+msgstr "Zoom –"
 
 #: ../../src/wui/interactive_base.cc:709
 #, c-format
@@ -6724,8 +6724,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Affaires maritimes"
@@ -7492,7 +7492,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:73
 msgid "Red:"
-msgstr ""
+msgstr "Rouge :"
 
 #: ../../src/wui/stock_menu.cc:73
 msgid "Stock is lower than the target"
@@ -7504,11 +7504,11 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:76
 msgid "Yellow:"
-msgstr ""
+msgstr "Jaune :"
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Green:"
-msgstr ""
+msgstr "Vert :"
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Stock is higher than the target"
@@ -7569,7 +7569,7 @@ msgstr "Expédition"
 
 #: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
-msgstr ""
+msgstr "↓"
 
 #: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
