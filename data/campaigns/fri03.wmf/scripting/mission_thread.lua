@@ -204,20 +204,6 @@ function mission_thread()
          -- Gather the soldiers. We take all who are on the northern island, no
          -- matter whether they are in warehouses, milsites, or walking around.
          fight.soldiers = {}
-         for i,bld in pairs(array_combine(
-            p1:get_buildings("frisians_warehouse"),
-            p1:get_buildings("frisians_port"),
-            p1:get_buildings("frisians_sentinel"),
-            p1:get_buildings("frisians_outpost"),
-            p1:get_buildings("frisians_tower"),
-            p1:get_buildings("frisians_fortress"),
-            p1:get_buildings("frisians_wooden_tower"),
-            p1:get_buildings("frisians_wooden_tower_high")
-         )) do
-            if bld.fields[1].y < 200 then
-               insert_soldiers(fight.soldiers, bld:get_soldiers("all"))
-            end
-         end
          for x = 0, map.width - 1 do
             for y = 24, 166 do
                for i,bob in pairs(map:get_field(x, y).bobs) do
