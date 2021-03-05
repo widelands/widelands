@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# David D, 2021
 # GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 10:29+0000\n"
+"Last-Translator: David D\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,7 +260,7 @@ msgstr "Après ça, choisissez 'Stock'."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
-msgstr ""
+msgstr "Vous pouvez aussi utiliser le raccourci clavier  \"%s\" pour accéder plus rapidement à cette fenêtre."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -423,7 +424,7 @@ msgstr "Ouvrez-la. Vous pouvez y accéder via le bouton en bas de l'écran."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "Autrement , vous pouvez y accéder directement avec la touche \"%s\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -574,7 +575,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "En ce moment, toutes les mines sont approvisionnées avec des rations. Si vous voulez donner la priorité à une mine spécifique, vous avez juste à ouvrir sa fenêtre. Dans l'onglet marchandises, près de chaque marchandise, vous pouvez voir un curseur."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -582,7 +583,7 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "Lorsque vous bougez le curseur vers la zone bleue sur la partie gauche (priorité basse), la marchandise correspondante est livrée moins souvent. Rouge (côté droit) signifie que le plus possible de marchandises doivent être livrées à ce bâtiment, probablement parce qu'il produit quelque chose d'important."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
