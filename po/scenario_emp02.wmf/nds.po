@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2020-08-26 12:03+0000\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 10:55+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -311,7 +311,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr "Mienheer, ick hebb gode Narichten för Ji: As ick na Oosten gahn bün, hebb ick eenen groten Barg funnen. Ick glööv – aver dat sall een Schattsöker nakieken – dat wi vun eenigen Steden im Barg Marmel ofboen könen."
+msgstr "Mienheer, ick hebb gode Narichten för Ji: As ick na Oosten gahn bün, hebb ick eenen groten Barg funnen. Ick gloov – aver dat sall een Schattsöker nakieken – dat wi vun eenigen Steden im Barg Marmel ofboen könen."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
@@ -342,7 +342,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Bi de Gotten, wat för een unbannigs Glück! 't gifft noch twee anner Bargen, un ick glööv, de eene hett een Bült vun Köhle un de anner vun Iesenkluut. Ick raad Jo, stracks Iesen- un Köhle-Bargwarken (of tominnst Holtköhl-Brannereen), Smeltwarken, Warktüügsmeden, Wapensmeden un Panzersmeden to bauen."
+msgstr "Bi de Gotten, wat för een unbannigs Glück! 't gifft noch twee anner Bargen, un ick gloov, de eene hett een Bült vun Köhle un de anner vun Iesenkluut. Ick raad Jo, stracks Iesen- un Köhle-Bargwarken (of tominnst Holtköhl-Brannereen), Smeltwarken, Warktüügsmeden, Wapensmeden un Panzersmeden to bauen."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:201
