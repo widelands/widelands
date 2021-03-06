@@ -28,6 +28,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "base/i18n.h"
 #include "base/macros.h"
 
 namespace AddOns {
@@ -134,7 +135,7 @@ using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;
 // Sorted list of all add-ons mapped to whether they are currently enabled
 using AddOnState = std::pair<std::shared_ptr<AddOnInfo>, bool>;
 extern std::vector<AddOnState> g_addons;
-const AddOnInfo* find_addon(const std::string& name);
+const AddOnInfo& find_addon(const std::string& name);
 
 extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
@@ -147,6 +148,8 @@ AddOnConflict check_requirements(const AddOnRequirements&);
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
 std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
+
+i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename);
 
 // This guard allows you to modify `g_addons` in any way you like
 // and ensures that it is reset to the initial state later.

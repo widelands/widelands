@@ -19,9 +19,12 @@
 
 #include "wui/mapdata.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "io/filesystem/filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 
 MapData::MapData(const std::string& init_filename,
@@ -50,7 +53,7 @@ MapData::MapData(const Widelands::Map& map,
              init_maptype,
              init_displaytype) {
 
-	i18n::Textdomain td("maps");
+	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_correct_textdomain(init_filename));
 	if (!map.get_name().empty()) {
 		name = map.get_name();
 		localized_name = _(name);
@@ -173,7 +176,7 @@ MapData MapData::create_empty_dir(const std::string& current_dir) {
 
 // static
 MapData MapData::create_directory(const std::string& directory) {
-	std::string localized_name;
+	std::string localized_name = FileSystem::fs_filename(directory.c_str());
 	if (boost::equals(directory, "maps/MP_Scenarios")) {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
@@ -183,8 +186,22 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (boost::equals(directory, "maps/Downloaded")) {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
-	} else {
-		localized_name = FileSystem::fs_filename(directory.c_str());
+	} else if (directory.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
+		std::string addon = directory.substr(kAddOnDir.size() + 1);
+		addon = addon.substr(0, addon.find('/'));
+		i18n::AddOnTextdomain td(addon, AddOns::find_addon(addon).i18n_version);
+		std::string profilepath = kAddOnDir;
+		profilepath += FileSystem::file_separator();
+		profilepath += addon;
+		profilepath += FileSystem::file_separator();
+		profilepath += "dirnames";
+		Profile p(profilepath.c_str());
+		if (Section* s = p.get_section("global")) {
+			const std::string fname = FileSystem::fs_filename(directory.c_str());
+			if (s->has_val(fname.c_str())) {
+				localized_name = s->get_safe_string(fname);
+			}
+		}
 	}
 	return MapData(directory, localized_name);
 }

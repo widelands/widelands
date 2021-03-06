@@ -59,19 +59,22 @@ const std::string& get_homedir();
 /// Create an object of this type to grab a textdomain and make sure that it is
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
-struct Textdomain {
+struct GenericTextdomain {
+	virtual ~GenericTextdomain() = default;
+};
+struct Textdomain : GenericTextdomain {
 	// For all common purposes
 	explicit Textdomain(const std::string& name) {
 		grab_textdomain(name, get_localedir().c_str());
 	}
-	~Textdomain() {
+	~Textdomain() override {
 		release_textdomain();
 	}
 };
-struct AddOnTextdomain {
+struct AddOnTextdomain : GenericTextdomain {
 	// For strings defined in an add-on
 	explicit AddOnTextdomain(std::string addon, int i18n_version);
-	~AddOnTextdomain() {
+	~AddOnTextdomain() override {
 		release_textdomain();
 	}
 };
