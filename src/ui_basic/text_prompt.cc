@@ -81,6 +81,7 @@ TextPrompt::TextPrompt(UI::Panel& parent,
 	set_center_panel(&box_);
 	editbox_.focus();
 	center_to_parent();
+	initialization_complete();
 }
 
 bool TextPrompt::handle_key(const bool down, const SDL_Keysym code) {

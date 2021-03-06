@@ -199,6 +199,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 
 	layout();
 	center_to_parent();
+	initialization_complete();
 }
 
 bool AddOnsPackager::handle_key(const bool down, const SDL_Keysym code) {
@@ -318,6 +319,7 @@ void AddOnsPackager::clicked_new_addon() {
 		}
 	}
 	n.content_box().add(&category, UI::Box::Resizing::kFullSize);
+	n.initialization_complete();
 
 	for (;;) {
 		if (n.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {

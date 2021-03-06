@@ -59,6 +59,7 @@ struct ShortcutChooser : public UI::Window {
 		box->add(cancel, UI::Box::Resizing::kFullSize);
 		set_center_panel(box);
 		center_to_parent();
+		initialization_complete();
 	}
 
 	SDL_Keysym key;
@@ -201,6 +202,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	layout();
 	center_to_parent();
+	initialization_complete();
 }
 
 bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
