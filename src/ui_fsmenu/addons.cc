@@ -1003,8 +1003,9 @@ static void install_translation(const std::string& temp_locale_path,
 
 	// NOTE:
 	// gettext expects a directory structure such as
-	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.mo"
-	// where "nds" is the language abbreviation and "addon_name.wad" the add-on's name.
+	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.VERSION.mo"
+	// where "nds" is the language abbreviation, VERSION the add-on's i18n version,
+	// and "addon_name.wad" the add-on's name.
 	// If we use a different structure, gettext will not find the translations!
 
 	const std::string temp_filename =
@@ -1122,9 +1123,6 @@ void AddOnsCtrl::upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, const bool f
 		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
 			install_translation(temp_locale_path, remote->internal_name, remote->i18n_version);
 		}
-		// Note: Changes to translations might not be applied until Widelands is
-		// restarted. This happens because gettext caches translation results
-		// and does not provide a way to clear this cache.
 	}
 	for (auto& pair : AddOns::g_addons) {
 		if (pair.first->internal_name == remote->internal_name) {
