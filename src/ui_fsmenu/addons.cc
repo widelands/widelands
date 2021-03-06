@@ -995,7 +995,8 @@ inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
 }
 
 static void install_translation(const std::string& temp_locale_path,
-                                const std::string& addon_name) {
+                                const std::string& addon_name,
+                                const int i18n_version) {
 	assert(g_fs->file_exists(temp_locale_path));
 
 	// NOTE:
@@ -1014,12 +1015,14 @@ static void install_translation(const std::string& temp_locale_path,
 	g_fs->ensure_directory_exists(new_locale_dir);
 
 	const std::string new_locale_path =
-	   new_locale_dir + FileSystem::file_separator() + addon_name + ".mo";
+	   new_locale_dir + FileSystem::file_separator() + addon_name + '.' + std::to_string(i18n_version) + ".mo";
 
 	assert(!g_fs->is_directory(new_locale_path));
-	if (g_fs->file_exists(new_locale_path)) {
-		// delete the outdated translation if present
-		g_fs->fs_unlink(new_locale_path);
+	// Delete outdated translations if present.
+	for (const std::string& mo : g_fs->list_directory(new_locale_dir)) {
+		if (mo.compare(0, addon_name.size(), addon_name)) {
+			g_fs->fs_unlink(mo);
+		}
 	}
 	assert(!g_fs->file_exists(new_locale_path));
 
@@ -1067,7 +1070,7 @@ void AddOnsCtrl::install(std::shared_ptr<AddOns::AddOnInfo> remote) {
 
 		// Now download the translations
 		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-			install_translation(temp_locale_path, remote->internal_name);
+			install_translation(temp_locale_path, remote->internal_name, remote->i18n_version);
 		}
 
 		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote->internal_name),
@@ -1114,7 +1117,7 @@ void AddOnsCtrl::upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, const bool f
 
 		// Now download the translations
 		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-			install_translation(temp_locale_path, remote->internal_name);
+			install_translation(temp_locale_path, remote->internal_name, remote->i18n_version);
 		}
 	}
 	for (auto& pair : AddOns::g_addons) {
