@@ -71,17 +71,17 @@ private:
 };
 
 struct InstalledAddOnRow : public UI::Panel {
-	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOns::AddOnInfo&, bool enabled);
+	InstalledAddOnRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool enabled);
 	~InstalledAddOnRow() override {
 	}
-	const AddOns::AddOnInfo& info() const {
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
 
 private:
-	AddOns::AddOnInfo info_;
+	std::shared_ptr<AddOns::AddOnInfo> info_;
 	bool enabled_;
 	UI::Button uninstall_, toggle_enabled_;
 	UI::Icon category_;
@@ -91,14 +91,14 @@ private:
 struct RemoteAddOnRow : public UI::Panel {
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
-	               const AddOns::AddOnInfo&,
+	               const std::shared_ptr<AddOns::AddOnInfo>,
 	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
-	const AddOns::AddOnInfo& info() const {
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
 	bool upgradeable() const;
@@ -107,7 +107,7 @@ struct RemoteAddOnRow : public UI::Panel {
 	}
 
 private:
-	AddOns::AddOnInfo info_;
+	std::shared_ptr<AddOns::AddOnInfo> info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
 	UI::Icon category_, verified_;
 	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
@@ -124,8 +124,8 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install(const AddOns::AddOnInfo&);
-	void upgrade(const AddOns::AddOnInfo&, bool full_upgrade);
+	void install(std::shared_ptr<AddOns::AddOnInfo>);
+	void upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool full_upgrade);
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -137,7 +137,7 @@ public:
 		return network_handler_;
 	}
 
-	const std::vector<AddOns::AddOnInfo>& get_remotes() const {
+	const AddOns::AddOnsList& get_remotes() const {
 		return remotes_;
 	}
 	bool is_remote(const std::string& name) const;
@@ -177,20 +177,20 @@ private:
 
 	void category_filter_changed(AddOns::AddOnCategory);
 	void check_enable_move_buttons();
-	const AddOns::AddOnInfo& selected_installed_addon() const;
-	void focus_installed_addon_row(const AddOns::AddOnInfo&);
+	std::shared_ptr<AddOns::AddOnInfo> selected_installed_addon() const;
+	void focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo>);
 
 	void autofix_dependencies();
 
 	AddOns::NetAddons network_handler_;
 
-	std::vector<AddOns::AddOnInfo> remotes_;
+	AddOns::AddOnsList remotes_;
 	void refresh_remotes();
 
-	bool matches_filter(const AddOns::AddOnInfo&);
+	bool matches_filter(std::shared_ptr<AddOns::AddOnInfo>);
 
-	std::string download_addon(ProgressIndicatorWindow&, const AddOns::AddOnInfo&);
-	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOns::AddOnInfo&);
+	std::string download_addon(ProgressIndicatorWindow&, std::shared_ptr<AddOns::AddOnInfo>);
+	std::set<std::string> download_i18n(ProgressIndicatorWindow&, std::shared_ptr<AddOns::AddOnInfo>);
 
 	void inform_about_restart(const std::string&);
 };

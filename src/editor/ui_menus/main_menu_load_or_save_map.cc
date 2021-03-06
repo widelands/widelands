@@ -171,9 +171,9 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		// but only in the load screen, not in the save screen!
 		if (include_addon_maps_) {
 			for (auto& addon : AddOns::g_addons) {
-				if (addon.first.category == AddOns::AddOnCategory::kMaps && addon.second) {
+				if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
 					for (const std::string& mapname : g_fs->list_directory(
-					        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
+					        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
 						files.insert(mapname);
 					}
 				}

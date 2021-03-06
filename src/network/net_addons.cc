@@ -93,7 +93,7 @@ static inline std::string get_addons_server_name() {
 }
 
 constexpr unsigned kCurrentListVersion = 3;
-std::vector<AddOnInfo> NetAddons::refresh_remotes() {
+AddOnsList NetAddons::refresh_remotes() {
 	// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
 	// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
 	// to be maintained by hand there which is exceedlingly fragile and messy.
@@ -106,7 +106,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	init();
 
-	std::vector<AddOnInfo> result_vector;
+	AddOnsList result_vector;
 
 	// For backwards compatibility, the server keeps multiple versions of the list
 	set_url_and_timeout(get_addons_server_name() + "list_" + std::to_string(kCurrentListVersion));
@@ -149,7 +149,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	const size_t nr_addons = next_number(output);
 	for (size_t i = 0; i < nr_addons; ++i) {
-		AddOnInfo info;
+		AddOnInfo& info = *new AddOnInfo;
 
 		info.internal_name = next_word(output);
 
@@ -218,7 +218,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		info.verified = next_word(output) == "verified";
 
-		result_vector.push_back(info);
+		result_vector.push_back(std::shared_ptr<AddOnInfo>(&info));
 	}
 
 	return result_vector;

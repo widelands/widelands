@@ -70,9 +70,7 @@ struct Textdomain {
 };
 struct AddOnTextdomain {
 	// For strings defined in an add-on
-	explicit AddOnTextdomain(const std::string& addon) {
-		grab_textdomain(addon, get_addon_locale_dir().c_str());
-	}
+	explicit AddOnTextdomain(std::string addon, int i18n_version);
 	~AddOnTextdomain() {
 		release_textdomain();
 	}

@@ -496,9 +496,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		}
 	}
 	for (auto& addon : AddOns::g_addons) {
-		if (addon.first.category == AddOns::AddOnCategory::kTheme && addon.second) {
-			const std::string path = kAddOnDir + '/' + addon.first.internal_name + '/';
-			theme_dropdown_.add(addon.first.descname(), path, nullptr, path == template_dir());
+		if (addon.first->category == AddOns::AddOnCategory::kTheme && addon.second) {
+			const std::string path = kAddOnDir + '/' + addon.first->internal_name + '/';
+			theme_dropdown_.add(addon.first->descname(), path, nullptr, path == template_dir());
 		}
 	}
 

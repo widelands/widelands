@@ -674,8 +674,8 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		const AddOns::AddOnVersion v = AddOns::string_to_version(packet.string());
 		AddOns::AddOnVersion found;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == name) {
-				found = pair.first.version;
+			if (pair.first->internal_name == name) {
+				found = pair.first->version;
 				new_g_addons.push_back(std::make_pair(pair.first, true));
 				break;
 			}

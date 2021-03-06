@@ -1823,8 +1823,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && pair.first.category != AddOns::AddOnCategory::kTheme) {
-				enabled_addons.push_back(&pair.first);
+			if (pair.second && pair.first->category != AddOns::AddOnCategory::kTheme) {
+				enabled_addons.push_back(pair.first.get());
 			}
 		}
 		packet.unsigned_32(enabled_addons.size());

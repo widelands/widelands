@@ -791,7 +791,7 @@ void MainMenu::layout() {
 
 bool MainMenu::check_desyncing_addon() {
 	for (const auto& pair : AddOns::g_addons) {
-		if (!pair.first.sync_safe && pair.second) {
+		if (!pair.first->sync_safe && pair.second) {
 			UI::WLMessageBox mmb(
 			   this, UI::WindowStyle::kFsMenu, _("Desyncing Add-On Found"),
 			   _("An enabled add-on is known to cause desyncs. Proceed at your own risk."),

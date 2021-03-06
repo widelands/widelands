@@ -566,7 +566,7 @@ void WLApplication::init_and_run_game_from_template() {
 		}
 		bool found = false;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == name) {
+			if (pair.first->internal_name == name) {
 				found = true;
 				new_g_addons.push_back(std::make_pair(pair.first, true));
 				break;

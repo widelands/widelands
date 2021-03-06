@@ -559,8 +559,8 @@ bool Game::run(StartGameType const start_game_type,
 		// Check whether we need to disable replays because of add-ons.
 		// For savegames this has already been done by the game class packet.
 		if (writereplay_) {
-			for (const AddOns::AddOnInfo& a : enabled_addons()) {
-				if (!a.sync_safe) {
+			for (const auto& a : enabled_addons()) {
+				if (!a->sync_safe) {
 					set_write_replay(false);
 					break;
 				}
@@ -569,7 +569,7 @@ bool Game::run(StartGameType const start_game_type,
 				// We need to check all enabled add-ons as well because enabled_addons() does
 				// not contain e.g. desync-prone starting condition or win condition add-ons.
 				for (const auto& pair : AddOns::g_addons) {
-					if (pair.second && !pair.first.sync_safe) {
+					if (pair.second && !pair.first->sync_safe) {
 						set_write_replay(false);
 						break;
 					}
@@ -639,11 +639,11 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 		} else {
 			// Run all selected add-on scripts (not in scenarios)
-			for (const AddOns::AddOnInfo& addon : enabled_addons()) {
-				if (addon.category == AddOns::AddOnCategory::kScript) {
+			for (const auto& addon : enabled_addons()) {
+				if (addon->category == AddOns::AddOnCategory::kScript) {
 					enqueue_command(new CmdLuaScript(
 					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
-					                                    addon.internal_name +
+					                                    addon->internal_name +
 					                                    FileSystem::file_separator() + "init.lua"));
 				}
 			}

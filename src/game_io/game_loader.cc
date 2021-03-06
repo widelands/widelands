@@ -78,24 +78,24 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
 	// only ones where it makes a difference whether they are enabled during loading or not.
 	{
-		const std::vector<AddOns::AddOnInfo> old_enabled_addons = game_.enabled_addons();
+		const AddOns::AddOnsList old_enabled_addons = game_.enabled_addons();
 		game_.enabled_addons().clear();
 		for (const auto& requirement : preload.required_addons()) {
 			bool found = false;
 			for (auto& pair : AddOns::g_addons) {
-				if (pair.first.internal_name == requirement.first) {
+				if (pair.first->internal_name == requirement.first) {
 					found = true;
-					if (pair.first.version != requirement.second) {
+					if (pair.first->version != requirement.second) {
 						log_warn(
 						   "Savegame requires add-on '%s' at version %s but version %s is installed. "
 						   "They might be compatible, but this is not necessarily the case.\n",
 						   requirement.first.c_str(),
 						   AddOns::version_to_string(requirement.second).c_str(),
-						   AddOns::version_to_string(pair.first.version).c_str());
+						   AddOns::version_to_string(pair.first->version).c_str());
 					}
-					assert(pair.first.category == AddOns::AddOnCategory::kWorld ||
-					       pair.first.category == AddOns::AddOnCategory::kTribes ||
-					       pair.first.category == AddOns::AddOnCategory::kScript);
+					assert(pair.first->category == AddOns::AddOnCategory::kWorld ||
+					       pair.first->category == AddOns::AddOnCategory::kTribes ||
+					       pair.first->category == AddOns::AddOnCategory::kScript);
 					game_.enabled_addons().push_back(pair.first);
 					break;
 				}
@@ -111,7 +111,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		bool addons_changed = old_enabled_addons.size() != game_.enabled_addons().size();
 		if (!addons_changed) {
 			for (size_t i = 0; i < old_enabled_addons.size(); ++i) {
-				if (old_enabled_addons[i].internal_name != game_.enabled_addons()[i].internal_name) {
+				if (old_enabled_addons[i]->internal_name != game_.enabled_addons()[i]->internal_name) {
 					addons_changed = true;
 					break;
 				}

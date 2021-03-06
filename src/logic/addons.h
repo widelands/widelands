@@ -23,9 +23,12 @@
 #include <ctime>
 #include <functional>
 #include <map>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+#include "base/macros.h"
 
 namespace AddOns {
 
@@ -77,6 +80,7 @@ struct AddOnComment {
 constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
+	AddOnInfo() = default;
 	/*
 	 * When adding any new add-on properties that are stored in the `addon` file,
 	 * be sure to add them to MutableAddon as well so they are preserved/updated
@@ -121,11 +125,16 @@ struct AddOnInfo {
 	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
 	double average_rating() const;
+
+	DISALLOW_COPY_AND_ASSIGN(AddOnInfo);
 };
 
+using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;
+
 // Sorted list of all add-ons mapped to whether they are currently enabled
-using AddOnState = std::pair<AddOnInfo, bool>;
+using AddOnState = std::pair<std::shared_ptr<AddOnInfo>, bool>;
 extern std::vector<AddOnState> g_addons;
+const AddOnInfo* find_addon(const std::string& name);
 
 extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
@@ -137,7 +146,7 @@ AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
-AddOnInfo preload_addon(const std::string&);
+std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 
 // This guard allows you to modify `g_addons` in any way you like
 // and ensures that it is reset to the initial state later.
