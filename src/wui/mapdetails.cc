@@ -74,7 +74,6 @@ MapDetails::MapDetails(Panel* parent,
 
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 	descr_.set_handle_mouse(false);
-	descr_box_.set_force_scrolling(true);
 
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);
@@ -117,7 +116,10 @@ void MapDetails::layout() {
 		minimap_icon_.set_desired_size(width, height);
 	}
 
-	descr_box_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
+	const int full_height = descr_.get_h() + minimap_icon_.get_h();
+	const int descr_height = main_box_.get_h() - name_label_.get_h() - padding_;
+	descr_box_.set_force_scrolling(full_height > descr_height);
+	descr_box_.set_size(main_box_.get_w(), descr_height);
 }
 
 bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool render_minimap) {
