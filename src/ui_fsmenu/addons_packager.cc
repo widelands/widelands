@@ -226,7 +226,8 @@ void AddOnsPackager::initialize_mutable_addons() {
 	addons_with_changes_.clear();
 
 	for (const AddOns::AddOnState& a : AddOns::g_addons) {
-		mutable_addons_[a.first->internal_name] = AddOns::MutableAddOn::create_mutable_addon(*a.first);
+		mutable_addons_[a.first->internal_name] =
+		   AddOns::MutableAddOn::create_mutable_addon(*a.first);
 	}
 
 	rebuild_addon_list("");

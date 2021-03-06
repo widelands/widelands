@@ -457,10 +457,10 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			      .str();
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
-					text +=
-					   (boost::format(_("\n· %1$s (%2$s) by %3$s")) % pair.first->descname() %
-					    (pair.first->verified ? _("verified") : _("NOT VERIFIED")) % pair.first->author())
-					      .str();
+					text += (boost::format(_("\n· %1$s (%2$s) by %3$s")) % pair.first->descname() %
+					         (pair.first->verified ? _("verified") : _("NOT VERIFIED")) %
+					         pair.first->author())
+					           .str();
 				}
 			}
 			UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
@@ -660,29 +660,30 @@ void AddOnsCtrl::refresh_remotes() {
 		                                         "the server!<br>Error Message: %s")) %
 		                         e.what())
 		                           .str();
-		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(new AddOns::AddOnInfo{"",
-		                              title,
-		                              err,
-		                              bug,
-		                              [title]() { return title; },
-		                              [err]() { return err; },
-		                              [bug]() { return bug; },
-		                              {},
-		                              0,
-		                              AddOns::AddOnCategory::kNone,
-		                              {},
-		                              true,
-		                              "",
-		                              "",
-		                              false,
-		                              {{}, {}, {}, {}},
-		                              {},
-		                              0,
-		                              bug,
-		                              std::time(nullptr),
-		                              0,
-		                              {},
-		                              {}})};
+		remotes_ = {
+		   std::shared_ptr<AddOns::AddOnInfo>(new AddOns::AddOnInfo{"",
+		                                                            title,
+		                                                            err,
+		                                                            bug,
+		                                                            [title]() { return title; },
+		                                                            [err]() { return err; },
+		                                                            [bug]() { return bug; },
+		                                                            {},
+		                                                            0,
+		                                                            AddOns::AddOnCategory::kNone,
+		                                                            {},
+		                                                            true,
+		                                                            "",
+		                                                            "",
+		                                                            false,
+		                                                            {{}, {}, {}, {}},
+		                                                            {},
+		                                                            0,
+		                                                            bug,
+		                                                            std::time(nullptr),
+		                                                            0,
+		                                                            {},
+		                                                            {}})};
 	}
 	rebuild();
 }
@@ -760,7 +761,8 @@ void AddOnsCtrl::rebuild() {
 	}
 	{
 		const AddOnSortingCriteria sort_by = sort_order_.get_selected();
-		remotes_to_show.sort([sort_by](const std::shared_ptr<AddOns::AddOnInfo> a, const std::shared_ptr<AddOns::AddOnInfo> b) {
+		remotes_to_show.sort([sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
+		                               const std::shared_ptr<AddOns::AddOnInfo> b) {
 			switch (sort_by) {
 			case AddOnSortingCriteria::kNameABC:
 				return a->descname().compare(b->descname()) < 0;
@@ -1014,8 +1016,8 @@ static void install_translation(const std::string& temp_locale_path,
 	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path =
-	   new_locale_dir + FileSystem::file_separator() + addon_name + '.' + std::to_string(i18n_version) + ".mo";
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name +
+	                                    '.' + std::to_string(i18n_version) + ".mo";
 
 	assert(!g_fs->is_directory(new_locale_path));
 	// Delete outdated translations if present.
@@ -1041,7 +1043,8 @@ void AddOnsCtrl::install(std::shared_ptr<AddOns::AddOnInfo> remote) {
 
 		g_fs->ensure_directory_exists(kAddOnDir);
 
-		piw.progressbar().set_total(remote->file_list.files.size() + remote->file_list.locales.size());
+		piw.progressbar().set_total(remote->file_list.files.size() +
+		                            remote->file_list.locales.size());
 
 		const std::string path = download_addon(piw, remote);
 
@@ -1169,8 +1172,8 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw,
 				throw wexception("Checksum for '%s' not found", file_to_download.c_str());
 			}
 
-			network_handler_.download_addon_file(info->internal_name + "/" + file_to_download, checksum,
-			                                     temp_dir + "/" + file_to_download);
+			network_handler_.download_addon_file(info->internal_name + "/" + file_to_download,
+			                                     checksum, temp_dir + "/" + file_to_download);
 			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
 		} catch (const std::exception& e) {
 			log_err("download_addon %s: %s", info->internal_name.c_str(), e.what());
@@ -1385,7 +1388,8 @@ step1:
 	rebuild();
 }
 
-static std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::AddOnInfo> info) {
+static std::string
+required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::AddOnInfo> info) {
 	std::string result;
 	if (!info->sync_safe) {
 		result += "<br>";
@@ -1397,9 +1401,9 @@ static std::string required_wl_version_and_sync_safety_string(std::shared_ptr<Ad
 		result += "<br>";
 		std::string str;
 		if (info->max_wl_version.empty()) {
-			str +=
-			   (boost::format(_("Requires a Widelands version of at least %s.")) % info->min_wl_version)
-			      .str();
+			str += (boost::format(_("Requires a Widelands version of at least %s.")) %
+			        info->min_wl_version)
+			          .str();
 		} else if (info->min_wl_version.empty()) {
 			str +=
 			   (boost::format(_("Requires a Widelands version of at most %s.")) % info->max_wl_version)
@@ -1412,7 +1416,7 @@ static std::string required_wl_version_and_sync_safety_string(std::shared_ptr<Ad
 		}
 		result += g_style_manager
 		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
-		                                                             UI::FontStyle::kWarning)
+		                                                              UI::FontStyle::kWarning)
 		             .as_font_tag(str);
 	}
 	return result;
@@ -1909,7 +1913,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
      verified_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(info->verified ? "images/ui_basic/list_selected.png" :
-                                                  "images/ui_basic/stop.png")),
+                                                   "images/ui_basic/stop.png")),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -1946,7 +1950,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                   Number of screenshots */
                _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u")) %
             filesize_string(info->total_file_size) % info->download_count %
-            (info->number_of_votes() ? (boost::format("%.2f") % info->average_rating()).str() : "–") %
+            (info->number_of_votes() ? (boost::format("%.2f") % info->average_rating()).str() :
+                                       "–") %
             info->user_comments.size() % info->screenshots.size())
               .str(),
         UI::Align::kRight),
@@ -1993,7 +1998,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Version %4$s\n"
 			                    "Category: %5$s\n"
 			                    "%6$s\n")) %
-			    info_->descname() % info_->author() % (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
+			    info_->descname() % info_->author() %
+			    (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
 			    AddOns::version_to_string(info_->version) %
 			    AddOns::kAddOnCategories.at(info_->category).descname() % info_->description())
 			      .str(),
@@ -2017,7 +2023,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Available version: %5$s\n"
 			                    "Category: %6$s\n"
 			                    "%7$s\n")) %
-			    info->descname() % info->author() % (info->verified ? _("Verified") : _("NOT VERIFIED")) %
+			    info->descname() % info->author() %
+			    (info->verified ? _("Verified") : _("NOT VERIFIED")) %
 			    AddOns::version_to_string(installed_version) %
 			    AddOns::version_to_string(info->version) %
 			    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
@@ -2074,11 +2081,11 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	        info->download_count)
 	          .str() %
 	       (info->number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                                         "Average rating: %1$.3f (%2$u votes)",
-	                                                         info->number_of_votes())) %
-	                                  info->average_rating() % info->number_of_votes())
-	                                    .str() :
-	                                 _("No votes yet")) %
+	                                                          "Average rating: %1$.3f (%2$u votes)",
+	                                                          info->number_of_votes())) %
+	                                   info->average_rating() % info->number_of_votes())
+	                                     .str() :
+	                                  _("No votes yet")) %
 	       (boost::format(ngettext("%u comment", "%u comments", info->user_comments.size())) %
 	        info->user_comments.size()) %
 	       (boost::format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size())) %

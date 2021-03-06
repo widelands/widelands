@@ -313,38 +313,40 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	Section* i18n_section = i18n_profile.get_section("global");
 
 	AddOnInfo* i = new AddOnInfo{name,
-	               s.get_safe_untranslated_string("name"),
-	               s.get_safe_untranslated_string("description"),
-	               s.get_safe_untranslated_string("author"),
-	               nullptr, nullptr, nullptr,
-	               string_to_version(s.get_safe_string("version")),
-	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
-	               get_category(s.get_safe_string("category")),
-	               {},
-	               s.get_bool("sync_safe", false),
-	               s.get_string("min_wl_version", ""),
-	               s.get_string("max_wl_version", ""),
-	               false,
-	               {{}, {}, {}, {}},
-	               {},
-	               0,
-	               "",
-	               0,
-	               0,
-	               {},
-	               {}};
+	                             s.get_safe_untranslated_string("name"),
+	                             s.get_safe_untranslated_string("description"),
+	                             s.get_safe_untranslated_string("author"),
+	                             nullptr,
+	                             nullptr,
+	                             nullptr,
+	                             string_to_version(s.get_safe_string("version")),
+	                             i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
+	                             get_category(s.get_safe_string("category")),
+	                             {},
+	                             s.get_bool("sync_safe", false),
+	                             s.get_string("min_wl_version", ""),
+	                             s.get_string("max_wl_version", ""),
+	                             false,
+	                             {{}, {}, {}, {}},
+	                             {},
+	                             0,
+	                             "",
+	                             0,
+	                             0,
+	                             {},
+	                             {}};
 	i->descname = [i]() {
-		               i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
-		               return i18n::translate(i->unlocalized_descname);
-	               };
+		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		return i18n::translate(i->unlocalized_descname);
+	};
 	i->description = [i]() {
-		               i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
-		               return i18n::translate(i->unlocalized_description);
-	               };
+		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		return i18n::translate(i->unlocalized_description);
+	};
 	i->author = [i]() {
-		               i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
-		               return i18n::translate(i->unlocalized_author);
-	               };
+		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		return i18n::translate(i->unlocalized_author);
+	};
 
 	if (i->category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());
