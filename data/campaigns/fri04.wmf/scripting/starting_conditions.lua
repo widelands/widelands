@@ -209,8 +209,8 @@ else
          empire_donkey = 5,
    }
    soldiers = {
-      {{0,0,0,0}, 70},
-      {{2,2,0,1}, 80},
+      {{1,2,0,1}, 70},
+      {{2,3,0,2}, 80},
       {{4,4,0,2}, 90},
    }
    hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
@@ -279,15 +279,18 @@ hq:set_workers {
 }
 if campaign_data.payment then
    soldiers = {
-      {{0,0,0,0}, 30},
-      {{1,1,1,2}, 40},
+      {{1,1,1,1}, 30},
+      {{2,2,1,2}, 40},
       {{3,2,2,3}, 50},
    }
 else
    soldiers = {
-      {{0,0,0,0}, 70},
-      {{1,1,1,2}, 80},
+      {{1,1,1,1}, 70},
+      {{2,2,1,2}, 80},
       {{3,2,2,3}, 90},
    }
 end
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
+p4:place_building("amazons_fortification", map:get_field(55,190), false, true):set_soldiers(soldiers[difficulty][1], 12)
+p4:place_building("amazons_fortification", map:get_field(38,177), false, true):set_soldiers(soldiers[difficulty][1], 12)
+p4:place_building("amazons_fortification", map:get_field(22,173), false, true):set_soldiers(soldiers[difficulty][1], 12)
