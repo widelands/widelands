@@ -257,7 +257,8 @@ size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& 
 		if (!dry_run) {
 			g_fs->ensure_directory_exists(subdir);
 		}
-		result += do_recursively_create_filesystem_structure(subdir, pair.second, all_dirnames, dry_run);
+		result +=
+		   do_recursively_create_filesystem_structure(subdir, pair.second, all_dirnames, dry_run);
 	}
 
 	// Maps
@@ -299,7 +300,8 @@ bool MapsAddon::write_to_disk() {
 
 	// Create the directory structure and copy the maps
 	std::set<std::string> all_dirnames;
-	callback_init_(do_recursively_create_filesystem_structure(directory_, tree_, &all_dirnames, true));
+	callback_init_(
+	   do_recursively_create_filesystem_structure(directory_, tree_, &all_dirnames, true));
 	do_recursively_create_filesystem_structure(directory_, tree_, nullptr, false);
 
 	// Create dirnames profile
@@ -314,7 +316,8 @@ bool MapsAddon::write_to_disk() {
 	Section& new_section = new_dirnames.pull_section("global");
 	for (const std::string& dir : all_dirnames) {
 		if (old_section && old_section->has_val(dir.c_str())) {
-			new_section.set_translated_string(dir.c_str(), old_section->get_safe_untranslated_string(dir.c_str()));
+			new_section.set_translated_string(
+			   dir.c_str(), old_section->get_safe_untranslated_string(dir.c_str()));
 		} else {
 			new_section.set_translated_string(dir.c_str(), dir);
 		}
