@@ -140,6 +140,7 @@ p2:place_building("frisians_fortress", map:get_field(4,28), false, true):set_sol
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
+p3.team = 1
 if not campaign_data.payment then
    p3.hidden_from_general_statistics = true
    p3:forbid_buildings("all")
@@ -154,7 +155,7 @@ else
       "empire_shipyard",
    }
 
-   hq = p3:place_building("empire_port", map.player_slots[3].starting_field, false, true)
+   hq = p3:place_building("empire_port_large", map.player_slots[3].starting_field, false, true)
    hq:set_wares {
          gold = campaign_data.payment,
          armor_helmet = 4,
@@ -208,8 +209,8 @@ else
          empire_donkey = 5,
    }
    soldiers = {
-      {{0,0,0,0}, 50},
-      {{2,2,0,1}, 70},
+      {{0,0,0,0}, 70},
+      {{2,2,0,1}, 80},
       {{4,4,0,2}, 90},
    }
    hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
@@ -278,15 +279,15 @@ hq:set_workers {
 }
 if campaign_data.payment then
    soldiers = {
-      {{3,2,2,3}, 40},
-      {{1,1,1,2}, 30},
-      {{0,0,0,0}, 20},
+      {{0,0,0,0}, 30},
+      {{1,1,1,2}, 40},
+      {{3,2,2,3}, 50},
    }
 else
    soldiers = {
-      {{3,2,2,3}, 90},
-      {{1,1,1,2}, 80},
       {{0,0,0,0}, 70},
+      {{1,1,1,2}, 80},
+      {{3,2,2,3}, 90},
    }
 end
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])

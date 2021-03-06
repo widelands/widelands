@@ -15,14 +15,12 @@ function see_amazons(field)
    end
    sleep(500)
    campaign_message_box(amz_2)
-   if not o_defeat_amz then
-      sleep(500)
-      campaign_message_box(amz_3)
-      o_defeat_amz = add_campaign_objective(obj_defeat_amz)
-   end
+   sleep(500)
+   campaign_message_box(amz_3)
+   if not o_defeat_amz then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
    while not p4.defeated do sleep(1000) end
    campaign_message_box(victory_amz)
-   set_objective_done(obj_defeat_amz)
+   set_objective_done(o_defeat_amz)
 end
 
 function see_reebaud(field)
@@ -30,20 +28,23 @@ function see_reebaud(field)
    sleep(2000)
    p2.hidden_from_general_statistics = false
    campaign_message_box(reebaud_1)
+   p2.team = 1
    campaign_message_box(reebaud_2)
    campaign_message_box(reebaud_3)
    campaign_message_box(reebaud_4)
    sleep(2000)
    campaign_message_box(reebaud_5)
    campaign_message_box(reebaud_6)
-   if seen_amazons then campaign_message_box(reebaud_7a) else campaign_message_box(reebaud_7b) end
-   p2.team = 1
+   campaign_message_box(reebaud_7)
+   campaign_message_box(reebaud_8)
+   if seen_amazons then campaign_message_box(reebaud_9a) else campaign_message_box(reebaud_9b) end
+   p3.team = 0
    if not o_defeat_amz then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
    if campaign_data.payment then
       sleep(2000)
-      campaign_message_box(reebaud_8)
-      campaign_message_box(reebaud_9)
       campaign_message_box(reebaud_10)
+      campaign_message_box(reebaud_11)
+      campaign_message_box(reebaud_12)
       o_defeat_emp = add_campaign_objective(obj_defeat_emp)
       p1:set_attack_forbidden(3, false)
       p2:set_attack_forbidden(3, false)
@@ -63,9 +64,9 @@ function see_reebaud(field)
             if bob.descr.name == "frisians_soldier" then
                local key = bob.health_level .. bob.attack_level .. bob.defense_level
                if data[key] then
-                  data[key] = data[key] + n
+                  data[key] = data[key] + 1
                else
-                  data[key] = n
+                  data[key] = 1
                end
             end
          end
@@ -81,8 +82,9 @@ function mission_thread()
    campaign_message_box(intro_1)
    scroll_to_field(map.player_slots[1].starting_field)
    include "map:scripting/starting_conditions.lua"
-   if campaign_data.payment then sleep(500); campaign_message_box(intro_2) end
-   sleep(500)
+   sleep(3000)
+   if campaign_data.payment then campaign_message_box(intro_2) end
+   sleep(2000)
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_find_reebaud)
    local f

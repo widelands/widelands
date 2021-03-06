@@ -20,8 +20,6 @@ p4 = game.players[4] -- Linthesilea – intruderess
 map = game.map
 difficulty = wl.Game().scenario_difficulty
 
-p1.see_all=true -- NOCOM
-
 campaign_data = game:read_campaign_data("frisians", "fri03")
 if not campaign_data then
    campaign_message_box({

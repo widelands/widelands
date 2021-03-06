@@ -141,54 +141,63 @@ reebaud_5 = {
       _([[Indeed I came to ask for your help. Surely you remember Atterdag, the King of the Danes, who caused us Frisians great difficulties many a time. You never fought him yourself, he being too wary at your reputation to assault you directly; but I have made an arch-enemy of him by frequently aiding those he sought to conquer.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – Reebaud 5
-      _([[Some three or four months ago – I have lost track of time on the long voyage – he landed his soldiers on my island Föhr. I will spare you an account of the battle, which lasted five weeks and not a day less. The short and bitter truth is that I was defeated and forced to flee. I had no hope that my friends on the mainland could help me, for Atterdag’s armies are so incredibly numerous that I knew they wouldn’t have stood a chance.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Claus Lembeck – Reebaud 5
-      _([[Only you have a reputation for the most wonderous feats of arms. You are probably the only human alive who can vanquish the evil Dane. I beg you to come South with me and liberate Föhr, or at least to send with me a troop of your far-famed soldiers.]]))
+      _([[Some three or four months ago – I have lost track of time on the long voyage – he landed his soldiers on my island Föhr. I will spare you an account of the battle, which lasted five weeks and not a day less. The short and bitter truth is that I was defeated and forced to flee. I had no hope that my friends on the mainland could help me, for Atterdag’s armies are so incredibly numerous that I knew they wouldn’t have stood a chance.]]))
 }
 reebaud_6 = {
    title =_ "An Old Friend",
+   body=claus(_"Met up at last",
+      -- TRANSLATORS: Claus Lembeck – Reebaud 6
+      _([[Only you have a reputation for the most wonderous feats of arms. You are probably the only human alive who can vanquish the evil Dane. I beg you to come South with me and liberate Föhr, or at least to send with me a troop of your far-famed soldiers.]]))
+}
+reebaud_7 = {
+   title =_ "An Old Friend",
    body=reebaud(_"Met up at last",
-      -- TRANSLATORS: Reebaud – Reebaud 6
-      _([[Had you arrived a week earlier, I would have agreed to your request instantly. Now, however, a spot of bother has appeared on the horizon. I mean this quite literally; foreigners have come from far away and seek to drive us out and take over our lands as we ourselves did, driven by need, seize them from the hostile people who lived here. Warlike barbarians, and an imperial scallywag named Murilius who made the most outrageous demands. We defeated them all, and believed to have found peace at last. And for four long years, life was peaceful indeed.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Reebaud – Reebaud 6
+      -- TRANSLATORS: Reebaud – Reebaud 7
+      _([[Had you arrived a week earlier, I would have agreed to your request instantly. Now, however, a spot of bother has appeared on the horizon. I mean this quite literally; foreigners have come from far away and seek to drive us out and take over our lands as we ourselves did, driven by need, seize them from the hostile people who lived here. Warlike barbarians, and an imperial scallywag named Murilius who made the most outrageous demands. We defeated them all, and believed to have found peace at last. And for four long years, life was peaceful indeed.]]))
+}
+reebaud_8 = {
+   title =_ "An Old Friend",
+   body=reebaud(_"Met up at last",
+      -- TRANSLATORS: Reebaud – Reebaud 8
       _([[But now, as I was saying, in the arrival of the short period of summer, during which the snow melts in some places and travel to distant places is possible, the strangers appeared and engaged us in battle. They took us by surprise, the life without fighting having made us careless. Many a good soldier fell to their spears, including Hauke, my best friend and most venerable advisor, and Fiete, my only son and heir. Their sneaky battle moves were a novelty to us, though now that we know what we are up against there can be no doubt that we will beat them in the end. But I fear it will still take some time until they are defeated and it is safe for me to travel South with you. For this period, you shall of course receive all the hospitality and courtesy we can offer.]]))
 }
-reebaud_7a = {
+reebaud_9a = {
    title =_ "An Old Friend",
    body=claus(_"Met up at last",
-      -- TRANSLATORS: Claus Lembeck – Reebaud 7a
+      -- TRANSLATORS: Claus Lembeck – Reebaud 9a
       _([[I believe we have already met these intruders. It would be unseemly to sit around enjoying mugs of mead while you are fighting for your lives. We will fight the invaders alongside you!]]))
 }
-reebaud_7b = {
+reebaud_9b = {
    title =_ "An Old Friend",
    body=claus(_"Met up at last",
-      -- TRANSLATORS: Claus Lembeck – Reebaud 7b
+      -- TRANSLATORS: Claus Lembeck – Reebaud 9b
       _([[Truly, it would be most unseemly to sit around enjoying mugs of mead while you are fighting for your lives. We shall seek out those invaders and fight them alongside you!]]))
       .. new_objectives(obj_defeat_amz),
 }
 
-reebaud_8 = {
-   title =_ "An Old Enemy",
-   body=iniucundus(_"Treason",
-      -- TRANSLATORS: Marcus Caius Iniucundus – Reebaud 8
-      _([[Wait a minute, you two. What was this you said? You assaulted and murdered Murilius, a Proconsule of the Empire?]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Marcus Caius Iniucundus – Reebaud 8
-      _([[This is most inacceptable. I am Marcus Caius Iniucundus, a legate of the Empire. To think that I was sent to investigate whether Murilius had neglected to pay his taxes from need or greed, and that I now discovered that he and all his men were foully murdered by arrogant invaders! By your deed, you have bestowed upon yourself the wrath of the Empire, and I swear by Jupiter Optimus Maximus that I will not rest until you and yours are lying in your own blood. I will be merciful only to those too young to have participated in the fighting then, whom I will keep alive to replace the handful of galley slaves who did not survive the latest journey.]]))
-}
-reebaud_9 = {
-   title =_ "An Old Enemy",
-   body=reebaud(_"Treason",
-      -- TRANSLATORS: Reebaud – Reebaud 9
-      _([[Oh, now I’m scared. Tell me, good man, is foolishness a requirement to be appointed a representative of the Empire? Claus, what did you bring that deplorable jester with you for?]]))
-}
 reebaud_10 = {
    title =_ "An Old Enemy",
+   body=iniucundus(_"Treason",
+      -- TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
+      _([[Wait a minute, you two. What was this you said? You assaulted and murdered Murilius, a Proconsule of the Empire?]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
+      _([[This is most inacceptable. I am Marcus Caius Iniucundus, a legate of the Empire. To think that I was sent to investigate whether Murilius had neglected to pay his taxes from need or greed, and that I now discovered that he and all his men were foully murdered by arrogant invaders!]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
+      _([[By your deed, you have bestowed upon yourself the wrath of the Empire, and I swear by Jupiter Optimus Maximus that I will not rest until you and yours are lying in your own blood. I will be merciful only to those too young to have participated in the fighting then, whom I will keep alive to replace the handful of galley slaves who did not survive the latest journey.]]))
+}
+reebaud_11 = {
+   title =_ "An Old Enemy",
+   body=reebaud(_"Treason",
+      -- TRANSLATORS: Reebaud – Reebaud 11
+      _([[Oh, now I’m scared. Tell me, good man, is foolishness a requirement to be appointed a representative of the Empire? Claus, what did you bring that deplorable jester with you for?]]))
+}
+reebaud_12 = {
+   title =_ "An Old Enemy",
    body=claus(_"Treason",
-      -- TRANSLATORS: Claus Lembeck – Reebaud 10
-      _([[I am sorry. He offered us a passage on his ship, and I had no way of knowing nor any reason to assume that he would seek a quarrel with you. But seeing that it is I who brough this trouble to you, the least I can do is to take responsibility for ridding you of him.]]))
+      -- TRANSLATORS: Claus Lembeck – Reebaud 12
+      _([[I am sorry. He offered us a passage on his ship, and I had no way of knowing nor any reason to assume that he would seek a quarrel with you. But seeing that it is I who brought this trouble to you, the least I can do is to take responsibility for ridding you of him.]]))
       .. new_objectives(obj_defeat_emp),
 }
 
