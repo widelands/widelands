@@ -1148,7 +1148,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw,
 	}
 
 	piw.action_params = info->file_list.files;
-	piw.action_when_thinking = [this, &info, &piw, temp_dir](const std::string& file_to_download) {
+	piw.action_when_thinking = [this, info, &piw, temp_dir](const std::string& file_to_download) {
 		try {
 			piw.set_message_2(file_to_download);
 
@@ -1200,7 +1200,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	std::set<std::string> result;
 	piw.die_after_last_action = true;
 	piw.action_params = info->file_list.locales;
-	piw.action_when_thinking = [this, &info, &result, &piw](const std::string& locale_to_download) {
+	piw.action_when_thinking = [this, info, &result, &piw](const std::string& locale_to_download) {
 		try {
 			piw.set_message_2(locale_to_download);
 
@@ -1482,7 +1482,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
              .str()) {
 
 	uninstall_.sigclicked.connect(
-	   [ctrl, &info]() { uninstall(ctrl, info, !ctrl->is_remote(info->internal_name)); });
+	   [ctrl, this]() { uninstall(ctrl, info_, !ctrl->is_remote(info_->internal_name)); });
 	toggle_enabled_.sigclicked.connect([this, ctrl, info]() {
 		enabled_ = !enabled_;
 		for (auto& pair : AddOns::g_addons) {
@@ -1970,14 +1970,14 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
              .str()),
      full_upgrade_possible_(AddOns::is_newer_version(installed_version, info->version)) {
 
-	interact_.sigclicked.connect([ctrl, &info]() {
-		RemoteInteractionWindow m(*ctrl, info);
+	interact_.sigclicked.connect([ctrl, this]() {
+		RemoteInteractionWindow m(*ctrl, info_);
 		m.run<UI::Panel::Returncodes>();
 	});
-	uninstall_.sigclicked.connect([ctrl, &info]() { uninstall(ctrl, info, false); });
-	install_.sigclicked.connect([ctrl, &info]() {
+	uninstall_.sigclicked.connect([ctrl, this]() { uninstall(ctrl, info_, false); });
+	install_.sigclicked.connect([ctrl, this]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
-		if (!info->verified || !(SDL_GetModState() & KMOD_CTRL)) {
+		if (!info_->verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
 			   (boost::format(_("Are you certain that you want to install this add-on?\n\n"
@@ -1987,16 +1987,16 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Version %4$s\n"
 			                    "Category: %5$s\n"
 			                    "%6$s\n")) %
-			    info->descname() % info->author() % (info->verified ? _("Verified") : _("NOT VERIFIED")) %
-			    AddOns::version_to_string(info->version) %
-			    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
+			    info_->descname() % info_->author() % (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
+			    AddOns::version_to_string(info_->version) %
+			    AddOns::kAddOnCategories.at(info_->category).descname() % info_->description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
 		}
-		ctrl->install(info);
+		ctrl->install(info_);
 		ctrl->rebuild();
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
