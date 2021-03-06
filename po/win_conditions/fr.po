@@ -5,6 +5,7 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
+# David D, 2021
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 12:20+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"PO-Revision-Date: 2021-03-03 10:25+0000\n"
+"Last-Translator: David D\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +65,7 @@ msgstr "Votre équipe à trouvé un nouvel artefact."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Vous avez trouvé un nouvel artefact."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -77,7 +78,7 @@ msgstr "Un des artefacts de votre équipe a été dérobé par l'ennemi."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Un de vos artefacts a été dérobé par un ennemi."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -90,7 +91,7 @@ msgstr "Votre équipe à volé un artefact à l’ennemi."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Vous avez volé un artefact à un ennemi."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -166,7 +167,7 @@ msgstr "Autocrate"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "La tribu ou l’équipe qui pourra vaincre tous les autres gagne le jeu ! Cela signifie que les adversaires n’ont plus aucun quartier général, port ou entrepôt."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -186,13 +187,13 @@ msgstr "C'est un jeu sans fin, sans règles. Le brouillard de guerre est désact
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Chasseur de QG"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "La tribu ou l’équipe qui peut trouver et détruire tous les autres quartiers généraux gagne le jeu ! Ne fonctionne pas avec des conditions de départ sans quartiers généraux."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
