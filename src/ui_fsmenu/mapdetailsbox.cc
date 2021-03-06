@@ -192,6 +192,8 @@ void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) 
 void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	// Translate the map's name
 	const char* nomap = _("(no map)");
+	// TODO(Nordfriese): If the map was defined by an add-on, use that add-on's textdomain
+	// instead (if available). We'll need to store the add-on name in the savegame for this.
 	i18n::Textdomain td("maps");
 	map_name_.set_text(!game_settings.mapname.empty() ? _(game_settings.mapname) : nomap);
 }

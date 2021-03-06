@@ -208,6 +208,9 @@ void NetSetupLAN::update_game_info(UI::Table<NetOpenGame const* const>::EntryRec
 	er.set_string(0, info.hostname);
 	assert(info.map[sizeof(info.map) - 1] == '\0');
 	{
+		// If the map is in an add-on, we have no way of knowing so. We are therefore
+		// unable to set the correct textdomain for add-on maps, even if we have
+		// installed the add-on ourself. Let's just hope it's an official map.
 		i18n::Textdomain td("maps");
 		er.set_string(1, info.map[0] ? i18n::translate(info.map) : "");
 	}
