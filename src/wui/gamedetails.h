@@ -33,7 +33,7 @@
 /**
  * Show a Panel with information about a savegame/replay file
  */
-class GameDetails : public UI::Box {
+class GameDetails : public UI::Panel {
 public:
 	enum class Mode { kSavegame, kReplay };
 
@@ -67,6 +67,7 @@ private:
 	const int padding_;
 	bool has_conflicts_;
 
+	UI::Box main_box_, descr_box_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
