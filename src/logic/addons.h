@@ -82,6 +82,7 @@ constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
 	AddOnInfo() = default;
+	~AddOnInfo() = default;
 	/*
 	 * When adding any new add-on properties that are stored in the `addon` file,
 	 * be sure to add them to MutableAddon as well so they are preserved/updated
