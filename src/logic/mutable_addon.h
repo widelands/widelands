@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <regex>
+#include <set>
 
 #include "logic/addons.h"
 
@@ -128,6 +129,7 @@ protected:
 	std::string parse_requirements() override;
 	size_t do_recursively_create_filesystem_structure(const std::string& dir,
 	                                                  const DirectoryTree& tree,
+	                                                  std::set<std::string>* all_dirnames,
 	                                                  bool dry_run);
 	DirectoryTree tree_;
 

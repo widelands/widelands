@@ -1123,11 +1123,14 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
 			install_translation(temp_locale_path, remote.internal_name);
 		}
+		// Note: Changes to translations might not be applied until Widelands is
+		// restarted. This happens because gettext caches translation results
+		// and does not provide a way to clear this cache.
 	}
 	for (auto& pair : AddOns::g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
 			pair.first = AddOns::preload_addon(remote.internal_name);
-			if (remote.category == AddOns::AddOnCategory::kWorld) {
+			if (remote.category == AddOns::AddOnCategory::kWorld && full_upgrade) {
 				pair.second = false;
 				inform_about_restart(remote.descname());
 			}
