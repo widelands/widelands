@@ -59,6 +59,8 @@ struct AddOnCategoryInfo {
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
+	AddOnFileList() = default;
+	~AddOnFileList() = default;
 	std::vector<std::string> directories, files, locales, checksums;
 };
 
@@ -73,6 +75,8 @@ using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
 using AddOnConflict = std::pair<std::string /* localized_message */, bool /* has_conflicts */>;
 
 struct AddOnComment {
+	AddOnComment() = default;
+	~AddOnComment() = default;
 	std::string username, message;
 	AddOnVersion version;  // The version on which the user commented
 	std::time_t timestamp;
