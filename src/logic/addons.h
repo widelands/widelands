@@ -59,11 +59,6 @@ struct AddOnCategoryInfo {
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
-	AddOnFileList() = default;
-	~AddOnFileList() = default;
-	AddOnFileList(const AddOnFileList&) = default;
-	AddOnFileList& operator=(const AddOnFileList&) = default;
-
 	std::vector<std::string> directories, files, locales, checksums;
 };
 
@@ -78,11 +73,6 @@ using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
 using AddOnConflict = std::pair<std::string /* localized_message */, bool /* has_conflicts */>;
 
 struct AddOnComment {
-	AddOnComment() = default;
-	~AddOnComment() = default;
-	AddOnComment(const AddOnComment&) = default;
-	AddOnComment& operator=(const AddOnComment&) = default;
-
 	std::string username, message;
 	AddOnVersion version;  // The version on which the user commented
 	std::time_t timestamp;
@@ -108,30 +98,30 @@ struct AddOnInfo {
 	std::function<std::string()> description;
 	std::function<std::string()> author;
 
-	AddOnVersion version;   // Add-on version (e.g. 1.2.3)
-	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)
+	AddOnVersion version;       // Add-on version (e.g. 1.2.3)
+	uint32_t i18n_version = 0;  // (see doc/sphinx/source/add-ons.rst)
 
-	AddOnCategory category;
+	AddOnCategory category = AddOnCategory::kNone;
 
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
-	bool sync_safe;              // Whether this add-on will not desync in MP and replays.
+	bool sync_safe = false;      // Whether this add-on will not desync in MP and replays.
 	std::string min_wl_version;  // Minimum required Widelands version, or "" if invalid.
 	std::string max_wl_version;  // Maximum supported Widelands version, or "" if invalid.
 
-	bool verified;  // Only valid for Remote add-ons.
+	bool verified = false;  // Only valid for Remote add-ons.
 
 	AddOnFileList file_list;  // Get rid of this ASAP
 	std::map<std::string /* name */, std::string /* description */> screenshots;
 
-	uint32_t total_file_size;     // total size of all files, in bytes
-	std::string upload_username;  // who uploaded (may be different from author)
+	uint32_t total_file_size = 0;  // total size of all files, in bytes
+	std::string upload_username;   // who uploaded (may be different from author)
 
 	// TODO(Nordfriese): These are not yet implemented on the server-side
-	std::time_t upload_timestamp;  // date and time when this version was uploaded
-	uint32_t download_count;       // total times downloaded
-	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
+	std::time_t upload_timestamp = 0;  // date and time when this version was uploaded
+	uint32_t download_count = 0;       // total times downloaded
+	uint32_t votes[kMaxRating] = {0};  // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
 
 	bool matches_widelands_version() const;

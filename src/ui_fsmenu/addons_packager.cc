@@ -31,6 +31,7 @@
 #include "ui_basic/progressbar.h"
 #include "ui_basic/text_prompt.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace FsMenu {
 
@@ -354,32 +355,16 @@ void AddOnsPackager::clicked_new_addon() {
 			continue;
 		}
 
-		AddOns::AddOnInfo a{
-		   // These default strings are not localized because these editboxes are meant to be
-		   // filled out in English. We will add localization markup to the resulting config file.
-		   name,
-		   n.text(),
-		   "No description",
-		   "Nobody",
-		   {},
-		   {},
-		   {},
-		   {1, 0, 0},
-		   0,
-		   category.get_selected(),
-		   {},
-		   false,
-		   "",
-		   "",
-		   false,
-		   {{}, {}, {}, {}},
-		   {},
-		   0,
-		   "",
-		   0,
-		   0,
-		   {},
-		   {}};
+		AddOns::AddOnInfo a;
+		// These default strings are not localized because these editboxes are meant to be
+		// filled out in English. We will add localization markup to the resulting config file.
+		a.internal_name = name;
+		a.unlocalized_descname = n.text();
+		a.unlocalized_description = "No description";
+		a.unlocalized_author = get_config_string("realname", pgettext("author_name", "Unknown"));
+		a.version = {1, 0, 0};
+		a.category = category.get_selected();
+
 		mutable_addons_[name] = AddOns::MutableAddOn::create_mutable_addon(a);
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();

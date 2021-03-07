@@ -660,30 +660,17 @@ void AddOnsCtrl::refresh_remotes() {
 		                                         "the server!<br>Error Message: %s")) %
 		                         e.what())
 		                           .str();
-		remotes_ = {
-		   std::shared_ptr<AddOns::AddOnInfo>(new AddOns::AddOnInfo{"",  // NOLINT
-		                                                            title,
-		                                                            err,
-		                                                            bug,
-		                                                            [title]() { return title; },
-		                                                            [err]() { return err; },
-		                                                            [bug]() { return bug; },
-		                                                            {},
-		                                                            0,
-		                                                            AddOns::AddOnCategory::kNone,
-		                                                            {},
-		                                                            true,
-		                                                            "",
-		                                                            "",
-		                                                            false,
-		                                                            {{}, {}, {}, {}},
-		                                                            {},
-		                                                            0,
-		                                                            bug,
-		                                                            std::time(nullptr),
-		                                                            0,
-		                                                            {},
-		                                                            {}})};
+		AddOns::AddOnInfo* i = new AddOns::AddOnInfo();
+		i->unlocalized_descname = title;
+		i->unlocalized_description = err;
+		i->unlocalized_author = bug;
+		i->descname = [title]() { return title; };
+		i->description = [err]() { return err; };
+		i->author = [bug]() { return bug; };
+		i->upload_username = bug;
+		i->upload_timestamp = std::time(nullptr);
+		i->sync_safe = true;  // suppress useless warning
+		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(i)};
 	}
 	rebuild();
 }

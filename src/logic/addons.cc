@@ -312,29 +312,17 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
 	Section* i18n_section = i18n_profile.get_section("global");
 
-	AddOnInfo* i = new AddOnInfo{name,
-	                             s.get_safe_untranslated_string("name"),
-	                             s.get_safe_untranslated_string("description"),
-	                             s.get_safe_untranslated_string("author"),
-	                             nullptr,
-	                             nullptr,
-	                             nullptr,
-	                             string_to_version(s.get_safe_string("version")),
-	                             i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
-	                             get_category(s.get_safe_string("category")),
-	                             {},
-	                             s.get_bool("sync_safe", false),
-	                             s.get_string("min_wl_version", ""),
-	                             s.get_string("max_wl_version", ""),
-	                             false,
-	                             {{}, {}, {}, {}},
-	                             {},
-	                             0,
-	                             "",
-	                             0,
-	                             0,
-	                             {},
-	                             {}};
+	AddOnInfo* i = new AddOnInfo();
+	i->internal_name = name;
+	i->unlocalized_descname = s.get_safe_untranslated_string("name");
+	i->unlocalized_description = s.get_safe_untranslated_string("description");
+	i->unlocalized_author = s.get_safe_untranslated_string("author");
+	i->version = string_to_version(s.get_safe_string("version"));
+	i->i18n_version = i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0;
+	i->category = get_category(s.get_safe_string("category"));
+	i->sync_safe = s.get_bool("sync_safe", false);
+	i->min_wl_version = s.get_string("min_wl_version", "");
+	i->max_wl_version = s.get_string("max_wl_version", "");
 	i->descname = [i]() {
 		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
 		return i18n::translate(i->unlocalized_descname);
