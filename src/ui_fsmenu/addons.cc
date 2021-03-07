@@ -661,7 +661,7 @@ void AddOnsCtrl::refresh_remotes() {
 		                         e.what())
 		                           .str();
 		remotes_ = {
-		   std::shared_ptr<AddOns::AddOnInfo>(new AddOns::AddOnInfo{"",
+		   std::shared_ptr<AddOns::AddOnInfo>(new AddOns::AddOnInfo{"",  // NOLINT
 		                                                            title,
 		                                                            err,
 		                                                            bug,
