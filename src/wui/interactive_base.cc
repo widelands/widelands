@@ -1376,6 +1376,9 @@ void InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 }
 
 void InteractiveBase::broadcast_cheating_message() {
+	if (!get_game()) {
+		return;  // Editor
+	}
 	if (upcast(GameHost, h, game().game_controller())) {
 		h->send_system_message_code(
 		   "CHEAT", player_number() ? game().player(player_number()).get_name() : "");
@@ -1412,7 +1415,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			if ((code.mod & KMOD_CTRL) && (code.mod & KMOD_SHIFT)) {
 				if (cheat_mode_enabled_) {
 					cheat_mode_enabled_ = false;
-				} else {
+				} else if (!omnipotent()) {
 					broadcast_cheating_message();
 					cheat_mode_enabled_ = true;
 				}
