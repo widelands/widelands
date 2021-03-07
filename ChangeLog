@@ -208,6 +208,7 @@
     - mines_percent is unused, so removing it
 - Trainingsites only evaluate fish/meat substitutes if present in inputs (#4641)
 - Delay AI initalization after scenario init (#4656)
+- Fixed an unsafe AI time operation (#4749)
 
 
 ### Gameplay
@@ -480,6 +481,8 @@
 - Multiplayer setup UI fixes (#4691)
 - Set minimal progress value in add-on packager (#4714)
 - Toggle preserve wares default behaviour with Shift (#4719)
+- Relayout stock menu on tab change (#4724)
+- Fix scrolling in gamedetails and mapdetails (#4742)
 
 
 ### Internationalization
@@ -520,6 +523,7 @@
 - Send localized cheating messages (#4462)
 - Fixed string issues (#4005, #4723, #4728, #4731)
 - Catch exception on invalid locale (#4725)
+- Fix textdomains for add-on maps and support localized map set directory names (#4743)
 
 
 ### Help and Documentation
@@ -583,6 +587,7 @@
 - Random map menu tweaks (#4469): Predefined profiles for Default, Alpine, Atoll, Wasteland, Random
 - Resize minimap when map size changes to prevent a crash (#4519)
 - Resize minimap on map creation (#4560)
+- Fix crash when using debug console in editor (#4737)
 
 
 ### Graphics Engine
