@@ -61,6 +61,9 @@ struct AddOnCategoryInfo {
 struct AddOnFileList {
 	AddOnFileList() = default;
 	~AddOnFileList() = default;
+	AddOnFileList(const AddOnFileList&) = default;
+	AddOnFileList& operator=(const AddOnFileList&) = default;
+
 	std::vector<std::string> directories, files, locales, checksums;
 };
 
@@ -77,6 +80,9 @@ using AddOnConflict = std::pair<std::string /* localized_message */, bool /* has
 struct AddOnComment {
 	AddOnComment() = default;
 	~AddOnComment() = default;
+	AddOnComment(const AddOnComment&) = default;
+	AddOnComment& operator=(const AddOnComment&) = default;
+
 	std::string username, message;
 	AddOnVersion version;  // The version on which the user commented
 	std::time_t timestamp;
