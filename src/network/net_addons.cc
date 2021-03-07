@@ -520,6 +520,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 			write(client_socket_, complete.get(), bytes);
 		}
 	}
+	progress("", state);
 
 	send = "ENDOFSTREAM\n";
 	write(client_socket_, send.c_str(), send.size());

@@ -600,7 +600,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 					      .str();
 				}
 			}
-			UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
+			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
 			                   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -766,7 +766,7 @@ void AddOnsCtrl::set_login(const std::string& username, const std::string& passw
 			log_err("set_login (''): server error (%s)", e.what());
 			if (show_error) {
 				UI::WLMessageBox m(
-					   &fsmm_, UI::WindowStyle::kFsMenu, _("Server Error"),
+					   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Server Error"),
 					   (boost::format(_("Unable to connect to the server.\nError message:\n%s")) % e.what()).str(),
 					   UI::WLMessageBox::MBoxType::kOk);
 					m.run<UI::Panel::Returncodes>();
@@ -775,7 +775,7 @@ void AddOnsCtrl::set_login(const std::string& username, const std::string& passw
 			log_err("set_login as '%s': access denied (%s)", username.c_str(), e.what());
 			if (show_error) {
 				UI::WLMessageBox m(
-				   &fsmm_, UI::WindowStyle::kFsMenu, _("Wrong Password"),
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Wrong Password"),
 				   _("The entered username or password is incorrect."), UI::WLMessageBox::MBoxType::kOk);
 				m.run<UI::Panel::Returncodes>();
 			}
@@ -1199,7 +1199,7 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 }
 
 inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
-	UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Note"),
+	UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Note"),
 	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
 	                                    "otherwise you may experience graphical glitches.")) %
 	                    name.c_str())
@@ -1246,7 +1246,15 @@ static void install_translation(const std::string& temp_locale_path,
 
 void AddOnsCtrl::upload_addon(const AddOns::AddOnInfo& addon) {
 	upload_addon_.set_list_visibility(false);
-	ProgressIndicatorWindow w(&fsmm_, addon.descname());
+	{
+		UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upload"),
+				(boost::format(_("Do you really want to upload the add-on ‘%s’ to the server?")) % addon.internal_name).str(),
+				UI::WLMessageBox::MBoxType::kOkCancel);
+		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			return;
+		}
+	}
+	ProgressIndicatorWindow w(&get_topmost_forefather(), addon.descname());
 	w.set_message_1((boost::format(_("Uploading ‘%s’…")) % addon.descname()).str());
 	try {
 		long nr_files = 0;
@@ -1268,7 +1276,7 @@ void AddOnsCtrl::upload_addon(const AddOns::AddOnInfo& addon) {
 		log_err("upload addon %s: %s", addon.internal_name.c_str(), e.what());
 		w.set_visible(false);
 		UI::WLMessageBox m(
-		   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
 			   _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s")) % addon.internal_name % e.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
@@ -1278,7 +1286,7 @@ void AddOnsCtrl::upload_addon(const AddOns::AddOnInfo& addon) {
 
 // TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's requirements
 void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool only_translations) {
-	ProgressIndicatorWindow w(&fsmm_, remote.descname());
+	ProgressIndicatorWindow w(&get_topmost_forefather(), remote.descname());
 	w.set_message_1((boost::format(_("Downloading ‘%s’…")) % remote.descname()).str());
 
 	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + remote.internal_name + kTempFileExtension;
@@ -1310,7 +1318,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 			log_err("install addon %s: %s", remote.internal_name.c_str(), e.what());
 			w.set_visible(false);
 			UI::WLMessageBox m(
-			   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(
 				   _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
 				     "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
@@ -1381,7 +1389,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		log_err("install translations for %s: %s", remote.internal_name.c_str(), e.what());
 		w.set_visible(false);
 		UI::WLMessageBox m(
-		   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
 		       _("The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
 		         "the translations will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
@@ -1497,7 +1505,7 @@ step1:
 		}
 		if (!found) {
 			UI::WLMessageBox w(
-			   &fsmm_, UI::WindowStyle::kFsMenu, _("Error"),
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The required add-on ‘%s’ could not be found on the server.")) %
 			    addon_to_install)
 			      .str(),
