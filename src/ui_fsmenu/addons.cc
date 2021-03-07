@@ -1138,7 +1138,7 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 				if (full_upgrade) {
 					pair.second = false;
 					inform_about_restart(remote.descname());
-        }
+				}
 				break;
 			case AddOns::AddOnCategory::kTheme:
 				if (template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
