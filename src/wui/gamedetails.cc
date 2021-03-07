@@ -40,11 +40,13 @@ GameDetails::GameDetails(Panel* parent,
                          UI::PanelStyle style,
                          Mode mode,
                          Widelands::EditorGameBase& egbase)
-   : UI::Box(parent, style, 0, 0, UI::Box::Vertical),
+   : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
      padding_(4),
      has_conflicts_(false),
-     name_label_(this,
+     main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     name_label_(&main_box_,
                  0,
                  0,
                  0,
@@ -53,27 +55,28 @@ GameDetails::GameDetails(Panel* parent,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this,
+     descr_(&descr_box_,
             0,
             0,
-            0,
+            UI::Scrollbar::kSize,
             0,
             style,
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(this, style, 0, 0, 0, 0, nullptr),
+     minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(this, style, 0, 0, UI::Box::Vertical)),
      last_game_(""),
      egbase_(egbase) {
+	descr_.set_handle_mouse(false);
+	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
+	descr_box_.add_space(padding_);
+	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	add(&name_label_, UI::Box::Resizing::kFullSize);
-	add_space(padding_);
-	add(&descr_, UI::Box::Resizing::kExpandBoth);
-	add_space(padding_);
-	add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	add_space(padding_);
-	add(button_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(padding_);
+	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(padding_);
 
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
@@ -207,31 +210,31 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 	if (!minimap_path.empty()) {
 		try {
 			// Load the image
-			minimap_cache_[gamedata.filename] = load_image(
+			minimap_cache_[last_game_] = load_image(
 			   minimap_path,
 			   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 			minimap_icon_.set_visible(true);
-			minimap_icon_.set_icon(minimap_cache_.at(gamedata.filename).get());
+			minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
 		} catch (const std::exception& e) {
 			log_err("Failed to load the minimap image : %s\n", e.what());
 		}
 	} else if (mode_ == Mode::kReplay) {
 		// Render minimap
-		auto minimap = minimap_cache_.find(gamedata.filename);
+		auto minimap = minimap_cache_.find(last_game_);
 		if (minimap != minimap_cache_.end()) {
 			minimap_icon_.set_icon(minimap->second.get());
 			minimap_icon_.set_visible(true);
 		} else {
 			egbase_.cleanup_for_load();
-			std::string filename(gamedata.filename);
+			std::string filename(last_game_);
 			filename.append(kSavegameExtension);
 			std::unique_ptr<Widelands::MapLoader> ml(
 			   egbase_.mutable_map()->get_correct_loader(filename));
 			if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
-				minimap_cache_[gamedata.filename] =
+				minimap_cache_[last_game_] =
 				   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 				                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
-				minimap_icon_.set_icon(minimap_cache_.at(gamedata.filename).get());
+				minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
 				minimap_icon_.set_visible(true);
 			}
 		}
@@ -239,40 +242,23 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 }
 
 void GameDetails::layout() {
-	if (get_w() == 0 && get_h() == 0) {
-		return;
-	}
-	UI::Box::layout();
+	main_box_.set_size(get_w(), get_h());
+
 	if (minimap_icon_.icon() == nullptr) {
-		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kScrollNormal);
 		minimap_icon_.set_desired_size(0, 0);
 	} else {
-		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		// Fit minimap to width
+		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_,
+		                                minimap_cache_.at(last_game_)->width());
+		const float scale = static_cast<float>(width) / minimap_cache_.at(last_game_)->width();
+		const int height = scale * minimap_cache_.at(last_game_)->height();
 
-		// Downscale the minimap image
-		const float available_width = get_w() - 4 * padding_;
-		const float available_height =
-		   get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
-
-		const float scale =
-		   std::min(1.f, std::min<float>(available_width / minimap_cache_.at(last_game_)->width(),
-		                                 available_height / minimap_cache_.at(last_game_)->height()));
-
-		const int w = scale * minimap_cache_.at(last_game_)->width();
-		const int h = scale * minimap_cache_.at(last_game_)->height();
-
-		// Center the minimap in the available space
-		const int xpos = (get_w() - w) / 2;
-		int ypos = name_label_.get_h() + descr_.get_h() + 2 * padding_;
-
-		// Set small minimaps higher up for a more harmonious look
-		if (h < available_height * 2 / 3) {
-			ypos += (available_height - h) / 3;
-		} else {
-			ypos += (available_height - h) / 2;
-		}
-
-		minimap_icon_.set_desired_size(w, h);
-		minimap_icon_.set_pos(Vector2i(xpos, ypos));
+		minimap_icon_.set_desired_size(width, height);
 	}
+
+	const int full_height = descr_.get_h() + minimap_icon_.get_h();
+	const int descr_height =
+	   main_box_.get_h() - name_label_.get_h() - button_box_->get_h() - 2 * padding_;
+	descr_box_.set_force_scrolling(full_height > descr_height);
+	descr_box_.set_size(main_box_.get_w(), descr_height);
 }

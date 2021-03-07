@@ -27,6 +27,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "base/i18n.h"
+
 class Image;
 
 namespace AddOns {
@@ -131,6 +133,8 @@ AddOnConflict check_requirements(const AddOnRequirements&);
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
 AddOnInfo preload_addon(const std::string&);
+
+i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename);
 
 // This guard allows you to modify `g_addons` in any way you like
 // and ensures that it is reset to the initial state later.
