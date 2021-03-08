@@ -84,7 +84,7 @@ A set of maps and/or standalone scenarios.
 
 All valid map files (including those in subdirectories) contained in the add-on will be offered in map selection screens.
 
-Note that it is not possible yet to mark the names of subdirectories for translation.
+The add-on can optionally contain an ini-style file called "dirnames" which defines the localized displaynames of the subdirectories in the "global" section.
 
 
 campaign

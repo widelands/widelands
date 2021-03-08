@@ -51,10 +51,10 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "fish", amount = 6 },
-      { name = "meat", amount = 6 },
-      { name = "amazons_bread", amount = 5 },
-      { name = "chocolate", amount = 5 },
+      { name = "fish", amount = 5 },
+      { name = "meat", amount = 5 },
+      { name = "amazons_bread", amount = 6 },
+      { name = "chocolate", amount = 6 },
       { name = "boots_sturdy", amount = 2 },
       { name = "boots_swift", amount = 2 },
       { name = "boots_hero", amount = 2 },

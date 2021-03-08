@@ -139,6 +139,7 @@ wl_library(wui_common_mapdetails
     graphic_minimap_renderer
     graphic_text_layout
     io_filesystem
+    io_profile
     logic
     logic_exceptions
     logic_filesystem_constants
