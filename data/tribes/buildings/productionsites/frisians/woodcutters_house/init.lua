@@ -38,9 +38,7 @@ descriptions:new_productionsite_type {
       }
    },
 
-   aihints = {
-      collects_ware_from_map = "log"
-   },
+   aihints = {},
 
    working_positions = {
       frisians_woodcutter = 1
