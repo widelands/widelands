@@ -35,10 +35,7 @@ descriptions:new_productionsite_type {
       unoccupied = { hotspot = {39, 46}}
    },
 
-   aihints = {
-      collects_ware_from_map = "log",
-      supports_production_of = { "liana" },
-   },
+   aihints = {},
 
    working_positions = {
       amazons_woodcutter = 1

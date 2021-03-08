@@ -27,7 +27,6 @@ descriptions:new_productionsite_type {
    }},
 
    aihints = {
-      supports_production_of = { "fish", "meat" },
       needs_water = true,
       basic_amount = 1,
       prohibited_till = 360,

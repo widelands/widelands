@@ -964,6 +964,9 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		}
 	}
 
+	for (const auto& attribute_info : workerprogram->needed_attributes()) {
+		descr->add_needed_attribute(attribute_info);
+	}
 	for (const auto& attribute_info : workerprogram->collected_attributes()) {
 		descr->add_collected_attribute(attribute_info);
 	}
