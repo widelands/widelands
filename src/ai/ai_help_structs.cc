@@ -314,7 +314,7 @@ uint32_t EventTimeQueue::count(const Time& current_time, const uint32_t addition
 }
 
 void EventTimeQueue::strip_old(const Time& current_time) {
-	while (!queue.empty() && queue.back().first < current_time - duration_) {
+	while (!queue.empty() && queue.back().first + duration_ < current_time) {
 		queue.pop_back();
 	}
 }
