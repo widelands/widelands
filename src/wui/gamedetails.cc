@@ -65,7 +65,7 @@ GameDetails::GameDetails(Panel* parent,
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(this, style, 0, 0, UI::Box::Vertical)),
+     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)),
      last_game_(""),
      egbase_(egbase) {
 	descr_.set_handle_mouse(false);
@@ -77,6 +77,7 @@ GameDetails::GameDetails(Panel* parent,
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
+	main_box_.add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
