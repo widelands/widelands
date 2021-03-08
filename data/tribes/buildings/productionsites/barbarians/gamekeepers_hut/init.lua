@@ -34,7 +34,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "meat" },
       prohibited_till = 510,
       basic_amount = 1
    },
