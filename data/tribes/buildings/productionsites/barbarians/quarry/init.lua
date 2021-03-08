@@ -31,9 +31,7 @@ descriptions:new_productionsite_type {
       },
    },
 
-   aihints = {
-      collects_ware_from_map = "granite"
-   },
+   aihints = {},
 
    working_positions = {
       barbarians_stonemason = 1

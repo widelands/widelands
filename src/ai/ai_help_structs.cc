@@ -334,16 +334,11 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      near_border(false),
      unowned_mines_spots_nearby(0),
      unowned_iron_mines_nearby(false),
-     trees_nearby(0),
-     bushes_nearby(0),
      // explanation of starting values
      // this is done to save some work for AI (CPU utilization)
      // base rules are:
-     // count of rocks can only decrease, so  amount of rocks
-     // is recalculated only when previous count is positive
      // count of water fields are stable, so if the current count is
      // non-negative, water is not recalculated
-     rocks_nearby(1),
      water_nearby(-1),
      open_water_nearby(-1),
      distant_water(0),
@@ -402,26 +397,6 @@ void BuildingObserver::set_is(const BuildingAttribute attribute) {
 void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	is_what.erase(attribute);
 	assert(!is(attribute));
-}
-
-bool BuildingObserver::has_collected_map_resource() const {
-	return collected_map_resource != Widelands::INVALID_INDEX;
-}
-void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& tribe,
-                                                  const std::string& ware_name) {
-	if (!ware_name.empty()) {
-		collected_map_resource = tribe.safe_ware_index(ware_name);
-	} else {
-		collected_map_resource = Widelands::INVALID_INDEX;
-	}
-}
-Widelands::DescriptionIndex BuildingObserver::get_collected_map_resource() const {
-	if (has_collected_map_resource()) {
-		return collected_map_resource;
-	} else {
-		throw wexception("Building '%s' needs to define the AI hint \"collects_ware_from_map\"",
-		                 desc->name().c_str());
-	}
 }
 
 AiModeBuildings BuildingObserver::aimode_limit_status() const {

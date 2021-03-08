@@ -34,7 +34,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "meat",
       prohibited_till = 480,
       basic_amount = 1,
       very_weak_ai_limit = 1,
