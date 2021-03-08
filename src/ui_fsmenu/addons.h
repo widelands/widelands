@@ -175,7 +175,7 @@ private:
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
-	UI::Dropdown<const AddOns::AddOnInfo*> upload_addon_;
+	UI::Dropdown<const AddOns::AddOnInfo*> upload_addon_, upload_screenshot_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
 	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_;
 

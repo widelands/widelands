@@ -529,6 +529,53 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 	guard.ok();
 }
 
+std::string NetAddons::upload_screenshot(const std::string& addon, const std::string& image, const std::string& description) {
+	init();
+	CrashGuard guard(*this);
+	std::string send = "CMD_SUBMIT_SCREENSHOT ";
+	send += addon;
+	send += ' ';
+
+	FileRead fr;
+	fr.open(*g_fs, image);
+	const size_t bytes = fr.get_size();
+	std::unique_ptr<char[]> complete(new char[bytes]);
+	fr.data_complete(complete.get(), bytes);
+	SimpleMD5Checksum md5sum;
+	md5sum.data(complete.get(), bytes);
+	md5sum.finish_checksum();
+
+	send += std::to_string(bytes);
+	send += ' ';
+	send += md5sum.get_checksum().str();
+	send += ' ';
+
+	unsigned whitespace = 0;
+	size_t pos = 0;
+	for (;;) {
+		pos = description.find(' ', pos);
+		if (pos == std::string::npos) {
+			break;
+		}
+		++whitespace;
+		++pos;
+	}
+	send += std::to_string(whitespace);
+	send += ' ';
+	send += description;
+	send += '\n';
+
+	write(client_socket_, send.c_str(), send.size());
+	write(client_socket_, complete.get(), bytes);
+	send = "ENDOFSTREAM\n";
+	write(client_socket_, send.c_str(), send.size());
+
+	const std::string filename = read_line();
+	check_endofstream();
+	guard.ok();
+	return filename;
+}
+
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
 	try {
 		init();

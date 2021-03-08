@@ -55,7 +55,7 @@ struct NetAddons {
 
 	void comment(const AddOnInfo& addon, std::string message);
 	void upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
-	// NOCOM support uploading screenshots
+	std::string upload_screenshot(const std::string& addon, const std::string& image, const std::string& description);
 
 	void set_login(const std::string& username, const std::string& password);
 

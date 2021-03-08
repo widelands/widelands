@@ -187,6 +187,88 @@ private:
 	}
 };
 
+class ScreenshotUploadWindow : public UI::Window {
+public:
+	explicit ScreenshotUploadWindow(AddOnsCtrl& ctrl, const AddOns::AddOnInfo& info, AddOns::AddOnInfo* remote)
+	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
+                "upload_screenshot", 0, 0, 100, 100, (boost::format(_("Upload Screenshot for ‘%s’")) % info.descname()).str()),
+     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     ok_(&buttons_box_, "ok", 0, 0, 7 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("Upload")),
+     cancel_(&buttons_box_, "cancel", 0, 0, 7 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     images_(&hbox_, 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
+     icon_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, 640, 360, nullptr),
+     description_(&vbox_, 0, 0, 300, UI::PanelStyle::kFsMenu),
+     progress_(&buttons_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter) {
+	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(&progress_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+
+	vbox_.add(&icon_, UI::Box::Resizing::kExpandBoth);
+	vbox_.add_space(kRowButtonSpacing);
+	vbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
+
+	hbox_.add(&images_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kRowButtonSpacing);
+	hbox_.add(&vbox_, UI::Box::Resizing::kExpandBoth);
+
+	box_.add(&hbox_, UI::Box::Resizing::kFullSize);
+	box_.add_space(kRowButtonSpacing);
+	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+
+	description_.set_tooltip(_("Description"));
+	for (const std::string& img : g_fs->list_directory(kScreenshotsDir)) {
+		images_.add(FileSystem::fs_filename(img.c_str()), img);
+	}
+
+	images_.selected.connect([this](uint32_t) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
+	cancel_.sigclicked.connect([this]() { die(); });
+	ok_.sigclicked.connect([this, &ctrl, &info, remote]() {
+		if (!images_.has_selection() || description_.text().empty()) { return; }
+		const std::string& sel = images_.get_selected();
+		progress_.set_text(_("Uploading…"));
+		ok_.set_enabled(false);
+		cancel_.set_enabled(false);
+		do_redraw_now();
+		try {
+			const std::string filename = ctrl.net().upload_screenshot(info.internal_name, sel, description_.text());
+			if (remote) {
+				remote->screenshots[filename] = description_.text();
+				ctrl.rebuild();
+			}
+			die();
+		} catch (const std::exception& e) {
+			log_err("Upload screenshot %s for %s: %s", sel.c_str(), info.internal_name.c_str(), e.what());
+			progress_.set_text("");
+			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+					(boost::format(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the server.\n\nError Message:\n%3$s"))
+							% sel % info.internal_name % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+			ok_.set_enabled(true);
+			cancel_.set_enabled(true);
+		}
+	});
+
+	set_center_panel(&box_);
+	center_to_parent();
+}
+
+	void think() override {
+		ok_.set_enabled(images_.has_selection() && !description_.text().empty());
+		UI::Window::think();
+	}
+
+private:
+	UI::Box box_, hbox_, vbox_, buttons_box_;
+	UI::Button ok_, cancel_;
+	UI::Listselect<std::string> images_;
+	UI::Icon icon_;
+	UI::EditBox description_;
+	UI::Textarea progress_;
+};
+
 ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
    : UI::Window(parent,
                 UI::WindowStyle::kFsMenu,
@@ -295,13 +377,24 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                  UI::PanelStyle::kFsMenu,
                  UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_(&dev_box_,
-                   "upload",
+                   "upload_addon",
 				 0,
 				 0,
 				 get_inner_w() / 2,
 				 8,
 				 kRowButtonSize,
 				 _("Choose add-on to upload…"),
+				 UI::DropdownType::kTextualMenu,
+				 UI::PanelStyle::kFsMenu,
+				 UI::ButtonStyle::kFsMenuSecondary),
+     upload_screenshot_(&dev_box_,
+                   "upload_screenie",
+				 0,
+				 0,
+				 get_inner_w() / 2,
+				 8,
+				 kRowButtonSize,
+				 _("Upload a screenshot…"),
 				 UI::DropdownType::kTextualMenu,
 				 UI::PanelStyle::kFsMenu,
 				 UI::ButtonStyle::kFsMenuSecondary),
@@ -429,8 +522,23 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	dev_box_.add(&upload_addon_);
+	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add(&upload_screenshot_);
 	upload_addon_.selected.connect([this]() {
 		upload_addon(*upload_addon_.get_selected());
+	});
+	upload_screenshot_.selected.connect([this]() {
+		upload_screenshot_.set_list_visibility(false);
+		const AddOns::AddOnInfo& info = *upload_screenshot_.get_selected();
+		AddOns::AddOnInfo* remote = nullptr;
+		for (AddOns::AddOnInfo& r : remotes_) {
+			if (r.internal_name == info.internal_name) {
+				remote = &r;
+				break;
+			}
+		}
+		ScreenshotUploadWindow s(*this, info, remote);
+		s.run<UI::Panel::Returncodes>();
 	});
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
@@ -739,11 +847,15 @@ void AddOnsCtrl::update_login_button(UI::Button& b) {
 		b.set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload your own add-ons."));
 		upload_addon_.set_enabled(false);
 		upload_addon_.set_tooltip(_("Please log in to upload add-ons"));
+		upload_screenshot_.set_enabled(false);
+		upload_screenshot_.set_tooltip(_("Please log in to upload content"));
 	} else {
 		b.set_title((boost::format(_("Logged in as %s")) % username_).str());
 		b.set_tooltip(_("Click to log out"));
 		upload_addon_.set_enabled(true);
 		upload_addon_.set_tooltip("");
+		upload_screenshot_.set_enabled(true);
+		upload_screenshot_.set_tooltip("");
 	}
 }
 
@@ -947,6 +1059,7 @@ void AddOnsCtrl::rebuild() {
 	assert(installed_addons_box_.get_nritems() == 0);
 	assert(browse_addons_box_.get_nritems() == 0);
 	upload_addon_.clear();
+	upload_screenshot_.clear();
 
 	size_t index = 0;
 	for (const auto& pair : AddOns::g_addons) {
@@ -958,6 +1071,7 @@ void AddOnsCtrl::rebuild() {
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
 		upload_addon_.add(pair.first.descname(), &pair.first, pair.first.icon, false, pair.first.internal_name);
+		upload_screenshot_.add(pair.first.descname(), &pair.first, pair.first.icon, false, pair.first.internal_name);
 	}
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
