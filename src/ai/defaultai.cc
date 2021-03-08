@@ -677,6 +677,7 @@ void DefaultAI::late_initialization() {
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.needs_water()) {
+			log_dbg_time(gametime, "AI %d detected coast building: %s", player_number(), bo.name);
 			bo.set_is(BuildingAttribute::kNeedsCoast);
 		}
 		if (bh.is_space_consumer()) {
@@ -916,7 +917,8 @@ void DefaultAI::late_initialization() {
 			// wells
 			if (prod.input_wares().empty()) {
 				for (Widelands::DescriptionIndex ware_index : prod.output_ware_types()) {
-					if (tribe_->get_ware_descr(ware_index)->name() == "water") {
+					if (tribe_->get_ware_descr(ware_index)->name() == "water" &&
+					    prod.collected_resources().count("resource_water") == 1) {
 						log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kWell);
 					}
@@ -1018,13 +1020,13 @@ void DefaultAI::late_initialization() {
 		         "This is the building that produces the tribe's 'soldier' worker.",
 		         tribe_->name().c_str());
 	}
-	if (count_buildings_with_attribute(BuildingAttribute::kWell) != 1) {
-		log_warn("The AI needs the tribe '%s' to define 1 type of well. "
-		         "This is the building that produces te ware 'water' and has no inputs.",
+	if (count_buildings_with_attribute(BuildingAttribute::kWell) > 1) {
+		log_warn("The AI needs the tribe '%s' to define 1 type of well at the most. "
+		         "This is the building that produces the ware 'water', has no inputs and mines "
+				 "the 'resource_water'.",
 		         tribe_->name().c_str());
 	}
-	if (count_buildings_with_attribute(BuildingAttribute::kHunter) != 0 &&
-	    count_buildings_with_attribute(BuildingAttribute::kHunter) != 1) {
+	if (count_buildings_with_attribute(BuildingAttribute::kHunter) > 1) {
 		log_warn("The AI needs the tribe '%s' to define 1 type of hunter's building at the most. "
 		         "Hunters are buildings that collect any bob from the map.",
 		         tribe_->name().c_str());
@@ -3255,6 +3257,13 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						if (bo.is(BuildingAttribute::kNeedsBerry)) {
 							prio += std::abs(management_data.get_military_number_at(13)) *
 							        bf->immovables_by_name_nearby[bo.name] / 12;
+						}
+						// buildings that need coast and are not considered above e.g. amazons water_gatherers
+						if (bo.is(BuildingAttribute::kNeedsCoast) && (bf->water_nearby < 3)) {
+							continue;
+						}
+						if (bo.is(BuildingAttribute::kNeedsCoast)) {
+							prio += (-3 + bf->water_nearby);
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
