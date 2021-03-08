@@ -38,11 +38,7 @@ struct BuildingHints {
 	~BuildingHints() {
 	}
 
-	std::set<std::string> supported_production() const {
-		return supported_production_;
-	}
-
-	bool get_needs_water() const {
+	bool needs_water() const {
 		return needs_water_;
 	}
 
@@ -71,10 +67,6 @@ struct BuildingHints {
 		return supports_seafaring_;
 	}
 
-	const std::string& collects_ware_from_map() const {
-		return collects_ware_from_map_;
-	}
-
 	uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
@@ -101,7 +93,6 @@ private:
 	const bool mountain_conqueror_;
 	const bool shipyard_;
 	const bool supports_seafaring_;
-	const std::string collects_ware_from_map_;
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;
 	const int32_t forced_after_;
@@ -110,7 +101,6 @@ private:
 	const int16_t normal_ai_limit_;
 	const bool requires_supporters_;
 	int trainingsites_max_percent_;
-	std::set<std::string> supported_production_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

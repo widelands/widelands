@@ -161,7 +161,6 @@ private:
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;
 
-private:
 	// Hints for the AI
 	std::unique_ptr<AI::WareWorkerHints> ai_hints_;
 

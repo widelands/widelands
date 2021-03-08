@@ -25,7 +25,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "water",
       needs_water = true,
    },
 

@@ -54,8 +54,8 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "fish", amount = 5 },
-      { name = "meat", amount = 5 },
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
       { name = "amazons_bread", amount = 2 },
       { name = "chocolate", amount = 5 },
       { name = "spear_stone_tipped", amount = 3 },
