@@ -1023,7 +1023,7 @@ void DefaultAI::late_initialization() {
 	if (count_buildings_with_attribute(BuildingAttribute::kWell) > 1) {
 		log_warn("The AI needs the tribe '%s' to define 1 type of well at the most. "
 		         "This is the building that produces the ware 'water', has no inputs and mines "
-				 "the 'resource_water'.",
+		         "the 'resource_water'.",
 		         tribe_->name().c_str());
 	}
 	if (count_buildings_with_attribute(BuildingAttribute::kHunter) > 1) {
@@ -3258,7 +3258,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							prio += std::abs(management_data.get_military_number_at(13)) *
 							        bf->immovables_by_name_nearby[bo.name] / 12;
 						}
-						// buildings that need coast and are not considered above e.g. amazons water_gatherers
+						// buildings that need coast and are not considered above e.g. amazons
+						// water_gatherers
 						if (bo.is(BuildingAttribute::kNeedsCoast) && (bf->water_nearby < 3)) {
 							continue;
 						}
