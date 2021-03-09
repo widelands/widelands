@@ -88,21 +88,3 @@ descriptions:new_immovable_type {
 }
 
 pop_textdomain()
-
--- RST
---
--- Help Texts
--- ----------
---
--- Each tribe immovable has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
--- The function in this file returns texts that are used for the immovable by the Tribal Encyclopedia.
---
--- .. function:: immovable_helptext([tribe])
---
---    Returns a localized string with a helptext for this immovable type.
---
---    :arg tribe: the name of the tribe to fetch this helptext for.
---    :type tribe: :class:`string`
---
---    This function works exactly the same as :any:`ware_helptext`.
---
