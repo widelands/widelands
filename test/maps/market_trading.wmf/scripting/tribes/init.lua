@@ -38,14 +38,15 @@ return {
                   purpose = pgettext("ware", "Custom ware does nothing")
                }
             },
-            {
-               name= "ax_sharp",
-               default_target_quantity = 1,
-               preciousness = 1,
-               helptexts = {
-                  purpose = pgettext("custom_ware", "This is a replaced ware.")
-               }
-            }
+            -- TODO(heesenfarmer): reinstate the possibility to replace a unit in scenarios
+            -- {
+               -- name= "ax_sharp",
+               -- default_target_quantity = 1,
+               -- preciousness = 1,
+               -- helptexts = {
+                  -- purpose = pgettext("custom_ware", "This is a replaced ware.")
+               -- }
+            -- }
          }
       }
    }
