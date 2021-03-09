@@ -35,22 +35,18 @@ return {
                default_target_quantity = 500,
                preciousness = 14,
                helptexts = {
-                  purpose = {
-                     pgettext("ware", "Custom ware does nothing"),
-                  }
+                  purpose = pgettext("ware", "Custom ware does nothing")
                }
-            }
+            },
             {
                name= "ax_sharp",
                default_target_quantity = 1,
                preciousness = 1,
                helptexts = {
-                  purpose = {
-                     pgettext("custom_ware", "This is a replaced ware."),
-                  }
+                  purpose = pgettext("custom_ware", "This is a replaced ware.")
                }
             }
-         },
+         }
       }
    }
 }

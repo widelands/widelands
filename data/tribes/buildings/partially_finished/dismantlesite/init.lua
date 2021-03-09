@@ -10,8 +10,8 @@
 --
 -- The dismantlesite is defined in
 -- ``buildings/partially_finished/dismantlesite/init.lua``.
--- The building will also need its help texts, which are defined in
--- ``data/tribes/initialization/<tribe_name>/units.lua``
+-- The building will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_dismantlesite_type{table}
 --

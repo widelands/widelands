@@ -8,8 +8,8 @@
 --
 -- Wares are defined in
 -- ``data/tribes/wares/<ware_name>/init.lua``.
--- The ware will also need its help texts, which are defined in
--- ``data/tribes/initialization/<tribe_name>/units.lua``
+-- The ware will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_ware_type(table)
 --
@@ -86,3 +86,11 @@ descriptions:new_ware_type {
 }
 
 pop_textdomain()
+
+-- RST
+--
+-- Help Texts
+-- ----------
+--
+-- See :ref:`lua_tribes_tribes_helptexts`.
+--

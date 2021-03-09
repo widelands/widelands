@@ -9,8 +9,8 @@
 --
 -- Tribe Immovables are defined in
 -- ``data/tribes/immovables/<immovable_name>/init.lua``.
--- The immovable will also need its help texts, which are defined in
--- ``data/tribes/initialization/<tribe_name>/units.lua``
+-- The immovable will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_immovable_type(table)
 --
@@ -86,3 +86,11 @@ descriptions:new_immovable_type {
 }
 
 pop_textdomain()
+
+-- RST
+--
+-- Help Texts
+-- ----------
+--
+-- See :ref:`lua_tribes_tribes_helptexts`.
+--

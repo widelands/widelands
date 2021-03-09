@@ -9,7 +9,7 @@
 --
 -- Soldiers, like workers, are defined in
 -- ``data/tribes/workers/<tribe name>/soldier/init.lua``.
--- The soldier will also need its :ref:`help texts <lua_tribes_workers_helptexts>`,
+-- The soldier will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
 -- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_soldier_type{table}
