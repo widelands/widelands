@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -309,16 +309,16 @@ msgstr "O krok blíže severu"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid ""
 "My soldiers report they have found a port space! Now we need to build a port"
-" and a shipyard and start an expedition. Of course, we’ll have to build a "
-"complete seafaring economy first, with a shipyard and a weaving mill. But "
-"don’t waste too much time perfecting our economy – all that matters is that "
-"we get to the North soon."
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
 msgstr ""
 "Mí vojáci podali hlášení, že našli místo pro stavbu přístavu! Teď je třeba "
-"ho postavit, postavit i loděnici a zahájit výpravu. Samozřejmě budeme "
-"potřebovat i všechny doprovodné hospodářské budovy zásobující loděnici a "
-"tkalcovnu. Ale nesmíme ztrácet mnoho času řešením efektivity. Vše, na čem "
-"teď záleží, je naše cesta na sever."
+"ho postavit a zahájit výpravu. Samozřejmě budeme potřebovat i všechny "
+"doprovodné hospodářské budovy, včetně loděnice a tkalcovny. Ale nesmíme "
+"ztrácet mnoho času řešením efektivity. Vše, na čem teď záleží, je naše cesta"
+" na sever."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
@@ -508,9 +508,9 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
-"Zdá se, že jsme už jsme opravdu blízko úplnému severu. Ledové pláně! "
-"Překvapuje mě, že něco takového opravdu existuje. Ale velmi pochybuji, že by"
-" tu někdo mohl žít. Obávám se, že tu žádnou pomoc nenajdeme."
+"Zdá se, že už jsme opravdu blízko úplnému severu. Ledové pláně! Překvapuje "
+"mě, že něco takového opravdu existuje. Ale velmi pochybuji, že by tu někdo "
+"mohl žít. Obávám se, že tu žádnou pomoc nenajdeme."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
@@ -724,6 +724,15 @@ msgstr ""
 "žádné zprávy, jsem si jistý, že ho brzy najdeme. A pak, až nám přislíbí svou"
 " pomoc, dobudeme Föhr z nadvlády rozpínavého Zítřka zpět!"
 
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Mise je splněna. Jestli chceš, můžeš pokračovat ve hře, nebo se přesuň k "
+"další misi."
+
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 msgid ""
@@ -751,6 +760,14 @@ msgid ""
 msgstr ""
 "Nestihli jste to. My musíme nyní vyplout a vám bouře nedovolí opustit tento "
 "ostrov. Mrzí mě to, ale počasí nečeká. Sbohem."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
+msgstr ""
+"Tvá výprava selhala a nelze pokračovat v cestě. Snad budeš mít při svém "
+"dalším pokusu více štěstí. Klikni na OK pro návrat do hlavní nabídky."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
