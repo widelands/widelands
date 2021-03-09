@@ -1169,7 +1169,10 @@ void GameClient::handle_network() {
 			disconnect("CONNECTION_LOST", "", false);
 			return;
 		}
-	} catch (const WLWarning&) {
+	} catch (const WLWarning& e) {
+		// disconnect() should have been called already, but just in case:
+		disconnect("SOMETHING_WRONG", e.what());
+		// the Warning is intended for the caller
 		throw;
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
