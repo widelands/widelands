@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -315,10 +315,10 @@ msgstr "Einen Schritt näher zum Norden"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid ""
 "My soldiers report they have found a port space! Now we need to build a port"
-" and a shipyard and start an expedition. Of course, we’ll have to build a "
-"complete seafaring economy first, with a shipyard and a weaving mill. But "
-"don’t waste too much time perfecting our economy – all that matters is that "
-"we get to the North soon."
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
 msgstr ""
 "Meine Krieger melden, dass sie einen Hafenbauplatz gefunden haben! Nun "
 "müssen wir einen Hafen bauen um eine Expedition zu starten. Natürlich müssen"
@@ -740,6 +740,15 @@ msgstr ""
 " ihn bald finden werden. Dann wird er uns Hilfe gewähren und ich werde Föhr "
 "von dem Besatzer Atterdag zurückerobern!"
 
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Du hast diese Mission vollendet. Du kannst, falls du möchtest, "
+"weiterspielen, ansonsten fahre mit der nächsten Mission fort."
+
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 msgid ""
@@ -768,6 +777,15 @@ msgstr ""
 "Ihr habt zu lang gebraucht. Wir müssen jetzt die Segel setzen und danach "
 "wird der Sturm es euch nicht mehr erlauben die Insel zu verlassen. Es tut "
 "mir leid, aber das Wetter wartet nicht. Auf Wiedersehen."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
+msgstr ""
+"Du hast verloren und darfst nicht weiterspielen. Hoffentlich hast du mehr "
+"Glück wenn du diese Mission nochmal probierst. Klicke OK um zum Hauptmenü "
+"zurückzukehren."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
