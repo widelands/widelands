@@ -1077,8 +1077,8 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 			install_translation(temp_locale_path, remote.internal_name);
 		}
 
-		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
-		                                          !remote.requires_restart()));
+		AddOns::g_addons.push_back(
+		   std::make_pair(AddOns::preload_addon(remote.internal_name), !remote.requires_restart()));
 	}
 	if (remote.requires_restart()) {
 		inform_about_restart(remote.descname());

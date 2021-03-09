@@ -283,7 +283,8 @@ bool AddOnInfo::requires_restart() const {
 	case AddOnCategory::kTribes: {
 		// We do not support replacing road or flag images of existing tribes,
 		// so we only need to check in case there's a new tribe.
-		return g_fs->is_directory(dir_to_check + FileSystem::file_separator() + "tribes") && contains_png(dir_to_check);
+		return g_fs->is_directory(dir_to_check + FileSystem::file_separator() + "tribes") &&
+		       contains_png(dir_to_check);
 	}
 	case AddOnCategory::kWorld:
 		return contains_png(dir_to_check);
