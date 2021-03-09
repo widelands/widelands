@@ -10,16 +10,16 @@
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
 # Gontzal M. Pujana <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-02-14 13:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-05 14:59+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -426,7 +426,7 @@ msgstr "Alterna la visibilidad del minimapa"
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -716,7 +716,7 @@ msgid ""
 "Manage your messages more efficiently: press ‘%1%’ for News to access the "
 "messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
 "messages."
-msgstr ""
+msgstr "Administra tus mensajes más eficientemente: presiona \"%1%\" para Nuevos para acceder a la ventan de mensajes, luego usa \"%2%\" para Ir A, y la tecla \"%3%\" para archivar mensajes."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -743,7 +743,7 @@ msgstr "Si te gusta vivir peligrosamente, presionando Ctrl mientras haces clic e
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Presiona ‘%s’ para cambiar rápidamente la visualización de tu inventario."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -760,19 +760,19 @@ msgstr "Algunos edificios, como la granja, tienen una zona de trabajo pequeña. 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Aumenta o reduce el zoom usando la rueda del ratón o %1%/%2%. Pulsa %3% para reiniciar el zoom."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Usa \"%1$s\"  y \"%2$s\" para saltar rapido entre los lugares recientemente visitados."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Aumenta o reduce la velocidad del juego con %1%/%2%. Utiliza %3%/%4% para cambios rapidos,  %5%/%6% va cambiar la velocidad suavemente."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: C138, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -308,17 +308,17 @@ msgstr "Un pas de plus vers le Nord"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid ""
 "My soldiers report they have found a port space! Now we need to build a port"
-" and a shipyard and start an expedition. Of course, we’ll have to build a "
-"complete seafaring economy first, with a shipyard and a weaving mill. But "
-"don’t waste too much time perfecting our economy – all that matters is that "
-"we get to the North soon."
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
 msgstr ""
 "Mes soldats rapportent qu'ils ont trouvé un espace portuaire! Nous devons "
-"maintenant construire un port et un chantier naval et commencer une "
-"expédition. Bien sûr, nous devrons d'abord construire une économie maritime "
-"complète, avec un chantier naval et une usine de tissage. Mais ne perdez pas"
-" trop de temps à perfectionner notre économie - tout ce qui compte, c’est "
-"que nous arrivions bientôt dans le Nord."
+"maintenant construire un port et démarrer une expédition. Bien sûr, nous "
+"devrons d'abord construire une économie maritime complète, avec un chantier "
+"naval et une usine de tissage. Mais ne perdez pas trop de temps à "
+"perfectionner notre économie - tout ce qui compte, c’est que nous arrivions "
+"bientôt dans le Nord."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
@@ -621,6 +621,13 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Je suis heureux que vous vouliez la paix. Je suis désolé, mais je n'ai "
+"jamais entendu le nom de Reebaud auparavant. Si vous voulez aller dans le "
+"Nord, cependant, nous avons la même destination, car c'est exactement là que"
+" je voyage pour affaires officielles depuis la capitale. Nous préparons "
+"actuellement un navire pour mettre les voiles. Nous pouvons vous emmener "
+"avec nous si vous le souhaitez, à condition que vous puissiez payer le "
+"passage."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
@@ -628,6 +635,9 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
+"Nous vous remercions pour votre offre! Quel est le prix que vous exigez? Et,"
+" si cela ne vous dérange pas que je vous pose la question, puis-je savoir "
+"dans quel domaine vous travaillez?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
@@ -642,6 +652,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Je sais que cela semble beaucoup, mais le Sénat ne m'a pas fourni beaucoup "
+"d'argent pour cette expédition, alors je dois admettre que j'en ai besoin."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -654,6 +666,13 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"Le but de mon voyage est de rechercher le Proconsule de la Province des "
+"Terres du Nord, qui a négligé de payer ses impôts pendant plusieurs années "
+"consécutives. Ma tâche est de donner à ce Murilius un bon récit, et si je "
+"découvre qu'il n'a pas payé par cupidité plutôt que par nécessité, je dois "
+"le ramener dans la capitale enchaîné. Je dois dire que je suis plutôt "
+"heureux de me voir confier cette tâche, car j'ai de bonnes chances d'être "
+"nommé Proconsule à sa place si j'y parviens."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -666,6 +685,13 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"Mais revenons au sujet de votre passage. Il n'y a qu'un seul endroit sur la "
+"côte nord de cette île où un port peut être construit. Vous n'avez donc pas "
+"vraiment d'alternative à l'achat d'un passage sur ma galère. Mais mes "
+"astrologues rapportent qu'une terrible tempête se prépare et rendra le "
+"voyage en mer impossible pendant longtemps. Nous devons mettre les voiles "
+"dans les deux heures, et quiconque se trouve encore sur l'île après cette "
+"heure ne la quittera pas de si tôt."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
@@ -678,6 +704,9 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Il semble assez heureux de nous offrir un passage, mais le prix est "
+"exorbitant. Nous pouvons tout aussi bien détruire son port et construire le "
+"nôtre. Je me demande ce qui serait mieux…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
@@ -697,6 +726,20 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"Nous avons conquis le port! Nous construisons déjà un navire, puis nous nous"
+" rendrons enfin dans le Grand Nord. Bien que nous n'ayons toujours pas eu de"
+" nouvelles de Reebaud, je suis convaincu que nous le retrouverons bientôt. "
+"Alors il nous accordera son aide, et je reconquérirai Föhr de l'usurpateur "
+"Atterdag!"
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Vous avez terminé cette mission. Vous pouvez continuer à jouer si vous le "
+"souhaitez, sinon passez à la mission suivante."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
@@ -704,6 +747,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Vous avez payé le passage avec de l'or pur. Maintenant, il est juste que "
+"vous l'obteniez. Notre navire est prêt, vous pouvez embarquer!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
@@ -720,6 +765,12 @@ msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers

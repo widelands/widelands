@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -308,16 +308,16 @@ msgstr "Een Stapp naher bi'm Noorden"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid ""
 "My soldiers report they have found a port space! Now we need to build a port"
-" and a shipyard and start an expedition. Of course, we’ll have to build a "
-"complete seafaring economy first, with a shipyard and a weaving mill. But "
-"don’t waste too much time perfecting our economy – all that matters is that "
-"we get to the North soon."
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
 msgstr ""
 "Miene Soldaten mellen, dat se Rüümte för Muden funnen hebben! Nu mutten wi "
-"eene Muu un eene Warft bauen un eene Söök begünnen. Natürelk mutten wi eerst"
-" eene kumpleete Seefahrt-Wirtschaft upbauen, mit Warft un Spinnweelmöhlen. "
-"Aver bruuk nich to lang daarmit to, de Wirtschaft perfekt to maken – all wat"
-" tellt, is, dat wi fix tum Noorden komen."
+"eene Muu bauen un eene Söök begünnen. Natürelk mutten wi eerst eene "
+"kumpleete Seefahrt-Weertskupp upbauen, mit Warft un Spinnweelmöhlen. Aver "
+"bruuk nich to lang daarmit to, de Weertskupp perfekt to maken – all wat "
+"tellt, is, dat wi fix tum Noorden komen."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
@@ -723,6 +723,15 @@ msgstr ""
 "aver ick bün getroost, dat wi hüm bold finnen. Dann word he uns hülpen, un "
 "ick haal mi Föhr vun de Rover Atterdag torügg!"
 
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Du hest deese Rutfödderung ofsloten. Wenn du willst, kannst du wiederspölen,"
+" anners de token Rutfödderung anfangen."
+
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 msgid ""
@@ -751,6 +760,15 @@ msgstr ""
 "Dat düürt to lang. Wi mutten nu lössseilen, un dann lett de Störm jo de "
 "Insel nich mehr verlaten 't dood mi Leid för jo, aver dat Weer wacht nich. "
 "Tschüss."
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
+msgstr ""
+"Du hest verloren un düürst nich wiederspölen. Wenn du deese Rutfödderung "
+"noch eenmaal versöchst, hest du hopentlik mehr Glück. Klick up »Jau«, um tum"
+" Höövdmenü torügg to gahn."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
