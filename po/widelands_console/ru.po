@@ -5,6 +5,7 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2016,2018
 # GunChleoc, 2020
+# Vasiliy Anosov <basil.snowman@gmail.com>, 2021
 # Viktor S <awsswa59@gmail.com>, 2018,2020
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-02-28 12:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-06 06:14+0000\n"
+"Last-Translator: Vasiliy Anosov <basil.snowman@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,13 +68,13 @@ msgstr "                      По умолчанию это ~/.widelands"
 
 #: ../../src/wlapplication_messages.cc:57
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr ""
+msgstr "По умолчанию это %USERPROFILE%\\.widelands"
 
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr ""
+msgstr "--localedir=DIRNAME Укажите требуемую директорию для локальных файлов widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -134,7 +135,7 @@ msgid ""
 " --addon_server=[...]\n"
 "                      Connect to a different github repository\n"
 "                      and branch from the add-ons manager."
-msgstr ""
+msgstr " --addon_server=[...]\nПодключитесь к требуемому репозиторию github \nи ветви из менеджера дополнений."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
@@ -143,7 +144,7 @@ msgstr " --nosound            Запуск игры без звука."
 #: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr " --fail-on-lua-error Вынужденное аварийное завершение работы Widelands при возникновении ошибки Lua."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
