@@ -183,7 +183,7 @@ bool MutableAddOn::write_to_disk() {
 
 	s.set_translated_string("name", descname_);
 	s.set_translated_string("description", description_);
-	s.set_translated_string("author", author_);
+	s.set_string("author", author_);
 	s.set_string("version", version_);
 	s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
 	s.set_string("requires", requirements);
