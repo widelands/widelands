@@ -7,14 +7,15 @@
 # Sylwia Studzińska <sanuspg@gmail.com>, 2019
 # Niektóry <niektory@gmail.com>, 2020
 # Marcin S <dzidek1003@o2.pl>, 2021
+# Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -467,7 +468,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
-msgstr ""
+msgstr "Nowe instrukcje Amaleai"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:287
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:361
@@ -522,12 +523,12 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea wygląda na szczęśliwą"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "Mam niesamowity postęp do zaraportowania."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -549,7 +550,7 @@ msgstr "Potrzebujemy portu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
-msgstr ""
+msgstr "Saledus jest zatroskany..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:335
@@ -569,7 +570,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "Krok bliżej do bycia w domu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
@@ -599,7 +600,7 @@ msgstr "Mądrość Amalei"
 msgid ""
 "I understand the euphoria of Saledus, but we have some serious problems to "
 "solve first."
-msgstr ""
+msgstr "Rozumiem euforię Saledus, ale mamy poważne problemy do rozwiązania."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:366
@@ -608,6 +609,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
+"Aby wysłać statek z ekspedycją, najpierw potrzebujemy statku. Niestety, "
+"zostało nam tylko pięć beli tkaniny, którą będziemy potrzebować do budowy "
+"portu i stoczni."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:369
@@ -616,6 +620,10 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
+"Więc potrzebujemy więcej tkaniny, by zacząć budowę statku. Niestety, na "
+"naszej wyspie nie ma miejsca, by zbudować całą gospodarkę przeznaczoną do "
+"produkcji tkaniny. W związku z tym musimy konstruować niezbędne towary krok "
+"po kroku. "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:372
@@ -624,6 +632,9 @@ msgid ""
 "farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Więc zastanówmy się nad tym. Do tkania tkaniny potrzebujemy wełny z "
+"owczarni. Sama owczarnia potrzebuje do pracy pszenicy i wody. Więc najpierw "
+"znajdźmy miejsce na duży budynek i zbudujmy tam farmę."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -633,6 +644,10 @@ msgid ""
 "same spot to use our wool for weaving cloth. But for the moment being, let’s"
 " start by producing a reasonable amount of wheat."
 msgstr ""
+"Gdy wystarczająco dużo pszenicy zostanie wyprodukowane, możemy rozebrać "
+"farmę i zbudować owczarnię w celu produkcji wełny. Później możemy zbudować "
+"tkalnie w tym samym miejscu, by użyć naszej wełny do tkania tkaniny. Ale na "
+"razie zacznijmy od wyprodukowania rozsądnych ilości pszenicy."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -640,15 +655,17 @@ msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
+"Myślę, że 50 snopów pszenicy wystarczy na początek. Być może będziemy "
+"musieli dostosować ilość pszenicy dostarczanej do owczarni, aby to osiągnąć."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
-msgstr ""
+msgstr "Żeglarstwo znowu jest możliwe"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 msgid "Praise the gods. We finally have a ship industry."
-msgstr ""
+msgstr "Chwała bogom. W końcu mamy przemysł okrętowy."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
@@ -664,6 +681,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
+"Jak dotąd idzie nam świetnie. Wyprodukowaliśmy wystarczająco dużo pszenicy. "
+"Teraz rozbierz farmę i zbuduj kolejny budynek w łańcuchu produkcyjnym."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:401
@@ -682,7 +701,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
-msgstr ""
+msgstr "Powinniśmy odkryć te wyspy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:413
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:459
@@ -695,6 +714,8 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
+"Teraz, kiedy wszystkie zasoby są gotowe do budowy statku, powinniśmy zacząć "
+"odkrywać otaczające nas wyspy."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:418
@@ -731,7 +752,7 @@ msgstr "Amalea radzi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:436
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Amalea wygląda na zadumaną..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:438
@@ -789,11 +810,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
-msgstr ""
+msgstr "Szczęście Amalei"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
-msgstr ""
+msgstr "Amalea jest bardzo dumna z osiągnięć..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:474
@@ -812,7 +833,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea jest pocieszona"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
@@ -871,7 +892,7 @@ msgstr "Amalea jest podekscytowana"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:511
 msgid "Amalea is looking forward to the exploration…"
-msgstr ""
+msgstr "Amalea oczekuje eksploracji..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
@@ -901,7 +922,7 @@ msgstr "Amalea jest bardzo zadowolona"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:528
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:537
 msgid "Amalea is clapping her hands…"
-msgstr ""
+msgstr "Amalea przyklaskuje..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:530
@@ -956,7 +977,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "The king will be very pleased with our victory."
-msgstr ""
+msgstr "Król będzie bardzo zadowolony z naszej wygranej."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
@@ -964,7 +985,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
-msgstr ""
+msgstr "Saledus jest bardzo smutny i zatroskany..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:563
@@ -1032,11 +1053,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Train Faster, Train Harder"
-msgstr ""
+msgstr "Trenuj szybciej, trenuj ciężej"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:598
 msgid "Saledus is demanding some discipline"
-msgstr ""
+msgstr "Saledus wymaga trochę dyscypliny"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:600
@@ -1077,7 +1098,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid "Time to get Home Again"
-msgstr ""
+msgstr "Czas na to, żeby wrócić do domu"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624

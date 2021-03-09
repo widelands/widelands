@@ -75,7 +75,8 @@ void LaunchSPG::update() {
 		   map.get_correct_loader(settings_.settings().mapfilename));
 		map.set_filename(settings_.settings().mapfilename);
 		{
-			i18n::Textdomain td("maps");
+			std::unique_ptr<i18n::GenericTextdomain> td(
+			   AddOns::create_correct_textdomain(settings_.settings().mapfilename));
 			map_loader->preload_map(true, nullptr);
 		}
 
