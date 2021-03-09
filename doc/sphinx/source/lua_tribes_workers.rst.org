@@ -21,8 +21,6 @@ Workers are defined with Lua functions called ``new_<worker_type>_type{table}``.
 
 **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
 
-**helptext_script**: The full path to the ``helptexts.lua`` script for this worker.
-
 **icon**: The full path to the menu icon for this worker.
 
 **vision_range**
