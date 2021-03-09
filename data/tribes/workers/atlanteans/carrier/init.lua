@@ -11,7 +11,7 @@
 -- Carriers, like workers, are defined in
 -- ``data/tribes/workers/<tribe name>/<worker_name>/init.lua``.
 -- The carrier will also need its :ref:`help texts <lua_tribes_workers_helptexts>`,
--- which are defined in ``data/tribes/wares/<tribe name>/<worker_name>/helptexts.lua``
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_carrier_type{table}
 --

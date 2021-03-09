@@ -14,7 +14,7 @@
 -- Warehouses are defined in
 -- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/init.lua``.
 -- The building will also need its help texts, which are defined in
--- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/helptexts.lua``
+-- ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_warehouse_type{table}
 --
