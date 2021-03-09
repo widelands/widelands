@@ -209,6 +209,8 @@
 - Trainingsites only evaluate fish/meat substitutes if present in inputs (#4641)
 - Delay AI initalization after scenario init (#4656)
 - Fixed an unsafe AI time operation (#4749)
+- AI production support (#4618)
+- Fix AI handling of amazon water gatherer (#4753)
 
 
 ### Gameplay
@@ -483,6 +485,7 @@
 - Toggle preserve wares default behaviour with Shift (#4719)
 - Relayout stock menu on tab change (#4724)
 - Fix scrolling in gamedetails and mapdetails (#4742)
+- Fix save game menu buttons (#4751)
 
 
 ### Internationalization
@@ -521,7 +524,7 @@
 - Add missing textdomain calls (#4643, #4652)
 - Localize timestamps of remote add-ons (#4700)
 - Send localized cheating messages (#4462)
-- Fixed string issues (#4005, #4723, #4728, #4731)
+- Fixed string issues (#4005, #4723, #4728, #4731, #4752)
 - Catch exception on invalid locale (#4725)
 - Fix textdomains for add-on maps and support localized map set directory names (#4743)
 
