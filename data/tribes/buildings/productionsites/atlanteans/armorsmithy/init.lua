@@ -133,7 +133,6 @@
 --
 --       aihints = {
 --          basic_amount = 1,
---          collects_ware_from_map = "water"
 --       },
 --
 --       working_positions = {
