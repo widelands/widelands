@@ -186,7 +186,8 @@ struct WLApplication {
 	                           Widelands::Game&,
 	                           const std::string& error,
 	                           uint8_t player = 1,
-	                           bool replace_ctrl = true);
+	                           bool replace_ctrl = true,
+	                           bool ask_for_bug_report = true);
 
 private:
 	WLApplication(int argc, char const* const* argv);

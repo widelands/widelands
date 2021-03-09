@@ -1471,19 +1471,26 @@ void WLApplication::emergency_save(UI::Panel* panel,
                                    Widelands::Game& game,
                                    const std::string& error,
                                    const uint8_t playernumber,
-                                   const bool replace_ctrl) {
+                                   const bool replace_ctrl,
+                                   const bool ask_for_bug_report) {
 	log_err("##############################\n"
 	        "  FATAL EXCEPTION: %s\n"
-	        "##############################\n"
-	        "  Please report this problem to help us improve Widelands.\n"
-	        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
-	        "  You are using build %s (%s).\n"
-	        "  Please add this information to your report.\n"
-	        "  If desired, Widelands attempts to create an emergency savegame.\n"
+	        "##############################\n",
+	        error.c_str());
+	if (ask_for_bug_report) {
+		log_err("  Please report this problem to help us improve Widelands.\n"
+		        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
+		        "  You are using build %s (%s).\n"
+		        "  Please add this information to your report.\n",
+		        build_id().c_str(), build_type().c_str());
+	}
+	log_err("  If desired, Widelands attempts to create an emergency savegame.\n"
 	        "  It is often – though not always – possible to load it and continue playing.\n"
-	        "##############################",
-	        error.c_str(), build_id().c_str(), build_type().c_str());
+	        "##############################");
 	if (!game.is_loaded()) {
+		if (!ask_for_bug_report) {
+			return;
+		}
 		UI::WLMessageBox m(
 		   panel, UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
@@ -1500,16 +1507,25 @@ void WLApplication::emergency_save(UI::Panel* panel,
 
 	if (panel) {
 		UI::WLMessageBox m(
-		   panel, UI::WindowStyle::kFsMenu, _("Unexpected error during the game"),
-		   (boost::format(
-		       _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
-		         "this problem to help us improve Widelands. You will find related messages in the "
-		         "standard output (stdout.txt on Windows). You are using build %2$s "
-		         "(%3$s).\n\nPlease add this information to your report.\n\nWould you like Widelands "
-		         "to attempt to create an emergency savegame? It is often – though not always – "
-		         "possible to load it and continue playing.")) %
-		    error % build_id() % build_type())
-		      .str(),
+		   panel, UI::WindowStyle::kFsMenu,
+		   ask_for_bug_report ? _("Unexpected error during the game") : _("Game ended unexpectedly"),
+		   ask_for_bug_report ?
+		      (boost::format(_(
+		          "An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
+		          "this problem to help us improve Widelands. You will find related messages in the "
+		          "standard output (stdout.txt on Windows). You are using build %2$s "
+		          "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
+		          "Widelands "
+		          "to attempt to create an emergency savegame? It is often – though not always – "
+		          "possible to load it and continue playing.")) %
+		       error % build_id() % build_type())
+		         .str() :
+		      (boost::format(
+		          _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
+		            "Widelands to attempt to create an emergency savegame? It is often – though not "
+		            "always – possible to load it and continue playing.")) %
+		       error)
+		         .str(),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
