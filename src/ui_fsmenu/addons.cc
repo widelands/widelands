@@ -1078,9 +1078,9 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 		}
 
 		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
-		                                          remote.category != AddOns::AddOnCategory::kWorld));
+		                                          !remote.requires_restart()));
 	}
-	if (remote.category == AddOns::AddOnCategory::kWorld) {
+	if (remote.requires_restart()) {
 		inform_about_restart(remote.descname());
 	}
 }
@@ -1130,7 +1130,7 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 	for (auto& pair : AddOns::g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
 			pair.first = AddOns::preload_addon(remote.internal_name);
-			if (remote.category == AddOns::AddOnCategory::kWorld && full_upgrade) {
+			if (full_upgrade && remote.requires_restart()) {
 				pair.second = false;
 				inform_about_restart(remote.descname());
 			}
