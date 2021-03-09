@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Language-Team: Romanian (https://www.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -244,10 +244,10 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid ""
 "My soldiers report they have found a port space! Now we need to build a port"
-" and a shipyard and start an expedition. Of course, we’ll have to build a "
-"complete seafaring economy first, with a shipyard and a weaving mill. But "
-"don’t waste too much time perfecting our economy – all that matters is that "
-"we get to the North soon."
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
 msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
@@ -567,6 +567,13 @@ msgid ""
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
 
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 msgid ""
@@ -589,6 +596,12 @@ msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -186,14 +186,14 @@ msgstr "Warktügen produzeren"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:137
 msgid "Produce at least ten tools to improve your economy."
-msgstr "Produzeer tominnst teihn Warktügen, um diene Wirtschaft to verbetern."
+msgstr "Produzeer tominnst teihn Warktügen, um diene Weertskupp to verbetern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:138
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
 "Vergeet nich, dat du de Tahl vun Waren, de produzeert worden sallen, in de "
-"Wirtschafts-Instellens stüren kannst."
+"Weertskupp-Instellens stüren kannst."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Recruit new soldiers"
@@ -235,7 +235,7 @@ msgstr "Bau twee Holtköhl-Brannereen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:166
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr "Bau twee Holtköhl-Brannereen, um de Iesen-Wirtschaft to stütten."
+msgstr "Bau twee Holtköhl-Brannereen, um de Iesen-Weertskupp to stütten."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Remember to ensure a constant log supply for them."
@@ -307,7 +307,7 @@ msgid ""
 "able to expand our economy."
 msgstr ""
 "De Gotten wees Pries. Wi hebben nu eene gode Versörgung mit Warktüüg. Nu "
-"könen wi wull uns' Wirtschaft vergrotern."
+"könen wi wull uns' Weertskupp vergrotern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
@@ -508,7 +508,7 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
-"Kiek blot de Wirtschaft an. 't gifft haast keene Wöörde. Well ok immer sük "
+"Kiek blot de Weertskupp an. 't gifft haast keene Wöörde. Well ok immer sük "
 "um uns' Land kümmert hett, as wi nich hier weren, hett 't heel un dall in "
 "een Kuddelmuddel verwannelt. Ick weet nich, wo wi dat ofhelpen könen, wenn "
 "dat överhoopt gaht."
@@ -639,7 +639,7 @@ msgid ""
 "materials, we can start to rebuild our economy."
 msgstr ""
 "Lutjus, wi kummen wieder. Wi hebben nu een paar Baumaterialien un könen uns'"
-" Wirtschaft weer upbauen."
+" Weertskupp weer upbauen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
@@ -695,7 +695,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:366
 msgid "But I’m afraid that this problem hasn’t been the last in our economy."
 msgstr ""
-"Aver ick bün wiss, dat dat nich dat leste Probleem in uns' Wirtschaft weer."
+"Aver ick bün wiss, dat dat nich dat leste Probleem in uns' Weertskupp weer."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:372
 msgid "Amalea has Good News"
@@ -719,7 +719,7 @@ msgstr ""
 msgid ""
 "This is offering us more options to get the shambles in our economy solved."
 msgstr ""
-"Nu hebben wi betere Kansen, de Problemen in uns' Wirtschaft oftohelpen."
+"Nu hebben wi betere Kansen, de Problemen in uns' Weertskupp oftohelpen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:381
@@ -766,7 +766,7 @@ msgstr "Hunnert, hunnert. Uns' Stratennett sücht al beter ut as ehr."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:400
 msgid "Now we can focus on rebuilding our economy."
-msgstr "Nu könen wi uns up dat Weer-Upbauen vun uns' Wirtschaft kunzentreren."
+msgstr "Nu könen wi uns up dat Weer-Upbauen vun uns' Weertskupp kunzentreren."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:406
 msgid "Amalea Shakes Her Head"
@@ -774,7 +774,7 @@ msgstr "Amalee' schüddekoppt …"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:407
 msgid "Amalea is getting fed up with all the problems in this economy…"
-msgstr "Amalee' hett genoog vun de Wirtschafts-Problemen …"
+msgstr "Amalee' hett genoog vun de Weertskupp-Problemen …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:409
@@ -782,7 +782,7 @@ msgid ""
 "For the sake of Neptune, I just discovered another problem! It seems that "
 "really very few things are working as expected in this economy."
 msgstr ""
-"Bi Neptun, ick hebb noch een Probleem funnen! In deeser Wirtschaft warken "
+"Bi Neptun, ick hebb noch een Probleem funnen! In deeser Weertskupp warken "
 "würrelk bannig minn Dingen as se sallen."
 
 #. TRANSLATORS: Amalea
@@ -833,8 +833,8 @@ msgid ""
 " our lumberjacks should be supplied with enough trees to enhance our "
 "economy."
 msgstr ""
-"Na, Lutjus, wi hebben jüüst noch een komiskes Verhollen in uns' Wirtschaft "
-"ofholpen. Nu kriegen uns' Boomhauers genoog Bomen, um in uns' Wirtschaft to "
+"Na, Lutjus, wi hebben jüüst noch een komiskes Verhollen in uns' Weertskupp "
+"ofholpen. Nu kriegen uns' Boomhauers genoog Bomen, um in uns' Weertskupp to "
 "helpen."
 
 #. TRANSLATORS: Amalea
@@ -881,7 +881,7 @@ msgid ""
 "Anyway, we have no choice. We need to find them to improve our economy."
 msgstr ""
 "Ick gloov nich, dat se hör Weten mit uns um nix delen worden. Aver wi hebben"
-" keene Wahl. Wi mutten utfinnen, wo wi uns' Wirtschaft verbetern."
+" keene Wahl. Wi mutten utfinnen, wo wi uns' Weertskupp verbetern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
 msgid "Amalea Looks Happy"
@@ -909,7 +909,7 @@ msgid ""
 msgstr ""
 "De eenzigst Probleem is, dat dat eenige Tied düren word, all de Waren to "
 "sammeln. Vör all mutten wi de Versörgung vun uns' Bargwarken leep minnern. "
-"Dat word uns' Metall-Wirtschaft slimm treffen."
+"Dat word uns' Metall-Weertskupp slimm treffen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:464
 msgid "Amalea Looks Sad"
@@ -987,7 +987,7 @@ msgid ""
 msgstr ""
 "Lutjus, noch een Probleem ofholpen, aver 't gifft mehr. Wi könen nu Spiesen "
 "produzeren, also sallen wi stracks begünnen, Köhl un Iesenkluut oftiboen. Wi"
-" bruken man Warktüüg, daarmit uns' Wirtschaft weer mehr un verschedene "
+" bruken man Warktüüg, daarmit uns' Weertskupp weer mehr un verschedene "
 "Warkhusen versörgen kann."
 
 #. TRANSLATORS: Amalea
@@ -1010,7 +1010,7 @@ msgid ""
 "urgently. I think we are still lacking a vineyard in our economy."
 msgstr ""
 "Wenn wi wat Iesen smelt hebben, könen wi begünnen, Warktüüg to produzeren. "
-"Villicht sallen wi de Tahl, wat wi wullen, över de Wirtschafts-Instellens "
+"Villicht sallen wi de Tahl, wat wi wullen, över de Weertskupp-Instellens "
 "setten. Tüskendör könen wi de Husen bauen, wat wi nu vun Nood bruken. Ick "
 "gloov, wi hebben noch keene Wienplanteree."
 
@@ -1020,7 +1020,7 @@ msgstr "Amalee' hett eenen Raad"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:503
 msgid "Amalea is providing economic advice…"
-msgstr "Amalee' raadt över de Wirtschaft …"
+msgstr "Amalee' raadt över de Weertskupp …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:505
@@ -1056,7 +1056,7 @@ msgid ""
 "Great, another issue solved! Now the charcoal will support our metal "
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
-"Hunnert, noch een Probleem ofholpen! De Holtköhl word uns' Metall-Wirtschaft"
+"Hunnert, noch een Probleem ofholpen! De Holtköhl word uns' Metall-Weertskupp"
 " verbetern un wi könen uns mehr um Utförsken un uns' Soldateree kümmern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
@@ -1099,7 +1099,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea Analyzes the Economy"
-msgstr "Amalee' sinnt över de Wirtschaft"
+msgstr "Amalee' sinnt över de Weertskupp"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:540
 msgid "Amalea reminds Lutius of the farms…"
@@ -1112,7 +1112,7 @@ msgid ""
 "there might be a problem with our farms. They don’t show any productivity "
 "although there is enough space to plant wheat."
 msgstr ""
-"Kiek, Lutjus, ick hebb uns' Wirtschaft nauer ankiekt. Dat gifft een Probleem"
+"Kiek, Lutjus, ick hebb uns' Weertskupp nauer ankiekt. Dat gifft een Probleem"
 " mit de Buurdereen. Se wiesen keene Wöörde, ofschoonst dat genoog Rüümte för"
 " Weit gifft."
 
@@ -1139,7 +1139,7 @@ msgid ""
 "Excuse me Lutius, but I think the most critical resources in the current "
 "state of our economy are logs."
 msgstr ""
-"Dat deit mi Leed, Lutjus, aver uns' Wirtschaft bruukt nu vun Nood vör allem "
+"Dat deit mi Leed, Lutjus, aver uns' Weertskupp bruukt nu vun Nood vör allem "
 "Boomstammen."
 
 #. TRANSLATORS: Amalea
@@ -1339,7 +1339,7 @@ msgid ""
 "our iron and coal towards military production."
 msgstr ""
 "Nu dat wi wat Warktüüg produzeert hebben is 't an de Tied, wat vun uns' "
-"Iesen un Köhl för de Soldateree-Wirtschaft to bruken."
+"Iesen un Köhl för de Soldateree-Weertskupp to bruken."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:655
