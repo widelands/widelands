@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-03-02 12:45+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:04+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -90,7 +90,7 @@ msgstr "Keene Stenen dicht bi"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum kriggst du mehr Mineraale, um diene Wirtschaft uptobauen."
+msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
 #: ../../data/scripting/infrastructure.lua:252
 msgid "No trees nearby"
@@ -100,7 +100,7 @@ msgstr "Keene Bomen dicht bi"
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Bomen. Daarum kriggst du mehr Mineraale, um diene Wirtschaft uptobauen."
+msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Bomen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
 #: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
@@ -266,8 +266,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Dez."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -280,12 +280,12 @@ msgstr "Höövdmenü"
 msgid "Tools"
 msgstr "Warktügen"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -475,10 +475,10 @@ msgstr "Informatioon"
 msgid "Click on a field to show information about it"
 msgstr "Klick up een Feld, um Informationen daaröver to wiesen"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -813,7 +813,7 @@ msgstr "Wiesen"
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
 #: ../../src/ui_basic/messagebox.cc:102 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:201 ../../src/ui_fsmenu/addons.cc:1650
+#: ../../src/ui_fsmenu/addons.cc:201 ../../src/ui_fsmenu/addons.cc:1654
 #: ../../src/ui_fsmenu/addons_packager.cc:108
 #: ../../src/ui_fsmenu/helpwindow.cc:57
 #: ../../src/ui_fsmenu/keyboard_options.cc:132 ../../src/ui_fsmenu/menu.cc:145
@@ -1371,7 +1371,7 @@ msgstr "Eerste Dingen"
 
 #: ../../src/game_io/game_loader.cc:169 ../../src/game_io/game_saver.cc:84
 msgid "Economies"
-msgstr "Wirtschaften"
+msgstr "Weertskuppen"
 
 #: ../../src/game_io/game_loader.cc:176 ../../src/game_io/game_saver.cc:91
 msgid "AI"
@@ -1545,7 +1545,7 @@ msgstr "ut"
 #: ../../src/logic/addons.cc:46 ../../src/ui_basic/dropdown.cc:343
 #: ../../src/ui_basic/dropdown.cc:345 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1351
-#: ../../src/ui_fsmenu/addons.cc:2050 ../../src/ui_fsmenu/launch_mpg.cc:294
+#: ../../src/ui_fsmenu/addons.cc:2054 ../../src/ui_fsmenu/launch_mpg.cc:294
 #: ../../src/wlapplication.cc:1436
 msgid "Error"
 msgstr "Fehler"
@@ -1875,7 +1875,7 @@ msgstr "Du worst angrepen!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:459
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "de Wirtschaft bruukt de Waar »%s«"
+msgstr "de Weertskupp bruukt de Waar »%s«"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -1883,7 +1883,7 @@ msgstr "de Wirtschaft bruukt de Waar »%s«"
 #: ../../src/logic/map_objects/tribes/production_program.cc:468
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "de Wirtschaft bruukt de Waar »%s« nich"
+msgstr "de Weertskupp bruukt de Waar »%s« nich"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1891,14 +1891,14 @@ msgstr "de Wirtschaft bruukt de Waar »%s« nich"
 #: ../../src/logic/map_objects/tribes/production_program.cc:481
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr "de Wirtschaft bruukt de Arbeider »%s«"
+msgstr "de Weertskupp bruukt de Arbeider »%s«"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
 #: ../../src/logic/map_objects/tribes/production_program.cc:491
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "de Wirtschaft bruukt de Arbeider »%s« nich"
+msgstr "de Weertskupp bruukt de Arbeider »%s« nich"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -2228,15 +2228,15 @@ msgstr "Husen"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:557
 msgid "A new port was added to your economy."
-msgstr "Diene Wirtschaft hett eene neje Muu kregen."
+msgstr "Diene Weertskupp hett eene neje Muu kregen."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:560
 msgid "A new headquarters was added to your economy."
-msgstr "Diene Wirtschaft hett een nejes Raadhuus kregen."
+msgstr "Diene Weertskupp hett een nejes Raadhuus kregen."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:563
 msgid "A new warehouse was added to your economy."
-msgstr "Diene Wirtschaft hett een nejes Kraamhuus kregen."
+msgstr "Diene Weertskupp hett een nejes Kraamhuus kregen."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
@@ -3297,12 +3297,12 @@ msgstr "Naam (umdreiht)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:359
 msgid "Best average rating"
-msgstr "Best Bewerten"
+msgstr "Best Beweerten"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:361
 msgid "Worst average rating"
-msgstr "Leepst Bewerten"
+msgstr "Leepst Beweerten"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons.cc:363
@@ -3347,8 +3347,8 @@ msgid ""
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) vun %3$s"
 
-#: ../../src/ui_fsmenu/addons.cc:462 ../../src/ui_fsmenu/addons.cc:1986
-#: ../../src/ui_fsmenu/addons.cc:2010
+#: ../../src/ui_fsmenu/addons.cc:462 ../../src/ui_fsmenu/addons.cc:1990
+#: ../../src/ui_fsmenu/addons.cc:2014
 msgid "NOT VERIFIED"
 msgstr "NICH VERIFIZEERT"
 
@@ -3490,7 +3490,7 @@ msgid ""
 msgstr "De Översettens för dat Verwiedern »%1$s« kunnen nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun de Översettens för deese Verwiedern word översprungen.\n\nFehler:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1254 ../../src/ui_fsmenu/addons.cc:1435
-#: ../../src/ui_fsmenu/addons.cc:1886
+#: ../../src/ui_fsmenu/addons.cc:1890
 msgid "Uninstall"
 msgstr "Wegdoon"
 
@@ -3554,157 +3554,157 @@ msgid "Enable"
 msgstr "Anknipsen"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1458 ../../src/ui_fsmenu/addons.cc:1911
+#: ../../src/ui_fsmenu/addons.cc:1458 ../../src/ui_fsmenu/addons.cc:1915
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1471 ../../src/ui_fsmenu/addons.cc:1951
+#: ../../src/ui_fsmenu/addons.cc:1471 ../../src/ui_fsmenu/addons.cc:1955
 #: ../../src/wui/stock_menu.cc:59
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1475 ../../src/ui_fsmenu/addons.cc:1955
+#: ../../src/ui_fsmenu/addons.cc:1475 ../../src/ui_fsmenu/addons.cc:1959
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1478 ../../src/ui_fsmenu/addons.cc:1959
+#: ../../src/ui_fsmenu/addons.cc:1478 ../../src/ui_fsmenu/addons.cc:1963
 #, c-format
 msgid "by %s"
 msgstr "vun %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1502 ../../src/ui_fsmenu/addons.cc:2041
+#: ../../src/ui_fsmenu/addons.cc:1502 ../../src/ui_fsmenu/addons.cc:2045
 #, c-format
 msgid "Category: %s"
 msgstr "Deel: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1507 ../../src/ui_fsmenu/addons.cc:2045
+#: ../../src/ui_fsmenu/addons.cc:1507 ../../src/ui_fsmenu/addons.cc:2049
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "Versioon: %1$s+%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1555
+#: ../../src/ui_fsmenu/addons.cc:1559
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1557
+#: ../../src/ui_fsmenu/addons.cc:1561
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1559
+#: ../../src/ui_fsmenu/addons.cc:1563
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1561
+#: ../../src/ui_fsmenu/addons.cc:1565
 #, c-format
 msgid "%u bytes"
 msgstr "%u Bytes"
 
-#: ../../src/ui_fsmenu/addons.cc:1599
+#: ../../src/ui_fsmenu/addons.cc:1603
 msgid "Your vote"
-msgstr "Dien Bewerten"
+msgstr "Dien Beweerten"
 
-#: ../../src/ui_fsmenu/addons.cc:1617 ../../src/ui_fsmenu/addons.cc:2066
+#: ../../src/ui_fsmenu/addons.cc:1621 ../../src/ui_fsmenu/addons.cc:2070
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] "Bewerten dör de Bank: %1$.3f (%2$u Bewerten)"
-msgstr[1] "Bewerten dör de Bank: %1$.3f (%2$u Bewertens)"
+msgstr[0] "Beweerten dör de Bank: %1$.3f (%2$u Beweerten)"
+msgstr[1] "Beweerten dör de Bank: %1$.3f (%2$u Beweertens)"
 
-#: ../../src/ui_fsmenu/addons.cc:1622 ../../src/ui_fsmenu/addons.cc:2071
+#: ../../src/ui_fsmenu/addons.cc:1626 ../../src/ui_fsmenu/addons.cc:2075
 msgid "No votes yet"
-msgstr "Noch nich bewert"
+msgstr "Noch nich beweert"
 
-#: ../../src/ui_fsmenu/addons.cc:1632
+#: ../../src/ui_fsmenu/addons.cc:1636
 msgid "Next screenshot"
 msgstr "Anner Billschirmfoto"
 
-#: ../../src/ui_fsmenu/addons.cc:1641
+#: ../../src/ui_fsmenu/addons.cc:1645
 msgid "Previous screenshot"
 msgstr "Vörig Billschirmfoto"
 
-#: ../../src/ui_fsmenu/addons.cc:1649
+#: ../../src/ui_fsmenu/addons.cc:1653
 msgid "Submit comment"
 msgstr "Kommentaar ofschicken"
 
-#: ../../src/ui_fsmenu/addons.cc:1655
+#: ../../src/ui_fsmenu/addons.cc:1659
 msgid "No comments yet."
 msgstr "Noch keene Kommentaren."
 
-#: ../../src/ui_fsmenu/addons.cc:1657
+#: ../../src/ui_fsmenu/addons.cc:1661
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u Kommentaar:"
 msgstr[1] "%u Kommentaren:"
 
-#: ../../src/ui_fsmenu/addons.cc:1667
+#: ../../src/ui_fsmenu/addons.cc:1671
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "»%1$s« hett över Versioon %2$s kommenteert:"
 
-#: ../../src/ui_fsmenu/addons.cc:1681
+#: ../../src/ui_fsmenu/addons.cc:1685
 msgid "Not voted"
-msgstr "Nich bewert"
+msgstr "Nich beweert"
 
-#: ../../src/ui_fsmenu/addons.cc:1741
+#: ../../src/ui_fsmenu/addons.cc:1745
 #, c-format
 msgid "Comments (%u)"
 msgstr "Kommentaren (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1746
+#: ../../src/ui_fsmenu/addons.cc:1750
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Billschirmfotos (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1758
+#: ../../src/ui_fsmenu/addons.cc:1762
 #, c-format
 msgid "Votes (%u)"
-msgstr "Bewertens (%u)"
+msgstr "Beweertens (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1799
+#: ../../src/ui_fsmenu/addons.cc:1803
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1829
+#: ../../src/ui_fsmenu/addons.cc:1833
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Deeses Billschirmfoto kunn um een Fehler nich vum Server haalt worden."
 
-#: ../../src/ui_fsmenu/addons.cc:1868 ../../src/ui_fsmenu/addons.cc:1978
+#: ../../src/ui_fsmenu/addons.cc:1872 ../../src/ui_fsmenu/addons.cc:1982
 msgid "Install"
 msgstr "Installeren"
 
-#: ../../src/ui_fsmenu/addons.cc:1877 ../../src/ui_fsmenu/addons.cc:2001
+#: ../../src/ui_fsmenu/addons.cc:1881 ../../src/ui_fsmenu/addons.cc:2005
 msgid "Upgrade"
 msgstr "Vernejen"
 
-#: ../../src/ui_fsmenu/addons.cc:1895
+#: ../../src/ui_fsmenu/addons.cc:1899
 msgid "Comments and Votes"
-msgstr "Kommentaren un Bewertens"
+msgstr "Kommentaren un Beweertens"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1937
+#: ../../src/ui_fsmenu/addons.cc:1941
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1960
+#: ../../src/ui_fsmenu/addons.cc:1964
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "vun %1$s (upladen vun %2$s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1979
+#: ../../src/ui_fsmenu/addons.cc:1983
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3717,11 +3717,11 @@ msgid ""
 "%6$s\n"
 msgstr "Willst du deese Verwiedern würrelk installeren?\n\n%1$s\nvun %2$s\n%3$s\nVersioon %4$s\nDeel: %5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:1986 ../../src/ui_fsmenu/addons.cc:2010
+#: ../../src/ui_fsmenu/addons.cc:1990 ../../src/ui_fsmenu/addons.cc:2014
 msgid "Verified"
 msgstr "Verifizeert"
 
-#: ../../src/ui_fsmenu/addons.cc:2002
+#: ../../src/ui_fsmenu/addons.cc:2006
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3735,38 +3735,38 @@ msgid ""
 "%7$s\n"
 msgstr "Willst du deese Verwiedern würrelk vernejen?\n\n%1$s\nvun %2$s\n%3$s\nInstalleert Versioon: %4$s\nNejste Versioon: %5$s\nDeel: %6$s\n%7$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:2052
+#: ../../src/ui_fsmenu/addons.cc:2056
 msgid "Verified by the Widelands Development Team"
 msgstr "Vun de Widelands Entwickeln-Klottje verifizeert"
 
-#: ../../src/ui_fsmenu/addons.cc:2053
+#: ../../src/ui_fsmenu/addons.cc:2057
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Deese Verwiedern is noch nich vun de Widelands Entwickeln-Klottje nakiekt worden. Wi könen di nich versekern, dat dat nich slimme of ungode Inhollen hett."
 
-#: ../../src/ui_fsmenu/addons.cc:2060
+#: ../../src/ui_fsmenu/addons.cc:2064
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] "Grött all tosamen: %u Byte"
 msgstr[1] "Grött all tosamen: %u Bytes"
 
-#: ../../src/ui_fsmenu/addons.cc:2063
+#: ../../src/ui_fsmenu/addons.cc:2067
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] "%u Maal runnerladen"
 msgstr[1] "%u Maal runnerladen"
 
-#: ../../src/ui_fsmenu/addons.cc:2072
+#: ../../src/ui_fsmenu/addons.cc:2076
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
 msgstr[0] "%u Kommentaar"
 msgstr[1] "%u Kommentaren"
 
-#: ../../src/ui_fsmenu/addons.cc:2074
+#: ../../src/ui_fsmenu/addons.cc:2078
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -3839,6 +3839,7 @@ msgid "Invalid Name"
 msgstr "Ungültig Naam"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:331
+#: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid. Please choose a different name."
 msgstr "Deeser Naam is ungültig. Bidde köör een anner Naam."
 
@@ -4013,10 +4014,6 @@ msgstr "Nejes Verteeknis"
 #: ../../src/ui_fsmenu/addons_packager_box.cc:238
 msgid "Enter the name for the new directory."
 msgstr "Giff de Naam för dat neje Verteeknis in."
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:251
-msgid "This name is invalid, please choose a different name."
-msgstr "Deeser Naam is ungültig, bidde köör een anner Naam."
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "A directory with this name already exists."
@@ -5479,7 +5476,7 @@ msgstr "Narichten: Narichten vun Schattsökers wiesen"
 
 #: ../../src/wlapplication_options.cc:519
 msgid "Messages: Show Economy Messages"
-msgstr "Narichten: Wirtschafts-Narichten wiesen"
+msgstr "Narichten: Weertskupp-Narichten wiesen"
 
 #: ../../src/wlapplication_options.cc:524
 msgid "Messages: Show Seafaring Messages"
@@ -5936,7 +5933,7 @@ msgstr "Instellens, wat na de Beschicken bruukt worden sallen"
 
 #: ../../src/wui/economy_options_window.cc:45
 msgid "Economy options"
-msgstr "Wirtschafts-Instellens"
+msgstr "Weertskupp-Instellens"
 
 #: ../../src/wui/economy_options_window.cc:78
 msgid "Decrease target by 10"
@@ -6053,7 +6050,7 @@ msgstr "Deese Fahn wegmaken"
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Configure this flag’s economy"
-msgstr "Wirtschafts-Instellens för deese Fahn hör Wirtschaft"
+msgstr "Weertskupp-Instellens för deese Fahn hör Weertskupp"
 
 #: ../../src/wui/fieldaction.cc:442
 msgid "Send geologist to explore site"
@@ -6254,7 +6251,7 @@ msgstr "Blot Narichten vun Schattsökers wiesen"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:542
 msgid "Show economy messages only"
-msgstr "Blot Wirtschafts-Narichten wiesen"
+msgstr "Blot Weertskupp-Narichten wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:546
@@ -6711,8 +6708,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Tahlen över alls"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seefahrt"
@@ -7475,7 +7472,7 @@ msgstr "Beweerten"
 
 #: ../../src/wui/stock_menu.cc:70
 msgid "Compare stocked amounts to economy target quantities"
-msgstr "De Tahlen im Bestand mit de Wirtschaft-Enn-Tahlen verglieken"
+msgstr "De Tahlen im Bestand mit de Weertskupp-Enn-Tahlen verglieken"
 
 #: ../../src/wui/stock_menu.cc:73
 msgid "Red:"
@@ -7520,7 +7517,7 @@ msgstr "Verbruuk"
 
 #: ../../src/wui/ware_statistics_menu.cc:147
 msgid "Economy health"
-msgstr "Wirtschafts-Utglekenheid"
+msgstr "Weertskupp-Utglekenheid"
 
 #: ../../src/wui/warehousewindow.cc:155
 msgid "Remove 10 wares"
@@ -7540,7 +7537,7 @@ msgstr "10 Waren hentofögen"
 
 #: ../../src/wui/warehousewindow.cc:187
 msgid "Configure this building’s economy"
-msgstr "Wirtschafts-Instellens för deeses Huus sien Wirtschaft"
+msgstr "Weertskupp-Instellens för deeses Huus sien Weertskupp"
 
 #: ../../src/wui/warehousewindow.cc:270
 msgid "Wares waiting to be shipped"

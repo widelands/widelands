@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-02-28 14:28+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Willkomen torügg. In deese Inföhren lehrst du de wichtigsten Dingen ö
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Laat mi eerst maal dien Gewest verklaren: Hier im Süden hest du eene kumplete Wirtschaft mit haast all wat du bruukst."
+msgstr "Laat mi eerst maal dien Gewest verklaren: Hier im Süden hest du eene kumplete Weertskupp mit haast all wat du bruukst."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
@@ -484,7 +484,7 @@ msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr "Dat waar eene sware un düre Arbeid, hier hen to komen. De Insel hett nich vööl to beden, aver 't gifft wat Iesenkluut in hör Barg. Uns' Wirtschaft bruukt Iesenkluut, also mutten wi een Iesen-Bargwark bauen."
+msgstr "Dat waar eene sware un düre Arbeid, hier hen to komen. De Insel hett nich vööl to beden, aver 't gifft wat Iesenkluut in hör Barg. Uns' Weertskupp bruukt Iesenkluut, also mutten wi een Iesen-Bargwark bauen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 msgid "Start mining iron ore in the mountain."
@@ -500,7 +500,7 @@ msgstr "Bau een Iesen-Bargwark up de Insel"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Our economy lacks resources."
-msgstr "Uns' Wirtschaft bruukt Mineraale."
+msgstr "Uns' Weertskupp bruukt Mineraale."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Start mining iron ore in mountains on the island."
@@ -691,7 +691,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr "Un wenn diene Prielen eene grote Ofkörten in dienem Stratennett sünd, word diene Wirtschaft völe Waren över de Priel schicken. Een Priel kann blot eene Fähr hebben – anners as Straten, wat eenen tweden Lastendrager kriegen, wenn 't vööl to doon gifft –, un wiel se oft länger sünd as de twee of dree Delen, wat för Straten anraden worden, könen Prielen licht to slimmen Buddelhalsen in diener Wirtschaft worden. Versöök, een paar Prielen parallel to bauen, um de Last to verdeelen. Wenn dat nich gaht, kann dat sogaar beter wesen, keine Prielen to bruken."
+msgstr "Un wenn diene Prielen eene grote Ofkörten in dienem Stratennett sünd, word diene Weertskupp völe Waren över de Priel schicken. Een Priel kann blot eene Fähr hebben – anners as Straten, wat eenen tweden Lastendrager kriegen, wenn 't vööl to doon gifft –, un wiel se oft länger sünd as de twee of dree Delen, wat för Straten anraden worden, könen Prielen licht to slimmen Buddelhalsen in diener Weertskupp worden. Versöök, een paar Prielen parallel to bauen, um de Last to verdeelen. Wenn dat nich gaht, kann dat sogaar beter wesen, keine Prielen to bruken."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "Ferry yard production"
