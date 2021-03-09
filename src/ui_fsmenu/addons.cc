@@ -200,6 +200,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
          kRowButtonSize,
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
+#if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
      autofix_dependencies_(&buttons_box_,
                            "autofix",
                            0,
@@ -209,6 +210,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                            UI::ButtonStyle::kFsMenuSecondary,
                            _("Fix dependencies…"),
                            _("Try to automatically fix the dependency errors")),
+#endif
      move_top_(&installed_addons_buttons_box_,
                "move_top",
                0,
@@ -422,7 +424,9 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			refresh_remotes();
 		}
 	});
+#if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 	autofix_dependencies_.sigclicked.connect([this]() { autofix_dependencies(); });
+#endif
 
 	filter_reset_.sigclicked.connect([this]() {
 		filter_name_.set_text("");
@@ -540,8 +544,10 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	buttons_box_.add_space(kRowButtonSpacing);
 	buttons_box_.add(&refresh_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kRowButtonSpacing);
+#if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 	buttons_box_.add(&autofix_dependencies_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kRowButtonSpacing);
+#endif
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kRowButtonSpacing);
 
@@ -948,7 +954,8 @@ void AddOnsCtrl::update_dependency_errors() {
 		warn_requirements_.set_tooltip(_("Add-Ons with dependency errors may work incorrectly or "
 		                                 "prevent games and maps from loading."));
 	}
-	autofix_dependencies_.set_enabled(!warn_requirements.empty());
+	// TODO(Nordfriese): Disabled autofix_dependencies for v1.0
+	// autofix_dependencies_.set_enabled(!warn_requirements.empty());
 	layout();
 }
 
@@ -1306,6 +1313,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 	NEVER_HERE();
 }
 
+#if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 // UNTESTED
 // Automatically fix all dependency errors by reordering add-ons and downloading missing ones.
 // We make no guarantees inhowfar the existing order is preserved
@@ -1384,6 +1392,7 @@ step1:
 
 	rebuild();
 }
+#endif
 
 static std::string required_wl_version_and_sync_safety_string(const AddOns::AddOnInfo& info) {
 	std::string result;
