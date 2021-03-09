@@ -543,7 +543,7 @@ Flag* Player::build_flag(const Coords& c) {
 }
 
 Flag& Player::force_flag(const FCoords& c) {
-	log_info_time(egbase().get_gametime(), "Forcing flag at (%i, %i)\n", c.x, c.y);
+	verb_log_info_time(egbase().get_gametime(), "Forcing flag at (%i, %i)\n", c.x, c.y);
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
@@ -619,7 +619,7 @@ Road& Player::force_road(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log_info_time(egbase().get_gametime(), "Clearing for road at (%i, %i)\n", c.x, c.y);
+		verb_log_info_time(egbase().get_gametime(), "Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
@@ -687,7 +687,7 @@ Waterway& Player::force_waterway(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log_info_time(egbase().get_gametime(), "Clearing for waterway at (%i, %i)\n", c.x, c.y);
+		verb_log_info_time(egbase().get_gametime(), "Clearing for waterway at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
@@ -872,7 +872,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						                         primary_road->get_flag(RoadBase::FlagEnd) :
 						                         primary_start;
 						primary_road->destroy(egbase());
-						log_info_time(egbase().get_gametime(),
+						verb_log_info_time(egbase().get_gametime(),
 						              "destroying road/waterway from (%i, %i) going in dir %u\n",
 						              flag->get_position().x, flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
@@ -1272,7 +1272,7 @@ void Player::enemyflagaction(const Flag& flag,
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
-							log_warn_time(
+							verb_log_warn_time(
 							   egbase().get_gametime(),
 							   "Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
 							   "building\n",

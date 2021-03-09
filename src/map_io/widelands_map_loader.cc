@@ -379,7 +379,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		//  Must be loaded after every kind of object that can see.
 		log_info("Reading Players View Data ... ");
 		set_progress_message(_("Vision"), 17);
-		{
+		if (!is_game) {
 			MapPlayersViewPacket p;
 			p.read(*fs_, egbase);
 		}

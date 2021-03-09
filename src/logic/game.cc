@@ -164,7 +164,7 @@ void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
 	synchash_.reset();
-	log_dbg_time(get_gametime(), "[sync] Reset\n");
+	log_info_time(get_gametime(), "[sync] Reset\n");
 }
 
 /**

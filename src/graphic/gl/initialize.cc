@@ -258,7 +258,7 @@ SDL_GLContext initialize(
 	if (opengl_version_string == nullptr) {
 		handle_unreadable_opengl_version();
 	}
-	log_dbg("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
+	log_info("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
 	check_version(
 	   opengl_version_string, "OpenGL", _("OpenGL"), 2, 1, handle_unreadable_opengl_version);
 
@@ -266,7 +266,7 @@ SDL_GLContext initialize(
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log_dbg("Graphics: %s is %d\n", #x, value);                                                  \
+		log_info("Graphics: %s is %d\n", #x, value);                                                  \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
@@ -295,17 +295,17 @@ SDL_GLContext initialize(
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log_dbg("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+	log_info("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
-	log_dbg("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
+	log_info("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
 	if (shading_language_version_string == nullptr) {
 		handle_unreadable_opengl_shading_language();
 	}
-	log_dbg("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+	log_info("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
 	check_version(shading_language_version_string, "Shading Language", _("Shading Language"), 1, 20,
 	              handle_unreadable_opengl_shading_language);
 

@@ -42,7 +42,7 @@ namespace Widelands {
 Serial Economy::last_economy_serial_ = 0;
 
 void Economy::initialize_serial() {
-	log_dbg("Initializing economy serial\n");
+	log_info("Initializing economy serial\n");
 	last_economy_serial_ = 0;
 }
 
