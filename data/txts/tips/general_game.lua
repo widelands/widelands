@@ -29,7 +29,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Use the priority buttons in building windows to adjust delivery of a specific ware. Pressing Ctrl while clicking will adjust all wares at once.",
+      text = _"Use the priority sliders in building windows to adjust delivery of a specific ware. Holding down Shift while clicking will adjust all wares at once.",
       seconds = 7
    },
    {
@@ -37,7 +37,7 @@ tips = {
       seconds = 7
    },
    {
-      text = _("Manage your messages more efficiently: press ‘%1%’ for News to access the messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."):bformat(
+      text = _("Manage your messages more efficiently: press ‘%1%’ to access the messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."):bformat(
          wl.ui.get_shortcut("game_messages"), wl.ui.get_shortcut("game_msg_goto"), wl.ui.get_shortcut("delete")),
       seconds = 6
    },

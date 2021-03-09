@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-02-19 14:42+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:02+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -358,7 +358,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "In deesem Speel fangst du mit eenem lütten Deel Land an, waar du leep minn Materialien un Mineraale hest. Daarmit baust du een Riek mit dusenden Inwohners up. Up dienem Weg daarhen baust du eene starke Wirtschaft up, förskst dat Land um di rum ut un kämpst tegen tegenstriedige Völker."
+msgstr "In deesem Speel fangst du mit eenem lütten Deel Land an, waar du leep minn Materialien un Mineraale hest. Daarmit baust du een Riek mit dusenden Inwohners up. Up dienem Weg daarhen baust du eene starke Weertskupp up, förskst dat Land um di rum ut un kämpst tegen tegenstriedige Völker."
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
@@ -515,7 +515,7 @@ msgstr "Amazonen leven Bomen. Bau mennig Waldwahrderske-Katen, um genoog daarvun
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
 "plantations to plant these special trees."
-msgstr "Edelholten sünd de wichtigsten Waren in de amazoonsk Wirtschaft. Bau Edelholt-Plantereen, um deese besünneren Bomen to planten."
+msgstr "Edelholten sünd de wichtigsten Waren in de amazoonsk Weertskupp. Bau Edelholt-Plantereen, um deese besünneren Bomen to planten."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
@@ -620,7 +620,7 @@ msgstr "Wenn du Bomen settst, bruuk de Hülp-Knoop, um to sehn, welke Bomen in w
 #: ../../data/txts/tips/editor.lua:39
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr "Wenn du de Mineraale Water un Fiss nich settst, word de Normaalwert sett."
+msgstr "Wenn du de Mineraale Water un Fiss nich settst, word de Normaalweert sett."
 
 #: ../../data/txts/tips/editor.lua:43
 msgid ""
@@ -701,7 +701,7 @@ msgstr "Bruuk de Wichtigkeids-Knopen in eenem Huus-Fenster, um de Versörgung mi
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Bruuk dat Menü »Wirtschafts-Instellens«, um de Enn-Tahlen för Waren fasttoleggen. Du kannst 't över dat Fahnen-Menü opendoon."
+msgstr "Bruuk dat Menü »Weertskupp-Instellens«, um de Enn-Tahlen för Waren fasttoleggen. Du kannst 't över dat Fahnen-Menü opendoon."
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid ""
@@ -741,7 +741,7 @@ msgstr "Drück »%s«, um dien Bestands-Fenster fix to wiesen of to verbargen."
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr "Eene Wirtschaft umfaat all Husen un Fahnen, de mit Straten verbunnen sünd. De Versörgung vun elkeen Huus word vun siener Wirtschaft regelt."
+msgstr "Eene Weertskupp umfaat all Husen un Fahnen, de mit Straten verbunnen sünd. De Versörgung vun elkeen Huus word vun siener Weertskupp regelt."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""
