@@ -156,6 +156,23 @@ public:
 		return (p.empty() || p == password_sha1_) ? p : crypto::sha1(p);
 	}
 
+	bool handle_key(bool down, SDL_Keysym code) override {
+		if (down) {
+			switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				ok();
+				return true;
+			case SDLK_ESCAPE:
+				die();
+				return true;
+			default:
+				break;
+			}
+		}
+		return UI::Window::handle_key(down, code);
+	}
+
 	void think() override {
 		UI::Window::think();
 		ok_.set_enabled(!username_.text().empty() && !password_.text().empty());
@@ -191,7 +208,7 @@ class ScreenshotUploadWindow : public UI::Window {
 public:
 	explicit ScreenshotUploadWindow(AddOnsCtrl& ctrl, const AddOns::AddOnInfo& info, AddOns::AddOnInfo* remote)
 	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-                "upload_screenshot", 0, 0, 100, 100, (boost::format(_("Upload Screenshot for ‘%s’")) % info.descname()).str()),
+                "upload_screenshot", 0, 0, 100, 100, (boost::format(_("Upload Screenshot for ‘%s’")) % info.internal_name).str()),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -233,9 +250,9 @@ public:
 		cancel_.set_enabled(false);
 		do_redraw_now();
 		try {
-			const std::string filename = ctrl.net().upload_screenshot(info.internal_name, sel, description_.text());
+			ctrl.net().upload_screenshot(info.internal_name, sel, description_.text());
 			if (remote) {
-				remote->screenshots[filename] = description_.text();
+				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
 				ctrl.rebuild();
 			}
 			die();
@@ -530,14 +547,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	upload_screenshot_.selected.connect([this]() {
 		upload_screenshot_.set_list_visibility(false);
 		const AddOns::AddOnInfo& info = *upload_screenshot_.get_selected();
-		AddOns::AddOnInfo* remote = nullptr;
-		for (AddOns::AddOnInfo& r : remotes_) {
-			if (r.internal_name == info.internal_name) {
-				remote = &r;
-				break;
-			}
-		}
-		ScreenshotUploadWindow s(*this, info, remote);
+		ScreenshotUploadWindow s(*this, info, find_remote(info.internal_name));
 		s.run<UI::Panel::Returncodes>();
 	});
 	dev_box_.add_space(kRowButtonSize);
@@ -1070,8 +1080,8 @@ void AddOnsCtrl::rebuild() {
 		   new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second);
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
-		upload_addon_.add(pair.first.descname(), &pair.first, pair.first.icon, false, pair.first.internal_name);
-		upload_screenshot_.add(pair.first.descname(), &pair.first, pair.first.icon, false, pair.first.internal_name);
+		upload_addon_.add(pair.first.internal_name, &pair.first, pair.first.icon, false, pair.first.descname());
+		upload_screenshot_.add(pair.first.internal_name, &pair.first, pair.first.icon, false, pair.first.descname());
 	}
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
@@ -1299,6 +1309,15 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
+AddOns::AddOnInfo* AddOnsCtrl::find_remote(const std::string& name) {
+	for (AddOns::AddOnInfo& r : remotes_) {
+		if (r.internal_name == name) {
+			return &r;
+		}
+	}
+	return nullptr;
+}
+
 bool AddOnsCtrl::is_remote(const std::string& name) const {
 	if (remotes_.size() <= 1) {
 		// No data available
@@ -1384,6 +1403,10 @@ void AddOnsCtrl::upload_addon(const AddOns::AddOnInfo& addon) {
 			w.progressbar().set_total(l);
 			nr_files = l;
 		});
+		if (AddOns::AddOnInfo* r = find_remote(addon.internal_name)) {
+			// NOCOM all assignments of `fetch_one_remote` need to be revisited after the shared_ptr refactoring branch is merged
+			*r = net().fetch_one_remote(r->internal_name);
+		}
 	} catch (const WLWarning& e) {
 		log_info("upload addon %s: %s", addon.internal_name.c_str(), e.what());
 	} catch (const std::exception& e) {
@@ -1918,23 +1941,16 @@ public:
 			own_voting_.add(std::to_string(i), i);
 		}
 		own_voting_.selected.connect([this]() {
-			const unsigned old_vote = current_vote_;
 			current_vote_ = own_voting_.get_selected();
 			try {
 				parent_.net().vote(info_.internal_name, current_vote_);
+				info_ = parent_.net().fetch_one_remote(info_.internal_name);
 			} catch (const std::exception& e) {
 				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					(boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
 					UI::WLMessageBox::MBoxType::kOk);
 				w.run<UI::Panel::Returncodes>();
 				return;
-			}
-			if (old_vote > 0) {
-				assert(info_.votes[old_vote - 1] > 0);
-				--info_.votes[old_vote - 1];
-			}
-			if (current_vote_ > 0) {
-				++info_.votes[current_vote_ - 1];
 			}
 			update_data();
 			parent_.rebuild();
@@ -1946,6 +1962,7 @@ public:
 			}
 			try {
 				parent_.net().comment(info_, message);
+				info_ = parent_.net().fetch_one_remote(info_.internal_name);
 			} catch (const std::exception& e) {
 				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					(boost::format(_("The comment could not be submitted.\nError code: %s")) % e.what()).str(),
@@ -1954,14 +1971,6 @@ public:
 				return;
 			}
 
-			for (;;) {
-				size_t pos = message.find('\n');
-				if (pos == std::string::npos) {
-					break;
-				}
-				message.replace(pos, 1, "<br>");
-			}
-			info_.user_comments.push_back(AddOns::AddOnComment{parent_.username(), message, info_.version, std::time(nullptr)});
 			update_data();
 			comment_->set_text("");
 			parent_.rebuild();

@@ -187,11 +187,8 @@ private:
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	init();
 	CrashGuard guard(*this);
-
-	{
-		const char* data_to_send = "CMD_LIST\n";
-		write(client_socket_, data_to_send, strlen(data_to_send));
-	}
+	const char* data_to_send = "CMD_LIST\n";
+	write(client_socket_, data_to_send, strlen(data_to_send));
 
 	const long nr_addons = std::stol(read_line().c_str());
 	std::vector<AddOnInfo> result_vector(nr_addons);
@@ -199,91 +196,99 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		result_vector[i].internal_name = read_line();
 	}
 	check_endofstream();
+	guard.ok();
 
 	for (long i = 0; i < nr_addons; ++i) {
-		AddOnInfo& a = result_vector[i];
-		{
-			std::string send = "CMD_INFO ";
-			send += a.internal_name;
-			send += '\n';
-			write(client_socket_, send.c_str(), send.size());
-		}
+		result_vector[i] = fetch_one_remote(result_vector[i].internal_name);
+	}
+	return result_vector;
+}
 
-		a.unlocalized_descname = read_line();
-		const std::string localized_descname = read_line();
-		a.descname = [localized_descname]() { return localized_descname; };
-		a.unlocalized_description = read_line();
-		const std::string localized_description = read_line();
-		a.description = [localized_description]() { return localized_description; };
-		a.unlocalized_author = read_line();
-		const std::string localized_author = read_line();
-		a.author = [localized_author]() { return localized_author; };
-		a.upload_username = read_line();
-		a.version = string_to_version(read_line());
-		a.i18n_version = std::stol(read_line());
-		a.category = get_category(read_line());
-
-		std::string req = read_line();
-		for (; !req.empty();) {
-			size_t pos = req.find(',');
-			if (pos < req.size()) {
-				a.requirements.push_back(req.substr(0, pos));
-				req = req.substr(pos + 1);
-			} else {
-				a.requirements.push_back(req);
-				break;
-			}
-		}
-
-		a.min_wl_version = read_line();
-		a.max_wl_version = read_line();
-		a.sync_safe = (read_line() == "true");
-
-		for (int j = std::stoi(read_line()); j > 0; --j) {
-			const std::string s1 = read_line();
-			const std::string s2 = read_line();
-			a.screenshots[s1] = s2;
-		}
-		a.total_file_size = std::stol(read_line());
-		a.upload_timestamp = std::stol(read_line());
-		a.download_count = std::stol(read_line());
-		for (int j = 0; j < kMaxRating; ++j) {
-			a.votes[j] = std::stol(read_line());
-		}
-
-		const int comments = std::stoi(read_line());
-		a.user_comments.resize(comments);
-		for (int j = 0; j < comments; ++j) {
-			a.user_comments[j].username = read_line();
-			a.user_comments[j].timestamp = std::stol(read_line());
-			a.user_comments[j].version = string_to_version(read_line());
-			int newlines = std::stoi(read_line());
-			a.user_comments[j].message = read_line();
-			for (; newlines > 0; --newlines) {
-				a.user_comments[j].message += "<br>";
-				a.user_comments[j].message += read_line();
-			}
-		}
-		a.verified = read_line() == "verified";
-
-		const std::string icon_checksum = read_line();
-		const long icon_file_size = std::stol(read_line());
-		if (icon_file_size <= 0) {
-			a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
-		} else {
-			const std::string path = kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
-					std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
-			read_file(icon_file_size, path);
-			check_checksum(path, icon_checksum);
-			a.icon = g_image_cache->get(path);
-			g_fs->fs_unlink(path);
-		}
-
-		check_endofstream();
+AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
+	init();
+	CrashGuard guard(*this);
+	{
+		std::string send = "CMD_INFO ";
+		send += name;
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
 	}
 
+	AddOnInfo a;
+	a.internal_name = name;
+	a.unlocalized_descname = read_line();
+	const std::string localized_descname = read_line();
+	a.descname = [localized_descname]() { return localized_descname; };
+	a.unlocalized_description = read_line();
+	const std::string localized_description = read_line();
+	a.description = [localized_description]() { return localized_description; };
+	a.unlocalized_author = read_line();
+	const std::string localized_author = read_line();
+	a.author = [localized_author]() { return localized_author; };
+	a.upload_username = read_line();
+	a.version = string_to_version(read_line());
+	a.i18n_version = std::stol(read_line());
+	a.category = get_category(read_line());
+
+	std::string req = read_line();
+	for (; !req.empty();) {
+		size_t pos = req.find(',');
+		if (pos < req.size()) {
+			a.requirements.push_back(req.substr(0, pos));
+			req = req.substr(pos + 1);
+		} else {
+			a.requirements.push_back(req);
+			break;
+		}
+	}
+
+	a.min_wl_version = read_line();
+	a.max_wl_version = read_line();
+	a.sync_safe = (read_line() == "true");
+
+	for (int j = std::stoi(read_line()); j > 0; --j) {
+		const std::string s1 = read_line();
+		const std::string s2 = read_line();
+		a.screenshots[s1] = s2;
+	}
+	a.total_file_size = std::stol(read_line());
+	a.upload_timestamp = std::stol(read_line());
+	a.download_count = std::stol(read_line());
+	for (int j = 0; j < kMaxRating; ++j) {
+		a.votes[j] = std::stol(read_line());
+	}
+
+	const int comments = std::stoi(read_line());
+	a.user_comments.resize(comments);
+	for (int j = 0; j < comments; ++j) {
+		a.user_comments[j].username = read_line();
+		a.user_comments[j].timestamp = std::stol(read_line());
+		a.user_comments[j].version = string_to_version(read_line());
+		int newlines = std::stoi(read_line());
+		a.user_comments[j].message = read_line();
+		for (; newlines > 0; --newlines) {
+			a.user_comments[j].message += "<br>";
+			a.user_comments[j].message += read_line();
+		}
+	}
+	a.verified = read_line() == "verified";
+
+	const std::string icon_checksum = read_line();
+	const long icon_file_size = std::stol(read_line());
+	if (icon_file_size <= 0) {
+		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
+	} else {
+		const std::string path = kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
+				std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
+		read_file(icon_file_size, path);
+		check_checksum(path, icon_checksum);
+		a.icon = g_image_cache->get(path);
+		g_fs->fs_unlink(path);
+	}
+
+	check_endofstream();
 	guard.ok();
-	return result_vector;
+	return a;
 }
 
 void NetAddons::download_addon(const std::string& name, const std::string& save_as, const CallbackFn& progress) {
@@ -379,7 +384,7 @@ int NetAddons::get_vote(const std::string& addon) {
 		write(client_socket_, send.c_str(), send.size());
 
 		const std::string line = read_line();
-		if (line == "ACCESSDENIED") {
+		if (line == "NOT_LOGGED_IN") {
 			return -1;
 		}
 		v = stoi(line);
@@ -529,7 +534,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 	guard.ok();
 }
 
-std::string NetAddons::upload_screenshot(const std::string& addon, const std::string& image, const std::string& description) {
+void NetAddons::upload_screenshot(const std::string& addon, const std::string& image, const std::string& description) {
 	init();
 	CrashGuard guard(*this);
 	std::string send = "CMD_SUBMIT_SCREENSHOT ";
@@ -570,10 +575,8 @@ std::string NetAddons::upload_screenshot(const std::string& addon, const std::st
 	send = "ENDOFSTREAM\n";
 	write(client_socket_, send.c_str(), send.size());
 
-	const std::string filename = read_line();
 	check_endofstream();
 	guard.ok();
-	return filename;
 }
 
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {

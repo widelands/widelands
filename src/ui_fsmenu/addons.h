@@ -136,6 +136,7 @@ public:
 	const std::vector<AddOns::AddOnInfo>& get_remotes() const {
 		return remotes_;
 	}
+	AddOns::AddOnInfo* find_remote(const std::string& name);
 	bool is_remote(const std::string& name) const;
 
 	const std::string& username() const {

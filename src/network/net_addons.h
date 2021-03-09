@@ -33,6 +33,7 @@ struct NetAddons {
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<AddOnInfo> refresh_remotes();
+	AddOnInfo fetch_one_remote(const std::string& name);
 
 	using CallbackFn = std::function<void(const std::string&, long)>;
 
@@ -55,7 +56,7 @@ struct NetAddons {
 
 	void comment(const AddOnInfo& addon, std::string message);
 	void upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
-	std::string upload_screenshot(const std::string& addon, const std::string& image, const std::string& description);
+	void upload_screenshot(const std::string& addon, const std::string& image, const std::string& description);
 
 	void set_login(const std::string& username, const std::string& password);
 
