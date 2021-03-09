@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
-msgstr "Bau eene eenfache Wirtschaft"
+msgstr "Bau eene eenfache Weertskupp"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
@@ -607,7 +607,7 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
-"Hunnert. Wi hebben eene Fissbuurderee baut, un uns' Bargwarks-Wirtschaft is "
+"Hunnert. Wi hebben eene Fissbuurderee baut, un uns' Bargwarks-Weertskupp is "
 "eerst maal klaar. Aver de Bargwarkskeerls seggen mi, dat nich mehr völe "
 "Mineraale im Barg sünd, un de Bargwarken sünd villicht bold heel leeg."
 
@@ -629,7 +629,7 @@ msgstr "Anhüren"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
-msgstr "Uns' Wirtschaft is kumpleet"
+msgstr "Uns' Weertskupp is kumpleet"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:245
@@ -638,7 +638,7 @@ msgid ""
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 "Du hest recht – wi sallen mehr Buskenplantereen, Früchtenpottjereen un "
-"Kneipen bauen, un daarto eene Weertskupp un betere Backereen un Broereen."
+"Kneipen bauen, un daarto eene Weertshuus un betere Backereen un Broereen."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:248

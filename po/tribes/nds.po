@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-02-21 20:33+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1235,6 +1235,7 @@ msgstr "Maniok-Wuddel-Köök"
 msgid "working"
 msgstr "to Warken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1688,6 +1689,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Steenwarkeree"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1722,6 +1724,8 @@ msgstr "eene Pickhack to maken"
 msgid "making a machete"
 msgstr "eene Mest to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1732,6 +1736,7 @@ msgstr "eene Mest to maken"
 msgid "making kitchen tools"
 msgstr "Besteck to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1749,9 +1754,9 @@ msgstr "eenen Klöpper to maken"
 msgid "making a chisel"
 msgstr "eenen Beitel to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1907,7 +1912,6 @@ msgstr "Fauna-Wahrderske-Telt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -3274,7 +3278,7 @@ msgstr "De Jäger, de bi deese Jaggthuus warkt, hett keene Deerten tum Jagen."
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
 msgctxt "empire_building"
 msgid "Inn"
-msgstr "Weertskupp"
+msgstr "Weertshuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:8
@@ -3829,7 +3833,7 @@ msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Bus
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
 msgctxt "frisians_building"
 msgid "Drinking Hall"
-msgstr "Weertskupp"
+msgstr "Weertshuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
@@ -4730,7 +4734,7 @@ msgstr "Kraamhuus"
 #: ../../data/tribes/economy_profiles/empire:4
 #: ../../data/tribes/economy_profiles/frisians:4
 msgid "Efficiency"
-msgstr "Trimmt Wirtschaft"
+msgstr "Trimmt Weertskupp"
 
 #: ../../data/tribes/economy_profiles/amazons:5
 #: ../../data/tribes/economy_profiles/atlanteans:5
@@ -5595,7 +5599,7 @@ msgstr "Nares Dörp"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Begünn dat Speel mit nix as eenem Kraamhuus un so minn Waren as würrelk nödig, um eene Wirtschaft uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
+msgstr "Begünn dat Speel mit nix as eenem Kraamhuus un so minn Waren as würrelk nödig, um eene Weertskupp uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5609,7 +5613,7 @@ msgstr "Pass up"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr "Du hest akkeraat jüüst genoog Waren för dat Warktüüg, wat du för eene Wirtschaft bruukst. Pass up, dat keen Warktüüg daarto maakt word."
+msgstr "Du hest akkeraat jüüst genoog Waren för dat Warktüüg, wat du för eene Weertskupp bruukst. Pass up, dat keen Warktüüg daarto maakt word."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5630,7 +5634,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr "Begünn dat Speel mit dienem Raadhuus un blot een paar Waren, um eene Wirtschaft uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
+msgstr "Begünn dat Speel mit dienem Raadhuus un blot een paar Waren, um eene Weertskupp uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5725,7 +5729,7 @@ msgstr[1] "%1%(+%2%) Soldaten"
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr "Du hest blot een Deel Iesen för elkeen Warktüüg, wat du för eene Wirtschaft bruukst. Pass up, dat keen Warktüüg daarto maakt word."
+msgstr "Du hest blot een Deel Iesen för elkeen Warktüüg, wat du för eene Weertskupp bruukst. Pass up, dat keen Warktüüg daarto maakt word."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
@@ -7870,7 +7874,7 @@ msgstr "Kööksch"
 #: ../../data/tribes/workers/amazons/dressmaker/init.lua:8
 msgctxt "amazons_worker"
 msgid "Dressmaker"
-msgstr "Naihsterke"
+msgstr "Naihsterske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
@@ -7906,7 +7910,7 @@ msgstr "Jägerske-Pottjerske"
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr "Beste Waldwahrderske"
+msgstr "Meister-Waldwahrderske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
@@ -7984,7 +7988,7 @@ msgstr "Boomslagerske"
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr "Beste Boomslagerske"
+msgstr "Meister-Boomslagerske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:89
@@ -8308,7 +8312,7 @@ msgstr "Künniger Bargwarkskeerl"
 #: ../../data/tribes/workers/barbarians/miner_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Miner"
-msgstr "Bester Bargwarkskeerl"
+msgstr "Meister-Bargwarkskeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/ox/init.lua:8
@@ -8488,7 +8492,7 @@ msgstr "Bargwarkskeerl"
 #: ../../data/tribes/workers/empire/miner_master/init.lua:8
 msgctxt "empire_worker"
 msgid "Master Miner"
-msgstr "Bester Bargwarkskeerl"
+msgstr "Meister-Bargwarkskeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:8
@@ -8710,7 +8714,7 @@ msgstr "Bargwarkskeerl"
 #: ../../data/tribes/workers/frisians/miner_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Miner"
-msgstr "Bester Bargwarkskeerl"
+msgstr "Meister-Bargwarkskeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:8
@@ -8740,13 +8744,13 @@ msgstr "Bespejer"
 #: ../../data/tribes/workers/frisians/seamstress/init.lua:8
 msgctxt "frisians_worker"
 msgid "Seamstress"
-msgstr "Naihsterke"
+msgstr "Naihsterske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/seamstress_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Seamstress"
-msgstr "Meister-Naihsterke"
+msgstr "Meister-Naihsterske"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/shipwright/init.lua:8

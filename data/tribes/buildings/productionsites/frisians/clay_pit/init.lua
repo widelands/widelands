@@ -50,7 +50,6 @@ descriptions:new_productionsite_type {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       basic_amount = 1,
-      supports_production_of = { "fish", "coal", }
    },
 
    working_positions = {

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-03-03 10:55+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:03+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -19,24 +19,24 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:10
 msgid "Your Economy and its Settings"
-msgstr "Diene Wirtschaft un hör Instellens"
+msgstr "Diene Weertskupp un hör Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:12
 msgid "Economy"
-msgstr "Wirtschaft"
+msgstr "Weertskupp"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:13
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Wilkomen torügg. In deese Inföhren vertell ick di, wat du doon kannst, um natokieken, wo good diene Wirtschaft löppt."
+msgstr "Wilkomen torügg. In deese Inföhren vertell ick di, wat du doon kannst, um natokieken, wo good diene Weertskupp löppt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:14
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Diene Wirtschaft uptobaun un daarför to sörgen, dat se good arbeidt un wasst, is dat Wichtigste, wat 't in Widelands gifft. Aver du kannst de Arbeiders nich stuuv instrueren – se hören up de Grundsatzen för de Wirtschaft, de du fastleggst."
+msgstr "Diene Weertskupp uptobaun un daarför to sörgen, dat se good arbeidt un wasst, is dat Wichtigste, wat 't in Widelands gifft. Aver du kannst de Arbeiders nich stuuv instrueren – se hören up de Grundsatzen för de Weertskupp, de du fastleggst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:15
 msgid ""
@@ -271,7 +271,7 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Hunnert. Du hest in de List sehn dat du keene Kneipen of Weertskuppen mehr hest. Dat heet, dat du keene Happen produzeerst. Laat uns nakieken, wat du noch im Bestand hest."
+msgstr "Hunnert. Du hest in de List sehn dat du keene Kneipen of Weertshusen mehr hest. Dat heet, dat du keene Happen produzeerst. Laat uns nakieken, wat du noch im Bestand hest."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
@@ -301,7 +301,7 @@ msgstr "Dat Bestand-Fenster hett veer Listenwesslers. De eerste wiest all Waren 
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "Wenn du de Happen ankiekst, süchst du, dat du blot fiev in 't Geheel hest, un se worden wull all jüüst to elkeen Huus brocht. Fiev Happen sünd för eene grote Wirtschaft nich vööl."
+msgstr "Wenn du de Happen ankiekst, süchst du, dat du blot fiev in 't Geheel hest, un se worden wull all jüüst to elkeen Huus brocht. Fiev Happen sünd för eene grote Weertskupp nich vööl."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
@@ -640,7 +640,7 @@ msgstr "De eersten twee Listenwessler wiesen, waar vööl vun elkeen Waar produz
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr "Wenn du genoog sehn hest, köör de darden Listenwessler (»Wirtschafts-Utglekenheid«) ut."
+msgstr "Wenn du genoog sehn hest, köör de darden Listenwessler (»Weertskupp-Utglekenheid«) ut."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
@@ -651,18 +651,18 @@ msgstr "In deesem Fenster kannst du Waren utkören, um to sehn, wo sük hör Pro
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr "Ick maak wieder, wenn du de darden Listenwessler (»Wirtschafts-Utglekenheid«) utköörst."
+msgstr "Ick maak wieder, wenn du de darden Listenwessler (»Weertskupp-Utglekenheid«) utköörst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr "Diene Wirtschafts-Utglekenheid ankieken"
+msgstr "Diene Weertskupp-Utglekenheid ankieken"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr "De darde Listenwessler wiest de Wirtschafts-Utglekenheid för elkeen Waar. Wenn de Weert groter as null is, heet dat, dat de Bestand wasst."
+msgstr "De darde Listenwessler wiest de Weertskupp-Utglekenheid för elkeen Waar. Wenn de Weert groter as null is, heet dat, dat de Bestand wasst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid "Now try this out. You can also compare it with the two previous tabs."
@@ -678,7 +678,7 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr "Deese Listenwessler wiest de Ofstand tüsken dat, wat produzeert word, un dat, wat verbruukt word. Dat heet »Wirtschafts-Utglekenheid«. Du kannst stracks sehn, welkes vun beiden för de utköörte Waar hoger is, also of de Bestand verhoogt of minnert word."
+msgstr "Deese Listenwessler wiest de Ofstand tüsken dat, wat produzeert word, un dat, wat verbruukt word. Dat heet »Weertskupp-Utglekenheid«. Du kannst stracks sehn, welkes vun beiden för de utköörte Waar hoger is, also of de Bestand verhoogt of minnert word."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
@@ -700,7 +700,7 @@ msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr "De leste Listenwessler wiest de Bestand all tosammen. Wenn de Wirtschafts-Utglekenheit groter as null is, word he groter, anners lütter. Vergliek de beiden Berichten!"
+msgstr "De leste Listenwessler wiest de Bestand all tosammen. Wenn de Weertskupp-Utglekenheid groter as null is, word he groter, anners lütter. Vergliek de beiden Berichten!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
@@ -746,11 +746,11 @@ msgstr "Anners maak 't bidde weer up un köör de veerden Listenwessler ut."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr "Maak dat Fenster för Wirtschafts-Instellens up"
+msgstr "Maak dat Fenster för Weertskupp-Instellens up"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."
-msgstr "Maak dat Fenster för Wirtschafts-Instellens up."
+msgstr "Maak dat Fenster för Weertskupp-Instellens up."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
 msgid "The window can be accessed by clicking on any flag you own."
@@ -760,7 +760,7 @@ msgstr "Du kannst deeses Fenster vun elkeen vun dienen Fahnen opmaken."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 msgid "Economy options"
-msgstr "Wirtschaft-Instellens"
+msgstr "Weertskupp-Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""
@@ -773,7 +773,7 @@ msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr "Nu segg ick di, wo du fastleggen kannst, wo völe Waren du hebben willst. Dat Fenster daarför kannst du vun elkeen Fahn opmaken un 't heet »Wirtschafts-Instellens«."
+msgstr "Nu segg ick di, wo du fastleggen kannst, wo völe Waren du hebben willst. Dat Fenster daarför kannst du vun elkeen Fahn opmaken un 't heet »Weertskupp-Instellens«."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
@@ -835,7 +835,7 @@ msgstr "Dien Flintslager produzeert keene Marmelpielers, wenn se nich bruukt wor
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr "Daarto klickst du elkeen Fahn an un bruukst de Knoop »Wirtschafts-Instellens«. In deesem Fenster kannst du fastleggen, wo völe Waren vun elkeen Aard du in Kraamhusen hebben willst."
+msgstr "Daarto klickst du elkeen Fahn an un bruukst de Knoop »Weertskupp-Instellens«. In deesem Fenster kannst du fastleggen, wo völe Waren vun elkeen Aard du in Kraamhusen hebben willst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
 msgid ""
@@ -937,7 +937,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr "Ich hoop, dat ick di lehren kunn, wo du de Wirtschaft in Widelands kuntrolleren kannst. 't gifft mennig Instellens un se könen toeerst elkeen rammdösig maken. Ok wenn du eerst een paar daarvun verstahn hest, dürst du nich upgeven. Versöök 't all in een paar Spelen, um 't to kennen to kriegen, un probeer de Kansen ut. Dann koom torügg to deese Inföhren un lehr de Rest!"
+msgstr "Ich hoop, dat ick di lehren kunn, wo du de Weertskupp in Widelands kuntrolleren kannst. 't gifft mennig Instellens un se könen toeerst elkeen rammdösig maken. Ok wenn du eerst een paar daarvun verstahn hest, dürst du nich upgeven. Versöök 't all in een paar Spelen, um 't to kennen to kriegen, un probeer de Kansen ut. Dann koom torügg to deese Inföhren un lehr de Rest!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
 msgid ""

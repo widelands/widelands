@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Marcin S <dzidek1003@o2.pl>, 2021
+# Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,21 +30,23 @@ msgstr "Idź na Północ"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
-msgstr ""
+msgstr "Płyń na Północ tak daleko jak to możliwe, tak szybko, jak potrafisz."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:40
 msgid "Destroy Angadthur’s Palace"
-msgstr ""
+msgstr "Zniszcz pałac Angadthur'a"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
-msgstr ""
+msgstr "Zniszcz kwaterę główną Atlantydów i zbuduj port"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:43
 msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
 msgstr ""
+"Zbuduj port na północnym wybrzeżu wyspy. Miejsce na port jest położone pod "
+"kwaterą główną Angadthur'a."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:50
 msgid "Pay or Fight"
@@ -88,7 +91,7 @@ msgstr "Wprowadzenie"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:69
 msgid "Welcome back!"
-msgstr ""
+msgstr "Witaj ponownie!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:71
@@ -249,19 +252,19 @@ msgstr "Jeden krok bliżej Północy"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid ""
 "My soldiers report they have found a port space! Now we need to build a port"
-" and a shipyard and start an expedition. Of course, we’ll have to build a "
-"complete seafaring economy first, with a shipyard and a weaving mill. But "
-"don’t waste too much time perfecting our economy – all that matters is that "
-"we get to the North soon."
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
 msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
-msgstr ""
+msgstr "Tajemnicza wyspa"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:142
 msgid "An apprehension"
-msgstr ""
+msgstr "Lęk"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
@@ -289,7 +292,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:260
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:275
 msgid "Strangers"
-msgstr ""
+msgstr "Nieznajomi"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:230
@@ -576,6 +579,13 @@ msgid ""
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
 
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 msgid ""
@@ -598,6 +608,12 @@ msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
+msgstr ""
+
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers

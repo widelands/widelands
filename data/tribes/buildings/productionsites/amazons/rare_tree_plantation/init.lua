@@ -33,8 +33,7 @@ descriptions:new_productionsite_type {
    animations = {unoccupied = {hotspot = {48, 50}}},
 
    aihints = {
-      supports_production_of = { "balsa", "rubber", },
-      requires_supporters = true,
+      basic_amount = 2,
       space_consumer = true,
    },
 
@@ -80,14 +79,6 @@ descriptions:new_productionsite_type {
             "return=skipped unless economy needs ironwood",
             "callworker=plant_ironwood",
             "sleep=duration:13s"
-         },
-      },
-      dummy = {
-         -- dirty hack to make the relation to cutter inverse due to the cutter being an upgraded building
-         -- TODO(hessenfarmer): make this dissapear in building help
-         descname = "dummy",
-         actions = {
-            "produce=ironwood",
          },
       },
    }

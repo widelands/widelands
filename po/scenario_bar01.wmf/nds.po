@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2020-08-26 12:03+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -240,7 +240,7 @@ msgstr "Grote un betere Husen – un alle Soldateree-Boen – bruuken betere Bau
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
-msgstr "Bau eene Kalkbranneree un eene Köhle-Wirtschaft"
+msgstr "Bau eene Kalkbranneree un eene Köhle-Weertskupp"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""

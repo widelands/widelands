@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:01+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr "Baumaterialien-Versörgung"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
-msgstr "Versörg diene Wirtschaft mit de wichtigsten Baumaterialien:"
+msgstr "Versörg diene Weertskupp mit de wichtigsten Baumaterialien:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
@@ -158,11 +158,11 @@ msgstr "Bau eene Goldspinneree"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:82
 msgid "Build industry and mines"
-msgstr "Bau eene Bargwarks-Wirtschaft"
+msgstr "Bau eene Bargwarks-Weertskupp"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:84
 msgid "Industry and Mines"
-msgstr "Bargwarken un anner Wirtschaft"
+msgstr "Bargwarken un anner Weertskupp"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid ""
@@ -228,7 +228,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "As all Völker könen de Atlantinger hör Soldaten utbilden: Gefahrelke Gangen lehren Angriff – daar sünd se baldadig in – un Dwaalwegen lehren Utwieken, Gesundheid un Verteidigung. De twee Övens-Boen bruken tum Lehren vun Soldaten de Waren, de vun de Metall-Wirtschaft produzeert worden."
+msgstr "As all Völker könen de Atlantinger hör Soldaten utbilden: Gefahrelke Gangen lehren Angriff – daar sünd se baldadig in – un Dwaalwegen lehren Utwieken, Gesundheid un Verteidigung. De twee Övens-Boen bruken tum Lehren vun Soldaten de Waren, de vun de Metall-Weertskupp produzeert worden."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
@@ -415,7 +415,7 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr "Wi hebben uns up de Insel inricht. De anner Stapp is, se to uns' Heimaad to maken. Ick gloov, wi mutten eerst maal eene Wirtschaft tum Sülvst-Versörgen upbauen un uns' Kuntrei utförsken. Ick hebb Meesters ropen laten un will hör Raad folgen."
+msgstr "Wi hebben uns up de Insel inricht. De anner Stapp is, se to uns' Heimaad to maken. Ick gloov, wi mutten eerst maal eene Weertskupp tum Sülvst-Versörgen upbauen un uns' Kuntrei utförsken. Ick hebb Meesters ropen laten un will hör Raad folgen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
@@ -493,7 +493,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "Uns' Bau-Wirtschaft is kumpleet un ick hebb een paar Dagen daarmit verbrocht, uptopassen, dat all Lüü good tosamen warken. Nu gifft dat anner wichtige Dingen. Ick hebb Kojonder, mienen persönelken Kock, to mi ropen laten, um mit siener Hülp een paar Dinge klaar to maken."
+msgstr "Uns' Bau-Weertskupp is kumpleet un ick hebb een paar Dagen daarmit verbrocht, uptopassen, dat all Lüü good tosamen warken. Nu gifft dat anner wichtige Dingen. Ick hebb Kojonder, mienen persönelken Kock, to mi ropen laten, um mit siener Hülp een paar Dinge klaar to maken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
@@ -523,7 +523,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Satuul sall Jo ok warmen, Kojonder. Jau, ick överlegg, of wi uns' Spiesen-Wirtschaft beter tosamenführen könen. Wi sünd bannig langsaam mit de Produzeren vun all Dingen, wiel uns' Lüü dat wohnt sünd, hör eegen Eten to maken. Wenn wi de Toständigheiten updelen könen, is dat better för uns all, gloov ick. Ick will weten, wat du daarvun hollst."
+msgstr "Satuul sall Jo ok warmen, Kojonder. Jau, ick överlegg, of wi uns' Spiesen-Weertskupp beter tosamenführen könen. Wi sünd bannig langsaam mit de Produzeren vun all Dingen, wiel uns' Lüü dat wohnt sünd, hör eegen Eten to maken. Wenn wi de Toständigheiten updelen könen, is dat better för uns all, gloov ick. Ick will weten, wat du daarvun hollst."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
@@ -578,7 +578,7 @@ msgstr "Jundlin' gaht de Berichten dör"
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr "Uns' Spiesen-Wirtschaft is kumpleet un all Lüü warken good tosamen. Wi begünnen, uns hier as tohuus to föhlen."
+msgstr "Uns' Spiesen-Weertskupp is kumpleet un all Lüü warken good tosamen. Wi begünnen, uns hier as tohuus to föhlen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
@@ -630,7 +630,7 @@ msgstr "Satuul sall Jo warmen, Jundlin'! De Spinnweelmöhlen, Goldspinneree un S
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
-msgstr "Dat sünd würrelk gode Narichten, Öpoll. Uns' Wirtschaft löppt bannig good. Gah nu torügg to diener Arbeid, Öpoll, un Satuul sall jo un all de anner Spinners warmen!"
+msgstr "Dat sünd würrelk gode Narichten, Öpoll. Uns' Weertskupp löppt bannig good. Gah nu torügg to diener Arbeid, Öpoll, un Satuul sall jo un all de anner Spinners warmen!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
@@ -656,7 +656,7 @@ msgstr "Jundlin' nickkoppt"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr "Ick hebb daar överleggt, Sidoolus. Un ick finn, dat is de rechte Tied. Wi wullen dat fix so maken. Du kriggst diene Wirtschaft bold!"
+msgstr "Ick hebb daar överleggt, Sidoolus. Un ick finn, dat is de rechte Tied. Wi wullen dat fix so maken. Du kriggst diene Weertskupp bold!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Jundlina Writes a Letter"
@@ -668,7 +668,7 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "Ick hebb höört, dat uns' Bargwark-Wirtschaft nu warkt. Nu dat wi Wapen smeden, will ick Sidoolus mellen laten, dat 't Tied is, eene Kasern to bauen un Soldaten antohüren."
+msgstr "Ick hebb höört, dat uns' Bargwark-Weertskupp nu warkt. Nu dat wi Wapen smeden, will ick Sidoolus mellen laten, dat 't Tied is, eene Kasern to bauen un Soldaten antohüren."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
@@ -734,7 +734,7 @@ msgstr "Ick bün vun Sidoolus inladen worden. De eerste Övens-Dag in de neje Dw
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
 msgid "Jundlina Considers the Economy"
-msgstr "Jundlin' sinnt över de Wirtschaft"
+msgstr "Jundlin' sinnt över de Weertskupp"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
@@ -820,7 +820,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "Un noch eens vun deesen Husen. Wi weten nu, dat de Lüü, well se baut hebben, maal de kumplete Insel kuntrolleert hebben. Aver ick bün nich mehr bang vör mögelken Feinden. Wi hebben al so vööl vun de Insel sehn un dat gifft keene Spoor vun deeser ollen Wirtschaft. Ick bün verlichtert, aber natürelk mutten wir immer noch uppassen, as wi deese moje Insel wieder utförsken. Aver sünner grote Gefahren föhl ick mi hier al as tohuus."
+msgstr "Un noch eens vun deesen Husen. Wi weten nu, dat de Lüü, well se baut hebben, maal de kumplete Insel kuntrolleert hebben. Aver ick bün nich mehr bang vör mögelken Feinden. Wi hebben al so vööl vun de Insel sehn un dat gifft keene Spoor vun deeser ollen Weertskupp. Ick bün verlichtert, aber natürelk mutten wir immer noch uppassen, as wi deese moje Insel wieder utförsken. Aver sünner grote Gefahren föhl ick mi hier al as tohuus."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:424
 msgid "The Water is Rising!"

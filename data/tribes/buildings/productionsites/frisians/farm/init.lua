@@ -61,7 +61,6 @@ descriptions:new_productionsite_type {
    aihints = {
       space_consumer = true,
       prohibited_till = 220,
-      supports_production_of = { "honey" }
    },
 
    working_positions = {

@@ -14,7 +14,7 @@
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2017,2020
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # Gontzal M. Pujana <juchuf@gmail.com>, 2017-2018,2020
 # Walter Benkel <tromaster@gmail.com>, 2020
 # X Bello <xbello@gmail.com>, 2020
@@ -22,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-03-02 12:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-08 12:38+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -276,8 +276,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dic"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -290,12 +290,12 @@ msgstr "Menú Principal"
 msgid "Tools"
 msgstr "Herramientas"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -485,10 +485,10 @@ msgstr "Información"
 msgid "Click on a field to show information about it"
 msgstr "Haz clic en una casilla para mostrar información sobre ella"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -823,7 +823,7 @@ msgstr "Mostrar"
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
 #: ../../src/ui_basic/messagebox.cc:102 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:201 ../../src/ui_fsmenu/addons.cc:1650
+#: ../../src/ui_fsmenu/addons.cc:201 ../../src/ui_fsmenu/addons.cc:1654
 #: ../../src/ui_fsmenu/addons_packager.cc:108
 #: ../../src/ui_fsmenu/helpwindow.cc:57
 #: ../../src/ui_fsmenu/keyboard_options.cc:132 ../../src/ui_fsmenu/menu.cc:145
@@ -1442,7 +1442,7 @@ msgstr "Hay un problema desconocido al leer la información del controlador de l
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "Widelands no va a funcionar porque no podemos detectar la versión de OpenGL."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1461,7 +1461,7 @@ msgstr "Widelands no va a funcionar porque el controlador de tu tarjeta gráfica
 #: ../../src/graphic/gl/initialize.cc:223
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "La versión de %1$u tiene que ser versión %2$u.%3$u o más nuevo."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1469,15 +1469,15 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "El %1$s tiene que ser versión %2$u.%3$u o más nuevo"
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:309
 msgid "Shading Language"
-msgstr ""
+msgstr "lenguaje de sombreado"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1555,7 +1555,7 @@ msgstr "apagado"
 #: ../../src/logic/addons.cc:46 ../../src/ui_basic/dropdown.cc:343
 #: ../../src/ui_basic/dropdown.cc:345 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1351
-#: ../../src/ui_fsmenu/addons.cc:2050 ../../src/ui_fsmenu/launch_mpg.cc:294
+#: ../../src/ui_fsmenu/addons.cc:2054 ../../src/ui_fsmenu/launch_mpg.cc:294
 #: ../../src/wlapplication.cc:1436
 msgid "Error"
 msgstr "Error"
@@ -1587,7 +1587,7 @@ msgstr "Condición de victoria"
 
 #: ../../src/logic/addons.cc:61
 msgid "Starting Condition"
-msgstr ""
+msgstr "Condición Inicial"
 
 #: ../../src/logic/addons.cc:74
 #, c-format
@@ -3357,8 +3357,8 @@ msgid ""
 "· %1$s (%2$s) by %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:462 ../../src/ui_fsmenu/addons.cc:1986
-#: ../../src/ui_fsmenu/addons.cc:2010
+#: ../../src/ui_fsmenu/addons.cc:462 ../../src/ui_fsmenu/addons.cc:1990
+#: ../../src/ui_fsmenu/addons.cc:2014
 msgid "NOT VERIFIED"
 msgstr "SIN VERIFICAR"
 
@@ -3423,7 +3423,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:852
 #, c-format
 msgid "· %s"
-msgstr ""
+msgstr "· %s"
 
 #: ../../src/ui_fsmenu/addons.cc:881
 #, c-format
@@ -3500,7 +3500,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:1254 ../../src/ui_fsmenu/addons.cc:1435
-#: ../../src/ui_fsmenu/addons.cc:1886
+#: ../../src/ui_fsmenu/addons.cc:1890
 msgid "Uninstall"
 msgstr "Desinstalar"
 
@@ -3564,157 +3564,157 @@ msgid "Enable"
 msgstr "Habilitar"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1458 ../../src/ui_fsmenu/addons.cc:1911
+#: ../../src/ui_fsmenu/addons.cc:1458 ../../src/ui_fsmenu/addons.cc:1915
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1471 ../../src/ui_fsmenu/addons.cc:1951
+#: ../../src/ui_fsmenu/addons.cc:1471 ../../src/ui_fsmenu/addons.cc:1955
 #: ../../src/wui/stock_menu.cc:59
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1475 ../../src/ui_fsmenu/addons.cc:1955
+#: ../../src/ui_fsmenu/addons.cc:1475 ../../src/ui_fsmenu/addons.cc:1959
 #, c-format
 msgid "(%s)"
-msgstr ""
+msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1478 ../../src/ui_fsmenu/addons.cc:1959
+#: ../../src/ui_fsmenu/addons.cc:1478 ../../src/ui_fsmenu/addons.cc:1963
 #, c-format
 msgid "by %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1502 ../../src/ui_fsmenu/addons.cc:2041
+#: ../../src/ui_fsmenu/addons.cc:1502 ../../src/ui_fsmenu/addons.cc:2045
 #, c-format
 msgid "Category: %s"
 msgstr ""
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1507 ../../src/ui_fsmenu/addons.cc:2045
+#: ../../src/ui_fsmenu/addons.cc:1507 ../../src/ui_fsmenu/addons.cc:2049
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1555
+#: ../../src/ui_fsmenu/addons.cc:1559
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1557
+#: ../../src/ui_fsmenu/addons.cc:1561
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1559
+#: ../../src/ui_fsmenu/addons.cc:1563
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1561
+#: ../../src/ui_fsmenu/addons.cc:1565
 #, c-format
 msgid "%u bytes"
 msgstr "%u bytes"
 
-#: ../../src/ui_fsmenu/addons.cc:1599
+#: ../../src/ui_fsmenu/addons.cc:1603
 msgid "Your vote"
 msgstr "Tu voto"
 
-#: ../../src/ui_fsmenu/addons.cc:1617 ../../src/ui_fsmenu/addons.cc:2066
+#: ../../src/ui_fsmenu/addons.cc:1621 ../../src/ui_fsmenu/addons.cc:2070
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons.cc:1622 ../../src/ui_fsmenu/addons.cc:2071
+#: ../../src/ui_fsmenu/addons.cc:1626 ../../src/ui_fsmenu/addons.cc:2075
 msgid "No votes yet"
 msgstr "Aún sin votos"
 
-#: ../../src/ui_fsmenu/addons.cc:1632
+#: ../../src/ui_fsmenu/addons.cc:1636
 msgid "Next screenshot"
 msgstr "Siguiente captura"
 
-#: ../../src/ui_fsmenu/addons.cc:1641
+#: ../../src/ui_fsmenu/addons.cc:1645
 msgid "Previous screenshot"
 msgstr "Captura anterior"
 
-#: ../../src/ui_fsmenu/addons.cc:1649
+#: ../../src/ui_fsmenu/addons.cc:1653
 msgid "Submit comment"
 msgstr "Enviar comentario"
 
-#: ../../src/ui_fsmenu/addons.cc:1655
+#: ../../src/ui_fsmenu/addons.cc:1659
 msgid "No comments yet."
 msgstr "Aún sin comentarios."
 
-#: ../../src/ui_fsmenu/addons.cc:1657
+#: ../../src/ui_fsmenu/addons.cc:1661
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons.cc:1667
+#: ../../src/ui_fsmenu/addons.cc:1671
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1681
+#: ../../src/ui_fsmenu/addons.cc:1685
 msgid "Not voted"
 msgstr "Sin votos"
 
-#: ../../src/ui_fsmenu/addons.cc:1741
+#: ../../src/ui_fsmenu/addons.cc:1745
 #, c-format
 msgid "Comments (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1746
+#: ../../src/ui_fsmenu/addons.cc:1750
 #, c-format
 msgid "Screenshots (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1758
+#: ../../src/ui_fsmenu/addons.cc:1762
 #, c-format
 msgid "Votes (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1799
+#: ../../src/ui_fsmenu/addons.cc:1803
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1829
+#: ../../src/ui_fsmenu/addons.cc:1833
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1868 ../../src/ui_fsmenu/addons.cc:1978
+#: ../../src/ui_fsmenu/addons.cc:1872 ../../src/ui_fsmenu/addons.cc:1982
 msgid "Install"
 msgstr "Instalar"
 
-#: ../../src/ui_fsmenu/addons.cc:1877 ../../src/ui_fsmenu/addons.cc:2001
+#: ../../src/ui_fsmenu/addons.cc:1881 ../../src/ui_fsmenu/addons.cc:2005
 msgid "Upgrade"
 msgstr "Actualizar"
 
-#: ../../src/ui_fsmenu/addons.cc:1895
+#: ../../src/ui_fsmenu/addons.cc:1899
 msgid "Comments and Votes"
 msgstr "Comentarios y votos"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1937
+#: ../../src/ui_fsmenu/addons.cc:1941
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
-msgstr ""
+msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1960
+#: ../../src/ui_fsmenu/addons.cc:1964
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1979
+#: ../../src/ui_fsmenu/addons.cc:1983
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3727,11 +3727,11 @@ msgid ""
 "%6$s\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1986 ../../src/ui_fsmenu/addons.cc:2010
+#: ../../src/ui_fsmenu/addons.cc:1990 ../../src/ui_fsmenu/addons.cc:2014
 msgid "Verified"
 msgstr "Verificado"
 
-#: ../../src/ui_fsmenu/addons.cc:2002
+#: ../../src/ui_fsmenu/addons.cc:2006
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3745,38 +3745,38 @@ msgid ""
 "%7$s\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:2052
+#: ../../src/ui_fsmenu/addons.cc:2056
 msgid "Verified by the Widelands Development Team"
 msgstr "Verificado por el equipo de desarrollo de Widelands"
 
-#: ../../src/ui_fsmenu/addons.cc:2053
+#: ../../src/ui_fsmenu/addons.cc:2057
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Este complemento aún no ha sido verificado por el equipo de desarrollo de Widelands. No podemos garantizar que no contenga contenido dañino u ofensivo."
 
-#: ../../src/ui_fsmenu/addons.cc:2060
+#: ../../src/ui_fsmenu/addons.cc:2064
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons.cc:2063
+#: ../../src/ui_fsmenu/addons.cc:2067
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons.cc:2072
+#: ../../src/ui_fsmenu/addons.cc:2076
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons.cc:2074
+#: ../../src/ui_fsmenu/addons.cc:2078
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -3794,7 +3794,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager.cc:83
 #: ../../src/ui_fsmenu/addons_packager_box.cc:74
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:84
 msgid "Delete this add-on"
@@ -3818,15 +3818,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:132
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:137
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:142
 msgid "Version:"
-msgstr ""
+msgstr "Versión:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:309
 msgid "New Add-On"
@@ -3838,7 +3838,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:312
 msgid "Category"
-msgstr ""
+msgstr "Categoría:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:331
 #: ../../src/ui_fsmenu/addons_packager.cc:346
@@ -3849,6 +3849,7 @@ msgid "Invalid Name"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:331
+#: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid. Please choose a different name."
 msgstr ""
 
@@ -3897,7 +3898,7 @@ msgstr[1] ""
 msgid ""
 "%1$s\n"
 "· %2$s"
-msgstr ""
+msgstr "%1$s\n· %2$s"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:430
 msgid "Quit Packager"
@@ -3973,7 +3974,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:65
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:66
 msgid "Create subdirectory"
@@ -4024,10 +4025,6 @@ msgstr ""
 msgid "Enter the name for the new directory."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager_box.cc:251
-msgid "This name is invalid, please choose a different name."
-msgstr ""
-
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "A directory with this name already exists."
 msgstr ""
@@ -4052,7 +4049,7 @@ msgstr "Dificultad"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:334
 msgid "Difficulty:"
-msgstr ""
+msgstr "Dificultad:"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:359
 msgid "The campaigns difficulty. One word."
@@ -4189,7 +4186,7 @@ msgstr "sin nombre %u"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:42
 msgid "Reset to default"
-msgstr ""
+msgstr "Reiniciar al valor predeterminado"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:55
 msgid "Press the new shortcut or close this window to cancel."
@@ -4201,16 +4198,16 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:123
 msgid "Reset all"
-msgstr ""
+msgstr "Reiniciar todo"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:124
 msgid "Reset all to defaults"
-msgstr ""
+msgstr "Reiniciar todo al valor predeterminado"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:136
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:155
 msgid "Keyboard Shortcut Conflict"
@@ -4233,7 +4230,7 @@ msgstr "General"
 #: ../../src/ui_fsmenu/keyboard_options.cc:186
 #: ../../src/wlapplication_options.cc:198
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -5291,11 +5288,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Alterna la Visibilidad del Minimapa"
 
 #: ../../src/wlapplication_options.cc:269
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Enciclopedia"
 
 #: ../../src/wlapplication_options.cc:273
 msgid "Cut Text"
@@ -5339,7 +5336,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:320
 msgid "Reset Zoom"
-msgstr ""
+msgstr "Reiniciar Zoom"
 
 #: ../../src/wlapplication_options.cc:325
 msgid "Jump to Next Location"
@@ -5379,11 +5376,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:389
 msgid "Toggle Census"
-msgstr ""
+msgstr "Alterna la Visibilidad del Censo"
 
 #: ../../src/wlapplication_options.cc:394
 msgid "Toggle Statistics Labels"
-msgstr ""
+msgstr "Alterna la Visibilidad de las Estadísticas"
 
 #: ../../src/wlapplication_options.cc:399
 msgid "Toggle Soldier Levels"
@@ -5428,31 +5425,31 @@ msgstr "Estadísticas Marítimas"
 
 #: ../../src/wlapplication_options.cc:452
 msgid "Decrease Game Speed by 1×"
-msgstr ""
+msgstr "Reducir la Velocidad del Juego en 1x"
 
 #: ../../src/wlapplication_options.cc:457
 msgid "Decrease Game Speed by 0.25×"
-msgstr ""
+msgstr "Reducir la Velocidad del Juego en 0.25x"
 
 #: ../../src/wlapplication_options.cc:462
 msgid "Decrease Game Speed by 10×"
-msgstr ""
+msgstr "Reducir la Velocidad del Juego en 10x"
 
 #: ../../src/wlapplication_options.cc:467
 msgid "Increase Game Speed by 1×"
-msgstr ""
+msgstr "Aumentar la Velocidad del Juego en 1x"
 
 #: ../../src/wlapplication_options.cc:472
 msgid "Increase Game Speed by 0.25×"
-msgstr ""
+msgstr "Aumentar la Velocidad del Juego en 0.25x"
 
 #: ../../src/wlapplication_options.cc:477
 msgid "Increase Game Speed by 10×"
-msgstr ""
+msgstr "Aumentar la Velocidad del Juego en 10x"
 
 #: ../../src/wlapplication_options.cc:482
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Reiniciar la Velocidad del Juego"
 
 #: ../../src/wlapplication_options.cc:486
 #: ../../src/wui/interactive_gamebase.cc:287
@@ -5561,7 +5558,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:737
 msgctxt "hotkey"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: ../../src/wlapplication_options.cc:741
 msgctxt "hotkey"
@@ -5576,12 +5573,12 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:747
 msgctxt "hotkey"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: ../../src/wlapplication_options.cc:752
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../src/wui/actionconfirm.cc:186
 msgid "Destroy building?"
@@ -5777,7 +5774,7 @@ msgstr "Puertos"
 
 #: ../../src/wui/building_statistics_menu.cc:701
 msgid "Low productivity:"
-msgstr ""
+msgstr "Baja productividad:"
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
@@ -5792,7 +5789,7 @@ msgstr "%1%/%2%"
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../src/wui/building_statistics_menu.cc:722
 msgid "Lacking soldiers:"
-msgstr ""
+msgstr "Soldados faltantes:"
 
 #: ../../src/wui/buildingwindow.cc:195
 msgid "Muted – click to unmute"
@@ -6071,7 +6068,7 @@ msgstr "Enviar geólogo a explorar la zona"
 
 #: ../../src/wui/fieldaction.cc:447 ../../src/wui/fieldaction.cc:450
 msgid "Send scout to explore surroundings"
-msgstr ""
+msgstr "Enviar explorador a explorar los alrededores"
 
 #: ../../src/wui/fieldaction.cc:452
 msgid ""
@@ -6510,13 +6507,13 @@ msgstr ""
 #: ../../src/wui/info_panel.cc:434
 #, c-format
 msgid "%1$s · %2$s"
-msgstr ""
+msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
 #: ../../src/wui/info_panel.cc:438
 #, c-format
 msgid "%1$s · %2$s · %3$s"
-msgstr ""
+msgstr "%1$s · %2$s · %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
@@ -6615,7 +6612,7 @@ msgstr "Reiniciar zoom"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:276
 msgid "Zoom –"
-msgstr ""
+msgstr "Zoom –"
 
 #: ../../src/wui/interactive_base.cc:709
 #, c-format
@@ -6625,7 +6622,7 @@ msgstr "Distancia de camino: %u"
 #: ../../src/wui/interactive_base.cc:710
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
-msgstr ""
+msgstr "Largo de vías acuáticas: %1$u/%2$u"
 
 #: ../../src/wui/interactive_gamebase.cc:53
 msgid "PAUSE"
@@ -6721,8 +6718,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadísticas"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Marítimo"
@@ -7489,7 +7486,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:73
 msgid "Red:"
-msgstr ""
+msgstr "Rojo:"
 
 #: ../../src/wui/stock_menu.cc:73
 msgid "Stock is lower than the target"
@@ -7501,11 +7498,11 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:76
 msgid "Yellow:"
-msgstr ""
+msgstr "Amarillo:"
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Green:"
-msgstr ""
+msgstr "Verde:"
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Stock is higher than the target"
@@ -7566,20 +7563,20 @@ msgstr "Expedición"
 
 #: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
-msgstr ""
+msgstr "↓"
 
 #: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
-msgstr ""
+msgstr "↑"
 
 #: ../../src/wui/waresdisplay.cc:554
 msgid "="
-msgstr ""
+msgstr "="
 
 #: ../../src/wui/waresdisplay.cc:555
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no

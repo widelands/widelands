@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-03-02 12:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:43+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,11 +45,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "En aquest tutorial, se us guiarà a través d'objectius."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Objectius i com aconseguir-los"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
@@ -132,7 +132,7 @@ msgstr "Necessitem un lloc per la cabana del llenyataire. Per fer-ho més fàcil
 msgid ""
 "I'll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Us ensenyaré on està el menú i com es mostren i amaguen els espais de construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -315,11 +315,11 @@ msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s'h
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Movent el punt de vista"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Moveu el punt de vista"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -379,7 +379,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Tanqueu el minimapa quan esteu llest per continuar seleccionant «Amaga minimapa» del menú de «Vista del mapa» o bé prement la tecla «%s». Un clic amb el botó dret també tancarà la finestra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
@@ -463,7 +463,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Assegureu-vos que s'estan mostrant els espais per construir. Llavors cliqueu en el lloc on construir l'edifici. Després, escolliu el tipus d'edifici a la finestra que apareix. Ja està!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -696,7 +696,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Per tal de mostrar o amagar les etiquetes d'estadístiques de construcció, podeu seleccionar l'entrada «Mostra estadístiques» del menú «Mostra amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -738,7 +738,7 @@ msgstr "Continueu fent clic al botó «Arxiva el missatge seleccionat» fins que
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "També podeu prémer les tecles Ctrl o bé Maj per seleccionar múltiples missatges. Per seleccionar-los tots, premeu %s."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #, lua-format
@@ -746,7 +746,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Podeu mostrar i amagar la finestra de missatges prement la tecla «%s» o fent clic al segon botó de la part inferior de la pantalla començant per la dreta. El missatge més nou se seleccionarà automàticament."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -914,7 +914,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Expandir-se és tan senzill com construir un edifici militar a la frontera del territori. Els bàrbars tenen una bona selecció de quatre edificis militars diferents: guardes sentinella, casernes, torres i fortaleses. Com major sigui la construcció, més recursos es necessiten per construir-lo, però més terreny conquerirà al seu voltant i més soldats podrà guarnir. Els diversos edificis també tenen diferents rangs de visió: els edificis amb torres poden veure més lluny que els que no en tenen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""
