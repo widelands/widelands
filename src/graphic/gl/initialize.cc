@@ -266,7 +266,7 @@ SDL_GLContext initialize(
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log_info("Graphics: %s is %d\n", #x, value);                                                  \
+		log_info("Graphics: %s is %d\n", #x, value);                                                 \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
@@ -295,7 +295,8 @@ SDL_GLContext initialize(
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log_info("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+	log_info(
+	   "Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log_info("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);

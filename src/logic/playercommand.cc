@@ -1714,9 +1714,9 @@ void CmdEnemyFlagAction::execute(Game& game) {
 
 	if (upcast(Flag, flag, game.objects().get_object(serial_))) {
 		verb_log_info_time(game.get_gametime(),
-			              "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-			              "number=%" PRIuS "\n",
-			              player->player_number(), flag->owner().player_number(), soldiers_.size());
+		                   "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+		                   "number=%" PRIuS "\n",
+		                   player->player_number(), flag->owner().player_number(), soldiers_.size());
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner())) {
@@ -1733,7 +1733,9 @@ void CmdEnemyFlagAction::execute(Game& game) {
 					}
 				}
 			}
-			log_warn_time(game.get_gametime(), "Cmd_EnemyFlagAction::execute: wrong player target not seen or not hostile.\n");
+			log_warn_time(
+			   game.get_gametime(),
+			   "Cmd_EnemyFlagAction::execute: wrong player target not seen or not hostile.\n");
 		}
 	}
 }

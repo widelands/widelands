@@ -512,7 +512,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 						observer.second.score += inputs[j + kFNeuronBitSize];
 						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
 							verb_log_dbg_time(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize,
-							             inputs[j + kFNeuronBitSize]);
+							                  inputs[j + kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
@@ -520,7 +520,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 						if (inputs[j + 2 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 2 * kFNeuronBitSize] > 10) {
 							verb_log_dbg_time(gametime, " pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
-							             inputs[j + 2 * kFNeuronBitSize]);
+							                  inputs[j + 2 * kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[18].get_position(j)) {
@@ -528,7 +528,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 						if (inputs[j + 3 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 3 * kFNeuronBitSize] > 10) {
 							verb_log_dbg_time(gametime, " pos: %d - value %d\n", j + 3 * kFNeuronBitSize,
-							             inputs[j + 3 * kFNeuronBitSize]);
+							                  inputs[j + 3 * kFNeuronBitSize]);
 						}
 					}
 				}
@@ -946,8 +946,8 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	// Inform if we are above ai type limit.
 	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {
 		verb_log_warn_time(gametime, "AI check_militarysites: Too many %s: %d, ai limit: %d\n",
-		              militarysites.front().bo->name, militarysites.front().bo->total_count(),
-		              militarysites.front().bo->cnt_limit_by_aimode);
+		                   militarysites.front().bo->name, militarysites.front().bo->total_count(),
+		                   militarysites.front().bo->cnt_limit_by_aimode);
 	}
 
 	Widelands::FCoords f = game().map().get_fcoords(ms->get_position());
@@ -1384,8 +1384,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
 			verb_log_warn_time(gametime,
-			              "Warning check_building_necessity score on position %2d too high %2d\n", i,
-			              inputs[i]);
+			                   "Warning check_building_necessity score on position %2d too high %2d\n",
+			                   i, inputs[i]);
 		}
 	}
 
@@ -1435,6 +1435,7 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 		}
 	}
 
-	verb_log_err_time(gametime, " %d: Computer player error - trainingsite not found\n", player_number());
+	verb_log_err_time(
+	   gametime, " %d: Computer player error - trainingsite not found\n", player_number());
 }
 }  // namespace AI

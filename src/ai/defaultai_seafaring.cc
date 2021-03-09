@@ -38,8 +38,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	// protocol out
 	verb_log_dbg_time(game().get_gametime(),
-	             "%d: (%3dx%3d) expedition spot scoring, colony_scan_area == %u\n", pn,
-	             candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
+	                  "%d: (%3dx%3d) expedition spot scoring, colony_scan_area == %u\n", pn,
+	                  candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
 
 	// abort if any player - including self - is too near to the spot (radius 10)
 	if (other_player_accessible(Widelands::Player::AiPersistentState::kColonyScanMinArea,
@@ -245,9 +245,9 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 			if (wh_obs.bo->is(BuildingAttribute::kPort)) {
 				verb_log_dbg_time(game().get_gametime(),
-				             "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
-				             player_number(), wh_obs.site->get_position().x,
-				             wh_obs.site->get_position().y);
+				                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
+				                  player_number(), wh_obs.site->get_position().x,
+				                  wh_obs.site->get_position().y);
 				game().send_player_start_or_cancel_expedition(*wh_obs.site);
 				return true;
 			}
@@ -413,8 +413,8 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime)
 		persistent_data->no_more_expeditions = true;
 		game().send_player_cancel_expedition_ship(*so.ship);
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
-		             so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		             so.ship->get_position().y);
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y);
 
 		// In case there is no port left to get back to, continue exploring
 		if (!so.ship->get_fleet() || !so.ship->get_fleet()->has_ports()) {
@@ -503,8 +503,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-		             so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		             so.ship->get_position().y, spot_score);
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random
 		if (std::rand() % 8 < spot_score) {  // NOLINT
@@ -521,8 +521,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// 2a) Ship is first time here
 	if (first_time_here) {
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
-		             so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		             so.ship->get_position().y);
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y);
 
 		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
@@ -530,12 +530,12 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		if (!so.ship->is_exploring_island()) {
 			so.island_circ_direction = randomExploreDirection();
 			verb_log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
-			             so.ship->get_shipname().c_str(),
-			             static_cast<uint32_t>(so.island_circ_direction));
+			                  so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		} else {
 			verb_log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
-			             so.ship->get_shipname().c_str(),
-			             static_cast<uint32_t>(so.island_circ_direction));
+			                  so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		}
 
 		// send the ship to circle island
@@ -546,9 +546,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		if (!attempt_escape(so)) {  // return true if the ship was sent to open sea
 			// otherwise we continue circumnavigating the island
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n", pn,
-			             so.ship->get_shipname().c_str(),
-			             static_cast<uint32_t>(so.island_circ_direction));
+			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n",
+			                  pn, so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		}
 	}
 
@@ -617,9 +617,10 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
-		verb_log_dbg_time(game().get_gametime(), "%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
-		             so.ship->get_shipname().c_str(),
-		             !new_teritory_directions.empty() ? "unexplored" : "free", direction);
+		verb_log_dbg_time(game().get_gametime(),
+		                  "%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
+		                  so.ship->get_shipname().c_str(),
+		                  !new_teritory_directions.empty() ? "unexplored" : "free", direction);
 		so.escape_mode = false;
 		return true;  // we were successful
 	}

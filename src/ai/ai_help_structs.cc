@@ -624,7 +624,7 @@ void ManagementData::review(const Time& gametime,
 
 	if (score < -10000 || score > 30000) {
 		verb_log_dbg_time(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
-		             gamestring_with_leading_zeros(gametime.get()), score);
+		                  gamestring_with_leading_zeros(gametime.get()), score);
 	}
 	assert(score > -10000 && score < 100000);
 }
@@ -776,7 +776,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	assert(probability > 0 && probability <= 201);
 
 	verb_log_dbg("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
-	        probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
+	             probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
 	if (probability < 201) {
 
@@ -802,9 +802,10 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
-					verb_log_dbg("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
-					        new_value,
-					        (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+					verb_log_dbg(
+					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+					   new_value,
+					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 				}
 			}
 		}
@@ -833,9 +834,10 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					verb_log_dbg("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
-					        old_value, item.get_weight(), item.get_type(),
-					        (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+					verb_log_dbg(
+					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
+					   old_value, item.get_weight(), item.get_type(),
+					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 
 					item.recalculate();
 				}
@@ -874,8 +876,8 @@ void ManagementData::mutate(const uint8_t pn) {
 				if (changed_bits) {
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
 					verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
-					        item.get_id(), item.get_int(), changed_bits,
-					        (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
+					             item.get_id(), item.get_int(), changed_bits,
+					             (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
 				}
 			}
 		}
@@ -1067,8 +1069,8 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 			this_player_team = mytn;
 		}
 		if (all_stats[opn].team_number != pltn) {
-			verb_log_dbg("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
-			        pltn);
+			verb_log_dbg("%2d: Team changed for player %d: %d -> %d\n", pn, opn,
+			             all_stats[opn].team_number, pltn);
 			all_stats[opn].team_number = pltn;
 		}
 	}
@@ -1138,7 +1140,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 	if (all_stats.count(other_player_number) == 0) {
 		// Should happen only rarely so we print a warning here
 		verb_log_warn("AI %d: player has no statistics yet for player %d\n", this_player_number,
-		         other_player_number);
+		              other_player_number);
 		return false;
 	}
 	// finally we compare my team number of the other player team number
