@@ -120,13 +120,15 @@ A UI theme. See :doc:`themes` for details.
 Restrictions
 ------------
 
-The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons are executed from top to bottom. If, for example, you enable one add-on A that adds a new worker type that requires experience and another add-on B that modifies all workers’ experience thresholds, the new worker’s experience is modified by B if and only if B is loaded later than A.
+The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons are executed from top to bottom. If, for example, you enable one add-on A that adds a new worker type that requires experience and *below* another add-on B that modifies all workers’ experience thresholds, the new worker’s experience is modified by B because B is loaded later than A. If B is listed *above* A, the new worker’s experience is *not* modified by B.
 
 In the editor, world (but not tribes) add-ons are run, allowing you to create maps with new worlds. The information which add-ons a map was created with is stored in the map file. When opening a map in the editor or starting a new game, the world add-ons required by the map are enabled and all other world add-ons disabled. Therefore map designers need to choose the add-ons they want to use prior to launching the editor; the choice can not be modified later. Their choice of world add-ons is also enforced whenever someone starts a game on that map. Script add-ons are ignored by the editor. Tribes add-ons are also ignored; therefore it is not possible to recommend an add-on-defined tribe as the default tribe for a player.
 
 After installing an add-on that contains new terrain textures or images for flags and roads, the game needs to be restarted. Otherwise the new images may not be rendered correctly.
 
 When loading a game, the game activates the tribes- and world add-ons the game was originally started with, and disable all others. Script add-ons are ignored on loading. Starting and win conditions as well as maps and campaign/scenario scripts are stored in the savegame independently from the add-on that defines them.
+
+When loading a map or savegame, Widelands displays a warning message if any required add-on is installed at the wrong version or missing altogether. In the latter case, it is not possible to load the map or savegame.
 
 In multiplayer games, all players need to enable the same add-ons at the same version in the same order for the game to work without desyncs. The host’s choice of add-ons is therefore enforced whenever a client joins a game.
 
