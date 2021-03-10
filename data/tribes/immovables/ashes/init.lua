@@ -9,6 +9,8 @@
 --
 -- Tribe Immovables are defined in
 -- ``data/tribes/immovables/<immovable_name>/init.lua``.
+-- The immovable will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_immovable_type(table)
 --
@@ -20,10 +22,6 @@
 --    **name**: A string containing the internal name of this immovable.
 --
 --    **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
---
---    **helptext_script**:  The full path to the ``helptexts.lua`` script for this immovable.
---    **NOTE: Deprecated. Immovable helptexts have been shifted to tribes initialization in the current
---    development version.**
 --
 --    **programs**: A table with the programs that this immovable will perform,
 --    e.g. ``{ "animate=idle duration:2m30s500ms",  "remove=" }`` (see :ref:`immovable_programs`)
@@ -94,15 +92,5 @@ pop_textdomain()
 -- Help Texts
 -- ----------
 --
--- Each tribe immovable has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
--- The function in this file returns texts that are used for the immovable by the Tribal Encyclopedia.
---
--- .. function:: immovable_helptext([tribe])
---
---    Returns a localized string with a helptext for this immovable type.
---
---    :arg tribe: the name of the tribe to fetch this helptext for.
---    :type tribe: :class:`string`
---
---    This function works exactly the same as :any:`ware_helptext`.
+-- See :ref:`lua_tribes_tribes_helptexts`.
 --
