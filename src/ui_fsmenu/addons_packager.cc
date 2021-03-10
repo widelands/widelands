@@ -31,6 +31,7 @@
 #include "ui_basic/progressbar.h"
 #include "ui_basic/text_prompt.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace FsMenu {
 
@@ -359,7 +360,7 @@ void AddOnsPackager::clicked_new_addon() {
 		   name,
 		   n.text(),
 		   "No description",
-		   "Nobody",
+		   get_config_string("realname", pgettext("author_name", "Unknown")),
 		   {},
 		   {},
 		   {},

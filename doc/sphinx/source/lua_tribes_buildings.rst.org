@@ -1,7 +1,7 @@
 Buildings
 =========
 
-Buildings are defined in their ``init.lua`` file. They also have a corresponding ``helptexts.lua`` file that contains their help texts.
+Buildings are defined in their ``init.lua`` file. They have corresponding help texts contained in ``data/tribes/initialization/<tribe_name>/units.lua``.
 
 Types of Buildings
 ------------------
@@ -29,9 +29,6 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
     *Mandatory*. The translatable display name. Use ``pgettext`` to fetch the string, e.g.::
 
         descname = pgettext("atlanteans_building", "Fortress"),
-
-**helptext_script**
-    *Mandatory*. The full path to the ``helptexts.lua`` script for this building.
 
 **icon**
     *Mandatory*. The full path to the menu icon for this building.

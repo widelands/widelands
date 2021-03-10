@@ -177,7 +177,7 @@ private:
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
 	UI::Dropdown<const AddOns::AddOnInfo*> upload_addon_, upload_screenshot_;
-	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
+	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, /* autofix_dependencies_, */ move_top_,
 	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_;
 
 	void category_filter_changed(AddOns::AddOnCategory);
@@ -185,7 +185,8 @@ private:
 	const AddOns::AddOnInfo& selected_installed_addon() const;
 	void focus_installed_addon_row(const AddOns::AddOnInfo&);
 
-	void autofix_dependencies();
+	// TODO(Nordfriese): Disabled autofix_dependencies for v1.0
+	// void autofix_dependencies();
 
 	AddOns::NetAddons network_handler_;
 
