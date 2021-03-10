@@ -33,6 +33,14 @@ RandomGame::RandomGame(MenuCapsule& m)
            UI::PanelStyle::kFsMenu,
            g_image_cache->get("images/logos/wl-ico-128.png")),
      progress_window_(nullptr) {
+	m.set_visible(false);
+	game_.reset(m.menu().create_safe_game());
+	if (!game_.get()) {
+		die();
+		return;
+	}
+	m.set_visible(true);
+
 	left_column_box_.add_inf_space();
 	left_column_box_.add(&menu_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	left_column_box_.add_inf_space();
@@ -45,20 +53,22 @@ RandomGame::RandomGame(MenuCapsule& m)
 	reactivated();
 	assert(progress_window_);
 	progress_window_->set_visible(true);
-	EditorInteractive::load_world_units(nullptr, game_);
+	EditorInteractive::load_world_units(nullptr, *game_);
 	progress_window_->set_visible(false);
 
 	layout();
 }
 
 RandomGame::~RandomGame() {
-	game_.cleanup_objects();
+	if (game_.get()) {
+		game_->cleanup_objects();
+	}
 }
 
 void RandomGame::reactivated() {
 	if (!progress_window_) {
 		progress_window_ =
-		   &game_.create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
+		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
 		progress_window_->set_visible(false);
 	}
 }
@@ -73,12 +83,12 @@ void RandomGame::layout() {
 void RandomGame::clicked_ok() {
 	assert(progress_window_);
 	progress_window_->set_visible(true);
-	game_.cleanup_objects();
+	game_->cleanup_objects();
 
-	if (menu_.do_generate_map(game_, nullptr, &settings_)) {
-		game_.remove_loader_ui();
+	if (menu_.do_generate_map(*game_, nullptr, &settings_)) {
+		game_->remove_loader_ui();
 		progress_window_ = nullptr;
-		new LaunchSPG(capsule_, settings_, game_, nullptr, false);
+		new LaunchSPG(capsule_, settings_, *game_, nullptr, false);
 	} else {
 		progress_window_->set_visible(false);
 		MainMenu& m = capsule_.menu();

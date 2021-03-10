@@ -42,7 +42,7 @@ public:
 
 private:
 	MainMenuNewRandomMapPanel menu_;
-	Widelands::Game game_;
+	std::unique_ptr<Widelands::Game> game_;
 	SinglePlayerGameSettingsProvider settings_;
 	UI::Icon icon_;
 	UI::ProgressWindow* progress_window_;  // not owned

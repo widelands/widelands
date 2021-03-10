@@ -12,6 +12,7 @@ wl_library(logic_map_objects_description_manager
     description_manager.cc
     description_manager.h
   DEPENDS
+    base_log
     base_macros
     io_filesystem
     logic_exceptions

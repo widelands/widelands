@@ -653,10 +653,10 @@ void WLApplication::run() {
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		if (filename_.empty()) {
-			EditorInteractive::run_editor(EditorInteractive::Init::kDefault);
+			EditorInteractive::run_editor(EditorInteractive::Init::kDefault, nullptr);
 		} else {
 			EditorInteractive::run_editor(
-			   EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+			   EditorInteractive::Init::kLoadMapDirectly, nullptr, filename_, script_to_run_);
 		}
 	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;

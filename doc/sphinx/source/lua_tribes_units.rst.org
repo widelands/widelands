@@ -64,6 +64,8 @@ The matching ``register.lua`` would look like this:
    Also, ``berry_bush_blueberry_small`` in this example has no attributes, so its
    attribute table is empty.
 
+Every unit defined by an add-on needs to define exactly one of the special attributes ``__skip_if_exists`` or ``__replace_if_exists``. This attribute determines how the engine proceeds if a description of the same name has already been registered. Units not contained in an add-on may not use these attributes.
+
 Available unit types:
 
 .. toctree::

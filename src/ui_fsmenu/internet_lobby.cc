@@ -32,6 +32,7 @@
 #include "network/internet_gaming_protocol.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication_options.h"
 
 namespace {
@@ -450,9 +451,17 @@ void InternetLobby::clicked_joingame() {
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
+	try {
 		running_game_.reset(new GameClient(capsule_, running_game_, ips,
 		                                   InternetGaming::ref().get_local_clientname(), true,
 		                                   opengames_list_.get_selected().name));
+	} catch (const std::exception& e) {
+		running_game_.reset();
+		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
+		                      e.what(), UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
+	}
 	} else {
 		throw wexception("No server selected! That should not happen!");
 	}
@@ -501,7 +510,15 @@ void InternetLobby::clicked_hostgame() {
 	}
 
 	// Start our relay host
+	try {
 	running_game_.reset(new GameHost(
 	   capsule_, running_game_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true));
+	} catch (const std::exception& e) {
+		running_game_.reset();
+		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
+		                      e.what(), UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
+	}
 }
 }  // namespace FsMenu

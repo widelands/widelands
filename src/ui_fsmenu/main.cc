@@ -216,6 +216,19 @@ MainMenu::MainMenu(const bool skip_init)
 	layout();
 }
 
+Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
+	try {
+		return new Widelands::Game;
+	} catch (const std::exception& e) {
+		log_err("Error allocating game: %s", e.what());
+		if (show_error) {
+			UI::WLMessageBox m(this, UI::WindowStyle::kFsMenu, _("Error"), (boost::format(_("Unable to create a Game instance!\nError message:\n%s")) % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+	}
+	return nullptr;
+}
+
 void MainMenu::update_template() {
 	UI::Panel::update_template();
 
@@ -311,51 +324,53 @@ void MainMenu::set_labels() {
 	// every language switch because it contains localized strings.
 	{
 		filename_for_continue_playing_ = "";
-		Widelands::Game game;
-		SinglePlayerLoader loader(game);
-		std::vector<SavegameData> games = loader.load_files(kSaveDir);
-		SavegameData* newest_singleplayer = nullptr;
-		for (SavegameData& data : games) {
-			if (!data.is_directory() && data.is_singleplayer() &&
-			    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
-				newest_singleplayer = &data;
+		std::unique_ptr<Widelands::Game> game(create_safe_game(false));
+		if (game.get()) {
+			SinglePlayerLoader loader(*game);
+			std::vector<SavegameData> games = loader.load_files(kSaveDir);
+			SavegameData* newest_singleplayer = nullptr;
+			for (SavegameData& data : games) {
+				if (!data.is_directory() && data.is_singleplayer() &&
+					(newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
+					newest_singleplayer = &data;
+				}
 			}
-		}
-		if (newest_singleplayer) {
-			filename_for_continue_playing_ = newest_singleplayer->filename;
-			singleplayer_.add(
-			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
-			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-			    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			       .as_font_tag(
-			          /* strip leading "save/" and trailing ".wgf" */
-			          filename_for_continue_playing_.substr(
-			             kSaveDir.length() + 1, filename_for_continue_playing_.length() -
-			                                       kSaveDir.length() - kSavegameExtension.length() -
-			                                       1)) %
-			    (boost::format(_("Map: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			        .as_font_tag(newest_singleplayer->mapname))
-			       .str() %
-			    (boost::format(_("Win Condition: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			        .as_font_tag(newest_singleplayer->wincondition))
-			       .str() %
-			    (boost::format(_("Players: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			        .as_font_tag(newest_singleplayer->nrplayers))
-			       .str() %
-			    (boost::format(_("Gametime: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			        .as_font_tag(newest_singleplayer->gametime))
-			       .str() %
-			    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-			    (boost::format(_("Saved: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			        .as_font_tag(newest_singleplayer->savedatestring))
-			       .str())
-			      .str(),
-			   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
+			if (newest_singleplayer) {
+				filename_for_continue_playing_ = newest_singleplayer->filename;
+				singleplayer_.add(
+				   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
+				   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
+					g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+					   .as_font_tag(
+					      /* strip leading "save/" and trailing ".wgf" */
+					      filename_for_continue_playing_.substr(
+					         kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+					                                   kSaveDir.length() - kSavegameExtension.length() -
+					                                   1)) %
+					(boost::format(_("Map: %s")) %
+					 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+					    .as_font_tag(newest_singleplayer->mapname))
+					   .str() %
+					(boost::format(_("Win Condition: %s")) %
+					 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+					    .as_font_tag(newest_singleplayer->wincondition))
+					   .str() %
+					(boost::format(_("Players: %s")) %
+					 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+					    .as_font_tag(newest_singleplayer->nrplayers))
+					   .str() %
+					(boost::format(_("Gametime: %s")) %
+					 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+					    .as_font_tag(newest_singleplayer->gametime))
+					   .str() %
+					/** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
+					(boost::format(_("Saved: %s")) %
+					 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+					    .as_font_tag(newest_singleplayer->savedatestring))
+					   .str())
+					  .str(),
+				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
+			}
 		}
 	}
 
@@ -828,20 +843,23 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 
 	case MenuTarget::kReplay:
-		menu_capsule_.clear_content();
-		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(),
-		             true, true);
+		if (Widelands::Game* g = create_safe_game()) {
+			menu_capsule_.clear_content();
+			new LoadGame(menu_capsule_, *g, *new SinglePlayerGameSettingsProvider(), true, true);
+		}
 		break;
 	case MenuTarget::kLoadGame:
-		menu_capsule_.clear_content();
-		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(),
-		             true, false);
+		if (Widelands::Game* g = create_safe_game()) {
+			menu_capsule_.clear_content();
+			new LoadGame(menu_capsule_, *g, *new SinglePlayerGameSettingsProvider(), true, false);
+		}
 		break;
 
 	case MenuTarget::kNewGame:
-		menu_capsule_.clear_content();
-		new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr,
-		              *new Widelands::Game());
+		if (Widelands::Game* g = create_safe_game()) {
+			menu_capsule_.clear_content();
+			new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr, *g);
+		}
 		break;
 
 	case MenuTarget::kRandomGame:
@@ -907,21 +925,21 @@ void MainMenu::action(const MenuTarget t) {
 	} break;
 
 	case MenuTarget::kEditorNew:
-		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+		EditorInteractive::run_editor(EditorInteractive::Init::kNew, this);
 		set_labels();
 		break;
 	case MenuTarget::kEditorRandom:
-		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+		EditorInteractive::run_editor(EditorInteractive::Init::kRandom, this);
 		set_labels();
 		break;
 	case MenuTarget::kEditorLoad:
-		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+		EditorInteractive::run_editor(EditorInteractive::Init::kLoad, this);
 		set_labels();
 		break;
 	case MenuTarget::kEditorContinue: {
 		if (!filename_for_continue_editing_.empty()) {
 			EditorInteractive::run_editor(
-			   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			   EditorInteractive::Init::kLoadMapDirectly, this, filename_for_continue_editing_);
 			set_labels();
 		}
 		break;

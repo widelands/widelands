@@ -100,6 +100,7 @@ public:
 		kLoad              // show Load Map window
 	};
 	static void run_editor(EditorInteractive::Init,
+	                       UI::Panel* parent_for_error_message,
 	                       const std::string& filename = "",
 	                       const std::string& script_to_run = "");
 

@@ -58,6 +58,8 @@ The matching ``register.lua`` would look like this:
 Note that ``alder_summer_pole`` and ``alder_summer_mature`` in this example have no attributes, so their
 attribute tables are empty.
 
+Every unit defined by an add-on needs to define exactly one of the special attributes ``__skip_if_exists`` or ``__replace_if_exists``. This attribute determines how the engine proceeds if a description of the same name has already been registered. Units not contained in an add-on may not use these attributes.
+
 .. toctree::
    :maxdepth: 3
 

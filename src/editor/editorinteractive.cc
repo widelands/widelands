@@ -899,8 +899,10 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 }
 
 void EditorInteractive::run_editor(const EditorInteractive::Init init,
+	                               UI::Panel* parent_for_error_message,
                                    const std::string& filename,
                                    const std::string& script_to_run) {
+	try {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
@@ -970,6 +972,13 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
 	egbase.cleanup_objects();
+	} catch (const std::exception& e) {
+		log_err("Error running editor: %s", e.what());
+		if (parent_for_error_message) {
+			UI::WLMessageBox m(parent_for_error_message, UI::WindowStyle::kFsMenu, _("Error"), (boost::format(_("Error while running the editor!\nError message:\n%s")) % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+	}
 }
 
 void EditorInteractive::load_world_units(EditorInteractive* eia,

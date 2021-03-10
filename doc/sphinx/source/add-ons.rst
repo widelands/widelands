@@ -57,6 +57,8 @@ A set of scripts that modify tribe units, namely wares, workers, buildings, immo
 
 New units are defined by creating one or more ``register.lua`` files with matching ``init.lua`` files, just like for official units. Modifications to existing units may be performed in the optional ``preload.lua`` and ``postload.lua`` files. It is recommended to use the function ``Descriptions.modify_unit`` in the ``postload.lua`` for this purpose. You will also need to use this function to add new units to existing tribes if desired.
 
+Every description type declared in a ``register.lua`` file by an add-on must define either the ``__skip_if_exists`` or the ``__replace_if_exists`` attribute, which defines how to proceed if a description of the same name was previously declared by another add-on.
+
 If the add-on introduces one or more new tribes, it will additionally need to contain a directory called ``tribes`` with one subdirectory for each new tribe. Each subdirectory must contain ``init.lua`` and ``units.lua`` files; for details see the corresponding files in ``data/tribes/initialization/*/*.lua``. A tribe can optionally have a gametips file called ``tips.lua`` which must be located in the same directory as the ``init.lua`` file; for details see the corresponding files in ``data/txts/tips/*.lua``
 
 
