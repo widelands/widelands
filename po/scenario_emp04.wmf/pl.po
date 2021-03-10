@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
@@ -181,7 +181,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Recruit new soldiers"
-msgstr ""
+msgstr "Werbowanie nowych żołnierzy"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "New Soldier Recruiting"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:175
 msgid "Training is Important"
-msgstr ""
+msgstr "Szkolenie jest ważne"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:176
 msgid "Train your soldiers hard and train them fast."
@@ -301,7 +301,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 msgid "The Battle is Won"
-msgstr ""
+msgstr "Bitwa wygrana"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:227
@@ -328,7 +328,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:238
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "Lucjusz jest zawiedziony"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:240
@@ -340,7 +340,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:245
 msgid "Explanation Needed"
-msgstr ""
+msgstr "Wymagane wyjaśnienia"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Lutius greets the official"
@@ -376,7 +376,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:267
 msgid "Welcome Back"
-msgstr ""
+msgstr "Witaj ponownie"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:268
 msgid "A high Fremil official is welcoming you…"
@@ -398,7 +398,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
 msgid "A Long Story"
-msgstr ""
+msgstr "Długa historia"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:278
 msgid "The official sighs deeply…"
@@ -575,7 +575,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:358
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "Amalea bierze głęboki wdech..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:360
@@ -640,7 +640,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea jest pocieszona."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:395
 msgid "Amalea is nodding her head…"
@@ -754,11 +754,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea wygląda na szczęśliwą"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:453
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea wchodzi…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:455
@@ -859,7 +859,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:502
 msgid "Amalea has Some Advice"
-msgstr ""
+msgstr "Amalea ma radę"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:503
 msgid "Amalea is providing economic advice…"
@@ -882,7 +882,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
 msgid "Amalea is in a Good Mood"
-msgstr ""
+msgstr "Amalea ma dobry humor"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:516
 msgid "Amalea is celebrating success…"
@@ -917,7 +917,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:532
 msgid "Amalea is celebrating a happy event…"
-msgstr ""
+msgstr "Amalea świętuje bardzo szczęśliwe wydarzenie..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
@@ -1109,7 +1109,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:640
 msgid "Pride"
-msgstr ""
+msgstr "Duma"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:643
@@ -1245,7 +1245,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:715
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Zwycięstwo należy do nas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:716
 msgid "Saledus is cheering loudly…"
@@ -1267,7 +1267,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:725
 msgid "The Enemy is Near"
-msgstr ""
+msgstr "Wróg jest blisko"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:726
 msgid "Saledus is alerted…"

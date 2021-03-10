@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-03-03 10:55+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
-msgstr "Bau eene Holt-Wirtschaft"
+msgstr "Bau eene Holt-Weertskupp"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr "Holt-Wirtschaft"
+msgstr "Holt-Weertskupp"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
@@ -67,18 +67,18 @@ msgstr "Vergroter dien Gewest na Oosten un boo Marmel ut de Barg of."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr "Bau een Steenbickerhuus un eene Bargwarks-Wirtschaft"
+msgstr "Bau een Steenbickerhuus un eene Bargwarks-Weertskupp"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr "Steenbickerhuus un Bargwarks-Wirtschaft"
+msgstr "Steenbickerhuus un Bargwarks-Weertskupp"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Bau een Steenbickerhuus un dann eene kumplete Wirtschaft för Bargwarken (Köhle-Bargwark un/of Holtköhl-Branneree, Iesen-Bargwark, Warktüügsmee, Wapensmee, Panzersmee un Smeltwark)."
+msgstr "Bau een Steenbickerhuus un dann eene kumplete Weertskupp för Bargwarken (Köhle-Bargwark un/of Holtköhl-Branneree, Iesen-Bargwark, Warktüügsmee, Wapensmee, Panzersmee un Smeltwark)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
@@ -252,7 +252,7 @@ msgstr "Holt för dat Dörp"
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr "Hunnert! Uns' Holt-Wirtschaft is nu kumpleet. Nu weten wi, dat wi för neje Bauvörhebbens genoog Holt hebben."
+msgstr "Hunnert! Uns' Holt-Weertskupp is nu kumpleet. Nu weten wi, dat wi för neje Bauvörhebbens genoog Holt hebben."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
@@ -452,7 +452,7 @@ msgid ""
 "That’s good. The first big military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr "Hunnert. De eerste grote Soldateree-Boo is beschickt, un de Bargwarks-Wirtschaft word immer beter. Nu könen wi uns för de Slacht torechtmaken."
+msgstr "Hunnert. De eerste grote Soldateree-Boo is beschickt, un de Bargwarks-Weertskupp word immer beter. Nu könen wi uns för de Slacht torechtmaken."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
@@ -477,7 +477,7 @@ msgstr "'t gifft noch een paar Wille Lüü, de sük up uns' Insel versteken, ave
 msgid ""
 "We have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island. Now we can think about our next steps."
-msgstr "Wi hebben eene gode Wirtschaft baut, neje Soldaten utstaffeert un de Willen Lüü vun de Insel verdreven. Nu könen wi över uns' anner Stappen nadenken."
+msgstr "Wi hebben eene gode Weertskupp baut, neje Soldaten utstaffeert un de Willen Lüü vun de Insel verdreven. Nu könen wi över uns' anner Stappen nadenken."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
