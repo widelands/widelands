@@ -89,22 +89,30 @@ void DescriptionManager::register_description(const std::string& description_nam
                                               const std::string& script_path,
                                               const std::vector<std::string>& attributes,
                                               const RegistryCaller caller) {
-	const bool skip = std::find(attributes.begin(), attributes.end(), "__skip_if_exists") != attributes.end();
-	const bool replace = std::find(attributes.begin(), attributes.end(), "__replace_if_exists") != attributes.end();
+	const bool skip =
+	   std::find(attributes.begin(), attributes.end(), "__skip_if_exists") != attributes.end();
+	const bool replace =
+	   std::find(attributes.begin(), attributes.end(), "__replace_if_exists") != attributes.end();
 	if (skip && replace) {
-		throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and '__replace_if_exists' are mutually exclusive", description_name.c_str());
+		throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and "
+		                    "'__replace_if_exists' are mutually exclusive",
+		                    description_name.c_str());
 	}
 	switch (caller) {
 	case RegistryCaller::kDefault:
 	case RegistryCaller::kScenario:
 		if (skip || replace) {
-			throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and '__replace_if_exists' may be used only by add-ons", description_name.c_str());
+			throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and "
+			                    "'__replace_if_exists' may be used only by add-ons",
+			                    description_name.c_str());
 		}
 		break;
 	case RegistryCaller::kTribeAddon:
 	case RegistryCaller::kWorldAddon:
 		if (!skip && !replace) {
-			throw GameDataError("DescriptionManager::register_description %s: add-on entities must define either '__skip_if_exists' or '__replace_if_exists'", description_name.c_str());
+			throw GameDataError("DescriptionManager::register_description %s: add-on entities must "
+			                    "define either '__skip_if_exists' or '__replace_if_exists'",
+			                    description_name.c_str());
 		}
 		break;
 	}
