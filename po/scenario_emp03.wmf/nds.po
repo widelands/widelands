@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -82,14 +82,14 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
-"Minner de Nafraag för Marmelpielers in de Wirtschafts-Instellens to veer. "
+"Minner de Nafraag för Marmelpielers in de Weertskupp-Instellens to veer. "
 "Dann blievt uns mehr Marmel för Husen över."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
-"Du kannst de Wirtschafts-Instellens openmaken, indeem du elkeen Fahn "
+"Du kannst de Weertskupp-Instellens openmaken, indeem du elkeen Fahn "
 "anklickst."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:82
@@ -110,7 +110,7 @@ msgstr "Bau eeme Muu un eene Warft up de Insel"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
-msgstr "Schippen-Wirtschaft"
+msgstr "Schippen-Weertskupp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
@@ -235,11 +235,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:170
 msgid "Build a training infrastructure"
-msgstr "Bau eene Övens-Wirtschaft"
+msgstr "Bau eene Övens-Weertskupp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 msgid "Training Infrastructure"
-msgstr "Övens-Wirtschaft"
+msgstr "Övens-Weertskupp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:173
 msgid ""
@@ -438,7 +438,7 @@ msgid ""
 msgstr ""
 "Dat is wull een goder Stapp vöran, aver ick seh heel minn Rüümte för Husen. "
 "De hele Insel is vull mit Stenen. Wo könen wi jemaals een nejes Schipp bauen"
-" of blot eene eenfache Wirtschaft hebben, um uns' Levens liedsamer to maken?"
+" of blot eene eenfache Weertskupp hebben, um uns' Levens liedsamer to maken?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
@@ -502,7 +502,7 @@ msgid ""
 "then build up a basic construction material industry."
 msgstr ""
 "Villicht is 't eene gode Idee, to wachten, bit 't wat Rüümte freei maakt "
-"hett, un dann eene eenfache Wirtschaft för Baumaterialien uptobauen."
+"hett, un dann eene eenfache Weertskupp för Baumaterialien uptobauen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
@@ -527,7 +527,7 @@ msgid ""
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
 "Ick bün wiss worden, dat uns' Flintslager nu ennelk anfangen hett, to "
-"arbeiden. He word so völe Marmelpielers sniddjen, as wi in uns' Wirtschafts-"
+"arbeiden. He word so völe Marmelpielers sniddjen, as wi in uns' Weertskupp-"
 "Instellens hebben wullen."
 
 #. TRANSLATORS: Amalea
@@ -540,7 +540,7 @@ msgid ""
 msgstr ""
 "Aver dat is de anner Sied; wenn wi all uns' Marmel för Pielers verklüngeln, "
 "hebben wi bold keenen mehr. Wi sallen de Instellen för Marmelpielers in de "
-"Wirtschafts-Instellens up eenen minneren Weert setten. Ick gloov, veer "
+"Weertskupp-Instellens up eenen minneren Weert setten. Ick gloov, veer "
 "Pielers up Lager sünd upstünds genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
@@ -597,7 +597,7 @@ msgid ""
 "construction site."
 msgstr ""
 "Dat Probleem is, dat eene Muu een Huus is, wat blot an leep besünnern Steden"
-" baut worden kann. As wi uns' Wirtschaft bauen, sallen wi daarum wieder "
+" baut worden kann. As wi uns' Weertskupp bauen, sallen wi daarum wieder "
 "utförsken, um de hele Insel to besitten. Laat uns versöken, sülk eene "
 "dürabele Stee to finnen."
 
@@ -661,7 +661,7 @@ msgid ""
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
 "WI bruken also mehr Stoff, um ennelk Schippen bauen to könen. Aver 't gifft "
-"nich genoog Rüümte up de Insel, um eene kumpleete Wirtschaft, um Stoff to "
+"nich genoog Rüümte up de Insel, um eene kumpleete Weertskupp, um Stoff to "
 "produzeren, uptobauen. Daarum mutten wi de nödigen Waren Stapp för Stapp "
 "sammeln."
 
@@ -705,7 +705,7 @@ msgstr "Wi könen weer tur See fahren"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 msgid "Praise the gods. We finally have a ship industry."
-msgstr "De Gotten wees Pries. Wi hebben ennelk eene Schippen-Wirtschaft."
+msgstr "De Gotten wees Pries. Wi hebben ennelk eene Schippen-Weertskupp."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
@@ -731,7 +731,7 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
-"Vergeet nich, na de End-Tahlen för Wulle un Stoff in de Wirtschafts-"
+"Vergeet nich, na de End-Tahlen för Wulle un Stoff in de Weertskupp-"
 "Instellens to kieken. Wi mutten all uns' Weit in Wulle umwanneln, un dann "
 "all de Wulle in Stoff."
 
@@ -769,7 +769,7 @@ msgid ""
 " have spotted an island with some mountains in the south. Perhaps we can "
 "find some valuable resources like iron there."
 msgstr ""
-"Toeerst mutten wi mehr Mineraale finnen, um uns' Wirtschaft to versörgen, as"
+"Toeerst mutten wi mehr Mineraale finnen, um uns' Weertskupp to versörgen, as"
 " se wasst. Ick hebb im Süden eene Insel mit een paar Bargen to sehn kregen. "
 "Villicht könen wi daar dürabele Mineraale as Iesen finnen."
 
@@ -862,7 +862,7 @@ msgstr ""
 "nadenken, wat wi bit nu lehrt hebben. Wi könen all de Stenen ofslagen. Wi "
 "könen villicht uns' Stratennett verbetern, um wat Rüümte för Husen freei to "
 "maken, of ok een paar Soldateree-Boen plattrieten, um mehr Rüümte för uns' "
-"Wirtschaft to kriegen."
+"Weertskupp to kriegen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:458
 msgid "We Should Conquer All the Islands"
@@ -926,9 +926,9 @@ msgid ""
 "in the economy settings is reached."
 msgstr ""
 "Hunnert bit hier. Nu produzeren wi nich mehr Marmelpielers as wi bruken. Ick"
-" gloov, wi  bruken deese Wirtschafts-Instellens würrelk mennigmaal, um uns' "
-"Wirtschaft beter to maken. Vergeet nich, uns' Husen arbeiden blot bit de "
-"End-Tahl in uns' Wirtschafts-Instellens wunnen is."
+" gloov, wi  bruken deese Weertskupp-Instellens würrelk mennigmaal, um uns' "
+"Weertskupp beter to maken. Vergeet nich, uns' Husen arbeiden blot bit de "
+"End-Tahl in uns' Weertskupp-Instellens wunnen is."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:489
@@ -969,7 +969,7 @@ msgid ""
 "coastline."
 msgstr ""
 "Du sallst würrelk de meesten daarvun plattrieten, um daar Husen för uns' "
-"Wirtschaft to bauen. Ick gloov nich, dat 't up deeser Insel völe Gefahren "
+"Weertskupp to bauen. Ick gloov nich, dat 't up deeser Insel völe Gefahren "
 "gifft, aver wenn du vörsichtig wesen willst, kannst du een paar Wachters-"
 "Kamers of Wachters-Kamerkes an de Küst stahn laten."
 
@@ -1030,7 +1030,7 @@ msgid ""
 "manage to sail home soon."
 msgstr ""
 "Lutjus. Hunnert. Hunnert. Wi hebben all de Rüümte för Muden funnen, de 't "
-"hier eenerwegens gifft. Nu könen wi uns' Wirtschaft starken un bold na Huus "
+"hier eenerwegens gifft. Nu könen wi uns' Weertskupp starken un bold na Huus "
 "seilen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
@@ -1211,7 +1211,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Training Infrastructure is Needed"
-msgstr "Wi bruken eene Övens-Wirtschaft"
+msgstr "Wi bruken eene Övens-Weertskupp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
@@ -1234,7 +1234,7 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
-"Daarum mutten wi eene hele Övens-Wirtschaft bauen, ok wenn wi so minn Rüümte"
+"Daarum mutten wi eene hele Övens-Weertskupp bauen, ok wenn wi so minn Rüümte"
 " hebben. Wi bruken eene Kasern, een Övens-Lager un eenen Ring of Groten "
 "Ring."
 

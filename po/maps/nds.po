@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-02 17:46+0000\n"
-"PO-Revision-Date: 2021-02-28 14:16+0000\n"
+"POT-Creation-Date: 2021-03-04 18:48+0000\n"
+"PO-Revision-Date: 2021-03-07 14:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -236,7 +236,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr "As Lutjus un siene Lüü na Huus komen sünd, finnen se de Wirtschaft versluddert. De Stukers in de Wirtschaft to stüren, is överut wichtig, um de Pries vun de Latiensken Riek weertohalen."
+msgstr "As Lutjus un siene Lüü na Huus komen sünd, finnen se de Weertskupp versluddert. De Stukers in de Weertskupp to stüren, is överut wichtig, um de Pries vun de Latiensken Riek weertohalen."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -311,13 +311,13 @@ msgstr "In deeser Inföhren lehrst du, wo du Schippen, Muden, Fähren un Prielen
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
-msgstr "Wirtschaft"
+msgstr "Weertskupp"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "In deese Inföhren lehrst du, welke Kansen Widelands hett, wo du diene Wirtschaft anpassen kannst. Deese Inföhren is för Spelers mit wat Erfahrung rekumdeert."
+msgstr "In deese Inföhren lehrst du, welke Kansen Widelands hett, wo du diene Weertskupp anpassen kannst. Deese Inföhren is för Spelers mit wat Erfahrung rekumdeert."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -351,7 +351,7 @@ msgstr "pbuczny@gmail.com – vun Nordfriese bewarkt"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr "Langes Wirtschaft-Speel in ewigsmojer Kuntrei. Probeer elkeen Speler ut!"
+msgstr "Langes Weertskupp-Speel in ewigsmojer Kuntrei. Probeer elkeen Speler ut!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -750,7 +750,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you're still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr "Deese Kaart is as Enkelt-Speler-Rutfödderung dacht för so bannig gode Spelers, dat alleen tegen 6 künstelk Spelers to licht is. De blaue Speler hett keen Metall (as een bietje Iesen, um de Wirtschaft in Gang to kriegen) un mutt sük up de 5%-Kans verlaten, waar een leges Bargwark mit wat finnt. Un du spöölst 1 tegen 6 (du kannst aver ok een paar künstelk Spelers weglaten, um dat lichter to maken). Vööl Glück"
+msgstr "Deese Kaart is as Enkelt-Speler-Rutfödderung dacht för so bannig gode Spelers, dat alleen tegen 6 künstelk Spelers to licht is. De blaue Speler hett keen Metall (as een bietje Iesen, um de Weertskupp in Gang to kriegen) un mutt sük up de 5%-Kans verlaten, waar een leges Bargwark mit wat finnt. Un du spöölst 1 tegen 6 (du kannst aver ok een paar künstelk Spelers weglaten, um dat lichter to maken). Vööl Glück"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

@@ -183,7 +183,7 @@ bool MutableAddOn::write_to_disk() {
 
 	s.set_translated_string("name", descname_);
 	s.set_translated_string("description", description_);
-	s.set_translated_string("author", author_);
+	s.set_string("author", author_);
 	s.set_string("version", version_);
 	s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
 	s.set_string("requires", requirements);
@@ -245,15 +245,20 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 
 size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
                                                              const DirectoryTree& tree,
+                                                             std::set<std::string>* all_dirnames,
                                                              const bool dry_run) {
 	size_t result = 0;
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
+		if (all_dirnames) {
+			all_dirnames->insert(pair.first);
+		}
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
 		if (!dry_run) {
 			g_fs->ensure_directory_exists(subdir);
 		}
-		result += do_recursively_create_filesystem_structure(subdir, pair.second, dry_run);
+		result +=
+		   do_recursively_create_filesystem_structure(subdir, pair.second, all_dirnames, dry_run);
 	}
 
 	// Maps
@@ -294,8 +299,33 @@ bool MapsAddon::write_to_disk() {
 	}
 
 	// Create the directory structure and copy the maps
-	callback_init_(do_recursively_create_filesystem_structure(directory_, tree_, true));
-	do_recursively_create_filesystem_structure(directory_, tree_, false);
+	std::set<std::string> all_dirnames;
+	callback_init_(
+	   do_recursively_create_filesystem_structure(directory_, tree_, &all_dirnames, true));
+	do_recursively_create_filesystem_structure(directory_, tree_, nullptr, false);
+
+	// Create dirnames profile
+	Profile old_dirnames, new_dirnames;
+	if (!backup_path_.empty()) {
+		std::string path = backup_path_;
+		path += FileSystem::file_separator();
+		path += "dirnames";
+		old_dirnames.read(path.c_str());
+	}
+	Section* old_section = old_dirnames.get_section("global");
+	Section& new_section = new_dirnames.pull_section("global");
+	for (const std::string& dir : all_dirnames) {
+		if (old_section && old_section->has_val(dir.c_str())) {
+			new_section.set_translated_string(
+			   dir.c_str(), old_section->get_safe_untranslated_string(dir.c_str()));
+		} else {
+			new_section.set_translated_string(dir.c_str(), dir);
+		}
+	}
+	std::string path = directory_;
+	path += FileSystem::file_separator();
+	path += "dirnames";
+	new_dirnames.write(path.c_str());
 
 	cleanup_temp_dir();
 
@@ -366,8 +396,8 @@ bool CampaignAddon::write_to_disk() {
 	}
 
 	// Create the directory structure and copy the maps
-	callback_init_(do_recursively_create_filesystem_structure(directory_, tree_, true) + 1);
-	do_recursively_create_filesystem_structure(directory_, tree_, false);
+	callback_init_(do_recursively_create_filesystem_structure(directory_, tree_, nullptr, true) + 1);
+	do_recursively_create_filesystem_structure(directory_, tree_, nullptr, false);
 
 	// Modify campaigns.lua
 	std::string scenario_list;
