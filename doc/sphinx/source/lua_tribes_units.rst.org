@@ -8,14 +8,14 @@ partially_finished, productionsites, trainingsites and warehouses; headquarters
 are a special case of warehouse), immovables, workers, wares, and a ship.
 
 The definitions for the tribes' units are located in the subdirectories of
-``data/tribes``. Each subdirectory needs to have a ``register.lua``, an ``init.lua`` and a ``helptexts.lua``
+``data/tribes``. Each subdirectory needs to have a ``register.lua`` and an ``init.lua``
 file.
 
 * ``register.lua`` will inform the engine about the existence of units and their attributes if they have any.
   This is needed for registering the objects before they are loaded.
 * ``init.lua`` will load the units if they are used in the game
-* ``helptexts.lua`` will provide the information used by the in-game help
-  ('Tribal Encyclopedia') and by our website's online
+* Help texts contained in ``data/tribes/initialization/<tribe_name>/units.lua`` will provide the information
+  used by the in-game help ('Tribal Encyclopedia') and by our website's online
   `Encyclopedia <https://wlww.widelands.org/encyclopedia/>`_.
 
 Example for ``init.lua``:
