@@ -100,6 +100,9 @@ struct GameClientImpl {
 
 	AddOns::AddOnsGuard addons_guard_;
 
+	// Whether disconnect() has been called previously.
+	bool disconnect_called_;
+
 	void send_hello();
 	void send_player_command(Widelands::PlayerCommand*);
 
@@ -216,6 +219,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
 	d->file_ = nullptr;
+	d->disconnect_called_ = false;
 
 	// Get the default win condition script
 	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
@@ -264,6 +268,9 @@ void GameClient::do_run() {
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
 		d->run_game(igb);
 
+	} catch (const WLWarning& e) {
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, true, false);
+		d->game = nullptr;
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
 		WLApplication::emergency_save(&parent, game, e.what());
@@ -273,6 +280,7 @@ void GameClient::do_run() {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
 	}
+	d->modal = nullptr;
 
 	// Quit
 	capsule_.die();
@@ -1160,17 +1168,22 @@ void GameClient::handle_network() {
 	}
 	try {
 		assert(d->net != nullptr);
-		// Check if the connection is still open
-		if (!d->net->is_connected()) {
-			disconnect("CONNECTION_LOST", "", false);
-			return;
-		}
 		// Process all available packets
 		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
 		while (packet) {
 			handle_packet(*packet);
 			packet = d->net->try_receive();
 		}
+		// Check if the connection is still open
+		if (!d->net->is_connected()) {
+			disconnect("CONNECTION_LOST", "", false);
+			return;
+		}
+	} catch (const WLWarning& e) {
+		// disconnect() should have been called already, but just in case:
+		disconnect("SOMETHING_WRONG", e.what());
+		// the Warning is intended for the caller
+		throw;
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
 	} catch (const ProtocolException& e) {
@@ -1185,6 +1198,10 @@ void GameClient::disconnect(const std::string& reason,
                             bool const sendreason,
                             bool const showmsg) {
 	log_info("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
+	if (d->disconnect_called_) {
+		return;
+	}
+	d->disconnect_called_ = true;
 
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
@@ -1204,7 +1221,11 @@ void GameClient::disconnect(const std::string& reason,
 
 	if (showmsg) {
 		if (d->game) {
-			// WLApplication::emergency_save(d->modal, *d->game, msg);
+			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
+				throw WLWarning("", "%s",
+				                arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+				                              NetworkGamingMessages::get_message(reason, arg).c_str());
+			}
 			throw wexception("%s", arg.empty() ?
 			                          NetworkGamingMessages::get_message(reason).c_str() :
 			                          NetworkGamingMessages::get_message(reason, arg).c_str());

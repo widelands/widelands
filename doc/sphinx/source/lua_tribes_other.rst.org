@@ -6,7 +6,8 @@ the tribes. It contains the following subdirectories:
 
 * ``data/tribes/scripting/help``: These scripts load all information used by the
   in-game help ('Tribal Encyclopedia'). Unit-specific help is loaded with the
-  help of each unit's and tribe's ``helptexts.lua`` script.
+  help of each unit's and tribe's help texts defined in
+  ``data/tribes/initialization/<tribe_name>/units.lua``.
 
 .. toctree::
    :maxdepth: 3
