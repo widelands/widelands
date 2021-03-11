@@ -1798,11 +1798,11 @@ void LuaTribeDescription::__persist(lua_State* L) {
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	if (!Widelands::tribe_exists(name)) {
+	Widelands::Descriptions& d = *get_egbase(L).mutable_descriptions();
+	if (!Widelands::tribe_exists(name, d.all_tribes())) {
 		report_error(L, "Tribe '%s' does not exist", name.c_str());
 	}
-	set_description_pointer(get_egbase(L).descriptions().get_tribe_descr(
-	   get_egbase(L).mutable_descriptions()->load_tribe(name)));
+	set_description_pointer(d.get_tribe_descr(d.load_tribe(name)));
 }
 
 /*

@@ -220,6 +220,9 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		ScopedTimer timer("Registering the descriptions took %ums");
 		assert(lua_);
 		descriptions_.reset(new Descriptions(lua_.get(), enabled_addons_));
+		if (game_tips_.get()) {
+			game_tips_.reset(new GameTips(*loader_ui_, registered_game_tips_, all_tribes()));
+		}
 	}
 	return descriptions_.get();
 }
@@ -278,10 +281,14 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 	}
 }
 
+AllTribes& EditorGameBase::all_tribes() {
+	return mutable_descriptions()->all_tribes();
+}
+
 // Loads map object descriptions for all tribes
 void EditorGameBase::load_all_tribes() {
 	// Load all tribes
-	for (const auto& tribe_info : Widelands::get_all_tribeinfos()) {
+	for (const auto& tribe_info : all_tribes()) {
 		mutable_descriptions()->load_tribe(tribe_info.name);
 	}
 }
@@ -338,7 +345,7 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?
 		                    nullptr :
-		                    new GameTips(*loader_ui_, registered_game_tips_));
+		                    new GameTips(*loader_ui_, registered_game_tips_, all_tribes()));
 	}
 	return *loader_ui_;
 }
