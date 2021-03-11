@@ -89,11 +89,14 @@ void DescriptionManager::register_description(const std::string& description_nam
                                               const std::string& script_path,
                                               const std::vector<std::string>& attributes,
                                               const RegistryCaller caller) {
-	if (registered_descriptions_.count(description_name) == 1) {
+	auto it = registered_descriptions_.find(description_name);
+	if (it != registered_descriptions_.end()) {
 		if (caller == RegistryCaller::kWorldAddon || caller == RegistryCaller::kTribeAddon) {
 			// TODO(Nordfriese): Minimal-invasive fix for #4759, replace with #4760 after v1.0
-			log_warn("Overwriting existing registry for '%s'", description_name.c_str());
-			registered_descriptions_.erase(registered_descriptions_.find(description_name));
+			log_warn("Overwriting existing registry for '%s':", description_name.c_str());
+			log_warn("  Old path: %s", it->second.script_path.c_str());
+			log_warn("  New path: %s", script_path.c_str());
+			registered_descriptions_.erase(it);
 		} else {
 			throw GameDataError(
 			   "DescriptionManager::register_description: Attempt to register description\n"
