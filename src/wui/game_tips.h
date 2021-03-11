@@ -25,7 +25,9 @@
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
-	GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>&, Widelands::AllTribes&);
+	GameTips(UI::ProgressWindow& progressWindow,
+	         const std::vector<std::string>&,
+	         Widelands::AllTribes&);
 	~GameTips() override;
 
 	void update(RenderTarget&, const Recti& bounds) override;

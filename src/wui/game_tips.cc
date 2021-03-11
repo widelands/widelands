@@ -38,7 +38,9 @@
 
 constexpr int kTextPadding = 48;
 
-GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names, Widelands::AllTribes& t)
+GameTips::GameTips(UI::ProgressWindow& progressWindow,
+                   const std::vector<std::string>& names,
+                   Widelands::AllTribes& t)
    : last_updated_(0),
      update_after_(0),
      progressWindow_(progressWindow),

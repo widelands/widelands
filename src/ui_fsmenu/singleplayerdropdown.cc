@@ -297,7 +297,8 @@ void SinglePlayerStartTypeDropdown::fill() {
 	const PlayerSettings& player_setting = settings.players[id_];
 	i18n::Textdomain td("tribes");  // for translated initialisation
 	Widelands::AllTribes all_tribes = Widelands::get_all_tribeinfos(nullptr);
-	const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe, all_tribes);
+	const Widelands::TribeBasicInfo tribeinfo =
+	   Widelands::get_tribeinfo(player_setting.tribe, all_tribes);
 	std::set<std::string> tags;
 	if (!settings.mapfilename.empty()) {
 		Widelands::Map map;

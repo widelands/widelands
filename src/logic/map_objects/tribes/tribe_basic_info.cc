@@ -132,9 +132,8 @@ AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>* addons_to_con
 	}
 
 	for (const AddOns::AddOnInfo& a : addons) {
-		const std::string dirname = kAddOnDir + FileSystem::file_separator() +
-		                            a.internal_name + FileSystem::file_separator() +
-		                            "tribes";
+		const std::string dirname = kAddOnDir + FileSystem::file_separator() + a.internal_name +
+		                            FileSystem::file_separator() + "tribes";
 		if (g_fs->is_directory(dirname)) {
 			for (const std::string& tribe : g_fs->list_directory(dirname)) {
 				const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";

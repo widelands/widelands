@@ -484,8 +484,8 @@ void Descriptions::add_tribe(const LuaTable& table) {
 	if (Widelands::tribe_exists(name, all_tribes_)) {
 		if (scenario_tribes_ != nullptr && scenario_tribes_->has_key(name)) {
 			// If we're loading a scenario with custom tribe entites, load them here.
-			tribes_->add(new TribeDescr(
-			   Widelands::get_tribeinfo(name, all_tribes_), *this, table, scenario_tribes_->get_table(name).get()));
+			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name, all_tribes_), *this, table,
+			                            scenario_tribes_->get_table(name).get()));
 		} else {
 			// Normal tribes loading without scenario entities
 			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name, all_tribes_), *this, table));
