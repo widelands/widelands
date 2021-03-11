@@ -1826,7 +1826,7 @@ private:
 				downloaded_screenshots_cache_[cache_key] = screenie;
 			} catch (const std::exception& e) {
 				log_err("Error downloading screenshot %s for %s: %s", it->first.c_str(),
-				        info_.internal_name.c_str(), e.what());
+				        info_->internal_name.c_str(), e.what());
 				image = nullptr;
 			}
 		} else if (!cached->second.empty()) {
