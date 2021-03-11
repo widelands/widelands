@@ -25,6 +25,9 @@
 --                         starting condition, e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the starting condition
 --                         is incompatible with the win condition "HQ Hunter".
 --
+--    **uses_map_starting_position**: *Optional* Whether this starting condition considers the player's
+--                                    starting position as defined by the map. Defaults to ``true``.
+--
 --    **func**: A standardized function to determine whether to share this starting condition between players (Shared Kingdom).
 --              It needs to be declared like this: ``func = function(player, shared_in_start)``.
 --              Later in the code it is necessary to use the result (variable ``shared_in_start``) to share the starting field
@@ -56,6 +59,7 @@
 --       tooltip = _"Start the game with three ships on the ocean and only a handful of supplies",
 --       map_tags = {"seafaring"},
 --       incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+--       uses_map_starting_position = false,
 --
 --       func = function(player, shared_in_start)
 --
@@ -119,6 +123,7 @@ init = {
    tooltip = _"Start the game with three ships on the ocean and only a handful of supplies",
    map_tags = {"seafaring"},
    incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+   uses_map_starting_position = false,
 
    func = function(player, shared_in_start)
 

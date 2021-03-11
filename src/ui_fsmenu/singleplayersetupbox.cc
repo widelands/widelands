@@ -28,7 +28,10 @@
 #include "map_io/map_loader.h"
 #include "ui_basic/color_chooser.h"
 
+namespace FsMenu {
+
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
+                                                             LaunchGame& lg,
                                                              int32_t const,
                                                              int32_t const h,
                                                              PlayerSlot id,
@@ -45,7 +48,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
              UI::ButtonStyle::kFsMenuSecondary,
              playercolor_image(),
              (boost::format(_("Player %u")) % static_cast<unsigned>(id_ + 1)).str()),
-     player_type_(this,
+     player_type_(this, lg,
                   (boost::format("dropdown_type%d") % static_cast<unsigned>(id)).str(),
                   0,
                   0,
@@ -53,7 +56,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                   h,
                   settings,
                   id),
-     tribe_(this,
+     tribe_(this, lg,
             (boost::format("dropdown_tribe%d") % static_cast<unsigned>(id)).str(),
             0,
             0,
@@ -61,7 +64,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
             h,
             settings,
             id),
-     start_type(this,
+     start_type(this, lg,
                 (boost::format("dropdown_init%d") % static_cast<unsigned>(id)).str(),
                 0,
                 0,
@@ -69,7 +72,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                 h,
                 settings,
                 id),
-     teams_(this,
+     teams_(this, lg,
             (boost::format("dropdown_team%d") % static_cast<unsigned>(id)).str(),
             0,
             0,
@@ -146,9 +149,11 @@ void SinglePlayerActivePlayerGroup::update() {
 }
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
+                                           LaunchGame& lg,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     launch_game_(lg),
      settings_(settings),
      standard_height_(standard_element_height),
      scrollable_playerbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -182,7 +187,7 @@ void SinglePlayerSetupBox::update() {
 
 	for (PlayerSlot i = active_player_groups_.size(); i < number_of_players; ++i) {
 		active_player_groups_.push_back(new SinglePlayerActivePlayerGroup(
-		   &scrollable_playerbox_, 0, standard_height_, i, settings_));
+		   &scrollable_playerbox_, launch_game_, 0, standard_height_, i, settings_));
 		scrollable_playerbox_.add(active_player_groups_.at(i), Resizing::kFullSize);
 	}
 
@@ -205,3 +210,4 @@ void SinglePlayerSetupBox::reset() {
 	}
 	active_player_groups_.clear();
 }
+}  // namespace FsMenu
