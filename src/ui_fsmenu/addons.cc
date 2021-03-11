@@ -1827,9 +1827,15 @@ private:
 		if (cached == downloaded_screenshots_cache_.end()) {
 			const std::string screenie =
 			   parent_.net().download_screenshot(cache_key.first, cache_key.second);
-			downloaded_screenshots_cache_[cache_key] = screenie;
-			if (!screenie.empty()) {
-				image = g_image_cache->get(screenie);
+			try {
+				if (!screenie.empty()) {
+					image = g_image_cache->get(screenie);
+				}
+				downloaded_screenshots_cache_[cache_key] = screenie;
+			} catch (const std::exception& e) {
+				log_err("Error downloading screenshot %s for %s: %s", it->first.c_str(),
+				        info_.internal_name.c_str(), e.what());
+				image = nullptr;
 			}
 		} else if (!cached->second.empty()) {
 			image = g_image_cache->get(cached->second);
