@@ -22,6 +22,7 @@
 #include <cassert>
 #include <memory>
 
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
@@ -89,14 +90,20 @@ void DescriptionManager::register_description(const std::string& description_nam
                                               const std::vector<std::string>& attributes,
                                               const RegistryCaller caller) {
 	if (registered_descriptions_.count(description_name) == 1) {
-		throw GameDataError(
-		   "DescriptionManager::register_description: Attempt to register description\n"
-		   "   name: '%s'\n"
-		   "   script: '%s'\n"
-		   "but the object has already been registered to\n"
-		   "   script: '%s'\n",
-		   description_name.c_str(), script_path.c_str(),
-		   registered_descriptions_.at(description_name).script_path.c_str());
+		if (caller == RegistryCaller::kWorldAddon || caller == RegistryCaller::kTribeAddon) {
+			// TODO(Nordfriese): Minimal-invasive fix for #4759, replace with #4760 after v1.0
+			log_warn("Overwriting existing registry for '%s'", description_name.c_str());
+			registered_descriptions_.erase(registered_descriptions_.find(description_name));
+		} else {
+			throw GameDataError(
+			   "DescriptionManager::register_description: Attempt to register description\n"
+			   "   name: '%s'\n"
+			   "   script: '%s'\n"
+			   "but the object has already been registered to\n"
+			   "   script: '%s'\n",
+			   description_name.c_str(), script_path.c_str(),
+			   registered_descriptions_.at(description_name).script_path.c_str());
+		}
 	}
 	if (!g_fs->file_exists(script_path)) {
 		throw GameDataError(
