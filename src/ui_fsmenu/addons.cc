@@ -849,8 +849,8 @@ void AddOnsCtrl::rebuild() {
 		upgrade_all_.set_tooltip(_("No upgrades are available for your installed add-ons"));
 	} else {
 		std::string text =
-		   (boost::format(ngettext(_("Upgrade the following %u add-on:"),
-		                           _("Upgrade the following %u add-ons:"), has_upgrades.size())) %
+		   (boost::format(ngettext("Upgrade the following %u add-on:",
+		                           "Upgrade the following %u add-ons:", has_upgrades.size())) %
 		    has_upgrades.size())
 		      .str();
 		for (const std::string& name : has_upgrades) {
