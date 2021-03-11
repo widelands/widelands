@@ -10,8 +10,8 @@
 --
 -- The constructionsite is defined in
 -- ``buildings/partially_finished/constructionsite/init.lua``.
--- The building will also need its help texts, which are defined in
--- ``buildings/partially_finished/constructionsite/helptexts.lua``
+-- The building will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_constructionsite_type{table}
 --
