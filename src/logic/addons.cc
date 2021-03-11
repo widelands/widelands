@@ -194,11 +194,11 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 			return std::make_pair(
 			   (boost::format(_("%1$s and %2$s: %3$s")) %
 			    (boost::format(
-			        ngettext(_("%u missing add-on"), _("%u missing add-ons"), addons_missing.size())) %
+			        ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size())) %
 			     addons_missing.size())
 			       .str() %
-			    (boost::format(ngettext(_("%u add-on with wrong version"),
-			                            _("%u add-ons with wrong version"), addons_missing.size())) %
+			    (boost::format(ngettext("%u add-on with wrong version",
+			                            "%u add-ons with wrong version", addons_missing.size())) %
 			     addons_missing.size())
 			       .str() %
 			    list)
