@@ -345,7 +345,9 @@ void Game::init_newgame(const GameSettings& settings) {
 		}
 		if (settings.custom_starting_positions) {
 			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
-				if (settings.get_tribeinfo(pl->tribe().name()).initializations[pl->initialization_index()].uses_map_starting_position) {
+				if (settings.get_tribeinfo(pl->tribe().name())
+				       .initializations[pl->initialization_index()]
+				       .uses_map_starting_position) {
 					pl->start_picking_custom_starting_position();
 				}
 			}

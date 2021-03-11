@@ -205,7 +205,9 @@ void LaunchGame::update_custom_starting_positions() {
 		bool allowed = false;
 		for (const PlayerSettings& p : settings.players) {
 			if (p.state != PlayerSettings::State::kClosed && p.state != PlayerSettings::State::kOpen &&
-					settings.get_tribeinfo(p.tribe).initializations[p.initialization_index].uses_map_starting_position) {
+			    settings.get_tribeinfo(p.tribe)
+			       .initializations[p.initialization_index]
+			       .uses_map_starting_position) {
 				allowed = true;
 				break;
 			}
@@ -213,7 +215,8 @@ void LaunchGame::update_custom_starting_positions() {
 		custom_starting_positions_.set_enabled(allowed);
 		if (!allowed) {
 			custom_starting_positions_.set_state(false);
-			custom_starting_positions_.set_tooltip(_("All selected starting conditions ignore the map’s starting positions"));
+			custom_starting_positions_.set_tooltip(
+			   _("All selected starting conditions ignore the map’s starting positions"));
 			return;
 		}
 	}

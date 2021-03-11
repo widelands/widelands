@@ -38,7 +38,7 @@ constexpr const char* const kClosed = "closed";
 constexpr const char* const kHuman_player = "human_player";
 
 SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
-	                          LaunchGame& lg,
+                                                     LaunchGame& lg,
                                                      const std::string& name,
                                                      int32_t x,
                                                      int32_t y,
@@ -46,7 +46,8 @@ SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
                                                      int button_dimension,
                                                      GameSettingsProvider* const settings,
                                                      PlayerSlot id)
-   : SinglePlayerDropdown<std::string>(parent, lg,
+   : SinglePlayerDropdown<std::string>(parent,
+                                       lg,
                                        name,
                                        x,
                                        y,
@@ -138,7 +139,7 @@ void SinglePlayerTribeDropdown::selection_action() {
 }
 
 SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
-	                          LaunchGame& lg,
+                                                               LaunchGame& lg,
                                                                const std::string& name,
                                                                int32_t x,
                                                                int32_t y,
@@ -146,7 +147,8 @@ SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent
                                                                int button_dimension,
                                                                GameSettingsProvider* const settings,
                                                                PlayerSlot id)
-   : SinglePlayerDropdown<std::string>(parent, lg,
+   : SinglePlayerDropdown<std::string>(parent,
+                                       lg,
                                        name,
                                        x,
                                        y,
@@ -251,7 +253,7 @@ void SinglePlayerPlayerTypeDropdown::selection_action() {
 }
 
 SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
-	                          LaunchGame& lg,
+                                                             LaunchGame& lg,
                                                              const std::string& name,
                                                              int32_t x,
                                                              int32_t y,
@@ -259,7 +261,8 @@ SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
                                                              int button_dimension,
                                                              GameSettingsProvider* const settings,
                                                              PlayerSlot id)
-   : SinglePlayerDropdown<uintptr_t>(parent, lg,
+   : SinglePlayerDropdown<uintptr_t>(parent,
+                                     lg,
                                      name,
                                      x,
                                      y,
@@ -339,7 +342,7 @@ void SinglePlayerStartTypeDropdown::selection_action() {
 	}
 }
 SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
-	                          LaunchGame& lg,
+                                                   LaunchGame& lg,
                                                    const std::string& name,
                                                    int32_t x,
                                                    int32_t y,
@@ -347,7 +350,8 @@ SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
                                                    int button_dimension,
                                                    GameSettingsProvider* const settings,
                                                    PlayerSlot id)
-   : SinglePlayerDropdown<uintptr_t>(parent, lg,
+   : SinglePlayerDropdown<uintptr_t>(parent,
+                                     lg,
                                      name,
                                      x,
                                      y,
