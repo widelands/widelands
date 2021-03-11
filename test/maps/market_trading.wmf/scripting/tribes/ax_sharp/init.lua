@@ -6,15 +6,8 @@ descriptions:new_ware_type {
    name = "ax_sharp",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Replaced Ware"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      barbarians = 1
-   },
-   preciousness = {
-      barbarians = 1
-   },
 
    animations = {
       idle = {

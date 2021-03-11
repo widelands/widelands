@@ -21,8 +21,6 @@ Workers are defined with Lua functions called ``new_<worker_type>_type{table}``.
 
 **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
 
-**helptext_script**: The full path to the ``helptexts.lua`` script for this worker.
-
 **icon**: The full path to the menu icon for this worker.
 
 **vision_range**
@@ -145,21 +143,7 @@ Example:
     pop_textdomain()
 
 
-.. _lua_tribes_workers_helptexts:
-
 Help Texts
 ----------
 
-Each worker has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
-The function in this file returns a text that is used for the worker by the Tribal Encyclopedia.
-
-.. function:: worker_helptext()
-
-   Returns a localized string with the helptext for this worker type.
-   It needs to be fetched by pgettext, using ``<tribename>_worker`` as the
-   message context. Example::
-
-      function worker_helptext()
-         -- TRANSLATORS: Helptext for a worker: Armorsmith
-         return pgettext("atlanteans_worker", "Produces armor for the soldiers.")
-      end
+See :ref:`lua_tribes_tribes_helptexts`.

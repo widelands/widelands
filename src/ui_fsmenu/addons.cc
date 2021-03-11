@@ -849,8 +849,8 @@ void AddOnsCtrl::rebuild() {
 		upgrade_all_.set_tooltip(_("No upgrades are available for your installed add-ons"));
 	} else {
 		std::string text =
-		   (boost::format(ngettext(_("Upgrade the following %u add-on:"),
-		                           _("Upgrade the following %u add-ons:"), has_upgrades.size())) %
+		   (boost::format(ngettext("Upgrade the following %u add-on:",
+		                           "Upgrade the following %u add-ons:", has_upgrades.size())) %
 		    has_upgrades.size())
 		      .str();
 		for (const std::string& name : has_upgrades) {
@@ -1856,9 +1856,15 @@ private:
 		if (cached == downloaded_screenshots_cache_.end()) {
 			const std::string screenie =
 			   parent_.net().download_screenshot(cache_key.first, cache_key.second);
-			downloaded_screenshots_cache_[cache_key] = screenie;
-			if (!screenie.empty()) {
-				image = g_image_cache->get(screenie);
+			try {
+				if (!screenie.empty()) {
+					image = g_image_cache->get(screenie);
+				}
+				downloaded_screenshots_cache_[cache_key] = screenie;
+			} catch (const std::exception& e) {
+				log_err("Error downloading screenshot %s for %s: %s", it->first.c_str(),
+				        info_.internal_name.c_str(), e.what());
+				image = nullptr;
 			}
 		} else if (!cached->second.empty()) {
 			image = g_image_cache->get(cached->second);
