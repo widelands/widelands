@@ -10,8 +10,8 @@
 --
 -- Trainingsites are defined in
 -- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/init.lua``.
--- The building will also need its help texts, which are defined in
--- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/helptexts.lua``
+-- The building will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
 --
 -- .. function:: new_trainingsite_type{table}
 --
