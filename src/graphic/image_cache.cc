@@ -42,13 +42,24 @@ const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const I
 void ImageCache::fill_with_texture_atlases(
    std::vector<std::unique_ptr<Texture>> texture_atlases,
    std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas) {
+	// There may still be pointers to existing images and textures, so we need
+	// to keep them around but no longer return any new pointers to them.
+
+	for (auto& t : texture_atlases_) {
+		outdated_texture_atlases_.push_back(std::move(t));
+	}
 	texture_atlases_ = std::move(texture_atlases);
+
+	for (auto& pair : images_) {
+		outdated_images_.push_back(std::move(pair.second));
+	}
+	images_.clear();
 	for (auto& pair : textures_in_atlas) {
 		images_.insert(std::move(pair));
 	}
 }
 
-/** Lazy accees to _images via hash.
+/** Lazy access to images_ via hash.
  *
  * In case hash is not not found it will we fetched via load_image().
  */
