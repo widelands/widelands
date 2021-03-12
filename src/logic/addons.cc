@@ -274,7 +274,8 @@ static bool contains_png(const std::string& dir) {
 	}
 	return false;
 }
-// Rebuilding the texture atlas is required if an add-on defines new terrain, flag, or road textures.
+// Rebuilding the texture atlas is required if an add-on defines new terrain, flag, or road
+// textures.
 bool AddOnInfo::requires_texture_atlas_rebuild() const {
 	std::string dir_to_check = kAddOnDir;
 	dir_to_check += FileSystem::file_separator();
