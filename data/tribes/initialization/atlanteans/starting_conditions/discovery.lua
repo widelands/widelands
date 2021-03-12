@@ -25,8 +25,14 @@
 --                         starting condition, e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the starting condition
 --                         is incompatible with the win condition "HQ Hunter".
 --
---    **uses_map_starting_position**: *Optional* Whether this starting condition considers the player's
---                                    starting position as defined by the map. Defaults to ``true``.
+--    **uses_map_starting_position**: *Optional* Whether this starting condition considers the player's starting position as
+--                                    defined by the map; that is, this value should be ``true`` for starting conditions which
+--                                    give the player some initial buildings, and ``false`` for starting conditions such as
+--                                    "Discovery" and "New World". If all players use a starting condition for which this
+--                                    value is ``false``, the checkbox for Custom Starting Positions mode is disabled. If at
+--                                    least one player uses a starting condition for which this value is ``true``, the
+--                                    checkbox for Custom Starting Positions mode is enabled, but the setting has no effect for
+--                                    players whose starting condition defines this value as ``false``. Defaults to ``true``.
 --
 --    **func**: A standardized function to determine whether to share this starting condition between players (Shared Kingdom).
 --              It needs to be declared like this: ``func = function(player, shared_in_start)``.
