@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-04 18:48+0000\n"
-"PO-Revision-Date: 2021-02-24 10:37+0000\n"
+"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"PO-Revision-Date: 2021-03-09 16:28+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -699,9 +699,10 @@ msgstr "Hast du weitere Fragen? Auf %s findest du unsere FAQs, das Wiki und nat�
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""
-"Use the priority buttons in building windows to adjust delivery of a "
-"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Benutze die Prioritätsschaltflächen in den Gebäudefenstern, um die Anlieferung von speziellen Waren zu steuern. STRG + Klick steuert alle Waren gleichzeitig."
+"Use the priority sliders in building windows to adjust delivery of a "
+"specific ware. Holding down Shift while clicking will adjust all wares at "
+"once."
+msgstr "Benutze die Prioritätsschieberegler in den Gebäudefenstern, um die Anlieferung von speziellen Waren zu steuern. Die UMSCHALT- Taste beim Klicken gedrückt zu halten, steuert alle Waren gleichzeitig."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -711,9 +712,8 @@ msgstr "Benutze das Menü „Wirtschaftseinstellungen“ um den gewünschten Lag
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘%1%’ for News to access the "
-"messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
-"messages."
+"Manage your messages more efficiently: press ‘%1%’ to access the messages "
+"window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
 msgstr "Verwalte deine Nachrichten effizienter: Drücke „%1%“, um in das Nachrichten-Fenster zu gelangen, verwende dann „%2%“, um zum betreffenden Ort zu gehen, und die „%3%“-Taste zum Ablegen der Nachrichten."
 
 #: ../../data/txts/tips/general_game.lua:45
