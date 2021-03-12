@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-04 18:48+0000\n"
-"PO-Revision-Date: 2021-02-14 13:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"PO-Revision-Date: 2021-03-09 11:30+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -702,9 +702,10 @@ msgstr "У вас остались вопросы? Наши ЧаВо, вики �
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""
-"Use the priority buttons in building windows to adjust delivery of a "
-"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Используйте кнопки приоритета в окне здания, чтобы настроить доставку определенных товаров. Удерживая Ctrl во время щелчка настроит сразу все товары."
+"Use the priority sliders in building windows to adjust delivery of a "
+"specific ware. Holding down Shift while clicking will adjust all wares at "
+"once."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -714,9 +715,8 @@ msgstr "Используйте меню «настроить экономику�
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘%1%’ for News to access the "
-"messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
-"messages."
+"Manage your messages more efficiently: press ‘%1%’ to access the messages "
+"window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:45
