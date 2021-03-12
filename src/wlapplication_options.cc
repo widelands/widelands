@@ -382,21 +382,23 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "editor_showhide_resources",
                          []() { return _("Toggle Resources"); })},
 
-#define EDITOR_TOOLSIZE(radius, key) \
-	{KeyboardShortcut::kEditorToolsize##radius, \
-	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, \
-	                      keysym(SDLK_##key), "editor_toolsize" #radius, \
-	                      []() { return (boost::format(_("Set Toolsize to %d")) % radius).str(); })}
-	EDITOR_TOOLSIZE(1, 1),
-	EDITOR_TOOLSIZE(2, 2),
-	EDITOR_TOOLSIZE(3, 3),
-	EDITOR_TOOLSIZE(4, 4),
-	EDITOR_TOOLSIZE(5, 5),
-	EDITOR_TOOLSIZE(6, 6),
-	EDITOR_TOOLSIZE(7, 7),
-	EDITOR_TOOLSIZE(8, 8),
-	EDITOR_TOOLSIZE(9, 9),
-	EDITOR_TOOLSIZE(10, 0),
+#define EDITOR_TOOLSIZE(radius, key)                                                               \
+	{                                                                                               \
+		KeyboardShortcut::kEditorToolsize##radius,                                                   \
+		   KeyboardShortcutInfo(                                                                     \
+		      {KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key), "editor_toolsize" #radius, \
+		      []() { return (boost::format(_("Set Toolsize to %d")) % radius).str(); })              \
+	}
+   EDITOR_TOOLSIZE(1, 1),
+   EDITOR_TOOLSIZE(2, 2),
+   EDITOR_TOOLSIZE(3, 3),
+   EDITOR_TOOLSIZE(4, 4),
+   EDITOR_TOOLSIZE(5, 5),
+   EDITOR_TOOLSIZE(6, 6),
+   EDITOR_TOOLSIZE(7, 7),
+   EDITOR_TOOLSIZE(8, 8),
+   EDITOR_TOOLSIZE(9, 9),
+   EDITOR_TOOLSIZE(10, 0),
 #undef EDITOR_TOOLSIZE
 
    {KeyboardShortcut::kInGameShowhideCensus,

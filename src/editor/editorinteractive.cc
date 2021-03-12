@@ -809,7 +809,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 
 		for (int i = 0; i < 10; ++i) {
-			if (matches_shortcut(static_cast<KeyboardShortcut>(static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i), code)) {
+			if (matches_shortcut(static_cast<KeyboardShortcut>(
+			                        static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i),
+			                     code)) {
 				set_sel_radius_and_update_menu(i);
 				return true;
 			}
