@@ -65,7 +65,7 @@ int get_ip_version(const boost::asio::ip::udp& version) {
 
 /*** class LanBase ***/
 /**
- * \internal In an ideal world, we would use the same code with boost asio for all three operating
+ * [Internal] In an ideal world, we would use the same code with boost asio for all three operating
  * systems. Unfortunately, it isn't that easy and we need some platform specific code. For IPv4,
  * windows needs a special case: For Linux and Apple we have to iterate over all assigned IPv4
  * addresses (e.g. 192.168.1.68), transform them to broadcast addresses (e.g. 192.168.1.255) and
@@ -131,7 +131,7 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 
 	if (!is_open()) {
 		// Hm, not good. Just try to open them and hope for the best
-		log_info("[LAN] Trying to open both sockets.\n");
+		verb_log_info("[LAN] Trying to open both sockets.");
 		start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);
 		start_socket(&socket_v6, boost::asio::ip::udp::v6(), port);
 	}
@@ -143,10 +143,10 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 	}
 
 	for (const std::string& ip : broadcast_addresses_v4) {
-		log_info("[LAN] Will broadcast to %s.\n", ip.c_str());
+		verb_log_info("[LAN] Will broadcast to %s.", ip.c_str());
 	}
 	if (socket_v6.is_open()) {
-		log_info("[LAN] Will broadcast for IPv6.\n");
+		verb_log_info("[LAN] Will broadcast for IPv6.");
 	}
 }
 
@@ -349,7 +349,7 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
 		return;
 	}
 
-	log_info("[LAN] Started an IPv%d socket on UDP port %d.\n", get_ip_version(version), port);
+	verb_log_info("[LAN] Started an IPv%d socket on UDP port %d.", get_ip_version(version), port);
 }
 
 void LanBase::report_network_error() {
@@ -372,7 +372,7 @@ void LanBase::close_socket(boost::asio::ip::udp::socket* socket) {
 	if (socket->is_open()) {
 		const boost::asio::ip::udp::endpoint& endpoint = socket->local_endpoint(ec);
 		if (!ec) {
-			log_info("[LAN] Closing an IPv%d socket.\n", get_ip_version(endpoint.protocol()));
+			verb_log_info("[LAN] Closing an IPv%d socket.", get_ip_version(endpoint.protocol()));
 		}
 		socket->shutdown(boost::asio::ip::udp::socket::shutdown_both, ec);
 		socket->close(ec);
@@ -422,7 +422,7 @@ void LanGamePromoter::run() {
 			continue;
 		}
 
-		log_info("Received %s packet from %s\n", magic, addr.ip.to_string().c_str());
+		verb_log_info("Received %s packet from %s", magic, addr.ip.to_string().c_str());
 
 		if (!strncmp(magic, "QUERY", 6) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
 			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
@@ -468,7 +468,7 @@ void LanGameFinder::run() {
 			continue;
 		}
 
-		log_info("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
+		verb_log_info("Received %s packet from %s", info.magic, addr.ip.to_string().c_str());
 
 		if (strncmp(info.magic, "GAME", 6) != 0 || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
 			continue;

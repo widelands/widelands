@@ -26,9 +26,14 @@
 #include "logic/game_settings.h"
 #include "ui_basic/dropdown.h"
 
+namespace FsMenu {
+
+class LaunchGame;
+
 template <typename T> class SinglePlayerDropdown {
 public:
 	SinglePlayerDropdown(UI::Panel* parent,
+	                     LaunchGame& lg,
 	                     const std::string& name,
 	                     int32_t x,
 	                     int32_t y,
@@ -52,6 +57,7 @@ public:
 	               type,
 	               style,
 	               button_style),
+	     launch_game_(lg),
 	     settings_(settings),
 	     id_(id),
 	     selection_locked_(false) {
@@ -81,6 +87,7 @@ public:
 
 protected:
 	UI::Dropdown<T> dropdown_;
+	LaunchGame& launch_game_;
 	GameSettingsProvider* const settings_;
 	PlayerSlot const id_;
 	bool selection_locked_;
@@ -96,6 +103,7 @@ private:
 class SinglePlayerTribeDropdown : public SinglePlayerDropdown<std::string> {
 public:
 	SinglePlayerTribeDropdown(UI::Panel* parent,
+	                          LaunchGame& lg,
 	                          const std::string& name,
 	                          int32_t x,
 	                          int32_t y,
@@ -112,6 +120,7 @@ private:
 class SinglePlayerPlayerTypeDropdown : public SinglePlayerDropdown<std::string> {
 public:
 	SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+	                               LaunchGame& lg,
 	                               const std::string& name,
 	                               int32_t x,
 	                               int32_t y,
@@ -130,6 +139,7 @@ private:
 class SinglePlayerStartTypeDropdown : public SinglePlayerDropdown<uintptr_t> {
 public:
 	SinglePlayerStartTypeDropdown(UI::Panel* parent,
+	                              LaunchGame& lg,
 	                              const std::string& name,
 	                              int32_t x,
 	                              int32_t y,
@@ -148,6 +158,7 @@ private:
 class SinglePlayerTeamDropdown : public SinglePlayerDropdown<uintptr_t> {
 public:
 	SinglePlayerTeamDropdown(UI::Panel* parent,
+	                         LaunchGame& lg,
 	                         const std::string& name,
 	                         int32_t x,
 	                         int32_t y,
@@ -161,5 +172,6 @@ public:
 private:
 	void selection_action() override;
 };
+}  // namespace FsMenu
 
 #endif  // WL_UI_FSMENU_SINGLEPLAYERDROPDOWN_H

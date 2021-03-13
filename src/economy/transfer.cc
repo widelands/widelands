@@ -266,6 +266,9 @@ void Transfer::has_failed() {
 }
 
 void Transfer::tlog(char const* const fmt, ...) {
+	if (!g_verbose) {
+		return;
+	}
 	char buffer[1024];
 	va_list va;
 	char id;

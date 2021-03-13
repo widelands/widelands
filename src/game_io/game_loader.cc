@@ -62,7 +62,7 @@ int32_t GameLoader::preload_game(GamePreloadPacket& mp) {
  * Load the complete file
  */
 int32_t GameLoader::load_game(bool const multiplayer) {
-	ScopedTimer timer("GameLoader::load() took %ums");
+	ScopedTimer timer("GameLoader::load() took %ums", true);
 
 	assert(game_.has_loader_ui());
 	auto set_progress_message = [](const std::string& text, unsigned step) {
@@ -70,7 +70,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str()));
 	};
 	set_progress_message(_("Elemental data"), 1);
-	log_info("Game: Reading Preload Data ... ");
+	verb_log_info("Game: Reading Preload Data ... ");
 	GamePreloadPacket preload;
 	preload.read(fs_, game_);
 
@@ -135,13 +135,13 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		}
 	}
 
-	log_info("Game: Reading Game Class Data ... ");
+	verb_log_info("Game: Reading Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.read(fs_, game_);
 	}
 
-	log_info("Game: Reading Map Data ... ");
+	verb_log_info("Game: Reading Map Data ... ");
 	GameMapPacket map_packet;
 	map_packet.read(fs_, game_);
 
@@ -150,36 +150,36 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// to load them as early as possible here.
 	FileSystem* map_fs = game_.map().filesystem();
 	if (map_fs->file_exists("scripting/tribes")) {
-		log_info("Game: Reading Scenario Tribes ... ");
+		verb_log_info("Game: Reading Scenario Tribes ... ");
 		game_.mutable_descriptions()->register_scenario_tribes(map_fs);
 	}
 
-	log_info("Game: Reading Player Info ...\n");
+	verb_log_info("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
 	}
 
-	log_info("Game: Calling read_complete()\n");
+	verb_log_info("Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
 
 	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 
-	log_info("Game: Reading Player Economies Info ... ");
+	verb_log_info("Game: Reading Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
 	}
 
-	log_info("Game: Reading ai persistent data ... ");
+	verb_log_info("Game: Reading ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
 	}
 
-	log_info("Game: Reading Command Queue Data ... ");
+	verb_log_info("Game: Reading Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
@@ -187,7 +187,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	}
 
 	//  This must be after the command queue has been read.
-	log_info("Game: Parsing messages ... ");
+	verb_log_info("Game: Parsing messages ... ");
 	set_progress_message(_("Messages"), 5);
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
@@ -213,11 +213,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// In multiplayer games every client needs to create a new interactive
 	// player.
 	if (!multiplayer) {
-		log_info("Game: Reading Interactive Player Data ... ");
-		{
-			GameInteractivePlayerPacket p;
-			p.read(fs_, game_, mol);
-		}
+		verb_log_info("Game: Reading Interactive Player Data ... ");
+		GameInteractivePlayerPacket p;
+		p.read(fs_, game_, mol);
 	}
 
 	return 0;
