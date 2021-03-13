@@ -29,17 +29,17 @@
 namespace Widelands {
 
 void CmdLuaScript::execute(Game& game) {
-	log_info("Trying to run: %s: ", script_.c_str());
+	verb_log_info("Trying to run %s", script_.c_str());
 	try {
 		game.lua().run_script(script_);
 	} catch (LuaScriptNotExistingError&) {
 		// The script has not been found.
-		log_err("not found.\n");
+		log_err("Script %s not found.", script_.c_str());
 		return;
 	} catch (LuaError& e) {
 		throw GameDataError("lua: %s", e.what());
 	}
-	log_info("done\n");
+	verb_log_info("Done running %s.", script_.c_str());
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;

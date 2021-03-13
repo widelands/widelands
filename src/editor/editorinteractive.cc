@@ -979,8 +979,8 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 	Widelands::Descriptions* descriptions = egbase.mutable_descriptions();
 
-	log_info("┏━ Loading world\n");
-	ScopedTimer timer("┗━ took %ums");
+	verb_log_info("┏━ Loading world\n");
+	ScopedTimer timer("┗━ took %ums", true);
 
 	if (eia) {
 		// In order to ensure that items created by add-ons are properly
@@ -1011,21 +1011,21 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 		}
 	};
 
-	log_info("┃    Critters");
+	verb_log_info("┃    Critters");
 	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
 
-	log_info("┃    Immovables");
+	verb_log_info("┃    Immovables");
 	load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
 
-	log_info("┃    Terrains");
+	verb_log_info("┃    Terrains");
 	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
 
-	log_info("┃    Resources");
+	verb_log_info("┃    Resources");
 	load_resources(*table);
 
 	for (const AddOns::AddOnInfo& info : egbase.enabled_addons()) {
 		if (info.category == AddOns::AddOnCategory::kWorld) {
-			log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
+			verb_log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
 			table = egbase.lua().run_script(kAddOnDir + '/' + info.internal_name + "/editor.lua");
 			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
 			load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);

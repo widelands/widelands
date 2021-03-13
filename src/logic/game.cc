@@ -85,7 +85,7 @@ Game::SyncWrapper::~SyncWrapper() {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
-				log_warn_time(game_.get_gametime(), "Deleting synchstream file %s failed: %s\n",
+				log_warn_time(game_.get_gametime(), "Deleting syncstream file %s failed: %s\n",
 				              dumpfname_.c_str(), e.what());
 			}
 		}
@@ -101,8 +101,8 @@ void Game::SyncWrapper::start_dump(const std::string& fname) {
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
-	uint32_t time = game_.get_gametime();
-	log_dbg_time(game_.get_gametime(), "[sync:%08u t=%6u]", counter_, time);
+	const Time& time = game_.get_gametime();
+	log_dbg_time(game_.get_gametime(), "[sync:%08u t=%6u]", counter_, time.get());
 	for (size_t i = 0; i < size; ++i) {
 		log_dbg_time(game_.get_gametime(), " %02x", (static_cast<uint8_t const*>(sync_data))[i]);
 	}
@@ -124,7 +124,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			dump_->data(sync_data, size);
 		} catch (const WException&) {
 			log_warn_time(game_.get_gametime(),
-			              "Writing to syncstream file %s failed. Stop synctream dump.\n",
+			              "Writing to syncstream file %s failed. Stop syncstream dump.\n",
 			              dumpfname_.c_str());
 			dump_.reset();
 		}
@@ -165,7 +165,7 @@ void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
 	synchash_.reset();
-	log_dbg_time(get_gametime(), "[sync] Reset\n");
+	verb_log_info_time(get_gametime(), "[sync] Reset\n");
 }
 
 /**
@@ -247,7 +247,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
-			log_info_time(
+			verb_log_info_time(
 			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
 			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
 			tribe = descriptions().get_tribe_descr(random)->name();
@@ -388,7 +388,7 @@ void Game::init_savegame(const GameSettings& settings) {
 		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
 			training_wheels_.reset(new TrainingWheels(lua()));
 			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
-			log_dbg("Training wheel from savegame");
+			verb_log_dbg("Training wheel from savegame");
 		}
 #endif
 		if (win_condition_displayname_ == "Scenario") {
@@ -439,7 +439,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
 			training_wheels_.reset(new TrainingWheels(lua()));
 			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
-			log_dbg("Training wheel from savegame");
+			verb_log_dbg("Training wheel from savegame");
 		}
 #endif
 		if (win_condition_displayname_ == "Scenario") {
@@ -682,12 +682,12 @@ bool Game::run(StartGameType const start_game_type,
 		                          std::string(timestring()) + std::string("_") + prefix_for_replays +
 		                          kReplayExtension;
 		if (writereplay_) {
-			log_info_time(get_gametime(), "Starting replay writer\n");
+			verb_log_info_time(get_gametime(), "Starting replay writer\n");
 
 			assert(!replaywriter_);
 			replaywriter_.reset(new ReplayWriter(*this, fname));
 
-			log_info_time(get_gametime(), "Replay writer has started\n");
+			verb_log_info_time(get_gametime(), "Replay writer has started\n");
 		}
 
 		if (writesyncstream_) {
@@ -715,7 +715,7 @@ bool Game::run(StartGameType const start_game_type,
 	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
 	// user switched off the option
 	if (training_wheels_ != nullptr && training_wheels_wanted_) {
-		log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
+		verb_log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
 		training_wheels_->run_objectives();
 	}
 #endif

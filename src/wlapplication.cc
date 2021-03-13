@@ -367,9 +367,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_backups();
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-	log_dbg("Byte order: little-endian\n");
+	log_info("Byte order: little-endian\n");
 #else
-	log_dbg("Byte order: big-endian\n");
+	log_info("Byte order: big-endian\n");
 #endif
 
 	// Start the SDL core

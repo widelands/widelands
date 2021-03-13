@@ -272,7 +272,7 @@ struct HostChatProvider : public ChatProvider {
 			std::string cmd, arg1, arg2;
 			std::string temp = c.msg.substr(1);  // cut off '/'
 			h->split_command_array(temp, cmd, arg1, arg2);
-			log_info("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
+			verb_log_info("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
 			if (cmd == "me") {
@@ -532,7 +532,7 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
    : capsule_(c), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
-	log_info("[Host]: starting up.\n");
+	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;
 
@@ -1824,7 +1824,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	d->settings.users.at(client.usernum).name = effective_name;
 	d->settings.users.at(client.usernum).position = UserSettings::none();
 
-	log_info("[Host]: Client %u: welcome to usernum %u\n", number, client.usernum);
+	verb_log_info("[Host]: Client %u: welcome to usernum %u", number, client.usernum);
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_HELLO);
@@ -1946,11 +1946,11 @@ void GameHost::receive_client_time(uint32_t const number, const Time& time) {
 	}
 
 	client.time = time;
-	log_info("[Host]: Client %i: Time %i\n", number, time.get());
+	verb_log_info("[Host]: Client %i: Time %i", number, time.get());
 
 	if (d->waiting) {
-		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number,
-		         time.get(), d->committed_networktime.get());
+		verb_log_info("[Host]: Client %i reports time %i (networktime = %i) during hang", number,
+		              time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
 }
@@ -1975,8 +1975,8 @@ void GameHost::check_hung_clients() {
 			assert(d->game != nullptr);
 			++nrdelayed;
 			if (delta > Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
-				log_info("[Host]: Client %i (%s) hung\n", i,
-				         d->settings.users.at(d->clients.at(i).usernum).name.c_str());
+				verb_log_info("[Host]: Client %i (%s) hung", i,
+				              d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
 					d->clients.at(i).hung_since = time(nullptr);
@@ -1999,7 +1999,7 @@ void GameHost::check_hung_clients() {
 
 	if (!d->waiting) {
 		if (nrhung) {
-			log_info("[Host]: %i clients hung. Entering wait mode\n", nrhung);
+			verb_log_info("[Host]: %i clients hung. Entering wait mode", nrhung);
 
 			// Brake and wait
 			d->waiting = true;
@@ -2108,7 +2108,7 @@ void GameHost::request_sync_reports() {
 		client.syncreport_arrived = false;
 	}
 
-	log_info("[Host]: Requesting sync reports for time %i\n", d->syncreport_time.get());
+	verb_log_info("[Host]: Requesting sync reports for time %i", d->syncreport_time.get());
 	d->game->report_sync_request();
 
 	SendPacket packet;
@@ -2139,7 +2139,7 @@ void GameHost::check_sync_reports() {
 	}
 
 	d->syncreport_pending = false;
-	log_info("[Host]: comparing syncreports for time %i\n", d->syncreport_time.get());
+	verb_log_info("[Host]: comparing syncreports for time %i", d->syncreport_time.get());
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients.at(i);
@@ -2148,10 +2148,11 @@ void GameHost::check_sync_reports() {
 		}
 
 		if (client.syncreport != d->syncreport) {
-			log_err("[Host]: lost synchronization with client %u!\n"
+			log_err("[Host]: lost synchronization with client %u at time %i!\n"
 			        "I have:     %s\n"
 			        "Client has: %s\n",
-			        i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
+			        i, d->syncreport_time.get(), d->syncreport.str().c_str(),
+			        client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
 			// Create syncstream excerpt and add faulting player number
@@ -2261,7 +2262,7 @@ void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
 }
 
 void GameHost::handle_ping(Client& client) {
-	log_info("[Host]: Received ping from metaserver.\n");
+	verb_log_info("[Host]: Received ping from metaserver.");
 	// Send PING back
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_METASERVER_PING);
@@ -2380,7 +2381,7 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	}
 	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
+	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
 	         client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time.get());
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
@@ -2463,7 +2464,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 
 	switch (cmd) {
 	case NETCMD_PONG:
-		log_info("[Host]: Client %u: got pong\n", client_num);
+		verb_log_info("[Host]: Client %u: got pong", client_num);
 		break;
 
 	case NETCMD_SETTING_CHANGETRIBE:
@@ -2713,6 +2714,6 @@ void GameHost::report_result(uint8_t p_nr,
 		}
 	}
 
-	log_info("GameHost::report_result(%d, %u, %s)\n", player->player_number(),
-	         static_cast<uint8_t>(result), info.c_str());
+	verb_log_info("GameHost::report_result(%d, %u, %s)", player->player_number(),
+	              static_cast<uint8_t>(result), info.c_str());
 }
