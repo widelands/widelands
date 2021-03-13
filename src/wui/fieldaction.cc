@@ -449,7 +449,7 @@ void FieldActionWindow::add_buttons_auto() {
 					                      g_style_manager->font_style(UI::FontStyle::kDisabled)
 					                         .as_font_tag(_("Send scout to explore surroundings")) %
 					                      g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-					                         .as_font_tag(_("You need to connect this flag to a scout's "
+					                         .as_font_tag(_("You need to connect this flag to a scout’s "
 					                                        "house before you can send a scout here.")))
 					                        .str(),
 					           false, enabled);

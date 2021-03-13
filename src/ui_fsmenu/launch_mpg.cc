@@ -293,7 +293,7 @@ void LaunchMPG::refresh() {
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
-			   (boost::format(_("Unable to load the win condition script file '%s'.")) %
+			   (boost::format(_("Unable to load the win condition script file ‘%s’.")) %
 			    settings_.get_win_condition_script())
 			      .str());
 
