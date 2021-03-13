@@ -75,10 +75,10 @@ SoundHandler::SoundHandler()
 
 	SDL_version sdl_version;
 	SDL_GetVersion(&sdl_version);
-	log_dbg("**** SOUND REPORT ****\n");
-	log_dbg("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	        static_cast<unsigned int>(sdl_version.minor),
-	        static_cast<unsigned int>(sdl_version.patch));
+	log_info("**** SOUND REPORT ****\n");
+	log_info("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	         static_cast<unsigned int>(sdl_version.minor),
+	         static_cast<unsigned int>(sdl_version.patch));
 
 	// SDL 2.0.6 will crash due to an upstream bug:
 	// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
@@ -88,11 +88,11 @@ SoundHandler::SoundHandler()
 	}
 
 	SDL_MIXER_VERSION(&sdl_version)
-	log_dbg("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	        static_cast<unsigned int>(sdl_version.minor),
-	        static_cast<unsigned int>(sdl_version.patch));
+	log_info("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	         static_cast<unsigned int>(sdl_version.minor),
+	         static_cast<unsigned int>(sdl_version.patch));
 
-	log_dbg("**** END SOUND REPORT ****\n");
+	log_info("**** END SOUND REPORT ****\n");
 
 	if (SoundHandler::is_backend_disabled()) {
 		return;
@@ -148,8 +148,8 @@ SoundHandler::~SoundHandler() {
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log_dbg("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
-	        numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
+	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
+	         numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -161,7 +161,7 @@ SoundHandler::~SoundHandler() {
 		log_err("SoundHandler: Audio error %s\n", SDL_GetError());
 	}
 
-	log_dbg("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
+	log_info("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
 
 	if (numtimesopened != 1) {
 		log_warn("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
