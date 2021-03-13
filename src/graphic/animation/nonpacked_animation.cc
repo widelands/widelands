@@ -167,14 +167,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 		// Get image files
 		if (table.has_key("pictures")) {
 			// TODO(GunChleoc): Old code - remove this option once conversion has been completed
+			assert(!table.get_table("pictures")->array_entries<std::string>().empty());
+			verb_log_dbg("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
+			        table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			mipmaps_.insert(
 			   std::make_pair(1.0f, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(
 			                           table.get_table("pictures")->array_entries<std::string>()))));
-			if (g_verbose) {
-				assert(!table.get_table("pictures")->array_entries<std::string>().empty());
-				log_dbg("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
-				        table.get_table("pictures")->array_entries<std::string>().front().c_str());
-			}
 		} else {
 			// TODO(GunChleoc): When all animations have been converted, require that
 			// animation_directory is not empty.

@@ -77,7 +77,7 @@ void MapSaver::save() {
 	std::string timer_message = "MapSaver::save() for '";
 	timer_message += map.get_name();
 	timer_message += "' took %ums";
-	ScopedTimer timer(timer_message);
+	ScopedTimer timer(timer_message, true);
 
 	const bool is_game = egbase_.is_game();
 
@@ -98,41 +98,41 @@ void MapSaver::save() {
 	// MANDATORY PACKETS
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
-	log_info_time(egbase_.get_gametime(), "Writing Elemental Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Elemental Data ... ");
 	set_progress_message(_("Elemental data"), 1);
 	{
 		MapElementalPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
 
-	log_info_time(egbase_.get_gametime(), "Writing Player Names And Tribe Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Player Names And Tribe Data ... ");
 	{
 		MapPlayerNamesAndTribesPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
 	//  PRELOAD DATA END
 
-	log_info_time(egbase_.get_gametime(), "Writing Port Spaces Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Port Spaces Data ... ");
 	{
 		MapPortSpacesPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
 
-	log_info_time(egbase_.get_gametime(), "Writing Heights Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Heights Data ... ");
 	set_progress_message(_("Heights"), 2);
 	{
 		MapHeightsPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
 
-	log_info_time(egbase_.get_gametime(), "Writing Terrain Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Terrain Data ... ");
 	set_progress_message(_("Terrains"), 3);
 	{
 		MapTerrainPacket p;
 		p.write(fs_, egbase_);
 	}
 
-	log_info_time(egbase_.get_gametime(), "Writing Player Start Position Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Player Start Position Data ... ");
 	set_progress_message(_("Starting positions"), 4);
 	{
 		MapPlayerPositionPacket p;
@@ -144,7 +144,7 @@ void MapSaver::save() {
 		//  This must come before anything that references messages, such as:
 		//    * command queue (PlayerMessageCommand, inherited by
 		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
-		log_info_time(egbase_.get_gametime(), "Writing Player Message Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Player Message Data ... ");
 		set_progress_message(_("Messages"), 5);
 		{
 			MapPlayersMessagesPacket p;
@@ -152,7 +152,7 @@ void MapSaver::save() {
 		}
 	}
 
-	log_info_time(egbase_.get_gametime(), "Writing Resources Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Resources Data ... ");
 	set_progress_message(_("Resources"), 6);
 	{
 		MapResourcesPacket p;
@@ -160,7 +160,7 @@ void MapSaver::save() {
 	}
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
-	log_info_time(egbase_.get_gametime(), "Writing Map Version ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Map Version ... ");
 	set_progress_message(_("Map version"), 7);
 	{
 		MapVersionPacket p;
@@ -172,7 +172,7 @@ void MapSaver::save() {
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		//  allowed worker types
-		log_info_time(egbase_.get_gametime(), "Writing Allowed Worker Types Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Allowed Worker Types Data ... ");
 		set_progress_message(_("Building restrictions"), 8);
 		{
 			MapAllowedWorkerTypesPacket p;
@@ -183,7 +183,7 @@ void MapSaver::save() {
 		iterate_players_existing_const(plnum, nr_players, egbase_, player) {
 			for (DescriptionIndex i = 0; i < egbase_.descriptions().nr_buildings(); ++i) {
 				if (!player->is_building_type_allowed(i)) {
-					log_info_time(egbase_.get_gametime(), "Writing Allowed Building Types Data ... ");
+					verb_log_info_time(egbase_.get_gametime(), "Writing Allowed Building Types Data ... ");
 					MapAllowedBuildingTypesPacket p;
 					p.write(fs_, egbase_, *mos_);
 					goto end_find_a_forbidden_building_type_loop;
@@ -196,27 +196,27 @@ void MapSaver::save() {
 		// This packet must be written before any building or road packet. So do not
 		// change this order unless you know what you are doing
 		// EXISTING PACKETS
-		log_info_time(egbase_.get_gametime(), "Writing Flag Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Flag Data ... ");
 		set_progress_message(_("Flags"), 9);
 		{
 			MapFlagPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
 
-		log_info_time(egbase_.get_gametime(), "Writing Road Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Road Data ... ");
 		set_progress_message(_("Roads and waterways"), 10);
 		{
 			MapRoadPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
 
-		log_info_time(egbase_.get_gametime(), "Writing Waterway Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Waterway Data ... ");
 		{
 			MapWaterwayPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
 
-		log_info_time(egbase_.get_gametime(), "Writing Building Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Building Data ... ");
 		set_progress_message(_("Buildings"), 11);
 		{
 			MapBuildingPacket p;
@@ -225,7 +225,7 @@ void MapSaver::save() {
 	}
 
 	// We do need to save this one in the editor!
-	log_info_time(egbase_.get_gametime(), "Writing Map Objects ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Map Objects ... ");
 	set_progress_message(_("Map objects"), 12);
 	{
 		MapObjectPacket p;
@@ -234,7 +234,7 @@ void MapSaver::save() {
 
 	if (is_game) {
 		// Map data used by win conditions
-		log_info_time(egbase_.get_gametime(), "Writing Wincondition Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Wincondition Data ... ");
 		set_progress_message(_("Win condition"), 13);
 		{
 			MapWinconditionPacket p;
@@ -243,7 +243,7 @@ void MapSaver::save() {
 
 		// DATA PACKETS
 		if (mos_->get_nr_flags()) {
-			log_info_time(egbase_.get_gametime(), "Writing Flagdata Data ... ");
+			verb_log_info_time(egbase_.get_gametime(), "Writing Flagdata Data ... ");
 			set_progress_message(_("Flag details"), 14);
 			{
 				MapFlagdataPacket p;
@@ -252,7 +252,7 @@ void MapSaver::save() {
 		}
 
 		if (mos_->get_nr_roads()) {
-			log_info_time(egbase_.get_gametime(), "Writing Roaddata Data ... ");
+			verb_log_info_time(egbase_.get_gametime(), "Writing Roaddata Data ... ");
 			set_progress_message(_("Road and waterway details"), 15);
 			{
 				MapRoaddataPacket p;
@@ -261,7 +261,7 @@ void MapSaver::save() {
 		}
 
 		if (mos_->get_nr_waterways()) {
-			log_info_time(egbase_.get_gametime(), "Writing Waterwaydata Data ... ");
+			verb_log_info_time(egbase_.get_gametime(), "Writing Waterwaydata Data ... ");
 			{
 				MapWaterwaydataPacket p;
 				p.write(fs_, egbase_, *mos_);
@@ -269,7 +269,7 @@ void MapSaver::save() {
 		}
 
 		if (mos_->get_nr_buildings()) {
-			log_info_time(egbase_.get_gametime(), "Writing Buildingdata Data ... ");
+			verb_log_info_time(egbase_.get_gametime(), "Writing Buildingdata Data ... ");
 			set_progress_message(_("Building details"), 16);
 			{
 				MapBuildingdataPacket p;
@@ -277,14 +277,14 @@ void MapSaver::save() {
 			}
 		}
 
-		log_info_time(egbase_.get_gametime(), "Writing Node Ownership Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Node Ownership Data ... ");
 		set_progress_message(_("Territory"), 17);
 		{
 			MapNodeOwnershipPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
 
-		log_info_time(egbase_.get_gametime(), "Writing Players View Data ... ");
+		verb_log_info_time(egbase_.get_gametime(), "Writing Players View Data ... ");
 		set_progress_message(_("Vision"), 18);
 		{
 			MapPlayersViewPacket p;
@@ -293,18 +293,18 @@ void MapSaver::save() {
 	}
 
 	// We also want to write these in the editor.
-	log_info_time(egbase_.get_gametime(), "Writing Scripting Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Scripting Data ... ");
 	set_progress_message(_("Scripting"), 19);
 	{
 		MapScriptingPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
 
-	log_info_time(egbase_.get_gametime(), "Writing Objective Data ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing Objective Data ... ");
 	set_progress_message(_("Objectives"), 20);
 	write_objective_data(fs_, egbase_);
 
-	log_info_time(egbase_.get_gametime(), "Writing map images ... ");
+	verb_log_info_time(egbase_.get_gametime(), "Writing map images ... ");
 	set_progress_message(_("Images"), 21);
 	save_map_images(&fs_, map.filesystem());
 

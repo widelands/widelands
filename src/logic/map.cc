@@ -340,8 +340,8 @@ size_t Map::count_all_conquerable_fields() {
 
 	std::set<FCoords> coords_to_check;
 
-	log_info("Collecting valuable fields ... ");
-	ScopedTimer timer(" → took %ums");
+	verb_log_info("Collecting valuable fields ... ");
+	ScopedTimer timer(" → took %ums", true);
 
 	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
 	// initialized with the given radius around the coordinates
@@ -420,7 +420,7 @@ size_t Map::count_all_conquerable_fields() {
 		}
 	}
 
-	log_info("%" PRIuS " found ... ", valuable_fields_.size());
+	verb_log_info("%" PRIuS " found ... ", valuable_fields_.size());
 	return valuable_fields_.size();
 }
 
@@ -430,8 +430,8 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 		return valuable_fields_.size();
 	}
 
-	log_info("Collecting valuable fields ... ");
-	ScopedTimer timer(" → took %ums");
+	verb_log_info("Collecting valuable fields ... ");
+	ScopedTimer timer(" → took %ums", true);
 
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];
@@ -440,7 +440,7 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 		}
 	}
 
-	log_info("%" PRIuS " found ... ", valuable_fields_.size());
+	verb_log_info("%" PRIuS " found ... ", valuable_fields_.size());
 	return valuable_fields_.size();
 }
 
@@ -602,7 +602,7 @@ void Map::set_origin(const Coords& new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
-	log_info("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
+	verb_log_info("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 // Helper function for resize()
@@ -748,7 +748,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		}
 	}
 
-	log_info("Map was resized to %d×%d\n", width_, height_);
+	verb_log_info("Map was resized to %d×%d\n", width_, height_);
 }
 
 ResizeHistory Map::dump_state(const EditorGameBase&) const {
