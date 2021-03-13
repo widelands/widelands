@@ -118,7 +118,7 @@ void BufferedConnection::close() {
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
 		verb_log_info("[BufferedConnection] Closing network socket connected to %s:%i.",
-		         remote.address().to_string().c_str(), remote.port());
+		              remote.address().to_string().c_str(), remote.port());
 	} else {
 		verb_log_info("[BufferedConnection] Closing network socket.");
 	}
@@ -314,8 +314,8 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	verb_log_info("[BufferedConnection] Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
-	         host.port);
+	verb_log_info("[BufferedConnection] Trying to connect to %s:%u ... ",
+	              host.ip.to_string().c_str(), host.port);
 	boost::system::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
@@ -333,8 +333,8 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 			verb_log_info("[BufferedConnection] Stopping networking thread\n");
 		});
 	} else {
-		log_err("[BufferedConnection] Trying to connect to %s:%u failed!", host.ip.to_string().c_str(),
-	         host.port);
+		log_err("[BufferedConnection] Trying to connect to %s:%u failed!",
+		        host.ip.to_string().c_str(), host.port);
 		socket_.close();
 		assert(!is_connected());
 	}
@@ -348,7 +348,7 @@ void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
 	verb_log_info("[BufferedConnection] Connection to %s.",
-	         socket_.remote_endpoint().address().to_string().c_str());
+	              socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
 

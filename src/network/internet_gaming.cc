@@ -453,7 +453,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			// client output and metaserver logs.
 			char time_str[kTimeFormatLength];
 			format_time(time_str, kTimeFormatLength);
-			verb_log_info("InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(), time_str);
+			verb_log_info(
+			   "InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(), time_str);
 			return;
 
 		} else if (cmd == IGPCMD_PWD_OK) {
@@ -649,7 +650,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				NetAddress::parse_ip(&gameips_.second, packet.string(), kInternetRelayPort);
 			}
 			verb_log_info("InternetGaming: Received ips of the relay to host: %s %s.",
-			         gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
+			              gameips_.first.ip.to_string().c_str(),
+			              gameips_.second.ip.to_string().c_str());
 			state_ = IN_GAME;
 		}
 
@@ -664,7 +666,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				NetAddress::parse_ip(&gameips_.second, packet.string(), kInternetRelayPort);
 			}
 			verb_log_info("InternetGaming: Received ips of the game to join: %s %s.",
-			         gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
+			              gameips_.first.ip.to_string().c_str(),
+			              gameips_.second.ip.to_string().c_str());
 		}
 
 		else if (cmd == IGPCMD_GAME_START) {

@@ -1940,7 +1940,7 @@ void GameHost::receive_client_time(uint32_t const number, const Time& time) {
 
 	if (d->waiting) {
 		verb_log_info("[Host]: Client %i reports time %i (networktime = %i) during hang", number,
-		         time.get(), d->committed_networktime.get());
+		              time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
 }
@@ -1966,7 +1966,7 @@ void GameHost::check_hung_clients() {
 			++nrdelayed;
 			if (delta > Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
 				verb_log_info("[Host]: Client %i (%s) hung", i,
-				         d->settings.users.at(d->clients.at(i).usernum).name.c_str());
+				              d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
 					d->clients.at(i).hung_since = time(nullptr);
@@ -2141,7 +2141,8 @@ void GameHost::check_sync_reports() {
 			log_err("[Host]: lost synchronization with client %u at time %i!\n"
 			        "I have:     %s\n"
 			        "Client has: %s\n",
-			        i, d->syncreport_time.get(), d->syncreport.str().c_str(), client.syncreport.str().c_str());
+			        i, d->syncreport_time.get(), d->syncreport.str().c_str(),
+			        client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
 			// Create syncstream excerpt and add faulting player number
@@ -2371,7 +2372,8 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u", client_num,
-	         client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time.get());
+	              client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(),
+	              time.get());
 	receive_client_time(client_num, time);
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
@@ -2705,5 +2707,5 @@ void GameHost::report_result(uint8_t p_nr,
 	}
 
 	verb_log_info("GameHost::report_result(%d, %u, %s)", player->player_number(),
-	         static_cast<uint8_t>(result), info.c_str());
+	              static_cast<uint8_t>(result), info.c_str());
 }

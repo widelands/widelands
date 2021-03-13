@@ -738,7 +738,7 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.savegame = packet.unsigned_8();
 	d->settings.scenario = packet.unsigned_8();
 	verb_log_info("[Client] SETTING_MAP '%s' '%s'", d->settings.mapname.c_str(),
-	         d->settings.mapfilename.c_str());
+	              d->settings.mapfilename.c_str());
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);

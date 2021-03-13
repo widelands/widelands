@@ -45,7 +45,7 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
 		verb_log_info("Resolved network name '%s:%u' to %s", hostname.c_str(), port,
-		         addr->ip.to_string().c_str());
+		              addr->ip.to_string().c_str());
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
