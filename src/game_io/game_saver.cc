@@ -42,7 +42,7 @@ GameSaver::GameSaver(FileSystem& fs, Game& game) : fs_(fs), game_(game) {
  * The core save function
  */
 void GameSaver::save() {
-	ScopedTimer timer("GameSaver::save() took %ums");
+	ScopedTimer timer("GameSaver::save() took %ums", true);
 
 	// We might not have a loader UI during emergency saves, so we don't assert that we have one.
 	// We also don't want it for game objectives.
@@ -55,53 +55,53 @@ void GameSaver::save() {
 
 	fs_.ensure_directory_exists("binary");
 
-	log_info_time(game_.get_gametime(), "Game: Writing Preload Data ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Preload Data ... ");
 	set_progress_message(_("Elemental data"), 1);
 	{
 		GamePreloadPacket p;
 		p.write(fs_, game_, nullptr);
 	}
 
-	log_info_time(game_.get_gametime(), "Game: Writing Game Class Data ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.write(fs_, game_, nullptr);
 	}
 
-	log_info_time(game_.get_gametime(), "Game: Writing Player Info ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Player Info ... ");
 	{
 		GamePlayerInfoPacket p;
 		p.write(fs_, game_, nullptr);
 	}
 
-	log_info_time(game_.get_gametime(), "Game: Writing Map Data!\n");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Map Data!\n");
 	GameMapPacket map_packet;
 	map_packet.write(fs_, game_, nullptr);
 
 	MapObjectSaver* const mos = map_packet.get_map_object_saver();
 
-	log_info_time(game_.get_gametime(), "Game: Writing Player Economies Info ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.write(fs_, game_, mos);
 	}
 
-	log_info_time(game_.get_gametime(), "Game: Writing ai persistent data ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
 	}
 
-	log_info_time(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
 	}
 
-	log_info_time(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
 	set_progress_message(_("Interactive player"), 5);
 	{
 		GameInteractivePlayerPacket p;

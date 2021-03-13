@@ -217,7 +217,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		// Lazy initialization of Descriptions. We need to create the pointer to the
 		// descriptions immediately though, because the lua scripts need to have access
 		// to descriptions through this method already.
-		ScopedTimer timer("Registering the descriptions took %ums");
+		ScopedTimer timer("Registering the descriptions took %ums", true);
 		assert(lua_);
 		descriptions_.reset(new Descriptions(lua_.get(), enabled_addons_));
 	}
@@ -314,7 +314,7 @@ void EditorGameBase::postload_addons() {
 			const std::string script(kAddOnDir + FileSystem::file_separator() + info->internal_name +
 			                         FileSystem::file_separator() + "postload.lua");
 			if (g_fs->file_exists(script)) {
-				log_info("Running postload script for add-on %s", info->internal_name.c_str());
+				verb_log_info("Running postload script for add-on %s", info->internal_name.c_str());
 				lua_->run_script(script);
 			}
 		}

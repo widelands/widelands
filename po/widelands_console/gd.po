@@ -6,13 +6,13 @@
 # GunChleoc, 2016-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2016
-# GunChleoc, 2013-2016,2018,2020
+# GunChleoc, 2013-2016,2018,2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-04 18:48+0000\n"
-"PO-Revision-Date: 2021-02-28 12:33+0000\n"
+"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"PO-Revision-Date: 2021-03-11 09:57+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Cleachdadh: widelands <roghainn0>=<luach0> ... <roghainnN>=<luachN>"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "       widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "            widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -61,11 +61,11 @@ msgstr " --homedir=AINM-PASGAIN    Cleachd am pasgan sònraichte airson nam faid
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
-msgstr "                           'S e ~/.widelands a th' ann a ghnàth"
+msgstr "                           ’S e ~/.widelands a th’ ann a ghnàth"
 
 #: ../../src/wlapplication_messages.cc:57
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr "                           'S e %USERPROFILE%\\.widelands a th' ann a ghnàth"
+msgstr "                           ’S e %USERPROFILE%\\.widelands a th’ ann a ghnàth"
 
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
@@ -113,7 +113,7 @@ msgstr " --autosave=[...]          Sàbhail gu fèin-obrachail gach n mionaid"
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...]  Cleachd an uiread de dh'fhaidhlichean seo airson\n                           fèin-sàbhaladh car mu char"
+msgstr " --rolling_autosave=[...]  Cleachd an uiread de dh’fhaidhlichean seo airson\n                           fèin-sàbhaladh car mu char"
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
@@ -132,7 +132,7 @@ msgid ""
 " --addon_server=[...]\n"
 "                      Connect to a different github repository\n"
 "                      and branch from the add-ons manager."
-msgstr ""
+msgstr " --addon_server=[...]\n                           Ceangail ri ionad-tasgaidh github agus\n                           meur eile o mhanaidsear nan tuilleadan."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
@@ -152,14 +152,14 @@ msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr " --editor                  Tòisichidh seo an deasaiche Widelands sa bhad.\n                           'S urrainn dhut =AINM-FAIDHLE a chur ris\n                           gus am mapa air a bheil AINM-FAIDHLE a luchdadh\n                           sa bhad san deasaiche."
+msgstr " --editor                  Tòisichidh seo an deasaiche Widelands sa bhad.\n                           ’S urrainn dhut =AINM-FAIDHLE a chur ris\n                           gus am mapa air a bheil AINM-FAIDHLE a luchdadh\n                           sa bhad san deasaiche."
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr " --ai_training             Cuiridh seo an comas modh trèanaidh na h-inntinne\n                           fuadain. Faic\n                           https://www.widelands.org/wiki/Ai%20Training/\n                           airson mìneachadh slàn air mar a dh'obraicheas\n                           loidsig trèanaidh na h-IF."
+msgstr " --ai_training             Cuiridh seo an comas modh trèanaidh na h-inntinne\n                           fuadain. Faic\n                           https://www.widelands.org/wiki/Ai%20Training/\n                           airson mìneachadh slàn air mar a dh’obraicheas\n                           loidsig trèanaidh na h-IF."
 
 #: ../../src/wlapplication_messages.cc:111
 msgid ""
@@ -167,7 +167,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr " --auto_speed              Ann an geamannan ioma-chluicheadair a-mhàin,\n                           bidh seo a' cur gleus air luathas a' gheama\n                           gu fèin-obrachail a-rèir nam FPS. Tha seo\n                           feumail nuair a chleachdas tu\n                           --ai_training."
+msgstr " --auto_speed              Ann an geamannan ioma-chluicheadair a-mhàin,\n                           bidh seo a’ cur gleus air luathas a’ gheama\n                           gu fèin-obrachail a-rèir nam FPS. Tha seo\n                           feumail nuair a chleachdas tu\n                           --ai_training."
 
 #: ../../src/wlapplication_messages.cc:116
 msgid ""
@@ -175,7 +175,7 @@ msgid ""
 "                      Directly create a new singleplayer game\n"
 "                      configured in the given file. An example can\n"
 "                      be found in `data/templates/new_game_template`."
-msgstr ""
+msgstr " --new_game_from_template=AINM-FAIDHLE\n                           Cruthaich geama aon-chluicheadair ùr gu\n                           dìreach on fhaidhle. Gheibh thu ball-\n                           eisimpleir ann an\n                           `data/templates/new_game_template`."
 
 #: ../../src/wlapplication_messages.cc:122
 msgid ""
@@ -189,7 +189,7 @@ msgstr " --loadgame=AINM-FAIDHLE   Luchdaichidh seo an geama air a shàbhaladh\n
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr ""
+msgstr " --replay=AINM-FAIDHLE     Luchdaichidh seo ath-chluiche o AINM-FAIDHLE gu dìreach."
 
 #: ../../src/wlapplication_messages.cc:127
 msgid ""
@@ -222,7 +222,7 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr " --fullscreen=[true|false]\n                           Co-dhiù an dèid gus nach dèid an sgrìn slàn a\n                           chleachdadh airson a' gheama."
+msgstr " --fullscreen=[true|false]\n                           Co-dhiù an dèid gus nach dèid an sgrìn slàn a\n                           chleachdadh airson a’ gheama."
 
 #: ../../src/wlapplication_messages.cc:148
 msgid " --xres=[...]         Width of the window in pixel."
@@ -284,7 +284,7 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                           Na gluais uinneag gu oir panail ma bhios i\n                           tar-chòmdaichte leis a' phanail."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                           Na gluais uinneag gu oir panail ma bhios i\n                           tar-chòmdaichte leis a’ phanail."
 
 #: ../../src/wlapplication_messages.cc:183
 msgid " --verbose            Enable verbose debug messages"
@@ -292,7 +292,7 @@ msgstr " --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathr
 
 #: ../../src/wlapplication_messages.cc:184
 msgid " --help               Show this help"
-msgstr " --help                    Seall a' chobhair seo"
+msgstr " --help                    Seall a’ chobhair seo"
 
 #: ../../src/wlapplication_messages.cc:186
 msgid ""
@@ -300,7 +300,7 @@ msgid ""
 "                      Directly loads the given savegame or replay. Useful for\n"
 "                      .wgf/.wrpl file extension association. Does not work with\n"
 "                      other options. Also see --loadgame/--replay."
-msgstr ""
+msgstr " <save.wgf>/<replay.wrpl> \n                           Luchdaidh seo geama air a shàbhaladh no ath-chluiche\n                           gu dìreach. Feumail airson na leudachain faidhle\n                           .wgf/.wrpl iomruineadh. Chan obraich seo còmhla ri\n                           roghainnean eile. Faic --loadgame/--replay cuideachd."
 
 #: ../../src/wlapplication_messages.cc:192
 msgid ""
@@ -308,4 +308,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "A bheil thu airson innse dhuinn mu bhuga? No beachd a chur thugainn? Thoir sùil air làrach-lìn a' phròiseict:\n        https://www.widelands.org/\n\nTha sinn an dòchas gun còrd an geama riut!"
+msgstr "A bheil thu airson innse dhuinn mu bhuga? No beachd a chur thugainn? Thoir sùil air làrach-lìn a’ phròiseict:\n        https://www.widelands.org/\n\nTha sinn an dòchas gun còrd an geama riut!"
