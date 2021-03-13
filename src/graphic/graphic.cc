@@ -87,7 +87,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log_dbg("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_info("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
 	uint32_t window_flags = SDL_WINDOW_OPENGL;
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;
@@ -118,27 +118,27 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	/* Information about the video capabilities. */
 	const char* drv = SDL_GetCurrentVideoDriver();
-	log_dbg("**** GRAPHICS REPORT ****\n");
+	log_info("**** GRAPHICS REPORT ****\n");
 #ifdef WL_USE_GLVND
-	log_dbg("VIDEO DRIVER GLVND %s\n", drv ? drv : "NONE");
+	log_info("VIDEO DRIVER GLVND %s\n", drv ? drv : "NONE");
 #else
-	log_dbg("VIDEO DRIVER %s\n", drv ? drv : "NONE");
+	log_info("VIDEO DRIVER %s\n", drv ? drv : "NONE");
 #endif
 	SDL_DisplayMode disp_mode;
 	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
 		if (SDL_GetCurrentDisplayMode(i, &disp_mode) == 0) {
-			log_dbg("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h,
-			        disp_mode.refresh_rate, SDL_GetPixelFormatName(disp_mode.format));
+			log_info("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h,
+			         disp_mode.refresh_rate, SDL_GetPixelFormatName(disp_mode.format));
 		} else {
 			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
-	log_dbg("**** END GRAPHICS REPORT ****\n");
+	verb_log_info("**** END GRAPHICS REPORT ****\n");
 	rebuild_texture_atlas();
 }
 
 void Graphic::rebuild_texture_atlas() {
-	log_info("Rebuilding texture atlas");
+	verb_log_info("Rebuilding texture atlas");
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	g_image_cache->fill_with_texture_atlases(
