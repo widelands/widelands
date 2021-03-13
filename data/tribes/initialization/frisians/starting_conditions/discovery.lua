@@ -13,6 +13,7 @@ init = {
    tooltip = _"Start the game with three ships on the ocean and only a handful of supplies",
    map_tags = {"seafaring"},
    incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+   uses_map_starting_position = false,
 
    func = function(player, shared_in_start)
 

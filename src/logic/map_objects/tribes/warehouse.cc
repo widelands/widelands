@@ -548,9 +548,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 
 		next_stock_remove_act_ = schedule_act(*game, Duration(4000));
 
-		log_info_time(egbase.get_gametime(), "Message: adding %s for player %i at (%d, %d)\n",
-		              to_string(descr().type()).c_str(), player->player_number(), position_.x,
-		              position_.y);
+		verb_log_info_time(egbase.get_gametime(), "Message: adding %s for player %i at (%d, %d)\n",
+		                   to_string(descr().type()).c_str(), player->player_number(), position_.x,
+		                   position_.y);
 
 		if (descr().get_isport()) {
 			send_message(*game, Message::Type::kSeafaring, descr().descname(), descr().icon_filename(),
@@ -607,7 +607,7 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 
 	std::vector<Coords> dock = egbase.map().find_portdock(get_position(), false);
 	if (dock.empty()) {
-		log_warn_time(
+		verb_log_warn_time(
 		   egbase.get_gametime(),
 		   "No suitable portdock space around %3dx%3d found! Attempting to force the portdock...\n",
 		   get_position().x, get_position().y);
@@ -624,8 +624,8 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 		Field& field = egbase.map()[dock.back()];
 
 		if (field.get_owned_by() != owner().player_number()) {
-			log_info_time(egbase.get_gametime(), "Conquering territory at %3dx%3d for portdock\n",
-			              dock.back().x, dock.back().y);
+			verb_log_info_time(egbase.get_gametime(), "Conquering territory at %3dx%3d for portdock\n",
+			                   dock.back().x, dock.back().y);
 			egbase.conquer_area(
 			   PlayerArea<Area<FCoords>>(
 			      owner().player_number(), Area<FCoords>(egbase.map().get_fcoords(dock.back()), 1)),
@@ -633,8 +633,9 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 		}
 
 		if (field.get_immovable()) {
-			log_info_time(egbase.get_gametime(), "Clearing immovable '%s' at %3dx%3d for portdock\n",
-			              field.get_immovable()->descr().name().c_str(), dock.back().x, dock.back().y);
+			verb_log_info_time(
+			   egbase.get_gametime(), "Clearing immovable '%s' at %3dx%3d for portdock\n",
+			   field.get_immovable()->descr().name().c_str(), dock.back().x, dock.back().y);
 			// currently only waterways and portdocks can be built on water
 			assert(field.get_immovable()->descr().type() == MapObjectType::WATERWAY);
 			if (upcast(Game, game, &egbase)) {

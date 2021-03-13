@@ -37,18 +37,21 @@ struct TribeBasicInfo {
 		               const std::string& init_descname,
 		               const std::string& init_tooltip,
 		               const std::set<std::string>& tags,
-		               const std::set<std::string>& incompatible_wc)
+		               const std::set<std::string>& incompatible_wc,
+		               bool s)
 		   : script(init_script),
 		     descname(init_descname),
 		     tooltip(init_tooltip),
 		     required_map_tags(tags),
-		     incompatible_win_conditions(incompatible_wc) {
+		     incompatible_win_conditions(incompatible_wc),
+		     uses_map_starting_position(s) {
 		}
 		std::string script;
 		std::string descname;
 		std::string tooltip;
 		std::set<std::string> required_map_tags;
 		std::set<std::string> incompatible_win_conditions;
+		bool uses_map_starting_position;
 	};
 
 	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);
