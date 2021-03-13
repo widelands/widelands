@@ -37,9 +37,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	uint32_t tested_fields = 0;
 
 	// protocol out
-	log_dbg_time(game().get_gametime(),
-	             "%d: (%3dx%3d) expedition spot scoring, colony_scan_area == %u\n", pn,
-	             candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
+	verb_log_dbg_time(game().get_gametime(),
+	                  "%d: (%3dx%3d) expedition spot scoring, colony_scan_area == %u\n", pn,
+	                  candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
 
 	// abort if any player - including self - is too near to the spot (radius 10)
 	if (other_player_accessible(Widelands::Player::AiPersistentState::kColonyScanMinArea,
@@ -149,7 +149,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 			// In very rare situation, we might have non-seafaring map but the shipyard is working
 			if (!map_allows_seafaring_ && !ps_obs.site->is_stopped()) {
-				log_dbg_time(
+				verb_log_dbg_time(
 				   game().get_gametime(),
 				   "  %1d: we have working shipyard in a non seafaring ecoomy, stopping it...\n",
 				   player_number());
@@ -244,10 +244,10 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 			if (wh_obs.bo->is(BuildingAttribute::kPort)) {
-				log_dbg_time(game().get_gametime(),
-				             "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
-				             player_number(), wh_obs.site->get_position().x,
-				             wh_obs.site->get_position().y);
+				verb_log_dbg_time(game().get_gametime(),
+				                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
+				                  player_number(), wh_obs.site->get_position().x,
+				                  wh_obs.site->get_position().y);
 				game().send_player_start_or_cancel_expedition(*wh_obs.site);
 				return true;
 			}
@@ -299,7 +299,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			    !so.waiting_for_command_) {
 				if (gametime - so.last_command_time > Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
-					log_warn_time(
+					verb_log_warn_time(
 					   gametime,
 					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something wrong "
 					   "here?...\n",
@@ -382,7 +382,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime)
 	// and this one is not the one listed in expedition_ship_ variable, so we quit expedition of this
 	// one
 	if (expedition_ship_ != so.ship->serial() && expedition_ship_ != kNoShip) {
-		log_warn_time(
+		verb_log_warn_time(
 		   gametime,
 		   "%d: WARNING: ship %s in expedition, but we have more then one in expedition mode and "
 		   "this is not supported, cancelling the expedition\n",
@@ -412,13 +412,13 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime)
 		persistent_data->colony_scan_area = Widelands::Player::AiPersistentState::kColonyScanMinArea;
 		persistent_data->no_more_expeditions = true;
 		game().send_player_cancel_expedition_ship(*so.ship);
-		log_dbg_time(gametime, "%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
-		             so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		             so.ship->get_position().y);
+		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y);
 
 		// In case there is no port left to get back to, continue exploring
 		if (!so.ship->get_fleet() || !so.ship->get_fleet()->has_ports()) {
-			log_dbg_time(
+			verb_log_dbg_time(
 			   gametime, "%d: %s at %3dx%3d: END OF EXPEDITION without port, continue exploring\n", pn,
 			   so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
 			persistent_data->expedition_start_time = gametime;
@@ -466,7 +466,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 				expedition_ship_ = ship.serial();
 			} else {
 				// What? Another ship in expedition? AI is not able to manage two expedition ships...
-				log_warn_time(
+				verb_log_warn_time(
 				   game().get_gametime(),
 				   " %d: AI will not control ship %s, as there is already another one in expedition\n",
 				   player_number(), ship.get_shipname().c_str());
@@ -502,9 +502,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
-		log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-		             so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		             so.ship->get_position().y, spot_score);
+		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random
 		if (std::rand() % 8 < spot_score) {  // NOLINT
@@ -520,22 +520,22 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// 2. Go on with expedition
 	// 2a) Ship is first time here
 	if (first_time_here) {
-		log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
-		             so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		             so.ship->get_position().y);
+		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y);
 
 		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
 		// in this case we create a new direction at random, otherwise continue circle movement
 		if (!so.ship->is_exploring_island()) {
 			so.island_circ_direction = randomExploreDirection();
-			log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
-			             so.ship->get_shipname().c_str(),
-			             static_cast<uint32_t>(so.island_circ_direction));
+			verb_log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
+			                  so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		} else {
-			log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
-			             so.ship->get_shipname().c_str(),
-			             static_cast<uint32_t>(so.island_circ_direction));
+			verb_log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
+			                  so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		}
 
 		// send the ship to circle island
@@ -546,9 +546,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		if (!attempt_escape(so)) {  // return true if the ship was sent to open sea
 			// otherwise we continue circumnavigating the island
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-			log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n", pn,
-			             so.ship->get_shipname().c_str(),
-			             static_cast<uint32_t>(so.island_circ_direction));
+			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n",
+			                  pn, so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		}
 	}
 
@@ -617,9 +617,10 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
-		log_dbg_time(game().get_gametime(), "%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
-		             so.ship->get_shipname().c_str(),
-		             !new_teritory_directions.empty() ? "unexplored" : "free", direction);
+		verb_log_dbg_time(game().get_gametime(),
+		                  "%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
+		                  so.ship->get_shipname().c_str(),
+		                  !new_teritory_directions.empty() ? "unexplored" : "free", direction);
 		so.escape_mode = false;
 		return true;  // we were successful
 	}
