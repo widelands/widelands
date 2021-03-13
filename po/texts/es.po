@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-04 18:48+0000\n"
-"PO-Revision-Date: 2021-03-05 14:59+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"PO-Revision-Date: 2021-03-09 11:30+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -701,9 +701,10 @@ msgstr "¿Alguna otra pregunta? Nuestras PFs, la wiki y por supuesto nuestros fo
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""
-"Use the priority buttons in building windows to adjust delivery of a "
-"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Utiliza los botones de prioridad en la ventana de cada edificio para ajustar la entrega de una mercancia determinada. Si pulsas Ctrl mientras haces clic, todas las mercancías quedarán ajustadas simultáneamente."
+"Use the priority sliders in building windows to adjust delivery of a "
+"specific ware. Holding down Shift while clicking will adjust all wares at "
+"once."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -713,10 +714,9 @@ msgstr "Utiliza el menú 'configurar economía' para ajustar la cantidad previst
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘%1%’ for News to access the "
-"messages window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive "
-"messages."
-msgstr "Administra tus mensajes más eficientemente: presiona \"%1%\" para Nuevos para acceder a la ventan de mensajes, luego usa \"%2%\" para Ir A, y la tecla \"%3%\" para archivar mensajes."
+"Manage your messages more efficiently: press ‘%1%’ to access the messages "
+"window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
