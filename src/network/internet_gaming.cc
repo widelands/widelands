@@ -104,7 +104,7 @@ InternetGaming& InternetGaming::ref() {
 
 void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
-	log_info("InternetGaming: Connecting to the metaserver.\n");
+	verb_log_info("InternetGaming: Connecting to the metaserver.");
 	NetAddress addr;
 	if (NetAddress::resolve_to_v6(&addr, meta_, port_)) {
 		net = NetClient::connect(addr);
@@ -156,7 +156,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 
 	// If we are here, a connection was established and we can send our login package through the
 	// socket.
-	log_info("InternetGaming: Sending login request.\n");
+	verb_log_info("InternetGaming: Sending login request.");
 	SendPacket s;
 	s.string(IGPCMD_LOGIN);
 	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
@@ -213,7 +213,7 @@ bool InternetGaming::relogin() {
 		set_game_playing();
 	}
 
-	log_info("InternetGaming: Reconnected to metaserver\n");
+	verb_log_info("InternetGaming: Reconnected to metaserver");
 	format_and_add_chat("", "", true, _("Successfully reconnected to the metaserver!"));
 
 	return true;
@@ -232,7 +232,7 @@ void InternetGaming::logout(const std::string& msgcode) {
 	}
 
 	const std::string& msg = InternetGamingMessages::get_message(msgcode);
-	log_info("InternetGaming: logout(%s)\n", msg.c_str());
+	verb_log_info("InternetGaming: logout(%s)", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 
 	reset();
@@ -251,7 +251,7 @@ bool InternetGaming::check_password(const std::string& nick,
 	// Has to be set for the password challenge later on
 	authenticator_ = pwd;
 
-	log_info("InternetGaming: Verifying password.\n");
+	verb_log_info("InternetGaming: Verifying password.");
 	{
 		SendPacket s;
 		s.string(IGPCMD_CHECK_PWD);
@@ -453,13 +453,14 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			// client output and metaserver logs.
 			char time_str[kTimeFormatLength];
 			format_time(time_str, kTimeFormatLength);
-			log_info("InternetGaming: Client %s logged in at UTC %s\n", clientname_.c_str(), time_str);
+			verb_log_info(
+			   "InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(), time_str);
 			return;
 
 		} else if (cmd == IGPCMD_PWD_OK) {
 			char time_str[kTimeFormatLength];
 			format_time(time_str, kTimeFormatLength);
-			log_info("InternetGaming: Password check successful at UTC %s\n", time_str);
+			verb_log_info("InternetGaming: Password check successful at UTC %s", time_str);
 			state_ = LOBBY;
 			return;
 
@@ -505,7 +506,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
 			time_offset_ = boost::lexical_cast<int>(packet.string()) - time(nullptr);
-			log_info("InternetGaming: Server time offset is %d second(s).\n", time_offset_);
+			verb_log_info("InternetGaming: Server time offset is %d second(s).", time_offset_);
 			std::string temp =
 			   (boost::format(ngettext("Server time offset is %d second.",
 			                           "Server time offset is %d seconds.", time_offset_)) %
@@ -533,7 +534,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_GAMES_UPDATE) {
 			// Client received a note, that the list of games was changed
-			log_info("InternetGaming: Game update on metaserver.\n");
+			verb_log_info("InternetGaming: Game update on metaserver.");
 			gameupdateonmetaserver_ = true;
 		}
 
@@ -542,7 +543,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetGame> old = gamelist_;
 			gamelist_.clear();
-			log_info("InternetGaming: Received a game list update with %u items.\n", number);
+			verb_log_info("InternetGaming: Received a game list update with %u items.", number);
 			for (uint8_t i = 0; i < number; ++i) {
 				InternetGame* ing = new InternetGame();
 				ing->name = packet.string();
@@ -583,7 +584,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_CLIENTS_UPDATE) {
 			// Client received a note, that the list of clients was changed
-			log_info("InternetGaming: Client update on metaserver.\n");
+			verb_log_info("InternetGaming: Client update on metaserver.");
 			clientupdateonmetaserver_ = true;
 		}
 
@@ -593,7 +594,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::vector<InternetClient> old = clientlist_;
 			// Push admins/registred/IRC users to a temporary list and add them back later
 			clientlist_.clear();
-			log_info("InternetGaming: Received a client list update with %u items.\n", number);
+			verb_log_info("InternetGaming: Received a client list update with %u items.", number);
 			InternetClient inc;
 			for (uint8_t i = 0; i < number; ++i) {
 				inc.name = packet.string();
@@ -648,8 +649,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			if (packet.string() == bool2str(true)) {
 				NetAddress::parse_ip(&gameips_.second, packet.string(), kInternetRelayPort);
 			}
-			log_info("InternetGaming: Received ips of the relay to host: %s %s.\n",
-			         gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
+			verb_log_info("InternetGaming: Received ips of the relay to host: %s %s.",
+			              gameips_.first.ip.to_string().c_str(),
+			              gameips_.second.ip.to_string().c_str());
 			state_ = IN_GAME;
 		}
 
@@ -663,8 +665,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			if (packet.string() == bool2str(true)) {
 				NetAddress::parse_ip(&gameips_.second, packet.string(), kInternetRelayPort);
 			}
-			log_info("InternetGaming: Received ips of the game to join: %s %s.\n",
-			         gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
+			verb_log_info("InternetGaming: Received ips of the game to join: %s %s.",
+			              gameips_.first.ip.to_string().c_str(),
+			              gameips_.second.ip.to_string().c_str());
 		}
 
 		else if (cmd == IGPCMD_GAME_START) {
@@ -781,7 +784,7 @@ void InternetGaming::join_game(const std::string& gamename) {
 	s.string(gamename);
 	net->send(s);
 	gamename_ = gamename;
-	log_info("InternetGaming: Client tries to join a game with the name %s\n", gamename_.c_str());
+	verb_log_info("InternetGaming: Client tries to join a game with the name %s", gamename_.c_str());
 	state_ = IN_GAME;
 
 	// From now on we wait for a reply from the metaserver
@@ -802,7 +805,7 @@ void InternetGaming::open_game() {
 	s.string(IGPCMD_GAME_OPEN);
 	s.string(gamename_);
 	net->send(s);
-	log_info("InternetGaming: Client opened a game with the name %s.\n", gamename_.c_str());
+	verb_log_info("InternetGaming: Client opened a game with the name %s.", gamename_.c_str());
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_OPEN;
@@ -818,7 +821,7 @@ void InternetGaming::set_game_playing() {
 	SendPacket s;
 	s.string(IGPCMD_GAME_START);
 	net->send(s);
-	log_info("InternetGaming: Client announced the start of the game %s.\n", gamename_.c_str());
+	verb_log_info("InternetGaming: Client announced the start of the game %s.", gamename_.c_str());
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_START;
@@ -840,8 +843,8 @@ void InternetGaming::set_game_done() {
 	gameips_ = std::make_pair(NetAddress(), NetAddress());
 	state_ = LOBBY;
 
-	log_info(
-	   "InternetGaming: Client announced the disconnect from the game %s.\n", gamename_.c_str());
+	verb_log_info(
+	   "InternetGaming: Client announced the disconnect from the game %s.", gamename_.c_str());
 }
 
 /// \returns whether the local gamelist was updated

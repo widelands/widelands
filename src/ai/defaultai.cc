@@ -292,7 +292,7 @@ void DefaultAI::think() {
 
 	// And printing it now and resetting counter
 	if (scheduler_delay_counter_ > 10) {
-		log_info_time(gametime, " %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
+		log_warn_time(gametime, " %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
 		              player_number(), static_cast<int32_t>(delay_time / 1000));
 		scheduler_delay_counter_ = 0;
 	}
@@ -491,7 +491,7 @@ void DefaultAI::think() {
 				}
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
-					log_info_time(
+					verb_log_info_time(
 					   gametime,
 					   "AI %2d: Basic economy not achieved, %" PRIuS " building(s) missing, f.e.: %s\n",
 					   player_number(), persistent_data->remaining_basic_buildings.size(),
@@ -499,8 +499,8 @@ void DefaultAI::think() {
 					      .name);
 				}
 				if (!enemy_warehouses.empty()) {
-					log_info_time(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
-					              enemy_warehouses.size());
+					verb_log_info_time(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
+					                   enemy_warehouses.size());
 				}
 				management_data.review(
 				   gametime, player_number(), player_statistics.get_player_land(player_number()),
@@ -543,11 +543,11 @@ void DefaultAI::late_initialization() {
 	}
 	const Time& gametime = game().get_gametime();
 
-	log_info_time(gametime, "ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
-	              static_cast<unsigned int>(type_),
-	              (ai_training_mode_) ? ", in ai training mode" : "");
+	verb_log_info_time(gametime, "ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
+	                   static_cast<unsigned int>(type_),
+	                   (ai_training_mode_) ? ", in ai training mode" : "");
 	if (player_->team_number() > 0) {
-		log_info_time(gametime, "    ... member of team %d\n", player_->team_number());
+		verb_log_info_time(gametime, "    ... member of team %d\n", player_->team_number());
 	}
 
 	wares.resize(game().descriptions().nr_wares());
@@ -597,7 +597,7 @@ void DefaultAI::late_initialization() {
 		}
 
 		if (ai_training_mode_) {
-			log_dbg_time(
+			verb_log_dbg_time(
 			   gametime, "AI %2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
 			management_data.copy_persistent_to_local();
@@ -610,11 +610,11 @@ void DefaultAI::late_initialization() {
 
 		management_data.test_consistency(true);
 
-		log_info_time(gametime, " AI %2d: %" PRIuS " basic buildings in savegame file. %s\n",
-		              player_number(), persistent_data->remaining_basic_buildings.size(),
-		              (create_basic_buildings_list) ?
-		                 "New list will be recreated though (kAITrainingMode is true)" :
-		                 "");
+		verb_log_info_time(gametime, " AI %2d: %" PRIuS " basic buildings in savegame file. %s\n",
+		                   player_number(), persistent_data->remaining_basic_buildings.size(),
+		                   (create_basic_buildings_list) ?
+		                      "New list will be recreated though (kAITrainingMode is true)" :
+		                      "");
 	}
 
 	// Even if we have basic buildings from savefile, we ignore them and recreate them based
@@ -677,7 +677,7 @@ void DefaultAI::late_initialization() {
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.needs_water()) {
-			log_dbg_time(gametime, "AI %d detected coast building: %s", player_number(), bo.name);
+			verb_log_dbg_time(gametime, "AI %d detected coast building: %s", player_number(), bo.name);
 			bo.set_is(BuildingAttribute::kNeedsCoast);
 		}
 		if (bh.is_space_consumer()) {
@@ -743,10 +743,10 @@ void DefaultAI::late_initialization() {
 
 			// If this is a producer, does it act also as supporter?
 			if (!bo.ware_outputs.empty() && !prod.supported_productionsites().empty()) {
-				log_dbg_time(
+				verb_log_dbg_time(
 				   gametime, "AI %d detected supporting producer: %s", player_number(), bo.name);
 				for (const auto& supp : prod.supported_productionsites()) {
-					log_dbg_time(gametime, "  -> %s", supp.c_str());
+					verb_log_dbg_time(gametime, "  -> %s", supp.c_str());
 				}
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
@@ -875,14 +875,16 @@ void DefaultAI::late_initialization() {
 					// TODO(GunChleoc): We should lose the hard distinction between quarry and
 					// lumberjack, so that a building can be both
 					if (prod.supported_by_productionsites().empty()) {
-						log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
+						verb_log_dbg_time(
+						   gametime, "AI %d detected quarry: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
 						for (const auto& attribute : prod.collected_attributes()) {
 							buildings_immovable_attributes_[attribute.second].insert(
 							   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
 						}
 					} else {
-						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
+						verb_log_dbg_time(
+						   gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
 						for (const auto& attribute : prod.collected_attributes()) {
 							buildings_immovable_attributes_[attribute.second].insert(
@@ -892,7 +894,7 @@ void DefaultAI::late_initialization() {
 					}
 				}
 				if (produces_non_construction_material) {
-					log_dbg_time(
+					verb_log_dbg_time(
 					   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
 					bo.set_is(BuildingAttribute::kNeedsBerry);
 					for (const auto& attribute : prod.collected_attributes()) {
@@ -904,13 +906,13 @@ void DefaultAI::late_initialization() {
 
 			// here we identify hunters
 			if (!prod.collected_bobs().empty()) {
-				log_dbg_time(gametime, "AI %d detected hunter: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %d detected hunter: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kHunter);
 			}
 
 			// fishers
 			if (bh.needs_water() && prod.collected_resources().count("resource_fish") == 1) {
-				log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
@@ -919,7 +921,7 @@ void DefaultAI::late_initialization() {
 				for (Widelands::DescriptionIndex ware_index : prod.output_ware_types()) {
 					if (tribe_->get_ware_descr(ware_index)->name() == "water" &&
 					    prod.collected_resources().count("resource_water") == 1) {
-						log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
+						verb_log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kWell);
 					}
 				}
@@ -927,7 +929,7 @@ void DefaultAI::late_initialization() {
 
 			bo.requires_supporters = bh.requires_supporters();
 			if (bo.requires_supporters) {
-				log_dbg_time(
+				verb_log_dbg_time(
 				   gametime, "AI %d: %s strictly requires supporters\n", player_number(), bo.name);
 			}
 			continue;
@@ -999,8 +1001,8 @@ void DefaultAI::late_initialization() {
 		for (const std::string& candidate : prodsite->supported_productionsites()) {
 			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
 				if (lumberjack->name() == candidate) {
-					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name,
-					             lumberjack->name().c_str());
+					verb_log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(),
+					                  bo.name, lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
 					for (const auto& attribute : prodsite->created_attributes()) {
 						buildings_immovable_attributes_[attribute.second].insert(
@@ -1178,11 +1180,12 @@ void DefaultAI::late_initialization() {
 	// printing identified basic buildings if we are in the basic economy mode
 	basic_economy_established = persistent_data->remaining_basic_buildings.empty();
 	if (!basic_economy_established) {
-		log_dbg_time(gametime, "%2d: Initializing in the basic economy mode, required buildings:\n",
-		             player_number());
+		verb_log_dbg_time(gametime,
+		                  "%2d: Initializing in the basic economy mode, required buildings:\n",
+		                  player_number());
 		for (auto bb : persistent_data->remaining_basic_buildings) {
-			log_dbg_time(gametime, "   %3d / %-28s- target %d\n", bb.first,
-			             get_building_observer(bb.first).name, bb.second);
+			verb_log_dbg_time(gametime, "   %3d / %-28s- target %d\n", bb.first,
+			                  get_building_observer(bb.first).name, bb.second);
 		}
 	}
 
@@ -1203,9 +1206,10 @@ void DefaultAI::late_initialization() {
 	   kExpeditionMinDuration +
 	   Duration(static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration).get() /
 	            scope);
-	log_dbg_time(gametime, " %d: expedition max duration = %u (%u minutes), map area root: %u\n",
-	             player_number(), expedition_max_duration.get() / 1000,
-	             expedition_max_duration.get() / (60 * 1000), map_area_root);
+	verb_log_dbg_time(gametime,
+	                  " %d: expedition max duration = %u (%u minutes), map area root: %u\n",
+	                  player_number(), expedition_max_duration.get() / 1000,
+	                  expedition_max_duration.get() / (60 * 1000), map_area_root);
 	assert(expedition_max_duration >= kExpeditionMinDuration);
 	assert(expedition_max_duration <= kExpeditionMaxDuration);
 
@@ -2146,12 +2150,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
-			log_dbg_time(
+			verb_log_dbg_time(
 			   gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
 			for (int32_t part : score_parts) {
-				log_dbg_time(gametime, "%d, ", part);
+				verb_log_dbg_time(gametime, "%d, ", part);
 			}
-			log_dbg_time(gametime, "\n");
 		}
 	}
 
@@ -2382,20 +2385,20 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	// Do we have basic economy established? Informing that we just left the basic economy mode.
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
-		log_info_time(gametime, "AI %2d: Player has achieved the basic economy at %s\n",
-		              player_number(), gamestring_with_leading_zeros(gametime.get()));
+		verb_log_info_time(gametime, "AI %2d: Player has achieved the basic economy at %s\n",
+		                   player_number(), gamestring_with_leading_zeros(gametime.get()));
 		basic_economy_established = true;
 		assert(persistent_data->remaining_basic_buildings.empty());
 	}
 
 	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) &&
 	    management_data.f_neuron_pool[17].get_position(0)) {
-		log_info_time(gametime,
-		              "AI %2d: Player has not all buildings for basic economy yet (%" PRIuS
-		              " missing), but enemy is "
-		              "nearby, so quitting the mode at %s\n",
-		              player_number(), persistent_data->remaining_basic_buildings.size(),
-		              gamestring_with_leading_zeros(gametime.get()));
+		verb_log_info_time(gametime,
+		                   "AI %2d: Player has not all buildings for basic economy yet (%" PRIuS
+		                   " missing), but enemy is "
+		                   "nearby, so quitting the mode at %s\n",
+		                   player_number(), persistent_data->remaining_basic_buildings.size(),
+		                   gamestring_with_leading_zeros(gametime.get()));
 		basic_economy_established = true;
 		// Zeroing following to preserve consistency
 		persistent_data->remaining_basic_buildings.clear();
@@ -3624,8 +3627,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	if (best_building->is(BuildingAttribute::kRecruitment)) {
-		log_info_time(gametime, "AI %2d: Building a recruitment site: %s\n", player_number(),
-		              best_building->name);
+		verb_log_info_time(gametime, "AI %2d: Building a recruitment site: %s\n", player_number(),
+		                   best_building->name);
 	}
 
 	if (!(best_building->type == BuildingObserver::Type::kMilitarysite)) {
@@ -4448,8 +4451,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
-		log_warn_time(gametime, "AI check_productionsites: Too many %s: %d, ai limit: %d\n",
-		              site.bo->name, site.bo->total_count(), site.bo->cnt_limit_by_aimode);
+		verb_log_warn_time(gametime, "AI check_productionsites: Too many %s: %d, ai limit: %d\n",
+		                   site.bo->name, site.bo->total_count(), site.bo->cnt_limit_by_aimode);
 	}
 
 	// first we werify if site is working yet (can be unoccupied since the start)
@@ -4522,9 +4525,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			}
 		}
 		if (resetting_wares) {
-			log_info_time(gametime,
-			              " %d: AI: input queues were reset to max for %s (game just loaded?)\n",
-			              player_number(), site.bo->name);
+			verb_log_info_time(gametime,
+			                   " %d: AI: input queues were reset to max for %s (game just loaded?)\n",
+			                   player_number(), site.bo->name);
 			return true;
 		}
 	}
@@ -4648,7 +4651,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
 		// If we somehow have more than one barracks we will dismantle current one
 		if (site.bo->total_count() > 1) {
-			log_info_time(
+			verb_log_info_time(
 			   gametime,
 			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
 			   "error; dismantling the barracks at %3dx%3d\n",
@@ -5510,8 +5513,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	if (purpose == PerfEvaluation::kForConstruction) {
 		// Inform if we are above ai type limit.
 		if (bo.total_count() > bo.cnt_limit_by_aimode) {
-			log_warn_time(gametime, "AI check_building_necessity: Too many %s: %d, ai limit: %d\n",
-			              bo.name, bo.total_count(), bo.cnt_limit_by_aimode);
+			verb_log_warn_time(gametime,
+			                   "AI check_building_necessity: Too many %s: %d, ai limit: %d\n", bo.name,
+			                   bo.total_count(), bo.cnt_limit_by_aimode);
 		}
 
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
@@ -6954,9 +6958,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land);
 			} catch (const std::out_of_range&) {
-				log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
-				              static_cast<unsigned int>(player_number()),
-				              static_cast<unsigned int>(genstats.size()));
+				verb_log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
+				                   static_cast<unsigned int>(player_number()),
+				                   static_cast<unsigned int>(genstats.size()));
 			}
 		} else {
 			// Well, under some circumstances it is possible we have stat for this player and he does
@@ -7129,19 +7133,14 @@ void DefaultAI::print_stats(const Time& gametime) {
 		}
 	}
 
-	if (false) {  // NOLINT
-		log_dbg_time(
-		   gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
-		   gamestring_with_leading_zeros(gametime.get()),
-		   static_cast<uint32_t>(productionsites.size()), static_cast<uint32_t>(militarysites.size()),
-		   static_cast<uint32_t>(mines_.size()),
-		   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
-	}
-	if (false) {  // NOLINT
-		log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
-		             "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
-		             "stock", "targ.");
-	}
+	verb_log_dbg_time(
+	   gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
+	   gamestring_with_leading_zeros(gametime.get()), static_cast<uint32_t>(productionsites.size()),
+	   static_cast<uint32_t>(militarysites.size()), static_cast<uint32_t>(mines_.size()),
+	   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
+	verb_log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
+	                  "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
+	                  "stock", "targ.");
 	for (BuildingObserver& bo : buildings_) {
 		if ((bo.total_count() > 0 || bo.new_building == BuildingNecessity::kNeeded ||
 		     bo.new_building == BuildingNecessity::kForced ||
@@ -7179,15 +7178,13 @@ void DefaultAI::print_stats(const Time& gametime) {
 				btype = "?";
 			}
 
-			if (true) {  // NOLINT
-				log_dbg_time(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
-				             btype.c_str(), bo.name,
-				             bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
-				                bo.unconnected_count,
-				             bo.current_stats, bo.cnt_under_construction, bo.unoccupied_count,
-				             bo.unconnected_count, needeness.c_str(), bo.max_needed_preciousness,
-				             bo.primary_priority, get_stocklevel(bo, gametime), bo.cnt_target);
-			}
+			verb_log_dbg_time(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
+			                  btype.c_str(), bo.name,
+			                  bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
+			                     bo.unconnected_count,
+			                  bo.current_stats, bo.cnt_under_construction, bo.unoccupied_count,
+			                  bo.unconnected_count, needeness.c_str(), bo.max_needed_preciousness,
+			                  bo.primary_priority, get_stocklevel(bo, gametime), bo.cnt_target);
 		}
 	}
 
@@ -7207,38 +7204,33 @@ void DefaultAI::print_stats(const Time& gametime) {
 		why += ", less then 2 mines";
 	}
 
-	if (false) {  // NOLINT
-		log_dbg_time(gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
-		             numof_psites_in_constr, mines_in_constr(),
-		             (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ?
-		                "NEW BUILDING STOP" :
-		                "",
-		             why.c_str());
-	}
+	verb_log_dbg_time(
+	   gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n", numof_psites_in_constr,
+	   mines_in_constr(),
+	   (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? "NEW BUILDING STOP" : "",
+	   why.c_str());
 
-	if (false) {  // NOLINT
-		log_dbg_time(gametime,
-		             "Least military score: %5d/%3d, msites in constr: %3d,"
-		             "soldier st: %2d, strength: %3d\n",
-		             persistent_data->least_military_score,
-		             persistent_data->ai_personality_mil_upper_limit, msites_in_constr(),
-		             static_cast<int8_t>(soldier_status_),
-		             player_statistics.get_modified_player_power(player_number()));
-	}
+	verb_log_dbg_time(gametime,
+	                  "Least military score: %5d/%3d, msites in constr: %3d,"
+	                  "soldier st: %2d, strength: %3d\n",
+	                  persistent_data->least_military_score,
+	                  persistent_data->ai_personality_mil_upper_limit, msites_in_constr(),
+	                  static_cast<int8_t>(soldier_status_),
+	                  player_statistics.get_modified_player_power(player_number()));
 }
 
 template <typename T>
 void DefaultAI::check_range(T value, T bottom_range, T upper_range, const char* value_name) {
 	if (value < bottom_range || value > upper_range) {
-		log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
-		             value_name, value);
+		verb_log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n",
+		                  player_number(), value_name, value);
 	}
 }
 
 template <typename T> void DefaultAI::check_range(T value, T upper_range, const char* value_name) {
 	if (value > upper_range) {
-		log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
-		             value_name, value.get());
+		verb_log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n",
+		                  player_number(), value_name, value.get());
 	}
 }
 
