@@ -145,7 +145,7 @@ void check_completeness(const std::string& name, size_t map_size, size_t last_en
 }  // namespace
 
 StyleManager::StyleManager() {
-	ScopedTimer timer("Style Manager: Reading style templates took %ums");
+	ScopedTimer timer("Style Manager: Reading style templates took %ums", true);
 
 	buttonstyles_.clear();
 	sliderstyles_.clear();

@@ -200,7 +200,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 		conn_.reset();
 		return;
 	}
-	log_info("[NetHostProxy] Handshaking with relay server done\n");
+	verb_log_info("[NetHostProxy] Handshaking with relay server done");
 }
 
 void NetHostProxy::receive_commands() {
