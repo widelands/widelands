@@ -2382,7 +2382,8 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
-	         client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time.get());
+	              client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(),
+	              time.get());
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
