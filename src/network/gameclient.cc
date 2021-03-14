@@ -959,7 +959,9 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			}
 			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
 			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags,
-			   incompatible_wc));
+			   incompatible_wc,
+			   !t->has_key("uses_map_starting_position") ||
+			      t->get_bool("uses_map_starting_position")));
 		}
 		d->settings.tribes.push_back(info);
 	}
