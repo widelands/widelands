@@ -28,6 +28,9 @@
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "map_io/map_loader.h"
+#include "ui_fsmenu/launch_game.h"
+
+namespace FsMenu {
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 #define RANDOM "random"
@@ -35,6 +38,7 @@ constexpr const char* const kClosed = "closed";
 constexpr const char* const kHuman_player = "human_player";
 
 SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
+                                                     LaunchGame& lg,
                                                      const std::string& name,
                                                      int32_t x,
                                                      int32_t y,
@@ -43,6 +47,7 @@ SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
                                                      GameSettingsProvider* const settings,
                                                      PlayerSlot id)
    : SinglePlayerDropdown<std::string>(parent,
+                                       lg,
                                        name,
                                        x,
                                        y,
@@ -134,15 +139,16 @@ void SinglePlayerTribeDropdown::selection_action() {
 }
 
 SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+                                                               LaunchGame& lg,
                                                                const std::string& name,
                                                                int32_t x,
                                                                int32_t y,
                                                                uint32_t w,
-
                                                                int button_dimension,
                                                                GameSettingsProvider* const settings,
                                                                PlayerSlot id)
    : SinglePlayerDropdown<std::string>(parent,
+                                       lg,
                                        name,
                                        x,
                                        y,
@@ -247,6 +253,7 @@ void SinglePlayerPlayerTypeDropdown::selection_action() {
 }
 
 SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
+                                                             LaunchGame& lg,
                                                              const std::string& name,
                                                              int32_t x,
                                                              int32_t y,
@@ -255,6 +262,7 @@ SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
                                                              GameSettingsProvider* const settings,
                                                              PlayerSlot id)
    : SinglePlayerDropdown<uintptr_t>(parent,
+                                     lg,
                                      name,
                                      x,
                                      y,
@@ -330,9 +338,11 @@ void SinglePlayerStartTypeDropdown::selection_action() {
 	}
 	if (dropdown_.has_selection()) {
 		settings_->set_player_init(id_, dropdown_.get_selected());
+		launch_game_.update_custom_starting_positions();
 	}
 }
 SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
+                                                   LaunchGame& lg,
                                                    const std::string& name,
                                                    int32_t x,
                                                    int32_t y,
@@ -341,6 +351,7 @@ SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
                                                    GameSettingsProvider* const settings,
                                                    PlayerSlot id)
    : SinglePlayerDropdown<uintptr_t>(parent,
+                                     lg,
                                      name,
                                      x,
                                      y,
@@ -387,3 +398,4 @@ void SinglePlayerTeamDropdown::selection_action() {
 		settings_->set_player_team(id_, dropdown_.get_selected());
 	}
 }
+}  // namespace FsMenu
