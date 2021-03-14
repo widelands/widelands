@@ -52,6 +52,9 @@ void NetAddons::init(std::string username, std::string password) {
 		// already initialized
 		return;
 	}
+	if (password.empty()) {
+		username = "";
+	}
 	if (username.empty()) {
 		username = last_username_;
 	} else {
@@ -79,10 +82,22 @@ void NetAddons::init(std::string username, std::string password) {
 	send += i18n::get_locale();
 	send += '\n';
 	send += username;
-	send += '\n';
-	send += password;
 	send += "\nENDOFSTREAM\n";
 	write(client_socket_, send.c_str(), send.size());
+
+	if (!username.empty()) {
+		std::string data = password;
+		data += '\n';
+		data += read_line();
+		data += '\n';
+		check_endofstream();
+		SimpleMD5Checksum md5;
+		md5.data(data.c_str(), data.size());
+		md5.finish_checksum();
+		send = md5.get_checksum().str();
+		send += "\nENDOFSTREAM\n";
+		write(client_socket_, send.c_str(), send.size());
+	}
 	check_endofstream();
 
 	initialized_ = true;
