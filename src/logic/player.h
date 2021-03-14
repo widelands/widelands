@@ -647,6 +647,10 @@ public:
 		return hidden_from_general_statistics_;
 	}
 
+	uint8_t initialization_index() const {
+		return initialization_index_;
+	}
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
