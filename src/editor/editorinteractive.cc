@@ -810,17 +810,11 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-		if (!(code.mod & ~KMOD_NUM)) {
-			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
-				set_sel_radius_and_update_menu(code.sym - SDLK_1);
-				return true;
-			}
-			if ((code.mod & KMOD_NUM) && code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9) {
-				set_sel_radius_and_update_menu(code.sym - SDLK_KP_1);
-				return true;
-			}
-			if (code.sym == SDLK_0 || ((code.mod & KMOD_NUM) && code.sym == SDLK_KP_0)) {
-				set_sel_radius_and_update_menu(9);
+		for (int i = 0; i < 10; ++i) {
+			if (matches_shortcut(static_cast<KeyboardShortcut>(
+			                        static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i),
+			                     code)) {
+				set_sel_radius_and_update_menu(i);
 				return true;
 			}
 		}

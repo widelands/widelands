@@ -196,10 +196,31 @@ void LaunchGame::update_peaceful_mode() {
 }
 
 void LaunchGame::update_custom_starting_positions() {
-	const bool forbidden = settings_.settings().scenario || settings_.settings().savegame;
-	custom_starting_positions_.set_enabled(!forbidden && settings_.can_change_map());
-	if (forbidden) {
-		custom_starting_positions_.set_state(false);
+	const GameSettings& settings = settings_.settings();
+	const bool forbidden = settings.scenario || settings.savegame;
+	if (forbidden || !settings_.can_change_map()) {
+		custom_starting_positions_.set_enabled(false);
+		if (forbidden) {
+			custom_starting_positions_.set_state(false);
+		}
+	} else {
+		bool allowed = false;
+		for (const PlayerSettings& p : settings.players) {
+			if (p.state != PlayerSettings::State::kClosed && p.state != PlayerSettings::State::kOpen &&
+			    settings.get_tribeinfo(p.tribe)
+			       .initializations[p.initialization_index]
+			       .uses_map_starting_position) {
+				allowed = true;
+				break;
+			}
+		}
+		custom_starting_positions_.set_enabled(allowed);
+		if (!allowed) {
+			custom_starting_positions_.set_state(false);
+			custom_starting_positions_.set_tooltip(
+			   _("All selected starting conditions ignore the map’s starting positions"));
+			return;
+		}
 	}
 	if (settings_.settings().scenario) {
 		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
