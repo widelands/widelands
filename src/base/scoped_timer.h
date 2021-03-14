@@ -32,7 +32,7 @@ class ScopedTimer {
 public:
 	// Takes the output message that will be boost::format() with the total time
 	// this object existed (in ms, use %u).
-	explicit ScopedTimer(const std::string& message);
+	explicit ScopedTimer(const std::string& message, bool only_verbose = false);
 
 	~ScopedTimer();
 
@@ -43,6 +43,7 @@ public:
 private:
 	std::string message_;
 	uint32_t startime_, lasttime_;
+	bool only_verbose_;
 
 	DISALLOW_COPY_AND_ASSIGN(ScopedTimer);
 };
