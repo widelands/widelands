@@ -46,6 +46,9 @@ public:
 		return settings_;
 	}
 
+	/// Enables or disables the custom_starting_positions checkbox.
+	void update_custom_starting_positions();
+
 protected:
 	LuaInterface* lua_;
 
@@ -59,8 +62,6 @@ protected:
 
 	/// Enables or disables the peaceful mode checkbox.
 	void update_peaceful_mode();
-	/// Enables or disables the custom_starting_positions checkbox.
-	void update_custom_starting_positions();
 	/// Hides or shows the desync warning.
 	void update_warn_desyncing_addon();
 
