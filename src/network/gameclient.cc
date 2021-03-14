@@ -320,7 +320,7 @@ void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		log_info("[Client]: send playercommand at time %i\n", d->game->get_gametime().get());
+		verb_log_info("[Client]: send playercommand at time %i", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
@@ -625,7 +625,7 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	log_info("[Client]: sending timestamp: %i\n", d->game->get_gametime().get());
+	verb_log_info("[Client]: sending timestamp: %i", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
@@ -724,7 +724,7 @@ void GameClient::handle_ping(RecvPacket&) {
 	s.unsigned_8(NETCMD_PONG);
 	d->net->send(s);
 
-	log_info("[Client] Pong!\n");
+	verb_log_info("[Client] Pong!");
 }
 
 /**
@@ -737,8 +737,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.map_background = packet.string();
 	d->settings.savegame = packet.unsigned_8();
 	d->settings.scenario = packet.unsigned_8();
-	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
-	         d->settings.mapfilename.c_str());
+	verb_log_info("[Client] SETTING_MAP '%s' '%s'", d->settings.mapname.c_str(),
+	              d->settings.mapfilename.c_str());
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
@@ -959,7 +959,9 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			}
 			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
 			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags,
-			   incompatible_wc));
+			   incompatible_wc,
+			   !t->has_key("uses_map_starting_position") ||
+			      t->get_bool("uses_map_starting_position")));
 		}
 		d->settings.tribes.push_back(info);
 	}
@@ -1124,13 +1126,13 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
-		log_info("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
+		verb_log_info("[Client] speed: %u.%03u", d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
 		d->time.receive(Time(packet.unsigned_32()));
 		break;
 	case NETCMD_WAIT:
-		log_info("[Client]: server is waiting.\n");
+		verb_log_info("[Client]: server is waiting.");
 		d->server_is_waiting = true;
 		break;
 	case NETCMD_PLAYERCOMMAND:
@@ -1187,7 +1189,7 @@ void GameClient::disconnect(const std::string& reason,
                             const std::string& arg,
                             bool const sendreason,
                             bool const showmsg) {
-	log_info("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
+	log_warn("[Client]: disconnect(%s, %s)", reason.c_str(), arg.c_str());
 	if (d->disconnect_called_) {
 		return;
 	}

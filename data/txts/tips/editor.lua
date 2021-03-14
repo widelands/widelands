@@ -1,4 +1,5 @@
 include "scripting/richtext.lua"
+include "txts/help/common_helptexts.lua"
 
 push_textdomain("texts")
 tips = {
@@ -24,7 +25,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"The number keys (0 - 9) allow you to directly set the size of the selected area around your mouse cursor.",
+      text = _("The keys %1% allow you to directly set the size of the selected area around your mouse cursor."):bformat(help_editor_toolsize_tips()),
       seconds = 6
    },
    {

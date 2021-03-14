@@ -117,10 +117,10 @@ void BufferedConnection::close() {
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
-		log_info("[BufferedConnection] Closing network socket connected to %s:%i.\n",
-		         remote.address().to_string().c_str(), remote.port());
+		verb_log_info("[BufferedConnection] Closing network socket connected to %s:%i.",
+		              remote.address().to_string().c_str(), remote.port());
 	} else {
-		log_info("[BufferedConnection] Closing network socket.\n");
+		verb_log_info("[BufferedConnection] Closing network socket.");
 	}
 	// Stop the thread
 	io_service_.stop();
@@ -314,12 +314,12 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log_info("[BufferedConnection] Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
-	         host.port);
+	verb_log_info("[BufferedConnection] Trying to connect to %s:%u ... ",
+	              host.ip.to_string().c_str(), host.port);
 	boost::system::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
-		log_info("success.\n");
+		verb_log_info("success.\n");
 
 		reduce_send_buffer(socket_);
 
@@ -328,12 +328,13 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 		start_receiving();
 		asio_thread_ = std::thread([this]() {
 			// The output might actually be messed up if it collides with the main thread...
-			log_info("[BufferedConnection] Starting networking thread\n");
+			verb_log_info("[BufferedConnection] Starting networking thread\n");
 			io_service_.run();
-			log_info("[BufferedConnection] Stopping networking thread\n");
+			verb_log_info("[BufferedConnection] Stopping networking thread\n");
 		});
 	} else {
-		log_err("failed.\n");
+		log_err("[BufferedConnection] Trying to connect to %s:%u failed!",
+		        host.ip.to_string().c_str(), host.port);
 		socket_.close();
 		assert(!is_connected());
 	}
@@ -346,17 +347,17 @@ BufferedConnection::BufferedConnection()
 void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
-	log_info("[BufferedConnection] Connection to %s.\n",
-	         socket_.remote_endpoint().address().to_string().c_str());
+	verb_log_info("[BufferedConnection] Connection to %s.",
+	              socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
 
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
-		log_info("[BufferedConnection] Starting networking thread\n");
+		verb_log_info("[BufferedConnection] Starting networking thread");
 		io_service_.run();
-		log_info("[BufferedConnection] Stopping networking thread\n");
+		verb_log_info("[BufferedConnection] Stopping networking thread");
 	});
 }
 

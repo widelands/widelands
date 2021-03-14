@@ -30,10 +30,13 @@
 #include "ui_basic/dropdown.h"
 #include "ui_fsmenu/singleplayerdropdown.h"
 
+namespace FsMenu {
+
 // horizontal group
 class SinglePlayerActivePlayerGroup : public UI::Box {
 public:
 	SinglePlayerActivePlayerGroup(UI::Panel* const parent,
+	                              LaunchGame&,
 	                              int32_t const w,
 	                              int32_t const h,
 	                              PlayerSlot id,
@@ -59,6 +62,7 @@ class SinglePlayerSetupBox : public UI::Box {
 
 public:
 	SinglePlayerSetupBox(UI::Panel* const parent,
+	                     LaunchGame&,
 	                     GameSettingsProvider* const settings,
 	                     uint32_t standard_element_height);
 
@@ -66,6 +70,7 @@ public:
 	void update();
 
 private:
+	LaunchGame& launch_game_;
 	GameSettingsProvider* const settings_;
 	uint32_t standard_height_;
 	UI::Box scrollable_playerbox_;
@@ -74,4 +79,5 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 	void reset();
 };
+}  // namespace FsMenu
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
