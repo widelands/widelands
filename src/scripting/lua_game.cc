@@ -326,7 +326,7 @@ int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 /* RST
    .. method:: send_to_inbox(title, message[, opts])
 
-      Send a message to the players inbox. One should prefer 
+      Send a message to the players inbox. One should prefer
       :meth:`send_to_inbox` from `messages.lua`, which
       has an option to wait before sending the message until the player leaves
       the roadbuilding mode.
@@ -579,7 +579,7 @@ int LuaPlayer::seen_field(lua_State* L) {
       :arg what: either "all" or an array containing the names of the allowed
          buildings
       :returns: :const:`nil`
-      
+
       The opposite function is :meth:`forbid_buildings`
 */
 int LuaPlayer::allow_buildings(lua_State* L) {
@@ -868,13 +868,13 @@ int LuaPlayer::get_buildings(lua_State* L) {
    .. method:: get_constructionsites(which)
 
       which can be either a single name or an array of names. In the first
-      case, the method returns an array of all constructionsites that the 
+      case, the method returns an array of all constructionsites that the
       player has of this kind. If which is an array, the function returns a
       table of (name,array of buildings) pairs.
 
       :type which: name of constructionsites building or array of building names
       :rtype which: :class:`string` or :class:`array`
-      :returns: information about the players constructionsites, 
+      :returns: information about the players constructionsites,
          see :class:`wl.map.ConstructionSite`
       :rtype: :class:`array` or :class:`table`
 */
@@ -1502,7 +1502,7 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 /* RST
 .. function:: report_result(plr, result[, info = ""])
 
-   Shows the window indicating the end of the game. The window contains a 
+   Shows the window indicating the end of the game. The window contains a
    table showing the results of all players and teams (if there are any).
    For mutliplayer games this reports the game ending also to the metaserver
    if this is an Internet network game.
@@ -1512,12 +1512,12 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
    :arg result: The player result (0: lost, 1: won, 2: resigned)
    :type result: :class:`number`
    :arg info: A string containing extra data for this particular win
-      condition. Likely one wants to use :meth:`make_extra_data` for this. 
+      condition. Likely one wants to use :meth:`make_extra_data` for this.
       The string will be shown beside the table as "Player information: string".
    :type info: :class:`string`
-   
+
    .. code-block:: lua
-   
+
       report_result(plr, 1, make_extra_data(plr, wc_name, wc_version, {score = "Score for this player"}))
 
 */
