@@ -74,6 +74,8 @@ private:
 	std::string read_line();
 	void read_file(long length, const std::string& out);
 	void check_endofstream();
+	void write_to_server(const std::string&);
+	void write_to_server(const char*, size_t);
 
 	std::string last_username_, last_password_;
 	bool initialized_;

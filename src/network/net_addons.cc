@@ -20,8 +20,10 @@
 #include "network/net_addons.h"
 
 #include <cassert>
+#include <csignal>
 #include <cstdlib>
 #include <cstring>
+#include <list>
 #include <memory>
 
 #include <arpa/inet.h>
@@ -43,7 +45,7 @@
 
 namespace AddOns {
 
-// All networking-related code in this file is inspired by
+// The networking-related code in this file is inspired by
 // https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
 
 constexpr unsigned kCurrentProtocolVersion = 4;
@@ -52,6 +54,7 @@ void NetAddons::init(std::string username, std::string password) {
 		// already initialized
 		return;
 	}
+	signal(SIGPIPE, SIG_IGN);
 	if (password.empty()) {
 		username = "";
 	}
@@ -83,7 +86,7 @@ void NetAddons::init(std::string username, std::string password) {
 	send += '\n';
 	send += username;
 	send += "\nENDOFSTREAM\n";
-	write(client_socket_, send.c_str(), send.size());
+	write_to_server(send);
 
 	if (!username.empty()) {
 		std::string data = password;
@@ -96,7 +99,7 @@ void NetAddons::init(std::string username, std::string password) {
 		md5.finish_checksum();
 		send = md5.get_checksum().str();
 		send += "\nENDOFSTREAM\n";
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 	}
 	check_endofstream();
 
@@ -111,6 +114,7 @@ void NetAddons::quit_connection() {
 	}
 	initialized_ = false;
 	close(client_socket_);
+	signal(SIGPIPE, SIG_DFL);
 }
 
 NetAddons::~NetAddons() {
@@ -120,6 +124,30 @@ NetAddons::~NetAddons() {
 void NetAddons::set_login(const std::string& username, const std::string& password) {
 	quit_connection();
 	init(username, password);
+}
+
+inline void NetAddons::write_to_server(const std::string& send) {
+	write_to_server(send.c_str(), send.size());
+}
+void NetAddons::write_to_server(const char* send, const size_t length) {
+	if (write(client_socket_, send, length) >= 0) {
+		return;
+	}
+
+	std::string message;
+	for (; initialized_;) {
+		std::string line = read_line();
+		if (line.empty()) {
+			break;
+		}
+		message += '\n';
+		message += line;
+	}
+
+	if (message.empty()) {
+		throw wexception("Connection interrupted (%s)", strerror(errno));
+	}
+	throw wexception("Connection interrupted (%s). Reason:%s", strerror(errno), message.c_str());
 }
 
 std::string NetAddons::read_line() {
@@ -202,8 +230,7 @@ private:
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	init();
 	CrashGuard guard(*this);
-	const char* data_to_send = "CMD_LIST\n";
-	write(client_socket_, data_to_send, strlen(data_to_send));
+	write_to_server("CMD_LIST\n");
 
 	const long nr_addons = std::stol(read_line().c_str());
 	std::vector<AddOnInfo> result_vector(nr_addons);
@@ -226,7 +253,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		std::string send = "CMD_INFO ";
 		send += name;
 		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 	}
 
 	AddOnInfo a;
@@ -313,7 +340,7 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 		std::string send = "CMD_DOWNLOAD ";
 		send += name;
 		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 	}
 	g_fs->ensure_directory_exists(save_as);
 
@@ -367,7 +394,7 @@ void NetAddons::download_i18n(const std::string& name, const std::string& direct
 		std::string send = "CMD_I18N ";
 		send += name;
 		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 	}
 	g_fs->ensure_directory_exists(directory);
 
@@ -396,7 +423,7 @@ int NetAddons::get_vote(const std::string& addon) {
 		std::string send = "CMD_GET_VOTE ";
 		send += addon;
 		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 
 		const std::string line = read_line();
 		if (line == "NOT_LOGGED_IN") {
@@ -422,7 +449,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	send += ' ';
 	send += std::to_string(vote);
 	send += '\n';
-	write(client_socket_, send.c_str(), send.size());
+	write_to_server(send);
 	check_endofstream();
 	guard.ok();
 }
@@ -460,7 +487,7 @@ void NetAddons::comment(const AddOnInfo& addon, std::string message) {
 	send += ' ';
 	send += message;
 	send += '\n';
-	write(client_socket_, send.c_str(), send.size());
+	write_to_server(send);
 	check_endofstream();
 	guard.ok();
 }
@@ -497,7 +524,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 	std::string send = "CMD_SUBMIT ";
 	send += name;
 	send += '\n';
-	write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 
 	send = std::to_string(content.size());
 	send += '\n';
@@ -505,13 +532,13 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 		send += pair.first;
 		send += '\n';
 	}
-	write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 
 	long state = 0;
 	for (const auto& pair : content) {
 		send = std::to_string(pair.second.size());
 		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 		for (const std::string& file : pair.second) {
 			std::string full_path = kAddOnDir;
 			full_path += FileSystem::file_separator();
@@ -536,15 +563,13 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 			send += '\n';
 			send += std::to_string(bytes);
 			send += '\n';
-			write(client_socket_, send.c_str(), send.size());
-			write(client_socket_, complete.get(), bytes);
+			write_to_server(send);
+			write_to_server(complete.get(), bytes);
 		}
 	}
 	progress("", state);
 
-	send = "ENDOFSTREAM\n";
-	write(client_socket_, send.c_str(), send.size());
-
+	write_to_server("ENDOFSTREAM\n");
 	check_endofstream();
 	guard.ok();
 }
@@ -585,10 +610,9 @@ void NetAddons::upload_screenshot(const std::string& addon, const std::string& i
 	send += description;
 	send += '\n';
 
-	write(client_socket_, send.c_str(), send.size());
-	write(client_socket_, complete.get(), bytes);
-	send = "ENDOFSTREAM\n";
-	write(client_socket_, send.c_str(), send.size());
+	write_to_server(send);
+	write_to_server(complete.get(), bytes);
+	write_to_server("ENDOFSTREAM\n");
 
 	check_endofstream();
 	guard.ok();
@@ -603,7 +627,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		send += ' ';
 		send += screenie;
 		send += '\n';
-		write(client_socket_, send.c_str(), send.size());
+		write_to_server(send);
 
 		std::string temp_dirname =
 		   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
