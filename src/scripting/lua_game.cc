@@ -74,7 +74,7 @@ Player
 
    This class represents one of the players in the game. You can access
    information about this player or act on his behalf. Note that you cannot
-   instantiate a class of this type directly, use the :attr:`wl.Game.players`
+   instantiate a class of this type directly, use ``wl.Game().players``
    instead.
 */
 const char LuaPlayer::className[] = "Player";
@@ -326,7 +326,7 @@ int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 /* RST
    .. method:: send_to_inbox(title, message[, opts])
 
-      Send a message to the players inbox. One should prefer
+      Send a message to the player's inbox. One should prefer
       :meth:`send_to_inbox` from `messages.lua`, which
       has an option to wait before sending the message until the player leaves
       the roadbuilding mode.
@@ -676,7 +676,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`
 
-      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored
+      :arg unexplore: *Optional*. If  ``true``, the fields will be marked as completely unexplored
          and will not be seen by buildings or workers until they are revealed again
          by :meth:`reveal_fields`.
          If `false`, They will no longer be permanently visible, but can still be seen by
@@ -856,7 +856,7 @@ int LuaPlayer::get_ships(lua_State* L) {
 
       :type which: name of building or array of building names
       :rtype which: :class:`string` or :class:`array`
-      :returns: information about the players buildings,
+      :returns: information about the player's buildings,
          see :class:`wl.map.Building`.
       :rtype: :class:`array` or :class:`table`
 */
@@ -874,7 +874,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 
       :type which: name of constructionsites building or array of building names
       :rtype which: :class:`string` or :class:`array`
-      :returns: information about the players constructionsites,
+      :returns: information about the player's constructionsites,
          see :class:`wl.map.ConstructionSite`
       :rtype: :class:`array` or :class:`table`
 */
@@ -1251,9 +1251,9 @@ int LuaObjective::set_visible(lua_State* L) {
    .. attribute:: done
 
       (RW) defines if this objective is already fulfilled. If done is
-      `true`, the objective will not be shown to the user, no matter what.
+      ``true``, the objective will not be shown to the user, no matter what.
       :attr:`visible` is set to. A savegame will be created when this attribute
-      is changed to `true`.
+      is changed to ``true``.
 
 */
 int LuaObjective::get_done(lua_State* L) {
@@ -1502,10 +1502,10 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 /* RST
 .. function:: report_result(plr, result[, info = ""])
 
-   Shows the window indicating the end of the game. The window contains a
-   table showing the results of all players and teams (if there are any).
-   For mutliplayer games this reports the game ending also to the metaserver
-   if this is an Internet network game.
+   Reports the game ending of a player. The player get prompted with a window
+   containing a table showing the results of all players and teams
+   (if there are any). For mutliplayer games this reports the game ending also
+   to the metaserver if this is an Internet network game.
 
    :arg plr: The Player to report results for.
    :type plr: :class:`~wl.game.Player`
@@ -1516,9 +1516,11 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
       The string will be shown beside the table as "Player information: string".
    :type info: :class:`string`
 
+   Example reporting a won game:
+
    .. code-block:: lua
 
-      report_result(plr, 1, make_extra_data(plr, wc_name, wc_version, {score = "Score for this player"}))
+      wl.game.report_result(plr, 1, make_extra_data(plr, wc_name, wc_version, {score = "Score for this player"}))
 
 */
 // TODO(sirver): this should be a method of wl.Game(). Fix for b19.
