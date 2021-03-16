@@ -4,6 +4,14 @@
 --
 -- This script contains function that ease setting up an initial infrastructure
 -- for maps. This includes placing buildings and roads.
+--
+-- To make these functions available include this file at the beginning 
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/infrastructure.lua"
+--
 
 -- RST
 -- .. function:: connected_road(roadtype, plr, sflag, descr[, create_carriers = true])

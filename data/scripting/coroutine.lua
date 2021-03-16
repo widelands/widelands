@@ -11,6 +11,13 @@
 --    Do not use these functions for multiplayer scripting (scenarios and
 --    winconditions) in combination with any functions in :ref:`ui.lua`
 --
+-- To make these functions available include this file at the beginning 
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/coroutine.lua"
+--
 
 -- =======================================================================
 --                             PUBLIC FUNCTIONS
