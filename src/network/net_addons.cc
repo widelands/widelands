@@ -48,6 +48,15 @@ namespace AddOns {
 // The networking-related code in this file is inspired by
 // https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
 
+static inline void check_string_validity(const std::string& str) {
+	if (str.find(' ') != std::string::npos) {
+		throw wexception("String '%s' may not contain whitespaces", str.c_str());
+	}
+	if (str.find('\n') != std::string::npos) {
+		throw wexception("String '%s' may not contain newlines", str.c_str());
+	}
+}
+
 constexpr unsigned kCurrentProtocolVersion = 4;
 void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
@@ -68,6 +77,7 @@ void NetAddons::init(std::string username, std::string password) {
 	} else {
 		last_password_ = "";
 	}
+	check_string_validity(username);
 
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		throw wexception("Unable to create socket");
@@ -247,6 +257,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 }
 
 AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
+	check_string_validity(name);
 	init();
 	CrashGuard guard(*this);
 	{
@@ -334,6 +345,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 }
 
 void NetAddons::download_addon(const std::string& name, const std::string& save_as, const CallbackFn& progress) {
+	check_string_validity(name);
 	init();
 	CrashGuard guard(*this);
 	{
@@ -388,6 +400,7 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 }
 
 void NetAddons::download_i18n(const std::string& name, const std::string& directory, const CallbackFn& progress, const CallbackFn& init_fn) {
+	check_string_validity(name);
 	init();
 	CrashGuard guard(*this);
 	{
@@ -415,6 +428,7 @@ void NetAddons::download_i18n(const std::string& name, const std::string& direct
 }
 
 int NetAddons::get_vote(const std::string& addon) {
+	check_string_validity(addon);
 	int v;
 	try {
 		init();
@@ -441,6 +455,7 @@ int NetAddons::get_vote(const std::string& addon) {
 	return v;
 }
 void NetAddons::vote(const std::string& addon, const unsigned vote) {
+	check_string_validity(addon);
 	assert(vote <= kMaxRating);
 	init();
 	CrashGuard guard(*this);
@@ -454,6 +469,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	guard.ok();
 }
 void NetAddons::comment(const AddOnInfo& addon, std::string message) {
+	check_string_validity(addon.internal_name);
 	init();
 	CrashGuard guard(*this);
 	std::string send = "CMD_COMMENT ";
@@ -510,6 +526,7 @@ static size_t gather_addon_content(const std::string& current_dir, const std::st
 }
 
 void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress, const CallbackFn& init_fn) {
+	check_string_validity(name);
 	init();
 
 	std::map<std::string /* content */, std::set<std::string> /* files in this directory */> content;
@@ -524,7 +541,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 	std::string send = "CMD_SUBMIT ";
 	send += name;
 	send += '\n';
-		write_to_server(send);
+	write_to_server(send);
 
 	send = std::to_string(content.size());
 	send += '\n';
@@ -532,7 +549,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 		send += pair.first;
 		send += '\n';
 	}
-		write_to_server(send);
+	write_to_server(send);
 
 	long state = 0;
 	for (const auto& pair : content) {
@@ -575,6 +592,10 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 }
 
 void NetAddons::upload_screenshot(const std::string& addon, const std::string& image, const std::string& description) {
+	check_string_validity(addon);
+	if (description.find('\n') != std::string::npos) {
+		throw wexception("Screenshot descriptions may not contain newlines");
+	}
 	init();
 	CrashGuard guard(*this);
 	std::string send = "CMD_SUBMIT_SCREENSHOT ";
@@ -620,6 +641,7 @@ void NetAddons::upload_screenshot(const std::string& addon, const std::string& i
 
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
 	try {
+		check_string_validity(name);
 		init();
 		CrashGuard guard(*this);
 		std::string send = "CMD_SCREENSHOT ";
