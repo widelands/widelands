@@ -9,14 +9,15 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2016
+# Ondřej Itřech, 2021
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-17 17:24+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +68,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "Dà un'occhiata ai soldati che si stanno incamminando verso i nostri edifici militari. Sono diversi dai lavoratori normali: hanno una barra della vita sopra la loro testa che mostra la loro salute rimanente, e hanno quattro simboli, che mostrano i livelli del soldato in quattro diverse categorie: salute, attacco, difesa e evasione."
+msgstr "Dà un'occhiata ai soldati che si stanno incamminando verso i nostri edifici militari. Sono diversi dai lavoratori normali: hanno una barra della vita sopra la loro testa che mostra la loro salute rimanente, e hanno quattro simboli, che mostrano i livelli del soldato in quattro diverse categorie: salute, attacco, difesa e schivata."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
@@ -75,7 +76,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Quando un soldato barbaro è allenato al massimo, ha salute livello %1%, attacco livello %2%, difesa livello %3% e elusione livello %4%. Un guerriero spaventoso, dunque! Le abilità individuali hanno il significato seguente:"
+msgstr "Quando un soldato barbaro è allenato al massimo, ha salute livello %1%, attacco livello %2%, difesa livello %3% e schivata livello %4%. Un guerriero spaventoso, dunque! Le abilità individuali hanno il significato seguente:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
@@ -127,7 +128,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "L'evasione è la possibilità che il soldato ha di schivare un attacco. Un soldato barbaro di livello 0 ha una possibilità del %1%%% di evadere un attacco, il valore dellla percentuale aumenta di %2%%% per ogni livello."
+msgstr "La schivata è la possibilità che il soldato ha di schivare un attacco. Un soldato barbaro di livello 0 ha una possibilità del %1%%% di evadere un attacco, il valore della percentuale aumenta di %2%%% per ogni livello."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
@@ -150,11 +151,11 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "Uno di questi centri di addestramento è l'arena di battaglia. È un edificio grande e costoso, e addestra i soldati in evasione. Siccome i soldati diventano molto affamati durante i loro esercizi, questo edificio richiede grandi quantità di cibo e birra forte. In una partita vera, dovresti avere una buona infrastruttura prima di costruirlo."
+msgstr "Uno di questi centri di addestramento è l'arena di battaglia. È un edificio grande e costoso, e addestra i soldati in schivata. Siccome i soldati diventano molto affamati durante i loro esercizi, questo edificio richiede grandi quantità di cibo e birra forte. In una partita vera, dovresti avere una buona infrastruttura prima di costruirlo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
-msgstr "Per vedere l'addestramento dell'evasione in azione, costruisci un'arena di battaglia."
+msgstr "Per vedere l'addestramento della schivata in azione, costruisci un'arena di battaglia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
 msgid ""
@@ -219,7 +220,7 @@ msgstr "Nessun punto rosso significa che il soldato non è allenato, ed è quind
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "Con ogni successivo livello di addestramento, il tuo soldato diventa più forte. Questo è indicato da un punto rosso. Questo soldato è addestrato in evasione a livello 1."
+msgstr "Con ogni successivo livello di addestramento, il tuo soldato diventa più forte. Questo è indicato da un punto rosso. Questo soldato è addestrato in schivata a livello 1."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
@@ -258,7 +259,7 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "L'arena di battaglia addestra i soldati solo in evasione. Per ottenere i soldati più forti possibili, devi costruire anche un campo di addestramento, che li addestra in attacco e salute."
+msgstr "L'arena di battaglia addestra i soldati solo in schivata. Per ottenere i soldati più forti possibili, devi costruire anche un campo di addestramento, che li addestra in attacco e salute."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""
