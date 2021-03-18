@@ -165,9 +165,9 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 /* RST
    .. attribute:: objectives
 
-      (RO) A table of :class:`objectives <wl.game.Objective>` in form of `{objectivename:
-   objective}`. You can change the objectives in this table and it will be reflected in the game. To
-   add a new item, use :meth:`add_objective`.
+      (RO) A table of :class:`objectives <wl.game.Objective>` in form of
+      ``{objectivename:objective}``. You can change the objectives in this table
+      and it will be reflected in the game. To add a new item, use :meth:`add_objective`.
 */
 int LuaPlayer::get_objectives(lua_State* L) {
 	lua_newtable(L);
@@ -193,7 +193,7 @@ int LuaPlayer::get_defeated(lua_State* L) {
    .. attribute:: messages
 
       (RO) An array of **all** the :class:`inbox messages <InboxMessage>` sent to the player. Note
-   that you can't add messages to this array, use :meth:`send_to_inbox` for that.
+      that you can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_messages(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -213,7 +213,7 @@ int LuaPlayer::get_messages(lua_State* L) {
    .. attribute:: inbox
 
       (RO) An array of the :class:`inbox messages <InboxMessage>` that are either read or new. Note
-   that you can't add messages to this array, use :meth:`send_to_inbox` for that.
+      that you can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_inbox(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -1520,8 +1520,8 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 
    .. code-block:: lua
 
-      wl.game.report_result(plr, 1, make_extra_data(plr, wc_name, wc_version, {score = "Score for
-this player"}))
+      wl.game.report_result(plr, 1, make_extra_data(
+            plr, wc_name, wc_version, {score = "Score for this player"}))
 
 */
 // TODO(sirver): this should be a method of wl.Game(). Fix for b19.
