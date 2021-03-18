@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2020
+# GunChleoc, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: GunChleoc, 2020\n"
+"Last-Translator: GunChleoc, 2021\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -175,7 +175,7 @@ msgstr "20 × iarann"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 × clach-òir"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
@@ -310,6 +310,12 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Chùm na gailleannan grèim teann air an long againn rè ar triall. Cha mhòr "
+"nach robh latha ann nach robh sinn fo eagal nach maireamaid troimhe. Thug "
+"sin oirnn a’ mheatailt uasail a bha sinn air toirt leinn a thilgeil a-mach "
+"on a bha an long ro chugallach agus sinn a’ faireachdainn mar an robh sinn "
+"a’ toirt ìobairt bhochd dha na diathan ach an cumadh iad beò sinn fad corra "
+"uair eile."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -319,6 +325,10 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Cha deach gu math leis a’ bheagan acainnean a shàbhail sinn à Langeness. "
+"Chaidh piocaidean nam mèinnearan a dholaidh agus thilg sinn iadsan dhan "
+"mhuir cuideachd nuair a bha e follaiseach gun do mheirg an sàl iad cho dona "
+"’s nach biodh iad gu feum oirnn gu bràth tuilleadh."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -1103,4 +1113,4 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Taigh-stòrais na h-Impireachd"
