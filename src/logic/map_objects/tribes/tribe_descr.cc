@@ -157,8 +157,8 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      port_(Widelands::INVALID_INDEX),
      scouts_house_(Widelands::INVALID_INDEX),
      basic_info_(info) {
-	log_info("┏━ Loading %s", name_.c_str());
-	ScopedTimer timer("┗━ took %ums");
+	verb_log_info("┏━ Loading %s", name_.c_str());
+	ScopedTimer timer("┗━ took %ums", true);
 
 	if (military_capacity_script_.empty() || !g_fs->file_exists(military_capacity_script_)) {
 		// TODO(GunChleoc): API compatibility - require after v 1.0
@@ -173,29 +173,29 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	};
 
 	try {
-		log_info("┃    Ships");
+		verb_log_info("┃    Ships");
 		set_progress_message(_("Ships"), 1);
 		load_ships(table, descriptions);
 
-		log_info("┃    Immovables");
+		verb_log_info("┃    Immovables");
 		set_progress_message(_("Immovables"), 2);
 		load_immovables(table, descriptions);
 
-		log_info("┃    Wares");
+		verb_log_info("┃    Wares");
 		set_progress_message(_("Wares"), 3);
 		load_wares(table, descriptions);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, descriptions);
 		}
 
-		log_info("┃    Workers");
+		verb_log_info("┃    Workers");
 		set_progress_message(_("Workers"), 4);
 		load_workers(table, descriptions);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
 			load_workers(*scenario_table, descriptions);
 		}
 
-		log_info("┃    Buildings");
+		verb_log_info("┃    Buildings");
 		set_progress_message(_("Buildings"), 5);
 		load_buildings(table, descriptions);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
@@ -204,10 +204,10 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 		set_progress_message(_("Finishing"), 6);
 
-		log_info("┃    Frontiers, flags and roads");
+		verb_log_info("┃    Frontiers, flags and roads");
 		load_frontiers_flags_roads(table);
 
-		log_info("┃    Finalizing");
+		verb_log_info("┃    Finalizing");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}

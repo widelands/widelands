@@ -34,10 +34,13 @@ enum class LogType {
 	kError     // fatal errors
 };
 
+extern bool g_verbose;
+
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
-// If `gametime` is not 0, a timestamp for the gametime will be prepended to the output;
-// otherwise, the real time will be used for the timestamp.
+// If `gametime` is not invalid, a timestamp for the gametime will be prepended to the
+// output; otherwise, the real time will be used for the timestamp.
 void do_log(LogType, const Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
+
 #define log_info_time(time, ...) do_log(LogType::kInfo, time, __VA_ARGS__)
 #define log_dbg_time(time, ...) do_log(LogType::kDebug, time, __VA_ARGS__)
 #define log_warn_time(time, ...) do_log(LogType::kWarning, time, __VA_ARGS__)
@@ -48,7 +51,31 @@ void do_log(LogType, const Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4)
 #define log_warn(...) do_log(LogType::kWarning, Time(), __VA_ARGS__)
 #define log_err(...) do_log(LogType::kError, Time(), __VA_ARGS__)
 
-extern bool g_verbose;
+#define verb_log_info_time(time, ...)                                                              \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kInfo, time, __VA_ARGS__)
+#define verb_log_dbg_time(time, ...)                                                               \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kDebug, time, __VA_ARGS__)
+#define verb_log_warn_time(time, ...)                                                              \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kWarning, time, __VA_ARGS__)
+#define verb_log_err_time(time, ...)                                                               \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kError, time, __VA_ARGS__)
+
+#define verb_log_info(...)                                                                         \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kInfo, Time(), __VA_ARGS__)
+#define verb_log_dbg(...)                                                                          \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kDebug, Time(), __VA_ARGS__)
+#define verb_log_warn(...)                                                                         \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kWarning, Time(), __VA_ARGS__)
+#define verb_log_err(...)                                                                          \
+	if (g_verbose)                                                                                  \
+	do_log(LogType::kError, Time(), __VA_ARGS__)
 
 #ifdef _WIN32
 /** Set the directory that stdout.txt shall be written to.

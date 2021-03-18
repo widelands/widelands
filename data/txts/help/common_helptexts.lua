@@ -86,3 +86,12 @@ function help_goto_landmarks_hotkeys()
    pop_textdomain()
    return r
 end
+function help_editor_toolsize_tips()
+   push_textdomain("texts")
+   local r = wl.ui.get_shortcut("editor_toolsize1")
+   for i=2,10 do
+      r = _("%1% / %2%"):bformat(r, wl.ui.get_shortcut("editor_toolsize" .. i))
+   end
+   pop_textdomain()
+   return r
+end

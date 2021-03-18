@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-09 11:33+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1703,6 +1703,7 @@ msgstr "Steenwarkeree"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
@@ -1714,6 +1715,8 @@ msgstr "eene Schüppe to maken"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1722,6 +1725,7 @@ msgstr "eene Boomslager-Ext to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1737,6 +1741,8 @@ msgstr "eene Mest to maken"
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1747,6 +1753,7 @@ msgstr "Besteck to maken"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
@@ -1917,6 +1924,7 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Fauna-Wahrderske-Telt"
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -1959,7 +1967,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "De Boomslagerske, de bi deese Boomslagerske-Kaat warkt, hett keene Bomen in de Arbeidsgewest. Riet dat Huus platt of brann 't of, of boo eene Waldwahrderske-Kaat."
+msgstr "De Boomslagerske, de bi deese Boomslagerske-Kaat warkt, hett keene Bomen in de Arbeidsgewest. Riet dat Huus platt of brann ’t of, of boo eene Waldwahrderske-Kaat."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -4740,7 +4748,7 @@ msgid "Stockpile"
 msgstr "Vööl up Lager"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:72
+#: ../../data/tribes/immovables/ashes/init.lua:70
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Aske"
@@ -5863,7 +5871,7 @@ msgstr[1] "%1%(+%2%) Soldaten"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
-msgstr "Tum Naslaan över 't Volk"
+msgstr "Tum Naslaan över ’t Volk"
 
 #: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"
@@ -6110,7 +6118,7 @@ msgstr "Inagua"
 #: ../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr "Jundlin'"
+msgstr "Jundlin’"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:161
@@ -6536,7 +6544,7 @@ msgstr "Alexandria"
 #: ../../data/tribes/ships/empire/init.lua:32
 msgctxt "shipname"
 msgid "Amalea"
-msgstr "Amalee'"
+msgstr "Amalee’"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:34
@@ -7048,7 +7056,7 @@ msgid "Uthlande"
 msgstr "Uthlande"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:85
+#: ../../data/tribes/wares/armor/init.lua:77
 msgctxt "ware"
 msgid "Armor"
 msgstr "Wapenrock"

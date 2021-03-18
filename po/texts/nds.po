@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-09 11:34+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgstr "De GPL word ok as eene Text-Datei mit Widelands sülvst levert."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell of Binärpaket of im Verteeknis, waar Widelands installeert is (to 'n Bispööl »%1%«)."
+msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell of Binärpaket of im Verteeknis, waar Widelands installeert is (to ’n Bispööl »%1%«)."
 
 #: ../../data/txts/LICENSE.lua:19
 msgid ""
@@ -91,7 +91,7 @@ msgstr "Up MacOS finnst du de Datei mit de Naam »COPYING« in de Paket, dat du 
 
 #: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
-msgstr "Deeses Speel is wat 't is un hett överhoopt keene Garantie."
+msgstr "Deeses Speel is wat ’t is un hett överhoopt keene Garantie."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid ""
@@ -125,7 +125,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands is in Grundlagen haast kumpleet un 't maakt mennig Spaaß, 't alleen of mit mennig Spelers to spölen. Aver up all Felden gifft 't immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neje Dingen to schrieven, dat Speel in diene Spraak to översetten of neje Kaarten to maken – mell di up uns' Internett-Sied."
+msgstr "Widelands is in Grundlagen haast kumpleet un ’t maakt mennig Spaaß, ’t alleen of mit mennig Spelers to spölen. Aver up all Felden gifft ’t immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neje Dingen to schrieven, dat Speel in diene Spraak to översetten of neje Kaarten to maken – mell di up uns’ Internett-Sied."
 
 #: ../../data/txts/README.lua:15
 msgid "Widelands Help"
@@ -149,7 +149,7 @@ msgstr "Fehler kunddoon"
 
 #: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Wenn du eenen Fehler finnst, mell dat bidde mit uns' Fehlermeller:"
+msgstr "Wenn du eenen Fehler finnst, mell dat bidde mit uns’ Fehlermeller:"
 
 #: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
@@ -193,7 +193,7 @@ msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "Wenn du een sekertes Speel of Upteken hest, wat de Probleem verklaart (to 'n Bispööl Störten waar man nich sücht, wat de Oorsaak is), kliev dat bidde ok an. Mehr Informationen finnst du unnern in de Deel över Uptekens."
+msgstr "Wenn du een sekertes Speel of Upteken hest, wat de Probleem verklaart (to ’n Bispööl Störten waar man nich sücht, wat de Oorsaak is), kliev dat bidde ok an. Mehr Informationen finnst du unnern in de Deel över Uptekens."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
@@ -337,7 +337,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr "Wenn du mehr Anwiesens of Hülp för Widelands of de Widelands-Bewarker bruukst, kiek di uns' Internett-Sied unner %s an. Daar finnst du Hülp in uns' Wiki."
+msgstr "Wenn du mehr Anwiesens of Hülp för Widelands of de Widelands-Bewarker bruukst, kiek di uns’ Internett-Sied unner %s an. Daar finnst du Hülp in uns’ Wiki."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
@@ -371,7 +371,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "Widelands nimmt elkeen Speel, wat du spöölst, in twee Dateien up. Eene daarvun hett eenen Naam, de up .wrpl.wgf ennt, un een sekert Speel vum Anfang hett. De Naam vun de anner Datei ennt up .wrpl; daarin sünd all Befehlen, de Spelers geven hebben, to 'n Bispööl eene Straat to bauen of eenen Feind antogriepen. De Rest vum Naam vun de Datei seggt di, wann dat Speel anfangen hett."
+msgstr "Widelands nimmt elkeen Speel, wat du spöölst, in twee Dateien up. Eene daarvun hett eenen Naam, de up .wrpl.wgf ennt, un een sekert Speel vum Anfang hett. De Naam vun de anner Datei ennt up .wrpl; daarin sünd all Befehlen, de Spelers geven hebben, to ’n Bispööl eene Straat to bauen of eenen Feind antogriepen. De Rest vum Naam vun de Datei seggt di, wann dat Speel anfangen hett."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -381,7 +381,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aver Achtung! Elkeen Ännerung in de Speeldaten of Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen över dat Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
+msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aver Achtung! Elkeen Ännerung in de Speeldaten of Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi’m Spölen över dat Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
 
 #: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
@@ -572,7 +572,7 @@ msgstr "De meesten utbauten Husen bruken Arbeiders mit Erfahrung. Bau de Husen e
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr "Du finnst allgemeene Hülp för de Bewarker un een körte Inföhren in uns' Wiki unner %s."
+msgstr "Du finnst allgemeene Hülp för de Bewarker un een körte Inföhren in uns’ Wiki unner %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -592,12 +592,12 @@ msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Holl de Umschalt-Tast drückt, um dat eerste anner Warktüüg to bruken. Dat is meestens dat Tegendeel vun de normaalen Warktüüg (to 'n Bispööl, dat een Ding wegmaakt word, in Stee, dat daar eens to sett word)."
+msgstr "Holl de Umschalt-Tast drückt, um dat eerste anner Warktüüg to bruken. Dat is meestens dat Tegendeel vun de normaalen Warktüüg (to ’n Bispööl, dat een Ding wegmaakt word, in Stee, dat daar eens to sett word)."
 
 #: ../../data/txts/tips/editor.lua:23
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Holl de Alt-Tast drückt, um dat tweede anner Warktüüg to bruken (wenn 't eens gifft)."
+msgstr "Holl de Alt-Tast drückt, um dat tweede anner Warktüüg to bruken (wenn ’t eens gifft)."
 
 #: ../../data/txts/tips/editor.lua:27
 msgid ""
@@ -671,7 +671,7 @@ msgstr "Schick immer eenen Schattsöker, um de Stee to unnersöken, bevör du ee
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "Du kannst dien Gewest groter maken, indeem du Soldateree-Boen baust – to 'n Bispööl Wachters-Kamern, Schanzen of Toorns."
+msgstr "Du kannst dien Gewest groter maken, indeem du Soldateree-Boen baust – to ’n Bispööl Wachters-Kamern, Schanzen of Toorns."
 
 #: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
@@ -689,20 +689,20 @@ msgstr "Deel diene Straten in körte Delen up, indeem du Fahnen baust. Dann word
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr "Noch Fragen? Uns' FAQ, de Wiki un natürelk uns' Gemeenskupp-Forums könen im Internett unner %s funnen worden."
+msgstr "Noch Fragen? Uns’ FAQ, de Wiki un natürelk uns’ Gemeenskupp-Forums könen im Internett unner %s funnen worden."
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr "Bruuk de Wichtigkeids-Schuvers in eenem Huus-Fenster, um de Versörgung mit eener wissen Waar fasttoleggen. Holl daarbi de Umschalt-Tast drückt, um 't för all Waren up eenmaal fasttosetten."
+msgstr "Bruuk de Wichtigkeids-Schuvers in eenem Huus-Fenster, um de Versörgung mit eener wissen Waar fasttoleggen. Holl daarbi de Umschalt-Tast drückt, um ’t för all Waren up eenmaal fasttosetten."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Bruuk dat Menü »Weertskupp-Instellens«, um de Enn-Tahlen för Waren fasttoleggen. Du kannst 't över dat Fahnen-Menü opendoon."
+msgstr "Bruuk dat Menü »Weertskupp-Instellens«, um de Enn-Tahlen för Waren fasttoleggen. Du kannst ’t över dat Fahnen-Menü opendoon."
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid ""
@@ -730,7 +730,7 @@ msgstr "Neje Soldaten worden in eener Kasern anhüürt. Hör Vermögen kann dann
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "'t is gefahrelk, aver wenn du de Strg-Tast drückt hollst, as du de Knopen för 't Utbauen, Plattrieten of Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
+msgstr "’t is gefahrelk, aver wenn du de Strg-Tast drückt hollst, as du de Knopen för ’t Utbauen, Plattrieten of Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
 
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
@@ -747,7 +747,7 @@ msgstr "Eene Weertskupp umfaat all Husen un Fahnen, de mit Straten verbunnen sü
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Eenige Husen, to 'n Bispööl de Buurderee, hebben een bannig lüttes Arbeidsgewest. Wenn dat Huus mit Bomen of Straten dichtmüürt is, kann 't nich mehr arbeiden."
+msgstr "Eenige Husen, to ’n Bispööl de Buurderee, hebben een bannig lüttes Arbeidsgewest. Wenn dat Huus mit Bomen of Straten dichtmüürt is, kann ’t nich mehr arbeiden."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -824,4 +824,4 @@ msgstr "Wenn dat Speel maal daalknallt, koom nich in Nood! Dat Speel word automa
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Sünd uns' künstelken Spelers to dröge? Besöök uns' Internett-Sied up %s un treff anner Spelers, mit de du över 't Internett spölen kannst."
+msgstr "Sünd uns’ künstelken Spelers to dröge? Besöök uns’ Internett-Sied up %s un treff anner Spelers, mit de du över ’t Internett spölen kannst."

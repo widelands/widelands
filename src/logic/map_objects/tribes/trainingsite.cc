@@ -881,7 +881,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 
 	// Finally drop the soldier.
 	if (nullptr != soldier_to_drop) {
-		log_info("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
+		verb_log_info("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
 		if (level > highest_trainee_level_seen_) {
 			highest_trainee_level_seen_ = level;
