@@ -9,15 +9,16 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016,2020
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
+# Ondřej Itřech, 2021
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
 # Tommaso, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-18 14:56+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -293,7 +294,7 @@ msgstr "Costruisci una calchera e un pozzo. In aggiunta, costruisci una carbonai
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr "Costruisci una serra per le felci"
+msgstr "Costruisci un giardino delle canne"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
