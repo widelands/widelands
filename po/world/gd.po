@@ -2,16 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2020
+# GunChleoc, 2015-2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-14 11:31+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -348,7 +348,7 @@ msgstr "Craobh mharbh"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:5
 msgid "Felled Tree"
-msgstr ""
+msgstr "Craobh air a leigeil"
 
 #: ../../data/world/immovables/trees/larch/init.lua:14
 msgid "Larch (Sapling)"
