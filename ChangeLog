@@ -489,6 +489,7 @@
 - Fix save game menu buttons (#4751)
 - Disable Autofix Dependencies v1.0 (#4736)
 - Fix crash on invalid screenshot (#4764)
+- No custom starting positions for Discovery (#4765)
 
 
 ### Internationalization
@@ -575,6 +576,7 @@
 - added info about ports vulnerability to port helptexts and empire 03 (#4665)
 - added documentation for start conditions
 - Clean up helptexts files (#4756)
+- Reworked RST for `lua_game.cc` (#4773)
 
 
 ### Editor
@@ -596,6 +598,7 @@
 - Resize minimap when map size changes to prevent a crash (#4519)
 - Resize minimap on map creation (#4560)
 - Fix crash when using debug console in editor (#4737)
+- Make editor toolsize hotkeys configurable (#4769)
 
 
 ### Graphics Engine
@@ -742,6 +745,8 @@
 - Get rid of code duplication in `lua_root.cc` (#4419)
 - Use `unique_ptr` for building settings (#4448)
 - Python 3 compatibility and modernizing; Ensure utils directory works with Python3 (#4546, #4730)
+- Clean up superfluous log output (#4755)
+- Fix vision unequality operator (#4771)
 
 
 
