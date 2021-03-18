@@ -12,14 +12,15 @@
 # Guybrush88 <erpizzo@alice.it>, 2015-2018,2020
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Mat V <enthusedquill6@gmail.com>, 2016
+# Ondřej Itřech, 2021
 # Samuele Battarra <battarsa@email.it>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-09 11:30+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-18 13:07+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -261,7 +262,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr ""
+msgstr "Frisoni"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
