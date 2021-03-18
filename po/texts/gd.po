@@ -2,16 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2020
+# GunChleoc, 2015-2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-09 11:30+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-16 20:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,7 +98,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr "Gheibh thu barrachd fiosrachaidh is taice uainn air %1% (làrach-lìn, uicidh, bòrd-brath airson cheistean no taice coitchinne) no %2% (tracaiche nam bugaichean) agus %3% (eadar-theangachaidhean)."
+msgstr "Gheibh thu barrachd fiosrachaidh is taice uainn air %1% (làrach-lìn, uicidh, bòrd-brath airson cheistean no taice coitchinne) no %2% (tracaiche nam buga) agus %3% (eadar-theangachaidhean)."
 
 #: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
@@ -418,7 +418,7 @@ msgstr "Toglaich am meanbh-mhapa"
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -509,24 +509,24 @@ msgstr "Chì thu fiosrachadh mun mhapa no geama air a shàbhaladh taobh deas. Le
 msgid ""
 "Amazons love trees. Build enough jungle preserver's huts to have enough of "
 "them."
-msgstr ""
+msgstr "Tha Muinntir na h-Amasoin glè mheasail air craobhan. Tog bothanan glèidheadair-coille ach am bi gu leòr dhuibh agad."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
 "plantations to plant these special trees."
-msgstr ""
+msgstr "Tha craobhan ainneamh aig cridhe eaconamaidh Muinntir na h-Amasoine. Tog planntachaidhean chraobhan ainneamh airson na craobhan sònraichte sin fhàs."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
 "to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Thèid craobhan ainneimh a bhuain le buaineadair-fiodha eòlach ann am bothanan buaineadair-fhiodha a chaidh a leasachadh gu bothanan chraobhan ainneamh. Gidheadh, cha bhuain iad craobhan àbhaisteach tuilleadh an uairsin. Beachdaich air far an cuir thu iad ro làimh."
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Thèid biadh a thiormachadh le teintean guail. Dèan cinnteach gum bi do leòr agad an-còmhnaidh."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -696,7 +696,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Cleachd sleamhnachain a’ phrìomhachais ann an uinneag togalaich gus gleus a chur air lìbhrigeadh bathair shònraichte. Cùm Shift sìos fhad ’s a bhios tu a’ briogadh gus a h-uile bathar a chur air gleus aig an aon àm."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -708,7 +708,7 @@ msgstr "Cleachd an clàr-taice “Rèitich an eaconamaidh” gus gleus a chur ai
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Stiùirich na teachdaireachdan agad nas èifeachdaiche: brùth air “%1%” airson naidheachdan gus uinneag nan teachdaireachdan inntrigeadh is an uairsin cleachd “%2%” airson dol gu teachdaireachd is an iuchair “%3%” gus teachdaireachdan a chur dhan tasglann."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -735,7 +735,7 @@ msgstr "Ma tha thu coma mu chunnart, ma chumas tu Ctrl sìos ’s tu a’ brioga
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Brùth air “%s” gus uinneag an stòrais a thoglachadh gu luath."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -752,19 +752,19 @@ msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. M
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Sùm a-steach/a-mach le cuibhle na luchaige no le %1%/%2%. Brùth air %3% gus an sùm ath-shuidheachadh."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Cleachd iuchraichean “%1$s” agus “%2$s” airson leum a ghearradh eadar ionadan far an robh thu o chionn ghoirid."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Dèan an geama nas luaithe no nas maille le %1%/%2%. Cleachd %3%/%4% airson atharrachadh luath no %5%/%6% airson gleusadh rèidh."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"

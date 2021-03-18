@@ -74,7 +74,7 @@ Player
 
    This class represents one of the players in the game. You can access
    information about this player or act on his behalf. Note that you cannot
-   instantiate a class of this type directly, use the :attr:`wl.Game.players`
+   instantiate a class of this type directly, use ``wl.Game().players``
    instead.
 */
 const char LuaPlayer::className[] = "Player";
@@ -165,7 +165,7 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 /* RST
    .. attribute:: objectives
 
-      (RO) A table of name -> :class:`wl.game.Objective`. You can change
+      (RO) A table of :class:`objectives <wl.game.Objective>` in form of `{objectivename: objective}`. You can change
       the objectives in this table and it will be reflected in the game. To add
       a new item, use :meth:`add_objective`.
 */
@@ -192,7 +192,7 @@ int LuaPlayer::get_defeated(lua_State* L) {
 /* RST
    .. attribute:: messages
 
-      (RO) An array of all the inbox messages sent to the player. Note that you
+      (RO) An array of **all** the :class:`inbox messages <InboxMessage>` sent to the player. Note that you
       can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_messages(lua_State* L) {
@@ -212,7 +212,7 @@ int LuaPlayer::get_messages(lua_State* L) {
 /* RST
    .. attribute:: inbox
 
-      (RO) An array of the inbox messages that are either read or new. Note that you
+      (RO) An array of the :class:`inbox messages <InboxMessage>` that are either read or new. Note that you
       can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_inbox(lua_State* L) {
@@ -266,7 +266,7 @@ int LuaPlayer::get_team(lua_State* L) {
 
       Returns the player's tribe.
 
-      (RO) The :class:`~wl.Game.Tribe_description` for this player.
+      (RO) The :class:`wl.map.TribeDescription` for this player.
 */
 int LuaPlayer::get_tribe(lua_State* L) {
 	return to_lua<LuaMaps::LuaTribeDescription>(
@@ -326,8 +326,8 @@ int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 /* RST
    .. method:: send_to_inbox(title, message[, opts])
 
-      Send a message to the players inbox.
-      There is also a function :meth:`send_to_inbox` in `messages.lua`, which
+      Send a message to the player's inbox. One should prefer
+      :meth:`send_to_inbox` from `messages.lua`, which
       has an option to wait before sending the message until the player leaves
       the roadbuilding mode.
       Title or Message can be a formatted using widelands'
@@ -463,7 +463,8 @@ int LuaPlayer::send_to_inbox(lua_State* L) {
       :type field: :class:`wl.map.Field`
 
       :arg modal: If this is ``false``, the game will not wait for the message window to close, but
-         continue at once. :type modal: :class:`boolean`
+         continue at once.
+      :type modal: :class:`boolean`
 
       :arg w: width of message box in pixels. Default: 400.
       :type w: :class:`integer`
@@ -575,11 +576,11 @@ int LuaPlayer::seen_field(lua_State* L) {
       can either be the single string "all" or a list of strings containing
       the names of the buildings that are allowed.
 
-      :see: :meth:`forbid_buildings`
-
       :arg what: either "all" or an array containing the names of the allowed
          buildings
       :returns: :const:`nil`
+
+      The opposite function is :meth:`forbid_buildings`
 */
 int LuaPlayer::allow_buildings(lua_State* L) {
 	return allow_forbid_buildings(L, true);
@@ -645,7 +646,7 @@ int LuaPlayer::add_objective(lua_State* L) {
       See also :ref:`field_animations` for animated revealing.
 
       :arg fields: The fields to reveal
-      :type fields: :class:`array` of :class:`wl.map.Fields`
+      :type fields: :class:`array` of :class:`fields <wl.map.Field>`
 
       :returns: :const:`nil`
 */
@@ -673,9 +674,9 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       See also :ref:`field_animations` for animated hiding.
 
       :arg fields: The fields to hide
-      :type fields: :class:`array` of :class:`wl.map.Fields`
+      :type fields: :class:`array` of :class:`fields <wl.map.Field>`
 
-      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored
+      :arg unexplore: *Optional*. If  ``true``, the fields will be marked as completely unexplored
          and will not be seen by buildings or workers until they are revealed again
          by :meth:`reveal_fields`.
          If `false`, They will no longer be permanently visible, but can still be seen by
@@ -826,7 +827,7 @@ int LuaPlayer::skip_training_wheel(lua_State* L) {
 /* RST
    .. method:: get_ships()
 
-      :returns: array of player's ships
+      :returns: array of player's :class:`ships <wl.map.Ship>`
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_ships(lua_State* L) {
@@ -855,7 +856,8 @@ int LuaPlayer::get_ships(lua_State* L) {
 
       :type which: name of building or array of building names
       :rtype which: :class:`string` or :class:`array`
-      :returns: information about the players buildings
+      :returns: information about the player's buildings,
+         see :class:`wl.map.Building`.
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_buildings(lua_State* L) {
@@ -866,13 +868,14 @@ int LuaPlayer::get_buildings(lua_State* L) {
    .. method:: get_constructionsites(which)
 
       which can be either a single name or an array of names. In the first
-      case, the method returns an array of all constructionsites that the player has
-      of this kind. If which is an array, the function returns a table of
-      (name,array of buildings) pairs.
+      case, the method returns an array of all constructionsites that the
+      player has of this kind. If which is an array, the function returns a
+      table of (name,array of buildings) pairs.
 
       :type which: name of constructionsites building or array of building names
       :rtype which: :class:`string` or :class:`array`
-      :returns: information about the players constructionsites
+      :returns: information about the player's constructionsites,
+         see :class:`wl.map.ConstructionSite`
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_constructionsites(lua_State* L) {
@@ -886,7 +889,7 @@ int LuaPlayer::get_constructionsites(lua_State* L) {
       is mainly useful in initializations where buildings must be placed
       automatically.
 
-      :arg building: name of the building description to check for
+      :arg building: internal name of the building to check for
       :type building: :class:`string`
       :arg field: where the suitability should be checked
       :type field: :class:`wl.map.Field`
@@ -1217,7 +1220,7 @@ int LuaObjective::set_title(lua_State* L) {
 /* RST
    .. attribute:: body
 
-      (RW) The complete text of this objective. Can be Widelands Richtext.
+      (RW) The complete text of this objective. Can be Widelands :ref:`richtext <richtext.lua>`
 */
 int LuaObjective::get_body(lua_State* L) {
 	const Widelands::Objective& o = get(L, get_game(L));
@@ -1248,9 +1251,9 @@ int LuaObjective::set_visible(lua_State* L) {
    .. attribute:: done
 
       (RW) defines if this objective is already fulfilled. If done is
-      :const`true`, the objective will not be shown to the user, no matter what.
+      ``true``, the objective will not be shown to the user, no matter what.
       :attr:`visible` is set to. A savegame will be created when this attribute
-      is changed to :const`true`.
+      is changed to ``true``.
 
 */
 int LuaObjective::get_done(lua_State* L) {
@@ -1499,17 +1502,25 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 /* RST
 .. function:: report_result(plr, result[, info = ""])
 
-   Reports the game ending to the metaserver if this is an Internet
-   network game. Otherwise, does nothing.
+   Reports the game ending of a player. The player get prompted with a window
+   containing a table showing the results of all players and teams
+   (if there are any). For mutliplayer games this reports the game ending also
+   to the metaserver if this is an Internet network game.
 
    :arg plr: The Player to report results for.
    :type plr: :class:`~wl.game.Player`
    :arg result: The player result (0: lost, 1: won, 2: resigned)
    :type result: :class:`number`
-   :arg info: a string containing extra data for this particular win
-      condition. This will vary from game type to game type. See
-      :class:`PlayerEndStatus` for allowed values
+   :arg info: A string containing extra data for this particular win
+      condition. Likely one wants to use :meth:`make_extra_data` for this.
+      The string will be shown beside the table as "Player information: string".
    :type info: :class:`string`
+
+   Example reporting a won game:
+
+   .. code-block:: lua
+
+      wl.game.report_result(plr, 1, make_extra_data(plr, wc_name, wc_version, {score = "Score for this player"}))
 
 */
 // TODO(sirver): this should be a method of wl.Game(). Fix for b19.

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 10:02+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,7 +58,7 @@ msgstr "Lorg an sgioba agad ball-ealain ùr."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Lorg thu ball-ealain ùr."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -71,7 +71,7 @@ msgstr "Chaidh fear dhe na buill-ealain aig an sgioba agad a ghoid le nàmhaid."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Chaidh fear dhe na buill-ealain agad a ghoid le nàmhaid."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -84,7 +84,7 @@ msgstr "Bhuinnig an sgioba agad ball-ealain o nàmhaid."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Bhuinnig thu ball-ealain o nàmhaid."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -166,7 +166,7 @@ msgstr "Fèin-fhlaitheach"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Buannaichidh an treubh no sgioba a chuireas ruaig air càch! Tachraidh sin nuair nach bi phrìomh-àras, port no taigh-stòrais air fhàgail dha na co-fharpaisich."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -186,13 +186,13 @@ msgstr "Seo geama gun chrìch is gun riaghailtean. Tha ceò a’ chogaidh à com
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Seal prìomh-àrais"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Buannaichidh an treubh no sgioba a lorgas ’s a mhilleas gach prìomh-àras chàich an geama! Chan obraich seo le cumha tòiseachaidh gun phrìomh-àras."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
