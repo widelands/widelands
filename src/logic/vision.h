@@ -107,7 +107,7 @@ public:
 	}
 
 	bool operator!=(const Vision other) const {
-		return value_ != other.value_ && override_ != other.override_;
+		return value_ != other.value_ || override_ != other.override_;
 	}
 
 	bool is_explored() const {
