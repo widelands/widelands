@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-02-28 12:32+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 10:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -267,14 +267,14 @@ msgstr "Ràinig Reebaud ’s a threubh an taobh tuath. Co-dhiù, chan eil fàilt
 
 #: ../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Caraidean ann an staing"
 
 #: ../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Ghabh Reebaud ’s a threubh còmhnaidh san taobh tuath gu sona. San eadar-àm, cha robh an tìr a dh’fhàg iad sìtheil idir agus tha cruaidh-fheum aig seann-charaid air taic…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -479,7 +479,7 @@ msgstr "(tionndadh 0.2)"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "An Roinn-Eòrpa 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
@@ -671,7 +671,7 @@ msgstr "Tha ceithir treubhan a’ strì ach an gabh iad làmh an uachdair air sg
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Fàinne bheag 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -680,7 +680,7 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "Mapa cothromach do dh’ochdnar le feartan nàdarra a’ sgaradh na tìre. Tha cruth na tìre ag amas a bhi caran fìrinneach le aibhnean a’ sruthadh o eigh-shruthan sna beanntan tro cnuic is tìr rèidh dhan mhuir. Tha òr mòran nas ainneimhe na tha gual no iarann. Tha na stòrasan eadar-dhealaichte fad air falbh o chàch a chèile mar as trice."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -792,7 +792,7 @@ msgstr "Tìr rùnach le caochladh crutha-tìre le aibhnean mòra ann."
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Bealaichean gainmhich"
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""

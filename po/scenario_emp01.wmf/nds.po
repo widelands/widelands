@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-03 10:55+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Wat is blot ut uns' Latiensken Riek worden? Dat fraag ick würrelk – waarum hett min König mi unnerseggt, mit deesem verfuterten Willen Volk to fechten, dat sük eerst as Fründ upspöölt hett, um miene Soldaten dann um Middernacht antogriepen?"
+msgstr "Wat is blot ut uns’ Latiensken Riek worden? Dat fraag ick würrelk – waarum hett min König mi unnerseggt, mit deesem verfuterten Willen Volk to fechten, dat sük eerst as Fründ upspöölt hett, um miene Soldaten dann um Middernacht antogriepen?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -127,7 +127,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Aver in de fievde Nacht, as wi daar wassen, hebben se uns um nix angrepen. Ick hebb umbi hunnert gode Lüü verloren, un ick wurr inspunnen un to hör Anföhrer versleept. He hett mi mit Verachtung befohlen, deeses Land bit to ewige Dagen to verlaten. He will, see he, keen nejes un ok nich uns' Land, aver deese Wald sall SIEN Land blieven – sien Land blieven, bit de Geister de leste Mann in sienem Volk halen!"
+msgstr "Aver in de fievde Nacht, as wi daar wassen, hebben se uns um nix angrepen. Ick hebb umbi hunnert gode Lüü verloren, un ick wurr inspunnen un to hör Anföhrer versleept. He hett mi mit Verachtung befohlen, deeses Land bit to ewige Dagen to verlaten. He will, see he, keen nejes un ok nich uns’ Land, aver deese Wald sall SIEN Land blieven – sien Land blieven, bit de Geister de leste Mann in sienem Volk halen!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -136,7 +136,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr "Dree Weken naher was ick torügg in Freemilt, um mit de König to spreken. He was güünsk över de Willen Lüü, versee mir aver, deese Völker antogriepen. He meende, uns' Soldateree is to swack, deese Willen Lüü im Krieg to manntjen."
+msgstr "Dree Weken naher was ick torügg in Freemilt, um mit de König to spreken. He was güünsk över de Willen Lüü, versee mir aver, deese Völker antogriepen. He meende, uns’ Soldateree is to swack, deese Willen Lüü im Krieg to manntjen."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -174,7 +174,7 @@ msgstr "Överlevers"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
-msgstr "De Gotten hebben sük uns' verbarmt!"
+msgstr "De Gotten hebben sük uns’ verbarmt!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -182,7 +182,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr "Wi sünd up eener frömden Küst lannt un kunnen uns unner de Palmen an de Waterkant hagelk verhalen. 't is as 't is, man nich as 't wesen mutt. De Wahrheid is: as ick vunmörgens upwaakde, hebb ick nix as Sand sehn."
+msgstr "Wi sünd up eener frömden Küst lannt un kunnen uns unner de Palmen an de Waterkant hagelk verhalen. ’t is as ’t is, man nich as ’t wesen mutt. De Wahrheid is: as ick vunmörgens upwaakde, hebb ick nix as Sand sehn."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -214,7 +214,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr "Villicht bün ick blot to bibärig, aver 't kann nich schaden, in de Wald to schildern – dann könen wi seker sien, dat wi mögelke Feinde sehn, ehr se uns sehn."
+msgstr "Villicht bün ick blot to bibärig, aver ’t kann nich schaden, in de Wald to schildern – dann könen wi seker sien, dat wi mögelke Feinde sehn, ehr se uns sehn."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -250,11 +250,11 @@ msgstr "Dat is een goder Stapp vöran. Nu könen wi uns een bietje sekerer föhl
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Young Amalea"
-msgstr "De junge Amalee'"
+msgstr "De junge Amalee’"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea smiles…"
-msgstr "Amalee' is munter …"
+msgstr "Amalee’ is munter …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
@@ -274,11 +274,11 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr "Keener kann betwiefeln, dat wi Holt bruken, um dat Schipp to repareren. Ick bün güstern dör de Wald gahn un hebb eene feine Stee för eene Boomhaueree südelk vun uns' vörlopigen Raadhuus funnen."
+msgstr "Keener kann betwiefeln, dat wi Holt bruken, um dat Schipp to repareren. Ick bün güstern dör de Wald gahn un hebb eene feine Stee för eene Boomhaueree südelk vun uns’ vörlopigen Raadhuus funnen."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
-msgstr "Amalee' rekumdeert …"
+msgstr "Amalee’ rekumdeert …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -287,7 +287,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr "Ick bün jüüst wiesworden, dat uns' Boomhauer nu arbeidt. Wi sallen nu wachten, bit he genoog Rüümte freeimaakt hett, dat wi noch twee anner Boomhauereen bauen könen, daarmit wi de Bomen fixer arnten könen."
+msgstr "Ick bün jüüst wiesworden, dat uns’ Boomhauer nu arbeidt. Wi sallen nu wachten, bit he genoog Rüümte freeimaakt hett, dat wi noch twee anner Boomhauereen bauen könen, daarmit wi de Bomen fixer arnten könen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -296,11 +296,11 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutten Planken daarut maken, de wi för 't Schipp un all grotern Husen bruuken. Also sallen wi eene Saagmöhlen bauen – sobold wi daar genoog Rüümte för hebben."
+msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutten Planken daarut maken, de wi för ’t Schipp un all grotern Husen bruuken. Also sallen wi eene Saagmöhlen bauen – sobold wi daar genoog Rüümte för hebben."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
-msgstr "Amalee' kummt in …"
+msgstr "Amalee’ kummt in …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
@@ -319,7 +319,7 @@ msgstr "De Saagmöhlen is beschickt, wi könen nu Planken ut de de Boomstammen v
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr "Aver de lepe Naricht is, dat uns' Boomhauers unbannig gau bi’m Arnten sünd. Up de Insel stahn haast keene Bomen mehr."
+msgstr "Aver de lepe Naricht is, dat uns’ Boomhauers unbannig gau bi’m Arnten sünd. Up de Insel stahn haast keene Bomen mehr."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -354,7 +354,7 @@ msgstr "Mienheer, ick hebb över de Stenen an de Südküste vun de Insel nadenkt
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr "Uns' Schipp to repareren düürt sowieso eenige Weken, un wat wi nu arnten, kann de Grundlage för grote, machtige Husen in eenem annern Land sien."
+msgstr "Uns’ Schipp to repareren düürt sowieso eenige Weken, un wat wi nu arnten, kann de Grundlage för grote, machtige Husen in eenem annern Land sien."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:210
 msgid "A Step Forward"
@@ -387,14 +387,14 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr "Ick hebb vandaag höört, dat uns' Schipp weer klaar is. Miene Lüü laden upstünds alls in uns' neei pleistert Schipp un hopen, dat 't uns nu beter deent as lestes Maal."
+msgstr "Ick hebb vandaag höört, dat uns’ Schipp weer klaar is. Miene Lüü laden upstünds alls in uns’ neei pleistert Schipp un hopen, dat ’t uns nu beter deent as lestes Maal."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr "Vunnacht is uns' leste Nacht up deese Insel. Mörgen froh verlaten wi se un söken na eener nejen Stee för uns' Exil."
+msgstr "Vunnacht is uns’ leste Nacht up deese Insel. Mörgen froh verlaten wi se un söken na eener nejen Stee för uns’ Exil."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
