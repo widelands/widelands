@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-07 14:01+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Bau eene Saagmöhlen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:42
 msgid "Expand your territory and explore"
-msgstr "Vergroter dien Gewest un försk 't ut"
+msgstr "Vergroter dien Gewest un försk ’t ut"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
@@ -170,7 +170,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Iesenkluut, Goldkluut un Köhle worden in de daarna benöögten Bargwarken ofboot. Dat Edelflint-Bargwark söcht na Blinkerflint un Edelstenen – dat sünd dürable Baumaterialien, de leep selten funnen worden. 't produzeert een Bült Flint, as 't daarna söcht."
+msgstr "Iesenkluut, Goldkluut un Köhle worden in de daarna benöögten Bargwarken ofboot. Dat Edelflint-Bargwark söcht na Blinkerflint un Edelstenen – dat sünd dürable Baumaterialien, de leep selten funnen worden. ’t produzeert een Bült Flint, as ’t daarna söcht."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
@@ -271,7 +271,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "'t gifft am Topp vun de Insel een Meer. Bau dree Schippen in deesem Water un du kannst villicht diene Lüü redden, ehr de Insel kumpleet vun de See verslungen word."
+msgstr "’t gifft am Topp vun de Insel een Meer. Bau dree Schippen in deesem Water un du kannst villicht diene Lüü redden, ehr de Insel kumpleet vun de See verslungen word."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
@@ -304,7 +304,7 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr "Deeses Vertellsel passeert unner de Heerskupp vun König Askandor, de 43. Nafolger vun König Ajanthul. He weer en goder König un hett Atlantis mit Klookheid un Vörutkieken regeert. Aver as oller Mann hett he Angst vör'm Starven kregen un begunnen, eene Medizin vör'm Dood to söken, ofschoon de Pastoren hüm daar vör warnt hebben. Se hebben seggt, dat dat ewich Leven blot för Gotten is, un 't is Minsken verseggt, daarna to söken."
+msgstr "Deeses Vertellsel passeert unner de Heerskupp vun König Askandor, de 43. Nafolger vun König Ajanthul. He weer en goder König un hett Atlantis mit Klookheid un Vörutkieken regeert. Aver as oller Mann hett he Angst vör’m Starven kregen un begunnen, eene Medizin vör’m Dood to söken, ofschoon de Pastoren hüm daar vör warnt hebben. Se hebben seggt, dat dat ewich Leven blot för Gotten is, un ’t is Minsken verseggt, daarna to söken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
@@ -321,7 +321,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Aver all sach good ut. Blot de Peer hebben sük een bietje komisk benohmen. In de Nacht weren se ganz dördreiht un rappelig. Na körter Tied hett de Peertüchter Skied' utfunnen, wat löss weer: De See tegen hör Stallen leep immer gauer up."
+msgstr "Aver all sach good ut. Blot de Peer hebben sük een bietje komisk benohmen. In de Nacht weren se ganz dördreiht un rappelig. Na körter Tied hett de Peertüchter Skied’ utfunnen, wat löss weer: De See tegen hör Stallen leep immer gauer up."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:158
@@ -358,7 +358,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr "Jundlin', de Dochter vun de doden König un hoogste Pastorin vun Luutas, weer de stuurste Pastor. As unbannig völe Gaven nix ännert hebben, weer se seker, dat nix as eene Gaav vun hogen persönelken Weert de Gott besadigen kann. Also opferte se hüm dat, wat se am meesten leevte: hör Mann, de Vader vun hör eenzigst Kind."
+msgstr "Jundlin’, de Dochter vun de doden König un hoogste Pastorin vun Luutas, weer de stuurste Pastor. As unbannig völe Gaven nix ännert hebben, weer se seker, dat nix as eene Gaav vun hogen persönelken Weert de Gott besadigen kann. Also opferte se hüm dat, wat se am meesten leevte: hör Mann, de Vader vun hör eenzigst Kind."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:170
@@ -370,7 +370,7 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Aver nich mal dat kunn de Gott anners stimmen. Dat Water leep wieder up. Haast dördreiht vör Schuld, Pien un Wut wurr Jundlin' tur Ketterin: In't Geheem hett se normale Lüü sammelt, wat mit de Beslutt vun de Pastoren, de Will vun de Gott antonehmen, nich tofree weren. Tosamen hebben se all de Tempel ofbrannt un een Schipp stohlen, mit de se weg vun Atlantis un Luutas sien Macht flüchtden. De lütte Klottje hett begunnen, to Satuul de Füürgott to beden, Luutas sien slimmster Feind."
+msgstr "Aver nich mal dat kunn de Gott anners stimmen. Dat Water leep wieder up. Haast dördreiht vör Schuld, Pien un Wut wurr Jundlin’ tur Ketterin: In’t Geheem hett se normale Lüü sammelt, wat mit de Beslutt vun de Pastoren, de Will vun de Gott antonehmen, nich tofree weren. Tosamen hebben se all de Tempel ofbrannt un een Schipp stohlen, mit de se weg vun Atlantis un Luutas sien Macht flüchtden. De lütte Klottje hett begunnen, to Satuul de Füürgott to beden, Luutas sien slimmster Feind."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
@@ -385,7 +385,7 @@ msgstr "De Königstochter hör Memoorje"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:180
 msgid "Jundlina Writes Down Her Memories"
-msgstr "Jundlin' schrievt hör Memoorje up"
+msgstr "Jundlin’ schrievt hör Memoorje up"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:182
@@ -395,7 +395,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr "Wi hebben Atlantis verlaten un sünd na Oosten seilt. Am sessten Dag hebben wi de verseggten Seen betreden, sünner vun Atlantis verfolgt to worden of dat Luutas uns' Schipp verneelt hett. Nu sünd wi achter siener Macht. Eenen Dag daarna hebben wi eene Insel to sehn kregen, wat utsücht, as of daar Bargen up sünd, wat Füür spejen. Dat is, gloov ik, en Teken vun de Füürgott, also sünd wi daar up de Küst lannt."
+msgstr "Wi hebben Atlantis verlaten un sünd na Oosten seilt. Am sessten Dag hebben wi de verseggten Seen betreden, sünner vun Atlantis verfolgt to worden of dat Luutas uns’ Schipp verneelt hett. Nu sünd wi achter siener Macht. Eenen Dag daarna hebben wi eene Insel to sehn kregen, wat utsücht, as of daar Bargen up sünd, wat Füür spejen. Dat is, gloov ik, en Teken vun de Füürgott, also sünd wi daar up de Küst lannt."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:185
@@ -415,7 +415,7 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr "Wi hebben uns up de Insel inricht. De anner Stapp is, se to uns' Heimaad to maken. Ick gloov, wi mutten eerst maal eene Weertskupp tum Sülvst-Versörgen upbauen un uns' Kuntrei utförsken. Ick hebb Meesters ropen laten un will hör Raad folgen."
+msgstr "Wi hebben uns up de Insel inricht. De anner Stapp is, se to uns’ Heimaad to maken. Ick gloov, wi mutten eerst maal eene Weertskupp tum Sülvst-Versörgen upbauen un uns’ Kuntrei utförsken. Ick hebb Meesters ropen laten un will hör Raad folgen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
@@ -444,7 +444,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Satuul sall jo twee warmen. Loftomoor, du büst de beste Baukeerl vun all Atlantis wesen. Sidoolus, du büst een oller Soldat un Kriegsplaner. Ick hebb jo twee to mi ropen laten, darmit jo mi beraadt: Wat mutten wi doon, um deese Insel uns' neje Heimaad to maken?"
+msgstr "Satuul sall jo twee warmen. Loftomoor, du büst de beste Baukeerl vun all Atlantis wesen. Sidoolus, du büst een oller Soldat un Kriegsplaner. Ick hebb jo twee to mi ropen laten, darmit jo mi beraadt: Wat mutten wi doon, um deese Insel uns’ neje Heimaad to maken?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
@@ -460,7 +460,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Satuul sall Jo warmen, Jundlin'! De wichtigsten Dingen, um een Dörp to bauen, sünd de Baumaterialien. Dat gifft hier een paar Bomen, also sallen wi Husen för Boomslagers bauen un natürelk ok för Försters, daarmit dat alltied genoog Bomen gifft. Ach, un wi düren nich eene Saagmöhlen vergeten, denn de meesten Husen könen nich blot ut Boomstammen baut worden. Grotere Husen bruken ok Flint, aver dat gifft Bülten daarvun im Noordoost; wi bruken nix as een Flintslagerhuus un miene Flintslager fangen stracks an to warken."
+msgstr "Satuul sall Jo warmen, Jundlin’! De wichtigsten Dingen, um een Dörp to bauen, sünd de Baumaterialien. Dat gifft hier een paar Bomen, also sallen wi Husen för Boomslagers bauen un natürelk ok för Försters, daarmit dat alltied genoog Bomen gifft. Ach, un wi düren nich eene Saagmöhlen vergeten, denn de meesten Husen könen nich blot ut Boomstammen baut worden. Grotere Husen bruken ok Flint, aver dat gifft Bülten daarvun im Noordoost; wi bruken nix as een Flintslagerhuus un miene Flintslager fangen stracks an to warken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
@@ -474,13 +474,13 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr "Satuul sall Jo warmen, Jundlin'! Ick segg Jau to all, wat Loftomoor vörslaggt. Wi bruken völe Baumaterialien, um uns' Gewest fix to vergrotern. Ick föhl mi up deeser Insel nich seker, bit wi se kumpleet sehn hebben. Ick hebb bannig völe gode Lüü vun Atlantis mitbrocht. De Soldateree is klaar, wi bruken blot Husen, waar se leven könen."
+msgstr "Satuul sall Jo warmen, Jundlin’! Ick segg Jau to all, wat Loftomoor vörslaggt. Wi bruken völe Baumaterialien, um uns’ Gewest fix to vergrotern. Ick föhl mi up deeser Insel nich seker, bit wi se kumpleet sehn hebben. Ick hebb bannig völe gode Lüü vun Atlantis mitbrocht. De Soldateree is klaar, wi bruken blot Husen, waar se leven könen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina is Satisfied"
-msgstr "Jundlin' is tofree"
+msgstr "Jundlin’ is tofree"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
@@ -493,7 +493,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "Uns' Bau-Weertskupp is kumpleet un ick hebb een paar Dagen daarmit verbrocht, uptopassen, dat all Lüü good tosamen warken. Nu gifft dat anner wichtige Dingen. Ick hebb Kojonder, mienen persönelken Kock, to mi ropen laten, um mit siener Hülp een paar Dinge klaar to maken."
+msgstr "Uns’ Bau-Weertskupp is kumpleet un ick hebb een paar Dagen daarmit verbrocht, uptopassen, dat all Lüü good tosamen warken. Nu gifft dat anner wichtige Dingen. Ick hebb Kojonder, mienen persönelken Kock, to mi ropen laten, um mit siener Hülp een paar Dinge klaar to maken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
@@ -503,7 +503,7 @@ msgstr "Kojonder kummt"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr "Satuul sall Jo warmen, Jundlin'. Kann ick Jo of de Gott denen?"
+msgstr "Satuul sall Jo warmen, Jundlin’. Kann ick Jo of de Gott denen?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:226
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
@@ -513,7 +513,7 @@ msgstr "Satuul sall Jo warmen, Jundlin'. Kann ick Jo of de Gott denen?"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
 msgid "Jundlina Replies"
-msgstr "Jundlin' antwoordt"
+msgstr "Jundlin’ antwoordt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:229
@@ -523,7 +523,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Satuul sall Jo ok warmen, Kojonder. Jau, ick överlegg, of wi uns' Spiesen-Weertskupp beter tosamenführen könen. Wi sünd bannig langsaam mit de Produzeren vun all Dingen, wiel uns' Lüü dat wohnt sünd, hör eegen Eten to maken. Wenn wi de Toständigheiten updelen könen, is dat better för uns all, gloov ick. Ick will weten, wat du daarvun hollst."
+msgstr "Satuul sall Jo ok warmen, Kojonder. Jau, ick överlegg, of wi uns’ Spiesen-Weertskupp beter tosamenführen könen. Wi sünd bannig langsaam mit de Produzeren vun all Dingen, wiel uns’ Lüü dat wohnt sünd, hör eegen Eten to maken. Wenn wi de Toständigheiten updelen könen, is dat better för uns all, gloov ick. Ick will weten, wat du daarvun hollst."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
@@ -536,7 +536,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr "Ahh, ick gloov man, dat is unmögelk, dat to ännern. Dat Torechtmaken un Eten vun uns' Spiesen is so bannig deep in de Eegenheiten vun uns Atlantingers ankert – dat is eene Fierlikheid, wat wi för uns' Tofree-Wesen bruken. Dat könen wi nich eenfach vun uns' Lüü wegnehmen."
+msgstr "Ahh, ick gloov man, dat is unmögelk, dat to ännern. Dat Torechtmaken un Eten vun uns’ Spiesen is so bannig deep in de Eegenheiten vun uns Atlantingers ankert – dat is eene Fierlikheid, wat wi för uns’ Tofree-Wesen bruken. Dat könen wi nich eenfach vun uns’ Lüü wegnehmen."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -562,7 +562,7 @@ msgstr "Och, un noch vööl wichtiger: Dat Rökeln vun Fiss un Fleesk, um se sch
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:245
 msgid "Jundlina Agrees"
-msgstr "Jundlin' stimmt to"
+msgstr "Jundlin’ stimmt to"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -571,14 +571,14 @@ msgstr "Diene Woorden sünd wies, Kojonder. Wees dat so."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Jundlina is Reviewing the Reports"
-msgstr "Jundlin' gaht de Berichten dör"
+msgstr "Jundlin’ gaht de Berichten dör"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr "Uns' Spiesen-Weertskupp is kumpleet un all Lüü warken good tosamen. Wi begünnen, uns hier as tohuus to föhlen."
+msgstr "Uns’ Spiesen-Weertskupp is kumpleet un all Lüü warken good tosamen. Wi begünnen, uns hier as tohuus to föhlen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
@@ -593,7 +593,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Satuul sall Jo warmen, Jundlin'. Mien Naam is Öpoll, un ick bin de eerste Spinner vun de Gild. wat Atlantis un Luutas mit Jo verlaten hett. Ick komm mit bannig slechten Narichten: Wi hebben keenen Spinnenstoff mehr. Nich een enkelt Deel is noch in uns' Kraamhusen över. Kannst du de Spinners nich helpen, indeem du eene Spinnweelmöhlen un eene Spinnentüchteree bauen lettst? De Spinnen produzeren de beste Sied, un wi maken daar de beste Spinnenstoff vun."
+msgstr "Satuul sall Jo warmen, Jundlin’. Mien Naam is Öpoll, un ick bin de eerste Spinner vun de Gild. wat Atlantis un Luutas mit Jo verlaten hett. Ick komm mit bannig slechten Narichten: Wi hebben keenen Spinnenstoff mehr. Nich een enkelt Deel is noch in uns’ Kraamhusen över. Kannst du de Spinners nich helpen, indeem du eene Spinnweelmöhlen un eene Spinnentüchteree bauen lettst? De Spinnen produzeren de beste Sied, un wi maken daar de beste Spinnenstoff vun."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -623,14 +623,14 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr "Satuul sall Jo warmen, Jundlin'! De Spinnweelmöhlen, Goldspinneree un Spinnentüchteree sünd kumpleet un begünnen jüüst nu to warken. De Spinners sünd bannig dankbaar för dien Unnerstütten und begünnen, as se versprocken hebben, bold de eersten Kluften to produzeren."
+msgstr "Satuul sall Jo warmen, Jundlin’! De Spinnweelmöhlen, Goldspinneree un Spinnentüchteree sünd kumpleet un begünnen jüüst nu to warken. De Spinners sünd bannig dankbaar för dien Unnerstütten und begünnen, as se versprocken hebben, bold de eersten Kluften to produzeren."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
-msgstr "Dat sünd würrelk gode Narichten, Öpoll. Uns' Weertskupp löppt bannig good. Gah nu torügg to diener Arbeid, Öpoll, un Satuul sall jo un all de anner Spinners warmen!"
+msgstr "Dat sünd würrelk gode Narichten, Öpoll. Uns’ Weertskupp löppt bannig good. Gah nu torügg to diener Arbeid, Öpoll, un Satuul sall jo un all de anner Spinners warmen!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
@@ -645,11 +645,11 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Satuul sall Jo warmen, Jundlin'. Hest du al överleggt, of wi in de Bargen um uns Mineraale ofboen sallen? Wi hebben bold keen Blinkerflint un Edelstenen för uns' Husen mehr. Un wi bruken ok mehr Iesen, Gold un vör allem Köhl. Wenn wi eene gode Versörgen för deese Schatten finnen, könen wi begünnen, Wapen un Warktüüg tp produzerem, wat uns bannig vööl helpen word. Daarto bruken wi natürelk Smeltwarken, eene Wapensmee, eene Panzersmee un eene Warktüügsmee. Un villicht noch mehr."
+msgstr "Satuul sall Jo warmen, Jundlin’. Hest du al överleggt, of wi in de Bargen um uns Mineraale ofboen sallen? Wi hebben bold keen Blinkerflint un Edelstenen för uns’ Husen mehr. Un wi bruken ok mehr Iesen, Gold un vör allem Köhl. Wenn wi eene gode Versörgen för deese Schatten finnen, könen wi begünnen, Wapen un Warktüüg tp produzerem, wat uns bannig vööl helpen word. Daarto bruken wi natürelk Smeltwarken, eene Wapensmee, eene Panzersmee un eene Warktüügsmee. Un villicht noch mehr."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
-msgstr "Jundlin' nickkoppt"
+msgstr "Jundlin’ nickkoppt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
@@ -660,7 +660,7 @@ msgstr "Ick hebb daar överleggt, Sidoolus. Un ick finn, dat is de rechte Tied. 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Jundlina Writes a Letter"
-msgstr "Jundlin' schrievt eenen Breev"
+msgstr "Jundlin’ schrievt eenen Breev"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
@@ -668,7 +668,7 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "Ick hebb höört, dat uns' Bargwark-Weertskupp nu warkt. Nu dat wi Wapen smeden, will ick Sidoolus mellen laten, dat 't Tied is, eene Kasern to bauen un Soldaten antohüren."
+msgstr "Ick hebb höört, dat uns’ Bargwark-Weertskupp nu warkt. Nu dat wi Wapen smeden, will ick Sidoolus mellen laten, dat ’t Tied is, eene Kasern to bauen un Soldaten antohüren."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
@@ -679,11 +679,11 @@ msgstr "Ick hebb vandag de eersten Lehrwichter sehn, as se vör de neje Kasern s
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina Summons Sidolus"
-msgstr "Jundlin' röppt Sidoolus heran"
+msgstr "Jundlin’ röppt Sidoolus heran"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is Angry"
-msgstr "Jundlin' is düll"
+msgstr "Jundlin’ is düll"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
@@ -720,7 +720,7 @@ msgstr "De Kösten un Arbeid sünd nich slimm, wenn dat blot diene Lüü bi Ben�
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:355
 msgid "Jundlina Received a Letter"
-msgstr "Jundlin' hett eenen Breev kregen"
+msgstr "Jundlin’ hett eenen Breev kregen"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
@@ -730,11 +730,11 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Ick bün vun Sidoolus inladen worden. De eerste Övens-Dag in de neje Dwaalwegen is mörgen. De Gefahrelke Gangen sünd ok kumpleet un begünnt bold to warken. Ick freei mi up mörgen; ick will geern sehn, wo de Soldaten öven, un ick hoop, dat deese nejen Upgaven se ofhollen, uns' Lüü to schikaneren."
+msgstr "Ick bün vun Sidoolus inladen worden. De eerste Övens-Dag in de neje Dwaalwegen is mörgen. De Gefahrelke Gangen sünd ok kumpleet un begünnt bold to warken. Ick freei mi up mörgen; ick will geern sehn, wo de Soldaten öven, un ick hoop, dat deese nejen Upgaven se ofhollen, uns’ Lüü to schikaneren."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
 msgid "Jundlina Considers the Economy"
-msgstr "Jundlin' sinnt över de Weertskupp"
+msgstr "Jundlin’ sinnt över de Weertskupp"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
@@ -759,7 +759,7 @@ msgstr "Eene gefahrelke Entdeckung"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:383
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:411
 msgid "Jundlina is in Thought"
-msgstr "Jundlin' sinnt"
+msgstr "Jundlin’ sinnt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
@@ -787,7 +787,7 @@ msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
-msgstr "Wi mutten uns' Soldateree verbetern. Wenn dat up de Insel Feinde gifft, mutten wi stark wesen, wenn wi se treffen. Wi sallen ok de Befestigungen an uns' Grenzen utbauen."
+msgstr "Wi mutten uns’ Soldateree verbetern. Wenn dat up de Insel Feinde gifft, mutten wi stark wesen, wenn wi se treffen. Wi sallen ok de Befestigungen an uns’ Grenzen utbauen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Another Building"
@@ -795,7 +795,7 @@ msgstr "Noch een Huus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
 msgid "Jundlina is Worried"
-msgstr "Jundlin' is besörgt"
+msgstr "Jundlin’ is besörgt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
@@ -805,7 +805,7 @@ msgid ""
 "before and obviously it was militarized. I have to check on our military "
 "status with my generals. I will not allow that a potential enemy will find "
 "us unprepared."
-msgstr "Wi hebben noch een Huus funnen, wat up deese komiske Aard baut is. Wi hebben de Baukeerls immer noch nich to sehn kregen. Aver dat hett openbaar maal eene Klottje up deeser Insel geven, wat openbaar ok Soldateree harr. Ick mutt mit mienen Offizeren över de Tostand vun uns' Soldateree reden. Een mögelker Feind düür uns nich unklaar finnen."
+msgstr "Wi hebben noch een Huus funnen, wat up deese komiske Aard baut is. Wi hebben de Baukeerls immer noch nich to sehn kregen. Aver dat hett openbaar maal eene Klottje up deeser Insel geven, wat openbaar ok Soldateree harr. Ick mutt mit mienen Offizeren över de Tostand vun uns’ Soldateree reden. Een mögelker Feind düür uns nich unklaar finnen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:410
 msgid "One More Building"
@@ -846,7 +846,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Satuul sall Jo warmen, Jundlin'. Mien Naam is Ostuur un ick bau Schippen. Ick hebb eene neje Aard vun Schipp utdacht: Lütter as de Schippen, wat wi sünst bruken, aver faster. Wenn wi se good bauen, könen wi wiss eene vööl grotere Streck daarmit seilen un villicht vun Luutas sien Macht utnaihen."
+msgstr "Satuul sall Jo warmen, Jundlin’. Mien Naam is Ostuur un ick bau Schippen. Ick hebb eene neje Aard vun Schipp utdacht: Lütter as de Schippen, wat wi sünst bruken, aver faster. Wenn wi se good bauen, könen wi wiss eene vööl grotere Streck daarmit seilen un villicht vun Luutas sien Macht utnaihen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
@@ -874,7 +874,7 @@ msgstr "Een Fründ vun mi hett de Insel sülvst utförsket un mi vun eenem grote
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr "Dien rodes Haar is een Teken vun de Füür-Gott. Ick will Jo trauen un dienen Plaan unnerstütten. Uns' Överleven liggt nu in dienen Hannen, Ostuur."
+msgstr "Dien rodes Haar is een Teken vun de Füür-Gott. Ick will Jo trauen un dienen Plaan unnerstütten. Uns’ Överleven liggt nu in dienen Hannen, Ostuur."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
@@ -883,11 +883,11 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Nu fix, wi bruken för Ostuur een Huus tegen de Meer, un wi bruken Planken, Boomstammen un Spinnenstoff, um Schippen to bauen. Vergeet all anner Dingen, wi bruken deese Waren hoog in de Bargen ehr uns' Kraamhusen all in dee See verswunnen sünd."
+msgstr "Nu fix, wi bruken för Ostuur een Huus tegen de Meer, un wi bruken Planken, Boomstammen un Spinnenstoff, um Schippen to bauen. Vergeet all anner Dingen, wi bruken deese Waren hoog in de Bargen ehr uns’ Kraamhusen all in dee See verswunnen sünd."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
 msgid "Jundlina is Relieved"
-msgstr "Jundlin' is verlichtert"
+msgstr "Jundlin’ is verlichtert"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
@@ -897,7 +897,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr "Satuul wees Pries! Ostuur, de Schippebauer, hett 't daankregen. Wi hebben dree Schippen – un ick hebb nie hardere sehn – wat jüüst groot genoog sünd, um uns all to dragen. Un dat weer jüüst bi Tied: Luutas word nu bold de Insel kumpleet versluken, dat Water löppt alltied fixer up. Aver wi könen nu utnaihen un in eenem anner Land, wied weg, neei begünnen …"
+msgstr "Satuul wees Pries! Ostuur, de Schippebauer, hett ’t daankregen. Wi hebben dree Schippen – un ick hebb nie hardere sehn – wat jüüst groot genoog sünd, um uns all to dragen. Un dat weer jüüst bi Tied: Luutas word nu bold de Insel kumpleet versluken, dat Water löppt alltied fixer up. Aver wi könen nu utnaihen un in eenem anner Land, wied weg, neei begünnen …"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475

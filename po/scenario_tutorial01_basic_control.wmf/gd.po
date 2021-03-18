@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-02 12:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 10:24+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,36 +43,36 @@ msgstr "Fàilte do Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "’S e geama ro-innleachd mhaille a th’ ann an Widelands far am bi d’ aire air togail seach milleadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Thèid do stiùireadh tron oideachadh seo le amasan."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Na h-amasan is mar a dhèiligeas tu riutha"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Làimhseachadh uinneag nan “Amasan”"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr " ’S urrainn dhut uinneag nan “Amasan” fhosgladh ’s a dhùnadh le briogadh air a’ phutan “Amasan” air a’ bhàr-inneal aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Mar a nì thu leis a’ mhòrchuid de dh’uinneagan, ’s urrainn dhut a uinneag a dhùnadh le briogadh deas oirre cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Nuair a bhios tu air amas a choileanadh, thèid a thoirt air falbh on liosta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
@@ -81,14 +81,14 @@ msgstr "Seall na h-ionadan togail"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Gnìomhaich “Seall ionadan togail”. Tha dà dhòigh ann gus seo a dhèanamh:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Brùth air an iuchair %s gus an cur air is dheth air neo tagh “Seall na h-ionadan togail” sa chlàr-taice “Seall / Falaich”."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
@@ -110,7 +110,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have a different "
 "economy, strength and weaknesses, but the general gameplay is the same for "
 "all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Tha còig treubhan diofraichte ann an Widelands: na Tùsanaich, an Impireachd, na h-Atlantaich, na Frìoslannaich agus Muinntir na h-Amasoin. Tha eaconamaidh, neartan is laigsean eadar-dhealaichte aig gach treubh, ach cluichidh tu an geama san aon dòigh le gach tè dhiubh. Bidh sinn ’nar Tùsanaich an-dràsta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -122,7 +122,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Tòisichidh tu air geama le aon phrìomh-àras mar as trice. Seo an togalach mòr leis a’ bhratach ghorm air a bheulaibh. Tha am prìomh-àras a’ glèidheadh bathar, luchd-obrach is saighdearan. Bidh feum air cuid a bhathar gus taighean a thogail is air cuid eile gus bathar eile a dhèanamh. Gu follaiseach, cha mhair na batharan a gheibh thu aig an toiseach gu bràth is feumaidh tu dèanamh cinnteach gun dèan thu barrachd dhiubh. ’S e fiodh agus gaireal a tha sa bhathar togail bhunasach as cudromaiche aig toiseach a’ gheama. Nise, dèanamaid cinnteach nach ruith am fiodh oirnn. Bidh feum againn air coilltear agus air bothan sa ghabhas e còmhnaidh air a shon."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -134,7 +134,7 @@ msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Se
 msgid ""
 "I'll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Seallaidh mi dhut far a bheil an clàr-taice agus mar a sheallas agus a dh’fhalaicheas tu na h-ionadan togail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -152,7 +152,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Sin thu fhèin! Nise, seallaidh mi dhut mar a thogas tu bothan coillteir is mar a cheanglas tu ri rathad e. Tha deagh àite airson coillteir ri taobh nan craobhan ud. Mìnichidh mi na ceuman a ghabhas mi is seallaidh mi iad dhut an uairsin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -162,13 +162,13 @@ msgstr "A’ togail bothan coillteir"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "An toiseach, nì mi briogadh clì air an t-samhla far a bheil mi airson am bothan coillteir a thogail. Nochdaidh uinneag far an urrainn dhomh togalach a thaghadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "’S e togalach beag a th’ anns a’ bhothan choillteir is mar sin taghaidh mi taba nan togalaichean beaga. Taghaidh mi am bothan coillteir an uairsin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -298,11 +298,11 @@ msgstr "Sin thu fhèin! Fuirich ort fhad ’s a thèid am bothan a chrìochnacha
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Ma tha thu airson cùisean a dhèanamh nas luaithe, cha leig thu leas ach an iuchair %1$s a chleachdadh air a’ mheur-chlàr agad gus an geama a dhèanamh nas luaithe. Cleachd an iuchair %2$s gus maille a chur air a’ gheama a-rithist."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Thèid atharrachadh gu luath le brùthadh air %1$s/%2$s agus gu rèidh le bruthadh air %3$s/%4$s."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
@@ -317,11 +317,11 @@ msgstr "Taghta. Tha am bothan coillteir deiseil. Gabhaidh coilltear còmhnaidh a
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Gluasad an t-seallaidh"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Gluais an sealladh agad"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -381,7 +381,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Nuair a bhios tu deiseil airson leantainn air adhart, dùin am meanbh-mhapa ’s tu a’ taghadh “Falaich am meanbh-mhapa” sa chlàr-taice “Sealladh a’ mhapa” no le brùthadh air “%s”. Gu nàdarra, obraichidh briogadh deas cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
@@ -402,7 +402,7 @@ msgstr "Glè mhath. Nise, mun mheanbh-mhapa. "
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "‘S urrainn dhut fhosgladh ’s tu a’ taghadh “Seall am meanbh-mhapa” sa chlàr-taice “Sealladh a’ mhapa” aig bonn na sgrìn no leis an iuchair “%s” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -443,7 +443,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "’S e togalach beag a tha sa chuaraidh mar a tha am bothan coillteir. Mar sin, ’s urrainn dhut fear a thogail air raon sam bith a sheallas taigh dearg, buidhe no uaine nuair a bhios na h-ionadan togail ’gan nochdadh (brùth air “%s” gus an nochdadh)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -465,7 +465,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Dèan cinnteach gun do nochd thu na h-ionadan togail is an uairsin briog air an àite far a bheil thu airson an togalach a chur ann agus tagh on uinneag a nochdas e ach an dèid a chur ann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -561,7 +561,7 @@ msgstr "Ceangail an làrach togail agad"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Ceangal làrach togail a’ chuaraidh ris a’ phrìomh-àras agad le rathad."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -615,7 +615,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Cha toigh leis an luchd-obrach agad coiseachd a’ bhlàir. Feumaidh tu rathad a thogail on phrìomh-àras agad dhan làrach togail ach an urrainn dha na giùlanairean bathar a thogail dha."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
@@ -673,7 +673,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Fhad ’s a tha sinn a’ feitheamh, seallaidh mi gleus feumail eile dhut. Tha e doirbh aig amannan aithneachadh dè seòrsa togalaich a chì thu. Tha gleus aig Widelands a nochdas ainm no “cunntas-sluaigh” os cionn gach togalaich."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -681,7 +681,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Airson leubailean cunntas-sluaigh nan togalaichean a nochdadh no fhalach, tagh “Seall an cunntas-sluaigh”/“Falaich an cunntas-sluaigh” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “%s” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -698,7 +698,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Airson leubailean stadastaireachd nan togalaichean a nochdadh no fhalach, tagh “Seall an stadastaireachd ”/“Falaich an stadastaireachd ” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “%s” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -740,7 +740,7 @@ msgstr "Briog air a’ phutan “Cuir an teachdaireachd a thagh thu dhan tasglan
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "’S urrainn dhut cuideachd an iuchair Ctrl no Shift a chumail sìos gus iomadh teachdaireachd a thaghadh, no brùth air %s gus a h-uile gin dhiubh a thaghadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #, lua-format
@@ -748,7 +748,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "’S urrainn dhut uinneag nan teachdaireachd a thoglachadh ’s tu a’ brùthadh air “%s” no a’ briogadh air an dàrna putan on taobh deas aig a bhonn. Thèid an teachdaireachd as ùire a thaghadh dhut gu fèin-obrachail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -800,7 +800,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "’S urrainn dhut uinneag sam bith ann an Widelands (ach uinneagan sgeulachd a sheallas putan “Ceart ma-thà”) a dhùnadh ’s tu a’ dèanamh briogadh deas air. Gabhaidh cuid a dh’uinneagan sealltainn is falach leis na putanan is clàran-taice aig bonn na sgrìn cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -813,7 +813,7 @@ msgstr "A’ dùnadh uinneagan"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Glan. Thoireamaid an aire air nithean eile a-nis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -877,14 +877,14 @@ msgstr "Cuir ris an ranntair agad"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Tog togalach an airm aig a’ chrìoch. Tagh fear sam bith a thogras tu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "’S e am freiceadan a tha san aon togalach an airm as urrainn dhut togail air raon togail beag. Ma tha an coilltear agad air rùm gu leòr a chruthachadh, ’s urrainn dhut togalach an airm a tha nas motha a thogail cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
@@ -916,7 +916,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Tha leudachadh an ranntair agad cho simplidh ri togail togalach an airm air crìochan do dhùthcha. Tha roghainn de cheithir togalaichean an airm aig na Tùsanaich: freiceadain, taighean-faire, taighean-faire agus tùir. Mar as motha an togalach ’s ann as cosgaile a bhios e, ’s ann as motha an tìr a cheannsaicheas e is ’s ann as motha an àireamh de shaighdearan a ghabhas còmhnaidh ann. Tha astar lèirsinne eadar-dhealaichte aig gach togalach cuideachd: chì togalaichean aig a bheil tùr nas fhaide na càch."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""
