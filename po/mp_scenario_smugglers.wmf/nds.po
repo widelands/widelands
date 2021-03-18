@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2020-08-26 12:03+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Smuggeln is eene spaßige Kaart för 4 Spelers. Du un deen Partner begünnt tegenöver up eener Insel, de evenmatig mit eenem Dreihzentrum is. Up de Insel gifft 't mennig Tunnels tum Smuggeln. Elkeen Tunnel hett een Enn tum Schicken un eens tum Empfangen."
+msgstr "Smuggeln is eene spaßige Kaart för 4 Spelers. Du un deen Partner begünnt tegenöver up eener Insel, de evenmatig mit eenem Dreihzentrum is. Up de Insel gifft ’t mennig Tunnels tum Smuggeln. Elkeen Tunnel hett een Enn tum Schicken un eens tum Empfangen."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""

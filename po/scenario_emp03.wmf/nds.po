@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -136,7 +136,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
-msgstr "Produzeer Stoff för uns' eerstes Schipp"
+msgstr "Produzeer Stoff för uns’ eerstes Schipp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
@@ -201,7 +201,7 @@ msgstr "Manntje de Feind"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
 msgstr ""
-"De Willen Lüü sall 't in deese Deel vun de Welt nich mehr geven. Kümmer di "
+"De Willen Lüü sall ’t in deese Deel vun de Welt nich mehr geven. Kümmer di "
 "drum."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
@@ -288,8 +288,8 @@ msgid ""
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
 "Neptun sülvst was tegen uns un hett uns weer in eenen dunkeln, depen Storm "
-"dreven. Deeses Maal was 't noch slimmer as lestes Maal. De Wellen weren twee"
-" maal so hoog as uns' dapperes Schipp un de Wind hett uns in unsekeres Water"
+"dreven. Deeses Maal was ’t noch slimmer as lestes Maal. De Wellen weren twee"
+" maal so hoog as uns’ dapperes Schipp un de Wind hett uns in unsekeres Water"
 " dreven."
 
 #. TRANSLATORS: Lutius - Diary
@@ -299,9 +299,9 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
-"Uns' Schipp is leep ramponeert. De Mast is över Boord gahn un sw Rump löppt "
+"Uns’ Schipp is leep ramponeert. De Mast is över Boord gahn un sw Rump löppt "
 "vull mit Water. Wi sünd blied, wenn wi deese swarte Nacht mit nix mehr as "
-"uns' Leven överstahn."
+"uns’ Leven överstahn."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
@@ -323,7 +323,7 @@ msgstr ""
 "WI sünd weer up eener frömden Küst uplopen un hebben im Scharren vun "
 "Palmbomen slapen bit de Sünne hoog am Himmel stunn. As wi am Namiddag "
 "upwaakt sünd was nüms würrelk överrascht, dat wi nix as Sand sehn kunnen … "
-"ok wenn de Tahl vun Stenen tegen uns' Lager baldadig was."
+"ok wenn de Tahl vun Stenen tegen uns’ Lager baldadig was."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -331,7 +331,7 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
-"'t sücht würrelk so ut, as of wi up eener bannig lütten Insel mit heel minn "
+"’t sücht würrelk so ut, as of wi up eener bannig lütten Insel mit heel minn "
 "Rüümte landt sünd."
 
 #. TRANSLATORS: Lutius - Diary
@@ -340,7 +340,7 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
-"Un 't is noch slimmer: All dat Land, wat wi sehn könen, is mit Stenen un "
+"Un ’t is noch slimmer: All dat Land, wat wi sehn könen, is mit Stenen un "
 "Bomen dichtmüürt. Ick bün bang, dat wi de nödigen Materialien, de wi bruken,"
 " um een nejes Schipp to bauen, nich finnen könen."
 
@@ -351,7 +351,7 @@ msgid ""
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
 "Ick weet würrelk nich, of un wo wo torügg na Huus komen sallen. Un de Krieg "
-"gaht sünner uns wieder. Ick hoop, miene Soldaten-Fründe verteidigen uns' "
+"gaht sünner uns wieder. Ick hoop, miene Soldaten-Fründe verteidigen uns’ "
 "Riek good."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:227
@@ -370,16 +370,16 @@ msgid ""
 " island and add some military strength."
 msgstr ""
 "Mienheer, wi weten absolut nix över deese Insel. Un ick gloov, wi sünd hier "
-"ok nich seker. 't is wull beter, eenen Toorn to bauen, um de Insel "
+"ok nich seker. ’t is wull beter, eenen Toorn to bauen, um de Insel "
 "uttoförsken un wat Soldateree-Fors to hebben."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
-msgstr "Amalee' unnerbreckt"
+msgstr "Amalee’ unnerbreckt"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:237
 msgid "Amalea raises her hand…"
-msgstr "Amalee' hollt de Hand hoog …"
+msgstr "Amalee’ hollt de Hand hoog …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:239
@@ -408,7 +408,7 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
-"Mienheer, Amalee' hett Recht över de Materialien. Ick änner mienen Raad. Wi "
+"Mienheer, Amalee’ hett Recht över de Materialien. Ick änner mienen Raad. Wi "
 "sallen blot eene Butenstee bauen, wat de goodkopenste Soldateree-Boo is."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:257
@@ -438,15 +438,15 @@ msgid ""
 msgstr ""
 "Dat is wull een goder Stapp vöran, aver ick seh heel minn Rüümte för Husen. "
 "De hele Insel is vull mit Stenen. Wo könen wi jemaals een nejes Schipp bauen"
-" of blot eene eenfache Weertskupp hebben, um uns' Levens liedsamer to maken?"
+" of blot eene eenfache Weertskupp hebben, um uns’ Levens liedsamer to maken?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
-msgstr "Amalee' hett eenen Plaan"
+msgstr "Amalee’ hett eenen Plaan"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
-msgstr "Amalee' is munter …"
+msgstr "Amalee’ is munter …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:272
@@ -474,17 +474,17 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
-"Dat gifft uns daarto wat Flint un Marmel, um uns' neje Welt to bauen. Wi "
+"Dat gifft uns daarto wat Flint un Marmel, um uns’ neje Welt to bauen. Wi "
 "könen se bruken, sobold daar ennelk genoog Rüümte för Husen is."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
-msgstr "Amalee' gifft neje Anwiesens"
+msgstr "Amalee’ gifft neje Anwiesens"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:287
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:361
 msgid "Amalea recommends…"
-msgstr "Amalee' rekumdeert …"
+msgstr "Amalee’ rekumdeert …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:289
@@ -492,7 +492,7 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
-"De Lüü brengen gode Narichten, Lutjus. Mi is seggt worden, dat uns' eerstes "
+"De Lüü brengen gode Narichten, Lutjus. Mi is seggt worden, dat uns’ eerstes "
 "Flintslagerhuus vandaag to arbeiden anfangen hett."
 
 #. TRANSLATORS: Amalea
@@ -501,23 +501,23 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
-"Villicht is 't eene gode Idee, to wachten, bit 't wat Rüümte freei maakt "
+"Villicht is ’t eene gode Idee, to wachten, bit ’t wat Rüümte freei maakt "
 "hett, un dann eene eenfache Weertskupp för Baumaterialien uptobauen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
-msgstr "Amalee' rekumdeert"
+msgstr "Amalee’ rekumdeert"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:301
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:318
 msgid "Amalea comes in…"
-msgstr "Amalee' kummt in …"
+msgstr "Amalee’ kummt in …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
 msgstr ""
-"'t gifft wichtige Dingen, waar ick mit di över reden will … Toeerst de gode "
+"’t gifft wichtige Dingen, waar ick mit di över reden will … Toeerst de gode "
 "Naricht:"
 
 #. TRANSLATORS: Amalea
@@ -526,8 +526,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
-"Ick bün wiss worden, dat uns' Flintslager nu ennelk anfangen hett, to "
-"arbeiden. He word so völe Marmelpielers sniddjen, as wi in uns' Weertskupp-"
+"Ick bün wiss worden, dat uns’ Flintslager nu ennelk anfangen hett, to "
+"arbeiden. He word so völe Marmelpielers sniddjen, as wi in uns’ Weertskupp-"
 "Instellens hebben wullen."
 
 #. TRANSLATORS: Amalea
@@ -538,14 +538,14 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
-"Aver dat is de anner Sied; wenn wi all uns' Marmel för Pielers verklüngeln, "
+"Aver dat is de anner Sied; wenn wi all uns’ Marmel för Pielers verklüngeln, "
 "hebben wi bold keenen mehr. Wi sallen de Instellen för Marmelpielers in de "
 "Weertskupp-Instellens up eenen minneren Weert setten. Ick gloov, veer "
 "Pielers up Lager sünd upstünds genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
-msgstr "Amalee' is glückelk"
+msgstr "Amalee’ is glückelk"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
@@ -584,8 +584,8 @@ msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
 msgstr ""
-"Mienheer, ick hebb över uns' Weg na Huus nadacht. 't is unbedingt nödig, "
-"eene Muu to bauen, waar wi uns' Schippen befrachten un eene Söke utrüsten "
+"Mienheer, ick hebb över uns’ Weg na Huus nadacht. ’t is unbedingt nödig, "
+"eene Muu to bauen, waar wi uns’ Schippen befrachten un eene Söke utrüsten "
 "könen."
 
 #. TRANSLATORS: Saledus
@@ -597,7 +597,7 @@ msgid ""
 "construction site."
 msgstr ""
 "Dat Probleem is, dat eene Muu een Huus is, wat blot an leep besünnern Steden"
-" baut worden kann. As wi uns' Weertskupp bauen, sallen wi daarum wieder "
+" baut worden kann. As wi uns’ Weertskupp bauen, sallen wi daarum wieder "
 "utförsken, um de hele Insel to besitten. Laat uns versöken, sülk eene "
 "dürabele Stee to finnen."
 
@@ -617,7 +617,7 @@ msgid ""
 "port quickly."
 msgstr ""
 "Mienheer, vandaag sünd wi bannig vööl nahder daarto komen, ennelk na Huus to"
-" gahn. Uns' Soldateree hett eene Stee sehn, waar eene Muu baut worden kann. "
+" gahn. Uns’ Soldateree hett eene Stee sehn, waar eene Muu baut worden kann. "
 "Wi sallen fix anfangen, de Muu to bauen."
 
 #. TRANSLATORS: Saledus
@@ -631,7 +631,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
-msgstr "Amalee' hett Wiesheid"
+msgstr "Amalee’ hett Wiesheid"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:363
@@ -660,7 +660,7 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
-"WI bruken also mehr Stoff, um ennelk Schippen bauen to könen. Aver 't gifft "
+"WI bruken also mehr Stoff, um ennelk Schippen bauen to könen. Aver ’t gifft "
 "nich genoog Rüümte up de Insel, um eene kumpleete Weertskupp, um Stoff to "
 "produzeren, uptobauen. Daarum mutten wi de nödigen Waren Stapp för Stapp "
 "sammeln."
@@ -686,7 +686,7 @@ msgid ""
 msgstr ""
 "Wenn wi genoog Weit produzeert hebben, könen wi de Buurderee plattrieten un "
 "eene Schaaptüchteree bauen, um Wulle to produzeren. Daarna könen wi eene "
-"Spinnweelmöhlen up desülvigen Stee bauen, um Stoff ut uns' Wulle to weven. "
+"Spinnweelmöhlen up desülvigen Stee bauen, um Stoff ut uns’ Wulle to weven. "
 "Aver nu laat uns daarmit anfangen, eenen goden Bült vun Weit to sammeln."
 
 #. TRANSLATORS: Amalea
@@ -709,11 +709,11 @@ msgstr "De Gotten wees Pries. Wi hebben ennelk eene Schippen-Weertskupp."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
-msgstr "Amalee' is stolt"
+msgstr "Amalee’ is stolt"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
-msgstr "Amalee' freit sük …"
+msgstr "Amalee’ freit sük …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
@@ -732,7 +732,7 @@ msgid ""
 "into cloth."
 msgstr ""
 "Vergeet nich, na de End-Tahlen för Wulle un Stoff in de Weertskupp-"
-"Instellens to kieken. Wi mutten all uns' Weit in Wulle umwanneln, un dann "
+"Instellens to kieken. Wi mutten all uns’ Weit in Wulle umwanneln, un dann "
 "all de Wulle in Stoff."
 
 #. TRANSLATORS: Amalea
@@ -741,7 +741,7 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
-"Villicht is 't eene gode Idee, de Warft antohollen, bit wi genoog Stoff "
+"Villicht is ’t eene gode Idee, de Warft antohollen, bit wi genoog Stoff "
 "hebben, daarmit se keene Boomstammen of Planken verplempert."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
@@ -769,7 +769,7 @@ msgid ""
 " have spotted an island with some mountains in the south. Perhaps we can "
 "find some valuable resources like iron there."
 msgstr ""
-"Toeerst mutten wi mehr Mineraale finnen, um uns' Weertskupp to versörgen, as"
+"Toeerst mutten wi mehr Mineraale finnen, um uns’ Weertskupp to versörgen, as"
 " se wasst. Ick hebb im Süden eene Insel mit een paar Bargen to sehn kregen. "
 "Villicht könen wi daar dürabele Mineraale as Iesen finnen."
 
@@ -797,17 +797,17 @@ msgid ""
 "possible enemies we should send some soldiers to each new port, until we can"
 " protect them with some military buildings."
 msgstr ""
-"Man wi sallen up uns' Muden uppassen. Um se tegen Feinden to verteidigen, "
+"Man wi sallen up uns’ Muden uppassen. Um se tegen Feinden to verteidigen, "
 "sallen wi een paar Soldaten to elkeen neje Muu stüren bit wi se mit "
 "Soldateree-Bauten verteidigen könen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea Advises"
-msgstr "Amalee' raadt"
+msgstr "Amalee’ raadt"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:436
 msgid "Amalea looks thoughtful…"
-msgstr "Amalee' sinnt …"
+msgstr "Amalee’ sinnt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:438
@@ -816,7 +816,7 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is build."
 msgstr ""
-"Salve Lutius. As ick mit uns' dappern Baulüü redt hebb, hebben se mi "
+"Salve Lutius. As ick mit uns’ dappern Baulüü redt hebb, hebben se mi "
 "vertellt, dat se all dat Gold, wat wi över hetten, bruukt hebben, um de Muu "
 "to bauen. Wi hebben also keen Gold mehr över, wenn de Muu beschickt is."
 
@@ -834,7 +834,7 @@ msgid ""
 "have some mining resources. Perhaps we should send some geologists to "
 "explore the hidden resources."
 msgstr ""
-"Tum Glück hebb ick eenen Barg to sehn kregen, wat so utsücht, as of 't daar "
+"Tum Glück hebb ick eenen Barg to sehn kregen, wat so utsücht, as of ’t daar "
 "Mineraale to ofboen gifft. Villicht sallen wi een paar Schattsökers "
 "schicken, um de verburgen Mineraale uttoförsken."
 
@@ -845,7 +845,7 @@ msgid ""
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
 " hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
-"Ick raad absolut an, eene Wirschaft för 't Ofboen un Smelten vun Gold to "
+"Ick raad absolut an, eene Wirschaft för ’t Ofboen un Smelten vun Gold to "
 "bauen. Ick gloov, wi bruken eene Wienplanteree, eene Wienmakeree, eene "
 "Kneipe, eene Fiskeree of een Jaggthuus un een Smeltwark. Un natürelk de "
 "Bargwarken sülvst."
@@ -858,10 +858,10 @@ msgid ""
 "should perhaps optimize our roads to free up some building sites, or even "
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
-"Wenn 't nich gaht, all de nödigen Husen to bauen, mutten wi över dat "
+"Wenn ’t nich gaht, all de nödigen Husen to bauen, mutten wi över dat "
 "nadenken, wat wi bit nu lehrt hebben. Wi könen all de Stenen ofslagen. Wi "
-"könen villicht uns' Stratennett verbetern, um wat Rüümte för Husen freei to "
-"maken, of ok een paar Soldateree-Boen plattrieten, um mehr Rüümte för uns' "
+"könen villicht uns’ Stratennett verbetern, um wat Rüümte för Husen freei to "
+"maken, of ok een paar Soldateree-Boen plattrieten, um mehr Rüümte för uns’ "
 "Weertskupp to kriegen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:458
@@ -878,16 +878,16 @@ msgid ""
 "Let’s finish the Barbarians off and provide a nice colony to the caesar of "
 "our empire."
 msgstr ""
-"Laat uns de Willen Lüü schieren un wi könen de Kaiser vun uns' Riek eene "
+"Laat uns de Willen Lüü schieren un wi könen de Kaiser vun uns’ Riek eene "
 "moje Provinz geven."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
-msgstr "Amalee' im Glück"
+msgstr "Amalee’ im Glück"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
-msgstr "Amalee' is bannig stolt up de Erfolgen …"
+msgstr "Amalee’ is bannig stolt up de Erfolgen …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:474
@@ -907,15 +907,15 @@ msgid ""
 "building an arena and other buildings to train our soldiers."
 msgstr ""
 "Blot Spaaß. Natürelk mutten wi so vööl Gold as wi könen upheven, um eenen "
-"Ring uns anner Boen, um uns' Soldaten uttobilden, to bauen."
+"Ring uns anner Boen, um uns’ Soldaten uttobilden, to bauen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
-msgstr "Amalee' is tofree"
+msgstr "Amalee’ is tofree"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
-msgstr "Amalee' is wiss, dat wi all uns' Rutfödderungen dwingen könen"
+msgstr "Amalee’ is wiss, dat wi all uns’ Rutfödderungen dwingen könen"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:486
@@ -926,9 +926,9 @@ msgid ""
 "in the economy settings is reached."
 msgstr ""
 "Hunnert bit hier. Nu produzeren wi nich mehr Marmelpielers as wi bruken. Ick"
-" gloov, wi  bruken deese Weertskupp-Instellens würrelk mennigmaal, um uns' "
-"Weertskupp beter to maken. Vergeet nich, uns' Husen arbeiden blot bit de "
-"End-Tahl in uns' Weertskupp-Instellens wunnen is."
+" gloov, wi  bruken deese Weertskupp-Instellens würrelk mennigmaal, um uns’ "
+"Weertskupp beter to maken. Vergeet nich, uns’ Husen arbeiden blot bit de "
+"End-Tahl in uns’ Weertskupp-Instellens wunnen is."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:489
@@ -937,17 +937,17 @@ msgid ""
 "ware and afterwards dismantle the building to gain space for another "
 "building."
 msgstr ""
-"To 'n Bispööl is 't villicht eene gode Idee, eenen lepen Bült vun eener Waar"
+"To ’n Bispööl is ’t villicht eene gode Idee, eenen lepen Bült vun eener Waar"
 " to produzeren un dann dat Huus platt to rieten, um Rüümte för een anners "
 "Huus to kriegen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid "Amalea’s Reminder"
-msgstr "Amalee' mahnt"
+msgstr "Amalee’ mahnt"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:496
 msgid "Amalea is shaking her head…"
-msgstr "Amalee' schüddekoppt …"
+msgstr "Amalee’ schüddekoppt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:498
@@ -956,7 +956,7 @@ msgid ""
 "security. But I think we could use the little space on this island better "
 "than by building a lot of military buildings."
 msgstr ""
-"Lutjus. Ick acht dat würrelk, dat du un Saledus so besörgt um uns' Sekerheid"
+"Lutjus. Ick acht dat würrelk, dat du un Saledus so besörgt um uns’ Sekerheid"
 " sünd. Aver ick gloov, wi können dat bietje Rüümte up deeser Insel beter "
 "bruken, as Bülten vun Soldateree-Boen to bauen."
 
@@ -968,8 +968,8 @@ msgid ""
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
-"Du sallst würrelk de meesten daarvun plattrieten, um daar Husen för uns' "
-"Weertskupp to bauen. Ick gloov nich, dat 't up deeser Insel völe Gefahren "
+"Du sallst würrelk de meesten daarvun plattrieten, um daar Husen för uns’ "
+"Weertskupp to bauen. Ick gloov nich, dat ’t up deeser Insel völe Gefahren "
 "gifft, aver wenn du vörsichtig wesen willst, kannst du een paar Wachters-"
 "Kamers of Wachters-Kamerkes an de Küst stahn laten."
 
@@ -980,11 +980,11 @@ msgstr "Aver pass up, dat du de groten Rüümte nich verklüngelst."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
 msgid "Amalea’s Excited"
-msgstr "Amalee' is wösig"
+msgstr "Amalee’ is wösig"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:511
 msgid "Amalea is looking forward to the exploration…"
-msgstr "Amalee' freit sük up de Söök …"
+msgstr "Amalee’ freit sük up de Söök …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
@@ -1001,7 +1001,7 @@ msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr ""
-"Nu dat uns' Flötte wasst un wasst sallen wi de övrige Gegend urförsken. Laat"
+"Nu dat uns’ Flötte wasst un wasst sallen wi de övrige Gegend urförsken. Laat"
 " uns versöken, mehr Land to finnen un lesterhand mehr Mineraale to kriegen."
 
 #. TRANSLATORS: Amalea
@@ -1010,17 +1010,17 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
-"'t is besünners good, wenn wi mehr Marmel finnen, of as Felden vun Stenen of"
+"’t is besünners good, wenn wi mehr Marmel finnen, of as Felden vun Stenen of"
 " tum Ofboen in Bargen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid "Amalea is Very Content"
-msgstr "Amalee' is bannig tofree"
+msgstr "Amalee’ is bannig tofree"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:528
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:537
 msgid "Amalea is clapping her hands…"
-msgstr "Amalee' hannenklappt …"
+msgstr "Amalee’ hannenklappt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:530
@@ -1029,13 +1029,13 @@ msgid ""
 " in the complete region. Now we can strengthen our economy and we will "
 "manage to sail home soon."
 msgstr ""
-"Lutjus. Hunnert. Hunnert. Wi hebben all de Rüümte för Muden funnen, de 't "
-"hier eenerwegens gifft. Nu könen wi uns' Weertskupp starken un bold na Huus "
+"Lutjus. Hunnert. Hunnert. Wi hebben all de Rüümte för Muden funnen, de ’t "
+"hier eenerwegens gifft. Nu könen wi uns’ Weertskupp starken un bold na Huus "
 "seilen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid "Amalea’s Counsel"
-msgstr "Amalee' raadt"
+msgstr "Amalee’ raadt"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:539
@@ -1044,8 +1044,8 @@ msgid ""
 "taking to the sea again. However, I thought it would be helpful to remind "
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
-"Salve Lutius. Uns' Spinnweelmöhlen is nu beschickt. Nu sünd wi bannig dicht "
-"daarbi, weer to schippern. Aver ick gloov, 't is good, wenn du nich "
+"Salve Lutius. Uns’ Spinnweelmöhlen is nu beschickt. Nu sünd wi bannig dicht "
+"daarbi, weer to schippern. Aver ick gloov, ’t is good, wenn du nich "
 "vergettst, dat wi Stoff nich blot för Schippen bruken."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:541
@@ -1054,9 +1054,9 @@ msgid ""
 "it to build some of the training buildings for our soldiers. And most "
 "important and most imminent of all, we need it to send out expeditions."
 msgstr ""
-"Wi bruken ok wat Stoff, um Wapenrocken ins uns' Panzersmee to produzeren. Wi"
-" bruken 't för eenige vun de Övens-Boen för uns' Soldaten. Un dat wichtigste"
-" un drockste is, wi bruken 't, um Söken uttorüsten."
+"Wi bruken ok wat Stoff, um Wapenrocken ins uns’ Panzersmee to produzeren. Wi"
+" bruken ’t för eenige vun de Övens-Boen för uns’ Soldaten. Un dat wichtigste"
+" un drockste is, wi bruken ’t, um Söken uttorüsten."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid ""
@@ -1066,14 +1066,14 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
-"Ick raad daarum an, dat wi faaktied na uns' Bestand an Stoff sehn, daarmit "
+"Ick raad daarum an, dat wi faaktied na uns’ Bestand an Stoff sehn, daarmit "
 "wi alltied genoog Stoff över hebben, um tominnst een paar Söken klaar to "
 "maken. Eene Söke bruukt dree Ballen Stoff, also gloov ick, sess to negen "
 "Ballen up Lager för twee of dree Söken is genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid "Victory is Ours"
-msgstr "Uns' is de Sieg"
+msgstr "Uns’ is de Sieg"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
@@ -1086,11 +1086,11 @@ msgid ""
 "furthermore, we have built a nice colony for our empire."
 msgstr ""
 "Mienheer, wi hebben uplest de Willen Lüü in deeser Gegend manntjet. Un "
-"daarto hebben wi een mojes Dörp för uns' Riek baut."
+"daarto hebben wi een mojes Dörp för uns’ Riek baut."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "The king will be very pleased with our victory."
-msgstr "De König mutt mit uns' Sieg bannig tofree wesen."
+msgstr "De König mutt mit uns’ Sieg bannig tofree wesen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
@@ -1106,7 +1106,7 @@ msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
 msgstr ""
-"Mienheer, 't sücht so ut, as of wi bold na Huus komen könen. Aver 't gifft "
+"Mienheer, ’t sücht so ut, as of wi bold na Huus komen könen. Aver ’t gifft "
 "eene Saak, waar ick över reden mutt."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:565
@@ -1114,8 +1114,8 @@ msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
-"As wi up uns' Fahrten sehn hebben, is 't unbannig wichtig, de Gotten un heel"
-" besünners Neptun bi goder Luun to hollen, daarmit se uns up uns' Fahrt "
+"As wi up uns’ Fahrten sehn hebben, is ’t unbannig wichtig, de Gotten un heel"
+" besünners Neptun bi goder Luun to hollen, daarmit se uns up uns’ Fahrt "
 "behüden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:567
@@ -1134,7 +1134,7 @@ msgid ""
 " You can give them to our soldiers and sailors to look for them."
 msgstr ""
 "Um de Söök lichter to maken, hebb ick Modellen vun de Delen maakt, as du "
-"süchst. Du kannst se un' Soldaten un Seelüü geven, daarmit se daarna "
+"süchst. Du kannst se un’ Soldaten un Seelüü geven, daarmit se daarna "
 "utkieken."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
@@ -1152,7 +1152,7 @@ msgid ""
 "protection for our journey."
 msgstr ""
 "Mienheer, wi hebben de hilligen Neptun-Altar torügg kregen. Nu könen wi um "
-"sien Geleid för uns' Fahrt beden."
+"sien Geleid för uns’ Fahrt beden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid ""
@@ -1160,7 +1160,7 @@ msgid ""
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
 "sea! Oh great Neptune, …"
 msgstr ""
-"Och groter Neptun, behüüd uns up uns' Fahrt! Och groter Neptun, laat uns de "
+"Och groter Neptun, behüüd uns up uns’ Fahrt! Och groter Neptun, laat uns de "
 "Winden gnädig sien! Och groter Neptun, behüüd uns vör de Beesten vun de See!"
 " Och groter Neptun, …"
 
@@ -1197,8 +1197,8 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
-"Mienheer, wie hebben all Husen paraat, de wi bruken, um uns' Soldaten "
-"uttobilden, aver wi mutten uns' Anstrengens verhogen, um mehr vun hör un "
+"Mienheer, wie hebben all Husen paraat, de wi bruken, um uns’ Soldaten "
+"uttobilden, aver wi mutten uns’ Anstrengens verhogen, um mehr vun hör un "
 "uttobilden un up de hoogsten Stand."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:602
@@ -1224,8 +1224,8 @@ msgid ""
 " important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
-"Mienheer, wi mutten mehr vun uns' Lüü utbilden, in diener groten Soldateree "
-"to denen. 't is wichtig, de Tahl vun uns' Soldaten so fix to verhogen as wi "
+"Mienheer, wi mutten mehr vun uns’ Lüü utbilden, in diener groten Soldateree "
+"to denen. ’t is wichtig, de Tahl vun uns’ Soldaten so fix to verhogen as wi "
 "könen. Un wi mutten se good utbilden, um hör Vermögen im Krieg to verbetern."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:613
@@ -1249,7 +1249,7 @@ msgid ""
 " were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
-"Jau, miene Soldaten-Fründe, wi hebben 't klaar brocht! Wi hebben all de "
+"Jau, miene Soldaten-Fründe, wi hebben ’t klaar brocht! Wi hebben all de "
 "Rutföderungen överwunnen, de vör uns laggen. Aver mien Hart is noch to Huus."
 " Wi sallen tur See fahren, sobold wi nu könen, um dat Riek tegen dat Wille "
 "Volk mit to verteidigen."
@@ -1269,20 +1269,20 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
-msgstr "Ennelk hebben wi een Deel vun uns' Altar funnen. Neptun wees Pries!"
+msgstr "Ennelk hebben wi een Deel vun uns’ Altar funnen. Neptun wees Pries!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr "Wi hebben noch een Stück vun uns' Altar funnen. Neptun wees Pries!"
+msgstr "Wi hebben noch een Stück vun uns’ Altar funnen. Neptun wees Pries!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] "Wi mutten noch %d Deel vun uns' Altar finnen."
-msgstr[1] "Wi mutten noch %d Delen vun uns' Altar finnen."
+msgstr[0] "Wi mutten noch %d Deel vun uns’ Altar finnen."
+msgstr[1] "Wi mutten noch %d Delen vun uns’ Altar finnen."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
@@ -1290,8 +1290,8 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
-"Uplest hebben wi dat leste Deel vun uns' Altar funnen. Nu könen wi 't weer "
-"tosammendoon, um uns' Gott hoogtoachten. Neptun wees Pries!"
+"Uplest hebben wi dat leste Deel vun uns’ Altar funnen. Nu könen wi ’t weer "
+"tosammendoon, um uns’ Gott hoogtoachten. Neptun wees Pries!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Artifact Found"
