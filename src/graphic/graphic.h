@@ -58,6 +58,7 @@ public:
 	                int window_mode_height,
 	                bool fullscreen,
 	                bool maximized);
+	void rebuild_texture_atlas();
 
 	// Gets and sets the resolution.
 	// Use 'resize_window = true' to resize the window to the new resolution.
