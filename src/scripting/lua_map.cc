@@ -3904,7 +3904,7 @@ const PropertyType<LuaSoldierDescription> LuaSoldierDescription::Properties[] = 
  */
 
 /* RST
-   .. attribute:: get_max_health_level
+   .. attribute:: max_health_level
 
       (RO) The maximum health level that the soldier can have.
 */
@@ -3944,7 +3944,7 @@ int LuaSoldierDescription::get_max_evade_level(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: get_base_health
+   .. attribute:: base_health
 
       (RO) The health points that the soldier starts with
 */
@@ -3994,7 +3994,7 @@ int LuaSoldierDescription::get_base_evade(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: get_health_incr_per_level
+   .. attribute:: health_incr_per_level
 
       (RO) The health points that the soldier will gain with each level.
 */
@@ -4216,7 +4216,7 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: get_default_resource
+   .. attribute:: default_resource
 
          (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
          terrain, or nil if the terrain has no default resource.
