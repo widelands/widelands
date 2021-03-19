@@ -123,6 +123,7 @@ struct AddOnInfo {
 	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
 	double average_rating() const;
+	bool requires_texture_atlas_rebuild() const;
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
