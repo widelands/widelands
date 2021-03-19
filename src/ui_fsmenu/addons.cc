@@ -28,6 +28,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
+#include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
@@ -1338,16 +1339,6 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 	return false;
 }
 
-inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
-	UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Note"),
-	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
-	                                    "otherwise you may experience graphical glitches.")) %
-	                    name.c_str())
-	                      .str(),
-	                   UI::WLMessageBox::MBoxType::kOk);
-	w.run<UI::Panel::Returncodes>();
-}
-
 static void install_translation(const std::string& temp_locale_path,
                                 const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
@@ -1439,7 +1430,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 	}
 	g_fs->ensure_directory_exists(kAddOnDir);
 
-	bool needs_restart = false;
+	bool need_to_rebuild_texture_atlas = false;
 	if (!only_translations) {
 		bool success = false;
 		g_fs->ensure_directory_exists(temp_dir);
@@ -1480,18 +1471,17 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		}
 		g_fs->fs_rename(temp_dir, new_path);
 
-		needs_restart = (remote.category == AddOns::AddOnCategory::kWorld);
+		need_to_rebuild_texture_atlas = remote.requires_texture_atlas_rebuild();
 		bool found = false;
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first.internal_name == remote.internal_name) {
 				pair.first = AddOns::preload_addon(remote.internal_name);
-				pair.second &= (remote.category != AddOns::AddOnCategory::kWorld);
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name), remote.category != AddOns::AddOnCategory::kWorld));
+			AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name), true));
 		}
 	}
 
@@ -1542,9 +1532,8 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 	}
 	g_fs->fs_unlink(temp_dir);
 
-	if (needs_restart) {
-		w.set_visible(false);
-		inform_about_restart(remote.descname());
+	if (need_to_rebuild_texture_atlas) {
+		g_gr->rebuild_texture_atlas();
 	}
 	rebuild();
 }

@@ -195,8 +195,6 @@ private:
 	bool matches_filter(const AddOns::AddOnInfo&);
 
 	std::string username_, password_;
-
-	void inform_about_restart(const std::string&);
 };
 }  // namespace FsMenu
 

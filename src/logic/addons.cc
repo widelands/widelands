@@ -263,6 +263,38 @@ double AddOnInfo::average_rating() const {
 	return (total > 0) ? (sum / total) : 0;
 }
 
+static bool contains_png(const std::string& dir) {
+	for (const std::string& f : g_fs->list_directory(dir)) {
+		if (g_fs->is_directory(f)) {
+			if (contains_png(f)) {
+				return true;
+			}
+		} else if (FileSystem::filename_ext(f) == ".png") {
+			return true;
+		}
+	}
+	return false;
+}
+// Rebuilding the texture atlas is required if an add-on defines new terrain, flag, or road
+// textures.
+bool AddOnInfo::requires_texture_atlas_rebuild() const {
+	std::string dir_to_check = kAddOnDir;
+	dir_to_check += FileSystem::file_separator();
+	dir_to_check += internal_name;
+	switch (category) {
+	case AddOnCategory::kTribes: {
+		// We do not support replacing road or flag images of existing tribes,
+		// so we only need to check in case there's a new tribe.
+		return g_fs->is_directory(dir_to_check + FileSystem::file_separator() + "tribes") &&
+		       contains_png(dir_to_check);
+	}
+	case AddOnCategory::kWorld:
+		return contains_png(dir_to_check);
+	default:
+		return false;
+	}
+}
+
 bool AddOnInfo::matches_widelands_version() const {
 	if (min_wl_version.empty() && max_wl_version.empty()) {
 		return true;
