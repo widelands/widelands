@@ -151,7 +151,7 @@ AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>* addons_to_con
 	return tribeinfos;
 }
 
-TribeBasicInfo get_tribeinfo(const std::string& tribename, AllTribes& all) {
+TribeBasicInfo get_tribeinfo(const std::string& tribename, const AllTribes& all) {
 	for (const TribeBasicInfo& info : all) {
 		if (info.name == tribename) {
 			return info;
@@ -160,7 +160,7 @@ TribeBasicInfo get_tribeinfo(const std::string& tribename, AllTribes& all) {
 	throw GameDataError("The tribe '%s' does not exist.", tribename.c_str());
 }
 
-bool tribe_exists(const std::string& tribename, AllTribes& tribeinfos) {
+bool tribe_exists(const std::string& tribename, const AllTribes& tribeinfos) {
 	for (const auto& tribeinfo : tribeinfos) {
 		if (tribeinfo.name == tribename) {
 			return true;

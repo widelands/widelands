@@ -40,7 +40,7 @@ constexpr int kTextPadding = 48;
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow,
                    const std::vector<std::string>& names,
-                   Widelands::AllTribes& t)
+                   const Widelands::AllTribes& t)
    : last_updated_(0),
      update_after_(0),
      progressWindow_(progressWindow),
@@ -66,7 +66,7 @@ GameTips::~GameTips() {
 }
 
 /// Loads tips out of \var name
-void GameTips::load_tips(const std::string& name, Widelands::AllTribes& t) {
+void GameTips::load_tips(const std::string& name, const Widelands::AllTribes& t) {
 	try {
 		LuaInterface lua;
 		std::string filename = "txts/tips/";

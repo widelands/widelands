@@ -281,8 +281,8 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 	}
 }
 
-AllTribes& EditorGameBase::all_tribes() {
-	return mutable_descriptions()->all_tribes();
+const AllTribes& EditorGameBase::all_tribes() const {
+	return descriptions().all_tribes();
 }
 
 // Loads map object descriptions for all tribes

@@ -226,7 +226,7 @@ public:
 	const std::vector<AddOns::AddOnInfo>& enabled_addons() const {
 		return enabled_addons_;
 	}
-	AllTribes& all_tribes();
+	const AllTribes& all_tribes() const;
 
 private:
 	/// Common function for create_critter and create_ship.

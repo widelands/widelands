@@ -188,7 +188,7 @@ public:
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
 
-	AllTribes& all_tribes() {
+	const AllTribes& all_tribes() const {
 		return all_tribes_;
 	}
 

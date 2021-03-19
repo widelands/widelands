@@ -27,7 +27,7 @@
 struct GameTips : public UI::IProgressVisualization {
 	GameTips(UI::ProgressWindow& progressWindow,
 	         const std::vector<std::string>&,
-	         Widelands::AllTribes&);
+	         const Widelands::AllTribes&);
 	~GameTips() override;
 
 	void update(RenderTarget&, const Recti& bounds) override;
@@ -38,7 +38,7 @@ private:
 		std::string text;
 		int32_t interval;
 	};
-	void load_tips(const std::string& name, Widelands::AllTribes&);
+	void load_tips(const std::string& name, const Widelands::AllTribes&);
 	void show_tip(RenderTarget&, const Recti& bounds, int32_t index);
 
 	uint32_t last_updated_;
