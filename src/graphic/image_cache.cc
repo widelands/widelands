@@ -42,13 +42,29 @@ const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const I
 void ImageCache::fill_with_texture_atlases(
    std::vector<std::unique_ptr<Texture>> texture_atlases,
    std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas) {
+	// TODO(Nordfriese): There may still be pointers to existing images and
+	// textures, so we need to keep them around but no longer return any new
+	// pointers to them. It would be better to fetch all existing pointers afresh.
+	// This will require some non-trivial refactoring to all UI widgets that store
+	// `Image` pointers or references – either pass ownership of the respective
+	// textures to them, or let them store only the string key and call `get()`
+	// every time they need to draw or query the texture.
+
+	for (auto& t : texture_atlases_) {
+		outdated_texture_atlases_.push_back(std::move(t));
+	}
 	texture_atlases_ = std::move(texture_atlases);
+
+	for (auto& pair : images_) {
+		outdated_images_.push_back(std::move(pair.second));
+	}
+	images_.clear();
 	for (auto& pair : textures_in_atlas) {
 		images_.insert(std::move(pair));
 	}
 }
 
-/** Lazy accees to _images via hash.
+/** Lazy access to images_ via hash.
  *
  * In case hash is not not found it will we fetched via load_image().
  */

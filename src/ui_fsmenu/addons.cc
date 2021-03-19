@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
@@ -991,16 +992,6 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 	return false;
 }
 
-inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
-	UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Note"),
-	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
-	                                    "otherwise you may experience graphical glitches.")) %
-	                    name.c_str())
-	                      .str(),
-	                   UI::WLMessageBox::MBoxType::kOk);
-	w.run<UI::Panel::Returncodes>();
-}
-
 static void install_translation(const std::string& temp_locale_path,
                                 const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
@@ -1077,21 +1068,16 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 			install_translation(temp_locale_path, remote.internal_name);
 		}
 
-		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
-		                                          remote.category != AddOns::AddOnCategory::kWorld));
+		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name), true));
 	}
-	switch (remote.category) {
-	case AddOns::AddOnCategory::kWorld:
-		inform_about_restart(remote.descname());
-		break;
-	case AddOns::AddOnCategory::kTheme: {
+ 
+	if (remote.requires_texture_atlas_rebuild()) {
+		g_gr->rebuild_texture_atlas();
+	}
+	if (remote.category == AddOns::AddOnCategory::kTheme) {
 		WLApplication::update_ui_theme(
 		   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
 		get_topmost_forefather().template_directory_changed();
-		break;
-	}
-	default:
-		break;
 	}
 }
 
@@ -1140,22 +1126,13 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 	for (auto& pair : AddOns::g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
 			pair.first = AddOns::preload_addon(remote.internal_name);
-			switch (remote.category) {
-			case AddOns::AddOnCategory::kWorld:
-				if (full_upgrade) {
-					pair.second = false;
-					inform_about_restart(remote.descname());
-				}
-				break;
-			case AddOns::AddOnCategory::kTheme:
-				if (template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
-					WLApplication::update_ui_theme(
-					   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
-					get_topmost_forefather().template_directory_changed();
-				}
-				break;
-			default:
-				break;
+			if (full_upgrade && remote.requires_texture_atlas_rebuild()) {
+				g_gr->rebuild_texture_atlas();
+			}
+			if (remote.category == AddOns::AddOnCategory::kTheme && template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
+				WLApplication::update_ui_theme(
+				   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
+				get_topmost_forefather().template_directory_changed();
 			}
 			return;
 		}
