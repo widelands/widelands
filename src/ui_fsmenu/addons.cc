@@ -1070,7 +1070,7 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 
 		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name), true));
 	}
- 
+
 	if (remote.requires_texture_atlas_rebuild()) {
 		g_gr->rebuild_texture_atlas();
 	}
@@ -1129,7 +1129,8 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 			if (full_upgrade && remote.requires_texture_atlas_rebuild()) {
 				g_gr->rebuild_texture_atlas();
 			}
-			if (remote.category == AddOns::AddOnCategory::kTheme && template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
+			if (remote.category == AddOns::AddOnCategory::kTheme &&
+			    template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
 				WLApplication::update_ui_theme(
 				   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
 				get_topmost_forefather().template_directory_changed();
