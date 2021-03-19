@@ -193,8 +193,6 @@ private:
 	std::string download_addon(ProgressIndicatorWindow&, std::shared_ptr<AddOns::AddOnInfo>);
 	std::set<std::string> download_i18n(ProgressIndicatorWindow&,
 	                                    std::shared_ptr<AddOns::AddOnInfo>);
-
-	void inform_about_restart(const std::string&);
 };
 }  // namespace FsMenu
 

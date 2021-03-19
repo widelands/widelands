@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
@@ -980,16 +981,6 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 	return false;
 }
 
-inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
-	UI::WLMessageBox w(&fsmm_, UI::WindowStyle::kFsMenu, _("Note"),
-	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
-	                                    "otherwise you may experience graphical glitches.")) %
-	                    name.c_str())
-	                      .str(),
-	                   UI::WLMessageBox::MBoxType::kOk);
-	w.run<UI::Panel::Returncodes>();
-}
-
 static void install_translation(const std::string& temp_locale_path,
                                 const std::string& addon_name,
                                 const int i18n_version) {
@@ -1071,11 +1062,10 @@ void AddOnsCtrl::install(std::shared_ptr<AddOns::AddOnInfo> remote) {
 			install_translation(temp_locale_path, remote->internal_name, remote->i18n_version);
 		}
 
-		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote->internal_name),
-		                                          remote->category != AddOns::AddOnCategory::kWorld));
+		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote->internal_name), true));
 	}
-	if (remote->category == AddOns::AddOnCategory::kWorld) {
-		inform_about_restart(remote->descname());
+	if (remote->requires_texture_atlas_rebuild()) {
+		g_gr->rebuild_texture_atlas();
 	}
 }
 
@@ -1121,9 +1111,8 @@ void AddOnsCtrl::upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, const bool f
 	for (auto& pair : AddOns::g_addons) {
 		if (pair.first->internal_name == remote->internal_name) {
 			pair.first = AddOns::preload_addon(remote->internal_name);
-			if (remote->category == AddOns::AddOnCategory::kWorld && full_upgrade) {
-				pair.second = false;
-				inform_about_restart(remote->descname());
+			if (full_upgrade && remote->requires_texture_atlas_rebuild()) {
+				g_gr->rebuild_texture_atlas();
 			}
 			return;
 		}
