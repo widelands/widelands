@@ -1062,7 +1062,8 @@ void AddOnsCtrl::install(std::shared_ptr<AddOns::AddOnInfo> remote) {
 			install_translation(temp_locale_path, remote->internal_name, remote->i18n_version);
 		}
 
-		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote->internal_name), true));
+		AddOns::g_addons.push_back(
+		   std::make_pair(AddOns::preload_addon(remote->internal_name), true));
 	}
 	if (remote->requires_texture_atlas_rebuild()) {
 		g_gr->rebuild_texture_atlas();
