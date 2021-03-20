@@ -124,18 +124,20 @@ AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>* addons_to_con
 		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 
-	std::vector<AddOns::AddOnInfo> addons;
+	const std::vector<AddOns::AddOnInfo>* addons;
+	std::vector<AddOns::AddOnInfo> enabled_tribe_addons;
 	if (addons_to_consider) {
-		addons = *addons_to_consider;
+		addons = addons_to_consider;
 	} else {
-		for (const auto& pair : AddOns::g_addons) {
+		for (auto& pair : AddOns::g_addons) {
 			if (pair.first.category == AddOns::AddOnCategory::kTribes && pair.second) {
-				addons.push_back(pair.first);
+				enabled_tribe_addons.push_back(pair.first);
 			}
 		}
+		addons = &enabled_tribe_addons;
 	}
 
-	for (const AddOns::AddOnInfo& a : addons) {
+	for (const AddOns::AddOnInfo& a : *addons) {
 		const std::string dirname = kAddOnDir + FileSystem::file_separator() + a.internal_name +
 		                            FileSystem::file_separator() + "tribes";
 		if (g_fs->is_directory(dirname)) {
