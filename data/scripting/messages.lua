@@ -4,7 +4,7 @@
 --
 -- Functions to send messages to the player and to add objectives to campaigns.
 --
--- To make these functions available include this file at the beginning 
+-- To make these functions available include this file at the beginning
 -- of a script via:
 --
 -- .. code-block:: lua
