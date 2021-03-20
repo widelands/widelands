@@ -8,6 +8,13 @@ include "scripting/ui.lua"
 -- This script contains some convenience functions intended mainly for use
 -- in the Discovery and New World starting conditions.
 --
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/starting_condition.lua"
+--
 
 -- =======================================================================
 --                             PUBLIC FUNCTIONS

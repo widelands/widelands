@@ -3,6 +3,14 @@
 -- -------------
 --
 -- This adds a new data type Set.
+--
+-- To make this class available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/set.lua"
+--
 
 -- RST
 -- Set

@@ -4,6 +4,14 @@
 --
 -- This script adds some functions that are useful to work with Lua tables as
 -- Sets or Arrays
+--
+-- To make these function(s) available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/table.lua"
+--
 
 -- RST
 -- .. function:: array_combine(arrays)

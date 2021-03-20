@@ -9,6 +9,14 @@ include "scripting/richtext.lua"
 -- Functions to simplify text formatting in scenarios and make it consistent.
 -- Most of these functions are simple wrapper functions for our :ref:`richtext system <wlrichtext>`.
 -- This file will include :ref:`richtext.lua` for you for additional formatting functions.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/richtext_scenarios.lua"
+--
 
 -- RST
 -- .. function:: speech(img, clr, title, text)
