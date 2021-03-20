@@ -27,6 +27,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
@@ -225,6 +226,7 @@ public:
 	const std::vector<AddOns::AddOnInfo>& enabled_addons() const {
 		return enabled_addons_;
 	}
+	const AllTribes& all_tribes() const;
 
 private:
 	/// Common function for create_critter and create_ship.
