@@ -8,7 +8,7 @@
 -- by a player. This functions are currently used in the campaigns and scenarios
 -- to tell the prologue to a story.
 --
--- To make these functions available include this file at the beginning 
+-- To make these functions available include this file at the beginning
 -- of a script via:
 --
 --    .. code-block:: lua
