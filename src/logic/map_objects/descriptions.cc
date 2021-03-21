@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions_compatibility_table.h"
@@ -54,7 +55,8 @@ namespace Widelands {
 uint32_t Descriptions::instances_ = 0;
 
 Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
-   : critters_(new DescriptionMaintainer<CritterDescr>()),
+   : all_tribes_(get_all_tribeinfos(&addons)),
+     critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
@@ -103,7 +105,7 @@ Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
-	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+	for (const TribeBasicInfo& tribeinfo : all_tribes_) {
 		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes,
 		                                           DescriptionManager::RegistryCaller::kDefault);
 		if (!attributes.empty()) {
@@ -479,14 +481,14 @@ void Descriptions::add_tribe(const LuaTable& table) {
 	// Register as in progress
 	description_manager_->mark_loading_in_progress(name);
 
-	if (Widelands::tribe_exists(name)) {
+	if (Widelands::tribe_exists(name, all_tribes_)) {
 		if (scenario_tribes_ != nullptr && scenario_tribes_->has_key(name)) {
 			// If we're loading a scenario with custom tribe entites, load them here.
-			tribes_->add(new TribeDescr(
-			   Widelands::get_tribeinfo(name), *this, table, scenario_tribes_->get_table(name).get()));
+			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name, all_tribes_), *this, table,
+			                            scenario_tribes_->get_table(name).get()));
 		} else {
 			// Normal tribes loading without scenario entities
-			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, table));
+			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name, all_tribes_), *this, table));
 		}
 	} else {
 		throw GameDataError(

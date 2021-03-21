@@ -28,6 +28,7 @@
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/map_object_type.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
 
@@ -187,7 +188,13 @@ public:
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
 
+	const AllTribes& all_tribes() const {
+		return all_tribes_;
+	}
+
 private:
+	AllTribes all_tribes_;
+
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;

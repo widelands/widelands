@@ -555,7 +555,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	InteractivePlayer* ipl = get_ipl();
 
-	if (replay || start_game_type != StartGameType::kSaveGame) {
+	if (start_game_type != StartGameType::kSaveGame) {
 		postload_addons();
 	}
 
