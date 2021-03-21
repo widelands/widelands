@@ -31,7 +31,7 @@
 --    buildings flag and goes from there 2 steps right (east), places a new
 --    flag. Then it goes one step bottom-right and one step right, places the
 --    next flag and then goes two steps right again and places the last flag.
---    If a flag at this last position already exists, the road get connected 
+--    If a flag at this last position already exists, the road get connected
 --    to the existing flag.
 --
 --    :arg roadtype: :const:`"normal"`, :const:`"busy"`, or :const:`"waterway"`
@@ -245,7 +245,7 @@ end
 -- RST
 -- .. function:: check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees)
 --
---    Checks for rocks or trees in the region of the player starting field 
+--    Checks for rocks or trees in the region of the player starting field
 --    and adds wares to the warehouse if no immovables were found
 --
 --    :arg player: the player to check
