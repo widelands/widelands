@@ -16,6 +16,13 @@
 -- If you're writing a scenario, you should also have a look at
 -- :ref:`richtext_scenarios.lua`.
 --
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/richtext.lua"
+--
 -- - `Blocks and Positioning`_
 -- - `Headings and Paragraphs`_
 -- - `Text Formatting`_
@@ -35,6 +42,10 @@
 
 -- RST
 -- .. function:: rt(text_or_attributes[, text = nil])
+--
+--    Normally a scripts author don't have to use this function explicitly
+--    because using the tags documented here are automatically wrapped by
+--    this function.
 --
 --    Wraps a block of text into Lua rich text.
 --    Only call this once for the whole text that gets sent to the backend.

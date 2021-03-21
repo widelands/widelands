@@ -13,8 +13,6 @@
 --
 
 -- RST
--- Set
--- ---
 --
 -- .. class:: Set(iteratable)
 --

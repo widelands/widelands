@@ -6,6 +6,14 @@ include "scripting/messages.lua"
 -- ---------------------------
 --
 -- This script contains functions that are shared by different win conditions.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/win_conditions/win_condition_functions.lua"
+--
 
 -- RST
 -- .. function:: make_extra_data(plr, name, version[, extra])

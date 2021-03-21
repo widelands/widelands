@@ -3,6 +3,14 @@
 -- ---------------------------
 --
 -- This file contains common code for the "Territorial Lord" and "Territorial Time" win conditions.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/win_conditions/territorial_functions.lua"
+--
 
 push_textdomain("win_conditions")
 

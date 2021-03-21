@@ -12,6 +12,14 @@ include "scripting/coroutine.lua"
 -- .. Note::
 --    Do not use any of these functions for multiplayer scenarios or winconditions,
 --    because a game will likely desync then.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scritping/ui.lua"
+--
 
 -- Sleep until we are done animating.
 function _await_animation()
