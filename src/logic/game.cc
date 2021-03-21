@@ -240,7 +240,8 @@ void Game::check_addons_desync_magic() {
 
 	bool needed = false;
 	for (const AddOns::AddOnInfo& a : enabled_addons()) {
-		if (a.category == AddOns::AddOnCategory::kWorld || a.category == AddOns::AddOnCategory::kTribes) {
+		if (a.category == AddOns::AddOnCategory::kWorld ||
+		    a.category == AddOns::AddOnCategory::kTribes) {
 			needed = true;
 			break;
 		}
