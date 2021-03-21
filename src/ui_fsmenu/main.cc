@@ -889,7 +889,7 @@ void MainMenu::action(const MenuTarget t) {
 		}
 		menu_capsule_.clear_content();
 
-		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos(nullptr);
 		if (tribeinfos.empty()) {
 			show_messagebox(_("No tribes found!"),
 			                _("No tribes found in data/tribes/initialization/[tribename]/init.lua."));

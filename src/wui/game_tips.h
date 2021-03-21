@@ -20,11 +20,14 @@
 #ifndef WL_WUI_GAME_TIPS_H
 #define WL_WUI_GAME_TIPS_H
 
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "ui_basic/progresswindow.h"
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
-	GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>&);
+	GameTips(UI::ProgressWindow& progressWindow,
+	         const std::vector<std::string>&,
+	         const Widelands::AllTribes&);
 	~GameTips() override;
 
 	void update(RenderTarget&, const Recti& bounds) override;
@@ -35,7 +38,7 @@ private:
 		std::string text;
 		int32_t interval;
 	};
-	void load_tips(const std::string& name);
+	void load_tips(const std::string& name, const Widelands::AllTribes&);
 	void show_tip(RenderTarget&, const Recti& bounds, int32_t index);
 
 	uint32_t last_updated_;

@@ -32,11 +32,12 @@
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
+GameTips::GameTips(UI::ProgressWindow& progressWindow,
+                   const std::vector<std::string>& names,
+                   const Widelands::AllTribes& t)
    : last_updated_(0),
      update_after_(0),
      progressWindow_(progressWindow),
@@ -46,7 +47,7 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 	i18n::Textdomain textdomain("texts");
 
 	for (const std::string& name : names) {
-		load_tips(name);
+		load_tips(name, t);
 	}
 
 	if (!tips_.empty()) {
@@ -62,13 +63,13 @@ GameTips::~GameTips() {
 }
 
 /// Loads tips out of \var name
-void GameTips::load_tips(const std::string& name) {
+void GameTips::load_tips(const std::string& name, const Widelands::AllTribes& t) {
 	try {
 		LuaInterface lua;
 		std::string filename = "txts/tips/";
 		filename += name;
 		filename += ".lua";
-		for (const Widelands::TribeBasicInfo& tribe : Widelands::get_all_tribeinfos()) {
+		for (const Widelands::TribeBasicInfo& tribe : t) {
 			if (tribe.name == name) {
 				if (tribe.script.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
 					filename = FileSystem::fs_dirname(tribe.script);
