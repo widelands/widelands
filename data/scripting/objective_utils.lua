@@ -53,8 +53,8 @@ end
 --    :type plr: :class:`wl.game.Player`
 --    :arg which: (name,count) pairs for buildings to check for.
 --    :type which: :class:`table`
---    :arg region: array of fields to check for the buildings
---    :type region: :class:`array` of :class:`wl.map.Field`
+--    :arg region: array of fields to check for the buildings See also :meth:`wl.map.Field.region`
+--    :type region: :class:`array` of :class:`wl.map.Field`.
 --
 --    :returns: :const:`true` if the requested buildings were found, :const:`false` otherwise
 
