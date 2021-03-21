@@ -55,6 +55,7 @@ Campaigns::Campaigns() {
 	i18n::Textdomain td("maps");
 
 	// Now load the campaign info
+	Widelands::AllTribes all_tribes = Widelands::get_all_tribeinfos(nullptr);
 	LuaInterface lua;
 	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
 	for (const auto& pair : AddOns::g_addons) {
@@ -85,7 +86,7 @@ Campaigns::Campaigns() {
 			CampaignData* campaign_data = new CampaignData();
 			campaign_data->descname = _(campaign_table->get_string("descname"));
 			campaign_data->tribename =
-			   Widelands::get_tribeinfo(campaign_table->get_string("tribe")).descname;
+			   Widelands::get_tribeinfo(campaign_table->get_string("tribe"), all_tribes).descname;
 			campaign_data->description = _(campaign_table->get_string("description"));
 			if (campaign_table->has_key("prerequisites")) {
 				for (const std::string& prerequisite :
