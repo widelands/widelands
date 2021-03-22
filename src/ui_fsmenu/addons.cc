@@ -2014,7 +2014,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Available version: %5$s\n"
 			                    "Category: %6$s\n"
 			                    "%7$s")) %
-			    info->descname() % info->author() % (info->verified ? _("Verified") : _("NOT VERIFIED")) %
+			    info->descname() % info->author() %
+			    (info->verified ? _("Verified") : _("NOT VERIFIED")) %
 			    AddOns::version_to_string(installed_version) %
 			    AddOns::version_to_string(info->version) %
 			    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
