@@ -289,9 +289,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_setting = settings.players[id_];
 		type_dropdown_.clear();
 		// AIs
+		bool can_change_hidden_tribe = !tribes_dropdown_.is_visible() && !settings.savegame;
 		if (settings.allows_ais(id_) &&
 		    (player_setting.tribe.empty() ||
-		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || !has_tribe_access())) {
+		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || can_change_hidden_tribe)) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 				type_dropdown_.add(_(impl->descname),
 				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),

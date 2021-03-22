@@ -333,7 +333,7 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
                        UI::FontStyle::kFsMenuInfoPanelHeading,
                        _("Difficulty:"),
                        UI::Align::kRight) {
-	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos(nullptr);
 	for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
 		tribe_select_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 		                  false, tribeinfo.tooltip);
