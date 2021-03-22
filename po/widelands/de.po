@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-12 11:54+0000\n"
+"POT-Creation-Date: 2021-03-18 17:03+0000\n"
+"PO-Revision-Date: 2021-03-22 15:09+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -145,7 +145,7 @@ msgstr "„%s“"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:336
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:212
 msgid "No AI"
 msgstr "Keine KI"
 
@@ -447,7 +447,7 @@ msgstr "Füge Hafenbauplätze hinzu, oder entferne sie"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:323
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:653
-#: ../../src/ui_fsmenu/singleplayersetupbox.cc:162
+#: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Spieler"
 
@@ -565,13 +565,13 @@ msgstr "Ungespeicherte Karte"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 
-#: ../../src/editor/editorinteractive.cc:926
+#: ../../src/editor/editorinteractive.cc:920
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lade Karte „%s“ …"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:950
+#: ../../src/editor/editorinteractive.cc:944
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:109
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:140
@@ -580,7 +580,7 @@ msgid "No Name"
 msgstr "Kein Name"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:953
+#: ../../src/editor/editorinteractive.cc:947
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:539
 #: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons_packager.cc:363
@@ -588,7 +588,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../src/editor/editorinteractive.cc:977
+#: ../../src/editor/editorinteractive.cc:971
 msgid "Loading world…"
 msgstr "Lade Welt…"
 
@@ -639,8 +639,8 @@ msgstr "Mine"
 msgid "port"
 msgstr "Hafen"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1233,7 +1233,7 @@ msgstr "Anzahl der Spieler"
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:100
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:111
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:162
-#: ../../src/ui_fsmenu/singleplayersetupbox.cc:47
+#: ../../src/ui_fsmenu/singleplayersetupbox.cc:50
 #, c-format
 msgid "Player %u"
 msgstr "Spieler %u"
@@ -1244,20 +1244,20 @@ msgstr "Spieler %u"
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 #: ../../src/ui_fsmenu/campaigndetails.cc:58
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:181
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:52
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:57
 msgid "Tribe"
 msgstr "Stamm"
 
 #: ../../src/editor/ui_menus/player_menu.cc:193
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:420
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:102
 msgctxt "tribe"
 msgid "Random"
 msgstr "Zufällig"
 
 #: ../../src/editor/ui_menus/player_menu.cc:195
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:422
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:99
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:104
 msgid "The tribe will be selected at random"
 msgstr "Der Stamm wird per Zufall ausgewählt"
 
@@ -1352,13 +1352,13 @@ msgid ""
 "location."
 msgstr "Wähle die neue Kartengröße, dann klicke in die Karte um sie an der gewählten Position zu ändern. Wenn die Karte vergrößert wird, werden neue Spalten und Zeilen im Osten und Süden des gewählten Punktes angefügt. Wenn die Karte verkleinert wird, wird die gewünschte Anzahl der Spalten und Zeilen von Osten und Süden des Trennungspunktes gelöscht.  "
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:291 ../../src/ui_basic/dropdown.cc:343
 #: ../../src/ui_basic/dropdown.cc:410 ../../src/ui_basic/dropdown.cc:418
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:326
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
@@ -1396,7 +1396,7 @@ msgstr "Befehlsspeicher"
 
 #: ../../src/game_io/game_loader.cc:191 ../../src/map_io/map_saver.cc:148
 #: ../../src/map_io/widelands_map_loader.cc:391
-#: ../../src/wlapplication_options.cc:447
+#: ../../src/wlapplication_options.cc:466
 #: ../../src/wui/interactive_player.cc:215
 #: ../../src/wui/interactive_player.cc:449
 msgid "Messages"
@@ -1478,7 +1478,7 @@ msgstr "Die \"%1$s\" muss Version %2$u.%3$u oder höher sein."
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../src/graphic/gl/initialize.cc:309
+#: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
 msgstr "Shading Language"
 
@@ -1691,7 +1691,7 @@ msgid "Not set"
 msgstr "Nicht festgelegt"
 
 #: ../../src/logic/game.cc:238 ../../src/logic/game.cc:284
-#: ../../src/logic/game.cc:375 ../../src/logic/game.cc:432
+#: ../../src/logic/game.cc:379 ../../src/logic/game.cc:436
 msgid "Preloading map…"
 msgstr "Lese Teile der Karte…"
 
@@ -1700,26 +1700,26 @@ msgid "Initializing game…"
 msgstr "Spiel wird initialisiert …"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:583
+#: ../../src/logic/game.cc:587
 msgid "Creating player infrastructure…"
 msgstr "Erzeuge Spielerinfrastruktur…"
 
-#: ../../src/logic/game.cc:600 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:604 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "Fehlende Ausgangsposition"
 
-#: ../../src/logic/game.cc:601 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:605 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keine Ausgangsposition besitzt.\nDu kannst manuell mit dem Widelands-Editor eine Ausgangsposition setzen, um das Problem zu lösen."
 
-#: ../../src/logic/game.cc:1070
+#: ../../src/logic/game.cc:1074
 msgid "Trade Offer"
 msgstr "Handelsangebot"
 
-#: ../../src/logic/game.cc:1072
+#: ../../src/logic/game.cc:1076
 msgid "This market has received a new trade offer."
 msgstr "Dieser Markt hat ein neues Handelsangebot erhalten."
 
@@ -2226,7 +2226,7 @@ msgstr "Arbeiter"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:199
-#: ../../src/map_io/map_saver.cc:220
+#: ../../src/map_io/map_saver.cc:221
 #: ../../src/map_io/widelands_map_loader.cc:326
 #: ../../src/wui/general_statistics_menu.cc:147
 #: ../../src/wui/interactive_player.cc:315 ../../src/wui/minimap.cc:195
@@ -2248,15 +2248,15 @@ msgstr "Ein neues Lagerhaus wurde deiner Wirtschaft hinzugefügt."
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../src/logic/map_objects/tribes/warehouse.cc:643
+#: ../../src/logic/map_objects/tribes/warehouse.cc:644
 msgid "Waterway"
 msgstr "Wasserweg"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:644
+#: ../../src/logic/map_objects/tribes/warehouse.cc:645
 msgid "Waterway destroyed"
 msgstr "Wasserweg zerstört"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:645
+#: ../../src/logic/map_objects/tribes/warehouse.cc:646
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Ein Wasserweg musste zerstört werden, um Platz für dein neues Hafendock zu schaffen."
 
@@ -2316,7 +2316,7 @@ msgstr "Eine Kartendatei ist ungültig:\n%s"
 msgid "This objective has no description."
 msgstr "Diese Aufgabe hat keine Beschreibung."
 
-#: ../../src/logic/player.cc:1907
+#: ../../src/logic/player.cc:1908
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2332,16 +2332,16 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Das Ende der Aufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weiter zuschauen."
 
-#: ../../src/logic/save_handler.cc:130
+#: ../../src/logic/save_handler.cc:131
 msgid "Saving game…"
 msgstr "Spiel wird gespeichert …"
 
-#: ../../src/logic/save_handler.cc:176
+#: ../../src/logic/save_handler.cc:178
 #: ../../src/wui/game_main_menu_save_game.cc:298
 msgid "Saving failed!"
 msgstr "Speichern fehlgeschlagen!"
 
-#: ../../src/logic/save_handler.cc:189
+#: ../../src/logic/save_handler.cc:192
 #: ../../src/wui/game_main_menu_save_game.cc:281
 msgid "Game saved"
 msgstr "Spiel gespeichert"
@@ -2380,66 +2380,66 @@ msgstr "Kartenversion"
 msgid "Building restrictions"
 msgstr "Gebäudebeschränkungen"
 
-#: ../../src/map_io/map_saver.cc:200
+#: ../../src/map_io/map_saver.cc:201
 #: ../../src/map_io/widelands_map_loader.cc:306 ../../src/wui/minimap.cc:173
 msgid "Flags"
 msgstr "Flaggen"
 
-#: ../../src/map_io/map_saver.cc:207
+#: ../../src/map_io/map_saver.cc:208
 #: ../../src/map_io/widelands_map_loader.cc:313
 msgid "Roads and waterways"
 msgstr "Straßen und Wasserwege"
 
-#: ../../src/map_io/map_saver.cc:229
+#: ../../src/map_io/map_saver.cc:230
 #: ../../src/map_io/widelands_map_loader.cc:243
 msgid "Map objects"
 msgstr "Kartenobjekte"
 
-#: ../../src/map_io/map_saver.cc:238
+#: ../../src/map_io/map_saver.cc:239
 #: ../../src/map_io/widelands_map_loader.cc:399
 msgid "Win condition"
 msgstr "Siegbedingung"
 
-#: ../../src/map_io/map_saver.cc:247
+#: ../../src/map_io/map_saver.cc:248
 msgid "Flag details"
 msgstr "Flaggendetails"
 
-#: ../../src/map_io/map_saver.cc:256
+#: ../../src/map_io/map_saver.cc:257
 msgid "Road and waterway details"
 msgstr "Straßen- und Wassserwegdetails"
 
-#: ../../src/map_io/map_saver.cc:273
+#: ../../src/map_io/map_saver.cc:274
 msgid "Building details"
 msgstr "Gebäudedetails"
 
-#: ../../src/map_io/map_saver.cc:281
+#: ../../src/map_io/map_saver.cc:282
 msgid "Territory"
 msgstr "Gebiet"
 
-#: ../../src/map_io/map_saver.cc:288
+#: ../../src/map_io/map_saver.cc:289
 #: ../../src/map_io/widelands_map_loader.cc:381
 msgid "Vision"
 msgstr "Sicht"
 
-#: ../../src/map_io/map_saver.cc:297
+#: ../../src/map_io/map_saver.cc:298
 #: ../../src/map_io/widelands_map_loader.cc:416
 msgid "Scripting"
 msgstr "Skripting"
 
-#: ../../src/map_io/map_saver.cc:304
+#: ../../src/map_io/map_saver.cc:305
 #: ../../src/map_io/widelands_map_loader.cc:409
-#: ../../src/wlapplication_options.cc:443
+#: ../../src/wlapplication_options.cc:462
 #: ../../src/wui/game_objectives_menu.cc:41
 #: ../../src/wui/interactive_player.cc:207
 msgid "Objectives"
 msgstr "Aufgaben"
 
-#: ../../src/map_io/map_saver.cc:308
+#: ../../src/map_io/map_saver.cc:309
 #: ../../src/map_io/widelands_map_loader.cc:423
 msgid "Images"
 msgstr "Bilder"
 
-#: ../../src/map_io/map_saver.cc:319
+#: ../../src/map_io/map_saver.cc:320
 msgid "Minimap"
 msgstr "Minikarte"
 
@@ -2535,11 +2535,11 @@ msgid ""
 "not handle the file."
 msgstr "/me überprüfte die empfangene Datei. Obwohl das md5-Prüfsummenverfahren erfolgreich durchgeführt wurde, kann ich die Datei nicht verarbeiten."
 
-#: ../../src/network/gameclient.cc:1224
+#: ../../src/network/gameclient.cc:1226
 msgid "Disconnected"
 msgstr "Verbindung verloren"
 
-#: ../../src/network/gameclient.cc:1226
+#: ../../src/network/gameclient.cc:1228
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2707,134 +2707,134 @@ msgstr "Unsere Foren können hier gefunden werden:"
 msgid "For reporting bugs, visit:"
 msgstr "Um Fehler zu melden, gehe zu:"
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:472
 msgid "Mixed up"
 msgstr "Durcheinander"
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:472
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Der Metaserver hat einen seltsamen ERROR (Fehler) Code beim Aufbau der Verbindung gesendet."
 
-#: ../../src/network/internet_gaming.cc:486
+#: ../../src/network/internet_gaming.cc:487
 msgid "Unexpected packet"
 msgstr "Unerwartetes Paket"
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:488
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Unerwartetes Netzwerkpaket vom Metaserver erhalten. Der Metaserver benutzt möglicherweise eine andere Protokollversion. Sollte der Fehler bestehen bleiben, versuche, das Spiel zu aktualisieren."
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:500
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "WARNUNG:  Es wurde der Befehl %s empfangen, obwohl wir nicht dabei sind, uns mit dem Metaserver zu verbinden."
 
-#: ../../src/network/internet_gaming.cc:510
+#: ../../src/network/internet_gaming.cc:511
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Der Server hat eine Zeitverschiebung von %d Sekunde."
 msgstr[1] "Der Server hat eine Zeitverschiebung von %d Sekunden."
 
-#: ../../src/network/internet_gaming.cc:525
+#: ../../src/network/internet_gaming.cc:526
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Ungültige Chat-Nachrichten-Art „%s“."
 
-#: ../../src/network/internet_gaming.cc:525
+#: ../../src/network/internet_gaming.cc:526
 msgid "Invalid message type"
 msgstr "Ungültige Nachrichten-Art"
 
-#: ../../src/network/internet_gaming.cc:566
+#: ../../src/network/internet_gaming.cc:567
 #, c-format
 msgid "The game %s is now available"
 msgstr "Das Spiel %s ist nun verfügbar"
 
-#: ../../src/network/internet_gaming.cc:577
+#: ../../src/network/internet_gaming.cc:578
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Das Spiel %s wurde geschlossen"
 
-#: ../../src/network/internet_gaming.cc:617
+#: ../../src/network/internet_gaming.cc:618
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s hat die Lobby betreten"
 
-#: ../../src/network/internet_gaming.cc:629
+#: ../../src/network/internet_gaming.cc:630
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s hat die Lobby verlassen"
 
-#: ../../src/network/internet_gaming.cc:684
+#: ../../src/network/internet_gaming.cc:687
 msgid "Chat message could not be sent."
 msgstr "Die Chat-Nachricht konnte nicht gesendet werden."
 
-#: ../../src/network/internet_gaming.cc:694
+#: ../../src/network/internet_gaming.cc:697
 msgid "Command could not be executed."
 msgstr "Befehl konnte nicht ausgeführt werden."
 
-#: ../../src/network/internet_gaming.cc:714
+#: ../../src/network/internet_gaming.cc:717
 #, c-format
 msgid "ERROR: %s"
 msgstr "FEHLER: %s"
 
-#: ../../src/network/internet_gaming.cc:717
+#: ../../src/network/internet_gaming.cc:720
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "Ein unerwarteter Fehler wurde gemeldet über Befehl %1%: %2%"
 
-#: ../../src/network/internet_gaming.cc:730
+#: ../../src/network/internet_gaming.cc:733
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Ein unbekannter Befehl wurde vom Metaserver empfangen: %s"
 
-#: ../../src/network/internet_gaming.cc:883
+#: ../../src/network/internet_gaming.cc:886
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Die Nachricht konnte nicht gesendet werden: Du bist nicht mit dem Metaserver verbunden!"
 
-#: ../../src/network/internet_gaming.cc:902
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:905
+#: ../../src/network/internet_gaming.cc:912
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Die Nachricht konnte nicht gesendet werden:  Sollte dies eine private Nachricht sein?"
 
-#: ../../src/network/internet_gaming.cc:924
+#: ../../src/network/internet_gaming.cc:927
 msgid "Supported admin commands:"
 msgstr "Unterstützte Administratorbefehle:"
 
-#: ../../src/network/internet_gaming.cc:925
+#: ../../src/network/internet_gaming.cc:928
 msgid "/motd <msg> - Set a permanent greeting message"
 msgstr "/motd <msg> - Setze eine dauerhafte Begrüßungsnachricht"
 
-#: ../../src/network/internet_gaming.cc:926
+#: ../../src/network/internet_gaming.cc:929
 msgid "/announce <msg> - Send a one time system message"
 msgstr "/announce <msg> - Sende eine einzelne Systemnachricht"
 
-#: ../../src/network/internet_gaming.cc:929
+#: ../../src/network/internet_gaming.cc:932
 msgid "/warn <user> <msg> - Send a private system message to the given user"
 msgstr "/warn <user> <msg> - Sende eine private Systemnachricht an den bezeichneten Nutzer"
 
-#: ../../src/network/internet_gaming.cc:932
+#: ../../src/network/internet_gaming.cc:935
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
 msgstr "/kick <user|game> - Den bezeichneten Nutzer oder das bezeichnete Spiel vom Metaserver entfernen"
 
-#: ../../src/network/internet_gaming.cc:934
+#: ../../src/network/internet_gaming.cc:937
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
 msgstr "/ban <user> - Einen Nutzer für 24 Std. vom Metaserver bannen"
 
-#: ../../src/network/internet_gaming.cc:1010
+#: ../../src/network/internet_gaming.cc:1013
 msgid "Conversion error"
 msgstr "Umwandlungsfehler"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:1013
+#: ../../src/network/internet_gaming.cc:1016
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Wahrheitswert für „%s“ konnte nicht ermittelt werden"
 
-#: ../../src/network/internet_gaming.cc:1038
+#: ../../src/network/internet_gaming.cc:1041
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -4275,44 +4275,48 @@ msgstr "Die gewählte Siegbedingung erlaubt keinen friedlichen Spielmodus"
 msgid "Forbid fighting between players"
 msgstr "Verbiete das Kämpfen zwischen den Spielern"
 
-#: ../../src/ui_fsmenu/launch_game.cc:203
+#: ../../src/ui_fsmenu/launch_game.cc:219
+msgid "All selected starting conditions ignore the map’s starting positions"
+msgstr "Alle ausgewählten Startbedingungen ignorieren die Ausgangspositionen der Karte"
+
+#: ../../src/ui_fsmenu/launch_game.cc:224
 msgid "The starting positions are set by the scenario"
 msgstr "Die Ausgangspositionen der Spieler werden durch das Szenario definiert"
 
-#: ../../src/ui_fsmenu/launch_game.cc:205
+#: ../../src/ui_fsmenu/launch_game.cc:226
 msgid "The starting positions are set by the saved game"
 msgstr "Die Ausgangspositionen der Spieler werden durch das gespeicherte Spiel definiert"
 
-#: ../../src/ui_fsmenu/launch_game.cc:208
+#: ../../src/ui_fsmenu/launch_game.cc:229
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Den Spielern erlauben ihre eigene Ausgangsposition zum Beginn des Spiels zu wählen"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:215
+#: ../../src/ui_fsmenu/launch_game.cc:236
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:465
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:281
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:289
 #: ../../src/wui/map_tags.cc:44 ../../src/wui/mapdetails.cc:141
 msgid "Scenario"
 msgstr "Szenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:216
+#: ../../src/ui_fsmenu/launch_game.cc:237
 msgid "Win condition is set through the scenario"
 msgstr "Die Siegbedingung wird durch das Szenario bestimmt"
 
-#: ../../src/ui_fsmenu/launch_game.cc:222
+#: ../../src/ui_fsmenu/launch_game.cc:243
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:469
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:285
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:293
 msgid "Saved Game"
 msgstr "Gesp. Spiel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:224
+#: ../../src/ui_fsmenu/launch_game.cc:245
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Dies ist ein gespeichertes Spiel – die Siegbedingung wurde bereits festgelegt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:295
+#: ../../src/ui_fsmenu/launch_game.cc:316
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
@@ -4748,13 +4752,13 @@ msgstr "Beobachter"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:170
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:326
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:152
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:158
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "Type"
 msgstr "Typ"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:203
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:350
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:361
 #: ../../src/wui/game_chat_panel.cc:443 ../../src/wui/game_summary.cc:113
 msgid "Team"
 msgstr "Team"
@@ -4762,8 +4766,8 @@ msgstr "Team"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:301
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:302
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:179
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:184
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:185
 msgid "Random AI"
 msgstr "Zufällige KI"
 
@@ -4775,7 +4779,7 @@ msgstr "Geteilt in"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:314
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:315
 #: ../../src/ui_fsmenu/netsetup_lan.cc:224
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:194
 msgid "Closed"
 msgstr "Geschlossen"
 
@@ -4785,30 +4789,30 @@ msgid "Open"
 msgstr "Offen"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:326
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "Human"
 msgstr "Mensch"
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:403
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:83
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:88
 #, c-format
 msgid "Shared in Player %u"
 msgstr "Geteilt in Spieler %u"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:466
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:282
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:290
 msgid "Start type is set via the scenario"
 msgstr "Die Startbedingung wird durch das Szenario bestimmt"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:538
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:371
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:382
 msgid "No Team"
 msgstr "Kein Team"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:544
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:377
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:388
 #, c-format
 msgid "Team %d"
 msgstr "Team %d"
@@ -5162,7 +5166,7 @@ msgid "Authors"
 msgstr "Autoren"
 
 #. * TRANSLATORS: This is the "name" of the single player
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:183
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:189
 msgid "You"
 msgstr "Du"
 
@@ -5382,208 +5386,213 @@ msgstr "Lebende Objekte An-/Ausschalten"
 msgid "Toggle Resources"
 msgstr "Rohstoffe An-/Ausschalten"
 
-#: ../../src/wlapplication_options.cc:389
+#: ../../src/wlapplication_options.cc:390
+#, c-format
+msgid "Set Toolsize to %d"
+msgstr "Werkzeuggröße auf %dsetzen"
+
+#: ../../src/wlapplication_options.cc:408
 msgid "Toggle Census"
 msgstr "Gebäudenamen An-/Ausschalten"
 
-#: ../../src/wlapplication_options.cc:394
+#: ../../src/wlapplication_options.cc:413
 msgid "Toggle Statistics Labels"
 msgstr "Gebäudestatistik An-/Ausschalten"
 
-#: ../../src/wlapplication_options.cc:399
+#: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
 msgstr "Soldatenstufen An-/Ausschalten"
 
-#: ../../src/wlapplication_options.cc:404
+#: ../../src/wlapplication_options.cc:423
 msgid "Toggle Buildings Visibility"
 msgstr "Gebäudesichtbarkeit An-/Ausschalten"
 
-#: ../../src/wlapplication_options.cc:409
+#: ../../src/wlapplication_options.cc:428
 msgid "Toggle Overlapping Workareas"
 msgstr "Überlappende Arbeitsbereiche An-/Ausschalten"
 
-#: ../../src/wlapplication_options.cc:414
+#: ../../src/wlapplication_options.cc:433
 #: ../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
 msgstr "Allgemeine Statistiken"
 
-#: ../../src/wlapplication_options.cc:419
+#: ../../src/wlapplication_options.cc:438
 #: ../../src/wui/ware_statistics_menu.cc:104
 msgid "Ware Statistics"
 msgstr "Warenstatistik"
 
-#: ../../src/wlapplication_options.cc:424
+#: ../../src/wlapplication_options.cc:443
 #: ../../src/wui/building_statistics_menu.cc:54
 msgid "Building Statistics"
 msgstr "Gebäudestatistik"
 
-#: ../../src/wlapplication_options.cc:429
+#: ../../src/wlapplication_options.cc:448
 msgid "Stock Inventory"
 msgstr "Lagerstandsübersicht"
 
-#: ../../src/wlapplication_options.cc:434
+#: ../../src/wlapplication_options.cc:453
 #: ../../src/wui/soldier_statistics_menu.cc:35
 msgid "Soldier Statistics"
 msgstr "Militärstatistik"
 
-#: ../../src/wlapplication_options.cc:439
+#: ../../src/wlapplication_options.cc:458
 #: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
 msgstr "Seefahrtsstatistik"
 
-#: ../../src/wlapplication_options.cc:452
+#: ../../src/wlapplication_options.cc:471
 msgid "Decrease Game Speed by 1×"
 msgstr "Spielgeschwindigkeit um 1× Verringern"
 
-#: ../../src/wlapplication_options.cc:457
+#: ../../src/wlapplication_options.cc:476
 msgid "Decrease Game Speed by 0.25×"
 msgstr "Spielgeschwindigkeit um 0.25× Verringern"
 
-#: ../../src/wlapplication_options.cc:462
+#: ../../src/wlapplication_options.cc:481
 msgid "Decrease Game Speed by 10×"
 msgstr "Spielgeschwindigkeit um 10× Verringern"
 
-#: ../../src/wlapplication_options.cc:467
+#: ../../src/wlapplication_options.cc:486
 msgid "Increase Game Speed by 1×"
 msgstr "Spielgeschwindigkeit um 1× Erhöhen"
 
-#: ../../src/wlapplication_options.cc:472
+#: ../../src/wlapplication_options.cc:491
 msgid "Increase Game Speed by 0.25×"
 msgstr "Spielgeschwindigkeit um 0.25× Erhöhen"
 
-#: ../../src/wlapplication_options.cc:477
+#: ../../src/wlapplication_options.cc:496
 msgid "Increase Game Speed by 10×"
 msgstr "Spielgeschwindigkeit um 10× Erhöhen"
 
-#: ../../src/wlapplication_options.cc:482
+#: ../../src/wlapplication_options.cc:501
 msgid "Reset Game Speed"
 msgstr "Spielgeschwindigkeit zurücksetzen"
 
-#: ../../src/wlapplication_options.cc:486
+#: ../../src/wlapplication_options.cc:505
 #: ../../src/wui/interactive_gamebase.cc:287
 msgid "Pause"
 msgstr "PAUSE"
 
-#: ../../src/wlapplication_options.cc:491
+#: ../../src/wlapplication_options.cc:510
 msgid "Scroll to Starting Field"
 msgstr "Zum Startfeld Schwenken"
 
-#: ../../src/wlapplication_options.cc:495 ../../src/wui/game_chat_menu.cc:53
+#: ../../src/wlapplication_options.cc:514 ../../src/wui/game_chat_menu.cc:53
 #: ../../src/wui/interactive_gamebase.cc:327
 msgid "Chat"
 msgstr "Chat"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:499
+#: ../../src/wlapplication_options.cc:518
 #: ../../src/wui/game_main_menu_save_game.cc:53
 #: ../../src/wui/interactive_gamebase.cc:138
 msgid "Save Game"
 msgstr "Spiel speichern"
 
-#: ../../src/wlapplication_options.cc:504
+#: ../../src/wlapplication_options.cc:523
 msgid "Messages: Go to Location"
 msgstr "Nachrichten: Zur Position Springen"
 
-#: ../../src/wlapplication_options.cc:509
+#: ../../src/wlapplication_options.cc:528
 msgid "Messages: Show "
 msgstr "Nachrichten: Anzeigen"
 
-#: ../../src/wlapplication_options.cc:514
+#: ../../src/wlapplication_options.cc:533
 msgid "Messages: Show Geologists’ Messages"
 msgstr "Nachrichten: Zeige Geologennachrichten"
 
-#: ../../src/wlapplication_options.cc:519
+#: ../../src/wlapplication_options.cc:538
 msgid "Messages: Show Economy Messages"
 msgstr "Nachrichten: Zeige Wirtschaftsnachrichten"
 
-#: ../../src/wlapplication_options.cc:524
+#: ../../src/wlapplication_options.cc:543
 msgid "Messages: Show Seafaring Messages"
 msgstr "Nachrichten: Zeige Seefahrtsnachrichten"
 
-#: ../../src/wlapplication_options.cc:529
+#: ../../src/wlapplication_options.cc:548
 msgid "Messages: Show Military Messages"
 msgstr "Nachrichten: Zeige Militärnachrichten"
 
-#: ../../src/wlapplication_options.cc:534
+#: ../../src/wlapplication_options.cc:553
 msgid "Messages: Show Scenario Messages"
 msgstr "Nachrichten: Zeige Szenarionachrichten"
 
-#: ../../src/wlapplication_options.cc:539
+#: ../../src/wlapplication_options.cc:558
 msgid "Seafaring: Go to Ship"
 msgstr "Seefahrt: Gehe zum Schiff"
 
-#: ../../src/wlapplication_options.cc:544
+#: ../../src/wlapplication_options.cc:563
 msgid "Seafaring: Watch Ship"
 msgstr "Seefahrt: Beobachte Schiff"
 
-#: ../../src/wlapplication_options.cc:549
+#: ../../src/wlapplication_options.cc:568
 msgid "Seafaring: Open Ship Window"
 msgstr "Seefahrt: Schiffsfenster Öffnen"
 
-#: ../../src/wlapplication_options.cc:554
+#: ../../src/wlapplication_options.cc:573
 msgid "Seafaring: Open Ship Window And Go to Ship"
 msgstr "Seefahrt: Schiffsfenster Öffnen und zum Schiff Gehen"
 
-#: ../../src/wlapplication_options.cc:559
+#: ../../src/wlapplication_options.cc:578
 msgid "Seafaring: Show All Ships"
 msgstr "Seefahrt: Alle Schiffe Zeigen"
 
-#: ../../src/wlapplication_options.cc:564
+#: ../../src/wlapplication_options.cc:583
 msgid "Seafaring: Show Idle Ships"
 msgstr "Seefahrt: Untätige Schiffe Zeigen"
 
-#: ../../src/wlapplication_options.cc:569
+#: ../../src/wlapplication_options.cc:588
 msgid "Seafaring: Show Transport Ships"
 msgstr "Seefahrt: Transportierende Schiffe Zeigen"
 
-#: ../../src/wlapplication_options.cc:574
+#: ../../src/wlapplication_options.cc:593
 msgid "Seafaring: Show Waiting Expeditions"
 msgstr "Seefahrt: Wartende Expeditionen Zeigen"
 
-#: ../../src/wlapplication_options.cc:579
+#: ../../src/wlapplication_options.cc:598
 msgid "Seafaring: Show Scouting Expeditions"
 msgstr "Seefahrt: Erkundende Expeditionen Zeigen"
 
-#: ../../src/wlapplication_options.cc:584
+#: ../../src/wlapplication_options.cc:603
 msgid "Seafaring: Show Expeditions with Port Spaces"
 msgstr "Seefahrt: Expeditionen mit Hafenbauplatz Zeigen"
 
-#: ../../src/wlapplication_options.cc:589
+#: ../../src/wlapplication_options.cc:608
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "Landmarke #%d Setzen"
 
-#: ../../src/wlapplication_options.cc:594
+#: ../../src/wlapplication_options.cc:613
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "Zu Landmarke #%d Springen"
 
-#: ../../src/wlapplication_options.cc:734
+#: ../../src/wlapplication_options.cc:753
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "UMSCHALT"
 
-#: ../../src/wlapplication_options.cc:737
+#: ../../src/wlapplication_options.cc:756
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt"
 
-#: ../../src/wlapplication_options.cc:741
+#: ../../src/wlapplication_options.cc:760
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd"
 
-#: ../../src/wlapplication_options.cc:743
+#: ../../src/wlapplication_options.cc:762
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "Graphische Nutzerschnittstelle"
 
-#: ../../src/wlapplication_options.cc:747
+#: ../../src/wlapplication_options.cc:766
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "STRG"
 
-#: ../../src/wlapplication_options.cc:752
+#: ../../src/wlapplication_options.cc:771
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
@@ -6082,7 +6091,7 @@ msgstr "Sende einen Kundschafter, um die Umgebung zu untersuchen"
 msgid ""
 "You need to connect this flag to a scout's house before you can send a scout"
 " here."
-msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbindenbevor du einen Kundschafter hierher senden kannst."
+msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbinden bevor du einen Kundschafter hierher senden kannst."
 
 #: ../../src/wui/fieldaction.cc:471
 msgid "Place a flag"
@@ -6187,8 +6196,8 @@ msgstr "Ersetze den Spieler durch die ausgewählte KI und setze das Spiel fort"
 msgid "AI for the disconnected player"
 msgstr "Ersatz-KI für den Spieler"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"

@@ -552,6 +552,8 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 	      current_amount > last_amount ?
 	      StyleManager::color_tag(_("↑"), colors.alternative_high_color()) :
 	      StyleManager::color_tag(_("="), colors.alternative_medium_color());
+	/** TRANSLATORS: The first placeholder is the stock amount of a ware/worker, and the second is an
+	 * icon indicating a trend. Very little space is available. */
 	return (boost::format(_("%1$s%2$s")) % text % indicator).str();
 }
 

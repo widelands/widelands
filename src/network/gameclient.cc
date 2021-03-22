@@ -876,7 +876,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			// Notify the players
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
-			s.string(_("/me 's file failed md5 checksumming."));
+			s.string(_("/me ’s file failed md5 checksumming."));
 			d->net->send(s);
 			try {
 				g_fs->fs_unlink(d->file_->filename);
