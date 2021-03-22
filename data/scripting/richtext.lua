@@ -45,13 +45,13 @@
 --
 --    Normally a scripts author don't have to use this function explicitly
 --    because using the tags documented here are automatically wrapped by
---    this function.
+--    this function. 
+--    So, only use this function if you wish to add some attributes to the
+--    tag, e.g. specifying a different background color for the whole area
+--    covered by this tag.
 --
 --    Wraps a block of text into Lua rich text.
 --    Only call this once for the whole text that gets sent to the backend.
---    There is no general need to wrap an rt tag around your text,
---    because the backend will take care of it.
---    So, only use this function if you wish to add some attributes to the tag.
 --
 --    :arg text_or_attributes: see the :ref:`rt tag's documentation <rt_tags_rt>`
 --                             for a list of attributes and their descriptions.

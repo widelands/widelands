@@ -27,14 +27,17 @@ include "scripting/ui.lua"
 --    (only in singleplayer)
 --
 --    :arg player: the recipient of the message
+--    :type player: :class:`wl.game.Player`
 --    :arg title: the localized title of the message
 --    :type title: :class:`string`
 --    :arg body: the localized body of the message. You can use rt functions here.
 --    :type body: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
---                     for :meth:`wl.game.Player.send_to_inbox`, e.g. { field = f, popup = true }.
+--                     for :meth:`wl.game.Player.send_to_inbox`, e.g. ``{field=f,popup=true}``.
 --                     The popup parameter must be set.
+--    :type parameters: :const:`table`
 --
+
 function send_to_inbox(player, title, body, parameters)
    if (parameters["popup"]) then
       wait_for_roadbuilding()
@@ -49,7 +52,9 @@ end
 --    Sends a message to the inbox of all players and show it instantly.
 --    This is mainly used for winconditions to show the status.
 --
---    :arg text: the localized body of the message. You can use rt functions here.
+--    :arg text: the localized body of the message. You can use 
+--               :ref:`richtext functions <richtext.lua>` here. 
+--               E.g. ``p(_"text")``.
 --    :type text: :class:`string`
 --    :arg heading: the localized title of the message (optional)
 --    :type heading: :class:`string`
@@ -75,13 +80,16 @@ end
 --    e.g. positioning of message boxes.
 --
 --    :arg player: the recipient of the message
+--    :type player: :class:`wl.game.Player`
 --    :arg title: the localized title of the message
 --    :type title: :class:`string`
 --    :arg message: the localized body of the message. You must use
---                 :ref:`richtext functions <richtext.lua>` here.
+--                 :ref:`richtext functions <richtext.lua>` here, 
+--                 e.g. ``p(_"message")``
 --    :type message: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
---                     for :meth:`wl.game.Player.message_box`, e.g. { field = f }.
+--                     for :meth:`wl.game.Player.message_box`, e.g. ``{field=f}``.
+--    :type parameters: :const:`array`
 --
 
 function message_box(player, title, body, parameters)
@@ -100,9 +108,10 @@ end
 --    Pause a game and show a message box for player 1. Since this function can
 --    have several options there is an example below this description.
 --
---    :arg table message, [opts]: The message consist of the `title`, the `body`
---           and optional parameters. Note that the `body` must be formatted
---           using the :ref:`richtext functions <richtext.lua>`.
+--    :arg table message, [opts]: The message consist of the ``title``, the ``body``
+--           and optional parameters. Note that the ``body`` must be formatted
+--           using the :ref:`richtext functions <richtext.lua>`, 
+--           e.g. ``p(_"message")``
 --
 --           **[opts]** can be a separated list of key value pairs defined by
 --           :meth:`wl.game.Player.message_box` and the following ones:
@@ -199,12 +208,15 @@ end
 --
 --    Adds an objective to a campaign.
 --
---    :arg objective: The objective to be added. If the variable obj_name exists,
+--    :arg objective: The objective to be added. If the 
+--                    variable :attr:`name <wl.game.Objective.name>` exists,
 --                    obj_name, obj_title and obj_body are used. Otherwise, it
 --                    needs to have a name, title, and body.
+--    :type objective: :class:`wl.game.Objective`
 --
 --    :returns: The new objective.
 --
+
 function add_campaign_objective(objective)
    if objective.obj_name then
       return wl.Game().players[1]:add_objective(objective.obj_name, objective.obj_title, rt(objective.obj_body))
@@ -223,11 +235,13 @@ end
 --    Provides nice formatting for objective texts.
 --    The following arguments will be parsed:
 --
---       - number: the number of objectives described in the body
---       - body: the objective text, e.g. created with function objective_text(heading, body)
+--       - **number**: the number of objectives described in the body
+--       - **body**: the objective text, e.g. created with :func:`objective_text`
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text & title.
+--
+
 function new_objectives(...)
    local sum = 0
    local text = ""
@@ -263,11 +277,15 @@ end
 --
 --
 --    :arg message: the message to be sent
+--    :type message: :class:`string`
 --    :arg objective: The objective to be added. If the variable obj_name exists, obj_name, obj_title and obj_body are used. Otherwise, it needs to have a name, title, and body.
+--    :type objective: :class:`wl.game.Objective`
 --    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
+--    :type sleeptime: :class:`int`
 --
 --    :returns: The new objective.
 --
+
 function campaign_message_with_objective(message, objective, sleeptime)
    message.body = message.body .. new_objectives(objective)
    campaign_message_box(message, sleeptime)
@@ -281,8 +299,11 @@ end
 --    Sets an objectve as done and sleeps for a bit.
 --
 --    :arg objective: The objective to be marked as done.
+--    :type objective: :class:`wl.game.Objective`
 --    :arg sleeptime: The milliseconds to sleep. Defaults to 3000.
+--    :type sleeptime: :class:`int`
 --
+
 function set_objective_done(objective, sleeptime)
    if not sleeptime then
       sleep(3000)

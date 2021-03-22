@@ -97,20 +97,20 @@ end
 --       where the building should be created. Optional entries are:
 --
 --       wares
---          A table of {:const:`ware_name`,count} as expected by
+--          A table of {:const:`"ware_name"`,count} as expected by
 --          :meth:`wl.map.HasWares.set_wares`. This is valid for
 --          :class:`wl.map.Warehouse` and must not be used otherwise.
 --       inputs
---          A table of {:const:`name`,count} as expected by
+--          A table of {:const:`"name"`,count} as expected by
 --          :meth:`wl.map.HasInputs.set_inputs`. Inputs are wares or workers
 --          which are consumed by the building. This is valid for
 --          :class:`wl.map.ProductionSite` and must not be used otherwise.
 --       soldiers
---          A table of (soldier_descr,count) as expected by
+--          A table of {{soldier_descr},count} as expected by
 --          :meth:`wl.map.HasSoldiers.set_soldiers`.  If this is nil, the site
 --          will be filled with {0,0,0,0} soldiers.
 --       workers
---          A table of {:const:`worker_name`,count} as expected by
+--          A table of {:const:`"worker_name"`,count} as expected by
 --          :meth:`wl.map.HasWorkers.set_workers`.  Note that ProductionSites
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`

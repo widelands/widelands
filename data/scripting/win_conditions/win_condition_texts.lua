@@ -14,7 +14,7 @@ include "scripting/richtext.lua"
 --
 --    include "scritping/win_conditions/win_condition_functions.lua"
 --
--- All tables have two values ``title`` and ``body``. Refer to those values
+-- All tables provide two values ``title`` and ``body``. Refer to those values
 -- like so:
 --
 -- .. code-block:: lua
