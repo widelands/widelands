@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-18 14:55+0000\n"
+"POT-Creation-Date: 2021-03-18 17:03+0000\n"
+"PO-Revision-Date: 2021-03-19 06:57+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -1245,6 +1245,7 @@ msgstr "sta lavorando"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1711,7 +1712,6 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
@@ -1723,8 +1723,6 @@ msgstr "sta producendo una pala"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1733,7 +1731,6 @@ msgstr "sta producendo un'ascia da disboscamento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1749,8 +1746,6 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1761,7 +1756,6 @@ msgstr "sta producendo degli utensili da cucina"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
@@ -2843,7 +2837,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera di granito è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
@@ -5472,6 +5466,7 @@ msgstr[1] ""
 #. of supplies",
 #. map_tags = {"seafaring"},
 #. incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+#. uses_map_starting_position = false,
 #. func = function(player, shared_in_start)
 #. local map = wl.Game().map
 #. local sf = map.player_slots[player.number].starting_field
@@ -5519,7 +5514,7 @@ msgstr[1] ""
 #. =======================================================================
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:11
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:117
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:127
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
@@ -5528,7 +5523,7 @@ msgstr "Scoperta"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:13
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:119
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:129
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
@@ -5911,7 +5906,7 @@ msgstr "Edifici"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr "Oggetto inamovibile"
+msgstr "Oggetti fissi"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
@@ -7415,7 +7410,7 @@ msgstr "Uva"
 #: ../../data/tribes/wares/grout/init.lua:8
 msgctxt "ware"
 msgid "Grout"
-msgstr "Calce"
+msgstr "Malta di calce"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hammer/init.lua:8
@@ -7451,7 +7446,7 @@ msgstr "Elmo da guerra"
 #: ../../data/tribes/wares/helmet_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Helmet"
-msgstr ""
+msgstr "Elmo di legno"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
@@ -7481,7 +7476,7 @@ msgstr "Arco da caccia"
 #: ../../data/tribes/wares/hunting_spear/init.lua:8
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "Lancia da Caccia"
+msgstr "Lancia da caccia"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/iron/init.lua:8
@@ -7499,7 +7494,7 @@ msgstr "Minerale di ferro"
 #: ../../data/tribes/wares/ironwood/init.lua:8
 msgctxt "ware"
 msgid "Ironwood"
-msgstr ""
+msgstr "Legno ferro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:8
@@ -7693,7 +7688,7 @@ msgstr "Lancia avanzata"
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Lancia con punta rinforzata"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
@@ -7705,7 +7700,7 @@ msgstr "Lancia pesante"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "Lancia con punta di pietra"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
