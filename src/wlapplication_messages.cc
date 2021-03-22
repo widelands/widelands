@@ -166,7 +166,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */
 	          << _(" --dock_windows_to_edges=[true|false]\n"
-	               "                      Eliminate a window's border towards the\n"
+	               "                      Eliminate a window’s border towards the\n"
 	               "                      edge of the screen when the edge of the\n"
 	               "                      window is next to the edge of the screen.")
 	          << endl

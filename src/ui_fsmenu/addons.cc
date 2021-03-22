@@ -710,11 +710,12 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		if (nr_full_updates > 0 && (!all_verified || !(SDL_GetModState() & KMOD_CTRL))) {
 			// We ask for confirmation only for real upgrades. i18n-only upgrades are done silently.
 			std::string text =
-			   (boost::format(ngettext("Are you certain that you want to upgrade this %u add-on?\n",
-			                           "Are you certain that you want to upgrade these %u add-ons?\n",
+			   (boost::format(ngettext("Are you certain that you want to upgrade this %u add-on?",
+			                           "Are you certain that you want to upgrade these %u add-ons?",
 			                           nr_full_updates)) %
 			    nr_full_updates)
 			      .str();
+			text += '\n';
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
 					text +=
@@ -2374,7 +2375,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Installed version: %4$s\n"
 			                    "Available version: %5$s\n"
 			                    "Category: %6$s\n"
-			                    "%7$s\n")) %
+			                    "%7$s")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
 			    AddOns::version_to_string(installed_version) %
 			    AddOns::version_to_string(info.version) %

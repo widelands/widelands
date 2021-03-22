@@ -253,6 +253,9 @@
 --   help you find missing helptexts.
 -- * ``lore``, ``lore_author`` and ``note`` are only used by buildings,
 --   ``performance`` is only used by training site and production site buildings.
+-- * The tribe’s scouting building should additionally define a ``no_scouting_building_connected``
+--   text which will be shown in the UI when the Send Scout To Flag button is disabled for lack
+--   of a connected scout’s house/hut.
 -- * We recommend that you use ``pgettext`` to disambiguate the strings for the different tribes.
 -- * To make life easier for our translators, you can split long helptexts into multiple entries
 --   as with the ``performance`` example above.
@@ -1454,6 +1457,7 @@ descriptions:new_tribe {
       {
          name = "atlanteans_scouts_house",
          helptexts = {
+            no_scouting_building_connected = pgettext("atlanteans_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory.")
          }
