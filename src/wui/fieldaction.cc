@@ -443,16 +443,28 @@ void FieldActionWindow::add_buttons_auto() {
 
 					const bool enabled = flag->get_economy(Widelands::wwWORKER)
 					                        ->has_building(flag->owner().tribe().scouts_house());
-					add_button(buildbox, "scout", kImgButtonScout, &FieldActionWindow::act_scout,
-					           enabled ? _("Send scout to explore surroundings") :
-					                     (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
+					std::string tooltip;
+					if (enabled) {
+						tooltip = _("Send scout to explore surroundings");
+					} else {
+						const std::map<std::string, std::string>& helptexts =
+							flag->owner().tribe().get_building_descr(flag->owner().tribe().scouts_house())->get_helptexts(flag->owner().tribe().name());
+						auto it = helptexts.find("no_scouting_building_connected");
+						if (it == helptexts.end()) {
+							tooltip =
+								/** TRANSLATORS: This string is used only when the name of the tribe’s scout house/hut is unknown. */
+								_("You need to connect this flag to a scouting building before you can send a scout here.");
+						} else {
+							tooltip = it->second;
+						}
+						tooltip = (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
 					                      g_style_manager->font_style(UI::FontStyle::kDisabled)
 					                         .as_font_tag(_("Send scout to explore surroundings")) %
 					                      g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-					                         .as_font_tag(_("You need to connect this flag to a scout’s "
-					                                        "house before you can send a scout here.")))
-					                        .str(),
-					           false, enabled);
+					                         .as_font_tag(tooltip)).str();
+					}
+					add_button(buildbox, "scout", kImgButtonScout, &FieldActionWindow::act_scout,
+					           tooltip, false, enabled);
 				}
 			}
 		} else {
