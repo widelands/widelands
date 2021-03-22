@@ -8,14 +8,15 @@
 # Filippo Montano, 2020
 # Guybrush88 <erpizzo@alice.it>, 2020
 # Samuele Battarra <battarsa@email.it>, 2020
+# Ondřej Itřech, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"POT-Creation-Date: 2021-03-18 17:03+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Samuele Battarra <battarsa@email.it>, 2020\n"
+"Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -230,7 +231,7 @@ msgstr ""
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:157
 msgid "Recover the shrine"
-msgstr "Recupera il santuario"
+msgstr "Recupera la Sacra Reliquia"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Find the Holy Shrine"

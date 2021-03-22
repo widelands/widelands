@@ -242,6 +242,14 @@ void BaseDropdown::layout() {
 		}
 	}
 
+	// Do not drop outside the screen if it fits in neither direction
+	if (new_list_x + list_offset_x_ < 0) {
+		list_offset_x_ = -new_list_x;
+	}
+	if (new_list_y + list_offset_y_ < 0) {
+		list_offset_y_ = -new_list_y;
+	}
+
 	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
 
 	// Keep open list on top while dragging
