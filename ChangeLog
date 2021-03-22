@@ -311,6 +311,7 @@
 - doubled trainers patience due to cycles failing quicker (#4726)
 - renamed Youth Gathering to Initiation Site (#4739)
 - Fix duplicate description registries by add-ons (#4767)
+- Fix replays and savegames with add-on tribes (#4766)
 
 
 ### User Interface
@@ -490,6 +491,8 @@
 - Disable Autofix Dependencies v1.0 (#4736)
 - Fix crash on invalid screenshot (#4764)
 - No custom starting positions for Discovery (#4765)
+- Add-Ons: Get rid of required restarts (#4758): Rebuild the texture atlas instead, and be more intelligent about detecting whether this is required.
+- Fix MP dropdown conditions (#4780)
 
 
 ### Internationalization
@@ -577,6 +580,7 @@
 - added documentation for start conditions
 - Clean up helptexts files (#4756)
 - Reworked RST for `lua_game.cc` (#4773)
+- Add-Ons: More verbose documentation (#4758)
 
 
 ### Editor
