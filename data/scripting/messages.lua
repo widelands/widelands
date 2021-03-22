@@ -52,8 +52,8 @@ end
 --    Sends a message to the inbox of all players and show it instantly.
 --    This is mainly used for winconditions to show the status.
 --
---    :arg text: the localized body of the message. You can use 
---               :ref:`richtext functions <richtext.lua>` here. 
+--    :arg text: the localized body of the message. You can use
+--               :ref:`richtext functions <richtext.lua>` here.
 --               E.g. ``p(_"text")``.
 --    :type text: :class:`string`
 --    :arg heading: the localized title of the message (optional)
@@ -84,7 +84,7 @@ end
 --    :arg title: the localized title of the message
 --    :type title: :class:`string`
 --    :arg message: the localized body of the message. You must use
---                 :ref:`richtext functions <richtext.lua>` here, 
+--                 :ref:`richtext functions <richtext.lua>` here,
 --                 e.g. ``p(_"message")``
 --    :type message: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
@@ -110,7 +110,7 @@ end
 --
 --    :arg table message, [opts]: The message consist of the ``title``, the ``body``
 --           and optional parameters. Note that the ``body`` must be formatted
---           using the :ref:`richtext functions <richtext.lua>`, 
+--           using the :ref:`richtext functions <richtext.lua>`,
 --           e.g. ``p(_"message")``
 --
 --           **[opts]** can be a separated list of key value pairs defined by
@@ -208,7 +208,7 @@ end
 --
 --    Adds an objective to a campaign.
 --
---    :arg objective: The objective to be added. If the 
+--    :arg objective: The objective to be added. If the
 --                    variable :attr:`name <wl.game.Objective.name>` exists,
 --                    obj_name, obj_title and obj_body are used. Otherwise, it
 --                    needs to have a name, title, and body.

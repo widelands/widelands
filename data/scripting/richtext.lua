@@ -45,7 +45,7 @@
 --
 --    Normally a scripts author don't have to use this function explicitly
 --    because using the tags documented here are automatically wrapped by
---    this function. 
+--    this function.
 --    So, only use this function if you wish to add some attributes to the
 --    tag, e.g. specifying a different background color for the whole area
 --    covered by this tag.
