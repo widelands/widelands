@@ -315,7 +315,7 @@ void NetSetupLAN::clicked_joingame() {
 }
 
 void NetSetupLAN::clicked_hostgame() {
-	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos(nullptr);
 	if (tribeinfos.empty()) {
 		UI::WLMessageBox mbox(
 		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("No tribes found!"),
