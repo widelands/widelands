@@ -2063,7 +2063,7 @@ void Worker::return_update(Game& game, State& state) {
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");
 		const std::string message =
-		   (boost::format(_("Your %s can't find a way home and will likely die.")) %
+		   (boost::format(_("Your %s can’t find a way home and will likely die.")) %
 		    descr().descname().c_str())
 		      .str();
 

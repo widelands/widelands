@@ -431,7 +431,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
 				format_and_add_chat("", "", true,
-				                    (boost::format(_("You have been logged in as '%s' since your "
+				                    (boost::format(_("You have been logged in as ‘%s’ since your "
 				                                     "requested name is already in use or reserved.")) %
 				                     assigned_name)
 				                       .str());
