@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "logic/addons.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -73,15 +74,16 @@ struct TribeBasicInfo {
 	std::vector<Initialization> initializations;
 };
 
+using AllTribes = std::vector<TribeBasicInfo>;
+
 /// Returns a vector with the basic info for all tribes.
-std::vector<TribeBasicInfo> get_all_tribeinfos();
+AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>*);
 
 /// Returns the basic preload info for a tribe.
-TribeBasicInfo get_tribeinfo(const std::string& tribename);
+TribeBasicInfo get_tribeinfo(const std::string& tribename, const AllTribes&);
 
 /// Returns whether this tribe is listed in tribes/initialization/<tribe>/init.lua.
-bool tribe_exists(const std::string& tribename,
-                  std::vector<TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos());
+bool tribe_exists(const std::string& tribename, const AllTribes&);
 
 }  // namespace Widelands
 

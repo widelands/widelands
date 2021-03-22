@@ -28,7 +28,7 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::get_all_tribeinfos();
+	s.tribes = Widelands::get_all_tribeinfos(nullptr);
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;

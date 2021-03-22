@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2020
+# GunChleoc, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: GunChleoc, 2020\n"
+"Last-Translator: GunChleoc, 2021\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -961,8 +961,8 @@ msgstr ""
 "Chan eil mi cinnteach am bu sin an roghainn cheart. Seadh, ’s ann gun d’ "
 "fhuair sinn na planaichean. Ach ged a tha sinn comasach air muileannan is "
 "taighean-grùide a thogail ’s a leasachadh leis an teicneolas leasaichte "
-"a-nis, cha bhi fios againn gu bràth tuilleadh an cuidicheadh Vesta ’s a ban-"
-"sagartan sinn an aghaidh nan Tùsanach."
+"a-nis, cha bhi fios againn gu bràth tuilleadh an cuidicheadh Bheasta ’s a "
+"ban-sagartan sinn an aghaidh nan Tùsanach."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:470
@@ -1116,7 +1116,7 @@ msgid ""
 msgstr ""
 "A bhràthair chòir, tha droch-naidheachd agam. Chaidh togalach a mhilleadh on"
 " a chaidh an cidsin ’na theine. ’S eagal leam gur e sin samhla gu bheil a’ "
-"bhan-dia Vesta feargach fhathast."
+"bhan-dia Bheasta feargach fhathast."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is Positively Surprised"
@@ -1135,7 +1135,7 @@ msgid ""
 msgstr ""
 "Hò-rò, a Lutius, chan eil fios agam ciamar ach chaidh leann is fìon a "
 "thabhann dhuinn. Lorg sinn na batharan a bharrachd sin nuair a chunnt sinn "
-"an stòras againn o chionn ghoirid. ‘S dòcha gu bheil a’ bhan-dia Vesta a’ "
+"an stòras againn o chionn ghoirid. ‘S dòcha gu bheil a’ bhan-dia Bheasta a’ "
 "toirt taic dhuinn fhathast."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
@@ -1597,7 +1597,7 @@ msgstr "Dèan ùrnaigh airson tìodhlac"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:742
 msgid "Julia is demanding a sacrifice for Vesta…"
-msgstr "Tha Julia ag iarraidh ìobairt dha Vesta…"
+msgstr "Tha Julia ag iarraidh ìobairt dha Bheasta…"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:744
@@ -1607,7 +1607,7 @@ msgid ""
 " to prepare a worthy sacrifice for her."
 msgstr ""
 "Ave, a Lutius! Ma tha sibh a’ sireadh taic uainne, feumaidh sibh ùrnaigh a "
-"dhèanamh dha ’r ban-dia Vesta. Mar sin, gun cuireadh sibh 35 raoid "
+"dhèanamh dha ’r ban-dia Bheasta. Mar sin, gun cuireadh sibh 35 raoid "
 "cruithneachd agus 15 amforaichean de dh’fhìon thugainn ach an ullaicheamaid "
 "ìobairt luachmhor."
 
@@ -1617,7 +1617,7 @@ msgstr "Gum beannaicheadh na diathan sibh"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:750
 msgid "Vesta is blessing us…"
-msgstr "Tha Vesta ’gar beannachadh…"
+msgstr "Tha Bheasta ’gar beannachadh…"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:752
@@ -1639,7 +1639,7 @@ msgstr "Damnaichte"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:758
 msgid "Vesta is cursing us…"
-msgstr "Tha Vesta ’gar mallachd…"
+msgstr "Tha Bheasta ’gar mallachd…"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:760
@@ -1649,13 +1649,13 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 "Mallachd oirbh a Lutius on a mharbh sibh luchd-frithealaidh sìtheil na ban-"
-"dia Vesta! Gum bhiodh an droch-fhortan air ur beatha ’s ur dùthaich agus gun"
-" sgiùrsadh fearg na ban-dia ar teaghlach às an t-saoghal!"
+"dia Bheasta! Gum bhiodh an droch-fhortan air ur beatha ’s ur dùthaich agus "
+"gun sgiùrsadh fearg na ban-dia ar teaghlach às an t-saoghal!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Taigh-grùide"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
@@ -1746,34 +1746,34 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
-"Cumaidh teampall Vesta batharan adhraidh. Seo dachaigh nam ban-shagairt agus"
-" freiceadan na ban-dè."
+"Cumaidh teampall Bheasta batharan adhraidh. Seo dachaigh nam ban-shagairt "
+"agus freiceadan na ban-dè."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Muileann"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
 msgctxt "empire_building"
 msgid "Temple of Vesta"
-msgstr ""
+msgstr "Teampall Bheasta"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Chan eil saighdear ri oideachadh ann!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Tobar"

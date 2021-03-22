@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-09 11:25+0000\n"
-"PO-Revision-Date: 2021-03-07 14:01+0000\n"
+"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "Deese Rutfödderung stellt de hogern Husen un Bargwarks vör."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr "Deeses Land is uns' Land"
+msgstr "Deeses Land is uns’ Land"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -142,7 +142,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "As ihr Gott sien Gloov in de Atlantinger verloor un ihre Insel överfloodde, wurr de Stried vun eener Froo na Gerechtigheid un eener annern Kans för hör Lüü de Stoff för Sagen. As se de övrigen Atlantinger to eener nejen Tokunft in eenem annern Part vun de Welt föhrt, word Jundlin' de machtigste Minsk in hör Tied, aver de Pries was düür: Hör Godigheid un hör Seel."
+msgstr "As ihr Gott sien Gloov in de Atlantinger verloor un ihre Insel överfloodde, wurr de Stried vun eener Froo na Gerechtigheid un eener annern Kans för hör Lüü de Stoff för Sagen. As se de övrigen Atlantinger to eener nejen Tokunft in eenem annern Part vun de Welt föhrt, word Jundlin’ de machtigste Minsk in hör Tied, aver de Pries was düür: Hör Godigheid un hör Seel."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
@@ -255,7 +255,7 @@ msgstr "1362 wurr dat gesette, freedsame Leven vun de Inwohners vun de Noordfree
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr "Deese Rutfödderung is na de Histoorje maakt, aver de Vertellsel un de Logen sünd in 't Geheel utdocht."
+msgstr "Deese Rutfödderung is na de Histoorje maakt, aver de Vertellsel un de Logen sünd in ’t Geheel utdocht."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
@@ -332,14 +332,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Tüsken Sweeden un Finnland liggt de Halligsee. Deese wunnermoje Stee is nich Land of Water, sünnern beides. Binnen een paar hunnert Kilometers liggen nich minner as 50.000 Inseln un Eilannen, de meesten lütter as een Demath. Dat Klima is recht mild; de Ackers blömen, Beren gifft 't im Övermaat, Fiske sünd riekelk daar. De minnen Lüü, de hier wohnen, hebben hör Leven nich hungert. Ji striedsüchtigen Bastards kunnen deeses lütte Paradies eenfach nich in Ruh laten, nich wahr?"
+msgstr "Tüsken Sweeden un Finnland liggt de Halligsee. Deese wunnermoje Stee is nich Land of Water, sünnern beides. Binnen een paar hunnert Kilometers liggen nich minner as 50.000 Inseln un Eilannen, de meesten lütter as een Demath. Dat Klima is recht mild; de Ackers blömen, Beren gifft ’t im Övermaat, Fiske sünd riekelk daar. De minnen Lüü, de hier wohnen, hebben hör Leven nich hungert. Ji striedsüchtigen Bastards kunnen deeses lütte Paradies eenfach nich in Ruh laten, nich wahr?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "Up deesen lütten Insels gifft 't kuum Rüümte för grote Husen. Daar sallst du daarher grote Husen bauen. Mitunner bruukst du grote Soldateree-Boen, um de anner Insel to faten to kriegen. Künstelk Spelers könen hier nich good spölen."
+msgstr "Up deesen lütten Insels gifft ’t kuum Rüümte för grote Husen. Daar sallst du daarher grote Husen bauen. Mitunner bruukst du grote Soldateree-Boen, um de anner Insel to faten to kriegen. Künstelk Spelers könen hier nich good spölen."
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
@@ -370,7 +370,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "'t is düll, sük in deese mojen Gegend ut eener Spoor an de annern daaltolaten. Aver de Wegen, deese groten Geweste to umfaten, sünd lang un vull mit Bogen, un 't is licht, in dat Land vun eenem frömden Volk to ströpen."
+msgstr "’t is düll, sük in deese mojen Gegend ut eener Spoor an de annern daaltolaten. Aver de Wegen, deese groten Geweste to umfaten, sünd lang un vull mit Bogen, un ’t is licht, in dat Land vun eenem frömden Volk to ströpen."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -504,7 +504,7 @@ msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr "Deese Kaart is wat unnatürelk, un 't is am besten för twee of dree Minsken as Spelers. Köhl to finnen is swaar – villicht maakst du beter sülvst welke. 't gifft Gold dicht bi de Anfangs-Stee – süchst du 't?"
+msgstr "Deese Kaart is wat unnatürelk, un ’t is am besten för twee of dree Minsken as Spelers. Köhl to finnen is swaar – villicht maakst du beter sülvst welke. ’t gifft Gold dicht bi de Anfangs-Stee – süchst du ’t?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -514,7 +514,7 @@ msgstr "Finnen-Meren"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr "Dat sünd de mojen Finnen-Lannen ut Meren, Stromen, steenollen Walden un Bargen. 't is diene Upgaav, eenen Weg dör deese Lannen to finnen."
+msgstr "Dat sünd de mojen Finnen-Lannen ut Meren, Stromen, steenollen Walden un Bargen. ’t is diene Upgaav, eenen Weg dör deese Lannen to finnen."
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
@@ -532,7 +532,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr "Is dat een Test vun de Gotten of een düvelsker Plaan vun well anner, dat du un dien Volk up deeser Insel tüsken Füür un noch mehr Füür upwacht sünd? Bit nu sücht 't so ut, as of ji alleen sünd, aver well weet, wat passeert, wenn ji eenen Feind trefft?"
+msgstr "Is dat een Test vun de Gotten of een düvelsker Plaan vun well anner, dat du un dien Volk up deeser Insel tüsken Füür un noch mehr Füür upwacht sünd? Bit nu sücht ’t so ut, as of ji alleen sünd, aver well weet, wat passeert, wenn ji eenen Feind trefft?"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -568,7 +568,7 @@ msgstr "Lechtmaan"
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr "Weer 't dat leste Sünnverdüüstern of eene Maanphase – elkeenwat drifft deese Völkers to hör lesten Proov."
+msgstr "Weer ’t dat leste Sünnverdüüstern of eene Maanphase – elkeenwat drifft deese Völkers to hör lesten Proov."
 
 #: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
@@ -597,7 +597,7 @@ msgstr "Ieskriegen"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr "Harvst is Winter worden. Vööl is froren, de Krieg is 't nich."
+msgstr "Harvst is Winter worden. Vööl is froren, de Krieg is ’t nich."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 msgid "Start positions are clockwise"
@@ -655,7 +655,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr "De Gotten hebben uns' Gebeden minnacht. Dat Sünnenlücht is mehr un mehr worden un hett de Eer dusend maal heter maakt un de Iesfelden smulten un de Lüü in de Deepten vun de See smeten. Aver nu – hoog in de machtigen Bargen, up de lesten Land-Steden – sünd twee Överlevers-Völker unnerkropen. De Gotten weren barmhartig un dat Weer is weer koller worden, aver dat Water word doch alltied hoger. Up de allerleste seker Stee – de hoogste Bargkopp, waar de Menge an Gold un de Rüümte tum Leven blot för een Volk langen – föhren blot twee Padden. Un vergeet nich, pass up … deese leste Rümte tum Leven is eene sware un lütte Stee tum Leven."
+msgstr "De Gotten hebben uns’ Gebeden minnacht. Dat Sünnenlücht is mehr un mehr worden un hett de Eer dusend maal heter maakt un de Iesfelden smulten un de Lüü in de Deepten vun de See smeten. Aver nu – hoog in de machtigen Bargen, up de lesten Land-Steden – sünd twee Överlevers-Völker unnerkropen. De Gotten weren barmhartig un dat Weer is weer koller worden, aver dat Water word doch alltied hoger. Up de allerleste seker Stee – de hoogste Bargkopp, waar de Menge an Gold un de Rüümte tum Leven blot för een Volk langen – föhren blot twee Padden. Un vergeet nich, pass up … deese leste Rümte tum Leven is eene sware un lütte Stee tum Leven."
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
@@ -737,7 +737,7 @@ msgstr "Wunnerlike Dwaalweg"
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr "'t gifft hier twee grote Fragen: Well hett deesen unbannig groten Dwaalweg baut, un wat kann man daar drin finnen?"
+msgstr "’t gifft hier twee grote Fragen: Well hett deesen unbannig groten Dwaalweg baut, un wat kann man daar drin finnen?"
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
@@ -767,7 +767,7 @@ msgstr "Nix as eene lütte Höcht in de Midde vun de Kaart verbinnt deese veer f
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr "'t gifft in de Midde Rüümte för blot eene Börg. Water kann allerwegens funnen worden, du muttst keene Schattsökers schicken."
+msgstr "’t gifft in de Midde Rüümte för blot eene Börg. Water kann allerwegens funnen worden, du muttst keene Schattsökers schicken."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
@@ -780,7 +780,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Elkeen Speler hett an anner Hinner tum wiederkomen, un 't gifft immer mehr as eene Aard, daarmit klaartoworden. Künstelke Spelers könen hier sünner een eenziges Schipp manntjet worden, aver ick raad an, völe Muden un Warften to bauen – Söken sünd alltieden nützelk un meestens de fixeste Weg to Goldlagers."
+msgstr "Elkeen Speler hett an anner Hinner tum wiederkomen, un ’t gifft immer mehr as eene Aard, daarmit klaartoworden. Künstelke Spelers könen hier sünner een eenziges Schipp manntjet worden, aver ick raad an, völe Muden un Warften to bauen – Söken sünd alltieden nützelk un meestens de fixeste Weg to Goldlagers."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -812,7 +812,7 @@ msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr "'t ruckt na Brook, 't sücht ut as Brook un 't is een Brook. Aver 't is diene Geburtsstee un du hest dien ganzes Leven hier leevt. Wenn du 't nich verlesen willst, wehr di!"
+msgstr "’t ruckt na Brook, ’t sücht ut as Brook un ’t is een Brook. Aver ’t is diene Geburtsstee un du hest dien ganzes Leven hier leevt. Wenn du ’t nich verlesen willst, wehr di!"
 
 #: ../../data/maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
@@ -822,7 +822,7 @@ msgstr "Broken-Mönken"
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
-msgstr "'t heet, dat de ollen Kriegs-Mönken, wat in de noch ollern Broken leven, de Slötel tur Kuntroll över de ganze Insel sünd."
+msgstr "’t heet, dat de ollen Kriegs-Mönken, wat in de noch ollern Broken leven, de Slötel tur Kuntroll över de ganze Insel sünd."
 
 #: ../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -867,7 +867,7 @@ msgid ""
 "wonderful and mighty treasure in their middle – The Green Plateau, which is "
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
-msgstr "Du stahst up eener Insel, un run um di stahn machtige Bargen, wat eenen wunnerbaaren un machtigen Schatt in hör Midde bargen – dat Gröne Flackland, wat swaar intonehmen un licht to verlesen is. Wenn du 't also willst, pass up de anner Völkers up."
+msgstr "Du stahst up eener Insel, un run um di stahn machtige Bargen, wat eenen wunnerbaaren un machtigen Schatt in hör Midde bargen – dat Gröne Flackland, wat swaar intonehmen un licht to verlesen is. Wenn du ’t also willst, pass up de anner Völkers up."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -877,7 +877,7 @@ msgstr "De lange Weg"
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr "Noch een komisker Test vun de Gotten. Um to de anner Sied to komen, gifft 't wull keen anner Weg as dat Land vun dienen Feinden to besetten."
+msgstr "Noch een komisker Test vun de Gotten. Um to de anner Sied to komen, gifft ’t wull keen anner Weg as dat Land vun dienen Feinden to besetten."
 
 #: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
@@ -904,7 +904,7 @@ msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr "'t is wat Wunnerlikes, as een grieser Floor, um deese dree Gröönflecken, wat noch nüms utfunnen hett. Villicht worst du dat sien, aver pass up de annern up, wat ok söken!"
+msgstr "’t is wat Wunnerlikes, as een grieser Floor, um deese dree Gröönflecken, wat noch nüms utfunnen hett. Villicht worst du dat sien, aver pass up de annern up, wat ok söken!"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
@@ -1023,7 +1023,7 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr "'t sücht ut, as of deeses magiske Daal siet de eersten Dag vun Bullen bewohnt word. As dien Volk hierher komen is, weerst du wiss, dat 't genoog Rüümte för een freedsames Leven hett. Aver kann dien Volk in Free tegen dienen Nabers leven?"
+msgstr "’t sücht ut, as of deeses magiske Daal siet de eersten Dag vun Bullen bewohnt word. As dien Volk hierher komen is, weerst du wiss, dat ’t genoog Rüümte för een freedsames Leven hett. Aver kann dien Volk in Free tegen dienen Nabers leven?"
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:11
 msgid ""
