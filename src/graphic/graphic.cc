@@ -133,8 +133,12 @@ void Graphic::initialize(const TraceGl& trace_gl,
 			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
-	log_info("**** END GRAPHICS REPORT ****\n");
+	verb_log_info("**** END GRAPHICS REPORT ****\n");
+	rebuild_texture_atlas();
+}
 
+void Graphic::rebuild_texture_atlas() {
+	verb_log_info("Rebuilding texture atlas");
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	g_image_cache->fill_with_texture_atlases(
