@@ -1712,6 +1712,7 @@ descriptions:new_tribe {
             lore = pgettext("frisians_building", "Everyone has their own ideas on how exactly we should explore the enemy’s territory… One more ‘improvement’ suggestion and we’ll demand meals instead of rations!"),
             -- TRANSLATORS: Lore author helptext for a frisian production site: Scout's House
             lore_author = pgettext("frisians_building", "The spokesman of the scouts’ labor union"),
+            no_scouting_building_connected = pgettext("frisians_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Scout's House

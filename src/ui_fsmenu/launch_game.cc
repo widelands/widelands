@@ -315,7 +315,7 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 		}
 	} catch (const std::exception& e) {
 		const std::string error_message =
-		   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
+		   (boost::format(_("Unable to determine valid win conditions because the map ‘%s’ "
 		                    "could not be loaded.")) %
 		    settings_.settings().mapfilename)
 		      .str();

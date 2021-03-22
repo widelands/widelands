@@ -487,7 +487,8 @@ void AddOnsPackager::clicked_write_changes() {
 			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 		}
 	}
-	msg += _("\n\nWarning: If you manually edited any files in this add-on, your changes may be "
+	msg += "\n\n";
+	msg += _("Warning: If you manually edited any files in this add-on, your changes may be "
 	         "overwritten!");
 
 	UI::WLMessageBox m(&main_menu_, UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg,
