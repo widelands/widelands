@@ -60,6 +60,9 @@ private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;
 	std::map<std::string, std::unique_ptr<const Image>> images_;
 
+	std::vector<std::unique_ptr<const Image>> outdated_images_;
+	std::vector<std::unique_ptr<Texture>> outdated_texture_atlases_;
+
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };
 

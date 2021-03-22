@@ -13,14 +13,19 @@ map="maps/Lake_of_Tranquility.wmf"
 # The player number of the interactive player. Default: 1.
 interactive_player="1"
 
-# The filename of the win condition script (without path), or the internal name of the add-on defining the win condition. Default: Endless Game.
+# The filename of the win condition script (without path), or the internal name of the add-on defining the win condition.
+# Default: Endless Game. Examples:
+# win_condition="wood_gnome.lua"   # Script at: data/scripting/win_conditions/wood_gnome.lua
+# win_condition="100-wells.wad"    # Script at: addons/100-wells.wad/init.lua
 win_condition="endless_game.lua"
 
 # Whether peaceful mode and custom starting positions mode are enabled. Default: false.
 peaceful="false"
 custom_starting_positions="false"
 
-# Comma-separated list of the add-ons to enable. Default: All disabled.
+# Comma-separated, ordered list of the internal names of the add-ons to enable. Default: All disabled.
+# Example: addons="foreign_planet.wad,more-fish-and-water.wad,frisians-economy-ultra.wad"
+# For more information regarding the ordering, see https://www.widelands.org/documentation/add-ons/#restrictions
 addons=
 
 # Section `player_i`: Settings for the i-th player. If any value (or a whole section) is missing, default settings will be used.
@@ -29,7 +34,10 @@ addons=
 # Player tribe (empty means random tribe). Default: Map's tribe.
 tribe=
 
-# The filename of the starting condition script (without path), or the internal name of the add-on defining the starting condition. Default: Headquarters.
+# The filename of the starting condition script (without path), or the internal name of the add-on defining the starting condition.
+# Default: Headquarters. Examples:
+# init="village.lua"                    # Script at: data/tribes/initialization/frisians/starting_conditions/village.lua
+# init="stronger-trading-outpost.wad"   # Script at: addons/stronger-trading-outpost.wad/frisians.lua
 init="headquarters.lua"
 
 # Team number (0 means no team). Default: 0.
