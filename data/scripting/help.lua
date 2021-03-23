@@ -3,7 +3,7 @@
 -- --------
 --
 -- This script contains functions that are used both in the Tribal Encyclopedia
--- and the Editor help.
+-- and the Editor help. To get descriptions see: :attr:`wl.Descriptions`.
 
 include "scripting/richtext.lua"
 
@@ -16,8 +16,8 @@ include "scripting/richtext.lua"
 --    terrain, sorted in descending order by probability.
 --
 --    :arg terrain_description: The terrain type that we want the information for.
---    :type terrain_description: :class:`LuaTerrainDescription`
---    :returns: list of :class:`LuaImmovableDescription` that have the attribute "tree" and probabilities.
+--    :type terrain_description: :class:`~wl.map.TerrainDescription`
+--    :returns: list of :class:`~wl.map.ImmovableDescription` that have the attribute "tree" and probabilities.
 --
 function tree_affinity_list(terrain_description)
    local tree_list = {}
@@ -48,8 +48,8 @@ end
 --    immovable is most likely to grow on, sorted in descending order by probability.
 --
 --    :arg immovable_description: The immovable type that we want the information for.
---    :type immovable_description: :class:`LuaImmovableDescription`
---    :returns: list of :class:`LuaTerrainDescription` and probabilities.
+--    :type immovable_description: :class:`~wl.map.ImmovableDescription`
+--    :returns: list of :class:`~wl.map.TerrainDescription` and probabilities.
 --
 function terrain_affinity_list(immovable_description)
    local terrain_list = {}
@@ -78,7 +78,7 @@ end
 --    immovable is most likely to grow on.
 --
 --    :arg immovable_description: The immovable type that we want the information for.
---    :type immovable_description: :class:`LuaImmovableDescription`
+--    :type immovable_description: :class:`~wl.map.ImmovableDescription`
 --    :returns: a richtext-formatted list of terrain images, terrain names and probabilities.
 --
 function terrain_affinity_help(immovable_description)

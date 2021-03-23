@@ -360,10 +360,10 @@ void LuaEditor::__unpersist(lua_State* /* L */) {
  */
 
 /* RST
-World
------
+World Descriptions
+------------------
 
-.. class:: World
+.. class:: Descriptions
 
    This offers access to the objects in the Widelands world and allows to add new objects.
    On how to build the world and adding new objects to it, see
@@ -428,7 +428,7 @@ void LuaDescriptions::__unpersist(lua_State*) {
 
       Returns a list of all the immovables that are available.
 
-      (RO) a list of :class:`LuaImmovableDescription` objects
+      (RO) a list of :class:`~wl.map.ImmovableDescription` objects
 */
 int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
@@ -448,7 +448,7 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 
       Returns a list of all the terrains that are available.
 
-      (RO) a list of :class:`LuaTerrainDescription` objects
+      (RO) a list of :class:`~wl.map.TerrainDescription` objects
 */
 int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
@@ -468,7 +468,7 @@ int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 
       Returns a list of all the workers that are available.
 
-      (RO) a list of :class:`LuaWorkerDescription` objects
+      (RO) a list of :class:`~wl.map.WorkerDescription` objects
 */
 int LuaDescriptions::get_worker_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
