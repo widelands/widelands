@@ -309,7 +309,7 @@ amalea_1 = {
       _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. All of the lumberjacks’ houses and the wells seem also to be inefficient or worn out.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[For the other buildings we can't tell yet, if they are working properly. We need to closely monitor them when we are able to supply them. Until then we shouldn't do anything with them.]])
+      _([[For the other buildings we can’t tell yet, if they are working properly. We need to closely monitor them when we are able to supply them. Until then we shouldn’t do anything with them.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Except, maybe we should restrict the input of all buildings which consume any of our building materials to zero. Or maybe we could even pause the production in all bigger buildings and get the workers some rest until we have produced some of their input wares.]]))
@@ -322,7 +322,7 @@ amalea_2 = {
    title=_"Amalea has Bad News",
    body= amalea3(_"Amalea recommends…",
       -- TRANSLATORS: Amalea
-      _([[Brother, I'm really worried that I have to deliver bad news again. As you can see, our farms aren’t producing anything and we can’t dismantle them.]])
+      _([[Brother, I’m really worried that I have to deliver bad news again. As you can see, our farms aren’t producing anything and we can’t dismantle them.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[This situation was caused by the sad fact that our people lost the instructions on how to construct and operate farms. Therefore they have zero productivity and the constructors don’t know how to dismantle them either.]])
@@ -531,7 +531,7 @@ amalea_17 = {
    title=_"Amalea is Positively Surprised",
    body= amalea2(_"Amalea is celebrating a happy event…",
       -- TRANSLATORS: Amalea
-      _([[Cheers Lutius, I don't know how, but we have been gifted with some beer and wine. We found the additional wares while we were taking stock recently. Maybe the goddess Vesta is still supporting us.]])),
+      _([[Cheers Lutius, I don’t know how, but we have been gifted with some beer and wine. We found the additional wares while we were taking stock recently. Maybe the goddess Vesta is still supporting us.]])),
    posy=1,
 }
 
@@ -574,7 +574,7 @@ amalea_21 = {
    title=_"Defeated!",
    body= amalea2(_"Amalea reports our defeat…",
       -- TRANSLATORS: Amalea
-      _([[Oh no Lutius, I don't know how this could have happened, but the Barbarians have sacked our headquarters. So, we have lost this battle and our empire!]])),
+      _([[Oh no Lutius, I don’t know how this could have happened, but the Barbarians have sacked our headquarters. So, we have lost this battle and our empire!]])),
    posy=1,
 }
 
@@ -582,7 +582,7 @@ amalea_22 = {
    title=_"Amalea has Bad News",
    body= amalea2(_"Amalea reports our headquarters lost…",
       -- TRANSLATORS: Amalea
-      _([[Oh no Lutius, I don't know how this could have happened, but the Barbarians have destroyed our headquarters. So, we can't deliver the wares to Julia anymore.]])
+      _([[Oh no Lutius, I don’t know how this could have happened, but the Barbarians have destroyed our headquarters. So, we can’t deliver the wares to Julia anymore.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Now we need to try to fulfil our duties without their technology. But this will not be an easy task at all.]])),
@@ -593,7 +593,7 @@ amalea_23 = {
    title=_"Defeated!",
    body= amalea2(_"Amalea reports our defeat…",
       -- TRANSLATORS: Amalea
-      _([[Oh no Lutius, I don't know how this could have happened, but the Barbarians have destroyed our last warehouse. So, we have lost this battle and our empire!]])),
+      _([[Oh no Lutius, I don’t know how this could have happened, but the Barbarians have destroyed our last warehouse. So, we have lost this battle and our empire!]])),
    posy=1,
 }
 

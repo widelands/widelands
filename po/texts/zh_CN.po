@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-09 11:30+0000\n"
+"POT-Creation-Date: 2021-03-18 17:03+0000\n"
+"PO-Revision-Date: 2021-03-18 17:06+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -416,6 +416,7 @@ msgstr "切换迷你地图"
 
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
+#: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
 msgstr ""
 
@@ -566,69 +567,69 @@ msgid ""
 msgstr "大多数升级后的建筑物需要有经验的劳动者。除非储备有经验丰富的劳动者，否则不要升级建筑物。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/editor.lua:7
+#: ../../data/txts/tips/editor.lua:8
 #, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
 msgstr "你可以找到关于地图编辑器的常规的帮助和一份简短的教程，我们的wiki位于%s。"
 
-#: ../../data/txts/tips/editor.lua:11
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "如果在选择过程中按住Ctrl键，可以选择多种动物类型组合成一个实例。如果你点击地图，一个选定动物类型的实例组合将被放置到地图上。 "
 
-#: ../../data/txts/tips/editor.lua:15
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "就像选择多个动物组合而成一个实例一样，你也可以使用Ctrl+鼠标单击选择多个固定物或是地表纹理。"
 
-#: ../../data/txts/tips/editor.lua:19
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "按住Shift键可以打开可切换工具的第一候选项。在大多数情况下，此工具的功用与普通工具正好相反（ 例如，删除对象而不是放置对象）。"
 
-#: ../../data/txts/tips/editor.lua:23
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "按住Alt键可以打开可切换工具的第二候选项（如果存在的话）。"
 
-#: ../../data/txts/tips/editor.lua:27
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
-"The number keys (0 - 9) allow you to directly set the size of the selected "
-"area around your mouse cursor."
-msgstr "数字键（0-9）允许你直接设置鼠标光标周围选定区域的大小。"
+"The keys %1% allow you to directly set the size of the selected area around "
+"your mouse cursor."
+msgstr ""
 
-#: ../../data/txts/tips/editor.lua:31
+#: ../../data/txts/tips/editor.lua:32
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "空格键在地图编辑器中的功用与普通游的戏中一样，都是用来切换建筑空间的显示或关闭。"
 
-#: ../../data/txts/tips/editor.lua:35
+#: ../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
 msgstr ""
 
-#: ../../data/txts/tips/editor.lua:39
+#: ../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
 msgstr ""
 
-#: ../../data/txts/tips/editor.lua:43
+#: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
 msgstr ""
 
-#: ../../data/txts/tips/editor.lua:47
+#: ../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
