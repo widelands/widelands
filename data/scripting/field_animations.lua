@@ -6,15 +6,7 @@
 --
 -- This script contains some animations to reveal and hide fields seen
 -- by a player. This functions are currently used in the campaigns and scenarios
--- to tell the prologue to a story.
---
--- To make these functions available include this file at the beginning
--- of a script via:
---
---    .. code-block:: lua
---
---       include "scritping/field_animations.lua"
---
+-- to tell the prologue of a story.
 
 -- RST
 -- .. function:: reveal_randomly(player, region, time)
@@ -22,13 +14,14 @@
 --    Reveal a given region field by field, where the fields
 --    are chosen randomly. The region will be hidden before being revealed.
 --    The animation runs the specified time.
---    See also :meth:`wl.map.Field.region`
 --
 --    :arg player: The player who gets sight to the region
---    :arg region: The region that has to be revealed
---    :type region: :class:`array` of :class:`wl.map.Fields`
+--    :type player: :class:`wl.game.Player`
+--    :arg region: The region that has to be revealed. E.g. by using :meth:`wl.map.Field.region`
+--    :type region: :class:`array` of :class:`fields <wl.map.Field>`
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
+--    :type time: :class:`integer`
 
 function reveal_randomly(plr, region, time)
    -- If no 'time' is given use a default
@@ -67,13 +60,15 @@ end
 --    Hide a given region field by field, where the fields
 --    are chosen randomly. The animation runs the specified time regardless
 --    how big the given region is. So region(6) and region(13) will take
---    the same time. See also :meth:`wl.map.Field.region`
+--    the same time.
 --
 --    :arg player: The player whose sight gets hidden
---    :arg region: The region that will be hidden
---    :type region: :class:`array` of :class:`wl.map.Fields`
+--    :type player: :class:`wl.game.Player`
+--    :arg region: The region that will be hidden. E.g. by using :meth:`wl.map.Field.region`
+--    :type region: :class:`array` of :class:`fields <wl.map.Field>`
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
+--    :type time: :class:`integer`
 
 function hide_randomly(plr, region, time)
    time = time or 1000
@@ -97,12 +92,16 @@ end
 --    max_radius. The region get hidden prior revealing as default.
 --
 --    :arg player: The player who gets sight to the region
+--    :type player: :class:`wl.game.Player`
 --    :arg center: The field from where the animation should start revealing
+--    :type center: :class:`wl.map.Field`
 --    :arg max_radius: The last ring to reveal
---    :arg hide: Optional, if `false` automatic hiding is disabled
+--    :type max_radius: :class:`integer`
+--    :arg hide: Optional, if :const:`false` automatic hiding is disabled
 --    :type hide: :class:`boolean`
 --    :arg delay: Optional, defaults to 100. The delay between revealing each
 --                ring. If you want to set the delay, you must also set `hide`
+--    :type delay: :class:`integer`
 
 function reveal_concentric(plr, center, max_radius, hide, delay)
    delay = delay or 100
@@ -134,10 +133,14 @@ end
 --    center.
 --
 --    :arg player: The player whose sight gets hidden
+--    :type player: :class:`wl.game.Player`
 --    :arg center: The field where the animation should end hiding
+--    :type center: :class:`wl.map.Field`
 --    :arg max_radius: The first ring to hide
+--    :type max_radius: :class:`integer`
 --    :arg delay: Optional, defaults to 100. The delay between revealing each
 --                ring
+--    :type time: :class:`integer`
 
 function hide_concentric(plr, center, max_radius, delay)
    delay = delay or 100
@@ -159,9 +162,10 @@ end
 --    Gather all fields a player can see in the current view. The current view
 --    is the whole area of the map in the current game window. You can use this
 --    function to get an unregular (non hexagonal) region and feed e.g.
---    :meth:`reveal_randomly()` with it.
+--    :meth:`reveal_randomly` with it.
 --
 --    :arg player: The player for whom the fields get gathered
+--    :type player: :class:`wl.game.Player`
 --    :returns: A table containing all visible fields in the current view
 
 function get_sees_fields(plr)
