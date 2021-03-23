@@ -133,6 +133,10 @@ NetAddons::~NetAddons() {
 
 void NetAddons::set_login(const std::string& username, const std::string& password) {
 	quit_connection();
+	if (username.empty()) {
+		last_username_ = username;
+		last_password_ = username;
+	}
 	init(username, password);
 }
 
@@ -441,6 +445,7 @@ int NetAddons::get_vote(const std::string& addon) {
 
 		const std::string line = read_line();
 		if (line == "NOT_LOGGED_IN") {
+			guard.ok();
 			return -1;
 		}
 		v = stoi(line);
