@@ -213,20 +213,26 @@ public:
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     descrbox_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_, "ok", 0, 0, 7 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("Upload")),
      cancel_(&buttons_box_, "cancel", 0, 0, 7 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
      images_(&hbox_, 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
      icon_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, 640, 360, nullptr),
-     description_(&vbox_, 0, 0, 300, UI::PanelStyle::kFsMenu),
+     description_(&descrbox_, 0, 0, 300, UI::PanelStyle::kFsMenu),
      progress_(&buttons_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter) {
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
 	buttons_box_.add(&progress_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
 
+	descrbox_.add(new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+			_("Description:"), UI::Align::kRight), UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	descrbox_.add_space(kRowButtonSpacing);
+	descrbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
+
 	vbox_.add(&icon_, UI::Box::Resizing::kExpandBoth);
 	vbox_.add_space(kRowButtonSpacing);
-	vbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
+	vbox_.add(&descrbox_, UI::Box::Resizing::kExpandBoth);
 
 	hbox_.add(&images_, UI::Box::Resizing::kExpandBoth);
 	hbox_.add_space(kRowButtonSpacing);
@@ -279,7 +285,7 @@ public:
 	}
 
 private:
-	UI::Box box_, hbox_, vbox_, buttons_box_;
+	UI::Box box_, hbox_, vbox_, descrbox_, buttons_box_;
 	UI::Button ok_, cancel_;
 	UI::Listselect<std::string> images_;
 	UI::Icon icon_;
