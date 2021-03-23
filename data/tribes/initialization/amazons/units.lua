@@ -1335,6 +1335,7 @@ descriptions:new_tribe {
       {
          name = "amazons_scouts_hut",
          helptexts = {
+            no_scouting_building_connected = pgettext("amazons_building", "You need to connect this flag to a scout’s hut before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Scout's Hut
             purpose = pgettext("amazons_building", "Explores unknown territory."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Scout's Hut

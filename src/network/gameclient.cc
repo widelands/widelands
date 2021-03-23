@@ -876,7 +876,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			// Notify the players
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
-			s.string(_("/me 's file failed md5 checksumming."));
+			s.string(_("/me ’s file failed md5 checksumming."));
 			d->net->send(s);
 			try {
 				g_fs->fs_unlink(d->file_->filename);
@@ -932,8 +932,9 @@ void GameClient::handle_file_part(RecvPacket& packet) {
  */
 void GameClient::handle_setting_tribes(RecvPacket& packet) {
 	d->settings.tribes.clear();
+	Widelands::AllTribes all_tribes = Widelands::get_all_tribeinfos(nullptr);
 	for (uint8_t i = packet.unsigned_8(); i; --i) {
-		Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
+		Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(packet.string(), all_tribes);
 
 		// Get initializations (we have to do this locally, for translations)
 		LuaInterface lua;

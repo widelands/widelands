@@ -1232,6 +1232,7 @@ descriptions:new_tribe {
       {
          name = "barbarians_scouts_hut",
          helptexts = {
+            no_scouting_building_connected = pgettext("barbarians_building", "You need to connect this flag to a scout’s hut before you can send a scout here."),
             -- TRANSLATORS: Lore helptext for a barbarian production site: Scout's Hut
             lore = pgettext("barbarians_building", "‘Behind the next hill there might be wealth and happiness but also hostility and doom.<br>He who will not explore it commits the crime of stupidity.’"),
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Scout's Hut
