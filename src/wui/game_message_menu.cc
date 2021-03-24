@@ -534,7 +534,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show geologists' messages only"),
+	   _("Show geologists’ messages only"),
 	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists),
 	   UI::PanelStyle::kWui));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(

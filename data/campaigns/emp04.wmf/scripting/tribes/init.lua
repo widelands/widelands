@@ -108,19 +108,19 @@ local result = {
          {
             name = "empire_foresters_house1",
             helptexts = {
-               -- TRANSLATORS: Purpose helptext for an empire production site: Forester's House
+               -- TRANSLATORS: Purpose helptext for an empire production site: Forester’s House
                purpose = pgettext("empire_building", "Plants trees in the surrounding area."),
-               -- TRANSLATORS: Note helptext for an empire production site: Forester's House
+               -- TRANSLATORS: Note helptext for an empire production site: Forester’s House
                note = pgettext("empire_building", "The forester’s house needs free space within the work area to plant the trees.")
             }
          },
          {
             name = "empire_lumberjacks_house1",
             helptexts = {
-               -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's House
+               -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s House
                purpose = pgettext("empire_building", "Fells trees in the surrounding area and processes them into logs."),
-               -- TRANSLATORS: Note helptext for an empire production site: Lumberjack's House
-               note = pgettext("empire_building", "The lumberjack's house needs trees to fell within the work area.")
+               -- TRANSLATORS: Note helptext for an empire production site: Lumberjack’s House
+               note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area.")
             }
          },
          {
