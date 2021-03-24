@@ -57,8 +57,8 @@ end
 -- RST
 -- .. function:: paragraphdivider()
 --
---    Closes a paragraph and opens a new paragraph. Use this when you format 
---    a :ref:`richtext<richtext.lua>` string and need to divide it into multiple paragraphs. Just concatenate 
+--    Closes a paragraph and opens a new paragraph. Use this when you format
+--    a :ref:`richtext<richtext.lua>` string and need to divide it into multiple paragraphs. Just concatenate
 --    this function with the Lua string concatenation operator ``..``
 --
 --    :returns: close_p() .. open_p()
@@ -78,8 +78,8 @@ end
 --
 --       campaign_message_box({title = "Window title",
 --                             body = text,
---                             w = 200, 
---                             h = 150, 
+--                             w = 200,
+--                             h = 150,
 --                             position = "top"})
 --
 
