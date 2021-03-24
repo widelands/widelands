@@ -21,20 +21,9 @@ descriptions:new_productionsite_type {
       grout = 1
    },
 
-   animations = {
-      idle = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 38 },
-      },
-      build = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 50, 38 },
-      },
-      working = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 50, 38 },
-      }
-   },
+   animation_directory = dirname,
+   -- TODO(Nordfriese): Make animations.
+   animations = {idle = {hotspot = {60, 46}}},
 
    aihints = {
       very_weak_ai_limit = 1,
@@ -58,8 +47,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barbarians_soldier",
             "consume=ax barbarians_recruit",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:30s",
             "recruit=barbarians_soldier"
          }
       },
