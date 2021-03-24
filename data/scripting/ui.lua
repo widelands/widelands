@@ -34,7 +34,10 @@ end
 --
 --    Make a nice moving transition to center on the 'map_pixel', which is a table
 --    that must contain 'x' and 'y' keys. The function will return as soon as
---    the transition is completed.
+--    the transition is completed. Usually this function is useful when 
+--    scrolling back after using :meth:`scroll_to_field` or
+--    :meth:`wait_for_roadbuilding_and_scroll`. These functions are returning 
+--    a table of 'map_pixel'.
 --
 --    :arg map_pixel: pixel to focus on.
 --    :type map_pixel: :class:`table`
@@ -148,7 +151,7 @@ end
 --    found, clicks it.
 --
 --    :arg name: Name of the button to click.
---    :type name: :class:`string`.
+--    :type name: :class:`string`
 --
 --    :returns: :const:`true` if a button was clicked
 --
@@ -200,9 +203,13 @@ end
 -- .. function:: wait_for_roadbuilding_and_scroll(field)
 --
 --    Sleeps while player is in roadbuilding mode, then calls
---    scroll_to_field(field).
+--    :meth:`scroll_to_field(field) <scroll_to_field>`.
+--
+--    :arg field: Field to scroll to
+--    :type field: :class:`wl.map.Field`
 --
 --    :returns: The return value of `scroll_to_field`.
+
 function wait_for_roadbuilding_and_scroll(field)
    _await_animation()
    wait_for_roadbuilding()
