@@ -13,7 +13,7 @@ include "scripting/ui.lua"
 --
 -- .. code-block:: lua
 --
---    include "scritping/starting_condition.lua"
+--    include "scripting/starting_condition.lua"
 --
 
 -- =======================================================================

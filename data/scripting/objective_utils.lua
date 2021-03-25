@@ -10,7 +10,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/objective_utils.lua"
+--    include "scripting/objective_utils.lua"
 
 -- =======================================================================
 --                             PRIVATE FUNCTIONS

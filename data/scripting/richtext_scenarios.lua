@@ -15,7 +15,7 @@ include "scripting/richtext.lua"
 --
 -- .. code-block:: lua
 --
---    include "scritping/richtext_scenarios.lua"
+--    include "scripting/richtext_scenarios.lua"
 --
 
 -- RST

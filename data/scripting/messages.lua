@@ -9,7 +9,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/messages.lua"
+--    include "scripting/messages.lua"
 --
 
 include "scripting/coroutine.lua"

@@ -4,6 +4,11 @@
 --
 -- This script contains functions that are used both in the Tribal Encyclopedia
 -- and the Editor help. To get descriptions see: :attr:`wl.Descriptions`.
+--
+-- .. code-block:: lua
+--
+--    include "scripting/help.lua"
+--
 
 include "scripting/richtext.lua"
 

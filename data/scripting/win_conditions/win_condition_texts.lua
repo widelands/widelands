@@ -12,7 +12,7 @@ include "scripting/richtext.lua"
 --
 -- .. code-block:: lua
 --
---    include "scritping/win_conditions/win_condition_functions.lua"
+--    include "scripting/win_conditions/win_condition_functions.lua"
 --
 -- All tables provide two values ``title`` and ``body``. Refer to those values
 -- like so:

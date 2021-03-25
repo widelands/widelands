@@ -21,7 +21,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/richtext.lua"
+--    include "scripting/richtext.lua"
 --
 -- - `Blocks and Positioning`_
 -- - `Headings and Paragraphs`_

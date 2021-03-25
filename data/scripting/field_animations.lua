@@ -6,7 +6,12 @@
 --
 -- This script contains some animations to reveal and hide fields seen
 -- by a player. This functions are currently used in the campaigns and scenarios
--- to tell the prologue of a story.
+-- to tell the prologue to a story.
+--
+-- .. code-block:: lua
+--
+--    include "scripting/field_animations.lua"
+--
 
 -- RST
 -- .. function:: reveal_randomly(player, region, time)

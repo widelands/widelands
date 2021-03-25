@@ -10,7 +10,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/table.lua"
+--    include "scripting/table.lua"
 --
 
 -- RST

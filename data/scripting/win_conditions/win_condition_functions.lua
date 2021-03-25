@@ -12,7 +12,7 @@ include "scripting/messages.lua"
 --
 -- .. code-block:: lua
 --
---    include "scritping/win_conditions/win_condition_functions.lua"
+--    include "scripting/win_conditions/win_condition_functions.lua"
 --
 
 -- RST

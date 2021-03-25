@@ -9,7 +9,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/win_conditions/territorial_functions.lua"
+--    include "scripting/win_conditions/territorial_functions.lua"
 --
 
 push_textdomain("win_conditions")

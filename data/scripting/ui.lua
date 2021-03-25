@@ -18,7 +18,7 @@ include "scripting/coroutine.lua"
 --
 -- .. code-block:: lua
 --
---    include "scritping/ui.lua"
+--    include "scripting/ui.lua"
 --
 
 -- Sleep until we are done animating.

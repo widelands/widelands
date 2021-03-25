@@ -9,7 +9,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/set.lua"
+--    include "scripting/set.lua"
 --
 
 -- RST

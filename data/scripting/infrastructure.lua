@@ -10,7 +10,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/infrastructure.lua"
+--    include "scripting/infrastructure.lua"
 --
 
 -- RST

@@ -16,7 +16,7 @@
 --
 -- .. code-block:: lua
 --
---    include "scritping/coroutine.lua"
+--    include "scripting/coroutine.lua"
 --
 
 -- =======================================================================
