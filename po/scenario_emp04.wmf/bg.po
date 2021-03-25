@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Любомир Василев, 2019\n"
 "Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
@@ -550,9 +550,9 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid ""
-"For the other buildings we can't tell yet, if they are working properly. We "
+"For the other buildings we can’t tell yet, if they are working properly. We "
 "need to closely monitor them when we are able to supply them. Until then we "
-"shouldn't do anything with them."
+"shouldn’t do anything with them."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -576,11 +576,9 @@ msgstr "Амалея препоръчва…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:325
 msgid ""
-"Brother, I'm really worried that I have to deliver bad news again. As you "
+"Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
-"Братко, страхувам се, че отново имам лоши новини. Както виждаш, фермите ни "
-"не произвеждат нищо, а не можем да ги демонтираме."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:328
@@ -1074,13 +1072,10 @@ msgstr "Амалея празнува радостно събитие…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
 msgid ""
-"Cheers Lutius, I don't know how, but we have been gifted with some beer and "
+"Cheers Lutius, I don’t know how, but we have been gifted with some beer and "
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
-"Наздраве, Луций. Не знам как, но отнякъде получихме бира и вино. Открихме "
-"тези стоки, докато съхранявахме запасите. Може би богинята Веста ни "
-"подкрепя."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea Analyzes the Economy"
@@ -1180,11 +1175,9 @@ msgstr "Амалея докладва за загубата ни…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:577
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
-"О, не! Луций, не знам се случи това, но варварите опустошиха щаба ни. "
-"Загубихме битката и империята си!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 msgid "Amalea reports our headquarters lost…"
@@ -1193,12 +1186,10 @@ msgstr "Амалея докладва за загубата на щаба ни�
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:585
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
-"have destroyed our headquarters. So, we can't deliver the wares to Julia "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
+"have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
-"О, не! Луций, не знам се случи това, но варварите разрушиха щаба ни. Вече не"
-" можем да доставим стоките на Юлия."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:588
@@ -1212,12 +1203,10 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
-"О, не! Луций, не знам се случи това, но варварите разрушиха последния ни "
-"склад. Загубихме битката и империята си!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
 msgid "Saledus looks very relaxed…"
@@ -1600,14 +1589,14 @@ msgctxt "empire_building"
 msgid "Sows and harvests wheat."
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Forester's
+#. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
 msgstr ""
 
-#. TRANSLATORS: Note helptext for an empire production site: Forester's House
+#. TRANSLATORS: Note helptext for an empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
 msgctxt "empire_building"
 msgid ""
@@ -1615,18 +1604,18 @@ msgid ""
 "trees."
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
+#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr ""
 
-#. TRANSLATORS: Note helptext for an empire production site: Lumberjack's
+#. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
-msgid "The lumberjack's house needs trees to fell within the work area."
+msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
