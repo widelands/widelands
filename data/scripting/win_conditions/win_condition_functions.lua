@@ -185,7 +185,7 @@ end
 -- RST
 -- .. function:: broadcast_objective(header, msg, body)
 --
---    Broadcast an :class:`~wl.game.Objective` to all players. Technically, 
+--    Broadcast an :class:`~wl.game.Objective` to all players. Technically,
 --    it is assigned to player1, because all players will see all objectives.
 --
 --    :arg name:  A unique name for the objective
@@ -386,7 +386,7 @@ end
 --
 --    :arg max_time:    The time maximum game time in minutes
 --    :type max_time: :class:`integer`
---    :arg remaining_time: The remaining time until game ends. On first call 
+--    :arg remaining_time: The remaining time until game ends. On first call
 --                         this is equal to **max_time**.
 --    :type remaining_time: :class:`integer`
 --
