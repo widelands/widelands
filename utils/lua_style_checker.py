@@ -50,7 +50,7 @@ if errors > 0:
 	sys.exit(1)
 
 # Actual check
-for filename in find_files(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), ['.lua']):
+for filename in find_files(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), ['.lua', '.rst', '.rst.org']):
 	for lidx, line in enumerate(read_text_file(filename).strip().split('\n')):
 		errors += check_line(re.compile(r""".*widelands.(.*)""").search(filename).group(1), lidx, line)
 
