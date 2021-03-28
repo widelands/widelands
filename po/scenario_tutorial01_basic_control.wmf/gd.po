@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-13 10:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 20:16+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,9 +132,9 @@ msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Se
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid ""
-"I'll show you where the menu is and where to show and hide the building "
+"I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr "Seallaidh mi dhut far a bheil an clàr-taice agus mar a sheallas agus a dh’fhalaicheas tu na h-ionadan togail."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016,2018,2020
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2017
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-06 15:48+0000\n"
-"Last-Translator: vargaviktor <viktor.varga@gmail.com>\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-25 12:49+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +35,7 @@ msgstr "Használat: widelands <beállítás0>=<érték0> ... <beállításN>=<é
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "       widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "  widelands <mentés.wgf>/<visszajátszás.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -142,7 +143,7 @@ msgstr " --nosound            Hang nélkül indítja a játékot."
 #: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr " --fail-on-lua-error  A Widelands kényszerítése az összeomlásra, ha Lua hiba fordul elő."
+msgstr " --fail-on-lua-error  A Widelands összeomlásra kényszerítése Lua hiba esetén."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
@@ -176,7 +177,7 @@ msgid ""
 "                      Directly create a new singleplayer game\n"
 "                      configured in the given file. An example can\n"
 "                      be found in `data/templates/new_game_template`."
-msgstr ""
+msgstr "--new_game_from_template=FÁJLNÉV\n                      Új egyszemélyes játék közvetlen indítása\n                      a megadott fájl alapján. Minta:\n                      `data/templates/new_game_template`."
 
 #: ../../src/wlapplication_messages.cc:122
 msgid ""
@@ -190,7 +191,7 @@ msgstr " --loadgame=FÁJLNÉV Közvetlenül betölti a FÁJLNÉV néven mentett 
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr ""
+msgstr " --replay=FÁJLNÉV    Közvetlenül betölti a FÁJLNÉV néven mentett visszajátszást."
 
 #: ../../src/wlapplication_messages.cc:127
 msgid ""
@@ -266,10 +267,10 @@ msgstr " --border_snap_distance=[0 ...]\n                      Az ablak ragadjon
 #: ../../src/wlapplication_messages.cc:167
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
-"                      Eliminate a window's border towards the\n"
+"                      Eliminate a window’s border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr "--dock_windows_to_edges=[true|false]\nHa egy ablak oldala a képernyő szélénél\nvan, az ablakkeret azon az oldalon ne\nlátszódjon."
+msgstr "--dock_windows_to_edges=[true|false]\n                      Ha egy ablak oldala a képernyő szélénél\n                      van, az ablakkeret azon az oldalon ne\n                      látszódjon."
 
 #: ../../src/wlapplication_messages.cc:172
 msgid ""
@@ -301,7 +302,7 @@ msgid ""
 "                      Directly loads the given savegame or replay. Useful for\n"
 "                      .wgf/.wrpl file extension association. Does not work with\n"
 "                      other options. Also see --loadgame/--replay."
-msgstr ""
+msgstr "<mentés.wgf>/<visszajátszás.wrpl>\n                      A megadott mentés vagy visszajátszás közvetlen\n                      betöltése. A .wgf/.wrpl fájltípus hozzárendeléséhez.\n                      Más beállításokkal együtt nem működik. Lásd még:\n                      --loadgame/--replay"
 
 #: ../../src/wlapplication_messages.cc:192
 msgid ""
