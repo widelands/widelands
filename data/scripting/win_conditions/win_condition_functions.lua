@@ -19,7 +19,7 @@ include "scripting/messages.lua"
 -- .. function:: make_extra_data(plr, name, version[, extra])
 --
 --    Constructs a string containing information about the win condition.
---    This can e.g be used to inform the  meta server about it.
+--    This can e.g be used to inform the metaserver about it.
 --
 --    :arg plr: Player to calculate extra data for
 --    :type plr: :class:`~wl.game.Player`
