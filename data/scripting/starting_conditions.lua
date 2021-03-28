@@ -29,8 +29,11 @@ include "scripting/ui.lua"
 --    This function returns immediately after calling.
 --
 --    :arg player: The player to move the view for
+--    :type player: :class:`~wl.game.Player`
 --    :arg sleeptime: The number of milliseconds to wait
---    :arg field: The :class:`wl.map.Field` to center the view on
+--    :type sleeptime: :class:`integer`
+--    :arg field: The field to center the view on
+--    :type field: :class:`~wl.map.Field`
 --
 --    :returns: :const:`nil`
 function sleep_then_goto(player, sleeptime, field)
@@ -47,7 +50,8 @@ end
 --    given additional items on them. If called for the interactive
 --    player, centers the view on an arbitrary of these ships.
 --
---    :arg player: The :class:`wl.game.Player` to use
+--    :arg player: The player to use
+--    :type player: :class:`~wl.game.Player`
 --    :arg items: An :class:`array` of :class:`tables` with `ware_or_worker_name = amount` pairs. As many ships will
 --                be created as there are subtables, and the n-th ship created will load the
 --                additional wares and workers defined in `items[n]`. The capacity of each ship will
