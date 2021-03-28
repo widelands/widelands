@@ -31,7 +31,7 @@
 --    building’s flag and goes from there 2 steps right (east), places a new
 --    flag. Then it goes one step bottom-right and one step right, places the
 --    next flag and then goes two steps right again and places the last flag.
---    If a flag at this last position already exists, the road get connected
+--    If a flag at this last position already exists, the road gets connected
 --    to the existing flag.
 --
 --    :arg roadtype: :const:`"normal"`, :const:`"busy"`, or :const:`"waterway"`
