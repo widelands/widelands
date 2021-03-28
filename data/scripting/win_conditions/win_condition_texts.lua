@@ -12,7 +12,7 @@ include "scripting/richtext.lua"
 --
 -- .. code-block:: lua
 --
---    include "scripting/win_conditions/win_condition_functions.lua"
+--    include "scripting/win_conditions/win_condition_texts.lua"
 --
 -- All tables provide two values ``title`` and ``body``. Refer to those values
 -- like so:
@@ -25,8 +25,8 @@ include "scripting/richtext.lua"
 -- RST
 -- .. data:: won_game
 --
---   :values: * ``title`` = "Congratulations!"
---            * ``body`` = p("You have won this game!")
+--   :values: * ``title`` = _"Congratulations!"
+--            * ``body`` = p(_"You have won this game!")
 --
 
 won_game = {
@@ -37,8 +37,8 @@ won_game = {
 -- RST
 -- .. data:: lost_game
 --
---   :values: * ``title`` = "You are defeated!"
---            * ``body`` = p("You lost your last warehouse and are therefore defeated. You may continue as spectator if you want.")
+--   :values: * ``title`` = _"You are defeated!"
+--            * ``body`` = p(_"You lost your last warehouse and are therefore defeated. You may continue as spectator if you want.")
 --
 
 lost_game = {
@@ -49,8 +49,8 @@ lost_game = {
 -- RST
 -- .. data:: won_game_over
 --
---   :values: * ``title`` = "You won"
---            * ``body`` = h2("You are the winner!")
+--   :values: * ``title`` = _"You won"
+--            * ``body`` = h2(_"You are the winner!")
 --
 
 won_game_over = {
@@ -73,8 +73,8 @@ lost_game_over = {
 -- RST
 -- .. data:: game_status
 --
---   :values: * ``title`` = "Status"
---            * ``body`` = h2("Player overview:")
+--   :values: * ``title`` = _"Status"
+--            * ``body`` = h2(_"Player overview:")
 --
 
 game_status = {

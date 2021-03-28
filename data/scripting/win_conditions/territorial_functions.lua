@@ -82,14 +82,19 @@ statistics = {
 -- RST
 -- .. function:: calculate_territory_points(fields, players, wc_descname, wc_version)
 --
---    First checks if a player was defeated, then fills the ``territory_points`` table
+--    First checks if a player was defeated, then fills the :data:`territory_points` table
 --    with current data.
 --
 --    :arg fields: Number of all valuable fields
+--    :type fields: :class:`integer`
 --    :arg players: Table of all players
---    :arg wc_descname: String with the win condition's descname
---    :arg wc_version: Number with the win condition's descname
+--    :type players: :class:`array` of :class:`~wl.game.Player`
+--    :arg wc_descname: The win condition's descname
+--    :type wc_descname: :class:`string`
+--    :arg wc_version: The win condition's version
+--    :type wc_version: :class:`integer`
 --
+
 function calculate_territory_points(fields, players)
    local points = {} -- tracking points of teams and players without teams
    local territory_was_kept = false
@@ -181,7 +186,9 @@ end
 --    for messages to the players
 --
 --    :arg fields: Number of all valuable fields
+--    :type fields: :class:`integer`
 --    :arg has_had: Use "has" for an interim message, "had" for a game over message.
+--    :type has_had: :class:`string`
 --
 --    :returns: a richtext-formatted string with information on current points for each player/team
 --
@@ -240,6 +247,7 @@ end
 --    Returns a string containing a status message header for a losing player
 --
 --    :arg players: Table of all players
+--    :type players: :class:`array` of :class:`~wl.game.Player`
 --
 --    :returns: a richtext-formatted string with header information for a losing player
 --
@@ -268,8 +276,15 @@ end
 --    Updates the territory points and sends game over reports
 --
 --    :arg fields: Number of all valuable fields
+--    :type fields: :class:`integer`
 --    :arg players: Table of all players
+--    :type players: :class:`array` of :class:`~wl.game.Player`
+--    :arg wc_descname: The win condition's descname
+--    :type wc_descname: :class:`string`
+--    :arg wc_version: The win condition's version
+--    :type wc_version: :class:`integer`
 --
+
 function territory_game_over(fields, players, wc_descname, wc_version)
    calculate_territory_points(fields, players, wc_descname, wc_version)
 
