@@ -95,6 +95,17 @@ jobs:
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
+  # TODO(Nordfriese): Require this check to be clean when we've cleaned up the hits
+  lua_style:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Run Lua style checker
+      run: ./utils/lua_style_checker.py
+
   testsuite:
     needs: [clang_tidy, documentation, codecheck, includes]
     strategy:
