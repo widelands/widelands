@@ -360,8 +360,8 @@ void LuaEditor::__unpersist(lua_State* /* L */) {
  */
 
 /* RST
-World Descriptions
-------------------
+World and Tribe Descriptions
+----------------------------
 
 .. class:: Descriptions
 
