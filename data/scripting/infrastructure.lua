@@ -77,7 +77,7 @@ end
 -- RST
 -- .. function:: prefilled_buildings(plr, b1_descr[, b2_descr, ...])
 --
---    Create pre-filled buildings. Each description is a array which contain
+--    Create pre-filled buildings. Each description is an array which contains
 --    building type, x and y coordinates and pre-fill information.
 --    A sample usage:
 --
