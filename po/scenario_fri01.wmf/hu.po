@@ -3,16 +3,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@mailbox.org>, 2018
 # Tamás Kismarton <kismartontomi@gmail.com>, 2019
+# Balázs Meskó <meskobalazs@mailbox.org>, 2021
+# András Tóth <txa-dev@posteo.hu>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Tamás Kismarton <kismartontomi@gmail.com>, 2019\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,8 +39,8 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Építs egy Favágó házat és két Erdészházat, hogy elkezdj farönköt termelni és"
-" hogy tudj Nádfarmot építeni és nádat termelni."
+"Építs egy favágóházat és két erdészházat, hogy elkezdj farönköt termelni, és"
+" egy nádfarmot, hogy nádat termessz."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -47,50 +48,54 @@ msgstr "Gyárts téglákat"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr ""
+msgstr "Tégla gazdaság"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Építs egy téglaégetőt, szénbányát, kőbányát, agyaggödröt és egy kutat, hogy "
+"elkezdd a téglagyártást."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "Gyűjts építőanyagokat"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "Halmozz fel építőanyagokat"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
+"Halmozz fel építőanyagokat a főhadiszállásodon. Gyűjtsd össze legalább a "
+"következőket:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr "30 x Farönk"
+msgstr "30 × Farönk"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr "30 x Gránit"
+msgstr "30 × Gránit"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr "10 x Agyag"
+msgstr "10 × Agyag"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr "40 x Tégla"
+msgstr "40 × Tégla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr "20 x Szén"
+msgstr "20 × Szén"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr "30 x Nád"
+msgstr "30 × Nád"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
