@@ -36,11 +36,31 @@ end
 --    that must contain 'x' and 'y' keys. The function will return as soon as
 --    the transition is completed. Usually this function is useful when
 --    scrolling back after using :meth:`scroll_to_field` or
---    :meth:`wait_for_roadbuilding_and_scroll`.
+--    :meth:`wait_for_roadbuilding_and_scroll`. The return value of these 
+--    functions can be passed to ``scroll_to_map_pixel`` to move back to the 
+--    previous location.
 --
---    :arg map_pixel: pixel to focus on.
+--    :arg map_pixel: pixels to focus on.
 --    :type map_pixel: :class:`table`
 --
+--    Example:
+--
+--    .. code-block:: lua
+--
+--       include "scripting/ui.lua"
+--       include "scripting/messages.lua"
+--
+--       local rocks_field = wl.Game().map:get_field(12, 34)
+--
+--       -- scroll to 'rocks_field'; 'prior_location' will be the position from where we are scrolling from
+--       local prior_location = scroll_to_field(rocks_field)
+--       campaign_message_box({title= "New observation",
+--                             body = "We have found some rocks!",
+--                             position = "top"})
+--       -- after clicking 'OK' scroll back
+--       scroll_to_map_pixel(prior_location)
+--
+
 function scroll_to_map_pixel(map_pixel)
    _await_animation()
    wl.ui.MapView():scroll_to_map_pixel(map_pixel.x, map_pixel.y)
