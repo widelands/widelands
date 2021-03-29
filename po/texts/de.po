@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-19 22:59+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 20:59+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -326,7 +326,7 @@ msgid "ZetaOS"
 msgstr "Zeta"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
+msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "und viele, viele andere (vielen Dank für alles, was ihr beigetragen habt)"
 
 #: ../../data/txts/developers.lua:3
@@ -514,20 +514,20 @@ msgstr "Du kannst auf der rechten Seite Informationen über die ausgewählte Kar
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
 msgstr "Amazonen lieben Bäume. Baue genügend Hütten für Dschungelbewahrerinnen, um immer genügend davon zu haben."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
-msgstr "Seltene Hölzer sind das Rückgrat einer Amazonenwirtschaft. Baue Edelbaumpflanzungen um diese speziellen Bäume zu pflanzen."
+"plantations to plant the special trees for these woods."
+msgstr "Seltene Hölzer sind das Rückgrat einer Amazonenwirtschaft. Baue Edelbaumpflanzungen um die speziellen Bäume für diese Hölzer zu pflanzen."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
 msgstr "Edelbäume werden von erfahrenen Holzfällerinnen gefällt, deren Holzfällhütten zu Edelbaumfällhüttem erweitert wurden. Allerdings hören sie auf normale Bäume zu fällen. Plane ihre örtliche Verteilung vor."
 
@@ -765,7 +765,7 @@ msgstr "Du kannst mit dem Mausrad oder %1%/ %2% rein- und rauszoomen. Drücke %3
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr "Verwende die ‘%1$s’  und ‘%2$s’ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
+msgstr "Verwende die „%1$s“ und „%2$s“ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
@@ -821,7 +821,7 @@ msgstr "Benutze „@name“ am Anfang einer Chat-Nachricht, um diese nur demjeni
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
 msgstr "Wenn das Spiel abstürzt, mach dir keine Sorgen! Das Spiel speichert automatisch, sodass du es später wieder laden kannst."
 
