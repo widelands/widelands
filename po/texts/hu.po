@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017,2020
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-18 17:06+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-24 19:31+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -321,8 +322,8 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
-msgstr "és még sokan mások (köszönjük mindenkinek)"
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr "és nagyon sokan mások (köszönünk minden segítséget)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -420,7 +421,7 @@ msgstr "Kistérkép ki-/bekapcsolása"
 #: ../../data/txts/help/common_helptexts.lua:84
 #: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -509,26 +510,26 @@ msgstr "A jobb oldalon a kiválasztott térképről vagy játékmentésről tal�
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Az amazonok szeretik a fákat. Építs elég dzsungel fenntartó kunyhót, hogy legyen sok nekik."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
-msgstr ""
+"plantations to plant the special trees for these woods."
+msgstr "A ritka fák alkotják az amazon gazdaság gerincét. Építs ritkafa ültetvényeket, amelyek elültetik a facsemetéket ezekhez a faanyagokhoz."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "A ritka fákat a favágókunyhókból fejleszett ritkafa vágó kunyhókban lakó tapasztalt favágók tudják kivágni. Ők viszont nem vágják ki a többi fát. Tervezd meg előre, hogy hová építed őket!"
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Az élelmiszereket faszén tüzén szárítják. Biztosítsd a folyamatos ellátást!"
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -605,7 +606,7 @@ msgstr "Az Alt nyomva tartásával válthatsz a második alternatív eszközre (
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "A %1% billentyűk lehetővé teszik, hogy közvetlenül megadd az egérkurzor körül kiválasztott terület nagyságát."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
@@ -698,7 +699,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Az épület ablakokban található prioritás csúszkákkal tudod szabályozni egy adott termék szállítását. Ha kattintás közben le van nyomva a Shift billentyű is, akkor az összes árut egyszerre állítod."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -710,11 +711,11 @@ msgstr "A „Gazdaság beállításai” menüben meghatározhatod az áruk kív
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Kezeld üzeneteidet még hatékonyabban: használd az %1% billentyűt az üzenetek ablakának megjelenítéséhez, majd a %2% billentyűt a helyszínre ugráshoz, és a %3% billentyűt az üzenet archiválásához."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "Jegyezd meg a fontos helyeket a %1% billentyűkkel, majd ugorj rájuk a %2% gombokkal."
 
 #: ../../data/txts/tips/general_game.lua:49
 msgid ""
@@ -726,7 +727,7 @@ msgstr "Ha nyomva tartod a Ctrl-t, miközben utat távolítasz el, akkor eltűni
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "Az új katonákat a laktanyákban toborozzák. A képességeiket ezután a kiképzőhelyeken fejlesztik tovább."
 
 #: ../../data/txts/tips/general_game.lua:57
 msgid ""
@@ -737,7 +738,7 @@ msgstr "Ha szeretsz veszélyesen élni, kihagyhatod a megerősítést, ha lenyom
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Nyomd meg az %s billentyűt raktárkészleteid gyors megjelenítéséhez."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -754,39 +755,39 @@ msgstr "Néhány épületnek, mint a farmnak, nagyon kis munkaterülete van. Ha 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Az egér görgőjével vagy a %1%/%2% billentyűkkel tudod a képet nagyítani/kicsinyíteni. Nyomd meg a %3% billentyűt a nagyítás alaphelyzetbe állításához."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "A %1$s és a %2$s billentyűkkel vissza, illetve előre léphetsz a világ nemrégiben meglátogatott helyei között."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "A %1%/%2%billentyűkkel gyorsíthatod/lassíthatod az idő múlását. A %3%/%4% billentyűkkel gyorsan, a %5%/%6% billentyűkkel finoman változtathatod a sebességet."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "kurzor"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + kurzor"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "A %1% billentyűkkel tudod a térkép látható területét mozgatni. A %2% gyorsabban, a %3% lassabban mozgatja a térképet."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + kurzor"
 
 #: ../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -794,7 +795,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "Amikor egy épület megsemmisül, a benne lévő munkások keresnek egy közeli zászlót, ahonnan út vezet egy raktárba. Ha nincs a közelben ilyen zászló, akkor egy ideig vándorolnak, majd idővel elpusztulnak."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -816,7 +817,7 @@ msgstr "Ha a csevegőüzenetet a „@játékosnév” kifejezéssel kezded, az �
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
 msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésre kerül, így újra betöltheted utána."
 
@@ -826,4 +827,4 @@ msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésr
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"

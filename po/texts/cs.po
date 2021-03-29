@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-18 17:19+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 22:02+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -323,7 +323,7 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
+msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "a mnoho, mnoho dalších (děkujeme za veškerou pomoc)"
 
 #: ../../data/txts/developers.lua:3
@@ -406,7 +406,7 @@ msgstr "%s:"
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
-msgstr "Přepínání stavebních míst"
+msgstr "Přepnout zobrazení stavebních míst"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
@@ -416,7 +416,7 @@ msgstr "Přepíná režim celé obrazovky (pokud je operačním systémem podpor
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
-msgstr "Přepíná minimapu"
+msgstr "Přepnout zobrazení minimapy"
 
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
@@ -511,20 +511,20 @@ msgstr "Napravo můžeš najít informace o zvolené mapě nebo uložené hře. 
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
 msgstr "Amazonky milují stromy. Postav dostatek chat ochránkyň džungle, aby byl stromů dostatek."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
+"plantations to plant the special trees for these woods."
 msgstr "Vzácné dřeviny představují páteř amazonského hospodářství. Postav plantáž vzácných dřevin pro jejich výsadbu."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
 msgstr "Vzácné dřeviny jsou káceny zkušenými dřevorubkyněmi, které přebývají v chýších dřevorubkyň vylepšených na chaty na těžbu vzácných dřevin. Ty už netěží obvyklé druhy dřevin. Předem si jejich umístění dobře naplánuj."
 
@@ -818,9 +818,9 @@ msgstr "Pro odeslání zprávy pouze jednomu hráči, napiš na začátek zpráv
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "I kdyby hra spadla, neboj se! Hra se automaticky uloží, takže se k ní můžeš vrátit."
+msgstr "Pokud by při hře mělo dojít k jejímu pádu, nic se neděje! Hra se automaticky uloží, takže ji lze znovu načíst."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
