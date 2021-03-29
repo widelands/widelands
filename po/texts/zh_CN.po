@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-18 17:06+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -319,7 +319,7 @@ msgid "ZetaOS"
 msgstr "Zeta 操作系统"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
+msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
@@ -507,22 +507,22 @@ msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr "亚马逊人喜爱树。建造足够的丛林守护者小屋来容纳满足他们。 "
+msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
-msgstr "稀有木材是亚马逊经济的支柱。建造珍稀树种种植园来种植这些特殊的树木。"
+"plantations to plant the special trees for these woods."
+msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr "樵夫小屋可增强升级至稀有树种加工车间，由经验丰富的樵夫砍伐稀有树种时加工使用。升级为稀有树种加工车间之后，樵夫将停止砍伐普通树木。请提前计划他们的位置。"
+msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
@@ -814,7 +814,7 @@ msgstr ""
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
 msgstr ""
 

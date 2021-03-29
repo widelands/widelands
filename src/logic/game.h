@@ -212,6 +212,7 @@ public:
 #endif
 
 	void postload() override;
+	void check_addons_desync_magic();
 
 	void think() override;
 
@@ -350,6 +351,8 @@ public:
 
 private:
 	void sync_reset();
+
+	bool did_check_addons_desync_magic_;
 
 	MD5Checksum<StreamWrite> synchash_;
 
