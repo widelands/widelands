@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-18 17:06+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -326,8 +326,8 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
-msgstr "i wiele, wiele więcej (dziękuję za wszystko co zrobiłeś)"
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -514,20 +514,20 @@ msgstr "Informacje o wybranej mapie lub zapisie gry znajdziesz po prawej stronie
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
+"plantations to plant the special trees for these woods."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
 msgstr ""
 
@@ -821,9 +821,9 @@ msgstr "Użyj \"@imię\" na początku wiadomości w czacie, aby wysłać ją tyl
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Jeśli gra uległa awarii, nie przejmuj się! Gra zostanie zapisana automatycznie, byś mógł ją potem wczytać."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
