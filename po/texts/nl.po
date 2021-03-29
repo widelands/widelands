@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-09 11:30+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -324,8 +324,8 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
-msgstr "en vele, vele anderen (bedankt voor alles wat jullie gedaan hebben)"
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -421,6 +421,7 @@ msgstr "Minikaart (aan/uit)"
 
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
+#: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
 msgstr ""
 
@@ -511,20 +512,20 @@ msgstr "Aan de rechterkant staat informatie over de gekozen kaart of opgeslagen 
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
+"plantations to plant the special trees for these woods."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
 msgstr ""
 
@@ -571,69 +572,69 @@ msgid ""
 msgstr "De meeste verbeterde gebouwen hebben werkers met ervaring nodig. Je moet geen gebouwen opwaarderen voor de nodige werkers beschikbaar zijn."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/editor.lua:7
+#: ../../data/txts/tips/editor.lua:8
 #, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
 msgstr "Je kunt algemene hulp en een korte handleiding voor de editor vinden in onze wiki op %s."
 
-#: ../../data/txts/tips/editor.lua:11
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Je kunt meerdere diersoorten selecteren als je Ctrl ingedrukt houdt tijdens de selectie. Als je dan op de kaart klikt, zal één van de geselecteerde dieren willekeurig geplaatst worden."
 
-#: ../../data/txts/tips/editor.lua:15
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "Juist zoals met dieren kan je ook meerdere immobiele objecten of bodemsoorten selecteren met Ctrl + muisklik."
 
-#: ../../data/txts/tips/editor.lua:19
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Shift ingedrukt houden schakelt het eerste alternatieve gereedschap aan. Dit gereedschap is in de meeste gevallen het compleet tegenovergestelde van het normale gereedschap (bijvoorbeeld het verwijderen van een object in plaats van het plaatsen ervan)."
 
-#: ../../data/txts/tips/editor.lua:23
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Alt ingedrukt houden zet het tweede alternatieve gereedschap aan (als dit bestaat)."
 
-#: ../../data/txts/tips/editor.lua:27
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
-"The number keys (0 - 9) allow you to directly set the size of the selected "
-"area around your mouse cursor."
-msgstr "Met de numerieke toetsen (0 - 9) kun je direct de grootte van het geselecteerde gebied rond je muiscursor instellen."
+"The keys %1% allow you to directly set the size of the selected area around "
+"your mouse cursor."
+msgstr ""
 
-#: ../../data/txts/tips/editor.lua:31
+#: ../../data/txts/tips/editor.lua:32
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "Spatie werkt net als tijdens het normale spel: het toont of verbergt de bouwlocaties."
 
-#: ../../data/txts/tips/editor.lua:35
+#: ../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
 msgstr "Voor het plaatsen van bomen kan je de hulpknop gebruiken om te weten te komen welke soorten het best gedijen op elk soort terrein."
 
-#: ../../data/txts/tips/editor.lua:39
+#: ../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
 msgstr "Als je zelf geen water- of visgrondstoffen instelt zal een standaardhoeveelheid worden gebruikt."
 
-#: ../../data/txts/tips/editor.lua:43
+#: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
 msgstr "Je kan een middelgroot gebouw plaatsen op elk knooppunt waar de helling in zuidoostelijke richting niet groter is dan één en waar het hoogteverschil met alle knooppunten in een straal van twee hoogstens twee is."
 
-#: ../../data/txts/tips/editor.lua:47
+#: ../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
@@ -818,9 +819,9 @@ msgstr "Gebruik '@name' aan het begin van een chatbericht om het naar één spel
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Geen paniek als het spel crasht! Je spel zal automatisch opgeslagen worden zodat je het nadien weer kan laden."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

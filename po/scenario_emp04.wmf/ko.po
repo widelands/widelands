@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -510,12 +510,10 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid ""
-"For the other buildings we can't tell yet, if they are working properly. We "
+"For the other buildings we can’t tell yet, if they are working properly. We "
 "need to closely monitor them when we are able to supply them. Until then we "
-"shouldn't do anything with them."
+"shouldn’t do anything with them."
 msgstr ""
-"다른 건물의 경우 제대로 일하고 있는지 아직은 알 수 없습니다. 우리는 공급할 수 있을 때 그들을 면밀히 감시할 필요가 있습니다. "
-"그때까지 우리는 그들과 함께 아무것도해서는 안됩니다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:315
@@ -540,11 +538,9 @@ msgstr "아말리아는 추천했다…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:325
 msgid ""
-"Brother, I'm really worried that I have to deliver bad news again. As you "
+"Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
-"오라버니, 제가 또 나쁜 소식을 전해야 할 것 같아서 정말 걱정이에요. 보시다시피, 우리 농장은 아무 것도 생산하지 않고 있고 우리는 "
-"그것들을 해체할 수도 없어요."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:328
@@ -1001,12 +997,10 @@ msgstr "아말리아는 행복한 행사를 축하했다…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
 msgid ""
-"Cheers Lutius, I don't know how, but we have been gifted with some beer and "
+"Cheers Lutius, I don’t know how, but we have been gifted with some beer and "
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
-"건배해요 루티우스, 어떻게 된건지는 모르겠지만, 우리는 맥주와 포도주를 선물 받았어요. 우리는 최근 재고를 확보하는 동안 추가 물품을 "
-"발견했습니다. 아마도 베스타 여신이 여전히 우리를 지원하고 있을지도 모릅니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea Analyzes the Economy"
@@ -1097,11 +1091,9 @@ msgstr "아말리아는 우리의 패배를 보고했다…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:577
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
-"오, 이런 루티우스, 어떻게 이런 일이 일어났는지는 모르겠지만, 야만인들이 우리 본부를 약탈했습니다. 그래서, 우리는 이 전투를 지고 "
-"제국을 잃었어요!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 msgid "Amalea reports our headquarters lost…"
@@ -1110,12 +1102,10 @@ msgstr "아말리아는 본부를 잃었다고 보고했다…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:585
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
-"have destroyed our headquarters. So, we can't deliver the wares to Julia "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
+"have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
-"오, 이런 루티우스, 어떻게 이런 일이 일어났는지는 모르겠지만, 야만인들이 우리 본부를 파괴했습니다. 그래서 우리는 더 이상 줄리아에게 "
-"물품을 전달할 수 없습니다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:588
@@ -1127,12 +1117,10 @@ msgstr "이제 우리는 그들의 기술 없이도 우리의 의무를 다하�
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
-"오, 이런 루티우스, 어떻게 이런 일이 일어날 수 있었는지 모르겠지만, 야만인들이 우리의 마지막 창고를 파괴했습니다. 그래서, 우리는 이"
-" 전투에서 지고 제국을 잃었습니다!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
 msgid "Saledus looks very relaxed…"
@@ -1476,14 +1464,14 @@ msgctxt "empire_building"
 msgid "Sows and harvests wheat."
 msgstr "밀을 심고 수확하십시오."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Forester's
+#. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
 msgstr "주변 지역에 나무를 심으십시오."
 
-#. TRANSLATORS: Note helptext for an empire production site: Forester's House
+#. TRANSLATORS: Note helptext for an empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
 msgctxt "empire_building"
 msgid ""
@@ -1491,19 +1479,19 @@ msgid ""
 "trees."
 msgstr "숲꾼의 집은 작업 영역 내에 나무를 심을 자유로운 공간이 필요합니다."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
+#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr "주변 지역에서 나무를 베어 통나무로 만드십시오."
 
-#. TRANSLATORS: Note helptext for an empire production site: Lumberjack's
+#. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
-msgid "The lumberjack's house needs trees to fell within the work area."
-msgstr "벌목꾼의 집은 작업 영역 내에 베어낼 나무가 필요합니다."
+msgid "The lumberjack’s house needs trees to fell within the work area."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130

@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-09 16:28+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-22 20:59+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -326,7 +326,7 @@ msgid "ZetaOS"
 msgstr "Zeta"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
+msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "und viele, viele andere (vielen Dank für alles, was ihr beigetragen habt)"
 
 #: ../../data/txts/developers.lua:3
@@ -423,6 +423,7 @@ msgstr "Öffnet/schließt die Minikarte"
 
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
+#: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -513,20 +514,20 @@ msgstr "Du kannst auf der rechten Seite Informationen über die ausgewählte Kar
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
 msgstr "Amazonen lieben Bäume. Baue genügend Hütten für Dschungelbewahrerinnen, um immer genügend davon zu haben."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
-msgstr "Seltene Hölzer sind das Rückgrat einer Amazonenwirtschaft. Baue Edelbaumpflanzungen um diese speziellen Bäume zu pflanzen."
+"plantations to plant the special trees for these woods."
+msgstr "Seltene Hölzer sind das Rückgrat einer Amazonenwirtschaft. Baue Edelbaumpflanzungen um die speziellen Bäume für diese Hölzer zu pflanzen."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
 msgstr "Edelbäume werden von erfahrenen Holzfällerinnen gefällt, deren Holzfällhütten zu Edelbaumfällhüttem erweitert wurden. Allerdings hören sie auf normale Bäume zu fällen. Plane ihre örtliche Verteilung vor."
 
@@ -573,69 +574,69 @@ msgid ""
 msgstr "Die meisten erweiterten Gebäude brauchen erfahrene Arbeiter. Erweitere kein Gebäude solange du nicht die benötigten Arbeiter hast."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/editor.lua:7
+#: ../../data/txts/tips/editor.lua:8
 #, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
 msgstr "Allgemeine Hilfe für den Editor sowie eine kurze Einführung können in unserem Wiki auf %s gefunden werden."
 
-#: ../../data/txts/tips/editor.lua:11
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Du kannst mehrere Tiere auswählen, wenn du STRG während der Auswahl gedrückt hältst. Wenn du dann auf die Karte klickst, wird eines der ausgewählten Tiere platziert."
 
-#: ../../data/txts/tips/editor.lua:15
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "Genauso wie bei Tieren kannst du auch mehrere unbewegliche Objekte oder Geländearten mit STRG+Mausklick auswählen."
 
-#: ../../data/txts/tips/editor.lua:19
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Festhalten der UMSCHALT-Taste aktiviert das erste alternative Werkzeug. Dieses Werkzeug macht meistens das Gegenteil dessen, was das normale tut (beispielsweise das Entfernen eines Objektes anstatt des Platzierens)."
 
-#: ../../data/txts/tips/editor.lua:23
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Wenn du ALT gedrückt hältst, wird das zweite alternative Werkzeug aktiviert (falls es existiert)."
 
-#: ../../data/txts/tips/editor.lua:27
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
-"The number keys (0 - 9) allow you to directly set the size of the selected "
-"area around your mouse cursor."
-msgstr "Die Zahlentasten (0 - 9) erlauben dir, direkt die Größe der Bearbeitungsfläche um den Mauszeiger zu setzen."
+"The keys %1% allow you to directly set the size of the selected area around "
+"your mouse cursor."
+msgstr "Die %1% Tasten erlauben dir, direkt die Größe der Bearbeitungsfläche um den Mauszeiger zu setzen."
 
-#: ../../data/txts/tips/editor.lua:31
+#: ../../data/txts/tips/editor.lua:32
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "Die Leertaste verhält sich wie im normalen Spiel. Sie schaltet die Bauhilfe an oder aus."
 
-#: ../../data/txts/tips/editor.lua:35
+#: ../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
 msgstr "Wenn du Bäume pflanzt, nutze die Hilfe um zu sehen, welche Bäume am besten auf welchem Gelände wachsen."
 
-#: ../../data/txts/tips/editor.lua:39
+#: ../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
 msgstr "Falls du keine Wasser- und Fischressourcen festlegst, wird ein Standardwert benutzt."
 
-#: ../../data/txts/tips/editor.lua:43
+#: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
 msgstr "Du kannst ein mittelgroßes Gebäude auf jeden Knoten setzen, der eine Steigung von maximal 1 im Südosten hat und dessen Höhenunterschied zu allen Knoten im Radius von 2 nicht größer als 2 ist."
 
-#: ../../data/txts/tips/editor.lua:47
+#: ../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
@@ -764,7 +765,7 @@ msgstr "Du kannst mit dem Mausrad oder %1%/ %2% rein- und rauszoomen. Drücke %3
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr "Verwende die ‘%1$s’  und ‘%2$s’ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
+msgstr "Verwende die „%1$s“ und „%2$s“ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
@@ -820,7 +821,7 @@ msgstr "Benutze „@name“ am Anfang einer Chat-Nachricht, um diese nur demjeni
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
 msgstr "Wenn das Spiel abstürzt, mach dir keine Sorgen! Das Spiel speichert automatisch, sodass du es später wieder laden kannst."
 

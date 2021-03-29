@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-02 12:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-24 15:27+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,61 +48,61 @@ msgstr "Üdvözlünk a Widelands játékban!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "A Widelands egy lassú, építkezős stratégiai játék, amiben az építés a hangsúlyos, és nem a pusztítás."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Célkitűzések fognak végigvezetni ezen az oktatójátékon."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Célkitűzések és kezelésük"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "A ‘Célkitűzések’ ablak kezelése"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "A Célkitűzések ablak megnyitásához és bezárásához kattints a Célkitűzések gombra a képernyő alján található eszközsoron."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "A többi ablakhoz hasonlóan be tudod zárni jobb gombos kattintással is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Amikor teljesítesz egy célkitűzést, az eltűnik a listáról."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
 msgid "Show building spaces"
-msgstr ""
+msgstr "Beépíthető helyek megjelenítése"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Kapcsold be a Beépíthető helyek megjelenítését! Kétféleképpen is megteheted:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Nyomd meg a %s billentyűt az átkapcsoláshoz, vagy válaszd ki a Beépíthető helyek megjelenítését a Megjelenít / Elrejt menüben!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Most jelenítsd meg a beépíthető helyeket!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Building Spaces"
-msgstr ""
+msgstr "Beépíthető helyek"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:76
@@ -114,7 +115,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have a different "
 "economy, strength and weaknesses, but the general gameplay is the same for "
 "all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Öt különböző törzs található a Widelandsben: barbárok, birodalmiak, atlantisziak, frízek és amazonok. Minden törzsnek eltérő gazdasága, erősségei és gyengéi vannak, de az általános játékmenet mindegyiknél megegyezik. Most a barbárokat mutatjuk be."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -126,25 +127,25 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "A játék általában a főhadiszálláson kezdődik. Ez a nagy épület a kék zászlóval előtte. A főhadiszállás tárolja az anyagokat, az árukat, a munkásokat és a katonákat. Az anyagok és áruk az épületek felhúzásához vagy más áruk előállításához kellenek. Nyilvánvalóan az induló árukészlet egy idő után elfogy, így elő kell állítani újakat. Ezek közül a legfontosabbak a játék elején: a farönk és a gránit. Ahhoz, hogy biztosan ne fogyjunk ki a farönkből, szükségünk van egy favágóra és egy kunyhóra, ahol lakhat."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Kell egy szép helyet találnunk a favágó kunyhójához. Hogy ezt megkönnyítsük, bekapcsolhatjuk a „Beépíthető helyek megjelenítését”."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid ""
-"I'll show you where the menu is and where to show and hide the building "
+"I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Megmutatom, hogy hol van a menü, és hol kapcsold ki vagy be a beépíthető helyek megjelenítését."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Most, hogy megmutattam, hogy hol tudod ki- vagy bekapcsolni a beépíthető helyek megjelenítését, jelenítsd meg őket, hogy elhelyezhessük az első épületünket."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"
@@ -156,23 +157,23 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Ez az. Most megmutatom, hogy hogyan építs favágókunyhót és hogyan kösd össze egy úttal. Van is egy tökéletes hely a kunyhóhoz az erdő mellett. Lépésről-lépésre elmagyarázom, mit kell tenned, utána meg is mutatom."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
-msgstr "A favágóház felépítése"
+msgstr "A favágókunyhó felépítése"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:102
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Először bal gombbal rákattintok a szimbólumra, ahol a favágó kunyhóját fel szeretném építeni. Meg fog jelenni egy ablak, ahol választani tudok az épületek közül."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "A favágó kunyhója egy kis épület, úgyhogy a kis épületek fület fogom kiválasztani. Ezután ki fogom választani a favágó kunyhóját."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -246,7 +247,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "Jó nézni ahogy dolgoznak, nem igaz? De a szegény hordárnak messzire kell mennie. Megkönnyíthetjük a dolgát (és hatékonyabbá tehetjük), ha újabb kék zászlót helyezünk az útra. Most te próbáld meg."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:171
 msgid ""
@@ -265,11 +266,11 @@ msgstr "Ezzel két részre osztottad az utat, mindkét oldalon egy-egy szállít
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "Lássuk, hogy haladunk!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:183
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Kattints az építési területre, hogy benézzünk kicsit!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
@@ -281,18 +282,18 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Ha rákattintasz az építési területre, egy ablak nyílik meg. Láthatod hogy a még hiányzó áruk ki vannak szürkítve. Azt is látod, hogy hogy halad az építkezés."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
 msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "Ez a gomb kapcsolja be vagy ki az épület munkaterületének megjelenítését. Amikor a favágó elhagyja az épületet, hogy kivágható fát keressen, csak ezen a területen belül keres. Hadd mutassam meg, hogy milyen tökéletes hely ez."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Zárd be az építési terület ablakot, ha mindent megnéztél!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Well done! Let’s wait till the hut is finished."
@@ -302,30 +303,30 @@ msgstr "Nagyszerű! Már csak várni kell, míg a kunyhó elkészül."
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Ha szeretnéd, hogy gyorsabban haladjanak a dolgok, akkor a %1$s billentyűvel gyorsíthatod az idő múlását. A %2$s billentyűvel ismét visszalassíthatod a játékot."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "A %1$s/%2$s billentyűkkel gyorsan, a %3$s/%4$s billentyűkkel finoman változtathatod a sebességet."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
-msgstr ""
+msgstr "A favágó kunyhója készen van"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr "Kiváló! A favágó kunyhója elkészült. Egy favágó most be fog költözni és elkezdi kivágni a fákat, így a farönk bevételünk egyelőre biztosított. Most irány a gránit."
+msgstr "Kiváló! A favágó kunyhója elkészült. Egy favágó most be fog költözni és elkezdi kivágni a fákat, így a farönk bevételünk egyelőre biztosított. Most folytassuk a gránittal."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Navigálás"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Navigálás"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -373,11 +374,11 @@ msgstr "Tanuld meg a kistérkép használatát"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Próbálj navigálni a kistérképre kattintva!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "Próbálgasd kicsit a különböző rétegek megjelenítését! (utak, zászlók, stb.)"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:266
 #, lua-format
@@ -395,11 +396,11 @@ msgstr "Navigálás"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:272
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
 msgid "Using the Minimap"
-msgstr ""
+msgstr "A kistérkép használata"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
 msgid "Very good. And now about the minimap. "
-msgstr ""
+msgstr "Nagyon jó! És most a kistérképről."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format
@@ -410,7 +411,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
-msgstr ""
+msgstr "Megnyitom neked."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:289
 msgid ""

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -562,13 +562,10 @@ msgstr "Donc, tout d'abord nous avons besoin de materi"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid ""
-"For the other buildings we can't tell yet, if they are working properly. We "
+"For the other buildings we can’t tell yet, if they are working properly. We "
 "need to closely monitor them when we are able to supply them. Until then we "
-"shouldn't do anything with them."
+"shouldn’t do anything with them."
 msgstr ""
-"Pour les autres bâtiments nous ne pouvons encore dire, si ils fonctionnent "
-"correctement. Nous devrons les surveiller de prés quand nous les "
-"approvisionnerons. En attendant nous ne devrions pas les utiliser."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:315
@@ -596,12 +593,9 @@ msgstr "Amalea recommande..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:325
 msgid ""
-"Brother, I'm really worried that I have to deliver bad news again. As you "
+"Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
-"Frère, je suis inquiet de devoir à nouveau délivrer de mauvaises nouvelles. "
-"Comme tu peux le voir, nos fermes ne produisent plus et nous ne pouvons les "
-"démanteler."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:328
@@ -1114,13 +1108,10 @@ msgstr "Amalea célèbre un heureux évènement"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
 msgid ""
-"Cheers Lutius, I don't know how, but we have been gifted with some beer and "
+"Cheers Lutius, I don’t know how, but we have been gifted with some beer and "
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
-"Salutations Lutius, je ne sais pas comment, mais on nous a offert du vin et "
-"de la bière. Nous les avons trouvés en vérifiant les stocks. Peut-être que "
-"la déesse Vesta nous soutient toujours."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea Analyzes the Economy"
@@ -1221,12 +1212,9 @@ msgstr "Amalea rapporte notre défaite..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:577
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
-"Oh non Lutius, je ne sais pas comment cela a pu arriver, mais les Barbares "
-"ont saccagé nos quartiers généraux. Ainsi nous avons perdu cette bataille et"
-" notre empire!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 msgid "Amalea reports our headquarters lost…"
@@ -1235,13 +1223,10 @@ msgstr "Amalea rapporte la perte de nos quartiers-généraux..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:585
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
-"have destroyed our headquarters. So, we can't deliver the wares to Julia "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
+"have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
-"Oh non Lutius, je ne sais pas comment cela a pu arriver, mais les Barbares "
-"ont détruit nos quartiers généraux. Ainsi nous ne pouvons plus livrer de "
-"marchandises à Julia."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:588
@@ -1255,13 +1240,10 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
 msgid ""
-"Oh no Lutius, I don't know how this could have happened, but the Barbarians "
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
-"Oh non Lutius, je ne sais pas comment cela a pu arriver, mais les Barbares "
-"ont détruit notre dernier entrepôt. Ainsi nous avons perdu cette bataille et"
-" notre empire!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
 msgid "Saledus looks very relaxed…"
@@ -1650,14 +1632,14 @@ msgctxt "empire_building"
 msgid "Sows and harvests wheat."
 msgstr "Sème et récolte du blé."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Forester's
+#. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
 msgstr "Plante des arbres dans les environs."
 
-#. TRANSLATORS: Note helptext for an empire production site: Forester's House
+#. TRANSLATORS: Note helptext for an empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
 msgctxt "empire_building"
 msgid ""
@@ -1667,21 +1649,19 @@ msgstr ""
 "La cabane du sylviculteur nécessite de l'espace disponible dans son rayon "
 "d'action pour planter des arbres."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
+#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr "Abat les arbres dans les alentours et les transforme en troncs."
 
-#. TRANSLATORS: Note helptext for an empire production site: Lumberjack's
+#. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
-msgid "The lumberjack's house needs trees to fell within the work area."
+msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr ""
-"La cabane de bûcheron nécessite des arbres à abattre dans son rayon "
-"d'action."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130

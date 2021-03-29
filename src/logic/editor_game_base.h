@@ -273,6 +273,7 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
+	bool did_postload_addons_;
 	Time gametime_;
 	ObjectManager objects_;
 

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016,2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"PO-Revision-Date: 2021-03-24 17:54+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr "Ereklyék"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Keress ősi ereklyéket. Ha mind megtalálásra kerül, akkor az a csapat nyer, amelyik a legtöbbet birtokolja."
+msgstr "Keress ősi ereklyéket. Amikor mindet megtaláltátok, akkor az a csapat nyer, amelyik a legtöbbet birtokolja."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
@@ -59,7 +60,7 @@ msgstr "A csapatod megtalált egy új ereklyét."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Találtál egy új ereklyét."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -72,7 +73,7 @@ msgstr "A csapatod egyik ereklyéjét ellopta egy ellenség."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Az egyik ereklyédet ellopta egy ellenség."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -85,7 +86,7 @@ msgstr "A csapatod ellopott egy ereklyét egy ellenségtől."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Elloptál egy ereklyét egy ellenségtől."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -118,7 +119,7 @@ msgstr "Gyűjtők"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr "Pontokat kapsz raktáraid értékes áruiért. A győztes az a játékos, akinek 4 óra elteltével a legtöbb pontja van."
+msgstr "Pontokat kapsz a raktáraidban lévő értékes árukért. A győztes az a játékos, akinek 4 óra elteltével a legtöbb áruja van."
 
 #: ../../data/scripting/win_conditions/collectors.lua:26
 msgid "Points"
@@ -161,7 +162,7 @@ msgstr "Zsarnok"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Az a törzs vagy csapat nyeri a játékot, aki mindenki mást legyőz! Egy ellenfél akkor van legyőzve, ha nincs több főhadiszállása, kikötője és raktára."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -181,13 +182,13 @@ msgstr "Ez egy végtelen játék szabályok nélkül. A háború köde ki van ka
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Főhadiszállás vadászat"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Az a törzs vagy csapat nyeri a játékot, aki megtalálja és megsemmisíti mindenki más főhadiszállását! Nem működik, ha a kezdő beállítás nem tartalmaz főhadiszállást."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
@@ -241,11 +242,11 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Minden játékos vagy csapat igyekszik a térkép több mint felét megszerezni. A nyertes az a játékos vagy csapat, amelyik ezt a területet legalább 20 percig megtartja. Békés módban a játék véget ér, ha egy játékosnak nagyobb területe van, mint amennyit a többiek meg tudnának szerezni."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr "Jelenleg egyik csoport sem birtokolja a térkép területének több mint felét."
+msgstr "Jelenleg egyik csapat sem birtokolja a térkép területének több mint felét."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -258,7 +259,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Minden játékos vagy csapat igyekszik a térkép több mint felét megszerezni. A nyertes az a játékos vagy csapat, amelyik ezt a területet legalább 20 percig megtartja, vagy amelyiknek 4 óra elteltével a legnagyobb területe van – amelyik előbb bekövetkezik. Békés módban a játék véget ér, ha egy játékosnak nagyobb területe van, mint amennyit a többiek meg tudnának szerezni."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

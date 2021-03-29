@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-12 11:07+0000\n"
+"POT-Creation-Date: 2021-03-22 20:13+0000\n"
 "PO-Revision-Date: 2021-03-09 11:30+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
@@ -1239,6 +1239,7 @@ msgstr "pracovanie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1717,8 +1718,6 @@ msgstr "vyrábanie lopaty"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1743,8 +1742,6 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -5474,6 +5471,7 @@ msgstr[3] ""
 #. of supplies",
 #. map_tags = {"seafaring"},
 #. incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+#. uses_map_starting_position = false,
 #. func = function(player, shared_in_start)
 #. local map = wl.Game().map
 #. local sf = map.player_slots[player.number].starting_field
@@ -5521,7 +5519,7 @@ msgstr[3] ""
 #. =======================================================================
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:11
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:117
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:127
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
@@ -5530,7 +5528,7 @@ msgstr "Objavenie"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:13
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:119
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:129
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
