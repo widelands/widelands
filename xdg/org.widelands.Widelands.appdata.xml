@@ -19,7 +19,7 @@
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel</summary>
   <summary xml:lang="fy">In strategysk bouwspultsje mei rinnende tiid</summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ama</summary>
-  <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
+  <summary xml:lang="hu">Valós idejű építkező stratégiai játék</summary>
   <summary xml:lang="id">Sebuah permainan pembangunan strategi dalam waktu nyata</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="ja">リアルタイム発展型ストラテジーゲーム</summary>
@@ -140,10 +140,10 @@
       Bheir Widelands modh aon-chluicheadair chut le iomairtean a dh’innseas sgeulachdan nan treubhan agus an còmhstri aca air saoghal Widelands. Co-dhiù, cha tòisich an tuineachadh ann an dà-rìribh ach nuair a bhios tu ’s do charaidean cruinn còmhla air an eadar-lìn no air lìonra ionadail gus impireachdan ùra a thogail còmhla – no gus càch a chèile a cheannsachadh air a’ bhlàr. Tha inntinn fhuadain aig Widelands cuideachd a bheir dùbhlan dhut.
     </p>
     <p xml:lang="hu">
-      Egy kis klán régense vagy. A feladatod az, hogy felépíts egy folyamatosan növekvő települést. A klánod minden tagja kiveszi a részét a nyersanyagok termeléséből, hogy tovább segítse ezt a növekedést.
+      Egy kis klán uralkodója vagy. A feladatod az, hogy felépíts egy folyamatosan növekvő települést. A klánod minden tagja kiveszi a részét a nyersanyagok termeléséből, hogy tovább segítse ezt a növekedést.
     </p>
     <p xml:lang="hu">
-      A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amelyek a törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat – vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
+      A Widelands tartalmaz egyjátékos módot hadjáratokkal, amelyek a törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. A móka azonban akkor kezdődik csak el igazán, amikor összejössz a barátaiddal az Interneten vagy helyi hálózaton keresztül, hogy közösen építsetek fel új birodalmakat – vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligenciája is készen áll, hogy kihívjon téged.
     </p>
     <p xml:lang="id">
       Anda adalah bupati klan kecil. Tugas anda adalah membangun pemukiman yang terus berkembang. Setiap anggota klan, Anda akan melakukan bagiannya untuk memperkenalkan lebih banyak sumber daya untuk memajukan pertumbuhan ini.
