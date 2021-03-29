@@ -482,33 +482,32 @@ void NetAddons::comment(const AddOnInfo& addon, std::string message) {
 	send += ' ';
 	send += version_to_string(addon.version, false);
 	send += ' ';
-	{
-		unsigned whitespace = 0;
-		size_t pos = 0;
-		for (;;) {
-			pos = message.find(' ', pos);
-			if (pos == std::string::npos) {
-				break;
-			}
-			++whitespace;
-			++pos;
-		}
-		send += std::to_string(whitespace);
 
-		pos = 0;
-		for (;;) {
-			pos = message.find('\n', pos);
-			if (pos == std::string::npos) {
-				break;
-			}
-			message.at(pos) = '\0';
-			++pos;
+	unsigned nr_lines = 1;
+	size_t pos = 0;
+	for (;;) {
+		pos = message.find('\n', pos);
+		if (pos == std::string::npos) {
+			break;
 		}
+		++nr_lines;
+		++pos;
 	}
-	send += ' ';
-	send += message;
+
+	send += std::to_string(nr_lines);
 	send += '\n';
 	write_to_server(send);
+
+	for (; nr_lines > 1; --nr_lines) {
+		pos = message.find('\n');
+		assert(pos < std::string::npos);
+		++pos;
+		write_to_server(message.substr(0, pos));
+		message = message.substr(pos);
+	}
+	write_to_server(message);
+	write_to_server("\nENDOFSTREAM\n");
+
 	check_endofstream();
 	guard.ok();
 }
