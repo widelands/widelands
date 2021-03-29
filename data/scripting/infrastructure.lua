@@ -84,10 +84,10 @@ end
 --    .. code-block:: lua
 --
 --       prefilled_buildings(wl.Game().players[1],
---          {"empire_sentry", 57, 9}, -- Sentry completely full with soldiers
---          {"empire_sentry", 57, 9, soldier={[{0,0,0,0}]=1}}, -- Sentry with one soldier
+--          {"empire_sentry", 57, 9},                               -- Sentry completely full with soldiers
+--          {"empire_sentry", 57, 9, soldiers={[{0,0,0,0}]=1}},     -- Sentry with one soldier
 --          {"empire_bakery", 55, 20, inputs = {wheat=6, water=6}}, -- bakery with wares and workers
---          {"empire_well", 52, 30}, -- a well with workers
+--          {"empire_well", 52, 30},                                -- a well with workers
 --       )
 --
 --    :arg plr: The player for which the building is created
@@ -254,9 +254,9 @@ end
 --    :type sf: :attr:`starting_field`
 --    :arg warehouse: The type of warehouse to add wares to
 --    :type warehouse: :const:`string`
---    :arg waretable_rocks: a table of pairs {:const:`"name"` = value} to add if no rocks
+--    :arg waretable_rocks: a table of pairs {:const:`"name"` = value} to add if no rocks were found nearby
 --    :type waretable_rocks: :const:`table`
---    :arg waretable_trees: a table of pairs {:const:`"name"` = value} to add if no trees
+--    :arg waretable_trees: a table of pairs {:const:`"name"` = value} to add if no trees were found nearby
 --    :type waretable_trees: :const:`table`
 
 function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees)

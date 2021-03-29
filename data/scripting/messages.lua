@@ -54,7 +54,7 @@ end
 --
 --    :arg text: the localized body of the message. You can use
 --               :ref:`richtext functions <richtext.lua>` here.
---               E.g. ``p(_"text")``.
+--               E.g. ``p(_("text"))``.
 --    :type text: :class:`string`
 --    :arg heading: the localized title of the message (optional)
 --    :type heading: :class:`string`
@@ -63,9 +63,9 @@ function send_to_all_inboxes(text, heading)
    push_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
-         send_to_inbox(plr, _"Status", text, {popup=true, heading=heading})
+         send_to_inbox(plr, _("Status"), text, {popup=true, heading=heading})
       else
-         send_to_inbox(plr, _"Status", text, {popup=true})
+         send_to_inbox(plr, _("Status"), text, {popup=true})
       end
    end
    pop_textdomain()
@@ -85,7 +85,7 @@ end
 --    :type title: :class:`string`
 --    :arg message: the localized body of the message. You must use
 --                 :ref:`richtext functions <richtext.lua>` here,
---                 e.g. ``p(_"message")``
+--                 e.g. ``p(_("message"))``
 --    :type message: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
 --                     for :meth:`wl.game.Player.message_box`, e.g. ``{field=f}``.
@@ -111,7 +111,7 @@ end
 --    :arg table message, [opts]: The message consist of the ``title``, the ``body``
 --           and optional parameters. Note that the ``body`` must be formatted
 --           using the :ref:`richtext functions <richtext.lua>`,
---           e.g. ``p(_"message")``
+--           e.g. ``p(_("message"))``
 --
 --           **[opts]** can be a separated list of key value pairs defined by
 --           :meth:`wl.game.Player.message_box` and the following ones:
@@ -251,9 +251,9 @@ function new_objectives(...)
    end
 
    push_textdomain("widelands")
-   local objectives_header = _"New Objective"
+   local objectives_header = _("New Objective")
    if (sum > 1) then
-      objectives_header = _"New Objectives"
+      objectives_header = _("New Objectives")
    end
    pop_textdomain()
 

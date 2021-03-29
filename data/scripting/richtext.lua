@@ -43,12 +43,10 @@
 -- RST
 -- .. function:: rt(text_or_attributes[, text = nil])
 --
---    Normally a scripts author don't have to use this function explicitly
---    because using the tags documented here are automatically wrapped by
---    this function.
---    So, only use this function if you wish to add some attributes to the
---    tag, e.g. specifying a different background color for the whole area
---    covered by this tag.
+--    Usually, it is not necessary to wrap your text with this function. If it
+--    is missing the backend will take care of it. Wrap your text with this 
+--    function if you wish to add some attributes to the whole area of text
+--    e.g. specifying a different background color for the whole area.
 --
 --    Wraps a block of text into Lua rich text.
 --    Only call this once for the whole text that gets sent to the backend.

@@ -36,8 +36,7 @@ end
 --    that must contain 'x' and 'y' keys. The function will return as soon as
 --    the transition is completed. Usually this function is useful when
 --    scrolling back after using :meth:`scroll_to_field` or
---    :meth:`wait_for_roadbuilding_and_scroll`. These functions are returning
---    a table of 'map_pixel'.
+--    :meth:`wait_for_roadbuilding_and_scroll`.
 --
 --    :arg map_pixel: pixel to focus on.
 --    :type map_pixel: :class:`table`
