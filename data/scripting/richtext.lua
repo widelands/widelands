@@ -44,7 +44,7 @@
 -- .. function:: rt(text_or_attributes[, text = nil])
 --
 --    Usually, it is not necessary to wrap your text with this function. If it
---    is missing the backend will take care of it. Wrap your text with this 
+--    is missing the backend will take care of it. Wrap your text with this
 --    function if you wish to add some attributes to the whole area of text
 --    e.g. specifying a different background color for the whole area.
 --
