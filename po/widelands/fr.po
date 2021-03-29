@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -639,8 +639,8 @@ msgstr "mine"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1355,8 +1355,8 @@ msgstr "Sélectionnez la nouvelle taille de la carte, puis cliquez sur la carte 
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
-#: ../../src/ui_basic/dropdown.cc:291 ../../src/ui_basic/dropdown.cc:343
-#: ../../src/ui_basic/dropdown.cc:410 ../../src/ui_basic/dropdown.cc:418
+#: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
+#: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:327
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "%1%: %2%"
@@ -1555,8 +1555,8 @@ msgstr "non"
 msgid "off"
 msgstr "désactivé"
 
-#: ../../src/logic/addons.cc:45 ../../src/ui_basic/dropdown.cc:343
-#: ../../src/ui_basic/dropdown.cc:345 ../../src/ui_fsmenu/addons.cc:1173
+#: ../../src/logic/addons.cc:45 ../../src/ui_basic/dropdown.cc:351
+#: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
 #: ../../src/wlapplication.cc:1443
@@ -3112,7 +3112,7 @@ msgid "Select Item"
 msgstr "Choisir un objet"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:403
+#: ../../src/ui_basic/dropdown.cc:411
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Non sélectionné"
@@ -6725,8 +6725,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Affaires maritimes"

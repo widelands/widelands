@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -246,7 +246,7 @@ msgstr "Poraž Barbary"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
-msgstr "Poraž nepřátelský kmen, žijící severozápadně od císařské hlásky."
+msgstr "Poraž nepřátelský kmen, žijící severozápadně od císařské kolonie."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
@@ -254,7 +254,7 @@ msgstr "Poraž Murilia!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr "Dobuď tu opovážlivou císařskou hlásku"
+msgstr "Dobuď tu opovážlivou císařskou kolonii"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
@@ -262,7 +262,7 @@ msgid ""
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
 "Jediným způsobem, jak utnout císařské snahy omezovat naše svobody, je zničit"
-" jejich hlásku jednou provždy. Zmocni se celé jeho země."
+" jejich kolonii jednou provždy. Zmocni se celé jejich země."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
@@ -724,7 +724,7 @@ msgid ""
 "outpost of the Empire."
 msgstr ""
 "V tom případě, Rýbaude, ti musím sdělit, že se tu, poblíž přímo této "
-"císařské hlásky, nachází nekultivovaný, nepřátelský barbarský kmen."
+"císařské kolonie, nachází nekultivovaný, nepřátelský barbarský kmen."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -961,8 +961,8 @@ msgid ""
 msgstr ""
 "Nyní vám dovoluji podílet se na našem tažení proti barbarům, kteří žijí v "
 "krytém údolí na severozápad od nás. Zmocňuji vás, zaberte území podél "
-"severního konce hor, přiléhajících k naší hlásce. Tam najdete Barbary – "
-"zaútočte na ně! My budeme odrážet útoky vedené nepřítelem."
+"severního konce hor, přiléhajících k naší kolonii. Tam najdete barbary. "
+"Zaútočte na ně! My budeme odrážet útoky vedené nepřítelem."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:391
 msgid "The Reward For Your Service"
