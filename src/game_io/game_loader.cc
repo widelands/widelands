@@ -41,7 +41,7 @@
 namespace Widelands {
 
 GameLoader::GameLoader(const std::string& path, Game& game)
-   : fs_(*g_fs->make_sub_file_system(path)), game_(game), did_postload_addons_(false) {
+   : fs_(*g_fs->make_sub_file_system(path)), game_(game) {
 }
 
 GameLoader::~GameLoader() {
@@ -78,7 +78,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
 	// only ones where it makes a difference whether they are enabled during loading or not.
 	{
-		const AddOns::AddOnsList old_enabled_addons = game_.enabled_addons();
 		game_.enabled_addons().clear();
 		for (const auto& requirement : preload.required_addons()) {
 			bool found = false;
@@ -108,31 +107,15 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		}
 
 		// Actually apply changes – but only if anything did change, otherwise this may crash
-		bool addons_changed = old_enabled_addons.size() != game_.enabled_addons().size();
-		if (!addons_changed) {
-			for (size_t i = 0; i < old_enabled_addons.size(); ++i) {
-				if (old_enabled_addons[i]->internal_name != game_.enabled_addons()[i]->internal_name) {
-					addons_changed = true;
-					break;
-				}
-			}
-		}
-		if (addons_changed) {
-			game_.delete_world_and_tribes();
-			game_.descriptions();
-
-			// TODO(Nordfriese): This needs to be done here already to prevent the
-			// GamePlayerInfoPacket from crashing in the case that we are loading
-			// a savegame and any player's tribe is receiving a new ware from an
-			// add-on's postload.lua. It would be much better to load only the
-			// tribes that are being played, but this would require rewriting
-			// the GamePlayerInfoPacket so that we know *all* tribes in the game
-			// *before* loading any ware statistics. Do this when we next break
-			// savegame compatibility completely.
-			game_.load_all_tribes();
-			did_postload_addons_ = true;
-			game_.postload_addons();
-		}
+		// TODO(Nordfriese): This needs to be done here already to prevent the
+		// GamePlayerInfoPacket from crashing in the case that we are loading
+		// a savegame and any player's tribe is receiving a new ware from an
+		// add-on's postload.lua. It would be much better to load only the
+		// tribes that are being played, but this would require rewriting
+		// the GamePlayerInfoPacket so that we know *all* tribes in the game
+		// *before* loading any ware statistics. Do this when we next break
+		// savegame compatibility completely.
+		game_.check_addons_desync_magic();
 	}
 
 	verb_log_info("Game: Reading Game Class Data ... ");

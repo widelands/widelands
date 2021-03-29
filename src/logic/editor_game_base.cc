@@ -69,7 +69,8 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : gametime_(0),
+   : did_postload_addons_(false),
+     gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
@@ -310,6 +311,11 @@ void EditorGameBase::postload() {
 }
 
 void EditorGameBase::postload_addons() {
+	if (did_postload_addons_) {
+		return;
+	}
+	did_postload_addons_ = true;
+
 	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 
 	assert(lua_);

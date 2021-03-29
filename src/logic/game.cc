@@ -38,6 +38,7 @@
 #include "build_info.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
+#include "editor/editorinteractive.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -138,6 +139,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
      forester_cache_(),
+     did_check_addons_desync_magic_(false),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),
@@ -216,6 +218,46 @@ void Game::save_syncstream(bool const save) {
 	syncwrapper_.syncstreamsave_ = save;
 }
 
+void Game::check_addons_desync_magic() {
+	if (did_check_addons_desync_magic_) {
+		postload_addons();
+		return;
+	}
+	did_check_addons_desync_magic_ = true;
+
+	// TODO(Nordfriese): Minimal-invasive fix for a very evil desync. The problem is:
+	// - We load only the tribes actually being played when starting a game.
+	// - With some add-ons, it is necessary to load *all* tribes during loading the replay.
+	// - This results in different load orders, so the same item may have a different
+	//   DescriptionIndex in the replay than in the original game. In particular, it
+	//   may happen that the index of A is smaller than B's in the original game but
+	//   greater than B's in the replay.
+	// The simple (and ugly) solution is to load all tribes in the original game if
+	// we know that we'll need to do this in the replay as well. We thus get the
+	// same load order – at the cost of a much longer loading time, so this is not
+	// suited as a long-term solution. In the long run, it would probably be best
+	// to get rid of `DescriptionIndex` entirely in favour of `std::string`.
+
+	bool needed = false;
+	for (const auto& a : enabled_addons()) {
+		if (a->category == AddOns::AddOnCategory::kWorld ||
+		    a->category == AddOns::AddOnCategory::kTribes) {
+			needed = true;
+			break;
+		}
+	}
+	if (!needed) {
+		return;
+	}
+
+	delete_world_and_tribes();
+	descriptions();
+	// Cyclic dependency. Can and must be gotten rid of when fixing the above TO-DO.
+	EditorInteractive::load_world_units(nullptr, *this);
+	load_all_tribes();
+	postload_addons();
+}
+
 bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
 	// Replays can't handle scenarios
@@ -280,6 +322,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
+	check_addons_desync_magic();
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -401,11 +444,9 @@ void Game::init_savegame(const GameSettings& settings) {
 
 		gl.load_game(settings.multiplayer);
 
-		if (!gl.did_postload_addons()) {
-			// Discover the links between resources and geologist flags,
-			// dependencies of productionsites etc.
-			postload_addons();
-		}
+		// Discover the links between resources and geologist flags,
+		// dependencies of productionsites etc.
+		postload_addons();
 
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
@@ -455,10 +496,8 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		set_ibase(ipl);
 
 		gl.load_game();
+		postload_addons();
 
-		if (!gl.did_postload_addons()) {
-			postload_addons();
-		}
 		ipl->info_panel_fast_forward_message_queue();
 	}
 
@@ -549,6 +588,7 @@ bool Game::run(StartGameType const start_game_type,
                bool replay,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
+	check_addons_desync_magic();
 
 	replay_ = replay;
 	postload();
