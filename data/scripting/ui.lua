@@ -36,8 +36,8 @@ end
 --    that must contain 'x' and 'y' keys. The function will return as soon as
 --    the transition is completed. Usually this function is useful when
 --    scrolling back after using :meth:`scroll_to_field` or
---    :meth:`wait_for_roadbuilding_and_scroll`. The return value of these 
---    functions can be passed to ``scroll_to_map_pixel`` to move back to the 
+--    :meth:`wait_for_roadbuilding_and_scroll`. The return value of these
+--    functions can be passed to ``scroll_to_map_pixel`` to move back to the
 --    previous location.
 --
 --    :arg map_pixel: pixels to focus on.
