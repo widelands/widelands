@@ -35,7 +35,7 @@
 
 #include "base/i18n.h"
 #include "base/md5.h"
-#include "base/wexception.h"
+#include "base/warning.h"
 #include "graphic/image_cache.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -50,10 +50,10 @@ namespace AddOns {
 
 static inline void check_string_validity(const std::string& str) {
 	if (str.find(' ') != std::string::npos) {
-		throw wexception("String '%s' may not contain whitespaces", str.c_str());
+		throw WLWarning("", "String '%s' may not contain whitespaces", str.c_str());
 	}
 	if (str.find('\n') != std::string::npos) {
-		throw wexception("String '%s' may not contain newlines", str.c_str());
+		throw WLWarning("", "String '%s' may not contain newlines", str.c_str());
 	}
 }
 
@@ -80,14 +80,14 @@ void NetAddons::init(std::string username, std::string password) {
 	check_string_validity(username);
 
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		throw wexception("Unable to create socket");
+		throw WLWarning("", "Unable to create socket");
 	}
 	sockaddr_in server;
 	server.sin_family = AF_INET;
 	server.sin_port = htons(get_config_int("addon_server_port", 7399));
 	server.sin_addr.s_addr = inet_addr(get_config_string("addon_server_ip", "127.0.0.1" /* NOCOM */).c_str());
 	if (connect(client_socket_, reinterpret_cast<sockaddr*>(&server), sizeof(server)) < 0) {
-		throw wexception("Unable to connect to the server");
+		throw WLWarning("", "Unable to connect to the server");
 	}
 
 	std::string send = std::to_string(kCurrentProtocolVersion);
@@ -134,8 +134,8 @@ NetAddons::~NetAddons() {
 void NetAddons::set_login(const std::string& username, const std::string& password) {
 	quit_connection();
 	if (username.empty()) {
-		last_username_ = username;
-		last_password_ = username;
+		last_username_ = "";
+		last_password_ = "";
 	}
 	init(username, password);
 }
@@ -159,9 +159,9 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	}
 
 	if (message.empty()) {
-		throw wexception("Connection interrupted (%s)", strerror(errno));
+		throw WLWarning("", "Connection interrupted (%s)", strerror(errno));
 	}
-	throw wexception("Connection interrupted (%s). Reason:%s", strerror(errno), message.c_str());
+	throw WLWarning("", "Connection interrupted (%s). Reason:%s", strerror(errno), message.c_str());
 }
 
 std::string NetAddons::read_line() {
@@ -185,7 +185,7 @@ void NetAddons::read_file(const long length, const std::string& out) {
 	do {
 		long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
 		if (l < 1) {
-			throw wexception("Connection interrupted");
+			throw WLWarning("", "Connection interrupted");
 		}
 		nr_bytes_read += l;
 		fw.data(buffer.get(), l);
@@ -196,7 +196,7 @@ void NetAddons::read_file(const long length, const std::string& out) {
 void NetAddons::check_endofstream() {
 	const std::string text = read_line();
 	if (text != "ENDOFSTREAM") {
-		throw wexception("Expected end of stream, received:\n%s", text.c_str());
+		throw WLWarning("", "Expected end of stream, received:\n%s", text.c_str());
 	}
 }
 
@@ -211,7 +211,7 @@ static void check_checksum(const std::string& path, const std::string& checksum)
 	md5sum.finish_checksum();
 	const std::string md5 = md5sum.get_checksum().str();
 	if (checksum != md5) {
-		throw wexception("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
+		throw WLWarning("", "Downloaded file '%s': Checksum mismatch, found %s, expected %s",
 		                 path.c_str(), md5.c_str(), checksum.c_str());
 	}
 }
@@ -388,7 +388,7 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 				progress(relative_path, progress_state);
 				long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
-					throw wexception("Connection interrupted");
+					throw WLWarning("", "Connection interrupted");
 				}
 				nr_bytes_read += l;
 				progress_state += l;
@@ -598,7 +598,7 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 void NetAddons::upload_screenshot(const std::string& addon, const std::string& image, const std::string& description) {
 	check_string_validity(addon);
 	if (description.find('\n') != std::string::npos) {
-		throw wexception("Screenshot descriptions may not contain newlines");
+		throw WLWarning("", "Screenshot descriptions may not contain newlines");
 	}
 	init();
 	CrashGuard guard(*this);
