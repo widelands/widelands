@@ -29,7 +29,6 @@ MapVersion::MapVersion()
    : map_creator_version(build_id()),
      map_version_major(0),
      map_version_minor(0),
-     map_version_timestamp(static_cast<uint32_t>(time(nullptr))),
-     needs_widelands_version_after(0) {
+     map_version_timestamp(static_cast<uint32_t>(time(nullptr))) {
 }
 }  // namespace Widelands
