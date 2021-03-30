@@ -8,13 +8,14 @@
 # GunChleoc, 2014
 # Kristof Szoke <kszoke@gmail.com>, 2019
 # litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-22 20:13+0000\n"
-"PO-Revision-Date: 2021-03-24 23:53+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-27 23:19+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +34,7 @@ msgstr "Erődítmény"
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortification."
-msgstr "A katonáid elfoglalták az erődítményed."
+msgstr "A katonáid elfoglalták az erődítményedet."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
@@ -69,7 +70,7 @@ msgstr "Erőd"
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "A katonáid elfoglalták az erődöd."
+msgstr "A katonáid elfoglalták az erődödet."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
@@ -105,7 +106,7 @@ msgstr "Kilátótorony"
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your observation tower."
-msgstr "A katonáid elfoglalták a kilátótornyod."
+msgstr "A katonáid elfoglalták a kilátótornyodat."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
@@ -123,7 +124,7 @@ msgstr "A kilátótornyodat megtámadták."
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:36
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the observation tower."
-msgstr "Az ellenség legyőzte a katonáidat a kilátótornyodnál."
+msgstr "Az ellenség legyőzte a katonáidat a kilátótoronynál."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
@@ -141,7 +142,7 @@ msgstr "Járőrház"
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr "A katonáid elfoglalták a járőrházad."
+msgstr "A katonáid elfoglalták a járőrházadat."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
@@ -177,7 +178,7 @@ msgstr "Torony"
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:58
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "A katonáid elfoglalták a tornyod."
+msgstr "A katonáid elfoglalták a tornyodat."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:60
@@ -195,7 +196,7 @@ msgstr "A tornyodat megtámadták."
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:64
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "Az ellenség legyőzte a katonáidat a tornyodnál."
+msgstr "Az ellenség legyőzte a katonáidat a toronynál."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:66
@@ -285,7 +286,7 @@ msgstr "Vár"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr "A katonáid elfoglalták a várad."
+msgstr "A katonáid elfoglalták a váradat."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
@@ -321,7 +322,7 @@ msgstr "Őrterem"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr "A katonáid elfoglalták az őrtermed."
+msgstr "A katonáid elfoglalták az őrtermedet."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
@@ -357,7 +358,7 @@ msgstr "Őrház"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr "A katonáid elfoglalták az őrházad."
+msgstr "A katonáid elfoglalták az őrházadat."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
@@ -393,7 +394,7 @@ msgstr "Torony"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "A katonáid elfoglalták a tornyod."
+msgstr "A katonáid elfoglalták a tornyodat."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
@@ -411,13 +412,13 @@ msgstr "A tornyodat megtámadták."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a toronynál."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a toronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -429,31 +430,31 @@ msgstr "Magas torony"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:29
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a magas tornyodat."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
 msgctxt "atlanteans_building"
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "A magas tornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
 msgctxt "atlanteans_building"
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "A magas tornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:35
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a magas toronynál."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a magas toronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:8
@@ -465,31 +466,31 @@ msgstr "Kis torony"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:41
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a kis tornyodat."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
 msgctxt "atlanteans_building"
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "A kis tornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
 msgctxt "atlanteans_building"
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "A kis tornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a kis toronynál."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a kis toronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
@@ -537,31 +538,31 @@ msgstr "Fellegvár"
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:37
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "A katonáid elfoglalták a fellegváradat."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:39
 msgctxt "barbarians_building"
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "A fellegvárad felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:41
 msgctxt "barbarians_building"
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "A fellegváradat megtámadták."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:43
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a fellegvárnál."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:45
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a fellegvárnál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:8
@@ -573,7 +574,7 @@ msgstr "Erőd"
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:71
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "A katonáid elfoglalták az erődöd."
+msgstr "A katonáid elfoglalták az erődödet."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:73
@@ -609,31 +610,31 @@ msgstr "Őrház"
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:48
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "A katonáid elfoglalták az őrházadat."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:50
 msgctxt "barbarians_building"
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Az őrházad felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Az őrházadat megtámadták."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az őrháznál."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az őrháznál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:8
@@ -645,31 +646,31 @@ msgstr "Torony"
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:53
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a tornyodat."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:55
 msgctxt "barbarians_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "A tornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:57
 msgctxt "barbarians_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "A tornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:59
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a toronynál."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:61
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a toronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -681,7 +682,7 @@ msgstr "Határőrház"
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:42
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr "A katonáid elfoglalták a határőrházad."
+msgstr "A katonáid elfoglalták a határőrházadat."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:44
@@ -717,31 +718,31 @@ msgstr "Erődház"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "A katonáid elfoglalták az erődházadat."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
-msgstr ""
+msgstr "Az erődházad felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:51
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
-msgstr ""
+msgstr "Az erődházadat megtámadták."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:53
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az erődháznál."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:55
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az erődháznál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:8
@@ -753,31 +754,31 @@ msgstr "Vár"
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:28
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "A katonáid elfoglalták a váradat."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:30
 msgctxt "empire_building"
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "A várad felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:32
 msgctxt "empire_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "A váradat megtámadták."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:34
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a várnál."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:36
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a várnál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:8
@@ -789,7 +790,7 @@ msgstr "Erőd"
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:68
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "A katonáid elfoglalták az erődöd."
+msgstr "A katonáid elfoglalták az erődödet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:70
@@ -825,31 +826,31 @@ msgstr "Előőrs"
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:56
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "A katonáid elfoglalták a előőrsödet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:58
 msgctxt "empire_building"
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "A előőrsöd felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:60
 msgctxt "empire_building"
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "A előőrsödet megtámadták."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:62
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az előőrsnél."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:64
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az előőrsnél."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:8
@@ -861,31 +862,31 @@ msgstr "Őrház"
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:42
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "A katonáid elfoglalták az őrházadat."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:44
 msgctxt "empire_building"
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Az őrházad felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:46
 msgctxt "empire_building"
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Az őrházadat megtámadták."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:48
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az őrháznál."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az őrháznál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:8
@@ -897,31 +898,31 @@ msgstr "Torony"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:48
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a tornyodat."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:50
 msgctxt "empire_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "A tornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:52
 msgctxt "empire_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "A tornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:54
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a toronynál."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:56
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a toronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
@@ -933,7 +934,7 @@ msgstr "Erőd"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "A katonáid elfoglalták az erődöd."
+msgstr "A katonáid elfoglalták az erődödet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
@@ -969,31 +970,31 @@ msgstr "Előőrs"
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:56
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "A katonáid elfoglalták a előőrsödet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:58
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "A előőrsöd felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:60
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "A előőrsödet megtámadták."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az előőrsnél."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az előőrsnél."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
@@ -1005,31 +1006,31 @@ msgstr "Őrház"
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:54
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "A katonáid elfoglalták az őrházadat."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:56
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr ""
+msgstr "Az őrházad felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:58
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "Az őrházadat megtámadták."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:60
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az őrháznál."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az őrháznál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1041,31 +1042,31 @@ msgstr "Torony"
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a tornyodat."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "A tornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:63
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "A tornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:65
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a toronynál."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a toronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
@@ -1077,67 +1078,67 @@ msgstr "Fatorony"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:63
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your wooden tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a fatornyodat."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:65
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
-msgstr ""
+msgstr "A fatornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
-msgstr ""
+msgstr "A fatornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:69
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a fatoronynál."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:71
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a fatoronynál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
 msgctxt "frisians_building"
 msgid "High Wooden Tower"
-msgstr ""
+msgstr "Magas fatorony"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your high wooden tower."
-msgstr ""
+msgstr "A katonáid elfoglalták a magas fatornyodat."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
 msgctxt "frisians_building"
 msgid "Your high wooden tower discovered an aggressor."
-msgstr ""
+msgstr "A magas fatornyod felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:47
 msgctxt "frisians_building"
 msgid "Your high wooden tower is under attack."
-msgstr ""
+msgstr "A magas fatornyodat megtámadták."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:49
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the high wooden tower."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat a magas fatoronynál."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the high wooden tower."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget a magas fatoronynál."
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
@@ -1504,7 +1505,7 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr "Az aranyásó fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy elpusztítását."
+msgstr "Az aranyásó fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
@@ -1602,7 +1603,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "A liánvágó, aki itt dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy elpusztítását vagy egy dzsungelfenntartó kunyhó építését."
+msgstr "A liánvágó, aki itt dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy dzsungelfenntartó kunyhó építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1656,7 +1657,7 @@ msgstr "vasfa ültetése"
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
 msgctxt "amazons_building"
 msgid "Rope Weaver Booth"
-msgstr ""
+msgstr "Kötélfonó bódé"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
@@ -1833,7 +1834,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "A kőfejtő, aki ennél a kunyhónál dolgozik, nem talál követ a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -1876,7 +1877,7 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr "A kőbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy elpusztítását."
+msgstr "A kőbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -1925,7 +1926,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Vadon őrző kunyhója"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -1968,7 +1968,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "A favágó, aki ennél a favágókunyhónál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy elpusztítását vagy egy dzsungelfenntartó kunyhó építését."
+msgstr "A favágó, aki ennél a favágókunyhónál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy dzsungelfenntartó kunyhó építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2103,7 +2103,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:8
@@ -2136,7 +2136,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "A kristálybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy elpusztítását."
+msgstr "A kristálybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:8
@@ -2251,19 +2251,19 @@ msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Horse Farm"
-msgstr "Lovarda"
+msgstr "Ménesgazdaság"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:49
 msgctxt "atlanteans_building"
 msgid "breeding horses"
-msgstr "lovakat tenyészt"
+msgstr "ló tenyésztése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:8
@@ -2353,7 +2353,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:8
@@ -2608,7 +2608,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy elpusztítását vagy egy erdészház építését."
+msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2650,7 +2650,7 @@ msgstr "pita kenyér sütése"
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:8
 msgctxt "barbarians_building"
 msgid "Barracks"
-msgstr "Laktanaya"
+msgstr "Laktanya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
@@ -2719,7 +2719,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy az elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:8
@@ -2739,7 +2739,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy az elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:8
@@ -2802,7 +2802,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:8
@@ -2822,7 +2822,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy az elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:8
@@ -2836,7 +2836,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "A gránitbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy elpusztítását."
+msgstr "A gránitbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
@@ -2894,7 +2894,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:8
@@ -2914,7 +2914,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:8
@@ -2939,7 +2939,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "A favágó, aki ennél a favágókunyhónál dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy elpusztítását vagy egy erdőőrkunyhó építését."
+msgstr "A favágó, aki ennél a favágókunyhónál dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy erdőőrkunyhó építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -3172,7 +3172,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy az elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:8
@@ -3186,7 +3186,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy az elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
@@ -3248,7 +3248,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:8
@@ -3262,7 +3262,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy az elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:8
@@ -3295,7 +3295,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:8
@@ -3309,7 +3309,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:8
@@ -3323,7 +3323,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy elpusztítását vagy egy erdészház építését."
+msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3356,7 +3356,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "A márványbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "A márványbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:8
@@ -3370,7 +3370,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "A márványbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy elpusztítását."
+msgstr "A márványbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:8
@@ -3743,7 +3743,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "Az itt dolgozó faszénégető nem talál gödröt a munkaterületén. Gondoskodj róla, hogy legyen működő agyagverem a közelben, és a faszénégető ház el legyen látva minden szükséges áruval, vagy fontold meg az épület lebontását vagy elpusztítását."
+msgstr "Az itt dolgozó faszénégető nem talál gödröt a munkaterületén. Gondoskodj róla, hogy legyen működő agyagverem a közelben, és a faszénégető ház el legyen látva minden szükséges áruval, vagy fontold meg az épület lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3790,7 +3790,7 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy az elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:8
@@ -3804,7 +3804,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy az elpusztítását."
+msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
@@ -3903,7 +3903,7 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:8
@@ -3917,7 +3917,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy az elpusztítását."
+msgstr "Az aranybánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:8
@@ -3956,7 +3956,7 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:8
@@ -3970,7 +3970,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy elpusztítását."
+msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:8
@@ -4038,13 +4038,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Reindeer Farm"
-msgstr ""
+msgstr "Rénszarvasfarm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:81
 msgctxt "frisians_building"
 msgid "rearing reindeer"
-msgstr ""
+msgstr "rénszarvas nevelése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:92
@@ -4101,7 +4101,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:8
 msgctxt "frisians_building"
 msgid "Shipyard"
-msgstr ""
+msgstr "Hajógyár"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:8
@@ -4119,36 +4119,36 @@ msgstr ""
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:66
 msgid "sewing studded fur garment"
-msgstr ""
+msgstr "szegecses kacagány varrása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:78
 msgid "sewing golden fur garment"
-msgstr ""
+msgstr "aranyozott kacagány varrása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:8
 msgctxt "frisians_building"
 msgid "Tavern"
-msgstr ""
+msgstr "Kocsma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:95
 msgid "preparing only one ration"
-msgstr ""
+msgstr "csak egy harapnivaló készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:109
 msgid "preparing rations"
-msgstr ""
+msgstr "harapnivaló készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:8
 msgctxt "frisians_building"
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Szövőmalom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:70
@@ -4159,18 +4159,18 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:8
 msgctxt "frisians_building"
 msgid "Well"
-msgstr ""
+msgstr "Kút"
 
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Favágóház"
 
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
 msgctxt "frisians_building"
@@ -4178,13 +4178,13 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
 msgctxt "amazons_building"
 msgid "Training Glade"
-msgstr ""
+msgstr "Kiképző tisztás"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
@@ -4205,56 +4205,56 @@ msgstr "alszik"
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "katona kitérésének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "katona kitérésének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr ""
+msgstr "katona kitérésének fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "katona életerejének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "katona életerejének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "katona életerejének fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "katona védelmének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "katona védelmének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
 msgctxt "amazons_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nincs kiképezhető katona!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4262,25 +4262,25 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nem található katona ehhez a képzési szinthez!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Harcosok gyűlése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
@@ -4310,7 +4310,7 @@ msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
+msgstr "katona támadásának fejlesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
@@ -4318,7 +4318,7 @@ msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nincs kiképezhető katona!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4326,7 +4326,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nem található katona ehhez a képzési szinthez!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4344,43 +4344,43 @@ msgstr "katona védelmének fejlesztése 0-sról 1-es szintre"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:105
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "katona védelmének feljesztése 1-esről 2-es szintre"
+msgstr "katona védelmének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:119
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
+msgstr "katona életerejének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:132
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
+msgstr "katona kitérésének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:145
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
+msgstr "katona kitérésének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:8
 msgctxt "barbarians_building"
 msgid "Battle Arena"
-msgstr "Küzdőtér"
+msgstr "Harci Aréna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:85
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
+msgstr "katona kitérésének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:100
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
+msgstr "katona kitérésének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
@@ -4426,31 +4426,31 @@ msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:144
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
+msgstr "katona támadásának fejlesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "katona életerejének feljesztése 4-esről 5-ös szintre"
+msgstr "katona támadásának fejlesztése 4-esről 5-ös szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:172
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
+msgstr "katona életerejének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:185
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "katona életerejének feljesztése 1-esről 2-es szintre"
+msgstr "katona életerejének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:199
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "katona életerejének feljesztése 2-esről 3-as szintre"
+msgstr "katona életerejének fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:8
@@ -4463,7 +4463,7 @@ msgstr "Aréna"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:54
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
+msgstr "katona kitérésének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
@@ -4492,7 +4492,7 @@ msgstr "Kolosszeum"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:67
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
+msgstr "katona kitérésének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:8
@@ -4522,31 +4522,31 @@ msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
+msgstr "katona támadásának fejlesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:152
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
+msgstr "katona életerejének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:165
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "katona életerejének feljesztése 1-esről 2-es szintre"
+msgstr "katona életerejének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:179
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "katona életerejének feljesztése 2-esről 3-as szintre"
+msgstr "katona életerejének fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "katona életerejének feljesztése 3-asról 4-es szintre"
+msgstr "katona életerejének fejlesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:8
@@ -4558,38 +4558,38 @@ msgstr "Kiképző aréna"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
+msgstr "katona támadásának fejlesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "katona életerejének feljesztése 4-esről 5-ös szintre"
+msgstr "katona támadásának fejlesztése 4-esről 5-ös szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:151
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
-msgstr ""
+msgstr "katona támadásának fejlesztése 5-ösről 6-os szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "katona védelmének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "katona életerejének fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:205
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
 msgctxt "frisians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nincs kiképezhető katona!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4597,7 +4597,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nem található katona ehhez a képzési szinthez!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -4609,37 +4609,37 @@ msgstr "Kiképzőtábor"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "katona életerejének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "katona védelmének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Főhadiszállás"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
@@ -5088,19 +5088,19 @@ msgstr "Nádas (közepes)"
 #: ../../data/tribes/immovables/reedfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Reed Field (ripe)"
-msgstr ""
+msgstr "Nádas (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Reed Field (small)"
-msgstr ""
+msgstr "Nádas (kicsi)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Reed Field (tiny)"
-msgstr ""
+msgstr "Nádas (apró)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/init.lua:8
@@ -5173,13 +5173,13 @@ msgstr "Kevés szén"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:100
 msgctxt "resource_indicator"
 msgid "Some Iron"
-msgstr ""
+msgstr "Kevés vas"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:123
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "Kevés kristály"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:146
@@ -5188,7 +5188,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:146
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
-msgstr ""
+msgstr "Rengeteg szén"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:192
@@ -5197,25 +5197,25 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:192
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
-msgstr ""
+msgstr "Rengeteg vas"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "Rengeteg kristály"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:108
 msgctxt "resource_indicator"
 msgid "Some Marble"
-msgstr ""
+msgstr "Kevés márvány"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:188
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
-msgstr ""
+msgstr "Rengeteg márvány"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_amazons/init.lua:8
@@ -5291,7 +5291,7 @@ msgstr ""
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Halott fa"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:80
@@ -5705,8 +5705,8 @@ msgstr[1] "%1% katona (+%2%)"
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona"
+msgstr[1] "%1% katona"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5715,8 +5715,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona (+%3%)"
+msgstr[1] "%1%(+%2%) katona (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5724,8 +5724,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona"
+msgstr[1] "%1%(+%2%) katona"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5751,16 +5751,16 @@ msgstr "A keleti földek hatalmas törzsei."
 msgctxt "barbarians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona (+%2%)"
+msgstr[1] "%1% katona (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
 msgctxt "barbarians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona"
+msgstr[1] "%1% katona"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5769,8 +5769,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona (+%3%)"
+msgstr[1] "%1%(+%2%) katona (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5778,8 +5778,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona"
+msgstr[1] "%1%(+%2%) katona"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5796,16 +5796,16 @@ msgstr "Ez a Római Birodalom kultúrája."
 msgctxt "empire_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona (+%2%)"
+msgstr[1] "%1% katona (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
 msgctxt "empire_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona"
+msgstr[1] "%1% katona"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5814,8 +5814,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona (+%3%)"
+msgstr[1] "%1%(+%2%) katona (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5823,8 +5823,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona"
+msgstr[1] "%1%(+%2%) katona"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5833,7 +5833,7 @@ msgstr "Frízek"
 
 #: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
-msgstr "A rideg északi tengerpart lakói"
+msgstr "A rideg északi tengerpart lakói."
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -5841,16 +5841,16 @@ msgstr "A rideg északi tengerpart lakói"
 msgctxt "frisians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona (+%2%)"
+msgstr[1] "%1% katona (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
 msgctxt "frisians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% katona"
+msgstr[1] "%1% katona"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5859,8 +5859,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona (+%3%)"
+msgstr[1] "%1%(+%2%) katona (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5868,8 +5868,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) katona"
+msgstr[1] "%1%(+%2%) katona"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -5922,37 +5922,37 @@ msgstr "Orinoco"
 #: ../../data/tribes/ships/amazons/init.lua:43
 msgctxt "shipname"
 msgid "Amazonas"
-msgstr ""
+msgstr "Amazonas"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:45
 msgctxt "shipname"
 msgid "Abacaxis"
-msgstr ""
+msgstr "Abacaxis"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:47
 msgctxt "shipname"
 msgid "Anchicayá"
-msgstr ""
+msgstr "Anchicayá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:49
 msgctxt "shipname"
 msgid "Guáitara"
-msgstr ""
+msgstr "Guáitara"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:51
 msgctxt "shipname"
 msgid "Iscuandé"
-msgstr ""
+msgstr "Iscuandé"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:53
 msgctxt "shipname"
 msgid "Putumayo"
-msgstr ""
+msgstr "Putumayo"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:83
@@ -5964,103 +5964,103 @@ msgstr "Hajó"
 #: ../../data/tribes/ships/atlanteans/init.lua:107
 msgctxt "shipname"
 msgid "Abaco"
-msgstr ""
+msgstr "Abaco"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:109
 msgctxt "shipname"
 msgid "Agate"
-msgstr ""
+msgstr "Agate"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:111
 msgctxt "shipname"
 msgid "Alexandrite"
-msgstr ""
+msgstr "Alexandrit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:113
 msgctxt "shipname"
 msgid "Amber"
-msgstr ""
+msgstr "Borostyán"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:115
 msgctxt "shipname"
 msgid "Amethyst"
-msgstr ""
+msgstr "Ametiszt"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:117
 msgctxt "shipname"
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:119
 msgctxt "shipname"
 msgid "Antigua"
-msgstr ""
+msgstr "Antigua"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:121
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr ""
+msgstr "Akvamarin"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:123
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr ""
+msgstr "Atlantisz Erőssége"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:125
 msgctxt "shipname"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantisz"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:127
 msgctxt "shipname"
 msgid "Bahama"
-msgstr ""
+msgstr "Bahama"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:129
 msgctxt "shipname"
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:131
 msgctxt "shipname"
 msgid "Barbuda"
-msgstr ""
+msgstr "Barbuda"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:133
 msgctxt "shipname"
 msgid "Beryl"
-msgstr ""
+msgstr "Berill"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:135
 msgctxt "shipname"
 msgid "Blanquilla"
-msgstr ""
+msgstr "Blanquilla"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:137
 msgctxt "shipname"
 msgid "Caicos"
-msgstr ""
+msgstr "Caicos"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:139
 msgctxt "shipname"
 msgid "Cassiterite"
-msgstr ""
+msgstr "Kassziterit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:141
@@ -6072,13 +6072,13 @@ msgstr "Macskaszem"
 #: ../../data/tribes/ships/atlanteans/init.lua:143
 msgctxt "shipname"
 msgid "Citrine"
-msgstr ""
+msgstr "Citrin"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:145
 msgctxt "shipname"
 msgid "Colionder"
-msgstr ""
+msgstr "Colionder"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:147
@@ -6090,7 +6090,7 @@ msgstr "Dominika"
 #: ../../data/tribes/ships/atlanteans/init.lua:149
 msgctxt "shipname"
 msgid "Eleuthera"
-msgstr ""
+msgstr "Eleuthera"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:151
@@ -6102,37 +6102,37 @@ msgstr "Smaragd"
 #: ../../data/tribes/ships/atlanteans/init.lua:153
 msgctxt "shipname"
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:155
 msgctxt "shipname"
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:157
 msgctxt "shipname"
 msgid "Inagua"
-msgstr ""
+msgstr "Inagua"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:161
 msgctxt "shipname"
 msgid "Juventud"
-msgstr ""
+msgstr "Juventud"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:163
 msgctxt "shipname"
 msgid "King Ajanthul"
-msgstr ""
+msgstr "Ajanthul király"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:165
@@ -6144,13 +6144,13 @@ msgstr "Askandor király"
 #: ../../data/tribes/ships/atlanteans/init.lua:167
 msgctxt "shipname"
 msgid "Kitts"
-msgstr ""
+msgstr "Kitts"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Loftomor"
-msgstr ""
+msgstr "Loftomor"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:171
@@ -6162,13 +6162,13 @@ msgstr "Malachit"
 #: ../../data/tribes/ships/atlanteans/init.lua:173
 msgctxt "shipname"
 msgid "Martinique"
-msgstr ""
+msgstr "Martinique"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:175
 msgctxt "shipname"
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:177
@@ -6186,13 +6186,13 @@ msgstr "Titokzatos Kvarc"
 #: ../../data/tribes/ships/atlanteans/init.lua:181
 msgctxt "shipname"
 msgid "Nassau"
-msgstr ""
+msgstr "Nassau"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:183
 msgctxt "shipname"
 msgid "Nevis"
-msgstr ""
+msgstr "Nevis"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:185
@@ -6210,19 +6210,19 @@ msgstr "Ónix"
 #: ../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Opol"
-msgstr ""
+msgstr "Opol"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:191
 msgctxt "shipname"
 msgid "Orchila"
-msgstr ""
+msgstr "Orchila"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:193
 msgctxt "shipname"
 msgid "Ostur"
-msgstr ""
+msgstr "Ostur"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:195
@@ -6240,19 +6240,19 @@ msgstr "Zafír"
 #: ../../data/tribes/ships/atlanteans/init.lua:199
 msgctxt "shipname"
 msgid "Satul"
-msgstr ""
+msgstr "Satul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:201
 msgctxt "shipname"
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:203
 msgctxt "shipname"
 msgid "Sphalerite"
-msgstr ""
+msgstr "Szfalerit"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:205
@@ -6264,7 +6264,7 @@ msgstr "Pók"
 #: ../../data/tribes/ships/atlanteans/init.lua:207
 msgctxt "shipname"
 msgid "Spinel"
-msgstr ""
+msgstr "Spinell"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:209
@@ -6276,786 +6276,786 @@ msgstr "Napkő"
 #: ../../data/tribes/ships/atlanteans/init.lua:211
 msgctxt "shipname"
 msgid "Tiger Eye"
-msgstr ""
+msgstr "Tigrisszem"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:213
 msgctxt "shipname"
 msgid "Tobago"
-msgstr ""
+msgstr "Tobago"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:215
 msgctxt "shipname"
 msgid "Topaz"
-msgstr ""
+msgstr "Topáz"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:217
 msgctxt "shipname"
 msgid "Tortuga"
-msgstr ""
+msgstr "Tortuga"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Tourmaline"
-msgstr ""
+msgstr "Turmalin"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:221
 msgctxt "shipname"
 msgid "Trinidad"
-msgstr ""
+msgstr "Trinidad"
 
 #. TRANSLATORS: This is the Barbarians' ship's name used in lists of units
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Hajó"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:28
 msgctxt "shipname"
 msgid "Agilaz"
-msgstr ""
+msgstr "Agilaz"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:30
 msgctxt "shipname"
 msgid "Aslaug"
-msgstr ""
+msgstr "Aslaug"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:32
 msgctxt "shipname"
 msgid "Baldr"
-msgstr ""
+msgstr "Baldr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:34
 msgctxt "shipname"
 msgid "Bear"
-msgstr ""
+msgstr "Medve"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:36
 msgctxt "shipname"
 msgid "Beowulf"
-msgstr ""
+msgstr "Beowulf"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:38
 msgctxt "shipname"
 msgid "Boldreth"
-msgstr ""
+msgstr "Boldreth"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:40
 msgctxt "shipname"
 msgid "Chat’Karuth"
-msgstr ""
+msgstr "Chat’Karuth"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:42
 msgctxt "shipname"
 msgid "Dellingr"
-msgstr ""
+msgstr "Dellingr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:44
 msgctxt "shipname"
 msgid "Fulla"
-msgstr ""
+msgstr "Fulla"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:46
 msgctxt "shipname"
 msgid "Gersemi"
-msgstr ""
+msgstr "Gersemi"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:48
 msgctxt "shipname"
 msgid "Hagbard"
-msgstr ""
+msgstr "Hagbard"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:50
 msgctxt "shipname"
 msgid "Heidrek"
-msgstr ""
+msgstr "Heidrek"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:52
 msgctxt "shipname"
 msgid "Heimdallr"
-msgstr ""
+msgstr "Heimdallr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:54
 msgctxt "shipname"
 msgid "Hnoss"
-msgstr ""
+msgstr "Hnoss"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:56
 msgctxt "shipname"
 msgid "Hrothgar"
-msgstr ""
+msgstr "Hrothgar"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:58
 msgctxt "shipname"
 msgid "Ingeld"
-msgstr ""
+msgstr "Ingeld"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:60
 msgctxt "shipname"
 msgid "Karl Hundason"
-msgstr ""
+msgstr "Karl Hundason"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:62
 msgctxt "shipname"
 msgid "Khantrukh"
-msgstr ""
+msgstr "Khantrukh"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:64
 msgctxt "shipname"
 msgid "Lynx"
-msgstr ""
+msgstr "Hiúz"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:66
 msgctxt "shipname"
 msgid "Mani"
-msgstr ""
+msgstr "Mani"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:68
 msgctxt "shipname"
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:70
 msgctxt "shipname"
 msgid "Red Fox"
-msgstr ""
+msgstr "Vörös Róka"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
 #: ../../data/tribes/ships/barbarians/init.lua:72
 msgctxt "shipname"
 msgid "Saxnot"
-msgstr ""
+msgstr "Saxnot"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:74
 msgctxt "shipname"
 msgid "Sigmund"
-msgstr ""
+msgstr "Sigmund"
 
 #. TRANSLATORS: This Barbarian ship is named after a barbarian bard
 #: ../../data/tribes/ships/barbarians/init.lua:76
 msgctxt "shipname"
 msgid "Sigurd"
-msgstr ""
+msgstr "Sigurd"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:78
 msgctxt "shipname"
 msgid "Snotra"
-msgstr ""
+msgstr "Snotra"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:80
 msgctxt "shipname"
 msgid "Thor"
-msgstr ""
+msgstr "Thor"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:82
 msgctxt "shipname"
 msgid "Thron"
-msgstr ""
+msgstr "Thron"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:84
 msgctxt "shipname"
 msgid "Ullr"
-msgstr ""
+msgstr "Ullr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:86
 msgctxt "shipname"
 msgid "Valdar"
-msgstr ""
+msgstr "Valdar"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:88
 msgctxt "shipname"
 msgid "Vili"
-msgstr ""
+msgstr "Vili"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:90
 msgctxt "shipname"
 msgid "Volf"
-msgstr ""
+msgstr "Volf"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:92
 msgctxt "shipname"
 msgid "Wild Boar"
-msgstr ""
+msgstr "Vadkan"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:94
 msgctxt "shipname"
 msgid "Wolverine"
-msgstr ""
+msgstr "Rozsomák"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:96
 msgctxt "shipname"
 msgid "Yrsa"
-msgstr ""
+msgstr "Yrsa"
 
 #. TRANSLATORS: This is the Empire's ship's name used in lists of units
 #: ../../data/tribes/ships/empire/init.lua:8
 msgctxt "empire_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Hajó"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:28
 msgctxt "shipname"
 msgid "Adriatic Sea"
-msgstr ""
+msgstr "Adria"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:30
 msgctxt "shipname"
 msgid "Alexandria"
-msgstr ""
+msgstr "Alexandria"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:32
 msgctxt "shipname"
 msgid "Amalea"
-msgstr ""
+msgstr "Amalea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:34
 msgctxt "shipname"
 msgid "Amolius"
-msgstr ""
+msgstr "Amolius"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
 msgid "Apollo"
-msgstr ""
+msgstr "Apollo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:38
 msgctxt "shipname"
 msgid "Augustus"
-msgstr ""
+msgstr "Augustus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:40
 msgctxt "shipname"
 msgid "Azurea Sea"
-msgstr ""
+msgstr "Azúr Tenger"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:42
 msgctxt "shipname"
 msgid "Baltic Sea"
-msgstr ""
+msgstr "Balti Tenger"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:44
 msgctxt "shipname"
 msgid "Bellona"
-msgstr ""
+msgstr "Bellona"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:46
 msgctxt "shipname"
 msgid "Ben Hur"
-msgstr ""
+msgstr "Ben Hur"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:48
 msgctxt "shipname"
 msgid "Bounty"
-msgstr ""
+msgstr "Præda"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:50
 msgctxt "shipname"
 msgid "Brutus"
-msgstr ""
+msgstr "Brutus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:52
 msgctxt "shipname"
 msgid "Caligula"
-msgstr ""
+msgstr "Caligula"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:54
 msgctxt "shipname"
 msgid "Camilla"
-msgstr ""
+msgstr "Camilla"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:56
 msgctxt "shipname"
 msgid "Carrara"
-msgstr ""
+msgstr "Carrara"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:58
 msgctxt "shipname"
 msgid "Caesar"
-msgstr ""
+msgstr "Caesar"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:60
 msgctxt "shipname"
 msgid "Cicero"
-msgstr ""
+msgstr "Cicero"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:62
 msgctxt "shipname"
 msgid "Claudius"
-msgstr ""
+msgstr "Claudius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:64
 msgctxt "shipname"
 msgid "Diana"
-msgstr ""
+msgstr "Diana"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:66
 msgctxt "shipname"
 msgid "Domitianus"
-msgstr ""
+msgstr "Domitianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Empire Glory"
-msgstr ""
+msgstr "A Birodalom Dicsősége"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
 msgctxt "shipname"
 msgid "Faustulus"
-msgstr ""
+msgstr "Faustulus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Galba"
-msgstr ""
+msgstr "Galba"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
 msgctxt "shipname"
 msgid "Gallus"
-msgstr ""
+msgstr "Gallus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:76
 msgctxt "shipname"
 msgid "Ianus"
-msgstr ""
+msgstr "Ianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:78
 msgctxt "shipname"
 msgid "Iulius Caesar"
-msgstr ""
+msgstr "Iulius Caesar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Iuno"
-msgstr ""
+msgstr "Iuno"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:82
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr ""
+msgstr "Iupiter"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Latium"
-msgstr ""
+msgstr "Latium"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Latonia"
-msgstr ""
+msgstr "Latonia"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
 msgid "Leonardo"
-msgstr ""
+msgstr "Leonardo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90
 msgctxt "shipname"
 msgid "Liguria"
-msgstr ""
+msgstr "Liguria"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:92
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Lutius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
 msgid "Marble"
-msgstr ""
+msgstr "Márvány"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
 msgid "Mars"
-msgstr ""
+msgstr "Mars"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:98
 msgctxt "shipname"
 msgid "Minerva"
-msgstr ""
+msgstr "Minerva"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
 msgid "Neptune"
-msgstr ""
+msgstr "Neptun"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:102
 msgctxt "shipname"
 msgid "Nero"
-msgstr ""
+msgstr "Nero"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:104
 msgctxt "shipname"
 msgid "Nerva"
-msgstr ""
+msgstr "Nerva"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:106
 msgctxt "shipname"
 msgid "Octavianus"
-msgstr ""
+msgstr "Octavianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:108
 msgctxt "shipname"
 msgid "Otho"
-msgstr ""
+msgstr "Otho"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Portus Bellus"
-msgstr ""
+msgstr "Portus Bellus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
 msgctxt "shipname"
 msgid "Quirinus"
-msgstr ""
+msgstr "Quirinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:116
 msgctxt "shipname"
 msgid "Remus"
-msgstr ""
+msgstr "Remus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:118
 msgctxt "shipname"
 msgid "Romulus"
-msgstr ""
+msgstr "Romulus"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Saledus"
-msgstr ""
+msgstr "Saledus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
 #: ../../data/tribes/ships/empire/init.lua:122
 msgctxt "shipname"
 msgid "Saturn"
-msgstr ""
+msgstr "Saturnus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:124
 msgctxt "shipname"
 msgid "Siena"
-msgstr ""
+msgstr "Siena"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:126
 msgctxt "shipname"
 msgid "Sparta"
-msgstr ""
+msgstr "Sparta"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:128
 msgctxt "shipname"
 msgid "Thyrrenia"
-msgstr ""
+msgstr "Thyrrenia"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:130
 msgctxt "shipname"
 msgid "Tiberius"
-msgstr ""
+msgstr "Tiberius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:132
 msgctxt "shipname"
 msgid "Titus"
-msgstr ""
+msgstr "Titus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:134
 msgctxt "shipname"
 msgid "Traianus"
-msgstr ""
+msgstr "Traianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:136
 msgctxt "shipname"
 msgid "Venus"
-msgstr ""
+msgstr "Venus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:138
 msgctxt "shipname"
 msgid "Vespasianus"
-msgstr ""
+msgstr "Vespasianus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142
 msgctxt "shipname"
 msgid "Vinea"
-msgstr ""
+msgstr "Vinea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:144
 msgctxt "shipname"
 msgid "Vitellius"
-msgstr ""
+msgstr "Vitellius"
 
 #. TRANSLATORS: This is the Frisians' ship's name used in lists of units
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Hajó"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:45
 msgctxt "shipname"
 msgid "Amrum"
-msgstr ""
+msgstr "Amrum"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:47
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
-msgstr ""
+msgstr "Alt-Nordstrand"
 
 #. TRANSLATORS: This frisian ship is named after a peninsula in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:49
 msgctxt "shipname"
 msgid "Eiderstedt"
-msgstr ""
+msgstr "Eiderstedt"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:51
 msgctxt "shipname"
 msgid "Föhr"
-msgstr ""
+msgstr "Föhr"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:53
 msgctxt "shipname"
 msgid "Gröde"
-msgstr ""
+msgstr "Gröde"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:55
 msgctxt "shipname"
 msgid "Habel"
-msgstr ""
+msgstr "Habel"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:57
 msgctxt "shipname"
 msgid "Hamburger Hallig"
-msgstr ""
+msgstr "Hamburger Hallig"
 
 #. TRANSLATORS: This frisian ship is named after an island in the North Sea
 #: ../../data/tribes/ships/frisians/init.lua:59
 msgctxt "shipname"
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:61
 msgctxt "shipname"
 msgid "Hever"
-msgstr ""
+msgstr "Hever"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:63
 msgctxt "shipname"
 msgid "Hooge"
-msgstr ""
+msgstr "Hooge"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:65
 msgctxt "shipname"
 msgid "Japsand"
-msgstr ""
+msgstr "Japsand"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:67
 msgctxt "shipname"
 msgid "Kormoransand"
-msgstr ""
+msgstr "Kormoransand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:69
 msgctxt "shipname"
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:71
 msgctxt "shipname"
 msgid "Norderaue"
-msgstr ""
+msgstr "Norderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:73
 msgctxt "shipname"
 msgid "Norderoog"
-msgstr ""
+msgstr "Norderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:75
 msgctxt "shipname"
 msgid "Norderoogsand"
-msgstr ""
+msgstr "Norderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:77
 msgctxt "shipname"
 msgid "Nordstrand"
-msgstr ""
+msgstr "Nordstrand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:79
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
-msgstr ""
+msgstr "Nordstrandischmoor"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:81
 msgctxt "shipname"
 msgid "Oland"
-msgstr ""
+msgstr "Oland"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:83
 msgctxt "shipname"
 msgid "Pellworm"
-msgstr ""
+msgstr "Pellworm"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:85
 msgctxt "shipname"
 msgid "Strand"
-msgstr ""
+msgstr "Strand"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:87
 msgctxt "shipname"
 msgid "Süderaue"
-msgstr ""
+msgstr "Süderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:89
 msgctxt "shipname"
 msgid "Süderoog"
-msgstr ""
+msgstr "Süderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:91
 msgctxt "shipname"
 msgid "Süderoogsand"
-msgstr ""
+msgstr "Süderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:93
 msgctxt "shipname"
 msgid "Südfall"
-msgstr ""
+msgstr "Südfall"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:95
 msgctxt "shipname"
 msgid "Sylt"
-msgstr ""
+msgstr "Sylt"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:97
 msgctxt "shipname"
 msgid "Uthlande"
-msgstr ""
+msgstr "Uthlande"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/armor/init.lua:77
