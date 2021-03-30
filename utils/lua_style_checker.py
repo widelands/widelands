@@ -9,6 +9,7 @@ import re
 import sys
 from file_utils import read_text_file, find_files
 
+
 def check_line(filename, lidx, line, print_error=True):
     e = 0
     for method in ['_', 'gettext']:
@@ -23,18 +24,18 @@ def check_line(filename, lidx, line, print_error=True):
 
 # Selftests against false-positives and false-negatives
 known_issues = [
-        '_"Hello World"',
-        'gettext "Hello World"',
-        '_[===[Hi]===]',
-        '_[[Hi %1%]]:bformat("Foo")',
-        '_([[Hi %1%]]):bformat(_"Foo")',
+    '_"Hello World"',
+    'gettext "Hello World"',
+    '_[===[Hi]===]',
+    '_[[Hi %1%]]:bformat("Foo")',
+    '_([[Hi %1%]]):bformat(_"Foo")',
 ]
 known_clean_lines = [
-        '_("Hello World")',
-        'gettext("Hello World")',
-        '_([==[Hi]==])',
-        '_([[Hi %1%]]):bformat("Foo")',
-        '_([[Hi %1%]]):bformat(_("Foo"))',
+    '_("Hello World")',
+    'gettext("Hello World")',
+    '_([==[Hi]==])',
+    '_([[Hi %1%]]):bformat("Foo")',
+    '_([[Hi %1%]]):bformat(_("Foo"))',
 ]
 
 errors = 0
