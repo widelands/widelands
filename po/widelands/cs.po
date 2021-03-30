@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-22 20:13+0000\n"
-"PO-Revision-Date: 2021-03-22 21:47+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-29 11:14+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -627,8 +627,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1303,7 +1303,7 @@ msgstr "Kliknutím na mapu se zvýší, stiskem Shift + kliknutím na mapu se sn
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr "Ctrl + Klik v mapě nastaví množství vybrané suroviny. Dojde k nahrazení aktuálně nastavené hodnoty dané suroviny."
+msgstr "Ctrl + Kliknutí na mapu nastaví zvolené množství vybrané suroviny. Dochází k nahrazení suroviny původní."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:33
 msgid "Random Height Options"
@@ -1345,8 +1345,8 @@ msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
-#: ../../src/ui_basic/dropdown.cc:291 ../../src/ui_basic/dropdown.cc:343
-#: ../../src/ui_basic/dropdown.cc:410 ../../src/ui_basic/dropdown.cc:418
+#: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
+#: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:327
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "%1%: %2%"
@@ -1545,8 +1545,8 @@ msgstr "ne"
 msgid "off"
 msgstr "ne"
 
-#: ../../src/logic/addons.cc:45 ../../src/ui_basic/dropdown.cc:343
-#: ../../src/ui_basic/dropdown.cc:345 ../../src/ui_fsmenu/addons.cc:1173
+#: ../../src/logic/addons.cc:45 ../../src/ui_basic/dropdown.cc:351
+#: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
 #: ../../src/wlapplication.cc:1443
@@ -3130,7 +3130,7 @@ msgid "Select Item"
 msgstr "Vybrat položku"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:403
+#: ../../src/ui_basic/dropdown.cc:411
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nevybráno"
@@ -4879,11 +4879,11 @@ msgstr "Nahrát předchozího hostitele"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:95
 msgid "Host a new game"
-msgstr "Hostovat novou hru"
+msgstr "Hostit novou hru"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:129
 msgid "Host"
-msgstr "Host"
+msgstr "Hostitel"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:131
 msgid "State"
@@ -4907,7 +4907,7 @@ msgstr "Neplatná adresa"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:299
 msgid "The entered hostname or address is invalid and can’t be connected to."
-msgstr "Zadaný hostname nebo adresa není platná a proto se není možné připojit."
+msgstr "Zadané jméno hostitele nebo adresa nejsou platné a nelze se tak připojit."
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:310
 #: ../../src/ui_fsmenu/netsetup_lan.cc:332
@@ -5124,7 +5124,7 @@ msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
 " with slightly different settings."
-msgstr "Generátor náhodných map nebyl schopný vygenerovat odpovídající mapu. To se může v některých případech stát, protože stále funguje ve své beta verzi. Prosím zkuste znovu s mírně pozměněným nastavením podmínek."
+msgstr "Generátor náhodných map nebyl schopný vygenerovat odpovídající mapu. To se může v některých případech stát, protože stále funguje ve své beta verzi. Prosím zkus to znovu s mírně pozměněným nastavením podmínek."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -5507,7 +5507,7 @@ msgstr "Nastavení normálního tempa hry"
 #: ../../src/wlapplication_options.cc:505
 #: ../../src/wui/interactive_gamebase.cc:287
 msgid "Pause"
-msgstr "Pause"
+msgstr "Pauza"
 
 #: ../../src/wlapplication_options.cc:510
 msgid "Scroll to Starting Field"
@@ -6783,8 +6783,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Námořní"
