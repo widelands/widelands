@@ -3,16 +3,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Walter Benkel <tromaster@gmail.com>, 2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Walter Benkel <tromaster@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-22 20:13+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -563,6 +563,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn’t do anything with them."
 msgstr ""
+"Aún no sabemos si los otros edificios funcionan correctamente. Cuando "
+"podamos suministrarles deberemos observarlos de cerca. Hasta entonces no "
+"deberíamos hacer nada con ellos."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:315
@@ -593,6 +596,9 @@ msgid ""
 "Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Hermano, estoy realmente preocupado de tener que darte nuevamente malas "
+"noticias. Como puedes ver, nuestras granjas no están produciendo nada y no "
+"podemos desarmarlas."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:328
@@ -1110,6 +1116,9 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
+"Saludos, Lutius, no sé cómo, pero nos han regalado algo de cerveza y vino. "
+"Encontramos esas mercancías cuando revisamos las existencias recientemente. "
+"Quizás la diosa Vesta aún nos apoya."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea Analyzes the Economy"
@@ -1212,6 +1221,8 @@ msgid ""
 "Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"Oh no, Lutius, no sé cómo pudo suceder esto, pero los Bárbaros han saqueado "
+"nuestro cuartel general. ¡Así, hemos perdido esta batalla y nuestro imperio!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 msgid "Amalea reports our headquarters lost…"
@@ -1224,6 +1235,9 @@ msgid ""
 "have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
+"Oh no, Lutius, no sé cómo pudo suceder esto, pero los Bárbaros han destruido"
+" nuestro cuartel general. Así, ya no podremos entregar las mercancías a "
+"Julia."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:588
@@ -1241,6 +1255,8 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"Oh no, Lutius, no sé cómo pudo suceder esto, pero los Bárbaros han destruido"
+" nuestro último almacén. ¡Así, hemos perdido esta batalla y nuestro imperio!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
 msgid "Saledus looks very relaxed…"
@@ -1652,6 +1668,8 @@ msgstr "Derriba árboles en la zona circundante y los procesa en troncos."
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr ""
+"La casa del leñador necesita árboles para talar dentro de su área de "
+"trabajo."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
