@@ -293,6 +293,143 @@ private:
 	UI::Textarea progress_;
 };
 
+class ContactForm : public UI::Window {
+public:
+	explicit ContactForm(AddOnsCtrl& ctrl)
+	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
+                "contact", 0, 0, 100, 100, _("Contact Form")),
+	ctrl_(ctrl),
+	logged_in_(!ctrl_.username().empty()),
+	box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	left_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	right_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	name_(&right_box_, 0, 0, 200, UI::PanelStyle::kFsMenu),
+	email_(&right_box_, 0, 0, 200, UI::PanelStyle::kFsMenu),
+	message_(new UI::MultilineEditbox(&right_box_, 0, 0, 400, 200, UI::PanelStyle::kFsMenu)),
+	contact_mail_(&left_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0), _("Contact by E-Mail:"), _("Allow us to contact you by the specified e-mail address")),
+	contact_website_(&left_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0), _("Contact by PM"),
+			logged_in_ ? _("Allow us to contact you via a PM on the Widelands website") : _("Log in to enable contacting you via the Widelands website")),
+	ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("Send message")),
+	cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"))
+{
+	buttons_box_.add_inf_space();
+	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_inf_space();
+	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_inf_space();
+
+	right_box_.add(&name_, UI::Box::Resizing::kFullSize);
+	right_box_.add_space(kRowButtonSpacing);
+	right_box_.add(message_, UI::Box::Resizing::kExpandBoth);
+	right_box_.add_space(kRowButtonSpacing);
+	right_box_.add(&email_, UI::Box::Resizing::kFullSize);
+
+	left_box_.add_space(kRowButtonSpacing);
+	left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+			_("Your name:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	left_box_.add_space(2 * kRowButtonSpacing);
+	left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+			_("Enquiry:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	left_box_.add_inf_space();
+	left_box_.add(&contact_website_, UI::Box::Resizing::kFullSize);
+	left_box_.add_inf_space();
+	left_box_.add_inf_space();
+	left_box_.add(&contact_mail_, UI::Box::Resizing::kFullSize);
+	left_box_.add_space(kRowButtonSpacing);
+
+	hbox_.add(&left_box_, UI::Box::Resizing::kFullSize);
+	hbox_.add_space(kRowButtonSpacing);
+	hbox_.add(&right_box_, UI::Box::Resizing::kExpandBoth);
+	box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(kRowButtonSpacing);
+	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+
+	contact_website_.set_enabled(logged_in_);
+	contact_website_.set_state(logged_in_);
+	contact_mail_.set_state(!logged_in_);
+	check_ok_button_enabled();
+
+	cancel_.sigclicked.connect([this]() { die(); });
+	contact_mail_.changed.connect([this]() { check_ok_button_enabled(); });
+	contact_website_.changed.connect([this]() { check_ok_button_enabled(); });
+	ok_.sigclicked.connect([this]() {
+		if (!check_ok_button_enabled()) {
+			return;
+		}
+		const bool mail = contact_mail_.get_state();
+		const bool pm = contact_website_.get_state();
+		try {
+			ctrl_.net().contact(name_.text(), mail ? email_.text() : "", pm, message_->get_text());
+		} catch (const std::exception& e) {
+			log_err("contact error: %s", e.what());
+			UI::WLMessageBox m(
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			   (boost::format(_("Unable to submit your enquiry.\nError message:\n%s")) % e.what()).str(),
+			   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+			return;
+		}
+
+		std::string str = _("Your message has been sent to the Widelands Development Team, and we will respond as soon as we can.");
+		str += "\n";
+		if (mail && pm) {
+			str += _("Don’t forget to check your e-mails and your website inbox frequently.");
+		} else if (pm) {
+			str += _("Don’t forget to check your website inbox frequently.");
+		} else {
+			str += _("Don’t forget to check your e-mails frequently.");
+		}
+		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Sent"), str, UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+		die();
+	});
+
+	set_center_panel(&box_);
+	center_to_parent();
+}
+
+void think() override {
+	UI::Window::think();
+	check_ok_button_enabled();
+}
+
+private:
+	AddOnsCtrl& ctrl_;
+	const bool logged_in_;
+
+	bool check_ok_button_enabled() {
+		if (!contact_mail_.get_state() && !contact_website_.get_state()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(_("You need to enable at least one way of communication"));
+			return false;
+		}
+
+		if (message_->get_text().empty()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(_("The message is empty"));
+			return false;
+		}
+
+		if (name_.text().empty()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(_("Please state your name first"));
+			return false;
+		}
+
+		ok_.set_enabled(true);
+		ok_.set_tooltip(_("Send this message now"));
+		return true;
+	}
+
+	UI::Box box_, hbox_, buttons_box_, left_box_, right_box_;
+	UI::EditBox name_, email_;
+	UI::MultilineEditbox* message_;
+	UI::Checkbox contact_mail_, contact_website_;
+	UI::Button ok_, cancel_;
+};
+
 ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
    : UI::Window(parent,
                 UI::WindowStyle::kFsMenu,
@@ -520,6 +657,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                    UI::ButtonStyle::kFsMenuSecondary,
                    "") {
 
+	dev_box_.set_force_scrolling(true);
 	dev_box_.add(
 	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
 	                    _("Tools for Add-Ons Developers"), UI::Align::kCenter),
@@ -547,9 +685,12 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	          .as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu. It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead. The Widelands Development Team will review your add-on soon after uploading; they may have further inquiries, therefore please check the inbox of your Widelands user profile page frequently."))).str(),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
+
+	dev_box_.add_space(kRowButtonSpacing);
 	dev_box_.add(&upload_addon_);
 	dev_box_.add_space(kRowButtonSpacing);
 	dev_box_.add(&upload_screenshot_);
+
 	upload_addon_.selected.connect([this]() {
 		upload_addon(*upload_addon_.get_selected());
 	});
@@ -559,6 +700,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		ScreenshotUploadWindow s(*this, info, find_remote(info.internal_name));
 		s.run<UI::Panel::Returncodes>();
 	});
+
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
@@ -589,6 +731,30 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			SDL_SetClipboardText(kDocumentationURL);
 #endif
 		});
+		dev_box_.add_space(kRowButtonSpacing);
+		dev_box_.add(b);
+	}
+
+	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add(
+	   new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%1$s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
+				_("Technical problems? Send a message to the Widelands Development Team and we’ll try to help you with your enquiry as soon as we can.")))
+			.str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
+	{
+		UI::Button* b =
+		   new UI::Button(&dev_box_, "contact", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+		                  /** TRANSLATORS: This button allows the user to send a message to the Widelands Development Team */
+		                  _("Contact us…")
+		   );
+		b->sigclicked.connect([this]() {
+			ContactForm c(*this);
+			c.run<UI::Panel::Returncodes>();
+		});
+		dev_box_.add_space(kRowButtonSpacing);
 		dev_box_.add(b);
 	}
 
@@ -912,7 +1078,8 @@ void AddOnsCtrl::set_login(const std::string& username, const std::string& passw
 			if (show_error) {
 				UI::WLMessageBox m(
 				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Wrong Password"),
-				   _("The entered username or password is incorrect."), UI::WLMessageBox::MBoxType::kOk);
+				   (boost::format(_("The entered username or password is invalid:\n%s")) % e.what()).str(),
+				   UI::WLMessageBox::MBoxType::kOk);
 				m.run<UI::Panel::Returncodes>();
 			}
 			set_login("", "", show_error);

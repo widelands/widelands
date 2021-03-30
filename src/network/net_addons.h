@@ -58,6 +58,8 @@ struct NetAddons {
 	void upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
 	void upload_screenshot(const std::string& addon, const std::string& image, const std::string& description);
 
+	void contact(const std::string& name, const std::string& mail, bool contact_pm, std::string enquiry);
+
 	void set_login(const std::string& username, const std::string& password);
 
 private:
