@@ -9,7 +9,6 @@ import re
 import sys
 from file_utils import read_text_file, find_files
 
-
 def check_line(filename, lidx, line, print_error=True):
     e = 0
     for method in ['_', 'gettext']:
@@ -22,31 +21,35 @@ def check_line(filename, lidx, line, print_error=True):
     return e
 
 
-errors = 0
-
-# Selftests against false-positives
-for line in [
+# Selftests against false-positives and false-negatives
+known_issues = [
+        '_"Hello World"',
+        'gettext "Hello World"',
+        '_[===[Hi]===]',
+        '_[[Hi %1%]]:bformat("Foo")',
+        '_([[Hi %1%]]):bformat(_"Foo")',
+]
+known_clean_lines = [
         '_("Hello World")',
         'gettext("Hello World")',
-        '_([[Hi]])',
+        '_([==[Hi]==])',
         '_([[Hi %1%]]):bformat("Foo")',
-]:
+        '_([[Hi %1%]]):bformat(_("Foo"))',
+]
+
+errors = 0
+
+for line in known_clean_lines:
     e = check_line('selftest false-positives', 1, line)
     errors += e
     if e > 0:
         print('SELFTEST ERROR: false-positive in "{}"'.format(line))
 
-# Selftests against false-negatives
-for line in [
-        '_"Hello World"',
-        'gettext "Hello World"',
-        '_[[Hi]]',
-        '_[[Hi %1%]]:bformat("Foo")',
-]:
+for line in known_issues:
     e = check_line('selftest false-negatives', 1, line, False)
     if e == 0:
         errors += 1
-        print('SELFTEST ERROR: false-negatives in "{}"'.format(line))
+        print('SELFTEST ERROR: false-negative in "{}"'.format(line))
 
 if errors > 0:
     print('\nThere were selftest errors, please fix!')
