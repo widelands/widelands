@@ -674,17 +674,10 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 	}
 }
 
-void NetAddons::contact(const std::string& name, const std::string& mail, const bool contact_pm, std::string enquiry) {
-	if (!mail.empty()) {
-		check_string_validity(mail);
-	}
+void NetAddons::contact(std::string enquiry) {
 	init();
 	CrashGuard guard(*this);
 	std::string send = "CMD_CONTACT ";
-	send += contact_pm ? "true" : "false";
-	send += ' ';
-	send += mail;
-	send += ' ';
 
 	unsigned nr_lines = 1;
 	size_t pos = 0;
@@ -700,9 +693,6 @@ void NetAddons::contact(const std::string& name, const std::string& mail, const 
 	send += std::to_string(nr_lines);
 	send += '\n';
 	write_to_server(send);
-
-	write_to_server(name);
-	write_to_server("\n");
 
 	for (; nr_lines > 1; --nr_lines) {
 		pos = enquiry.find('\n');
