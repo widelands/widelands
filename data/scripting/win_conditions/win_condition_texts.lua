@@ -25,8 +25,8 @@ include "scripting/richtext.lua"
 -- RST
 -- .. data:: won_game
 --
---   :values: * ``title`` = _("Congratulations!")
---            * ``body`` = p(_("You have won this game!"))
+--   :values: * ``title=_("Congratulations!")``
+--            * ``body=p(_("You have won this game!"))``
 --
 
 won_game = {
@@ -37,8 +37,8 @@ won_game = {
 -- RST
 -- .. data:: lost_game
 --
---   :values: * ``title`` = _("You are defeated!")
---            * ``body`` = p(_("You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."))
+--   :values: * ``title=_("You are defeated!")``
+--            * ``body=p(_("You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."))``
 --
 
 lost_game = {
@@ -49,8 +49,8 @@ lost_game = {
 -- RST
 -- .. data:: won_game_over
 --
---   :values: * ``title`` = _("You won")
---            * ``body`` = h2(_("You are the winner!"))
+--   :values: * ``title=_("You won")``
+--            * ``body=h2(_("You are the winner!"))``
 --
 
 won_game_over = {
@@ -61,8 +61,8 @@ won_game_over = {
 -- RST
 -- .. data:: lost_game_over
 --
---   :values: * ``title`` = _("You lost")
---            * ``body`` = h2(_("You’ve lost this game!"))
+--   :values: * ``title=_("You lost")``
+--            * ``body=h2(_("You’ve lost this game!"))``
 --
 
 lost_game_over = {
@@ -73,8 +73,8 @@ lost_game_over = {
 -- RST
 -- .. data:: game_status
 --
---   :values: * ``title`` = _("Status")
---            * ``body`` = h2(_("Player overview:"))
+--   :values: * ``title=_("Status")``
+--            * ``body=h2(_("Player overview:"))``
 --
 
 game_status = {

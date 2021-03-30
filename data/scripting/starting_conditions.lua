@@ -54,7 +54,7 @@ end
 --    :type player: :class:`~wl.game.Player`
 --    :arg items: An :class:`array` of :class:`tables` with `ware_or_worker_name = amount` pairs. As many ships will
 --                be created as there are subtables, and the n-th ship created will load the
---                additional wares and workers defined in `items[n]`. The capacity of each ship will
+--                additional wares and workers defined in ``items[n]``. The capacity of each ship will
 --                be adjusted to accommodate the build cost of the player's tribe's port building
 --                plus one builder plus the number of additional items for this ship.
 --

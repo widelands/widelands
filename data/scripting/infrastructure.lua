@@ -245,8 +245,9 @@ end
 -- RST
 -- .. function:: check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees)
 --
---    Checks for rocks or trees in the region of the player starting field
---    and adds wares to the warehouse if no immovables were found.
+--    Used for starting condition "Poor Hamlet". Checks for rocks or trees in
+--    the region of the player starting field and adds wares to the warehouse
+--    if no immovables were found.
 --
 --    :arg player: the player to check
 --    :type player: :class:`wl.game.Player`

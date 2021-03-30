@@ -367,7 +367,7 @@ World and Tribe Descriptions
 
    This offers access to the objects in the Widelands world and allows to add new objects.
    On how to build the world and adding new objects to it, see
-   :ref:`toc_lua_world`.
+   :ref:`toc_lua_world` and :ref:`lua_tribes`.
 */
 
 const char LuaDescriptions::className[] = "Descriptions";
