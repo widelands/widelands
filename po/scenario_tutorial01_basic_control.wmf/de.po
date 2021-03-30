@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-02 14:48+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-22 21:06+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "Wir müssen einen passenden Ort für die Holzfällerhütte finden. Um da
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid ""
-"I'll show you where the menu is and where to show and hide the building "
+"I’ll show you where the menu is and where to show and hide the building "
 "spaces."
 msgstr "Ich werde dir zeigen wo das Menü ist und wo man die Bauplätze anzeigt und versteckt."
 
@@ -452,7 +452,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr "Der Steinbruch ist ein kleines Gebäude wie die Holzfällerhütte. Du kannst ihn folglich auf jedes Feld mit einem roten, gelben oder grünen Haussymbol bauen, wenn die Bauhilfe eingeschaltet ist (drücke  ‘%s’ dafür)."
+msgstr "Der Steinbruch ist ein kleines Gebäude wie die Holzfällerhütte. Du kannst ihn folglich auf jedes Feld mit einem roten, gelben oder grünen Haussymbol bauen, wenn die Bauhilfe eingeschaltet ist (drücke „%s“ dafür)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -690,7 +690,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr "Um die Gebäudenamen anzuzeigen oder auszublenden, kannst du den ‘Gebäudenamen Anzeigen’ / ‘Gebäudenamen Ausblenden’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die ‘%s’ Tate auf der Tastatur drücken."
+msgstr "Um die Gebäudenamen anzuzeigen oder auszublenden, kannst du den ‘Gebäudenamen Anzeigen’ / ‘Gebäudenamen Ausblenden’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -707,7 +707,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr "Um die Gebäudestatistik anzuzeigen oder auszublenden, kannst du den ‘Statistik Anzeigen’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die ‘%s’ Tate auf der Tastatur drücken."
+msgstr "Um die Gebäudestatistik anzuzeigen oder auszublenden, kannst du den ‘Statistik Anzeigen’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -757,7 +757,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr "Du kannst das Nachrichtenfenster mit dem Tastenkürzel ‘%s’ oder durch Klicken der zweiten Schaltfläche von rechts in der unteren Bildschirmleiste ein- und ausblenden. Die neueste Nachricht ist bereits automatisch markiert."
+msgstr "Du kannst das Nachrichtenfenster mit dem Tastenkürzel „%s“ oder durch Klicken der zweiten Schaltfläche von rechts in der unteren Bildschirmleiste ein- und ausblenden. Die neueste Nachricht ist bereits automatisch markiert."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -809,7 +809,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr "Alle Fenster in Widelands (ausser den Fenstern zur Spielhandlung die ein   ‘OK’ zeigen) können durch einen Rechtsklick auf geschlossen werden. Einige können außerdem mit den Schaltflächen und Menüs am unteren Bildschirmrand zu- und weggeschaltet werden."
+msgstr "Alle Fenster in Widelands (ausser den Fenstern zur Spielhandlung die ein ‘OK’ zeigen) können durch einen Rechtsklick auf geschlossen werden. Einige können außerdem mit den Schaltflächen und Menüs am unteren Bildschirmrand zu- und weggeschaltet werden."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."

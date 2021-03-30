@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-18 17:06+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -320,8 +320,8 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
-msgstr "agus mòran mòran a bharrachd (mòran taing airson a h-uile càil a rinn sibh)"
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -508,22 +508,22 @@ msgstr "Chì thu fiosrachadh mun mhapa no geama air a shàbhaladh taobh deas. Le
 
 #: ../../data/txts/tips/amazons.lua:4
 msgid ""
-"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr "Tha Muinntir na h-Amasoin glè mheasail air craobhan. Tog bothanan glèidheadair-coille ach am bi gu leòr dhuibh agad."
+msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
-"plantations to plant these special trees."
-msgstr "Tha craobhan ainneamh aig cridhe eaconamaidh Muinntir na h-Amasoine. Tog planntachaidhean chraobhan ainneamh airson na craobhan sònraichte sin fhàs."
+"plantations to plant the special trees for these woods."
+msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
-"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
-"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr "Thèid craobhan ainneimh a bhuain le buaineadair-fiodha eòlach ann am bothanan buaineadair-fhiodha a chaidh a leasachadh gu bothanan chraobhan ainneamh. Gidheadh, cha bhuain iad craobhan àbhaisteach tuilleadh an uairsin. Beachdaich air far an cuir thu iad ro làimh."
+msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
@@ -815,9 +815,9 @@ msgstr "Cleachd “@name” aig toiseach teachdaireachd na cabadaich gus a cur g
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Na gabh dragh ma thuislicheas an geama! Thèid an geama a shàbhaladh gu fèin-obrachail ach an urrainn dhut a luchdadh a-rithist an uairsin."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2018
 # GunChleoc, 2016
 # GunChleoc, 2014
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-02-28 12:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-23 23:36+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgstr "Egy hely, amit otthonnak hívunk"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "Ebben a küldetésben a magasabb szintű termelő épületek kerülnek bemutatásra."
+msgstr "Ebben a küldetésben a magasabb szintű termelő épületek és a bányászat kerülnek bemutatásra."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
@@ -55,32 +56,32 @@ msgstr "Ez az oktatójáték elmagyarázza a katonai és kiképzőépületek kez
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Könnyű."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Közepes."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Nehéz."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Kihívás."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Második Birodalom"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "A barbárok bemutatása."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -98,17 +99,17 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Amikor Chat'Karuth meghalt, nagyon öreg, három erős és törekvő fiú apja és egy erős hadúr volt, olyan hadsereggel, amely bármelyik ellenséget képes legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, Chat'Karuth a legidősebb fiára hagyta a trónt – ezzel magára haragítva másik két fiát. Az öreg hadúr tudta ezt. Ahogy az apja meghagyta neki, Thron elhagyta Al'thunran fővárosát, a korona otthonát a fák között, és visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "A száműzetés hónapjai"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "A Birodalom bemutatása."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -123,17 +124,17 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Hat hónappal ezelőtt Lutiust – a Birodalom egy ifjú tábornokát – 150 katonával az északi erdőkön túli határvidékre küldték, ahol barbár törzsek léptek a Birodalom földjére. Feladata volt a Birodalom területének védelme. Kezdetben minden nyugodt volt. Még néhány barbár gyermekkel is elbeszélgetett, és egy békés életről álmodozott – egymás mellett élve ezzel az ősi törzzsel. Kezdte magát biztonságban érezni, és katonái egyre inkább figyelmen kívül hagyták a lehetséges ellenséget. Ezt lett a vesztük. Egy márciusi éjszakán 100 barbár gyalogos megtámadta a felkészületlen sereget, mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája menekült meg."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Hajsza a tűz után"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Az Atlantisziak bemutatása."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -143,32 +144,32 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Mikor istenük csalódott az atlantisziakban, és szigetüket elsüllyesztette, egy asszony küzdelme az igazságért és egy új esélyért népének, legendává lett. Jundlina, ki a megmaradt atlantisziakat a világ egy új részére, új jövőbe vezette, kora leghatalmasabb embere lett – de ezért nagy árat fizetett: emberségét és lelkét."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Vízből tűzbe"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "A Frízek bemutatása."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Tengerész (Nehéz)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../data/campaigns/campaigns.lua:117
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Kormányos (Nagyon Nehéz)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Kapitány (Lehetetlen)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -179,7 +180,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Az óceán melletti élet folyamatos küzdelem, és ez még inkább igaz a Jeges-tenger menti fríz lakosok esetén. A legutóbbi szökőár, amely emberemlékezet óta a legpusztítóbb volt, csak egy példa a nehézségekre, amelyekkel a frízek kénytelenek szembenézni – vagy egy jel az istenektől, hogy a frissen letelepedett törzsnek teljesen új otthont kell keresnie?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -220,7 +221,7 @@ msgstr "Végül megjavították a hajót, így Lutius és emberei folytatták ú
 
 #: ../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptun bosszúja"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -270,14 +271,14 @@ msgstr "Reebaud és a törzse megérkeztek Északra. De az érkezésük a fagyot
 
 #: ../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Barátok bajban"
 
 #: ../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Reebaud és törzse boldogan élnek északon. Eközben a hátrahagyott országaik egyáltalán nem békések, és egy régi barátnak kétségbeesett szüksége van a segítségükre…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -298,7 +299,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "Ebben az oktatójátékban megismered a hadviselés titkait: hogyan toborozhatsz katonákat, miként fejlesztheted őket, és hogyan vezetheted őket a harcban. A felderítéssel is megismerkedhetsz."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -308,7 +309,7 @@ msgstr "Hajózás"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Ebben az oktatójátékban megismered a hajózást, azon belül a hajók és a kikötők kezelését valamint a kompok és víziutak használatát."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -344,15 +345,15 @@ msgstr "A nagy épülethelyek ritkák azokon a kis szigeteken. Mérlegeld a nagy
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – szerkesztette Nordfriese"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Hosszú, gazdaságra épülő játék egy gyönyörű tájon. Próbálj ki minden játékost!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -426,7 +427,7 @@ msgstr "Átkelés a horizonton"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – szerkesztette 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -434,20 +435,20 @@ msgstr "Legénység a fedélzetre, és irány a horizont."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr ""
+msgstr "Ez a térkép nem megnyerhető Zsarnok játékmódban."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomitok 3.0"
 
 #: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
-"reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
+"reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Az Alpok ékköve, a Dolomitok hegyei ősi szépségük miatt a Világörökség részévé lettek nyilvánítva. Ez a térkép amennyire lehet – és ésszerű – hű újraalkotása a területnek, amelyet északkeletről a Cortina d'Ampezzo, délkeletről pedig a Canazei határol. Ha már egy életre halálra szóló viadalra kell kelned az ellenségeiddel, akkor azt egy gyönyörű helyen is megteheted."
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -455,8 +456,8 @@ msgid ""
 " vertical – use the little building space you have wisely. A fortress at the"
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
-" you can – it's the only way to find all the precious farm spaces."
-msgstr ""
+" you can – it’s the only way to find all the precious farm spaces."
+msgstr "Sok lapos terület van a hegyeken. Sajnos a legtöbb függőleges. Használd bölcsen a kevés építési helyet. Egy erőd a keskeny hegyi átjárónál komoly akadály lehet egy ellenséges hadseregnek. Használd előnyödre a terepet! Vágd ki az összes fát, és terjeszkedj ahol csak tudsz – csak így találhatod meg a mezőgazdaság számára létfontosságú kevés helyet."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -470,25 +471,25 @@ msgstr "E smaragdzöld erdők lélegzetelállító bája számos törzset csáb�
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher: Levegő és víz"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Azonos kezdőfeltételek 3 játékos számára."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "Európa 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Hatalmas Európa térkép. Kék = Svédország, Piros = Olaszország, Sárga = Spanyolország, Zöld = Törökország, Fekete = Oroszország, Narancs = Anglia, Lila = Franciaország, Fehér = Lengyelország"
 
 #: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -674,7 +675,7 @@ msgstr "Négy törzs harcol az uralomért egy rideg területen. A nyersanyagok e
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Hatalom Gyűrűje 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -683,17 +684,17 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "Igazságos térkép 8 játékos számára, ahol természetes földrajzi alakzatok tagolják a szárazföldet. Valósághűnek szánt táj, ahol a folyók a hegyi gleccserektől a dombságokon és síkságokon keresztül a tengerbe folynak. Az arany a szénnél és vasnál sokkal ritkább. A különböző nyersanyagok gyakran egymástól távol találhatók."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Hosszú-hosszú út v2"
 
 #: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr "„Az merre van?” – „Ezer mérföldre innen.” [Porgy és Bess] Hosszú, hosszú utat kell megtenned, hogy meghódítsd az összes szigetet. Sok szerencsét!"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -742,16 +743,16 @@ msgstr "Két nagy kérdés merül fel: ki készítette ezt a hihetetlenül nagy 
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Fémek nélküli kihívás v2"
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
 " find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
 " of iron to kickstart your economy), so you have to rely on the 5% "
-"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Egyszemélyes kihívás a legtapasztaltabb játékosok számára, akiknek egyedül 6 számítógépes ellenfél ellen is túl könnyű már. A kék játékosnak nincsenek fémei (kivéve egy kevés vasat a gazdaság beindításához), úgyhogy a kiürült bánya 5%%-os termelésére kell hagyatkoznod. És továbbra is 1 a 6 ellen. (Persze ki is kapcsolhatsz néhány ellenfelet, hogy kicsivel könnyebb legyen.) Sok szerencsét!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -795,7 +796,7 @@ msgstr "Misztikus vidék, különböző tájakkal, amiket hatalmas folyók vála
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Homokos átjárók"
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -994,7 +995,7 @@ msgstr "Tengernyi gyönyörű zöld sziget várja a bátrakat, akik átkelnek az
 msgid ""
 "Take care not to build your ships in the lagoons. They cannot pass through "
 "the reefs to the main ocean, where your ports are located."
-msgstr ""
+msgstr "Ügyelj arra, hogy a hajóid ne a lagúnákban épüljenek, mert nem tudnak átkelni a zátonyokon a nyílt óceánra, ahol a kikötők vannak."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-18 17:03+0000\n"
-"PO-Revision-Date: 2021-03-02 18:13+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-29 11:09+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "Musíme najít vhodné místo pro chatu dřevorubce. Abychom si to usnad
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid ""
-"I'll show you where the menu is and where to show and hide the building "
+"I’ll show you where the menu is and where to show and hide the building "
 "spaces."
 msgstr "Ukážu ti, kde se nachází nabídka, kde se dají zobrazovat a skrývat stavební místa."
 
@@ -280,7 +280,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr "Pokud klikneš na staveniště, otevře se okno. V něm bude přehled surovin. Ty, které stále chybí, budou označeny šedě. Je zde také vidět postup stavebních prací."
+msgstr "Pokud klikneš na staveniště, otevře se okno. Můžeš v něm vidět chybějící suroviny podbarvené šedou barvou. Také zde vidíš postup stavebních prací."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
 msgid ""
@@ -533,7 +533,7 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr "Teď něco o cestě. Pamatuj: režim stavby cesty je už aktivovaný, protože jsi právě zadal stavbu lomu. Teď můžeš buďto klikáním levým tlačítkem na sousední pole cestu prodlužovat a mít tak plnou kontrolu nad její polohou, asi takto:"
+msgstr "Teď něco o cestě. Pamatuj, že režim stavby cesty je již aktivovaný, protože jsme právě zadali stavbu lomu. Teď můžeš buďto klikáním levým tlačítkem na sousední pole cestu prodlužovat a mít tak plnou kontrolu nad její polohou, asi takto:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:355
 msgid ""
