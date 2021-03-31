@@ -33,7 +33,7 @@ struct MapVersion {
 	int32_t map_version_minor;
 	uint32_t map_version_timestamp;
 	// Map compatibility information for the website
-	int needs_widelands_version_after;
+	std::string minimum_required_widelands_version;
 
 	MapVersion();
 };

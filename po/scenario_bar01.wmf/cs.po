@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-22 20:13+0000\n"
-"PO-Revision-Date: 2021-02-15 17:09+0000\n"
+"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"PO-Revision-Date: 2021-03-26 16:00+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -378,7 +378,7 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr "Jak můj otec říkával, jsou dny, kdy je třeba bojovat a dny, kdy je lepší ležet a vyčkávat, pokoušet se neusnout a nebo nezemřít, než nadejte ten správný čas. A tak vyčkávám."
+msgstr "Jak můj otec říkával, jsou dny, kdy je třeba bojovat, a dny, kdy je lepší ležet a vyčkávat, pokoušet se neusnout a nebo nezemřít dříve, než nadejte ten správný čas. A tak vyčkávám."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
@@ -437,7 +437,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Boldreth je den ode dne skleslejší. Morálka mých druhů upadá s tím, jak se přiblíží zima a my stále nebydlíme v ničem jiném než chýších a chatrčích. Nikdy jsem nezamýšlel zůstat v této divočině tak dlouho. A nikdy jsem také nemyslel, že mí bratři po celý ten čas budou vést tento nesmyslný boj."
+msgstr "Boldreth je den ode dne skleslejší. Morálka mých druhů upadá s tím, jak se blíží zima a my stále nebydlíme v ničem jiném než chýších a chatrčích. Nikdy jsem nezamýšlel zůstat v této divočině tak dlouho. A nikdy jsem také nemyslel, že mí bratři po celý ten čas budou vést tento nesmyslný boj."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
