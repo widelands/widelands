@@ -6,12 +6,20 @@ include "scripting/messages.lua"
 -- ---------------------------
 --
 -- This script contains functions that are shared by different win conditions.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/win_conditions/win_condition_functions.lua"
+--
 
 -- RST
 -- .. function:: make_extra_data(plr, name, version[, extra])
 --
 --    Constructs a string containing information about the win condition.
---    this can e.g be used to inform the  meta server about it.
+--    This can e.g be used to inform the metaserver about it.
 --
 --    :arg plr: Player to calculate extra data for
 --    :type plr: :class:`~wl.game.Player`
@@ -19,11 +27,14 @@ include "scripting/messages.lua"
 --    :type name: :class:`string`
 --    :arg version: Version the win-condition
 --    :type version: :class:`integer`
---    :arg extra: list of other extra arguments that should be passed
---       to the server. They will also be incorporated into the extra string.
+--    :arg extra: List of other extra arguments that should be passed
+--                to the server. They will also be incorporated into the
+--                extra string.
 --    :type extra: :class:`array`
 --
---    :returns: the extra string that can be passed on
+--    :returns: The extra string that can be passed on
+--
+
 function make_extra_data(plr, name, version, extra)
    extra = extra or {}
    local rv = {
@@ -52,14 +63,20 @@ win_conditions__initially_without_warehouse = {}
 --    Checks whether one of the players in the list was defeated and if yes,
 --    removes that player from the list and sends him/her a message.
 --
---    :arg plrs:    List of Players to be checked
+--    :arg plrs: List of :class:`players <wl.game.Player>` to be checked
+--    :type plrs: :class:`array`
 --    :arg heading: Heading of the message the defeated player will get
+--    :type heading: :class:`string`
 --    :arg msg:     Message the defeated player will get
---    :arg wc_name: Name of the win condition. If not nil, meth:`wl.game.Game.report_result`
---       will be called.
+--    :type msg: :class:`string`
+--    :arg wc_name: Name of the win condition. If not nil, :meth:`wl.game.report_result`
+--                  will be called.
+--    :type wc_name: :class:`string`
 --    :arg wc_ver:  Version of the win condition
+--    :type wc_ver: :class:`integer`
 --
 --    :returns: :const:`nil`
+
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
       if win_conditions__initially_without_warehouse[idx] == nil then
@@ -109,9 +126,12 @@ end
 --    the running game.
 --    A faction is a team or an unteamed player.
 --
---    :arg plrs: List the players will be saved to
+--    :arg plrs: List of :class:`players <wl.game.Player>`
+--    :type plrs: :class:`array`
 --
---    :returns: the number of factions left in game
+--    :returns: The number of factions left in game
+--
+
 function count_factions(plrs)
    local factions = 0
    local teams = {}
@@ -132,7 +152,7 @@ end
 -- RST
 -- .. function:: broadcast(plrs, header, msg[, options])
 --
---    broadcast a message to all players using
+--    Broadcast a message to all players using
 --    :meth:`send_to_inbox`. All parameters are passed
 --    literally.
 
@@ -165,12 +185,16 @@ end
 -- RST
 -- .. function:: broadcast_objective(header, msg, body)
 --
---    broadcast an objective to all players
---    technically, it is assigned to player1, because all players will see all objectives
+--    Broadcast an :class:`~wl.game.Objective` to all players. Technically,
+--    it is assigned to player1, because all players will see all objectives.
 --
---    :arg name:    A unique name for the objective
---    :arg title:   The title to be displayed for the objective
---    :arg body:    The content text to be displayed for the objective
+--    :arg name:  A unique name for the objective
+--    :type name: :class:`string`
+--    :arg title: The title to be displayed for the objective
+--    :type title: :class:`string`
+--    :arg body: The content text to be displayed for the objective
+--    :type body: :class:`string`
+
 function broadcast_objective(name, title, body)
    local plrs = wl.Game().players
    plrs[1]:add_objective(name, title, body)
@@ -182,11 +206,15 @@ end
 --
 --    Counts all owned fields for each player.
 --
---    :arg players: Table of all players
---    :arg attribute: If this is set, only count fields that have an immovable with this attribute
+--    :arg players: Table of all :class:`players <wl.game.Player>`
+--    :type players: :class:`array` of :class:`wl.game.Player`
+--    :arg attribute: If this is set, only count fields that have an immovable
+--                    with this attribute.
+--    :type attribute: :class:`string`
 --
---    :returns: a table with ``playernumber = count_of_owned_fields``  entries
+--    :returns: A table with ``playernumber=count_of_owned_fields``  entries
 --
+
 function count_owned_valuable_fields_for_all_players(players, attribute)
    attribute = attribute or ""
 
@@ -214,10 +242,14 @@ end
 --
 --    Rank the players and teams according to the highest points
 --
---    :arg all_player_points:    A table of ``playernumber = points`` entries for all players
---    :arg plrs:                 A table of all Player objects
+--    :arg all_player_points: A table of ``playernumber=points`` entries for
+--                            all players.
+--    :type all_player_points: :class:`array`
+--    :arg plrs: A table of all :class:`wl.game.Player` objects
+--    :type plrs: :class:`array`
 --
---    :returns: A table with ranked player and team points, sorted by points descending. Example:
+--    :returns: A table with ranked player and team points, sorted by points
+--              descending. Example:
 --
 --    .. code-block:: lua
 --
@@ -249,6 +281,7 @@ end
 --          },
 --       }
 --
+
 function rank_players(all_player_points, plrs)
    local ranked_players_and_teams = {}
    local team_points = {}
@@ -304,10 +337,13 @@ end
 -- RST
 -- .. function:: format_remaining_time(remaining_time)
 --
---    return a message that contains the remaining game time
---    to be used when sending status meassages
+--    Return a localized message that contains the remaining game time
+--    to be used when sending status meassages.
 --
---    :arg remaining_time:    The remaining game time in minutes
+--    :arg remaining_time: The remaining game time in minutes.
+--    :type remaining_time: :class:`integer`
+--
+
 function format_remaining_time(remaining_time)
    local h = 0
    local m = 60
@@ -338,7 +374,7 @@ function format_remaining_time(remaining_time)
 end
 
 -- RST
--- .. function:: notification_remaining_time(max_time)
+-- .. function:: notification_remaining_time(max_time, remaining_time)
 --
 --    Calculate the remaining game time for notifications.
 --    Should only be called within a coroutine, because the routine gets blocked.
@@ -349,6 +385,15 @@ end
 --    the message window pops up ever hour, 30, 20 & 10 minutes before the game ends.
 --
 --    :arg max_time:    The time maximum game time in minutes
+--    :type max_time: :class:`integer`
+--    :arg remaining_time: The remaining time until game ends. On first call
+--                         this is equal to **max_time**.
+--    :type remaining_time: :class:`integer`
+--
+--    :returns: The remaining_time and :class:`true` if the end of the
+--              predefined periods are reached.
+--
+
 function notification_remaining_time(max_time, remaining_time)
    local show_popup = false
    if (wl.Game().time == 100) then
