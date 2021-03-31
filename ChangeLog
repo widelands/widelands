@@ -154,6 +154,7 @@
     - Updated map Wide World
     - Deleted map Sun of Fire
     - Marked Desert Tournament as unbalanced and renamed it
+- Adapt maps' minimum version number (#4646)
 
 
 ### Saveloading
@@ -583,6 +584,7 @@
 - Clean up helptexts files (#4756)
 - Reworked RST for `lua_game.cc` (#4773)
 - Add-Ons: More verbose documentation (#4758)
+- Fix documentation 2 (#4776)
 
 
 ### Editor
@@ -708,6 +710,7 @@
 - MSVC support (VS 2019) (#4420)
 - Add curl dependency
 - added libdeflate as static library where tiff is to be linked (#4573)
+- Fix linking with opus (#4789)
 
 
 ### Other Issues
