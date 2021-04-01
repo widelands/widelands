@@ -66,7 +66,6 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
-#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
@@ -79,6 +78,7 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/options.h"
+#include "wlapplication_messages.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -1020,93 +1020,21 @@ bool WLApplication::init_settings() {
 
 	set_mouse_swap(get_config_bool("swapmouse", false));
 
-	// TODO(unknown): KLUDGE!
-	// Without this the following config options get dropped by check_used().
-	// Profile needs support for a Syntax definition to solve this in a
-	// sensible way
+	// Without this the config options get dropped by check_used().
+	for (const std::string& conf : get_all_parameters()) {
+		get_config_string(conf, "");
+	}
 
-	// Some of the options listed here are documented in wlapplication_messages.cc
-	get_config_bool("ai_training", false);
-	get_config_bool("auto_roadbuild_mode", false);
-	get_config_bool("auto_speed", false);
-	get_config_bool("dock_windows_to_edges", false);
-	get_config_bool("fullscreen", false);
-	get_config_bool("maximized", false);
-	get_config_bool("sdl_cursor", true);
-	get_config_bool("snap_windows_only_when_overlapping", false);
-	get_config_bool("animate_map_panning", false);
-	get_config_bool("write_syncstreams", false);
-	get_config_bool("nozip", false);
-	get_config_string("theme", "");
-	get_config_int("xres", 0);
-	get_config_int("yres", 0);
-	get_config_int("border_snap_distance", 0);
-	get_config_int("maxfps", 0);
-	get_config_int("panel_snap_distance", 0);
-	get_config_int("autosave", 0);
-	get_config_int("rolling_autosave", 0);
-	get_config_string("language", "");
-	get_config_string("metaserver", "");
-	get_config_natural("metaserverport", 0);
-	get_config_string("addon_server", "");
-	// Undocumented on command line, appears in game options
-	get_config_bool("single_watchwin", false);
-	get_config_bool("ctrl_zoom", false);
-	get_config_bool("game_clock", true);
-	get_config_int("toolbar_pos", 0);
-	get_config_bool("numpad_diagonalscrolling", false);
-	get_config_bool("edge_scrolling", false);
-	get_config_bool("tooltip_accessibility_mode", false);
-#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
-	get_config_bool("training_wheels", true);
-#endif
-	get_config_bool("inputgrab", false);
-	get_config_bool("transparent_chat", false);
-	get_config_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
-	// Undocumented. Unique ID used to allow the metaserver to recognize players
-	get_config_string("uuid", "");
-	// Undocumented, appears in online login box
-	// Whether the used metaserver login is for a registered user
-	get_config_string("registered", "");
-	// Undocumented, appears in online login box and LAN lobby
-	// The nickname used for LAN and online games
-	get_config_string("nickname", "");
-	// Undocumented, appears in online login box. The hashed password for online logins
-	get_config_string("password_sha1", "");
-	// Undocumented, appears in online login box. Whether to automatically use the stored login
-	get_config_string("auto_log", "");
-	// Undocumented, appears in LAN lobby. The last host connected to
-	get_config_string("lasthost", "");
-	// Undocumented, appears in online lobby. The name of the last hosted game
-	get_config_string("servername", "");
-	// Undocumented, appears in editor. Name of map author
-	get_config_string("realname", "");
-	// Undocumented, checkbox appears on "Watch Replay" screen
-	get_config_bool("display_replay_filenames", false);
-	get_config_bool("editor_player_menu_warn_too_many_players", false);
-	get_config_string("addons", "");
-	// Undocumented, on command line, appears in game options
-	get_config_bool("sound", "enable_ambient", true);
-	get_config_bool("sound", "enable_chat", true);
-	get_config_bool("sound", "enable_message", true);
-	get_config_bool("sound", "enable_music", true);
-	get_config_bool("sound", "enable_ui", true);
-	get_config_int("sound", "volume_ambient", 128);
-	get_config_int("sound", "volume_chat", 128);
-	get_config_int("sound", "volume_message", 128);
-	get_config_int("sound", "volume_music", 64);
-	get_config_int("sound", "volume_ui", 128);
 	// Keyboard shortcuts
 	init_shortcuts();
-	// KLUDGE!
 
 	int64_t last_start = get_config_int("last_start", 0);
-	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
+	if (last_start + 12 * 60 * 60 < time(nullptr) || get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
-		get_config_string("uuid", generate_random_uuid());
+		set_config_string("uuid", generate_random_uuid());
 	}
-	get_config_int("last_start", time(nullptr));
+	set_config_int("last_start", time(nullptr));
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, losing part of its advantage
@@ -1217,7 +1145,7 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 					continue;
 				}
 			}
-			throw ParameterError();
+			throw ParameterError(false);
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
@@ -1300,7 +1228,6 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("verbose")) {
 		g_verbose = true;
-
 		commandline_.erase("verbose");
 	}
 
@@ -1392,23 +1319,31 @@ void WLApplication::handle_commandline_parameters() {
 		set_config_bool("auto_speed", false);
 	}
 
+	if (commandline_.count("version")) {
+		init_language();
+		throw ParameterError(0);  // No message on purpose
+	}
+
+	if (commandline_.count("help-all")) {
+		init_language();
+		throw ParameterError(2);  // No message on purpose
+	}
+
+	if (commandline_.count("help")) {
+		init_language();
+		throw ParameterError(1);  // No message on purpose
+	}
+
 	// If it hasn't been handled yet it's probably an attempt to
 	// override a conffile setting
-	// With typos, this will create invalid config settings. They
-	// will be taken care of (==ignored) when saving the options
-
 	const std::map<std::string, std::string>::const_iterator commandline_end = commandline_.end();
 	for (std::map<std::string, std::string>::const_iterator it = commandline_.begin();
 	     it != commandline_end; ++it) {
-		// TODO(unknown): barf here on unknown option; the list of known options
-		// needs to be centralized
-
-		set_config_string(it->first, it->second);
-	}
-
-	if (commandline_.count("help") || commandline_.count("version")) {
-		init_language();
-		throw ParameterError();  // No message on purpose
+		if (is_parameter(it->first)) {
+			set_config_string(it->first, it->second);
+		} else {
+			throw ParameterError(1, _("Unknown config key: ") + it->first);
+		}
 	}
 }
 

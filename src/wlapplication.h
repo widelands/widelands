@@ -48,10 +48,11 @@ class Game;
 
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
-	explicit ParameterError() : std::runtime_error("") {
+	explicit ParameterError(uint8_t level, const std::string& text = "")
+	   : std::runtime_error(text), level_(level) {
 	}
-	explicit ParameterError(const std::string& text) : std::runtime_error(text) {
-	}
+
+	uint8_t level_;
 };
 
 // Callbacks input events to the UI. All functions return true when the event

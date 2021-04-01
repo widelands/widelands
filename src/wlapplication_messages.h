@@ -21,7 +21,18 @@
 #define WL_WLAPPLICATION_MESSAGES_H
 
 #include <string>
+#include <vector>
 
-void show_usage(const std::string&, const std::string&);
+struct Parameter {
+	std::string title_;
+	std::string key_;
+	std::string hint_;
+	std::string help_;
+	bool is_verbose_;
+};
+
+bool is_parameter(const std::string&);
+const std::vector<std::string> get_all_parameters();
+void show_usage(const std::string&, const std::string&, uint8_t verbosity);
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H
