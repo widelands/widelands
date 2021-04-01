@@ -14,102 +14,68 @@ Scenarios
 The most prominent usage of Lua is in scenarios: All scenario logic is
 scripted using Lua. How this works is described in the :ref:`scenario_tutorial`.
 
-Initializations of Tribes in non-scenario games
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Starting conditions of Tribes in non-scenario games
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 At the beginning of non scenario games, the player has a choice to use
 different starting conditions. There is the very essential one that just sets
 a hq and some starting wares and there are more sophisticated ones.
 
-Adding new ones is simple. All you have to do is to create a new script in
-the ``scripting`` directory of a tribe. The script should return a :class:`table`
-with two keys: ``name`` is the name for this start condition shown to the user
-and ``func`` is the function that will be called. This function takes on
-argument, a :class:`~wl.game.Player` for which to create the initial
-infrastructure.
-
-A small example. Let's assume we want to add an initialization to the
-barbarians that gives the player 80 logs, but not at once but one by one
-over a certain time. The corresponding lua script could be named
-``barbarians/scripting/sc99_init_logs.lua``. The naming decides over the
-order in which the starting conditions are listed. Let's write the script:
-
-.. code-block:: lua
-
-   use("aux", "coroutine")  -- For convenience function sleep()
-
-   -- Set the textdomain, so that all strings given to the _() function are
-   -- properly translated.
-   set_textdomain("tribes")
-
-   -- Now for the array we must return
-   return {
-      name = _ "Slow start",  -- the name. This is translated.
-      func = function(player)  -- The function to be returned
-         -- Let the player build all workers.
-         player:allow_workers("all")
-
-         -- Place the hq
-         local hq = player:place_building("barbarians_headquarters", player.starting_field)
-
-         -- Now add one log to the hq every 250 ms
-         for i=1,80 do
-            hq:set_wares("log", hq:get_wares("log") + 1)
-            sleep(250)
-         end
-   end
-   }
-
-That's it, now it can be selected when starting new games.
+To add a new starting condition see :ref:`Starting Conditions <lua_tribes_tribes_start_conditions>`.
 
 Win conditions
 ^^^^^^^^^^^^^^
 
 In non player scenarios, win conditions define when one single player has won
 a game. The definitions of win conditions is very similar to defining
-initializations: We have to create a Lua script in
-``/data/scripting/win_conditions`` which returns an array with ``name``,
-``description`` and ``func``. Let's also make up a quick example: The first
-player to have 200 logs in his HQ wins the game. All others loose. Save the
-following file as ``/data/scripting/win_conditions/havest_logs.lua``.
+starting conditions: We have to create a Lua script in
+``/data/scripting/win_conditions`` which returns an array with some attributes.
+
+Here is an example of the "Autocrat" win condition:
 
 .. code-block:: lua
 
-   use("aux", "coroutine") -- for sleep
+   include "scripting/coroutine.lua" -- for sleep
+   include "scripting/win_conditions/win_condition_functions.lua"
 
-   -- For translations, textdomain must be win_conditions
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
 
-   return {
-      name = _ "Harvest logs",
-      description = _ "The first player with 200 logs wins!",
+   include "scripting/win_conditions/win_condition_texts.lua"
+
+   local wc_name = "Autocrat"
+   -- This needs to be exactly like wc_name, but localized, because wc_name
+   -- will be used as the key to fetch the translation in C++
+   local wc_descname = _("Autocrat")
+   local wc_version = 2
+   local wc_desc = _ "The tribe or team that can defeat all others wins the game! This means the opponents do not have any headquarters, ports or warehouses left."
+   local r = {
+      name = wc_name,
+      description = wc_desc,
+      peaceful_mode_allowed = false,
       func = function()
-         -- Find all valid players.
          local plrs = wl.Game().players
 
-         -- Iterate all players, check if he is the winner
-         local winner = nil
-         local losers = {}
-         while not winner do
-            sleep(5000) -- we do this every 5 seconds
-            for idx,p in ipairs(plrs) do -- iterate the players array
-               local hq = p.starting_field.immovable
-               if hq:get_wares("log") >= 200 then
-                  -- We found the winner
-                  winner = p
-                  losers = plrs
-                  table.remove(losers,idx) -- Remove the winner from the losers table
-               end
-            end
-         end
+         -- set the objective with the game type for all players
+         broadcast_objective("win_condition", wc_descname, wc_desc)
 
-         -- Send the winner a hurray message, the losers a boo
-         for idx,p in ipairs(losers) do
-            p:send_message(_"You lost!", _"You lost this game!")
-         end
-         winner:send_message(_"You won!", _"You won this game!")
+         -- Iterate all players, if one is defeated, remove him
+         -- from the list, send him a defeated message and give him full vision
+         repeat
+            sleep(5000)
+            check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+         until count_factions(plrs) <= 1
+
+         -- Send congratulations to all remaining players
+         broadcast_win(plrs,
+               won_game.title,
+               won_game.body,{},
+               wc_descname, wc_version
+         )
+
       end,
    }
+   pop_textdomain()
+   return r
 
 Hooks
 ^^^^^
