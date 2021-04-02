@@ -76,6 +76,7 @@ end
 -- (but not the builder, he will be added to the list of workers below)
 for name,amount in pairs(wl.Game():get_building_description("frisians_port").buildcost) do
    if wares[name] then wares[name] = wares[name] - amount end
+   if name == "gold" or name == "gold_ore" then has_gold = has_gold - amount end
 end
 
 -- Saved workers

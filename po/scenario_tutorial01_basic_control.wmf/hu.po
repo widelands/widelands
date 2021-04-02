@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-26 18:26+0000\n"
+"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"PO-Revision-Date: 2021-04-01 21:52+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "A Célkitűzések ablak megnyitásához és bezárásához kattints a C�
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr "A többi ablakhoz hasonlóan be tudod zárni jobb gombos kattintással is."
+msgstr "A legtöbb ablakot, így ezt is, be tudod zárni jobb gombos rákattintással is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -805,7 +805,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr "A Widelandsben minden ablak bezárható, ha jobb egérgombbal kattintasz rajtuk (a történetek üzenetei kivételével, amelyekben ‘OK’ gomb található). Egyes ablakok a képernyő alján lévő gombokkal és menükkel is be-, illetve kikapcsolhatóak."
+msgstr "A Widelandsben minden ablak bezárható, ha jobb egérgombbal kattintasz rajtuk (a történetek üzenetei kivételével, amelyekben ‘Rendben’ gomb található). Egyes ablakok a képernyő alján lévő gombokkal és menükkel is be-, illetve kikapcsolhatóak."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."

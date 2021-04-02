@@ -9,6 +9,14 @@ include "scripting/richtext.lua"
 -- Functions to simplify text formatting in scenarios and make it consistent.
 -- Most of these functions are simple wrapper functions for our :ref:`richtext system <wlrichtext>`.
 -- This file will include :ref:`richtext.lua` for you for additional formatting functions.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/richtext_scenarios.lua"
+--
 
 -- RST
 -- .. function:: speech(img, clr, title, text)
@@ -22,9 +30,14 @@ include "scripting/richtext.lua"
 --        end
 --
 --    :arg img: name of the image to use for this speaker
+--    :type img: :class:`string`
 --    :arg clr: a valid 6 char hex color to use for the name of this speaker
+--    :type clr: :class:`string`
 --    :arg title: Title of this text. Use empty string if you don't want any.
+--    :type title: :class:`string`
 --    :arg text: The text itself.
+--    :type text: :class:`string`
+--
 --    :returns: the formatted text.
 
 function speech(img, clr, title, text)
@@ -44,10 +57,31 @@ end
 -- RST
 -- .. function:: paragraphdivider()
 --
---    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function
---    and need to divide the speech into multiple paragraphs.
+--    Closes a paragraph and opens a new paragraph. Use this when you format
+--    a :ref:`richtext<richtext.lua>` string and need to divide it into multiple paragraphs. Just concatenate
+--    this function with the Lua string concatenation operator ``..``
 --
 --    :returns: close_p() .. open_p()
+--
+--    Example:
+--
+--    .. code-block:: lua
+--
+--       include "scripting/richtext.lua"
+--       include "scripting/richtext_scenarios.lua"
+--       include "scripting/messages.lua"
+--
+--       local text = p("This is the first paragraph"
+--                      .. paragraphdivider() ..
+--                      "This is the second paragraph"
+--                     )
+--
+--       campaign_message_box({title = "Window title",
+--                             body = text,
+--                             w = 200,
+--                             h = 150,
+--                             position = "top"})
+--
 
 function paragraphdivider()
    return close_p() .. open_p()
@@ -58,6 +92,11 @@ end
 -- .. function:: objective_text(heading, body)
 --
 --    Provides nice formatting for objective texts.
+--
+--    :arg heading: The heading
+--    :type heading: :class:`string`
+--    :arg body: The text
+--    :type body: :class:`string`
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text.

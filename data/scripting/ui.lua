@@ -12,6 +12,14 @@ include "scripting/coroutine.lua"
 -- .. Note::
 --    Do not use any of these functions for multiplayer scenarios or winconditions,
 --    because a game will likely desync then.
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/ui.lua"
+--
 
 -- Sleep until we are done animating.
 function _await_animation()
@@ -26,11 +34,33 @@ end
 --
 --    Make a nice moving transition to center on the 'map_pixel', which is a table
 --    that must contain 'x' and 'y' keys. The function will return as soon as
---    the transition is completed.
+--    the transition is completed. Usually this function is useful when
+--    scrolling back after using :meth:`scroll_to_field` or
+--    :meth:`wait_for_roadbuilding_and_scroll`. The return value of these
+--    functions can be passed to ``scroll_to_map_pixel`` to move back to the
+--    previous location.
 --
---    :arg map_pixel: pixel to focus on.
+--    :arg map_pixel: pixels to focus on.
 --    :type map_pixel: :class:`table`
 --
+--    Example:
+--
+--    .. code-block:: lua
+--
+--       include "scripting/ui.lua"
+--       include "scripting/messages.lua"
+--
+--       local rocks_field = wl.Game().map:get_field(12, 34)
+--
+--       -- scroll to 'rocks_field'; 'prior_location' will be the position from where we are scrolling from
+--       local prior_location = scroll_to_field(rocks_field)
+--       campaign_message_box({title= "New observation",
+--                             body = "We have found some rocks!",
+--                             position = "top"})
+--       -- after clicking 'OK' scroll back
+--       scroll_to_map_pixel(prior_location)
+--
+
 function scroll_to_map_pixel(map_pixel)
    _await_animation()
    wl.ui.MapView():scroll_to_map_pixel(map_pixel.x, map_pixel.y)
@@ -142,7 +172,7 @@ end
 --    This function is used only by the testsuite.
 --
 --    :arg name: Name of the button to click.
---    :type name: :class:`string`.
+--    :type name: :class:`string`
 --
 --    :returns: :const:`true` if a button was clicked
 --
@@ -201,9 +231,13 @@ end
 -- .. function:: wait_for_roadbuilding_and_scroll(field)
 --
 --    Sleeps while player is in roadbuilding mode, then calls
---    scroll_to_field(field).
+--    :meth:`scroll_to_field(field) <scroll_to_field>`.
+--
+--    :arg field: Field to scroll to
+--    :type field: :class:`wl.map.Field`
 --
 --    :returns: The return value of `scroll_to_field`.
+
 function wait_for_roadbuilding_and_scroll(field)
    _await_animation()
    wait_for_roadbuilding()
