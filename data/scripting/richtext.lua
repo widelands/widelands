@@ -16,6 +16,13 @@
 -- If you're writing a scenario, you should also have a look at
 -- :ref:`richtext_scenarios.lua`.
 --
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/richtext.lua"
+--
 -- - `Blocks and Positioning`_
 -- - `Headings and Paragraphs`_
 -- - `Text Formatting`_
@@ -36,11 +43,13 @@
 -- RST
 -- .. function:: rt(text_or_attributes[, text = nil])
 --
+--    Usually, it is not necessary to wrap your text with this function. If it
+--    is missing the backend will take care of it. Wrap your text with this
+--    function if you wish to add some attributes to the whole area of text
+--    e.g. specifying a different background color for the whole area.
+--
 --    Wraps a block of text into Lua rich text.
 --    Only call this once for the whole text that gets sent to the backend.
---    There is no general need to wrap an rt tag around your text,
---    because the backend will take care of it.
---    So, only use this function if you wish to add some attributes to the tag.
 --
 --    :arg text_or_attributes: see the :ref:`rt tag's documentation <rt_tags_rt>`
 --                             for a list of attributes and their descriptions.

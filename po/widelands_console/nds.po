@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-22 20:24+0000\n"
+"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"PO-Revision-Date: 2021-03-30 20:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Dat is Widelands-Versioon %s"
 
 #: ../../src/wlapplication_messages.cc:42
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Gebruuk: widelands <option0>=<value0> ... <optionN>=<valueN>"
+msgstr "Gebruuk: widelands <Optioon1>=<Weert1> … <OptioonN>=<WeertN>"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "       widelands <save.wgf>/<replay.wrpl>"
@@ -37,7 +37,7 @@ msgstr "Instellens:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=Weert överschrifft de Instellen vun de Instellens-Datei"
+msgstr " --<Instellens-Naam>=Weert överschrifft de Instellen vun de Instellens-Datei"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
@@ -53,7 +53,7 @@ msgstr " --datadir=LISTNAAM   Bruuk deeses Verteeknis för de Widelands-Daten-Da
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=LISTNAME   Bruuk deeses Verteeknis för de Widelands Instellens-Dateien, sekerte Speele un Uptekens"
+msgstr " --homedir=LISTNAME   Bruuk deeses Verteeknis för de Widelands Instellens-Dateien, sekert Spelen un Uptekens"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
@@ -67,7 +67,7 @@ msgstr "                      Normaal is %USERPROFILE%\\.widelands"
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr " --localedir=LISTNAAM  Bruuk deeses Verteeknis för de Widelands-Översetten-Dateien"
+msgstr " --localedir=LISTNAAM Bruuk deeses Verteeknis för de Widelands-Översetten-Dateien"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -181,7 +181,7 @@ msgstr " --scenario=DATEINAAM Stracks de Kaart DATEINAAM as Rutfödderung starte
 
 #: ../../src/wlapplication_messages.cc:125
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=DATEINAAM Stracks dat sekerte Speel DATEINAAM laden."
+msgstr " --loadgame=DATEINAAM Stracks dat sekert Speel DATEINAAM laden."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
@@ -226,11 +226,11 @@ msgstr " --xres=[...]         Fenster-Breddt in Bildtüttels."
 
 #: ../../src/wlapplication_messages.cc:149
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...] Fenster-Höcht in Bildtüttels."
+msgstr " --yres=[...]         Fenster-Höcht in Bildtüttels."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr " --maxfps=[5 ...]     Hoogste Tahl vun tekenten Fensters pro Sekünne."
+msgstr " --maxfps=[5 ...]     Hoogste Tahl vun tekent Fensters pro Sekünn."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
