@@ -10,15 +10,15 @@
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2019-2020
+# Renaud Bouchard, 2019-2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-03 10:20+0000\n"
-"Last-Translator: David D\n"
+"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"PO-Revision-Date: 2021-03-30 08:56+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -363,7 +363,7 @@ msgstr "Cliquez simplement sur les emplacements vides, puis faites défiler la l
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Maintenant essayez ceci. Un petit point en vert, jaune, ou rouge vous indiquera si l'objet est arrivé, en route ou s'il n'est pas disponible respectivement."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
