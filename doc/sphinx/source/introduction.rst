@@ -28,54 +28,72 @@ Win conditions
 
 In non player scenarios, win conditions define when one single player has won
 a game. The definitions of win conditions is very similar to defining
-starting conditions: We have to create a Lua script in
-``/data/scripting/win_conditions`` which returns an array with some attributes.
-
-Here is an example of the "Autocrat" win condition:
+starting conditions which returns an array with name, description and func. 
+Let’s make up a quick example: The first player to have 200 logs in his HQ 
+wins the game. All others loose. Save the following file as 
+/data/scripting/win_conditions/havest_logs.lua.
 
 .. code-block:: lua
 
-   include "scripting/coroutine.lua" -- for sleep
-   include "scripting/win_conditions/win_condition_functions.lua"
+   include "scripting/coroutine.lua"                              -- for sleep()
+   include "scripting/win_conditions/win_condition_functions.lua" -- for broadcast_objective()
 
-   push_textdomain("win_conditions")
+   -- For translations, textdomain must be win_conditions
+   local textdomain = "win_conditions"
+   push_textdomain(textdomain)
 
-   include "scripting/win_conditions/win_condition_texts.lua"
-
-   local wc_name = "Autocrat"
+   local wc_name = "Harvest logs"
    -- This needs to be exactly like wc_name, but localized, because wc_name
    -- will be used as the key to fetch the translation in C++
-   local wc_descname = _("Autocrat")
-   local wc_version = 2
-   local wc_desc = _ "The tribe or team that can defeat all others wins the game! This means the opponents do not have any headquarters, ports or warehouses left."
-   local r = {
+   local wc_descname = _("Harvest logs")
+   local wc_version = 1
+   local wc_desc = _("The first player with 200 logs in his headquarter wins!")
+
+   local wc_definition = {                              -- The array defining the win condition
       name = wc_name,
       description = wc_desc,
-      peaceful_mode_allowed = false,
-      func = function()
-         local plrs = wl.Game().players
+      peaceful_mode_allowed = true,
+      func = function()                                 -- The function processing the win condition
+         local plrs = wl.Game().players                 -- All players
+         broadcast_objective("win_condition",           -- Set objective with win condition for all players
+                             wc_descname, 
+                             wc_desc)
 
-         -- set the objective with the game type for all players
-         broadcast_objective("win_condition", wc_descname, wc_desc)
+         local winner = nil                             -- No winner yet
+         local losers = {}                              -- Table of loosers
+         local map = wl.Game().map                      -- Access to map objects
+         while not winner do                            -- Iterate all players, check if he is the winner
+            sleep(5000)                                 -- Do this every 5 seconds
+            for idx, p in ipairs(plrs) do               -- Iterate the players array
+               
+               local sf = map.player_slots[p.number].starting_field    -- The starting field of this player
+               local hq = sf.immovable                  -- The headquarters of this player
+               if hq:get_wares("log") >= 200 then       -- Check if more than 200 logs are stored
+                  winner = p                            -- This player is the winner
+                  losers = plrs                         -- Store all players and ...
+                  table.remove(losers,idx)              -- .. remove the winner from the losers table
+               end
+            end
+         end
 
-         -- Iterate all players, if one is defeated, remove him
-         -- from the list, send him a defeated message and give him full vision
-         repeat
-            sleep(5000)
-            check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-         until count_factions(plrs) <= 1
-
-         -- Send congratulations to all remaining players
-         broadcast_win(plrs,
-               won_game.title,
-               won_game.body,{},
-               wc_descname, wc_version
-         )
-
+         push_textdomain(textdomain)                    -- Each function containing localized strings
+                                                        -- needs pushing the textdomain again
+         for idx,p in ipairs(losers) do                 -- Iterate all losers and send the status
+            p:send_to_inbox(_("You lost!"), 
+                            _("You lost this game!"),
+                            {popup=true}
+                            )
+         end
+         winner:send_to_inbox(_("You won!"),             -- The winner get also the status
+                              _("You won this game!"),
+                              {popup=true}
+                              )
+         pop_textdomain()                                -- Pop textdomain from function
       end,
    }
-   pop_textdomain()
-   return r
+   pop_textdomain()                                      -- Pop textdomain from file
+   return wc_definition                                  -- Return the defined wincondition
+
 
 Hooks
 ^^^^^
