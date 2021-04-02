@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-27 23:19+0000\n"
+"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"PO-Revision-Date: 2021-04-02 01:25+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1238,9 +1238,8 @@ msgstr "Maniókafőzde"
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:52
 msgid "working"
-msgstr "működik"
+msgstr "a munka"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1296,7 +1295,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava root plantation has no cleared soil to "
 "plant her seeds."
-msgstr "A földművesnek, aki ezen a manióka ültetvényen dolgozik, nincs üres termőtalaja a magok elvetéséhez."
+msgstr "A manióka ültetvényen dolgozó földművesnek nincs üres termőtalaja a magok elvetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -1391,13 +1390,13 @@ msgstr "hősi csizma készítése"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
 msgid "making a padded vest"
-msgstr ""
+msgstr "gumimellény készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:161
 msgid "making a padded protector"
-msgstr ""
+msgstr "gumipáncél készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
@@ -1454,7 +1453,7 @@ msgstr "talajminőség javítása"
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Gold Digger Dwelling"
-msgstr "Aranyásó kunyhóAranyásó kunyhó"
+msgstr "Aranyásó kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
@@ -1543,7 +1542,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr "A vadász-gyűjtögető, aki itt dolgozik, nem talál se vadat, se halat a munkaterületén."
+msgstr "Az itt dolgozó vadász-gyűjtögető nem talál se vadat, se halat a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
@@ -1570,7 +1569,7 @@ msgstr "Dzsungelfenntartó kunyhó"
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:52
 msgid "planting trees"
-msgstr "fákat ültet"
+msgstr "fa ültetése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
@@ -1603,7 +1602,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "A liánvágó, aki itt dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy dzsungelfenntartó kunyhó építését."
+msgstr "Az itt dolgozó liánvágó nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy dzsungelfenntartó kunyhó építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1662,7 +1661,7 @@ msgstr "Kötélfonó bódé"
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
 msgid "making a rope"
-msgstr ""
+msgstr "kötél fonása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
@@ -1706,7 +1705,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kőfaragó műhely"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1718,16 +1716,15 @@ msgstr "Kőfaragó műhely"
 msgid "making a shovel"
 msgstr "lapát készítése"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
 msgid "making a felling ax"
 msgstr "favágó balta készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1742,9 +1739,9 @@ msgstr "csákány készítése"
 msgid "making a machete"
 msgstr "macsete készítése"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1752,7 +1749,6 @@ msgstr "macsete készítése"
 msgid "making kitchen tools"
 msgstr "konyhai eszközök készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1770,9 +1766,9 @@ msgstr "kalapács készítése"
 msgid "making a chisel"
 msgstr "véső készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1834,7 +1830,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr "A kőfejtő, aki ennél a kunyhónál dolgozik, nem talál követ a munkaterületén."
+msgstr "A kunyhónál dolgozó kőfejtő nem talál követ a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -1918,14 +1914,15 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr "A hordár, aki ennél a vízgyűjtőnél dolgozik, nem talál vizet a közelben."
+msgstr "A vízgyűjtőnél dolgozó hordár nem talál vizet a közelben."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr "Vadon őrző kunyhója"
+msgstr "Vadonőrző kunyhó"
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -1968,7 +1965,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "A favágó, aki ennél a favágókunyhónál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy dzsungelfenntartó kunyhó építését."
+msgstr "Az itt dolgozó favágó nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy dzsungelfenntartó kunyhó építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2034,7 +2031,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr "A feketegyökér termesztőnek, aki ezen a farmon dolgozik, nincs üres termőtalaja a magok elültetéséhez."
+msgstr "A farmon dolgozó feketegyökér termesztőnek nincs üres termőtalaja a magok elültetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
@@ -2121,7 +2118,7 @@ msgstr "kvarc bányászata"
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:93
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:120
 msgid "mining diamonds"
-msgstr "gyémántok bányászata"
+msgstr "gyémánt bányászata"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:154
 msgid "No Crystals"
@@ -2158,7 +2155,7 @@ msgstr "kukorica betakarítása"
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "A földművesnek, aki ezen a farmon dolgozik, nincs üres termőtalaja a magok elvetéséhez."
+msgstr "A farmon dolgozó földművesnek nincs üres termőtalaja a magok elvetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
@@ -2194,7 +2191,7 @@ msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
 "fish in his work area. Remember that you can only regenerate your fish "
 "resources if there are some fish left to breed."
-msgstr "A haltenyésztő, aki ennél a haltenyésztőháznál dolgozik nem talál halat a munkaterületén. Ne felejtsd el, hogy csak akkor tudod helyreállítani a halak számát, ha maradt még tenyészthető hal."
+msgstr "Az itt dolgozó haltenyésztő nem talál halat a munkaterületén. Ne felejtsd el, hogy csak akkor tudja szaporítani a halakat, ha maradt még tenyészthető hal."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2213,7 +2210,7 @@ msgstr "Halászház"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:53
 msgid "fishing"
-msgstr "horgászik"
+msgstr "hal fogása"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 msgctxt "atlanteans_building"
@@ -2221,7 +2218,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "A halász, aki ennél a halászháznál dolgozik, nem talál halat a munkaterületén. Ne felejtsd el, hogy növelheted a halak számát, ha építesz egy haltenyésztőházat."
+msgstr "Az itt dolgozó halász nem talál halat a munkaterületén. Ne felejtsd el, hogy növelheted a halak számát, ha építesz egy haltenyésztőházat."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2238,7 +2235,7 @@ msgstr "Aranyszálfonó malom"
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:48
 msgid "spinning gold"
-msgstr "aranyszál készítése"
+msgstr "aranyszál fonása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:8
@@ -2277,7 +2274,7 @@ msgstr "Vadászház"
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:39
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:52
 msgid "hunting"
-msgstr "vadászik"
+msgstr "vadászat"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:59
@@ -2390,7 +2387,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr "A kőfaragó, aki ennél a kőfejtőnél dolgozik, nem talál követ a munkaterületén."
+msgstr "A kőfejtőnél dolgozó kőfaragó nem talál követ a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:8
@@ -2498,7 +2495,7 @@ msgstr "halászháló készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:128
 msgid "making a hook pole"
-msgstr "kampós rudat készít"
+msgstr "kampós rúd készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
@@ -2594,7 +2591,7 @@ msgstr "Kút"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
+msgstr "A kútnál dolgozó hordár nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:8
@@ -2608,7 +2605,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy erdészház építését."
+msgstr "Az itt dolgozó favágó nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2763,7 +2760,7 @@ msgstr "búza aratása"
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "A földművesnek, aki ezen a farmon dolgozik, nincs üres termőtalaja a magok elvetéséhez."
+msgstr "A farmon dolgozó földművesnek nincs üres termőtalaja a magok elvetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
@@ -2874,7 +2871,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "A vadász, aki ennél a vadászkunyhónál dolgozik, nem talál vadat a munkaterületén. Ne felejtsd el, hogy építhetsz egy vadőrházat, több vad szabadon eresztéséhez."
+msgstr "Az itt dolgozó vadász nem talál vadat a munkaterületén. Ne felejtsd el, hogy építhetsz vadőrházat a vadak szaporításához."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
@@ -2920,7 +2917,7 @@ msgstr "A vasércbánya fő telére kimerült. Számíts erősen csökkent megt�
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:8
 msgctxt "barbarians_building"
 msgid "Lime Kiln"
-msgstr "Mészégető"
+msgstr "Mészégető kemence"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:52
@@ -2939,7 +2936,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "A favágó, aki ennél a favágókunyhónál dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy erdőőrkunyhó építését."
+msgstr "Az itt dolgozó favágó nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy erdőőrkunyhó építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -2986,7 +2983,7 @@ msgstr "Kőfejtő"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "A kőfaragó, aki ennél a kőfejtőnél dolgozik, nem talál követ a munkaterületén."
+msgstr "A kőfejtőnél dolgozó kőfaragó nem talál követ a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3017,7 +3014,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "A kertésznek, aki ennél a nádudvarnál dolgozik, nincs termőtalaja a magok elvetéséhez."
+msgstr "A nádudvarnál dolgozó kertésznek nincs termőtalaja a magok elvetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
@@ -3088,7 +3085,7 @@ msgstr "Kút"
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:59
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
+msgstr "A kútnál dolgozó hordár nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:8
@@ -3323,7 +3320,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fát a munkaterületén. Fontold meg a lebontását vagy megsemmisítését, vagy egy erdészház építését."
+msgstr "Az itt dolgozó favágó nem talál fát a munkaterületén. Fontold meg a favágóház lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3409,7 +3406,7 @@ msgstr "márvány kifejtése"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "A kőfaragó, aki ennél a kőfejtőnél dolgozik, nem talál követ a munkaterületén."
+msgstr "A kőfejtőnél dolgozó kőfaragó nem talál követ a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3499,7 +3496,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr "A szőlősgazdának, aki ennél a szőlőskertnél dolgozik, nincs termőtalaja a szőlőtőkék elültetéséhez."
+msgstr "A szőlőskertnél dolgozó szőlősgazdának nincs termőtalaja a szőlőtőkék elültetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:8
@@ -3551,7 +3548,7 @@ msgstr "Kút"
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
+msgstr "A kútnál dolgozó hordár nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:8
@@ -3562,22 +3559,22 @@ msgstr "Borászat"
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:53
 msgid "making wine"
-msgstr "bort készít"
+msgstr "bor készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Aqua Farm"
-msgstr ""
+msgstr "Halgazdaság"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:89
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:89
 msgid "No Ponds"
-msgstr ""
+msgstr "Nincsenek halastavak"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:90
 msgid "Out of Fish Ponds"
-msgstr ""
+msgstr "Nincsenek halastavak"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:91
 msgctxt "frisians_building"
@@ -3586,7 +3583,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr ""
+msgstr "A halgazdaságban dolgozó halásznak nincsenek halastavai a munkaterületén. Gondoskodj róla, hogy legyen működő agyagverem a közelben, a halgazdaság pedig legyen ellátva minden szükséges áruval, vagy fontold meg az épület lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3668,18 +3665,18 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "A méhészháznál dolgozó méhész nem talál virágzó mezőket vagy bokrokat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy farm vagy gyümölcsös építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Berry Farm"
-msgstr ""
+msgstr "Gyümölcsös"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:53
 msgid "planting bushes"
-msgstr ""
+msgstr "bokor ültetése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:8
@@ -3691,12 +3688,12 @@ msgstr "Kovácsműhely"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:90
 msgid "forging a felling ax"
-msgstr ""
+msgstr "favágóbalta kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:101
 msgid "forging a pick"
-msgstr ""
+msgstr "csákány kovácsolása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:8
@@ -3777,7 +3774,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "A vályogvető, aki ennél az agyagveremnél dolgozik, nem talál sík terepet a munkaterületén. Fontold meg az agyagverem lebontását és máshol való felépítését."
+msgstr "Az agyagveremnél dolgozó vályogvető nem talál sík terepet a munkaterületén. Fontold meg az agyagverem lebontását és máshol való felépítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
@@ -3810,20 +3807,20 @@ msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtér
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Fruit Collector’s House"
-msgstr ""
+msgstr "Gyümölcsszedő ház"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:53
 msgid "gathering berries"
-msgstr ""
+msgstr "gyümölcs szüretelése"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgid "No Bushes"
-msgstr ""
+msgstr "Nincsenek bokrok"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
 msgid "Out of Berries"
-msgstr ""
+msgstr "Nincsenek gyümölcsök"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
 msgctxt "frisians_building"
@@ -3831,7 +3828,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr ""
+msgstr "Az itt dolgozó gyümölcsszedő nem talál bokrokat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy gyümölcsös építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -3994,7 +3991,7 @@ msgstr "Kőfejtő"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "A kőfaragó, aki ennél a kőfejtőnél dolgozik, nem talál követ a munkaterületén."
+msgstr "A kőfejtőnél dolgozó kőfaragó nem talál követ a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4032,7 +4029,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr ""
+msgstr "A nádfarmon dolgozó nádtermesztőnek nincs szabad termőföldje nád ültetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
@@ -4051,26 +4048,26 @@ msgstr "rénszarvas nevelése"
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:103
 msgctxt "frisians_building"
 msgid "producing fur"
-msgstr ""
+msgstr "szőrme készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Rock Mine"
-msgstr ""
+msgstr "Kőbánya"
 
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "A kőbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. Fontold meg a fejlesztését, lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Rock Mine"
-msgstr ""
+msgstr "Mély kőbánya"
 
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
 msgctxt "frisians_building"
@@ -4078,7 +4075,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "A kőbánya fő telére kimerült. Számíts erősen csökkent megtérülésre. A bánya nem fejleszthető tovább, fontold meg a lebontását vagy megsemmisítését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
@@ -4090,12 +4087,12 @@ msgstr "Felderítőház"
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:8
 msgctxt "frisians_building"
 msgid "Sewing Room"
-msgstr ""
+msgstr "Varroda"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:80
 msgid "sewing fur garment"
-msgstr ""
+msgstr "kacagány varrása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:8
@@ -4113,7 +4110,7 @@ msgstr "Füstölő"
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:8
 msgctxt "frisians_building"
 msgid "Tailor’s Shop"
-msgstr ""
+msgstr "Szabóműhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment
 #. because ...
@@ -4153,7 +4150,7 @@ msgstr "Szövőmalom"
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:70
 msgid "weaving cloth"
-msgstr ""
+msgstr "ruha szövése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:8
@@ -4164,7 +4161,7 @@ msgstr "Kút"
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
+msgstr "A kútnál dolgozó hordár nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:8
@@ -4178,7 +4175,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "A favágó, aki ennél a favágóháznál dolgozik, nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy erdészház építését."
+msgstr "Az itt dolgozó favágó nem talál fákat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -4199,7 +4196,7 @@ msgstr "Kiképző tisztás"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
 msgid "sleeping"
-msgstr "alszik"
+msgstr "alvás"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
@@ -4746,7 +4743,7 @@ msgstr "Hatékonyság"
 #: ../../data/tribes/economy_profiles/empire:5
 #: ../../data/tribes/economy_profiles/frisians:5
 msgid "Stockpile"
-msgstr "Raktárkészlet"
+msgstr "Felhalmozás"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:70
@@ -4802,221 +4799,221 @@ msgstr "Áfonyabokor (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:14
 msgid "Black Currant (tiny)"
-msgstr ""
+msgstr "Feketeribizli (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:38
 msgid "Black Currant (small)"
-msgstr ""
+msgstr "Feketeribizli (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:62
 msgid "Black Currant (medium)"
-msgstr ""
+msgstr "Feketeribizli (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:86
 msgid "Black Currant (ripe)"
-msgstr ""
+msgstr "Feketeribizli (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:14
 msgid "Red Currant (tiny)"
-msgstr ""
+msgstr "Ribizli (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:38
 msgid "Red Currant (small)"
-msgstr ""
+msgstr "Ribizli (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:62
 msgid "Red Currant (medium)"
-msgstr ""
+msgstr "Ribizli (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:86
 msgid "Red Currant (ripe)"
-msgstr ""
+msgstr "Ribizli (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:14
 msgid "Desert Hackberry (tiny)"
-msgstr ""
+msgstr "Sivatagi ostorfa (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:38
 msgid "Desert Hackberry (small)"
-msgstr ""
+msgstr "Sivatagi ostorfa (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:62
 msgid "Desert Hackberry (medium)"
-msgstr ""
+msgstr "Sivatagi ostorfa (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:86
 msgid "Desert Hackberry (ripe)"
-msgstr ""
+msgstr "Sivatagi ostorfa (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:14
 msgid "Juniper (tiny)"
-msgstr ""
+msgstr "Boróka (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:38
 msgid "Juniper (small)"
-msgstr ""
+msgstr "Boróka (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:62
 msgid "Juniper (medium)"
-msgstr ""
+msgstr "Boróka (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:86
 msgid "Juniper (ripe)"
-msgstr ""
+msgstr "Boróka (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:14
 msgid "Raspberry Bush (tiny)"
-msgstr ""
+msgstr "Málna (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:38
 msgid "Raspberry Bush (small)"
-msgstr ""
+msgstr "Málna (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:62
 msgid "Raspberry Bush (medium)"
-msgstr ""
+msgstr "Málna (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:86
 msgid "Raspberry Bush (ripe)"
-msgstr ""
+msgstr "Málna (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:14
 msgid "Sea Buckthorn (tiny)"
-msgstr ""
+msgstr "Homoktövis (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:38
 msgid "Sea Buckthorn (small)"
-msgstr ""
+msgstr "Homoktövis (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:62
 msgid "Sea Buckthorn (medium)"
-msgstr ""
+msgstr "Homoktövis (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:86
 msgid "Sea Buckthorn (ripe)"
-msgstr ""
+msgstr "Homoktövis (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:14
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "Bűzösbokor (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:38
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "Bűzösbokor (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:62
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "Bűzösbokor (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:86
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "Bűzösbokor (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:14
 msgid "Strawberries (tiny)"
-msgstr ""
+msgstr "Földieper (apró)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:38
 msgid "Strawberries (small)"
-msgstr ""
+msgstr "Földieper (kicsi)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:62
 msgid "Strawberries (medium)"
-msgstr ""
+msgstr "Földieper (közepes)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:86
 msgid "Strawberries (ripe)"
-msgstr ""
+msgstr "Földieper (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (harvested)"
-msgstr "Learatott feketegyökér-ültetvény"
+msgstr "Feketegyökér (learatott)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
-msgstr "Közepes feketegyökér"
+msgstr "Feketegyökér (közepes)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr "Apró feketegyökér"
+msgstr "Feketegyökér (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (small)"
-msgstr "Kis feketegyökér"
+msgstr "Feketegyökér (kicsi)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr "Apró feketegyökér"
+msgstr "Feketegyökér (apró)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (harvested)"
-msgstr ""
+msgstr "Manióka ültetvény (learatott)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (medium)"
-msgstr ""
+msgstr "Manióka ültetvény (közepes)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (ripe)"
-msgstr ""
+msgstr "Manióka ültetvény (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (small)"
-msgstr ""
+msgstr "Manióka ültetvény (kicsi)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (tiny)"
-msgstr ""
+msgstr "Manióka ültetvény (apró)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (harvested)"
-msgstr "Learatott kukoricamező"
+msgstr "Kukoricamező (learatott)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (medium)"
-msgstr "Éretlen kukoricamező"
+msgstr "Kukoricamező (közepes)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
-msgstr "Kukorica palánták"
+msgstr "Kukoricamező (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (small)"
-msgstr "Fiatal kukoricamező"
+msgstr "Kukoricamező (kicsi)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
-msgstr "Kukorica palánták"
+msgstr "Kukoricamező (apró)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/destroyed_building/init.lua:8
@@ -5052,7 +5049,7 @@ msgstr "Szőlőtőke (pici)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:8
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr "Faszénrakás égetése"
+msgstr "Izzó faszénrakás"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:8
@@ -5234,7 +5231,7 @@ msgstr "Hajóépítési terület"
 #: ../../data/tribes/immovables/trees/balsa/init.lua:236
 #: ../../data/tribes/immovables/trees/balsa/init.lua:314
 msgid "Balsa Tree (Sapling)"
-msgstr ""
+msgstr "Balzafa (csemete)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:98
@@ -5242,7 +5239,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:254
 #: ../../data/tribes/immovables/trees/balsa/init.lua:332
 msgid "Balsa Tree (Pole)"
-msgstr ""
+msgstr "Balzafa (közepes)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:116
@@ -5250,7 +5247,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:272
 #: ../../data/tribes/immovables/trees/balsa/init.lua:350
 msgid "Balsa Tree (Mature)"
-msgstr ""
+msgstr "Balzafa (kifejlett)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:134
@@ -5258,7 +5255,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:290
 #: ../../data/tribes/immovables/trees/balsa/init.lua:368
 msgid "Balsa Tree (Old)"
-msgstr ""
+msgstr "Balzafa (öreg)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:136
@@ -5266,27 +5263,27 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:292
 #: ../../data/tribes/immovables/trees/balsa/init.lua:370
 msgid "Balsa Tree"
-msgstr ""
+msgstr "Balzafa"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:8
 msgid "Cocoa Tree (sapling)"
-msgstr ""
+msgstr "Kakaófa (csemete)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:32
 msgid "Cocoa Tree (pole)"
-msgstr ""
+msgstr "Kakaófa (közepes)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:56
 msgid "Cocoa Tree (mature)"
-msgstr ""
+msgstr "Kakaófa (kifejlett)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:80
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "Kakaófa (öreg)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -5299,7 +5296,7 @@ msgstr "Halott fa"
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:236
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:314
 msgid "Ironwood Tree (Sapling)"
-msgstr ""
+msgstr "Vasfa (csemete)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:98
@@ -5307,7 +5304,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:254
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:332
 msgid "Ironwood Tree (Pole)"
-msgstr ""
+msgstr "Vasfa (közepes)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:116
@@ -5315,7 +5312,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:272
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:350
 msgid "Ironwood Tree (Mature)"
-msgstr ""
+msgstr "Vasfa (kifejlett)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:134
@@ -5323,7 +5320,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:290
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:368
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr "Vasfa (öreg)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:136
@@ -5331,7 +5328,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:292
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:370
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "Vasfa"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:80
@@ -5339,7 +5336,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:236
 #: ../../data/tribes/immovables/trees/rubber/init.lua:314
 msgid "Rubber Tree (Sapling)"
-msgstr ""
+msgstr "Gumifa (csemete)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:98
@@ -5347,7 +5344,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:254
 #: ../../data/tribes/immovables/trees/rubber/init.lua:332
 msgid "Rubber Tree (Pole)"
-msgstr ""
+msgstr "Gumifa (közepes)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:116
@@ -5355,7 +5352,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:272
 #: ../../data/tribes/immovables/trees/rubber/init.lua:350
 msgid "Rubber Tree (Mature)"
-msgstr ""
+msgstr "Gumifa (kifejlett)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:134
@@ -5363,7 +5360,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:290
 #: ../../data/tribes/immovables/trees/rubber/init.lua:368
 msgid "Rubber Tree (Old)"
-msgstr ""
+msgstr "Gumifa (öreg)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:136
@@ -5371,37 +5368,37 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:292
 #: ../../data/tribes/immovables/trees/rubber/init.lua:370
 msgid "Rubber Tree"
-msgstr ""
+msgstr "Gumifa"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (harvested)"
-msgstr ""
+msgstr "Búzamező (learatott)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (medium)"
-msgstr ""
+msgstr "Búzamező (közepes)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (ripe)"
-msgstr ""
+msgstr "Búzamező (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (small)"
-msgstr ""
+msgstr "Búzamező (kicsi)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (tiny)"
-msgstr ""
+msgstr "Búzamező (apró)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:11
 #: ../../data/tribes/initialization/atlanteans/init.lua:11
@@ -5905,7 +5902,7 @@ msgstr "Épületek"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr "Mozdíthatatlan"
+msgstr "Mozdíthatatlan tereptárgyak"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
@@ -7578,7 +7575,7 @@ msgstr "Deszka"
 #: ../../data/tribes/wares/protector_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Protector"
-msgstr ""
+msgstr "Gumipáncél"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:8
@@ -7807,7 +7804,7 @@ msgstr "Tunika"
 #: ../../data/tribes/wares/vest_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Vest"
-msgstr ""
+msgstr "Gumimellény"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
@@ -8605,7 +8602,7 @@ msgstr "Méhész"
 #: ../../data/tribes/workers/frisians/berry_farmer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Berry Farmer"
-msgstr ""
+msgstr "Gyümölcskertész"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/blacksmith/init.lua:8
@@ -8707,7 +8704,7 @@ msgstr "Vadász"
 #: ../../data/tribes/workers/frisians/landlady/init.lua:8
 msgctxt "frisians_worker"
 msgid "Landlady"
-msgstr ""
+msgstr "Gazdasszony"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/miner/init.lua:8
