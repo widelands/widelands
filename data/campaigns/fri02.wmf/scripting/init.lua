@@ -46,13 +46,14 @@ elseif not campaign_data.port_soldiers then
    }
 end
 
+has_gold = 0
 for name,amount in pairs(campaign_data.wares) do
    if name == "pick" then
       lost_miners = true
    elseif name == "iron" or name == "iron_ore" or name == "scrap_metal_mixed" or name == "scrap_iron" then
       lost_metals = true
    elseif name == "gold" or name == "gold_ore" then
-      has_gold = true
+      has_gold = has_gold + amount
    end
 end
 for name,amount in pairs(campaign_data.workers) do

@@ -147,7 +147,9 @@ void MultilineEditbox::Data::reset_selection() {
 void MultilineEditbox::Data::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
 	start = snap_to_char(std::min(selection_start, selection_end));
 	end = std::max(selection_start, selection_end);
-	end = Utf8::is_utf8_extended(text[end]) ? next_char(end) : snap_to_char(end);
+	if (end < text.size()) {
+		end = Utf8::is_utf8_extended(text[end]) ? next_char(end) : snap_to_char(end);
+	}
 }
 
 void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
@@ -246,6 +248,10 @@ uint32_t MultilineEditbox::Data::next_char(uint32_t cursor) {
  * Return the starting offset of the (multi-byte) character that @p cursor points to.
  */
 uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
+	if (cursor >= text.size()) {
+		return cursor;
+	}
+
 	while (cursor > 0 && Utf8::is_utf8_extended(text[cursor])) {
 		--cursor;
 	}
@@ -253,6 +259,10 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 }
 
 uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor) {
+	if (cursor >= txt.size()) {
+		return cursor;
+	}
+
 	while (cursor > 0 && Utf8::is_utf8_extended(txt[cursor])) {
 		--cursor;
 	}
