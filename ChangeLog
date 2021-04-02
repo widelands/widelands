@@ -49,6 +49,7 @@
 - Fri03 Fixes (#4738)
     - Fix duplicate soldier detection
     - Add missing translation markups
+- Fix detection of amount of starting gold in fri02 (#4797)
 
 
 ### Scripting
@@ -137,6 +138,7 @@
 - Discovery and New World starting conditions for amazons (#4705)
 - Make atlantean Discovery start easier (#4709)
 - 3588 fix artifact messages (#4727)
+- Fix amazons fortified village (#4793)
 
 
 ### Maps
@@ -495,6 +497,7 @@
 - Add-Ons: Get rid of required restarts (#4758): Rebuild the texture atlas instead, and be more intelligent about detecting whether this is required.
 - Fix MP dropdown conditions (#4780)
 - Prevent large dropdowns dropping out of the screen (#4782)
+- Add text size checks in multiline editbox (#4800)
 
 
 ### Internationalization
@@ -538,6 +541,7 @@
 - Fix textdomains for add-on maps and support localized map set directory names (#4743)
 - Fix npgettext textdomains for add-ons (#4762)
 - Tribe-specific No Scout Hut Connected hint (#4770)
+- Fix textdomain for keyboard shortcuts (#4799)
 
 
 ### Help and Documentation
