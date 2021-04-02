@@ -89,8 +89,8 @@ init = {
       place_building_in_region(plr, "amazons_warriors_gathering", sf:region(11), {
          inputs = {
             amazons_bread = 2,
-            fish = 5,
-            meat = 5,
+            fish = 4,
+            meat = 4,
             chocolate = 3,
          },
       })
