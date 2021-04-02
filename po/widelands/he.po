@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"POT-Creation-Date: 2021-03-29 19:08+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
@@ -1366,19 +1366,19 @@ msgstr ""
 msgid "Elemental data"
 msgstr ""
 
-#: ../../src/game_io/game_loader.cc:169 ../../src/game_io/game_saver.cc:84
+#: ../../src/game_io/game_loader.cc:152 ../../src/game_io/game_saver.cc:84
 msgid "Economies"
 msgstr ""
 
-#: ../../src/game_io/game_loader.cc:176 ../../src/game_io/game_saver.cc:91
+#: ../../src/game_io/game_loader.cc:159 ../../src/game_io/game_saver.cc:91
 msgid "AI"
 msgstr ""
 
-#: ../../src/game_io/game_loader.cc:183 ../../src/game_io/game_saver.cc:98
+#: ../../src/game_io/game_loader.cc:166 ../../src/game_io/game_saver.cc:98
 msgid "Command queue"
 msgstr ""
 
-#: ../../src/game_io/game_loader.cc:191 ../../src/map_io/map_saver.cc:148
+#: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:148
 #: ../../src/map_io/widelands_map_loader.cc:391
 #: ../../src/wlapplication_options.cc:466
 #: ../../src/wui/interactive_player.cc:215
@@ -1386,7 +1386,7 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: ../../src/game_io/game_loader.cc:208
+#: ../../src/game_io/game_loader.cc:191
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
 msgid "Finishing"
 msgstr ""
@@ -1656,62 +1656,62 @@ msgstr ""
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:251
+#: ../../src/logic/editor_game_base.cc:252
 #, c-format
 msgid "Creating player %d…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:313
+#: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:547
+#: ../../src/logic/editor_game_base.cc:553
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:550
+#: ../../src/logic/editor_game_base.cc:556
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:553
+#: ../../src/logic/editor_game_base.cc:559
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:151
+#: ../../src/logic/game.cc:153
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:238 ../../src/logic/game.cc:284
-#: ../../src/logic/game.cc:379 ../../src/logic/game.cc:436
+#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
+#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:333
+#: ../../src/logic/game.cc:376
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:587
+#: ../../src/logic/game.cc:627
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:604 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:605 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:1074
+#: ../../src/logic/game.cc:1114
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1076
+#: ../../src/logic/game.cc:1116
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -5179,18 +5179,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -5825,9 +5825,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6230,8 +6230,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6777,8 +6777,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
