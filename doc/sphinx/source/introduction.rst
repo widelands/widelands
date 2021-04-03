@@ -178,3 +178,5 @@ The tests communicate with the test runner through standard output. If a
 script outputs "All Tests passed." the test is considered to pass, otherwise
 to fail. Whenever a savegame is written inside a test it is later loaded by
 the test runner as an additional test.
+
+See also: `Regression Tests <https://www.widelands.org/wiki/RegressionTests/>`_
