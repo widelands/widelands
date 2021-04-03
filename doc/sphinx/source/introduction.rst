@@ -123,7 +123,8 @@ something like this:
 
 Every time widelands samples the current statistics, it will call the
 ``calculator`` function for each player and expects an unsigned integer value
-back.
+back. Note that the argument ``p`` in the calculator function **isn't** an object 
+of :class:`~wl.game.Player` so you can not 
 
 Debug console
 ^^^^^^^^^^^^^
