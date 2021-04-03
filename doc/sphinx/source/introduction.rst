@@ -111,7 +111,6 @@ something like this:
 
 .. code-block:: lua
 
-   hooks = {}
    hooks.custom_statistic = {
       name = _ "Unchanging statistic",
       pic = "map:mycool_stat_picture.png", -- For the menu button
@@ -123,16 +122,15 @@ something like this:
 
 Every time widelands samples the current statistics, it will call the
 ``calculator`` function for each player and expects an unsigned integer value
-back. Note that the argument ``p`` in the calculator function **isn't** an object 
-of :class:`~wl.game.Player` so you can not 
+back.
 
 Debug console
 ^^^^^^^^^^^^^
 
-In widelands debug builds you can open a debug console by pressing ``F6``. You
-can enter Lua commands here that act in the global environment: That is if you
-are in a scenario you can access the global variables and alter all Lua
-objects that are in the global scope:
+In widelands debug builds you can open a debug console by pressing 
+``SHIFT+CTRL+SPACE``. You can enter Lua commands here that act in the global
+environment: That is if you are in a scenario you can access the global
+variables and alter all Lua objects that are in the global scope:
 
 .. code-block:: lua
 
@@ -145,7 +143,24 @@ This makes for excellent cheating in debug builds, but note that this is for
 debug purposes only -- in network games running Lua commands this way will
 desync and therefore crash the game and also replays where you changed the
 game state via the debug console will not work. It is very useful
-for debugging scenarios though.
+for debugging scenarios though. It is also possible to load a script from any
+directory which makes testing of functions very easy. Let's assume you test
+a function like:
+
+.. code-block:: lua
+
+   function all_players()
+      for idx, player in ipairs(wl.Game().players) do
+        print("Player:" player.name, player.number, player.tribe.name) 
+      end
+   end
+
+Save this as ``tests.lua``. Now start a normal game, open the debug console 
+by pressing ``SHIFT+CTRL+SPACE`` and enter ``dofile("/full/path/to/tests.lua")``.
+Now you can run the function ``all_players()``. If the output is not what you
+expected just change the function, load the file again with ``dofile()`` and 
+call the function again. For convenience you can get the last 5 commands back by
+pressing ``↑``.
 
 Regression testing infrastructure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
