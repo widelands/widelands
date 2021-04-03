@@ -748,6 +748,7 @@ std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape)
 }
 
 std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
+	i18n::Textdomain textdomain("widelands");
 	std::vector<std::string> mods;
 	if (sym.mod & KMOD_SHIFT) {
 		mods.push_back(pgettext("hotkey", "Shift"));
