@@ -166,7 +166,7 @@ again. Let's dive into an example right away:
    include "scripting/coroutine.lua"
 
    function print_a_word(word)
-      while 1 do
+      while true do
          print(word)
          sleep(1000)         -- always sleep a bit, otherwise the system got stuck
       end
@@ -218,7 +218,7 @@ Let's consider a final example on how coroutines can interact with each other.
    end
 
    function change_a()
-      while 1 do
+      while true do
          if a == "Hello" then
             a = "World"
          else
@@ -363,7 +363,7 @@ into the translation files in the same order as they appear in the source code,
 so the context will remain intact for the translators.
 
 Also, please hide all formatting control characters from our translators. This
-includes HTML tags as well as new lines in the code! For an example, have a
-look at ``data/campaigns/atl01.wmf/scripting/texts.lua``.
+includes :ref:`richtext tags <richtext.lua>` as well as new lines in the code!
+For an example, have a look at ``data/campaigns/atl01.wmf/scripting/texts.lua``.
 
 .. vim:ft=rst:spelllang=en:spell

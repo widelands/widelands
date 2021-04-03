@@ -39,7 +39,7 @@ a game. The definitions of win conditions is very similar to defining
 starting conditions which returns an array with ``name``, ``description`` and ``func``. 
 Let’s make up a quick example: The first player to have 200 logs in his HQ 
 wins the game. All others loose. Save the following file as 
-``/data/scripting/win_conditions/havest_logs.lua``.
+``data/scripting/win_conditions/havest_logs.lua``.
 
 .. code-block:: lua
 
@@ -79,7 +79,7 @@ wins the game. All others loose. Save the following file as
                if hq:get_wares("log") >= 200 then       -- Check if more than 200 logs are stored
                   winner = p                            -- This player is the winner
                   losers = plrs                         -- Store all players and ...
-                  table.remove(losers,idx)              -- .. remove the winner from the losers table
+                  table.remove(losers,idx)              -- ... remove the winner from the losers table
                end
             end
          end
@@ -136,7 +136,7 @@ Debug console
 ^^^^^^^^^^^^^
 
 In widelands debug builds you can open a debug console by pressing 
-``SHIFT+CTRL+SPACE``. You can enter Lua commands here that act in the global
+``Shift+Ctrl+Space``. You can enter Lua commands here that act in the global
 environment: That is if you are in a scenario you can access the global
 variables and alter all Lua objects that are in the global scope:
 
@@ -164,11 +164,11 @@ a function like:
    end
 
 Save this as ``tests.lua``. Now start a normal game, open the debug console 
-by pressing ``SHIFT+CTRL+SPACE`` and enter ``dofile("/full/path/to/tests.lua")``.
+by pressing ``Shift+Ctrl+Space`` and enter ``dofile("/full/path/to/tests.lua")``.
 Now you can run the function ``all_players()``. If the output is not what you
-expected just change the function, load the file again with ``dofile()`` and 
+expected just change the function, load the file again with ``dofile`` and 
 call the function again. For convenience you can get the last 5 commands back by
-pressing ``↑``.
+pressing the Up arrow key.
 
 Regression testing infrastructure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
