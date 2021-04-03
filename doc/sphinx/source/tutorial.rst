@@ -37,20 +37,11 @@ following inside:
 
 .. code-block:: lua
 
-   print "###############################"
-   print "Hello World"
-   print "###############################"
+   print("###############################")
+   print("Hello World")
+   print("###############################")
 
 Save this file inside the maps directory as ``scripting/init.lua``.
-
-.. note::
-
-   When we talk about text files, we mean the very basic representation of
-   characters that a computer can understand. That means that any fancy word
-   processor (Word, OpenOffice and their like) will likely produce the wrong
-   file format when saving. Make sure to use a plain text editor (like Notepad
-   under Windows, nedit under Linux and TextEdit under Mac OS X). If you have
-   programmed before, you likely already have found your favorite editor....
 
 Now we try to start this scenario. We can either directly select the map when
 starting a new single player game and mark the scenario box or we manually
@@ -68,9 +59,9 @@ Widelands should start up and immediately load a map. Look at it's output on
 the cmdline (Under Windows, you might have to look at ``stdout.txt``) and you
 should see our text been printed::
 
-   ###############################"
-   Hello World"
-   ###############################"
+   ###############################
+   Hello World
+   ###############################
 
 So what we learned is that widelands will run the script
 ``scripting/init.lua`` as soon as the map is finished loading. This script is
@@ -103,19 +94,19 @@ values in the table, either by using the ``d[key]`` syntax or by using the
 
 .. code-block:: lua
 
-   d = {
+   d = {             -- d is a table with key=value pairs
       value_a = 23,
       b  = 34,
       90 = "Hallo"
    }
 
-   d.value_a -- is 23
-   d['value_a'] -- the same
-   d['b'] -- the same as d.b
+   d.value_a         -- is 23
+   d['value_a']      -- the same
+   d['b']            -- the same as d.b
 
-   d[90]  -- is "Hallo"
+   d[90]             -- is "Hallo"
 
-   b.90 -- this is illegal
+   b.90              -- this is illegal (key is not a string)
 
 Tables that are indexed with integers starting from 1 are called
 :class:`arrays` throughout the documentation. Lua also accepts them as
@@ -124,11 +115,10 @@ operator and they can be specially created:
 
 .. code-block:: lua
 
-   a = { [1] = "Hi", [2] = "World }
-   b = { "Hi", "World" }
-   -- a and b have the same content
+   a = { [1] = "Hi", [2] = "World" }
+   b = { "Hi", "World" }            -- b has the same content than a
 
-   print(#a) -- will print 2
+   print(#a)                        -- will print 2, the amount of key/value pairs in a 
 
 Calling conventions
 ^^^^^^^^^^^^^^^^^^^
@@ -140,10 +130,11 @@ surprise for most programmers is that Lua throws values away without notice.
 
    function f(a1, a2, a3) print("Hello World:", a1, a2, a3) end
 
-   f() --- Prints 'Hello World: nil  nil  nil'
-   f("a", "house", "blah") --- Prints 'Hello World: a  house  blah'
+   f()                        -- Prints 'Hello World: nil  nil  nil'
+   f("a", "house")            -- Prints 'Hello World: a  house  nil'
+   f("a", "house", "blah")    -- Prints 'Hello World: a  house  blah'
 
-   f("a", "a", "a", "a", "a") --- Prints 'Hello World: a  a  a'
+   f("a", "a", "a", "a", "a") -- Prints 'Hello World: a  a  a'
 
 The same also goes for return values.
 
@@ -151,37 +142,14 @@ The same also goes for return values.
 
    function f() return 1, 2, 3 end
 
-   a = f()  -- a == 1
-   a,b = f() -- a == 1, b == 2
-   a,b,c,d = f() -- a == 1, b == 2, c == 3, d == nil
+   a = f()        -- a == 1
+   a,b = f()      -- a == 1, b == 2
+   a,b,c,d = f()  -- a == 1, b == 2, c == 3, d == nil
 
-Another thing that comes to a surprise for some developer is the syntactic
-sugar that Lua adds to calls. The following rules apply: If a function is
-given exactly one argument and this argument is either a :class:`string` or a
-:class:`table`, the surrounding parenthesis can be left out. This makes for
-something similar to optional arguments. The following two lines are equal
-
-.. code-block:: lua
-
-   some_function{a = "Hi", b = "no"}
-   some_function({a = "Hi", b = "no"})
-
-The first one though is often used for functions that take mostly optional
-arguments. A second use case is for strings:
-
-.. code-block:: lua
-
-   print "hi"
-   print("hi") -- same
-
-We use this in widelands to our advantage to implement internationalization
-via a global function called :func:`_` (an long standing gettext paradigm):
-
-.. code-block:: lua
-
-   print _ "Hello Word" -- Will print in German: "Hallo Welt"
-   print( _("Hello World")) -- the same in more verbose writing
-
+Lua allows to optionally leave out the parentheses of a function call in
+certain situations. This is considered bad style and sometimes results in
+ambiguous statements. It is recommended to always use parentheses in a 
+function call.
 
 Coroutines
 ^^^^^^^^^^
@@ -195,12 +163,12 @@ again. Let's dive into an example right away:
 
 .. code-block:: lua
 
-   use("aux", "coroutine")
+   include "scripting/coroutine.lua"
 
    function print_a_word(word)
       while 1 do
          print(word)
-         sleep(1000)
+         sleep(1000)         -- always sleep a bit, otherwise the system got stuck
       end
    end
 
@@ -208,8 +176,8 @@ again. Let's dive into an example right away:
 
 If you put this code into our ``init.lua`` file from the earlier example, you
 will see "Hello World!" begin printed every second on the console. Let's
-digest this example. The first line imports the ``coroutine.lua`` script from
-the auxiliary Lua library that comes bundled with widelands. We use two
+digest this example. The first line imports the :doc:`autogen_auxiliary_coroutine`
+script from the auxiliary Lua library that comes bundled with widelands. We use two
 functions from this in the rest of the code, namly :func:`sleep` and
 :func:`run`.
 
@@ -240,7 +208,7 @@ Let's consider a final example on how coroutines can interact with each other.
 
 .. code-block:: lua
 
-   use("aux", "coroutine")
+   include "scripting/coroutine.lua"
 
    function print_a()
       while 1 do
@@ -260,31 +228,66 @@ Let's consider a final example on how coroutines can interact with each other.
       end
    end
 
-   a = "Hello"
+   a = "Hello"                -- global variable
    run(print_a)
    run(change_a)
 
 The first coroutine will print out the current value of a, the second changes
-the value of the variable a asynchronously. So we see in this example that
+the value of the variable ``a`` asynchronously. So we see in this example that
 coroutines share the same environment and can therefore use global variables
 to communicate with each other.
 
+Scope of Variables
+^^^^^^^^^^^^^^^^^^
+
+In the last example the used variable named ``a`` is in the global scope.
+`Global scope` means that this variable can be accessed (and changed) in all
+functions and files the scenario uses. This can lead to bad errors if in one
+part of the scenario the value of the variable get changed while in other parts
+of the scenario the value of the variable get calculated. E.g. the example given
+above will overwrite the global function :meth:`a` and further calls to
+:meth:`a` will not work as expected anymore. To prevent such bad errors it is
+recommended to:
+
+1. give global variables a descriptive name, e.g.::
+
+      player_1 = wl.Game().players[1]
+
+2. use the keyword ``local`` for variables used in functions and files,
+   e.g.::
+
+      local a = "Hello"          -- the scope of this 'a' is the file where it is defined; global 'a' is not changed
+      local function change_a()  -- the scope of this function is the file; it can't be called from outside the file
+         local a = "World"       -- the scope of this 'a' is the function, both local 'a' and global 'a' are not changed
+         ....
+      end
+
+For a step by step tutorial for scenarios take a look at the
+`Scenario Tutorial <https://www.widelands.org/wiki/Scenario%20Tutorial/>`_ in
+our wiki.
 
 Preparing Strings for Translation
 ---------------------------------
 
-If you want your scenario to be translatable into different languages, it is important to keep in mind that languages differ widely in their grammar. This entails that word forms and word order will change, and some languages have more than one plural form. So, here are some pointers for good string design. For examples for the formatting discussed here, have a look at ``data/maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua`` in the source code.
+If you want your scenario to be translatable into different languages, it is
+important to keep in mind that languages differ widely in their grammar. This
+entails that word forms and word order will change, and some languages have
+more than one plural form. So, here are some pointers for good string design.
+For examples for the formatting discussed here, have a look at 
+``data/maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua`` in
+the source code.
 
 Marking a String for Translation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to tell Widelands to add a string to the list of translatable strings, simply add an underscore in front of it, like this:
+Use the function :meth:`_` to mark a string for translation, e.g.
 
 .. code-block:: lua
 
-   print _"Translate me"
+   print(_("Translate me"))
 
-Strings that contain number variables have to be treated differently; cf. the ``Numbers in Placeholders`` section below.
+Strings that contain number variables have to be treated differently; cf.
+the `Numbers in Placeholders`_ section below.
 
 Translator Comments
 ^^^^^^^^^^^^^^^^^^^
@@ -301,18 +304,22 @@ prefixed by ``-- TRANSLATORS:``, like this:
 
    -- TRANSLATORS: This is just a test string
    -- TRANSLATORS: With a multiline comment
-   print _"Hello Word"
+   print(_("Hello Word"))
 
 
 Working with Placeholders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you have multiple variables in your script that you wish to include dynamically in the same string, please use ordered placeholders to give translators control over the word order. We have implemented a special Lua function for this called `bformat <https://www.widelands.org/docs/wl/autogen_globals/#string.bformat>`_ that works just like the ``boost::format`` function in C++. Example:
+If you have multiple variables in your script that you wish to include
+dynamically in the same string, please use ordered placeholders to give
+translators control over the word order. We have implemented a special Lua
+function for this called :meth:`string.bformat` that works just like the
+``boost::format`` function in C++. Example:
 
 .. code-block:: lua
 
-   local world = _("world") -- Will print in Gaelic: "saoghal"
-   local hello = _("hello") -- Will print in Gaelic: "halò"
+   local world = _("world")                              -- Will print in Gaelic: "saoghal"
+   local hello = _("hello")                              -- Will print in Gaelic: "halò"
    -- TRANSLATORS: %1$s = hello, %2$s = world
    print  (_ "The %1$s is '%2$s'"):bformat(hello, world) -- Will print in Gaelic: "Is 'halò' an saoghal"
 
@@ -320,7 +327,12 @@ If you have multiple variables in your script that you wish to include dynamical
 Numbers in Placeholders
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Not all languages' number systems work the same as in English. For example, the Gaelic word for "cat" conveniently is "cat", and this is how its plural works: `0 cat`, `1 or 2 chat`, `3 cait`, `11 or 12 chat`, `13 cait`, `20 cat`... So, instead of using ``_`` to fetch the translation, any string containing a placeholder that is a number should be fetched with ``ngettext`` instead. First, you fetch the correct plural form, using the number variable and ``ngettext``:
+Not all languages' number systems work the same as in English. For example, the
+Gaelic word for "cat" conveniently is "cat", and this is how its plural works:
+`0 cat`, `1 or 2 chat`, `3 cait`, `11 or 12 chat`, `13 cait`, `20 cat`...
+So, instead of using ``_`` to fetch the translation, any string containing a
+placeholder that is a number should be fetched with :meth:`ngettext` instead.
+First, you fetch the correct plural form, using the number variable and ``ngettext``:
 
 .. code-block:: lua
 
@@ -331,16 +343,27 @@ Then you still need to format the string with your variable:
 
 .. code-block:: lua
 
-   print pretty_plurals_string:format(number_of_worlds)
+   print pretty_plurals_string:bformat(number_of_worlds)
 
-If you have a string with multiple numbers in it that would trigger plural forms, split it into separate strings that you can fetch with ``ngettext``. You can then combine them with ``bformat`` and ordered placeholders.
+If you have a string with multiple numbers in it that would trigger plural
+forms, split it into separate strings that you can fetch with ``ngettext``.
+You can then combine them with ``bformat`` and ordered placeholders.
 
 
 Handling Long Strings
 ^^^^^^^^^^^^^^^^^^^^^
 
-If you have a really long string, e.g. a dialog stretching over multiple sentences, check if there is a logical place where you could split this into two separate strings for translators. We don't have a "break after x characters" rule for this; please use common sense here. It is easier for translators to translate smaller chunks, and if you should have to change the string later on, e.g. to fix a typo, you will break less translations. The strings will be put into the translation files in the same order as they appear in the source code, so the context will remain intact for the translators.
+If you have a really long string, e.g. a dialog stretching over multiple
+sentences, check if there is a logical place where you could split this into
+two separate strings for translators. We don't have a "break after x characters"
+rule for this; please use common sense here. It is easier for translators to
+translate smaller chunks, and if you should have to change the string later on,
+e.g. to fix a typo, you will break less translations. The strings will be put
+into the translation files in the same order as they appear in the source code,
+so the context will remain intact for the translators.
 
-Also, please hide all formatting control characers from our translators. This includes HTML tags as well as new lines in the code! For an example, have a look at ``data/campaigns/atl01.wmf/scripting/texts.lua``
+Also, please hide all formatting control characters from our translators. This
+includes HTML tags as well as new lines in the code! For an example, have a
+look at ``data/campaigns/atl01.wmf/scripting/texts.lua``.
 
 .. vim:ft=rst:spelllang=en:spell
