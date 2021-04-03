@@ -214,9 +214,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		    info.file_list.files.size() + info.file_list.locales.size()) {
 			valid = false;
 			log_err("Skip add-on %s because: Found %u files and %u locales, but %u checksums",
-					info.internal_name.c_str(), static_cast<unsigned>(info.file_list.files.size()),
-			                 static_cast<unsigned>(info.file_list.locales.size()),
-			                 static_cast<unsigned>(info.file_list.checksums.size()));
+			        info.internal_name.c_str(), static_cast<unsigned>(info.file_list.files.size()),
+			        static_cast<unsigned>(info.file_list.locales.size()),
+			        static_cast<unsigned>(info.file_list.checksums.size()));
 		}
 		for (size_t screenies = next_number(output); screenies; --screenies) {
 			const std::string s_name = next_word(output);
