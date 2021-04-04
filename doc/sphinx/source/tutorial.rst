@@ -17,8 +17,10 @@ we have to create new text files in the ``scripting/`` directory of the map,
 therefore we want to have the map as a plain directory, so that we can
 easily add new scripting files. There are two ways to achieve this:
 
-   1. Set the nozip option in the advanced options inside of Widelands.
-      Widelands will now save maps (and savegames) as plain directories.
+   1. In the widelands main menu open the tab *"Options → Saving"* and uncheck
+      the option *"Compress widelands data files..."*. Widelands will now save maps
+      (and savegames) as plain directories.
+
    2. Manually unpack the zip file. To do this, do the following:
 
       1. Rename the file: ``map.wmf``-> ``map.zip``

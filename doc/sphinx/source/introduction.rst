@@ -172,13 +172,13 @@ pressing the Up arrow key.
 Regression testing infrastructure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `test` directory in the repository contains the regression test suite. A
+The ``test`` directory in the repository contains the regression test suite. A
 test is either a savegame plus a set of Lua scripts (test_*.lua) or a map that
 contains in its scripting directory a set of (test_*.lua and/or
 editor_test*.lua which are only run in the Editor) files.
 
-Each test starts Widelands using either the `--editor`, `--loadgame` or
-`--scenario` switch and additionally, the `--script` switch can be supplied to
+Each test starts Widelands using either the ``--editor``, ``--loadgame`` or
+``--scenario`` switch and additionally, the ``--script`` switch can be supplied to
 run a Lua script directly after the game is ready to take commands.
 
 The tests communicate with the test runner through standard output. If a
