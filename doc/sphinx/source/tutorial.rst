@@ -368,8 +368,19 @@ e.g. to fix a typo, you will break less translations. The strings will be put
 into the translation files in the same order as they appear in the source code,
 so the context will remain intact for the translators.
 
+Note that simply concatenating two translatable strings with ``..``
+does not work in all languages. To achieve the desired effect, use
+the function :meth:`join_sentences` with the two sentences as
+arguments, or :meth:`paragraphdivider` if you wish the text to
+continue on a new paragraph.
+
+Never assemble a single localized sentence with the ``..``
+operator. Use :meth:`string.bformat` with appropriate
+placeholder substitutions for such cases.
+
 Also, please hide all formatting control characters from our translators. This
 includes :ref:`richtext tags <richtext.lua>` as well as new lines in the code!
 For an example, have a look at ``data/campaigns/atl01.wmf/scripting/texts.lua``.
+
 
 .. vim:ft=rst:spelllang=en:spell

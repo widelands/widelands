@@ -135,7 +135,7 @@ Debug console
 ^^^^^^^^^^^^^
 
 In widelands debug builds you can open a debug console by pressing 
-``Shift+Ctrl+Space``. You can enter Lua commands here that act in the global
+``Ctrl+Shift+Space``. You can enter Lua commands here that act in the global
 environment: That is if you are in a scenario you can access the global
 variables and alter all Lua objects that are in the global scope:
 
@@ -163,7 +163,7 @@ a function like:
    end
 
 Save this as ``tests.lua``. Now start a normal game, open the debug console 
-by pressing ``Shift+Ctrl+Space`` and enter ``dofile("/full/path/to/tests.lua")``.
+by pressing ``Ctrl+Shift+Space`` and enter ``dofile("/full/path/to/tests.lua")``.
 Now you can run the function ``all_players()``. If the output is not what you
 expected just change the function, load the file again with ``dofile`` and 
 call the function again. For convenience you can get the last 5 commands back by
