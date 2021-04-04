@@ -165,20 +165,20 @@ again. Let's dive into an example right away:
 
    include "scripting/coroutine.lua"
 
-   function print_a_word(word)
-      while true do
+   function print_a_word(word)         -- this function is a coroutine
+      while true do                    -- run this loop forever
          print(word)
-         sleep(1000)         -- always sleep a bit, otherwise the system got stuck
+         sleep(1000)                   -- important call, see the note below
       end
    end
 
-   run(print_a_word, "Hello World!")
+   run(print_a_word, "Hello World!")   -- calling the coroutine with an argument
 
 If you put this code into our ``init.lua`` file from the earlier example, you
 will see "Hello World!" begin printed every second on the console. Let's
 digest this example. The first line imports the :doc:`autogen_auxiliary_coroutine`
 script from the auxiliary Lua library that comes bundled with widelands. We use two
-functions from this in the rest of the code, namly :func:`sleep` and
+functions from this in the rest of the code, namely :func:`sleep` and
 :func:`run`.
 
 Then we define a simple function :func:`print_a_word` that takes one argument
@@ -199,10 +199,15 @@ for widelands.
 
 .. note::
 
-   Keep in mind that widelands won't do anything else while you're
-   coroutine is running, so if you plan to do long running tasks consider
-   adding some calls to :func:`sleep` here and there so that widelands can act
-   and update the user interface.
+   Keep in mind that widelands won't do anything else while the coroutine is
+   running, that's why the call to :func:`sleep` is very important.
+   If a call to :func:`sleep` is missing, widelands will hang – or even the
+   whole operating system may stall for an extended period of time - until
+   Widelands is force-closed.
+
+   If you plan to do long running tasks always add some calls to 
+   :func:`sleep` here and there so that widelands can act and update the user
+   interface.
 
 Let's consider a final example on how coroutines can interact with each other.
 
@@ -249,18 +254,19 @@ above will overwrite the global function :meth:`a` and further calls to
 :meth:`a` will not work as expected anymore. To prevent such bad errors it is
 recommended to:
 
-1. give global variables a descriptive name, e.g.::
+1. give global variables a descriptive (possibly unique) name, e.g.::
 
       player_1 = wl.Game().players[1]
 
-2. use the keyword ``local`` for variables used in functions and files,
+2. use always the keyword ``local`` for variables used in functions and files,
    e.g.::
 
       local a = "Hello"          -- the scope of this 'a' is the file where it is defined; global 'a' is not changed
       local function change_a()  -- the scope of this function is the file; it can't be called from outside the file
          local a = "World"       -- the scope of this 'a' is the function, both local 'a' and global 'a' are not changed
-         ....
+         print(a)                -- will print "World"
       end
+      print(a)                   -- will print "Hello"
 
 For a step by step tutorial for scenarios take a look at the
 `Scenario Tutorial <https://www.widelands.org/wiki/Scenario%20Tutorial/>`_ in

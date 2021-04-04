@@ -8,8 +8,7 @@ This documentation describes the usage and possibilities of Lua to extend Widela
    Files of type ``.lua`` are very basic text files. Do not use any fancy word
    processor (Word, OpenOffice and their like) because they produce the wrong 
    file format. Make sure to use a plain text editor (like Notepad under 
-   Windows, nedit under Linux and TextEdit under Mac OS X). If you have
-   programmed before, you likely already have found your favorite editor...
+   Windows, nedit under Linux and TextEdit under Mac OS X).
 
 Where Lua is used
 -----------------
