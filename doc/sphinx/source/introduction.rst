@@ -38,7 +38,7 @@ a game. The definitions of win conditions is very similar to defining
 starting conditions which returns an array with ``name``, ``description`` and ``func``. 
 Let’s make up a quick example: The first player to have 200 logs in his HQ 
 wins the game. All others loose. Save the following file as 
-``data/scripting/win_conditions/havest_logs.lua``.
+``data/scripting/win_conditions/harvest_logs.lua``.
 
 .. code-block:: lua
 
