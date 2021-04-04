@@ -165,14 +165,14 @@ again. Let's dive into an example right away:
 
    include "scripting/coroutine.lua"
 
-   function print_a_word(word)         -- this function is a coroutine
-      while true do                    -- run this loop forever
+   function print_a_word(word)         -- a function we'll use to create a coroutine
+      while true do
          print(word)
          sleep(1000)                   -- important call, see the note below
       end
    end
 
-   run(print_a_word, "Hello World!")   -- calling the coroutine with an argument
+   run(print_a_word, "Hello World!")   -- constructs a new coroutine from the function print_a_word and an argument, and immediately launches this coroutine
 
 If you put this code into our ``init.lua`` file from the earlier example, you
 will see "Hello World!" begin printed every second on the console. Let's
