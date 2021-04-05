@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-22 20:25+0000\n"
+"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"PO-Revision-Date: 2021-03-30 20:02+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:589 ../../src/base/i18n.cc:366
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:366
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -33,7 +33,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:591 ../../src/base/i18n.cc:370
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:370
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s of %2$s"
@@ -44,7 +44,7 @@ msgstr "%1$s of %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
-#: ../../data/scripting/richtext.lua:593 ../../data/scripting/richtext.lua:598
+#: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:374 ../../src/base/i18n.cc:383
 #: ../../src/logic/addons.cc:170
 #, c-format
@@ -54,77 +54,77 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:595 ../../src/base/i18n.cc:378
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:378
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s un %2$s"
 
 #. TRANSLATORS: Terrain name (Climate)
 #. TRANSLATORS: Help text - Probability to grow for an immovable
-#: ../../data/scripting/help.lua:95
+#: ../../data/scripting/help.lua:100
 #, lua-format
 msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:173
+#: ../../data/scripting/infrastructure.lua:187
 msgid "No Space"
 msgstr "Keen Platz"
 
-#: ../../data/scripting/infrastructure.lua:174
+#: ../../data/scripting/infrastructure.lua:188
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Welke vun dienen Anfangs-Husen sünd nich baut worden, wiel keen Rüümte daar is. Daarum hest du enen Nadeel un sallst di överleggen, of du de Kaart noch eenmal gerecht anfangen wullt."
 
-#: ../../data/scripting/infrastructure.lua:175
+#: ../../data/scripting/infrastructure.lua:189
 msgid "Not enough space"
 msgstr "Nich noog Platz"
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
 msgstr "Keene Stenen dicht bi"
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
-#: ../../data/scripting/infrastructure.lua:252
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
 msgstr "Keene Bomen dicht bi"
 
-#: ../../data/scripting/infrastructure.lua:252
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Bomen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
-#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
+#: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
 msgid "Status"
 msgstr "Tostand"
 
-#: ../../data/scripting/messages.lua:232
+#: ../../data/scripting/messages.lua:254
 msgid "New Objective"
 msgstr "Neje Upgaav"
 
-#: ../../data/scripting/messages.lua:234
+#: ../../data/scripting/messages.lua:256
 msgid "New Objectives"
 msgstr "Neje Upgaven"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:561
+#: ../../data/scripting/richtext.lua:570
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
 msgstr "%s %s"
 
-#: ../../data/scripting/richtext_scenarios.lua:37
+#: ../../data/scripting/richtext_scenarios.lua:50
 #, lua-format
 msgid "“%s”"
 msgstr "»%s«"
@@ -211,7 +211,7 @@ msgstr "Mai"
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:123
 msgid "Jun"
-msgstr "Jun"
+msgstr "Juni"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -266,8 +266,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Dez."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -280,12 +280,12 @@ msgstr "Höövdmenü"
 msgid "Tools"
 msgstr "Warktügen"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -475,10 +475,10 @@ msgstr "Informatioon"
 msgid "Click on a field to show information about it"
 msgstr "Klick up een Feld, um Informationen daaröver to wiesen"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -546,7 +546,7 @@ msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich 
 
 #: ../../src/editor/editorinteractive.cc:543
 msgid "Unsaved Map"
-msgstr "Nich sekerte Kaart"
+msgstr "Nich sekert Kaart"
 
 #: ../../src/editor/editorinteractive.cc:544
 msgid "The map has not been saved, do you really want to quit?"
@@ -626,8 +626,8 @@ msgstr "Bargwark"
 msgid "port"
 msgstr "Muu"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1369,19 +1369,19 @@ msgstr "Lade dat Speel: %1$s (%2$u/%3$d)"
 msgid "Elemental data"
 msgstr "Eerste Dingen"
 
-#: ../../src/game_io/game_loader.cc:169 ../../src/game_io/game_saver.cc:84
+#: ../../src/game_io/game_loader.cc:152 ../../src/game_io/game_saver.cc:84
 msgid "Economies"
 msgstr "Weertskuppen"
 
-#: ../../src/game_io/game_loader.cc:176 ../../src/game_io/game_saver.cc:91
+#: ../../src/game_io/game_loader.cc:159 ../../src/game_io/game_saver.cc:91
 msgid "AI"
 msgstr "Künstelk Spelers"
 
-#: ../../src/game_io/game_loader.cc:183 ../../src/game_io/game_saver.cc:98
+#: ../../src/game_io/game_loader.cc:166 ../../src/game_io/game_saver.cc:98
 msgid "Command queue"
 msgstr "Speelbefehlen"
 
-#: ../../src/game_io/game_loader.cc:191 ../../src/map_io/map_saver.cc:148
+#: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:148
 #: ../../src/map_io/widelands_map_loader.cc:391
 #: ../../src/wlapplication_options.cc:466
 #: ../../src/wui/interactive_player.cc:215
@@ -1389,7 +1389,7 @@ msgstr "Speelbefehlen"
 msgid "Messages"
 msgstr "Narichten"
 
-#: ../../src/game_io/game_loader.cc:208
+#: ../../src/game_io/game_loader.cc:191
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
 msgid "Finishing"
 msgstr "Klaarmaken"
@@ -1651,62 +1651,62 @@ msgstr "Keene"
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (Versioon %3$s)"
 
-#: ../../src/logic/editor_game_base.cc:251
+#: ../../src/logic/editor_game_base.cc:252
 #, c-format
 msgid "Creating player %d…"
 msgstr "Maakt Speler %d …"
 
-#: ../../src/logic/editor_game_base.cc:313
+#: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
 msgstr "Maak Welt un Völker klaar …"
 
-#: ../../src/logic/editor_game_base.cc:547
+#: ../../src/logic/editor_game_base.cc:553
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Tum Laden uprümen: Kaart-Dingen (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:550
+#: ../../src/logic/editor_game_base.cc:556
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Tum Laden uprümen: Spelers (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:553
+#: ../../src/logic/editor_game_base.cc:559
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Tum Laden uprümen: Kaart (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:151
+#: ../../src/logic/game.cc:153
 msgid "Not set"
 msgstr "Nich fastleggt"
 
-#: ../../src/logic/game.cc:238 ../../src/logic/game.cc:284
-#: ../../src/logic/game.cc:379 ../../src/logic/game.cc:436
+#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
+#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
 msgid "Preloading map…"
 msgstr "Lade de Kaart vör …"
 
-#: ../../src/logic/game.cc:333
+#: ../../src/logic/game.cc:376
 msgid "Initializing game…"
 msgstr "Speel word vörbereidt …"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:587
+#: ../../src/logic/game.cc:627
 msgid "Creating player infrastructure…"
 msgstr "Maak de Kraam för de Spelers …"
 
-#: ../../src/logic/game.cc:604 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "Do fehlt eene Anfangs-Stee"
 
-#: ../../src/logic/game.cc:605 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Stee hett.\nDu kannst tum Ofhelpen eene Anfangs-Stee mit de Widelands-Bewarker daartodoon."
 
-#: ../../src/logic/game.cc:1074
+#: ../../src/logic/game.cc:1114
 msgid "Trade Offer"
 msgstr "Hannel-Anbott"
 
-#: ../../src/logic/game.cc:1076
+#: ../../src/logic/game.cc:1116
 msgid "This market has received a new trade offer."
 msgstr "Deese Markt hett een nejes Hannel-Anbott bekomen."
 
@@ -1747,7 +1747,7 @@ msgstr "Fehler bi’m Schrieven vun Daten in de Datei »%s«!"
 
 #: ../../src/logic/generic_save_handler.cc:259
 msgid "Saved file may be corrupt!"
-msgstr "De sekerte Datei is villicht kaputt!"
+msgstr "De sekert Datei is villicht kaputt!"
 
 #: ../../src/logic/generic_save_handler.cc:267
 #, c-format
@@ -4919,7 +4919,7 @@ msgstr "Hoogste Tahl vun Dateien vun automatiskem Sekern:"
 
 #: ../../src/ui_fsmenu/options.cc:247
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Dateien mit Widelands-Daten (Kaarten, Uptekens un sekerte Speelen) spaarsam sekern"
+msgstr "Dateien mit Widelands-Daten (Kaarten, Uptekens un sekert Speelen) spaarsam sekern"
 
 #: ../../src/ui_fsmenu/options.cc:253
 msgid "Write syncstreams in network games to debug desyncs"
@@ -6173,8 +6173,8 @@ msgstr "De Speler, de nich mehr verbunnen is, mit de utköörten künstelk Spele
 msgid "AI for the disconnected player"
 msgstr "Künstelker Speler för de Speler, de nich mehr verbunnen is"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6712,8 +6712,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Tahlen över alls"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seefahrt"

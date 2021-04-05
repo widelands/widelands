@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-26 18:26+0000\n"
+"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"PO-Revision-Date: 2021-04-02 23:18+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "A Célkitűzések ablak megnyitásához és bezárásához kattints a C�
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr "A többi ablakhoz hasonlóan be tudod zárni jobb gombos kattintással is."
+msgstr "A legtöbb ablakot, így ezt is, be tudod zárni jobb gombos rákattintással is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -671,7 +671,7 @@ msgstr "Ahol sok kő van, ott érdemes megfontolni mégegy kőfejtő építésé
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid "Census and Statistics"
-msgstr "Épületnevek és statisztika"
+msgstr "Épületnevek és Állapotsorok"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -703,7 +703,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr "Az épületstatisztika megjelenítéséhez vagy elrejtéséhez használhatod a képernyő alján található „Megjelenítés / elrejtés‟ menü „Épülettatisztika megjelenítése‟ / „Épülettatisztika elrejtése‟ sorát, vagy nyomd meg a „%s‟ billentyűt."
+msgstr "Az épületek állapotsorainak megjelenítéséhez vagy elrejtéséhez használhatod a képernyő alján található „Megjelenítés / elrejtés‟ menü „Állapotsorok megjelenítése‟ / „Állapotsorok elrejtése‟ pontját, vagy nyomd meg a „%s‟ billentyűt."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -716,7 +716,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate statistics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
-msgstr "A nevük mellett az épületekről statisztikát is megjeleníthetsz a címkéikben. Ez az épület termelékenységéről vagy az építkezés állapotáról jelenít meg információkat."
+msgstr "A nevük alatt az épületek állapotát is megjelenítheted a címkéikben. Ez az épület termelékenységéről vagy az építkezés állapotáról jelenít meg információkat."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -805,7 +805,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr "A Widelandsben minden ablak bezárható, ha jobb egérgombbal kattintasz rajtuk (a történetek üzenetei kivételével, amelyekben ‘OK’ gomb található). Egyes ablakok a képernyő alján lévő gombokkal és menükkel is be-, illetve kikapcsolhatóak."
+msgstr "A Widelandsben minden ablak bezárható, ha jobb egérgombbal kattintasz rajtuk (a történetek üzenetei kivételével, amelyekben ‘Rendben’ gomb található). Egyes ablakok a képernyő alján lévő gombokkal és menükkel is be-, illetve kikapcsolhatóak."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."

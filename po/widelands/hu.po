@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-29 18:11+0000\n"
+"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"PO-Revision-Date: 2021-04-02 23:16+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:589 ../../src/base/i18n.cc:366
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:366
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -37,7 +37,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:591 ../../src/base/i18n.cc:370
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:370
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s vagy %2$s"
@@ -48,7 +48,7 @@ msgstr "%1$s vagy %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
-#: ../../data/scripting/richtext.lua:593 ../../data/scripting/richtext.lua:598
+#: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:374 ../../src/base/i18n.cc:383
 #: ../../src/logic/addons.cc:170
 #, c-format
@@ -58,77 +58,77 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:595 ../../src/base/i18n.cc:378
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:378
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s és %2$s"
 
 #. TRANSLATORS: Terrain name (Climate)
 #. TRANSLATORS: Help text - Probability to grow for an immovable
-#: ../../data/scripting/help.lua:95
+#: ../../data/scripting/help.lua:100
 #, lua-format
 msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:173
+#: ../../data/scripting/infrastructure.lua:187
 msgid "No Space"
 msgstr "Nincs hely"
 
-#: ../../data/scripting/infrastructure.lua:174
+#: ../../data/scripting/infrastructure.lua:188
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Néhány kezdőépületed nem fért el, és ezért nem lettek megépítve. Emiatt hátrányba kerültél; fontold meg a pálya újrakezdését az egyenlő esélyek érdekében."
 
-#: ../../data/scripting/infrastructure.lua:175
+#: ../../data/scripting/infrastructure.lua:189
 msgid "Not enough space"
 msgstr "Nincs elég hely"
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
 msgstr "Nincsenek a közelben kövek"
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "A kezdőpozíciód közelében nincsenek kövek, ezért több nyersanyagot kapsz a gazdaságod beindításához."
 
-#: ../../data/scripting/infrastructure.lua:252
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
 msgstr "Nincsenek a közelben fák"
 
-#: ../../data/scripting/infrastructure.lua:252
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "A kezdőpozíciód közelében nincsenek fák, ezért több nyersanyagot kapsz a gazdaságod beindításához."
 
-#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
+#: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
 msgid "Status"
 msgstr "Állapot"
 
-#: ../../data/scripting/messages.lua:232
+#: ../../data/scripting/messages.lua:254
 msgid "New Objective"
 msgstr "Új cél"
 
-#: ../../data/scripting/messages.lua:234
+#: ../../data/scripting/messages.lua:256
 msgid "New Objectives"
 msgstr "Új célok"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:561
+#: ../../data/scripting/richtext.lua:570
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
 msgstr "%s %s"
 
-#: ../../data/scripting/richtext_scenarios.lua:37
+#: ../../data/scripting/richtext_scenarios.lua:50
 #, lua-format
 msgid "“%s”"
 msgstr "„%s”"
@@ -179,7 +179,7 @@ msgstr "jan"
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:99
 msgid "Feb"
-msgstr "febr"
+msgstr "feb"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -188,7 +188,7 @@ msgstr "febr"
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:105
 msgid "Mar"
-msgstr "márc"
+msgstr "már"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -242,7 +242,7 @@ msgstr "aug"
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:141
 msgid "Sep"
-msgstr "szept"
+msgstr "sze"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -270,8 +270,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -284,12 +284,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Szerszámok"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -630,8 +630,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -826,7 +826,7 @@ msgstr "Megjelenítés:"
 #: ../../src/wui/game_main_menu_save_game.cc:85
 #: ../../src/wui/story_message_box.cc:47
 msgid "OK"
-msgstr "OK"
+msgstr "Rendben"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:81
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:256
@@ -1089,7 +1089,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "A térkép generálva lett. Kérjük ellenőrizd a játékosok kezdőhelyeit, hogy biztosan ne fulladjanak meg, vagy ragadjanak egy szigeten vagy egy hegy tetején."
+msgstr "A térképgenerálás elkészült. Kérjük ellenőrizd a játékosok kezdőhelyeit, hogy biztosan ne fulladjanak meg, vagy ragadjanak egy szigeten vagy egy hegy tetején."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:609
 msgid "The Widelands Random Map Generator"
@@ -1373,19 +1373,19 @@ msgstr "Játék betöltése: %1$s (%2$u/%3$d)"
 msgid "Elemental data"
 msgstr "Alapvető adatok"
 
-#: ../../src/game_io/game_loader.cc:169 ../../src/game_io/game_saver.cc:84
+#: ../../src/game_io/game_loader.cc:152 ../../src/game_io/game_saver.cc:84
 msgid "Economies"
 msgstr "Gazdaságok"
 
-#: ../../src/game_io/game_loader.cc:176 ../../src/game_io/game_saver.cc:91
+#: ../../src/game_io/game_loader.cc:159 ../../src/game_io/game_saver.cc:91
 msgid "AI"
 msgstr "Mesterséges Intelligencia"
 
-#: ../../src/game_io/game_loader.cc:183 ../../src/game_io/game_saver.cc:98
+#: ../../src/game_io/game_loader.cc:166 ../../src/game_io/game_saver.cc:98
 msgid "Command queue"
 msgstr "Parancslista"
 
-#: ../../src/game_io/game_loader.cc:191 ../../src/map_io/map_saver.cc:148
+#: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:148
 #: ../../src/map_io/widelands_map_loader.cc:391
 #: ../../src/wlapplication_options.cc:466
 #: ../../src/wui/interactive_player.cc:215
@@ -1393,7 +1393,7 @@ msgstr "Parancslista"
 msgid "Messages"
 msgstr "Üzenetek"
 
-#: ../../src/game_io/game_loader.cc:208
+#: ../../src/game_io/game_loader.cc:191
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
 msgid "Finishing"
 msgstr "Lezárás"
@@ -1418,7 +1418,7 @@ msgstr "Interaktív játékos"
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "A Widelands nem tud elindulni, mert nem találta az árnyaló nyelv verzióját."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1428,7 +1428,7 @@ msgstr ""
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr ""
+msgstr "Ismeretlen hiba a grafikus meghajtóprogramtól való információkéréskor."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1436,7 +1436,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "A Widelands nem tud elindulni, mert nem találta az OpenGL nyelv verzióját."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1463,7 +1463,7 @@ msgstr "A %1$u szükséges verziója %2$u.%3$u vagy újabb."
 #: ../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Az %1$s szükséges verziója %2$u.%3$u vagy újabb."
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
@@ -1471,7 +1471,7 @@ msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "árnyaló nyelv"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1655,62 +1655,62 @@ msgstr "Nincsenek"
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (%3$s verzió)"
 
-#: ../../src/logic/editor_game_base.cc:251
+#: ../../src/logic/editor_game_base.cc:252
 #, c-format
 msgid "Creating player %d…"
 msgstr "%d. játékos létrehozása…"
 
-#: ../../src/logic/editor_game_base.cc:313
+#: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
 msgstr "Világ és törzsek utótöltése…"
 
-#: ../../src/logic/editor_game_base.cc:547
+#: ../../src/logic/editor_game_base.cc:553
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Elrendezés betöltéshez: Térképobjektumok (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:550
+#: ../../src/logic/editor_game_base.cc:556
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Elrendezés betöltéshez: Játékosok (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:553
+#: ../../src/logic/editor_game_base.cc:559
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Elrendezés betöltéshez: Térkép (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:151
+#: ../../src/logic/game.cc:153
 msgid "Not set"
 msgstr "Nincs beállítva"
 
-#: ../../src/logic/game.cc:238 ../../src/logic/game.cc:284
-#: ../../src/logic/game.cc:379 ../../src/logic/game.cc:436
+#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
+#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
 msgid "Preloading map…"
 msgstr "Térkép előtöltése…"
 
-#: ../../src/logic/game.cc:333
+#: ../../src/logic/game.cc:376
 msgid "Initializing game…"
 msgstr "Játék előkészítése…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:587
+#: ../../src/logic/game.cc:627
 msgid "Creating player infrastructure…"
 msgstr "Infrastruktúra létrehozása…"
 
-#: ../../src/logic/game.cc:604 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "Hiányzó kezdőpont"
 
-#: ../../src/logic/game.cc:605 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő helye.\nA hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a játékosnak a szerkesztőben."
 
-#: ../../src/logic/game.cc:1074
+#: ../../src/logic/game.cc:1114
 msgid "Trade Offer"
 msgstr "Kereskedelmi ajánlat"
 
-#: ../../src/logic/game.cc:1076
+#: ../../src/logic/game.cc:1116
 msgid "This market has received a new trade offer."
 msgstr "Ez a piac egy új kereskedelmi ajánlatot kapott."
 
@@ -1945,7 +1945,7 @@ msgstr "a munkásnak több tapasztalatra van szüksége"
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:593
 msgid "the workers need no experience"
-msgstr "a munkásnak nincs szüksége több tapasztalatra"
+msgstr "a munkásnak nincs szüksége tapasztalatra"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -1964,20 +1964,20 @@ msgstr "a munkásnak nincs szüksége több tapasztalatra"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1240
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr "Nem indult el %1$s, mert %2$s"
+msgstr "%1$s nem indult el, mert %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
 #: ../../src/logic/map_objects/tribes/production_program.cc:732
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr "Befejeződött %1$s, mert %2$s"
+msgstr "%1$s elkészült, mert %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
 #: ../../src/logic/map_objects/tribes/production_program.cc:738
 #: ../../src/logic/map_objects/tribes/production_program.cc:744
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr "Kihagyva %1$s, mert %2$s"
+msgstr "%1$s kihagyva, mert %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1997,8 +1997,8 @@ msgstr[1] "%s hiányzik"
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
-msgstr[0] "Termelt: %s"
-msgstr[1] "Termelt: %s"
+msgstr[0] "%s elkészült"
+msgstr[1] "%s elkészült"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -2007,8 +2007,8 @@ msgstr[1] "Termelt: %s"
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
-msgstr[0] "Besorozva: %s"
-msgstr[1] "Besorozva: %s"
+msgstr[0] "%s toborozva"
+msgstr[1] "%s toborozva"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1836
 msgid "No soldier found for this training level!"
@@ -2021,7 +2021,7 @@ msgstr "Nem található katona ehhez a képzési szinthez!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1877
 #, c-format
 msgid "Completed %s"
-msgstr "Befejeződött %s"
+msgstr "%s befejeződött"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
@@ -2202,7 +2202,7 @@ msgstr "Hajók"
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:261
 msgid "Wares"
-msgstr "Termékek"
+msgstr "Áruk"
 
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
@@ -3457,12 +3457,12 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "A(z) „%1$s‟ bővítményt nem sikerült letölteni. A bővítmény telepítése/frissítése kimarad.\n\nHibaüzenet:\n%2$s"
+msgstr "A(z) „%1$s” bővítményt nem sikerült letölteni. A bővítmény telepítése/frissítése kimarad.\n\nHibaüzenet:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1189
 #, c-format
 msgid "Downloading translations for ‘%s’…"
-msgstr "Fordítások letöltése a(z) „%s‟ bővítményhez…"
+msgstr "Fordítások letöltése a(z) „%s” bővítményhez…"
 
 #: ../../src/ui_fsmenu/addons.cc:1230
 #, c-format
@@ -3471,7 +3471,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "A(z) „%1$s‟ bővítmény fordításait nem sikerült letölteni. A bővítmény fordításainak telepítése/frissítése kimarad.\n\nHibaüzenet:\n%2$s"
+msgstr "A(z) „%1$s” bővítmény fordításait nem sikerült letölteni. A bővítmény fordításainak telepítése/frissítése kimarad.\n\nHibaüzenet:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1254 ../../src/ui_fsmenu/addons.cc:1437
 #: ../../src/ui_fsmenu/addons.cc:1898
@@ -3881,24 +3881,24 @@ msgstr "Kilépés a csomagolóból"
 #: ../../src/ui_fsmenu/addons_packager.cc:446
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr ""
+msgstr "Biztosan el akarod vetni a „%s” bővítmény módosításait?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:451
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Biztosan el akarod vetni az alábbi %u bővítmény módosításait?"
+msgstr[1] "Biztosan el akarod vetni az alábbi %u bővítmény módosításait?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:461
 msgid "Discard Changes"
-msgstr ""
+msgstr "Változtatások elvetése"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:474
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr ""
+msgstr "Biztosan el akarod menteni a(z) „%s” bővítmény módosításait?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:479
 #, c-format
@@ -3907,110 +3907,110 @@ msgid ""
 msgid_plural ""
 "Do you really want to commit all changes to the following %u add-ons to "
 "disk?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Biztosan el akarod menteni az alábbi %u bővítmény módosításait?"
+msgstr[1] "Biztosan el akarod menteni az alábbi %u bővítmény módosításait?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:489
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
-msgstr ""
+msgstr "Figyelem! Ha kézzel módosítottad a bővítményhez tartozó bármelyik fájlt, a módosításaid elveszhetnek!"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:492
 msgid "Confirm Saving"
-msgstr ""
+msgstr "Mentés jóváhagyása"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:546
 msgid "Invalid Version"
-msgstr ""
+msgstr "Érvénytelen verzió"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:548
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
-msgstr ""
+msgstr "A(z) „%1$s” nem érvényes verziószám. A(z) „%2$s” bővítmény nem menthető el."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:558
 msgid "Error Writing Addon"
-msgstr ""
+msgstr "Hiba a bővítmény mentésénél"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:559
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
 "%2$s"
-msgstr ""
+msgstr "A(z) „%1$s” bővítmény nem menthető el:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:57
 msgid "Add selected map"
-msgstr ""
+msgstr "Kiválasztott térkép hozzáadása"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:65
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:66
 msgid "Create subdirectory"
-msgstr ""
+msgstr "Alkönyvtár létrehozása"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:75
 msgid "Remove selected map or directory"
-msgstr ""
+msgstr "Kiválasztott térkép vagy könyvtár eltávolítása"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:87
 msgid "Directory Tree"
-msgstr ""
+msgstr "Könyvtárszerkezet"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:138
 #: ../../src/ui_fsmenu/main.cc:400
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Név: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
 #: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "Méret: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
 #: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
 #, c-format
 msgid "%1$u×%2$u"
-msgstr ""
+msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:106
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Játékosok: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:175
 msgid "Top-level directory"
-msgstr ""
+msgstr "Kezdő könyvtár"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:237
 msgid "New Directory"
-msgstr ""
+msgstr "Könyvtár létrehozása"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:238
 msgid "Enter the name for the new directory."
-msgstr ""
+msgstr "Add meg az új könyvtár nevét"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "A directory with this name already exists."
-msgstr ""
+msgstr "Már létezik egy ilyen nevű könyvtár."
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:274
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
-msgstr ""
+msgstr "Biztosan törölni szeretnéd a(z) „%s” könyvtárat és a teljes tartalmát?"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:277
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
-msgstr ""
+msgstr "Biztosan törölni szeretnéd a következő térképet: %s?"
 
 #. * TRANSLATORS: Header for campaign difficulty
 #: ../../src/ui_fsmenu/addons_packager_box.cc:325
@@ -4022,19 +4022,19 @@ msgstr "Nehézség"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:334
 msgid "Difficulty:"
-msgstr ""
+msgstr "Nehézség:"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:359
 msgid "The campaigns difficulty. One word."
-msgstr ""
+msgstr "A hadjárat nehézsége egy szóban."
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:360
 msgid "Short description, which will be appended to the difficulty."
-msgstr ""
+msgstr "Rövid magyarázat, ami a nehézséghez lesz fűzve."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:34
 msgid "Choose Campaign"
-msgstr ""
+msgstr "Hadjárat kiválasztása"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:39
 #: ../../src/ui_fsmenu/loadgame.cc:80
@@ -4621,56 +4621,56 @@ msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat · Licensz: GNU General Public L
 
 #: ../../src/ui_fsmenu/main.cc:796
 msgid "Desyncing Add-On Found"
-msgstr ""
+msgstr "Szinkronizációs hibákat okozó bővítményt találtunk"
 
 #: ../../src/ui_fsmenu/main.cc:797
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr ""
+msgstr "Egy bekapcsolt bővítmény szinkronizációs hibákat szokott okozni. Csak akkor folytasd, ha vállalod a kockázatokat!"
 
 #: ../../src/ui_fsmenu/main.cc:892 ../../src/ui_fsmenu/netsetup_lan.cc:321
 msgid "No tribes found!"
-msgstr ""
+msgstr "A törzs nem található!"
 
 #: ../../src/ui_fsmenu/main.cc:893 ../../src/ui_fsmenu/netsetup_lan.cc:322
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
-msgstr ""
+msgstr "Nem található törzs a data/tribes/initialization/[törzsnév]/init.lua parancsfájlban."
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:35
 #, c-format
 msgid "invalid tribe ‘%s’"
-msgstr ""
+msgstr "érvénytelen törzs: %s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:47
 msgid "Saved Players"
-msgstr ""
+msgstr "Elmentett játékosok"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:54
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "%u. játékos: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:77
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "%1$u. játékos (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:96
 msgid "Map Details"
-msgstr ""
+msgstr "Térkép adatai"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:96
 msgid "Scenario Details"
-msgstr ""
+msgstr "Küldetés adatai"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:118
 #, c-format
 msgid "Hint: %s"
-msgstr ""
+msgstr "Tipp: %s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:150
 msgid "No map selected"
-msgstr ""
+msgstr "Nincs térkép kiválasztva"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:194
 msgid "(no map)"
@@ -4690,23 +4690,23 @@ msgstr "Eredeti térképnevek megjelenítése"
 
 #: ../../src/ui_fsmenu/mapselect.cc:102
 msgid "Official & Unofficial"
-msgstr ""
+msgstr "Hivatalos és nem hivatalos"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"", "Teams of 2"
 #. * etc.
 #: ../../src/ui_fsmenu/mapselect.cc:116
 msgid "Any Teams"
-msgstr ""
+msgstr "Bármilyen csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:459
 msgid "Balanced & Unbalanced"
-msgstr ""
+msgstr "Kiegyenlített és kiegyenlítetlen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:464
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "Nincs megadva"
 
 #: ../../src/ui_fsmenu/menu.cc:108
 msgid "Back"
@@ -4715,11 +4715,11 @@ msgstr "Vissza"
 #: ../../src/ui_fsmenu/menu.cc:273
 #, c-format
 msgid "Back to ‘%s’"
-msgstr ""
+msgstr "Vissza ide: „%s”"
 
 #: ../../src/ui_fsmenu/menu.cc:280
 msgid "Close window"
-msgstr ""
+msgstr "Ablak bezárása"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:58
 msgid "Role"
@@ -4883,11 +4883,11 @@ msgstr "Rendszer egérmutató használata"
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Maximum FPS:"
-msgstr "Maximum képkocka/s:"
+msgstr "Maximum képfrissítés/s:"
 
 #: ../../src/ui_fsmenu/options.cc:158
 msgid "Accessibility mode for tooltips"
-msgstr ""
+msgstr "Kisegítő mód az eszköztippekhez"
 
 #: ../../src/ui_fsmenu/options.cc:165
 msgid "Snap windows only when overlapping"
@@ -4927,7 +4927,7 @@ msgstr "Widelands adatfájlok tömörítése (térképek, visszajátszások és 
 
 #: ../../src/ui_fsmenu/options.cc:253
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr "Syncstreamek írása a halózati játékokban a deszinkronizációk hibakövetéséhez"
+msgstr "Szinkronizálási folyam írása a hálózati játékokban a szinkronizációs hibák hibakövetéséhez"
 
 #: ../../src/ui_fsmenu/options.cc:259
 #: ../../src/wui/interactive_gamebase.cc:194
@@ -4937,24 +4937,24 @@ msgstr "Épületnevek megjelenítése"
 #: ../../src/ui_fsmenu/options.cc:261
 #: ../../src/wui/interactive_gamebase.cc:203
 msgid "Show Statistics"
-msgstr ""
+msgstr "Állapotsorok megjelenítése"
 
 #: ../../src/ui_fsmenu/options.cc:263
 #: ../../src/wui/interactive_gamebase.cc:212
 msgid "Show Soldier Levels"
-msgstr ""
+msgstr "Tapasztalati pontok megjelenítése"
 
 #: ../../src/ui_fsmenu/options.cc:264
 #: ../../src/wui/interactive_gamebase.cc:221
 msgid "Show Buildings"
-msgstr ""
+msgstr "Épületek megjelenítése"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
 #: ../../src/ui_fsmenu/options.cc:266 ../../src/wui/interactive_player.cc:371
 msgid "Show Workarea Overlaps"
-msgstr ""
+msgstr "Munkaterület átfedések megjelenítése"
 
 #: ../../src/ui_fsmenu/options.cc:272
 msgid "Start building road after placing a flag"
@@ -4974,33 +4974,33 @@ msgstr "Egy figyelőablakos mód"
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Egérgörgős nagyítás csak Ctrl nyomvatartása mellett"
 
 #: ../../src/ui_fsmenu/options.cc:295
 msgid "Display system time in the info panel"
-msgstr ""
+msgstr "Valós idő megjelenítése a tálcán"
 
 #: ../../src/ui_fsmenu/options.cc:299
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Átlós térképmozgatás engedélyezése a numerikus billentyűzet használatával"
 
 #: ../../src/ui_fsmenu/options.cc:303
 msgid "Scroll when the mouse cursor is near the screen edge"
-msgstr ""
+msgstr "Térkép mozgatása amikor az egérmutató a kép szélén van"
 
 #: ../../src/ui_fsmenu/options.cc:309
 msgid "Teach me how to play"
-msgstr ""
+msgstr "Játék betanítása"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
 #: ../../src/ui_fsmenu/options.cc:319
 msgid "Progress…"
-msgstr ""
+msgstr "Betanítás állása…"
 
 #: ../../src/ui_fsmenu/options.cc:335
 msgid "Interface"
-msgstr "Felület"
+msgstr "Kezelés"
 
 #: ../../src/ui_fsmenu/options.cc:336
 msgid "Sound"
@@ -5012,11 +5012,11 @@ msgstr "Mentés"
 
 #: ../../src/ui_fsmenu/options.cc:338
 msgid "New Games"
-msgstr ""
+msgstr "Játék kezdésekor"
 
 #: ../../src/ui_fsmenu/options.cc:339
 msgid "In-Game"
-msgstr ""
+msgstr "Játék alatt"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:438
@@ -5031,7 +5031,7 @@ msgstr "Teljes képernyő"
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../src/ui_fsmenu/options.cc:466
 msgid "Maximized"
-msgstr ""
+msgstr "Kinagyított"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:476 ../../src/ui_fsmenu/options.cc:487
@@ -5046,49 +5046,49 @@ msgstr "Az operációs rendszer nyelve"
 #: ../../src/ui_fsmenu/options.cc:692
 #, c-format
 msgid "The translation into %s is complete."
-msgstr "A %s fordítás kész."
+msgstr "A %s fordítás teljes."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../src/ui_fsmenu/options.cc:695
 msgid "The translation into %1% is %2%%% complete."
-msgstr "A %1% fordítás %2%%% kész."
+msgstr "A %1% fordítás %2%%%-os."
 
 #: ../../src/ui_fsmenu/options.cc:709
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr "Ha segítene nekünk fordítani, akkor keresse fel ezt az oldalt: %s"
+msgstr "Ha segítenél nekünk fordítani, akkor keresd fel ezt az oldalt: %s"
 
 #: ../../src/ui_fsmenu/random_game.cc:85
 msgid "Map Generation Error"
-msgstr ""
+msgstr "Hiba a térkép generálásakor"
 
 #: ../../src/ui_fsmenu/random_game.cc:86
 msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
 " with slightly different settings."
-msgstr ""
+msgstr "A véletlenszerű térképgeneráló nem tudott megfelelő térképet készíteni. Ez néha előfordul, mert a generáló még „béta” állapotban van. Kérjük próbálkozz újra kicsit más beállításokkal."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
-msgstr ""
+msgstr "Küldetés kiválasztása"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
-msgstr ""
+msgstr "Oktatójáték kiválasztása"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:85
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Válaszd ki az oktatójátékot a listáról és kattints a „Rendben” gombra!"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:87
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr "A megjelölt játékról a jobb oldalon találsz leírást."
+msgstr "A megjelölt oktatójátékról a jobb oldalon találsz leírást."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:105
 msgid "Return to campaign selection"
-msgstr ""
+msgstr "Vissza a hadjárat kiválasztásához"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:106
 msgid "Play this scenario"
@@ -5122,17 +5122,17 @@ msgstr "#"
 #: ../../src/ui_fsmenu/scenario_select.cc:242
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
-msgstr ""
+msgstr "Érvénytelen fájlelérési út a campaigns.lua-ban vagy a tutorials.lua-ban: %s"
 
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 msgid "Tutorial"
-msgstr ""
+msgstr "Oktatójáték"
 
 #. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
-msgstr ""
+msgstr "Szerző"
 
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
@@ -5142,34 +5142,34 @@ msgstr ""
 #. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
-msgstr ""
+msgstr "Szerzők"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:189
 msgid "You"
-msgstr ""
+msgstr "Te"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:43
 msgctxt "teaching_progress"
 msgid "Edit Teaching Progress"
-msgstr ""
+msgstr "Betanítás állásának szerkesztése"
 
 #. * TRANSLATORS: Title above a list
 #: ../../src/ui_fsmenu/training_wheel_options.cc:66
 msgctxt "teaching_progress"
 msgid "Teaching objectives"
-msgstr ""
+msgstr "Betanítási célok"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
 #: ../../src/ui_fsmenu/training_wheel_options.cc:181
 msgid "Mark All"
-msgstr ""
+msgstr "Összes kijelölése"
 
 #: ../../src/ui_fsmenu/training_wheel_options.cc:181
 msgid "Unmark All"
-msgstr ""
+msgstr "Kijelölések megszüntetése"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wlapplication.cc:682 ../../src/wlapplication.cc:688
@@ -5184,11 +5184,11 @@ msgstr "Játékadat hiba"
 #: ../../src/wlapplication.cc:686
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
-msgstr ""
+msgstr "A Widelands nem találja a(z) „%s” fájlt."
 
 #: ../../src/wlapplication.cc:689
 msgid "File system error"
-msgstr ""
+msgstr "Fájlrendszer hiba"
 
 #: ../../src/wlapplication.cc:1445
 #, c-format
@@ -5199,15 +5199,15 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
 
 #: ../../src/wlapplication.cc:1459
 msgid "Game ended unexpectedly"
-msgstr ""
+msgstr "A játék váratlanul ért véget"
 
 #: ../../src/wlapplication.cc:1459
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Váratlan hiba játék közben"
 
 #: ../../src/wlapplication.cc:1462
 #, c-format
@@ -5221,7 +5221,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
 #: ../../src/wlapplication.cc:1472
 #, c-format
@@ -5231,11 +5231,11 @@ msgid ""
 "%s\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
 #: ../../src/wlapplication.cc:1500
 msgid "Emergency save failed"
-msgstr ""
+msgstr "Vészhelyzeti mentés sikertelen"
 
 #: ../../src/wlapplication.cc:1501
 #, c-format
@@ -5243,39 +5243,39 @@ msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
 "\n"
 "%s"
-msgstr ""
+msgstr "Elnézést kérünk, a Widelands nem tudta elkészíteni a vészhelyzeti játékmentést az alábbi okból:\n\n%s"
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Singleplayer"
-msgstr ""
+msgstr "Egyjátékos"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Multiplayer"
-msgstr ""
+msgstr "Többjátékos"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Editor – Load Map"
-msgstr ""
+msgstr "Térképszerkesztő – Betöltés"
 
 #: ../../src/wlapplication_options.cc:208
 msgid "Editor – New Map"
-msgstr ""
+msgstr "Térképszerkesztő – Új térkép"
 
 #: ../../src/wlapplication_options.cc:213
 msgid "Editor – New Random Map"
-msgstr ""
+msgstr "Térképszerkesztő – Új véletlen térkép"
 
 #: ../../src/wlapplication_options.cc:231
 msgid "About"
-msgstr ""
+msgstr "Névjegy"
 
 #: ../../src/wlapplication_options.cc:248
 msgid "Internet Login"
-msgstr ""
+msgstr "Internetes bejelentkezés"
 
 #: ../../src/wlapplication_options.cc:259
 msgid "Toggle Building Spaces"
-msgstr ""
+msgstr "Épülethelyek ki-/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Toggle Minimap"
@@ -5283,92 +5283,92 @@ msgstr "Kistérkép ki-/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:269
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Enciklopédia"
 
 #: ../../src/wlapplication_options.cc:273
 msgid "Cut Text"
-msgstr ""
+msgstr "Szöveg kivágása"
 
 #: ../../src/wlapplication_options.cc:277
 msgid "Copy Text"
-msgstr ""
+msgstr "Szöveg másolása"
 
 #: ../../src/wlapplication_options.cc:281
 msgid "Paste Text"
-msgstr ""
+msgstr "Szöveg beillesztése"
 
 #: ../../src/wlapplication_options.cc:285
 msgid "Select All"
-msgstr ""
+msgstr "Minden kiválasztása"
 
 #: ../../src/wlapplication_options.cc:290
 msgid "Delete Item"
-msgstr ""
+msgstr "Törlés"
 
 #: ../../src/wlapplication_options.cc:295
 msgid "Tooltip Accessibility Mode Key"
-msgstr ""
+msgstr "Eszköztipp kisegítő mód gomb"
 
 #: ../../src/wlapplication_options.cc:300
 msgid "Toggle Fullscreen"
-msgstr ""
+msgstr "Teljes képernyős mód ki/be"
 
 #: ../../src/wlapplication_options.cc:305
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Képernyőkép készítése"
 
 #: ../../src/wlapplication_options.cc:310
 msgid "Zoom In"
-msgstr ""
+msgstr "Nagyítás"
 
 #: ../../src/wlapplication_options.cc:315
 msgid "Zoom Out"
-msgstr ""
+msgstr "Kicsinyítés"
 
 #: ../../src/wlapplication_options.cc:320
 msgid "Reset Zoom"
-msgstr ""
+msgstr "Nagyítás alaphelyzet"
 
 #: ../../src/wlapplication_options.cc:325
 msgid "Jump to Next Location"
-msgstr ""
+msgstr "Következő helyre ugrás"
 
 #: ../../src/wlapplication_options.cc:330
 msgid "Jump to Previous Location"
-msgstr ""
+msgstr "Előző helyre ugrás"
 
 #: ../../src/wlapplication_options.cc:335
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: ../../src/wlapplication_options.cc:359
 msgid "Info Tool"
-msgstr ""
+msgstr "Info eszköz"
 
 #: ../../src/wlapplication_options.cc:363
 msgid "Players Menu"
-msgstr ""
+msgstr "Játékosok menü"
 
 #: ../../src/wlapplication_options.cc:368
 msgid "Toggle Grid"
-msgstr ""
+msgstr "Rács ki/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:373
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Mozdíthatatlan tárgyak ki/be"
 
 #: ../../src/wlapplication_options.cc:378
 msgid "Toggle Animals"
-msgstr ""
+msgstr "Állatok ki/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:383
 msgid "Toggle Resources"
-msgstr ""
+msgstr "Erőforrások ki/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:390
 #, c-format
 msgid "Set Toolsize to %d"
-msgstr ""
+msgstr "Eszközméret %d"
 
 #: ../../src/wlapplication_options.cc:408
 msgid "Toggle Census"
@@ -5376,19 +5376,19 @@ msgstr "Épületnevek ki/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:413
 msgid "Toggle Statistics Labels"
-msgstr ""
+msgstr "Állapotsorok ki/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
-msgstr ""
+msgstr "Tapasztalati pontok ki/be"
 
 #: ../../src/wlapplication_options.cc:423
 msgid "Toggle Buildings Visibility"
-msgstr ""
+msgstr "Épületek ki/bekapcsolása"
 
 #: ../../src/wlapplication_options.cc:428
 msgid "Toggle Overlapping Workareas"
-msgstr ""
+msgstr "Munkaterület átfedések ki/be"
 
 #: ../../src/wlapplication_options.cc:433
 #: ../../src/wui/general_statistics_menu.cc:47
@@ -5407,54 +5407,54 @@ msgstr "Épületstatisztika"
 
 #: ../../src/wlapplication_options.cc:448
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Árukészlet"
 
 #: ../../src/wlapplication_options.cc:453
 #: ../../src/wui/soldier_statistics_menu.cc:35
 msgid "Soldier Statistics"
-msgstr ""
+msgstr "Katonai statisztika"
 
 #: ../../src/wlapplication_options.cc:458
 #: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
-msgstr "Tengerjárási statisztika"
+msgstr "Hajózási statisztika"
 
 #: ../../src/wlapplication_options.cc:471
 msgid "Decrease Game Speed by 1×"
-msgstr ""
+msgstr "Játéksebesség csökkentése 1-gyel"
 
 #: ../../src/wlapplication_options.cc:476
 msgid "Decrease Game Speed by 0.25×"
-msgstr ""
+msgstr "Játéksebesség csökkentése 0,25-tel"
 
 #: ../../src/wlapplication_options.cc:481
 msgid "Decrease Game Speed by 10×"
-msgstr ""
+msgstr "Játéksebesség csökkentése 10-zel"
 
 #: ../../src/wlapplication_options.cc:486
 msgid "Increase Game Speed by 1×"
-msgstr ""
+msgstr "Játéksebesség növelése 1-gyel"
 
 #: ../../src/wlapplication_options.cc:491
 msgid "Increase Game Speed by 0.25×"
-msgstr ""
+msgstr "Játéksebesség növelése 0,25-tel"
 
 #: ../../src/wlapplication_options.cc:496
 msgid "Increase Game Speed by 10×"
-msgstr ""
+msgstr "Játéksebesség növelése 10-zel"
 
 #: ../../src/wlapplication_options.cc:501
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Játéksebesség alaphelyzet"
 
 #: ../../src/wlapplication_options.cc:505
 #: ../../src/wui/interactive_gamebase.cc:287
 msgid "Pause"
-msgstr ""
+msgstr "Játék megállítása"
 
 #: ../../src/wlapplication_options.cc:510
 msgid "Scroll to Starting Field"
-msgstr ""
+msgstr "Kezdőpontra ugrás"
 
 #: ../../src/wlapplication_options.cc:514 ../../src/wui/game_chat_menu.cc:53
 #: ../../src/wui/interactive_gamebase.cc:327
@@ -5470,81 +5470,81 @@ msgstr "Játék mentése"
 
 #: ../../src/wlapplication_options.cc:523
 msgid "Messages: Go to Location"
-msgstr ""
+msgstr "Üzenetek: Helyszínre ugrás"
 
 #: ../../src/wlapplication_options.cc:528
 msgid "Messages: Show "
-msgstr ""
+msgstr "Üzenetek: Mind mutatása"
 
 #: ../../src/wlapplication_options.cc:533
 msgid "Messages: Show Geologists’ Messages"
-msgstr ""
+msgstr "Üzenetek: Csak geológus"
 
 #: ../../src/wlapplication_options.cc:538
 msgid "Messages: Show Economy Messages"
-msgstr ""
+msgstr "Üzenetek: Csak gazdaság"
 
 #: ../../src/wlapplication_options.cc:543
 msgid "Messages: Show Seafaring Messages"
-msgstr ""
+msgstr "Üzenetek: Csak hajózás"
 
 #: ../../src/wlapplication_options.cc:548
 msgid "Messages: Show Military Messages"
-msgstr ""
+msgstr "Üzenetek: Csak katonai"
 
 #: ../../src/wlapplication_options.cc:553
 msgid "Messages: Show Scenario Messages"
-msgstr ""
+msgstr "Üzenetek: Csak küldetés"
 
 #: ../../src/wlapplication_options.cc:558
 msgid "Seafaring: Go to Ship"
-msgstr ""
+msgstr "Hajózás: Hajóhoz ugrás"
 
 #: ../../src/wlapplication_options.cc:563
 msgid "Seafaring: Watch Ship"
-msgstr ""
+msgstr "Hajózás: Hajó figyelése"
 
 #: ../../src/wlapplication_options.cc:568
 msgid "Seafaring: Open Ship Window"
-msgstr ""
+msgstr "Hajózás: Hajó ablak"
 
 #: ../../src/wlapplication_options.cc:573
 msgid "Seafaring: Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Hajózás: Ablak és hajóhoz ugrás"
 
 #: ../../src/wlapplication_options.cc:578
 msgid "Seafaring: Show All Ships"
-msgstr ""
+msgstr "Hajózás: Minden hajó"
 
 #: ../../src/wlapplication_options.cc:583
 msgid "Seafaring: Show Idle Ships"
-msgstr ""
+msgstr "Hajózás: Üres hajók"
 
 #: ../../src/wlapplication_options.cc:588
 msgid "Seafaring: Show Transport Ships"
-msgstr ""
+msgstr "Hajózás: Szállító hajók"
 
 #: ../../src/wlapplication_options.cc:593
 msgid "Seafaring: Show Waiting Expeditions"
-msgstr ""
+msgstr "Hajózás: Várakozó expedíciók"
 
 #: ../../src/wlapplication_options.cc:598
 msgid "Seafaring: Show Scouting Expeditions"
-msgstr ""
+msgstr "Hajózás: Felderítő expedíciók"
 
 #: ../../src/wlapplication_options.cc:603
 msgid "Seafaring: Show Expeditions with Port Spaces"
-msgstr ""
+msgstr "Hajózás: Expedíciók kikötőhelynél"
 
 #: ../../src/wlapplication_options.cc:608
 #, c-format
 msgid "Set Landmark #%d"
-msgstr ""
+msgstr "#%d. helyszín rögzítése"
 
 #: ../../src/wlapplication_options.cc:613
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr ""
+msgstr "#%d. helyszínre ugrás"
 
 #: ../../src/wlapplication_options.cc:753
 msgctxt "hotkey"
@@ -5574,7 +5574,7 @@ msgstr "Ctrl"
 #: ../../src/wlapplication_options.cc:771
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../src/wui/actionconfirm.cc:186
 msgid "Destroy building?"
@@ -5594,13 +5594,13 @@ msgstr "Tényleg le akarod bontani ezt az épületet?"
 
 #: ../../src/wui/actionconfirm.cc:248 ../../src/wui/actionconfirm.cc:307
 msgid "Preserve wares"
-msgstr ""
+msgstr "Áruk megőrzése"
 
 #: ../../src/wui/actionconfirm.cc:250
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr ""
+msgstr "Az épületben maradó árukat először kihordják a munkások, ezzel nő a bontási idő."
 
 #: ../../src/wui/actionconfirm.cc:299
 msgid "Enhance building?"
@@ -5620,7 +5620,7 @@ msgstr "Légy óvatos, az ellenség közel jár!"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr ""
+msgstr "Az épületben maradó árukat először kihordják a munkások, ezzel nő a fejlesztés ideje."
 
 #: ../../src/wui/actionconfirm.cc:361
 msgid "Sink the ship?"
@@ -5651,7 +5651,7 @@ msgstr[1] "%u katona"
 
 #: ../../src/wui/attack_box.cc:196
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr ""
+msgstr "Kevesebb katona küldése. A Ctrl billentyűt lenyomva egyet se."
 
 #: ../../src/wui/attack_box.cc:205
 msgid "Number of soldiers"
@@ -5660,7 +5660,7 @@ msgstr "Katonák száma"
 #: ../../src/wui/attack_box.cc:210
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr ""
+msgstr "Több katona küldése. A Ctrl billentyűt lenyomva a lehető legtöbbet."
 
 #: ../../src/wui/attack_box.cc:215
 msgid "Start attack"
@@ -5668,36 +5668,36 @@ msgstr "Támadás indítása"
 
 #: ../../src/wui/attack_box.cc:229
 msgid "Attackers:"
-msgstr ""
+msgstr "Támadók:"
 
 #: ../../src/wui/attack_box.cc:235
 msgid "Click on a soldier to remove him from the list of attackers"
-msgstr ""
+msgstr "Az egyes katonákra kattintva eltávolíthatod őket a támadásra küldöttek közül"
 
 #: ../../src/wui/attack_box.cc:237
 msgid "Hold down Ctrl to remove all soldiers from the list"
-msgstr ""
+msgstr "A Ctrl billentyűt lenyomva az összes katona eltávolítása"
 
 #: ../../src/wui/attack_box.cc:238
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva a katonák eltávolítása a kiválasztott katonáig"
 
 #: ../../src/wui/attack_box.cc:246
 msgid "Not attacking:"
-msgstr ""
+msgstr "Nem támadnak:"
 
 #: ../../src/wui/attack_box.cc:251
 msgid "Click on a soldier to add him to the list of attackers"
-msgstr ""
+msgstr "Az egyes katonákra kattintva hozzáadhatod őket a támadásra küldöttekhez"
 
 #: ../../src/wui/attack_box.cc:253
 msgid "Hold down Ctrl to add all soldiers to the list"
-msgstr ""
+msgstr "A Ctrl billentyűt lenyomva az összes katona hozzáadása"
 
 #: ../../src/wui/attack_box.cc:254
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva a katonák hozzáadása a kiválasztott katonáig"
 
 #: ../../src/wui/attack_box.cc:263
 msgid "Destroy target"
@@ -5716,7 +5716,7 @@ msgstr "ÉP: %1$u/%2$u  TÁ: %3$u/%4$u  VÉ: %5$u/%6$u  KI: %7$u/%8$u"
 
 #: ../../src/wui/building_statistics_menu.cc:67
 msgid "(no building selected)"
-msgstr ""
+msgstr "(nincs kiválasztott épület)"
 
 #: ../../src/wui/building_statistics_menu.cc:72
 msgid "Owned:"
@@ -5724,11 +5724,11 @@ msgstr "Birtokolt:"
 
 #: ../../src/wui/building_statistics_menu.cc:77
 msgid "Under construction:"
-msgstr ""
+msgstr "Építés alatt:"
 
 #: ../../src/wui/building_statistics_menu.cc:93
 msgid "Low productivity threshold:"
-msgstr ""
+msgstr "Alacsony hatékonyság határa:"
 
 #: ../../src/wui/building_statistics_menu.cc:104
 #: ../../src/wui/building_statistics_menu.cc:123
@@ -5746,7 +5746,7 @@ msgstr "Következő épület megjelenítése"
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
-msgstr ""
+msgstr "Az ennél rosszabb hatékonysággal dolgozó épületeket tekintjük rossz hatékonyságúnak."
 
 #: ../../src/wui/building_statistics_menu.cc:338
 msgid "Small buildings"
@@ -5770,7 +5770,7 @@ msgstr "Kikötők"
 
 #: ../../src/wui/building_statistics_menu.cc:701
 msgid "Low productivity:"
-msgstr ""
+msgstr "Alacsony hatékonyságú:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
@@ -5785,23 +5785,23 @@ msgstr "%1%/%2%"
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../src/wui/building_statistics_menu.cc:722
 msgid "Lacking soldiers:"
-msgstr ""
+msgstr "Katonahiánnyal:"
 
 #: ../../src/wui/buildingwindow.cc:195
 msgid "Muted – click to unmute"
-msgstr ""
+msgstr "Elnémítva – kattintással üzenetek visszakapcsolása"
 
 #: ../../src/wui/buildingwindow.cc:196
 msgid "Mute this building’s messages"
-msgstr ""
+msgstr "Ne jöjjenek üzenetek ettől az épülettől"
 
 #: ../../src/wui/buildingwindow.cc:201
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Minden ilyen épület elnémítva – kattintással üzenetek visszakapcsolása"
 
 #: ../../src/wui/buildingwindow.cc:205
 msgid "Mute all buildings of this type"
-msgstr ""
+msgstr "Ne jöjjenek üzenetek egyik ilyen épülettől se"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:269
@@ -5841,7 +5841,7 @@ msgstr "Hibakereső ablak megjelenítése"
 
 #: ../../src/wui/buildingwindow.cc:394
 msgid "Watch the scout"
-msgstr ""
+msgstr "Felderítő figyelése"
 
 #: ../../src/wui/buildingwindow.cc:401
 msgid "Center view on this"
@@ -5867,29 +5867,29 @@ msgstr "Expedíció lefújása"
 #: ../../src/wui/constructionsitewindow.cc:153
 #: ../../src/wui/dismantlesitewindow.cc:65
 msgid "Building materials"
-msgstr "Építőanayag"
+msgstr "Építőanyag"
 
 #: ../../src/wui/constructionsitewindow.cc:192
 #: ../../src/wui/constructionsitewindow.cc:254
 #: ../../src/wui/soldiercapacitycontrol.cc:68
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
-msgstr ""
+msgstr "Férőhelyek csökkentése. Ctrl billentyűt lenyomva a legalacsonyabbra"
 
 #: ../../src/wui/constructionsitewindow.cc:196
 #: ../../src/wui/constructionsitewindow.cc:258
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
-msgstr ""
+msgstr "Férőhelyek növelése. Ctrl billentyűt lenyomva a legnagyobbra"
 
 #: ../../src/wui/constructionsitewindow.cc:230
 msgid "Stopped"
-msgstr ""
+msgstr "Leállítás"
 
 #: ../../src/wui/constructionsitewindow.cc:231
 msgid "Stop this building’s work after completion"
-msgstr ""
+msgstr "Befejezés után ne kezdjen dolgozni az épület"
 
 #: ../../src/wui/constructionsitewindow.cc:300
 #: ../../src/wui/soldierlist.cc:422
@@ -5923,19 +5923,19 @@ msgstr "A kijelölt áruk eltávolítása innen"
 
 #: ../../src/wui/constructionsitewindow.cc:364
 msgid "Ware settings to apply after construction"
-msgstr ""
+msgstr "Az elkészült épületre alkalmazandó árubeállítások"
 
 #: ../../src/wui/constructionsitewindow.cc:367
 msgid "Worker settings to apply after construction"
-msgstr ""
+msgstr "Az elkészült épületre alkalmazandó munkás beállítások"
 
 #: ../../src/wui/constructionsitewindow.cc:375
 msgid "Start an expedition from this port after completion"
-msgstr ""
+msgstr "Expedíció indítása az elkészült kikötőből"
 
 #: ../../src/wui/constructionsitewindow.cc:399
 msgid "Settings to apply after construction"
-msgstr ""
+msgstr "Az elkészült épületre alkalmazandó beállítások"
 
 #: ../../src/wui/economy_options_window.cc:45
 msgid "Economy options"
@@ -5943,7 +5943,7 @@ msgstr "Gazdaság beállításai"
 
 #: ../../src/wui/economy_options_window.cc:78
 msgid "Decrease target by 10"
-msgstr ""
+msgstr "Cél csökkentése 10-zel"
 
 #: ../../src/wui/economy_options_window.cc:86
 msgid "Decrease target"
@@ -5951,7 +5951,7 @@ msgstr "Cél csökkentése"
 
 #: ../../src/wui/economy_options_window.cc:95
 msgid "Toggle infinite target"
-msgstr ""
+msgstr "Végtelen cél beállítása/kikapcsolása"
 
 #: ../../src/wui/economy_options_window.cc:103
 msgid "Increase target"
@@ -5959,56 +5959,56 @@ msgstr "Cél növelése"
 
 #: ../../src/wui/economy_options_window.cc:111
 msgid "Increase target by 10"
-msgstr ""
+msgstr "Cél növelése 10-zel"
 
 #: ../../src/wui/economy_options_window.cc:117
 msgid "Profile to apply to the selected items"
-msgstr ""
+msgstr "A kiválasztott árukra/munkásokra alkalmazandó mentett célbeállítás"
 
 #: ../../src/wui/economy_options_window.cc:128
 msgid "Save target settings"
-msgstr ""
+msgstr "Célbeállítások mentése"
 
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../src/wui/economy_options_window.cc:299
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:562
 msgid "The profile name cannot be empty"
-msgstr ""
+msgstr "A célbeállításnak nevet kell adni"
 
 #: ../../src/wui/economy_options_window.cc:563
 msgid "The default profile cannot be overwritten"
-msgstr ""
+msgstr "Az alapértelmezett célbeállítás nem módosítható"
 
 #: ../../src/wui/economy_options_window.cc:566
 msgid "Save the profile under this name"
-msgstr ""
+msgstr "Célbeállítások mentése a megadott néven"
 
 #: ../../src/wui/economy_options_window.cc:578
 msgid "The predefined profiles cannot be deleted"
-msgstr ""
+msgstr "Ez a célbeállítás nem törölhető"
 
 #: ../../src/wui/economy_options_window.cc:581
 msgid "Delete the selected profiles"
-msgstr ""
+msgstr "A kiválasztott célbeállítások törlése"
 
 #: ../../src/wui/economy_options_window.cc:603
 msgid "Overwrite?"
-msgstr ""
+msgstr "Felülírás?"
 
 #: ../../src/wui/economy_options_window.cc:604
 msgid "A profile with this name already exists. Do you wish to replace it?"
-msgstr ""
+msgstr "Már létezik ilyen nevű célbeállítás. Szeretnéd felülírni?"
 
 #: ../../src/wui/economy_options_window.cc:654
 msgid "Save Profile"
-msgstr ""
+msgstr "Célbeállítás mentése"
 
 #: ../../src/wui/economy_options_window.cc:664
 msgid "Existing Profiles"
-msgstr ""
+msgstr "Mentett célbeállítások"
 
 #: ../../src/wui/fieldaction.cc:234
 msgid "Build small building"
@@ -6032,15 +6032,15 @@ msgstr "Műveletek"
 
 #: ../../src/wui/fieldaction.cc:393
 msgid "Marked for removal by a worker – click to unmark"
-msgstr ""
+msgstr "Eltávolításra való kijelölés törlése"
 
 #: ../../src/wui/fieldaction.cc:394 ../../src/wui/fieldaction.cc:401
 msgid "Immovable Actions"
-msgstr ""
+msgstr "Mozdíthatatlan tereptárgy parancsok"
 
 #: ../../src/wui/fieldaction.cc:400
 msgid "Mark this immovable for timely removal by a suited worker"
-msgstr ""
+msgstr "Mozdíthatatlan tereptárgy kijelölése eltávolításra egy megfelelő dolgozó által"
 
 #: ../../src/wui/fieldaction.cc:421 ../../src/wui/fieldaction.cc:527
 msgid "Build road"
@@ -6048,7 +6048,7 @@ msgstr "Út építése"
 
 #: ../../src/wui/fieldaction.cc:425
 msgid "Build waterway"
-msgstr ""
+msgstr "Vízi út építése"
 
 #: ../../src/wui/fieldaction.cc:432
 msgid "Destroy this flag"
@@ -6056,7 +6056,7 @@ msgstr "Zászló megsemmisítése"
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Configure this flag’s economy"
-msgstr ""
+msgstr "A zászlót tartalmazó gazdaság beállítása"
 
 #: ../../src/wui/fieldaction.cc:442
 msgid "Send geologist to explore site"
@@ -6064,7 +6064,7 @@ msgstr "Geológus küldése a terület felderítésére"
 
 #: ../../src/wui/fieldaction.cc:448 ../../src/wui/fieldaction.cc:468
 msgid "Send scout to explore surroundings"
-msgstr ""
+msgstr "Geológus küldése a terület felderítésére"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
@@ -6072,7 +6072,7 @@ msgstr ""
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr ""
+msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítő épületével."
 
 #: ../../src/wui/fieldaction.cc:489
 msgid "Place a flag"
@@ -6084,7 +6084,7 @@ msgstr "Út megsemmisítése"
 
 #: ../../src/wui/fieldaction.cc:499
 msgid "Destroy a waterway"
-msgstr ""
+msgstr "Vízi út megsemmisítése"
 
 #: ../../src/wui/fieldaction.cc:517
 msgid "Watch field in a separate window"
@@ -6108,11 +6108,11 @@ msgstr "Szászló létrehozása"
 
 #: ../../src/wui/fieldaction.cc:686
 msgid "Cancel road"
-msgstr "Mégsem kell ide út"
+msgstr "Út elvetése"
 
 #: ../../src/wui/fieldaction.cc:693
 msgid "Cancel road and start building waterway"
-msgstr ""
+msgstr "Út elvetése, helyette vízi út építése"
 
 #: ../../src/wui/fieldaction.cc:697
 msgid "Build roads"
@@ -6120,33 +6120,33 @@ msgstr "Út építése"
 
 #: ../../src/wui/fieldaction.cc:709
 msgid "Cancel waterway"
-msgstr ""
+msgstr "Vízi út elvetése"
 
 #: ../../src/wui/fieldaction.cc:712
 msgid "Cancel waterway and start building road"
-msgstr ""
+msgstr "Vízi út elvetése, helyette út építése"
 
 #: ../../src/wui/fieldaction.cc:715
 msgid "Build waterways"
-msgstr ""
+msgstr "Vízi utak építése"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_chat_menu.cc:60
 #: ../../src/wui/interactive_gamebase.cc:119
 msgid "Script Console"
-msgstr ""
+msgstr "Parancsértelmező ablak"
 
 #: ../../src/wui/game_chat_panel.cc:63
 msgid "Recipient"
-msgstr ""
+msgstr "Címzett"
 
 #: ../../src/wui/game_chat_panel.cc:368 ../../src/wui/game_chat_panel.cc:492
 msgid "Unknown Recipient"
-msgstr ""
+msgstr "Ismeretlen címzett"
 
 #: ../../src/wui/game_chat_panel.cc:437
 msgid "All"
-msgstr ""
+msgstr "mindenki"
 
 #. * TRANSLATORS: Window label
 #: ../../src/wui/game_client_disconnected.cc:48
@@ -6177,8 +6177,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6254,7 +6254,7 @@ msgstr "Minden üzenet megjelenítése"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:537
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Csak a geológusok üzeneteinek megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:542
@@ -6269,7 +6269,7 @@ msgstr "Csak a hajózási üzenetek megjelenítése"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:550
 msgid "Show warfare messages only"
-msgstr "Csak a hadi üzenetek megjelenítése"
+msgstr "Csak a katonai üzenetek megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:554
@@ -6278,7 +6278,7 @@ msgstr "Csak a küldetés üzeneteinek megjelenítése"
 
 #: ../../src/wui/game_message_menu.cc:592
 msgid "Messages: Archive"
-msgstr "Üzenetek: archívum"
+msgstr "Üzenetek: Archívum"
 
 #: ../../src/wui/game_message_menu.cc:595
 msgid "Show Inbox"
@@ -6398,20 +6398,20 @@ msgstr "Csapat pontszám"
 #, c-format
 msgid "%d file"
 msgid_plural "%d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d fájl"
+msgstr[1] "%d fájl"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:126
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% könyvtár és %2% van kiválasztva:"
+msgstr[1] "%1% könyvtár és %2% van kiválasztva:"
 
 #: ../../src/wui/gamedetails.cc:145
 msgid "Directory Name:"
-msgstr ""
+msgstr "Könyvtár neve:"
 
 #: ../../src/wui/gamedetails.cc:153
 msgid "Error:"
@@ -6442,7 +6442,7 @@ msgstr "Játék célja:"
 
 #: ../../src/wui/gamedetails.cc:194 ../../src/wui/mapdetails.cc:193
 msgid "Add-Ons:"
-msgstr ""
+msgstr "Bővítmények:"
 
 #: ../../src/wui/general_statistics_menu.cc:136
 msgid "Land"
@@ -6478,110 +6478,110 @@ msgstr "Haderő"
 
 #: ../../src/wui/info_panel.cc:145
 msgid "Info Panel Visibility"
-msgstr ""
+msgstr "Tálca megjelenítése"
 
 #: ../../src/wui/info_panel.cc:198
 msgid "Follow mouse"
-msgstr ""
+msgstr "Csak ha az egérmutató rajta van"
 
 #: ../../src/wui/info_panel.cc:203
 msgid "Hide"
-msgstr ""
+msgstr "Elrejtés"
 
 #: ../../src/wui/info_panel.cc:208
 msgid "Move panel to bottom"
-msgstr ""
+msgstr "Tálca alulra helyezése"
 
 #: ../../src/wui/info_panel.cc:208
 msgid "Move panel to top"
-msgstr ""
+msgstr "Tálca felülre helyezése"
 
 #: ../../src/wui/info_panel.cc:384
 msgid "Cheat mode enabled"
-msgstr ""
+msgstr "Csalások bekapcsolása"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
 #: ../../src/wui/info_panel.cc:434
 #, c-format
 msgid "%1$s · %2$s"
-msgstr ""
+msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
 #: ../../src/wui/info_panel.cc:438
 #, c-format
 msgid "%1$s · %2$s · %3$s"
-msgstr ""
+msgstr "%1$s · %2$s · %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "Fontosság: Nagyon alacsony"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "Fontosság: Alacsony"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "Fontosság: Átlagos"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "Fontosság: Magas"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "Fontosság: Nagyon magas"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:124
 msgid "Increase the number of wares you want to be stored here"
-msgstr ""
+msgstr "Az itt tárolt árukészlet növelése"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:126
 msgid "Decrease the number of wares you want to be stored here"
-msgstr ""
+msgstr "Az itt tárolt árukészlet csökkentése"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:130
 msgid "Hold down Shift to increase all ware types at the same time"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva az összes árucikk együtt növekszik"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:133
 msgid "Hold down Shift to decrease all ware types at the same time"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva az összes árucikk együtt csökken"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:138
 msgid "Hold down Ctrl to allow all of this ware"
-msgstr ""
+msgstr "A Ctrl billentyűt lenyomva a teljes mennyiség engedélyezése"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:141
 msgid "Hold down Ctrl to allow none of this ware"
-msgstr ""
+msgstr "A Ctrl billentyűt lenyomva az árucikk teljes tiltása"
 
 #: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
-msgstr ""
+msgstr "Áru eltávolítása"
 
 #: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
-msgstr ""
+msgstr "Áru hozzáadása"
 
 #: ../../src/wui/inputqueuedisplay.cc:532
 msgid "Hide controls"
-msgstr ""
+msgstr "Vezérlők elrejtése"
 
 #: ../../src/wui/inputqueuedisplay.cc:532
 msgid "Show controls"
-msgstr ""
+msgstr "Vezérlők megjelenítése"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:118
@@ -6600,27 +6600,27 @@ msgstr "Kistérkép megjelenítése"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:266
 msgid "Zoom +"
-msgstr ""
+msgstr "Nagyítás"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:271
 msgid "Reset zoom"
-msgstr "Közelítés visszaállítása"
+msgstr "Nagyítás alaphelyzet"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:276
 msgid "Zoom –"
-msgstr ""
+msgstr "Kicsinyítés"
 
 #: ../../src/wui/interactive_base.cc:709
 #, c-format
 msgid "Road length: %u"
-msgstr ""
+msgstr "Út hossza: %u"
 
 #: ../../src/wui/interactive_base.cc:710
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
-msgstr ""
+msgstr "Vízi út hossza: %1$u/%2$u"
 
 #: ../../src/wui/interactive_gamebase.cc:53
 msgid "PAUSE"
@@ -6635,7 +6635,7 @@ msgstr "Esc"
 #. options o increase/decrease the gamespeed, and to pause the game
 #: ../../src/wui/interactive_gamebase.cc:104
 msgid "Game Speed"
-msgstr ""
+msgstr "Játéksebesség"
 
 #. * TRANSLATORS: Tooltip for Script Console in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:122
@@ -6658,51 +6658,51 @@ msgstr "Épületnevek elrejtése"
 #. * building statistics are shown
 #: ../../src/wui/interactive_gamebase.cc:202
 msgid "Hide Statistics"
-msgstr ""
+msgstr "Állapotsorok elrejtése"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
 #: ../../src/wui/interactive_gamebase.cc:211
 msgid "Hide Soldier Levels"
-msgstr ""
+msgstr "Tapasztalati pontok elrejtése"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * buildings are greyed out
 #: ../../src/wui/interactive_gamebase.cc:220
 msgid "Hide Buildings"
-msgstr ""
+msgstr "Épületek  elrejtése"
 
 #: ../../src/wui/interactive_gamebase.cc:267
 msgid "Speed +"
-msgstr ""
+msgstr "Sebesség +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:270
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Játéksebesség növelése"
 
 #: ../../src/wui/interactive_gamebase.cc:273
 msgid "Speed -"
-msgstr ""
+msgstr "Sebesség -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:276
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Játéksebesség csökkentése"
 
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Resume"
-msgstr ""
+msgstr "Folytatás"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:284
 msgid "Resume the Game"
-msgstr ""
+msgstr "Játék folytatása"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:290
 msgid "Pause the Game"
-msgstr ""
+msgstr "Játék megállítása"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_gamebase.cc:489
@@ -6716,11 +6716,11 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
-msgstr "Vízi"
+msgstr "Hajózás"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:305
@@ -6739,13 +6739,13 @@ msgstr "Készletek"
 #. * are highlighted
 #: ../../src/wui/interactive_player.cc:368
 msgid "Hide Workarea Overlaps"
-msgstr ""
+msgstr "Munkaterület átfedések elrejtése"
 
 #: ../../src/wui/interactive_player.cc:374
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
-msgstr ""
+msgstr "Épület elhelyezésekor mutassa-e az átfedő munkaterületeket."
 
 #: ../../src/wui/interactive_player.cc:454
 #, c-format
@@ -6784,12 +6784,12 @@ msgstr "Hivatalos"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Unofficial"
-msgstr ""
+msgstr "Nem hivatalos"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Balanced"
-msgstr ""
+msgstr "Kiegyenlített"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:36
@@ -6799,7 +6799,7 @@ msgstr "Kiegyenlítetlen"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
 msgid "Ferries"
-msgstr ""
+msgstr "Kompok"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:42
@@ -6847,7 +6847,7 @@ msgstr "üres"
 
 #: ../../src/wui/mapdetails.cc:133
 msgid "Directory"
-msgstr ""
+msgstr "Könyvtár"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
@@ -6958,28 +6958,28 @@ msgstr "játék"
 
 #: ../../src/wui/portdockwaresdisplay.cc:98
 msgid "Additional item"
-msgstr ""
+msgstr "További áru/munkás"
 
 #: ../../src/wui/portdockwaresdisplay.cc:100
 msgid "(Empty)"
-msgstr ""
+msgstr "(nincs)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../src/wui/portdockwaresdisplay.cc:150
 msgid "Present"
-msgstr ""
+msgstr "Készen áll"
 
 #. * TRANSLATORS: Tooltip for a ware that is neither present in the
 #. building nor being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:154
 msgid "Missing"
-msgstr ""
+msgstr "Hiányzik"
 
 #. * TRANSLATORS: Tooltip for a ware that is not present in the
 #. building, but already being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:157
 msgid "Coming"
-msgstr ""
+msgstr "Úton van"
 
 #: ../../src/wui/productionsitewindow.cc:115
 msgid "Exp"
@@ -6991,11 +6991,11 @@ msgstr "Következő szint"
 
 #: ../../src/wui/productionsitewindow.cc:131
 msgid "Decrease experience by 1"
-msgstr ""
+msgstr "Tapasztalati pontok csökkentése 1-gyel"
 
 #: ../../src/wui/productionsitewindow.cc:134
 msgid "Increase experience by 1"
-msgstr ""
+msgstr "Tapasztalati pontok növelése 1-gyel"
 
 #: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
@@ -7115,7 +7115,7 @@ msgstr "mentve: tegnap %1%:%2%"
 #. month day, year
 #: ../../src/wui/savegameloader.cc:165
 msgid "%1% %2%, %3%"
-msgstr "%1% %2%, %3%"
+msgstr "%3%. %1%. %2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -7124,7 +7124,7 @@ msgstr "%1% %2%, %3%"
 #: ../../src/wui/savegameloader.cc:172
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "mentés dátuma: %3$u. %1$s. %2$u."
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:30
@@ -7263,7 +7263,7 @@ msgstr "Ugrás a kiválasztott hajóhoz, és az ablakának megnyitása"
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:159
 msgid "Center the map on the selected ship"
-msgstr "A kiválasztott hajó térkép közepére helyezése"
+msgstr "Ugrás a kiválasztott hajóhoz"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:202
 msgctxt "ship"
@@ -7451,7 +7451,7 @@ msgstr "Háttérzajok"
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "A hang ki van kapcsolva vagy meghajtóprogram hiba miatt, vagy mert a parancssorban lett kikapcsolva."
 
 #. * TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
 #. drawn with
@@ -7460,39 +7460,39 @@ msgstr ""
 #. lower than the economy target setting. Very little space is available.
 #: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
-msgstr ""
+msgstr "Értékelés"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "Raktárkészlet összehasonlítása a gazdaság célértékeivel"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Red:"
-msgstr ""
+msgstr "Piros:"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Stock is lower than the target"
-msgstr ""
+msgstr "A készlet alacsonyabb a célnál"
 
 #: ../../src/wui/stock_menu.cc:61
 msgid "Yellow:"
-msgstr ""
+msgstr "Sárga:"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Stock is equal to the target"
-msgstr ""
+msgstr "A készlet egyenlő a céllal"
 
 #: ../../src/wui/stock_menu.cc:65
 msgid "Green:"
-msgstr ""
+msgstr "Zöld:"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Stock is higher than the target"
-msgstr ""
+msgstr "A készlet több a célnál."
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
-msgstr "Termékek (összesen)"
+msgstr "Áruk (összesen)"
 
 #: ../../src/wui/stock_menu.cc:75
 msgid "Workers (total)"
@@ -7500,7 +7500,7 @@ msgstr "Munkások (összesen)"
 
 #: ../../src/wui/stock_menu.cc:79
 msgid "Wares in warehouses"
-msgstr "Termékek raktáron"
+msgstr "Áruk raktáron"
 
 #: ../../src/wui/stock_menu.cc:83
 msgid "Workers in warehouses"
@@ -7537,7 +7537,7 @@ msgstr "Egy áru eltávolítása"
 
 #: ../../src/wui/warehousewindow.cc:169
 msgid "Add a ware"
-msgstr "Egy áru hozzázadása"
+msgstr "Egy áru hozzáadása"
 
 #: ../../src/wui/warehousewindow.cc:176
 msgid "Add 10 wares"

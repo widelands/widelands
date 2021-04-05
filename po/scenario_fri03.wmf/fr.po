@@ -4,14 +4,15 @@
 # 
 # Translators:
 # C138, 2021
+# Renaud Bouchard, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
+"POT-Creation-Date: 2021-04-02 10:43+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: C138, 2021\n"
+"Last-Translator: Renaud Bouchard, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +66,11 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
+"Amenez %d lingot d'or dans votre port le plus au Nord pour obtenir un "
+"passage de Marcus Caius Iniucundus."
 msgstr[1] ""
+"Amenez %d lingots d'or dans votre port le plus au Nord pour obtenir un "
+"passage de Marcus Caius Iniucundus."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:56
 msgid ""
@@ -201,7 +206,7 @@ msgstr "Mais je n'accepterai pas la défaite!"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid "Dark Future"
-msgstr ""
+msgstr "Sombre futur"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:116
@@ -397,7 +402,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:173
 msgid "Greetings to the King!"
-msgstr ""
+msgstr "Salutations au roi!"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:163
@@ -418,7 +423,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:248
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:261
 msgid "Greetings"
-msgstr ""
+msgstr "Salutations"
 
 #. TRANSLATORS: Angadthur – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:169
@@ -474,11 +479,11 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid "Congratulations"
-msgstr ""
+msgstr "Félicitations"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
-msgstr ""
+msgstr "Puisse Satul te bénir"
 
 #. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:191
@@ -497,12 +502,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "Dans le désert de glace"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
 msgid "The next island"
-msgstr ""
+msgstr "La prochaine île"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
@@ -526,7 +531,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
-msgstr ""
+msgstr "Espace portuaire trouvé"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
@@ -540,12 +545,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
 msgid "The North"
-msgstr ""
+msgstr "Le Nord"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
 msgid "In the North"
-msgstr ""
+msgstr "Dans le Nord"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
@@ -580,7 +585,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
-msgstr ""
+msgstr "Pas d'ennuis, s'il vous plait."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:238
@@ -596,7 +601,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
 msgid "Travellers"
-msgstr ""
+msgstr "Voyageurs"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:244
@@ -643,8 +648,8 @@ msgstr ""
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d pièce d'or."
+msgstr[1] "%d pièces d'or."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -695,7 +700,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
-msgstr ""
+msgstr "Décidez"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:278
@@ -711,12 +716,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
 msgid "Victory"
-msgstr ""
+msgstr "Victoire"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
 msgid "Victory!"
-msgstr ""
+msgstr "Victoire!"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:287
@@ -753,11 +758,11 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "You Have Lost"
-msgstr ""
+msgstr "Vous avez perdu"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
 msgid "Goodbye!"
-msgstr ""
+msgstr "Au revoir!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
@@ -766,46 +771,55 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"Vous avez pris trop de temps. Nous devons mettre les voiles maintenant, mais"
+" l'orage ne vous permettra pas de quitter cette île. Je suis désolé pour "
+"vous, mais le temps n'attend pas. Au revoir."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Vous avez perdu et ne pouvez continuer à jouer. Puissiez vous avoir "
+"meilleure chance quand vous réessaierez ce scenario. Cliquez OK pour revenir"
+" au menu principal."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Endigueur"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Maison de l'endigueur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "Endigue"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
 msgstr ""
+"Construisez des brise-lames tout près pour gagner de nouvelles terres sur la"
+" mer."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
 msgstr ""
+"Construisez des brise-lames pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -814,3 +828,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Sert de base pour coloniser les terres outre-mer et le commerce. Stocke "
+"également vos soldats, marchandises et outils."

@@ -6,15 +6,16 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017
 # Dániel Varga <vargad88@gmail.com>, 2007
 # GunChleoc, 2016
-# GunChleoc, 2014
+# GunChleoc, 2014,2016
+# litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-26 19:02+0000\n"
+"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"PO-Revision-Date: 2021-04-04 23:32+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -23,11 +24,11 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:368
 #: ../../data/tribes/initialization/barbarians/units.lua:112
@@ -46,13 +47,13 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr ""
+msgstr "Az amazon favágók vágják ki a fákat, a dzsungelfenntartók pedig gondoskodnak a fák utánpótlásáról. A farönköket a kőfaragók használják. A faszénégető kemencéknek is szükségük van rá a faszén előállításához."
 
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:356
 #: ../../data/tribes/initialization/barbarians/units.lua:100
@@ -68,7 +69,7 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making tools and weapons as well. It is produced"
 " by the stonecutters and in stone mines."
-msgstr ""
+msgstr "Az amazonok gránitot használnak a szerszámokhoz és a fegyverekhez. A kőfejtők és a kőbányák termelik ki."
 
 #. TRANSLATORS: Helptext for an amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:114
@@ -76,7 +77,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
 "armor. Balsa trees are cut by an experienced woodcutter."
-msgstr ""
+msgstr "A balzafa fontos építőanyag. Használják könnyű páncél készítéséhez is. A balzafát tapasztalt favágók vágják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ironwood
 #: ../../data/tribes/initialization/amazons/units.lua:125
@@ -84,7 +85,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
 " tools and weapons. It is cut by a very experienced woodcutter."
-msgstr ""
+msgstr "Ez a nagyon kemény fa olyan kemény, mint a vas. Egyes épületekhez, szerszámokhoz és fegyverekhez használják. A nagy tapasztalattal rendelkező favágók vágják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rubber
 #: ../../data/tribes/initialization/amazons/units.lua:136
@@ -92,13 +93,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
 "collected by experienced woodcutters."
-msgstr ""
+msgstr "A gumi fontos a harcosok páncéljához és cipőjéhez. A gumifát tapasztalt favágók vágják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Liana
 #: ../../data/tribes/initialization/amazons/units.lua:146
 msgctxt "amazons_ware"
 msgid "Lianas grow on trees. Very durable ropes are made out of them."
-msgstr ""
+msgstr "A lián fákon nő. Kiváló kötél készül belőle."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rope
 #: ../../data/tribes/initialization/amazons/units.lua:156
@@ -106,13 +107,13 @@ msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
 "construct buildings and ships."
-msgstr ""
+msgstr "A kötél liánból készül. Páncélruhákhoz, épületekhez és hajókhoz használják."
 
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:454
 #: ../../data/tribes/initialization/barbarians/units.lua:182
@@ -128,7 +129,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
 "digger and the tapir farm."
-msgstr ""
+msgstr "A vizet a maniókafőzde, a csokoládéfőzde, az aranyásó és a tapírtelep használja."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cassava Root
 #: ../../data/tribes/initialization/amazons/units.lua:181
@@ -137,7 +138,7 @@ msgid ""
 "Cassava roots are a special kind of root produced at cassava root "
 "plantations. The Amazons like their strong taste for making bread and they "
 "also feed their tapirs with them."
-msgstr ""
+msgstr "A manióka gyökér az amazonok alapvető élelmiszere, amit a manióka ültetvényen termesztenek. Az amazonok szeretik az erős ízét a kenyerükben, és a tapírjaikat is manióka gyökérrel etetik."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
 #: ../../data/tribes/initialization/amazons/units.lua:191
@@ -145,7 +146,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr ""
+msgstr "A kakaóbabot a kakaótermesztők gyűjtik be a kakaófákról. A csokoládé készítéséhez használják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Bread
 #: ../../data/tribes/initialization/amazons/units.lua:202
@@ -154,14 +155,14 @@ msgid ""
 "This tasty bread is made in cassava root cookeries out of cassava root and "
 "water. It is the basic ingredient of a ration that is made by a food "
 "preserver. Soldiers like it too."
-msgstr ""
+msgstr "Ezt az ízletes kenyeret a maniókafőzdékben készítik manióka gyökérből és vízből. Ez a fő összetevője a harapnivalónak, amit a tartósító készít. A katonák is fogyasztják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chocolate
 #: ../../data/tribes/initialization/amazons/units.lua:213
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
-msgstr ""
+msgstr "A csokoládét a csokoládé főzdében készítik és a katonák kiképzésénél használják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Fish
 #: ../../data/tribes/initialization/amazons/units.lua:223
@@ -171,7 +172,7 @@ msgid ""
 "the food preserver to prepare rations for the workers digging for gold dust "
 "and granite. It is also consumed at the training sites (training glade and "
 "warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "A hal az amazonok két alapvető élelmiszerének az egyike. A tartósító használja harapnivaló készítéséhez az aranyásók és a kőbányászok számára. A kiképzőhelyeken (a kiképző tisztáson és a harcosok gyűlésén) és a katonák toborzásakor is fogyasztják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Meat, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:233
@@ -179,7 +180,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunter-gatherers."
-msgstr ""
+msgstr "A hús sok energiát tartalmaz. Vadak elejtésével szerzik a vadász-gyűjtögetők."
 
 #. TRANSLATORS: Helptext for an amazon ware: Meat, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:235
@@ -188,7 +189,7 @@ msgid ""
 "Meat is used by the food preserver to prepare rations for the workers "
 "digging for gold dust and granite. It is also consumed at the training sites"
 " (training glade and warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "A húst a tartósító használja harapnivaló készítéséhez az aranyásók és a kőbányászok számára. A kiképzőhelyeken (a kiképző tisztáson és a harcosok gyűlésén) és a katonák toborzásakor is fogyasztják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:246
@@ -196,7 +197,7 @@ msgctxt "amazons_ware"
 msgid ""
 "A small bite to keep the workers digging for gold dust and granite strong "
 "and working. The scout also consumes rations on her scouting trips."
-msgstr ""
+msgstr "Pár falat, ami erőt ad az aranyásóknak és a kőbányászoknak a munkához. A felderítő is fogyasztja útjai során."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:248
@@ -204,13 +205,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rations are produced by the food preserver out of fish or meat and bread. "
 "They are dried using a charcoal fire."
-msgstr ""
+msgstr "A harapnivalót a tartósító készíti halból vagy húsból és kenyérből. Faszéntűzön szárítják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:262
 msgctxt "amazons_ware"
 msgid "Gold dust is washed in a gold digger dwelling."
-msgstr ""
+msgstr "Az aranyport az aranyásó mossa ki."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:264
@@ -218,13 +219,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce armor."
-msgstr ""
+msgstr "A kemencében megolvasztva aranyat készítenek belőle, amit értékes építőanyagként, illetve páncélok készítéséhez használnak."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:275
 msgctxt "amazons_ware"
 msgid "Gold is the most valuable of all metals."
-msgstr ""
+msgstr "Az arany a legértékesebb fém."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:277
@@ -232,7 +233,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is smelted out of gold dust by the furnace and used by the dressmaker and"
 " for special buildings."
-msgstr ""
+msgstr "Aranyporból olvasztják a kemencékben. A ruhakészítő használja, valamint a különleges épületekhez van rá szükség."
 
 #. TRANSLATORS: Helptext for an amazon ware: Charcoal, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:288
@@ -240,37 +241,37 @@ msgctxt "amazons_ware"
 msgid ""
 "Charcoal is produced out of logs by a charcoal burner. The Amazons use "
 "charcoal for drying their food and for smelting gold."
-msgstr ""
+msgstr "A faszenet farönkökből készíti a faszénégető. Az amazonok csak faszenet használnak az élelmiszer szárításához és az arany olvasztásához."
 
 #. TRANSLATORS: Helptext for an amazon ware: Pick
 #: ../../data/tribes/initialization/amazons/units.lua:302
 msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
-msgstr ""
+msgstr "A csákányt a kőfejtők használják a kőfejtőkben és a kőbányákban."
 
-#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
 #: ../../data/tribes/initialization/empire/units.lua:362
 #: ../../data/tribes/initialization/frisians/units.lua:409
 msgctxt "ware"
 msgid "The felling ax is the tool to chop down trees."
-msgstr ""
+msgstr "A favágóbalta a fák kivágásához szükséges szerszám."
 
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:315
 msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
-msgstr ""
+msgstr "A kőfaragók készítik és a favágók használják."
 
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:617
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -286,13 +287,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Therefore the jungle preservers, the cassava farmers and the cocoa farmers "
 "use them. They are produced by the stone carver."
-msgstr ""
+msgstr "A dzsungelfenntartók, valamint a manióka- és a kakaótermesztők használják. A kőfaragók készítik."
 
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:630
 #: ../../data/tribes/initialization/barbarians/units.lua:371
@@ -309,13 +310,13 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr ""
+msgstr "A geológusoknak, az építészeknek, a hajóácsoknak és a kőfaragóknak is szükségük van kalapácsra. Mindig legyen belőle néhány tartalék! A kőfaragók készítik."
 
 #. TRANSLATORS: Helptext for an amazon ware: Machete
 #: ../../data/tribes/initialization/amazons/units.lua:352
 msgctxt "amazons_ware"
 msgid "The machete is the tool of the liana cutters."
-msgstr ""
+msgstr "A macsete a liánvágók szerszáma."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:363
@@ -324,13 +325,13 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr ""
+msgstr "A falándzsa az amazon harcosok kezdő fegyvere. A kőfaragók készítik. Egy tunikával együtt ez szükséges egy fiatal harcos felszereléséhez."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:365
 msgctxt "amazons_ware"
 msgid "It is used by the amazon hunter-gatherers as well."
-msgstr ""
+msgstr "Az amazon vadász-gyűjtögetők is használják."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chisel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:376
@@ -473,7 +474,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:559
 msgctxt "amazons_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Árukat szállít át keskeny folyókon."
 
 #. TRANSLATORS: Helptext for an amazon worker: Tapir
 #: ../../data/tribes/initialization/amazons/units.lua:568
@@ -623,16 +624,16 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a frisian immovable: Ashes
-#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for a frisian immovable: Ashes
+#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an atlantean immovable: Ashes
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/amazons/units.lua:764
 #: ../../data/tribes/initialization/atlanteans/units.lua:1067
@@ -646,13 +647,13 @@ msgstr ""
 msgid "The remains of a destroyed building."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1261
 #: ../../data/tribes/initialization/barbarians/units.lua:990
@@ -763,12 +764,12 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1074
 #: ../../data/tribes/initialization/atlanteans/units.lua:1109
@@ -778,12 +779,12 @@ msgstr ""
 msgid "This field has just been planted."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1081
@@ -798,12 +799,12 @@ msgstr ""
 msgid "This field is growing."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1095
 #: ../../data/tribes/initialization/atlanteans/units.lua:1130
@@ -813,12 +814,12 @@ msgstr ""
 msgid "This field is ready for harvesting."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1102
 #: ../../data/tribes/initialization/atlanteans/units.lua:1137
@@ -848,11 +849,11 @@ msgstr ""
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
-#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
+#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1151
 #: ../../data/tribes/initialization/barbarians/units.lua:880
@@ -868,11 +869,11 @@ msgid ""
 "dwellings."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1190
 #: ../../data/tribes/initialization/barbarians/units.lua:919
@@ -888,9 +889,9 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
 #: ../../data/tribes/initialization/frisians/units.lua:1312
@@ -904,11 +905,11 @@ msgid ""
 "digger dwellings."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1234
 #: ../../data/tribes/initialization/barbarians/units.lua:963
@@ -917,20 +918,20 @@ msgstr ""
 msgid "There is a lot of gold here."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
 #: ../../data/tribes/initialization/frisians/units.lua:1356
 msgid "There is a lot of granite here."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1253
 #: ../../data/tribes/initialization/barbarians/units.lua:982
@@ -1445,13 +1446,13 @@ msgctxt "amazons_building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
 "between ports."
-msgstr ""
+msgstr "Hajókat készít, amelyeket tengerentúli gyarmatosításra és kikötők közti kereskedelemre használnak."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1590
 #: ../../data/tribes/initialization/atlanteans/units.lua:1714
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
@@ -1461,13 +1462,13 @@ msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr ""
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1592
 #: ../../data/tribes/initialization/atlanteans/units.lua:1716
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
@@ -1477,11 +1478,11 @@ msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1594
 #: ../../data/tribes/initialization/atlanteans/units.lua:1718
 #: ../../data/tribes/initialization/barbarians/units.lua:1794
@@ -1491,11 +1492,11 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Egy új épület épül ezen az építési területen."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1601
 #: ../../data/tribes/initialization/atlanteans/units.lua:1725
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
@@ -1505,11 +1506,11 @@ msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr ""
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1603
 #: ../../data/tribes/initialization/atlanteans/units.lua:1727
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
@@ -1517,13 +1518,13 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2169
 msgctxt "building"
 msgid "Proverb"
-msgstr ""
+msgstr "Közmondás"
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1605
 #: ../../data/tribes/initialization/atlanteans/units.lua:1729
 #: ../../data/tribes/initialization/barbarians/units.lua:1805
@@ -1534,7 +1535,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "Egy épület bontása zajlik itt, ami visszaadja az épület építésekor felhasznált nyersanyagok egy részét."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:358
@@ -1563,7 +1564,7 @@ msgstr "A deszkák fontos építőanyagok."
 #: ../../data/tribes/initialization/atlanteans/units.lua:383
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "A fűrészmalom készíti őket farönkökből."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
 #: ../../data/tribes/initialization/atlanteans/units.lua:385
@@ -1608,8 +1609,8 @@ msgid ""
 msgstr "Minthogy egyetlen atlantiszi sem szereti a nyers halat, leggyakrabban úgy teszik azt ehetővé, hogy megfüstölik egy füstölőben."
 
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:433
 #: ../../data/tribes/initialization/barbarians/units.lua:170
@@ -1704,8 +1705,8 @@ msgid ""
 msgstr "Ezeket a gyönyörű gyémántokat néhány különleges épülethez használják fel. A kristálybányában termelik ki."
 
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:531
 #: ../../data/tribes/initialization/barbarians/units.lua:268
@@ -1725,8 +1726,8 @@ msgid ""
 msgstr "Az atlantiszi kohók, páncél- és fegyverkovács műhelyek tüzeit szénnel táplálják."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:544
 #: ../../data/tribes/initialization/barbarians/units.lua:281
@@ -1743,8 +1744,8 @@ msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:557
 #: ../../data/tribes/initialization/barbarians/units.lua:294
@@ -1763,8 +1764,8 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:570
 #: ../../data/tribes/initialization/barbarians/units.lua:307
@@ -1783,8 +1784,8 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:583
 #: ../../data/tribes/initialization/barbarians/units.lua:320
@@ -1871,8 +1872,8 @@ msgid ""
 msgstr "Ezt a kampós rudat a füstölő használja, hogy felakassza vele a húst és a halat a füstölő tetejébe. A szerszámkovács készíti."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:688
 #: ../../data/tribes/initialization/barbarians/units.lua:410
@@ -1889,8 +1890,8 @@ msgid "Scythes are produced by the toolsmith."
 msgstr "A kaszákat a szerszámkovács készíti."
 
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:701
 #: ../../data/tribes/initialization/barbarians/units.lua:423
@@ -1907,8 +1908,8 @@ msgid "Bread paddles are produced by the toolsmith."
 msgstr "A péklapátokat a szerszámkovács készíti."
 
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:714
 #: ../../data/tribes/initialization/barbarians/units.lua:445
@@ -1916,13 +1917,13 @@ msgstr "A péklapátokat a szerszámkovács készíti."
 #: ../../data/tribes/initialization/frisians/units.lua:505
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
-msgstr ""
+msgstr "A tűzifogó a fémkohászathoz szükséges szerszám."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:716
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "A kohókban használják és a szerszámkovács készíti őket."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Light Trident
 #: ../../data/tribes/initialization/atlanteans/units.lua:729
@@ -2022,7 +2023,7 @@ msgstr "Árut szállít a csomópontok között."
 #: ../../data/tribes/initialization/atlanteans/units.lua:833
 msgctxt "atlanteans_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Árukat szállít át keskeny folyókon."
 
 #. TRANSLATORS: Helptext for an atlantean worker: Horse
 #: ../../data/tribes/initialization/atlanteans/units.lua:842
@@ -2080,7 +2081,7 @@ msgstr "Pókokat tenyészt a selymükért."
 #: ../../data/tribes/initialization/atlanteans/units.lua:901
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Pókszövetet készít épületekhez, hajókhoz és katonáknak."
 
 #. TRANSLATORS: Helptext for an atlantean worker: Shipwright
 #: ../../data/tribes/initialization/atlanteans/units.lua:908
@@ -2206,8 +2207,8 @@ msgid ""
 msgstr "A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet felderítőruhában."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
-#. TRANSLATORS: Helptext for a frisian resource indicator: Water
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Water
+#. TRANSLATORS: Helptext for a frisian resource indicator: Water
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1158
 #: ../../data/tribes/initialization/barbarians/units.lua:887
@@ -2217,8 +2218,8 @@ msgid "There is water in the ground here that can be pulled up by a well."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1166
 #: ../../data/tribes/initialization/atlanteans/units.lua:1210
@@ -2232,8 +2233,8 @@ msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1168
 #: ../../data/tribes/initialization/barbarians/units.lua:897
@@ -2243,8 +2244,8 @@ msgid "There is only a little bit of coal here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1221
@@ -2258,8 +2259,8 @@ msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1179
 #: ../../data/tribes/initialization/barbarians/units.lua:908
@@ -2269,8 +2270,8 @@ msgid "There is only a little bit of iron here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1188
 #: ../../data/tribes/initialization/atlanteans/units.lua:1232
@@ -2297,8 +2298,8 @@ msgid "There are only a few precious stones here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
 #: ../../data/tribes/initialization/barbarians/units.lua:941
@@ -2308,8 +2309,8 @@ msgid "There is a lot of coal here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1223
 #: ../../data/tribes/initialization/barbarians/units.lua:952
@@ -2329,12 +2330,6 @@ msgstr ""
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
-#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
@@ -2344,6 +2339,12 @@ msgstr ""
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
 #. Ironwood Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
 #. Tree
@@ -2421,7 +2422,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "A munkások és a katonák itt menedékre lelnek. Az árukat és az eszközöket is tárolja."
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1373
@@ -2453,10 +2454,10 @@ msgstr "A kőfejtőnek vájható kövekre van szüksége a munkaterületén."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
-#. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
-#. House
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
 #. Hut
+#. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
+#. House
 #. TRANSLATORS: Purpose helptext for an atlantean production site:
 #. Woodcutter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1393
@@ -2476,9 +2477,9 @@ msgstr "A favágóháznak kivágható fákra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1402
@@ -2546,8 +2547,8 @@ msgid "Breeds fish."
 msgstr "Halakat tenyészt."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
-#. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
+#. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1438
@@ -2565,8 +2566,8 @@ msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "A vadászháznak vadászható állatokra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
-#. TRANSLATORS: Purpose helptext for a frisian production site: Well
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Well
+#. TRANSLATORS: Purpose helptext for a frisian production site: Well
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1447
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
@@ -2588,11 +2589,11 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítőházzal."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
-#. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
+#. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1462
@@ -2642,11 +2643,11 @@ msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Kenyeret süt a felderítők és bányászok élelmezéséhez, valamint a katonák kiképzéséhez."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
+#. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1501
@@ -2765,11 +2766,11 @@ msgstr "Hegyes terepen drágaköveket váj ki a kövekből."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1593
 #: ../../data/tribes/initialization/barbarians/units.lua:1528
@@ -2785,13 +2786,13 @@ msgstr "Hegyes terepen szenet ás ki a földből."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1600
 #: ../../data/tribes/initialization/barbarians/units.lua:1571
@@ -2807,11 +2808,11 @@ msgstr "Hegyes terepen vasércet ás ki a földből."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1607
 #: ../../data/tribes/initialization/barbarians/units.lua:1610
@@ -2885,8 +2886,8 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1696
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
@@ -2897,8 +2898,8 @@ msgid "Builds ferries."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Note helptext for production site: Ferry Yard
+#. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
 #: ../../data/tribes/initialization/barbarians/units.lua:1757
@@ -2909,8 +2910,8 @@ msgid "Needs water nearby."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
-#. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1705
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
@@ -2960,13 +2961,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Reed is produced in a reed yard and used to make the roofs of buildings "
 "waterproof."
-msgstr ""
+msgstr "A nádat a nádudvarban termesztik, és a tetők vízhatlanná tételéhez használják."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Cloth
 #: ../../data/tribes/initialization/barbarians/units.lua:150
 msgctxt "barbarians_ware"
 msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
-msgstr ""
+msgstr "A szövetre a barbár hajóknak van szükségük. Nádból készül."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Fish
 #: ../../data/tribes/initialization/barbarians/units.lua:161
@@ -3039,8 +3040,8 @@ msgid ""
 msgstr "Csak ez a sör  elfogadható a katonák számára a harci arénában. Vannak akik azt tartják, hogy ebben a sörben rejlik a barbárok ereje. Segíti a katonák védekezésének szintjét 0-ról 1-re, majd 2-re fejleszteni. Az erős sört a nagy fogadókban is használják az ebédek elkészítéséhez."
 
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:234
 #: ../../data/tribes/initialization/empire/units.lua:242
 #: ../../data/tribes/initialization/frisians/units.lua:283
@@ -3087,7 +3088,7 @@ msgstr "A barbárok tüzeit általában szénnel táplálják. Jó néhány ép�
 #: ../../data/tribes/initialization/barbarians/units.lua:283
 msgctxt "barbarians_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "A kohóban nyerik ki belőle a vasat."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:296
@@ -3095,7 +3096,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr ""
+msgstr "A kohókban készül, fegyverekhez és szerszámokhoz használják fel a szerszám-, a fejsze-, a fegyver- és a sisakkészítő műhelyekben."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:309
@@ -3103,7 +3104,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "A kohóban nyerik ki belőle az aranyat, amit értékes építőanyagként, illetve fegyverek és páncélok készítéséhez használnak."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:322
@@ -3113,7 +3114,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr ""
+msgstr "Csak nagyon fontos dolgokat díszítenek arannyal. A kohókban készül, értékes építőanyagként, valamint (a fegyverkészítő műhelyben) különböző fejszékhez és (a sisakkészítő műhelyben) a páncélok különböző részeihez használják."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Pick
 #: ../../data/tribes/initialization/barbarians/units.lua:335
@@ -3131,7 +3132,7 @@ msgid ""
 "Felling axes are used by lumberjacks and produced in the metal workshop (but"
 " cease to be produced by the building if it is enhanced to an ax workshop "
 "and war mill)."
-msgstr ""
+msgstr "A favágóbaltát a favágók használják, és a szerszámkészítő műhelyben állítják elő (de továbbfejlesztés után a fejsze- és a fegyverkészítő műhelyekben már nem)."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:360
@@ -3170,8 +3171,8 @@ msgid ""
 msgstr "Ez az egyik alapvető eszköz, amelyet a szerszámkészítő műhelyben állítanak elő (de továbbfejlesztéseiben, azaz a fejsze- és a fegyverkészítő műhelyben már nem)."
 
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:397
 #: ../../data/tribes/initialization/empire/units.lua:423
 #: ../../data/tribes/initialization/frisians/units.lua:457
@@ -3297,7 +3298,7 @@ msgid ""
 "A mask is an enhanced armor for Barbarian soldiers. It is produced in the "
 "helm smithy and used in the training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "A maszk egy fejlett páncél a barbár katonáknak. A sisakkészítő műhelyben állítják elő, és a kiképzőtáborban használják – élelmiszerrel együtt – a katonák életerejének 1.-ről 2. szintre fejlesztéséhez."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Warhelm
 #: ../../data/tribes/initialization/barbarians/units.lua:532
@@ -3306,7 +3307,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in a helm smithy "
 "and used in a training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
-msgstr ""
+msgstr "Ez a legfejlettebb barbár páncélzat. A sisakkészítő műhelyben állítják elő, és a kiképzőtáborban – élelemmel együtt – a katonák életerejének 2.-ról 3. szintűre fejlesztéséhez használják."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Carrier
 #: ../../data/tribes/initialization/barbarians/units.lua:548
@@ -3318,7 +3319,7 @@ msgstr "Árut szállít a csomópontok között."
 #: ../../data/tribes/initialization/barbarians/units.lua:555
 msgctxt "barbarians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Árukat szállít át keskeny folyókon."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Ox
 #: ../../data/tribes/initialization/barbarians/units.lua:564
@@ -3367,7 +3368,7 @@ msgstr "A mészégető kemencében habarcsot kever gránitból, vízből és sz�
 #: ../../data/tribes/initialization/barbarians/units.lua:616
 msgctxt "barbarians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Nádat ültet és arat."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Weaver
 #: ../../data/tribes/initialization/barbarians/units.lua:623
@@ -3411,7 +3412,7 @@ msgstr "Mezőn dolgozik."
 #: ../../data/tribes/initialization/barbarians/units.lua:668
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Pitát süt a bányászoknak, a katonáknak és a felderítőknek."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Brewer
 #: ../../data/tribes/initialization/barbarians/units.lua:675
@@ -3499,23 +3500,23 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet felderítőruhában."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:852
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid "This reed field has just been planted."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/barbarians/units.lua:866
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is growing."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:873
 #: ../../data/tribes/initialization/frisians/units.lua:1255
 msgid "This reed field is ready for harvesting."
@@ -3526,7 +3527,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:972
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
+msgstr "A gránit a barbárok egyik alapvető építőanyaga. A kőfejtőkben és a gránitbányákban bányásszák."
 
 #. TRANSLATORS: Lore helptext for a barbarian warehouse: Headquarters
 #: ../../data/tribes/initialization/barbarians/units.lua:1086
@@ -3581,7 +3582,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "A munkások és a katonák itt menedékre lelnek. Az árukat és az eszközöket is tárolja."
 
 #. TRANSLATORS: Lore helptext for a barbarian warehouse: Port
 #: ../../data/tribes/initialization/barbarians/units.lua:1119
@@ -3780,7 +3781,7 @@ msgstr "A vadász %s szünetet tart, mielőtt újra elkezd dolgozni."
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
-msgstr ""
+msgstr "„Annyira szereti az állatokat és a tenyésztésüket,<br> mint amennyire mi szeretjük megsütni és megenni őket.”"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
@@ -3815,7 +3816,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21ˢᵗ year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Sigurd, a Bárd dala a Nagy Aszály utáni első eső lehullásakor, Chat'Karuth uralkodásának 21. évében."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/barbarians/units.lua:1229
@@ -3829,7 +3830,7 @@ msgctxt "barbarians_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
 "here."
-msgstr ""
+msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítőkunyhóval."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1237
@@ -3898,7 +3899,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Reed is the traditional material for roofing, and it is woven into the "
 "extremely durable cloth that they use for their ships’ sails."
-msgstr ""
+msgstr "A nád a tetőfedés hagyományos anyaga, valamint rendkívül tartós szövetet készítenek belőle, amelyet hajóvitorlákhoz használnak."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Reed
 #. Yard
@@ -3906,7 +3907,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of reed in about %s on average."
-msgstr ""
+msgstr "A nádudvar átlagosan %s alatt termel egy kéve nádat."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Lime Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1277
@@ -4050,8 +4051,8 @@ msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
-#. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+#. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1336
 #: ../../data/tribes/initialization/empire/units.lua:1280
 #: ../../data/tribes/initialization/frisians/units.lua:1900
@@ -4201,7 +4202,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such you will need to enhance an ax workshop in order to get one."
-msgstr ""
+msgstr "A barbár fegyverkészítő műhely a legfejlettebb fegyvertermelő hely. Mint ilyet, a fejszkészítő műhelyből lehet kifejleszteni."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Warmill,
 #. part 1
@@ -4238,7 +4239,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr ""
+msgstr "A barbár fegyverkészítő műhely a köztes termelőhely három épület sorában. Egy fejlesztés a szerszámkészítő műhelyhez képest, de nem igényel további szakértelmet a munkástól."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Ax
 #. Workshop
@@ -4387,7 +4388,7 @@ msgstr "Hegyes terepen gránitot váj ki a kövekből."
 #: ../../data/tribes/initialization/barbarians/units.lua:1512
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
-msgstr ""
+msgstr "Nem fejleszthető tovább."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Granite
 #. Mine
@@ -4409,7 +4410,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "A barbárok már ősidők óta megtanultak leásni a hegyek mélyére a fekete anyagért, amivel a kemencéiket táplálják. "
 
 #. TRANSLATORS: Lore helptext for production site: Coal Mine, part 2
 #. TRANSLATORS: Lore helptext for production site: Deep Coal Mine
@@ -4421,7 +4422,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "A fa hasznos lehet a házi tűzhelyhez és melegen tart, de ha vassal és arannyal kell dolgozni, akkor csak a szén jöhet szóba."
 
 #. TRANSLATORS: Performance helptext for production site: Coal Mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1530
@@ -4774,7 +4775,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1781
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of reed."
-msgstr ""
+msgstr "Szövetet sző nádból."
 
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:95
@@ -4795,7 +4796,7 @@ msgstr "A birodalmi favágók vágják ki a fákat; az erdészek pedig gondoskod
 #: ../../data/tribes/initialization/empire/units.lua:120
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "A fűrészmalom készíti őket farönkökből."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 3
 #: ../../data/tribes/initialization/empire/units.lua:122
@@ -4848,7 +4849,7 @@ msgctxt "empire_ware"
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "A búzát farmokon termelik, és malmok, illetve sörfőzdék használják fel. A szamárfarmokat, juh- és sertéstelepeket szintén el kell látni búzával."
 
 #. TRANSLATORS: Helptext for an empire ware: Flour
 #: ../../data/tribes/initialization/empire/units.lua:198
@@ -4935,7 +4936,7 @@ msgstr "A Birodalom kohóinak, páncél- és fegyverkovács műhelyeinek tüzeit
 #: ../../data/tribes/initialization/empire/units.lua:300
 msgctxt "empire_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "A kohóban nyerik ki belőle a vasat."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 2
 #: ../../data/tribes/initialization/empire/units.lua:313
@@ -4943,7 +4944,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Weapons, armor and tools are made of "
 "iron."
-msgstr ""
+msgstr "A kohókban készül. A fegyverek, a páncélok és a szerszámok készülnek vasból."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/empire/units.lua:326
@@ -4951,7 +4952,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "A kohóban nyerik ki belőle az aranyat, amit értékes építőanyagként, illetve fegyverek és páncélok készítéséhez használnak."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 2
 #: ../../data/tribes/initialization/empire/units.lua:339
@@ -4959,7 +4960,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
 " gold in the armor smithy and the weapon smithy."
-msgstr ""
+msgstr "A kohókban készül. A páncélokat és fegyvereket arannyal díszítik a páncél- és a fegyverkovács műhelyben."
 
 #. TRANSLATORS: Helptext for an empire ware: Pick
 #: ../../data/tribes/initialization/empire/units.lua:352
@@ -4973,7 +4974,7 @@ msgstr "Ezt a csákányt a kőfaragók és a bányászok használják. A szersz�
 #: ../../data/tribes/initialization/empire/units.lua:364
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
-msgstr ""
+msgstr "A  balta a favágó eszköze, ami a szerszámkovács műhelyben készül."
 
 #. TRANSLATORS: Helptext for an empire ware: Saw
 #: ../../data/tribes/initialization/empire/units.lua:374
@@ -5003,7 +5004,7 @@ msgstr "A geológusnak, az építésznek, a kovácsnak és a sisakkovácsnak is 
 #: ../../data/tribes/initialization/empire/units.lua:425
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "A szerszámkovács készíti őket."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 2
 #: ../../data/tribes/initialization/empire/units.lua:438
@@ -5037,7 +5038,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:482
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "A kohókban használják és a szerszámkovács készíti őket."
 
 #. TRANSLATORS: Helptext for an empire ware: Wooden Spear
 #: ../../data/tribes/initialization/empire/units.lua:495
@@ -5131,7 +5132,7 @@ msgstr "Árut szállít a csomópontok között."
 #: ../../data/tribes/initialization/empire/units.lua:589
 msgctxt "empire_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Árukat szállít át keskeny folyókon."
 
 #. TRANSLATORS: Helptext for an empire worker: Donkey
 #: ../../data/tribes/initialization/empire/units.lua:598
@@ -5350,7 +5351,7 @@ msgstr ""
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
-msgstr ""
+msgstr "A márvány az egyik alapvető építőanyag. A márványbányákban bányásszák. A márványbányák termelnek gránitot is."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/empire/units.lua:971
@@ -5430,7 +5431,7 @@ msgstr "A kőfejtőnek vájható kövekre van szüksége a munkaterületén."
 #: ../../data/tribes/initialization/empire/units.lua:1174
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "A favágóháznak kivágható fákra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Note helptext for an empire production site: Forester's House
 #: ../../data/tribes/initialization/empire/units.lua:1183
@@ -5463,7 +5464,7 @@ msgctxt "empire_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítőházzal."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Stonemason's
 #. House
@@ -5526,7 +5527,7 @@ msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Harapnivalót készít a felderítők számára, valamint harapnivalót, és ebédet a bányákban dolgozó bányászok élelmezéséhez."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Inn
 #: ../../data/tribes/initialization/empire/units.lua:1291
@@ -5699,7 +5700,7 @@ msgid ""
 " are also used in the blacksmithy to build basic tools, and in the charcoal "
 "kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
 " and fish."
-msgstr ""
+msgstr "A favágók vágják ki a fákat; az erdészek pedig gondoskodnak a fák utánpótlásáról. A farönköket a kovácsműhelyben használják az alapvető eszközökhöz, valamint a faszénégető kemencében szén előállításához. A füstölők is fát használnak tüzelőként a hús és a hal füstöléséhez."
 
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:114
@@ -7556,12 +7557,12 @@ msgstr "Felszerelés:"
 #: ../../data/tribes/scripting/help/building_help.lua:329
 #: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Text needed"
-msgstr "Szöveg kellene ide"
+msgstr "[Szöveg hiányzik]"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
 #: ../../data/tribes/scripting/help/building_help.lua:334
 msgid "Lore"
-msgstr "Színesítő szöveg"
+msgstr "Bölcsesség"
 
 #: ../../data/tribes/scripting/help/building_help.lua:343
 #: ../../data/tribes/scripting/help/init.lua:59
@@ -7578,7 +7579,7 @@ msgstr "Rendeltetés:"
 msgid ""
 "This mine will exploit %1%%% of its resources. From there on out, it will "
 "only have a %2%%% chance of finding any more of them."
-msgstr ""
+msgstr "Ez a bánya a nyersanyag %1%%%-át termeli ki. Ezután csak %2%%% valószínűséggel talál többet."
 
 #. TRANSLATORS: Note helptext for a mine.
 #: ../../data/tribes/scripting/help/building_help.lua:428
@@ -7586,7 +7587,7 @@ msgid ""
 "This mine will exploit all of its resources down to the deepest level. But "
 "even after having done so, it will still have a %1%%% chance of finding some"
 " more of them."
-msgstr ""
+msgstr "Ez a bánya mindent nyersanyagot kitermel a lehető legnagyobb mértékben. De ezután is talál anyagot %1%%% valószínűséggel."
 
 #: ../../data/tribes/scripting/help/building_help.lua:436
 #: ../../data/tribes/scripting/help/building_help.lua:656
@@ -7613,7 +7614,7 @@ msgstr[1] "A beszállásolt katonák %d életerő pontot gyógyulnak másodperce
 #: ../../data/tribes/scripting/help/building_help.lua:447
 #: ../../data/tribes/scripting/help/building_help.lua:453
 msgid "Conquer range:"
-msgstr "Hódítási hatótáv:"
+msgstr "Hódítás sugara:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:452
 #: ../../data/tribes/scripting/help/building_help.lua:456
@@ -7637,7 +7638,7 @@ msgstr "Bemenet:"
 #. TRANSLATORS: This is a verb (The miner mines)
 #: ../../data/tribes/scripting/help/building_help.lua:498
 msgid "Mines:"
-msgstr "Bányász:"
+msgstr "Bányászik:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:500
 msgid "Collects:"
@@ -7645,7 +7646,7 @@ msgstr "Gyűjt:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:509
 msgid "Creates:"
-msgstr ""
+msgstr "Létrehoz:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:514
 msgid "Produces:"
@@ -7727,11 +7728,11 @@ msgstr "Építési költség:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:676
 msgid "Or enhanced from:"
-msgstr "Vagy fejlesztve innen:"
+msgstr "Vagy fejlesztve ebből:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:678
 msgid "Enhanced from:"
-msgstr "Fejlesztve innen:"
+msgstr "Fejlesztve ebből:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:687
 msgid "Cumulative cost:"
@@ -7744,7 +7745,7 @@ msgstr "Ismeretlen"
 
 #: ../../data/tribes/scripting/help/building_help.lua:737
 msgid "If built directly, dismantle yields:"
-msgstr "Ha közvetlenül épített, akkor a lebontás ezt adja:"
+msgstr "Ha közvetlenül lett építve, akkor a lebontás ezt adja:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:742
 msgid "If enhanced, dismantle yields:"
@@ -7779,19 +7780,19 @@ msgstr "%s vagy jobb"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:859
 msgid "Worker uses:"
-msgstr ""
+msgstr "A munkás szerszámai:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
 #: ../../data/tribes/scripting/help/building_help.lua:862
 msgid "Workers use:"
-msgstr ""
+msgstr "A munkások szerszámai:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
 #: ../../data/tribes/scripting/help/building_help.lua:894
 msgid "Calculation needed"
-msgstr "Kiszámítás kellene ide"
+msgstr "[Számítás hiányzik]"
 
 #: ../../data/tribes/scripting/help/building_help.lua:898
 msgid "Production"
@@ -7826,18 +7827,18 @@ msgstr "Jobb kattintás"
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
-msgstr "Középső kattintás vagy Ctrl + Bal kattintás"
+msgstr "Középső kattintás vagy Ctrl + bal kattintás"
 
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
-msgstr "Ablak minimalizálása/maximalizálása"
+msgstr "Ablak összecsukása/kinagyítása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
-msgstr "Ctrl + Bal klikk a gombon"
+msgstr "Ctrl + bal kattintás a gombon"
 
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgid "Skip confirmation dialog"
@@ -7845,20 +7846,20 @@ msgstr "A megerősítő párbeszédablak kihagyása"
 
 #: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Table Control"
-msgstr ""
+msgstr "Táblázatok kezelése"
 
 #: ../../data/tribes/scripting/help/controls.lua:23
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "A több elem kijelölését is megengedő táblázatokban az alábbi billentyűkombiációk használhatók:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:26
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr "Ctrl + Kattintás"
+msgstr "Ctrl + kattintás"
 
 #: ../../data/tribes/scripting/help/controls.lua:26
 msgctxt "table_control"
@@ -7875,7 +7876,7 @@ msgstr "Egymást követő elemek kiválasztása"
 #: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "Shift + Kattintás"
+msgstr "Shift + kattintás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -7894,7 +7895,7 @@ msgstr "Útvezérlés"
 #: ../../data/tribes/scripting/help/controls.lua:37
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
-msgstr "Ctrl + Bal klikk"
+msgstr "Ctrl + bal kattintás"
 
 #: ../../data/tribes/scripting/help/controls.lua:35
 msgid "While connecting two flags: Place flags automatically"
@@ -7902,7 +7903,7 @@ msgstr "Két zászló összekötésekor: zászlók automatikus elhelyezése"
 
 #: ../../data/tribes/scripting/help/controls.lua:37
 msgid "While removing a flag: Remove all flags up to the first junction"
-msgstr "Zászló törlésekor: minden zászló törlése az első kereszteződésig"
+msgstr "Zászló törlésekor: minden zászló törlése az első útelágazásig"
 
 #: ../../data/tribes/scripting/help/controls.lua:39
 msgid "Keyboard Shortcuts"
@@ -7924,25 +7925,25 @@ msgstr "Játéksebesség csökkentése"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:46
 msgid "Increase game speed by 10x"
-msgstr ""
+msgstr "Játéksebesség növelése 10-zel"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Decrease game speed by 10x"
-msgstr ""
+msgstr "Játéksebesség csökkentése 10-zel"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Increase game speed by 0.25x"
-msgstr ""
+msgstr "Játéksebesség növelése 0,25-tel"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Decrease game speed by 0.25x"
-msgstr ""
+msgstr "Játéksebesség csökkentése 0,25-tel"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -7953,27 +7954,27 @@ msgstr "Játék megállítása"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
 #: ../../data/tribes/scripting/help/controls.lua:56
 msgid "Toggle census"
-msgstr "Épületnevek bekapcsolása"
+msgstr "Épületnevek ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:58
 msgid "Toggle statistics"
-msgstr "Statisztika ki/bekapcsolása"
+msgstr "Épületstatisztikák ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'l'
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Toggle soldier health bars and level icons"
-msgstr ""
+msgstr "Katonák életerősávjának és tapasztalati pont ikonjainak ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'u'
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Toggle building visibility"
-msgstr ""
+msgstr "Épületek ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'w'
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Toggle workarea overlap indicators"
-msgstr ""
+msgstr "Munkaterület átfedések ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
 #: ../../data/tribes/scripting/help/controls.lua:68
@@ -7994,55 +7995,55 @@ msgstr "Törzsi enciklopédia"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/tribes/scripting/help/controls.lua:74
 msgid "Toggle stock inventory"
-msgstr "Árukészlet bekapcsolása"
+msgstr "Árukészlet ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Toggle building statistics"
-msgstr "Épületstatisztika ki/bekapcsolása"
+msgstr "Épületek statisztika ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'x'
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Toggle soldier statistics"
-msgstr ""
+msgstr "Katonai statisztika ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'e'
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Toggle seafaring statistics"
-msgstr ""
+msgstr "Hajózási statisztika ki/bekapcsolása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Kurzor billentyűk"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Move the map"
-msgstr ""
+msgstr "Térkép mozgatása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + kurzor"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Move the map fast"
-msgstr ""
+msgstr "Térkép gyors mozgatása"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Térkép lassú mozgatása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + kurzor"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -8054,41 +8055,41 @@ msgstr "A fő térképnézet kiindulóhelyre igazítása"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Remember current location"
-msgstr ""
+msgstr "Jelenlegi hely megjegyzése"
 
 #: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Megjegyzett helyre ugrás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Go to previous location"
-msgstr ""
+msgstr "Előző helyre ugrás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Go to next location"
-msgstr ""
+msgstr "Következő helyre ugrás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:97
 msgid "Increase zoom"
-msgstr "Közelítés növelése"
+msgstr "Nagyítás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:99
 msgid "Decrease zoom"
-msgstr "Közelítése csökkentése"
+msgstr "Kicsinyítés"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:101
 msgid "Reset zoom"
-msgstr "Közelítés visszaállítása"
+msgstr "Nagyítás alaphelyzet"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -8100,7 +8101,7 @@ msgstr "Képernyőkép készítése"
 #: ../../data/tribes/scripting/help/controls.lua:106
 msgctxt "hotkey"
 msgid "Ctrl + Shift + Space"
-msgstr ""
+msgstr "Ctrl+Shift+Szóköz"
 
 #: ../../data/tribes/scripting/help/controls.lua:106
 msgid "Show the debug console (only in debug-builds)"
@@ -8155,57 +8156,57 @@ msgstr "A jelenlegi üzenetet archiválása/helyreállítása"
 #. TRANSLATORS: Heading in "Controls" help
 #: ../../data/tribes/scripting/help/controls.lua:131
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Hajózási statisztika"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:134
 msgid "Show all ships"
-msgstr ""
+msgstr "Összes hajó megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:136
 msgid "Show idle ships"
-msgstr ""
+msgstr "Üres hajók megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:138
 msgid "Show ships shipping wares and workers"
-msgstr ""
+msgstr "Árut és munkásokat szállító hajók megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:140
 msgid "Show waiting expeditions"
-msgstr ""
+msgstr "Várakozó expedíciók megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:142
 msgid "Show scouting expeditions"
-msgstr ""
+msgstr "Felderítő expedíciók megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:144
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr ""
+msgstr "Azon expedíciók megjelenítése, melyek találtak kikötőhelyet, vagy kolóniát alapítanak."
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:146
 msgid "Center the map on the selected ship"
-msgstr ""
+msgstr "Ugrás a kiválasztott hajóhoz"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:148
 msgid "Open the selected ship’s window"
-msgstr ""
+msgstr "A kiválasztott hajó ablakának megnyitása"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:150
 msgid "Go to the selected ship and open its window"
-msgstr ""
+msgstr "Ugrás a kiválasztott hajóhoz, és az ablakának megnyitása"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:152
 msgid "Watch the selected ship"
-msgstr ""
+msgstr "A kiválasztott hajó figyelése"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../data/tribes/scripting/help/format_help.lua:54
@@ -8276,19 +8277,19 @@ msgstr "Elfogyasztott áruk:"
 #: ../../data/tribes/scripting/help/ware_help.lua:29
 #: ../../data/tribes/scripting/help/worker_help.lua:163
 msgid "Purpose"
-msgstr "Rendeltetés"
+msgstr "Rendeltetés:"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Requirements"
-msgstr ""
+msgstr "Szükséges hozzá:"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:60
 msgid "Becomes"
-msgstr ""
+msgstr "Lesz belőle:"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:80
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Kedvelt terepek:"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
@@ -8309,7 +8310,7 @@ msgstr "Épületek"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Mozdíthatatlan tereptárgyak"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -8337,36 +8338,36 @@ msgstr "Termelő"
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:120
 msgid "Ware produced:"
-msgstr ""
+msgstr "Termelt áru:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:123
 msgid "Wares produced:"
-msgstr ""
+msgstr "Termelt áruk:"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:185
 msgid "Consumer"
-msgstr ""
+msgstr "Fogyasztó"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:188
 msgid "Consumers"
-msgstr ""
+msgstr "Fogyasztók"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Szükséges munkás:"
 
 #. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
 #. productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:82
 msgid "Workers recruited:"
-msgstr ""
+msgstr "Szükséges munkások:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -8374,7 +8375,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:112
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Munkahelye"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -8382,24 +8383,24 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:116
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Munkahelyei"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../data/tribes/scripting/help/worker_help.lua:132
 msgctxt "workerhelp_one_building"
 msgid "Can also work at"
-msgstr ""
+msgstr "További munkahelye"
 
 #. TRANSLATORS: You can also translate this as 'additional workplaces'
 #: ../../data/tribes/scripting/help/worker_help.lua:136
 msgctxt "workerhelp_multiple_buildings"
 msgid "Can also work at"
-msgstr ""
+msgstr "További munkahelyei"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:181
 msgid "Worker uses"
-msgstr "Munkás használja"
+msgstr "Munkaeszközei"
 
 #. TRANSLATORS: Soldier levels
 #: ../../data/tribes/scripting/help/worker_help.lua:198

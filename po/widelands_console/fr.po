@@ -8,16 +8,16 @@
 # GwendalD <samuel.weber@gresille.org>, 2017
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
-# Renaud Bouchard, 2015-2020
+# Renaud Bouchard, 2015-2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-25 12:56+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"PO-Revision-Date: 2021-03-31 10:37+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Utilisation : widelands <option0>=<valeur0> ... <optionN>=<valeurN>"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "       widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "       widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -136,7 +136,7 @@ msgid ""
 " --addon_server=[...]\n"
 "                      Connect to a different github repository\n"
 "                      and branch from the add-ons manager."
-msgstr ""
+msgstr " --addon_server=[...]\n                      Connecte à une branche différente du github\n                      depuis le gestionnaire de modules."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
@@ -145,7 +145,7 @@ msgstr " --nosound            Démarre le jeu avec le son désactivé."
 #: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr " --fail-on-lua-error  Force Widelands à crasher quand une erreur LUA arrive."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
@@ -179,7 +179,7 @@ msgid ""
 "                      Directly create a new singleplayer game\n"
 "                      configured in the given file. An example can\n"
 "                      be found in `data/templates/new_game_template`."
-msgstr ""
+msgstr " --new_game_from_template=FILENAME\n                      Créé directement une nouvelle partie solo\n                      configurée dans le fichier donné. Un exemple peut\n                      être trouvé dans `data/templates/new_game_template`."
 
 #: ../../src/wlapplication_messages.cc:122
 msgid ""
@@ -193,7 +193,7 @@ msgstr " --loadgame=FILENAME  Charge directement la sauvegarde FILENAME."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr ""
+msgstr " --replay=FILENAME    Charge directement le replay FILENAME."
 
 #: ../../src/wlapplication_messages.cc:127
 msgid ""
@@ -272,7 +272,7 @@ msgid ""
 "                      Eliminate a window’s border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false]\n                      Élimine la bordure de la fenêtre vers le bord\n                      de l'écran quand le bord de la fenêtre est\n                      près du bord de l'écran."
 
 #: ../../src/wlapplication_messages.cc:172
 msgid ""
@@ -304,7 +304,7 @@ msgid ""
 "                      Directly loads the given savegame or replay. Useful for\n"
 "                      .wgf/.wrpl file extension association. Does not work with\n"
 "                      other options. Also see --loadgame/--replay."
-msgstr ""
+msgstr " <save.wgf>/<replay.wrpl> \n                      Charge directement la sauvegarde ou le replay. Pratique pour\n                      l'association des extension de fichiers .wgf/.wrpl. Ne marche pas avec\n                      d'autres options. Voir aussi --loadgame/--replay."
 
 #: ../../src/wlapplication_messages.cc:192
 msgid ""
