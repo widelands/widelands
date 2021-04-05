@@ -193,7 +193,9 @@ bool is_parameter(const std::string& name) {
 /**
  * Print usage information
  */
-void show_usage(const std::string& build_id, const std::string& build_type, uint8_t verbosity) {
+void show_usage(const std::string& build_id,
+                const std::string& build_type,
+                CmdLineVerbosity verbosity) {
 	i18n::Textdomain textdomain("widelands_console");  //  uses system standard language
 
 	std::cout << std::string(60, '=')
@@ -204,10 +206,10 @@ void show_usage(const std::string& build_id, const std::string& build_type, uint
 	                .str()
 	          << endl;
 
-	if (verbosity > 0) {
+	if (verbosity != CmdLineVerbosity::None) {
 		std::string indent_string = std::string(kIndent, ' ');
 		for (const Parameter& param : parameters) {
-			if (verbosity < 2 && param.is_verbose_) {
+			if (verbosity != CmdLineVerbosity::All && param.is_verbose_) {
 				continue;
 			}
 

@@ -31,8 +31,10 @@ struct Parameter {
 	bool is_verbose_;
 };
 
+enum class CmdLineVerbosity { None, Normal, All };
+
 bool is_parameter(const std::string&);
 const std::vector<std::string> get_all_parameters();
-void show_usage(const std::string&, const std::string&, uint8_t verbosity);
+void show_usage(const std::string&, const std::string&, CmdLineVerbosity verbosity);
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H

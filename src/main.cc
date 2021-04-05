@@ -51,10 +51,10 @@ int main(int argc, char* argv[]) {
 		return 0;
 	} catch (const ParameterError& e) {
 		//  handle wrong commandline parameters
-		if (e.what()[0] != 0) {
-			std::cerr << std::endl << e.what() << std::endl << std::endl;
-		}
 		show_usage(build_id(), build_type(), e.level_);
+		if (e.what()[0] != 0) {
+			std::cerr << std::string(60, '=') << std::endl << std::endl << e.what() << std::endl;
+		}
 		delete g_app;
 
 		return 0;

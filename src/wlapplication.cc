@@ -1145,7 +1145,12 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 					continue;
 				}
 			}
-			throw ParameterError(false);
+			i18n::Textdomain textdomain("widelands_console");
+			throw ParameterError(
+			   CmdLineVerbosity::Normal,
+			   (boost::format(_("Unknown command line parameter: %1$s\nMaybe a '=' is missing?")) %
+			    opt)
+			      .str());
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
@@ -1170,11 +1175,11 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 /**
  * Parse the command line given in commandline_
  *
- * \return false if there were errors during parsing \e or if "--help"
- * was given,
- * true otherwise.
+ * \throw a ParameterError if there were errors during parsing \e or if "--help"
  */
 void WLApplication::handle_commandline_parameters() {
+	i18n::Textdomain textdomain("widelands_console");
+
 	if (commandline_.count("nosound")) {
 		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
@@ -1221,6 +1226,9 @@ void WLApplication::handle_commandline_parameters() {
 			exit(1);
 		}
 	}
+
+	init_language();  // do this now to have translated command line help
+
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];
 		commandline_.erase("datadir_for_testing");
@@ -1242,10 +1250,17 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("replay")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("replay can not be combined with other actions");
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("%1$s can not be combined with other actions")) % "replay").str());
 		}
 		filename_ = commandline_["replay"];
-		if (!filename_.empty() && *filename_.rbegin() == '/') {
+		if (filename_.empty()) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--replay").str());
+		}
+		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kReplay;
@@ -1254,11 +1269,17 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("new_game_from_template")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("new_game_from_template can not be combined with other actions");
+			throw ParameterError(CmdLineVerbosity::None,
+			                     (boost::format(_("%1$s can not be combined with other actions")) %
+			                      "new_game_from_template")
+			                        .str());
 		}
 		filename_ = commandline_["new_game_from_template"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --new_game_from_template");
+			throw ParameterError(CmdLineVerbosity::None,
+			                     (boost::format(_("Empty value of command line parameter: %1$s")) %
+			                      "--new_game_from_template")
+			                        .str());
 		}
 		game_type_ = GameType::kFromTemplate;
 		commandline_.erase("new_game_from_template");
@@ -1266,11 +1287,15 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("loadgame")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("loadgame can not be combined with other actions");
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("%1$s can not be combined with other actions")) % "loadgame").str());
 		}
 		filename_ = commandline_["loadgame"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --loadgame");
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--loadgame").str());
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1281,11 +1306,15 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("scenario")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("scenario can not be combined with other actions");
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("%1$s can not be combined with other actions")) % "scenario").str());
 		}
 		filename_ = commandline_["scenario"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --scenario");
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--scenario").str());
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1296,7 +1325,9 @@ void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("script")) {
 		script_to_run_ = commandline_["script"];
 		if (script_to_run_.empty()) {
-			throw wexception("empty value of command line parameter --script");
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--script").str());
 		}
 		if (*script_to_run_.rbegin() == '/') {
 			script_to_run_.erase(script_to_run_.size() - 1);
@@ -1320,29 +1351,44 @@ void WLApplication::handle_commandline_parameters() {
 	}
 
 	if (commandline_.count("version")) {
-		init_language();
-		throw ParameterError(0);  // No message on purpose
+		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
 	}
 
 	if (commandline_.count("help-all")) {
-		init_language();
-		throw ParameterError(2);  // No message on purpose
+		throw ParameterError(CmdLineVerbosity::All);  // No message on purpose
 	}
 
 	if (commandline_.count("help")) {
-		init_language();
-		throw ParameterError(1);  // No message on purpose
+		throw ParameterError(CmdLineVerbosity::Normal);  // No message on purpose
+	}
+
+	// Override maximized and fullscreen settings for window options
+	uint8_t exclusives = commandline_.count("xres") + commandline_.count("yres") +
+	                     2 * commandline_.count("maximized") + 2 * commandline_.count("fullscreen");
+	if (exclusives > 2) {
+		throw ParameterError(CmdLineVerbosity::None,
+		                     _("--xres/--yres, --maximized and --fullscreen can not be combined"));
+	} else if (exclusives > 0) {
+		set_config_bool("maximized", false);
+		set_config_bool("fullscreen", false);
 	}
 
 	// If it hasn't been handled yet it's probably an attempt to
 	// override a conffile setting
-	const std::map<std::string, std::string>::const_iterator commandline_end = commandline_.end();
-	for (std::map<std::string, std::string>::const_iterator it = commandline_.begin();
-	     it != commandline_end; ++it) {
-		if (is_parameter(it->first)) {
-			set_config_string(it->first, it->second);
+	for (const auto& pair : commandline_) {
+		if (is_parameter(pair.first)) {
+			if (!pair.second.empty()) {
+				set_config_string(pair.first, pair.second);
+			} else {
+				throw ParameterError(
+				   CmdLineVerbosity::None,
+				   (boost::format(_("Empty value of command line parameter: %1$s")) % pair.first)
+				      .str());
+			}
 		} else {
-			throw ParameterError(1, _("Unknown config key: ") + it->first);
+			throw ParameterError(
+			   CmdLineVerbosity::Normal,
+			   (boost::format(_("Unknown command line parameter: %1$s")) % pair.first).str());
 		}
 	}
 }
