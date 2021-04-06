@@ -49,7 +49,8 @@ void fill_parameter_vector() {
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
 	  {"", _("widelands <save.wgf>/<replay.wrpl>"), "--", "", false},
 	  {_("Options:"), _("<config-entry-name>"), _("value"),
-		_("value overwrites any config file setting Note: New value will be written to config file"),
+		_("`value` overwrites any config file setting Note: New value will be written to config "
+		  "file"),
 		false},
 	  /// Paths
 	  {" ", "datadir", _("DIRNAME"), _("Use specified directory for the widelands data files"),
@@ -66,16 +67,17 @@ void fill_parameter_vector() {
 		_("Directly create a new singleplayer game configured in the given file. An example can be "
 		  "found in `data/templates/new_game_template`"),
 		false},
-	  {"", "scenario", _("FILENAME"), _("Directly starts the map FILENAME as scenario map"), false},
-	  {"", "loadgame", _("FILENAME"), _("Directly loads the savegame FILENAME"), false},
-	  {"", "replay", _("FILENAME"), _("Directly loads the replay FILENAME"), false},
+	  {"", "scenario", _("FILENAME"), _("Directly starts the map `FILENAME` as scenario map"),
+		false},
+	  {"", "loadgame", _("FILENAME"), _("Directly loads the savegame `FILENAME`"), false},
+	  {"", "replay", _("FILENAME"), _("Directly loads the replay `FILENAME`"), false},
 	  {"", "script", _("FILENAME"),
 		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
 		  "--editor"),
 		false},
 	  {"", "editor", "",
 		_("Directly starts the Widelands editor. You can add a =FILENAME to directly load the map "
-		  "FILENAME in editor"),
+		  "`FILENAME` in editor"),
 		false},
 	  /// Misc
 	  {" ", "nosound", "", _("Starts the game with sound disabled"), false},
@@ -155,13 +157,13 @@ void fill_parameter_vector() {
 	  {"", "xres",
 		/** TRANSLATORS: A placeholder for window width */
 		_("x"),
-		/** TRANSLATORS: x references a window width placeholder */
-		_("Width x of the window in pixel"), false},
+		/** TRANSLATORS: `x` references a window width placeholder */
+		_("Width `x` of the window in pixel"), false},
 	  {"", "yres",
 		/** TRANSLATORS: A placeholder for window height */
 		_("y"),
-		/** TRANSLATORS: y references a window height placeholder */
-		_("Height y of the window in pixel"), false},
+		/** TRANSLATORS: `y` references a window height placeholder */
+		_("Height `y` of the window in pixel"), false},
 	  {"", "inputgrab", _("[true|false*]"), _("Whether to grab the mouse input"), true},
 	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL"),
 		true},
@@ -180,8 +182,7 @@ void fill_parameter_vector() {
 		  "distance `n` from the edge of the screen"),
 		true},
 	  {"", "dock_windows_to_edges", _("[true|false*]"),
-		_("Eliminate a window’s border towards the edge of the screen when the edge of the window "
-		  "is "
+		_("Eliminate a window’s border towards the edge of the screen when the edge of the window is "
 		  "next to the edge of the screen"),
 		true},
 	  {"", "panel_snap_distance", _("n"),
