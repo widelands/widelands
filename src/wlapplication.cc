@@ -1175,6 +1175,18 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
  * \throw a ParameterError if there were errors during parsing \e or if "--help"
  */
 void WLApplication::handle_commandline_parameters() {
+	auto throw_empty_value = [](const std::string& opt) {
+		throw ParameterError(
+		   CmdLineVerbosity::None,
+		   (boost::format(_("Empty value of command line parameter: %s")) % opt).str());
+	};
+
+	auto throw_exclusive = [](const std::string& opt) {
+		throw ParameterError(
+		   CmdLineVerbosity::None,
+		   (boost::format(_("%s can not be combined with other actions")) % opt).str());
+	};
+
 	if (commandline_.count("nosound")) {
 		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
@@ -1228,13 +1240,11 @@ void WLApplication::handle_commandline_parameters() {
 			set_config_string("language", lang);
 		} else {
 			init_language();
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %s")) % "language").str());
+			throw_empty_value("--language");
 		}
 	}
 	init_language();  // do this now to have translated command line help
-	i18n::Textdomain textdomain("widelands_console");
+	fill_parameter_vector();
 
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];
@@ -1257,15 +1267,11 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("replay")) {
 		if (game_type_ != GameType::kNone) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("%s can not be combined with other actions")) % "replay").str());
+			throw_exclusive("replay");
 		}
 		filename_ = commandline_["replay"];
 		if (filename_.empty()) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %s")) % "--replay").str());
+			throw_empty_value("--replay");
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1276,17 +1282,10 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("new_game_from_template")) {
 		if (game_type_ != GameType::kNone) {
-			throw ParameterError(
-			   CmdLineVerbosity::None, (boost::format(_("%s can not be combined with other actions")) %
-			                            "new_game_from_template")
-			                              .str());
 		}
 		filename_ = commandline_["new_game_from_template"];
 		if (filename_.empty()) {
-			throw ParameterError(
-			   CmdLineVerbosity::None, (boost::format(_("Empty value of command line parameter: %s")) %
-			                            "--new_game_from_template")
-			                              .str());
+			throw_empty_value("--new_game_from_template");
 		}
 		game_type_ = GameType::kFromTemplate;
 		commandline_.erase("new_game_from_template");
@@ -1294,15 +1293,11 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("loadgame")) {
 		if (game_type_ != GameType::kNone) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("%s can not be combined with other actions")) % "loadgame").str());
+			throw_exclusive("loadgame");
 		}
 		filename_ = commandline_["loadgame"];
 		if (filename_.empty()) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %s")) % "--loadgame").str());
+			throw_empty_value("--loadgame");
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1313,15 +1308,11 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("scenario")) {
 		if (game_type_ != GameType::kNone) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("%s can not be combined with other actions")) % "scenario").str());
+			throw_exclusive("scenario");
 		}
 		filename_ = commandline_["scenario"];
 		if (filename_.empty()) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %s")) % "--scenario").str());
+			throw_empty_value("--scenario");
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1332,9 +1323,7 @@ void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("script")) {
 		script_to_run_ = commandline_["script"];
 		if (script_to_run_.empty()) {
-			throw ParameterError(
-			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %s")) % "--script").str());
+			throw_empty_value("--script");
 		}
 		if (*script_to_run_.rbegin() == '/') {
 			script_to_run_.erase(script_to_run_.size() - 1);
@@ -1387,9 +1376,7 @@ void WLApplication::handle_commandline_parameters() {
 			if (!pair.second.empty()) {
 				set_config_string(pair.first, pair.second);
 			} else {
-				throw ParameterError(
-				   CmdLineVerbosity::None,
-				   (boost::format(_("Empty value of command line parameter: %s")) % pair.first).str());
+				throw_empty_value(pair.first);
 			}
 		} else {
 			throw ParameterError(
