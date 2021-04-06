@@ -1132,8 +1132,8 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 		}
 
 		// Are we looking at an option at all?
-		if (opt.compare(0, 2, "--")) {
-			if (argc == 2) {
+		if (opt.size() < 2 || opt.compare(0, 2, "--")) {
+			if (opt.size() > 2 && argc == 2) {
 				// Special case of opening a savegame or replay from file browser
 				if (0 == opt.compare(opt.size() - kSavegameExtension.size(), kSavegameExtension.size(),
 				                     kSavegameExtension)) {

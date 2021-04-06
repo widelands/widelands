@@ -27,9 +27,8 @@
 
 #include "base/i18n.h"
 
-using std::endl;
-
-static size_t kIndent = 23;
+constexpr size_t kIndent = 23;
+constexpr size_t kTextWidth = 50;
 
 #ifndef _WIN32
 static const std::string kDefaultHomedir = "~/.widelands";
@@ -50,49 +49,54 @@ void fill_parameter_vector() {
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
 	  {"", _("widelands <save.wgf>/<replay.wrpl>"), "--", "", false},
 	  {_("Options:"), _("<config-entry-name>"), _("value"),
-		_("value overwrites any config file setting\nNote: New value will be written to config file"),
+		_("value overwrites any config file setting Note: New value will be written to config file"),
 		false},
 	  /// Paths
-	  {" ", "datadir", _("DIRNAME"), _("Use specified directory for the widelands\ndata files"),
+	  {" ", "datadir", _("DIRNAME"), _("Use specified directory for the widelands data files"),
 		false},
 	  {"", "homedir", _("DIRNAME"),
-		_("Use specified directory for widelands config\nfiles, savegames and replays\nDefault is ") +
+		_("Use specified directory for widelands config files, savegames and replays Default is ") +
 		   kDefaultHomedir,
 		false},
-	  {"", "localedir", _("DIRNAME"), _("Use specified directory for the widelands\nlocale files"),
+	  {"", "localedir", _("DIRNAME"), _("Use specified directory for the widelands locale files"),
 		false},
 	  {" ", "language", _("[de_DE|sv_SE|...]"), _("The locale to use"), false},
 	  /// Game setup
 	  {" ", "new_game_from_template", _("FILENAME"),
-		_("Directly create a new singleplayer game\nconfigured in the given file. An example can\nbe "
+		_("Directly create a new singleplayer game configured in the given file. An example can be "
 		  "found in `data/templates/new_game_template`"),
 		false},
 	  {"", "scenario", _("FILENAME"), _("Directly starts the map FILENAME as scenario map"), false},
 	  {"", "loadgame", _("FILENAME"), _("Directly loads the savegame FILENAME"), false},
 	  {"", "replay", _("FILENAME"), _("Directly loads the replay FILENAME"), false},
 	  {"", "script", _("FILENAME"),
-		_("Run the given Lua script after initialization.\nOnly valid with --scenario, --loadgame, "
-		  "or "
+		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
 		  "--editor"),
 		false},
 	  {"", "editor", "",
-		_("Directly starts the Widelands editor.\nYou can add a =FILENAME to directly load\nthe map "
+		_("Directly starts the Widelands editor. You can add a =FILENAME to directly load the map "
 		  "FILENAME in editor"),
 		false},
 	  /// Misc
 	  {" ", "nosound", "", _("Starts the game with sound disabled"), false},
 	  {" ", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs"), false},
 	  {"", "ai_training", "",
-		_("Enables AI training mode. See\nhttps://www.widelands.org/wiki/Ai%20Training/\nfor a full "
+		_("Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
 		  "description of the AI training logic"),
 		false},
 	  {"", "auto_speed", "",
-		_("In multiplayer games only, this will keep\nadjusting the game speed "
-		  "automatically,\ndepending on FPS. Useful in conjunction with\n--ai_training"),
+		_("In multiplayer games only, this will keep adjusting the game speed "
+		  "automatically, depending on FPS. Useful in conjunction with --ai_training"),
 		false},
 	  /// Saving options
-	  {"", "autosave", _("n"), _("Automatically save each n minutes"), false},
-	  {"", "rolling_autosave", _("n"), _("Use n files for rolling autosaves"), true},
+	  {"", "autosave",
+		/** TRANSLATORS: A placeholder for a numerical value */
+		_("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Automatically save each `n` minutes"), false},
+	  {"", "rolling_autosave", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Use `n` files for rolling autosaves"), true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives"), false},
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in replay screen"),
 		true},
@@ -135,54 +139,67 @@ void fill_parameter_vector() {
 		_("Create syncstream dump files to help debug network games"), false},
 	  {"", "metaserver", _("URI"), _("Connect to a different metaserver for internet gaming"),
 		false},
-	  {"", "metaserverport", _("n"), _("Port number n of the metaserver for internet gaming"),
-		false},
+	  {"", "metaserverport", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Port number `n` of the metaserver for internet gaming"), false},
 	  {"", "servername", _("[...]"), _("The name of the last hosted game"), true},
 	  {"", "realname", _("[...]"), _("The nickname used for LAN and online games"), true},
 	  {"", "nickname", _("[...]"), _("Name of map author"), true},
 	  {"", "addon_server", _("URI"),
-		_("Connect to a different github repository\nand branch from the add-ons manager"), false},
+		_("Connect to a different github repository and branch from the add-ons manager"), false},
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
-		_("Whether to use the whole display for the\ngame screen"), false},
+		_("Whether to use the whole display for the game screen"), false},
 	  {"", "maximized", _("[true|false*]"), _("Whether to use start the game in a maximized window"),
 		false},
-	  {"", "xres", _("x"), _("Width x of the window in pixel"), false},
-	  {"", "yres", _("y"), _("Height y of the window in pixel"), false},
+	  {"", "xres",
+		/** TRANSLATORS: A placeholder for window width */
+		_("x"),
+		/** TRANSLATORS: x references a window width placeholder */
+		_("Width x of the window in pixel"), false},
+	  {"", "yres",
+		/** TRANSLATORS: A placeholder for window height */
+		_("y"),
+		/** TRANSLATORS: y references a window height placeholder */
+		_("Height y of the window in pixel"), false},
 	  {"", "inputgrab", _("[true|false*]"), _("Whether to grab the mouse input"), true},
 	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL"),
 		true},
 	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips"),
 		true},
-	  {"", "maxfps", _("n"), _("Maximal optical framerate n of the game"), true},
+	  {"", "maxfps", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Maximal optical framerate `n` of the game"), true},
 	  {"", "theme", _("[...]"), _("The active UI theme"), false},
 	  /// Window options
 	  {_("Options for the internal window manager:"), "animate_map_panning", _("[true*|false]"),
 		_("Should automatic map movements be animated"), true},
 	  {"", "border_snap_distance", _("n"),
-		_("Move a window to the edge of the screen\nwhen the edge of the window comes within\na "
-		  "distance n from the edge of the screen"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Move a window to the edge of the screen when the edge of the window comes within a "
+		  "distance `n` from the edge of the screen"),
 		true},
 	  {"", "dock_windows_to_edges", _("[true|false*]"),
-		_("Eliminate a window’s border towards the\nedge of the screen when the edge of the\nwindow "
+		_("Eliminate a window’s border towards the edge of the screen when the edge of the window "
 		  "is "
 		  "next to the edge of the screen"),
 		true},
 	  {"", "panel_snap_distance", _("n"),
-		_("Move a window to the edge of the panel when\nthe edge of the window comes within "
-		  "a\ndistance of n from the edge of the panel"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Move a window to the edge of the panel when the edge of the window comes within "
+		  "a distance of `n` from the edge of the panel"),
 		true},
 	  {"", "snap_windows_only_when_overlapping", _("[true|false*]"),
-		_("Only move a window to the edge of a panel\nif the window is overlapping with the panel"),
+		_("Only move a window to the edge of a panel if the window is overlapping with the panel"),
 		true},
 	  /// Others
-	  {"Others:", "verbose", "", _("Enable verbose debug messages"), false},
+	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "version", "", _("Only print version and exit"), false},
 	  {"", "help", "", _("Show this help"), false},
 	  {"", "help-all", "", _("Show this help with all available config options"), false},
 	  {" ", _("<save.wgf>/<replay.wrpl>"), "--",
-		_("Directly loads the given savegame or replay. Useful for\n.wgf/.wrpl file extension "
-		  "association. Does not work with\nother options. Also see --loadgame/--replay"),
+		_("Directly loads the given savegame or replay. Useful for .wgf/.wrpl file extension "
+		  "association. Does not work with other options. Also see --loadgame/--replay"),
 		false} };
 }
 
@@ -207,13 +224,13 @@ void show_usage(const std::string& build_id,
                 CmdLineVerbosity verbosity) {
 	i18n::Textdomain textdomain("widelands_console");
 
-	std::cout << std::string(60, '=')
-	          << endl
+	std::cout << std::string(kIndent + kTextWidth, '=')
+	          << std::endl
 	          /** TRANSLATORS: %s = version information */
 	          << (boost::format(_("This is Widelands Version %s")) %
 	              (boost::format("%s(%s)") % build_id % build_type).str())
 	                .str()
-	          << endl;
+	          << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {
 		std::string indent_string = std::string(kIndent, ' ');
@@ -223,15 +240,15 @@ void show_usage(const std::string& build_id,
 			}
 
 			if (param.title_ == " ") {
-				std::cout << endl;
+				std::cout << std::endl;
 			} else if (!param.title_.empty()) {
-				std::cout << endl << param.title_ << endl;
+				std::cout << std::endl << param.title_ << std::endl;
 			}
 
 			std::string column = " ";
 			if (param.hint_ == "--") {
 				// option without dashes
-				column += _(param.key_);
+				column += param.key_;
 			} else {
 				column += std::string("--") + param.key_;
 				if (!param.hint_.empty()) {
@@ -241,25 +258,34 @@ void show_usage(const std::string& build_id,
 
 			std::cout << column;
 			if (param.help_.empty()) {
-				std::cout << endl;
+				std::cout << std::endl;
 				continue;
 			}
 
 			if (column.size() >= kIndent) {
-				std::cout << endl << indent_string;
+				std::cout << std::endl << indent_string;
 			} else {
 				std::cout << std::string(kIndent - column.size(), ' ');
 			}
 
-			std::string help =
-			   std::regex_replace(param.help_, std::regex("\\n"), "\n" + indent_string);
-			std::cout << help << endl;
+			std::string help = param.help_;
+			while (help.size() > kTextWidth) {
+				// Auto wrap lines wider than text width
+				size_t space_idx = help.rfind(' ', kTextWidth);
+				if (space_idx != std::string::npos) {
+					std::cout << help.substr(0, space_idx) << std::endl << indent_string;
+					help = help.substr(space_idx + 1);
+				} else {
+					break;
+				}
+			}
+			std::cout << help << std::endl;
 		}
 	}
 
-	std::cout << endl
+	std::cout << std::endl
 	          << _("Bug reports? Suggestions? Check out the project website:\n"
 	               "        https://www.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
-	          << endl;
+	          << std::endl;
 }
