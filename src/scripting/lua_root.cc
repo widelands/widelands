@@ -619,16 +619,61 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 }
 
 /* RST
-   .. method:: modify_unit(type, name, property ... , value ...)
+   .. method:: modify_unit(type, name, property … , value …)
 
-      This powerful function is meant to be used by add-ons of the ``tribes``
-      and ``world`` categories from their ``postload.lua``.
+      This powerful function can be used to modify almost
+      every property of every object description.
 
-      TODO(Nordfriese): Document
+      Currently, support is implemented only for a limited number of properties.
+      Contact the Widelands Development Team if you need access to a property
+      that can not be modified by this function yet.
+
+      This function is meant to be used **only** by add-ons of the ``tribes``
+      and ``world`` categories from their ``postload.lua``. **Do not** use it
+      in scenario scripts, add-ons of other types, or the debug console.
+
+      :arg string type: The object type to modify. See below for a list of valid values.
+      :arg string name: The name of the item to modify.
+      :arg string property…: The property to modify. A property is specified as a
+                             sequence of one or more strings. See below for a list
+                             of all supported property descriptors.
+      :arg value…: The values for the property. The number and types of the expected
+                   values depend on the property being modified (see below).
+
+      Supported types and properties are:
+
+      ===========================  ========================  ====================================
+      Type                            Property descriptor                Values
+      ===========================  ========================  ====================================
+      :const:`"resource"`          :const:`"max_amount"`     **amount**         (*int*)
+      :const:`"terrain"`           :const:`"enhancement"`    **terrain_name**   (*string*)
+      :const:`"worker"`            :const:`"experience"`     **experience**     (*int*)
+      :const:`"worker"`            :const:`"becomes"`        **worker_name**    (*string*)
+      :const:`"worker"`            :const:`"programs"`       **program_name**   (*string*),
+                                   :const:`"set"`            **actions_table**  (*table*)
+      :const:`"productionsite"`    :const:`"enhancement"`    **building_name**  (*string*)
+      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*),
+                                   :const:`"add_ware"`       **amount**         (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*),
+                                   :const:`"modify_ware"`    **new_amount**     (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*)
+                                   :const:`"remove_ware"`
+      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*),
+                                   :const:`"add_worker"`     **amount**         (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*),
+                                   :const:`"modify_worker"`  **new_amount**     (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*)
+                                   :const:`"remove_worker"`
+      :const:`"productionsite"`    :const:`"programs"`       **program_name**   (*string*),
+                                   :const:`"set"`            **program_table**  (*table*)
+      :const:`"tribe"`             :const:`"add_ware"`       **ware_name**      (*string*),
+                                                             **menu_column**    (*int*)
+      :const:`"tribe"`             :const:`"add_worker"`     **worker_name**    (*string*),
+                                                             **menu_column**    (*int*)
+      :const:`"tribe"`             :const:`"add_building"`   **building_name**  (*string*)
+      :const:`"tribe"`             :const:`"add_immovable"`  **immovable_name** (*string*)
+      ===========================  ========================  ====================================
 */
-// TODO(Nordfriese): I only added functions I need for my own add-ons.
-// If anyone requests the possibility to modify any other tribe-related properties
-// through add-ons, the changes need to go here.
 int LuaDescriptions::modify_unit(lua_State* L) {
 	const std::string type = luaL_checkstring(L, 2);
 	const std::string unit = luaL_checkstring(L, 3);
