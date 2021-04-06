@@ -1145,12 +1145,9 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 					continue;
 				}
 			}
-			i18n::Textdomain textdomain("widelands_console");
-			throw ParameterError(
-			   CmdLineVerbosity::Normal,
-			   (boost::format(_("Unknown command line parameter: %1$s\nMaybe a '=' is missing?")) %
-			    opt)
-			      .str());
+			// We don't have i18n set up yet
+			throw ParameterError(CmdLineVerbosity::Normal, "Unknown command line parameter: " + opt +
+			                                                  "\nMaybe a '=' is missing?");
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
@@ -1178,8 +1175,6 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
  * \throw a ParameterError if there were errors during parsing \e or if "--help"
  */
 void WLApplication::handle_commandline_parameters() {
-	i18n::Textdomain textdomain("widelands_console");
-
 	if (commandline_.count("nosound")) {
 		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
@@ -1227,7 +1222,19 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
+	if (commandline_.count("language")) {
+		const std::string& lang = commandline_["language"];
+		if (!lang.empty()) {
+			set_config_string("language", lang);
+		} else {
+			init_language();
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   (boost::format(_("Empty value of command line parameter: %s")) % "language").str());
+		}
+	}
 	init_language();  // do this now to have translated command line help
+	i18n::Textdomain textdomain("widelands_console");
 
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];
@@ -1252,13 +1259,13 @@ void WLApplication::handle_commandline_parameters() {
 		if (game_type_ != GameType::kNone) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("%1$s can not be combined with other actions")) % "replay").str());
+			   (boost::format(_("%s can not be combined with other actions")) % "replay").str());
 		}
 		filename_ = commandline_["replay"];
 		if (filename_.empty()) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--replay").str());
+			   (boost::format(_("Empty value of command line parameter: %s")) % "--replay").str());
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1269,17 +1276,17 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("new_game_from_template")) {
 		if (game_type_ != GameType::kNone) {
-			throw ParameterError(CmdLineVerbosity::None,
-			                     (boost::format(_("%1$s can not be combined with other actions")) %
-			                      "new_game_from_template")
-			                        .str());
+			throw ParameterError(
+			   CmdLineVerbosity::None, (boost::format(_("%s can not be combined with other actions")) %
+			                            "new_game_from_template")
+			                              .str());
 		}
 		filename_ = commandline_["new_game_from_template"];
 		if (filename_.empty()) {
-			throw ParameterError(CmdLineVerbosity::None,
-			                     (boost::format(_("Empty value of command line parameter: %1$s")) %
-			                      "--new_game_from_template")
-			                        .str());
+			throw ParameterError(
+			   CmdLineVerbosity::None, (boost::format(_("Empty value of command line parameter: %s")) %
+			                            "--new_game_from_template")
+			                              .str());
 		}
 		game_type_ = GameType::kFromTemplate;
 		commandline_.erase("new_game_from_template");
@@ -1289,13 +1296,13 @@ void WLApplication::handle_commandline_parameters() {
 		if (game_type_ != GameType::kNone) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("%1$s can not be combined with other actions")) % "loadgame").str());
+			   (boost::format(_("%s can not be combined with other actions")) % "loadgame").str());
 		}
 		filename_ = commandline_["loadgame"];
 		if (filename_.empty()) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--loadgame").str());
+			   (boost::format(_("Empty value of command line parameter: %s")) % "--loadgame").str());
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1308,13 +1315,13 @@ void WLApplication::handle_commandline_parameters() {
 		if (game_type_ != GameType::kNone) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("%1$s can not be combined with other actions")) % "scenario").str());
+			   (boost::format(_("%s can not be combined with other actions")) % "scenario").str());
 		}
 		filename_ = commandline_["scenario"];
 		if (filename_.empty()) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--scenario").str());
+			   (boost::format(_("Empty value of command line parameter: %s")) % "--scenario").str());
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1327,7 +1334,7 @@ void WLApplication::handle_commandline_parameters() {
 		if (script_to_run_.empty()) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
-			   (boost::format(_("Empty value of command line parameter: %1$s")) % "--script").str());
+			   (boost::format(_("Empty value of command line parameter: %s")) % "--script").str());
 		}
 		if (*script_to_run_.rbegin() == '/') {
 			script_to_run_.erase(script_to_run_.size() - 1);
@@ -1382,13 +1389,12 @@ void WLApplication::handle_commandline_parameters() {
 			} else {
 				throw ParameterError(
 				   CmdLineVerbosity::None,
-				   (boost::format(_("Empty value of command line parameter: %1$s")) % pair.first)
-				      .str());
+				   (boost::format(_("Empty value of command line parameter: %s")) % pair.first).str());
 			}
 		} else {
 			throw ParameterError(
 			   CmdLineVerbosity::Normal,
-			   (boost::format(_("Unknown command line parameter: %1$s")) % pair.first).str());
+			   (boost::format(_("Unknown command line parameter: %s")) % pair.first).str());
 		}
 	}
 }

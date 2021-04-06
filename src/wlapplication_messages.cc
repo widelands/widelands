@@ -43,6 +43,8 @@ static std::string kDefaultHomedir = "%USERPROFILE%\\.widelands";
 /// Hint: text after =
 /// Help: Full text help
 /// Verbose: Filter some config options (--help vs. --help-all)
+/// Note that the _() markup is only for extraction. Since no textdomain is available in
+/// static context these should be marked again on usage.
 static std::vector<Parameter> parameters = {
    {_("\nUsage:"), _("\twidelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
    {"", _("\twidelands <save.wgf>/<replay.wrpl>"), "--", "", false},
@@ -97,11 +99,11 @@ static std::vector<Parameter> parameters = {
    {"", "auto_roadbuild_mode", _("[true*|false]"), _("Start building road after placing a flag"),
     true},
    {"", "display_flags", _("[...]"), _("Display flags to set for new games"), true},
-#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(matthiakl): Re-add training wheels code after v1.0
 	{"",
 	 "training_wheels",
 	 _("[true*|false]"),
-	 _(""),
+	 "",
 	 true
 	},
 #endif
@@ -214,17 +216,18 @@ void show_usage(const std::string& build_id,
 			}
 
 			if (!param.title_.empty()) {
-				std::cout << param.title_ << endl;
+				// Duplicate gettext markup to ensure being in the correct textdomain
+				std::cout << _(param.title_) << endl;
 			}
 
 			std::string column = " ";
 			if (param.hint_ == "--") {
 				// option without dashes
-				column += param.key_;
+				column += _(param.key_);
 			} else {
-				column += "--" + param.key_;
+				column += std::string("--") + _(param.key_);
 				if (!param.hint_.empty()) {
-					column += "=" + param.hint_;
+					column += std::string("=") + _(param.hint_);
 				}
 			}
 
@@ -241,7 +244,7 @@ void show_usage(const std::string& build_id,
 			}
 
 			std::string help =
-			   std::regex_replace(param.help_, std::regex("\\n"), "\n" + indent_string);
+			   std::regex_replace(_(param.help_), std::regex("\\n"), "\n" + indent_string);
 			std::cout << help << endl;
 		}
 	}
