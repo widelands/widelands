@@ -49,7 +49,7 @@ void fill_parameter_vector() {
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
 	  {"", _("widelands <save.wgf>/<replay.wrpl>"), "--", "", false},
 	  {_("Options:"), _("<config-entry-name>"), _("value"),
-		_("`value` overwrites any config file setting Note: New value will be written to config "
+		_("`value` overwrites any config file setting. Note: New value will be written to config "
 		  "file"),
 		false},
 	  /// Paths
@@ -61,7 +61,10 @@ void fill_parameter_vector() {
 		false},
 	  {"", "localedir", _("DIRNAME"), _("Use specified directory for the widelands locale files"),
 		false},
-	  {" ", "language", _("[de_DE|sv_SE|...]"), _("The locale to use"), false},
+	  {" ", "language",
+		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
+		 */
+		_("[de_DE|sv_SE|...]"), _("The locale to use"), false},
 	  /// Game setup
 	  {" ", "new_game_from_template", _("FILENAME"),
 		_("Directly create a new singleplayer game configured in the given file. An example can be "
@@ -107,7 +110,10 @@ void fill_parameter_vector() {
 	  /// Game options
 	  {"", "auto_roadbuild_mode", _("[true*|false]"), _("Start building road after placing a flag"),
 		true},
-	  {"", "display_flags", _("[...]"), _("Display flags to set for new games"), true},
+	  {"", "display_flags",
+		/** TRANSLATORS: The … character is not used on purpose to increase readability on monospaced
+		   terminals */
+		_("[...]"), _("Display flags to set for new games"), true},
 #if 0  // TODO(matthiakl): Re-add training wheels code after v1.0
 	{"",
 	 "training_wheels",
@@ -147,6 +153,10 @@ void fill_parameter_vector() {
 	  {"", "servername", _("[...]"), _("The name of the last hosted game"), true},
 	  {"", "realname", _("[...]"), _("The nickname used for LAN and online games"), true},
 	  {"", "nickname", _("[...]"), _("Name of map author"), true},
+	  {"", "lasthost", _("[...]"), _("The last host connected to"), true},
+	  {"", "registered", _("[true|false*]"),
+		_("Whether the used metaserver login is for a registered user"), true},
+	  {"", "password_sha1", _("[...]"), _("The hashed password for online logins"), true},
 	  {"", "addon_server", _("URI"),
 		_("Connect to a different github repository and branch from the add-ons manager"), false},
 	  /// Interface options

@@ -1148,6 +1148,7 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 				}
 			}
 			// We don't have i18n set up yet
+			fill_parameter_vector();
 			throw ParameterError(CmdLineVerbosity::Normal, "Unknown command line parameter: " + opt +
 			                                                  "\nMaybe a '=' is missing?");
 		} else {
