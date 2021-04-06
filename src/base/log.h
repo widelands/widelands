@@ -35,6 +35,7 @@ enum class LogType {
 };
 
 extern bool g_verbose;
+extern bool g_quiet;
 
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 // If `gametime` is not invalid, a timestamp for the gametime will be prepended to the

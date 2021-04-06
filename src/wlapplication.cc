@@ -79,6 +79,7 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/options.h"
+#include "wlapplication_messages.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -342,6 +343,16 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
+	if (commandline_.count("version")) {
+		// Version has already been printed by main()
+		throw ParameterError();
+	} else if (commandline_.count("help")) {
+		g_quiet = true;
+	} else if (commandline_.count("quiet")) {
+		// Process this option early
+		g_quiet = true;
+		commandline_.erase("quiet");
+	}
 
 	setup_homedir();
 	init_settings();
@@ -1299,8 +1310,10 @@ void WLApplication::handle_commandline_parameters() {
 	}
 
 	if (commandline_.count("verbose")) {
+		if (g_quiet) {
+			throw ParameterError(_("--verbose and --quiet are mutually exclusive"));
+		}
 		g_verbose = true;
-
 		commandline_.erase("verbose");
 	}
 
@@ -1406,9 +1419,10 @@ void WLApplication::handle_commandline_parameters() {
 		set_config_string(it->first, it->second);
 	}
 
-	if (commandline_.count("help") || commandline_.count("version")) {
+	if (commandline_.count("help")) {
 		init_language();
-		throw ParameterError();  // No message on purpose
+		show_usage();
+		throw ParameterError();
 	}
 }
 

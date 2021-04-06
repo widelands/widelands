@@ -31,7 +31,6 @@
 #include "build_info.h"
 #include "config.h"
 #include "wlapplication.h"
-#include "wlapplication_messages.h"
 
 /**
  * Cross-platform entry point for SDL applications.
@@ -51,8 +50,9 @@ int main(int argc, char* argv[]) {
 		return 0;
 	} catch (const ParameterError& e) {
 		//  handle wrong commandline parameters
-		std::cerr << std::endl << e.what() << std::endl << std::endl;
-		show_usage(build_id(), build_type());
+		if (e.what() && *e.what()) {
+			std::cerr << std::endl << e.what() << std::endl;
+		}
 		delete g_app;
 
 		return 0;

@@ -134,6 +134,7 @@ std::vector<std::string> split(const std::string& s) {
 
 // Default to stdout for logging.
 bool g_verbose = false;
+bool g_quiet = false;
 
 #ifdef _WIN32
 // Start with nullptr so that we won't initialize an empty file in the program's directory
@@ -174,6 +175,9 @@ static const char* to_string(const LogType& type) {
 }
 
 void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {
+	if (g_quiet) {
+		return;
+	}
 	assert(logger != nullptr);
 
 	// message type and timestamp

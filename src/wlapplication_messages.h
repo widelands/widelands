@@ -22,6 +22,6 @@
 
 #include <string>
 
-void show_usage(const std::string&, const std::string&);
+void show_usage();
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H
