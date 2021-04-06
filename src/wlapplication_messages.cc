@@ -178,8 +178,7 @@ void show_usage() {
 	print_help_option(
 	   /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but it HAS TO BE
 	      CONSISTENT with the translation in the widelands textdomain */
-	   _("--fullscreen=[true|false]"),
-	   _("Whether to use the whole display for the game screen."));
+	   _("--fullscreen=[true|false]"), _("Whether to use the whole display for the game screen."));
 	print_help_option(_("--xres=[...]"), _("Width of the window in pixels."));
 	print_help_option(_("--yres=[...]"), _("Height of the window in pixels."));
 	print_help_option(_("--maxfps=[5 ...]"), _("Maximal optical framerate of the game."));
@@ -190,8 +189,7 @@ void show_usage() {
 	print_help_option(
 	   /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but it HAS TO BE
 	      CONSISTENT with the translation in the widelands textdomain */
-	   _("--animate_map_panning=[true|false]"),
-	   _("Should automatic map movements be animated."));
+	   _("--animate_map_panning=[true|false]"), _("Should automatic map movements be animated."));
 	print_help_option(_("--border_snap_distance=[0 ...]"),
 	                  _("Move a window to the edge of the screen when the edge of the window comes "
 	                    "within this distance from the edge of the screen."));
