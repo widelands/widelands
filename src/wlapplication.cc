@@ -1029,12 +1029,13 @@ bool WLApplication::init_settings() {
 	init_shortcuts();
 
 	int64_t last_start = get_config_int("last_start", 0);
-	if (last_start + 12 * 60 * 60 < time(nullptr) || get_config_string("uuid", "").empty()) {
+	int64_t now = time(nullptr);
+	if (last_start + 12 * 60 * 60 < now || get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
 		set_config_string("uuid", generate_random_uuid());
 	}
-	set_config_int("last_start", time(nullptr));
+	set_config_int("last_start", now);
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, losing part of its advantage
@@ -1147,10 +1148,8 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 					continue;
 				}
 			}
-			// We don't have i18n set up yet
-			fill_parameter_vector();
-			throw ParameterError(CmdLineVerbosity::Normal, "Unknown command line parameter: " + opt +
-			                                                  "\nMaybe a '=' is missing?");
+			commandline_["error"] = opt;
+			break;
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
@@ -1248,6 +1247,14 @@ void WLApplication::handle_commandline_parameters() {
 	}
 	init_language();  // do this now to have translated command line help
 	fill_parameter_vector();
+
+	if (commandline_.count("error")) {
+		throw ParameterError(
+		   CmdLineVerbosity::Normal,
+		   (boost::format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?")) %
+		    commandline_["error"])
+		      .str());
+	}
 
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];

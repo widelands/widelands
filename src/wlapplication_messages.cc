@@ -56,7 +56,7 @@ void fill_parameter_vector() {
 	  {"", "datadir", _("DIRNAME"), _("Use specified directory for the widelands data files"),
 		false},
 	  {"", "homedir", _("DIRNAME"),
-		_("Use specified directory for widelands config files, savegames and replays Default is ") +
+		_("Use specified directory for widelands config files, savegames and replays. Default is ") +
 		   kDefaultHomedir,
 		false},
 	  {"", "localedir", _("DIRNAME"), _("Use specified directory for the widelands locale files"),
@@ -113,7 +113,7 @@ void fill_parameter_vector() {
 	  {"", "display_flags",
 		/** TRANSLATORS: The … character is not used on purpose to increase readability on monospaced
 		   terminals */
-		_("[...]"), _("Display flags to set for new games"), true},
+		_("[...]"), _("Bitmask of display flags to set for new games"), true},
 #if 0  // TODO(matthiakl): Re-add training wheels code after v1.0
 	{"",
 	 "training_wheels",
@@ -134,7 +134,7 @@ void fill_parameter_vector() {
 	  {"", "single_watchwin", _("[true|false*]"), _("Use single watchwindow mode"), true},
 	  {"", "transparent_chat", _("[true*|false]"),
 		_("Show in-game chat with transparent background"), true},
-	  {"", "toolbar_pos", _("[...]"), _("Sets the toolbar location and mode"), true},
+	  {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode"), true},
 	  /// Networking
 	  {_("Networking:"), "write_syncstreams",
 		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
@@ -182,7 +182,8 @@ void fill_parameter_vector() {
 	  {"", "maxfps", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Maximal optical framerate `n` of the game"), true},
-	  {"", "theme", _("[...]"), _("The active UI theme"), false},
+	  {"", "theme", _("DIRNAME"), _("The path to the active UI theme relative to the homedir"),
+		false},
 	  /// Window options
 	  {_("Options for the internal window manager:"), "animate_map_panning", _("[true*|false]"),
 		_("Should automatic map movements be animated"), true},
