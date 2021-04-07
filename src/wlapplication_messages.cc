@@ -53,7 +53,7 @@ void fill_parameter_vector() {
 		  "file"),
 		false},
 	  /// Paths
-	  {" ", "datadir", _("DIRNAME"), _("Use specified directory for the widelands data files"),
+	  {"", "datadir", _("DIRNAME"), _("Use specified directory for the widelands data files"),
 		false},
 	  {"", "homedir", _("DIRNAME"),
 		_("Use specified directory for widelands config files, savegames and replays Default is ") +
@@ -61,12 +61,12 @@ void fill_parameter_vector() {
 		false},
 	  {"", "localedir", _("DIRNAME"), _("Use specified directory for the widelands locale files"),
 		false},
-	  {" ", "language",
+	  {"", "language",
 		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
 		 */
 		_("[de_DE|sv_SE|...]"), _("The locale to use"), false},
 	  /// Game setup
-	  {" ", "new_game_from_template", _("FILENAME"),
+	  {"", "new_game_from_template", _("FILENAME"),
 		_("Directly create a new singleplayer game configured in the given file. An example can be "
 		  "found in `data/templates/new_game_template`"),
 		false},
@@ -83,8 +83,8 @@ void fill_parameter_vector() {
 		  "`FILENAME` in editor"),
 		false},
 	  /// Misc
-	  {" ", "nosound", "", _("Starts the game with sound disabled"), false},
-	  {" ", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs"), false},
+	  {"", "nosound", "", _("Starts the game with sound disabled"), false},
+	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs"), false},
 	  {"", "ai_training", "",
 		_("Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
 		  "description of the AI training logic"),
@@ -208,7 +208,7 @@ void fill_parameter_vector() {
 	  {"", "version", "", _("Only print version and exit"), false},
 	  {"", "help", "", _("Show this help"), false},
 	  {"", "help-all", "", _("Show this help with all available config options"), false},
-	  {" ", _("<save.wgf>/<replay.wrpl>"), "--",
+	  {"", _("<save.wgf>/<replay.wrpl>"), "--",
 		_("Directly loads the given savegame or replay. Useful for .wgf/.wrpl file extension "
 		  "association. Does not work with other options. Also see --loadgame/--replay"),
 		false} };
@@ -245,15 +245,17 @@ void show_usage(const std::string& build_id,
 
 	if (verbosity != CmdLineVerbosity::None) {
 		std::string indent_string = std::string(kIndent, ' ');
+		bool multiline = true;
 		for (const Parameter& param : parameters) {
 			if (verbosity != CmdLineVerbosity::All && param.is_verbose_) {
 				continue;
 			}
 
-			if (param.title_ == " ") {
-				std::cout << std::endl;
-			} else if (!param.title_.empty()) {
+			if (!param.title_.empty()) {
 				std::cout << std::endl << param.title_ << std::endl;
+			} else if (!multiline) {
+				// Space out single line entries
+				std::cout << std::endl;
 			}
 
 			std::string column = " ";
@@ -273,13 +275,15 @@ void show_usage(const std::string& build_id,
 				continue;
 			}
 
-			if (column.size() >= kIndent) {
+			multiline = column.size() >= kIndent;
+			if (multiline) {
 				std::cout << std::endl << indent_string;
 			} else {
 				std::cout << std::string(kIndent - column.size(), ' ');
 			}
 
 			std::string help = param.help_;
+			multiline |= help.size() > kTextWidth;
 			while (help.size() > kTextWidth) {
 				// Auto wrap lines wider than text width
 				size_t space_idx = help.rfind(' ', kTextWidth);
