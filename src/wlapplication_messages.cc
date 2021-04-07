@@ -48,13 +48,9 @@ void fill_parameter_vector() {
 	parameters =
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
 	  {"", _("widelands <save.wgf>/<replay.wrpl>"), "--", "", false},
-	  {_("Options:"), _("<config-entry-name>"), _("value"),
-		_("`value` overwrites any config file setting. Note: New value will be written to config "
-		  "file"),
-		false},
 	  /// Paths
-	  {"", "datadir", _("DIRNAME"), _("Use specified directory for the widelands data files"),
-		false},
+	  {_("Options:"), "datadir", _("DIRNAME"),
+		_("Use specified directory for the widelands data files"), false},
 	  {"", "homedir", _("DIRNAME"),
 		_("Use specified directory for widelands config files, savegames and replays. Default is ") +
 		   kDefaultHomedir,
@@ -94,6 +90,7 @@ void fill_parameter_vector() {
 		  "automatically, depending on FPS. Useful in conjunction with --ai_training"),
 		false},
 	  /// Saving options
+	  {_("Game options:"), _("Note: New values will be written to config file"), "--", "", false},
 	  {"", "autosave",
 		/** TRANSLATORS: A placeholder for a numerical value */
 		_("n"),
@@ -106,7 +103,7 @@ void fill_parameter_vector() {
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in replay screen"),
 		true},
 	  {"", "editor_player_menu_warn_too_many_players", _("[true*|false]"),
-		_("Enable verbose debug messages"), true},
+		_("Whether a warning should be shown in the editor if there are too many players"), true},
 	  /// Game options
 	  {"", "auto_roadbuild_mode", _("[true*|false]"), _("Start building road after placing a flag"),
 		true},
@@ -151,8 +148,8 @@ void fill_parameter_vector() {
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Port number `n` of the metaserver for internet gaming"), false},
 	  {"", "servername", _("[...]"), _("The name of the last hosted game"), true},
-	  {"", "realname", _("[...]"), _("The nickname used for LAN and online games"), true},
-	  {"", "nickname", _("[...]"), _("Name of map author"), true},
+	  {"", "nickname", _("[...]"), _("The nickname used for LAN and online games"), true},
+	  {"", "realname", _("[...]"), _("Name of map author"), true},
 	  {"", "lasthost", _("[...]"), _("The last host connected to"), true},
 	  {"", "registered", _("[true|false*]"),
 		_("Whether the used metaserver login is for a registered user"), true},
@@ -162,7 +159,7 @@ void fill_parameter_vector() {
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
 		_("Whether to use the whole display for the game screen"), false},
-	  {"", "maximized", _("[true|false*]"), _("Whether to use start the game in a maximized window"),
+	  {"", "maximized", _("[true|false*]"), _("Whether to start the game in a maximized window"),
 		false},
 	  {"", "xres",
 		/** TRANSLATORS: A placeholder for window width */
