@@ -685,7 +685,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
          descriptions:modify_unit("tribe", "frisians", "add_worker", "frisians_salter", 2,
                { helptexts = { purpose =
-                  _"The salter washes salt from the shores of the sea."
+                  _("The salter washes salt from the shores of the sea.")
                }})
 
       Example to add a new input ware to a building and ensure that the programs use it:
@@ -698,7 +698,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
          -- Overwrite the two predefined programs with new ones
          descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
-               "smoke_fish", { descname = _"smoking fish", actions = {
+               "smoke_fish", { descname = _("smoking fish"), actions = {
                      "return=skipped unless economy needs smoked_fish",
                      "consume=fish:2 salt log",
                      "sleep=duration:16s",
@@ -706,7 +706,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                      "produce=smoked_fish:2"
                }})
          descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
-               "smoke_meat", { descname = _"smoking meat", actions = {
+               "smoke_meat", { descname = _("smoking meat"), actions = {
                      "return=skipped when site has fish:2 and economy needs smoked_fish",
                      "return=skipped unless economy needs smoked_meat",
                      "consume=meat:2 salt log",
@@ -718,7 +718,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          -- The main program needs to be overwritten as well – otherwise
          -- the new program definitions will not not applied!
          descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
-               "main", { descname = _"working", actions = {
+               "main", { descname = _("working"), actions = {
                      "call=smoke_fish",
                      "call=smoke_meat"
                }})
