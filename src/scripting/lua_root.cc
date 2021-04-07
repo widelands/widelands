@@ -667,12 +667,61 @@ int LuaDescriptions::new_tribe(lua_State* L) {
       :const:`"productionsite"`    :const:`"programs"`       **program_name**   (*string*),
                                    :const:`"set"`            **program_table**  (*table*)
       :const:`"tribe"`             :const:`"add_ware"`       **ware_name**      (*string*),
-                                                             **menu_column**    (*int*)
+                                                             **menu_column**    (*int*),
+                                                             **helptexts**      (*table*)
       :const:`"tribe"`             :const:`"add_worker"`     **worker_name**    (*string*),
-                                                             **menu_column**    (*int*)
-      :const:`"tribe"`             :const:`"add_building"`   **building_name**  (*string*)
-      :const:`"tribe"`             :const:`"add_immovable"`  **immovable_name** (*string*)
+                                                             **menu_column**    (*int*),
+                                                             **helptexts**      (*table*)
+      :const:`"tribe"`             :const:`"add_building"`   **building_name**  (*string*),
+                                                             **helptexts**      (*table*)
+      :const:`"tribe"`             :const:`"add_immovable"`  **immovable_name** (*string*),
+                                                             **helptexts**      (*table*)
       ===========================  ========================  ====================================
+
+      Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
+      column in the workers displays (stock menu, warehouse window, economy options):
+
+      .. code-block:: lua
+
+         descriptions:modify_unit("tribe", "frisians", "add_worker", "frisians_salter", 2,
+               { helptexts = { purpose =
+                  _"The salter washes salt from the shores of the sea."
+               }})
+
+      Example to add a new input ware to a building and ensure that the programs use it:
+
+      .. code-block:: lua
+
+         -- Add the input
+         descriptions:modify_unit("productionsite", "frisians_smokery",
+               "input", "add_ware", "salt", 6)
+
+         -- Overwrite the two predefined programs with new ones
+         descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
+               "smoke_fish", { descname = _"smoking fish", actions = {
+                     "return=skipped unless economy needs smoked_fish",
+                     "consume=fish:2 salt log",
+                     "sleep=duration:16s",
+                     "animate=working duration:30s",
+                     "produce=smoked_fish:2"
+               }})
+         descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
+               "smoke_meat", { descname = _"smoking meat", actions = {
+                     "return=skipped when site has fish:2 and economy needs smoked_fish",
+                     "return=skipped unless economy needs smoked_meat",
+                     "consume=meat:2 salt log",
+                     "sleep=duration:16s",
+                     "animate=working duration:30s",
+                     "produce=smoked_meat:2"
+               }})
+
+         -- The main program needs to be overwritten as well – otherwise
+         -- the new program definitions will not not applied!
+         descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
+               "main", { descname = _"working", actions = {
+                     "call=smoke_fish",
+                     "call=smoke_meat"
+               }})
 */
 int LuaDescriptions::modify_unit(lua_State* L) {
 	const std::string type = luaL_checkstring(L, 2);
