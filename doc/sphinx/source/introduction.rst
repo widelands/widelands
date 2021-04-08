@@ -35,9 +35,10 @@ Win conditions
 
 In non player scenarios, win conditions define when one single player has won
 a game. The definitions of win conditions is very similar to defining
-starting conditions which returns an array with ``name``, ``description`` and ``func``. 
-Let’s make up a quick example: The first player to have 200 logs in his HQ 
-wins the game. All others loose. Save the following file as 
+starting conditions which returns an array with ``name``, ``description`` and ``func``.
+Take a look at the `endless_game wincondition <https://github.com/widelands/widelands/blob/master/data/scripting/win_conditions/endless_game.lua>`_
+for a basic example. Let’s make up a quick example: The first player to have
+200 logs in his HQ wins the game. All others loose. Save the following file as 
 ``data/scripting/win_conditions/harvest_logs.lua``.
 
 .. code-block:: lua
@@ -45,45 +46,47 @@ wins the game. All others loose. Save the following file as
    include "scripting/coroutine.lua"                              -- for sleep()
    include "scripting/win_conditions/win_condition_functions.lua" -- for broadcast_objective()
 
-   -- For translations, textdomain must be win_conditions
-   local textdomain = "win_conditions"
+   -- Some variable which get used throughout this win condition:
+   
+   local textdomain = "win_conditions"                  -- For translations, textdomain must be win_conditions
    push_textdomain(textdomain)
 
-   local wc_name = "Harvest logs"
-   -- This needs to be exactly like wc_name, but localized, because wc_name
-   -- will be used as the key to fetch the translation in C++
-   local wc_descname = _("Harvest logs")
-   local wc_version = 1
+   local wc_name = "Harvest logs"                       -- The name of win condition, not localized
+   local wc_descname = _("Harvest logs")                -- wc_descname has to be exactly like wc_name, because it
+                                                        -- will be used as the key to fetch the translation in C++
+
+   local wc_version = 1                                 -- The version of this win condition
+
    local wc_desc = _("The first player with 200 logs in his headquarter wins!")
 
-   local wc_definition = {                              -- The array defining the win condition
+   local wc_definition = {                              -- The table defining the win condition
       name = wc_name,
       description = wc_desc,
-      peaceful_mode_allowed = true,
+      peaceful_mode_allowed = true,                     -- Enabling the checkbox for peaceful mode in game setup menu
       func = function()                                 -- The function processing the win condition
-         local plrs = wl.Game().players                 -- All players
          broadcast_objective("win_condition",           -- Set objective with win condition for all players
                              wc_descname, 
                              wc_desc)
-
+         local plrs = wl.Game().players                 -- All players
          local winner = nil                             -- No winner yet
          local losers = {}                              -- Table of loosers
-         local map = wl.Game().map                      -- Access to map objects
-         while not winner do                            -- Iterate all players, check if he is the winner
+         local map = wl.Game().map                      -- To get access to map objects
+
+         while not winner do                            -- The main loop, it will run as long there is no winner
             sleep(5000)                                 -- Do this every 5 seconds
-            for idx, p in ipairs(plrs) do               -- Iterate the players array
+            for idx, p in ipairs(plrs) do               -- Iterate all players
                
                local sf = map.player_slots[p.number].starting_field    -- The starting field of this player
                local hq = sf.immovable                  -- The headquarters of this player
                if hq:get_wares("log") >= 200 then       -- Check if more than 200 logs are stored
-                  winner = p                            -- This player is the winner
+                  winner = p                            -- This player is the winner!
                   losers = plrs                         -- Store all players and ...
                   table.remove(losers,idx)              -- ... remove the winner from the losers table
                end
             end
          end
 
-         push_textdomain(textdomain)                    -- Each function containing localized strings
+         push_textdomain(textdomain)                    -- Each part containing localized strings
                                                         -- needs pushing the textdomain again
          for idx,p in ipairs(losers) do                 -- Iterate all losers and send the status
             p:send_to_inbox(_("You lost!"), 
@@ -95,11 +98,11 @@ wins the game. All others loose. Save the following file as
                               _("You won this game!"),
                               {popup=true}
                               )
-         pop_textdomain()                                -- Pop textdomain from function
+         pop_textdomain()                                -- Reset last textdomain
       end,
    }
-   pop_textdomain()                                      -- Pop textdomain from file
-   return wc_definition                                  -- Return the defined wincondition
+   pop_textdomain()                                      -- Reset textdomain from file
+   return wc_definition                                  -- Return the table of the defined wincondition
 
 
 Hooks
