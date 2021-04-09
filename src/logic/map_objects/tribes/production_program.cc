@@ -75,8 +75,6 @@ engine. Each productionsite must have a program named ``main``, which will be st
 when the productionsite is created in the game, and then repeated until the productionsite is
 destroyed.
 
-.. note:: The main program used to be called ``work``, which has been deprecated.
-
 Programs are defined as Lua tables. Each program must be declared as a subtable in the
 productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
 program's subtable are the translatable ``descname`` and the table of ``actions`` to execute, like
@@ -1430,7 +1428,7 @@ bool ProductionProgram::ActRecruit::get_building_work(Game& game,
 mine
 ----
 
-.. function:: mine=\<resource_name\> radius:\<number\> resources:\<percent\> when_empty:\<percent\>
+.. function:: mine=\<resource_name\> radius:\<number\> yield:\<percent\> when_empty:\<percent\>
      \[experience_on_fail:\<percent\>\]
 
    :arg string resource_name: The name of the resource to mine, e.g. 'coal' or 'water'.
