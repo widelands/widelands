@@ -3,12 +3,12 @@
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005
-# D M <hunter12@home.se>, 2017
+# D M <kamera001dm@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-05 17:22+0000\n"
 "PO-Revision-Date: 2021-03-02 12:22+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
