@@ -4,14 +4,15 @@
 # Translators:
 # András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
+# Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
-"PO-Revision-Date: 2021-04-02 23:43+0000\n"
+"POT-Creation-Date: 2021-04-05 17:22+0000\n"
+"PO-Revision-Date: 2021-04-07 00:36+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -32,20 +33,20 @@ msgstr "Gazdaság"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Üdv újra. Ebben az oktatójátékban elmondom mit kell tenned, hogy megtudd milyen jól működik a gazdaságod."
+msgstr "Üdv újra! Ebben az oktatójátékban elmondom, hogyan tudod felügyelni a gazdaságod megfelelő működését."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:14
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr ""
+msgstr "A Widelandsban a gazdaságod felépítése és olajozott működésének biztosítása a legfontosabb. A munkásokat azonban nem tudod közvetlenül irányítani – ők az általad beállított általános feltételek szerint fognak dolgozni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:15
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr ""
+msgstr "Ezt fogom neked bemutatni ebben az oktatójátékban: Milyen lehetőségeid vannak ezeknek az általános feltételeknek a beállítására?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid "A Peaceful Land"
@@ -55,7 +56,7 @@ msgstr "Egy békés föld"
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr ""
+msgstr "A térképről: Egy szép völgyben telepedtél le, két márványban, vasban és szénben gazdag hegy között. Mindenki csendes, nyugodt életre számított."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:27
 msgid ""
@@ -63,13 +64,13 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr ""
+msgstr "Egy napon azonban kelet felé egy komor pusztaságot fedeztél fel elhagyatott épületekkel. Különös hangulat lengte be, ami miatt senkinek nem volt kedve betenni oda a lábát. De a határt nem lehetett többé őrizetlenül hagyni, ezért építettél három erődöt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:28
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr "Nem készültél fel a háborúra, és sietned kell, hogy felépíts egy hadsereget."
+msgstr "Nem készültél fel a háborúra, így most sietve kell felépítened a hadseregedet."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid "An accident"
@@ -84,7 +85,7 @@ msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr ""
+msgstr "Jaj, ne, ezt nézd meg: a fogadónk lángokban áll! A nagy sietségben a kocsmáros elejtett egy fáklyát. Neki nem lett komoly baja, de a tüzet nem tudtuk időben eloltani."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
@@ -119,22 +120,22 @@ msgstr "Épületstatisztika"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:60
 msgid "Check out your taverns"
-msgstr "Nézd meg a kocsmáidat!"
+msgstr "Ellenőrizd a kocsmáidat!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "Először is meg kell tudnunk, hogy hány kocsmánk van jelenleg. A Widelandsben van egy ablak, ahol ezt könnyen megnézhetjük."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
 msgid "Look up how many taverns you have"
-msgstr ""
+msgstr "Nézd meg, hány kocsmád van!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "Tudni szeretnénk, hogy vannak-e még kocsmáink."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
@@ -142,7 +143,7 @@ msgstr "Válaszd a „Közepes épületek” lapot az épületstatisztika ablakb
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "Nézd meg, hány kocsmád van!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:74
 msgid ""
@@ -150,7 +151,7 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr ""
+msgstr "Minden épülettípus alatt két sor látható. Az első azt mutatja, hogy az adott épületből hány van jelenleg, és hány épül éppen. A második sor termelő vagy kiképző épület esetén az átlagos kihasználtságot, katonai épület esetén pedig a jelenleg elszállásolt és a kért katonák számát mutatja."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
@@ -164,24 +165,24 @@ msgstr "Épületstatisztika"
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr "Ez az épületstatisztika ablak. Megmutatja az összes épületed, a méretük szerint rendezve."
+msgstr "Ez az épületstatisztika ablak. Megmutatja az összes épülettípust, amit építhetsz, a méretük szerint csoportosítva."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid "Let me now explain what all those numbers mean:"
-msgstr "Hadd magyarázzam el mit jelentenek azok a számok:"
+msgstr "Elmagyarázom, mit jelentenek a számok:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr ""
+msgstr "A kőfejtő alatti „2/1”: Ez azt jelenti, hogy jelenleg két kőfejtőd van, ezen kívül pedig még egyet építenek."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr ""
+msgstr "„0%”: Ez mutatja az összes ilyen típusú épület termelékenységeinek az átlagát. Még csak most kezdted a játékot, ezért nem készítettek még semmit az épületeidben, de hamarosan beindul a munka."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
@@ -189,29 +190,29 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr ""
+msgstr "Az őrbódé alatti „2/1”: A katonai épületeknél az elszállásolt katonák száma látható a termelékenység helyett. Négy katonát kértél őrbódékba, de csak kettő van jelenleg ilyen fajtájú épületben. Van tehát két főnyi hiányunk – nagy szükségünk van új katonákra."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "In both cases, the color (green - yellow - red) signals you how good the "
 "value is."
-msgstr ""
+msgstr "Mindkét esetben a színek (zöld - sárga - piros) jelzik, mennyire jó az adott érték."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:89
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
-msgstr ""
+msgstr "Egy épülettípusra kattintva végig tudsz lépegetni az adott típusú épületeiden."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:90
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr ""
+msgstr "Ha egy épülettípusból nincs egy sem, akkor az kiszürkítve jelenik meg."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Egyelőre elég lesz ennyi magyarázat. Most próbáld ki te magad!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
@@ -238,7 +239,7 @@ msgstr "Bezártad az épületstatisztika ablakot, de nem nézted meg a kocsmák 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr ""
+msgstr "Kérlek, nyisd meg újra, és válaszd ki a második lapfület (közepes épületek)!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
@@ -248,7 +249,7 @@ msgstr "Nyisd meg a készletek ablakot!"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr ""
+msgstr "A készletek ablak áttekintést ad az áruk rendelkezésre álló mennyiségeiről."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
@@ -267,61 +268,61 @@ msgstr "Készletek"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
-msgstr ""
+msgstr "Ellenőrizd a harapnivalókat!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr ""
+msgstr "Rendben van. A listában láthattad, hogy nincs több kocsmád, se fogadód. Ez azt jelenti, hogy nem készül sehol harapnivaló. Lássuk, mennyi van még készleten!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Vizsgáld meg a készletek ablak első két lapját!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "Nézd meg a készletek ablak első két lapját! Ezek mutatják az összes rendelkezésre álló árut illetve munkást."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr "Ha eleget láttál, válts a harmadik („Áruk raktáron”) lapra!"
+msgstr "Ha eleget láttál, válts vissza a harmadik („Áruk raktáron”) lapra!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "A készletek ablaknak négy lapja van. Az első mutatja az összes árut, azokat is, amelyek az utakon és a zászlóknál vannak, illetve azokat is amelyek már feldolgozásra várnak a termelő épületekben."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr ""
+msgstr "Megnézve a harapnivalókat, azt látjuk, hogy csak öt darab van összesen, valószínűleg úton valahová. Öt harapnivaló nem valami sok egy ilyen nagy gazdaságnak."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr ""
+msgstr "A második lap mutatja az összes munkást, ismét az utakon és az épületekben lévőket összesítve."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:168
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr ""
+msgstr "A harmadik lap mutatja a főhadiszállásodon, a raktáraidban és a kikötőidben lévő áruk mennyiségét. Ezekre jelenleg nincs szükség sehol, így ezek képezik a tartalékaidat."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
-msgstr "A negyedik lap ugyanazt mutatja a munkásaidról."
+msgstr "A negyedik lap ugyanezt mutatja a munkásaidról."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:170
 msgid ""
@@ -338,7 +339,7 @@ msgstr "Bezártad a készletek ablakot!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "Bezártad a készletek ablakot, pedig még nem fejeztem be a magyarázatot. Légy szíves nyisd meg újra és válaszd ki az első lapot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
@@ -353,25 +354,25 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Bezártad a készletek ablakot, mielőtt mindent elmondtam volna róla. Ha már mindent tudsz, nyugodtan lépj ki az oktatójátékból!"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "Ha nem, akkor kérlek, nyisd meg újra, és nézd meg az összes lapját!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Bezártad a készletek ablakot, pedig még nem fejeztem be a magyarázatot. Légy szíves nyisd meg újra és válaszd ki a harmadik lapot!"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr ""
+msgstr "Ha nem, kérlek, nyisd meg újra, és válaszd ki a harmadik lapot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
@@ -386,7 +387,7 @@ msgstr "Építs legalább két kocsmát!"
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "Amíg nem készítünk harapnivalókat, addig a bányászaink sem termelnek érceket. Vas nélkül pedig egyetlen sisakot sem tudunk kovácsolni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
@@ -400,7 +401,7 @@ msgstr "Új kocsmákra van szükségünk"
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "Most, hogy áttekintettük a helyzetet, ideje cselekednünk! Véleményem szerint egynél több kocsmát kellene építenünk – kettő vagy akár három jobb lenne."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
@@ -411,7 +412,7 @@ msgstr "Nyisd meg a Súgó ablakot!"
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Az enciklopédia ablakban találod a súgót és annak a törzsnek az enciklopédiáját, akikkel éppen játszol."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:248
@@ -421,7 +422,7 @@ msgstr "Nyisd meg a képernyő alján található gombra kattintva!"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "Vagy elérheted közvetlenül is az „%s” billentyűvel."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -429,13 +430,13 @@ msgstr "Enciklopédia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
-msgstr ""
+msgstr "Hogyan kérhetsz segítséget"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Érthető, ha nehezen tudod megjegyezni az összes mondandómat és tanácsomat. Vagy esetleg kíváncsi vagy rá, hogy pl. miért kell nekünk harapnivaló ahhoz, hogy katonákat toborozzunk."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -443,12 +444,12 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Amikor már sokat játszottál, ezeket a dolgokat fejből is tudni fogod. De amíg megtanulod, vagy ha elbizonytalanodsz a törzsed igényeivel és képességeivel kapcsolatban, és hogy hogyan működnek az épületei és mit dolgoznak a munkásai, könnyen utánanézhetsz a törzsekhez illeszkedő játékon belüli súgónkban és enciklopédiánkban."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Keresd ki, hogy mely árukra van szükség a katonák toborzásához!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""
@@ -456,103 +457,103 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Egy katonához egy fa lándzsára és egy sisakra van szükség – innen visszafelé haladva le tudod követni, hogy milyen árukra van szükséged a katonákat toborzó laktanyák ellátásához, és ezeket mely épületekben állítják elő. Ha készen vagy, zárd be az enciklopédia ablakot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Használd az enciklopédiát, hogy megtudd, hogyan toborozhatsz új katonákat!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Válaszd az „Áruk” lapot az enciklopédia ablakban."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Keresd ki, hogy mi szükséges a sisak, és mi a fa lándzsa készítéséhez!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Ha érdekel, folytasd tovább a keresést, hogy mi kell az éppen kikeresett áruk készítéséhez!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Zárd be az enciklopédia ablakot ha végeztél."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Az enciklopédia részletei"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:281
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Az enciklopédia fejezetei"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "Az enciklopédia ablaknak öt lapja van:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "Az „Általános” lap a Widelands kezeléséről nyújt információkat. Ezen kívül kaphatsz a törzsedet érintő tippeket is."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "Az „áruk” lap a törzsed által használt árukról nyújt információt: rövid ismertetőt, az adott árut előállító épületek listáját, és azt, hogy hol használják fel az adott árut."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "A „Munkások” lap a törzsed munkásairól nyújt információt ahhoz hasonlóan, ahogy a második lap az árukról."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Az „Épületek” lap tartalmazza a szükséges informácókat a törzsed épületeiről."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:287
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Végül a „Mozdíthatatlan tereptárgyak” lap azokról a tereptárgyakról nyújt információt, amelyeket a törzsed munkásai helyeznek el a térképen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "Bezártad az enciklopédiát!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Bezártad az enciklopédia ablakát, de nem láttam, hogy megkerested volna a katona toborzásához szükséges árukat. Légy szíves, nyisd meg újra, és keresd meg!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Nyisd meg újra az enciklopédia ablakot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Bezártad az enciklopédia ablakát anélkül, hogy megkerested volna a szükséges információt. Ha már mindent tudsz, nyugodtan lépj ki az oktatójátékból!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "Ha nem, kérlek, nyisd meg újra az enciklopédia ablakot, és válaszd ki a második lapot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -565,14 +566,14 @@ msgstr "Küldd oda az árukat, ahol szükség van rájuk!"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:319
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr ""
+msgstr "Nagyszerű. Felépültek a kocsmáink, és ellátnak minket harapnivalóval."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "Jelenleg minden bánya kap harapnivalót. Ha előnyben szeretnéd valamelyik kiválasztott bányát részesíteni, akkor nyisd meg az ablakát! Az áruk lapon minden áru mellett van egy csúszka."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -580,27 +581,27 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "Ha a bal oldali kék részre (alacsony fontosságra) húzod a csúszkát, akkor az adott árut ritkábban szállítják ide. A piros (jobb oldal) viszont azt jelenti, hogy a lehető legtöbb árut hozzák ebbe az épületbe, pl. mert valami nagyon fontosat termel."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "A tényleges árumennyiséget az áruk ikonjainak megjelenése mutatja:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Az adott épületben tárolt árukat teljes színben láthatod."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "A hiányzó áruk ki vannak szürkítve."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Azok az áruk, amelyek még nincsenek az épületben, de már hozzák őket, sötétebb árnyalatban vannak mutatva."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -608,7 +609,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr ""
+msgstr "A mostani helyzetünkben jó lenne, ha a pékségek a lehető leggyorsabban dolgoznának, mert ők látják el a kocsmákat. Ezért érdemes a vizet a legmagasabb fontosságra állítani bennük. A többi épület, mint pl. a szamárfarm így kevesebb vizet fog kapni, a pékség viszont gyorsabban tud dolgozni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -628,18 +629,18 @@ msgstr "Árustatisztika"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "Lássuk, hogyan halad az árutermelésünk!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Vizsgáld meg az áruk termelését és fogyasztását!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr ""
+msgstr "Az első két lap mutatja bármelyik kiválasztott áru termelését és fogyasztását. Az egyes árukat egyszerűen rájuk kattintva tudod kiválasztani vagy eltávolítani."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
@@ -649,7 +650,7 @@ msgstr "Ha eleget láttál, válts a harmadik („Gazdaság állapota”) lapra!
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "Ebben az ablakban kiválaszthatsz árukat, hogy megjelenítsd, hogyan változott a termelésük vagy a fogyasztásuk a játékidő során. Próbáld ki néhány árucikkel!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
@@ -659,17 +660,17 @@ msgstr "Folytatom, amint rákattintasz a harmadik („Gazdaság állapota”) la
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Vizsgáld meg a gazdaságod állapotát!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr ""
+msgstr "A harmadik lap mutatja a kiválasztott árucikkek gazdasági állapotát. Pozitív érték esetén a készleted növekszik."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid "Now try this out. You can also compare it with the two previous tabs."
-msgstr ""
+msgstr "Próbáld ki! Hasonlítsd össze az előző két lappal is!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
@@ -681,18 +682,18 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr ""
+msgstr "Ezen a lapon a termelés és a fogyasztás különbségét láthatod, amit a „gazdaság állapotának” nevezünk. Itt egyből láthatod, hogy melyik a nagyobb a kiválasztott áru esetén, tehát hogy a rendelkezésre álló mennyiség növekszik vagy csökken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "Vizsgáld meg a készleteidet!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
-msgstr ""
+msgstr "A készletek lap azt mutatja meg, hogy mennyi van a kiválasztott áruból. Hasonlítsd össze a négy lap információit, hogy megértsd az összefüggést közöttük!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
@@ -703,13 +704,13 @@ msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr ""
+msgstr "Az utolsó lapon láthatod a valós készletedet. Ez növekszik, amikor a gazdaság állapota pozitív, és csökken, amikor negatív. Hasonlítsd össze a két diagramot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
-msgstr ""
+msgstr "Az utolsó két lap jól jelzi, ha áruhiány várható. Igyekezz rendszeresen rájuk nézni!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
@@ -720,7 +721,7 @@ msgstr "Bezártad az árustatisztika ablakot!"
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Bezártad az árustatisztika ablakot, pedig még nem fejeztem be a magyarázatot. Légy szíves nyisd meg újra és válaszd ki a harmadik lapot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
@@ -733,18 +734,18 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Bezártad az árustatisztika ablakot, mielőtt mindent elmondtam volna róla. Ha már mindent tudsz, nyugodtan lépj ki az oktatójátékból!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Bezártad az árustatisztika ablakot, pedig még nem fejeztem be a magyarázatot. Légy szíves nyisd meg újra és válaszd ki a negyedik lapot!"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr ""
+msgstr "Ha nem, kérlek, nyisd meg újra, és válaszd ki a negyedik lapot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
@@ -757,7 +758,7 @@ msgstr "Nyisd meg a „Gazdaság beállításai” ablakot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
 msgid "The window can be accessed by clicking on any flag you own."
-msgstr ""
+msgstr "Az ablak elérhető bármelyik zászlódra kattintva."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
@@ -769,14 +770,14 @@ msgstr "Gazdaság beállításai"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Már mutattam a készletek ablakot, ahol azt láthattad, hogy milyen áruk vannak a raktárakban. Emlékszel rá?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Most megmutatom, hogyan állíthatod be, hogy miből mennyit szeretnél. Az ablak, ahol ezt megteheted bármelyik zászlódnál elérhető, a neve: „Gazdaság beállításai”."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
@@ -786,20 +787,20 @@ msgstr "Ez az az ikon."
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
-msgstr ""
+msgstr "Ez az ablak hasonlít a készletek ablakra, de több gomb van az alján."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:484
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr ""
+msgstr "Először válassz ki egy vagy több árut (a bal egérgombot nyomva tartva húzással is). Ezután be tudod állítani a kiválasztott áruk kívánt mennyiségét."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr ""
+msgstr "A legtöbb épület csak addig termel árut, amíg a raktárakban lévő árukészlet az adott áruból el nem éri a kívánt mennyiséget. Tehát itt a kívánt tartalék mennyiségét tudod beállítani."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
@@ -807,7 +808,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr ""
+msgstr "Pl. a kasza alapértelmezett értéke 1. Ha építesz egy farmot, egy hordár elveszi a kaszát, és földművessé válik. Így nem marad több kasza, de mivel a célérték 1, a szerszámkovács készíteni fog egy újat."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -815,7 +816,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr ""
+msgstr "Ha két farmot építesz, csak az egyik tud egyből munkához látni. A másik hiába fogja várni a munkást, mert nem jut neki kasza. Ha korábban 2-re állítottad volna a célértéket, akkor lett volna raktáron két kasza, így mindkét farm egyből munkához láthatott volna."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
@@ -826,25 +827,25 @@ msgstr "Készíts 20 márványoszlopot!"
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
-msgstr ""
+msgstr "Készíts 20 márványoszlopot, hogy készen állj további erődítmények építésére!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr ""
+msgstr "A kőfaragód nem fog márványoszlopokat készíteni, amikor nincs rájuk szükség. Meg kell emelned a célmennyiséget."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "Ehhez kattints egy zászlóra és válaszd a zászlót tartalmazó gazdaság beállítását! Ebben az ablakban be tudod állítani, hogy melyik áruból mennyit szeretnél készleten tartani."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr ""
+msgstr "Van, amikor gyorsan van szükséged sok árura – gyorsabban, mint ahogy elő tudod állítani. Ilyenkor jó, ha van elég tartalékod."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -852,43 +853,43 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr ""
+msgstr "A célmennyiség beállításával így el tudod dönteni, hogy a nyersanyagokból, pl. vasból milyen árukat vagy szerszámokat készítsenek, vagy inkább halmozzák fel a vasat magát későbbre, amikor kiderül, hogy mihez lesz rá szükség."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr ""
+msgstr "Ez a beállítás csak azoknak az épületeknek fontos, amelyek árut fogyasztanak a termeléshez. Azok az épületek, amelyek ingyen dolgoznak (pl. a farmok vagy a kutak), mindig folyamatosan termelnek."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr ""
+msgstr "Akkor most próbáljuk ki! A márványoszlop célmennyisége jelenleg 10. Növeld meg, hogy készen állj, ha esetleg gyorsan kellene erődítményeket építened!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Hozz 20 márványoszlopot a frontvonalhoz!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Hozd mind a 20 márványoszlopot a frontvonal közelében álló raktárba!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr ""
+msgstr "Hogy ezt elérd, két dolgot kell tenned. Először állítsd be, hogy a márványoszlopokat lehetőleg a kívánt raktárban tárolják. Így a jövőben készülő márványoszlopokat oda fogják szállítani, ha lehetséges."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
-msgstr ""
+msgstr "Ezután ahhoz, hogy a márványoszlopokat elszállítsák a főhadiszállásodról, ott is be kell állítanod, hogy távolítsák el őket onnan."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid "Warehouse Preferences"
@@ -896,27 +897,27 @@ msgstr "Raktárbeállítások"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
 msgid "Bring the marble columns to the front line"
-msgstr ""
+msgstr "Hozd a márványoszlopokat a frontvonalhoz!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
-msgstr ""
+msgstr "A márványoszlopok termelése szépen halad, de jó lenne, ha ott tárolnák őket, ahol szükség lesz rájuk."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr ""
+msgstr "Alapesetben a megtermelt árukat a legközelebbi raktárba szállítják, ha nincs máshol szükség rájuk. Ebben az esetben ez a főhadiszállásunk, de mi azt szeretnénk, ha az erődök közelében álló raktárba kerülnének."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr ""
+msgstr "Minden raktárnak négy gombja van az áruk tárolásának beállításához. Ha rájuk viszed az egérmutatót, a megjelenő eszköztippek megmutatják, melyik mire való."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid "Borders Secured"
@@ -931,7 +932,7 @@ msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
-msgstr ""
+msgstr "Nagyszerű! Most már van elég márványoszlopunk, így támadás esetén tudunk erődítményeket építeni. De nem hiszem, hogy szükség lesz rá. Még mindig nem bukkant fel az ellenség."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
 msgid ""
@@ -940,7 +941,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr ""
+msgstr "Remélem meg tudtam tanítani, hogy hogyan irányíthatod a gazdaságot a Widelandsben. Sok a lehetőség, és elsőre nehéz lehet eligazodni. Ha most még csak néhány témát értettél is meg belőle, akkor se add fel! Próbáld ki ezeket néhány játékban, így megszokhatod őket és kitapasztalhatod a lehetőségeket. Ezután térj vissza ehhez az oktatójátékhoz, és tanuld meg a többit is!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
 msgid ""
@@ -949,4 +950,4 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr ""
+msgstr "Ez volt az utolsó oktatójáték, amit összeállítottam neked. Most már megtanítottam neked mindent, amit tudok. De vannak még ennek a világnak rejtett zugai, amiket én sem ismerek. Én most visszavonulok egy csendes helyre a nyugdíjas éveimre. Ha további kérdéseid vannak, a Widelands közösség szívesen segít neked. Itt találhatod meg őket:"
