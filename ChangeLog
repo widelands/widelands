@@ -589,6 +589,8 @@
 - Reworked RST for `lua_game.cc` (#4773)
 - Add-Ons: More verbose documentation (#4758)
 - Fix documentation 2 (#4776)
+- Document `LuaDescriptions::modify_unit` (#4807)
+- Fix documentation 3 (#4798)
 
 
 ### Editor
@@ -761,6 +763,7 @@
 - Python 3 compatibility and modernizing; Ensure utils directory works with Python3 (#4546, #4730)
 - Clean up superfluous log output (#4755)
 - Fix vision unequality operator (#4771)
+- Forward compatibility for remote add-ons (#4802)
 
 
 
