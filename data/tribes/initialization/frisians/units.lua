@@ -1605,7 +1605,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Reed Farm
             purpose = pgettext("frisians_building", "Cultivates reed that serves three different purposes for the Frisians."),
             -- TRANSLATORS: Note helptext for a frisian production site: Reed Farm
-            note = pgettext("frisians_building", "Reed is the traditional material for roofing. It is also needed for producing buckets and fishing nets, and it is woven – together with reindeer fur – into the cloth used for ships’ sails.")
+            note = pgettext("frisians_building", "Reed is the traditional material for roofing. It is also needed to produce baskets and fishing nets, and it is woven – together with reindeer fur – into the cloth used for ships’ sails.")
          }
       },
       {
