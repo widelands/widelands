@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:589 ../../src/base/i18n.cc:366
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:366
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -30,7 +30,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:591 ../../src/base/i18n.cc:370
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:370
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$sか%2$s"
@@ -41,7 +41,7 @@ msgstr "%1$sか%2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
-#: ../../data/scripting/richtext.lua:593 ../../data/scripting/richtext.lua:598
+#: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:374 ../../src/base/i18n.cc:383
 #: ../../src/logic/addons.cc:170
 #, c-format
@@ -51,77 +51,77 @@ msgstr "%1$s、%2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:595 ../../src/base/i18n.cc:378
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:378
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$sと%2$s"
 
 #. TRANSLATORS: Terrain name (Climate)
 #. TRANSLATORS: Help text - Probability to grow for an immovable
-#: ../../data/scripting/help.lua:95
+#: ../../data/scripting/help.lua:100
 #, lua-format
 msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:173
+#: ../../data/scripting/infrastructure.lua:187
 msgid "No Space"
 msgstr "空き地不足"
 
-#: ../../data/scripting/infrastructure.lua:174
+#: ../../data/scripting/infrastructure.lua:188
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "初期配置されるはずだった建物のいくつかが空き地不足のために建設されませんでした。それによりあなたは不利を受けることになります。予定通りの初期条件を得るため、リスタートすることを検討してください。"
 
-#: ../../data/scripting/infrastructure.lua:175
+#: ../../data/scripting/infrastructure.lua:189
 msgid "Not enough space"
 msgstr "土地が足りません"
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:252
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:252
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
+#: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
 msgid "Status"
 msgstr "状態"
 
-#: ../../data/scripting/messages.lua:232
+#: ../../data/scripting/messages.lua:254
 msgid "New Objective"
 msgstr ""
 
-#: ../../data/scripting/messages.lua:234
+#: ../../data/scripting/messages.lua:256
 msgid "New Objectives"
 msgstr ""
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:561
+#: ../../data/scripting/richtext.lua:570
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
 msgstr "%s%s"
 
-#: ../../data/scripting/richtext_scenarios.lua:37
+#: ../../data/scripting/richtext_scenarios.lua:50
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
@@ -623,8 +623,8 @@ msgstr "鉱山"
 msgid "port"
 msgstr "港"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1854,7 +1854,7 @@ msgstr "襲撃を受けています。"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:459
+#: ../../src/logic/map_objects/tribes/production_program.cc:457
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "経済が物資「%s」を必要としているの"
@@ -1862,7 +1862,7 @@ msgstr "経済が物資「%s」を必要としているの"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:468
+#: ../../src/logic/map_objects/tribes/production_program.cc:466
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "経済が物資「%s」を必要としていないの"
@@ -1870,14 +1870,14 @@ msgstr "経済が物資「%s」を必要としていないの"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:481
+#: ../../src/logic/map_objects/tribes/production_program.cc:479
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "経済が労働者「%s」を必要としているの"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:491
+#: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "経済が労働者「%s」を必要としていないの"
@@ -1898,36 +1898,36 @@ msgstr "経済が労働者「%s」を必要としていないの"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:541
-#: ../../src/logic/map_objects/tribes/production_program.cc:565
-#: ../../src/logic/map_objects/tribes/production_program.cc:1216
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
-#: ../../src/logic/map_objects/tribes/production_program.cc:1406
+#: ../../src/logic/map_objects/tribes/production_program.cc:539
+#: ../../src/logic/map_objects/tribes/production_program.cc:563
+#: ../../src/logic/map_objects/tribes/production_program.cc:1214
+#: ../../src/logic/map_objects/tribes/production_program.cc:1321
+#: ../../src/logic/map_objects/tribes/production_program.cc:1404
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%2$sx%1$i"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:547
+#: ../../src/logic/map_objects/tribes/production_program.cc:545
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "この建物には物資 %s があるの"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:571
+#: ../../src/logic/map_objects/tribes/production_program.cc:569
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "この建物には物資 %s が無いの"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:587
+#: ../../src/logic/map_objects/tribes/production_program.cc:585
 msgid "a worker needs experience"
 msgstr "労働者が経験を必要としているの"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:593
+#: ../../src/logic/map_objects/tribes/production_program.cc:591
 msgid "the workers need no experience"
 msgstr "労働者が経験を必要としていないの"
 
@@ -1944,21 +1944,21 @@ msgstr "労働者が経験を必要としていないの"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:726
-#: ../../src/logic/map_objects/tribes/production_program.cc:1240
+#: ../../src/logic/map_objects/tribes/production_program.cc:724
+#: ../../src/logic/map_objects/tribes/production_program.cc:1238
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "%2$sで、%1$sを中止しました"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:732
+#: ../../src/logic/map_objects/tribes/production_program.cc:730
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "%2$sで、%1$sを完了しました"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:738
-#: ../../src/logic/map_objects/tribes/production_program.cc:744
+#: ../../src/logic/map_objects/tribes/production_program.cc:736
+#: ../../src/logic/map_objects/tribes/production_program.cc:742
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "%2$sで、%1$sをスキップしました"
@@ -1967,7 +1967,7 @@ msgstr "%2$sで、%1$sをスキップしました"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1226
+#: ../../src/logic/map_objects/tribes/production_program.cc:1224
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1976,7 +1976,7 @@ msgstr[0] "%sが無いの"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1334
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1985,13 +1985,13 @@ msgstr[0] "%sを生産"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1417
+#: ../../src/logic/map_objects/tribes/production_program.cc:1415
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%sを登用"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1836
+#: ../../src/logic/map_objects/tribes/production_program.cc:1834
 msgid "No soldier found for this training level!"
 msgstr "このレベルのトレーニングを必要とする兵士はいません！"
 
@@ -1999,7 +1999,7 @@ msgstr "このレベルのトレーニングを必要とする兵士はいませ
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1877
+#: ../../src/logic/map_objects/tribes/production_program.cc:1875
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -5091,18 +5091,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -5509,32 +5509,32 @@ msgstr ""
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:753
+#: ../../src/wlapplication_options.cc:754
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:756
+#: ../../src/wlapplication_options.cc:757
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:760
+#: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:762
+#: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:766
+#: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:771
+#: ../../src/wlapplication_options.cc:772
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
@@ -5734,9 +5734,9 @@ msgstr "港"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733

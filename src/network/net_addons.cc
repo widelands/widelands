@@ -34,6 +34,7 @@
 #include <sys/types.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/md5.h"
 #include "base/warning.h"
 #include "graphic/image_cache.h"
@@ -255,7 +256,13 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	guard.ok();
 
 	for (long i = 0; i < nr_addons; ++i) {
-		result_vector[i] = fetch_one_remote(result_vector[i].internal_name);
+		try {
+			result_vector[i] = fetch_one_remote(result_vector[i].internal_name);
+		} catch (const std::exception& e) {
+			log_err("Skip add-on %s because: %s", result_vector[i].internal_name.c_str(), e.what());
+			result_vector.pop_back();
+			--i;
+		}
 	}
 	return result_vector;
 }

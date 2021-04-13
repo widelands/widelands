@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
 "PO-Revision-Date: 2021-03-02 12:22+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
@@ -191,30 +191,30 @@ msgid ""
 "game! Does not work with starting conditions without headquarters."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+#: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+#: ../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:15
+#: ../../data/scripting/win_conditions/territorial_functions.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
 #. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
 #. consistent with the translation of the Win condition.
-#: ../../data/scripting/win_conditions/territorial_functions.lua:21
+#: ../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:220
+#: ../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:221
+#: ../../data/scripting/win_conditions/territorial_functions.lua:236
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
@@ -223,12 +223,12 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:248
+#: ../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:249
+#: ../../data/scripting/win_conditions/territorial_functions.lua:265
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -268,8 +268,8 @@ msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:324
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:329
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:360
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:365
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -279,7 +279,7 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:326
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:362
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] ""
@@ -288,7 +288,7 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:332
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:368
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] ""
@@ -297,51 +297,51 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:335
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:371
 #, lua-format
 msgid "The game will end in %s."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:4
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:5
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:34
 msgid "You have won this game!"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:9
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:45
 msgid "You are defeated!"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:10
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:14
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:15
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:58
 msgid "You are the winner!"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:19
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:69
 msgid "You lost"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:20
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:70
 msgid "You’ve lost this game!"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:24
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
 msgstr ""
 
 #. TRANSLATORS: This is an overview for all players.
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:26
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:83
 msgid "Player overview:"
 msgstr ""
 

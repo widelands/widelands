@@ -3,18 +3,23 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016,2020
+# Balázs Meskó <meskobalazs@mailbox.org>, 2016,2020
 # GunChleoc, 2018
+# GunChleoc, 2014,2018
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
+# András Tóth <txa-dev@posteo.hu>, 2021
+# zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-29 19:08+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
+"PO-Revision-Date: 2021-04-10 12:52+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +29,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
-msgstr "Építs egy erődházat"
+msgstr "Építs egy erődházat!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
@@ -34,11 +39,11 @@ msgstr "Erődház"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "Építs egy gerendaházat a piros ház szimbólumon az erdő keleti oldalán, ideiglenes főhadiszállásodtól jobbra."
+msgstr "Építs egy erődházat a piros ház szimbólumon az erdő keleti oldalán, az ideiglenes főhadiszállásodtól jobbra!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
-msgstr "Építs egy favágóházat"
+msgstr "Építs egy favágóházat!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Lumberjack’s House"
@@ -48,25 +53,25 @@ msgstr "Favágóház"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Építs egy favágóházat a piros ház szimbólumon, ideiglenes főhadiszállásodtól délre."
+msgstr "Építs egy favágóházat a piros ház szimbólumon, az ideiglenes főhadiszállásodtól délre!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr "Építs két favágóházat és egy fűrészmalmot"
+msgstr "Építs két favágóházat és egy fűrészmalmot!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "Építs két favágóházat és egy fűrészmalmot"
+msgstr "Két favágóház és egy fűrészmalom"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Építs még két favágóházat és egy fűrészmalmot, amint lesz nekik elég hely."
+msgstr "Építs még két favágóházat és egy fűrészmalmot, amint lesz nekik elég hely!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
-msgstr "Építs egy erdészházat"
+msgstr "Építs egy erdészházat!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
@@ -75,11 +80,11 @@ msgstr "Erdészház"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr "Építs egy erdészházat, hogy megőrizd a sziget erdőgazdaságát."
+msgstr "Építs egy erdészházat, hogy megőrizd a sziget erdejeit!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr "Építs egy kőfejtőt"
+msgstr "Építs egy kőfejtőt!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
@@ -88,11 +93,11 @@ msgstr "Kőfejtő"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Építs délen egy kőfejtőt, hogy ki lehessen vágni némi gránitot és márványt a sziklákból."
+msgstr "Építs délen egy kőfejtőt, hogy gránit- és a márványtömböket faragjon az ott találhatő kövekből!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr "Ezek felhasználhatók későbbi épületekhez."
+msgstr "Ezeket felhasználhatjuk majd a további építkezéshez."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
@@ -187,7 +192,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr "Partot értünk egy ismeretlen helyen, és nyugodtan megpihentünk a parti pálmafák alatt. De több jó hír nincs. Az igazság:<br> mikor felkeltem ma reggel, homokon kívül semmit sem láttam magunk körül."
+msgstr "Partot értünk egy ismeretlen helyen, és nyugodtan megpihentünk a parti pálmafák alatt. De több jó hír nincs. A valóság: amikor felkeltem ma reggel, homokon kívül semmit sem láttam magunk körül."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -211,7 +216,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr "Uram, attól félek, nem vagyunk biztonságban ezen az idegen földön. Ki tudja, miféle szörnyű teremtmények élnek az erdőn túl, abban a hatalmas sivatagban? Mi lesz, ha ezek belépnek az erdőbe, és becserkésznek minket?"
+msgstr "Uram, attól félek, nem vagyunk biztonságban ezen az idegen földön. Ki tudja, miféle szörnyű teremtmények élnek az erdőn túl, abban a hatalmas sivatagban? Mi lesz, ha ezek megbújnak az erdőben, és becserkésznek minket?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -227,7 +232,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr "Mindenképpen építened kellene egy laktanyát az erdő keleti részén. Aztán az egyik emberem őrt állhat a sötétben, hogy biztonságban legyünk ezektől a teremtményektől."
+msgstr "Mindenképpen építened kellene egy erődházat az erdő keleti részén. Aztán az egyik emberem őrt állhat a sötétben, hogy biztonságban legyünk ezektől a teremtményektől."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
@@ -249,7 +254,7 @@ msgstr "Uram, láttam, hogy elkészült az erődház építése, így oda is ren
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr "Ez jó előrelépés. Most már kicsit nagyobb biztonságban érezhetjük magunkat, és foglalkozhatunk hajónk megjavításával."
+msgstr "Ez nagy előrelépés. Most már kicsit nagyobb biztonságban érezhetjük magunkat, és foglalkozhatunk a hajónk megjavításával."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:165
@@ -271,7 +276,7 @@ msgstr "Üdvözöllek, Lutius, most futottam össze Saledusszal odakint."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "Beszélt a gerendaházról. Nos, nem hinném, hogy több gerendaházra lenne szükségünk – ehelyett inkább más dolgokra kellene most összpontosítanunk."
+msgstr "Beszélt az erődházról. Nos, nem hinném, hogy több erődházra lenne szükségünk – ehelyett inkább más dolgokra kellene most összpontosítanunk."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -283,7 +288,7 @@ msgstr "Nyilvánvaló, hogy szükségünk lesz fára hajónk megjavításához. 
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
-msgstr "Amalea ajánlja…"
+msgstr "Amalea javaslata…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -301,7 +306,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "De sajnos a farönkök nem használhatók hajónk megjavításához – deszkát belőlük készítenünk, ami minden hajóhoz és nagyobb épülethez szükséges. Szóval építenünk kellene egy fűrészmalmot – amint lesz hozzá elég helyünk."
+msgstr "De sajnos a farönkök nem használhatóak a hajónk megjavításához – deszkát kell belőlük készítenünk, ami minden hajóhoz és minden nagyobb épülethez szükséges. Szóval építenünk kellene egy fűrészmalmot – amint lesz hozzá elég helyünk."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
@@ -324,7 +329,7 @@ msgstr "Láttam, hogy elkészült a fűrészmalom építése, így elkezdhetjük
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr "A rossz hír az, hogy favágóink hihetetlen sebességgel tarolnak. Lassan már nem marad fa a szigeten."
+msgstr "A rossz hír az, hogy favágóink hihetetlen sebességgel irtják az erdőt. Lassan már nem marad fa a szigeten."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -332,7 +337,7 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "Ezek a fák menedéket adnak a sivatag homokviharai elől, árnyat a forró napokon, és otthont oly sok szelíd állatnak. Nem szabad sivatagnak hátrahagynunk az egész szigetet."
+msgstr "Ezek a fák menedéket adnak a sivatag homokviharai elől, árnyat a forró napokon, és otthont oly sok szelíd állatnak. Nem szabad puszta sivatagként hátrahagynunk ezt a szigetet."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
@@ -352,18 +357,18 @@ msgstr "Saledus megjegyzi…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr "Uram, épp eszembe jutottak ennek a földnek a déli partján álló sziklák. Talán kivághatnánk belőlük némi hasznos gránitot és gyönyörű márványt."
+msgstr "Uram, gondolkodtam a sziget déli partján álló sziklákról. Talán faraghatnánk belőlük némi hasznos gránitot és gyönyörű márványt."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr "Hajónk megjavítása amúgy is eltart pár hétig, és a nyersanyagok, amiket most kitermelünk, alapját képezhetik erős és nagy épületeknek egy másik vidéken."
+msgstr "Hajónk megjavítása amúgy is eltart pár hétig, és a nyersanyagokból, amiket most kitermelünk, egy másik vidéken erős és nagy épületek építésébe kezdhetünk majd."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:210
 msgid "A Step Forward"
-msgstr "Egy lépés előre"
+msgstr "Előrelépés"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
@@ -375,7 +380,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "Uram, ma nagy lépést tettünk első kastélyunk felé. A kőfejtő délen elkezdett dolgozni, és hamarosan gránittal és gyönyörű márvánnyal lát el minket."
+msgstr "Uram, ma nagy lépést tettünk első várunk megépítése felé. A kőfejtő délen elkezdett dolgozni, és hamarosan gránittal és gyönyörű márvánnyal lát el minket."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
@@ -392,14 +397,14 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr "Ma kaptam az üzenetet, hogy hajónkat teljesen megjavították. Jelenleg embereim mindent a megjavított hajóba rakodnak, remélve, hogy az most jobb szolgálatot tesz, mint legutóbb."
+msgstr "Ma kaptam az üzenetet, hogy a hajónkat teljesen megjavították. Embereim már elkezdtek mindent berakodni a megjavított hajóba. Reméljük, hogy most jobban fog szolgálni, mint legutóbb."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr "A mai lesz az utolsó éjszakánk ezen a szigeten. Holnap reggel távozunk, új helyet keresve számkivetésünknek."
+msgstr "A mai lesz az utolsó éjszakánk ezen a szigeten. Holnap reggel távozunk, új menedéket keresni száműzetésünkben."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
@@ -414,7 +419,7 @@ msgstr "Győzelem"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel."
+msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:237
 msgid "Safe Peninsula"
@@ -429,4 +434,4 @@ msgstr "Saledus így szól:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr "Uram, nagyon bebiztosítottad a félszigetet. De most már ideje továbblépni!"
+msgstr "Uram, biztonságossá tetted ezt a félszigetet. De most már ideje továbblépnünk!"

@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# D M <hunter12@home.se>, 2017
+# D M <kamera001dm@gmail.com>, 2017
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-29 19:08+0000\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"

@@ -5,16 +5,19 @@
 # András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2018
 # GunChleoc, 2016
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-29 19:08+0000\n"
-"PO-Revision-Date: 2021-03-23 23:36+0000\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
+"PO-Revision-Date: 2021-04-11 22:08+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -288,7 +291,7 @@ msgstr "Alapvető vezérlés"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr "Ebben az oktatójátékban megtanulod, hogyan kell navigálni a Widelandsben, illetve, hogy miként lehet épületeket és utakat építeni."
+msgstr "Ebben az oktatójátékban megtanulsz eligazodni a Widelandsben, és megtanulod, hogy hogyan lehet épületeket és utakat építeni."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
@@ -323,7 +326,7 @@ msgstr "Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Wi
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr "Archipelago-tenger"
+msgstr "Finn-szigetvilág"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -334,14 +337,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Svédország és Finnország között fekszik egy szigetvilág. Ez a hihetetlen szépségű hely se nem föld, se nem tenger, hanem mindkettő. Néhány száz kilométeren belül, nem kevesebb mint 50.000 sziget és szigetecske található, a legtöbb nem nagyobb néhány holdnál. A klíma egész enyhe a szélességi fokhoz képest; a termesztés virágzik, a bogyókból sok van, és bőséges a hal. A hely kis lakossága sosem ismerte az éhínséget. Ti gazemberek nem tudtátok ezt a kis paradicsomot békén hagyni, ugye?"
+msgstr "Svédország és Finnország között fekszik egy szigetvilág. Ez a hihetetlen szépségű hely se nem föld, se nem tenger, hanem mindkettő. Néhány száz kilométeren belül, nem kevesebb mint 50.000 sziget és szigetecske található, a legtöbb nem nagyobb néhány holdnál. A klíma egész enyhe a szélességi fokhoz képest; a földművelés virágzik, bogyókból sok van, és bőséges a hal. A szigetvilág ritka lakossága sosem ismerte az éhínséget. De ti hódításra éhes gazemberek nem tudjátok ezt a kis paradicsomot békén hagyni…"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "A nagy épülethelyek ritkák azokon a kis szigeteken. Mérlegeld a nagy épületek építését rajtuk. Néha nagy katonai épületekre lesz szükséged, hogy a következő szigetig terjeszkedj. Az MI rosszul fog teljesíteni."
+msgstr "A kis szigeteken ritkák a nagy épületeknek alkalmas helyek. Gondosan használd ki ezeket! Néha nagy katonai épületekre lesz szükséged, hogy a következő szigetig terjeszkedj. A mesterséges intelligencia nem tud jól játszani ezen a térképen."
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
