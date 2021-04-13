@@ -6,14 +6,16 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017-2018
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-05 17:22+0000\n"
-"PO-Revision-Date: 2021-04-02 23:05+0000\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
+"PO-Revision-Date: 2021-04-10 22:39+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -134,7 +136,7 @@ msgstr "A Harci Aréna"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr "Most, hogy beszéltem a kiképzésről és a szintekről, hadd fejtsem ki bővebben."
+msgstr "Most, hogy beszéltem a kiképzésről és a szintekről, hadd fejtsem ki bővebben!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
@@ -152,7 +154,7 @@ msgstr "Ezeknek a kiképzőhelyeknek az egyike a harci aréna. Ez egy nagy és d
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
-msgstr "Hogy lásd a kitérés fejlesztését élőben, építs egy harci arénát."
+msgstr "Hogy lásd a kitérés fejlesztését élőben, építs egy harci arénát!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
 msgid ""
@@ -167,11 +169,11 @@ msgstr "Harci aréna"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
-msgstr "Építs egy harci arénát"
+msgstr "Építs egy harci arénát!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid "Build a battle arena. It is a big building."
-msgstr "Építs egy harci arénát. Ez egy nagy épület."
+msgstr "Építs egy harci arénát! Ez egy nagy épület."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
@@ -241,7 +243,7 @@ msgstr "Van egy második kiképzőhely: a kiképzőtábor. Ez szintén egy nagy 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 msgid "Build a training camp."
-msgstr "Építs egy kiképzőtábort."
+msgstr "Építs egy kiképzőtábort!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Training Camp"
@@ -249,7 +251,7 @@ msgstr "Kiképzőtábor"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
-msgstr "Építs egy kiképzőtábort"
+msgstr "Építs egy kiképzőtábort!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:113
 msgid ""
@@ -294,7 +296,7 @@ msgstr "Felderítő kunyhója"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid "Explore Your Surroundings"
-msgstr "Fedezd fel a környéket"
+msgstr "Fedezd fel a környéket!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
@@ -367,11 +369,11 @@ msgstr "Fedezd fel a térképet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr "Várd meg, amíg a felderítő felfedezi az eddig ismeretlen területeket."
+msgstr "Várd meg, amíg a felderítő felfedezi az eddig ismeretlen területeket!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr "Figyeld a felderítődet"
+msgstr "Figyeld a felderítődet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
@@ -405,7 +407,7 @@ msgstr "Hősök és Újoncok"
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr "Amíg a katonáid kiképzésen vannak, hadd mutassam meg, hogyan vezényelheted őket."
+msgstr "Amíg a katonáid kiképzésen vannak, hadd mutassam meg, hogyan vezényelheted őket!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid ""
@@ -456,7 +458,7 @@ msgstr "Ha el szeretnél küldeni egy katonát, csak rá kell kattintanod. Ekkor
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr "Elmagyarázom azt is, hogy mit jelentenek a számok az állapotsorban. A felirat akár 3 számot is tartalmazhat, pl. „1 (+5) katona (+2)‟."
+msgstr "Elmagyarázom azt is, hogy mit jelentenek a számok az állapotsorban. A felirat akár 3 számot is tartalmazhat, pl. „1 (+5) katona (+2)”."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
@@ -481,7 +483,7 @@ msgstr "A harmadik szám mutatja, hogy hány katona hiányzik az épületből. A
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
-msgstr "Bontsd le az őrbódét"
+msgstr "Bontsd le az őrbódét!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Dismantling military buildings"
@@ -515,7 +517,7 @@ msgstr "Láttad az őrbódédat? Mivel nem fér el benne sok katona, és egy er�
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 msgid "Dismantle it."
-msgstr "Bontsd le."
+msgstr "Bontsd le!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid ""
@@ -529,7 +531,7 @@ msgstr "Katonák, lelépni!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
-msgstr "Bontsd le az északnyugati őrbódét"
+msgstr "Bontsd le az északnyugati őrbódét!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
@@ -541,12 +543,12 @@ msgstr "Egy katonai épületben állomásozó katonák számát a nyíl gombokka
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr "Bontsd le az északnyugati őrbódét, a határőrház mellett."
+msgstr "Bontsd le az északnyugati őrbódét, a határőrház mellett!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
 msgid "Enhance Your Fortress"
-msgstr "Fejleszd az erődödet"
+msgstr "Fejleszd az erődödet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid "Enhancing Buildings"
@@ -570,7 +572,7 @@ msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Fellegvárat nem tudsz közvetlenül építeni, ehelyett először egy erődöt kell építened, és azt továbbfejleszteni fellegvárrá. Ehhez kattints az erődre, és válaszd ki a továbbfejlesztés fellegvárrá gombot."
+msgstr "Fellegvárat nem tudsz közvetlenül építeni, ehelyett először egy erődöt kell építened, és azt továbbfejleszteni fellegvárrá. Ehhez kattints az erődre, és válaszd ki a továbbfejlesztés fellegvárrá gombot!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid ""
@@ -585,11 +587,11 @@ msgstr "Most fejleszd az erődödet fellegvárrá!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
 msgid "Enhance your fortress to a citadel"
-msgstr "Fejleszd az erődödet fellegvárrá"
+msgstr "Fejleszd az erődödet fellegvárrá!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 msgid "Enhance your fortress to a mighty citadel."
-msgstr "Fejleszd az erődödet félelmetes fellegvárrá."
+msgstr "Fejleszd az erődödet félelmetes fellegvárrá!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
 msgid ""
@@ -601,11 +603,11 @@ msgstr "A fellegvárba 12 katona fér, és ez a legnagyobb katonai épület, ami
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
 msgid "Defeat your Enemy"
-msgstr "Győzd le az ellenségedet"
+msgstr "Győzd le az ellenségedet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:261
 msgid "Defeat the Enemy"
-msgstr "Győzd le az ellenséget"
+msgstr "Győzd le az ellenséget!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
 msgid ""
@@ -621,7 +623,7 @@ msgstr "Nagyszerű munka, a fellegvár elkészült. De mi ez? Egy ellenséges t�
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr "Egy épület megtámadásához kattints az ajtajára, válaszd ki a küldeni kívánt katonák számát és kattints a „Támadás” gombra."
+msgstr "Egy épület megtámadásához kattints az ajtajára, válaszd ki a küldeni kívánt katonák számát és kattints a „Támadás” gombra!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 msgid ""
@@ -634,19 +636,19 @@ msgstr "A katonáid az összes közeli katonai épületből elindulnak. Hasonló
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr "Támadd meg és foglald el az ellenség összes katonai létesítményét, a főhadiszállást pedig rombold le."
+msgstr "Támadd meg és foglald el az ellenség összes katonai létesítményét, a főhadiszállást pedig rombold le!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:270
 msgid "Defeat Your Enemy"
-msgstr "Győzd le az ellenségedet"
+msgstr "Győzd le az ellenségedet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:272
 msgid "Defeat the enemy tribe"
-msgstr "Győzd le az ellenséges törzset"
+msgstr "Győzd le az ellenséges törzset!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
 msgid "Defeat the nearby enemy."
-msgstr "Győzd le a közeli ellenséget."
+msgstr "Győzd le a közeli ellenséget!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:281
