@@ -6,14 +6,17 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016,2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016,2020
+# litoll <litoll@freemail.hu>, 2016,2020
+# zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-03-29 19:08+0000\n"
-"PO-Revision-Date: 2021-03-24 17:54+0000\n"
+"POT-Creation-Date: 2021-04-09 12:11+0000\n"
+"PO-Revision-Date: 2021-04-11 22:08+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +33,7 @@ msgstr "Ereklyék"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Keress ősi ereklyéket. Amikor mindet megtaláltátok, akkor az a csapat nyer, amelyik a legtöbbet birtokolja."
+msgstr "Keress ősi ereklyéket! Amikor mindet megtaláltátok, akkor az a csapat nyer, amelyik a legtöbbet birtokolja."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
@@ -46,13 +49,13 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr "Nincsenek ereklyék ezen a térképen. Ennek nem szabadna megtörténnie. Kérjük jelentsd a hibát a %s oldalon és add meg a Widelands verziódat és a térképet amit megpróbáltál betölteni."
+msgstr "Nincsenek ereklyék ezen a térképen. Ennek nem szabadna megtörténnie. Kérjük jelentsd a hibát a %s oldalon és add meg a Widelands verziódat és a térképet amit megpróbáltál betölteni!"
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Artifact Found"
-msgstr "Ereklye megtalálva"
+msgstr "Ereklyét találtunk"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "Your team found a new artifact."
@@ -190,47 +193,47 @@ msgid ""
 "game! Does not work with starting conditions without headquarters."
 msgstr "Az a törzs vagy csapat nyeri a játékot, aki megtalálja és megsemmisíti mindenki más főhadiszállását! Nem működik, ha a kezdő beállítás nem tartalmaz főhadiszállást."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+#: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
 msgstr "%i. csapat"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+#: ../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "%1$s birtokolja a szárazföld %2$3.0f%%-át (%3$i / %4$i)."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:15
+#: ../../data/scripting/win_conditions/territorial_functions.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "%1$s birtokolta a szárazföld %2$3.0f%%-át (%3$i / %4$i)."
 
 #. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
 #. consistent with the translation of the Win condition.
-#: ../../data/scripting/win_conditions/territorial_functions.lua:21
+#: ../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
 msgstr "Terület százaléka"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:220
+#: ../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
 msgstr "Te uralod a játékterület több mint felét."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:221
+#: ../../data/scripting/win_conditions/territorial_functions.lua:236
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] "Még %i percig tartsad meg a győzelemhez."
-msgstr[1] "Még %i percig tartsad meg a győzelemhez."
+msgstr[0] "Még %i percig kell megtartanod a győzelemhez."
+msgstr[1] "Még %i percig kell megtartanod a győzelemhez."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:248
+#: ../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr "%s több, mint a térkép felét birtokolja."
+msgstr "%s uralja a játékterület több mint felét."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:249
+#: ../../data/scripting/win_conditions/territorial_functions.lua:265
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] "Még mindig van %i perced megakadályozni más győzelmét."
-msgstr[1] "Még mindig van %i perced megakadályozni más győzelmét."
+msgstr[0] "Még %i perced van megakadályozni a győzelmét."
+msgstr[1] "Még %i perced van megakadályozni a győzelmét."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
@@ -259,12 +262,12 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr "Minden játékos vagy csapat igyekszik a térkép több mint felét megszerezni. A nyertes az a játékos vagy csapat, amelyik ezt a területet legalább 20 percig megtartja, vagy amelyiknek 4 óra elteltével a legnagyobb területe van – amelyik előbb bekövetkezik. Békés módban a játék véget ér, ha egy játékosnak nagyobb területe van, mint amennyit a többiek meg tudnának szerezni."
+msgstr "Minden játékos vagy csapat igyekszik a térkép több mint felét megszerezni. A nyertes az a játékos vagy csapat, amelyik ezt a területet legalább 20 percig megtartja, vagy, ha ez 4 óra alatt nem sikerül, akkor az, amelyiknek 4 óra elteltével a legnagyobb területe van. Békés módban a játék véget ér, ha egy játékosnak nagyobb területe van, mint amennyit a többiek meg tudnának szerezni."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:324
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:329
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:360
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:365
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -272,65 +275,65 @@ msgstr[0] "%i perc"
 msgstr[1] "%i perc"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:326
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:362
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% óra és %2%"
 msgstr[1] "%1% óra és %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:332
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:368
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% óra"
 msgstr[1] "%1% óra"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:335
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:371
 #, lua-format
 msgid "The game will end in %s."
 msgstr "A játék %s múlva véget ér."
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:4
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
 msgstr "Gratulálunk!"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:5
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:34
 msgid "You have won this game!"
 msgstr "Megnyerted a játékot!"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:9
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:45
 msgid "You are defeated!"
 msgstr "Vesztettél!"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:10
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
 msgstr "Elvesztetted az utolsó raktáradat, ezért vesztettél. Folytathatod a játékot megfigyelőként, ha akarod."
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:14
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
 msgstr "Nyertél"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:15
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:58
 msgid "You are the winner!"
 msgstr "Te nyertél!"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:19
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:69
 msgid "You lost"
 msgstr "Vesztettél"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:20
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:70
 msgid "You’ve lost this game!"
 msgstr "Elvesztetted a játékot!"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:24
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
 msgstr "Állás"
 
 #. TRANSLATORS: This is an overview for all players.
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:26
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:83
 msgid "Player overview:"
 msgstr "Játékosok áttekintése:"
 
@@ -343,7 +346,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr "Erdei manóként szereted a nagy erdőket, így az a dolgod, hogy felségterületeden több fa legyen, mint bármelyik másik játékosén. A játszma 4 óráig tart. Akinek akkor a legtöbb fája van, az nyeri a játékot."
+msgstr "Erdei manók vagytok, akik szeretik a kiterjedt erdőket, ezért az a célotok, hogy a felségterületeteken több fa legyen, mint bármelyik másik játékosén. A játszma 4 óráig tart. Akinek ekkor a legtöbb fája van, az nyeri a játékot."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:25
 msgid "Trees owned"
