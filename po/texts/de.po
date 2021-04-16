@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-09 12:11+0000\n"
-"PO-Revision-Date: 2021-03-22 20:59+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"PO-Revision-Date: 2021-04-13 11:38+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -614,9 +614,9 @@ msgstr "Die %1% Tasten erlauben dir, direkt die Größe der Bearbeitungsfläche 
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "Die Leertaste verhält sich wie im normalen Spiel. Sie schaltet die Bauhilfe an oder aus."
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr "%1% verhält sich wie im normalen Spiel. Sie schaltet die Bauhilfe an oder aus."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
