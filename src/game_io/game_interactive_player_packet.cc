@@ -34,7 +34,7 @@ namespace Widelands {
 
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 }  // namespace
 
@@ -98,7 +98,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					}
 				}
 
-				if (packet_version == kCurrentPacketVersion) {
+				if (packet_version >= 5) {
 					size_t nr_port_spaces = fr.unsigned_32();
 					for (size_t i = 0; i < nr_port_spaces; ++i) {
 						uint32_t serial = fr.unsigned_32();
@@ -109,6 +109,9 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
 						}
 					}
+				}
+				if (packet_version >= 6) {
+					ibase->load_windows(fr);
 				}
 			}
 		} else {
@@ -167,6 +170,8 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 		} else {
 			fw.unsigned_32(0);
 		}
+
+		ibase->save_windows(fw);
 	}
 
 	fw.write(fs, "binary/interactive_player");

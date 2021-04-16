@@ -37,6 +37,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -59,6 +60,7 @@
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/shipwindow.h"
+#include "wui/stock_menu.h"
 #include "wui/toolbar.h"
 #include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
@@ -881,6 +883,79 @@ void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 	}
 	if (old_value != display_flags_) {
 		rebuild_showhide_menu();
+	}
+}
+
+/*
+===============
+Saveloading support for open unique windows.
+===============
+*/
+constexpr uint16_t kCurrentPacketVersionUniqueWindows = 1;
+
+void InteractiveBase::load_windows(FileRead& fr) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionUniqueWindows) {
+			for (;;) {
+				const UI::Panel::SaveType type = static_cast<UI::Panel::SaveType>(fr.unsigned_8());
+				if (type == UI::Panel::SaveType::kNone) {
+					break;
+				}
+
+				const int32_t x = fr.signed_32();
+				const int32_t y = fr.signed_32();
+				const bool pin = fr.unsigned_8();
+				UI::Window* w = nullptr;
+
+				switch (type) {
+				case UI::Panel::SaveType::kBuildingWindow:
+					w = &BuildingWindow::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kStockMenu:
+					w = &StockMenu::load(fr, *this);
+					break;
+				default:
+					throw Widelands::GameDataError("Invalid panel save type %u", static_cast<unsigned>(type));
+				}
+
+				assert(w);
+				w->set_pinned(pin);
+				w->set_pos(Vector2i(x, y));
+				w->move_inside_parent();  // In case the game was loaded at a smaller resolution.
+			}
+		} else {
+			throw Widelands::UnhandledVersionError("Unique Windows", packet_version, kCurrentPacketVersionUniqueWindows);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("unique windows: %s", e.what());
+	}
+}
+
+void InteractiveBase::save_windows(FileWrite& fw) {
+	fw.unsigned_16(kCurrentPacketVersionUniqueWindows);
+	for (UI::Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
+		const UI::Panel::SaveType t = child->save_type();
+		if (t != UI::Panel::SaveType::kNone) {
+			fw.unsigned_8(static_cast<uint8_t>(t));
+			fw.signed_32(child->get_x());
+			fw.signed_32(child->get_y());
+			fw.unsigned_8(dynamic_cast<UI::Window&>(*child).is_pinned() ? 1 : 0);
+			child->save(fw);
+		}
+	}
+	fw.unsigned_8(0);
+}
+
+void InteractiveBase::cleanup_for_load() {
+	std::set<UI::Panel*> panels_to_kill;
+	for (UI::Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
+		if (dynamic_cast<UI::Window*>(child) != nullptr) {
+			panels_to_kill.insert(child);
+		}
+	}
+	for (UI::Panel* p : panels_to_kill) {
+		delete p;
 	}
 }
 

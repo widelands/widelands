@@ -65,7 +65,6 @@ public:
 	void set_player_number(uint32_t plrn);
 
 	// For load
-	void cleanup_for_load() override;
 	void postload() override;
 	void think() override;
 	void draw(RenderTarget& dst) override;

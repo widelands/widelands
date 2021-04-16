@@ -99,6 +99,9 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
+	void load_windows(FileRead&);
+	void save_windows(FileWrite&);
+
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
 	}
@@ -150,8 +153,7 @@ public:
 	Widelands::Coords get_build_road_end() const;
 	Widelands::CoordPath get_build_road_path() const;
 
-	virtual void cleanup_for_load() {
-	}
+	virtual void cleanup_for_load();
 
 	/**
 	 * Log a message to be displayed on screen

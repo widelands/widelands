@@ -495,6 +495,7 @@ void EditorInteractive::load(const std::string& filename) {
 }
 
 void EditorInteractive::cleanup_for_load() {
+	InteractiveBase::cleanup_for_load();
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	// TODO(Nordfriese): …and then we can get rid of delete_world_and_tribes() as well
