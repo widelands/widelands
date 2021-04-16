@@ -1,5 +1,6 @@
 include "scripting/richtext.lua"
 include "scripting/messages.lua"
+include "scripting/table.lua"
 
 -- RST
 -- win_condition_functions.lua
@@ -89,7 +90,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
             s:destroy()
          end
          -- now collect the warehouses/ports/milsites including constructionsites a player has
-         for name,allowed in pairs(p.allowed_buildings) do
+         for name,allowed in ordered_pairs(p.allowed_buildings) do
             for i,site in pairs(p:get_constructionsites(name)) do
                table.insert(fields_to_destroy, site.fields[1])
             end
