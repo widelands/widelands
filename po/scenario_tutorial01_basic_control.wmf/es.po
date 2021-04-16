@@ -7,7 +7,7 @@
 # Gastón <gastbr@gmail.com>, 2016
 # Javier Mora <morehash@gmail.com>, 2015
 # Gontzal M. Pujana <juchuf@gmail.com>, 2015
-# Kiba, 2015
+# Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016,2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-05 17:22+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"

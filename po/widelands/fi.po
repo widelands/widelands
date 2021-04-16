@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-05 17:22+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -629,8 +629,8 @@ msgstr "louhos"
 msgid "port"
 msgstr "satama"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1869,7 +1869,7 @@ msgstr "Olet hyökkäyksen alla"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:459
+#: ../../src/logic/map_objects/tribes/production_program.cc:457
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "talous tarvitsee tarviketta ‘%s’"
@@ -1877,7 +1877,7 @@ msgstr "talous tarvitsee tarviketta ‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:468
+#: ../../src/logic/map_objects/tribes/production_program.cc:466
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "talous ei kaipaa tarviketta '%s'"
@@ -1885,14 +1885,14 @@ msgstr "talous ei kaipaa tarviketta '%s'"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:481
+#: ../../src/logic/map_objects/tribes/production_program.cc:479
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "talous tarvitsee työntekijää '%s'"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:491
+#: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "talous ei tarvitse työtekijää '%s'"
@@ -1913,36 +1913,36 @@ msgstr "talous ei tarvitse työtekijää '%s'"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:541
-#: ../../src/logic/map_objects/tribes/production_program.cc:565
-#: ../../src/logic/map_objects/tribes/production_program.cc:1216
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
-#: ../../src/logic/map_objects/tribes/production_program.cc:1406
+#: ../../src/logic/map_objects/tribes/production_program.cc:539
+#: ../../src/logic/map_objects/tribes/production_program.cc:563
+#: ../../src/logic/map_objects/tribes/production_program.cc:1214
+#: ../../src/logic/map_objects/tribes/production_program.cc:1321
+#: ../../src/logic/map_objects/tribes/production_program.cc:1404
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:547
+#: ../../src/logic/map_objects/tribes/production_program.cc:545
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "rakennuksella on seuraavat tuotteet: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:571
+#: ../../src/logic/map_objects/tribes/production_program.cc:569
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "rakennukselta puuttuvat seuraavat tuotteet: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:587
+#: ../../src/logic/map_objects/tribes/production_program.cc:585
 msgid "a worker needs experience"
 msgstr "työntekijä tarvitsee kokemusta"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:593
+#: ../../src/logic/map_objects/tribes/production_program.cc:591
 msgid "the workers need no experience"
 msgstr "työntekijät eivät tarvitse kokemusta"
 
@@ -1959,21 +1959,21 @@ msgstr "työntekijät eivät tarvitse kokemusta"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:726
-#: ../../src/logic/map_objects/tribes/production_program.cc:1240
+#: ../../src/logic/map_objects/tribes/production_program.cc:724
+#: ../../src/logic/map_objects/tribes/production_program.cc:1238
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Väliin jätetty %1$s, koska %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:732
+#: ../../src/logic/map_objects/tribes/production_program.cc:730
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "%1$s valmistui, koska %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:738
-#: ../../src/logic/map_objects/tribes/production_program.cc:744
+#: ../../src/logic/map_objects/tribes/production_program.cc:736
+#: ../../src/logic/map_objects/tribes/production_program.cc:742
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Ohitettu %1$s, koska %2$s"
@@ -1982,7 +1982,7 @@ msgstr "Ohitettu %1$s, koska %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1226
+#: ../../src/logic/map_objects/tribes/production_program.cc:1224
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1992,7 +1992,7 @@ msgstr[1] "%s puuttuvat"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1334
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2002,14 +2002,14 @@ msgstr[1] "Tuotettu %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1417
+#: ../../src/logic/map_objects/tribes/production_program.cc:1415
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Rekrytoitu %s"
 msgstr[1] "Rektytoitu %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1836
+#: ../../src/logic/map_objects/tribes/production_program.cc:1834
 msgid "No soldier found for this training level!"
 msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
@@ -2017,7 +2017,7 @@ msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1877
+#: ../../src/logic/map_objects/tribes/production_program.cc:1875
 #, c-format
 msgid "Completed %s"
 msgstr "%svalmis"
@@ -5127,18 +5127,18 @@ msgstr "Viallinen tutorials.lua polku tiedostolla campaigns.conf: %s"
 msgid "Tutorial"
 msgstr "Opetuspeli"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Tekijä"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Tekijät"

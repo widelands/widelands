@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-05 17:22+0000\n"
-"PO-Revision-Date: 2021-04-08 23:42+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"PO-Revision-Date: 2021-04-13 19:20+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,11 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:368
 #: ../../data/tribes/initialization/barbarians/units.lua:112
@@ -49,11 +49,11 @@ msgid ""
 "logs to produce charcoal."
 msgstr "Az amazon favágók vágják ki a fákat, a dzsungelfenntartók pedig gondoskodnak a fák utánpótlásáról. A farönköket a kőfaragók használják. A faszénégető kemencéknek is szükségük van rá a faszén előállításához."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:356
 #: ../../data/tribes/initialization/barbarians/units.lua:100
@@ -109,11 +109,11 @@ msgid ""
 "construct buildings and ships."
 msgstr "A kötél liánból készül. Páncélruhákhoz, épületekhez és hajókhoz használják."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:454
 #: ../../data/tribes/initialization/barbarians/units.lua:182
@@ -249,10 +249,10 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr "A csákányt a kőfejtők használják a kőfejtőkben és a kőbányákban."
 
-#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
 #: ../../data/tribes/initialization/empire/units.lua:362
@@ -267,11 +267,11 @@ msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr "A kőfaragók készítik és a favágók használják."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:617
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -289,11 +289,11 @@ msgid ""
 "use them. They are produced by the stone carver."
 msgstr "A dzsungelfenntartók, valamint a manióka- és a kakaótermesztők használják. A kőfaragók készítik."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:630
 #: ../../data/tribes/initialization/barbarians/units.lua:371
@@ -624,16 +624,16 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr "Ismeretlen területeket fedez fel."
 
-#. TRANSLATORS: Helptext for an atlantean immovable: Ashes
-#. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a frisian immovable: Ashes
-#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for a frisian immovable: Ashes
+#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an atlantean immovable: Ashes
+#. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/amazons/units.lua:764
 #: ../../data/tribes/initialization/atlanteans/units.lua:1067
@@ -647,13 +647,13 @@ msgstr "Ismeretlen területeket fedez fel."
 msgid "The remains of a destroyed building."
 msgstr "Egy lerombolt épület maradványai."
 
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
+#. Tree
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1261
 #: ../../data/tribes/initialization/barbarians/units.lua:990
@@ -764,12 +764,12 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr "Ez a gumifa megérett a gumi betakarítására az amazon favágómester által. A többi törzs egyszerű farönkökként tudja hasznosítani."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1074
 #: ../../data/tribes/initialization/atlanteans/units.lua:1109
@@ -779,12 +779,12 @@ msgstr "Ez a gumifa megérett a gumi betakarítására az amazon favágómester 
 msgid "This field has just been planted."
 msgstr "Frissen bevetett szántóföld."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1081
@@ -799,12 +799,12 @@ msgstr "Frissen bevetett szántóföld."
 msgid "This field is growing."
 msgstr "Növekedésben lévő szántóföld."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1095
 #: ../../data/tribes/initialization/atlanteans/units.lua:1130
@@ -814,12 +814,12 @@ msgstr "Növekedésben lévő szántóföld."
 msgid "This field is ready for harvesting."
 msgstr "Aratásra kész szántóföld."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1102
 #: ../../data/tribes/initialization/atlanteans/units.lua:1137
@@ -849,11 +849,11 @@ msgstr "Teljesen kifejlődött kakaófa."
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr "A kakaófán megérett a kakaóbab, készen áll a betakarításra."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
-#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
+#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
+#. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1151
 #: ../../data/tribes/initialization/barbarians/units.lua:880
@@ -869,11 +869,11 @@ msgid ""
 "dwellings."
 msgstr "Az aranytelér aranyércet tartalmaz, amit az aranyásó kunyhóban tudnak kimosni a kőtörmelék közül."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1190
 #: ../../data/tribes/initialization/barbarians/units.lua:919
@@ -889,9 +889,9 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr "A gránit az egyik alapvető építőanyag. A kőbányákban bányásszák."
 
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
 #: ../../data/tribes/initialization/frisians/units.lua:1312
@@ -905,11 +905,11 @@ msgid ""
 "digger dwellings."
 msgstr "Az aranytelér aranyércet tartalmaz, amit az aranyásó kunyhóban tudnak kimosni a kőtörmelék közül."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1234
 #: ../../data/tribes/initialization/barbarians/units.lua:963
@@ -918,20 +918,20 @@ msgstr "Az aranytelér aranyércet tartalmaz, amit az aranyásó kunyhóban tudn
 msgid "There is a lot of gold here."
 msgstr "Rengeteg arany található itt."
 
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
 #: ../../data/tribes/initialization/frisians/units.lua:1356
 msgid "There is a lot of granite here."
 msgstr "Rengeteg gránit található itt."
 
-#. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1253
 #: ../../data/tribes/initialization/barbarians/units.lua:982
@@ -1448,11 +1448,11 @@ msgid ""
 "between ports."
 msgstr "Hajókat épít, amelyeket tengerentúli gyarmatosításra és kikötők közti kereskedelemre használnak."
 
-#. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
-#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1590
 #: ../../data/tribes/initialization/atlanteans/units.lua:1714
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
@@ -1462,13 +1462,13 @@ msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr "„Ne szidd az építészt azért, mert nincs építőanyaga!”"
 
-#. TRANSLATORS: Lore author helptext for an atlantean building: Construction
-#. Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore author helptext for an atlantean building: Construction
+#. Site
 #: ../../data/tribes/initialization/amazons/units.lua:1592
 #: ../../data/tribes/initialization/atlanteans/units.lua:1716
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
@@ -1478,11 +1478,11 @@ msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr "Közmondás minden lehetetlen feladatra"
 
-#. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
+#. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1594
 #: ../../data/tribes/initialization/atlanteans/units.lua:1718
 #: ../../data/tribes/initialization/barbarians/units.lua:1794
@@ -1492,11 +1492,11 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Egy új épület épül ezen az építési területen."
 
-#. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1601
 #: ../../data/tribes/initialization/atlanteans/units.lua:1725
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
@@ -1506,11 +1506,11 @@ msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr "„Új utak nyílnak meg, ha nem félsz lebontani a régieket.”"
 
-#. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1603
 #: ../../data/tribes/initialization/atlanteans/units.lua:1727
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
@@ -1520,11 +1520,11 @@ msgctxt "building"
 msgid "Proverb"
 msgstr "Közmondás"
 
-#. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1605
 #: ../../data/tribes/initialization/atlanteans/units.lua:1729
 #: ../../data/tribes/initialization/barbarians/units.lua:1805
@@ -1552,8 +1552,8 @@ msgid ""
 "the smokery also need logs for their work."
 msgstr "Az atlantisziak is farönköket használnak a deszkák alapjaként, amelyek majdnem minden épülethez kellenek. Emellett a fűrészmalom, a faszénégető kemence, a szerszámkovács műhely és a füstölő is igényel farönköket a munkához."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:381
 #: ../../data/tribes/initialization/empire/units.lua:118
 msgctxt "ware"
@@ -1608,10 +1608,10 @@ msgid ""
 "way to make it edible."
 msgstr "Minthogy egyetlen atlantiszi sem szereti a nyers halat, leggyakrabban úgy teszik azt ehetővé, hogy megfüstölik egy füstölőben."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:433
 #: ../../data/tribes/initialization/barbarians/units.lua:170
 #: ../../data/tribes/initialization/empire/units.lua:162
@@ -1704,10 +1704,10 @@ msgid ""
 "are mined in a crystal mine."
 msgstr "Ezeket a gyönyörű gyémántokat néhány különleges épülethez használják fel. A kristálybányában termelik ki."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:531
 #: ../../data/tribes/initialization/barbarians/units.lua:268
 #: ../../data/tribes/initialization/empire/units.lua:285
@@ -1725,10 +1725,10 @@ msgid ""
 "are fed with coal."
 msgstr "Az atlantiszi kohók, páncél- és fegyverkovács műhelyek tüzeit szénnel táplálják."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:544
 #: ../../data/tribes/initialization/barbarians/units.lua:281
 #: ../../data/tribes/initialization/empire/units.lua:298
@@ -1743,10 +1743,10 @@ msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr "A kohóban nyerik ki belőle a vasat."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:557
 #: ../../data/tribes/initialization/barbarians/units.lua:294
 #: ../../data/tribes/initialization/empire/units.lua:311
@@ -1763,10 +1763,10 @@ msgid ""
 "smithy and weapon smithy."
 msgstr "A szerszámkovács műhelyben, a páncélkovács műhelyben és a fegyverkovács műhelyben használják fel."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:570
 #: ../../data/tribes/initialization/barbarians/units.lua:307
 #: ../../data/tribes/initialization/empire/units.lua:324
@@ -1783,10 +1783,10 @@ msgid ""
 "building material and to produce weapons and armor."
 msgstr "A kohóban nyerik ki belőle az aranyat, amit értékes építőanyagként, illetve fegyverek és páncélok készítéséhez használnak."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:583
 #: ../../data/tribes/initialization/barbarians/units.lua:320
 #: ../../data/tribes/initialization/empire/units.lua:337
@@ -1871,10 +1871,10 @@ msgid ""
 "the top of the smokery. It is created by the toolsmith."
 msgstr "Ezt a kampós rudat a füstölő használja, hogy felakassza vele a húst és a halat a füstölő tetejébe. A szerszámkovács készíti."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:688
 #: ../../data/tribes/initialization/barbarians/units.lua:410
 #: ../../data/tribes/initialization/empire/units.lua:436
@@ -1889,10 +1889,10 @@ msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
 msgstr "A kaszákat a szerszámkovács készíti."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:701
 #: ../../data/tribes/initialization/barbarians/units.lua:423
 #: ../../data/tribes/initialization/empire/units.lua:449
@@ -1907,10 +1907,10 @@ msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
 msgstr "A péklapátokat a szerszámkovács készíti."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:714
 #: ../../data/tribes/initialization/barbarians/units.lua:445
 #: ../../data/tribes/initialization/empire/units.lua:480
@@ -2105,7 +2105,7 @@ msgstr "Halakat tenyészt."
 #: ../../data/tribes/initialization/atlanteans/units.lua:932
 msgctxt "atlanteans_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "A vadász jó hússal látja el a hódítókat."
+msgstr "A vadász friss nyers hússal látja el a telepeseket."
 
 #. TRANSLATORS: Helptext for an atlantean worker: Smoker
 #: ../../data/tribes/initialization/atlanteans/units.lua:939
@@ -2206,10 +2206,10 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet felderítőruhában."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Water
-#. TRANSLATORS: Helptext for a frisian resource indicator: Water
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Water
+#. TRANSLATORS: Helptext for a frisian resource indicator: Water
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1158
 #: ../../data/tribes/initialization/barbarians/units.lua:887
 #: ../../data/tribes/initialization/empire/units.lua:928
@@ -2217,10 +2217,10 @@ msgstr "A felderítők, mint Feri, a felderítő, felderítenek felderítetlen t
 msgid "There is water in the ground here that can be pulled up by a well."
 msgstr "Itt talajvíz található, amire kutat lehet építeni."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1166
 #: ../../data/tribes/initialization/atlanteans/units.lua:1210
 #: ../../data/tribes/initialization/barbarians/units.lua:895
@@ -2232,10 +2232,10 @@ msgstr "Itt talajvíz található, amire kutat lehet építeni."
 msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr "A szén telérek szenet tartalmaznak, amit a szénbányák tudnak kibányászni."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1168
 #: ../../data/tribes/initialization/barbarians/units.lua:897
 #: ../../data/tribes/initialization/empire/units.lua:938
@@ -2243,10 +2243,10 @@ msgstr "A szén telérek szenet tartalmaznak, amit a szénbányák tudnak kibán
 msgid "There is only a little bit of coal here."
 msgstr "Csak kevés szén található itt."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1221
 #: ../../data/tribes/initialization/barbarians/units.lua:906
@@ -2258,10 +2258,10 @@ msgstr "Csak kevés szén található itt."
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr "A vas telérek vasércet tartalmaznak, amit a vasércbányák tudnak kibányászni."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1179
 #: ../../data/tribes/initialization/barbarians/units.lua:908
 #: ../../data/tribes/initialization/empire/units.lua:949
@@ -2269,10 +2269,10 @@ msgstr "A vas telérek vasércet tartalmaznak, amit a vasércbányák tudnak kib
 msgid "There is only a little bit of iron here."
 msgstr "Csak egy kevés vas található itt."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1188
 #: ../../data/tribes/initialization/atlanteans/units.lua:1232
 #: ../../data/tribes/initialization/barbarians/units.lua:917
@@ -2297,10 +2297,10 @@ msgstr "A drágaköveket a nagy épületekhez használják, és kristálybányá
 msgid "There are only a few precious stones here."
 msgstr "Csak kevés drágakő található itt."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
 #: ../../data/tribes/initialization/barbarians/units.lua:941
 #: ../../data/tribes/initialization/empire/units.lua:982
@@ -2308,10 +2308,10 @@ msgstr "Csak kevés drágakő található itt."
 msgid "There is a lot of coal here."
 msgstr "Rengeteg szén található itt."
 
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1223
 #: ../../data/tribes/initialization/barbarians/units.lua:952
 #: ../../data/tribes/initialization/empire/units.lua:993
@@ -2324,18 +2324,6 @@ msgstr "Rengeteg vas található itt."
 msgid "There are many precious stones here."
 msgstr "Rengeteg drágakő található itt."
 
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans:
-#. Ironwood Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
-#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
@@ -2346,12 +2334,24 @@ msgstr "Rengeteg drágakő található itt."
 #. Ironwood Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
+#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans:
+#. Ironwood Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber
+#. Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1268
 #: ../../data/tribes/initialization/atlanteans/units.lua:1275
 #: ../../data/tribes/initialization/atlanteans/units.lua:1282
@@ -2452,14 +2452,14 @@ msgctxt "atlanteans_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr "A kőfejtőnek kitermelhető kövekre van szüksége a munkaterületén."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site:
-#. Woodcutter's House
-#. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
-#. House
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
 #. Hut
+#. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
+#. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
+#. TRANSLATORS: Purpose helptext for an atlantean production site:
+#. Woodcutter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1393
 #: ../../data/tribes/initialization/barbarians/units.lua:1153
 #: ../../data/tribes/initialization/empire/units.lua:1172
@@ -2475,12 +2475,12 @@ msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
 msgstr "A favágóháznak kivágható fákra van szüksége a munkaterületén."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
-#. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
+#. House
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1402
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
@@ -2546,11 +2546,11 @@ msgctxt "building"
 msgid "Breeds fish."
 msgstr "Halakat tenyészt."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
+#. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
-#. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
-#. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1438
 #: ../../data/tribes/initialization/barbarians/units.lua:1199
 #: ../../data/tribes/initialization/empire/units.lua:1199
@@ -2565,10 +2565,10 @@ msgctxt "atlanteans_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "A vadászháznak vadászható állatokra van szüksége a munkaterületén."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Well
-#. TRANSLATORS: Purpose helptext for a frisian production site: Well
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Well
+#. TRANSLATORS: Purpose helptext for a frisian production site: Well
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1447
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
 #: ../../data/tribes/initialization/empire/units.lua:1208
@@ -2591,11 +2591,11 @@ msgid ""
 " here."
 msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítőházzal."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
+#. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+#. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
-#. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
-#. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1462
 #: ../../data/tribes/initialization/barbarians/units.lua:1241
 #: ../../data/tribes/initialization/empire/units.lua:1216
@@ -2604,8 +2604,8 @@ msgctxt "building"
 msgid "Explores unknown territory."
 msgstr "Ismeretlen területeket fedez fel."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an empire production site: Sawmill
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1471
 #: ../../data/tribes/initialization/empire/units.lua:1232
 msgctxt "building"
@@ -2642,14 +2642,14 @@ msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Kenyeret süt a felderítők és bányászok élelmezéséhez, valamint a katonák kiképzéséhez."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
+#. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1501
 #: ../../data/tribes/initialization/barbarians/units.lua:1376
 #: ../../data/tribes/initialization/empire/units.lua:1298
@@ -2659,11 +2659,11 @@ msgctxt "building"
 msgid "Burns logs into charcoal."
 msgstr "Farönkökből faszenet éget."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
-#. Works
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
 #. Works
 #. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
+#. Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1508
 #: ../../data/tribes/initialization/barbarians/units.lua:1388
 #: ../../data/tribes/initialization/empire/units.lua:1305
@@ -2671,10 +2671,10 @@ msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
 msgstr "Vasércet olvaszt vassá és aranyércet arannyá."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Metal
 #. Workshop
 #. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1515
 #: ../../data/tribes/initialization/barbarians/units.lua:1399
 #: ../../data/tribes/initialization/empire/units.lua:1312
@@ -2764,14 +2764,14 @@ msgctxt "atlanteans_building"
 msgid "Carves precious stones out of the rock in mountain terrain."
 msgstr "Hegyes terepen drágaköveket váj ki a kövekből."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1593
 #: ../../data/tribes/initialization/barbarians/units.lua:1528
 #: ../../data/tribes/initialization/barbarians/units.lua:1543
@@ -2784,16 +2784,16 @@ msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Hegyes terepen szenet bányászik."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1600
 #: ../../data/tribes/initialization/barbarians/units.lua:1571
 #: ../../data/tribes/initialization/barbarians/units.lua:1584
@@ -2806,14 +2806,14 @@ msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "Hegyes terepen vasércet bányászik."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1607
 #: ../../data/tribes/initialization/barbarians/units.lua:1610
 #: ../../data/tribes/initialization/barbarians/units.lua:1623
@@ -2885,10 +2885,10 @@ msgid ""
 "send him away."
 msgstr "Ha nem jut katona az új katonai épületekbe, használd a sárga lefelé nyíl gombot a férőhelyek csökkentéséhez. A katonákra kattintva egyesével is elküldheted őket."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1696
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
 #: ../../data/tribes/initialization/empire/units.lua:1549
@@ -2897,10 +2897,10 @@ msgctxt "building"
 msgid "Builds ferries."
 msgstr "Kompokat készít."
 
-#. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
-#. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Note helptext for production site: Ferry Yard
+#. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
+#. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
 #: ../../data/tribes/initialization/barbarians/units.lua:1757
 #: ../../data/tribes/initialization/empire/units.lua:1551
@@ -2909,10 +2909,10 @@ msgctxt "building"
 msgid "Needs water nearby."
 msgstr "Víz közelében tud csak dolgozni."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
-#. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1705
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
 #: ../../data/tribes/initialization/empire/units.lua:1558
@@ -3039,8 +3039,8 @@ msgid ""
 "inns to prepare meals."
 msgstr "Csak ez a sör  elfogadható a katonák számára a harci arénában. Vannak akik azt tartják, hogy ebben a sörben rejlik a barbárok ereje. Segíti a katonák védekezésének szintjét 0-ról 1-re, majd 2-re fejleszteni. Az erős sört a nagy fogadókban is használják az ebédek elkészítéséhez."
 
-#. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:234
 #: ../../data/tribes/initialization/empire/units.lua:242
@@ -3082,7 +3082,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr "A barbárok tüzeit általában szénnel táplálják. Jó néhány épület fogyasztó: a mészégető kemence, a kohó, a fejsze-, a fegyver- és a sisakkészítő műhely."
+msgstr "A barbárok tüzeit általában szénnel táplálják. Jó néhány épület fogyasztja: a mészégető kemence, a kohó, a fejsze-, a fegyver- és a sisakkészítő műhely."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:283
@@ -3170,8 +3170,8 @@ msgid ""
 "mill)."
 msgstr "Ez az egyik alapvető szerszám, amit a szerszámkészítő műhelyben állítanak elő (de továbbfejlesztéseiben, azaz a fejsze- és a fegyverkészítő műhelyben már nem)."
 
-#. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:397
 #: ../../data/tribes/initialization/empire/units.lua:423
@@ -3289,7 +3289,7 @@ msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr "A sisak egy alapvető eszköz a katonák megvédésére. A sisakkészítő műhelyben állítják elő, és a kiképzőtáborban használatos – élelmiszerrel együtt – a katonák életerejének 0.-ról 1. szintűre fejlesztéséhez."
+msgstr "A sisak a katonák egyszerű védőfelszerelése. A sisakkészítő műhelyben készül, és a kiképzőtáborban használják – élelmiszerrel együtt – a katonák életerejének 0.-ról 1. szintre fejlesztéséhez."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Mask
 #: ../../data/tribes/initialization/barbarians/units.lua:523
@@ -3392,7 +3392,7 @@ msgstr "Halat fog a tengerből."
 #: ../../data/tribes/initialization/barbarians/units.lua:647
 msgctxt "barbarians_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "A vadász jó hússal látja el a hódítókat."
+msgstr "A vadász friss nyers hússal látja el a telepeseket."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Gamekeeper
 #: ../../data/tribes/initialization/barbarians/units.lua:654
@@ -3406,7 +3406,7 @@ msgstr "A vadőr feladata, hogy a természetben élő állatok ne pusztuljanak k
 #: ../../data/tribes/initialization/barbarians/units.lua:661
 msgctxt "barbarians_worker"
 msgid "Plants fields."
-msgstr "Mezőn dolgozik."
+msgstr "A szántóföldeken dolgozik."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Baker
 #: ../../data/tribes/initialization/barbarians/units.lua:668
@@ -3500,23 +3500,23 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet felderítőruhában."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:852
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid "This reed field has just been planted."
 msgstr "Frissen ültetett nádas."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/barbarians/units.lua:866
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is growing."
 msgstr "Növekedésben lévő nádas."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:873
 #: ../../data/tribes/initialization/frisians/units.lua:1255
 msgid "This reed field is ready for harvesting."
@@ -4050,8 +4050,8 @@ msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr "A Csorba Bronzfejszéhez kocsma étlapja"
 
-#. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+#. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1336
 #: ../../data/tribes/initialization/empire/units.lua:1280
@@ -5208,13 +5208,13 @@ msgstr "Halat fog a tengerből."
 #: ../../data/tribes/initialization/empire/units.lua:681
 msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "A vadász jó hússal látja el a hódítókat."
+msgstr "A vadász friss nyers hússal látja el a telepeseket."
 
 #. TRANSLATORS: Helptext for an empire worker: Farmer
 #: ../../data/tribes/initialization/empire/units.lua:688
 msgctxt "empire_worker"
 msgid "Plants fields."
-msgstr "Mezőn dolgozik."
+msgstr "A szántóföldeken dolgozik."
 
 #. TRANSLATORS: Helptext for an empire worker: Miller
 #: ../../data/tribes/initialization/empire/units.lua:695
@@ -5501,7 +5501,7 @@ msgstr "A péknek átlagosan %1% szükséges egy vekni kenyér elkészítéséhe
 #: ../../data/tribes/initialization/empire/units.lua:1259
 msgctxt "empire_building"
 msgid "The brewer needs %1% on average to brew a vat of beer."
-msgstr "A sörfőzőnek átlagosan %1% szükséges egy kád sör elkészítéséhez."
+msgstr "A sörfőzőnek átlagosan %1% szükséges egy korsó sör elkészítéséhez."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Vineyard
 #: ../../data/tribes/initialization/empire/units.lua:1266
@@ -5708,7 +5708,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
 "refined in a brick kiln."
-msgstr ""
+msgstr "A frízek a kőfejtőkben és kőbányákban termelnek gránitot. Nem csak közvetlenül használják fel az építkezéshez, hanem a téglakészítéshez is szükség van rá."
 
 #. TRANSLATORS: Helptext for a frisian ware: Clay
 #: ../../data/tribes/initialization/frisians/units.lua:124
@@ -5716,7 +5716,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Clay is made out of water and mud to be turned into bricks, used in ship "
 "construction and to improve the charcoal kiln."
-msgstr ""
+msgstr "Az agyagot vízből és sárból készítik. Felhasználják tégla készítéséhez, hajóépítéshez és a faszén égetéséhez."
 
 #. TRANSLATORS: Helptext for a frisian ware: Brick
 #: ../../data/tribes/initialization/frisians/units.lua:133
@@ -5724,16 +5724,16 @@ msgctxt "frisians_ware"
 msgid ""
 "Bricks are the best and most important building material. They are made out "
 "of a mix of clay and granite dried in a coal fire."
-msgstr ""
+msgstr "A tégla a legjobb és legfontosabb építőanyag. Agyag és gránit keverékéből készül szénen kiégetve."
 
 #. TRANSLATORS: Helptext for a frisian ware: Reed
 #: ../../data/tribes/initialization/frisians/units.lua:141
 msgctxt "frisians_ware"
 msgid ""
 "Reed is grown in a reed farm. Nothing is better suited to make roofs "
-"waterproof. It is also used to make buckets and fishing nets as well as "
+"waterproof. It is also used to make baskets and fishing nets as well as "
 "cloth."
-msgstr ""
+msgstr "A nádat a nád farmokon termesztik. Nincs nála jobb tetőfedő anyag. De használják kosarak, halászhálók és szövetek készítésére is."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fur
 #: ../../data/tribes/initialization/frisians/units.lua:150
@@ -5741,14 +5741,14 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur is won from reindeer in a reindeer farm. It is woven into cloth or "
 "turned into fur garments for soldiers."
-msgstr ""
+msgstr "A szőrmét a rénszarvasfarmokon termelik. Szövetekbe szövik vagy kacagányt készítenek belőle a katonáknak."
 
 #. TRANSLATORS: Helptext for a frisian ware: Cloth
 #: ../../data/tribes/initialization/frisians/units.lua:159
 msgctxt "frisians_ware"
 msgid ""
 "Cloth is needed for ships. It is produced out of reindeer fur and reed."
-msgstr ""
+msgstr "A szövetre a hajókhoz van szükség. Rénszarvas szőrméből és nádból készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fruit
 #: ../../data/tribes/initialization/frisians/units.lua:170
@@ -5756,7 +5756,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
 "used for rations and for feeding the fish at the aqua farms."
-msgstr ""
+msgstr "A gyümölcsöket a gyümölcsszedők szüretelik le a bokrokról. A harapnivalók készítéséhez és a halgazdaságokban a halak etetésére használják őket."
 
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:181
@@ -5764,7 +5764,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Water is used to bake bread and brew beer. Reindeer farms and aqua farms "
 "also consume it."
-msgstr ""
+msgstr "A vizet a kenyérsütéshez, a sörfőzéshez valamint a rénszarvastelepeken és a halgazdaságokban használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Barley
 #: ../../data/tribes/initialization/frisians/units.lua:190
@@ -5772,7 +5772,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Barley is a slow-growing grain that is used for baking bread and brewing "
 "beer. It is also eaten by reindeer."
-msgstr ""
+msgstr "Az árpa lassan fejlődő gabona, amit kenyérsütéshez, sörfőzéshez és a rénszarvasok etetéséhez használnak."
 
 #. TRANSLATORS: Helptext for a frisian ware: Honey
 #: ../../data/tribes/initialization/frisians/units.lua:198
@@ -5780,7 +5780,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Honey is produced by bees belonging to a beekeeper. It is used to bake honey"
 " bread and brew mead."
-msgstr ""
+msgstr "A mézet a méhész méhei termelik. Mézes kenyérhez és mézsörhöz használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Bread
 #: ../../data/tribes/initialization/frisians/units.lua:207
@@ -5788,7 +5788,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bread is made out of barley and water and is used in the taverns to prepare "
 "rations. It is also consumed by training soldiers."
-msgstr ""
+msgstr "A kenyeret árpából és vízből készítik. A kocsmákban harapnivalót készítenek belőle. A katonák kiképzésénél is használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Honey Bread
 #: ../../data/tribes/initialization/frisians/units.lua:216
@@ -5796,7 +5796,7 @@ msgctxt "frisians_ware"
 msgid ""
 "This bread is sweetened with honey. It is consumed by the most experienced "
 "miners and in advanced soldier training."
-msgstr ""
+msgstr "A mézzel édesített kenyeret a tapasztalt bányászok és a magasabb szintű katonák fogyasztják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Beer
 #: ../../data/tribes/initialization/frisians/units.lua:225
@@ -5804,7 +5804,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Beer is produced in breweries and used in drinking halls to produce meals. "
 "Soldiers drink beer while receiving basic training."
-msgstr ""
+msgstr "A sört a sörfőzdék készítik. Használják az ebédek készítéséhez az ivókban valamint a katonák alapkiképzéséhez."
 
 #. TRANSLATORS: Helptext for a frisian ware: Mead
 #: ../../data/tribes/initialization/frisians/units.lua:234
@@ -5812,7 +5812,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Mead is produced by mead breweries. Soldiers drink mead during advanced "
 "training."
-msgstr ""
+msgstr "A mézsört a mézsör főzdékben készítik. A katonák fogyasztják a magas szintű kiképzésen."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fish
 #: ../../data/tribes/initialization/frisians/units.lua:243
@@ -5820,7 +5820,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is a very important food resource for the Frisians. It is fished from "
 "the shore or reared in aqua farms."
-msgstr ""
+msgstr "A hal nagyon fontos tápanyag a frízeknél. A tengerparton halásszák vagy halgazdaságokban tenyésztik."
 
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:254
@@ -5828,7 +5828,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to taverns, "
 "drinking halls and training sites."
-msgstr ""
+msgstr "A húst meg kell füstölni egy füstölőben mielőtt a kocsmákba, ivókba vagy a kiképzőhelyekre szállítanák."
 
 #. TRANSLATORS: Helptext for a frisian ware: Smoked Fish
 #: ../../data/tribes/initialization/frisians/units.lua:264
@@ -5836,7 +5836,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "A halat a füstölőkben megfüstölik. A füstölt halat a katonák kiképzésénél használják vagy harapnivalót illetve ebédet készítenek belőle a bányászoknak és a felderítőknek."
 
 #. TRANSLATORS: Helptext for a frisian ware: Smoked Meat
 #: ../../data/tribes/initialization/frisians/units.lua:273
@@ -5844,7 +5844,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "A húst a füstölőkben megfüstölik. A füstölt húst a katonák kiképzésénél használják vagy harapnivalót illetve ebédet készítenek belőle a bányászoknak és a felderítőknek."
 
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:285
@@ -5852,7 +5852,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Rations are produced in taverns and drinking halls out of something to eat: "
 "Fruit, bread or smoked meat or fish."
-msgstr ""
+msgstr "A harapnivalókat a kocsmákban és az ivókban készítik valamilyen élelmiszerből: gyümölcsből, kenyérből, füstölt húsból vagy füstölt halból."
 
 #. TRANSLATORS: Helptext for a frisian ware: Meal
 #: ../../data/tribes/initialization/frisians/units.lua:295
@@ -5860,20 +5860,20 @@ msgctxt "frisians_ware"
 msgid ""
 "A meal is made out of honey bread and beer and either smoked fish or meat. "
 "It is consumed by miners in deep mines."
-msgstr ""
+msgstr "Az ebédet mézes kenyérből, sörből és füstölt halból vagy füstölt húsból készítik. A mély bányákban dolgozó bányászok fogyasztják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Coal, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:310
 msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr ""
+msgstr "A téglaégetők, kemencék és páncélkovácsok tüzeit szénnel táplálják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:323
 msgctxt "frisians_ware"
 msgid "It is smelted in a furnace to retrieve the iron."
-msgstr ""
+msgstr "A kemencében nyerik ki belőle a vasat."
 
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:336
@@ -5881,7 +5881,7 @@ msgctxt "frisians_ware"
 msgid ""
 "It is produced by the furnace. Tools and weapons are made of iron. It is "
 "also used as jewellery for fur garment armor to give it a silver shine."
-msgstr ""
+msgstr "A kemence készíti. Szerszámok és fegyverek készülnek vasból. A kacagányok díszítéséhez is használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:349
@@ -5889,7 +5889,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "A kemencében nyerik ki belőle az aranyat, amit értékes építőanyagként, illetve fegyverek és páncélok készítéséhez használnak."
 
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:362
@@ -5898,7 +5898,7 @@ msgid ""
 "Only very important things are embellished with gold. It is produced by the "
 "furnace and is used to produce better swords and the best helmets. The best "
 "armor is also decorated with gold."
-msgstr ""
+msgstr "Csak a nagyon fontos tárgyakat díszítik arannyal. A kemence készíti, és a jobb kardokhoz valamint a legjobb sisakokhoz és páncélok díszítéséhez használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Scrap Iron
 #. TRANSLATORS: Helptext for a frisian ware: Scrap metal (mixed)
@@ -5908,25 +5908,25 @@ msgctxt "frisians_ware"
 msgid ""
 "Discarded weapons and armor can be recycled in a recycling center to produce"
 " new tools, weapon and armor."
-msgstr ""
+msgstr "Az elhasznált fegyverekből és páncélokból vissza lehet nyerni a nyersanyagokat az újrahasznosító telepen, amelyeket így új szerszámokhoz, fegyverekhez és páncélokhoz lehet felhasználni."
 
 #. TRANSLATORS: Helptext for a frisian ware: Old Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:387
 msgctxt "frisians_ware"
 msgid "Old garments can be turned into fur in a recycling center."
-msgstr ""
+msgstr "Az elrongyolódott kacagányokból új szőrme készíthető az újrahasznosító telepeken."
 
 #. TRANSLATORS: Helptext for a frisian ware: Pick
 #: ../../data/tribes/initialization/frisians/units.lua:399
 msgctxt "frisians_ware"
 msgid "Picks are used by stonemasons and miners."
-msgstr ""
+msgstr "A csákányt a kőfaragók és a bányászok használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:411
 msgctxt "frisians_ware"
 msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
-msgstr ""
+msgstr "A balta a favágó szerszáma, ami a kovácsműhelyben készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:424
@@ -5934,7 +5934,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
-msgstr ""
+msgstr "A gyümölcs- és a nádtermesztők, valamint az erdészek és a vályogvetők használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:437
@@ -5942,31 +5942,31 @@ msgctxt "frisians_ware"
 msgid ""
 "Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
 "always got some in reserve! They are produced by the blacksmithy."
-msgstr ""
+msgstr "A geológusnak, az építésznek és a kovácsnak is szüksége van kalapácsra. Mindig legyen belőle néhány tartalék! A kovácsműhelyben készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fishing Net
 #: ../../data/tribes/initialization/frisians/units.lua:447
 msgctxt "frisians_ware"
 msgid "Fishing nets are the tool used by fishers."
-msgstr ""
+msgstr "A halászhálóra a halászoknak van szükségük a halfogáshoz."
 
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:459
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr ""
+msgstr "A vadászlándzsa a kovácsműhelyben készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:472
 msgctxt "frisians_ware"
 msgid "Scythes are produced by the blacksmithy."
-msgstr ""
+msgstr "A kasza a kovácsműhelyben készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:485
 msgctxt "frisians_ware"
 msgid "Bread paddles are produced by the blacksmithy."
-msgstr ""
+msgstr "A péklapát a kovácsműhelyben készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Kitchen Tools
 #: ../../data/tribes/initialization/frisians/units.lua:495
@@ -5982,7 +5982,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used in the furnace and the brick kiln and produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "A kemencékben és a téglaégetőkben használják. A kovácsműhelyben készül."
 
 #. TRANSLATORS: Helptext for a frisian ware: Basket
 #: ../../data/tribes/initialization/frisians/units.lua:517
@@ -5990,13 +5990,13 @@ msgctxt "frisians_ware"
 msgid ""
 "Baskets are needed by the fruit collector to gather berries. They are woven "
 "from reed and wood by the blacksmith."
-msgstr ""
+msgstr "A kosarakat a gyümölcsszedők használják a szüreteléshez. Nádból és fából fonja a kovács."
 
 #. TRANSLATORS: Helptext for a frisian ware: Needles
 #: ../../data/tribes/initialization/frisians/units.lua:526
 msgctxt "frisians_ware"
 msgid "Needles are used by seamstresses to sew cloth and fur garments."
-msgstr ""
+msgstr "A tűt a varrónők használják szövet és kacagány varrásához."
 
 #. TRANSLATORS: Helptext for a frisian ware: Short sword
 #: ../../data/tribes/initialization/frisians/units.lua:538
@@ -6005,7 +6005,7 @@ msgid ""
 "This is the basic weapon of the Frisian soldiers. Together with a fur "
 "garment, it makes up the equipment of young soldiers. Short swords are "
 "produced by the small armor smithy."
-msgstr ""
+msgstr "A fríz katonák kezdő fegyvere, ami egy kacagánnyal együtt szükséges az új katonák toborzásához. A rövid kardot a kis páncélkovács műhely készíti."
 
 #. TRANSLATORS: Helptext for a frisian ware: Long Sword
 #: ../../data/tribes/initialization/frisians/units.lua:547
@@ -6013,7 +6013,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
 "equipped with a long and a double-edged sword."
-msgstr ""
+msgstr "A hosszú kard az 1. szintű katonák fegyvere. A 4. szintű katonák a kétélű kard mellett egy hosszú kardot is használnak."
 
 #. TRANSLATORS: Helptext for a frisian ware: Broadsword
 #: ../../data/tribes/initialization/frisians/units.lua:556
@@ -6021,7 +6021,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
 "equipped with a broadsword and a double-edged sword."
-msgstr ""
+msgstr "A pallos a 2. szintű katonák fegyvere. Az 5. szintű katonák a kétélű kard mellett egy pallost is használnak."
 
 #. TRANSLATORS: Helptext for a frisian ware: Double-edged Sword
 #: ../../data/tribes/initialization/frisians/units.lua:565
@@ -6029,7 +6029,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The double-edged sword is the weapon used by level 3 soldiers. Level 6 "
 "soldiers are equipped with two of these ferocious swords."
-msgstr ""
+msgstr "A kétélű kard a 3. szintű katonák fegyvere. A 6. szintű katonák kettőt is használnak belőle."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:574
@@ -6037,7 +6037,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur can be sewn into garments. They are used as basic armor. All new "
 "soldiers are clothed in a fur garment."
-msgstr ""
+msgstr "A szőrméből kacagányt varrnak, amit alapszintű páncélként használnak. Minden új katona kacagányt hord."
 
 #. TRANSLATORS: Helptext for a frisian ware: Studded Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:583
@@ -6045,7 +6045,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Ordinary fur garments can be decorated with iron to give them a silvery "
 "shine. These clothes make good armor."
-msgstr ""
+msgstr "Az egyszerű kacagányt vassal feldíszítik. Így jobb páncél lesz belőlük."
 
 #. TRANSLATORS: Helptext for a frisian ware: Golden Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:592
@@ -6053,7 +6053,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Ordinary fur garments can be decorated with iron and gold. Such clothes are "
 "the best armor."
-msgstr ""
+msgstr "Az egyszerű kacagányt arannyal feldíszítik. Így készül a legjobb páncél."
 
 #. TRANSLATORS: Helptext for a frisian ware: Helmet
 #: ../../data/tribes/initialization/frisians/units.lua:601
@@ -6061,7 +6061,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the small "
 "armor smithy and used to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "A sisak a katonák egyszerű védőfelszerelése. A kis páncélkovács műhelyben készül, és a katonák életerejének 0.-ról 1. szintre fejlesztéséhez használják."
 
 #. TRANSLATORS: Helptext for a frisian ware: Golden Helmet
 #: ../../data/tribes/initialization/frisians/units.lua:610
@@ -6069,19 +6069,19 @@ msgctxt "frisians_ware"
 msgid ""
 "A golden helmet protects soldiers. It is produced in the large armor smithy "
 "and used to train soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Az aranysisak a katonák fejlett védőfelszerelése. A nagy páncélkovács műhelyben készül, és a katonák életerejének 1.-ről 2. szintre fejlesztéséhez használják."
 
 #. TRANSLATORS: Helptext for a frisian worker: Carrier
 #: ../../data/tribes/initialization/frisians/units.lua:626
 msgctxt "frisians_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Árut szállít a csomópontok között."
 
 #. TRANSLATORS: Helptext for a frisian worker: Ferry
 #: ../../data/tribes/initialization/frisians/units.lua:633
 msgctxt "frisians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Árukat szállít át keskeny folyókon."
 
 #. TRANSLATORS: Helptext for a frisian worker: Reindeer
 #: ../../data/tribes/initialization/frisians/units.lua:642
@@ -6089,151 +6089,151 @@ msgctxt "frisians_worker"
 msgid ""
 "Reindeer help to carry items along busy roads. They are reared in a reindeer"
 " farm."
-msgstr ""
+msgstr "A rénszarvasok segítenek cipelni az árut a forgalmas utakon. A rénszarvastelepeken nevelik őket."
 
 #. TRANSLATORS: Helptext for a frisian worker: Reindeer Breeder
 #: ../../data/tribes/initialization/frisians/units.lua:649
 msgctxt "frisians_worker"
 msgid "Breeds reindeer as carriers and for their fur."
-msgstr ""
+msgstr "Rénszarvasokat tenyészt hordárnak és a szőrméjükért."
 
 #. TRANSLATORS: Helptext for a frisian worker: Stonemason
 #: ../../data/tribes/initialization/frisians/units.lua:659
 msgctxt "frisians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Nyers gránitdarabokat vág ki a közeli kövekből."
 
 #. TRANSLATORS: Helptext for a frisian worker: Woodcutter
 #: ../../data/tribes/initialization/frisians/units.lua:666
 msgctxt "frisians_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Kivágja a fákat."
 
 #. TRANSLATORS: Helptext for a frisian worker: Forester
 #: ../../data/tribes/initialization/frisians/units.lua:673
 msgctxt "frisians_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Fákat ültet."
 
 #. TRANSLATORS: Helptext for a frisian worker: Clay Digger
 #: ../../data/tribes/initialization/frisians/units.lua:680
 msgctxt "frisians_worker"
 msgid "Makes clay out of mud and water."
-msgstr ""
+msgstr "Agyagot készít sárból és vízből."
 
 #. TRANSLATORS: Helptext for a frisian worker: Brickmaker
 #: ../../data/tribes/initialization/frisians/units.lua:687
 msgctxt "frisians_worker"
 msgid "Burns bricks out of clay and granite."
-msgstr ""
+msgstr "Téglát éget agyagból és gránitból."
 
 #. TRANSLATORS: Helptext for a frisian worker: Builder
 #: ../../data/tribes/initialization/frisians/units.lua:694
 msgctxt "frisians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Építési területeken dolgozik, új épületeket emel."
 
 #. TRANSLATORS: Helptext for a frisian worker: Gardener
 #: ../../data/tribes/initialization/frisians/units.lua:701
 msgctxt "frisians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Nádat ültet és arat."
 
 #. TRANSLATORS: Helptext for a frisian worker: Seamstress
 #: ../../data/tribes/initialization/frisians/units.lua:708
 msgctxt "frisians_worker"
 msgid "Produces cloth and sews fur garments."
-msgstr ""
+msgstr "Szövetet készít és kacagányt varr."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Seamstress
 #: ../../data/tribes/initialization/frisians/units.lua:715
 msgctxt "frisians_worker"
 msgid "Sews armor out of fur garments and metal."
-msgstr ""
+msgstr "Páncélt varr kacagányból és fémekből."
 
 #. TRANSLATORS: Helptext for a frisian worker: Shipwright
 #: ../../data/tribes/initialization/frisians/units.lua:722
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "A hajógyárban dolgozik, új hajókat épít."
 
 #. TRANSLATORS: Helptext for a frisian worker: Fisher
 #: ../../data/tribes/initialization/frisians/units.lua:732
 msgctxt "frisians_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Halat fog a tengerből."
 
 #. TRANSLATORS: Helptext for a frisian worker: Hunter
 #: ../../data/tribes/initialization/frisians/units.lua:739
 msgctxt "frisians_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr ""
+msgstr "A vadász friss nyers hússal látja el a telepeseket."
 
 #. TRANSLATORS: Helptext for a frisian worker: Farmer
 #: ../../data/tribes/initialization/frisians/units.lua:746
 msgctxt "frisians_worker"
 msgid "Plants fields."
-msgstr ""
+msgstr "A szántóföldeken dolgozik."
 
 #. TRANSLATORS: Helptext for a frisian worker: Berry Farmer
 #: ../../data/tribes/initialization/frisians/units.lua:753
 msgctxt "frisians_worker"
 msgid "Plants berry bushes."
-msgstr ""
+msgstr "Gyümölcsbokrokat ültet."
 
 #. TRANSLATORS: Helptext for a frisian worker: Fruit Collector
 #: ../../data/tribes/initialization/frisians/units.lua:760
 msgctxt "frisians_worker"
 msgid "Gathers berries."
-msgstr ""
+msgstr "Leszüreteli a gyümölcsöket."
 
 #. TRANSLATORS: Helptext for a frisian worker: Smoker
 #: ../../data/tribes/initialization/frisians/units.lua:767
 msgctxt "frisians_worker"
 msgid "Refines meat and fish by smoking them."
-msgstr ""
+msgstr "Húst és halat füstöl."
 
 #. TRANSLATORS: Helptext for a frisian worker: Beekeeper
 #: ../../data/tribes/initialization/frisians/units.lua:774
 msgctxt "frisians_worker"
 msgid "Lets bees swarm over flowers, then gathers the honey."
-msgstr ""
+msgstr "Kiereszti a virágzó földekre és gyümölcsösökre a méheket, és begyűjti a mézet."
 
 #. TRANSLATORS: Helptext for a frisian worker: Baker
 #: ../../data/tribes/initialization/frisians/units.lua:781
 msgctxt "frisians_worker"
 msgid "Bakes bread for miners and soldiers."
-msgstr ""
+msgstr "Kenyeret süt a bányászok élelmezéséhez és a katonák kiképzéséhez."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Baker
 #: ../../data/tribes/initialization/frisians/units.lua:788
 msgctxt "frisians_worker"
 msgid "This baker is skilled enough to bake bread sweetened with honey."
-msgstr ""
+msgstr "Tapasztalt pék, aki mézes kenyeret is tud sütni."
 
 #. TRANSLATORS: Helptext for a frisian worker: Brewer
 #: ../../data/tribes/initialization/frisians/units.lua:795
 msgctxt "frisians_worker"
 msgid "Brews beer."
-msgstr ""
+msgstr "Sört főz."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Brewer
 #: ../../data/tribes/initialization/frisians/units.lua:802
 msgctxt "frisians_worker"
 msgid "Brews beer and mead."
-msgstr ""
+msgstr "Sört és mézsört főz."
 
 #. TRANSLATORS: Helptext for a frisian worker: Landlady
 #: ../../data/tribes/initialization/frisians/units.lua:809
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Harapnivalót és ebédet készít a felderítők és bányászok élelmezéséhez."
 
 #. TRANSLATORS: Helptext for a frisian worker: Geologist
 #: ../../data/tribes/initialization/frisians/units.lua:819
 msgctxt "frisians_worker"
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Ásványok után kutat."
 
 #. TRANSLATORS: Helptext for a frisian worker: Miner
 #. TRANSLATORS: Helptext for a frisian worker: Master Miner
@@ -6241,50 +6241,50 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:833
 msgctxt "frisians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "A bányák mélyén dolgozik, hogy szenet, vasat, aranyat vagy gránitot termeljen ki."
 
 #. TRANSLATORS: Helptext for a frisian worker: Charcoal Burner
 #: ../../data/tribes/initialization/frisians/units.lua:840
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
-msgstr ""
+msgstr "Farönkökből faszenet éget agyaghutákban."
 
 #. TRANSLATORS: Helptext for a frisian worker: Smelter
 #: ../../data/tribes/initialization/frisians/units.lua:847
 msgctxt "frisians_worker"
 msgid "Smelts iron and gold at furnaces or recycling centers."
-msgstr ""
+msgstr "Vasat és aranyat olvaszt a kemencéknél és az újrahasznosító telepeken."
 
 #. TRANSLATORS: Helptext for a frisian worker: Blacksmith
 #: ../../data/tribes/initialization/frisians/units.lua:854
 msgctxt "frisians_worker"
 msgid "Produces weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Fegyvereket és páncélokat készít a katonáknak, és szerszámokat a munkásoknak."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Blacksmith
 #: ../../data/tribes/initialization/frisians/units.lua:861
 msgctxt "frisians_worker"
 msgid ""
 "Produces the best weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Fejlett fegyvereket és páncélokat készít a katonáknak, és szerszámokat a munkásoknak."
 
 #. TRANSLATORS: Helptext for a frisian worker: Soldier
 #: ../../data/tribes/initialization/frisians/units.lua:873
 msgctxt "frisians_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Védekezz és hódíts!"
 
 #. TRANSLATORS: Helptext for a frisian worker: Trainer
 #: ../../data/tribes/initialization/frisians/units.lua:880
 msgctxt "frisians_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Katonákat képez."
 
 #. TRANSLATORS: Helptext for a frisian worker: Scout
 #: ../../data/tribes/initialization/frisians/units.lua:887
 msgctxt "frisians_worker"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Ismeretlen területeket fedez fel."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:912
@@ -6297,7 +6297,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1108
 #: ../../data/tribes/initialization/frisians/units.lua:1136
 msgid "This berry bush has just been planted."
-msgstr ""
+msgstr "Frissen ültetett bokor."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:919
@@ -6310,7 +6310,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1115
 #: ../../data/tribes/initialization/frisians/units.lua:1143
 msgid "This berry bush is growing."
-msgstr ""
+msgstr "Növekedésben lévő bokor."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:926
@@ -6324,7 +6324,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1150
 msgid ""
 "This berry bush is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Virágzó bokor. A méhész mézet tud gyűjteni róla."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:933
@@ -6337,7 +6337,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1129
 #: ../../data/tribes/initialization/frisians/units.lua:1157
 msgid "This berry bush is ready for harvesting."
-msgstr ""
+msgstr "Szüretelésre kész bokor."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an empire/barbarian immovable usable by frisians:
@@ -6351,7 +6351,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1380
 #: ../../data/tribes/initialization/frisians/units.lua:1387
 msgid "This field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Virágzó szántóföld. A méhész mézet tud gyűjteni róla."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1199
@@ -6359,53 +6359,53 @@ msgid ""
 "When claydiggers dig up earth, they leave holes in the ground. These holes "
 "vanish after a while. Aqua farms can use them as ponds to grow fish in them,"
 " whereas charcoal burners erect their charcoal stacks in them."
-msgstr ""
+msgstr "A földben gödrök maradnak az agyag kiásása után. Ezek idővel eltűnnek, de addig a halgazdaságok halastóként tudják hasznosítani őket, de a szénégetők is ezekbe építik a hutáikat."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1206
 msgid ""
 "Fish are maturing in this pond. A fisher working from an aqua farm will be "
 "able to catch them when they are bigger."
-msgstr ""
+msgstr "A halastóban fiatal halak nevelődnek. Ha megnőnek, egy halgazdaságon dolgozó halász ki tudja majd fogni őket."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1213
 msgid ""
 "Fish are living in this pond. A fisher working from an aqua farm can catch "
 "them as food."
-msgstr ""
+msgstr "A halastóban felnőtt halak élnek. Egy halgazdaságon dolgozó halász ki tudja őket fogni."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1220
 msgid ""
 "A charcoal stack is burning in this earthen hole. When it has burnt down, a "
 "charcoal burner will be able to gather coal from it."
-msgstr ""
+msgstr "A gödörben faszén izzik. Amikor teljesen leég, a szénégető be tudja majd gyűjteni a szenet."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1227
 msgid ""
 "A charcoal stack, which had been erected in this earthen hole, is ready for "
 "a charcoal burner to gather coal from it."
-msgstr ""
+msgstr "A faszénrakás leégett, és arra vár, hogy a szénégető begyűjtse a szenet."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/frisians/units.lua:1248
 msgid ""
 "This reed field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Virágzó nádas. A méhész mézet tud gyűjteni róla."
 
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/frisians/units.lua:1310
 #: ../../data/tribes/initialization/frisians/units.lua:1354
 msgid "Granite is a basic building material and can be dug up by a rock mine."
-msgstr ""
+msgstr "A gránit az egyik alapvető építőanyag. A kőbányákban bányásszák."
 
 #. TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
 #: ../../data/tribes/initialization/frisians/units.lua:1394
 msgid ""
 "This grapevine is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Virágzó szőlőtőke. A méhész mézet tud gyűjteni róla."
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Headquarters
 #: ../../data/tribes/initialization/frisians/units.lua:1506
@@ -6447,32 +6447,32 @@ msgstr "A főhadiszálláshoz hasonlóan a kikötőt is meg tudja támadni és l
 #: ../../data/tribes/initialization/frisians/units.lua:1533
 msgctxt "frisians_building"
 msgid "When I swing my pick, whole mountains fall before me!"
-msgstr ""
+msgstr "Ha meglengetem a csákányomat, hegyek omlanak le előttem!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1535
 msgctxt "frisians_building"
 msgid "A stonemason"
-msgstr ""
+msgstr "Egy kőfaragó"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1537
 msgctxt "frisians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Nyers gránitdarabokat vág ki a közeli kövekből."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1539
 msgctxt "frisians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "A kőfejtőnek kitermelhető kövekre van szüksége a munkaterületén."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1541
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
-msgstr ""
+msgstr "A kőfaragó %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Woodcutter's
 #. House
@@ -6481,21 +6481,21 @@ msgctxt "frisians_building"
 msgid ""
 "I cannot see a tree without imagining what it would look like in terms of "
 "furniture."
-msgstr ""
+msgstr "Nem tudok úgy ránézni egy fára, hogy ne a benne rejlő bútort látnám."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Woodcutter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1550
 msgctxt "frisians_building"
 msgid "An over-enthusiastic woodcutter"
-msgstr ""
+msgstr "Egy túlbuzgó favágó"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Woodcutter's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1554
 msgctxt "frisians_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "A favágóháznak kivágható fákra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1561
@@ -6503,14 +6503,14 @@ msgctxt "frisians_building"
 msgid ""
 "What can ever be more beautiful than the brilliant sun’s beams shining "
 "through the glistering canopy of leaves?"
-msgstr ""
+msgstr "Mi lehetne gyönyörűbb, mint amikor a nap sugarai átszűrődnek a fák dús lombja között?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Forester's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1563
 msgctxt "frisians_building"
 msgid "A forester explaining his choice of profession"
-msgstr ""
+msgstr "Egy erdész a munkaválasztásáról"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1567
@@ -6526,13 +6526,13 @@ msgstr "Az erdészháznak szabad helyre van szüksége a munkaterületén a fák
 #, lua-format
 msgctxt "frisians_building"
 msgid "The forester pauses %s before going to work again."
-msgstr ""
+msgstr "Az erdész %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1578
 msgctxt "frisians_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "A vadászháznak vadászható állatokra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Hunter's
 #. House
@@ -6540,7 +6540,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
-msgstr ""
+msgstr "A vadász %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1587
@@ -6548,26 +6548,26 @@ msgctxt "frisians_building"
 msgid ""
 "Hunters can’t sell anything on a Friday, but fishers don’t have such "
 "problems."
-msgstr ""
+msgstr "A vadászok semmit sem tudnak eladni pénteken, pedig a halászoknak nincs ilyen problémájuk."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Fisher's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1589
 msgctxt "frisians_building"
 msgid "A hunter admiring a fisher"
-msgstr ""
+msgstr "Egy vadász irigykedve egy halászról"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1591
 msgctxt "frisians_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Halászik a halászház közelében lévő parton."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1593
 msgctxt "frisians_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "A halászháznak hallal teli vizekre van szüksége a munkaterületén."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Fisher's
 #. House
@@ -6575,41 +6575,41 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fisher pauses %s before going to work again."
-msgstr ""
+msgstr "A halász %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1602
 msgctxt "frisians_building"
 msgid ""
 "No worse fortune can befall a reed farmer than to see his roof leaking."
-msgstr ""
+msgstr "Nem érhet nagyobb balszerencse egy nádtermesztőt, mint az, ha beázik a fedele."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1604
 msgctxt "frisians_building"
 msgid "Anonymous reed farmer"
-msgstr ""
+msgstr "Egy ismeretlen nádtermesztő"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1606
 msgctxt "frisians_building"
 msgid "Cultivates reed that serves three different purposes for the Frisians."
-msgstr ""
+msgstr "Nádat termeszt, amelyet három különböző célra is felhasználnak a frízek."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1608
 msgctxt "frisians_building"
 msgid ""
-"Reed is the traditional material for roofing. It is also needed for "
-"producing buckets and fishing nets, and it is woven – together with reindeer"
-" fur – into the cloth used for ships’ sails."
-msgstr ""
+"Reed is the traditional material for roofing. It is also needed to produce "
+"baskets and fishing nets, and it is woven – together with reindeer fur – "
+"into the cloth used for ships’ sails."
+msgstr "A nád a tetőfedés hagyományos anyaga. Használják kosarakhoz és halászhálókhoz is, rénszarvas szőrmével együtt szőve pedig a hajók vitorlájának az anyagához."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1615
 msgctxt "frisians_building"
 msgid "We love the sea so much that we don’t want to drink it empty!"
-msgstr ""
+msgstr "Mi nagyon szeretjük a tengert, ezért eszünkbe se jutna kiinni az egészet!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1617
@@ -6617,26 +6617,26 @@ msgctxt "frisians_building"
 msgid ""
 "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt "
 "water"
-msgstr ""
+msgstr "Arldor törzsfőnök visszavágása arra, hogy miért nem iszik a törzse sós vizet"
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1621
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
-msgstr ""
+msgstr "A kút átlagosan %s alatt merít egy vízzel teli vödröt."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1628
 msgctxt "frisians_building"
 msgid "You think you can build a house without my help?"
-msgstr ""
+msgstr "Azt hiszed, nélkülem fel tudsz építeni egy házat?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1630
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr ""
+msgstr "Egy vályogvető vitája egy építésszel"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1632
@@ -6654,7 +6654,7 @@ msgstr "Földet ás ki, és vízzel agyagot készít belőle. Az agyagot tégla 
 msgctxt "frisians_building"
 msgid ""
 "No other tribe has ever mastered the art of charcoal burning as we have!"
-msgstr ""
+msgstr "Semelyik másik törzs nem fejlesztette olyan tökélyre a faszénégetést, mint mi!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Charcoal
 #. Burner's House
@@ -6664,7 +6664,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1824
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr ""
+msgstr "A fríz faszénégető huta feltalálója"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's
 #. House
@@ -6673,7 +6673,7 @@ msgctxt "building"
 msgid ""
 "The charcoal burner’s house needs holes in the ground that were dug by a "
 "clay pit’s worker nearby to erect charcoal stacks in them."
-msgstr ""
+msgstr "A faszénégető háznak egy agyagverem gödreire van szüksége a munkaterületén, hogy el tudja készíteni a faszénrakásait."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Burner's House
@@ -6681,7 +6681,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner’s house needs %s on average to produce one coal."
-msgstr ""
+msgstr "A faszénégető átlagosan %s alatt éget ki egy adag faszenet."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1654
@@ -6689,19 +6689,19 @@ msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
 "likes to eat bark!"
-msgstr ""
+msgstr "Lehet, hogy a bokraim alacsonyabbak a fáidnál, de még senkivel sem találkoztam, aki fakérget evett volna!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1656
 msgctxt "frisians_building"
 msgid "A berry farmer to a forester"
-msgstr ""
+msgstr "Egy gyümölcskertész egy erdésznek"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1658
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr ""
+msgstr "Gyümölcsbokrokat ültet a környező területen."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1660
@@ -6715,35 +6715,35 @@ msgstr "A gyümölcsösnek szabad helyre van szüksége a munkaterületén a bok
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
-msgstr ""
+msgstr "A gyümölcskertész %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Fruit Collector's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1669
 msgctxt "frisians_building"
 msgid "Meat doesn’t grow on bushes. Fruit does."
-msgstr ""
+msgstr "A hús nem terem bokrokon. A gyümölcs igen."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Fruit
 #. Collector's House
 #: ../../data/tribes/initialization/frisians/units.lua:1671
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
-msgstr ""
+msgstr "Egy gyümölcsszedő a portékáját reklámozva egy gazdasszonynak"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Fruit
 #. Collector's House
 #: ../../data/tribes/initialization/frisians/units.lua:1673
 msgctxt "building"
 msgid "Collects berries from nearby bushes."
-msgstr ""
+msgstr "Leszüreteli a gyümölcsöket a közeli bokrokról."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Fruit Collector's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1675
 msgctxt "frisians_building"
 msgid "The fruit collector needs bushes full of berries within the work area."
-msgstr ""
+msgstr "A gyümölcsszedőnek érett gyümölccsel teli bokrokra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Fruit
 #. Collector's House
@@ -6751,7 +6751,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fruit collector pauses %s before going to work again."
-msgstr ""
+msgstr "A gyümölcsszedő %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Beekeeper's House
 #: ../../data/tribes/initialization/frisians/units.lua:1684
@@ -6759,21 +6759,21 @@ msgctxt "frisians_building"
 msgid ""
 "If my honey tastes bitter, I must have left some bee stings in it. There are"
 " never any bee stings in my honey, therefore, it is not bitter."
-msgstr ""
+msgstr "Ha a mézem keserű, akkor biztos fullánkok maradtak benne. De az én mézemben soha nincs fullánk, tehát az én mézem soha nem keserű."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Beekeeper's House
 #: ../../data/tribes/initialization/frisians/units.lua:1686
 msgctxt "frisians_building"
 msgid "A beekeeper ignoring a customer’s complaint"
-msgstr ""
+msgstr "Egy méhész elutasítva egy vevői panaszt"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Beekeeper's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1688
 msgctxt "frisians_building"
 msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
-msgstr ""
+msgstr "Méheket tart, és kiereszti őket a virágzó mezőkre, hogy mézet gyűjtsenek."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Beekeeper's House
 #: ../../data/tribes/initialization/frisians/units.lua:1690
@@ -6781,7 +6781,7 @@ msgctxt "frisians_building"
 msgid ""
 "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
 " (berry bushes or grapevines) nearby."
-msgstr ""
+msgstr "Közepesre nőtt szántóföldekre (árpa, búza, kukorica vagy feketegyökér), nádasokra, gyümölcsbokrokra vagy szőlőtőkékre van szüksége a munkaterületén."
 
 #. TRANSLATORS: Performance helptext for a frisian production site:
 #. Beekeeper's House
@@ -6789,25 +6789,25 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The beekeeper pauses %s before going to work again."
-msgstr ""
+msgstr "A méhész %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Aqua Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1699
 msgctxt "frisians_building"
 msgid "Why on earth shouldn’t we be able to catch fish even in the desert?"
-msgstr ""
+msgstr "Miért ne foghatánk halat akár a sivatagban is?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Aqua Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1701
 msgctxt "frisians_building"
 msgid "The fisherman who invented aqua farming"
-msgstr ""
+msgstr "A halász, aki feltalálta a halgazdálkodást"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Aqua Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1703
 msgctxt "frisians_building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Halakat tenyészt a katonák és bányászok élelmezéséhez."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Aqua Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1705
@@ -6815,7 +6815,7 @@ msgctxt "building"
 msgid ""
 "The aqua farm needs holes in the ground that were dug by a clay pit’s worker"
 " nearby to use as fishing ponds."
-msgstr ""
+msgstr "A halgazdaságnak egy agyagverem gödreire van szüksége a munkaterületén, hogy halakat telepítsen beléjük."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Scout's House
 #: ../../data/tribes/initialization/frisians/units.lua:1712
@@ -6824,21 +6824,21 @@ msgid ""
 "Everyone has their own ideas on how exactly we should explore the enemy’s "
 "territory… One more ‘improvement’ suggestion and we’ll demand meals instead "
 "of rations!"
-msgstr ""
+msgstr "Mindenkinek van elképzelése arról, pontosan hogyan kellene felderítenünk az ellenség területét… De ha még egy „javító” észrevételt kapunk, harapnivalók helyett ebédeket fogunk követelni!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Scout's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1714
 msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
-msgstr ""
+msgstr "A felderítő szakszervezet szóvivője"
 
 #: ../../data/tribes/initialization/frisians/units.lua:1715
 msgctxt "frisians_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítőházzal."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Scout's
 #. House
@@ -6846,7 +6846,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The scout pauses %s before going to work again."
-msgstr ""
+msgstr "A felderítő %s szünetet tart, mielőtt újra elkezd dolgozni."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1728
@@ -6854,13 +6854,13 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "Ha nincs elég szén, csak a legostobább vezető vonná meg a téglaégetőktől elsőként."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1730
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
-msgstr ""
+msgstr "Egy téglakészítő a törzsfőnökével vitázva, amikor az éppen ezt tette"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1732
@@ -6868,14 +6868,14 @@ msgctxt "building"
 msgid ""
 "Burns bricks using granite and clay, and coal as fuel. Bricks are the most "
 "important building material."
-msgstr ""
+msgstr "Téglákat éget gránitból és agyagból, szenet használva tüzelőnek. A tégla a frízek legfontosabb építőanyaga."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1734
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce three bricks."
-msgstr ""
+msgstr "A téglaégető átlagosan %s alatt éget ki három téglát."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Furnace
 #: ../../data/tribes/initialization/frisians/units.lua:1741
@@ -6883,7 +6883,7 @@ msgctxt "frisians_building"
 msgid ""
 "Miners get ores from the depths of the hills; but without our work, their "
 "labour is in vain."
-msgstr ""
+msgstr "A bányászok hozzák fel az ércet a hegyek mélyéből; de nélkülünk a munkájuk kárba veszne."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Furnace
 #: ../../data/tribes/initialization/frisians/units.lua:1743
@@ -6895,7 +6895,7 @@ msgstr "A kohászok céhének jelmondata"
 #: ../../data/tribes/initialization/frisians/units.lua:1745
 msgctxt "building"
 msgid "Smelts iron ore and gold ore into iron and gold ingots using coal."
-msgstr ""
+msgstr "Vasércet olvaszt vassá és aranyércet arannyá szén felhasználásával."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1752
@@ -6904,14 +6904,14 @@ msgid ""
 "Of course these weapons could be used by other soldiers again without being "
 "smelted down first! The only drawback is that they’d break in two at the "
 "first blow."
-msgstr ""
+msgstr "Persze, hogy tovább használhatná valaki más ezeket a fegyvereket beolvasztás helyett! Az egyetlen probléma, hogy az első csapásnál kettétörnének."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Recycling
 #. Center
 #: ../../data/tribes/initialization/frisians/units.lua:1754
 msgctxt "frisians_building"
 msgid "A smelter explaining the need for recycling to his impatient chieftain"
-msgstr ""
+msgstr "Egy kohász az újrahasznosítás szükségességét magyarázva türelmetlen törzsfőnökének"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Recycling
 #. Center
@@ -6920,26 +6920,26 @@ msgctxt "frisians_building"
 msgid ""
 "Recycles old armor and weapon parts that have been discarded by training "
 "sites into fur, iron and gold."
-msgstr ""
+msgstr "Újrahasznosítja a kiképzőhelyeken elhasznált páncélokat és fegyvereket szőrmévé, vassá és arannyá."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1763
 msgctxt "frisians_building"
 msgid "If you don’t have iron, change your name from blacksmith to lacksmith!"
-msgstr ""
+msgstr "Ha vasat akarsz, akkor addig is legyél a szerencsénk kovácsa!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1765
 msgctxt "frisians_building"
 msgid "Irritated chieftain during a metal shortage"
-msgstr ""
+msgstr "Zaklatott törzsfőnök fémhiány idején"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1767
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr ""
+msgstr "Szerszámokat készít a munkásoknak."
 
 #. TRANSLATORS: Performance helptext for a frisian production site:
 #. Blacksmithy
@@ -6947,7 +6947,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s on average to produce one tool."
-msgstr ""
+msgstr "A kovács átlagosan %s alatt készít egy szerszámot."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Small Armor
 #. Smithy
@@ -6956,21 +6956,21 @@ msgctxt "frisians_building"
 msgid ""
 "I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
 " I forge ’em."
-msgstr ""
+msgstr "Nem azért kovácsolok kardokat, mert a katonáknak kellenek. A katonák azért kapják, mert én megkovácsolom őket!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Small
 #. Armor Smithy
 #: ../../data/tribes/initialization/frisians/units.lua:1778
 msgctxt "frisians_building"
 msgid "A blacksmith pointing out his influence on soldier training"
-msgstr ""
+msgstr "Egy kovács kifejtve munkája jelentőségét a katonai kiképzésben"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Small Armor
 #. Smithy
 #: ../../data/tribes/initialization/frisians/units.lua:1780
 msgctxt "frisians_building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "Egyszerű fegyvereket és sisakokat készít a katonáknak."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Large Armor
 #. Smithy
@@ -6979,7 +6979,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr ""
+msgstr "Természetesen még mindig tudnék rövid és hosszú kardokat kovácsolni, de rangomon aluli lenne leereszkedni ilyen gyerekjátékokhoz."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Large
 #. Armor Smithy
@@ -6988,14 +6988,14 @@ msgctxt "frisians_building"
 msgid ""
 "A master blacksmith refusing to forge anything but the most sophisticated "
 "helmets and weapons"
-msgstr ""
+msgstr "Egy kovácsmester visszautasítva a legfejlettebb sisakokon és fegyvereken kívül minden más munkát"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Large Armor
 #. Smithy
 #: ../../data/tribes/initialization/frisians/units.lua:1791
 msgctxt "frisians_building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
-msgstr ""
+msgstr "Fejlett fegyvereket és aranysisakokat készít a katonáknak."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1798
@@ -7003,20 +7003,20 @@ msgctxt "frisians_building"
 msgid ""
 "You soldiers think a good sword is everything, but where would you be if you"
 " had no garments?"
-msgstr ""
+msgstr "Ti katonák azt hiszitek, hogy egy jó kardon múlik minden, de mit csinálnátok ruha nélkül?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Sewing
 #. Room
 #: ../../data/tribes/initialization/frisians/units.lua:1800
 msgctxt "frisians_building"
 msgid "A seamstress scolding a soldier for disrespecting her profession"
-msgstr ""
+msgstr "Egy varrónő egy katonát leszidva, aki lenézte a szakmája miatt"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1802
 msgctxt "building"
 msgid "Sews fur garments out of reindeer fur."
-msgstr ""
+msgstr "Kacagányt varr rénszarvas szőrméből."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Sewing
 #. Room
@@ -7024,7 +7024,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s on average to produce one fur garment."
-msgstr ""
+msgstr "A varroda átlagosan %s alatt készít egy kacagányt."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tailor's Shop
 #: ../../data/tribes/initialization/frisians/units.lua:1811
@@ -7032,20 +7032,20 @@ msgctxt "frisians_building"
 msgid ""
 "Don’t complain if these garments are too heavy – they’re not supposed to be "
 "light but to keep you alive a bit longer!"
-msgstr ""
+msgstr "Ne panaszkodjatok, hogy túl nehezek ezek a kacagányok! — Nem könnyűnek kell lenniük, hanem kicsivel tovább életben kell tartaniuk benneteket!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Tailor's
 #. Shop
 #: ../../data/tribes/initialization/frisians/units.lua:1813
 msgctxt "frisians_building"
 msgid "A trainer scolding a soldier"
-msgstr ""
+msgstr "Egy kiképző egy katonát szidva"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
 #: ../../data/tribes/initialization/frisians/units.lua:1815
 msgctxt "building"
 msgid "Equips fur garments with iron or gold to produce good armor."
-msgstr ""
+msgstr "Vassal és arannyal erősíti meg a kacagányokat."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Kiln
@@ -7053,7 +7053,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "A faszénégető kemence átlagosan %s alatt éget ki egy adag faszenet."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1835
@@ -7061,13 +7061,13 @@ msgctxt "frisians_building"
 msgid ""
 "Miners and soldiers are so picky… But who am I to complain, as I make my "
 "living from it?"
-msgstr ""
+msgstr "Milyen válogatósak a bányászok és a katonák… De minek panaszkodom, elvégre pont ebből élek!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1837
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
-msgstr ""
+msgstr "Egy füstölő magyarázza a szakmáját"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1839
@@ -7075,39 +7075,39 @@ msgctxt "frisians_building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
 "to be eaten by miners and soldiers."
-msgstr ""
+msgstr "Halat és húst füstöl fával. A katonák és a bányászok csak a füstölt halat és húst eszik meg."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1841
 #, lua-format
 msgctxt "frisians_building"
 msgid "The smokery needs %s on average to smoke two fish or two meat."
-msgstr ""
+msgstr "A füstölő átlagosan %s alatt füstöl meg két halat vagy két húst."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1848
 msgctxt "frisians_building"
 msgid "Why shouldn’t my bread taste good? It’s only barley and water!"
-msgstr ""
+msgstr "Hogyan is lehetne rossz ízű a kenyerem? Hiszen csak árpa és víz!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1850
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "Egy pék"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1852
 msgctxt "frisians_building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
-msgstr ""
+msgstr "Kenyeret süt árpa és víz felhasználásával a bányászok élelmezéséhez és a katonák kiképzéséhez."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1854
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
-msgstr ""
+msgstr "A péknek átlagosan %s szükséges egy vekni kenyér elkészítéséhez."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Honey Bread
 #. Bakery
@@ -7116,14 +7116,14 @@ msgctxt "frisians_building"
 msgid ""
 "Rookies will say that vengeance is sweet. Heroes will say that honey bread "
 "is sweeter."
-msgstr ""
+msgstr "Az újoncok azt mondják, édes a bosszú. A hősök azt, hogy a mézes kenyér édesebb."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Honey
 #. Bread Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1863
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
-msgstr ""
+msgstr "Egy kiképző egy pékkel beszélgetve"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread
 #. Bakery
@@ -7132,46 +7132,46 @@ msgctxt "frisians_building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
-msgstr ""
+msgstr "Mézes kenyeret süt árpából, vízből és mézből a mély bányákban dolgozó bányászoknak és a katonák magas szintű kiképzéséhez."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1872
 msgctxt "frisians_building"
 msgid ""
 "I know no single master miner who’ll ever work without a nice pint of beer!"
-msgstr ""
+msgstr "Nem ismerek egyetlen bányászmestert sem, aki hajlandó lenne dolgozni egy jó korsó sör nélkül!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1874
 msgctxt "frisians_building"
 msgid "A brewer boasting about the importance of his profession"
-msgstr ""
+msgstr "Egy sörfőző a szakmája fontosságáról dicsekedve"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1876
 msgctxt "frisians_building"
 msgid "Brews beer for miners and soldier training."
-msgstr ""
+msgstr "Sört főz a bányászoknak és a katonák kiképzéséhez."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1878
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr ""
+msgstr "A sörfőzőnek átlagosan %s szükséges egy korsó sör elkészítéséhez."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Mead Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1885
 msgctxt "frisians_building"
 msgid "If you like beer, you’ve never tasted mead."
-msgstr ""
+msgstr "Ha szereted a sört, akkor soha nem kóstoltad a mézsört."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Mead
 #. Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1887
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
-msgstr ""
+msgstr "Egy mézsör főzde jelmondata"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1889
@@ -7179,19 +7179,19 @@ msgctxt "frisians_building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
-msgstr ""
+msgstr "Sört főz árpából és vízből. Készít mézsört is sörből és mézből. A mézsört a tapasztalt katonák isszák."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1896
 msgctxt "frisians_building"
 msgid "Nothing but fruit all day… Couldn’t you hurry up a bit?"
-msgstr ""
+msgstr "Csak gyümölcs egész nap… Nem tudnál kicsit sietni?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1898
 msgctxt "frisians_building"
 msgid "Hungry customers in times of a shortage of smoked fish and meat"
-msgstr ""
+msgstr "Éhes vendégek füstölt hal- és húshiány idején"
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1902
@@ -7200,7 +7200,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50%% longer."
-msgstr ""
+msgstr "A kocsma átlagosan %s alatt készít egy harapnivalót, ha folyamatos az áruellátása, különben 50%%-kal tovább tart."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1909
@@ -7208,14 +7208,14 @@ msgctxt "frisians_building"
 msgid ""
 "All I need to be happy is a slice of honey bread with some smoked meat and a"
 " beer."
-msgstr ""
+msgstr "A boldogságomhoz csak egy szelet mézes kenyér hiányzik füstölt hússal és egy korsó sörrel."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Drinking
 #. Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1911
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
-msgstr ""
+msgstr "Egy bányászmester a gazdasszonynak"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1913
@@ -7223,7 +7223,7 @@ msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Harapnivalót készít a felderítők számára, valamint harapnivalót és ebédet a bányákban dolgozó bányászok élelmezéséhez."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1920
@@ -7234,13 +7234,13 @@ msgid ""
 "alone! You’d better pay close attention to me in order to make the most of "
 "it. Now here is your new short sword, forged just for you by our best "
 "blacksmiths. Time’s up everyone, now go occupy your sentinels!"
-msgstr ""
+msgstr "Harminc másodpercetek van a kardforgatás és az életben maradás alapjainak elsajátítására. Ennek a harmada már el is telt a bevezetéssel! Jobb, ha nagyon figyeltek, hogy a legtöbbet kihozzátok belőle. Akkor itt is van a kardotok, csak nektek készítették a legjobb kovácsaink. Lejárt az idő, most mindenki menjen, foglalja el a kijelölt őrhelyét!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1922
 msgctxt "frisians_building"
 msgid "A trainer greeting the new recruits"
-msgstr ""
+msgstr "Egy kiképző az újoncokat üdvözölve"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1924
@@ -7253,14 +7253,14 @@ msgstr "Felszereli és kiképzi katonákká az újoncokat."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "A laktanya átlagosan %s alatt toboroz egy katonát."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1935
 msgctxt "frisians_building"
 msgid ""
 "Who says a beast of burden cannot be useful for other things than transport?"
-msgstr ""
+msgstr "Ki mondta, hogy egy teherhordó állat másra nem használható?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reindeer
 #. Farm
@@ -7268,7 +7268,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The reindeer breeder who first proposed using reindeer fur for clothing"
-msgstr ""
+msgstr "A rénszarvas tenyésztő, aki először javasolta a rénszarvas szőrme felhasználását ruhákhoz"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1939
@@ -7276,7 +7276,7 @@ msgctxt "frisians_building"
 msgid ""
 "Breeds strong reindeer for adding them to the transportation system. Also "
 "keeps them for their fur, which is turned into armor and cloth."
-msgstr ""
+msgstr "Erős rénszarvasokat tenyészt, hogy aztán részei legyenek a szállítási rendszernek. A szőrméjüket is használják páncél és szövet készítésére."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1941
@@ -7284,7 +7284,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady, the reindeer farm produces one meat after producing"
 " three pieces of fur."
-msgstr ""
+msgstr "Ha folyamatos az ellátás, a rénszarvastelep termel egy húst minden harmadik szőrme után."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1948
@@ -7292,7 +7292,7 @@ msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no drought; no rats, no locusts; naught can "
 "destroy my harvest."
-msgstr ""
+msgstr "Sem fagy, sem forróság; sem eső, sem aszály; sem patkányok, sem sáskák; semmi nem tudja elpusztítani az én vetésemet."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1950
@@ -7300,13 +7300,13 @@ msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
 "slow-growing grain."
-msgstr ""
+msgstr "Egy földműves válasza a törzsfőnöknek, hogy miért ilyen lassan növekvő gabonát termeszt"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1952
 msgctxt "building"
 msgid "Sows and harvests barley."
-msgstr ""
+msgstr "Árpát vet és arat."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1954
@@ -7329,7 +7329,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce two blocks of "
 "granite in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a kőbánya átlagosan %s alatt termel két gránittömböt."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Rock
 #. Mine
@@ -7339,7 +7339,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce three blocks of"
 " granite in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély kőbánya átlagosan %s alatt termel három gránittömböt."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
 #: ../../data/tribes/initialization/frisians/units.lua:1983
@@ -7348,7 +7348,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce two pieces of coal "
 "in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a szénbánya átlagosan %s alatt termel két szenet."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Coal
 #. Mine
@@ -7358,7 +7358,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce four pieces of "
 "coal in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély szénbánya átlagosan %s alatt termel négy szenet."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2001
@@ -7367,7 +7367,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a vasércbánya átlagosan %s alatt termel egy vasércet."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Iron
 #. Mine
@@ -7377,7 +7377,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce two pieces of "
 "iron ore in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély vasércbánya átlagosan %s alatt termel két vasércet."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2019
@@ -7386,7 +7386,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor az aranybánya átlagosan %s alatt termel egy aranyércet."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Gold
 #. Mine
@@ -7396,7 +7396,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce two pieces of "
 "gold ore in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély aranybánya átlagosan %s alatt termel két aranyércet."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2037
@@ -7404,7 +7404,7 @@ msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
 "explained to you how to hold a broadsword."
-msgstr ""
+msgstr "Csak maradj nyugton, figyelj rendesen, és próbáld meg nem összekaszabolni magadat, amíg megmutatom, hogyan tartsd a pallost!"
 
 #. TRANSLATORS: Lore author helptext for a frisian training site: Training
 #. Camp
@@ -7414,7 +7414,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2052
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
-msgstr ""
+msgstr "Egy kiképző a kiképzésen"
 
 #. TRANSLATORS: Purpose helptext for a frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2041
@@ -7422,7 +7422,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack up to level 3 as well as in Defense and Health to "
 "level 1. Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "A katonák támadását fejleszti a 3. szintig, a védelmüket és az életerejüket pedig az 1. szintig. Felszereli őket az ehhez szükséges fegyverekkel és páncélzattal."
 
 #. TRANSLATORS: Note helptext for a frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2043
@@ -7430,7 +7430,7 @@ msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
 "level."
-msgstr ""
+msgstr "A fríz katonák kitérését nem lehet fejleszteni, mindig a kezdeti szintjükön maradnak."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Arena
 #: ../../data/tribes/initialization/frisians/units.lua:2050
@@ -7439,7 +7439,7 @@ msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidentally "
 "stab yourself, but if you got this far, you’ll likely master this challenge "
 "as well."
-msgstr ""
+msgstr "Most, hogy két kardod van, nagyobb eséllyel vágod meg saját magadat, de ha eddig eljutottál, valószínűleg ezt is meg tudod tanulni."
 
 #. TRANSLATORS: Purpose helptext for a frisian training site: Training Arena
 #: ../../data/tribes/initialization/frisians/units.lua:2054
@@ -7447,7 +7447,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
 " soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "A katonák támadását, védelmét és életerejét fejleszt a legmagasabb szintig. Felszereli őket az ehhez szükséges fegyverekkel és páncélzattal."
 
 #. TRANSLATORS: Note helptext for a frisian training site: Training Arena
 #: ../../data/tribes/initialization/frisians/units.lua:2056
@@ -7455,7 +7455,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains only soldiers who have been trained to the maximum level by the "
 "Training Camp."
-msgstr ""
+msgstr "Csak azokat a katonákat fejleszti, akiket a kiképzőtáborban az ott elérhető legmagasabb szintre fejlesztették."
 
 #. TRANSLATORS: Purpose helptext for a frisian military site: Wooden Tower
 #. TRANSLATORS: Purpose helptext for a frisian military site: High Wooden
@@ -7499,7 +7499,7 @@ msgctxt "frisians_building"
 msgid ""
 "This house may be called a shipyard, but my ships are rather longer than one"
 " yard!"
-msgstr ""
+msgstr "Nem kicsi, ha jó a hajó!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Shipyard
 #: ../../data/tribes/initialization/frisians/units.lua:2132
@@ -7507,7 +7507,7 @@ msgctxt "frisians_building"
 msgid ""
 "A shipwright who only constructed toy ships after being chid that his ships "
 "were too small"
-msgstr ""
+msgstr "Egy hajóács, aki csak játékhajókat készített, miután bírálták, hogy túl kicsik a hajói"
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Weaving Mill
 #: ../../data/tribes/initialization/frisians/units.lua:2141
@@ -7515,20 +7515,20 @@ msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
 "ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
-msgstr ""
+msgstr "Szarvasszőrme, tetőnád<br>Milyen jövő vár itt rád?<br>Fa hajóknak a szelet<br>Vitorlátok fogja be!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Weaving
 #. Mill
 #: ../../data/tribes/initialization/frisians/units.lua:2143
 msgctxt "frisians_building"
 msgid "A seamstress’ work song"
-msgstr ""
+msgstr "Egy varrónő munkadala"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Weaving Mill
 #: ../../data/tribes/initialization/frisians/units.lua:2145
 msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
-msgstr ""
+msgstr "Szövetet varr nádból és rénszarvas szőrméből a hajók vitorlájához."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Weaving
 #. Mill
@@ -7536,7 +7536,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr ""
+msgstr "A szövőmalom átlagosan %s alatt készít egy vég szövetet."
 
 #: ../../data/tribes/scripting/help/building_help.lua:240
 #: ../../data/tribes/scripting/help/format_help.lua:232

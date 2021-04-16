@@ -21,6 +21,7 @@
 
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "map_io/map_loader.h"
 
 // Helper functions for localizable assembly of info strings
@@ -110,7 +111,7 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	infotext % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	              .as_font_tag((boost::format(_("Description: %s")) %
 	                            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                               .as_font_tag(map.get_description()))
+	                               .as_font_tag(richtext_escape(map.get_description())))
 	                              .str());
 	if (!map.get_hint().empty()) {
 		infotext %
