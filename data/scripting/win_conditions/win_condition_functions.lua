@@ -91,17 +91,17 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          end
          -- now collect the warehouses/ports/milsites including constructionsites a player has
          for name,allowed in ordered_pairs(p.allowed_buildings) do
-            for i,site in pairs(p:get_constructionsites(name)) do
+            for i,site in ipairs(p:get_constructionsites(name)) do
                table.insert(fields_to_destroy, site.fields[1])
             end
-            for i,site in pairs(p:get_buildings(name)) do
+            for i,site in ipairs(p:get_buildings(name)) do
                if site.descr.type_name == "militarysite" then
                   table.insert(fields_to_destroy, site.fields[1])
                end
             end
          end
          -- destroy the collected sites
-         for idx,f in pairs(fields_to_destroy) do
+         for idx,f in ipairs(fields_to_destroy) do
             if f.immovable then
                f.immovable:destroy()
                -- add some delay to the destruction for dramaturgical reason
