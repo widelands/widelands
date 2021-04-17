@@ -77,7 +77,7 @@ end
 -- RST
 -- .. function:: ordered_pairs(t)
 --
---    Equivalent of the :func:`pairs()` function on tables. 
+--    Equivalent of the :func:`pairs()` function on tables.
 --    Allows to iterate in deterministic order.
 --    Taken from http://lua-users.org/wiki/SortedIteration
 --
@@ -86,4 +86,3 @@ end
 function ordered_pairs(t)
     return ordered_next, t, nil
 end
-
