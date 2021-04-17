@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-09 12:11+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"PO-Revision-Date: 2021-04-13 10:18+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -613,9 +613,9 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "스페이스키는 정상적인 게임에서처럼 작동합니다. 건물 공간이 켜져 있거나 꺼져있는 경우 전환됩니다."
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr ""
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
