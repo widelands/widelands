@@ -67,6 +67,7 @@
 #include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
 #include "wui/warehousewindow.h"
+#include "wui/watchwindow.h"
 
 namespace {
 
@@ -917,8 +918,14 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 				case UI::Panel::SaveType::kShipWindow:
 					w = &ShipWindow::load(fr, *this, mol);
 					break;
+				case UI::Panel::SaveType::kWatchWindow:
+					w = &WatchWindow::load(fr, *this, mol);
+					break;
 				case UI::Panel::SaveType::kStockMenu:
 					w = &StockMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kGeneralStats:
+					w = &GeneralStatisticsMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kSoldierStats:
 					w = &SoldierStatisticsMenu::load(fr, *this);
