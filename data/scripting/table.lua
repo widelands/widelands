@@ -32,16 +32,10 @@ function array_combine(...)
    return t
 end
 
-
--- RST
--- .. function:: __gen_ordered_index(t)
---
---    Generate a sorted index from a table
---    Taken from http://lua-users.org/wiki/SortedIteration
---
---    :arg t: a table
---    :returns: a table containing t's keys in alphabetic order
-function __gen_ordered_index( t )
+-- Helper function for ordered_pairs(t)
+-- Generate a sorted index from a table
+-- Taken from http://lua-users.org/wiki/SortedIteration
+function __gen_ordered_index(t)
     local ordered_index = {}
     for key in pairs(t) do
         table.insert( ordered_index, key )
@@ -50,17 +44,11 @@ function __gen_ordered_index( t )
     return ordered_index
 end
 
--- RST
--- .. function:: ordered_next(t, state)
---
---    Equivalent of the next function, but returns the keys in the alphabetic
---    order. We use a temporary ordered key table that is stored in the
---    table being iterated.
---    Taken from http://lua-users.org/wiki/SortedIteration
---
---    :arg t: a table
---    :arg state: current iteration state
---    :returns: the next key,value pair
+-- Helper function for ordered_pairs(t)
+-- Equivalent of the next function, but returns the keys in the alphabetic
+-- order. We use a temporary ordered key table that is stored in the
+-- table being iterated.
+-- Taken from http://lua-users.org/wiki/SortedIteration
 function ordered_next(t, state)
 
     local key = nil
@@ -89,11 +77,11 @@ end
 -- RST
 -- .. function:: ordered_pairs(t)
 --
---    Equivalent of the pairs() function on tables. 
+--    Equivalent of the :func:`pairs()` function on tables. 
 --    Allows to iterate in deterministic order.
 --    Taken from http://lua-users.org/wiki/SortedIteration
 --
---    :arg t: a table
+--    :arg table t: The table to iterate over
 --    :returns: a key,value iterator
 function ordered_pairs(t)
     return ordered_next, t, nil
