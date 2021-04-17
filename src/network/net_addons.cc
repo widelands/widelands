@@ -27,6 +27,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/md5.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
@@ -149,6 +150,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	const size_t nr_addons = next_number(output);
 	for (size_t i = 0; i < nr_addons; ++i) {
+		bool valid = true;
 		AddOnInfo info;
 
 		info.internal_name = next_word(output);
@@ -185,7 +187,12 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		info.i18n_version = next_number(output);
 		info.total_file_size = next_number(output);
 
-		info.category = get_category(next_word(output));
+		try {
+			info.category = get_category(next_word(output));
+		} catch (const std::exception& e) {
+			valid = false;
+			log_err("Skip add-on %s because: %s", info.internal_name.c_str(), e.what());
+		}
 
 		for (size_t req = next_number(output); req; --req) {
 			info.requirements.push_back(next_word(output));
@@ -205,10 +212,11 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		}
 		if (info.file_list.checksums.size() !=
 		    info.file_list.files.size() + info.file_list.locales.size()) {
-			throw wexception("Found %u files and %u locales, but %u checksums",
-			                 static_cast<unsigned>(info.file_list.files.size()),
-			                 static_cast<unsigned>(info.file_list.locales.size()),
-			                 static_cast<unsigned>(info.file_list.checksums.size()));
+			valid = false;
+			log_err("Skip add-on %s because: Found %u files and %u locales, but %u checksums",
+			        info.internal_name.c_str(), static_cast<unsigned>(info.file_list.files.size()),
+			        static_cast<unsigned>(info.file_list.locales.size()),
+			        static_cast<unsigned>(info.file_list.checksums.size()));
 		}
 		for (size_t screenies = next_number(output); screenies; --screenies) {
 			const std::string s_name = next_word(output);
@@ -218,7 +226,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		info.verified = next_word(output) == "verified";
 
-		result_vector.push_back(info);
+		if (valid) {
+			result_vector.push_back(info);
+		}
 	}
 
 	return result_vector;
