@@ -168,18 +168,18 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 }
 
-void EconomyOptionsWindow::create(Panel* parent,
+EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
                                   Widelands::Descriptions* descriptions,
                                   const Widelands::Flag& flag,
                                   Widelands::WareWorker type,
                                   bool can_act) {
 	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
 	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
-	bool window_open = false;
+	EconomyOptionsWindow* window_open = nullptr;
 	if (ware_economy->get_options_window()) {
-		window_open = true;
 		EconomyOptionsWindow& window =
 		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
+		window_open = &window;
 		window.activate_tab(type);
 		if (window.is_minimal()) {
 			window.restore();
@@ -187,18 +187,19 @@ void EconomyOptionsWindow::create(Panel* parent,
 		window.move_to_top();
 	}
 	if (worker_economy->get_options_window()) {
-		window_open = true;
 		EconomyOptionsWindow& window =
 		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+		window_open = &window;
 		window.activate_tab(type);
 		if (window.is_minimal()) {
 			window.restore();
 		}
 		window.move_to_top();
 	}
-	if (!window_open) {
-		new EconomyOptionsWindow(parent, descriptions, ware_economy, worker_economy, type, can_act);
+	if (window_open) {
+		return *window_open;
 	}
+	return *new EconomyOptionsWindow(parent, descriptions, ware_economy, worker_economy, type, can_act);
 }
 void EconomyOptionsWindow::activate_tab(Widelands::WareWorker type) {
 	tabpanel_.activate(type == Widelands::WareWorker::wwWARE ? "wares" : "workers");

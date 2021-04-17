@@ -117,10 +117,13 @@ private:
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
+
+public:
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 
+private:
 	const Image* grid_marker_pic_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

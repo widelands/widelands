@@ -63,7 +63,7 @@ public:
 	};
 
 	// Create an economy options window for the given flag
-	static void create(UI::Panel* parent,
+	static EconomyOptionsWindow& create(UI::Panel* parent,
 	                   Widelands::Descriptions* descriptions,
 	                   const Widelands::Flag& flag,
 	                   Widelands::WareWorker type,

@@ -55,6 +55,7 @@
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
+#include "wui/game_objectives_menu.h"
 #include "wui/info_panel.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/militarysitewindow.h"
@@ -914,6 +915,12 @@ void InteractiveBase::load_windows(FileRead& fr) {
 					break;
 				case UI::Panel::SaveType::kStockMenu:
 					w = &StockMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kObjectives:
+					w = &GameObjectivesMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kMinimap:
+					w = &MiniMap::load(fr, *this);
 					break;
 				default:
 					throw Widelands::GameDataError("Invalid panel save type %u", static_cast<unsigned>(type));

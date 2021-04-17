@@ -390,9 +390,12 @@ private:
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
-	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 
+public:
+	MiniMap::Registry minimap_registry_;
+
+private:
 	// The currently enabled work area previews
 	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
 	std::unique_ptr<Workareas> workareas_cache_;
