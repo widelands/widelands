@@ -91,13 +91,23 @@ python3 utils/fix_formatting.py --lua --dir data/txts
 
 # Undo one-liner diffs in po directory - these are pure timestamps with no other content
 set +x
-for line in $(git diff --numstat po); do
-  row=($(echo $line | tr "\t" "\n"))
-  if [ ${#row[@]} -eq 3 ] ; then
-    if [ ${row[0]} -eq 1 -a ${row[1]} -eq 1 ] ; then
-      echo "Skipping changes to ${row[2]}"
-      git checkout ${row[2]}
+nrAdded=""
+nrDeleted=""
+for entry in $(git diff --numstat po); do
+  if [ -z "$nrAdded" ]
+  then
+    nrAdded=$entry
+  elif [ -z "$nrDeleted" ]
+  then
+    nrDeleted=$entry
+  else
+    if [[ $nrAdded == 1 ]] && [[ $nrDeleted == 1 ]]
+    then
+      echo "Skipping changes to $entry"
+      git checkout $entry
     fi
+    nrAdded=""
+    nrDeleted=""
   fi
 done
 set -x
