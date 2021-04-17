@@ -111,7 +111,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					}
 				}
 				if (packet_version >= 6) {
-					ibase->load_windows(fr);
+					ibase->load_windows(fr, *mol);
 				}
 			}
 		} else {
@@ -171,7 +171,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.unsigned_32(0);
 		}
 
-		ibase->save_windows(fw);
+		ibase->save_windows(fw, *mos);
 	}
 
 	fw.write(fs, "binary/interactive_player");

@@ -21,6 +21,7 @@
 #define WL_WUI_SOLDIER_STATISTICS_MENU_H
 
 #include "ui_basic/icon.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
@@ -32,6 +33,12 @@ struct SoldierStatisticsMenu : public UI::UniqueWindow {
 
 	void think() override;
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kSoldierStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	void update();
 
@@ -39,6 +46,7 @@ private:
 
 	unsigned max_attack_, max_defense_, max_health_, max_evade_;
 
+	UI::TabPanel tabs_;
 	std::vector<UI::Icon*> icons_all_;
 	std::vector<UI::Textarea*> labels_all_;
 	std::vector<UI::Icon*> icons_detail_;

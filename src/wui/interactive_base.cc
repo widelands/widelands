@@ -61,6 +61,7 @@
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/shipwindow.h"
+#include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/toolbar.h"
 #include "wui/trainingsitewindow.h"
@@ -894,7 +895,7 @@ Saveloading support for open unique windows.
 */
 constexpr uint16_t kCurrentPacketVersionUniqueWindows = 1;
 
-void InteractiveBase::load_windows(FileRead& fr) {
+void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionUniqueWindows) {
@@ -913,8 +914,14 @@ void InteractiveBase::load_windows(FileRead& fr) {
 				case UI::Panel::SaveType::kBuildingWindow:
 					w = &BuildingWindow::load(fr, *this);
 					break;
+				case UI::Panel::SaveType::kShipWindow:
+					w = &ShipWindow::load(fr, *this, mol);
+					break;
 				case UI::Panel::SaveType::kStockMenu:
 					w = &StockMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kSoldierStats:
+					w = &SoldierStatisticsMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kObjectives:
 					w = &GameObjectivesMenu::load(fr, *this);
@@ -939,7 +946,7 @@ void InteractiveBase::load_windows(FileRead& fr) {
 	}
 }
 
-void InteractiveBase::save_windows(FileWrite& fw) {
+void InteractiveBase::save_windows(FileWrite& fw, Widelands::MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionUniqueWindows);
 	for (UI::Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
 		const UI::Panel::SaveType t = child->save_type();
@@ -948,7 +955,7 @@ void InteractiveBase::save_windows(FileWrite& fw) {
 			fw.signed_32(child->get_x());
 			fw.signed_32(child->get_y());
 			fw.unsigned_8(dynamic_cast<UI::Window&>(*child).is_pinned() ? 1 : 0);
-			child->save(fw);
+			child->save(fw, mos);
 		}
 	}
 	fw.unsigned_8(0);
@@ -1450,11 +1457,12 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 	return registry.window;
 }
 
-void InteractiveBase::show_ship_window(Widelands::Ship* ship) {
+UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	UI::UniqueWindow::Registry& registry =
 	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
 	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
 	registry.create();
+	return *registry.window;
 }
 
 void InteractiveBase::broadcast_cheating_message() {

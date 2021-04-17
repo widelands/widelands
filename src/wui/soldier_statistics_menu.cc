@@ -19,9 +19,9 @@
 
 #include "wui/soldier_statistics_menu.h"
 
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "ui_basic/box.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/waresdisplay.h"
 
 SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
@@ -33,10 +33,10 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
                       100,
                       100,
                       _("Soldier Statistics")),
-     player_(parent.player()) {
-	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
+     player_(parent.player()),
+     tabs_(this, UI::TabPanelStyle::kWuiDark) {
 
-	UI::Box* vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box* vbox = new UI::Box(&tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
 	// To optimize the layout, we arrange Attack and Evade level gradients horizontally
 	// and Health and Defense level gradients vertically
@@ -106,9 +106,9 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		}
 	}
 
-	tabs->add("all", _("Overview"), vbox);
+	tabs_.add("all", _("Overview"), vbox);
 
-	vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	vbox = new UI::Box(&tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
 	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	UI::Box* hbox2 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -180,9 +180,9 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 	vbox->add(hbox2, UI::Box::Resizing::kFullSize);
 	vbox->add(hbox3, UI::Box::Resizing::kFullSize);
 	vbox->add(hbox4, UI::Box::Resizing::kFullSize);
-	tabs->add("detail", _("By Attribute"), vbox);
+	tabs_.add("detail", _("By Attribute"), vbox);
 
-	set_center_panel(tabs);
+	set_center_panel(&tabs_);
 	update();
 }
 
@@ -234,4 +234,27 @@ void SoldierStatisticsMenu::update() {
 		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
 		++index;
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& SoldierStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_soldiers;
+			r.create();
+			assert(r.window);
+			SoldierStatisticsMenu& m = dynamic_cast<SoldierStatisticsMenu&>(*r.window);
+			m.tabs_.activate(fr.unsigned_8());
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError("Soldiers Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("soldiers menu: %s", e.what());
+	}
+}
+void SoldierStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(tabs_.active());
 }

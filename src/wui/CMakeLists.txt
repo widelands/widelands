@@ -347,6 +347,7 @@ wl_library(wui
     logic_map_objects
     logic_objectives
     logic_widelands_geometry
+    map_io
     network
     note_sound
     scripting_coroutine

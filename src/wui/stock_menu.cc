@@ -173,7 +173,7 @@ UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("stock menu: %s", e.what());
 	}
 }
-void StockMenu::save(FileWrite& fw) const {
+void StockMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(tabs_.active());
 	fw.unsigned_8(solid_icon_backgrounds_.get_state() ? 1 : 0);

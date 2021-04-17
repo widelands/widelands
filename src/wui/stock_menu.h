@@ -44,7 +44,7 @@ struct StockMenu : public UI::UniqueWindow {
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kStockMenu;
 	}
-	void save(FileWrite&) const override;
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:

@@ -39,6 +39,9 @@
 class InfoPanel;
 class MainToolbar;
 class UniqueWindowHandler;
+namespace Widelands {
+class MapObjectLoader;
+}
 
 struct WorkareaPreview {
 	Widelands::Coords coords;
@@ -99,8 +102,8 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
-	void load_windows(FileRead&);
-	void save_windows(FileWrite&);
+	void load_windows(FileRead&, Widelands::MapObjectLoader&);
+	void save_windows(FileWrite&, Widelands::MapObjectSaver&);
 
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
@@ -180,7 +183,7 @@ public:
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
-	void show_ship_window(Widelands::Ship* ship);
+	UI::UniqueWindow& show_ship_window(Widelands::Ship* ship);
 
 	MapView* map_view() {
 		return &map_view_;

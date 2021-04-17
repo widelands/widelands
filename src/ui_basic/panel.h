@@ -36,6 +36,9 @@
 
 class FileWrite;
 class RenderTarget;
+namespace Widelands {
+class MapObjectSaver;
+}
 
 namespace UI {
 
@@ -321,7 +324,7 @@ public:
 	// Call this on the topmost panel after you changed the template directory
 	void template_directory_changed();
 
-	enum class SaveType {
+	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
 		kNone = 0,  ///< This panel is not saveable.
 		kBuildingWindow,
 		kWatchWindow,
@@ -336,11 +339,12 @@ public:
 		kObjectives,
 		kMinimap,
 		kEncyclopedia,
+		kShipWindow,
 	};
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
 	}
-	virtual void save(FileWrite&) const {
+	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
 		NEVER_HERE();
 	}
 
