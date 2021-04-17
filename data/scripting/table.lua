@@ -45,7 +45,7 @@ function __gen_ordered_index(t)
 end
 
 -- Helper function for ordered_pairs(t)
--- Equivalent of the next function, but returns the keys in the alphabetic
+-- Equivalent of the Lua-function ``next()``, but returns the keys in the alphabetic
 -- order. We use a temporary ordered key table that is stored in the
 -- table being iterated.
 -- Taken from http://lua-users.org/wiki/SortedIteration
@@ -77,7 +77,7 @@ end
 -- RST
 -- .. function:: ordered_pairs(t)
 --
---    Equivalent of the :func:`pairs()` function on tables.
+--    Equivalent of the Lua-function ``pairs()`` on tables.
 --    Allows to iterate in deterministic order.
 --    Taken from http://lua-users.org/wiki/SortedIteration
 --
