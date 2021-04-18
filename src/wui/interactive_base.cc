@@ -51,6 +51,7 @@
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+#include "wui/building_statistics_menu.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
@@ -929,6 +930,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kSoldierStats:
 					w = &SoldierStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kBuildingStats:
+					w = &BuildingStatisticsMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kObjectives:
 					w = &GameObjectivesMenu::load(fr, *this);
