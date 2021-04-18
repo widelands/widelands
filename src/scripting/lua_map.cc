@@ -1186,9 +1186,11 @@ HasInputs
 
       :arg ware: ware name
       :type ware: :class:`string`
-      :arg prio: The new priority. One of "very_low", "low", "normal", "high", or "very_high".
+      :arg  prio: The new priority. One of "very_low", "low", "normal", "high", or "very_high".
+      :type prio: :class:`string`
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
                        settings to apply after construction.
+      :type cs_setting: :class:`bool`
 */
 
 /* RST
@@ -1198,9 +1200,11 @@ HasInputs
 
       :arg ware: ware name
       :type ware: :class:`string`
-      :returns: :class:`string`
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
                        settings to apply after construction.
+      :type cs_setting: :class:`bool`
+      :returns: :class:`string`
+
 */
 
 /* RST
@@ -1215,6 +1219,7 @@ HasInputs
       :type ware: :class:`integer`
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
                        settings to apply after construction.
+      :type cs_setting: :class:`bool`
 */
 
 /* RST
@@ -1225,9 +1230,10 @@ HasInputs
 
       :arg item: ware or worker name
       :type ware: :class:`string`
-      :returns: :class:`integer`
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
                        settings to apply after construction.
+      :type cs_setting: :class:`bool`
+      :returns: :class:`integer`
 */
 
 /* RST
@@ -1291,7 +1297,7 @@ HasSoldiers
 
          .. code-block:: lua
 
-            w:get_soldiers({0,0,0,0})
+            building:get_soldiers({0,0,0,0})
 
          would return the number of soldiers of level 0 in this location.
 
@@ -1302,19 +1308,19 @@ HasSoldiers
 
          .. code-block:: lua
 
-            w:set_soldiers({0,0,0,0}, 100)
-            w:get_soldiers({0,0,0,0}) -- works, returns 100
-            w:get_soldiers("all")[{0,0,0,0}] -- works not, this is nil
+            building:set_soldiers({0,0,0,0}, 100)
+            building:get_soldiers({0,0,0,0}) -- works, returns 100
+            building:get_soldiers("all")[{0,0,0,0}] -- works not, this is nil
 
             -- Following is a working way to check for a {0,0,0,0} soldier
-            for descr,count in pairs(w:get_soldiers("all")) do
+            for descr,count in pairs(building:get_soldiers("all")) do
                if descr[1] == 0 and descr[2] == 0 and
                   descr[3] == 0 and descr[4] == 0 then
                      print(count)
                end
             end
 
-      :returns: Number of soldiers that match descr or the :class:`table`
+      :returns: Number of soldiers that match **descr** or the :class:`table`
          containing all soldiers
       :rtype: :class:`integer` or :class:`table`.
 */
@@ -1326,17 +1332,21 @@ HasSoldiers
       a name a :class:`array` is used to define the soldier. See
       :meth:`get_soldiers` for an example.
 
+      :arg which: either a table of (description, count) pairs or one
+         description. In that case amount has to be specified as well.
+      :type which: :class:`table` or :class:`array`.
+
       Usage example:
 
       .. code-block:: lua
 
-         l:set_soldiers({0,0,0,0}, 100)
+         building:set_soldiers({0,0,0,0}, 100)
 
       would add 100 level 0 soldiers. While
 
       .. code-block:: lua
 
-         l:set_soldiers({
+         building:set_soldiers({
            [{0,0,0,0}] = 10,
            [{1,2,3,4}] = 5,
          })
@@ -1344,17 +1354,13 @@ HasSoldiers
       would add 10 level 0 soldier and 5 soldiers with hit point level 1,
       attack level 2, defense level 3 and evade level 4 (as long as this is
       legal for the players tribe).
-
-      :arg which: either a table of (description, count) pairs or one
-         description. In that case amount has to be specified as well.
-      :type which: :class:`table` or :class:`array`.
 */
 
 /* RST
    .. attribute:: max_soldiers
 
       (RO) The maximum number of soldiers that can be inside this building at
-      one time. If it is not constrained, like for :class:`~wl.map.Warehouse`
+      one time. If it is not constrained, like for :class:`~wl.map.Warehouse`,
       this will be :const:`nil`.
 */
 
@@ -1371,7 +1377,7 @@ Map
 .. class:: Map
 
    Access to the map and its objects. You cannot instantiate this directly,
-   instead access it via :attr:`wl.Game.map`.
+   instead access it via :attr:`wl.Game().map`.
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
@@ -1434,7 +1440,7 @@ int LuaMap::get_number_of_port_spaces(lua_State* L) {
       (RO) A list of coordinates for all port spaces on the map.
 
       :returns: A table of port space coordinates,
-        like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
+        like this: ``{{x=0,y=2},{x=54,y=23}}``.
 */
 int LuaMap::get_port_spaces(lua_State* L) {
 	lua_newtable(L);
@@ -1475,7 +1481,7 @@ int LuaMap::get_height(lua_State* L) {
 /* RST
    .. attribute:: player_slots
 
-      (RO) This is an :class:`array` that contains :class:`~wl.map.PlayerSlots`
+      (RO) This is an :class:`array` that contains a :class:`~wl.map.PlayerSlot`
       for each player defined in the map.
 */
 int LuaMap::get_player_slots(lua_State* L) {
@@ -1504,7 +1510,7 @@ int LuaMap::get_player_slots(lua_State* L) {
 
       **Note:** The fields are only calculated afresh when this is called for the first time.
 
-     :returns: An integer with the amount of fields.
+      :returns: An integer with the amount of fields.
 */
 int LuaMap::count_conquerable_fields(lua_State* L) {
 	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_conquerable_fields());
@@ -1516,9 +1522,9 @@ int LuaMap::count_conquerable_fields(lua_State* L) {
 
       (RO) Counts all fields that are not swimmable.
 
-     **Note:** The fields are only calculated afresh when this is called for the first time.
+      **Note:** The fields are only calculated afresh when this is called for the first time.
 
-     :returns: An integer with the amount of fields.
+      :returns: An integer with the amount of fields.
 */
 int LuaMap::count_terrestrial_fields(lua_State* L) {
 	lua_pushinteger(
@@ -1531,11 +1537,11 @@ int LuaMap::count_terrestrial_fields(lua_State* L) {
 
       (RO) Counts the number of owned valuable fields for all players.
 
-      :arg name: *Optional*. If this is set, only count fields that have an
-        immovable with the given atttribute.
-      :type name: :class:`string`
+      :arg immovable_attribute: *Optional*. If this is set, only count fields that have an
+        immovable with the given attribute.
+      :type immovable_attribute: :class:`string`
 
-     :returns: A table mapping player numbers to their number of owned fields.
+      :returns: A table mapping player numbers to their number of owned fields.
 */
 int LuaMap::count_owned_valuable_fields(lua_State* L) {
 	if (lua_gettop(L) > 2) {
@@ -1559,8 +1565,8 @@ int LuaMap::count_owned_valuable_fields(lua_State* L) {
       and from each field a sea route to any port space exists.
 
       :arg number: The number of fields to find.
-
-     :returns: :class:`array` of :class:`wl.map.Field`
+      :type number: :class:`integer`
+      :returns: :class:`array` of :class:`wl.map.Field`
 */
 int LuaMap::find_ocean_fields(lua_State* L) {
 	upcast(Widelands::Game, game, &get_egbase(L));
@@ -1673,7 +1679,7 @@ int LuaMap::get_field(lua_State* L) {
 
       This map recalculates the whole map state: height of fields, buildcaps,
       whether the map allows seafaring and so on. You only need to call this
-      function if you changed :any:`raw_height` in any way.
+      function if you changed :attr:`~wl.map.Field.raw_height` in any way.
 */
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
@@ -1701,9 +1707,9 @@ int LuaMap::recalculate_seafaring(lua_State* L) {
       Returns false if the port space couldn't be set.
 
       :arg x: The x coordinate of the port space to set/unset.
-      :type x: :class:`int`
+      :type x: :class:`integer`
       :arg y: The y coordinate of the port space to set/unset.
-      :type y: :class:`int`
+      :type y: :class:`integer`
       :arg allowed: Whether building a port will be allowed here.
       :type allowed: :class:`bool`
 
@@ -1814,7 +1820,7 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildings
 
-      (RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can
+      (RO) An array of :class:`BuildingDescription` with all the buildings that the tribe can
       use, casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
@@ -1832,7 +1838,8 @@ int LuaTribeDescription::get_buildings(lua_State* L) {
 /* RST
    .. attribute:: builder
 
-         (RO) the :class:`string` internal name of the builder type that this tribe uses
+         (RO) The internal name of the builder type that this tribe uses as
+         :class:`string`.
 */
 int LuaTribeDescription::get_builder(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->builder())->name());
@@ -1842,7 +1849,8 @@ int LuaTribeDescription::get_builder(lua_State* L) {
 /* RST
    .. attribute:: carrier
 
-         (RO) the :class:`string` internal name of the carrier type that this tribe uses
+         (RO) The internal name of the carrier type that this tribe uses as
+         :class:`string`.
 */
 
 int LuaTribeDescription::get_carrier(lua_State* L) {
@@ -1853,8 +1861,8 @@ int LuaTribeDescription::get_carrier(lua_State* L) {
 /* RST
    .. attribute:: carrier2
 
-         (RO) the :class:`string` internal name of the carrier2 type that this tribe uses.
-              e.g. 'atlanteans_horse'
+         (RO) The internal name of the carrier2 type that this tribe uses as
+         :class:`string`.
 */
 
 int LuaTribeDescription::get_carrier2(lua_State* L) {
@@ -1865,8 +1873,8 @@ int LuaTribeDescription::get_carrier2(lua_State* L) {
 /* RST
    .. attribute:: ferry
 
-         (RO) the :class:`string` internal name of the ferry type that this tribe uses.
-              e.g. 'atlanteans_ferry'
+         (RO) The internal name of the ferry type that this tribe uses as
+         :class:`string`.
 */
 
 int LuaTribeDescription::get_ferry(lua_State* L) {
@@ -1877,7 +1885,7 @@ int LuaTribeDescription::get_ferry(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-         (RO) a :class:`string` with the tribe's localized name
+         (RO) The localized name of the tribe as :class:`string`
 */
 
 int LuaTribeDescription::get_descname(lua_State* L) {
@@ -1888,7 +1896,8 @@ int LuaTribeDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: geologist
 
-         (RO) the :class:`string` internal name of the geologist type that this tribe uses
+         (RO) The internal name of the geologist type that this tribe uses as
+         :class:`string`.
 */
 
 int LuaTribeDescription::get_geologist(lua_State* L) {
@@ -1899,7 +1908,7 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 /* RST
    .. attribute:: immovables
 
-      (RO) an array of :class:`LuaImmovableDescription` with all the immovables that the tribe can
+      (RO) An array of :class:`ImmovableDescription` with all the immovables that the tribe can
       use.
 */
 int LuaTribeDescription::get_immovables(lua_State* L) {
@@ -1918,7 +1927,7 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 /* RST
    .. attribute:: resource_indicators
 
-      (RO) the table ``resource_indicators`` as defined in the tribe's ``units.lua``.
+      (RO) The table ``resource_indicators`` as defined in the tribe's ``units.lua``.
       See `data/tribes/initializations/atlanteans/units.lua` for more information
       on the table structure.
 */
@@ -1966,7 +1975,7 @@ int LuaTribeDescription::get_collectors_points_table(lua_State* L) {
 /* RST
    .. attribute:: name
 
-         (RO) a :class:`string` with the tribe's internal name
+         (RO) The internal name of the tribe as :class:`string`.
 */
 
 int LuaTribeDescription::get_name(lua_State* L) {
@@ -1977,7 +1986,7 @@ int LuaTribeDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: directory
 
-         (RO) a :class:`string` with the path of the tribe's initialization scripts
+         (RO) The path of the tribe's initialization scripts as :class:`string`.
 */
 
 int LuaTribeDescription::get_directory(lua_State* L) {
@@ -1990,7 +1999,7 @@ int LuaTribeDescription::get_directory(lua_State* L) {
 /* RST
    .. attribute:: port
 
-         (RO) the :class:`string` internal name of the port type that this tribe uses
+         (RO) The internal name of the port type that this tribe uses as :class:`string`.
 */
 
 int LuaTribeDescription::get_port(lua_State* L) {
@@ -2001,7 +2010,7 @@ int LuaTribeDescription::get_port(lua_State* L) {
 /* RST
    .. attribute:: ship
 
-         (RO) the :class:`string` internal name of the ship type that this tribe uses
+         (RO) The internal name of the ship type that this tribe uses as :class:`string`.
 */
 
 int LuaTribeDescription::get_ship(lua_State* L) {
@@ -2012,7 +2021,7 @@ int LuaTribeDescription::get_ship(lua_State* L) {
 /* RST
    .. attribute:: soldier
 
-         (RO) the :class:`string` internal name of the soldier type that this tribe uses
+         (RO) The internal name of the soldier type that this tribe uses as :class:`string`.
 */
 
 int LuaTribeDescription::get_soldier(lua_State* L) {
@@ -2023,7 +2032,7 @@ int LuaTribeDescription::get_soldier(lua_State* L) {
 /* RST
    .. attribute:: wares
 
-         (RO) an array of :class:`LuaWareDescription` with all the wares that the tribe can use.
+         (RO) An array of :class:`WareDescription` with all the wares that the tribe can use.
 */
 int LuaTribeDescription::get_wares(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -2040,7 +2049,7 @@ int LuaTribeDescription::get_wares(lua_State* L) {
 /* RST
    .. attribute:: workers
 
-         (RO) an array of :class:`LuaWorkerDescription` with all the workers that the tribe can use,
+         (RO) an array of :class:`WorkerDescription` with all the workers that the tribe can use,
               casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_workers(lua_State* L) {
@@ -2058,7 +2067,7 @@ int LuaTribeDescription::get_workers(lua_State* L) {
 /* RST
    .. method:: has_building(buildingname)
 
-      Returns true if buildingname is a building and the tribe can use it.
+      Returns true if **buildingname** is a building and the tribe can use it.
 
       :returns: :const:`true` or :const:`false`
       :rtype: :class:`bool`
@@ -2074,7 +2083,7 @@ int LuaTribeDescription::has_building(lua_State* L) {
 /* RST
    .. method:: has_ware(warename)
 
-      Returns true if warename is a ware and the tribe uses it.
+      Returns true if **warename** is a ware and the tribe uses it.
 
       :returns: :const:`true` or :const:`false`
       :rtype: :class:`bool`
@@ -2089,7 +2098,7 @@ int LuaTribeDescription::has_ware(lua_State* L) {
 /* RST
    .. method:: has_worker(workername)
 
-      Returns true if workername is a worker and the tribe can use it.
+      Returns true if **workername** is a worker and the tribe can use it.
 
       :returns: :const:`true` or :const:`false`
       :rtype: :class:`bool`
