@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-05 17:22+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
@@ -25,27 +25,27 @@ msgstr ""
 #: ../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "Beépíthető helyek"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
-msgstr ""
+msgstr "Épületeket kell elhelyeznünk, ahol az árukat termelik."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "Nézzük meg, hol van hely nekik!"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "Kattints a „Megjelenítés / elrejtés” menüre!"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "Válaszd a „Beépíthető helyek megjelenítése” sort!"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "Most már látjuk, hogy hová lehet épületeket és zászlókat elhelyezni."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -53,46 +53,48 @@ msgstr ""
 #: ../../data/scripting/training_wheels/flags.lua:83
 #: ../../data/scripting/training_wheels/init.lua:168
 msgid "Flags"
-msgstr ""
+msgstr "Zászlók"
 
 #: ../../data/scripting/training_wheels/flags.lua:63
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
 msgstr ""
+"A hordárjaid gyorsabban tudják az árukat szállítani, ha megosztoznak a "
+"feladaton."
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "Kattints a zászló szimbólumra!"
 
 #: ../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "Kattints a zászló gombra!"
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "Nézd meg, hogy tudsz-e még több zászlót rakni az útjaidra!"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
 msgid "Welcome"
-msgstr ""
+msgstr "Üdvözöllek!"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:147
 #: ../../data/scripting/training_wheels/objectives.lua:22
 #: ../../data/scripting/training_wheels/objectives.lua:35
 msgid "Objectives"
-msgstr ""
+msgstr "Célkitűzések"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "Farönkök és utak"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:163
 msgid "Rocks"
-msgstr ""
+msgstr "Kövek"
 
 #: ../../data/scripting/training_wheels/logs.lua:115
 #: ../../data/scripting/training_wheels/rocks.lua:115
@@ -100,6 +102,8 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
+"Kattints egy kicsi, közepes vagy nagy beépíthető helyre, és válaszd ki az "
+"épületet a kis épületek lapról!"
 
 #: ../../data/scripting/training_wheels/logs.lua:117
 #: ../../data/scripting/training_wheels/rocks.lua:117
@@ -107,6 +111,8 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
+"Kattints egy közepes vagy egy nagy beépíthető helyre, és válaszd ki az "
+"épületet a közepes épületek lapról!"
 
 #: ../../data/scripting/training_wheels/logs.lua:119
 #: ../../data/scripting/training_wheels/rocks.lua:119
@@ -114,23 +120,29 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
+"Kattints egy nagy beépíthető helyre, és válaszd ki az épületet a nagy "
+"épületek lapról!"
 
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"Ha nyomva tartod a Ctrl billentyűt, amikor a második zászlóra kattintasz, "
+"akkor zászlók is kerülnek az útra, ha van nekik hely."
 
 #: ../../data/scripting/training_wheels/logs.lua:125
 #: ../../data/scripting/training_wheels/logs.lua:175
 msgid "Logs"
-msgstr ""
+msgstr "Farönkök"
 
 #: ../../data/scripting/training_wheels/logs.lua:128
 msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
+"El kell látni a törzsedet farönkökkel. Ehhez ezt az épületet kell "
+"megépítened:"
 
 #: ../../data/scripting/training_wheels/logs.lua:138
 #: ../../data/scripting/training_wheels/logs.lua:149
@@ -139,26 +151,28 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:152
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
-msgstr ""
+msgstr "Utak"
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "Kattints az épület gombjára…"
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "…azután kattints a célépület előtti zászlóra!"
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
+"Ügyes vagy! Hamarosan beindul a farönkök termelése. Ezekre a további "
+"épületek felépítéséhez lesz szükségünk."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr ""
+msgstr "Nyisd meg a „Célkitűzések” ablakot!"
 
 #: ../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -166,79 +180,94 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
+"A játék aktuális célkitűzéseinek megtekintéséhez kattints a nyíllal jelzett "
+"gombra, vagy nyomd meg a „%s” billentyűt!"
 
 #: ../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
-msgstr ""
+msgstr "Zárd be ezt az ablakot"
 
 #: ../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr ""
+msgstr "Ablak bezárása"
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
 msgstr ""
+"Ennek az ablaknak a megnyitásához és bezárásához kattints a Célkitűzések "
+"gombra a képernyő alján található eszközsoron."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
-"A többi ablakhoz hasonlóan, a „Célkitűzések‟ ablakot is be tudod zárni jobb "
-"gombos kattintással."
+"A legtöbb ablakot, így a „Célkitűzések” ablakot is be tudod zárni jobb "
+"gombos rákattintással."
 
 #: ../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
+"Amikor csinálod, figyeld a jelzéseket, hogy az utad a lehető legsimább "
+"legyen:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "Sík terep. A hordárok itt könnyen és gyorsan fognak haladni."
 
 #: ../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"Van egy kis emelkedő. Itt munkásaid gyorsan fognak lefelé menni, viszont "
+"felfelé csak gyalogolni tudnak majd."
 
 #: ../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Rendkívül meredek terep. Lefelé nagyon gyorsak lesznek a hordárok, felfelé "
+"viszont igencsak meglassítja a munkájukat."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "Gránit"
 
 #: ../../data/scripting/training_wheels/rocks.lua:131
 msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr ""
+"El kell látni a törzsedet gránittal. Ehhez ezt az épületet kell megépítened:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"…azután kattints sorban a térképen a színes jelölőkre az útvonal "
+"kijelöléséhez, amíg el nem érsz a célépület előtti zászlóig!"
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
+"Ügyes vagy! Hamarosan beindul a gránit termelése. Erre a további épületek "
+"felépítéséhez lesz szükségünk."
 
 #: ../../data/scripting/training_wheels/welcome.lua:20
 #: ../../data/scripting/training_wheels/welcome.lua:24
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Üdvözlünk a Widelands játékban!"
 
 #: ../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr ""
+msgstr "A nyilakat követve megtanulhatod, hogyan játszhatsz."

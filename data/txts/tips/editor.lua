@@ -29,7 +29,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Space key behaves like in normal game. It switches if building spaces are shown on or off.",
+      text = _("%1% behaves like in normal games: It switches if building spaces are shown on or off."):bformat(wl.ui.get_shortcut("buildhelp")),
       seconds = 4
    },
    {
