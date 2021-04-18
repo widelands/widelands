@@ -187,6 +187,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
 		display_mode_ = DisplayMode::kPinned;
 	}
 	rebuild_dropdown();
+	update_mode();
 }
 
 void InfoPanel::rebuild_dropdown() {
