@@ -149,8 +149,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	std::string addons;
 	for (const AddOns::AddOnInfo& addon : game.enabled_addons()) {
 		if (addon.category == AddOns::AddOnCategory::kTribes ||
-		    addon.category == AddOns::AddOnCategory::kWorld ||
-		    addon.category == AddOns::AddOnCategory::kScript) {
+		    addon.category == AddOns::AddOnCategory::kWorld) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
