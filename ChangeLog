@@ -28,7 +28,7 @@
     - changed artifact model picture to landscape
     - fixed div width and alignment
 - Campaign Empire 02: improved scenario continuity (#4038): Trigger mining infrastructure objective when marble mine is done.
-- fixed a file reerence in atl01 scenario (#4157)
+- Fixed a file reference in atl01 scenario (#4157)
 - Fix link to starting conditions for tutorial1 (#4257)
 - Fix image link in first tutorial (#4261)
 - Fix empire04 helptexts by changing an obsolete reference (#4267)
@@ -478,6 +478,7 @@
 - Configurable keyboard shortcuts (#4476)
 - Indicate stock/target amount relations and trends in stock menu (#4529)
 - Configurable Keyboard Shortcuts, Part 2 & 3 (#4637, #4640)
+    - Use Cmd instead of Ctrl as default modifier on MacOS
 - implement caret positioning via mouse (#4649)
 - Add-Ons Packager (#4603)
 - Fix statistics string cache (#4653)
