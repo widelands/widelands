@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-09 12:11+0000\n"
-"PO-Revision-Date: 2021-04-12 12:55+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"PO-Revision-Date: 2021-04-13 19:20+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -611,9 +611,9 @@ msgstr "A %1% billentyűk lehetővé teszik, hogy közvetlenül megadd az egérk
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "A szóköz billentyű hasonlóan működik, mint a normál játékban: ki-/bekapcsolja a beépíthető helyeket."
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr "A „%1%” billentyű hasonlóan működik, mint a normál játékban: ki-/bekapcsolja a beépíthető helyeket"
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""

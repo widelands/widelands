@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-09 12:11+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"PO-Revision-Date: 2021-04-13 10:18+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -616,9 +616,9 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "La barra espaciadora se comporta como en un juego normal. Activa o desactiva si las zonas de construcción se muestran."
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr ""
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""

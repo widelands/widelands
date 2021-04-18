@@ -38,7 +38,7 @@ local r = {
             for j, building in ipairs(p.tribe.buildings) do
                if building.type_name == "warehouse" then
                   if building.conquers == 0 or building.is_port then
-                     for i,site in pairs(p:get_buildings(building.name)) do
+                     for i,site in ipairs(p:get_buildings(building.name)) do
                         table.insert(warehouses_and_ports, site.fields[1])
                      end
                   else
@@ -47,7 +47,7 @@ local r = {
                end
             end
             if #headquarters == 0 then
-               for idx,f in pairs(warehouses_and_ports) do
+               for idx,f in ipairs(warehouses_and_ports) do
                   if f.immovable then
                      f.immovable:destroy()
                   end
