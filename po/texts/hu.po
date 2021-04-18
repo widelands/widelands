@@ -5,14 +5,15 @@
 # András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017,2020
 # GunChleoc, 2014
+# GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-05 17:22+0000\n"
-"PO-Revision-Date: 2021-03-26 14:19+0000\n"
+"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"PO-Revision-Date: 2021-04-13 19:20+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -405,7 +406,7 @@ msgstr "%s:"
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
-msgstr "Épülethelyek megjelenítése/elrejtése"
+msgstr "Beépíthető helyek megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
@@ -610,9 +611,9 @@ msgstr "A %1% billentyűk lehetővé teszik, hogy közvetlenül megadd az egérk
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "A szóköz gomb hasonlóan működik, mint a normál játékban: ki-/bekapcsolja az épülethelyeket."
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr "A „%1%” billentyű hasonlóan működik, mint a normál játékban: ki-/bekapcsolja a beépíthető helyeket"
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -801,7 +802,7 @@ msgstr "Amikor egy épület megsemmisül, a benne lévő munkások keresnek egy 
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "A „Page up” és „Page down” gombokkal állíthatod be a számodra megfelelő sebességet, a valódi sebességet demokratikusan ez alapján választja a játék."
+msgstr "A „Page up” és „Page down” billentyűkkel állíthatod be az általad kért sebességet. A valódi sebességet a játékosok szavazatai határozzák meg demokratikus módon."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
