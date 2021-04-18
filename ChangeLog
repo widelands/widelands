@@ -139,6 +139,7 @@
 - Make atlantean Discovery start easier (#4709)
 - 3588 fix artifact messages (#4727)
 - Fix amazons fortified village (#4793)
+- Add ordered iteration for lua tables (#4818)
 
 
 ### Maps
@@ -196,6 +197,7 @@
 - Hotfix for savegame compatibility #4273 (#4706)
 - Immovable savegame compatibility (#4690)
 - Reduce crashes from missing add-on dependencies (#4710)
+- Don't store Script add-ons in savegames (#4811)
 
 
 ### AI
@@ -544,6 +546,7 @@
 - Fix npgettext textdomains for add-ons (#4762)
 - Tribe-specific No Scout Hut Connected hint (#4770)
 - Fix textdomain for keyboard shortcuts (#4799)
+- Fix skipping of one-liner diffs in translation updates
 
 
 ### Help and Documentation
