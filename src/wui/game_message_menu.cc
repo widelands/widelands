@@ -677,10 +677,10 @@ UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Objectives Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError("Messages Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
-		throw Widelands::GameDataError("objectives menu: %s", e.what());
+		throw Widelands::GameDataError("messages menu: %s", e.what());
 	}
 }
 void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {

@@ -62,6 +62,7 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/shipwindow.h"
 #include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
@@ -931,6 +932,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kSoldierStats:
 					w = &SoldierStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kSeafaringStats:
+					w = &SeafaringStatisticsMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kBuildingStats:
 					w = &BuildingStatisticsMenu::load(fr, *this);

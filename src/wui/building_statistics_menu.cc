@@ -807,10 +807,10 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.last_building_index_ = fr.signed_32();
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Objectives Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError("Building Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
-		throw Widelands::GameDataError("objectives menu: %s", e.what());
+		throw Widelands::GameDataError("building statistics menu: %s", e.what());
 	}
 }
 void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
