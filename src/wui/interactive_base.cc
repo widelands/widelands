@@ -69,6 +69,7 @@
 #include "wui/toolbar.h"
 #include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
+#include "wui/ware_statistics_menu.h"
 #include "wui/warehousewindow.h"
 #include "wui/watchwindow.h"
 
@@ -932,6 +933,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kSoldierStats:
 					w = &SoldierStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kWareStats:
+					w = &WareStatisticsMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kSeafaringStats:
 					w = &SeafaringStatisticsMenu::load(fr, *this);

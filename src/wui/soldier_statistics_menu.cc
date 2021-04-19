@@ -248,10 +248,10 @@ UI::Window& SoldierStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.tabs_.activate(fr.unsigned_8());
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Soldiers Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError("Soldiers Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
-		throw Widelands::GameDataError("soldiers menu: %s", e.what());
+		throw Widelands::GameDataError("soldiers statistics menu: %s", e.what());
 	}
 }
 void SoldierStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
