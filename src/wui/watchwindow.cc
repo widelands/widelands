@@ -323,10 +323,10 @@ UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapO
 			return *w;
 		} else {
 			throw Widelands::UnhandledVersionError(
-			   "Objectives Menu", packet_version, kCurrentPacketVersion);
+			   "Watchwindow", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
-		throw Widelands::GameDataError("objectives menu: %s", e.what());
+		throw Widelands::GameDataError("watchwindow: %s", e.what());
 	}
 }
 void WatchWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
