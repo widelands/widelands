@@ -71,6 +71,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 
 			uint32_t display_flags = fr.unsigned_32();
 
+			InteractivePlayer* ipl = game.get_ipl();
 			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
 #ifndef NDEBUG
@@ -80,7 +81,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 #endif
 				ibase->set_display_flags(display_flags);
 			}
-			if (InteractivePlayer* const ipl = game.get_ipl()) {
+			if (ipl) {
 				ipl->set_player_number(player_number);
 			}
 
@@ -104,13 +105,13 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						uint32_t serial = fr.unsigned_32();
 						int16_t x = fr.signed_16();
 						int16_t y = fr.signed_16();
-						if (InteractivePlayer* const ipl = game.get_ipl()) {
+						if (ipl) {
 							ipl->get_expedition_port_spaces().emplace(
 							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
 						}
 					}
 				}
-				if (packet_version >= 6) {
+				if (packet_version >= 6 && ipl && fr.unsigned_8()) {
 					ibase->load_windows(fr, *mol);
 				}
 			}
@@ -170,9 +171,17 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 		} else {
 			fw.unsigned_32(0);
 		}
-
-		ibase->save_windows(fw, *mos);
 	}
+
+	if (iplayer) {
+		fw.unsigned_8(1);
+		iplayer->save_windows(fw, *mos);
+	} else {
+		fw.unsigned_8(0);
+	}
+	// ====================================================
+	// Nothing may be saved after `iplayer->save_windows`!!
+	// ====================================================
 
 	fw.write(fs, "binary/interactive_player");
 }
