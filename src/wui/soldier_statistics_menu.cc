@@ -241,14 +241,16 @@ UI::Window& SoldierStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_soldiers;
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_soldiers;
 			r.create();
 			assert(r.window);
 			SoldierStatisticsMenu& m = dynamic_cast<SoldierStatisticsMenu&>(*r.window);
 			m.tabs_.activate(fr.unsigned_8());
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Soldiers Statistics Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Soldiers Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("soldiers statistics menu: %s", e.what());

@@ -574,7 +574,8 @@ UI::Window& SeafaringStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_seafaring;
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_seafaring;
 			r.create();
 			assert(r.window);
 			SeafaringStatisticsMenu& m = dynamic_cast<SeafaringStatisticsMenu&>(*r.window);
@@ -582,7 +583,8 @@ UI::Window& SeafaringStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.table_.select(fr.unsigned_32());
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Seafaring Statistics Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Seafaring Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("seafaring statistics menu: %s", e.what());

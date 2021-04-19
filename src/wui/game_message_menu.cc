@@ -677,7 +677,8 @@ UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Messages Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Messages Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("messages menu: %s", e.what());

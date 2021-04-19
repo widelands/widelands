@@ -299,7 +299,6 @@ void WatchWindow::close_cur_view() {
 	toggle_buttons();
 }
 
-
 constexpr uint16_t kCurrentPacketVersion = 1;
 UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
 	try {
@@ -307,7 +306,8 @@ UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapO
 		if (packet_version == kCurrentPacketVersion) {
 			WatchWindow* w = nullptr;
 			for (size_t i = fr.unsigned_32(); i; --i) {
-				WatchWindow* ww = show_watch_window(dynamic_cast<InteractiveGameBase&>(ib), Widelands::Coords(0, 0));
+				WatchWindow* ww =
+				   show_watch_window(dynamic_cast<InteractiveGameBase&>(ib), Widelands::Coords(0, 0));
 				assert(ww != nullptr);
 				assert((w == nullptr) ^ (w == ww));
 				w = ww;
@@ -322,7 +322,8 @@ UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapO
 			w->set_current_view(fr.unsigned_8(), false);
 			return *w;
 		} else {
-			throw Widelands::UnhandledVersionError("Objectives Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Objectives Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("objectives menu: %s", e.what());

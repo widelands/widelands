@@ -201,15 +201,18 @@ UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			const size_t nr_entries = m.lists_.at(tab)->size();
 			for (size_t i = 0; i < nr_entries; ++i) {
-				if ((*m.lists_.at(tab))[i].script_path == entry_path && (*m.lists_.at(tab))[i].script_parameters == entry_params) {
+				if ((*m.lists_.at(tab))[i].script_path == entry_path &&
+				    (*m.lists_.at(tab))[i].script_parameters == entry_params) {
 					m.lists_.at(tab)->select(i);
 					return m;
 				}
 			}
-			log_warn("EncyclopediaWindow::load: could not find a suitable list entry for '%s' in '%s'", entry_path.c_str(), tab.c_str());
+			log_warn("EncyclopediaWindow::load: could not find a suitable list entry for '%s' in '%s'",
+			         entry_path.c_str(), tab.c_str());
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Encyclopedia", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Encyclopedia", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("encyclopedia: %s", e.what());

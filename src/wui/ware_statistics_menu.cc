@@ -278,7 +278,8 @@ UI::Window& WareStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_wares;
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_wares;
 			r.create();
 			assert(r.window);
 			WareStatisticsMenu& m = dynamic_cast<WareStatisticsMenu&>(*r.window);
@@ -289,7 +290,8 @@ UI::Window& WareStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Wares Statistics Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Wares Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("wares statistics menu: %s", e.what());

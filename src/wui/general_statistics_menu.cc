@@ -295,7 +295,8 @@ UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_general;
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_general;
 			r.create();
 			assert(r.window);
 			GeneralStatisticsMenu& m = dynamic_cast<GeneralStatisticsMenu&>(*r.window);
@@ -308,7 +309,8 @@ UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.slider_->get_slider().set_value(fr.signed_32());
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("General Statistics Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "General Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("general statistics menu: %s", e.what());

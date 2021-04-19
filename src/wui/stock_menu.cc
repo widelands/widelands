@@ -157,7 +157,8 @@ UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_stock;
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_stock;
 			r.create();
 			assert(r.window);
 			StockMenu& sm = dynamic_cast<StockMenu&>(*r.window);
@@ -167,7 +168,8 @@ UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
 
 			return sm;
 		} else {
-			throw Widelands::UnhandledVersionError("Stock Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Stock Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("stock menu: %s", e.what());

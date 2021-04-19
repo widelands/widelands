@@ -174,10 +174,10 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 }
 
 EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
-                                  Widelands::Descriptions* descriptions,
-                                  const Widelands::Flag& flag,
-                                  Widelands::WareWorker type,
-                                  bool can_act) {
+                                                   Widelands::Descriptions* descriptions,
+                                                   const Widelands::Flag& flag,
+                                                   Widelands::WareWorker type,
+                                                   bool can_act) {
 	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
 	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
 	EconomyOptionsWindow* window_open = nullptr;
@@ -204,7 +204,8 @@ EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
 	if (window_open) {
 		return *window_open;
 	}
-	return *new EconomyOptionsWindow(parent, descriptions, ware_economy, worker_economy, type, can_act);
+	return *new EconomyOptionsWindow(
+	   parent, descriptions, ware_economy, worker_economy, type, can_act);
 }
 void EconomyOptionsWindow::activate_tab(Widelands::WareWorker type) {
 	tabpanel_.activate(type == Widelands::WareWorker::wwWARE ? "wares" : "workers");
@@ -848,7 +849,8 @@ void EconomyOptionsWindow::read_targets() {
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
-UI::Window* EconomyOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+UI::Window*
+EconomyOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
@@ -858,9 +860,11 @@ UI::Window* EconomyOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widela
 			}
 			Widelands::Flag& flag = mol.get<Widelands::Flag>(flag_serial);
 			return &create(&ib, ib.egbase().mutable_descriptions(), flag,
-					fr.unsigned_8() > 0 ? Widelands::wwWORKER : Widelands::wwWARE, ib.can_act(flag.owner().player_number()));
+			               fr.unsigned_8() > 0 ? Widelands::wwWORKER : Widelands::wwWARE,
+			               ib.can_act(flag.owner().player_number()));
 		} else {
-			throw Widelands::UnhandledVersionError("Objectives Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Objectives Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("objectives menu: %s", e.what());
@@ -876,7 +880,8 @@ void EconomyOptionsWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) c
 	}
 	Widelands::Flag* f = e_wa->get_arbitrary_flag(e_wo);
 	if (!f) {
-		log_warn("EconomyOptionsWindow::save: No flag exists in both economies (%u & %u)", ware_serial_, worker_serial_);
+		log_warn("EconomyOptionsWindow::save: No flag exists in both economies (%u & %u)",
+		         ware_serial_, worker_serial_);
 		f = e_wa->get_arbitrary_flag();
 	}
 	if (!f) {

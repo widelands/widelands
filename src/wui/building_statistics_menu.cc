@@ -793,7 +793,8 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_buildings;
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_buildings;
 			r.create();
 			assert(r.window);
 			BuildingStatisticsMenu& m = dynamic_cast<BuildingStatisticsMenu&>(*r.window);
@@ -807,7 +808,8 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.last_building_index_ = fr.signed_32();
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Building Statistics Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Building Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("building statistics menu: %s", e.what());
@@ -817,6 +819,9 @@ void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) con
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(low_production_);
 	fw.unsigned_8(tab_panel_.active());
-	fw.string(current_building_type_ == Widelands::INVALID_INDEX ? "" : iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
+	fw.string(
+	   current_building_type_ == Widelands::INVALID_INDEX ?
+	      "" :
+	      iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
 }

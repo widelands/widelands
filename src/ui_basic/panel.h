@@ -28,9 +28,9 @@
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
-#include "base/wexception.h"
 #include "base/rect.h"
 #include "base/vector.h"
+#include "base/wexception.h"
 #include "graphic/styles/panel_styles.h"
 #include "sound/constants.h"
 
@@ -325,7 +325,7 @@ public:
 	void template_directory_changed();
 
 	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
-		kNone = 0,  ///< This panel is not saveable.
+		kNone = 0,          ///< This panel is not saveable.
 		kBuildingWindow,
 		kWatchWindow,
 		kConfigureEconomy,

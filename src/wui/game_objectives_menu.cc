@@ -107,7 +107,8 @@ UI::Window& GameObjectivesMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.list.select(fr.unsigned_32());
 			return m;
 		} else {
-			throw Widelands::UnhandledVersionError("Objectives Menu", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Objectives Menu", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("objectives menu: %s", e.what());

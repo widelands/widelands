@@ -961,7 +961,8 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					w = EconomyOptionsWindow::load(fr, *this, mol);
 					break;
 				default:
-					throw Widelands::GameDataError("Invalid panel save type %u", static_cast<unsigned>(type));
+					throw Widelands::GameDataError(
+					   "Invalid panel save type %u", static_cast<unsigned>(type));
 				}
 
 				if (w) {
@@ -971,7 +972,8 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 				}
 			}
 		} else {
-			throw Widelands::UnhandledVersionError("Unique Windows", packet_version, kCurrentPacketVersionUniqueWindows);
+			throw Widelands::UnhandledVersionError(
+			   "Unique Windows", packet_version, kCurrentPacketVersionUniqueWindows);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("unique windows: %s", e.what());

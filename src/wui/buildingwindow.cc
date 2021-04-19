@@ -676,11 +676,13 @@ UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 			const int32_t x = fr.signed_32();
 			const int32_t y = fr.signed_32();
 			const bool workarea = fr.unsigned_8();
-			BuildingWindow& bw = dynamic_cast<BuildingWindow&>(*ib.show_building_window(Widelands::Coords(x, y), true, workarea));
+			BuildingWindow& bw = dynamic_cast<BuildingWindow&>(
+			   *ib.show_building_window(Widelands::Coords(x, y), true, workarea));
 			bw.tabs_->activate(fr.unsigned_8());
 			return bw;
 		} else {
-			throw Widelands::UnhandledVersionError("Building Window", packet_version, kCurrentPacketVersion);
+			throw Widelands::UnhandledVersionError(
+			   "Building Window", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("building window: %s", e.what());
