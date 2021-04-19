@@ -2116,14 +2116,23 @@ MapObjectDescription
 
 .. class:: MapObjectDescription
 
-   A static description of a tribe's map object, so it can be used in help files
-   without having to access an actual object on the map.
-   This class contains the properties that are common to all map objects such as buildings or wares.
+   A static description of a tribe’s object, so it can be used without
+   having to access an actual object on the map. This class contains the
+   properties that are common to all objects a tribe has, such as buildings or
+   wares.
+   
+   The dynamic class :class:`MapObject` corresponding to this class is the base
+   class for all Objects in widelands, including immovables and Bobs. This
+   class can't be instantiated directly, but provides the base for all others.
 
-   The dynamic MapObject class corresponding to this class is the base class for all Objects in
-   widelands, including immovables and Bobs. This class can't be instantiated directly, but provides
-   the base for all others.
+   Accessing descriptions for an existing map object in a game is done via 
+   the class :class:`MapObject` and the attribute :attr:`MapObject.descr`.
+
+   To access static descriptions without being an existing map object one can use 
+   anything that returns a Description object. See e.g. some of the attributes
+   of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
 */
+
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
    METHOD(LuaImmovableDescription, helptexts),
@@ -2260,6 +2269,20 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
              about two soldiers in a fight,
            * :class:`fleet <FleetDescription>`, holds information for
              managing ships.
+
+   Example:
+
+   .. code-block:: lua
+
+         local tribe_descr = wl.Game().get_tribe_description("barbarians") -- get tribe description
+         local buildings = tribe_descr.buildings                           -- get all building descriptions of this tribe
+         for i, building in ipairs(buildings) do                           -- loop all buildings descriptions
+            print(building.type_name, building.name)                       -- type and internal name of each building of this tribe
+                                                                           -- also for not allowed buildings
+            if building.type_name == "militarysite" do
+               print(building.max_number_of_soldiers)
+         end
+
 */
 int LuaMapObjectDescription::get_type_name(lua_State* L) {
 	lua_pushstring(L, to_string(get()->type()));
@@ -4460,9 +4483,6 @@ MapObject
    :class:`immovables <BaseImmovable>` and :class:`bobs <Bob>`. This
    class can't be instantiated directly, but provides the base for all
    others.
-
-   More properties are available through this object's
-   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaMapObject::className[] = "MapObject";
 const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
@@ -4533,7 +4553,17 @@ int LuaMapObject::get_serial(lua_State* L) {
 /* RST
    .. attribute:: descr
 
-      (RO) The description object for this immovable, e.g. BuildingDescription.
+      (RO) The :class:`MapObjectDescription` for this immovable.
+      
+      .. code-block:: lua
+
+         local immovable = wl.Game().map:get_field(20,31).immovable
+         if immovable then                                     -- always check if the immovable still exists
+            if immovable.descr.type_name == "warehouse"        -- access MapObjectDescription
+               immovable:set_wares("log", 5)
+            end
+         end
+
 */
 int LuaMapObject::get_descr(lua_State* L) {
 	const Widelands::MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
