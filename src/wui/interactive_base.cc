@@ -54,6 +54,7 @@
 #include "wui/building_statistics_menu.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
+#include "wui/encyclopedia_window.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/game_message_menu.h"
@@ -951,6 +952,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kMinimap:
 					w = &MiniMap::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kEncyclopedia:
+					w = &UI::EncyclopediaWindow::load(fr, *this);
 					break;
 				default:
 					throw Widelands::GameDataError("Invalid panel save type %u", static_cast<unsigned>(type));
