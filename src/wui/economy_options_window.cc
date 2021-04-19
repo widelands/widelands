@@ -21,15 +21,20 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "ui_basic/messagebox.h"
+#include "wui/interactive_base.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
@@ -840,4 +845,44 @@ void EconomyOptionsWindow::read_targets() {
 	}
 
 	update_profiles();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window* EconomyOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			const uint32_t flag_serial = fr.unsigned_32();
+			if (flag_serial == 0) {
+				return nullptr;
+			}
+			Widelands::Flag& flag = mol.get<Widelands::Flag>(flag_serial);
+			return &create(&ib, ib.egbase().mutable_descriptions(), flag,
+					fr.unsigned_8() > 0 ? Widelands::wwWORKER : Widelands::wwWARE, ib.can_act(flag.owner().player_number()));
+		} else {
+			throw Widelands::UnhandledVersionError("Objectives Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("objectives menu: %s", e.what());
+	}
+}
+void EconomyOptionsWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	Widelands::Economy* e_wa = player_->get_economy(ware_serial_);
+	Widelands::Economy* e_wo = player_->get_economy(worker_serial_);
+	if (!e_wa || !e_wo) {
+		fw.unsigned_32(0);
+		return;
+	}
+	Widelands::Flag* f = e_wa->get_arbitrary_flag(e_wo);
+	if (!f) {
+		log_warn("EconomyOptionsWindow::save: No flag exists in both economies (%u & %u)", ware_serial_, worker_serial_);
+		f = e_wa->get_arbitrary_flag();
+	}
+	if (!f) {
+		fw.unsigned_32(0);
+		return;
+	}
+	fw.unsigned_32(mos.get_object_file_index(*f));
+	fw.unsigned_8(tabpanel_.active());
 }

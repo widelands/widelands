@@ -35,6 +35,11 @@
 
 const std::string kDefaultEconomyProfile = "Default";
 
+class InteractiveBase;
+namespace Widelands {
+class MapObjectLoader;
+}
+
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {
 	NoteEconomyProfile(Widelands::Serial ware, Widelands::Serial worker)
@@ -89,6 +94,12 @@ public:
 	void layout() override;
 
 	void close_save_profile_window();
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kConfigureEconomy;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window* load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
 
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {

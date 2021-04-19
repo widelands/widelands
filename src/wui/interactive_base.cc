@@ -54,6 +54,7 @@
 #include "wui/building_statistics_menu.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
+#include "wui/economy_options_window.h"
 #include "wui/encyclopedia_window.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -956,14 +957,18 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 				case UI::Panel::SaveType::kEncyclopedia:
 					w = &UI::EncyclopediaWindow::load(fr, *this);
 					break;
+				case UI::Panel::SaveType::kConfigureEconomy:
+					w = EconomyOptionsWindow::load(fr, *this, mol);
+					break;
 				default:
 					throw Widelands::GameDataError("Invalid panel save type %u", static_cast<unsigned>(type));
 				}
 
-				assert(w);
-				w->set_pinned(pin);
-				w->set_pos(Vector2i(x, y));
-				w->move_inside_parent();  // In case the game was loaded at a smaller resolution.
+				if (w) {
+					w->set_pinned(pin);
+					w->set_pos(Vector2i(x, y));
+					w->move_inside_parent();  // In case the game was loaded at a smaller resolution.
+				}
 			}
 		} else {
 			throw Widelands::UnhandledVersionError("Unique Windows", packet_version, kCurrentPacketVersionUniqueWindows);

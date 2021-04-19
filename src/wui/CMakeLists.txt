@@ -36,24 +36,6 @@ wl_library(wui_chat_ui
     widelands_options
 )
 
-wl_library(wui_economy_options
-  SRCS
-    economy_options_window.cc
-    economy_options_window.h
-  DEPENDS
-    economy
-    graphic
-    graphic_fonthandler
-    logic
-    logic_commands
-    logic_filesystem_constants
-    logic_map_objects
-    notifications
-    io_profile
-    ui_basic
-    wui_waresdisplay
-)
-
 wl_library(wui_mapview_pixelconstants
   SRCS
     mapviewpixelconstants.h
@@ -233,6 +215,8 @@ wl_library(wui
     debugconsole.h
     dismantlesitewindow.cc
     dismantlesitewindow.h
+    economy_options_window.cc
+    economy_options_window.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -350,6 +334,7 @@ wl_library(wui
     map_io
     network
     note_sound
+    notifications
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
@@ -358,7 +343,6 @@ wl_library(wui
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
-    wui_economy_options
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
