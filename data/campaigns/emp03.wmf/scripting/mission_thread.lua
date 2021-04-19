@@ -305,7 +305,7 @@ function mission_thread()
    sleep(400)
    ship:remove()
    sleep(300)
-   hide_randomly(p1, sea:region(6), 1000)
+   p1:hide_fields(sea:region(6), false)
    sleep(300)
 
    -- Scroll to the place where the ship is finally stranded
