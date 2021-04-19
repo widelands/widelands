@@ -2120,15 +2120,15 @@ MapObjectDescription
    having to access an actual object on the map. This class contains the
    properties that are common to all objects a tribe has, such as buildings or
    wares.
-   
+
    The dynamic class :class:`MapObject` corresponding to this class is the base
    class for all Objects in widelands, including immovables and Bobs. This
    class can't be instantiated directly, but provides the base for all others.
 
-   Accessing descriptions for an existing map object in a game is done via 
+   Accessing descriptions for an existing map object in a game is done via
    the class :class:`MapObject` and the attribute :attr:`MapObject.descr`.
 
-   To access static descriptions without being an existing map object one can use 
+   To access static descriptions without being an existing map object one can use
    anything that returns a Description object. See e.g. some of the attributes
    of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
 */
@@ -4554,7 +4554,7 @@ int LuaMapObject::get_serial(lua_State* L) {
    .. attribute:: descr
 
       (RO) The :class:`MapObjectDescription` for this immovable.
-      
+
       .. code-block:: lua
 
          local immovable = wl.Game().map:get_field(20,31).immovable
