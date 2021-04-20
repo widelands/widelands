@@ -836,7 +836,8 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		if (!lua_isnil(L, 7)) {
 			wdescr.set_default_target_quantity(luaL_checkuint32(L, 7));
 			if (lua_isnil(L, 8)) {
-				report_error(L, "Worker '%s' with target quantity must define a preciousness", workername.c_str());
+				report_error(L, "Worker '%s' with target quantity must define a preciousness",
+				             workername.c_str());
 			}
 		}
 		if (!lua_isnil(L, 8)) {
