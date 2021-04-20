@@ -3148,10 +3148,12 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
    .. attribute:: consumed_wares_workers
 
       :arg program_name: the name of the production program that we want to get the consumed wares
-      for :type tribename: :class:`string`
+         for
+      :type tribename: :class:`string`
 
       (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production
       program. Multiple entries in {ware name} are alternatives (OR logic)).
+
 */
 int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -3183,7 +3185,8 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
    .. attribute:: produced_wares
 
       :arg program_name: the name of the production program that we want to get the produced wares
-      for :type tribename: :class:`string`
+         for
+      :type tribename: :class:`string`
 
       (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
       program
@@ -3203,7 +3206,8 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
    .. attribute:: recruited_workers
 
       :arg program_name: the name of the production program that we want to get the recruited
-      workers for :type tribename: :class:`string`
+         workers for
+      :type tribename: :class:`string`
 
       (RO) Returns a table of {worker name, worker amount} for the workers recruited
       by this production program
@@ -6328,8 +6332,9 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 
       (RO) Returns whether this productionsite is currently active or stopped
 
-      :returns: true if the productionsite has been started,
-      false if it has been stopped.
+      :returns: :const:`true` if the productionsite has been started,
+         :const:`false` if it has been stopped.
+
 */
 int LuaProductionSite::get_is_stopped(lua_State* L) {
 	Widelands::ProductionSite* ps = get(L, get_egbase(L));
