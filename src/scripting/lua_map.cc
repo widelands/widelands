@@ -2275,17 +2275,17 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
       .. code-block:: lua
 
          -- get tribe description:
-         local tribe_descr = wl.Game():get_tribe_description("barbarians") 
+         local tribe_descr = wl.Game():get_tribe_description("barbarians")
 
          -- get building descriptions of this tribe
-         local buildings = tribe_descr.buildings                            
+         local buildings = tribe_descr.buildings
 
          -- loop all building descriptions
-         for i, building in ipairs(buildings) do                           
+         for i, building in ipairs(buildings) do
             print(building.type_name, building.name)
 
             -- filter military sites
-            if building.type_name == "militarysite" do 
+            if building.type_name == "militarysite" do
                print(building.max_number_of_soldiers) end
          end
 */
@@ -4560,7 +4560,7 @@ int LuaMapObject::get_serial(lua_State* L) {
          local immovable = wl.Game().map:get_field(20,31).immovable
 
          -- always check if the immovable still exists
-         if immovable then                                     
+         if immovable then
             if immovable.descr.type_name == "warehouse"  -- access MapObjectDescription
                immovable:set_wares("log", 5)
             end
