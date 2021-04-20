@@ -1186,7 +1186,7 @@ HasInputs
 
       :arg ware: ware name
       :type ware: :class:`string`
-      :arg  prio: The new priority. One of "very_low", "low", "normal", "high", or "very_high".
+      :arg prio: The new priority. One of "very_low", "low", "normal", "high", or "very_high".
       :type prio: :class:`string`
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
                        settings to apply after construction.
@@ -1838,8 +1838,8 @@ int LuaTribeDescription::get_buildings(lua_State* L) {
 /* RST
    .. attribute:: builder
 
-         (RO) The internal name of the builder type that this tribe uses as
-         :class:`string`.
+      (RO) The internal name of the builder type that this tribe uses as
+      :class:`string`.
 */
 int LuaTribeDescription::get_builder(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->builder())->name());
@@ -1849,8 +1849,8 @@ int LuaTribeDescription::get_builder(lua_State* L) {
 /* RST
    .. attribute:: carrier
 
-         (RO) The internal name of the carrier type that this tribe uses as
-         :class:`string`.
+      (RO) The internal name of the carrier type that this tribe uses as
+      :class:`string`.
 */
 
 int LuaTribeDescription::get_carrier(lua_State* L) {
@@ -1861,8 +1861,8 @@ int LuaTribeDescription::get_carrier(lua_State* L) {
 /* RST
    .. attribute:: carrier2
 
-         (RO) The internal name of the carrier2 type that this tribe uses as
-         :class:`string`.
+      (RO) The internal name of the carrier2 type that this tribe uses as
+      :class:`string`.
 */
 
 int LuaTribeDescription::get_carrier2(lua_State* L) {
@@ -1873,8 +1873,8 @@ int LuaTribeDescription::get_carrier2(lua_State* L) {
 /* RST
    .. attribute:: ferry
 
-         (RO) The internal name of the ferry type that this tribe uses as
-         :class:`string`.
+      (RO) The internal name of the ferry type that this tribe uses as
+      :class:`string`.
 */
 
 int LuaTribeDescription::get_ferry(lua_State* L) {
@@ -1885,7 +1885,7 @@ int LuaTribeDescription::get_ferry(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-         (RO) The localized name of the tribe as :class:`string`
+      (RO) The localized name of the tribe as :class:`string`
 */
 
 int LuaTribeDescription::get_descname(lua_State* L) {
@@ -1896,8 +1896,8 @@ int LuaTribeDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: geologist
 
-         (RO) The internal name of the geologist type that this tribe uses as
-         :class:`string`.
+      (RO) The internal name of the geologist type that this tribe uses as
+      :class:`string`.
 */
 
 int LuaTribeDescription::get_geologist(lua_State* L) {
@@ -1975,7 +1975,7 @@ int LuaTribeDescription::get_collectors_points_table(lua_State* L) {
 /* RST
    .. attribute:: name
 
-         (RO) The internal name of the tribe as :class:`string`.
+      (RO) The internal name of the tribe as :class:`string`.
 */
 
 int LuaTribeDescription::get_name(lua_State* L) {
@@ -1986,7 +1986,7 @@ int LuaTribeDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: directory
 
-         (RO) The path of the tribe's initialization scripts as :class:`string`.
+      (RO) The path of the tribe's initialization scripts as :class:`string`.
 */
 
 int LuaTribeDescription::get_directory(lua_State* L) {
@@ -1999,7 +1999,7 @@ int LuaTribeDescription::get_directory(lua_State* L) {
 /* RST
    .. attribute:: port
 
-         (RO) The internal name of the port type that this tribe uses as :class:`string`.
+      (RO) The internal name of the port type that this tribe uses as :class:`string`.
 */
 
 int LuaTribeDescription::get_port(lua_State* L) {
@@ -2010,7 +2010,7 @@ int LuaTribeDescription::get_port(lua_State* L) {
 /* RST
    .. attribute:: ship
 
-         (RO) The internal name of the ship type that this tribe uses as :class:`string`.
+      (RO) The internal name of the ship type that this tribe uses as :class:`string`.
 */
 
 int LuaTribeDescription::get_ship(lua_State* L) {
@@ -2021,7 +2021,7 @@ int LuaTribeDescription::get_ship(lua_State* L) {
 /* RST
    .. attribute:: soldier
 
-         (RO) The internal name of the soldier type that this tribe uses as :class:`string`.
+      (RO) The internal name of the soldier type that this tribe uses as :class:`string`.
 */
 
 int LuaTribeDescription::get_soldier(lua_State* L) {
@@ -2032,7 +2032,7 @@ int LuaTribeDescription::get_soldier(lua_State* L) {
 /* RST
    .. attribute:: wares
 
-         (RO) An array of :class:`WareDescription` with all the wares that the tribe can use.
+      (RO) An array of :class:`WareDescription` with all the wares that the tribe can use.
 */
 int LuaTribeDescription::get_wares(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -2049,8 +2049,8 @@ int LuaTribeDescription::get_wares(lua_State* L) {
 /* RST
    .. attribute:: workers
 
-         (RO) an array of :class:`WorkerDescription` with all the workers that the tribe can use,
-              casted to their appropriate subclasses.
+      (RO) an array of :class:`WorkerDescription` with all the workers that the tribe can use,
+      casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_workers(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -2164,7 +2164,7 @@ void LuaMapObjectDescription::__unpersist(lua_State*) {
 /* RST
    .. attribute:: descname
 
-         (RO) a :class:`string` with the map object's localized name
+      (RO) The map object's localized name as :class:`string`
 */
 
 int LuaMapObjectDescription::get_descname(lua_State* L) {
@@ -2175,7 +2175,7 @@ int LuaMapObjectDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: icon_name
 
-         (RO) the filename for the menu icon.
+      (RO) The filename for the menu icon as :class:`string`
 */
 int LuaMapObjectDescription::get_icon_name(lua_State* L) {
 	lua_pushstring(L, get()->icon_filename());
@@ -2185,7 +2185,7 @@ int LuaMapObjectDescription::get_icon_name(lua_State* L) {
 /* RST
    .. attribute:: name
 
-         (RO) a :class:`string` with the map object's internal name
+      (RO) The map object's internal name as :class:`string`
 */
 
 int LuaMapObjectDescription::get_name(lua_State* L) {
@@ -2196,91 +2196,92 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: type_name
 
-         (RO) the map object's type as a string. Map object types are
-         organized in a hierarchy, where an element that's lower in the
-         hierarchy has all the properties of the higher-placed types,
-         as well as its own additional properties. Any map object's
-         description that isn't linked below can be accessed via its
-         higher types, e.g. a ``bob`` is a
-         :class:`general map object <MapObjectDescription>`, and a
-         ``carrier`` is a :class:`worker <WorkerDescription>` as well as a
-         general map object. Possible values are:
+      (RO) The map object's type as :class:`string`. Map object types are
+      organized in a hierarchy, where an element that's lower in the
+      hierarchy has all the properties of the higher-placed types,
+      as well as its own additional properties. Any map object's
+      description that isn't linked below can be accessed via its
+      higher types, e.g. a ``bob`` is a
+      :class:`general map object <MapObjectDescription>`, and a
+      ``carrier`` is a :class:`worker <WorkerDescription>` as well as a
+      general map object. Possible values are:
 
-         * **Bobs:** Bobs are map objects that can move around the map.
-           Bob types are:
+      * **Bobs:** Bobs are map objects that can move around the map.
+        Bob types are:
 
-           * :class:`bob <BobDescription>`, the abstract base type for
-             all bobs,
-           * :class:`critter <CritterDescription>`, animals that aren't
-             controlled by any tribe,
-           * :class:`ship <ShipDescription>`, a sea-going vessel
-             belonging to a tribe that can ferry wares or an expedition,
-           * :class:`worker <WorkerDescription>`, a worker belonging to
-             a tribe,
-           * :class:`carrier <CarrierDescription>`, a specialized
-             worker for carrying items along a road,
-           * :class:`soldier <SoldierDescription>`, a specialized worker
-             that will fight for its tribe.
+        * :class:`bob <BobDescription>`, the abstract base type for
+          all bobs,
+        * :class:`critter <CritterDescription>`, animals that aren't
+          controlled by any tribe,
+        * :class:`ship <ShipDescription>`, a sea-going vessel
+          belonging to a tribe that can ferry wares or an expedition,
+        * :class:`worker <WorkerDescription>`, a worker belonging to
+          a tribe,
+        * :class:`carrier <CarrierDescription>`, a specialized
+          worker for carrying items along a road,
+        * :class:`soldier <SoldierDescription>`, a specialized worker
+          that will fight for its tribe.
 
-         * **Wares:** :class:`ware <WareDescription>`, a ware used by
-           buildings to produce other wares, workers or ships
-         * **Immovables:** Immovables are map objects that have a fixed
-           position on the map, like buildings or trees. Immovable types are:
+      * **Wares:** :class:`ware <WareDescription>`, a ware used by
+        buildings to produce other wares, workers or ships
+      * **Immovables:** Immovables are map objects that have a fixed
+        position on the map, like buildings or trees. Immovable types are:
 
-           * :class:`immovable <ImmovableDescription>` General immovables
-             that can belong to a tribe (e.g. a wheat field) or to the
-             world (e.g. trees or rocks).
+        * :class:`immovable <ImmovableDescription>` General immovables
+          that can belong to a tribe (e.g. a wheat field) or to the
+          world (e.g. trees or rocks).
 
-           * **Buildings:** Buildings always belong to a tribe. Building
-             types are:
+        * **Buildings:** Buildings always belong to a tribe. Building
+          types are:
 
-             * :class:`building <BuildingDescription>`, the base class
-               for all buildings
-             * :class:`constructionsite <ConstructionSiteDescription>`,
-               an actual building is being constructed here,
-             * :class:`dismantlesite <DismantleSiteDescription>`, an
-               actual building is being dismantled here,
-             * :class:`warehouse <WarehouseDescription>`, a warehouse
-               can store wares and workers. Headquarters and ports are
-               special tapes of warehouses, but they belong to the same
-               class,
-             * :class:`militarysite <MilitarySiteDescription>`, a
-               building manned by soldiers to expand a tribe's territory,
-             * :class:`productionsite <ProductionSiteDescription>`, the
-               most common type of building, which can produce wares,
-             * :class:`trainingsite <TrainingSiteDescription>`, a
-               specialized productionsite for improving soldiers.
+          * :class:`building <BuildingDescription>`, the base class
+            for all buildings
+          * :class:`constructionsite <ConstructionSiteDescription>`,
+            an actual building is being constructed here,
+          * :class:`dismantlesite <DismantleSiteDescription>`, an
+            actual building is being dismantled here,
+          * :class:`warehouse <WarehouseDescription>`, a warehouse
+            can store wares and workers. Headquarters and ports are
+            special tapes of warehouses, but they belong to the same
+            class,
+          * :class:`militarysite <MilitarySiteDescription>`, a
+            building manned by soldiers to expand a tribe's territory,
+          * :class:`productionsite <ProductionSiteDescription>`, the
+            most common type of building, which can produce wares,
+          * :class:`trainingsite <TrainingSiteDescription>`, a
+            specialized productionsite for improving soldiers.
 
-           * **Other Immovables:** Specialized immovables that aren't buildings:
+        * **Other Immovables:** Specialized immovables that aren't buildings:
 
-             * :class:`flag <FlagDescription>`, a flag that can hold
-               wares for transport,
-             * :class:`road <RoadDescription>`, a road or waterway
-               connecting two flags,
-             * :class:`portdock <PortdockDescription>`, a 'parking space'
-               on water terrain where ships can load/unload wares and
-               workers. A portdock is invisible to the player and one is
-               automatically placed next to each port building.
+          * :class:`flag <FlagDescription>`, a flag that can hold
+            wares for transport,
+          * :class:`road <RoadDescription>`, a road or waterway
+            connecting two flags,
+          * :class:`portdock <PortdockDescription>`, a 'parking space'
+            on water terrain where ships can load/unload wares and
+            workers. A portdock is invisible to the player and one is
+            automatically placed next to each port building.
 
-         * **Abstract:** These types are abstract map objects that are used by the engine and are
-           not visible on the map.
+      * **Abstract:** These types are abstract map objects that are used by the engine and are
+        not visible on the map.
 
-           * :class:`battle <BattleDescription>`, holds information
-             about two soldiers in a fight,
-           * :class:`fleet <FleetDescription>`, holds information for
-             managing ships.
+        * :class:`battle <BattleDescription>`, holds information
+          about two soldiers in a fight,
+        * :class:`fleet <FleetDescription>`, holds information for
+          managing ships.
 
-   Example:
+      Example to fetch some information from a tribe's description:
 
-   .. code-block:: lua
+      .. code-block:: lua
 
-         local tribe_descr = wl.Game().get_tribe_description("barbarians") -- get tribe description
+         local tribe_descr = wl.Game():get_tribe_description("barbarians") -- get tribe description
          local buildings = tribe_descr.buildings                           -- get all building descriptions of this tribe
          for i, building in ipairs(buildings) do                           -- loop all buildings descriptions
             print(building.type_name, building.name)                       -- type and internal name of each building of this tribe
                                                                            -- also for not allowed buildings
             if building.type_name == "militarysite" do
                print(building.max_number_of_soldiers)
+            end
          end
 
 */
@@ -2292,14 +2293,14 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 /* RST
    .. method:: helptext(tribename)
 
-      Returns the tribe-specific helptexts for this object.
+      (RO) Returns a table of helptexts if it exists for the given tribe, an
+      empty table otherwise.
+
+      Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
+      optional.
 
       :arg tribename: The tribe for which we want to fetch the helptext.
       :type tribename: :class:`string`
-
-         (RO) a table of helptexts if it exists for the given tribe, an empty table otherwise.
-         Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
-         optional.
 */
 int LuaMapObjectDescription::helptexts(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -2327,8 +2328,7 @@ ImmovableDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a :class:`base immovable <BaseImmovable>`, so it can be used in help
-   files without having to access an actual immovable on the map. See also
+   A static description of a :class:`base immovable <BaseImmovable>`. See also
    :class:`MapObjectDescription` for more properties.
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
@@ -2359,9 +2359,7 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: species
 
-         the species name of a tree for editor lists
-
-         (RO) the localized species name of the immovable, or an empty string if it has none.
+         (RO) The localized species name of the immovable, or an empty string if it has none.
 */
 int LuaImmovableDescription::get_species(lua_State* L) {
 	lua_pushstring(L, get()->species());
@@ -2371,8 +2369,8 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-         (RO) a table of ware-to-count pairs, describing the build cost for the
-         immovable.
+      (RO) A table of ware-to-count pairs, describing the build cost for the
+      immovable.
 */
 int LuaImmovableDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), Widelands::MapObjectType::WARE);
@@ -2381,8 +2379,8 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
 /* RST
    .. attribute:: becomes
 
-         (RO) a table of map object names that this immovable can turn into, e.g.
-         ``{"atlanteans_ship"}`` or ``{"deadtree2", "fallentree"}``.
+      (RO) An array of map object names that this immovable can turn into, e.g.
+      ``{"atlanteans_ship"}`` or ``{"deadtree2", "fallentree"}``.
 */
 int LuaImmovableDescription::get_becomes(lua_State* L) {
 	lua_newtable(L);
@@ -2398,11 +2396,9 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: terrain_affinity
 
-         returns the terrain affinity values for this immovable
-
-         (RO) a table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
-         preferred_humidity (uint), and preferred_temperature (uint),
-         or nil if the immovable has no terrain affinity.
+      (RO) A table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
+      preferred_humidity (uint), and preferred_temperature (uint),
+      or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
@@ -2433,7 +2429,7 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 
       * :const:`none` -- Example: mushrooms. Immovables will be destroyed when
          something else is built on this field.
-      * :const:`small` -- Example: trees or flags
+      * :const:`small` -- Example: trees, flags or small sized buildings
       * :const:`medium` -- Example: Medium sized buildings
       * :const:`big` -- Example: Big sized buildings or rocks
 */
@@ -2454,14 +2450,13 @@ int LuaImmovableDescription::get_size(lua_State* L) {
  */
 
 /* RST
-   .. method:: has_attribute
+   .. method:: has_attribute(attribute_name)
 
-      whether the immovable has the given attribute
+      (RO) Returns :const:`true` if the immovable has the attribute, :const:`false` otherwise.
 
       :arg attribute_name: The attribute that we are checking for.
       :type attribute_name: :class:`string`
 
-         (RO) true if the immovable has the attribute, false otherwise.
 */
 int LuaImmovableDescription::has_attribute(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -2474,13 +2469,14 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 }
 
 /* RST
-   .. method:: probability_to_grow
+   .. method:: probability_to_grow(terrain_description)
 
-      :arg terrain: The terrain that we are checking the probability for.
-      :type terrain: :class:`wl.map.TerrainDescription`
+      (RO) For trees: Returns a double describing the probability that this tree will grow on the given terrain.
+      Returns nil if this immovable tree has no terrain affinity (all trees should have one).
+      
+      :arg terrain_description: The terrain that we are checking the probability for.
+      :type terrain_description: :class:`wl.map.TerrainDescription`
 
-      (RO) A double describing the probability that this tree will grow on the given terrain.
-           Returns nil if this immovable tree has no terrain affinity (all trees should have one).
 */
 int LuaImmovableDescription::probability_to_grow(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -2505,8 +2501,7 @@ BuildingDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`
 
-   A static description of a tribe's building, so it can be used in help files
-   without having to access an actual building on the map.
+   A static description of a tribe's building.
    This class contains the properties that are common to all buildings.
    Further properties are implemented in the subclasses.
    See the parent classes for more properties.
@@ -2556,7 +2551,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-         (RO) a list of ware build cost for the building.
+      (RO) A table of ware build cost for the building.
 */
 int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), Widelands::MapObjectType::WARE);
@@ -2565,7 +2560,7 @@ int LuaBuildingDescription::get_buildcost(lua_State* L) {
 /* RST
    .. attribute:: buildable
 
-         (RO) true if the building can be built.
+      (RO) :const:`true` if the building can be built.
 */
 int LuaBuildingDescription::get_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
@@ -2575,7 +2570,7 @@ int LuaBuildingDescription::get_buildable(lua_State* L) {
 /* RST
    .. attribute:: conquers
 
-         (RO) the conquer range of the building as an int.
+      (RO) The conquer range of the building as an :class:`int`.
 */
 int LuaBuildingDescription::get_conquers(lua_State* L) {
 	lua_pushinteger(L, get()->get_conquers());
@@ -2585,7 +2580,7 @@ int LuaBuildingDescription::get_conquers(lua_State* L) {
 /* RST
    .. attribute:: destructible
 
-         (RO) true if the building is destructible.
+      (RO) :const:`true` if the building is destructible.
 */
 int LuaBuildingDescription::get_destructible(lua_State* L) {
 	lua_pushboolean(L, get()->is_destructible());
@@ -2595,7 +2590,7 @@ int LuaBuildingDescription::get_destructible(lua_State* L) {
 /* RST
    .. attribute:: enhanced
 
-         (RO) true if the building is enhanced from another building.
+      (RO) :const:`true` if the building is enhanced from another building.
 */
 int LuaBuildingDescription::get_enhanced(lua_State* L) {
 	lua_pushboolean(L, get()->is_enhanced());
@@ -2605,8 +2600,8 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
 /* RST
    .. attribute:: enhanced_from
 
-         (RO) returns the building that this was enhanced from, or nil if this isn't an enhanced
-         building.
+      (RO) The :class:`~wl.map.BuildingDescription` that this was enhanced from, or nil if this isn't an enhanced
+      building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
@@ -2623,7 +2618,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 /* RST
    .. attribute:: enhancement_cost
 
-         (RO) a list of ware cost for enhancing to this building type.
+      (RO) A :class:`table` of warename cost for enhancing to this building type.
 */
 int LuaBuildingDescription::get_enhancement_cost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->enhancement_cost(), Widelands::MapObjectType::WARE);
@@ -2632,7 +2627,7 @@ int LuaBuildingDescription::get_enhancement_cost(lua_State* L) {
 /* RST
    .. attribute:: enhancement
 
-      (RO) a building description that this building can enhance to.
+      (RO) The :class:`~wl.map.BuildingDescription` that this building can enhance to.
 */
 int LuaBuildingDescription::get_enhancement(lua_State* L) {
 	const Widelands::DescriptionIndex enhancement = get()->enhancement();
@@ -2646,7 +2641,7 @@ int LuaBuildingDescription::get_enhancement(lua_State* L) {
 /* RST
    .. attribute:: is_mine
 
-         (RO) true if the building is a mine.
+      (RO) :const:`true` if the building is a mine.
 */
 int LuaBuildingDescription::get_is_mine(lua_State* L) {
 	lua_pushboolean(L, get()->get_ismine());
@@ -2656,7 +2651,7 @@ int LuaBuildingDescription::get_is_mine(lua_State* L) {
 /* RST
    .. attribute:: is_port
 
-         (RO) true if the building is a port.
+      (RO) :const:`true` if the building is a port.
 */
 int LuaBuildingDescription::get_is_port(lua_State* L) {
 	lua_pushboolean(L, get()->get_isport());
@@ -2666,7 +2661,7 @@ int LuaBuildingDescription::get_is_port(lua_State* L) {
 /* RST
    .. attribute:: size
 
-      (RO) The size of this building. Can be either of
+      (RO) The size of this building as a :class:`string`. Can be either of
 
       * :const:`small` -- Small sized buildings
       * :const:`medium` -- Medium sized buildings
@@ -2685,7 +2680,7 @@ int LuaBuildingDescription::get_size(lua_State* L) {
 /* RST
    .. attribute:: returns_on_dismantle
 
-         (RO) a list of wares returned upon dismantling.
+      (RO) A :class:`table` of wares amount returned upon dismantling.
 */
 int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
 	return wares_or_workers_map_to_lua(
@@ -2695,7 +2690,7 @@ int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
 /* RST
    .. attribute:: enhancement_returns_on_dismantle
 
-         (RO) a list of wares returned upon dismantling an enhanced building.
+      (RO) A :class:`table` of wares amount returned upon dismantling an enhanced building.
 */
 int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
 	return wares_or_workers_map_to_lua(
@@ -2705,7 +2700,7 @@ int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
 /* RST
    .. attribute:: vision range
 
-         (RO) the vision_range of the building as an int.
+      (RO) The vision_range of the building as an :class:`integer`.
 */
 int LuaBuildingDescription::get_vision_range(lua_State* L) {
 	lua_pushinteger(L, get()->vision_range());
@@ -2715,8 +2710,8 @@ int LuaBuildingDescription::get_vision_range(lua_State* L) {
 /* RST
    .. attribute:: workarea_radius
 
-         (RO) the first workarea_radius of the building as an int,
-              nil in case bulding has no workareas
+      (RO) The first workarea_radius of the building as an :class:`integer`,
+      nil in case bulding has no workareas.
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State* L) {
 	const WorkareaInfo& workareaInfo = get()->workarea_info();
@@ -3148,7 +3143,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
    .. attribute:: consumed_wares_workers
 
       :arg program_name: the name of the production program that we want to get the consumed wares
-         for :type tribename: :class:`string`
+      for :type tribename: :class:`string`
 
       (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production
       program. Multiple entries in {ware name} are alternatives (OR logic)).
@@ -3183,10 +3178,10 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
    .. attribute:: produced_wares
 
       :arg program_name: the name of the production program that we want to get the produced wares
-         for :type tribename: :class:`string`
+      for :type tribename: :class:`string`
 
-         (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
-         program
+      (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
+      program
 */
 int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -3203,10 +3198,10 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
    .. attribute:: recruited_workers
 
       :arg program_name: the name of the production program that we want to get the recruited
-         workers for :type tribename: :class:`string`
+      workers for :type tribename: :class:`string`
 
-         (RO) Returns a table of {worker name, worker amount} for the workers recruited
-         by this production program
+      (RO) Returns a table of {worker name, worker amount} for the workers recruited
+      by this production program
 */
 int LuaProductionSiteDescription::recruited_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -3318,7 +3313,7 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
    .. attribute:: food_attack
 
       (RO) A table of tables with food ware names used for Attack training,
-           e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_attack());
@@ -3328,7 +3323,7 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
    .. attribute:: food_defense
 
       (RO) A table of tables with food ware names used for Defense training,
-           e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_defense());
@@ -3338,7 +3333,7 @@ int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
    .. attribute:: food_evade
 
       (RO) A table of tables with food ware names used for Evade training,
-           e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_evade());
@@ -3348,7 +3343,7 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
    .. attribute:: food_health
 
       (RO) A table of tables with food ware names used for Health training,
-           e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_health());
@@ -3889,7 +3884,7 @@ int LuaWorkerDescription::get_buildable(lua_State* L) {
 /* RST
    .. attribute:: needed_experience
 
-         (RO) the experience the worker needs to reach this level.
+      (RO) the experience the worker needs to reach this level.
 */
 int LuaWorkerDescription::get_needed_experience(lua_State* L) {
 	lua_pushinteger(L, get()->get_needed_experience());
@@ -4109,7 +4104,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: name
 
-         (RO) the :class:`string` internal name of this resource
+      (RO) the :class:`string` internal name of this resource
 */
 
 int LuaResourceDescription::get_name(lua_State* L) {
@@ -4120,7 +4115,7 @@ int LuaResourceDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-         (RO) the :class:`string` display name of this resource
+      (RO) the :class:`string` display name of this resource
 */
 
 int LuaResourceDescription::get_descname(lua_State* L) {
@@ -4131,7 +4126,7 @@ int LuaResourceDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: is_detectable
 
-         (RO) true if geologists can find this resource
+      (RO) true if geologists can find this resource
 */
 
 int LuaResourceDescription::get_is_detectable(lua_State* L) {
@@ -4142,7 +4137,7 @@ int LuaResourceDescription::get_is_detectable(lua_State* L) {
 /* RST
    .. attribute:: max_amount
 
-         (RO) the maximum amount of this resource that a terrain can have
+      (RO) the maximum amount of this resource that a terrain can have
 */
 
 int LuaResourceDescription::get_max_amount(lua_State* L) {
@@ -4153,7 +4148,7 @@ int LuaResourceDescription::get_max_amount(lua_State* L) {
 /* RST
    .. attribute:: representative_image
 
-         (RO) the :class:`string` path to the image representing this resource in the GUI
+      (RO) the :class:`string` path to the image representing this resource in the GUI
 */
 int LuaResourceDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->representative_image());
@@ -4171,8 +4166,8 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
 
       :arg amount: The amount of the resource what we want an overlay image for
 
-         (RO) the :class:`string` path to the image representing the specified amount of this
-         resource
+      (RO) the :class:`string` path to the image representing the specified amount of this
+      resource
 */
 int LuaResourceDescription::editor_image(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -4228,7 +4223,7 @@ void LuaTerrainDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: name
 
-         (RO) the :class:`string` internal name of this terrain
+      (RO) the :class:`string` internal name of this terrain
 */
 
 int LuaTerrainDescription::get_name(lua_State* L) {
@@ -4239,7 +4234,7 @@ int LuaTerrainDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-         (RO) the :class:`string` display name of this terrain
+      (RO) the :class:`string` display name of this terrain
 */
 
 int LuaTerrainDescription::get_descname(lua_State* L) {
@@ -4250,8 +4245,8 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: default_resource
 
-         (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
-         terrain, or nil if the terrain has no default resource.
+      (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
+      terrain, or nil if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
@@ -4280,7 +4275,7 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 /* RST
    .. attribute:: fertility
 
-         (RO) the :class:`uint` fertility value for this terrain
+      (RO) the :class:`uint` fertility value for this terrain
 */
 
 int LuaTerrainDescription::get_fertility(lua_State* L) {
@@ -4291,7 +4286,7 @@ int LuaTerrainDescription::get_fertility(lua_State* L) {
 /* RST
    .. attribute:: humidity
 
-         (RO) the :class:`uint` humidity value for this terrain
+      (RO) the :class:`uint` humidity value for this terrain
 */
 
 int LuaTerrainDescription::get_humidity(lua_State* L) {
@@ -4302,7 +4297,7 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {
 /* RST
    .. attribute:: representative_image
 
-         (RO) the :class:`string` file path to a representative image
+      (RO) the :class:`string` file path to a representative image
 */
 int LuaTerrainDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->texture_paths().front());
@@ -4312,7 +4307,7 @@ int LuaTerrainDescription::get_representative_image(lua_State* L) {
 /* RST
    .. attribute:: temperature
 
-         (RO) the :class:`uint` temperature value for this terrain
+      (RO) the :class:`uint` temperature value for this terrain
 */
 
 int LuaTerrainDescription::get_temperature(lua_State* L) {
@@ -4323,8 +4318,8 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
 /* RST
    .. attribute:: valid_resources
 
-         (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this
-         terrain.
+      (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this
+      terrain.
 */
 
 int LuaTerrainDescription::get_valid_resources(lua_State* L) {
@@ -6327,7 +6322,7 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
       (RO) Returns whether this productionsite is currently active or stopped
 
       :returns: true if the productionsite has been started,
-         false if it has been stopped.
+      false if it has been stopped.
 */
 int LuaProductionSite::get_is_stopped(lua_State* L) {
 	Widelands::ProductionSite* ps = get(L, get_egbase(L));
@@ -7056,7 +7051,7 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 
    Get name of ship:
 
-      (RO) returns the :class:`string` ship's name.
+   (RO) returns the :class:`string` ship's name.
 
 
 */
@@ -7075,7 +7070,7 @@ int LuaShip::get_shipname(lua_State* L) {
    Do not change this value if the ship is currently shipping more items than the new capacity
    allows.
 
-      (RW) returns the current capacity of this ship
+   (RW) returns the current capacity of this ship
 
 */
 int LuaShip::get_capacity(lua_State* L) {
