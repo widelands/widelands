@@ -2135,7 +2135,7 @@ MapObjectDescription
 
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
-   METHOD(LuaImmovableDescription, helptexts),
+   METHOD(LuaMapObjectDescription, helptexts),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
@@ -2295,7 +2295,7 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 }
 
 /* RST
-   .. method:: helptext(tribename)
+   .. method:: helptexts(tribename)
 
       (RO) Returns a table of helptexts if it exists for the given tribe, an
       empty table otherwise.
