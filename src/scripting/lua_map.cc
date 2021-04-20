@@ -2275,13 +2275,12 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
       .. code-block:: lua
 
          local tribe_descr = wl.Game():get_tribe_description("barbarians") -- get tribe description
-         local buildings = tribe_descr.buildings                           -- get all building descriptions of this tribe
-         for i, building in ipairs(buildings) do                           -- loop all buildings descriptions
-            print(building.type_name, building.name)                       -- type and internal name of each building of this tribe
-                                                                           -- also for not allowed buildings
-            if building.type_name == "militarysite" do
-               print(building.max_number_of_soldiers)
-            end
+         local buildings = tribe_descr.buildings                           -- get all building
+   descriptions of this tribe for i, building in ipairs(buildings) do                           --
+   loop all buildings descriptions print(building.type_name, building.name)                       --
+   type and internal name of each building of this tribe
+                                                                           -- also for not allowed
+   buildings if building.type_name == "militarysite" do print(building.max_number_of_soldiers) end
          end
 
 */
@@ -2471,9 +2470,10 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 /* RST
    .. method:: probability_to_grow(terrain_description)
 
-      (RO) For trees: Returns a double describing the probability that this tree will grow on the given terrain.
-      Returns nil if this immovable tree has no terrain affinity (all trees should have one).
-      
+      (RO) For trees: Returns a double describing the probability that this tree will grow on the
+   given terrain. Returns nil if this immovable tree has no terrain affinity (all trees should have
+   one).
+
       :arg terrain_description: The terrain that we are checking the probability for.
       :type terrain_description: :class:`wl.map.TerrainDescription`
 
@@ -2600,8 +2600,8 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
 /* RST
    .. attribute:: enhanced_from
 
-      (RO) The :class:`~wl.map.BuildingDescription` that this was enhanced from, or nil if this isn't an enhanced
-      building.
+      (RO) The :class:`~wl.map.BuildingDescription` that this was enhanced from, or nil if this
+   isn't an enhanced building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
@@ -4553,8 +4553,8 @@ int LuaMapObject::get_serial(lua_State* L) {
       .. code-block:: lua
 
          local immovable = wl.Game().map:get_field(20,31).immovable
-         if immovable then                                     -- always check if the immovable still exists
-            if immovable.descr.type_name == "warehouse"        -- access MapObjectDescription
+         if immovable then                                     -- always check if the immovable
+   still exists if immovable.descr.type_name == "warehouse"        -- access MapObjectDescription
                immovable:set_wares("log", 5)
             end
          end
