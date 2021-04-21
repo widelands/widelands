@@ -619,16 +619,110 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 }
 
 /* RST
-   .. method:: modify_unit(type, name, property ... , value ...)
+   .. method:: modify_unit(type, name, property … , value …)
 
-      This powerful function is meant to be used by add-ons of the ``tribes``
-      and ``world`` categories from their ``postload.lua``.
+      This powerful function can be used to modify almost
+      every property of every object description.
 
-      TODO(Nordfriese): Document
+      Currently, support is implemented only for a limited number of properties.
+      Contact the Widelands Development Team if you need access to a property
+      that can not be modified by this function yet.
+
+      This function is meant to be used **only** by add-ons of the ``tribes``
+      and ``world`` categories from their ``postload.lua``. **Do not** use it
+      in scenario scripts, add-ons of other types, or the debug console.
+
+      :arg string type: The object type to modify. See below for a list of valid values.
+      :arg string name: The name of the item to modify.
+      :arg string property…: The property to modify. A property is specified as a
+                             sequence of one or more strings. See below for a list
+                             of all supported property descriptors.
+      :arg value…: The values for the property. The number and types of the expected
+                   values depend on the property being modified (see below).
+
+      Supported types and properties are:
+
+      ===========================  ========================  ====================================
+      Type                            Property descriptor                Values
+      ===========================  ========================  ====================================
+      :const:`"resource"`          :const:`"max_amount"`     **amount**         (*int*)
+      :const:`"terrain"`           :const:`"enhancement"`    **terrain_name**   (*string*)
+      :const:`"worker"`            :const:`"experience"`     **experience**     (*int*)
+      :const:`"worker"`            :const:`"becomes"`        **worker_name**    (*string*)
+      :const:`"worker"`            :const:`"programs"`       **program_name**   (*string*),
+                                   :const:`"set"`            **actions_table**  (*table*)
+      :const:`"productionsite"`    :const:`"enhancement"`    **building_name**  (*string*)
+      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*),
+                                   :const:`"add_ware"`       **amount**         (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*),
+                                   :const:`"modify_ware"`    **new_amount**     (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*)
+                                   :const:`"remove_ware"`
+      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*),
+                                   :const:`"add_worker"`     **amount**         (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*),
+                                   :const:`"modify_worker"`  **new_amount**     (*int*)
+      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*)
+                                   :const:`"remove_worker"`
+      :const:`"productionsite"`    :const:`"programs"`       **program_name**   (*string*),
+                                   :const:`"set"`            **program_table**  (*table*)
+      :const:`"tribe"`             :const:`"add_ware"`       **ware_name**      (*string*),
+                                                             **menu_column**    (*int*),
+                                                             **helptexts**      (*table*)
+      :const:`"tribe"`             :const:`"add_worker"`     **worker_name**    (*string*),
+                                                             **menu_column**    (*int*),
+                                                             **helptexts**      (*table*)
+      :const:`"tribe"`             :const:`"add_building"`   **building_name**  (*string*),
+                                                             **helptexts**      (*table*)
+      :const:`"tribe"`             :const:`"add_immovable"`  **immovable_name** (*string*),
+                                                             **helptexts**      (*table*)
+      ===========================  ========================  ====================================
+
+      Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
+      column in the workers displays (stock menu, warehouse window, economy options):
+
+      .. code-block:: lua
+
+         descriptions:modify_unit("tribe", "frisians", "add_worker", "frisians_salter", 2,
+               { helptexts = { purpose =
+                  _("The salter washes salt from the shores of the sea.")
+               }})
+
+      Example to add a new input ware to a building and ensure that the programs use it:
+
+      .. code-block:: lua
+
+         -- Add the input
+         descriptions:modify_unit("productionsite", "frisians_smokery",
+               "input", "add_ware", "salt", 6)
+
+         -- Overwrite the two predefined programs with new ones
+         descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
+               "smoke_fish", { descname = _("smoking fish"), actions = {
+                     "return=skipped unless economy needs smoked_fish",
+                     "consume=fish:2 salt log",
+                     "sleep=duration:16s",
+                     "animate=working duration:30s",
+                     "produce=smoked_fish:2"
+               }})
+         descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
+               "smoke_meat", { descname = _("smoking meat"), actions = {
+                     "return=skipped when site has fish:2 and economy needs smoked_fish",
+                     "return=skipped unless economy needs smoked_meat",
+                     "consume=meat:2 salt log",
+                     "sleep=duration:16s",
+                     "animate=working duration:30s",
+                     "produce=smoked_meat:2"
+               }})
+
+         -- The main program needs to be overwritten as well – otherwise
+         -- the new program definitions will not not applied!
+         descriptions:modify_unit("productionsite", "frisians_smokery", "programs", "set",
+               "main", { descname = _("working"), actions = {
+                     "call=smoke_fish",
+                     "call=smoke_meat"
+               }})
 */
-// TODO(Nordfriese): I only added functions I need for my own add-ons.
-// If anyone requests the possibility to modify any other tribe-related properties
-// through add-ons, the changes need to go here.
 int LuaDescriptions::modify_unit(lua_State* L) {
 	const std::string type = luaL_checkstring(L, 2);
 	const std::string unit = luaL_checkstring(L, 3);

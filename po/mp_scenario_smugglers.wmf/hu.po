@@ -5,14 +5,17 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016
+# zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2017-09-21 23:34+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"

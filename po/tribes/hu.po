@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
-"PO-Revision-Date: 2021-04-04 23:37+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-17 19:07+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -712,37 +712,37 @@ msgstr "A katonáid legyőzték az ellenséget a hátárőrháznál."
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:8
 msgctxt "empire_building"
 msgid "Blockhouse"
-msgstr "Erődház"
+msgstr "Őrbódé"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr "A katonáid elfoglalták az erődházadat."
+msgstr "A katonáid elfoglalták az őrbódédat."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
-msgstr "Az erődházad felfedezett egy támadót."
+msgstr "Az őrbódéd felfedezett egy támadót."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:51
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
-msgstr "Az erődházadat megtámadták."
+msgstr "Az őrbódédat megtámadták."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:53
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr "Az ellenség legyőzte a katonáidat az erődháznál."
+msgstr "Az ellenség legyőzte a katonáidat az őrbódénál."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:55
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr "Az ellenség legyőzte a katonáidat az erődháznál."
+msgstr "A katonáid legyőzték az ellenséget az őrbódénál."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:8
@@ -1242,7 +1242,6 @@ msgstr "a munka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1709,7 +1708,6 @@ msgstr "Kőfaragó műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
@@ -1721,8 +1719,6 @@ msgstr "lapát készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1731,7 +1727,6 @@ msgstr "favágó balta készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1747,8 +1742,6 @@ msgstr "macsete készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1759,7 +1752,6 @@ msgstr "konyhai eszközök készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
@@ -1774,9 +1766,9 @@ msgstr "kalapács készítése"
 msgid "making a chisel"
 msgstr "véső készítése"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"

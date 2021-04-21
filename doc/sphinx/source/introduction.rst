@@ -3,6 +3,13 @@ Introduction
 
 This documentation describes the usage and possibilities of Lua to extend Widelands.
 
+.. note::
+
+   Files of type ``.lua`` are very basic text files. Do not use any fancy word
+   processor (Word, OpenOffice and their like) because they produce the wrong 
+   file format. Make sure to use a plain text editor (like Notepad under 
+   Windows, nedit under Linux and TextEdit under Mac OS X).
+
 Where Lua is used
 -----------------
 
@@ -14,102 +21,89 @@ Scenarios
 The most prominent usage of Lua is in scenarios: All scenario logic is
 scripted using Lua. How this works is described in the :ref:`scenario_tutorial`.
 
-Initializations of Tribes in non-scenario games
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Starting conditions of Tribes in non-scenario games
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 At the beginning of non scenario games, the player has a choice to use
 different starting conditions. There is the very essential one that just sets
 a hq and some starting wares and there are more sophisticated ones.
 
-Adding new ones is simple. All you have to do is to create a new script in
-the ``scripting`` directory of a tribe. The script should return a :class:`table`
-with two keys: ``name`` is the name for this start condition shown to the user
-and ``func`` is the function that will be called. This function takes on
-argument, a :class:`~wl.game.Player` for which to create the initial
-infrastructure.
-
-A small example. Let's assume we want to add an initialization to the
-barbarians that gives the player 80 logs, but not at once but one by one
-over a certain time. The corresponding lua script could be named
-``barbarians/scripting/sc99_init_logs.lua``. The naming decides over the
-order in which the starting conditions are listed. Let's write the script:
-
-.. code-block:: lua
-
-   use("aux", "coroutine")  -- For convenience function sleep()
-
-   -- Set the textdomain, so that all strings given to the _() function are
-   -- properly translated.
-   set_textdomain("tribes")
-
-   -- Now for the array we must return
-   return {
-      name = _ "Slow start",  -- the name. This is translated.
-      func = function(player)  -- The function to be returned
-         -- Let the player build all workers.
-         player:allow_workers("all")
-
-         -- Place the hq
-         local hq = player:place_building("barbarians_headquarters", player.starting_field)
-
-         -- Now add one log to the hq every 250 ms
-         for i=1,80 do
-            hq:set_wares("log", hq:get_wares("log") + 1)
-            sleep(250)
-         end
-   end
-   }
-
-That's it, now it can be selected when starting new games.
+To add a new starting condition see :ref:`Starting Conditions <lua_tribes_tribes_start_conditions>`.
 
 Win conditions
 ^^^^^^^^^^^^^^
 
 In non player scenarios, win conditions define when one single player has won
 a game. The definitions of win conditions is very similar to defining
-initializations: We have to create a Lua script in
-``/data/scripting/win_conditions`` which returns an array with ``name``,
-``description`` and ``func``. Let's also make up a quick example: The first
-player to have 200 logs in his HQ wins the game. All others loose. Save the
-following file as ``/data/scripting/win_conditions/havest_logs.lua``.
+starting conditions which returns an array with ``name``, ``description`` and ``func``.
+Take a look at the `endless_game wincondition <https://github.com/widelands/widelands/blob/master/data/scripting/win_conditions/endless_game.lua>`_
+for a basic example. Let’s make up a quick example: The first player to have
+200 logs in his HQ wins the game. All others loose. Save the following file as 
+``data/scripting/win_conditions/harvest_logs.lua``.
 
 .. code-block:: lua
 
-   use("aux", "coroutine") -- for sleep
+   include "scripting/coroutine.lua"                              -- for sleep()
+   include "scripting/win_conditions/win_condition_functions.lua" -- for broadcast_objective()
 
-   -- For translations, textdomain must be win_conditions
-   set_textdomain("win_conditions")
+   -- Some variable which get used throughout this win condition:
+   
+   local textdomain = "win_conditions"                  -- For translations, textdomain must be win_conditions
+   push_textdomain(textdomain)
 
-   return {
-      name = _ "Harvest logs",
-      description = _ "The first player with 200 logs wins!",
-      func = function()
-         -- Find all valid players.
-         local plrs = wl.Game().players
+   local wc_name = "Harvest logs"                       -- The name of win condition, not localized
+   local wc_descname = _("Harvest logs")                -- wc_descname has to be exactly like wc_name, because it
+                                                        -- will be used as the key to fetch the translation in C++
 
-         -- Iterate all players, check if he is the winner
-         local winner = nil
-         local losers = {}
-         while not winner do
-            sleep(5000) -- we do this every 5 seconds
-            for idx,p in ipairs(plrs) do -- iterate the players array
-               local hq = p.starting_field.immovable
-               if hq:get_wares("log") >= 200 then
-                  -- We found the winner
-                  winner = p
-                  losers = plrs
-                  table.remove(losers,idx) -- Remove the winner from the losers table
+   local wc_version = 1                                 -- The version of this win condition
+
+   local wc_desc = _("The first player with 200 logs in his headquarter wins!")
+
+   local wc_definition = {                              -- The table defining the win condition
+      name = wc_name,
+      description = wc_desc,
+      peaceful_mode_allowed = true,                     -- Enabling the checkbox for peaceful mode in game setup menu
+      func = function()                                 -- The function processing the win condition
+         broadcast_objective("win_condition",           -- Set objective with win condition for all players
+                             wc_descname, 
+                             wc_desc)
+         local plrs = wl.Game().players                 -- All players
+         local winner = nil                             -- No winner yet
+         local losers = {}                              -- Table of loosers
+         local map = wl.Game().map                      -- To get access to map objects
+
+         while not winner do                            -- The main loop, it will run as long there is no winner
+            sleep(5000)                                 -- Do this every 5 seconds
+            for idx, p in ipairs(plrs) do               -- Iterate all players
+               
+               local sf = map.player_slots[p.number].starting_field    -- The starting field of this player
+               local hq = sf.immovable                  -- The headquarters of this player
+               if hq:get_wares("log") >= 200 then       -- Check if more than 200 logs are stored
+                  winner = p                            -- This player is the winner!
+                  losers = plrs                         -- Store all players and ...
+                  table.remove(losers,idx)              -- ... remove the winner from the losers table
                end
             end
          end
 
-         -- Send the winner a hurray message, the losers a boo
-         for idx,p in ipairs(losers) do
-            p:send_message(_"You lost!", _"You lost this game!")
+         push_textdomain(textdomain)                    -- Each part containing localized strings
+                                                        -- needs pushing the textdomain again
+         for idx,p in ipairs(losers) do                 -- Iterate all losers and send the status
+            p:send_to_inbox(_("You lost!"), 
+                            _("You lost this game!"),
+                            {popup=true}
+                            )
          end
-         winner:send_message(_"You won!", _"You won this game!")
+         winner:send_to_inbox(_("You won!"),             -- The winner get also the status
+                              _("You won this game!"),
+                              {popup=true}
+                              )
+         pop_textdomain()                                -- Reset last textdomain
       end,
    }
+   pop_textdomain()                                      -- Reset textdomain from file
+   return wc_definition                                  -- Return the table of the defined wincondition
+
 
 Hooks
 ^^^^^
@@ -127,7 +121,6 @@ something like this:
 
 .. code-block:: lua
 
-   hooks = {}
    hooks.custom_statistic = {
       name = _ "Unchanging statistic",
       pic = "map:mycool_stat_picture.png", -- For the menu button
@@ -144,10 +137,10 @@ back.
 Debug console
 ^^^^^^^^^^^^^
 
-In widelands debug builds you can open a debug console by pressing ``F6``. You
-can enter Lua commands here that act in the global environment: That is if you
-are in a scenario you can access the global variables and alter all Lua
-objects that are in the global scope:
+In widelands debug builds you can open a debug console by pressing 
+``Ctrl+Shift+Space``. You can enter Lua commands here that act in the global
+environment: That is if you are in a scenario you can access the global
+variables and alter all Lua objects that are in the global scope:
 
 .. code-block:: lua
 
@@ -160,21 +153,40 @@ This makes for excellent cheating in debug builds, but note that this is for
 debug purposes only -- in network games running Lua commands this way will
 desync and therefore crash the game and also replays where you changed the
 game state via the debug console will not work. It is very useful
-for debugging scenarios though.
+for debugging scenarios though. It is also possible to load a script from any
+directory which makes testing of functions very easy. Let's assume you test
+a function like:
+
+.. code-block:: lua
+
+   function all_players()
+      for idx, player in ipairs(wl.Game().players) do
+        print("Player:" player.name, player.number, player.tribe.name) 
+      end
+   end
+
+Save this as ``tests.lua``. Now start a normal game, open the debug console 
+by pressing ``Ctrl+Shift+Space`` and enter ``dofile("/full/path/to/tests.lua")``.
+Now you can run the function ``all_players()``. If the output is not what you
+expected just change the function, load the file again with ``dofile`` and 
+call the function again. For convenience you can get the last 5 commands back by
+pressing the Up arrow key.
 
 Regression testing infrastructure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `test` directory in the repository contains the regression test suite. A
+The ``test`` directory in the repository contains the regression test suite. A
 test is either a savegame plus a set of Lua scripts (test_*.lua) or a map that
 contains in its scripting directory a set of (test_*.lua and/or
 editor_test*.lua which are only run in the Editor) files.
 
-Each test starts Widelands using either the `--editor`, `--loadgame` or
-`--scenario` switch and additionally, the `--script` switch can be supplied to
+Each test starts Widelands using either the ``--editor``, ``--loadgame`` or
+``--scenario`` switch and additionally, the ``--script`` switch can be supplied to
 run a Lua script directly after the game is ready to take commands.
 
 The tests communicate with the test runner through standard output. If a
 script outputs "All Tests passed." the test is considered to pass, otherwise
 to fail. Whenever a savegame is written inside a test it is later loaded by
 the test runner as an additional test.
+
+See also: `Regression Tests <https://www.widelands.org/wiki/RegressionTests/>`_

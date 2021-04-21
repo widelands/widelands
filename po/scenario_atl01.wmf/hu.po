@@ -7,6 +7,7 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016,2020
+# litoll <litoll@freemail.hu>, 2016,2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
@@ -14,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
