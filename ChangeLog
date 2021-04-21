@@ -109,7 +109,7 @@
 - Make terrain dither layer unique to prevent hard edges (#4281)
 - fix territorial messages by resetting last winning candidate values if no winner candidate available (#4333)
 - Zap `luaopen_eris` compiler warning (#4351)
-- 3254 cleanup messages (#4386)
+- Cleanup messages (#4386)
     - renamed `LuaMessage` to `LuaInboxMessage`; `wl.game.Message` to `wl.game.InboxMessage`
     - adjusted main scripting files
     - documentation tweaks
@@ -131,13 +131,13 @@
 - Tweak ATL New World start (#4613)
 - Show initial status message for win conditions (#4633)
 - New lua methods & properties (#4584)
-- 3849 win conditions fixes (#4648)
+- Win conditions fixes (#4648)
 - Expose win condition name to Lua (#4675)
 - HQ Hunter fix (#4683): destroy also conquered milsites
 - fix a variable conflict (#4701)
 - Discovery and New World starting conditions for amazons (#4705)
 - Make atlantean Discovery start easier (#4709)
-- 3588 fix artifact messages (#4727)
+- Fix artifact messages (#4727)
 - Fix amazons fortified village (#4793)
 - Add ordered iteration for lua tables (#4818)
 
@@ -202,10 +202,10 @@
 
 ### AI
 
-- fix a crash due to wrong AI Hint (#4191)
+- Fix a crash due to wrong AI Hint (#4191)
 - Give the AI its own namespace (#4225)
-- quick AI fix to avoid crashes (#4388)
-- 4384 ai quick fix (#4401)
+- Quick AI fix to avoid crashes (#4388)
+- AI quick fix (#4401)
 - Read mining information for help & AI (#4489)
     - Read AI mining hints from production program
     - Add building name to deprecation messages
@@ -379,7 +379,7 @@
     - Set window as not resizable before resizing it
     - Add Fullscreen and Maximized to Window Size dropdown
     - Set window as not resizable and don't change its size when toggling fullscreen
-    - Disable resizable window when compiled with SDL `< 2.0.5`
+    - Disable resizable window when compiled with SDL < 2.0.5
 - Map preview on selection screen (#4201)
     - Show map preview in new game screen and replays
     - Use faster map loading for website info
