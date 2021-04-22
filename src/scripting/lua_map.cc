@@ -2274,7 +2274,7 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 
       .. code-block:: lua
 
-         -- get tribe description:
+         -- get tribe description
          local tribe_descr = wl.Game():get_tribe_description("barbarians")
 
          -- get building descriptions of this tribe
@@ -2286,7 +2286,8 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 
             -- filter military sites
             if building.type_name == "militarysite" do
-               print(building.max_number_of_soldiers) end
+               print(building.max_number_of_soldiers)
+            end
          end
 */
 int LuaMapObjectDescription::get_type_name(lua_State* L) {
@@ -2373,7 +2374,7 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-      (RO) A table of ware-to-count pairs, describing the build cost for the
+      (RO) A table of ware count pairs, describing the build cost for the
       immovable.
 */
 int LuaImmovableDescription::get_buildcost(lua_State* L) {
@@ -2737,9 +2738,7 @@ ConstructionSiteDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's constructionsite, so it can be used in help files
-   without having to access an actual building on the map.
-   See the parent classes for more properties.
+   A static description of a tribe's constructionsite. See the parent classes for more properties.
 */
 const char LuaConstructionSiteDescription::className[] = "ConstructionSiteDescription";
 const MethodType<LuaConstructionSiteDescription> LuaConstructionSiteDescription::Methods[] = {
@@ -2758,9 +2757,7 @@ DismantleSiteDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's dismantlesite, so it can be used in help files
-   without having to access an actual building on the map.
-   See the parent classes for more properties.
+   A static description of a tribe's dismantlesite. See the parent classes for more properties.
 */
 const char LuaDismantleSiteDescription::className[] = "DismantleSiteDescription";
 const MethodType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Methods[] = {
@@ -2779,11 +2776,9 @@ ProductionSiteDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's productionsite, so it can be used in help files
-   without having to access an actual building on the map.
-   This class contains the properties for productionsites that have workers.
-   For militarysites and trainingsites, please use the subclasses.
-   See the parent classes for more properties.
+   A static description of a tribe's productionsite. This class contains
+   the properties for productionsites that have workers. For militarysites and trainingsites,
+   please use the subclasses. See the parent classes for more properties.
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
@@ -2837,7 +2832,7 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 /* RST
    .. attribute:: collected_bobs
 
-      (RO) An array with :class:`MapObjectDescription` containing the bobs that
+      (RO) An array of :class:`MapObjectDescription` containing the bobs that
       this building will collect from the map.
       For example, a Hunters's Hut will hunt some critters for meat.
 
@@ -2862,7 +2857,7 @@ int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
 /* RST
    .. attribute:: collected_immovables
 
-      (RO) An array with :class:`ImmovableDescription` containing the immovables that
+      (RO) An array of :class:`ImmovableDescription` containing the immovables that
       this building will collect from the map.
       For example, a Woodcutters's House will cut down trees to obtain logs, and the
       Fruit Collector's House will harvest fruit from berry bushes.
@@ -2885,7 +2880,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 /* RST
    .. attribute:: collected_resources
 
-      (RO) An array with :class:`ResourceDescription` containing the resources that
+      (RO) An array of :class:`ResourceDescription` containing the resources that
       this building will collect from the map, along with the maximum percentage mined and the
       chance to still find some more after depletion. For example, a Fishers's House will collect:
 
@@ -2938,7 +2933,7 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 /* RST
    .. attribute:: created_immovables
 
-      (RO) An array with :class:`ImmovableDescription` containing the immovables that
+      (RO) An array of :class:`ImmovableDescription` containing the immovables that
       this building will place on the map.
       For example, a Foresters's House will create trees, and the Berry Farm some berry bushes.
 */
@@ -2960,7 +2955,7 @@ int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
 /* RST
    .. attribute:: created_bobs
 
-      (RO) An array with :class:`MapObjectDescription` containing the bobs that
+      (RO) An array of :class:`MapObjectDescription` containing the bobs that
       this building will place on the map.
       For example, a Gamekeepers's Hut will create some critters, and the Shipyard a Ship.
 */
@@ -3000,7 +2995,7 @@ int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 /* RST
    .. attribute:: created_resources
 
-      (RO) An array with :class:`ResourceDescription` containing the resources that
+      (RO) An array of :class:`ResourceDescription` containing the resources that
       this building will place on the map.
       For example, a Fishbreeder's House will create the "fish" resource.
 */
@@ -3022,7 +3017,7 @@ int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 /* RST
    .. attribute:: output_ware_types
 
-      (RO) An array with :class:`LuaWareDescription` containing the wares that
+      (RO) An array of :class:`WareDescription` containing the wares that
       the productionsite can produce.
 */
 int LuaProductionSiteDescription::get_output_ware_types(lua_State* L) {
@@ -3041,7 +3036,7 @@ int LuaProductionSiteDescription::get_output_ware_types(lua_State* L) {
 /* RST
    .. attribute:: output_worker_types
 
-      (RO) An array with :class:`LuaWorkerDescription` containing the workers that
+      (RO) An array of :class:`WorkerDescription` containing the workers that
       the productionsite can produce.
 */
 int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
@@ -3061,7 +3056,7 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
 /* RST
    .. attribute:: production_programs
 
-      (RO) An array with the production program names as string.
+   (RO) An array of :ref:`production site names <productionsite_programs>` as string.
 */
 int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 	lua_newtable(L);
