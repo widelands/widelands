@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-10 21:47+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-17 19:06+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "Védd meg a településedet!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr "Építs néhány erődházat és őrbódét a település köré."
+msgstr "Építs néhány őrbódét és őrházat a település köré."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -304,7 +304,7 @@ msgstr "Lehet, hogy utasait épp az a vihar ragadta el, amelyik minket Malac' Mo
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr "Kérve kérlek, légy elővigyázatos, és építs pár erődházat vagy őrbódét a településünk köré."
+msgstr "Kérve kérlek, légy elővigyázatos, és építs pár őrbódét vagy őrházat a településünk köré."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Marble on the Mountain"
