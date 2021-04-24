@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-10 22:39+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-18 11:34+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Terjeszkedj északkeletre, a kövekig!"
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Építs katonai épületeket (mint az őrbódék vagy a határőrházak) a területed növeléséhez!"
+msgstr "Építs katonai épületeket (őrházakat vagy a határőrházakat) a területed növeléséhez!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
@@ -141,13 +141,13 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Egy vadász elejti az állatokat, míg a vadőr megelőzi, hogy kihaljanak. A húst aztán egy kocsmában dolgozzák fel, bányászaidnak szánt étellé."
+msgstr "A vadászok elejtik az állatokat, míg a vadőrök gondoskodnak az utánpótlásukról. A húsból azután a kocsmákban készítenek a bányászaidnak megfelelő ételt."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Ez az első, de nem az utolsó példa olyan árura, amit finomítani kell mielőtt egy másik épületben használhatnád."
+msgstr "Ez az első, de nem az utolsó példa olyan árura, amit fel kell dolgozni, mielőtt egy másik épületben használhatnád."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
@@ -168,7 +168,7 @@ msgstr "Az élelmiszer-termelés további más módjai a halászok és a farmok.
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr "Finomítsd a kibányászott nyersanyagokat"
+msgstr "Dolgozd fel a kibányászott nyersanyagokat!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"

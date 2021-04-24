@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-10 21:47+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-24 00:19+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "Védd meg a településedet!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr "Építs néhány erődházat és őrbódét a település köré."
+msgstr "Építs néhány őrbódét és őrházat a település köré."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -290,7 +290,7 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr "Uram, nem akarok riadalmat kelteni, de találtam valamit, amitől elszorul a gyomrom, és ami félelmet kelt bennem. Amint a déli parton sétáltam, egy másik hajó maradványaira bukkantam. Nem tudom, vajon csak ennyi maradt-e abból a hajóból. Mindenesetre a maradványok nem tűnnek réginek."
+msgstr "Uram! Nem akarok riadalmat kelteni, de találtam valamit, amitől elszorul a gyomrom, és ami félelmet kelt bennem. Amint a déli parton sétáltam, egy másik hajó maradványaira bukkantam. Nem tudom, vajon csak ennyi maradt-e abból a hajóból. Mindenesetre a maradványok nem tűnnek réginek."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:169
@@ -304,7 +304,7 @@ msgstr "Lehet, hogy utasait épp az a vihar ragadta el, amelyik minket Malac' Mo
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr "Kérve kérlek, légy elővigyázatos, és építs pár erődházat vagy őrbódét a településünk köré."
+msgstr "Kérve kérlek, légy elővigyázatos, és építs pár őrbódét vagy őrházat a településünk köré."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Marble on the Mountain"
@@ -320,7 +320,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr "Uram, jó híreim vannak számodra: Ahogy kelet felé sétáltam, találtam egy nagyobb hegyet. Nem vagyok benne teljesen biztos – egy geológusnak meg kellene néznie, hogy igazam van-e – de úgy hiszem, hogy van pár hely a hegyen ahonnan márványt bányászhatnánk."
+msgstr "Uram! Jó híreim vannak számodra: Ahogy kelet felé sétáltam, találtam egy nagyobb hegyet. Nem vagyok benne teljesen biztos – egy geológusnak meg kellene néznie, hogy igazam van-e – de úgy hiszem, hogy van pár hely a hegyen ahonnan márványt bányászhatnánk."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
@@ -520,4 +520,4 @@ msgstr "Az üzenet nekem volt címezve, könyörgött hogy térjek vissza Fremil
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is, máskülönben folytasd a következő küldetéssel."
+msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel!"
