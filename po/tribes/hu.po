@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 19:07+0000\n"
+"PO-Revision-Date: 2021-04-24 17:51+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -6747,7 +6747,7 @@ msgstr "Minerva"
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
 msgid "Neptune"
-msgstr "Neptun"
+msgstr "Neptunus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:102
