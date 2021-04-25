@@ -2401,9 +2401,20 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: terrain_affinity
 
-      (RO) A table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
+      (RO) For trees: A table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
       preferred_humidity (uint), and preferred_temperature (uint),
       or nil if the immovable has no terrain affinity.
+      
+      E.g. for a beech this will be:
+      
+      .. code-block:: lua
+      
+         {
+            preferred_humidity = 400,
+            preferred_temperature = 110,
+            preferred_fertility = 600,
+            pickiness = 60
+         }
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
@@ -2557,7 +2568,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-      (RO) A table of ware build cost for the building.
+      (RO) A table of ``{ware,build_cost}`` for the building.
 */
 int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), Widelands::MapObjectType::WARE);
@@ -2624,7 +2635,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 /* RST
    .. attribute:: enhancement_cost
 
-      (RO) A :class:`table` of warename cost for enhancing to this building type.
+      (RO) A :class:`table` of ``{warename,cost}`` for enhancing to this building type.
 */
 int LuaBuildingDescription::get_enhancement_cost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->enhancement_cost(), Widelands::MapObjectType::WARE);
@@ -2882,7 +2893,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 
       (RO) An array of :class:`ResourceDescription` containing the resources that
       this building will collect from the map, along with the maximum percentage mined and the
-      chance to still find some more after depletion. For example, a Fishers's House will collect:
+      chance to still find some more after depletion. E.g. for a Fishers's this will be:
 
       .. code-block:: lua
 
@@ -2894,7 +2905,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
             }
          }
 
-      and a Barbarian Coal Mine will collect:
+      and for a Barbarian Coal Mine this will be:
 
       .. code-block:: lua
 
@@ -2997,7 +3008,7 @@ int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 
       (RO) An array of :class:`ResourceDescription` containing the resources that
       this building will place on the map.
-      For example, a Fishbreeder's House will create the "fish" resource.
+      For example, a Fishbreeder's House will create the resource fish.
 */
 int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 	lua_newtable(L);
@@ -3056,7 +3067,8 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
 /* RST
    .. attribute:: production_programs
 
-   (RO) An array of :ref:`production site names <productionsite_programs>` as string.
+   (RO) An array with the production program names as string. See 
+   :ref:`production site programs <productionsite_programs>`.
 */
 int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 	lua_newtable(L);
@@ -3120,7 +3132,7 @@ int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L)
 
       (RO) An array with :class:`WorkerDescription` containing the workers that
       can work here with their multiplicity, i.e. for a atlantean mine this
-      would be { miner, miner, miner }.
+      would be ``{miner,miner,miner}``.
 */
 int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 	lua_newtable(L);
@@ -3140,14 +3152,15 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: consumed_wares_workers
+   .. method:: consumed_wares_workers(program_name)
 
-      :arg program_name: the name of the production program that we want to get the consumed wares
-         for
-      :type tribename: :class:`string`
-
-      (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production
+      (RO) Returns a table of ``{{ware_name},ware_amount}`` for the wares consumed by this production
       program. Multiple entries in {ware name} are alternatives (OR logic)).
+   
+      :arg program_name: The name of the production program that we want to get the consumed wares
+      for. See :ref:`production site programs <productionsite_programs>`.
+      :type program_name: :class:`string`
+
 
 */
 int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
@@ -3177,14 +3190,15 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: produced_wares
+   .. method:: produced_wares(program_name)
 
-      :arg program_name: the name of the production program that we want to get the produced wares
-         for
-      :type tribename: :class:`string`
+      (RO) Returns a table of ``{ware_name,ware_amount}`` for the wares produced by this production
+      program. See :ref:`production site programs <productionsite_programs>`.
+      
+      :arg program_name: The name of the production program that we want to get the produced wares
+            for
+      :type program_name: :class:`string`
 
-      (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
-      program
 */
 int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -3198,14 +3212,15 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: recruited_workers
-
+   .. method:: recruited_workers(program_name)
+      
+      (RO) Returns a table of ``{worker_name,worker_amount}`` for the workers recruited
+      by this production program. See :ref:`production site programs <productionsite_programs>`.
+      
       :arg program_name: the name of the production program that we want to get the recruited
-         workers for
-      :type tribename: :class:`string`
+            workers for
+      :type program_name: :class:`string`
 
-      (RO) Returns a table of {worker name, worker amount} for the workers recruited
-      by this production program
 */
 int LuaProductionSiteDescription::recruited_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
