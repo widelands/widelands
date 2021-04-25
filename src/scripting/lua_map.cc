@@ -3242,8 +3242,8 @@ MilitarySiteDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's militarysite, so it can be used in help files
-   without having to access an actual building on the map.
+   A static description of a tribe's militarysite.
+
    A militarysite can garrison and heal soldiers, and it will expand your territory.
    See the parent classes for more properties.
 */
@@ -3292,8 +3292,8 @@ TrainingSiteDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`, :class:`ProductionSiteDescription`
 
-   A static description of a tribe's trainingsite, so it can be used in help files
-   without having to access an actual building on the map.
+   A static description of a tribe's trainingsite.
+
    A training site can train some or all of a soldier's properties (Attack, Defense, Evade and
    Health). See the parent classes for more properties.
 */
@@ -3332,7 +3332,7 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
    .. attribute:: food_attack
 
       (RO) A table of tables with food ware names used for Attack training,
-      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_attack());
@@ -3342,7 +3342,7 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
    .. attribute:: food_defense
 
       (RO) A table of tables with food ware names used for Defense training,
-      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. ``{{"barbarians_bread"},{"fish", "meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_defense());
@@ -3352,7 +3352,7 @@ int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
    .. attribute:: food_evade
 
       (RO) A table of tables with food ware names used for Evade training,
-      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_evade());
@@ -3362,7 +3362,7 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
    .. attribute:: food_health
 
       (RO) A table of tables with food ware names used for Health training,
-      e.g. {{"barbarians_bread"}, {"fish", "meat"}}
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_health());
@@ -3571,11 +3571,8 @@ WarehouseDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's warehouse, so it can be used in help files
-   without having to access an actual building on the map.
-   Note that headquarters are also warehouses.
-   A warehouse keeps people, animals and wares.
-   See the parent classes for more properties.
+   A static description of a tribe's warehouse. Note that headquarters are also warehouses.
+   A warehouse keeps people, animals and wares. See the parent classes for more properties.
 */
 const char LuaWarehouseDescription::className[] = "WarehouseDescription";
 const MethodType<LuaWarehouseDescription> LuaWarehouseDescription::Methods[] = {
@@ -3611,8 +3608,7 @@ MarketDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's market, so it can be used in help files
-   without having to access an actual building on the map. A Market is used for
+   A static description of a tribe's market. A Market is used for
    trading over land with other players. See the parent classes for more
    properties.
 */
@@ -3640,9 +3636,8 @@ ShipDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a tribe's ship, so it can be used in help files
-   without having to access an actual instance of the ship on the map.
-   See also :class:`MapObjectDescription` for more properties.
+   A static description of a tribe's ship. See also
+   :class:`MapObjectDescription` for more properties.
 */
 const char LuaShipDescription::className[] = "ShipDescription";
 const MethodType<LuaShipDescription> LuaShipDescription::Methods[] = {
@@ -3679,9 +3674,8 @@ WareDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a tribe's ware, so it can be used in help files
-   without having to access an actual instance of the ware on the map.
-   See also :class:`MapObjectDescription` for more properties.
+   A static description of a tribe's ware. See also
+   :class:`MapObjectDescription` for more properties.
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
@@ -3716,14 +3710,12 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 /* RST
    .. method:: consumers(tribename)
 
-      Returns a list of buildings for the 'tribe' that consume this ware.
-      Loads the tribe if it hasn't been loaded yet.
+      (RO) Returns an array with :class:`~wl.map.BuildingDescription` with buildings that
+      need this ware for their production. Loads the tribe if it hasn't been loaded yet.
 
-      :arg tribename: the name of the tribe that this ware gets checked for
+      :arg tribename: The name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
 
-      (RO) An array with :class:`LuaBuildingDescription` with buildings that
-      need this ware for their production.
 */
 int LuaWareDescription::consumers(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -3747,10 +3739,11 @@ int LuaWareDescription::consumers(lua_State* L) {
 /* RST
    .. method:: is_construction_material(tribename)
 
-      :arg tribename: the name of the tribe that this ware gets checked for
+      (RO) Returns :const:`true` if this ware is used by the tribe's construction sites.
+
+      :arg tribename: The name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
 
-      (RO) A bool that is true if this ware is used by the tribe's construction sites.
 */
 int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
@@ -3769,14 +3762,12 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 /* RST
    .. method:: producers(tribename)
 
-      Returns a list of buildings for the 'tribe' that produce this ware.
-      Loads the tribe if it hasn't been loaded yet.
+      (RO) Returns an array with :class:`LuaBuildingDescription` with buildings that
+      can produce this ware. Loads the tribe if it hasn't been loaded yet.
 
-      :arg tribename: the name of the tribe that this ware gets checked for
+      :arg tribename: The name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
 
-      (RO) An array with :class:`LuaBuildingDescription` with buildings that
-      can procude this ware.
 */
 int LuaWareDescription::producers(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -3805,9 +3796,8 @@ WorkerDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a tribe's worker, so it can be used in help files
-   without having to access an actual instance of the worker on the map.
-   See also :class:`MapObjectDescription` for more properties.
+   A static description of a tribe's worker. See also
+   :class:`MapObjectDescription` for more properties.
 */
 const char LuaWorkerDescription::className[] = "WorkerDescription";
 const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
@@ -3857,7 +3847,8 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-      (RO) a list of building requirements, e.g. {"atlanteans_carrier", "ax"}
+      (RO) A list of building requirements, e.g. for an atlateans woodcutter this is
+      ``{"atlanteans_carrier","saw"}``.
 */
 int LuaWorkerDescription::get_buildcost(lua_State* L) {
 	lua_newtable(L);
@@ -3893,7 +3884,7 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 /* RST
    .. attribute:: buildable
 
-      (RO) returns true if this worker is buildable
+      (RO) Returns true if this worker is buildable.
 */
 int LuaWorkerDescription::get_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
@@ -3903,7 +3894,7 @@ int LuaWorkerDescription::get_buildable(lua_State* L) {
 /* RST
    .. attribute:: needed_experience
 
-      (RO) the experience the worker needs to reach this level.
+      (RO) The experience the worker needs to reach this level.
 */
 int LuaWorkerDescription::get_needed_experience(lua_State* L) {
 	lua_pushinteger(L, get()->get_needed_experience());
