@@ -3158,7 +3158,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
       program. Multiple entries in {ware name} are alternatives (OR logic)).
    
       :arg program_name: The name of the production program that we want to get the consumed wares
-      for. See :ref:`production site programs <productionsite_programs>`.
+         for. See :ref:`production site programs <productionsite_programs>`.
       :type program_name: :class:`string`
 
 
