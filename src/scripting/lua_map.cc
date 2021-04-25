@@ -2401,14 +2401,14 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: terrain_affinity
 
-      (RO) For trees: A table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
-      preferred_humidity (uint), and preferred_temperature (uint),
-      or nil if the immovable has no terrain affinity.
-      
+      (RO) For trees: A table containing numbers labeled as pickiness (uint), preferred_fertility
+   (uint), preferred_humidity (uint), and preferred_temperature (uint), or nil if the immovable has
+   no terrain affinity.
+
       E.g. for a beech this will be:
-      
+
       .. code-block:: lua
-      
+
          {
             preferred_humidity = 400,
             preferred_temperature = 110,
@@ -3067,7 +3067,7 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
 /* RST
    .. attribute:: production_programs
 
-   (RO) An array with the production program names as string. See 
+   (RO) An array with the production program names as string. See
    :ref:`production site programs <productionsite_programs>`.
 */
 int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
@@ -3154,9 +3154,9 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 /* RST
    .. method:: consumed_wares_workers(program_name)
 
-      (RO) Returns a table of ``{{ware_name},ware_amount}`` for the wares consumed by this production
-      program. Multiple entries in {ware name} are alternatives (OR logic)).
-   
+      (RO) Returns a table of ``{{ware_name},ware_amount}`` for the wares consumed by this
+   production program. Multiple entries in {ware name} are alternatives (OR logic)).
+
       :arg program_name: The name of the production program that we want to get the consumed wares
       for. See :ref:`production site programs <productionsite_programs>`.
       :type program_name: :class:`string`
@@ -3194,7 +3194,7 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 
       (RO) Returns a table of ``{ware_name,ware_amount}`` for the wares produced by this production
       program. See :ref:`production site programs <productionsite_programs>`.
-      
+
       :arg program_name: The name of the production program that we want to get the produced wares
             for
       :type program_name: :class:`string`
@@ -3213,10 +3213,10 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 
 /* RST
    .. method:: recruited_workers(program_name)
-      
+
       (RO) Returns a table of ``{worker_name,worker_amount}`` for the workers recruited
       by this production program. See :ref:`production site programs <productionsite_programs>`.
-      
+
       :arg program_name: the name of the production program that we want to get the recruited
             workers for
       :type program_name: :class:`string`
