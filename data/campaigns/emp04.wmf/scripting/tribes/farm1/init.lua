@@ -4,7 +4,7 @@ push_textdomain("scenario_emp04.wmf")
 
 descriptions:new_productionsite_type {
    name = "empire_farm1",
-   descname = "Farm",
+   descname = pgettext("empire_building", "Farm"),
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -39,21 +39,21 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         descname = "working",
+         descname = pgettext("empire_building", "working"),
          actions = {
             "call=plant",
             "call=harvest",
          }
       },
       plant = {
-         descname = "planting wheat",
+         descname = pgettext("empire_building", "planting wheat"),
          actions = {
             "sleep=duration:14s",
             "callworker=harvest"
          }
       },
       harvest = {
-         descname = "harvesting wheat",
+         descname = pgettext("empire_building", "harvesting wheat"),
          actions = {
             "sleep=duration:4s",
             "callworker=harvest"

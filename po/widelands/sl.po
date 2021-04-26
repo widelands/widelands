@@ -5,14 +5,14 @@
 # GunChleoc, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Matevž Jekovec <matevz.jekovec@gmail.com>, 2020
+# Matevž Jekovec <matevz.jekovec@gmail.com>, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-24 18:30+0000\n"
+"PO-Revision-Date: 2021-04-21 18:08+0000\n"
+"Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/widelands/widelands/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -624,8 +624,8 @@ msgstr "rudnik"
 msgid "port"
 msgstr "pristanišče"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -697,7 +697,7 @@ msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:204
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:140
 #: ../../src/ui_fsmenu/netsetup_lan.cc:130 ../../src/wui/mapdetails.cc:141
 #: ../../src/wui/minimap.cc:140
 msgid "Map"
@@ -730,7 +730,7 @@ msgstr "Avtorji: %s"
 
 #: ../../src/editor/tools/info_tool.cc:223
 #: ../../src/ui_fsmenu/addons_packager_box.cc:151
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Description: %s"
 msgstr "Opis: %s"
@@ -738,17 +738,17 @@ msgstr "Opis: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/tools/info_tool.cc:231
 msgid "(none)"
-msgstr ""
+msgstr "(brez)"
 
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Omogoči dodatke: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
@@ -998,7 +998,7 @@ msgstr "Klima"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Porazdelitev terena"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:129
 msgid "Water:"
@@ -1049,11 +1049,11 @@ msgstr "Privzeto"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:241
 msgid "Alpine"
-msgstr ""
+msgstr "Alpe"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:242
 msgid "Atoll"
-msgstr ""
+msgstr "Atoli"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:243
@@ -1432,7 +1432,7 @@ msgstr "Neznana napaka pri branju podatkov iz grafičnega gonilnika."
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "Widelands ne bo deloval, ker ni bilo mogoče zaznati različice OpenGL."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1451,7 +1451,7 @@ msgstr "Widelands se ne more zagnati, ker je grafični gonilnik prestar."
 #: ../../src/graphic/gl/initialize.cc:223
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Različica %1$u mora biti vsaj %2$u.%3$u ali novejša."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1459,15 +1459,15 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$s mora biti vsaj %2$u.%3$u ali novejša."
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "Jezik senčilnika"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1552,19 +1552,19 @@ msgstr "Napaka"
 
 #: ../../src/logic/addons.cc:46
 msgid "Tribes"
-msgstr ""
+msgstr "Plemena"
 
 #: ../../src/logic/addons.cc:48
 msgid "World"
-msgstr ""
+msgstr "Svet"
 
 #: ../../src/logic/addons.cc:51
 msgid "Script"
-msgstr ""
+msgstr "Skripta"
 
 #: ../../src/logic/addons.cc:52
 msgid "Map Set"
-msgstr ""
+msgstr "Nabor zemljevidov"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:54 ../../src/ui_fsmenu/campaigndetails.cc:49
@@ -1573,39 +1573,39 @@ msgstr "Kampanja"
 
 #: ../../src/logic/addons.cc:58
 msgid "Win Condition"
-msgstr ""
+msgstr "Pogoji za zmago"
 
 #: ../../src/logic/addons.cc:60
 msgid "Starting Condition"
-msgstr ""
+msgstr "Začetni pogoji"
 
 #: ../../src/logic/addons.cc:85
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../src/logic/addons.cc:140
 msgid "No conflicts"
-msgstr ""
+msgstr "Ni konfliktov"
 
 #: ../../src/logic/addons.cc:145
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
-msgstr ""
+msgstr "%1$s (pričakovana različica %2$s, najdena %3$s)"
 
 #: ../../src/logic/addons.cc:150 ../../src/logic/addons.cc:190
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
-msgstr ""
+msgstr "%1$s, %2$s (pričakovana različica %3$s, najdena %4$s)"
 
 #: ../../src/logic/addons.cc:156
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$u dodatek z napačno različico: %2$s"
+msgstr[1] "%1$u dodatka z napačno različico: %2$s"
+msgstr[2] "%1$u dodatki z napačno različico: %2$s"
+msgstr[3] "%1$u dodatkov z napačno različico: %2$s"
 
 #: ../../src/logic/addons.cc:175
 #, c-format
@@ -1652,7 +1652,7 @@ msgstr[3] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:215
 msgid "None"
-msgstr ""
+msgstr "Brez"
 
 #: ../../src/logic/addons.cc:219
 #, c-format
@@ -1842,10 +1842,10 @@ msgstr[3] "%1% vojakov (+%2%)"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:428
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaka"
+msgstr[2] "%1% vojaki"
+msgstr[3] "%1% vojakov"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently open soldier slots in the building. %3% is the maximum number of
@@ -2276,7 +2276,7 @@ msgstr "Geolog je našel surovino."
 #: ../../src/logic/map_objects/tribes/worker.cc:2066
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "Vaš %s ne najde poti domov in bo najverjetneje umrl."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../src/logic/map_objects/tribes/worker.cc:2073
@@ -2319,7 +2319,7 @@ msgstr "neprehodno"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Datoteka z zemljevidom je neveljavna:\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
@@ -3093,33 +3093,33 @@ msgstr ""
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
-msgstr ""
+msgstr "Privzeta barva"
 
 #: ../../src/ui_basic/color_chooser.cc:328
 msgid "Red"
-msgstr ""
+msgstr "Rdeča"
 
 #: ../../src/ui_basic/color_chooser.cc:340
 msgid "Green"
-msgstr ""
+msgstr "Zelena"
 
 #: ../../src/ui_basic/color_chooser.cc:352
 msgid "Blue"
-msgstr ""
+msgstr "Modra"
 
 #: ../../src/ui_basic/dropdown.cc:112
 msgctxt "dropdown"
@@ -3195,7 +3195,7 @@ msgstr "Minimiraj"
 msgid "Restore"
 msgstr "Obnovi"
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:195
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
 msgid "Pin"
 msgstr "Pripni"
 
@@ -3213,11 +3213,11 @@ msgstr "Napaka Lua"
 
 #: ../../src/ui_fsmenu/addons.cc:115
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Urejevalnik dodatkov"
 
 #: ../../src/ui_fsmenu/addons.cc:156
 msgid "Verified only"
-msgstr ""
+msgstr "Samo preverjeni"
 
 #: ../../src/ui_fsmenu/addons.cc:157
 msgid "Show only verified add-ons in the Browse tab"
@@ -3225,28 +3225,28 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:165
 msgid "Sort by"
-msgstr ""
+msgstr "Uredi po"
 
 #: ../../src/ui_fsmenu/addons.cc:176
 #: ../../src/ui_fsmenu/training_wheel_options.cc:120
 msgid "Reset"
-msgstr ""
+msgstr "Ponastavi"
 
 #: ../../src/ui_fsmenu/addons.cc:177
 msgid "Reset the filters"
-msgstr ""
+msgstr "Ponastavi filtre"
 
 #: ../../src/ui_fsmenu/addons.cc:193
 msgid "Refresh"
-msgstr ""
+msgstr "Osveži"
 
 #: ../../src/ui_fsmenu/addons.cc:194
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Osveži seznam dodatkov s strežnika"
 
 #: ../../src/ui_fsmenu/addons.cc:211
 msgid "Fix dependencies…"
-msgstr ""
+msgstr "Popravi odvisnosti ..."
 
 #: ../../src/ui_fsmenu/addons.cc:212
 msgid "Try to automatically fix the dependency errors"
@@ -3295,11 +3295,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:303
 msgid "Open Link"
-msgstr ""
+msgstr "Odpri povezavo"
 
 #: ../../src/ui_fsmenu/addons.cc:305
 msgid "Copy Link"
-msgstr ""
+msgstr "Kopiraj povezavo"
 
 #: ../../src/ui_fsmenu/addons.cc:325
 #, c-format
@@ -3310,47 +3310,47 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:355
 msgid "Development"
-msgstr ""
+msgstr "Razvoj"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons.cc:358
 msgid "Name"
-msgstr ""
+msgstr "Ime"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../src/ui_fsmenu/addons.cc:360
 msgid "Name (descending)"
-msgstr ""
+msgstr "Ime (padajoče)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:362
 msgid "Best average rating"
-msgstr ""
+msgstr "Najboljša povprečna ocena"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:364
 msgid "Worst average rating"
-msgstr ""
+msgstr "Najslabša povprečna ocena"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons.cc:366
 msgid "Most often downloaded"
-msgstr ""
+msgstr "Največkrat prenešeno"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons.cc:368
 msgid "Least often downloaded"
-msgstr ""
+msgstr "Najmanjkrat prenešeno"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons.cc:370
 msgid "Oldest"
-msgstr ""
+msgstr "Najstarejši"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons.cc:372
 msgid "Newest"
-msgstr ""
+msgstr "Najnovejši"
 
 #: ../../src/ui_fsmenu/addons.cc:375
 msgid "Filter add-ons by name"
@@ -3380,11 +3380,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:468 ../../src/ui_fsmenu/addons.cc:1998
 #: ../../src/ui_fsmenu/addons.cc:2022
 msgid "NOT VERIFIED"
-msgstr ""
+msgstr "NI PREVERJENO"
 
 #: ../../src/ui_fsmenu/addons.cc:468
 msgid "verified"
-msgstr ""
+msgstr "preverjeno"
 
 #: ../../src/ui_fsmenu/addons.cc:472
 msgid "Upgrade All"
@@ -3414,12 +3414,12 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:837
 msgid "Browse"
-msgstr ""
+msgstr "Brskaj"
 
 #: ../../src/ui_fsmenu/addons.cc:838
 #, c-format
 msgid "Browse (%u)"
-msgstr ""
+msgstr "Brskaj (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:848
 #, c-format
@@ -3567,11 +3567,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:1447 ../../src/ui_fsmenu/addons.cc:1496
 msgid "Disable"
-msgstr ""
+msgstr "Onemogoči"
 
 #: ../../src/ui_fsmenu/addons.cc:1447 ../../src/ui_fsmenu/addons.cc:1496
 msgid "Enable"
-msgstr ""
+msgstr "Omogoči"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons.cc:1460 ../../src/ui_fsmenu/addons.cc:1923
@@ -3630,36 +3630,36 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:1605
 msgid "Your vote"
-msgstr ""
+msgstr "Vaša ocena"
 
 #: ../../src/ui_fsmenu/addons.cc:1623 ../../src/ui_fsmenu/addons.cc:2078
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Povprečna ocena: %1$.3f (%2$u mnenje)"
+msgstr[1] "Povprečna ocena: %1$.3f (%2$u mnenji)"
+msgstr[2] "Povprečna ocena: %1$.3f (%2$u mnenja)"
+msgstr[3] "Povprečna ocena: %1$.3f (%2$u mnenj)"
 
 #: ../../src/ui_fsmenu/addons.cc:1628 ../../src/ui_fsmenu/addons.cc:2083
 msgid "No votes yet"
-msgstr ""
+msgstr "Ni še ocen"
 
 #: ../../src/ui_fsmenu/addons.cc:1638
 msgid "Next screenshot"
-msgstr ""
+msgstr "Naslednja zaslonska slika"
 
 #: ../../src/ui_fsmenu/addons.cc:1647
 msgid "Previous screenshot"
-msgstr ""
+msgstr "Prejšnja zaslonska slika"
 
 #: ../../src/ui_fsmenu/addons.cc:1655
 msgid "Submit comment"
-msgstr ""
+msgstr "Dodaj komentar"
 
 #: ../../src/ui_fsmenu/addons.cc:1661
 msgid "No comments yet."
-msgstr ""
+msgstr "Brez komentarjev."
 
 #: ../../src/ui_fsmenu/addons.cc:1663
 #, c-format
@@ -3743,7 +3743,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:1998 ../../src/ui_fsmenu/addons.cc:2022
 msgid "Verified"
-msgstr ""
+msgstr "Preverjen"
 
 #: ../../src/ui_fsmenu/addons.cc:2014
 #, c-format
@@ -3811,7 +3811,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:76
 msgid "New add-on"
-msgstr ""
+msgstr "Nov dodatek"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:84
 #: ../../src/ui_fsmenu/addons_packager_box.cc:74
@@ -3840,27 +3840,27 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:133
 msgid "Name:"
-msgstr ""
+msgstr "Ime:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:138
 msgid "Author:"
-msgstr ""
+msgstr "Avtor:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:143
 msgid "Version:"
-msgstr ""
+msgstr "Različica:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:310
 msgid "New Add-On"
-msgstr ""
+msgstr "Nov dodatek"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:311
 msgid "Enter the name for the new add-on."
-msgstr ""
+msgstr "Vnesite ime za nov dodatek."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:313
 msgid "Category"
-msgstr ""
+msgstr "Kategorija"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:332
 #: ../../src/ui_fsmenu/addons_packager.cc:347
@@ -3868,31 +3868,31 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "Invalid Name"
-msgstr ""
+msgstr "Neveljavno ime"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:332
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid. Please choose a different name."
-msgstr ""
+msgstr "To ime je neveljavno. Prosimo, vnesite drugo ime."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:347
 msgid "An add-on with this internal name already exists."
-msgstr ""
+msgstr "Dodatek s tem internim imenom že obstaja."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:352
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr ""
+msgstr "Dodatek s tem internim imenom je bil nedavno zbrisan. Prosimo, shranite spremembe pred ponovno uporabo tega imena."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:394
 msgid "Delete Add-on"
-msgstr ""
+msgstr "Zbriši dodatek"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:396
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
-msgstr ""
+msgstr "Ste prepričani, da želite zbrisati dodatek '%s'?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:397
 #, c-format
@@ -3900,7 +3900,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "Ste prepričani, da želite zbrisati dodatek '%s' lokalno?\n\nTega dodatka ni mogoče več naložiti s strežnika."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:418
 #, c-format
@@ -3922,7 +3922,7 @@ msgstr[3] ""
 msgid ""
 "%1$s\n"
 "· %2$s"
-msgstr ""
+msgstr "%1$s\n. %2$s"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:431
 msgid "Quit Packager"
@@ -4022,20 +4022,20 @@ msgid "Name: %s"
 msgstr "Ime: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
 msgstr "Velikost: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$ux%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
 msgstr "Igralci: %s"
@@ -4261,7 +4261,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
-msgstr ""
+msgstr "Zaženi igro"
 
 #: ../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -4689,44 +4689,44 @@ msgstr ""
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr "napačno pleme '%s'"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
 msgstr "Shranjeni igralci"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
 msgstr "Igralec %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr "Igralec %1$u (%2$s): %3$s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
 msgstr "Podrobnosti zemljevida"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Scenario Details"
 msgstr "Podrobnosti scenarija"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Hint: %s"
 msgstr "Namig: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
 msgstr "Ni izbranega zemljevida"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:194
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:195
 msgid "(no map)"
 msgstr "(ni zemljevida)"
 
@@ -6233,8 +6233,8 @@ msgstr "Zamenjaj odklopljenega igralca z izbrano UI in nadaljuj z igranjem"
 msgid "AI for the disconnected player"
 msgstr "UI za odklopljenega igralca"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6544,35 +6544,35 @@ msgstr "Vojska"
 msgid "Info Panel Visibility"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:198
+#: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:203
+#: ../../src/wui/info_panel.cc:204
 msgid "Hide"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:384
+#: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:434
+#: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:438
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""
