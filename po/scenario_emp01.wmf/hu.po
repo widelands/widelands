@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016,2020
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016,2020
 # GunChleoc, 2018
@@ -17,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-10 12:52+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-24 00:19+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -29,17 +30,17 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
-msgstr "Építs egy erődházat!"
+msgstr "Építs egy őrbódét!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
-msgstr "Erődház"
+msgstr "Őrbódé"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "Építs egy erődházat a piros ház szimbólumon az erdő keleti oldalán, az ideiglenes főhadiszállásodtól jobbra!"
+msgstr "Építs egy őrbódét a piros ház szimbólumon az erdő keleti oldalán, az ideiglenes főhadiszállásodtól jobbra!"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
@@ -216,7 +217,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr "Uram, attól félek, nem vagyunk biztonságban ezen az idegen földön. Ki tudja, miféle szörnyű teremtmények élnek az erdőn túl, abban a hatalmas sivatagban? Mi lesz, ha ezek megbújnak az erdőben, és becserkésznek minket?"
+msgstr "Uram! Attól félek, nem vagyunk biztonságban ezen az idegen földön. Ki tudja, miféle szörnyű teremtmények élnek az erdőn túl, abban a hatalmas sivatagban? Mi lesz, ha ezek megbújnak az erdőben, és becserkésznek minket?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -232,7 +233,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr "Mindenképpen építened kellene egy erődházat az erdő keleti részén. Aztán az egyik emberem őrt állhat a sötétben, hogy biztonságban legyünk ezektől a teremtményektől."
+msgstr "Mindenképpen építened kellene egy őrbódét az erdő keleti részén. Aztán az egyik emberem őrt állhat a sötétben, hogy biztonságban legyünk ezektől a teremtményektől."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
@@ -247,7 +248,7 @@ msgstr "Saledus megkönnyebbülve felsóhajt…"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr "Uram, láttam, hogy elkészült az erődház építése, így oda is rendeltem egyik legjobb katonámat, hogy szemmel tartsa a sivatagot."
+msgstr "Uram! Láttam, hogy elkészült az őrbódé építése, így oda is rendeltem egyik legjobb katonámat, hogy szemmel tartsa a sivatagot."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:145
@@ -276,7 +277,7 @@ msgstr "Üdvözöllek, Lutius, most futottam össze Saledusszal odakint."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "Beszélt az erődházról. Nos, nem hinném, hogy több erődházra lenne szükségünk – ehelyett inkább más dolgokra kellene most összpontosítanunk."
+msgstr "Beszélt az őrbódéról. Nos, nem hinném, hogy több őrbódéra lenne szükségünk – ehelyett inkább más dolgokra kellene most összpontosítanunk."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -342,7 +343,7 @@ msgstr "Ezek a fák menedéket adnak a sivatag homokviharai elől, árnyat a for
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr "Lutius, kérlek, találj valakit, akinek gondja lesz új fák ültetésére."
+msgstr "Lutius! Kérlek, találj valakit, akinek gondja lesz új fák ültetésére."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
@@ -357,7 +358,7 @@ msgstr "Saledus megjegyzi…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr "Uram, gondolkodtam a sziget déli partján álló sziklákról. Talán faraghatnánk belőlük némi hasznos gránitot és gyönyörű márványt."
+msgstr "Uram! Gondolkodtam a sziget déli partján álló sziklákról. Talán faraghatnánk belőlük némi hasznos gránitot és gyönyörű márványt."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
@@ -380,7 +381,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "Uram, ma nagy lépést tettünk első várunk megépítése felé. A kőfejtő délen elkezdett dolgozni, és hamarosan gránittal és gyönyörű márvánnyal lát el minket."
+msgstr "Uram! Ma nagy lépést tettünk első várunk megépítése felé. A kőfejtő délen elkezdett dolgozni, és hamarosan gránittal és gyönyörű márvánnyal lát el minket."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
@@ -434,4 +435,4 @@ msgstr "Saledus így szól:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr "Uram, biztonságossá tetted ezt a félszigetet. De most már ideje továbblépnünk!"
+msgstr "Uram! Biztonságossá tetted ezt a félszigetet. De most már ideje továbblépnünk!"
