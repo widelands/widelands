@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-21 13:12+0000\n"
 "PO-Revision-Date: 2021-03-13 10:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -271,8 +271,8 @@ msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth dhe ro
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:360
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:365
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:361
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:366
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -282,7 +282,7 @@ msgstr[2] "%i mionaidean"
 msgstr[3] "%i mionaid"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:362
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:363
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% uair ’s %2%"
@@ -291,7 +291,7 @@ msgstr[2] "%1% uairean ’s %2%"
 msgstr[3] "%1% uair ’s %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:368
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:369
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% uair"
@@ -300,7 +300,7 @@ msgstr[2] "%1% uairean"
 msgstr[3] "%1% uair"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:371
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:372
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Thig an geama gu crìch an ceann %s."

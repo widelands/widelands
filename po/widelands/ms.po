@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-04-24 18:30+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
@@ -263,8 +263,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dis"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -277,12 +277,12 @@ msgstr "Menu Utama"
 msgid "Tools"
 msgstr "Alatan"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -472,10 +472,10 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -623,8 +623,8 @@ msgstr "periuk api"
 msgid "port"
 msgstr "pelabuhan"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -3140,7 +3140,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:195
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
 msgid "Pin"
 msgstr ""
 
@@ -6438,35 +6438,35 @@ msgstr "Tentera"
 msgid "Info Panel Visibility"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:198
+#: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:203
+#: ../../src/wui/info_panel.cc:204
 msgid "Hide"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:384
+#: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:434
+#: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:438
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""
