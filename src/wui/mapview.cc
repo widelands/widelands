@@ -532,7 +532,7 @@ bool MapView::handle_mousemove(
 
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
-			pan_by(Vector2i(xdiff, ydiff), Transition::Jump);
+            pan_by(Vector2i(-xdiff, -ydiff), Transition::Jump);
 		} else {
 			stop_dragging();
 		}
