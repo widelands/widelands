@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         descname = "brewing beer",
+         descname = pgettext("empire_building", "brewing beer"),
          actions = {
             "sleep=duration:30s",
             "return=skipped unless economy needs beer",
