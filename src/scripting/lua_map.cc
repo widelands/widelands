@@ -1074,7 +1074,7 @@ HasWares
          and he will return 0.
       * an :class:`array` of ware names.
          In this case a :class:`table` of
-         (ware name,amount) pairs is returned where only the requested wares
+         ``{ware_name=amount}`` pairs is returned where only the requested wares
          are listed. All other entries are :const:`nil`.
 
       :returns: :class:`integer` or :class:`table`
@@ -1085,10 +1085,10 @@ HasWares
 
       Sets the wares available in this location. Either takes two arguments,
       a ware name and an amount to set it to. Or it takes a table of
-      (ware name, amount) pairs. Wares are created and added to an economy out
+      ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
       of thin air.
 
-      :arg which: name of ware or (ware_name, amount) table
+      :arg which: name of ware or ``{ware_name=amount}`` table
       :type which: :class:`string` or :class:`table`
       :arg amount: this many units will be available after the call
       :type amount: :class:`integer`
@@ -1097,7 +1097,7 @@ HasWares
 /* RST
    .. attribute:: valid_wares
 
-      (RO) A :class:`table` of (ware_name, count) if storage is somehow
+      (RO) A :class:`table` of ``{ware_name=count}`` if storage is somehow
       constrained in this location. For example for a
       :class:`~wl.map.ProductionSite` this is the information what wares
       and how much can be stored as inputs. For unconstrained storage (like
@@ -1143,7 +1143,7 @@ HasInputs
            and he will return 0.
       * an :class:`array` of ware and worker names.
            In this case a :class:`table` of
-           (ware/worker name,amount) pairs is returned where only the requested
+           ``{ware/worker_name=amount}`` pairs is returned where only the requested
            wares/workers are listed. All other entries are :const:`nil`.
 
       :returns: :class:`integer` or :class:`table`
@@ -1155,10 +1155,10 @@ HasInputs
       Sets the wares/workers available in this location which will
       be consumed by the production/training programm. Either takes two arguments,
       a ware/worker name and an amount to set it to. Or it takes a table of
-      (ware/worker name, amount) pairs. Wares are created and added to an
+      ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
       economy out of thin air.
 
-      :arg which: name of ware/worker or (ware/worker name, amount) table
+      :arg which: name of ware/worker or ``{ware/worker_name=amount}`` table
       :type which: :class:`string` or :class:`table`
       :arg amount: this many units will be available after the call
       :type amount: :class:`integer`
@@ -1167,7 +1167,7 @@ HasInputs
 /* RST
    .. attribute:: valid_inputs
 
-      (RO) A :class:`table` of (ware/worker name, count) which describes how
+      (RO) A :class:`table` of ``{ware/worker_name=amount}`` which describes how
       many wares/workers can be stored here for consumption. For example for a
       :class:`~wl.map.ProductionSite` this is the information what wares/workers
       and can be stored in which amount as inputs.
@@ -1302,7 +1302,7 @@ HasSoldiers
          would return the number of soldiers of level 0 in this location.
 
       * the string :const:`all`.
-         In this case a :class:`table` of (soldier descriptions, count) is
+         In this case a :class:`table` of ``{soldier_descriptions=count}`` is
          returned. Note that the following will not work, because Lua indexes
          tables by identity:
 
@@ -1332,7 +1332,7 @@ HasSoldiers
       a name a :class:`array` is used to define the soldier. See
       :meth:`get_soldiers` for an example.
 
-      :arg which: either a table of (description, count) pairs or one
+      :arg which: either a table of ``{description=count}`` pairs or one
          description. In that case amount has to be specified as well.
       :type which: :class:`table` or :class:`array`.
 
@@ -1377,7 +1377,7 @@ Map
 .. class:: Map
 
    Access to the map and its objects. You cannot instantiate this directly,
-   instead access it via :attr:`wl.Game().map`.
+   instead access it via ``wl.Game().map``.
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
@@ -1950,7 +1950,7 @@ int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 /* RST
    .. attribute:: collectors_points_table
 
-      (RO) the ``collectors_points_table`` as defined in the tribe's `units.lua`.
+      (RO) the ``collectors_points_table`` as defined in the tribe's ``units.lua``.
       See `data/tribes/initializations/atlanteans/units.lua` for more information
       on the table structure.
 */
@@ -2374,7 +2374,7 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-      (RO) A table of ware count pairs, describing the build cost for the
+      (RO) A :class:`table` of ``{ware=amount}`` pairs, describing the build cost for the
       immovable.
 */
 int LuaImmovableDescription::get_buildcost(lua_State* L) {
@@ -2488,7 +2488,7 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
    .. method:: probability_to_grow(terrain_description)
 
       (RO) For trees: Returns a double describing the probability that this tree will grow on the
-      given terrain. Returns nil if this immovable tree has no terrain affinity (all trees should
+      given terrain. Returns nil if this tree has no terrain affinity (all trees should
       have one).
 
       :arg terrain_description: The terrain that we are checking the probability for.
@@ -2568,7 +2568,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-      (RO) A table of ``{ware,build_cost}`` for the building.
+      (RO) A table of ``{ware=build_cost}`` for the building.
 */
 int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), Widelands::MapObjectType::WARE);
@@ -2635,7 +2635,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 /* RST
    .. attribute:: enhancement_cost
 
-      (RO) A :class:`table` of ``{warename,cost}`` for enhancing to this building type.
+      (RO) A :class:`table` of ``{warename=cost}`` for enhancing to this building type.
 */
 int LuaBuildingDescription::get_enhancement_cost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->enhancement_cost(), Widelands::MapObjectType::WARE);
@@ -2697,7 +2697,7 @@ int LuaBuildingDescription::get_size(lua_State* L) {
 /* RST
    .. attribute:: returns_on_dismantle
 
-      (RO) A :class:`table` of wares amount returned upon dismantling.
+      (RO) A :class:`table` of ``{ware=amount,…}`` returned upon dismantling.
 */
 int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
 	return wares_or_workers_map_to_lua(
@@ -2707,7 +2707,7 @@ int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
 /* RST
    .. attribute:: enhancement_returns_on_dismantle
 
-      (RO) A :class:`table` of wares amount returned upon dismantling an enhanced building.
+      (RO) A :class:`table` of ``{ware=amount,…}`` returned upon dismantling an enhanced building.
 */
 int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
 	return wares_or_workers_map_to_lua(
@@ -2893,7 +2893,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 
       (RO) An array of :class:`ResourceDescription` containing the resources that
       this building will collect from the map, along with the maximum percentage mined and the
-      chance to still find some more after depletion. E.g. for a Fishers's this will be:
+      chance to still find some more after depletion. E.g. for a Fisher's hut this will be:
 
       .. code-block:: lua
 
@@ -3155,7 +3155,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
    .. method:: consumed_wares_workers(program_name)
 
       (RO) Returns a table of ``{{ware_name},ware_amount}`` for the wares consumed by this
-      production program. Multiple entries in {ware name} are alternatives (OR logic)).
+      production program. Multiple entries in ``{ware_name}`` are alternatives (OR logic)).
 
       :arg program_name: The name of the production program that we want to get the consumed wares
          for. See :ref:`production site programs <productionsite_programs>`.
@@ -3192,7 +3192,7 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 /* RST
    .. method:: produced_wares(program_name)
 
-      (RO) Returns a table of ``{ware_name,ware_amount}`` for the wares produced by this production
+      (RO) Returns a table of ``{ware_name=ware_amount}`` for the wares produced by this production
       program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: The name of the production program that we want to get the produced wares
@@ -3214,7 +3214,7 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 /* RST
    .. method:: recruited_workers(program_name)
 
-      (RO) Returns a table of ``{worker_name,worker_amount}`` for the workers recruited
+      (RO) Returns a table of ``{worker_name=worker_amount}`` for the workers recruited
       by this production program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: the name of the production program that we want to get the recruited
@@ -3501,7 +3501,7 @@ int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 /* RST
    .. attribute:: weapons_attack
 
-      (RO) A table with weapon ware names used for Attack training
+      (RO) A table with ``{weapon=ware_names}`` used for Attack training
 */
 int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
 	lua_newtable(L);
@@ -3517,7 +3517,7 @@ int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
 /* RST
    .. attribute:: weapons_defense
 
-      (RO) A table with weapon ware names used for Defense training
+      (RO) A table with ``{weapon=ware_names}`` used for Defense training
 */
 int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
 	lua_newtable(L);
@@ -3533,7 +3533,7 @@ int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
 /* RST
    .. attribute:: weapons_evade
 
-      (RO) A table with weapon ware names used for Evade training
+      (RO) A table with ``{weapon=ware_names}`` used for Evade training
 */
 int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
 	lua_newtable(L);
@@ -3549,7 +3549,7 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
 /* RST
    .. attribute:: weapons_health
 
-      (RO) A table with weapon ware names used for Health training
+      (RO) A table with ``{weapon=ware_names}`` used for Health training
 */
 int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
 	lua_newtable(L);
@@ -3599,7 +3599,8 @@ int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 	return 1;
 }
 
-/* RST
+/*TODO: Readd RST once this get fully implemented*/
+/*
 MarketDescription
 -----------------
 
@@ -3674,8 +3675,7 @@ WareDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a tribe's ware. See also
-   :class:`MapObjectDescription` for more properties.
+   A static description of a tribe's ware. See the parent class for more properties.
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
@@ -3762,7 +3762,7 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 /* RST
    .. method:: producers(tribename)
 
-      (RO) Returns an array with :class:`LuaBuildingDescription` with buildings that
+      (RO) Returns an :class:`array` with :class:`LuaBuildingDescription` with buildings that
       can produce this ware. Loads the tribe if it hasn't been loaded yet.
 
       :arg tribename: The name of the tribe that this ware gets checked for
@@ -3796,8 +3796,7 @@ WorkerDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a tribe's worker. See also
-   :class:`MapObjectDescription` for more properties.
+   A static description of a tribe's worker. See the parent class for more properties.
 */
 const char LuaWorkerDescription::className[] = "WorkerDescription";
 const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
@@ -3866,7 +3865,7 @@ int LuaWorkerDescription::get_buildcost(lua_State* L) {
 /* RST
    .. attribute:: employers
 
-      (RO) An array with :class:`LuaBuildingDescription` with buildings where
+      (RO) An :class:`array` with :class:`LuaBuildingDescription` with buildings where
       this worker can be employed.
 */
 int LuaWorkerDescription::get_employers(lua_State* L) {
@@ -4114,7 +4113,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: name
 
-      (RO) the :class:`string` internal name of this resource
+      (RO) The internal name of this resource as :class:`string`
 */
 
 int LuaResourceDescription::get_name(lua_State* L) {
@@ -4125,7 +4124,7 @@ int LuaResourceDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-      (RO) the :class:`string` display name of this resource
+      (RO) The display name of this resource as :class:`string`
 */
 
 int LuaResourceDescription::get_descname(lua_State* L) {
@@ -4136,7 +4135,7 @@ int LuaResourceDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: is_detectable
 
-      (RO) true if geologists can find this resource
+      (RO) :const:`true` if geologists can find this resource
 */
 
 int LuaResourceDescription::get_is_detectable(lua_State* L) {
@@ -4147,7 +4146,7 @@ int LuaResourceDescription::get_is_detectable(lua_State* L) {
 /* RST
    .. attribute:: max_amount
 
-      (RO) the maximum amount of this resource that a terrain can have
+      (RO) The maximum amount of this resource that a terrain can have
 */
 
 int LuaResourceDescription::get_max_amount(lua_State* L) {
@@ -4158,7 +4157,7 @@ int LuaResourceDescription::get_max_amount(lua_State* L) {
 /* RST
    .. attribute:: representative_image
 
-      (RO) the :class:`string` path to the image representing this resource in the GUI
+      (RO) The path to the image representing this resource in the GUI as :class:`string`
 */
 int LuaResourceDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->representative_image());
@@ -4174,10 +4173,12 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
 /* RST
    .. method:: editor_image(amount)
 
-      :arg amount: The amount of the resource what we want an overlay image for
+      (RO) The path to the image representing the specified amount of this
+      resource as :class:`string`.
 
-      (RO) the :class:`string` path to the image representing the specified amount of this
-      resource
+      :arg amount: The amount of the resource what we want an overlay image for
+      :type amount: :class:`integer`
+
 */
 int LuaResourceDescription::editor_image(lua_State* L) {
 	if (lua_gettop(L) != 2) {
