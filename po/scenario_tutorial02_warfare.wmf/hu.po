@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-10 22:39+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-17 19:07+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -422,7 +422,7 @@ msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr "A kezdeti beállítás függ az épület típusától. A barbároknál az őrbódé az egyetlen, ami alaphelyzetben az újoncokat részesíti előnyben. Érdemes ezt a beállítást a mindenkori helyzetnek megfelelően megváltoztatni."
+msgstr "A kezdeti beállítás függ az épület típusától. A barbároknál az őrház az egyetlen, ami alaphelyzetben az újoncokat részesíti előnyben. Érdemes ezt a beállítást a mindenkori helyzetnek megfelelően megváltoztatni."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
@@ -483,7 +483,7 @@ msgstr "A harmadik szám mutatja, hogy hány katona hiányzik az épületből. A
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
-msgstr "Bontsd le az őrbódét!"
+msgstr "Bontsd le az őrházat!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Dismantling military buildings"
@@ -512,7 +512,7 @@ msgstr "Viszont egy katonai épület felszámolásának mindig veszélye van: az
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr "Láttad az őrbódédat? Mivel nem fér el benne sok katona, és egy erősebb határőrház mellett van, így nem sok haszna van."
+msgstr "Láttad az őrházadat? Mivel nem fér el benne sok katona, és egy erősebb határőrház mellett van, így nem sok haszna van."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
@@ -531,7 +531,7 @@ msgstr "Katonák, lelépni!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
-msgstr "Bontsd le az északnyugati őrbódét!"
+msgstr "Bontsd le az északnyugati őrházadat!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
@@ -543,7 +543,7 @@ msgstr "Egy katonai épületben állomásozó katonák számát a nyíl gombokka
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr "Bontsd le az északnyugati őrbódét, a határőrház mellett!"
+msgstr "Bontsd le az északnyugati őrházat, a határőrház mellett!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
