@@ -4,7 +4,7 @@ push_textdomain("scenario_emp04.wmf")
 
 descriptions:new_productionsite_type {
    name = "empire_lumberjacks_house1",
-   descname = "Lumberjack’s House",
+   descname = pgettext("empire_building", "Lumberjack’s House"),
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -35,7 +35,7 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         descname = "felling trees",
+         descname = pgettext("empire_building", "felling trees"),
          actions = {
             "sleep=duration:6m40s",
             "callworker=harvest"
