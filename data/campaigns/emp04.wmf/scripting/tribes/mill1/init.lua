@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         descname = "grinding wheat",
+         descname = pgettext("empire_building", "grinding wheat"),
          actions = {
             "sleep=duration:5s",
             "return=skipped unless economy needs flour",
