@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-24 18:30+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -626,8 +626,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -699,7 +699,7 @@ msgid "%1%x %2%"
 msgstr "%1%x%2%"
 
 #: ../../src/editor/tools/info_tool.cc:204
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:140
 #: ../../src/ui_fsmenu/netsetup_lan.cc:130 ../../src/wui/mapdetails.cc:141
 #: ../../src/wui/minimap.cc:140
 msgid "Map"
@@ -732,7 +732,7 @@ msgstr "作者：%s"
 
 #: ../../src/editor/tools/info_tool.cc:223
 #: ../../src/ui_fsmenu/addons_packager_box.cc:151
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Description: %s"
 msgstr "说明：%s"
@@ -3143,7 +3143,7 @@ msgstr "最小化"
 msgid "Restore"
 msgstr "还原"
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:195
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
 msgid "Pin"
 msgstr "固定"
 
@@ -3934,20 +3934,20 @@ msgid "Name: %s"
 msgstr "名称：%s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
 msgstr "大小：%s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
 msgstr "玩家：%s"
@@ -4601,44 +4601,44 @@ msgstr "找不到部落！"
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr "无效的部落'%s'"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
 msgstr "保存的玩家"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
 msgstr "玩家%u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr "玩家%1$u (%2$s): %3$s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
 msgstr "地图详情"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Scenario Details"
 msgstr "场景详情"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Hint: %s"
 msgstr "提示：%s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
 msgstr "没有选中地图"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:194
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:195
 msgid "(no map)"
 msgstr "(无地图)"
 
@@ -6142,8 +6142,8 @@ msgstr "用选定的AI替换断开连接的游戏玩家并继续进行游戏"
 msgid "AI for the disconnected player"
 msgstr "断开连接的游戏玩家的AI"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6441,35 +6441,35 @@ msgstr "军事"
 msgid "Info Panel Visibility"
 msgstr "信息面板可见性"
 
-#: ../../src/wui/info_panel.cc:198
+#: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
 msgstr "跟随鼠标"
 
-#: ../../src/wui/info_panel.cc:203
+#: ../../src/wui/info_panel.cc:204
 msgid "Hide"
 msgstr "隐藏"
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
 msgstr "将面板移至底部"
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
 msgstr "将面板移至顶部"
 
-#: ../../src/wui/info_panel.cc:384
+#: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:434
+#: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:438
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s · %2$s · %3$s"
