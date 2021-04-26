@@ -60,7 +60,7 @@ function reveal_randomly(plr, region, time)
 end
 
 -- RST
--- .. function:: hide_randomly(player, region, time, [permanent = false])
+-- .. function:: hide_randomly(player, region, time, permanent)
 --
 --    Hide a given region field by field, where the fields
 --    are chosen randomly. The animation runs the specified time regardless
@@ -74,6 +74,9 @@ end
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
+--    :arg permanent: Optional. Set to true for permanently hide. Set to false for unexplore.
+--               Defaults to false
+--    :type permanent: :class:`boolean`
 
 function hide_randomly(plr, region, time, permanent)
    time = time or 1000
@@ -136,7 +139,7 @@ function reveal_concentric(plr, center, max_radius, hide, delay)
 end
 
 -- RST
--- .. function:: hide_concentric(player, center, max_radius, delay)
+-- .. function:: hide_concentric(player, center, max_radius, delay, permanent)
 --
 --    Hide a part of the map in a concentric way beginning from max_radius onto
 --    center.
@@ -150,14 +153,21 @@ end
 --    :arg delay: Optional, defaults to 100. The delay between revealing each
 --                ring
 --    :type time: :class:`integer`
+--    :arg permanent: Optional. Set to true for permanently hide. Set to false for unexplore.
+--               Defaults to false
+--    :type permanent: :class:`boolean`
 
-function hide_concentric(plr, center, max_radius, delay)
+function hide_concentric(plr, center, max_radius, delay, permanent)
    delay = delay or 100
    -- Turn off buildhelp
    wl.ui.MapView().buildhelp = false
    while max_radius > 0 do
       local to_hide = center:region(max_radius, max_radius - 1)
-      plr:hide_fields(to_hide, true)
+      if permanent then
+         plr:hide_fields(to_hide, true)
+      else
+         plr:unexplore_fields(to_hide)
+      end
       sleep(delay)
       max_radius = max_radius -1
    end
