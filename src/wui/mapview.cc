@@ -324,6 +324,8 @@ MapView::MapView(
      dragging_(false),
      edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&
                      get_config_bool("edge_scrolling", false)),
+     invert_movement_(parent && !parent->get_parent() /* not in watch windows */ &&
+                     get_config_bool("invert_movement", false)),
      is_scrolling_x_(0),
      is_scrolling_y_(0) {
 }
@@ -532,7 +534,8 @@ bool MapView::handle_mousemove(
 
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
-            pan_by(Vector2i(-xdiff, -ydiff), Transition::Jump);
+            pan_by(Vector2i(invert_movement_ ? xdiff : -xdiff,
+                            invert_movement_ ? ydiff : -ydiff), Transition::Jump);
 		} else {
 			stop_dragging();
 		}
