@@ -3599,7 +3599,7 @@ int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 	return 1;
 }
 
-/*TODO: Readd RST once this get fully implemented*/
+// TODO(kaputtnik): Readd RST once this get fully implemented
 /*
 MarketDescription
 -----------------
@@ -6516,7 +6516,8 @@ bool LuaProductionSite::create_new_worker(lua_State* /* L */,
 	return ps.warp_worker(egbase, *wdes);
 }
 
-/* RST
+// TODO(kaputtnik): Readd RST once this get implemented
+/*
 Market
 ---------
 
@@ -6555,7 +6556,8 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
  ==========================================================
  */
 
-/* RST
+// TODO(kaputtnik): Readd RST once this get implemented
+/*
    .. method:: propose_trade(other_market, num_batches, items_to_send, items_to_receive)
 
       TODO(sirver,trading): document
