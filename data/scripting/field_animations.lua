@@ -60,7 +60,7 @@ function reveal_randomly(plr, region, time)
 end
 
 -- RST
--- .. function:: hide_randomly(player, region, time)
+-- .. function:: hide_randomly(player, region, time, [permanent = false])
 --
 --    Hide a given region field by field, where the fields
 --    are chosen randomly. The animation runs the specified time regardless
@@ -75,7 +75,7 @@ end
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
 
-function hide_randomly(plr, region, time)
+function hide_randomly(plr, region, time, permanent)
    time = time or 1000
    -- Turn off buildhelp
    wl.ui.MapView().buildhelp = false
@@ -84,7 +84,11 @@ function hide_randomly(plr, region, time)
    if delay < 1 then delay = 1 end
    while #region > 0 do
       local id = math.random(1, #region)
-      plr:hide_fields({region[id]},true)
+      if permanent then
+         plr:hide_fields({region[id]},true)
+      else
+         plr:unexplore_fields({region[id]})
+      end
       table.remove(region, id)
       sleep(delay)
    end
