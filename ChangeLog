@@ -548,6 +548,7 @@
 - Tribe-specific No Scout Hut Connected hint (#4770)
 - Fix textdomain for keyboard shortcuts (#4799)
 - Fix skipping of one-liner diffs in translation updates
+- Add missing `pgettext` calls in emp04 (#4830)
 
 
 ### Help and Documentation
