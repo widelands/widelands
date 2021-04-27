@@ -33,7 +33,7 @@ function reveal_randomly(plr, region, time)
    time = time or 1000
 
    -- Make sure the region is hidden
-   plr:hide_fields(region, true)
+   plr:hide_fields(region, "permanent")
 
    -- Turn off buildhelp during animation
    local buildhelp_state = wl.ui.MapView().buildhelp
@@ -130,7 +130,7 @@ function reveal_concentric(plr, center, max_radius, hide, delay)
    end
 
    if hide then
-      plr:hide_fields(center:region(max_radius), true)
+      plr:hide_fields(center:region(max_radius), "permanent")
    end
 
    local radius = 0
@@ -176,7 +176,11 @@ function hide_concentric(plr, center, max_radius, delay, permanent)
       max_radius = max_radius -1
    end
    -- Hide the remaining field
-   plr:hide_fields({center},true)
+   if permanent then
+      plr:hide_fields({center}, "permanent")
+   else
+      plr:hide_fields({center}, "explorable")
+   end
 end
 
 -- RST

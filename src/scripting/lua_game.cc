@@ -88,7 +88,6 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, add_objective),
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
-   METHOD(LuaPlayer, unexplore_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPlayer, acquire_training_wheel_lock),
@@ -709,33 +708,6 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
 	return 0;
 }
-
-/* RST
-   .. method:: unexplore_fields(fields)
-
-      Make previously visible fields unexplored again.
-      See also :ref:`field_animations` for animated hiding.
-
-      :arg fields: The fields to make unexplored
-      :type fields: :class:`array` of :class:`fields <wl.map.Field>`
-
-      :returns: :const:`nil`
-*/
-// int LuaPlayer::unexplore_fields(lua_State* L) {
-	// Widelands::Game& game = get_game(L);
-	// Widelands::Player& p = get(L, game);
-
-	// luaL_checktype(L, 2, LUA_TTABLE);
-	// const Widelands::HideOrRevealFieldMode mode = Widelands::HideOrRevealFieldMode::kUnexplore;
-
-	// lua_pushnil(L); /* first key */
-	// while (lua_next(L, 2) != 0) {
-		// p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), mode);
-		// lua_pop(L, 1);
-	// }
-
-	// return 0;
-// }
 
 /* RST
    .. method:: mark_scenario_as_solved(name)

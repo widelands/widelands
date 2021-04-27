@@ -93,7 +93,6 @@ public:
 	int add_objective(lua_State* L);
 	int reveal_fields(lua_State* L);
 	int hide_fields(lua_State* L);
-	//int unexplore_fields(lua_State* L);
 	int mark_scenario_as_solved(lua_State* L);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int acquire_training_wheel_lock(lua_State* L);
