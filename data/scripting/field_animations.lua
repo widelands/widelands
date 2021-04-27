@@ -74,8 +74,8 @@ end
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
---    :arg permanent: Optional. Set to true for permanently hide. Set to false for unexplore.
---               Defaults to false
+--    :arg permanent: Optional. Set to ``true`` to hide the fields permanently. Set to ``false`` to mark the fields as unexplored.
+--                    Defaults to ``false``.
 --    :type permanent: :class:`boolean`
 
 function hide_randomly(plr, region, time, permanent)
