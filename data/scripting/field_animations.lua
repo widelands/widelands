@@ -60,7 +60,7 @@ function reveal_randomly(plr, region, time)
 end
 
 -- RST
--- .. function:: hide_randomly(player, region, time, permanent)
+-- .. function:: hide_randomly(player, region, time[, permanent=false])
 --
 --    Hide a given region field by field, where the fields
 --    are chosen randomly. The animation runs the specified time regardless
