@@ -60,7 +60,7 @@ function reveal_randomly(plr, region, time)
 end
 
 -- RST
--- .. function:: hide_randomly(player, region, time, permanent)
+-- .. function:: hide_randomly(player, region, time[, permanent=false])
 --
 --    Hide a given region field by field, where the fields
 --    are chosen randomly. The animation runs the specified time regardless
@@ -74,8 +74,8 @@ end
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
---    :arg permanent: Optional. Set to true for permanently hide. Set to false for unexplore.
---               Defaults to false. See meth
+--    :arg permanent: Optional. Set to ``true`` to hide the fields permanently. Set to ``false`` to make the fields unexplored again.
+--                    Defaults to ``false``.
 --    :type permanent: :class:`boolean`
 
 function hide_randomly(plr, region, time, permanent)
@@ -153,9 +153,9 @@ end
 --    :arg delay: Optional, defaults to 100. The delay between revealing each
 --                ring
 --    :type time: :class:`integer`
---    :arg permanent: Optional. Set to true for permanently hide. Set to false for unexplore.
---               Defaults to false
---    :type permanent: :class:`boolean`
+--    :arg permanent: Optional. Set to ``true`` to hide the fields permanently. Set to ``false`` to make the fields unexplored again.
+--                    Defaults to ``false``.
+--    :type permanent: :class:`boolean
 
 function hide_concentric(plr, center, max_radius, delay, permanent)
    delay = delay or 100
