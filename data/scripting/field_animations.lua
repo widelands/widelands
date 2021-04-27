@@ -75,7 +75,7 @@ end
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
 --    :arg permanent: Optional. Set to true for permanently hide. Set to false for unexplore.
---               Defaults to false
+--               Defaults to false. See meth
 --    :type permanent: :class:`boolean`
 
 function hide_randomly(plr, region, time, permanent)
@@ -88,9 +88,9 @@ function hide_randomly(plr, region, time, permanent)
    while #region > 0 do
       local id = math.random(1, #region)
       if permanent then
-         plr:hide_fields({region[id]},true)
+         plr:hide_fields({region[id]}, "permanent")
       else
-         plr:unexplore_fields({region[id]})
+         plr:hide_fields({region[id]}, "explorable")
       end
       table.remove(region, id)
       sleep(delay)
@@ -164,9 +164,9 @@ function hide_concentric(plr, center, max_radius, delay, permanent)
    while max_radius > 0 do
       local to_hide = center:region(max_radius, max_radius - 1)
       if permanent then
-         plr:hide_fields(to_hide, true)
+         plr:hide_fields(to_hide, "permanent")
       else
-         plr:unexplore_fields(to_hide)
+         plr:hide_fields(to_hide, "explorable")
       end
       sleep(delay)
       max_radius = max_radius -1

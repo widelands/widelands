@@ -668,21 +668,24 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: hide_fields(fields[, unexplore = false])
+   .. method:: hide_fields(fields[, mode = "seen"])
 
       Undo the effect of :meth:`reveal_fields` on these fields for the current player and
-      optionally completely hide them.
+      optionally completely hide them or reset them to unexplored.
       See also :ref:`field_animations` for animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`
 
-      :arg unexplore: *Optional*. If  ``true``, the fields will be marked as completely unexplored
+      :arg state: *Optional*. If  ``permanent``, the fields will be marked as completely hidden
          and will not be seen by buildings or workers until they are revealed again
          by :meth:`reveal_fields`.
-         If `false`, They will no longer be permanently visible, but can still be seen by
-         buildings or workers (own or allied), and the player will remember the last seen state.
-      :type unexplore: :class:`boolean`
+         If ``seen``, They will no longer be permanently visible, but can still be seen by
+         buildings or workers (own or allied), and the player will remember the last state that
+         they had been seen. this is the default 
+         If ``explorable``, They will no longer be visible, but can still be rediscovered by
+         buildings, ships or workers (own or allied).
+      :type state: :class:`string`
 
       :returns: :const:`nil`
 */
@@ -691,9 +694,12 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	const std::string state = luaL_checkstring(L, 3);
+	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && state == "permanent") ?
 	                                                 Widelands::HideOrRevealFieldMode::kHide :
-	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
+	                                                 (!lua_isnone(L, 3) && state == "explorable") ?
+	                                                    Widelands::HideOrRevealFieldMode::kUnexplore :
+	                                                    Widelands::HideOrRevealFieldMode::kUnreveal;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
@@ -715,21 +721,21 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
       :returns: :const:`nil`
 */
-int LuaPlayer::unexplore_fields(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-	Widelands::Player& p = get(L, game);
+// int LuaPlayer::unexplore_fields(lua_State* L) {
+	// Widelands::Game& game = get_game(L);
+	// Widelands::Player& p = get(L, game);
 
-	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode = Widelands::HideOrRevealFieldMode::kUnexplore;
+	// luaL_checktype(L, 2, LUA_TTABLE);
+	// const Widelands::HideOrRevealFieldMode mode = Widelands::HideOrRevealFieldMode::kUnexplore;
 
-	lua_pushnil(L); /* first key */
-	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), mode);
-		lua_pop(L, 1);
-	}
+	// lua_pushnil(L); /* first key */
+	// while (lua_next(L, 2) != 0) {
+		// p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), mode);
+		// lua_pop(L, 1);
+	// }
 
-	return 0;
-}
+	// return 0;
+// }
 
 /* RST
    .. method:: mark_scenario_as_solved(name)
