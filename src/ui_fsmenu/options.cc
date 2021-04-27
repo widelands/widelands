@@ -304,7 +304,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      invert_movement_(&box_ingame_,
                      UI::PanelStyle::kFsMenu,
                      Vector2i::zero(),
-                     _("Invert mouse movement via right click")),
+                     _("Invert click-and-drag map movement direction")),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
