@@ -324,8 +324,7 @@ MapView::MapView(
      dragging_(false),
      edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&
                      get_config_bool("edge_scrolling", false)),
-     invert_movement_(parent && !parent->get_parent() /* not in watch windows */ &&
-                     get_config_bool("invert_movement", false)),
+     invert_movement_(get_config_bool("invert_movement", false)),
      is_scrolling_x_(0),
      is_scrolling_y_(0) {
 }
