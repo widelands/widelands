@@ -39,7 +39,7 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         descname = "working",
+         descname = pgettext("empire_building", "working"),
          actions = {
             "sleep=duration:30s",
             "animate=working duration:30s",
