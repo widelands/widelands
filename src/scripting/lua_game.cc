@@ -707,7 +707,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 /* RST
    .. method:: unexplore_fields(fields)
 
-      Make previously visible fields unexplored again. 
+      Make previously visible fields unexplored again.
       See also :ref:`field_animations` for animated hiding.
 
       :arg fields: The fields to make unexplored
