@@ -367,6 +367,13 @@ void EditorGameBase::remove_loader_ui() {
 	registered_game_tips_.clear();
 }
 
+void EditorGameBase::release_loader_ui() {
+	assert(loader_ui_ != nullptr);
+	loader_ui_.release();
+	game_tips_.reset(nullptr);
+	registered_game_tips_.clear();
+}
+
 /**
  * Instantly create a building at the given x/y location. There is no build time.
  * \li owner  is the player number of the building's owner.

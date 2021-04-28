@@ -39,8 +39,18 @@ RandomGame::RandomGame(MenuCapsule& m)
 
 	// There's so much unused space in this screen, let's beautify it a bit
 	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(&icon_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_inf_space();
+	layout();
+	{
+		UI::MultilineTextarea* txt = new UI::MultilineTextarea(&right_column_content_box_, 0, 0, 100, 100,
+				UI::PanelStyle::kFsMenu, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		txt->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
+		txt->set_text(_("The random map generator is still in beta stage. The maps it generates are usually – but not always – well playable. Seafaring and artifacts are not supported. Add-ons of the World, Tribes, and Script categories are disabled in random matches."));
+		right_column_content_box_.add(txt, UI::Box::Resizing::kFullSize);
+		right_column_content_box_.add_inf_space();
+	}
 
 	reactivated();
 	assert(progress_window_);
@@ -53,6 +63,10 @@ RandomGame::RandomGame(MenuCapsule& m)
 
 RandomGame::~RandomGame() {
 	game_.cleanup_objects();
+	if (progress_window_) {
+		game_.release_loader_ui();
+		progress_window_ = nullptr;
+	}
 }
 
 void RandomGame::reactivated() {
