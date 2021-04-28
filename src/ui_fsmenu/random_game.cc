@@ -33,6 +33,21 @@ RandomGame::RandomGame(MenuCapsule& m)
            UI::PanelStyle::kFsMenu,
            g_image_cache->get("images/logos/wl-ico-128.png")),
      progress_window_(nullptr) {
+	{  // Do this first to prevent crashes with incompatible add-on types
+		std::vector<AddOns::AddOnState> new_g_addons;
+		for (const AddOns::AddOnState& s : AddOns::g_addons) {
+			if (s.second
+					&& s.first.category != AddOns::AddOnCategory::kWorld
+					&& s.first.category != AddOns::AddOnCategory::kTribes
+					&& s.first.category != AddOns::AddOnCategory::kScript) {
+				new_g_addons.push_back(s);
+			}
+		}
+		AddOns::g_addons = new_g_addons;
+	}
+	settings_.reset(new SinglePlayerGameSettingsProvider());
+	game_.reset(new Widelands::Game());
+
 	left_column_box_.add_inf_space();
 	left_column_box_.add(&menu_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	left_column_box_.add_inf_space();
@@ -59,16 +74,16 @@ RandomGame::RandomGame(MenuCapsule& m)
 	reactivated();
 	assert(progress_window_);
 	progress_window_->set_visible(true);
-	EditorInteractive::load_world_units(nullptr, game_);
+	EditorInteractive::load_world_units(nullptr, *game_);
 	progress_window_->set_visible(false);
 
 	layout();
 }
 
 RandomGame::~RandomGame() {
-	game_.cleanup_objects();
+	game_->cleanup_objects();
 	if (progress_window_) {
-		game_.release_loader_ui();
+		game_->release_loader_ui();
 		progress_window_ = nullptr;
 	}
 }
@@ -76,7 +91,7 @@ RandomGame::~RandomGame() {
 void RandomGame::reactivated() {
 	if (!progress_window_) {
 		progress_window_ =
-		   &game_.create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
+		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
 		progress_window_->set_visible(false);
 	}
 }
@@ -91,12 +106,12 @@ void RandomGame::layout() {
 void RandomGame::clicked_ok() {
 	assert(progress_window_);
 	progress_window_->set_visible(true);
-	game_.cleanup_objects();
+	game_->cleanup_objects();
 
-	if (menu_.do_generate_map(game_, nullptr, &settings_)) {
-		game_.remove_loader_ui();
+	if (menu_.do_generate_map(*game_, nullptr, settings_.get())) {
+		game_->remove_loader_ui();
 		progress_window_ = nullptr;
-		new LaunchSPG(capsule_, settings_, game_, nullptr, false);
+		new LaunchSPG(capsule_, *settings_, *game_, nullptr, false);
 	} else {
 		progress_window_->set_visible(false);
 		MainMenu& m = capsule_.menu();
