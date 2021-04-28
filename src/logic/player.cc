@@ -1554,7 +1554,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 			field.vision = VisibleState::kUnexplored;
 		}
 		assert(!field.vision.is_revealed());
-		assert(!field.vision == VisibleState::kPreviouslySeen);
+		assert(field.vision != VisibleState::kPreviouslySeen);
 		break;
 	}
 }

@@ -159,7 +159,7 @@ end
 --    :type time: :class:`integer`
 --    :arg permanent: Optional. Set to ``true`` to hide the fields permanently. Set to ``false`` to make the fields unexplored again.
 --                    Defaults to ``false``.
---    :type permanent: :class:`boolean
+--    :type permanent: :class:`boolean`
 
 function hide_concentric(plr, center, max_radius, delay, permanent)
    delay = delay or 100
