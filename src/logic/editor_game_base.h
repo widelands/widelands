@@ -140,7 +140,7 @@ public:
 
 	// Destroy the loader UI and game tips
 	void remove_loader_ui();
-	void release_loader_ui();
+	UI::ProgressWindow* release_loader_ui();
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 

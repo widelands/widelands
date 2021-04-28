@@ -369,9 +369,9 @@ void EditorGameBase::remove_loader_ui() {
 
 void EditorGameBase::release_loader_ui() {
 	assert(loader_ui_ != nullptr);
-	loader_ui_.release();
 	game_tips_.reset(nullptr);
 	registered_game_tips_.clear();
+	return loader_ui_.release();
 }
 
 /**
