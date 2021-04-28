@@ -36,10 +36,9 @@ RandomGame::RandomGame(MenuCapsule& m)
 	{  // Do this first to prevent crashes with incompatible add-on types
 		std::vector<AddOns::AddOnState> new_g_addons;
 		for (const AddOns::AddOnState& s : AddOns::g_addons) {
-			if (s.second
-					&& s.first.category != AddOns::AddOnCategory::kWorld
-					&& s.first.category != AddOns::AddOnCategory::kTribes
-					&& s.first.category != AddOns::AddOnCategory::kScript) {
+			if (s.second && s.first.category != AddOns::AddOnCategory::kWorld &&
+			    s.first.category != AddOns::AddOnCategory::kTribes &&
+			    s.first.category != AddOns::AddOnCategory::kScript) {
 				new_g_addons.push_back(s);
 			}
 		}
