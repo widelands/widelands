@@ -681,7 +681,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
          by :meth:`reveal_fields`.
          If ``seen``, They will no longer be permanently visible, but can still be seen by
          buildings or workers (own or allied), and the player will remember the last state that
-         they had been seen. this is the default 
+         they had been seen. this is the default
          If ``explorable``, They will no longer be visible, but can still be rediscovered by
          buildings, ships or workers (own or allied).
       :type state: :class:`string`
@@ -697,8 +697,8 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && state == "permanent") ?
 	                                                 Widelands::HideOrRevealFieldMode::kHide :
 	                                                 (!lua_isnone(L, 3) && state == "explorable") ?
-	                                                    Widelands::HideOrRevealFieldMode::kUnexplore :
-	                                                    Widelands::HideOrRevealFieldMode::kUnreveal;
+	                                                 Widelands::HideOrRevealFieldMode::kUnexplore :
+	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
