@@ -367,7 +367,7 @@ void EditorGameBase::remove_loader_ui() {
 	registered_game_tips_.clear();
 }
 
-void EditorGameBase::release_loader_ui() {
+UI::ProgressWindow* EditorGameBase::release_loader_ui() {
 	assert(loader_ui_ != nullptr);
 	game_tips_.reset(nullptr);
 	registered_game_tips_.clear();
