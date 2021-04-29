@@ -672,6 +672,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       Undo the effect of :meth:`reveal_fields` on these fields for the current player and
       optionally completely hide them or reset them to unexplored.
       See also :ref:`field_animations` for animated hiding.
+      *Note*: hide_fields(fields[, unexplore = false]) is deprecated and will be converted to
+              ``"permanent"`` if true and ``"seen"`` if false.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`
@@ -693,7 +695,10 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const std::string state = lua_isnone(L, 3) ? "seen" : luaL_checkstring(L, 3);
+	// TODO(hessenfarmer): Boolean check for compatibility. Remove after v1.0
+	const std::string state = lua_isnone(L, 3) ? "seen" : !lua_isboolean(L, 3) ? 
+	                             luaL_checkstring(L, 3) : luaL_checkboolean(L, 3) ?
+	                             "permanent" : "seen";
 	const Widelands::HideOrRevealFieldMode mode = (state == "permanent") ?
 	                                                 Widelands::HideOrRevealFieldMode::kHide :
 	                                                 (state == "explorable") ?
