@@ -699,6 +699,9 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	                                                 (state == "explorable") ?
 	                                                 Widelands::HideOrRevealFieldMode::kUnexplore :
 	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
+	if (mode == Widelands::HideOrRevealFieldMode::kUnreveal && state != "seen") {
+		report_error(L, "'%s' is no valid parameter for hide_fields!", state.c_str());
+	}
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
