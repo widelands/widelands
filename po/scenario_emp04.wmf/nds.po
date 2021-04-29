@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-26 16:18+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -1595,6 +1595,42 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr "Broeree"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+msgctxt "empire_building"
+msgid "brewing beer"
+msgstr "Beer to broen"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Buurderee"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
+msgctxt "empire_building"
+msgid "working"
+msgstr "to Warken"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
+msgctxt "empire_building"
+msgid "planting wheat"
+msgstr "Weit to planten"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
+msgctxt "empire_building"
+msgid "harvesting wheat"
+msgstr "Weit to arnten"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Forester’s House"
+msgstr "Förster-Huus"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+msgctxt "empire_building"
+msgid "planting trees"
+msgstr "Bomen to planten"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
@@ -1684,16 +1720,81 @@ msgstr ""
 "In Vestas Tempel worden de Waren lagert, wat man tum Anbeden bruukt. Daar "
 "wohnen ok de Preesterinnen un de Wahrders vun de Gottin."
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Lumberjack’s House"
+msgstr "Boomhaueree"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+msgctxt "empire_building"
+msgid "felling trees"
+msgstr "Bomen to slagen"
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
 msgstr "Möhlen"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+msgctxt "empire_building"
+msgid "grinding wheat"
+msgstr "Weit to mahlen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
 msgctxt "empire_building"
 msgid "Temple of Vesta"
 msgstr "Vestas Tempel"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
+msgctxt "empire_building"
+msgid "Training Camp"
+msgstr "Övens-Lager"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
+msgctxt "empire_building"
+msgid "sleeping"
+msgstr "to slapen"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "Soldaten-Angriff vun Stand 0 to Stand 1 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "Soldaten-Angriff vun Stand 1 to Stand 2 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "Soldaten-Angriff vun Stand 2 to Stand 3 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "Soldaten-Angriff vun Stand 3 to Stand 4 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "Soldaten-Gesundheid vun Stand 0 to Stand 1 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "Soldaten-Gesundheid vun Stand 1 to Stand 2 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "Soldaten-Gesundheid vun Stand 2 to Stand 3 to verbetern"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr "Soldaten-Gesundheid vun Stand 3 to Stand 4 to verbetern"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
