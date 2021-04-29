@@ -372,10 +372,10 @@ amalea_4 = {
       _([[So, let’s think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So, let’s find a space for a big building and build a farm first.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. Later on, we could build a weaving mill in the same spot to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
+      _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. When the sheep farm starts working, we could find or free up space for a medium building to build a weaving mill to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps we will have to adjust the target quantity for wheat to achieve this.]]))
+      _([[I think a stock of 50 sheaves of wheat would be enough for starters. We do not have a target quantity for wheat, because the farmer does not need other wares to produce it. All we have to do is watch our stock of wheat grow.]]))
       .. new_objectives(obj_produce_wheat),
    posy=1,
    w=550,
@@ -435,7 +435,7 @@ amalea_6 = {
    title=_"Amalea Advises",
    body= amalea3(_"Amalea looks thoughtful…",
       -- TRANSLATORS: Amalea
-      _([[Salve Lutius. While talking to all our brave builders, they told me that they have to use all our remaining gold for building the port. So, we won’t have any gold left after our port is build.]])
+      _([[Salve Lutius. While talking to all our brave builders, they told me that they have to use all our remaining gold for building the port. So, we won’t have any gold left after our port is built.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But the problem is that for sending out an expedition, we need some gold.]])
