@@ -667,7 +667,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: hide_fields(fields[, mode = "seen"])
+   .. method:: hide_fields(fields[, state = "seen"])
 
       Undo the effect of :meth:`reveal_fields` on these fields for the current player and
       optionally completely hide them or reset them to unexplored.
@@ -676,14 +676,14 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`
 
-      :arg state: *Optional*. If  ``permanent``, the fields will be marked as completely hidden
+      :arg state: *Optional*. If  ``"permanent"``, the fields will be marked as completely hidden
          and will not be seen by buildings or workers until they are revealed again
          by :meth:`reveal_fields`.
-         If ``seen``, They will no longer be permanently visible, but can still be seen by
-         buildings or workers (own or allied), and the player will remember the last state that
-         they had been seen. this is the default
-         If ``explorable``, They will no longer be visible, but can still be rediscovered by
+         If ``"explorable"``, They will no longer be visible, but can still be rediscovered by
          buildings, ships or workers (own or allied).
+         If ``"seen"``, They will no longer be permanently visible (fading to foggy), but can
+         still be seen by buildings or workers (own or allied), and the player will remember the
+         last state that they had been seen. This is the default.
       :type state: :class:`string`
 
       :returns: :const:`nil`
@@ -693,10 +693,10 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const std::string state = luaL_checkstring(L, 3);
-	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && state == "permanent") ?
+	const std::string state = lua_isnone(L, 3) ? "seen" : luaL_checkstring(L, 3);
+	const Widelands::HideOrRevealFieldMode mode = (state == "permanent") ?
 	                                                 Widelands::HideOrRevealFieldMode::kHide :
-	                                                 (!lua_isnone(L, 3) && state == "explorable") ?
+	                                                 (state == "explorable") ?
 	                                                 Widelands::HideOrRevealFieldMode::kUnexplore :
 	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
 

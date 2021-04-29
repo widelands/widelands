@@ -157,7 +157,11 @@ end
 --    :arg delay: Optional, defaults to 100. The delay between revealing each
 --                ring
 --    :type time: :class:`integer`
---    :arg permanent: Optional. Set to ``true`` to hide the fields permanently. Set to ``false`` to make the fields unexplored again.
+--    :arg permanent: Optional. Set to ``true`` to hide the fields permanently (they can't be
+--                    seen by any unit until revealed again by using
+--                    :meth: ~wl.game.Player.reveal_fields).
+--                    Set to ``false`` to make the fields unexplored (they can be rediscovered
+--                    by buildings and bobs again).
 --                    Defaults to ``false``.
 --    :type permanent: :class:`boolean`
 

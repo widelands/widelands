@@ -59,8 +59,8 @@ run(function()
    assert_equal(true, p1:sees_field(field))
    cleanup(field)
 
-   -- Unexplore
-   p1:hide_fields(field:region(1), false)
+   -- Unreveal
+   p1:hide_fields(field:region(1), "seen")
    sleep(1000)
    assert_equal(false, p1:sees_field(field))
    assert_equal(true, p1:seen_field(field))
@@ -69,15 +69,29 @@ run(function()
    assert_equal(true, p1:sees_field(field))
    p1.see_all = false
    assert_equal(false, p1:sees_field(field))
-
-   p1:hide_fields(field:region(1), true)
+   -- Hide
+   p1:hide_fields(field:region(1), "permanent")
    sleep(1000)
    assert_equal(false, p1:sees_field(field))
    assert_equal(false, p1:seen_field(field))
+   local sentry = prefilled_buildings(p1, {"barbarians_sentry", 51, 18})
+   assert_equal(false, p1:sees_field(field))
+   assert_equal(false, p1:seen_field(field))
+   sentry:remove()
    p1:reveal_fields(field:region(1))
    sleep(1000)
    assert_equal(true, p1:sees_field(field))
    assert_equal(true, p1:seen_field(field))
+   -- Unexplore
+   p1:hide_fields(field:region(1), "explorable")
+   sleep(1000)
+   assert_equal(false, p1:sees_field(field))
+   assert_equal(false, p1:seen_field(field))
+   local sentry = prefilled_buildings(p1, {"barbarians_sentry", 51, 18})
+   sleep(1000)
+   assert_equal(true, p1:sees_field(field))
+   assert_equal(true, p1:seen_field(field))
+   sentry:remove()
    cleanup(field)
 
    print("# All Tests passed.")

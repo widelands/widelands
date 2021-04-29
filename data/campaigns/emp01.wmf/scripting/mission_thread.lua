@@ -15,7 +15,8 @@ function mission_thread()
    sleep(1000)
    campaign_message_box(diary_page_2)
    sleep(500)
-   hide_concentric(p1, sea, 5)
+   -- hide a bit more as revealed as the ship might move and discover some fields
+   hide_concentric(p1, sea, 6)
    ship:remove()
 
    -- Back home
