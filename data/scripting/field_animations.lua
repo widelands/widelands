@@ -143,7 +143,7 @@ function reveal_concentric(plr, center, max_radius, hide, delay)
 end
 
 -- RST
--- .. function:: hide_concentric(player, center, max_radius, delay, permanent)
+-- .. function:: hide_concentric(player, center, max_radius, delay[, permanent=false])
 --
 --    Hide a part of the map in a concentric way beginning from max_radius onto
 --    center.
