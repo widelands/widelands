@@ -679,9 +679,9 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :arg state: *Optional*. If  ``"permanent"``, the fields will be marked as completely hidden
          and will not be seen by buildings or workers until they are revealed again
          by :meth:`reveal_fields`.
-         If ``"explorable"``, They will no longer be visible, but can still be rediscovered by
+         If ``"explorable"``, they will no longer be visible, but can still be rediscovered by
          buildings, ships or workers (own or allied).
-         If ``"seen"``, They will no longer be permanently visible (fading to foggy), but can
+         If ``"seen"``, they will no longer be permanently visible (fading to foggy), but can
          still be seen by buildings or workers (own or allied), and the player will remember the
          last state that they had been seen. This is the default.
       :type state: :class:`string`
