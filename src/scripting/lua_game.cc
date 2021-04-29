@@ -672,8 +672,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       Undo the effect of :meth:`reveal_fields` on these fields for the current player and
       optionally completely hide them or reset them to unexplored.
       See also :ref:`field_animations` for animated hiding.
-      *Note*: hide_fields(fields[, unexplore = false]) is deprecated and will be converted to
-              ``"permanent"`` if true and ``"seen"`` if false.
+      .. note:: Passing a :class:`boolean` as the *state* argument is deprecated.
+         Use ``"permanent"`` instead of ``true`` and ``"seen"`` instead of ``false``.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`
