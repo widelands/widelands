@@ -696,9 +696,10 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 	// TODO(hessenfarmer): Boolean check for compatibility. Remove after v1.0
-	const std::string state = lua_isnone(L, 3) ? "seen" : !lua_isboolean(L, 3) ? 
-	                             luaL_checkstring(L, 3) : luaL_checkboolean(L, 3) ?
-	                             "permanent" : "seen";
+	const std::string state = lua_isnone(L, 3) ? "seen" :
+	                                             !lua_isboolean(L, 3) ?
+	                                             luaL_checkstring(L, 3) :
+	                                             luaL_checkboolean(L, 3) ? "permanent" : "seen";
 	const Widelands::HideOrRevealFieldMode mode = (state == "permanent") ?
 	                                                 Widelands::HideOrRevealFieldMode::kHide :
 	                                                 (state == "explorable") ?
