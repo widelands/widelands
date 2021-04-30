@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-26 16:18+0000\n"
+"PO-Revision-Date: 2021-04-28 15:28+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,8 +264,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -278,12 +278,12 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Eines"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -473,10 +473,10 @@ msgstr "Informació"
 msgid "Click on a field to show information about it"
 msgstr "Feu clic en un camp per mostrar-ne informació"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -1337,8 +1337,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -2501,14 +2501,14 @@ msgstr[1] "S'han detectat %u incompatibilitats de complements:\n"
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n· No s'ha trobat el fitxer «%2$s» que necessita l'hoste."
 
 #: ../../src/network/gameclient.cc:710
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n· La versió instal·lada de «%2$s» és la %3$s, però l'hoste usa la versió %4$s."
 
 #: ../../src/network/gameclient.cc:879
 msgid "/me ’s file failed md5 checksumming."
@@ -2529,7 +2529,7 @@ msgstr "Desconnectat"
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "La connexió amb l'hoste s'ha perdut a causa de:\n%s"
 
 #: ../../src/network/gamehost.cc:291
 msgid "Available host commands are:"
@@ -5122,18 +5122,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autors"
@@ -5341,7 +5341,7 @@ msgstr "Eina d'informació"
 
 #: ../../src/wlapplication_options.cc:363
 msgid "Players Menu"
-msgstr ""
+msgstr "Menú de jugadors"
 
 #: ../../src/wlapplication_options.cc:368
 msgid "Toggle Grid"
@@ -5766,9 +5766,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6171,8 +6171,8 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6710,8 +6710,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Navegació"

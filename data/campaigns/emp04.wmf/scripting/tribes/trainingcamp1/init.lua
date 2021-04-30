@@ -4,7 +4,7 @@ push_textdomain("scenario_emp04.wmf")
 
 descriptions:new_trainingsite_type {
    name = "empire_trainingcamp1",
-   descname = "Training Camp",
+   descname = pgettext("empire_building", "Training Camp"),
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -81,14 +81,14 @@ descriptions:new_trainingsite_type {
 
    programs = {
       sleep = {
-         descname = "sleeping",
+         descname = pgettext("empire_building", "sleeping"),
          actions = {
             "sleep=duration:5s",
             "return=skipped"
          }
       },
       upgrade_soldier_attack_0 = {
-         descname = "upgrading soldier attack from level 0 to level 1",
+         descname = pgettext("empire_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "checksoldier=soldier:attack level:0", -- Fails when aren't any soldier of level 0 attack
             "sleep=duration:30s",
@@ -98,7 +98,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_attack_1 = {
-         descname = "upgrading soldier attack from level 1 to level 2",
+         descname = pgettext("empire_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "checksoldier=soldier:attack level:1",
             "sleep=duration:30s",
@@ -108,7 +108,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_attack_2 = {
-         descname = "upgrading soldier attack from level 2 to level 3",
+         descname = pgettext("empire_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
             "checksoldier=soldier:attack level:2",
             "sleep=duration:30s",
@@ -118,7 +118,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_attack_3 = {
-         descname = "upgrading soldier attack from level 3 to level 4",
+         descname = pgettext("empire_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "checksoldier=soldier:attack level:3",
             "sleep=duration:30s",
@@ -128,7 +128,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_health_0 = {
-         descname = "upgrading soldier health from level 0 to level 1",
+         descname = pgettext("empire_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "checksoldier=soldier:health level:0",
             "sleep=duration:30s",
@@ -138,7 +138,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_health_1 = {
-         descname = "upgrading soldier health from level 1 to level 2",
+         descname = pgettext("empire_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
             "checksoldier=soldier:health level:1",
             "sleep=duration:30s",
@@ -148,7 +148,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_health_2 = {
-         descname = "upgrading soldier health from level 2 to level 3",
+         descname = pgettext("empire_building", "upgrading soldier health from level 2 to level 3"),
          actions = {
             "checksoldier=soldier:health level:2",
             "sleep=duration:30s",
@@ -158,7 +158,7 @@ descriptions:new_trainingsite_type {
          }
       },
       upgrade_soldier_health_3 = {
-         descname = "upgrading soldier health from level 3 to level 4",
+         descname = pgettext("empire_building", "upgrading soldier health from level 3 to level 4"),
          actions = {
             "checksoldier=soldier:health level:3",
             "sleep=duration:30s",

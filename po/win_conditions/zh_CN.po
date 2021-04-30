@@ -5,13 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # Roy Luo <1598359376@qq.com>, 2021
+# liulitchi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-04-29 12:06+0000\n"
+"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +58,7 @@ msgstr "你的团队找到新的远古遗物。"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "你发现了一件远古遗物。"
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -70,7 +71,7 @@ msgstr "你所在团队的一件远古遗物被敌人偷走了。"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "你的一件远古遗物被偷了。"
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -83,7 +84,7 @@ msgstr "你所在的团队从敌人哪里偷来了一件远古遗物。"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "你从敌人偷了一件远古遗物。"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
