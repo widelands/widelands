@@ -4,15 +4,16 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Viktor S <awsswa59@gmail.com>, 2019
+# Zme Zzzz <zmey1207@gmail.com>, 2021
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-18 17:05+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-27 19:13+0000\n"
+"Last-Translator: Zme Zzzz <zmey1207@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -211,7 +212,7 @@ msgstr "Деревья здесь не будут расти."
 #: ../../data/scripting/editor/tree_tooltip.lua:22
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f %%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
