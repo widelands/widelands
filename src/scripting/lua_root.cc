@@ -894,8 +894,8 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	const Widelands::DescriptionIndex psindex = descrs.safe_building_index(unit_name);
-	Widelands::ProductionSiteDescr& psdescr = dynamic_cast<Widelands::ProductionSiteDescr&>(
-	   *descrs.get_mutable_building_descr(psindex));
+	Widelands::ProductionSiteDescr& psdescr =
+	   dynamic_cast<Widelands::ProductionSiteDescr&>(*descrs.get_mutable_building_descr(psindex));
 
 	if (property == "input") {
 		const std::string cmd = luaL_checkstring(L, 5);
