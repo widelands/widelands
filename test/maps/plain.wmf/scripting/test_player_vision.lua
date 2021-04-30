@@ -9,7 +9,7 @@ run(function()
    end
 
    sleep(5000)
-   local field = wl.Game().map:get_field(50, 20)
+   local field = map:get_field(50, 20)
    cleanup(field)
 
    -- Seen field
@@ -78,7 +78,7 @@ run(function()
    prefilled_buildings(p1, {"barbarians_sentry", 51, 18})
    assert_equal(false, p1:sees_field(field))
    assert_equal(false, p1:seen_field(field))
-   sentry.immovable:remove()
+   sentry.brn.immovable:remove()
    p1:reveal_fields(field:region(1))
    sleep(1000)
    assert_equal(true, p1:sees_field(field))
@@ -92,7 +92,7 @@ run(function()
    sleep(1000)
    assert_equal(true, p1:sees_field(field))
    assert_equal(true, p1:seen_field(field))
-   sentry.immovable:remove()
+   sentry.brn.immovable:remove()
    cleanup(field)
 
    print("# All Tests passed.")
