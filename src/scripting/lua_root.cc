@@ -811,6 +811,9 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		if (!lua_isnil(L, 7)) {
 			wdescr.set_default_target_quantity(unit_name, luaL_checkuint32(L, 7));
 		}
+		if (!lua_isinteger(L, 8)) {
+			report_error(L, "Preciousness is mandatory for wares (item: %s)", warename.c_str());
+		}
 		wdescr.set_preciousness(unit_name, luaL_checkuint32(L, 8));
 
 		LuaTable t(L);
