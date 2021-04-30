@@ -33,7 +33,7 @@ function reveal_randomly(plr, region, time)
    time = time or 1000
 
    -- Make sure the region is hidden
-   plr:hide_fields(region, true)
+   plr:hide_fields(region, "permanent")
 
    -- Turn off buildhelp during animation
    local buildhelp_state = wl.ui.MapView().buildhelp
@@ -60,7 +60,7 @@ function reveal_randomly(plr, region, time)
 end
 
 -- RST
--- .. function:: hide_randomly(player, region, time)
+-- .. function:: hide_randomly(player, region, time[, permanent=false])
 --
 --    Hide a given region field by field, where the fields
 --    are chosen randomly. The animation runs the specified time regardless
@@ -74,8 +74,15 @@ end
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
+--    :arg permanent: Optional. Set to ``true`` to hide the fields permanently (they can't be
+--                    seen by any unit until revealed again by using
+--                    :meth: ~wl.game.Player.reveal_fields).
+--                    Set to ``false`` to make the fields unexplored (they can be rediscovered
+--                    by buildings and bobs again).
+--                    Defaults to ``false``.
+--    :type permanent: :class:`boolean`
 
-function hide_randomly(plr, region, time)
+function hide_randomly(plr, region, time, permanent)
    time = time or 1000
    -- Turn off buildhelp
    wl.ui.MapView().buildhelp = false
@@ -84,7 +91,11 @@ function hide_randomly(plr, region, time)
    if delay < 1 then delay = 1 end
    while #region > 0 do
       local id = math.random(1, #region)
-      plr:hide_fields({region[id]},true)
+      if permanent then
+         plr:hide_fields({region[id]}, "permanent")
+      else
+         plr:hide_fields({region[id]}, "explorable")
+      end
       table.remove(region, id)
       sleep(delay)
    end
@@ -119,7 +130,7 @@ function reveal_concentric(plr, center, max_radius, hide, delay)
    end
 
    if hide then
-      plr:hide_fields(center:region(max_radius), true)
+      plr:hide_fields(center:region(max_radius), "permanent")
    end
 
    local radius = 0
@@ -132,7 +143,7 @@ function reveal_concentric(plr, center, max_radius, hide, delay)
 end
 
 -- RST
--- .. function:: hide_concentric(player, center, max_radius, delay)
+-- .. function:: hide_concentric(player, center, max_radius, delay[, permanent=false])
 --
 --    Hide a part of the map in a concentric way beginning from max_radius onto
 --    center.
@@ -146,19 +157,34 @@ end
 --    :arg delay: Optional, defaults to 100. The delay between revealing each
 --                ring
 --    :type time: :class:`integer`
+--    :arg permanent: Optional. Set to ``true`` to hide the fields permanently (they can't be
+--                    seen by any unit until revealed again by using
+--                    :meth: ~wl.game.Player.reveal_fields).
+--                    Set to ``false`` to make the fields unexplored (they can be rediscovered
+--                    by buildings and bobs again).
+--                    Defaults to ``false``.
+--    :type permanent: :class:`boolean`
 
-function hide_concentric(plr, center, max_radius, delay)
+function hide_concentric(plr, center, max_radius, delay, permanent)
    delay = delay or 100
    -- Turn off buildhelp
    wl.ui.MapView().buildhelp = false
    while max_radius > 0 do
       local to_hide = center:region(max_radius, max_radius - 1)
-      plr:hide_fields(to_hide, true)
+      if permanent then
+         plr:hide_fields(to_hide, "permanent")
+      else
+         plr:hide_fields(to_hide, "explorable")
+      end
       sleep(delay)
       max_radius = max_radius -1
    end
    -- Hide the remaining field
-   plr:hide_fields({center},true)
+   if permanent then
+      plr:hide_fields({center}, "permanent")
+   else
+      plr:hide_fields({center}, "explorable")
+   end
 end
 
 -- RST
