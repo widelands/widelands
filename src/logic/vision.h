@@ -22,7 +22,7 @@
 
 namespace Widelands {
 
-enum class HideOrRevealFieldMode { kReveal, kUnreveal, kHide };
+enum class HideOrRevealFieldMode { kReveal, kUnreveal, kHide, kUnexplore };
 
 /// Simplified vision information reduced to 3 states.
 /// Do not change the order! It is stored in savegames.
