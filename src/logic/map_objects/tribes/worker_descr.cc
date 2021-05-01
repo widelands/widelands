@@ -46,11 +46,15 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      // Read what the worker can become and the needed experience. If one of the keys is there, the
      // other key must be there too. So, we cross the checks to trigger an exception if this is
      // violated.
-     becomes_(table.has_key("experience") ? descriptions.load_worker(table.get_string("becomes")) :
-                                            INVALID_INDEX),
+     becomes_(INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
      ai_hints_(new AI::WareWorkerHints()),
      descriptions_(descriptions) {
+	if (table.has_key("experience")) {
+		// This also checks rhat the other worker's type matches ours
+		set_becomes(descriptions, table.get_string("becomes"));
+	}
+
 	if (icon_filename().empty()) {
 		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}
@@ -126,6 +130,13 @@ WorkerDescr::~WorkerDescr() {  // NOLINT
 
 void WorkerDescr::set_becomes(Descriptions& d, const std::string& become) {
 	becomes_ = d.load_worker(become);
+	assert(becomes_ != INVALID_INDEX);
+
+	const WorkerDescr* other = d.get_worker_descr(becomes_);
+	if (type() != other->type()) {
+		throw GameDataError("Worker %s of type %s can not level up to worker %s of type %s",
+				name().c_str(), to_string(type()).c_str(), become.c_str(), to_string(other->type()).c_str());
+	}
 }
 
 void WorkerDescr::set_default_target_quantity(int quantity) {
