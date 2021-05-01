@@ -95,6 +95,7 @@ protected:
 	struct GameMenuWindows {
 		UI::UniqueWindow::Registry sound_options;
 		UI::UniqueWindow::Registry savegame;
+		UI::UniqueWindow::Registry loadgame;
 
 		GeneralStatisticsMenu::Registry stats_general;
 		UI::UniqueWindow::Registry stats_wares;
@@ -124,6 +125,7 @@ private:
 #endif
 		kOptions,
 		kSaveMap,
+		kLoadMap,
 		kExitGame
 	};
 

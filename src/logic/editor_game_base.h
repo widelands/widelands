@@ -115,6 +115,7 @@ public:
 	virtual void postload();
 	void postload_addons();
 	virtual void cleanup_for_load();
+	virtual void full_cleanup();
 	void delete_world_and_tribes();
 
 	void init_addons(bool world_only);

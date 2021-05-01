@@ -132,12 +132,22 @@ void InteractiveGameBase::add_main_menu() {
 	              _("Set sound effect and music options"));
 
 	menu_windows_.savegame.open_window = [this] {
-		new GameMainMenuSaveGame(*this, menu_windows_.savegame);
+		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/menus/save_game.png"), false, "",
 	              shortcut_string_for(KeyboardShortcut::kInGameSave));
+
+	if (!is_multiplayer() && !game().is_replay()) {
+		menu_windows_.loadgame.open_window = [this] {
+			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
+		};
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
+				      g_image_cache->get("images/wui/menus/load_game.png"), false, "",
+				      shortcut_string_for(KeyboardShortcut::kInGameLoad));
+	}
 
 	mainmenu_.add(
 	   /** TRANSLATORS: An entry in the game's main menu */
@@ -159,6 +169,11 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	case MainMenuEntry::kSaveMap: {
 		menu_windows_.savegame.toggle();
 	} break;
+	case MainMenuEntry::kLoadMap:
+		if (!is_multiplayer() && !game().is_replay()) {
+			menu_windows_.loadgame.toggle();
+		}
+		break;
 	case MainMenuEntry::kExitGame: {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
@@ -438,7 +453,11 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameSave, code)) {
-		new GameMainMenuSaveGame(*this, menu_windows_.savegame);
+		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
+		return true;
+	}
+	if (!is_multiplayer() && !game().is_replay() && matches_shortcut(KeyboardShortcut::kInGameLoad, code)) {
+		new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
 		return true;
 	}
 	if (chat_provider_ && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {

@@ -54,7 +54,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	~GameClient() override;
 
-	void run(std::unique_ptr<GameController>&);
+	void run();
 
 	// GameController interface
 	void think() override;
@@ -123,6 +123,10 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	void send_cheating_info();
 
+	void release_pointer() {
+		pointer_.release();
+	}
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(GameClient);
 
@@ -162,6 +166,7 @@ private:
 	GameClientImpl* d;
 
 	FsMenu::MenuCapsule& capsule_;
+	std::unique_ptr<GameController>& pointer_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H

@@ -531,7 +531,7 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+   : capsule_(c), pointer_(ptr), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;
@@ -582,7 +582,7 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 
-	run(ptr);
+	run();
 }
 
 GameHost::~GameHost() {
@@ -657,12 +657,12 @@ void GameHost::init_computer_players() {
 	}
 }
 
-void GameHost::run(std::unique_ptr<GameController>& ptr) {
+void GameHost::run() {
 	game_.reset(new Widelands::Game());
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	new FsMenu::LaunchMPG(
-	   capsule_, d->hp, *this, d->chat, *game_, ptr, internet_, [this]() { run_callback(); });
+	   capsule_, d->hp, *this, d->chat, *game_, pointer_, internet_, [this]() { run_callback(); });
 }
 
 // TODO(k.halfmann): refactor into smaller functions
@@ -702,6 +702,7 @@ void GameHost::run_callback() {
 
 		d->game = game_.get();
 		game_->set_game_controller(this);
+		pointer_.release();  /// Ownership was passed to the game
 		InteractiveGameBase* igb;
 		player_number = d->settings.playernum + 1;
 		game_->save_handler().set_autosave_filename(

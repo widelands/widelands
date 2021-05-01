@@ -229,6 +229,7 @@ public:
 	}
 
 	void cleanup_for_load() override;
+	void full_cleanup() override;
 
 	// in-game logic
 	const CmdQueue& cmdqueue() const {
@@ -344,6 +345,10 @@ public:
 
 	void set_auto_speed(bool);
 
+	void set_next_game_to_load(const std::string& file) {
+		next_game_to_load_ = file;
+	}
+
 	// TODO(sirver,trading): document these functions once the interface settles.
 	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
@@ -401,7 +406,7 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
-	GameController* ctrl_;
+	std::unique_ptr<GameController> ctrl_;
 
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back
@@ -442,6 +447,8 @@ private:
 #endif
 
 	bool replay_;
+
+	std::string next_game_to_load_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

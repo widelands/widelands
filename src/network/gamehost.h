@@ -54,7 +54,7 @@ struct GameHost : public GameController {
 	         bool internet = false);
 	~GameHost() override;
 
-	void run(std::unique_ptr<GameController>&);
+	void run();
 	void run_callback();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
@@ -198,6 +198,7 @@ private:
 	void reaper();
 
 	FsMenu::MenuCapsule& capsule_;
+	std::unique_ptr<GameController>& pointer_;
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;

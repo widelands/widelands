@@ -179,7 +179,7 @@ InteractivePlayer* Game::get_ipl() {
 }
 
 void Game::set_game_controller(GameController* const ctrl) {
-	ctrl_ = ctrl;
+	ctrl_.reset(ctrl);
 }
 
 void Game::set_ai_training_mode(const bool mode) {
@@ -191,7 +191,7 @@ void Game::set_auto_speed(const bool mode) {
 }
 
 GameController* Game::game_controller() {
-	return ctrl_;
+	return ctrl_.get();
 }
 
 void Game::set_write_replay(bool const wr) {
@@ -307,12 +307,10 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	try {
 		bool const result =
 		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
@@ -461,10 +459,9 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	enabled_addons().clear();  // will be loaded later
+	full_cleanup();  // Reset and cleanup all values
 
 	int8_t player_nr;
-
 	{
 		GameLoader gl(filename, *this);
 
@@ -504,15 +501,14 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
+	next_game_to_load_.clear();  // `filename` might actually be a reference to `next_game_to_load_`
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
 		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
@@ -714,7 +710,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_.reset(nullptr);
 		} else {
 			// Just like with scenarios, replays will desync, so we switch them off.
-			writereplay_ = false;
+			set_write_replay(false);
 		}
 	}
 #endif
@@ -774,7 +770,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_notrunning;
 
-	return true;
+	return next_game_to_load_.empty() || run_load_game(next_game_to_load_, script_to_run);
 }
 
 /**
@@ -815,6 +811,15 @@ void Game::cleanup_for_load() {
 
 	// Statistics
 	general_stats_.clear();
+}
+
+void Game::full_cleanup() {
+	EditorGameBase::full_cleanup();
+
+	did_check_addons_desync_magic_ = false;
+	ctrl_.reset();
+	replaywriter_.reset();
+	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
 }
 
 /**

@@ -137,6 +137,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 	game->set_game_controller(parent);
+	parent->release_pointer();  /// Ownership was passed to the game
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
@@ -186,7 +187,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl), capsule_(c) {
+   : d(new GameClientImpl), capsule_(c), pointer_(ptr) {
 
 	d->internet_ = internet;
 
@@ -227,7 +228,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
 
-	run(ptr);
+	run();
 }
 
 GameClient::~GameClient() {
@@ -239,17 +240,18 @@ GameClient::~GameClient() {
 	delete d;
 }
 
-void GameClient::run(std::unique_ptr<GameController>& ptr) {
+void GameClient::run() {
 	d->send_hello();
 	d->settings.multiplayer = true;
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, ptr, d->internet_);
+	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, pointer_, d->internet_);
 }
 
 void GameClient::do_run() {
+	dynamic_cast<FsMenu::LaunchMPG&>(*d->modal).unset_ctrl();
 	d->server_is_waiting = true;
 
 	Widelands::Game game;

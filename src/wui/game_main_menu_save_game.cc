@@ -43,23 +43,25 @@ InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 }
 
 GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
-                                           UI::UniqueWindow::Registry& registry)
+                                           UI::UniqueWindow::Registry& registry,
+                                           const Type type)
    : UI::UniqueWindow(&parent,
                       UI::WindowStyle::kWui,
-                      "save_game",
+                      type == Type::kSave ? "save_game" : "load_game",
                       &registry,
                       parent.get_inner_w() - 40,
                       parent.get_inner_h() - 40,
-                      _("Save Game")),
+                      type == Type::kSave ? _("Save Game") : _("Load Game")),
      // Values for alignment and size
      padding_(4),
+     type_(type),
 
      main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
-                   LoadOrSaveGame::FileType::kShowAll,
+                   type == Type::kSave ? LoadOrSaveGame::FileType::kShowAll : LoadOrSaveGame::FileType::kGameSinglePlayer,
                    UI::PanelStyle::kWui,
                    UI::WindowStyle::kWui,
                    false),
@@ -86,6 +88,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      curdir_(kSaveDir),
      illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+	filename_box_.set_visible(type_ == Type::kSave);
 
 	layout();
 
@@ -131,7 +134,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	center_to_parent();
 	move_to_top();
 
-	filename_editbox_.focus();
+	if (type_ == Type::kSave) {
+		filename_editbox_.focus();
+	} else {
+		load_or_save_.table().focus();
+	}
 	pause_game(true);
 	set_thinks(false);
 	layout();
@@ -182,11 +189,21 @@ void GameMainMenuSaveGame::ok() {
 		curdir_ = gamedata->filename;
 		filename_editbox_.focus();
 	} else {
-		std::string filename = filename_editbox_.text();
-		if (save_game(filename, !get_config_bool("nozip", false))) {
-			die();
-		} else {
-			load_or_save_.table().focus();
+		switch (type_) {
+		case Type::kSave: {
+			std::string filename = filename_editbox_.text();
+			if (save_game(filename, !get_config_bool("nozip", false))) {
+				die();
+			} else {
+				load_or_save_.table().focus();
+			}
+		} break;
+		case Type::kLoad: {
+			if (load_or_save_.has_selection()) {
+				igbase().game().set_next_game_to_load(load_or_save_.entry_selected()->filename);
+				igbase().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+			}
+		} break;
 		}
 	}
 }

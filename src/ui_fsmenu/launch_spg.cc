@@ -154,8 +154,6 @@ void LaunchSPG::clicked_ok() {
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
 			// Game controller needs the ibase pointer to init the chat
 			game_.set_ibase(new InteractivePlayer(game_, get_config_section(), playernumber, false));
-			std::unique_ptr<GameController> ctrl(
-			   new SinglePlayerGameController(game_, true, playernumber));
 
 			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp->has_players_tribe()) {
@@ -166,7 +164,7 @@ void LaunchSPG::clicked_ok() {
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-			game_.set_game_controller(ctrl.get());
+			game_.set_game_controller(new SinglePlayerGameController(game_, true, playernumber));
 			game_.init_newgame(sp->settings());
 			game_.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}

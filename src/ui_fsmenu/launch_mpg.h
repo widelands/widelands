@@ -60,6 +60,10 @@ public:
 
 	void clicked_select_map_callback(const MapData*, bool);
 
+	void unset_ctrl() {
+		ctrl_ = nullptr;
+	}
+
 protected:
 	void clicked_ok() override;
 
