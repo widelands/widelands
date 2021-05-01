@@ -258,17 +258,20 @@ void Game::check_addons_desync_magic() {
 	postload_addons();
 }
 
-bool Game::run_splayer_scenario_direct(const std::string& mapname,
+bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
                                        const std::string& script_to_run) {
+	full_cleanup();
+	list_of_scenarios_ = list_of_scenarios;
+	assert(!list_of_scenarios_.empty());
 	// Replays can't handle scenarios
 	set_write_replay(false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_wanted_ = false;
 #endif
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(list_of_scenarios.front()));
 	if (!maploader) {
-		throw wexception("could not load \"%s\"", mapname.c_str());
+		throw wexception("could not load \"%s\"", list_of_scenarios.front().c_str());
 	}
 
 	// Need to do this first so we can set the theme and background.
@@ -501,7 +504,6 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	next_game_to_load_.clear();  // `filename` might actually be a reference to `next_game_to_load_`
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
 		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
@@ -770,7 +772,22 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_notrunning;
 
-	return next_game_to_load_.empty() || run_load_game(next_game_to_load_, script_to_run);
+	if (next_game_to_load_.empty()) {
+		return true;
+	}
+	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+	if (load.compare(load.size() - kSavegameExtension.size(), kSavegameExtension.size(), kSavegameExtension) == 0) {
+		return run_load_game(load, script_to_run);
+	}
+	/* Load a scenario. This should be either the current one, or the next if that exists. */
+	assert(!list_of_scenarios_.empty());
+	std::list<std::string> list = list_of_scenarios_;
+	if (list.front() != load) {
+		list.pop_front();
+		assert(!list.empty());
+		assert(list.front() == load);
+	}
+	return run_splayer_scenario_direct(list, script_to_run);
 }
 
 /**
@@ -820,6 +837,8 @@ void Game::full_cleanup() {
 	ctrl_.reset();
 	replaywriter_.reset();
 	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
+	next_game_to_load_.clear();
+	list_of_scenarios_.clear();
 }
 
 /**

@@ -149,6 +149,12 @@ void InteractiveGameBase::add_main_menu() {
 				      shortcut_string_for(KeyboardShortcut::kInGameLoad));
 	}
 
+	if (!game().list_of_scenarios().empty()) {
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Restart Scenario"), MainMenuEntry::kRestartScenario,
+				      g_image_cache->get("images/wui/menus/restart_scenario.png"));
+	}
+
 	mainmenu_.add(
 	   /** TRANSLATORS: An entry in the game's main menu */
 	   _("Exit Game"), MainMenuEntry::kExitGame, g_image_cache->get("images/wui/menus/exit.png"));
@@ -168,6 +174,17 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	} break;
 	case MainMenuEntry::kSaveMap: {
 		menu_windows_.savegame.toggle();
+	} break;
+	case MainMenuEntry::kRestartScenario: {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			game().set_next_game_to_load(game().list_of_scenarios().front());
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+		} else {
+			GameExitConfirmBox* gecb = new GameExitConfirmBox(*this, *this, _("Restart Scenario"), _("Are you sure you wish to restart this scenario?"));
+			gecb->ok.connect([this] {
+				game().set_next_game_to_load(game().list_of_scenarios().front());
+			});
+		}
 	} break;
 	case MainMenuEntry::kLoadMap:
 		if (!is_multiplayer() && !game().is_replay()) {

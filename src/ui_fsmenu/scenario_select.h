@@ -35,8 +35,6 @@ public:
 	// If camp is not set, we'll be loading the tutorials
 	explicit ScenarioSelect(MenuCapsule&, CampaignData* camp);
 
-	std::string get_map();
-
 protected:
 	void clicked_ok() override;
 	void entry_selected();

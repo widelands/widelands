@@ -126,6 +126,7 @@ private:
 		kOptions,
 		kSaveMap,
 		kLoadMap,
+		kRestartScenario,
 		kExitGame
 	};
 

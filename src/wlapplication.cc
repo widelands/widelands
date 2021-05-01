@@ -702,7 +702,7 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(filename_, script_to_run_);
+			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {

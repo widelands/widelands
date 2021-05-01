@@ -148,7 +148,7 @@ void LaunchSPG::clicked_ok() {
 	game_.set_ai_training_mode(get_config_bool("ai_training", false));
 	try {
 		if (sp->settings().scenario) {  // scenario
-			game_.run_splayer_scenario_direct(sp->get_map(), "");
+			game_.run_splayer_scenario_direct({sp->get_map()}, "");
 		} else {  // normal singleplayer
 			playernumber = sp->settings().playernum + 1;
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
