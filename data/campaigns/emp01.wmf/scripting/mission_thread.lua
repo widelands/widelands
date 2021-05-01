@@ -4,7 +4,7 @@ function mission_thread()
    -- Initial messages
    local sea = wl.Game().map:get_field(50,25)
    local ship = p1:place_ship(sea)
-   p1:hide_fields(sea:region(6),true)
+   p1:hide_fields(sea:region(6), "permanent")
    scroll_to_field(sea,0)
 
    campaign_message_box(diary_page_1)
@@ -15,12 +15,13 @@ function mission_thread()
    sleep(1000)
    campaign_message_box(diary_page_2)
    sleep(500)
-   hide_concentric(p1, sea, 5)
+   -- hide a bit more as revealed as the ship might move and discover some fields
+   hide_concentric(p1, sea, 6)
    ship:remove()
 
    -- Back home
    include "map:scripting/starting_conditions.lua"
-   p1:hide_fields(wl.Game().map.player_slots[1].starting_field:region(13),true)
+   p1:hide_fields(wl.Game().map.player_slots[1].starting_field:region(13),"permanent")
    scroll_to_field(wl.Game().map.player_slots[1].starting_field)
    campaign_message_box(diary_page_3)
    sleep(1000)
