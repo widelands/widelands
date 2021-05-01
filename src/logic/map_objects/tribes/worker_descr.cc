@@ -135,7 +135,8 @@ void WorkerDescr::set_becomes(Descriptions& d, const std::string& become) {
 	const WorkerDescr* other = d.get_worker_descr(becomes_);
 	if (type() != other->type()) {
 		throw GameDataError("Worker %s of type %s can not level up to worker %s of type %s",
-				name().c_str(), to_string(type()).c_str(), become.c_str(), to_string(other->type()).c_str());
+		                    name().c_str(), to_string(type()).c_str(), become.c_str(),
+		                    to_string(other->type()).c_str());
 	}
 }
 
