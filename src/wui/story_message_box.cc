@@ -38,13 +38,18 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const x,
                                  int32_t const y,
                                  uint32_t const w,
-                                 uint32_t const h)
+                                 uint32_t const h,
+                                 bool allow_next_scenario)
    : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
      main_box_(this, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
      button_box_(
         &main_box_, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
      textarea_(&main_box_, 0, 0, 100, 50, UI::PanelStyle::kWui, body),
-     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
+     ok_(&button_box_, "ok", 0, 0, 120, 0, allow_next_scenario ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kWuiPrimary, _("OK")),
+     next_scenario_(&button_box_, "next", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary,
+     		game->list_of_scenarios().size() > 1 ? _("Next Mission") : _("Main Menu"),
+     		game->list_of_scenarios().size() > 1 ? _("Start the next mission now") : _("Return to the main menu")
+ 		),
      desired_speed_(game->game_controller()->desired_speed()),
      game_(game) {
 
@@ -62,9 +67,18 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 
 	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+
 	button_box_.add_inf_space();
 	button_box_.add(&ok_);
 	button_box_.add_inf_space();
+
+	if (allow_next_scenario) {
+		button_box_.add(&next_scenario_);
+		button_box_.add_inf_space();
+		next_scenario_.sigclicked.connect([this]() { clicked_next_scenario(); });
+	} else {
+		next_scenario_.set_visible(false);
+	}
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -96,6 +110,17 @@ void StoryMessageBox::resume_game() {
 	game_->save_handler().set_allow_saving(true);
 }
 
+void StoryMessageBox::clicked_next_scenario() {
+	if (game_->list_of_scenarios().size() > 1) {
+		auto it = game_->list_of_scenarios().begin();
+		++it;
+		game_->set_next_game_to_load(*it);
+	}
+
+	clicked_ok();
+	get_topmost_forefather().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+}
+
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		return true;
@@ -109,7 +134,11 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			clicked_ok();
+			if (next_scenario_.is_visible()) {
+				clicked_next_scenario();
+			} else {
+				clicked_ok();
+			}
 			return true;
 		case SDLK_ESCAPE:
 			clicked_ok();

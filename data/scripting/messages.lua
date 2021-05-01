@@ -128,6 +128,12 @@ end
 --                  wait until the player leaves the roadbuilding mode. Be aware that this can be very interruptive.
 --                  Default: :type false:.
 --
+--                  **scroll_back** - If true, the view scrolls/jumps back to where it came from. If false, the new
+--                  location stays on the screen when the message box is closed. Default: False.
+--
+--                  **allow_next_scenario** - If set to ``true``, show a button that allows starting
+--                                            the next scenario at once. Defaults to ``false``.
+--
 --    :arg int sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
 --    Example:

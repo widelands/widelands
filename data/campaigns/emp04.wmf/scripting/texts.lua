@@ -228,6 +228,7 @@ diary_page_4 = {
       .. objective_text(_"Victory",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
    posy=1,
+   allow_next_scenario = true,
 }
 
 
