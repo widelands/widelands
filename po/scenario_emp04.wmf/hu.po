@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-26 16:18+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,243 +21,263 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:43
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Bontsd le a nem dolgozó épületeket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Bonts le néhány épületet!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:46
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Bontsd le a nem dolgozó kis épületeket, hogy építőanyaghoz juss új "
+"épületekhez!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
 "Remember to check the messages and the building statistics for unproductive "
 "buildings."
 msgstr ""
+"Nézd át az üzeneteket és az épületstatisztikát, és keresd meg a nem dolgozó "
+"épületeket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Szüntesd meg a fölösleges utakat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Tedd átláthatóvá az úthálózatot!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:56
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
 msgstr ""
+"Tedd átláthatóvá a kaotikus úthálózatot a fölösleges utak megszüntetésével!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:62
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Kattints az egyik farmra!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Nyisd meg egy farm ablakát!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:65
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Kattints egy farmra, hogy megnyisd az ablakát! Így ellenőrizni tudod az "
+"épületet."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:71
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Keresd meg a farmok tervrajzait!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Keresd meg a farmok tervrajzait!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:74
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Szerezd vissza a farmok tervrajzait! Kelet felé terjeszkedve a dombok "
+"környékén kutass!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:80
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Építs legalább 3 favágóházat és 2 kőfejtőt!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Kőfejtők és favágók"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:83
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Állítsd helyre az építőanyagok termelését legalább három favágóház és két "
+"kőfejtő építésével!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:89
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Termelj halat és harapnivalót!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Food Production"
-msgstr ""
+msgstr "Élelmiszer termelés"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:92
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
+"Keress és fogj halakat! Ezután készíts harapnivalókat a bányászaidnak!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:98
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
+msgstr "Cseréld le a régi, rosszul működő erdészházakat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Építs két új erdészházat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:101
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
-msgstr ""
+msgstr "Cseréld le a két erdészházat újakra a nagyobb hatékonyság érdekében!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:107
 msgid "Find the monastery in the north"
-msgstr ""
+msgstr "Keresd meg északon a templomot!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Find the Monastery"
-msgstr ""
+msgstr "Keresd meg a templomot!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:110
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
+"Keresd meg északon a templomot, hogy megismerhesd a búza felhasználásának "
+"fejlettebb módját!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:116
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "Szerezd meg Juliától a technológiát!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "Diplomácia: Kereskedelem vagy háború?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:119
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
+"Választhatsz: Vagy gyűjts be 35 kéve búzát és 15 amfora bort a "
+"főhadiszállásodon az istennő számára, vagy foglald el a templomot!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:125
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Képezz ki legalább 3 hőst!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Hero Training"
-msgstr ""
+msgstr "Hősök képzése"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:128
 msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
 msgstr ""
+"Használd okosan a nyersanyagaidat, amíg legalább három teljesen "
+"felfejlesztett katonád nem lesz."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:134
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Készíts legalább 10 szerszámot!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid "Tool Production"
-msgstr ""
+msgstr "Szerszámkészítés"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:137
 msgid "Produce at least ten tools to improve your economy."
-msgstr ""
+msgstr "Készíts legalább tíz szerszámot, hogy fejleszthesd a gazdaságodat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:138
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
+"Emlékszel, hogy be tudod állítani a készítendő darabszámokat a gazdaság "
+"beállításainál?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Recruit new soldiers"
-msgstr ""
+msgstr "Toborozz új katonákat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "New Soldier Recruiting"
-msgstr ""
+msgstr "Újoncok toborzása"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:147
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr ""
+msgstr "Toborozz legalább tíz új katonát a laktanyádban."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "Don’t forget to forge weapons and armor for them."
-msgstr ""
+msgstr "Ne felejts el fegyvert és páncélt készíteni nekik!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:154
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Győzd le a barbárokat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Győzd le az ellenséget!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:157
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr ""
+msgstr "Szabadítsd meg a hazádat a behatoló barbároktól!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Build 2 charcoal kiln"
-msgstr ""
+msgstr "Építs 2 faszénégető kemencét!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "Építs két faszénégető kemencét!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:166
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "Építs két faszénégető kemencét a vastermelés számára!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Remember to ensure a constant log supply for them."
-msgstr ""
+msgstr "Ne feledkezz meg a farönkökkel való folyamatos ellátásukról se!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:173
 msgid "Increase your military strength by training your soldiers"
-msgstr ""
+msgstr "Növeld a hadsereged ütőképességét a katonáid fejlesztésével!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:175
 msgid "Training is Important"
-msgstr ""
+msgstr "A kiképzés fontos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:176
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "Fejleszd a katonáidat keményen és gyorsan!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:177
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "Növelned kell a hadsereg ütőképességét."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:183
 msgid "Build a training camp and enhance the arena"
-msgstr ""
+msgstr "Építs kiképzőtábort és fejleszd tovább az arénádat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:185
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "Hatékonyabb kiképzőhelyek"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:186
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "Építs kiképzőtábort és fejleszd tovább az arénádat kolosszeummá!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:197
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Otthon, édes otthon!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:217
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:225
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutius naplója"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:200
@@ -270,7 +294,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:208
 msgid "Tools, Tools, Tools"
-msgstr ""
+msgstr "Szerszámok, szerszámok, szerszámok"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:211
@@ -283,7 +307,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:649
 msgid "Military Strength"
-msgstr ""
+msgstr "Haderő"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:219
@@ -294,7 +318,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 msgid "The Battle is Won"
-msgstr ""
+msgstr "A csata megnyerve!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:227
@@ -307,21 +331,23 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:228
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:229
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben"
+" folytasd a következő küldetéssel!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:237
 msgid "Chaos"
-msgstr ""
+msgstr "Káosz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:238
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "Lutius csalódott"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:240
@@ -337,20 +363,20 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Lutius greets the official"
-msgstr ""
+msgstr "Lutius köszönti a hivatalnokot"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:248
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr ""
+msgstr "Ave! Ki vagy te, és mi történt a gyönyörű hazánkkal?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "Difficult Times"
-msgstr ""
+msgstr "Nehéz idők"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:254
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "Lutius elfogadja a kihívást"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:256
@@ -373,7 +399,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:268
 msgid "A high Fremil official is welcoming you…"
-msgstr ""
+msgstr "Egy magas rangú fremili hivatalnok köszönt téged…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -391,7 +417,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
 msgid "A Long Story"
-msgstr ""
+msgstr "Egy hosszú történet"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:278
 msgid "The official sighs deeply…"
@@ -447,11 +473,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:303
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "Amalea vizsgálódik"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:304
 msgid "Amalea is nodding thoughtfully…"
-msgstr ""
+msgstr "Amalea elgondolkodva bólogat…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:306
@@ -495,11 +521,11 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:322
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea has Bad News"
-msgstr ""
+msgstr "Amalea rossz hírt hoz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:323
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea javaslata…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:325
@@ -533,7 +559,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:341
 msgid "Amalea Looks Confident"
-msgstr ""
+msgstr "Amalea magabiztos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:342
 msgid "Amalea is more confident"
@@ -592,7 +618,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:372
 msgid "Amalea has Good News"
-msgstr ""
+msgstr "Amalea jó hírt hoz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:373
 msgid "Amalea smiles for the first time in weeks…"
@@ -633,11 +659,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea elégedett"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:395
 msgid "Amalea is nodding her head…"
-msgstr ""
+msgstr "Amalea bólogat…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:397
@@ -653,11 +679,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:406
 msgid "Amalea Shakes Her Head"
-msgstr ""
+msgstr "Amalea a fejét rázza"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:407
 msgid "Amalea is getting fed up with all the problems in this economy…"
-msgstr ""
+msgstr "Amaleának kezd elege lenni az itteni gondokból…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:409
@@ -714,11 +740,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:436
 msgid "Amalea Shrugs"
-msgstr ""
+msgstr "Amalea vállat von"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:437
 msgid "Amalea is getting used to bad news…"
-msgstr ""
+msgstr "Amalea kezd hozzászokni a rossz hírekhez…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:439
@@ -747,11 +773,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea jókedvű"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:453
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea bejön…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:455
@@ -759,6 +785,8 @@ msgid ""
 "Brother, I think this is a rather fair offer. And some good will from any of"
 " our gods could be very helpful as well."
 msgstr ""
+"Bátyám! Szerintem ez egy igazán méltányos ajánlat. Ezen felül az csak a "
+"hasznunkra válhat, ha elnyerjük az isteneink jóakaratát."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:458
@@ -767,14 +795,17 @@ msgid ""
 "the wares. In particular, we will need to shorten the supply to our mines "
 "drastically. This will give us a real drawback in metal production."
 msgstr ""
+"Az egyetlen probléma, hogy sok időbe telik, amíg összegyűjtjük az árukat. "
+"Azt tehetjük, hogy drasztikusan lecsökkentjük a bányák ellátmányát, ami a "
+"fémtermelés jelentős visszaesését fogja eredményezni."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:464
 msgid "Amalea Looks Sad"
-msgstr ""
+msgstr "Amalea szomorú"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:465
 msgid "Amalea is really sad…"
-msgstr ""
+msgstr "Amalea nagyon szomorú…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:467
@@ -784,6 +815,10 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"Kételkedem, hogy helyesen cselekedtünk-e. Valóban, a terveket megszereztük, "
+"és most már tudunk jobb malmokat és sörfőzdéket építeni, a régieket pedig ki"
+" tudjuk javítani. Azt viszont soha nem fogjuk megtudni, milyen segítséget "
+"kaphattunk volna Vestától és papnőitől a barbárok ellen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:470
@@ -791,14 +826,16 @@ msgid ""
 "Furthermore, we will have to live with the guilt of destroying a temple of "
 "an Empire goddess on our souls."
 msgstr ""
+"Ráadásul egész életünkben nyomni fogja lelkiismeretünket bűnünk terhe, hogy "
+"leromboltuk birodalmunk egyik istennőjének a templomát."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalea nagyon elégedett"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:476
 msgid "Amalea claps her hands…"
-msgstr ""
+msgstr "Amalea tapsol…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:478
@@ -807,6 +844,9 @@ msgid ""
 "wheat. Furthermore, the plans enable us to upgrade our current mill and "
 "brewery with the improved technology."
 msgstr ""
+"Sikerült! Most már hatékonyabb épületeket építhetünk a búza feldolgozására, "
+"és a meglévő malmot és sörfőzdét is fel tudjuk fejleszteni a tervek alapján,"
+" hogy jól működjenek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:481
@@ -815,14 +855,17 @@ msgid ""
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
 msgstr ""
+"A legjobb az egészben pedig az, hogy új szövetségest szereztünk, akiktől "
+"rengeteg vizet, lisztet és sört kaptunk. Most már igazán semmi sem "
+"akadályozhatja meg, hogy újra megerősödjünk és visszaszerezzük a hazánkat."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:486
 msgid "Amalea is Satisfied"
-msgstr ""
+msgstr "Amalea elégedett"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:487
 msgid "Amalea is satisfied with the progress…"
-msgstr ""
+msgstr "Amalea elégedett az eredményekkel…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:489
@@ -832,6 +875,11 @@ msgid ""
 "immediately. After all, we need more tools to get our economy back up and "
 "build more and different production sites."
 msgstr ""
+"Rendben van Lutius, megoldottunk egy újabb problémát. De lesz még több is. "
+"Most, hogy tudunk már élelmiszert termelni, azonnal el kell kezdenünk szenet"
+" és vasércet bányászni, hiszen több szerszámra van szükségünk ahhoz, hogy "
+"újra megerősítsük a gazdaságunkat, hogy újabb, többféle épületeket "
+"építhessünk."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:492
@@ -840,6 +888,9 @@ msgid ""
 "wrong with our mines as well. It’s probably a good idea to send a geologist "
 "to check whether there are enough resources in the vicinity of our mines."
 msgstr ""
+"Az eddigi tapasztalataink alapján azonban feltételezem, hogy a bányáinkkal "
+"is bajunk lesz. Valószínűleg jó lenne küldeni egy geológust ellenőrizni, "
+"hogy van-e elég nyersanyag a bányák közelében."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:495
@@ -875,11 +926,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
 msgid "Amalea is in a Good Mood"
-msgstr ""
+msgstr "Amalea jó hangulatban van"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:516
 msgid "Amalea is celebrating success…"
-msgstr ""
+msgstr "Amalea örül a sikernek…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:518
@@ -887,14 +938,17 @@ msgid ""
 "Great, another issue solved! Now the charcoal will support our metal "
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
+"Nagyszerű! Újabb akadályt hárítottunk el. Most már faszén is segíti a "
+"fémtermelésünket, így többet foglalkozhatunk felderítéssel és a hadseregünk "
+"megerősítésével."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
 msgid "Amalea Looks Thoughtful"
-msgstr ""
+msgstr "Amalea töpreng"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:524
 msgid "Amalea is sorrowful…"
-msgstr ""
+msgstr "Amalea gyászol…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:526
@@ -903,14 +957,17 @@ msgid ""
 "destroyed by an uncontrolled kitchen fire. I fear this might be a sign of "
 "the goddess Vesta still being in a bad mood."
 msgstr ""
+"Kedves bátyám! Rossz hírről kell beszámolnom. Egyik épületünk megsemmisült "
+"egy elszabadult konyhai tűztől. Félek, ez annak a jele, hogy Vesta istennő "
+"még mindig haragszik ránk."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is Positively Surprised"
-msgstr ""
+msgstr "Amalea boldog a meglepetéstől"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:532
 msgid "Amalea is celebrating a happy event…"
-msgstr ""
+msgstr "Amalea ünnepel…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
@@ -919,14 +976,17 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
+"Hahó Lutius! Nem tudom hogyan, de sört és bort kaptunk valahonnan. A "
+"legutóbbi leltározásnál vettük észre a többletet. Lehet, hogy Vesta istennő "
+"még mindig támogat minket?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea Analyzes the Economy"
-msgstr ""
+msgstr "Amalea a gazdaságot elemzi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:540
 msgid "Amalea reminds Lutius of the farms…"
-msgstr ""
+msgstr "Amalea a farmokra emlékezteti Lutiust"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:542
@@ -935,6 +995,8 @@ msgid ""
 "there might be a problem with our farms. They don’t show any productivity "
 "although there is enough space to plant wheat."
 msgstr ""
+"Nézd Lutius! Tovább elemeztem a gazdaságunkat. Azt hiszem, gond lehet a "
+"farmjainkkal. Nem termelnek semmit, pedig van elég helyük búzát vetni."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:545
@@ -1017,6 +1079,8 @@ msgid ""
 "have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
+"Jaj ne, Lutius! Nem tudom hogy történhetett, de a barbárok lerombolták a "
+"főhadiszállásunkat. Így nem tudjuk leszállítani az áldozati árukat Juliának."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:588
@@ -1260,11 +1324,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:725
 msgid "The Enemy is Near"
-msgstr ""
+msgstr "Közel az ellenség"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:726
 msgid "Saledus is alerted…"
-msgstr ""
+msgstr "Saledus készültségben…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:728
@@ -1272,20 +1336,25 @@ msgid ""
 "Sire, although we don’t have enough fully trained soldiers yet, we just have"
 " made contact with the enemy."
 msgstr ""
+"Uram! Bár még nincs elég teljesen kiképzett katonánk, most fedeztük fel az "
+"ellenséget."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:730
 msgid ""
 "We have to finish them off and regain control over our lands. They shall "
 "regret deeply that they ever came!"
 msgstr ""
+"Meg kell őket semmisítenünk, és vissza kell szereznünk az uralmat a "
+"földjeink fölött. Súlyosan meg kell keserülniük, hogy valaha is betették ide"
+" a lábukat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:741
 msgid "Worship to be Gifted"
-msgstr ""
+msgstr "Áldozatot ajándékért"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:742
 msgid "Julia is demanding a sacrifice for Vesta…"
-msgstr ""
+msgstr "Julia áldozatot kér Vesta számára…"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:744
@@ -1294,14 +1363,17 @@ msgid ""
 "goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
 " to prepare a worthy sacrifice for her."
 msgstr ""
+"Ave Lutius! Ha a segítségünket kéred, először áldozz istennőnknek Vestának! "
+"Szállíts le 35 kéve búzát és 15 amfora bort, hogy méltó áldozatot "
+"mutathassunk be!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid "May The Gods Bless You"
-msgstr ""
+msgstr "Az istenek áldása szálljon reád!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:750
 msgid "Vesta is blessing us…"
-msgstr ""
+msgstr "Vesta áldása"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:752
@@ -1311,14 +1383,19 @@ msgid ""
 "you need so desperately as well. Furthermore, we will pray for you and join "
 "your party to safeguard our land from the Barbarians."
 msgstr ""
+"Köszönjük Lutius! Jól szolgáltad az istennőt. Nem csak az épületeid "
+"fejlesztéséhez szükséges tudásunkat ajándékozzuk neked, hanem olyan árukat "
+"is, amelyekre nagy szükséged van. Ezen kívül pedig imádkozni fogunk érted, "
+"és csatlakozunk a csapatodhoz, hogy együtt védelmezzük földünket a "
+"barbároktól."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:757
 msgid "Damned"
-msgstr ""
+msgstr "Elátkozva"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:758
 msgid "Vesta is cursing us…"
-msgstr ""
+msgstr "Vesta átka"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:760
@@ -1327,30 +1404,69 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
+"Légy átkozott Lutius, amiért megölted Vesta istennő békés szolgáit! Legyen "
+"átkozott az életed és a földed! Az istennő haragja tüntesse el családodat a "
+"föld színéről!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Sörfőzde"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+msgctxt "empire_building"
+msgid "brewing beer"
+msgstr "sör főzése"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Farm"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
+msgctxt "empire_building"
+msgid "working"
+msgstr "a munka"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
+msgctxt "empire_building"
+msgid "planting wheat"
+msgstr "búza vetése"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
+msgctxt "empire_building"
+msgid "harvesting wheat"
+msgstr "búza aratása"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Forester’s House"
+msgstr "Erdészház"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+msgctxt "empire_building"
+msgid "planting trees"
+msgstr "fa ültetése"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Sört termel, hogy erősen és derűsen tartsa a bányászokat."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Farm
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
 msgctxt "empire_building"
 msgid "Sows and harvests wheat."
-msgstr ""
+msgstr "Búzát vet és arat."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Fákat ültet a környező területen."
 
 #. TRANSLATORS: Note helptext for an empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
@@ -1359,40 +1475,42 @@ msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
+"Az erdészháznak szabad helyre van szüksége a munkaterületén a fák "
+"ültetéséhez."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "Kivágja a fákat a környéken, és azokból rönköket készít."
 
 #. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "A favágóháznak kivágható fákra van szüksége a munkaterületén."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
 msgctxt "empire_building"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Lisztté őrli a búzát."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 1
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Katonákat képez a „Támadás” és „Életerő” képességben."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 2
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Ellátja a katonákat a szükséges fegyverekkel és páncéldarabokkal."
 
 #. TRANSLATORS: Note helptext for an empire training site: Training Camp
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
@@ -1401,12 +1519,14 @@ msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
+"A birodalmi katonákat nem lehet a „Védelem” képességben képezni, és a "
+"kezdeti szintjükön maradnak."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
 msgctxt "empire_building"
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Vizet merít a mélyből."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
@@ -1415,32 +1535,99 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
+"Vesta templomában tárolják az áldozati árukat. Egyben lakóhely a papnőknek "
+"és az istennő őreinek."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Lumberjack’s House"
+msgstr "Favágóház"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+msgctxt "empire_building"
+msgid "felling trees"
+msgstr "fa kivágása"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Malom"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+msgctxt "empire_building"
+msgid "grinding wheat"
+msgstr "búza őrlése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
 msgctxt "empire_building"
 msgid "Temple of Vesta"
-msgstr ""
+msgstr "Vesta temploma"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
+msgctxt "empire_building"
+msgid "Training Camp"
+msgstr "Kiképzőtábor"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
+msgctxt "empire_building"
+msgid "sleeping"
+msgstr "alvás"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "katona támadásának fejlesztése 3-asról 4-es szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "katona életerejének fejlesztése 0-sról 1-es szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "katona életerejének fejlesztése 1-esről 2-es szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "katona életerejének fejlesztése 2-esről 3-as szintre"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr "katona életerejének fejlesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nincs kiképezhető katona!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nem található katona ehhez a képzési szinthez!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Kút"

@@ -51,6 +51,7 @@ wl_library(graphic_build_texture_atlas
     build_texture_atlas.h
     build_texture_atlas.cc
   DEPENDS
+    base_log
     graphic
     graphic_image_io
     graphic_surface
