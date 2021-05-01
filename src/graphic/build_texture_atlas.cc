@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
@@ -128,17 +129,21 @@ build_texture_atlas(const int max_size,
 		std::string file = dir;
 		file += FileSystem::file_separator();
 		file += kAddOnMainFile;
-		Profile profile(file.c_str());
-		const std::string category = profile.get_safe_section("global").get_safe_string("category");
-		if (category == "world") {
-			find_images(dir, &all_images, &first_atlas_images);
-		} else if (category == "tribes") {
-			std::string tribes_dir = dir;
-			tribes_dir += FileSystem::file_separator();
-			tribes_dir += "tribes";
-			if (g_fs->is_directory(tribes_dir)) {
-				find_images(tribes_dir, &all_images, &first_atlas_images);
+		try {
+			Profile profile(file.c_str());
+			const std::string category = profile.get_safe_section("global").get_safe_string("category");
+			if (category == "world") {
+				find_images(dir, &all_images, &first_atlas_images);
+			} else if (category == "tribes") {
+				std::string tribes_dir = dir;
+				tribes_dir += FileSystem::file_separator();
+				tribes_dir += "tribes";
+				if (g_fs->is_directory(tribes_dir)) {
+					find_images(tribes_dir, &all_images, &first_atlas_images);
+				}
 			}
+		} catch (const std::exception& e) {
+			log_warn("Ignoring unreadable add-ons profile %s: %s", file.c_str(), e.what());
 		}
 	}
 
