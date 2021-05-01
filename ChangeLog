@@ -50,6 +50,7 @@
     - Fix duplicate soldier detection
     - Add missing translation markups
 - Fix detection of amount of starting gold in fri02 (#4797)
+- Fix typo and outdated instructions in emp03 (#4836)
 
 
 ### Scripting
@@ -140,6 +141,8 @@
 - Fix artifact messages (#4727)
 - Fix amazons fortified village (#4793)
 - Add ordered iteration for lua tables (#4818)
+- Fix scenario vision bugs (#4832): Added a new option `hide_fields` to unreveal and unexplore fields rather then completely hiding them
+- Allow defining target quantity and preciousness for add-on wares and workers (#4825)
 
 
 ### Maps
@@ -771,6 +774,7 @@
 - Clean up superfluous log output (#4755)
 - Fix vision unequality operator (#4771)
 - Forward compatibility for remote add-ons (#4802)
+- Skip preloading invalid add-ons (#4840)
 
 
 
