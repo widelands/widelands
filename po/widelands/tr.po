@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-26 16:18+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
@@ -697,7 +697,7 @@ msgid "%1%x %2%"
 msgstr ""
 
 #: ../../src/editor/tools/info_tool.cc:204
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:140
 #: ../../src/ui_fsmenu/netsetup_lan.cc:130 ../../src/wui/mapdetails.cc:141
 #: ../../src/wui/minimap.cc:140
 msgid "Map"
@@ -730,7 +730,7 @@ msgstr "Yazar: %s"
 
 #: ../../src/editor/tools/info_tool.cc:223
 #: ../../src/ui_fsmenu/addons_packager_box.cc:151
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Description: %s"
 msgstr ""
@@ -1337,8 +1337,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -3159,7 +3159,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:195
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
 msgid "Pin"
 msgstr ""
 
@@ -3962,20 +3962,20 @@ msgid "Name: %s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
 msgstr ""
@@ -4629,44 +4629,44 @@ msgstr ""
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
 msgstr ""
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Scenario Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Hint: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:194
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:195
 msgid "(no map)"
 msgstr ""
 
@@ -5122,18 +5122,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -5766,9 +5766,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6474,35 +6474,35 @@ msgstr ""
 msgid "Info Panel Visibility"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:198
+#: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:203
+#: ../../src/wui/info_panel.cc:204
 msgid "Hide"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:384
+#: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:434
+#: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:438
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""
@@ -6710,8 +6710,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
