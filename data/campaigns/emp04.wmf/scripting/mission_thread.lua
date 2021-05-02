@@ -72,6 +72,8 @@ end
 -- the chaotic road network has to be cleared
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
+   local o1 = add_campaign_objective(obj_clear_roads_2)
+   o1.done = true
    local cleared = false
    local count_deadend = 0
    local count_star = 0
@@ -101,11 +103,14 @@ function clear_roads()
       end
       timer = timer + 1
       if timer == 100 and not p1.defeated then
+         o.done = true
+         o1.done = false
          campaign_message_box(amalea_20)
       end
    end
    if not p1.defeated then
       o.done = true
+      o1.done = true
       campaign_message_box(amalea_6)
    end
 end
@@ -583,6 +588,8 @@ function mission_thread()
    run(dismantle)
    run(farm_plans)
    run(check_defeat)
+   sleep(20000)
+   campaign_message_box(amalea_24)
 end
 
 run(mission_thread)
