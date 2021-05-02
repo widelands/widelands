@@ -5154,7 +5154,7 @@ Road
    A road connecting two flags in the economy of this Player.
    Waterways are currently treated like roads in scripts; however,
    there are significant differences. You can check whether an
-   instance of Road is a road or waterway using `get_road_type()`.
+   instance of Road is a road or waterway using :attr:`road_type`.
 
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
@@ -5188,7 +5188,7 @@ int LuaRoad::get_length(lua_State* L) {
 /* RST
    .. attribute:: start_flag
 
-      (RO) The flag were this road starts
+      (RO) The flag were this road starts.
 */
 int LuaRoad::get_start_flag(lua_State* L) {
 	return to_lua<LuaFlag>(
@@ -5198,7 +5198,7 @@ int LuaRoad::get_start_flag(lua_State* L) {
 /* RST
    .. attribute:: end_flag
 
-      (RO) The flag were this road ends
+      (RO) The flag were this road ends.
 */
 int LuaRoad::get_end_flag(lua_State* L) {
 	return to_lua<LuaFlag>(
@@ -5210,9 +5210,9 @@ int LuaRoad::get_end_flag(lua_State* L) {
 
       (RO) Type of road. Can be any either of:
 
-      * normal
-      * busy
-      * waterway
+      * ``"normal"``
+      * ``"busy"``
+      * ``"waterway"``
 */
 int LuaRoad::get_road_type(lua_State* L) {
 	Widelands::RoadBase* r = get(L, get_egbase(L));
@@ -5391,6 +5391,10 @@ int LuaBuilding::get_flag(lua_State* L) {
    .. method:: dismantle([keep_wares = false])
 
       Instantly turn this building into a dismantlesite.
+      
+      :arg keep_wares: Optional: If :const:`true` the wares in this buildings stock get destroyed.
+         If :const:`false` (default) the wares in this buildings stock will be preserved.
+      :type keep_wares: :const:`bool`
 */
 int LuaBuilding::dismantle(lua_State* L) {
 	Widelands::Building* bld = get(L, get_egbase(L));
@@ -5445,7 +5449,7 @@ const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
 /* RST
    .. attribute:: building
 
-      (RO) The name of the building that is constructed here
+      (RO) The name of the building that is constructed here.
 */
 int LuaConstructionSite::get_building(lua_State* L) {
 	lua_pushstring(L, get(L, get_egbase(L))->building().name());
@@ -5540,8 +5544,8 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 /* RST
    .. attribute:: setting_soldier_preference
 
-      (RW) Only valid for militarysites under construction. "heroes" if this site will prefer heroes
-      after completion; "rookies" otherwise.
+      (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer heroes
+      after completion; ``"rookies"`` otherwise.
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
@@ -5707,6 +5711,9 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 
       Only valid for warehouses under construction. Returns the stock policy to apply to the given
       ware or worker after completion.
+      
+      :arg wareworker: The set ware or worker stock policy in this warehouse.
+      :type wareworker: :class:`string`
 */
 int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -5727,8 +5734,9 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
    .. method:: set_setting_warehouse_policy(wareworker, policystring)
 
       Only valid for warehouses under construction. Sets the stock policy to apply to the given ware
-      or worker after completion. Valid argument strings are documented in
-      `Warehouse.set_warehouse_policies`.
+      or worker after completion. Valid values for **policystring** are documented in
+      :meth:`Warehouse.set_warehouse_policies`.
+      
 */
 int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -6052,16 +6060,17 @@ inline bool do_set_worker_policy(Widelands::Warehouse* wh,
 
       Sets the policies how the warehouse should handle the given wares and workers.
 
+      :arg which: Behaves like for :meth:`HasWares.get_wares`.
+
+      :arg policy: The policy to apply for all the wares and workers given in **which**.
+      :type policy: A string out of ``"normal"``, ``"prefer"``, ``"dontstock"`` or ``"remove"``
+      
       Usage example:
 
       .. code-block:: lua
 
          wh:set_warehouse_policies("coal", "prefer")
 
-      :arg which: behaves like for :meth:`HasWares.get_wares`.
-
-      :arg policy: the policy to apply for all the wares and workers given in `which`.
-      :type policy: a string out of "normal", "prefer", "dontstock", "remove".
 */
 int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 	int32_t nargs = lua_gettop(L);
