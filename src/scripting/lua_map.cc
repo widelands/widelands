@@ -5391,7 +5391,7 @@ int LuaBuilding::get_flag(lua_State* L) {
    .. method:: dismantle([keep_wares = false])
 
       Instantly turn this building into a dismantlesite.
-      
+
       :arg keep_wares: Optional: If :const:`true` the wares in this buildings stock get destroyed.
          If :const:`false` (default) the wares in this buildings stock will be preserved.
       :type keep_wares: :const:`bool`
@@ -5544,8 +5544,8 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 /* RST
    .. attribute:: setting_soldier_preference
 
-      (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer heroes
-      after completion; ``"rookies"`` otherwise.
+      (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer
+   heroes after completion; ``"rookies"`` otherwise.
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
@@ -5711,7 +5711,7 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 
       Only valid for warehouses under construction. Returns the stock policy to apply to the given
       ware or worker after completion.
-      
+
       :arg wareworker: The set ware or worker stock policy in this warehouse.
       :type wareworker: :class:`string`
 */
@@ -5736,7 +5736,7 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
       Only valid for warehouses under construction. Sets the stock policy to apply to the given ware
       or worker after completion. Valid values for **policystring** are documented in
       :meth:`Warehouse.set_warehouse_policies`.
-      
+
 */
 int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -6064,7 +6064,7 @@ inline bool do_set_worker_policy(Widelands::Warehouse* wh,
 
       :arg policy: The policy to apply for all the wares and workers given in **which**.
       :type policy: A string out of ``"normal"``, ``"prefer"``, ``"dontstock"`` or ``"remove"``
-      
+
       Usage example:
 
       .. code-block:: lua
