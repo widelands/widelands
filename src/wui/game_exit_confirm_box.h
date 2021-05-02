@@ -29,7 +29,10 @@
 class GameExitConfirmBox : public UI::WLMessageBox {
 public:
 	GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb);
-	GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb, const std::string& title, const std::string& message);
+	GameExitConfirmBox(UI::Panel& parent,
+	                   InteractiveGameBase& gb,
+	                   const std::string& title,
+	                   const std::string& message);
 
 	void clicked_ok() override;
 

@@ -61,7 +61,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      load_or_save_(&info_box_,
                    igbase().game(),
-                   type == Type::kSave ? LoadOrSaveGame::FileType::kShowAll : LoadOrSaveGame::FileType::kGameSinglePlayer,
+                   type == Type::kSave ? LoadOrSaveGame::FileType::kShowAll :
+                                         LoadOrSaveGame::FileType::kGameSinglePlayer,
                    UI::PanelStyle::kWui,
                    UI::WindowStyle::kWui,
                    false),

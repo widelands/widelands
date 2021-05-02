@@ -198,7 +198,8 @@ private:
 	void reaper();
 
 	FsMenu::MenuCapsule& capsule_;
-	std::shared_ptr<GameController>& pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
+	std::shared_ptr<GameController>&
+	   pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;

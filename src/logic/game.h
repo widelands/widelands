@@ -195,7 +195,8 @@ public:
 	// `list_of_scenarios` is list of this scenario and – if applicable –
 	// all the subsequent scenarios in the campaign.
 	// Returns the result of run().
-	bool run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios, const std::string& script_to_run);
+	bool run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
+	                                 const std::string& script_to_run);
 
 	// Run a single player loaded game directly via --loadgame on the cmdline. Will
 	// run the 'script_to_run' directly after the game was loaded.

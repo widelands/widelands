@@ -1489,7 +1489,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 
 	try {
 		if (replace_ctrl) {
-			game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
+			game.set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 		}
 
 		SaveHandler& save_handler = game.save_handler();

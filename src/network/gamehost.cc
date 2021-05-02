@@ -531,7 +531,11 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c), pointer_(ptr), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+   : capsule_(c),
+     pointer_(ptr),
+     d(new GameHostImpl(this)),
+     internet_(internet),
+     forced_pause_(false) {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;

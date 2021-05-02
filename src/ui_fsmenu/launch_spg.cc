@@ -164,7 +164,8 @@ void LaunchSPG::clicked_ok() {
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-			game_.set_game_controller(std::make_shared<SinglePlayerGameController>(game_, true, playernumber));
+			game_.set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(game_, true, playernumber));
 			game_.init_newgame(sp->settings());
 			game_.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}

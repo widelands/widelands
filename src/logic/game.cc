@@ -269,7 +269,8 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 	training_wheels_wanted_ = false;
 #endif
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(list_of_scenarios.front()));
+	std::unique_ptr<MapLoader> maploader(
+	   mutable_map()->get_correct_loader(list_of_scenarios.front()));
 	if (!maploader) {
 		throw wexception("could not load \"%s\"", list_of_scenarios.front().c_str());
 	}
@@ -777,7 +778,8 @@ bool Game::run(StartGameType const start_game_type,
 	}
 
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
-	if (load.compare(load.size() - kSavegameExtension.size(), kSavegameExtension.size(), kSavegameExtension) == 0) {
+	if (load.compare(load.size() - kSavegameExtension.size(), kSavegameExtension.size(),
+	                 kSavegameExtension) == 0) {
 		return run_load_game(load, script_to_run);
 	}
 
