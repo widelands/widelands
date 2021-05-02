@@ -638,8 +638,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
 
-	SinglePlayerGameController ctrl(game, true, playernumber);
-	game.set_game_controller(&ctrl);
+	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings.settings());
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
@@ -675,7 +674,7 @@ void WLApplication::run() {
 				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 				game.set_write_replay(false);
-				ReplayGameController rgc(game, filename_);
+				new ReplayGameController(game, filename_);
 				game.save_handler().set_allow_saving(false);
 				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 			} else {
@@ -1489,10 +1488,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	}
 
 	try {
-		std::unique_ptr<GameController> ctrl(
-		   new SinglePlayerGameController(game, true, playernumber));
 		if (replace_ctrl) {
-			game.set_game_controller(ctrl.get());
+			game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 		}
 
 		SaveHandler& save_handler = game.save_handler();

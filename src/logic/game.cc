@@ -178,8 +178,8 @@ InteractivePlayer* Game::get_ipl() {
 	return dynamic_cast<InteractivePlayer*>(get_ibase());
 }
 
-void Game::set_game_controller(GameController* const ctrl) {
-	ctrl_.reset(ctrl);
+void Game::set_game_controller(std::shared_ptr<GameController> c) {
+	ctrl_ = c;
 }
 
 void Game::set_ai_training_mode(const bool mode) {
@@ -306,7 +306,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
-	set_game_controller(new SinglePlayerGameController(*this, true, 1));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
 		bool const result =
 		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
@@ -504,7 +504,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, player_nr));
 	try {
 		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
 		ctrl_.reset();
@@ -775,11 +775,13 @@ bool Game::run(StartGameType const start_game_type,
 	if (next_game_to_load_.empty()) {
 		return true;
 	}
+
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
 	if (load.compare(load.size() - kSavegameExtension.size(), kSavegameExtension.size(), kSavegameExtension) == 0) {
 		return run_load_game(load, script_to_run);
 	}
-	/* Load a scenario. This should be either the current one, or the next if that exists. */
+
+	/* Load a scenario. This should be either the current one, or the next one if existent. */
 	assert(!list_of_scenarios_.empty());
 	std::list<std::string> list = list_of_scenarios_;
 	if (list.front() != load) {

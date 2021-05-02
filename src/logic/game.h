@@ -172,7 +172,7 @@ public:
 	}
 
 	// life cycle
-	void set_game_controller(GameController*);
+	void set_game_controller(std::shared_ptr<GameController>);
 	GameController* game_controller();
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
@@ -417,7 +417,7 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
-	std::unique_ptr<GameController> ctrl_;
+	std::shared_ptr<GameController> ctrl_;
 
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back

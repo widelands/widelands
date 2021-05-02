@@ -48,7 +48,7 @@ struct GameHost : public GameController {
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
 	GameHost(FsMenu::MenuCapsule&,
-	         std::unique_ptr<GameController>&,
+	         std::shared_ptr<GameController>&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
@@ -198,7 +198,7 @@ private:
 	void reaper();
 
 	FsMenu::MenuCapsule& capsule_;
-	std::unique_ptr<GameController>& pointer_;
+	std::shared_ptr<GameController>& pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;

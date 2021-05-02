@@ -50,7 +50,6 @@ public:
 	   GameController&,
 	   ChatProvider&,
 	   Widelands::Game&,
-	   std::unique_ptr<GameController>& delete_on_cancel,
 	   bool game_done_on_cancel,
 	   const std::function<void()>& callback = []() {});
 	~LaunchMPG() override;
@@ -59,10 +58,6 @@ public:
 	void refresh();
 
 	void clicked_select_map_callback(const MapData*, bool);
-
-	void unset_ctrl() {
-		ctrl_ = nullptr;
-	}
 
 protected:
 	void clicked_ok() override;
@@ -81,7 +76,6 @@ private:
 
 	std::function<void()> callback_;
 	bool game_done_on_cancel_;
-	std::unique_ptr<GameController>& delete_on_cancel_;
 
 	UI::Button help_button_;
 

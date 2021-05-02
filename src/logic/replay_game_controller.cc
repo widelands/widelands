@@ -19,6 +19,8 @@
 
 #include "logic/replay_game_controller.h"
 
+#include <memory>
+
 #include <SDL_timer.h>
 
 #include "logic/game.h"
@@ -32,7 +34,7 @@ ReplayGameController::ReplayGameController(Widelands::Game& game, const std::str
      time_(game_.get_gametime()),
      speed_(1000),
      paused_(false) {
-	game_.set_game_controller(this);
+	game_.set_game_controller(std::shared_ptr<ReplayGameController>(this));
 	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
 }
 

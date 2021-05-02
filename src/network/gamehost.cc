@@ -527,7 +527,7 @@ struct GameHostImpl {
 };
 
 GameHost::GameHost(FsMenu::MenuCapsule& c,
-                   std::unique_ptr<GameController>& ptr,
+                   std::shared_ptr<GameController>& ptr,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
@@ -662,7 +662,7 @@ void GameHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	new FsMenu::LaunchMPG(
-	   capsule_, d->hp, *this, d->chat, *game_, pointer_, internet_, [this]() { run_callback(); });
+	   capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
 }
 
 // TODO(k.halfmann): refactor into smaller functions
@@ -701,8 +701,7 @@ void GameHost::run_callback() {
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = game_.get();
-		game_->set_game_controller(this);
-		pointer_.release();  /// Ownership was passed to the game
+		game_->set_game_controller(pointer_);
 		InteractiveGameBase* igb;
 		player_number = d->settings.playernum + 1;
 		game_->save_handler().set_autosave_filename(

@@ -46,7 +46,7 @@ class MenuCapsule;
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(FsMenu::MenuCapsule&,
-	           std::unique_ptr<GameController>&,
+	           std::shared_ptr<GameController>&,
 	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
@@ -123,8 +123,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	void send_cheating_info();
 
-	void release_pointer() {
-		pointer_.release();
+	std::shared_ptr<GameController>& get_pointer() {
+		return pointer_;
 	}
 
 private:
@@ -166,7 +166,7 @@ private:
 	GameClientImpl* d;
 
 	FsMenu::MenuCapsule& capsule_;
-	std::unique_ptr<GameController>& pointer_;
+	std::shared_ptr<GameController>& pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H
