@@ -44,7 +44,9 @@ function farm_plans()
       sleep(500)
    end
 
-   o1.done = true
+   if o1 then
+      o1.done = true
+   end
    if not p1.defeated then
       campaign_message_box(amalea_2)
       local o = add_campaign_objective(obj_find_farm_plans)
