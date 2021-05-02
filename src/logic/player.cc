@@ -1493,8 +1493,8 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		field.vision.set_hidden(false);
 		if (!field.vision.is_visible()) {
 			field.vision = VisibleState::kVisible;
-			rediscover_node(map, map.get_fcoords(map[i]));
 		}
+		rediscover_node(map, map.get_fcoords(map[i]));
 		assert(field.vision.is_visible());
 		assert(!field.vision.is_revealed());
 		field.vision.set_revealed(true);
@@ -1546,6 +1546,15 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		}
 		assert(!field.vision.is_revealed());
 		assert(field.vision == VisibleState::kUnexplored);
+		break;
+
+	case HideOrRevealFieldMode::kUnexplore:
+		hide_or_reveal_field(coords, HideOrRevealFieldMode::kUnreveal);
+		if (field.vision == VisibleState::kPreviouslySeen) {
+			field.vision = VisibleState::kUnexplored;
+		}
+		assert(!field.vision.is_revealed());
+		assert(field.vision != VisibleState::kPreviouslySeen);
 		break;
 	}
 }
