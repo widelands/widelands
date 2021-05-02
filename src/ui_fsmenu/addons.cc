@@ -1157,7 +1157,7 @@ bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
 		return true;
 	}
 	for (const std::string& text :
-	     {info.descname(), info.author(), info.internal_name, info.description()}) {
+	     {info.descname(), info.author(), info.upload_username, info.internal_name, info.description()}) {
 		if (text.find(filter_name_.text()) != std::string::npos) {
 			// text filter found
 			return true;
