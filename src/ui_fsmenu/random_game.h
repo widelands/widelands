@@ -41,9 +41,10 @@ public:
 	void layout() override;
 
 private:
+	AddOns::AddOnsGuard guard_;
 	MainMenuNewRandomMapPanel menu_;
 	std::unique_ptr<Widelands::Game> game_;
-	SinglePlayerGameSettingsProvider settings_;
+	std::unique_ptr<SinglePlayerGameSettingsProvider> settings_;
 	UI::Icon icon_;
 	UI::ProgressWindow* progress_window_;  // not owned
 };
