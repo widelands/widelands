@@ -51,7 +51,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      ai_hints_(new AI::WareWorkerHints()),
      descriptions_(descriptions) {
 	if (table.has_key("experience")) {
-		// This also checks rhat the other worker's type matches ours
+		// This also checks that the other worker's type matches ours
 		set_becomes(descriptions, table.get_string("becomes"));
 	}
 
