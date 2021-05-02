@@ -4369,7 +4369,7 @@ Economy
    flag on the map. As soon this flag get connected to other flags the economies of all flags
    will be joined to a single economy. A player can have multiple economies each with it's own
    economy-settings.
-   
+
    You can get an economy from a :class:`Flag`.
 */
 const char LuaEconomy::className[] = "Economy";
@@ -4700,7 +4700,7 @@ int LuaMapObject::destroy(lua_State* L) {
    .. method:: has_attribute(attribute)
 
       (RO) Returns :const:`true`, if the map object has this attribute, else :const:`false`.
-      
+
       :arg attribute: The attribute to check for.
       :type attribute: :class:`string`
 */
@@ -4927,10 +4927,10 @@ int LuaFlag::get_worker_economy(lua_State* L) {
    .. attribute:: roads
 
       (RO) The roads which are connected to this flag, if any.
-      
+
       Note that waterways are currently treated like roads.
 
-      :returns:  A :class:`table` with directions as keys. Directions can be 
+      :returns:  A :class:`table` with directions as keys. Directions can be
          ``"tr"``, ``"r"``, ``"br"``, ``"bl"``, ``"l"`` and ``"tl"``. If this flag has no roads,
          the table will be empty.
 */
