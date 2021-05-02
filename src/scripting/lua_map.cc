@@ -2385,7 +2385,7 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
    .. attribute:: becomes
 
       (RO) An array of map object names that this immovable can turn into, e.g.
-      ``{"atlanteans_ship"}`` or ``{"deadtree2", "fallentree"}``.
+      ``{"atlanteans_ship"}`` or ``{"deadtree2","fallentree"}``.
 */
 int LuaImmovableDescription::get_becomes(lua_State* L) {
 	lua_newtable(L);
@@ -3342,7 +3342,7 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
    .. attribute:: food_defense
 
       (RO) A table of tables with food ware names used for Defense training,
-      e.g. ``{{"barbarians_bread"},{"fish", "meat"}}``
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_defense());
@@ -4234,7 +4234,7 @@ void LuaTerrainDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: name
 
-      (RO) the :class:`string` internal name of this terrain
+      (RO) The internal name of this terrain as :class:`string`.
 */
 
 int LuaTerrainDescription::get_name(lua_State* L) {
@@ -4245,7 +4245,7 @@ int LuaTerrainDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-      (RO) the :class:`string` display name of this terrain
+      (RO) The localized name of this terrain as :class:`string`.
 */
 
 int LuaTerrainDescription::get_descname(lua_State* L) {
@@ -4256,7 +4256,7 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: default_resource
 
-      (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
+      (RO) The :class:`wl.map.ResourceDescription` for the default resource provided by this
       terrain, or nil if the terrain has no default resource.
 */
 
@@ -4275,7 +4275,7 @@ int LuaTerrainDescription::get_default_resource(lua_State* L) {
 /* RST
    .. attribute:: default_resource_amount
 
-      (RO) the int amount of the default resource provided by this terrain.
+      (RO) The amount of the default resource provided by this terrain as :class:`integer`.
 */
 
 int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
@@ -4286,7 +4286,9 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 /* RST
    .. attribute:: fertility
 
-      (RO) the :class:`uint` fertility value for this terrain
+      (RO) The fertility value for this terrain as :class:`uint`.
+
+      See also: :attr:`ImmovableDescription.terrain_affinity`
 */
 
 int LuaTerrainDescription::get_fertility(lua_State* L) {
@@ -4297,7 +4299,9 @@ int LuaTerrainDescription::get_fertility(lua_State* L) {
 /* RST
    .. attribute:: humidity
 
-      (RO) the :class:`uint` humidity value for this terrain
+      (RO) The humidity value for this terrain as :class:`uint`.
+
+      See also: :attr:`ImmovableDescription.terrain_affinity`
 */
 
 int LuaTerrainDescription::get_humidity(lua_State* L) {
@@ -4308,7 +4312,7 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {
 /* RST
    .. attribute:: representative_image
 
-      (RO) the :class:`string` file path to a representative image
+      (RO) The file path to a representative image as :class:`string`.
 */
 int LuaTerrainDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->texture_paths().front());
@@ -4318,7 +4322,9 @@ int LuaTerrainDescription::get_representative_image(lua_State* L) {
 /* RST
    .. attribute:: temperature
 
-      (RO) the :class:`uint` temperature value for this terrain
+      (RO) The temperature value for this terrain as :class:`uint`.
+
+      See also: :attr:`~ImmovableDescription.terrain_affinity`
 */
 
 int LuaTerrainDescription::get_temperature(lua_State* L) {
@@ -4329,7 +4335,7 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
 /* RST
    .. attribute:: valid_resources
 
-      (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this
+      (RO) A list of :class:`wl.map.ResourceDescription` with all valid resources for this
       terrain.
 */
 
@@ -4359,8 +4365,12 @@ Economy
 -------
 .. class:: LuaEconomy
 
-   Provides access to an economy. A player can have multiple economies;
-   you can get an economy from a :class:`Flag`.
+   Provides access to an economy. An economy will be created each time a player places a
+   flag on the map. As soon this flag get connected to other flags the economies of all flags
+   will be joined to a single economy. A player can have multiple economies each with it's own
+   economy-settings.
+   
+   You can get an economy from a :class:`Flag`.
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
@@ -4399,7 +4409,7 @@ void LuaEconomy::__unpersist(lua_State* L) {
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
-      :arg name: the name of the ware or worker.
+      :arg name: The name of the ware or worker.
       :type name: :class:`string`
 */
 int LuaEconomy::target_quantity(lua_State* L) {
@@ -4430,7 +4440,7 @@ int LuaEconomy::target_quantity(lua_State* L) {
 }
 
 /* RST
-   .. method:: set_target_quantity(name)
+   .. method:: set_target_quantity(name, amount)
 
       Sets the amount of the given ware or worker type that should be kept in stock for this
       economy. Whether this works only for wares or only for workers is determined by the type of
@@ -4440,10 +4450,10 @@ int LuaEconomy::target_quantity(lua_State* L) {
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
-      :arg workername: the name of the worker type.
+      :arg workername: The name of the worker type.
       :type workername: :class:`string`
 
-      :arg amount: the new target amount for the worker. Needs to be >= 0.
+      :arg amount: The new target amount for the worker. Needs to be >= 0.
       :type amount: :class:`integer`
 */
 int LuaEconomy::set_target_quantity(lua_State* L) {
@@ -4687,9 +4697,12 @@ int LuaMapObject::destroy(lua_State* L) {
 }
 
 /* RST
-   .. method:: has_attribute(string)
+   .. method:: has_attribute(attribute)
 
-      returns true, if the map object has this attribute, else false
+      (RO) Returns :const:`true`, if the map object has this attribute, else :const:`false`.
+      
+      :arg attribute: The attribute to check for.
+      :type attribute: :class:`string`
 */
 int LuaMapObject::has_attribute(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -4737,7 +4750,7 @@ BaseImmovable
    This is the base class for all immovables in Widelands.
 
    More properties are available through this object's
-   :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
+   :class:`ImmovableDescription`, which you can access via :attr:`MapObject.descr`.
 */
 const char LuaBaseImmovable::className[] = "BaseImmovable";
 const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
@@ -4757,9 +4770,9 @@ const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
 /* RST
    .. attribute:: fields
 
-      (RO) An :class:`array` of :class:`~wl.map.Field` that is occupied by this
+      (RO) An :class:`array` of :class:`wl.map.Field` that is occupied by this
       Immovable. If the immovable occupies more than one field (roads or big
-      buildings for example) the first entry in this list will be the main field
+      buildings for example) the first entry in this list will be the main field.
 */
 int LuaBaseImmovable::get_fields(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -4913,11 +4926,13 @@ int LuaFlag::get_worker_economy(lua_State* L) {
 /* RST
    .. attribute:: roads
 
-      (RO) Array of roads leading to the flag. Directions
-      can be tr,r,br,bl,l and tl
+      (RO) The roads which are connected to this flag, if any.
+      
       Note that waterways are currently treated like roads.
 
-      :returns: The array of 'direction:road', if any
+      :returns:  A :class:`table` with directions as keys. Directions can be 
+         ``"tr"``, ``"r"``, ``"br"``, ``"bl"``, ``"l"`` and ``"tl"``. If this flag has no roads,
+         the table will be empty.
 */
 int LuaFlag::get_roads(lua_State* L) {
 
@@ -4941,7 +4956,7 @@ int LuaFlag::get_roads(lua_State* L) {
 /* RST
    .. attribute:: building
 
-      (RO) building belonging to the flag
+      (RO) The building belonging to the flag, if any.
 */
 int LuaFlag::get_building(lua_State* L) {
 
@@ -5082,16 +5097,16 @@ int LuaFlag::get_wares(lua_State* L) {
 /* RST
    .. method:: get_distance(flag)
 
-      Returns the distance of the specified flag from this flag by roads and/or ships,
-      or `nil` of the flag cannot be reached. More precisely, this is the time that a worker
-      will need to get from this flag to the other flag using roads.
+      Returns the distance of the specified flag from this flag by roads and/or ships. More
+      precisely, this is the time that a worker will need to get from this flag to the other
+      flag using roads.
 
       Note that the distance from A to B is not necessarily equal to the distance from B to A.
 
       :arg flag: The flag to find.
       :type flag: :class:`Flag`
 
-      :returns: The distance of the flags in walking time or `nil` if no path exists
+      :returns: The distance of the flags in walking time or ``nil`` if no path exists
 */
 int LuaFlag::get_distance(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
