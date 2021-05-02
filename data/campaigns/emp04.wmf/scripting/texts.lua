@@ -616,7 +616,7 @@ amalea_24 = {
       _([[Brother, as you can see, a lot of things seem to be wrong in this economy. I’ll be very busy to examine everything, so I won’t be here to provide as detailed advice as I used to do.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[But I am very confident, that you will handle everything properly all by yourself. I will report and advice immediately, if I am going to discover new problems, of course.]])),
+      _([[But I am very confident that you will handle everything properly all by yourself. Of course I will report and advise immediately whenever I discover new problems.]])),
    posy=1,
 }
 
