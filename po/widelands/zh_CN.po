@@ -8,13 +8,14 @@
 # Frank Tang <roadtang@gmail.com>, 2015
 # GunChleoc, 2015
 # Roy Luo <1598359376@qq.com>, 2020-2021
+# liulitchi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-24 18:30+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"PO-Revision-Date: 2021-04-29 12:46+0000\n"
+"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -266,8 +267,8 @@ msgstr "十一月"
 msgid "Dec"
 msgstr "十二月"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -280,12 +281,12 @@ msgstr "主菜单"
 msgid "Tools"
 msgstr "工具"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -475,10 +476,10 @@ msgstr "信息"
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -626,8 +627,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1338,8 +1339,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1431,7 +1432,7 @@ msgstr "读取显卡信息时出现未知的问题。"
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "因无法检测 OpenGL 版本，故游戏无法启动。"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -2511,7 +2512,7 @@ msgstr "/me 已检查收到的文件。虽然md5值校验成功，但我无法�
 
 #: ../../src/network/gameclient.cc:1227
 msgid "Disconnected"
-msgstr ""
+msgstr "未连接"
 
 #: ../../src/network/gameclient.cc:1229
 #, c-format
@@ -5094,18 +5095,18 @@ msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
 msgid "Tutorial"
 msgstr "教程"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "作者"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "作者"
@@ -5737,9 +5738,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6677,8 +6678,8 @@ msgstr "%1$s(%2$s)"
 msgid "Statistics"
 msgstr "统计"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "航海"
