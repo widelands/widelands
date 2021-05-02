@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# D M <hunter12@home.se>, 2017
+# D M <kamera001dm@gmail.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-21 13:12+0000\n"
 "PO-Revision-Date: 2021-03-02 12:22+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
@@ -262,8 +262,8 @@ msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:360
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:365
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:361
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:366
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -271,21 +271,21 @@ msgstr[0] "%i minut"
 msgstr[1] "%i minuter"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:362
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:363
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:368
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:369
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% timme"
 msgstr[1] "%1% timmar"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:371
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:372
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Spelet slutar om %s."

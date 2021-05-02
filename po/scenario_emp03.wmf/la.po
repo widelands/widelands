@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-29 14:02+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Language-Team: Latin (https://www.transifex.com/widelands/teams/35159/la/)\n"
 "MIME-Version: 1.0\n"
@@ -569,16 +569,18 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
 msgid ""
 "After the production of enough wheat, we can dismantle the farm and build a "
-"sheep farm to produce wool. Later on, we could build a weaving mill in the "
-"same spot to use our wool for weaving cloth. But for the moment being, let’s"
-" start by producing a reasonable amount of wheat."
+"sheep farm to produce wool. When the sheep farm starts working, we could "
+"find or free up space for a medium building to build a weaving mill to use "
+"our wool for weaving cloth. But for the moment being, let’s start by "
+"producing a reasonable amount of wheat."
 msgstr ""
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
 msgid ""
-"I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
-" we will have to adjust the target quantity for wheat to achieve this."
+"I think a stock of 50 sheaves of wheat would be enough for starters. We do "
+"not have a target quantity for wheat, because the farmer does not need other"
+" wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
@@ -678,7 +680,7 @@ msgstr ""
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
 "they have to use all our remaining gold for building the port. So, we won’t "
-"have any gold left after our port is build."
+"have any gold left after our port is built."
 msgstr ""
 
 #. TRANSLATORS: Amalea

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# liulitchi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-29 12:17+0000\n"
+"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,11 +43,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
-msgstr ""
+msgstr "保卫殖民地"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
-msgstr ""
+msgstr "保卫殖民地"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
@@ -54,19 +55,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
-msgstr ""
+msgstr "开始开采大理石"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
-msgstr ""
+msgstr "大理石"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "向东扩张，从山上开采大理石。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr ""
+msgstr "建造一所石匠之屋，和采矿基础设施。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
@@ -126,7 +127,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect Your Eastern Frontier"
-msgstr ""
+msgstr "防护东线"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:87
 msgid ""
@@ -140,15 +141,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "摧毁蛮族部落"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "摧毁蛮族部落"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "建造军营，来生产士兵。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
@@ -165,7 +166,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
-msgstr ""
+msgstr "新岛屿"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
@@ -177,7 +178,7 @@ msgstr ""
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "卢图斯日记"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
@@ -186,7 +187,7 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr ""
+msgstr "这个小岛似乎是为我们而建的，它是神的礼物。 目前，我们只探索该岛的一小部分，但仅此就已经使我想到了阳光。 我觉得，我们似乎找到了无价之宝，像天堂一样的土地。"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
@@ -198,7 +199,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
-msgstr ""
+msgstr "森林"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
@@ -484,7 +485,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
-msgstr ""
+msgstr "七天后……"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"

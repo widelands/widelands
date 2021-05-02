@@ -3,14 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# liulitchi <xingzuo88@qq.com>, 2019
+# liulitchi <xingzuo88@qq.com>, 2019,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-29 11:58+0000\n"
+"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,39 +20,39 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "确保建筑物供应"
+msgstr "确保建筑用品的供应"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "建筑供应警告"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "为经济提供基础建筑材料："
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
-msgstr ""
+msgstr "修建一座采石场"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "修建两所樵夫小屋"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "修建两所护林小屋"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
-msgstr ""
+msgstr "修建一座锯木厂"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:42
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "扩张领土，探索世界"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
-msgstr ""
+msgstr "扩张及探索"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""

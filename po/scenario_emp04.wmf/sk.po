@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-26 16:18+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Language-Team: Slovak (https://www.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -1333,6 +1333,42 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr ""
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+msgctxt "empire_building"
+msgid "brewing beer"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
+msgctxt "empire_building"
+msgid "Farm"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
+msgctxt "empire_building"
+msgid "working"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
+msgctxt "empire_building"
+msgid "planting wheat"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
+msgctxt "empire_building"
+msgid "harvesting wheat"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Forester’s House"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+msgctxt "empire_building"
+msgid "planting trees"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
@@ -1416,15 +1452,80 @@ msgid ""
 "the priestesses and the guards of the goddess."
 msgstr ""
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Lumberjack’s House"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+msgctxt "empire_building"
+msgid "felling trees"
+msgstr ""
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+msgctxt "empire_building"
+msgid "grinding wheat"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
 msgctxt "empire_building"
 msgid "Temple of Vesta"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
+msgctxt "empire_building"
+msgid "Training Camp"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
+msgctxt "empire_building"
+msgid "sleeping"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned

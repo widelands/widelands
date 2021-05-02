@@ -8,13 +8,14 @@
 # Frank Tang <roadtang@gmail.com>, 2015
 # GunChleoc, 2015
 # Roy Luo <1598359376@qq.com>, 2020-2021
+# liulitchi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"PO-Revision-Date: 2021-04-29 12:46+0000\n"
+"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -626,8 +627,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -699,7 +700,7 @@ msgid "%1%x %2%"
 msgstr "%1%x%2%"
 
 #: ../../src/editor/tools/info_tool.cc:204
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:140
 #: ../../src/ui_fsmenu/netsetup_lan.cc:130 ../../src/wui/mapdetails.cc:141
 #: ../../src/wui/minimap.cc:140
 msgid "Map"
@@ -732,7 +733,7 @@ msgstr "作者：%s"
 
 #: ../../src/editor/tools/info_tool.cc:223
 #: ../../src/ui_fsmenu/addons_packager_box.cc:151
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Description: %s"
 msgstr "说明：%s"
@@ -1338,8 +1339,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1431,7 +1432,7 @@ msgstr "读取显卡信息时出现未知的问题。"
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "因无法检测 OpenGL 版本，故游戏无法启动。"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1857,7 +1858,7 @@ msgstr "你受到了攻击"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:459
+#: ../../src/logic/map_objects/tribes/production_program.cc:457
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "经济需要这些物品 ‘%s’"
@@ -1865,7 +1866,7 @@ msgstr "经济需要这些物品 ‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:468
+#: ../../src/logic/map_objects/tribes/production_program.cc:466
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "经济不再需要这些物品‘%s’"
@@ -1873,14 +1874,14 @@ msgstr "经济不再需要这些物品‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:481
+#: ../../src/logic/map_objects/tribes/production_program.cc:479
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "经济需要这些劳动者 ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:491
+#: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "经济不再需要这些劳动者 ‘%s’"
@@ -1901,36 +1902,36 @@ msgstr "经济不再需要这些劳动者 ‘%s’"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:541
-#: ../../src/logic/map_objects/tribes/production_program.cc:565
-#: ../../src/logic/map_objects/tribes/production_program.cc:1216
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
-#: ../../src/logic/map_objects/tribes/production_program.cc:1406
+#: ../../src/logic/map_objects/tribes/production_program.cc:539
+#: ../../src/logic/map_objects/tribes/production_program.cc:563
+#: ../../src/logic/map_objects/tribes/production_program.cc:1214
+#: ../../src/logic/map_objects/tribes/production_program.cc:1321
+#: ../../src/logic/map_objects/tribes/production_program.cc:1404
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:547
+#: ../../src/logic/map_objects/tribes/production_program.cc:545
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "这座建筑有以下物品： %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:571
+#: ../../src/logic/map_objects/tribes/production_program.cc:569
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "这栋楼没有下列物品： %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:587
+#: ../../src/logic/map_objects/tribes/production_program.cc:585
 msgid "a worker needs experience"
 msgstr "工人需要经验"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:593
+#: ../../src/logic/map_objects/tribes/production_program.cc:591
 msgid "the workers need no experience"
 msgstr "工人们不需要经验"
 
@@ -1947,21 +1948,21 @@ msgstr "工人们不需要经验"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:726
-#: ../../src/logic/map_objects/tribes/production_program.cc:1240
+#: ../../src/logic/map_objects/tribes/production_program.cc:724
+#: ../../src/logic/map_objects/tribes/production_program.cc:1238
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "没有开始 %1$s 因为 %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:732
+#: ../../src/logic/map_objects/tribes/production_program.cc:730
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "完成了 %1$s 因为 %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:738
-#: ../../src/logic/map_objects/tribes/production_program.cc:744
+#: ../../src/logic/map_objects/tribes/production_program.cc:736
+#: ../../src/logic/map_objects/tribes/production_program.cc:742
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "略过 %1$s 因为 %2$s"
@@ -1970,7 +1971,7 @@ msgstr "略过 %1$s 因为 %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1226
+#: ../../src/logic/map_objects/tribes/production_program.cc:1224
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1979,7 +1980,7 @@ msgstr[0] "%s 缺乏"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1334
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1988,13 +1989,13 @@ msgstr[0] "已生产 %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1417
+#: ../../src/logic/map_objects/tribes/production_program.cc:1415
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "已征募 %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1836
+#: ../../src/logic/map_objects/tribes/production_program.cc:1834
 msgid "No soldier found for this training level!"
 msgstr "找不到符合此训练级别的士兵！"
 
@@ -2002,7 +2003,7 @@ msgstr "找不到符合此训练级别的士兵！"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1877
+#: ../../src/logic/map_objects/tribes/production_program.cc:1875
 #, c-format
 msgid "Completed %s"
 msgstr "已完成 %s"
@@ -2511,7 +2512,7 @@ msgstr "/me 已检查收到的文件。虽然md5值校验成功，但我无法�
 
 #: ../../src/network/gameclient.cc:1227
 msgid "Disconnected"
-msgstr ""
+msgstr "未连接"
 
 #: ../../src/network/gameclient.cc:1229
 #, c-format
@@ -3143,7 +3144,7 @@ msgstr "最小化"
 msgid "Restore"
 msgstr "还原"
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:195
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
 msgid "Pin"
 msgstr "固定"
 
@@ -3934,20 +3935,20 @@ msgid "Name: %s"
 msgstr "名称：%s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
 msgstr "大小：%s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
 msgstr "玩家：%s"
@@ -4601,44 +4602,44 @@ msgstr "找不到部落！"
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr "无效的部落'%s'"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
 msgstr "保存的玩家"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
 msgstr "玩家%u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr "玩家%1$u (%2$s): %3$s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
 msgstr "地图详情"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Scenario Details"
 msgstr "场景详情"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Hint: %s"
 msgstr "提示：%s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
 msgstr "没有选中地图"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:194
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:195
 msgid "(no map)"
 msgstr "(无地图)"
 
@@ -5512,32 +5513,32 @@ msgstr ""
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:753
+#: ../../src/wlapplication_options.cc:754
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:756
+#: ../../src/wlapplication_options.cc:757
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:760
+#: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:762
+#: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:766
+#: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:771
+#: ../../src/wlapplication_options.cc:772
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
@@ -5737,9 +5738,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6441,35 +6442,35 @@ msgstr "军事"
 msgid "Info Panel Visibility"
 msgstr "信息面板可见性"
 
-#: ../../src/wui/info_panel.cc:198
+#: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
 msgstr "跟随鼠标"
 
-#: ../../src/wui/info_panel.cc:203
+#: ../../src/wui/info_panel.cc:204
 msgid "Hide"
 msgstr "隐藏"
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
 msgstr "将面板移至底部"
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
 msgstr "将面板移至顶部"
 
-#: ../../src/wui/info_panel.cc:384
+#: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:434
+#: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:438
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s · %2$s · %3$s"

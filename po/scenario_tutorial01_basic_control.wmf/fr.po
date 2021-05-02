@@ -3,6 +3,7 @@
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2019
+# Atanase Albaran, 2021
 # David D, 2018,2021
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # GunChleoc, 2016
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
-"PO-Revision-Date: 2021-03-30 08:54+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-04-19 18:27+0000\n"
+"Last-Translator: Atanase Albaran\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,7 +151,7 @@ msgstr "Je vais vous montrer où se trouve le menu et où afficher et cacher les
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr "Maintenant que je t'ai montré comment afficher et cacher les espaces de construction, s'il te plait active-les à nouveau que nous puissions placer notre premier bâtiment."
+msgstr "Maintenant que je vous ai montré comment afficher et cacher les espaces de construction, s'il vous plaît active-les à nouveau que nous puissions placer notre premier bâtiment."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"

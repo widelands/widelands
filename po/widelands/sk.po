@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-02 10:43+0000\n"
+"POT-Creation-Date: 2021-04-29 14:02+0000\n"
 "PO-Revision-Date: 2021-03-22 20:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
@@ -625,8 +625,8 @@ msgstr "tažit"
 msgid "port"
 msgstr "prístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -698,7 +698,7 @@ msgid "%1%x %2%"
 msgstr "%1% x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:204
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:140
 #: ../../src/ui_fsmenu/netsetup_lan.cc:130 ../../src/wui/mapdetails.cc:141
 #: ../../src/wui/minimap.cc:140
 msgid "Map"
@@ -731,7 +731,7 @@ msgstr "Autor: %s"
 
 #: ../../src/editor/tools/info_tool.cc:223
 #: ../../src/ui_fsmenu/addons_packager_box.cc:151
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Description: %s"
 msgstr "Popis: %s"
@@ -1340,8 +1340,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1883,7 +1883,7 @@ msgstr "Útočí na vás nepriateľ"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:459
+#: ../../src/logic/map_objects/tribes/production_program.cc:457
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "ekonomika potrebuje výrobok „%s“"
@@ -1891,7 +1891,7 @@ msgstr "ekonomika potrebuje výrobok „%s“"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:468
+#: ../../src/logic/map_objects/tribes/production_program.cc:466
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "ekonomika nepotrebuje výrobok „%s“"
@@ -1899,14 +1899,14 @@ msgstr "ekonomika nepotrebuje výrobok „%s“"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:481
+#: ../../src/logic/map_objects/tribes/production_program.cc:479
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "ekonomika potrebuje pracovníka „%s“"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:491
+#: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "ekonomika nepotrebuje pracovníka „%s“"
@@ -1927,36 +1927,36 @@ msgstr "ekonomika nepotrebuje pracovníka „%s“"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:541
-#: ../../src/logic/map_objects/tribes/production_program.cc:565
-#: ../../src/logic/map_objects/tribes/production_program.cc:1216
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
-#: ../../src/logic/map_objects/tribes/production_program.cc:1406
+#: ../../src/logic/map_objects/tribes/production_program.cc:539
+#: ../../src/logic/map_objects/tribes/production_program.cc:563
+#: ../../src/logic/map_objects/tribes/production_program.cc:1214
+#: ../../src/logic/map_objects/tribes/production_program.cc:1321
+#: ../../src/logic/map_objects/tribes/production_program.cc:1404
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:547
+#: ../../src/logic/map_objects/tribes/production_program.cc:545
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "budova má tieto výrobky: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:571
+#: ../../src/logic/map_objects/tribes/production_program.cc:569
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "budova nemá tieto výrobky: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:587
+#: ../../src/logic/map_objects/tribes/production_program.cc:585
 msgid "a worker needs experience"
 msgstr "pracovník potrebuje nadobudnúť skúsenosti"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:593
+#: ../../src/logic/map_objects/tribes/production_program.cc:591
 msgid "the workers need no experience"
 msgstr "pracovníci nepotrebujú nadobudnúť skúsenosti"
 
@@ -1973,21 +1973,21 @@ msgstr "pracovníci nepotrebujú nadobudnúť skúsenosti"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:726
-#: ../../src/logic/map_objects/tribes/production_program.cc:1240
+#: ../../src/logic/map_objects/tribes/production_program.cc:724
+#: ../../src/logic/map_objects/tribes/production_program.cc:1238
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Nezačalo sa %1$s, pretože %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:732
+#: ../../src/logic/map_objects/tribes/production_program.cc:730
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Dokončilo sa %1$s, pretože %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:738
-#: ../../src/logic/map_objects/tribes/production_program.cc:744
+#: ../../src/logic/map_objects/tribes/production_program.cc:736
+#: ../../src/logic/map_objects/tribes/production_program.cc:742
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Nevykonalo sa %1$s, pretože %2$s"
@@ -1996,7 +1996,7 @@ msgstr "Nevykonalo sa %1$s, pretože %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1226
+#: ../../src/logic/map_objects/tribes/production_program.cc:1224
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2008,7 +2008,7 @@ msgstr[3] "chýba %s"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1334
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2020,7 +2020,7 @@ msgstr[3] "Vyrobené výrobky: %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1417
+#: ../../src/logic/map_objects/tribes/production_program.cc:1415
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -2029,7 +2029,7 @@ msgstr[1] "Najatí pracovníci: %s"
 msgstr[2] "Najatí pracovníci: %s"
 msgstr[3] "Najatí pracovníci: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1836
+#: ../../src/logic/map_objects/tribes/production_program.cc:1834
 msgid "No soldier found for this training level!"
 msgstr "Nenašiel sa žiaden vojak pre túto úroveň výcviku!"
 
@@ -2037,7 +2037,7 @@ msgstr "Nenašiel sa žiaden vojak pre túto úroveň výcviku!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1877
+#: ../../src/logic/map_objects/tribes/production_program.cc:1875
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -3196,7 +3196,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:195
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
 msgid "Pin"
 msgstr ""
 
@@ -4023,20 +4023,20 @@ msgid "Name: %s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
 msgstr ""
@@ -4690,44 +4690,44 @@ msgstr ""
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
 msgstr ""
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Scenario Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Hint: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:194
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:195
 msgid "(no map)"
 msgstr "(žiadna mapa)"
 
@@ -5601,32 +5601,32 @@ msgstr ""
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:753
+#: ../../src/wlapplication_options.cc:754
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:756
+#: ../../src/wlapplication_options.cc:757
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:760
+#: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:762
+#: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:766
+#: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:771
+#: ../../src/wlapplication_options.cc:772
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
@@ -5829,9 +5829,9 @@ msgstr "Prístavy"
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6545,35 +6545,35 @@ msgstr "Vojsko"
 msgid "Info Panel Visibility"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:198
+#: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:203
+#: ../../src/wui/info_panel.cc:204
 msgid "Hide"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:208
+#: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:384
+#: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:434
+#: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:438
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""

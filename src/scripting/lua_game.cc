@@ -667,21 +667,26 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: hide_fields(fields[, unexplore = false])
+   .. method:: hide_fields(fields[, state = "seen"])
 
       Undo the effect of :meth:`reveal_fields` on these fields for the current player and
-      optionally completely hide them.
+      optionally completely hide them or reset them to unexplored.
       See also :ref:`field_animations` for animated hiding.
+      .. note:: Passing a :class:`boolean` as the *state* argument is deprecated.
+      Use ``"permanent"`` instead of ``true`` and ``"seen"`` instead of ``false``.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`
 
-      :arg unexplore: *Optional*. If  ``true``, the fields will be marked as completely unexplored
+      :arg state: *Optional*. If  ``"permanent"``, the fields will be marked as completely hidden
          and will not be seen by buildings or workers until they are revealed again
          by :meth:`reveal_fields`.
-         If `false`, They will no longer be permanently visible, but can still be seen by
-         buildings or workers (own or allied), and the player will remember the last seen state.
-      :type unexplore: :class:`boolean`
+         If ``"explorable"``, they will no longer be visible, but can still be rediscovered by
+         buildings, ships or workers (own or allied).
+         If ``"seen"``, they will no longer be permanently visible (fading to foggy), but can
+         still be seen by buildings or workers (own or allied), and the player will remember the
+         last state that they had been seen. This is the default.
+      :type state: :class:`string`
 
       :returns: :const:`nil`
 */
@@ -690,9 +695,19 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	// TODO(hessenfarmer): Boolean check for compatibility. Remove after v1.0
+	const std::string state = lua_isnone(L, 3) ? "seen" :
+	                                             !lua_isboolean(L, 3) ?
+	                                             luaL_checkstring(L, 3) :
+	                                             luaL_checkboolean(L, 3) ? "permanent" : "seen";
+	const Widelands::HideOrRevealFieldMode mode = (state == "permanent") ?
 	                                                 Widelands::HideOrRevealFieldMode::kHide :
+	                                                 (state == "explorable") ?
+	                                                 Widelands::HideOrRevealFieldMode::kUnexplore :
 	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
+	if (mode == Widelands::HideOrRevealFieldMode::kUnreveal && state != "seen") {
+		report_error(L, "'%s' is no valid parameter for hide_fields!", state.c_str());
+	}
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
