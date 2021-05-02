@@ -31,8 +31,7 @@ function farm_plans()
    local f = map:get_field(47, 10)
    local farmclick = false
    local count = 0
-   local o1 = add_campaign_objective(obj_click_farmbuilding)
-   o1.done = true
+   local o1 = nil
    while not (farmclick or p1.defeated or (f.owner == p1)) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
@@ -40,7 +39,7 @@ function farm_plans()
       count = count + 1
       if count == 1201 then
          campaign_message_box(amalea_18)
-         o1.done = false
+         o1 = add_campaign_objective(obj_click_farmbuilding)
       end
       sleep(500)
    end
@@ -72,8 +71,6 @@ end
 -- the chaotic road network has to be cleared
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
-   local o1 = add_campaign_objective(obj_clear_roads_2)
-   o1.done = true
    local cleared = false
    local count_deadend = 0
    local count_star = 0
@@ -103,14 +100,12 @@ function clear_roads()
       end
       timer = timer + 1
       if timer == 100 and not p1.defeated then
-         o.done = true
-         o1.done = false
+         o.body = obj_clear_roads_hint
          campaign_message_box(amalea_20)
       end
    end
    if not p1.defeated then
       o.done = true
-      o1.done = true
       campaign_message_box(amalea_6)
    end
 end
