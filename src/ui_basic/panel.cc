@@ -1169,7 +1169,7 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 
-	if (!handles_keypresses()) {
+	if (!handles_keypresses() || !is_visible()) {
 		return false;
 	}
 
