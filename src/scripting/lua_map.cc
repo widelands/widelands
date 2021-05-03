@@ -6148,7 +6148,7 @@ WH_GET_POLICY(worker)
 
       Returns the policies how the warehouse should handle the given wares
       and workers. See :meth:`Warehouse.set_warehouse_policies` for policy strings.
-      
+
       :arg which: Behaves like :meth:`HasWares.get_wares`.
       :type which: :class:`string` or :class:`array`
 
@@ -6158,10 +6158,10 @@ WH_GET_POLICY(worker)
 
       .. code-block:: lua
 
-         wh:get_warehouse_policies("log")             
+         wh:get_warehouse_policies("log")
             -- Returns e.g. "normal"
 
-         wh:get_warehouse_policies({"ax", "coal"})    
+         wh:get_warehouse_policies({"ax", "coal"})
             -- Returns a table like {"ax"="normal", "coal"="prefer"}
 
 
@@ -6853,7 +6853,7 @@ int LuaBob::get_field(lua_State* L) {
 
       :arg swim_or_walk: Can be either of :const:`"swims"` or :const:`"walks"`
       :type swim_or_walk: :class:`string`
-      
+
       :returns: :const:`true` if this bob is able to **swim_or_walk**, otherwise :const:`false`
 */
 // UNTESTED
@@ -6956,7 +6956,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
       (RW) Query which state the ship is in. Can be either of:
 
       * :const:`"transport"`,
-      * :const:`"exp_waiting"`, :const:`"exp_scouting"`, :const:`"exp_found_port_space"`, 
+      * :const:`"exp_waiting"`, :const:`"exp_scouting"`, :const:`"exp_found_port_space"`,
         :const:`"exp_colonizing"`,
       * :const:`"sink_request"`, :const:`"sink_animation"`
 
