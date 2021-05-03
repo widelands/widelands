@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 27,
+	NETWORK_PROTOCOL_VERSION = 28,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
