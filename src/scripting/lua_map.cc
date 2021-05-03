@@ -5449,7 +5449,7 @@ const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
 /* RST
    .. attribute:: building
 
-      (RO) The name of the building that is constructed here.
+      (RO) The internal name of the building that is constructed here.
 */
 int LuaConstructionSite::get_building(lua_State* L) {
 	lua_pushstring(L, get(L, get_egbase(L))->building().name());
@@ -5459,8 +5459,8 @@ int LuaConstructionSite::get_building(lua_State* L) {
 /* RST
    .. attribute:: has_builder
 
-      (RW) Whether this constructionsite has a builder. Changing this setting causes the worker to
-      be instantly deleted or to be created from thin air.
+      (RW) :const:`true` if this constructionsite has a builder. Changing this setting causes the
+      worker to be instantly deleted or to be created from thin air.
 */
 int LuaConstructionSite::get_has_builder(lua_State* L) {
 	lua_pushboolean(L, get(L, get_egbase(L))->builder_.is_set());
@@ -5498,7 +5498,7 @@ int LuaConstructionSite::set_has_builder(lua_State* L) {
 /* RST
    .. attribute:: setting_launch_expedition
 
-      (RW) Only valid for ports under construction. Whether an expedition will be launched
+      (RW) Only valid for ports under construction. :const:`true` if an expedition will be launched
       immediately upon completion.
 */
 int LuaConstructionSite::get_setting_launch_expedition(lua_State* L) {
@@ -5521,8 +5521,8 @@ int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
 /* RST
    .. attribute:: setting_stopped
 
-      (RW) Only valid for productionsites and trainingsites under construction. Whether this
-      building will be initially stopped after completion.
+      (RW) Only valid for productionsites and trainingsites under construction. :const:`true` if
+      this building will be initially stopped after completion.
 */
 int LuaConstructionSite::get_setting_stopped(lua_State* L) {
 	if (upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings())) {
@@ -5545,7 +5545,7 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
    .. attribute:: setting_soldier_preference
 
       (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer
-   heroes after completion; ``"rookies"`` otherwise.
+      heroes after completion; ``"rookies"`` otherwise.
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
@@ -5576,7 +5576,7 @@ int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
    .. attribute:: setting_soldier_capacity
 
       (RW) Only valid for militarysites and trainingsites under construction. The desired number of
-      soldiers stationed here after completion.
+      soldiers stationed here after completion as :const:`integer`.
 */
 int LuaConstructionSite::get_setting_soldier_capacity(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
@@ -5733,8 +5733,8 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 /* RST
    .. method:: set_setting_warehouse_policy(wareworker, policystring)
 
-      Only valid for warehouses under construction. Sets the stock policy to apply to the given ware
-      or worker after completion. Valid values for **policystring** are documented in
+      Only valid for warehouses under construction. Sets the stock policy to apply to the given
+      ware or worker after completion. Valid values for **policystring** are documented in
       :meth:`Warehouse.set_warehouse_policies`.
 
 */
@@ -5790,8 +5790,8 @@ const PropertyType<LuaDismantleSite> LuaDismantleSite::Properties[] = {
 /* RST
    .. attribute:: has_builder
 
-      (RW) Whether this dismantlesite has a builder. Changing this setting causes the worker to be
-      instantly deleted, or to be created from thin air.
+      (RW) :const:`true` if this dismantlesite has a builder. Changing this setting causes the
+      worker to be instantly deleted, or to be created from thin air.
 */
 int LuaDismantleSite::get_has_builder(lua_State* L) {
 	lua_pushboolean(L, get(L, get_egbase(L))->builder_.is_set());
@@ -5892,7 +5892,7 @@ int LuaWarehouse::get_portdock(lua_State* L) {
    .. attribute:: expedition_in_progress
 
       (RO) If this Warehouse is a port, and an expedition is in
-      progress, returns true, otherwise nil
+      progress, this is :const`true`, otherwise nil.
 */
 int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 
@@ -6060,16 +6060,19 @@ inline bool do_set_worker_policy(Widelands::Warehouse* wh,
 
       Sets the policies how the warehouse should handle the given wares and workers.
 
-      :arg which: Behaves like for :meth:`HasWares.get_wares`.
-
+      :arg which: Behaves like :meth:`HasWares.get_wares`.
+      :type which: :class:`string` or :class:`table`
       :arg policy: The policy to apply for all the wares and workers given in **which**.
       :type policy: A string out of ``"normal"``, ``"prefer"``, ``"dontstock"`` or ``"remove"``
 
-      Usage example:
+      Usage examples:
 
       .. code-block:: lua
 
-         wh:set_warehouse_policies("coal", "prefer")
+         wh:set_warehouse_policies("all", "remove")               -- remove all wares
+         wh:set_warehouse_policies("coal", "prefer")              -- prefer coal
+         wh:set_warehouse_policies({"coal", "log"}, "dontstock")  -- don't store coal and logs
+
 
 */
 int LuaWarehouse::set_warehouse_policies(lua_State* L) {
@@ -6143,19 +6146,25 @@ WH_GET_POLICY(worker)
 /* RST
    .. method:: get_warehouse_policies(which)
 
-      Gets the policies how the warehouse should handle the given wares and workers.
-      The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
+      Returns the policies how the warehouse should handle the given wares
+      and workers. See :meth:`Warehouse.set_warehouse_policies` for policy strings.
+      
+      :arg which: Behaves like :meth:`HasWares.get_wares`.
+      :type which: :class:`string` or :class:`array`
+
+      :returns: :class:`string` or :class:`table`
 
       Usage example:
 
       .. code-block:: lua
 
-         wh:get_warehouse_policies({"ax", "coal"})
-         -- Returns a table like {ax="normal", coal="prefer"}
+         wh:get_warehouse_policies("log")             
+            -- Returns e.g. "normal"
 
-      :arg which: behaves like for :meth:`HasWares.get_wares`.
+         wh:get_warehouse_policies({"ax", "coal"})    
+            -- Returns a table like {"ax"="normal", "coal"="prefer"}
 
-      :returns: :class:`string` or :class:`table`
+
 */
 int LuaWarehouse::get_warehouse_policies(lua_State* L) {
 	int32_t nargs = lua_gettop(L);
@@ -6224,7 +6233,7 @@ int LuaWarehouse::set_soldiers(lua_State* L) {
 /* RST
    .. method:: start_expedition()
 
-      Starts preparation for expedition
+      Starts preparation for an expedition.
 
 */
 int LuaWarehouse::start_expedition(lua_State* L) {
@@ -6253,7 +6262,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 /* RST
    .. method:: cancel_expedition()
 
-      Cancels an expedition if in progress
+      Cancels an expedition if in progress.
 
 */
 int LuaWarehouse::cancel_expedition(lua_State* L) {
@@ -6476,7 +6485,7 @@ int LuaProductionSite::set_workers(lua_State* L) {
 /* RST
    .. method:: toggle_start_stop()
 
-      If :any:`ProductionSite.is_stopped`, sends a command to start this productionsite.
+      If :attr:`ProductionSite.is_stopped`, sends a command to start this productionsite.
       Otherwise, sends a command to stop this productionsite.
 */
 int LuaProductionSite::toggle_start_stop(lua_State* L) {
@@ -6690,7 +6699,7 @@ int LuaMilitarySite::get_capacity(lua_State* L) {
 /* RST
    .. attribute:: soldier_preference
 
-      (RW) "heroes" if this site prefers heroes; "rookies" otherwise.
+      (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` otherwise.
 */
 int LuaMilitarySite::get_soldier_preference(lua_State* L) {
 	lua_pushstring(
@@ -6820,7 +6829,7 @@ const PropertyType<LuaBob> LuaBob::Properties[] = {
 /* RST
    .. attribute:: field
 
-      (RO) The field the bob is located on
+      (RO) The field the bob is located on.
 */
 // UNTESTED
 int LuaBob::get_field(lua_State* L) {
@@ -6838,14 +6847,14 @@ int LuaBob::get_field(lua_State* L) {
  ==========================================================
  */
 /* RST
-   .. method:: has_caps(capname)
+   .. method:: has_caps(swim_or_walk)
 
-      Similar to :meth:`Field::has_caps`.
+      (RO) Whether this bob can swim or walk.
 
-      :arg capname: can be either of
-
-      * :const:`swims`: This bob can swim.
-      * :const:`walks`: This bob can walk.
+      :arg swim_or_walk: Can be either of :const:`"swims"` or :const:`"walks"`
+      :type swim_or_walk: :class:`string`
+      
+      :returns: :const:`true` if this bob is able to **swim_or_walk**, otherwise :const:`false`
 */
 // UNTESTED
 int LuaBob::has_caps(lua_State* L) {
@@ -6944,13 +6953,14 @@ int LuaShip::get_last_portdock(lua_State* L) {
 /* RST
    .. attribute:: state
 
-   Query which state the ship is in:
+      (RW) Query which state the ship is in. Can be either of:
 
-   - transport,
-   - exp_waiting, exp_scouting, exp_found_port_space, exp_colonizing,
-   - sink_request, sink_animation
+      * :const:`"transport"`,
+      * :const:`"exp_waiting"`, :const:`"exp_scouting"`, :const:`"exp_found_port_space"`, 
+        :const:`"exp_colonizing"`,
+      * :const:`"sink_request"`, :const:`"sink_animation"`
 
-      (RW) returns the :class:`string` ship's state, or :const:`nil` if there is no valid state.
+      :returns: The ship's state as :const:`string`, or :const:`nil` if there is no valid state.
 
 
 */
@@ -7045,8 +7055,8 @@ int LuaShip::set_scouting_direction(lua_State* L) {
 /* RST
    .. attribute:: island_explore_direction
 
-      (RW) actual direction if the ship sails around an island.
-      Sets/returns cw, ccw or nil
+      (RW) Actual direction if the ship sails around an island.
+      Sets/returns :const:`"cw"`, :const:`"ccw"` or :const:`nil`
 
 */
 int LuaShip::get_island_explore_direction(lua_State* L) {
@@ -7089,9 +7099,7 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 /* RST
    .. attribute:: shipname
 
-   Get name of ship:
-
-   (RO) returns the :class:`string` ship's name.
+   (RO) The name of the ship as :class:`string`.
 
 
 */
@@ -7104,14 +7112,11 @@ int LuaShip::get_shipname(lua_State* L) {
 /* RST
    .. attribute:: capacity
 
-   The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship
+   (RW) The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship
    description.
 
    Do not change this value if the ship is currently shipping more items than the new capacity
    allows.
-
-   (RW) returns the current capacity of this ship
-
 */
 int LuaShip::get_capacity(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->get_capacity());
@@ -7145,7 +7150,7 @@ int LuaShip::set_capacity(lua_State* L) {
       When called with :const:`""` as argument, returns an array with
       the names of all loaded wares.
 
-      :returns: the number of wares or an :class:`array` of :class:`string`
+      :returns: The number of wares or an :class:`array` of :class:`string`.
 */
 // UNTESTED
 int LuaShip::get_wares(lua_State* L) {
@@ -7200,7 +7205,7 @@ int LuaShip::get_wares(lua_State* L) {
       When called with :const:`""` as argument, returns an array
       with all loaded workers.
 
-      :returns: the number of workers or an :class:`array` of :class:`Worker`
+      :returns: The number of workers or an :class:`array` of :class:`Worker`
 */
 // UNTESTED
 int LuaShip::get_workers(lua_State* L) {
