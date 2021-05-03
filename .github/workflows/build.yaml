@@ -188,8 +188,8 @@ jobs:
     - name: Installing dependencies
       run: |
         $env:Path += ";C:\msys64\usr\bin"
-        pacman.exe --noconfirm -Syyuu
-        pacman.exe --noconfirm -Syyuu
+        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
+        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         if ("${{ matrix.arch }}" -Match "x64") {
           $env:archname = "x86_64"
         } else {
