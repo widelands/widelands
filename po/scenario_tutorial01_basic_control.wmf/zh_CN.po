@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-29 13:16+0000\n"
+"PO-Revision-Date: 2021-04-30 08:07+0000\n"
 "Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -139,7 +139,7 @@ msgstr "我将向你展示菜单的位置，以及显示和隐藏建筑空地的
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "既然已经展示了显示和隐藏建筑空地，请打开它们，以便放置第一座建筑物。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"
@@ -151,7 +151,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "下面，我来花一分钟解释这些标志。首先，先演示怎么建一座伐木工小屋，并把它连到道路上。有一处地方不错，正好在树的旁边。 按照步骤慢慢来，点击“好的”按钮开始。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -161,13 +161,13 @@ msgstr "建造伐木小屋"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "首先，在要建造伐木工小屋的符号上鼠标左击。 会出现一个窗口，可选择建筑。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "伐木工小屋是一座小型建筑，因此继续选择“小型建筑”选项卡。 然后选择伐木工小屋。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -230,7 +230,7 @@ msgstr "在你的总部和伐木屋的中间创建一个蓝旗"
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "要放置旗帜，请单击位于蓝旗之间的黄旗符号，然后单击建筑旗帜符号。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:156
 msgid "Placing Another Flag"
@@ -241,7 +241,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "看他们工作起来还不错，是不是？但是可怜的搬运工每次都要走很长的路。我们可以在路上再放一个旗子，让他们更方便（同时也能提升效率）。这次换你来试试。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:171
 msgid ""
@@ -260,11 +260,11 @@ msgstr "现在路已经分割成了两段，每一段有一个搬运工。这意
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "我们来看一下进度"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:183
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "单击建筑地基来查看。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
