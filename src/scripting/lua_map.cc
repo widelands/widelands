@@ -7275,10 +7275,10 @@ int LuaShip::build_colonization_port(lua_State* L) {
       Turns this ship into an expedition ship without a base port. Creates all necessary
       wares and a builder plus, if desired, the specified additional **items**.
       The ship must be empty and not an expedition ship when this method is called.
-      
+
       Note that the :attr:`capacity` is not adjusted if you give additional itmes. If the amount
       of additional items exceed the capacity, the game don't like it.
-      
+
       See also :any:`launch_expeditions` which adjusts :attr:`capacity`
       depending on the given wares and workers.
 
@@ -7299,16 +7299,16 @@ int LuaShip::build_colonization_port(lua_State* L) {
 
          -- substract buildcost for port
          local buildings = wl.Game().players[1].tribe.buildings
-         for i, building in ipairs(buildings) do 
-            if building.is_port then 
-               for ware, amount in pairs(building.buildcost) do 
+         for i, building in ipairs(buildings) do
+            if building.is_port then
+               for ware, amount in pairs(building.buildcost) do
                   free_capacity = free_capacity - amount
-               end 
-            end 
+               end
+            end
          end
          -- finally substract one slot for the builder
          free_capacity = free_capacity - 1
-         
+
          if free_capacity < 13 then
             ship.capacity = ship.capacity + 13
          end
