@@ -57,6 +57,11 @@ obj_clear_roads = {
    ),
 }
 
+obj_clear_roads_hint = rt(objective_text(_"Clear Road Network",
+   li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]]) ..
+   li_arrow(_[[Ensure there are not more than 3 dead ends or flags with more than 4 roads.]])
+   ))
+
 obj_click_farmbuilding = {
    name = "click_farm_building",
    title=_"Click on one of the farms",
@@ -125,7 +130,10 @@ obj_heroes = {
    title=_"Train at least 3 heroes",
    number = 1,
    body = objective_text(_"Hero Training",
-      li(_[[Use your resources wisely to train at least three fully promoted heroes.]])
+      li(_[[Use your resources wisely to train at least three fully promoted heroes.]]) ..
+      li_arrow(_[[To train a soldier to the highest level in one site, consider stopping the trainigsite until it is fully equipped with all food and weapons needed.]]) ..
+      li_arrow(_[[To prevent waste of goods, reduce the soldiers to be trained to one per site.]]) ..
+      li_arrow(_[[A site will always prefer the best suited soldier available for training. Make sure you don’t have your half trained soldiers garrisoned in a military building.]])
    ),
 }
 
@@ -144,8 +152,7 @@ obj_recruit_soldiers = {
    title=_"Recruit new soldiers",
    number = 1,
    body = objective_text(_"New Soldier Recruiting",
-      li(_[[Recruit at least ten new soldiers in your barracks.]]) ..
-      li_arrow(_[[Don’t forget to forge weapons and armor for them.]])
+      li(_[[Recruit at least ten new soldiers in your barracks.]])
    ),
 }
 
@@ -595,6 +602,17 @@ amalea_23 = {
    body= amalea2(_"Amalea reports our defeat…",
       -- TRANSLATORS: Amalea
       _([[Oh no Lutius, I don’t know how this could have happened, but the Barbarians have destroyed our last warehouse. So, we have lost this battle and our empire!]])),
+   posy=1,
+}
+
+amalea_24 = {
+   title=_"Amalea in a Hurry",
+   body= amalea1(_"Amalea is very busy…",
+      -- TRANSLATORS: Amalea
+      _([[Brother, as you can see, a lot of things seem to be wrong in this economy. I’ll be very busy to examine everything, so I won’t be here to provide as detailed advice as I used to do.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[But I am very confident that you will handle everything properly all by yourself. Of course I will report and advise immediately whenever I discover new problems.]])),
    posy=1,
 }
 
