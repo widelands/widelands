@@ -1654,38 +1654,38 @@ msgstr "Brauerei"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
 msgctxt "empire_building"
 msgid "brewing beer"
-msgstr ""
+msgstr "Das Brauen von Bier"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Bauernhof"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
 msgctxt "empire_building"
 msgid "working"
-msgstr ""
+msgstr "Das Arbeiten"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
 msgid "planting wheat"
-msgstr ""
+msgstr "Das Pflanzen von Weizen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
 msgctxt "empire_building"
 msgid "harvesting wheat"
-msgstr ""
+msgstr "Das Ernten von Weizen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Forsthaus"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
 msgctxt "empire_building"
 msgid "planting trees"
-msgstr ""
+msgstr "Das Pflanzen von Bäumen"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
@@ -1780,12 +1780,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Holzfällerhaus"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
 msgctxt "empire_building"
 msgid "felling trees"
-msgstr ""
+msgstr "Das Fällen von Bäumen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1795,7 +1795,7 @@ msgstr "Mühle"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
 msgctxt "empire_building"
 msgid "grinding wheat"
-msgstr ""
+msgstr "Das Mahlen von Weizen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
@@ -1806,52 +1806,52 @@ msgstr "Tempel der Vesta"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Ausbildungslager"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
 msgid "sleeping"
-msgstr ""
+msgstr "Das Schlafen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 0 auf 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 1 auf 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 2 auf 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 3 auf 4"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 0 auf 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 1 auf 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 2 auf 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 3 auf 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
