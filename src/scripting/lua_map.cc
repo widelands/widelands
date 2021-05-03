@@ -6634,7 +6634,7 @@ MilitarySite
 
    Child of: :class:`Building`, :class:`HasSoldiers`
 
-   Miltary Buildings
+   Military buildings with stationed soldiers.
 
    More properties are available through this object's
    :class:`MilitarySiteDescription`, which you can access via :any:`MapObject.descr`.
@@ -7056,7 +7056,7 @@ int LuaShip::set_scouting_direction(lua_State* L) {
    .. attribute:: island_explore_direction
 
       (RW) Actual direction if the ship sails around an island.
-      Sets/returns :const:`"cw"`, :const:`"ccw"` or :const:`nil`
+      Sets/returns :const:`"cw"` (clockwise), :const:`"ccw"` (counter clock wise) or :const:`nil`.
 
 */
 int LuaShip::get_island_explore_direction(lua_State* L) {
@@ -7252,10 +7252,10 @@ int LuaShip::get_workers(lua_State* L) {
 /* RST
    .. method:: build_colonization_port()
 
-      Returns true if port space construction was started (ship was in adequate
-      status and a found portspace was nearby)
+      Returns :const:`true` if port space construction was started (ship was in adequate
+      status and a found portspace nearby)
 
-      :returns: true/false
+      :returns: :const:`true` or :const:`false`
 */
 int LuaShip::build_colonization_port(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -7273,12 +7273,48 @@ int LuaShip::build_colonization_port(lua_State* L) {
    .. method:: make_expedition([items])
 
       Turns this ship into an expedition ship without a base port. Creates all necessary
-      wares and a builder plus, if desired, the specified additional items.
-      Any items previously present in the ship will be deleted.
-
+      wares and a builder plus, if desired, the specified additional **items**.
       The ship must be empty and not an expedition ship when this method is called.
+      
+      Note that the :attr:`capacity` is not adjusted if you give additional itmes. If the amount
+      of additional items exceed the capacity, the game don't like it.
+      
+      See also :any:`launch_expeditions` which adjusts :attr:`capacity`
+      depending on the given wares and workers.
 
-      :returns: nil
+      :arg items: Optional: Additional items to the ones that are needed to build a port.
+      :type items: :class:`table` of ``{ware_or_worker=amount}`` pairs.
+
+      :returns: :const:`nil`
+
+      Example:
+
+      .. code-block:: lua
+
+         -- place a ship on the map
+         ship = wl.Game().players[1]:place_ship(wl.Game().map:get_field(21,27))
+
+         -- check capacity
+         local free_capacity = ship.capacity
+
+         -- substract buildcost for port
+         local buildings = wl.Game().players[1].tribe.buildings
+         for i, building in ipairs(buildings) do 
+            if building.is_port then 
+               for ware, amount in pairs(building.buildcost) do 
+                  free_capacity = free_capacity - amount
+               end 
+            end 
+         end
+         -- finally substract one slot for the builder
+         free_capacity = free_capacity - 1
+         
+         if free_capacity < 13 then
+            ship.capacity = ship.capacity + 13
+         end
+
+         -- create expedition with additional 13 items
+         ship:make_expedition({barbarians_soldier = 10, fish=3})
 */
 int LuaShip::make_expedition(lua_State* L) {
 	upcast(Widelands::Game, game, &get_egbase(L));
