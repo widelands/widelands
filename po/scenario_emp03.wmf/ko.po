@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-29 14:02+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -612,20 +612,19 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
 msgid ""
 "After the production of enough wheat, we can dismantle the farm and build a "
-"sheep farm to produce wool. Later on, we could build a weaving mill in the "
-"same spot to use our wool for weaving cloth. But for the moment being, let’s"
-" start by producing a reasonable amount of wheat."
+"sheep farm to produce wool. When the sheep farm starts working, we could "
+"find or free up space for a medium building to build a weaving mill to use "
+"our wool for weaving cloth. But for the moment being, let’s start by "
+"producing a reasonable amount of wheat."
 msgstr ""
-"충분한 양의 밀이 생산되면, 농장을 해체하고 양털을 생산할 양 목장을 짓습니다. 그리고 나서, 같은 위치에 양털로 옷감을 직조할 "
-"직조공장을 같은 위치에 짓습니다. 하지만 거의 그렇게 하려면, 충분한 양의 밀을 생산하기 시작해야 겠지요."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
 msgid ""
-"I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
-" we will have to adjust the target quantity for wheat to achieve this."
+"I think a stock of 50 sheaves of wheat would be enough for starters. We do "
+"not have a target quantity for wheat, because the farmer does not need other"
+" wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
-"제 생각에는 50 묶음의 밀 정도면 초심자에게 충분할 것 같습니다. 아마 이를 달성하기 위한 밀의 목표 양을 설정해야 할 것입니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -731,10 +730,8 @@ msgstr "아말리아가 생각에 잠겨 있는 것 같다…"
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
 "they have to use all our remaining gold for building the port. So, we won’t "
-"have any gold left after our port is build."
+"have any gold left after our port is built."
 msgstr ""
-"루티우스를 위하여. 용감한 건설업자들과 이야기해봤는데, 우리에게 남겨진 모든 금을 항구를 건설하는데 사용했다고 하네요. 그래서, 항구를 "
-"건설한 이후에는 금이 전혀 없어요."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
