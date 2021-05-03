@@ -51,6 +51,7 @@
     - Add missing translation markups
 - Fix detection of amount of starting gold in fri02 (#4797)
 - Fix typo and outdated instructions in emp03 (#4836)
+- Empire 04 text improvements (#4844)
 
 
 ### Scripting
@@ -320,6 +321,9 @@
 - renamed Youth Gathering to Initiation Site (#4739)
 - Fix duplicate description registries by add-ons (#4767)
 - Fix replays and savegames with add-on tribes (#4766)
+- Fix add-on compatibility issues in random match setup (#4835)
+    - Add some notes to the random match setup menu
+    - Prevent crashes with invalid add-on
 
 
 ### User Interface
@@ -506,6 +510,7 @@
 - Add text size checks in multiline editbox (#4800)
 - Add missing richtext escape for map descriptions (#4817)
 - Fix initial info panel text visibility (#4810)
+- Don't let invisible panels handle keys (#4826)
 
 
 ### Internationalization
