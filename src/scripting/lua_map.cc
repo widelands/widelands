@@ -1204,8 +1204,8 @@ HasInputs
       :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
          refers to the settings to apply after construction.
       :type cs_setting: :class:`bool`
-      :returns: :class:`string`
 
+      :returns: :class:`string`
 */
 
 /* RST
@@ -1215,11 +1215,12 @@ HasInputs
       the increase/decrease buttons.
 
       :arg item: Ware or worker name.
-      :type ware: :class:`string`
+      :type item: :class:`string`
       :arg fill: The desired fill.
-      :type ware: :class:`integer`
+      :type fill: :class:`integer`
       :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
-   the settings to apply after construction. :type cs_setting: :class:`bool`
+         the settings to apply after construction.
+      :type cs_setting: :class:`bool`
 */
 
 /* RST
@@ -1229,10 +1230,12 @@ HasInputs
       :meth:`set_desired_fill`.
 
       :arg item: Ware or worker name.
-      :type ware: :class:`string`
+      :type item: :class:`string`
       :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
-   the settings to apply after construction. :type cs_setting: :class:`bool` :returns:
-   :class:`integer`
+         the settings to apply after construction.
+      :type cs_setting: :class:`bool` 
+      
+      :returns: :class:`integer`
 */
 
 /* RST
@@ -1291,7 +1294,7 @@ HasSoldiers
          Returns an :class:`integer` which is the number of soldiers of this
          kind in this building.
 
-         A soldier description is a :class:`array` that contains the level for
+         A soldier description is an :class:`array` that contains the level for
          health, attack, defense and evade (in this order). A usage example:
 
          .. code-block:: lua
