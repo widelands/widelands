@@ -919,8 +919,9 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
                                                const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::ProductionSiteDescr& psdescr = dynamic_cast<Widelands::ProductionSiteDescr&>(
-	   *descrs.get_mutable_building_descr(descrs.safe_building_index(unit_name)));
+	const Widelands::DescriptionIndex psindex = descrs.safe_building_index(unit_name);
+	Widelands::ProductionSiteDescr& psdescr =
+	   dynamic_cast<Widelands::ProductionSiteDescr&>(*descrs.get_mutable_building_descr(psindex));
 
 	if (property == "input") {
 		const std::string cmd = luaL_checkstring(L, 5);
@@ -1001,6 +1002,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 	} else if (property == "enhancement") {
 		std::unique_ptr<LuaTable> tbl(new LuaTable(L));
 		psdescr.set_enhancement(descrs, *tbl);
+		descrs.get_mutable_building_descr(psdescr.enhancement())->set_enhanced_from(psindex);
 	} else {
 		report_error(
 		   L, "modify_unit not supported yet for productionsite property '%s'", property.c_str());

@@ -684,6 +684,10 @@ void GameHost::run_callback() {
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
+	packet.unsigned_32(game_->enabled_addons().size());
+	for (const AddOns::AddOnInfo& a : game_->enabled_addons()) {
+		packet.string(a.internal_name);
+	}
 	broadcast(packet);
 
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
