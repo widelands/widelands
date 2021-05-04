@@ -1218,9 +1218,8 @@ HasInputs
       :type ware: :class:`string`
       :arg fill: The desired fill.
       :type ware: :class:`integer`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to the
-                       settings to apply after construction.
-      :type cs_setting: :class:`bool`
+      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
+   the settings to apply after construction. :type cs_setting: :class:`bool`
 */
 
 /* RST
@@ -1231,10 +1230,9 @@ HasInputs
 
       :arg item: Ware or worker name.
       :type ware: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to the
-                       settings to apply after construction.
-      :type cs_setting: :class:`bool`
-      :returns: :class:`integer`
+      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
+   the settings to apply after construction. :type cs_setting: :class:`bool` :returns:
+   :class:`integer`
 */
 
 /* RST
@@ -8133,7 +8131,7 @@ int LuaField::region(lua_State* L) {
 
       :arg capname: Can be either of:
       :type capname: :class:`string`
-      
+
       * :const:`"small"`: Can a small building be built here?
       * :const:`"medium"`: Can a medium building be built here?
       * :const:`"big"`: Can a big building be built here?
@@ -8142,8 +8140,8 @@ int LuaField::region(lua_State* L) {
       * :const:`"flag"`: Can a flag be built here?
       * :const:`"walkable"`: Is this field passable for walking bobs?
       * :const:`"swimmable"`: Is this field passable for swimming bobs?
-      
-      
+
+
 */
 int LuaField::has_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
