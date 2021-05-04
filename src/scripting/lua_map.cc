@@ -7276,8 +7276,8 @@ int LuaShip::build_colonization_port(lua_State* L) {
       wares and a builder plus, if desired, the specified additional **items**.
       The ship must be empty and not an expedition ship when this method is called.
 
-      Note that the :attr:`capacity` is not adjusted if you give additional itmes. If the amount
-      of additional items exceed the capacity, the game don't like it.
+      Note that the :attr:`capacity` is not adjusted if you give additional **itmes**.
+      If the amount of additional items exceed the capacity, the game don't like it.
 
       See also :any:`launch_expeditions` which adjusts :attr:`capacity`
       depending on the given wares and workers.
@@ -7287,7 +7287,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
 
       :returns: :const:`nil`
 
-      Example:
+      Example with check for sufficent capacity:
 
       .. code-block:: lua
 
@@ -7297,18 +7297,21 @@ int LuaShip::build_colonization_port(lua_State* L) {
          -- check capacity
          local free_capacity = ship.capacity
 
-         -- substract buildcost for port
+         -- subtract buildcost for port
          local buildings = wl.Game().players[1].tribe.buildings
          for i, building in ipairs(buildings) do
             if building.is_port then
                for ware, amount in pairs(building.buildcost) do
                   free_capacity = free_capacity - amount
                end
+               -- stop iterating buildings
+               break
             end
          end
-         -- finally substract one slot for the builder
+         -- finally subtract one slot for the builder
          free_capacity = free_capacity - 1
 
+         -- adjust capacity
          if free_capacity < 13 then
             ship.capacity = ship.capacity + 13
          end
@@ -7810,7 +7813,7 @@ int LuaField::set_resource_amount(lua_State* L) {
 /* RST
    .. attribute:: initial_resource_amount
 
-      (RO) Starting value of resource. It is set be resource_amount
+      (RO) Starting value of resource. It is set be resource_amount.
 
       :see also: :attr:`resource`
 */
@@ -7917,12 +7920,12 @@ int LuaField::set_terd(lua_State* L) {
 
       (RO) The neighbour fields of this field. The abbreviations stand for:
 
-      * rn -- Right neighbour
-      * ln -- Left neighbour
-      * brn -- Bottom right neighbour
-      * bln -- Bottom left neighbour
-      * trn -- Top right neighbour
-      * tln -- Top left neighbour
+      * ``rn`` -- Right neighbour
+      * ``ln`` -- Left neighbour
+      * ``brn`` -- Bottom right neighbour
+      * ``bln`` -- Bottom left neighbour
+      * ``trn`` -- Top right neighbour
+      * ``tln`` -- Top left neighbour
 
       Note that the widelands map wraps at its borders, that is the following
       holds:
@@ -8121,21 +8124,25 @@ int LuaField::region(lua_State* L) {
 /* RST
    .. method:: has_caps(capname)
 
-      Returns :const:`true` if the field has this caps associated
-      with it, otherwise returns false.
+      Returns :const:`true` if the field has this **capname** associated
+      with it, otherwise returns :const:`false`.
+
       Note: Immovables will hide the caps. If you want to have the caps
       without immovables use has_max_caps instead
 
-      :arg capname: can be either of
-
-      * :const:`small`: Can a small building be built here?
-      * :const:`medium`: Can a medium building be built here?
-      * :const:`big`: Can a big building be built here?
-      * :const:`mine`: Can a mine be built here?
-      * :const:`port`: Can a port be built here?
-      * :const:`flag`: Can a flag be built here?
-      * :const:`walkable`: Is this field passable for walking bobs?
-      * :const:`swimmable`: Is this field passable for swimming bobs?
+      :arg capname: Can be either of:
+      :type capname: :class:`string`
+      
+      * :const:`"small"`: Can a small building be built here?
+      * :const:`"medium"`: Can a medium building be built here?
+      * :const:`"big"`: Can a big building be built here?
+      * :const:`"mine"`: Can a mine be built here?
+      * :const:`"port"`: Can a port be built here?
+      * :const:`"flag"`: Can a flag be built here?
+      * :const:`"walkable"`: Is this field passable for walking bobs?
+      * :const:`"swimmable"`: Is this field passable for swimming bobs?
+      
+      
 */
 int LuaField::has_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
@@ -8148,18 +8155,11 @@ int LuaField::has_caps(lua_State* L) {
    .. method:: has_max_caps(capname)
 
       Returns :const:`true` if the field has this maximum caps (not taking immovables into account)
-      associated with it, otherwise returns false.
+      associated with it, otherwise returns :const:`false`.
 
-      :arg capname: can be either of
+      :arg capname: For possible values see :meth:`has_caps`
+      :type capname: :class:`string`
 
-      * :const:`small`: Can a small building be built here?
-      * :const:`medium`: Can a medium building be built here?
-      * :const:`big`: Can a big building be built here?
-      * :const:`mine`: Can a mine be built here?
-      * :const:`port`: Can a port be built here?
-      * :const:`flag`: Can a flag be built here?
-      * :const:`walkable`: Is this field passable for walking bobs?
-      * :const:`swimmable`: Is this field passable for swimming bobs?
 */
 int LuaField::has_max_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
@@ -8281,7 +8281,7 @@ void LuaPlayerSlot::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: tribe_name
 
-      (RO) The name of the tribe suggested for this player in this map
+      (RO) The name of the tribe suggested for this player in this map.
 */
 int LuaPlayerSlot::get_tribe_name(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
@@ -8291,7 +8291,7 @@ int LuaPlayerSlot::get_tribe_name(lua_State* L) {
 /* RST
    .. attribute:: name
 
-      (RO) The name for this player as suggested in this map
+      (RO) The name for this player as suggested in this map.
 */
 int LuaPlayerSlot::get_name(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
