@@ -1061,18 +1061,18 @@ HasWares
 
       Gets the number of wares that currently reside here.
 
-      :arg which:  can be either of
+      :arg which:  Can be either of:
 
-      * the string :const:`all`.
-           In this case the function will return a
-           :class:`table` of (ware name,amount) pairs that gives information
-           about all ware information available for this object.
-      * a ware name.
+      * The string :const:`"all"`.
+         In this case the function will return a
+         :class:`table` of ``{ware_name=amount}`` pairs that gives information
+         about all ware information available for this object.
+      * A ware name.
          In this case a single integer is returned. No check is made
          if this ware makes sense for this location, you can for example ask a
          :const:`lumberjacks_hut` for the number of :const:`granite` he has
          and he will return 0.
-      * an :class:`array` of ware names.
+      * An :class:`array` of ware names.
          In this case a :class:`table` of
          ``{ware_name=amount}`` pairs is returned where only the requested wares
          are listed. All other entries are :const:`nil`.
@@ -1088,9 +1088,9 @@ HasWares
       ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
       of thin air.
 
-      :arg which: name of ware or ``{ware_name=amount}`` table
+      :arg which: Name of ware or a :const:`table` of `{ware_name=amount}`` pairs.
       :type which: :class:`string` or :class:`table`
-      :arg amount: this many units will be available after the call
+      :arg amount: This many units will be available after the call.
       :type amount: :class:`integer`
 */
 
@@ -1121,7 +1121,7 @@ HasInputs
    :class:`~wl.map.ProductionSite` and :class:`~wl.map.TrainingSite`.
    This interface is similar to :class:`HasWares` but additionally allows
    to set workers as inputs. These workers are consumed by the production
-   or trainings programm.
+   or trainings programs.
 */
 
 /* RST
@@ -1130,21 +1130,21 @@ HasInputs
       Gets the number of wares and workers that currently reside here
       for consumption.
 
-      :arg which:  can be either of
+      :arg which:  Can be either of:
 
-      * the string :const:`all`.
-           In this case the function will return a
-           :class:`table` of (ware/worker name,amount) pairs that gives
-           information about all ware information available for this object.
-      * a ware or worker name.
-           In this case a single integer is returned. No check is made
-           if this ware/worker makes sense for this location, you can for example ask a
-           :const:`lumberjacks_hut` for the number of :const:`granite` he has
-           and he will return 0.
-      * an :class:`array` of ware and worker names.
-           In this case a :class:`table` of
-           ``{ware/worker_name=amount}`` pairs is returned where only the requested
-           wares/workers are listed. All other entries are :const:`nil`.
+      * The string :const:`all`.
+         In this case the function will return a
+         :class:`table` of ``{ware/worker_name,amount}`` pairs that gives
+         information about all ware information available for this object.
+      * A ware or worker name.
+         In this case a single integer is returned. No check is made
+         if this ware/worker makes sense for this location, you can for example ask a
+         :const:`lumberjacks_hut` for the number of :const:`granite` he has
+         and he will return 0.
+      * An :class:`array` of ware and worker names.
+         In this case a :class:`table` of
+         ``{ware/worker_name=amount}`` pairs is returned where only the requested
+         wares/workers are listed. All other entries are :const:`nil`.
 
       :returns: :class:`integer` or :class:`table`
 */
@@ -1186,10 +1186,11 @@ HasInputs
 
       :arg ware: ware name
       :type ware: :class:`string`
-      :arg prio: The new priority. One of "very_low", "low", "normal", "high", or "very_high".
+      :arg prio: The new priority. One of ``"very_low"``, ``"low"``, ``"normal"``, ``"high"``,
+         or ``"very_high"``.
       :type prio: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
-                       settings to apply after construction.
+      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
+         refers to the settings to apply after construction.
       :type cs_setting: :class:`bool`
 */
 
@@ -1198,10 +1199,10 @@ HasInputs
 
       Returns the priority for the given ware inputqueue. See also :meth:`set_priority`.
 
-      :arg ware: ware name
+      :arg ware: A ware name.
       :type ware: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
-                       settings to apply after construction.
+      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
+         refers to the settings to apply after construction.
       :type cs_setting: :class:`bool`
       :returns: :class:`string`
 
@@ -1213,11 +1214,11 @@ HasInputs
       Sets the desired fill for the given ware or worker inputqueue, as if the player had clicked
       the increase/decrease buttons.
 
-      :arg item: ware or worker name
+      :arg item: Ware or worker name.
       :type ware: :class:`string`
-      :arg fill: desired fill
+      :arg fill: The desired fill.
       :type ware: :class:`integer`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to the
                        settings to apply after construction.
       :type cs_setting: :class:`bool`
 */
@@ -1228,9 +1229,9 @@ HasInputs
       Returns the desired fill for the given ware or worker inputqueue. See also
       :meth:`set_desired_fill`.
 
-      :arg item: ware or worker name
+      :arg item: Ware or worker name.
       :type ware: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to the
                        settings to apply after construction.
       :type cs_setting: :class:`bool`
       :returns: :class:`integer`
@@ -1286,9 +1287,9 @@ HasSoldiers
 
       Gets information about the soldiers in a location.
 
-      :arg descr: can be either of
+      :arg descr: Can be either of:
 
-      * a soldier description.
+      * A soldier description.
          Returns an :class:`integer` which is the number of soldiers of this
          kind in this building.
 
@@ -1301,7 +1302,7 @@ HasSoldiers
 
          would return the number of soldiers of level 0 in this location.
 
-      * the string :const:`all`.
+      * The string :const:`"all"`.
          In this case a :class:`table` of ``{soldier_descriptions=count}`` is
          returned. Note that the following will not work, because Lua indexes
          tables by identity:
@@ -1537,7 +1538,7 @@ int LuaMap::count_terrestrial_fields(lua_State* L) {
 
       (RO) Counts the number of owned valuable fields for all players.
 
-      :arg immovable_attribute: *Optional*. If this is set, only count fields that have an
+      :arg immovable_attribute: Optional: If this is set, only count fields that have an
         immovable with the given attribute.
       :type immovable_attribute: :class:`string`
 
@@ -7987,7 +7988,7 @@ int LuaField::get_buildable(lua_State* L) {
       (RO) Whether any roads lead to the field.
       Note that waterways are currently treated like roads.
 
-      :returns: ``true`` if any of the 6 directions has a road on it, ``false`` otherwise.
+      :returns: :const:`true` if any of the 6 directions has a road on it, :const:`false` otherwise.
 */
 int LuaField::get_has_roads(lua_State* L) {
 
