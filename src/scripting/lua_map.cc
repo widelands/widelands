@@ -1233,8 +1233,8 @@ HasInputs
       :type item: :class:`string`
       :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
          the settings to apply after construction.
-      :type cs_setting: :class:`bool` 
-      
+      :type cs_setting: :class:`bool`
+
       :returns: :class:`integer`
 */
 
