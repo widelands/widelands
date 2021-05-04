@@ -668,9 +668,13 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                                    :const:`"set"`            **program_table**  (*table*)
       :const:`"tribe"`             :const:`"add_ware"`       **ware_name**      (*string*),
                                                              **menu_column**    (*int*),
+                                                             **target_quan**    (*int* or *nil*),
+                                                             **preciousness**   (*int*),
                                                              **helptexts**      (*table*)
       :const:`"tribe"`             :const:`"add_worker"`     **worker_name**    (*string*),
                                                              **menu_column**    (*int*),
+                                                             **target_quan**    (*int* or *nil*),
+                                                             **preciousness**   (*int* or *nil*),
                                                              **helptexts**      (*table*)
       :const:`"tribe"`             :const:`"add_building"`   **building_name**  (*string*),
                                                              **helptexts**      (*table*)
@@ -679,12 +683,13 @@ int LuaDescriptions::new_tribe(lua_State* L) {
       ===========================  ========================  ====================================
 
       Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
-      column in the workers displays (stock menu, warehouse window, economy options):
+      column in the workers displays (stock menu, warehouse window, economy options), and have
+      no target quantity or preciousness:
 
       .. code-block:: lua
 
-         descriptions:modify_unit("tribe", "frisians", "add_worker", "frisians_salter", 2,
-               { helptexts = { purpose =
+         descriptions:modify_unit("tribe", "frisians", "add_worker", "frisians_salter",
+               2, nil, nil, { helptexts = { purpose =
                   _("The salter washes salt from the shores of the sea.")
                }})
 
@@ -802,6 +807,15 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		tribe_descr.mutable_wares().insert(di);
 		tribe_descr.mutable_wares_order()[column].push_back(di);
 
+		Widelands::WareDescr& wdescr = *descrs.get_mutable_ware_descr(di);
+		if (!lua_isnil(L, 7)) {
+			wdescr.set_default_target_quantity(unit_name, luaL_checkuint32(L, 7));
+		}
+		if (!lua_isinteger(L, 8)) {
+			report_error(L, "Preciousness is mandatory for wares (item: %s)", warename.c_str());
+		}
+		wdescr.set_preciousness(unit_name, luaL_checkuint32(L, 8));
+
 		LuaTable t(L);
 		tribe_descr.load_helptexts(descrs.get_mutable_ware_descr(di), t);
 
@@ -820,6 +834,18 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		const Widelands::DescriptionIndex di = descrs.safe_worker_index(workername);
 		tribe_descr.mutable_workers().insert(di);
 		tribe_descr.mutable_workers_order()[column].push_back(di);
+
+		Widelands::WorkerDescr& wdescr = *descrs.get_mutable_worker_descr(di);
+		if (!lua_isnil(L, 7)) {
+			wdescr.set_default_target_quantity(luaL_checkuint32(L, 7));
+			if (lua_isnil(L, 8)) {
+				report_error(L, "Worker '%s' with target quantity must define a preciousness",
+				             workername.c_str());
+			}
+		}
+		if (!lua_isnil(L, 8)) {
+			wdescr.set_preciousness(unit_name, luaL_checkuint32(L, 8));
+		}
 
 		LuaTable t(L);
 		tribe_descr.load_helptexts(descrs.get_mutable_worker_descr(di), t);
@@ -893,8 +919,9 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
                                                const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::ProductionSiteDescr& psdescr = dynamic_cast<Widelands::ProductionSiteDescr&>(
-	   *descrs.get_mutable_building_descr(descrs.safe_building_index(unit_name)));
+	const Widelands::DescriptionIndex psindex = descrs.safe_building_index(unit_name);
+	Widelands::ProductionSiteDescr& psdescr =
+	   dynamic_cast<Widelands::ProductionSiteDescr&>(*descrs.get_mutable_building_descr(psindex));
 
 	if (property == "input") {
 		const std::string cmd = luaL_checkstring(L, 5);
@@ -975,6 +1002,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 	} else if (property == "enhancement") {
 		std::unique_ptr<LuaTable> tbl(new LuaTable(L));
 		psdescr.set_enhancement(descrs, *tbl);
+		descrs.get_mutable_building_descr(psdescr.enhancement())->set_enhanced_from(psindex);
 	} else {
 		report_error(
 		   L, "modify_unit not supported yet for productionsite property '%s'", property.c_str());

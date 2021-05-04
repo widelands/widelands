@@ -260,6 +260,7 @@ void Game::check_addons_desync_magic() {
 
 bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
+	enabled_addons().clear();
 	// Replays can't handle scenarios
 	set_write_replay(false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
