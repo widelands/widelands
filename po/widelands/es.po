@@ -13,7 +13,7 @@
 # Kiibakun, 2015,2021
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015-2017,2020
+# Madkat Here, 2015-2017,2020-2021
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # Gontzal M. Pujana <juchuf@gmail.com>, 2017-2018,2020
@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
-"PO-Revision-Date: 2021-04-08 22:23+0000\n"
-"Last-Translator: Edmundo Vázquez M. <evazquezm@gmail.com>\n"
+"POT-Creation-Date: 2021-05-02 12:36+0000\n"
+"PO-Revision-Date: 2021-05-03 16:17+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,7 +548,7 @@ msgstr "Mostrar Recursos"
 msgid "Unsupported Format"
 msgstr "Formato no soportado"
 
-#: ../../src/editor/editorinteractive.cc:476 ../../src/wlapplication.cc:678
+#: ../../src/editor/editorinteractive.cc:476 ../../src/wlapplication.cc:686
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -1557,7 +1557,7 @@ msgstr "apagado"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/wlapplication.cc:1443
+#: ../../src/wlapplication.cc:1451
 msgid "Error"
 msgstr "Error"
 
@@ -1669,17 +1669,17 @@ msgstr "Creando jugador %d…"
 
 #: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "Carga posterior de mundo y tribus…"
 
-#: ../../src/logic/editor_game_base.cc:553
+#: ../../src/logic/editor_game_base.cc:560
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Limpiando para cargar: Objetos del mapa (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:556
+#: ../../src/logic/editor_game_base.cc:563
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Limpiando para cargar: Jugadores (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:559
+#: ../../src/logic/editor_game_base.cc:566
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Limpiando para cargar: Mapa (3/3)"
 
@@ -2265,7 +2265,7 @@ msgstr "Un geólogo encontró recursos."
 #: ../../src/logic/map_objects/tribes/worker.cc:2066
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "Tu %s no encuentra un camino a casa, probablemente muera."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../src/logic/map_objects/tribes/worker.cc:2073
@@ -2308,13 +2308,13 @@ msgstr "intransitable"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Un archivo de mapa no es válido :\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
 msgstr "El objetivo no tiene descripción"
 
-#: ../../src/logic/player.cc:1908
+#: ../../src/logic/player.cc:1917
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2486,7 +2486,7 @@ msgid "Checking map"
 msgstr "Comprobando mapa"
 
 #: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:701
-#: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:629
+#: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:637
 msgid "Preparing game…"
 msgstr "Preparando partida…"
 
@@ -2535,7 +2535,7 @@ msgstr "/me comprobó el archivo recibido. Aunque la verificación del md5 fue e
 
 #: ../../src/network/gameclient.cc:1227
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconectado"
 
 #: ../../src/network/gameclient.cc:1229
 #, c-format
@@ -3045,7 +3045,7 @@ msgstr "El cliente %1$s no ha respondido por más de %2$s."
 #: ../../src/network/network_gaming_messages.cc:169
 #, c-format
 msgid "Client %s is cheating!"
-msgstr ""
+msgstr "El cliente %s está haciendo trampa!"
 
 #: ../../src/network/network_lan_promotion.cc:362
 msgid "Failed to use the local network!"
@@ -3061,7 +3061,7 @@ msgstr "Widelands no pudo usar la red local. Quizás otro proceso está ejecutan
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1276
+#: ../../src/scripting/lua_game.cc:1291
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3190,15 +3190,15 @@ msgstr "Error de Lua"
 
 #: ../../src/ui_fsmenu/addons.cc:115
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Administrador de complementos"
 
 #: ../../src/ui_fsmenu/addons.cc:156
 msgid "Verified only"
-msgstr ""
+msgstr "Solo verificados"
 
 #: ../../src/ui_fsmenu/addons.cc:157
 msgid "Show only verified add-ons in the Browse tab"
-msgstr ""
+msgstr "Muestra solo complementos verificados en la pestaña Examinar"
 
 #: ../../src/ui_fsmenu/addons.cc:165
 msgid "Sort by"
@@ -3219,7 +3219,7 @@ msgstr "Actualizar"
 
 #: ../../src/ui_fsmenu/addons.cc:194
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Actualizar la lista de complementos disponibles en el servidor"
 
 #: ../../src/ui_fsmenu/addons.cc:211
 msgid "Fix dependencies…"
@@ -3231,27 +3231,27 @@ msgstr "Intenta arreglar los errores de dependencias automáticamente"
 
 #: ../../src/ui_fsmenu/addons.cc:222
 msgid "Move selected add-on to top"
-msgstr ""
+msgstr "Mover el complemento seleccionado a la parte superior "
 
 #: ../../src/ui_fsmenu/addons.cc:231
 msgid "Move selected add-on one step up"
-msgstr ""
+msgstr "Mover el complemento seleccionado una posición hacia arriba"
 
 #: ../../src/ui_fsmenu/addons.cc:240
 msgid "Move selected add-on one step down"
-msgstr ""
+msgstr "Mover el complemento seleccionado una posición hacia abajo"
 
 #: ../../src/ui_fsmenu/addons.cc:249
 msgid "Move selected add-on to bottom"
-msgstr ""
+msgstr "Mover el complemento seleccionado a la parte inferior"
 
 #: ../../src/ui_fsmenu/addons.cc:257
 msgid "Launch the add-ons packager…"
-msgstr ""
+msgstr "Iniciar el empaquetador de complementos..."
 
 #: ../../src/ui_fsmenu/addons.cc:261
 msgid "Tools for Add-Ons Developers"
-msgstr ""
+msgstr "Herramientas para desarrolladores de complementos"
 
 #: ../../src/ui_fsmenu/addons.cc:269
 msgid ""
@@ -3272,22 +3272,22 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:303
 msgid "Open Link"
-msgstr ""
+msgstr "Abrir Enlace"
 
 #: ../../src/ui_fsmenu/addons.cc:305
 msgid "Copy Link"
-msgstr ""
+msgstr "Copiar Enlace"
 
 #: ../../src/ui_fsmenu/addons.cc:325
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "Para obtener más información sobre cómo desarrollar y empaquetar tus propios complementos, visita %s."
 
 #: ../../src/ui_fsmenu/addons.cc:355
 msgid "Development"
-msgstr ""
+msgstr "Desarrollo"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons.cc:358
@@ -3297,7 +3297,7 @@ msgstr "Nombre"
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../src/ui_fsmenu/addons.cc:360
 msgid "Name (descending)"
-msgstr ""
+msgstr "Nombre (descendiente)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:362
@@ -3331,7 +3331,7 @@ msgstr "Más nuevo"
 
 #: ../../src/ui_fsmenu/addons.cc:375
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Filtrar complementos por nombre"
 
 #: ../../src/ui_fsmenu/addons.cc:385
 #, c-format
@@ -5065,11 +5065,19 @@ msgstr "La traducción al%1% está completa en un %2%%%."
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Si deseas ayudar con la traducción, por favor visita %s"
 
-#: ../../src/ui_fsmenu/random_game.cc:85
+#: ../../src/ui_fsmenu/random_game.cc:66
+msgid ""
+"The random map generator is still in beta stage. The maps it generates are "
+"usually – but not always – well playable. Seafaring and artifacts are not "
+"supported. Add-ons of the World, Tribes, and Script categories are disabled "
+"in random matches."
+msgstr ""
+
+#: ../../src/ui_fsmenu/random_game.cc:117
 msgid "Map Generation Error"
 msgstr "Error en la generación del mapa"
 
-#: ../../src/ui_fsmenu/random_game.cc:86
+#: ../../src/ui_fsmenu/random_game.cc:118
 msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
@@ -5135,18 +5143,18 @@ msgstr "Ruta a archivo no válida en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autores"
@@ -5179,25 +5187,25 @@ msgid "Unmark All"
 msgstr "Desmarcar todo"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:682 ../../src/wlapplication.cc:688
-#: ../../src/wlapplication.cc:693 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:690 ../../src/wlapplication.cc:696
+#: ../../src/wlapplication.cc:701 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "Mensaje de error:"
 
-#: ../../src/wlapplication.cc:683 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:691 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "Error en datos de partida"
 
-#: ../../src/wlapplication.cc:686
+#: ../../src/wlapplication.cc:694
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:689
+#: ../../src/wlapplication.cc:697
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1445
+#: ../../src/wlapplication.cc:1453
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -5208,15 +5216,15 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1467
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1467
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1462
+#: ../../src/wlapplication.cc:1470
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5230,7 +5238,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1472
+#: ../../src/wlapplication.cc:1480
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5240,11 +5248,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1500
+#: ../../src/wlapplication.cc:1508
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1501
+#: ../../src/wlapplication.cc:1509
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5274,7 +5282,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:231
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: ../../src/wlapplication_options.cc:248
 msgid "Internet Login"
@@ -5294,19 +5302,19 @@ msgstr "Enciclopedia"
 
 #: ../../src/wlapplication_options.cc:273
 msgid "Cut Text"
-msgstr ""
+msgstr "Cortar Texto"
 
 #: ../../src/wlapplication_options.cc:277
 msgid "Copy Text"
-msgstr ""
+msgstr "Copiar Texto"
 
 #: ../../src/wlapplication_options.cc:281
 msgid "Paste Text"
-msgstr ""
+msgstr "Pegar Texto"
 
 #: ../../src/wlapplication_options.cc:285
 msgid "Select All"
-msgstr ""
+msgstr "Seleccionar Todo"
 
 #: ../../src/wlapplication_options.cc:290
 msgid "Delete Item"
@@ -5346,7 +5354,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:335
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #: ../../src/wlapplication_options.cc:359
 msgid "Info Tool"
@@ -5354,7 +5362,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:363
 msgid "Players Menu"
-msgstr ""
+msgstr "Menú de Jugadores"
 
 #: ../../src/wlapplication_options.cc:368
 msgid "Toggle Grid"
@@ -5779,9 +5787,9 @@ msgstr "Puertos"
 msgid "Low productivity:"
 msgstr "Baja productividad:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -7131,7 +7139,7 @@ msgstr "%2% %1%, %3%"
 #: ../../src/wui/savegameloader.cc:172
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "guardado en %1$s %2$u, %3$u"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:30
@@ -7467,7 +7475,7 @@ msgstr "El sonido está deshabilitado debido a un problema con la tarjeta de son
 #. lower than the economy target setting. Very little space is available.
 #: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
-msgstr ""
+msgstr "Evaluar"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Compare stocked amounts to economy target quantities"
@@ -7479,7 +7487,7 @@ msgstr "Rojo:"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Stock is lower than the target"
-msgstr ""
+msgstr "El stock es más bajo que el objetivo"
 
 #: ../../src/wui/stock_menu.cc:61
 msgid "Yellow:"
@@ -7487,7 +7495,7 @@ msgstr "Amarillo:"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Stock is equal to the target"
-msgstr ""
+msgstr "El stock es igual al objetivo"
 
 #: ../../src/wui/stock_menu.cc:65
 msgid "Green:"
@@ -7495,7 +7503,7 @@ msgstr "Verde:"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Stock is higher than the target"
-msgstr ""
+msgstr "El stock es más alto que el objetivo"
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
@@ -7552,7 +7560,7 @@ msgstr "Añadir 10 productos"
 
 #: ../../src/wui/warehousewindow.cc:187
 msgid "Configure this building’s economy"
-msgstr ""
+msgstr "Configurar la economía de este edificio"
 
 #: ../../src/wui/warehousewindow.cc:270
 msgid "Wares waiting to be shipped"
