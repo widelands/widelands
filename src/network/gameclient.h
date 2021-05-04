@@ -135,7 +135,7 @@ private:
 		return path + "~backup";
 	}
 
-	void do_run();
+	void do_run(RecvPacket&);
 
 	void sync_report_callback();
 

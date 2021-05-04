@@ -249,11 +249,27 @@ void GameClient::run() {
 	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
 }
 
-void GameClient::do_run() {
+void GameClient::do_run(RecvPacket& packet) {
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+
+	game.enabled_addons().clear();
+	for (size_t i = packet.unsigned_32(); i; --i) {
+		const std::string name = packet.string();
+		bool found = false;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.internal_name == name) {
+				game.enabled_addons().push_back(pair.first);
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			throw wexception("Add-on %s required by host not found", name.c_str());
+		}
+	}
 
 	capsule_.set_visible(false);
 	try {
@@ -674,11 +690,16 @@ void GameClient::handle_hello(RecvPacket& packet) {
 
 	d->addons_guard_.reset();
 	std::vector<AddOns::AddOnState> new_g_addons;
+	std::map<std::string, const AddOns::AddOnInfo*> disabled_installed_addons;
+	for (const auto& pair : AddOns::g_addons) {
+		disabled_installed_addons[pair.first.internal_name] = &pair.first;
+	}
 	std::set<std::string> missing_addons;
 	std::map<std::string, std::pair<std::string /* installed */, std::string /* host */>>
 	   wrong_version_addons;
 	for (size_t i = packet.unsigned_32(); i; --i) {
 		const std::string name = packet.string();
+		disabled_installed_addons.erase(name);
 		const AddOns::AddOnVersion v = AddOns::string_to_version(packet.string());
 		AddOns::AddOnVersion found;
 		for (const auto& pair : AddOns::g_addons) {
@@ -712,6 +733,9 @@ void GameClient::handle_hello(RecvPacket& packet) {
 			             .str();
 		}
 		throw WLWarning("", "%s", message.c_str());
+	}
+	for (const auto& pair : disabled_installed_addons) {
+		new_g_addons.push_back(std::make_pair(*pair.second, false));
 	}
 	AddOns::g_addons = new_g_addons;
 }
@@ -1123,7 +1147,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		if (d->game || (d->modal && d->modal->is_modal())) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		do_run();
+		do_run(packet);
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
