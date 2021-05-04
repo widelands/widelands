@@ -1825,8 +1825,8 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildings
 
-      (RO) An :class:`array` of :class:`BuildingDescription` with all the buildings that the tribe can
-      use, casted to their appropriate subclasses.
+      (RO) An :class:`array` of :class:`BuildingDescription` with all the buildings that the tribe
+      can use, casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -1913,8 +1913,8 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 /* RST
    .. attribute:: immovables
 
-      (RO) An :class:`array` of :class:`ImmovableDescription` with all the immovables that the tribe can
-      use.
+      (RO) An :class:`array` of :class:`ImmovableDescription` with all the immovables that the
+      tribe can use.
 */
 int LuaTribeDescription::get_immovables(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -2054,8 +2054,8 @@ int LuaTribeDescription::get_wares(lua_State* L) {
 /* RST
    .. attribute:: workers
 
-      (RO) an :class:`array` of :class:`WorkerDescription` with all the workers that the tribe can use,
-      casted to their appropriate subclasses.
+      (RO) an :class:`array` of :class:`WorkerDescription` with all the workers that the tribe
+      can use, casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_workers(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -3198,11 +3198,11 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 /* RST
    .. method:: produced_wares(program_name)
 
-      (RO) Returns a :class:`table` of ``{ware_name=ware_amount}`` for the wares produced by this production
-      program. See :ref:`production site programs <productionsite_programs>`.
+      (RO) Returns a :class:`table` of ``{ware_name=ware_amount}`` for the wares produced by this
+      production program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: The name of the production program that we want to get the produced wares
-            for
+         for.
       :type program_name: :class:`string`
 
 */
@@ -3224,7 +3224,7 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
       by this production program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: the name of the production program that we want to get the recruited
-            workers for
+         workers for.
       :type program_name: :class:`string`
 
 */
@@ -3272,7 +3272,7 @@ const PropertyType<LuaMilitarySiteDescription> LuaMilitarySiteDescription::Prope
 /* RST
    .. attribute:: heal_per_second
 
-      (RO) The number of health healed per second by the militarysite
+      (RO) The number of health healed per second by the militarysite.
 */
 int LuaMilitarySiteDescription::get_heal_per_second(lua_State* L) {
 	lua_pushinteger(L, get()->get_heal_per_second());
@@ -3282,7 +3282,7 @@ int LuaMilitarySiteDescription::get_heal_per_second(lua_State* L) {
 /* RST
    .. attribute:: max_number_of_soldiers
 
-      (RO) The number of soldiers that can be garrisoned at the militarysite
+      (RO) The number of soldiers that can be garrisoned at the militarysite.
 */
 int LuaMilitarySiteDescription::get_max_number_of_soldiers(lua_State* L) {
 	lua_pushinteger(L, get()->get_max_number_of_soldiers());
@@ -3338,7 +3338,7 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
    .. attribute:: food_attack
 
       (RO) A :class:`table` of tables with food ware names used for Attack training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
 */
 int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_attack());
@@ -3348,7 +3348,7 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
    .. attribute:: food_defense
 
       (RO) A :class:`table` of tables with food ware names used for Defense training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_defense());
@@ -3368,7 +3368,7 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
    .. attribute:: food_health
 
       (RO) A :class:`table` of tables with food ware names used for Health training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
+      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
 */
 int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
 	return food_list_to_lua(L, get()->get_food_health());
@@ -3377,7 +3377,7 @@ int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
 /* RST
    .. attribute:: max_attack
 
-      (RO) The number of attack points that a soldier can train
+      (RO) The number of attack points that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_attack(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3392,7 +3392,7 @@ int LuaTrainingSiteDescription::get_max_attack(lua_State* L) {
 /* RST
    .. attribute:: max_defense
 
-      (RO) The number of defense points that a soldier can train
+      (RO) The number of defense points that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_defense(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3407,7 +3407,7 @@ int LuaTrainingSiteDescription::get_max_defense(lua_State* L) {
 /* RST
    .. attribute:: max_evade
 
-      (RO) The number of evade points that a soldier can train
+      (RO) The number of evade points that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_evade(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3422,7 +3422,7 @@ int LuaTrainingSiteDescription::get_max_evade(lua_State* L) {
 /* RST
    .. attribute:: max_health
 
-      (RO) The number of health points that a soldier can train
+      (RO) The number of health points that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_health(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3437,7 +3437,7 @@ int LuaTrainingSiteDescription::get_max_health(lua_State* L) {
 /* RST
    .. attribute:: max_number_of_soldiers
 
-      (RO) The number of soldiers that can be garrisoned at the trainingsite
+      (RO) The number of soldiers that can be garrisoned at the trainingsite.
 */
 int LuaTrainingSiteDescription::get_max_number_of_soldiers(lua_State* L) {
 	lua_pushinteger(L, get()->get_max_number_of_soldiers());
@@ -3447,7 +3447,7 @@ int LuaTrainingSiteDescription::get_max_number_of_soldiers(lua_State* L) {
 /* RST
    .. attribute:: min_attack
 
-      (RO) The number of attack points that a soldier starts training with
+      (RO) The number of attack points that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_attack(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3462,7 +3462,7 @@ int LuaTrainingSiteDescription::get_min_attack(lua_State* L) {
 /* RST
    .. attribute:: min_defense
 
-      (RO) The number of defense points that a soldier starts training with
+      (RO) The number of defense points that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_defense(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3477,7 +3477,7 @@ int LuaTrainingSiteDescription::get_min_defense(lua_State* L) {
 /* RST
    .. attribute:: min_evade
 
-      (RO) The number of evade points that a soldier starts training with
+      (RO) The number of evade points that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_evade(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3492,7 +3492,7 @@ int LuaTrainingSiteDescription::get_min_evade(lua_State* L) {
 /* RST
    .. attribute:: min_health
 
-      (RO) The number of health points that a soldier starts training with
+      (RO) The number of health points that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -3507,7 +3507,7 @@ int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 /* RST
    .. attribute:: weapons_attack
 
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Attack training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Attack training.
 */
 int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
 	lua_newtable(L);
@@ -3523,7 +3523,7 @@ int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
 /* RST
    .. attribute:: weapons_defense
 
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Defense training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Defense training.
 */
 int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
 	lua_newtable(L);
@@ -3539,7 +3539,7 @@ int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
 /* RST
    .. attribute:: weapons_evade
 
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Evade training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Evade training.
 */
 int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
 	lua_newtable(L);
@@ -3555,7 +3555,7 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
 /* RST
    .. attribute:: weapons_health
 
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Health training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Health training.
 */
 int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
 	lua_newtable(L);
@@ -3598,7 +3598,7 @@ const PropertyType<LuaWarehouseDescription> LuaWarehouseDescription::Properties[
 /* RST
    .. attribute:: heal_per_second
 
-      (RO) The number of health healed per second by the warehouse
+      (RO) The number of health healed per second by the warehouse.
 */
 int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 	lua_pushinteger(L, get()->get_heal_per_second());
@@ -3719,7 +3719,7 @@ void LuaWareDescription::__unpersist(lua_State* L) {
       (RO) Returns an :class:`array` with :class:`~wl.map.BuildingDescription` with buildings that
       need this ware for their production. Loads the tribe if it hasn't been loaded yet.
 
-      :arg tribename: The name of the tribe that this ware gets checked for
+      :arg tribename: The name of the tribe that this ware gets checked for.
       :type tribename: :class:`string`
 
 */
@@ -3747,7 +3747,7 @@ int LuaWareDescription::consumers(lua_State* L) {
 
       (RO) Returns :const:`true` if this ware is used by the tribe's construction sites.
 
-      :arg tribename: The name of the tribe that this ware gets checked for
+      :arg tribename: The name of the tribe that this ware gets checked for.
       :type tribename: :class:`string`
 
 */
@@ -3771,7 +3771,7 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
       (RO) Returns an :class:`array` with :class:`LuaBuildingDescription` with buildings that
       can produce this ware. Loads the tribe if it hasn't been loaded yet.
 
-      :arg tribename: The name of the tribe that this ware gets checked for
+      :arg tribename: The name of the tribe that this ware gets checked for.
       :type tribename: :class:`string`
 
 */
@@ -4119,7 +4119,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: name
 
-      (RO) The internal name of this resource as :class:`string`
+      (RO) The internal name of this resource as :class:`string`.
 */
 
 int LuaResourceDescription::get_name(lua_State* L) {
@@ -4130,7 +4130,7 @@ int LuaResourceDescription::get_name(lua_State* L) {
 /* RST
    .. attribute:: descname
 
-      (RO) The display name of this resource as :class:`string`
+      (RO) The display name of this resource as :class:`string`.
 */
 
 int LuaResourceDescription::get_descname(lua_State* L) {
@@ -4141,7 +4141,7 @@ int LuaResourceDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: is_detectable
 
-      (RO) :const:`true` if geologists can find this resource
+      (RO) :const:`true` if geologists can find this resource.
 */
 
 int LuaResourceDescription::get_is_detectable(lua_State* L) {
@@ -4152,7 +4152,7 @@ int LuaResourceDescription::get_is_detectable(lua_State* L) {
 /* RST
    .. attribute:: max_amount
 
-      (RO) The maximum amount of this resource that a terrain can have
+      (RO) The maximum amount of this resource that a terrain can have.
 */
 
 int LuaResourceDescription::get_max_amount(lua_State* L) {
@@ -4163,7 +4163,7 @@ int LuaResourceDescription::get_max_amount(lua_State* L) {
 /* RST
    .. attribute:: representative_image
 
-      (RO) The path to the image representing this resource in the GUI as :class:`string`
+      (RO) The path to the image representing this resource in the GUI as :class:`string`.
 */
 int LuaResourceDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->representative_image());
@@ -4182,7 +4182,7 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
       (RO) The path to the image representing the specified amount of this
       resource as :class:`string`.
 
-      :arg amount: The amount of the resource what we want an overlay image for
+      :arg amount: The amount of the resource what we want an overlay image for.
       :type amount: :class:`integer`
 
 */
@@ -5112,7 +5112,7 @@ int LuaFlag::get_wares(lua_State* L) {
       :arg flag: The flag to find.
       :type flag: :class:`Flag`
 
-      :returns: The distance of the flags in walking time or ``nil`` if no path exists
+      :returns: The distance of the flags in walking time or ``nil`` if no path exists.
 */
 int LuaFlag::get_distance(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -6857,10 +6857,10 @@ int LuaBob::get_field(lua_State* L) {
 
       (RO) Whether this bob can swim or walk.
 
-      :arg swim_or_walk: Can be either of :const:`"swims"` or :const:`"walks"`
+      :arg swim_or_walk: Can be either of :const:`"swims"` or :const:`"walks"`.
       :type swim_or_walk: :class:`string`
 
-      :returns: :const:`true` if this bob is able to **swim_or_walk**, otherwise :const:`false`
+      :returns: :const:`true` if this bob is able to **swim_or_walk**, otherwise :const:`false`.
 */
 // UNTESTED
 int LuaBob::has_caps(lua_State* L) {
@@ -7259,7 +7259,7 @@ int LuaShip::get_workers(lua_State* L) {
    .. method:: build_colonization_port()
 
       Returns :const:`true` if port space construction was started (ship was in adequate
-      status and a found portspace nearby)
+      status and a found portspace nearby).
 
       :returns: :const:`true` or :const:`false`
 */
@@ -7736,7 +7736,7 @@ int LuaField::set_raw_height(lua_State* L) {
    .. attribute:: viewpoint_x, viewpoint_y
 
       (RO) Returns the position in pixels to move the view to to center
-      this field for the current interactive player
+      this field for the current interactive player.
 */
 int LuaField::get_viewpoint_x(lua_State* L) {
 	Vector2f point =
@@ -7755,7 +7755,7 @@ int LuaField::get_viewpoint_y(lua_State* L) {
    .. attribute:: resource
 
       (RW) The name of the resource that is available in this field or
-      "none"
+      "none".
 
       :see also: :attr:`resource_amount`
 */
@@ -7848,7 +7848,7 @@ int LuaField::get_immovable(lua_State* L) {
    .. attribute:: bobs
 
       (RO) An :class:`array` of :class:`~wl.map.Bob` that are associated
-      with this field
+      with this field.
 */
 // UNTESTED
 int LuaField::get_bobs(lua_State* L) {
