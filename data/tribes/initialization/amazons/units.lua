@@ -1495,7 +1495,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon training site: Training Glade
             purpose = pgettext("amazons_building", "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all necessary equipment and armor parts."),
             -- TRANSLATORS: Note helptext for an amazon training site: Training Glade
-            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train their soldiers properly.")
+            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly.")
          }
       },
 
