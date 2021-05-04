@@ -1084,7 +1084,7 @@ HasWares
    .. method:: set_wares(which[, amount])
 
       Sets the wares available in this location. Either takes two arguments,
-      a ware name and an amount to set it to. Or it takes a table of
+      a ware name and an amount to set it to. Or it takes a :class:`table` of
       ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
       of thin air.
 
@@ -1154,7 +1154,7 @@ HasInputs
 
       Sets the wares/workers available in this location which will
       be consumed by the production/training programm. Either takes two arguments,
-      a ware/worker name and an amount to set it to. Or it takes a table of
+      a ware/worker name and an amount to set it to. Or it takes a :class:`table` of
       ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
       economy out of thin air.
 
@@ -1331,10 +1331,10 @@ HasSoldiers
    .. method:: set_soldiers(which[, amount])
 
       Analogous to :meth:`HasWorkers.set_workers`, but for soldiers. Instead of
-      a name a :class:`array` is used to define the soldier. See
-      :meth:`get_soldiers` for an example.
+      a name an :class:`array` is used to define the soldier. See
+      below for an example.
 
-      :arg which: either a table of ``{description=count}`` pairs or one
+      :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
          description. In that case amount has to be specified as well.
       :type which: :class:`table` or :class:`array`.
 
@@ -1418,7 +1418,8 @@ void LuaMap::__unpersist(lua_State* /* L */) {
 
       (RO) Whether the map currently allows seafaring.
 
-      :returns: True if there are at least two port spaces that can be reached from each other.
+      :returns: :const:`true` if there are at least two port spaces that can be reached from each
+         other.
 */
 int LuaMap::get_allows_seafaring(lua_State* L) {
 	lua_pushboolean(L, get_egbase(L).map().allows_seafaring());
@@ -1429,7 +1430,7 @@ int LuaMap::get_allows_seafaring(lua_State* L) {
 
       (RO) The amount of port spaces on the map.
 
-      :returns: An integer with the number of port spaces.
+      :returns: An :class:`integer` with the number of port spaces.
 */
 int LuaMap::get_number_of_port_spaces(lua_State* L) {
 	lua_pushuint32(L, get_egbase(L).map().get_port_spaces().size());
@@ -1441,7 +1442,7 @@ int LuaMap::get_number_of_port_spaces(lua_State* L) {
 
       (RO) A list of coordinates for all port spaces on the map.
 
-      :returns: A table of port space coordinates,
+      :returns: A :class:`table` of port space coordinates,
         like this: ``{{x=0,y=2},{x=54,y=23}}``.
 */
 int LuaMap::get_port_spaces(lua_State* L) {
@@ -1543,7 +1544,7 @@ int LuaMap::count_terrestrial_fields(lua_State* L) {
         immovable with the given attribute.
       :type immovable_attribute: :class:`string`
 
-      :returns: A table mapping player numbers to their number of owned fields.
+      :returns: A :class:`table` mapping player numbers to their number of owned fields.
 */
 int LuaMap::count_owned_valuable_fields(lua_State* L) {
 	if (lua_gettop(L) > 2) {
@@ -1563,11 +1564,12 @@ int LuaMap::count_owned_valuable_fields(lua_State* L) {
 /* RST
    .. method:: find_ocean_fields(number)
 
-      Returns an array with the given number of Fields so that every field is swimmable,
+      Returns an :class:`array` with the given number of Fields so that every field is swimmable,
       and from each field a sea route to any port space exists.
 
       :arg number: The number of fields to find.
       :type number: :class:`integer`
+
       :returns: :class:`array` of :class:`wl.map.Field`
 */
 int LuaMap::find_ocean_fields(lua_State* L) {
@@ -1679,7 +1681,7 @@ int LuaMap::get_field(lua_State* L) {
 /* RST
    .. method:: recalculate()
 
-      This map recalculates the whole map state: height of fields, buildcaps,
+      This map recalculates the whole map state: Height of fields, buildcaps,
       whether the map allows seafaring and so on. You only need to call this
       function if you changed :attr:`~wl.map.Field.raw_height` in any way.
 */
@@ -1738,6 +1740,7 @@ int LuaMap::set_port_space(lua_State* L) {
       :arg port: The port space to find
       :type port: :class:`wl.map.Field`
 
+      :returns: :const:`true` if a sea route exists, or :const:`false` otherwise
       :rtype: :class:`bool`
 */
 int LuaMap::sea_route_exists(lua_State* L) {
@@ -1929,7 +1932,7 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 /* RST
    .. attribute:: resource_indicators
 
-      (RO) The table ``resource_indicators`` as defined in the tribe's ``units.lua``.
+      (RO) The :class:`table` ``resource_indicators`` as defined in the tribe's ``units.lua``.
       See `data/tribes/initializations/atlanteans/units.lua` for more information
       on the table structure.
 */
@@ -1952,7 +1955,7 @@ int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 /* RST
    .. attribute:: collectors_points_table
 
-      (RO) the ``collectors_points_table`` as defined in the tribe's ``units.lua``.
+      (RO) The ``collectors_points_table`` as defined in the tribe's ``units.lua``.
       See `data/tribes/initializations/atlanteans/units.lua` for more information
       on the table structure.
 */
@@ -2300,7 +2303,7 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 /* RST
    .. method:: helptexts(tribename)
 
-      (RO) Returns a table of helptexts if it exists for the given tribe, an
+      (RO) Returns a :class:`table` of helptexts if it exists for the given tribe, an
       empty table otherwise.
 
       Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
@@ -2403,7 +2406,7 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: terrain_affinity
 
-      (RO) For trees: A table containing numbers labeled as pickiness (uint), preferred_fertility
+      (RO) For trees: A :class:`table` containing numbers labeled as pickiness (uint), preferred_fertility
       (uint), preferred_humidity (uint), and preferred_temperature (uint), or nil if the immovable
       has no terrain affinity.
 
@@ -2570,7 +2573,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildcost
 
-      (RO) A table of ``{ware=build_cost}`` for the building.
+      (RO) A :class:`table` of ``{ware=build_cost}`` for the building.
 */
 int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), Widelands::MapObjectType::WARE);
@@ -3156,7 +3159,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 /* RST
    .. method:: consumed_wares_workers(program_name)
 
-      (RO) Returns a table of ``{{ware_name},ware_amount}`` for the wares consumed by this
+      (RO) Returns a :class:`table` of ``{{ware_name},ware_amount}`` for the wares consumed by this
       production program. Multiple entries in ``{ware_name}`` are alternatives (OR logic)).
 
       :arg program_name: The name of the production program that we want to get the consumed wares
@@ -3194,7 +3197,7 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 /* RST
    .. method:: produced_wares(program_name)
 
-      (RO) Returns a table of ``{ware_name=ware_amount}`` for the wares produced by this production
+      (RO) Returns a :class:`table` of ``{ware_name=ware_amount}`` for the wares produced by this production
       program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: The name of the production program that we want to get the produced wares
@@ -3216,7 +3219,7 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 /* RST
    .. method:: recruited_workers(program_name)
 
-      (RO) Returns a table of ``{worker_name=worker_amount}`` for the workers recruited
+      (RO) Returns a :class:`table` of ``{worker_name=worker_amount}`` for the workers recruited
       by this production program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: the name of the production program that we want to get the recruited
@@ -3333,7 +3336,7 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
 /* RST
    .. attribute:: food_attack
 
-      (RO) A table of tables with food ware names used for Attack training,
+      (RO) A :class:`table` of tables with food ware names used for Attack training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
@@ -3343,7 +3346,7 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
 /* RST
    .. attribute:: food_defense
 
-      (RO) A table of tables with food ware names used for Defense training,
+      (RO) A :class:`table` of tables with food ware names used for Defense training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
@@ -3353,7 +3356,7 @@ int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
 /* RST
    .. attribute:: food_evade
 
-      (RO) A table of tables with food ware names used for Evade training,
+      (RO) A :class:`table` of tables with food ware names used for Evade training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
@@ -3363,7 +3366,7 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
 /* RST
    .. attribute:: food_health
 
-      (RO) A table of tables with food ware names used for Health training,
+      (RO) A :class:`table` of tables with food ware names used for Health training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
@@ -3503,7 +3506,7 @@ int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 /* RST
    .. attribute:: weapons_attack
 
-      (RO) A table with ``{weapon=ware_names}`` used for Attack training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Attack training
 */
 int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
 	lua_newtable(L);
@@ -3519,7 +3522,7 @@ int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
 /* RST
    .. attribute:: weapons_defense
 
-      (RO) A table with ``{weapon=ware_names}`` used for Defense training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Defense training
 */
 int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
 	lua_newtable(L);
@@ -3535,7 +3538,7 @@ int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
 /* RST
    .. attribute:: weapons_evade
 
-      (RO) A table with ``{weapon=ware_names}`` used for Evade training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Evade training
 */
 int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
 	lua_newtable(L);
@@ -3551,7 +3554,7 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
 /* RST
    .. attribute:: weapons_health
 
-      (RO) A table with ``{weapon=ware_names}`` used for Health training
+      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Health training
 */
 int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
 	lua_newtable(L);
