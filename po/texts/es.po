@@ -8,7 +8,7 @@
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
 # Gontzal M. Pujana <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015-2016
+# Madkat Here, 2015-2016,2021
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
 # Gontzal M. Pujana <juchuf@gmail.com>, 2017
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 10:18+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-03 15:54+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,7 +329,7 @@ msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "y muchos, muchos más (gracias por todo lo que has hecho) "
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -518,24 +518,24 @@ msgstr "En el lado derecho puedes ver información acerca del mapa o partida gua
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Los Amazones aman los árboles. Construye suficientes cabañas de silvicultor para tener suficientes árboles. "
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Las maderas raras son la columna vertebral de la economía amazónica. Construye plantaciones de árboles raros para plantar los árboles especiales para estos bosques."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Los leñadores experimentados cortan árboles raros en las chozas de los leñadores, que se convierten en chozas de los cortadores de árboles raros. Pero dejan de talar árboles normales. Planifica tus ubicaciones con anticipación. "
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "La comida se seca con carbón vegetal. Asegúrate de tener un suministro constante. "
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -612,13 +612,13 @@ msgstr "Manteniendo Alt activa la segunda herramienta alternativa (si existe)."
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "Las teclas %1% te permiten establecer directamente el tamaño del área seleccionada alrededor de tu ratón."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "%1% se comporta como en un juego normal. Activa o desactiva las zonas de construcción."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -705,7 +705,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Utiliza los deslizadores de prioridad en las ventanas de construcción para ajustar la entrega de un artículo específico. Si mantienes presionada la tecla Shift mientras haces clic, se ajustarán todos los productos a la vez."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -717,7 +717,7 @@ msgstr "Utiliza el menú 'configurar economía' para ajustar la cantidad previst
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Administra tus mensajes más eficientemente: presiona ‘%1%’ para acceder a la ventana de mensajes, luego utiliza ‘%2%’ para Ir A, y la tecla ‘%3%’ para archivar mensajes."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -825,7 +825,7 @@ msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a es
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Si el juego falla, ¡no te preocupes! El juego se guardará automáticamente para que puedas volver a cargarlo después."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
