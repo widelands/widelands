@@ -1825,7 +1825,7 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildings
 
-      (RO) An array of :class:`BuildingDescription` with all the buildings that the tribe can
+      (RO) An :class:`array` of :class:`BuildingDescription` with all the buildings that the tribe can
       use, casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
@@ -1913,7 +1913,7 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 /* RST
    .. attribute:: immovables
 
-      (RO) An array of :class:`ImmovableDescription` with all the immovables that the tribe can
+      (RO) An :class:`array` of :class:`ImmovableDescription` with all the immovables that the tribe can
       use.
 */
 int LuaTribeDescription::get_immovables(lua_State* L) {
@@ -2037,7 +2037,7 @@ int LuaTribeDescription::get_soldier(lua_State* L) {
 /* RST
    .. attribute:: wares
 
-      (RO) An array of :class:`WareDescription` with all the wares that the tribe can use.
+      (RO) An :class:`array` of :class:`WareDescription` with all the wares that the tribe can use.
 */
 int LuaTribeDescription::get_wares(lua_State* L) {
 	const Widelands::TribeDescr& tribe = *get();
@@ -2054,7 +2054,7 @@ int LuaTribeDescription::get_wares(lua_State* L) {
 /* RST
    .. attribute:: workers
 
-      (RO) an array of :class:`WorkerDescription` with all the workers that the tribe can use,
+      (RO) an :class:`array` of :class:`WorkerDescription` with all the workers that the tribe can use,
       casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_workers(lua_State* L) {
@@ -2389,7 +2389,7 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
 /* RST
    .. attribute:: becomes
 
-      (RO) An array of map object names that this immovable can turn into, e.g.
+      (RO) An :class:`array` of map object names that this immovable can turn into, e.g.
       ``{"atlanteans_ship"}`` or ``{"deadtree2","fallentree"}``.
 */
 int LuaImmovableDescription::get_becomes(lua_State* L) {
@@ -2406,9 +2406,9 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: terrain_affinity
 
-      (RO) For trees: A :class:`table` containing numbers labeled as pickiness (uint), preferred_fertility
-      (uint), preferred_humidity (uint), and preferred_temperature (uint), or nil if the immovable
-      has no terrain affinity.
+      (RO) For trees: A :class:`table` containing numbers labeled as pickiness (uint),
+      preferred_fertility (uint), preferred_humidity (uint), and preferred_temperature (uint),
+      or nil if the immovable has no terrain affinity.
 
       E.g. for a beech this will be:
 
@@ -2685,9 +2685,9 @@ int LuaBuildingDescription::get_is_port(lua_State* L) {
 
       (RO) The size of this building as a :class:`string`. Can be either of
 
-      * :const:`small` -- Small sized buildings
-      * :const:`medium` -- Medium sized buildings
-      * :const:`big` -- Big sized buildings
+      * :const:`"small"` -- Small sized buildings
+      * :const:`"medium"` -- Medium sized buildings
+      * :const:`"big"` -- Big sized buildings
 */
 int LuaBuildingDescription::get_size(lua_State* L) {
 	try {
@@ -2702,7 +2702,7 @@ int LuaBuildingDescription::get_size(lua_State* L) {
 /* RST
    .. attribute:: returns_on_dismantle
 
-      (RO) A :class:`table` of ``{ware=amount,…}`` returned upon dismantling.
+      (RO) A :class:`table` of ``{warename=amount}`` pairs returned upon dismantling.
 */
 int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
 	return wares_or_workers_map_to_lua(
@@ -2712,7 +2712,8 @@ int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
 /* RST
    .. attribute:: enhancement_returns_on_dismantle
 
-      (RO) A :class:`table` of ``{ware=amount,…}`` returned upon dismantling an enhanced building.
+      (RO) A :class:`table` of ``{warename=amount}`` pairs returned upon dismantling an enhanced
+      building.
 */
 int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
 	return wares_or_workers_map_to_lua(
@@ -2829,7 +2830,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 /* RST
    .. attribute:: inputs
 
-      (RO) An array with :class:`WareDescription` containing the wares that
+      (RO) An :class:`array` with :class:`WareDescription` containing the wares that
       the productionsite needs for its production.
 */
 int LuaProductionSiteDescription::get_inputs(lua_State* L) {
@@ -2848,7 +2849,7 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 /* RST
    .. attribute:: collected_bobs
 
-      (RO) An array of :class:`MapObjectDescription` containing the bobs that
+      (RO) An :class:`array` of :class:`MapObjectDescription` containing the bobs that
       this building will collect from the map.
       For example, a Hunters's Hut will hunt some critters for meat.
 
@@ -2873,7 +2874,7 @@ int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
 /* RST
    .. attribute:: collected_immovables
 
-      (RO) An array of :class:`ImmovableDescription` containing the immovables that
+      (RO) An :class:`array` of :class:`ImmovableDescription` containing the immovables that
       this building will collect from the map.
       For example, a Woodcutters's House will cut down trees to obtain logs, and the
       Fruit Collector's House will harvest fruit from berry bushes.
@@ -2896,7 +2897,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 /* RST
    .. attribute:: collected_resources
 
-      (RO) An array of :class:`ResourceDescription` containing the resources that
+      (RO) An :class:`array` of :class:`ResourceDescription` containing the resources that
       this building will collect from the map, along with the maximum percentage mined and the
       chance to still find some more after depletion. E.g. for a Fisher's hut this will be:
 
@@ -2949,7 +2950,7 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 /* RST
    .. attribute:: created_immovables
 
-      (RO) An array of :class:`ImmovableDescription` containing the immovables that
+      (RO) An :class:`array` of :class:`ImmovableDescription` containing the immovables that
       this building will place on the map.
       For example, a Foresters's House will create trees, and the Berry Farm some berry bushes.
 */
@@ -2971,7 +2972,7 @@ int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
 /* RST
    .. attribute:: created_bobs
 
-      (RO) An array of :class:`MapObjectDescription` containing the bobs that
+      (RO) An :class:`array` of :class:`MapObjectDescription` containing the bobs that
       this building will place on the map.
       For example, a Gamekeepers's Hut will create some critters, and the Shipyard a Ship.
 */
@@ -3011,7 +3012,7 @@ int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 /* RST
    .. attribute:: created_resources
 
-      (RO) An array of :class:`ResourceDescription` containing the resources that
+      (RO) An :class:`array` of :class:`ResourceDescription` containing the resources that
       this building will place on the map.
       For example, a Fishbreeder's House will create the resource fish.
 */
@@ -3033,7 +3034,7 @@ int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 /* RST
    .. attribute:: output_ware_types
 
-      (RO) An array of :class:`WareDescription` containing the wares that
+      (RO) An :class:`array` of :class:`WareDescription` containing the wares that
       the productionsite can produce.
 */
 int LuaProductionSiteDescription::get_output_ware_types(lua_State* L) {
@@ -3052,7 +3053,7 @@ int LuaProductionSiteDescription::get_output_ware_types(lua_State* L) {
 /* RST
    .. attribute:: output_worker_types
 
-      (RO) An array of :class:`WorkerDescription` containing the workers that
+      (RO) An :class:`array` of :class:`WorkerDescription` containing the workers that
       the productionsite can produce.
 */
 int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
@@ -3072,8 +3073,8 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
 /* RST
    .. attribute:: production_programs
 
-   (RO) An array with the production program names as string. See
-   :ref:`production site programs <productionsite_programs>`.
+      (RO) An :class:`array` with the production program names as string. See
+      :ref:`production site programs <productionsite_programs>`.
 */
 int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 	lua_newtable(L);
@@ -3089,7 +3090,7 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 /* RST
    .. attribute:: supported_productionsites
 
-      (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
+      (RO) An :class:`array` with :class:`ProductionSiteDescription` containing the buildings that
       will collect the bobs, immovables or resources from the map that this building will place on
       it. For example, a Forester's House will support a Woodcutter's House, because it places trees
       on the map.
@@ -3112,7 +3113,7 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 /* RST
    .. attribute:: supported_by_productionsites
 
-      (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
+      (RO) An :class:`array` with :class:`ProductionSiteDescription` containing the buildings that
       place bobs, immovables or resources on the map that this building will collect.
       For example, a Woodcutter's House is supported by a Forester's House, because it needs trees
       to fell.
@@ -3135,7 +3136,7 @@ int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L)
 /* RST
    .. attribute:: working_positions
 
-      (RO) An array with :class:`WorkerDescription` containing the workers that
+      (RO) An :class:`array` with :class:`WorkerDescription` containing the workers that
       can work here with their multiplicity, i.e. for a atlantean mine this
       would be ``{miner,miner,miner}``.
 */
@@ -3715,7 +3716,7 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 /* RST
    .. method:: consumers(tribename)
 
-      (RO) Returns an array with :class:`~wl.map.BuildingDescription` with buildings that
+      (RO) Returns an :class:`array` with :class:`~wl.map.BuildingDescription` with buildings that
       need this ware for their production. Loads the tribe if it hasn't been loaded yet.
 
       :arg tribename: The name of the tribe that this ware gets checked for
@@ -7152,7 +7153,7 @@ int LuaShip::set_capacity(lua_State* L) {
       When called with a ware name as argument, returns the amount of the
       specified ware on the ship.
 
-      When called with :const:`""` as argument, returns an array with
+      When called with :const:`""` as argument, returns an :class:`array` with
       the names of all loaded wares.
 
       :returns: The number of wares or an :class:`array` of :class:`string`.
@@ -7207,7 +7208,7 @@ int LuaShip::get_wares(lua_State* L) {
       When called with a worker name as argument, returns the amount of the
       specified worker on the ship.
 
-      When called with :const:`""` as argument, returns an array
+      When called with :const:`""` as argument, returns an :class:`array`
       with all loaded workers.
 
       :returns: The number of workers or an :class:`array` of :class:`Worker`
@@ -8091,7 +8092,7 @@ int LuaField::__tostring(lua_State* L) {
 /* RST
    .. function:: region(r1[, r2])
 
-      Returns an array of all Fields inside the given region. If one argument
+      Returns an :class:`array` of all Fields inside the given region. If one argument
       is given it defines the radius of the region. If both arguments are
       specified, the first one defines the outer radius and the second one the
       inner radius and a hollow region is returned, that is all fields in the
@@ -8103,14 +8104,14 @@ int LuaField::__tostring(lua_State* L) {
 
          f:region(1)
 
-      will return an array with the following entries (Note: Ordering of the
+      will return an :class:`array` with the following entries (Note: Ordering of the
       fields inside the array is not guaranteed):
 
       .. code-block:: lua
 
          {f, f.rn, f.ln, f.brn, f.bln, f.tln, f.trn}
 
-      :returns: The array of the given fields.
+      :returns: The :class:`array` of the given fields.
       :rtype: :class:`array`
 */
 int LuaField::region(lua_State* L) {
