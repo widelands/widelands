@@ -59,7 +59,7 @@ obj_clear_roads = {
 
 obj_clear_roads_hint = rt(objective_text(_"Clear Road Network",
    li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]]) ..
-   li_arrow(_[[Ensure there are not more than 3 dead ends or flags with more than 4 roads.]])
+   li_arrow(_[[Ensure there are not more than 3 dead ends, nor more than one flag with more than 4 roads.]])
    ))
 
 obj_click_farmbuilding = {
@@ -131,7 +131,7 @@ obj_heroes = {
    number = 1,
    body = objective_text(_"Hero Training",
       li(_[[Use your resources wisely to train at least three fully promoted heroes.]]) ..
-      li_arrow(_[[To train a soldier to the highest level in one site, consider stopping the trainigsite until it is fully equipped with all food and weapons needed.]]) ..
+      li_arrow(_[[To train a soldier to the highest level in one site, consider stopping the trainingsite until it is fully equipped with all food and weapons needed.]]) ..
       li_arrow(_[[To prevent waste of goods, reduce the soldiers to be trained to one per site.]]) ..
       li_arrow(_[[A site will always prefer the best suited soldier available for training. Make sure you don’t have your half trained soldiers garrisoned in a military building.]])
    ),
@@ -167,7 +167,7 @@ obj_conquer_all = {
 
 obj_charcoal = {
    name = "charcoal",
-   title=_"Build 2 charcoal kiln",
+   title=_"Build 2 charcoal kilns",
    number = 1,
    body = objective_text(_"Build Two Charcoal Kilns",
       li(_[[Build two charcoal kilns to support the iron industry.]]) ..
