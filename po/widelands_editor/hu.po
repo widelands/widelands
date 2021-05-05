@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-26 15:32+0000\n"
+"PO-Revision-Date: 2021-05-04 22:46+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -205,7 +205,7 @@ msgstr "Fák növekedésének valószínűsége"
 #: ../../data/scripting/editor/terrain_help.lua:60
 #: ../../data/scripting/editor/terrain_tooltip.lua:37
 msgid "No trees will grow here."
-msgstr "Itt nem fognak fák nőni."
+msgstr "Semmilyen fa nem nő rajta."
 
 #: ../../data/scripting/editor/terrain_tooltip.lua:25
 #: ../../data/scripting/editor/tree_tooltip.lua:22
