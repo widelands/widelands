@@ -67,7 +67,7 @@ struct ShortcutChooser : public UI::Window {
 			fastplace = get_fastplace_shortcut(c);
 			UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(box, "choose_fastplace", 0, 0, 100, 8,
 					ok->get_h(), "", UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
-			dd->add(_("(unused)"), "", nullptr, fastplace.empty(), _("Do not use this fastplace slot"));
+			dd->add(_("(unused)"), "", nullptr, fastplace.empty());
 
 			std::map<std::pair<Widelands::DescriptionIndex, std::string>, const Widelands::BuildingDescr*> all_building_sorted;
 			for (Widelands::DescriptionIndex di = 0; di < game_for_fastplace->descriptions().nr_buildings(); ++di) {
@@ -173,13 +173,27 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
          _("OK")) {
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
-	auto generate_title = [](const KeyboardShortcut key) {
+	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		if (key >= KeyboardShortcut::kFastplace__Begin && key <= KeyboardShortcut::kFastplace__End) {
-			const std::string fp = get_fastplace_shortcut(key);
-			return (shortcut.empty() || fp.empty()) ? _("(unused)") : (boost::format(_("%1$s: %2$s")) % fp % shortcut).str();
+		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End || game_.get() == nullptr) {
+			return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut).str();
 		}
-		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut).str();
+
+		const std::string fp = get_fastplace_shortcut(key);
+		if (shortcut.empty() || fp.empty()) {
+			return std::string(_("(unused)"));
+		}
+
+		const Widelands::BuildingDescr* bld = game_->descriptions().get_building_descr(game_->descriptions().building_index(fp));
+		if (bld == nullptr) {
+			return (boost::format(_("%1$s: %2$s")) % fp % shortcut).str();
+		}
+
+		return (boost::format(
+			/** TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut */
+			_("[%1$s] %2$s: %3$s"))
+				% game_->descriptions().get_tribe_descr(game_->descriptions().safe_tribe_index(bld->get_owning_tribe()))->descname()
+				% bld->descname() % shortcut).str();
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -241,12 +255,15 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	buttons_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	buttons_box_.add_inf_space();
 
-	tabs_.sigclicked.connect([this]() {
+	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title]() {
 		if (tabs_.active() == 4 && game_.get() == nullptr) {
 			game_.reset(new Widelands::Game());
 			game_->create_loader_ui({}, false, "", "", this);
 			game_->load_all_tribes();
 			game_->postload_addons();
+			for (auto& pair : all_keyboard_buttons) {
+				pair.second->set_title(generate_title(pair.first));
+			}
 			game_->remove_loader_ui();
 		}
 	});
