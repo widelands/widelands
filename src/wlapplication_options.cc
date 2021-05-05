@@ -753,7 +753,8 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 }
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key) {
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace__Begin); i < static_cast<int>(KeyboardShortcut::kFastplace__End); ++i) {
+	for (int i = static_cast<int>(KeyboardShortcut::kFastplace__Begin);
+	     i < static_cast<int>(KeyboardShortcut::kFastplace__End); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
 		const std::string& str = shortcuts_.at(id).fastplace_name;
 		if (!str.empty() && matches_shortcut(id, key)) {
@@ -815,9 +816,13 @@ void init_shortcuts(const bool force_defaults) {
 				shortcuts_.erase(k);
 			}
 			if (shortcuts_.count(k) == 0) {
-				const int off = static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
-				shortcuts_.emplace(k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
-						(boost::format("fastplace_%i") % off).str(), [off]() { return (boost::format(_("Fastplace #%i")) % off).str(); }));
+				const int off =
+				   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
+				shortcuts_.emplace(
+				   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
+				                           (boost::format("fastplace_%i") % off).str(), [off]() {
+					                           return (boost::format(_("Fastplace #%i")) % off).str();
+				                           }));
 			}
 		}
 

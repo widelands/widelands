@@ -65,24 +65,33 @@ struct ShortcutChooser : public UI::Window {
 
 		if (game_for_fastplace) {
 			fastplace = get_fastplace_shortcut(c);
-			UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(box, "choose_fastplace", 0, 0, 100, 8,
-					ok->get_h(), "", UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+			UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(
+			   box, "choose_fastplace", 0, 0, 100, 8, ok->get_h(), "", UI::DropdownType::kTextual,
+			   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 			dd->add(_("(unused)"), "", nullptr, fastplace.empty());
 
-			std::map<std::pair<Widelands::DescriptionIndex, std::string>, const Widelands::BuildingDescr*> all_building_sorted;
-			for (Widelands::DescriptionIndex di = 0; di < game_for_fastplace->descriptions().nr_buildings(); ++di) {
-				const Widelands::BuildingDescr* bld = game_for_fastplace->descriptions().get_building_descr(di);
+			std::map<std::pair<Widelands::DescriptionIndex, std::string>,
+			         const Widelands::BuildingDescr*>
+			   all_building_sorted;
+			for (Widelands::DescriptionIndex di = 0;
+			     di < game_for_fastplace->descriptions().nr_buildings(); ++di) {
+				const Widelands::BuildingDescr* bld =
+				   game_for_fastplace->descriptions().get_building_descr(di);
 				if (bld->is_buildable()) {
-					all_building_sorted[std::make_pair(game_for_fastplace->descriptions().safe_tribe_index(bld->get_owning_tribe()), bld->descname())] = bld;
+					all_building_sorted[std::make_pair(
+					   game_for_fastplace->descriptions().safe_tribe_index(bld->get_owning_tribe()),
+					   bld->descname())] = bld;
 				}
 			}
 			for (const auto& pair : all_building_sorted) {
-				dd->add((boost::format(
-					/** TRANSLATORS: [Tribe Name] Building Name */
-					_("[%1$s] %2$s"))
-						% game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname()
-						% pair.second->descname()).str(),
-					pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
+				dd->add(
+				   (boost::format(
+				       /** TRANSLATORS: [Tribe Name] Building Name */
+				       _("[%1$s] %2$s")) %
+				    game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname() %
+				    pair.second->descname())
+				      .str(),
+				   pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
 			}
 
 			if (!dd->has_selection()) {
@@ -175,7 +184,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End || game_.get() == nullptr) {
+		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
+		    game_.get() == nullptr) {
 			return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut).str();
 		}
 
@@ -184,16 +194,20 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			return std::string(_("(unused)"));
 		}
 
-		const Widelands::BuildingDescr* bld = game_->descriptions().get_building_descr(game_->descriptions().building_index(fp));
+		const Widelands::BuildingDescr* bld =
+		   game_->descriptions().get_building_descr(game_->descriptions().building_index(fp));
 		if (bld == nullptr) {
 			return (boost::format(_("%1$s: %2$s")) % fp % shortcut).str();
 		}
 
 		return (boost::format(
-			/** TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut */
-			_("[%1$s] %2$s: %3$s"))
-				% game_->descriptions().get_tribe_descr(game_->descriptions().safe_tribe_index(bld->get_owning_tribe()))->descname()
-				% bld->descname() % shortcut).str();
+		           /** TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut */
+		           _("[%1$s] %2$s: %3$s")) %
+		        game_->descriptions()
+		           .get_tribe_descr(game_->descriptions().safe_tribe_index(bld->get_owning_tribe()))
+		           ->descname() %
+		        bld->descname() % shortcut)
+		   .str();
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -204,7 +218,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
-			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin && key <= KeyboardShortcut::kFastplace__End);
+			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
+			                        key <= KeyboardShortcut::kFastplace__End);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
 			if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
@@ -247,7 +262,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
 	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
 	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
-	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End);
+	create_tab(
+	   _("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End);
 
 	buttons_box_.add_inf_space();
 	buttons_box_.add(&reset_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
