@@ -59,7 +59,7 @@ obj_clear_roads = {
 
 obj_clear_roads_hint = rt(objective_text(_"Clear Road Network",
    li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]]) ..
-   li_arrow(_[[Ensure there are not more than 3 dead ends and one flag with more than 4 roads.]])
+   li_arrow(_[[Ensure there are not more than 3 dead ends, nor more than one flag with more than 4 roads.]])
    ))
 
 obj_click_farmbuilding = {
