@@ -134,6 +134,7 @@ struct KeyboardShortcutInfo {
 	const SDL_Keysym default_shortcut;
 	SDL_Keysym current_shortcut;
 	const std::string internal_name;
+	std::string fastplace_name;
 	const std::function<std::string()> descname;
 
 	KeyboardShortcutInfo(const std::set<Scope>& s,
@@ -624,6 +625,17 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
+void set_fastplace_shortcut(const KeyboardShortcut id, const std::string& building) {
+	assert(id >= KeyboardShortcut::kFastplace__Begin && id <= KeyboardShortcut::kFastplace__End);
+	KeyboardShortcutInfo& info = shortcuts_.at(id);
+	info.fastplace_name = building;
+	set_config_string("keyboard_fastplace", info.internal_name, building);
+}
+
+const std::string& get_fastplace_shortcut(const KeyboardShortcut id) {
+	return shortcuts_.at(id).fastplace_name;
+}
+
 std::string to_string(const KeyboardShortcut id) {
 	return shortcuts_.at(id).descname();
 }
@@ -685,6 +697,9 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 }
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const int mod) {
 	const SDL_Keysym key = get_shortcut(id);
+	if (key.sym == SDLK_UNKNOWN || code == SDLK_UNKNOWN) {
+		return false;
+	}
 
 	const bool ctrl1 = key.mod & KMOD_CTRL;
 	const bool shift1 = key.mod & KMOD_SHIFT;
@@ -734,6 +749,17 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	return false;
 }
 
+std::string matching_fastplace_shortcut(const SDL_Keysym key) {
+	for (int i = static_cast<int>(KeyboardShortcut::kFastplace__Begin); i < static_cast<int>(KeyboardShortcut::kFastplace__End); ++i) {
+		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+		const std::string& str = shortcuts_.at(id).fastplace_name;
+		if (!str.empty() && matches_shortcut(id, key)) {
+			return str;
+		}
+	}
+	return "";
+}
+
 KeyboardShortcut shortcut_from_string(const std::string& name) {
 	for (const auto& pair : shortcuts_) {
 		if (pair.second.internal_name == name) {
@@ -748,6 +774,9 @@ std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape)
 }
 
 std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
+	if (sym.sym == SDLK_UNKNOWN) {
+		return "";
+	}
 	i18n::Textdomain textdomain("widelands");
 	std::vector<std::string> mods;
 	if (sym.mod & KMOD_SHIFT) {
@@ -778,6 +807,17 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 void init_shortcuts(const bool force_defaults) {
 	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+		if (k >= KeyboardShortcut::kFastplace__Begin && k <= KeyboardShortcut::kFastplace__End) {
+			if (force_defaults) {
+				shortcuts_.erase(k);
+			}
+			if (shortcuts_.count(k) == 0) {
+				const int off = static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
+				shortcuts_.emplace(k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
+						(boost::format("fastplace_%i") % off).str(), [off]() { return (boost::format(_("Fastplace #%i")) % off).str(); }));
+			}
+		}
+
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {
 			write_shortcut(k, shortcuts_.at(k).current_shortcut);
@@ -804,7 +844,6 @@ void init_shortcuts(const bool force_defaults) {
 	}
 
 	Section& ss = get_config_section("keyboard_sym");
-	Section& sm = get_config_section("keyboard_mod");
 	while (Section::Value* v = ss.get_next_val()) {
 		for (auto& pair : shortcuts_) {
 			if (pair.second.internal_name == v->get_name()) {
@@ -813,10 +852,20 @@ void init_shortcuts(const bool force_defaults) {
 			}
 		}
 	}
+	Section& sm = get_config_section("keyboard_mod");
 	while (Section::Value* v = sm.get_next_val()) {
 		for (auto& pair : shortcuts_) {
 			if (pair.second.internal_name == v->get_name()) {
 				pair.second.current_shortcut.mod = v->get_int();
+				break;
+			}
+		}
+	}
+	Section& sf = get_config_section("keyboard_fastplace");
+	while (Section::Value* v = sf.get_next_val()) {
+		for (auto& pair : shortcuts_) {
+			if (pair.second.internal_name == v->get_name()) {
+				pair.second.fastplace_name = v->get_string();
 				break;
 			}
 		}
