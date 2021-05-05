@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-02 12:36+0000\n"
+"POT-Creation-Date: 2021-05-04 10:44+0000\n"
 "PO-Revision-Date: 2021-05-02 12:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -263,8 +263,8 @@ msgstr "11月"
 msgid "Dec"
 msgstr "12月"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -277,12 +277,12 @@ msgstr "メインメニュー"
 msgid "Tools"
 msgstr "ツール"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -472,10 +472,10 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -623,8 +623,8 @@ msgstr "鉱山"
 msgid "port"
 msgstr "港"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1098,7 +1098,7 @@ msgid "Player"
 msgstr "プレイヤー"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1739
+#: ../../src/network/gamehost.cc:1743
 #, c-format
 msgid "Computer %u"
 msgstr "コンピュータ%u"
@@ -1669,36 +1669,36 @@ msgstr ""
 msgid "Not set"
 msgstr "設定なし"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
-#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:328
+#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:376
+#: ../../src/logic/game.cc:377
 msgid "Initializing game…"
 msgstr "ゲームを初期化中……"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:627
+#: ../../src/logic/game.cc:628
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "開始位置が見つかりません"
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:646 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "プレイヤー %u の開始位置が存在しないため、Widelandsはゲームを開始できませんでした。\nWidelandsエディタ上で手動で開始位置を追加すれば、問題を解決できます。"
 
-#: ../../src/logic/game.cc:1114
+#: ../../src/logic/game.cc:1115
 msgid "Trade Offer"
 msgstr "トレードの提案"
 
-#: ../../src/logic/game.cc:1116
+#: ../../src/logic/game.cc:1117
 msgid "This market has received a new trade offer."
 msgstr "このマーケットは新たなトレードの提案を受け取りました。"
 
@@ -2459,7 +2459,7 @@ msgstr ""
 msgid "Checking map"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:701
+#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:705
 #: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:637
 msgid "Preparing game…"
 msgstr ""
@@ -2476,41 +2476,41 @@ msgid ""
 " you tried to connect."
 msgstr "Widelandsは指定されたアドレスへの接続を確立できませんでした。指定されたポートでWidelandsが動いていないか、サーバがシャットダウンされていることが想定されます。"
 
-#: ../../src/network/gameclient.cc:700
+#: ../../src/network/gameclient.cc:721
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 
-#: ../../src/network/gameclient.cc:706
+#: ../../src/network/gameclient.cc:727
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:710
+#: ../../src/network/gameclient.cc:731
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:879
+#: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:921
+#: ../../src/network/gameclient.cc:945
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me が受信したファイルをチェックしました。MD5チェックサムは一致しましたが、このファイルを扱うことができません。"
 
-#: ../../src/network/gameclient.cc:1227
+#: ../../src/network/gameclient.cc:1251
 msgid "Disconnected"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1229
+#: ../../src/network/gameclient.cc:1253
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2631,7 +2631,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelandsはサーバを起動できませんでした。\nおそらく、別のプロセスが既にサーバを起動しているのでしょう。"
 
-#: ../../src/network/gamehost.cc:1979
+#: ../../src/network/gamehost.cc:1983
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -6147,8 +6147,8 @@ msgstr "切断されたプレイヤーを選択した AI に置き換えてプ�
 msgid "AI for the disconnected player"
 msgstr "代わりの AI"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
