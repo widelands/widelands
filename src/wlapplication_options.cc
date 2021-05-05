@@ -673,7 +673,9 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 	for (auto& pair : shortcuts_) {
 		if (pair.first != id && shared_scope(scopes, pair.second) &&
 		    matches_shortcut(pair.first, code)) {
-			*conflict = pair.first;
+			if (conflict != nullptr) {
+				*conflict = pair.first;
+			}
 			return false;
 		}
 	}

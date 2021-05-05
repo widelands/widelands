@@ -189,7 +189,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut).str();
 		}
 
-		const std::string fp = get_fastplace_shortcut(key);
+		const std::string& fp = get_fastplace_shortcut(key);
 		if (shortcut.empty() || fp.empty()) {
 			return std::string(_("(unused)"));
 		}
