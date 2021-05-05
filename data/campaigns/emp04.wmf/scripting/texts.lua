@@ -59,7 +59,7 @@ obj_clear_roads = {
 
 obj_clear_roads_hint = rt(objective_text(_"Clear Road Network",
    li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]]) ..
-   li_arrow(_[[Ensure there are not more than 3 dead ends or flags with more than 4 roads.]])
+   li_arrow(_[[Ensure there are not more than 3 dead ends, nor more than one flag with more than 4 roads.]])
    ))
 
 obj_click_farmbuilding = {
@@ -167,7 +167,7 @@ obj_conquer_all = {
 
 obj_charcoal = {
    name = "charcoal",
-   title=_"Build 2 charcoal kiln",
+   title=_"Build 2 charcoal kilns",
    number = 1,
    body = objective_text(_"Build Two Charcoal Kilns",
       li(_[[Build two charcoal kilns to support the iron industry.]]) ..

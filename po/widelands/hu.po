@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-02 12:36+0000\n"
-"PO-Revision-Date: 2021-05-02 12:39+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-05-04 10:44+0000\n"
+"PO-Revision-Date: 2021-05-04 22:40+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -270,8 +270,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -284,12 +284,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Szerszámok"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -630,8 +630,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1106,7 +1106,7 @@ msgid "Player"
 msgstr "Játékos"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1739
+#: ../../src/network/gamehost.cc:1743
 #, c-format
 msgid "Computer %u"
 msgstr "%u. számítógép"
@@ -1681,36 +1681,36 @@ msgstr "Elrendezés betöltéshez: Térkép (3/3)"
 msgid "Not set"
 msgstr "Nincs beállítva"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
-#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:328
+#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "Térkép előtöltése…"
 
-#: ../../src/logic/game.cc:376
+#: ../../src/logic/game.cc:377
 msgid "Initializing game…"
 msgstr "Játék előkészítése…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:627
+#: ../../src/logic/game.cc:628
 msgid "Creating player infrastructure…"
 msgstr "Infrastruktúra létrehozása…"
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "Hiányzó kezdőpont"
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:646 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő helye.\nA hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a játékosnak a szerkesztőben."
 
-#: ../../src/logic/game.cc:1114
+#: ../../src/logic/game.cc:1115
 msgid "Trade Offer"
 msgstr "Kereskedelmi ajánlat"
 
-#: ../../src/logic/game.cc:1116
+#: ../../src/logic/game.cc:1117
 msgid "This market has received a new trade offer."
 msgstr "Ez a piac egy új kereskedelmi ajánlatot kapott."
 
@@ -2478,7 +2478,7 @@ msgstr "Térképobjektumok előkészítése"
 msgid "Checking map"
 msgstr "Térkép ellenőrzése"
 
-#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:701
+#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:705
 #: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:637
 msgid "Preparing game…"
 msgstr "Játék előkészítése…"
@@ -2495,42 +2495,42 @@ msgid ""
 " you tried to connect."
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel. Vagy nem fut Widelands kiszolgáló a feltételezett porton, vagy a kiszolgáló leállt a csatlakozás közben."
 
-#: ../../src/network/gameclient.cc:700
+#: ../../src/network/gameclient.cc:721
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u bővítményütközés:\n"
 msgstr[1] "%u bővítményütközés:\n"
 
-#: ../../src/network/gameclient.cc:706
+#: ../../src/network/gameclient.cc:727
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n· a gazdagép által igényelt ‘%2$s’ nem található"
 
-#: ../../src/network/gameclient.cc:710
+#: ../../src/network/gameclient.cc:731
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n· ‘%2$s’ %3$s verziója van telepítve, de a gazdagép %4$s verziót használ"
 
-#: ../../src/network/gameclient.cc:879
+#: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me fájljának nem sikerült az md5 ellenőrzése."
 
-#: ../../src/network/gameclient.cc:921
+#: ../../src/network/gameclient.cc:945
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me ellenőrizte a kapott fájlt. Bár az md5 ellenőrzés sikeres volt, a fájl nem kezelhető."
 
-#: ../../src/network/gameclient.cc:1227
+#: ../../src/network/gameclient.cc:1251
 msgid "Disconnected"
 msgstr "Kapcsolat bontva"
 
-#: ../../src/network/gameclient.cc:1229
+#: ../../src/network/gameclient.cc:1253
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2651,7 +2651,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "A Widelands nem tudott kiszolgálót indítani.\nLehet hogy már fut egy folyamat ezen a porton."
 
-#: ../../src/network/gamehost.cc:1979
+#: ../../src/network/gamehost.cc:1983
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -5064,7 +5064,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the World, Tribes, and Script categories are disabled "
 "in random matches."
-msgstr ""
+msgstr "A véletlenszerű térképgeneráló még fejlesztés alatt áll. A generált térképek általában — de nem mindig — jól használhatóak. A hajózás és az ereklyék nem működnek. A világ, a törzsek és a parancsfájl kategóriákba tartozó bővítmények nem engedélyezettek a véletlen játékokban."
 
 #: ../../src/ui_fsmenu/random_game.cc:117
 msgid "Map Generation Error"
@@ -6185,8 +6185,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
