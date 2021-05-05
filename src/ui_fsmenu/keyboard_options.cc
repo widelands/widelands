@@ -176,7 +176,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	auto generate_title = [](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
 		if (key >= KeyboardShortcut::kFastplace__Begin && key <= KeyboardShortcut::kFastplace__End) {
-			return shortcut.empty() ? _("(unused)") : (boost::format(_("%1$s: %2$s")) % get_fastplace_shortcut(key) % shortcut).str();
+			const std::string fp = get_fastplace_shortcut(key);
+			return (shortcut.empty() || fp.empty()) ? _("(unused)") : (boost::format(_("%1$s: %2$s")) % fp % shortcut).str();
 		}
 		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut).str();
 	};

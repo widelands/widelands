@@ -630,6 +630,9 @@ void set_fastplace_shortcut(const KeyboardShortcut id, const std::string& buildi
 	KeyboardShortcutInfo& info = shortcuts_.at(id);
 	info.fastplace_name = building;
 	set_config_string("keyboard_fastplace", info.internal_name, building);
+	if (building.empty()) {
+		set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
+	}
 }
 
 const std::string& get_fastplace_shortcut(const KeyboardShortcut id) {
