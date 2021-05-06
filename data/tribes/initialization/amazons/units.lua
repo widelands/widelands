@@ -1108,37 +1108,37 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "cassavarootfield_tiny",
+         name = "cassavafield_tiny",
          helptexts = {
             -- TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
             purpose = _("This field has just been planted.")
          }
       },
       {
-         name = "cassavarootfield_small",
+         name = "cassavafield_small",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Field
             purpose = _("This field is growing.")
          }
       },
       {
-         name = "cassavarootfield_medium",
+         name = "cassavafield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Field
             purpose = _("This field is growing.")
          }
       },
       {
-         name = "cassavarootfield_ripe",
+         name = "cassavafield_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Field
             purpose = _("This field is ready for harvesting.")
          }
       },
       {
-         name = "cassavarootfield_harvested",
+         name = "cassavafield_harvested",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Field
             purpose = _("This field has been harvested.")
          }
       },
