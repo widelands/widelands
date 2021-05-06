@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
+"POT-Creation-Date: 2021-05-04 10:44+0000\n"
+"PO-Revision-Date: 2021-05-02 12:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Persian (http://www.transifex.com/widelands/widelands/language/fa/)\n"
 "MIME-Version: 1.0\n"
@@ -263,8 +263,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -277,12 +277,12 @@ msgstr "منوی اصلی"
 msgid "Tools"
 msgstr "ابزار"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -472,10 +472,10 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -534,7 +534,7 @@ msgstr ""
 msgid "Unsupported Format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:476 ../../src/wlapplication.cc:678
+#: ../../src/editor/editorinteractive.cc:476 ../../src/wlapplication.cc:686
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -623,8 +623,8 @@ msgstr ""
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1099,7 +1099,7 @@ msgid "Player"
 msgstr "بازیکن"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1739
+#: ../../src/network/gamehost.cc:1743
 #, c-format
 msgid "Computer %u"
 msgstr ""
@@ -1543,7 +1543,7 @@ msgstr ""
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/wlapplication.cc:1443
+#: ../../src/wlapplication.cc:1451
 msgid "Error"
 msgstr ""
 
@@ -1657,15 +1657,15 @@ msgstr ""
 msgid "Postloading world and tribes…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:553
+#: ../../src/logic/editor_game_base.cc:560
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:556
+#: ../../src/logic/editor_game_base.cc:563
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:559
+#: ../../src/logic/editor_game_base.cc:566
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
@@ -1674,36 +1674,36 @@ msgstr ""
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
-#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:328
+#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:376
+#: ../../src/logic/game.cc:377
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:627
+#: ../../src/logic/game.cc:628
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:646 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:1114
+#: ../../src/logic/game.cc:1115
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1116
+#: ../../src/logic/game.cc:1117
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -2300,7 +2300,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1908
+#: ../../src/logic/player.cc:1917
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2471,8 +2471,8 @@ msgstr ""
 msgid "Checking map"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:701
-#: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:629
+#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:705
+#: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:637
 msgid "Preparing game…"
 msgstr ""
 
@@ -2488,42 +2488,42 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:700
+#: ../../src/network/gameclient.cc:721
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/gameclient.cc:706
+#: ../../src/network/gameclient.cc:727
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:710
+#: ../../src/network/gameclient.cc:731
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:879
+#: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:921
+#: ../../src/network/gameclient.cc:945
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1227
+#: ../../src/network/gameclient.cc:1251
 msgid "Disconnected"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1229
+#: ../../src/network/gameclient.cc:1253
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2644,7 +2644,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1979
+#: ../../src/network/gamehost.cc:1983
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3047,7 +3047,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1276
+#: ../../src/scripting/lua_game.cc:1291
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -5051,11 +5051,19 @@ msgstr ""
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/random_game.cc:85
+#: ../../src/ui_fsmenu/random_game.cc:66
+msgid ""
+"The random map generator is still in beta stage. The maps it generates are "
+"usually – but not always – well playable. Seafaring and artifacts are not "
+"supported. Add-ons of the World, Tribes, and Script categories are disabled "
+"in random matches."
+msgstr ""
+
+#: ../../src/ui_fsmenu/random_game.cc:117
 msgid "Map Generation Error"
 msgstr ""
 
-#: ../../src/ui_fsmenu/random_game.cc:86
+#: ../../src/ui_fsmenu/random_game.cc:118
 msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
@@ -5121,18 +5129,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -5165,25 +5173,25 @@ msgid "Unmark All"
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:682 ../../src/wlapplication.cc:688
-#: ../../src/wlapplication.cc:693 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:690 ../../src/wlapplication.cc:696
+#: ../../src/wlapplication.cc:701 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:683 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:691 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:686
+#: ../../src/wlapplication.cc:694
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:689
+#: ../../src/wlapplication.cc:697
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1445
+#: ../../src/wlapplication.cc:1453
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -5194,15 +5202,15 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1467
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1467
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1462
+#: ../../src/wlapplication.cc:1470
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5216,7 +5224,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1472
+#: ../../src/wlapplication.cc:1480
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5226,11 +5234,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1500
+#: ../../src/wlapplication.cc:1508
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1501
+#: ../../src/wlapplication.cc:1509
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5765,9 +5773,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6170,8 +6178,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"

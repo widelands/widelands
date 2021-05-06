@@ -3,9 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_immovable_type {
-   name = "cassavarootfield_harvested",
+   name = "cassavafield_harvested",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext("immovable", "Cassava Root Field (harvested)"),
+   descname = pgettext("immovable", "Cassava Field (harvested)"),
    icon = dirname .. "menu.png",
    programs = {
       main = {
