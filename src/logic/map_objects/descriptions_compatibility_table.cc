@@ -93,6 +93,11 @@ immovables_
 	{"greenland_stones5", "greenland_rocks5"},
 	{"greenland_stones6", "greenland_rocks6"},
 		// Tribe immovables below - can be deleted whenever we break map compatibility
+	{"cassavarootfield_harvested", "cassavafield_harvested"},
+	{"cassavarootfield_ripe", "cassavafield_ripe"},
+	{"cassavarootfield_medium", "cassavafield_medium"},
+	{"cassavarootfield_small", "cassavafield_small"},
+	{"cassavarootfield_tiny", "cassavafield_tiny"},
 },
 resources_
 {

@@ -3,15 +3,15 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_immovable_type {
-   name = "cassavarootfield_small",
+   name = "cassavafield_small",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext("immovable", "Cassava Root Field (small)"),
+   descname = pgettext("immovable", "Cassava Field (small)"),
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
       main = {
          "animate=idle duration:45s",
-         "transform=cassavarootfield_medium",
+         "transform=cassavafield_medium",
       }
    },
 
