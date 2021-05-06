@@ -2127,14 +2127,14 @@ MapObjectDescription
    wares.
 
    The dynamic class :class:`MapObject` corresponding to this class is the base
-   class for all Objects in widelands, including immovables and Bobs. This
+   class for all objects in widelands, including immovables and bobs. This
    class can't be instantiated directly, but provides the base for all others.
 
    Accessing descriptions for an existing map object in a game is done via
    the class :class:`MapObject` and the attribute :attr:`MapObject.descr`.
 
-   To access static descriptions without being an existing map object one can use
-   anything that returns a Description object. See e.g. some of the attributes
+   To access static descriptions without having access to an actual object on the map one can use
+   anything that returns a description object. See e.g. some of the attributes
    of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
 */
 
@@ -2247,7 +2247,7 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
             actual building is being dismantled here,
           * :class:`warehouse <WarehouseDescription>`, a warehouse
             can store wares and workers. Headquarters and ports are
-            special tapes of warehouses, but they belong to the same
+            special types of warehouses, but they belong to the same
             class,
           * :class:`militarysite <MilitarySiteDescription>`, a
             building manned by soldiers to expand a tribe's territory,
@@ -2285,7 +2285,7 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
          -- get building descriptions of this tribe
          local buildings = tribe_descr.buildings
 
-         -- loop all building descriptions
+         -- iterate over all building descriptions
          for i, building in ipairs(buildings) do
             print(building.type_name, building.name)
 
@@ -2406,9 +2406,9 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 /* RST
    .. attribute:: terrain_affinity
 
-      (RO) For trees: A :class:`table` containing numbers labeled as pickiness (uint),
-      preferred_fertility (uint), preferred_humidity (uint), and preferred_temperature (uint),
-      or nil if the immovable has no terrain affinity.
+      (RO) A :class:`table` containing numbers labeled as pickiness,
+      preferred_fertility, preferred_humidity, and preferred_temperature,
+      or :const:`nil` if the immovable has no terrain affinity.
 
       E.g. for a beech this will be:
 
@@ -2473,7 +2473,7 @@ int LuaImmovableDescription::get_size(lua_State* L) {
 /* RST
    .. method:: has_attribute(attribute_name)
 
-      (RO) Returns :const:`true` if the immovable has the attribute, :const:`false` otherwise.
+      Returns :const:`true` if the immovable has the attribute, :const:`false` otherwise.
 
       :arg attribute_name: The attribute that we are checking for.
       :type attribute_name: :class:`string`
@@ -2492,8 +2492,8 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 /* RST
    .. method:: probability_to_grow(terrain_description)
 
-      (RO) For trees: Returns a double describing the probability that this tree will grow on the
-      given terrain. Returns nil if this tree has no terrain affinity (all trees should
+      Returns a double describing the probability that this tree will grow on the
+      given terrain. Returns :const:`nil` if this tree has no terrain affinity (all trees should
       have one).
 
       :arg terrain_description: The terrain that we are checking the probability for.
@@ -2622,8 +2622,8 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
 /* RST
    .. attribute:: enhanced_from
 
-      (RO) The :class:`~wl.map.BuildingDescription` that this was enhanced from, or nil if this
-      isn't an enhanced building.
+      (RO) The :class:`~wl.map.BuildingDescription` that this was enhanced from, or :const:`nil`
+      if this isn't an enhanced building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
@@ -2734,7 +2734,7 @@ int LuaBuildingDescription::get_vision_range(lua_State* L) {
    .. attribute:: workarea_radius
 
       (RO) The first workarea_radius of the building as an :class:`integer`,
-      nil in case bulding has no workareas.
+      :const:`nil` in case bulding has no workareas.
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State* L) {
 	const WorkareaInfo& workareaInfo = get()->workarea_info();
@@ -4263,7 +4263,7 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
    .. attribute:: default_resource
 
       (RO) The :class:`wl.map.ResourceDescription` for the default resource provided by this
-      terrain, or nil if the terrain has no default resource.
+      terrain, or :const:`nil` if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
@@ -5888,7 +5888,7 @@ const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
    .. attribute:: portdock
 
       (RO) If this Warehouse is a port, returns the
-      :class:`PortDock` attached to it, otherwise nil.
+      :class:`PortDock` attached to it, otherwise :const:`nil`.
 */
 int LuaWarehouse::get_portdock(lua_State* L) {
 	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_portdock());
@@ -5898,7 +5898,7 @@ int LuaWarehouse::get_portdock(lua_State* L) {
    .. attribute:: expedition_in_progress
 
       (RO) If this Warehouse is a port, and an expedition is in
-      progress, this is :const`true`, otherwise nil.
+      progress, this is :const`true`, otherwise :const:`nil`.
 */
 int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 
