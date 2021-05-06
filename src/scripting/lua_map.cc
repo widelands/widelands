@@ -2133,9 +2133,9 @@ MapObjectDescription
    Accessing descriptions for an existing map object in a game is done via
    the class :class:`MapObject` and the attribute :attr:`MapObject.descr`.
 
-   To access static descriptions without having access to an actual object on the map one can use
-   anything that returns a description object. See e.g. some of the attributes
-   of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
+   To access static descriptions without having access to an actual object on the map, e.g. for
+   the tribal encyclopedia, one can use anything that returns a description object. See e.g. 
+   some of the attributes of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
 */
 
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
@@ -2492,9 +2492,8 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 /* RST
    .. method:: probability_to_grow(terrain_description)
 
-      Returns a double describing the probability that this tree will grow on the
-      given terrain. Returns :const:`nil` if this tree has no terrain affinity (all trees should
-      have one).
+      Returns a :class:`double` describing the probability that this immovable will grow on the
+      given terrain. Returns :const:`nil` if this immovable has no terrain affinity.
 
       :arg terrain_description: The terrain that we are checking the probability for.
       :type terrain_description: :class:`wl.map.TerrainDescription`
@@ -2794,8 +2793,9 @@ ProductionSiteDescription
    :class:`BuildingDescription`
 
    A static description of a tribe's productionsite. This class contains
-   the properties for productionsites that have workers. For militarysites and trainingsites,
-   please use the subclasses. See the parent classes for more properties.
+   the properties for productionsites that have workers.
+   
+   See the parent classes for more properties.
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
@@ -2899,7 +2899,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 
       (RO) An :class:`array` of :class:`ResourceDescription` containing the resources that
       this building will collect from the map, along with the maximum percentage mined and the
-      chance to still find some more after depletion. E.g. for a Fisher's hut this will be:
+      chance to still find some more after depletion. E.g. for a Fisher's Hut this will be:
 
       .. code-block:: lua
 
@@ -3160,7 +3160,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 /* RST
    .. method:: consumed_wares_workers(program_name)
 
-      (RO) Returns a :class:`table` of ``{{ware_name},ware_amount}`` for the wares consumed by this
+      Returns a :class:`table` of ``{{ware_name},ware_amount}`` for the wares consumed by this
       production program. Multiple entries in ``{ware_name}`` are alternatives (OR logic)).
 
       :arg program_name: The name of the production program that we want to get the consumed wares
@@ -3198,7 +3198,7 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 /* RST
    .. method:: produced_wares(program_name)
 
-      (RO) Returns a :class:`table` of ``{ware_name=ware_amount}`` for the wares produced by this
+      Returns a :class:`table` of ``{ware_name=ware_amount}`` for the wares produced by this
       production program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: The name of the production program that we want to get the produced wares
@@ -3220,7 +3220,7 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 /* RST
    .. method:: recruited_workers(program_name)
 
-      (RO) Returns a :class:`table` of ``{worker_name=worker_amount}`` for the workers recruited
+      Returns a :class:`table` of ``{worker_name=worker_amount}`` for the workers recruited
       by this production program. See :ref:`production site programs <productionsite_programs>`.
 
       :arg program_name: the name of the production program that we want to get the recruited
@@ -3300,8 +3300,8 @@ TrainingSiteDescription
 
    A static description of a tribe's trainingsite.
 
-   A training site can train some or all of a soldier's properties (Attack, Defense, Evade and
-   Health). See the parent classes for more properties.
+   A training site can train some or all of a soldier's properties (attack, defense, evade and
+   health). See the parent classes for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -3337,7 +3337,7 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
 /* RST
    .. attribute:: food_attack
 
-      (RO) A :class:`table` of tables with food ware names used for Attack training,
+      (RO) A :class:`table` of tables with food ware names used for attack training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
 */
 int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
@@ -3347,7 +3347,7 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
 /* RST
    .. attribute:: food_defense
 
-      (RO) A :class:`table` of tables with food ware names used for Defense training,
+      (RO) A :class:`table` of tables with food ware names used for defense training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
@@ -3357,7 +3357,7 @@ int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
 /* RST
    .. attribute:: food_evade
 
-      (RO) A :class:`table` of tables with food ware names used for Evade training,
+      (RO) A :class:`table` of tables with food ware names used for evade training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
 */
 int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
@@ -3367,7 +3367,7 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
 /* RST
    .. attribute:: food_health
 
-      (RO) A :class:`table` of tables with food ware names used for Health training,
+      (RO) A :class:`table` of tables with food ware names used for health training,
       e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
 */
 int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
@@ -3681,7 +3681,7 @@ WareDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a tribe's ware. See the parent class for more properties.
+   A static description of a ware. See the parent class for more properties.
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
@@ -3768,7 +3768,7 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 /* RST
    .. method:: producers(tribename)
 
-      (RO) Returns an :class:`array` with :class:`LuaBuildingDescription` with buildings that
+      (RO) Returns an :class:`array` with :class:`BuildingDescription` with buildings that
       can produce this ware. Loads the tribe if it hasn't been loaded yet.
 
       :arg tribename: The name of the tribe that this ware gets checked for.
@@ -3871,7 +3871,7 @@ int LuaWorkerDescription::get_buildcost(lua_State* L) {
 /* RST
    .. attribute:: employers
 
-      (RO) An :class:`array` with :class:`LuaBuildingDescription` with buildings where
+      (RO) An :class:`array` with :class:`BuildingDescription` with buildings where
       this worker can be employed.
 */
 int LuaWorkerDescription::get_employers(lua_State* L) {
@@ -4372,9 +4372,9 @@ Economy
 .. class:: LuaEconomy
 
    Provides access to an economy. An economy will be created each time a player places a
-   flag on the map. As soon this flag get connected to other flags the economies of all flags
-   will be joined to a single economy. A player can have multiple economies each with it's own
-   economy-settings.
+   flag on the map. As soon this flag is connected to another flag, their two economies will
+   be merged into a single economy. A player can have multiple economies, each of which has
+   its own set of economy target settings.
 
    You can get an economy from a :class:`Flag`.
 */
@@ -4459,7 +4459,7 @@ int LuaEconomy::target_quantity(lua_State* L) {
       :arg workername: The name of the worker type.
       :type workername: :class:`string`
 
-      :arg amount: The new target amount for the worker. Needs to be >= 0.
+      :arg amount: The new target amount for the worker. Needs to be ``>=0``.
       :type amount: :class:`integer`
 */
 int LuaEconomy::set_target_quantity(lua_State* L) {
@@ -4705,7 +4705,7 @@ int LuaMapObject::destroy(lua_State* L) {
 /* RST
    .. method:: has_attribute(attribute)
 
-      (RO) Returns :const:`true`, if the map object has this attribute, else :const:`false`.
+      Returns :const:`true` if the map object has this attribute, :const:`false` otherwise.
 
       :arg attribute: The attribute to check for.
       :type attribute: :class:`string`
@@ -5398,8 +5398,8 @@ int LuaBuilding::get_flag(lua_State* L) {
 
       Instantly turn this building into a dismantlesite.
 
-      :arg keep_wares: Optional: If :const:`true` the wares in this buildings stock get destroyed.
-         If :const:`false` (default) the wares in this buildings stock will be preserved.
+      :arg keep_wares: Optional: If :const:`false` (default) the wares in this buildings stock
+         get destroyed. If :const:`true` the wares in this buildings stock will be preserved.
       :type keep_wares: :const:`bool`
 */
 int LuaBuilding::dismantle(lua_State* L) {
@@ -6373,8 +6373,8 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 
       (RO) Returns whether this productionsite is currently active or stopped
 
-      :returns: :const:`true` if the productionsite has been started,
-         :const:`false` if it has been stopped.
+      :returns: :const:`false` if the productionsite has been started,
+         :const:`true` if it has been stopped.
 
 */
 int LuaProductionSite::get_is_stopped(lua_State* L) {
@@ -6959,7 +6959,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
 /* RST
    .. attribute:: state
 
-      (RW) Query which state the ship is in. Can be either of:
+      (RO) Query which state the ship is in. Can be either of:
 
       * :const:`"transport"`,
       * :const:`"exp_waiting"`, :const:`"exp_scouting"`, :const:`"exp_found_port_space"`,
@@ -7282,8 +7282,8 @@ int LuaShip::build_colonization_port(lua_State* L) {
       wares and a builder plus, if desired, the specified additional **items**.
       The ship must be empty and not an expedition ship when this method is called.
 
-      Note that the :attr:`capacity` is not adjusted if you give additional **itmes**.
-      If the amount of additional items exceed the capacity, the game don't like it.
+      Note that the ships :attr:`capacity` is not adjusted if you give additional **itmes**.
+      If the amount of additional items exceeds the capacity, the game doesn't like it.
 
       See also :any:`launch_expeditions` which adjusts :attr:`capacity`
       depending on the given wares and workers.
@@ -7293,7 +7293,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
 
       :returns: :const:`nil`
 
-      Example with check for sufficent capacity:
+      Example with check for sufficient capacity:
 
       .. code-block:: lua
 
@@ -7323,7 +7323,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
          end
 
          -- create expedition with additional 13 items
-         ship:make_expedition({barbarians_soldier = 10, fish=3})
+         ship:make_expedition({barbarians_soldier = 10, fish = 3})
 */
 int LuaShip::make_expedition(lua_State* L) {
 	upcast(Widelands::Game, game, &get_egbase(L));
