@@ -178,7 +178,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Cassava Root
-                  pgettext("amazons_ware", "Cassava roots are a special kind of root produced at cassava root plantations. The Amazons like their strong taste for making bread and they also feed their tapirs with them.")
+                  pgettext("amazons_ware", "Cassava roots are a special kind of root produced at cassava plantations. The Amazons like their strong taste for making bread and they also feed their tapirs with them.")
                }
             }
          },
@@ -648,7 +648,7 @@ descriptions:new_tribe {
             name = "amazons_cassava_farmer",
             helptexts = {
                -- TRANSLATORS: Helptext for an amazon worker: Cassava Farmer
-               purpose = pgettext("amazons_worker", "Grows cassava roots.")
+               purpose = pgettext("amazons_worker", "Grows cassava.")
             }
          },
          {
@@ -1110,7 +1110,7 @@ descriptions:new_tribe {
       {
          name = "cassavafield_tiny",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassava Field
             purpose = _("This field has just been planted.")
          }
       },
@@ -1443,12 +1443,12 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "amazons_cassava_root_plantation",
+         name = "amazons_cassava_plantation",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an amazon production site: Cassava Root Plantation
-            purpose = pgettext("amazons_building", "Sows and harvests cassava root."),
-            -- TRANSLATORS: Note helptext for an amazon production site: Cassava Root Plantation
-            note = pgettext ("amazons_building", "The cassava root plantation needs free space within the work area to plant seeds.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Cassava Plantation
+            purpose = pgettext("amazons_building", "Sows and harvests cassava."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Cassava Plantation
+            note = pgettext ("amazons_building", "The cassava plantation needs free space within the work area to plant seeds.")
          }
       },
       {

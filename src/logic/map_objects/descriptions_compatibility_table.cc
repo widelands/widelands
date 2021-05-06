@@ -28,7 +28,9 @@ DescriptionsCompatibilityTable::DescriptionsCompatibilityTable()
         // {"old_name", "new_name"},
      },
      // Buildings
-     buildings_{},
+     buildings_{
+        {"amazons_cassava_root_plantation", "amazons_cassava_plantation"},
+     },
      // Ships
      ships_{} {
 }
