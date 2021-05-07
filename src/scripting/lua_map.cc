@@ -4292,7 +4292,7 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 /* RST
    .. attribute:: fertility
 
-      (RO) The fertility value for this terrain as :class:`uint`.
+      (RO) The fertility value for this terrain.
 
       See also: :attr:`ImmovableDescription.terrain_affinity`
 */
@@ -4305,7 +4305,7 @@ int LuaTerrainDescription::get_fertility(lua_State* L) {
 /* RST
    .. attribute:: humidity
 
-      (RO) The humidity value for this terrain as :class:`uint`.
+      (RO) The humidity value for this terrain as.
 
       See also: :attr:`ImmovableDescription.terrain_affinity`
 */
@@ -4328,7 +4328,7 @@ int LuaTerrainDescription::get_representative_image(lua_State* L) {
 /* RST
    .. attribute:: temperature
 
-      (RO) The temperature value for this terrain as :class:`uint`.
+      (RO) The temperature value for this terrain.
 
       See also: :attr:`~ImmovableDescription.terrain_affinity`
 */
