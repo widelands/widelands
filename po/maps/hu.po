@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-24 17:51+0000\n"
+"PO-Revision-Date: 2021-05-05 22:01+0000\n"
 "Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atla
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr "Egy hely, amit otthonnak hívunk"
+msgstr "Egy hely, amit otthonnak hívhatunk"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -54,7 +54,7 @@ msgstr "Ez a föld a miénk"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Ez az oktatójáték elmagyarázza a katonai és kiképzőépületek kezelését, és bemutatja a harcot."
+msgstr "Ez az oktatójáték elmagyarázza a katonai és a kiképző épületek kezelését, és bemutatja a harc menetét."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14

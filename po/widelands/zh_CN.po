@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-02 12:36+0000\n"
+"POT-Creation-Date: 2021-05-05 15:08+0000\n"
 "PO-Revision-Date: 2021-05-02 12:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -267,8 +267,8 @@ msgstr "十一月"
 msgid "Dec"
 msgstr "十二月"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -281,12 +281,12 @@ msgstr "主菜单"
 msgid "Tools"
 msgstr "工具"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -476,10 +476,10 @@ msgstr "信息"
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -627,8 +627,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1102,7 +1102,7 @@ msgid "Player"
 msgstr "玩家"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1739
+#: ../../src/network/gamehost.cc:1743
 #, c-format
 msgid "Computer %u"
 msgstr "计算机 %u"
@@ -1673,36 +1673,36 @@ msgstr "清理后加载: 地图 (3/3)"
 msgid "Not set"
 msgstr "未设定"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
-#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:328
+#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "预加载地图…"
 
-#: ../../src/logic/game.cc:376
+#: ../../src/logic/game.cc:377
 msgid "Initializing game…"
 msgstr "初始化游戏"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:627
+#: ../../src/logic/game.cc:628
 msgid "Creating player infrastructure…"
 msgstr "创建玩家基础设施…"
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "缺少起始位置"
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:646 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands不能开始游戏，因为玩家%u缺少起始位置。\n你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
 
-#: ../../src/logic/game.cc:1114
+#: ../../src/logic/game.cc:1115
 msgid "Trade Offer"
 msgstr "交易报价"
 
-#: ../../src/logic/game.cc:1116
+#: ../../src/logic/game.cc:1117
 msgid "This market has received a new trade offer."
 msgstr "这个市场收到了新的交易报价。"
 
@@ -2463,7 +2463,7 @@ msgstr "初始化地图对象"
 msgid "Checking map"
 msgstr "检查地图"
 
-#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:701
+#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:705
 #: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:637
 msgid "Preparing game…"
 msgstr "准备游戏…"
@@ -2480,41 +2480,41 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands无法建立到指定地址的连接。如果没有Widelands服务器运行在该端口之上，那么就是在你尝试连接时该服务器已关闭。"
 
-#: ../../src/network/gameclient.cc:700
+#: ../../src/network/gameclient.cc:721
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 
-#: ../../src/network/gameclient.cc:706
+#: ../../src/network/gameclient.cc:727
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:710
+#: ../../src/network/gameclient.cc:731
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:879
+#: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:921
+#: ../../src/network/gameclient.cc:945
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me 已检查收到的文件。虽然md5值校验成功，但我无法处理该文件。"
 
-#: ../../src/network/gameclient.cc:1227
+#: ../../src/network/gameclient.cc:1251
 msgid "Disconnected"
 msgstr "未连接"
 
-#: ../../src/network/gameclient.cc:1229
+#: ../../src/network/gameclient.cc:1253
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2635,7 +2635,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands不能启动服务。\n 可能其它的进程已经在我们的端口上运行服务器了 "
 
-#: ../../src/network/gamehost.cc:1979
+#: ../../src/network/gamehost.cc:1983
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -5103,18 +5103,18 @@ msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
 msgid "Tutorial"
 msgstr "教程"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "作者"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "作者"
@@ -6151,8 +6151,8 @@ msgstr "用选定的AI替换断开连接的游戏玩家并继续进行游戏"
 msgid "AI for the disconnected player"
 msgstr "断开连接的游戏玩家的AI"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6686,8 +6686,8 @@ msgstr "%1$s(%2$s)"
 msgid "Statistics"
 msgstr "统计"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "航海"

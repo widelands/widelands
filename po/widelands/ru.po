@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-02 12:36+0000\n"
-"PO-Revision-Date: 2021-05-03 10:47+0000\n"
+"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"PO-Revision-Date: 2021-05-04 12:34+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -277,8 +277,8 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -291,12 +291,12 @@ msgstr "Главное меню"
 msgid "Tools"
 msgstr "Инструменты"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -486,10 +486,10 @@ msgstr "Информация"
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -637,8 +637,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -751,7 +751,7 @@ msgstr "Описание: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/tools/info_tool.cc:231
 msgid "(none)"
-msgstr "(ничего)"
+msgstr "(нету)"
 
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
@@ -1115,7 +1115,7 @@ msgid "Player"
 msgstr "Игрок"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1739
+#: ../../src/network/gamehost.cc:1743
 #, c-format
 msgid "Computer %u"
 msgstr "Компьютер %u"
@@ -1480,7 +1480,7 @@ msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "Язык шейдинга"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1657,10 +1657,10 @@ msgstr[3] ""
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "У %u дополнения не та версия "
+msgstr[1] "У %u дополнений не та версия"
+msgstr[2] "У %u дополнений не та версия"
+msgstr[3] "У %u дополнений не та версия"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:215
@@ -1698,36 +1698,36 @@ msgstr "Загрузка карты (3/3)"
 msgid "Not set"
 msgstr "Не заданы"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:327
-#: ../../src/logic/game.cc:422 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:328
+#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "Предзагрузка карты..."
 
-#: ../../src/logic/game.cc:376
+#: ../../src/logic/game.cc:377
 msgid "Initializing game…"
 msgstr "Инициализация игры…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:627
+#: ../../src/logic/game.cc:628
 msgid "Creating player infrastructure…"
 msgstr "Создание пользовательской инфраструктуры..."
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "Отсутствует стартовая позиция"
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:646 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Игра не может начаться, так как у игрока %u не выбрана стартовая позиция. Чтобы решить проблему, вы можете вручную добавить стартовую позицию в редакторе Widelands."
 
-#: ../../src/logic/game.cc:1114
+#: ../../src/logic/game.cc:1115
 msgid "Trade Offer"
 msgstr "Предложение обмена"
 
-#: ../../src/logic/game.cc:1116
+#: ../../src/logic/game.cc:1117
 msgid "This market has received a new trade offer."
 msgstr "Этот магазин получил новое торговое предложение."
 
@@ -2509,7 +2509,7 @@ msgstr "Размещение объектов на карте"
 msgid "Checking map"
 msgstr "Проверка карты"
 
-#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:701
+#: ../../src/network/gameclient.cc:137 ../../src/network/gamehost.cc:705
 #: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:637
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
@@ -2526,7 +2526,7 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands не может осуществить соединение по указанному адресу. Возможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз."
 
-#: ../../src/network/gameclient.cc:700
+#: ../../src/network/gameclient.cc:721
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2535,35 +2535,35 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/network/gameclient.cc:706
+#: ../../src/network/gameclient.cc:727
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:710
+#: ../../src/network/gameclient.cc:731
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:879
+#: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
 msgstr "Файл /me не прошел проверку контрольной суммы MD5."
 
-#: ../../src/network/gameclient.cc:921
+#: ../../src/network/gameclient.cc:945
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me проверка полученного файла. Хотя проверка md5 суммы успешна, файл не доступен."
 
-#: ../../src/network/gameclient.cc:1227
+#: ../../src/network/gameclient.cc:1251
 msgid "Disconnected"
 msgstr "Отвалилась сеть"
 
-#: ../../src/network/gameclient.cc:1229
+#: ../../src/network/gameclient.cc:1253
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2684,7 +2684,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands не удалось запустить сервер.\nВероятно, какой-то другой процесс уже запустил сервер на нашем порту."
 
-#: ../../src/network/gamehost.cc:1979
+#: ../../src/network/gamehost.cc:1983
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3190,10 +3190,10 @@ msgstr[3] "%d пикселей"
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d поле"
+msgstr[1] "%d поля"
+msgstr[2] "%d полей"
+msgstr[3] "%d полей"
 
 #: ../../src/ui_basic/window.cc:108 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/wui/watchwindow.cc:74
@@ -3372,7 +3372,7 @@ msgstr "Фильтровать дополнения по названию"
 #: ../../src/ui_fsmenu/addons.cc:385
 #, c-format
 msgid "Toggle category ‘%s’"
-msgstr ""
+msgstr "Переключить категорию '%s'"
 
 #: ../../src/ui_fsmenu/addons.cc:458
 #, c-format
@@ -3388,7 +3388,7 @@ msgstr[3] ""
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s)  от %3$s"
 
 #: ../../src/ui_fsmenu/addons.cc:468 ../../src/ui_fsmenu/addons.cc:1998
 #: ../../src/ui_fsmenu/addons.cc:2022
@@ -3418,7 +3418,7 @@ msgstr "сетевая ошибка"
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
-msgstr ""
+msgstr "Список дополнений на сервере недоступен. <br> Причина: %s"
 
 #: ../../src/ui_fsmenu/addons.cc:760
 #, c-format
@@ -3447,10 +3447,10 @@ msgstr "Нет обновлений для установленных вами �
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Обновить %u зависимое дополнение:"
+msgstr[1] "Обновить %u зависимых дополнения:"
+msgstr[2] "Обновить %u зависимых дополнений:"
+msgstr[3] "Обновить %u зависимых дополнений:"
 
 #: ../../src/ui_fsmenu/addons.cc:860
 #, c-format
@@ -3460,12 +3460,12 @@ msgstr "· %s"
 #: ../../src/ui_fsmenu/addons.cc:889
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr ". Дополнение \"%1$s\" зависит от \"%2$s\", а оно не найдено"
 
 #: ../../src/ui_fsmenu/addons.cc:895
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr ". Дополнение \"%1$s\" зависит от \"%2$s\", а оно не недоступно"
 
 #: ../../src/ui_fsmenu/addons.cc:902
 #, c-format
@@ -3483,16 +3483,16 @@ msgstr ""
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u ошибка зависимостей"
+msgstr[1] "%u ошибки зависимостей"
+msgstr[2] "%u ошибок зависимостей"
+msgstr[3] "%u ошибок зависимостей"
 
 #: ../../src/ui_fsmenu/addons.cc:953
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr ""
+msgstr "Дополнения с нарушенными зависимостями могут привести к ошибкам в игре и загрузке карт."
 
 #: ../../src/ui_fsmenu/addons.cc:1135
 #, c-format
@@ -3506,7 +3506,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Не удалось загрузить дополнение \"%1$s\" с сервера. Установка/обновление были пропущены.\n\nПричина:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1189
 #, c-format
@@ -3539,7 +3539,7 @@ msgid ""
 "%5$s\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "Вы уверены, что хотите удалить это дополнение?\n\n%1$s\nЗа авторством %2$s\nВерсии %3$s\nКатегория  - %4$s\n%5$s\n\nУчтите, что потом вы не сможете загрузить его с сервера."
 
 #: ../../src/ui_fsmenu/addons.cc:1263
 #, c-format
@@ -3551,7 +3551,7 @@ msgid ""
 "Version %3$s\n"
 "Category: %4$s\n"
 "%5$s"
-msgstr ""
+msgstr "Вы уверены в том, что хотите удалить это дополнение?\n\n%1$s\nЗа авторством %2$s\nВерсии %3$s\nКатегория - %4$s\n%5$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1353
 #, c-format
@@ -3566,17 +3566,17 @@ msgstr "Дополнения могут привести к рассинхрон
 #: ../../src/ui_fsmenu/addons.cc:1397
 #, c-format
 msgid "Requires a Widelands version of at least %s."
-msgstr ""
+msgstr "Требуется версия игры не ниже %s."
 
 #: ../../src/ui_fsmenu/addons.cc:1401
 #, c-format
 msgid "Requires a Widelands version of at most %s."
-msgstr ""
+msgstr "Требуется версия игры не новее чем %s."
 
 #: ../../src/ui_fsmenu/addons.cc:1405
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
-msgstr ""
+msgstr "Требуется версия игры в диапазоне от%1$s до %2$s."
 
 #: ../../src/ui_fsmenu/addons.cc:1447 ../../src/ui_fsmenu/addons.cc:1496
 msgid "Disable"
@@ -3608,12 +3608,12 @@ msgstr "(%s)"
 #: ../../src/ui_fsmenu/addons.cc:1480 ../../src/ui_fsmenu/addons.cc:1971
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "от %s"
 
 #: ../../src/ui_fsmenu/addons.cc:1504 ../../src/ui_fsmenu/addons.cc:2053
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Категория: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons.cc:1509 ../../src/ui_fsmenu/addons.cc:2057
@@ -3686,7 +3686,7 @@ msgstr[3] "%u комментариев:"
 #: ../../src/ui_fsmenu/addons.cc:1673
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
-msgstr ""
+msgstr "\"%1$s\" прокомментировал версию %2$s:"
 
 #: ../../src/ui_fsmenu/addons.cc:1687
 msgid "Not voted"
@@ -3695,17 +3695,17 @@ msgstr "Не голосовали"
 #: ../../src/ui_fsmenu/addons.cc:1747
 #, c-format
 msgid "Comments (%u)"
-msgstr ""
+msgstr "Комментарии (%u шт.)"
 
 #: ../../src/ui_fsmenu/addons.cc:1752
 #, c-format
 msgid "Screenshots (%u)"
-msgstr ""
+msgstr "Снимков (%u шт.)"
 
 #: ../../src/ui_fsmenu/addons.cc:1764
 #, c-format
 msgid "Votes (%u)"
-msgstr ""
+msgstr "Голосование (%u раз)"
 
 #: ../../src/ui_fsmenu/addons.cc:1805
 #, c-format
@@ -3739,7 +3739,7 @@ msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 #: ../../src/ui_fsmenu/addons.cc:1972
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
-msgstr ""
+msgstr "от %1$s (обновлено до %2$s)"
 
 #: ../../src/ui_fsmenu/addons.cc:1991
 #, c-format
@@ -3752,7 +3752,7 @@ msgid ""
 "Version %4$s\n"
 "Category: %5$s\n"
 "%6$s\n"
-msgstr ""
+msgstr "Всё же установить дополнение?\n\n%1$s\nот %2$s\n%3$s\nВерсии %4$s\nКатегория: %5$s\n%6$s\n"
 
 #: ../../src/ui_fsmenu/addons.cc:1998 ../../src/ui_fsmenu/addons.cc:2022
 msgid "Verified"
@@ -3770,7 +3770,7 @@ msgid ""
 "Available version: %5$s\n"
 "Category: %6$s\n"
 "%7$s"
-msgstr ""
+msgstr "Рискнёте обновить это дополнение?\n\n%1$s\nот %2$s\n%3$s\nУстановлена версия %4$s\nДоступна версия %5$s\nКатегория: %6$s\n%7$s"
 
 #: ../../src/ui_fsmenu/addons.cc:2064
 msgid "Verified by the Widelands Development Team"
@@ -3896,7 +3896,7 @@ msgstr "Дополнение с таким названием уже есть."
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr ""
+msgstr "Дополнение с этим названием было удалено. Сохраните свои правки, прежде чем его использовать снова."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:394
 msgid "Delete Add-on"
@@ -3913,7 +3913,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "Вы и правда собираетесь удалить у себя \"%s\"?\n\nУчтите, что потом оно может стать недоступным для загрузки с сервера."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:418
 #, c-format
@@ -4230,7 +4230,7 @@ msgstr "Сбросить на умолчания"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:55
 msgid "Press the new shortcut or close this window to cancel."
-msgstr ""
+msgstr "Введите новые горячие клавиши. Или закройте окно."
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:113
 msgid "Edit Keyboard Shortcuts"
@@ -4247,7 +4247,7 @@ msgstr "Откатить все к умолчаниям"
 #: ../../src/ui_fsmenu/keyboard_options.cc:136
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:155
 msgid "Keyboard Shortcut Conflict"
@@ -4618,7 +4618,7 @@ msgstr "Один игрок..."
 
 #: ../../src/ui_fsmenu/main.cc:424
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Мультиплеер..."
 
 #: ../../src/ui_fsmenu/main.cc:425
 msgid "Editor…"
@@ -4705,22 +4705,22 @@ msgstr "В data/tribes/initialization/[tribename]/init.lua не найдено �
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
-msgstr ""
+msgstr "\"%s\" - неиграбельное племя"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
-msgstr ""
+msgstr "Игроки сохранены"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Игрок %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Игрок %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
@@ -4782,7 +4782,7 @@ msgstr "Назад"
 #: ../../src/ui_fsmenu/menu.cc:273
 #, c-format
 msgid "Back to ‘%s’"
-msgstr ""
+msgstr "Вернуться к \"%s\""
 
 #: ../../src/ui_fsmenu/menu.cc:280
 msgid "Close window"
@@ -4909,7 +4909,7 @@ msgstr "Неизвестно"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
-msgstr ""
+msgstr "Укажите корректный ник. Он может содержать буквы латиницы, цифры и знаки @ . + - _ . Слово \"team\" не годится."
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:298
 msgid "Invalid Address"
@@ -4938,7 +4938,7 @@ msgstr "Оконный размер"
 
 #: ../../src/ui_fsmenu/options.cc:141
 msgid "UI Theme"
-msgstr ""
+msgstr "Шкурка UI"
 
 #: ../../src/ui_fsmenu/options.cc:146
 msgid "Grab Input"
@@ -5063,7 +5063,7 @@ msgstr "Научите меня играть"
 #. Options
 #: ../../src/ui_fsmenu/options.cc:319
 msgid "Progress…"
-msgstr ""
+msgstr "Процесс обучения..."
 
 #: ../../src/ui_fsmenu/options.cc:335
 msgid "Interface"
@@ -5203,18 +5203,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Авторы"
@@ -5228,13 +5228,13 @@ msgstr "Вы"
 #: ../../src/ui_fsmenu/training_wheel_options.cc:43
 msgctxt "teaching_progress"
 msgid "Edit Teaching Progress"
-msgstr ""
+msgstr "Изменить процесс обучения"
 
 #. * TRANSLATORS: Title above a list
 #: ../../src/ui_fsmenu/training_wheel_options.cc:66
 msgctxt "teaching_progress"
 msgid "Teaching objectives"
-msgstr ""
+msgstr "Задачи обучения"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
@@ -5310,7 +5310,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1508
 msgid "Emergency save failed"
-msgstr ""
+msgstr "Быстрое сохранение завершилось с ошибкой"
 
 #: ../../src/wlapplication.cc:1509
 #, c-format
@@ -5318,7 +5318,7 @@ msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
 "\n"
 "%s"
-msgstr ""
+msgstr "Увы, Widelands не смог выполнить быстрое сохранение по следующей причине:\n\n%s"
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Singleplayer"
@@ -5382,7 +5382,7 @@ msgstr "Удалить пункт"
 
 #: ../../src/wlapplication_options.cc:295
 msgid "Tooltip Accessibility Mode Key"
-msgstr ""
+msgstr "Переключение между режимами доступа"
 
 #: ../../src/wlapplication_options.cc:300
 msgid "Toggle Fullscreen"
@@ -5430,7 +5430,7 @@ msgstr "Переключить видимость сетки"
 
 #: ../../src/wlapplication_options.cc:373
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Переключение неподвижных объектов"
 
 #: ../../src/wlapplication_options.cc:378
 msgid "Toggle Animals"
@@ -5438,7 +5438,7 @@ msgstr "Переключить видимость животных"
 
 #: ../../src/wlapplication_options.cc:383
 msgid "Toggle Resources"
-msgstr ""
+msgstr "Переключение ресурсов"
 
 #: ../../src/wlapplication_options.cc:390
 #, c-format
@@ -5447,23 +5447,23 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:408
 msgid "Toggle Census"
-msgstr ""
+msgstr "Переключение численности населения"
 
 #: ../../src/wlapplication_options.cc:413
 msgid "Toggle Statistics Labels"
-msgstr ""
+msgstr "Переключение меток статистики"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
-msgstr ""
+msgstr "Переключение уровня солдат"
 
 #: ../../src/wlapplication_options.cc:423
 msgid "Toggle Buildings Visibility"
-msgstr ""
+msgstr "Переключение видимости зданий"
 
 #: ../../src/wlapplication_options.cc:428
 msgid "Toggle Overlapping Workareas"
-msgstr ""
+msgstr "Переключение видимости слоёв рабочей области"
 
 #: ../../src/wlapplication_options.cc:433
 #: ../../src/wui/general_statistics_menu.cc:47
@@ -5496,27 +5496,27 @@ msgstr "Статистика мореплавания"
 
 #: ../../src/wlapplication_options.cc:471
 msgid "Decrease Game Speed by 1×"
-msgstr ""
+msgstr "Замедлить игру в 1× раз"
 
 #: ../../src/wlapplication_options.cc:476
 msgid "Decrease Game Speed by 0.25×"
-msgstr ""
+msgstr "Замедлить игру в 0.25× раз"
 
 #: ../../src/wlapplication_options.cc:481
 msgid "Decrease Game Speed by 10×"
-msgstr ""
+msgstr "Замедлить игру в 10× раз"
 
 #: ../../src/wlapplication_options.cc:486
 msgid "Increase Game Speed by 1×"
-msgstr ""
+msgstr "Ускорить игру в 1× раз"
 
 #: ../../src/wlapplication_options.cc:491
 msgid "Increase Game Speed by 0.25×"
-msgstr ""
+msgstr "Ускорить игру в 0.25× раз"
 
 #: ../../src/wlapplication_options.cc:496
 msgid "Increase Game Speed by 10×"
-msgstr ""
+msgstr "Ускорить игру в 10× раз"
 
 #: ../../src/wlapplication_options.cc:501
 msgid "Reset Game Speed"
@@ -5529,7 +5529,7 @@ msgstr "Пауза"
 
 #: ../../src/wlapplication_options.cc:510
 msgid "Scroll to Starting Field"
-msgstr ""
+msgstr "Прокрутить к стартовому полю"
 
 #: ../../src/wlapplication_options.cc:514 ../../src/wui/game_chat_menu.cc:53
 #: ../../src/wui/interactive_gamebase.cc:327
@@ -5649,7 +5649,7 @@ msgstr "Ctrl"
 #: ../../src/wlapplication_options.cc:772
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../src/wui/actionconfirm.cc:186
 msgid "Destroy building?"
@@ -6028,7 +6028,7 @@ msgstr "Уменьшить план выпуска"
 
 #: ../../src/wui/economy_options_window.cc:95
 msgid "Toggle infinite target"
-msgstr ""
+msgstr "Переключение между недостижимыми целями"
 
 #: ../../src/wui/economy_options_window.cc:103
 msgid "Increase target"
@@ -6109,11 +6109,11 @@ msgstr "Действие"
 
 #: ../../src/wui/fieldaction.cc:393
 msgid "Marked for removal by a worker – click to unmark"
-msgstr ""
+msgstr "Рабочий помечен на удаление. Кликните для отмены"
 
 #: ../../src/wui/fieldaction.cc:394 ../../src/wui/fieldaction.cc:401
 msgid "Immovable Actions"
-msgstr ""
+msgstr "Использование неподвижного объекта"
 
 #: ../../src/wui/fieldaction.cc:400
 msgid "Mark this immovable for timely removal by a suited worker"
@@ -6133,7 +6133,7 @@ msgstr "Уничтожить этот флаг"
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Configure this flag’s economy"
-msgstr ""
+msgstr "Настроить экономику узла"
 
 #: ../../src/wui/fieldaction.cc:442
 msgid "Send geologist to explore site"
@@ -6141,7 +6141,7 @@ msgstr "Отправить геолога исследовать район"
 
 #: ../../src/wui/fieldaction.cc:448 ../../src/wui/fieldaction.cc:468
 msgid "Send scout to explore surroundings"
-msgstr ""
+msgstr "Послать разведчика изучать окрестности"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
@@ -6149,7 +6149,7 @@ msgstr ""
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr ""
+msgstr "Соедините узел со штабом разведки, чтобы выслать разведчика."
 
 #: ../../src/wui/fieldaction.cc:489
 msgid "Place a flag"
@@ -6161,7 +6161,7 @@ msgstr "Разрушить дорогу"
 
 #: ../../src/wui/fieldaction.cc:499
 msgid "Destroy a waterway"
-msgstr ""
+msgstr "Отказаться от фарватера"
 
 #: ../../src/wui/fieldaction.cc:517
 msgid "Watch field in a separate window"
@@ -6189,7 +6189,7 @@ msgstr "Отменить дорогу"
 
 #: ../../src/wui/fieldaction.cc:693
 msgid "Cancel road and start building waterway"
-msgstr ""
+msgstr "Отменить стр. дороги и начать прокладку фарватера"
 
 #: ../../src/wui/fieldaction.cc:697
 msgid "Build roads"
@@ -6197,11 +6197,11 @@ msgstr "Строить дороги"
 
 #: ../../src/wui/fieldaction.cc:709
 msgid "Cancel waterway"
-msgstr ""
+msgstr "Отменить прокладку фарватера"
 
 #: ../../src/wui/fieldaction.cc:712
 msgid "Cancel waterway and start building road"
-msgstr ""
+msgstr "Отказаться от фарватера и начать строительство дороги"
 
 #: ../../src/wui/fieldaction.cc:715
 msgid "Build waterways"
@@ -6215,15 +6215,15 @@ msgstr "Скриптовая консоль"
 
 #: ../../src/wui/game_chat_panel.cc:63
 msgid "Recipient"
-msgstr ""
+msgstr "Получатель"
 
 #: ../../src/wui/game_chat_panel.cc:368 ../../src/wui/game_chat_panel.cc:492
 msgid "Unknown Recipient"
-msgstr ""
+msgstr "Получатель неизвестен"
 
 #: ../../src/wui/game_chat_panel.cc:437
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 #. * TRANSLATORS: Window label
 #: ../../src/wui/game_client_disconnected.cc:48
@@ -6254,8 +6254,8 @@ msgstr "Замените отключенного игрока выбранны�
 msgid "AI for the disconnected player"
 msgstr "Искусственный Интеллект для отключенного игрока"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6331,7 +6331,7 @@ msgstr "Показать все сообщения"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:537
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Показать сообщения только от геологов"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:542
@@ -6496,7 +6496,7 @@ msgstr[3] ""
 
 #: ../../src/wui/gamedetails.cc:145
 msgid "Directory Name:"
-msgstr ""
+msgstr "Каталог:"
 
 #: ../../src/wui/gamedetails.cc:153
 msgid "Error:"
@@ -6527,7 +6527,7 @@ msgstr "Условия победы:"
 
 #: ../../src/wui/gamedetails.cc:194 ../../src/wui/mapdetails.cc:193
 msgid "Add-Ons:"
-msgstr ""
+msgstr "Дополнения: "
 
 #: ../../src/wui/general_statistics_menu.cc:136
 msgid "Land"
@@ -6563,60 +6563,60 @@ msgstr "Войска"
 
 #: ../../src/wui/info_panel.cc:145
 msgid "Info Panel Visibility"
-msgstr ""
+msgstr "Видимость информационной панели"
 
 #: ../../src/wui/info_panel.cc:199
 msgid "Follow mouse"
-msgstr ""
+msgstr "Следовать за курсором"
 
 #: ../../src/wui/info_panel.cc:204
 msgid "Hide"
-msgstr ""
+msgstr "Скрыть"
 
 #: ../../src/wui/info_panel.cc:209
 msgid "Move panel to bottom"
-msgstr ""
+msgstr "Убрать панель вниз"
 
 #: ../../src/wui/info_panel.cc:209
 msgid "Move panel to top"
-msgstr ""
+msgstr "Поднять панель наверх"
 
 #: ../../src/wui/info_panel.cc:385
 msgid "Cheat mode enabled"
-msgstr ""
+msgstr "Доступны читы"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
 #: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
-msgstr ""
+msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
 #: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
-msgstr ""
+msgstr "%1$s · %2$s · %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "Пренебрежимо"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "Неважно"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "Обыденно"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "Важно"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "Крайне важно"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:124
@@ -6801,8 +6801,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Статистика"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "С мореплаванием"
@@ -7225,7 +7225,7 @@ msgstr "%2% %1%, %3%"
 #: ../../src/wui/savegameloader.cc:172
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "сохранение от %2$u %1$s %3$u "
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:30
@@ -7646,7 +7646,7 @@ msgstr "Добавить 10 ед. товара"
 
 #: ../../src/wui/warehousewindow.cc:187
 msgid "Configure this building’s economy"
-msgstr ""
+msgstr "Настроить экономику в здании"
 
 #: ../../src/wui/warehousewindow.cc:270
 msgid "Wares waiting to be shipped"
@@ -7678,7 +7678,7 @@ msgstr "="
 #: ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no

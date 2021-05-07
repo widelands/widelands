@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# András Tóth <txa-dev@posteo.hu>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: András Tóth <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -571,6 +575,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben"
+" folytasd a következő küldetéssel!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
