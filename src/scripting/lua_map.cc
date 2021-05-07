@@ -2792,8 +2792,7 @@ ProductionSiteDescription
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
    :class:`BuildingDescription`
 
-   A static description of a tribe's productionsite. This class contains
-   the properties for productionsites that have workers.
+   A static description of a tribe's productionsite.
 
    See the parent classes for more properties.
 */
