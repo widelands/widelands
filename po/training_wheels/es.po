@@ -5,14 +5,15 @@
 # Translators:
 # Madkat Here, 2020
 # Gontzal M. Pujana <juchuf@gmail.com>, 2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Gontzal M. Pujana <juchuf@gmail.com>, 2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +64,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "Haz clic en el símbolo de bandera."
 
 #: ../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
@@ -210,18 +211,25 @@ msgstr ""
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
+"El terreno es llano aquí. Tus transportistas se moverán bien por este sitio."
 
 #: ../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"Hay una pequeña pendiente que superar para alcanzar esta parcela. Esto "
+"significa que tus trabajadores serán más rápidos caminando colina abajo de "
+"lo que lo serán caminando colina arriba."
 
 #: ../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"La conexión entre las parcelas es muy empinada. El incremento de velocidad "
+"en una dirección es enorme mientras que la ralentización en la otra es "
+"también substancial."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176

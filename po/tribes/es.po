@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-04 10:44+0000\n"
-"PO-Revision-Date: 2021-05-05 12:06+0000\n"
+"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"PO-Revision-Date: 2021-05-06 15:49+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1251,8 +1251,8 @@ msgstr ""
 msgid "working"
 msgstr "trabajando"
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1351,7 +1351,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "La granjera de cacao trabajando en esta granja de cacao no tiene tierra despejada para plantar sus semillas."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
@@ -1714,7 +1714,7 @@ msgstr "construyendo un barco"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Taller de Piedra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
@@ -1940,8 +1940,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -4282,7 +4282,7 @@ msgstr "¡No se han encontrado guerreras para este nivel de entrenamiento!"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Asamblea de las Guerreras"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88

@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -233,7 +237,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:135
 msgid "Port Space Found"
-msgstr ""
+msgstr "Se ha encontrado Espacio para un Puerto"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
 msgid "One step closer to the North"
@@ -369,7 +373,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicidades"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
@@ -412,7 +416,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
-msgstr ""
+msgstr "Se ha encontrado espacio para un puerto"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
@@ -549,7 +553,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
 msgid "Victory"
-msgstr ""
+msgstr "Victoria"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
@@ -582,7 +586,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "You Have Lost"
-msgstr ""
+msgstr "Has Perdido"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
 msgid "Goodbye!"
@@ -622,7 +626,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11

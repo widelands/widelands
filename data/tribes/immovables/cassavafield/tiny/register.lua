@@ -1,3 +1,3 @@
 return {
-   cassavarootfield_tiny = { "field", "seed_cassava" },
+   cassavafield_tiny = { "field", "seed_cassava" },
 }
