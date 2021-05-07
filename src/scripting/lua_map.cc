@@ -2121,21 +2121,17 @@ MapObjectDescription
 
 .. class:: MapObjectDescription
 
-   A static description of a tribe’s object, so it can be used without
+   A static description of a map object, so it can be used without
    having to access an actual object on the map. This class contains the
    properties that are common to all objects a tribe has, such as buildings or
-   wares.
+   wares. E.g. the tribal encyclopedia is build upon this class.
 
-   The dynamic class :class:`MapObject` corresponding to this class is the base
-   class for all objects in widelands, including immovables and bobs. This
-   class can't be instantiated directly, but provides the base for all others.
+   To access the static descriptions of this class one can use anything that return
+   description objects. See e.g. some of the attributes of :class:`~wl.Descriptions`
+   or :class:`~wl.bases.EditorGameBase`.
 
-   Accessing descriptions for an existing map object in a game is done via
+   Accessing the descriptions of this class during a game is done via
    the class :class:`MapObject` and the attribute :attr:`MapObject.descr`.
-
-   To access static descriptions without having access to an actual object on the map, e.g. for
-   the tribal encyclopedia, one can use anything that returns a description object. See e.g.
-   some of the attributes of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
 */
 
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
@@ -4304,7 +4300,7 @@ int LuaTerrainDescription::get_fertility(lua_State* L) {
 /* RST
    .. attribute:: humidity
 
-      (RO) The humidity value for this terrain as.
+      (RO) The humidity value for this terrain.
 
       See also: :attr:`ImmovableDescription.terrain_affinity`
 */
