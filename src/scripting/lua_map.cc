@@ -1708,7 +1708,7 @@ int LuaMap::recalculate_seafaring(lua_State* L) {
    .. method:: set_port_space(x, y, allowed)
 
       Sets whether a port space is allowed at the coordinates (x, y).
-      Returns false if the port space couldn't be set.
+      Returns :const:`false` if the port space couldn't be set.
 
       :arg x: The x coordinate of the port space to set/unset.
       :type x: :class:`integer`
@@ -2072,7 +2072,7 @@ int LuaTribeDescription::get_workers(lua_State* L) {
 /* RST
    .. method:: has_building(buildingname)
 
-      Returns true if **buildingname** is a building and the tribe can use it.
+      Returns :const:`true` if **buildingname** is a building and the tribe can use it.
 
       :returns: :const:`true` or :const:`false`
       :rtype: :class:`bool`
@@ -2088,7 +2088,7 @@ int LuaTribeDescription::has_building(lua_State* L) {
 /* RST
    .. method:: has_ware(warename)
 
-      Returns true if **warename** is a ware and the tribe uses it.
+      Returns :const:`true` if **warename** is a ware and the tribe uses it.
 
       :returns: :const:`true` or :const:`false`
       :rtype: :class:`bool`
@@ -2103,7 +2103,7 @@ int LuaTribeDescription::has_ware(lua_State* L) {
 /* RST
    .. method:: has_worker(workername)
 
-      Returns true if **workername** is a worker and the tribe can use it.
+      Returns :const:`true` if **workername** is a worker and the tribe can use it.
 
       :returns: :const:`true` or :const:`false`
       :rtype: :class:`bool`
@@ -2134,7 +2134,7 @@ MapObjectDescription
    the class :class:`MapObject` and the attribute :attr:`MapObject.descr`.
 
    To access static descriptions without having access to an actual object on the map, e.g. for
-   the tribal encyclopedia, one can use anything that returns a description object. See e.g. 
+   the tribal encyclopedia, one can use anything that returns a description object. See e.g.
    some of the attributes of :class:`~wl.Descriptions` or :class:`~wl.bases.EditorGameBase`.
 */
 
@@ -2794,7 +2794,7 @@ ProductionSiteDescription
 
    A static description of a tribe's productionsite. This class contains
    the properties for productionsites that have workers.
-   
+
    See the parent classes for more properties.
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
@@ -3889,7 +3889,7 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 /* RST
    .. attribute:: buildable
 
-      (RO) Returns true if this worker is buildable.
+      (RO) Returns :const:`true` if this worker is buildable.
 */
 int LuaWorkerDescription::get_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
@@ -7282,7 +7282,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
       wares and a builder plus, if desired, the specified additional **items**.
       The ship must be empty and not an expedition ship when this method is called.
 
-      Note that the ships :attr:`capacity` is not adjusted if you give additional **itmes**.
+      Note that the ships :attr:`capacity` is not adjusted if you give additional **items**.
       If the amount of additional items exceeds the capacity, the game doesn't like it.
 
       See also :any:`launch_expeditions` which adjusts :attr:`capacity`
