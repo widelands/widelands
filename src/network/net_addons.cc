@@ -46,8 +46,13 @@
 
 namespace AddOns {
 
-// The networking-related code in this file is inspired by
-// https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
+/*
+ * The networking-related code in this file is inspired by
+ * https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
+ *
+ * The communication protocol is documented in the server
+ * repo (widelands/wl_addons_server) in `Server.java`.
+ */
 
 static inline void check_string_validity(const std::string& str) {
 	if (str.find(' ') != std::string::npos) {
