@@ -2205,21 +2205,25 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
       higher types, e.g. a ``bob`` is a
       :class:`general map object <MapObjectDescription>`, and a
       ``carrier`` is a :class:`worker <WorkerDescription>` as well as a
-      general map object. Possible values are:
+      general map object.
+      The types marked with ``(*)`` do not have any static properties besides those
+      defined in their parent type's description class, and are therefore represented
+      by their parent class and have no class of their own. Possible values are:
 
       * **Bobs:** Bobs are map objects that can move around the map.
         Bob types are:
 
-        * :class:`bob <BobDescription>`, the abstract base type for
-          all bobs,
-        * :class:`critter <CritterDescription>`, animals that aren't
-          controlled by any tribe,
+        * :class:`bob <MapObjectDescription>` ``(*)``, the abstract base type for all bobs,
+        * :class:`critter <MapObjectDescription>` ``(*)``,
+          animals that aren't controlled by any tribe,
         * :class:`ship <ShipDescription>`, a sea-going vessel
           belonging to a tribe that can ferry wares or an expedition,
         * :class:`worker <WorkerDescription>`, a worker belonging to
           a tribe,
-        * :class:`carrier <CarrierDescription>`, a specialized
+        * :class:`carrier <WorkerDescription>` ``(*)``, a specialized
           worker for carrying items along a road,
+        * :class:`ferry <WorkerDescription>` ``(*)``, a specialized
+          carrier for carrying items along a waterway,
         * :class:`soldier <SoldierDescription>`, a specialized worker
           that will fight for its tribe.
 
@@ -2252,24 +2256,25 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
           * :class:`trainingsite <TrainingSiteDescription>`, a
             specialized productionsite for improving soldiers.
 
-        * **Other Immovables:** Specialized immovables that aren't buildings:
+        * **Other Immovables:** Specialized immovables that aren't buildings.
 
-          * :class:`flag <FlagDescription>`, a flag that can hold
-            wares for transport,
-          * :class:`road <RoadDescription>`, a road or waterway
-            connecting two flags,
-          * :class:`portdock <PortdockDescription>`, a 'parking space'
+          * :class:`flag <MapObjectDescription>` ``(*)``, a flag that can hold wares for transport,
+          * :class:`roadbase <MapObjectDescription>` ``(*)``,
+            the abstract base type for roads and waterways,
+          * :class:`road <MapObjectDescription>` ``(*)``, a road connecting two flags,
+          * :class:`waterway <MapObjectDescription>` ``(*)``, a waterway connecting two flags,
+          * :class:`portdock <MapObjectDescription>` ``(*)``, a 'parking space'
             on water terrain where ships can load/unload wares and
             workers. A portdock is invisible to the player and one is
             automatically placed next to each port building.
 
       * **Abstract:** These types are abstract map objects that are used by the engine and are
-        not visible on the map.
+        not visible on the map. They are mentioned here only for completeness; no Lua
+        interface to access such objects or descriptions currently exists.
 
-        * :class:`battle <BattleDescription>`, holds information
-          about two soldiers in a fight,
-        * :class:`fleet <FleetDescription>`, holds information for
-          managing ships.
+        * :const:`battle`, holds information about two soldiers in a fight,
+        * :const:`ship_fleet`, holds information for managing ships and ports,
+        * :const:`ferry_fleet`, holds information for managing ferries and waterways.
 
       Example to fetch some information from a tribe's description:
 
@@ -2490,6 +2495,9 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 
       Returns a :class:`double` describing the probability that this immovable will grow on the
       given terrain. Returns :const:`nil` if this immovable has no terrain affinity.
+
+      Note that floating-point arithmetic is platform-dependent. Using :class:`double`
+      values to make any decisions in the script logic will result in desyncs.
 
       :arg terrain_description: The terrain that we are checking the probability for.
       :type terrain_description: :class:`wl.map.TerrainDescription`
