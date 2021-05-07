@@ -47,6 +47,7 @@ constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
 
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
+constexpr const char* const kForumURL = "https://www.widelands.org/forum/";
 
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
@@ -618,10 +619,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-	      (boost::format("<rt><p>%s</p></rt>") %
-	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	          .as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu. It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead. The Widelands Development Team will review your add-on soon after uploading; they may have further inquiries, therefore please check the inbox of your Widelands user profile page frequently."))).str(),
-	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	      (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."))
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead."))
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("The Widelands Development Team will review your add-on soon after uploading. In case they have further inquiries, they will contact you via a PM on the Widelands website; therefore please check the inbox of your online user profile page frequently."))
+	      ).str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 
 	dev_box_.add_space(kRowButtonSpacing);
@@ -653,7 +655,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	         .str(),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
-	{
+	auto add_button = [this](const std::string& url) {
 		UI::Button* b =
 		   new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
 #if SDL_VERSION_ATLEAST(2, 0, 14)
@@ -662,16 +664,33 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		                  _("Copy Link")
 #endif
 		   );
-		b->sigclicked.connect([]() {
+		b->sigclicked.connect([url]() {
 #if SDL_VERSION_ATLEAST(2, 0, 14)
-			SDL_OpenURL(kDocumentationURL);
+			SDL_OpenURL(url.c_str());
 #else
-			SDL_SetClipboardText(kDocumentationURL);
+			SDL_SetClipboardText(url.c_str());
 #endif
 		});
-		dev_box_.add_space(kRowButtonSpacing);
 		dev_box_.add(b);
-	}
+	};
+	dev_box_.add_space(kRowButtonSpacing);
+	add_button(kDocumentationURL);
+
+	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add(
+	   new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%1$s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             (boost::format(_("Technical problems? Unclear documentation? Advanced needs such as deletion of an add-on or collaborating with another add-on designer? Please visit our forums at %s, explain your needs, and the Widelands Development Team will be happy to help.")) %
+	              underline_tag(kForumURL))
+	                .str()))
+	         .str(),
+	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
+	dev_box_.add_space(kRowButtonSpacing);
+	add_button(kForumURL);
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
@@ -679,7 +698,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      (boost::format("<rt><p>%1$s</p></rt>") %
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
-				_("Technical problems? Send a message to the Widelands Development Team and we’ll try to help you with your enquiry as soon as we can. You’ll receive our reply via a PM on your Widelands website user profile page.")))
+				_("Alternatively you can also send a message to the Widelands Development Team and we’ll try to help you with your enquiry as soon as we can. Only the server administrators can read messages sent in this way. Since other add-on designers can usually benefit from others’ questions and answers, please use this way of communication only if there is a reason why your concern is not for everyone’s ears. You’ll receive our reply via a PM on your Widelands website user profile page.")))
 			.str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	contact_.sigclicked.connect([this]() {
