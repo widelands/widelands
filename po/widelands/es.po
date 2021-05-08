@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-04 10:44+0000\n"
-"PO-Revision-Date: 2021-05-03 16:17+0000\n"
-"Last-Translator: Madkat Here\n"
+"POT-Creation-Date: 2021-05-06 19:39+0000\n"
+"PO-Revision-Date: 2021-05-07 09:03+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1350,8 +1350,8 @@ msgid ""
 "location."
 msgstr "Selecciona el nuevo tamaño del mapa y después haz clic en la posición deseada para dividirlo. Al aumentar el tamaño, se insertarán nuevas columnas/filas al este/sur del punto seleccionado. Al reducir el mapa, el número deseado de columnas/filas serán removidas al este/sur de la posición divisoria."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1613,8 +1613,8 @@ msgstr "%1$s, %2$s (se esperaba la versión %3$s, se encontró %4$s)"
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u complemento con versión equivocada: %2$s"
+msgstr[1] "%1$u complementos con versión equivocada: %2$s"
 
 #: ../../src/logic/addons.cc:175
 #, c-format
@@ -1642,15 +1642,15 @@ msgstr "%1$s y %2$s: %3$s"
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Falta %u complemento"
+msgstr[1] "Faltan %u complementos"
 
 #: ../../src/logic/addons.cc:200
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u complemento con versión equivocada"
+msgstr[1] "%u complementos con versión equivocada"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:215
@@ -1660,7 +1660,7 @@ msgstr "Ninguno"
 #: ../../src/logic/addons.cc:219
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (versión %3$s)"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -2506,8 +2506,8 @@ msgstr "Widelands no ha podido establecer una conexión a la dirección indicada
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u  discrepancia de complementos detectado:\n"
+msgstr[1] "%u discrepancias de complementos detectado:\n"
 
 #: ../../src/network/gameclient.cc:727
 #, c-format
@@ -3342,15 +3342,15 @@ msgstr ""
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "¿Estás seguro de querer actualizar este %u complemento?"
+msgstr[1] "¿Estás seguro de querer actualizar este %u complementos?"
 
 #: ../../src/ui_fsmenu/addons.cc:467
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s) de %3$s"
 
 #: ../../src/ui_fsmenu/addons.cc:468 ../../src/ui_fsmenu/addons.cc:1998
 #: ../../src/ui_fsmenu/addons.cc:2022
@@ -3509,7 +3509,7 @@ msgid ""
 "Version %3$s\n"
 "Category: %4$s\n"
 "%5$s"
-msgstr ""
+msgstr "¿Estás seguro de querer desinstalar este complemento?\n\n%1$s\nde %2$s\nVersión %3$s\nCategoría: %4$s\n%5$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1353
 #, c-format
@@ -3566,18 +3566,18 @@ msgstr "(%s)"
 #: ../../src/ui_fsmenu/addons.cc:1480 ../../src/ui_fsmenu/addons.cc:1971
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "de %s"
 
 #: ../../src/ui_fsmenu/addons.cc:1504 ../../src/ui_fsmenu/addons.cc:2053
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Categoría: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons.cc:1509 ../../src/ui_fsmenu/addons.cc:2057
 #, c-format
 msgid "Version: %1$s+%2$u"
-msgstr ""
+msgstr "Versión: %1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons.cc:1561
 #, c-format
@@ -3706,7 +3706,7 @@ msgid ""
 "Version %4$s\n"
 "Category: %5$s\n"
 "%6$s\n"
-msgstr ""
+msgstr "¿Estás seguro de querer instalar este complemento?\n\n%1$s\nde %2$s\n%3$s\nVersión %4$s\nCategoría: %5$s\n%6$s\n"
 
 #: ../../src/ui_fsmenu/addons.cc:1998 ../../src/ui_fsmenu/addons.cc:2022
 msgid "Verified"
@@ -3724,7 +3724,7 @@ msgid ""
 "Available version: %5$s\n"
 "Category: %6$s\n"
 "%7$s"
-msgstr ""
+msgstr "¿Estás seguro de querer actualizar este complemento?\n\n%1$s\nde %2$s\n%3$s\nVersión instalado: %4$s\nVersión disponible: %5$s\nCategoría: %6$s\n%7$s"
 
 #: ../../src/ui_fsmenu/addons.cc:2064
 msgid "Verified by the Widelands Development Team"
@@ -3770,7 +3770,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:76
 msgid "New add-on"
-msgstr ""
+msgstr "Complemento nuevo"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:84
 #: ../../src/ui_fsmenu/addons_packager_box.cc:74
@@ -3811,7 +3811,7 @@ msgstr "Versión:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:310
 msgid "New Add-On"
-msgstr ""
+msgstr "Complemento Nuevo"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:311
 msgid "Enter the name for the new add-on."
@@ -3929,7 +3929,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:546
 msgid "Invalid Version"
-msgstr ""
+msgstr "Versión no Válida"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:548
 #, c-format
@@ -3999,7 +3999,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:237
 msgid "New Directory"
-msgstr ""
+msgstr "Directorio Nuevo"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:238
 msgid "Enter the name for the new directory."
@@ -4849,7 +4849,7 @@ msgstr "Desconocido"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
-msgstr ""
+msgstr "Ingresa un apodo válido. Éste sólo puede contener letras en inglés, números, y los caracteres @ . + - _ y no debe ser \"team\"."
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:298
 msgid "Invalid Address"
@@ -5290,7 +5290,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:259
 msgid "Toggle Building Spaces"
-msgstr ""
+msgstr "Mostrar u ocultar Zonas de Construcción"
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Toggle Minimap"
@@ -5422,7 +5422,7 @@ msgstr "Estadísticas de Construcción"
 
 #: ../../src/wlapplication_options.cc:448
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Inventario de Existencias"
 
 #: ../../src/wlapplication_options.cc:453
 #: ../../src/wui/soldier_statistics_menu.cc:35
@@ -5787,9 +5787,9 @@ msgstr "Puertos"
 msgid "Low productivity:"
 msgstr "Baja productividad:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6071,7 +6071,7 @@ msgstr "Destruir esta bandera"
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Configure this flag’s economy"
-msgstr ""
+msgstr "Configurar la economía de esta bandera"
 
 #: ../../src/wui/fieldaction.cc:442
 msgid "Send geologist to explore site"
@@ -6192,8 +6192,8 @@ msgstr "Reemplazar el jugador desconectado con la IA seleccionada y continuar ju
 msgid "AI for the disconnected player"
 msgstr "IA para el jugador desconectado"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6731,8 +6731,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadísticas"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Marítimo"
@@ -7487,7 +7487,7 @@ msgstr "Rojo:"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Stock is lower than the target"
-msgstr "El stock es más bajo que el objetivo"
+msgstr "Las existencias son más bajo que el objetivo"
 
 #: ../../src/wui/stock_menu.cc:61
 msgid "Yellow:"
@@ -7495,7 +7495,7 @@ msgstr "Amarillo:"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Stock is equal to the target"
-msgstr "El stock es igual al objetivo"
+msgstr "Las existencias son igual al objetivo"
 
 #: ../../src/wui/stock_menu.cc:65
 msgid "Green:"
@@ -7503,7 +7503,7 @@ msgstr "Verde:"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Stock is higher than the target"
-msgstr "El stock es más alto que el objetivo"
+msgstr "Las existencias son más alto que el objetivo"
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"

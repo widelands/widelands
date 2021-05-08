@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-04 10:44+0000\n"
-"PO-Revision-Date: 2021-05-05 12:06+0000\n"
+"POT-Creation-Date: 2021-05-06 19:39+0000\n"
+"PO-Revision-Date: 2021-05-07 21:01+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1166,14 +1166,14 @@ msgid "Dismantle Site"
 msgstr "Desarmar Sitio"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
-msgid "Cassava Root Cooker"
-msgstr ""
+msgid "Cassava Plantation"
+msgstr "Plantación de Mandioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
@@ -1251,31 +1251,17 @@ msgstr ""
 msgid "working"
 msgstr "trabajando"
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
-msgid "baking bread"
-msgstr "horneando pan"
+#. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+msgid "planting cassava"
+msgstr "plantando mandioca"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:8
-msgctxt "amazons_building"
-msgid "Cassava Root Plantation"
-msgstr ""
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+msgid "harvesting cassava"
+msgstr "Cosechando mandioca"
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:49
-msgid "planting cassava root"
-msgstr ""
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:57
-msgid "harvesting cassava root"
-msgstr ""
-
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:66
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
@@ -1288,7 +1274,7 @@ msgstr ""
 msgid "No Fields"
 msgstr "Sin Campos"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
@@ -1301,12 +1287,26 @@ msgstr "Sin Campos"
 msgid "Out of Fields"
 msgstr "Sin Parcelas"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
 msgctxt "amazons_building"
 msgid ""
-"The farmer working at this cassava root plantation has no cleared soil to "
-"plant her seeds."
+"The farmer working at this cassava plantation has no cleared soil to plant "
+"her seeds."
+msgstr "La granjera trabajando en esta plantación de mandioca no tiene tierra despejada para plantar sus semillas."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Cooker"
 msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+msgid "baking bread"
+msgstr "horneando pan"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -1317,7 +1317,7 @@ msgstr "Fosa de Carbonización"
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
 msgid "producing charcoal"
-msgstr ""
+msgstr "produciendo carbón vegetal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
@@ -1351,7 +1351,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "La granjera de cacao trabajando en esta granja de cacao no tiene tierra despejada para plantar sus semillas."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
@@ -1363,7 +1363,7 @@ msgstr ""
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
 msgid "sewing a tunic"
-msgstr ""
+msgstr "cosiendo una túnica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
@@ -1378,24 +1378,24 @@ msgstr "fabricando un casco de madera"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "cosiendo un abrigo de guerreras"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:117
 msgid "making sturdy boots"
-msgstr ""
+msgstr "fabricando botas resistentes"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:128
 msgid "making swift boots"
-msgstr ""
+msgstr "fabricando botas prestas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
 msgid "making hero boots"
-msgstr ""
+msgstr "fabricando botas de héroes"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -1526,17 +1526,17 @@ msgstr "Cabaña de Cazadora-Recolectora"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
 msgid "gathering"
-msgstr ""
+msgstr "recogiendo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:48
 msgid "gathering meat"
-msgstr ""
+msgstr "recogiendo carne"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:56
 msgid "gathering fish"
-msgstr ""
+msgstr "recogiendo peces"
 
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:65
 msgid "No Game, No Fish"
@@ -1667,12 +1667,12 @@ msgstr "plantando árbol de madera de hierro"
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
 msgctxt "amazons_building"
 msgid "Rope Weaver Booth"
-msgstr ""
+msgstr "Cordelería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
 msgid "making a rope"
-msgstr ""
+msgstr "fabricando una cuerda"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
@@ -1714,12 +1714,11 @@ msgstr "construyendo un barco"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Taller de Piedra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
@@ -1731,8 +1730,6 @@ msgstr "fabricando una pala"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1741,7 +1738,6 @@ msgstr "la fabricación del hacha de talar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1752,13 +1748,11 @@ msgstr "fabricando un pico"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
 msgid "making a machete"
-msgstr ""
+msgstr "fabricando un machete"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1769,7 +1763,6 @@ msgstr "fabricando utensilios de cocina"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
@@ -1782,11 +1775,11 @@ msgstr "fabricando un martillo"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "fabricando un cincel"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1825,7 +1818,7 @@ msgstr "Cabaña de Cantero"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr ""
+msgstr "picando granito"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
@@ -1854,7 +1847,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr ""
+msgstr "Mina de Piedra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1940,8 +1933,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2068,7 +2061,7 @@ msgstr "produciendo carbón"
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Coal Mine"
-msgstr "Mina de carbón"
+msgstr "Mina de Carbón"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:54
@@ -2123,7 +2116,7 @@ msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuer
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Crystal Mine"
-msgstr "Mina de cristal"
+msgstr "Mina de Cristal"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:78
@@ -2258,7 +2251,7 @@ msgstr "fundiendo oro"
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Gold Mine"
-msgstr "Mina de oro"
+msgstr "Mina de Oro"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:86
 msgctxt "atlanteans_building"
@@ -2320,7 +2313,7 @@ msgstr "El transportista que trabaja en este pozo no puede encontrar agua en su 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
-msgstr "Mina de hierro"
+msgstr "Mina de Hierro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:54
@@ -2725,7 +2718,7 @@ msgstr "Fosa de Carbonización"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:8
 msgctxt "barbarians_building"
 msgid "Coal Mine"
-msgstr "Mina de carbón"
+msgstr "Mina de Carbón"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:90
@@ -2739,13 +2732,13 @@ msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuer
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deep Coal Mine"
-msgstr "Mina de carbón profunda"
+msgstr "Mina de Carbón Profunda"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
-msgstr "Mina de Carbón Profunda"
+msgstr "Mina de Carbón Muy Profunda"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
 msgctxt "barbarians_building"
@@ -2808,7 +2801,7 @@ msgstr "Cabaña Forestal"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:8
 msgctxt "barbarians_building"
 msgid "Gold Mine"
-msgstr "Mina de oro"
+msgstr "Mina de Oro"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:90
@@ -2822,13 +2815,13 @@ msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deep Gold Mine"
-msgstr "Mina de oro profunda"
+msgstr "Mina de Oro Profunda"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
-msgstr "Mina de Oro Profunda"
+msgstr "Mina de Oro Muy Profunda"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
 msgctxt "barbarians_building"
@@ -2900,7 +2893,7 @@ msgstr "Posada"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:8
 msgctxt "barbarians_building"
 msgid "Iron Mine"
-msgstr "Mina de hierro"
+msgstr "Mina de Hierro"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:90
@@ -3179,7 +3172,7 @@ msgstr "Fosa de Carbonización"
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:8
 msgctxt "empire_building"
 msgid "Coal Mine"
-msgstr "Mina de carbón"
+msgstr "Mina de Carbón"
 
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
 msgctxt "empire_building"
@@ -3192,7 +3185,7 @@ msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuer
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:8
 msgctxt "empire_building"
 msgid "Deep Coal Mine"
-msgstr "Mina de carbón profunda"
+msgstr "Mina de Carbón Profunda"
 
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
 msgctxt "empire_building"
@@ -3255,7 +3248,7 @@ msgstr "Casa del Silvicultor"
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:8
 msgctxt "empire_building"
 msgid "Gold Mine"
-msgstr "Mina de oro"
+msgstr "Mina de Oro"
 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
 msgctxt "empire_building"
@@ -3268,7 +3261,7 @@ msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:8
 msgctxt "empire_building"
 msgid "Deep Gold Mine"
-msgstr "Mina de oro profunda"
+msgstr "Mina de Oro Profunda"
 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
 msgctxt "empire_building"
@@ -3302,7 +3295,7 @@ msgstr "Posada"
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:8
 msgctxt "empire_building"
 msgid "Iron Mine"
-msgstr "Mina de hierro"
+msgstr "Mina de Hierro"
 
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
 msgctxt "empire_building"
@@ -3343,7 +3336,7 @@ msgstr "El leñador que trabaja en esta casa de leñador no puede encontrar árb
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
 msgctxt "empire_building"
 msgid "Marble Mine"
-msgstr "Cantera de mármol"
+msgstr "Cantera de Mármol"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:87
@@ -3376,7 +3369,7 @@ msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuer
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:8
 msgctxt "empire_building"
 msgid "Deep Marble Mine"
-msgstr "Gran cantera de mármol"
+msgstr "Gran Cantera de Mármol"
 
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
 msgctxt "empire_building"
@@ -4282,7 +4275,7 @@ msgstr "¡No se han encontrado guerreras para este nivel de entrenamiento!"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Asamblea de las Guerreras"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
@@ -4975,31 +4968,31 @@ msgstr "Campo de raíz negra (minúsculo)"
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (harvested)"
+msgid "Cassava Field (harvested)"
 msgstr "Campo de Mandioca (cosechado)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (medium)"
+msgid "Cassava Field (medium)"
 msgstr "Campo de Mandioca (mediano)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (ripe)"
+msgid "Cassava Field (ripe)"
 msgstr "Campo de Mandioca (maduro)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (small)"
+msgid "Cassava Field (small)"
 msgstr "Campo de Mandioca (pequeño)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (tiny)"
+msgid "Cassava Field (tiny)"
 msgstr "Campo de Mandioca (minúsculo)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
@@ -7743,7 +7736,7 @@ msgstr "Tela de araña"
 #: ../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "Cuenco de Piedra"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -7869,7 +7862,7 @@ msgstr "Transportista"
 #: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cassava Farmer"
-msgstr "Granjero de Mandioca"
+msgstr "Granjera de Mandioca"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
