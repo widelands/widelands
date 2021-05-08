@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# András Tóth <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-18 11:34+0000\n"
-"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
+"PO-Revision-Date: 2021-05-05 21:50+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "A fák önmaguktól csak lassan nőnek. Hogy biztosan elég farönköd l
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr "Terjeszkedj északkeletre, és építs egy kőfejtőt"
+msgstr "Terjeszkedj északkeletre, és építs egy kőfejtőt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
@@ -58,7 +58,7 @@ msgstr "Menj a tőled északkeletre fekvő kövekhez és építs ott egy kőfejt
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr "Láss hozzá bányák építéséhez a hegyen"
+msgstr "Láss hozzá bányák építéséhez a hegyen!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
@@ -126,7 +126,7 @@ msgstr "A bányák csak hegyi terepen építhetőek. Azokat a helyeket, ahová b
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr "Lásd el bányászaidat élelemmel"
+msgstr "Lásd el bányászaidat élelemmel!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
@@ -151,11 +151,11 @@ msgstr "Ez az első, de nem az utolsó példa olyan árura, amit fel kell dolgoz
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr "Süss kenyeret"
+msgstr "Süss kenyeret!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr "Építs egy kutat, egy farmot és egy pékséget"
+msgstr "Építs egy kutat, egy farmot és egy pékséget!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -172,7 +172,7 @@ msgstr "Dolgozd fel a kibányászott nyersanyagokat!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr "Építs egy kohót"
+msgstr "Építs egy kohót!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
@@ -258,7 +258,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "A jobb épületekhez szükség lehet az edzett fán kívül még más fejlett anyagokra is. Ezek egyike a cement, amit gránit, víz és szén felhasználásával gyártanak a mészégetőben."
+msgstr "A jobb épületekhez szükség lehet az edzett fán kívül még más fejlett anyagokra is. Ezek egyike a habarcs, amit gránit, víz és szén felhasználásával gyártanak a mészégetőben."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -792,7 +792,7 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr "Tegnap megnyílt egy kocsma embereinknek. Noha aligha van kedvem ünnepelni, felfigyeltem rá, mily sokat jelent nekik ez a talpalatnyi kis otthon. Dalaik késő éjszakáig betöltötték a levegőt, és még másnap is emelt lélekkel jártak."
+msgstr "Tegnap megnyílt egy kocsma embereinknek. Noha aligha van kedvem ünnepelni, felfigyeltem rá, mily sokat jelent nekik ez a talpalatnyi kis otthon. Dalaik késő éjszakáig betöltötték a levegőt, és még másnap is emelkedett lélekkel jártak."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:412
@@ -867,7 +867,7 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr "Mégsem ártana némi cementet is felhalmozni a további hadjáratunkra; így szükség esetén építhetnénk egy olyan erődöt, amilyet még nem látott a világ!"
+msgstr "Mégsem ártana felhalmozni némi habarcsot is a további hadjáratunkra. Így szükség esetén építhetnénk egy olyan erődöt, amilyet még nem látott a világ!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:458
 msgid "Khantrukh steps in…"
@@ -881,7 +881,7 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr "Szégyen, törzsfőnök! Az rendben van, hogy már tudunk cementet csinálni kitartó erődítményekhez és nagy épületekhez – de ettől a tetőink még beáznak! Lehet, hogy az ifjak szívesen töltik az éjszakát az esőben, de én nem tudok aludni, ha víz csepeg az arcomra!"
+msgstr "Ez szégyen, törzsfőnök! Az rendben van, hogy már tudunk habarcsot készíteni félelmetes erődítményekhez és nagy épületekhez – de ettől a tetőink még beáznak! Lehet, hogy az ifjak szívesen töltik az éjszakát az esőben, de én nem tudok aludni, ha víz csepeg az arcomra!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:463
@@ -944,7 +944,7 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr "Mikor körülnéztem, hűséges arcokat láttam, melyek hitet sugároztak, hogy át tudom őket vezetni eme sötét napokon. De mielőtt hálálkodó vagy bátorító szavakat szólhattam volna, egyik harcosom rontott be a fogadóba. Messze kint járt az erdőben az elmúlt napokban, és látszott rajta, milyen meggyötört."
+msgstr "Amikor körülnéztem, hűséges arcokat láttam, melyek hitet sugároztak, hogy át tudom őket vezetni eme sötét napokon. De mielőtt hálálkodó vagy bátorító szavakat szólhattam volna, egyik harcosom rontott be a fogadóba. Messze kint járt az erdőben az elmúlt napokban, és látszott rajta, milyen meggyötört."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
@@ -959,7 +959,7 @@ msgstr "Győzelem"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is, máskülönben folytasd a következő küldetéssel."
+msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
 msgid "One Full Moon Night"
