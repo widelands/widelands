@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
-"PO-Revision-Date: 2021-05-06 15:40+0000\n"
+"POT-Creation-Date: 2021-05-06 19:39+0000\n"
+"PO-Revision-Date: 2021-05-07 09:03+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1350,8 +1350,8 @@ msgid ""
 "location."
 msgstr "Selecciona el nuevo tamaño del mapa y después haz clic en la posición deseada para dividirlo. Al aumentar el tamaño, se insertarán nuevas columnas/filas al este/sur del punto seleccionado. Al reducir el mapa, el número deseado de columnas/filas serán removidas al este/sur de la posición divisoria."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -5143,18 +5143,18 @@ msgstr "Ruta a archivo no válida en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autores"
@@ -5787,9 +5787,9 @@ msgstr "Puertos"
 msgid "Low productivity:"
 msgstr "Baja productividad:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6192,8 +6192,8 @@ msgstr "Reemplazar el jugador desconectado con la IA seleccionada y continuar ju
 msgid "AI for the disconnected player"
 msgstr "IA para el jugador desconectado"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -7487,7 +7487,7 @@ msgstr "Rojo:"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Stock is lower than the target"
-msgstr "El stock es más bajo que el objetivo"
+msgstr "Las existencias son más bajo que el objetivo"
 
 #: ../../src/wui/stock_menu.cc:61
 msgid "Yellow:"
@@ -7495,7 +7495,7 @@ msgstr "Amarillo:"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Stock is equal to the target"
-msgstr "El stock es igual al objetivo"
+msgstr "Las existencias son igual al objetivo"
 
 #: ../../src/wui/stock_menu.cc:65
 msgid "Green:"
@@ -7503,7 +7503,7 @@ msgstr "Verde:"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Stock is higher than the target"
-msgstr "El stock es más alto que el objetivo"
+msgstr "Las existencias son más alto que el objetivo"
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
