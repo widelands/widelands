@@ -2293,6 +2293,17 @@ ImmovableDescription
 
 .. class:: ImmovableDescription
 
+   .. graphviz::
+      :align: right
+      :caption:
+      
+      digraph dependency {
+         bgcolor="transparent";
+         node [shape=box, style=filled, fillcolor=white];
+         MapObjectDescription -> ImmovableDescription [color=white];
+      }
+
+
    Child of: :class:`MapObjectDescription`
 
    A static description of a :class:`base immovable <BaseImmovable>`, so it can be used in help
@@ -4446,6 +4457,30 @@ MapObject
 ---------
 
 .. class:: MapObject
+
+   .. graphviz::
+      :align: right
+      :caption:
+      
+      digraph dependency {
+         bgcolor="transparent";
+         node [shape=box, style=filled, fillcolor=white, fontsize=11];
+         edge [color=white];
+         MapObject [fillcolor=green]
+         MapObject [shape=oval]
+         more [href="../autogen_wl_map.html#building", target="_parent"]
+         MapObject -> Bob
+         Bob -> Ship 
+         Bob -> Critter
+         Bob -> Worker -> Carrier -> Ferry
+         MapObject -> BaseImmovable
+         BaseImmovable -> Immovable
+         BaseImmovable -> PlayerImmovable
+         PlayerImmovable -> PortDock 
+         PlayerImmovable -> Building -> more
+         PlayerImmovable -> Flag
+         PlayerImmovable -> "Road/Waterway"
+      }
 
    This is the base class for all objects in Widelands, including
    :class:`immovables <BaseImmovable>` and :class:`bobs <Bob>`. This
