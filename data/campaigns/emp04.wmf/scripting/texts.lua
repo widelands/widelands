@@ -549,7 +549,7 @@ amalea_18 = {
       _([[Look Lutius, I have just analyzed our economy somewhat further. I think there might be a problem with our farms. They don’t show any productivity although there is enough space to plant wheat.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I think we should have a deeper look into the issue and open the building window of one of them.]]))
+      _([[I think we should have a deeper look into the issue and visit one of them.]]))
       .. new_objectives(obj_click_farmbuilding),
    posy=1,
    h=500,
@@ -673,7 +673,7 @@ saledus_5 = {
       _([[I am really worried about the weakness of our army. We should start to increase our military power. As a starting point, we should recruit at least ten new soldiers.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[Remember, we need to produce wooden spears and helmets to recruit them in the barracks. Perhaps we should train them further in the arena as well.]]))
+      _([[Perhaps we should train them further in the arena as well.]]))
       .. new_objectives(obj_recruit_soldiers),
    posy=1,
    h=500,
