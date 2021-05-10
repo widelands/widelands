@@ -1,3 +1,3 @@
 return {
-   cassavarootfield_ripe = { "field", "ripe_cassava" },
+   cassavafield_ripe = { "field", "ripe_cassava" },
 }
