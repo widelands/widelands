@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# András Tóth <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017-2018
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
@@ -10,13 +10,14 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 19:07+0000\n"
-"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
+"PO-Revision-Date: 2021-05-09 12:09+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,7 +151,7 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "Ezeknek a kiképzőhelyeknek az egyike a harci aréna. Ez egy nagy és drága épület, ami a katonák kitérését fejleszti. Mivel a katonák igencsak megéheznek az edzés közben, ennek az épületnek sok élelmiszerre és erős sörre van szüksége. Igazi játékban jó infrastruktúrával kell rendelkezned, mielőtt megépíted."
+msgstr "Ezeknek a kiképzőhelyeknek az egyike a harci aréna. Ez egy nagy és drága épület, ami a katonák kitérését fejleszti. Mivel a katonák igencsak megéheznek kiképzés közben, ennek az épületnek sok élelmiszerre és erős sörre van szüksége. Éles játékban jó infrastruktúrával kell rendelkezned, mielőtt megépíted."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
