@@ -53,7 +53,7 @@
     - Add missing translation markups
 - Fix detection of amount of starting gold in fri02 (#4797)
 - Fix typo and outdated instructions in emp03 (#4836)
-- Empire 04 text improvements (#4844, #4847, #4848)
+- Empire 04 text improvements (#4844, #4847, #4848, #4852)
 
 
 ### Scripting
@@ -331,6 +331,8 @@
     - 1 in SP scenarios
     - 1 with custom building enhancements
     - 1 with custom worker enhancements
+- Rename Cassava Root Field/Plantation → Cassava Field/Plantation (#4850)
+
 
 ### User Interface
 
