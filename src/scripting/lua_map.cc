@@ -2124,7 +2124,7 @@ MapObjectDescription
    A static description of a map object, so it can be used without
    having to access an actual object on the map. This class contains the
    properties that are common to all objects a tribe has, such as buildings or
-   wares. E.g. the tribal encyclopedia is build upon this class.
+   wares. E.g. the tribal encyclopedia is built upon this class.
 
    To access the static descriptions of this class one can use anything that return
    description objects. See e.g. some of the attributes of :class:`~wl.Descriptions`
@@ -2206,24 +2206,25 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
       :class:`general map object <MapObjectDescription>`, and a
       ``carrier`` is a :class:`worker <WorkerDescription>` as well as a
       general map object.
-      The types marked with ``(*)`` do not have any static properties besides those
+      Some types do not have any static properties besides those
       defined in their parent type's description class, and are therefore represented
-      by their parent class and have no class of their own. Possible values are:
+      by their parent class. Possible values are:
 
       * **Bobs:** Bobs are map objects that can move around the map.
         Bob types are:
 
-        * :class:`bob <MapObjectDescription>` ``(*)``, the abstract base type for all bobs,
-        * :class:`critter <MapObjectDescription>` ``(*)``,
-          animals that aren't controlled by any tribe,
+        * :const:`bob`, the abstract base type for all bobs. For properties see
+          :class:`MapObjectDescription`.
+        * :const:`critter`, animals that aren't controlled by any tribe. For properties see
+          :class:`MapObjectDescription`.
         * :class:`ship <ShipDescription>`, a sea-going vessel
-          belonging to a tribe that can ferry wares or an expedition,
+          belonging to a tribe that can ferry wares or an expedition.
         * :class:`worker <WorkerDescription>`, a worker belonging to
-          a tribe,
-        * :class:`carrier <WorkerDescription>` ``(*)``, a specialized
-          worker for carrying items along a road,
-        * :class:`ferry <WorkerDescription>` ``(*)``, a specialized
-          carrier for carrying items along a waterway,
+          a tribe.
+        * :const:`carrier`, a specialized worker for carrying items along a road. For properties
+          see :class:`WorkerDescription`.
+        * :const:`ferry`, a specialized carrier for carrying items along a waterway. For properties
+          see :class:`WorkerDescription`.
         * :class:`soldier <SoldierDescription>`, a specialized worker
           that will fight for its tribe.
 
@@ -2258,15 +2259,18 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 
         * **Other Immovables:** Specialized immovables that aren't buildings.
 
-          * :class:`flag <MapObjectDescription>` ``(*)``, a flag that can hold wares for transport,
-          * :class:`roadbase <MapObjectDescription>` ``(*)``,
-            the abstract base type for roads and waterways,
-          * :class:`road <MapObjectDescription>` ``(*)``, a road connecting two flags,
-          * :class:`waterway <MapObjectDescription>` ``(*)``, a waterway connecting two flags,
-          * :class:`portdock <MapObjectDescription>` ``(*)``, a 'parking space'
-            on water terrain where ships can load/unload wares and
-            workers. A portdock is invisible to the player and one is
-            automatically placed next to each port building.
+          * :const:`flag`, a flag that can hold wares for transport. For properties see
+            :class:`MapObjectDescription`.
+          * ``roadbase``, the abstract base type for roads and waterways. For properties see
+            :class:`MapObjectDescription`.
+          * :const:`road`, a road connecting two flags. For properties see
+            :class:`MapObjectDescription`.
+          * :const:`waterway`, a waterway connecting two flags. For properties see
+            :class:`MapObjectDescription`.
+          * :const:`portdock`, a 'parking space' on water terrain where ships can
+            load/unload wares and workers. A portdock is invisible to the player and one is
+            automatically placed next to each port building. For properties see
+            :class:`MapObjectDescription`.
 
       * **Abstract:** These types are abstract map objects that are used by the engine and are
         not visible on the map. They are mentioned here only for completeness; no Lua
@@ -2308,7 +2312,7 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
       empty table otherwise.
 
       Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
-      optional.
+      optional. The table may contain other keys as well.
 
       :arg tribename: The tribe for which we want to fetch the helptext.
       :type tribename: :class:`string`
@@ -2497,7 +2501,7 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
       given terrain. Returns :const:`nil` if this immovable has no terrain affinity.
 
       Note that floating-point arithmetic is platform-dependent. Using :class:`double`
-      values to make any decisions in the script logic will result in desyncs.
+      values to make any decisions in the script logic might result in desyncs.
 
       :arg terrain_description: The terrain that we are checking the probability for.
       :type terrain_description: :class:`wl.map.TerrainDescription`
