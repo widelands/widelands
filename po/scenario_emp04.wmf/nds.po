@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-04 10:44+0000\n"
+"POT-Creation-Date: 2021-05-05 15:08+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -61,9 +61,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:62
 msgid ""
-"Ensure there are not more than 3 dead ends or flags with more than 4 roads."
+"Ensure there are not more than 3 dead ends, nor more than one flag with more"
+" than 4 roads."
 msgstr ""
-"'t sall nich mehr as 3 Sackgassen un Fahnen mit mehr as 4 Straten geven."
+"'t sall nich mehr as 3 Sackgassen un ok nich mehr as eene Fahn mit mehr as 4"
+" Straten geven."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
@@ -187,7 +189,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:134
 msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
-"trainigsite until it is fully equipped with all food and weapons needed."
+"trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
 "Um eenen Soldaten in eenem Huus up de hoogsten Stand uttobilden, holl de "
 "Övens-Bau an, bit 't mit all bruukt Spiesen un Wapen kumpleet utrüst is."
@@ -256,7 +258,7 @@ msgstr ""
 "höört, nich mehr geven. Kümmer di drum."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
-msgid "Build 2 charcoal kiln"
+msgid "Build 2 charcoal kilns"
 msgstr "Bau 2 Holtköhl-Brannereen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172

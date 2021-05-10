@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-04 10:44+0000\n"
-"PO-Revision-Date: 2021-05-04 12:34+0000\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-10 00:56+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -1609,7 +1609,7 @@ msgstr "%1$s (требуется версия %2$s, найдена - %3$s)"
 #: ../../src/logic/addons.cc:150 ../../src/logic/addons.cc:190
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
-msgstr ""
+msgstr "%1$s, %2$s (требуется версия %3$s, тогда как установлена %4$s)"
 
 #: ../../src/logic/addons.cc:156
 #, c-format
@@ -1624,10 +1624,10 @@ msgstr[3] "%1$u дополнений не той версии (%2$s)"
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$u дополнение пропущено: %2$s"
+msgstr[1] "%1$u дополнения пропущено: %2$s"
+msgstr[2] "%1$u дополнений пропущено: %2$s"
+msgstr[3] "%1$u дополнений пропущено: %2$s"
 
 #: ../../src/logic/addons.cc:183
 #, c-format
@@ -1642,16 +1642,16 @@ msgstr "%1$s, %2$s (упущено)"
 #: ../../src/logic/addons.cc:195
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s и %2$s: %3$s"
 
 #: ../../src/logic/addons.cc:197
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u дополнение пропущено"
+msgstr[1] "%u дополнения пропущено"
+msgstr[2] "%u дополнений пропущено"
+msgstr[3] "%u дополнений пропущено"
 
 #: ../../src/logic/addons.cc:200
 #, c-format
@@ -1670,7 +1670,7 @@ msgstr "Нет"
 #: ../../src/logic/addons.cc:219
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s версии %3$s"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -2530,24 +2530,24 @@ msgstr "Widelands не может осуществить соединение п
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u конфликт дополнений:\n"
+msgstr[1] "%u конфликта дополнений:\n"
+msgstr[2] "%u конфликтов дополнений:\n"
+msgstr[3] "%u конфликтов дополнений:\n"
 
 #: ../../src/network/gameclient.cc:727
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n. Требования  \"%2$s\" не выполнены"
 
 #: ../../src/network/gameclient.cc:731
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n. Установлено дополнение \"%2$s\" версии %3$s, тогда как на сервере запущена версия %4$s"
 
 #: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
@@ -3295,7 +3295,7 @@ msgid ""
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr ""
+msgstr "Интерактивный упаковщик позволит вам создавать, править и удалять дополнения. Используйте наш редактор карт с графическим интерфейсом для того, чтобы создавать карты и делиться ими с другими игроками без необходимости писать код."
 
 #: ../../src/ui_fsmenu/addons.cc:290
 #, c-format
@@ -3304,7 +3304,7 @@ msgid ""
 "yet. To upload your add-ons, please zip the add-on directory in your file "
 "browser, then open our add-on submission website %s in your browser and "
 "attach the zip file."
-msgstr ""
+msgstr "Загрузка дополнений на сервер из игры не поддерживается. Для этого вам нужно сжать каталог с дополнением в zip-архив, открыть его страницу на сайте %s и загрузить с помощью формы."
 
 #: ../../src/ui_fsmenu/addons.cc:303
 msgid "Open Link"
@@ -3319,7 +3319,7 @@ msgstr "Скопировать ссылку"
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "За подробностями о разработке дополнений обращайтесь на %s."
 
 #: ../../src/ui_fsmenu/addons.cc:355
 msgid "Development"
@@ -3378,10 +3378,10 @@ msgstr "Переключить категорию '%s'"
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Вы уверены, что это %u дополнение нужно обновить?"
+msgstr[1] "Вы уверены, что эти %u дополнения нужно обновить?"
+msgstr[2] "Вы уверены, что эти %u дополнений нужно обновить?"
+msgstr[3] "Вы уверены, что эти %u дополнений нужно обновить?"
 
 #: ../../src/ui_fsmenu/addons.cc:467
 #, c-format
@@ -3470,14 +3470,14 @@ msgstr ". Дополнение \"%1$s\" зависит от \"%2$s\", а оно 
 #: ../../src/ui_fsmenu/addons.cc:902
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr ". \"%1$s\" требует установленного \"%2$s\". Взгляните на список зависимостей"
 
 #: ../../src/ui_fsmenu/addons.cc:922
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "Дополнения \"%2$s\" и \"%3$s\" должны идти в обратном порядке в зависимостях дополнения \"%1$s\""
 
 #: ../../src/ui_fsmenu/addons.cc:948
 #, c-format
@@ -3837,7 +3837,7 @@ msgstr "Удалить дополнение"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:93
 msgid "Discard changes"
-msgstr ""
+msgstr "Откатить изменения"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:101
 msgid "Save changes"
@@ -3923,10 +3923,10 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Вы уверены? Все изменения в %u дополнении будут потеряны."
+msgstr[1] "Вы уверены? Все изменения в %u дополнениях будут потеряны."
+msgstr[2] "Вы уверены? Все изменения в %u дополнениях будут потеряны."
+msgstr[3] "Вы уверены? Все изменения в %u дополнениях будут потеряны."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:428
 #: ../../src/ui_fsmenu/addons_packager.cc:457
@@ -3944,26 +3944,26 @@ msgstr "Быстрый упаковщик"
 #: ../../src/ui_fsmenu/addons_packager.cc:446
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr ""
+msgstr "Вы действительно хотите отменить все правки в \"%s\"?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:451
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Вы действительно хотите отбросить все правки в %u дополнении?"
+msgstr[1] "Вы действительно хотите отбросить все изменения во всех %u дополнениях?"
+msgstr[2] "Вы действительно хотите отбросить все правки аж в %u дополнениях?"
+msgstr[3] "Вы действительно хотите отбросить правки аж в %u дополнениях?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:461
 msgid "Discard Changes"
-msgstr ""
+msgstr "Отменить правки"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:474
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr ""
+msgstr "Вы действительно хотите занести все правки \"%s\" в файл?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:479
 #, c-format
@@ -3981,7 +3981,7 @@ msgstr[3] ""
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
-msgstr ""
+msgstr "Внимание! При ручной правке файлов расширения вы можете потерять результаты!"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:492
 msgid "Confirm Saving"
@@ -3995,7 +3995,7 @@ msgstr "Версия недействительна"
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
-msgstr ""
+msgstr "Не бывает версии вроде \"%1$s\". Дополнение \"%2$s\" ждёт выставления допустимой версии перед сохранением."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:558
 msgid "Error Writing Addon"
@@ -4259,7 +4259,7 @@ msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
 "action: ‘%2$s’. Please select a different shortcut or change the conflicting"
 " shortcut first."
-msgstr ""
+msgstr "Выбранные горячие клавиши (%1$s) уже используются как триггер \"%2$s\". Попробуйте другое их сочетание."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:183
@@ -4684,15 +4684,15 @@ msgstr "Версия %1$s (%2$s)"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:796
 msgid "Desyncing Add-On Found"
-msgstr ""
+msgstr "Рассинхронизация дополнений"
 
 #: ../../src/ui_fsmenu/main.cc:797
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr ""
+msgstr "Это объявление доступно, но рассинхронизовано с сервером. Использовать на свой страх и риск."
 
 #: ../../src/ui_fsmenu/main.cc:892 ../../src/ui_fsmenu/netsetup_lan.cc:321
 msgid "No tribes found!"
@@ -5203,18 +5203,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Авторы"
@@ -5274,7 +5274,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Возникла следующая ошибка:\n\n%1$s\n\nПожалуйста, отправьте отчет об ошибке нам, это поможет в улучшении Widelands. Вся нужная информация приведена в стандартном выходном потоке (в ОС Windows это файл stdout.txt). Ваша текущая сборка - %2$s (%3$s).\nПожалуйста, добавьте эту информацию в ваш отчет об ошибке."
 
 #: ../../src/wlapplication.cc:1467
 msgid "Game ended unexpectedly"
@@ -5296,7 +5296,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "В ходе игры возникла следующая ошибка:\n\n%1$s\n\nПожалуйста, отправьте отчет об ошибке нам, это поможет в улучшении Widelands. Вся нужная информация приведена в стандартном выходном потоке (в ОС Windows это файл stdout.txt). Ваша текущая сборка - %2$s (%3$s).\n\nПроверьте: игра могла попытаться создать быстрое сохранение. Если оно есть, попробуйте загрузить его и продолжить игру."
 
 #: ../../src/wlapplication.cc:1480
 #, c-format
@@ -5801,7 +5801,7 @@ msgstr "В собственности:"
 
 #: ../../src/wui/building_statistics_menu.cc:77
 msgid "Under construction:"
-msgstr ""
+msgstr "В разработке:"
 
 #: ../../src/wui/building_statistics_menu.cc:93
 msgid "Low productivity threshold:"
@@ -6801,8 +6801,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Статистика"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "С мореплаванием"
