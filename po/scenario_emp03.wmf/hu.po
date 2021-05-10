@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Kristof Szoke <kszoke@gmail.com>, 2019
-# András Tóth <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-29 14:02+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: András Tóth <txa-dev@posteo.hu>, 2021\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,11 +107,11 @@ msgstr "Keress kikötőhelyet, hogy újra tengerre szállhass!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
-msgstr "Építs egy kikötőt és egy hajógyárat a szigeten!"
+msgstr "Építs egy kikötőt és egy hajóács műhelyt a szigeten!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
-msgstr "Hajógyártás"
+msgstr "Hajóépítés"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
@@ -119,7 +119,8 @@ msgstr "Építs egy kikötőt, hogy legyen honnan kifutnia a hajóidnak!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr "Építs egy hajógyárat, hogy hajókat készítsen a tenger meghódítására!"
+msgstr ""
+"Építs egy hajóács műhelyt, hogy hajókat készítsen a tenger meghódítására!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
@@ -624,7 +625,7 @@ msgid ""
 "shipyard as well."
 msgstr ""
 "Most már boldogan tervezhetjük hajók építését is, úgyhogy építsünk egy "
-"hajógyárat is!"
+"hajóács műhelyt is!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
@@ -647,7 +648,7 @@ msgid ""
 " the shipyard."
 msgstr ""
 "Felderítő expedíció kiküldéséhez mindenek előtt hajóra lesz szükségünk. De "
-"sajnos csak öt vég szövetünk maradt, amire a kikötő és a hajógyár "
+"sajnos csak öt vég szövetünk maradt, amire a kikötő és a hajóács műhely "
 "megépítéséhez lesz szükségünk."
 
 #. TRANSLATORS: Amalea
@@ -743,7 +744,7 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
-"Valószínűleg jobb lenne leállítani a hajógyár termelését, amíg nincs "
+"Valószínűleg jobb lenne leállítani a hajóács műhely termelését, amíg nincs "
 "szövetünk, hogy ne pazaroljuk el fölöslegesen a farönköket és a deszkákat."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
