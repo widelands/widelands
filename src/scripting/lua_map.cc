@@ -4462,24 +4462,19 @@ MapObject
       :align: right
       :caption:
       
-      digraph dependency {
+      graph dependency {
          bgcolor="transparent";
          node [shape=box, style=filled, fillcolor=white, fontsize=11];
          edge [color=white];
-         MapObject [fillcolor=green]
-         MapObject [shape=oval]
-         more [href="../autogen_wl_map.html#building", target="_parent"]
-         MapObject -> Bob
-         Bob -> Ship 
-         Bob -> Critter
-         Bob -> Worker -> Carrier -> Ferry
-         MapObject -> BaseImmovable
-         BaseImmovable -> Immovable
-         BaseImmovable -> PlayerImmovable
-         PlayerImmovable -> PortDock 
-         PlayerImmovable -> Building -> more
-         PlayerImmovable -> Flag
-         PlayerImmovable -> "Road/Waterway"
+         MapObject [fillcolor=green, shape=oval]
+         more [label="…", href="../autogen_wl_map.html#building", target="_parent"]
+
+         MapObject -- {Bob BaseImmovable}
+         Bob -- {Ship Critter Worker}
+         Worker -- Carrier -- Ferry
+         BaseImmovable -- {MapImmovable PlayerImmovable}
+         PlayerImmovable -- {PortDock Flag "Road/Waterway" Building}
+         Building -- more
       }
 
    This is the base class for all objects in Widelands, including
