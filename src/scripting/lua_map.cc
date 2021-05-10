@@ -2261,7 +2261,7 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 
           * :const:`flag`, a flag that can hold wares for transport. For properties see
             :class:`MapObjectDescription`.
-          * ``roadbase``, the abstract base type for roads and waterways. For properties see
+          * :const:`roadbase`, the abstract base type for roads and waterways. For properties see
             :class:`MapObjectDescription`.
           * :const:`road`, a road connecting two flags. For properties see
             :class:`MapObjectDescription`.
