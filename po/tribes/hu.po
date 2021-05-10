@@ -10,12 +10,13 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-06 19:39+0000\n"
-"PO-Revision-Date: 2021-05-06 22:48+0000\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-09 23:58+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1289,6 +1290,7 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Maniókafőzde"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1402,7 +1404,7 @@ msgstr "gumipáncél készítése"
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr "Kompgyár"
+msgstr "Csónakkészítő műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
@@ -1687,7 +1689,7 @@ msgstr "felderítés"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
 msgctxt "amazons_building"
 msgid "Shipyard"
-msgstr "Hajógyár"
+msgstr "Hajóács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
@@ -1708,6 +1710,7 @@ msgstr "Kőfaragó műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
@@ -1719,6 +1722,8 @@ msgstr "lapát készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1727,6 +1732,7 @@ msgstr "favágó balta készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
@@ -1742,6 +1748,8 @@ msgstr "macsete készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1752,6 +1760,7 @@ msgstr "konyhai eszközök készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
@@ -2012,7 +2021,7 @@ msgstr "katona toborzása"
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Blackroot Farm"
-msgstr "Feketegyökér-termesztő"
+msgstr "Feketegyökér ültetvény"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:52
@@ -2030,7 +2039,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr "A farmon dolgozó feketegyökér termesztőnek nincs üres termőtalaja a magok elültetéséhez."
+msgstr "Az ültetvényen dolgozó feketegyökér termesztőnek nincs üres termőtalaja a magok elültetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
@@ -2160,7 +2169,7 @@ msgstr "A farmon dolgozó földművesnek nincs üres termőtalaja a magok elvet�
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "Kompgyár"
+msgstr "Csónakkészítő műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2410,7 +2419,7 @@ msgstr "Felderítőház"
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Shipyard"
-msgstr "Hajógyár"
+msgstr "Hajóács műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:8
@@ -2689,7 +2698,7 @@ msgstr "erős sör főzése"
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr "Marhafarm"
+msgstr "Marhatelep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:49
@@ -2765,7 +2774,7 @@ msgstr "A farmon dolgozó földművesnek nincs üres termőtalaja a magok elvet�
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr "Kompgyár"
+msgstr "Csónakkészítő műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
@@ -3025,7 +3034,7 @@ msgstr "Felderítő kunyhója"
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Shipyard"
-msgstr "Hajógyár"
+msgstr "Hajóács műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:8
@@ -3188,7 +3197,7 @@ msgstr "A szénbánya fő telére kimerült. Számíts erősen csökkent megtér
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr "Szamárfarm"
+msgstr "Szamártelep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:49
@@ -3212,7 +3221,7 @@ msgstr "A farmon dolgozó földművesnek nincs üres termőtalaja a magok elvet�
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr "Kompgyár"
+msgstr "Csónakkészítő műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
@@ -3434,7 +3443,7 @@ msgstr "juhok tenyésztése"
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:8
 msgctxt "empire_building"
 msgid "Shipyard"
-msgstr "Hajógyár"
+msgstr "Hajóács műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:8
@@ -3861,7 +3870,7 @@ msgstr "A farmon dolgozó földművesnek nincs üres termőtalaja a magok elvet�
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr "Kompgyár"
+msgstr "Csónakkészítő műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
@@ -4021,14 +4030,14 @@ msgstr "vas és arany újrahasznosítása"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Reed Farm"
-msgstr "Nád farm"
+msgstr "Nádas"
 
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:83
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr "A nádfarmon dolgozó nádtermesztőnek nincs szabad termőföldje nád ültetéséhez."
+msgstr "A nádasban dolgozó nádtermesztőnek nincs szabad termőföldje nád ültetéséhez."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
@@ -4097,7 +4106,7 @@ msgstr "kacagány varrása"
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:8
 msgctxt "frisians_building"
 msgid "Shipyard"
-msgstr "Hajógyár"
+msgstr "Hajóács műhely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:8
@@ -5453,7 +5462,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) katona"
 msgstr[1] "%1%(+%2%) katona"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -7839,7 +7847,7 @@ msgstr "Gyapjú"
 #: ../../data/tribes/workers/amazons/builder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Builder"
-msgstr "Építész"
+msgstr "Építőmunkás"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/carrier/init.lua:8
@@ -8007,13 +8015,13 @@ msgstr "Pék"
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Blackroot Farmer"
-msgstr "Feketegyökér-termelő"
+msgstr "Feketegyökér termesztő"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/builder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Builder"
-msgstr "Építész"
+msgstr "Építőmunkás"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/carrier/init.lua:67
@@ -8211,7 +8219,7 @@ msgstr "Sörfőző mester"
 #: ../../data/tribes/workers/barbarians/builder/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Builder"
-msgstr "Építész"
+msgstr "Építőmunkás"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/carrier/init.lua:8
@@ -8397,7 +8405,7 @@ msgstr "Sörfőző"
 #: ../../data/tribes/workers/empire/builder/init.lua:8
 msgctxt "empire_worker"
 msgid "Builder"
-msgstr "Építész"
+msgstr "Építőmunkás"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/carpenter/init.lua:8
@@ -8637,7 +8645,7 @@ msgstr "Téglakészítő"
 #: ../../data/tribes/workers/frisians/builder/init.lua:8
 msgctxt "frisians_worker"
 msgid "Builder"
-msgstr "Építész"
+msgstr "Építőmunkás"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/carrier/init.lua:8
