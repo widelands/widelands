@@ -1,3 +1,3 @@
 return {
-   cassavarootfield_medium = { "field", "flowering" },
+   cassavafield_medium = { "field", "flowering" },
 }

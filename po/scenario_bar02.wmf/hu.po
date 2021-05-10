@@ -2,20 +2,21 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# András Tóth <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2018
 # GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 19:06+0000\n"
-"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
+"PO-Revision-Date: 2021-05-09 23:55+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,12 +88,12 @@ msgstr "Építs egy pékséget!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr "Építs egy marhafarmot!"
+msgstr "Építs egy marhatelepet!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr "Ne felejts el építeni egy marhafarmot!"
+msgstr "Ne felejts el építeni egy marhatelepet!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
@@ -164,7 +165,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Fejleszd tovább a szerszámkészítő műhelyedet fejszekészítő műhellyé, hogy fegyvert gyártson, és építs egy másik szerszámkészítő műhelyt, hogy biztosítsd a szerszámok gyártását! Ha a kovács eléri a következő szintet (kovácsmester), a fejszekészítő műhelyt fegyverkészítő műhellyé is fejlesztheted, ahol más fegyverek is készülnek."
+msgstr "Fejleszd tovább a szerszámkészítő műhelyedet fejszekészítő műhellyé, hogy fegyvereket készítsen, és építs egy másik szerszámkészítő műhelyt, hogy biztosítsd a szerszámok termelését! Ha a kovács eléri a következő szintet (kovácsmester), a fejszekészítő műhelyt fegyverkészítő műhellyé is fejlesztheted, ahol más fegyverek is készülnek."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
@@ -216,7 +217,7 @@ msgstr "A képességek: életerő, támadás, védelem és kitérés."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr "Létesíts fegyvergyártó műhelyeket!"
+msgstr "Létesíts fegyverkészítő műhelyeket!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
