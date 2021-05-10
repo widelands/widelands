@@ -1271,25 +1271,103 @@ void WLApplication::handle_commandline_parameters() {
 		localedir_ = commandline_["localedir"];
 		commandline_.erase("localedir");
 	}
+
+	auto checkdatadirversion = [](const std::string& dd) {
+		try {
+			std::unique_ptr<FileSystem> fs(&FileSystem::create(dd));
+			if (!fs.get()) {
+				return std::string("Unable to allocate filesystem");
+			}
+
+			size_t len;
+			void* textptr = fs->load("datadirversion", len);
+			std::string text(static_cast<char*>(textptr), len);
+			free(textptr);
+
+			size_t sep_pos = text.find('\n');
+			if (sep_pos == std::string::npos) {
+				return std::string("Malformed one-liner version string");
+			}
+
+			if (sep_pos != build_id().size() || 0 != text.compare(0, sep_pos, build_id())) {
+				return std::string("Incorrect version string part");
+			}
+
+			text = text.substr(sep_pos + 1);
+			sep_pos = text.find('\n');
+			if (sep_pos == std::string::npos) {
+				return std::string("Malformed two-liner version string");
+			}
+
+			if (sep_pos != build_type().size() || 0 != text.compare(0, sep_pos, build_type())) {
+				return std::string("Incorrect type string part");
+			}
+		} catch (const std::exception& e) {
+			return std::string(e.what());
+		}
+		return std::string();
+	};
 	if (commandline_.count("datadir")) {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
+
+		const std::string err = checkdatadirversion(datadir_);
+		if (!err.empty()) {
+			throw wexception("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
+		}
 	} else {
+		bool found = false;
+		std::vector<std::pair<std::string, std::string>> wrong_candidates;
+
+		// Try absolute path first.
 		if (is_absolute_path(INSTALL_DATADIR)) {
-			// Absolute install dir has precedence
 			datadir_ = INSTALL_DATADIR;
-		} else {
-			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+			const std::string err = checkdatadirversion(datadir_);
+			if (err.empty()) {
+				found = true;
+			} else {
+				wrong_candidates.emplace_back(datadir_, err);
+			}
+		}
+
+		// Next, pick the first applicable XDG path.
 #ifdef USE_XDG
-			// Overwrite relative dir with first folder found in XDG_DATA_DIRS
+		if (!found) {
 			for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
 				RealFSImpl dir(datadir);
 				if (dir.is_directory(datadir + "/widelands")) {
 					datadir_ = datadir + "/widelands";
-					break;
+
+					const std::string err = checkdatadirversion(datadir_);
+					if (err.empty()) {
+						found = true;
+						break;
+					} else {
+						wrong_candidates.emplace_back(datadir_, err);
+					}
 				}
 			}
+		}
 #endif
+
+		// Finally, try a relative datadir.
+		if (!found) {
+			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+			const std::string err = checkdatadirversion(datadir_);
+			if (err.empty()) {
+				found = true;
+			} else {
+				wrong_candidates.emplace_back(datadir_, err);
+			}
+		}
+
+		if (!found) {
+			log_err("Unable to detect the datadir. Please specify a datadir explicitly\n"
+			        "with the --datadir command line option. Tried the following %d path(s):", static_cast<int>(wrong_candidates.size()));
+			for (const auto& pair : wrong_candidates) {
+				log_err(" · '%s': %s", pair.first.c_str(), pair.second.c_str());
+			}
+			exit(2);
 		}
 	}
 	if (!is_absolute_path(datadir_)) {
@@ -1298,7 +1376,7 @@ void WLApplication::handle_commandline_parameters() {
 			                                        FileSystem::file_separator() + datadir_);
 		} catch (const WException& e) {
 			log_err("Error parsing datadir: %s\n", e.what());
-			exit(1);
+			exit(2);
 		}
 	}
 	if (commandline_.count("datadir_for_testing")) {
