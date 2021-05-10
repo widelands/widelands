@@ -2,18 +2,19 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# András Tóth <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 19:07+0000\n"
-"Last-Translator: András Tóth <txa-dev@posteo.hu>\n"
+"PO-Revision-Date: 2021-05-09 23:49+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -609,7 +610,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "A mostani helyzetünkben jó lenne, ha a pékségek a lehető leggyorsabban dolgoznának, mert ők látják el a kocsmákat. Ezért érdemes a vizet a legmagasabb fontosságra állítani bennük. A többi épület, mint pl. a szamárfarm így kevesebb vizet fog kapni, a pékség viszont gyorsabban tud dolgozni."
+msgstr "A mostani helyzetünkben jó lenne, ha a pékségek a lehető leggyorsabban dolgoznának, mert ők látják el a kocsmákat. Ezért érdemes a vizet a legmagasabb fontosságra állítani bennük. A többi épület, mint pl. a szamártelep így kevesebb vizet fog kapni, a pékség viszont gyorsabban tud dolgozni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
