@@ -1363,7 +1363,8 @@ void WLApplication::handle_commandline_parameters() {
 
 		if (!found) {
 			log_err("Unable to detect the datadir. Please specify a datadir explicitly\n"
-			        "with the --datadir command line option. Tried the following %d path(s):", static_cast<int>(wrong_candidates.size()));
+			        "with the --datadir command line option. Tried the following %d path(s):",
+			        static_cast<int>(wrong_candidates.size()));
 			for (const auto& pair : wrong_candidates) {
 				log_err(" · '%s': %s", pair.first.c_str(), pair.second.c_str());
 			}
