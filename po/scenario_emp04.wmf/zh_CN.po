@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-04 10:44+0000\n"
+"POT-Creation-Date: 2021-05-05 15:08+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/widelands/teams/35159/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:62
 msgid ""
-"Ensure there are not more than 3 dead ends or flags with more than 4 roads."
+"Ensure there are not more than 3 dead ends, nor more than one flag with more"
+" than 4 roads."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
@@ -165,7 +166,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:134
 msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
-"trainigsite until it is fully equipped with all food and weapons needed."
+"trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
@@ -223,7 +224,7 @@ msgid "End the Barbarian intrusion into your very own part of the world."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
-msgid "Build 2 charcoal kiln"
+msgid "Build 2 charcoal kilns"
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
