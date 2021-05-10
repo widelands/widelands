@@ -3,9 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname (__file__)
 
 descriptions:new_productionsite_type {
-   name = "amazons_cassava_root_plantation",
+   name = "amazons_cassava_plantation",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("amazons_building", "Cassava Root Plantation"),
+   descname = pgettext ("amazons_building", "Cassava Plantation"),
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -45,16 +45,16 @@ descriptions:new_productionsite_type {
          }
       },
       plant_cassava = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-         descname = _"planting cassava root",
+         -- TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
+         descname = _"planting cassava",
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
          }
       },
       harvest_cassava = {
-         -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-         descname = _"harvesting cassava root",
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
+         descname = _"harvesting cassava",
          actions = {
             "callworker=harvest",
             "sleep=duration:4s",
@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext ("amazons_building", "The farmer working at this cassava root plantation has no cleared soil to plant her seeds."),
+      message = pgettext ("amazons_building", "The farmer working at this cassava plantation has no cleared soil to plant her seeds."),
       productivity_threshold = 30
    },
 }

@@ -5,15 +5,15 @@
 # Translators:
 # Tamás Kismarton <kismartontomi@gmail.com>, 2019
 # Balázs Meskó <meskobalazs@mailbox.org>, 2021
-# András Tóth <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: András Tóth <txa-dev@posteo.hu>, 2021\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,53 +24,53 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "A nagy szökőár (automatikus biztonsági mentés)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr "Építs egy fagazdaságot és egy nádfarmot"
+msgstr "Építsd ki a fatermelő gazdaságot és építs egy nádast!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr "Fagazdaság"
+msgstr "Fatermelő gazdaság"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Építs egy favágóházat és két erdészházat, hogy elkezdj farönköt termelni, és"
-" egy nádfarmot, hogy nádat termessz."
+"Építs egy favágóházat és két erdészházat farönkök termeléséhez, és egy "
+"nádast nád termesztéséhez!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr "Gyárts téglákat"
+msgstr "Készíts téglát!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr "Tégla gazdaság"
+msgstr "Téglatermelő gazdaság"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
-"Építs egy téglaégetőt, szénbányát, kőbányát, agyaggödröt és egy kutat, hogy "
-"elkezdd a téglagyártást."
+"Építs téglaégetőt, szénbányát, kőbányát, agyagvermet és kutat, hogy téglát "
+"tudj készíteni!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr "Gyűjts építőanyagokat"
+msgstr "Gyűjts építőanyagokat!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr "Halmozz fel építőanyagokat"
+msgstr "Halmozz fel építőanyagokat!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
-"Halmozz fel építőanyagokat a főhadiszállásodon. Gyűjtsd össze legalább a "
+"Halmozz fel építőanyagokat a főhadiszállásodon! Gyűjtsd össze legalább a "
 "következőket:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
@@ -240,7 +240,7 @@ msgstr "Bevezetés"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr "Üdvözöllek!"
+msgstr "Üdvözlet!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
@@ -248,6 +248,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Üdvözöllek Langeness gyönyörű szigetén! Én Reebaud vagyok, ennek az "
+"érintetlen szigetnek a törzsfőnöke."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -258,6 +260,10 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"Most érkeztem a kontinensről a törzsemmel. Harcolnunk kellett északon a "
+"dánokkal, keleten és délen pedig a schauenburgiakkal és a holsteiniekkel… "
+"Ezért úgy döntöttem, elhozom onnan a törzset, hogy békében és csendben "
+"éljünk ezen a háborítatlan szigeten."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
@@ -316,7 +322,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr "Építsük fel az új otthonunkat"
+msgstr "Új otthonunk felépítése"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -354,7 +360,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr ""
+msgstr "Első településünk"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -366,11 +372,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
-msgstr ""
+msgstr "Nádhiány"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr "Építs másik nádfarmot"
+msgstr "Építs még egy nádast!"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
@@ -389,11 +395,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "Agyaghiány"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Építs még egy agyagvermet!"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -414,11 +420,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Téglahiány"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Építs még egy téglaégetőt!"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -438,11 +444,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "Raktárak"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "Építs egy raktárat keleten"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -456,7 +462,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "A bányászok éheznek"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
@@ -492,7 +498,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "A katonák ellátmánya"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
@@ -528,11 +534,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "Építsd ki a bányagazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "Bányagazdaság"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
@@ -821,12 +827,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Ellenség legyőzve"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Ellenség legyőzve!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
@@ -845,7 +851,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "Szökőár"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
@@ -916,7 +922,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
@@ -932,7 +938,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulálunk!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
