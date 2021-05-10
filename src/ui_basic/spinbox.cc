@@ -56,7 +56,8 @@ struct SpinBoxImpl {
 	std::map<int32_t, std::string> value_replacements;
 
 	/// The UI parts
-	Textarea* text = nullptr;
+	//	Textarea* text = nullptr;
+	UI::Button* text = nullptr;
 	UI::MultilineTextarea* label = nullptr;
 	Button* button_plus = nullptr;
 	Button* button_minus = nullptr;
@@ -104,7 +105,7 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->value = startval;
 	sbi_->unit = unit;
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
-	                                                        UI::ButtonStyle::kWuiSecondary;
+                                                           UI::ButtonStyle::kWuiSecondary;
 
 	box_ = new UI::Box(this, style, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
@@ -112,11 +113,13 @@ SpinBox::SpinBox(Panel* const parent,
 	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 
-	sbi_->text = new UI::Textarea(
-	   box_, style,
-	   style == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel, "",
-	   UI::Align::kCenter);
-
+	//	sbi_->text = new UI::Textarea(
+	//	   box_, style,
+	//	   style == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel, "",
+	//	   UI::Align::kCenter);
+	sbi_->text = new UI::Button(
+	   box_, "text", 0, 0, 50, button_height_, UI::ButtonStyle::kFsMenuSecondary, "value");
+	sbi_->text->set_perm_pressed(true);
 	bool is_big = type_ == SpinBox::Type::kBig;
 
 	sbi_->step_size = step_size;
@@ -125,12 +128,12 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_minus =
 	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
-	                                          "images/ui_basic/scrollbar_down.png"),
+                                             "images/ui_basic/scrollbar_down.png"),
 	              _("Decrease the value"));
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
-	                                          "images/ui_basic/scrollbar_up.png"),
+                                             "images/ui_basic/scrollbar_up.png"),
 	              _("Increase the value"));
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);
@@ -280,11 +283,12 @@ void SpinBox::layout() {
 	}
 
 	if (type_ == SpinBox::Type::kBig) {
-		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_ten_plus->get_w() -
-		                            2 * sbi_->button_minus->get_w() - number_of_paddings_ * padding_);
+		//		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_ten_plus->get_w() -
+		//		                            2 * sbi_->button_minus->get_w() - number_of_paddings_ *
+		// padding_);
 	} else {
-		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_minus->get_w() -
-		                            number_of_paddings_ * padding_);
+		//		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_minus->get_w() -
+		//		                            number_of_paddings_ * padding_);
 	}
 
 	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_height_));
@@ -298,17 +302,22 @@ void SpinBox::layout() {
  */
 void SpinBox::update() {
 	if (sbi_->value_replacements.count(sbi_->value) == 1) {
-		sbi_->text->set_text(sbi_->value_replacements.at(sbi_->value));
+		//		sbi_->text->set_text(sbi_->value_replacements.at(sbi_->value));
+		sbi_->text->set_title(sbi_->value_replacements.at(sbi_->value));
 	} else {
 		if (type_ == SpinBox::Type::kValueList) {
 			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
-				sbi_->text->set_text(unit_text(sbi_->values.at(sbi_->value)));
+				//				sbi_->text->set_text(unit_text(sbi_->values.at(sbi_->value)));
+				sbi_->text->set_title(unit_text(sbi_->values.at(sbi_->value)));
 			} else {
-				sbi_->text->set_text(
+				//				sbi_->text->set_text(
+				//				   "undefined");  // The user should never see this, so we're not localizing
+				sbi_->text->set_title(
 				   "undefined");  // The user should never see this, so we're not localizing
 			}
 		} else {
-			sbi_->text->set_text(unit_text(sbi_->value));
+			//			sbi_->text->set_text(unit_text(sbi_->value));
+			sbi_->text->set_title(unit_text(sbi_->value));
 		}
 	}
 
