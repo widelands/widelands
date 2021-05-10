@@ -1394,6 +1394,13 @@ descriptions:new_tribe {
             purpose = _("This grapevine is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
+      {
+         name = "cassavafield_medium",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Cassava field
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
+         }
+      },
       -- Used by the fruit collector
       {
          name = "grapevine_ripe",
