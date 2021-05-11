@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
-"PO-Revision-Date: 2021-03-29 10:59+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-06 19:43+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1152,14 +1152,14 @@ msgid "Dismantle Site"
 msgstr "Rozebrat stavbu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
-msgid "Cassava Root Cooker"
-msgstr "Manioková kuchyně"
+msgid "Cassava Plantation"
+msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
@@ -1237,31 +1237,17 @@ msgstr "Manioková kuchyně"
 msgid "working"
 msgstr "vyrábění"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
-msgid "baking bread"
-msgstr "pečení chleba"
+#. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+msgid "planting cassava"
+msgstr ""
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:8
-msgctxt "amazons_building"
-msgid "Cassava Root Plantation"
-msgstr "Manioková plantáž"
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+msgid "harvesting cassava"
+msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:49
-msgid "planting cassava root"
-msgstr "sázení maniokové hlízy"
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:57
-msgid "harvesting cassava root"
-msgstr "sklízení maniokové hlízy"
-
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:66
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
@@ -1274,7 +1260,7 @@ msgstr "sklízení maniokové hlízy"
 msgid "No Fields"
 msgstr "Žádná pole"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
@@ -1287,12 +1273,27 @@ msgstr "Žádná pole"
 msgid "Out of Fields"
 msgstr "Došla pole"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
 msgctxt "amazons_building"
 msgid ""
-"The farmer working at this cassava root plantation has no cleared soil to "
-"plant her seeds."
-msgstr "Pěstitelka pracující na této maniokové plantáži nemá k dipozici volnou půdu pro výsadbu."
+"The farmer working at this cassava plantation has no cleared soil to plant "
+"her seeds."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Cooker"
+msgstr "Manioková kuchyně"
+
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+msgid "baking bread"
+msgstr "pečení chleba"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -1770,9 +1771,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -4961,32 +4962,32 @@ msgstr "Pole rozrazilu (oseté)"
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (harvested)"
-msgstr "Maniokové pole (sklizené)"
+msgid "Cassava Field (harvested)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (medium)"
-msgstr "Maniokové pole (vzrostlé)"
+msgid "Cassava Field (medium)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (ripe)"
-msgstr "Maniokové pole (zralé)"
+msgid "Cassava Field (ripe)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (small)"
-msgstr "Maniokové pole (malé)"
+msgid "Cassava Field (small)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (tiny)"
-msgstr "Maniokové pole (osázené)"
+msgid "Cassava Field (tiny)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5465,7 +5466,6 @@ msgstr[1] "%1%(+%2%) bojovnice"
 msgstr[2] "%1%(+%2%) bojovnic"
 msgstr[3] "%1%(+%2%) bojovnic"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
-"PO-Revision-Date: 2021-03-09 11:30+0000\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-06 19:43+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -1153,14 +1153,14 @@ msgid "Dismantle Site"
 msgstr "Dismantle Site"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
-msgid "Cassava Root Cooker"
+msgid "Cassava Plantation"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
@@ -1238,31 +1238,17 @@ msgstr ""
 msgid "working"
 msgstr "working"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
-msgid "baking bread"
+#. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+msgid "planting cassava"
 msgstr ""
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:8
-msgctxt "amazons_building"
-msgid "Cassava Root Plantation"
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+msgid "harvesting cassava"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:49
-msgid "planting cassava root"
-msgstr ""
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:57
-msgid "harvesting cassava root"
-msgstr ""
-
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:66
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
@@ -1275,7 +1261,7 @@ msgstr ""
 msgid "No Fields"
 msgstr "No Fields"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
@@ -1288,11 +1274,26 @@ msgstr "No Fields"
 msgid "Out of Fields"
 msgstr "Out of Fields"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
 msgctxt "amazons_building"
 msgid ""
-"The farmer working at this cassava root plantation has no cleared soil to "
-"plant her seeds."
+"The farmer working at this cassava plantation has no cleared soil to plant "
+"her seeds."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Cooker"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+msgid "baking bread"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1771,9 +1772,9 @@ msgstr "making a hammer"
 msgid "making a chisel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -4962,31 +4963,31 @@ msgstr "Blackroot Field (tiny)"
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (harvested)"
+msgid "Cassava Field (harvested)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (medium)"
+msgid "Cassava Field (medium)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (ripe)"
+msgid "Cassava Field (ripe)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (small)"
+msgid "Cassava Field (small)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (tiny)"
+msgid "Cassava Field (tiny)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
@@ -5458,7 +5459,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

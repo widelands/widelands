@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
-"PO-Revision-Date: 2021-05-06 07:39+0000\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-06 20:46+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1163,14 +1163,14 @@ msgid "Dismantle Site"
 msgstr "Abriss des Gebäudes"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
-msgid "Cassava Root Cooker"
-msgstr "Cassavawurzelküche"
+msgid "Cassava Plantation"
+msgstr "Cassavapflanzung"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
@@ -1248,31 +1248,17 @@ msgstr "Cassavawurzelküche"
 msgid "working"
 msgstr "Das Arbeiten"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
-msgid "baking bread"
-msgstr "Das Backen von Brot"
+#. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+msgid "planting cassava"
+msgstr "Das Pflanzen von Cassava"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:8
-msgctxt "amazons_building"
-msgid "Cassava Root Plantation"
-msgstr "Cassavawurzelpflanzung"
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+msgid "harvesting cassava"
+msgstr "Das Ernten von Cassava"
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:49
-msgid "planting cassava root"
-msgstr "Das Pflanzen von Cassavawurzeln"
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:57
-msgid "harvesting cassava root"
-msgstr "Das Ernten von Cassavawurzeln"
-
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:66
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
@@ -1285,7 +1271,7 @@ msgstr "Das Ernten von Cassavawurzeln"
 msgid "No Fields"
 msgstr "Keine Felder"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
@@ -1298,12 +1284,27 @@ msgstr "Keine Felder"
 msgid "Out of Fields"
 msgstr "Keine Felder"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
 msgctxt "amazons_building"
 msgid ""
-"The farmer working at this cassava root plantation has no cleared soil to "
-"plant her seeds."
-msgstr "Die Pflanzerin dieser Cassavawurzelpflanzung hat keinen freien Platz, um Cassavawurzeln zu pflanzen."
+"The farmer working at this cassava plantation has no cleared soil to plant "
+"her seeds."
+msgstr "Die Pflanzerin dieser Cassavapflanzung hat keinen freien Platz, um Cassava zu pflanzen."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Cooker"
+msgstr "Cassavawurzelküche"
+
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+msgid "baking bread"
+msgstr "Das Backen von Brot"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -1781,9 +1782,9 @@ msgstr "Das Herstellen eines Hammers"
 msgid "making a chisel"
 msgstr "Das Schleifen eines Meißels"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -4972,32 +4973,32 @@ msgstr "Dunkelrübenfeld (jung)"
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (harvested)"
-msgstr "Cassavawurzelfeld (abgeerntet)"
+msgid "Cassava Field (harvested)"
+msgstr "Cassavafeld (abgeerntet)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (medium)"
-msgstr "Cassavawurzelfeld (mittel)"
+msgid "Cassava Field (medium)"
+msgstr "Cassavafeld (mittel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (ripe)"
-msgstr "Cassavawurzelfeld (reif)"
+msgid "Cassava Field (ripe)"
+msgstr "Cassavafeld (reif)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (small)"
-msgstr "Cassavawurzelfeld (klein)"
+msgid "Cassava Field (small)"
+msgstr "Cassavafeld (klein)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (tiny)"
-msgstr "Cassavawurzelfeld (jung)"
+msgid "Cassava Field (tiny)"
+msgstr "Cassavafeld (jung)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5468,7 +5469,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) Kriegerin"
 msgstr[1] "%1%(+%2%) Kriegerinnen"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

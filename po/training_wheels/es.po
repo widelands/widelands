@@ -157,7 +157,7 @@ msgstr "Haz clic en el botón de los edificios..."
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "...luego haz clic en la bandera frente al edificio de destino."
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
@@ -241,6 +241,7 @@ msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr ""
+"Necesitas proveer granito a tu tribu. Construye el siguiente edificio:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

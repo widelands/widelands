@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
-"PO-Revision-Date: 2021-05-04 10:48+0000\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-06 19:43+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -29,11 +29,11 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:368
 #: ../../data/tribes/initialization/barbarians/units.lua:112
@@ -54,11 +54,11 @@ msgid ""
 "logs to produce charcoal."
 msgstr "Лесорубы Амазонки повалили деревья, и хранители джунглей посадят их. Полученные бревна используются резчиком по камню. Печь для обжига древесного угля также нуждается в бревнах для производства древесного угля."
 
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:356
 #: ../../data/tribes/initialization/barbarians/units.lua:100
@@ -114,11 +114,11 @@ msgid ""
 "construct buildings and ships."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:454
 #: ../../data/tribes/initialization/barbarians/units.lua:182
@@ -140,9 +140,9 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:181
 msgctxt "amazons_ware"
 msgid ""
-"Cassava roots are a special kind of root produced at cassava root "
-"plantations. The Amazons like their strong taste for making bread and they "
-"also feed their tapirs with them."
+"Cassava roots are a special kind of root produced at cassava plantations. "
+"The Amazons like their strong taste for making bread and they also feed "
+"their tapirs with them."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
@@ -254,10 +254,10 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
 #: ../../data/tribes/initialization/empire/units.lua:362
@@ -272,11 +272,11 @@ msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:617
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -294,11 +294,11 @@ msgid ""
 "use them. They are produced by the stone carver."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:630
 #: ../../data/tribes/initialization/barbarians/units.lua:371
@@ -552,7 +552,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for an amazon worker: Cassava Farmer
 #: ../../data/tribes/initialization/amazons/units.lua:651
 msgctxt "amazons_worker"
-msgid "Grows cassava roots."
+msgid "Grows cassava."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an amazon worker: Cocoa Farmer
@@ -629,16 +629,16 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a barbarian immovable: Ashes
-#. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an atlantean immovable: Ashes
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a frisian immovable: Ashes
 #. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
+#. TRANSLATORS: Helptext for a barbarian immovable: Ashes
+#. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/amazons/units.lua:764
 #: ../../data/tribes/initialization/atlanteans/units.lua:1067
@@ -652,18 +652,18 @@ msgstr ""
 msgid "The remains of a destroyed building."
 msgstr "Останки разрушенного здания."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
-#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
+#. Tree
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1261
 #: ../../data/tribes/initialization/barbarians/units.lua:990
 #: ../../data/tribes/initialization/empire/units.lua:1031
-#: ../../data/tribes/initialization/frisians/units.lua:1410
+#: ../../data/tribes/initialization/frisians/units.lua:1417
 msgid "The remains of an old tree."
 msgstr ""
 
@@ -769,12 +769,12 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1074
 #: ../../data/tribes/initialization/atlanteans/units.lua:1109
@@ -784,12 +784,12 @@ msgstr ""
 msgid "This field has just been planted."
 msgstr "Это поле засажено."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1081
@@ -804,12 +804,12 @@ msgstr "Это поле засажено."
 msgid "This field is growing."
 msgstr "Это поле растет."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1095
 #: ../../data/tribes/initialization/atlanteans/units.lua:1130
@@ -819,12 +819,12 @@ msgstr "Это поле растет."
 msgid "This field is ready for harvesting."
 msgstr "Поле готово к уборке."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1102
 #: ../../data/tribes/initialization/atlanteans/units.lua:1137
@@ -854,11 +854,11 @@ msgstr ""
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
-#. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
+#. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1151
 #: ../../data/tribes/initialization/barbarians/units.lua:880
@@ -874,11 +874,11 @@ msgid ""
 "dwellings."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1190
 #: ../../data/tribes/initialization/barbarians/units.lua:919
@@ -894,9 +894,9 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr ""
 
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
 #: ../../data/tribes/initialization/frisians/units.lua:1312
@@ -910,11 +910,11 @@ msgid ""
 "digger dwellings."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1234
 #: ../../data/tribes/initialization/barbarians/units.lua:963
@@ -923,20 +923,20 @@ msgstr ""
 msgid "There is a lot of gold here."
 msgstr ""
 
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
 #: ../../data/tribes/initialization/frisians/units.lua:1356
 msgid "There is a lot of granite here."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1253
 #: ../../data/tribes/initialization/barbarians/units.lua:982
@@ -1066,34 +1066,34 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1612
 #: ../../data/tribes/initialization/barbarians/units.lua:1659
 #: ../../data/tribes/initialization/barbarians/units.lua:1678
-#: ../../data/tribes/initialization/frisians/units.lua:1541
-#: ../../data/tribes/initialization/frisians/units.lua:1569
-#: ../../data/tribes/initialization/frisians/units.lua:1580
-#: ../../data/tribes/initialization/frisians/units.lua:1595
-#: ../../data/tribes/initialization/frisians/units.lua:1621
-#: ../../data/tribes/initialization/frisians/units.lua:1647
-#: ../../data/tribes/initialization/frisians/units.lua:1662
-#: ../../data/tribes/initialization/frisians/units.lua:1677
-#: ../../data/tribes/initialization/frisians/units.lua:1692
-#: ../../data/tribes/initialization/frisians/units.lua:1719
-#: ../../data/tribes/initialization/frisians/units.lua:1734
-#: ../../data/tribes/initialization/frisians/units.lua:1769
-#: ../../data/tribes/initialization/frisians/units.lua:1804
-#: ../../data/tribes/initialization/frisians/units.lua:1828
-#: ../../data/tribes/initialization/frisians/units.lua:1841
-#: ../../data/tribes/initialization/frisians/units.lua:1854
-#: ../../data/tribes/initialization/frisians/units.lua:1878
-#: ../../data/tribes/initialization/frisians/units.lua:1902
-#: ../../data/tribes/initialization/frisians/units.lua:1926
-#: ../../data/tribes/initialization/frisians/units.lua:1965
-#: ../../data/tribes/initialization/frisians/units.lua:1974
-#: ../../data/tribes/initialization/frisians/units.lua:1983
-#: ../../data/tribes/initialization/frisians/units.lua:1992
-#: ../../data/tribes/initialization/frisians/units.lua:2001
-#: ../../data/tribes/initialization/frisians/units.lua:2010
-#: ../../data/tribes/initialization/frisians/units.lua:2019
-#: ../../data/tribes/initialization/frisians/units.lua:2028
-#: ../../data/tribes/initialization/frisians/units.lua:2147
+#: ../../data/tribes/initialization/frisians/units.lua:1548
+#: ../../data/tribes/initialization/frisians/units.lua:1576
+#: ../../data/tribes/initialization/frisians/units.lua:1587
+#: ../../data/tribes/initialization/frisians/units.lua:1602
+#: ../../data/tribes/initialization/frisians/units.lua:1628
+#: ../../data/tribes/initialization/frisians/units.lua:1654
+#: ../../data/tribes/initialization/frisians/units.lua:1669
+#: ../../data/tribes/initialization/frisians/units.lua:1684
+#: ../../data/tribes/initialization/frisians/units.lua:1699
+#: ../../data/tribes/initialization/frisians/units.lua:1726
+#: ../../data/tribes/initialization/frisians/units.lua:1741
+#: ../../data/tribes/initialization/frisians/units.lua:1776
+#: ../../data/tribes/initialization/frisians/units.lua:1811
+#: ../../data/tribes/initialization/frisians/units.lua:1835
+#: ../../data/tribes/initialization/frisians/units.lua:1848
+#: ../../data/tribes/initialization/frisians/units.lua:1861
+#: ../../data/tribes/initialization/frisians/units.lua:1885
+#: ../../data/tribes/initialization/frisians/units.lua:1909
+#: ../../data/tribes/initialization/frisians/units.lua:1933
+#: ../../data/tribes/initialization/frisians/units.lua:1972
+#: ../../data/tribes/initialization/frisians/units.lua:1981
+#: ../../data/tribes/initialization/frisians/units.lua:1990
+#: ../../data/tribes/initialization/frisians/units.lua:1999
+#: ../../data/tribes/initialization/frisians/units.lua:2008
+#: ../../data/tribes/initialization/frisians/units.lua:2017
+#: ../../data/tribes/initialization/frisians/units.lua:2026
+#: ../../data/tribes/initialization/frisians/units.lua:2035
+#: ../../data/tribes/initialization/frisians/units.lua:2154
 #: ../../data/tribes/scripting/help/time_strings.lua:26
 #: ../../data/tribes/scripting/help/time_strings.lua:62
 #, lua-format
@@ -1311,20 +1311,19 @@ msgctxt "amazons_building"
 msgid "Tapirs help to prevent traffic jams on highly used roads."
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for an amazon production site: Cassava Root
+#. TRANSLATORS: Purpose helptext for an amazon production site: Cassava
 #. Plantation
 #: ../../data/tribes/initialization/amazons/units.lua:1449
 msgctxt "amazons_building"
-msgid "Sows and harvests cassava root."
+msgid "Sows and harvests cassava."
 msgstr ""
 
-#. TRANSLATORS: Note helptext for an amazon production site: Cassava Root
+#. TRANSLATORS: Note helptext for an amazon production site: Cassava
 #. Plantation
 #: ../../data/tribes/initialization/amazons/units.lua:1451
 msgctxt "amazons_building"
 msgid ""
-"The cassava root plantation needs free space within the work area to plant "
-"seeds."
+"The cassava plantation needs free space within the work area to plant seeds."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cocoa Farm
@@ -1451,88 +1450,88 @@ msgid ""
 "between ports."
 msgstr ""
 
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1590
 #: ../../data/tribes/initialization/atlanteans/units.lua:1714
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
 #: ../../data/tribes/initialization/empire/units.lua:1567
-#: ../../data/tribes/initialization/frisians/units.lua:2156
+#: ../../data/tribes/initialization/frisians/units.lua:2163
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr ""
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore author helptext for a barbarian building: Construction
-#. Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore author helptext for a barbarian building: Construction
+#. Site
 #: ../../data/tribes/initialization/amazons/units.lua:1592
 #: ../../data/tribes/initialization/atlanteans/units.lua:1716
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
 #: ../../data/tribes/initialization/empire/units.lua:1569
-#: ../../data/tribes/initialization/frisians/units.lua:2158
+#: ../../data/tribes/initialization/frisians/units.lua:2165
 msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
-#. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
+#. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1594
 #: ../../data/tribes/initialization/atlanteans/units.lua:1718
 #: ../../data/tribes/initialization/barbarians/units.lua:1794
 #: ../../data/tribes/initialization/empire/units.lua:1571
-#: ../../data/tribes/initialization/frisians/units.lua:2160
+#: ../../data/tribes/initialization/frisians/units.lua:2167
 msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Новое здание строится на этой строительной площадке."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1601
 #: ../../data/tribes/initialization/atlanteans/units.lua:1725
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
 #: ../../data/tribes/initialization/empire/units.lua:1578
-#: ../../data/tribes/initialization/frisians/units.lua:2167
+#: ../../data/tribes/initialization/frisians/units.lua:2174
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr ""
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1603
 #: ../../data/tribes/initialization/atlanteans/units.lua:1727
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
 #: ../../data/tribes/initialization/empire/units.lua:1580
-#: ../../data/tribes/initialization/frisians/units.lua:2169
+#: ../../data/tribes/initialization/frisians/units.lua:2176
 msgctxt "building"
 msgid "Proverb"
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1605
 #: ../../data/tribes/initialization/atlanteans/units.lua:1729
 #: ../../data/tribes/initialization/barbarians/units.lua:1805
 #: ../../data/tribes/initialization/empire/units.lua:1582
-#: ../../data/tribes/initialization/frisians/units.lua:2171
+#: ../../data/tribes/initialization/frisians/units.lua:2178
 msgctxt "building"
 msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
@@ -1612,9 +1611,9 @@ msgid ""
 msgstr "Поскольку атланты не любят сырую рыбу, они коптят ее в коптильнях; это самый доступный способ сделать её съедобной."
 
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:433
 #: ../../data/tribes/initialization/barbarians/units.lua:170
 #: ../../data/tribes/initialization/empire/units.lua:162
@@ -1708,9 +1707,9 @@ msgid ""
 msgstr "Эти удивительные алмазы используются для постройки некоторых уникальных зданий. Они добываются в Кристальных шахтах."
 
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:531
 #: ../../data/tribes/initialization/barbarians/units.lua:268
 #: ../../data/tribes/initialization/empire/units.lua:285
@@ -1729,9 +1728,9 @@ msgid ""
 msgstr "Углем, атланты поддерживают огонь в литейной, бронной и оружейной."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:544
 #: ../../data/tribes/initialization/barbarians/units.lua:281
 #: ../../data/tribes/initialization/empire/units.lua:298
@@ -1747,9 +1746,9 @@ msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:557
 #: ../../data/tribes/initialization/barbarians/units.lua:294
 #: ../../data/tribes/initialization/empire/units.lua:311
@@ -1767,9 +1766,9 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:570
 #: ../../data/tribes/initialization/barbarians/units.lua:307
 #: ../../data/tribes/initialization/empire/units.lua:324
@@ -1787,9 +1786,9 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:583
 #: ../../data/tribes/initialization/barbarians/units.lua:320
 #: ../../data/tribes/initialization/empire/units.lua:337
@@ -1875,9 +1874,9 @@ msgid ""
 msgstr "Багор нужен коптильщику, чтобы подвешивать мясо и рыбу в коптильне. Он производится инструментальщиком."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:688
 #: ../../data/tribes/initialization/barbarians/units.lua:410
 #: ../../data/tribes/initialization/empire/units.lua:436
@@ -1893,9 +1892,9 @@ msgid "Scythes are produced by the toolsmith."
 msgstr "Косы производятся инструментальщиком."
 
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:701
 #: ../../data/tribes/initialization/barbarians/units.lua:423
 #: ../../data/tribes/initialization/empire/units.lua:449
@@ -1911,9 +1910,9 @@ msgid "Bread paddles are produced by the toolsmith."
 msgstr "Садник для выпечки производится инструментальщиком."
 
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:714
 #: ../../data/tribes/initialization/barbarians/units.lua:445
 #: ../../data/tribes/initialization/empire/units.lua:480
@@ -2210,9 +2209,9 @@ msgid ""
 msgstr "Разведчики, такие как разведчик Ерофей Павлович Разведчиков, разведывательно разведывают неразведанные земли с стиле разведчиков."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1158
 #: ../../data/tribes/initialization/barbarians/units.lua:887
 #: ../../data/tribes/initialization/empire/units.lua:928
@@ -2221,9 +2220,9 @@ msgid "There is water in the ground here that can be pulled up by a well."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1166
 #: ../../data/tribes/initialization/atlanteans/units.lua:1210
 #: ../../data/tribes/initialization/barbarians/units.lua:895
@@ -2236,9 +2235,9 @@ msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1168
 #: ../../data/tribes/initialization/barbarians/units.lua:897
 #: ../../data/tribes/initialization/empire/units.lua:938
@@ -2247,9 +2246,9 @@ msgid "There is only a little bit of coal here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1221
 #: ../../data/tribes/initialization/barbarians/units.lua:906
@@ -2262,9 +2261,9 @@ msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1179
 #: ../../data/tribes/initialization/barbarians/units.lua:908
 #: ../../data/tribes/initialization/empire/units.lua:949
@@ -2273,9 +2272,9 @@ msgid "There is only a little bit of iron here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1188
 #: ../../data/tribes/initialization/atlanteans/units.lua:1232
 #: ../../data/tribes/initialization/barbarians/units.lua:917
@@ -2301,9 +2300,9 @@ msgid "There are only a few precious stones here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
 #: ../../data/tribes/initialization/barbarians/units.lua:941
 #: ../../data/tribes/initialization/empire/units.lua:982
@@ -2312,9 +2311,9 @@ msgid "There is a lot of coal here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1223
 #: ../../data/tribes/initialization/barbarians/units.lua:952
 #: ../../data/tribes/initialization/empire/units.lua:993
@@ -2333,16 +2332,6 @@ msgstr ""
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
-#. Blackroot Field
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
-#. Ironwood Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
-#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans:
@@ -2354,6 +2343,16 @@ msgstr ""
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
+#. Blackroot Field
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
+#. Ironwood Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
 #. Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1268
 #: ../../data/tribes/initialization/atlanteans/units.lua:1275
@@ -2391,7 +2390,6 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1101
 #: ../../data/tribes/initialization/empire/units.lua:1108
 #: ../../data/tribes/initialization/empire/units.lua:1115
-#: ../../data/tribes/initialization/frisians/units.lua:1417
 #: ../../data/tribes/initialization/frisians/units.lua:1424
 #: ../../data/tribes/initialization/frisians/units.lua:1431
 #: ../../data/tribes/initialization/frisians/units.lua:1438
@@ -2403,6 +2401,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1480
 #: ../../data/tribes/initialization/frisians/units.lua:1487
 #: ../../data/tribes/initialization/frisians/units.lua:1494
+#: ../../data/tribes/initialization/frisians/units.lua:1501
 msgid ""
 "This tree is only planted by the amazon tribe but can be harvested for logs."
 msgstr ""
@@ -2457,16 +2456,16 @@ msgstr "Каменоломне для работы нужны скалы в ра
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
-#. Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site:
 #. Woodcutter's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
+#. Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1393
 #: ../../data/tribes/initialization/barbarians/units.lua:1153
 #: ../../data/tribes/initialization/empire/units.lua:1172
-#: ../../data/tribes/initialization/frisians/units.lua:1552
+#: ../../data/tribes/initialization/frisians/units.lua:1559
 msgctxt "building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr "Валит деревья поблизости и перерабатывает их в брёвна."
@@ -2480,15 +2479,15 @@ msgstr "Домику лесоруба нужны деревья для рубк�
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1402
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
 #: ../../data/tribes/initialization/empire/units.lua:1181
-#: ../../data/tribes/initialization/frisians/units.lua:1565
+#: ../../data/tribes/initialization/frisians/units.lua:1572
 msgctxt "building"
 msgid "Plants trees in the surrounding area."
 msgstr "Сажает деревья в ближайших окрестностях."
@@ -2550,14 +2549,14 @@ msgid "Breeds fish."
 msgstr "Разводит рыбу."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1438
 #: ../../data/tribes/initialization/barbarians/units.lua:1199
 #: ../../data/tribes/initialization/empire/units.lua:1199
-#: ../../data/tribes/initialization/frisians/units.lua:1576
+#: ../../data/tribes/initialization/frisians/units.lua:1583
 msgctxt "building"
 msgid "Hunts animals to produce meat."
 msgstr "Охотится на зверей для производства мяса."
@@ -2569,13 +2568,13 @@ msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "Домику охотника нужны звери в его рабочей области."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1447
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
 #: ../../data/tribes/initialization/empire/units.lua:1208
-#: ../../data/tribes/initialization/frisians/units.lua:1619
+#: ../../data/tribes/initialization/frisians/units.lua:1626
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Черпает воду из недр."
@@ -2595,14 +2594,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1462
 #: ../../data/tribes/initialization/barbarians/units.lua:1241
 #: ../../data/tribes/initialization/empire/units.lua:1216
-#: ../../data/tribes/initialization/frisians/units.lua:1717
+#: ../../data/tribes/initialization/frisians/units.lua:1724
 msgctxt "building"
 msgid "Explores unknown territory."
 msgstr "Разведывает незнакомую территорию."
@@ -2646,26 +2645,26 @@ msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Печёт хлеб, чтобы накормить разведчиков и шахтеров и тренировать солдат."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
+#. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1501
 #: ../../data/tribes/initialization/barbarians/units.lua:1376
 #: ../../data/tribes/initialization/empire/units.lua:1298
-#: ../../data/tribes/initialization/frisians/units.lua:1643
-#: ../../data/tribes/initialization/frisians/units.lua:1826
+#: ../../data/tribes/initialization/frisians/units.lua:1650
+#: ../../data/tribes/initialization/frisians/units.lua:1833
 msgctxt "building"
 msgid "Burns logs into charcoal."
 msgstr "Обжигает брёвна в уголь."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
-#. Works
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
+#. Works
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
 #. Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1508
 #: ../../data/tribes/initialization/barbarians/units.lua:1388
@@ -2675,9 +2674,9 @@ msgid "Smelts iron ore into iron and gold ore into gold."
 msgstr "Выплавляет железо из железной руды и золото из золотой."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Metal
 #. Workshop
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1515
 #: ../../data/tribes/initialization/barbarians/units.lua:1399
 #: ../../data/tribes/initialization/empire/units.lua:1312
@@ -2769,62 +2768,62 @@ msgstr "Высекает ценные камни из скал в горной �
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
-#. TRANSLATORS: Purpose helptext for production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
-#. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1593
 #: ../../data/tribes/initialization/barbarians/units.lua:1528
 #: ../../data/tribes/initialization/barbarians/units.lua:1543
 #: ../../data/tribes/initialization/barbarians/units.lua:1558
 #: ../../data/tribes/initialization/empire/units.lua:1399
 #: ../../data/tribes/initialization/empire/units.lua:1406
-#: ../../data/tribes/initialization/frisians/units.lua:1981
-#: ../../data/tribes/initialization/frisians/units.lua:1990
+#: ../../data/tribes/initialization/frisians/units.lua:1988
+#: ../../data/tribes/initialization/frisians/units.lua:1997
 msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Выкапывает уголь из-под земли в горной местности."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1600
 #: ../../data/tribes/initialization/barbarians/units.lua:1571
 #: ../../data/tribes/initialization/barbarians/units.lua:1584
 #: ../../data/tribes/initialization/barbarians/units.lua:1597
 #: ../../data/tribes/initialization/empire/units.lua:1413
 #: ../../data/tribes/initialization/empire/units.lua:1420
-#: ../../data/tribes/initialization/frisians/units.lua:1999
-#: ../../data/tribes/initialization/frisians/units.lua:2008
+#: ../../data/tribes/initialization/frisians/units.lua:2006
+#: ../../data/tribes/initialization/frisians/units.lua:2015
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "Выкапывает железную руду из-под земли, в горной местности."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
-#. TRANSLATORS: Purpose helptext for production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
-#. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1607
 #: ../../data/tribes/initialization/barbarians/units.lua:1610
 #: ../../data/tribes/initialization/barbarians/units.lua:1623
 #: ../../data/tribes/initialization/barbarians/units.lua:1636
 #: ../../data/tribes/initialization/empire/units.lua:1427
 #: ../../data/tribes/initialization/empire/units.lua:1434
-#: ../../data/tribes/initialization/frisians/units.lua:2017
-#: ../../data/tribes/initialization/frisians/units.lua:2026
+#: ../../data/tribes/initialization/frisians/units.lua:2024
+#: ../../data/tribes/initialization/frisians/units.lua:2033
 msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr "Выкапывает золотую руду из-под земли в горной местности."
@@ -2889,37 +2888,37 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1696
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
 #: ../../data/tribes/initialization/empire/units.lua:1549
-#: ../../data/tribes/initialization/frisians/units.lua:2121
+#: ../../data/tribes/initialization/frisians/units.lua:2128
 msgctxt "building"
 msgid "Builds ferries."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
 #: ../../data/tribes/initialization/barbarians/units.lua:1757
 #: ../../data/tribes/initialization/empire/units.lua:1551
-#: ../../data/tribes/initialization/frisians/units.lua:2123
+#: ../../data/tribes/initialization/frisians/units.lua:2130
 msgctxt "building"
 msgid "Needs water nearby."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1705
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
 #: ../../data/tribes/initialization/empire/units.lua:1558
-#: ../../data/tribes/initialization/frisians/units.lua:2134
+#: ../../data/tribes/initialization/frisians/units.lua:2141
 msgctxt "building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
@@ -3043,8 +3042,8 @@ msgid ""
 msgstr "Воины с арены поединков признают только это пиво. Некоторые даже считают, что в этом пиве кроется вся сила Варваров. Оно помогает тренировке солдат уклонению с 0 до 1 и до 2 уровней. Крепкое пиво также используется для приготовления обедов в гостиницах."
 
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:234
 #: ../../data/tribes/initialization/empire/units.lua:242
 #: ../../data/tribes/initialization/frisians/units.lua:283
@@ -3174,8 +3173,8 @@ msgid ""
 msgstr "Это один из основных инструментов, производящихся в кузнице (но производство прекращается при улучшении здания до топорной мастерской или военной фабрики)."
 
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:397
 #: ../../data/tribes/initialization/empire/units.lua:423
 #: ../../data/tribes/initialization/frisians/units.lua:457
@@ -3503,23 +3502,23 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "Разведчики, такие как разведчик Ерофей Павлович Разведчиков, разведывательно разведывают неразведанные земли с стиле разведчиков."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:852
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid "This reed field has just been planted."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/barbarians/units.lua:866
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is growing."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:873
 #: ../../data/tribes/initialization/frisians/units.lua:1255
 msgid "This reed field is ready for harvesting."
@@ -4054,11 +4053,11 @@ msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1336
 #: ../../data/tribes/initialization/empire/units.lua:1280
-#: ../../data/tribes/initialization/frisians/units.lua:1900
+#: ../../data/tribes/initialization/frisians/units.lua:1907
 msgctxt "building"
 msgid "Prepares rations to feed the scouts and miners."
 msgstr "Готовит пайки для питания разведчиков и шахтеров."
@@ -5346,7 +5345,7 @@ msgstr "Этот виноград растет."
 #. TRANSLATORS: Helptext for an empire immovable: Grapevine
 #. TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
 #: ../../data/tribes/initialization/empire/units.lua:914
-#: ../../data/tribes/initialization/frisians/units.lua:1402
+#: ../../data/tribes/initialization/frisians/units.lua:1409
 msgid "This grapevine is ready for harvesting."
 msgstr "Виноград готов к сбору."
 
@@ -6351,10 +6350,13 @@ msgstr ""
 #. Field
 #. TRANSLATORS: Helptext for an atlantean immovable usable by frisians:
 #. Blackroot Field
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Cassava
+#. field
 #: ../../data/tribes/initialization/frisians/units.lua:1178
 #: ../../data/tribes/initialization/frisians/units.lua:1373
 #: ../../data/tribes/initialization/frisians/units.lua:1380
 #: ../../data/tribes/initialization/frisians/units.lua:1387
+#: ../../data/tribes/initialization/frisians/units.lua:1401
 msgid "This field is flowering. Honey can be produced from it by a beekeeper."
 msgstr ""
 
@@ -6413,19 +6415,19 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Headquarters
-#: ../../data/tribes/initialization/frisians/units.lua:1506
+#: ../../data/tribes/initialization/frisians/units.lua:1513
 msgctxt "frisians_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian warehouse: Headquarters
-#: ../../data/tribes/initialization/frisians/units.lua:1508
+#: ../../data/tribes/initialization/frisians/units.lua:1515
 msgctxt "frisians_building"
 msgid "The headquarters is your main building."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Warehouse
-#: ../../data/tribes/initialization/frisians/units.lua:1515
+#: ../../data/tribes/initialization/frisians/units.lua:1522
 msgctxt "frisians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
@@ -6433,7 +6435,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Port
-#: ../../data/tribes/initialization/frisians/units.lua:1522
+#: ../../data/tribes/initialization/frisians/units.lua:1529
 msgctxt "frisians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
@@ -6441,7 +6443,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an frisian warehouse: Port
-#: ../../data/tribes/initialization/frisians/units.lua:1524
+#: ../../data/tribes/initialization/frisians/units.lua:1531
 msgctxt "frisians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
@@ -6449,31 +6451,31 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Quarry
-#: ../../data/tribes/initialization/frisians/units.lua:1533
+#: ../../data/tribes/initialization/frisians/units.lua:1540
 msgctxt "frisians_building"
 msgid "When I swing my pick, whole mountains fall before me!"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Quarry
-#: ../../data/tribes/initialization/frisians/units.lua:1535
+#: ../../data/tribes/initialization/frisians/units.lua:1542
 msgctxt "frisians_building"
 msgid "A stonemason"
 msgstr "Каменщик"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Quarry
-#: ../../data/tribes/initialization/frisians/units.lua:1537
+#: ../../data/tribes/initialization/frisians/units.lua:1544
 msgctxt "frisians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Quarry
-#: ../../data/tribes/initialization/frisians/units.lua:1539
+#: ../../data/tribes/initialization/frisians/units.lua:1546
 msgctxt "frisians_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Quarry
-#: ../../data/tribes/initialization/frisians/units.lua:1541
+#: ../../data/tribes/initialization/frisians/units.lua:1548
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
@@ -6481,7 +6483,7 @@ msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Woodcutter's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1548
+#: ../../data/tribes/initialization/frisians/units.lua:1555
 msgctxt "frisians_building"
 msgid ""
 "I cannot see a tree without imagining what it would look like in terms of "
@@ -6490,20 +6492,20 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Woodcutter's House
-#: ../../data/tribes/initialization/frisians/units.lua:1550
+#: ../../data/tribes/initialization/frisians/units.lua:1557
 msgctxt "frisians_building"
 msgid "An over-enthusiastic woodcutter"
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Woodcutter's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1554
+#: ../../data/tribes/initialization/frisians/units.lua:1561
 msgctxt "frisians_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Forester's House
-#: ../../data/tribes/initialization/frisians/units.lua:1561
+#: ../../data/tribes/initialization/frisians/units.lua:1568
 msgctxt "frisians_building"
 msgid ""
 "What can ever be more beautiful than the brilliant sun’s beams shining "
@@ -6512,13 +6514,13 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Forester's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1563
+#: ../../data/tribes/initialization/frisians/units.lua:1570
 msgctxt "frisians_building"
 msgid "A forester explaining his choice of profession"
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Forester's House
-#: ../../data/tribes/initialization/frisians/units.lua:1567
+#: ../../data/tribes/initialization/frisians/units.lua:1574
 msgctxt "frisians_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
@@ -6527,28 +6529,28 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Forester's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1569
+#: ../../data/tribes/initialization/frisians/units.lua:1576
 #, lua-format
 msgctxt "frisians_building"
 msgid "The forester pauses %s before going to work again."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Hunter's House
-#: ../../data/tribes/initialization/frisians/units.lua:1578
+#: ../../data/tribes/initialization/frisians/units.lua:1585
 msgctxt "frisians_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "Для охоты нужно чтобы в рабочей области вокруг Домика охотника обитали животные."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Hunter's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1580
+#: ../../data/tribes/initialization/frisians/units.lua:1587
 #, lua-format
 msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
 msgstr "Охотник делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Fisher's House
-#: ../../data/tribes/initialization/frisians/units.lua:1587
+#: ../../data/tribes/initialization/frisians/units.lua:1594
 msgctxt "frisians_building"
 msgid ""
 "Hunters can’t sell anything on a Friday, but fishers don’t have such "
@@ -6557,52 +6559,52 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Fisher's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1589
+#: ../../data/tribes/initialization/frisians/units.lua:1596
 msgctxt "frisians_building"
 msgid "A hunter admiring a fisher"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Fisher's House
-#: ../../data/tribes/initialization/frisians/units.lua:1591
+#: ../../data/tribes/initialization/frisians/units.lua:1598
 msgctxt "frisians_building"
 msgid "Fishes on the coast near the fisher’s house."
 msgstr "Рыба на побережье возле дома рыбака."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Fisher's House
-#: ../../data/tribes/initialization/frisians/units.lua:1593
+#: ../../data/tribes/initialization/frisians/units.lua:1600
 msgctxt "frisians_building"
 msgid "The fisher’s house needs water full of fish within the work area."
 msgstr "Дом рыбака должен быть полон водой, для рыбы в рабочей зоне."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Fisher's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1595
+#: ../../data/tribes/initialization/frisians/units.lua:1602
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fisher pauses %s before going to work again."
 msgstr "Рыбак останавливается %s, прежде чем снова работать."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reed Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1602
+#: ../../data/tribes/initialization/frisians/units.lua:1609
 msgctxt "frisians_building"
 msgid ""
 "No worse fortune can befall a reed farmer than to see his roof leaking."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reed Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1604
+#: ../../data/tribes/initialization/frisians/units.lua:1611
 msgctxt "frisians_building"
 msgid "Anonymous reed farmer"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reed Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1606
+#: ../../data/tribes/initialization/frisians/units.lua:1613
 msgctxt "frisians_building"
 msgid "Cultivates reed that serves three different purposes for the Frisians."
 msgstr "Культивирует тростник, который служит трем разным целям для Фризы."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Reed Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1608
+#: ../../data/tribes/initialization/frisians/units.lua:1615
 msgctxt "frisians_building"
 msgid ""
 "Reed is the traditional material for roofing. It is also needed to produce "
@@ -6611,13 +6613,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Well
-#: ../../data/tribes/initialization/frisians/units.lua:1615
+#: ../../data/tribes/initialization/frisians/units.lua:1622
 msgctxt "frisians_building"
 msgid "We love the sea so much that we don’t want to drink it empty!"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Well
-#: ../../data/tribes/initialization/frisians/units.lua:1617
+#: ../../data/tribes/initialization/frisians/units.lua:1624
 msgctxt "frisians_building"
 msgid ""
 "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt "
@@ -6625,26 +6627,26 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Well
-#: ../../data/tribes/initialization/frisians/units.lua:1621
+#: ../../data/tribes/initialization/frisians/units.lua:1628
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Clay Pit
-#: ../../data/tribes/initialization/frisians/units.lua:1628
+#: ../../data/tribes/initialization/frisians/units.lua:1635
 msgctxt "frisians_building"
 msgid "You think you can build a house without my help?"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Clay Pit
-#: ../../data/tribes/initialization/frisians/units.lua:1630
+#: ../../data/tribes/initialization/frisians/units.lua:1637
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
 msgstr "Копатель глины спорит с строителем"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Clay Pit
-#: ../../data/tribes/initialization/frisians/units.lua:1632
+#: ../../data/tribes/initialization/frisians/units.lua:1639
 msgctxt "building"
 msgid ""
 "Digs up mud from the ground and uses water to turn it into clay. Clay is "
@@ -6654,8 +6656,8 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a frisian production site: Charcoal Burner's
 #. House
 #. TRANSLATORS: Lore helptext for a frisian production site: Charcoal Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1639
-#: ../../data/tribes/initialization/frisians/units.lua:1822
+#: ../../data/tribes/initialization/frisians/units.lua:1646
+#: ../../data/tribes/initialization/frisians/units.lua:1829
 msgctxt "frisians_building"
 msgid ""
 "No other tribe has ever mastered the art of charcoal burning as we have!"
@@ -6665,15 +6667,15 @@ msgstr ""
 #. Burner's House
 #. TRANSLATORS: Lore author helptext for a frisian production site: Charcoal
 #. Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1641
-#: ../../data/tribes/initialization/frisians/units.lua:1824
+#: ../../data/tribes/initialization/frisians/units.lua:1648
+#: ../../data/tribes/initialization/frisians/units.lua:1831
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1645
+#: ../../data/tribes/initialization/frisians/units.lua:1652
 msgctxt "building"
 msgid ""
 "The charcoal burner’s house needs holes in the ground that were dug by a "
@@ -6682,14 +6684,14 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Burner's House
-#: ../../data/tribes/initialization/frisians/units.lua:1647
+#: ../../data/tribes/initialization/frisians/units.lua:1654
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner’s house needs %s on average to produce one coal."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Berry Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1654
+#: ../../data/tribes/initialization/frisians/units.lua:1661
 msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
@@ -6697,26 +6699,26 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Berry Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1656
+#: ../../data/tribes/initialization/frisians/units.lua:1663
 msgctxt "frisians_building"
 msgid "A berry farmer to a forester"
 msgstr "Сборщик ягод для лесника"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Berry Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1658
+#: ../../data/tribes/initialization/frisians/units.lua:1665
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
 msgstr "Сажает ягодные кусты в окрестностях."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Berry Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1660
+#: ../../data/tribes/initialization/frisians/units.lua:1667
 msgctxt "frisians_building"
 msgid ""
 "The berry farm needs free space within the work area to plant the bushes."
 msgstr "Ягодной ферме требуется свободное пространство в рабочей области для выращивания кустарника."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Berry Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1662
+#: ../../data/tribes/initialization/frisians/units.lua:1669
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
@@ -6724,42 +6726,42 @@ msgstr "Сборщик ягод делает перерыв в работе на
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Fruit Collector's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1669
+#: ../../data/tribes/initialization/frisians/units.lua:1676
 msgctxt "frisians_building"
 msgid "Meat doesn’t grow on bushes. Fruit does."
 msgstr "Мясо не растет на кустах. Делай Фрукты."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Fruit
 #. Collector's House
-#: ../../data/tribes/initialization/frisians/units.lua:1671
+#: ../../data/tribes/initialization/frisians/units.lua:1678
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Fruit
 #. Collector's House
-#: ../../data/tribes/initialization/frisians/units.lua:1673
+#: ../../data/tribes/initialization/frisians/units.lua:1680
 msgctxt "building"
 msgid "Collects berries from nearby bushes."
 msgstr "Собирает ягоды из близлежащих кустов."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Fruit Collector's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1675
+#: ../../data/tribes/initialization/frisians/units.lua:1682
 msgctxt "frisians_building"
 msgid "The fruit collector needs bushes full of berries within the work area."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Fruit
 #. Collector's House
-#: ../../data/tribes/initialization/frisians/units.lua:1677
+#: ../../data/tribes/initialization/frisians/units.lua:1684
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fruit collector pauses %s before going to work again."
 msgstr "Сборщик фруктов приостанавливается %s прежде чем снова работать."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Beekeeper's House
-#: ../../data/tribes/initialization/frisians/units.lua:1684
+#: ../../data/tribes/initialization/frisians/units.lua:1691
 msgctxt "frisians_building"
 msgid ""
 "If my honey tastes bitter, I must have left some bee stings in it. There are"
@@ -6768,20 +6770,20 @@ msgstr "Если мой мед на вкус горький, я должно б�
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Beekeeper's House
-#: ../../data/tribes/initialization/frisians/units.lua:1686
+#: ../../data/tribes/initialization/frisians/units.lua:1693
 msgctxt "frisians_building"
 msgid "A beekeeper ignoring a customer’s complaint"
 msgstr "Пчеловод не обращает внимание на жалобы клиентов"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Beekeeper's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1688
+#: ../../data/tribes/initialization/frisians/units.lua:1695
 msgctxt "frisians_building"
 msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
 msgstr "Содержит пчел и позволяет им роиться над цветущими полями для производства меда."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Beekeeper's House
-#: ../../data/tribes/initialization/frisians/units.lua:1690
+#: ../../data/tribes/initialization/frisians/units.lua:1697
 msgctxt "frisians_building"
 msgid ""
 "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
@@ -6790,32 +6792,32 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site:
 #. Beekeeper's House
-#: ../../data/tribes/initialization/frisians/units.lua:1692
+#: ../../data/tribes/initialization/frisians/units.lua:1699
 #, lua-format
 msgctxt "frisians_building"
 msgid "The beekeeper pauses %s before going to work again."
 msgstr "Пчеловод делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Aqua Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1699
+#: ../../data/tribes/initialization/frisians/units.lua:1706
 msgctxt "frisians_building"
 msgid "Why on earth shouldn’t we be able to catch fish even in the desert?"
 msgstr "Почему бы нам не вылавливать рыбу прямо в пустыне?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Aqua Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1701
+#: ../../data/tribes/initialization/frisians/units.lua:1708
 msgctxt "frisians_building"
 msgid "The fisherman who invented aqua farming"
 msgstr "Рыбак, что изобрел рыбоводные аквафермы"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Aqua Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1703
+#: ../../data/tribes/initialization/frisians/units.lua:1710
 msgctxt "frisians_building"
 msgid "Breeds fish as food for soldiers and miners."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Aqua Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1705
+#: ../../data/tribes/initialization/frisians/units.lua:1712
 msgctxt "building"
 msgid ""
 "The aqua farm needs holes in the ground that were dug by a clay pit’s worker"
@@ -6823,7 +6825,7 @@ msgid ""
 msgstr "Акваферме, чтобы использовать в качестве рыболовных прудов, нужны ямы в земле. Их роют работники глиняных карьеров, расположенных поблизости."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Scout's House
-#: ../../data/tribes/initialization/frisians/units.lua:1712
+#: ../../data/tribes/initialization/frisians/units.lua:1719
 msgctxt "frisians_building"
 msgid ""
 "Everyone has their own ideas on how exactly we should explore the enemy’s "
@@ -6833,12 +6835,12 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Scout's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1714
+#: ../../data/tribes/initialization/frisians/units.lua:1721
 msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
 msgstr ""
 
-#: ../../data/tribes/initialization/frisians/units.lua:1715
+#: ../../data/tribes/initialization/frisians/units.lua:1722
 msgctxt "frisians_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
@@ -6847,14 +6849,14 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Scout's
 #. House
-#: ../../data/tribes/initialization/frisians/units.lua:1719
+#: ../../data/tribes/initialization/frisians/units.lua:1726
 #, lua-format
 msgctxt "frisians_building"
 msgid "The scout pauses %s before going to work again."
 msgstr "Разведчик делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brick Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1728
+#: ../../data/tribes/initialization/frisians/units.lua:1735
 msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
@@ -6862,13 +6864,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Brick Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1730
+#: ../../data/tribes/initialization/frisians/units.lua:1737
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brick Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1732
+#: ../../data/tribes/initialization/frisians/units.lua:1739
 msgctxt "building"
 msgid ""
 "Burns bricks using granite and clay, and coal as fuel. Bricks are the most "
@@ -6876,14 +6878,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brick Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1734
+#: ../../data/tribes/initialization/frisians/units.lua:1741
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce three bricks."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Furnace
-#: ../../data/tribes/initialization/frisians/units.lua:1741
+#: ../../data/tribes/initialization/frisians/units.lua:1748
 msgctxt "frisians_building"
 msgid ""
 "Miners get ores from the depths of the hills; but without our work, their "
@@ -6891,19 +6893,19 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Furnace
-#: ../../data/tribes/initialization/frisians/units.lua:1743
+#: ../../data/tribes/initialization/frisians/units.lua:1750
 msgctxt "frisians_building"
 msgid "Slogan of the Smelters’ Guild"
 msgstr "Девиз гильдии литейщиков"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Furnace
-#: ../../data/tribes/initialization/frisians/units.lua:1745
+#: ../../data/tribes/initialization/frisians/units.lua:1752
 msgctxt "building"
 msgid "Smelts iron ore and gold ore into iron and gold ingots using coal."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Recycling Center
-#: ../../data/tribes/initialization/frisians/units.lua:1752
+#: ../../data/tribes/initialization/frisians/units.lua:1759
 msgctxt "frisians_building"
 msgid ""
 "Of course these weapons could be used by other soldiers again without being "
@@ -6913,14 +6915,14 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Recycling
 #. Center
-#: ../../data/tribes/initialization/frisians/units.lua:1754
+#: ../../data/tribes/initialization/frisians/units.lua:1761
 msgctxt "frisians_building"
 msgid "A smelter explaining the need for recycling to his impatient chieftain"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Recycling
 #. Center
-#: ../../data/tribes/initialization/frisians/units.lua:1756
+#: ../../data/tribes/initialization/frisians/units.lua:1763
 msgctxt "frisians_building"
 msgid ""
 "Recycles old armor and weapon parts that have been discarded by training "
@@ -6928,27 +6930,27 @@ msgid ""
 msgstr "Перерабатывает старые доспехи и части оружия, которые были выкинуты с тренировочного участка в мех, железо и золото."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Blacksmithy
-#: ../../data/tribes/initialization/frisians/units.lua:1763
+#: ../../data/tribes/initialization/frisians/units.lua:1770
 msgctxt "frisians_building"
 msgid "If you don’t have iron, change your name from blacksmith to lacksmith!"
 msgstr "Если у вас нет железа, смените имя кузнеца на недокузнец!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Blacksmithy
-#: ../../data/tribes/initialization/frisians/units.lua:1765
+#: ../../data/tribes/initialization/frisians/units.lua:1772
 msgctxt "frisians_building"
 msgid "Irritated chieftain during a metal shortage"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
-#: ../../data/tribes/initialization/frisians/units.lua:1767
+#: ../../data/tribes/initialization/frisians/units.lua:1774
 msgctxt "building"
 msgid "Forges tools to equip new workers."
 msgstr "Куёт инструменты для оснащения новых работников."
 
 #. TRANSLATORS: Performance helptext for a frisian production site:
 #. Blacksmithy
-#: ../../data/tribes/initialization/frisians/units.lua:1769
+#: ../../data/tribes/initialization/frisians/units.lua:1776
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s on average to produce one tool."
@@ -6956,7 +6958,7 @@ msgstr "Кузнецу нужно %s в среднем для производс
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Small Armor
 #. Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1776
+#: ../../data/tribes/initialization/frisians/units.lua:1783
 msgctxt "frisians_building"
 msgid ""
 "I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
@@ -6965,21 +6967,21 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Small
 #. Armor Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1778
+#: ../../data/tribes/initialization/frisians/units.lua:1785
 msgctxt "frisians_building"
 msgid "A blacksmith pointing out his influence on soldier training"
 msgstr "Кузнец оказывает свое влияние на подготовку солдат"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Small Armor
 #. Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1780
+#: ../../data/tribes/initialization/frisians/units.lua:1787
 msgctxt "frisians_building"
 msgid "Produces basic weapons and helmets for the soldiers."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Large Armor
 #. Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1787
+#: ../../data/tribes/initialization/frisians/units.lua:1794
 msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
@@ -6988,7 +6990,7 @@ msgstr "Конечно, я все еще мог подделывать коро�
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Large
 #. Armor Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1789
+#: ../../data/tribes/initialization/frisians/units.lua:1796
 msgctxt "frisians_building"
 msgid ""
 "A master blacksmith refusing to forge anything but the most sophisticated "
@@ -6997,13 +6999,13 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Large Armor
 #. Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1791
+#: ../../data/tribes/initialization/frisians/units.lua:1798
 msgctxt "frisians_building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
-#: ../../data/tribes/initialization/frisians/units.lua:1798
+#: ../../data/tribes/initialization/frisians/units.lua:1805
 msgctxt "frisians_building"
 msgid ""
 "You soldiers think a good sword is everything, but where would you be if you"
@@ -7012,27 +7014,27 @@ msgstr "Вы, солдаты, думаете, что хороший меч - э�
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Sewing
 #. Room
-#: ../../data/tribes/initialization/frisians/units.lua:1800
+#: ../../data/tribes/initialization/frisians/units.lua:1807
 msgctxt "frisians_building"
 msgid "A seamstress scolding a soldier for disrespecting her profession"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Sewing Room
-#: ../../data/tribes/initialization/frisians/units.lua:1802
+#: ../../data/tribes/initialization/frisians/units.lua:1809
 msgctxt "building"
 msgid "Sews fur garments out of reindeer fur."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Sewing
 #. Room
-#: ../../data/tribes/initialization/frisians/units.lua:1804
+#: ../../data/tribes/initialization/frisians/units.lua:1811
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s on average to produce one fur garment."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tailor's Shop
-#: ../../data/tribes/initialization/frisians/units.lua:1811
+#: ../../data/tribes/initialization/frisians/units.lua:1818
 msgctxt "frisians_building"
 msgid ""
 "Don’t complain if these garments are too heavy – they’re not supposed to be "
@@ -7041,27 +7043,27 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Tailor's
 #. Shop
-#: ../../data/tribes/initialization/frisians/units.lua:1813
+#: ../../data/tribes/initialization/frisians/units.lua:1820
 msgctxt "frisians_building"
 msgid "A trainer scolding a soldier"
 msgstr "Тренер ругает солдата"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
-#: ../../data/tribes/initialization/frisians/units.lua:1815
+#: ../../data/tribes/initialization/frisians/units.lua:1822
 msgctxt "building"
 msgid "Equips fur garments with iron or gold to produce good armor."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1828
+#: ../../data/tribes/initialization/frisians/units.lua:1835
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
 msgstr "Угольная печь нуждается %s в среднем для производства одного угля."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1835
+#: ../../data/tribes/initialization/frisians/units.lua:1842
 msgctxt "frisians_building"
 msgid ""
 "Miners and soldiers are so picky… But who am I to complain, as I make my "
@@ -7069,13 +7071,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1837
+#: ../../data/tribes/initialization/frisians/units.lua:1844
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1839
+#: ../../data/tribes/initialization/frisians/units.lua:1846
 msgctxt "frisians_building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
@@ -7083,32 +7085,32 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1841
+#: ../../data/tribes/initialization/frisians/units.lua:1848
 #, lua-format
 msgctxt "frisians_building"
 msgid "The smokery needs %s on average to smoke two fish or two meat."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1848
+#: ../../data/tribes/initialization/frisians/units.lua:1855
 msgctxt "frisians_building"
 msgid "Why shouldn’t my bread taste good? It’s only barley and water!"
 msgstr "Почему мой хлеб не должен быть вкусным? Здесь только ячмень и вода!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1850
+#: ../../data/tribes/initialization/frisians/units.lua:1857
 msgctxt "frisians_building"
 msgid "A baker"
 msgstr "Пекарь"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1852
+#: ../../data/tribes/initialization/frisians/units.lua:1859
 msgctxt "frisians_building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1854
+#: ../../data/tribes/initialization/frisians/units.lua:1861
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
@@ -7116,7 +7118,7 @@ msgstr "В пекарня производит одну буханка хлеб�
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Honey Bread
 #. Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1861
+#: ../../data/tribes/initialization/frisians/units.lua:1868
 msgctxt "frisians_building"
 msgid ""
 "Rookies will say that vengeance is sweet. Heroes will say that honey bread "
@@ -7125,14 +7127,14 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Honey
 #. Bread Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1863
+#: ../../data/tribes/initialization/frisians/units.lua:1870
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
 msgstr "Тренер беседует с пекарем"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread
 #. Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1865
+#: ../../data/tribes/initialization/frisians/units.lua:1872
 msgctxt "frisians_building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
@@ -7140,46 +7142,46 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1872
+#: ../../data/tribes/initialization/frisians/units.lua:1879
 msgctxt "frisians_building"
 msgid ""
 "I know no single master miner who’ll ever work without a nice pint of beer!"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1874
+#: ../../data/tribes/initialization/frisians/units.lua:1881
 msgctxt "frisians_building"
 msgid "A brewer boasting about the importance of his profession"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1876
+#: ../../data/tribes/initialization/frisians/units.lua:1883
 msgctxt "frisians_building"
 msgid "Brews beer for miners and soldier training."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1878
+#: ../../data/tribes/initialization/frisians/units.lua:1885
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
 msgstr "Пивоварне нужно %s в среднем, чтобы сварить кружку пива."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Mead Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1885
+#: ../../data/tribes/initialization/frisians/units.lua:1892
 msgctxt "frisians_building"
 msgid "If you like beer, you’ve never tasted mead."
 msgstr "Если вам нравится пиво, вы просто никогда не пробовали медовуху."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Mead
 #. Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1887
+#: ../../data/tribes/initialization/frisians/units.lua:1894
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1889
+#: ../../data/tribes/initialization/frisians/units.lua:1896
 msgctxt "frisians_building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
@@ -7187,19 +7189,19 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/frisians/units.lua:1896
+#: ../../data/tribes/initialization/frisians/units.lua:1903
 msgctxt "frisians_building"
 msgid "Nothing but fruit all day… Couldn’t you hurry up a bit?"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/frisians/units.lua:1898
+#: ../../data/tribes/initialization/frisians/units.lua:1905
 msgctxt "frisians_building"
 msgid "Hungry customers in times of a shortage of smoked fish and meat"
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/frisians/units.lua:1902
+#: ../../data/tribes/initialization/frisians/units.lua:1909
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7208,7 +7210,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Drinking Hall
-#: ../../data/tribes/initialization/frisians/units.lua:1909
+#: ../../data/tribes/initialization/frisians/units.lua:1916
 msgctxt "frisians_building"
 msgid ""
 "All I need to be happy is a slice of honey bread with some smoked meat and a"
@@ -7217,13 +7219,13 @@ msgstr "Все, что мне нужно для счастья - это кусо
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Drinking
 #. Hall
-#: ../../data/tribes/initialization/frisians/units.lua:1911
+#: ../../data/tribes/initialization/frisians/units.lua:1918
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
 msgstr "Мастер-шахтер для хозяйки"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Drinking Hall
-#: ../../data/tribes/initialization/frisians/units.lua:1913
+#: ../../data/tribes/initialization/frisians/units.lua:1920
 msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
@@ -7231,7 +7233,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1920
+#: ../../data/tribes/initialization/frisians/units.lua:1927
 msgctxt "frisians_building"
 msgid ""
 "You have thirty seconds to learn the basics of swordfighting and how to stay"
@@ -7242,26 +7244,26 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1922
+#: ../../data/tribes/initialization/frisians/units.lua:1929
 msgctxt "frisians_building"
 msgid "A trainer greeting the new recruits"
 msgstr "Инструктор приветствует новобранцев"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1924
+#: ../../data/tribes/initialization/frisians/units.lua:1931
 msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "Снаряжает новобранцев и тренирует их до солдат."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1926
+#: ../../data/tribes/initialization/frisians/units.lua:1933
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s on average to recruit one soldier."
 msgstr "Казармы нуждаются %s в среднем чтобы нанять одного солдата."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reindeer Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1935
+#: ../../data/tribes/initialization/frisians/units.lua:1942
 msgctxt "frisians_building"
 msgid ""
 "Who says a beast of burden cannot be useful for other things than transport?"
@@ -7269,14 +7271,14 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reindeer
 #. Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1937
+#: ../../data/tribes/initialization/frisians/units.lua:1944
 msgctxt "frisians_building"
 msgid ""
 "The reindeer breeder who first proposed using reindeer fur for clothing"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reindeer Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1939
+#: ../../data/tribes/initialization/frisians/units.lua:1946
 msgctxt "frisians_building"
 msgid ""
 "Breeds strong reindeer for adding them to the transportation system. Also "
@@ -7284,7 +7286,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian production site: Reindeer Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1941
+#: ../../data/tribes/initialization/frisians/units.lua:1948
 msgctxt "frisians_building"
 msgid ""
 "If the supply is steady, the reindeer farm produces one meat after producing"
@@ -7292,7 +7294,7 @@ msgid ""
 msgstr "Если поставка пищи будет стабильной, оленеводческая ферма может производить один кусок мяса после производства трех кусков меха."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1948
+#: ../../data/tribes/initialization/frisians/units.lua:1955
 msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no drought; no rats, no locusts; naught can "
@@ -7300,7 +7302,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1950
+#: ../../data/tribes/initialization/frisians/units.lua:1957
 msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
@@ -7308,27 +7310,27 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1952
+#: ../../data/tribes/initialization/frisians/units.lua:1959
 msgctxt "building"
 msgid "Sows and harvests barley."
 msgstr "Свиноматки и урожай ячменя."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1954
+#: ../../data/tribes/initialization/frisians/units.lua:1961
 msgctxt "frisians_building"
 msgid "The farm needs free space within the work area to plant seeds."
 msgstr "Ферме требуется свободное пространство в рабочей области для посадки семян."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Rock Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1963
-#: ../../data/tribes/initialization/frisians/units.lua:1972
+#: ../../data/tribes/initialization/frisians/units.lua:1970
+#: ../../data/tribes/initialization/frisians/units.lua:1979
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Rock Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1965
+#: ../../data/tribes/initialization/frisians/units.lua:1972
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7338,7 +7340,7 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Rock
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1974
+#: ../../data/tribes/initialization/frisians/units.lua:1981
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7347,7 +7349,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1983
+#: ../../data/tribes/initialization/frisians/units.lua:1990
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7357,7 +7359,7 @@ msgstr "Если поставка пищи будет стабильной, уг
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Coal
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1992
+#: ../../data/tribes/initialization/frisians/units.lua:1999
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7366,7 +7368,7 @@ msgid ""
 msgstr "Если поставка пищи будет стабильной, глубокая угольная шахта может производить четыре куска угля, в среднем за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2001
+#: ../../data/tribes/initialization/frisians/units.lua:2008
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7376,7 +7378,7 @@ msgstr "Если поставка пищи будет стабильной, же
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Iron
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2010
+#: ../../data/tribes/initialization/frisians/units.lua:2017
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7385,7 +7387,7 @@ msgid ""
 msgstr "Если поставка пищи будет стабильной, глубокий железный рудник может производить два куска железной руды, в среднем за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2019
+#: ../../data/tribes/initialization/frisians/units.lua:2026
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7395,7 +7397,7 @@ msgstr "Если поставка пищи будет стабильной, зо
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Gold
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2028
+#: ../../data/tribes/initialization/frisians/units.lua:2035
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -7404,7 +7406,7 @@ msgid ""
 msgstr "Если поставка пищи будет стабильной, глубокая золотодобывающая шахта может производить два куска золотой руды, в среднем за %s."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Camp
-#: ../../data/tribes/initialization/frisians/units.lua:2037
+#: ../../data/tribes/initialization/frisians/units.lua:2044
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
@@ -7415,14 +7417,14 @@ msgstr ""
 #. Camp
 #. TRANSLATORS: Lore author helptext for a frisian training site: Training
 #. Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2039
-#: ../../data/tribes/initialization/frisians/units.lua:2052
+#: ../../data/tribes/initialization/frisians/units.lua:2046
+#: ../../data/tribes/initialization/frisians/units.lua:2059
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
 msgstr "Тренер обучает солдата"
 
 #. TRANSLATORS: Purpose helptext for a frisian training site: Training Camp
-#: ../../data/tribes/initialization/frisians/units.lua:2041
+#: ../../data/tribes/initialization/frisians/units.lua:2048
 msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack up to level 3 as well as in Defense and Health to "
@@ -7430,7 +7432,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a frisian training site: Training Camp
-#: ../../data/tribes/initialization/frisians/units.lua:2043
+#: ../../data/tribes/initialization/frisians/units.lua:2050
 msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
@@ -7438,7 +7440,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2050
+#: ../../data/tribes/initialization/frisians/units.lua:2057
 msgctxt "frisians_building"
 msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidentally "
@@ -7447,7 +7449,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian training site: Training Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2054
+#: ../../data/tribes/initialization/frisians/units.lua:2061
 msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
@@ -7455,7 +7457,7 @@ msgid ""
 msgstr "Тренирует солдат для Атаки, Защиты и Здоровья до последнего уровня. Оснащает солдат всем необходимым оружием и частями доспехов."
 
 #. TRANSLATORS: Note helptext for a frisian training site: Training Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2056
+#: ../../data/tribes/initialization/frisians/units.lua:2063
 msgctxt "frisians_building"
 msgid ""
 "Trains only soldiers who have been trained to the maximum level by the "
@@ -7469,12 +7471,12 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a frisian military site: Outpost
 #. TRANSLATORS: Purpose helptext for a frisian military site: Tower
 #. TRANSLATORS: Purpose helptext for a frisian military site: Fortress
-#: ../../data/tribes/initialization/frisians/units.lua:2065
-#: ../../data/tribes/initialization/frisians/units.lua:2074
-#: ../../data/tribes/initialization/frisians/units.lua:2083
-#: ../../data/tribes/initialization/frisians/units.lua:2092
-#: ../../data/tribes/initialization/frisians/units.lua:2101
-#: ../../data/tribes/initialization/frisians/units.lua:2110
+#: ../../data/tribes/initialization/frisians/units.lua:2072
+#: ../../data/tribes/initialization/frisians/units.lua:2081
+#: ../../data/tribes/initialization/frisians/units.lua:2090
+#: ../../data/tribes/initialization/frisians/units.lua:2099
+#: ../../data/tribes/initialization/frisians/units.lua:2108
+#: ../../data/tribes/initialization/frisians/units.lua:2117
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
 msgstr ""
@@ -7485,12 +7487,12 @@ msgstr ""
 #. TRANSLATORS: Note helptext for a frisian military site: Outpost
 #. TRANSLATORS: Note helptext for a frisian military site: Tower
 #. TRANSLATORS: Note helptext for a frisian military site: Fortress
-#: ../../data/tribes/initialization/frisians/units.lua:2067
-#: ../../data/tribes/initialization/frisians/units.lua:2076
-#: ../../data/tribes/initialization/frisians/units.lua:2085
-#: ../../data/tribes/initialization/frisians/units.lua:2094
-#: ../../data/tribes/initialization/frisians/units.lua:2103
-#: ../../data/tribes/initialization/frisians/units.lua:2112
+#: ../../data/tribes/initialization/frisians/units.lua:2074
+#: ../../data/tribes/initialization/frisians/units.lua:2083
+#: ../../data/tribes/initialization/frisians/units.lua:2092
+#: ../../data/tribes/initialization/frisians/units.lua:2101
+#: ../../data/tribes/initialization/frisians/units.lua:2110
+#: ../../data/tribes/initialization/frisians/units.lua:2119
 msgctxt "frisians_building"
 msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
@@ -7499,7 +7501,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Shipyard
-#: ../../data/tribes/initialization/frisians/units.lua:2130
+#: ../../data/tribes/initialization/frisians/units.lua:2137
 msgctxt "frisians_building"
 msgid ""
 "This house may be called a shipyard, but my ships are rather longer than one"
@@ -7507,7 +7509,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Shipyard
-#: ../../data/tribes/initialization/frisians/units.lua:2132
+#: ../../data/tribes/initialization/frisians/units.lua:2139
 msgctxt "frisians_building"
 msgid ""
 "A shipwright who only constructed toy ships after being chid that his ships "
@@ -7515,7 +7517,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Weaving Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2141
+#: ../../data/tribes/initialization/frisians/units.lua:2148
 msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
@@ -7524,20 +7526,20 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Weaving
 #. Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2143
+#: ../../data/tribes/initialization/frisians/units.lua:2150
 msgctxt "frisians_building"
 msgid "A seamstress’ work song"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Weaving Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2145
+#: ../../data/tribes/initialization/frisians/units.lua:2152
 msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Weaving
 #. Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2147
+#: ../../data/tribes/initialization/frisians/units.lua:2154
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."

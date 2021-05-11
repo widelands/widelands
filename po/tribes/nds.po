@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
-"PO-Revision-Date: 2021-03-13 12:50+0000\n"
+"POT-Creation-Date: 2021-05-08 12:59+0000\n"
+"PO-Revision-Date: 2021-05-06 19:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1150,14 +1150,14 @@ msgid "Dismantle Site"
 msgstr "Huus word plattreten"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
-msgid "Cassava Root Cooker"
-msgstr "Maniok-Wuddel-Köök"
+msgid "Cassava Plantation"
+msgstr "Maniok-Planteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:41
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
@@ -1235,31 +1235,17 @@ msgstr "Maniok-Wuddel-Köök"
 msgid "working"
 msgstr "to Warken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
-msgid "baking bread"
-msgstr "Brood to backen"
+#. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+msgid "planting cassava"
+msgstr "Maniok to planten"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:8
-msgctxt "amazons_building"
-msgid "Cassava Root Plantation"
-msgstr "Maniok-Planteree"
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+msgid "harvesting cassava"
+msgstr "Maniok to arnten"
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:49
-msgid "planting cassava root"
-msgstr "Maniok-Wuddels to planten"
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:57
-msgid "harvesting cassava root"
-msgstr "Maniok-Wuddels to arnten"
-
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:66
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
@@ -1272,7 +1258,7 @@ msgstr "Maniok-Wuddels to arnten"
 msgid "No Fields"
 msgstr "Keene Meedjes"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
@@ -1285,12 +1271,27 @@ msgstr "Keene Meedjes"
 msgid "Out of Fields"
 msgstr "Hebb keene Medjes mehr"
 
-#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
 msgctxt "amazons_building"
 msgid ""
-"The farmer working at this cassava root plantation has no cleared soil to "
-"plant her seeds."
+"The farmer working at this cassava plantation has no cleared soil to plant "
+"her seeds."
 msgstr "De Buurske dat warkt bi deese Maniok-Planteree hett keen Meedland waar se wat anplanten kann."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Cooker"
+msgstr "Maniok-Wuddel-Köök"
+
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+msgid "baking bread"
+msgstr "Brood to backen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -1768,9 +1769,9 @@ msgstr "eenen Klöpper to maken"
 msgid "making a chisel"
 msgstr "eenen Beitel to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -4959,31 +4960,31 @@ msgstr "Swartwuddels-Acker (ganz lütt)"
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (harvested)"
+msgid "Cassava Field (harvested)"
 msgstr "Maniok-Feld (arnt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (medium)"
+msgid "Cassava Field (medium)"
 msgstr "Maniok-Feld (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (ripe)"
+msgid "Cassava Field (ripe)"
 msgstr "Maniok-Feld (riep)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (small)"
+msgid "Cassava Field (small)"
 msgstr "Maniok-Feld (lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
-msgid "Cassava Root Field (tiny)"
+msgid "Cassava Field (tiny)"
 msgstr "Maniok-Feld (ganz lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
@@ -5455,7 +5456,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) Soldatske"
 msgstr[1] "%1%(+%2%) Soldatsken"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
