@@ -10,12 +10,13 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-06 11:41+0000\n"
+"PO-Revision-Date: 2021-05-09 23:27+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -167,31 +168,31 @@ msgstr "Nagyszerű. Amíg a kikötőd elkészül, építsünk néhány hajót!"
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr "A hajókat a hajógyár közelében a vízparton építi a hajóács. Ezért építenünk kell egy hajógyárat valahol a part közelében."
+msgstr "A hajókat a hajóács műhely közelében a vízparton építi a hajóács. Ezért építenünk kell egy hajóács műhelyt valahol a part közelében."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr "Építs egy hajógyárat!"
+msgstr "Építs egy hajóács műhelyt!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr "Építs egy hajógyárat a part közelébe!"
+msgstr "Építs egy hajóács műhelyt a part közelébe!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr "A hajók a hajógyárban készülnek. Ez egy közepes épület."
+msgstr "A hajók a hajóács műhelynél készülnek. Ez egy közepes épület."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr "Építs egy hajógyárat a táborod déli részének a partja közelében!"
+msgstr "Építs egy hajóács műhelyt a táborod déli részének a partja közelében!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "A hajógyárban egy közepes épület. Bár a térképen akárhol megépítheted, de a hajóács csak akkor tud dolgozni, ha van a munkaterületén belül szabad vízpart, ahol nincs se út, se fa."
+msgstr "A hajóács műhely egy közepes épület. Bár a térképen akárhol megépítheted, a hajóács csak akkor tud dolgozni, ha van a munkaterületén belül szabad vízpart, ahol nincs se út, se fa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
@@ -202,7 +203,7 @@ msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr "Nagyszerű! A hajógyár elkészült és a hajóács azonnal munkához is látott. A hajókhoz farönkökre, deszkákra és pókszövetre van szüksége, amelyek már úton is vannak a hajógyárba."
+msgstr "Nagyszerű! A hajóács műhely elkészült és a hajóács azonnal munkához is látott. A hajókhoz farönkökre, deszkákra és pókszövetre van szüksége, amelyek már úton is vannak a hajóács műhelybe."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
@@ -227,7 +228,7 @@ msgstr "Építs két hajót!"
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr "A hajók automatikusan készülnek, ha van kész hajógyárad és a szükséges áruk megérkeztek."
+msgstr "A hajók automatikusan készülnek, ha van kész hajóács műhelyed és a szükséges áruk megérkeztek."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
@@ -235,11 +236,11 @@ msgstr "Várd meg, amíg a hajóács befejezi a második hajót is."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr "Ne felejtsd el leállítani a hajógyárat, amikor elég hajód van!"
+msgstr "Ne felejtsd el leállítani a hajóács műhelyt, amikor elég hajód van!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
 msgid "Shipyard production"
-msgstr "Hajógyári termelés"
+msgstr "A hajóács műhely termelése"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "We have enough ships"
@@ -254,7 +255,7 @@ msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr "Le kell állítanod a hajógyárad termelését, amikor elég hajód van, különben elhasználná az összes fádat és pókszövetedet, miközben tucatnyi hajót készítene."
+msgstr "Le kell állítanod a hajóács műhely termelését, amikor elég hajód van, különben elhasználná az összes fát és pókszövetet, miközben tucatnyi hajót készítene."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
@@ -312,7 +313,7 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr "Bármelyik kikötőből lehet expedíciót indítani. Ilyenkor minden szükséges árut az adott kikötőbe szállítanak, ami megegyezik azzal, ami egy új kikötő építéséhez kell (mivel a célunk az, hogy távol otthonról egy kikötőt építsünk). Ezen kívül természetesen szükség van egy építészre is. Ha minden készen áll, az egyik hajód odamegy és mindent berakodik."
+msgstr "Bármelyik kikötőből lehet expedíciót indítani. Ilyenkor minden szükséges árut az adott kikötőbe szállítanak, ami megegyezik azzal, ami egy új kikötő építéséhez kell (mivel a célunk az, hogy távol otthonról egy kikötőt építsünk). Ezen kívül természetesen szükség van egy építőmunkásra is. Ha minden készen áll, az egyik hajód odamegy és mindent berakodik."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
@@ -409,7 +410,7 @@ msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr "Ekkor a hajó kirakodja az árukat, és utána újra bekapcsolódik az áruszállításba. Az építész pedig hozzákezd a kikötő felépítéséhez."
+msgstr "Ekkor a hajó kirakodja az árukat, és utána újra bekapcsolódik az áruszállításba. Az építőmunkás pedig hozzákezd a kikötő felépítéséhez."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
@@ -530,7 +531,7 @@ msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr "Eltart egy ideig, amíg a hajógyárad megépíti a hajókat. Amíg erre várunk, szeretnélek megtanítani még egy vízi szállítási módra."
+msgstr "Eltart egy ideig, amíg a hajóács műhely megépíti a hajókat. Amíg erre várunk, szeretnélek megtanítani még egy vízi szállítási módra."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
@@ -550,7 +551,7 @@ msgstr "Vess egy pillantást erre a völgyre messze délen. Találtunk egy arann
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:258
 msgid "Rowboats & Ferry Yards"
-msgstr "Csónakok és kompgyárak"
+msgstr "Kompok és csónakkészítő műhelyek"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:260
 msgid ""
@@ -564,29 +565,29 @@ msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "A kompokat a kompgyárakban készítik. Egy komp két farönkbe és egy vég szövetbe kerül, és gyorsan elkészül. A kompgyár egy közepes épület, amit a part közelébe kell építeni."
+msgstr "A kompokat a csónakkészítő műhelyekben készítik. Egy komp két farönkbe és egy vég szövetbe kerül, és gyorsan elkészül. A csónakkészítő műhely egy közepes épület, amit a part közelébe kell építeni."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr "Mielőtt folytatnánk, építsünk egy kompgyárat a part közelébe."
+msgstr "Mielőtt folytatnánk, építsünk egy csónakkészítő műhelyt a part közelébe."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:268
 msgid "Build a ferry yard"
-msgstr "Építs egy kompgyárat!"
+msgstr "Építs egy csónakkészítő műhelyt!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:270
 msgid "Build a ferry yard close to the shore"
-msgstr "Építs egy kompgyárat a part közelébe!"
+msgstr "Építs egy csónakkészítő műhelyt a part közelébe!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
 msgid "Ferries are constructed by a ferry yard."
-msgstr "A kompokat a kompgyárban készítik."
+msgstr "A kompokat a csónakkészítő műhelyben készítik."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr "A kompgyárat a part közelébe kell építened, különben nem fog tudni dolgozni."
+msgstr "A csónakkészítő műhelyt a part közelébe kell építened, különben nem fog tudni dolgozni."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:280
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:293
@@ -702,7 +703,7 @@ msgstr "Ha egy víziút nagyon hosszú és fontos szárazföldi utat vág le, el
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "Ferry yard production"
-msgstr "A kompgyár termelése"
+msgstr "A csónakkészítő műhely termelése"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:337
 msgid "More ferries needed?"
@@ -713,7 +714,7 @@ msgid ""
 "Do remember to stop your ferry yard when you don’t need any new ferries to "
 "be produced. As long as a ferry services a waterway, its lifetime is "
 "unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr "Ne felejtsd el leállítani a kompgyáradat, ha már nincs szükséged több kompra! Amíg egy komp be van osztva egy víziútra, addig nincs korlátozva az élettartama. De a nem használt kompok idővel tönkremennek és eltűnnek."
+msgstr "Ne felejtsd el leállítani a csónakkészítő műhelyt, ha már nincs szükséged több kompra! Amíg egy komp be van osztva egy víziútra, addig nincs korlátozva az élettartama. De a nem használt kompok idővel tönkremennek és eltűnnek."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:346
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
