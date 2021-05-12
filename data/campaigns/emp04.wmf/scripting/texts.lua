@@ -59,7 +59,7 @@ obj_clear_roads = {
 
 obj_clear_roads_hint = rt(objective_text(_"Clear Road Network",
    li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]]) ..
-   li_arrow(_[[Ensure there are not more than 3 dead ends or flags with more than 4 roads.]])
+   li_arrow(_[[Ensure there are not more than 3 dead ends, nor more than one flag with more than 4 roads.]])
    ))
 
 obj_click_farmbuilding = {
@@ -131,7 +131,7 @@ obj_heroes = {
    number = 1,
    body = objective_text(_"Hero Training",
       li(_[[Use your resources wisely to train at least three fully promoted heroes.]]) ..
-      li_arrow(_[[To train a soldier to the highest level in one site, consider stopping the trainigsite until it is fully equipped with all food and weapons needed.]]) ..
+      li_arrow(_[[To train a soldier to the highest level in one site, consider stopping the trainingsite until it is fully equipped with all food and weapons needed.]]) ..
       li_arrow(_[[To prevent waste of goods, reduce the soldiers to be trained to one per site.]]) ..
       li_arrow(_[[A site will always prefer the best suited soldier available for training. Make sure you don’t have your half trained soldiers garrisoned in a military building.]])
    ),
@@ -167,7 +167,7 @@ obj_conquer_all = {
 
 obj_charcoal = {
    name = "charcoal",
-   title=_"Build 2 charcoal kiln",
+   title=_"Build 2 charcoal kilns",
    number = 1,
    body = objective_text(_"Build Two Charcoal Kilns",
       li(_[[Build two charcoal kilns to support the iron industry.]]) ..
@@ -549,7 +549,7 @@ amalea_18 = {
       _([[Look Lutius, I have just analyzed our economy somewhat further. I think there might be a problem with our farms. They don’t show any productivity although there is enough space to plant wheat.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I think we should have a deeper look into the issue and open the building window of one of them.]]))
+      _([[I think we should have a deeper look into the issue and visit one of them.]]))
       .. new_objectives(obj_click_farmbuilding),
    posy=1,
    h=500,
@@ -673,7 +673,7 @@ saledus_5 = {
       _([[I am really worried about the weakness of our army. We should start to increase our military power. As a starting point, we should recruit at least ten new soldiers.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[Remember, we need to produce wooden spears and helmets to recruit them in the barracks. Perhaps we should train them further in the arena as well.]]))
+      _([[Perhaps we should train them further in the arena as well.]]))
       .. new_objectives(obj_recruit_soldiers),
    posy=1,
    h=500,

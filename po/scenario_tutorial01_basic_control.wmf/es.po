@@ -9,7 +9,7 @@
 # Gontzal M. Pujana <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015-2016,2020
+# Madkat Here, 2015-2016,2020-2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # Gontzal M. Pujana <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-03 15:30+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,7 +142,7 @@ msgstr "Tenemos que encontrar un lugar agradable para la cabaña del leñador. P
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Te mostraré dónde está el menú y dónde mostrar y ocultar las zonas de construcción."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -170,13 +170,13 @@ msgstr "Construyendo la cabaña del leñador"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Primero, haré clic izquierdo en el símbolo donde quiero que se construya la cabaña del leñador. Aparecerá una ventana donde puedo elegir entre varios edificios."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "La cabaña del leñador es un edificio pequeño, así que seleccionaré la pestaña de edificios pequeños. Luego elegiré la cabaña del leñador."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -569,7 +569,7 @@ msgstr "Conecta tu Obra"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Conecta el sitio de construcción de tu cantera a tu sede con una carretera."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -808,7 +808,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Todas las ventanas de Widelands (excepto las ventanas de mensajes de historias que muestran \"OK\") se pueden cerrar haciendo clic derecho en ellas. Algunas ventanas también se pueden abrrirse y cerrarse con los botones y menús en la parte inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -821,7 +821,7 @@ msgstr "Cerrando ventanas"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Excelente. Ahora tenemos que centrarnos en otras cosas."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""

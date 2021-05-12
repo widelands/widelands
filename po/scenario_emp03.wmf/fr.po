@@ -11,6 +11,7 @@
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # Renaud Bouchard, 2020
 # C138, 2021
+# Atanase Albaran, 2021
 # 
 msgid ""
 msgstr ""
@@ -18,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-29 14:02+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: C138, 2021\n"
+"Last-Translator: Atanase Albaran, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -697,6 +698,12 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Après avoir produit suffisamment de blé, nous pouvons démanteler la ferme et"
+" construire une bergerie pour produire de la laine. Lorsque la bergerie "
+"commencera à fonctionner, nous pourrions trouver ou libérer de l'espace pour"
+" un bâtiment moyen afin de construire une usine textile et ainsi d'utiliser "
+"notre laine pour réaliser des tissus. Mais pour le moment, commençons par "
+"produire une quantité raisonnable de blé."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -705,6 +712,10 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Je pense qu'un stock de 50 gerbes de blé suffirait pour commencer. Nous "
+"n'avons pas de quantité cible pour le blé, car l'agriculteur n'a pas besoin "
+"d'autres marchandises pour le produire. Tout ce que nous avons à faire est "
+"de surveiller notre stock de blé augmenter."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -826,6 +837,9 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Salve Lutius. En parlant à tous nos courageux bâtisseurs, ils m'ont dit "
+"qu'ils devaient utiliser tout l'or restant pour construire le port. Donc, il"
+" ne nous restera plus d’or après la construction de notre port."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
