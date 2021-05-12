@@ -70,7 +70,8 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 			set_landmark(i, current_);
 			return true;
 		}
-		if (landmarks_[i].set && matches_shortcut(
+		if (landmarks_[i].set &&
+		    matches_shortcut(
 		       static_cast<KeyboardShortcut>(
 		          static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
 		       key)) {
