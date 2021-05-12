@@ -27,9 +27,13 @@
 namespace AddOns {
 
 struct NetAddons {
-	NetAddons() : initialized_(false), client_socket_(0) {
+	NetAddons() : initialized_(false), client_socket_(0), is_admin_(false) {
 	}
 	~NetAddons();
+
+	bool is_admin() const {
+		return is_admin_;
+	}
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<AddOnInfo> refresh_remotes();
@@ -84,6 +88,7 @@ private:
 	std::string last_username_, last_password_;
 	bool initialized_;
 	int client_socket_;
+	bool is_admin_;
 };
 
 }  // namespace AddOns

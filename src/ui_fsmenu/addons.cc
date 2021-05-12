@@ -28,9 +28,11 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "network/crypto.h"
@@ -992,7 +994,7 @@ void AddOnsCtrl::update_login_button(UI::Button& b) {
 		contact_.set_enabled(false);
 		contact_.set_tooltip(_("Please log in to send an enquiry"));
 	} else {
-		b.set_title((boost::format(_("Logged in as %s")) % username_).str());
+		b.set_title((boost::format(net().is_admin() ? _("Logged in as %s (admin)") : _("Logged in as %s")) % username_).str());
 		b.set_tooltip(_("Click to log out"));
 		upload_addon_.set_enabled(true);
 		upload_addon_.set_tooltip("");
@@ -1215,6 +1217,7 @@ void AddOnsCtrl::rebuild() {
 		   new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second);
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
+
 		upload_addon_.add(pair.first.internal_name, &pair.first, pair.first.icon, false, pair.first.descname());
 		upload_screenshot_.add(pair.first.internal_name, &pair.first, pair.first.icon, false, pair.first.descname());
 	}
@@ -1438,7 +1441,7 @@ void AddOnsCtrl::layout() {
 		   tabs_placeholder_.get_w(),
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
 
-		login_button_.set_size(get_inner_w() / 4, login_button_.get_h());
+		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
 	}
 
@@ -1997,8 +2000,6 @@ public:
 	     box_comment_rows_placeholder_(&box_comments_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0),
 	     comments_header_(&box_comments_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	     screenshot_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, nullptr),
-	     comment_(new UI::MultilineEditbox(
-	        &box_comments_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
 	     own_voting_(&box_votes_,
 	                 "voting",
 	                 0,
@@ -2043,14 +2044,14 @@ public:
 	                      UI::ButtonStyle::kFsMenuSecondary,
 	                      g_image_cache->get("images/ui_basic/scrollbar_left.png"),
 	                      _("Previous screenshot")),
-	     submit_(&box_comments_,
-	             "submit",
+	     write_comment_(&box_comments_,
+	             "write_comment",
 	             0,
 	             0,
 	             0,
 	             0,
 	             UI::ButtonStyle::kFsMenuSecondary,
-	             _("Submit comment")),
+	             _("Write a comment…")),
 	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
      login_button_(this,
                    "login",
@@ -2061,7 +2062,6 @@ public:
                    UI::ButtonStyle::kFsMenuSecondary,
                    "") {
 
-		comment_->set_text("");
 		ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
 		own_voting_.add(_("Not voted"), 0, nullptr, true);
@@ -2083,25 +2083,12 @@ public:
 			update_data();
 			parent_.rebuild();
 		});
-		submit_.sigclicked.connect([this]() {
-			std::string message = comment_->get_text();
-			if (message.empty()) {
-				return;
+		write_comment_.sigclicked.connect([this]() {
+			CommentEditor m(parent_, info_, -1);
+			if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+				update_data();
+				parent_.rebuild();
 			}
-			try {
-				parent_.net().comment(info_, message);
-				info_ = parent_.net().fetch_one_remote(info_.internal_name);
-			} catch (const std::exception& e) {
-				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-					(boost::format(_("The comment could not be submitted.\nError code: %s")) % e.what()).str(),
-					UI::WLMessageBox::MBoxType::kOk);
-				w.run<UI::Panel::Returncodes>();
-				return;
-			}
-
-			update_data();
-			comment_->set_text("");
-			parent_.rebuild();
 		});
 
 		box_screenies_buttons_.add(&screenshot_prev_, UI::Box::Resizing::kFullSize);
@@ -2120,9 +2107,7 @@ public:
 		box_comments_.add_space(kRowButtonSpacing);
 		box_comments_.add(&box_comment_rows_placeholder_, UI::Box::Resizing::kExpandBoth);
 		box_comments_.add_space(kRowButtonSpacing);
-		box_comments_.add(comment_, UI::Box::Resizing::kFullSize);
-		box_comments_.add_space(kRowButtonSpacing);
-		box_comments_.add(&submit_, UI::Box::Resizing::kFullSize);
+		box_comments_.add(&write_comment_, UI::Box::Resizing::kFullSize);
 
 		voting_stats_.add_inf_space();
 		for (unsigned i = 0; i < AddOns::kMaxRating; ++i) {
@@ -2199,7 +2184,7 @@ public:
 
 	void layout() override {
 		if (!is_minimal()) {
-			login_button_.set_size(get_inner_w() / 4, login_button_.get_h());
+			login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 			login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
 			box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
 			box_comment_rows_.set_size(box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());
@@ -2329,14 +2314,14 @@ private:
 	void login_changed() {
 		current_vote_ = parent_.net().get_vote(info_.internal_name);
 		if (current_vote_ < 0) {
-			submit_.set_enabled(false);
-			submit_.set_tooltip(_("Please log in to comment"));
+			write_comment_.set_enabled(false);
+			write_comment_.set_tooltip(_("Please log in to comment"));
 			own_voting_.set_enabled(false);
 			own_voting_.set_tooltip(_("Please log in to vote"));
 			own_voting_.select(0);
 		} else {
-			submit_.set_enabled(true);
-			submit_.set_tooltip("");
+			write_comment_.set_enabled(true);
+			write_comment_.set_tooltip("");
 			own_voting_.set_enabled(true);
 			own_voting_.set_tooltip("");
 			own_voting_.select(current_vote_);
@@ -2358,82 +2343,127 @@ private:
 	UI::Box box_comments_, box_comment_rows_, box_screenies_, box_screenies_buttons_, box_votes_, voting_stats_;
 	UI::Panel box_comment_rows_placeholder_;
 
-	class CommentRow : public UI::MultilineTextarea {
-	private:
-		AddOnsCtrl& ctrl_;
-		UI::Button edit_;
+	class CommentEditor : public UI::Window {
+	public:
+		CommentEditor(AddOnsCtrl& ctrl, AddOns::AddOnInfo& info, const long index)
+		: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
+            "write_comment", 0, 0, 100, 100, index < 0 ? _("Write Comment") : _("Edit Comment")),
+		info_(info), index_(index),
+		main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+		preview_(&main_box_, 0, 0, 300, 150, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
+		text_(new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu)),
+		ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+		reset_(&buttons_box_, "reset", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Reset")),
+		cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"))
+		{
+			if (ctrl.username().empty()) {
+				die();
+				return;
+			}
 
-		class CommentEditor : public UI::Window {
-		public:
-			CommentEditor(AddOnsCtrl& ctrl, AddOns::AddOnInfo& info, const long index)
-			: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-                "edit_comment", 0, 0, 100, 100, _("Edit Comment")),
-			info_(info), index_(index),
-			main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-			buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-			text_(new UI::MultilineEditbox(&main_box_, 0, 0, 400, 300, UI::PanelStyle::kFsMenu)),
-			ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-			reset_(&buttons_box_, "reset", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Reset")),
-			cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"))
-			{
-				buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-				buttons_box_.add_space(kRowButtonSpacing);
-				buttons_box_.add(&reset_, UI::Box::Resizing::kExpandBoth);
-				buttons_box_.add_space(kRowButtonSpacing);
-				buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+			buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
+			buttons_box_.add_space(kRowButtonSpacing);
+			buttons_box_.add(&reset_, UI::Box::Resizing::kExpandBoth);
+			buttons_box_.add_space(kRowButtonSpacing);
+			buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
-				main_box_.add(text_, UI::Box::Resizing::kFullSize);
-				main_box_.add_space(kRowButtonSpacing);
-				main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+			main_box_.add(text_, UI::Box::Resizing::kFullSize);
+			main_box_.add_space(kRowButtonSpacing);
+			main_box_.add(&preview_, UI::Box::Resizing::kFullSize);
+			main_box_.add_space(kRowButtonSpacing);
+			main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
-				cancel_.sigclicked.connect([this]() { die(); });
-				reset_.sigclicked.connect([this]() { reset_text(); });
-				ok_.sigclicked.connect([this, &ctrl]() {
-					try {
-						std::string message = text_->get_text();
-						if (message.empty()) {
-							return;
-						}
-						ctrl.net().comment(info_, message, index_);
-						info_ = ctrl.net().fetch_one_remote(info_.internal_name);
-						end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-					} catch (const std::exception& e) {
-						log_err("Edit comment #%ld for %s: %s", index_, info_.internal_name.c_str(), e.what());
-						UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-								(boost::format(_("The comment could not be edited.\n\nError Message:\n%s")) % e.what()).str(),
-								UI::WLMessageBox::MBoxType::kOk);
-						m.run<UI::Panel::Returncodes>();
+			cancel_.sigclicked.connect([this]() { die(); });
+			reset_.sigclicked.connect([this]() { reset_text(); });
+			ok_.sigclicked.connect([this, &ctrl]() {
+				try {
+					std::string message = text_->get_text();
+					if (message.empty()) {
+						return;
 					}
-				});
+					ctrl.net().comment(info_, message, index_);
+					info_ = ctrl.net().fetch_one_remote(info_.internal_name);
+					end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+				} catch (const std::exception& e) {
+					log_err("Edit comment #%ld for %s: %s", index_, info_.internal_name.c_str(), e.what());
+					UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+							(boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) % e.what()).str(),
+							UI::WLMessageBox::MBoxType::kOk);
+					m.run<UI::Panel::Returncodes>();
+				}
+			});
 
-				reset_text();
-				set_center_panel(&main_box_);
-				center_to_parent();
+			reset_text();
+			set_center_panel(&main_box_);
+			center_to_parent();
+			text_->focus();
+		}
+
+		void think() override {
+			UI::Window::think();
+
+			std::string p = "<rt><p>";
+			p += g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag(_("Preview:"));
+			p += "</p><p>";
+
+			std::string message = text_->get_text();
+			for (;;) {
+				size_t pos = message.find('\n');
+				if (pos == std::string::npos) {
+					break;
+				}
+				message = message.replace(pos, 1, "<br>");
 			}
 
+			p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(message);
+			p += "</p></rt>";
 
-		private:
-			AddOns::AddOnInfo& info_;
-			const long index_;
-
-			UI::Box main_box_, buttons_box_;
-			UI::MultilineEditbox* text_;
-			UI::Button ok_, reset_, cancel_;
-
-			void reset_text() {
-				text_->set_text(info_.user_comments[index_].message);
+			ok_.set_enabled(!message.empty());
+			try {
+				// TODO(Nordfriese): The font renderer produces memory leaks if the text
+				// is invalid (which is exactly what we're trying to check here). There
+				// must be a safer (and faster) way to check whether the text is valid.
+				UI::g_fh->render(p, preview_.get_inner_w());
+			} catch (const std::exception& e) {
+				ok_.set_enabled(false);
+				p = "<rt><p>";
+				p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("The comment contains invalid richtext markup:"));
+				p += "</p><p>";
+				p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(richtext_escape(e.what()));
+				p += "</p></rt>";
 			}
-		};
 
+			if (preview_.get_text() != p) {
+				preview_.set_text(p);
+			}
+		}
+
+	private:
+		AddOns::AddOnInfo& info_;
+		const long index_;
+
+		UI::Box main_box_, buttons_box_;
+		UI::MultilineTextarea preview_;
+		UI::MultilineEditbox* text_;
+		UI::Button ok_, reset_, cancel_;
+
+		void reset_text() {
+			text_->set_text(index_ < 0 ? "" : info_.user_comments[index_].message);
+			think();
+		}
+	};
+
+	class CommentRow : public UI::MultilineTextarea {
 	public:
 		CommentRow(AddOnsCtrl& ctrl, AddOns::AddOnInfo& info, RemoteInteractionWindow& r, UI::Panel& parent, const std::string& text, const long index) : UI::MultilineTextarea(&parent, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
-				ctrl_(ctrl),
+				ctrl_(ctrl), info_(info), index_(index),
 				edit_(this, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Edit…")) {
-			edit_.sigclicked.connect([this, &r, &info, index]() {
+			edit_.sigclicked.connect([this, &r]() {
 				if (ctrl_.username().empty()) {
 					return;
 				}
-				CommentEditor m(ctrl_, info, index);
+				CommentEditor m(ctrl_, info_, index_);
 				if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 					r.update_data();
 				}
@@ -2442,23 +2472,31 @@ private:
 			update_edit_enabled();
 		}
 		void update_edit_enabled() {
-			edit_.set_visible(!ctrl_.username().empty());
+			/* Admins can edit all posts; normal users only their own posts and only if the post was never edited by an admin yet. */
+			edit_.set_visible(!ctrl_.username().empty() && (ctrl_.net().is_admin() || (
+				info_.user_comments[index_].username == ctrl_.username() &&
+				(info_.user_comments[index_].editor.empty() || info_.user_comments[index_].editor == ctrl_.username()))));
 		}
 		void layout() override {
 			UI::MultilineTextarea::layout();
 			edit_.set_pos(Vector2i(get_w() - edit_.get_w(), 0));
 		}
+
+	private:
+		AddOnsCtrl& ctrl_;
+		AddOns::AddOnInfo& info_;
+		const long index_;
+		UI::Button edit_;
 	};
 	UI::MultilineTextarea comments_header_;
 	std::list<std::unique_ptr<CommentRow>> comment_rows_;
 	UI::Icon screenshot_;
 
-	UI::MultilineEditbox* comment_;
 	UI::Dropdown<uint8_t> own_voting_;
 	UI::ProgressBar* voting_bars_[AddOns::kMaxRating];
 	UI::Textarea* voting_txt_[AddOns::kMaxRating];
 	UI::Textarea screenshot_stats_, screenshot_descr_, voting_stats_summary_;
-	UI::Button screenshot_next_, screenshot_prev_, submit_, ok_, login_button_;
+	UI::Button screenshot_next_, screenshot_prev_, write_comment_, ok_, login_button_;
 };
 std::map<std::pair<std::string, std::string>, std::string>
    RemoteInteractionWindow::downloaded_screenshots_cache_;

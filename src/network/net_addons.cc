@@ -69,6 +69,7 @@ void NetAddons::init(std::string username, std::string password) {
 		// already initialized
 		return;
 	}
+
 	signal(SIGPIPE, SIG_IGN);
 	if (password.empty()) {
 		username = "";
@@ -104,7 +105,10 @@ void NetAddons::init(std::string username, std::string password) {
 	send += "\nENDOFSTREAM\n";
 	write_to_server(send);
 
-	if (!username.empty()) {
+	is_admin_ = false;
+	if (username.empty()) {
+		check_endofstream();
+	} else {
 		std::string data = password;
 		data += '\n';
 		data += read_line();
@@ -116,8 +120,14 @@ void NetAddons::init(std::string username, std::string password) {
 		send = md5.get_checksum().str();
 		send += "\nENDOFSTREAM\n";
 		write_to_server(send);
+
+		data = read_line();
+		if (data == "ADMIN") {
+			is_admin_ = true;
+		} else if (data != "SUCCESS") {
+			throw WLWarning("", "Expected login result, received:\n%s", data.c_str());
+		}
 	}
-	check_endofstream();
 
 	initialized_ = true;
 	last_username_ = username;
