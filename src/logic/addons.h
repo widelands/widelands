@@ -68,9 +68,9 @@ using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
 using AddOnConflict = std::pair<std::string /* localized_message */, bool /* has_conflicts */>;
 
 struct AddOnComment {
-	std::string username, message;
+	std::string username, editor, message;
 	AddOnVersion version;  // The version on which the user commented
-	std::time_t timestamp;
+	std::time_t timestamp, edit_timestamp;
 };
 
 constexpr uint8_t kMaxRating = 10;

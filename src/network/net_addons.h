@@ -54,7 +54,9 @@ struct NetAddons {
 	int get_vote(const std::string& addon);
 	void vote(const std::string& addon, unsigned vote);
 
-	void comment(const AddOnInfo& addon, std::string message);
+	// Write a new comment or edit an existing one. Negative `index_to_edit` indicates a new comment should be written.
+	void comment(const AddOnInfo& addon, std::string message, long index_to_edit = -1);
+
 	void upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
 	void upload_screenshot(const std::string& addon, const std::string& image, const std::string& description);
 

@@ -252,7 +252,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	CrashGuard guard(*this);
 	write_to_server("CMD_LIST\n");
 
-	const long nr_addons = std::stol(read_line().c_str());
+	long nr_addons = std::stol(read_line().c_str());
 	std::vector<AddOnInfo> result_vector(nr_addons);
 	for (long i = 0; i < nr_addons; ++i) {
 		result_vector[i].internal_name = read_line();
@@ -265,8 +265,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			result_vector[i] = fetch_one_remote(result_vector[i].internal_name);
 		} catch (const std::exception& e) {
 			log_err("Skip add-on %s because: %s", result_vector[i].internal_name.c_str(), e.what());
+			result_vector[i].internal_name = result_vector.back().internal_name;
 			result_vector.pop_back();
 			--i;
+			--nr_addons;
 		}
 	}
 	return result_vector;
@@ -332,6 +334,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	for (int j = 0; j < comments; ++j) {
 		a.user_comments[j].username = read_line();
 		a.user_comments[j].timestamp = std::stol(read_line());
+		a.user_comments[j].editor = read_line();
+		a.user_comments[j].edit_timestamp = std::stol(read_line());
 		a.user_comments[j].version = string_to_version(read_line());
 		int newlines = std::stoi(read_line());
 		a.user_comments[j].message = read_line();
@@ -485,14 +489,20 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	check_endofstream();
 	guard.ok();
 }
-void NetAddons::comment(const AddOnInfo& addon, std::string message) {
+void NetAddons::comment(const AddOnInfo& addon, std::string message, const long index_to_edit) {
 	check_string_validity(addon.internal_name);
 	init();
 	CrashGuard guard(*this);
-	std::string send = "CMD_COMMENT ";
+	std::string send;
+	if (index_to_edit < 0) {
+		send = "CMD_COMMENT";
+	} else {
+		send = "CMD_EDIT_COMMENT";
+	}
+	send += ' ';
 	send += addon.internal_name;
 	send += ' ';
-	send += version_to_string(addon.version, false);
+	send += (index_to_edit < 0) ? version_to_string(addon.version, false) : std::to_string(index_to_edit);
 	send += ' ';
 
 	unsigned nr_lines = 1;
