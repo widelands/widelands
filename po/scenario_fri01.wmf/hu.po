@@ -28,7 +28,7 @@ msgstr "A nagy szökőár (automatikus biztonsági mentés)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr "Építsd ki a fatermelő gazdaságot és építs egy nádast!"
+msgstr "Építsd ki a fatermelő gazdaságot és építs egy nád ültetvényt!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
@@ -39,8 +39,8 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Építs egy favágóházat és két erdészházat farönkök termeléséhez, és egy "
-"nádast nád termesztéséhez!"
+"Építs egy favágóházat és két erdészházat farönkök termeléséhez, és egy nád "
+"ültetvényt nád termesztéséhez!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -376,7 +376,7 @@ msgstr "Nádhiány"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr "Építs még egy nádast!"
+msgstr "Építs még egy nád ültetvényt!"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
