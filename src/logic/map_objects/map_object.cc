@@ -170,7 +170,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	const static std::vector<MapObjectType> killusfirst{
 	   MapObjectType::WATERWAY, MapObjectType::FERRY,      MapObjectType::FERRY_FLEET,
 	   MapObjectType::SHIP,     MapObjectType::SHIP_FLEET, MapObjectType::PORTDOCK,
-	   MapObjectType::WORKER};
+	   MapObjectType::WORKER,   MapObjectType::WARE};
 	for (auto moi : killusfirst) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
