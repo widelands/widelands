@@ -18,16 +18,16 @@
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2015-2021
 # Stanislas Dolcini <stan@wildfiregames.com>, 2021
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # Tubuntu, 2015
 # zecas <jjorge@free.fr>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-08 12:59+0000\n"
-"PO-Revision-Date: 2021-05-06 19:43+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
+"PO-Revision-Date: 2021-05-11 21:14+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1169,7 +1169,7 @@ msgstr "Démanteler le site"
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "Plantation de Manioc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1254,12 +1254,12 @@ msgstr "travaille"
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 msgid "planting cassava"
-msgstr ""
+msgstr "plante du manioc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
 msgid "harvesting cassava"
-msgstr ""
+msgstr "récolte de manioc"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1292,7 +1292,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "Le fermier qui travaille dans cette plantation de manioc n'a pas de sol défriché pour planter ses graines."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
@@ -1302,7 +1302,6 @@ msgstr "Cuisinier de racines de Manioc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -4977,31 +4976,31 @@ msgstr "Champ de racines noires (minuscule)"
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (harvested)"
-msgstr ""
+msgstr "Champ de manioc (récolté)."
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (medium)"
-msgstr ""
+msgstr "Champ de manioc (moyen)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (ripe)"
-msgstr ""
+msgstr "Champ de manioc (mûr)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (small)"
-msgstr ""
+msgstr "Champ de manioc (jeune)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (tiny)"
-msgstr ""
+msgstr "Champ de manioc (naissant)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5472,6 +5471,7 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldat"
 msgstr[1] "%1%(+%2%) soldats"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

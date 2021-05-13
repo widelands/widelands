@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-10 00:02+0000\n"
+"PO-Revision-Date: 2021-05-12 08:16+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Az élelem nagyon fontos a bányákban és a katonai kiképzőhelyeken. Létesíts egy jól működő élelemtermelő gazdaságot legalább egy tanya, egy feketegyökér ültetvény és egy malom építésével! A kétféle lisztből, illetve a kútból szerzett vízből a pékségben sütnek kenyeret, ezért építs egy pékséget és egy kutat is!"
+msgstr "Az étel nagyon fontos a bányáknak és a katonai kiképzőhelyeknek. Létesíts egy jól működő élelmiszertermelő gazdaságot legalább egy földbirtok, egy feketegyökér ültetvény és egy malom építésével! A kétféle lisztből, illetve a kútból szerzett vízből a pékségben sütnek kenyeret, ezért építs egy pékséget és egy kutat is!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -101,7 +101,7 @@ msgstr "Ezenkívül fontos élelmiszer még a füstölt hal és a füstölt hús
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
-msgstr "Építs egy tanyát és egy feketegyökér ültetvényt!"
+msgstr "Építs egy földbirtokot és egy feketegyökér ültetvényt!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
