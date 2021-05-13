@@ -519,6 +519,7 @@
 - Add missing richtext escape for map descriptions (#4817)
 - Fix initial info panel text visibility (#4810)
 - Don't let invisible panels handle keys (#4826)
+- Don't jump to undefined landmarks (#4855)
 
 
 ### Internationalization
@@ -614,6 +615,7 @@
 - Fix documentation 2 (#4776)
 - Document `LuaDescriptions::modify_unit` (#4807)
 - Fix documentation 3 (#4798)
+- Fix documentation `wlmaps` (#4822): Make MapObjectDescription understandable
 
 
 ### Editor
