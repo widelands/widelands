@@ -325,7 +325,7 @@ void WareInstance::update(Game& game) {
 
 	// Update whether we have a Supply or not
 	if (!transfer_ || !transfer_->get_request()) {
-		if (!supply_) {
+		if (supply_.get() == nullptr) {
 			supply_.reset(new IdleWareSupply(*this));
 		}
 	} else {
