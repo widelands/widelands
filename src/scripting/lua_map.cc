@@ -2342,13 +2342,13 @@ ImmovableDescription
 .. class:: ImmovableDescription
 
    .. graphviz::
-      :align: right
-      :caption:
       
-      digraph dependency {
-         bgcolor="transparent";
-         node [shape=box, style=filled, fillcolor=white];
-         MapObjectDescription -> ImmovableDescription [color=white];
+      graph dependency {
+         bgcolor="transparent"
+         node [shape=box, style=filled, fillcolor=white]
+         edge [color=white]
+
+         MapObjectDescription -- ImmovableDescription
       }
 
 
@@ -4518,7 +4518,7 @@ MapObject
 ---------
 
 .. graphviz::
-   
+
    graph dependency {
       bgcolor="transparent";
       node [shape=box, style=filled, fillcolor=white, fontsize=11]
@@ -5392,9 +5392,11 @@ Building
       bgcolor="transparent";
       node [shape=box, style=filled, fillcolor=white, fontsize=11]
       edge [color=white]
-      MapObject [fillcolor=green, shape=house]
+      MapObject [shape=house]
+      Building [fillcolor=green]
 
-      MapObject -- Building [style=dashed]
+      MapObject -- Building [style=dashed, penwidth=10,
+                             edgetooltip="Via BaseImmovable -> PlayerImmovable"]
       Building-- {ConstructionSite 
       DismantleSite Warehouse ProductionSite MilitarySite TrainingSite}
    }
@@ -5895,6 +5897,20 @@ int LuaDismantleSite::set_has_builder(lua_State* L) {
 /* RST
 Warehouse
 ---------
+
+.. graphviz::
+
+   graph dependency {
+      bgcolor="transparent";
+      node [shape=box, style=filled, fillcolor=white, fontsize=11]
+      edge [color=white]
+      MapObject [shape=house]
+      Warehouse [fillcolor=green]
+
+      MapObject -- Building [style=dashed, penwidth=10,
+                             edgetooltip="Via BaseImmovable -> PlayerImmovable -> Building"]
+      {Building HasWares HasWorkers HasSoldiers} -- Warehouse
+   }
 
 .. class:: Warehouse
 
