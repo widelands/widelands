@@ -37,6 +37,7 @@
 #include "logic/filesystem_constants.h"
 #include "network/crypto.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/color_chooser.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_fsmenu/addons_packager.h"
@@ -2227,14 +2228,17 @@ public:
 		long index = 0;
 		for (const auto& comment : info_.user_comments) {
 			text = "<rt><p>";
-			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag(time_string(comment.timestamp));
-			if (!comment.editor.empty()) {
-				text += "<br>";
+			if (comment.editor.empty()) {
 				text += g_style_manager->font_style(UI::FontStyle::kItalic)
-					       .as_font_tag((boost::format(_("(edited by ‘%1$s’ on %2$s)")) %
-					                     comment.editor % time_string(comment.edit_timestamp))
-					                       .str());
+			           .as_font_tag(time_string(comment.timestamp));
+			} else if (comment.editor == comment.username) {
+				text += g_style_manager->font_style(UI::FontStyle::kItalic)
+						.as_font_tag((boost::format(_("%1$s (edited on %2$s)"))
+						% time_string(comment.timestamp) % time_string(comment.edit_timestamp)).str());
+			} else {
+				text += g_style_manager->font_style(UI::FontStyle::kItalic)
+						.as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)"))
+						% time_string(comment.timestamp) % comment.editor % time_string(comment.edit_timestamp)).str());
 			}
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
@@ -2350,6 +2354,7 @@ private:
             "write_comment", 0, 0, 100, 100, index < 0 ? _("Write Comment") : _("Edit Comment")),
 		info_(info), index_(index),
 		main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		markup_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 		buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 		preview_(&main_box_, 0, 0, 300, 150, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
 		text_(new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu)),
@@ -2368,6 +2373,66 @@ private:
 			buttons_box_.add_space(kRowButtonSpacing);
 			buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
+			auto markup_button = [this](const std::string& name, const std::string& open, const std::string& close, const std::string& title, const std::string& tt) {
+				UI::Button* b = new UI::Button(&markup_box_, name, 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuMenu, title, tt);
+				b->sigclicked.connect([this, open, close]() { apply_format(open, close); });
+				return b;
+			};
+			markup_box_.add(markup_button("markup_bold", "<font bold=true>", "</font>",
+					/** TRANSLATORS: Short for Bold text markup */
+					_("B"), _("Bold")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_italic", "<font italic=true>", "</font>",
+					/** TRANSLATORS: Short for Italic text markup */
+					_("I"), _("Italic")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_line", "<font underline=true>", "</font>",
+					/** TRANSLATORS: Short for Underline text markup */
+					_("_"), _("Underline")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_shadow", "<font shadow=true>", "</font>",
+					/** TRANSLATORS: Short for Shadow text markup */
+					_("S"), _("Shadow")));
+			markup_box_.add_space(kRowButtonSpacing);
+			{
+				UI::Button* b = new UI::Button(&markup_box_, "markup_color", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuMenu,
+						/** TRANSLATORS: Short for Color text markup */
+						_("C"), _("Color…"));
+				b->sigclicked.connect([this]() {
+					UI::ColorChooser c(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, RGBColor(0xffffff), nullptr);
+					if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+						std::string str = "<font color=";
+						str += c.get_color().hex_value();
+						str += ">";
+						apply_format(str, "</font>");
+					}
+				});
+				markup_box_.add(b);
+			}
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_tiny", "<font size=8>", "</font>",
+					/** TRANSLATORS: Short for Tiny text markup */
+					_("1"), _("Tiny")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_small", "<font size=11>", "</font>",
+					/** TRANSLATORS: Short for Small text markup */
+					_("2"), _("Small")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_normal", "<font size=14>", "</font>",
+					/** TRANSLATORS: Short for Medium text markup */
+					_("3"), _("Medium")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_large", "<font size=18>", "</font>",
+					/** TRANSLATORS: Short for Large text markup */
+					_("4"), _("Large")));
+			markup_box_.add_space(kRowButtonSpacing);
+			markup_box_.add(markup_button("markup_huge", "<font size=24>", "</font>",
+					/** TRANSLATORS: Short for Huge text markup */
+					_("5"), _("Huge")));
+			markup_box_.add_space(kRowButtonSpacing);
+
+			main_box_.add(&markup_box_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+			main_box_.add_space(kRowButtonSpacing);
 			main_box_.add(text_, UI::Box::Resizing::kFullSize);
 			main_box_.add_space(kRowButtonSpacing);
 			main_box_.add(&preview_, UI::Box::Resizing::kFullSize);
@@ -2443,10 +2508,28 @@ private:
 		AddOns::AddOnInfo& info_;
 		const long index_;
 
-		UI::Box main_box_, buttons_box_;
+		UI::Box main_box_, markup_box_, buttons_box_;
 		UI::MultilineTextarea preview_;
 		UI::MultilineEditbox* text_;
 		UI::Button ok_, reset_, cancel_;
+
+		void apply_format(const std::string& open_tag, const std::string& close_tag) {
+			const size_t caret = text_->get_caret_pos();
+			if (text_->has_selection()) {
+				std::string str = open_tag;
+				str += text_->get_selected_text();
+				str += close_tag;
+				text_->replace_selected_text(str);
+			} else {
+				std::string str = text_->get_text().substr(0, caret);
+				str += open_tag;
+				str += close_tag;
+				str += text_->get_text().substr(caret);
+				text_->set_text(str);
+				text_->set_caret_pos(caret + open_tag.size());
+			}
+			text_->focus();
+		}
 
 		void reset_text() {
 			text_->set_text(index_ < 0 ? "" : info_.user_comments[index_].message);
