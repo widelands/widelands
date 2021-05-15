@@ -104,6 +104,8 @@ struct EditBoxImpl {
 	Align align;
 };
 
+static const int CARET_BLINKING_DELAY = 500;
+
 EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : Panel(parent,
            style,
@@ -116,7 +118,10 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
      history_active_(false),
      history_position_(-1),
      password_(false),
-     warning_(false) {
+     warning_(false),
+     caret_timer_("", true) {
+	caret_ms = 0;
+	caret_timer_.ms_since_last_query();
 	set_thinks(false);
 
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -191,6 +196,8 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		reset_selection();
 		set_caret_to_cursor_pos(x);
+		caret_ms = CARET_BLINKING_DELAY;
+		caret_timer_.ms_since_last_query();
 		focus();
 		clicked();
 		return true;
@@ -592,32 +599,39 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	if (has_focus()) {
-		// Draw the caret
-		std::string line_to_caret;
-
-		if (password_) {
-			line_to_caret = text_to_asterisk().substr(0, m_->caret);
-		} else {
-			line_to_caret = m_->text.substr(0, m_->caret);
-		}
-
-		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
-		int caret_x = text_width(line_to_caret, m_->font_style(), m_->font_scale);
-
 		const uint16_t fontheight = text_height(m_->font_style(), m_->font_scale);
-
-		const Image* caret_image =
-		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-		                                                         "images/ui_basic/caret_fs.png");
-		Vector2i caretpt = Vector2i::zero();
-		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
-		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
-		dst.blit(caretpt, caret_image);
+		draw_caret(dst, point, fontheight);
 
 		if (m_->mode == EditBoxImpl::Mode::kSelection) {
 			highlight_selection(dst, point, fontheight);
 		}
 	}
+}
+void EditBox::draw_caret(RenderTarget& dst, const Vector2i& point, const uint16_t fontheight) {
+	std::string line_to_caret;
+
+	if (password_) {
+		line_to_caret = text_to_asterisk().substr(0, m_->caret);
+	} else {
+		line_to_caret = m_->text.substr(0, m_->caret);
+	}
+
+	// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
+	int caret_x = text_width(line_to_caret, m_->font_style(), m_->font_scale);
+
+	const Image* caret_image =
+	   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
+                                                            "images/ui_basic/caret_fs.png");
+	Vector2i caretpt = Vector2i::zero();
+	caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
+	caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
+	if (caret_ms > CARET_BLINKING_DELAY) {
+		dst.blit(caretpt, caret_image);
+	}
+	if (caret_ms > 2 * CARET_BLINKING_DELAY) {
+		caret_ms = 0;
+	}
+	caret_ms += caret_timer_.ms_since_last_query();
 }
 
 void EditBox::set_caret_pos(const size_t pos) {
