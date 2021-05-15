@@ -196,8 +196,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		reset_selection();
 		set_caret_to_cursor_pos(x);
-		caret_ms = CARET_BLINKING_DELAY;
-		caret_timer_.ms_since_last_query();
 		focus();
 		clicked();
 		return true;
@@ -515,6 +513,12 @@ void EditBox::delete_selected_text() {
 	m_->caret = start;
 	reset_selection();
 	changed();
+}
+
+void EditBox::focus(bool topcaller) {
+	Panel::focus(topcaller);
+	caret_ms = CARET_BLINKING_DELAY;
+	caret_timer_.ms_since_last_query();
 }
 
 void EditBox::draw(RenderTarget& dst) {

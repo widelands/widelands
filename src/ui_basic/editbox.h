@@ -83,6 +83,7 @@ struct EditBox : public Panel {
 
 	void set_caret_pos(size_t pos);
 	size_t caret_pos() const;
+	void focus(bool topcaller = true);
 
 private:
 	std::unique_ptr<EditBoxImpl> m_;
