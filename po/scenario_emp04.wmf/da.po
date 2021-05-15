@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -1130,11 +1130,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
+"I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
-"Jeg tænker vi skal kigge nærmere på sagen og åbne bygningsvinduet for en af "
-"dem."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
@@ -1384,12 +1381,8 @@ msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
+msgid "Perhaps we should train them further in the arena as well."
 msgstr ""
-"Husk, vis skal fremstille træspyd og hjelme for at rekruttere soldater i "
-"barakkerne. Måske bør vi derudover træne dem i arenaen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"
