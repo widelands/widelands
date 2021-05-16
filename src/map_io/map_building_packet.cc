@@ -72,11 +72,8 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 						//  Get the tribe and the building index.
 						if (Player* const player = egbase.get_safe_player(p)) {
-							Notifications::publish(NoteMapObjectDescription(
-							   name, NoteMapObjectDescription::LoadType::kObject));
-
 							const TribeDescr& tribe = player->tribe();
-							const DescriptionIndex index = tribe.safe_building_index(name);
+							const DescriptionIndex index = egbase.mutable_descriptions()->load_building(name);
 							const BuildingDescr* bd = tribe.get_building_descr(index);
 							// Check if tribe has this building itself
 							// OR alternatively if this building might be a conquered militarysite
