@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-10 10:43+0000\n"
-"PO-Revision-Date: 2021-05-12 08:22+0000\n"
+"POT-Creation-Date: 2021-05-13 11:20+0000\n"
+"PO-Revision-Date: 2021-05-14 21:06+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1290,8 +1290,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Maniókafőzde"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1930,6 +1930,7 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Vadonőrző kunyhó"
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -5050,7 +5051,7 @@ msgstr "Szőlőtőke (kicsi)"
 #: ../../data/tribes/immovables/grapevine/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Szőlőtőke (pici)"
+msgstr "Szőlőtőke (apró)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/burning/init.lua:8

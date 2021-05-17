@@ -7,7 +7,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # Arex <arex@ngs.ru>, 2015
 # CupIvan <mail@cupivan.ru>, 2017,2019
-# Mironenko Dmitry, 2021
+# nskdmitry, 2021
 # George Matsune <georg29387878@gmail.com>, 2017
 # CupIvan <mail@cupivan.ru>, 2015
 # Sergey Trofimov <sarg@sarg.org.ru>, 2021
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-10 10:43+0000\n"
-"PO-Revision-Date: 2021-05-11 14:25+0000\n"
-"Last-Translator: Mironenko Dmitry\n"
+"POT-Creation-Date: 2021-05-13 11:20+0000\n"
+"PO-Revision-Date: 2021-05-15 11:57+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1101,13 +1101,13 @@ msgstr "На нашу деревянную башню напали."
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:69
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
-msgstr ""
+msgstr "Наши воины пали, защищая деревянную башню."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:71
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
-msgstr ""
+msgstr "Нападение на деревянную башню удалось отбить."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
@@ -1119,31 +1119,31 @@ msgstr "Высокая деревянная башня"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your high wooden tower."
-msgstr ""
+msgstr "Высокая деревянная башня взята под охрану."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
 msgctxt "frisians_building"
 msgid "Your high wooden tower discovered an aggressor."
-msgstr ""
+msgstr "Враг в окрестности высокой деревянной башни."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:47
 msgctxt "frisians_building"
 msgid "Your high wooden tower is under attack."
-msgstr ""
+msgstr "На нашу высокую деревянную башню напали."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:49
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the high wooden tower."
-msgstr ""
+msgstr "Наши воины пали, защищая высокую деревянную башню."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the high wooden tower."
-msgstr ""
+msgstr "Нападение на высокую деревянную башню удалось отбить."
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
@@ -1163,7 +1163,7 @@ msgstr "Площадка демонтажа"
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "Плантация маниоки"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1248,12 +1248,12 @@ msgstr "работает"
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 msgid "planting cassava"
-msgstr ""
+msgstr "сеет маниоку"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
 msgid "harvesting cassava"
-msgstr ""
+msgstr "собирает маниоку"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1286,16 +1286,16 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "У фермера с этой плантации маниоки нет свободного места под посев."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
-msgstr ""
+msgstr "Пекарня маниоки"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
@@ -1306,96 +1306,96 @@ msgstr "печет хлеб"
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
 msgctxt "amazons_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Печь углежога"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
 msgid "producing charcoal"
-msgstr ""
+msgstr "производит уголь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr ""
+msgstr "Какаоварильня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
 msgid "brewing chocolate"
-msgstr ""
+msgstr "варит шоколад"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Cocoa Farm"
-msgstr ""
+msgstr "Ферма какао"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
 msgid "planting cocoa"
-msgstr ""
+msgstr "садит какао"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:63
 msgid "harvesting cocoa"
-msgstr ""
+msgstr "собирает какао-бобы"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "Ферме какао не хватает свободного места под посевы."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr ""
+msgstr "Текстильщик"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
 msgid "sewing a tunic"
-msgstr ""
+msgstr "шьет тунику"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
 msgid "making a light wooden armor"
-msgstr ""
+msgstr "мастерит легкую деревянную броню"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
 msgid "making a wooden helmet"
-msgstr ""
+msgstr "мастерит деревянный шлем"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "шьет воинский плащ"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:117
 msgid "making sturdy boots"
-msgstr ""
+msgstr "делает крепкие ботинки"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:128
 msgid "making swift boots"
-msgstr ""
+msgstr "делает легкую обувь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
 msgid "making hero boots"
-msgstr ""
+msgstr "делает командирские ботинки"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
 msgid "making a padded vest"
-msgstr ""
+msgstr "шьет подбитую мехом куртку"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1407,13 +1407,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "паромная переправа"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
 msgctxt "amazons_building"
 msgid "Food Preserver"
-msgstr ""
+msgstr "Продуктовый склад"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
@@ -1430,7 +1430,7 @@ msgstr "готовит паёк"
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
 msgctxt "amazons_building"
 msgid "Furnace"
-msgstr ""
+msgstr "Печь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
@@ -1445,20 +1445,20 @@ msgstr "выплавляет золото"
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
 msgctxt "amazons_building"
 msgid "Gardening Center"
-msgstr ""
+msgstr "Центр садоводства"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
 msgid "enhancing the fertility of land"
-msgstr ""
+msgstr "обустроить ландшафт"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Gold Digger Dwelling"
-msgstr ""
+msgstr "Жилище золотодобытчика"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
@@ -1509,37 +1509,37 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr ""
+msgstr "Главная золотая жила хижины золотодобытчика истощилась. Отныне отдача от затрат на ее использование сильно уменьшится. Быть может, вам стоит разрушить или разобрать это здание."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr ""
+msgstr "Домик лесника"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
 msgid "gathering"
-msgstr ""
+msgstr "собирает съестное"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:48
 msgid "gathering meat"
-msgstr ""
+msgstr "добывает мясо"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:56
 msgid "gathering fish"
-msgstr ""
+msgstr "добывает рыбу"
 
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:65
 msgid "No Game, No Fish"
-msgstr ""
+msgstr "Нет дичи и улова"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:67
 msgid "Out of Game and Fish"
-msgstr ""
+msgstr "Больше нет ни дичи, ни улова"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:69
@@ -1547,25 +1547,25 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr ""
+msgstr "Лесник не может найти дичь и рыбу в рабочей области вокруг своего домика."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
 msgctxt "amazons_building"
 msgid "Initiation Site"
-msgstr ""
+msgstr "Тренировочный плац"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
 msgctxt "amazons_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "вербует солдат"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Jungle Preserver’s Hut"
-msgstr ""
+msgstr "Хижина хранителя джунглей"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
@@ -1580,12 +1580,12 @@ msgstr "сажает деревья"
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr ""
+msgstr "Хижина собирателя лиан"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
 msgid "cutting lianas"
-msgstr ""
+msgstr "срезает лианы"
 
 #. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
@@ -1599,7 +1599,7 @@ msgstr "Нет деревьев"
 
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
 msgid "No Tree to Cut Lianas"
-msgstr ""
+msgstr "Нет обвитых лианами деревьев"
 
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
 msgctxt "amazons_building"
@@ -1607,72 +1607,72 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr ""
+msgstr "Собиратель лиан не может найти деревья в рабочей области вокруг своей хижины. Быть может, вам стоит разрушить или разобрать это сооружение или построить рядом хижину хранителя джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr ""
+msgstr "Хижина лесозаготовителя"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:39
 msgid "harvesting balsa"
-msgstr ""
+msgstr "садит бальзамин"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:48
 msgid "harvesting rubber"
-msgstr ""
+msgstr "сбор каучука"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:57
 msgid "harvesting ironwood"
-msgstr ""
+msgstr "рубит железное дерево"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Plantation"
-msgstr ""
+msgstr "Посадка ценных пород деревьев"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:56
 msgid "planting balsa tree"
-msgstr ""
+msgstr "растит бальзамин"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:66
 msgid "planting rubber tree"
-msgstr ""
+msgstr "посадка каучуконосов"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:76
 msgid "planting ironwood tree"
-msgstr ""
+msgstr "садит железное дерево"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
 msgctxt "amazons_building"
 msgid "Rope Weaver Booth"
-msgstr ""
+msgstr "Будка канатчика"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
 msgid "making a rope"
-msgstr ""
+msgstr "вьет канат"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Хижина разведчика"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
@@ -1692,7 +1692,7 @@ msgstr "разведывает"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
 msgctxt "amazons_building"
 msgid "Shipyard"
-msgstr ""
+msgstr "Верфь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
@@ -1708,7 +1708,7 @@ msgstr "строит корабль"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Каменотесный цех"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
@@ -1746,7 +1746,7 @@ msgstr "делает кирку"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
 msgid "making a machete"
-msgstr ""
+msgstr "кует мачете"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1776,7 +1776,7 @@ msgstr "делает молоток"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "делает зубило"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
@@ -1790,36 +1790,36 @@ msgstr "Производит иглы"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 msgid "making a stone bowl"
-msgstr ""
+msgstr "вырезает каменную чашу"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
 msgid "making a wooden spear"
-msgstr ""
+msgstr "точит кол"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
 msgid "making a stone-tipped spear"
-msgstr ""
+msgstr "делает копье"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
 msgid "making a hardened spear"
-msgstr ""
+msgstr "делает пику"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
-msgstr ""
+msgstr "Хижина каменотеса"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr ""
+msgstr "колит гранитные глыбы"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
@@ -1842,13 +1842,13 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr ""
+msgstr "Гранитная шахта"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1885,25 +1885,25 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Основная жила гранита в этой шахте истощена. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разобрать или разрушить эту шахту."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Tapir Farm"
-msgstr ""
+msgstr "Тапирная ферма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
 msgctxt "amazons_building"
 msgid "breeding tapir"
-msgstr ""
+msgstr "разводит тапиров"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
-msgstr ""
+msgstr "Хижина водовоза"
 
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
@@ -1926,14 +1926,15 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr ""
+msgstr "Носильщик, работающий у этого колодца, не может найти воду в его окрестности."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr ""
+msgstr "Палатка дикосея"
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -1945,13 +1946,13 @@ msgstr "разводит рыбу"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:58
 msgid "releasing game"
-msgstr ""
+msgstr "разводит дичь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Woodcutter’s Hut"
-msgstr ""
+msgstr "Хижина лесоруба"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:47
@@ -1976,7 +1977,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr ""
+msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого домика лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик хранителя джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2133,7 +2134,7 @@ msgstr "добывает алмазы"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:154
 msgid "No Crystals"
-msgstr ""
+msgstr "Нет кристаллов"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:155
 msgid "Main Crystal Vein Exhausted"
@@ -2172,7 +2173,7 @@ msgstr "У фермера из этой фермы нет почвы приго�
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "паромная переправа"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2777,7 +2778,7 @@ msgstr "У фермера с этой фермы нет почвы пригод�
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Паромная переправа"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
@@ -3224,7 +3225,7 @@ msgstr "У фермера с этой фермы нет почвы пригод�
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Паромная переправа"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
@@ -3727,22 +3728,22 @@ msgstr "обжигает кирпич"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Домик углежога"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:68
 msgid "making a charcoal stack"
-msgstr ""
+msgstr "запекает уголь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
 msgid "collecting coal"
-msgstr ""
+msgstr "собирает уголь"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:90
 msgid "Out of Clay Ponds"
-msgstr ""
+msgstr "Глиняные пруды вычерпаны"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:91
 msgctxt "frisians_building"
@@ -3751,7 +3752,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "Углежог из этого домика не может найти не вычерпанные глинистые пруды в своей рабочей области. Рассмотрите вопрос о выкапывании рядом глиняного карьера для обеспечения этого углежога всем необходимым, либо разобрать или разрушить это строение."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3873,7 +3874,7 @@ msgstr "Фермер, работающий на этой ферме, не мож
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Паромная переправа"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
@@ -4192,7 +4193,7 @@ msgstr "Лесоруб не может найти деревьев в рабоч
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
 msgctxt "amazons_building"
 msgid "Training Glade"
-msgstr ""
+msgstr "Тренировочный полигон"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
@@ -4213,56 +4214,56 @@ msgstr "спит"
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "повысить ловкость солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "повысить ловкость солдата с 1 до 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr ""
+msgstr "повысить ловкость солдата с 2 до 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "повысить живучесть солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "повысить живучесть солдата с 1 до 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "повысить живучесть солдата с 2 до 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "повысить защиту солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "повысить защиту солдата с 1 до 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
 msgctxt "amazons_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4270,25 +4271,25 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Нет солдат для этого уровня тренировки!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Место сбора войск"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "повысить атаку солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "повысить атаку солдата с 1 до 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
@@ -4326,7 +4327,7 @@ msgstr "повышает атаку солдата с 3 до 4 уровня"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4334,7 +4335,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Нет солдат для этого уровня тренировки!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4396,7 +4397,7 @@ msgstr "повышает уклонение солдата с 1 до 2 уров�
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:218
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4404,7 +4405,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:220
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Нет солдат для этого уровня тренировки!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -4479,7 +4480,7 @@ msgstr "повышает уклонение солдата с 0 до 1 уров�
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4488,7 +4489,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Нет солдат для этого уровня тренировки!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4597,7 +4598,7 @@ msgstr "повышает здоровье солдата с 1 до 2 уровн�
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
 msgctxt "frisians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4605,7 +4606,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Нет солдат для этого уровня тренировки!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -4647,19 +4648,19 @@ msgstr "повышает защиту солдата с 0 до 1 уровня"
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Штаб"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
 msgctxt "amazons_building"
 msgid "Port"
-msgstr ""
+msgstr "Порт"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Склад"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -4746,7 +4747,7 @@ msgstr "Склад"
 #: ../../data/tribes/economy_profiles/empire:4
 #: ../../data/tribes/economy_profiles/frisians:4
 msgid "Efficiency"
-msgstr ""
+msgstr "Продуктивность"
 
 #: ../../data/tribes/economy_profiles/amazons:5
 #: ../../data/tribes/economy_profiles/atlanteans:5
@@ -4754,7 +4755,7 @@ msgstr ""
 #: ../../data/tribes/economy_profiles/empire:5
 #: ../../data/tribes/economy_profiles/frisians:5
 msgid "Stockpile"
-msgstr ""
+msgstr "Запасено"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:70
@@ -4906,19 +4907,19 @@ msgstr "Облепиха (зрелое)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:14
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "Босция (крохотная)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:38
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "Босция (маленькая)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:62
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "Босция (средняя)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:86
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "Босция (срублена)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:14
 msgid "Strawberries (tiny)"
@@ -4970,31 +4971,31 @@ msgstr "Козельцовое поле (крохотное)"
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (harvested)"
-msgstr ""
+msgstr "Поле маниоки (убрано)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (medium)"
-msgstr ""
+msgstr "Поле маниоки (среднее)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (ripe)"
-msgstr ""
+msgstr "Поле маниоки (крохотное)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (small)"
-msgstr ""
+msgstr "Поле маниоки (малое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (tiny)"
-msgstr ""
+msgstr "Поле маниоки (крошечное)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5060,13 +5061,13 @@ msgstr "Виноград (крохотный)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:8
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "Печь горшечника"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:8
 msgctxt "immovable"
 msgid "Pond With Charcoal"
-msgstr ""
+msgstr "Глиняный пруд"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:8
@@ -5187,7 +5188,7 @@ msgstr "Немного железа"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:123
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "Немного хрусталя"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:146
@@ -5211,7 +5212,7 @@ msgstr "Много железа"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "Много хрусталя"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:108
@@ -5242,7 +5243,7 @@ msgstr "Строящийся корабль"
 #: ../../data/tribes/immovables/trees/balsa/init.lua:236
 #: ../../data/tribes/immovables/trees/balsa/init.lua:314
 msgid "Balsa Tree (Sapling)"
-msgstr ""
+msgstr "Бальзамовое дерево (молодняк)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:98
@@ -5250,7 +5251,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:254
 #: ../../data/tribes/immovables/trees/balsa/init.lua:332
 msgid "Balsa Tree (Pole)"
-msgstr ""
+msgstr "Бальзамовое дерево (средневозрастное)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:116
@@ -5258,7 +5259,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:272
 #: ../../data/tribes/immovables/trees/balsa/init.lua:350
 msgid "Balsa Tree (Mature)"
-msgstr ""
+msgstr "Бальзамовое дерево (спелое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:134
@@ -5266,7 +5267,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:290
 #: ../../data/tribes/immovables/trees/balsa/init.lua:368
 msgid "Balsa Tree (Old)"
-msgstr ""
+msgstr "Бальзамовое дерево (старое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:136
@@ -5274,32 +5275,32 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:292
 #: ../../data/tribes/immovables/trees/balsa/init.lua:370
 msgid "Balsa Tree"
-msgstr ""
+msgstr "Бальзамовое дерево"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:8
 msgid "Cocoa Tree (sapling)"
-msgstr ""
+msgstr "Какао-дерево (молодняк)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:32
 msgid "Cocoa Tree (pole)"
-msgstr ""
+msgstr "Какао-дерево (средневозрастное)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:56
 msgid "Cocoa Tree (mature)"
-msgstr ""
+msgstr "Какао-дерево (спелое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:80
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "Какао-дерево (старое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Сухостой"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:80
@@ -5307,7 +5308,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:236
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:314
 msgid "Ironwood Tree (Sapling)"
-msgstr ""
+msgstr "Железное дерево (молодняк)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:98
@@ -5315,7 +5316,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:254
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:332
 msgid "Ironwood Tree (Pole)"
-msgstr ""
+msgstr "Железное дерево (средневозрастное)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:116
@@ -5323,7 +5324,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:272
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:350
 msgid "Ironwood Tree (Mature)"
-msgstr ""
+msgstr "Железное дерево (зрелое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:134
@@ -5331,7 +5332,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:290
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:368
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr "Железное дерево (старое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:136
@@ -5339,7 +5340,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:292
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:370
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "Железное дерево"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:80
@@ -5347,7 +5348,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:236
 #: ../../data/tribes/immovables/trees/rubber/init.lua:314
 msgid "Rubber Tree (Sapling)"
-msgstr ""
+msgstr "Каучуконос (молодняк)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:98
@@ -5355,7 +5356,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:254
 #: ../../data/tribes/immovables/trees/rubber/init.lua:332
 msgid "Rubber Tree (Pole)"
-msgstr ""
+msgstr "Каучуконос (средневозрастное)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:116
@@ -5363,7 +5364,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:272
 #: ../../data/tribes/immovables/trees/rubber/init.lua:350
 msgid "Rubber Tree (Mature)"
-msgstr ""
+msgstr "Каучуконос (спелое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:134
@@ -5371,7 +5372,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:290
 #: ../../data/tribes/immovables/trees/rubber/init.lua:368
 msgid "Rubber Tree (Old)"
-msgstr ""
+msgstr "Каучуконос (старое)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:136
@@ -5379,7 +5380,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:292
 #: ../../data/tribes/immovables/trees/rubber/init.lua:370
 msgid "Rubber Tree"
-msgstr ""
+msgstr "Каучуконос"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -5422,12 +5423,12 @@ msgstr "Команда разработчиков Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons (experimental)"
-msgstr ""
+msgstr "Амазонцы (экспериментальное)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid ""
 "The people of the amazonian jungle. This tribe is still under development."
-msgstr ""
+msgstr "Жители джунглей Амазонки. Это племя все еще находится в стадии разработки."
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -5534,7 +5535,7 @@ msgstr[3] ""
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
 msgid "Discovery"
-msgstr ""
+msgstr "Открытие"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:13
@@ -5544,7 +5545,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr ""
+msgstr "Начать игру с тремя кораблями посреди океана и ресурсами впритык"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5590,7 +5591,7 @@ msgstr "Начать игру только со штабом в собствен
 #: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
 msgid "New World"
-msgstr ""
+msgstr "Новый свет"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:13
@@ -5599,7 +5600,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr ""
+msgstr "Начать с полными припасов семью кораблями посреди океана"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:11
@@ -5608,7 +5609,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
 msgid "Poor Hamlet"
-msgstr ""
+msgstr "Бедный Гамлет"
 
 #. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
 #. condition
@@ -5620,7 +5621,7 @@ msgstr ""
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "Начать игру лишь со складом и просто нулевой экономикой. Внимание: боты не могут полноценно играть в этом режиме."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5628,13 +5629,13 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
 #: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid "Be careful"
-msgstr ""
+msgstr "Будь внимателен!"
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Вы начинаете с товарами, которые хватит лишь для изготовления необходимых инструментов. Будьте внимательны, не изготовьте ненужного."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5643,7 +5644,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr ""
+msgstr "Рисковая застава"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:13
@@ -5655,7 +5656,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr ""
+msgstr "Начать игру лишь со штабом и кучкой товаров для подъема экономики. Внимание: боты не могут полноценно играть в этом режиме."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5758,7 +5759,7 @@ msgstr[3] ""
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Развивать вашу экономику придется, имея на старте только железо. Будьте внимательны, чтобы не спустить железо на ненужный инструмент."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
@@ -5869,11 +5870,11 @@ msgstr[3] ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
-msgstr ""
+msgstr "Фризы"
 
 #: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
-msgstr ""
+msgstr "Жители сурового побережья Северного моря."
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -5958,19 +5959,19 @@ msgstr "Статичные объекты"
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Судно"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:41
 msgctxt "shipname"
 msgid "Orinoco"
-msgstr ""
+msgstr "Ориноко"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:43
 msgctxt "shipname"
 msgid "Amazonas"
-msgstr ""
+msgstr "Амазонка"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:45
@@ -6006,103 +6007,103 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:83
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Судно"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:107
 msgctxt "shipname"
 msgid "Abaco"
-msgstr ""
+msgstr "Абако"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:109
 msgctxt "shipname"
 msgid "Agate"
-msgstr ""
+msgstr "Агат"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:111
 msgctxt "shipname"
 msgid "Alexandrite"
-msgstr ""
+msgstr "Александрит"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:113
 msgctxt "shipname"
 msgid "Amber"
-msgstr ""
+msgstr "Янтарь"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:115
 msgctxt "shipname"
 msgid "Amethyst"
-msgstr ""
+msgstr "Аметист"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:117
 msgctxt "shipname"
 msgid "Anguilla"
-msgstr ""
+msgstr "Анжулия"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:119
 msgctxt "shipname"
 msgid "Antigua"
-msgstr ""
+msgstr "Антигуа"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:121
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr ""
+msgstr "Аквамарин"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:123
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr ""
+msgstr "Владыка Атлантиды"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:125
 msgctxt "shipname"
 msgid "Atlantis"
-msgstr ""
+msgstr "Атлантида"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:127
 msgctxt "shipname"
 msgid "Bahama"
-msgstr ""
+msgstr "Багамы"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:129
 msgctxt "shipname"
 msgid "Barbados"
-msgstr ""
+msgstr "Барбадос"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:131
 msgctxt "shipname"
 msgid "Barbuda"
-msgstr ""
+msgstr "Бермуды"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:133
 msgctxt "shipname"
 msgid "Beryl"
-msgstr ""
+msgstr "Берил"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:135
 msgctxt "shipname"
 msgid "Blanquilla"
-msgstr ""
+msgstr "Бланкулия"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:137
 msgctxt "shipname"
 msgid "Caicos"
-msgstr ""
+msgstr "Кайкос"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:139
@@ -6114,115 +6115,115 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:141
 msgctxt "shipname"
 msgid "Cat’s Eye"
-msgstr ""
+msgstr "Кошачий глаз"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:143
 msgctxt "shipname"
 msgid "Citrine"
-msgstr ""
+msgstr "Цитрин"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:145
 msgctxt "shipname"
 msgid "Colionder"
-msgstr ""
+msgstr "Колиондер"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:147
 msgctxt "shipname"
 msgid "Dominica"
-msgstr ""
+msgstr "Доминика"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:149
 msgctxt "shipname"
 msgid "Eleuthera"
-msgstr ""
+msgstr "Элеутера"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:151
 msgctxt "shipname"
 msgid "Emerald"
-msgstr ""
+msgstr "Изумруд"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:153
 msgctxt "shipname"
 msgid "Grenada"
-msgstr ""
+msgstr "Гренада"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:155
 msgctxt "shipname"
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Галиполи"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:157
 msgctxt "shipname"
 msgid "Inagua"
-msgstr ""
+msgstr "Инагуа"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr ""
+msgstr "Жандлин"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:161
 msgctxt "shipname"
 msgid "Juventud"
-msgstr ""
+msgstr "Жувентюд"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:163
 msgctxt "shipname"
 msgid "King Ajanthul"
-msgstr ""
+msgstr "Король Ажантул"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:165
 msgctxt "shipname"
 msgid "King Askandor"
-msgstr ""
+msgstr "Король Аскендер"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:167
 msgctxt "shipname"
 msgid "Kitts"
-msgstr ""
+msgstr "Киттс"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Loftomor"
-msgstr ""
+msgstr "Лофтомор"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:171
 msgctxt "shipname"
 msgid "Malachite"
-msgstr ""
+msgstr "Малахит"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:173
 msgctxt "shipname"
 msgid "Martinique"
-msgstr ""
+msgstr "Мартиника"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:175
 msgctxt "shipname"
 msgid "Montserrat"
-msgstr ""
+msgstr "Монсеррат"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:177
 msgctxt "shipname"
 msgid "Moonstone"
-msgstr ""
+msgstr "Лунный камень"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:179
@@ -6234,31 +6235,31 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:181
 msgctxt "shipname"
 msgid "Nassau"
-msgstr ""
+msgstr "Нассау"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:183
 msgctxt "shipname"
 msgid "Nevis"
-msgstr ""
+msgstr "Невис"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Obsidian"
-msgstr ""
+msgstr "Обсидан"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:187
 msgctxt "shipname"
 msgid "Onyx"
-msgstr ""
+msgstr "Оникс"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Opol"
-msgstr ""
+msgstr "Опал"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:191
@@ -6270,31 +6271,31 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:193
 msgctxt "shipname"
 msgid "Ostur"
-msgstr ""
+msgstr "Остер"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:195
 msgctxt "shipname"
 msgid "Pearl"
-msgstr ""
+msgstr "Жемчужина"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:197
 msgctxt "shipname"
 msgid "Sapphire"
-msgstr ""
+msgstr "Сапфир"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:199
 msgctxt "shipname"
 msgid "Satul"
-msgstr ""
+msgstr "Сатул"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:201
 msgctxt "shipname"
 msgid "Sidolus"
-msgstr ""
+msgstr "Сидолюс"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:203
@@ -6306,193 +6307,193 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:205
 msgctxt "shipname"
 msgid "Spider"
-msgstr ""
+msgstr "Паучиха"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:207
 msgctxt "shipname"
 msgid "Spinel"
-msgstr ""
+msgstr "Шпинель"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:209
 msgctxt "shipname"
 msgid "Sunstone"
-msgstr ""
+msgstr "Янтарь"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:211
 msgctxt "shipname"
 msgid "Tiger Eye"
-msgstr ""
+msgstr "Тигровый глаз"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:213
 msgctxt "shipname"
 msgid "Tobago"
-msgstr ""
+msgstr "Тобаго"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:215
 msgctxt "shipname"
 msgid "Topaz"
-msgstr ""
+msgstr "Топаз"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:217
 msgctxt "shipname"
 msgid "Tortuga"
-msgstr ""
+msgstr "Тортуга"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Tourmaline"
-msgstr ""
+msgstr "Турмалин"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:221
 msgctxt "shipname"
 msgid "Trinidad"
-msgstr ""
+msgstr "Тринидад"
 
 #. TRANSLATORS: This is the Barbarians' ship's name used in lists of units
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Судно"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:28
 msgctxt "shipname"
 msgid "Agilaz"
-msgstr ""
+msgstr "Агилиас"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:30
 msgctxt "shipname"
 msgid "Aslaug"
-msgstr ""
+msgstr "Аслуг"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:32
 msgctxt "shipname"
 msgid "Baldr"
-msgstr ""
+msgstr "Бальдр"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:34
 msgctxt "shipname"
 msgid "Bear"
-msgstr ""
+msgstr "Бер"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:36
 msgctxt "shipname"
 msgid "Beowulf"
-msgstr ""
+msgstr "Беовульф"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:38
 msgctxt "shipname"
 msgid "Boldreth"
-msgstr ""
+msgstr "Болдрет"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:40
 msgctxt "shipname"
 msgid "Chat’Karuth"
-msgstr ""
+msgstr "Чат'Карут"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:42
 msgctxt "shipname"
 msgid "Dellingr"
-msgstr ""
+msgstr "Делингр"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:44
 msgctxt "shipname"
 msgid "Fulla"
-msgstr ""
+msgstr "Фулла"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:46
 msgctxt "shipname"
 msgid "Gersemi"
-msgstr ""
+msgstr "Герсеми"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:48
 msgctxt "shipname"
 msgid "Hagbard"
-msgstr ""
+msgstr "Хагбард"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:50
 msgctxt "shipname"
 msgid "Heidrek"
-msgstr ""
+msgstr "Хейдрик"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:52
 msgctxt "shipname"
 msgid "Heimdallr"
-msgstr ""
+msgstr "Хеймдалр"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:54
 msgctxt "shipname"
 msgid "Hnoss"
-msgstr ""
+msgstr "Хнос"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:56
 msgctxt "shipname"
 msgid "Hrothgar"
-msgstr ""
+msgstr "Хротгар"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:58
 msgctxt "shipname"
 msgid "Ingeld"
-msgstr ""
+msgstr "Ингельд"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:60
 msgctxt "shipname"
 msgid "Karl Hundason"
-msgstr ""
+msgstr "Карл Хьюндсон"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:62
 msgctxt "shipname"
 msgid "Khantrukh"
-msgstr ""
+msgstr "Хантрух"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:64
 msgctxt "shipname"
 msgid "Lynx"
-msgstr ""
+msgstr "Рысь"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:66
 msgctxt "shipname"
 msgid "Mani"
-msgstr ""
+msgstr "Мани"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:68
 msgctxt "shipname"
 msgid "Odin"
-msgstr ""
+msgstr "Водан"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:70
 msgctxt "shipname"
 msgid "Red Fox"
-msgstr ""
+msgstr "Красный лис"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
 #: ../../data/tribes/ships/barbarians/init.lua:72
@@ -6504,13 +6505,13 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:74
 msgctxt "shipname"
 msgid "Sigmund"
-msgstr ""
+msgstr "Зигмунд"
 
 #. TRANSLATORS: This Barbarian ship is named after a barbarian bard
 #: ../../data/tribes/ships/barbarians/init.lua:76
 msgctxt "shipname"
 msgid "Sigurd"
-msgstr ""
+msgstr "Сигурд"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:78
@@ -6522,109 +6523,109 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:80
 msgctxt "shipname"
 msgid "Thor"
-msgstr ""
+msgstr "Тор"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:82
 msgctxt "shipname"
 msgid "Thron"
-msgstr ""
+msgstr "Трун"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:84
 msgctxt "shipname"
 msgid "Ullr"
-msgstr ""
+msgstr "Ульрик"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:86
 msgctxt "shipname"
 msgid "Valdar"
-msgstr ""
+msgstr "Вальдр"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:88
 msgctxt "shipname"
 msgid "Vili"
-msgstr ""
+msgstr "Виле"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:90
 msgctxt "shipname"
 msgid "Volf"
-msgstr ""
+msgstr "Волк"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:92
 msgctxt "shipname"
 msgid "Wild Boar"
-msgstr ""
+msgstr "Секач"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:94
 msgctxt "shipname"
 msgid "Wolverine"
-msgstr ""
+msgstr "Росомаха"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:96
 msgctxt "shipname"
 msgid "Yrsa"
-msgstr ""
+msgstr "Юрса"
 
 #. TRANSLATORS: This is the Empire's ship's name used in lists of units
 #: ../../data/tribes/ships/empire/init.lua:8
 msgctxt "empire_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Судно"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:28
 msgctxt "shipname"
 msgid "Adriatic Sea"
-msgstr ""
+msgstr "Адриатика"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:30
 msgctxt "shipname"
 msgid "Alexandria"
-msgstr ""
+msgstr "Алексадрия"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:32
 msgctxt "shipname"
 msgid "Amalea"
-msgstr ""
+msgstr "Амелия"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:34
 msgctxt "shipname"
 msgid "Amolius"
-msgstr ""
+msgstr "Амолий"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
 msgid "Apollo"
-msgstr ""
+msgstr "Апполон"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:38
 msgctxt "shipname"
 msgid "Augustus"
-msgstr ""
+msgstr "Август"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:40
 msgctxt "shipname"
 msgid "Azurea Sea"
-msgstr ""
+msgstr "Лазурия"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:42
 msgctxt "shipname"
 msgid "Baltic Sea"
-msgstr ""
+msgstr "Балтика"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:44
@@ -6636,229 +6637,229 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:46
 msgctxt "shipname"
 msgid "Ben Hur"
-msgstr ""
+msgstr "Бен-Гур"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:48
 msgctxt "shipname"
 msgid "Bounty"
-msgstr ""
+msgstr "Сокровище"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:50
 msgctxt "shipname"
 msgid "Brutus"
-msgstr ""
+msgstr "Брут"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:52
 msgctxt "shipname"
 msgid "Caligula"
-msgstr ""
+msgstr "Калигула"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:54
 msgctxt "shipname"
 msgid "Camilla"
-msgstr ""
+msgstr "Камелия"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:56
 msgctxt "shipname"
 msgid "Carrara"
-msgstr ""
+msgstr "Карэрра"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:58
 msgctxt "shipname"
 msgid "Caesar"
-msgstr ""
+msgstr "Цезарь"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:60
 msgctxt "shipname"
 msgid "Cicero"
-msgstr ""
+msgstr "Циреро"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:62
 msgctxt "shipname"
 msgid "Claudius"
-msgstr ""
+msgstr "Клавдий"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:64
 msgctxt "shipname"
 msgid "Diana"
-msgstr ""
+msgstr "Диана"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:66
 msgctxt "shipname"
 msgid "Domitianus"
-msgstr ""
+msgstr "Властитель"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Empire Glory"
-msgstr ""
+msgstr "Слава империи"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
 msgctxt "shipname"
 msgid "Faustulus"
-msgstr ""
+msgstr "Фастул"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Galba"
-msgstr ""
+msgstr "Гельб"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
 msgctxt "shipname"
 msgid "Gallus"
-msgstr ""
+msgstr "Галия"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:76
 msgctxt "shipname"
 msgid "Ianus"
-msgstr ""
+msgstr "Янус"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:78
 msgctxt "shipname"
 msgid "Iulius Caesar"
-msgstr ""
+msgstr "Юлий Цезарь"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Iuno"
-msgstr ""
+msgstr "Яно"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:82
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr ""
+msgstr "Юпитер"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Latium"
-msgstr ""
+msgstr "Лаций"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Latonia"
-msgstr ""
+msgstr "Латония"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
 msgid "Leonardo"
-msgstr ""
+msgstr "Леонардо"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90
 msgctxt "shipname"
 msgid "Liguria"
-msgstr ""
+msgstr "Лигурия"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:92
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Луций"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
 msgid "Marble"
-msgstr ""
+msgstr "Мрамор"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
 msgid "Mars"
-msgstr ""
+msgstr "Марс"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:98
 msgctxt "shipname"
 msgid "Minerva"
-msgstr ""
+msgstr "Минерва"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
 msgid "Neptune"
-msgstr ""
+msgstr "Нептун"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:102
 msgctxt "shipname"
 msgid "Nero"
-msgstr ""
+msgstr "Нерон"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:104
 msgctxt "shipname"
 msgid "Nerva"
-msgstr ""
+msgstr "Нерва"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:106
 msgctxt "shipname"
 msgid "Octavianus"
-msgstr ""
+msgstr "Октавий"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:108
 msgctxt "shipname"
 msgid "Otho"
-msgstr ""
+msgstr "Отто"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
 msgid "Pluto"
-msgstr ""
+msgstr "Плутон"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Portus Bellus"
-msgstr ""
+msgstr "Портубеллум"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
 msgctxt "shipname"
 msgid "Quirinus"
-msgstr ""
+msgstr "Квириний"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:116
 msgctxt "shipname"
 msgid "Remus"
-msgstr ""
+msgstr "Рем"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:118
 msgctxt "shipname"
 msgid "Romulus"
-msgstr ""
+msgstr "Ромул"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Saledus"
-msgstr ""
+msgstr "Саледус"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
 #: ../../data/tribes/ships/empire/init.lua:122
@@ -6870,7 +6871,7 @@ msgstr "Сатурн"
 #: ../../data/tribes/ships/empire/init.lua:124
 msgctxt "shipname"
 msgid "Siena"
-msgstr ""
+msgstr "Сина"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:126
@@ -6894,13 +6895,13 @@ msgstr "Тиберий"
 #: ../../data/tribes/ships/empire/init.lua:132
 msgctxt "shipname"
 msgid "Titus"
-msgstr ""
+msgstr "Тит"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:134
 msgctxt "shipname"
 msgid "Traianus"
-msgstr ""
+msgstr "Траиний"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:136
@@ -6912,7 +6913,7 @@ msgstr "Венера"
 #: ../../data/tribes/ships/empire/init.lua:138
 msgctxt "shipname"
 msgid "Vespasianus"
-msgstr ""
+msgstr "Веспасий"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:140
@@ -6924,25 +6925,25 @@ msgstr "Веста"
 #: ../../data/tribes/ships/empire/init.lua:142
 msgctxt "shipname"
 msgid "Vinea"
-msgstr ""
+msgstr "Винея"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:144
 msgctxt "shipname"
 msgid "Vitellius"
-msgstr ""
+msgstr "Вителий"
 
 #. TRANSLATORS: This is the Frisians' ship's name used in lists of units
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Судно"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:45
 msgctxt "shipname"
 msgid "Amrum"
-msgstr ""
+msgstr "Амрум"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
@@ -6974,7 +6975,7 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:55
 msgctxt "shipname"
 msgid "Habel"
-msgstr ""
+msgstr "Хабель"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:57
@@ -7103,7 +7104,7 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:97
 msgctxt "shipname"
 msgid "Uthlande"
-msgstr ""
+msgstr "Ютландия"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/armor/init.lua:77
@@ -7133,7 +7134,7 @@ msgstr "Шлем"
 #: ../../data/tribes/wares/armor_wooden/init.lua:8
 msgctxt "ware"
 msgid "Light Wooden Armor"
-msgstr ""
+msgstr "Легкие деревянные доспехи"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
@@ -7175,7 +7176,7 @@ msgstr "Топор война"
 #: ../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr ""
+msgstr "Бальзамная древесина"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/barley/init.lua:8
@@ -7223,25 +7224,25 @@ msgstr "Балка"
 #: ../../data/tribes/wares/boots_hero/init.lua:8
 msgctxt "ware"
 msgid "Hero Boots"
-msgstr ""
+msgstr "Командирские ботинки"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_sturdy/init.lua:8
 msgctxt "ware"
 msgid "Sturdy Boots"
-msgstr ""
+msgstr "Крепкие ботинки"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_swift/init.lua:8
 msgctxt "ware"
 msgid "Swift Boots"
-msgstr ""
+msgstr "Легкие ботинки"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Хлеб"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -7289,13 +7290,13 @@ msgstr "Вёдра"
 #: ../../data/tribes/wares/cassavaroot/init.lua:8
 msgctxt "ware"
 msgid "Cassava Root"
-msgstr ""
+msgstr "Корень маниоки"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chisel/init.lua:8
 msgctxt "ware"
 msgid "Chisel"
-msgstr ""
+msgstr "Зубило"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chocolate/init.lua:8
@@ -7493,7 +7494,7 @@ msgstr "Боевой шлем"
 #: ../../data/tribes/wares/helmet_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Helmet"
-msgstr ""
+msgstr "Деревянный шлем"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
@@ -7651,13 +7652,13 @@ msgstr "Тростник"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "Канат"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr ""
+msgstr "Каучук"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8
@@ -7735,7 +7736,7 @@ msgstr "Улучшенное копьё"
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Пика"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
@@ -7747,7 +7748,7 @@ msgstr "Тяжёлое копьё"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "Копье"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -7777,7 +7778,7 @@ msgstr "Шёлк"
 #: ../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "Каменная чаша"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -7849,19 +7850,19 @@ msgstr "Стальной трезубец"
 #: ../../data/tribes/wares/tunic/init.lua:8
 msgctxt "ware"
 msgid "Tunic"
-msgstr ""
+msgstr "Туника"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/vest_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Vest"
-msgstr ""
+msgstr "Подбитая мехом куртка"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Coat"
-msgstr ""
+msgstr "Воинский плащ"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/water/init.lua:8
@@ -7903,25 +7904,25 @@ msgstr "Носильщик"
 #: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cassava Farmer"
-msgstr ""
+msgstr "Фермер маниоки"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
 msgctxt "amazons_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Углежог"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cocoa Farmer"
-msgstr ""
+msgstr "Какао плантатор"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cook/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cook"
-msgstr ""
+msgstr "Повар"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/dressmaker/init.lua:8
@@ -7933,7 +7934,7 @@ msgstr "Портной"
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Паром"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
@@ -7951,13 +7952,13 @@ msgstr "Золотодобытчик"
 #: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr ""
+msgstr "Золотолитейщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Hunter-Gatherer"
-msgstr ""
+msgstr "Лесник"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
@@ -7969,13 +7970,13 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr ""
+msgstr "Хранитель джунглей"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "Собиратель лиан"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
@@ -7999,49 +8000,49 @@ msgstr "Воин"
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "Каменщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "Каменотес"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir"
-msgstr ""
+msgstr "Тапир"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir Breeder"
-msgstr ""
+msgstr "Тапировод"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Сержант"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
 msgctxt "amazons_worker"
 msgid "Wilderness Keeper"
-msgstr ""
+msgstr "Дикосей"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Дровосек"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr ""
+msgstr "Глава дровосеков"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:89
@@ -8089,7 +8090,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Паром"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:8
@@ -8293,7 +8294,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Паром"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:8
@@ -8491,7 +8492,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/empire/ferry/init.lua:8
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Паром"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:8
@@ -8719,7 +8720,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:8
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Паром"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:8

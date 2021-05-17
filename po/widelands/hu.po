@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-10 10:43+0000\n"
-"PO-Revision-Date: 2021-05-09 12:03+0000\n"
+"POT-Creation-Date: 2021-05-13 11:20+0000\n"
+"PO-Revision-Date: 2021-05-16 23:58+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -271,8 +271,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -285,12 +285,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -480,10 +480,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -1801,17 +1801,17 @@ msgstr "%i%% megépítve"
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:118
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% lebontott"
+msgstr "%u%% lebontva"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../src/logic/map_objects/tribes/militarysite.cc:250
 msgctxt "building"
 msgid "Lost!"
-msgstr "Elveszett!"
+msgstr "Vereség!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:251
 msgid "Militarysite lost!"
-msgstr "Támaszpont elveszett!"
+msgstr "Támaszpont elesett!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
@@ -2139,7 +2139,7 @@ msgstr "Expedíciós hajó parancsra vár."
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Shipping"
-msgstr "Hajózás"
+msgstr "Szállít"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
@@ -2164,14 +2164,14 @@ msgstr "Várakozik"
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr "Felderítés"
+msgstr "Felderít"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:1028
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr "Kikötőhely felfedezve"
+msgstr "Kikötőhelyet talált"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
@@ -2179,7 +2179,7 @@ msgstr "Kikötőhely felfedezve"
 #: ../../src/logic/map_objects/tribes/ship.cc:1033
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr "Kolónia alapítása"
+msgstr "Kolóniát alapít"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1516
 #: ../../src/logic/map_objects/tribes/soldier.cc:1520
@@ -5137,18 +5137,18 @@ msgstr "Érvénytelen fájlelérési út a campaigns.lua-ban vagy a tutorials.lu
 msgid "Tutorial"
 msgstr "Oktatójáték"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Szerző"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Szerzők"
@@ -5781,9 +5781,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6455,7 +6455,7 @@ msgstr "Bővítmények:"
 
 #: ../../src/wui/general_statistics_menu.cc:136
 msgid "Land"
-msgstr "Föld"
+msgstr "Földterület"
 
 #: ../../src/wui/general_statistics_menu.cc:157
 msgid "Productivity"
@@ -6467,7 +6467,7 @@ msgstr "Veszteségek"
 
 #: ../../src/wui/general_statistics_menu.cc:166
 msgid "Kills"
-msgstr "Megölt"
+msgstr "Megölt ellenségek"
 
 #: ../../src/wui/general_statistics_menu.cc:172
 msgid "Military buildings lost"

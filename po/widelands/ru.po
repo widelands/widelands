@@ -4,9 +4,9 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015-2018
+# Anton Khabarov <2233009@gmail.com>, 2015-2018,2021
 # CupIvan <mail@cupivan.ru>, 2019
-# Mironenko Dmitry, 2021
+# nskdmitry, 2021
 # Максим Дронь <dronmax@gmail.com>, 2015
 # 66c17387c1d6640720971b8ab706da27_0feead1, 2019
 # GunChleoc, 2016,2018
@@ -15,7 +15,7 @@
 # Yuriy Sokolov <lention@mail.ru>, 2015,2017
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
-# Mironenko Dmitry, 2021
+# nskdmitry, 2021
 # Евгений Кривошеев <euja@yandex.ru>, 2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2019
@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-10 10:43+0000\n"
-"PO-Revision-Date: 2021-05-11 13:01+0000\n"
-"Last-Translator: Mironenko Dmitry\n"
+"POT-Creation-Date: 2021-05-13 11:20+0000\n"
+"PO-Revision-Date: 2021-05-17 14:19+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,13 +95,13 @@ msgstr "Недостаточно места"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
-msgstr "Поблизости нет камней"
+msgstr "Поблизости нет скал"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Рядом с вашей исходной позицией нет камней. Таким образом, вы получаете дополнительные ресурсы для загрузки своей экономики."
+msgstr "Рядом с вашей исходной позицией нет скал. Поэтому вы получаете дополнительные ресурсы для развития своей экономики."
 
 #: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
@@ -111,7 +111,7 @@ msgstr "Поблизости нет деревьев"
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Рядом с вашей исходной позицией нет деревьев. Таким образом, вы получаете дополнительные ресурсы для загрузки своей экономики."
+msgstr "Рядом с вашей исходной позицией нет деревьев. Поэтому вы получаете дополнительные ресурсы для развития своей экономики."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
@@ -277,8 +277,8 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -291,12 +291,12 @@ msgstr "Главное меню"
 msgid "Tools"
 msgstr "Инструменты"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -435,7 +435,7 @@ msgstr "Установить или изменить ресурсы"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:314
 msgid "Port spaces"
-msgstr "Место для порта"
+msgstr "Места для порта"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:317
@@ -486,10 +486,10 @@ msgstr "Информация"
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -761,7 +761,7 @@ msgstr "%1$s; %2$s"
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Включить аддон: %s"
+msgstr "Включить аддоны: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
@@ -1618,7 +1618,7 @@ msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$uдополнение не той версии (%2$s)."
 msgstr[1] "%1$u дополнения не той версии (%2$s)"
 msgstr[2] "%1$u дополнений не той версии (%2$s)"
-msgstr[3] "%1$u дополнений не той версии (%2$s)"
+msgstr[3] "%1$u дополнений не той версии: %2$s"
 
 #: ../../src/logic/addons.cc:175
 #, c-format
@@ -5203,18 +5203,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Авторы"
@@ -5849,9 +5849,9 @@ msgstr "Порты"
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
