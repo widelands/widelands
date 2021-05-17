@@ -4,7 +4,7 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015-2018
+# Anton Khabarov <2233009@gmail.com>, 2015-2018,2021
 # CupIvan <mail@cupivan.ru>, 2019
 # nskdmitry, 2021
 # Максим Дронь <dronmax@gmail.com>, 2015
@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-08 12:59+0000\n"
-"PO-Revision-Date: 2021-05-10 00:56+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2021-05-13 11:20+0000\n"
+"PO-Revision-Date: 2021-05-17 14:19+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,13 +95,13 @@ msgstr "Недостаточно места"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
-msgstr "Поблизости нет камней"
+msgstr "Поблизости нет скал"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Рядом с вашей исходной позицией нет камней. Таким образом, вы получаете дополнительные ресурсы для загрузки своей экономики."
+msgstr "Рядом с вашей исходной позицией нет скал. Поэтому вы получаете дополнительные ресурсы для развития своей экономики."
 
 #: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
@@ -111,7 +111,7 @@ msgstr "Поблизости нет деревьев"
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Рядом с вашей исходной позицией нет деревьев. Таким образом, вы получаете дополнительные ресурсы для загрузки своей экономики."
+msgstr "Рядом с вашей исходной позицией нет деревьев. Поэтому вы получаете дополнительные ресурсы для развития своей экономики."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
@@ -277,8 +277,8 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -291,12 +291,12 @@ msgstr "Главное меню"
 msgid "Tools"
 msgstr "Инструменты"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -435,7 +435,7 @@ msgstr "Установить или изменить ресурсы"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:314
 msgid "Port spaces"
-msgstr "Место для порта"
+msgstr "Места для порта"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:317
@@ -486,10 +486,10 @@ msgstr "Информация"
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -637,8 +637,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -761,7 +761,7 @@ msgstr "%1$s; %2$s"
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Включить аддон: %s"
+msgstr "Включить аддоны: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
@@ -1618,7 +1618,7 @@ msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$uдополнение не той версии (%2$s)."
 msgstr[1] "%1$u дополнения не той версии (%2$s)"
 msgstr[2] "%1$u дополнений не той версии (%2$s)"
-msgstr[3] "%1$u дополнений не той версии (%2$s)"
+msgstr[3] "%1$u дополнений не той версии: %2$s"
 
 #: ../../src/logic/addons.cc:175
 #, c-format
@@ -3972,10 +3972,10 @@ msgid ""
 msgid_plural ""
 "Do you really want to commit all changes to the following %u add-ons to "
 "disk?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Вы подтверждаете сохранение всех правок в %u дополнении на диск?"
+msgstr[1] "Вы подтверждаете сохранения всех правок в %u дополнениях?"
+msgstr[2] "Вы подтверждаете сохранение правок всех %u дополнений на диск?"
+msgstr[3] "Вы подтверждаете сохранение всех правок %u дополнений на диск?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:489
 msgid ""
@@ -5306,7 +5306,7 @@ msgid ""
 "%s\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Игра завершена по следующей причине:\n\n%s.\n\nПроверьте, Widelands создало быстрое сохранение? Если оно доступно, попробуйте запустить его и продолжить игру."
 
 #: ../../src/wlapplication.cc:1508
 msgid "Emergency save failed"
@@ -5443,7 +5443,7 @@ msgstr "Переключение ресурсов"
 #: ../../src/wlapplication_options.cc:390
 #, c-format
 msgid "Set Toolsize to %d"
-msgstr ""
+msgstr "Задать размер панели инструментов равный %d"
 
 #: ../../src/wlapplication_options.cc:408
 msgid "Toggle Census"
@@ -5675,7 +5675,7 @@ msgstr "Запасено товаров"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr ""
+msgstr "Оставшиеся в здании товары будут вынесены строителем, что задержит демонтаж"
 
 #: ../../src/wui/actionconfirm.cc:299
 msgid "Enhance building?"
@@ -5695,7 +5695,7 @@ msgstr "Будьте осторожны, если враг находится р
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr ""
+msgstr "Оставшиеся в здании товары будут вынесены строителем, что задержит снос"
 
 #: ../../src/wui/actionconfirm.cc:361
 msgid "Sink the ship?"
@@ -6117,7 +6117,7 @@ msgstr "Использование неподвижного объекта"
 
 #: ../../src/wui/fieldaction.cc:400
 msgid "Mark this immovable for timely removal by a suited worker"
-msgstr ""
+msgstr "Отметьте это здание,чтобы подходящий работник его снес"
 
 #: ../../src/wui/fieldaction.cc:421 ../../src/wui/fieldaction.cc:527
 msgid "Build road"
@@ -6479,20 +6479,20 @@ msgstr "Командный счёт"
 #, c-format
 msgid "%d file"
 msgid_plural "%d files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d файл"
+msgstr[1] "%d файла"
+msgstr[2] "%d файлов"
+msgstr[3] "%d файлов"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:126
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Выбрано %1% каталог и %2%:"
+msgstr[1] "Выбрано %1% каталога и %2%:"
+msgstr[2] "Выбрано %1% каталогов и %2%:"
+msgstr[3] "Выбрано %1% каталогов и %2%:"
 
 #: ../../src/wui/gamedetails.cc:145
 msgid "Directory Name:"
@@ -6801,8 +6801,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Статистика"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "С мореплаванием"
@@ -7051,7 +7051,7 @@ msgstr "Вся игра"
 
 #: ../../src/wui/portdockwaresdisplay.cc:98
 msgid "Additional item"
-msgstr ""
+msgstr "Дополнительно"
 
 #: ../../src/wui/portdockwaresdisplay.cc:100
 msgid "(Empty)"
@@ -7565,7 +7565,7 @@ msgstr "Доставка"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "Теперь сравните запасы с целевыми показателями экономики"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Red:"
