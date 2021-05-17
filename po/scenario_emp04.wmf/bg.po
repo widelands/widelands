@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Любомир Василев, 2019\n"
 "Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
@@ -1122,11 +1122,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
+"I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
-"Мисля, че трябва да разгледаме по-подробно нещата и да отворим прозореца на "
-"сградата за някоя от тях."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
@@ -1378,13 +1375,8 @@ msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
+msgid "Perhaps we should train them further in the arena as well."
 msgstr ""
-"Не забравяйте, че ще трябва да произведем дървени копия и шлемове, за да "
-"можем да ги наберем в казармата. Може би ще трябва и да ги тренираме "
-"допълнителни в арената."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"
