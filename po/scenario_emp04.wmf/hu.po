@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
@@ -68,34 +68,34 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
-msgstr "Kattints az egyik farmra!"
+msgstr "Kattints az egyik földbirtokra!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:69
 msgid "Open the Building Window of a Farm"
-msgstr "Nyisd meg egy farm ablakát!"
+msgstr "Nyisd meg egy földbirtok ablakát!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:70
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
-"Kattints egy farmra, hogy megnyisd az ablakát! Így ellenőrizni tudod az "
-"épületet."
+"Kattints egy földbirtokra, hogy megnyisd az ablakát! Így ellenőrizni tudod "
+"az épületet."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid "Find the construction plans for the farms"
-msgstr "Keresd meg a farmok tervrajzait!"
+msgstr "Keresd meg a földbirtokok tervrajzait!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:78
 msgid "Find Farm Construction Plans"
-msgstr "Keresd meg a farmok tervrajzait!"
+msgstr "Keresd meg a földbirtokok tervrajzait!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:79
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
-"Szerezd vissza a farmok tervrajzait! Kelet felé terjeszkedve a dombok "
+"Szerezd vissza a földbirtokok tervrajzait! Kelet felé terjeszkedve a dombok "
 "környékén kutass!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
@@ -142,23 +142,23 @@ msgstr "Cseréld le a két erdészházat újakra a nagyobb hatékonyság érdek�
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid "Find the monastery in the north"
-msgstr "Keresd meg északon a templomot!"
+msgstr "Keresd meg északon a szerzetesrendet!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:114
 msgid "Find the Monastery"
-msgstr "Keresd meg a templomot!"
+msgstr "Keresd meg a szerzetesrendet!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:115
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
-"Keresd meg északon a templomot, hogy megismerhesd a búza felhasználásának "
-"fejlettebb módját!"
+"Keresd meg északon a szerzetesrendet, hogy megismerhesd a búza "
+"felhasználásának fejlettebb módját!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid "Deal with Julia to get the technology"
-msgstr "Szerezd meg Juliától a technológiát!"
+msgstr "Szerezd meg Juliától a tudást!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:123
 msgid "Diplomacy: Trade or War"
@@ -170,7 +170,7 @@ msgid ""
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
 "Választhatsz: Vagy gyűjts be 35 kéve búzát és 15 amfora bort a "
-"főhadiszállásodon az istennő számára, vagy foglald el a templomot!"
+"főhadiszállásodon az istennő számára, vagy győzd le a papnőket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:130
 msgid "Train at least 3 heroes"
@@ -319,11 +319,14 @@ msgid ""
 " again. I am really looking forward to a walk on our lovely coast and to "
 "hunting in our deep forests."
 msgstr ""
+"Végre sikerült hazajutnunk! Annyira boldog vagyok, hogy viszontláthatom "
+"gyönyörű szülőföldemet! Alig várom már, hogy újra a csodás tengerpartunkon "
+"sétálhassak és a sűrű erdeinkben vadászhassak!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr ""
+msgstr "Gondolom, Saledus és Amalea is szívből örvendeznek."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:215
 msgid "Tools, Tools, Tools"
@@ -335,6 +338,8 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
+"Hódolat az isteneknek! Biztosítottuk a folyamatos szerszám utánpótlást. Most"
+" már végre bővíthetjük a gazdaságunkat."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:621
@@ -348,6 +353,8 @@ msgid ""
 "Thank the gods! Now we have everything prepared to fully train our soldiers."
 " We can increase our military strength at last."
 msgstr ""
+"Hála az isteneknek! Most már minden készen áll, hogy teljesen kiképezzük a "
+"katonáinkat. Végre növelhetjük a haderőnket."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid "The Battle is Won"
@@ -361,6 +368,10 @@ msgid ""
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
 msgstr ""
+"Hódolat az isteneknek! Sikerrel jártunk. Leküzdtünk minden akadályt, ami az "
+"utunkat állta. A barbárokat is kiűztük az országunkból. Azonban győzelmünk "
+"csak pillanatnyi, mert ez még csak a háború kezdete. Lássuk hát, mit "
+"tartogat még számunkra a jövendő."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:235
 msgid "Victory"
@@ -389,10 +400,12 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
+"Jaj ne! Amaleának igaza van. Sőt, egyáltalán nem látható termelés sehol. Az "
+"úthálózat is teljesen kesze-kusza. Ki lehet a felelős ezért a káoszért?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:252
 msgid "Explanation Needed"
-msgstr ""
+msgstr "Magyarázat kell"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "Lutius greets the official"
@@ -418,6 +431,9 @@ msgid ""
 "will do our very best to recover from the chaos. But unfortunately, this "
 "seems to be very difficult."
 msgstr ""
+"Polgármester uram! Köszönjük a városunk védelméért tett erőfeszítéseidet. "
+"Megteszünk minden tőlünk telhetőt, hogy úrrá legyünk ezen a káoszon. Sajnos "
+"ez rendkívül nehéznek ígérkezik."
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:266
@@ -425,10 +441,12 @@ msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
 msgstr ""
+"Nagyon aggódom, mert ha a barbárok most támadnának meg minket, akkor "
+"egyáltalán nem tudnánk ellenállni."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:274
 msgid "Welcome Back"
-msgstr ""
+msgstr "Üdvözlet a hazatérőknek"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:275
 msgid "A high Fremil official is welcoming you…"
@@ -441,12 +459,16 @@ msgid ""
 "Ave, Sire! The people and me are so glad to see you returning back home. We "
 "really need some good leadership around here."
 msgstr ""
+"Ave Uram! A nép és én magam is örömmel köszöntünk újra itthon. Igazán "
+"elkélne errefelé egy jó vezető."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:279
 msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
 msgstr ""
+"Mint azt bizonyára te is észrevetted, minden rettentő rosszra fordult itt, "
+"amióta elmentél."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:284
 msgid "A Long Story"
@@ -454,7 +476,7 @@ msgstr "Egy hosszú történet"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:285
 msgid "The official sighs deeply…"
-msgstr ""
+msgstr "A hivatalnok mélyen sóhajt…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -465,6 +487,10 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
+"Uram! Legjobb, ha az elején kezdem. A király már hosszú ideje elhagyta "
+"Fremilt, háborúba indulva a barbárok ellen. Mivel ez lekötötte minden "
+"figyelmét, a város irányításával a titkárát bízta meg, kinevezve őt "
+"teljhatalmú helyettesévé."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:289
 msgid ""
@@ -472,6 +498,9 @@ msgid ""
 "his new power. His selfish instincts were as awful as his complete stupidity"
 " and inability to govern the city."
 msgstr ""
+"De ez élete egyik legrosszabb döntésének bizonyult. A titkárnak fejébe "
+"szállt a rábízott hatalom. Önző hajlamai éppolyan károsak voltak, mint "
+"mélységes ostobasága és teljes alkalmatlansága a város vezetésére."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:291
 msgid ""
@@ -479,14 +508,17 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
+"Egy idő után a város népe ráébredt az igazságra, és elűzte az alkalmatlan "
+"bohócot. Ezután engem választottak meg a város polgármesterének, de az ebből"
+" a káoszból való helyreállítás meghaladja a képességeimet."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:299
 msgid "Amalea Looks Puzzled"
-msgstr ""
+msgstr "Amalea zavarodott"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300
 msgid "Amalea is doubtful…"
-msgstr ""
+msgstr "Amaleának kételyei vannak…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:302
@@ -495,6 +527,9 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
+"Ave Saledus! Egyfelől igazad van, nagy boldogság viszontlátni a "
+"szülőföldünket. Másrészt viszont olyan érzésem van, mintha valami nagyon "
+"elromlott volna itt."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:305
@@ -503,6 +538,9 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"Nézd csak a gazdaságot! Alig termelnek valamit. Akárki is vezette az "
+"országot a távollétünkben, teljes káoszt teremtett. Nem igazán tudom, hogy "
+"hogyan tudnánk ezt helyrehozni, ha egyáltalán lehetséges."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:310
 msgid "Amalea Investigates"
@@ -521,6 +559,11 @@ msgid ""
 " You can hardly find a grain of dust left in there: no wares, no tools, no "
 "workers and no soldiers either."
 msgstr ""
+"Lutius! Attól tartok, újra komoly kihívás előtt állunk. De úgy tűnik, a sors"
+" azt rendelte, hogy ezen a helyzeten is mi legyünk úrrá. Tetézi a bajt, hogy"
+" a raktárakban is kellemetlen meglepetés fogadott: mind üresen áll. Egy "
+"porszemet is alig találni bennük. Se áru, se szerszám, se munkás, se katona "
+"nincs egy sem."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:316
@@ -533,6 +576,12 @@ msgid ""
 "of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
 " out."
 msgstr ""
+"Így hát először építőanyagokat kell kerítenünk ahhoz, hogy az elvetemült "
+"titkár hibáit kijavítsuk. Megpróbálhatunk lebontani néhány nem működő kisebb"
+" épületet, hogy visszaszerezzünk valamennyi építőanyagot belőlük, és a "
+"főhadiszállásunkra szállítsuk. Amennyire most látom, a halászházak és a "
+"kőfejtők közelében nincsenek lelőhelyek. A favágóházak és a kutak is "
+"rossznak és elhasználtnak tűnnek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:319
@@ -541,6 +590,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn’t do anything with them."
 msgstr ""
+"A többi épületről még nem tudjuk megmondani, hogy megfelelően működnek-e. "
+"Akkor kell majd közelebbről megvizsgálnunk őket, amikor el tudjuk őket látni"
+" nyersanyaggal. Addig ne foglalkozzunk velük."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:322
@@ -550,6 +602,11 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Kivéve, hogy esetleg teljesen le kellene tiltanunk azoknak az épületeknek az"
+" ellátását, amelyek valamelyik építőanyagot használják. Vagy akár "
+"leállíthatnánk minden nagyobb épületben a termelést, és engedélyezhetnénk "
+"egy kis pihenőt a munkásoknak, amíg nem készítettünk nekik felhasználható "
+"alapanyagokat."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:329
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:589
@@ -566,6 +623,8 @@ msgid ""
 "Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Bátyám! Sajnos megint rossz hírt kell közölnöm veled. Ahogy láthatod, a "
+"földbirtokaink nem termesztenek semmit, de nem tudjuk lebontani sem őket."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:335
@@ -574,6 +633,9 @@ msgid ""
 "instructions on how to construct and operate farms. Therefore they have zero"
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
+"Ez a helyzet úgy állhatott elő, hogy az embereink elvesztették a leírásokat "
+"a földbirtokok építéséről és működéséről. Így most nulla a termelékenységük,"
+" az építőmunkások pedig nem tudják, hogyan bontsák le őket."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:338
@@ -582,6 +644,9 @@ msgid ""
 "operation of farms. One older constructor told me that they might have been "
 "concealed in a cave in the hills east of our border."
 msgstr ""
+"Ezért aztán sürgősen vissza kell szereznünk a földbirtokok tervrajzait és a "
+"földművesek útmutatóit. Egy öreg építőmunkás azt mondta nekem, hogy egy "
+"barlangban lehetnek elrejtve a keleti határainkon túli dombok között."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:341
@@ -589,6 +654,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
+"Amíg meg nem találjuk a tervrajzokat, addig az egyetlen lehetőségünk a "
+"földbirtokok megsemmisítése."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:348
 msgid "Amalea Looks Confident"
@@ -596,7 +663,7 @@ msgstr "Amalea magabiztos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:349
 msgid "Amalea is more confident"
-msgstr ""
+msgstr "Amalea egyre magabiztosabb"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:351
@@ -604,6 +671,8 @@ msgid ""
 "Lutius, now we are getting somewhere. As we have gained some construction "
 "materials, we can start to rebuild our economy."
 msgstr ""
+"Lutius! Végre haladunk. Szereztünk egy kevés építőanyagot, így elkezdhetjük "
+"újraépíteni a gazdaságot."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:354
@@ -612,6 +681,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
 " all of the unproductive buildings though."
 msgstr ""
+"Először is további építőanyagok kellenek. Legalább három favágóházat és két "
+"kőfejtőt kell építenünk. De győződj meg róla, hogy a nem működőeket mindet "
+"lebontották!"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:357
@@ -620,14 +692,17 @@ msgid ""
 " are doing their job, somebody should clear up our road network. They are "
 "leaving us no space to place the buildings that we need."
 msgstr ""
+"Oh, mielőtt elfelejtem, van még egy feladatunk. Amíg az építőmunkásaink "
+"dolgoznak, valakinek rendbe kell tennie az úthálózatot. Nincs tőle helyünk "
+"elhelyezni a szükséges épületeket."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:364
 msgid "Amalea is Somewhat Relieved"
-msgstr ""
+msgstr "Amalea kicsit megkönnyebbült"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "Amalea nagyot sóhajt…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:367
@@ -635,6 +710,8 @@ msgid ""
 "Praise the gods, Lutius! We have found the plans on how to build and operate"
 " farms."
 msgstr ""
+"Hála az isteneknek, Lutius! Megtaláltuk a földbirtokok tervrajzait és "
+"útmutatóit."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:370
@@ -643,11 +720,14 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"Most már elkezdhetünk földbirtokokat építeni és sört főzni, amit annyira "
+"várnak már a bányászaink. A tervek alapján ráadásul a meglévő "
+"földbirtokainkat is fel tudjuk fejleszteni, hogy újra működjenek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:373
 msgid "But I’m afraid that this problem hasn’t been the last in our economy."
-msgstr ""
+msgstr "De félek, nem ez volt az utolsó probléma a gazdasággal."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:379
 msgid "Amalea has Good News"
@@ -655,7 +735,7 @@ msgstr "Amalea jó hírt hoz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:380
 msgid "Amalea smiles for the first time in weeks…"
-msgstr ""
+msgstr "Amalea hetek óta először mosolyog…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:382
@@ -663,12 +743,14 @@ msgid ""
 "Lutius, well done so far. I just got the news that we have finished the "
 "basic buildings to obtain some construction materials."
 msgstr ""
+"Jól haladunk, Lutius! Most kaptam a hírt, hogy elkészültek az építőanyagokat"
+" termelő alap épületek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:385
 msgid ""
 "This is offering us more options to get the shambles in our economy solved."
-msgstr ""
+msgstr "Így már több lehetőségünk van a gazdaság roncsainak rendbetételére."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:388
@@ -676,6 +758,8 @@ msgid ""
 "I really think we can start to be hopeful about our future now. I pray that "
 "we can make ourselves comfortable in our homeland again."
 msgstr ""
+"Most már tényleg elkezdhetünk reménykedni a jövővel kapcsolatban. Imádkozom "
+"az istenekhez, hogy újra kényelemben élhessünk a szülőföldünkön."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:391
@@ -684,11 +768,15 @@ msgid ""
 "some houses for our fishermen. As all the fish has been caught at our coast,"
 " we should try our luck in the eastern part of our territory."
 msgstr ""
+"De még mindig sok kemény munka vár ránk addig. Egyelőre kezdjünk azzal, hogy"
+" házakat építünk a halászainknak! A tengerparton már minden halat kifogtak, "
+"így a területünk keleti részein próbálhatnánk szerencsét."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
 msgid "After we have managed this, we can start making rations in our tavern."
 msgstr ""
+"Ha ez sikerrel jár, akkor a kocsma elkezdhet harapnivalókat készíteni."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:401
 msgid "Amalea is Pleased"
@@ -703,12 +791,12 @@ msgstr "Amalea bólogat…"
 msgid ""
 "Well done, well done. Our road network looks a lot more structured than "
 "before."
-msgstr ""
+msgstr "Nagyon jó, nagyon jó. Az úthálózatunk sokkal rendezettebb, mint volt."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:407
 msgid "Now we can focus on rebuilding our economy."
-msgstr ""
+msgstr "Most már koncentráljunk a gazdaság helyreállítására!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:413
 msgid "Amalea Shakes Her Head"
@@ -724,6 +812,8 @@ msgid ""
 "For the sake of Neptune, I just discovered another problem! It seems that "
 "really very few things are working as expected in this economy."
 msgstr ""
+"Neptunus nevére! Megint új problémát fedeztem fel! Úgy néz ki, tényleg alig "
+"valami működik ebben a gazdaságban úgy, ahogy kellene."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:419
@@ -732,6 +822,9 @@ msgid ""
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
 msgstr ""
+"Az egyik favágó jelezte, hogy az erdők növekedése sokkal lassabb, mint ahogy"
+" megszokta és ahogy elvárható. Ezért hát megvizsgáltam közelebbről az "
+"erdészeink tevékenységét."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:422
@@ -740,6 +833,9 @@ msgid ""
 " seed is degenerated. For this reason, they need much more time than usual "
 "for planting trees."
 msgstr ""
+"Nem fogod elhinni, minden nagyon régi. A házaik omladoznak, a szerszámaik "
+"elhasználódtak, a magvaik tönkrementek. Ezért a megszokottnál sokkal több "
+"idejükbe telik a fák ültetése."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
@@ -749,14 +845,17 @@ msgid ""
 "eventually destroy the old one or at least expel the forester to change "
 "houses."
 msgstr ""
+"Az egyetlen megoldás, ha két új erdészházat építünk a favágók közelébe. "
+"Ügyelj arra, hogy a régieket csak azután bontsd le, ha legalább egy új "
+"felépült."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:432
 msgid "Amalea Laughs Sarcastically"
-msgstr ""
+msgstr "Amalea gúnyosan nevet"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:433
 msgid "Amalea is laughing sarcastically…"
-msgstr ""
+msgstr "Amalea gúnyosan nevet…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:435
@@ -765,11 +864,13 @@ msgid ""
 " our lumberjacks should be supplied with enough trees to enhance our "
 "economy."
 msgstr ""
+"Hát, Lutius, a gazdaság még egy furcsaságán lettünk úrrá. Most már biztos "
+"lesz elég fa a favágóinknak, amit kivághatnak az építkezésekhez."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:438
 msgid "I am really very curious about what will go wrong next!"
-msgstr ""
+msgstr "Igazán kíváncsi vagyok, mi romlik el legközelebb!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:443
 msgid "Amalea Shrugs"
@@ -787,6 +888,9 @@ msgid ""
 "mills and breweries is somewhat outdated. This way, they are consuming far "
 "too many resources."
 msgstr ""
+"Jól van, Lutius, újabb probléma: miután elkezdődött a sör főzése és a búza "
+"őrlése, észrevettem, hogy a sörfőzdékben és a malmokban elavult módszerekkel"
+" dolgoznak, így túl sok anyagot használnak."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:449
@@ -796,6 +900,10 @@ msgid ""
 "monastery in the north where the priestesses are supposed to possess some "
 "knowledge about improved technologies."
 msgstr ""
+"És el sem fogod hinni, de senki sem tudja, hogyan lehetne jobban csinálni, "
+"vagy jobban működő épületeket építeni. Csak némi szóbeszédet hallottam "
+"arról, hogy valahol észak felé van egy szerzetesrend, ahol a papnők "
+"állítólag jobb módszereket ismernek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
@@ -803,6 +911,8 @@ msgid ""
 "But I’m not sure if they will share their knowledge with us for free. "
 "Anyway, we have no choice. We need to find them to improve our economy."
 msgstr ""
+"De nem tudhatjuk, hogy megosztják-e velünk ezt a tudást. Akárhogy is, nincs "
+"más választásunk. Meg kell találnunk őket a gazdaság kijavításához."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:459
 msgid "Amalea Looks Happy"
@@ -933,14 +1043,18 @@ msgid ""
 "In the meantime, we can start raising the buildings that we need most "
 "urgently. I think we are still lacking a vineyard in our economy."
 msgstr ""
+"Amint olvasztottunk egy kevés vasat, el kell kezdenünk a szerszámok "
+"készítését. Esetleg a gazdaság beállításával felügyelhetnénk, hogy mi "
+"készüljön. Addig is elkezdhetjük építeni a legsürgősebben szükséges "
+"épületeket. Azt hiszem, még mindig nincs szőlőskertünk."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:509
 msgid "Amalea has Some Advice"
-msgstr ""
+msgstr "Amalea tanácsot hoz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:510
 msgid "Amalea is providing economic advice…"
-msgstr ""
+msgstr "Amalea gazdasági tanácsot ad…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:512
@@ -948,6 +1062,8 @@ msgid ""
 "Lutius, it seems that our coal supply is a little weak. So, we need to "
 "expand and explore all mineable areas for more coal."
 msgstr ""
+"Lutius! Úgy tűnik, a szénellátásunk eléggé gyenge. Terjeszkednünk kell és "
+"szén után kutatnunk minden bányászatra alkalmas helyen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
@@ -956,6 +1072,8 @@ msgid ""
 "mining shortfalls with charcoal. But be careful to ensure a continuous log "
 "supply afterwards."
 msgstr ""
+"Addig is segíthet, ha építünk egy faszénégető kemencét a szénhiányok "
+"áthidalására. De ezután biztosítanod kell a folyamatos ellátást farönkökből."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:522
 msgid "Amalea is in a Good Mood"
@@ -1019,7 +1137,7 @@ msgstr "Amalea a gazdaságot elemzi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea reminds Lutius of the farms…"
-msgstr "Amalea a farmokra emlékezteti Lutiust"
+msgstr "Amalea a földbirtokokra emlékezteti Lutiust"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:549
@@ -1029,22 +1147,23 @@ msgid ""
 "although there is enough space to plant wheat."
 msgstr ""
 "Nézd Lutius! Tovább elemeztem a gazdaságunkat. Azt hiszem, gond lehet a "
-"farmjainkkal. Nem termelnek semmit, pedig van elég helyük búzát vetni."
+"földbirtokainkkal. Nem termelnek semmit, pedig van elég helyük búzát vetni."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
+"I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
+"Úgy vélem, jobban meg kell vizsgálnunk ezt a problémát, ezért látogassuk meg"
+" az egyiket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
-msgstr ""
+msgstr "Amalea korlátozásai"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Amalea restricts the building possibilities…"
-msgstr ""
+msgstr "Amalea korlátozza az építési lehetőségeket…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:562
@@ -1052,6 +1171,8 @@ msgid ""
 "Excuse me Lutius, but I think the most critical resources in the current "
 "state of our economy are logs."
 msgstr ""
+"Ne haragudj, Lutius, de a gazdaság jelenlegi állapotában a farönkök a "
+"legfontosabb nyersanyagok."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:565
@@ -1060,14 +1181,17 @@ msgid ""
 " lumberjack’s house until we have gained enough building materials by "
 "dismantling the ineffective buildings."
 msgstr ""
+"Ezért vettem a bátorságot, hogy megtiltsak a favágóházakon kívül minden "
+"építkezést, amíg nem szereztünk elég építőanyagot a rosszul működő épületek "
+"lebontásából."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:570
 msgid "Amalea Reminds to Clear Road Network"
-msgstr ""
+msgstr "Amalea emlékeztet az úthálózat rendbetételére"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:571
 msgid "Amalea reminds Lutius of the scrambled road network…"
-msgstr ""
+msgstr "Amalea a kusza úthálózatra emlékezteti Lutiust…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
@@ -1075,6 +1199,9 @@ msgid ""
 "Look Brother, I have just realized we haven’t cleared the road network yet. "
 "I think we should do so very quickly to free enough space for new buildings."
 msgstr ""
+"Nézd bátyám! Most vettem észre, hogy az úthálózatunk még nincs rendbe hozva."
+" Úgy gondolom, ezt nagyon sürgősen meg kell tennünk, hogy legyen helyünk "
+"építkezni."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
@@ -1095,7 +1222,7 @@ msgstr "Vereség!"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:601
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "Amalea jelenti a vereséget…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -1103,10 +1230,12 @@ msgid ""
 "Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"Jaj ne, Lutius! Nem tudom, hogy történhetett meg, de a barbárok kifosztották"
+" a főhadiszállásunkat. Elvesztettük a csatát és a birodalmat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:590
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "Amalea jelenti a főhadiszállás elestét…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
@@ -1124,6 +1253,8 @@ msgid ""
 "Now we need to try to fulfil our duties without their technology. But this "
 "will not be an easy task at all."
 msgstr ""
+"Most már úgy kell végrehajtanunk a feladatunkat, hogy nem számíthatunk a "
+"tudásukra. Egyáltalán nem lesz könnyű."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
@@ -1166,7 +1297,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:622
 msgid "Saledus looks very relaxed…"
-msgstr ""
+msgstr "Saledus nagyon nyugodtnak tűnik…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:624
@@ -1175,14 +1306,17 @@ msgid ""
 "can see we still have some military strength. I can count five towers and a "
 "fortress in our vicinity to guard us."
 msgstr ""
+"Uram! Igazán nagy öröm újra itthon lenni. A legjobb hír pedig: Látom, hogy "
+"hadseregünk még mindig erős. Öt tornyot és egy erődöt számoltam össze a "
+"közelben a védelmünkre."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:629
 msgid "We Could Use The Military Instead"
-msgstr ""
+msgstr "Használhatjuk a hadsereget is"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:630
 msgid "Saledus raises his voice…"
-msgstr ""
+msgstr "Saledus felszólal…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:632
@@ -1190,6 +1324,8 @@ msgid ""
 "Sire, if we need the technology that badly, why don’t we conquer it? We "
 "could defeat the little monastery in an instant."
 msgstr ""
+"Uram! Ha annyira kell a tudásuk, miért nem vesszük el erővel? Pillanatok "
+"alatt le tudjuk győzni a papnőket."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:635
@@ -1197,14 +1333,16 @@ msgid ""
 "The problem is however that the gods won’t be amused if we destroy one of "
 "their temples. And you never know what this could lead to."
 msgstr ""
+"Ezzel viszont az lehet a gond, hogy az istenek nem fogják jó néven venni, ha"
+" elpusztítjuk az egyik templomukat. Nem tudhatjuk, mivel járhat ez."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:642
 msgid "Easy Victory"
-msgstr ""
+msgstr "Könnyű győzelem"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:643
 msgid "Saledus is cheering proudly…"
-msgstr ""
+msgstr "Saledus büszkén ünnepel…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:645
@@ -1212,15 +1350,17 @@ msgid ""
 "General, our armies just swept over the priestesses and conquered the plans."
 " That was a rather easy victory."
 msgstr ""
+"Tábornok! Seregeink elsöpörték a papnőket és megszerezték a terveket. Egész "
+"könnyű győzelem volt."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:650
 msgid "Defiance"
-msgstr ""
+msgstr "Ellenállás"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:651
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:659
 msgid "Saledus asserts his point…"
-msgstr ""
+msgstr "Saledus kifejezi a véleményét…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:653
@@ -1230,10 +1370,14 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
+"Uram! Be kell ismernem, hogy ez jó üzletnek bizonyult, bár sokkal hamarabb "
+"is hozzájuthattunk volna a tervekhez. Akárhogy is, a barbárokkal nem tudunk "
+"üzletet kötni, úgyhogy gondoskodnunk kell a katonáink jókedvéről és "
+"megfelelő kiképzéséről."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:658
 msgid "Pride"
-msgstr ""
+msgstr "Büszkeség"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:661
@@ -1243,10 +1387,14 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
+"Uram! Beismerem, hogy valószínűleg magunkra vontuk az istenek haragját, de "
+"háborúban néha a cél szentesíti az eszközt. A barbárokkal sem tudunk üzletet"
+" kötni, úgyhogy gondoskodnunk kell a katonáink jókedvéről és megfelelő "
+"kiképzéséről."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:668
 msgid "Saledus asks for a stronger army…"
-msgstr ""
+msgstr "Saledus erősebb hadsereget kér…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:670
@@ -1254,6 +1402,8 @@ msgid ""
 "Now that we have produced some tools, I think it is time to divert some of "
 "our iron and coal towards military production."
 msgstr ""
+"Most, hogy vannak szerszámaink, úgy gondolom, ideje a vas és a szén egy "
+"részét átirányítani a hadi termeléshez."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:673
@@ -1262,21 +1412,21 @@ msgid ""
 "increase our military power. As a starting point, we should recruit at least"
 " ten new soldiers."
 msgstr ""
+"Nagyon aggódom a hadseregünk gyengesége miatt. Növelnünk kell haderőnket. "
+"Kezdetnek legalább tíz új katonát kell toboroznunk."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
-msgstr ""
+msgid "Perhaps we should train them further in the arena as well."
+msgstr "Esetleg elkezdhetjük őket fejleszteni is az arénában."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"
-msgstr ""
+msgstr "Kiképzés kell"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:684
 msgid "Saledus still has security concerns…"
-msgstr ""
+msgstr "Saledusnak még mindig biztonsági aggályai vannak…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:686
@@ -1285,6 +1435,9 @@ msgid ""
 "train them well. It is important to increase the strength of our soldiers as"
 " fast as we can."
 msgstr ""
+"Tábornok! Bár elkezdtük a katonák toborzását, de jól ki is kell képeznünk "
+"őket. Fontos, hogy a lehető leggyorsabban fejlesszük katonáink "
+"ütőképességét."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:688
 msgid ""
@@ -1293,14 +1446,17 @@ msgid ""
 "improve this. Alas! But we need to use what we have to get prepared for "
 "battle."
 msgstr ""
+"Sajnos csak egy arénánk és egy nagyon régi kiképzőtáborunk van, ahol alig "
+"van hely. Az építőmunkásaink sem tudják, hogyan javíthatnánk rajta. Mindegy,"
+" azt kell használnunk, amink van, hogy felkészüljünk a harcra."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:695
 msgid "Praise The Army of The Empire"
-msgstr ""
+msgstr "Dicsőség a Birodalom seregeinek"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:696
 msgid "Saledus is happy…"
-msgstr ""
+msgstr "Saledus örül…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:698
@@ -1309,20 +1465,25 @@ msgid ""
 "builders and developed better and more efficient training buildings "
 "together."
 msgstr ""
+"Uram! Néhány katona kiképzése után a kiképzőtisztjeink egyeztettek az "
+"építőmunkásokkal, és együtt kidolgozták a jobb és hatékonyabb kiképző "
+"épületek terveit."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:700
 msgid ""
 "Now we can really improve our army and build the military strength that we "
 "will need to defend our country."
 msgstr ""
+"Most már hatékonyan fejleszthetjük a hadseregünket, és szert tehetünk akkora"
+" haderőre, amekkorára szükség lesz a hazánk megvédéséhez."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:707
 msgid "We Just Need Another Hero"
-msgstr ""
+msgstr "Csak még egy hős kell"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:708
 msgid "Saledus is in a good mood…"
-msgstr ""
+msgstr "Saledus jó hangulatban van…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:710
@@ -1331,6 +1492,9 @@ msgid ""
 "training facilities, we should train as many fully promoted soldiers as we "
 "can. I really would consider them heroes after that."
 msgstr ""
+"Tábornok! Most, hogy több és jobb sörünk van a felfejlesztett kiképzőhelyek "
+"mellett, a lehető legtöbb katonát kell kiképeznünk a legmagasabb szintre. "
+"Őket már igazi hősöknek nevezhetjük majd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:712
 msgid ""
@@ -1338,6 +1502,9 @@ msgid ""
 "powerful than the Barbarians’. So, we need to spend our resources wisely to "
 "get some heroes as soon as we can."
 msgstr ""
+"Hatalmas előnyt jelent majd a csatában, ha a katonáink sokkal erősebbek a "
+"barbárokéinál. Használjuk bölcsen az anyagainkat, hogy minél előbb legyenek "
+"hőseink."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:714
 msgid ""
@@ -1345,14 +1512,17 @@ msgid ""
 "with. But don’t forget to send them to the front line, because they are not "
 "that useful back home."
 msgstr ""
+"Kezdetnek megelégednék három teljesen kiképzett hőssel. De utána ne felejtsd"
+" el kiküldeni őket a frontvonalba, mert itthon kárba vesznének a "
+"képességeik."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:721
 msgid "We Should Expel The Barbarians"
-msgstr ""
+msgstr "Ki kell űznünk a barbárokat"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:722
 msgid "Saledus is excited…"
-msgstr ""
+msgstr "Saledus izgatott…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:724
@@ -1360,12 +1530,16 @@ msgid ""
 "Now that we have some fully trained soldiers, it is time to expel the "
 "Barbarians from our homeland."
 msgstr ""
+"Most, hogy vannak teljesen kiképzett katonáink, ideje kiűznünk a barbárokat "
+"a hazánkból."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:726
 msgid ""
 "Let’s finish them off and regain control over our lands. They shall regret "
 "deeply that they ever came!"
 msgstr ""
+"Végezzünk hát velük, és szerezzük vissza a földünket! Bánják meg örökre, "
+"hogy valaha is betették ide a lábukat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:733
 msgid "Victory is Ours"
@@ -1493,7 +1667,7 @@ msgstr "sör főzése"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr "Farm"
+msgstr "Földbirtok"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42

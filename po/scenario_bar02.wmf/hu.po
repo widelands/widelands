@@ -9,12 +9,13 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 19:06+0000\n"
+"PO-Revision-Date: 2021-05-12 08:17+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +80,7 @@ msgstr "Építs egy kutat!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr "Építs egy farmot!"
+msgstr "Építs egy földbirtokot!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
@@ -87,12 +88,12 @@ msgstr "Építs egy pékséget!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr "Építs egy marhafarmot!"
+msgstr "Építs egy marhatelepet!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr "Ne felejts el építeni egy marhafarmot!"
+msgstr "Ne felejts el építeni egy marhatelepet!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
@@ -164,7 +165,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Fejleszd tovább a szerszámkészítő műhelyedet fejszekészítő műhellyé, hogy fegyvert gyártson, és építs egy másik szerszámkészítő műhelyt, hogy biztosítsd a szerszámok gyártását! Ha a kovács eléri a következő szintet (kovácsmester), a fejszekészítő műhelyt fegyverkészítő műhellyé is fejlesztheted, ahol más fegyverek is készülnek."
+msgstr "Fejleszd tovább a szerszámkészítő műhelyedet fejszekészítő műhellyé, hogy fegyvereket készítsen, és építs egy másik szerszámkészítő műhelyt, hogy biztosítsd a szerszámok termelését! Ha a kovács eléri a következő szintet (kovácsmester), a fejszekészítő műhelyt fegyverkészítő műhellyé is fejlesztheted, ahol más fegyverek is készülnek."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
@@ -216,7 +217,7 @@ msgstr "A képességek: életerő, támadás, védelem és kitérés."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr "Létesíts fegyvergyártó műhelyeket!"
+msgstr "Létesíts fegyverkészítő műhelyeket!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
@@ -448,7 +449,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kellene kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy farmot és egy pékséget is! Az egyik földműves nagyon ügyesnek tűnik - sikerült már gabonát termesztenie ebben a hideg talajban is."
+msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kellene kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy földbirtokot és egy pékséget is! Az egyik földműves nagyon ügyesnek tűnik - sikerült már gabonát termesztenie ebben a hideg talajban is."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"

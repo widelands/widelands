@@ -7,12 +7,13 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 19:07+0000\n"
+"PO-Revision-Date: 2021-05-12 08:18+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -609,7 +610,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "A mostani helyzetünkben jó lenne, ha a pékségek a lehető leggyorsabban dolgoznának, mert ők látják el a kocsmákat. Ezért érdemes a vizet a legmagasabb fontosságra állítani bennük. A többi épület, mint pl. a szamárfarm így kevesebb vizet fog kapni, a pékség viszont gyorsabban tud dolgozni."
+msgstr "A mostani helyzetünkben jó lenne, ha a pékségek a lehető leggyorsabban dolgoznának, mert ők látják el a kocsmákat. Ezért érdemes a vizet a legmagasabb fontosságra állítani bennük. A többi épület, mint pl. a szamártelep így kevesebb vizet fog kapni, a pékség viszont gyorsabban tud dolgozni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -808,7 +809,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Pl. a kasza alapértelmezett értéke 1. Ha építesz egy farmot, egy hordár elveszi a kaszát, és földművessé válik. Így nem marad több kasza, de mivel a célérték 1, a szerszámkovács készíteni fog egy újat."
+msgstr "Pl. a kasza alapértelmezett értéke 1. Ha építesz egy földbirtokot, egy hordár elveszi a kaszát, és földművessé válik. Így nem marad több kasza, de mivel a célérték 1, a szerszámkovács készíteni fog egy újat."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -816,7 +817,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr "Ha két farmot építesz, csak az egyik tud egyből munkához látni. A másik hiába fogja várni a munkást, mert nem jut neki kasza. Ha korábban 2-re állítottad volna a célértéket, akkor lett volna raktáron két kasza, így mindkét farm egyből munkához láthatott volna."
+msgstr "Ha két földbirtokot építesz, csak az egyik tud egyből munkához látni. A másik hiába fogja várni a munkást, mert nem jut neki kasza. Ha korábban 2-re állítottad volna a célértéket, akkor lett volna raktáron két kasza, így mindkét földbirtok egyből munkához láthatott volna."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
@@ -859,7 +860,7 @@ msgstr "A célmennyiség beállításával így el tudod dönteni, hogy a nyersa
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Ez a beállítás csak azoknak az épületeknek fontos, amelyek árut fogyasztanak a termeléshez. Azok az épületek, amelyek ingyen dolgoznak (pl. a farmok vagy a kutak), mindig folyamatosan termelnek."
+msgstr "Ez a beállítás csak azoknak az épületeknek fontos, amelyek árut fogyasztanak a termeléshez. Azok az épületek, amelyek ingyen dolgoznak (pl. a földbirtokok vagy a kutak), mindig folyamatosan termelnek."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
 msgid ""
