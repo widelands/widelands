@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-09 23:54+0000\n"
+"PO-Revision-Date: 2021-05-12 08:24+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "Süss kenyeret!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr "Építs egy kutat, egy farmot és egy pékséget!"
+msgstr "Építs egy kutat, egy földbirtokot és egy pékséget!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -165,7 +165,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Az élelmiszer-termelés további más módjai a halászok és a farmok. A farmokon termesztett búzához vízre van szükség, hogy a pékségben pitát készítsenek belőle, amit már meg lehet enni. Vizet kút építésével szerezhetsz. A jobb termelékenység érdekében olyan helyen építsd a kutat, ahol a geológusok vízforrást találtak."
+msgstr "Az élelmiszer-termelés további más módjai a halászok és a földbirtokok. A földbirtokokon termesztett búzához vízre van szükség, hogy a pékségben pitát készítsenek belőle, amit már meg lehet enni. Vizet kút építésével szerezhetsz. A jobb termelékenység érdekében olyan helyen építsd a kutat, ahol a geológusok vízforrást találtak."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -439,7 +439,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Boldreth egyre elgyötörtebbnek tűnik, ahogy múlnak a napok. Társaim lelke sorvad, ahogy a hideg évszak közeleg, és mi még mindig csak kunyhókban és laktanyákban élünk. Nem szándékoztam ilyen sokáig itt, a vadonban tanyázni - de nem is hittem, hogy fivéreim ily sokáig időznek ezzel az értelmetlen harccal."
+msgstr "Boldreth egyre elgyötörtebbnek tűnik, ahogy múlnak a napok. Társaim lelke sorvad, ahogy a hideg évszak közeleg, és mi még mindig csak kunyhókban és laktanyákban élünk. Nem szándékoztam ilyen sokáig itt, a vadonban tanyázni – de nem is hittem, hogy fivéreim ily sokáig időznek ezzel az értelmetlen harccal."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -748,7 +748,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "A nagy hegytől északra hatalmas síkság terül el. Miért ne használnánk a természet e nagyszerű ajándékát farm építésére? A magam részéről igencsak megkívántam egy kis frissen sült pitát…"
+msgstr "A nagy hegytől északra hatalmas síkság terül el. Miért ne használnánk a természet e nagyszerű ajándékát földbirtok építésére? A magam részéről igencsak megkívántam egy kis frissen sült pitát…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
