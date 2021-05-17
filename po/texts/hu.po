@@ -8,12 +8,13 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-17 20:07+0000\n"
+"PO-Revision-Date: 2021-05-12 08:19+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -751,7 +752,7 @@ msgstr "Egy gazdaság egy úthálózattal összekötött épületekből és zás
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Néhány épületnek, mint a farmnak, nagyon kis munkaterülete van. Ha fák vagy utak veszik körbe, a termelés leáll."
+msgstr "Néhány épületnek, mint a földbirtoknak, nagyon kis munkaterülete van. Ha fák vagy utak veszik körbe, a termelés leáll."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
