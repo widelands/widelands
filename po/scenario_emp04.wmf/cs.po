@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -1167,11 +1167,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
+"I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
-"Myslím, že bychom to měli důkladně prověřit a otevřít si okno budovy u "
-"jednoho z obilných  polí."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
@@ -1432,12 +1429,8 @@ msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
+msgid "Perhaps we should train them further in the arena as well."
 msgstr ""
-"Pamatujte, že na verbování vojáků v kasárnách potřebujeme dřevěný oštěp a "
-"přilby. Možná bychom měli nové vojáky následně také vycvičit v aréně."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"
