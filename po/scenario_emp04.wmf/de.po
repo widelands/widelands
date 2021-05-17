@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1194,11 +1194,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
-msgstr ""
-"Wir sollten uns das mal genauer ansehen und eins ihrer Gebäudefenster "
-"öffnen."
+"I think we should have a deeper look into the issue and visit one of them."
+msgstr "Wir sollten uns das mal genauer ansehen und eine davon besuchen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
@@ -1467,13 +1464,8 @@ msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
-msgstr ""
-"Denkt dran, dass wir Holzspeere und Helme brauchen, um sie in der Kaserne zu"
-" rekrutieren. Außerdem sollten wir sie vielleicht in der Arena weiter "
-"ausbilden."
+msgid "Perhaps we should train them further in the arena as well."
+msgstr "Vielleicht sollten wir sie auch noch in der Arena weiter ausbilden."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"

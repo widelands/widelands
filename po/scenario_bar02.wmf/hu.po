@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-09 23:55+0000\n"
+"PO-Revision-Date: 2021-05-12 08:17+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -80,7 +80,7 @@ msgstr "Építs egy kutat!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr "Építs egy farmot!"
+msgstr "Építs egy földbirtokot!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
@@ -449,7 +449,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kellene kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy farmot és egy pékséget is! Az egyik földműves nagyon ügyesnek tűnik - sikerült már gabonát termesztenie ebben a hideg talajban is."
+msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kellene kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy földbirtokot és egy pékséget is! Az egyik földműves nagyon ügyesnek tűnik - sikerült már gabonát termesztenie ebben a hideg talajban is."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
