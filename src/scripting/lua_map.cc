@@ -4526,7 +4526,7 @@ MapObject
       MapObject [fillcolor=green, shape=house]
       more [label="…", href="../autogen_wl_map.html#building", target="_parent"]
 
-      MapObject -- {Bob BaseImmovable}
+      MapObject -- {Bob BaseImmovable }
       Bob -- {Ship Critter Worker}
       Worker -- Carrier -- Ferry
       BaseImmovable -- {MapImmovable PlayerImmovable}
@@ -5962,7 +5962,7 @@ int LuaWarehouse::get_portdock(lua_State* L) {
    .. attribute:: expedition_in_progress
 
       (RO) If this Warehouse is a port, and an expedition is in
-      progress, this is :const`true`, otherwise :const:`nil`.
+      progress, this is :const:`true`, otherwise :const:`nil`.
 */
 int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 
@@ -6954,6 +6954,8 @@ Ship
 ----
 
 .. class:: Ship
+
+   Child of: :class:`Bob`
 
    This represents a ship in game.
 
