@@ -1040,7 +1040,7 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
  */
 
 /* RST
-.. currentmodule:: map.object
+.. currentmodule:: wl.map.object
 
 Common functions
 ^^^^^^^^^^^^^^^^
