@@ -516,7 +516,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 }
 
 // Parser the arguments of set_soldiers() into a setpoint. See the
-// documentation in HasSoldiers to understand the valid arguments.
+// documentation in has_soldiers to understand the valid arguments.
 SoldiersMap parse_set_soldiers_arguments(lua_State* L,
                                          const Widelands::SoldierDescr& soldier_descr) {
 	SoldiersMap rv;
@@ -1045,7 +1045,7 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 Common functions
 ^^^^^^^^^^^^^^^^
 
-Some objects share the same functions:
+Some objects share the same functions and attributes:
 
    * :ref:`has_wares`
    * :ref:`has_workers`
@@ -1059,65 +1059,65 @@ Some objects share the same functions:
 Functions for objects implementing wares
 -----------------------------------------
 
-   Functions for objects which can store wares.
-   Supported at the time of this writing by :class:`~wl.map.Flag`
-   and :class:`~wl.map.Warehouse`.
+Functions for objects which can store wares.
+Supported at the time of this writing by :class:`~wl.map.Flag`
+and :class:`~wl.map.Warehouse`.
    
-   For objects which consume wares, see: :ref:`has_inputs`.
+For objects which consume wares, see: :ref:`has_inputs`.
 */
 
 /* RST
-   .. method:: get_wares(which)
+.. method:: get_wares(which)
 
-      Gets the number of wares that currently reside here.
+   Gets the number of wares that currently reside here.
 
-      :arg which:  Can be either of:
+   :arg which:  Can be either of:
 
-      * The string :const:`"all"`.
-         In this case the function will return a
-         :class:`table` of ``{ware_name=amount}`` pairs that gives information
-         about all ware information available for this object.
-      * A ware name.
-         In this case a single integer is returned. No check is made
-         if this ware makes sense for this location, you can for example ask a
-         :const:`lumberjacks_hut` for the number of :const:`granite` he has
-         and he will return 0.
-      * An :class:`array` of ware names.
-         In this case a :class:`table` of
-         ``{ware_name=amount}`` pairs is returned where only the requested wares
-         are listed. All other entries are :const:`nil`.
+   * The string :const:`"all"`.
+      In this case the function will return a
+      :class:`table` of ``{ware_name=amount}`` pairs that gives information
+      about all ware information available for this object.
+   * A ware name.
+      In this case a single integer is returned. No check is made
+      if this ware makes sense for this location, you can for example ask a
+      :const:`lumberjacks_hut` for the number of :const:`granite` he has
+      and he will return 0.
+   * An :class:`array` of ware names.
+      In this case a :class:`table` of
+      ``{ware_name=amount}`` pairs is returned where only the requested wares
+      are listed. All other entries are :const:`nil`.
 
-      :returns: :class:`integer` or :class:`table`
+   :returns: :class:`integer` or :class:`table`
 */
 
 /* RST
-   .. method:: set_wares(which[, amount])
+.. method:: set_wares(which[, amount])
 
-      Sets the wares available in this location. Either takes two arguments,
-      a ware name and an amount to set it to. Or it takes a :class:`table` of
-      ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
-      of thin air.
+   Sets the wares available in this location. Either takes two arguments,
+   a ware name and an amount to set it to. Or it takes a :class:`table` of
+   ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
+   of thin air.
 
-      :arg which: Name of ware or a :const:`table` of `{ware_name=amount}`` pairs.
-      :type which: :class:`string` or :class:`table`
-      :arg amount: This many units will be available after the call.
-      :type amount: :class:`integer`
+   :arg which: Name of ware or a :const:`table` of `{ware_name=amount}`` pairs.
+   :type which: :class:`string` or :class:`table`
+   :arg amount: This many units will be available after the call.
+   :type amount: :class:`integer`
 */
 
 /* RST
-   .. attribute:: valid_wares
+.. attribute:: valid_wares
 
-      (RO) A :class:`table` of ``{ware_name=count}`` if storage is somehow
-      constrained in this location. For example for a
-      :class:`~wl.map.ProductionSite` this is the information what wares
-      and how much can be stored as inputs. For unconstrained storage (like
-      :class:`~wl.map.Warehouse`) this is :const:`nil`.
+   (RO) A :class:`table` of ``{ware_name=count}`` if storage is somehow
+   constrained in this location. For example for a
+   :class:`~wl.map.ProductionSite` this is the information what wares
+   and how much can be stored as inputs. For unconstrained storage (like
+   :class:`~wl.map.Warehouse`) this is :const:`nil`.
 
-      You can use this to quickly fill a building:
+   You can use this to quickly fill a building:
 
-      .. code-block:: lua
+   .. code-block:: lua
 
-         if b.valid_wares then b:set_wares(b.valid_wares) end
+      if b.valid_wares then b:set_wares(b.valid_wares) end
 */
 
 /* RST
@@ -1126,126 +1126,125 @@ Functions for objects implementing wares
 Functions for objects implementing wares and workers
 ----------------------------------------------------
 
-   Supported at the time of this writing by
-   :class:`~wl.map.ProductionSite` and :class:`~wl.map.TrainingSite`.
-   These functions allows to set workers as inputs. These workers
-   are consumed by the production or trainings programs. To access
-   workers that do the work, see: :ref:`has_workers`
-   
+Supported at the time of this writing by
+:class:`~wl.map.ProductionSite` and :class:`~wl.map.TrainingSite`.
+These functions allows to set workers as inputs. These workers
+are consumed by the production or trainings programs. To access
+workers that do the work, see: :ref:`has_workers`.
 */
 
 /* RST
-   .. method:: get_inputs(which)
+.. method:: get_inputs(which)
 
-      Gets the number of wares and workers that currently reside here
-      for consumption.
+   Gets the number of wares and workers that currently reside here
+   for consumption.
 
-      :arg which:  Can be either of:
+   :arg which:  Can be either of:
 
-      * The string :const:`all`.
-         In this case the function will return a
-         :class:`table` of ``{ware/worker_name,amount}`` pairs that gives
-         information about all ware information available for this object.
-      * A ware or worker name.
-         In this case a single integer is returned. No check is made
-         if this ware/worker makes sense for this location, you can for example ask a
-         :const:`lumberjacks_hut` for the number of :const:`granite` he has
-         and he will return 0.
-      * An :class:`array` of ware and worker names.
-         In this case a :class:`table` of
-         ``{ware/worker_name=amount}`` pairs is returned where only the requested
-         wares/workers are listed. All other entries are :const:`nil`.
+   * The string :const:`all`.
+      In this case the function will return a
+      :class:`table` of ``{ware/worker_name,amount}`` pairs that gives
+      information about all ware information available for this object.
+   * A ware or worker name.
+      In this case a single integer is returned. No check is made
+      if this ware/worker makes sense for this location, you can for example ask a
+      :const:`lumberjacks_hut` for the number of :const:`granite` he has
+      and he will return 0.
+   * An :class:`array` of ware and worker names.
+      In this case a :class:`table` of
+      ``{ware/worker_name=amount}`` pairs is returned where only the requested
+      wares/workers are listed. All other entries are :const:`nil`.
 
-      :returns: :class:`integer` or :class:`table`
+   :returns: :class:`integer` or :class:`table`
 */
 
 /* RST
-   .. method:: set_inputs(which[, amount])
+.. method:: set_inputs(which[, amount])
 
-      Sets the wares/workers available in this location which will
-      be consumed by the production/training programm. Either takes two arguments,
-      a ware/worker name and an amount to set it to. Or it takes a :class:`table` of
-      ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
-      economy out of thin air.
+   Sets the wares/workers available in this location which will
+   be consumed by the production/training programm. Either takes two arguments,
+   a ware/worker name and an amount to set it to. Or it takes a :class:`table` of
+   ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
+   economy out of thin air.
 
-      :arg which: name of ware/worker or ``{ware/worker_name=amount}`` table
-      :type which: :class:`string` or :class:`table`
-      :arg amount: this many units will be available after the call
-      :type amount: :class:`integer`
+   :arg which: name of ware/worker or ``{ware/worker_name=amount}`` table
+   :type which: :class:`string` or :class:`table`
+   :arg amount: this many units will be available after the call
+   :type amount: :class:`integer`
 */
 
 /* RST
-   .. attribute:: valid_inputs
+.. attribute:: valid_inputs
 
-      (RO) A :class:`table` of ``{ware/worker_name=amount}`` which describes how
-      many wares/workers can be stored here for consumption. For example for a
-      :class:`~wl.map.ProductionSite` this is the information what wares/workers
-      and can be stored in which amount as inputs.
+   (RO) A :class:`table` of ``{ware/worker_name=amount}`` which describes how
+   many wares/workers can be stored here for consumption. For example for a
+   :class:`~wl.map.ProductionSite` this is the information what wares/workers
+   and can be stored in which amount as inputs.
 
-      You can use this to quickly fill a building:
+   You can use this to quickly fill a building:
 
-      .. code-block:: lua
+   .. code-block:: lua
 
-         if b.valid_inputs then b:set_inputs(b.valid_inputs) end
+      if b.valid_inputs then b:set_inputs(b.valid_inputs) end
 */
 
 /* RST
-   .. method:: set_priority(ware, prio [, cs_setting = false])
+.. method:: set_priority(ware, prio [, cs_setting = false])
 
-      Sets the priority for the given ware inputqueue.
+   Sets the priority for the given ware inputqueue.
 
-      :arg ware: ware name
-      :type ware: :class:`string`
-      :arg prio: The new priority. One of ``"very_low"``, ``"low"``, ``"normal"``, ``"high"``,
-         or ``"very_high"``.
-      :type prio: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
-         refers to the settings to apply after construction.
-      :type cs_setting: :class:`bool`
+   :arg ware: ware name
+   :type ware: :class:`string`
+   :arg prio: The new priority. One of ``"very_low"``, ``"low"``, ``"normal"``, ``"high"``,
+      or ``"very_high"``.
+   :type prio: :class:`string`
+   :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
+      refers to the settings to apply after construction.
+   :type cs_setting: :class:`bool`
 */
 
 /* RST
-   .. method:: get_priority(ware [, cs_setting = false])
+.. method:: get_priority(ware [, cs_setting = false])
 
-      Returns the priority for the given ware inputqueue. See also :meth:`set_priority`.
+   Returns the priority for the given ware inputqueue. See also :meth:`set_priority`.
 
-      :arg ware: A ware name.
-      :type ware: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
-         refers to the settings to apply after construction.
-      :type cs_setting: :class:`bool`
+   :arg ware: A ware name.
+   :type ware: :class:`string`
+   :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`,
+      refers to the settings to apply after construction.
+   :type cs_setting: :class:`bool`
 
-      :returns: :class:`string`
+   :returns: :class:`string`
 */
 
 /* RST
-   .. method:: set_desired_fill(item, fill [, cs_setting = false])
+.. method:: set_desired_fill(item, fill [, cs_setting = false])
 
-      Sets the desired fill for the given ware or worker inputqueue, as if the player had clicked
-      the increase/decrease buttons.
+   Sets the desired fill for the given ware or worker inputqueue, as if the player had clicked
+   the increase/decrease buttons.
 
-      :arg item: Ware or worker name.
-      :type item: :class:`string`
-      :arg fill: The desired fill.
-      :type fill: :class:`integer`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
-         the settings to apply after construction.
-      :type cs_setting: :class:`bool`
+   :arg item: Ware or worker name.
+   :type item: :class:`string`
+   :arg fill: The desired fill.
+   :type fill: :class:`integer`
+   :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
+      the settings to apply after construction.
+   :type cs_setting: :class:`bool`
 */
 
 /* RST
-   .. method:: get_desired_fill(item, fill [, cs_setting = false])
+.. method:: get_desired_fill(item, fill [, cs_setting = false])
 
-      Returns the desired fill for the given ware or worker inputqueue. See also
-      :meth:`set_desired_fill`.
+   Returns the desired fill for the given ware or worker inputqueue. See also
+   :meth:`set_desired_fill`.
 
-      :arg item: Ware or worker name.
-      :type item: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
-         the settings to apply after construction.
-      :type cs_setting: :class:`bool`
+   :arg item: Ware or worker name.
+   :type item: :class:`string`
+   :arg cs_setting: Only valid for productionsite-constructionsites. If :const:`true`, refers to
+      the settings to apply after construction.
+   :type cs_setting: :class:`bool`
 
-      :returns: :class:`integer`
+   :returns: :class:`integer`
 */
 
 /* RST
@@ -1254,30 +1253,30 @@ Functions for objects implementing wares and workers
 Functions for objects implementing workers
 ------------------------------------------
 
-   Supported at the time of this writing by :class:`~wl.map.Road`,
-   :class:`~wl.map.Warehouse` and :class:`~wl.map.ProductionSite`. 
-   In the case of ProductionSites, these methods allow access to the
-   workers which do the work instead of workers which are consumed.
-   For workers which are consumed, see: :ref:`has_inputs`.
+Supported at the time of this writing by :class:`~wl.map.Road`,
+:class:`~wl.map.Warehouse` and :class:`~wl.map.ProductionSite`. 
+In the case of ProductionSites, these methods allow access to the
+workers which do the work instead of workers which are consumed.
+For workers which are consumed, see: :ref:`has_inputs`.
 */
 
 /* RST
-   .. method:: get_workers(which)
+.. method:: get_workers(which)
 
-      Similar to :meth:`object.get_wares`.
+   Similar to :meth:`object.get_wares`.
 */
 
 /* RST
-   .. method:: set_workers(which[, amount])
+.. method:: set_workers(which[, amount])
 
-      Similar to :meth:`object.set_wares`.
+   Similar to :meth:`object.set_wares`.
 */
 
 /* RST
-   .. attribute:: valid_workers
+.. attribute:: valid_workers
 
-      (RO) Similar to :attr:`object.valid_wares` but for workers in this
-      location.
+   (RO) Similar to :attr:`object.valid_wares` but for workers in this
+   location.
 */
 
 /* RST
@@ -1286,92 +1285,92 @@ Functions for objects implementing workers
 Functions for objects implementing soldiers
 -------------------------------------------
 
-   Supported at the time of this writing by
-   :class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
-   :class:`~wl.map.TrainingSite`.
+Supported at the time of this writing by
+:class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
+:class:`~wl.map.TrainingSite`.
 */
 
 /* RST
-   .. method:: get_soldiers(descr)
+.. method:: get_soldiers(descr)
 
-      Gets information about the soldiers in a location.
+   Gets information about the soldiers in a location.
 
-      :arg descr: Can be either of:
+   :arg descr: Can be either of:
 
-      * A soldier description.
-         Returns an :class:`integer` which is the number of soldiers of this
-         kind in this building.
+   * A soldier description.
+      Returns an :class:`integer` which is the number of soldiers of this
+      kind in this building.
 
-         A soldier description is an :class:`array` that contains the level for
-         health, attack, defense and evade (in this order). A usage example:
+      A soldier description is an :class:`array` that contains the level for
+      health, attack, defense and evade (in this order). A usage example:
 
-         .. code-block:: lua
+      .. code-block:: lua
 
-            building:get_soldiers({0,0,0,0})
+         building:get_soldiers({0,0,0,0})
 
-         would return the number of soldiers of level 0 in this location.
+      would return the number of soldiers of level 0 in this location.
 
-      * The string :const:`"all"`.
-         In this case a :class:`table` of ``{soldier_descriptions=count}`` is
-         returned. Note that the following will not work, because Lua indexes
-         tables by identity:
-
-         .. code-block:: lua
-
-            building:set_soldiers({0,0,0,0}, 100)
-            building:get_soldiers({0,0,0,0}) -- works, returns 100
-            building:get_soldiers("all")[{0,0,0,0}] -- works not, this is nil
-
-            -- Following is a working way to check for a {0,0,0,0} soldier
-            for descr,count in pairs(building:get_soldiers("all")) do
-               if descr[1] == 0 and descr[2] == 0 and
-                  descr[3] == 0 and descr[4] == 0 then
-                     print(count)
-               end
-            end
-
-      :returns: Number of soldiers that match **descr** or the :class:`table`
-         containing all soldiers
-      :rtype: :class:`integer` or :class:`table`.
-*/
-
-/* RST
-   .. method:: set_soldiers(which[, amount])
-
-      Analogous to :meth:`object.set_workers`, but for soldiers. Instead of
-      a name an :class:`array` is used to define the soldier. See
-      below for an example.
-
-      :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
-         description. In that case amount has to be specified as well.
-      :type which: :class:`table` or :class:`array`.
-
-      Usage example:
+   * The string :const:`"all"`.
+      In this case a :class:`table` of ``{soldier_descriptions=count}`` is
+      returned. Note that the following will not work, because Lua indexes
+      tables by identity:
 
       .. code-block:: lua
 
          building:set_soldiers({0,0,0,0}, 100)
+         building:get_soldiers({0,0,0,0}) -- works, returns 100
+         building:get_soldiers("all")[{0,0,0,0}] -- works not, this is nil
 
-      would add 100 level 0 soldiers. While
+         -- Following is a working way to check for a {0,0,0,0} soldier
+         for descr,count in pairs(building:get_soldiers("all")) do
+            if descr[1] == 0 and descr[2] == 0 and
+               descr[3] == 0 and descr[4] == 0 then
+                  print(count)
+            end
+         end
 
-      .. code-block:: lua
-
-         building:set_soldiers({
-           [{0,0,0,0}] = 10,
-           [{1,2,3,4}] = 5,
-         })
-
-      would add 10 level 0 soldier and 5 soldiers with hit point level 1,
-      attack level 2, defense level 3 and evade level 4 (as long as this is
-      legal for the players tribe).
+   :returns: Number of soldiers that match **descr** or the :class:`table`
+      containing all soldiers
+   :rtype: :class:`integer` or :class:`table`.
 */
 
 /* RST
-   .. attribute:: max_soldiers
+.. method:: set_soldiers(which[, amount])
 
-      (RO) The maximum number of soldiers that can be inside this building at
-      one time. If it is not constrained, like for :class:`~wl.map.Warehouse`,
-      this will be :const:`nil`.
+   Analogous to :meth:`object.set_workers`, but for soldiers. Instead of
+   a name an :class:`array` is used to define the soldier. See
+   below for an example.
+
+   :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
+      description. In that case amount has to be specified as well.
+   :type which: :class:`table` or :class:`array`.
+
+   Usage example:
+
+   .. code-block:: lua
+
+      building:set_soldiers({0,0,0,0}, 100)
+
+   would add 100 level 0 soldiers. While
+
+   .. code-block:: lua
+
+      building:set_soldiers({
+        [{0,0,0,0}] = 10,
+        [{1,2,3,4}] = 5,
+      })
+
+   would add 10 level 0 soldier and 5 soldiers with hit point level 1,
+   attack level 2, defense level 3 and evade level 4 (as long as this is
+   legal for the players tribe).
+*/
+
+/* RST
+.. attribute:: max_soldiers
+
+   (RO) The maximum number of soldiers that can be inside this building at
+   one time. If it is not constrained, like for :class:`~wl.map.Warehouse`,
+   this will be :const:`nil`.
 */
 
 /* RST
@@ -4892,10 +4891,12 @@ Flag
 
 .. class:: Flag
 
-   Child of: :class:`PlayerImmovable`, :class:`HasWares`
+   Child of: :class:`PlayerImmovable`
 
    One flag in the economy of this Player.
 
+   See also: :ref:`has_wares`.
+   
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
@@ -5172,13 +5173,15 @@ Road
 
 .. class:: Road
 
-   Child of: :class:`PlayerImmovable`, :class:`HasWorkers`
+   Child of: :class:`PlayerImmovable`
 
    A road connecting two flags in the economy of this Player.
    Waterways are currently treated like roads in scripts; however,
    there are significant differences. You can check whether an
    instance of Road is a road or waterway using :attr:`road_type`.
 
+   See also: :ref:`has_workers`.
+   
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
@@ -5867,10 +5870,14 @@ Warehouse
 
 .. class:: Warehouse
 
-   Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`,
-   :class:`HasSoldiers`
+   Child of: :class:`Building`
 
    Every Headquarter, Port or Warehouse on the Map is of this type.
+
+   See also: 
+      * :ref:`has_wares`
+      * :ref:`has_workers`
+      * :ref:`has_soldiers`
 
    More properties are available through this object's
    :class:`WarehouseDescription`, which you can access via :any:`MapObject.descr`.
@@ -5915,7 +5922,7 @@ int LuaWarehouse::get_portdock(lua_State* L) {
    .. attribute:: expedition_in_progress
 
       (RO) If this Warehouse is a port, and an expedition is in
-      progress, this is :const`true`, otherwise :const:`nil`.
+      progress, this is :const:`true`, otherwise :const:`nil`.
 */
 int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 
@@ -6083,7 +6090,7 @@ inline bool do_set_worker_policy(Widelands::Warehouse* wh,
 
       Sets the policies how the warehouse should handle the given wares and workers.
 
-      :arg which: Behaves like :meth:`HasWares.get_wares`.
+      :arg which: Behaves like :meth:`object.get_wares`.
       :type which: :class:`string` or :class:`table`
       :arg policy: The policy to apply for all the wares and workers given in **which**.
       :type policy: A string out of ``"normal"``, ``"prefer"``, ``"dontstock"`` or ``"remove"``
@@ -6172,7 +6179,7 @@ WH_GET_POLICY(worker)
       Returns the policies how the warehouse should handle the given wares
       and workers. See :meth:`Warehouse.set_warehouse_policies` for policy strings.
 
-      :arg which: Behaves like :meth:`HasWares.get_wares`.
+      :arg which: Behaves like :meth:`object.get_wares`.
       :type which: :class:`string` or :class:`array`
 
       :returns: :class:`string` or :class:`table`
@@ -6323,9 +6330,13 @@ ProductionSite
 
 .. class:: ProductionSite
 
-   Child of: :class:`Building`, :class:`HasInputs`, :class:`HasWorkers`
+   Child of: :class:`Building`
 
    Every building that produces anything.
+
+   See also:
+      * :ref:`has_inputs`
+      * :ref:`has_workers`
 
    More properties are available through this object's
    :class:`ProductionSiteDescription`, which you can access via :any:`MapObject.descr`.
@@ -6579,9 +6590,13 @@ Market
 
 .. class:: Market
 
-   Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
+   Child of: :class:`Building`
 
    A Market used for trading with other players.
+
+   For functions see: 
+      * :ref:`has_wares`
+      * :ref:`has_workers`
 
    More properties are available through this object's
    :class:`MarketDescription`, which you can access via :any:`MapObject.descr`.
@@ -6655,9 +6670,11 @@ MilitarySite
 
 .. class:: MilitarySite
 
-   Child of: :class:`Building`, :class:`HasSoldiers`
+   Child of: :class:`Building`
 
    Military buildings with stationed soldiers.
+
+   See also: :ref:`has_soldiers`
 
    More properties are available through this object's
    :class:`MilitarySiteDescription`, which you can access via :any:`MapObject.descr`.
@@ -6751,9 +6768,11 @@ TrainingSite
 
 .. class:: TrainingSite
 
-   Child of: :class:`ProductionSite`, :class:`HasSoldiers`
+   Child of: :class:`ProductionSite`
 
    A specialized production site for training soldiers.
+
+   See also: :ref:`has_soldiers`
 
    More properties are available through this object's
    :class:`TrainingSiteDescription`, which you can access via :any:`MapObject.descr`.
@@ -7605,10 +7624,10 @@ Field
 
    This class represents one Field in Widelands. The field may contain
    immovables like Flags or Buildings and can be connected via Roads. Every
-   Field has two Triangles associated with itself: the right and the down one.
+   Field has two Triangles associated with itself: The right and the down one.
 
    You cannot instantiate this directly, access it via
-   wl.Game().map.get_field() instead.
+   ``wl.Game().map.get_field()`` instead.
 */
 
 const char LuaField::className[] = "Field";
