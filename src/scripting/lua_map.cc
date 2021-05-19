@@ -1062,7 +1062,7 @@ Functions for objects implementing wares
 Functions for objects which can store wares.
 Supported at the time of this writing by :class:`~wl.map.Flag`
 and :class:`~wl.map.Warehouse`.
-   
+
 For objects which consume wares, see: :ref:`has_inputs`.
 */
 
@@ -1254,7 +1254,7 @@ Functions for objects implementing workers
 ------------------------------------------
 
 Supported at the time of this writing by :class:`~wl.map.Road`,
-:class:`~wl.map.Warehouse` and :class:`~wl.map.ProductionSite`. 
+:class:`~wl.map.Warehouse` and :class:`~wl.map.ProductionSite`.
 In the case of ProductionSites, these methods allow access to the
 workers which do the work instead of workers which are consumed.
 For workers which are consumed, see: :ref:`has_inputs`.
@@ -4896,7 +4896,7 @@ Flag
    One flag in the economy of this Player.
 
    See also: :ref:`has_wares`.
-   
+
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
@@ -5181,7 +5181,7 @@ Road
    instance of Road is a road or waterway using :attr:`road_type`.
 
    See also: :ref:`has_workers`.
-   
+
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
@@ -5874,7 +5874,7 @@ Warehouse
 
    Every Headquarter, Port or Warehouse on the Map is of this type.
 
-   See also: 
+   See also:
       * :ref:`has_wares`
       * :ref:`has_workers`
       * :ref:`has_soldiers`
@@ -6594,7 +6594,7 @@ Market
 
    A Market used for trading with other players.
 
-   For functions see: 
+   For functions see:
       * :ref:`has_wares`
       * :ref:`has_workers`
 
