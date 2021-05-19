@@ -1040,20 +1040,30 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
  */
 
 /* RST
-Module Interfaces
-^^^^^^^^^^^^^^^^^
+.. currentmodule:: object
 
+Common functions
+^^^^^^^^^^^^^^^^
+
+Some objects share the same functions:
+
+   * :ref:`has_wares`
+   * :ref:`has_workers`
+   * :ref:`has_soldiers`
+   * :ref:`has_inputs`
 */
 
 /* RST
-HasWares
---------
+.. _has_wares:
 
-.. class:: HasWares
+Functions for objects implementing wares
+-----------------------------------------
 
-   HasWares is an interface that most :class:`PlayerImmovable` objects
-   that can contain wares implement. This is at the time of this writing
-   :class:`~wl.map.Flag` and :class:`~wl.map.Warehouse`.
+   Functions for objects which can store wares.
+   Supported at the time of this writing by :class:`~wl.map.Flag`
+   and :class:`~wl.map.Warehouse`.
+   
+   For objects which consume wares, see: :ref:`has_inputs`.
 */
 
 /* RST
@@ -1111,17 +1121,17 @@ HasWares
 */
 
 /* RST
-HasInputs
----------
+.. _has_inputs:
 
-.. class:: HasInputs
+Functions for objects implementing wares and workers
+----------------------------------------------------
 
-   HasInputs is an interface that some :class:`PlayerImmovable` objects
-   implement. At the time of this writing these are
+   Supported at the time of this writing by
    :class:`~wl.map.ProductionSite` and :class:`~wl.map.TrainingSite`.
-   This interface is similar to :class:`HasWares` but additionally allows
-   to set workers as inputs. These workers are consumed by the production
-   or trainings programs.
+   These functions allows to set workers as inputs. These workers
+   are consumed by the production or trainings programs. To access
+   workers that do the work, see: :ref:`has_workers`
+   
 */
 
 /* RST
@@ -1239,47 +1249,45 @@ HasInputs
 */
 
 /* RST
-HasWorkers
-----------
+.. _has_workers:
 
-.. class:: HasWorkers
+Functions for objects implementing workers
+------------------------------------------
 
-   Analogon to :class:`HasWares`, but for Workers. Supported at the time
-   of this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse`
-   and :class:`~wl.map.ProductionSite`. In the case of ProductionSites,
-   these methods allow access to the workers which do the work instead of
-   workers which are consumed as accessed by the methods of :class:`HasInputs`.
+   Supported at the time of this writing by :class:`~wl.map.Road`,
+   :class:`~wl.map.Warehouse` and :class:`~wl.map.ProductionSite`. 
+   In the case of ProductionSites, these methods allow access to the
+   workers which do the work instead of workers which are consumed.
+   For workers which are consumed, see: :ref:`has_inputs`.
 */
 
 /* RST
    .. method:: get_workers(which)
 
-      Similar to :meth:`HasWares.get_wares`.
+      Similar to :meth:`object.get_wares`.
 */
 
 /* RST
    .. method:: set_workers(which[, amount])
 
-      Similar to :meth:`HasWares.set_wares`.
+      Similar to :meth:`object.set_wares`.
 */
 
 /* RST
    .. attribute:: valid_workers
 
-      (RO) Similar to :attr:`HasWares.valid_wares` but for workers in this
+      (RO) Similar to :attr:`object.valid_wares` but for workers in this
       location.
 */
 
 /* RST
-HasSoldiers
-------------
+.. _has_soldiers:
 
-.. class:: HasSoldiers
+Functions for objects implementing soldiers
+-------------------------------------------
 
-   Analogon to :class:`HasWorkers`, but for Soldiers. Due to differences in
-   Soldiers and implementation details in Lua this class has a slightly
-   different interface than :class:`HasWorkers`. Supported at the time of this
-   writing by :class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
+   Supported at the time of this writing by
+   :class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
    :class:`~wl.map.TrainingSite`.
 */
 
@@ -1330,7 +1338,7 @@ HasSoldiers
 /* RST
    .. method:: set_soldiers(which[, amount])
 
-      Analogous to :meth:`HasWorkers.set_workers`, but for soldiers. Instead of
+      Analogous to :meth:`object.set_workers`, but for soldiers. Instead of
       a name an :class:`array` is used to define the soldier. See
       below for an example.
 
@@ -1367,6 +1375,8 @@ HasSoldiers
 */
 
 /* RST
+.. currentmodule:: wl.map
+
 Module Classes
 ^^^^^^^^^^^^^^
 
