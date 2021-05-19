@@ -1040,12 +1040,12 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
  */
 
 /* RST
-.. currentmodule:: object
+.. currentmodule:: map.object
 
 Common functions
 ^^^^^^^^^^^^^^^^
 
-Some objects share the same functions and attributes:
+Some map objects share the same functions and attributes:
 
    * :ref:`has_wares`
    * :ref:`has_workers`
