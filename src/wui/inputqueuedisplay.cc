@@ -120,25 +120,25 @@ static inline std::string create_tooltip(const bool increase) {
 	        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	           .as_font_tag(
 	              increase ?
-	                 /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-	                 _("Increase the number of wares you want to be stored here") :
-	                 /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-	                 _("Decrease the number of wares you want to be stored here")) %
+                    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+                    _("Increase the number of wares you want to be stored here") :
+                    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+                    _("Decrease the number of wares you want to be stored here")) %
 	        as_listitem(increase ?
-	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-	                          option explanation */
-	                       _("Hold down Shift to increase all ware types at the same time") :
-	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-	                          option explanation */
-	                       _("Hold down Shift to decrease all ware types at the same time"),
+                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                                option explanation */
+                             _("Hold down Shift to increase all ware types at the same time") :
+                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                                option explanation */
+                             _("Hold down Shift to decrease all ware types at the same time"),
 	                    UI::FontStyle::kWuiTooltip) %
 	        as_listitem(increase ?
-	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-	                          option explanation */
-	                       _("Hold down Ctrl to allow all of this ware") :
-	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-	                          option explanation */
-	                       _("Hold down Ctrl to allow none of this ware"),
+                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                                option explanation */
+                             _("Hold down Ctrl to allow all of this ware") :
+                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                                option explanation */
+                             _("Hold down Ctrl to allow none of this ware"),
 	                    UI::FontStyle::kWuiTooltip))
 	   .str();
 }
@@ -229,10 +229,9 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
      slider_was_moved_(nullptr),
      collapsed_(false),
-     nr_icons_(queue_ ?
-                  queue_->get_max_size() :
-                  type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
-                                                 settings_->ware_queues.at(index_).max_fill),
+     nr_icons_(queue_                       ? queue_->get_max_size() :
+               type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
+                                              settings_->ware_queues.at(index_).max_fill),
      icons_(nr_icons_, nullptr),
      fill_index_under_mouse_(-1) {
 
@@ -259,8 +258,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	for (size_t i = 0; i < nr_icons_; ++i) {
 		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
-		                            building_.owner().tribe().get_ware_descr(index_)->icon() :
-		                            building_.owner().tribe().get_worker_descr(index_)->icon());
+                                  building_.owner().tribe().get_ware_descr(index_)->icon() :
+                                  building_.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 
@@ -334,8 +333,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?
-	               building_.owner().tribe().get_ware_descr(index_)->descname() :
-	               building_.owner().tribe().get_worker_descr(index_)->descname());
+                  building_.owner().tribe().get_ware_descr(index_)->descname() :
+                  building_.owner().tribe().get_worker_descr(index_)->descname());
 
 	// Initialize tooltips, icon colours and stuff
 	think();
@@ -483,8 +482,8 @@ void InputQueueDisplay::set_collapsed(const bool c) {
 inline Widelands::ProductionsiteSettings::InputQueueSetting*
 InputQueueDisplay::get_setting() const {
 	return settings_ ? type_ == Widelands::wwWARE ? &settings_->ware_queues.at(index_) :
-	                                                &settings_->worker_queues.at(index_) :
-	                   nullptr;
+                                                   &settings_->worker_queues.at(index_) :
+                      nullptr;
 }
 
 static const RGBAColor kColorComing(127, 127, 127, 191);
@@ -531,7 +530,7 @@ void InputQueueDisplay::think() {
 
 	collapse_.set_tooltip(collapsed_ ? _("Show controls") : _("Hide controls"));
 	collapse_.set_pic(g_image_cache->get(collapsed_ ? "images/ui_basic/scrollbar_right.png" :
-	                                                  "images/ui_basic/scrollbar_left.png"));
+                                                     "images/ui_basic/scrollbar_left.png"));
 }
 
 static const RGBAColor kPriorityColors[] = {RGBAColor(0, 0, 255, 127), RGBAColor(63, 127, 255, 127),
@@ -561,11 +560,11 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 		auto calc_xpos = [this](const size_t fill) {
 			return (fill == 0 ? icons_[0]->get_x() :
-			                    fill == nr_icons_ ?
-			                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
-			                    (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
+			        fill == nr_icons_ ?
+                             icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
+                             (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
 			                     icons_[fill]->get_x()) /
-			                          2) +
+			                       2) +
 			       hbox_.get_x() - max_fill_indicator_.width() / 2;
 		};
 
@@ -585,7 +584,7 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 	// Draw priority indicator
 	if (has_priority_ && collapsed_) {
 		const size_t p = priority_to_index(queue_ ? building_.get_priority(type_, index_) :
-		                                            get_setting()->priority);
+                                                  get_setting()->priority);
 		const int w = kButtonSize / 5;
 		const int x = hbox_.get_x() + collapse_.get_x() - w;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
