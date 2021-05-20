@@ -1061,8 +1061,8 @@ void Soldier::attack_update(Game& game, State& state) {
 	//  give the enemy soldier some time to act
 	schedule_act(game, Duration(enemy->attack_target()->attack(this) ==
 	                                  AttackTarget::AttackResult::DefenderLaunched ?
-                                  1000 :
-                                  10));
+	                               1000 :
+	                               10));
 }
 
 void Soldier::attack_pop(Game& game, State&) {

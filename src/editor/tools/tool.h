@@ -48,9 +48,7 @@ public:
 	                     EditorInteractive& parent,
 	                     EditorActionArgs* args,
 	                     Widelands::Map* map) {
-		return (i == First  ? *this :
-		        i == Second ? second_ :
-                            third_)
+		return (i == First ? *this : i == Second ? second_ : third_)
 		   .handle_click_impl(center, parent, args, map);
 	}
 
@@ -59,9 +57,7 @@ public:
 	                    EditorInteractive& parent,
 	                    EditorActionArgs* args,
 	                    Widelands::Map* map) {
-		return (i == First  ? *this :
-		        i == Second ? second_ :
-                            third_)
+		return (i == First ? *this : i == Second ? second_ : third_)
 		   .handle_undo_impl(center, parent, args, map);
 	}
 

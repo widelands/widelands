@@ -253,8 +253,8 @@ void RenderedText::blit_cropped(RenderTarget& dst,
 
 	dst.blitrect(
 	   Vector2i(cropped_left > 0 ?
-                  position.x + region.x - (align == UI::Align::kRight ? region.w : region.w / 2) :
-                  blit_point.x,
+	               position.x + region.x - (align == UI::Align::kRight ? region.w : region.w / 2) :
+	               blit_point.x,
 	            blit_point.y),
 	   rect.image(), Recti(cropped_left > 0 ? cropped_left : 0, region.y, blit_width, region.h));
 }
