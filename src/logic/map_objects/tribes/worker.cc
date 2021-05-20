@@ -1455,8 +1455,8 @@ void Worker::set_current_experience(const int32_t xp) {
 DescriptionIndex Worker::gain_experience(Game& game) {
 	return (descr().get_needed_experience() == INVALID_INDEX ||
 	        ++current_exp_ < descr().get_needed_experience()) ?
-             INVALID_INDEX :
-             level(game);
+	          INVALID_INDEX :
+	          level(game);
 }
 
 /**
@@ -1679,9 +1679,10 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 		// Road to Flag
 		if (nextstep->descr().type() == MapObjectType::FLAG) {
 			const Path& path = road->get_path();
-			int32_t const index = nextstep == &road->get_flag(RoadBase::FlagStart) ? 0 :
-			                      nextstep == &road->get_flag(RoadBase::FlagEnd) ? path.get_nsteps() :
-                                                                                -1;
+			int32_t const index =
+			   nextstep == &road->get_flag(RoadBase::FlagStart) ?
+			      0 :
+			      nextstep == &road->get_flag(RoadBase::FlagEnd) ? path.get_nsteps() : -1;
 
 			if (index >= 0) {
 				if (start_task_movepath(
@@ -2056,8 +2057,8 @@ void Worker::return_update(Game& game, State& state) {
 	// Determine the building's flag and move to it
 
 	Flag& target_flag = location->descr().type() == MapObjectType::FLAG ?
-                          dynamic_cast<Flag&>(*location) :
-                          dynamic_cast<Building&>(*location).base_flag();
+	                       dynamic_cast<Flag&>(*location) :
+	                       dynamic_cast<Building&>(*location).base_flag();
 	if (!start_task_movepath(game, target_flag.get_position(), 15,
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");
@@ -2825,7 +2826,7 @@ void Worker::geologist_update(Game& game, State& state) {
 				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
 					if (descriptions
 					       .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
-                                                                    t.node.field->terrain_r()))
+					                                                     t.node.field->terrain_r()))
 					       ->get_is() &
 					    TerrainDescription::Is::kMineable) {
 						return true;
