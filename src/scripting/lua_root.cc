@@ -643,68 +643,68 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
       Supported types and properties are:
 
-      ===========================  ============================================  =======================================
-      Type                         Property descriptor                           Values
-      ===========================  ============================================  =======================================
-      :const:`"resource"`          :const:`"max_amount"`                         **amount**         (*int*)
-      :const:`"terrain"`           :const:`"enhancement"`                        **terrain_name**   (*string*)
-      :const:`"worker"`            :const:`"experience"`                         **experience**     (*int*)
-      :const:`"worker"`            :const:`"becomes"`                            **worker_name**    (*string*)
-      :const:`"worker"`            :const:`"programs"`                           **program_name**   (*string*),
+      ===========================  ============================================  =======================================  =============
+      Type                         Property descriptor                           Values                                   Since version
+      ===========================  ============================================  =======================================  =============
+      :const:`"resource"`          :const:`"max_amount"`                         **amount**         (*int*)               1.0
+      :const:`"terrain"`           :const:`"enhancement"`                        **terrain_name**   (*string*)            1.0
+      :const:`"worker"`            :const:`"experience"`                         **experience**     (*int*)               1.0
+      :const:`"worker"`            :const:`"becomes"`                            **worker_name**    (*string*)            1.0
+      :const:`"worker"`            :const:`"programs"`                           **program_name**   (*string*),           1.0
                                    :const:`"set"`                                **actions_table**  (*table*)
-      :const:`"building"`          :const:`"enhancement"`                        **building_name**  (*string*)
-      :const:`"building"`          :const:`"buildcost"`,                         **ware_name**      (*string*)
+      :const:`"building"`          :const:`"enhancement"`                        **building_name**  (*string*)            1.1
+      :const:`"building"`          :const:`"buildcost"`,                         **ware_name**      (*string*)            1.1
                                    :const:`"remove"`
-      :const:`"building"`          :const:`"buildcost"`,                         **ware_name**      (*string*),
+      :const:`"building"`          :const:`"buildcost"`,                         **ware_name**      (*string*),           1.1
                                    :const:`"set"`                                **amount**         (*int*)
-      :const:`"building"`          :const:`"return_on_dismantle"`,               **ware_name**      (*string*)
+      :const:`"building"`          :const:`"return_on_dismantle"`,               **ware_name**      (*string*)            1.1
                                    :const:`"remove"`
-      :const:`"building"`          :const:`"return_on_dismantle"`,               **ware_name**      (*string*),
+      :const:`"building"`          :const:`"return_on_dismantle"`,               **ware_name**      (*string*),           1.1
                                    :const:`"set"`                                **amount**         (*int*)
-      :const:`"building"`          :const:`"enhancement_cost"`,                  **ware_name**      (*string*)
+      :const:`"building"`          :const:`"enhancement_cost"`,                  **ware_name**      (*string*)            1.1
                                    :const:`"remove"`
-      :const:`"building"`          :const:`"enhancement_cost"`,                  **ware_name**      (*string*),
+      :const:`"building"`          :const:`"enhancement_cost"`,                  **ware_name**      (*string*),           1.1
                                    :const:`"set"`                                **amount**         (*int*)
-      :const:`"building"`          :const:`"enhancement_return_on_dismantle"`,   **ware_name**      (*string*)
+      :const:`"building"`          :const:`"enhancement_return_on_dismantle"`,   **ware_name**      (*string*)            1.1
                                    :const:`"remove"`
-      :const:`"building"`          :const:`"enhancement_return_on_dismantle"`,   **ware_name**      (*string*),
+      :const:`"building"`          :const:`"enhancement_return_on_dismantle"`,   **ware_name**      (*string*),           1.1
                                    :const:`"set"`                                **amount**         (*int*)
-      :const:`"productionsite"`    :const:`"input"`                              **ware_name**      (*string*),
+      :const:`"productionsite"`    :const:`"input"`                              **ware_name**      (*string*),           1.0
                                    :const:`"add_ware"`                           **amount**         (*int*)
-      :const:`"productionsite"`    :const:`"input"`                              **ware_name**      (*string*),
+      :const:`"productionsite"`    :const:`"input"`                              **ware_name**      (*string*),           1.0
                                    :const:`"modify_ware"`                        **new_amount**     (*int*)
-      :const:`"productionsite"`    :const:`"input"`                              **ware_name**      (*string*)
+      :const:`"productionsite"`    :const:`"input"`                              **ware_name**      (*string*)            1.0
                                    :const:`"remove_ware"`
-      :const:`"productionsite"`    :const:`"input"`                              **worker_name**    (*string*),
+      :const:`"productionsite"`    :const:`"input"`                              **worker_name**    (*string*),           1.0
                                    :const:`"add_worker"`                         **amount**         (*int*)
-      :const:`"productionsite"`    :const:`"input"`                              **worker_name**    (*string*),
+      :const:`"productionsite"`    :const:`"input"`                              **worker_name**    (*string*),           1.0
                                    :const:`"modify_worker"`                      **new_amount**     (*int*)
-      :const:`"productionsite"`    :const:`"input"`                              **worker_name**    (*string*)
+      :const:`"productionsite"`    :const:`"input"`                              **worker_name**    (*string*)            1.0
                                    :const:`"remove_worker"`
-      :const:`"productionsite"`    :const:`"programs"`                           **program_name**   (*string*),
+      :const:`"productionsite"`    :const:`"programs"`                           **program_name**   (*string*),           1.0
                                    :const:`"set"`                                **program_table**  (*table*)
-      :const:`"militarysite"`      :const:`"conquers"`                           **radius**         (*int*)
-      :const:`"militarysite"`      :const:`"heal_per_second"`                    **amount**         (*int*)
-      :const:`"militarysite"`      :const:`"max_soldiers"`                       **amount**         (*int*)
-      :const:`"warehouse"`         :const:`"heal_per_second"`                    **amount**         (*int*)
-      :const:`"warehouse"`         :const:`"conquers"`                           **radius**         (*int*)
-      :const:`"trainingsite"`      :const:`"soldier_capacity"`                   **capacity**       (*int*)
-      :const:`"trainingsite"`      :const:`"trainer_patience"`                   **patience**       (*int*)
-      :const:`"tribe"`             :const:`"add_ware"`                           **ware_name**      (*string*),
+      :const:`"militarysite"`      :const:`"conquers"`                           **radius**         (*int*)               1.1
+      :const:`"militarysite"`      :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
+      :const:`"militarysite"`      :const:`"max_soldiers"`                       **amount**         (*int*)               1.1
+      :const:`"warehouse"`         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
+      :const:`"warehouse"`         :const:`"conquers"`                           **radius**         (*int*)               1.1
+      :const:`"trainingsite"`      :const:`"soldier_capacity"`                   **capacity**       (*int*)               1.1
+      :const:`"trainingsite"`      :const:`"trainer_patience"`                   **patience**       (*int*)               1.1
+      :const:`"tribe"`             :const:`"add_ware"`                           **ware_name**      (*string*),           1.0
                                                                                  **menu_column**    (*int*),
                                                                                  **target_quan**    (*int* or *nil*),
                                                                                  **preciousness**   (*int*),
                                                                                  **helptexts**      (*table*)
-      :const:`"tribe"`             :const:`"add_worker"`                         **worker_name**    (*string*),
+      :const:`"tribe"`             :const:`"add_worker"`                         **worker_name**    (*string*),           1.0
                                                                                  **menu_column**    (*int*),
                                                                                  **target_quan**    (*int* or *nil*),
                                                                                  **preciousness**   (*int* or *nil*),
                                                                                  **helptexts**      (*table*)
-      :const:`"tribe"`             :const:`"add_building"`                       **building_name**  (*string*),
+      :const:`"tribe"`             :const:`"add_building"`                       **building_name**  (*string*),           1.0
                                                                                  **helptexts**      (*table*)
-      :const:`"tribe"`             :const:`"add_immovable"`                      **immovable_name** (*string*),
+      :const:`"tribe"`             :const:`"add_immovable"`                      **immovable_name** (*string*),           1.0
                                                                                  **helptexts**      (*table*)
-      ===========================  ============================================  =======================================
+      ===========================  ============================================  =======================================  =============
 
       Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
       column in the workers displays (stock menu, warehouse window, economy options), and have
