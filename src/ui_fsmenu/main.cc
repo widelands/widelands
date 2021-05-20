@@ -264,8 +264,8 @@ void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& re
 				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
 					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
-					                           MapData::MapType::kScenario :
-					                           MapData::MapType::kNormal;
+                                          MapData::MapType::kScenario :
+                                          MapData::MapType::kNormal;
 					results.push_back(MapEntry(
 					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()));
 				}
@@ -602,7 +602,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
-			                                                         last_image_exchange_time_);
+                                                                  last_image_exchange_time_);
 			return true;
 		}
 	}
@@ -621,8 +621,8 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 
 inline float MainMenu::calc_opacity(const uint32_t time) {
 	return last_image_ == draw_image_ ?
-	          1.f :
-	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
+             1.f :
+             std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
 	                                         kImageExchangeDuration));
 }
 
@@ -712,9 +712,9 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 
 	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-		                         1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
+                               1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
 		                                  kInitialFadeoutDuration :
-		                         1.f;
+                               1.f;
 		do_draw_image(r, image_pos(*splashscreen_), *splashscreen_, opacity);
 	} else {
 		const unsigned opacity =

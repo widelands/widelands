@@ -151,8 +151,8 @@ SDL_GLContext initialize(
 			display_message += "\n\n";
 			display_message +=
 			   (i18n::has_rtl_character(localized_message.c_str()) ?
-			       i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
-			       localized_message);
+                i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
+                localized_message);
 		}
 
 		log_err("%s\n", display_message.c_str());
