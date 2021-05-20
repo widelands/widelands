@@ -1263,19 +1263,19 @@ For workers which are consumed, see: :ref:`has_inputs`.
 /* RST
 .. method:: get_workers(which)
 
-   Similar to :meth:`object.get_wares`.
+   Similar to :meth:`wl.map.object.get_wares`.
 */
 
 /* RST
 .. method:: set_workers(which[, amount])
 
-   Similar to :meth:`object.set_wares`.
+   Similar to :meth:`wl.map.object.set_wares`.
 */
 
 /* RST
 .. attribute:: valid_workers
 
-   (RO) Similar to :attr:`object.valid_wares` but for workers in this
+   (RO) Similar to :attr:`wl.map.object.valid_wares` but for workers in this
    location.
 */
 
@@ -1337,7 +1337,7 @@ Supported at the time of this writing by
 /* RST
 .. method:: set_soldiers(which[, amount])
 
-   Analogous to :meth:`object.set_workers`, but for soldiers. Instead of
+   Analogous to :meth:`wl.map.object.set_workers`, but for soldiers. Instead of
    a name an :class:`array` is used to define the soldier. See
    below for an example.
 
@@ -6090,7 +6090,7 @@ inline bool do_set_worker_policy(Widelands::Warehouse* wh,
 
       Sets the policies how the warehouse should handle the given wares and workers.
 
-      :arg which: Behaves like :meth:`object.get_wares`.
+      :arg which: Behaves like :meth:`wl.map.object.get_wares`.
       :type which: :class:`string` or :class:`table`
       :arg policy: The policy to apply for all the wares and workers given in **which**.
       :type policy: A string out of ``"normal"``, ``"prefer"``, ``"dontstock"`` or ``"remove"``
@@ -6179,7 +6179,7 @@ WH_GET_POLICY(worker)
       Returns the policies how the warehouse should handle the given wares
       and workers. See :meth:`Warehouse.set_warehouse_policies` for policy strings.
 
-      :arg which: Behaves like :meth:`object.get_wares`.
+      :arg which: Behaves like :meth:`wl.map.object.get_wares`.
       :type which: :class:`string` or :class:`array`
 
       :returns: :class:`string` or :class:`table`
