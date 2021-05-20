@@ -289,8 +289,8 @@ void InteractivePlayer::add_statistics_menu() {
 
 void InteractivePlayer::rebuild_statistics_menu() {
 	const StatisticsMenuEntry last_selection = statisticsmenu_.has_selection() ?
-	                                              statisticsmenu_.get_selected() :
-	                                              StatisticsMenuEntry::kSoldiers;
+                                                 statisticsmenu_.get_selected() :
+                                                 StatisticsMenuEntry::kSoldiers;
 
 	statisticsmenu_.clear();
 
@@ -363,12 +363,12 @@ void InteractivePlayer::rebuild_showhide_menu() {
 
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
-	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-	       * are highlighted */
-	      _("Hide Workarea Overlaps") :
-	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-	       * are highlighted */
-	      _("Show Workarea Overlaps"),
+          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+           * are highlighted */
+          _("Hide Workarea Overlaps") :
+          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+           * are highlighted */
+          _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
@@ -583,7 +583,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
 					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
-					                                               Widelands::CAPS_NONE;
+                                                              Widelands::CAPS_NONE;
 				} else if (show_port_space) {
 					caps = f->fcoords.field->maxcaps();
 				} else {
