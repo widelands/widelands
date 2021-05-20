@@ -61,7 +61,7 @@ TextPrompt::TextPrompt(UI::Panel& parent,
 	box_.add(
 	   new UI::Textarea(&box_, panel_style_,
 	                    s == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
-	                                                    UI::FontStyle::kWuiInfoPanelHeading,
+                                                       UI::FontStyle::kWuiInfoPanelHeading,
 	                    text),
 	   UI::Box::Resizing::kFullSize);
 	box_.add_space(kSpacing);
