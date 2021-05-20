@@ -1023,7 +1023,7 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
-                                 g_image_cache->get(image_filename)),
+	                              g_image_cache->get(image_filename)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),

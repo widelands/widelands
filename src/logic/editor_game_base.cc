@@ -99,7 +99,7 @@ void EditorGameBase::init_addons(bool world_only) {
 	enabled_addons_.clear();
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && (world_only ? pair.first.category == AddOns::AddOnCategory::kWorld :
-                                       addon_initially_enabled(pair.first.category))) {
+		                                 addon_initially_enabled(pair.first.category))) {
 			enabled_addons_.push_back(pair.first);
 		}
 	}
@@ -350,8 +350,8 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?
-                          nullptr :
-                          new GameTips(*loader_ui_, registered_game_tips_, all_tribes()));
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_, all_tribes()));
 	}
 	return *loader_ui_;
 }
