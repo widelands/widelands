@@ -941,7 +941,9 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 	}
 }
 
-void LuaDescriptions::do_modify_building(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_building(lua_State* L,
+                                         const std::string& unit_name,
+                                         const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	const Widelands::DescriptionIndex bldindex = descrs.safe_building_index(unit_name);
@@ -975,7 +977,8 @@ void LuaDescriptions::do_modify_building(lua_State* L, const std::string& unit_n
 		} else if (cmd == "set") {
 			bc[wi] = luaL_checkuint32(L, 7);
 		} else {
-			report_error(L, "modify_unit - building - return_on_dismantle: invalid command '%s'", cmd.c_str());
+			report_error(
+			   L, "modify_unit - building - return_on_dismantle: invalid command '%s'", cmd.c_str());
 		}
 	} else if (property == "enhancement_cost") {
 		Widelands::Buildcost& bc = bld.mutable_enhancement_cost();
@@ -987,7 +990,8 @@ void LuaDescriptions::do_modify_building(lua_State* L, const std::string& unit_n
 		} else if (cmd == "set") {
 			bc[wi] = luaL_checkuint32(L, 7);
 		} else {
-			report_error(L, "modify_unit - building - enhancement_cost: invalid command '%s'", cmd.c_str());
+			report_error(
+			   L, "modify_unit - building - enhancement_cost: invalid command '%s'", cmd.c_str());
 		}
 	} else if (property == "enhancement_return_on_dismantle") {
 		Widelands::Buildcost& bc = bld.mutable_enhancement_returns_on_dismantle();
@@ -999,11 +1003,12 @@ void LuaDescriptions::do_modify_building(lua_State* L, const std::string& unit_n
 		} else if (cmd == "set") {
 			bc[wi] = luaL_checkuint32(L, 7);
 		} else {
-			report_error(L, "modify_unit - building - enhancement_return_on_dismantle: invalid command '%s'", cmd.c_str());
+			report_error(
+			   L, "modify_unit - building - enhancement_return_on_dismantle: invalid command '%s'",
+			   cmd.c_str());
 		}
 	} else {
-		report_error(
-		   L, "modify_unit: invalid building property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid building property '%s'", property.c_str());
 	}
 }
 
@@ -1096,8 +1101,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 		// Needs to stay around for backward compatibility
 		return do_modify_building(L, unit_name, property);
 	} else {
-		report_error(
-		   L, "modify_unit: invalid productionsite property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid productionsite property '%s'", property.c_str());
 	}
 }
 
@@ -1132,7 +1136,9 @@ void LuaDescriptions::do_modify_ware(lua_State* L, const std::string&, const std
 	report_error(L, "modify_unit for wares not yet supported");
 }
 
-void LuaDescriptions::do_modify_trainingsite(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_trainingsite(lua_State* L,
+                                             const std::string& unit_name,
+                                             const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	const Widelands::DescriptionIndex tsindex = descrs.safe_building_index(unit_name);
@@ -1144,12 +1150,13 @@ void LuaDescriptions::do_modify_trainingsite(lua_State* L, const std::string& un
 	} else if (property == "trainer_patience") {
 		tsdescr.set_max_stall(luaL_checkuint32(L, 5));
 	} else {
-		report_error(
-		   L, "modify_unit: invalid trainingsite property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid trainingsite property '%s'", property.c_str());
 	}
 }
 
-void LuaDescriptions::do_modify_militarysite(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_militarysite(lua_State* L,
+                                             const std::string& unit_name,
+                                             const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	const Widelands::DescriptionIndex msindex = descrs.safe_building_index(unit_name);
@@ -1163,12 +1170,13 @@ void LuaDescriptions::do_modify_militarysite(lua_State* L, const std::string& un
 	} else if (property == "max_soldiers") {
 		msdescr.set_max_number_of_soldiers(luaL_checkuint32(L, 5));
 	} else {
-		report_error(
-		   L, "modify_unit: invalid militarysite property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid militarysite property '%s'", property.c_str());
 	}
 }
 
-void LuaDescriptions::do_modify_warehouse(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_warehouse(lua_State* L,
+                                          const std::string& unit_name,
+                                          const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	const Widelands::DescriptionIndex whindex = descrs.safe_building_index(unit_name);
@@ -1180,8 +1188,7 @@ void LuaDescriptions::do_modify_warehouse(lua_State* L, const std::string& unit_
 	} else if (property == "heal_per_second") {
 		whdescr.set_heal_per_second(luaL_checkuint32(L, 5));
 	} else {
-		report_error(
-		   L, "modify_unit: invalid warehouse property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid warehouse property '%s'", property.c_str());
 	}
 }
 
