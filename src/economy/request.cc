@@ -282,7 +282,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
 	   (target_building_ ? target_building_->get_priority(get_type(), get_index()) :
-                          WarePriority::kNormal);
+	                       WarePriority::kNormal);
 
 	if (WarePriority::kVeryHigh <= priority) {
 		// Always serve requests with the highest priority first,
