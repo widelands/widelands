@@ -177,7 +177,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
 		if (type == wwWORKER ? curflag.get_road(nextflag) == nullptr :
-		                       curflag.get_roadbase(nextflag) == nullptr) {
+                             curflag.get_roadbase(nextflag) == nullptr) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 

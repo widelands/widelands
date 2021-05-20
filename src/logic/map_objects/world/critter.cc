@@ -413,10 +413,10 @@ void Critter::roam_update(Game& game, State& state) {
 				                                                          // and only if S >= N
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 :
-				             S >= N ? 1.0 :
-				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
-				                        std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
-				                         (2 * N * kPi);
+				   S >= N  ? 1.0 :
+                         -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
+                          std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
+				               (2 * N * kPi);
 				molog(game.get_gametime(),
 				      "    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
 				      defender_strength, weighted_success_chance);
