@@ -270,11 +270,11 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		UI::WLMessageBox mbox(
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
-            (boost::format(
+		      (boost::format(
 		          _("Do you really want to delete the directory ‘%s’ and all its contents?")) %
 		       select.back())
 		         .str() :
-            (boost::format(_("Do you really want to delete the map ‘%s’?")) % selected_map).str(),
+		      (boost::format(_("Do you really want to delete the map ‘%s’?")) % selected_map).str(),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

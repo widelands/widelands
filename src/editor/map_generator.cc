@@ -207,10 +207,10 @@ uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& 
 	double const land_fac = map_info_.landRatio;
 
 	uint8_t res_h = elevation < water_fac ?
-                      water_h :
-	                elevation < water_fac + land_fac ?
-                      water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
-                      mount_h + ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
+	                   water_h :
+	                   elevation < water_fac + land_fac ?
+	                   water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
+	                   mount_h + ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
 	                                (summit_h - mount_h);
 
 	//  Handle Map Border in island mode
@@ -573,8 +573,8 @@ DescriptionIndex MapGenerator::figure_out_terrain(const uint32_t* random2,
 	} else if (isDesert) {
 		atp = MapGenAreaInfo::Area::kWasteland;
 		ttp = ttp == MapGenAreaInfo::Terrain::kLandCoast || isDesertOuter ?
-               MapGenAreaInfo::Terrain::kWastelandOuter :
-               MapGenAreaInfo::Terrain::kWastelandInner;
+		         MapGenAreaInfo::Terrain::kWastelandOuter :
+		         MapGenAreaInfo::Terrain::kWastelandInner;
 	}
 
 	// Return terrain type

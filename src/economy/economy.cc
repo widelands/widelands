@@ -59,8 +59,8 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares_or_workers = wwtype == wwWARE ?
-                                                   player.egbase().descriptions().nr_wares() :
-                                                   player.egbase().descriptions().nr_workers();
+	                                                player.egbase().descriptions().nr_wares() :
+	                                                player.egbase().descriptions().nr_workers();
 	wares_or_workers_.set_nrwares(nr_wares_or_workers);
 
 	target_quantities_ = new TargetQuantity[nr_wares_or_workers];
@@ -503,7 +503,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 		Quantity quantity = 0;
 		for (const Warehouse* wh : warehouses_) {
 			quantity += type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
-                                       wh->get_workers().stock(ware_or_worker_type);
+			                              wh->get_workers().stock(ware_or_worker_type);
 			if (t <= quantity) {
 				return false;
 			}
@@ -738,8 +738,8 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 				             supp.get_position(game)->base_flag().get_position().y,
 				             target_flag.get_position().x, target_flag.get_position().y,
 				             type_ == wwWARE ?
-                            game.descriptions().get_ware_descr(req.get_index())->name().c_str() :
-                            game.descriptions().get_worker_descr(req.get_index())->name().c_str());
+				                game.descriptions().get_ware_descr(req.get_index())->name().c_str() :
+				                game.descriptions().get_worker_descr(req.get_index())->name().c_str());
 			}
 			continue;
 		}
