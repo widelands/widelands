@@ -227,7 +227,7 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			add_vertex(fields_to_draw.at(field.brn_index), color, &vertices_);
 			add_vertex(
 			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
-                                                                              field.rn_index),
+			                                                                     field.rn_index),
 			   color, &vertices_);
 		}
 	};
