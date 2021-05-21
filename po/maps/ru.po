@@ -6,6 +6,7 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # CupIvan <mail@cupivan.ru>, 2019
+# nskdmitry, 2021
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -15,8 +16,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-27 19:15+0000\n"
-"Last-Translator: Zme Zzzz <zmey1207@gmail.com>\n"
+"PO-Revision-Date: 2021-05-16 10:06+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,12 +78,12 @@ msgstr "Очень трудно"
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Вторая империя"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Знакомство с варварами"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -105,12 +106,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Месяцы в изгнании"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Знакомство с имперцами"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -130,12 +131,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Эстафета огня"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Знакомство с атлантами"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -150,27 +151,27 @@ msgstr ""
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "От воды ко льду"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Знакомство с Фризами"
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Моряк (нечестный)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../data/campaigns/campaigns.lua:117
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Рулевой (очень сложный)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Капитан (невозможный)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -272,7 +273,7 @@ msgstr "Ребауд и его племя прибыли на Север. Но �
 
 #: ../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Друзья в нужде"
 
 #: ../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
@@ -300,7 +301,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "На этом уроке вы овладеете военным ремеслом: наймом солдат, их обучением и руководством в бою. Ах, да, о разведке тоже не забудем."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -310,7 +311,7 @@ msgstr "Мореплавание"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Данный урок научит вас мореплаванию, управлению судами и портами, а также использованию паромов и фарваттеров."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -744,7 +745,7 @@ msgstr "В воздухе повисли два больших вопроса: �
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Вызов: нет металла, v2"
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
@@ -797,7 +798,7 @@ msgstr "Загадочная страна с разнообразными лан
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Златоносные пески"
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""

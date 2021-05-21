@@ -10,6 +10,7 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
+# Tóth András <txa-dev@posteo.hu>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
 msgid ""
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-24 00:19+0000\n"
+"PO-Revision-Date: 2021-05-12 08:23+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -111,7 +112,7 @@ msgstr "Persze ezt az is jelenti, hogy további alapanyagokra is szükség lesz 
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr "Az élelmiszer ellátás biztosításához építhetsz egy halászházat, egy vadászházat, egy farmot, egy malmot és egy pékséget."
+msgstr "Az élelmiszerellátás biztosításához építhetsz egy halászházat, egy vadászházat, egy földbirtokot, egy malmot és egy pékséget."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
