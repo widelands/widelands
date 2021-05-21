@@ -139,6 +139,26 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		throw GameDataError("%s: temperature is not possible.", name_.c_str());
 	}
 
+	for (const std::string& resource :
+	     table.get_table("valid_resources")->array_entries<std::string>()) {
+		valid_resources_.push_back(descriptions.load_resource(resource));
+	}
+
+	const std::string default_resource(table.get_string("default_resource"));
+	default_resource_index_ = !default_resource.empty() ?
+	                             descriptions.load_resource(default_resource) :
+	                             Widelands::INVALID_INDEX;
+
+	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
+		throw GameDataError("Default resource is not in valid resources.\n");
+	}
+
+	replace_textures(table);
+}
+
+void TerrainDescription::replace_textures(const LuaTable& table) {
+	texture_paths_.clear();
+	textures_.clear();
 	// Note: Terrain texures are loaded in "graphic/build_texture_atlas.h"
 
 	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
@@ -152,20 +172,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		}
 	} else {
 		frame_length_ = 1000 / get_positive_int(table, "fps");
-	}
-
-	for (const std::string& resource :
-	     table.get_table("valid_resources")->array_entries<std::string>()) {
-		valid_resources_.push_back(descriptions.load_resource(resource));
-	}
-
-	const std::string default_resource(table.get_string("default_resource"));
-	default_resource_index_ = !default_resource.empty() ?
-	                             descriptions.load_resource(default_resource) :
-	                             Widelands::INVALID_INDEX;
-
-	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
-		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
 	for (size_t j = 0; j < texture_paths().size(); ++j) {

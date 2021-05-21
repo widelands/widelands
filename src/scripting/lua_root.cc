@@ -648,6 +648,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
       ===========================  ============================================  =======================================  =============
       :const:`"resource"`          :const:`"max_amount"`                         **amount**         (*int*)               1.0
       :const:`"terrain"`           :const:`"enhancement"`                        **terrain_name**   (*string*)            1.0
+      :const:`"terrain"`           :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
       :const:`"worker"`            :const:`"experience"`                         **experience**     (*int*)               1.0
       :const:`"worker"`            :const:`"becomes"`                            **worker_name**    (*string*)            1.0
       :const:`"worker"`            :const:`"programs"`                           **program_name**   (*string*),           1.0
@@ -1123,6 +1124,9 @@ void LuaDescriptions::do_modify_terrain(lua_State* L,
 
 	if (property == "enhancement") {
 		terrain.set_enhancement(luaL_checkstring(L, 5), luaL_checkstring(L, 6));
+	} else if (property == "textures") {
+		LuaTable t(L);
+		terrain.replace_textures(t);
 	} else {
 		report_error(L, "modify_unit: invalid terrain property '%s'", property.c_str());
 	}
