@@ -68,8 +68,8 @@ jobs:
       run: |
         # Ensure version 10.0
         clang-format --version
-        ver=$(clang-format --version | grep 11)
-        if [ -n "$ver" ]
+        ver=$(clang-format --version | grep 10)
+        if [ -z "$ver" ]
         then
           echo "Cancelling run with clang-format 11"
           exit 2
