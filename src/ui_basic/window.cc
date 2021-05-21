@@ -162,22 +162,22 @@ inline const WindowStyleInfo& Window::window_style_info() const {
 }
 inline const FontStyleInfo& Window::title_style() const {
 	return g_style_manager->font_style(window_style_ == WindowStyle::kWui ?
-                                         FontStyle::kWuiWindowTitle :
-                                         FontStyle::kFsMenuWindowTitle);
+	                                      FontStyle::kWuiWindowTitle :
+	                                      FontStyle::kFsMenuWindowTitle);
 }
 
 void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
-                                                   window_style_info().button_unminimize() :
-                                                   window_style_info().button_minimize()));
+	                                                window_style_info().button_unminimize() :
+	                                                window_style_info().button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
-                                                    Button::VisualState::kRaised);
+	                                                 Button::VisualState::kRaised);
 	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_info().button_unpin() :
-                                                     window_style_info().button_pin()));
+	                                                  window_style_info().button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
-                                           Button::VisualState::kRaised);
+	                                        Button::VisualState::kRaised);
 	button_close_->set_enabled(!pinned_);
 }
 
@@ -343,8 +343,8 @@ void Window::draw_border(RenderTarget& dst) {
 
 	const RGBAColor& focus_color =
 	   (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
-         window_style_info().window_border_focused() :
-         window_style_info().window_border_unfocused();
+	      window_style_info().window_border_focused() :
+	      window_style_info().window_border_unfocused();
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
