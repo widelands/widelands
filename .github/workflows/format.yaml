@@ -57,6 +57,7 @@ jobs:
     - name: Installing formatting tools
       run: |
         sudo apt-get update
+        sudo apt-get remove clang-format
         sudo apt-get install clang-format-10
         pip install pyformat
         # Use clang-format 10 as default until we choose to migrate to 11
@@ -64,7 +65,11 @@ jobs:
         sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
         sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
     - name: Invoking fix_formatting.py
-      run: python3 ./utils/fix_formatting.py
+      run: |
+        # Ensure version 10.0
+        clang-format --version
+        clang-format --version | grep 11 || exit 2
+        python3 ./utils/fix_formatting.py
     - name: Gathering changes
       run: |
         nrfiles=$(git status -s | wc -l)
