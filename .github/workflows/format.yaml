@@ -64,7 +64,8 @@ jobs:
         sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
         sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
         sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
-        clang-format --version
+        # Quit on wrong version
+        clang-format --version | grep 10.0.0
     - name: Invoking fix_formatting.py
       run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
