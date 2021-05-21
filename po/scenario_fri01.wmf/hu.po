@@ -102,76 +102,82 @@ msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Ne feledd, hogy ezek nagy részéhez be tudsz állítani célmennyiséget a "
+"gazdaság beállításainál."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Készíts ételt a bányászoknak!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr ""
+msgstr "Élelmiszer-termelő gazdaság"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Építs kocsmát, halászházat, füstölőt, gyümölcsöst és gyümölcsszedőházat!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "Fejleszd az élelmiszer-termelő gazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "Fejleszd az élelmiszer-termelő gazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Építs legalább két földbirtokot, egy méhészházat (a gyümölcsös közelébe), "
+"egy pékséget, egy sörfőzdét és még egy kocsmát!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Építs vasércbányát és a hozzá kapcsolódó gazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "Építs bányákat és hozzájuk kapcsolódó gazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
+"Építs vasércbányát, kemencét, kovácsműhelyt és kis páncélkovács műhelyt!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "Kezdj katonákat toborozni!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "Katonák toborzása"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Építs laktanyát, rénszarvastelepet és varrodát!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Fedezz fel többet a szigetből!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Terjeszkedés és felfedezés"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "Terjeszkedj tovább és fedezz fel többet a szigetből!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Fejleszd a katonáidat!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -181,7 +187,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "Katonák fejlesztése"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -190,38 +196,46 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"Képezz ki egy katonát a legmagasabb szintre! Ezt a kiképzőtáborban és a "
+"kiképző arénában teheted meg. Szükségünk lesz aranybányára, szabóműhelyre "
+"erősebb kacagányokhoz, és nagy páncélkovács műhelyre jobb fegyverekhez és "
+"sisakokhoz."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "Győzd le az ellenséget!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "Győzd le az ellenséget!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "Rombold le az ellenséges törzs főhadiszállását!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "Menekülj el az árvíz elől!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "Menekülj el az árvíz elől!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Építs kikötőt, szövőmalmot és hajóács műhelyt, és indíts expedíciót a "
+"meneküléshez, mielőtt a szökőár elárasztja a szigetet!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
+"A kikötőt vagy a sziget legkeletibb csúcsán, vagy az ellenség "
+"főhadiszállásának a helyén tudod megépíteni."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
@@ -229,6 +243,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Ha nem készültél fel megfelelően erre a kihívásra, akkor tölts be egy "
+"biztonsági mentést, ami azelőtt készült, hogy elérted volna az ellenség "
+"főhadiszállását!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -275,6 +292,8 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"Itt legalább olyan jó helye lesz az új otthonunknak, mint bárhol máshol. De "
+"először meg kell oldanunk az építőanyagok megbízható utánpótlását."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -282,6 +301,7 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"Megkértem egyik tanácsadómat, Haukét, hogy felügyelje a település építését."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
@@ -294,6 +314,7 @@ msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
 msgstr ""
+"Béke veled, Reebaud főnök! Azonnal hozzálátok a sziget betelepítéséhez."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -302,6 +323,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Frízekként a házainkat leginkább téglából építjük. Emellett kell még "
+"hozzájuk farönk és gránit is. A tetőt természetesen náddal fedjük. Semmi sem"
+" jobb eső ellen."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -310,6 +334,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"A fatermelésre lesz először gondunk. Úgy tűnik, lassan nőnek a fák ezen a "
+"szigeten. Jobb lesz, ha legalább két erdészházat építünk, és egy "
+"favágóházat."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -319,6 +346,11 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
+"Jó lenne minél előbb építeni egy nád ültetvényt is. Még a nád ültetvény "
+"építéséhez is szükség van nádra, úgyhogy figyelnünk kell arra, hogy nehogy "
+"kifogyjon, mielőtt tudnánk magunknak termeszteni. A nádat könnyű "
+"termeszteni, úgyhogy a nádtermesztőnek nincs is szüksége semmire a "
+"munkájához."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
@@ -333,6 +365,11 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"A fa és nád utánpótlást biztosítottuk. Most a téglával kell foglalkoznunk. A"
+" téglát a téglaégetőben gránitból és agyagból égetik, úgyhogy először ezeket"
+" kell termelnünk. A kontinensen a gránitot kövekből fejtettük, de azt itt "
+"nem látok sehol. De talán ezekben a dombokban találunk elég kibányászható "
+"gránitot."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -342,6 +379,10 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"Agyagot könnyű készíteni: Az agyagveremnél dolgozó vályogvető csak kiás egy "
+"kis földet, és elkeveri vízzel. Csak arra figyelj, hogy legyen elég helye "
+"ásni az agyagverem körül! Esetleg őrházak építésével bővíthetjük a "
+"területünket."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -350,6 +391,9 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"A téglaégetéshez a téglaégető szénnel tüzel. Építs szénbányát, hogy soha ne "
+"fogyjunk ki belőle! Ha nincs szén, nincs tégla sem, ha nincs tégla, nincs "
+"bánya sem, ha nincs bánya, nincs szén sem… láthatod, mi a probléma."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -357,6 +401,8 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"Építs kutat is! Senki sem szeret sós vizet inni, és téglához sem "
+"használható."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
@@ -369,6 +415,9 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Jól csináltad. A teljes építőanyag termelésünk működik már. Várjuk meg, amíg"
+" összegyűlik kicsit több építőanyag. Terjeszkedhetünk tovább, hogy lássuk, "
+"mi található még ezen a szigeten."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
@@ -386,12 +435,18 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"Észrevettem, hogy egy ideje kevés a nádunk. Az épületeinkhez nagyon sok "
+"kell. Építsünk még egy-két nád ültetvényt! Nádat használunk a halászhálókhoz"
+" és más szerszámokhoz is, ezért a hiány megszüntetése elsőbbséget kell "
+"élvezzen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
+"Az új nád ültetvény építésének nád szükségletéhez rendeld el a legmagasabb "
+"fontosságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
@@ -409,6 +464,9 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"A téglakészítők agyaghiányra panaszkodnak egy ideje. Agyag nélkül nem "
+"készülnek téglák, így ez a hiány nagyon lelassít minket. Jó lenne építeni "
+"még egy-két agyagvermet és kutat is a vízellátásukhoz."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -417,6 +475,10 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"Az agyagot használjuk hajóépítéshez és a hatékonyabb faszénégető kemencékben"
+" is. Ha szükségünk lenne valamikor hajóra, vagy ha a bányáink nem tudnának "
+"elég szenet termelni, akkor több agyagra lesz szükségünk, ezért a hiányt meg"
+" kell szüntetnünk."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
@@ -435,12 +497,18 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"Észrevettem, hogy fogytán van a téglánk. Ez nagyon lelassítja az építkezést,"
+" mert mindenhez sok tégla kell. Mindenképpen építenünk kellene még egy "
+"téglaégetőt, és a legmagasabb fontossággal szállítani a téglákat az "
+"építéséhez, hogy minél előbb megszüntessük a hiányt."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"Az új téglaégető építésének tégla szükségletéhez rendeld el a legmagasabb "
+"fontosságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
@@ -459,6 +527,11 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Egyre távolabb terjeszkedünk keletre, ehhez az árukat egyre hosszabb úton "
+"kell szállítanunk. Építsünk bizonyos távolságonként raktárakat a mindenkori "
+"keleti határra, és mindig küldjük az építőanyagokat a legkeletibb raktárba. "
+"A főhadiszállásunk túl messze van a nyugati parton, így nem igazán alkalmas "
+"az áruk tartós tárolására."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
@@ -466,7 +539,7 @@ msgstr "A bányászok éheznek"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Tiltakoznak a bányászok…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
@@ -475,6 +548,9 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"Reebaud főnök! Rossz hírt hozok. A bányászok olyan keményen dolgoznak, hogy "
+"nincs idejük ételt készíteniük maguknak. Azt követelik, hogy szállítsunk "
+"nekik."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -484,6 +560,10 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"Építenünk kell egy kocsmát harapnivalók készítéséhez. A nyers "
+"élelmiszerekhez halászházat kell építenünk, és mivel senki nem szereti a "
+"nyers halat, egy füstölőt is, hogy megfüstölje a halakat. Ezen kívül építs "
+"gyümölcsöst bokrokat ültetni, és gyümölcsszedőházat leszüretelni őket!"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -491,10 +571,12 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"Kezdjünk el gyorsabban terjeszkedni, hogy legyen helyünk sok gyümölcsösnek "
+"és hosszabb partszakaszunk a halászathoz!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Az élelmiszer-termelő gazdaság bővítése"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
@@ -503,7 +585,7 @@ msgstr "A katonák ellátmánya"
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
-msgstr ""
+msgstr "Ez megvan. A bányászok elégedettek, és újra munkába álltak."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -512,6 +594,9 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"De ha majd bővítenünk kell a bányákat, akkor már nem lesz elég nekik a "
+"harapnivaló. Jobb, ha előre felkészülünk: Építs még egy kocsmát, utána pedig"
+" fontold meg az egyik továbbfejlesztését ivóvá!"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -522,6 +607,11 @@ msgid ""
 "bread and beer. We should keep expanding quickly to have more space for "
 "farming."
 msgstr ""
+"Az ivónak jobb élelmiszerekre van szüksége. Építs pékséget, sörfőzdét, és "
+"két-három földbirtokot árpa termesztéséhez! Ne feledd, hogy az árpa nagyon "
+"lassan növekszik, ezért ennyi földbirtok nem lesz már elég, amikor tényleg "
+"szükségünk lesz kenyérre és sörre! Továbbra is gyorsan kell terjeszkednünk, "
+"hogy legyen elég megművelhető földünk."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -531,6 +621,10 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
+"A pékséget és a sörfőzdét fejlesszük tovább, amikor a munkások elég "
+"tapasztaltak lesznek, hogy tudjanak mézsört és mézzel édesített kenyeret "
+"készíteni! A gyümölcsös közelébe építs méhészházat mézet gyűjteni, amit "
+"elraktározunk, amíg szükség nem lesz rá!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
@@ -546,6 +640,8 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"Most már minden ételt el tudunk készíteni, amit szoktunk. Kíváncsi vagyok, "
+"milyen kincseket rejtegethetnek ezek a dombok. Derítsük ki!"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -556,11 +652,16 @@ msgid ""
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
 msgstr ""
+"Építs vasércbányát és esetleg aranybányát is! Mivel ezek csak az ércet "
+"termelik ki, szükségünk lesz kemencére is a kiolvasztásukhoz. Építs "
+"kovácsműhelyt is, hogy ne fogyjunk ki a szerszámokból — és igen, egy kis "
+"páncélkovács műhelyt is! Ez sisakokat és kardokat készít. Remélem, nem "
+"találkozunk itt ellenséggel, de jobb felkészülni."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "Készülj fel!"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -568,6 +669,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"A bányáink jól dolgoznak. El tudunk már készíteni minden szerszámot, amire "
+"szükségünk van, és valamennyi fegyvert is."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -577,6 +680,10 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
+"A fegyvereket felhasználhatnánk új katonák toborzásához. Remélem, nem "
+"találunk itt ellenséget, de mindig jobb előre felkészülni. Az újoncokat a "
+"laktanyában rövid karddal és kacagánnyal látják el. Ez az egyenruhája minden"
+" tisztességes katonának."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -586,6 +693,10 @@ msgid ""
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
 msgstr ""
+"Szükség lesz laktanyára persze, ezen kívül rénszarvastelepre a szőrméhez és "
+"varrodára, hogy kacagányt varrjon a szőrméből. A rénszarvastelep emellett "
+"húst is készít, és rénszarvasokat képez segíteni a hordárok munkáját a "
+"forgalmas utakon."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -594,6 +705,10 @@ msgid ""
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
+"Azt javaslom, hogy ezeket az épületeket egymás közelében építsük fel, a "
+"közelükben pedig építsünk két raktárat: Az egyik csak a fegyvereket, "
+"páncélokat, érceket, fémeket és szenet tároljon; a másik pedig "
+"építőanyagokat!"
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -603,20 +718,24 @@ msgid ""
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
 msgstr ""
+"Építsük a kapcsolódó épületeket is a közelbe: kemencét, kutakat és "
+"földbirtokokat a rénszarvastelep ellátásához! Ez az elrendezés hatékonyabbá "
+"teszi a hadi termelésünket, mert lecsökkenti a várakozási időt a feldolgozó "
+"épületekben."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "Fedezd fel a szigetet!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Terjeszkedés"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "A laktanyánk elkészült, és megkezdte az újoncok toborzását."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -624,6 +743,8 @@ msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
 msgstr ""
+"De még nem tudjuk biztosan, hogy biztonságban vagyunk-e. Jó volna tovább "
+"terjeszkednünk keletre, hogy lássuk, egyedül vagyunk-e."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -631,23 +752,25 @@ msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
+"A terjeszkedés több helyet biztosítana a földműveléshez is. Jól jönne kicsit"
+" több árpa a rénszarvasoknak, mert az útjaink egyre forgalmasabbak."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
-msgstr ""
+msgstr "Ellenség!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:291
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "Ellenséget találtunk!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "Másik törzs! A MI szigetünkön! Mit kerestek itt, betolakodók?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -658,6 +781,9 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"Ez az ÉN szigetem! TI vagytok itt a betolakodók! Esküszöm az egy igaz "
+"Istenre, hogy mindannyiótokat megölünk, lelketek pedig örökre a pokol izzó "
+"tüzébe vettetik!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -665,10 +791,12 @@ msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
 msgstr ""
+"Hitetlenek! Imádkozom istenEINKhez, hogy ezt a káromló törzset szétzúzzák! "
+"Háborút reájuk!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "Erősebben a csatára"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
@@ -676,6 +804,8 @@ msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr ""
+"Könnyedén toborzunk katonákat, de ők még gyengék így. Fejlesztenünk kell a "
+"katonáinkat, ha le akarjuk győzni az ellenséget."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
@@ -683,10 +813,12 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
+"A katonák a kiképzőtáborban kapnak alapkiképzést támadásból, életerőből és "
+"védelemből. A magasabb szintű kiképzést a kiképző arénában kapják meg."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Fríz hadviselés"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -695,6 +827,9 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"A katonákat két szinten képezzük védelemre és életerőre. Vassal és arannyal "
+"kivert kacagányt kapnak, hogy felfogja az ütéseket; valamint vasból és "
+"aranyból kovácsolt sisakot, hogy tovább bírják a csatát."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -705,6 +840,11 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"Háromféle karddal tanulnak meg támadni: hosszú karddal, pallossal és kétélű "
+"karddal. Mindegyikhez kell vas, az utóbbi kettő aranyat is tartalmaz. A "
+"magasabb szinteken a katonák megtanulnak egyszerre két karddal harcolni: "
+"Megtartják az első kétélű kardjukat, és mellé a másik kezükbe sorban "
+"ugyanezeket a kardokat. Így összesen hat szinten képezhető a támadásuk."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -713,10 +853,12 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"Nem tanítjuk meg a katonákat kitérni a támadás elől. Egy igazi harcos a "
+"kardjával hárítja az ellenfele csapásait, nem ugrál el gyáván előlük."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "A kiképző központ megtervezése"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -727,6 +869,12 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"Szükségünk lesz egy szabóműhelyre az erősebb kacagányok varrásához, és egy "
+"újabb varrodára, hogy továbbra is készüljenek egyszerű kacagányok. A kis "
+"páncélkovács műhelyt is fel kell fejlesztenünk jobb fegyverek és sisakok "
+"készítéséhez, és egy új kicsit építenünk, hogy továbbra is legyenek alap "
+"fegyvereink. Most már szükségünk van aranybányára is, mert a legjobb "
+"fegyverekhez és páncélokhoz arany is kell."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -737,6 +885,11 @@ msgid ""
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
+"Mindezeket az épületeket a laktanya közelébe érdemes építenünk, mert, ahogy "
+"korábban mondtam, sokkal hatékonyabb, ha minden toborzó és kiképző helyünk "
+"egy katonai központba van szervezve, mintha nagy távolságokra lenne "
+"szétszórva. Építs egy harmadik raktárat is ide, ami csak a kiképzéshez "
+"szükséges élelmiszert fogja tárolni!"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -745,6 +898,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Amikor a katonák új fegyverek használatát tanulják, a régieket kidobják. "
+"Gondolj arra, hogy ez a haszontalan hulladék az utakat foglalja, amíg be nem"
+" kerül valamelyik raktárba."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -752,19 +908,22 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"Azt javaslom, fejlesszünk legalább egy katonát a legmagasabb szintre "
+"életerőből, védekezésből és támadásból. Amíg nem sikerül, addig az ellenség "
+"túl erős számunkra."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Katonáink erősek"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
-msgstr ""
+msgstr "Megvan végre az első teljesen kiképzett katonánk. Támadás!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Elég erősek a katonáink?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -774,10 +933,15 @@ msgid ""
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
 msgstr ""
+"Tisztelettel kérlek, főnök, ne oly hevesen! Az ellenség nagyon erős, és nem "
+"vagyok még meggyőződve róla, hogy le tudnánk győzni. Nem szeretnék katonákat"
+" olyan csatába küldeni, amit valószínűleg elvesztenének. Várjunk inkább "
+"kicsit tovább, amíg biztosan le nem tudjuk győzni az ellenséget veszteségek "
+"nélkül!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "Elég erősek a katonáink"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -787,16 +951,20 @@ msgid ""
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
+"Persze, én is szeretném életben tartani a katonáinkat, de nem kímélhetünk "
+"meg mindenkit. A katonák időnként elesnek a csatában, ez már csak így megy. "
+"Eldöntheted, meddig várjunk a támadással, de ha túl sokáig tétovázunk, az "
+"ellenség ki fogja használni a gyengeségünket."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "Vigyázz!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "Nem vagyunk elég erősek"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -805,6 +973,9 @@ msgid ""
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
 msgstr ""
+"Reebaud főnök! Felderítőink jelentik, hogy az ellenség gyorsan nyomul előre."
+" Attól tartok, nem vagyunk még elég erősek, hogy megvédjük magunkat, ha ők "
+"támadnak először. Találj ki valamit a távoltartásukra!"
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
@@ -814,6 +985,10 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"A felderítők azt jelentették, hogy az ellenség nem tud tornyokat építeni. "
+"Építsünk erődöt, mert ez az az épület, ami a legtávolabbra tolja ki a "
+"határunkat. Az ellenség csak akkor láthatja, ha közvetlenül a határra épít ő"
+" is erődöt."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -823,6 +998,10 @@ msgid ""
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
 msgstr ""
+"Ezt is megakadályozhatjuk, vagy legalább megnehezíthetjük, ha erdészeket "
+"küldünk fákat ültetni a határra. Az ellenségnek sokat ki kell majd vágnia "
+"ahhoz, hogy építkezni tudjon, így talán biztonságban lehetünk addig, amíg mi"
+" nem indítunk támadást a nekünk megfelelő időpontban."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
@@ -840,6 +1019,8 @@ msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr ""
+"Legyőztük őket! Hálát adok összes isteneimnek a hitetlenek fölött aratott "
+"győzelemért!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
@@ -847,6 +1028,8 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"Imádkozom Istenhez, hogy meghallgassa utolsó szavaimat. Ne hagyja, hogy a "
+"hamis bitangok győzedelmeskedjenek! Büntesse meg őket gaz tettükért!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
@@ -856,7 +1039,7 @@ msgstr "Szökőár"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "A szigetet elönti az ár!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -864,6 +1047,8 @@ msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
 msgstr ""
+"Az istene teljesítette a kérését! A tengerszint emelkedik! A sziget majdnem "
+"teljesen sík — mindannyian megfulladunk!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -873,6 +1058,11 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"Ne csüggedj, találtam okot reményre! A sziget legkeletibb csúcsa, és az a "
+"hely, ahol a galád főhadiszállása állt egyaránt alkalmasnak tűnik kikötő "
+"építésére. Ha tudunk építeni egy hajót, és megtöltjük mindazzal, amire egy "
+"új település építéséhez szükségünk van, akkor még lehet esélyünk "
+"elmenekülni."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -883,14 +1073,19 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"A szökőár nyugatról érkezik. Ha sietünk, éppen csak megelőzhetjük! Csak egy "
+"kikötőt és egy hajóács műhelyt kell építenünk – oh, és még egy szövőmalmot "
+"is, ami elkészíti nádból és szőrméből a vitorlákhoz szükséges erős szövetet."
+" Ezután tudunk expedíciót indítani a kikötőből. Imádkozzunk az istenekhez, "
+"és siessünk!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "Ne feledd a katonákat!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "Katonák a kikötőbe!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -912,13 +1107,29 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"Majdnem elfelejtettem a nagy sietségben: Akárhol is érünk partot, szükségünk"
+" lesz építőanyagokra az újrakezdéshez, és katonákra az új településünk "
+"védelmére és kiterjesztésére. Az expedíció berakodása után marad még egy "
+"kevés hely a hajón áruknak és munkásoknak. Ezen felül pedig %d katona is "
+"elfér, ha kibírunk egy kis zsúfoltságot. Küldjünk építőanyagokat és a "
+"legjobb embereinket a kikötőbe, amikor megépült, hogy felkészüljenek a "
+"behajózásra!"
 msgstr[1] ""
+"Majdnem elfelejtettem a nagy sietségben: Akárhol is érünk partot, szükségünk"
+" lesz építőanyagokra az újrakezdéshez, és katonákra az új településünk "
+"védelmére és kiterjesztésére. Az expedíció berakodása után marad még egy "
+"kevés hely a hajón áruknak és munkásoknak. Ezen felül pedig %d katona is "
+"elfér, ha kibírunk egy kis zsúfoltságot. Küldjünk építőanyagokat és a "
+"legjobb embereinket a kikötőbe, amikor megépült, hogy felkészüljenek a "
+"behajózásra!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"Az expedícióba berakodott áruk és munkások és néhány katona a kikötőből "
+"hozzá lesznek adva a következő küldetés kezdőkészletéhez."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
@@ -926,7 +1137,7 @@ msgstr "Győzelem"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
-msgstr ""
+msgstr "Megmenekültünk!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
@@ -935,6 +1146,9 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
+"Az istenek meghallgatták az imáinkat. Megmenekülünk a szigetet elpusztító ár"
+" elől, és bízom abban, hogy a világ egy békésebb zugában új otthont "
+"építhetünk majd!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
