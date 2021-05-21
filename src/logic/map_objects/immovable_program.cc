@@ -148,7 +148,7 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 	immovable.program_step(
 	   game, Duration(parameters.duration.get() ? 1 + game.logic_rand() % parameters.duration.get() +
 	                                                 game.logic_rand() % parameters.duration.get() :
-                                                 0));
+	                                              0));
 }
 
 /* RST
