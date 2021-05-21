@@ -321,8 +321,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
-                           nullptr :
-                           descriptions.get_building_descr(descriptions.safe_building_index(descr));
+							      nullptr :
+							      descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite->intermediates.push_back(
@@ -428,8 +428,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 								   descriptions.safe_building_index(fr.string()));
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
-                                                     nullptr :
-                                                     descriptions.get_building_descr(
+								                             nullptr :
+								                             descriptions.get_building_descr(
 								                                descriptions.safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
@@ -454,8 +454,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
-                                                     nullptr :
-                                                     descriptions.get_building_descr(
+								                             nullptr :
+								                             descriptions.get_building_descr(
 								                                descriptions.safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
@@ -505,11 +505,13 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const MapIndex upper_bound = map.max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
-				oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
-				                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-				                         f.vision == VisibleState::kPreviouslySeen ?
-                                                            SavedVisionState::kPreviouslySeen :
-                                                            SavedVisionState::kNone);
+				oss << static_cast<char>(f.vision.is_revealed() ?
+				                            SavedVisionState::kRevealed :
+				                            f.vision.is_hidden() ?
+				                            SavedVisionState::kHidden :
+				                            f.vision == VisibleState::kPreviouslySeen ?
+				                            SavedVisionState::kPreviouslySeen :
+				                            SavedVisionState::kNone);
 				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
@@ -525,11 +527,13 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
-			                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-			                         f.vision == VisibleState::kPreviouslySeen ?
-                                                         SavedVisionState::kPreviouslySeen :
-                                                         SavedVisionState::kNone);
+			oss << static_cast<char>(f.vision.is_revealed() ?
+			                            SavedVisionState::kRevealed :
+			                            f.vision.is_hidden() ?
+			                            SavedVisionState::kHidden :
+			                            f.vision == VisibleState::kPreviouslySeen ?
+			                            SavedVisionState::kPreviouslySeen :
+			                            SavedVisionState::kNone);
 			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
@@ -658,7 +662,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					// `building` can only be nullptr in compatibility cases.
 					// Remove the non-null check after v1.0
 					fw.string(field->dismantlesite.building ? field->dismantlesite.building->name() :
-                                                         "dismantlesite");
+					                                          "dismantlesite");
 					fw.unsigned_32(field->dismantlesite.progress);
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());

@@ -273,7 +273,7 @@ inline bool InfoPanel::is_mouse_over_panel() const {
 	}
 	return last_mouse_pos_.x >= 0 && last_mouse_pos_.x <= get_w() &&
 	       (on_top_ ? (last_mouse_pos_.y >= 0 && last_mouse_pos_.y <= h) :
-                     (last_mouse_pos_.y <= get_h() && last_mouse_pos_.y >= get_h() - h));
+	                  (last_mouse_pos_.y <= get_h() && last_mouse_pos_.y >= get_h() - h));
 }
 
 void InfoPanel::set_textareas_visibility(bool v) {

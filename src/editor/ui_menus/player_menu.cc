@@ -195,8 +195,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		plr_tribe->select(
 		   (p <= map.get_nrplayers() &&
 		    Widelands::tribe_exists(map.get_scenario_player_tribe(p), parent.egbase().all_tribes())) ?
-            map.get_scenario_player_tribe(p) :
-            "");
+		      map.get_scenario_player_tribe(p) :
+		      "");
 		plr_tribe->selected.connect([this, p]() { player_tribe_clicked(p - 1); });
 
 		// Starting position
