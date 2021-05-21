@@ -477,7 +477,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :  // NOLINT
-                                  Widelands::IslandExploreDirection::kCounterClockwise;
+	          Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires
@@ -612,8 +612,8 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Widelands::Direction direction =
 		   !new_teritory_directions.empty() ?
-            new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
-            possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
+		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
+		      possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
