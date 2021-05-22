@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2021 by the Widelands Development Team
+ * Copyright (C) 2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,8 @@ public:
 
 	void set_player_state(uint8_t const number, PlayerSettings::State state) override;
 	void set_player_ai(uint8_t const number, const std::string& ai, bool const random_ai) override;
-	void set_player_tribe(uint8_t const number, const std::string& tribe, bool random_tribe) override;
+	void
+	set_player_tribe(uint8_t const number, const std::string& tribe, bool random_tribe) override;
 	void set_player_init(uint8_t const number, uint8_t const index) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_color(uint8_t number, const RGBColor&) override;
@@ -73,5 +74,4 @@ private:
 	std::vector<std::string> wincondition_scripts_;
 };
 
-
-#endif // end of include guard: WL_NETWORK_HOST_GAME_SETTINGS_PROVIDER_H
+#endif  // end of include guard: WL_NETWORK_HOST_GAME_SETTINGS_PROVIDER_H

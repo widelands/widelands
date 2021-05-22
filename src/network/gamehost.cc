@@ -598,7 +598,9 @@ void GameHost::run_callback() {
 		}
 		clear_computer_players();
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(capsule_ ? &capsule_->menu() : nullptr, *game_, e.what(), player_number);
+		FsMenu::MainMenu* parent =
+		   capsule_ ? &capsule_->menu() : nullptr;  // make includes script happy
+		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
 		clear_computer_players();
 
 		while (!d->clients.empty()) {

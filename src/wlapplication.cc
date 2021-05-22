@@ -506,7 +506,7 @@ void WLApplication::initialize_g_addons() {
 }
 
 static void init_one_player_from_template(unsigned p,
-										  bool human,
+                                          bool human,
                                           std::unique_ptr<GameSettingsProvider>& settings,
                                           Section& player_section,
                                           const Widelands::Map& map) {
@@ -514,7 +514,7 @@ static void init_one_player_from_template(unsigned p,
 		settings->set_player_state(p, PlayerSettings::State::kHuman);
 	} else if (player_section.get_bool("closed", false)) {
 		settings->set_player_state(p, PlayerSettings::State::kClosed);
-		return; // No need to configure closed player
+		return;  // No need to configure closed player
 	} else {
 		std::string ai = player_section.get_string("ai", "normal");
 		bool random = ai == "random";
@@ -610,7 +610,8 @@ void WLApplication::init_and_run_game_from_template() {
 	std::unique_ptr<GameHost> host;
 	if (multiplayer) {
 		std::unique_ptr<GameController> ctrl(nullptr);
-		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")), Widelands::get_all_tribeinfos(nullptr), false));
+		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
+		                        Widelands::get_all_tribeinfos(nullptr), false));
 		settings.reset(new HostGameSettingsProvider(host.get()));
 	} else {
 		settings.reset(new SinglePlayerGameSettingsProvider());
@@ -647,11 +648,11 @@ void WLApplication::init_and_run_game_from_template() {
 		const int nr_players = map.get_nrplayers();
 		settings->set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
 		settings->set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(),
-		                 nr_players, false);
+		                  nr_players, false);
 		for (int p = 0; p < nr_players; ++p) {
 			std::string key = "player_";
 			key += std::to_string(p + 1);
-			bool human = p == playernumber-1;
+			bool human = p == playernumber - 1;
 			init_one_player_from_template(p, human, settings, profile.pull_section(key.c_str()), map);
 		}
 	}
