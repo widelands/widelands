@@ -63,7 +63,7 @@ int text_height(int ptsize) {
 
 namespace UI {
 
-static const int CARET_BLINKING_DELAY = 500;
+constexpr int CARET_BLINKING_DELAY = 500;
 
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
    : draw_caret_(false),

@@ -41,6 +41,7 @@
 namespace {
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
+constexpr int CARET_BLINKING_DELAY = 500;
 }  // namespace
 
 namespace UI {
@@ -103,8 +104,6 @@ struct EditBoxImpl {
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
 };
-
-static const int CARET_BLINKING_DELAY = 500;
 
 EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : Panel(parent,
