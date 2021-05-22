@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
@@ -15,8 +16,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-05-18 10:18+0000\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgstr "Twoja drużyna znalazła nowy artefakt."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Znalazłeś nowy artefakt."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -75,7 +76,7 @@ msgstr "Jeden z artefaktów twojego zespołu został skradziony przez przeciwnik
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Jeden z twoich artefaktów został skradziony przez przeciwnika."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -88,7 +89,7 @@ msgstr "Twoja drużyna wykradła przeciwnikowi artefakt."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Wykradłeś artefakt przeciwnikowi."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -170,7 +171,7 @@ msgstr "Samowładca"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Plemię lub drużyna, która zdoła pokonać innych, wygrywa! Wygrana oznacza, że przeciwnicy nie mają kwatery głównej, portu ani magazynu."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -190,13 +191,13 @@ msgstr "Niekończąca się gra bez wytycznych. Mgła wojny jest wyłączona."
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Myśliwy HQ"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Plemię lub drużyna, która może znaleźć i pokonać wszystkie inne kwatery główne wygrywa grę! To nie działa w warunkach początkowych bez kwater głównych."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
