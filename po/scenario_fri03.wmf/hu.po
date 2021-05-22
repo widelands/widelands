@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
+# vargaviktor <viktor.varga@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
+"Last-Translator: vargaviktor <viktor.varga@gmail.com>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,11 +48,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:50
 msgid "Pay or Fight"
-msgstr ""
+msgstr "Fizess vagy harcolj"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:52
 msgid "Pay the Empire or Destroy Their Port"
-msgstr ""
+msgstr "Fizess a birodalomnak vagy pusztítsd el a kikötőit"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 #, lua-format
@@ -82,11 +83,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:68
 msgid "Introduction"
-msgstr ""
+msgstr "Bevezetés"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:69
 msgid "Welcome back!"
-msgstr ""
+msgstr "Üdvözöllek újra!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:71
@@ -114,7 +115,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:100
 msgid "Eight Weeks Ago"
-msgstr ""
+msgstr "Nyolc héttel ezelőtt"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:83
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:92
@@ -166,12 +167,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid "Dark Future"
-msgstr ""
+msgstr "Sötét jövő"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:116
 msgid "Reconquest"
-msgstr ""
+msgstr "Újrahódít"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:109
@@ -255,7 +256,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
-msgstr ""
+msgstr "Egy furcsa sziget"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:142
 msgid "An apprehension"
@@ -287,7 +288,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:260
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:275
 msgid "Strangers"
-msgstr ""
+msgstr "Idegenek"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:230
@@ -373,7 +374,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulálunk"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
@@ -392,12 +393,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "A Jégsivatagban"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
 msgid "The next island"
-msgstr ""
+msgstr "A következő sziget"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
@@ -428,12 +429,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
 msgid "The North"
-msgstr ""
+msgstr "Észak"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
 msgid "In the North"
-msgstr ""
+msgstr "Északon"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
