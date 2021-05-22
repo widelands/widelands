@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-18 09:53+0000\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +51,7 @@ msgstr "Witamy w Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands to gra strategiczna oparta na powolnej rozbudowie skupiona bardziej na budowaniu, niż na niszczeniu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
@@ -63,7 +63,7 @@ msgstr "Cele i sposób radzenia sobie z nimi"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Obsługa okna ‘Cele’"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
@@ -89,7 +89,7 @@ msgstr "Pokaż obszary zabudowy"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Aktywuj wyświetlanie miejsc na budowę. Możesz to zrobić na dwa sposoby:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
@@ -130,7 +130,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Zwykle zaczynasz grę z jedną kwaterą główną. To ten duży budynek z niebieską flagą przed nim. Kwatera główna przechowuje towary, pracowników i wojsko. Niektóre towary są potrzebne do budowy budynków, inne są dalej przetwarzane. Oczywiście początkowe towary kiedyś się skończą, więc należy rozpocząć ich produkcję. Najważniejsze na początku są podstawowe towary: kłody i granit. Upewnijmy się, że nie skończą się nam kłody. Potrzebujemy do tego drwala i chaty dla niego."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -142,13 +142,13 @@ msgstr "Musimy znaleźć miłe miejsce na chatę drwala. Aby sobie to ułatwić,
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Pokażę ci, gdzie jest menu i gdzie pokazać lub ukryć wyświetlanie miejsc na budowę."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Skoro już wiesz, gdzie można pokazać i ukryć miejsca na budowę, włącz je z powrotem, abyśmy mogli wznieść nasz pierwszy budynek."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"
@@ -160,7 +160,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Oto i są. Najpierw pozwól, że pokażę ci, jak zbudować chatę drwala i połączyć ją z drogą. Dobre miejsce dla drwala znajduje się zaraz obok tych drzew. Wytłumaczę ci kroki, które podejmę i zademonstruję je."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -170,7 +170,7 @@ msgstr "Budowanie chaty drwala"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Najpierw kliknę lewym przyciskiem symbol w miejscu, gdzie chcę zbudować chatę drwala. Pojawi się okno, w którym mogę wybierać między budynkami."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
@@ -451,7 +451,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "Kamieniołom to mały budynek, podobnie jak chata drwala. Możesz je więc zbudować na każdym polu, na którym jest symbol czerwonego, żółtego lub zielonego domku (aby pokazać symbole, wciśnij %s)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -473,7 +473,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Upewnij się, że włączyłeś pokazywanie miejsc na budowę, po czym kliknij na miejscu, gdzie chcesz umieścić budynek i wybierz go z okna."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -623,7 +623,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Twoi pracownicy nie lubią chodzić bezdrożami. Powinieneś wybudować drogę łączącą kwaterę główną z placem budowy, aby tragarze mogli dostarczać towary."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
@@ -681,7 +681,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "W międzyczasie pokażę ci kolejną przydatną rzecz. Czasem ciężko jest odróżnić budynki od siebie. W Widelands można włączyć etykiety nad budynkami nazywane ‘spisem ludności’."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -808,7 +808,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Każde okno w Widelands (oprócz okien dotyczących historii gry z napisem ‘OK’) może zostać zamknięte poprzez kliknięcie na nim prawym przyciskiem myszy. Niektóre z nich mogą być także kontrolowane przyciskami i menu u dołu ekranu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -821,7 +821,7 @@ msgstr "Zamykanie okien"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Świetnie. Teraz musimy skupić się na innych rzeczach."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -885,14 +885,14 @@ msgstr "Powiększ swoje terytorium"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Wybuduj budynek wojskowy na swojej granicy. Wybierz ten, który lubisz najbardziej."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "Strażnica to jedyny budynek obronny, który mieści się na polu dla małego budynku. Jeśli twój drwal oczyścił dość miejsca, możliwe, że zdołasz zbudować większe budynki."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
@@ -924,7 +924,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Zdobywanie terytorium sprowadza się do budowy budynku wojskowego na granicy twojego terytorium. Barbarzyńcy mogą budować 4 rodzaje takich budynków: posterunki, bariery, wieże, fortece i cytadele. Im większy budynek, tym bardziej jest kosztowny, tym więcej terenu kontroluje i tym więcej żołnierzy można w nim umieścić. Budynki różnią się także w kwestii pola widzenia: budynki z wieżami pozwalają widzieć dalej."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""
