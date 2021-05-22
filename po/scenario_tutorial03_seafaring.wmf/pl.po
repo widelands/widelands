@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2016
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # Marcin S <dzidek1003@o2.pl>, 2021
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-02 07:38+0000\n"
-"Last-Translator: Marcin S <dzidek1003@o2.pl>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-18 10:10+0000\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -327,7 +328,7 @@ msgstr "Rozpocznij ekspedycję z któregokolwiek portu."
 #. TRANSLATORS: This refers to a memory game
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr ""
+msgstr "Spakowałem moją torbę i włożyłem do niej..."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
@@ -338,26 +339,26 @@ msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "Przydałoby się zabrać ze sobą trochę więcej towarów niż tylko te, które są potrzebne do budowy nowego portu. W ten sposób będziemy mogli zacząć budowę nowych budynków zaraz po wybudowaniu portu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "Na ekspedycję możesz zabrać dodatkowe towary, żołnierzy lub pracowników. Możesz zdefiniować je wypełniając puste miejsca poniżej podstawowych towarów potrzebnych do budowy portu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr ""
+msgstr "Wystarczy kliknąć na puste miejsca, a następnie przewinąć listę, aby wybrać dodatkowy element."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Teraz wypróbujmy to. Mała niebieska, żółta lub czerwona kropka informuje, czy przedmiot dotarł, czy jest w drodze, czy też nie jest dostępny."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
