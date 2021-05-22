@@ -53,11 +53,11 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 	if (scenariodata.playable) {
 		const std::string authors_heading =
 		   (scenariodata.authors.get_number() == 1) ?
-               /** TRANSLATORS: Label in campaign scenario details if there is 1 author */
-               _("Author") :
-               /** TRANSLATORS: Label in campaign scenario details if there is more than 1 author. If
-                  you need plural forms here, please let us know. */
-               _("Authors");
+		      /** TRANSLATORS: Label in campaign scenario details if there is 1 author */
+		      _("Author") :
+		      /** TRANSLATORS: Label in campaign scenario details if there is more than 1 author. If
+		         you need plural forms here, please let us know. */
+		      _("Authors");
 		std::string description =
 		   (boost::format("%s%s") % as_heading(authors_heading, UI::PanelStyle::kFsMenu) %
 		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu))
