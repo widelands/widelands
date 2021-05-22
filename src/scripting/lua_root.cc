@@ -674,7 +674,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          ============================================  =======================================  =============
          Property descriptor                           Values                                   Since version
          ============================================  =======================================  =============
-         :const:`"enhancement"`                        **terrain_name**   (*string*)            1.0
+         :const:`"enhancement"`                        **terrain_name**     (*string*)          1.0
          :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
          ============================================  =======================================  =============
 
@@ -707,17 +707,12 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"buildcost"`, :const:`"set"`                            **ware_name**      (*string*),           1.1
                                                                          **amount**         (*int*)
          :const:`"return_on_dismantle"`, :const:`"remove"`               **ware_name**      (*string*)            1.1
-
          :const:`"return_on_dismantle"`, :const:`"set"`                  **ware_name**      (*string*),           1.1
                                                                          **amount**         (*int*)
-
          :const:`"enhancement_cost"`, :const:`"remove"`                  **ware_name**      (*string*)            1.1
-
          :const:`"enhancement_cost"`, :const:`"set"`                     **ware_name**      (*string*),           1.1
                                                                          **amount**         (*int*)
-
          :const:`"enhancement_return_on_dismantle"`, :const:`"remove"`   **ware_name**      (*string*)            1.1
-
          :const:`"enhancement_return_on_dismantle"`, :const:`"set"`      **ware_name**      (*string*),           1.1
                                                                          **amount**         (*int*)
          ==============================================================  =======================================  =============
@@ -794,20 +789,20 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          ============================================  =======================================  =============
          Property descriptor                           Values                                   Since version
          ============================================  =======================================  =============
-         :const:`"add_ware"`                           **ware_name**      (*string*),           1.0
-                                                       **menu_column**    (*int*),
-                                                       **target_quan**    (*int* or *nil*),
-                                                       **preciousness**   (*int*),
-                                                       **helptexts**      (*table*)
-         :const:`"add_worker"`                         **worker_name**    (*string*),           1.0
-                                                       **menu_column**    (*int*),
-                                                       **target_quan**    (*int* or *nil*),
-                                                       **preciousness**   (*int* or *nil*),
-                                                       **helptexts**      (*table*)
-         :const:`"add_building"`                       **building_name**  (*string*),           1.0
-                                                       **helptexts**      (*table*)
-         :const:`"add_immovable"`                      **immovable_name** (*string*),           1.0
-                                                       **helptexts**      (*table*)
+         :const:`"add_ware"`                           **ware_name**       (*string*),          1.0
+                                                       **menu_column**     (*int*),
+                                                       **target_quantity** (*int* or *nil*),
+                                                       **preciousness**    (*int*),
+                                                       **helptexts**       (*table*)
+         :const:`"add_worker"`                         **worker_name**     (*string*),          1.0
+                                                       **menu_column**     (*int*),
+                                                       **target_quantity** (*int* or *nil*),
+                                                       **preciousness**    (*int* or *nil*),
+                                                       **helptexts**       (*table*)
+         :const:`"add_building"`                       **building_name**   (*string*),          1.0
+                                                       **helptexts**       (*table*)
+         :const:`"add_immovable"`                      **immovable_name**  (*string*),          1.0
+                                                       **helptexts**       (*table*)
          ============================================  =======================================  =============
 
       Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
