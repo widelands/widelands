@@ -643,6 +643,18 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
       Supported types and properties are:
 
+      - Resource_
+      - Terrain_
+      - Worker_
+      - Building_
+      - Productionsite_
+      - Trainingsite_
+      - Militarysite_
+      - Warehouse_
+      - Tribe_
+
+      .. _resource:
+
       **Type "resource"**
 
       .. table::
@@ -655,6 +667,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          ============================================  =======================================  =============
          :const:`"max_amount"`                         **amount**         (*int*)               1.0
          ============================================  =======================================  =============
+
+      .. _terrain:
 
       **Type "terrain"**
 
@@ -669,6 +683,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"enhancement"`                        **terrain_name**   (*string*)            1.0
          :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
          ============================================  =======================================  =============
+
+      .. _worker:
 
       **Type "worker"**
 
@@ -685,6 +701,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
                                                        **actions_table**  (*table*)
          ============================================  =======================================  =============
+
+      .. _building:
 
       **Type "building"**
 
@@ -716,6 +734,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                                                                          **amount**         (*int*)
          ==============================================================  =======================================  =============
 
+      .. _productionsite:
+
       **Type "productionsite"**
 
       .. table::
@@ -740,6 +760,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                                                        **program_table**  (*table*)
          ============================================  =======================================  =============
 
+      .. _trainingsite:
+
       **Type "trainingsite"**
 
       .. table::
@@ -753,6 +775,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"soldier_capacity"`                   **capacity**       (*int*)               1.1
          :const:`"trainer_patience"`                   **patience**       (*int*)               1.1
          ============================================  =======================================  =============
+
+      .. _militarysite:
 
       **Type "militarysite"**
 
@@ -769,6 +793,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"max_soldiers"`                       **amount**         (*int*)               1.1
          ============================================  =======================================  =============
 
+      .. _warehouse:
+
       **Type "warehouse"**
 
       .. table::
@@ -782,6 +808,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
          :const:`"conquers"`                           **radius**         (*int*)               1.1
          ============================================  =======================================  =============
+
+      .. _tribe:
 
       **Type "tribe"**
 
