@@ -653,11 +653,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
       - Warehouse_
       - Tribe_
 
-      .. _resource:
-
-      **Type "resource"**
-
-      .. table::
+      .. table:: ``"resource"``
+         :name: resource
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -668,11 +665,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"max_amount"`                         **amount**         (*int*)               1.0
          ============================================  =======================================  =============
 
-      .. _terrain:
-
-      **Type "terrain"**
-
-      .. table::
+      .. table:: ``"terrain"``
+         :name: terrain
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -684,11 +678,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
          ============================================  =======================================  =============
 
-      .. _worker:
-
-      **Type "worker"**
-
-      .. table::
+      .. table:: ``"worker"``
+         :name: worker
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -702,11 +693,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                                                        **actions_table**  (*table*)
          ============================================  =======================================  =============
 
-      .. _building:
-
-      **Type "building"**
-
-      .. table::
+      .. table:: ``"building"``
+         :name: building
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -734,11 +722,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                                                                          **amount**         (*int*)
          ==============================================================  =======================================  =============
 
-      .. _productionsite:
-
-      **Type "productionsite"**
-
-      .. table::
+      .. table:: ``"productionsite"``
+         :name: productionsite
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -760,11 +745,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                                                        **program_table**  (*table*)
          ============================================  =======================================  =============
 
-      .. _trainingsite:
-
-      **Type "trainingsite"**
-
-      .. table::
+      .. table:: ``"trainingsite"``
+         :name: trainingsite
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -776,11 +758,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"trainer_patience"`                   **patience**       (*int*)               1.1
          ============================================  =======================================  =============
 
-      .. _militarysite:
-
-      **Type "militarysite"**
-
-      .. table::
+      .. table:: ``"militarysite"``
+         :name: militarysite
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -793,11 +772,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"max_soldiers"`                       **amount**         (*int*)               1.1
          ============================================  =======================================  =============
 
-      .. _warehouse:
-
-      **Type "warehouse"**
-
-      .. table::
+      .. table:: ``"warehouse"``
+         :name: warehouse
          :width: 100%
          :widths: 40,50,10
          :align: left
@@ -809,11 +785,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"conquers"`                           **radius**         (*int*)               1.1
          ============================================  =======================================  =============
 
-      .. _tribe:
-
-      **Type "tribe"**
-
-      .. table::
+      .. table:: ``"tribe"``
+         :name: tribe
          :width: 100%
          :widths: 40,50,10
          :align: left
