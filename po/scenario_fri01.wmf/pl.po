@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Antoni Szpikowski <szantek2004@gmail.com>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +30,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "Gospodarka drzewna"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
@@ -40,7 +44,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr ""
+msgstr "Ekonomia cegieł"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
@@ -50,7 +54,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "Zdobądź materiały do budowy"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
@@ -63,27 +67,27 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Kłoda"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × Granit"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × Glina"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × Cegła"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × Węgiel"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × Trzcina"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
@@ -93,65 +97,69 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Produkuje jedzenie dla górników"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr ""
+msgstr "Gospodarka żywnościowa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Zbuduj tawernę, domek rybaka, wędzarnie, plantację jagód i dom zbieracza "
+"owoców."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "Rozbuduj twoją gospodarkę żywnościową"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "Rozbuduj gospodarkę żywnościową"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Zbuduj przynajmniej dwie farmy, dom pszczelarza (obok plantacji jagód), "
+"piekarnię, browar i kolejną tawernę."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Zbuduj kopalnię żelaza i infrastrukturę górniczą"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "Zbuduj kopalnie i infrastrukturę górniczą"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr ""
+msgstr "Zbuduj kopalnię rudy żelaza, hutę, kuźnię i małą pracownię płatnerza."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "Zacznij rekrutować żołnierzy"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "Werbowanie żołnierzy"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Zbuduj kwaterę zaciężnika, hodowlę reniferów i szwalnię."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Odkryj więcej wyspy"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Rozszerzaj i Odkrywaj"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
@@ -159,7 +167,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Szkol swoich żołnierzy"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-30 08:07+0000\n"
+"PO-Revision-Date: 2021-05-18 21:27+0000\n"
 "Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "欢迎来到Widelands教程！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
-msgstr "欢迎来到Widelands!"
+msgstr "欢迎来到 Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:30
 msgid ""
