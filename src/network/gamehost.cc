@@ -408,7 +408,7 @@ GameHost::GameHost(FsMenu::MenuCapsule* c,
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 
-	if (capsule_ && ptr.get()) {
+	if (capsule_) {
 		run(ptr);
 	}
 }

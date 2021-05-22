@@ -54,7 +54,7 @@ playercolor="26,23,162"
 # Possible values are: empty, very_weak, weak, normal, random. Default: normal
 ai="normal"
 
-# Only valid for multiplayer setup. Whether this player slot is closed. Default: false
+# Whether this player slot is closed. Default: false
 closed="false"
 
 [player_2]
@@ -62,5 +62,5 @@ tribe=
 init="headquarters.lua"
 team="0"
 playercolor="238,229,22"
-ai="normal"
+ai="random"
 closed="false"
