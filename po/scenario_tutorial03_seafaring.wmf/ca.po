@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-28 15:24+0000\n"
+"PO-Revision-Date: 2021-05-23 09:15+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -336,14 +336,14 @@ msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "Pot ser útil portar alguns béns més amb nosaltres a banda dels que es necessiten per construir un port. Així, podrem construir altres edificis tan aviat com s'acabi d'enllestir el port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "Podeu agafar béns, soldats o treballadors adicionals per a l'expedició. Podeu definir-los omplint les ranures buides sota els béns primaris per construir el port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
@@ -355,7 +355,7 @@ msgstr "Feu clic a les ranures buides i moveu-vos per la llista per escollir l'e
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Proveu això. Un punt petit en verd, groc o vermell us indica si l'element ja ha arribat, si està en camí o si no està disponible respectivament."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"

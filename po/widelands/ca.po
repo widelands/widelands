@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-10 10:43+0000\n"
-"PO-Revision-Date: 2021-05-02 12:39+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-05-20 10:25+0000\n"
+"PO-Revision-Date: 2021-05-23 09:43+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,8 +264,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
@@ -278,12 +278,12 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Eines"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
@@ -473,10 +473,10 @@ msgstr "Informació"
 msgid "Click on a field to show information about it"
 msgstr "Feu clic en un camp per mostrar-ne informació"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:411
@@ -624,8 +624,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1712,7 +1712,7 @@ msgstr "Aquest mercat ha rebut una oferta de canvi nova."
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "La partida es va crear usant una versió diferent del Widelands i actualment no es pot carregar."
 
 #: ../../src/logic/generic_save_handler.cc:231
 #: ../../src/logic/generic_save_handler.cc:235
@@ -2252,7 +2252,7 @@ msgstr "Un geòleg ha trobat recursos."
 #: ../../src/logic/map_objects/tribes/worker.cc:2066
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../src/logic/map_objects/tribes/worker.cc:2073
@@ -2512,7 +2512,7 @@ msgstr "%1$s\n· La versió instal·lada de «%2$s» és la %3$s, però l'hoste 
 
 #: ../../src/network/gameclient.cc:903
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "La suma md5 del fitxer de /me ha fallat."
 
 #: ../../src/network/gameclient.cc:945
 msgid ""
@@ -2682,7 +2682,7 @@ msgstr "Us donem la benvinguda al metaservidor del Widelands!"
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Heu entrat com a «%s», ja que el nom que heu demanat està reservat o bé ja s'està usant."
 
 #: ../../src/network/internet_gaming.cc:447
 msgid "Our forums can be found at:"
@@ -3329,8 +3329,8 @@ msgstr "Mostra/Amaga la categoria «%s»"
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Esteu segur que voleu actualitzar %u complement?"
+msgstr[1] "Esteu segur que voleu actualitzar aquests %u complements?"
 
 #: ../../src/ui_fsmenu/addons.cc:467
 #, c-format
@@ -3711,7 +3711,7 @@ msgid ""
 "Available version: %5$s\n"
 "Category: %6$s\n"
 "%7$s"
-msgstr ""
+msgstr "Esteu segur que voleu actualitzar aquest complement?\n\n%1$s\nde %2$s\n%3$s\nVersió instal·lada: %4$s\nVersió disponible: %5$s\nCategoria: %6$s\n%7$s"
 
 #: ../../src/ui_fsmenu/addons.cc:2064
 msgid "Verified by the Widelands Development Team"
@@ -3908,7 +3908,7 @@ msgstr[1] "Voleu desar els canvis dels següents %u complements al disc?"
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
-msgstr ""
+msgstr "Avís: Si heu editat manualment algun fitxer d'aquest complement, els canvis es sobreescriuran."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:492
 msgid "Confirm Saving"
@@ -4294,7 +4294,7 @@ msgstr "La partida ja estava desada: la condició de victòria ja està establer
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
-msgstr ""
+msgstr "No s'han pogut determinar unes condicions de victòria vàlides perquè el mapa «%s» no s'ha pogut carregar."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:69
 msgid "Show the help window"
@@ -4340,7 +4340,7 @@ msgstr "No es pot trobar el fitxer seleccionat. Si no se t'envia automàticament
 #: ../../src/ui_fsmenu/launch_mpg.cc:296
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
-msgstr ""
+msgstr "No s'ha pogut carregar l'script amb la condició de victòria del fitxer «%s»."
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../src/ui_fsmenu/launch_mpg.cc:419
@@ -5130,18 +5130,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autors"
@@ -5277,7 +5277,7 @@ msgstr "Inici de sessió a Internet"
 
 #: ../../src/wlapplication_options.cc:259
 msgid "Toggle Building Spaces"
-msgstr ""
+msgstr "Commuta entre mostrar o ocultar els espais de construcció"
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Toggle Minimap"
@@ -5337,7 +5337,7 @@ msgstr "Vés a la posició següent"
 
 #: ../../src/wlapplication_options.cc:330
 msgid "Jump to Previous Location"
-msgstr ""
+msgstr "Vés a la posició anterior"
 
 #: ../../src/wlapplication_options.cc:335
 msgid "Menu"
@@ -6074,7 +6074,7 @@ msgstr "Envia l'explorador a explorar els voltants"
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr ""
+msgstr "Heu de connectar la bandera a un edifici d'exploració abans d'enviar-ne algun."
 
 #: ../../src/wui/fieldaction.cc:489
 msgid "Place a flag"
@@ -6179,8 +6179,8 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6256,7 +6256,7 @@ msgstr "Mostra tots els missatges"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:537
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Mostra només els missatges dels geòlegs"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:542
