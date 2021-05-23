@@ -515,7 +515,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 		if (plot.second.showplot) {
 			draw_plot_line(dst,
 			               (plotmode_ == Plotmode::kRelative) ? plot.second.relative_data.get() :
-			                                                    plot.second.absolute_data,
+                                                             plot.second.absolute_data,
 			               highest_scale, sub_, plot.second.plotcolor, yoffset);
 		}
 	}
