@@ -1634,7 +1634,7 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 			}
 		}, [this, &w, &nr_translations](const std::string&, const long l) {
 			nr_translations = l;
-			w.progressbar().set_total(l);
+			w.progressbar().set_total(std::max(l, 1l));
 		});
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
