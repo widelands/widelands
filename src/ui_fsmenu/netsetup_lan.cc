@@ -66,8 +66,7 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
                      _("Host to connect:")),
 
      host_box_(&right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     //     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     hostname_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
                    0,
@@ -104,8 +103,7 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	right_column_content_box_.add(&playername_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(&label_hostname_, UI::Box::Resizing::kFullSize);
-	//	right_column_content_box_.add(&host_box_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add(&hostname_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&host_box_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(kPadding);
 	right_column_content_box_.add(&joingame_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
@@ -116,7 +114,7 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();
 
-	//	host_box_.add(&hostname_, UI::Box::Resizing::kExpandBoth);
+	host_box_.add(&hostname_, UI::Box::Resizing::kExpandBoth);
 	host_box_.add_space(kPadding);
 	host_box_.add(&loadlasthost_);
 
