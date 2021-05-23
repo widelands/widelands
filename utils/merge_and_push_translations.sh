@@ -11,6 +11,13 @@
 # Exit as soon as any line in the bash script fails.
 set -e
 
+if [ -z "$1" ]
+then
+  push_target="https://github.com/widelands/widelands.git"
+else
+  push_target="$1"
+fi
+
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
 	pushd ..
@@ -35,7 +42,7 @@ fi
 
 # Checkout master and pull latest version
 git checkout master
-git pull https://github.com/widelands/widelands.git master
+git pull "$push_target" master
 
 # Double-check that it's clean
 STATUS="$(git status)"
@@ -126,6 +133,7 @@ git add data/i18n/translation_stats.conf || true
 
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."
+git push "$push_target" master
 
 # Push catalogs to Transifex
 tx push -s

@@ -22,5 +22,4 @@ jobs:
         echo "${{ secrets.TXAUTH }}" > ~/.transifexrc
         git config --global user.name "The Widelands Translations Bot"
         git config --global user.email "bunnybot@widelands.org"
-        ./utils/merge_and_push_translations.sh
-        git push https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/widelands/widelands.git master
+        ./utils/merge_and_push_translations.sh "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/widelands/widelands.git"
