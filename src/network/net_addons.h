@@ -27,7 +27,7 @@
 namespace AddOns {
 
 struct NetAddons {
-	NetAddons() : initialized_(false), client_socket_(0), is_admin_(false) {
+	NetAddons() : initialized_(false), network_active_(false), client_socket_(0), is_admin_(false) {
 	}
 	~NetAddons();
 
@@ -87,6 +87,7 @@ private:
 
 	std::string last_username_, last_password_;
 	bool initialized_;
+	bool network_active_;
 	int client_socket_;
 	bool is_admin_;
 };

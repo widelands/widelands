@@ -69,6 +69,10 @@ void NetAddons::init(std::string username, std::string password) {
 		// already initialized
 		return;
 	}
+	if (network_active_) {
+		throw WLWarning("", "Network is already active during init");
+	}
+	network_active_ = true;
 
 	signal(SIGPIPE, SIG_IGN);
 	if (password.empty()) {
@@ -130,6 +134,7 @@ void NetAddons::init(std::string username, std::string password) {
 	}
 
 	initialized_ = true;
+	network_active_ = false;
 	last_username_ = username;
 	last_password_ = password;
 }
@@ -239,14 +244,21 @@ static void check_checksum(const std::string& path, const std::string& checksum)
 struct CrashGuard {
 	explicit CrashGuard(NetAddons& n) : net_(n), ok_(false) {
 		assert(net_.initialized_);
+		if (net_.network_active_) {
+			throw WLWarning("", "Network is already active");
+		}
+		net_.network_active_ = true;
 	}
 	void ok() {
 		assert(net_.initialized_);
+		assert(net_.network_active_);
 		assert(!ok_);
 		ok_ = true;
 	}
 	~CrashGuard() {
 		assert(net_.initialized_);
+		assert(net_.network_active_);
+		net_.network_active_ = false;
 		if (!ok_) {
 			net_.quit_connection();
 		}
@@ -259,16 +271,21 @@ private:
 
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	init();
-	CrashGuard guard(*this);
-	write_to_server("CMD_LIST\n");
 
-	long nr_addons = std::stol(read_line().c_str());
-	std::vector<AddOnInfo> result_vector(nr_addons);
-	for (long i = 0; i < nr_addons; ++i) {
-		result_vector[i].internal_name = read_line();
+	std::vector<AddOnInfo> result_vector;
+	long nr_addons;
+	{
+		CrashGuard guard(*this);
+		write_to_server("CMD_LIST\n");
+
+		nr_addons = std::stol(read_line().c_str());
+		result_vector.resize(nr_addons);
+		for (long i = 0; i < nr_addons; ++i) {
+			result_vector[i].internal_name = read_line();
+		}
+		check_endofstream();
+		guard.ok();
 	}
-	check_endofstream();
-	guard.ok();
 
 	for (long i = 0; i < nr_addons; ++i) {
 		try {
@@ -361,6 +378,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	if (icon_file_size <= 0) {
 		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
 	} else {
+		g_fs->ensure_directory_exists(kTempFileDir);
 		const std::string path = kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
 				std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
 		read_file(icon_file_size, path);
