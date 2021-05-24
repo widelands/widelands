@@ -30,6 +30,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
@@ -1248,10 +1249,16 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	return result;
 }
 
+static inline std::string safe_richtext_message(std::string body) {
+	newlines_to_richtext(body);
+	return as_richtext_paragraph(body, UI::FontStyle::kFsMenuLabel, UI::Align::kCenter);
+}
+
 static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
+		   safe_richtext_message(
 		   (boost::format(local ?
 		                     _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
@@ -1268,7 +1275,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 		                       "%5$s")) %
 		    info.descname() % info.author() % AddOns::version_to_string(info.version) %
 		    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
-		      .str(),
+		      .str()),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -1988,6 +1995,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
+		   safe_richtext_message(
 			   (boost::format(_("Are you certain that you want to install this add-on?\n\n"
 			                    "%1$s\n"
 			                    "by %2$s\n"
@@ -1998,7 +2006,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
 			    AddOns::version_to_string(info.version) %
 			    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
-			      .str(),
+			      .str()),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -2011,6 +2019,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
+		   safe_richtext_message(
 			   (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
 			                    "%1$s\n"
 			                    "by %2$s\n"
@@ -2023,7 +2032,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			    AddOns::version_to_string(installed_version) %
 			    AddOns::version_to_string(info.version) %
 			    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
-			      .str(),
+			      .str()),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;

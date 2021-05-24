@@ -199,14 +199,7 @@ void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode
 
 std::string MultilineTextarea::make_richtext() {
 	std::string temp = richtext_escape(text_);
-	// Double paragraphs should generate an empty line.
-	// We do this here rather than in the font renderer, because a single \n
-	// should only create a new line without any added space.
-	// \n\n or \n\n\n will give us 1 blank line,
-	// \n\n\n or \n\n\n\” will give us 2 blank lines etc.
-	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
-	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
-	boost::replace_all(temp, "\n", "<br>");
+	newlines_to_richtext(temp);
 
 	FontStyleInfo scaled_style(font_style());
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
