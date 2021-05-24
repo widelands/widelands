@@ -153,6 +153,9 @@ AddOnInfo preload_addon(const std::string&);
 
 i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename);
 
+enum class UpdateThemeAction { kEnableArgument, kLoadFromConfig, kAutodetect };
+void update_ui_theme(UpdateThemeAction, std::string = "");
+
 // This guard allows you to modify `g_addons` in any way you like
 // and ensures that it is reset to the initial state later.
 struct AddOnsGuard {

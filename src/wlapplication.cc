@@ -50,7 +50,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -452,59 +451,6 @@ WLApplication::~WLApplication() {
 	SDL_Quit();
 }
 
-void WLApplication::update_ui_theme(const UpdateThemeAction action, std::string arg) {
-	AddOns::AddOnState* previously_enabled = nullptr;
-	std::list<AddOns::AddOnState*> installed;
-	for (AddOns::AddOnState& s : AddOns::g_addons) {
-		if (s.first.category == AddOns::AddOnCategory::kTheme) {
-			if (s.second) {
-				previously_enabled = &s;
-			}
-			s.second = false;
-			installed.push_back(&s);
-		}
-	}
-
-	switch (action) {
-	case UpdateThemeAction::kEnableArgument:
-		for (AddOns::AddOnState* s : installed) {
-			if (s->first.internal_name == arg) {
-				s->second = true;
-				set_template_dir(AddOns::theme_addon_template_dir(arg));
-				set_config_string("theme", arg);
-				return;
-			}
-		}
-		NEVER_HERE();
-
-	case UpdateThemeAction::kLoadFromConfig:
-		arg = get_config_string("theme", "");
-		if (arg.empty()) {
-			return set_template_dir("");
-		}
-		for (AddOns::AddOnState* s : installed) {
-			if (s->first.internal_name == arg) {
-				s->second = true;
-				set_template_dir(AddOns::theme_addon_template_dir(arg));
-				return;
-			}
-		}
-		log_warn("Theme '%s' not found", arg.c_str());
-		FALLS_THROUGH;
-	case UpdateThemeAction::kAutodetect:
-		if (!previously_enabled) {
-			set_config_string("theme", "");
-			set_template_dir("");
-			return;
-		}
-		previously_enabled->second = true;
-		set_config_string("theme", previously_enabled->first.internal_name);
-		set_template_dir(AddOns::theme_addon_template_dir(previously_enabled->first.internal_name));
-		return;
-	}
-	NEVER_HERE();
-}
-
 void WLApplication::initialize_g_addons() {
 	AddOns::g_addons.clear();
 	if (g_fs->is_directory(kAddOnDir)) {
@@ -553,7 +499,7 @@ void WLApplication::initialize_g_addons() {
 			}
 		}
 	}
-	update_ui_theme(UpdateThemeAction::kLoadFromConfig);
+	AddOns::update_ui_theme(AddOns::UpdateThemeAction::kLoadFromConfig);
 }
 
 static void init_one_player_from_template(unsigned p,

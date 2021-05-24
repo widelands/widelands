@@ -1076,8 +1076,8 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 		g_gr->rebuild_texture_atlas();
 	}
 	if (remote.category == AddOns::AddOnCategory::kTheme) {
-		WLApplication::update_ui_theme(
-		   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
+		AddOns::update_ui_theme(
+		   AddOns::UpdateThemeAction::kEnableArgument, remote.internal_name);
 		get_topmost_forefather().template_directory_changed();
 	}
 }
@@ -1132,8 +1132,8 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 			}
 			if (remote.category == AddOns::AddOnCategory::kTheme &&
 			    template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
-				WLApplication::update_ui_theme(
-				   WLApplication::UpdateThemeAction::kEnableArgument, remote.internal_name);
+				AddOns::update_ui_theme(
+				   AddOns::UpdateThemeAction::kEnableArgument, remote.internal_name);
 				get_topmost_forefather().template_directory_changed();
 			}
 			return;
@@ -1301,7 +1301,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 			AddOns::g_addons.erase(it);
 			if (info.category == AddOns::AddOnCategory::kTheme &&
 			    template_dir() == AddOns::theme_addon_template_dir(info.internal_name)) {
-				WLApplication::update_ui_theme(WLApplication::UpdateThemeAction::kAutodetect);
+				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
 			return ctrl->rebuild();
@@ -1505,9 +1505,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
-					WLApplication::update_ui_theme(pair.second ?
-					                                  WLApplication::UpdateThemeAction::kEnableArgument :
-					                                  WLApplication::UpdateThemeAction::kAutodetect,
+					AddOns::update_ui_theme(pair.second ?
+					                                  AddOns::UpdateThemeAction::kEnableArgument :
+					                                  AddOns::UpdateThemeAction::kAutodetect,
 					                               pair.first.internal_name);
 					get_topmost_forefather().template_directory_changed();
 					ctrl->rebuild();
