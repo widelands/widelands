@@ -175,9 +175,9 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>>
    immovable_relations_;
 
-void ImmovableProgram::postload_immovable_relations(const Descriptions& descriptions) {
+void ImmovableProgram::postload_immovable_relations(Descriptions& descriptions) {
 	for (const auto& pair : immovable_relations_) {
-		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(pair.second))
+		descriptions.get_mutable_immovable_descr(descriptions.load_immovable(pair.second))
 		   ->add_became_from(pair.first);
 	}
 	immovable_relations_.clear();
