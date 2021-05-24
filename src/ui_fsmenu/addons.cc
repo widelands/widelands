@@ -1076,8 +1076,7 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 		g_gr->rebuild_texture_atlas();
 	}
 	if (remote.category == AddOns::AddOnCategory::kTheme) {
-		AddOns::update_ui_theme(
-		   AddOns::UpdateThemeAction::kEnableArgument, remote.internal_name);
+		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote.internal_name);
 		get_topmost_forefather().template_directory_changed();
 	}
 }
@@ -1505,10 +1504,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
-					AddOns::update_ui_theme(pair.second ?
-					                                  AddOns::UpdateThemeAction::kEnableArgument :
-					                                  AddOns::UpdateThemeAction::kAutodetect,
-					                               pair.first.internal_name);
+					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
+					                                      AddOns::UpdateThemeAction::kAutodetect,
+					                        pair.first.internal_name);
 					get_topmost_forefather().template_directory_changed();
 					ctrl->rebuild();
 				}
