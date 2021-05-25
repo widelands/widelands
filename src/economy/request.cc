@@ -288,8 +288,9 @@ uint32_t Request::get_priority(const int32_t cost) const {
 
 	// Workaround for bug #4809 Kicking a worker let him go the building where he was kicked off
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
-	if (target_building_ != nullptr && get_type() == wwWORKER && target_building_->get_worker_evicted().is_valid()
-			&& cur_time - target_building_->get_worker_evicted() < kBlacklistDurationAfterEvict) {
+	if (target_building_ != nullptr && get_type() == wwWORKER &&
+	    target_building_->get_worker_evicted().is_valid() &&
+	    cur_time - target_building_->get_worker_evicted() < kBlacklistDurationAfterEvict) {
 		return 0;
 	}
 
