@@ -599,14 +599,16 @@ void WLApplication::init_and_run_game_from_template() {
 			}
 		}
 		if (!found) {
-			throw wexception("Add-on '%s' not found", name.c_str());
+			log_err("Add-on '%s' not found", name.c_str());
+			return;
 		}
 	}
 	AddOns::g_addons = new_g_addons;
 
 	const int playernumber = section.get_natural("interactive_player", 1);
 	if (playernumber == 0 && !multiplayer) {
-		throw wexception("interactive_player must be > 0 for singleplayer games.");
+		log_err("interactive_player must be > 0 for singleplayer games.");
+		return;
 	}
 
 	std::unique_ptr<GameSettingsProvider> settings;
@@ -620,7 +622,6 @@ void WLApplication::init_and_run_game_from_template() {
 		settings.reset(new SinglePlayerGameSettingsProvider());
 	}
 
-	settings->set_player_number(playernumber == 0 ? UserSettings::none() : playernumber);
 	settings->set_peaceful_mode(section.get_bool("peaceful", false));
 	settings->set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
 
@@ -645,23 +646,32 @@ void WLApplication::init_and_run_game_from_template() {
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfile);
 		if (!ml) {
-			throw wexception("Invalid map file '%s'", mapfile.c_str());
+			log_err("Invalid map file '%s'", mapfile.c_str());
+			return;
 		}
 		ml->preload_map(true, nullptr);
 		const int nr_players = map.get_nrplayers();
 		settings->set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
 		settings->set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(),
 		                  nr_players, false);
+		settings->set_player_number(playernumber == 0 ? UserSettings::none() : playernumber - 1);
 		for (int p = 0; p < nr_players; ++p) {
 			std::string key = "player_";
 			key += std::to_string(p + 1);
 			bool human = p == playernumber - 1;
-			init_one_player_from_template(p, human, settings, profile.pull_section(key.c_str()), map);
+			try {
+				init_one_player_from_template(
+				   p, human, settings, profile.pull_section(key.c_str()), map);
+			} catch (const WException& e) {
+				log_err("%s", e.what());
+				return;
+			}
 		}
 	}
 
 	if (!settings->can_launch()) {
-		throw wexception("Inconsistent game setup configuration. Cannot launch.");
+		log_err("Inconsistent game setup configuration. Cannot launch.");
+		return;
 	}
 
 	if (multiplayer) {
