@@ -56,8 +56,8 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-struct AddOnsMismatch : WLWarning {
-	explicit AddOnsMismatch(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {
+struct AddOnsMismatchException : WLWarning {
+	explicit AddOnsMismatchException(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {
 	}
 };
 
@@ -737,7 +737,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 			           message % pair.first % pair.second.first % pair.second.second)
 			             .str();
 		}
-		throw AddOnsMismatch(message);
+		throw AddOnsMismatchException(message);
 	}
 	for (const auto& pair : disabled_installed_addons) {
 		new_g_addons.push_back(std::make_pair(*pair.second, false));
@@ -1201,7 +1201,7 @@ void GameClient::handle_network() {
 			disconnect("CONNECTION_LOST", "", false);
 			return;
 		}
-	} catch (const AddOnsMismatch& e) {
+	} catch (const AddOnsMismatchException& e) {
 		disconnect("SOMETHING_WRONG", e.what());
 	} catch (const WLWarning& e) {
 		// disconnect() should have been called already, but just in case:
