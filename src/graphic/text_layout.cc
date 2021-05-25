@@ -154,8 +154,8 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	return ((boost::format("<rt><p>%s<br></p><vspace gap=6>%s</rt>") %
 	         g_style_manager->font_style(UI::FontStyle::kWuiMessageHeading).as_font_tag(heading) %
 	         (is_paragraph(body) || is_div(body) ?
-                body :
-                (boost::format("<p>%s</p>") %
+	             body :
+	             (boost::format("<p>%s</p>") %
 	              g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(body))
 	                .str()))
 	           .str());
@@ -242,11 +242,11 @@ std::string as_tooltip_text_with_hotkey(const std::string& text,
 	static boost::format f("<rt><p>%s %s</p></rt>");
 	f % g_style_manager
 	       ->font_style(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
-                                                       UI::FontStyle::kFsTooltip)
+	                                                    UI::FontStyle::kFsTooltip)
 	       .as_font_tag(text);
 	f % g_style_manager
 	       ->font_style(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
-                                                       UI::FontStyle::kFsTooltipHotkey)
+	                                                    UI::FontStyle::kFsTooltipHotkey)
 	       .as_font_tag("(" + hotkey + ")");
 	return f.str();
 }
