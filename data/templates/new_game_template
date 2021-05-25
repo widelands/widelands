@@ -7,7 +7,8 @@
 # Section `global`: General game settings.
 [global]
 # Whether a multiplayer game should be configured. Default: false
-# Note, that this cannot be used for a real multiplayer game, because the host will be the only possible human player
+# Note that this cannot be used for a real multiplayer game, because the game will not be registered on
+# the metaserver or in the local network, and therefore no clients or spectators will be able to join.
 multiplayer="false"
 
 # The map file to use, relative to the `data` directory or the Widelands home directory. This is the only mandatory entry.

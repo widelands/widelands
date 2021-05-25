@@ -510,11 +510,14 @@ static void init_one_player_from_template(unsigned p,
                                           std::unique_ptr<GameSettingsProvider>& settings,
                                           Section& player_section,
                                           const Widelands::Map& map) {
-	if (human) {
-		settings->set_player_state(p, PlayerSettings::State::kHuman);
-	} else if (player_section.get_bool("closed", false)) {
+	if (player_section.get_bool("closed", false)) {
+		if (human) {
+			throw wexception("Cannot close interactive player slot.");
+		}
 		settings->set_player_state(p, PlayerSettings::State::kClosed);
 		return;  // No need to configure closed player
+	} else if (human) {
+		settings->set_player_state(p, PlayerSettings::State::kHuman);
 	} else {
 		std::string ai = player_section.get_string("ai", "normal");
 		bool random = ai == "random";
@@ -658,7 +661,7 @@ void WLApplication::init_and_run_game_from_template() {
 	}
 
 	if (!settings->can_launch()) {
-		wexception("Inconsistent game setup configuration. Cannot launch.");
+		throw wexception("Inconsistent game setup configuration. Cannot launch.");
 	}
 
 	if (multiplayer) {
