@@ -56,7 +56,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 7;
+constexpr uint16_t kCurrentPacketVersion = 8;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -133,6 +133,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					}
 
 					building.leave_time_ = Time(fr);
+					building.worker_evicted_ = packet_version >= 8 ? Time(fr) : Time();
 
 					building.mute_messages_ = packet_version >= 6 && fr.unsigned_8();
 
@@ -981,6 +982,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				}
 			}
 			building->leave_time_.save(fw);
+			building->worker_evicted_.save(fw);
 			fw.unsigned_8(building->mute_messages_ ? 1 : 0);
 
 			fw.unsigned_32(building->ware_priorities_.size());

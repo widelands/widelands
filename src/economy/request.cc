@@ -275,6 +275,8 @@ Time Request::get_required_time() const {
 	return get_base_required_time(economy_->owner().egbase(), transfers_.size());
 }
 
+constexpr Duration kBlacklistDurationAfterEvict(3600);
+
 /**
  * Return the request priority. Used only to sort requests from most to least important.
  */
@@ -283,6 +285,13 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	const WarePriority& priority =
 	   (target_building_ ? target_building_->get_priority(get_type(), get_index()) :
 	                       WarePriority::kNormal);
+
+	// Workaround for bug #4809 Kicking a worker let him go the building where he was kicked off
+	const Time& cur_time = economy_->owner().egbase().get_gametime();
+	if (target_building_ != nullptr && get_type() == wwWORKER && target_building_->get_worker_evicted().is_valid()
+			&& cur_time - target_building_->get_worker_evicted() < kBlacklistDurationAfterEvict) {
+		return 0;
+	}
 
 	if (WarePriority::kVeryHigh <= priority) {
 		// Always serve requests with the highest priority first,
@@ -294,7 +303,6 @@ uint32_t Request::get_priority(const int32_t cost) const {
 		return 0;
 	}
 
-	const uint32_t cur_time = economy_->owner().egbase().get_gametime().get();
 	const uint32_t req_time =
 	   (target_constructionsite_ ? get_required_time().get() : get_last_request_time().get());
 	return
@@ -304,7 +312,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	   // Linear scaling of request priority depending on the time
 	   // since the request was last supplied (constructionsites)
 	   // or when the next ware is due (productionsites)
-	   (cur_time > req_time ? cur_time - req_time : 1) *
+	   (cur_time.get() > req_time ? cur_time.get() - req_time : 1) *
 	   // Requests with higher costs are preferred to keep the average waiting
 	   // times short. This is capped at an arbitrary max cost of 30 seconds
 	   // gametime to not disadvantage close-by supplies too much.
