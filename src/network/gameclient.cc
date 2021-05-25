@@ -57,7 +57,7 @@
 #include "wui/interactive_spectator.h"
 
 struct AddOnsMismatch : WLWarning {
-	AddOnsMismatch(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {
+	explicit AddOnsMismatch(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {
 	}
 };
 
