@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Juanjo, 2021\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -64,7 +64,11 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
+"Recolliu %d lingot d'or al port de més al nord per obtenir un passatge d'en "
+"Marcus Caius Iniucundus."
 msgstr[1] ""
+"Recolliu %d lingots d'or al port de més al nord per obtenir un passatge d'en"
+" Marcus Caius Iniucundus."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:56
 msgid ""
@@ -107,6 +111,9 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
+"Només hi ha una cosa certa: hem de trobar un espai portuari a la costa del "
+"nord del cinturó d'illes per iniciar una expedició i continuar viatjant al "
+"nord."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:77
@@ -142,6 +149,9 @@ msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
+"L'illa prosperava sota el meu regnat i els súbdits m'estimaven i "
+"respectaven. Fins i tot em van construir un castell nou com a regal. I "
+"llavors va venir l'Atterdag."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:94
@@ -198,6 +208,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
+"I aquesta força és la que busco. Reebaud, el cabdill d'una comunitat frisona"
+" petita però forta de la que em vaig fer amic; el seu orgull i habilitats "
+"per a la batalla no tenen rival en el món conegut. Si algú pot enfrontar-se "
+"a l'Atterdag, és ell."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -378,6 +392,10 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"Mentre passa, els soldats estan avorrits sense res a fer. Organitzem millor "
+"un torneig d'armes? Envieu els vostres soldats a destruir el meu palau. "
+"Estic segur que no teniu ni una sola oportunitat, però si em guanyeu, "
+"pregaré als déus que beneeixin el vostre viatge."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
@@ -470,6 +488,8 @@ msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
+"Els soldats han vist forasters un altre cop. Em pregunto si tindran relació "
+"amb l'estrany rei que ens va felicitar per destruir el seu palau."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
@@ -513,6 +533,8 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
+"Us agraïm l'oferiment! Quin preu hem de pagar? I, si no us importa que "
+"pregunti, puc saber en què esteu atrafegat?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
@@ -598,6 +620,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Heu pagat pel passatge amb or pur. El vaixell està preparat i ja podeu "
+"embarcar!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
