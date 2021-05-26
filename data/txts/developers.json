@@ -374,6 +374,22 @@
 			]
 		},
 		{
+			"heading": "Add ons",
+			"image": "images/players/genstats_player.png",
+			"entries":[
+				{
+					"members":[
+						"the-x",
+						"Benedikt Straub (Nordfriese)",
+						"Stephan Lutz (hessenfarmer)",
+						"OIPUN",
+						"matthiakl",
+						"king of nowhere",
+						"MarkMcWire",
+						"kaputtnik"
+					]
+				},
+		{
 			"heading": "Former Elders",
 			"image": "images/players/genstats_player.png",
 			"entries":[
