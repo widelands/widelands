@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-23 09:36+0000\n"
+"PO-Revision-Date: 2021-05-25 20:10+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -53,13 +53,13 @@ msgstr "Objectius i com aconseguir-los"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Ús de a finestra «Objectius»"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Podeu obrir i tancar la finestra «Objectius» fent clic en el botó «Objectius» de la barra d'eines de la part inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -120,7 +120,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general guarda els béns, els treballadors i els soldats que no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns inicials no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana per viure-hi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -441,7 +441,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "La pedrera és un edifici petit com la cabana del llenyataire. Es pot construir en qualsevol parcel·la que es mostri disponible amb una casa vermella, groga o verda (premeu «%s» per mostrar o ocultar aquests símbols)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
