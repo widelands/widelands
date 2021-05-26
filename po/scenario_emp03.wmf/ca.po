@@ -676,6 +676,11 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Després de produir prou blat, podem desmantellar la masoveria de blat i "
+"construir una granja d'ovelles per produir la llana. Quan la granja "
+"d'ovelles comenci a funcionar, buscarem espai per construir un edifici mitjà"
+" i construirem un taller de teixir per usar la llana i fer-ne teles. Però de"
+" moment, comencem produint blat."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -802,6 +807,9 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Salve, Lutius. Mentre parlava amb els nostres valents soldats, m'han "
+"comentat que hem emprat tot l'or per construir el port. Així que ja no ens "
+"queda or."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
