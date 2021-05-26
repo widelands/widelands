@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-20 10:25+0000\n"
-"PO-Revision-Date: 2021-05-23 09:43+0000\n"
+"POT-Creation-Date: 2021-05-23 10:22+0000\n"
+"PO-Revision-Date: 2021-05-25 20:14+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -624,8 +624,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -3892,7 +3892,7 @@ msgstr "Descarta canvis"
 #: ../../src/ui_fsmenu/addons_packager.cc:474
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr ""
+msgstr "Voleu desar els canvis del complement «%s» al disc?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:479
 #, c-format
@@ -5130,18 +5130,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autors"
@@ -5265,7 +5265,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:213
 msgid "Editor – New Random Map"
-msgstr ""
+msgstr "Editor – Mapa nou aleatori"
 
 #: ../../src/wlapplication_options.cc:231
 msgid "About"
@@ -5378,7 +5378,7 @@ msgstr "Commuta la finestra del cens"
 
 #: ../../src/wlapplication_options.cc:413
 msgid "Toggle Statistics Labels"
-msgstr ""
+msgstr "Commuta les etiquetes d'estadístiques"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
@@ -5390,7 +5390,7 @@ msgstr "Commuta la visibilitat d'edificis"
 
 #: ../../src/wlapplication_options.cc:428
 msgid "Toggle Overlapping Workareas"
-msgstr ""
+msgstr "Mostra/Amaga les àrees de treball que es superposen"
 
 #: ../../src/wlapplication_options.cc:433
 #: ../../src/wui/general_statistics_menu.cc:47
@@ -5488,7 +5488,7 @@ msgstr "Missatges: Mostra els missatges de l'economia"
 
 #: ../../src/wlapplication_options.cc:543
 msgid "Messages: Show Seafaring Messages"
-msgstr ""
+msgstr "Missatges: Mostra els missatges de navegació"
 
 #: ../../src/wlapplication_options.cc:548
 msgid "Messages: Show Military Messages"
@@ -5496,11 +5496,11 @@ msgstr "Missatges: Mostra els missatges militars"
 
 #: ../../src/wlapplication_options.cc:553
 msgid "Messages: Show Scenario Messages"
-msgstr ""
+msgstr "Missatges: Mostra els missatges de l'escenari"
 
 #: ../../src/wlapplication_options.cc:558
 msgid "Seafaring: Go to Ship"
-msgstr ""
+msgstr "Navegació: Vés on està el vaixell"
 
 #: ../../src/wlapplication_options.cc:563
 msgid "Seafaring: Watch Ship"
@@ -5508,11 +5508,11 @@ msgstr "Navegació: Veure vaixell"
 
 #: ../../src/wlapplication_options.cc:568
 msgid "Seafaring: Open Ship Window"
-msgstr ""
+msgstr "Navegació: Obre la finestra del vaixell"
 
 #: ../../src/wlapplication_options.cc:573
 msgid "Seafaring: Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Navegació: Obre la finestra del vaixell i vés on està"
 
 #: ../../src/wlapplication_options.cc:578
 msgid "Seafaring: Show All Ships"
@@ -5532,11 +5532,11 @@ msgstr "Navegació: Veure les expedicions en espera"
 
 #: ../../src/wlapplication_options.cc:598
 msgid "Seafaring: Show Scouting Expeditions"
-msgstr ""
+msgstr "Navegació: Mostra les expedicions d'exploració"
 
 #: ../../src/wlapplication_options.cc:603
 msgid "Seafaring: Show Expeditions with Port Spaces"
-msgstr ""
+msgstr "Navegació: Veure les expedicions amb espais portuaris"
 
 #: ../../src/wlapplication_options.cc:608
 #, c-format
@@ -6179,8 +6179,8 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
