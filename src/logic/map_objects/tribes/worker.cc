@@ -1830,9 +1830,7 @@ void Worker::buildingwork_update(Game& game, State& state) {
 
 	if (signal == "evict") {
 		if (building) {
-			// If the building was working, we do not tell it to cancel – it'll notice by itself soon –
-			// but we already change the animation so it won't look strange
-			building->start_animation(game, building->descr().get_unoccupied_animation());
+			building->notify_worker_evicted(game, *this);
 		}
 		return pop_task(game);
 	}
