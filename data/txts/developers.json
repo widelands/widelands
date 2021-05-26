@@ -374,7 +374,7 @@
 			]
 		},
 		{
-			"heading": "Add ons",
+			"heading": "Add Ons",
 			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
@@ -388,7 +388,9 @@
 						"MarkMcWire",
 						"kaputtnik"
 					]
-				},
+				}
+			]
+		},
 		{
 			"heading": "Former Elders",
 			"image": "images/players/genstats_player.png",
