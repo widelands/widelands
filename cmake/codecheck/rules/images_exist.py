@@ -16,12 +16,7 @@ FIND_VARIABLE_NAMES = re.compile(
     r"""g_image_cache->get\(([0-9a-zA-Z_]+?)\)""")
 
 # Find the data path
-base_path = os.getcwd()
-while len(base_path) > 0 and ('build' in base_path or 'cmake' in base_path):
-    base_path = os.path.dirname(base_path)
-# Dirty hack to get this working on Travis
-if base_path == '/home/travis':
-    base_path = '/home/travis/build/widelands/widelands'
+base_path = os.getenv("WL_ROOT_DIR", os.getcwd())
 data_path = os.path.join(base_path, 'data')
 
 
