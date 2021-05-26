@@ -72,18 +72,16 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 						//  Get the tribe and the building index.
 						if (Player* const player = egbase.get_safe_player(p)) {
-							Notifications::publish(NoteMapObjectDescription(
-							   name, NoteMapObjectDescription::LoadType::kObject));
-
 							const TribeDescr& tribe = player->tribe();
-							const DescriptionIndex index = tribe.safe_building_index(name);
+							const DescriptionIndex index =
+							   egbase.mutable_descriptions()->load_building(name);
 							const BuildingDescr* bd = tribe.get_building_descr(index);
 							// Check if tribe has this building itself
 							// OR alternatively if this building might be a conquered militarysite
 							if (!tribe.has_building(index) &&
 							    !(bd && bd->type() == MapObjectType::MILITARYSITE)) {
 								throw GameDataError("tribe %s does not define building type \"%s\"",
-								                    tribe.name().c_str(), name);
+								                    tribe.name().c_str(), bd ? bd->name().c_str() : name);
 							}
 
 							//  Now, create this Building, take extra special care for
