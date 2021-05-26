@@ -856,6 +856,13 @@ void Building::remove_worker(Worker& worker) {
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
+void Building::notify_worker_evicted(Game& game, Worker&) {
+	// If the building was working, we do not tell it to cancel – it'll notice by itself soon –
+	// but we already change the animation so it won't look strange
+	start_animation(game, descr().get_unoccupied_animation());
+	worker_evicted_ = game.get_gametime();
+}
+
 void Building::set_attack_target(AttackTarget* new_attack_target) {
 	assert(attack_target_ == nullptr);
 	attack_target_ = new_attack_target;
