@@ -355,6 +355,11 @@ public:
 		mute_messages_ = m;
 	}
 
+	void notify_worker_evicted(Game&, Worker&);
+	const Time& get_worker_evicted() const {
+		return worker_evicted_;
+	}
+
 	void start_animation(const EditorGameBase&, uint32_t anim);
 
 	bool is_seeing() const {
@@ -394,6 +399,8 @@ protected:
 	LeaveQueue leave_queue_;     //  FIFO queue of workers leaving the building
 	Time leave_time_;            //  when to wake the next one from leave queue
 	ObjectPointer leave_allow_;  //  worker that is allowed to leave now
+
+	Time worker_evicted_;  // The time when a worker was last evicted by the player.
 
 	//  The player who has defeated this building.
 	PlayerNumber defeating_player_;
