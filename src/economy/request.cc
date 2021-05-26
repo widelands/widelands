@@ -275,7 +275,7 @@ Time Request::get_required_time() const {
 	return get_base_required_time(economy_->owner().egbase(), transfers_.size());
 }
 
-constexpr Duration kBlacklistDurationAfterEvict(3600);
+constexpr Duration kBlacklistDurationAfterEvict(18000);
 
 /**
  * Return the request priority. Used only to sort requests from most to least important.
