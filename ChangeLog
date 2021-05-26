@@ -617,6 +617,7 @@
 - Document `LuaDescriptions::modify_unit` (#4807)
 - Fix documentation 3 (#4798)
 - Fix documentation `wlmaps` (#4822): Make MapObjectDescription understandable
+- Remove pseudo classes HasXy's (#4865)
 
 
 ### Editor
@@ -743,6 +744,7 @@
 - Add curl dependency
 - added libdeflate as static library where tiff is to be linked (#4573)
 - Fix linking with opus (#4789)
+- Fix MinGW revision detection and linking (#4870)
 
 
 ### Other Issues
