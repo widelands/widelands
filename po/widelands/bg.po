@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021
 # GunChleoc, 2014,2018
 # GunChleoc, 2014
 # Lyubomir Vasilev, 2015
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-17 16:23+0000\n"
-"PO-Revision-Date: 2021-05-02 12:39+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-05-23 10:22+0000\n"
+"PO-Revision-Date: 2021-05-24 19:15+0000\n"
+"Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +460,7 @@ msgstr "Задаване на позицията, която ще бъде с к
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:340
 msgid "Map size"
-msgstr ""
+msgstr "Размер на картата"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:343
@@ -469,7 +470,7 @@ msgstr "Промяна на размера на картата"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:346
 msgid "Information"
-msgstr ""
+msgstr "Информация"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:349
@@ -627,8 +628,8 @@ msgstr "мина"
 msgid "port"
 msgstr "пристанище"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -746,7 +747,7 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
@@ -875,7 +876,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager.cc:75
 #: ../../src/ui_fsmenu/addons_packager_box.cc:56
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
@@ -1340,8 +1341,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1464,7 +1465,7 @@ msgstr ""
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
@@ -1626,7 +1627,7 @@ msgstr ""
 #: ../../src/logic/addons.cc:195
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s и %2$s: %3$s"
 
 #: ../../src/logic/addons.cc:197
 #, c-format
@@ -1650,7 +1651,7 @@ msgstr ""
 #: ../../src/logic/addons.cc:219
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (версия %3$s)"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -2189,7 +2190,7 @@ msgstr ""
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:177
 msgid "Ships"
-msgstr ""
+msgstr "Кораби"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
@@ -3061,38 +3062,38 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:280
 msgid "Initial Color"
-msgstr ""
+msgstr "Първоначален цвят"
 
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgid "R"
-msgstr ""
+msgstr "Ч"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgid "G"
-msgstr ""
+msgstr "З"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgid "B"
-msgstr ""
+msgstr "С"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
-msgstr ""
+msgstr "Цвят по подразбиране"
 
 #: ../../src/ui_basic/color_chooser.cc:328
 msgid "Red"
-msgstr ""
+msgstr "Червено"
 
 #: ../../src/ui_basic/color_chooser.cc:340
 msgid "Green"
-msgstr ""
+msgstr "Зелено"
 
 #: ../../src/ui_basic/color_chooser.cc:352
 msgid "Blue"
-msgstr ""
+msgstr "Синьо"
 
 #: ../../src/ui_basic/dropdown.cc:112
 msgctxt "dropdown"
@@ -3340,7 +3341,7 @@ msgstr[1] ""
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s) от %3$s"
 
 #: ../../src/ui_fsmenu/addons.cc:468 ../../src/ui_fsmenu/addons.cc:1998
 #: ../../src/ui_fsmenu/addons.cc:2022
@@ -3405,7 +3406,7 @@ msgstr[1] ""
 #: ../../src/ui_fsmenu/addons.cc:860
 #, c-format
 msgid "· %s"
-msgstr ""
+msgstr "· %s"
 
 #: ../../src/ui_fsmenu/addons.cc:889
 #, c-format
@@ -3538,7 +3539,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1460 ../../src/ui_fsmenu/addons.cc:1923
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -3546,48 +3547,48 @@ msgstr ""
 #: ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1477 ../../src/ui_fsmenu/addons.cc:1967
 #, c-format
 msgid "(%s)"
-msgstr ""
+msgstr "(%s)"
 
 #: ../../src/ui_fsmenu/addons.cc:1480 ../../src/ui_fsmenu/addons.cc:1971
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "от %s"
 
 #: ../../src/ui_fsmenu/addons.cc:1504 ../../src/ui_fsmenu/addons.cc:2053
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Категория: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons.cc:1509 ../../src/ui_fsmenu/addons.cc:2057
 #, c-format
 msgid "Version: %1$s+%2$u"
-msgstr ""
+msgstr "Версия: %1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons.cc:1561
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f ГБ"
 
 #: ../../src/ui_fsmenu/addons.cc:1563
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f МБ"
 
 #: ../../src/ui_fsmenu/addons.cc:1565
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f КБ"
 
 #: ../../src/ui_fsmenu/addons.cc:1567
 #, c-format
 msgid "%u bytes"
-msgstr ""
+msgstr "%u байта"
 
 #: ../../src/ui_fsmenu/addons.cc:1605
 msgid "Your vote"
@@ -3624,8 +3625,8 @@ msgstr ""
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u коментар:"
+msgstr[1] "%u коментара:"
 
 #: ../../src/ui_fsmenu/addons.cc:1673
 #, c-format
@@ -3639,7 +3640,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1747
 #, c-format
 msgid "Comments (%u)"
-msgstr ""
+msgstr "Коментари (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:1752
 #, c-format
@@ -3678,7 +3679,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1949
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
-msgstr ""
+msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
 #: ../../src/ui_fsmenu/addons.cc:1972
 #, c-format
@@ -3730,29 +3731,29 @@ msgstr ""
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Общ размер: %u байт"
+msgstr[1] "Общ размер: %u байта"
 
 #: ../../src/ui_fsmenu/addons.cc:2075
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u изтегляне"
+msgstr[1] "%u изтегляния"
 
 #: ../../src/ui_fsmenu/addons.cc:2084
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u коментар"
+msgstr[1] "%u коментара"
 
 #: ../../src/ui_fsmenu/addons.cc:2086
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u снимка"
+msgstr[1] "%u снимки"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:49
 msgid "Add-Ons Packager"
@@ -3765,7 +3766,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager.cc:84
 #: ../../src/ui_fsmenu/addons_packager_box.cc:74
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:85
 msgid "Delete this add-on"
@@ -3789,15 +3790,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:133
 msgid "Name:"
-msgstr ""
+msgstr "Име:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:138
 msgid "Author:"
-msgstr ""
+msgstr "Автор:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:143
 msgid "Version:"
-msgstr ""
+msgstr "Версия:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:310
 msgid "New Add-On"
@@ -3809,7 +3810,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:313
 msgid "Category"
-msgstr ""
+msgstr "Категория"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:332
 #: ../../src/ui_fsmenu/addons_packager.cc:347
@@ -3817,7 +3818,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "Invalid Name"
-msgstr ""
+msgstr "Неправилно име"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:332
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
@@ -3869,7 +3870,7 @@ msgstr[1] ""
 msgid ""
 "%1$s\n"
 "· %2$s"
-msgstr ""
+msgstr "%1$s\n· %2$s"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:431
 msgid "Quit Packager"
@@ -3919,7 +3920,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:546
 msgid "Invalid Version"
-msgstr ""
+msgstr "Неправилна версия"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:548
 #, c-format
@@ -3944,7 +3945,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:65
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:66
 msgid "Create subdirectory"
@@ -3962,26 +3963,26 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:400
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Име: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
 #: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "Размер: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
 #: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
-msgstr ""
+msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Играчи: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:175
 msgid "Top-level directory"
@@ -3989,7 +3990,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:237
 msgid "New Directory"
-msgstr ""
+msgstr "Нова папка"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:238
 msgid "Enter the name for the new directory."
@@ -4019,7 +4020,7 @@ msgstr "Трудност"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:334
 msgid "Difficulty:"
-msgstr ""
+msgstr "Трудност:"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:359
 msgid "The campaigns difficulty. One word."
@@ -4152,7 +4153,7 @@ msgstr "Просрочено време за връзка"
 #: ../../src/ui_fsmenu/internet_lobby.cc:475
 #, c-format
 msgid "unnamed %u"
-msgstr ""
+msgstr "без име %u"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:42
 msgid "Reset to default"
@@ -4177,7 +4178,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/keyboard_options.cc:136
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:155
 msgid "Keyboard Shortcut Conflict"
@@ -4200,7 +4201,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/keyboard_options.cc:186
 #: ../../src/wlapplication_options.cc:198
 msgid "Editor"
-msgstr ""
+msgstr "Редактор"
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -4487,7 +4488,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:336
 #, c-format
 msgid "Map: %s"
-msgstr ""
+msgstr "Карта: %s"
 
 #: ../../src/ui_fsmenu/main.cc:340
 #, c-format
@@ -4544,15 +4545,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:423
 msgid "Single Player…"
-msgstr ""
+msgstr "Самостоятелна игра..."
 
 #: ../../src/ui_fsmenu/main.cc:424
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Мрежова игра..."
 
 #: ../../src/ui_fsmenu/main.cc:425
 msgid "Editor…"
-msgstr ""
+msgstr "Редактор..."
 
 #: ../../src/ui_fsmenu/main.cc:427
 msgid "Begin or load a single-player campaign or free game"
@@ -4635,7 +4636,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
-msgstr ""
+msgstr "неправилно племе „%s“"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:48
 msgid "Saved Players"
@@ -4644,13 +4645,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:55
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Играч %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:78
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Играч %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:97
 msgid "Map Details"
@@ -4663,7 +4664,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Hint: %s"
-msgstr ""
+msgstr "Съвет: %s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
@@ -5009,7 +5010,7 @@ msgstr "Запазване"
 
 #: ../../src/ui_fsmenu/options.cc:338
 msgid "New Games"
-msgstr ""
+msgstr "Нови игри"
 
 #: ../../src/ui_fsmenu/options.cc:339
 msgid "In-Game"
@@ -5137,7 +5138,7 @@ msgstr "Обучение"
 #. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
@@ -5147,12 +5148,12 @@ msgstr ""
 #. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
-msgstr ""
+msgstr "Автори"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:189
 msgid "You"
-msgstr ""
+msgstr "Вие"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:43
@@ -5252,11 +5253,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Singleplayer"
-msgstr ""
+msgstr "Самостоятелна игра"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Multiplayer"
-msgstr ""
+msgstr "Мрежова игра"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Editor – Load Map"
@@ -5272,7 +5273,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:231
 msgid "About"
-msgstr ""
+msgstr "Относно"
 
 #: ../../src/wlapplication_options.cc:248
 msgid "Internet Login"
@@ -5344,7 +5345,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:335
 msgid "Menu"
-msgstr ""
+msgstr "Меню"
 
 #: ../../src/wlapplication_options.cc:359
 msgid "Info Tool"
@@ -5554,32 +5555,32 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:754
 msgctxt "hotkey"
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: ../../src/wlapplication_options.cc:757
 msgctxt "hotkey"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Cmd"
-msgstr ""
+msgstr "Cmd"
 
 #: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "GUI"
-msgstr ""
+msgstr "ГПИ"
 
 #: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: ../../src/wlapplication_options.cc:772
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../src/wui/actionconfirm.cc:186
 msgid "Destroy building?"
@@ -5977,7 +5978,7 @@ msgstr ""
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../src/wui/economy_options_window.cc:299
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:562
 msgid "The profile name cannot be empty"
@@ -6182,8 +6183,8 @@ msgstr "Замяна на разкачения играч с избрания И
 msgid "AI for the disconnected player"
 msgstr "ИИ за разкачилия се играч"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -6403,20 +6404,20 @@ msgstr "Отборен резултат"
 #, c-format
 msgid "%d file"
 msgid_plural "%d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d файл"
+msgstr[1] "%d файла"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:126
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Избрана %1% папка и %2%:"
+msgstr[1] "Избрани %1% папки и %2%:"
 
 #: ../../src/wui/gamedetails.cc:145
 msgid "Directory Name:"
-msgstr ""
+msgstr "Име на папката:"
 
 #: ../../src/wui/gamedetails.cc:153
 msgid "Error:"
@@ -6510,13 +6511,13 @@ msgstr ""
 #: ../../src/wui/info_panel.cc:435
 #, c-format
 msgid "%1$s · %2$s"
-msgstr ""
+msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
 #: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
-msgstr ""
+msgstr "%1$s · %2$s · %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
@@ -6634,7 +6635,7 @@ msgstr "ПАУЗА"
 #: ../../src/wui/interactive_gamebase.cc:90
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for a menu button in the game. This menu will show
 #. options o increase/decrease the gamespeed, and to pause the game
@@ -6646,7 +6647,7 @@ msgstr ""
 #: ../../src/wui/interactive_gamebase.cc:122
 msgctxt "hotkey"
 msgid "Ctrl+Shift+Space"
-msgstr ""
+msgstr "Ctrl+Shift+Space"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:132
@@ -6852,7 +6853,7 @@ msgstr "празно"
 
 #: ../../src/wui/mapdetails.cc:133
 msgid "Directory"
-msgstr ""
+msgstr "Папка"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
@@ -6875,7 +6876,7 @@ msgstr "Името на тази карта на Вашия език: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:203
 msgid "Hint"
-msgstr ""
+msgstr "Съвет"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/wui/maptable.cc:32
@@ -7411,7 +7412,7 @@ msgstr ""
 #: ../../src/wui/soldier_statistics_menu.cc:234
 #, c-format
 msgid "×%u"
-msgstr ""
+msgstr "×%u"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:82
 msgid "Capacity"
@@ -7473,7 +7474,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Red:"
-msgstr ""
+msgstr "Червено:"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Stock is lower than the target"
@@ -7481,7 +7482,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:61
 msgid "Yellow:"
-msgstr ""
+msgstr "Жълто:"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Stock is equal to the target"
@@ -7489,7 +7490,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:65
 msgid "Green:"
-msgstr ""
+msgstr "Зелено:"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Stock is higher than the target"
@@ -7566,15 +7567,15 @@ msgstr "Експедиция"
 
 #: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
-msgstr ""
+msgstr "↓"
 
 #: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
-msgstr ""
+msgstr "↑"
 
 #: ../../src/wui/waresdisplay.cc:554
 msgid "="
-msgstr ""
+msgstr "="
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
@@ -7582,7 +7583,7 @@ msgstr ""
 #: ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
