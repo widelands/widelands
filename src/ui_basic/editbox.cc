@@ -41,7 +41,7 @@
 namespace {
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
-constexpr int CARET_BLINKING_DELAY = 500;
+constexpr int CARET_BLINKING_DELAY = 1000;
 }  // namespace
 
 namespace UI {
