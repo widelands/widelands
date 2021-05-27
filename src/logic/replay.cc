@@ -85,18 +85,13 @@ public:
 
 			UI::WLMessageBox m(
 			   game.get_ibase(), UI::WindowStyle::kWui, _("Desync"),
-			   (boost::format(
-			       _("The replay has desynced at gametime %1$u. The game was paused automatically.\n"
-			         "The current checksum is: %2$s\nThe original checksum is: %3$s\n\n"
-			         "If the game was originally played with a different version of Widelands, this "
-			         "desync is to be expected.\n"
-			         "Otherwise, please report this problem to help us improve Widelands.\n"
-			         "You will find related messages in the standard output (stdout.txt on Windows).\n"
-			         "You are using build %4$s (%5$s).\n"
-			         "Please add this information to your report.")) %
-			    duetime().get() % myhash.str() % hash_.str() % build_id() % build_type())
-			      .str(),
-			   UI::WLMessageBox::MBoxType::kOk);
+			   (boost::format(_(
+			         "The replay has desynced and the game was paused.\n"
+			         "You are probably watching a replay created with another version of Widelands, which is not supported.\n\n"
+			         "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), "
+			         "please report this problem as a bug.\n"
+			         "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
+			         )) % build_id() % build_type()).str(), UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
 	}
