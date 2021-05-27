@@ -498,6 +498,7 @@ void Ship::refit(EditorGameBase& egbase, const ShipStates type) {
 	if (upcast(Game, game, &egbase)) {
 		send_signal(*game, "wakeup");
 	}
+	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {

@@ -220,6 +220,9 @@ struct Ship : Bob {
 
 	bool can_refit(ShipStates) const;
 	void refit(EditorGameBase&, ShipStates);
+	ShipStates get_pending_refit() const {
+		return pending_refit_;
+	}
 
 protected:
 	void draw(const EditorGameBase&,

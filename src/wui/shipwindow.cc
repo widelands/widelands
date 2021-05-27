@@ -131,7 +131,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	btn_sink_ = make_button(buttons, "sink", _("Sink the ship"), kImgSink, [this]() { act_sink(); });
 	buttons->add(btn_sink_);
 
-	btn_refit_ = make_button(buttons, "refit", "", nullptr, [this]() { act_refit(); });
+	btn_refit_ = make_button(buttons, "refit", "", kImgRefitTransport, [this]() { act_refit(); });
 	buttons->add(btn_refit_);
 
 	btn_cancel_expedition_ =

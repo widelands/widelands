@@ -606,6 +606,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_6, KMOD_SHIFT),
                          "game_sfstats_filter_warship",
                          []() { return _("Seafaring: Show Warships"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterRefitting,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                         keysym(SDLK_7, KMOD_SHIFT),
+                         "game_sfstats_filter_refitting",
+                         []() { return _("Seafaring: Show Ships Being Refitted"); })},
 #define QUICKNAV(i)                                                                                \
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
