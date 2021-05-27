@@ -28,6 +28,7 @@
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/shipstates.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"
@@ -296,6 +297,7 @@ public:
 	void send_player_ship_construct_port(const Ship&, Coords);
 	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
 	void send_player_sink_ship(const Ship&);
+	void send_player_refit_ship(const Ship&, ShipStates);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);

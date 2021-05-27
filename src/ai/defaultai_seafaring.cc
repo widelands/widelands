@@ -269,12 +269,12 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// iterating over ships and doing what is needed
 		for (ShipObserver& so : allships) {
 
-			const Widelands::Ship::ShipStates ship_state = so.ship->get_ship_state();
+			const Widelands::ShipStates ship_state = so.ship->get_ship_state();
 
 			// Here we manage duration of expedition and related variables
-			if (ship_state == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-			    ship_state == Widelands::Ship::ShipStates::kExpeditionScouting ||
-			    ship_state == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			if (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
+			    ship_state == Widelands::ShipStates::kExpeditionScouting ||
+			    ship_state == Widelands::ShipStates::kExpeditionPortspaceFound) {
 
 				// the function below will take care of variables like
 				// - expedition_ship_
@@ -293,9 +293,9 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			}
 
 			// only two states need an attention
-			if ((so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+			if ((so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
 			     so.ship->get_ship_state() ==
-			        Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
+			        Widelands::ShipStates::kExpeditionPortspaceFound) &&
 			    !so.waiting_for_command_) {
 				if (gametime - so.last_command_time > Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
@@ -318,12 +318,12 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				// Or(!) this is a island without a port and ship would sail around forever
 			} else if ((so.escape_mode ||
 			            (so.last_command_time + Duration(5 * 60 * 1000)) < gametime) &&
-			           so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting) {
+			           so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
 			}
 
 			// Checking utilization
-			if (so.ship->get_ship_state() == Widelands::Ship::ShipStates::kTransport) {
+			if (so.ship->get_ship_state() == Widelands::ShipStates::kTransport) {
 				// Good utilization is 10 pieces of ware onboard, to track utilization we use range
 				// 0-10000
 				// to avoid float or rounding errors if integers in range 0-100

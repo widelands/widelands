@@ -47,6 +47,8 @@ constexpr const char* const kImgScoutE = "images/wui/ship/ship_scout_e.png";
 constexpr const char* const kImgScoutSW = "images/wui/ship/ship_scout_sw.png";
 constexpr const char* const kImgScoutSE = "images/wui/ship/ship_scout_se.png";
 constexpr const char* const kImgConstructPort = "images/wui/ship/ship_construct_port_space.png";
+constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_transport.png";
+constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
 
 constexpr int kPadding = 5;
 }  // namespace
@@ -128,6 +130,9 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 
 	btn_sink_ = make_button(buttons, "sink", _("Sink the ship"), kImgSink, [this]() { act_sink(); });
 	buttons->add(btn_sink_);
+
+	btn_refit_ = make_button(buttons, "refit", "", nullptr, [this]() { act_refit(); });
+	buttons->add(btn_refit_);
 
 	btn_cancel_expedition_ =
 	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), kImgCancelExpedition,
@@ -230,6 +235,10 @@ void ShipWindow::think() {
 	btn_destination_->set_enabled(ship->get_destination());
 	btn_sink_->set_enabled(can_act);
 
+	btn_refit_->set_pic(g_image_cache->get(ship->is_warship() ? kImgRefitTransport : kImgRefitWarship));
+	btn_refit_->set_enabled(can_act && ship->can_refit(ship->is_warship() ? Widelands::ShipStates::kTransport : Widelands::ShipStates::kWarship));
+	btn_refit_->set_tooltip(ship->is_warship() ? _("Refit to transport ship") : _("Refit to warship"));
+
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
 		Widelands::ShippingItem item = ship->get_item(idx);
@@ -245,7 +254,7 @@ void ShipWindow::think() {
 		}
 	}
 
-	Widelands::Ship::ShipStates state = ship->get_ship_state();
+	Widelands::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
 		/* The following rules apply:
 		 * - The "construct port" button is only active, if the ship is waiting for commands and found
@@ -259,25 +268,25 @@ void ShipWindow::think() {
 		 *   in waiting or already expedition/scouting mode)
 		 */
 		btn_construct_port_->set_enabled(
-		   can_act && (state == Widelands::Ship::ShipStates::kExpeditionPortspaceFound));
+		   can_act && (state == Widelands::ShipStates::kExpeditionPortspaceFound));
 		bool coast_nearby = false;
 		for (Widelands::Direction dir = 1; dir <= Widelands::LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
 			btn_scout_[dir - 1]->set_enabled(
 			   can_act && ship->exp_dir_swimmable(dir) &&
-			   (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+			   (state != Widelands::ShipStates::kExpeditionColonizing));
 			coast_nearby |= !ship->exp_dir_swimmable(dir);
 		}
 		btn_explore_island_cw_->set_enabled(
-		   can_act && coast_nearby && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		   can_act && coast_nearby && (state != Widelands::ShipStates::kExpeditionColonizing));
 		btn_explore_island_ccw_->set_enabled(
-		   can_act && coast_nearby && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		   can_act && coast_nearby && (state != Widelands::ShipStates::kExpeditionColonizing));
 		btn_sink_->set_enabled(can_act &&
-		                       (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		                       (state != Widelands::ShipStates::kExpeditionColonizing));
 	}
 	btn_cancel_expedition_->set_enabled(
 	   ship->state_is_expedition() && can_act &&
-	   (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+	   (state != Widelands::ShipStates::kExpeditionColonizing));
 	// Expedition specific buttons
 	set_button_visibility();
 }
@@ -328,6 +337,19 @@ void ShipWindow::act_sink() {
 		}
 	} else if (upcast(InteractivePlayer, ipl, &ibase_)) {
 		show_ship_sink_confirm(*ipl, *ship);
+	}
+}
+
+void ShipWindow::act_refit() {
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	const Widelands::ShipStates t = ship->is_warship() ? Widelands::ShipStates::kTransport : Widelands::ShipStates::kWarship;
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_refit_ship(*ship, t);
+	} else {
+		ship->refit(ibase_.egbase(), t);
 	}
 }
 

@@ -103,6 +103,14 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    kButtonSize,
                    UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kShipping)),
+     warship_btn_(&filter_box_,
+                   "filter_ship_warship",
+                   0,
+                   0,
+                   kButtonSize,
+                   kButtonSize,
+                   UI::ButtonStyle::kWuiSecondary,
+                   status_to_image(ShipFilterStatus::kWarship)),
      ship_filter_(ShipFilterStatus::kAll),
      navigation_box_(&main_box_,
                      UI::PanelStyle::kWui,
@@ -168,6 +176,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	filter_box_.add(&waiting_btn_);
 	filter_box_.add(&scouting_btn_);
 	filter_box_.add(&portspace_btn_);
+	filter_box_.add(&warship_btn_);
 
 	main_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
@@ -188,6 +197,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	   [this]() { filter_ships(ShipFilterStatus::kExpeditionScouting); });
 	portspace_btn_.sigclicked.connect(
 	   [this]() { filter_ships(ShipFilterStatus::kExpeditionPortspaceFound); });
+	warship_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kWarship); });
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
 
@@ -241,6 +252,8 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 		return pgettext("ship_state", "Scouting");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		return pgettext("ship_state", "Port Space Found");
+	case SeafaringStatisticsMenu::ShipFilterStatus::kWarship:
+		return pgettext("ship_state", "Warship");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
 	}
@@ -266,6 +279,9 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		filename = "images/wui/ship/ship_construct_port_space.png";
 		break;
+	case SeafaringStatisticsMenu::ShipFilterStatus::kWarship:
+		filename = "images/wui/ship/ship_refit_warship.png";
+		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
@@ -275,29 +291,32 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 
 std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>
 SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
-	const Widelands::Ship::ShipStates state = ship.get_ship_state();
+	const Widelands::ShipStates state = ship.get_ship_state();
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
-	case Widelands::Ship::ShipStates::kTransport:
+	case Widelands::ShipStates::kTransport:
 		if (ship.get_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;
 		}
 		break;
-	case Widelands::Ship::ShipStates::kExpeditionWaiting:
+	case Widelands::ShipStates::kExpeditionWaiting:
 		status = ShipFilterStatus::kExpeditionWaiting;
 		break;
-	case Widelands::Ship::ShipStates::kExpeditionScouting:
+	case Widelands::ShipStates::kExpeditionScouting:
 		status = ShipFilterStatus::kExpeditionScouting;
 		break;
-	case Widelands::Ship::ShipStates::kExpeditionPortspaceFound:
-	case Widelands::Ship::ShipStates::kExpeditionColonizing:
+	case Widelands::ShipStates::kExpeditionPortspaceFound:
+	case Widelands::ShipStates::kExpeditionColonizing:
 		// We're grouping the "colonizing" status with the port space.
 		status = ShipFilterStatus::kExpeditionPortspaceFound;
 		break;
-	case Widelands::Ship::ShipStates::kSinkRequest:
-	case Widelands::Ship::ShipStates::kSinkAnimation:
+	case Widelands::ShipStates::kWarship:
+		status = ShipFilterStatus::kWarship;
+		break;
+	case Widelands::ShipStates::kSinkRequest:
+	case Widelands::ShipStates::kSinkAnimation:
 		status = ShipFilterStatus::kAll;
 	}
 	return std::unique_ptr<const ShipInfo>(new ShipInfo(ship.get_shipname(), status, ship.serial()));
@@ -416,6 +435,10 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 			filter_ships(ShipFilterStatus::kExpeditionScouting);
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterWarship, code)) {
+			filter_ships(ShipFilterStatus::kWarship);
+			return true;
+		}
 		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace, code)) {
 			filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);
 			return true;
@@ -466,6 +489,9 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kIdle:
 		toggle_filter_ships_button(idle_btn_, status);
 		break;
+	case ShipFilterStatus::kWarship:
+		toggle_filter_ships_button(warship_btn_, status);
+		break;
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
 		ship_filter_ = ShipFilterStatus::kAll;
@@ -474,6 +500,7 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 		portspace_btn_.set_perm_pressed(false);
 		shipping_btn_.set_perm_pressed(false);
 		idle_btn_.set_perm_pressed(false);
+		warship_btn_.set_perm_pressed(false);
 		break;
 	}
 	fill_table();
@@ -491,6 +518,7 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 		portspace_btn_.set_perm_pressed(false);
 		shipping_btn_.set_perm_pressed(false);
 		idle_btn_.set_perm_pressed(false);
+		warship_btn_.set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		ship_filter_ = status;
 
@@ -526,6 +554,11 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show expeditions that have found a port space or are founding a colony"),
 	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace),
+	   UI::PanelStyle::kWui));
+	warship_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show warships"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterWarship),
 	   UI::PanelStyle::kWui));
 }
 

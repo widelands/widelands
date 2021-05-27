@@ -6939,6 +6939,7 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, get_workers),
    METHOD(LuaShip, build_colonization_port),
    METHOD(LuaShip, make_expedition),
+   METHOD(LuaShip, refit),
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
@@ -7000,6 +7001,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
       * :const:`"transport"`,
       * :const:`"exp_waiting"`, :const:`"exp_scouting"`, :const:`"exp_found_port_space"`,
         :const:`"exp_colonizing"`,
+      * :const:`"warship"`
       * :const:`"sink_request"`, :const:`"sink_animation"`
 
       :returns: The ship's state as :const:`string`, or :const:`nil` if there is no valid state.
@@ -7011,26 +7013,30 @@ int LuaShip::get_state(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_ship_state()) {
-		case Widelands::Ship::ShipStates::kTransport:
+		case Widelands::ShipStates::kTransport:
 			lua_pushstring(L, "transport");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionWaiting:
+		case Widelands::ShipStates::kExpeditionWaiting:
 			lua_pushstring(L, "exp_waiting");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionScouting:
+		case Widelands::ShipStates::kExpeditionScouting:
 			lua_pushstring(L, "exp_scouting");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionPortspaceFound:
+		case Widelands::ShipStates::kExpeditionPortspaceFound:
 			lua_pushstring(L, "exp_found_port_space");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionColonizing:
+		case Widelands::ShipStates::kExpeditionColonizing:
 			lua_pushstring(L, "exp_colonizing");
 			break;
-		case Widelands::Ship::ShipStates::kSinkRequest:
+		case Widelands::ShipStates::kWarship:
+			lua_pushstring(L, "warship");
+			break;
+		case Widelands::ShipStates::kSinkRequest:
 			lua_pushstring(L, "sink_request");
 			break;
-		case Widelands::Ship::ShipStates::kSinkAnimation:
+		case Widelands::ShipStates::kSinkAnimation:
 			lua_pushstring(L, "sink_animation");
+			break;
 		}
 		return 1;
 	}
@@ -7302,7 +7308,7 @@ int LuaShip::get_workers(lua_State* L) {
 int LuaShip::build_colonization_port(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Ship* ship = get(L, egbase);
-	if (ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+	if (ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) {
 		if (upcast(Widelands::Game, game, &egbase)) {
 			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 			return 1;
@@ -7366,7 +7372,7 @@ int LuaShip::make_expedition(lua_State* L) {
 	assert(game);
 	Widelands::Ship* ship = get(L, *game);
 	assert(ship);
-	if (ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport ||
+	if (ship->get_ship_state() != Widelands::ShipStates::kTransport ||
 	    ship->get_nritems() > 0) {
 		report_error(L, "Ship.make_expedition can be used only on empty transport ships!");
 	}
@@ -7423,6 +7429,32 @@ int LuaShip::make_expedition(lua_State* L) {
 	ship->set_destination(*game, nullptr);
 	ship->start_task_expedition(*game);
 
+	return 0;
+}
+
+/* RST
+   .. method:: refit(type)
+
+      Order the ship to refit to the given type
+
+      :arg string type: :const:`"transport"` or :const:`"warship"`
+
+      :returns: :const:`nil`
+*/
+int LuaShip::refit(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments to refit!");
+	}
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+	const std::string type = luaL_checkstring(L, 2);
+	if (type == "transport") {
+		ship->refit(egbase, Widelands::ShipStates::kTransport);
+	} else if (type == "warship") {
+		ship->refit(egbase, Widelands::ShipStates::kWarship);
+	} else {
+		report_error(L, "Invalid ship refit type '%s'", type.c_str());
+	}
 	return 0;
 }
 

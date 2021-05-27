@@ -26,6 +26,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/tribes/shipstates.h"
 
 namespace Widelands {
 
@@ -136,37 +137,6 @@ struct Ship : Bob {
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
 
-	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
-	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of
-	// this ship
-	// can give direction change commands to change the direction of the moving ship / send the ship
-	// in a
-	// direction. Once the ship is on its way, it is in kExpeditionScouting state. In the backend, a
-	// click
-	// on a direction begins to the movement into that direction until a coast is reached or the user
-	// cancels the direction through a direction change.
-	//
-	// The kExpeditionWaiting state means, that an event happend and thus the ship stopped and waits
-	// for a
-	// new command by the owner. An event leading to a kExpeditionWaiting state can be:
-	// * expedition is ready to start
-	// * new island appeared in vision range (only outer ring of vision range has to be checked due
-	// to the
-	//   always ongoing movement).
-	// * island was completely surrounded
-	//
-	// The kExpeditionPortspaceFound state means, that a port build space was found.
-	//
-	enum class ShipStates : uint8_t {
-		kTransport = 0,
-		kExpeditionWaiting = 1,
-		kExpeditionScouting = 2,
-		kExpeditionPortspaceFound = 3,
-		kExpeditionColonizing = 4,
-		kSinkRequest = 8,
-		kSinkAnimation = 9
-	};
-
 	/// \returns the current state the ship is in
 	ShipStates get_ship_state() const {
 		return ship_state_;
@@ -187,6 +157,9 @@ struct Ship : Bob {
 	/// \returns whether the ship is in transport mode
 	bool state_is_transport() const {
 		return (ship_state_ == ShipStates::kTransport);
+	}
+	bool is_warship() const {
+		return (ship_state_ == ShipStates::kWarship);
 	}
 	/// \returns whether a sink request for the ship is currently valid
 	bool state_is_sinkable() const {
@@ -245,6 +218,9 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
+	bool can_refit(ShipStates) const;
+	void refit(EditorGameBase&, ShipStates);
+
 protected:
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
@@ -265,6 +241,7 @@ private:
 	void ship_wakeup(Game&);
 
 	bool ship_update_transport(Game&, State&);
+	bool ship_update_warship(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
@@ -285,6 +262,7 @@ private:
 	OPtr<PortDock> lastdock_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_;
+	ShipStates pending_refit_;
 	std::string shipname_;
 
 	PortDock* destination_;
@@ -330,7 +308,7 @@ protected:
 		Serial worker_economy_serial_;
 		uint32_t destination_;
 		uint32_t capacity_;
-		ShipStates ship_state_;
+		ShipStates ship_state_, pending_refit_;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

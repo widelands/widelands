@@ -52,6 +52,7 @@ private:
 	void act_goto();
 	void act_destination();
 	void act_sink();
+	void act_refit();
 	void act_debug();
 	void act_cancel_expedition();
 	void act_scout_towards(Widelands::WalkingDir);
@@ -66,6 +67,7 @@ private:
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
+	UI::Button* btn_refit_;
 	UI::Button* btn_debug_;
 	UI::Button* btn_cancel_expedition_;
 	UI::Button* btn_explore_island_cw_;

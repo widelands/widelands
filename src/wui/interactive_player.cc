@@ -247,7 +247,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		   if (note.ship->owner().player_number() == player_number() &&
 		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
 		       note.ship->get_ship_state() ==
-		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+		          Widelands::ShipStates::kExpeditionPortspaceFound) {
 			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
 		   }
 	   });
@@ -465,7 +465,7 @@ void InteractivePlayer::think() {
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
 		Widelands::Ship* ship = it->first.get(egbase());
 		if (!ship ||
-		    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound) {
 			expedition_port_spaces_.erase(it);
 			// If another port space also needs removing, we'll take care of it in the next frame
 			return;

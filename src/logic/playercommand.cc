@@ -896,6 +896,51 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
+/*** Cmd_ShipRefit ***/
+CmdShipRefit::CmdShipRefit(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	type_ = static_cast<ShipStates>(des.unsigned_8());
+}
+
+void CmdShipRefit::execute(Game& game) {
+	upcast(Ship, ship, game.objects().get_object(serial_));
+	if (ship && ship->get_owner()->player_number() == sender()) {
+		ship->refit(game, type_);
+	}
+}
+
+void CmdShipRefit::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
+}
+
+constexpr uint16_t kCurrentPacketVersionShipRefit = 1;
+
+void CmdShipRefit::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionShipRefit) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
+			type_ = static_cast<ShipStates>(fr.unsigned_8());
+		} else {
+			throw UnhandledVersionError(
+			   "CmdShipRefit", packet_version, kCurrentPacketVersionShipRefit);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Ship scout: %s", e.what());
+	}
+}
+void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionShipRefit);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(type_));
+}
+
 /*** Cmd_ShipScoutDirection ***/
 CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
@@ -906,9 +951,9 @@ CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
 void CmdShipScoutDirection::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
+		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received scout command but not in "
@@ -969,7 +1014,7 @@ CmdShipConstructPort::CmdShipConstructPort(StreamRead& des)
 void CmdShipConstructPort::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound) {
 			log_warn_time(game.get_gametime(),
 			              " %1d:ship on %3dx%3d received build port command but "
 			              "not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
@@ -1028,9 +1073,9 @@ CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
 void CmdShipExploreIsland::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
+		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received explore island command "

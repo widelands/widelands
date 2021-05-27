@@ -101,6 +101,7 @@ wl_library(logic_map_objects
     tribes/road_textures.h
     tribes/ship.cc
     tribes/ship.h
+    tribes/shipstates.h
     tribes/soldier.cc
     tribes/soldier.h
     tribes/soldiercontrol.h

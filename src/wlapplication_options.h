@@ -191,6 +191,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSeafaringstatsFilterExpWait,
 	kInGameSeafaringstatsFilterExpScout,
 	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsFilterWarship,
 	kInGameQuicknavSet1,
 	kInGameQuicknavGoto1,
 	kInGameQuicknavSet2,

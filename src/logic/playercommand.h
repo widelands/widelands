@@ -397,6 +397,30 @@ private:
 	Serial serial;
 };
 
+struct CmdShipRefit : public PlayerCommand {
+	CmdShipRefit() : PlayerCommand(), serial_(0), type_(ShipStates::kTransport) {
+	}  // For savegame loading
+	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipStates ss)
+	   : PlayerCommand(t, p), serial_(s), type_(ss) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kShipRefit;
+	}
+
+	explicit CmdShipRefit(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_;
+	ShipStates type_;
+};
+
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading

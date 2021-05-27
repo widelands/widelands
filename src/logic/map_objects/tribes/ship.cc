@@ -128,6 +128,7 @@ Ship::Ship(const ShipDescr& gdescr)
      ware_economy_(nullptr),
      worker_economy_(nullptr),
      ship_state_(ShipStates::kTransport),
+     pending_refit_(ship_state_),
      destination_(nullptr),
      capacity_(gdescr.get_default_capacity()) {
 }
@@ -260,9 +261,45 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		}
 	}
 
+	if (ship_state_ != pending_refit_) {
+		assert(fleet_);
+		bool skip = false;
+		if (!destination_) {
+			PortDock* closest = nullptr;
+			int32_t dist = 0;
+			for (PortDock* pd : fleet_->get_ports()) {
+				Path path;
+				int32_t d = -1;
+				calculate_sea_route(game, *pd, &path);
+				game.map().calc_cost(path, &d, nullptr);
+				assert(d >= 0);
+				if (!closest || d < dist) {
+					dist = d;
+					closest = pd;
+				}
+			}
+			if (closest) {
+				set_destination(game, closest);
+			} else {
+				molog(game.get_gametime(), "Pending refit to %d but no ports in fleet", static_cast<int>(pending_refit_));
+				pending_refit_ = ship_state_;
+				skip = true;
+			}
+		}
+		if (!skip) {
+			ship_update_transport(game, state);
+			return;
+		}
+	}
+
 	switch (ship_state_) {
 	case ShipStates::kTransport:
 		if (ship_update_transport(game, state)) {
+			return;
+		}
+		break;
+	case ShipStates::kWarship:
+		if (ship_update_warship(game, state)) {
 			return;
 		}
 		break;
@@ -382,6 +419,11 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	return true;
 }
 
+bool Ship::ship_update_warship(Game&, Bob::State&) {
+	// NOCOM
+	return false;
+}
+
 /// updates a ships tasks in expedition mode
 void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	Map* map = game.mutable_map();
@@ -437,6 +479,24 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 			             _("An expedition ship found a new port build space."),
 			             "images/wui/editor/fsel_editor_set_port_space.png");
 		}
+	}
+}
+
+inline bool Ship::can_refit(const ShipStates type) const {
+	return
+			pending_refit_ == ship_state_ &&
+			type != ship_state_ && !state_is_expedition() &&
+			(type == ShipStates::kWarship || type == ShipStates::kTransport) &&
+			fleet_ != nullptr && !fleet_->get_ports().empty();
+}
+
+void Ship::refit(EditorGameBase& egbase, const ShipStates type) {
+	if (!can_refit(type)) {
+		return;
+	}
+	pending_refit_ = type;
+	if (upcast(Game, game, &egbase)) {
+		send_signal(*game, "wakeup");
 	}
 }
 
@@ -691,6 +751,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		expedition_.reset(nullptr);
 		return start_task_idle(game, descr().main_animation(), kShipInterval);
 	}
+	case ShipStates::kWarship:
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
@@ -1005,36 +1066,53 @@ void Ship::draw(const EditorGameBase& egbase,
 	// Show ship name and current activity
 	std::string statistics_string;
 	if (info_to_draw & InfoToDraw::kStatistics) {
-		switch (ship_state_) {
-		case (ShipStates::kTransport):
-			statistics_string =
-			   destination_ && fleet_->get_schedule().is_busy(*this) ?
-			      /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-			      pgettext("ship_state", "Shipping") :
-			      /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
-			       * nothing to do. */
-			      pgettext("ship_state", "Empty");
-			break;
-		case (ShipStates::kExpeditionWaiting):
-			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
-			statistics_string = pgettext("ship_state", "Waiting");
-			break;
-		case (ShipStates::kExpeditionScouting):
-			/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
-			statistics_string = pgettext("ship_state", "Scouting");
-			break;
-		case (ShipStates::kExpeditionPortspaceFound):
-			/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
-			statistics_string = pgettext("ship_state", "Port Space Found");
-			break;
-		case (ShipStates::kExpeditionColonizing):
-			/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
-			 * port. */
-			statistics_string = pgettext("ship_state", "Founding a Colony");
-			break;
-		case (ShipStates::kSinkRequest):
-		case (ShipStates::kSinkAnimation):
-			break;
+		if (ship_state_ != pending_refit_) {
+			switch (pending_refit_) {
+			case ShipStates::kTransport:
+				statistics_string = pgettext("ship_state", "Refitting to Transport Ship");
+				break;
+			case ShipStates::kWarship:
+				statistics_string = pgettext("ship_state", "Refitting to Warship");
+				break;
+			default:
+				NEVER_HERE();
+			}
+		} else {
+			switch (ship_state_) {
+			case (ShipStates::kTransport):
+				statistics_string =
+				   destination_ && fleet_->get_schedule().is_busy(*this) ?
+					  /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
+					  pgettext("ship_state", "Shipping") :
+					  /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
+					   * nothing to do. */
+					  pgettext("ship_state", "Empty");
+				break;
+			case (ShipStates::kExpeditionWaiting):
+				/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
+				statistics_string = pgettext("ship_state", "Waiting");
+				break;
+			case (ShipStates::kExpeditionScouting):
+				/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
+				statistics_string = pgettext("ship_state", "Scouting");
+				break;
+			case (ShipStates::kExpeditionPortspaceFound):
+				/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
+				statistics_string = pgettext("ship_state", "Port Space Found");
+				break;
+			case (ShipStates::kExpeditionColonizing):
+				/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
+				 * port. */
+				statistics_string = pgettext("ship_state", "Founding a Colony");
+				break;
+			case (ShipStates::kWarship):
+				/** TRANSLATORS: This is a ship state. */
+				statistics_string = pgettext("ship_state", "Warship");
+				break;
+			case (ShipStates::kSinkRequest):
+			case (ShipStates::kSinkAnimation):
+				break;
+			}
 		}
 		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
@@ -1127,7 +1205,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 12;
+constexpr uint8_t kCurrentPacketVersion = 13;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -1137,7 +1215,7 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
-	if (packet_version == kCurrentPacketVersion) {
+	if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
 		Bob::Loader::load(fr);
 		// Economy
 		ware_economy_serial_ = fr.unsigned_32();
@@ -1145,12 +1223,14 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		// The state the ship is in
 		ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
+		pending_refit_ = (packet_version >= 13) ? static_cast<ShipStates>(fr.unsigned_8()) : ship_state_;
 
 		// Expedition specific data
-		if (ship_state_ == ShipStates::kExpeditionScouting ||
-		    ship_state_ == ShipStates::kExpeditionWaiting ||
-		    ship_state_ == ShipStates::kExpeditionPortspaceFound ||
-		    ship_state_ == ShipStates::kExpeditionColonizing) {
+		switch (ship_state_) {
+		case ShipStates::kExpeditionScouting:
+	    case ShipStates::kExpeditionWaiting:
+	    case ShipStates::kExpeditionPortspaceFound:
+	    case ShipStates::kExpeditionColonizing: {
 			expedition_.reset(new Expedition());
 			// Currently seen port build spaces
 			expedition_->seen_port_buildspaces.clear();
@@ -1171,8 +1251,15 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Whether the exploration is done clockwise or counter clockwise
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
-		} else {
+			} break;
+
+		case ShipStates::kWarship:
+			// NOCOM
+			break;
+
+		default:
 			ship_state_ = ShipStates::kTransport;
+			break;
 		}
 
 		shipname_ = fr.c_string();
@@ -1226,6 +1313,7 @@ void Ship::Loader::load_finish() {
 
 	// restore the state the ship is in
 	ship.ship_state_ = ship_state_;
+	ship.pending_refit_ = pending_refit_;
 
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
@@ -1237,6 +1325,8 @@ void Ship::Loader::load_finish() {
 		ship.expedition_.swap(expedition_);
 		ship.expedition_->ware_economy = ship.ware_economy_;
 		ship.expedition_->worker_economy = ship.worker_economy_;
+	} else if (ship_state_ == ShipStates::kWarship) {
+		// NOCOM
 	} else {
 		assert(ship_state_ == ShipStates::kTransport);
 	}
@@ -1257,7 +1347,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
@@ -1292,6 +1382,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));
+	fw.unsigned_8(static_cast<uint8_t>(pending_refit_));
 
 	// expedition specific data
 	if (state_is_expedition()) {
