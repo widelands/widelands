@@ -100,10 +100,10 @@ struct Ship : Bob {
 	// Returns the fleet the ship is a part of.
 	ShipFleet* get_fleet() const;
 
-	PortDock* get_destination() const {
-		return destination_;
+	PortDock* get_destination(EditorGameBase& e) const {
+		return destination_.get(e);
 	}
-	void set_destination(Game&, PortDock*);
+	void set_destination(EditorGameBase&, PortDock*);
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
@@ -268,7 +268,7 @@ private:
 	ShipStates pending_refit_;
 	std::string shipname_;
 
-	PortDock* destination_;
+	OPtr<PortDock> destination_;
 
 	struct Expedition {
 		~Expedition();

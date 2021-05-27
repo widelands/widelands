@@ -232,7 +232,7 @@ void ShipWindow::think() {
 	}
 	const bool can_act = ibase_.can_act(ship->owner().player_number());
 
-	btn_destination_->set_enabled(ship->get_destination());
+	btn_destination_->set_enabled(ship->get_destination(ibase_.egbase()));
 	btn_sink_->set_enabled(can_act);
 
 	btn_refit_->set_pic(g_image_cache->get(ship->is_warship() ? kImgRefitTransport : kImgRefitWarship));
@@ -317,7 +317,7 @@ void ShipWindow::act_destination() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (Widelands::PortDock* destination = ship->get_destination()) {
+	if (Widelands::PortDock* destination = ship->get_destination(ibase_.egbase())) {
 		ibase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}

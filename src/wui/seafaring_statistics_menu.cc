@@ -309,35 +309,36 @@ std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>
 SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	const Widelands::ShipStates state = ship.get_ship_state();
 	ShipFilterStatus status = ShipFilterStatus::kAll;
-	switch (state) {
-	case Widelands::ShipStates::kTransport:
-		if (ship.get_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
-			status = ShipFilterStatus::kShipping;
-		} else {
-			status = ShipFilterStatus::kIdle;
-		}
-		break;
-	case Widelands::ShipStates::kExpeditionWaiting:
-		status = ShipFilterStatus::kExpeditionWaiting;
-		break;
-	case Widelands::ShipStates::kExpeditionScouting:
-		status = ShipFilterStatus::kExpeditionScouting;
-		break;
-	case Widelands::ShipStates::kExpeditionPortspaceFound:
-	case Widelands::ShipStates::kExpeditionColonizing:
-		// We're grouping the "colonizing" status with the port space.
-		status = ShipFilterStatus::kExpeditionPortspaceFound;
-		break;
-	case Widelands::ShipStates::kWarship:
-		status = ShipFilterStatus::kWarship;
-		break;
-	case Widelands::ShipStates::kSinkRequest:
-	case Widelands::ShipStates::kSinkAnimation:
-		status = ShipFilterStatus::kAll;
-		break;
-	}
 	if (ship.get_pending_refit() != state) {
 		status = ShipFilterStatus::kRefitting;
+	} else {
+		switch (state) {
+		case Widelands::ShipStates::kTransport:
+			if (ship.get_destination(iplayer().egbase()) && ship.get_fleet()->get_schedule().is_busy(ship)) {
+				status = ShipFilterStatus::kShipping;
+			} else {
+				status = ShipFilterStatus::kIdle;
+			}
+			break;
+		case Widelands::ShipStates::kExpeditionWaiting:
+			status = ShipFilterStatus::kExpeditionWaiting;
+			break;
+		case Widelands::ShipStates::kExpeditionScouting:
+			status = ShipFilterStatus::kExpeditionScouting;
+			break;
+		case Widelands::ShipStates::kExpeditionPortspaceFound:
+		case Widelands::ShipStates::kExpeditionColonizing:
+			// We're grouping the "colonizing" status with the port space.
+			status = ShipFilterStatus::kExpeditionPortspaceFound;
+			break;
+		case Widelands::ShipStates::kWarship:
+			status = ShipFilterStatus::kWarship;
+			break;
+		case Widelands::ShipStates::kSinkRequest:
+		case Widelands::ShipStates::kSinkAnimation:
+			status = ShipFilterStatus::kAll;
+			break;
+		}
 	}
 	return std::unique_ptr<const ShipInfo>(new ShipInfo(ship.get_shipname(), status, ship.serial()));
 }

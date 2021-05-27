@@ -6978,7 +6978,7 @@ int LuaShip::get_debug_worker_economy(lua_State* L) {
 */
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
-	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_destination());
+	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_destination(get_egbase(L)));
 }
 
 /* RST

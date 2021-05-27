@@ -262,34 +262,28 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	}
 
 	if (ship_state_ != pending_refit_) {
-		assert(fleet_);
-		bool skip = false;
-		if (!destination_) {
-			PortDock* closest = nullptr;
-			int32_t dist = 0;
-			for (PortDock* pd : fleet_->get_ports()) {
-				Path path;
-				int32_t d = -1;
-				calculate_sea_route(game, *pd, &path);
-				game.map().calc_cost(path, &d, nullptr);
-				assert(d >= 0);
-				if (!closest || d < dist) {
-					dist = d;
-					closest = pd;
-				}
-			}
-			if (closest) {
-				set_destination(game, closest);
+		assert(!fleet_);
+		if (PortDock* d = destination_.get(game)) {
+			const Map& map = game.map();
+			FCoords position = map.get_fcoords(get_position());
+			if (position.field->get_immovable() != d) {
+				start_task_movetodock(game, *d);
 			} else {
-				molog(game.get_gametime(), "Pending refit to %d but no ports in fleet", static_cast<int>(pending_refit_));
-				pending_refit_ = ship_state_;
-				skip = true;
+				// Arrived at destination, now unload and refit
+				for (ShippingItem& si : items_) {
+					d->shipping_item_arrived(game, si);
+				}
+				items_.clear();
+				ship_state_ = pending_refit_;
+				set_destination(game, nullptr);
 			}
+		} else {
+			// Destination vanished, try to find a new one
+			const ShipStates s = pending_refit_;
+			pending_refit_ = ship_state_;
+			refit(game, s);
 		}
-		if (!skip) {
-			ship_update_transport(game, state);
-			return;
-		}
+		return;
 	}
 
 	switch (ship_state_) {
@@ -332,39 +326,39 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	const Map& map = game.map();
 
-	if (!destination_) {
+	if (!destination_.get(game)) {
 		// The ship has no destination, so let it sleep
 		ship_update_idle(game, state);
 		return true;
 	}
 
 	FCoords position = map.get_fcoords(get_position());
-	if (position.field->get_immovable() == destination_) {
-		if (lastdock_ != destination_) {
-			molog(game.get_gametime(), "ship_update: Arrived at dock %u\n", destination_->serial());
-			lastdock_ = destination_;
+	if (position.field->get_immovable() == destination_.get(game)) {
+		if (lastdock_ != destination_.get(game)) {
+			molog(game.get_gametime(), "ship_update: Arrived at dock %u\n", destination_.serial());
+			lastdock_ = destination_.get(game);
 		}
-		while (withdraw_item(game, *destination_)) {
+		while (withdraw_item(game, *destination_.get(game))) {
 		}
 
-		destination_->ship_arrived(game, *this);  // This will also set the destination
+		destination_.get(game)->ship_arrived(game, *this);  // This will also set the destination
 
-		if (destination_) {
-			start_task_movetodock(game, *destination_);
+		if (destination_.get(game)) {
+			start_task_movetodock(game, *destination_.get(game));
 		} else {
 			start_task_idle(game, descr().main_animation(), 250);
 		}
 		return true;
 	}
 
-	molog(game.get_gametime(), "ship_update: Go to dock %u\n", destination_->serial());
+	molog(game.get_gametime(), "ship_update: Go to dock %u\n", destination_.serial());
 
 	PortDock* lastdock = lastdock_.get(game);
-	if (lastdock && lastdock != destination_) {
+	if (lastdock && lastdock != destination_.get(game)) {
 		molog(game.get_gametime(), "ship_update: Have lastdock %u\n", lastdock->serial());
 
 		Path path;
-		if (fleet_->get_path(*lastdock, *destination_, path)) {
+		if (fleet_->get_path(*lastdock, *destination_.get(game), path)) {
 			uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
 			uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
 			Coords closest_target(Coords::null());
@@ -415,7 +409,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 		lastdock_ = nullptr;
 	}
 
-	start_task_movetodock(game, *destination_);
+	start_task_movetodock(game, *destination_.get(game));
 	return true;
 }
 
@@ -483,22 +477,44 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 }
 
 inline bool Ship::can_refit(const ShipStates type) const {
-	return
-			pending_refit_ == ship_state_ &&
-			type != ship_state_ && !state_is_expedition() &&
-			(type == ShipStates::kWarship || type == ShipStates::kTransport) &&
-			fleet_ != nullptr && !fleet_->get_ports().empty();
+	return pending_refit_ == ship_state_ && type != ship_state_ && !state_is_expedition() && (type == ShipStates::kWarship || type == ShipStates::kTransport);
 }
 
 void Ship::refit(EditorGameBase& egbase, const ShipStates type) {
 	if (!can_refit(type)) {
+		molog(egbase.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
 		return;
 	}
-	pending_refit_ = type;
-	if (upcast(Game, game, &egbase)) {
-		send_signal(*game, "wakeup");
+
+	if (!fleet_) {
+		init_fleet(egbase);
+		assert(fleet_);
 	}
-	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
+	PortDock* dest = destination_.get(egbase);
+	if (!dest) {
+		int32_t dist = 0;
+		for (PortDock* pd : fleet_->get_ports()) {
+			Path path;
+			int32_t d = -1;
+			calculate_sea_route(egbase, *pd, &path);
+			egbase.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			if (!dest || d < dist) {
+				dist = d;
+				dest = pd;
+			}
+		}
+		if (!dest) {
+			molog(egbase.get_gametime(), "Attempted refit to %d but no ports in fleet", static_cast<int>(type));
+			return;
+		}
+	}
+
+	pending_refit_ = type;
+	fleet_->remove_ship(egbase, this);
+	assert(fleet_ == nullptr);
+
+	set_destination(egbase, dest);
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
@@ -783,9 +799,11 @@ void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 	}
 }
 
-void Ship::set_destination(Game& game, PortDock* dock) {
+void Ship::set_destination(EditorGameBase& egbase, PortDock* dock) {
 	destination_ = dock;
-	send_signal(game, "wakeup");
+	if (upcast(Game, g, &egbase)) {
+		send_signal(*g, "wakeup");
+	}
 	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 }
 
@@ -1082,7 +1100,7 @@ void Ship::draw(const EditorGameBase& egbase,
 			switch (ship_state_) {
 			case (ShipStates::kTransport):
 				statistics_string =
-				   destination_ && fleet_->get_schedule().is_busy(*this) ?
+				   destination_.get(egbase) && fleet_->get_schedule().is_busy(*this) ?
 					  /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
 					  pgettext("ship_state", "Shipping") :
 					  /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
@@ -1134,9 +1152,9 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	                                .str()
 	                                .c_str() :
 	                             "-");
-	if (destination_) {
-		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d)\n", destination_->serial(),
-		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y);
+	if (destination_.get(egbase)) {
+		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d)\n", destination_.serial(),
+		      destination_.get(egbase)->get_positions(egbase)[0].x, destination_.get(egbase)->get_positions(egbase)[0].y);
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}
@@ -1144,7 +1162,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
 
-	if (destination_ && get_position().field->get_immovable() == destination_) {
+	if (destination_.get(egbase) && get_position().field->get_immovable() == destination_.get(egbase)) {
 		molog(egbase.get_gametime(), "Currently in destination portdock\n");
 	}
 
@@ -1409,7 +1427,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(egbase)));
 
 	fw.unsigned_32(items_.size());
 	for (ShippingItem& shipping_item : items_) {
