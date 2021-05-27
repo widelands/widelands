@@ -378,6 +378,7 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
                 parent->get_inner_w() - 2 * kRowButtonSize,
                 2 * kRowButtonSize,
                 title),
+     modal_(*this),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
      hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      txt1_(&box_,

@@ -155,22 +155,15 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
-struct ModalGuard {
-	explicit ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
-		Panel::modal_ = &top_panel_;
+Panel::ModalGuard::ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+	Panel::modal_ = &top_panel_;
+}
+Panel::ModalGuard::~ModalGuard() {
+	Panel::modal_ = bottom_panel_;
+	if (bottom_panel_) {
+		bottom_panel_->become_modal_again(top_panel_);
 	}
-	~ModalGuard() {
-		Panel::modal_ = bottom_panel_;
-		if (bottom_panel_) {
-			bottom_panel_->become_modal_again(top_panel_);
-		}
-	}
-
-private:
-	Panel* bottom_panel_;
-	Panel& top_panel_;
-	DISALLOW_COPY_AND_ASSIGN(ModalGuard);
-};
+}
 
 Panel& Panel::get_topmost_forefather() {
 	Panel* forefather = this;

@@ -316,6 +316,16 @@ public:
 
 	Panel& get_topmost_forefather();
 
+	struct ModalGuard {
+		explicit ModalGuard(Panel& p);
+		~ModalGuard();
+
+	private:
+		Panel* bottom_panel_;
+		Panel& top_panel_;
+		DISALLOW_COPY_AND_ASSIGN(ModalGuard);
+	};
+
 	// Call this on the topmost panel after you changed the template directory
 	void template_directory_changed();
 

@@ -43,6 +43,9 @@ namespace FsMenu {
 
 class AddOnsCtrl;
 
+// NOCOM: Before proposing this branch for merging, move ALL classes defined in
+// addons.h and addons.cc except AddOnsCtrl to one or more new file pairs.
+
 struct ProgressIndicatorWindow : public UI::Window {
 	ProgressIndicatorWindow(UI::Panel* parent, const std::string& title);
 	~ProgressIndicatorWindow() override = default;
@@ -61,6 +64,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 	}
 
 private:
+	UI::Panel::ModalGuard modal_;
 	UI::Box box_, hbox_;
 	UI::Textarea txt1_, txt2_, txt3_;
 	UI::ProgressBar progress_;
