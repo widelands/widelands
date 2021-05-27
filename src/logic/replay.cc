@@ -83,16 +83,20 @@ public:
 			// There has to be a better way to do this.
 			game.game_controller()->set_desired_speed(0);
 
-			UI::WLMessageBox m(game.get_ibase(), UI::WindowStyle::kWui, _("Desync"),
-					             (boost::format(_("The replay has desynced at gametime %1$u. The game was paused automatically.\n"
-					             "The current checksum is: %2$s\nThe original checksum is: %3$s\n\n"
-					             "If the game was originally played with a different version of Widelands, this desync is to be expected.\n"
-					             "Otherwise, please report this problem to help us improve Widelands.\n"
-					             "You will find related messages in the standard output (stdout.txt on Windows).\n"
-					             "You are using build %4$s (%5$s).\n"
-					             "Please add this information to your report."
-					             )) % duetime().get() % myhash.str() % hash_.str() % build_id() % build_type()).str(),
-					             UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox m(
+			   game.get_ibase(), UI::WindowStyle::kWui, _("Desync"),
+			   (boost::format(
+			       _("The replay has desynced at gametime %1$u. The game was paused automatically.\n"
+			         "The current checksum is: %2$s\nThe original checksum is: %3$s\n\n"
+			         "If the game was originally played with a different version of Widelands, this "
+			         "desync is to be expected.\n"
+			         "Otherwise, please report this problem to help us improve Widelands.\n"
+			         "You will find related messages in the standard output (stdout.txt on Windows).\n"
+			         "You are using build %4$s (%5$s).\n"
+			         "Please add this information to your report.")) %
+			    duetime().get() % myhash.str() % hash_.str() % build_id() % build_type())
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
 	}
