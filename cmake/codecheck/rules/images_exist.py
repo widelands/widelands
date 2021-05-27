@@ -16,7 +16,7 @@ FIND_VARIABLE_NAMES = re.compile(
     r"""g_image_cache->get\(([0-9a-zA-Z_]+?)\)""")
 
 # Find the data path
-base_path = os.getenv("WL_ROOT_DIR", os.getcwd())
+base_path = os.getenv('WL_ROOT_DIR', os.getcwd())
 data_path = os.path.join(base_path, 'data')
 
 
