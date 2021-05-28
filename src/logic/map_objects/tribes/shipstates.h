@@ -58,6 +58,11 @@ enum class ShipType : uint8_t {
 	kWarship = 2,
 };
 
+enum class WarshipCommand : uint8_t {
+	kAttack = 1,
+	kRetreat = 2,
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIPSTATES_H

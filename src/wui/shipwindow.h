@@ -58,8 +58,7 @@ private:
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
-	void act_warship_attack();
-	void act_warship_retreat();
+	void act_warship_command(Widelands::WarshipCommand);
 
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;

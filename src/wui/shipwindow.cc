@@ -133,11 +133,12 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
 	btn_warship_retreat_ = make_button(
-	   &warship_controls_, "war_retreat", _("Retreat to an own port"), kImgWarshipRetreat, [this]() { act_warship_retreat(); });
+	   &warship_controls_, "war_retreat", _("Retreat to an own port"), kImgWarshipRetreat, [this]() { act_warship_command(Widelands::WarshipCommand::kRetreat); });
 	warship_controls_.add(btn_warship_retreat_);
 
 	btn_warship_attack_ = make_button(
-	   &warship_controls_, "war_attack", _("Attack the nearest enemy port or warship"), kImgWarshipAttack, [this]() { act_warship_attack(); });
+	   &warship_controls_, "war_attack", _("Attack the nearest enemy port or warship"),
+	   kImgWarshipAttack, [this]() { act_warship_command(Widelands::WarshipCommand::kAttack); });
 	warship_controls_.add(btn_warship_attack_);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -255,6 +256,7 @@ void ShipWindow::think() {
 	btn_refit_->set_enabled(can_act && ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship
 			? Widelands::ShipType::kTransport : Widelands::ShipType::kWarship));
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ? _("Refit to transport ship") : _("Refit to warship"));
+	btn_warship_attack_->set_enabled(can_act && ship->get_ship_type() == Widelands::ShipType::kWarship && ship->get_attack_target(ibase_.egbase()) != nullptr);
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
@@ -370,12 +372,16 @@ void ShipWindow::act_refit() {
 	}
 }
 
-void ShipWindow::act_warship_attack() {
-	// NOCOM
-}
-
-void ShipWindow::act_warship_retreat() {
-	// NOCOM
+void ShipWindow::act_warship_command(const Widelands::WarshipCommand cmd) {
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_warship_command(*ship, cmd);
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
 
 /// Show debug info

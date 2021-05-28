@@ -421,6 +421,30 @@ private:
 	ShipType type_;
 };
 
+struct CmdWarshipCommand : public PlayerCommand {
+	CmdWarshipCommand() : PlayerCommand(), serial_(0), cmd_(WarshipCommand::kRetreat) {
+	}  // For savegame loading
+	CmdWarshipCommand(const Time& t, PlayerNumber const p, Serial s, WarshipCommand c)
+	   : PlayerCommand(t, p), serial_(s), cmd_(c) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kWarshipCommand;
+	}
+
+	explicit CmdWarshipCommand(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_;
+	WarshipCommand cmd_;
+};
+
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading

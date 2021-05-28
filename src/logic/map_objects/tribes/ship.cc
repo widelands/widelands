@@ -37,7 +37,9 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -100,6 +102,25 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 }
 
 }  // namespace
+
+struct FindNodeAttackTarget {
+	FindNodeAttackTarget(const Widelands::Ship& s) : ship_(s) {
+	}
+	bool accept(const EditorGameBase&, const FCoords& f) const {
+		if (f.field->get_immovable() && f.field->get_immovable()->descr().type() == MapObjectType::PORTDOCK) {
+			return ship_.owner().is_hostile(dynamic_cast<const PortDock&>(*f.field->get_immovable()).owner());
+		}
+		for (const Bob* b = f.field->get_first_bob(); b; b = b->get_next_bob()) {
+			if (ship_.is_enemy_warship(*b)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+private:
+	const Widelands::Ship& ship_;
+};
 
 /**
  * The contents of 'table' are documented in
@@ -427,7 +448,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 		   map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 	}
 
-	if (ship_state_ == ShipStates::kExpeditionScouting) {
+	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// Check surrounding fields for port buildspaces
 		std::vector<Coords> temp_port_buildspaces;
 		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
@@ -470,6 +491,72 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 			             "images/wui/editor/fsel_editor_set_port_space.png");
 		}
 	}
+
+	if (get_ship_type() == ShipType::kWarship) {
+		// Look for nearby enemy warships and ports we can attack. We prefer the closest
+		// attackable object. Attacking warships takes precedent over attacking ports.
+		const MapObject* old_target = expedition_->attack_target.get(game);
+		MapObject* new_target = nullptr;
+		std::vector<Coords> candidates;
+		uint32_t distance = descr().vision_range();
+		map->find_reachable_fields(game,
+                                    Area<FCoords>(get_position(), distance),
+                                    &candidates,
+                                    CheckStepDefault(MOVECAPS_SWIM),
+                                    FindNodeAttackTarget(*this));
+		for (const Coords& c : candidates) {
+			const uint32_t d = map->calc_distance(get_position(), c);
+			if (d <= distance) {
+				bool found = false;
+				Field& f = (*map)[c];
+				for (Bob* b = f.get_first_bob(); b; b = b->get_next_bob()) {
+					if (is_enemy_warship(*b)) {
+						new_target = b;
+						found = true;
+						break;
+					}
+				}
+				if (!found && f.get_immovable() && f.get_immovable()->descr().type() == MapObjectType::PORTDOCK) {
+					new_target = f.get_immovable();
+					found = true;
+				}
+				assert(found);
+				distance = d;
+			}
+		}
+		if (new_target != old_target) {
+			expedition_->attack_target = new_target;
+			if (new_target != nullptr) {
+				set_ship_state_and_notify(
+				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+				if (new_target->descr().type() == MapObjectType::SHIP) {
+					send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
+							     _("A warship spotted an enemy ship."),
+							     new_target->descr().icon_filename());
+				} else {
+					send_message(game, _("Enemy Port"), _("Enemy Port Found"),
+							     _("A warship spotted an enemy port."),
+							     "images/wui/ship/ship_attack.png");
+				}
+			}
+		}
+	}
+}
+
+void Ship::warship_command(Game&, const WarshipCommand) {
+	if (get_ship_type() != ShipType::kWarship) {
+		return;
+	}
+
+	// NOCOM
+}
+
+bool Ship::is_enemy_warship(const Bob& b) const {
+	if (b.descr().type() != MapObjectType::SHIP) {
+		return false;
+	}
+	const Ship& s = dynamic_cast<const Ship&>(b);
+	return s.get_ship_type() == ShipType::kWarship && owner().is_hostile(s.owner());
 }
 
 inline bool Ship::can_refit(const ShipType type) const {
@@ -898,6 +985,7 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
+	expedition_->attack_target = nullptr;
 	expedition_->ware_economy = get_owner()->create_economy(wwWARE);
 	expedition_->worker_economy = get_owner()->create_economy(wwWORKER);
 
@@ -1263,6 +1351,11 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Whether the exploration is done clockwise or counter clockwise
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
+			if (const uint32_t a = ((packet_version >= 13) ? fr.unsigned_32() : 0)) {
+				MapObject& mo = mol().get<MapObject>(a);
+				assert(mo.descr().type() == MapObjectType::SHIP || mo.descr().type() == MapObjectType::PORTDOCK);
+				expedition_->attack_target = &mo;
+			}
 			} break;
 
 		default:
@@ -1411,6 +1504,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		write_coords_32(&fw, expedition_->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.unsigned_8(static_cast<uint8_t>(expedition_->island_explore_direction));
+		fw.unsigned_32(mos.get_object_file_index_or_zero(expedition_->attack_target.get(egbase)));
 	}
 
 	fw.string(shipname_);

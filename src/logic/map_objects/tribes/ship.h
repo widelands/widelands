@@ -218,6 +218,12 @@ struct Ship : Bob {
 	ShipType get_ship_type() const {
 		return ship_type_;
 	}
+	MapObject* get_attack_target(const EditorGameBase& e) const {
+		return expedition_ ? expedition_->attack_target.get(e) : nullptr;
+	}
+	bool is_enemy_warship(const Bob&) const;
+	void warship_command(Game&, WarshipCommand);
+
 	bool can_refit(ShipType) const;
 	void refit(EditorGameBase&, ShipType);
 	ShipType get_pending_refit() const {
@@ -281,6 +287,7 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
+		OPtr<MapObject> attack_target;
 		Economy* ware_economy;  // Owned by Player
 		Economy* worker_economy;
 	};
