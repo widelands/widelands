@@ -49,6 +49,9 @@ constexpr const char* const kImgScoutSE = "images/wui/ship/ship_scout_se.png";
 constexpr const char* const kImgConstructPort = "images/wui/ship/ship_construct_port_space.png";
 constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_transport.png";
 constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
+constexpr const char* const kImgWarshipStay = "images/wui/ship/ship_stay.png";
+constexpr const char* const kImgWarshipAttack = "images/wui/ship/ship_attack.png";
+constexpr const char* const kImgWarshipRetreat = "images/wui/ship/ship_retreat.png";
 
 constexpr int kPadding = 5;
 }  // namespace
@@ -58,7 +61,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
      ibase_(ib),
      ship_(ship),
      vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     navigation_box_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
+     navigation_box_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     warship_controls_(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
@@ -76,6 +80,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	UI::Box* exp_bot =
 	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	navigation_box_.add(&warship_controls_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	btn_scout_[Widelands::WALK_NW - 1] =
 	   make_button(exp_top, "scnw", _("Scout towards the north west"), kImgScoutNW,
@@ -102,6 +107,11 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               kImgConstructPort, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
+	btn_warship_stay_ =
+	   make_button(exp_mid, "buildport", _("Anchor at the current location"),
+	               kImgWarshipStay, [this]() { act_scout_towards(Widelands::IDLE); });
+	exp_mid->add(btn_warship_stay_);
+
 	btn_scout_[Widelands::WALK_E - 1] =
 	   make_button(exp_mid, "sce", _("Scout towards the east"), kImgScoutE,
 	               [this]() { act_scout_towards(Widelands::WALK_E); });
@@ -121,6 +131,14 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	   make_button(exp_bot, "scse", _("Scout towards the south east"), kImgScoutSE,
 	               [this]() { act_scout_towards(Widelands::WALK_SE); });
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
+
+	btn_warship_retreat_ = make_button(
+	   &warship_controls_, "war_retreat", _("Retreat to an own port"), kImgWarshipRetreat, [this]() { act_warship_retreat(); });
+	warship_controls_.add(btn_warship_retreat_);
+
+	btn_warship_attack_ = make_button(
+	   &warship_controls_, "war_attack", _("Attack the nearest enemy port or warship"), kImgWarshipAttack, [this]() { act_warship_attack(); });
+	warship_controls_.add(btn_warship_attack_);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -198,13 +216,11 @@ void ShipWindow::set_button_visibility() {
 		return;
 	}
 
-	if (navigation_box_.is_visible() != ship->state_is_expedition()) {
-		navigation_box_.set_visible(ship->state_is_expedition());
-		layout();
-	}
-	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
-		btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	}
+	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
+	warship_controls_.set_visible(ship->get_ship_type() == Widelands::ShipType::kWarship);
+	btn_warship_stay_->set_visible(ship->get_ship_type() == Widelands::ShipType::kWarship);
+	btn_construct_port_->set_visible(!btn_warship_stay_->is_visible());
+	navigation_box_.set_visible(ship->state_is_expedition() && !ship->is_refitting());
 }
 
 void ShipWindow::no_port_error_message() {
@@ -235,9 +251,10 @@ void ShipWindow::think() {
 	btn_destination_->set_enabled(ship->get_destination(ibase_.egbase()));
 	btn_sink_->set_enabled(can_act);
 
-	btn_refit_->set_pic(g_image_cache->get(ship->is_warship() ? kImgRefitTransport : kImgRefitWarship));
-	btn_refit_->set_enabled(can_act && ship->can_refit(ship->is_warship() ? Widelands::ShipStates::kTransport : Widelands::ShipStates::kWarship));
-	btn_refit_->set_tooltip(ship->is_warship() ? _("Refit to transport ship") : _("Refit to warship"));
+	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ? kImgRefitTransport : kImgRefitWarship));
+	btn_refit_->set_enabled(can_act && ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship
+			? Widelands::ShipType::kTransport : Widelands::ShipType::kWarship));
+	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ? _("Refit to transport ship") : _("Refit to warship"));
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
@@ -284,8 +301,8 @@ void ShipWindow::think() {
 		btn_sink_->set_enabled(can_act &&
 		                       (state != Widelands::ShipStates::kExpeditionColonizing));
 	}
-	btn_cancel_expedition_->set_enabled(
-	   ship->state_is_expedition() && can_act &&
+	btn_cancel_expedition_->set_enabled(can_act && ship->get_ship_type() == Widelands::ShipType::kTransport &&
+	   ship->state_is_expedition() &&
 	   (state != Widelands::ShipStates::kExpeditionColonizing));
 	// Expedition specific buttons
 	set_button_visibility();
@@ -345,12 +362,20 @@ void ShipWindow::act_refit() {
 	if (ship == nullptr) {
 		return;
 	}
-	const Widelands::ShipStates t = ship->is_warship() ? Widelands::ShipStates::kTransport : Widelands::ShipStates::kWarship;
+	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ? Widelands::ShipType::kTransport : Widelands::ShipType::kWarship;
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_refit_ship(*ship, t);
 	} else {
 		ship->refit(ibase_.egbase(), t);
 	}
+}
+
+void ShipWindow::act_warship_attack() {
+	// NOCOM
+}
+
+void ShipWindow::act_warship_retreat() {
+	// NOCOM
 }
 
 /// Show debug info
@@ -386,7 +411,7 @@ void ShipWindow::act_scout_towards(Widelands::WalkingDir direction) {
 		return;
 	}
 	// ignore request if the direction is not swimmable at all
-	if (!ship->exp_dir_swimmable(static_cast<Widelands::Direction>(direction))) {
+	if (direction != Widelands::IDLE && !ship->exp_dir_swimmable(static_cast<Widelands::Direction>(direction))) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {

@@ -6963,6 +6963,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
    PROP_RO(LuaShip, last_portdock),
    PROP_RO(LuaShip, destination),
    PROP_RO(LuaShip, state),
+   PROP_RO(LuaShip, type),
    PROP_RW(LuaShip, scouting_direction),
    PROP_RW(LuaShip, island_explore_direction),
    PROP_RO(LuaShip, shipname),
@@ -7016,7 +7017,6 @@ int LuaShip::get_last_portdock(lua_State* L) {
       * :const:`"transport"`,
       * :const:`"exp_waiting"`, :const:`"exp_scouting"`, :const:`"exp_found_port_space"`,
         :const:`"exp_colonizing"`,
-      * :const:`"warship"`
       * :const:`"sink_request"`, :const:`"sink_animation"`
 
       :returns: The ship's state as :const:`string`, or :const:`nil` if there is no valid state.
@@ -7043,9 +7043,6 @@ int LuaShip::get_state(lua_State* L) {
 		case Widelands::ShipStates::kExpeditionColonizing:
 			lua_pushstring(L, "exp_colonizing");
 			break;
-		case Widelands::ShipStates::kWarship:
-			lua_pushstring(L, "warship");
-			break;
 		case Widelands::ShipStates::kSinkRequest:
 			lua_pushstring(L, "sink_request");
 			break;
@@ -7056,6 +7053,27 @@ int LuaShip::get_state(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+   .. attribute:: type
+
+      .. versionadded:: 1.1
+
+      (RO) The state the ship is in as :const:`string`:
+      :const:`"transport"` or :const:`"warship"`.
+*/
+int LuaShip::get_type(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	switch (get(L, egbase)->get_ship_type()) {
+	case Widelands::ShipType::kTransport:
+		lua_pushstring(L, "transport");
+		break;
+	case Widelands::ShipType::kWarship:
+		lua_pushstring(L, "warship");
+		break;
+	}
+	return 1;
 }
 
 int LuaShip::get_scouting_direction(lua_State* L) {
@@ -7450,6 +7468,8 @@ int LuaShip::make_expedition(lua_State* L) {
 /* RST
    .. method:: refit(type)
 
+      .. versionadded:: 1.1
+
       Order the ship to refit to the given type
 
       :arg string type: :const:`"transport"` or :const:`"warship"`
@@ -7464,9 +7484,9 @@ int LuaShip::refit(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 	const std::string type = luaL_checkstring(L, 2);
 	if (type == "transport") {
-		ship->refit(egbase, Widelands::ShipStates::kTransport);
+		ship->refit(egbase, Widelands::ShipType::kTransport);
 	} else if (type == "warship") {
-		ship->refit(egbase, Widelands::ShipStates::kWarship);
+		ship->refit(egbase, Widelands::ShipType::kWarship);
 	} else {
 		report_error(L, "Invalid ship refit type '%s'", type.c_str());
 	}

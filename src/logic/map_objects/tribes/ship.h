@@ -158,9 +158,6 @@ struct Ship : Bob {
 	bool state_is_transport() const {
 		return (ship_state_ == ShipStates::kTransport);
 	}
-	bool is_warship() const {
-		return (ship_state_ == ShipStates::kWarship);
-	}
 	/// \returns whether a sink request for the ship is currently valid
 	bool state_is_sinkable() const {
 		return (ship_state_ != ShipStates::kSinkRequest &&
@@ -218,10 +215,16 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
-	bool can_refit(ShipStates) const;
-	void refit(EditorGameBase&, ShipStates);
-	ShipStates get_pending_refit() const {
+	ShipType get_ship_type() const {
+		return ship_type_;
+	}
+	bool can_refit(ShipType) const;
+	void refit(EditorGameBase&, ShipType);
+	ShipType get_pending_refit() const {
 		return pending_refit_;
+	}
+	inline bool is_refitting() const {
+		return get_pending_refit() != get_ship_type();
 	}
 
 protected:
@@ -244,7 +247,6 @@ private:
 	void ship_wakeup(Game&);
 
 	bool ship_update_transport(Game&, State&);
-	bool ship_update_warship(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
@@ -265,7 +267,7 @@ private:
 	OPtr<PortDock> lastdock_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_;
-	ShipStates pending_refit_;
+	ShipType ship_type_, pending_refit_;
 	std::string shipname_;
 
 	OPtr<PortDock> destination_;
@@ -296,7 +298,9 @@ protected:
 		     worker_economy_serial_(kInvalidSerial),
 		     destination_(0),
 		     capacity_(0),
-		     ship_state_(ShipStates::kTransport) {
+		     ship_state_(ShipStates::kTransport),
+             ship_type_(ShipType::kTransport),
+             pending_refit_(ship_type_) {
 		}
 
 		const Task* get_task(const std::string& name) override;
@@ -311,7 +315,8 @@ protected:
 		Serial worker_economy_serial_;
 		uint32_t destination_;
 		uint32_t capacity_;
-		ShipStates ship_state_, pending_refit_;
+		ShipStates ship_state_;
+		ShipType ship_type_, pending_refit_;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

@@ -58,12 +58,13 @@ private:
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
+	void act_warship_attack();
+	void act_warship_retreat();
 
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
 
-	UI::Box vbox_;
-	UI::Box navigation_box_;
+	UI::Box vbox_, navigation_box_, warship_controls_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
@@ -75,6 +76,9 @@ private:
 	// format: DIRECTION - 1, as 0 is normally the current location.
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
+	UI::Button* btn_warship_stay_;
+	UI::Button* btn_warship_attack_;
+	UI::Button* btn_warship_retreat_;
 	ItemWaresDisplay* display_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);

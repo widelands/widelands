@@ -900,7 +900,7 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 CmdShipRefit::CmdShipRefit(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
-	type_ = static_cast<ShipStates>(des.unsigned_8());
+	type_ = static_cast<ShipType>(des.unsigned_8());
 }
 
 void CmdShipRefit::execute(Game& game) {
@@ -924,7 +924,7 @@ void CmdShipRefit::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 		if (packet_version == kCurrentPacketVersionShipRefit) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-			type_ = static_cast<ShipStates>(fr.unsigned_8());
+			type_ = static_cast<ShipType>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdShipRefit", packet_version, kCurrentPacketVersionShipRefit);

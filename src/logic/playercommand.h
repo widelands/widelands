@@ -398,9 +398,9 @@ private:
 };
 
 struct CmdShipRefit : public PlayerCommand {
-	CmdShipRefit() : PlayerCommand(), serial_(0), type_(ShipStates::kTransport) {
+	CmdShipRefit() : PlayerCommand(), serial_(0), type_(ShipType::kTransport) {
 	}  // For savegame loading
-	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipStates ss)
+	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipType ss)
 	   : PlayerCommand(t, p), serial_(s), type_(ss) {
 	}
 
@@ -418,7 +418,7 @@ struct CmdShipRefit : public PlayerCommand {
 
 private:
 	Serial serial_;
-	ShipStates type_;
+	ShipType type_;
 };
 
 struct CmdShipScoutDirection : public PlayerCommand {

@@ -309,34 +309,38 @@ std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>
 SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	const Widelands::ShipStates state = ship.get_ship_state();
 	ShipFilterStatus status = ShipFilterStatus::kAll;
-	if (ship.get_pending_refit() != state) {
+	if (ship.is_refitting()) {
 		status = ShipFilterStatus::kRefitting;
 	} else {
-		switch (state) {
-		case Widelands::ShipStates::kTransport:
-			if (ship.get_destination(iplayer().egbase()) && ship.get_fleet()->get_schedule().is_busy(ship)) {
-				status = ShipFilterStatus::kShipping;
-			} else {
-				status = ShipFilterStatus::kIdle;
-			}
-			break;
-		case Widelands::ShipStates::kExpeditionWaiting:
-			status = ShipFilterStatus::kExpeditionWaiting;
-			break;
-		case Widelands::ShipStates::kExpeditionScouting:
-			status = ShipFilterStatus::kExpeditionScouting;
-			break;
-		case Widelands::ShipStates::kExpeditionPortspaceFound:
-		case Widelands::ShipStates::kExpeditionColonizing:
-			// We're grouping the "colonizing" status with the port space.
-			status = ShipFilterStatus::kExpeditionPortspaceFound;
-			break;
-		case Widelands::ShipStates::kWarship:
+		switch (ship.get_ship_type()) {
+		case Widelands::ShipType::kWarship:
 			status = ShipFilterStatus::kWarship;
 			break;
-		case Widelands::ShipStates::kSinkRequest:
-		case Widelands::ShipStates::kSinkAnimation:
-			status = ShipFilterStatus::kAll;
+		case Widelands::ShipType::kTransport:
+			switch (state) {
+			case Widelands::ShipStates::kTransport:
+				if (ship.get_destination(iplayer().egbase()) && ship.get_fleet()->get_schedule().is_busy(ship)) {
+					status = ShipFilterStatus::kShipping;
+				} else {
+					status = ShipFilterStatus::kIdle;
+				}
+				break;
+			case Widelands::ShipStates::kExpeditionWaiting:
+				status = ShipFilterStatus::kExpeditionWaiting;
+				break;
+			case Widelands::ShipStates::kExpeditionScouting:
+				status = ShipFilterStatus::kExpeditionScouting;
+				break;
+			case Widelands::ShipStates::kExpeditionPortspaceFound:
+			case Widelands::ShipStates::kExpeditionColonizing:
+				// We're grouping the "colonizing" status with the port space.
+				status = ShipFilterStatus::kExpeditionPortspaceFound;
+				break;
+			case Widelands::ShipStates::kSinkRequest:
+			case Widelands::ShipStates::kSinkAnimation:
+				status = ShipFilterStatus::kAll;
+				break;
+			}
 			break;
 		}
 	}

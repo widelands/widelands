@@ -128,7 +128,8 @@ Ship::Ship(const ShipDescr& gdescr)
      ware_economy_(nullptr),
      worker_economy_(nullptr),
      ship_state_(ShipStates::kTransport),
-     pending_refit_(ship_state_),
+     ship_type_(ShipType::kTransport),
+     pending_refit_(ship_type_),
      destination_(nullptr),
      capacity_(gdescr.get_default_capacity()) {
 }
@@ -261,7 +262,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		}
 	}
 
-	if (ship_state_ != pending_refit_) {
+	if (is_refitting()) {
 		assert(!fleet_);
 		if (PortDock* d = destination_.get(game)) {
 			const Map& map = game.map();
@@ -270,18 +271,23 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 				start_task_movetodock(game, *d);
 			} else {
 				// Arrived at destination, now unload and refit
+				set_destination(game, nullptr);
 				for (ShippingItem& si : items_) {
 					d->shipping_item_arrived(game, si);
 				}
 				items_.clear();
-				ship_state_ = pending_refit_;
-				set_destination(game, nullptr);
+				ship_type_ = pending_refit_;
+				if (ship_type_ == ShipType::kWarship) {
+					start_task_expedition(game);
+				} else {
+					exp_cancel(game);
+				}
 			}
 		} else {
 			// Destination vanished, try to find a new one
-			const ShipStates s = pending_refit_;
-			pending_refit_ = ship_state_;
-			refit(game, s);
+			const ShipType t = pending_refit_;
+			pending_refit_ = ship_type_;
+			refit(game, t);
 		}
 		return;
 	}
@@ -289,11 +295,6 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	switch (ship_state_) {
 	case ShipStates::kTransport:
 		if (ship_update_transport(game, state)) {
-			return;
-		}
-		break;
-	case ShipStates::kWarship:
-		if (ship_update_warship(game, state)) {
 			return;
 		}
 		break;
@@ -413,11 +414,6 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	return true;
 }
 
-bool Ship::ship_update_warship(Game&, Bob::State&) {
-	// NOCOM
-	return false;
-}
-
 /// updates a ships tasks in expedition mode
 void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	Map* map = game.mutable_map();
@@ -476,11 +472,11 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	}
 }
 
-inline bool Ship::can_refit(const ShipStates type) const {
-	return pending_refit_ == ship_state_ && type != ship_state_ && !state_is_expedition() && (type == ShipStates::kWarship || type == ShipStates::kTransport);
+inline bool Ship::can_refit(const ShipType type) const {
+	return !is_refitting() && type != ship_type_;
 }
 
-void Ship::refit(EditorGameBase& egbase, const ShipStates type) {
+void Ship::refit(EditorGameBase& egbase, const ShipType type) {
 	if (!can_refit(type)) {
 		molog(egbase.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
 		return;
@@ -768,7 +764,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		expedition_.reset(nullptr);
 		return start_task_idle(game, descr().main_animation(), kShipInterval);
 	}
-	case ShipStates::kWarship:
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
@@ -908,8 +903,10 @@ void Ship::start_task_expedition(Game& game) {
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
-	fleet_->remove_ship(game, this);
-	assert(fleet_ == nullptr);
+	if (fleet_) {
+		fleet_->remove_ship(game, this);
+		assert(fleet_ == nullptr);
+	}
 
 	set_economy(game, expedition_->ware_economy, wwWARE);
 	set_economy(game, expedition_->worker_economy, wwWORKER);
@@ -1085,18 +1082,17 @@ void Ship::draw(const EditorGameBase& egbase,
 	// Show ship name and current activity
 	std::string statistics_string;
 	if (info_to_draw & InfoToDraw::kStatistics) {
-		if (ship_state_ != pending_refit_) {
+		if (is_refitting()) {
 			switch (pending_refit_) {
-			case ShipStates::kTransport:
+			case ShipType::kTransport:
 				statistics_string = pgettext("ship_state", "Refitting to Transport Ship");
 				break;
-			case ShipStates::kWarship:
+			case ShipType::kWarship:
 				statistics_string = pgettext("ship_state", "Refitting to Warship");
 				break;
-			default:
-				NEVER_HERE();
 			}
 		} else {
+			// NOCOM show ship_type_
 			switch (ship_state_) {
 			case (ShipStates::kTransport):
 				statistics_string =
@@ -1123,10 +1119,6 @@ void Ship::draw(const EditorGameBase& egbase,
 				/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 				 * port. */
 				statistics_string = pgettext("ship_state", "Founding a Colony");
-				break;
-			case (ShipStates::kWarship):
-				/** TRANSLATORS: This is a ship state. */
-				statistics_string = pgettext("ship_state", "Warship");
 				break;
 			case (ShipStates::kSinkRequest):
 			case (ShipStates::kSinkAnimation):
@@ -1242,7 +1234,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		// The state the ship is in
 		ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
-		pending_refit_ = (packet_version >= 13) ? static_cast<ShipStates>(fr.unsigned_8()) : ship_state_;
+		ship_type_ = (packet_version >= 13) ? static_cast<ShipType>(fr.unsigned_8()) : ShipType::kTransport;
+		pending_refit_ = (packet_version >= 13) ? static_cast<ShipType>(fr.unsigned_8()) : ship_type_;
 
 		// Expedition specific data
 		switch (ship_state_) {
@@ -1271,10 +1264,6 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
 			} break;
-
-		case ShipStates::kWarship:
-			// NOCOM
-			break;
 
 		default:
 			ship_state_ = ShipStates::kTransport;
@@ -1332,6 +1321,7 @@ void Ship::Loader::load_finish() {
 
 	// restore the state the ship is in
 	ship.ship_state_ = ship_state_;
+	ship.ship_type_ = ship_type_;
 	ship.pending_refit_ = pending_refit_;
 
 	// restore the  ship id and name
@@ -1344,8 +1334,6 @@ void Ship::Loader::load_finish() {
 		ship.expedition_.swap(expedition_);
 		ship.expedition_->ware_economy = ship.ware_economy_;
 		ship.expedition_->worker_economy = ship.worker_economy_;
-	} else if (ship_state_ == ShipStates::kWarship) {
-		// NOCOM
 	} else {
 		assert(ship_state_ == ShipStates::kTransport);
 	}
@@ -1401,6 +1389,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));
+	fw.unsigned_8(static_cast<uint8_t>(ship_type_));
 	fw.unsigned_8(static_cast<uint8_t>(pending_refit_));
 
 	// expedition specific data

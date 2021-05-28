@@ -297,7 +297,7 @@ public:
 	void send_player_ship_construct_port(const Ship&, Coords);
 	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
 	void send_player_sink_ship(const Ship&);
-	void send_player_refit_ship(const Ship&, ShipStates);
+	void send_player_refit_ship(const Ship&, ShipType);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);

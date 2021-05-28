@@ -1058,7 +1058,7 @@ void Game::send_player_sink_ship(const Ship& ship) {
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_refit_ship(const Ship& ship, const ShipStates t) {
+void Game::send_player_refit_ship(const Ship& ship, const ShipType t) {
 	send_player_command(
 	   new CmdShipRefit(get_gametime(), ship.get_owner()->player_number(), ship.serial(), t));
 }

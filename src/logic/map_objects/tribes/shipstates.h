@@ -43,8 +43,6 @@ namespace Widelands {
 //
 // The kExpeditionPortspaceFound state means, that a port build space was found.
 //
-// The kWarship state means that the ship is a warship that can attack enemy ports and warships.
-//
 enum class ShipStates : uint8_t {
 	kTransport = 0,
 	kExpeditionWaiting = 1,
@@ -53,7 +51,11 @@ enum class ShipStates : uint8_t {
 	kExpeditionColonizing = 4,
 	kSinkRequest = 8,
 	kSinkAnimation = 9,
-	kWarship = 10,
+};
+
+enum class ShipType : uint8_t {
+	kTransport = 1,
+	kWarship = 2,
 };
 
 }  // namespace Widelands
