@@ -949,7 +949,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF
 	molog(egbase.get_gametime(), "Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON
-	molog(egbase.get_gametime(), "Postition: (%i, %i)\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "Position: (%i, %i)\n", position_.x, position_.y);
 	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
 	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
 	molog(egbase.get_gametime(), "Animation: %s\n",

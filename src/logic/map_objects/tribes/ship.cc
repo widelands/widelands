@@ -657,8 +657,6 @@ void Ship::warship_command(Game& game, const WarshipCommand cmd) {
 	}
 }
 
-constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
-
 void Ship::start_battle(Game& game, const Battle new_battle) {
 	MapObject* target = new_battle.opponent.get(game);
 	if (!target) {
@@ -676,6 +674,7 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 	}
 }
 
+constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
 constexpr uint32_t kAttackAnimationDuration = 2000;
 
 void Ship::battle_update(Game& game) {
@@ -691,30 +690,54 @@ void Ship::battle_update(Game& game) {
 	upcast(PortDock, target_port, target);
 	assert((target_ship == nullptr) ^ (target_port == nullptr));
 	assert(target_port == nullptr || b.is_first);
+
 	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
 	assert(!other_battle || (other_battle->opponent.get(game) == this && other_battle->is_first != b.is_first && other_battle->phase == b.phase));
-	auto set_phase = [&b, other_battle](Battle::Phase p) {
+
+	auto set_phase = [&game, &b, other_battle](Battle::Phase p) {
 		b.phase = p;
+		b.time_of_last_action = game.get_gametime();
 		if (other_battle) {
 			other_battle->phase = p;
+			other_battle->time_of_last_action = b.time_of_last_action;
 		}
+	};
+	auto fight = [this, &b, other_battle, &game, target_ship]() {
+		b.pending_damage = other_battle->pending_damage =
+			(game.logic_rand() % 100 < descr().attack_accuracy_) ?
+				(descr().min_attack_
+					+ (game.logic_rand() % (descr().max_attack_ - descr().min_attack_)))
+					* (100 - target_ship->descr().defense_) / 100
+			: 0;
+		log_dbg_time(game.get_gametime(), "NOCOM Ship %u vs %u : Damage %u", serial(), target_ship->serial(), b.pending_damage);
+	};
+	auto damage = [this, &game, set_phase, &b, other_battle, target_ship](Battle::Phase next) {
+		if (target_ship->hitpoints_ > b.pending_damage) {
+			target_ship->hitpoints_ -= b.pending_damage;
+			log_dbg_time(game.get_gametime(), "NOCOM Ship %u : Remaining hitpoints %u", target_ship->serial(), target_ship->hitpoints_);
+			set_phase(next);
+		} else {
+			log_dbg_time(game.get_gametime(), "NOCOM Ship %u HAS LOST", target_ship->serial());
+			target_ship->set_ship_state_and_notify(ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
+			target_ship->battles_.clear();
+			battles_.pop_back();
+		}
+		b.pending_damage = 0;
+		other_battle->pending_damage = 0;
 	};
 
 	if (!b.is_first) {
 		switch (b.phase) {
 		case Battle::Phase::kDefenderAttacking:
 			// Our turn is over, now it's the enemy's turn.
-			set_phase(Battle::Phase::kAttackersTurn);
+			damage(Battle::Phase::kAttackersTurn);
 			start_task_idle(game, descr().main_animation(), 100);
 			return;
 
 		case Battle::Phase::kDefendersTurn:
-
-			// NOCOM attack the attacker
-			log_dbg("NOCOM Defender %u attacks attacker %u", serial(), target->serial());
-			start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);
-
+			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
+			start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);  // NOCOM proper animation
 			return;
 
 		default:
@@ -768,7 +791,10 @@ void Ship::battle_update(Game& game) {
 	case Battle::Phase::kAttackerAttacking:
 		if (target_ship) {
 			// Our turn is over, now it's the enemy's turn.
-			set_phase(Battle::Phase::kDefendersTurn);
+			damage(Battle::Phase::kDefendersTurn);
+		} else if (b.pending_damage) {
+			// NOCOM Victory, conquer the port and end the fight
+			battles_.pop_back();
 		} else {
 			// Summon someone to the port's defense, if possible.
 			std::vector<Bob*> defenders;
@@ -798,12 +824,9 @@ void Ship::battle_update(Game& game) {
 		return;
 
 	case Battle::Phase::kAttackersTurn:
-
-		// NOCOM attack the defender
-		log_dbg("NOCOM Attacker %u attacks defender %u", serial(), target->serial());
-		start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);
-
+		fight();
 		set_phase(Battle::Phase::kAttackerAttacking);
+		start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);  // NOCOM proper animation
 		return;
 	}
 
@@ -1369,13 +1392,15 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
+constexpr int kShipHealthBarWidth = 13 * 2;
+
 void Ship::draw(const EditorGameBase& egbase,
                 const InfoToDraw& info_to_draw,
-                const Vector2f& point_on_dst,
+                const Vector2f& field_on_dst,
                 const Widelands::Coords& coords,
                 const float scale,
                 RenderTarget* dst) const {
-	Bob::draw(egbase, info_to_draw, point_on_dst, coords, scale, dst);
+	Bob::draw(egbase, info_to_draw, field_on_dst, coords, scale, dst);
 
 	// Show ship name and current activity
 	std::string statistics_string;
@@ -1429,8 +1454,47 @@ void Ship::draw(const EditorGameBase& egbase,
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
-	do_draw_info(info_to_draw, shipname_, statistics_string,
-	             calc_drawpos(egbase, point_on_dst, scale), scale, dst);
+	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
+	do_draw_info(info_to_draw, shipname_, statistics_string, point_on_dst, scale, dst);
+
+	if ((info_to_draw & InfoToDraw::kSoldierLevels) && (ship_type_ == ShipType::kWarship || hitpoints_ < descr().max_hitpoints_)) {
+		// TODO(Nordfriese): Common code with Soldier::draw_info_icon
+		const RGBColor& color = owner().get_playercolor();
+		const uint16_t color_sum = color.r + color.g + color.b;
+
+		const Vector2i draw_position = point_on_dst.cast<int>();
+
+		// The frame gets a slight tint of player color
+		const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
+		                         kShipHealthBarWidth * 2 * scale, 5 * scale);
+		dst->fill_rect(energy_outer, color);
+		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+
+		// Adjust health to current animation tick
+		uint32_t health_to_show = hitpoints_;
+		if (has_battle() && battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking : Battle::Phase::kAttackerAttacking)) {
+			uint32_t pending_damage = battles_.back().pending_damage
+				* (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() / kAttackAnimationDuration;
+			if (pending_damage > health_to_show) {
+				health_to_show = 0;
+			} else {
+				health_to_show -= pending_damage;
+			}
+		}
+
+		// Now draw the health bar itself
+		const int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+
+		Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
+		                   health_width * scale, 3 * scale);
+		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+		                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+
+		const RGBColor complement_color =
+		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
+		dst->fill_rect(energy_inner, color);
+		dst->fill_rect(energy_complement, complement_color);
+	}
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) const {
@@ -1563,11 +1627,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Whether the exploration is done clockwise or counter clockwise
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
-			if (const uint32_t a = ((packet_version >= 13) ? fr.unsigned_32() : 0)) {
-				MapObject& mo = mol().get<MapObject>(a);
-				assert(mo.descr().type() == MapObjectType::SHIP || mo.descr().type() == MapObjectType::PORTDOCK);
-				expedition_->attack_target = &mo;
-			}
+			expedition_attack_target_serial_ = ((packet_version >= 13) ? fr.unsigned_32() : 0);
 			} break;
 
 		default:
@@ -1577,12 +1637,11 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		for (uint8_t i = (packet_version >= 13) ? fr.unsigned_8() : 0; i; --i) {
 			const bool first = fr.unsigned_8();
-			MapObject* o = nullptr;
-			if (const uint32_t a = fr.unsigned_32()) {
-				o = &mol().get<MapObject>(a);
-			}
-			battles_.emplace_back(o, first);
+			battle_serials_.push_back(fr.unsigned_32());
+			battles_.emplace_back(nullptr, first);
 			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
+			battles_.back().pending_damage = fr.unsigned_32();
+			battles_.back().time_of_last_action = Time(fr);
 		}
 		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
 
@@ -1609,6 +1668,15 @@ void Ship::Loader::load_pointers() {
 		ship.lastdock_ = &mol().get<PortDock>(lastdock_);
 	}
 	ship.destination_ = destination_ ? &mol().get<PortDock>(destination_) : nullptr;
+
+	if (expedition_attack_target_serial_) {
+		expedition_->attack_target = &mol().get<MapObject>(expedition_attack_target_serial_);
+	}
+	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
+		if (battle_serials_[i]) {
+			battles_[i].opponent = &mol().get<MapObject>(battle_serials_[i]);
+		}
+	}
 
 	ship.items_.resize(items_.size());
 	for (uint32_t i = 0; i < items_.size(); ++i) {
@@ -1736,6 +1804,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_8(b.is_first ? 1 : 0);
 		fw.unsigned_32(mos.get_object_file_index_or_zero(b.opponent.get(egbase)));
 		fw.unsigned_8(static_cast<uint8_t>(b.phase));
+		fw.unsigned_32(b.pending_damage);
+		b.time_of_last_action.save(fw);
 	}
 	fw.unsigned_32(hitpoints_);
 

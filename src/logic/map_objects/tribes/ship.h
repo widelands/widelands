@@ -133,12 +133,14 @@ struct Ship : Bob {
 			kDefenderAttacking = 5,
 		};
 
-		Battle(MapObject* o, bool f) : opponent(o), is_first(f), phase(Phase::kNotYetStarted) {
+		Battle(MapObject* o, bool f) : opponent(o), is_first(f), phase(Phase::kNotYetStarted), pending_damage(0) {
 		}
 
 		OPtr<MapObject> opponent;
 		bool is_first;
 		Phase phase;
+		uint32_t pending_damage;
+		Time time_of_last_action;
 	};
 	void start_battle(Game&, Battle);
 
@@ -341,7 +343,8 @@ protected:
 		     hitpoints_(-1),
 		     ship_state_(ShipStates::kTransport),
              ship_type_(ShipType::kTransport),
-             pending_refit_(ship_type_) {
+             pending_refit_(ship_type_),
+             expedition_attack_target_serial_(0) {
 		}
 
 		const Task* get_task(const std::string& name) override;
@@ -363,6 +366,8 @@ protected:
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<Battle> battles_;
 		std::vector<ShippingItem::Loader> items_;
+		Serial expedition_attack_target_serial_;
+		std::vector<Serial> battle_serials_;
 	};
 
 public:
