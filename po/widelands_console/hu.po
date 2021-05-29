@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-03-25 12:49+0000\n"
+"PO-Revision-Date: 2021-05-28 19:28+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr "Használat: widelands <beállítás0>=<érték0> ... <beállításN>=<é
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "       widelands <save.wgf>/<replay.wrpl>"
-msgstr "  widelands <mentés.wgf>/<visszajátszás.wrpl>"
+msgstr "           widelands <mentés.wgf>/<visszajátszás.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -48,37 +48,37 @@ msgstr "Beállítások:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<beállítás-neve>=érték felülírja bármelyik beállítást a beállítási fájlból"
+msgstr " --<beállítás-neve>=érték\n                      A beállító fájlban szereplő beállítás felülírása"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr "                      Megjegyzés: Az új érték bele lesz írva a konfiguráció fájlba"
+msgstr "                      Megjegyzés: Az új érték el lesz mentve a beállító fájlba"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=KÖNYVTÁRNÉV A megadott könyvtárban találhatóak\na Widelands adatfájljai"
+msgstr " --datadir=KÖNYVTÁR   A megadott könyvtár használata a Widelands adatfájlok\n                      betöltéséhez"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=KÖNYVTÁRNÉV A megadott könyvtár használata\n                      a Widelands beállítási fájlok, mentett játékok\n                      és visszajátszások tárolására"
+msgstr " --homedir=KÖNYVTÁR   A megadott könyvtár használata a Widelands beállító\n                      fájlok, mentett játékok és visszajátszások tárolására"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
-msgstr "                      ~/.widelands az alapértelmezett"
+msgstr "                      Alapértelmezett: ~/.widelands"
 
 #: ../../src/wlapplication_messages.cc:57
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr "                      %USERPROFILE%\\.widelands az alapértelmezett"
+msgstr "                      Alapértelmezett: %USERPROFILE%\\.widelands"
 
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr " --localedir=DIRNAME  A megadott könyvtár használata a  widelands\n                      nyelvi fájlokhoz"
+msgstr " --localedir=KÖNYVTÁR\n                      A megadott könyvtár használata a Widelands nyelvi\n                      fájlokhoz"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -89,13 +89,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr " --coredump=[true|false]\n                      Core dump generálása szegmentálási hibák\n                      esetén az SDL használata helyett"
+msgstr " --coredump=[true|false]\n                      Program állapotának fájlba mentése („core dump”)\n                      memóriakezelési hiba miatti leállás esetén az\n                      „SDL Parachute” használata helyett"
 
 #: ../../src/wlapplication_messages.cc:70
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|hu_HU]\n                        Lokalizáció beállítása."
+msgstr " --language=[de_DE|hu_HU|...]\n                      Használandó nyelv beállítása"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -110,63 +110,63 @@ msgstr " --language=[de_DE|hu_HU]\n                        Lokalizáció beáll�
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr " --write_syncstreams=[true|false]\n                      Syncstream dump fájlok létrehozása, a hálózati játékok hibakövetését megkönnyítése érdekében."
+msgstr " --write_syncstreams=[true|false]\n                      Szinkronizációs naplófájlok létrehozása a hálózati\n                      játékok hibakeresésének megkönnyítésére (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:82
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr "--autosave=[...] Automatikus mentés n percenként"
+msgstr " --autosave=[...]     Automatikus mentés n percenként"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...]\n                      Ennyi fájl használata a görgetett automatikus mentéshez"
+msgstr " --rolling_autosave=[...]\n                      Megőrzendő automatikus mentések számának beállítása"
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr " --metaserver=[...]\n                      Kapcsolódás egy másik metakiszolgálóhoz az internetes játékhoz."
+msgstr " --metaserver=[...]\n                      Az internetes játékokhoz használandó metakiszolgáló\n                      beállítása"
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr " --metaserverport=[...]\n                      Az internetes játékhoz használt metakiszolgáló portja."
+msgstr " --metaserverport=[...]\n                      Az internetes játékokhoz használt metakiszolgáló\n                      portjának beállítása"
 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --addon_server=[...]\n"
 "                      Connect to a different github repository\n"
 "                      and branch from the add-ons manager."
-msgstr " --addon_server=[...]\n                      Kapcsolódás egy másik github repository-hoz\n                      és elágazás az add-on managertől."
+msgstr " --addon_server=[...]\n                      A bővítménykezelő által használandó github tároló\n                      („repository”) és ág („branch”) beállítása"
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Hang nélkül indítja a játékot."
+msgstr " --nosound            Hang kikapcsolása"
 
 #: ../../src/wlapplication_messages.cc:99
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr " --fail-on-lua-error  A Widelands összeomlásra kényszerítése Lua hiba esetén."
+msgstr " --fail-on-lua-error  A Widelands összeomlásra kényszerítése Lua hiba esetén"
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip              A mentéseket ne tömörített zip formátumban tárolja."
+msgstr " --nozip              A mentések zip formátumba való tömörítésének kikapcsolása"
 
 #: ../../src/wlapplication_messages.cc:103
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr " --editor             Egyből a Widelands pályaszerkesztőt indítsa el.\n                      Hozzáírva a =FILENAME szöveget betölti a\n                      FILENAME néven mentett térképet a szerkesztőbe."
+msgstr " --editor             A Widelands térképszerkesztő közvetlen indítása\n                      Megadható az indításkor betöltendő térkép is =FÁJLNÉV\n                      hozzáfűzésével"
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr " --ai_training        MI oktatómód engedélyezése. Az MI\n                      kiképzési logika teljes leírásáért lásd:\n                      https://www.widelands.org/wiki/Ai%20Training/."
+msgstr " --ai_training        Mesterséges intelligencia oktatómód bekapcsolása\n                      Részletes leírás:\n                      https://www.widelands.org/wiki/Ai%20Training/"
 
 #: ../../src/wlapplication_messages.cc:111
 msgid ""
@@ -174,7 +174,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr " --auto_speed         Csak a többjátékos játékokban, ez\n                      automatikusan állítja a játék sebességét,\n                      az FPS függvényében. Az --ai_training\n                      kapcsolóval együtt hasznos lehet."
+msgstr " --auto_speed         A többjátékosos játékokban a játéksebesség automatikus\n                      módosítása a képfrissítési sebesség függvényében\n                      Hasznos lehet az --ai_training kapcsolóval együtt."
 
 #: ../../src/wlapplication_messages.cc:116
 msgid ""
@@ -182,27 +182,27 @@ msgid ""
 "                      Directly create a new singleplayer game\n"
 "                      configured in the given file. An example can\n"
 "                      be found in `data/templates/new_game_template`."
-msgstr "--new_game_from_template=FÁJLNÉV\n                      Új egyszemélyes játék közvetlen indítása\n                      a megadott fájl alapján. Minta:\n                      `data/templates/new_game_template`."
+msgstr " --new_game_from_template=FÁJLNÉV\n                      Új egyszemélyes játék közvetlen indítása a megadott fájl\n                      alapján. Minta: `data/templates/new_game_template`"
 
 #: ../../src/wlapplication_messages.cc:122
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr " --scenario=FÁJLNÉV Közvetlenül a FÁJLNÉV térképet indítja küldetésként."
+msgstr " --scenario=FÁJLNÉV   A FÁJLNÉV térkép közvetlen indítása küldetésként"
 
 #: ../../src/wlapplication_messages.cc:125
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FÁJLNÉV Közvetlenül betölti a FÁJLNÉV néven mentett állást."
+msgstr " --loadgame=FÁJLNÉV   Játék indítása a FÁJLNÉV mentett állás közvetlen\n                      betöltésével"
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr " --replay=FÁJLNÉV    Közvetlenül betölti a FÁJLNÉV néven mentett visszajátszást."
+msgstr " --replay=FÁJLNÉV     A FÁJLNÉV visszajátszás közvetlen indítása"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=FÁJLNÉV    A megadott Lua parancsfájl futtatása az előkészítés után.\n                      Csak --scenario, --loadgame vagy --editor esetén érvényes."
+msgstr " --script=FÁJLNÉV     A megadott Lua parancsfájl futtatása betöltés után\n                      Csak a --scenario, --loadgame vagy --editor\n                      kapcsolókkal együtt használható."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -214,7 +214,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr " --auto_roadbuild_mode=[true|false]\n                      Automatikusan lépjen-e útépítési módba\n                      egy olyan zászló lehelyezésekor,\n                      amely nem kapcsolódik úthoz."
+msgstr " --auto_roadbuild_mode=[true|false]\n                      Útépítés mód indítása (igen/nem), úthoz nem\n                      kapcsolódó zászló lehelyezésekor"
 
 #: ../../src/wlapplication_messages.cc:139
 msgid "Graphic options:"
@@ -229,19 +229,19 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr " --fullscreen=[true|false]\n                      A teljes kijelző legyen-e használva a\n                      játékképernyőhöz."
+msgstr " --fullscreen=[true|false]\n                      Teljes képernyős üzemmód használata (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:148
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[…]         Az ablak szélessége képpontokban."
+msgstr " --xres=[...]         A programablak szélessége képpontokban"
 
 #: ../../src/wlapplication_messages.cc:149
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[…]         Az ablak magassága képpontokban."
+msgstr " --yres=[...]         A programablak magassága képpontokban"
 
 #: ../../src/wlapplication_messages.cc:150
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr " --maxfps=[5 …]     A játék legmagasabb képfrissítési sebessége."
+msgstr " --maxfps=[5 ...]     A játék megengedett legmagasabb képfrissítési sebessége"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -255,7 +255,7 @@ msgstr "Kapcsolók a belső ablakkezelőhöz:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr " --animate_map_panning=[yes|no]\n                      Az automatikus térkép mozgások animálva legyenek-e."
+msgstr " --animate_map_panning=[yes|no]\n                      Automatikus térképmozgások animálása (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:159
 msgid ""
@@ -263,7 +263,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Az ablak ragadjon a képernyő széléhez,\n                      ha az ablak széle ilyen távolságon belülre\n                      kerül a képernyő széléhez képest."
+msgstr " --border_snap_distance=[0 ...]\n                      Ablakok képernyő széléhez igazítása a megadott távolságon\n                      belül"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -275,7 +275,7 @@ msgid ""
 "                      Eliminate a window’s border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr "--dock_windows_to_edges=[true|false]\n                      Ha egy ablak oldala a képernyő szélénél\n                      van, az ablakkeret azon az oldalon ne\n                      látszódjon."
+msgstr " --dock_windows_to_edges=[true|false]\n                      Ablakok keretének elrejtése, ahol hozzáérnek a képernyő\n                      széléhez (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:172
 msgid ""
@@ -283,7 +283,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Az ablak ragadjon a panel széléhez,\n                      ha az ablak széle ilyen távolságon belülre\n                      kerül a panel széléhez képest."
+msgstr " --panel_snap_distance=[0 ...]\n                      Ablakok tálcához igazítása a megadott távolságon belül"
 
 #: ../../src/wlapplication_messages.cc:177
 msgid ""
@@ -291,7 +291,7 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Csak akkor mozgasson egy ablakot a panel széléhez\n                      ha az ablak túlnyúl a panelen."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Ablakok tálcához igazítása csak átfedés esetén (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:183
 msgid " --verbose            Enable verbose debug messages"
@@ -299,7 +299,7 @@ msgstr " --verbose            Bővebb hibakeresési üzenetek"
 
 #: ../../src/wlapplication_messages.cc:184
 msgid " --help               Show this help"
-msgstr " --help               Megjeleníti ezt a segítséget"
+msgstr " --help               Ennek a súgónak a megjelenítése"
 
 #: ../../src/wlapplication_messages.cc:186
 msgid ""
@@ -307,7 +307,7 @@ msgid ""
 "                      Directly loads the given savegame or replay. Useful for\n"
 "                      .wgf/.wrpl file extension association. Does not work with\n"
 "                      other options. Also see --loadgame/--replay."
-msgstr "<mentés.wgf>/<visszajátszás.wrpl>\n                      A megadott mentés vagy visszajátszás közvetlen\n                      betöltése. A .wgf/.wrpl fájltípus hozzárendeléséhez.\n                      Más beállításokkal együtt nem működik. Lásd még:\n                      --loadgame/--replay"
+msgstr " <mentés.wgf>/<visszajátszás.wrpl>\n                      A megadott mentés vagy visszajátszás közvetlen betöltése\n                      A .wgf/.wrpl fájltípus hozzárendeléséhez használható.\n                      Más beállításokkal együtt nem működik.\n                      Lásd még: --loadgame/--replay"
 
 #: ../../src/wlapplication_messages.cc:192
 msgid ""
@@ -315,4 +315,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n        https://www.widelands.org/\n\nReméljük, hogy tetszett a játék!"
+msgstr "Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n        https://www.widelands.org/\n\nReméljük, hogy tetszik a játék!"

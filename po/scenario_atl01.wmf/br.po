@@ -4,16 +4,16 @@
 # Translators:
 # ThonyVezbe <a.guechoum@gmail.com>, 2020
 # GunChleoc, 2018
-# Irriep Nala Novram <allannkorh@yahoo.fr>, 2017
+# Irriep Nala Novram <allannkorh@yahoo.fr>, 2017,2021
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2020-10-14 13:19+0000\n"
-"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-28 11:19+0000\n"
+"Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "Asurit pourvezioù marc'hadourezhioù ar sevel-tiezh"
+msgstr "Asurit pourvezioù marc'hadourezhioù ar sevel-tiez"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
