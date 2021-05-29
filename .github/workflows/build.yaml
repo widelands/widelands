@@ -31,9 +31,7 @@ jobs:
         fetch-depth: 1
     - name: Test
       run: |
-        pushd cmake/codecheck
-        ./run_tests.py
-        popd
+        ./cmake/codecheck/run_tests.py
     - name: Check
       run: |
         mkdir build

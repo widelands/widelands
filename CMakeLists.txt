@@ -14,6 +14,8 @@ option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
+# Absolute path reference for submodules
+set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 

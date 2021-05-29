@@ -119,7 +119,7 @@ You can add targets to the `make` or `ninja` command, e.g. `make lang` to build 
 | Name | Function |
 | --- | --- |
 | `ALL` or no target | Compile everything, up to executable with the settings from the `cmake` call |
-| `codecheck` | Run the codechecks (currently broken) |
+| `codecheck` | Run the codechecks |
 | `doc` | Generate Doxygen documentation. Currently only with Build Type Debug, but this is easily changed if necessary. |
 | `install` | Install into the target dir, this is `/usr/local` per default (you need root privileges!) unless you change it (see CMake options above) |
 | `lang` | Generate the translations |

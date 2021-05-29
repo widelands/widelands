@@ -1009,6 +1009,8 @@ public:
 	 * Properties
 	 */
 	int get_flag(lua_State* L);
+	int get_destruction_blocked(lua_State* L);
+	int set_destruction_blocked(lua_State* L);
 
 	/*
 	 * Lua Methods
