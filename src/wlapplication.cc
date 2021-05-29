@@ -663,8 +663,8 @@ void WLApplication::run() {
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
 		} else {
-			EditorInteractive::run_editor(nullptr,
-			   EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+			EditorInteractive::run_editor(
+			   nullptr, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
 		}
 	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;

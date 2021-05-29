@@ -925,8 +925,8 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 }
 
 void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
-                                   const std::string& filename,
-                                   const std::string& script_to_run) {
+                                      const std::string& filename,
+                                      const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
