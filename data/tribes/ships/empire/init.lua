@@ -11,6 +11,12 @@ descriptions:new_ship_type {
    capacity = 30,
    vision_range = 4,
 
+   hitpoints    = 50000,
+   min_attack   =   100,
+   max_attack   = 10000,
+   defense         =  5,
+   attack_accuracy = 60,
+
    animations = {
       idle = {
          hotspot = { 115, 100 },

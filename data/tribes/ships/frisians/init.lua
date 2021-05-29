@@ -9,6 +9,13 @@ descriptions:new_ship_type {
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
+
+   hitpoints    = 50000,
+   min_attack   =   100,
+   max_attack   = 10000,
+   defense         =  5,
+   attack_accuracy = 60,
+
    spritesheets = {
       idle = {
          directory = dirname,

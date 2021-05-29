@@ -74,6 +74,8 @@ public:
 		return ship_names_;
 	}
 
+	const uint32_t max_hitpoints_, min_attack_, max_attack_, defense_, attack_accuracy_;
+
 private:
 	DirAnimations sail_anims_;
 	Quantity default_capacity_;
@@ -83,8 +85,6 @@ private:
 };
 
 constexpr int32_t kShipInterval = 1500;
-
-constexpr uint32_t kInvalidDestination = std::numeric_limits<uint32_t>::max();
 
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
@@ -122,8 +122,25 @@ struct Ship : Bob {
 	void start_task_ship(Game&);
 	void start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
-	void start_task_attack(Game&, MapObject& target);
-	void start_task_defense(Game&, Ship& attacker);
+
+	struct Battle {
+		enum class Phase : uint8_t {
+			kNotYetStarted = 0,
+			kAttackerMovingTowardsOpponent = 1,
+			kAttackersTurn = 2,
+			kDefendersTurn = 3,
+			kAttackerAttacking = 4,
+			kDefenderAttacking = 5,
+		};
+
+		Battle(MapObject* o, bool f) : opponent(o), is_first(f), phase(Phase::kNotYetStarted) {
+		}
+
+		OPtr<MapObject> opponent;
+		bool is_first;
+		Phase phase;
+	};
+	void start_battle(Game&, Battle);
 
 	uint32_t calculate_sea_route(EditorGameBase&, PortDock&, Path* = nullptr) const;
 
@@ -217,24 +234,33 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
-	ShipType get_ship_type() const {
-		return ship_type_;
-	}
 	MapObject* get_attack_target(const EditorGameBase& e) const {
 		return expedition_ ? expedition_->attack_target.get(e) : nullptr;
 	}
+	bool has_battle() const {
+		return !battles_.empty();
+	}
+
 	bool can_be_attacked() const;
+	bool can_attack() const;
 	bool is_attackable_enemy_warship(const Bob&) const;
+	uint32_t get_hitpoints() const {
+		return hitpoints_;
+	}
+
 	void warship_command(Game&, WarshipCommand);
 
-	bool can_refit(ShipType) const;
-	void refit(EditorGameBase&, ShipType);
+	ShipType get_ship_type() const {
+		return ship_type_;
+	}
 	ShipType get_pending_refit() const {
 		return pending_refit_;
 	}
+	bool can_refit(ShipType) const;
 	inline bool is_refitting() const {
 		return get_pending_refit() != get_ship_type();
 	}
+	void refit(EditorGameBase&, ShipType);
 
 protected:
 	void draw(const EditorGameBase&,
@@ -251,8 +277,6 @@ private:
 	void wakeup_neighbours(Game&);
 
 	static const Task taskShip;
-	static const Task taskAttack;
-	static const Task taskDefense;
 
 	void ship_update(Game&, State&);
 	void ship_wakeup(Game&);
@@ -260,8 +284,7 @@ private:
 	bool ship_update_transport(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
-	void attack_update(Game&, State&);
-	void defense_update(Game&, State&);
+	void battle_update(Game&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
@@ -300,6 +323,9 @@ private:
 	};
 	std::unique_ptr<Expedition> expedition_;
 
+	std::vector<Battle> battles_;
+	uint32_t hitpoints_;
+
 	Quantity capacity_;
 
 	// saving and loading
@@ -312,6 +338,7 @@ protected:
 		     worker_economy_serial_(kInvalidSerial),
 		     destination_(0),
 		     capacity_(0),
+		     hitpoints_(-1),
 		     ship_state_(ShipStates::kTransport),
              ship_type_(ShipType::kTransport),
              pending_refit_(ship_type_) {
@@ -329,14 +356,17 @@ protected:
 		Serial worker_economy_serial_;
 		uint32_t destination_;
 		uint32_t capacity_;
+		int32_t hitpoints_;
 		ShipStates ship_state_;
 		ShipType ship_type_, pending_refit_;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
+		std::vector<Battle> battles_;
 		std::vector<ShippingItem::Loader> items_;
 	};
 
 public:
+
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);

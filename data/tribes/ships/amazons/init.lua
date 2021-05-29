@@ -10,6 +10,12 @@ descriptions:new_ship_type {
    vision_range = 4,
    icon = dirname .. "menu.png",
 
+   hitpoints    = 50000,
+   min_attack   =   100,
+   max_attack   = 10000,
+   defense         =  5,
+   attack_accuracy = 60,
+
    animation_directory = dirname,
    spritesheets = {
       idle = {

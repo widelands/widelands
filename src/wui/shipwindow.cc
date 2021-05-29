@@ -256,7 +256,7 @@ void ShipWindow::think() {
 	btn_refit_->set_enabled(can_act && ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship
 			? Widelands::ShipType::kTransport : Widelands::ShipType::kWarship));
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ? _("Refit to transport ship") : _("Refit to warship"));
-	btn_warship_attack_->set_enabled(can_act && ship->get_ship_type() == Widelands::ShipType::kWarship && ship->get_attack_target(ibase_.egbase()) != nullptr);
+	btn_warship_attack_->set_enabled(can_act && ship->can_attack());
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
