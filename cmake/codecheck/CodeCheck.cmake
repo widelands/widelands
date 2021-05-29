@@ -1,3 +1,4 @@
+set(ENV{WL_ROOT_DIR} ${WL_ROOT_DIR})
 execute_process(
   COMMAND "${PYTHON_EXECUTABLE}" "${WL_SOURCE_CHECKER}" -c "${SRC}"
   OUTPUT_VARIABLE checkresult
