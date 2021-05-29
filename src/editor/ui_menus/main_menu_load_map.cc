@@ -92,8 +92,8 @@ void MainMenuLoadMap::entry_selected() {
 		ok_.set_enabled(false);
 		map_details_.clear();
 	} else {
-		ok_.set_enabled(map_details_.update(maps_data_[table_.get_selected()],
-		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized,
-		                    true));
+		ok_.set_enabled(map_details_.update(
+		   maps_data_[table_.get_selected()],
+		   display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized, true));
 	}
 }
