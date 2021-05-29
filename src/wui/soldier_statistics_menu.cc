@@ -23,9 +23,10 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/waresdisplay.h"
 
-SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent, const Widelands::Player& player, const CountingFn& cfn)
-   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     counting_function_(cfn) {
+SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
+                                               const Widelands::Player& player,
+                                               const CountingFn& cfn)
+   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical), counting_function_(cfn) {
 	// To optimize the layout, we arrange Attack and Evade level gradients horizontally
 	// and Health and Defense level gradients vertically
 	const Widelands::SoldierDescr& soldier = dynamic_cast<const Widelands::SoldierDescr&>(
@@ -133,8 +134,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
      player_(parent.player()) {
 	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 
-	tabs->add("all", _("Overview"), new SoldierStatisticsPanel(*tabs, player_,
-			[this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) { return player_.count_soldiers(h, a, d, e); }));
+	tabs->add("all", _("Overview"),
+	          new SoldierStatisticsPanel(
+	             *tabs, player_, [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
+		             return player_.count_soldiers(h, a, d, e);
+	             }));
 
 	const Widelands::SoldierDescr& soldier = dynamic_cast<const Widelands::SoldierDescr&>(
 	   *player_.tribe().get_worker_descr(player_.tribe().soldier()));

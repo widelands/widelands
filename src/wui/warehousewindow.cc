@@ -268,19 +268,24 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_soldiers), new SoldierStatisticsPanel(*get_tabs(), warehouse->owner(),
-			[this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
-					uint32_t n = 0;
-					if (Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase())) {
-						assert(wh->soldier_control() != nullptr);
-						for (const Widelands::Soldier* s : wh->soldier_control()->present_soldiers()) {
-							if (s->get_health_level() == h && s->get_attack_level() == a && s->get_defense_level() == d && s->get_evade_level() == e) {
-								++n;
-							}
-						}
-					}
-					return n;
-			}), _("Soldiers"));
+	get_tabs()->add(
+	   "soldiers", g_image_cache->get(pic_tab_soldiers),
+	   new SoldierStatisticsPanel(
+	      *get_tabs(), warehouse->owner(),
+	      [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
+		      uint32_t n = 0;
+		      if (Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase())) {
+			      assert(wh->soldier_control() != nullptr);
+			      for (const Widelands::Soldier* s : wh->soldier_control()->present_soldiers()) {
+				      if (s->get_health_level() == h && s->get_attack_level() == a &&
+				          s->get_defense_level() == d && s->get_evade_level() == e) {
+					      ++n;
+				      }
+			      }
+		      }
+		      return n;
+	      }),
+	   _("Soldiers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_image_cache->get(pic_tab_dock_wares),
