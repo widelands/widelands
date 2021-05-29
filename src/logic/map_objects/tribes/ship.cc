@@ -103,6 +103,24 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 
 }  // namespace
 
+struct FindBobDefender {
+	FindBobDefender(const PortDock& pd) : dock_(pd) {
+	}
+	bool accept(Bob* b) const {
+		if (b.descr().type() != MapObjectType::SHIP) {
+			return false;
+		}
+		const Ship& s = dynamic_cast<const Ship&>(*b);
+		return s.get_ship_type() == ShipType::kWarship &&
+				(s.owner().player_number() == dock_.owner().player_number() ||
+						(dock_.owner().team_number() > 0 && s.owner().team_number() == dock_.owner().team_number()))
+				&& !s.get_state(taskDefense) && !s.get_state(taskAttack);
+	}
+
+private:
+	const PortDock& dock_;
+};
+
 struct FindNodeAttackTarget {
 	FindNodeAttackTarget(const Widelands::Ship& s) : ship_(s) {
 	}
@@ -111,7 +129,7 @@ struct FindNodeAttackTarget {
 			return ship_.owner().is_hostile(dynamic_cast<const PortDock&>(*f.field->get_immovable()).owner());
 		}
 		for (const Bob* b = f.field->get_first_bob(); b; b = b->get_next_bob()) {
-			if (ship_.is_enemy_warship(*b)) {
+			if (ship_.is_attackable_enemy_warship(*b)) {
 				return true;
 			}
 		}
@@ -510,7 +528,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 				bool found = false;
 				Field& f = (*map)[c];
 				for (Bob* b = f.get_first_bob(); b; b = b->get_next_bob()) {
-					if (is_enemy_warship(*b)) {
+					if (is_attackable_enemy_warship(*b)) {
 						new_target = b;
 						found = true;
 						break;
@@ -543,20 +561,26 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	}
 }
 
-void Ship::warship_command(Game&, const WarshipCommand) {
-	if (get_ship_type() != ShipType::kWarship) {
-		return;
-	}
-
-	// NOCOM
-}
-
-bool Ship::is_enemy_warship(const Bob& b) const {
+bool Ship::is_attackable_enemy_warship(const Bob& b) const {
 	if (b.descr().type() != MapObjectType::SHIP) {
 		return false;
 	}
 	const Ship& s = dynamic_cast<const Ship&>(b);
-	return s.get_ship_type() == ShipType::kWarship && owner().is_hostile(s.owner());
+	return s.can_be_attacked() && owner().is_hostile(s.owner());
+}
+
+bool Ship::can_be_attacked() const {
+	// Only warships can be attacked, but not if they're already engaged in battle
+	// against any other ship. Ships attacking a port CAN be attacked though.
+	if (get_ship_type() != ShipType::kWarship || get_state(taskDefense)) {
+		return false;
+	}
+	if (const State* s = get_state(taskAttack)) {
+		if (const MapObject* a = s->objvar1.get(game)) {
+			return a->descr().type() == MapObjectType::PORTDOCK;
+		}
+	}
+	return true;
 }
 
 inline bool Ship::can_refit(const ShipType type) const {
@@ -598,6 +622,97 @@ void Ship::refit(EditorGameBase& egbase, const ShipType type) {
 	assert(fleet_ == nullptr);
 
 	set_destination(egbase, dest);
+}
+
+void Ship::warship_command(Game& game, const WarshipCommand cmd) {
+	if (get_ship_type() != ShipType::kWarship) {
+		return;
+	}
+
+	switch (cmd) {
+	case WarshipCommand::kAttack:
+		if (MapObject* a = get_attack_target(game)) {
+			start_task_attack(cmd, *a);
+		}
+		break;
+
+	default:
+		NEVER_HERE();  // NOCOM
+	}
+}
+
+constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
+
+const Task Ship::taskDefense = { "defense", static_cast<Bob::Ptr>(&Ship::defense_update), nullptr, nullptr, true };
+const Task Ship::taskAttack = { "attack", static_cast<Bob::Ptr>(&Ship::attack_update), nullptr, nullptr, true };
+
+/*
+ * State layout for the attack and defense tasks;
+ * objvar1 – Enemy we're fighting against
+ * ivar1   – Attack phase:
+ *           0 – The attacker is moving towards the defender
+ *           1 – The attacker is about to attack the defender
+ *           2 – The defender is about to attack the attacker
+ */
+
+void Ship::start_task_defense(Game& game, Ship& attacker) {
+	push_task(game, taskDefense);
+	top_state().objvar1 = &attacker;
+	top_state().ivar1 = 0;
+}
+
+void Ship::start_task_attack(Game& game, MapObject& target) {
+	push_task(game, taskAttack);
+	top_state().objvar1 = &target;
+	top_state().ivar1 = 0;
+
+	// Sommon someone to the defence
+	if (target.descr().type() == MapObjectType::SHIP) {
+		dynamic_cast<Ship&>(target).start_task_defense(game, *this);
+	} else {
+		std::vector<Bob*> defenders;
+		game.map().find_reachable_bobs(game,
+                                      Area<FCoords>(get_position(), kPortUnderAttackDefendersSearchRadius),
+	                                  &defenders,
+                                      CheckStepDefault(MOVECAPS_SWIM),
+	                                  FindBobDefender(dynamic_cast<const PortDock&>(target)));
+		Bob* nearest = nullptr;
+		uint32_t distance = 0;
+		for (Bob* b : defenders) {
+			const uint32_t d = map->calc_distance(b->get_position(), get_position());
+			if (!nearest || d < distance) {
+				nearest = b;
+				distance = d;
+			}
+		}
+		if (nearest) {
+			dynamic_cast<Ship&>(*nearest).start_task_attack(game, *this);
+		}
+	}
+}
+
+void Ship::defense_update(Game& game, State& state) {
+	upcast(Ship, attacker, state.objvar1.get(game));
+	if (!attacker) {
+		return pop_task(game);
+	}
+
+	// NOCOM actual battlework here
+}
+
+void Ship::attack_update(Game& game, State& state) {
+	MapObject* target = state.objvar1.get(game);
+	if (!target) {
+		return pop_task(game);
+	}
+
+	// NOCOM actual battlework here
+}
+
+void Ship::ship_wakeup(Game& game) {
+	if (get_state(taskShip)) {
+		send_signal(game, "wakeup");
+	}
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
@@ -1309,6 +1424,12 @@ constexpr uint8_t kCurrentPacketVersion = 13;
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
 		return &taskShip;
+	}
+	if (name == "attack") {
+		return &taskAttack;
+	}
+	if (name == "defense") {
+		return &taskDefense;
 	}
 	return Bob::Loader::get_task(name);
 }

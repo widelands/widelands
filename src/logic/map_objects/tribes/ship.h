@@ -122,6 +122,8 @@ struct Ship : Bob {
 	void start_task_ship(Game&);
 	void start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
+	void start_task_attack(Game&, MapObject& target);
+	void start_task_defense(Game&, Ship& attacker);
 
 	uint32_t calculate_sea_route(EditorGameBase&, PortDock&, Path* = nullptr) const;
 
@@ -221,7 +223,8 @@ struct Ship : Bob {
 	MapObject* get_attack_target(const EditorGameBase& e) const {
 		return expedition_ ? expedition_->attack_target.get(e) : nullptr;
 	}
-	bool is_enemy_warship(const Bob&) const;
+	bool can_be_attacked() const;
+	bool is_attackable_enemy_warship(const Bob&) const;
 	void warship_command(Game&, WarshipCommand);
 
 	bool can_refit(ShipType) const;
@@ -248,6 +251,8 @@ private:
 	void wakeup_neighbours(Game&);
 
 	static const Task taskShip;
+	static const Task taskAttack;
+	static const Task taskDefense;
 
 	void ship_update(Game&, State&);
 	void ship_wakeup(Game&);
@@ -255,6 +260,8 @@ private:
 	bool ship_update_transport(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
+	void attack_update(Game&, State&);
+	void defense_update(Game&, State&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
