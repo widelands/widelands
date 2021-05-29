@@ -20,28 +20,16 @@
 #include "wui/soldier_statistics_menu.h"
 
 #include "logic/map_objects/tribes/soldier.h"
-#include "ui_basic/box.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/waresdisplay.h"
 
-SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
-                                             UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent,
-                      UI::WindowStyle::kWui,
-                      "soldier_statistics",
-                      &registry,
-                      100,
-                      100,
-                      _("Soldier Statistics")),
-     player_(parent.player()) {
-	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
-
-	UI::Box* vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-
+SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent, const Widelands::Player& player, const CountingFn& cfn)
+   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     counting_function_(cfn) {
 	// To optimize the layout, we arrange Attack and Evade level gradients horizontally
 	// and Health and Defense level gradients vertically
 	const Widelands::SoldierDescr& soldier = dynamic_cast<const Widelands::SoldierDescr&>(
-	   *player_.tribe().get_worker_descr(player_.tribe().soldier()));
+	   *player.tribe().get_worker_descr(player.tribe().soldier()));
 	max_attack_ = soldier.get_max_attack_level();
 	max_defense_ = soldier.get_max_defense_level();
 	max_health_ = soldier.get_max_health_level();
@@ -49,9 +37,9 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 
 	for (unsigned health = 0; health <= max_health_; ++health) {
 		for (unsigned defense = 0; defense <= max_defense_; ++defense) {
-			UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-			UI::Box* hbox2 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-			UI::Box* hbox3 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box* hbox1 = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box* hbox2 = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box* hbox3 = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			for (unsigned attack = 0; attack <= max_attack_; ++attack) {
 				for (unsigned evade = 0; evade <= max_evade_; ++evade) {
 					if (attack || evade) {
@@ -98,17 +86,64 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 				}
 			}
 			if (health || defense) {
-				vbox->add_space(8);
+				add_space(8);
 			}
-			vbox->add(hbox1, UI::Box::Resizing::kFullSize);
-			vbox->add(hbox2, UI::Box::Resizing::kFullSize);
-			vbox->add(hbox3, UI::Box::Resizing::kFullSize);
+			add(hbox1, UI::Box::Resizing::kFullSize);
+			add(hbox2, UI::Box::Resizing::kFullSize);
+			add(hbox3, UI::Box::Resizing::kFullSize);
 		}
 	}
 
-	tabs->add("all", _("Overview"), vbox);
+	update();
+}
 
-	vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+void SoldierStatisticsPanel::think() {
+	UI::Panel::think();
+	update();
+}
+
+void SoldierStatisticsPanel::update() {
+	unsigned index = 0;
+	for (unsigned h = 0; h <= max_health_; ++h) {
+		for (unsigned d = 0; d <= max_defense_; ++d) {
+			for (unsigned a = 0; a <= max_attack_; ++a) {
+				for (unsigned e = 0; e <= max_evade_; ++e) {
+					const uint32_t nr = counting_function_(h, a, d, e);
+					labels_all_[index]->set_text(nr ? get_amount_string(nr, true) : "");
+					labels_all_[index]->set_tooltip(std::to_string(nr));
+					for (uint8_t i = 0; i < 4; ++i) {
+						icons_all_[index * 4 + i]->set_grey_out(nr == 0);
+					}
+					++index;
+				}
+			}
+		}
+	}
+}
+
+SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
+                                             UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "soldier_statistics",
+                      &registry,
+                      100,
+                      100,
+                      _("Soldier Statistics")),
+     player_(parent.player()) {
+	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
+
+	tabs->add("all", _("Overview"), new SoldierStatisticsPanel(*tabs, player_,
+			[this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) { return player_.count_soldiers(h, a, d, e); }));
+
+	const Widelands::SoldierDescr& soldier = dynamic_cast<const Widelands::SoldierDescr&>(
+	   *player_.tribe().get_worker_descr(player_.tribe().soldier()));
+	max_attack_ = soldier.get_max_attack_level();
+	max_defense_ = soldier.get_max_defense_level();
+	max_health_ = soldier.get_max_health_level();
+	max_evade_ = soldier.get_max_evade_level();
+
+	UI::Box* vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
 	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	UI::Box* hbox2 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -193,23 +228,6 @@ void SoldierStatisticsMenu::think() {
 
 void SoldierStatisticsMenu::update() {
 	unsigned index = 0;
-	for (unsigned h = 0; h <= max_health_; ++h) {
-		for (unsigned d = 0; d <= max_defense_; ++d) {
-			for (unsigned a = 0; a <= max_attack_; ++a) {
-				for (unsigned e = 0; e <= max_evade_; ++e) {
-					const uint32_t nr = player_.count_soldiers(h, a, d, e);
-					labels_all_[index]->set_text(nr ? get_amount_string(nr, true) : "");
-					labels_all_[index]->set_tooltip(std::to_string(nr));
-					for (uint8_t i = 0; i < 4; ++i) {
-						icons_all_[index * 4 + i]->set_grey_out(nr == 0);
-					}
-					++index;
-				}
-			}
-		}
-	}
-
-	index = 0;
 	for (unsigned h = 0; h <= max_health_; ++h) {
 		const uint32_t nr = player_.count_soldiers_h(h);
 		icons_detail_[index]->set_grey_out(nr == 0);
