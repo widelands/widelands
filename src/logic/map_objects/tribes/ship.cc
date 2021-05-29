@@ -703,21 +703,21 @@ void Ship::battle_update(Game& game) {
 		}
 	};
 	auto fight = [this, &b, other_battle, &game, target_ship]() {
-		b.pending_damage = other_battle->pending_damage =
+		b.pending_damage =
 			(game.logic_rand() % 100 < descr().attack_accuracy_) ?
 				(descr().min_attack_
 					+ (game.logic_rand() % (descr().max_attack_ - descr().min_attack_)))
-					* (100 - target_ship->descr().defense_) / 100
+					* (100 - (target_ship ? target_ship->descr().defense_ : 0)) / 100
 			: 0;
-		log_dbg_time(game.get_gametime(), "NOCOM Ship %u vs %u : Damage %u", serial(), target_ship->serial(), b.pending_damage);
+		if (other_battle) {
+			other_battle->pending_damage = b.pending_damage;
+		}
 	};
 	auto damage = [this, &game, set_phase, &b, other_battle, target_ship](Battle::Phase next) {
 		if (target_ship->hitpoints_ > b.pending_damage) {
 			target_ship->hitpoints_ -= b.pending_damage;
-			log_dbg_time(game.get_gametime(), "NOCOM Ship %u : Remaining hitpoints %u", target_ship->serial(), target_ship->hitpoints_);
 			set_phase(next);
 		} else {
-			log_dbg_time(game.get_gametime(), "NOCOM Ship %u HAS LOST", target_ship->serial());
 			target_ship->set_ship_state_and_notify(ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
 			target_ship->battles_.clear();
 			battles_.pop_back();
@@ -792,8 +792,10 @@ void Ship::battle_update(Game& game) {
 		if (target_ship) {
 			// Our turn is over, now it's the enemy's turn.
 			damage(Battle::Phase::kDefendersTurn);
-		} else if (b.pending_damage) {
-			// NOCOM Victory, conquer the port and end the fight
+		} else if (b.pending_damage > 0) {
+			// Victory – conquer the port and end the fight.
+			// NOCOM replace the port with one of our own
+			target_port->get_warehouse()->destroy(game);
 			battles_.pop_back();
 		} else {
 			// Summon someone to the port's defense, if possible.
