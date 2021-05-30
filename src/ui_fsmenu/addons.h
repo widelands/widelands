@@ -147,7 +147,7 @@ public:
 		return username_;
 	}
 	void set_login(const std::string& username, const std::string& password, bool show_error);
-	void update_login_button(UI::Button&);
+	void update_login_button(UI::Button*);
 	void login_button_clicked();
 
 protected:
@@ -181,6 +181,7 @@ private:
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
 	UI::Dropdown<const AddOns::AddOnInfo*> upload_addon_, upload_screenshot_;
+	UI::Checkbox upload_addon_accept_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, /* autofix_dependencies_, */ move_top_,
 	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_, contact_;
 

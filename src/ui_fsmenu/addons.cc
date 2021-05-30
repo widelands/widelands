@@ -499,6 +499,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 				 UI::DropdownType::kTextualMenu,
 				 UI::PanelStyle::kFsMenu,
 				 UI::ButtonStyle::kFsMenuSecondary),
+     upload_addon_accept_(&dev_box_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i(0, 0),
+                      _("Understood and confirmed"),
+                      _("By ticking this checkbox, you confirm that you have read and agree to the above terms.")),
      filter_reset_(&browse_addons_buttons_inner_box_2_,
                    "f_reset",
                    0,
@@ -619,31 +624,6 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	}
 	dev_box_.add_space(kRowButtonSpacing);
 	dev_box_.add(&launch_packager_);
-	dev_box_.add_space(kRowButtonSize);
-	dev_box_.add(
-	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-	      (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."))
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead."))
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("The Widelands Development Team will review your add-on soon after uploading. In case they have further inquiries, they will contact you via a PM on the Widelands website; therefore please check the inbox of your online user profile page frequently."))
-	      ).str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	   UI::Box::Resizing::kFullSize);
-
-	dev_box_.add_space(kRowButtonSpacing);
-	dev_box_.add(&upload_addon_);
-	dev_box_.add_space(kRowButtonSpacing);
-	dev_box_.add(&upload_screenshot_);
-
-	upload_addon_.selected.connect([this]() {
-		upload_addon(*upload_addon_.get_selected());
-	});
-	upload_screenshot_.selected.connect([this]() {
-		upload_screenshot_.set_list_visibility(false);
-		const AddOns::AddOnInfo& info = *upload_screenshot_.get_selected();
-		ScreenshotUploadWindow s(*this, info, find_remote(info.internal_name));
-		s.run<UI::Panel::Returncodes>();
-	});
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
@@ -679,6 +659,36 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	};
 	dev_box_.add_space(kRowButtonSpacing);
 	add_button(kDocumentationURL);
+
+	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add(
+	   new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p><p>%s</p></rt>")
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."))
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead."))
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("You are required to have read the add-ons documentation under the link given further above before submitting content. Since the documentation is subject to frequent changes, ensure that you have read it recently and that you followed all guidelines stated there."))
+	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("The Widelands Development Team will review your add-on soon after uploading. In case they have further inquiries, they will contact you via a PM on the Widelands website; therefore please check the inbox of your online user profile page frequently."))
+	      ).str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
+
+	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add(&upload_addon_accept_);
+	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add(&upload_addon_);
+	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add(&upload_screenshot_);
+
+	upload_addon_accept_.changed.connect([this]() { update_login_button(nullptr); });
+	upload_addon_.selected.connect([this]() {
+		upload_addon(*upload_addon_.get_selected());
+	});
+	upload_screenshot_.selected.connect([this]() {
+		upload_screenshot_.set_list_visibility(false);
+		const AddOns::AddOnInfo& info = *upload_screenshot_.get_selected();
+		ScreenshotUploadWindow s(*this, info, find_remote(info.internal_name));
+		s.run<UI::Panel::Returncodes>();
+	});
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
@@ -953,7 +963,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		set_login(get_config_string("nickname", ""), get_config_string("password_sha1", ""), false);
 	}
 	login_button_.sigclicked.connect([this]() { login_button_clicked(); });
-	update_login_button(login_button_);
+	update_login_button(&login_button_);
 
 	do_not_layout_on_resolution_change();
 	center_to_parent();
@@ -983,25 +993,34 @@ void AddOnsCtrl::login_button_clicked() {
 	} else {
 		set_login("", "", false);
 	}
-	update_login_button(login_button_);
+	update_login_button(&login_button_);
 }
-void AddOnsCtrl::update_login_button(UI::Button& b) {
+
+void AddOnsCtrl::update_login_button(UI::Button* b) {
 	if (username_.empty()) {
-		b.set_title(_("Not logged in"));
-		b.set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload your own add-ons."));
+		upload_addon_accept_.set_enabled(false);
+		upload_addon_accept_.set_state(false);
+		if (b) {
+			b->set_title(_("Not logged in"));
+			b->set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload your own add-ons."));
+		}
 		upload_addon_.set_enabled(false);
 		upload_addon_.set_tooltip(_("Please log in to upload add-ons"));
-		upload_screenshot_.set_enabled(false);
+		upload_screenshot_.set_enabled(upload_addon_accept_.get_state());
 		upload_screenshot_.set_tooltip(_("Please log in to upload content"));
 		contact_.set_enabled(false);
 		contact_.set_tooltip(_("Please log in to send an enquiry"));
 	} else {
-		b.set_title((boost::format(net().is_admin() ? _("Logged in as %s (admin)") : _("Logged in as %s")) % username_).str());
-		b.set_tooltip(_("Click to log out"));
-		upload_addon_.set_enabled(true);
-		upload_addon_.set_tooltip("");
-		upload_screenshot_.set_enabled(true);
-		upload_screenshot_.set_tooltip("");
+		upload_addon_accept_.set_enabled(true);
+		if (b) {
+			b->set_title((boost::format(net().is_admin() ? _("Logged in as %s (admin)") : _("Logged in as %s")) % username_).str());
+			b->set_tooltip(_("Click to log out"));
+		}
+		const bool enable = upload_addon_accept_.get_state();
+		upload_addon_.set_enabled(enable);
+		upload_addon_.set_tooltip(enable ? "" : _("Please tick the confirmation checkbox to upload add-ons"));
+		upload_screenshot_.set_enabled(enable);
+		upload_screenshot_.set_tooltip(enable ? "" : _("Please tick the confirmation checkbox to upload content"));
 		contact_.set_enabled(true);
 		contact_.set_tooltip("");
 	}
@@ -2164,10 +2183,10 @@ public:
 
 		login_button_.sigclicked.connect([this]() {
 			parent_.login_button_clicked();
-			parent_.update_login_button(login_button_);
+			parent_.update_login_button(&login_button_);
 			login_changed();
 		});
-		parent_.update_login_button(login_button_);
+		parent_.update_login_button(&login_button_);
 		login_changed();
 
 		update_data();

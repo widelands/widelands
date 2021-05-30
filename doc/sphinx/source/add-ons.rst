@@ -177,6 +177,10 @@ Uploading
 
 The recommended way to upload an add-on is to use the in-game add-ons manager. Log in with your Widelands website user profile and online gaming password (i.e., the same credentials as for the metaserver), and use the Upload section in the add-ons manager’s third tab. If you previously submitted an add-on with the same name and lower version number, the new upload will be made available as an upgrade. You can upload screenshots for your add-ons in the same way.
 
+When providing an upgrade, always ensure that your modifications are based on the version that was downloaded from the server rather than your original sources, as the maintainers may make minor maintenance modifications to the versions stored there.
+
+Please note that up- or downloading few large files is several orders of magnitude faster than up- or downloading many small files. If your add-on contains new graphics for units, it is therefore recommended to use spritesheets instead of sprite files.
+
 By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the Widelands main menu. It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead. The Widelands Development Team will review your add-on soon after uploading. In case they have further inquiries, they will contact you via a PM on the Widelands website; therefore please check the inbox of your online user profile page frequently.
 
 You can only upload upgrades and screenshots for your own add-ons (unless you are a server administrator).
