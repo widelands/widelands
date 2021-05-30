@@ -624,8 +624,7 @@ void Descriptions::add_immovable_relation(const std::string& a, const std::strin
 }
 void Descriptions::postload_immovable_relations() {
 	for (const auto& pair : immovable_relations_) {
-		get_mutable_immovable_descr(load_immovable(pair.second))
-		   ->add_became_from(pair.first);
+		get_mutable_immovable_descr(load_immovable(pair.second))->add_became_from(pair.first);
 	}
 	immovable_relations_.clear();
 }
