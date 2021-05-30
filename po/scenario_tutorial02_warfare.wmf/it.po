@@ -11,13 +11,14 @@
 # Luigi Lain <lainluigi86@tiscali.it>, 2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
+# Stron Zios <danielekeb@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-17 17:24+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-28 21:52+0000\n"
+"Last-Translator: Stron Zios <danielekeb@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +60,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Nuovi soldati vengono creati in maniera differente rispetto ai lavoratori normali: le reclute cammineranno da un magazzino (o dal quartier generale) verso la caserma, dove riceveranno un addestramento di base diventando così soldati. I soldati di base dei Barbari non indossano armatura, necessitano soltanto di un'ascia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -76,7 +77,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Quando un soldato barbaro è allenato al massimo, ha salute livello %1%, attacco livello %2%, difesa livello %3% e schivata livello %4%. Un guerriero spaventoso, dunque! Le abilità individuali hanno il significato seguente:"
+msgstr "Quando un soldato barbaro è addestrato al massimo, ha salute livello %1%, attacco livello %2%, difesa livello %3% e schivata livello %4%. Un guerriero spaventoso, dunque! Le abilità individuali hanno il significato seguente:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
@@ -166,7 +167,7 @@ msgstr "Mentre aspettiamo che l'arena venga completata, avrai probabilmente nota
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid "Battle Arena"
-msgstr ""
+msgstr "Arena di battaglia"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
@@ -180,7 +181,7 @@ msgstr "Costruisci un'arena di battaglia. È un edificio grande."
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Dato che la costruzione richiede del tempo, puoi modificare la velocità di gioco usando %1$s and %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
@@ -248,7 +249,7 @@ msgstr "Costruisci un campo di addestramento."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Training Camp"
-msgstr ""
+msgstr "Campo di addestramento"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
@@ -288,117 +289,117 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Dovresti tenere in considerazione che ognuna delle tribù di Widelands ha la proprie modalità di addestramento, pertanto  gli edifici e le merci richiesti sono diversi. Inoltre, anche i livelli delle abilità non possono essere comparati: un Soldato Imperiale possiede un attacco base di %1%al livello 0, mentre un soldato Barbarico ha soltanto un attacco base di %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Capanna dell'esploratore"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Esplora i dintorni"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Una buona parte della mappa non è stata ancora esplorata. Sapere quale sia la direzione migliore per espandere il nostro impero potrebbe essere una buona idea."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Puoi sfidare la sorte e espanderti in maniera casuale, ma è rischioso. È più sicuro usare un esploratore per perlustrare le parti nascoste della mappa. Pensa se trovasse delle montagne straripanti d'oro?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Ci serve una Capanna dell'esploratore per iniziare l'esplorazione. È un piccolo edificio."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Costruisci una Capanna dell'esploratore."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Costruisci una Capanna dell'esploratore"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "È bello conoscere i propri dintorni. Un esploratore perlustrerà le parti nascoste della mappa per te."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Costruisci una Capanna dell'esploratore."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid "Scout is ready"
-msgstr ""
+msgstr "L'Esploratore è pronto"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid "Ready to go!"
-msgstr ""
+msgstr "Pronti a partire!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Ottimo lavoro! La tua capanna dell'esploratore è stata costruita. Mentre il nostro esploratore inizia a muoversi, vediamo di saperne qualcosa di più su di lui."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Innanzitutto, egli necessiterà di cibo da portare con sé durante le proprie uscite. Fortunatamente abbiamo alcune razioni nel nostro magazzino."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Quando equipaggiato con del cibo, egli inizierà a camminare casualmente per l'area circostante. È opportuno che tu segua i suoi movimenti prima che la nebbia di guerra nasconda ciò che ha visto."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid "Scout"
-msgstr ""
+msgstr "Esploratore"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Explore the map"
-msgstr ""
+msgstr "Esplora la mappa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Attendi che l'esploratore perlustri le aree nascoste."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr ""
+msgstr "Osserva il tuo esploratore."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
-msgstr ""
+msgstr "L'esploratore ha fatto progressi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
-msgstr ""
+msgstr "Nuovi orizzonti?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Come puoi vedere, gli esploratori possono spostarsi piuttosto lontano. La buona notizia è che non ci sono nemici nei dintorni."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Puoi usare la Minimappa per controllare il progresso dell'esplorazione."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Non dimenticare che l'esplorazione è un'attività laboriosa e pertanto non può essere svolta senza una provvista di cibo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
@@ -524,11 +525,11 @@ msgstr "Smantellalo."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Puoi anche usare questa opportunità per diventare familiare con la altre opzioni: la preferenza reclute/veterani e la capacità."
+msgstr "Puoi anche usare questa opportunità per prendere familiarità con le altre opzioni: la preferenza reclute/veterani e la capacità."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Soldati, riposo!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"

@@ -4,15 +4,15 @@
 # 
 # Translators:
 # TaeMin An, 2019
-# ks k, 2020
+# ks k, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: ks k, 2020\n"
+"Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +162,7 @@ msgstr "20 × 철"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 × 금광석"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
@@ -986,4 +986,4 @@ msgstr "당신의 일꾼들과 군인들이 여기서 거주할 것입니다. �
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "제국의 창고"
