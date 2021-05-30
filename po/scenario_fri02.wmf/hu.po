@@ -81,8 +81,8 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
-"Amikor a katonák gyakorlatoznak, az  elhasznált fegyvereket kidobják. Ezeket"
-" fémmé lehet alakítani az újrahasznosító telepen. Használd a készleten lévő "
+"Amikor a katonák gyakorlatoznak, az elhasznált fegyvereket kidobják. Ezeket "
+"fémmé lehet alakítani az újrahasznosító telepen. Használd a készleten lévő "
 "fegyvereket katonák fejlesztésére, és hasznosítsd újra a keletkező "
 "ócskavasat!"
 
@@ -573,9 +573,9 @@ msgid ""
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
 "Reebaud főnök! További rossz híreket hozok. Alig van a környező vizekben "
-"hal. Bár  harapnivalókat készíthetünk gyümölcsből és kenyérből, de a katonák"
-" kiképzése sok füstölt húst vagy halat igényel. A rénszarvastelepen a szőrme"
-" mellett csak mellékesen készül egy kevés hús, ami nem elég."
+"hal. Bár harapnivalókat készíthetünk gyümölcsből és kenyérből, de a katonák "
+"kiképzése sok füstölt húst vagy halat igényel. A rénszarvastelepen a szőrme "
+"mellett csak mellékesen készül egy kevés hús, ami nem elég."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:229
