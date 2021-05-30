@@ -276,6 +276,7 @@ function(wl_run_codecheck NAME SRC)
         -DSRC=${ABSOLUTE_SRC}
         -DOUTPUT_FILE=${OUTPUT_FILE}
         -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}
+        -DWL_ROOT_DIR=${WL_ROOT_DIR}
         -P ${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.cmake
       DEPENDS ${ABSOLUTE_SRC}
       COMMENT "Checking ${SRC} with CodeCheck"
