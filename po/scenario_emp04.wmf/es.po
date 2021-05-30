@@ -1284,11 +1284,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:608
 msgid "Amalea in a Hurry"
-msgstr ""
+msgstr "Amalea Tiene Prisa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea is very busy…"
-msgstr ""
+msgstr "Amalea está muy ocupada..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:611
@@ -1297,6 +1297,9 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
+"Hermano, como puedes ver, muchas cosas parecen de estar mal en esta "
+"economía. Estaré muy ocupada de examinar todo, por eso no seré aqui para "
+"aconsejar tan detallado como habia hecho."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:614

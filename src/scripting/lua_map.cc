@@ -5387,6 +5387,7 @@ const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
    PROP_RO(LuaBuilding, flag),
+   PROP_RW(LuaBuilding, destruction_blocked),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5405,6 +5406,20 @@ const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
 // UNTESTED
 int LuaBuilding::get_flag(lua_State* L) {
 	return upcasted_map_object_to_lua(L, &get(L, get_egbase(L))->base_flag());
+}
+
+/* RST
+   .. attribute:: destruction_blocked
+
+      (RW) Whether the player is forbidden to dismantle or destroy this building.
+*/
+int LuaBuilding::get_destruction_blocked(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L))->is_destruction_blocked());
+	return 1;
+}
+int LuaBuilding::set_destruction_blocked(lua_State* L) {
+	get(L, get_egbase(L))->set_destruction_blocked(luaL_checkboolean(L, -1));
+	return 0;
 }
 
 /*

@@ -3,16 +3,16 @@
 # 
 # Translators:
 # ks k, 2017
-# ks k, 2017-2018,2020
+# ks k, 2017-2018,2020-2021
 # TaeMin An, 2017
 # TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-28 18:32+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -268,14 +268,14 @@ msgstr "리바우드와 그의 부족은 북쪽에 도착했다. 하지만 얼�
 
 #: ../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "도움이 필요한 친구"
 
 #: ../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "리바우드와 그의 부족은 북쪽에서 행복하게 살고 있습니다. 한편, 그들이 남긴 나라들은 모두 평화롭고 오랜 친구가 그들의 도움을 절실히 필요로 하고 있습니다…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
