@@ -149,6 +149,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
+     descriptions_(descriptions),
      size_(BaseImmovable::NONE) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());

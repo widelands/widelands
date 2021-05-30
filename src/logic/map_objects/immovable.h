@@ -170,6 +170,8 @@ public:
 		became_from_.insert(s);
 	}
 
+	Descriptions& descriptions_;
+
 protected:
 	int32_t size_;
 	Programs programs_;

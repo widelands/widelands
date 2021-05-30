@@ -619,6 +619,17 @@ void Descriptions::set_old_world_name(const std::string& name) {
 	}
 }
 
+void Descriptions::add_immovable_relation(const std::string& a, const std::string& b) {
+	immovable_relations_.push_back(std::make_pair(a, b));
+}
+void Descriptions::postload_immovable_relations() {
+	for (const auto& pair : immovable_relations_) {
+		get_mutable_immovable_descr(load_immovable(pair.second))
+		   ->add_became_from(pair.first);
+	}
+	immovable_relations_.clear();
+}
+
 #define CHECK_FACTORY(addon, unit_type)                                                            \
 	if (unit_type##_index(note.description_name) != INVALID_INDEX) {                                \
 		throw GameDataError(#addon " add-ons must not define " #unit_type "s (offending unit: %s)",  \
