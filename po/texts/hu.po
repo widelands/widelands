@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-12 08:19+0000\n"
+"PO-Revision-Date: 2021-05-26 18:46+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -453,7 +453,7 @@ msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvev�
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Megfigyelő mód, vagyis mindent láthatsz, de egy játékost sem sem tudsz irányítani. "
+msgstr "Megfigyelő mód, vagyis mindent láthatsz, de egy játékost sem tudsz irányítani."
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
