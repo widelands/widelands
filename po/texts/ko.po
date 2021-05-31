@@ -6,7 +6,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2015,2018
 # ks k, 2017
-# ks k, 2017-2020
+# ks k, 2017-2021
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An, 2017,2019
 # TaeMin An, 2019
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 10:18+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-05-31 09:13+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -326,7 +326,7 @@ msgstr "제타OS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "그리고, (당신이 한) 모든 것에 대해 더 많은 감사를 드립니다"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -424,7 +424,7 @@ msgstr "작은 지도 켜기/끄기"
 #: ../../data/txts/help/common_helptexts.lua:84
 #: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -515,7 +515,7 @@ msgstr "오른쪽에서 선택한 지도 또는 저장 게임에 대한 정보�
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "아마존은 나무를 좋아합니다. 정글 보호자의 오두막을 충분히 지어서 충분히 만들어두십시오."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
@@ -609,7 +609,7 @@ msgstr "알트키를 누르면 두 번째 대체 도구가 켜집니다 (있는 
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "%1% 키를 사용하여 마우스 커서 주변의 선택된 영역의 크기를 직접 설정할 수 있습니다."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""

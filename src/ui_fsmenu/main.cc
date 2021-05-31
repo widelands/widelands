@@ -922,8 +922,27 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 	case MenuTarget::kEditorContinue: {
 		if (!filename_for_continue_editing_.empty()) {
-			EditorInteractive::run_editor(
-			   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			try {
+				EditorInteractive::run_editor(
+				   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			} catch (const std::exception& e) {
+				log_err("##############################\n"
+				        "  FATAL EXCEPTION: %s\n"
+				        "##############################\n",
+				        e.what());
+				// Note: We don't necessarily want a bug report here, but the wording must
+				// be EXACTLY LIKE THIS in v1.0 to avoid adding a new translatable string
+				// during winter time freeze. We can consider rephrasing it after v1.0.
+				show_messagebox(
+				   _("Error"),
+				   (boost::format(
+				       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+				         "this problem to help us improve Widelands. You will find related "
+				         "messages in the standard output (stdout.txt on Windows). You are using "
+				         "build %2$s (%3$s).\nPlease add this information to your report.")) %
+				    e.what() % build_id() % build_type())
+				      .str());
+			}
 			set_labels();
 		}
 		break;
