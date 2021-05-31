@@ -1,0 +1,3 @@
+file build/src/widelands
+run --verbose=true --datadir=./data --datadir_for_testing=. --homedir=. --nosound --fail-on-lua-error --language=en_US --scenario=test/maps/all_tribes.wmf --script=test/maps/all_tribes.wmf/scripting/test_atlanteans.lua
+bt
