@@ -67,6 +67,7 @@ descriptions:new_productionsite_type {
          actions = {
             "call=mine_granite",
             "call=mine_marble",
+            "return=skipped"
          }
       },
       mine_granite = {
