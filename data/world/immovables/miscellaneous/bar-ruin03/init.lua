@@ -9,7 +9,8 @@ wl.Descriptions():new_immovable_type{
    programs = {},
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
+         directory = dirname,
+         basename = "idle",
          hotspot = { 44, 34 },
       },
    }
