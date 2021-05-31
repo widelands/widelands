@@ -44,8 +44,9 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
 }
 
 void MainMenuLoadMap::clicked_ok() {
-	assert(ok_.enabled());
-	assert(table_.has_selection());
+	if (!ok_.enabled() || !table_.has_selection()) {
+		return;
+	}
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (g_fs->is_directory(mapdata.filename) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
@@ -87,12 +88,12 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
  */
 void MainMenuLoadMap::entry_selected() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection);
 	if (!has_selection) {
+		ok_.set_enabled(false);
 		map_details_.clear();
 	} else {
-		map_details_.update(maps_data_[table_.get_selected()],
-		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized,
-		                    true);
+		ok_.set_enabled(map_details_.update(
+		   maps_data_[table_.get_selected()],
+		   display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized, true));
 	}
 }

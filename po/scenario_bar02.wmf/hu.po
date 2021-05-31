@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-12 08:17+0000\n"
+"PO-Revision-Date: 2021-05-30 14:05+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 msgid "Build up a basic economy"
-msgstr "Építs ki egy alap gazdaságot!"
+msgstr "Alap gazdaság kiépítése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
@@ -60,7 +60,7 @@ msgstr "Előbb-utóbb építened kell egy nádudvart és egy mészégető kemenc
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr "Építs ki egy kis élelemtermelő gazdaságot!"
+msgstr "Élelemtermelő gazdaság kiépítése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
@@ -88,7 +88,7 @@ msgstr "Építs egy pékséget!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr "Építs egy marhatelepet!"
+msgstr "Marhatelep építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:49
@@ -104,7 +104,7 @@ msgstr "Ahogy az utaid egyre hosszabbak és a gazdaságod egyre nagyobbak leszne
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 msgid "Build a tower"
-msgstr "Építs egy tornyot!"
+msgstr "Torony építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
@@ -115,7 +115,7 @@ msgstr "Építs egy tornyot a területed az északkeleti határán, hogy messzeb
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr "Terjeszkedj tovább!"
+msgstr "Továbbterjeszkedés"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
@@ -126,7 +126,7 @@ msgstr "Építs további katonai épületeket, hogy felfedezd a főhadiszállás
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a mining infrastructure"
-msgstr "Építsd ki a bányagazdaságot!"
+msgstr "Bányagazdaság kiépítése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
@@ -138,7 +138,7 @@ msgstr "Terjeszd ki a területed a hegyekbe, küldj geológusokat, hogy ércet �
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr "Építs egy erődöt!"
+msgstr "Erőd építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
@@ -147,7 +147,7 @@ msgstr "Építs egy erődöt a hegyektől keletre!"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 msgid "Build a training infrastructure"
-msgstr "Építs kiképzőhelyeket!"
+msgstr "Kiképzőhelyek építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
@@ -177,7 +177,7 @@ msgstr "Építs egy sisakkészítőt a hegyektől nyugatra, hogy jobb páncélla
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr "Építs egy raktárat!"
+msgstr "Raktár építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
@@ -194,7 +194,7 @@ msgstr "A raktár hasonló a főhadiszálláshoz, azzal a különbséggel, hogy 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 msgid "Build training sites"
-msgstr "Építs kiképzőhelyeket!"
+msgstr "Kiképzőhelyek építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:111
 msgid ""
@@ -217,17 +217,17 @@ msgstr "A képességek: életerő, támadás, védelem és kitérés."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr "Létesíts fegyverkészítő műhelyeket!"
+msgstr "Fegyverkészítő műhelyek építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr "Építs egy sisakkészítőt!"
+msgstr "Sisakkészítő építése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr "Semmisítsd meg Kalitath seregét!"
+msgstr "Kalitath seregének megsemmisítése"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
@@ -449,7 +449,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kellene kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy földbirtokot és egy pékséget is! Az egyik földműves nagyon ügyesnek tűnik - sikerült már gabonát termesztenie ebben a hideg talajban is."
+msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kellene kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy földbirtokot és egy pékséget is! Az egyik földműves nagyon ügyesnek tűnik – sikerült gabonát termesztenie ebben a hideg talajban is."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
@@ -498,7 +498,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr "Hogy főhadiszállásunk körül még több területet szemmel tarthassunk, tovább kell terjeszkednünk, még több őrt és  felderítőt kell küldenünk, hogy figyeljék a határt és rajta tartsák a szemüket a küszöbünkön tomboló háborún. Majd AKKOR készen állunk az erdőinkbe betörő vész fogadására."
+msgstr "Hogy főhadiszállásunk körül még több területet szemmel tarthassunk, tovább kell terjeszkednünk, még több őrt és felderítőt kell küldenünk, hogy figyeljék a határt és rajta tartsák a szemüket a küszöbünkön tomboló háborún. Majd AKKOR készen állunk az erdőinkbe betörő vész fogadására."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"

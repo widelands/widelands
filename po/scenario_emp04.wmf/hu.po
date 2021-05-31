@@ -25,7 +25,7 @@ msgstr "Bontsd le a nem dolgozó épületeket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle Buildings"
-msgstr "Bonts le néhány épületet!"
+msgstr "Épületek lebontása"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:46
 msgid ""
@@ -50,7 +50,7 @@ msgstr "Szüntesd meg a fölösleges utakat!"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:60
 msgid "Clear Road Network"
-msgstr "Tedd átláthatóvá az úthálózatot!"
+msgstr "Úthálózat rendbetétele"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:56
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:61
@@ -72,7 +72,7 @@ msgstr "Kattints az egyik földbirtokra!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:69
 msgid "Open the Building Window of a Farm"
-msgstr "Nyisd meg egy földbirtok ablakát!"
+msgstr "Földbirtok ellenőrzése"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:70
 msgid ""
@@ -88,7 +88,7 @@ msgstr "Keresd meg a földbirtokok tervrajzait!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:78
 msgid "Find Farm Construction Plans"
-msgstr "Keresd meg a földbirtokok tervrajzait!"
+msgstr "A földbirtokok tervrajzai"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:79
 msgid ""
@@ -133,7 +133,7 @@ msgstr "Cseréld le a régi, rosszul működő erdészházakat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:105
 msgid "Build Two New Forester’s Houses"
-msgstr "Építs két új erdészházat!"
+msgstr "Új erdészházak"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:106
 msgid ""
@@ -146,7 +146,7 @@ msgstr "Keresd meg északon a szerzetesrendet!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:114
 msgid "Find the Monastery"
-msgstr "Keresd meg a szerzetesrendet!"
+msgstr "A szerzetesrend"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:115
 msgid ""
@@ -251,7 +251,7 @@ msgstr "Győzd le a barbárokat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Defeat the Enemy"
-msgstr "Győzd le az ellenséget!"
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:164
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -263,7 +263,7 @@ msgstr "Építs 2 faszénégető kemencét!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
-msgstr "Építs két faszénégető kemencét!"
+msgstr "Faszénégető kemencék"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:173
 msgid "Build two charcoal kilns to support the iron industry."

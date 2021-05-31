@@ -59,6 +59,7 @@ descriptions:new_productionsite_type {
             "sleep=duration:20s",
             "call=mine_produce",
             "call=mine_produce",
+            "return=skipped"
          }
       },
       mine_produce = {
