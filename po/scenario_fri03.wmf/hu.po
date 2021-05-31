@@ -313,7 +313,7 @@ msgstr ""
 "A katonáim jelentik, hogy kikötőhelyet találtak! Kikötőt kell építenünk és "
 "expedíciót indítanunk. Ehhez persze fel kell építenünk a teljes hajóépítő "
 "gazdaságot hajóács műhellyel és szövőmalommal. De nem vesztegethetünk sok "
-"időt a gazdaság tökéletesítésére — csak az számít, hogy minél gyorsabban "
+"időt a gazdaság tökéletesítésére – csak az számít, hogy minél gyorsabban "
 "továbbindulhassunk észak felé."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
@@ -442,7 +442,7 @@ msgid ""
 "located directly under my palace."
 msgstr ""
 "Sajnálom, de ki kell ábrándítsalak, Sir Lembeck, soha nem hallottam a nevét,"
-" tehát hírt sem adhatok róla. A tervedről, hogy északra utazz — Attól tartok"
+" tehát hírt sem adhatok róla. A tervedről, hogy északra utazz – Attól tartok"
 " csak egy helyen lehet kikötőt építeni ezen a szigeten azon kívül, ahol ti "
 "kikötöttetek, és az pontosan az én palotám alatt található."
 

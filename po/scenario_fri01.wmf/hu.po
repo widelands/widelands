@@ -654,7 +654,7 @@ msgid ""
 msgstr ""
 "Építs vasércbányát és esetleg aranybányát is! Mivel ezek csak az ércet "
 "termelik ki, szükségünk lesz kemencére is a kiolvasztásukhoz. Építs "
-"kovácsműhelyt is, hogy ne fogyjunk ki a szerszámokból — és igen, egy kis "
+"kovácsműhelyt is, hogy ne fogyjunk ki a szerszámokból – és igen, egy kis "
 "páncélkovács műhelyt is! Ez sisakokat és kardokat készít. Remélem, nem "
 "találkozunk itt ellenséggel, de jobb felkészülni."
 
@@ -1048,7 +1048,7 @@ msgid ""
 " – we will all drown!"
 msgstr ""
 "Az istene teljesítette a kérését! A tengerszint emelkedik! A sziget majdnem "
-"teljesen sík — mindannyian megfulladunk!"
+"teljesen sík – mindannyian megfulladunk!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401

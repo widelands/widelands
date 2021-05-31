@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-26 11:53+0000\n"
+"POT-Creation-Date: 2021-05-29 10:07+0000\n"
 "PO-Revision-Date: 2021-05-02 12:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
@@ -1336,8 +1336,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -2248,19 +2248,19 @@ msgstr ""
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2066
+#: ../../src/logic/map_objects/tribes/worker.cc:2064
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2072
 msgid "Worker got lost!"
 msgstr ""
 
@@ -5773,9 +5773,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6178,8 +6178,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"

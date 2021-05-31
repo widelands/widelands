@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-28 18:32+0000\n"
+"PO-Revision-Date: 2021-05-31 02:13+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -354,7 +354,7 @@ msgstr "아름다운 땅에서 오랫동안 경제 놀이를 했습니다. 모�
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr "고리모양 산호섬"
+msgstr "고리 모양 산호섬"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
@@ -445,7 +445,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "알프스의 보석인 돌로미티 산맥은 그 원래의 아름다움을 위해 2009년 유네스코 세계 유산으로 지정되었습니다. 이 지도는 북동쪽의 코르티나 담페초(Cortina d'Ampezzo)와 남서쪽의 카나제이(Canazei)로 구분된 지역을 충실하게 재현한 것입니다. 적들과의 죽음의 결투를 해야한다면, 아름다운 곳일 수도 있습니다."
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -454,7 +454,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "그 산에는 평평한 땅이 풍부합니다. 불행히도, 그것의 대부분은 수직입니다 – 당신이 가지고 있는 작은 건물 공간을 현명하게 사용하십시오. 좁은 산길 어귀에 있는 요새는 적군에게 만만치 않은 장애물이 될 수 있습니다 – 지형을 유리하게 활용하십시오. 모든 나무를 자르고 당신이 할 수 있는 모든 곳을 확장하십시오 – 그것이 모든 귀중한 농장 공간을 찾을 수 있는 유일한 방법입니다."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -480,7 +480,7 @@ msgstr "v0.2"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "유로파 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
@@ -672,7 +672,7 @@ msgstr "삭막한 지역에서 지배를 위해 싸우고 있는 4개의 부족.
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "작은 반지 "
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -681,7 +681,7 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "자연적인 지리적 특징이 땅을 나누는 공정한 8 인용 지도입니다. 지리적 특징은 산의 빙하로부터 언덕과 평지를 거쳐 바다로 흐르는 강과 함께 어느 정도 현실적이도록 되어 있습니다. 금은 석탄이나 철에 비해 훨씬 희귀한 자원입니다. 서로 다른 자원이 서로 어느 정도 떨어진 곳에서 발견되는 경우가 많습니다."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -749,7 +749,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "이 지도는 인공지능과의 1 대 6이 너무 쉽다고 생각하는 매우 숙련된 선수들을 위한 혼자 도전용으로 만들어졌습니다. 파랑색 선수는 금속이 없으므로 (경제를 시작하기 위해 약간의 철분 제외하고는) 당신은 빈 광산의 5% 생산량에 의존해야합니다. 그리고 여전히 1 대 6입니다 (물론 인공지능 선수를 제거하여 조금 더 쉽게 만들 수는 있지만). 행운을 빕니다!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -793,7 +793,7 @@ msgstr "다양한 풍경들로 가득한 신비한 땅들, 한줌의 큰 강이 
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "모래 길"
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
