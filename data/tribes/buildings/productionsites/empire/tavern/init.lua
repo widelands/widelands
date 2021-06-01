@@ -39,7 +39,7 @@ descriptions:new_productionsite_type {
          hotspot = { 52, 58 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 52, 58 },
       },
    },
