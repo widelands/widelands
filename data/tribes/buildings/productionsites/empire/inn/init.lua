@@ -9,9 +9,9 @@ descriptions:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 52, 75 },
       },
       working = {

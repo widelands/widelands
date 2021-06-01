@@ -19,9 +19,9 @@ descriptions:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 73, 60 },
       },
       working = {

@@ -10,9 +10,9 @@ descriptions:new_warehouse_type {
    size = "big",
    destructible = false,
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 93, 40 },
       },
    },

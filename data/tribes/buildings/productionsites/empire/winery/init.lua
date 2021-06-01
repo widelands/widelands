@@ -21,9 +21,9 @@ descriptions:new_productionsite_type {
       marble_column = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 62 },
       },
       working = {
