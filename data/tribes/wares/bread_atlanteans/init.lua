@@ -8,10 +8,9 @@ descriptions:new_ware_type {
    descname = pgettext("atlanteans_ware", "Bread"),
    icon = dirname .. "menu.png",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = { 9, 13 },
       },
    }
