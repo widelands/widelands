@@ -22,13 +22,13 @@ descriptions:new_productionsite_type {
       spidercloth = 1,
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 44, 65 },
       },
       working = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
+         basename = "idle",
          hotspot = { 44, 65 },
       }
    },
