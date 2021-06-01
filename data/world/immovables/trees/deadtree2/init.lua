@@ -12,10 +12,9 @@ wl.Descriptions():new_immovable_type{
          "remove=chance:4.69%"
       }
    },
+   animation_directory = dirname,
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = { 27, 56 },
       },
    }

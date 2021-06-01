@@ -8,10 +8,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Track",
    size = "none",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = { 30, 15 },
       },
    }

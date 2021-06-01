@@ -7,10 +7,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Cactus",
    size = "none",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = { 10, 71 },
       },
    }

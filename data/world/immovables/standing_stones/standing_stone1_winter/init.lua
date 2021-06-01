@@ -7,10 +7,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Standing Stone",
    size = "big",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = { 20, 52 },
       },
    }
