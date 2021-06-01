@@ -165,8 +165,8 @@ jobs:
       run: |
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
+        gdb --batch -x _test || true  # NOCOM
         ./regression_test.py -b build/src/widelands
-        gdb --batch -x _test  # NOCOM
 
 
   windows:
