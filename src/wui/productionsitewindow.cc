@@ -105,11 +105,11 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 		const std::string workers_heading =
 		   (production_site->descr().nr_working_positions() == 1) ?
-            /** TRANSLATORS: Header in production site window if there is 1 worker */
-            _("Worker") :
-            /** TRANSLATORS: Header in production site window if there is more than 1 worker. If you
-               need plural forms here, please let us know. */
-               _("Workers");
+		      /** TRANSLATORS: Header in production site window if there is 1 worker */
+		      _("Worker") :
+		      /** TRANSLATORS: Header in production site window if there is more than 1 worker. If you
+		         need plural forms here, please let us know. */
+		      _("Workers");
 
 		worker_table_->add_column(210, workers_heading);
 		worker_table_->add_column(60, _("Exp"));
@@ -345,7 +345,7 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 
 	const Widelands::DescriptionIndex current =
 	   worker ? ibase()->egbase().descriptions().safe_worker_index(worker->descr().name()) :
-               Widelands::INVALID_INDEX;
+	            Widelands::INVALID_INDEX;
 	if (current == selected) {
 		return;
 	}

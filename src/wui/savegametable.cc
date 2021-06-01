@@ -209,7 +209,7 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 void SavegameTableReplay::set_show_filenames(bool show_filenames) {
 	show_filenames_ = show_filenames;
 	set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
-                                          _("Map name (start of replay)"));
+	                                       _("Map name (start of replay)"));
 }
 
 SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
