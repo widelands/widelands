@@ -62,6 +62,7 @@ descriptions:new_productionsite_type {
             "call=produce_hg",
             "call=produce_s3",
             "call=produce_s4",
+            "return=skipped"
          },
       },
       produce_s3 = {

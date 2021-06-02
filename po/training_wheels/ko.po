@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# ks k, 2020
+# ks k, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: ks k, 2020\n"
+"Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,27 +25,27 @@ msgstr ""
 #: ../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "건물 공간"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
-msgstr ""
+msgstr "우리는 물품을 생산할 수 있도록 건물을 짓고 싶을 것입니다."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "그러면, 그들을 위한 공간이 어디에 있는지 알아 봅시다."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "‘표시 / 숨김’ 단추를 누르십시오."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "‘건물 공간 표시’ 를 선택하십시오."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "이제 우리는 건물과 깃발을 어디에 둘 수 있는지 알 수 있습니다."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -53,29 +53,29 @@ msgstr ""
 #: ../../data/scripting/training_wheels/flags.lua:83
 #: ../../data/scripting/training_wheels/init.lua:168
 msgid "Flags"
-msgstr ""
+msgstr "깃발"
 
 #: ../../data/scripting/training_wheels/flags.lua:63
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
-msgstr ""
+msgstr "짐꾼들이 화물을 분담하면 물품을 더 빨리 나를 수 있습니다."
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "깃발 기호를 누르십시오."
 
 #: ../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "깃발 단추를 누르십시오."
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "이제 땅길에 더 많은 깃발을 세울 수 있는지 확인하십시오."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
 msgid "Welcome"
-msgstr ""
+msgstr "환영합니다"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:147
@@ -87,12 +87,12 @@ msgstr "목표"
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "수행 기록 & 땅길"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:163
 msgid "Rocks"
-msgstr ""
+msgstr "바위"
 
 #: ../../data/scripting/training_wheels/logs.lua:115
 #: ../../data/scripting/training_wheels/rocks.lua:115
@@ -119,7 +119,7 @@ msgstr "큰 건물 공간을 클릭한 다음 큰 건물 탭에서 건물을 선
 msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
-msgstr ""
+msgstr "‘Ctrl’ 키를 누른 상태에서 두 번째 깃발을 클릭하면 가능한 경우 땅길에 더 많은 깃발이 배치됩니다."
 
 #: ../../data/scripting/training_wheels/logs.lua:125
 #: ../../data/scripting/training_wheels/logs.lua:175
@@ -130,7 +130,7 @@ msgstr "번역확인-> 통나무or실행기록"
 msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
-msgstr "부족에게 통나무를 공급해야 합니다. 다음 건물을 지어으십시오:"
+msgstr "부족에게 통나무를 공급해야 합니다. 다음 건물을 지으십시오:"
 
 #: ../../data/scripting/training_wheels/logs.lua:138
 #: ../../data/scripting/training_wheels/logs.lua:149
@@ -148,13 +148,13 @@ msgstr "건물 단추를 누르십시오..."
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "…그런 다음 대상 건물 앞에 있는 깃발을 누릅니다."
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
-msgstr ""
+msgstr "잘 했습니다! 곧 더 많은 건물을 짓는 데 필요한 통나무 생산을 시작할 것입니다."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
@@ -190,47 +190,47 @@ msgstr "다른 창과 마찬가지로 ‘목표’ 창을 마우스 오른쪽 �
 #: ../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
-msgstr ""
+msgstr "그렇게하는 동안, 마커를 확인하여 땅길을 최대한 평평하게 만드십시오:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "이 지형은 평평합니다. 짐꾼들은 이 지형에서 매우 신속할 것입니다."
 
 #: ../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr ""
+msgstr "이 들판에 도달하려면 작은 경사를 올라야 합니다. 일꾼들이 언덕 아래로 내려가는 것이 올라가는 것보다 빠를 겁니다."
 
 #: ../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr ""
+msgstr "이 들판 사이를 연결은 매우 가파릅니다. 한쪽 방향은 속도가 엄청 빠를거고 다른 쪽은 매우 느릴 겁니다."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "화강암"
 
 #: ../../data/scripting/training_wheels/rocks.lua:131
 msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
-msgstr ""
+msgstr "부족에게 화강암을 공급해야 합니다. 다음 건물을 지으십시오:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
-msgstr ""
+msgstr "…그런 다음 지도에서 컬러 마커를 클릭하여 대상 건물 앞에 있는 깃발에 도달할 때까지 땅길을 안내합니다."
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
-msgstr ""
+msgstr "잘 했습니다! 곧 더 많은 건물을 짓는 데 필요한 화강암 생산을 시작할 것입니다."
 
 #: ../../data/scripting/training_wheels/welcome.lua:20
 #: ../../data/scripting/training_wheels/welcome.lua:24
