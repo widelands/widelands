@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-26 11:53+0000\n"
-"PO-Revision-Date: 2021-05-26 20:53+0000\n"
+"POT-Creation-Date: 2021-05-31 09:21+0000\n"
+"PO-Revision-Date: 2021-05-30 14:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -631,8 +631,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -776,32 +776,32 @@ msgid "Current: %s"
 msgstr "Jelenlegi: %s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "Hiba!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:76
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:185
 msgid "My Maps"
 msgstr "Az én térképeim"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/wui/mapdata.cc:182
 msgid "Multiplayer Scenarios"
 msgstr "Többjátékos küldetések"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:79
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
 msgstr "Letöltött térképek"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #, c-format
 msgid "Current directory: %s"
@@ -1551,7 +1551,7 @@ msgstr "ki"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/wlapplication.cc:1451
+#: ../../src/ui_fsmenu/main.cc:935 ../../src/wlapplication.cc:1451
 msgid "Error"
 msgstr "Hiba"
 
@@ -1748,7 +1748,7 @@ msgstr "Próbáld meg más néven elmenteni."
 #: ../../src/logic/generic_save_handler.cc:252
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr "Hiba az adatok a(z) „%s” fájlba írásakor."
+msgstr "Hiba az adatok „%s” fájlba írásakor."
 
 #: ../../src/logic/generic_save_handler.cc:259
 msgid "Saved file may be corrupt!"
@@ -1767,7 +1767,7 @@ msgstr "A(z) „%s” biztonságimentés-fájl egy darabig elérhető lesz."
 #: ../../src/logic/generic_save_handler.cc:280
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr "A(z) „%s” biztonsági mentésből lett helyreállítva."
+msgstr "A(z) „%s” fájl biztonsági mentésből lett helyreállítva."
 
 #: ../../src/logic/generic_save_handler.cc:288
 msgid "An unexpected error occurred:"
@@ -2256,19 +2256,19 @@ msgstr "Egy víziutat meg kellett semmisíteni, hogy legyen helye az új kiköt�
 msgid "A geologist found resources."
 msgstr "Geológus ásványkincseket talált."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2066
+#: ../../src/logic/map_objects/tribes/worker.cc:2064
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "A(z) %s nem talál hazautat és valószínűleg meghal."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr "Munkás"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2072
 msgid "Worker got lost!"
 msgstr "Eltűnt egy munkás!"
 
@@ -4347,7 +4347,7 @@ msgstr "A kiválasztott fájl nem található. Ha nem kerül automatikus átkül
 #: ../../src/ui_fsmenu/launch_mpg.cc:296
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
-msgstr "A(z) „%s” győzelmi feltétel parancsfájl nem tölthető be."
+msgstr "A(z) „%s” játékmód parancsfájl nem tölthető be."
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../src/ui_fsmenu/launch_mpg.cc:419
@@ -4635,6 +4635,17 @@ msgstr "A törzs nem található!"
 #: ../../src/ui_fsmenu/main.cc:893 ../../src/ui_fsmenu/netsetup_lan.cc:322
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Nem található törzs a data/tribes/initialization/[törzsnév]/init.lua parancsfájlban."
+
+#: ../../src/ui_fsmenu/main.cc:937 ../../src/wlapplication.cc:1453
+#, c-format
+msgid ""
+"An error has occured. The error message is:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please add this information to your report."
+msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
@@ -5065,7 +5076,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the World, Tribes, and Script categories are disabled "
 "in random matches."
-msgstr "A véletlenszerű térképgeneráló még fejlesztés alatt áll. A generált térképek általában — de nem mindig — jól használhatóak. A hajózás és az ereklyék nem működnek. A világ, a törzsek és a parancsfájl kategóriákba tartozó bővítmények nem engedélyezettek a véletlen játékokban."
+msgstr "A véletlenszerű térképgeneráló még fejlesztés alatt áll. A generált térképek általában – de nem mindig – jól használhatóak. A hajózás és az ereklyék nem működnek. A világ, a törzsek és a parancsfájl kategóriákba tartozó bővítmények nem engedélyezettek a véletlen játékokban."
 
 #: ../../src/ui_fsmenu/random_game.cc:117
 msgid "Map Generation Error"
@@ -5137,18 +5148,18 @@ msgstr "Érvénytelen fájlelérési út a campaigns.lua-ban vagy a tutorials.lu
 msgid "Tutorial"
 msgstr "Oktatójáték"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Szerző"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Szerzők"
@@ -5198,17 +5209,6 @@ msgstr "A Widelands nem találja a(z) „%s” fájlt."
 #: ../../src/wlapplication.cc:697
 msgid "File system error"
 msgstr "Fájlrendszer hiba"
-
-#: ../../src/wlapplication.cc:1453
-#, c-format
-msgid ""
-"An error has occured. The error message is:\n"
-"\n"
-"%1$s\n"
-"\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
-"Please add this information to your report."
-msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
 
 #: ../../src/wlapplication.cc:1467
 msgid "Game ended unexpectedly"
@@ -6186,8 +6186,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-26 20:53+0000\n"
+"PO-Revision-Date: 2021-05-31 10:20+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -608,7 +608,7 @@ msgstr "Győzd le az ellenségedet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:261
 msgid "Defeat the Enemy"
-msgstr "Győzd le az ellenséget!"
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
 msgid ""
@@ -645,7 +645,7 @@ msgstr "Győzd le az ellenségedet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:272
 msgid "Defeat the enemy tribe"
-msgstr "Győzd le az ellenséges törzset!"
+msgstr "Az ellenséges törzs legyőzése"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
 msgid "Defeat the nearby enemy."
