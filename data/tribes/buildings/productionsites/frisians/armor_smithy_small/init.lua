@@ -85,6 +85,7 @@ descriptions:new_productionsite_type {
             "call=produce_s2",
             "call=produce_h",
             "call=produce_s2",
+            "return=skipped"
          },
       },
       produce_s1 = {

@@ -103,7 +103,7 @@ msgstr "Építs egy halgazdaságot!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr "Építs egy halgazdaságot halak tenyésztéséhez!"
+msgstr "Halgazdaság építése halak tenyésztéséhez"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -196,16 +196,16 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr "Kémkedj Murilius után"
+msgstr "Kémkedj Murilius után!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr "Küldj felderítőt, hogy kémkedjen a Birodalom után!"
+msgstr "Felderítő küldése a Birodalom után kémkedni"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
-msgstr "Építs felderítőházat a határhoz, hogy felfedd a Birodalom titkait."
+msgstr "Építs felderítőházat a határhoz, hogy felfedd a Birodalom titkait!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
@@ -246,7 +246,7 @@ msgstr "Győzd le a barbárokat!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr "Győzd le a barbárokat!"
+msgstr "A barbárok legyőzése"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -272,7 +272,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr "Foglalj el minden egyes mezőt, ami meg Muriliusé."
+msgstr "Foglalj el minden egyes mezőt, ami meg Muriliusé!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"

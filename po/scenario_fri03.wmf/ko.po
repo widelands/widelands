@@ -102,6 +102,7 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
+"단 한 가지 확실한 것은: 이 육지 지대의 북쪽 해안에 있는 항구 공간을 찾아 탐험을 시작하고 계속 북쪽으로 항해를 해야한다는 것입니다."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:77
@@ -115,13 +116,13 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:100
 msgid "Eight Weeks Ago"
-msgstr ""
+msgstr "8주 전"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:83
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:101
 msgid "An unfair fight"
-msgstr ""
+msgstr "불공평한 싸움"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
