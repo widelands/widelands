@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-29 10:07+0000\n"
-"PO-Revision-Date: 2021-05-14 21:06+0000\n"
+"POT-Creation-Date: 2021-05-31 09:21+0000\n"
+"PO-Revision-Date: 2021-06-01 17:27+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1710,6 +1710,7 @@ msgstr "Kőfaragó műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
@@ -1744,6 +1745,8 @@ msgstr "Macsete készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1754,6 +1757,7 @@ msgstr "Konyhai eszközök készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
@@ -1768,9 +1772,9 @@ msgstr "Kalapács készítése"
 msgid "making a chisel"
 msgstr "Véső készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1924,8 +1928,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Vadonőrző kunyhó"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2651,7 +2655,7 @@ msgid "Barracks"
 msgstr "Laktanya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:54
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "Katona toborzása"
@@ -3063,7 +3067,7 @@ msgstr "Csatabalta kovácsolása"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:137
 msgid "forging a warrior’s ax"
-msgstr "Harci fejsze kovácsolása"
+msgstr "Csatabárd kovácsolása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:8
@@ -5456,6 +5460,7 @@ msgstr[0] "%1%(+%2%) katona"
 msgstr[1] "%1%(+%2%) katona"
 
 #. TRANSLATORS: This is the name of a starting condition
+#. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #. tooltip = _"Start the game with three ships on the ocean and only a handful
@@ -7118,7 +7123,7 @@ msgstr "Éles fejsze"
 #: ../../data/tribes/wares/ax_warriors/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Ax"
-msgstr "Harci fejsze"
+msgstr "Csatabárd"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/balsa/init.lua:8
