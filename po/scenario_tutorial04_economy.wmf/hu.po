@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-30 15:01+0000\n"
+"PO-Revision-Date: 2021-05-31 10:21+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -91,13 +91,13 @@ msgstr "Jaj, ne, ezt nézd meg: a fogadónk lángokban áll! A nagy sietségben 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
 msgid "Open the building statistics window"
-msgstr "Nyisd meg az épületstatisztika ablakot!"
+msgstr "Az épületstatisztika ablak megnyitása"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:50
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr "Nyisd meg az épületstatisztika ablakot, hogy áttekinthesd, milyen épületeid vannak."
+msgstr "Nyisd meg az épületstatisztika ablakot, hogy áttekinthesd, milyen épületeid vannak!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
@@ -156,7 +156,7 @@ msgstr "Minden épülettípus alatt két sor látható. Az első azt mutatja, ho
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
-msgstr "Zárd be az épületstatisztika ablakot ha végeztél."
+msgstr "Zárd be az épületstatisztika ablakot, ha végeztél!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
@@ -281,7 +281,7 @@ msgstr "Rendben van. A listában láthattad, hogy nincs több kocsmád, se fogad
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr "Vizsgáld meg a készletek ablak első két lapját!"
+msgstr "A készletek ablak első két lapja"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
@@ -378,7 +378,7 @@ msgstr "Ha nem, kérlek, nyisd meg újra, és válaszd ki a harmadik lapot!"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid "Build new taverns"
-msgstr "Építs új kocsmákat!"
+msgstr "Új kocsmák építése"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid "Build at least two taverns."
@@ -407,7 +407,7 @@ msgstr "Most, hogy áttekintettük a helyzetet, ideje cselekednünk! Véleménye
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid "Open the in-game help window"
-msgstr "Nyisd meg a Súgó ablakot!"
+msgstr "A Súgó ablak"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
@@ -466,7 +466,7 @@ msgstr "Használd az enciklopédiát, hogy megtudd, hogyan toborozhatsz új kato
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr "Válaszd az „Áruk” lapot az enciklopédia ablakban."
+msgstr "Válaszd az „Áruk” lapot az enciklopédia ablakban!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
@@ -482,7 +482,7 @@ msgstr "Ha érdekel, folytasd tovább a keresést, hogy mi kell az éppen kikere
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
-msgstr "Zárd be az enciklopédia ablakot ha végeztél."
+msgstr "Zárd be az enciklopédia ablakot, ha végeztél!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
@@ -751,7 +751,7 @@ msgstr "Ha nem, kérlek, nyisd meg újra, és válaszd ki a negyedik lapot!"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr "Nyisd meg a „Gazdaság beállításai” ablakot!"
+msgstr "A „Gazdaság beállításai” ablak"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."
@@ -794,7 +794,7 @@ msgstr "Ez az ablak hasonlít a készletek ablakra, de több gomb van az alján.
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr "Először válassz ki egy vagy több árut (a bal egérgombot nyomva tartva húzással is). Ezután be tudod állítani a kiválasztott áruk kívánt mennyiségét."
+msgstr "Először válassz ki egy vagy több árut (a bal egérgombot nyomva tartva húzással is)! Ezután be tudod állítani a kiválasztott áruk kívánt mennyiségét."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
@@ -822,7 +822,7 @@ msgstr "Ha két földbirtokot építesz, csak az egyik tud egyből munkához lá
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
 msgid "Produce 20 marble columns"
-msgstr "Készíts 20 márványoszlopot!"
+msgstr "Márványoszlopok készítése"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
 msgid ""
@@ -872,7 +872,7 @@ msgstr "Akkor most próbáljuk ki! A márványoszlop célmennyisége jelenleg 10
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid "Bring 20 marble columns to the front line"
-msgstr "Hozz 20 márványoszlopot a frontvonalhoz!"
+msgstr "Márványoszlopok átszállítása a frontvonalhoz"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
 msgid ""
@@ -884,7 +884,7 @@ msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr "Hogy ezt elérd, két dolgot kell tenned. Először állítsd be, hogy a márványoszlopokat lehetőleg a kívánt raktárban tárolják. Így a jövőben készülő márványoszlopokat oda fogják szállítani, ha lehetséges."
+msgstr "Ehhez két dolgot kell tenned. Először állítsd be, hogy a márványoszlopokat lehetőleg a kívánt raktárban tárolják! Így a jövőben készülő márványoszlopokat oda fogják szállítani, ha lehetséges."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid ""
