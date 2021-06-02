@@ -420,6 +420,8 @@ void InteractivePlayer::think() {
 	if (player().is_picking_custom_starting_position()) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
+
+		show_buildhelp(false);
 	}
 
 	if (flag_to_connect_) {
