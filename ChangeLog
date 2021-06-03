@@ -17,6 +17,8 @@
 - Tapir & Tapir Farm (#4631)
 - New empire barracks graphics by DragonAtma (#4668)
 - Building animation for empire barracks by DragonAtma (#4695)
+- New barbarians barracks graphics by DragonAtma (#4785)
+- fix graphic glitch in Barbarian flag (#4910)
 
 
 ### Sounds and Music
@@ -54,6 +56,8 @@
 - Fix detection of amount of starting gold in fri02 (#4797)
 - Fix typo and outdated instructions in emp03 (#4836)
 - Empire 04 text improvements (#4844, #4847, #4848, #4852)
+- Better fri03 placeholder portraits (#4891)
+- Make fri03 starting port indestructible (#4874)
 
 
 ### Scripting
@@ -333,6 +337,8 @@
     - 1 with custom building enhancements
     - 1 with custom worker enhancements
 - Rename Cassava Root Field/Plantation → Cassava Field/Plantation (#4850)
+- Quickfix against workers reoccupying the building they were evicted from (#4890)
+- Fix workers gaining experience for idling (#4905)
 
 
 ### User Interface
@@ -640,6 +646,8 @@
 - Resize minimap on map creation (#4560)
 - Fix crash when using debug console in editor (#4737)
 - Make editor toolsize hotkeys configurable (#4769)
+- Fix crash when loading map with not installed add-on in editor (#4900)
+- Catch more editor exceptions gracefully (#4902)
 
 
 ### Graphics Engine
@@ -693,6 +701,7 @@
 - MP Fixes (#4716)
 - Request no bug report for expected disconnects (#4722)
 - Fix desyncs with tribe add-ons (#4777)
+- Fix uncaught exception on MP add-on mismatches (#4885)
 
 
 ### Build System
@@ -745,6 +754,7 @@
 - added libdeflate as static library where tiff is to be linked (#4573)
 - Fix linking with opus (#4789)
 - Fix MinGW revision detection and linking (#4870)
+- Fix codecheck path magic (#4895)
 
 
 ### Other Issues
