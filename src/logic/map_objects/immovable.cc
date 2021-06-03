@@ -260,6 +260,10 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
 	}
 }
 
+void ImmovableDescr::register_immovable_relation(const std::string& a, const std::string& b) {
+	descriptions_.add_immovable_relation(a, b);
+}
+
 /**
  * Cleanup
  */

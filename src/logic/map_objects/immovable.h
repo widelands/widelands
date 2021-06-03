@@ -166,13 +166,13 @@ public:
 	}
 	void add_collected_by(const Descriptions& descriptions, const std::string& prodsite);
 
+	void register_immovable_relation(const std::string&, const std::string&);
 	void add_became_from(const std::string& s) {
 		became_from_.insert(s);
 	}
 
-	Descriptions& descriptions_;
-
 protected:
+	Descriptions& descriptions_;
 	int32_t size_;
 	Programs programs_;
 

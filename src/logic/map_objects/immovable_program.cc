@@ -251,7 +251,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		descr.becomes_.insert(
 		   std::make_pair(bob_ ? MapObjectType::BOB : MapObjectType::IMMOVABLE, type_name_));
 		if (!bob_) {
-			descr.descriptions_.add_immovable_relation(descr.name(), type_name_);
+			descr.register_immovable_relation(descr.name(), type_name_);
 		}
 	} catch (const std::exception& e) {
 		throw GameDataError("transform: %s", e.what());
@@ -324,7 +324,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, Immovabl
 
 	// Register target at ImmovableDescr
 	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
-	descr.descriptions_.add_immovable_relation(descr.name(), type_name_);
+	descr.register_immovable_relation(descr.name(), type_name_);
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
