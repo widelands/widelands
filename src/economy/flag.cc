@@ -612,7 +612,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 	memmove(&wares_[best_index], &wares_[best_index + 1],
 	        sizeof(wares_[0]) * (ware_filled_ - best_index));
 
-	ware->set_location(game, nullptr); // Ware has no location while in transit
+	ware->set_location(game, nullptr);  // Ware has no location while in transit
 
 	// wake up capacity wait queue
 	wake_up_capacity_queue(game);

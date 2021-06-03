@@ -45,7 +45,7 @@ struct SupplyList {
 	bool have_supplies(const Game& game, const Request&);
 
 private:
-    // TODO(klaus-halfmann): try to use a Map or Set
+	// TODO(klaus-halfmann): try to use a Map or Set
 	using Supplies = std::vector<Supply*>;
 	Supplies supplies_;
 };

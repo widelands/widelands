@@ -26,15 +26,15 @@
 namespace Widelands {
 
 size_t SupplyList::get_nrsupplies() const {
-    return supplies_.size();
+	return supplies_.size();
 }
 
 const Supply& SupplyList::operator[](size_t const idx) const {
-    return *supplies_[idx];
+	return *supplies_[idx];
 }
 
 Supply& SupplyList::operator[](size_t const idx) {
-    return *supplies_[idx];
+	return *supplies_[idx];
 }
 
 /**
@@ -48,17 +48,17 @@ void SupplyList::add_supply(Supply& supp) {
  * Remove a supply from the list.
  */
 void SupplyList::remove_supply(Supply& supp) {
-    if (supplies_.empty()) { // #4913 happens here 
-        throw wexception("SupplyList::remove: list is empty");
-    }
+	if (supplies_.empty()) {  // #4913 happens here
+		throw wexception("SupplyList::remove: list is empty");
+	}
 	for (Supplies::iterator item_iter = supplies_.begin(); item_iter != supplies_.end();
 	     ++item_iter) {
 
 		if (*item_iter == &supp) {
-            bool at_end = item_iter == supplies_.end();
-            if (!at_end) { // Copy last Element unless alreday at end
-                *item_iter = *(supplies_.end() - 1);
-            }
+			bool at_end = item_iter == supplies_.end();
+			if (!at_end) {  // Copy last Element unless alreday at end
+				*item_iter = *(supplies_.end() - 1);
+			}
 			supplies_.pop_back();
 			return;
 		}
