@@ -2,16 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# ks k, 2017-2018,2020
+# ks k, 2017-2018,2020-2021
 # TaeMin An, 2017,2019
 # TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-26 11:53+0000\n"
-"PO-Revision-Date: 2021-05-06 19:43+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-05-31 09:21+0000\n"
+"PO-Revision-Date: 2021-05-31 07:16+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1284,6 +1284,7 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -2147,7 +2148,7 @@ msgstr "옥수수 씨뿌리고 있음"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:64
 msgid "harvesting corn"
-msgstr "옥수수 수확하고 있음"
+msgstr "옥수수를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
 msgctxt "atlanteans_building"
@@ -2359,12 +2360,12 @@ msgstr "방앗간"
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:60
 msgid "grinding corn"
-msgstr "옥수수 빻고 있음"
+msgstr "옥수수를 빻고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:73
 msgid "grinding blackroot"
-msgstr "검은뿌리 빻고 있음"
+msgstr "검은뿌리를 빻고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:8
@@ -2648,7 +2649,7 @@ msgid "Barracks"
 msgstr "병영"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:54
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "군인을 모집하고 있음"
@@ -2746,13 +2747,13 @@ msgstr "농장"
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:55
 msgid "planting wheat"
-msgstr "밀 심고 있음"
+msgstr "밀을 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:63
 msgid "harvesting wheat"
-msgstr "밀 베고 있음"
+msgstr "밀을 베고 있음"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:85
 msgctxt "barbarians_building"
@@ -4179,7 +4180,7 @@ msgstr "나무꾼의 집에서 일하는 나무꾼은 작업 영역 내에 어�
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
 msgctxt "amazons_building"
 msgid "Training Glade"
-msgstr ""
+msgstr "번역확인-> 빈터를 훈련시키고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
@@ -4194,25 +4195,25 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
 msgid "sleeping"
-msgstr "잠자는 중"
+msgstr "잠을 자고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "군인이 회피력을 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "군인이 회피력을 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr ""
+msgstr "군인이 회피력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
@@ -4242,7 +4243,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "군인이 방어력을 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
@@ -4293,19 +4294,19 @@ msgstr "군인 공격력 훈련하고 있음: 0→1"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "군인 공격력 훈련하고 있음: 1→2"
+msgstr "군인이 공격력을 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "군인 공격력 훈련하고 있음: 2→3"
+msgstr "군인이 공격력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "군인 공격력 훈련하고 있음: 0→1"
+msgstr "군인이 공격력을 훈련하고 있음: 3→4"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
@@ -4415,7 +4416,7 @@ msgstr "군인 공격력 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:130
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "군인 공격력 훈련하고 있음: 2→3"
+msgstr "군인이 공격력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:144
@@ -4439,13 +4440,13 @@ msgstr "군인 체력 훈련하고 있음: 0→1"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:185
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "군인 체력 훈련하고 있음: 1→2"
+msgstr "군인이 체력을 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:199
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "군인 체력 훈련하고 있음: 2→3"
+msgstr "군인이 체력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:8
@@ -4505,13 +4506,13 @@ msgstr "군인 공격력 훈련하고 있음: 0→1"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:110
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "군인 공격력 훈련하고 있음: 1→2"
+msgstr "군인이 공격력을 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:124
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "군인 공격력 훈련하고 있음: 2→3"
+msgstr "군인이 공격력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
@@ -4535,13 +4536,13 @@ msgstr "군인 체력 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:179
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "군인 체력 훈련하고 있음: 2→3"
+msgstr "군인이 체력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "군인 체력 훈련하고 있음: 3→4"
+msgstr "군인이 체력을 훈련하고 있음: 3→4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:8
@@ -4553,7 +4554,7 @@ msgstr "모의 전투 하고 있음"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "군인 공격력 훈련하고 있음: 3→4"
+msgstr "군인이 공격력을 훈련하고 있음: 3→4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
@@ -4616,7 +4617,7 @@ msgstr "군인 공격력 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "군인 공격력 훈련하고 있음: 2→3"
+msgstr "군인이 공격력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166

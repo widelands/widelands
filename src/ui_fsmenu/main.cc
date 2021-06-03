@@ -907,21 +907,21 @@ void MainMenu::action(const MenuTarget t) {
 	} break;
 
 	case MenuTarget::kEditorNew:
-		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+		EditorInteractive::run_editor(this, EditorInteractive::Init::kNew);
 		set_labels();
 		break;
 	case MenuTarget::kEditorRandom:
-		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+		EditorInteractive::run_editor(this, EditorInteractive::Init::kRandom);
 		set_labels();
 		break;
 	case MenuTarget::kEditorLoad:
-		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+		EditorInteractive::run_editor(this, EditorInteractive::Init::kLoad);
 		set_labels();
 		break;
 	case MenuTarget::kEditorContinue: {
 		if (!filename_for_continue_editing_.empty()) {
 			EditorInteractive::run_editor(
-			   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			   this, EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
 			set_labels();
 		}
 		break;

@@ -190,6 +190,11 @@ void RenderQueue::enqueue(const Item& given_item) {
 	++next_z_;
 }
 
+void RenderQueue::clear() {
+	opaque_items_.clear();
+	blended_items_.clear();
+}
+
 void RenderQueue::draw(const int screen_width, const int screen_height) {
 	// TODO(sirver): If next_z >= kMaximumZValue here, we ran out of z-layers to
 	// correctly order the drawing of our objects (see
