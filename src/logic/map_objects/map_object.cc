@@ -168,13 +168,11 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	// Destruction happens in correct order after this dirty quickie.
 	// Run at the end of game, algorithmic efficiency may be what it is.
 	const static std::vector<MapObjectType> killusfirst{
-	   MapObjectType::WARE,
-	   MapObjectType::WATERWAY, MapObjectType::FERRY,      MapObjectType::FERRY_FLEET,
-	   MapObjectType::SHIP,     MapObjectType::SHIP_FLEET, MapObjectType::PORTDOCK,
-	   MapObjectType::WORKER,
-	   MapObjectType::CARRIER,
+	   MapObjectType::WARE,        MapObjectType::WATERWAY, MapObjectType::FERRY,
+	   MapObjectType::FERRY_FLEET, MapObjectType::SHIP,     MapObjectType::SHIP_FLEET,
+	   MapObjectType::PORTDOCK,    MapObjectType::WORKER,   MapObjectType::CARRIER,
 	   MapObjectType::SOLDIER,
-	   };
+	};
 	for (auto moi : killusfirst) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
