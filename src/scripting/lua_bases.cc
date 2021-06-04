@@ -167,8 +167,9 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 /* RST
    .. function:: get_immovable_description(immovable_name)
 
-      Returns the ImmovableDescription of the named object depending on the type of the immovable.
-      See the point **Immovables** in the list of :attr:`~wl.map.MapObjectDescription.type_name`.
+      Returns the description of the named immovable depending on the type of the immovable.
+      See the point **Immovables** in the list of
+      :attr:`MapObjectDescription.type_name <wl.map.MapObjectDescription.type_name>`.
 
       :arg immovable_name: The internal name of the immovable.
       :type immovable_name: :class:`string`
@@ -215,7 +216,7 @@ int LuaEditorGameBase::immovable_exists(lua_State* L) {
       Returns the description for the given building depending on the type of building.
       See the point **Buildings** in the list of :attr:`~wl.map.MapObjectDescription.type_name`.
 
-      :arg building_name: the name of the building
+      :arg building_name: The internal name of the building.
       :type building_name: :class:`string`
 */
 int LuaEditorGameBase::get_building_description(lua_State* L) {
@@ -258,7 +259,7 @@ int LuaEditorGameBase::get_ship_description(lua_State* L) {
 /* RST
    .. function:: get_tribe_description(tribe_name)
 
-      The :class:`~wl.map.TribeDescription` of the given tribe.
+      Returns the :class:`~wl.map.TribeDescription` of the given tribe.
       Loads the tribe if it hasn't been loaded yet.
 
       :arg tribe_name: The name of the tribe.
@@ -555,14 +556,16 @@ static void push_table_recursively(lua_State* L,
 /* RST
    .. function:: read_campaign_data(campaign_name, scenario_name)
 
-      :arg campaign_name: the name of the campaign, e.g. "empiretut" or "frisians"
-      :arg scenario_name: the name of the scenario that saved the data, e.g. "emp04" or "fri03"
+      Reads information that was saved by :meth:`save_campaign_data`.
 
-      Reads information that was saved by another scenario.
-      The data is returned as a table of key-value pairs.
-      The table is not guaranteed to be in any particular order, unless it is an array,
-      in which case it will be returned in the same order as it was saved.
-      This function returns :const:`nil` if the file cannot be opened for reading.
+      :arg campaign_name: The name of the campaign, e.g. "empiretut" or "frisians".
+      :type campaign_name: :class:`string`
+      :arg scenario_name: The name of the scenario that saved the data, e.g. "emp04" or "fri03".
+      :type scenario_name: :class:`string`
+      :returns: The data is returned as a table of key-value pairs.
+         The table is not guaranteed to be in any particular order, unless it is an array,
+         in which case it will be returned in the same order as it was saved.
+         This function returns :const:`nil` if the file cannot be opened for reading.
 */
 int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	const std::string campaign_name = luaL_checkstring(L, 2);
@@ -593,10 +596,11 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 /* RST
    .. function:: set_loading_message(text)
 
-      :arg text: the text to display
-
-      Change the progress message on the loading screen.
+      Changes the progress message on the loading screen.
       May be used from the init.lua files for tribe/world loading only.
+
+      :arg text: The text to display.
+      :type text: :class:`string`
 */
 int LuaEditorGameBase::set_loading_message(lua_State* L) {
 	Notifications::publish(UI::NoteLoadingMessage(luaL_checkstring(L, 2)));
@@ -615,7 +619,7 @@ PlayerBase
 
 .. class:: PlayerBase
 
-   The Base class for the Player objects in Editor and Game
+   The Base class for the Player objects in Editor and Game.
 */
 
 const char LuaPlayerBase::className[] = "PlayerBase";
@@ -689,13 +693,13 @@ int LuaPlayerBase::__tostring(lua_State* L) {
    .. function:: place_flag(field[, force])
 
       Builds a flag on a given field if it is legal to do so. If not,
-      reports an error
+      reports an error.
 
       :arg field: where the flag should be created
-      :type field: :class:`wl.map.Field`
-      :arg force: If this is :const:`true` then the map is created with
+      :type field: :class:`~wl.map.Field`
+      :arg force: (Optional) If this is :const:`true` the flag is created with
          pure force:
-
+         
             * if there is an immovable on this field, it will be
               removed
             * if there are flags too close by to this field, they will be
@@ -703,7 +707,7 @@ int LuaPlayerBase::__tostring(lua_State* L) {
             * if the player does not own the territory, it is conquered
               for him.
       :type force: :class:`boolean`
-      :returns: :class:`wl.map.Flag` object created or :const:`nil`.
+      :returns: The :class:`~wl.map.Flag` object created or :const:`nil`.
 */
 int LuaPlayerBase::place_flag(lua_State* L) {
 	uint32_t n = lua_gettop(L);
@@ -727,24 +731,29 @@ int LuaPlayerBase::place_flag(lua_State* L) {
 }
 
 /* RST
-   .. method:: place_road(roadtype, f1, dir1, dir2, ...[, force=false])
+   .. method:: place_road(roadtype, start_field, dirs, ...[, force=false])
 
-      Start a road or waterway at the given field, then walk the directions
+      Start a road or waterway at the given field, then walk the **dirs**
       given. Places a flag at the last field.
+      
+      See also the convenience function :meth:`connected_road` in *"infrastructure.lua"*.
 
-      If the last argument to this function is :const:`true` the road will
-      be created by force: all immovables in the way are removed and land
-      is conquered.
-
-      :arg roadtype: 'normal', 'busy', or 'waterway'
+      :arg roadtype: One of: :const:`"normal"`, :const:`"busy"`, or :const:`"waterway"`.
       :type roadtype: :class:`string`
-      :arg f1: fields to connect with this road
-      :type f1: :class:`wl.map.Field`
-      :arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
-         ("e", "w", "ne", "nw", "se", "sw").
-      :type dirs: :class:`string`
+      :arg start_field: The field where to start the road.
+      :type start_field: :class:`~wl.map.Field`
+      :arg dirs: Comma separated list of directions of the road. Allowed values for each
+        direction are either:
 
-      :returns: the road created
+               * directions: :const:`"r"`, :const:`"l"`, :const:`"br"`, :const:`"bl"`,
+                 :const:`"tr"`, :const:`"tl"`
+               * cardinal directions: :const:`"e"`, :const:`"w"`, :const:`"ne"`,
+                 :const:`"nw"`, :const:`"se"`, :const:`"sw"`
+      :type dirs: :class:`string`
+      :arg force: (Optional) If :const:`true` the road will be created by force: All immovables
+         in the way are removed and land is conquered. Defaults to :const:`false`.
+      :type force: :class:`boolean`
+      :returns: The :class:`~wl.map.Road` created.
 */
 int LuaPlayerBase::place_road(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -855,16 +864,25 @@ int LuaPlayerBase::place_road(lua_State* L) {
    .. method:: place_building(name, field[, cs = false, force = false])
 
       Immediately creates a building on the given field. The building starts
-      out completely empty. If :const:`cs` is set, the building
-      is not created directly, instead a constructionsite for this building is
-      placed.
+      out completely empty.
+      
+      See also the functions :meth:`place_building_in_region` and :meth:`prefilled_buildings` 
+      in *"infrastructure.lua"*.
+      
+      :arg name: The internal name of the building to create.
+      :type name: :class:`string`
+      :arg field: The field to place the building.
+      :type field: :class:`~wl.map.Field`
+      :arg cs: (Optional) If :const:`true` the building is not created directly,
+         instead a constructionsite for this building is placed.
+      :type cs: :class:`boolean`
+      :arg force: (Optional) If :const:`true` the building is forced into
+         existence: The same action is taken as for :meth:`place_flag` when force
+         is :const:`true`. Additionally, all buildings that are too close to the
+         new one are ripped. If you want to use **force** you have to set **cs** also.
+      :type force: :class:`boolean`
 
-      If the :const:`force` argument is set, the building is forced into
-      existence: the same action is taken as for :meth:`place_flag` when force
-      is :const:`true`. Additionally, all buildings that are too close to the
-      new one are ripped.
-
-      :returns: a subclass of :class:`wl.map.Building`
+      :returns: The object of the building created.
 */
 int LuaPlayerBase::place_building(lua_State* L) {
 	const std::string& name = luaL_checkstring(L, 2);
@@ -933,10 +951,10 @@ int LuaPlayerBase::place_building(lua_State* L) {
       Places a ship for the player's tribe, which will be
       owned by the player.
 
-      :arg field: where the ship should be placed.
-      :type field: :class:`wl.map.Field`
+      :arg field: The field where the ship should be placed.
+      :type field: :class:`~wl.map.Field`
 
-      :returns: The new ship that was created.
+      :returns: The new :class:`~wl.map.Ship` that was created.
 */
 // UNTESTED
 int LuaPlayerBase::place_ship(lua_State* L) {
@@ -956,14 +974,13 @@ int LuaPlayerBase::place_ship(lua_State* L) {
 /* RST
    .. method:: conquer(f[, radius=1])
 
-      Conquer this area around the given field if it does not belong to the
+      Conquer an area around the given field if it does not belong to the
       player already. This will conquer the fields no matter who owns it at the
       moment.
 
-      :arg f: center field for conquering
-      :type f: :class:`wl.map.Field`
-      :arg radius: radius to conquer around. Default value makes this call
-         conquer 7 fields
+      :arg f: Center field for conquering.
+      :type f: :class:`~wl.map.Field`
+      :arg radius: (Optional) Radius to conquer around. Defaults to conquer 7 fields.
       :type radius: :class:`integer`
       :returns: :const:`nil`
 */
@@ -983,12 +1000,11 @@ int LuaPlayerBase::conquer(lua_State* L) {
 /* RST
    .. method:: get_workers(name)
 
-      Returns the number of workers of this type in the players stock. This does not implement
-      everything that :class:`HasWorkers` offers.
+      Returns the number of workers of this name in the players stock.
 
-      :arg name: name of the worker to get
+      :arg name: The internal name of the worker to get.
       :type name: :class:`string`.
-      :returns: the number of workers
+      :returns: The number of workers.
 */
 // UNTESTED
 int LuaPlayerBase::get_workers(lua_State* L) {
@@ -1010,12 +1026,11 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 /* RST
    .. method:: get_wares(name)
 
-      Returns the number of wares of this type in the players stock. This does not implement
-      everything that :class:`HasWorkers` offers.
+      Returns the number of wares of this name in the players stock.
 
-      :arg name: name of the worker to get
+      :arg name: The name of the worker to get.
       :type name: :class:`string`.
-      :returns: the number of wares
+      :returns: The number of wares.
 */
 // UNTESTED
 int LuaPlayerBase::get_wares(lua_State* L) {
