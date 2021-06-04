@@ -192,6 +192,9 @@ public:
 		return all_tribes_;
 	}
 
+	void add_immovable_relation(const std::string&, const std::string&);
+	void postload_immovable_relations();
+
 private:
 	AllTribes all_tribes_;
 
@@ -215,6 +218,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>>
 	   subscriber_;
 	void check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck&) const;
+
+	std::vector<std::pair<std::string /* immo */, std::string /* becomes */>> immovable_relations_;
 
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
