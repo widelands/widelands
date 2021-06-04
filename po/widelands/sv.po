@@ -3,6 +3,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2021
 # GunChleoc, 2016
 # GunChleoc, 2014
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2018-2020
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-31 09:21+0000\n"
-"PO-Revision-Date: 2021-05-02 12:39+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-02 08:17+0000\n"
+"PO-Revision-Date: 2021-06-04 09:26+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,23 +83,23 @@ msgstr "Inte tillräckligt utrymme"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Inga klippor i närheten"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Det finns inga klippor i närheten av din startposition. Därför får du extra resurser för att få fart på din ekonomi."
 
 #: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
-msgstr ""
+msgstr "Inga träd i omgivningarna"
 
 #: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Det finns inga träd i närheten av din startposition. Därför får du extra resurser för att få fart på din ekonomi."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
@@ -107,11 +108,11 @@ msgstr "Status"
 
 #: ../../data/scripting/messages.lua:254
 msgid "New Objective"
-msgstr ""
+msgstr "Nya uppdrag"
 
 #: ../../data/scripting/messages.lua:256
 msgid "New Objectives"
-msgstr ""
+msgstr "Nya uppdrag"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -155,7 +156,7 @@ msgstr "Väldigt svag AI"
 #: ../../src/base/i18n.cc:393
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr ""
+msgstr "%1% %2%"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -287,7 +288,7 @@ msgstr "Verktyg"
 #: ../../src/editor/editorinteractive.cc:122
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
-msgstr ""
+msgstr "Visa / Dölj"
 
 #: ../../src/editor/editorinteractive.cc:135
 msgid "Tool size"
@@ -355,7 +356,7 @@ msgstr "Ändra höjd"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../src/editor/editorinteractive.cc:264
 msgid "Change the terrain height"
-msgstr ""
+msgstr "Ändra på terränghöjden"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:270
@@ -366,7 +367,7 @@ msgstr "Slumpmässig höjd"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:273
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Ändra terränghöjden slumpmässigt"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:279
@@ -379,7 +380,7 @@ msgstr "Terräng"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../src/editor/editorinteractive.cc:282
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Ändra på kartans terräng"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:289
@@ -391,7 +392,7 @@ msgstr "Fasta hinder"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:292
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Lägg till eller ta bort fasta föremål"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:298
@@ -402,7 +403,7 @@ msgstr "Djur"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:301
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Lägg till eller ta bort djur"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:308
@@ -417,17 +418,17 @@ msgstr "Resurser"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:311
 msgid "Set or change resources"
-msgstr ""
+msgstr "Placera ut eller ändra resurser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:314
 msgid "Port spaces"
-msgstr ""
+msgstr "Hamnplatser"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:317
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "Lägg till eller ta bort hamnplatser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:323
@@ -439,12 +440,12 @@ msgstr "Spelare"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:326
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Ställ in antal spelare och deras namn, stam och startpositioner"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:330
 msgid "Map origin"
-msgstr ""
+msgstr "Kartans origo"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:333
@@ -456,22 +457,22 @@ msgstr "Välj position som skall ha koordinaterna (0, 0). Detta kommer vara övr
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:340
 msgid "Map size"
-msgstr ""
+msgstr "Kartstorlek"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:343
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Ändra på kartans storlek"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:346
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:349
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Klicka på ett fält för att visa information om det"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -482,54 +483,54 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:411
 #: ../../src/wui/interactive_gamebase.cc:187
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Dölj byggnadsytor"
 
 #: ../../src/editor/editorinteractive.cc:411
 #: ../../src/ui_fsmenu/options.cc:258
 #: ../../src/wui/interactive_gamebase.cc:187
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Visa byggnadsytor"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
 #: ../../src/editor/editorinteractive.cc:418
 msgid "Hide Grid"
-msgstr ""
+msgstr "Dölj rutnät"
 
 #: ../../src/editor/editorinteractive.cc:418
 msgid "Show Grid"
-msgstr ""
+msgstr "Visa rutnät"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
 #. * rocks etc.) are shown
 #: ../../src/editor/editorinteractive.cc:424
 msgid "Hide Immovables"
-msgstr ""
+msgstr "Dölj fasta föremål"
 
 #: ../../src/editor/editorinteractive.cc:424
 msgid "Show Immovables"
-msgstr ""
+msgstr "Visa fasta föremål"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
 #: ../../src/editor/editorinteractive.cc:430
 msgid "Hide Animals"
-msgstr ""
+msgstr "Dölj djur"
 
 #: ../../src/editor/editorinteractive.cc:430
 msgid "Show Animals"
-msgstr ""
+msgstr "Visa djur"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../src/editor/editorinteractive.cc:435
 msgid "Hide Resources"
-msgstr ""
+msgstr "Dölj resurser"
 
 #: ../../src/editor/editorinteractive.cc:435
 msgid "Show Resources"
-msgstr ""
+msgstr "Visa resurser"
 
 #: ../../src/editor/editorinteractive.cc:475
 msgid "Unsupported Format"
@@ -575,7 +576,7 @@ msgstr "Okänd"
 
 #: ../../src/editor/editorinteractive.cc:971
 msgid "Loading world…"
-msgstr ""
+msgstr "Laddar värld..."
 
 #: ../../src/editor/map_generator.cc:750
 msgid "Random Player"
@@ -587,7 +588,7 @@ msgstr "Fältinformation"
 
 #: ../../src/editor/tools/info_tool.cc:50
 msgid "Node"
-msgstr ""
+msgstr "Nod"
 
 #: ../../src/editor/tools/info_tool.cc:52
 #, c-format
@@ -624,8 +625,8 @@ msgstr "gruva"
 msgid "port"
 msgstr "hamn"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -674,7 +675,7 @@ msgstr "Objekt"
 #: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Immovable: %s"
-msgstr ""
+msgstr "Fast föremål: %s"
 
 #: ../../src/editor/tools/info_tool.cc:172
 #, c-format
@@ -738,17 +739,17 @@ msgstr "Beskrivning: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/tools/info_tool.cc:231
 msgid "(none)"
-msgstr ""
+msgstr "(inga)"
 
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Aktiverade tillägg: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
@@ -791,19 +792,19 @@ msgstr "Scenarier med flera spelare"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
-msgstr ""
+msgstr "Nedladdade kartor"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #, c-format
 msgid "Current directory: %s"
-msgstr ""
+msgstr "Nuvarande katalog: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 msgid "Display"
-msgstr ""
+msgstr "Visning"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:80
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:248
@@ -839,23 +840,23 @@ msgstr "Avbryt"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:109
 msgid "File names"
-msgstr ""
+msgstr "Filnamn"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Map names"
-msgstr ""
+msgstr "Kartnamn"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Original map names"
-msgstr ""
+msgstr "Kartornas originalnamn"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
 msgid "Translated map names"
-msgstr ""
+msgstr "Översatta kartnamn"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
-msgstr ""
+msgstr "Klicka för att ta bort spelare"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/ui_fsmenu/addons_packager_box.cc:271
@@ -866,30 +867,30 @@ msgstr "Ta bort"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 msgid "Delete this suggested team lineup"
-msgstr ""
+msgstr "Ta bort denna föreslagna laguppställning"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons_packager.cc:75
 #: ../../src/ui_fsmenu/addons_packager_box.cc:56
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
-msgstr ""
+msgstr "Lägg till en spelare till detta lag"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:320
 #: ../../src/logic/addons.cc:63
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:331
 msgid "Add lineup"
-msgstr ""
+msgstr "Lägg till lag"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:332
 msgid "Add another suggested team lineup"
-msgstr ""
+msgstr "Lägg till en föreslagen laguppställning"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:352
 msgid "Map name:"
@@ -915,16 +916,16 @@ msgstr "Märkning:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:387
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(ingen)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:396
 msgid "Waterway length limit:"
-msgstr ""
+msgstr "Maximal längd på vattenväg:"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:407
 msgid "Disabled"
-msgstr ""
+msgstr "Avstängd"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:427
 #, c-format
@@ -953,7 +954,7 @@ msgstr "Lag"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:487
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr ""
+msgstr "Det är inte rekommenderat att tillåta vattenvägar som är längre än %u"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:61
 msgid "Create Map"
@@ -992,11 +993,11 @@ msgstr "Hög"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:85
 msgid "Climate"
-msgstr ""
+msgstr "Klimat"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Terrängfördelning"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:129
 msgid "Water:"
@@ -1037,21 +1038,21 @@ msgstr "Kart-ID:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:210
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Random"
-msgstr ""
+msgstr "Slumpmässig"
 
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:240
 #: ../../src/ui_fsmenu/campaigns.cc:54 ../../src/ui_fsmenu/options.cc:494
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:241
 msgid "Alpine"
-msgstr ""
+msgstr "Alpin"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:242
 msgid "Atoll"
-msgstr ""
+msgstr "Korallö"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:243
@@ -1087,12 +1088,12 @@ msgstr "Kartan har skapats. Var vänlig och dubbelklicka på spelarnas startposi
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:609
 msgid "The Widelands Random Map Generator"
-msgstr ""
+msgstr "Widelands slumpmässiga kartgenerator"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:611
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr ""
+msgstr "Kartan skapades automatiskt av Widelands slumpmässiga kartgenerator."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:622
 #: ../../src/wui/game_summary.cc:112
@@ -1153,11 +1154,11 @@ msgstr "Fel när kartan skulle sparas!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:340
 msgid "Saving the map…"
-msgstr ""
+msgstr "Sparar kartan..."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:358
 msgid "Map saved"
-msgstr ""
+msgstr "Kartan sparad"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:52
 msgid "Enter Directory Name:"
@@ -1165,15 +1166,15 @@ msgstr "Skriv katalogens namn:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:107
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "Detta tillägg är reserverat!"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:39
 msgid "Width"
-msgstr ""
+msgstr "Bredd"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:51
 msgid "Height"
-msgstr ""
+msgstr "Höjd"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1189,18 +1190,18 @@ msgstr "För många spelare"
 msgid ""
 "We do not recommend setting more than 8 players except for testing purposes."
 " Are you sure that you want more than 8 players?"
-msgstr ""
+msgstr "Vi rekommenderar inte inställningar med mer än 8 spelare annat än för teständamål. Är du säker på att du vill ha mer än 8 spelare?"
 
 #. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
 #. players except
 #. for testing purposes. Are you sure that you want more than 8 players?'
 #: ../../src/editor/ui_menus/player_menu.cc:75
 msgid "Do not remind me again"
-msgstr ""
+msgstr "Påminn mig inte igen"
 
 #: ../../src/editor/ui_menus/player_menu.cc:79
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 #: ../../src/editor/ui_menus/player_menu.cc:131
 msgid "Player Options"
@@ -1250,7 +1251,7 @@ msgstr "Stammen kommer att väljas slumpmässigt"
 #. position tool
 #: ../../src/editor/ui_menus/player_menu.cc:211
 msgid "Set this player’s starting position"
-msgstr ""
+msgstr "Ställ in denna spelares startposition"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:32
 msgid "Height Tools Options"
@@ -1258,12 +1259,12 @@ msgstr "Höjdverktygsalternativ"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
 msgid "Increase/Decrease height by:"
-msgstr ""
+msgstr "Öka/minska höjd med:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:69
 msgid "Set height to:"
-msgstr ""
+msgstr "Ställ in höjden på:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:61
@@ -1280,11 +1281,11 @@ msgstr "'Ctrl' + klicka på kartan för att ställa in terränghöjden"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 msgid "Increase/Decrease amount by:"
-msgstr ""
+msgstr "Öka/minska antal med:"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:65
 msgid "Set amount to:"
-msgstr ""
+msgstr "Ställ in antal till:"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
@@ -1298,7 +1299,7 @@ msgstr "Klicka på kartan för att öka, shift + klicka på kartan för att mins
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr ""
+msgstr "Håll inne \"ctrl\" och klicka på kartan för att ställa in antalet av vald resurs. Detta kommer att ersätta redan inställda värden."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:33
 msgid "Random Height Options"
@@ -1306,11 +1307,11 @@ msgstr "Slumpmässiga höjdval"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:45
 msgid "Minimum height:"
-msgstr ""
+msgstr "Lägsta höjd:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:57
 msgid "Maximum height:"
-msgstr ""
+msgstr "Högsta höjd:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
@@ -1322,11 +1323,11 @@ msgstr "Klicka på kartan för att ge terrängen ett slumpmässigt höjdvärde i
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Fixed height"
-msgstr ""
+msgstr "Fast höjd:"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:35
 msgid "Resize"
-msgstr ""
+msgstr "Ändra storlek"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:51
 msgid ""
@@ -1335,10 +1336,10 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "Välj den nya kartstorleken och klicka sedan på kartan för att dela den i vald position. När kartstorleken ökas kommer nya rader och kolumner att läggas till öster/söder om vald position. När kartstorleken minskas kommer det valda antalet kolumner och rader att tas bort öster/söder om delningspunkten."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1359,25 +1360,25 @@ msgstr "Nuvarande storlek: %u"
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Laddar spel: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:72 ../../src/game_io/game_saver.cc:59
 #: ../../src/map_io/map_saver.cc:102
 #: ../../src/map_io/widelands_map_loader.cc:202
 msgid "Elemental data"
-msgstr ""
+msgstr "Grundläggande data"
 
 #: ../../src/game_io/game_loader.cc:152 ../../src/game_io/game_saver.cc:84
 msgid "Economies"
-msgstr ""
+msgstr "Ekonomier"
 
 #: ../../src/game_io/game_loader.cc:159 ../../src/game_io/game_saver.cc:91
 msgid "AI"
-msgstr ""
+msgstr "AI"
 
 #: ../../src/game_io/game_loader.cc:166 ../../src/game_io/game_saver.cc:98
 msgid "Command queue"
-msgstr ""
+msgstr "Kommandokö"
 
 #: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:148
 #: ../../src/map_io/widelands_map_loader.cc:391
@@ -1390,20 +1391,20 @@ msgstr "Meddelanden"
 #: ../../src/game_io/game_loader.cc:191
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
 msgid "Finishing"
-msgstr ""
+msgstr "Avslutning"
 
 #: ../../src/game_io/game_saver.cc:52
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Sparar spel: %1$s (%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:54
 msgid "Autosaving game…"
-msgstr ""
+msgstr "Automatisk sparning..."
 
 #: ../../src/game_io/game_saver.cc:105
 msgid "Interactive player"
-msgstr ""
+msgstr "Interaktiv spelare"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1412,7 +1413,7 @@ msgstr ""
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "Widelands fungerar inte för vi kunde inte hitta versionen av OpenGL Shading Language."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1422,7 +1423,7 @@ msgstr ""
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr ""
+msgstr "Det har uppstått ett okänt problem med att läsa information från grafikdrivrutinen."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1430,7 +1431,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "Widelands fungerar inte för vi kunde inte hitta versionen av OpenGL."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1441,7 +1442,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:220
 #: ../../src/graphic/gl/initialize.cc:242
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "Widelands fungerar inte för din grafikdrivrutin är för gammal."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1449,7 +1450,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:223
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$u-versionen måste vara version %2$u.%3$u eller nyare."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1457,15 +1458,15 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$s måste vara version %2$u.%3$u eller nyare."
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "OpenGL Shading Language"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1473,7 +1474,7 @@ msgstr ""
 #: ../../src/io/filesystem/filesystem.cc:248
 msgctxt "illegal_filename_characters"
 msgid "blank space"
-msgstr ""
+msgstr "mellanslag"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
@@ -1481,7 +1482,7 @@ msgstr ""
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s at the start of the filename"
-msgstr ""
+msgstr "%s i början av filnamnet"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. * %s is a list of illegal characters
@@ -1489,14 +1490,14 @@ msgstr ""
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s anywhere in the filename"
-msgstr ""
+msgstr "%s någonstans i filnamnet"
 
 #. * TRANSLATORS: Tooltip header for characters in illegal filenames.
 #. * This is followed by a list of bullet points
 #: ../../src/io/filesystem/filesystem.cc:272
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
-msgstr ""
+msgstr "Följande tecken är inte tillåtna:"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1550,109 +1551,109 @@ msgstr "Fel"
 
 #: ../../src/logic/addons.cc:46
 msgid "Tribes"
-msgstr ""
+msgstr "Stammar"
 
 #: ../../src/logic/addons.cc:48
 msgid "World"
-msgstr ""
+msgstr "Värld"
 
 #: ../../src/logic/addons.cc:51
 msgid "Script"
-msgstr ""
+msgstr "Skript"
 
 #: ../../src/logic/addons.cc:52
 msgid "Map Set"
-msgstr ""
+msgstr "Kartuppsättning"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:54 ../../src/ui_fsmenu/campaigndetails.cc:49
 msgid "Campaign"
-msgstr ""
+msgstr "Fälttåg"
 
 #: ../../src/logic/addons.cc:58
 msgid "Win Condition"
-msgstr ""
+msgstr "Segerförutsättning"
 
 #: ../../src/logic/addons.cc:60
 msgid "Starting Condition"
-msgstr ""
+msgstr "Startförhållande"
 
 #: ../../src/logic/addons.cc:85
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../src/logic/addons.cc:140
 msgid "No conflicts"
-msgstr ""
+msgstr "Inga konflikter"
 
 #: ../../src/logic/addons.cc:145
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
-msgstr ""
+msgstr "%1$s (förväntad version %2$s, hittade %3$s)"
 
 #: ../../src/logic/addons.cc:150 ../../src/logic/addons.cc:190
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
-msgstr ""
+msgstr "%1$s, %2$s (förväntad version %3$s, hittade %4$s)"
 
 #: ../../src/logic/addons.cc:156
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u tillägg med fel version: %2$s"
+msgstr[1] "%1$u tillägg med fel version: %2$s"
 
 #: ../../src/logic/addons.cc:175
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$usaknat tillägg: %2$s"
+msgstr[1] "%1$usaknade tillägg: %2$s"
 
 #: ../../src/logic/addons.cc:183
 #, c-format
 msgid "%s (missing)"
-msgstr ""
+msgstr "%s (saknas)"
 
 #: ../../src/logic/addons.cc:185
 #, c-format
 msgid "%1$s, %2$s (missing)"
-msgstr ""
+msgstr "%1$s, %2$s (saknas)"
 
 #: ../../src/logic/addons.cc:195
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s och %2$s: %3$s"
 
 #: ../../src/logic/addons.cc:197
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u saknat tillägg"
+msgstr[1] "%u saknade tillägg"
 
 #: ../../src/logic/addons.cc:200
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u tillägg med fel version"
+msgstr[1] "%u tillägg med fel version"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:215
 msgid "None"
-msgstr ""
+msgstr "Inga"
 
 #: ../../src/logic/addons.cc:219
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (version %3$s)"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
 msgid "Creating player %d…"
-msgstr ""
+msgstr "Genererar spelare %d..."
 
 #: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
