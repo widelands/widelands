@@ -6,7 +6,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2015,2018
 # ks k, 2017
-# ks k, 2017-2020
+# ks k, 2017-2021
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An, 2017,2019
 # TaeMin An, 2019
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 10:18+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-01 23:19+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -326,7 +326,7 @@ msgstr "제타OS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "그리고, (당신이 한) 모든 것에 대해 더 많은 감사를 드립니다"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -424,7 +424,7 @@ msgstr "작은 지도 켜기/끄기"
 #: ../../data/txts/help/common_helptexts.lua:84
 #: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -515,24 +515,24 @@ msgstr "오른쪽에서 선택한 지도 또는 저장 게임에 대한 정보�
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "아마존은 나무를 좋아합니다. 정글 보호자의 오두막을 충분히 지어서 충분히 만들어두십시오."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "희귀한 숲은 아마존 경제의 중추입니다. 희귀한 나무 농장을 건설하여 이 숲을위한 특별한 나무를 심으십시오."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "희귀한 나무는 희귀 나무 벌목공의 오두막으로 개선된 나무꾼의 오두막에 있는 노련한 나무꾼들이 자른다. 하지만 그들은 평범한 나무들을 자르는 것을 멈춥니다. 그들의 위치를 미리 계획하십시오."
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "음식은 숯불로 말립니다. 꾸준한 공급을 보장하십시오."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -609,13 +609,13 @@ msgstr "알트키를 누르면 두 번째 대체 도구가 켜집니다 (있는 
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "%1% 키를 사용하여 마우스 커서 주변의 선택된 영역의 크기를 직접 설정할 수 있습니다."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "%1% 키는 정상적인 게임에서처럼 작동합니다. 건물 공간이 켜져 있거나 꺼져있는 경우 전환됩니다."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -702,7 +702,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "특정 상품의 전달을 조정하려면 건물 창에서 우선 순위 슬라이더를 사용하십시오. 쉬프트 키를 누른 상태에서 클릭하면 모든 상품이 한 번에 조정됩니다."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -714,7 +714,7 @@ msgstr "'경제 구성'메뉴를 사용하여 목표 수량을 조정하십시�
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "메시지를 보다 효율적으로 관리하십시오: 메시지 창에 접근하려면 새소식의 ‘%1%’ 키를 누르고, 이동을 위해 ‘%2%’ 키를 누르고, 메시지를 보관하려면 %3%키를 누르십시오."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -741,7 +741,7 @@ msgstr "위험하게 살고 싶다면, 컨트롤 키를 누른 상태에서 건�
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "재고 목록을 빨리 전환하려면  ‘%s’ 키를 누르십시오."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -758,19 +758,19 @@ msgstr "농장과 같은 몇몇 건물은 작업 공간이 매우 작습니다. 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "마우스 휠 또는 %1%/%2%키로 확대/축소합니다. %3%키를 눌러 확대/축소를 다시 설정하십시오."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "‘%1$s’ 키와 ‘%2$s’ 키를 사용하여 최근에 방문한 위치 사이를 빠르게 이동할 수 있습니다."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "%1%/%2%키로 놀이 속도를 빠르게하거나 늦춥니다. %3%/%4% 키로 빠르게 바꿀 수 있고, %5%/%6%키로 속도를 부드럽게 조정합니다."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
@@ -822,7 +822,7 @@ msgstr "채팅 메시지가 시작될 때 '@name'을 사용하여 한 명에게�
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "만약 놀이가 중단되어도, 걱정하지 마십시오! 놀이는 자동으로 저장되므로 나중에 다시 불러올 수 있습니다."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
