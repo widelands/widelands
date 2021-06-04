@@ -167,9 +167,8 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 /* RST
    .. function:: get_immovable_description(immovable_name)
 
-      Returns the description of the named immovable depending on the type of the immovable.
-      See the point **Immovables** in the list of
-      :attr:`MapObjectDescription.type_name <wl.map.MapObjectDescription.type_name>`.
+      Returns the :class:`~wl.map.ImmovableDescription` of the named immovable. To get
+      descriptions for buildings use :meth:`get_building_description`.
 
       :arg immovable_name: The internal name of the immovable.
       :type immovable_name: :class:`string`
@@ -192,8 +191,8 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 /* RST
    .. function:: immovable_exists(immovable_name)
 
-      Returns whether the descriptions know about an ImmovableDescription for the named
-      object. This is either :const:`true` if the named immovable exists, :const:`false` otherwise.
+      Returns whether the descriptions know about an :class:`ImmovableDescription` for the named
+      object. This is :const:`true` if the named immovable exists, :const:`false` otherwise.
 
       :arg immovable_name: The internal name of the immovable.
       :type immovable_name: :class:`string`
@@ -451,7 +450,7 @@ static void save_table_recursively(lua_State* L,
       :arg data: If an array is used, the data will be saved in the correct order. Arrays may not
          contain :const:`nil` values. If a table is used, all keys have to be strings. Tables may
          contain subtables of any depth. Cyclic dependencies will cause Widelands to crash. Values
-         have to be of type :const:`string`, :const:`integer` or :const:`boolean`
+         have to be of type :class:`string`, :class:`integer`, :const:`boolean` or :class:`table`.
       :type data: :class:`array` or :class:`table`
 
 */
@@ -619,7 +618,7 @@ PlayerBase
 
 .. class:: PlayerBase
 
-   The Base class for the Player objects in Editor and Game.
+   The base class for the Player objects in Editor and Game.
 */
 
 const char LuaPlayerBase::className[] = "PlayerBase";
@@ -980,7 +979,8 @@ int LuaPlayerBase::place_ship(lua_State* L) {
 
       :arg f: Center field for conquering.
       :type f: :class:`~wl.map.Field`
-      :arg radius: (Optional) Radius to conquer around. Defaults to conquer 7 fields.
+      :arg radius: (Optional) Radius to conquer around. The default of 1 results in 7 fields
+         conquered.
       :type radius: :class:`integer`
       :returns: :const:`nil`
 */
