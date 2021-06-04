@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-31 09:21+0000\n"
-"PO-Revision-Date: 2021-05-26 16:13+0000\n"
+"POT-Creation-Date: 2021-06-02 08:17+0000\n"
+"PO-Revision-Date: 2021-06-03 19:41+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -626,8 +626,8 @@ msgstr "Bargwark"
 msgid "port"
 msgstr "Muu"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1339,8 +1339,8 @@ msgid ""
 "location."
 msgstr "Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wünsket Stee oftodelen. Wenn de Kaart-Grött verhoogt word, worden neje Striepen of Riegen in de Oost/Süden vun de utköört Stee inföögt. Wenn de Kaart-Grött minnert word, worden Striepen of Riegen, wat to vööl sünd, in de Oost/Süden vun de utköört Stee wegnohmen."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -4388,7 +4388,7 @@ msgid ""
 "Please do not report any bugs that occur while watching this replay.\n"
 "\n"
 "Do you want to load the replay anyway?"
-msgstr "Deeses Upteken is mit eener annern Versioon vun Widelands maakt worden. Villicht gaht dat doch, aver wahrschienelker word sik dat verschuven of gaar nich eerst laden.\n\nBidde melle keene Fehlers, die uptreden, as du deeses Upteken ankiekst.\n\nWillst du dat Upteken nu doch ankieken?"
+msgstr "Deeses Upteken is mit eener annern Versioon vun Widelands maakt worden. Villicht gaht dat doch, aver wahrschienelker word sik dat verschuven of gaar nich eerst laden.\n\nBidde melle keene Fehlers, wat uptreden, as du deeses Upteken ankiekst.\n\nWillst du dat Upteken nu doch ankieken?"
 
 #: ../../src/ui_fsmenu/login_box.cc:38 ../../src/ui_fsmenu/main.cc:365
 msgid "Online Game Settings"
