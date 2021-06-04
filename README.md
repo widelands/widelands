@@ -1,6 +1,6 @@
 # Widelands
 
-[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands)
+[![Build Status Travis-CI](https://travis-ci.com/widelands/widelands.svg?branch=master)](https://travis-ci.com/widelands/widelands)
 [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands)
 [![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3A%22Formatting+your+code%22)
 [![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3ABuild)
