@@ -46,6 +46,7 @@ struct SupplyList {
 
 private:
 	// TODO(klaus-halfmann): try to use a Map or Set
+	// (-> keep in mind that the iteration order needs to be platform-independent though)
 	using Supplies = std::vector<Supply*>;
 	Supplies supplies_;
 };

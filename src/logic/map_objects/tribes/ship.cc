@@ -221,6 +221,9 @@ void Ship::wakeup_neighbours(Game& game) {
  *
  * ivar1 = helper flag for coordination of mutual evasion of ships
  */
+// TODO(Nordfriese): Having just 1 global task and those numerous ship_update_x
+// functions is ugly. Refactor to use a stack of multiple tasks like every
+// other bob. But not while I'm still working on the naval warfare please ;)
 const Bob::Task Ship::taskShip = {
    "ship", static_cast<Bob::Ptr>(&Ship::ship_update), nullptr, nullptr,
    true  // unique task
@@ -644,6 +647,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						// cs->inputqueue() may throw if this is an additional item
 						wq = nullptr;
 					}
+					// Wares are not preserved in the same way as workers. We register the ware as a
+					// number in the building's statistics table, then delete the actual instance.
 					if (!wq || wq->get_filled() >= wq->get_max_fill()) {
 						cs->add_additional_ware(ware->descr_index());
 					} else {
