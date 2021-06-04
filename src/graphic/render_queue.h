@@ -170,6 +170,9 @@ public:
 	// directly.
 	void draw(int screen_width, int screen_height);
 
+	// Clear the render queue without drawing anything.
+	void clear();
+
 private:
 	RenderQueue();
 
