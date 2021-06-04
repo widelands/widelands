@@ -285,7 +285,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 /* RST
    .. function:: get_ware_description(ware_name)
 
-      Returns the :class:`~wl.map.WareDescription` for the given ware. 
+      Returns the :class:`~wl.map.WareDescription` for the given ware.
 
       :arg ware_name: The internal name of the ware.
       :type ware_name: :class:`string`
@@ -450,10 +450,10 @@ static void save_table_recursively(lua_State* L,
       :type scenario_name: :class:`string`
       :arg data: If an array is used, the data will be saved in the correct order. Arrays may not
          contain :const:`nil` values. If a table is used, all keys have to be strings. Tables may
-         contain subtables of any depth. Cyclic dependencies will cause Widelands to crash. Values 
+         contain subtables of any depth. Cyclic dependencies will cause Widelands to crash. Values
          have to be of type :const:`string`, :const:`integer` or :const:`boolean`
       :type data: :class:`array` or :class:`table`
-      
+
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
@@ -699,7 +699,7 @@ int LuaPlayerBase::__tostring(lua_State* L) {
       :type field: :class:`~wl.map.Field`
       :arg force: (Optional) If this is :const:`true` the flag is created with
          pure force:
-         
+
             * if there is an immovable on this field, it will be
               removed
             * if there are flags too close by to this field, they will be
@@ -735,7 +735,7 @@ int LuaPlayerBase::place_flag(lua_State* L) {
 
       Start a road or waterway at the given field, then walk the **dirs**
       given. Places a flag at the last field.
-      
+
       See also the convenience function :meth:`connected_road` in *"infrastructure.lua"*.
 
       :arg roadtype: One of: :const:`"normal"`, :const:`"busy"`, or :const:`"waterway"`.
@@ -865,10 +865,10 @@ int LuaPlayerBase::place_road(lua_State* L) {
 
       Immediately creates a building on the given field. The building starts
       out completely empty.
-      
-      See also the functions :meth:`place_building_in_region` and :meth:`prefilled_buildings` 
+
+      See also the functions :meth:`place_building_in_region` and :meth:`prefilled_buildings`
       in *"infrastructure.lua"*.
-      
+
       :arg name: The internal name of the building to create.
       :type name: :class:`string`
       :arg field: The field to place the building.
