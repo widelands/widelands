@@ -54,7 +54,12 @@ namespace LuaBases {
 The :mod:`wl.bases` module contains Base functions on which the classes
 of :mod:`wl.game` and :mod:`wl.editor` are based. You will not need
 to create any of the functions in this module directly, but you might
-use their functionality via the child classes.
+use their functionality via the child classes:
+
+.. code-block:: lua
+
+   local map = wl.Game().map     -- the map object of a game currently running
+   local map = wl.Editor().map   -- the map object in the editor
 */
 
 /*
@@ -113,7 +118,7 @@ void LuaEditorGameBase::__unpersist(lua_State* /* L */) {
 /* RST
    .. attribute:: map
 
-      (RO) The :class:`~wl.map.Map` the game is played on.
+      (RO) The :class:`~wl.map.Map`, either in a game or in the editor.
 */
 int LuaEditorGameBase::get_map(lua_State* L) {
 	to_lua<LuaMaps::LuaMap>(L, new LuaMaps::LuaMap());
@@ -162,11 +167,11 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 /* RST
    .. function:: get_immovable_description(immovable_name)
 
-      :arg immovable_name: the name of the immovable
+      Returns the ImmovableDescription of the named object depending on the type of the immovable.
+      See the point **Immovables** in the list of :attr:`~wl.map.MapObjectDescription.type_name`.
 
-      Returns the ImmovableDescription for the named object.
-
-      (RO) The :class:`~wl.Game.Immovable_description`.
+      :arg immovable_name: The internal name of the immovable.
+      :type immovable_name: :class:`string`
 */
 int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -186,11 +191,11 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 /* RST
    .. function:: immovable_exists(immovable_name)
 
-      :arg immovable_name: the name of the immovable
+      Returns whether the descriptions know about an ImmovableDescription for the named
+      object. This is either :const:`true` if the named immovable exists, :const:`false` otherwise.
 
-      Returns whether the descriptions know about an ImmovableDescription for the named object.
-
-      (RO) ``true`` if the named immovable exists, ``false`` otherwise.
+      :arg immovable_name: The internal name of the immovable.
+      :type immovable_name: :class:`string`
 */
 int LuaEditorGameBase::immovable_exists(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -205,13 +210,13 @@ int LuaEditorGameBase::immovable_exists(lua_State* L) {
 }
 
 /* RST
-   .. function:: get_building_description(building_description.name)
+   .. function:: get_building_description(building_name)
+
+      Returns the description for the given building depending on the type of building.
+      See the point **Buildings** in the list of :attr:`~wl.map.MapObjectDescription.type_name`.
 
       :arg building_name: the name of the building
-
-      Returns the description for the given building.
-
-      (RO) The :class:`~wl.Game.Building_description`.
+      :type building_name: :class:`string`
 */
 int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -229,13 +234,12 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 }
 
 /* RST
-   .. function:: get_ship_description(ship_description.name)
+   .. function:: get_ship_description(ship_name)
 
-      :arg ship_name: the name of the ship
+      Returns the :class:`~wl.map.ShipDescription` for the given ship.
 
-      Returns the description for the given ship.
-
-      (RO) The :class:`~wl.Game.Ship_description`.
+      :arg ship_name: The name of the ship.
+      :type ship_name: :class:`string`
 */
 int LuaEditorGameBase::get_ship_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -254,12 +258,11 @@ int LuaEditorGameBase::get_ship_description(lua_State* L) {
 /* RST
    .. function:: get_tribe_description(tribe_name)
 
-      :arg tribe_name: the name of the tribe
-
-      Returns the tribe description of the given tribe.
+      The :class:`~wl.map.TribeDescription` of the given tribe.
       Loads the tribe if it hasn't been loaded yet.
 
-      (RO) The :class:`~wl.Game.Tribe_description`.
+      :arg tribe_name: The name of the tribe.
+      :type tribe_name: :class:`string`
 */
 int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -279,13 +282,12 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 }
 
 /* RST
-   .. function:: get_ware_description(ware_description.name)
+   .. function:: get_ware_description(ware_name)
 
-      :arg ware_name: the name of the ware
+      Returns the :class:`~wl.map.WareDescription` for the given ware. 
 
-      Returns the ware description for the given ware.
-
-      (RO) The :class:`~wl.Game.Ware_description`.
+      :arg ware_name: The internal name of the ware.
+      :type ware_name: :class:`string`
 */
 int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -303,13 +305,12 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 }
 
 /* RST
-   .. function:: get_worker_description(worker_description.name)
+   .. function:: get_worker_description(worker_name)
 
-      :arg worker_name: the name of the worker
+      Returns the :class:`~wl.map.WorkerDescription` for the given worker.
 
-      Returs the worker desciption for the given worker.
-
-      (RO) The :class:`~wl.Game.Worker_description`.
+      :arg worker_name: The internal name of the worker.
+      :type worker_name: :class:`string`
 */
 int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -329,11 +330,10 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 /* RST
    .. function:: get_resource_description(resource_name)
 
-      :arg resource_name: the name of the resource
+      Returns the :class:`~wl.map.ResourceDescription` for the given resource.
 
-      Returns the resource description for the given resource.
-
-      (RO) The :class:`~wl.Game.Resource_description`.
+      :arg resource_name: The internal name of the resource.
+      :type resource_name: :class:`string`
 */
 int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -353,11 +353,10 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 /* RST
    .. function:: get_terrain_description(terrain_name)
 
-      :arg terrain_name: the name of the terrain
+      Returns the :class:`~wl.map.TerrainDescription` for the given terrain.
 
-      Returns a given terrain description for the given terrain.
-
-      (RO) The :class:`~wl.Game.Terrain_description`.
+      :arg terrain_name: The internal name of the terrain.
+      :type terrain_name: :class:`string`
 */
 int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -442,16 +441,18 @@ static void save_table_recursively(lua_State* L,
 /* RST
    .. function:: save_campaign_data(campaign_name, scenario_name, data)
 
-      :arg campaign_name: the name of the current campaign, e.g. "empiretut" or "frisians"
-      :arg scenario_name: the name of the current scenario, e.g. "emp04" or "fri03"
-      :arg data: a table of key-value pairs to save
+      Saves information that can be read by other scenarios. See also :meth:`read_campaign_data`.
 
-      Saves information that can be read by other scenarios.
-
-      If an array is used, the data will be saved in the correct order. Arrays may not contain nil
-      values. If the table is not an array, all keys have to be strings. Tables may contain
-      subtables of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays,
-      strings, integer numbers and booleans may be used as values.
+      :arg campaign_name: The name of the current campaign, e.g. "empiretut" or "frisians".
+      :type campaign_name: :class:`string`
+      :arg scenario_name: The name of the current scenario, e.g. "emp04" or "fri03".
+      :type scenario_name: :class:`string`
+      :arg data: If an array is used, the data will be saved in the correct order. Arrays may not
+         contain :const:`nil` values. If a table is used, all keys have to be strings. Tables may
+         contain subtables of any depth. Cyclic dependencies will cause Widelands to crash. Values 
+         have to be of type :const:`string`, :const:`integer` or :const:`boolean`
+      :type data: :class:`array` or :class:`table`
+      
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
