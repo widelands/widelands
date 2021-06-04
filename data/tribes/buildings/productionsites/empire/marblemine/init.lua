@@ -67,6 +67,7 @@ descriptions:new_productionsite_type {
          actions = {
             "call=mine_granite",
             "call=mine_marble",
+            "return=skipped"
          }
       },
       mine_granite = {
@@ -80,6 +81,7 @@ descriptions:new_productionsite_type {
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
+            "return=skipped"
          }
       },
       mine_marble = {
@@ -93,6 +95,7 @@ descriptions:new_productionsite_type {
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
+            "return=skipped"
          }
       },
       a_mine_produce_granite = {
