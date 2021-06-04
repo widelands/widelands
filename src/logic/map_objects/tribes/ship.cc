@@ -649,6 +649,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					} else {
 						wq->set_filled(wq->get_filled() + 1);
 					}
+					ware->remove(game);
 				} else {
 					worker->set_economy(nullptr, wwWARE);
 					worker->set_economy(nullptr, wwWORKER);
