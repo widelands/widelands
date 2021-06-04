@@ -36,11 +36,15 @@ struct SupplyList {
 	void add_supply(Supply&);
 	void remove_supply(Supply&);
 
-	size_t get_nrsupplies() const;
-
-	const Supply& operator[](size_t const idx) const;
-
-	Supply& operator[](size_t const idx);
+	size_t get_nrsupplies() const {
+		return supplies_.size();
+	}
+	const Supply& operator[](size_t const idx) const {
+		return *supplies_[idx];
+	}
+	Supply& operator[](size_t const idx) {
+		return *supplies_[idx];
+	}
 
 	bool have_supplies(const Game& game, const Request&);
 

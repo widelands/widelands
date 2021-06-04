@@ -25,18 +25,6 @@
 
 namespace Widelands {
 
-size_t SupplyList::get_nrsupplies() const {
-	return supplies_.size();
-}
-
-const Supply& SupplyList::operator[](size_t const idx) const {
-	return *supplies_[idx];
-}
-
-Supply& SupplyList::operator[](size_t const idx) {
-	return *supplies_[idx];
-}
-
 /**
  * Add a supply to the list.
  */
@@ -55,10 +43,12 @@ void SupplyList::remove_supply(Supply& supp) {
 	     ++item_iter) {
 
 		if (*item_iter == &supp) {
+			// Copy last element to current positon, avoids shifts
 			*item_iter = *(supplies_.end() - 1);
 			supplies_.pop_back();
 			return;
 		}
+		// no extra code for last element, copy will be a noop then
 	}
 	throw wexception("SupplyList::remove: not in list");
 }
