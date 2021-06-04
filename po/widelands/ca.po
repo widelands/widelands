@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-26 11:53+0000\n"
-"PO-Revision-Date: 2021-05-25 20:14+0000\n"
+"POT-Creation-Date: 2021-06-02 08:17+0000\n"
+"PO-Revision-Date: 2021-05-30 12:38+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -769,32 +769,32 @@ msgid "Current: %s"
 msgstr "Actual: %s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "S'ha produït un error!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:76
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:185
 msgid "My Maps"
 msgstr "Els meus mapes"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/wui/mapdata.cc:182
 msgid "Multiplayer Scenarios"
 msgstr "Escenaris multijugador"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:79
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
 msgstr "Mapes descarregats"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #, c-format
 msgid "Current directory: %s"
@@ -1337,8 +1337,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1544,7 +1544,7 @@ msgstr "off"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/wlapplication.cc:1451
+#: ../../src/ui_fsmenu/main.cc:935 ../../src/wlapplication.cc:1451
 msgid "Error"
 msgstr "S'ha produït un error."
 
@@ -2249,19 +2249,19 @@ msgstr "Cal destruir una via d'aigua per deixar espai al nou edifici portuari."
 msgid "A geologist found resources."
 msgstr "Un geòleg ha trobat recursos."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2066
+#: ../../src/logic/map_objects/tribes/worker.cc:2064
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr "Treballador"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2072
 msgid "Worker got lost!"
 msgstr "El treballador s'ha perdut!"
 
@@ -4250,7 +4250,7 @@ msgstr "Prohibeix les lluites entre jugadors"
 
 #: ../../src/ui_fsmenu/launch_game.cc:219
 msgid "All selected starting conditions ignore the map’s starting positions"
-msgstr ""
+msgstr "Totes les condicions inicials seleccionades ignoren les posicions inicials del mapa."
 
 #: ../../src/ui_fsmenu/launch_game.cc:224
 msgid "The starting positions are set by the scenario"
@@ -4628,6 +4628,17 @@ msgstr "No s'ha trobat cap cultura!"
 #: ../../src/ui_fsmenu/main.cc:893 ../../src/ui_fsmenu/netsetup_lan.cc:322
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "No s'ha trobat cap cultura a data/tribes/intialization/[tribename]/init.lua."
+
+#: ../../src/ui_fsmenu/main.cc:937 ../../src/wlapplication.cc:1453
+#, c-format
+msgid ""
+"An error has occured. The error message is:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please add this information to your report."
+msgstr "S'ha produït un error i el missatge d'error és:\n\n%1$s\n\nSi us plau, informeu de l'error per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt en Windows). Esteu usant la versió %2$s (%3$s).\nAfegiu aquesta informació a l'informe."
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
@@ -5130,18 +5141,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autors"
@@ -5191,17 +5202,6 @@ msgstr "El Widelands no ha pogut trobar el fitxer «%s»."
 #: ../../src/wlapplication.cc:697
 msgid "File system error"
 msgstr "S'ha produït un error en el sistema de fitxers."
-
-#: ../../src/wlapplication.cc:1453
-#, c-format
-msgid ""
-"An error has occured. The error message is:\n"
-"\n"
-"%1$s\n"
-"\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
-"Please add this information to your report."
-msgstr "S'ha produït un error i el missatge d'error és:\n\n%1$s\n\nSi us plau, informeu de l'error per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt en Windows). Esteu usant la versió %2$s (%3$s).\nAfegiu aquesta informació a l'informe."
 
 #: ../../src/wlapplication.cc:1467
 msgid "Game ended unexpectedly"
@@ -5257,11 +5257,11 @@ msgstr "Multijugador"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Editor – Load Map"
-msgstr ""
+msgstr "Editor – Carrega el mapa"
 
 #: ../../src/wlapplication_options.cc:208
 msgid "Editor – New Map"
-msgstr ""
+msgstr "Editor – Mapa nou"
 
 #: ../../src/wlapplication_options.cc:213
 msgid "Editor – New Random Map"
@@ -5269,7 +5269,7 @@ msgstr "Editor – Mapa nou aleatori"
 
 #: ../../src/wlapplication_options.cc:231
 msgid "About"
-msgstr ""
+msgstr "Informació"
 
 #: ../../src/wlapplication_options.cc:248
 msgid "Internet Login"
@@ -5357,11 +5357,11 @@ msgstr "Commuta la graella"
 
 #: ../../src/wlapplication_options.cc:373
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Mostra/Amaga inamovibles"
 
 #: ../../src/wlapplication_options.cc:378
 msgid "Toggle Animals"
-msgstr ""
+msgstr "Mostra/Amaga els animals"
 
 #: ../../src/wlapplication_options.cc:383
 msgid "Toggle Resources"
@@ -5370,7 +5370,7 @@ msgstr "Commuta la visió dels recursos"
 #: ../../src/wlapplication_options.cc:390
 #, c-format
 msgid "Set Toolsize to %d"
-msgstr ""
+msgstr "Estableix la mida de l'eina a %d"
 
 #: ../../src/wlapplication_options.cc:408
 msgid "Toggle Census"
@@ -5382,7 +5382,7 @@ msgstr "Commuta les etiquetes d'estadístiques"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
-msgstr ""
+msgstr "Mostra/Amaga els nivells dels soldats"
 
 #: ../../src/wlapplication_options.cc:423
 msgid "Toggle Buildings Visibility"
@@ -6179,8 +6179,8 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
@@ -7126,7 +7126,7 @@ msgstr "%2% de %1%, %3%"
 #: ../../src/wui/savegameloader.cc:172
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "desada el %2$u de %1$s de %3$u"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:30
