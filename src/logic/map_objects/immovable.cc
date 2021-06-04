@@ -149,6 +149,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
+     descriptions_(descriptions),
      size_(BaseImmovable::NONE) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());
@@ -257,6 +258,10 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
 		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(immo))
 		   ->add_collected_by(descriptions, prodsite);
 	}
+}
+
+void ImmovableDescr::register_immovable_relation(const std::string& a, const std::string& b) {
+	descriptions_.add_immovable_relation(a, b);
 }
 
 /**
