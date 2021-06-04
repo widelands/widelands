@@ -64,7 +64,7 @@ msgstr "Gyűjts építőanyagokat!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr "Halmozz fel építőanyagokat!"
+msgstr "Építőanyagok felhalmozása"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
@@ -126,7 +126,7 @@ msgstr "Fejleszd az élelmiszer-termelő gazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr "Fejleszd az élelmiszer-termelő gazdaságot!"
+msgstr "Az élelmiszer-termelő gazdaság fejlesztése"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
@@ -142,7 +142,7 @@ msgstr "Építs vasércbányát és a hozzá kapcsolódó gazdaságot!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr "Építs bányákat és hozzájuk kapcsolódó gazdaságot!"
+msgstr "Bányák és a hozzájuk kapcsolódó gazdaság"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
@@ -207,7 +207,7 @@ msgstr "Győzd le az ellenséget!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr "Győzd le az ellenséget!"
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
@@ -219,7 +219,7 @@ msgstr "Menekülj el az árvíz elől!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr "Menekülj el az árvíz elől!"
+msgstr "Menekülés az árvíz elől"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
@@ -654,7 +654,7 @@ msgid ""
 msgstr ""
 "Építs vasércbányát és esetleg aranybányát is! Mivel ezek csak az ércet "
 "termelik ki, szükségünk lesz kemencére is a kiolvasztásukhoz. Építs "
-"kovácsműhelyt is, hogy ne fogyjunk ki a szerszámokból — és igen, egy kis "
+"kovácsműhelyt is, hogy ne fogyjunk ki a szerszámokból – és igen, egy kis "
 "páncélkovács műhelyt is! Ez sisakokat és kardokat készít. Remélem, nem "
 "találkozunk itt ellenséggel, de jobb felkészülni."
 
@@ -1048,7 +1048,7 @@ msgid ""
 " – we will all drown!"
 msgstr ""
 "Az istene teljesítette a kérését! A tengerszint emelkedik! A sziget majdnem "
-"teljesen sík — mindannyian megfulladunk!"
+"teljesen sík – mindannyian megfulladunk!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401

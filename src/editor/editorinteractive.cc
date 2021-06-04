@@ -29,6 +29,7 @@
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -892,22 +893,50 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-void EditorInteractive::run_editor(const EditorInteractive::Init init,
-                                   UI::Panel* parent_for_error_message,
+void EditorInteractive::run_editor(UI::Panel* error_message_parent,
+                                   const EditorInteractive::Init init,
                                    const std::string& filename,
                                    const std::string& script_to_run) {
 	try {
-		Widelands::EditorGameBase egbase(nullptr);
-		EditorInteractive& eia = *new EditorInteractive(egbase);
-		egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
+		EditorInteractive::do_run_editor(init, filename, script_to_run);
+	} catch (const std::exception& e) {
+		log_err("##############################\n"
+		        "  FATAL EXCEPTION in editor: %s\n"
+		        "##############################\n",
+		        e.what());
+		if (!error_message_parent) {
+			return;
+		}
+		// Note: We don't necessarily want a bug report here, but the wording must
+		// be EXACTLY LIKE THIS in v1.0 to avoid adding a new translatable string
+		// during winter time freeze. We can consider rephrasing it after v1.0.
+		UI::WLMessageBox m(
+		   error_message_parent, UI::WindowStyle::kFsMenu, _("Error"),
+		   (boost::format(
+		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		         "this problem to help us improve Widelands. You will find related messages in the "
+		         "standard output (stdout.txt on Windows). You are using build %2$s "
+		         "(%3$s).\nPlease add this information to your report.")) %
+		    e.what() % build_id() % build_type())
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
+}
 
-		// We need to disable non-world add-ons in the editor
-		for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-			if (it->category != AddOns::AddOnCategory::kWorld) {
-				it = egbase.enabled_addons().erase(it);
-			} else {
-				++it;
-			}
+void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
+                                      const std::string& filename,
+                                      const std::string& script_to_run) {
+	Widelands::EditorGameBase egbase(nullptr);
+	EditorInteractive& eia = *new EditorInteractive(egbase);
+	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
+
+	// We need to disable non-world add-ons in the editor
+	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
+		if (it->category != AddOns::AddOnCategory::kWorld) {
+			it = egbase.enabled_addons().erase(it);
+		} else {
+			++it;
 		}
 
 		egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
@@ -966,16 +995,6 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 		egbase.remove_loader_ui();
 		eia.run<UI::Panel::Returncodes>();
 		egbase.cleanup_objects();
-	} catch (const std::exception& e) {
-		log_err("Error running editor: %s", e.what());
-		if (parent_for_error_message) {
-			UI::WLMessageBox m(
-			   parent_for_error_message, UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("Error while running the editor!\nError message:\n%s")) % e.what())
-			      .str(),
-			   UI::WLMessageBox::MBoxType::kOk);
-			m.run<UI::Panel::Returncodes>();
-		}
 	}
 }
 

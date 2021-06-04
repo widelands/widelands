@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-23 10:22+0000\n"
-"PO-Revision-Date: 2021-05-14 21:06+0000\n"
+"POT-Creation-Date: 2021-06-02 08:17+0000\n"
+"PO-Revision-Date: 2021-06-04 08:56+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1292,9 +1292,10 @@ msgstr "Maniókafőzde"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
 msgid "baking bread"
 msgstr "Kenyér sütése"
 
@@ -1462,40 +1463,40 @@ msgstr "Aranyásó kunyhó"
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:43
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:77
 msgid "mining gold"
 msgstr "Arany bányászata"
 
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:87
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
 msgid "No Gold"
 msgstr "Nincs arany"
 
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
 msgid "Main Gold Vein Exhausted"
 msgstr "Fő arany telér kimerült"
 
@@ -1712,9 +1713,9 @@ msgstr "Kőfaragó műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:206
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:200
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:123
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making a shovel"
 msgstr "Lapát készítése"
 
@@ -1724,7 +1725,7 @@ msgstr "Lapát készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:109
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:110
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
 msgid "making a felling ax"
 msgstr "Favágó balta készítése"
@@ -1734,7 +1735,7 @@ msgstr "Favágó balta készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:182
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:164
 msgid "making a pick"
 msgstr "Csákány készítése"
@@ -1750,9 +1751,9 @@ msgstr "Macsete készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:169
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:178
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:179
 msgid "making kitchen tools"
 msgstr "Konyhai eszközök készítése"
 
@@ -1762,9 +1763,9 @@ msgstr "Konyhai eszközök készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:146
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:128
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:189
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
 msgid "making a hammer"
 msgstr "Kalapács készítése"
 
@@ -1778,7 +1779,7 @@ msgstr "Véső készítése"
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
 msgstr "Tű készítése"
 
@@ -1852,27 +1853,27 @@ msgstr "Kőbánya"
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:63
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:102
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:80
 msgid "mining granite"
 msgstr "Gránit bányászata"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:120
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:121
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:98
 msgid "No Granite"
 msgstr "Nincs gránit"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:121
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:122
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:99
 msgid "Main Granite Vein Exhausted"
 msgstr "Fő gránit telér kimerült"
 
@@ -1932,7 +1933,6 @@ msgstr "Vadonőrző kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2065,34 +2065,23 @@ msgstr "Szénbánya"
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:54
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:78
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:59
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:43
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:57
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:79
 msgid "mining coal"
 msgstr "Szén bányászata"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:87
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:117
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:96
-msgid "No Coal"
-msgstr "Nincs szén"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:78
@@ -2100,6 +2089,17 @@ msgstr "Nincs szén"
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:97
+msgid "No Coal"
+msgstr "Nincs szén"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
 msgid "Main Coal Vein Exhausted"
 msgstr "Fő szén telér kimerült"
 
@@ -2318,38 +2318,38 @@ msgstr "Vasércbánya"
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:59
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:43
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:56
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:79
 msgid "mining iron"
 msgstr "Vas bányászása"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:87
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
 msgid "No Iron"
 msgstr "Nincs vas"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
 msgid "Main Iron Vein Exhausted"
 msgstr "Fő vasérc telér kimerült"
 
@@ -2473,9 +2473,9 @@ msgstr "Szerszámkovács műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:98
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:167
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:168
 msgid "making a bread paddle"
 msgstr "Péklapát készítése"
 
@@ -2487,16 +2487,16 @@ msgstr "Egy pár vödör készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:92
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:121
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:122
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:200
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:201
 msgid "making fire tongs"
 msgstr "Parázsfogó készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:156
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:157
 msgid "making a fishing net"
 msgstr "Halászháló készítése"
 
@@ -2525,9 +2525,9 @@ msgstr "Fűrész készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:193
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:194
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:188
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:113
 msgid "making a scythe"
 msgstr "Kasza készítése"
 
@@ -2622,20 +2622,20 @@ msgid "Ax Workshop"
 msgstr "Fejszekészítő műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:62
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:63
 msgid "forging an ax"
 msgstr "Fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:78
 msgid "forging a sharp ax"
 msgstr "Éles fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:104
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:93
 msgid "forging a broad ax"
 msgstr "Széles fejsze kovácsolása"
 
@@ -2658,7 +2658,7 @@ msgid "Barracks"
 msgstr "Laktanya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:54
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "Katona toborzása"
@@ -2718,8 +2718,8 @@ msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "Szénbánya"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:91
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2738,7 +2738,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr "Mélyebb szénbánya"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:81
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2802,7 +2802,7 @@ msgid "Gold Mine"
 msgstr "Aranybánya"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:91
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2821,7 +2821,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr "Mélyebb aranybánya"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:80
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2835,7 +2835,7 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr "Gránitbánya"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:86
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:87
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -2852,7 +2852,7 @@ msgstr "Sisakkészítő műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:122
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:123
 msgid "forging a helmet"
 msgstr "Sisak kovácsolása"
 
@@ -2894,7 +2894,7 @@ msgid "Iron Mine"
 msgstr "Vasércbánya"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:91
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2913,7 +2913,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr "Mélyebb vasércbánya"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:81
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2954,16 +2954,16 @@ msgstr "Szerszámkészítő műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:133
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:134
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:116
 msgid "making a fishing rod"
 msgstr "Horgászbot készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:158
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:145
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:146
 msgid "making a hunting spear"
 msgstr "Vadászlándzsa készítése"
 
@@ -2977,7 +2977,7 @@ msgstr "Kis sörfőzde"
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:51
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:89
 msgid "brewing beer"
 msgstr "Sör főzése"
 
@@ -3056,21 +3056,21 @@ msgstr "Fegyverkészítő műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:107
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:108
 msgid "forging a bronze ax"
 msgstr "Bronz fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:122
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:123
 msgid "forging a battle ax"
 msgstr "Csatabalta kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:137
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
 msgid "forging a warrior’s ax"
-msgstr "Harci fejsze kovácsolása"
+msgstr "Csatabárd kovácsolása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:8
@@ -3172,7 +3172,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Szénbánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:98
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3185,7 +3185,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Mély szénbánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:78
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3248,7 +3248,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Aranybánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:97
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3261,7 +3261,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Mély aranybánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:76
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3295,7 +3295,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Vasércbánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:98
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3308,7 +3308,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Mély vasércbánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3337,25 +3337,25 @@ msgid "Marble Mine"
 msgstr "Márványbánya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:87
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:107
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:110
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:43
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:64
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:65
 msgid "mining marble"
 msgstr "Márvány kifejtése"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:133
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:83
 msgid "No Marble"
 msgstr "Nincs márvány"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:134
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:137
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:84
 msgid "Main Marble Vein Exhausted"
 msgstr "Fő márvány telér kimerült"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:139
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3369,7 +3369,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Mély márványbánya"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:86
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3477,7 +3477,7 @@ msgstr "Szerszámkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:80
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:134
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:135
 msgid "making a basket"
 msgstr "Kosár fonása"
 
@@ -3601,19 +3601,19 @@ msgstr "Nagy páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:70
 msgid "forging a broadsword"
 msgstr "Pallos kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:85
 msgid "forging a double-edged sword"
 msgstr "Kétélű kard kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:100
 msgid "forging a golden helmet"
 msgstr "Aranysisak kovácsolása"
 
@@ -3625,13 +3625,13 @@ msgstr "Kis páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:92
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:93
 msgid "forging a short sword"
 msgstr "Rövid kard kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:107
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:108
 msgid "forging a long sword"
 msgstr "Hosszú kard kovácsolása"
 
@@ -3694,12 +3694,12 @@ msgstr "Kovácsműhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:91
 msgid "forging a felling ax"
 msgstr "Favágóbalta kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:102
 msgid "forging a pick"
 msgstr "Csákány kovácsolása"
 
@@ -3790,7 +3790,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "Szénbánya"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:121
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3803,7 +3803,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr "Mély szénbánya"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:100
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3916,7 +3916,7 @@ msgctxt "frisians_building"
 msgid "Deep Gold Mine"
 msgstr "Mély aranybánya"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:98
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3931,8 +3931,8 @@ msgid "Honey Bread Bakery"
 msgstr "Mézeskenyérpékség"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:66
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:78
 msgid "baking honey bread"
 msgstr "Mézes kenyér sütése"
 
@@ -3969,7 +3969,7 @@ msgctxt "frisians_building"
 msgid "Deep Iron Mine"
 msgstr "Mély vasércbánya"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3984,8 +3984,8 @@ msgid "Mead Brewery"
 msgstr "Mézsör főzde"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:66
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:78
 msgid "brewing mead"
 msgstr "Mézsör főzése"
 
@@ -4064,7 +4064,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "Kőbánya"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:124
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4077,7 +4077,7 @@ msgctxt "frisians_building"
 msgid "Deep Rock Mine"
 msgstr "Mély kőbánya"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:101
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4122,13 +4122,13 @@ msgstr "Szabóműhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:67
 msgid "sewing studded fur garment"
 msgstr "Szegecses kacagány varrása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:79
 msgid "sewing golden fur garment"
 msgstr "Aranyozott kacagány varrása"
 
@@ -4787,11 +4787,11 @@ msgstr "Árpaföld (kicsi)"
 #: ../../data/tribes/immovables/barleyfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr "Árpaföld (apró)"
+msgstr "Árpaföld (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:14
 msgid "Blueberry Bush (tiny)"
-msgstr "Áfonyabokor (apró)"
+msgstr "Áfonyabokor (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:38
 msgid "Blueberry Bush (small)"
@@ -4807,7 +4807,7 @@ msgstr "Áfonyabokor (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:14
 msgid "Black Currant (tiny)"
-msgstr "Feketeribizli (apró)"
+msgstr "Feketeribizli (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:38
 msgid "Black Currant (small)"
@@ -4823,7 +4823,7 @@ msgstr "Feketeribizli (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:14
 msgid "Red Currant (tiny)"
-msgstr "Ribizli (apró)"
+msgstr "Ribizli (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:38
 msgid "Red Currant (small)"
@@ -4839,7 +4839,7 @@ msgstr "Ribizli (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:14
 msgid "Desert Hackberry (tiny)"
-msgstr "Sivatagi ostorfa (apró)"
+msgstr "Sivatagi ostorfa (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:38
 msgid "Desert Hackberry (small)"
@@ -4855,7 +4855,7 @@ msgstr "Sivatagi ostorfa (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:14
 msgid "Juniper (tiny)"
-msgstr "Boróka (apró)"
+msgstr "Boróka (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:38
 msgid "Juniper (small)"
@@ -4871,7 +4871,7 @@ msgstr "Boróka (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:14
 msgid "Raspberry Bush (tiny)"
-msgstr "Málna (apró)"
+msgstr "Málna (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:38
 msgid "Raspberry Bush (small)"
@@ -4887,7 +4887,7 @@ msgstr "Málna (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:14
 msgid "Sea Buckthorn (tiny)"
-msgstr "Homoktövis (apró)"
+msgstr "Homoktövis (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:38
 msgid "Sea Buckthorn (small)"
@@ -4903,7 +4903,7 @@ msgstr "Homoktövis (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:14
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr "Bűzösbokor (apró)"
+msgstr "Bűzösbokor (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:38
 msgid "Stink Shepherd’s Tree (small)"
@@ -4919,7 +4919,7 @@ msgstr "Bűzösbokor (érett)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:14
 msgid "Strawberries (tiny)"
-msgstr "Földieper (apró)"
+msgstr "Földieper (csíra)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:38
 msgid "Strawberries (small)"
@@ -4961,7 +4961,7 @@ msgstr "Feketegyökér (kicsi)"
 #: ../../data/tribes/immovables/blackrootfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr "Feketegyökér (apró)"
+msgstr "Feketegyökér (csíra)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
@@ -4991,7 +4991,7 @@ msgstr "Manióka ültetvény (kicsi)"
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (tiny)"
-msgstr "Manióka ültetvény (apró)"
+msgstr "Manióka ültetvény (csíra)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5021,7 +5021,7 @@ msgstr "Kukoricamező (kicsi)"
 #: ../../data/tribes/immovables/cornfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
-msgstr "Kukoricamező (apró)"
+msgstr "Kukoricamező (csíra)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/destroyed_building/init.lua:8
@@ -5051,7 +5051,7 @@ msgstr "Szőlőtőke (kicsi)"
 #: ../../data/tribes/immovables/grapevine/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Szőlőtőke (apró)"
+msgstr "Szőlőtőke (csíra)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/burning/init.lua:8
@@ -5105,7 +5105,7 @@ msgstr "Nádas (kicsi)"
 #: ../../data/tribes/immovables/reedfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Reed Field (tiny)"
-msgstr "Nádas (apró)"
+msgstr "Nádas (csíra)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/init.lua:8
@@ -5143,7 +5143,7 @@ msgstr "Kevés gránit"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:169
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
-msgstr "Rengeteg arany"
+msgstr "Sok arany"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/init.lua:72
@@ -5151,7 +5151,7 @@ msgstr "Rengeteg arany"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
-msgstr "Rengeteg gránit"
+msgstr "Sok gránit"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:31
@@ -5193,7 +5193,7 @@ msgstr "Kevés kristály"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:146
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
-msgstr "Rengeteg szén"
+msgstr "Sok szén"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:192
@@ -5202,13 +5202,13 @@ msgstr "Rengeteg szén"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:192
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
-msgstr "Rengeteg vas"
+msgstr "Sok vas"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr "Rengeteg kristály"
+msgstr "Sok kristály"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:108
@@ -5220,7 +5220,7 @@ msgstr "Kevés márvány"
 #: ../../data/tribes/immovables/resi/empire/init.lua:188
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
-msgstr "Rengeteg márvány"
+msgstr "Sok márvány"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_amazons/init.lua:8
@@ -5406,7 +5406,7 @@ msgstr "Búzamező (kicsi)"
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (tiny)"
-msgstr "Búzamező (apró)"
+msgstr "Búzamező (csíra)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:11
 #: ../../data/tribes/initialization/atlanteans/init.lua:11
@@ -5462,7 +5462,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) katona"
 msgstr[1] "%1%(+%2%) katona"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -7126,7 +7125,7 @@ msgstr "Éles fejsze"
 #: ../../data/tribes/wares/ax_warriors/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Ax"
-msgstr "Harci fejsze"
+msgstr "Csatabárd"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/balsa/init.lua:8
@@ -8316,7 +8315,7 @@ msgstr "Bányász"
 #: ../../data/tribes/workers/barbarians/miner_chief/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr "Főbányász"
+msgstr "Képzett bányász"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/miner_master/init.lua:8

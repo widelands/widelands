@@ -99,8 +99,8 @@ public:
 		kRandom,           // show Random Map window
 		kLoad              // show Load Map window
 	};
-	static void run_editor(EditorInteractive::Init,
-	                       UI::Panel* parent_for_error_message,
+	static void run_editor(UI::Panel* error_message_parent,
+	                       EditorInteractive::Init,
 	                       const std::string& filename = "",
 	                       const std::string& script_to_run = "");
 
@@ -185,6 +185,8 @@ private:
 
 	// For referencing the items in showhidemenu_
 	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+
+	static void do_run_editor(EditorInteractive::Init, const std::string&, const std::string&);
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();

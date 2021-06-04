@@ -81,8 +81,8 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
-"Amikor a katonák gyakorlatoznak, az  elhasznált fegyvereket kidobják. Ezeket"
-" fémmé lehet alakítani az újrahasznosító telepen. Használd a készleten lévő "
+"Amikor a katonák gyakorlatoznak, az elhasznált fegyvereket kidobják. Ezeket "
+"fémmé lehet alakítani az újrahasznosító telepen. Használd a készleten lévő "
 "fegyvereket katonák fejlesztésére, és hasznosítsd újra a keletkező "
 "ócskavasat!"
 
@@ -103,7 +103,7 @@ msgstr "Építs egy halgazdaságot!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr "Építs egy halgazdaságot halak tenyésztéséhez!"
+msgstr "Halgazdaság építése halak tenyésztéséhez"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -196,16 +196,16 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr "Kémkedj Murilius után"
+msgstr "Kémkedj Murilius után!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr "Küldj felderítőt, hogy kémkedjen a Birodalom után!"
+msgstr "Felderítő küldése a Birodalom után kémkedni"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
-msgstr "Építs felderítőházat a határhoz, hogy felfedd a Birodalom titkait."
+msgstr "Építs felderítőházat a határhoz, hogy felfedd a Birodalom titkait!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
@@ -246,7 +246,7 @@ msgstr "Győzd le a barbárokat!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr "Győzd le a barbárokat!"
+msgstr "A barbárok legyőzése"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -272,7 +272,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr "Foglalj el minden egyes mezőt, ami meg Muriliusé."
+msgstr "Foglalj el minden egyes mezőt, ami meg Muriliusé!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
@@ -573,9 +573,9 @@ msgid ""
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
 "Reebaud főnök! További rossz híreket hozok. Alig van a környező vizekben "
-"hal. Bár  harapnivalókat készíthetünk gyümölcsből és kenyérből, de a katonák"
-" kiképzése sok füstölt húst vagy halat igényel. A rénszarvastelepen a szőrme"
-" mellett csak mellékesen készül egy kevés hús, ami nem elég."
+"hal. Bár harapnivalókat készíthetünk gyümölcsből és kenyérből, de a katonák "
+"kiképzése sok füstölt húst vagy halat igényel. A rénszarvastelepen a szőrme "
+"mellett csak mellékesen készül egy kevés hús, ami nem elég."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -612,8 +612,8 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
-"A bányák működni tudnak tovább is, de így már hússzor — a mély bányáknak "
-"tízszer — annyi ideig tart ércet vagy szenet termelni. Érdemes felkészülnöd "
+"A bányák működni tudnak tovább is, de így már hússzor – a mély bányáknak "
+"tízszer – annyi ideig tart ércet vagy szenet termelni. Érdemes felkészülnöd "
 "a megnövekedett élelmiszer- és időszükségletre."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:242
@@ -630,7 +630,7 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
-"Igazad van — több gyümölcsöst, gyümölcsszedőházat és kocsmát kell építenünk,"
+"Igazad van – több gyümölcsöst, gyümölcsszedőházat és kocsmát kell építenünk,"
 " valamint ivót és fejlesztett pékséget és sörfőzdét is."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
@@ -740,7 +740,7 @@ msgid ""
 "driving them out."
 msgstr ""
 "Ha békében szeretnél itt élni, akkor nincs választási lehetőséged, hogy "
-"megtűröd-e őket: segítened kell a Birodalmat a kiűzésükben."
+"megtűröd-e őket: Segítened kell a Birodalmat a kiűzésükben."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:292
