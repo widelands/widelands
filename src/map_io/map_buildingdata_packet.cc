@@ -343,7 +343,8 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 				for (uint32_t i = fr.unsigned_32(); i; --i) {
 					const std::string item = fr.string();
 					const uint32_t amount = fr.unsigned_32();
-					constructionsite.additional_wares_[game.mutable_descriptions()->load_ware(item)] = amount;
+					constructionsite.additional_wares_[game.mutable_descriptions()->load_ware(item)] =
+					   amount;
 				}
 				for (uint32_t i = fr.unsigned_32(); i; --i) {
 					constructionsite.additional_workers_.push_back(&mol.get<Worker>(fr.unsigned_32()));
