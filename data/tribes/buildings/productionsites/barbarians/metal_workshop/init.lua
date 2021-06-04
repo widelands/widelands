@@ -90,6 +90,7 @@ descriptions:new_productionsite_type {
             "call=produce_pick",
             "call=produce_scythe",
             "call=produce_shovel",
+            "return=skipped"
          }
       },
       produce_bread_paddle = {
