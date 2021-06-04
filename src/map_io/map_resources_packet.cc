@@ -54,10 +54,12 @@ void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					const uint32_t id = (packet_version >= 2) ? fr.unsigned_32() : fr.unsigned_8();
 					const uint16_t amount = (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
-					const uint16_t start_amount = (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
+					const uint16_t start_amount =
+					   (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
 					const FCoords& fcoords = map->get_fcoords(Coords(x, y));
 					const auto it = smap.find(id);
-					map->initialize_resources(fcoords, it == smap.end() ? kNoResource : it->second, start_amount);
+					map->initialize_resources(
+					   fcoords, it == smap.end() ? kNoResource : it->second, start_amount);
 					map->set_resources(fcoords, amount);
 				}
 			}
