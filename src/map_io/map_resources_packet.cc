@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
@@ -39,7 +39,8 @@ void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// We need to keep support for older versions around forever!!
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
 			int32_t const nr_res = fr.unsigned_16();
 
 			// construct ids and map
@@ -51,11 +52,12 @@ void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 			for (uint16_t y = 0; y < map->get_height(); ++y) {
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
-					DescriptionIndex const id = fr.unsigned_8();
-					ResourceAmount const amount = fr.unsigned_8();
-					ResourceAmount const start_amount = fr.unsigned_8();
-					const auto fcoords = map->get_fcoords(Coords(x, y));
-					map->initialize_resources(fcoords, smap[id], start_amount);
+					const uint32_t id = (packet_version >= 2) ? fr.unsigned_32() : fr.unsigned_8();
+					const uint16_t amount = (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
+					const uint16_t start_amount = (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
+					const FCoords& fcoords = map->get_fcoords(Coords(x, y));
+					const auto it = smap.find(id);
+					map->initialize_resources(fcoords, it == smap.end() ? kNoResource : it->second, start_amount);
 					map->set_resources(fcoords, amount);
 				}
 			}
@@ -104,9 +106,9 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			DescriptionIndex res = f.get_resources();
 			ResourceAmount const amount = f.get_resources_amount();
 			ResourceAmount const start_amount = f.get_initial_res_amount();
-			fw.unsigned_8(res);
-			fw.unsigned_8(amount);
-			fw.unsigned_8(start_amount);
+			fw.unsigned_32(res);
+			fw.unsigned_16(amount);
+			fw.unsigned_16(start_amount);
 		}
 	}
 
