@@ -6,7 +6,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2015
 # ks k, 2017
-# ks k, 2017-2020
+# ks k, 2017-2021
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An, 2017
 # TaeMin An, 2017
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-26 11:53+0000\n"
-"PO-Revision-Date: 2021-05-02 12:39+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-02 08:17+0000\n"
+"PO-Revision-Date: 2021-06-02 11:03+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -742,17 +742,17 @@ msgstr "설명: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/tools/info_tool.cc:231
 msgid "(none)"
-msgstr ""
+msgstr "(없음)"
 
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "사용설정된 추가기능: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
@@ -773,32 +773,32 @@ msgid "Current: %s"
 msgstr "현재: %s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "오류!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:76
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:185
 msgid "My Maps"
 msgstr "내 지도"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/wui/mapdata.cc:182
 msgid "Multiplayer Scenarios"
 msgstr "여러 선수 시나리오"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:79
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
 msgstr "내려받은 지도들"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #, c-format
 msgid "Current directory: %s"
@@ -999,7 +999,7 @@ msgstr "기후"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "지형 분포"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:129
 msgid "Water:"
@@ -1050,11 +1050,11 @@ msgstr "기본값"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:241
 msgid "Alpine"
-msgstr ""
+msgstr "알파인"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:242
 msgid "Atoll"
-msgstr ""
+msgstr "고리 모양 산호섬"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:243
@@ -1340,8 +1340,8 @@ msgid ""
 "location."
 msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1433,7 +1433,7 @@ msgstr "그래픽 드라이버에서 정보를 읽는 데 알 수 없는 문제�
 #: ../../src/graphic/gl/initialize.cc:188
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "오픈지엘 버전을 감지할 수 없어서 와이드랜드가가 작동하지 않습니다."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1452,7 +1452,7 @@ msgstr "그래픽 드라이버가 너무 오래되었기 때문에 와이드랜�
 #: ../../src/graphic/gl/initialize.cc:223
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$u 버전은 %2$u.%3$u 버전 이상이어야 합니다."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1460,15 +1460,15 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$s 은(는) %2$u.%3$u 버전 이상이어야 합니다."
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "오픈지엘"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "그림자 언어 "
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1547,25 +1547,25 @@ msgstr "비활성"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/wlapplication.cc:1451
+#: ../../src/ui_fsmenu/main.cc:935 ../../src/wlapplication.cc:1451
 msgid "Error"
 msgstr "오류"
 
 #: ../../src/logic/addons.cc:46
 msgid "Tribes"
-msgstr ""
+msgstr "부족"
 
 #: ../../src/logic/addons.cc:48
 msgid "World"
-msgstr ""
+msgstr "세계"
 
 #: ../../src/logic/addons.cc:51
 msgid "Script"
-msgstr ""
+msgstr "스크립트"
 
 #: ../../src/logic/addons.cc:52
 msgid "Map Set"
-msgstr ""
+msgstr "지도 설정"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:54 ../../src/ui_fsmenu/campaigndetails.cc:49
@@ -1574,57 +1574,57 @@ msgstr "작전 수행"
 
 #: ../../src/logic/addons.cc:58
 msgid "Win Condition"
-msgstr ""
+msgstr "승리 조건"
 
 #: ../../src/logic/addons.cc:60
 msgid "Starting Condition"
-msgstr ""
+msgstr "시작 조건"
 
 #: ../../src/logic/addons.cc:85
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../src/logic/addons.cc:140
 msgid "No conflicts"
-msgstr ""
+msgstr "충돌 없음"
 
 #: ../../src/logic/addons.cc:145
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
-msgstr ""
+msgstr "%1$s (예상 버전 %2$s, 찾음 %3$s)"
 
 #: ../../src/logic/addons.cc:150 ../../src/logic/addons.cc:190
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
-msgstr ""
+msgstr "%1$s, %2$s (예상 버전 %3$s, 찾음 %4$s)"
 
 #: ../../src/logic/addons.cc:156
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
-msgstr[0] ""
+msgstr[0] "%1$u 잘못된 버전의 추가 기능: %2$s"
 
 #: ../../src/logic/addons.cc:175
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
-msgstr[0] ""
+msgstr[0] "%1$u 빠진 추가 기능: %2$s"
 
 #: ../../src/logic/addons.cc:183
 #, c-format
 msgid "%s (missing)"
-msgstr ""
+msgstr "%s (빠짐)"
 
 #: ../../src/logic/addons.cc:185
 #, c-format
 msgid "%1$s, %2$s (missing)"
-msgstr ""
+msgstr "%1$s, %2$s (빠짐)"
 
 #: ../../src/logic/addons.cc:195
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s 및 %2$s: %3$s"
 
 #: ../../src/logic/addons.cc:197
 #, c-format
@@ -1641,12 +1641,12 @@ msgstr[0] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:215
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 #: ../../src/logic/addons.cc:219
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (버전 %3$s)"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -1828,7 +1828,7 @@ msgstr[0] "%1% 군인들 (+%2%)"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:428
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
+msgstr[0] "군인 %1% 명"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently open soldier slots in the building. %3% is the maximum number of
@@ -2057,7 +2057,7 @@ msgstr "항구 공간"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:436
 msgid "Port Space Found"
-msgstr "항구 공간 발견"
+msgstr "항구 공간을 발견"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:437
 msgid "An expedition ship found a new port build space."
@@ -2241,19 +2241,19 @@ msgstr "새로운 항구 부두를 위한 공간을 마련하기 위해 수로�
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2066
+#: ../../src/logic/map_objects/tribes/worker.cc:2064
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "%s 이(가) 집으로가는 길을 찾지 못하고 죽을 가능성이 높습니다."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr "일꾼"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2072
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -2287,7 +2287,7 @@ msgstr "통행 불가능"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "지도 파일이 잘못되었습니다:\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
@@ -2485,14 +2485,14 @@ msgstr "Widelands 가 주어진 주소에 연결할 수 없습니다. 가정된 
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
-msgstr[0] ""
+msgstr[0] "%u 추가기능 불일치가 감지됨:\n"
 
 #: ../../src/network/gameclient.cc:732
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "번역확인-> %1$s\n· ‘%2$s’ 호스트에 필요한 것 찾을 수 없습니다"
 
 #: ../../src/network/gameclient.cc:736
 #, c-format
@@ -2513,7 +2513,7 @@ msgstr "/me 확보한 파일을 체크했습니다. 비록 md5 체크섬이 성�
 
 #: ../../src/network/gameclient.cc:1258
 msgid "Disconnected"
-msgstr ""
+msgstr "연결 끊김"
 
 #: ../../src/network/gameclient.cc:1260
 #, c-format
@@ -4603,6 +4603,17 @@ msgstr "부족을 찾을 수 없습니다!"
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "data/tribes/initialization/[tribename]/init.lua 에서 부족을 찾을 수 없습니다."
 
+#: ../../src/ui_fsmenu/main.cc:937 ../../src/wlapplication.cc:1453
+#, c-format
+msgid ""
+"An error has occured. The error message is:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please add this information to your report."
+msgstr ""
+
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
@@ -5104,18 +5115,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "제작자들"
@@ -5164,17 +5175,6 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:697
 msgid "File system error"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1453
-#, c-format
-msgid ""
-"An error has occured. The error message is:\n"
-"\n"
-"%1$s\n"
-"\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
-"Please add this information to your report."
 msgstr ""
 
 #: ../../src/wlapplication.cc:1467
@@ -6152,8 +6152,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
 msgid "Exit Game"
