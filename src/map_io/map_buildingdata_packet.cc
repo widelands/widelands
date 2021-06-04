@@ -60,7 +60,7 @@ constexpr uint16_t kCurrentPacketVersion = 8;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
-constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
+constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
@@ -314,7 +314,7 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
                                                   MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 3) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionConstructionsite) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
 			for (ConstructionSite::Wares::iterator wares_iter =
@@ -337,6 +337,17 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
 			} else {
 				constructionsite.init_settings();
+			}
+
+			if (packet_version >= 5) {
+				for (uint32_t i = fr.unsigned_32(); i; --i) {
+					const std::string item = fr.string();
+					const uint32_t amount = fr.unsigned_32();
+					constructionsite.additional_wares_[game.mutable_descriptions()->load_ware(item)] = amount;
+				}
+				for (uint32_t i = fr.unsigned_32(); i; --i) {
+					constructionsite.additional_workers_.push_back(&mol.get<Worker>(fr.unsigned_32()));
+				}
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Constructionsite", packet_version,
@@ -1108,6 +1119,16 @@ void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& const
 
 	assert(constructionsite.settings_);
 	constructionsite.settings_->save(game, fw);
+
+	fw.unsigned_32(constructionsite.additional_wares_.size());
+	for (const auto& pair : constructionsite.additional_wares_) {
+		fw.string(game.descriptions().get_ware_descr(pair.first)->name());
+		fw.unsigned_32(pair.second);
+	}
+	fw.unsigned_32(constructionsite.additional_workers_.size());
+	for (const Worker* w : constructionsite.additional_workers_) {
+		fw.unsigned_32(mos.get_object_file_index(*w));
+	}
 }
 
 void MapBuildingdataPacket::write_dismantlesite(const DismantleSite& dms,
