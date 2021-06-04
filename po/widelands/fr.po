@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-29 10:07+0000\n"
+"POT-Creation-Date: 2021-06-02 08:17+0000\n"
 "PO-Revision-Date: 2021-05-05 08:44+0000\n"
 "Last-Translator: Atanase Albaran\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -785,32 +785,32 @@ msgid "Current: %s"
 msgstr "Actuel : %s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "Erreur !"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:76
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:185
 msgid "My Maps"
 msgstr "Mes cartes"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/wui/mapdata.cc:182
 msgid "Multiplayer Scenarios"
 msgstr "Scénarios multijoueurs"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:79
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
 msgstr "Cartes téléchargées"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #, c-format
 msgid "Current directory: %s"
@@ -1560,7 +1560,7 @@ msgstr "désactivé"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
 #: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
 #: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/wlapplication.cc:1451
+#: ../../src/ui_fsmenu/main.cc:935 ../../src/wlapplication.cc:1451
 msgid "Error"
 msgstr "Erreur"
 
@@ -4645,6 +4645,17 @@ msgstr "Pas de Tribus trouvées !"
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Pas de Tribus trouvées dans data/tribes/initialization/[tribename]/init.lua."
 
+#: ../../src/ui_fsmenu/main.cc:937 ../../src/wlapplication.cc:1453
+#, c-format
+msgid ""
+"An error has occured. The error message is:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please add this information to your report."
+msgstr "Une erreur est survenue. Le message d'erreur est :\n\n%1$s\n\nS'il vous plait, reportez nous ce problème pour nous aider à améliorer Widelands. Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %2$s (%3$s).\nAjoutez cette information à ce rapport s'il vous plait."
+
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
@@ -5146,18 +5157,18 @@ msgstr "Chemin de fichier tutorial.lua invalide dans campaigns.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriel"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Auteurs"
@@ -5207,17 +5218,6 @@ msgstr "Widelands n' pas pu trouver le fichier \"%s\"."
 #: ../../src/wlapplication.cc:697
 msgid "File system error"
 msgstr "Erreur du système de fichier"
-
-#: ../../src/wlapplication.cc:1453
-#, c-format
-msgid ""
-"An error has occured. The error message is:\n"
-"\n"
-"%1$s\n"
-"\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
-"Please add this information to your report."
-msgstr "Une erreur est survenue. Le message d'erreur est :\n\n%1$s\n\nS'il vous plait, reportez nous ce problème pour nous aider à améliorer Widelands. Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %2$s (%3$s).\nAjoutez cette information à ce rapport s'il vous plait."
 
 #: ../../src/wlapplication.cc:1467
 msgid "Game ended unexpectedly"
@@ -5790,9 +5790,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivité faible :"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
