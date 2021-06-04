@@ -58,6 +58,7 @@ descriptions:new_productionsite_type {
             "call=bake_honey",
             "call=bake_normal",
             "call=bake_honey_2",
+            "return=skipped"
          }
       },
       -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
