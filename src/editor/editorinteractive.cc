@@ -938,64 +938,64 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		} else {
 			++it;
 		}
+	}
 
-		egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
-		EditorInteractive::load_world_units(&eia, egbase);
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	EditorInteractive::load_world_units(&eia, egbase);
 
-		if (init == EditorInteractive::Init::kLoadMapDirectly) {
-			if (filename.empty()) {
-				throw wexception("EditorInteractive::run_editor: Empty map file name");
-			}
-
-			Notifications::publish(
-			   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
-			eia.load(filename);
-
-			egbase.postload_addons();
-			egbase.postload();
-			eia.start();
-			if (!script_to_run.empty()) {
-				eia.egbase().lua().run_script(script_to_run);
-			}
-		} else {
-			if (!filename.empty()) {
-				throw wexception(
-				   "EditorInteractive::run_editor: Map file name given when none was expected");
-			}
-			if (!script_to_run.empty()) {
-				throw wexception("EditorInteractive::run_editor: Script given when none was expected");
-			}
-
-			egbase.postload_addons();
-			egbase.postload();
-
-			egbase.mutable_map()->create_empty_map(
-			   egbase, 64, 64, 0,
-			   /** TRANSLATORS: Default name for new map */
-			   _("No Name"),
-			   get_config_string("realname",
-			                     /** TRANSLATORS: Map author name when it hasn't been set yet */
-			                     pgettext("author_name", "Unknown")));
-
-			switch (init) {
-			case EditorInteractive::Init::kNew:
-				eia.registry_to_open_ = &eia.menu_windows_.newmap;
-				break;
-			case EditorInteractive::Init::kRandom:
-				eia.registry_to_open_ = &eia.menu_windows_.newrandommap;
-				break;
-			case EditorInteractive::Init::kLoad:
-				eia.registry_to_open_ = &eia.menu_windows_.loadmap;
-				break;
-			default:
-				break;
-			}
+	if (init == EditorInteractive::Init::kLoadMapDirectly) {
+		if (filename.empty()) {
+			throw wexception("EditorInteractive::run_editor: Empty map file name");
 		}
 
-		egbase.remove_loader_ui();
-		eia.run<UI::Panel::Returncodes>();
-		egbase.cleanup_objects();
+		Notifications::publish(
+		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+		eia.load(filename);
+
+		egbase.postload_addons();
+		egbase.postload();
+		eia.start();
+		if (!script_to_run.empty()) {
+			eia.egbase().lua().run_script(script_to_run);
+		}
+	} else {
+		if (!filename.empty()) {
+			throw wexception(
+			   "EditorInteractive::run_editor: Map file name given when none was expected");
+		}
+		if (!script_to_run.empty()) {
+			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
+		}
+
+		egbase.postload_addons();
+		egbase.postload();
+
+		egbase.mutable_map()->create_empty_map(
+		   egbase, 64, 64, 0,
+		   /** TRANSLATORS: Default name for new map */
+		   _("No Name"),
+		   get_config_string("realname",
+		                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+		                     pgettext("author_name", "Unknown")));
+
+		switch (init) {
+		case EditorInteractive::Init::kNew:
+			eia.registry_to_open_ = &eia.menu_windows_.newmap;
+			break;
+		case EditorInteractive::Init::kRandom:
+			eia.registry_to_open_ = &eia.menu_windows_.newrandommap;
+			break;
+		case EditorInteractive::Init::kLoad:
+			eia.registry_to_open_ = &eia.menu_windows_.loadmap;
+			break;
+		default:
+			break;
+		}
 	}
+
+	egbase.remove_loader_ui();
+	eia.run<UI::Panel::Returncodes>();
+	egbase.cleanup_objects();
 }
 
 void EditorInteractive::load_world_units(EditorInteractive* eia,
