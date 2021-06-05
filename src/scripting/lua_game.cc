@@ -76,13 +76,13 @@ Player
    information about this player or act on his behalf. Note that you cannot
    instantiate a class of this type directly. To get an object of a player index the
    :class:`array` of :attr:`~wl.bases.EditorGameBase.players`:
-   
+
    .. code-block:: lua
 
       local plr = wl.Game().players[1]                            -- the first player (usually blue)
       local plr = wl.Game().players[2]                            -- the second player
       local plr = wl.Game().players[wl.Game().interactive_player] -- the interactive player
-   
+
 */
 const char LuaPlayer::className[] = "Player";
 const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
