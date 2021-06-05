@@ -209,6 +209,7 @@
 - Reduce crashes from missing add-on dependencies (#4710)
 - Don't store Script add-ons in savegames (#4811)
 - Fix missing compatibility lookups during gameloading (#4862)
+- Fix additional expedition items saveloading (#4921)
 
 
 ### AI
