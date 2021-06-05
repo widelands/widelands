@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-03-25 12:20+0000\n"
+"PO-Revision-Date: 2021-06-03 06:02+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -244,15 +244,15 @@ msgstr "Éger (csemete)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:47
 msgid "Alder (Pole)"
-msgstr "Éger (vessző)"
+msgstr "Éger (közepes)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:73
 msgid "Alder (Mature)"
-msgstr "Éger (felnőtt)"
+msgstr "Éger (kifejlett)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:98
 msgid "Alder (Old)"
-msgstr "Éger (idős)"
+msgstr "Éger (öreg)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:99
 msgid "Alder"
@@ -264,15 +264,15 @@ msgstr "Nyár (csemete)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:39
 msgid "Aspen (Pole)"
-msgstr "Nyár (vessző)"
+msgstr "Nyár (közepes)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:65
 msgid "Aspen (Mature)"
-msgstr "Nyár (felnőtt)"
+msgstr "Nyár (kifejlett)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:93
 msgid "Aspen (Old)"
-msgstr "Nyár (idős)"
+msgstr "Nyár (öreg)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:94
 msgid "Aspen"
@@ -284,15 +284,15 @@ msgstr "Bükk (csemete)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:39
 msgid "Beech (Pole)"
-msgstr "Bükk (vessző)"
+msgstr "Bükk (közepes)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:65
 msgid "Beech (Mature)"
-msgstr "Bükk (felnőtt)"
+msgstr "Bükk (kifejlett)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:90
 msgid "Beech (Old)"
-msgstr "Bükk (idős)"
+msgstr "Bükk (öreg)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:91
 msgid "Beech"
@@ -304,15 +304,15 @@ msgstr "Nyír (csemete)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:39
 msgid "Birch (Pole)"
-msgstr "Nyír (vessző)"
+msgstr "Nyír (közepes)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:65
 msgid "Birch (Mature)"
-msgstr "Nyír (felnőtt)"
+msgstr "Nyír (kifejlett)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:93
 msgid "Birch (Old)"
-msgstr "Nyír (idős)"
+msgstr "Nyír (öreg)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:94
 msgid "Birch"
@@ -326,17 +326,17 @@ msgstr "Felhőfa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:41
 msgid "Cirrus Tree (Pole)"
-msgstr "Felhőfa (vessző)"
+msgstr "Felhőfa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:68
 msgid "Cirrus Tree (Mature)"
-msgstr "Felhőfa (felnőtt)"
+msgstr "Felhőfa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:94
 msgid "Cirrus Tree (Old)"
-msgstr "Felhőfa (idős)"
+msgstr "Felhőfa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:96
@@ -362,15 +362,15 @@ msgstr "Vörösfenyő (csemete)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:39
 msgid "Larch (Pole)"
-msgstr "Vörösfenyő (vessző)"
+msgstr "Vörösfenyő (közepes)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:65
 msgid "Larch (Mature)"
-msgstr "Vörösfenyő (felnőtt)"
+msgstr "Vörösfenyő (kifejlett)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:90
 msgid "Larch (Old)"
-msgstr "Vörösfenyő (idős)"
+msgstr "Vörösfenyő (öreg)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:91
 msgid "Larch"
@@ -384,17 +384,17 @@ msgstr "Liánfa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:41
 msgid "Liana Tree (Pole)"
-msgstr "Liánfa (vessző)"
+msgstr "Liánfa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:68
 msgid "Liana Tree (Mature)"
-msgstr "Liánfa (felnőtt)"
+msgstr "Liánfa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:97
 msgid "Liana Tree (Old)"
-msgstr "Liánfa (idős)"
+msgstr "Liánfa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:99
@@ -407,15 +407,15 @@ msgstr "Juhar (csemete)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:39
 msgid "Maple (Pole)"
-msgstr "Juhar (vessző)"
+msgstr "Juhar (közepes)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:65
 msgid "Maple (Mature)"
-msgstr "Juhar (felnőtt)"
+msgstr "Juhar (kifejlett)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:90
 msgid "Maple (Old)"
-msgstr "Juhar (idős)"
+msgstr "Juhar (öreg)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:91
 msgid "Maple"
@@ -429,17 +429,17 @@ msgstr "Sötét gombafa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
 msgid "Dark Mushroom Tree (Pole)"
-msgstr "Sötét gombafa (vessző)"
+msgstr "Sötét gombafa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:68
 msgid "Dark Mushroom Tree (Mature)"
-msgstr "Sötét gombafa (felnőtt)"
+msgstr "Sötét gombafa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:94
 msgid "Dark Mushroom Tree (Old)"
-msgstr "Sötét gombafa (idős)"
+msgstr "Sötét gombafa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:96
@@ -454,17 +454,17 @@ msgstr "Zöld gombafa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:41
 msgid "Green Mushroom Tree (Pole)"
-msgstr "Zöld gombafa (vessző)"
+msgstr "Zöld gombafa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:68
 msgid "Green Mushroom Tree (Mature)"
-msgstr "Zöld gombafa (felnőtt)"
+msgstr "Zöld gombafa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:94
 msgid "Green Mushroom Tree (Old)"
-msgstr "Zöld gombafa (idős)"
+msgstr "Zöld gombafa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:96
@@ -479,17 +479,17 @@ msgstr "Vörös gombafa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:41
 msgid "Red Mushroom Tree (Pole)"
-msgstr "Vörös gombafa (vessző)"
+msgstr "Vörös gombafa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:68
 msgid "Red Mushroom Tree (Mature)"
-msgstr "Vörös gombafa (felnőtt)"
+msgstr "Vörös gombafa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:97
 msgid "Red Mushroom Tree (Old)"
-msgstr "Vörös gombafa (idős)"
+msgstr "Vörös gombafa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:99
@@ -502,15 +502,15 @@ msgstr "Tölgy (csemete)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:39
 msgid "Oak (Pole)"
-msgstr "Tölgy (vessző)"
+msgstr "Tölgy (közepes)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:65
 msgid "Oak (Mature)"
-msgstr "Tölgy (felnőtt)"
+msgstr "Tölgy (kifejlett)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:90
 msgid "Oak (Old)"
-msgstr "Tölgy (idős)"
+msgstr "Tölgy (öreg)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:91
 msgid "Oak"
@@ -522,15 +522,15 @@ msgstr "Palmira-pálma (csemete)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:39
 msgid "Borassus Palm (Pole)"
-msgstr "Palmira-pálma (vessző)"
+msgstr "Palmira-pálma (közepes)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:65
 msgid "Borassus Palm (Mature)"
-msgstr "Palmira-pálma (felnőtt)"
+msgstr "Palmira-pálma (kifejlett)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:90
 msgid "Borassus Palm (Old)"
-msgstr "Palmira-pálma (idős)"
+msgstr "Palmira-pálma (öreg)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:91
 msgid "Borassus Palm"
@@ -542,15 +542,15 @@ msgstr "Kókuszpálma (csemete)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:39
 msgid "Coconut Palm (Pole)"
-msgstr "Kókuszpálma (vessző)"
+msgstr "Kókuszpálma (közepes)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:65
 msgid "Coconut Palm (Mature)"
-msgstr "Kókuszpálma (felnőtt)"
+msgstr "Kókuszpálma (kifejlett)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:90
 msgid "Coconut Palm (Old)"
-msgstr "Kókuszpálma (idős)"
+msgstr "Kókuszpálma (öreg)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:91
 msgid "Coconut Palm"
@@ -562,15 +562,15 @@ msgstr "Datolyapálma (csemete)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:39
 msgid "Date Palm (Pole)"
-msgstr "Datolyapálma (vessző)"
+msgstr "Datolyapálma (közepes)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:65
 msgid "Date Palm (Mature)"
-msgstr "Datolyapálma (felnőtt)"
+msgstr "Datolyapálma (kifejlett)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:93
 msgid "Date Palm (Old)"
-msgstr "Datolyapálma (idős)"
+msgstr "Datolyapálma (öreg)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:94
 msgid "Date Palm"
@@ -582,15 +582,15 @@ msgstr "Olajpálma (csemete)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:39
 msgid "Oil Palm (Pole)"
-msgstr "Olajpálma (vessző)"
+msgstr "Olajpálma (közepes)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:65
 msgid "Oil Palm (Mature)"
-msgstr "Olajpálma (felnőtt)"
+msgstr "Olajpálma (kifejlett)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:94
 msgid "Oil Palm (Old)"
-msgstr "Olajpálma (idős)"
+msgstr "Olajpálma (öreg)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:95
 msgid "Oil Palm"
@@ -602,15 +602,15 @@ msgstr "Királypálma (csemete)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
 msgid "Roystonea regia Palm (Pole)"
-msgstr "Királypálma (vessző)"
+msgstr "Királypálma (közepes)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:65
 msgid "Roystonea regia Palm (Mature)"
-msgstr "Királypálma (felnőtt)"
+msgstr "Királypálma (kifejlett)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:90
 msgid "Roystonea regia Palm (Old)"
-msgstr "Királypálma (idős)"
+msgstr "Királypálma (öreg)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:91
 msgid "Roystonea regia Palm"
@@ -622,15 +622,15 @@ msgstr "Madárberkenye (csemete)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:39
 msgid "Rowan (Pole)"
-msgstr "Madárberkenye (vessző)"
+msgstr "Madárberkenye (közepes)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:65
 msgid "Rowan (Mature)"
-msgstr "Madárberkenye (felnőtt)"
+msgstr "Madárberkenye (kifejlett)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:93
 msgid "Rowan (Old)"
-msgstr "Madárberkenye (idős)"
+msgstr "Madárberkenye (öreg)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:94
 msgid "Rowan"
@@ -642,15 +642,15 @@ msgstr "Lucfenyő (csemete)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:39
 msgid "Spruce (Pole)"
-msgstr "Lucfenyő (vessző)"
+msgstr "Lucfenyő (közepes)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:65
 msgid "Spruce (Mature)"
-msgstr "Lucfenyő (felnőtt)"
+msgstr "Lucfenyő (kifejlett)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:90
 msgid "Spruce (Old)"
-msgstr "Lucfenyő (idős)"
+msgstr "Lucfenyő (öreg)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:91
 msgid "Spruce"
@@ -664,17 +664,17 @@ msgstr "Zsinórfa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:41
 msgid "Twine Tree (Pole)"
-msgstr "Zsinórfa (vessző)"
+msgstr "Zsinórfa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:68
 msgid "Twine Tree (Mature)"
-msgstr "Zsinórfa (felnőtt)"
+msgstr "Zsinórfa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:94
 msgid "Twine Tree (Old)"
-msgstr "Zsinórfa (idős)"
+msgstr "Zsinórfa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:96
@@ -689,17 +689,17 @@ msgstr "Zöld esernyőfa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:41
 msgid "Green Umbrella Tree (Pole)"
-msgstr "Zöld esernyőfa (vessző)"
+msgstr "Zöld esernyőfa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:68
 msgid "Green Umbrella Tree (Mature)"
-msgstr "Zöld esernyőfa (felnőtt)"
+msgstr "Zöld esernyőfa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:94
 msgid "Green Umbrella Tree (Old)"
-msgstr "Zöld esernyőfa (idős)"
+msgstr "Zöld esernyőfa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:96
@@ -714,17 +714,17 @@ msgstr "Vörös esernyőfa (csemete)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:41
 msgid "Red Umbrella Tree (Pole)"
-msgstr "Vörös esernyőfa (vessző)"
+msgstr "Vörös esernyőfa (közepes)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:68
 msgid "Red Umbrella Tree (Mature)"
-msgstr "Vörös esernyőfa (felnőtt)"
+msgstr "Vörös esernyőfa (kifejlett)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:97
 msgid "Red Umbrella Tree (Old)"
-msgstr "Vörös esernyőfa (idős)"
+msgstr "Vörös esernyőfa (öreg)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:99
@@ -783,7 +783,7 @@ msgstr "Elpusztult fák"
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:330
 msgid "Coniferous Trees"
-msgstr "Toboztermő fák"
+msgstr "Tűlevelű fák"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:348

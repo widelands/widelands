@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-30 14:03+0000\n"
+"PO-Revision-Date: 2021-06-02 23:06+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "kevés szén"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
-msgstr "rengeteg szén"
+msgstr "sok szén"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
@@ -93,7 +93,7 @@ msgstr "kevés vas"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
-msgstr "rengeteg vas"
+msgstr "sok vas"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
@@ -101,7 +101,7 @@ msgstr "kevés arany"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
-msgstr "rengeteg arany"
+msgstr "sok arany"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
@@ -109,7 +109,7 @@ msgstr "kevés gránit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
-msgstr "rengeteg gránit"
+msgstr "sok gránit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
