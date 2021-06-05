@@ -133,9 +133,9 @@ int LuaEditorGameBase::get_map(lua_State* L) {
 
       In game, there might be less players then defined in
       :attr:`wl.map.Map.player_slots` because some slots might not be taken.
-      Also note that for the same reason you cannot index this array with
+      Also note that for the same reason you cannot index this :class:`array` with
       :attr:`wl.bases.PlayerBase.number`, but the players are ordered with
-      increasing number in this array.
+      increasing number in this :class:`array`.
 
       The editor always creates all players that are defined by the map.
 */
@@ -447,10 +447,11 @@ static void save_table_recursively(lua_State* L,
       :type campaign_name: :class:`string`
       :arg scenario_name: The name of the current scenario, e.g. "emp04" or "fri03".
       :type scenario_name: :class:`string`
-      :arg data: If an array is used, the data will be saved in the correct order. Arrays may not
-         contain :const:`nil` values. If a table is used, all keys have to be strings. Tables may
-         contain subtables of any depth. Cyclic dependencies will cause Widelands to crash. Values
-         have to be of type :class:`string`, :class:`integer`, :const:`boolean` or :class:`table`.
+      :arg data: If an :class:`array` is used, the data will be saved in the correct order.
+         Arrays may not contain :const:`nil` values. If a :class:`table` is used, all keys
+         have to be strings. Tables may contain subtables of any depth. Cyclic dependencies
+         will cause Widelands to crash. Values have to be of type :class:`string`,
+         :class:`integer`, :const:`boolean` or :class:`table`.
       :type data: :class:`array` or :class:`table`
 
 */
@@ -561,9 +562,9 @@ static void push_table_recursively(lua_State* L,
       :type campaign_name: :class:`string`
       :arg scenario_name: The name of the scenario that saved the data, e.g. "emp04" or "fri03".
       :type scenario_name: :class:`string`
-      :returns: The data is returned as a table of key-value pairs.
-         The table is not guaranteed to be in any particular order, unless it is an array,
-         in which case it will be returned in the same order as it was saved.
+      :returns: The data is returned as a :class:`table` of key-value pairs.
+         The :class:`table` is not guaranteed to be in any particular order, unless it is an
+         :class:`array`, in which case it will be returned in the same order as it was saved.
          This function returns :const:`nil` if the file cannot be opened for reading.
 */
 int LuaEditorGameBase::read_campaign_data(lua_State* L) {
