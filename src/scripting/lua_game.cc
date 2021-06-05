@@ -986,7 +986,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
       Switch the :attr:`~wl.Game.interactive_player` to the player with **playernumber** gaining
       full control over the player given by **playernumber** and loosing control over the
       formerly interactive player.
-      
+
       :arg playernumber: An index in the array of :attr:`~wl.bases.EditorGameBase.players`.
       :type playernumber: :class:`integer`
 */
@@ -1006,7 +1006,7 @@ int LuaPlayer::switchplayer(lua_State* L) {
    .. method:: produced_wares_count(what)
 
       Returns count of wares produced by the player up to now.
-      
+
       :arg what: This can be either :const:`"all"` or a single name of a ware or an :class`array`
          of ware names.
       :type what: :class:`string` or :class:`array`
