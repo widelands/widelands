@@ -735,7 +735,7 @@ int LuaPlayerBase::place_flag(lua_State* L) {
       Start a road or waterway at the given field, then walk the **dirs**
       given. Places a flag at the last field.
 
-      See also the convenience function :meth:`connected_road` in *"infrastructure.lua"*.
+      See also the convenience function :meth:`connected_road` in *infrastructure.lua*.
 
       :arg roadtype: One of: :const:`"normal"`, :const:`"busy"`, or :const:`"waterway"`.
       :type roadtype: :class:`string`
