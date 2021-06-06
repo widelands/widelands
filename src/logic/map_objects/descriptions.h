@@ -197,6 +197,7 @@ public:
 
 private:
 	AllTribes all_tribes_;
+	const std::vector<AddOns::AddOnInfo>& addons_;
 
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;

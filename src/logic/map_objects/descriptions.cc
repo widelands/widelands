@@ -56,6 +56,7 @@ uint32_t Descriptions::instances_ = 0;
 
 Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
    : all_tribes_(get_all_tribeinfos(&addons)),
+     addons_(addons),
      critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -95,11 +96,11 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
 		if (info.category == AddOns::AddOnCategory::kWorld) {
 			description_manager_->register_directory(
 			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
-			   DescriptionManager::RegistryCaller::kWorldAddon);
+			   DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kWorldAddon, info.internal_name));
 		} else if (info.category == AddOns::AddOnCategory::kTribes) {
 			description_manager_->register_directory(
 			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
-			   DescriptionManager::RegistryCaller::kTribeAddon);
+			   DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kTribeAddon, info.internal_name));
 		}
 	}
 
@@ -107,7 +108,7 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
 	std::vector<std::string> attributes;
 	for (const TribeBasicInfo& tribeinfo : all_tribes_) {
 		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes,
-		                                           DescriptionManager::RegistryCaller::kDefault);
+		                                           DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kDefault, std::string()));
 		if (!attributes.empty()) {
 			throw GameDataError("Tribes can't have attributes - please remove all attributes in "
 			                    "'register.lua' for tribe '%s'.",
@@ -117,7 +118,7 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
 
 	// Walk world directory and register objects
 	description_manager_->register_directory(
-	   "world", g_fs, DescriptionManager::RegistryCaller::kDefault);
+	   "world", g_fs, DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kDefault, std::string()));
 
 	// We register tribes on demand in load_tribe for performance reasons
 }
@@ -397,7 +398,7 @@ void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 			scenario_tribes_ = lua_->run_script("map:scripting/tribes/init.lua");
 		}
 		description_manager_->register_directory(
-		   "scripting/tribes", filesystem, DescriptionManager::RegistryCaller::kScenario);
+		   "scripting/tribes", filesystem, DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kScenario, std::string()));
 	}
 }
 
@@ -422,9 +423,24 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 	case MapObjectType::RESOURCE:
 		resources_->add(new ResourceDescription(table));
 		break;
-	case MapObjectType::TERRAIN:
-		terrains_->add(new TerrainDescription(table, *this));
-		break;
+	case MapObjectType::TERRAIN: {
+		const DescriptionManager::RegistryCallerInfo& c = description_manager_->get_registry_caller_info(type_name);
+		assert(c.second.empty() ^ (c.first == DescriptionManager::RegistryCallerType::kWorldAddon));
+		uint32_t index = 0;
+		if (!c.second.empty()) {
+			index = addons_.size();
+			for (uint32_t i = 0; i < addons_.size(); ++i) {
+				if (addons_[i].internal_name == c.second) {
+					index = i;
+					break;
+				}
+			}
+			if (index >= addons_.size()) {
+				throw wexception("Terrain %s defined by add-on %s which is not enabled", type_name.c_str(), c.second.c_str());
+			}
+		}
+		terrains_->add(new TerrainDescription(table, *this, index));
+	} break;
 	case MapObjectType::CARRIER:
 		workers_->add(new CarrierDescr(type_descname, table, *this));
 		break;
@@ -505,7 +521,7 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 		// the website tools
 		if (!tribes_have_been_registered_) {
 			description_manager_->register_directory(
-			   "tribes", g_fs, DescriptionManager::RegistryCaller::kDefault);
+			   "tribes", g_fs, DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kDefault, std::string()));
 			tribes_have_been_registered_ = true;
 		}
 		description_manager_->load_description(tribename);
@@ -636,13 +652,19 @@ void Descriptions::postload_immovable_relations() {
 	}
 
 void Descriptions::check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck& note) const {
-	switch (note.caller) {
-	case DescriptionManager::RegistryCaller::kTribeAddon:
+	switch (note.caller.first) {
+	case DescriptionManager::RegistryCallerType::kTribeAddon:
+		if (note.caller.second.empty()) {
+			throw wexception("Unidentified registry caller for tribe add-on (unit: %s)", note.description_name.c_str());
+		}
 		CHECK_FACTORY(Tribe, critter)
 		CHECK_FACTORY(Tribe, terrain)
 		CHECK_FACTORY(Tribe, resource)
 		break;
-	case DescriptionManager::RegistryCaller::kWorldAddon:
+	case DescriptionManager::RegistryCallerType::kWorldAddon:
+		if (note.caller.second.empty()) {
+			throw wexception("Unidentified registry caller for world add-on (unit: %s)", note.description_name.c_str());
+		}
 		CHECK_FACTORY(World, tribe)
 		CHECK_FACTORY(World, ware)
 		CHECK_FACTORY(World, worker)
@@ -650,6 +672,9 @@ void Descriptions::check(const DescriptionManager::NoteMapObjectDescriptionTypeC
 		CHECK_FACTORY(World, ship)
 		break;
 	default:
+		if (!note.caller.second.empty()) {
+			throw wexception("Unexpected registry caller identifier '%s' for offical/scenario unit %s", note.caller.second.c_str(), note.description_name.c_str());
+		}
 		// Scenarios and official scripts may load anything
 		break;
 	}

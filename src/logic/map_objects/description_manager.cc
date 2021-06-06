@@ -53,14 +53,14 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 /// Walk given directory and register descriptions
 void DescriptionManager::register_directory(const std::string& dirname,
                                             FileSystem* filesystem,
-                                            const RegistryCaller caller) {
+                                            const RegistryCallerInfo& caller) {
 	FilenameSet files = filesystem->list_directory(dirname);
 	for (const std::string& file : files) {
 		if (filesystem->is_directory(file)) {
 			register_directory(file, filesystem, caller);
 		} else {
 			if (strcmp(FileSystem::fs_filename(file.c_str()), "register.lua") == 0) {
-				if (caller == RegistryCaller::kScenario) {
+				if (caller.first == RegistryCallerType::kScenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
 						const std::vector<std::string> attributes =
@@ -88,10 +88,10 @@ void DescriptionManager::register_directory(const std::string& dirname,
 void DescriptionManager::register_description(const std::string& description_name,
                                               const std::string& script_path,
                                               const std::vector<std::string>& attributes,
-                                              const RegistryCaller caller) {
+                                              const RegistryCallerInfo& caller) {
 	auto it = registered_descriptions_.find(description_name);
 	if (it != registered_descriptions_.end()) {
-		if (caller == RegistryCaller::kWorldAddon || caller == RegistryCaller::kTribeAddon) {
+		if (caller.first == RegistryCallerType::kWorldAddon || caller.first == RegistryCallerType::kTribeAddon) {
 			// TODO(Nordfriese): Minimal-invasive fix for #4759, replace with #4760 after v1.0
 			log_warn("Overwriting existing registry for '%s':", description_name.c_str());
 			log_warn("  Old path: %s", it->second.script_path.c_str());
@@ -146,7 +146,7 @@ void DescriptionManager::register_scenario_description(FileSystem* filesystem,
 
 	registered_scenario_descriptions_.insert(std::make_pair(
 	   description_name,
-	   RegisteredObject("map:" + script_path, attributes, RegistryCaller::kScenario)));
+	   RegisteredObject("map:" + script_path, attributes, RegistryCallerInfo(RegistryCallerType::kScenario, std::string()))));
 }
 
 void DescriptionManager::load_description(const std::string& description_name) {
@@ -195,6 +195,14 @@ DescriptionManager::get_attributes(const std::string& description_name) const {
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
 	          registered_scenario_descriptions_.at(description_name).attributes :
 	          registered_descriptions_.at(description_name).attributes;
+}
+
+const DescriptionManager::RegistryCallerInfo& DescriptionManager::get_registry_caller_info(const std::string& description_name) const {
+	assert(registered_scenario_descriptions_.count(description_name) == 1 ||
+	       registered_descriptions_.count(description_name) == 1);
+	return registered_scenario_descriptions_.count(description_name) == 1 ?
+	          registered_scenario_descriptions_.at(description_name).caller :
+	          registered_descriptions_.at(description_name).caller;
 }
 
 void DescriptionManager::clear_scenario_descriptions() {
