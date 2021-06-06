@@ -38,8 +38,8 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriang
 		Widelands::ResourceAmount amount = args->set_to;
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-            descriptions.get_resource_descr(args->current_resource)->max_amount() :
-            0;
+		      descriptions.get_resource_descr(args->current_resource)->max_amount() :
+		      0;
 
 		if (amount > max_amount) {
 			amount = max_amount;

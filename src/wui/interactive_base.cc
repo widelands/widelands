@@ -651,18 +651,18 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 			switch (dir) {
 			case Widelands::WALK_E:
 				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-                              Widelands::RoadSegment::kNormal :
-                              Widelands::RoadSegment::kWaterway;
+				                  Widelands::RoadSegment::kNormal :
+				                  Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SE:
 				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
-                               Widelands::RoadSegment::kWaterway;
+				                   Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SW:
 				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
-                               Widelands::RoadSegment::kWaterway;
+				                   Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kWaterway;
 				break;
 			default:
 				throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
@@ -708,8 +708,8 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	if (in_road_building_mode() && tooltip().empty()) {
 		draw_tooltip(
 		   in_road_building_mode(RoadBuildingType::kRoad) ?
-            (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
-            (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
+		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
+		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
 		       egbase().map().get_waterway_max_length())
 		         .str(),
 		   UI::PanelStyle::kWui);
@@ -899,8 +899,8 @@ void InteractiveBase::start_build_road(Coords road_start,
 
 	road_building_add_overlay();
 	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
-                                         "images/ui_basic/fsel_waterwaybuilding.png" :
-                                         "images/ui_basic/fsel_roadbuilding.png"));
+	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
+	                                      "images/ui_basic/fsel_roadbuilding.png"));
 
 	if (t == RoadBuildingType::kWaterway) {
 		// Show workarea to visualise length limit
@@ -1164,8 +1164,8 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		               kSoundDistanceDivisor;
 
 		distance = (note.priority == kFxMaximumPriority) ?
-                    (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
-                    distance;
+		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
+		              distance;
 
 		if (distance < kSoundMaxDistance) {
 			g_sh->play_fx(note.type, note.fx, note.priority, note.allow_multiple,

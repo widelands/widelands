@@ -766,8 +766,8 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	const NodeCaps buildcaps = descr.get_built_over_immovable() == INVALID_INDEX ?
-                                 get_buildcaps(fc) :
-                                 map.get_max_nodecaps(egbase(), fc);
+	                              get_buildcaps(fc) :
+	                              map.get_max_nodecaps(egbase(), fc);
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE)) {
 			return false;
@@ -869,8 +869,8 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
 						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
 						Flag& primary_other = flag == &primary_start ?
-                                           primary_road->get_flag(RoadBase::FlagEnd) :
-                                           primary_start;
+						                         primary_road->get_flag(RoadBase::FlagEnd) :
+						                         primary_start;
 						primary_road->destroy(egbase());
 						verb_log_info_time(egbase().get_gametime(),
 						                   "destroying road/waterway from (%i, %i) going in dir %u\n",

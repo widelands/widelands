@@ -7,9 +7,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Seashell",
    size = "none",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 26, 32 },
       },
    }

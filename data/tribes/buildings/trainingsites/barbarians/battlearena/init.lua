@@ -24,22 +24,19 @@ descriptions:new_trainingsite_type {
       reed = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 110, 72 },
          fps = 10
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 110, 72 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 110, 72 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 110, 72 },
          fps = 1
       }

@@ -216,9 +216,9 @@ std::string EconomyOptionsWindow::localize_profile_name(const std::string& name)
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
-	Widelands::Serial* serial = note.old_economy == ware_serial_   ? &ware_serial_ :
-	                            note.old_economy == worker_serial_ ? &worker_serial_ :
-                                                                    nullptr;
+	Widelands::Serial* serial = note.old_economy == ware_serial_ ?
+	                               &ware_serial_ :
+	                               note.old_economy == worker_serial_ ? &worker_serial_ : nullptr;
 	if (serial) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
@@ -375,7 +375,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 					new_quantity = is_wares ? economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .wares.at(index) :
-                                         economy_options_window_->get_predefined_targets()
+					                          economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .workers.at(index);
 				} else {
@@ -560,7 +560,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
 	if (text.empty() || text == kDefaultEconomyProfile) {
 		save_.set_enabled(false);
 		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
-                                       _("The default profile cannot be overwritten"));
+		                                 _("The default profile cannot be overwritten"));
 	} else {
 		save_.set_enabled(true);
 		save_.set_tooltip(_("Save the profile under this name"));
