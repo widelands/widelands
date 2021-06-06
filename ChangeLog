@@ -227,6 +227,30 @@
 - Delay AI initalization after scenario init (#4656)
 - Fixed an unsafe AI time operation (#4749)
 - AI production support (#4618)
+    - Deprecate `collects_ware_from_map` AI hint
+    - Deprecate `supports_production_of` AI hint
+    - Add support for multiple lumberjack/ranger pairs
+    - Get rid of dirty hack for rare tree cutter/plantation. `amazons_rare_tree_plantation` no longer needs supporters, but the `rare_tree_cutters_hut` still does
+    - Fix miscategorization of Frisian Fishers being supported by clay pits
+    - `frisians_reed_farm` is now detected as supporting the `frisians_beekeepers_house`
+    - Hotfix for Amazon trainingsites
+    - New property `needed_attributes` for productionsites when the immovable doesn't get removed from the map
+    - Get rid of hard-coded work area radius when detecting useful immovables near a building
+    - If a building has no input but some output wares and creates no immovables, but collects some:
+        - If it produces a construction material
+            - If it has supporters -> lumberjack
+            - If it has no supporters -> quarry
+        - If it produces ware that is not a construction material -> needs berry
+    - A hunter collects and bob from the map. This adds `amazons_hunter_gatherers_hut` to the list
+    - If needs water and collects "resource_fish" -> fisher
+    - If a building has no input and it produces "water" -> well
+    - If a building supports a lumberjack, it's a ranger
+    - introduce `number_of_same_nearby` to identify nearby buildings of same type
+    - if upgrade building needs supporters take this into consideration
+    - fixes some values in training to make the AI train amazons
+    - minor updates of basic amounts and other lua values
+
+
 - Fix AI handling of amazon water gatherer (#4753)
 
 
