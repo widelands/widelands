@@ -361,6 +361,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	}
 
 	log_info("LUA CODE:");
+	#ifdef _WIN32
+		log_info("%s",lua_animation->as_string());
+	#endif
 	std::cout << lua_animation->as_string() << std::endl;
 	log_info("Done!\n");
 }
@@ -374,6 +377,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
  */
 
 int main(int argc, char** argv) {
+	#ifdef _WIN32
+		set_logging_dir();
+	#endif
 	if (argc != 4) {
 		log_err("Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
 		return 1;
