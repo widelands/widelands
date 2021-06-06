@@ -25,24 +25,31 @@ descriptions:new_productionsite_type {
       }
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 76 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 57, 76 },
       },
       unoccupied = {
          pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 57, 76 },
       },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 76 },
-         fps = 10
+   },
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 57, 64 }
       },
+      working = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 75 }
+      }
    },
 
    aihints = {
