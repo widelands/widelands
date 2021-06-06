@@ -44,19 +44,10 @@ descriptions:new_productionsite_type {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 57, 76 },
       },
-      -- build = {
-         -- pictures = path.list_files(dirname .. "build_??.png"),
-         -- hotspot = { 57, 76 },
-      -- },
       unoccupied = {
          pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 57, 76 },
       },
-      -- working = {
-         -- pictures = path.list_files(dirname .. "working_??.png"),
-         -- hotspot = { 57, 76 },
-         -- fps = 10
-      -- },
    },
    spritesheets = {
       working = {
