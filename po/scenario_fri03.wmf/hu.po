@@ -26,7 +26,7 @@ msgstr "Juss el északra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
-msgstr "Menj északra!"
+msgstr "Tarts északra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
@@ -233,10 +233,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
-"Ilyen erő nyomában járok éppen. Reebaudéban, aki egy kicsi, de erős fríz "
-"közösség törzsfőnöke, akivel valaha összebarátkoztam. Lekicsinylő büszkesége"
-" és hatalmas hadi tehetsége páratlanok az egész ismert világban. Ha van "
-"valaki, aki szembeszállhat Atterdaggal, akkor ő az."
+"Egy ilyen erő nyomában járok éppen. Reebaudéban, aki egy kicsi, de erős fríz"
+" közösség törzsfőnöke, akivel valaha összebarátkoztam. Lekicsinylő "
+"büszkesége és hatalmas hadi tehetsége páratlanok az egész ismert világban. "
+"Ha van valaki, aki szembeszállhat Atterdaggal, akkor ő az."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -299,7 +299,7 @@ msgstr "Kikötőhely felfedezve"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
 msgid "One step closer to the North"
-msgstr "Újabb lépés észak felé"
+msgstr "Egy lépés észak felé"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
