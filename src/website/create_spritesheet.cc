@@ -362,7 +362,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 
 	log_info("LUA CODE:");
 	#ifdef _WIN32
-		log_info("%s",lua_animation->as_string());
+		log_info("%s",lua_animation->as_string().c_str());
 	#endif
 	std::cout << lua_animation->as_string() << std::endl;
 	log_info("Done!\n");
