@@ -60,6 +60,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 			register_directory(file, filesystem, caller);
 		} else {
 			if (strcmp(FileSystem::fs_filename(file.c_str()), "register.lua") == 0) {
+				std::set<std::string> all_registered_items;
 				if (caller.first == RegistryCallerType::kScenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
@@ -69,6 +70,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						                              FileSystem::fs_dirname(file) + "init.lua",
 						                              attributes);
 						register_attributes(attributes, object_name);
+						all_registered_items.insert(object_name);
 					}
 				} else {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script(file);
@@ -78,7 +80,22 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						register_description(
 						   object_name, FileSystem::fs_dirname(file) + "init.lua", attributes, caller);
 						register_attributes(attributes, object_name);
+						all_registered_items.insert(object_name);
 					}
+				}
+				if (all_registered_items.empty()) {
+					log_warn("Registry file %s does not define any units", file.c_str());
+				} else if ((g_verbose || caller.first != RegistryCallerType::kDefault) && all_registered_items.size() > 1) {
+					std::string all;
+					for (const std::string& str : all_registered_items) {
+						all += ' ';
+						all += str;
+					}
+					log_warn("The registry file %s\n"
+					         "    defines multiple (%u) units:%s\n"
+					         "    Defining multiple units in one file is error-prone. "
+					         "Every unit should be defined in a registry directory of its own.",
+					         file.c_str(), static_cast<unsigned>(all_registered_items.size()), all.c_str());
 				}
 			}
 		}
