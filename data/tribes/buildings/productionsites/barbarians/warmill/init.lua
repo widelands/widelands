@@ -17,10 +17,6 @@ descriptions:new_productionsite_type {
       unoccupied = {
          hotspot = { 57, 76 },
       },
-      working = {
-         hotspot = { 57, 76 },
-         fps = 10
-      },
    },
 
    spritesheets = {
@@ -30,7 +26,13 @@ descriptions:new_productionsite_type {
          columns = 2,
          hotspot = { 57, 76 }
       },
-      
+      working = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 76 }
+      },
    },
 
    aihints = {
