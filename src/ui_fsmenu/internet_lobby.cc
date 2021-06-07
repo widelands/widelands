@@ -20,6 +20,7 @@
 #include "ui_fsmenu/internet_lobby.h"
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
@@ -32,6 +33,7 @@
 #include "network/internet_gaming_protocol.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication_options.h"
 
 namespace {
@@ -442,19 +444,25 @@ bool InternetLobby::wait_for_ip() {
 
 /// called when the 'join game' button was clicked
 void InternetLobby::clicked_joingame() {
-	if (opengames_list_.has_selection()) {
-		InternetGaming::ref().join_game(opengames_list_.get_selected().name);
+	try {
+		if (opengames_list_.has_selection()) {
+			InternetGaming::ref().join_game(opengames_list_.get_selected().name);
 
-		if (!wait_for_ip()) {
-			return;
+			if (!wait_for_ip()) {
+				return;
+			}
+			const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
+
+			running_game_.reset(new GameClient(capsule_, running_game_, ips,
+				                               InternetGaming::ref().get_local_clientname(), true,
+				                               opengames_list_.get_selected().name));
+		} else {
+			throw wexception("No server selected! That should not happen!");
 		}
-		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
-
-		running_game_.reset(new GameClient(capsule_, running_game_, ips,
-		                                   InternetGaming::ref().get_local_clientname(), true,
-		                                   opengames_list_.get_selected().name));
-	} else {
-		throw wexception("No server selected! That should not happen!");
+	} catch (const std::exception& e) {
+		log_err("InternetLobby::clicked_joingame: %s", e.what());
+		running_game_.reset();
+		get_capsule().menu().show_messagebox(_("Error"), (boost::format(_("An error occurred while attempting to join the game:\n\n%s")) % e.what()).str());
 	}
 }
 
