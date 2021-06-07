@@ -26,14 +26,20 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 21, 37 },
       },
-      build = {
-         hotspot = { 21, 37 },
-      },
       working = {
          hotspot = { 21, 37 },
       },
       empty = {
          hotspot = { 21, 37 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 21, 37 }
       },
    },
 
