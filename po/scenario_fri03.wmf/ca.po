@@ -104,6 +104,9 @@ msgid ""
 "We have been sailing North for weeks until we reached this shore. Not one of"
 " my numerous seamaps gives me the information what lies beyond this point."
 msgstr ""
+"Hem navegat cap al nord durant setmanes fins que hem arribat a aquesta "
+"costa. Cap dels meus moltíssims mapes conté informació de què hi ha més "
+"enllà. "
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:74
@@ -122,6 +125,9 @@ msgid ""
 "idleness pains me as I imagine Atterdag gleefully trampling the green "
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
+"Vull trobar el meu vell amic Reebaud tan ràpid com pugui. Cada minut parats "
+"em sento malament, perquè m'imagino l'Atterdag creuant les verdes pastures "
+"de la meva illa amb els seus peus bastards… Afanyem-nos."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
@@ -239,7 +245,7 @@ msgstr "No podem fallar. El futur del meu poble depèn de mi."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
-msgstr ""
+msgstr "Fent dics"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:129
 msgid "Gaining Land"
@@ -254,6 +260,11 @@ msgid ""
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
 msgstr ""
+"L'illa és massa petita. Però hi ha un constructor de dics entre la nostra "
+"gent i m'ha recomanat usar alguns troncs per construir espigons, que ens "
+"permetran aconseguir un terreny extra. Serà una tasca cara i lenta. Tot i "
+"que penso que no estarem massa temps en aquesta illa, almenys ho hauríem de "
+"considerar."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:135
 msgid "Port Space Found"
@@ -481,6 +492,7 @@ msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
 msgstr ""
+"Sembla adequat, però potser és només una altra illa. Continuem viatjant."
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:232
@@ -549,6 +561,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Ja sé que sembla molt, però el senat no m'ha proporcionat molts diners per a"
+" l'expedició, i he d'admetre que en necessito més."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -561,6 +575,12 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"La finalitat del meu viatge és buscar el procònsol de la província de les "
+"Terres del Nord, que s'ha negat a pagar els impostos els últims anys. La "
+"meva tasca és parlar amb aquest tal Murilius i, si descobreixo que ha fallat"
+" més per avarícia que per necessitat, me l'emportaré a la capital encadenat."
+" He de dir que estic content amb aquesta tasca, ja que tinc opcions "
+"d'aconseguir ser procònsol en el seu lloc si tinc èxit. "
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -585,6 +605,9 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Sembla content per oferir-nos un passatge, però el preu és exorbitant. "
+"Podríem destruir el seu port i construir el nostre propi. Em pregunto que "
+"pot ser millor…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
@@ -645,22 +668,25 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Heu perdut i no podeu continuar jugant. Potser tindreu més bona sort quan "
+"proveu de nou l'escenari. Fe clic al botó de confirmació per tornar al menú "
+"principal."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Constructor de dics"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Casa del constructor de dics"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "fer dics"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -672,13 +698,13 @@ msgstr "Port"
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Construeix espigons a prop per guanyar terrenys nous al mar."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Construeix espigons per guanyar terrenys nous al mar."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27

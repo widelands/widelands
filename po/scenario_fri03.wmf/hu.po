@@ -26,7 +26,7 @@ msgstr "Juss el északra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
-msgstr "Menj északra!"
+msgstr "Tarts északra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
@@ -233,10 +233,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
-"Ilyen erő nyomában járok éppen. Reebaudéban, aki egy kicsi, de erős fríz "
-"közösség törzsfőnöke, akivel valaha összebarátkoztam. Lekicsinylő büszkesége"
-" és hatalmas hadi tehetsége páratlanok az egész ismert világban. Ha van "
-"valaki, aki szembeszállhat Atterdaggal, akkor ő az."
+"Egy ilyen erő nyomában járok éppen. Reebaudéban, aki egy kicsi, de erős fríz"
+" közösség törzsfőnöke, akivel valaha összebarátkoztam. Lekicsinylő "
+"büszkesége és hatalmas hadi tehetsége páratlanok az egész ismert világban. "
+"Ha van valaki, aki szembeszállhat Atterdaggal, akkor ő az."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -299,7 +299,7 @@ msgstr "Kikötőhely felfedezve"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
 msgid "One step closer to the North"
-msgstr "Újabb lépés észak felé"
+msgstr "Egy lépés észak felé"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
@@ -313,7 +313,7 @@ msgstr ""
 "A katonáim jelentik, hogy kikötőhelyet találtak! Kikötőt kell építenünk és "
 "expedíciót indítanunk. Ehhez persze fel kell építenünk a teljes hajóépítő "
 "gazdaságot hajóács műhellyel és szövőmalommal. De nem vesztegethetünk sok "
-"időt a gazdaság tökéletesítésére — csak az számít, hogy minél gyorsabban "
+"időt a gazdaság tökéletesítésére – csak az számít, hogy minél gyorsabban "
 "továbbindulhassunk észak felé."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
@@ -442,7 +442,7 @@ msgid ""
 "located directly under my palace."
 msgstr ""
 "Sajnálom, de ki kell ábrándítsalak, Sir Lembeck, soha nem hallottam a nevét,"
-" tehát hírt sem adhatok róla. A tervedről, hogy északra utazz — Attól tartok"
+" tehát hírt sem adhatok róla. A tervedről, hogy északra utazz – Attól tartok"
 " csak egy helyen lehet kikötőt építeni ezen a szigeten azon kívül, ahol ti "
 "kikötöttetek, és az pontosan az én palotám alatt található."
 
