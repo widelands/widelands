@@ -454,15 +454,18 @@ void InternetLobby::clicked_joingame() {
 			const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
 			running_game_.reset(new GameClient(capsule_, running_game_, ips,
-				                               InternetGaming::ref().get_local_clientname(), true,
-				                               opengames_list_.get_selected().name));
+			                                   InternetGaming::ref().get_local_clientname(), true,
+			                                   opengames_list_.get_selected().name));
 		} else {
 			throw wexception("No server selected! That should not happen!");
 		}
 	} catch (const std::exception& e) {
 		log_err("InternetLobby::clicked_joingame: %s", e.what());
 		running_game_.reset();
-		get_capsule().menu().show_messagebox(_("Error"), (boost::format(_("An error occurred while attempting to join the game:\n\n%s")) % e.what()).str());
+		get_capsule().menu().show_messagebox(
+		   _("Error"),
+		   (boost::format(_("An error occurred while attempting to join the game:\n\n%s")) % e.what())
+		      .str());
 	}
 }
 
