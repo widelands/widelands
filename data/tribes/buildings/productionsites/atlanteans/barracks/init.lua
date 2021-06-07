@@ -22,14 +22,15 @@ descriptions:new_productionsite_type {
       spidercloth = 1,
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 44, 65 },
-      },
-      working = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 44, 65 },
+   animation_directory = dirname,
+   -- TODO(Nordfriese): Make animations.
+   animations = {idle = {hotspot = {50, 56}}},
+   spritesheets = {
+      build = {
+         hotspot = {50, 56},
+         frames = 3,
+         columns = 1,
+         rows = 3
       }
    },
 
@@ -56,8 +57,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs atlanteans_soldier",
             "consume=tabard trident_light atlanteans_recruit",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:30s",
             "recruit=atlanteans_soldier"
          }
       },

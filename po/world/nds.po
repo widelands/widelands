@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-02 12:31+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-05 18:25+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -350,23 +350,23 @@ msgstr "Umslaan Boom"
 
 #: ../../data/world/immovables/trees/larch/init.lua:14
 msgid "Larch (Sapling)"
-msgstr "Föhre (Kiensel)"
+msgstr "Lärke (Kiensel)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:39
 msgid "Larch (Pole)"
-msgstr "Föhre (Jung)"
+msgstr "Lärke (Jung)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:65
 msgid "Larch (Mature)"
-msgstr "Föhre (Riep)"
+msgstr "Lärke (Riep)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:90
 msgid "Larch (Old)"
-msgstr "Föhre (Old)"
+msgstr "Lärke (Old)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:91
 msgid "Larch"
-msgstr "Föhre"
+msgstr "Lärke"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:15
