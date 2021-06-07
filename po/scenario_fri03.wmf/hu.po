@@ -3,6 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# vargaviktor <viktor.varga@gmail.com>, 2021
 # Tóth András <txa-dev@posteo.hu>, 2021
 # 
 msgid ""
@@ -21,37 +22,39 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:31
 msgid "Get to the North"
-msgstr ""
+msgstr "Juss el északra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
-msgstr ""
+msgstr "Tarts északra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
-msgstr ""
+msgstr "Hajózz északra, ameddig csak lehet, amilyen gyorsan csak tudsz!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:40
 msgid "Destroy Angadthur’s Palace"
-msgstr ""
+msgstr "Rombold le Angadthur palotáját!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
-msgstr ""
+msgstr "Rombold le az atlantisziak főhadiszállását és építs kikötőt!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:43
 msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
 msgstr ""
+"Építs kikötőt a sziget északi partján! A kikötőhely Angadthur főhadiszállása"
+" alatt található."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:50
 msgid "Pay or Fight"
-msgstr ""
+msgstr "Fizess vagy harcolj!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:52
 msgid "Pay the Empire or Destroy Their Port"
-msgstr ""
+msgstr "Fizess a birodalomnak vagy pusztítsd el a kikötőjét!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 #, lua-format
@@ -62,31 +65,39 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
+"Gyűjts össze %d aranyrudat a legészakibb kikötődben, hogy kifizesd a "
+"viteldíjat Marcus Caius Iniucundusnak!"
 msgstr[1] ""
+"Gyűjts össze %d aranyrudat a legészakibb kikötődben, hogy kifizesd a "
+"viteldíjat Marcus Caius Iniucundusnak!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:56
 msgid ""
 "Alternatively, you can destroy his port to build one of your own in it’s "
 "place."
 msgstr ""
+"Választhatod azt is, hogy lerombolod a kikötőjét, és felépíted a helyére a "
+"sajátodat."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:57
 msgid ""
 "All soldiers who are present on the Northern island when you embark will "
 "accompany you."
 msgstr ""
+"Minden katona veled tart, aki az északi szigeten tartózkodik, amikor hajóra "
+"szállsz."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:58
 msgid "You have two hours to accomplish this objective."
-msgstr ""
+msgstr "Két órád van teljesíteni ezt a célkitűzést."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:68
 msgid "Introduction"
-msgstr ""
+msgstr "Bevezetés"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:69
 msgid "Welcome back!"
-msgstr ""
+msgstr "Üdvözöllek újra!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:71
@@ -94,6 +105,8 @@ msgid ""
 "We have been sailing North for weeks until we reached this shore. Not one of"
 " my numerous seamaps gives me the information what lies beyond this point."
 msgstr ""
+"Heteken át hajóztunk észak felé, mielőtt partot értünk itt. Számos tengeri "
+"térképeim egyike sem ad útmutatást, hogy mi vár ránk ezen a helyen túl."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:74
@@ -101,6 +114,9 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
+"Csak egy biztos: Találnunk kell egy kikötőnek alkalmas helyet ennek a "
+"földsávnak az északi partján, ahonnan expedíciót indíthatunk, és "
+"folytathatjuk utunkat észak felé."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:77
@@ -109,18 +125,22 @@ msgid ""
 "idleness pains me as I imagine Atterdag gleefully trampling the green "
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
+"Meg akarom találni régi barátomat, Reebaudot, a lehető leggyorsabban. Minden"
+" perc tétlen késedelem gyötrelmet okoz, mert Atterdag jut az eszembe, ahogy "
+"kevélyen tapossa gyűlöletes lábaival az én Föhröm zöld lápvidékét… Siessünk "
+"hát!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:100
 msgid "Eight Weeks Ago"
-msgstr ""
+msgstr "Nyolc héttel ezelőtt"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:83
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:101
 msgid "An unfair fight"
-msgstr ""
+msgstr "Egyenlőtlen küzdelem"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
@@ -129,6 +149,8 @@ msgid ""
 " knight who rules the island of Föhr… or I did until I was forced out by the"
 " conqueror."
 msgstr ""
+"De bocsáss meg, még be sem mutatkoztam! Claus Lembeck vagyok, lovag és Föhr "
+"szigetének uralkodója… voltam, amíg el nem űzött a hódító."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:88
@@ -136,6 +158,8 @@ msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
+"A sziget virágzott uralmam alatt, alattvalóim szerettek és tiszteltek. Még "
+"egy új kastélyt is emeltek a tiszteletemre. De jött Atterdag."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:94
@@ -146,6 +170,11 @@ msgid ""
 "weeks ago he landed with some of his allies and a large and well-trained "
 "army on my own island, Föhr, and sought to seize it."
 msgstr ""
+"Atterdag! A Dán birodalom királya, esküdt ellenségem. Számtalanszor "
+"segítettem a kontinens hercegeit védekezni háború és hódítás iránti vágya "
+"ellen, és általában vissza is vertük. De nyolc héttel ezelőtt partra szállt "
+"szövetségeseivel és hatalmas, jól képzett seregével az én drága szigetemen, "
+"Föhrön, hogy elfoglalja."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:97
@@ -157,21 +186,27 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
+"És keserűen be kell vallanom – sikerrel járt. A harcok harmincöt napon át "
+"dúltak, minden reggel és minden este újabb hajó érkezett Dániából, újabb "
+"csapatokat hozva. Hogyan küzdhettem volna ilyen túlerővel szemben? Végül nem"
+" maradt más választásom, mint hogy elmeneküljek fiammal Hennekével és "
+"legközelebbi bizalmasaimmal, míg Föhr Atterdag növekvő birodalmának egy "
+"újabb darabkája lett."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:103
 msgid "But I will not accept defeat!"
-msgstr ""
+msgstr "De nem fogadom el a vereséget!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid "Dark Future"
-msgstr ""
+msgstr "Sötét jövő"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:116
 msgid "Reconquest"
-msgstr ""
+msgstr "Visszahódítás"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:109
@@ -183,6 +218,12 @@ msgid ""
 "toying with us. No, if I am to stand a chance of winning against him I need "
 "to find a greater force to aid my cause."
 msgstr ""
+"Egyértelmű, hogy egyedül reményem sem lehet legyőzni fő ellenségemet. Azok "
+"sem segíthetnek, akiknek az oldalán annyiszor harcoltam, mert eddig is alig "
+"sikerült visszaszorítanunk Atterdagot, és ez a legutóbbi támadása "
+"megmutatta, hogy eddig nem is próbálkozott igazán. Csak játszott velünk. "
+"Nem, ha azt akarom, hogy legyen esélyem legyőzni őt, akkor nagyobb erőt kell"
+" találnom ügyem támogatására."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:112
@@ -192,6 +233,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
+"Egy ilyen erő nyomában járok éppen. Reebaudéban, aki egy kicsi, de erős fríz"
+" közösség törzsfőnöke, akivel valaha összebarátkoztam. Lekicsinylő "
+"büszkesége és hatalmas hadi tehetsége páratlanok az egész ismert világban. "
+"Ha van valaki, aki szembeszállhat Atterdaggal, akkor ő az."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -202,6 +247,10 @@ msgid ""
 "settle before. The bravery for so bold an undertaking is also something I "
 "would expect from nobody but him."
 msgstr ""
+"Amikor elmentem volna hozzá segítséget kérni, keserű csalódásban volt "
+"részem. Ő és az emberei már nem élnek Észak-Fríziában, hanem úgy határoztak,"
+" hogy a távoli északon telepednek le, ahol eddig senki nem mert. Egy ilyen "
+"merész vállalkozáshoz szükséges bátorságot sem vártam volna senki mástól."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -211,19 +260,23 @@ msgid ""
 "Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
 " the evil Dane."
 msgstr ""
+"Bátorságot, melynek most meg kell próbálnunk a nyomdokaiba lépnünk, mert "
+"csak egy lehetséges út áll előttünk. Északra kell hajóznunk, hogy "
+"megtaláljuk régi barátomat, Reebaudot, és meggyőznünk, hogy adjon katonákat "
+"szeretett Föhröm felszabadítására a gonosz dán uralma alól."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:124
 msgid "We must not fail. The future of my people depends on me."
-msgstr ""
+msgstr "Nem bukhatunk el. A népem jövője múlik rajtam."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
-msgstr ""
+msgstr "Gátépítés"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:129
 msgid "Gaining Land"
-msgstr ""
+msgstr "Föld szerzése"
 
 #. TRANSLATORS: Claus Lembeck – Diker
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:131
@@ -234,14 +287,19 @@ msgid ""
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
 msgstr ""
+"Ez a sziget túl kicsi és zsúfolt az ízlésemnek. Az embereim között van egy "
+"tapasztalt gátépítő, aki azt javasolta, hogy építsünk hullámtörőket "
+"farönkökből, így földterületet hasíthatunk ki a tengerből. Lassú és drága "
+"művelet, és remélem nem maradunk sokáig ezen a szigeten, de azért fontolóra "
+"vehetjük."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:135
 msgid "Port Space Found"
-msgstr ""
+msgstr "Kikötőhely felfedezve"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
 msgid "One step closer to the North"
-msgstr ""
+msgstr "Egy lépés észak felé"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
@@ -252,14 +310,19 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"A katonáim jelentik, hogy kikötőhelyet találtak! Kikötőt kell építenünk és "
+"expedíciót indítanunk. Ehhez persze fel kell építenünk a teljes hajóépítő "
+"gazdaságot hajóács műhellyel és szövőmalommal. De nem vesztegethetünk sok "
+"időt a gazdaság tökéletesítésére – csak az számít, hogy minél gyorsabban "
+"továbbindulhassunk észak felé."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
-msgstr ""
+msgstr "Egy furcsa sziget"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:142
 msgid "An apprehension"
-msgstr ""
+msgstr "Baljós előérzet"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
@@ -272,6 +335,13 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
+"Egy furcsa szigeten értünk partot. A föld kemény, sötét és meredek, a levegő"
+" pedig égett szagot hordoz. A part hamuszínű, maga a homok is rosszindulatot"
+" sugároz, mintha egy sárkánykígyó rejtőzne benne, arra várva, hogy lecsapjon"
+" minden élő teremtményre, ami elég botor ahhoz, hogy betegye ide a lábát. "
+"Alig tudom szavakba önteni a rámtörő baljós előérzeteket. Nem tudom, mitől "
+"kellene félnünk, de jobb lesz, ha óvatosan kelünk át rajta. Reméljük, hogy "
+"minél előbb átérünk a sziget túloldalára."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:154
@@ -287,12 +357,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:260
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:275
 msgid "Strangers"
-msgstr ""
+msgstr "Idegenek"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:230
 msgid "Who are they?"
-msgstr ""
+msgstr "Kik ezek?"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:151
@@ -300,10 +370,12 @@ msgid ""
 "Our soldiers have sighted strangers. Their buildings do not look like any I "
 "have seen before. I wonder who they are."
 msgstr ""
+"A katonáink idegeneket fedeztek fel. Az épületeik nem hasonlítanak semmire, "
+"amit eddig láttam. Kíváncsi vagyok, kik lehetnek."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:155
 msgid "Who are you?"
-msgstr ""
+msgstr "Kik vagytok?"
 
 #. TRANSLATORS: Angadthur – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:157
@@ -312,11 +384,14 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
+"Legyetek üdvözölve, idegenek! Angadthur vagyok, ennek a varázslat övezte "
+"szigetnek a királya, a legendás atlantiszi I. Ajanthul király "
+"leszármazottja. Örömmel látunk benneteket, ha a barátaink akartok lenni!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:173
 msgid "Greetings to the King!"
-msgstr ""
+msgstr "Üdvözlet a királynak!"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:163
@@ -326,13 +401,17 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
+"Béke veled, Angadthur király! Claus Lembeck vagyok, ez pedig a fiam, "
+"Henneke. Régi barátomat, Reebaudot keressük, aki néhány évvel ezelőtt hagyta"
+" el országunkat, hogy a távoli északon keressen új otthont. Megkérdezhetem, "
+"hogy hallottál-e már róla, és meg tudod-e mondani, hol találjuk?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:248
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:261
 msgid "Greetings"
-msgstr ""
+msgstr "Üdvözlet"
 
 #. TRANSLATORS: Angadthur – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:169
@@ -340,6 +419,8 @@ msgid ""
 "Of course you may ask. Ask whatever you like. Why do you ask whether you may"
 " ask?"
 msgstr ""
+"Persze, hogy megkérdezheted. Kérdezz, amit csak szeretnél. Miért kérdezed, "
+"hogy megkérdezheted-e?"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:175
@@ -348,6 +429,8 @@ msgid ""
 "all. Very well, I’ll ask properly: Do you know where we can find my friend "
 "Reebaud?"
 msgstr ""
+"Ez csak egy udvariassági formula a népemnél, semmi más. Rendben van, akkor "
+"csak kérdezek: Tudod, hogy hol találjuk Reebaud barátomat?"
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:181
@@ -358,6 +441,10 @@ msgid ""
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
 msgstr ""
+"Sajnálom, de ki kell ábrándítsalak, Sir Lembeck, soha nem hallottam a nevét,"
+" tehát hírt sem adhatok róla. A tervedről, hogy északra utazz – Attól tartok"
+" csak egy helyen lehet kikötőt építeni ezen a szigeten azon kívül, ahol ti "
+"kikötöttetek, és az pontosan az én palotám alatt található."
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:184
@@ -368,16 +455,21 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"Történetesen a katonáim unatkoznak, mert soha sincs semmi dolguk. Mérjük "
+"össze a fegyvereinket! Mit szólsz hozzá? Küldd el a katonáidat, hogy "
+"próbálják meg lerombolni a palotámat! Biztos vagyok benne, hogy esélyük sem "
+"lesz, ezért megígérem, hogy imádkozni fogok az istenekhez, hogy áldják meg "
+"az utatokat, ha mégis sikerül."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulálunk"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
-msgstr ""
+msgstr "Satul áldása legyen veled!"
 
 #. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:191
@@ -387,17 +479,21 @@ msgid ""
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
 msgstr ""
+"Túljutottál a legjobb őreimen és porig égetted a palotámat, amiről azt "
+"hittem, lehetetlen. Nagyon hatalmas lehetsz, és az istenek kegyeltje. Teljes"
+" joggal kiérdemelted a győzelmet. Gratulálok, és minden jót kívánok az "
+"utazásodhoz! Satul őrizzen téged!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "A Jégsivatagban"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
 msgid "The next island"
-msgstr ""
+msgstr "A következő sziget"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
@@ -406,6 +502,9 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
+"Úgy tűnik, közel járunk északhoz. Egy jégsivatag! Nem is tudtam, hogy "
+"létezik ilyen. De kétlem, hogy bárki meg tudna itt élni. Félek, semmi "
+"hasznosat nem fogunk találni ezen a szigeten."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
@@ -413,10 +512,12 @@ msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
 msgstr ""
+"Mindegy. Csak találjuk meg hamar a következő kikötőhelyet, hogy "
+"folytathassuk az utunkat!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
-msgstr ""
+msgstr "Kikötőhely felfedezve"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
@@ -424,16 +525,18 @@ msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
 msgstr ""
+"Találtunk egy kikötőhelyet a szigeten. Most már elhagyhatjuk ezt a hideg és "
+"barátságtalan jégsivatagot, és továbbhajózhatunk."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
 msgid "The North"
-msgstr ""
+msgstr "Észak"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
 msgid "In the North"
-msgstr ""
+msgstr "Északon"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
@@ -442,6 +545,9 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
+"Igen, ez már jobban hasonlít ahhoz, ahogy az északot elképzeltem. A mezők "
+"még zöldek, de a hó foltjai egyre nagyobbak, ahogy egyre messzebbre "
+"tekintünk észak felé."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:224
@@ -449,6 +555,8 @@ msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
 msgstr ""
+"Jónak tűnik, de lehet, hogy ez is csak egy sziget. Folytassuk gyorsan az "
+"utunkat!"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:232
@@ -456,10 +564,13 @@ msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
+"A katonáink újabb idegeneket fedeztek fel. Kíváncsi vagyok, hogy "
+"hasonlítanak-e a különös királyra, aki gratulált nekünk, amiért leromboltuk "
+"a palotáját."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
-msgstr ""
+msgstr "Nem akarunk zavarni"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:238
@@ -468,11 +579,14 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
+"Üdvözlet, idegenek! Marcus Caius Iniucundus vagyok, a Birodalom követe. Ez a"
+" ti szigetetek? Csak átutazóban vagyunk, reméljük nem haragszotok. Nem "
+"akarunk semmilyen kellemetlenséget."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
 msgid "Travellers"
-msgstr ""
+msgstr "Utazók"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:244
@@ -482,6 +596,10 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
+"Béke veled, Sir Iniucundus! Claus Lembeck vagyok, ez pedig a fiam, Henneke. "
+"Mi is csak átutazóban vagyunk. Azt mondod, követ vagy? Biztosan sokfelé "
+"jártál már. Hallottad hírét régi barátomnak, Reebaudnak? Csak annyit tudok, "
+"hogy valahol északon él. Meg tudod mondani, hol találjuk?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:250
@@ -492,6 +610,11 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Örülök, hogy békét akartok. Sajnálom, de soha nem hallottam még Reebaud "
+"nevét. Azonban ha északra tartotok, akkor ugyanaz az úticélunk, mert én is "
+"éppen arra tartok hivatalos birodalmi ügyben a Főváros megbízásából. Éppen "
+"egy hajót készítünk elő az útra. Elvihetünk magunkkal, ha szeretnétek, már "
+"ha ki tudjátok fizetni a viteldíjat."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
@@ -499,13 +622,15 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
+"Köszönjük az ajánlatot! Milyen árat kérsz? És, ha megkérdezhetem, "
+"megtudhatom, hogy milyen ügyben jársz?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d arany."
+msgstr[1] "%d arany."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -513,6 +638,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Tudom, hogy soknak tűnik, de a szenátus nem adott túl sok pénzt a "
+"kiküldetéshez, úgyhogy be kell valljam, szükségem lenne egy kevésre."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -525,6 +652,12 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"A kiküldetésem célja, hogy megkeressem az Északi Vidékek Tartományának "
+"proconsulját, aki immár évek óta nem fizette be az adót. Az a feladatom, "
+"hogy jól leszidjam ezt a Muriliust, és ha azt találom, hogy nem szükségből, "
+"hanem kapzsiságból maradt el az adófizetés, akkor láncra verve vigyem vissza"
+" a Fővárosba. El kell áruljam, örömömre szolgál ez a megbízás, mert jó "
+"esélyem van a helyére kerülni proconsulnak, ha sikerrel járok."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -537,10 +670,16 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"De visszatérve a te utazásodra. Csak egy hely van ennek a szigetnek az "
+"északi partján, ahová kikötőt lehet építeni, úgyhogy nem igazán van más "
+"választásod, mint kifizetni a viteldíjat a gályámon. A csillagjósaim pedig "
+"azt jelentették, hogy szörnyű vihar közeledik, ami hosszú időre lehetetlenné"
+" teszi a hajózást. Két órán belül ki kell hajóznunk, és aki ezután a "
+"szigeten marad, az egyhamar nem is megy innen sehová."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
-msgstr ""
+msgstr "Döntés"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:278
@@ -549,16 +688,19 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Úgy tűnik, tényleg boldogan magával vinne, de az ára túlzás. Ennyi erővel le"
+" is rombolhatjuk a kikötőjét, és sajátot építhetünk. Nem tudom, melyik lenne"
+" jobb…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
 msgid "Victory!"
-msgstr ""
+msgstr "Győzelem!"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:287
@@ -568,6 +710,10 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"Elfoglaltuk a kikötőt! Már építjük a hajót is, és utána végre már az igazi "
+"távoli északra utazhatunk. Bár még mindig nem hallottunk hírt Reebaudról, "
+"biztos vagyok benne, hogy hamarosan megtaláljuk. Ő pedig segíteni fog "
+"nekünk, és visszafoglalom Föhrt a bitorló Atterdagtól!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
@@ -584,15 +730,17 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Tiszta arannyal fizettél az útért, ezért úgy van rendjén, ha meg is kapod. A"
+" hajónk készen áll, beszállhattok!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "You Have Lost"
-msgstr ""
+msgstr "Vesztettél"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
 msgid "Goodbye!"
-msgstr ""
+msgstr "Viszont látásra!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
@@ -601,46 +749,53 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"Túl lassú voltál. Nekünk indulnunk kell, a viharban pedig nem fogod tudni "
+"elhagyni a szigetet. Sajnállak, de az időjárás nem vár. Viszont látásra!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Vesztettél és nem tudsz tovább játszani. Legyen több szerencséd, amikor "
+"újrajátszod ezt a küldetést! Kattints a „Rendben” gombra a főmenübe való "
+"visszatéréshez!"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Gátépítő"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Gátépítő ház"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "Gát építése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Kikötő"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
 msgstr ""
+"Hullámtörőket épít a munkaterületén, hogy szárazföldet nyerjen el a "
+"tengertől."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Hullámtörőket épít, hogy szárazföldet nyerjen el a tengertől."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -649,3 +804,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"A tengerentúli gyarmatosítás és a kereskedelem bázisaként szolgál. A "
+"katonákat, az árukat és a szerszámokat is tárolja."

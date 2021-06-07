@@ -154,7 +154,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_IMAGE)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Image jpeg tiff webp lzma ${SDL_IMG_EXTRA_LIBS})
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Image jpeg tiff webp lzma jbig ${SDL_IMG_EXTRA_LIBS})
     else()
       target_link_libraries(${NAME} SDL2::Image)
     endif()
@@ -276,6 +276,7 @@ function(wl_run_codecheck NAME SRC)
         -DSRC=${ABSOLUTE_SRC}
         -DOUTPUT_FILE=${OUTPUT_FILE}
         -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}
+        -DWL_ROOT_DIR=${WL_ROOT_DIR}
         -P ${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.cmake
       DEPENDS ${ABSOLUTE_SRC}
       COMMENT "Checking ${SRC} with CodeCheck"

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-09 12:09+0000\n"
+"PO-Revision-Date: 2021-05-31 10:20+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Egy teljesen felfejlesztett barbár katona Életerő szintje %1%, Támadás szintje %2%, Védelem szintje %3%,  és a Kitérés szintje %4%. Ez így egy igazán félelmetes harcos! Az egyes képességek jelentése a következő:"
+msgstr "Egy teljesen felfejlesztett barbár katona Életerő szintje %1%, Támadás szintje %2%, Védelem szintje %3%, és a Kitérés szintje %4%. Ez így egy igazán félelmetes harcos! Az egyes képességek jelentése a következő:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
@@ -608,7 +608,7 @@ msgstr "Győzd le az ellenségedet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:261
 msgid "Defeat the Enemy"
-msgstr "Győzd le az ellenséget!"
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
 msgid ""
@@ -645,7 +645,7 @@ msgstr "Győzd le az ellenségedet!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:272
 msgid "Defeat the enemy tribe"
-msgstr "Győzd le az ellenséges törzset!"
+msgstr "Az ellenséges törzs legyőzése"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
 msgid "Defeat the nearby enemy."

@@ -5,14 +5,15 @@
 # Translators:
 # tombox <wptom@wp.pl>, 2018
 # Marcin S <dzidek1003@o2.pl>, 2021
+# Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,17 +65,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Kliknij na jedną z farm"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:69
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Otwórz okno budynku farmy"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:70
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Kliknij na budynek farmy, aby otworzyć jej okno budynku. Pozwoli ci to "
+"przeanalizować budynek."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid "Find the construction plans for the farms"
@@ -969,8 +972,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
+"I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
@@ -1188,9 +1190,7 @@ msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
+msgid "Perhaps we should train them further in the arena as well."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-09 23:27+0000\n"
+"PO-Revision-Date: 2021-05-31 10:21+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Hajózási oktatás"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Üdv újra. Ebben az oktatójátékban megtanulhatod a legfontosabb dolgokat a hajózásról: a hajókról, a kikötőkről és az expedíciókról."
+msgstr "Üdvözöllek újra! Ebben az oktatójátékban megtanulhatod a legfontosabb dolgokat a hajózásról: a hajókról, a kikötőkről és az expedíciókról."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
@@ -97,7 +97,7 @@ msgstr "Kikötők építése"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
 msgid "How to build a port"
-msgstr "Hogyan építsünk kikötőt"
+msgstr "Hogyan építsünk kikötőt?"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
 msgid ""
@@ -124,11 +124,11 @@ msgstr "Talán már észre is vetted, hogy van is egy ilyen szimbólum a várad 
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
-msgstr "Építs egy kikötőt!"
+msgstr "Építs egy kikötőt a tábor északi részén!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr "Építs egy kikötőt a táborod északi részén!"
+msgstr "Kikötő építése"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
@@ -136,7 +136,7 @@ msgstr "Mindig szükséged van kikötőre, ha hajóval akarsz árukat szállíta
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr "Építs egy kikötőt a várad mellé, a kikötő helyét jelző kék szimbólumon."
+msgstr "Építs egy kikötőt a várad mellé, a kikötő helyét jelző kék szimbólumon!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
@@ -172,7 +172,7 @@ msgstr "A hajókat a hajóács műhely közelében a vízparton építi a hajó�
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr "Építs egy hajóács műhelyt!"
+msgstr "Hajóács műhely építése"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
@@ -356,7 +356,7 @@ msgstr "Az expedíciók tudnak magukkal vinni plusz árukat, munkásokat vagy ka
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr "Ehhez kattints egy üres áruhelyre, és válaszd ki a listából, hogy mit vigyenek."
+msgstr "Ehhez kattints egy üres áruhelyre, és válaszd ki a listából, hogy mit vigyenek!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
@@ -380,7 +380,7 @@ msgstr "Indíts egy expedíciót!"
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr "Ehhez kattints az „Expedíció indítása” gombra bármelyik kikötőben. Ekkor megjelenik az új fül, ahol a szükséges árukat követheted."
+msgstr "Ehhez kattints az „Expedíció indítása” gombra bármelyik kikötőben! Ekkor megjelenik az új fül, ahol a szükséges árukat követheted."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Off to greener pastures"
@@ -429,7 +429,7 @@ msgstr "Alapíts új települést!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr "Irányítsd a hajót egy szigetre, ahol lehet vasérc."
+msgstr "Irányítsd a hajót egy szigetre, ahol lehet vasérc!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
@@ -470,7 +470,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr "De figyelmeztetnem is kell téged: A kikötőket a főhadiszálláshoz hasonlóan meg tudja támadni az ellenség. De míg a főhadiszállásodban általában vannak katonák, akik meg tudják védeni, egy újonnan épült kikötőben nincsenek. Ezért, ha lehet, ne az ellenség közelében telepedj le."
+msgstr "De figyelmeztetnem is kell téged: A kikötőket a főhadiszálláshoz hasonlóan meg tudja támadni az ellenség. De míg a főhadiszállásodban általában vannak katonák, akik meg tudják védeni, egy újonnan épült kikötőben nincsenek. Ezért, ha lehet, ne az ellenség közelében telepedj le!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid ""
@@ -569,11 +569,11 @@ msgstr "A kompokat a csónakkészítő műhelyekben készítik. Egy komp két fa
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr "Mielőtt folytatnánk, építsünk egy csónakkészítő műhelyt a part közelébe."
+msgstr "Mielőtt folytatnánk, építsünk egy csónakkészítő műhelyt a part közelébe!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:268
 msgid "Build a ferry yard"
-msgstr "Építs egy csónakkészítő műhelyt!"
+msgstr "Csónakkészítő műhely építése"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:270
 msgid "Build a ferry yard close to the shore"

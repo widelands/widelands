@@ -10,6 +10,7 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
+# Tóth András <txa-dev@posteo.hu>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
 msgid ""
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-24 00:19+0000\n"
+"PO-Revision-Date: 2021-05-29 08:04+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +29,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
-msgstr "Építs ki egy fatermelő gazdaságot"
+msgstr "Építs ki egy fatermelő gazdaságot!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
@@ -36,11 +37,11 @@ msgstr "Fatermelő gazdaság"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Építs három favágóházat, egy erdészházat és egy fűrészmalmot."
+msgstr "Építs három favágóházat, egy erdészházat és egy fűrészmalmot!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
-msgstr "Építs egy kőfejtőt"
+msgstr "Építs egy kőfejtőt!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
@@ -48,7 +49,7 @@ msgstr "Kőfejtő"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Építs egy kőfejtőt főhadiszállásodtól délre."
+msgstr "Építs egy kőfejtőt főhadiszállásodtól délre!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
@@ -56,11 +57,11 @@ msgstr "Védd meg a településedet!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
-msgstr "Védd meg a településedet!"
+msgstr "A településed védelme"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr "Építs néhány őrbódét és őrházat a település köré."
+msgstr "Építs néhány őrbódét és őrházat a település köré!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -111,13 +112,13 @@ msgstr "Persze ezt az is jelenti, hogy további alapanyagokra is szükség lesz 
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr "Az élelmiszer ellátás biztosításához építhetsz egy halászházat, egy vadászházat, egy farmot, egy malmot és egy pékséget."
+msgstr "Az élelmiszerellátás biztosításához építhetsz egy halászházat, egy vadászházat, egy földbirtokot, egy malmot és egy pékséget."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
-msgstr "Építs egy sörfőzdét és egy borászatot, hogy ellásd a bányászokat jó és erős itallal!"
+msgstr "Építs egy sörfőzdét és egy borászatot, ami ellátja a bányászokat jó és erős itallal!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
@@ -136,7 +137,7 @@ msgstr "Védd a keleti határt!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect Your Eastern Frontier"
-msgstr "Védd a keleti határt!"
+msgstr "A keleti határ védelme"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:87
 msgid ""
@@ -154,7 +155,7 @@ msgstr "Pusztítsd el a barbár törzset!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
-msgstr "Pusztítsd el a barbár törzset!"
+msgstr "A barbárok elpusztítása"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."

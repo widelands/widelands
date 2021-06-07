@@ -76,7 +76,7 @@ msgstr "Csökkentsd 4-re a márványoszlopok célmennyiségét!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr "Csökkentsd a márványoszlopok célmennyiségét!"
+msgstr "A márványoszlopok célmennyisége"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
@@ -161,7 +161,7 @@ msgstr "Építs 2 kikötőt a távoli szigeteken!"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
-msgstr "Építs két expedíciós kikötőt!"
+msgstr "Kikötők a többi szigeten"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
@@ -198,7 +198,7 @@ msgstr "Győzd le a barbárokat!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
-msgstr "Győzd le az ellenséget!"
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
@@ -210,7 +210,7 @@ msgstr "Fedezd fel a térkép többi részét, és építs kikötőket!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr "Fedezz fel további szigeteket és keress kikötőhelyeket!"
+msgstr "További szigetek és kikötőhelyek felfedezése"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
@@ -226,7 +226,7 @@ msgstr "Szerezd vissza az oltárt!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Find the Holy Shrine"
-msgstr "Találd meg a szent oltárt!"
+msgstr "Neptunus oltára"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
@@ -672,8 +672,8 @@ msgid ""
 msgstr ""
 "Gondoljuk végig! A szövet szövéséhez gyapjúra van szükség egy juhtelepről. A"
 " juhtelepnek pedig búzára és vízre van szüksége a juhok neveléséhez. Ezért "
-"hát, ha találunk egy nagy épületnek megfelelő helyet, ott először egy farmot"
-" kell építenünk."
+"hát, ha találunk egy nagy épületnek megfelelő helyet, ott először egy "
+"földbirtokot kell építenünk."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -684,9 +684,9 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
-"Ha a farm elég búzát termesztett, lebontjuk, és a helyére felépítjük a "
-"juhtelepet gyapjút termelni. Amikor a juhtelep működni kezd, keresünk, vagy "
-"ha nincs, felszabadítunk egy közepes épülethez megfelelő helyet, ahová "
+"Ha a földbirtok elég búzát termesztett, lebontjuk, és a helyére felépítjük a"
+" juhtelepet gyapjút termelni. Amikor a juhtelep működni kezd, keresünk, vagy"
+" ha nincs, felszabadítunk egy közepes épülethez megfelelő helyet, ahová "
 "megépíthetjük a szövőmalmot, ahol a gyapjúból szövet készülhet. De egyelőre "
 "foglalkozzunk azzal, hogy legyen elég búzánk!"
 
@@ -724,8 +724,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
-"Eddig jól haladunk. Elég búzát termesztettünk. Most bontsuk le a farmot, és "
-"építsük fel a termelési láncban utána következő épületet!"
+"Eddig jól haladunk. Elég búzát termesztettünk. Most bontsuk le a "
+"földbirtokot, és építsük fel a termelési láncban utána következő épületet!"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:401
@@ -949,7 +949,7 @@ msgstr "Amalea emlékeztet"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:496
 msgid "Amalea is shaking her head…"
-msgstr "Amalea a fejét rázza"
+msgstr "Amalea a fejét rázza…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:498
@@ -1080,7 +1080,7 @@ msgstr "Miénk a győzelem"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
-msgstr "Saledus örvendezik"
+msgstr "Saledus örvendezik…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:552
@@ -1101,7 +1101,7 @@ msgstr "Neptunus megbékítése"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
-msgstr "Saledus nagyon szomorú és nyugtalan"
+msgstr "Saledus nagyon szomorú és nyugtalan…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:563

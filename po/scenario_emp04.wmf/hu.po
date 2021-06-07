@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-05 15:08+0000\n"
+"POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
@@ -25,7 +25,7 @@ msgstr "Bontsd le a nem dolgozó épületeket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle Buildings"
-msgstr "Bonts le néhány épületet!"
+msgstr "Épületek lebontása"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:46
 msgid ""
@@ -50,7 +50,7 @@ msgstr "Szüntesd meg a fölösleges utakat!"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:60
 msgid "Clear Road Network"
-msgstr "Tedd átláthatóvá az úthálózatot!"
+msgstr "Úthálózat rendbetétele"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:56
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:61
@@ -68,34 +68,34 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
-msgstr "Kattints az egyik farmra!"
+msgstr "Kattints az egyik földbirtokra!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:69
 msgid "Open the Building Window of a Farm"
-msgstr "Nyisd meg egy farm ablakát!"
+msgstr "Földbirtok ellenőrzése"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:70
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
-"Kattints egy farmra, hogy megnyisd az ablakát! Így ellenőrizni tudod az "
-"épületet."
+"Kattints egy földbirtokra, hogy megnyisd az ablakát! Így ellenőrizni tudod "
+"az épületet."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid "Find the construction plans for the farms"
-msgstr "Keresd meg a farmok tervrajzait!"
+msgstr "Keresd meg a földbirtokok tervrajzait!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:78
 msgid "Find Farm Construction Plans"
-msgstr "Keresd meg a farmok tervrajzait!"
+msgstr "A földbirtokok tervrajzai"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:79
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
-"Szerezd vissza a farmok tervrajzait! Kelet felé terjeszkedve a dombok "
+"Szerezd vissza a földbirtokok tervrajzait! Kelet felé terjeszkedve a dombok "
 "környékén kutass!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
@@ -133,7 +133,7 @@ msgstr "Cseréld le a régi, rosszul működő erdészházakat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:105
 msgid "Build Two New Forester’s Houses"
-msgstr "Építs két új erdészházat!"
+msgstr "Új erdészházak"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:106
 msgid ""
@@ -146,7 +146,7 @@ msgstr "Keresd meg északon a szerzetesrendet!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:114
 msgid "Find the Monastery"
-msgstr "Keresd meg a szerzetesrendet!"
+msgstr "A szerzetesrend"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:115
 msgid ""
@@ -251,7 +251,7 @@ msgstr "Győzd le a barbárokat!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Defeat the Enemy"
-msgstr "Győzd le az ellenséget!"
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:164
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -263,7 +263,7 @@ msgstr "Építs 2 faszénégető kemencét!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
-msgstr "Építs két faszénégető kemencét!"
+msgstr "Faszénégető kemencék"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:173
 msgid "Build two charcoal kilns to support the iron industry."
@@ -624,7 +624,7 @@ msgid ""
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
 "Bátyám! Sajnos megint rossz hírt kell közölnöm veled. Ahogy láthatod, a "
-"farmjaink nem termesztenek semmit, de nem tudjuk lebontani sem őket."
+"földbirtokaink nem termesztenek semmit, de nem tudjuk lebontani sem őket."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:335
@@ -633,9 +633,9 @@ msgid ""
 "instructions on how to construct and operate farms. Therefore they have zero"
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
-"Ez a helyzet úgy állhatott elő, hogy az embereink elvesztették az "
-"útmutatókat a farmok építéséről és működéséről. Így most nulla a "
-"termelékenységük, az építőmunkások pedig nem tudják, hogyan bontsák le őket."
+"Ez a helyzet úgy állhatott elő, hogy az embereink elvesztették a leírásokat "
+"a földbirtokok építéséről és működéséről. Így most nulla a termelékenységük,"
+" az építőmunkások pedig nem tudják, hogyan bontsák le őket."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:338
@@ -644,8 +644,8 @@ msgid ""
 "operation of farms. One older constructor told me that they might have been "
 "concealed in a cave in the hills east of our border."
 msgstr ""
-"Ezért aztán sürgősen vissza kell szereznünk a farmok tervrajzait és "
-"használati útmutatóit. Egy öreg építőmunkás azt mondta nekem, hogy egy "
+"Ezért aztán sürgősen vissza kell szereznünk a földbirtokok tervrajzait és a "
+"földművesek útmutatóit. Egy öreg építőmunkás azt mondta nekem, hogy egy "
 "barlangban lehetnek elrejtve a keleti határainkon túli dombok között."
 
 #. TRANSLATORS: Amalea
@@ -655,7 +655,7 @@ msgid ""
 "them."
 msgstr ""
 "Amíg meg nem találjuk a tervrajzokat, addig az egyetlen lehetőségünk a "
-"farmok megsemmisítése."
+"földbirtokok megsemmisítése."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:348
 msgid "Amalea Looks Confident"
@@ -710,7 +710,8 @@ msgid ""
 "Praise the gods, Lutius! We have found the plans on how to build and operate"
 " farms."
 msgstr ""
-"Hála az isteneknek, Lutius! Megtaláltuk a farmok tervrajzait és útmutatóit."
+"Hála az isteneknek, Lutius! Megtaláltuk a földbirtokok tervrajzait és "
+"útmutatóit."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:370
@@ -719,9 +720,9 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
-"Most már elkezdhetünk farmokat építeni és sört főzni, amit annyira várnak "
-"már a bányászaink. A tervek alapján ráadásul a meglévő farmjainkat is fel "
-"tudjuk fejleszteni, hogy újra működjenek."
+"Most már elkezdhetünk földbirtokokat építeni és sört főzni, amit annyira "
+"várnak már a bányászaink. A tervek alapján ráadásul a meglévő "
+"földbirtokainkat is fel tudjuk fejleszteni, hogy újra működjenek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:373
@@ -1136,7 +1137,7 @@ msgstr "Amalea a gazdaságot elemzi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea reminds Lutius of the farms…"
-msgstr "Amalea a farmokra emlékezteti Lutiust"
+msgstr "Amalea a földbirtokokra emlékezteti Lutiust"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:549
@@ -1146,16 +1147,15 @@ msgid ""
 "although there is enough space to plant wheat."
 msgstr ""
 "Nézd Lutius! Tovább elemeztem a gazdaságunkat. Azt hiszem, gond lehet a "
-"farmjainkkal. Nem termelnek semmit, pedig van elég helyük búzát vetni."
+"földbirtokainkkal. Nem termelnek semmit, pedig van elég helyük búzát vetni."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid ""
-"I think we should have a deeper look into the issue and open the building "
-"window of one of them."
+"I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
 "Úgy vélem, jobban meg kell vizsgálnunk ezt a problémát, ezért látogassuk meg"
-" az egyiket."
+" az egyiket!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
@@ -1417,12 +1417,8 @@ msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
-msgid ""
-"Remember, we need to produce wooden spears and helmets to recruit them in "
-"the barracks. Perhaps we should train them further in the arena as well."
-msgstr ""
-"Ne feledd, fa lándzsákra és sisakokra van szükség az újoncok felszereléséhez"
-" a laktanyában. Esetleg elkezdhetjük őket fejleszteni is az arénában."
+msgid "Perhaps we should train them further in the arena as well."
+msgstr "Esetleg elkezdhetjük őket fejleszteni is az arénában."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"
@@ -1671,7 +1667,7 @@ msgstr "sör főzése"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr "Farm"
+msgstr "Földbirtok"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42

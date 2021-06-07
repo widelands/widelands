@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-28 15:28+0000\n"
+"PO-Revision-Date: 2021-06-05 21:14+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -53,19 +53,19 @@ msgstr "Objectius i com aconseguir-los"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Ús de a finestra «Objectius»"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Podeu obrir i tancar la finestra «Objectius» fent clic en el botó «Objectius» de la barra d'eines de la part inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Com la majoria de les altres finestres, es pot tancar fent-hi clic dret."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -120,7 +120,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general guarda els béns, els treballadors i els soldats que no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns inicials no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana per viure-hi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -132,7 +132,7 @@ msgstr "Necessitem un lloc per la cabana del llenyataire. Per fer-ho més fàcil
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Us ensenyaré on està el menú i com es mostren i amaguen els espais de construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -150,7 +150,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Ja ho teniu. Ara deixeu-me mostrar-vos com fer una cabana de llenyataire i com connectar-la amb un camí. Hi ha una àrea lliure al costat d'aquests arbres per talar. Descriuré els passos a realitzar i després us ho mostraré."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -160,13 +160,13 @@ msgstr "Construcció de la cabana del llenyataire"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Primer, faré clic esquerre en el símbol on vull que es construeixi la cabana del llenyataire. Apareixerà una finestra on podré escollir entre diferents edificis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "La cabana del llenyataire és un edifici petit, així que buscaré la pestanya dels edificis petits i escolliré l'edifici corresponent."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -296,7 +296,7 @@ msgstr "Ben fet! Esperem fins que s'acabi de construir la cabana."
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Si voleu que el temps avanci més ràpidament, useu la tecla «%1$s» per incrementar la velocitat de la partida. Després, podeu usar «%2$s» per reduir-la."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
@@ -400,7 +400,7 @@ msgstr "Molt bé. Ara parlem del minimapa."
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Podeu obrir la finestra seleccionant l'entrada «Mostra el minimapa» del menú «Vista del mapa» de la part inferior de la pantalla o simplement usant la drecera de teclat «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -441,7 +441,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "La pedrera és un edifici petit com la cabana del llenyataire. Es pot construir en qualsevol parcel·la que es mostri disponible amb una casa vermella, groga o verda (premeu «%s» per mostrar o ocultar aquests símbols)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -671,7 +671,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Mentre esperem, us mostraré ràpidament una opció molt útil. Les obres en construcció i molts edificis són pareguts i costa distingir-los. El Widelands té una opció per mostrar etiquetes amb el nom dels edificis. S'anomena «cens»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -679,7 +679,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Per tal de mostrar o amagar les etiquetes de cens de construcció, podeu seleccionar l'entrada «Mostra/Amaga cens» del menú «Mostra/Amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
