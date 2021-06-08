@@ -25,7 +25,7 @@ descriptions:new_productionsite_type {
          hotspot = { 52, 63 },
       },
    },
-   
+
    spritesheets = {
       working = {
          fps = 20,
