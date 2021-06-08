@@ -375,6 +375,25 @@
 			]
 		},
 		{
+			"heading": "Add-Ons",
+			"image": "images/ui_fsmenu/addon_authors.png",
+			"entries":[
+				{
+					"members":[
+						"Björn Burkhardt",
+						"Benedikt Straub (Nordfriese)",
+						"Stephan Lutz (hessenfarmer)",
+						"Ondřej (OIPUN)",
+						"Matthias Klimmek",
+						"king of nowhere",
+						"Markus Göpfert (MarkMcWire)",
+						"Yo...",
+						"kaputtnik"
+					]
+				}
+			]
+		},
+		{
 			"heading": "Former Elders",
 			"image": "images/players/genstats_player.png",
 			"entries":[
