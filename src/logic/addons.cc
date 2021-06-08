@@ -300,7 +300,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
-		if (s.first.category == AddOnCategory::kTheme) {
+		if (s.first->category == AddOnCategory::kTheme) {
 			if (s.second) {
 				previously_enabled = &s;
 			}
@@ -312,7 +312,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	switch (action) {
 	case UpdateThemeAction::kEnableArgument:
 		for (AddOnState* s : installed) {
-			if (s->first.internal_name == arg) {
+			if (s->first->internal_name == arg) {
 				s->second = true;
 				set_template_dir(theme_addon_template_dir(arg));
 				set_config_string("theme", arg);
@@ -327,7 +327,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 			return set_template_dir("");
 		}
 		for (AddOnState* s : installed) {
-			if (s->first.internal_name == arg) {
+			if (s->first->internal_name == arg) {
 				s->second = true;
 				set_template_dir(theme_addon_template_dir(arg));
 				return;
@@ -342,8 +342,8 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 			return;
 		}
 		previously_enabled->second = true;
-		set_config_string("theme", previously_enabled->first.internal_name);
-		set_template_dir(theme_addon_template_dir(previously_enabled->first.internal_name));
+		set_config_string("theme", previously_enabled->first->internal_name);
+		set_template_dir(theme_addon_template_dir(previously_enabled->first->internal_name));
 		return;
 	}
 	NEVER_HERE();
