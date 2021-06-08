@@ -1,6 +1,6 @@
 # Widelands
 
-[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands)
+[![Build Status Travis-CI](https://travis-ci.com/widelands/widelands.svg?branch=master)](https://travis-ci.com/widelands/widelands)
 [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands)
 [![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3A%22Formatting+your+code%22)
 [![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3ABuild)
@@ -120,7 +120,7 @@ You can add targets to the `make` or `ninja` command, e.g. `make lang` to build 
 | Name | Function |
 | --- | --- |
 | `ALL` or no target | Compile everything, up to executable with the settings from the `cmake` call |
-| `codecheck` | Run the codechecks (currently broken) |
+| `codecheck` | Run the codechecks |
 | `doc` | Generate Doxygen documentation. Currently only with Build Type Debug, but this is easily changed if necessary. |
 | `install` | Install into the target dir, this is `/usr/local` per default (you need root privileges!) unless you change it (see CMake options above) |
 | `lang` | Generate the translations |
