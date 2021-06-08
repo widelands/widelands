@@ -22,11 +22,11 @@ jobs:
     - name: Validate `developers.json`
       # The website gets angry about incorrect punctuation
       run: |
-        python3 << END_SCRIPT
-import json
-with open('data/txts/developers.json', 'r') as f:
-    json_data = json.load(f)['developers']
-END_SCRIPT
+        python3 <<- END_SCRIPT
+          import json
+          with open('data/txts/developers.json', 'r') as f:
+              json_data = json.load(f)['developers']
+        END_SCRIPT
 
   codecheck:
     runs-on: ubuntu-latest
