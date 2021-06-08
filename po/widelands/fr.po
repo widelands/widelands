@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-04 09:30+0000\n"
+"POT-Creation-Date: 2021-06-06 08:32+0000\n"
 "PO-Revision-Date: 2021-05-05 08:44+0000\n"
 "Last-Translator: Atanase Albaran\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -1372,8 +1372,8 @@ msgid ""
 "location."
 msgstr "Sélectionnez la nouvelle taille de la carte, puis cliquez sur la carte pour la diviser à l'emplacement souhaité. Lorsque vous augmentez la taille de la carte, de nouvelles colonnes / lignes seront insérées à l'est / sud du point sélectionné. Lorsque vous réduisez la carte, le nombre souhaité de colonnes / lignes sera supprimé de l'est / sud de l'emplacement de fractionnement."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426

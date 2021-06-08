@@ -5,6 +5,7 @@
 # Translators:
 # stdh, 2019
 # FvZ, 2020
+# CrisiusXIII <chris@cborn.nl>, 2021
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-29 14:02+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: FvZ, 2020\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -692,6 +693,12 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Na het verbouwen van voldoende graan kunnen we de boerderij afbreken en een "
+"schaapskooi bouwen om wol te produceren. Zodra de schaapskooi werkt kunnen "
+"we een stukje grond zoeken of vrij maken, voor een gemiddeld gebouw, om een "
+"weverij te bouwen zodat we de wol kunnen gebruiken om kleding te weven. Maar"
+" voor het moment daar gelaten, laten we beginnen door eerst een behoorlijke "
+"hoeveelheid graan te verbouwen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -700,6 +707,10 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Ik denk dat een voorraad van 50 schoven graan genoeg is voor een beginner. "
+"Er is geen aangegeven hoeveelheid graan omdat een boer geen andere spullen "
+"nodig heeft om graan te verbouwen. We hoeven alleen maar toe te kijken hoe "
+"onze voorraad graan groeit."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -800,6 +811,10 @@ msgid ""
 "possible enemies we should send some soldiers to each new port, until we can"
 " protect them with some military buildings."
 msgstr ""
+"In ieder geval moeten we voorzichtig zijn met onze havens. Om ze te "
+"verdedigen tegen vijanden is het beter een paar soldaten naar iedere nieuwe "
+"haven te sturen totdat we ze kunnen beschermen met enkele militaire "
+"gebouwen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea Advises"
@@ -816,6 +831,9 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Gegroet Lutius. Tijdens de gesprekken met al onze heldhaftige bouwers, "
+"vertelden zij dat ze all het overgebleven goud nodig hebben voor de bouw van"
+" de haven. Dus hebben we geen goud over als de haven is gebouwd."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441

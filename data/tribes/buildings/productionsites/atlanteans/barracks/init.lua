@@ -23,13 +23,14 @@ descriptions:new_productionsite_type {
    },
 
    animation_directory = dirname,
-   animations = {
-      idle = {
-         hotspot = { 44, 65 },
-      },
-      working = { -- TODO(GunChleoc): make animations
-         basename = "idle",
-         hotspot = { 44, 65 },
+   -- TODO(Nordfriese): Make animations.
+   animations = {idle = {hotspot = {50, 56}}},
+   spritesheets = {
+      build = {
+         hotspot = {50, 56},
+         frames = 3,
+         columns = 1,
+         rows = 3
       }
    },
 
@@ -56,8 +57,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs atlanteans_soldier",
             "consume=tabard trident_light atlanteans_recruit",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:30s",
             "recruit=atlanteans_soldier"
          }
       },
