@@ -26,8 +26,8 @@ A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils
 // e.g. for version "1.2" we need "1,2,0,0".
 // https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
 1 VERSIONINFO
-FILEVERSION 0,21,0,1
-PRODUCTVERSION 0,21,0,1
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"

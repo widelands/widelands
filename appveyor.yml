@@ -40,6 +40,7 @@ shallow_clone: false
 branches:
   only:
     - master
+    - release-1.0
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
@@ -52,11 +53,11 @@ build_script:
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
-  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
-  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING%.exe
+  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%PLATFORM%-%WIDELANDS_VERSION_STRING% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%PLATFORM%-%WIDELANDS_VERSION_STRING%.exe
 
 artifacts:
-  - path: Widelands-$(CONFIGURATION)-$(PLATFORM)-$(WIDELANDS_VERSION_STRING).exe
+  - path: Widelands-$(PLATFORM)-$(WIDELANDS_VERSION_STRING).exe
     name: Widelands Setup
 
 platform:
@@ -65,4 +66,3 @@ platform:
 
 configuration:
   - Release
-  - Debug

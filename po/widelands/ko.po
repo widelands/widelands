@@ -4596,7 +4596,7 @@ msgstr "버전 %1$s (%2$s)"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) 2010 - 2022년 와이드랜드 개발 팀에 의해 GNU 일반 공중 사용 허가서 V2.0에 따라 사용허가가 부여되었습니다"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:796
 msgid "Desyncing Add-On Found"
