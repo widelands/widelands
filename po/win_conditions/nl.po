@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# CrisiusXIII <chris@cborn.nl>, 2021
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # FvZ, 2020
@@ -14,8 +15,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-06-06 23:56+0000\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +62,7 @@ msgstr "Je team vond een nieuw artefact."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Je hebt een nieuw artefact gevonden"
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -74,7 +75,7 @@ msgstr "Een vijand stal één van de artefacten van je team."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Een van je artefacten is gestolen door een vijand"
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -87,7 +88,7 @@ msgstr "Je team stal een artefact van een vijand."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Je stal een artefact van een vijand."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -163,7 +164,7 @@ msgstr "Autocraat"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "De stam of team die alle andere verslaat wint het spel! Dit betekend dat de tegenstanders geen enkel hoofdkwartier, haven of pakhuis meer over hebben."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -183,13 +184,13 @@ msgstr "Dit is een spel zonder einde of regels. Oorlogsmist is uitgeschakeld."
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "HKw Jager"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "De stam of het team dat alle andere hoofdkwartieren kan vinden en kan vernietigen wint het spel! Dit werkt niet met startcondities zonder hoofdkwartier."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -260,7 +261,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Elke speler of team probeert om meer dan de helft van het gebied van de kaart te bemachtigen. De winnaar is die speler of dat team welke dit gebied voor minimaal 20 minuten weet te behouden, of degene met het grootste gebied na 4 uur, watook er als eerste komt. Als de vreedzame mode is geselecteerd, dan eindigt het spel zodra een enkele speler meer land heeft dan welke andere speler dan ook kon vergaren."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

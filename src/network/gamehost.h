@@ -43,18 +43,20 @@ class MenuCapsule;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct GameHost : public GameController {
+class GameHost : public GameController {
+public:
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(FsMenu::MenuCapsule&,
-	         std::shared_ptr<GameController>&,
+	GameHost(FsMenu::MenuCapsule*,
+	         std::unique_ptr<GameController>&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
 	~GameHost() override;
 
 	void run();
+	void run_direct();
 	void run_callback();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
@@ -197,7 +199,7 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
-	FsMenu::MenuCapsule& capsule_;
+	FsMenu::MenuCapsule* capsule_;
 	std::shared_ptr<GameController>&
 	   pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
 
