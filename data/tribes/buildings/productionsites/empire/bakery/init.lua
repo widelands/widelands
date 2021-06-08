@@ -34,7 +34,7 @@ descriptions:new_productionsite_type {
          hotspot = { 42, 65 }
       },
       working = {
-         fps = 2.
+         fps = 2,
          frames = 20,
          rows = 5,
          columns = 4,
@@ -65,8 +65,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs empire_bread",
             "consume=flour water",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:20s",
+            "animate=working duration:10s",
             "produce=empire_bread"
          }
       },
