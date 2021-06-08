@@ -633,6 +633,7 @@ bool MultilineEditbox::handle_textinput(const std::string& input_text) {
  */
 void MultilineEditbox::focus(bool topcaller) {
 	Panel::focus(topcaller);
+	d_->ww.focus();
 }
 
 /**

@@ -19,6 +19,7 @@
 
 #include "logic/addons.h"
 
+#include <list>
 #include <memory>
 #include <set>
 
@@ -27,9 +28,10 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "graphic/style_manager.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
-#include "logic/filesystem_constants.h"
+#include "wlapplication_options.h"
 
 namespace AddOns {
 
@@ -292,6 +294,59 @@ bool AddOnInfo::requires_texture_atlas_rebuild() const {
 	default:
 		return false;
 	}
+}
+
+void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+	AddOnState* previously_enabled = nullptr;
+	std::list<AddOnState*> installed;
+	for (AddOnState& s : g_addons) {
+		if (s.first.category == AddOnCategory::kTheme) {
+			if (s.second) {
+				previously_enabled = &s;
+			}
+			s.second = false;
+			installed.push_back(&s);
+		}
+	}
+
+	switch (action) {
+	case UpdateThemeAction::kEnableArgument:
+		for (AddOnState* s : installed) {
+			if (s->first.internal_name == arg) {
+				s->second = true;
+				set_template_dir(theme_addon_template_dir(arg));
+				set_config_string("theme", arg);
+				return;
+			}
+		}
+		NEVER_HERE();
+
+	case UpdateThemeAction::kLoadFromConfig:
+		arg = get_config_string("theme", "");
+		if (arg.empty()) {
+			return set_template_dir("");
+		}
+		for (AddOnState* s : installed) {
+			if (s->first.internal_name == arg) {
+				s->second = true;
+				set_template_dir(theme_addon_template_dir(arg));
+				return;
+			}
+		}
+		log_warn("Theme '%s' not found", arg.c_str());
+		FALLS_THROUGH;
+	case UpdateThemeAction::kAutodetect:
+		if (!previously_enabled) {
+			set_config_string("theme", "");
+			set_template_dir("");
+			return;
+		}
+		previously_enabled->second = true;
+		set_config_string("theme", previously_enabled->first.internal_name);
+		set_template_dir(theme_addon_template_dir(previously_enabled->first.internal_name));
+		return;
+	}
+	NEVER_HERE();
 }
 
 bool AddOnInfo::matches_widelands_version() const {

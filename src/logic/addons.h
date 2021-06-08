@@ -28,6 +28,7 @@
 #include <vector>
 
 #include "base/i18n.h"
+#include "logic/filesystem_constants.h"
 
 namespace AddOns {
 
@@ -126,6 +127,14 @@ struct AddOnInfo {
 	bool requires_texture_atlas_rebuild() const;
 };
 
+inline static std::string theme_addon_template_dir(const std::string& name) {
+	std::string s = kAddOnDir;
+	s += '/';
+	s += name;
+	s += '/';
+	return s;
+}
+
 // Sorted list of all add-ons mapped to whether they are currently enabled
 using AddOnState = std::pair<AddOnInfo, bool>;
 extern std::vector<AddOnState> g_addons;
@@ -143,6 +152,9 @@ unsigned count_all_dependencies(const std::string&, const std::map<std::string, 
 AddOnInfo preload_addon(const std::string&);
 
 i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename);
+
+enum class UpdateThemeAction { kEnableArgument, kLoadFromConfig, kAutodetect };
+void update_ui_theme(UpdateThemeAction, std::string = "");
 
 // This guard allows you to modify `g_addons` in any way you like
 // and ensures that it is reset to the initial state later.
