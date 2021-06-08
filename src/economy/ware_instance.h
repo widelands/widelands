@@ -20,6 +20,8 @@
 #ifndef WL_ECONOMY_WARE_INSTANCE_H
 #define WL_ECONOMY_WARE_INSTANCE_H
 
+#include <memory>
+
 #include "economy/transfer.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -94,7 +96,7 @@ private:
 	Economy* economy_;
 	DescriptionIndex descr_index_;
 
-	IdleWareSupply* supply_;
+	std::unique_ptr<IdleWareSupply> supply_;
 	Transfer* transfer_;
 	ObjectPointer transfer_nextstep_;  ///< cached PlayerImmovable, can be 0
 
