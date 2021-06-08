@@ -63,12 +63,17 @@ int text_height(int ptsize) {
 
 namespace UI {
 
+constexpr int CARET_BLINKING_DELAY = 1000;
+
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
    : draw_caret_(false),
      fontsize_(fontsize),
      color_(color),
-     font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)) {
+     font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)),
+     caret_timer_("", true) {
 	wrapwidth_ = gwrapwidth;
+	caret_timer_.ms_since_last_query();
+	caret_ms = 0;
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
 		if (wrapwidth_ < 2 * kLineMargin) {
@@ -392,7 +397,14 @@ void WordWrap::draw(RenderTarget& dst,
 			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
-			dst.blit(caretpt, caret_image);
+
+			if (caret_ms > CARET_BLINKING_DELAY) {
+				dst.blit(caretpt, caret_image);
+			}
+			if (caret_ms > 2 * CARET_BLINKING_DELAY) {
+				caret_ms = 0;
+			}
+			caret_ms += caret_timer_.ms_since_last_query();
 		}
 	}
 }
@@ -454,6 +466,10 @@ uint32_t WordWrap::quick_width(const std::string& text) const {
 		}
 	}
 	return result;
+}
+void WordWrap::focus() {
+	caret_ms = CARET_BLINKING_DELAY;
+	caret_timer_.ms_since_last_query();
 }
 
 }  // namespace UI
