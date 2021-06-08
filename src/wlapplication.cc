@@ -50,7 +50,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -414,8 +413,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
 
-	set_template_dir(get_config_string("theme", ""));
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 }
@@ -503,6 +500,7 @@ void WLApplication::initialize_g_addons() {
 			}
 		}
 	}
+	AddOns::update_ui_theme(AddOns::UpdateThemeAction::kLoadFromConfig);
 }
 
 static void init_one_player_from_template(unsigned p,
