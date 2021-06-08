@@ -1069,6 +1069,10 @@ void AddOnsCtrl::install(std::shared_ptr<AddOns::AddOnInfo> remote) {
 	if (remote->requires_texture_atlas_rebuild()) {
 		g_gr->rebuild_texture_atlas();
 	}
+	if (remote->category == AddOns::AddOnCategory::kTheme) {
+		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote->internal_name);
+		get_topmost_forefather().template_directory_changed();
+	}
 }
 
 // Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
@@ -1115,6 +1119,12 @@ void AddOnsCtrl::upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, const bool f
 			pair.first = AddOns::preload_addon(remote->internal_name);
 			if (full_upgrade && remote->requires_texture_atlas_rebuild()) {
 				g_gr->rebuild_texture_atlas();
+			}
+			if (remote.category == AddOns::AddOnCategory::kTheme &&
+			    template_dir() == AddOns::theme_addon_template_dir(remote.internal_name)) {
+				AddOns::update_ui_theme(
+				   AddOns::UpdateThemeAction::kEnableArgument, remote.internal_name);
+				get_topmost_forefather().template_directory_changed();
 			}
 			return;
 		}
@@ -1267,13 +1277,6 @@ static void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info,
 		}
 	}
 
-	if (info->category == AddOns::AddOnCategory::kTheme &&
-	    template_dir() == (kAddOnDir + '/' + info->internal_name + '/')) {
-		// When uninstalling the active theme, fall back to default theme
-		set_template_dir("");
-		ctrl->get_topmost_forefather().template_directory_changed();
-	}
-
 	// Delete the add-on…
 	g_fs->fs_unlink(kAddOnDir + FileSystem::file_separator() + info->internal_name);
 
@@ -1286,6 +1289,11 @@ static void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info,
 	for (auto it = AddOns::g_addons.begin(); it != AddOns::g_addons.end(); ++it) {
 		if (it->first->internal_name == info->internal_name) {
 			AddOns::g_addons.erase(it);
+			if (info.category == AddOns::AddOnCategory::kTheme &&
+			    template_dir() == AddOns::theme_addon_template_dir(info.internal_name)) {
+				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
+				ctrl->get_topmost_forefather().template_directory_changed();
+			}
 			return ctrl->rebuild();
 		}
 	}
@@ -1487,6 +1495,13 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				                                              "images/ui_basic/checkbox_checked.png" :
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
+				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
+					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
+					                                      AddOns::UpdateThemeAction::kAutodetect,
+					                        pair.first.internal_name);
+					get_topmost_forefather().template_directory_changed();
+					ctrl->rebuild();
+				}
 				return ctrl->update_dependency_errors();
 			}
 		}

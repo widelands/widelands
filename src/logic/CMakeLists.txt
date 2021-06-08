@@ -99,12 +99,14 @@ wl_library(logic_addons
     base_macros
     base_log
     build_info
+    graphic
     io_fileread
     io_filesystem
     io_profile
     logic_filesystem_constants
     logic_map
     map_io
+    widelands_options
 )
 
 wl_library(logic_objectives
