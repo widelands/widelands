@@ -50,7 +50,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -69,6 +68,7 @@
 #include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
+#include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
@@ -413,8 +413,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
 
-	set_template_dir(get_config_string("theme", ""));
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 }
@@ -502,13 +500,30 @@ void WLApplication::initialize_g_addons() {
 			}
 		}
 	}
+	AddOns::update_ui_theme(AddOns::UpdateThemeAction::kLoadFromConfig);
 }
 
 static void init_one_player_from_template(unsigned p,
-                                          SinglePlayerGameSettingsProvider& settings,
+                                          bool human,
+                                          std::unique_ptr<GameSettingsProvider>& settings,
                                           Section& player_section,
                                           const Widelands::Map& map) {
-	settings.set_player_team(p, player_section.get_natural("team", 0));
+	if (player_section.get_bool("closed", false)) {
+		if (human) {
+			throw wexception("Cannot close interactive player slot.");
+		}
+		settings->set_player_state(p, PlayerSettings::State::kClosed);
+		return;  // No need to configure closed player
+	} else if (human) {
+		settings->set_player_state(p, PlayerSettings::State::kHuman);
+	} else {
+		std::string ai = player_section.get_string("ai", "normal");
+		bool random = ai == "random";
+		settings->set_player_ai(p, ai, random);
+		settings->set_player_state(p, PlayerSettings::State::kComputer);
+	}
+
+	settings->set_player_team(p, player_section.get_natural("team", 0));
 	if (player_section.has_val("playercolor")) {
 		std::string colorstr = player_section.get_safe_string("playercolor");
 		char* color;
@@ -518,15 +533,15 @@ static void init_one_player_from_template(unsigned p,
 		result.g = std::strtol(color, &color, 10);
 		++color;
 		result.b = std::strtol(color, &color, 10);
-		settings.set_player_color(p, result);
+		settings->set_player_color(p, result);
 	} else {
-		settings.set_player_color(p, kPlayerColors[p]);
+		settings->set_player_color(p, kPlayerColors[p]);
 	}
 
 	std::string tribe =
 	   player_section.get_string("tribe", map.get_scenario_player_tribe(p + 1).c_str());
-	settings.set_player_tribe(p, tribe, tribe.empty());
-	tribe = settings.settings().players[p].tribe;
+	settings->set_player_tribe(p, tribe, tribe.empty());
+	tribe = settings->settings().players[p].tribe;
 
 	const std::string& init_script_name = player_section.get_string("init", "headquarters.lua");
 	std::string addon;
@@ -539,12 +554,12 @@ static void init_one_player_from_template(unsigned p,
 		addon += ".lua";
 	}
 	bool found_init = false;
-	const Widelands::TribeBasicInfo t = settings.settings().get_tribeinfo(tribe);
+	const Widelands::TribeBasicInfo t = settings->settings().get_tribeinfo(tribe);
 	for (unsigned i = 0; i < t.initializations.size(); ++i) {
 		if (addon.empty() ?
-             init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
-             addon == t.initializations[i].script) {
-			settings.set_player_init(p, i);
+		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+		       addon == t.initializations[i].script) {
+			settings->set_player_init(p, i);
 			found_init = true;
 			break;
 		}
@@ -560,6 +575,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	Profile profile(filename_.c_str());
 	Section& section = profile.get_safe_section("global");
+	const bool multiplayer = section.get_bool("multiplayer", false);
 
 	std::vector<AddOns::AddOnState> new_g_addons;
 	for (std::string addons = section.get_string("addons", ""); !addons.empty();) {
@@ -581,17 +597,31 @@ void WLApplication::init_and_run_game_from_template() {
 			}
 		}
 		if (!found) {
-			throw wexception("Add-on '%s' not found", name.c_str());
+			log_err("Add-on '%s' not found", name.c_str());
+			return;
 		}
 	}
 	AddOns::g_addons = new_g_addons;
 
-	Widelands::Game game;
-	SinglePlayerGameSettingsProvider settings;
+	const int playernumber = section.get_natural("interactive_player", 1);
+	if (playernumber == 0 && !multiplayer) {
+		log_err("interactive_player must be > 0 for singleplayer games.");
+		return;
+	}
 
-	const int playernumber = section.get_positive("interactive_player", 1);
-	settings.set_peaceful_mode(section.get_bool("peaceful", false));
-	settings.set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
+	std::unique_ptr<GameSettingsProvider> settings;
+	std::unique_ptr<GameHost> host;
+	if (multiplayer) {
+		std::unique_ptr<GameController> ctrl(nullptr);
+		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
+		                        Widelands::get_all_tribeinfos(nullptr), false));
+		settings.reset(new HostGameSettingsProvider(host.get()));
+	} else {
+		settings.reset(new SinglePlayerGameSettingsProvider());
+	}
+
+	settings->set_peaceful_mode(section.get_bool("peaceful", false));
+	settings->set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
 
 	{
 		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
@@ -606,7 +636,7 @@ void WLApplication::init_and_run_game_from_template() {
 			script = "scripting/win_conditions/";
 			script += wc_name;
 		}
-		settings.set_win_condition_script(script);
+		settings->set_win_condition_script(script);
 	}
 
 	{
@@ -614,33 +644,53 @@ void WLApplication::init_and_run_game_from_template() {
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfile);
 		if (!ml) {
-			throw wexception("Invalid map file '%s'", mapfile.c_str());
+			log_err("Invalid map file '%s'", mapfile.c_str());
+			return;
 		}
 		ml->preload_map(true, nullptr);
 		const int nr_players = map.get_nrplayers();
-		settings.set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
-		settings.set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(),
-		                 nr_players, false);
+		settings->set_scenario((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0);
+		settings->set_map(map.get_name(), mapfile, map.get_background_theme(), map.get_background(),
+		                  nr_players, false);
+		settings->set_player_number(playernumber == 0 ? UserSettings::none() : playernumber - 1);
 		for (int p = 0; p < nr_players; ++p) {
 			std::string key = "player_";
 			key += std::to_string(p + 1);
-			init_one_player_from_template(p, settings, profile.pull_section(key.c_str()), map);
+			bool human = p == playernumber - 1;
+			try {
+				init_one_player_from_template(
+				   p, human, settings, profile.pull_section(key.c_str()), map);
+			} catch (const WException& e) {
+				log_err("%s", e.what());
+				return;
+			}
 		}
 	}
 
+	if (!settings->can_launch()) {
+		log_err("Inconsistent game setup configuration. Cannot launch.");
+		return;
+	}
+
+	if (multiplayer) {
+		host->run_direct();
+		return;
+	}
+
+	Widelands::Game game;
 	std::vector<std::string> tipstexts{"general_game", "singleplayer"};
-	if (settings.has_players_tribe()) {
-		tipstexts.push_back(settings.get_players_tribe());
+	if (settings->has_players_tribe()) {
+		tipstexts.push_back(settings->get_players_tribe());
 	}
 	game.create_loader_ui(
-	   tipstexts, true, settings.settings().map_theme, settings.settings().map_background);
+	   tipstexts, true, settings->settings().map_theme, settings->settings().map_background);
 	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
 
 	SinglePlayerGameController ctrl(game, true, playernumber);
 	game.set_game_controller(&ctrl);
-	game.init_newgame(settings.settings());
+	game.init_newgame(settings->settings());
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 	} catch (const Widelands::GameDataError& e) {
@@ -1064,6 +1114,7 @@ bool WLApplication::init_settings() {
 	get_config_int("toolbar_pos", 0);
 	get_config_bool("numpad_diagonalscrolling", false);
 	get_config_bool("edge_scrolling", false);
+	get_config_bool("invert_movement", false);
 	get_config_bool("tooltip_accessibility_mode", false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	get_config_bool("training_wheels", true);
