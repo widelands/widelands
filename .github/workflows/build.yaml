@@ -6,7 +6,8 @@ on:
     branches: [ master ]
 
 jobs:
-  includes:
+  # This job runs multiple smaller checks where having several jobs would be overkill.
+  misc_sanity_checks:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -15,8 +16,16 @@ jobs:
         fetch-depth: 1
     - name: Check for superfluous includes and forward declarations
       run: |
-        cd src
+        pushd src
         ../utils/find_unused_includes.py
+        popd
+    - name: Validate `developers.json`
+      # The website gets angry about incorrect punctuation
+      run: python3 << END_SCRIPT
+import json
+with open('data/txts/developers.json', 'r') as f:
+    json_data = json.load(f)['developers']
+END_SCRIPT
 
   codecheck:
     runs-on: ubuntu-latest
@@ -94,7 +103,7 @@ jobs:
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
   testsuite:
-    needs: [clang_tidy, documentation, codecheck, includes]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       fail-fast: false
       matrix:
@@ -169,9 +178,7 @@ jobs:
 
 
   windows:
-    # Skip this job on master branch
-    if: github.ref != 'refs/heads/master'
-    needs: [clang_tidy, documentation, codecheck, includes]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
@@ -249,7 +256,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    needs: [clang_tidy, documentation, codecheck, includes]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
