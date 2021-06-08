@@ -511,8 +511,9 @@ void InternetLobby::clicked_hostgame() {
 
 	// Start our relay host
 	try {
-		running_game_.reset(new GameHost(
-		   &capsule_, running_game_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true));
+		running_game_.reset(new GameHost(&capsule_, running_game_,
+		                                 InternetGaming::ref().get_local_clientname(), tribeinfos_,
+		                                 true));
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),

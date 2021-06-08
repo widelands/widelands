@@ -290,9 +290,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                      Vector2i::zero(),
                      _("Scroll when the mouse cursor is near the screen edge")),
      invert_movement_(&box_ingame_,
-                     UI::PanelStyle::kFsMenu,
-                     Vector2i::zero(),
-                     _("Invert click-and-drag map movement direction")),
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      _("Invert click-and-drag map movement direction")),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
@@ -379,7 +379,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
-    box_ingame_.add(&invert_movement_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&invert_movement_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add_space(kPadding);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
@@ -501,7 +501,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 	edge_scrolling_.set_state(opt.edge_scrolling);
-    invert_movement_.set_state(opt.invert_movement);
+	invert_movement_.set_state(opt.invert_movement);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_.set_state(opt.training_wheels);
 #endif
@@ -761,7 +761,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 	os_.edge_scrolling = edge_scrolling_.get_state();
-    os_.invert_movement = invert_movement_.get_state();
+	os_.invert_movement = invert_movement_.get_state();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	os_.training_wheels = training_wheels_.get_state();
 #endif
@@ -843,7 +843,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
-    opt.invert_movement = opt_section_.get_bool("invert_movement", false);
+	opt.invert_movement = opt_section_.get_bool("invert_movement", false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 #endif
@@ -893,7 +893,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
-    opt_section_.set_bool("invert_movement", opt.invert_movement);
+	opt_section_.set_bool("invert_movement", opt.invert_movement);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 #endif
