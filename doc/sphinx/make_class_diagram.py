@@ -3,24 +3,40 @@
 
 import re
 
-class_re=re.compile(r'^class Lua(\w+) : public Lua(\w+)')
+class_re=re.compile(r'^class\s+(\w+)\s+:\s+public\s+(\w+)')
 
-tmp_classes = {}     # All classes in a file with classname as key. If this class is a child
+tmp_cls = {}     # All classes in a file with classname as key. If this class is a child
                      # of other classes the value is a list of ancestors, otherwise ''.
-cls_derived = {}     # derived classes with a list of parent classes
-main_classes = []    # main classes
+descendant_cls = {}     # derived classes with a list of parent classes
+main_cls = []    # main classes
 
 def parse_classes(file_name):
-   with open(file_name) as f:
-      for line in f:
-         m = re.match(class_re, line)
-         if m:
-            tmp_classes[m.group(1)]=m.group(2)
+   found_cls = False
+   with open(file_name, 'r') as f:
+      found_cls = re.findall(r'^class\s(\w+)\s:\s\w+\s(\w+)', f.read(), re.M)
+
+   if found_cls:
+      mod_name = ''
+      for main_cl, der_cl in found_cls:
+         # Strip out leading 'Lua'; this can't be done in the regexp because we need 'LunaClass'
+         main_cl = main_cl.replace('Lua','')
+         der_cl = der_cl.replace('Lua','')
+
+         # find module name
+         if der_cl == "LunaClass":
+            mod_name = main_cl
+            continue
+
+         # feed tmp_cls
+         if der_cl == mod_name:
+            tmp_cls[main_cl]=''
+         else:
+            tmp_cls[main_cl]=der_cl
 
 parse_classes('/home/kaputtnik/Quellcode/widelands-repo/widelands/src/scripting/lua_map.h')
 
 print("\nAll classes:")
-for k, v in tmp_classes.items():
+for k, v in tmp_cls.items():
   print(k, v)
 
 #graph_directive = """
