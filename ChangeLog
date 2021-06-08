@@ -17,6 +17,9 @@
 - Tapir & Tapir Farm (#4631)
 - New empire barracks graphics by DragonAtma (#4668)
 - Building animation for empire barracks by DragonAtma (#4695)
+- New barbarians barracks graphics by DragonAtma (#4785)
+- fix graphic glitch in Barbarian flag (#4910)
+- New atlantean barracks graphics by DragonAtma (#4923)
 
 
 ### Sounds and Music
@@ -54,6 +57,8 @@
 - Fix detection of amount of starting gold in fri02 (#4797)
 - Fix typo and outdated instructions in emp03 (#4836)
 - Empire 04 text improvements (#4844, #4847, #4848, #4852)
+- Better fri03 placeholder portraits (#4891)
+- Make fri03 starting port indestructible (#4874)
 
 
 ### Scripting
@@ -205,6 +210,7 @@
 - Reduce crashes from missing add-on dependencies (#4710)
 - Don't store Script add-ons in savegames (#4811)
 - Fix missing compatibility lookups during gameloading (#4862)
+- Fix additional expedition items saveloading (#4921)
 
 
 ### AI
@@ -222,6 +228,30 @@
 - Delay AI initalization after scenario init (#4656)
 - Fixed an unsafe AI time operation (#4749)
 - AI production support (#4618)
+    - Deprecate `collects_ware_from_map` AI hint
+    - Deprecate `supports_production_of` AI hint
+    - Add support for multiple lumberjack/ranger pairs
+    - Get rid of dirty hack for rare tree cutter/plantation. `amazons_rare_tree_plantation` no longer needs supporters, but the `rare_tree_cutters_hut` still does
+    - Fix miscategorization of Frisian Fishers being supported by clay pits
+    - `frisians_reed_farm` is now detected as supporting the `frisians_beekeepers_house`
+    - Hotfix for Amazon trainingsites
+    - New property `needed_attributes` for productionsites when the immovable doesn't get removed from the map
+    - Get rid of hard-coded work area radius when detecting useful immovables near a building
+    - If a building has no input but some output wares and creates no immovables, but collects some:
+        - If it produces a construction material
+            - If it has supporters -> lumberjack
+            - If it has no supporters -> quarry
+        - If it produces ware that is not a construction material -> needs berry
+    - A hunter collects and bob from the map. This adds `amazons_hunter_gatherers_hut` to the list
+    - If needs water and collects "resource_fish" -> fisher
+    - If a building has no input and it produces "water" -> well
+    - If a building supports a lumberjack, it's a ranger
+    - introduce `number_of_same_nearby` to identify nearby buildings of same type
+    - if upgrade building needs supporters take this into consideration
+    - fixes some values in training to make the AI train amazons
+    - minor updates of basic amounts and other lua values
+
+
 - Fix AI handling of amazon water gatherer (#4753)
 
 
@@ -333,6 +363,8 @@
     - 1 with custom building enhancements
     - 1 with custom worker enhancements
 - Rename Cassava Root Field/Plantation → Cassava Field/Plantation (#4850)
+- Quickfix against workers reoccupying the building they were evicted from (#4890)
+- Fix workers gaining experience for idling (#4905)
 
 
 ### User Interface
@@ -640,6 +672,8 @@
 - Resize minimap on map creation (#4560)
 - Fix crash when using debug console in editor (#4737)
 - Make editor toolsize hotkeys configurable (#4769)
+- Fix crash when loading map with not installed add-on in editor (#4900)
+- Catch more editor exceptions gracefully (#4902)
 
 
 ### Graphics Engine
@@ -693,6 +727,7 @@
 - MP Fixes (#4716)
 - Request no bug report for expected disconnects (#4722)
 - Fix desyncs with tribe add-ons (#4777)
+- Fix uncaught exception on MP add-on mismatches (#4885)
 
 
 ### Build System
@@ -745,6 +780,7 @@
 - added libdeflate as static library where tiff is to be linked (#4573)
 - Fix linking with opus (#4789)
 - Fix MinGW revision detection and linking (#4870)
+- Fix codecheck path magic (#4895)
 
 
 ### Other Issues
