@@ -689,6 +689,9 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Crec que un estoc de 50 unitats de blat serà suficient per començar. No "
+"tenim una quantitat objectiu de blat, perquè el granger no necessita altres "
+"béns per produir-ne. Només haurem de vigilar que l'estoc de blat creixi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"

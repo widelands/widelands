@@ -69,7 +69,12 @@ Tab::Tab(TabPanel* const tab_parent,
 	set_title(init_title);
 }
 
+void Tab::update_template() {
+	set_title(title_);  // update rendered_text_
+}
+
 void Tab::set_title(const std::string& init_title) {
+	title_ = init_title;
 	if (init_title.empty()) {
 		rendered_title = nullptr;
 	} else {
