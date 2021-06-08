@@ -104,7 +104,7 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->value = startval;
 	sbi_->unit = unit;
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
-                                                           UI::ButtonStyle::kWuiSecondary;
+	                                                        UI::ButtonStyle::kWuiSecondary;
 
 	box_ = new UI::Box(this, style, 0, 0, UI::Box::Horizontal);
 
@@ -115,7 +115,7 @@ SpinBox::SpinBox(Panel* const parent,
 
 	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_height_,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                              UI::ButtonStyle::kWuiSecondary,
+	                                                           UI::ButtonStyle::kWuiSecondary,
 	                            "");
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
@@ -128,12 +128,12 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_minus =
 	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
-                                             "images/ui_basic/scrollbar_down.png"),
+	                                          "images/ui_basic/scrollbar_down.png"),
 	              _("Decrease the value"));
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
-                                             "images/ui_basic/scrollbar_up.png"),
+	                                          "images/ui_basic/scrollbar_up.png"),
 	              _("Increase the value"));
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);

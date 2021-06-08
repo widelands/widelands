@@ -219,7 +219,7 @@ private:
 	bool dragging_;
 
 	bool edge_scrolling_;
-    bool invert_movement_;
+	bool invert_movement_;
 	int8_t is_scrolling_x_, is_scrolling_y_;
 
 	// The queue of plans to execute as animations.
