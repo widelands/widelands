@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_EDITBOX_H
 #define WL_UI_BASIC_EDITBOX_H
 
+#include <base/scoped_timer.h>
 #include <memory>
 
 #include "ui_basic/panel.h"
@@ -82,6 +83,7 @@ struct EditBox : public Panel {
 
 	void set_caret_pos(size_t pos);
 	size_t caret_pos() const;
+	void focus(bool topcaller = true) override;
 
 private:
 	std::unique_ptr<EditBoxImpl> m_;
@@ -89,6 +91,7 @@ private:
 	void check_caret();
 	void reset_selection();
 	void highlight_selection(RenderTarget& dst, const Vector2i& point, uint16_t fontheight);
+	void draw_caret(RenderTarget& dst, const Vector2i& point, uint16_t fontheight);
 	std::string text_to_asterisk();
 
 	bool history_active_;
@@ -106,6 +109,9 @@ private:
 	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
 	int calculate_text_width(int pos) const;
 	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;
+
+	ScopedTimer caret_timer_;
+	uint32_t caret_ms;
 };
 }  // namespace UI
 
