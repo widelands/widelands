@@ -36,14 +36,19 @@ void SupplyList::add_supply(Supply& supp) {
  * Remove a supply from the list.
  */
 void SupplyList::remove_supply(Supply& supp) {
+	if (supplies_.empty()) {
+		throw wexception("SupplyList::remove: list is empty");
+	}
 	for (Supplies::iterator item_iter = supplies_.begin(); item_iter != supplies_.end();
 	     ++item_iter) {
 
 		if (*item_iter == &supp) {
+			// Copy last element to current positon, avoids shifts
 			*item_iter = *(supplies_.end() - 1);
 			supplies_.pop_back();
 			return;
 		}
+		// no extra code for last element, copy will be a noop then
 	}
 	throw wexception("SupplyList::remove: not in list");
 }

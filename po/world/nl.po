@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# CrisiusXIII <chris@cborn.nl>, 2021
 # FvZ, 2020
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-06 23:38+0000\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -349,7 +350,7 @@ msgstr "Dode boom"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:5
 msgid "Felled Tree"
-msgstr ""
+msgstr "Gevelde Boom"
 
 #: ../../data/world/immovables/trees/larch/init.lua:14
 msgid "Larch (Sapling)"

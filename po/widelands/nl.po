@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-04 09:30+0000\n"
+"POT-Creation-Date: 2021-06-06 08:32+0000\n"
 "PO-Revision-Date: 2021-06-05 02:02+0000\n"
 "Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
@@ -1361,8 +1361,8 @@ msgid ""
 "location."
 msgstr "Selecteer het nieuwe formaat van de kaart, klik dan op de kaart om deze te splitsen op de gewenste locatie. Wanneer de kaart wordt vergroot, zullen nieuwe kolommen/rijen worden ingevoegd ten oosten/zuiden van het geselcteerde punt. Wanneer de kaart wordt verkleind, wordt het gewenste aantal kolommen/rijen verwijderd ten oosten/zuiden van de splitsingslocatie."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426

@@ -98,6 +98,7 @@ wl_library(logic_addons
     base_exceptions
     base_log
     build_info
+    graphic
     graphic_image_cache
     io_fileread
     io_filesystem
@@ -105,6 +106,7 @@ wl_library(logic_addons
     logic_filesystem_constants
     logic_map
     map_io
+    widelands_options
 )
 
 wl_library(logic_objectives
