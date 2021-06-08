@@ -61,6 +61,7 @@ struct Tab : public NamedPanel {
 	void activate();
 
 	void set_title(const std::string&);
+	void update_template() override;
 
 private:
 	// Leave handling the mouse move to the TabPanel.
@@ -75,6 +76,7 @@ private:
 
 	const Image* pic;
 	FontStyle font_style_;
+	std::string title_;
 	std::shared_ptr<const UI::RenderedText> rendered_title;
 	std::string tooltip;
 	Panel* panel;
