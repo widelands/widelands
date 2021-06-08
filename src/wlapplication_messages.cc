@@ -124,6 +124,8 @@ void fill_parameter_vector() {
 		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
 		/** TRANSLATORS: * marks the default value */
 		_("[true|false*]"), _("Scroll when the mouse cursor is near the screen edge"), true},
+	  {"", "invert_movement", _("[true|false*]"), _("Invert click-and-drag map movement direction"),
+		true},
 	  {"", "numpad_diagonalscrolling", _("[true|false*]"),
 		_("Allow diagonal scrolling with the numeric keypad"), true},
 	  {"", "game_clock", _("[true|false*]"), _("Display system time in the info panel"), true},
