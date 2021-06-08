@@ -21,11 +21,17 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 43, 45 },
       },
-      build = {
-         hotspot = { 43, 45 },
-      },
       unoccupied = {
          hotspot = { 43, 45 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 42, 44 }
       },
    },
 
