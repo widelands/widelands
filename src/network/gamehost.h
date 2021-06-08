@@ -49,7 +49,7 @@ public:
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
 	GameHost(FsMenu::MenuCapsule*,
-	         std::unique_ptr<GameController>&,
+	         std::shared_ptr<GameController>&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
