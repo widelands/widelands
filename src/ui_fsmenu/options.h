@@ -52,7 +52,6 @@ public:
 		bool inputgrab;
 		uint32_t maxfps;
 		bool sdl_cursor;
-		std::string theme;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -75,6 +74,7 @@ public:
 		bool game_clock;
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
+        bool invert_movement;
 		bool tooltip_accessibility_mode;
 		int32_t display_flags;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -140,7 +140,6 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<int> resolution_dropdown_;
-	UI::Dropdown<std::string> theme_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
@@ -180,6 +179,7 @@ private:
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
+    UI::Checkbox invert_movement_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	UI::Box training_wheels_box_;

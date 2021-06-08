@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <base/scoped_timer.h>
 #include <unicode/uchar.h>
 
 #include "base/vector.h"
@@ -71,6 +72,8 @@ struct WordWrap {
 	std::string text_of_line_at(int32_t y) const;
 	int text_width_of(std::string& text) const;
 
+	void focus();
+
 private:
 	struct LineData {
 		/// Textual content of the line
@@ -112,6 +115,8 @@ private:
 	                         uint32_t line,
 	                         const Vector2i& point) const;
 	uint32_t line_index(int32_t y) const;
+	ScopedTimer caret_timer_;
+	uint32_t caret_ms;
 };
 
 }  // namespace UI
