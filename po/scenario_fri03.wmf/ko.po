@@ -246,7 +246,7 @@ msgstr "우리는 실패해서는 안됩니다. 우리 민족의 미래는 나�
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
-msgstr "디킹"
+msgstr "제방을 쌓고 있음"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:129
 msgid "Gaining Land"
@@ -414,16 +414,19 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"공교롭게도, 우리 군인들은 할 일이 전혀 없는 것에 싫증을 느낍니다. 우리 겨루기 한번 해볼까요? 내 궁전을 파괴하기 위해 군인들을 보낼"
+" 수 있습니다. 나는 당신이 기회를 놓치지 않을 것을 확신합니다. 그러므로 나는 당신이 성공한다면 당신의 여행을 축복해 달라고 "
+"신들에게기도 할 것을 약속하겠습니다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid "Congratulations"
-msgstr ""
+msgstr "축하합니다"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
-msgstr ""
+msgstr "사툴이 당신을 축복하기를"
 
 #. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:191
@@ -433,17 +436,19 @@ msgid ""
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
 msgstr ""
+"당신은 나의 최고의 근위대를 물리치고 불가능하다고 믿었던 나의 궁전을 불태웠소. 당신은 매우 강력해야하고 신들의 사랑을 받아야합니다. "
+"당신은 틀림없이 승리를 거둘 자격이 있습니다. 당신의 항해를 축하하고 잘 되길 바랍니다. 사툴이 당신을 안전하게 지켜주길!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "얼음 사막에서"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
 msgid "The next island"
-msgstr ""
+msgstr "다음 섬"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
@@ -452,34 +457,36 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
+"우리는 북쪽에 가까워지고 있는 것 같습니다. 얼음 사막! 나는 그런 것이 존재하는지조차 몰랐습니다. 하지만 누가 여기에서 살 수 있을지 "
+"의심스럽습니다. 저는 우리가 이 섬에서 유용한 것을 발견하지 못할까 두렵습니다."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
 msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
-msgstr ""
+msgstr "상관없어요 다음 항구 터를 빨리 찾아서 계속 여행 할 수 있도록 합시다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
-msgstr ""
+msgstr "항구 터를 찾았습니다"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
 msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
-msgstr ""
+msgstr "섬에서 항구 터를 찾았습니다. 이제 우리는 이 춥고 황량한 얼음 사막을 떠나서 항해를 계속할 수 있습니다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
 msgid "The North"
-msgstr ""
+msgstr "북쪽"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
 msgid "In the North"
-msgstr ""
+msgstr "북쪽에서"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
@@ -488,24 +495,26 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
+"번역확인-> 그렇습니다, 이것은 제가 상상하는 북쪽의 모습과 더 닮아보입니다. 이곳의 초원은 아직은 푸르지만, 눈이 쌓여갈수록 북쪽은 더"
+" 멀리 내다볼 수 있다."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:224
 msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
-msgstr ""
+msgstr "보기엔 좋지만, 그냥 다른 섬일 수도 있어요. 빨리 여행을 계속합시다."
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:232
 msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
-msgstr ""
+msgstr "우리 군인들이 낯선 사람들을 다시 목격했습니다. 그들이 우리 왕궁을 파괴한 것을 축하해주던 이상한 왕과 닮았는지 궁금합니다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
-msgstr ""
+msgstr "번역확인-> 제발 아무 문제 없기를"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:238
@@ -514,11 +523,13 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
+"안녕하세요, 이방인 여러분! 저는 마르쿠스 카이우스 이니우쿤두스 제국의 특별사절이오. 여기가 당신들의 섬이오? 우리는 그냥 지나갈 "
+"뿐이오, 당신들이 신경쓰지 않았으면 좋겠소. 우리는 어떤 문제도 원하지 않습니다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
 msgid "Travellers"
-msgstr ""
+msgstr "여행자들"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:244
@@ -528,6 +539,9 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
+"평화를 빕니다 이니우쿤투스 경! 저는 클라우스 렘벡이고, 이쪽은 제 아들 헨네케입니다. 우리도 그냥 지나가고 있을뿐입니다. 당신이 "
+"특별사절입니까? 많이 돌아다니시는것 같군요. 내 오랜 친구 리바우드에 대한 소식 들으셨습니까? 나는 그가 북쪽에 살고 있다는 것만 알고 "
+"있는데, 어디서 그를 찾을 수 있는지 알려줄 수 있습니까?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:250
@@ -538,19 +552,22 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"당신이 평화를 원한다니 기쁩니다. 미안하지만 리바우드라는 이름은 들어 본 적이 없습니다. 그러나 만약 당신이 북쪽으로 가고 싶다면, "
+"우리와 목적지가 같습니다. 왜냐하면 그곳이 제가 수도에서 공무로 여행하고있는 곳이기 때문입니다. 우리는 현재 출항할 배를 준비하고 "
+"있습니다. 당신이 원하고, 통과 비용을 지불 할 수 있다면, 우리는 당신을 데려 갈 수 있습니다."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
 msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
-msgstr ""
+msgstr "당신의 제안에 감사드립니다! 당신이 요구하는 가격은 얼마입니까? 실례가 안 된다면 어떤 업종에서 일하는지 알 수 있겠습니까?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
+msgstr[0] "금조각 %d개 입니다. "
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -558,6 +575,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"나는 그것이 많이 보인다는 것을 알고 있지만, 상원 의원들이 이 탐험을 위해 저에게 많은 돈을 주지 않았기 때문에, 저에게 필요한것이 좀"
+" 있다는것을 인정해줬음 좋겠소."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -570,6 +589,9 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"제 여행의 목적은 수년 동안 세금을 내지 않은 북쪽의 땅의 총독을 찾는 것입니다. 제 임무는 이 무릴리우스를 호되게 꾸짖는 것이고, 만약"
+" 그가 필요보다는 탐욕으로 돈을 지불하지 못했다는 것을 알게 된다면, 저는 그에게 족쇄를 채워 수도로 압송할것입니다. 제가 이 임무를 "
+"맡게되어 기쁘오. 제가 성공하면 그 대신 총독으로 임명될 좋은 기회가 있기 때문이오."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -582,10 +604,13 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"하지만 당신의 흐름의 주제로 돌아가보세요. 이 섬의 북쪽 해안에는 항구를 지을 수있는 곳은 한곳뿐입니다. 그래서 당신은 내 갤리 배에 "
+"있는 통로를 구입하는 것에 대한 대안이 없습니다. 그러나 나의 점성가들은 끔찍한 폭풍이 모이고있어 오랫동안 바다 여행을 불가능하게 만들 "
+"것이라고 보고했었소. 우리는 2 시간 이내에 출항해야하며, 그 시간 이후에도 섬에 남아있는 사람은 곧 떠나지 않을 것입니다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
-msgstr ""
+msgstr "결정"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:278
@@ -594,16 +619,18 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"그가 우리에게 통행권을 줄 만큼 행복해 보이지만, 가격은 터무니없이 비쌉니다. 우리가 그의 항구를 파괴하고 우리만의 항구를 짓는 것이 "
+"나을 수도 있습니다. 뭐가 더 좋을까요…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
 msgid "Victory"
-msgstr ""
+msgstr "이김"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
 msgid "Victory!"
-msgstr ""
+msgstr "이겼습니다!"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:287
@@ -613,13 +640,16 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"우리가 항구를 점령했습니다! 우리는 이미 배를 만들고 있고 그리고나서, 실제 먼 북쪽으로 여행 할 것입니다. 아직 리바우드에 대한 소식은"
+" 듣지 못했지만, 나는 우리가 곧 그를 찾을 수있을 것이라고 확신합니다. 그러면 그는 우리에게 도움을 줄 것이고, 나는 압제자 "
+"아트테르다그로부터 훼르를 되찾을 것이다!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "이 임무를 완료했습니다. 원하는 경우 계속 놀 수도 있고, 그렇지 않으면 다음 임무로 넘어갈 수 있습니다."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
@@ -627,15 +657,16 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"당신은 통행료를 순금으로 지불했습니다. 이제 당신이 그것을 얻는 것이 옳습니다. 우리 배가 준비되었습니다. 당신은 승선해도 좋습니다!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "You Have Lost"
-msgstr ""
+msgstr "졌습니다"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
 msgid "Goodbye!"
-msgstr ""
+msgstr "안녕히 계세요!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
@@ -644,46 +675,50 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"너무 오래 걸렸어요. 우리는 지금 출항해야 합니다. 그러면 폭풍우가 당신이 이 섬을 떠나는 것을 허락하지 않을 것입니다. 당신에게는 "
+"미안하지만, 날씨가 기다려지지 않아요. 안녕히 계세요."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"당신은 졌으므로 계속 플레이 할 수 없습니다. 이 시나리오를 다시 시도 할 때 행운이 있기를 바랍니다. 확인을 눌러 기본 메뉴로 "
+"돌아가십시오."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "제방꾼"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "제방꾼의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "제방을 쌓고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "항구"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "바다에서 새로운 땅을 얻기 위해 근처에 방파제를 건설합니다."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "바다에서 새로운 땅을 얻기 위해 방파제를 건설합니다."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -691,4 +726,4 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "해외 식민지화 및 무역의 기반 역할을 합니다. 또한 군인, 물품 및 도구도 저장합니다."
