@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-08 22:18+0000\n"
+"PO-Revision-Date: 2021-06-04 23:18+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -77,11 +77,11 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "A kulcs az, hogy az első sziget csak követ és fát nyújt, a második pedig csak legelőket és forrásokat. A gazdaságok, amiket hátrahagysz, folytatják a munkát, de termékeikhez csak akkor jutsz hozzá, amikor elérsz egy új szigetet."
+msgstr "A kulcs az, hogy az első sziget csak követ és fát nyújt, a második pedig csak legelőket és nyersanyagokat. A gazdaságok, amiket hátrahagysz, folytatják a munkát, de termékeikhez csak akkor jutsz hozzá, amikor elérsz egy új szigetet."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr "Végül pedig légy óvatos, ne pazarold el a kvarcodat és a gyémántokat."
+msgstr "Végül pedig figyelj arra, hogy ne pazarold el a kvarcot és a gyémántokat!"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finish Rewards"

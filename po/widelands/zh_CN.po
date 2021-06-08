@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-05-31 09:21+0000\n"
+"POT-Creation-Date: 2021-06-06 08:32+0000\n"
 "PO-Revision-Date: 2021-05-02 12:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -269,14 +269,14 @@ msgstr "十二月"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
-#: ../../src/editor/editorinteractive.cc:92
+#: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:184
 #: ../../src/wui/interactive_gamebase.cc:89
 msgid "Main Menu"
 msgstr "主菜单"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
-#: ../../src/editor/editorinteractive.cc:107
+#: ../../src/editor/editorinteractive.cc:108
 #: ../../src/wlapplication_options.cc:355
 msgid "Tools"
 msgstr "工具"
@@ -287,92 +287,92 @@ msgstr "工具"
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
-#: ../../src/editor/editorinteractive.cc:122
+#: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:76
 msgid "Show / Hide"
 msgstr "显示/隐藏"
 
-#: ../../src/editor/editorinteractive.cc:135
+#: ../../src/editor/editorinteractive.cc:136
 msgid "Tool size"
 msgstr "工具尺寸"
 
-#: ../../src/editor/editorinteractive.cc:150
+#: ../../src/editor/editorinteractive.cc:151
 #: ../../src/wlapplication_options.cc:347
 msgid "Undo"
 msgstr "撤销"
 
-#: ../../src/editor/editorinteractive.cc:154
+#: ../../src/editor/editorinteractive.cc:155
 #: ../../src/wlapplication_options.cc:351
 msgid "Redo"
 msgstr "重做"
 
-#: ../../src/editor/editorinteractive.cc:165
+#: ../../src/editor/editorinteractive.cc:166
 #: ../../src/wui/buildingwindow.cc:413 ../../src/wui/interactive_player.cc:224
 msgid "Help"
 msgstr "帮助"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:190
+#: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:41
 #: ../../src/ui_fsmenu/main.cc:372
 msgid "New Map"
 msgstr "新地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:198
+#: ../../src/editor/editorinteractive.cc:199
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:738
 msgid "New Random Map"
 msgstr "新随机地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:205
+#: ../../src/editor/editorinteractive.cc:206
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:377 ../../src/wlapplication_options.cc:343
 msgid "Load Map"
 msgstr "加载地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:213
+#: ../../src/editor/editorinteractive.cc:214
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
 #: ../../src/wlapplication_options.cc:339
 msgid "Save Map"
 msgstr "保存地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:221
+#: ../../src/editor/editorinteractive.cc:222
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:225
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 msgid "Map Options"
 msgstr "地图选项"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:225
+#: ../../src/editor/editorinteractive.cc:226
 msgid "Exit Editor"
 msgstr "退出编辑器"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:261
+#: ../../src/editor/editorinteractive.cc:262
 msgid "Change height"
 msgstr "改变高度"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:264
+#: ../../src/editor/editorinteractive.cc:265
 msgid "Change the terrain height"
 msgstr "改变地形高度"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:270
+#: ../../src/editor/editorinteractive.cc:271
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Random height"
 msgstr "随机海拔"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:273
+#: ../../src/editor/editorinteractive.cc:274
 msgid "Set the terrain height to random values"
 msgstr " 把地形高度设定为随机值"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:279
+#: ../../src/editor/editorinteractive.cc:280
 #: ../../src/editor/tools/info_tool.cc:112
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../src/wui/minimap.cc:151
@@ -380,35 +380,35 @@ msgid "Terrain"
 msgstr "地形"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:282
+#: ../../src/editor/editorinteractive.cc:283
 msgid "Change the map’s terrain"
 msgstr "改变地图的地形"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:289
+#: ../../src/editor/editorinteractive.cc:290
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:62
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:181
 msgid "Immovables"
 msgstr "固定物"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:292
+#: ../../src/editor/editorinteractive.cc:293
 msgid "Add or remove immovables"
 msgstr "添加或删除固定物"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:298
+#: ../../src/editor/editorinteractive.cc:299
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:47
 msgid "Animals"
 msgstr "动物"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:301
+#: ../../src/editor/editorinteractive.cc:302
 msgid "Add or remove animals"
 msgstr "添加或删除动物"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:308
+#: ../../src/editor/editorinteractive.cc:309
 #: ../../src/editor/tools/info_tool.cc:195
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:97
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -418,61 +418,61 @@ msgid "Resources"
 msgstr "资源"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:311
+#: ../../src/editor/editorinteractive.cc:312
 msgid "Set or change resources"
 msgstr "设置或改变资源"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:314
+#: ../../src/editor/editorinteractive.cc:315
 msgid "Port spaces"
 msgstr "港口空间"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:317
+#: ../../src/editor/editorinteractive.cc:318
 msgid "Add or remove port spaces"
 msgstr "添加或删除港口空间"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:323
+#: ../../src/editor/editorinteractive.cc:324
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:654
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "玩家"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:326
+#: ../../src/editor/editorinteractive.cc:327
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "设置玩家数量和他们的名字，部族和起始位置"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:330
+#: ../../src/editor/editorinteractive.cc:331
 msgid "Map origin"
 msgstr "地图原点"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:333
+#: ../../src/editor/editorinteractive.cc:334
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "设置坐标为(0,0)的位置。将以此生成迷你地图的左上角。"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:340
+#: ../../src/editor/editorinteractive.cc:341
 msgid "Map size"
 msgstr "地图尺寸"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:343
+#: ../../src/editor/editorinteractive.cc:344
 msgid "Change the map’s size"
 msgstr "改变地图的尺寸"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:346
+#: ../../src/editor/editorinteractive.cc:347
 msgid "Information"
 msgstr "信息"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:349
+#: ../../src/editor/editorinteractive.cc:350
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
@@ -482,12 +482,12 @@ msgstr "点击区域以显示与其相关的信息"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:411
+#: ../../src/editor/editorinteractive.cc:412
 #: ../../src/wui/interactive_gamebase.cc:187
 msgid "Hide Building Spaces"
 msgstr "隐藏建筑空间"
 
-#: ../../src/editor/editorinteractive.cc:411
+#: ../../src/editor/editorinteractive.cc:412
 #: ../../src/ui_fsmenu/options.cc:258
 #: ../../src/wui/interactive_gamebase.cc:187
 msgid "Show Building Spaces"
@@ -495,71 +495,90 @@ msgstr "显示建筑空间"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:418
+#: ../../src/editor/editorinteractive.cc:419
 msgid "Hide Grid"
 msgstr "隐藏网格"
 
-#: ../../src/editor/editorinteractive.cc:418
+#: ../../src/editor/editorinteractive.cc:419
 msgid "Show Grid"
 msgstr "显示网格"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
 #. * rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:424
+#: ../../src/editor/editorinteractive.cc:425
 msgid "Hide Immovables"
 msgstr "隐藏固定物"
 
-#: ../../src/editor/editorinteractive.cc:424
+#: ../../src/editor/editorinteractive.cc:425
 msgid "Show Immovables"
 msgstr "显示固定物"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:430
+#: ../../src/editor/editorinteractive.cc:431
 msgid "Hide Animals"
 msgstr "隐藏动物"
 
-#: ../../src/editor/editorinteractive.cc:430
+#: ../../src/editor/editorinteractive.cc:431
 msgid "Show Animals"
 msgstr "显示动物"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:435
+#: ../../src/editor/editorinteractive.cc:436
 msgid "Hide Resources"
 msgstr "隐藏资源"
 
-#: ../../src/editor/editorinteractive.cc:435
+#: ../../src/editor/editorinteractive.cc:436
 msgid "Show Resources"
 msgstr "显示资源"
 
-#: ../../src/editor/editorinteractive.cc:475
+#: ../../src/editor/editorinteractive.cc:476
 msgid "Unsupported Format"
 msgstr "不支持的格式"
 
-#: ../../src/editor/editorinteractive.cc:476 ../../src/wlapplication.cc:686
+#: ../../src/editor/editorinteractive.cc:477 ../../src/wlapplication.cc:686
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands 不能读取文件 “%s\"。文件格式似乎不兼容。"
 
-#: ../../src/editor/editorinteractive.cc:543
+#: ../../src/editor/editorinteractive.cc:544
 msgid "Unsaved Map"
 msgstr "未保存的地图"
 
-#: ../../src/editor/editorinteractive.cc:544
+#: ../../src/editor/editorinteractive.cc:545
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "这个地图没有保存，您确定真的要退出吗？"
 
-#: ../../src/editor/editorinteractive.cc:920
+#: ../../src/editor/editorinteractive.cc:914 ../../src/logic/addons.cc:45
+#: ../../src/ui_basic/dropdown.cc:351 ../../src/ui_basic/dropdown.cc:353
+#: ../../src/ui_fsmenu/addons.cc:1173 ../../src/ui_fsmenu/addons.cc:1229
+#: ../../src/ui_fsmenu/addons.cc:1352 ../../src/ui_fsmenu/addons.cc:2062
+#: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/wlapplication.cc:1451
+msgid "Error"
+msgstr "错误"
+
+#: ../../src/editor/editorinteractive.cc:916 ../../src/wlapplication.cc:1453
+#, c-format
+msgid ""
+"An error has occured. The error message is:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please add this information to your report."
+msgstr "发生错误，错误消息是： \n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息 （stdout.txt on Windows）。你正生成%2$s(%3$s)。\n请添加此信息到你的报告中。"
+
+#: ../../src/editor/editorinteractive.cc:952
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "载入地图 “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:944
+#: ../../src/editor/editorinteractive.cc:976
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:109
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:140
@@ -568,7 +587,7 @@ msgid "No Name"
 msgstr "新地图"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:947
+#: ../../src/editor/editorinteractive.cc:979
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:539
 #: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons_packager.cc:363
@@ -576,7 +595,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../../src/editor/editorinteractive.cc:971
+#: ../../src/editor/editorinteractive.cc:1003
 msgid "Loading world…"
 msgstr "载入广袤大地…"
 
@@ -772,7 +791,7 @@ msgid "Current: %s"
 msgstr "当前：%s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "错误！"
@@ -1339,8 +1358,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1541,14 +1560,6 @@ msgstr "没有"
 #: ../../src/io/profile.cc:58
 msgid "off"
 msgstr "关闭"
-
-#: ../../src/logic/addons.cc:45 ../../src/ui_basic/dropdown.cc:351
-#: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_fsmenu/addons.cc:1173
-#: ../../src/ui_fsmenu/addons.cc:1229 ../../src/ui_fsmenu/addons.cc:1352
-#: ../../src/ui_fsmenu/addons.cc:2062 ../../src/ui_fsmenu/launch_mpg.cc:294
-#: ../../src/ui_fsmenu/main.cc:935 ../../src/wlapplication.cc:1451
-msgid "Error"
-msgstr "错误"
 
 #: ../../src/logic/addons.cc:46
 msgid "Tribes"
@@ -1783,7 +1794,7 @@ msgstr "沙漠"
 msgid "No description defined"
 msgstr "未定义描述"
 
-#: ../../src/logic/map_objects/immovable.cc:498
+#: ../../src/logic/map_objects/immovable.cc:503
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:173
 #, c-format
 msgid "%i%% built"
@@ -4602,17 +4613,6 @@ msgstr "找不到部落！"
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
-#: ../../src/ui_fsmenu/main.cc:937 ../../src/wlapplication.cc:1453
-#, c-format
-msgid ""
-"An error has occured. The error message is:\n"
-"\n"
-"%1$s\n"
-"\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
-"Please add this information to your report."
-msgstr "发生错误，错误消息是： \n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息 （stdout.txt on Windows）。你正生成%2$s(%3$s)。\n请添加此信息到你的报告中。"
-
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:36
 #, c-format
 msgid "invalid tribe ‘%s’"
@@ -5746,9 +5746,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6554,40 +6554,40 @@ msgid "Show controls"
 msgstr "显示控件"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:118
+#: ../../src/wui/interactive_base.cc:119
 msgid "Map View"
 msgstr "地图视图"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:260
+#: ../../src/wui/interactive_base.cc:262
 msgid "Hide Minimap"
 msgstr "隐藏迷你地图"
 
-#: ../../src/wui/interactive_base.cc:260
+#: ../../src/wui/interactive_base.cc:262
 msgid "Show Minimap"
 msgstr "显示迷你地图"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:266
+#: ../../src/wui/interactive_base.cc:268
 msgid "Zoom +"
 msgstr "放大"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:271
+#: ../../src/wui/interactive_base.cc:273
 msgid "Reset zoom"
 msgstr "重置缩放"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:276
+#: ../../src/wui/interactive_base.cc:278
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:709
+#: ../../src/wui/interactive_base.cc:711
 #, c-format
 msgid "Road length: %u"
 msgstr "道路的长度：%u"
 
-#: ../../src/wui/interactive_base.cc:710
+#: ../../src/wui/interactive_base.cc:712
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "水道的长度：%1$u/%2$u"

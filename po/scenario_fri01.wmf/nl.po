@@ -5,14 +5,15 @@
 # Translators:
 # FvZ, 2020
 # stdh, 2020
+# CrisiusXIII <chris@cborn.nl>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: stdh, 2020\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1126,13 +1127,32 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"In onze haast vergat ik dit bijna – waar we ook aan land komen, we hebben "
+"bouwmateriaal nodig om te kunnen beginnen, en soldaten om onze nieuwe "
+"kolonie te beschermen en uit te breiden. Ook na het inladen van de expeditie"
+" moet er genoeg ruimte over blijven voor wat goederen en werkers. Bovendien "
+"moet er ruimte over blijven voor tenminste %d soldaat, zo lang niemand het "
+"erg vind allemaal opgepropt te zitten. Laten we wat bouwmateriaal en onze "
+"beste bouwers naar de haven sturen zodra deze gereed is, zodat ze direct aan"
+" kunnen monsteren om uit te zeilen."
 msgstr[1] ""
+"In onze haast vergat ik dit bijna – waar we ook aan land komen, we hebben "
+"bouwmateriaal nodig om te kunnen beginnen, en soldaten om onze nieuwe "
+"kolonie te beschermen en uit te breiden. Ook na het inladen van de expeditie"
+" moet er genoeg ruimte over blijven voor wat goederen en werkers. Bovendien "
+"moet er ruimte over blijven voor tenminste %dsoldaten, zo lang niemand het "
+"erg vind allemaal opgepropt te zitten. Laten we wat bouwmateriaal en onze "
+"beste bouwers naar de haven sturen zodra deze gereed is, zodat ze direct aan"
+" kunnen monsteren om uit te zeilen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"Alle goederen en werkers die zijn ingeladen voor de expeditie zullen , net "
+"als de soldaten in de haven, worden meegenomen naar het volgende verhaal "
+"onderdeel."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"

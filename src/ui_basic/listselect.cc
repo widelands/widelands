@@ -76,7 +76,7 @@ BaseListselect::BaseListselect(Panel* const parent,
    : Panel(parent, style, x, y, w, h),
      widest_text_(0),
      widest_hotkey_(0),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
@@ -320,14 +320,19 @@ int BaseListselect::calculate_desired_width() {
 }
 
 void BaseListselect::layout() {
-	scrollbar_.set_size(scrollbar_.get_w(), get_h());
-	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
-	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
-	scrollbar_.set_singlestepsize(get_lineheight());
 	const int steps = entry_records_.size() * get_lineheight() - get_h();
 	scrollbar_.set_steps(steps);
-	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
-		scrollbar_.set_steps(steps + kMargin);
+	if (scrollbar_.is_enabled()) {
+		scrollbar_.set_size(Scrollbar::kSize, get_h());
+		scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+		scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
+		scrollbar_.set_singlestepsize(get_lineheight());
+		if (selection_mode_ == ListselectLayout::kDropdown) {
+			scrollbar_.set_steps(steps + kMargin);
+		}
+	} else {
+		// Prevent invisible child
+		scrollbar_.set_size(0, get_h());
 	}
 	// For dropdowns, autoincrease width
 	if (selection_mode_ == ListselectLayout::kDropdown) {
