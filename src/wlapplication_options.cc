@@ -751,6 +751,12 @@ static std::string key_name(const SDL_Keycode k) {
 	switch (k) {
 	case SDLK_SPACE:
 		return pgettext("hotkey", "Space");
+	case SDLK_RETURN:
+		return pgettext("hotkey", "Enter");
+	case SDLK_ESCAPE:
+		return pgettext("hotkey", "Escape");
+	case SDLK_TAB:
+		return pgettext("hotkey", "Tab");
 	case SDLK_MENU:
 		return pgettext("hotkey", "Menu");
 	case SDLK_PAUSE:
@@ -763,10 +769,20 @@ static std::string key_name(const SDL_Keycode k) {
 		return pgettext("hotkey", "Home");
 	case SDLK_END:
 		return pgettext("hotkey", "End");
+	case SDLK_LEFT:
+		return pgettext("hotkey", "Left Arrow Key");
+	case SDLK_RIGHT:
+		return pgettext("hotkey", "Right Arrow Key");
+	case SDLK_UP:
+		return pgettext("hotkey", "Up Arrow Key");
+	case SDLK_DOWN:
+		return pgettext("hotkey", "Down Arrow Key");
 	case SDLK_INSERT:
 		return pgettext("hotkey", "Insert");
 	case SDLK_DELETE:
 		return pgettext("hotkey", "Delete");
+	case SDLK_BACKSPACE:
+		return pgettext("hotkey", "Backspace");
 	case SDLK_CAPSLOCK:
 		return pgettext("hotkey", "Caps Lock");
 	case SDLK_NUMLOCKCLEAR:
@@ -803,6 +819,8 @@ static std::string key_name(const SDL_Keycode k) {
 		return pgettext("hotkey", "Keypad *");
 	case SDLK_KP_DIVIDE:
 		return pgettext("hotkey", "Keypad /");
+	case SDLK_KP_ENTER:
+		return pgettext("hotkey", "Keypad Enter");
 	default:
 		return SDL_GetKeyName(k);
 	}
