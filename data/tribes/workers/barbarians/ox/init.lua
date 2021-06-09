@@ -12,24 +12,33 @@ descriptions:new_carrier_type {
 
    ware_hotspot = { -2, 13 },
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 10, 25 },
-         fps = 20
-      },
-      -- TODO(GunChleoc): Make real oxen animations
-      walk = {
-         hotspot = { 21, 31 },
          fps = 20,
-         directional = true
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 25 }
+      },
+      -- TODO(hessenfarmer): Make real oxen animations
+      walk = {
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 21, 31 }
       },
       walkload = {
          basename = "walk",
-         hotspot = { 21, 31 },
-         fps = 10,
-         directional = true
-      }
-   }
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 21, 31 }
+      },
+   },
 }
 
 pop_textdomain()
