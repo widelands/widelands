@@ -10,9 +10,9 @@ descriptions:new_militarysite_type {
    size = "medium",
    vision_range = 21,
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 47, 78 },
       }
    },

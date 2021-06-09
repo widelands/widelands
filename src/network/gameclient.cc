@@ -264,7 +264,7 @@ void GameClient::do_run(RecvPacket& packet) {
 		const std::string name = packet.string();
 		bool found = false;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == name) {
+			if (pair.first->internal_name == name) {
 				game.enabled_addons().push_back(pair.first);
 				found = true;
 				break;
@@ -694,9 +694,9 @@ void GameClient::handle_hello(RecvPacket& packet) {
 
 	d->addons_guard_.reset();
 	std::vector<AddOns::AddOnState> new_g_addons;
-	std::map<std::string, const AddOns::AddOnInfo*> disabled_installed_addons;
+	std::map<std::string, std::shared_ptr<AddOns::AddOnInfo>> disabled_installed_addons;
 	for (const auto& pair : AddOns::g_addons) {
-		disabled_installed_addons[pair.first.internal_name] = &pair.first;
+		disabled_installed_addons[pair.first->internal_name] = pair.first;
 	}
 	std::set<std::string> missing_addons;
 	std::map<std::string, std::pair<std::string /* installed */, std::string /* host */>>
@@ -707,8 +707,8 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		const AddOns::AddOnVersion v = AddOns::string_to_version(packet.string());
 		AddOns::AddOnVersion found;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == name) {
-				found = pair.first.version;
+			if (pair.first->internal_name == name) {
+				found = pair.first->version;
 				new_g_addons.push_back(std::make_pair(pair.first, true));
 				break;
 			}
@@ -739,7 +739,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		throw AddOnsMismatchException(message);
 	}
 	for (const auto& pair : disabled_installed_addons) {
-		new_g_addons.push_back(std::make_pair(*pair.second, false));
+		new_g_addons.push_back(std::make_pair(pair.second, false));
 	}
 	AddOns::g_addons = new_g_addons;
 }
