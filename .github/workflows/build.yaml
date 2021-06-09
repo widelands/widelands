@@ -14,19 +14,13 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
+    - name: Validate `developers.json`
+      run: python3 utils/validate_developers_json.py
     - name: Check for superfluous includes and forward declarations
       run: |
         pushd src
         ../utils/find_unused_includes.py
         popd
-    - name: Validate `developers.json`
-      # The website gets angry about incorrect punctuation
-      run: |
-        python3 <<- END_SCRIPT
-          import json
-          with open('data/txts/developers.json', 'r') as f:
-              json_data = json.load(f)['developers']
-        END_SCRIPT
 
   codecheck:
     runs-on: ubuntu-latest
