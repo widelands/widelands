@@ -43,8 +43,8 @@ namespace FsMenu {
 
 class AddOnsCtrl;
 
-// NOCOM: Before proposing this branch for merging, move ALL classes defined in
-// addons.h and addons.cc except AddOnsCtrl to one or more new file pairs.
+// TODO(Nordfriese): All classes defined in addons.h and addons.cc except AddOnsCtrl should
+// be moved to one or more new file pairs. Also put them all in a new sub-namespace.
 
 struct ProgressIndicatorWindow : public UI::Window {
 	ProgressIndicatorWindow(UI::Panel* parent, const std::string& title);
@@ -71,17 +71,17 @@ private:
 };
 
 struct InstalledAddOnRow : public UI::Panel {
-	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOns::AddOnInfo&, bool enabled);
+	InstalledAddOnRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool enabled);
 	~InstalledAddOnRow() override {
 	}
-	const AddOns::AddOnInfo& info() const {
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
 
 private:
-	AddOns::AddOnInfo info_;
+	std::shared_ptr<AddOns::AddOnInfo> info_;
 	bool enabled_;
 	UI::Button uninstall_, toggle_enabled_;
 	UI::Icon icon_, category_;
@@ -91,14 +91,14 @@ private:
 struct RemoteAddOnRow : public UI::Panel {
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
-	               AddOns::AddOnInfo&,
+	               const std::shared_ptr<AddOns::AddOnInfo>,
 	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
-	const AddOns::AddOnInfo& info() const {
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
 	bool upgradeable() const;
@@ -107,7 +107,7 @@ struct RemoteAddOnRow : public UI::Panel {
 	}
 
 private:
-	AddOns::AddOnInfo info_;
+	std::shared_ptr<AddOns::AddOnInfo> info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
 	UI::Icon icon_, category_, verified_;
 	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
@@ -124,8 +124,8 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install_or_upgrade(const AddOns::AddOnInfo&, bool only_translations);
-	void upload_addon(const AddOns::AddOnInfo&);
+	void install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool only_translations);
+	void upload_addon(std::shared_ptr<AddOns::AddOnInfo>);
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -137,10 +137,10 @@ public:
 		return network_handler_;
 	}
 
-	const std::vector<AddOns::AddOnInfo>& get_remotes() const {
+	const AddOns::AddOnsList& get_remotes() const {
 		return remotes_;
 	}
-	AddOns::AddOnInfo* find_remote(const std::string& name);
+	std::shared_ptr<AddOns::AddOnInfo> find_remote(const std::string& name);
 	bool is_remote(const std::string& name) const;
 
 	const std::string& username() const {
@@ -180,24 +180,24 @@ private:
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
-	UI::Dropdown<const AddOns::AddOnInfo*> upload_addon_, upload_screenshot_;
+	UI::Dropdown<std::shared_ptr<AddOns::AddOnInfo>> upload_addon_, upload_screenshot_;
 	UI::Checkbox upload_addon_accept_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, /* autofix_dependencies_, */ move_top_,
 	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_, contact_;
 
 	void category_filter_changed(AddOns::AddOnCategory);
 	void check_enable_move_buttons();
-	const AddOns::AddOnInfo& selected_installed_addon() const;
-	void focus_installed_addon_row(const AddOns::AddOnInfo&);
+	std::shared_ptr<AddOns::AddOnInfo> selected_installed_addon() const;
+	void focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo>);
 
 	// TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 	// void autofix_dependencies();
 
 	AddOns::NetAddons network_handler_;
 
-	std::vector<AddOns::AddOnInfo> remotes_;
+	AddOns::AddOnsList remotes_;
 	void refresh_remotes();
-	bool matches_filter(const AddOns::AddOnInfo&);
+	bool matches_filter(std::shared_ptr<AddOns::AddOnInfo>);
 
 	std::string username_, password_;
 };

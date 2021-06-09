@@ -269,10 +269,10 @@ private:
 	bool ok_;
 };
 
-std::vector<AddOnInfo> NetAddons::refresh_remotes() {
+AddOnsList NetAddons::refresh_remotes() {
 	init();
 
-	std::vector<AddOnInfo> result_vector;
+	AddOnsList result_vector;
 	long nr_addons;
 	{
 		CrashGuard guard(*this);
@@ -281,7 +281,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		nr_addons = std::stol(read_line().c_str());
 		result_vector.resize(nr_addons);
 		for (long i = 0; i < nr_addons; ++i) {
-			result_vector[i].internal_name = read_line();
+			result_vector[i].reset(new AddOnInfo());
+			result_vector[i]->internal_name = read_line();
 		}
 		check_endofstream();
 		guard.ok();
@@ -289,10 +290,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	for (long i = 0; i < nr_addons; ++i) {
 		try {
-			result_vector[i] = fetch_one_remote(result_vector[i].internal_name);
+			*result_vector[i] = fetch_one_remote(result_vector[i]->internal_name);
 		} catch (const std::exception& e) {
-			log_err("Skip add-on %s because: %s", result_vector[i].internal_name.c_str(), e.what());
-			result_vector[i].internal_name = result_vector.back().internal_name;
+			log_err("Skip add-on %s because: %s", result_vector[i]->internal_name.c_str(), e.what());
+			result_vector[i]->internal_name = result_vector.back()->internal_name;
 			result_vector.pop_back();
 			--i;
 			--nr_addons;

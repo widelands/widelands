@@ -50,7 +50,7 @@ constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
 
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
-constexpr const char* const kForumURL = "https://www.widelands.org/forum/";
+constexpr const char* const kForumURL = "https://www.widelands.org/forum/17/";
 
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
@@ -84,7 +84,7 @@ static std::string filesize_string(const uint32_t bytes) {
 	}
 }
 
-struct OperationCancelledByUser {};
+struct OperationCancelledByUserException {};
 
 class AddOnsLoginBox : public UI::Window {
 public:
@@ -213,9 +213,9 @@ private:
 
 class ScreenshotUploadWindow : public UI::Window {
 public:
-	explicit ScreenshotUploadWindow(AddOnsCtrl& ctrl, const AddOns::AddOnInfo& info, AddOns::AddOnInfo* remote)
+	explicit ScreenshotUploadWindow(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, std::shared_ptr<AddOns::AddOnInfo> remote)
 	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-                "upload_screenshot", 0, 0, 100, 100, (boost::format(_("Upload Screenshot for ‘%s’")) % info.internal_name).str()),
+                "upload_screenshot", 0, 0, 100, 100, (boost::format(_("Upload Screenshot for ‘%s’")) % info->internal_name).str()),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -255,7 +255,7 @@ public:
 
 	images_.selected.connect([this](uint32_t) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
 	cancel_.sigclicked.connect([this]() { die(); });
-	ok_.sigclicked.connect([this, &ctrl, &info, remote]() {
+	ok_.sigclicked.connect([this, &ctrl, info, remote]() {
 		if (!images_.has_selection() || description_.text().empty()) { return; }
 		const std::string& sel = images_.get_selected();
 		progress_.set_text(_("Uploading…"));
@@ -263,18 +263,18 @@ public:
 		cancel_.set_enabled(false);
 		do_redraw_now();
 		try {
-			ctrl.net().upload_screenshot(info.internal_name, sel, description_.text());
-			if (remote) {
+			ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
+			if (remote.get() != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
 				ctrl.rebuild();
 			}
 			die();
 		} catch (const std::exception& e) {
-			log_err("Upload screenshot %s for %s: %s", sel.c_str(), info.internal_name.c_str(), e.what());
+			log_err("Upload screenshot %s for %s: %s", sel.c_str(), info->internal_name.c_str(), e.what());
 			progress_.set_text("");
 			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					(boost::format(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the server.\n\nError Message:\n%3$s"))
-							% sel % info.internal_name % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+							% sel % info->internal_name % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 			ok_.set_enabled(true);
 			cancel_.set_enabled(true);
@@ -681,12 +681,12 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	upload_addon_accept_.changed.connect([this]() { update_login_button(nullptr); });
 	upload_addon_.selected.connect([this]() {
-		upload_addon(*upload_addon_.get_selected());
+		upload_addon(upload_addon_.get_selected());
 	});
 	upload_screenshot_.selected.connect([this]() {
 		upload_screenshot_.set_list_visibility(false);
-		const AddOns::AddOnInfo& info = *upload_screenshot_.get_selected();
-		ScreenshotUploadWindow s(*this, info, find_remote(info.internal_name));
+		std::shared_ptr<AddOns::AddOnInfo> info = upload_screenshot_.get_selected();
+		ScreenshotUploadWindow s(*this, info, find_remote(info->internal_name));
 		s.run<UI::Panel::Returncodes>();
 	});
 
@@ -829,7 +829,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		filter_reset_.set_enabled(false);
 	});
 	upgrade_all_.sigclicked.connect([this]() {
-		std::vector<std::pair<AddOns::AddOnInfo, bool /* full upgrade */>> upgrades;
+		std::vector<std::pair<std::shared_ptr<AddOns::AddOnInfo>, bool /* full upgrade */>> upgrades;
 		bool all_verified = true;
 		size_t nr_full_updates = 0;
 		for (const RemoteAddOnRow* r : browse_) {
@@ -837,7 +837,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 				const bool full_upgrade = r->full_upgrade_possible();
 				upgrades.push_back(std::make_pair(r->info(), full_upgrade));
 				if (full_upgrade) {
-					all_verified &= r->info().verified;
+					all_verified &= r->info()->verified;
 					++nr_full_updates;
 				}
 			}
@@ -854,10 +854,10 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			text += '\n';
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
-					text +=
-					   (boost::format(_("\n· %1$s (%2$s) by %3$s")) % pair.first.descname() %
-					    (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author())
-					      .str();
+					text += (boost::format(_("\n· %1$s (%2$s) by %3$s")) % pair.first->descname() %
+					         (pair.first->verified ? _("verified") : _("NOT VERIFIED")) %
+					         pair.first->author())
+					           .str();
 				}
 			}
 			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
@@ -873,9 +873,9 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	});
 
 	move_up_.sigclicked.connect([this]() {
-		const AddOns::AddOnInfo info = selected_installed_addon();
+		const auto& info = selected_installed_addon();
 		auto it = AddOns::g_addons.begin();
-		while (it->first.internal_name != info.internal_name) {
+		while (it->first->internal_name != info->internal_name) {
 			++it;
 		}
 		const bool state = it->second;
@@ -886,9 +886,9 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 	move_down_.sigclicked.connect([this]() {
-		const AddOns::AddOnInfo info = selected_installed_addon();
+		const auto& info = selected_installed_addon();
 		auto it = AddOns::g_addons.begin();
-		while (it->first.internal_name != info.internal_name) {
+		while (it->first->internal_name != info->internal_name) {
 			++it;
 		}
 		const bool state = it->second;
@@ -899,9 +899,9 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 	move_top_.sigclicked.connect([this]() {
-		const AddOns::AddOnInfo info = selected_installed_addon();
+		const auto& info = selected_installed_addon();
 		auto it = AddOns::g_addons.begin();
-		while (it->first.internal_name != info.internal_name) {
+		while (it->first->internal_name != info->internal_name) {
 			++it;
 		}
 		const bool state = it->second;
@@ -911,9 +911,9 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 	move_bottom_.sigclicked.connect([this]() {
-		const AddOns::AddOnInfo info = selected_installed_addon();
+		const auto& info = selected_installed_addon();
 		auto it = AddOns::g_addons.begin();
-		while (it->first.internal_name != info.internal_name) {
+		while (it->first->internal_name != info->internal_name) {
 			++it;
 		}
 		const bool state = it->second;
@@ -976,7 +976,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 		if (!text.empty()) {
 			text += ',';
 		}
-		text += pair.first.internal_name + ':' + (pair.second ? "true" : "false");
+		text += pair.first->internal_name + ':' + (pair.second ? "true" : "false");
 	}
 	set_config_string("addons", text);
 	write_config();
@@ -1064,12 +1064,12 @@ void AddOnsCtrl::set_login(const std::string& username, const std::string& passw
 	}
 }
 
-inline const AddOns::AddOnInfo& AddOnsCtrl::selected_installed_addon() const {
+inline std::shared_ptr<AddOns::AddOnInfo> AddOnsCtrl::selected_installed_addon() const {
 	return dynamic_cast<InstalledAddOnRow&>(*installed_addons_box_.focused_child()).info();
 }
-void AddOnsCtrl::focus_installed_addon_row(const AddOns::AddOnInfo& info) {
+void AddOnsCtrl::focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo> info) {
 	for (UI::Panel* p = installed_addons_box_.get_first_child(); p; p = p->get_next_sibling()) {
-		if (dynamic_cast<InstalledAddOnRow&>(*p).info().internal_name == info.internal_name) {
+		if (dynamic_cast<InstalledAddOnRow&>(*p).info()->internal_name == info->internal_name) {
 			p->focus();
 			return;
 		}
@@ -1109,12 +1109,12 @@ void AddOnsCtrl::check_enable_move_buttons() {
 		b->set_enabled(enable_move_buttons);
 	}
 	if (enable_move_buttons) {
-		const AddOns::AddOnInfo& sel = selected_installed_addon();
-		if (sel.internal_name == AddOns::g_addons.begin()->first.internal_name) {
+		const auto& sel = selected_installed_addon();
+		if (sel->internal_name == AddOns::g_addons.begin()->first->internal_name) {
 			move_top_.set_enabled(false);
 			move_up_.set_enabled(false);
 		}
-		if (sel.internal_name == AddOns::g_addons.back().first.internal_name) {
+		if (sel->internal_name == AddOns::g_addons.back().first->internal_name) {
 			move_down_.set_enabled(false);
 			move_bottom_.set_enabled(false);
 		}
@@ -1147,51 +1147,39 @@ void AddOnsCtrl::refresh_remotes() {
 		                                         "the server!<br>Error Message: %s")) %
 		                         e.what())
 		                           .str();
-		remotes_ = {AddOns::AddOnInfo{"",
-		                              title,
-		                              err,
-		                              bug,
-		                              [title]() { return title; },
-		                              [err]() { return err; },
-		                              [bug]() { return bug; },
-		                              {},
-		                              0,
-		                              AddOns::AddOnCategory::kNone,
-		                              g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon),
-		                              {},
-		                              true,
-		                              "",
-		                              "",
-	                                  {},
-	                                  false,
-	                                  0,
-	                                  bug,
-	                                  std::time(nullptr),
-	                                  0,
-	                                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	                                  {}
-	                                  }};
+		AddOns::AddOnInfo* i = new AddOns::AddOnInfo();
+		i->unlocalized_descname = title;
+		i->unlocalized_description = err;
+		i->unlocalized_author = bug;
+		i->descname = [title]() { return title; };
+		i->description = [err]() { return err; };
+		i->author = [bug]() { return bug; };
+		i->upload_username = bug;
+		i->upload_timestamp = std::time(nullptr);
+		i->icon = g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon),
+		i->sync_safe = true;  // suppress useless warning
+		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(i)};
 	}
 	rebuild();
 }
 
-bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
-	if (info.internal_name.empty()) {
+bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
+	if (info->internal_name.empty()) {
 		// always show error messages
 		return true;
 	}
 
-	if (!info.matches_widelands_version()) {
+	if (!info->matches_widelands_version()) {
 		// incompatible
 		return false;
 	}
 
-	if (!filter_category_.at(info.category)->get_state()) {
+	if (!filter_category_.at(info->category)->get_state()) {
 		// wrong category
 		return false;
 	}
 
-	if (filter_verified_.get_state() && !info.verified) {
+	if (filter_verified_.get_state() && !info->verified) {
 		// not verified
 		return false;
 	}
@@ -1201,7 +1189,7 @@ bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
 		return true;
 	}
 	for (const std::string& text :
-	     {info.descname(), info.author(), info.upload_username, info.internal_name, info.description()}) {
+	     {info->descname(), info->author(), info->upload_username, info->internal_name, info->description()}) {
 		if (text.find(filter_name_.text()) != std::string::npos) {
 			// text filter found
 			return true;
@@ -1239,21 +1227,22 @@ void AddOnsCtrl::rebuild() {
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
 
-		upload_addon_.add(pair.first.internal_name, &pair.first, pair.first.icon, false, pair.first.descname());
-		upload_screenshot_.add(pair.first.internal_name, &pair.first, pair.first.icon, false, pair.first.descname());
+		upload_addon_.add(pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
+		upload_screenshot_.add(pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
 	}
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
 	index = 0;
-	std::list<AddOns::AddOnInfo*> remotes_to_show;
-	for (AddOns::AddOnInfo& a : remotes_) {
+	std::list<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show;
+	for (auto& a : remotes_) {
 		if (matches_filter(a)) {
-			remotes_to_show.push_back(&a);
+			remotes_to_show.push_back(a);
 		}
 	}
 	{
 		const AddOnSortingCriteria sort_by = sort_order_.get_selected();
-		remotes_to_show.sort([sort_by](const AddOns::AddOnInfo* a, const AddOns::AddOnInfo* b) {
+		remotes_to_show.sort([sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
+		                               const std::shared_ptr<AddOns::AddOnInfo> b) {
 			switch (sort_by) {
 			case AddOnSortingCriteria::kNameABC:
 				return a->descname().compare(b->descname()) < 0;
@@ -1298,21 +1287,21 @@ void AddOnsCtrl::rebuild() {
 		});
 	}
 	std::vector<std::string> has_upgrades;
-	for (AddOns::AddOnInfo* a : remotes_to_show) {
+	for (const auto& a : remotes_to_show) {
 		if (0 < index++) {
 			browse_addons_box_.add_space(kRowButtonSize);
 		}
 		AddOns::AddOnVersion installed;
 		uint32_t installed_i18n = 0;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == a->internal_name) {
-				installed = pair.first.version;
-				installed_i18n = pair.first.i18n_version;
+			if (pair.first->internal_name == a->internal_name) {
+				installed = pair.first->version;
+				installed_i18n = pair.first->i18n_version;
 				break;
 			}
 		}
 		RemoteAddOnRow* r =
-		   new RemoteAddOnRow(&browse_addons_box_, this, *a, installed, installed_i18n);
+		   new RemoteAddOnRow(&browse_addons_box_, this, a, installed, installed_i18n);
 		browse_addons_box_.add(r, UI::Box::Resizing::kFullSize);
 		if (r->upgradeable()) {
 			has_upgrades.push_back(a->descname());
@@ -1357,11 +1346,11 @@ void AddOnsCtrl::update_dependency_errors() {
 			// Disabled, so we don't care about dependencies
 			continue;
 		}
-		for (const std::string& requirement : addon->first.requirements) {
-			std::vector<AddOns::AddOnState>::iterator search_result = AddOns::g_addons.end();
+		for (const std::string& requirement : addon->first->requirements) {
+			auto search_result = AddOns::g_addons.end();
 			bool too_late = false;
 			for (auto search = AddOns::g_addons.begin(); search != AddOns::g_addons.end(); ++search) {
-				if (search->first.internal_name == requirement) {
+				if (search->first->internal_name == requirement) {
 					search_result = search;
 					break;
 				}
@@ -1373,41 +1362,41 @@ void AddOnsCtrl::update_dependency_errors() {
 			if (search_result == AddOns::g_addons.end()) {
 				warn_requirements.push_back(
 				   (boost::format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found")) %
-				    addon->first.descname() % requirement)
+				    addon->first->descname() % requirement)
 				      .str());
 			} else {
 				if (!search_result->second) {
 					warn_requirements.push_back(
 					   (boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled")) %
-					    addon->first.descname() % search_result->first.descname())
+					    addon->first->descname() % search_result->first->descname())
 					      .str());
 				}
 				if (too_late) {
 					warn_requirements.push_back(
 					   (boost::format(
 					       _("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on")) %
-					    addon->first.descname() % search_result->first.descname())
+					    addon->first->descname() % search_result->first->descname())
 					      .str());
 				}
 			}
 			// Also warn if the add-on's requirements are present in the wrong order
 			// (e.g. when A requires B,C but they are ordered C,B,A)
-			for (const std::string& previous_requirement : addon->first.requirements) {
+			for (const std::string& previous_requirement : addon->first->requirements) {
 				if (previous_requirement == requirement) {
 					break;
 				}
 				// check if `previous_requirement` comes before `requirement`
 				std::string prev_descname;
 				for (const AddOns::AddOnState& a : AddOns::g_addons) {
-					if (a.first.internal_name == previous_requirement) {
-						prev_descname = a.first.descname();
+					if (a.first->internal_name == previous_requirement) {
+						prev_descname = a.first->descname();
 						break;
-					} else if (a.first.internal_name == requirement) {
+					} else if (a.first->internal_name == requirement) {
 						warn_requirements.push_back(
 						   (boost::format(
 						       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 						         "listed in the wrong order")) %
-						    addon->first.descname() % prev_descname % search_result->first.descname())
+						    addon->first->descname() % prev_descname % search_result->first->descname())
 						      .str());
 						break;
 					}
@@ -1469,10 +1458,10 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
-AddOns::AddOnInfo* AddOnsCtrl::find_remote(const std::string& name) {
-	for (AddOns::AddOnInfo& r : remotes_) {
-		if (r.internal_name == name) {
-			return &r;
+std::shared_ptr<AddOns::AddOnInfo> AddOnsCtrl::find_remote(const std::string& name) {
+	for (auto& r : remotes_) {
+		if (r->internal_name == name) {
+			return r;
 		}
 	}
 	return nullptr;
@@ -1483,8 +1472,8 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 		// No data available
 		return true;
 	}
-	for (const AddOns::AddOnInfo& r : remotes_) {
-		if (r.internal_name == name) {
+	for (const auto& r : remotes_) {
+		if (r->internal_name == name) {
 			return true;
 		}
 	}
@@ -1492,13 +1481,15 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 }
 
 static void install_translation(const std::string& temp_locale_path,
-                                const std::string& addon_name) {
+                                const std::string& addon_name,
+                                const int i18n_version) {
 	assert(g_fs->file_exists(temp_locale_path));
 
 	// NOTE:
 	// gettext expects a directory structure such as
-	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.mo"
-	// where "nds" is the language abbreviation and "addon_name.wad" the add-on's name.
+	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.VERSION.mo"
+	// where "nds" is the language abbreviation, VERSION the add-on's i18n version,
+	// and "addon_name.wad" the add-on's name.
 	// If we use a different structure, gettext will not find the translations!
 
 	const std::string temp_filename =
@@ -1510,13 +1501,15 @@ static void install_translation(const std::string& temp_locale_path,
 	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path =
-	   new_locale_dir + FileSystem::file_separator() + addon_name + ".mo";
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name +
+	                                    '.' + std::to_string(i18n_version) + ".mo";
 
 	assert(!g_fs->is_directory(new_locale_path));
-	if (g_fs->file_exists(new_locale_path)) {
-		// delete the outdated translation if present
-		g_fs->fs_unlink(new_locale_path);
+	// Delete outdated translations if present.
+	for (const std::string& mo : g_fs->list_directory(new_locale_dir)) {
+		if (mo.compare(0, addon_name.size(), addon_name)) {
+			g_fs->fs_unlink(mo);
+		}
 	}
 	assert(!g_fs->file_exists(new_locale_path));
 
@@ -1527,56 +1520,56 @@ static void install_translation(const std::string& temp_locale_path,
 	assert(!g_fs->file_exists(temp_locale_path));
 }
 
-void AddOnsCtrl::upload_addon(const AddOns::AddOnInfo& addon) {
+void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 	upload_addon_.set_list_visibility(false);
 	{
 		UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upload"),
-				(boost::format(_("Do you really want to upload the add-on ‘%s’ to the server?")) % addon.internal_name).str(),
+				(boost::format(_("Do you really want to upload the add-on ‘%s’ to the server?")) % addon->internal_name).str(),
 				UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
 	}
-	ProgressIndicatorWindow w(&get_topmost_forefather(), addon.descname());
-	w.set_message_1((boost::format(_("Uploading ‘%s’…")) % addon.descname()).str());
+	ProgressIndicatorWindow w(&get_topmost_forefather(), addon->descname());
+	w.set_message_1((boost::format(_("Uploading ‘%s’…")) % addon->descname()).str());
 	try {
 		long nr_files = 0;
-		net().upload_addon(addon.internal_name, [this, &w, &nr_files](const std::string& f, const long l) {
+		net().upload_addon(addon->internal_name, [this, &w, &nr_files](const std::string& f, const long l) {
 			w.set_message_2(f);
 			w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_files).str());
 			w.progressbar().set_state(l);
 			do_redraw_now();
 			if (w.is_dying()) {
-				throw OperationCancelledByUser();
+				throw OperationCancelledByUserException();
 			}
 		}, [this, &w, &nr_files](const std::string&, const long l) {
 			w.progressbar().set_total(l);
 			nr_files = l;
 		});
-		if (AddOns::AddOnInfo* r = find_remote(addon.internal_name)) {
-			// NOCOM all assignments of `fetch_one_remote` need to be revisited after the shared_ptr refactoring branch is merged
+		std::shared_ptr<AddOns::AddOnInfo> r = find_remote(addon->internal_name);
+		if (r.get() != nullptr) {
 			*r = net().fetch_one_remote(r->internal_name);
 		}
-	} catch (const OperationCancelledByUser&) {
-		log_info("upload addon %s cancelled by user", addon.internal_name.c_str());
+	} catch (const OperationCancelledByUserException&) {
+		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
 	} catch (const std::exception& e) {
-		log_err("upload addon %s: %s", addon.internal_name.c_str(), e.what());
+		log_err("upload addon %s: %s", addon->internal_name.c_str(), e.what());
 		w.set_visible(false);
 		UI::WLMessageBox m(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
-			   _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s")) % addon.internal_name % e.what()).str(),
+			   _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s")) % addon->internal_name % e.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
 }
 
 // TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's requirements
-void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool only_translations) {
-	ProgressIndicatorWindow w(&get_topmost_forefather(), remote.descname());
-	w.set_message_1((boost::format(_("Downloading ‘%s’…")) % remote.descname()).str());
+void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, const bool only_translations) {
+	ProgressIndicatorWindow w(&get_topmost_forefather(), remote->descname());
+	w.set_message_1((boost::format(_("Downloading ‘%s’…")) % remote->descname()).str());
 
-	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + remote.internal_name + kTempFileExtension;
+	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + remote->internal_name + kTempFileExtension;
 	if (g_fs->file_exists(temp_dir)) {
 		g_fs->fs_unlink(temp_dir);
 	}
@@ -1587,28 +1580,28 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		bool success = false;
 		g_fs->ensure_directory_exists(temp_dir);
 		try {
-			const std::string size = filesize_string(remote.total_file_size);
-			w.progressbar().set_total(remote.total_file_size);
-			net().download_addon(remote.internal_name, temp_dir, [this, &w, size](const std::string& f, const long l) {
+			const std::string size = filesize_string(remote->total_file_size);
+			w.progressbar().set_total(remote->total_file_size);
+			net().download_addon(remote->internal_name, temp_dir, [this, &w, size](const std::string& f, const long l) {
 				w.set_message_2(f);
 				w.set_message_3((boost::format(_("%1% / %2%")) % filesize_string(l) % size).str());
 				w.progressbar().set_state(l);
 				do_redraw_now();
 				if (w.is_dying()) {
-					throw OperationCancelledByUser();
+					throw OperationCancelledByUserException();
 				}
 			});
 			success = true;
-		} catch (const OperationCancelledByUser&) {
-			log_info("install addon %s cancelled by user", remote.internal_name.c_str());
+		} catch (const OperationCancelledByUserException&) {
+			log_info("install addon %s cancelled by user", remote->internal_name.c_str());
 		} catch (const std::exception& e) {
-			log_err("install addon %s: %s", remote.internal_name.c_str(), e.what());
+			log_err("install addon %s: %s", remote->internal_name.c_str(), e.what());
 			w.set_visible(false);
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(
 				   _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
-				     "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
+				     "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote->internal_name % e.what()).str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -1617,25 +1610,25 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 			return;
 		}
 
-		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote->internal_name;
 		if (g_fs->file_exists(new_path)) {
 			g_fs->fs_unlink(new_path);
 		}
 		g_fs->fs_rename(temp_dir, new_path);
 
-		need_to_rebuild_texture_atlas = remote.requires_texture_atlas_rebuild();
+		need_to_rebuild_texture_atlas = remote->requires_texture_atlas_rebuild();
 		bool found = false;
 		for (auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == remote.internal_name) {
-				pair.first = AddOns::preload_addon(remote.internal_name);
-				enable_theme = (remote.category == AddOns::AddOnCategory::kTheme && template_dir() == AddOns::theme_addon_template_dir(remote.internal_name));
+			if (pair.first->internal_name == remote->internal_name) {
+				pair.first = AddOns::preload_addon(remote->internal_name);
+				enable_theme = (remote->category == AddOns::AddOnCategory::kTheme && template_dir() == AddOns::theme_addon_template_dir(remote->internal_name));
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			enable_theme = (remote.category == AddOns::AddOnCategory::kTheme);
-			AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name), true));
+			enable_theme = (remote->category == AddOns::AddOnCategory::kTheme);
+			AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote->internal_name), true));
 		}
 	}
 
@@ -1646,13 +1639,13 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		w.progressbar().set_total(1);
 		long nr_translations = 0;
 		w.set_message_3("");
-		net().download_i18n(remote.internal_name, temp_dir, [this, &w, &nr_translations](const std::string& f, const long l) {
+		net().download_i18n(remote->internal_name, temp_dir, [this, &w, &nr_translations](const std::string& f, const long l) {
 			w.set_message_2(f);
 			w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_translations).str());
 			w.progressbar().set_state(l);
 			do_redraw_now();
 			if (w.is_dying()) {
-				throw OperationCancelledByUser();
+				throw OperationCancelledByUserException();
 			}
 		}, [this, &w, &nr_translations](const std::string&, const long l) {
 			nr_translations = l;
@@ -1660,27 +1653,27 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		});
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
-			install_translation(n, remote.internal_name);
+			install_translation(n, remote->internal_name, remote->i18n_version);
 		}
 		for (auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == remote.internal_name) {
-				pair.first.i18n_version = remote.i18n_version;
+			if (pair.first->internal_name == remote->internal_name) {
+				pair.first->i18n_version = remote->i18n_version;
 				break;
 			}
 		}
 		Profile prof(kAddOnLocaleVersions.c_str());
-		prof.pull_section("global").set_natural(remote.internal_name.c_str(), remote.i18n_version);
+		prof.pull_section("global").set_natural(remote->internal_name.c_str(), remote->i18n_version);
 		prof.write(kAddOnLocaleVersions.c_str(), false);
-	} catch (const OperationCancelledByUser&) {
-		log_info("install translations for %s cancelled by user", remote.internal_name.c_str());
+	} catch (const OperationCancelledByUserException&) {
+		log_info("install translations for %s cancelled by user", remote->internal_name.c_str());
 	} catch (const std::exception& e) {
-		log_err("install translations for %s: %s", remote.internal_name.c_str(), e.what());
+		log_err("install translations for %s: %s", remote->internal_name.c_str(), e.what());
 		w.set_visible(false);
 		UI::WLMessageBox m(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
 		       _("The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
-		         "the translations will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
+		         "the translations will be skipped.\n\nError Message:\n%2$s")) % remote->internal_name % e.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
@@ -1690,13 +1683,13 @@ void AddOnsCtrl::install_or_upgrade(const AddOns::AddOnInfo& remote, const bool 
 		g_gr->rebuild_texture_atlas();
 	}
 	if (enable_theme) {
-		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote.internal_name);
+		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote->internal_name);
 		get_topmost_forefather().template_directory_changed();
 	}
 	rebuild();
 }
 
-static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
+static void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const bool local) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
@@ -1714,8 +1707,8 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 		                       "Version %3$s\n"
 		                       "Category: %4$s\n"
 		                       "%5$s")) %
-		    info.descname() % info.author() % AddOns::version_to_string(info.version) %
-		    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
+		    info->descname() % info->author() % AddOns::version_to_string(info->version) %
+		    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
 		      .str(),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1724,19 +1717,19 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 	}
 
 	// Delete the add-on…
-	g_fs->fs_unlink(kAddOnDir + FileSystem::file_separator() + info.internal_name);
+	g_fs->fs_unlink(kAddOnDir + FileSystem::file_separator() + info->internal_name);
 
 	// …and its translations
 	for (const std::string& locale : g_fs->list_directory(kAddOnLocaleDir)) {
 		g_fs->fs_unlink(locale + FileSystem::file_separator() + "LC_MESSAGES" +
-		                FileSystem::file_separator() + info.internal_name + ".mo");
+		                FileSystem::file_separator() + info->internal_name + ".mo");
 	}
 
 	for (auto it = AddOns::g_addons.begin(); it != AddOns::g_addons.end(); ++it) {
-		if (it->first.internal_name == info.internal_name) {
+		if (it->first->internal_name == info->internal_name) {
 			AddOns::g_addons.erase(it);
-			if (info.category == AddOns::AddOnCategory::kTheme &&
-			    template_dir() == AddOns::theme_addon_template_dir(info.internal_name)) {
+			if (info->category == AddOns::AddOnCategory::kTheme &&
+			    template_dir() == AddOns::theme_addon_template_dir(info->internal_name)) {
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
@@ -1761,9 +1754,9 @@ step1:
 		if (addon_to_fix.second) {
 			bool anything_changed = false;
 			bool found = false;
-			for (const std::string& requirement : addon_to_fix.first.requirements) {
+			for (const std::string& requirement : addon_to_fix.first->requirements) {
 				for (AddOns::AddOnState& a : AddOns::g_addons) {
-					if (a.first.internal_name == requirement) {
+					if (a.first->internal_name == requirement) {
 						found = true;
 						if (!a.second) {
 							a.second = true;
@@ -1786,8 +1779,8 @@ step1:
 	// Step 2: Download missing add-ons
 	for (const std::string& addon_to_install : missing_requirements) {
 		bool found = false;
-		for (const AddOns::AddOnInfo& info : remotes_) {
-			if (info.internal_name == addon_to_install) {
+		for (const auto& info : remotes_) {
+			if (info->internal_name == addon_to_install) {
 				install_or_upgrade(info, false);
 				found = true;
 				break;
@@ -1808,7 +1801,7 @@ step1:
 	std::map<std::string, AddOns::AddOnState> all_addons;
 
 	for (const AddOns::AddOnState& aos : AddOns::g_addons) {
-		all_addons[aos.first.internal_name] = aos;
+		all_addons[aos.first->internal_name] = aos;
 	}
 
 	std::multimap<unsigned /* number of dependencies */, AddOns::AddOnState> addons_tree;
@@ -1827,34 +1820,35 @@ step1:
 }
 #endif
 
-static std::string required_wl_version_and_sync_safety_string(const AddOns::AddOnInfo& info) {
+static std::string
+required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::AddOnInfo> info) {
 	std::string result;
-	if (!info.sync_safe) {
+	if (!info->sync_safe) {
 		result += "<br>";
 		result += g_style_manager->font_style(UI::FontStyle::kWarning)
 		             .as_font_tag(
 		                _("This add-on is known to cause desyncs in multiplayer games and replays."));
 	}
-	if (!info.min_wl_version.empty() || !info.max_wl_version.empty()) {
+	if (!info->min_wl_version.empty() || !info->max_wl_version.empty()) {
 		result += "<br>";
 		std::string str;
-		if (info.max_wl_version.empty()) {
+		if (info->max_wl_version.empty()) {
+			str += (boost::format(_("Requires a Widelands version of at least %s.")) %
+			        info->min_wl_version)
+			          .str();
+		} else if (info->min_wl_version.empty()) {
 			str +=
-			   (boost::format(_("Requires a Widelands version of at least %s.")) % info.min_wl_version)
-			      .str();
-		} else if (info.min_wl_version.empty()) {
-			str +=
-			   (boost::format(_("Requires a Widelands version of at most %s.")) % info.max_wl_version)
+			   (boost::format(_("Requires a Widelands version of at most %s.")) % info->max_wl_version)
 			      .str();
 		} else {
 			str +=
 			   (boost::format(_("Requires a Widelands version of at least %1$s and at most %2$s.")) %
-			    info.min_wl_version % info.max_wl_version)
+			    info->min_wl_version % info->max_wl_version)
 			      .str();
 		}
 		result += g_style_manager
-		             ->font_style(info.matches_widelands_version() ? UI::FontStyle::kItalic :
-		                                                             UI::FontStyle::kWarning)
+		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
+		                                                              UI::FontStyle::kWarning)
 		             .as_font_tag(str);
 	}
 	return result;
@@ -1862,7 +1856,7 @@ static std::string required_wl_version_and_sync_safety_string(const AddOns::AddO
 
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                      AddOnsCtrl* ctrl,
-                                     const AddOns::AddOnInfo& info,
+                                     std::shared_ptr<AddOns::AddOnInfo> info,
                                      bool enabled)
    : UI::Panel(parent,
                UI::PanelStyle::kFsMenu,
@@ -1894,10 +1888,10 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                      UI::Button::VisualState::kFlat),
      icon_(this,
                UI::PanelStyle::kFsMenu,
-               info_.icon),
+               info_->icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
-               g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
+               g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -1906,8 +1900,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               0,
               0,
               /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
-               info.i18n_version)
+              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info->version) %
+               info->i18n_version)
                  .str(),
               UI::Align::kCenter),
      txt_(this,
@@ -1921,32 +1915,32 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
                _("%1$s %2$s")) %
             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-               .as_font_tag(info.descname()) %
+               .as_font_tag(info->descname()) %
             g_style_manager->font_style(UI::FontStyle::kItalic)
-               .as_font_tag((boost::format(_("(%s)")) % info.internal_name).str()))
+               .as_font_tag((boost::format(_("(%s)")) % info->internal_name).str()))
               .str() %
            g_style_manager->font_style(UI::FontStyle::kItalic)
-              .as_font_tag((boost::format(_("by %s")) % info.author()).str()) %
+              .as_font_tag((boost::format(_("by %s")) % info->author()).str()) %
            required_wl_version_and_sync_safety_string(info) %
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-              .as_font_tag(info.description()))
+              .as_font_tag(info->description()))
              .str()) {
 
 	uninstall_.sigclicked.connect(
-	   [ctrl, info]() { uninstall(ctrl, info, !ctrl->is_remote(info.internal_name)); });
+	   [ctrl, this]() { uninstall(ctrl, info_, !ctrl->is_remote(info_->internal_name)); });
 	toggle_enabled_.sigclicked.connect([this, ctrl, info]() {
 		enabled_ = !enabled_;
 		for (auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == info.internal_name) {
+			if (pair.first->internal_name == info->internal_name) {
 				pair.second = !pair.second;
 				toggle_enabled_.set_pic(g_image_cache->get(pair.second ?
 				                                              "images/ui_basic/checkbox_checked.png" :
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
-				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
+				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
 					                                      AddOns::UpdateThemeAction::kAutodetect,
-					                        pair.first.internal_name);
+					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
 					ctrl->rebuild();
 				}
@@ -1957,13 +1951,13 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	});
 	category_.set_handle_mouse(true);
 	category_.set_tooltip(
-	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info.category).descname())
+	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info->category).descname())
 	      .str());
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info.version) %
-	    info.i18n_version)
+	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info->version) %
+	    info->i18n_version)
 	      .str());
 	set_can_focus(true);
 	layout();
@@ -2006,19 +2000,19 @@ void RemoteAddOnRow::draw(RenderTarget& r) {
 
 class RemoteInteractionWindow : public UI::Window {
 public:
-	RemoteInteractionWindow(AddOnsCtrl& parent, AddOns::AddOnInfo& info)
+	RemoteInteractionWindow(AddOnsCtrl& parent, std::shared_ptr<AddOns::AddOnInfo> info)
 	   : UI::Window(parent.get_parent(),
 	                UI::WindowStyle::kFsMenu,
-	                info.internal_name,
+	                info->internal_name,
 	                parent.get_x() + kRowButtonSize,
 	                parent.get_y() + kRowButtonSize,
 	                parent.get_inner_w() - 2 * kRowButtonSize,
 	                parent.get_inner_h() - 2 * kRowButtonSize,
-	                info.descname()),
+	                info->descname()),
 	     parent_(parent),
 	     info_(info),
 	     current_screenshot_(0),
-	     nr_screenshots_(info.screenshots.size()),
+	     nr_screenshots_(info->screenshots.size()),
 	     current_vote_(-1),
 
 	     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -2103,8 +2097,8 @@ public:
 		own_voting_.selected.connect([this]() {
 			current_vote_ = own_voting_.get_selected();
 			try {
-				parent_.net().vote(info_.internal_name, current_vote_);
-				info_ = parent_.net().fetch_one_remote(info_.internal_name);
+				parent_.net().vote(info_->internal_name, current_vote_);
+				*info_ = parent_.net().fetch_one_remote(info_->internal_name);
 			} catch (const std::exception& e) {
 				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					(boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
@@ -2170,7 +2164,7 @@ public:
 		tabs_.add("comments", "", &box_comments_);
 		if (nr_screenshots_) {
 			tabs_.add("screenshots",
-			          (boost::format(_("Screenshots (%u)")) % info_.screenshots.size()).str(),
+			          (boost::format(_("Screenshots (%u)")) % info_->screenshots.size()).str(),
 			          &box_screenies_);
 			tabs_.sigclicked.connect([this]() {
 				if (tabs_.active() == 1) {
@@ -2225,22 +2219,22 @@ public:
 	}
 
 	void update_data() {
-		(*tabs_.tabs().begin())->set_title((boost::format(_("Comments (%u)")) % info_.user_comments.size()).str());
-		(*tabs_.tabs().rbegin())->set_title((boost::format(_("Votes (%u)")) % info_.number_of_votes()).str());
+		(*tabs_.tabs().begin())->set_title((boost::format(_("Comments (%u)")) % info_->user_comments.size()).str());
+		(*tabs_.tabs().rbegin())->set_title((boost::format(_("Votes (%u)")) % info_->number_of_votes()).str());
 
-		voting_stats_summary_.set_text(info_.number_of_votes() ?
+		voting_stats_summary_.set_text(info_->number_of_votes() ?
 	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                                                      "Average rating: %1$.3f (%2$u votes)",
-	                                                      info_.number_of_votes())) % info_.average_rating() % info_.number_of_votes()).str() :
+	                                                      info_->number_of_votes())) % info_->average_rating() % info_->number_of_votes()).str() :
 	                              _("No votes yet"));
 
 		uint32_t most_votes = 1;
-		for (uint32_t v : info_.votes) {
+		for (uint32_t v : info_->votes) {
 			most_votes = std::max(most_votes, v);
 		}
 		for (unsigned i = 0; i < AddOns::kMaxRating; ++i) {
 			voting_bars_[i]->set_total(most_votes);
-			voting_bars_[i]->set_state(info_.votes[i]);
+			voting_bars_[i]->set_state(info_->votes[i]);
 			voting_txt_[i]->set_text(std::to_string(i + 1));
 		}
 
@@ -2248,16 +2242,16 @@ public:
 		comment_rows_.clear();
 		std::string text = "<rt><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-		           .as_font_tag(info_.user_comments.empty() ?
+		           .as_font_tag(info_->user_comments.empty() ?
 		                           _("No comments yet.") :
 		                           (boost::format(ngettext(
-		                               "%u comment:", "%u comments:", info_.user_comments.size())) %
-		                            info_.user_comments.size())
+		                               "%u comment:", "%u comments:", info_->user_comments.size())) %
+		                            info_->user_comments.size())
 		                              .str());
 		text += "</p></rt>";
 		comments_header_.set_text(text);
 		long index = 0;
-		for (const auto& comment : info_.user_comments) {
+		for (const auto& comment : info_->user_comments) {
 			text = "<rt><p>";
 			if (comment.editor.empty()) {
 				text += g_style_manager->font_style(UI::FontStyle::kItalic)
@@ -2302,7 +2296,7 @@ private:
 		current_screenshot_ = (current_screenshot_ + delta) % nr_screenshots_;
 		assert(current_screenshot_ < static_cast<int32_t>(screenshot_cache_.size()));
 
-		auto it = info_.screenshots.begin();
+		auto it = info_->screenshots.begin();
 		std::advance(it, current_screenshot_);
 
 		screenshot_stats_.set_text(
@@ -2316,7 +2310,7 @@ private:
 		}
 
 		const Image* image = nullptr;
-		const std::pair<std::string, std::string> cache_key(info_.internal_name, it->first);
+		const std::pair<std::string, std::string> cache_key(info_->internal_name, it->first);
 		auto cached = downloaded_screenshots_cache_.find(cache_key);
 		if (cached == downloaded_screenshots_cache_.end()) {
 			const std::string screenie =
@@ -2328,7 +2322,7 @@ private:
 				downloaded_screenshots_cache_[cache_key] = screenie;
 			} catch (const std::exception& e) {
 				log_err("Error downloading screenshot %s for %s: %s", it->first.c_str(),
-				        info_.internal_name.c_str(), e.what());
+				        info_->internal_name.c_str(), e.what());
 				image = nullptr;
 			}
 		} else if (!cached->second.empty()) {
@@ -2347,7 +2341,7 @@ private:
 	}
 
 	void login_changed() {
-		current_vote_ = parent_.net().get_vote(info_.internal_name);
+		current_vote_ = parent_.net().get_vote(info_->internal_name);
 		if (current_vote_ < 0) {
 			write_comment_.set_enabled(false);
 			write_comment_.set_tooltip(_("Please log in to comment"));
@@ -2367,7 +2361,7 @@ private:
 	}
 
 	AddOnsCtrl& parent_;
-	AddOns::AddOnInfo& info_;
+	std::shared_ptr<AddOns::AddOnInfo> info_;
 	int32_t current_screenshot_, nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
@@ -2380,7 +2374,7 @@ private:
 
 	class CommentEditor : public UI::Window {
 	public:
-		CommentEditor(AddOnsCtrl& ctrl, AddOns::AddOnInfo& info, const long index)
+		CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const long index)
 		: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
             "write_comment", 0, 0, 100, 100, index < 0 ? _("Write Comment") : _("Edit Comment")),
 		info_(info), index_(index),
@@ -2478,11 +2472,11 @@ private:
 					if (message.empty()) {
 						return;
 					}
-					ctrl.net().comment(info_, message, index_);
-					info_ = ctrl.net().fetch_one_remote(info_.internal_name);
+					ctrl.net().comment(*info_, message, index_);
+					*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 					end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 				} catch (const std::exception& e) {
-					log_err("Edit comment #%ld for %s: %s", index_, info_.internal_name.c_str(), e.what());
+					log_err("Edit comment #%ld for %s: %s", index_, info_->internal_name.c_str(), e.what());
 					UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 							(boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) % e.what()).str(),
 							UI::WLMessageBox::MBoxType::kOk);
@@ -2536,7 +2530,7 @@ private:
 		}
 
 	private:
-		AddOns::AddOnInfo& info_;
+		std::shared_ptr<AddOns::AddOnInfo> info_;
 		const long index_;
 
 		UI::Box main_box_, markup_box_, buttons_box_;
@@ -2563,14 +2557,14 @@ private:
 		}
 
 		void reset_text() {
-			text_->set_text(index_ < 0 ? "" : info_.user_comments[index_].message);
+			text_->set_text(index_ < 0 ? "" : info_->user_comments[index_].message);
 			think();
 		}
 	};
 
 	class CommentRow : public UI::MultilineTextarea {
 	public:
-		CommentRow(AddOnsCtrl& ctrl, AddOns::AddOnInfo& info, RemoteInteractionWindow& r, UI::Panel& parent, const std::string& text, const long index) : UI::MultilineTextarea(&parent, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		CommentRow(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, RemoteInteractionWindow& r, UI::Panel& parent, const std::string& text, const long index) : UI::MultilineTextarea(&parent, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 				ctrl_(ctrl), info_(info), index_(index),
 				edit_(this, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Edit…")) {
 			edit_.sigclicked.connect([this, &r]() {
@@ -2588,8 +2582,8 @@ private:
 		void update_edit_enabled() {
 			/* Admins can edit all posts; normal users only their own posts and only if the post was never edited by an admin yet. */
 			edit_.set_visible(!ctrl_.username().empty() && (ctrl_.net().is_admin() || (
-				info_.user_comments[index_].username == ctrl_.username() &&
-				(info_.user_comments[index_].editor.empty() || info_.user_comments[index_].editor == ctrl_.username()))));
+				info_->user_comments[index_].username == ctrl_.username() &&
+				(info_->user_comments[index_].editor.empty() || info_->user_comments[index_].editor == ctrl_.username()))));
 		}
 		void layout() override {
 			UI::MultilineTextarea::layout();
@@ -2598,7 +2592,7 @@ private:
 
 	private:
 		AddOnsCtrl& ctrl_;
-		AddOns::AddOnInfo& info_;
+		std::shared_ptr<AddOns::AddOnInfo> info_;
 		const long index_;
 		UI::Button edit_;
 	};
@@ -2617,7 +2611,7 @@ std::map<std::pair<std::string, std::string>, std::string>
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                                AddOnsCtrl* ctrl,
-                               AddOns::AddOnInfo& info,
+                               std::shared_ptr<AddOns::AddOnInfo> info,
                                const AddOns::AddOnVersion& installed_version,
                                uint32_t installed_i18n_version)
    : UI::Panel(parent, UI::PanelStyle::kFsMenu, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
@@ -2660,14 +2654,14 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                _("Comments and Votes")),
      icon_(this,
                UI::PanelStyle::kFsMenu,
-               info_.icon),
+               info_->icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
-               g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
+               g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
      verified_(this,
                UI::PanelStyle::kFsMenu,
-               g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" :
-                                                  "images/ui_basic/stop.png")),
+               g_image_cache->get(info->verified ? "images/ui_basic/list_selected.png" :
+                                                   "images/ui_basic/stop.png")),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -2676,8 +2670,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               0,
               0,
               /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
-               info.i18n_version)
+              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info->version) %
+               info->i18n_version)
                  .str(),
               UI::Align::kCenter),
      bottom_row_left_(this,
@@ -2687,7 +2681,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                       0,
                       0,
                       0,
-                      time_string(info.upload_timestamp),
+                      time_string(info->upload_timestamp),
                       UI::Align::kLeft),
      bottom_row_right_(
         this,
@@ -2697,15 +2691,16 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         0,
         0,
         0,
-        info.internal_name.empty() ?
+        info->internal_name.empty() ?
            "" :
            (boost::format(
                /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
                   Number of screenshots */
                _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u")) %
-            filesize_string(info.total_file_size) % info.download_count %
-            (info.number_of_votes() ? (boost::format("%.2f") % info.average_rating()).str() : "–") %
-            info.user_comments.size() % info.screenshots.size())
+            filesize_string(info->total_file_size) % info->download_count %
+            (info->number_of_votes() ? (boost::format("%.2f") % info->average_rating()).str() :
+                                       "–") %
+            info->user_comments.size() % info->screenshots.size())
               .str(),
         UI::Align::kRight),
      txt_(this,
@@ -2718,30 +2713,30 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
            /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
            % (boost::format(_("%1$s %2$s")) %
               g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-                 .as_font_tag(info.descname()) %
+                 .as_font_tag(info->descname()) %
               g_style_manager->font_style(UI::FontStyle::kItalic)
-                 .as_font_tag((boost::format(_("(%s)")) % info.internal_name).str()))
+                 .as_font_tag((boost::format(_("(%s)")) % info->internal_name).str()))
                 .str() %
            g_style_manager->font_style(UI::FontStyle::kItalic)
-              .as_font_tag(info.author() == info.upload_username ?
-                              (boost::format(_("by %s")) % info.author()).str() :
-                              (boost::format(_("by %1$s (uploaded by %2$s)")) % info.author() %
-                               info.upload_username)
+              .as_font_tag(info->author() == info->upload_username ?
+                              (boost::format(_("by %s")) % info->author()).str() :
+                              (boost::format(_("by %1$s (uploaded by %2$s)")) % info->author() %
+                               info->upload_username)
                                  .str()) %
            required_wl_version_and_sync_safety_string(info) %
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-              .as_font_tag(info.description()))
+              .as_font_tag(info->description()))
              .str()),
-     full_upgrade_possible_(AddOns::is_newer_version(installed_version, info.version)) {
+     full_upgrade_possible_(AddOns::is_newer_version(installed_version, info->version)) {
 
-	interact_.sigclicked.connect([ctrl, &info]() {
+	interact_.sigclicked.connect([ctrl, info]() {
 		RemoteInteractionWindow m(*ctrl, info);
 		m.run<UI::Panel::Returncodes>();
 	});
-	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info, false); });
-	install_.sigclicked.connect([ctrl, info]() {
+	uninstall_.sigclicked.connect([ctrl, this]() { uninstall(ctrl, info_, false); });
+	install_.sigclicked.connect([ctrl, this]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
-		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
+		if (!info_->verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
 			   (boost::format(_("Are you certain that you want to install this add-on?\n\n"
@@ -2751,20 +2746,21 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Version %4$s\n"
 			                    "Category: %5$s\n"
 			                    "%6$s\n")) %
-			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    AddOns::version_to_string(info.version) %
-			    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
+			    info_->descname() % info_->author() %
+			    (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
+			    AddOns::version_to_string(info_->version) %
+			    AddOns::kAddOnCategories.at(info_->category).descname() % info_->description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
 		}
-		ctrl->install_or_upgrade(info, false);
+		ctrl->install_or_upgrade(info_, false);
 		ctrl->rebuild();
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
-		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
+		if (!info->verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
 			   (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
@@ -2775,10 +2771,11 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Available version: %5$s\n"
 			                    "Category: %6$s\n"
 			                    "%7$s")) %
-			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
+			    info->descname() % info->author() %
+			    (info->verified ? _("Verified") : _("NOT VERIFIED")) %
 			    AddOns::version_to_string(installed_version) %
-			    AddOns::version_to_string(info.version) %
-			    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
+			    AddOns::version_to_string(info->version) %
+			    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -2788,7 +2785,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		ctrl->install_or_upgrade(info, !full_upgrade_possible_);
 		ctrl->rebuild();
 	});
-	if (info.internal_name.empty()) {
+	if (info->internal_name.empty()) {
 		install_.set_enabled(false);
 		upgrade_.set_enabled(false);
 		uninstall_.set_enabled(false);
@@ -2798,7 +2795,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		upgrade_.set_enabled(false);
 	} else {
 		install_.set_enabled(false);
-		upgrade_.set_enabled(full_upgrade_possible_ || installed_i18n_version < info.i18n_version);
+		upgrade_.set_enabled(full_upgrade_possible_ || installed_i18n_version < info->i18n_version);
 	}
 
 	for (UI::Panel* p :
@@ -2806,41 +2803,41 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		p->set_handle_mouse(true);
 	}
 	category_.set_tooltip(
-	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info.category).descname())
+	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info->category).descname())
 	      .str());
 	version_.set_tooltip(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info.version) %
-	    info.i18n_version)
+	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info->version) %
+	    info->i18n_version)
 	      .str());
 	verified_.set_tooltip(
-	   info.internal_name.empty() ?
+	   info->internal_name.empty() ?
 	      _("Error") :
-	      info.verified ?
+	      info->verified ?
 	      _("Verified by the Widelands Development Team") :
 	      _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
 	bottom_row_right_.set_tooltip(
-	   info.internal_name.empty() ?
+	   info->internal_name.empty() ?
 	      "" :
 	      (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
 	       (boost::format(
-	           ngettext("Total size: %u byte", "Total size: %u bytes", info.total_file_size)) %
-	        info.total_file_size)
+	           ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size)) %
+	        info->total_file_size)
 	          .str() %
-	       (boost::format(ngettext("%u download", "%u downloads", info.download_count)) %
-	        info.download_count)
+	       (boost::format(ngettext("%u download", "%u downloads", info->download_count)) %
+	        info->download_count)
 	          .str() %
-	       (info.number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                                         "Average rating: %1$.3f (%2$u votes)",
-	                                                         info.number_of_votes())) %
-	                                  info.average_rating() % info.number_of_votes())
-	                                    .str() :
-	                                 _("No votes yet")) %
-	       (boost::format(ngettext("%u comment", "%u comments", info.user_comments.size())) %
-	        info.user_comments.size()) %
-	       (boost::format(ngettext("%u screenshot", "%u screenshots", info.screenshots.size())) %
-	        info.screenshots.size())
+	       (info->number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                                                          "Average rating: %1$.3f (%2$u votes)",
+	                                                          info->number_of_votes())) %
+	                                   info->average_rating() % info->number_of_votes())
+	                                     .str() :
+	                                  _("No votes yet")) %
+	       (boost::format(ngettext("%u comment", "%u comments", info->user_comments.size())) %
+	        info->user_comments.size()) %
+	       (boost::format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size())) %
+	        info->screenshots.size())
 	          .str())
 	         .str());
 

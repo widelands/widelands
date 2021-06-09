@@ -74,10 +74,10 @@ i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename) {
 	if (pos != std::string::npos) {
 		mapfilename = mapfilename.substr(0, pos);
 	}
-	return new i18n::AddOnTextdomain(mapfilename);
+	return new i18n::AddOnTextdomain(mapfilename, find_addon(mapfilename).i18n_version);
 }
 
-std::vector<std::pair<AddOnInfo, bool>> g_addons;
+std::vector<AddOnState> g_addons;
 
 std::string version_to_string(const AddOnVersion& version, const bool localize) {
 	std::string s;
@@ -124,11 +124,11 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 	for (const auto& requirement : required_addons) {
 		bool found = false;
 		for (const auto& pair : g_addons) {
-			if (pair.first.internal_name == requirement.first) {
+			if (pair.first->internal_name == requirement.first) {
 				found = true;
-				if (pair.first.version != requirement.second) {
+				if (pair.first->version != requirement.second) {
 					addons_wrong_version[requirement.first] =
-					   std::make_pair(pair.first.version, requirement.second);
+					   std::make_pair(pair.first->version, requirement.second);
 				}
 				break;
 			}
@@ -234,7 +234,7 @@ unsigned count_all_dependencies(const std::string& info,
 		return 0;
 	}
 	unsigned deps = 0;
-	for (const std::string& req : it->second.first.requirements) {
+	for (const std::string& req : it->second.first->requirements) {
 		deps += count_all_dependencies(req, all);
 	}
 	return deps;
@@ -301,7 +301,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
-		if (s.first.category == AddOnCategory::kTheme) {
+		if (s.first->category == AddOnCategory::kTheme) {
 			if (s.second) {
 				previously_enabled = &s;
 			}
@@ -313,7 +313,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	switch (action) {
 	case UpdateThemeAction::kEnableArgument:
 		for (AddOnState* s : installed) {
-			if (s->first.internal_name == arg) {
+			if (s->first->internal_name == arg) {
 				s->second = true;
 				set_template_dir(theme_addon_template_dir(arg));
 				set_config_string("theme", arg);
@@ -328,7 +328,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 			return set_template_dir("");
 		}
 		for (AddOnState* s : installed) {
-			if (s->first.internal_name == arg) {
+			if (s->first->internal_name == arg) {
 				s->second = true;
 				set_template_dir(theme_addon_template_dir(arg));
 				return;
@@ -343,8 +343,8 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 			return;
 		}
 		previously_enabled->second = true;
-		set_config_string("theme", previously_enabled->first.internal_name);
-		set_template_dir(theme_addon_template_dir(previously_enabled->first.internal_name));
+		set_config_string("theme", previously_enabled->first->internal_name);
+		set_template_dir(theme_addon_template_dir(previously_enabled->first->internal_name));
 		return;
 	}
 	NEVER_HERE();
@@ -381,78 +381,71 @@ bool AddOnInfo::matches_widelands_version() const {
 	return true;
 }
 
-AddOnInfo preload_addon(const std::string& name) {
+const AddOnInfo& find_addon(const std::string& name) {
+	for (const auto& pair : g_addons) {
+		if (pair.first->internal_name == name) {
+			return *pair.first;
+		}
+	}
+	throw wexception("Add-on %s is not installed", name.c_str());
+}
+
+std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(
 	   g_fs->make_sub_file_system(kAddOnDir + FileSystem::file_separator() + name));
 	Profile profile;
 	profile.read("addon", nullptr, *fs);
 	Section& s = profile.get_safe_section("global");
 
-	// Fetch strings from the correct textdomain
-	i18n::AddOnTextdomain addon_textdomain(name);
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
 	Section* i18n_section = i18n_profile.get_section("global");
 
-	const std::string unlocalized_descname = s.get_safe_untranslated_string("name");
-	const std::string unlocalized_description = s.get_safe_untranslated_string("description");
-	const std::string unlocalized_author = s.get_safe_untranslated_string("author");
-
-	AddOnInfo i = {name,
-	               unlocalized_descname,
-	               unlocalized_description,
-	               unlocalized_author,
-	               [name, unlocalized_descname]() {
-		               i18n::AddOnTextdomain td(name);
-		               return i18n::translate(unlocalized_descname);
-	               },
-	               [name, unlocalized_description]() {
-		               i18n::AddOnTextdomain td(name);
-		               return i18n::translate(unlocalized_description);
-	               },
-	               [name, unlocalized_author]() {
-		               i18n::AddOnTextdomain td(name);
-		               return i18n::translate(unlocalized_author);
-	               },
-	               string_to_version(s.get_safe_string("version")),
-	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
-	               get_category(s.get_safe_string("category")),
-	               g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
+	AddOnInfo* i = new AddOnInfo();
+	i->internal_name = name;
+	i->unlocalized_descname = s.get_safe_untranslated_string("name");
+	i->unlocalized_description = s.get_safe_untranslated_string("description");
+	i->unlocalized_author = s.get_safe_untranslated_string("author");
+	i->version = string_to_version(s.get_safe_string("version"));
+	i->i18n_version = i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0;
+	i->category = get_category(s.get_safe_string("category"));
+	i->sync_safe = s.get_bool("sync_safe", false);
+	i->min_wl_version = s.get_string("min_wl_version", "");
+	i->max_wl_version = s.get_string("max_wl_version", "");
+	i->descname = [i]() {
+		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		return i18n::translate(i->unlocalized_descname);
+	};
+	i->description = [i]() {
+		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		return i18n::translate(i->unlocalized_description);
+	};
+	i->author = [i]() {
+		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		return i18n::translate(i->unlocalized_author);
+	};
+	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
 	               		kAddOnDir + FileSystem::file_separator() + name + FileSystem::file_separator() + kAddOnIconFile
-	               		: kAddOnCategories.at(i.category).icon),
-	               {},  // Requirements (will be initialized later)
-	               s.get_bool("sync_safe", false),
-	               s.get_string("min_wl_version", ""),
-	               s.get_string("max_wl_version", ""),
-	               /* Everything below is used only for remote add-ons. */
-	               {},     // Screenshots
-	               false,  // Verified
-	               0,      // Size
-	               "",     // Uploader
-	               0,      // Timestamp
-	               0,      // Downloads
-	               {},     // Votes
-	               {}      // Comments
-	               };
+	               		: kAddOnCategories.at(i->category).icon);
 
-	if (i.category == AddOnCategory::kNone) {
+	if (i->category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());
 	}
-	if (i.version.empty()) {
+	if (i->version.empty()) {
 		throw wexception("preload_addon (%s): version string is empty", name.c_str());
 	}
 
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');
 		if (commapos == std::string::npos) {
-			i.requirements.push_back(req);
+			i->requirements.push_back(req);
 			break;
 		} else {
-			i.requirements.push_back(req.substr(0, commapos));
+			i->requirements.push_back(req.substr(0, commapos));
 			req = req.substr(commapos + 1);
 		}
 	}
 
-	return i;
+	return std::shared_ptr<AddOnInfo>(i);
 }
 
 }  // namespace AddOns

@@ -227,7 +227,8 @@ void AddOnsPackager::initialize_mutable_addons() {
 	addons_with_changes_.clear();
 
 	for (const AddOns::AddOnState& a : AddOns::g_addons) {
-		mutable_addons_[a.first.internal_name] = AddOns::MutableAddOn::create_mutable_addon(a.first);
+		mutable_addons_[a.first->internal_name] =
+		   AddOns::MutableAddOn::create_mutable_addon(*a.first);
 	}
 
 	rebuild_addon_list("");
@@ -354,34 +355,16 @@ void AddOnsPackager::clicked_new_addon() {
 			continue;
 		}
 
-		AddOns::AddOnInfo a{
-		   // These default strings are not localized because these editboxes are meant to be
-		   // filled out in English. We will add localization markup to the resulting config file.
-		   name,
-		   n.text(),
-		   "No description",
-		   get_config_string("realname", pgettext("author_name", "Unknown")),
-		   {},
-		   {},
-		   {},
-		   {1, 0, 0},
-		   0,
-		   category.get_selected(),
-		   g_image_cache->get(AddOns::kAddOnCategories.at(category.get_selected()).icon),
-		   {},     // Requirements
-		   false,  // sync-safe
-		   "",     // min WL version
-		   "",     // max WL version
-		   /* Everything below is used only for remote add-ons. */
-		   {},     // Screenies
-		   false,  // verified
-		   0,      // Size
-		   "",     // Uploader
-		   0,      // Timestamp
-		   0,      // Downloads
-		   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Votes
-		   {}  // Comments
-		   };
+		AddOns::AddOnInfo a;
+		// These default strings are not localized because these editboxes are meant to be
+		// filled out in English. We will add localization markup to the resulting config file.
+		a.internal_name = name;
+		a.unlocalized_descname = n.text();
+		a.unlocalized_description = "No description";
+		a.unlocalized_author = get_config_string("realname", pgettext("author_name", "Unknown"));
+		a.version = {1, 0, 0};
+		a.category = category.get_selected();
+
 		mutable_addons_[name] = AddOns::MutableAddOn::create_mutable_addon(a);
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();

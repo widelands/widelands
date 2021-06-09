@@ -23,6 +23,7 @@
 #include <ctime>
 #include <functional>
 #include <map>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -77,6 +78,11 @@ struct AddOnComment {
 constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
+	AddOnInfo() = default;
+	AddOnInfo& operator=(const AddOnInfo&) = default;
+	AddOnInfo(const AddOnInfo&) = default;
+	~AddOnInfo() = default;
+
 	/*
 	 * When adding any new add-on properties that are stored in the `addon` file,
 	 * be sure to add them to MutableAddon as well so they are preserved/updated
@@ -92,26 +98,28 @@ struct AddOnInfo {
 	std::function<std::string()> description;
 	std::function<std::string()> author;
 
-	AddOnVersion version;   ///< Add-on version (e.g. 1.2.3)
-	uint32_t i18n_version;  ///< (see doc/sphinx/source/add-ons.rst)
-	AddOnCategory category;
-	const Image* icon;  ///< A little icon to display in the add-ons manager.
+	AddOnVersion version;       ///< Add-on version (e.g. 1.2.3)
+	uint32_t i18n_version = 0;  ///< (see doc/sphinx/source/add-ons.rst)
+
+	AddOnCategory category = AddOnCategory::kNone;
+	const Image* icon = nullptr;  ///< A little icon to display in the add-ons manager.
 
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
-	bool sync_safe;              // Whether this add-on will not desync in MP and replays.
+	bool sync_safe = false;      // Whether this add-on will not desync in MP and replays.
 	std::string min_wl_version;  // Minimum required Widelands version, or "" if invalid.
 	std::string max_wl_version;  // Maximum supported Widelands version, or "" if invalid.
 
 	std::map<std::string /* name */, std::string /* description */> screenshots;
 
-	bool verified;                 ///< Only valid for Remote add-ons.
-	uint32_t total_file_size;      ///< Total size of all files, in bytes.
-	std::string upload_username;   ///< Who uploaded (may be different from author).
-	std::time_t upload_timestamp;  ///< Date and time when this version was uploaded.
-	uint32_t download_count;       ///< Total times downloaded.
-	uint32_t votes[kMaxRating];    ///< Total number of votes for each of the ratings 1-10.
+	bool verified = false;             ///< Only valid for Remote add-ons.
+	uint32_t total_file_size = 0;      ///< Total size of all files, in bytes.
+	std::string upload_username;       ///< Who uploaded (may be different from author).
+	std::time_t upload_timestamp = 0;  ///< Date and time when this version was uploaded.
+
+	uint32_t download_count = 0;       ///< Total times downloaded.
+	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
 	std::vector<AddOnComment> user_comments;
 
 	bool matches_widelands_version() const;
@@ -119,6 +127,8 @@ struct AddOnInfo {
 	double average_rating() const;
 	bool requires_texture_atlas_rebuild() const;
 };
+
+using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;
 
 inline static std::string theme_addon_template_dir(const std::string& name) {
 	std::string s = kAddOnDir;
@@ -129,8 +139,9 @@ inline static std::string theme_addon_template_dir(const std::string& name) {
 }
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
-using AddOnState = std::pair<AddOnInfo, bool>;
+using AddOnState = std::pair<std::shared_ptr<AddOnInfo>, bool>;
 extern std::vector<AddOnState> g_addons;
+const AddOnInfo& find_addon(const std::string& name);
 
 extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
@@ -142,7 +153,7 @@ AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
-AddOnInfo preload_addon(const std::string&);
+std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 
 i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename);
 
