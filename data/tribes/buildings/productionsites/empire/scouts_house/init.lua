@@ -18,13 +18,20 @@ descriptions:new_productionsite_type {
    },
 
    animation_directory = dirname,
-   animations = {
-      idle = {
-         hotspot = { 50, 53 },
-         fps = 10
-      },
+
+   spritesheets = {
       build = {
-         hotspot = { 50, 53 },
+         frames = 3,
+         rows = 3,
+         columns = 1,
+         hotspot = { 50, 53 }
+      },
+      idle = {
+         fps = 10,
+         frames = 12,
+         rows = 4,
+         columns = 3,
+         hotspot = { 50, 53 }
       },
    },
 
