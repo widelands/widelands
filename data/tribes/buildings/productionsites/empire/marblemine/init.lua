@@ -39,7 +39,7 @@ descriptions:new_productionsite_type {
          hotspot = { 49, 49 },
       },
    },
-   
+
    spritesheets = {
       working = {
          fps = 10,

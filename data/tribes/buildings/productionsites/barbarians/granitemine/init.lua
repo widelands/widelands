@@ -27,7 +27,7 @@ descriptions:new_productionsite_type {
          hotspot = { 42, 35 },
       },
    },
-   
+
    spritesheets = {
       build = {
          frames = 4,

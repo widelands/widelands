@@ -19,7 +19,7 @@ descriptions:new_worker_type {
          hotspot = { 3, 21 },
       },
    },
-   
+
    spritesheets = {
       walk = {
          fps = 20,
