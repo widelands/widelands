@@ -34,6 +34,7 @@
 #include "economy/waterway.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -240,6 +241,7 @@ InteractiveBase::~InteractiveBase() {
 	if (road_building_mode_) {
 		abort_build_road();
 	}
+	RenderQueue::instance().clear();  // Cleanup spurious drawing commands
 }
 
 UI::Box* InteractiveBase::toolbar() {

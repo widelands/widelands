@@ -29,6 +29,7 @@
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -894,9 +895,40 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-void EditorInteractive::run_editor(const EditorInteractive::Init init,
+void EditorInteractive::run_editor(UI::Panel* error_message_parent,
+                                   const EditorInteractive::Init init,
                                    const std::string& filename,
                                    const std::string& script_to_run) {
+	try {
+		EditorInteractive::do_run_editor(init, filename, script_to_run);
+	} catch (const std::exception& e) {
+		log_err("##############################\n"
+		        "  FATAL EXCEPTION in editor: %s\n"
+		        "##############################\n",
+		        e.what());
+		if (!error_message_parent) {
+			return;
+		}
+		// Note: We don't necessarily want a bug report here, but the wording must
+		// be EXACTLY LIKE THIS in v1.0 to avoid adding a new translatable string
+		// during winter time freeze. We can consider rephrasing it after v1.0.
+		UI::WLMessageBox m(
+		   error_message_parent, UI::WindowStyle::kFsMenu, _("Error"),
+		   (boost::format(
+		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		         "this problem to help us improve Widelands. You will find related messages in the "
+		         "standard output (stdout.txt on Windows). You are using build %2$s "
+		         "(%3$s).\nPlease add this information to your report.")) %
+		    e.what() % build_id() % build_type())
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
+}
+
+void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
+                                      const std::string& filename,
+                                      const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this

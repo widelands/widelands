@@ -30,7 +30,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -131,17 +130,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
-     theme_dropdown_(&box_interface_vbox_,
-                     "dropdown_theme",
-                     0,
-                     0,
-                     100,  // 100 is arbitrary, will be resized in layout().
-                     50,
-                     24,
-                     _("UI Theme"),
-                     UI::DropdownType::kTextual,
-                     UI::PanelStyle::kFsMenu,
-                     UI::ButtonStyle::kFsMenuMenu),
 
      inputgrab_(&box_interface_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
      sdl_cursor_(&box_interface_,
@@ -301,6 +289,10 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                      UI::PanelStyle::kFsMenu,
                      Vector2i::zero(),
                      _("Scroll when the mouse cursor is near the screen edge")),
+     invert_movement_(&box_ingame_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      _("Invert click-and-drag map movement direction")),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
@@ -346,7 +338,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
-	box_interface_vbox_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_hbox_.add(&box_interface_vbox_, UI::Box::Resizing::kExpandBoth);
 	box_interface_hbox_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 
@@ -388,6 +379,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&invert_movement_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add_space(kPadding);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
@@ -488,20 +480,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		   true);
 	}
 
-	for (const std::string& theme : g_fs->list_directory("templates")) {
-		if (g_fs->is_directory(theme)) {
-			const std::string descname =
-			   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
-			theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
-		}
-	}
-	for (auto& addon : AddOns::g_addons) {
-		if (addon.first.category == AddOns::AddOnCategory::kTheme && addon.second) {
-			const std::string path = kAddOnDir + '/' + addon.first.internal_name + '/';
-			theme_dropdown_.add(addon.first.descname(), path, nullptr, path == template_dir());
-		}
-	}
-
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
 	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
@@ -523,6 +501,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 	edge_scrolling_.set_state(opt.edge_scrolling);
+	invert_movement_.set_state(opt.invert_movement);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_.set_state(opt.training_wheels);
 #endif
@@ -749,9 +728,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	if (language_dropdown_.has_selection()) {
 		os_.language = language_dropdown_.get_selected();
 	}
-	if (theme_dropdown_.has_selection()) {
-		os_.theme = theme_dropdown_.get_selected();
-	}
 	if (resolution_dropdown_.has_selection()) {
 		const int res_index = resolution_dropdown_.get_selected();
 		os_.fullscreen = res_index == kDropdownFullscreen;
@@ -787,6 +763,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 	os_.edge_scrolling = edge_scrolling_.get_state();
+	os_.invert_movement = invert_movement_.get_state();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	os_.training_wheels = training_wheels_.get_state();
 #endif
@@ -868,6 +845,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
+	opt.invert_movement = opt_section_.get_bool("invert_movement", false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 #endif
@@ -877,8 +855,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
-
-	opt.theme = opt_section_.get_string("theme", "");
 
 	// Last tab for reloading the options menu
 	opt.active_tab = active_tab;
@@ -919,6 +895,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
+	opt_section_.set_bool("invert_movement", opt.invert_movement);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 #endif
@@ -929,14 +906,10 @@ void OptionsCtrl::save_options() {
 	// Language options
 	opt_section_.set_string("language", opt.language);
 
-	opt_section_.set_string("theme", opt.theme);
-
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
-	set_template_dir(opt.theme);
-	parent_.get_topmost_forefather().template_directory_changed();
 
 	// Sound options
 	g_sh->save_config();

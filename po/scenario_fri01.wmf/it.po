@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Costruisci una economia del legno e una fattoria per le canne"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
@@ -39,9 +39,9 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Costruisci almento una Casa del taglialegna e due Guardia forestale per "
-"iniziare a produrre Tronchi, e una Fattoria per le canne per cominciare a "
-"coltivare Canne."
+"Costruisci almento una casa del taglialegna e due guardia forestale per "
+"iniziare a produrre tronchi, e una fattoria per le canne per cominciare a "
+"coltivare canne."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -330,6 +330,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Come tutti i Frisoni, costruiamo le nostre case principalmente coi mattoni. "
+"Le miglioriamo aggiungendo tronchi e granito. I tetti sono ricoperti con "
+"canne, naturalmente. Nient'altro è più adatto a tenere fuori la pioggia."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -338,6 +341,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Dovremmo iniziare occupandoci della produzione del legno. Gli alberi non "
+"sembrano crescere bene su quest'isola; meglio costruire almeno due case per "
+"le guardie forestali e una per taglialegna."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -347,10 +353,16 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
+"Inoltre, sarebbe meglio se costruissimo il prima possibile una fattoria per "
+"le canne. Anche le fattorie per le canne hanno bisogno di essere costruite, "
+"pertanto dobbiamo fare in modo di non avere carenza prima di essere in grado"
+" di poter procedere noi stessi con la coltivazione.  Le canne crescono "
+"facilmente, per cui il coltivatore di canne non necessita di nient'altro per"
+" iniziare a coltivare i campi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "Costruiamo la nostra nuova casa"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -361,6 +373,12 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"La scorta di legno e canne è assicurata. Ora, dobbiamo occuparti della "
+"scorta di mattoni. I mattoni vengono cotti all'interno di una fornace di "
+"mattoni partendo dal granito e dall'argilla, per cui dobbiamo prima produrre"
+" queste ultime. Sulla terraferma, eravamo soliti estrarre il granito dalla "
+"pietra, ma qui non ne vedo. Forse queste colline contengono abbastanza "
+"pietre da poter estrarre del granito."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -370,6 +388,11 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"L'argilla è facile da produrre: uno scavatore di argilla impiegato in una "
+"cava di argilla non farà altro che scavare un po' di terra e mischiarla con "
+"acqua. Assicurati soltanto che abbia abbastanza spazio per poter scavare "
+"attorno alla sua cava. Potrebbe essere una buona idea costruire qualche "
+"posto di guardia per espanderci."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -378,6 +401,11 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"Per cuocere i mattoni, la fornace ha bisogno di fuoco. È necessario usare il"
+" carbone come combustibile. Costruisci una miniera di carbone per essere "
+"sicuro di non rimanerne senza. Niente carbone significa niente mattoni, "
+"niente mattoni significa niente miniere, niente miniere significa niente "
+"carbone... Insomma, hai capito anche tu qual è il problema."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -385,6 +413,8 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"Inoltre, costruisci un pozzo – a nessuno piace bere acqua salata, che non va"
+" bene per produrre argilla."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
@@ -397,6 +427,10 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Hai agito bene. Ora l'intera produzione di materiale da costruzione sta "
+"funzionando. Aspettiamo fino a che non abbiamo accumulato del materiale in "
+"più. Potremo espandere il nostro territorio e vedere che cos'altro possiamo "
+"trovare su quest'isola."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
@@ -425,14 +459,16 @@ msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
+"Dovresti assegnare alla nuova fattoria delle canne la più alta priorità per "
+"le canne nella finestra del cantiere."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "Carenza di argilla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Costruisci un'altra cava di argilla"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -442,6 +478,11 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"I nostri fabbricatori di mattoni si stanno lamentando da un po' della "
+"mancanza di argilla. Niente argilla significa che i mattoni non possono "
+"essere prodotti, pertanto questa carenza ci sta rallentando molto Sarebbe "
+"meglio costruire una o due cave di argilla in più, nonché dei pozzi per "
+"rifornirle d'acqua."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197

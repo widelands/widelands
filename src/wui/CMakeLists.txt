@@ -330,6 +330,7 @@ wl_library(wui
     graphic_minimap_renderer
     graphic_mouse_cursor
     graphic_playercolor
+    graphic_render_queue
     graphic_styles
     graphic_surface
     graphic_text_layout
