@@ -1077,7 +1077,7 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
    .. method:: set_attack_forbidden(playernumber, forbid)
 
       Sets whether this player is forbidden to attack the player with the specified
-      **playernumber**. Note that setting this to `false` does not necessarily mean that this
+      **playernumber**. Note that setting this to :const:`false` does not necessarily mean that this
       player *can* attack the other player, as they might for example be in the same team.
 
       :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.

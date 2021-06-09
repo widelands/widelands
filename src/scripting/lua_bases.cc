@@ -877,7 +877,7 @@ int LuaPlayerBase::place_road(lua_State* L) {
          instead a constructionsite for this building is placed.
       :type cs: :class:`boolean`
       :arg force: (Optional) If :const:`true` the building is forced into
-         existence: The same action is taken as for :meth:`place_flag` when force
+         existence: The same action is taken as for :meth:`place_flag` when **force**
          is :const:`true`. Additionally, all buildings that are too close to the
          new one are ripped. If you want to use **force** you have to set **cs** also.
       :type force: :class:`boolean`
