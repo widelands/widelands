@@ -734,11 +734,11 @@ bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
 void AddOnsCtrl::rebuild() {
 	const uint32_t scrollpos_i =
 	   installed_addons_inner_wrapper_.get_scrollbar() ?
-	      installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-	      0;
+         installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+         0;
 	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() ?
-	                                browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-	                                0;
+                                   browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+                                   0;
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
 	installed_addons_box_.clear();
@@ -835,7 +835,7 @@ void AddOnsCtrl::rebuild() {
 		browse_.push_back(r);
 	}
 	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") :
-	                                        (boost::format(_("Browse (%u)")) % index).str());
+                                           (boost::format(_("Browse (%u)")) % index).str());
 
 	if (installed_addons_inner_wrapper_.get_scrollbar() && scrollpos_i) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
@@ -1264,14 +1264,14 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   (boost::format(local ?
-		                     _("Are you certain that you want to uninstall this add-on?\n\n"
+                           _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
 		                       "by %2$s\n"
 		                       "Version %3$s\n"
 		                       "Category: %4$s\n"
 		                       "%5$s\n\n"
 		                       "Note that this add-on can not be downloaded again from the server.") :
-		                     _("Are you certain that you want to uninstall this add-on?\n\n"
+                           _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
 		                       "by %2$s\n"
 		                       "Version %3$s\n"
@@ -1417,7 +1417,7 @@ static std::string required_wl_version_and_sync_safety_string(const AddOns::AddO
 		}
 		result += g_style_manager
 		             ->font_style(info.matches_widelands_version() ? UI::FontStyle::kItalic :
-		                                                             UI::FontStyle::kWarning)
+                                                                   UI::FontStyle::kWarning)
 		             .as_font_tag(str);
 	}
 	return result;
@@ -1500,12 +1500,12 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 			if (pair.first.internal_name == info.internal_name) {
 				pair.second = !pair.second;
 				toggle_enabled_.set_pic(g_image_cache->get(pair.second ?
-				                                              "images/ui_basic/checkbox_checked.png" :
-				                                              "images/ui_basic/checkbox_empty.png"));
+                                                          "images/ui_basic/checkbox_checked.png" :
+                                                          "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first.category == AddOns::AddOnCategory::kTheme) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
-					                                      AddOns::UpdateThemeAction::kAutodetect,
+                                                     AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first.internal_name);
 					get_topmost_forefather().template_directory_changed();
 					ctrl->rebuild();
@@ -1553,8 +1553,9 @@ void InstalledAddOnRow::layout() {
 
 void InstalledAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
-	r.brighten_rect(
-	   Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 : enabled_ ? -20 : 0);
+	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 :
+	                                               enabled_    ? -20 :
+                                                                0);
 }
 
 void RemoteAddOnRow::draw(RenderTarget& r) {
@@ -1636,12 +1637,12 @@ public:
 	                           UI::PanelStyle::kFsMenu,
 	                           UI::FontStyle::kFsMenuLabel,
 	                           info.number_of_votes() ?
-	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+                                 (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                                                      "Average rating: %1$.3f (%2$u votes)",
 	                                                      info.number_of_votes())) %
 	                               info.average_rating() % info.number_of_votes())
 	                                 .str() :
-	                              _("No votes yet"),
+                                 _("No votes yet"),
 	                           UI::Align::kCenter),
 	     screenshot_next_(&box_screenies_buttons_,
 	                      "next_screenshot",
@@ -1674,8 +1675,8 @@ public:
 		std::string text = "<rt><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(info.user_comments.empty() ?
-		                           _("No comments yet.") :
-		                           (boost::format(ngettext(
+                                 _("No comments yet.") :
+                                 (boost::format(ngettext(
 		                               "%u comment:", "%u comments:", info.user_comments.size())) %
 		                            info.user_comments.size())
 		                              .str());
@@ -2075,15 +2076,15 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	      .str());
 	verified_.set_tooltip(
 	   info.internal_name.empty() ?
-	      _("Error") :
-	      info.verified ?
-	      _("Verified by the Widelands Development Team") :
-	      _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
+         _("Error") :
+	   info.verified ?
+         _("Verified by the Widelands Development Team") :
+         _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
 	bottom_row_right_.set_tooltip(
 	   info.internal_name.empty() ?
-	      "" :
-	      (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+         "" :
+         (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
 	       (boost::format(
 	           ngettext("Total size: %u byte", "Total size: %u bytes", info.total_file_size)) %
 	        info.total_file_size)
@@ -2096,7 +2097,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	                                                         info.number_of_votes())) %
 	                                  info.average_rating() % info.number_of_votes())
 	                                    .str() :
-	                                 _("No votes yet")) %
+                                    _("No votes yet")) %
 	       (boost::format(ngettext("%u comment", "%u comments", info.user_comments.size())) %
 	        info.user_comments.size()) %
 	       (boost::format(ngettext("%u screenshot", "%u screenshots", info.screenshots.size())) %

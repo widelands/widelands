@@ -5592,7 +5592,7 @@ int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
 		lua_pushstring(
 		   L, soldier_preference_to_string(ms->prefer_heroes ? Widelands::SoldierPreference::kHeroes :
-		                                                       Widelands::SoldierPreference::kRookies)
+                                                             Widelands::SoldierPreference::kRookies)
 		         .c_str());
 	} else {
 		lua_pushnil(L);
@@ -5702,7 +5702,7 @@ int LuaConstructionSite::get_desired_fill(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-	             get_egbase(L).descriptions().safe_worker_index(itemname);
+                get_egbase(L).descriptions().safe_worker_index(itemname);
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		if (!ps) {
@@ -5727,7 +5727,7 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-	             get_egbase(L).descriptions().safe_worker_index(itemname);
+                get_egbase(L).descriptions().safe_worker_index(itemname);
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		if (!ps) {
@@ -5766,7 +5766,7 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-	             get_egbase(L).descriptions().safe_worker_index(itemname);
+                get_egbase(L).descriptions().safe_worker_index(itemname);
 	wh_policy_to_string(
 	   L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
 	return 1;
@@ -5788,7 +5788,7 @@ int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-	             get_egbase(L).descriptions().safe_worker_index(itemname);
+                get_egbase(L).descriptions().safe_worker_index(itemname);
 	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
 	   string_to_wh_policy(L, 3);
 	return 0;
@@ -6460,8 +6460,8 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 		if (!valid_inputs.count(sp.first)) {
 			report_error(L, "<%s> can't be stored in this building: %s!",
 			             sp.first.second == Widelands::wwWARE ?
-			                tribe.get_ware_descr(sp.first.first)->name().c_str() :
-			                tribe.get_worker_descr(sp.first.first)->name().c_str(),
+                         tribe.get_ware_descr(sp.first.first)->name().c_str() :
+                         tribe.get_worker_descr(sp.first.first)->name().c_str(),
 			             ps->descr().name().c_str());
 		}
 		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second, nullptr);
@@ -6510,8 +6510,8 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 			break;
 		} else {
 			lua_pushstring(L, input.second == Widelands::wwWARE ?
-			                     tribe.get_ware_descr(input.first)->name() :
-			                     tribe.get_worker_descr(input.first)->name());
+                              tribe.get_ware_descr(input.first)->name() :
+                              tribe.get_worker_descr(input.first)->name());
 			lua_pushuint32(L, cnt);
 			lua_settable(L, -3);
 		}
@@ -6569,7 +6569,7 @@ int LuaProductionSite::get_desired_fill(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(item);
 	lua_pushuint32(L, get(L, get_egbase(L))
 	                     ->inputqueue(is_ware ? get_egbase(L).descriptions().safe_ware_index(item) :
-	                                            get_egbase(L).descriptions().safe_worker_index(item),
+                                               get_egbase(L).descriptions().safe_worker_index(item),
 	                                  is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
 	                     .get_max_fill());
 	return 1;
@@ -6579,7 +6579,7 @@ int LuaProductionSite::set_desired_fill(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(item);
 	get(L, get_egbase(L))
 	   ->inputqueue(is_ware ? get_egbase(L).descriptions().safe_ware_index(item) :
-	                          get_egbase(L).descriptions().safe_worker_index(item),
+                             get_egbase(L).descriptions().safe_worker_index(item),
 	                is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
 	   .set_max_fill(luaL_checkuint32(L, 3));
 	return 0;

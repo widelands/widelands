@@ -1416,8 +1416,8 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
 		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
-		                                                          UI::FontStyle::kWuiTooltip :
-		                                                          UI::FontStyle::kFsTooltip);
+                                                                UI::FontStyle::kWuiTooltip :
+                                                                UI::FontStyle::kFsTooltip);
 	}
 
 	constexpr int kTipWidthMax = 360;

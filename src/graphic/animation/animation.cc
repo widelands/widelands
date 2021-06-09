@@ -127,8 +127,8 @@ const Vector2i& Animation::hotspot() const {
 uint32_t Animation::current_frame(uint32_t time) const {
 	if (nr_frames() > 1) {
 		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
-		          static_cast<uint32_t>(nr_frames() - 1) :
-		          time / frametime_ % nr_frames();
+                static_cast<uint32_t>(nr_frames() - 1) :
+                time / frametime_ % nr_frames();
 	}
 	return 0;
 }
