@@ -367,7 +367,6 @@ void MultilineEditbox::set_caret_pos(const size_t caret) const {
 	d_->set_cursor_pos(d_->snap_to_char(caret));
 }
 
-
 /**
  * This is called by the UI code whenever a key press or release arrives
  */

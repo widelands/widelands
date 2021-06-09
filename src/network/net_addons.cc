@@ -96,7 +96,8 @@ void NetAddons::init(std::string username, std::string password) {
 	sockaddr_in server;
 	server.sin_family = AF_INET;
 	server.sin_port = htons(get_config_int("addon_server_port", 7399));
-	server.sin_addr.s_addr = inet_addr(get_config_string("addon_server_ip", "127.0.0.1" /* NOCOM */).c_str());
+	server.sin_addr.s_addr =
+	   inet_addr(get_config_string("addon_server_ip", "127.0.0.1" /* NOCOM */).c_str());
 	if (connect(client_socket_, reinterpret_cast<sockaddr*>(&server), sizeof(server)) < 0) {
 		throw WLWarning("", "Unable to connect to the server");
 	}
@@ -233,7 +234,7 @@ static void check_checksum(const std::string& path, const std::string& checksum)
 	const std::string md5 = md5sum.get_checksum().str();
 	if (checksum != md5) {
 		throw WLWarning("", "Downloaded file '%s': Checksum mismatch, found %s, expected %s",
-		                 path.c_str(), md5.c_str(), checksum.c_str());
+		                path.c_str(), md5.c_str(), checksum.c_str());
 	}
 }
 
@@ -380,8 +381,9 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
 	} else {
 		g_fs->ensure_directory_exists(kTempFileDir);
-		const std::string path = kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
-				std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
+		const std::string path =
+		   kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
+		   std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
 		read_file(icon_file_size, path);
 		check_checksum(path, icon_checksum);
 		a.icon = g_image_cache->get(path);
@@ -393,7 +395,9 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	return a;
 }
 
-void NetAddons::download_addon(const std::string& name, const std::string& save_as, const CallbackFn& progress) {
+void NetAddons::download_addon(const std::string& name,
+                               const std::string& save_as,
+                               const CallbackFn& progress) {
 	check_string_validity(name);
 	init();
 	CrashGuard guard(*this);
@@ -448,7 +452,10 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 	guard.ok();
 }
 
-void NetAddons::download_i18n(const std::string& name, const std::string& directory, const CallbackFn& progress, const CallbackFn& init_fn) {
+void NetAddons::download_i18n(const std::string& name,
+                              const std::string& directory,
+                              const CallbackFn& progress,
+                              const CallbackFn& init_fn) {
 	check_string_validity(name);
 	init();
 	CrashGuard guard(*this);
@@ -531,7 +538,8 @@ void NetAddons::comment(const AddOnInfo& addon, std::string message, const long 
 	send += ' ';
 	send += addon.internal_name;
 	send += ' ';
-	send += (index_to_edit < 0) ? version_to_string(addon.version, false) : std::to_string(index_to_edit);
+	send +=
+	   (index_to_edit < 0) ? version_to_string(addon.version, false) : std::to_string(index_to_edit);
 	send += ' ';
 
 	unsigned nr_lines = 1;
@@ -563,7 +571,9 @@ void NetAddons::comment(const AddOnInfo& addon, std::string message, const long 
 	guard.ok();
 }
 
-static size_t gather_addon_content(const std::string& current_dir, const std::string& prefix, std::map<std::string, std::set<std::string>>& result) {
+static size_t gather_addon_content(const std::string& current_dir,
+                                   const std::string& prefix,
+                                   std::map<std::string, std::set<std::string>>& result) {
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
@@ -580,7 +590,9 @@ static size_t gather_addon_content(const std::string& current_dir, const std::st
 	return nr_files;
 }
 
-void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress, const CallbackFn& init_fn) {
+void NetAddons::upload_addon(const std::string& name,
+                             const CallbackFn& progress,
+                             const CallbackFn& init_fn) {
 	check_string_validity(name);
 	init();
 
@@ -646,7 +658,9 @@ void NetAddons::upload_addon(const std::string& name, const CallbackFn& progress
 	guard.ok();
 }
 
-void NetAddons::upload_screenshot(const std::string& addon, const std::string& image, const std::string& description) {
+void NetAddons::upload_screenshot(const std::string& addon,
+                                  const std::string& image,
+                                  const std::string& description) {
 	check_string_validity(addon);
 	if (description.find('\n') != std::string::npos) {
 		throw WLWarning("", "Screenshot descriptions may not contain newlines");

@@ -156,8 +156,10 @@ void fill_parameter_vector() {
 	  {"", "registered", _("[true|false*]"),
 		_("Whether the used metaserver login is for a registered user"), true},
 	  {"", "password_sha1", _("[...]"), _("The hashed password for online logins"), true},
-	  {"", "addon_server_ip", _("IP"), _("Connect to a different server address from the add-ons manager"), false},
-	  {"", "addon_server_port", _("n"), _("Connect to a different server port from the add-ons manager"), false},
+	  {"", "addon_server_ip", _("IP"),
+		_("Connect to a different server address from the add-ons manager"), false},
+	  {"", "addon_server_port", _("n"),
+		_("Connect to a different server port from the add-ons manager"), false},
 
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),

@@ -89,32 +89,67 @@ struct OperationCancelledByUserException {};
 class AddOnsLoginBox : public UI::Window {
 public:
 	explicit AddOnsLoginBox(AddOnsCtrl& ctrl)
-	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-                "login", 0, 0, 100, 100, _("Login")),
-     password_sha1_(get_config_string("password_sha1", "")),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     left_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     right_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     username_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
-     password_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
-     ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-     cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
-     reset_(&buttons_box_, "reset", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Reset"))
-	{
+	   : UI::Window(&ctrl.get_topmost_forefather(),
+	                UI::WindowStyle::kFsMenu,
+	                "login",
+	                0,
+	                0,
+	                100,
+	                100,
+	                _("Login")),
+	     password_sha1_(get_config_string("password_sha1", "")),
+	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     left_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     right_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     username_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
+	     password_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
+	     ok_(&buttons_box_,
+	         "ok",
+	         0,
+	         0,
+	         kRowButtonSize,
+	         kRowButtonSize,
+	         UI::ButtonStyle::kFsMenuPrimary,
+	         _("OK")),
+	     cancel_(&buttons_box_,
+	             "cancel",
+	             0,
+	             0,
+	             kRowButtonSize,
+	             kRowButtonSize,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             _("Cancel")),
+	     reset_(&buttons_box_,
+	            "reset",
+	            0,
+	            0,
+	            kRowButtonSize,
+	            kRowButtonSize,
+	            UI::ButtonStyle::kFsMenuSecondary,
+	            _("Reset")) {
 		UI::MultilineTextarea* m = new UI::MultilineTextarea(
 		   &box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
 		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 		m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
-		m->set_text((boost::format(_("In order to use a registered account, you need an account on the Widelands website. Please log in at %s and set an online gaming password on your profile page.")) % "\n\nhttps://widelands.org/accounts/register/\n\n").str());
+		m->set_text(
+		   (boost::format(_(
+		       "In order to use a registered account, you need an account on the Widelands website. "
+		       "Please log in at %s and set an online gaming password on your profile page.")) %
+		    "\n\nhttps://widelands.org/accounts/register/\n\n")
+		      .str());
 
 		left_box_.add_inf_space();
-		left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-				_("Username:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+		left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu,
+		                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Username:"),
+		                               UI::Align::kRight),
+		              UI::Box::Resizing::kFullSize);
 		left_box_.add_inf_space();
-		left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-				_("Password:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+		left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu,
+		                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Password:"),
+		                               UI::Align::kRight),
+		              UI::Box::Resizing::kFullSize);
 		left_box_.add_inf_space();
 
 		right_box_.add(&username_, UI::Box::Resizing::kExpandBoth);
@@ -213,77 +248,113 @@ private:
 
 class ScreenshotUploadWindow : public UI::Window {
 public:
-	explicit ScreenshotUploadWindow(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, std::shared_ptr<AddOns::AddOnInfo> remote)
-	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-                "upload_screenshot", 0, 0, 100, 100, (boost::format(_("Upload Screenshot for ‘%s’")) % info->internal_name).str()),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     descrbox_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     ok_(&buttons_box_, "ok", 0, 0, 7 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("Upload")),
-     cancel_(&buttons_box_, "cancel", 0, 0, 7 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
-     images_(&hbox_, 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
-     icon_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, 640, 360, nullptr),
-     description_(&descrbox_, 0, 0, 300, UI::PanelStyle::kFsMenu),
-     progress_(&buttons_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter) {
-	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
-	buttons_box_.add(&progress_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
-	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	explicit ScreenshotUploadWindow(AddOnsCtrl& ctrl,
+	                                std::shared_ptr<AddOns::AddOnInfo> info,
+	                                std::shared_ptr<AddOns::AddOnInfo> remote)
+	   : UI::Window(&ctrl.get_topmost_forefather(),
+	                UI::WindowStyle::kFsMenu,
+	                "upload_screenshot",
+	                0,
+	                0,
+	                100,
+	                100,
+	                (boost::format(_("Upload Screenshot for ‘%s’")) % info->internal_name).str()),
+	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     descrbox_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     ok_(&buttons_box_,
+	         "ok",
+	         0,
+	         0,
+	         7 * kRowButtonSize,
+	         kRowButtonSize,
+	         UI::ButtonStyle::kFsMenuPrimary,
+	         _("Upload")),
+	     cancel_(&buttons_box_,
+	             "cancel",
+	             0,
+	             0,
+	             7 * kRowButtonSize,
+	             kRowButtonSize,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             _("Cancel")),
+	     images_(&hbox_, 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
+	     icon_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, 640, 360, nullptr),
+	     description_(&descrbox_, 0, 0, 300, UI::PanelStyle::kFsMenu),
+	     progress_(&buttons_box_,
+	               UI::PanelStyle::kFsMenu,
+	               UI::FontStyle::kFsMenuLabel,
+	               "",
+	               UI::Align::kCenter) {
+		buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+		buttons_box_.add(&progress_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+		buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
 
-	descrbox_.add(new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-			_("Description:"), UI::Align::kRight), UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	descrbox_.add_space(kRowButtonSpacing);
-	descrbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
+		descrbox_.add(new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu,
+		                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
+		                               UI::Align::kRight),
+		              UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		descrbox_.add_space(kRowButtonSpacing);
+		descrbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
 
-	vbox_.add(&icon_, UI::Box::Resizing::kExpandBoth);
-	vbox_.add_space(kRowButtonSpacing);
-	vbox_.add(&descrbox_, UI::Box::Resizing::kExpandBoth);
+		vbox_.add(&icon_, UI::Box::Resizing::kExpandBoth);
+		vbox_.add_space(kRowButtonSpacing);
+		vbox_.add(&descrbox_, UI::Box::Resizing::kExpandBoth);
 
-	hbox_.add(&images_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kRowButtonSpacing);
-	hbox_.add(&vbox_, UI::Box::Resizing::kExpandBoth);
+		hbox_.add(&images_, UI::Box::Resizing::kExpandBoth);
+		hbox_.add_space(kRowButtonSpacing);
+		hbox_.add(&vbox_, UI::Box::Resizing::kExpandBoth);
 
-	box_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kRowButtonSpacing);
-	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+		box_.add(&hbox_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
-	description_.set_tooltip(_("Description"));
-	for (const std::string& img : g_fs->list_directory(kScreenshotsDir)) {
-		images_.add(FileSystem::fs_filename(img.c_str()), img);
-	}
-
-	images_.selected.connect([this](uint32_t) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
-	cancel_.sigclicked.connect([this]() { die(); });
-	ok_.sigclicked.connect([this, &ctrl, info, remote]() {
-		if (!images_.has_selection() || description_.text().empty()) { return; }
-		const std::string& sel = images_.get_selected();
-		progress_.set_text(_("Uploading…"));
-		ok_.set_enabled(false);
-		cancel_.set_enabled(false);
-		do_redraw_now();
-		try {
-			ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
-			if (remote.get() != nullptr) {
-				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
-				ctrl.rebuild();
-			}
-			die();
-		} catch (const std::exception& e) {
-			log_err("Upload screenshot %s for %s: %s", sel.c_str(), info->internal_name.c_str(), e.what());
-			progress_.set_text("");
-			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-					(boost::format(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the server.\n\nError Message:\n%3$s"))
-							% sel % info->internal_name % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
-			m.run<UI::Panel::Returncodes>();
-			ok_.set_enabled(true);
-			cancel_.set_enabled(true);
+		description_.set_tooltip(_("Description"));
+		for (const std::string& img : g_fs->list_directory(kScreenshotsDir)) {
+			images_.add(FileSystem::fs_filename(img.c_str()), img);
 		}
-	});
 
-	set_center_panel(&box_);
-	center_to_parent();
-}
+		images_.selected.connect(
+		   [this](uint32_t) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
+		cancel_.sigclicked.connect([this]() { die(); });
+		ok_.sigclicked.connect([this, &ctrl, info, remote]() {
+			if (!images_.has_selection() || description_.text().empty()) {
+				return;
+			}
+			const std::string& sel = images_.get_selected();
+			progress_.set_text(_("Uploading…"));
+			ok_.set_enabled(false);
+			cancel_.set_enabled(false);
+			do_redraw_now();
+			try {
+				ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
+				if (remote.get() != nullptr) {
+					*remote = ctrl.net().fetch_one_remote(remote->internal_name);
+					ctrl.rebuild();
+				}
+				die();
+			} catch (const std::exception& e) {
+				log_err("Upload screenshot %s for %s: %s", sel.c_str(), info->internal_name.c_str(),
+				        e.what());
+				progress_.set_text("");
+				UI::WLMessageBox m(
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+				   (boost::format(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded "
+				                    "to the server.\n\nError Message:\n%3$s")) %
+				    sel % info->internal_name % e.what())
+				      .str(),
+				   UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+				ok_.set_enabled(true);
+				cancel_.set_enabled(true);
+			}
+		});
+
+		set_center_panel(&box_);
+		center_to_parent();
+	}
 
 	void think() override {
 		ok_.set_enabled(images_.has_selection() && !description_.text().empty());
@@ -302,59 +373,84 @@ private:
 class ContactForm : public UI::Window {
 public:
 	explicit ContactForm(AddOnsCtrl& ctrl)
-	: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-                "contact", 0, 0, 100, 100, _("Contact Form")),
-	ctrl_(ctrl),
-	box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-	message_(new UI::MultilineEditbox(&box_, 0, 0, 400, 200, UI::PanelStyle::kFsMenu)),
-	ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("Send message")),
-	cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"))
-{
-	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kRowButtonSpacing);
-	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+	   : UI::Window(&ctrl.get_topmost_forefather(),
+	                UI::WindowStyle::kFsMenu,
+	                "contact",
+	                0,
+	                0,
+	                100,
+	                100,
+	                _("Contact Form")),
+	     ctrl_(ctrl),
+	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     message_(new UI::MultilineEditbox(&box_, 0, 0, 400, 200, UI::PanelStyle::kFsMenu)),
+	     ok_(&buttons_box_,
+	         "ok",
+	         0,
+	         0,
+	         kRowButtonSize,
+	         kRowButtonSize,
+	         UI::ButtonStyle::kFsMenuPrimary,
+	         _("Send message")),
+	     cancel_(&buttons_box_,
+	             "cancel",
+	             0,
+	             0,
+	             kRowButtonSize,
+	             kRowButtonSize,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             _("Cancel")) {
+		buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(kRowButtonSpacing);
+		buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
-	box_.add(message_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kRowButtonSpacing);
-	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+		box_.add(message_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
-	check_ok_button_enabled();
+		check_ok_button_enabled();
 
-	cancel_.sigclicked.connect([this]() { die(); });
-	ok_.sigclicked.connect([this]() {
-		if (!check_ok_button_enabled()) {
-			return;
-		}
-		UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Send Message"), _("Send this message now?"), UI::WLMessageBox::MBoxType::kOkCancel);
-		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-			return;
-		}
-		try {
-			ctrl_.net().contact(message_->get_text());
-		} catch (const std::exception& e) {
-			log_err("contact error: %s", e.what());
+		cancel_.sigclicked.connect([this]() { die(); });
+		ok_.sigclicked.connect([this]() {
+			if (!check_ok_button_enabled()) {
+				return;
+			}
+			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Send Message"),
+			                   _("Send this message now?"), UI::WLMessageBox::MBoxType::kOkCancel);
+			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return;
+			}
+			try {
+				ctrl_.net().contact(message_->get_text());
+			} catch (const std::exception& e) {
+				log_err("contact error: %s", e.what());
+				UI::WLMessageBox m(
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+				   (boost::format(_("Unable to submit your enquiry.\nError message:\n%s")) % e.what())
+				      .str(),
+				   UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+				return;
+			}
+
+			die();
 			UI::WLMessageBox m(
-			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("Unable to submit your enquiry.\nError message:\n%s")) % e.what()).str(),
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Sent"),
+			   _("Your message has been sent to the Widelands Development Team, and we will respond "
+			     "as soon as we can. Don’t forget to check your website inbox frequently."),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
-			return;
-		}
+		});
 
-		die();
-		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Sent"), _("Your message has been sent to the Widelands Development Team, and we will respond as soon as we can. Don’t forget to check your website inbox frequently."), UI::WLMessageBox::MBoxType::kOk);
-		m.run<UI::Panel::Returncodes>();
-	});
+		set_center_panel(&box_);
+		center_to_parent();
+	}
 
-	set_center_panel(&box_);
-	center_to_parent();
-}
-
-void think() override {
-	UI::Window::think();
-	check_ok_button_enabled();
-}
+	void think() override {
+		UI::Window::think();
+		check_ok_button_enabled();
+	}
 
 private:
 	AddOnsCtrl& ctrl_;
@@ -479,31 +575,32 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                  UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_(&dev_box_,
                    "upload_addon",
-				 0,
-				 0,
-				 get_inner_w() / 2,
-				 8,
-				 kRowButtonSize,
-				 _("Choose add-on to upload…"),
-				 UI::DropdownType::kTextualMenu,
-				 UI::PanelStyle::kFsMenu,
-				 UI::ButtonStyle::kFsMenuSecondary),
+                   0,
+                   0,
+                   get_inner_w() / 2,
+                   8,
+                   kRowButtonSize,
+                   _("Choose add-on to upload…"),
+                   UI::DropdownType::kTextualMenu,
+                   UI::PanelStyle::kFsMenu,
+                   UI::ButtonStyle::kFsMenuSecondary),
      upload_screenshot_(&dev_box_,
-                   "upload_screenie",
-				 0,
-				 0,
-				 get_inner_w() / 2,
-				 8,
-				 kRowButtonSize,
-				 _("Upload a screenshot…"),
-				 UI::DropdownType::kTextualMenu,
-				 UI::PanelStyle::kFsMenu,
-				 UI::ButtonStyle::kFsMenuSecondary),
+                        "upload_screenie",
+                        0,
+                        0,
+                        get_inner_w() / 2,
+                        8,
+                        kRowButtonSize,
+                        _("Upload a screenshot…"),
+                        UI::DropdownType::kTextualMenu,
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_accept_(&dev_box_,
-                      UI::PanelStyle::kFsMenu,
-                      Vector2i(0, 0),
-                      _("Understood and confirmed"),
-                      _("By ticking this checkbox, you confirm that you have read and agree to the above terms.")),
+                          UI::PanelStyle::kFsMenu,
+                          Vector2i(0, 0),
+                          _("Understood and confirmed"),
+                          _("By ticking this checkbox, you confirm that you have read and agree to "
+                            "the above terms.")),
      filter_reset_(&browse_addons_buttons_inner_box_2_,
                    "f_reset",
                    0,
@@ -593,17 +690,17 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                       0,
                       UI::ButtonStyle::kFsMenuSecondary,
                       _("Launch the add-ons packager…")),
-     login_button_(this,
-                   "login",
-                   0,
-                   0,
-                   0,
-                   0,
-                   UI::ButtonStyle::kFsMenuSecondary,
-                   ""),
-     contact_(&dev_box_, "contact", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-		                  /** TRANSLATORS: This button allows the user to send a message to the Widelands Development Team */
-		                  _("Contact us…")) {
+     login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, ""),
+     contact_(&dev_box_,
+              "contact",
+              0,
+              0,
+              0,
+              0,
+              UI::ButtonStyle::kFsMenuSecondary,
+              /** TRANSLATORS: This button allows the user to send a message to the Widelands
+                 Development Team */
+              _("Contact us…")) {
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(
@@ -664,12 +761,32 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-	      (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p><p>%s</p></rt>")
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("Here, you can upload your add-ons to the server to make them available to other players. By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."))
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead."))
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("You are required to have read the add-ons documentation under the link given further above before submitting content. Since the documentation is subject to frequent changes, ensure that you have read it recently and that you followed all guidelines stated there."))
-	       % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("The Widelands Development Team will review your add-on soon after uploading. In case they have further inquiries, they will contact you via a PM on the Widelands website; therefore please check the inbox of your online user profile page frequently."))
-	      ).str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	      (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p><p>%s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             _("Here, you can upload your add-ons to the server to make them available to other "
+	               "players. By uploading, you agree to publish your creation under the terms of "
+	               "the GNU General Public License (GPL) version 2 (the same license under which "
+	               "Widelands itself is distributed). For more information on the GPL, please refer "
+	               "to ‘About Widelands’ → ‘License’ in the main menu.")) %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(_(
+	             "It is forbidden to upload add-ons containing harmful or malicious content or "
+	             "spam. By uploading an add-on, you assert that the add-on is of your own creation "
+	             "or you have the add-on’s author(s) permission to submit it in their stead.")) %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             _("You are required to have read the add-ons documentation under the link given "
+	               "further above before submitting content. Since the documentation is subject to "
+	               "frequent changes, ensure that you have read it recently and that you followed "
+	               "all guidelines stated there.")) %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(_("The Widelands Development Team will review your add-on soon after "
+	                         "uploading. In case they have further inquiries, they will contact you "
+	                         "via a PM on the Widelands website; therefore please check the inbox "
+	                         "of your online user profile page frequently.")))
+	         .str(),
+	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 
 	dev_box_.add_space(kRowButtonSpacing);
@@ -680,9 +797,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add(&upload_screenshot_);
 
 	upload_addon_accept_.changed.connect([this]() { update_login_button(nullptr); });
-	upload_addon_.selected.connect([this]() {
-		upload_addon(upload_addon_.get_selected());
-	});
+	upload_addon_.selected.connect([this]() { upload_addon(upload_addon_.get_selected()); });
 	upload_screenshot_.selected.connect([this]() {
 		upload_screenshot_.set_list_visibility(false);
 		std::shared_ptr<AddOns::AddOnInfo> info = upload_screenshot_.get_selected();
@@ -697,7 +812,10 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      (boost::format("<rt><p>%1$s</p></rt>") %
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	          .as_font_tag(
-	             (boost::format(_("Technical problems? Unclear documentation? Advanced needs such as deletion of an add-on or collaborating with another add-on designer? Please visit our forums at %s, explain your needs, and the Widelands Development Team will be happy to help.")) %
+	             (boost::format(_("Technical problems? Unclear documentation? Advanced needs such "
+	                              "as deletion of an add-on or collaborating with another add-on "
+	                              "designer? Please visit our forums at %s, explain your needs, and "
+	                              "the Widelands Development Team will be happy to help.")) %
 	              underline_tag(kForumURL))
 	                .str()))
 	         .str(),
@@ -707,14 +825,21 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	add_button(kForumURL);
 
 	dev_box_.add_space(kRowButtonSize);
-	dev_box_.add(
-	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-	      (boost::format("<rt><p>%1$s</p></rt>") %
-	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
-				_("Alternatively you can also send a message to the Widelands Development Team and we’ll try to help you with your enquiry as soon as we can. Only the server administrators can read messages sent in this way. Since other add-on designers can usually benefit from others’ questions and answers, please use this way of communication only if there is a reason why your concern is not for everyone’s ears. You’ll receive our reply via a PM on your Widelands website user profile page.")))
-			.str(), UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	   UI::Box::Resizing::kFullSize);
+	dev_box_.add(new UI::MultilineTextarea(
+	                &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	                (boost::format("<rt><p>%1$s</p></rt>") %
+	                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                    .as_font_tag(_(
+	                       "Alternatively you can also send a message to the Widelands Development "
+	                       "Team and we’ll try to help you with your enquiry as soon as we can. "
+	                       "Only the server administrators can read messages sent in this way. "
+	                       "Since other add-on designers can usually benefit from others’ questions "
+	                       "and answers, please use this way of communication only if there is a "
+	                       "reason why your concern is not for everyone’s ears. You’ll receive our "
+	                       "reply via a PM on your Widelands website user profile page.")))
+	                   .str(),
+	                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	             UI::Box::Resizing::kFullSize);
 	contact_.sigclicked.connect([this]() {
 		ContactForm c(*this);
 		c.run<UI::Panel::Returncodes>();
@@ -860,8 +985,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 					           .str();
 				}
 			}
-			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade All"), text,
-			                   UI::WLMessageBox::MBoxType::kOkCancel);
+			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade All"),
+			                   text, UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
@@ -1002,7 +1127,8 @@ void AddOnsCtrl::update_login_button(UI::Button* b) {
 		upload_addon_accept_.set_state(false);
 		if (b) {
 			b->set_title(_("Not logged in"));
-			b->set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload your own add-ons."));
+			b->set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload "
+			                 "your own add-ons."));
 		}
 		upload_addon_.set_enabled(false);
 		upload_addon_.set_tooltip(_("Please log in to upload add-ons"));
@@ -1013,20 +1139,27 @@ void AddOnsCtrl::update_login_button(UI::Button* b) {
 	} else {
 		upload_addon_accept_.set_enabled(true);
 		if (b) {
-			b->set_title((boost::format(net().is_admin() ? _("Logged in as %s (admin)") : _("Logged in as %s")) % username_).str());
+			b->set_title(
+			   (boost::format(net().is_admin() ? _("Logged in as %s (admin)") : _("Logged in as %s")) %
+			    username_)
+			      .str());
 			b->set_tooltip(_("Click to log out"));
 		}
 		const bool enable = upload_addon_accept_.get_state();
 		upload_addon_.set_enabled(enable);
-		upload_addon_.set_tooltip(enable ? "" : _("Please tick the confirmation checkbox to upload add-ons"));
+		upload_addon_.set_tooltip(
+		   enable ? "" : _("Please tick the confirmation checkbox to upload add-ons"));
 		upload_screenshot_.set_enabled(enable);
-		upload_screenshot_.set_tooltip(enable ? "" : _("Please tick the confirmation checkbox to upload content"));
+		upload_screenshot_.set_tooltip(
+		   enable ? "" : _("Please tick the confirmation checkbox to upload content"));
 		contact_.set_enabled(true);
 		contact_.set_tooltip("");
 	}
 }
 
-void AddOnsCtrl::set_login(const std::string& username, const std::string& password, const bool show_error) {
+void AddOnsCtrl::set_login(const std::string& username,
+                           const std::string& password,
+                           const bool show_error) {
 	if (password.empty() != username.empty()) {
 		return;
 	}
@@ -1045,17 +1178,19 @@ void AddOnsCtrl::set_login(const std::string& username, const std::string& passw
 			log_err("set_login (''): server error (%s)", e.what());
 			if (show_error) {
 				UI::WLMessageBox m(
-					   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Server Error"),
-					   (boost::format(_("Unable to connect to the server.\nError message:\n%s")) % e.what()).str(),
-					   UI::WLMessageBox::MBoxType::kOk);
-					m.run<UI::Panel::Returncodes>();
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Server Error"),
+				   (boost::format(_("Unable to connect to the server.\nError message:\n%s")) % e.what())
+				      .str(),
+				   UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
 			}
 		} else {
 			log_err("set_login as '%s': access denied (%s)", username.c_str(), e.what());
 			if (show_error) {
 				UI::WLMessageBox m(
 				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Wrong Password"),
-				   (boost::format(_("The entered username or password is invalid:\n%s")) % e.what()).str(),
+				   (boost::format(_("The entered username or password is invalid:\n%s")) % e.what())
+				      .str(),
 				   UI::WLMessageBox::MBoxType::kOk);
 				m.run<UI::Panel::Returncodes>();
 			}
@@ -1188,8 +1323,8 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 		// no text filter given, so we accept it
 		return true;
 	}
-	for (const std::string& text :
-	     {info->descname(), info->author(), info->upload_username, info->internal_name, info->description()}) {
+	for (const std::string& text : {info->descname(), info->author(), info->upload_username,
+	                                info->internal_name, info->description()}) {
 		if (text.find(filter_name_.text()) != std::string::npos) {
 			// text filter found
 			return true;
@@ -1227,8 +1362,10 @@ void AddOnsCtrl::rebuild() {
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
 
-		upload_addon_.add(pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
-		upload_screenshot_.add(pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
+		upload_addon_.add(
+		   pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
+		upload_screenshot_.add(
+		   pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
 	}
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
@@ -1523,9 +1660,12 @@ static void install_translation(const std::string& temp_locale_path,
 void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 	upload_addon_.set_list_visibility(false);
 	{
-		UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upload"),
-				(boost::format(_("Do you really want to upload the add-on ‘%s’ to the server?")) % addon->internal_name).str(),
-				UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox w(
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upload"),
+		   (boost::format(_("Do you really want to upload the add-on ‘%s’ to the server?")) %
+		    addon->internal_name)
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
@@ -1534,18 +1674,21 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 	w.set_message_1((boost::format(_("Uploading ‘%s’…")) % addon->descname()).str());
 	try {
 		long nr_files = 0;
-		net().upload_addon(addon->internal_name, [this, &w, &nr_files](const std::string& f, const long l) {
-			w.set_message_2(f);
-			w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_files).str());
-			w.progressbar().set_state(l);
-			do_redraw_now();
-			if (w.is_dying()) {
-				throw OperationCancelledByUserException();
-			}
-		}, [this, &w, &nr_files](const std::string&, const long l) {
-			w.progressbar().set_total(l);
-			nr_files = l;
-		});
+		net().upload_addon(
+		   addon->internal_name,
+		   [this, &w, &nr_files](const std::string& f, const long l) {
+			   w.set_message_2(f);
+			   w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_files).str());
+			   w.progressbar().set_state(l);
+			   do_redraw_now();
+			   if (w.is_dying()) {
+				   throw OperationCancelledByUserException();
+			   }
+		   },
+		   [this, &w, &nr_files](const std::string&, const long l) {
+			   w.progressbar().set_total(l);
+			   nr_files = l;
+		   });
 		std::shared_ptr<AddOns::AddOnInfo> r = find_remote(addon->internal_name);
 		if (r.get() != nullptr) {
 			*r = net().fetch_one_remote(r->internal_name);
@@ -1558,18 +1701,23 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		UI::WLMessageBox m(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 		   (boost::format(
-			   _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s")) % addon->internal_name % e.what()).str(),
+		       _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s")) %
+		    addon->internal_name % e.what())
+		      .str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
 }
 
-// TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's requirements
-void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, const bool only_translations) {
+// TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's
+// requirements
+void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
+                                    const bool only_translations) {
 	ProgressIndicatorWindow w(&get_topmost_forefather(), remote->descname());
 	w.set_message_1((boost::format(_("Downloading ‘%s’…")) % remote->descname()).str());
 
-	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + remote->internal_name + kTempFileExtension;
+	std::string temp_dir =
+	   kTempFileDir + FileSystem::file_separator() + remote->internal_name + kTempFileExtension;
 	if (g_fs->file_exists(temp_dir)) {
 		g_fs->fs_unlink(temp_dir);
 	}
@@ -1582,15 +1730,16 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, c
 		try {
 			const std::string size = filesize_string(remote->total_file_size);
 			w.progressbar().set_total(remote->total_file_size);
-			net().download_addon(remote->internal_name, temp_dir, [this, &w, size](const std::string& f, const long l) {
-				w.set_message_2(f);
-				w.set_message_3((boost::format(_("%1% / %2%")) % filesize_string(l) % size).str());
-				w.progressbar().set_state(l);
-				do_redraw_now();
-				if (w.is_dying()) {
-					throw OperationCancelledByUserException();
-				}
-			});
+			net().download_addon(
+			   remote->internal_name, temp_dir, [this, &w, size](const std::string& f, const long l) {
+				   w.set_message_2(f);
+				   w.set_message_3((boost::format(_("%1% / %2%")) % filesize_string(l) % size).str());
+				   w.progressbar().set_state(l);
+				   do_redraw_now();
+				   if (w.is_dying()) {
+					   throw OperationCancelledByUserException();
+				   }
+			   });
 			success = true;
 		} catch (const OperationCancelledByUserException&) {
 			log_info("install addon %s cancelled by user", remote->internal_name.c_str());
@@ -1600,8 +1749,10 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, c
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(
-				   _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
-				     "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote->internal_name % e.what()).str(),
+			       _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
+			         "this add-on will be skipped.\n\nError Message:\n%2$s")) %
+			    remote->internal_name % e.what())
+			      .str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -1621,14 +1772,17 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, c
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == remote->internal_name) {
 				pair.first = AddOns::preload_addon(remote->internal_name);
-				enable_theme = (remote->category == AddOns::AddOnCategory::kTheme && template_dir() == AddOns::theme_addon_template_dir(remote->internal_name));
+				enable_theme =
+				   (remote->category == AddOns::AddOnCategory::kTheme &&
+				    template_dir() == AddOns::theme_addon_template_dir(remote->internal_name));
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
 			enable_theme = (remote->category == AddOns::AddOnCategory::kTheme);
-			AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote->internal_name), true));
+			AddOns::g_addons.push_back(
+			   std::make_pair(AddOns::preload_addon(remote->internal_name), true));
 		}
 	}
 
@@ -1639,18 +1793,21 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, c
 		w.progressbar().set_total(1);
 		long nr_translations = 0;
 		w.set_message_3("");
-		net().download_i18n(remote->internal_name, temp_dir, [this, &w, &nr_translations](const std::string& f, const long l) {
-			w.set_message_2(f);
-			w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_translations).str());
-			w.progressbar().set_state(l);
-			do_redraw_now();
-			if (w.is_dying()) {
-				throw OperationCancelledByUserException();
-			}
-		}, [this, &w, &nr_translations](const std::string&, const long l) {
-			nr_translations = l;
-			w.progressbar().set_total(std::max(l, 1l));
-		});
+		net().download_i18n(
+		   remote->internal_name, temp_dir,
+		   [this, &w, &nr_translations](const std::string& f, const long l) {
+			   w.set_message_2(f);
+			   w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_translations).str());
+			   w.progressbar().set_state(l);
+			   do_redraw_now();
+			   if (w.is_dying()) {
+				   throw OperationCancelledByUserException();
+			   }
+		   },
+		   [this, &w, &nr_translations](const std::string&, const long l) {
+			   nr_translations = l;
+			   w.progressbar().set_total(std::max(l, 1l));
+		   });
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
 			install_translation(n, remote->internal_name, remote->i18n_version);
@@ -1671,9 +1828,11 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote, c
 		w.set_visible(false);
 		UI::WLMessageBox m(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-		   (boost::format(
-		       _("The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
-		         "the translations will be skipped.\n\nError Message:\n%2$s")) % remote->internal_name % e.what()).str(),
+		   (boost::format(_("The translations for the add-on ‘%1$s’ could not be downloaded from the "
+		                    "server. Installing/upgrading "
+		                    "the translations will be skipped.\n\nError Message:\n%2$s")) %
+		    remote->internal_name % e.what())
+		      .str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
@@ -1886,9 +2045,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                                   "images/ui_basic/checkbox_empty.png"),
                      enabled ? _("Disable") : _("Enable"),
                      UI::Button::VisualState::kFlat),
-     icon_(this,
-               UI::PanelStyle::kFsMenu,
-               info_->icon),
+     icon_(this, UI::PanelStyle::kFsMenu, info_->icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
@@ -1983,7 +2140,8 @@ void InstalledAddOnRow::layout() {
 	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
 	version_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing,
 	                          kRowButtonSize + 3 * kRowButtonSpacing));
-	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing) - icon_size, 2 * kRowButtonSize + 3 * kRowButtonSpacing);
+	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing) - icon_size,
+	              2 * kRowButtonSize + 3 * kRowButtonSpacing);
 	txt_.set_pos(Vector2i(icon_size, 0));
 }
 
@@ -2024,7 +2182,15 @@ public:
 	     box_votes_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 	     voting_stats_(&box_votes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 	     box_comment_rows_placeholder_(&box_comments_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0),
-	     comments_header_(&box_comments_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	     comments_header_(&box_comments_,
+	                      0,
+	                      0,
+	                      0,
+	                      0,
+	                      UI::PanelStyle::kFsMenu,
+	                      "",
+	                      UI::Align::kLeft,
+	                      UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	     screenshot_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, nullptr),
 	     own_voting_(&box_votes_,
 	                 "voting",
@@ -2071,22 +2237,15 @@ public:
 	                      g_image_cache->get("images/ui_basic/scrollbar_left.png"),
 	                      _("Previous screenshot")),
 	     write_comment_(&box_comments_,
-	             "write_comment",
-	             0,
-	             0,
-	             0,
-	             0,
-	             UI::ButtonStyle::kFsMenuSecondary,
-	             _("Write a comment…")),
+	                    "write_comment",
+	                    0,
+	                    0,
+	                    0,
+	                    0,
+	                    UI::ButtonStyle::kFsMenuSecondary,
+	                    _("Write a comment…")),
 	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-     login_button_(this,
-                   "login",
-                   0,
-                   0,
-                   0,
-                   0,
-                   UI::ButtonStyle::kFsMenuSecondary,
-                   "") {
+	     login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "") {
 
 		ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
@@ -2100,9 +2259,11 @@ public:
 				parent_.net().vote(info_->internal_name, current_vote_);
 				*info_ = parent_.net().fetch_one_remote(info_->internal_name);
 			} catch (const std::exception& e) {
-				UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-					(boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
-					UI::WLMessageBox::MBoxType::kOk);
+				UI::WLMessageBox w(
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+				   (boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what())
+				      .str(),
+				   UI::WLMessageBox::MBoxType::kOk);
 				w.run<UI::Panel::Returncodes>();
 				return;
 			}
@@ -2143,9 +2304,8 @@ public:
 			   new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0,
 			                       UI::ProgressBar::Vertical);
 			voting_bars_[i]->set_show_percent(false);
-			voting_txt_[i] =
-			   new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel,
-			                    "", UI::Align::kCenter);
+			voting_txt_[i] = new UI::Textarea(
+			   box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter);
 
 			box->add(voting_bars_[i], UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 			box->add_space(kRowButtonSpacing);
@@ -2213,20 +2373,25 @@ public:
 			login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 			login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
 			box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
-			box_comment_rows_.set_size(box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());
+			box_comment_rows_.set_size(
+			   box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());
 		}
 		UI::Window::layout();
 	}
 
 	void update_data() {
-		(*tabs_.tabs().begin())->set_title((boost::format(_("Comments (%u)")) % info_->user_comments.size()).str());
-		(*tabs_.tabs().rbegin())->set_title((boost::format(_("Votes (%u)")) % info_->number_of_votes()).str());
+		(*tabs_.tabs().begin())
+		   ->set_title((boost::format(_("Comments (%u)")) % info_->user_comments.size()).str());
+		(*tabs_.tabs().rbegin())
+		   ->set_title((boost::format(_("Votes (%u)")) % info_->number_of_votes()).str());
 
-		voting_stats_summary_.set_text(info_->number_of_votes() ?
-	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                                      "Average rating: %1$.3f (%2$u votes)",
-	                                                      info_->number_of_votes())) % info_->average_rating() % info_->number_of_votes()).str() :
-	                              _("No votes yet"));
+		voting_stats_summary_.set_text(
+		   info_->number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+		                                                      "Average rating: %1$.3f (%2$u votes)",
+		                                                      info_->number_of_votes())) %
+		                               info_->average_rating() % info_->number_of_votes())
+		                                 .str() :
+		                              _("No votes yet"));
 
 		uint32_t most_votes = 1;
 		for (uint32_t v : info_->votes) {
@@ -2255,15 +2420,19 @@ public:
 			text = "<rt><p>";
 			if (comment.editor.empty()) {
 				text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag(time_string(comment.timestamp));
+				           .as_font_tag(time_string(comment.timestamp));
 			} else if (comment.editor == comment.username) {
 				text += g_style_manager->font_style(UI::FontStyle::kItalic)
-						.as_font_tag((boost::format(_("%1$s (edited on %2$s)"))
-						% time_string(comment.timestamp) % time_string(comment.edit_timestamp)).str());
+				           .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
+				                         time_string(comment.timestamp) %
+				                         time_string(comment.edit_timestamp))
+				                           .str());
 			} else {
 				text += g_style_manager->font_style(UI::FontStyle::kItalic)
-						.as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)"))
-						% time_string(comment.timestamp) % comment.editor % time_string(comment.edit_timestamp)).str());
+				           .as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)")) %
+				                         time_string(comment.timestamp) % comment.editor %
+				                         time_string(comment.edit_timestamp))
+				                           .str());
 			}
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
@@ -2369,24 +2538,52 @@ private:
 
 	UI::Box main_box_;
 	UI::TabPanel tabs_;
-	UI::Box box_comments_, box_comment_rows_, box_screenies_, box_screenies_buttons_, box_votes_, voting_stats_;
+	UI::Box box_comments_, box_comment_rows_, box_screenies_, box_screenies_buttons_, box_votes_,
+	   voting_stats_;
 	UI::Panel box_comment_rows_placeholder_;
 
 	class CommentEditor : public UI::Window {
 	public:
 		CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const long index)
-		: UI::Window(&ctrl.get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-            "write_comment", 0, 0, 100, 100, index < 0 ? _("Write Comment") : _("Edit Comment")),
-		info_(info), index_(index),
-		main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-		markup_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-		buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-		preview_(&main_box_, 0, 0, 300, 150, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
-		text_(new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu)),
-		ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-		reset_(&buttons_box_, "reset", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Reset")),
-		cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"))
-		{
+		   : UI::Window(&ctrl.get_topmost_forefather(),
+		                UI::WindowStyle::kFsMenu,
+		                "write_comment",
+		                0,
+		                0,
+		                100,
+		                100,
+		                index < 0 ? _("Write Comment") : _("Edit Comment")),
+		     info_(info),
+		     index_(index),
+		     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		     markup_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+		     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+		     preview_(&main_box_, 0, 0, 300, 150, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
+		     text_(new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu)),
+		     ok_(&buttons_box_,
+		         "ok",
+		         0,
+		         0,
+		         kRowButtonSize,
+		         kRowButtonSize,
+		         UI::ButtonStyle::kFsMenuPrimary,
+		         _("OK")),
+		     reset_(&buttons_box_,
+		            "reset",
+		            0,
+		            0,
+		            kRowButtonSize,
+		            kRowButtonSize,
+		            UI::ButtonStyle::kFsMenuSecondary,
+		            _("Reset")),
+		     cancel_(&buttons_box_,
+		             "cancel",
+		             0,
+		             0,
+		             kRowButtonSize,
+		             kRowButtonSize,
+		             UI::ButtonStyle::kFsMenuSecondary,
+		             _("Cancel")) {
 			if (ctrl.username().empty()) {
 				die();
 				return;
@@ -2398,33 +2595,38 @@ private:
 			buttons_box_.add_space(kRowButtonSpacing);
 			buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
-			auto markup_button = [this](const std::string& name, const std::string& open, const std::string& close, const std::string& title, const std::string& tt) {
-				UI::Button* b = new UI::Button(&markup_box_, name, 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuMenu, title, tt);
+			auto markup_button = [this](const std::string& name, const std::string& open,
+			                            const std::string& close, const std::string& title,
+			                            const std::string& tt) {
+				UI::Button* b = new UI::Button(&markup_box_, name, 0, 0, kRowButtonSize, kRowButtonSize,
+				                               UI::ButtonStyle::kFsMenuMenu, title, tt);
 				b->sigclicked.connect([this, open, close]() { apply_format(open, close); });
 				return b;
 			};
 			markup_box_.add(markup_button("markup_bold", "<font bold=true>", "</font>",
-					/** TRANSLATORS: Short for Bold text markup */
-					_("B"), _("Bold")));
+			                              /** TRANSLATORS: Short for Bold text markup */
+			                              _("B"), _("Bold")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_italic", "<font italic=true>", "</font>",
-					/** TRANSLATORS: Short for Italic text markup */
-					_("I"), _("Italic")));
+			                              /** TRANSLATORS: Short for Italic text markup */
+			                              _("I"), _("Italic")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_line", "<font underline=true>", "</font>",
-					/** TRANSLATORS: Short for Underline text markup */
-					_("_"), _("Underline")));
+			                              /** TRANSLATORS: Short for Underline text markup */
+			                              _("_"), _("Underline")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_shadow", "<font shadow=true>", "</font>",
-					/** TRANSLATORS: Short for Shadow text markup */
-					_("S"), _("Shadow")));
+			                              /** TRANSLATORS: Short for Shadow text markup */
+			                              _("S"), _("Shadow")));
 			markup_box_.add_space(kRowButtonSpacing);
 			{
-				UI::Button* b = new UI::Button(&markup_box_, "markup_color", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuMenu,
-						/** TRANSLATORS: Short for Color text markup */
-						_("C"), _("Color…"));
+				UI::Button* b = new UI::Button(&markup_box_, "markup_color", 0, 0, kRowButtonSize,
+				                               kRowButtonSize, UI::ButtonStyle::kFsMenuMenu,
+				                               /** TRANSLATORS: Short for Color text markup */
+				                               _("C"), _("Color…"));
 				b->sigclicked.connect([this]() {
-					UI::ColorChooser c(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, RGBColor(0xffffff), nullptr);
+					UI::ColorChooser c(
+					   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, RGBColor(0xffffff), nullptr);
 					if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 						std::string str = "<font color=";
 						str += c.get_color().hex_value();
@@ -2436,24 +2638,24 @@ private:
 			}
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_tiny", "<font size=8>", "</font>",
-					/** TRANSLATORS: Short for Tiny text markup */
-					_("1"), _("Tiny")));
+			                              /** TRANSLATORS: Short for Tiny text markup */
+			                              _("1"), _("Tiny")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_small", "<font size=11>", "</font>",
-					/** TRANSLATORS: Short for Small text markup */
-					_("2"), _("Small")));
+			                              /** TRANSLATORS: Short for Small text markup */
+			                              _("2"), _("Small")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_normal", "<font size=14>", "</font>",
-					/** TRANSLATORS: Short for Medium text markup */
-					_("3"), _("Medium")));
+			                              /** TRANSLATORS: Short for Medium text markup */
+			                              _("3"), _("Medium")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_large", "<font size=18>", "</font>",
-					/** TRANSLATORS: Short for Large text markup */
-					_("4"), _("Large")));
+			                              /** TRANSLATORS: Short for Large text markup */
+			                              _("4"), _("Large")));
 			markup_box_.add_space(kRowButtonSpacing);
 			markup_box_.add(markup_button("markup_huge", "<font size=24>", "</font>",
-					/** TRANSLATORS: Short for Huge text markup */
-					_("5"), _("Huge")));
+			                              /** TRANSLATORS: Short for Huge text markup */
+			                              _("5"), _("Huge")));
 			markup_box_.add_space(kRowButtonSpacing);
 
 			main_box_.add(&markup_box_, UI::Box::Resizing::kAlign, UI::Align::kRight);
@@ -2476,10 +2678,14 @@ private:
 					*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 					end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 				} catch (const std::exception& e) {
-					log_err("Edit comment #%ld for %s: %s", index_, info_->internal_name.c_str(), e.what());
-					UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-							(boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) % e.what()).str(),
-							UI::WLMessageBox::MBoxType::kOk);
+					log_err(
+					   "Edit comment #%ld for %s: %s", index_, info_->internal_name.c_str(), e.what());
+					UI::WLMessageBox m(
+					   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+					   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
+					    e.what())
+					      .str(),
+					   UI::WLMessageBox::MBoxType::kOk);
 					m.run<UI::Panel::Returncodes>();
 				}
 			});
@@ -2506,7 +2712,8 @@ private:
 				message = message.replace(pos, 1, "<br>");
 			}
 
-			p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(message);
+			p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(message);
 			p += "</p></rt>";
 
 			ok_.set_enabled(!message.empty());
@@ -2518,9 +2725,11 @@ private:
 			} catch (const std::exception& e) {
 				ok_.set_enabled(false);
 				p = "<rt><p>";
-				p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("The comment contains invalid richtext markup:"));
+				p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+				        .as_font_tag(_("The comment contains invalid richtext markup:"));
 				p += "</p><p>";
-				p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(richtext_escape(e.what()));
+				p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				        .as_font_tag(richtext_escape(e.what()));
 				p += "</p></rt>";
 			}
 
@@ -2564,9 +2773,25 @@ private:
 
 	class CommentRow : public UI::MultilineTextarea {
 	public:
-		CommentRow(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, RemoteInteractionWindow& r, UI::Panel& parent, const std::string& text, const long index) : UI::MultilineTextarea(&parent, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
-				ctrl_(ctrl), info_(info), index_(index),
-				edit_(this, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Edit…")) {
+		CommentRow(AddOnsCtrl& ctrl,
+		           std::shared_ptr<AddOns::AddOnInfo> info,
+		           RemoteInteractionWindow& r,
+		           UI::Panel& parent,
+		           const std::string& text,
+		           const long index)
+		   : UI::MultilineTextarea(&parent,
+		                           0,
+		                           0,
+		                           0,
+		                           0,
+		                           UI::PanelStyle::kFsMenu,
+		                           text,
+		                           UI::Align::kLeft,
+		                           UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		     ctrl_(ctrl),
+		     info_(info),
+		     index_(index),
+		     edit_(this, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Edit…")) {
 			edit_.sigclicked.connect([this, &r]() {
 				if (ctrl_.username().empty()) {
 					return;
@@ -2580,10 +2805,13 @@ private:
 			update_edit_enabled();
 		}
 		void update_edit_enabled() {
-			/* Admins can edit all posts; normal users only their own posts and only if the post was never edited by an admin yet. */
-			edit_.set_visible(!ctrl_.username().empty() && (ctrl_.net().is_admin() || (
-				info_->user_comments[index_].username == ctrl_.username() &&
-				(info_->user_comments[index_].editor.empty() || info_->user_comments[index_].editor == ctrl_.username()))));
+			/* Admins can edit all posts; normal users only their own posts and only if the post was
+			 * never edited by an admin yet. */
+			edit_.set_visible(!ctrl_.username().empty() &&
+			                  (ctrl_.net().is_admin() ||
+			                   (info_->user_comments[index_].username == ctrl_.username() &&
+			                    (info_->user_comments[index_].editor.empty() ||
+			                     info_->user_comments[index_].editor == ctrl_.username()))));
 		}
 		void layout() override {
 			UI::MultilineTextarea::layout();
@@ -2652,9 +2880,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::ButtonStyle::kFsMenuSecondary,
                "…",
                _("Comments and Votes")),
-     icon_(this,
-               UI::PanelStyle::kFsMenu,
-               info_->icon),
+     icon_(this, UI::PanelStyle::kFsMenu, info_->icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
@@ -2870,7 +3096,8 @@ void RemoteAddOnRow::layout() {
 	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
 	verified_.set_pos(
 	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
-	txt_.set_size(get_w() - icon_size - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
+	txt_.set_size(
+	   get_w() - icon_size - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
 	txt_.set_pos(Vector2i(icon_size, 0));
 	bottom_row_left_.set_size(
 	   get_w() / 2 - kRowButtonSpacing, kRowButtonSize - 2 * kRowButtonSpacing);

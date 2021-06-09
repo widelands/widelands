@@ -49,7 +49,10 @@ struct NetAddons {
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
 	// The filename of the created MO files is guaranteed to be in the format
 	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	void download_i18n(const std::string& addon, const std::string& directory, const CallbackFn& progress, const CallbackFn& init_fn);
+	void download_i18n(const std::string& addon,
+	                   const std::string& directory,
+	                   const CallbackFn& progress,
+	                   const CallbackFn& init_fn);
 
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
@@ -58,11 +61,15 @@ struct NetAddons {
 	int get_vote(const std::string& addon);
 	void vote(const std::string& addon, unsigned vote);
 
-	// Write a new comment or edit an existing one. Negative `index_to_edit` indicates a new comment should be written.
+	// Write a new comment or edit an existing one. Negative `index_to_edit` indicates a new comment
+	// should be written.
 	void comment(const AddOnInfo& addon, std::string message, long index_to_edit = -1);
 
-	void upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
-	void upload_screenshot(const std::string& addon, const std::string& image, const std::string& description);
+	void
+	upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
+	void upload_screenshot(const std::string& addon,
+	                       const std::string& image,
+	                       const std::string& description);
 
 	void contact(std::string enquiry);
 
