@@ -232,10 +232,10 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		} else {
 			for (size_t i = 0; i < nr_addons; ++i) {
 				if (addons.empty()) {
-					addons = parent.egbase().enabled_addons()[i].descname();
+					addons = parent.egbase().enabled_addons()[i]->descname();
 				} else {
 					addons = (boost::format(_("%1$s; %2$s")) % addons %
-					          parent.egbase().enabled_addons()[i].descname())
+					          parent.egbase().enabled_addons()[i]->descname())
 					            .str();
 				}
 			}

@@ -299,57 +299,48 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 10, 36 },
       fps = 5
    },
    atk_ok_e = {
-      pictures = path.list_files(dirname .. "atk_ok_e_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_fail_e = {
-      pictures = path.list_files(dirname .. "atk_fail_e_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    eva_ok_e = {
-      pictures = path.list_files(dirname .. "eva_ok_e_??.png"),
       hotspot = { 36, 40 },
       fps = 20
    },
    eva_fail_e = {
-      pictures = path.list_files(dirname .. "eva_fail_e_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_ok_w = {
-      pictures = path.list_files(dirname .. "atk_ok_w_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_fail_w = {
-      pictures = path.list_files(dirname .. "atk_fail_w_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    eva_ok_w = {
-      pictures = path.list_files(dirname .. "eva_ok_w_??.png"),
       hotspot = { 36, 40 },
       fps = 20
    },
    eva_fail_w = {
-      pictures = path.list_files(dirname .. "eva_fail_w_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    die_w = {
-      pictures = path.list_files(dirname .. "die_??.png"),
+      basename = "die",
       hotspot = { 10, 36 },
       fps = 10
    },
    die_e = {
-      pictures = path.list_files(dirname .. "die_??.png"),
+      basename = "die",
       hotspot = { 10, 36 },
       fps = 10
    },

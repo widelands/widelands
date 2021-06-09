@@ -61,31 +61,22 @@ const std::string& get_homedir();
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct GenericTextdomain {
-	virtual ~GenericTextdomain() = default;
+public:
+	virtual ~GenericTextdomain();
+
+protected:
+	explicit GenericTextdomain();
+
+private:
+	MutexLock lock_;
 };
 struct Textdomain : GenericTextdomain {
 	// For all common purposes
-	explicit Textdomain(const std::string& name) : lock_(MutexLock::ID::kI18N) {
-		grab_textdomain(name, get_localedir().c_str());
-	}
-	~Textdomain() override {
-		release_textdomain();
-	}
-
-private:
-	MutexLock lock_;
+	explicit Textdomain(const std::string& name);
 };
 struct AddOnTextdomain : GenericTextdomain {
 	// For strings defined in an add-on
-	explicit AddOnTextdomain(const std::string& addon) : lock_(MutexLock::ID::kI18N) {
-		grab_textdomain(addon, get_addon_locale_dir().c_str());
-	}
-	~AddOnTextdomain() override {
-		release_textdomain();
-	}
-
-private:
-	MutexLock lock_;
+	explicit AddOnTextdomain(std::string addon, int i18n_version);
 };
 
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };

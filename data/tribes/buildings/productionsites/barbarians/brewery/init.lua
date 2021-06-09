@@ -9,13 +9,13 @@ descriptions:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 60, 59 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 60, 59 },
       },
    },
