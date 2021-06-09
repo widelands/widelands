@@ -167,9 +167,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Artifact",
    size = "small",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 14, 20 },
       },
    }

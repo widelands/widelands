@@ -19,17 +19,16 @@ descriptions:new_productionsite_type {
       planks = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 56 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 50, 56 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
          hotspot = { 50, 56 },
       },
    },
