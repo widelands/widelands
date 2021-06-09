@@ -883,7 +883,6 @@ void init_shortcuts(const bool force_defaults) {
 	}
 
 	Section& ss = get_config_section("keyboard_sym");
-	Section& sm = get_config_section("keyboard_mod");
 	while (Section::Value* v = ss.get_next_val()) {
 		for (auto& pair : shortcuts_) {
 			if (pair.second.internal_name == v->get_name()) {
@@ -892,6 +891,7 @@ void init_shortcuts(const bool force_defaults) {
 			}
 		}
 	}
+	Section& sm = get_config_section("keyboard_mod");
 	while (Section::Value* v = sm.get_next_val()) {
 		for (auto& pair : shortcuts_) {
 			if (pair.second.internal_name == v->get_name()) {
@@ -911,6 +911,7 @@ void set_config_directory(const std::string& userconfigdir) {
 void read_config() {
 	assert(config_dir != nullptr);
 	g_options.read(kConfigFile.c_str(), "global", *config_dir);
+	get_config_section();
 }
 
 void write_config() {

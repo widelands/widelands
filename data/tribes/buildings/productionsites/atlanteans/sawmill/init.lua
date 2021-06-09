@@ -18,13 +18,12 @@ descriptions:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 53, 60 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 53, 60 },
          fps = 25
       }
