@@ -5,9 +5,9 @@ import re
 
 class_re=re.compile(r'^class\s+(\w+)\s+:\s+public\s+(\w+)')
 
-tmp_cls = {}     # All classes in a file with classname as key. If this class is a child
+tmp_classes = {}     # All classes in a file with classname as key. If this class is a child
                      # of other classes the value is a list of ancestors, otherwise ''.
-descendant_cls = {}     # derived classes with a list of parent classes
+descendant_cls = {}  # derived classes with a list of parent classes
 main_cls = []    # main classes
 
 def parse_classes(file_name):
@@ -17,26 +17,31 @@ def parse_classes(file_name):
 
    if found_cls:
       mod_name = ''
-      for main_cl, der_cl in found_cls:
+      for main_cls, descendant in found_cls:
          # Strip out leading 'Lua'; this can't be done in the regexp because we need 'LunaClass'
-         main_cl = main_cl.replace('Lua','')
-         der_cl = der_cl.replace('Lua','')
+         main_cls = main_cls.replace('Lua','')
+         descendant = descendant.replace('Lua','')
 
          # find module name
-         if der_cl == "LunaClass":
-            mod_name = main_cl
+         if descendant == "LunaClass":
+            mod_name = main_cls
             continue
 
-         # feed tmp_cls
-         if der_cl == mod_name:
-            tmp_cls[main_cl]=''
-         else:
-            tmp_cls[main_cl]=der_cl
+         # feed tmp_classes
+         print("chck: ", main_cls, list(tmp_classes.keys()))
+         if main_cls not in list(tmp_classes.keys()):
+            if descendant == mod_name:
+               tmp_classes[main_cls] = []
+            else:
+               tmp_classes[main_cls]=[descendant]
+         if descendant in list(tmp_classes.keys()):
+            print("Appending: ", descendant)
+            tmp_classes[main_cls].append(descendant)
 
 parse_classes('/home/kaputtnik/Quellcode/widelands-repo/widelands/src/scripting/lua_map.h')
 
-print("\nAll classes:")
-for k, v in tmp_cls.items():
+print("\nAll classes:", tmp_classes)
+for k, v in tmp_classes.items():
   print(k, v)
 
 #graph_directive = """
