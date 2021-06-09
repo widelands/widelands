@@ -1261,23 +1261,23 @@ static void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info,
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   safe_richtext_message(
-		   (boost::format(local ?
-		                     _("Are you certain that you want to uninstall this add-on?\n\n"
-		                       "%1$s\n"
-		                       "by %2$s\n"
-		                       "Version %3$s\n"
-		                       "Category: %4$s\n"
-		                       "%5$s\n\n"
-		                       "Note that this add-on can not be downloaded again from the server.") :
-		                     _("Are you certain that you want to uninstall this add-on?\n\n"
-		                       "%1$s\n"
-		                       "by %2$s\n"
-		                       "Version %3$s\n"
-		                       "Category: %4$s\n"
-		                       "%5$s")) %
-		    info->descname() % info->author() % AddOns::version_to_string(info->version) %
-		    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
-		      .str()),
+		      (boost::format(
+		          local ? _("Are you certain that you want to uninstall this add-on?\n\n"
+		                    "%1$s\n"
+		                    "by %2$s\n"
+		                    "Version %3$s\n"
+		                    "Category: %4$s\n"
+		                    "%5$s\n\n"
+		                    "Note that this add-on can not be downloaded again from the server.") :
+		                  _("Are you certain that you want to uninstall this add-on?\n\n"
+		                    "%1$s\n"
+		                    "by %2$s\n"
+		                    "Version %3$s\n"
+		                    "Category: %4$s\n"
+		                    "%5$s")) %
+		       info->descname() % info->author() % AddOns::version_to_string(info->version) %
+		       AddOns::kAddOnCategories.at(info->category).descname() % info->description())
+		         .str()),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -2005,18 +2005,18 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
 			   safe_richtext_message(
-			   (boost::format(_("Are you certain that you want to install this add-on?\n\n"
-			                    "%1$s\n"
-			                    "by %2$s\n"
-			                    "%3$s\n"
-			                    "Version %4$s\n"
-			                    "Category: %5$s\n"
-			                    "%6$s\n")) %
-			    info_->descname() % info_->author() %
-			    (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
-			    AddOns::version_to_string(info_->version) %
-			    AddOns::kAddOnCategories.at(info_->category).descname() % info_->description())
-			      .str()),
+			      (boost::format(_("Are you certain that you want to install this add-on?\n\n"
+			                       "%1$s\n"
+			                       "by %2$s\n"
+			                       "%3$s\n"
+			                       "Version %4$s\n"
+			                       "Category: %5$s\n"
+			                       "%6$s\n")) %
+			       info_->descname() % info_->author() %
+			       (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
+			       AddOns::version_to_string(info_->version) %
+			       AddOns::kAddOnCategories.at(info_->category).descname() % info_->description())
+			         .str()),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -2030,20 +2030,20 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
 			   safe_richtext_message(
-			   (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
-			                    "%1$s\n"
-			                    "by %2$s\n"
-			                    "%3$s\n"
-			                    "Installed version: %4$s\n"
-			                    "Available version: %5$s\n"
-			                    "Category: %6$s\n"
-			                    "%7$s")) %
-			    info->descname() % info->author() %
-			    (info->verified ? _("Verified") : _("NOT VERIFIED")) %
-			    AddOns::version_to_string(installed_version) %
-			    AddOns::version_to_string(info->version) %
-			    AddOns::kAddOnCategories.at(info->category).descname() % info->description())
-			      .str()),
+			      (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
+			                       "%1$s\n"
+			                       "by %2$s\n"
+			                       "%3$s\n"
+			                       "Installed version: %4$s\n"
+			                       "Available version: %5$s\n"
+			                       "Category: %6$s\n"
+			                       "%7$s")) %
+			       info->descname() % info->author() %
+			       (info->verified ? _("Verified") : _("NOT VERIFIED")) %
+			       AddOns::version_to_string(installed_version) %
+			       AddOns::version_to_string(info->version) %
+			       AddOns::kAddOnCategories.at(info->category).descname() % info->description())
+			         .str()),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
