@@ -86,6 +86,10 @@ void Textarea::set_font_scale(float scale) {
 	update();
 }
 
+void Textarea::update_template() {
+	update();  // update rendered_text_
+}
+
 void Textarea::update() {
 	if (layoutmode_ == LayoutMode::AutoMove) {
 		collapse();  // collapse() implicitly updates the size and position

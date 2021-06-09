@@ -23,11 +23,14 @@
 #include <ctime>
 #include <functional>
 #include <map>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
 #include "base/i18n.h"
+#include "base/macros.h"
+#include "logic/filesystem_constants.h"
 
 namespace AddOns {
 
@@ -79,6 +82,8 @@ struct AddOnComment {
 constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
+	AddOnInfo() = default;
+	~AddOnInfo() = default;
 	/*
 	 * When adding any new add-on properties that are stored in the `addon` file,
 	 * be sure to add them to MutableAddon as well so they are preserved/updated
@@ -94,41 +99,54 @@ struct AddOnInfo {
 	std::function<std::string()> description;
 	std::function<std::string()> author;
 
-	AddOnVersion version;   // Add-on version (e.g. 1.2.3)
-	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)
+	AddOnVersion version;       // Add-on version (e.g. 1.2.3)
+	uint32_t i18n_version = 0;  // (see doc/sphinx/source/add-ons.rst)
 
-	AddOnCategory category;
+	AddOnCategory category = AddOnCategory::kNone;
 
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
-	bool sync_safe;              // Whether this add-on will not desync in MP and replays.
+	bool sync_safe = false;      // Whether this add-on will not desync in MP and replays.
 	std::string min_wl_version;  // Minimum required Widelands version, or "" if invalid.
 	std::string max_wl_version;  // Maximum supported Widelands version, or "" if invalid.
 
-	bool verified;  // Only valid for Remote add-ons.
+	bool verified = false;  // Only valid for Remote add-ons.
 
 	AddOnFileList file_list;  // Get rid of this ASAP
 	std::map<std::string /* name */, std::string /* description */> screenshots;
 
-	uint32_t total_file_size;     // total size of all files, in bytes
-	std::string upload_username;  // who uploaded (may be different from author)
+	uint32_t total_file_size = 0;  // total size of all files, in bytes
+	std::string upload_username;   // who uploaded (may be different from author)
 
 	// TODO(Nordfriese): These are not yet implemented on the server-side
-	std::time_t upload_timestamp;  // date and time when this version was uploaded
-	uint32_t download_count;       // total times downloaded
-	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
+	std::time_t upload_timestamp = 0;  // date and time when this version was uploaded
+	uint32_t download_count = 0;       // total times downloaded
+	uint32_t votes[kMaxRating] = {0};  // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
 
 	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
 	double average_rating() const;
 	bool requires_texture_atlas_rebuild() const;
+
+	DISALLOW_COPY_AND_ASSIGN(AddOnInfo);
 };
 
+using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;
+
+inline static std::string theme_addon_template_dir(const std::string& name) {
+	std::string s = kAddOnDir;
+	s += '/';
+	s += name;
+	s += '/';
+	return s;
+}
+
 // Sorted list of all add-ons mapped to whether they are currently enabled
-using AddOnState = std::pair<AddOnInfo, bool>;
+using AddOnState = std::pair<std::shared_ptr<AddOnInfo>, bool>;
 extern std::vector<AddOnState> g_addons;
+const AddOnInfo& find_addon(const std::string& name);
 
 extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
@@ -140,9 +158,12 @@ AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
-AddOnInfo preload_addon(const std::string&);
+std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 
 i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename);
+
+enum class UpdateThemeAction { kEnableArgument, kLoadFromConfig, kAutodetect };
+void update_ui_theme(UpdateThemeAction, std::string = "");
 
 // This guard allows you to modify `g_addons` in any way you like
 // and ensures that it is reset to the initial state later.

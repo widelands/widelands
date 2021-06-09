@@ -791,7 +791,7 @@ void MainMenu::layout() {
 
 bool MainMenu::check_desyncing_addon() {
 	for (const auto& pair : AddOns::g_addons) {
-		if (!pair.first.sync_safe && pair.second) {
+		if (!pair.first->sync_safe && pair.second) {
 			UI::WLMessageBox mmb(
 			   this, UI::WindowStyle::kFsMenu, _("Desyncing Add-On Found"),
 			   _("An enabled add-on is known to cause desyncs. Proceed at your own risk."),
@@ -907,40 +907,21 @@ void MainMenu::action(const MenuTarget t) {
 	} break;
 
 	case MenuTarget::kEditorNew:
-		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+		EditorInteractive::run_editor(this, EditorInteractive::Init::kNew);
 		set_labels();
 		break;
 	case MenuTarget::kEditorRandom:
-		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+		EditorInteractive::run_editor(this, EditorInteractive::Init::kRandom);
 		set_labels();
 		break;
 	case MenuTarget::kEditorLoad:
-		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+		EditorInteractive::run_editor(this, EditorInteractive::Init::kLoad);
 		set_labels();
 		break;
 	case MenuTarget::kEditorContinue: {
 		if (!filename_for_continue_editing_.empty()) {
-			try {
-				EditorInteractive::run_editor(
-				   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
-			} catch (const std::exception& e) {
-				log_err("##############################\n"
-				        "  FATAL EXCEPTION: %s\n"
-				        "##############################\n",
-				        e.what());
-				// Note: We don't necessarily want a bug report here, but the wording must
-				// be EXACTLY LIKE THIS in v1.0 to avoid adding a new translatable string
-				// during winter time freeze. We can consider rephrasing it after v1.0.
-				show_messagebox(
-				   _("Error"),
-				   (boost::format(
-				       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
-				         "this problem to help us improve Widelands. You will find related "
-				         "messages in the standard output (stdout.txt on Windows). You are using "
-				         "build %2$s (%3$s).\nPlease add this information to your report.")) %
-				    e.what() % build_id() % build_type())
-				      .str());
-			}
+			EditorInteractive::run_editor(
+			   this, EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
 			set_labels();
 		}
 		break;
