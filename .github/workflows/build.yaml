@@ -151,11 +151,6 @@ jobs:
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc)
         cd ..
-    - name: NOCOM uploading binary for testing
-      uses: actions/upload-artifact@v2
-      with:
-        name: FOR TESTING ${{ matrix.compiler }} ${{ matrix.config }}
-        path: ${{ github.workspace }}/build/src/widelands
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
@@ -170,7 +165,7 @@ jobs:
       run: |
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
-        # NOCOM ./regression_test.py -b build/src/widelands
+        ./regression_test.py -b build/src/widelands
 
 
   windows:
