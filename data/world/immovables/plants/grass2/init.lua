@@ -7,9 +7,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Grass",
    size = "none",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 10, 16 },
          sound_effect = {
             path = "sound/animals/frog",

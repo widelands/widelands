@@ -23,21 +23,20 @@ descriptions:new_productionsite_type {
       spidercloth = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 53, 66 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 53, 66 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 53, 66 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 53, 66 },
       }
    },

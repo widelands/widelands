@@ -20,9 +20,9 @@ descriptions:new_militarysite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 42, 65 },
       }
    },

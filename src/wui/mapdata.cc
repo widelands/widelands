@@ -189,7 +189,7 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (directory.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
 		std::string addon = directory.substr(kAddOnDir.size() + 1);
 		addon = addon.substr(0, addon.find('/'));
-		i18n::AddOnTextdomain td(addon);
+		i18n::AddOnTextdomain td(addon, AddOns::find_addon(addon).i18n_version);
 		std::string profilepath = kAddOnDir;
 		profilepath += FileSystem::file_separator();
 		profilepath += addon;

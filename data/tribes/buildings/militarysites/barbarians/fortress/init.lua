@@ -38,18 +38,16 @@ descriptions:new_militarysite_type {
       grout = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 103, 80 },
          fps = 10
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 103, 80 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 103, 80 }
       }
    },

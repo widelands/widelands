@@ -9,9 +9,9 @@ descriptions:new_trainingsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 81, 106 }
       }
    },

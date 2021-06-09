@@ -80,6 +80,7 @@ public:
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
+	void update_template() override;
 
 	void set_style(FontStyle);
 	void set_style_override(const FontStyleInfo&);

@@ -20,18 +20,16 @@ descriptions:new_militarysite_type {
       granite = 3
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 48, 84 },
          fps = 10
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 48, 84 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 48, 84 }
       }
    },
