@@ -13,9 +13,9 @@ descriptions:new_warehouse_type {
    -- The Headquarters of the barbarians is from the apperance a stable military
    -- Building, fortified base and some towers made of blackwood. Some flags
    -- in the player colors may be present
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 90, 96 },
          fps = 10
       },

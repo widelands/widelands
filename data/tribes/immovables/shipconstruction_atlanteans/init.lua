@@ -20,9 +20,10 @@ descriptions:new_immovable_type {
       spidercloth = 4
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "build_??.png"),
+         basename = "build",
          hotspot = { 118, 94 },
          fps = 1,
          representative_frame = 5

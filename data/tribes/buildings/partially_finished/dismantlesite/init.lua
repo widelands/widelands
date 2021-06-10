@@ -59,9 +59,9 @@ descriptions:new_dismantlesite_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 5, 5 },
       },
    },

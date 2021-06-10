@@ -21,7 +21,21 @@
 #define WL_WLAPPLICATION_MESSAGES_H
 
 #include <string>
+#include <vector>
 
-void show_usage(const std::string&, const std::string&);
+struct Parameter {
+	std::string title_;
+	std::string key_;
+	std::string hint_;
+	std::string help_;
+	bool is_verbose_;
+};
+
+enum class CmdLineVerbosity { None, Normal, All };
+
+void fill_parameter_vector();
+bool is_parameter(const std::string&);
+const std::vector<std::string> get_all_parameters();
+void show_usage(const std::string&, const std::string&, CmdLineVerbosity verbosity);
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H

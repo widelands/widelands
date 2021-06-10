@@ -19,17 +19,15 @@ descriptions:new_productionsite_type {
       marble = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 53 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 39, 53 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 39, 53 },
          fps = 5
       },

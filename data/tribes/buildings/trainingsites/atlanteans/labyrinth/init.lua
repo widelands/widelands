@@ -26,9 +26,9 @@ descriptions:new_trainingsite_type {
       gold = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 80, 88 },
       }
    },

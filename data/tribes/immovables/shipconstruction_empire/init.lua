@@ -20,9 +20,10 @@ descriptions:new_immovable_type {
       cloth = 4
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "build_??.png"),
+         basename = "build",
          hotspot = { 115, 78 },
          fps = 1,
          representative_frame = 5
