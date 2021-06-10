@@ -74,9 +74,12 @@ Game
 
    Child of: :class:`wl.bases.EditorGameBase`
 
-   The root class to access the game internals. You can
-   construct as many instances of this class as you like, but
-   they all will access the one game currently running.
+   The root class to access the game internals. Use ``wl.Game()`` to access the properties, e.g.:
+
+   .. code-block:: lua
+
+      current_speed = wl.Game().real_Speed
+
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
@@ -111,7 +114,7 @@ void LuaGame::__unpersist(lua_State* /* L */) {
    .. attribute:: real_speed
 
       (RO) The speed that the current game is running at in ms.
-           For example, for game speed = 2x, this returns 2000.
+      For example, for game speed = 2x, this returns 2000.
 */
 int LuaGame::get_real_speed(lua_State* L) {
 	lua_pushinteger(L, get_game(L).game_controller()->real_speed());
@@ -121,7 +124,7 @@ int LuaGame::get_real_speed(lua_State* L) {
 /* RST
    .. attribute:: time
 
-   (RO) The absolute time elapsed since the game was started in milliseconds.
+      (RO) The absolute time elapsed since the game was started in milliseconds.
 */
 int LuaGame::get_time(lua_State* L) {
 	lua_pushint32(L, get_game(L).get_gametime().get());
@@ -131,9 +134,9 @@ int LuaGame::get_time(lua_State* L) {
 /* RST
    .. attribute:: desired_speed
 
-   (RW) Sets the desired speed of the game in ms per real second, so a speed of
-   2000 means the game runs at 2x speed. Note that this will not work in
-   network games as expected.
+      (RW) Sets the desired speed of the game in ms per real second, so a speed of
+      2000 means the game runs at 2x speed. Note that this will not work in
+      network games as expected.
 */
 // UNTESTED
 int LuaGame::set_desired_speed(lua_State* L) {
@@ -189,8 +192,8 @@ int LuaGame::get_last_save_time(lua_State* L) {
 /* RST
    .. attribute:: type
 
-      (RO) One string out of 'undefined', 'singleplayer', 'netclient', 'nethost', 'replay',
-      describing the type of game that is played.
+      (RO) One string out of :const:`"undefined"`, :const:`"singleplayer"`, :const:`"netclient"`,
+      :const:`"nethost"`, :const:`"replay"`, describing the type of game that is played.
 */
 int LuaGame::get_type(lua_State* L) {
 	// enum class GameType : uint8_t { kUndefined = 0, kSingleplayer, kNetClient, kNetHost, kReplay
@@ -321,7 +324,7 @@ Editor
    Child of: :class:`wl.bases.EditorGameBase`
 
    The Editor object; it is the correspondence of the :class:`wl.Game`
-   that is used in a Game.
+   that is used in a Game. Use ``ẁl.Editor()`` to access the properties.
 */
 
 const char LuaEditor::className[] = "Editor";

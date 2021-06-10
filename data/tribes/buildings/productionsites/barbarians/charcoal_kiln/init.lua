@@ -19,17 +19,15 @@ descriptions:new_productionsite_type {
       grout = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 71 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 50, 71 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 50, 71 },
       },
    },

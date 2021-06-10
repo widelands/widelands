@@ -38,6 +38,7 @@
 #include <SDL_keyboard.h>
 
 #include "base/vector.h"
+#include "wlapplication_messages.h"
 
 namespace UI {
 class Panel;
@@ -48,10 +49,11 @@ class Game;
 
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
-	explicit ParameterError() : std::runtime_error("") {
+	explicit ParameterError(CmdLineVerbosity level, const std::string& text = "")
+	   : std::runtime_error(text), level_(level) {
 	}
-	explicit ParameterError(const std::string& text) : std::runtime_error(text) {
-	}
+
+	CmdLineVerbosity level_;
 };
 
 // Callbacks input events to the UI. All functions return true when the event
