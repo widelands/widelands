@@ -23,9 +23,9 @@ descriptions:new_productionsite_type {
    },
 
    -- TODO(Nordfriese): Make animations
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 63 },
       }
    },

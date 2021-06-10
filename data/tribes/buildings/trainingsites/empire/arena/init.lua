@@ -43,13 +43,12 @@ descriptions:new_trainingsite_type {
       marble_column = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 81, 82 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 82, 83 },
       }
    },

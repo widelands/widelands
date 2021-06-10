@@ -54,7 +54,7 @@ namespace Widelands {
 
 uint32_t Descriptions::instances_ = 0;
 
-Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
+Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
    : all_tribes_(get_all_tribeinfos(&addons)),
      addons_(addons),
      critters_(new DescriptionMaintainer<CritterDescr>()),
@@ -80,27 +80,27 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
 	// very early than to risk crashes because it was done too late…
 
 	assert(lua_);
-	for (const AddOns::AddOnInfo& info : addons) {
-		if (info.category == AddOns::AddOnCategory::kWorld ||
-		    info.category == AddOns::AddOnCategory::kTribes) {
-			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
+	for (const auto& info : addons) {
+		if (info->category == AddOns::AddOnCategory::kWorld ||
+		    info->category == AddOns::AddOnCategory::kTribes) {
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info->internal_name +
 			                         FileSystem::file_separator() + "preload.lua");
 			if (g_fs->file_exists(script)) {
-				log_info("Running preload script for add-on %s", info.internal_name.c_str());
+				log_info("Running preload script for add-on %s", info->internal_name.c_str());
 				lua_->run_script(script);
 			}
 		}
 	}
 
-	for (const AddOns::AddOnInfo& info : addons) {
-		if (info.category == AddOns::AddOnCategory::kWorld) {
+	for (const auto& info : addons) {
+		if (info->category == AddOns::AddOnCategory::kWorld) {
 			description_manager_->register_directory(
-			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
-			   DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kWorldAddon, info.internal_name));
-		} else if (info.category == AddOns::AddOnCategory::kTribes) {
+			   kAddOnDir + FileSystem::file_separator() + info->internal_name, g_fs,
+			   DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kWorldAddon, info->internal_name));
+		} else if (info->category == AddOns::AddOnCategory::kTribes) {
 			description_manager_->register_directory(
-			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
-			   DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kTribeAddon, info.internal_name));
+			   kAddOnDir + FileSystem::file_separator() + info->internal_name, g_fs,
+			   DescriptionManager::RegistryCallerInfo(DescriptionManager::RegistryCallerType::kTribeAddon, info->internal_name));
 		}
 	}
 
@@ -430,7 +430,7 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 		if (!c.second.empty()) {
 			index = addons_.size();
 			for (uint32_t i = 0; i < addons_.size(); ++i) {
-				if (addons_[i].internal_name == c.second) {
+				if (addons_[i]->internal_name == c.second) {
 					index = i;
 					break;
 				}

@@ -308,7 +308,8 @@
 				{
 					"subheading": "Flatpak",
 					"members":[
-						"scx"
+						"scx",
+						"Tóth András"
 					]
 				},
 				{
@@ -369,6 +370,25 @@
 						"Hanna Podewski (kristin)",
 						"king of nowhere",
 						"GunChleoc"
+					]
+				}
+			]
+		},
+		{
+			"heading": "Add-Ons",
+			"image": "images/ui_fsmenu/addon_authors.png",
+			"entries":[
+				{
+					"members":[
+						"Björn Burkhardt",
+						"Benedikt Straub (Nordfriese)",
+						"Stephan Lutz (hessenfarmer)",
+						"Ondřej (OIPUN)",
+						"Matthias Klimmek",
+						"king of nowhere",
+						"Markus Göpfert (MarkMcWire)",
+						"Yo...",
+						"kaputtnik"
 					]
 				}
 			]

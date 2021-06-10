@@ -14,6 +14,8 @@ wl_library(network
     gameclient.h
     gamehost.cc
     gamehost.h
+    host_game_settings_provider.cc
+    host_game_settings_provider.h
     net_addons.cc
     net_addons.h
     netclient_interface.h

@@ -14,14 +14,15 @@
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Samuele Battarra <battarsa@email.it>, 2021
+# Stron Zios <danielekeb@gmail.com>, 2021
 # Tommaso, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-04 09:30+0000\n"
-"PO-Revision-Date: 2021-05-02 12:39+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-08 08:24+0000\n"
+"PO-Revision-Date: 2021-06-06 10:15+0000\n"
+"Last-Translator: Stron Zios <danielekeb@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +165,7 @@ msgstr "IA Molto Debole"
 #: ../../src/base/i18n.cc:393
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr ""
+msgstr "%1%%2% "
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -576,7 +577,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Si è verificato un errore. Il messaggio di errore è:\n\n%1$s\n\nSegnala questo problema per aiutarci a migliorare Widelands. Potrai trovare messaggi relativi al problema sullo standard output (stdout.txt su Windows). Stai usando la build %2$s (%3$s). \nPer favore aggiungi questa informazione nel report di errore."
 
 #: ../../src/editor/editorinteractive.cc:952
 #, c-format
@@ -652,8 +653,8 @@ msgstr "miniera"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -766,12 +767,12 @@ msgstr "Descrizione: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/tools/info_tool.cc:231
 msgid "(none)"
-msgstr ""
+msgstr "(nessuno)"
 
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
@@ -943,7 +944,7 @@ msgstr "Etichette:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:387
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(nessuno)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:396
 msgid "Waterway length limit:"
@@ -1365,8 +1366,8 @@ msgid ""
 "location."
 msgstr "Seleziona la nuova dimensione della mappa, quindi fai click sul punto dove vuoi effettuare la modifica. Quando si aumenta la dimensione della mappa, verranno inserite nuove colonne/righe a est/sud del punto selezionato. Quando si riduce la dimensione della mappa, il numero di colonne/righe indicato verrà rimosso da est/sud del punto indicato."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
 #: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
@@ -1469,7 +1470,7 @@ msgstr "Widelands non riesce a rilevare la versione di OpenGL"
 #: ../../src/graphic/gl/initialize.cc:220
 #: ../../src/graphic/gl/initialize.cc:242
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "Widelands non può funzionare perché la versione dei driver grafici è troppo vecchia."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1732,7 +1733,7 @@ msgstr "Questo mercato ha ricevuto una nuova offerta commerciale."
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Questa partita è stata salvata da una versione più vecchia di Widelands e non può più essere caricata, oppure si tratta di una nuova versione che non possiamo ancora gestire."
 
 #: ../../src/logic/generic_save_handler.cc:231
 #: ../../src/logic/generic_save_handler.cc:235
@@ -2453,7 +2454,7 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr ""
+msgstr "Il motore di gioco ha ricevuto un segnale SIGABRT che molto probabilmente è stato generato da un salvataggio danneggiato. Non sono state implementate al momento soluzioni per questo bug. Siamo spiacenti, ma questo salvataggio sembra sia irrimediabilmente danneggiato."
 
 #: ../../src/map_io/s2map.cc:427 ../../src/map_io/widelands_map_loader.cc:185
 msgid "Loading map…"
@@ -2474,7 +2475,7 @@ msgstr "Territori"
 
 #: ../../src/map_io/widelands_map_loader.cc:334
 msgid "Initializing flags"
-msgstr ""
+msgstr "Inizializzazione bandiere"
 
 #: ../../src/map_io/widelands_map_loader.cc:341
 msgid "Initializing roads and waterways"
@@ -2507,7 +2508,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands non è riuscito a stabilire una connessione all'indirizzo fornito.\nSu quella porta non girava un server di Widelands oppure il server si è\nspento mentre cercavi di connetterti."
 
 #: ../../src/network/gameclient.cc:726
 #, c-format
@@ -2542,14 +2543,14 @@ msgstr "/me ha controllato il file ricevuto. Sebbene in controllo md5 abbia avut
 
 #: ../../src/network/gameclient.cc:1258
 msgid "Disconnected"
-msgstr ""
+msgstr "Disconnesso"
 
 #: ../../src/network/gameclient.cc:1260
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "La connessione con l'host è stata perduta a causa della seguente motivazione: \n%s"
 
 #: ../../src/network/gamehost.cc:291
 msgid "Available host commands are:"
@@ -2657,13 +2658,13 @@ msgstr ""
 
 #: ../../src/network/gamehost.cc:556
 msgid "Failed to start the server!"
-msgstr ""
+msgstr "Impossibile inizializzare il server!"
 
 #: ../../src/network/gamehost.cc:557
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr ""
+msgstr "Widelands non è stato in grado di inizializzare un server.\nÈ possibile che un server di qualche altro processo sia già in esecuzione sulla nostra porta."
 
 #: ../../src/network/gamehost.cc:1983
 #, c-format
@@ -3826,7 +3827,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager.cc:313
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:332
 #: ../../src/ui_fsmenu/addons_packager.cc:347
@@ -3834,31 +3835,31 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "Invalid Name"
-msgstr ""
+msgstr "Nome non valido"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:332
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid. Please choose a different name."
-msgstr ""
+msgstr "Questo nome non è valido. Per favore seleziona un altro nome."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:347
 msgid "An add-on with this internal name already exists."
-msgstr ""
+msgstr "Esiste già un'estensione con questo nome interno."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:352
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr ""
+msgstr "Un'estensione con questo nome interno è stata eliminata recentemente. Per favore conferma le modifiche prima di usare di nuovo questo nome."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:394
 msgid "Delete Add-on"
-msgstr ""
+msgstr "Elimina estensione"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:396
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
-msgstr ""
+msgstr "Vuoi davvero eliminare l'estensione '%s'?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:397
 #, c-format
@@ -3866,7 +3867,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "Vuoi davvero eliminare l'estensione locale '%s'?\n\nNota che questa estensione non potrà più essere scaricata di nuovo dal servere."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:418
 #, c-format
@@ -3876,8 +3877,8 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se esci adesso dal packager, tutte le modifiche alle seguenti %uestensioni verrano annullate."
+msgstr[1] "Se esci adesso dal packager, tutte le modifiche alle seguenti %u estensioni verrano annullate."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:428
 #: ../../src/ui_fsmenu/addons_packager.cc:457
@@ -3886,11 +3887,11 @@ msgstr[1] ""
 msgid ""
 "%1$s\n"
 "· %2$s"
-msgstr ""
+msgstr "%1$s\n. %2$s"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:431
 msgid "Quit Packager"
-msgstr ""
+msgstr "Esci dal packager"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:446
 #, c-format
@@ -5150,18 +5151,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -5298,7 +5299,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:273
 msgid "Cut Text"
-msgstr ""
+msgstr "Taglia testo"
 
 #: ../../src/wlapplication_options.cc:277
 msgid "Copy Text"
@@ -6727,8 +6728,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiche"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Viaggiare in mare"

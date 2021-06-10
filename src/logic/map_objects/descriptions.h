@@ -48,7 +48,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	explicit Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>&);
+	explicit Descriptions(LuaInterface* lua, const AddOns::AddOnsList&);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
@@ -197,7 +197,7 @@ public:
 
 private:
 	AllTribes all_tribes_;
-	const std::vector<AddOns::AddOnInfo>& addons_;
+	const AddOns::AddOnsList& addons_;
 
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
