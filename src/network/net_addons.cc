@@ -64,6 +64,7 @@ static inline void check_string_validity(const std::string& str) {
 }
 
 constexpr unsigned kCurrentProtocolVersion = 4;
+
 void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
 		// already initialized
@@ -72,7 +73,6 @@ void NetAddons::init(std::string username, std::string password) {
 	if (network_active_) {
 		throw WLWarning("", "Network is already active during init");
 	}
-	network_active_ = true;
 
 	signal(SIGPIPE, SIG_IGN);
 	if (password.empty()) {
@@ -135,7 +135,6 @@ void NetAddons::init(std::string username, std::string password) {
 	}
 
 	initialized_ = true;
-	network_active_ = false;
 	last_username_ = username;
 	last_password_ = password;
 }
@@ -200,12 +199,12 @@ std::string NetAddons::read_line() {
 	return line;
 }
 
-void NetAddons::read_file(const long length, const std::string& out) {
+void NetAddons::read_file(const int64_t length, const std::string& out) {
 	FileWrite fw;
 	std::unique_ptr<char[]> buffer(new char[length]);
-	long nr_bytes_read = 0;
+	int64_t nr_bytes_read = 0;
 	do {
-		long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
+		int64_t l = read(client_socket_, buffer.get(), length - nr_bytes_read);
 		if (l < 1) {
 			throw WLWarning("", "Connection interrupted");
 		}
@@ -274,14 +273,14 @@ AddOnsList NetAddons::refresh_remotes() {
 	init();
 
 	AddOnsList result_vector;
-	long nr_addons;
+	int64_t nr_addons;
 	{
 		CrashGuard guard(*this);
 		write_to_server("CMD_LIST\n");
 
-		nr_addons = std::stol(read_line().c_str());
+		nr_addons = std::stol(read_line());
 		result_vector.resize(nr_addons);
-		for (long i = 0; i < nr_addons; ++i) {
+		for (int64_t i = 0; i < nr_addons; ++i) {
 			result_vector[i].reset(new AddOnInfo());
 			result_vector[i]->internal_name = read_line();
 		}
@@ -289,7 +288,7 @@ AddOnsList NetAddons::refresh_remotes() {
 		guard.ok();
 	}
 
-	for (long i = 0; i < nr_addons; ++i) {
+	for (int64_t i = 0; i < nr_addons; ++i) {
 		try {
 			*result_vector[i] = fetch_one_remote(result_vector[i]->internal_name);
 		} catch (const std::exception& e) {
@@ -376,7 +375,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	a.verified = read_line() == "verified";
 
 	const std::string icon_checksum = read_line();
-	const long icon_file_size = std::stol(read_line());
+	const int64_t icon_file_size = std::stol(read_line());
 	if (icon_file_size <= 0) {
 		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
 	} else {
@@ -409,18 +408,18 @@ void NetAddons::download_addon(const std::string& name,
 	}
 	g_fs->ensure_directory_exists(save_as);
 
-	const long nr_dirs = std::stol(read_line());
+	const int64_t nr_dirs = std::stol(read_line());
 	std::unique_ptr<std::string[]> dirnames(new std::string[nr_dirs]);
-	for (long i = 0; i < nr_dirs; ++i) {
+	for (int64_t i = 0; i < nr_dirs; ++i) {
 		dirnames[i] = read_line();
 		g_fs->ensure_directory_exists(save_as + FileSystem::file_separator() + dirnames[i]);
 	}
-	long progress_state = 0;
-	for (long i = -1 /* top-level directory is not counted */; i < nr_dirs; ++i) {
-		for (long j = std::stol(read_line()); j > 0; --j) {
+	int64_t progress_state = 0;
+	for (int64_t i = -1 /* top-level directory is not counted */; i < nr_dirs; ++i) {
+		for (int64_t j = std::stol(read_line()); j > 0; --j) {
 			const std::string filename = read_line();
 			const std::string checksum = read_line();
-			const long length = std::stol(read_line());
+			const int64_t length = std::stol(read_line());
 			std::string relative_path;
 			if (i >= 0) {
 				relative_path += dirnames[i];
@@ -432,10 +431,10 @@ void NetAddons::download_addon(const std::string& name,
 			out += relative_path;
 			FileWrite fw;
 			std::unique_ptr<char[]> buffer(new char[length]);
-			long nr_bytes_read = 0;
+			int64_t nr_bytes_read = 0;
 			do {
 				progress(relative_path, progress_state);
-				long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
+				int64_t l = read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
 					throw WLWarning("", "Connection interrupted");
 				}
@@ -467,14 +466,17 @@ void NetAddons::download_i18n(const std::string& name,
 	}
 	g_fs->ensure_directory_exists(directory);
 
-	const long nr_translations = std::stol(read_line());
+	const int64_t nr_translations = std::stol(read_line());
 	init_fn("", nr_translations);
-	for (long i = 0; i < nr_translations; ++i) {
+	for (int64_t i = 0; i < nr_translations; ++i) {
 		const std::string filename = read_line();
 		const std::string checksum = read_line();
 		progress(filename.substr(0, filename.find('.')), i);
-		const long length = std::stol(read_line());
-		const std::string out = directory + FileSystem::file_separator() + filename;
+		const int64_t length = std::stol(read_line());
+
+		std::string out = directory;
+		out += FileSystem::file_separator();
+		out += filename;
 		read_file(length, out);
 		check_checksum(out, checksum);
 	}
@@ -525,7 +527,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	check_endofstream();
 	guard.ok();
 }
-void NetAddons::comment(const AddOnInfo& addon, std::string message, const long index_to_edit) {
+void NetAddons::comment(const AddOnInfo& addon, std::string message, const int64_t index_to_edit) {
 	check_string_validity(addon.internal_name);
 	init();
 	CrashGuard guard(*this);
@@ -618,7 +620,7 @@ void NetAddons::upload_addon(const std::string& name,
 	}
 	write_to_server(send);
 
-	long state = 0;
+	int64_t state = 0;
 	for (const auto& pair : content) {
 		send = std::to_string(pair.second.size());
 		send += '\n';
@@ -726,7 +728,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 
 		const std::string checksum = read_line();
-		const long filesize = stoi(read_line());
+		const int64_t filesize = stoi(read_line());
 		read_file(filesize, output);
 		check_checksum(output, checksum);
 

@@ -39,7 +39,7 @@ struct NetAddons {
 	AddOnsList refresh_remotes();
 	AddOnInfo fetch_one_remote(const std::string& name);
 
-	using CallbackFn = std::function<void(const std::string&, long)>;
+	using CallbackFn = std::function<void(const std::string&, int64_t)>;
 
 	// Downloads the add-on with the given name (e.g. "cool_feature.wad")
 	// from the server and downloads it to the given canonical location.
@@ -63,7 +63,7 @@ struct NetAddons {
 
 	// Write a new comment or edit an existing one. Negative `index_to_edit` indicates a new comment
 	// should be written.
-	void comment(const AddOnInfo& addon, std::string message, long index_to_edit = -1);
+	void comment(const AddOnInfo& addon, std::string message, int64_t index_to_edit = -1);
 
 	void
 	upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
@@ -87,7 +87,7 @@ private:
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
 	std::string read_line();
-	void read_file(long length, const std::string& out);
+	void read_file(int64_t length, const std::string& out);
 	void check_endofstream();
 	void write_to_server(const std::string&);
 	void write_to_server(const char*, size_t);

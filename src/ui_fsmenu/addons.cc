@@ -84,7 +84,7 @@ static std::string filesize_string(const uint32_t bytes) {
 	}
 }
 
-struct OperationCancelledByUserException {};
+struct OperationCancelledByUserException : std::exception {};
 
 class AddOnsLoginBox : public UI::Window {
 public:
@@ -1291,7 +1291,7 @@ void AddOnsCtrl::refresh_remotes() {
 		i->author = [bug]() { return bug; };
 		i->upload_username = bug;
 		i->upload_timestamp = std::time(nullptr);
-		i->icon = g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon),
+		i->icon = g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon);
 		i->sync_safe = true;  // suppress useless warning
 		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(i)};
 	}
@@ -1673,10 +1673,10 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 	ProgressIndicatorWindow w(&get_topmost_forefather(), addon->descname());
 	w.set_message_1((boost::format(_("Uploading ‘%s’…")) % addon->descname()).str());
 	try {
-		long nr_files = 0;
+		int64_t nr_files = 0;
 		net().upload_addon(
 		   addon->internal_name,
-		   [this, &w, &nr_files](const std::string& f, const long l) {
+		   [this, &w, &nr_files](const std::string& f, const int64_t l) {
 			   w.set_message_2(f);
 			   w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_files).str());
 			   w.progressbar().set_state(l);
@@ -1685,7 +1685,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 				   throw OperationCancelledByUserException();
 			   }
 		   },
-		   [this, &w, &nr_files](const std::string&, const long l) {
+		   [&w, &nr_files](const std::string&, const int64_t l) {
 			   w.progressbar().set_total(l);
 			   nr_files = l;
 		   });
@@ -1731,7 +1731,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 			const std::string size = filesize_string(remote->total_file_size);
 			w.progressbar().set_total(remote->total_file_size);
 			net().download_addon(
-			   remote->internal_name, temp_dir, [this, &w, size](const std::string& f, const long l) {
+			   remote->internal_name, temp_dir, [this, &w, size](const std::string& f, const int64_t l) {
 				   w.set_message_2(f);
 				   w.set_message_3((boost::format(_("%1% / %2%")) % filesize_string(l) % size).str());
 				   w.progressbar().set_state(l);
@@ -1791,11 +1791,11 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	try {
 		w.progressbar().set_state(0);
 		w.progressbar().set_total(1);
-		long nr_translations = 0;
+		int64_t nr_translations = 0;
 		w.set_message_3("");
 		net().download_i18n(
 		   remote->internal_name, temp_dir,
-		   [this, &w, &nr_translations](const std::string& f, const long l) {
+		   [this, &w, &nr_translations](const std::string& f, const int64_t l) {
 			   w.set_message_2(f);
 			   w.set_message_3((boost::format(_("%1% / %2%")) % l % nr_translations).str());
 			   w.progressbar().set_state(l);
@@ -1804,7 +1804,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 				   throw OperationCancelledByUserException();
 			   }
 		   },
-		   [this, &w, &nr_translations](const std::string&, const long l) {
+		   [&w, &nr_translations](const std::string&, const int64_t l) {
 			   nr_translations = l;
 			   w.progressbar().set_total(std::max(l, 1l));
 		   });
@@ -2415,7 +2415,7 @@ public:
 		                              .str());
 		text += "</p></rt>";
 		comments_header_.set_text(text);
-		long index = 0;
+		int64_t index = 0;
 		for (const auto& comment : info_->user_comments) {
 			text = "<rt><p>";
 			if (comment.editor.empty()) {
@@ -2544,7 +2544,7 @@ private:
 
 	class CommentEditor : public UI::Window {
 	public:
-		CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const long index)
+		CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const int64_t index)
 		   : UI::Window(&ctrl.get_topmost_forefather(),
 		                UI::WindowStyle::kFsMenu,
 		                "write_comment",
@@ -2740,7 +2740,7 @@ private:
 
 	private:
 		std::shared_ptr<AddOns::AddOnInfo> info_;
-		const long index_;
+		const int64_t index_;
 
 		UI::Box main_box_, markup_box_, buttons_box_;
 		UI::MultilineTextarea preview_;
@@ -2778,7 +2778,7 @@ private:
 		           RemoteInteractionWindow& r,
 		           UI::Panel& parent,
 		           const std::string& text,
-		           const long index)
+		           const int64_t index)
 		   : UI::MultilineTextarea(&parent,
 		                           0,
 		                           0,
@@ -2821,7 +2821,7 @@ private:
 	private:
 		AddOnsCtrl& ctrl_;
 		std::shared_ptr<AddOns::AddOnInfo> info_;
-		const long index_;
+		const int64_t index_;
 		UI::Button edit_;
 	};
 	UI::MultilineTextarea comments_header_;
