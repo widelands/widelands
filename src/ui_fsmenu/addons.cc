@@ -1731,7 +1731,8 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 			const std::string size = filesize_string(remote->total_file_size);
 			w.progressbar().set_total(remote->total_file_size);
 			net().download_addon(
-			   remote->internal_name, temp_dir, [this, &w, size](const std::string& f, const int64_t l) {
+			   remote->internal_name, temp_dir,
+			   [this, &w, size](const std::string& f, const int64_t l) {
 				   w.set_message_2(f);
 				   w.set_message_3((boost::format(_("%1% / %2%")) % filesize_string(l) % size).str());
 				   w.progressbar().set_state(l);
