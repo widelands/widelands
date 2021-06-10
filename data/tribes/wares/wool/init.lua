@@ -8,9 +8,9 @@ descriptions:new_ware_type {
    descname = pgettext("ware", "Wool"),
    icon = dirname .. "menu.png",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 8, 18 },
       },
    }
