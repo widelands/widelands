@@ -77,9 +77,9 @@ descriptions:new_immovable_type {
       }
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 40, 39 },
       },
    }

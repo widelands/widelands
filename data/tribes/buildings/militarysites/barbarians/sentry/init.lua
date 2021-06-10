@@ -16,18 +16,16 @@ descriptions:new_militarysite_type {
       blackwood = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 40 },
          fps = 10
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 39, 40 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 39, 40 }
       }
    },

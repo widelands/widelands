@@ -37,7 +37,6 @@ descriptions:new_worker_type {
       },
       planting = {
          basename = "plant",
-         pictures = path.list_files(dirname .. "plant_??.png"),
          hotspot = { 17, 21 },
          fps = 10
       },
