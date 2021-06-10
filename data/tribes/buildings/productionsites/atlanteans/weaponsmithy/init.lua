@@ -22,13 +22,13 @@ descriptions:new_productionsite_type {
       planks = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 58 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 50, 58 },
       }
    },
