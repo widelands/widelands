@@ -2679,8 +2679,8 @@ private:
 					*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 					end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 				} catch (const std::exception& e) {
-					log_err(
-					   "Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(), e.what());
+					log_err("Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(),
+					        e.what());
 					UI::WLMessageBox m(
 					   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
