@@ -99,17 +99,21 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	}
 }
 
-TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& descriptions, const uint16_t dither_layer_disambiguator)
+TerrainDescription::TerrainDescription(const LuaTable& table,
+                                       Descriptions& descriptions,
+                                       const uint16_t dither_layer_disambiguator)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
      default_resource_amount_(table.get_int("default_resource_amount")),
-     dither_layer_(table.get_int("dither_layer") * kMaxDitherLayerDisambiguator + dither_layer_disambiguator),
+     dither_layer_(table.get_int("dither_layer") * kMaxDitherLayerDisambiguator +
+                   dither_layer_disambiguator),
      temperature_(table.get_int("temperature")),
      fertility_(table.get_int("fertility")),
      humidity_(table.get_int("humidity")) {
 	if (dither_layer_disambiguator >= kMaxDitherLayerDisambiguator) {
-		throw wexception("Terrain %s: dither layer disambiguator %u exceeds maximum of %u", name_.c_str(), dither_layer_disambiguator, kMaxDitherLayerDisambiguator);
+		throw wexception("Terrain %s: dither layer disambiguator %u exceeds maximum of %u",
+		                 name_.c_str(), dither_layer_disambiguator, kMaxDitherLayerDisambiguator);
 	}
 
 	if (table.has_key("tooltips")) {

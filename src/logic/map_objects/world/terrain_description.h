@@ -56,7 +56,9 @@ public:
 	};
 
 	static constexpr uint16_t kMaxDitherLayerDisambiguator = 100;
-	TerrainDescription(const LuaTable& table, Descriptions& descriptions, uint16_t dither_layer_disambiguator);
+	TerrainDescription(const LuaTable& table,
+	                   Descriptions& descriptions,
+	                   uint16_t dither_layer_disambiguator);
 	~TerrainDescription() = default;
 
 	/// The name used internally for this terrain.

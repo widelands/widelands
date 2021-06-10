@@ -44,7 +44,9 @@ public:
 	using RegistryCallerInfo = std::pair<RegistryCallerType, std::string /* add-on name */>;
 
 	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts
-	void register_directory(const std::string& dirname, FileSystem* filesystem, const RegistryCallerInfo&);
+	void register_directory(const std::string& dirname,
+	                        FileSystem* filesystem,
+	                        const RegistryCallerInfo&);
 	/// Map a map object description's name to its init script so that we can load it when we want
 	/// it.
 	void register_description(const std::string& description_name,

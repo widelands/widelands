@@ -85,7 +85,8 @@ void DescriptionManager::register_directory(const std::string& dirname,
 				}
 				if (all_registered_items.empty()) {
 					log_warn("Registry file %s does not define any units", file.c_str());
-				} else if ((g_verbose || caller.first != RegistryCallerType::kDefault) && all_registered_items.size() > 1) {
+				} else if ((g_verbose || caller.first != RegistryCallerType::kDefault) &&
+				           all_registered_items.size() > 1) {
 					std::string all;
 					for (const std::string& str : all_registered_items) {
 						all += ' ';
@@ -95,7 +96,8 @@ void DescriptionManager::register_directory(const std::string& dirname,
 					         "    defines multiple (%u) units:%s\n"
 					         "    Defining multiple units in one file is error-prone. "
 					         "Every unit should be defined in a registry directory of its own.",
-					         file.c_str(), static_cast<unsigned>(all_registered_items.size()), all.c_str());
+					         file.c_str(), static_cast<unsigned>(all_registered_items.size()),
+					         all.c_str());
 				}
 			}
 		}
@@ -108,7 +110,8 @@ void DescriptionManager::register_description(const std::string& description_nam
                                               const RegistryCallerInfo& caller) {
 	auto it = registered_descriptions_.find(description_name);
 	if (it != registered_descriptions_.end()) {
-		if (caller.first == RegistryCallerType::kWorldAddon || caller.first == RegistryCallerType::kTribeAddon) {
+		if (caller.first == RegistryCallerType::kWorldAddon ||
+		    caller.first == RegistryCallerType::kTribeAddon) {
 			// TODO(Nordfriese): Minimal-invasive fix for #4759, replace with #4760 after v1.0
 			log_warn("Overwriting existing registry for '%s':", description_name.c_str());
 			log_warn("  Old path: %s", it->second.script_path.c_str());
@@ -163,7 +166,8 @@ void DescriptionManager::register_scenario_description(FileSystem* filesystem,
 
 	registered_scenario_descriptions_.insert(std::make_pair(
 	   description_name,
-	   RegisteredObject("map:" + script_path, attributes, RegistryCallerInfo(RegistryCallerType::kScenario, std::string()))));
+	   RegisteredObject("map:" + script_path, attributes,
+	                    RegistryCallerInfo(RegistryCallerType::kScenario, std::string()))));
 }
 
 void DescriptionManager::load_description(const std::string& description_name) {
@@ -214,7 +218,8 @@ DescriptionManager::get_attributes(const std::string& description_name) const {
 	          registered_descriptions_.at(description_name).attributes;
 }
 
-const DescriptionManager::RegistryCallerInfo& DescriptionManager::get_registry_caller_info(const std::string& description_name) const {
+const DescriptionManager::RegistryCallerInfo&
+DescriptionManager::get_registry_caller_info(const std::string& description_name) const {
 	assert(registered_scenario_descriptions_.count(description_name) == 1 ||
 	       registered_descriptions_.count(description_name) == 1);
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
