@@ -64,6 +64,7 @@ public:
 	void postload() override;
 	void start() override;
 	void toggle_mainmenu();
+	void rebuild_main_menu();
 
 protected:
 	// For referencing the items in showhidemenu_

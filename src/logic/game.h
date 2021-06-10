@@ -353,9 +353,7 @@ public:
 	 * A .wgf file will be loaded as a singleplayer savegame this way;
 	 * a map file will be loaded as a singleplayer scenario.
 	 */
-	void set_next_game_to_load(const std::string& file) {
-		next_game_to_load_ = file;
-	}
+	void set_next_game_to_load(const std::string& file);
 
 	const std::list<std::string>& list_of_scenarios() const {
 		return list_of_scenarios_;

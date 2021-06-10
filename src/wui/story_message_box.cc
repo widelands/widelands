@@ -89,6 +89,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 		button_box_.add(&next_scenario_);
 		button_box_.add_inf_space();
 		next_scenario_.sigclicked.connect([this]() { clicked_next_scenario(); });
+		ok_.set_tooltip(_("Continue playing this mission"));
 	} else {
 		next_scenario_.set_visible(false);
 	}

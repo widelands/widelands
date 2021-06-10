@@ -696,6 +696,8 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
+	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
+
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
@@ -777,6 +779,7 @@ bool Game::run(StartGameType const start_game_type,
 		return true;
 	}
 
+	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
 	if (load.compare(load.size() - kSavegameExtension.size(), kSavegameExtension.size(),
 	                 kSavegameExtension) == 0) {
@@ -792,6 +795,10 @@ bool Game::run(StartGameType const start_game_type,
 		assert(list.front() == load);
 	}
 	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+void Game::set_next_game_to_load(const std::string& file) {
+	next_game_to_load_ = file;
 }
 
 /**
@@ -843,6 +850,10 @@ void Game::full_cleanup() {
 	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
 	next_game_to_load_.clear();
 	list_of_scenarios_.clear();
+
+	if (has_loader_ui()) {
+		remove_loader_ui();
+	}
 }
 
 /**

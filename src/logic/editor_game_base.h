@@ -132,12 +132,10 @@ public:
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
 
-#ifndef NDEBUG
-	/// Check whether we currently have a loader_ui. Used for asserts only.
+	/// Check whether we currently have a loader_ui.
 	bool has_loader_ui() const {
 		return loader_ui_ != nullptr;
 	}
-#endif
 
 	// Destroy the loader UI and game tips
 	void remove_loader_ui();
