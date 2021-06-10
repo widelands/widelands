@@ -77,7 +77,7 @@ struct TribeBasicInfo {
 using AllTribes = std::vector<TribeBasicInfo>;
 
 /// Returns a vector with the basic info for all tribes.
-AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>*);
+AllTribes get_all_tribeinfos(const AddOns::AddOnsList*);
 
 /// Returns the basic preload info for a tribe.
 TribeBasicInfo get_tribeinfo(const std::string& tribename, const AllTribes&);
