@@ -1807,7 +1807,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		   },
 		   [&w, &nr_translations](const std::string&, const int64_t l) {
 			   nr_translations = l;
-			   w.progressbar().set_total(std::max(l, 1l));
+			   w.progressbar().set_total(std::max<int64_t>(l, 1));
 		   });
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
@@ -2680,7 +2680,7 @@ private:
 					end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 				} catch (const std::exception& e) {
 					log_err(
-					   "Edit comment #%ld for %s: %s", index_, info_->internal_name.c_str(), e.what());
+					   "Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(), e.what());
 					UI::WLMessageBox m(
 					   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 					   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
