@@ -9,17 +9,15 @@ descriptions:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 57, 88 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 57, 88 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 57, 88 },
       },
    },
