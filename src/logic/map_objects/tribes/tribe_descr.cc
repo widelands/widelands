@@ -454,7 +454,8 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 			carriers_.push_back(add_special_worker(name, descriptions));
 		}
 	} else {
-		log_warn("Tribe %s: Specifying `carrier`/`carrier2` instead of `carriers` is deprecated", name().c_str());
+		log_warn("Tribe %s: Specifying `carrier`/`carrier2` instead of `carriers` is deprecated",
+		         name().c_str());
 		if (table.has_key("carrier")) {
 			carriers_.push_back(add_special_worker(table.get_string("carrier"), descriptions));
 		}
@@ -778,7 +779,8 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 		throw GameDataError("special worker 'builder' not defined");
 	}
 	if (carriers_.size() < 2) {
-		throw GameDataError("only %d type(s) of carriers defined", static_cast<int>(carriers_.size()));
+		throw GameDataError(
+		   "only %d type(s) of carriers defined", static_cast<int>(carriers_.size()));
 	}
 	if (geologist_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special worker 'geologist' not defined");

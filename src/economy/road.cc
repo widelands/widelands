@@ -45,7 +45,9 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 }
 
 Road::CarrierSlot::CarrierSlot()
-   : carrier(nullptr), carrier_request(nullptr), carrier_type_id(std::numeric_limits<uint8_t>::max()) {
+   : carrier(nullptr),
+     carrier_request(nullptr),
+     carrier_type_id(std::numeric_limits<uint8_t>::max()) {
 }
 
 /**
@@ -157,8 +159,7 @@ void Road::set_economy(Economy* const e, WareWorker type) {
  */
 void Road::request_carrier(CarrierSlot& slot) {
 	slot.carrier_request = new Request(
-	   *this, owner().tribe().carriers()[slot.carrier_type_id],
-	   request_carrier_callback, wwWORKER);
+	   *this, owner().tribe().carriers()[slot.carrier_type_id], request_carrier_callback, wwWORKER);
 }
 
 /**
@@ -355,7 +356,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
 	for (CarrierSlot& slot : carrier_slots_) {
-		if (!slot.carrier.get(game) && !slot.carrier_request && (slot.carrier_type_id == 0 || busy_)) {
+		if (!slot.carrier.get(game) && !slot.carrier_request &&
+		    (slot.carrier_type_id == 0 || busy_)) {
 			request_carrier(slot);
 		}
 	}
@@ -471,9 +473,9 @@ void Road::charge_wallet(Game& game) {
 				if (Carrier* const c = slot.carrier.get(game)) {
 					if (c->top_state().task == &Carrier::taskRoad) {
 						c->send_signal(game, "cancel");
-						// This signal is not handled in any special way. It will simply pop the task off the
-						// stack. The string "cancel" has been used to clarify the final goal we want to
-						// achieve, ie: cancelling the current task.
+						// This signal is not handled in any special way. It will simply pop the task off
+						// the stack. The string "cancel" has been used to clarify the final goal we want
+						// to achieve, ie: cancelling the current task.
 						slot.carrier = nullptr;
 						slot.carrier_request = nullptr;
 					} else {

@@ -229,14 +229,14 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex builder_;       // The builder for this tribe
-	std::vector<DescriptionIndex> carriers_; // The basic and advanced carriers for this tribe
-	DescriptionIndex geologist_;     // This tribe's geologist worker
-	DescriptionIndex soldier_;       // The soldier that this tribe uses
-	DescriptionIndex ship_;          // The ship that this tribe uses
-	DescriptionIndex ferry_;         // The ferry that this tribe uses
-	DescriptionIndex port_;          // The port that this tribe uses
-	DescriptionIndex scouts_house_;  // This tribe's scout's house/hut
+	DescriptionIndex builder_;                // The builder for this tribe
+	std::vector<DescriptionIndex> carriers_;  // The basic and advanced carriers for this tribe
+	DescriptionIndex geologist_;              // This tribe's geologist worker
+	DescriptionIndex soldier_;                // The soldier that this tribe uses
+	DescriptionIndex ship_;                   // The ship that this tribe uses
+	DescriptionIndex ferry_;                  // The ferry that this tribe uses
+	DescriptionIndex port_;                   // The port that this tribe uses
+	DescriptionIndex scouts_house_;           // This tribe's scout's house/hut
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
