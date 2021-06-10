@@ -72,8 +72,7 @@ WidelandsMapLoader::~WidelandsMapLoader() {  // NOLINT
  * Preloads a map so that the map class returns valid data for all it's
  * get_info() functions (width, nrplayers..)
  */
-int32_t WidelandsMapLoader::preload_map(bool const scenario,
-                                        std::vector<AddOns::AddOnInfo>* addons) {
+int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList* addons) {
 	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
@@ -86,7 +85,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario,
 		if (addons) {
 			// first, clear all world add-ons…
 			for (auto it = addons->begin(); it != addons->end();) {
-				if (it->category == AddOns::AddOnCategory::kWorld) {
+				if ((*it)->category == AddOns::AddOnCategory::kWorld) {
 					it = addons->erase(it);
 				} else {
 					++it;
@@ -96,16 +95,16 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario,
 			for (const auto& requirement : map_.required_addons()) {
 				bool found = false;
 				for (auto& pair : AddOns::g_addons) {
-					if (pair.first.internal_name == requirement.first) {
+					if (pair.first->internal_name == requirement.first) {
 						found = true;
-						if (pair.first.version != requirement.second) {
+						if (pair.first->version != requirement.second) {
 							log_warn("Map requires add-on '%s' at version %s but version %s is installed. "
 							         "They might be compatible, but this is not necessarily the case.\n",
 							         requirement.first.c_str(),
 							         AddOns::version_to_string(requirement.second).c_str(),
-							         AddOns::version_to_string(pair.first.version).c_str());
+							         AddOns::version_to_string(pair.first->version).c_str());
 						}
-						assert(pair.first.category == AddOns::AddOnCategory::kWorld);
+						assert(pair.first->category == AddOns::AddOnCategory::kWorld);
 						addons->push_back(pair.first);
 						break;
 					}
@@ -142,8 +141,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario,
 	return 0;
 }
 
-int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase,
-                                                std::vector<AddOns::AddOnInfo>* a) {
+int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase, AddOns::AddOnsList* a) {
 	preload_map(false, a);
 
 	// Ensure add-ons are handled correctly

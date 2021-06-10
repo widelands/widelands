@@ -62,15 +62,14 @@ descriptions:new_constructionsite_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname,
    animations = {
       -- The constructionsite is a mess. Not nice and clean, but rather some
       -- logs lying around on piles, maybe some tools.
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 5, 5 },
       },
       idle_with_worker = {
-         pictures = path.list_files(dirname .. "idle_with_worker_??.png"),
          hotspot = { 33, 36 },
       }
    },

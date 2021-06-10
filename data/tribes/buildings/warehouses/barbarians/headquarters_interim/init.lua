@@ -12,9 +12,9 @@ descriptions:new_warehouse_type {
 
    -- The interim headquarters of the barbarians is a simple stone building thatched
    -- with reed and coated with many different wares.
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 64, 106 }
       },
    },
