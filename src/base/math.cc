@@ -31,6 +31,7 @@ unsigned read_percent_to_int(const std::string& input) {
 	std::regex re("^\\d+([.](\\d{1,2})){0,1}%$");
 	if (std::regex_search(input, match, re)) {
 		// Convert to range
+
 		uint64_t result =
 		   100U * std::stoul(match[0]) +
 		   // Match[1] are the outer () around ([.](\\d{1,2})), but we're interested in

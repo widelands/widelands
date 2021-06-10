@@ -23,9 +23,9 @@ descriptions:new_warehouse_type {
       quartz = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 58, 62 }
       }
    },

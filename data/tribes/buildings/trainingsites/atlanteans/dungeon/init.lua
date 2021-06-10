@@ -224,9 +224,9 @@ descriptions:new_trainingsite_type {
       log = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 47, 47 },
       }
    },
