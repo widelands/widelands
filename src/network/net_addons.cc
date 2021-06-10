@@ -74,7 +74,7 @@ void NetAddons::init(std::string username, std::string password) {
 		throw WLWarning("", "Network is already active during init");
 	}
 
-	signal(SIGPIPE, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);  // NOLINT
 	if (password.empty()) {
 		username = "";
 	}
