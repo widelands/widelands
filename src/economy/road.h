@@ -58,6 +58,7 @@ struct Road : public RoadBase {
 
 	explicit Road();
 	~Road() override;
+	bool init(EditorGameBase&) override;
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 
@@ -67,7 +68,7 @@ struct Road : public RoadBase {
 
 		OPtr<Carrier> carrier;
 		Request* carrier_request;
-		bool second_carrier;
+		uint8_t carrier_type_id;
 	};
 
 	void postsplit(Game&, Flag&) override;
