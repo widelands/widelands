@@ -413,7 +413,8 @@ protected:
 	 *  provided message to the user drawn in the screen center.
 	 *  May be called only by the initializer thread.
 	 */
-	void do_redraw_now(bool handle_input = true, const std::string& message_to_display = std::string());
+	void do_redraw_now(bool handle_input = true,
+	                   const std::string& message_to_display = std::string());
 
 private:
 	bool initialized_;
