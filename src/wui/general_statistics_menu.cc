@@ -202,6 +202,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	slider_ = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
 	slider_->changedto.connect([this](int32_t i) { plot_.set_time_id(i); });
 	box_.add(slider_, UI::Box::Resizing::kFullSize);
+
+	initialization_complete();
 }
 
 void GeneralStatisticsMenu::create_player_buttons() {

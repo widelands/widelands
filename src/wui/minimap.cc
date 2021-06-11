@@ -224,6 +224,8 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	   [this](const GraphicResolutionChanged&) { check_boundaries(); });
 
 	update_button_permpressed();
+
+	initialization_complete();
 }
 
 void MiniMap::toggle(MiniMapLayer const button) {

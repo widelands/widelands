@@ -20,6 +20,7 @@
 #include "wui/buildingwindow.h"
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -89,8 +90,12 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
 				const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
-				init(true, showing_workarea_);
-				tabs_->activate(active_tab);
+				NoteThreadSafeFunction::instantiate(
+				   [this, active_tab]() {
+					   init(true, showing_workarea_);
+					   tabs_->activate(active_tab);
+				   },
+				   false);
 			}
 			break;
 		// The building is no more. Next think() will call die().

@@ -158,7 +158,10 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	   });
 
 	read_targets();
+
 	activate_tab(type);
+
+	initialization_complete();
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
@@ -692,6 +695,8 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
 
 	table_selection_changed();
 	update_save_enabled();
+
+	initialization_complete();
 }
 
 EconomyOptionsWindow::SaveProfileWindow::~SaveProfileWindow() {

@@ -198,6 +198,8 @@ void SinglePlayerSetupBox::update() {
 	for (auto& p : active_player_groups_) {
 		p->update();
 	}
+
+	initialization_complete();
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height,

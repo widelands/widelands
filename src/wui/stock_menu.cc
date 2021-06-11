@@ -95,6 +95,8 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 
 	// Preselect the wares_in_warehouses tab
 	tabs_.activate(2);
+
+	initialization_complete();
 }
 
 void StockMenu::layout() {

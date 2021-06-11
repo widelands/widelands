@@ -184,6 +184,8 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 
 	set_center_panel(&tabs_);
 	update();
+
+	initialization_complete();
 }
 
 void SoldierStatisticsMenu::think() {

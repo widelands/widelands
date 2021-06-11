@@ -62,6 +62,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	update_warn_desyncing_addon();
 	update();
 	layout();
+	initialization_complete();
 }
 
 void LaunchSPG::update() {
