@@ -94,6 +94,12 @@ const std::string& get_homedir() {
 	return homedir;
 }
 
+AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
+	addon += '.';
+	addon += std::to_string(i18n_version);
+	grab_textdomain(addon, get_addon_locale_dir().c_str());
+}
+
 /**
  * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
  * On release, it is dropped and the previous one is re-grabbed instead.

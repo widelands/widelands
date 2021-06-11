@@ -7,9 +7,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Ruin",
    size = "medium",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 43, 43 },
       },
    }
