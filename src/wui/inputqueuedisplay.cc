@@ -258,8 +258,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	for (size_t i = 0; i < nr_icons_; ++i) {
 		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
-		                            bld.owner().tribe().get_ware_descr(index_)->icon() :
-		                            bld.owner().tribe().get_worker_descr(index_)->icon());
+                                  bld.owner().tribe().get_ware_descr(index_)->icon() :
+                                  bld.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 
@@ -333,8 +333,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?
-	               bld.owner().tribe().get_ware_descr(index_)->descname() :
-	               bld.owner().tribe().get_worker_descr(index_)->descname());
+                  bld.owner().tribe().get_ware_descr(index_)->descname() :
+                  bld.owner().tribe().get_worker_descr(index_)->descname());
 
 	// Initialize tooltips, icon colours and stuff
 	think();
