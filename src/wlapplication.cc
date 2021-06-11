@@ -418,6 +418,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
+
+	// Save configuration now. Otherwise, the UUID and sound options
+	// are not saved, when the game crashes
+	write_config();
 }
 
 /**
@@ -1102,10 +1106,6 @@ bool WLApplication::init_settings() {
 		set_config_string("uuid", generate_random_uuid());
 	}
 	set_config_int("last_start", now);
-
-	// Save configuration now. Otherwise, the UUID is not saved
-	// when the game crashes, losing part of its advantage
-	write_config();
 
 	return true;
 }
