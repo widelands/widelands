@@ -267,6 +267,7 @@ wl_library(logic
     base_log
     base_macros
     base_md5
+    base_multithreading
     base_random
     base_scoped_timer
     base_time_string

@@ -188,6 +188,8 @@ public:
 		reset();
 		set_center_panel(&box_);
 		center_to_parent();
+
+		initialization_complete();
 	}
 
 	const std::string& get_username() const {
@@ -354,6 +356,8 @@ public:
 
 		set_center_panel(&box_);
 		center_to_parent();
+
+		initialization_complete();
 	}
 
 	void think() override {
@@ -445,6 +449,8 @@ public:
 
 		set_center_panel(&box_);
 		center_to_parent();
+
+		initialization_complete();
 	}
 
 	void think() override {
@@ -510,6 +516,8 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
 
 	set_center_panel(&box_);
 	center_to_parent();
+
+	initialization_complete();
 }
 
 AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
@@ -1474,6 +1482,8 @@ void AddOnsCtrl::rebuild() {
 	}
 
 	update_dependency_errors();
+
+	initialization_complete();
 }
 
 void AddOnsCtrl::update_dependency_errors() {
@@ -2358,6 +2368,8 @@ public:
 		update_data();
 		main_box_.set_size(get_inner_w(), get_inner_h());
 		layout();
+
+		initialization_complete();
 	}
 
 	void on_resolution_changed_note(const GraphicResolutionChanged& note) override {
@@ -2695,6 +2707,8 @@ private:
 			set_center_panel(&main_box_);
 			center_to_parent();
 			text_->focus();
+
+			initialization_complete();
 		}
 
 		void think() override {

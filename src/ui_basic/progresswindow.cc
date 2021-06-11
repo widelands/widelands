@@ -67,6 +67,8 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
 	}
 
 	event_buffer_.clear();
+	initialization_complete();
+
 	set_background(background);
 	step(_("Loading…"));
 }

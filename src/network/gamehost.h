@@ -199,6 +199,9 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
+	std::list<Widelands::PlayerCommand*> pending_player_commands_;
+	void do_send_player_command(Widelands::PlayerCommand*);
+
 	FsMenu::MenuCapsule* capsule_;
 
 	std::unique_ptr<NetTransferFile> file_;

@@ -64,6 +64,9 @@ Scrollbar::Scrollbar(Panel* const parent,
                                           "images/ui_basic/scrollbar_down.png")) {
 	set_thinks(true);
 	layout();
+
+	// This is such a low-level UI element that we can safely mark it initialized immediately
+	initialization_complete();
 }
 
 inline const UI::PanelStyleInfo& Scrollbar::button_style() const {
