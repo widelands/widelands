@@ -57,59 +57,24 @@ CHECKFILES = [  # 'src/scripting/lua_map.h',
     # 'src/scripting/lua_root.h'
 ]
 
-file_classes = {}
 all_classes = []
 for f_name in CHECKFILES:
-    file_classes[f_name] = find_classes(f_name)
     all_classes.append(find_classes(f_name))
 
-print("all classes:", all_classes)
-for i in all_classes:
-   for k,v in i.items():
-      print(k,v)
+main_cls = []
+derived_cls = []
+def split_cls():
+    for i in all_classes:
+        for cls, ancestor in i.items():
+            if ancestor = '':
+                main_cls.append(cls)
+            else:
+                derived_cls.append([main.cls, ancestor])
 
-print('file_classes:')
-for f in file_classes:
-    print('\nAll classes of:', f)
-    for k, v in file_classes[f].items():
-        print(k, 'child of: ', v)
+split_cls()
 
-
-def find_descendants(cls):
-    descendants = [cls]
-    for f in file_classes:
-        for main_cls, descendant in file_classes[f].items():
-            if descendant == cls:
-                descendants.append([main_cls, f])
-    return descendants
-
-
-def get_main_classes():
-    main_cls = []
-    for f, l in file_classes.items():
-        for k, v in l.items():
-            if v == '':
-                main_cls.append(k)
-    return main_cls
-
-
-def find_all_descendants():
-    all_descendants = []
-    for c in get_main_classes():
-        for l in file_classes.values():
-            print('c', c, 'l', l, c in l)
-            if c in l:
-                all_descendants.append([x for x in find_descendants(l[c])])
-                print('found', l[c])
-    return all_descendants
-
-
-# print(get_main_classes())
-desc = find_all_descendants()
-
-for c in desc:
-    print('descendants', c)
-
+print('Main classes:', main_cls)
+print('derived classes:', derived_cls)
 
 # graph_directive = """
     # .. graphviz::
