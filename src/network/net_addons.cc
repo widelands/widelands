@@ -27,6 +27,7 @@
 #include <memory>
 
 #include <boost/format.hpp>
+#include <unistd.h>
 #ifndef _WIN32
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -81,7 +82,10 @@ void NetAddons::init(std::string username, std::string password) {
 		throw WLWarning("", "Network is already active during init");
 	}
 
+#ifdef SIGPIPE
 	signal(SIGPIPE, SIG_IGN);  // NOLINT
+#endif
+
 	if (password.empty()) {
 		username = "";
 	}
@@ -152,7 +156,10 @@ void NetAddons::quit_connection() {
 	}
 	initialized_ = false;
 	close(client_socket_);
+
+#ifdef SIGPIPE
 	signal(SIGPIPE, SIG_DFL);
+#endif
 }
 
 NetAddons::~NetAddons() {
