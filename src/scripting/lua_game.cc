@@ -74,8 +74,15 @@ Player
 
    This class represents one of the players in the game. You can access
    information about this player or act on his behalf. Note that you cannot
-   instantiate a class of this type directly, use ``wl.Game().players``
-   instead.
+   instantiate a class of this type directly. To get an object of a player index the
+   :class:`array` of :attr:`~wl.bases.EditorGameBase.players`:
+
+   .. code-block:: lua
+
+      local plr = wl.Game().players[1]                            -- the first player (usually blue)
+      local plr = wl.Game().players[2]                            -- the second player
+      local plr = wl.Game().players[wl.Game().interactive_player] -- the interactive player
+
 */
 const char LuaPlayer::className[] = "Player";
 const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
@@ -143,7 +150,7 @@ int LuaPlayer::get_name(lua_State* L) {
 /* RST
    .. attribute:: allowed_buildings
 
-      (RO) an array with name:bool values with all buildings
+      (RO) An :class:`array` with :class:`boolean` values with all buildings
       that are currently allowed for this player. Note that
       you can not enable/forbid a building by setting the value. Use
       :meth:`allow_buildings` or :meth:`forbid_buildings` for that.
@@ -165,8 +172,8 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 /* RST
    .. attribute:: objectives
 
-      (RO) A table of :class:`objectives <wl.game.Objective>` in form of
-      ``{objectivename:objective}``. You can change the objectives in this table
+      (RO) A :class:`table` of :class:`objectives <wl.game.Objective>` in form of
+      ``{objectivename=objective}``. You can change the objectives in this :class:`table`
       and it will be reflected in the game. To add a new item, use :meth:`add_objective`.
 */
 int LuaPlayer::get_objectives(lua_State* L) {
@@ -192,8 +199,9 @@ int LuaPlayer::get_defeated(lua_State* L) {
 /* RST
    .. attribute:: messages
 
-      (RO) An array of **all** the :class:`inbox messages <InboxMessage>` sent to the player. Note
-      that you can't add messages to this array, use :meth:`send_to_inbox` for that.
+      (RO) An :class:`array` of **all** the :class:`inbox messages <InboxMessage>` sent to the
+      player. Note that you can't add messages to this :class:`array`, use
+      :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_messages(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -212,8 +220,9 @@ int LuaPlayer::get_messages(lua_State* L) {
 /* RST
    .. attribute:: inbox
 
-      (RO) An array of the :class:`inbox messages <InboxMessage>` that are either read or new. Note
-      that you can't add messages to this array, use :meth:`send_to_inbox` for that.
+      (RO) An :class:`array` of the :class:`inbox messages <InboxMessage>` that are either read
+      or new. Note that you can't add messages to this :class:`array`, use :meth:`send_to_inbox`
+      for that.
 */
 int LuaPlayer::get_inbox(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -247,9 +256,9 @@ int LuaPlayer::get_color(lua_State* L) {
 /* RST
    .. attribute:: team
 
-      (RW) The team number of this player (0 means player is not in a team)
+      (RW) The team number of this player (``0`` means player is not in a team).
 
-      normally only reading should be enough, however it's a nice idea to have
+      Normally only reading should be enough, however it's a nice idea to have
       a modular scenario, where teams form during the game.
 */
 int LuaPlayer::set_team(lua_State* L) {
@@ -264,8 +273,6 @@ int LuaPlayer::get_team(lua_State* L) {
 /* RST
    .. attribute:: tribe
 
-      Returns the player's tribe.
-
       (RO) The :class:`wl.map.TribeDescription` for this player.
 */
 int LuaPlayer::get_tribe(lua_State* L) {
@@ -276,8 +283,9 @@ int LuaPlayer::get_tribe(lua_State* L) {
 /* RST
    .. attribute:: see_all
 
-      (RW) If you set this to true, the map will be completely visible for this
-      player.
+      (RW) If you set this to :const:`true`, the map will be completely visible for this
+      player. Note that the player for whom this is set to :const:`true` can't attack any
+      buildings anymore.
 */
 int LuaPlayer::set_see_all(lua_State* const L) {
 	get(L, get_egbase(L)).set_see_all(luaL_checkboolean(L, -1));
@@ -327,43 +335,43 @@ int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
    .. method:: send_to_inbox(title, message[, opts])
 
       Send a message to the player's inbox. One should prefer
-      :meth:`send_to_inbox` from `messages.lua`, which
+      :meth:`send_to_inbox` from *messages.lua*, which
       has an option to wait before sending the message until the player leaves
       the roadbuilding mode.
       Title or Message can be a formatted using widelands'
       :ref:`richtext functions <richtext.lua>`.
 
-      :arg title: title of the message
+      :arg title: The title of the message.
       :type title: :class:`string`
 
-      :arg message: text of the message
+      :arg message: The text of the message.
       :type message: :class:`string`
 
-      Opts is a table of optional arguments and can be omitted. If it
+      Opts is a :class:`table` of optional arguments and can be omitted. If it
       exist it must contain string/value pairs of the following type:
 
-      :arg field: the field connected to this message. Default:
-         no field connected to message
+      :arg field: The field connected to this message. Default:
+         no field connected to message.
       :type field: :class:`wl.map.Field`
 
-      :arg status: status to attach to this message. can be 'new', 'read' or
-         'archived'. Default: "new"
+      :arg status: Status to attach to this message. Can be :const:`"new"`, :const:`"read"`
+         or :const:`"archived"`. Default: :const:`"new"`
       :type status: :class:`string`
 
-      :arg popup: should the message window be opened for this message or not.
-         Default: :const:`false`
+      :arg popup: If :const:`true` the message window popups immediately,
+         defaults to :const:`false`.
       :type popup: :class:`boolean`
 
-      :arg icon: show a custom icon instead of the standard scenario message icon.
-         Default: "images/wui/messages/menu_toggle_objectives_menu.png""
-      :type icon: :class:`string` The icon's file path.
+      :arg icon: A file path to an icon which is shown beside this message. Defaults to
+         ``"images/wui/messages/menu_toggle_objectives_menu.png"``.
+      :type icon: :class:`string`
 
-      :arg heading: a longer message heading to be shown within the message.
+      :arg heading: A longer message heading to be shown within the message.
          If this is not set, `title` is used instead.
-         Default: ""
+         Default: :const:`""`
       :type building: :class:`string`
 
-      :returns: the message created
+      :returns: The message created.
       :rtype: :class:`wl.game.InboxMessage`
 */
 int LuaPlayer::send_to_inbox(lua_State* L) {
@@ -449,26 +457,26 @@ int LuaPlayer::send_to_inbox(lua_State* L) {
       game is set to pause. Usually you want to use :meth:`campaign_message_box`
       which has more options, e.g. easier positioning of message boxes.
 
-      :arg title: title of the message
+      :arg title: The title of the message.
       :type title: :class:`string`
 
-      :arg message: text of the message
+      :arg message: The text of the message.
       :type message: :class:`string`
 
-      Opts is a table of optional arguments and can be omitted. If it
+      Opts is a :class:`table` of optional arguments and can be omitted. If it
       exist it must contain string/value pairs of the following type:
 
       :arg field: The main view will be centered on this field when the box
-         pops up. Default: no field attached to message
+         pops up. Default: No field attached to message.
       :type field: :class:`wl.map.Field`
 
-      :arg modal: If this is ``false``, the game will not wait for the message window to close, but
-         continue at once.
+      :arg modal: If this is :const:`false`, the game will not wait for the message window to
+         close, but continue at once.
       :type modal: :class:`boolean`
 
-      :arg w: width of message box in pixels. Default: 400.
+      :arg w: The width of the message box in pixels. Default: 400.
       :type w: :class:`integer`
-      :arg h: width of message box in pixels. Default: 300.
+      :arg h: The height of the message box in pixels. Default: 300.
       :type h: :class:`integer`
       :arg posx: x position of window in pixels. Default: centered
       :type posx: :class:`integer`
@@ -535,10 +543,10 @@ int LuaPlayer::message_box(lua_State* L) {
 /* RST
    .. method:: sees_field(f)
 
-      Returns true if this field is currently seen by this player
+      Returns :const:`true` if this field is currently seen by this player.
 
-      :returns: :const:`true` or :const:`false`
-      :rtype: :class:`bool`
+      :returns: :const:`true` or :const:`false`.
+      :rtype: :class:`boolean`
 */
 int LuaPlayer::sees_field(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -553,10 +561,10 @@ int LuaPlayer::sees_field(lua_State* L) {
 /* RST
    .. method:: seen_field(f)
 
-      Returns true if this field has ever been seen by this player or
-      is currently seen
+      Returns :const:`true` if this field has ever been seen by this player or
+      is currently seen.
 
-      :returns: :const:`true` or :const:`false`
+      :returns: :const:`true` or :const:`false`.
       :rtype: :class:`bool`
 */
 int LuaPlayer::seen_field(lua_State* L) {
@@ -576,8 +584,9 @@ int LuaPlayer::seen_field(lua_State* L) {
       can either be the single string "all" or a list of strings containing
       the names of the buildings that are allowed.
 
-      :arg what: either "all" or an array containing the names of the allowed
-         buildings
+      :arg what: Either the string :const:`"all"` or an :class:`array` containing the names of
+         the allowed buildings.
+      :type what: :class:`string` or :class:`array`
       :returns: :const:`nil`
 
       The opposite function is :meth:`forbid_buildings`
@@ -591,8 +600,9 @@ int LuaPlayer::allow_buildings(lua_State* L) {
 
       See :meth:`allow_buildings` for arguments. This is the opposite function.
 
-      :arg what: either "all" or an array containing the names of the allowed
-         buildings
+      :arg what: Either the string :const:`"all"` or an :class:`array` containing the names
+         of the allowed buildings.
+      :type what: :class:`string` or :class:`array`
       :returns: :const:`nil`
 */
 int LuaPlayer::forbid_buildings(lua_State* L) {
@@ -600,21 +610,21 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
 }
 
 /* RST
-   .. method:: add_objective(name, title, descr)
+   .. method:: add_objective(name, title, body)
 
-      Add a new objective for this player. Will report an error, if an
+      Add a new :class:`~wl.game.Objective` for this player. Will report an error, if an
       Objective with the same name is already registered - note that the names
       for the objectives are shared internally for all players, so not even
       another player can have an objective with the same name.
 
-      :arg name: the name of the objective
+      :arg name: The name of the objective. Has to be unique.
       :type name: :class:`string`
-      :arg title: the title of the objective that will be shown in the menu
+      :arg title: The title of the objective that will be shown in the menu.
       :type title: :class:`string`
-      :arg body: the full text of the objective
+      :arg body: The full text of the objective.
       :type body: :class:`string`
 
-      :returns: The objective class created
+      :returns: The objective created.
       :rtype: :class:`wl.game.Objective`
 */
 int LuaPlayer::add_objective(lua_State* L) {
@@ -640,13 +650,14 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. The fields will remain visible until they
+      Make these **fields** visible for the player. The fields will remain visible until they
       are hidden again by :meth:`hide_fields`, even if they are not in vision range of any
       buildings or workers.
+
       See also :ref:`field_animations` for animated revealing.
 
-      :arg fields: The fields to reveal
-      :type fields: :class:`array` of :class:`fields <wl.map.Field>`
+      :arg fields: The fields to reveal.
+      :type fields: :class:`array` of :class:`fields <wl.map.Field>`.
 
       :returns: :const:`nil`
 */
@@ -669,23 +680,26 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 /* RST
    .. method:: hide_fields(fields[, state = "seen"])
 
-      Undo the effect of :meth:`reveal_fields` on these fields for the current player and
+      Undo the effect of :meth:`reveal_fields` on these fields for the player and
       optionally completely hide them or reset them to unexplored.
+
       See also :ref:`field_animations` for animated hiding.
-      .. note:: Passing a :class:`boolean` as the *state* argument is deprecated.
-      Use ``"permanent"`` instead of ``true`` and ``"seen"`` instead of ``false``.
 
-      :arg fields: The fields to hide
-      :type fields: :class:`array` of :class:`fields <wl.map.Field>`
+      .. note:: Passing a :class:`boolean` as the **state** argument is deprecated.
+         Use :const:`"permanent"` instead of :const:`true` and :const:`"seen"` instead of
+         :const:`false`.
 
-      :arg state: *Optional*. If  ``"permanent"``, the fields will be marked as completely hidden
-         and will not be seen by buildings or workers until they are revealed again
-         by :meth:`reveal_fields`.
-         If ``"explorable"``, they will no longer be visible, but can still be rediscovered by
-         buildings, ships or workers (own or allied).
-         If ``"seen"``, they will no longer be permanently visible (fading to foggy), but can
-         still be seen by buildings or workers (own or allied), and the player will remember the
-         last state that they had been seen. This is the default.
+      :arg fields: The fields to hide.
+      :type fields: :class:`array` of :class:`fields <wl.map.Field>`.
+
+      :arg state: (Optional) One of :const:`"permanent"`, :const:`"explorable"` or :const:`"seen"`.
+         If :const:`"permanent"`, the fields will be marked as completely
+         hidden and will not be seen by buildings or workers until they are revealed again
+         by :meth:`reveal_fields`. If :const:`"explorable"`, they will no longer be visible,
+         but can still be rediscovered by buildings, ships or workers (own or allied). If
+         :const:`"seen"`, they will no longer be permanently visible (fading to foggy), but
+         can still be seen by buildings or workers (own or allied), and the player will
+         remember the last state that they had been seen. This is the default.
       :type state: :class:`string`
 
       :returns: :const:`nil`
@@ -722,11 +736,11 @@ int LuaPlayer::hide_fields(lua_State* L) {
    .. method:: mark_scenario_as_solved(name)
 
       Marks a campaign scenario as solved. Reads the scenario definition in
-      data/campaigns/campaigns.lua to check which scenario and/or campaign should be
+      *data/campaigns/campaigns.lua* to check which scenario and/or campaign should be
       revealed as a result. This only works for the interactive player and most likely
       also only in single player games.
 
-      :arg name: name of the scenario to be marked as solved
+      :arg name: The name of the scenario to be marked as solved.
       :type name: :class:`string`
 */
 // UNTESTED
@@ -748,10 +762,10 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 
       Try to mark the given training wheel as the active one.
 
-      :arg name: name of the training wheel that wants to run
+      :arg name: The name of the training wheel that wants to run.
       :type name: :class:`string`
 
-      :returns: whether the training wheel is allowed to run
+      :returns: Whether the training wheel is allowed to run.
       :rtype: :class:`boolean`
 */
 // UNTESTED
@@ -780,7 +794,7 @@ int LuaPlayer::release_training_wheel_lock(lua_State* L) {
 
       Marks a global training wheel objective as solved. Also releases the lock.
 
-      :arg name: name of the training wheel to be marked as solved
+      :arg name: The name of the training wheel to be marked as solved.
       :type name: :class:`string`
 */
 // UNTESTED
@@ -802,10 +816,11 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 
       .. note:: Intended for use in scenarios only.
 
-      :arg name: name of the training wheel to be run
+      :arg name: The name of the training wheel to be run.
       :type name: :class:`string`
 
-      :arg force: whether it should be run anyway if it was previously solved
+      :arg force: (Optional) Whether this training wheel should be run anyway if it was
+         previously solved.
       :type force: :class:`boolean`
 */
 // UNTESTED
@@ -825,7 +840,7 @@ int LuaPlayer::run_training_wheel(lua_State* L) {
       Skips the execution of a training wheel and activates the training wheels that depend on it.
       Also releases the lock.
 
-      :arg name: name of the training wheel to be skipped
+      :arg name: The name of the training wheel to be skipped.
       :type name: :class:`string`
 */
 // UNTESTED
@@ -842,8 +857,8 @@ int LuaPlayer::skip_training_wheel(lua_State* L) {
 /* RST
    .. method:: get_ships()
 
-      :returns: array of player's :class:`ships <wl.map.Ship>`
-      :rtype: :class:`array` or :class:`table`
+      :returns: An :class:`array` of player's :class:`ships <wl.map.Ship>`.
+      :rtype: :class:`array`
 */
 int LuaPlayer::get_ships(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -864,14 +879,14 @@ int LuaPlayer::get_ships(lua_State* L) {
 /* RST
    .. method:: get_buildings(which)
 
-      which can be either a single name or an array of names. In the first
-      case, the method returns an array of all Buildings that the player has of
-      this kind. If which is an array, the function returns a table of
-      (name,array of buildings) pairs.
+      **which** can be either a single name or an :class:`array` of names. In the first
+      case, the method returns an :class:`array` of all Buildings that the player has of
+      this kind. If **which** is an :class:`array`, the function returns a :class:`table` of
+      ``{name=array_of_buildings}`` pairs.
 
-      :type which: name of building or array of building names
-      :rtype which: :class:`string` or :class:`array`
-      :returns: information about the player's buildings,
+      :arg which: The name of a building or an :class:`array` of building names.
+      :type which: :class:`string` or :class:`array`
+      :returns: Information about the player's buildings,
          see :class:`wl.map.Building`.
       :rtype: :class:`array` or :class:`table`
 */
@@ -882,15 +897,16 @@ int LuaPlayer::get_buildings(lua_State* L) {
 /* RST
    .. method:: get_constructionsites(which)
 
-      which can be either a single name or an array of names. In the first
-      case, the method returns an array of all constructionsites that the
-      player has of this kind. If which is an array, the function returns a
-      table of (name,array of buildings) pairs.
+      **which** can be either a single name or an :class:`array` of names. In the first
+      case, the method returns an :class:`array` of all constructionsites that the
+      player has of this kind. If which is an :class:`array`, the function returns a
+      :class:`table` of ``{name=array_of_constructionsites}`` pairs.
 
-      :type which: name of constructionsites building or array of building names
-      :rtype which: :class:`string` or :class:`array`
-      :returns: information about the player's constructionsites,
-         see :class:`wl.map.ConstructionSite`
+      :arg which: The internal name of a constructionsites building or an :class:`array` of
+         building names.
+      :type which: :class:`string` or :class:`array`
+      :returns: Information about the player's constructionsites,
+         see :class:`wl.map.ConstructionSite`.
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_constructionsites(lua_State* L) {
@@ -904,12 +920,13 @@ int LuaPlayer::get_constructionsites(lua_State* L) {
       is mainly useful in initializations where buildings must be placed
       automatically.
 
-      :arg building: internal name of the building to check for
+      :arg building: The internal name of the building to check for.
       :type building: :class:`string`
-      :arg field: where the suitability should be checked
+      :arg field: The field to check for suitability.
       :type field: :class:`wl.map.Field`
 
-      :returns: whether the field has a suitable building plot for this building type
+      :returns: :const:`true` if the field has a suitable building plot for this building,
+         :const:`false` otherwise.
       :rtype: :class:`boolean`
 */
 // UNTESTED
@@ -932,7 +949,7 @@ int LuaPlayer::get_suitability(lua_State* L) {
    .. method:: allow_workers(what)
 
       This will become the corresponding function to :meth:`allow_buildings`,
-      but at the moment this is only a stub that accepts only "all" as
+      but at the moment this is only a stub that accepts only :const:`"all"` as
       argument. It then activates all workers for the player, that means all
       workers are allowed to spawn in all warehouses.
 */
@@ -979,8 +996,12 @@ int LuaPlayer::allow_workers(lua_State* L) {
 /* RST
    .. method:: switchplayer(playernumber)
 
-      If *this* is the local player (the player set in interactive player)
-      switch to the player with playernumber
+      Switch the :attr:`~wl.Game.interactive_player` to the player with **playernumber** gaining
+      full control over the player given by **playernumber** and loosing control over the
+      formerly interactive player.
+
+      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :type playernumber: :class:`integer`
 */
 int LuaPlayer::switchplayer(lua_State* L) {
 	Widelands::Game& game = get_game(L);
@@ -998,8 +1019,13 @@ int LuaPlayer::switchplayer(lua_State* L) {
    .. method:: produced_wares_count(what)
 
       Returns count of wares produced by the player up to now.
-      'what' can be either an "all" or single ware name or an array of names. If single
-      ware name is given, integer is returned, otherwise the table is returned.
+
+      :arg what: This can be either :const:`"all"` or a single name of a ware or an :class`array`
+         of ware names.
+      :type what: :class:`string` or :class:`array`
+      :returns: If a single ware name is given, integer is returned, otherwise a :class:`table`
+         is returned.
+      :rtype: :class:`integer` or :class:`table`
 */
 int LuaPlayer::get_produced_wares_count(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -1031,14 +1057,15 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
 }
 
 /* RST
-   .. method:: is_attack_forbidden(who)
+   .. method:: is_attack_forbidden(playernumber)
 
-      Returns true if this player is currently forbidden to attack the player with the specified
-      player number. Note that the return value `false` does not necessarily mean that this
-      player *can* attack the other player, as they might for example be in the same team.
+      Returns :const:`true` if this player is currently forbidden to attack the player with
+      the specified **playernumber**. Note that the return value :const:`false` does not
+      necessarily mean that this player *can* attack the other player, as they might for
+      example be in the same team.
 
-      :arg who: player number of the player to query
-      :type who: :class:`int`
+      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :type playernumber: :class:`int`
       :rtype: :class:`boolean`
 */
 int LuaPlayer::is_attack_forbidden(lua_State* L) {
@@ -1047,15 +1074,16 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
 }
 
 /* RST
-   .. method:: set_attack_forbidden(who, forbid)
+   .. method:: set_attack_forbidden(playernumber, forbid)
 
       Sets whether this player is forbidden to attack the player with the specified
-      player number. Note that setting this to `false` does not necessarily mean that this
+      **playernumber**. Note that setting this to :const:`false` does not necessarily mean that this
       player *can* attack the other player, as they might for example be in the same team.
 
-      :arg who: player number of the player to query
-      :type who: :class:`int`
-      :arg forbid: Whether to allow or forbid attacks
+      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :type playernumber: :class:`int`
+      :arg forbid: If this is :const:`true` forbids attacking, :const:`false` allows
+         attacking (if the player is not in the same team).
       :type forbid: :class:`boolean`
 */
 int LuaPlayer::set_attack_forbidden(lua_State* L) {
@@ -1176,7 +1204,7 @@ Objective
 .. class:: Objective
 
    This represents an Objective, a goal for the player in the game. This is
-   mainly for displaying to the user, but each objective also has a
+   mainly for displaying to the user, but each objective also has an attribute
    :attr:`done` which can be set by the scripter to define if this is done. Use
    :attr:`visible` to hide it from the user.
 */
@@ -1209,7 +1237,7 @@ void LuaObjective::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: name
 
-      (RO) the internal name. You can reference this object via
+      (RO) The internal name. You can reference this object via
       :attr:`wl.game.Player.objectives` with :attr:`name` as key.
 */
 int LuaObjective::get_name(lua_State* L) {
@@ -1220,7 +1248,7 @@ int LuaObjective::get_name(lua_State* L) {
 /* RST
    .. attribute:: title
 
-      (RW) The line that is shown in the objectives menu
+      (RW) The line that is shown in the objectives menu.
 */
 int LuaObjective::get_title(lua_State* L) {
 	const Widelands::Objective& o = get(L, get_game(L));
@@ -1235,7 +1263,8 @@ int LuaObjective::set_title(lua_State* L) {
 /* RST
    .. attribute:: body
 
-      (RW) The complete text of this objective. Can be Widelands :ref:`richtext <richtext.lua>`
+      (RW) The complete text of this objective. Can be formatted via
+      Widelands :ref:`richtext <richtext.lua>`.
 */
 int LuaObjective::get_body(lua_State* L) {
 	const Widelands::Objective& o = get(L, get_game(L));
@@ -1250,7 +1279,8 @@ int LuaObjective::set_body(lua_State* L) {
 /* RST
    .. attribute:: visible
 
-      (RW) is this objective shown in the objectives menu
+      (RW) This is :const:`true` if this objective is shown in the objectives menu,
+      :const:`false` otherwisae.
 */
 int LuaObjective::get_visible(lua_State* L) {
 	const Widelands::Objective& o = get(L, get_game(L));
@@ -1265,10 +1295,10 @@ int LuaObjective::set_visible(lua_State* L) {
 /* RST
    .. attribute:: done
 
-      (RW) defines if this objective is already fulfilled. If done is
-      ``true``, the objective will not be shown to the user, no matter what.
+      (RW) Defines if this objective is already fulfilled. If done is
+      :const:`true`, the objective will not be shown to the user, no matter what
       :attr:`visible` is set to. A savegame will be created when this attribute
-      is changed to ``true``.
+      is changed to :const:`true`.
 
 */
 int LuaObjective::get_done(lua_State* L) {
@@ -1381,7 +1411,7 @@ void LuaInboxMessage::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: title
 
-      (RO) The title of this message
+      (RO) The title of this message.
 */
 int LuaInboxMessage::get_title(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).title());
@@ -1390,7 +1420,7 @@ int LuaInboxMessage::get_title(lua_State* L) {
 /* RST
    .. attribute:: body
 
-      (RO) The body of this message
+      (RO) The body of this message.
 */
 int LuaInboxMessage::get_body(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).body());
@@ -1400,7 +1430,7 @@ int LuaInboxMessage::get_body(lua_State* L) {
 /* RST
    .. attribute:: sent
 
-      (RO) The game time in milliseconds when this message was sent
+      (RO) The game time in milliseconds when this message was sent.
 */
 int LuaInboxMessage::get_sent(lua_State* L) {
 	lua_pushuint32(L, get(L, get_game(L)).sent().get());
@@ -1425,9 +1455,9 @@ int LuaInboxMessage::get_field(lua_State* L) {
 
       (RW) The status of the message. Can be either of
 
-         * new
-         * read
-         * archived
+         * :const:`"new"`
+         * :const:`"read"`
+         * :const:`"archived"`
 */
 int LuaInboxMessage::get_status(lua_State* L) {
 	switch (get(L, get_game(L)).status()) {
@@ -1464,7 +1494,7 @@ int LuaInboxMessage::set_status(lua_State* L) {
 /* RST
    .. attribute:: heading
 
-      (RO) The long heading of this message that is shown in the body
+      (RO) The long heading of this message that is shown in the body.
 */
 int LuaInboxMessage::get_heading(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).heading());
@@ -1474,7 +1504,7 @@ int LuaInboxMessage::get_heading(lua_State* L) {
 /* RST
    .. attribute:: icon_name
 
-      (RO) The filename for the icon that is shown with the message title
+      (RO) The filename for the icon that is shown with the message title.
 */
 int LuaInboxMessage::get_icon_name(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).icon_filename());
@@ -1518,17 +1548,17 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 .. function:: report_result(plr, result[, info = ""])
 
    Reports the game ending of a player. The player get prompted with a window
-   containing a table showing the results of all players and teams
+   containing a :class:`table` showing the results of all players and teams
    (if there are any). For mutliplayer games this reports the game ending also
-   to the metaserver if this is an Internet network game.
+   to the metaserver if this is an internet network game.
 
    :arg plr: The Player to report results for.
    :type plr: :class:`~wl.game.Player`
    :arg result: The player result (0: lost, 1: won, 2: resigned)
-   :type result: :class:`number`
+   :type result: :class:`integer`
    :arg info: A string containing extra data for this particular win
       condition. Likely one wants to use :meth:`make_extra_data` for this.
-      The string will be shown beside the table as "Player information: string".
+      The string will be shown beside the :class:`table` as "Player information: info".
    :type info: :class:`string`
 
    Example reporting a won game:

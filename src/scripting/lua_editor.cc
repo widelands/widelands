@@ -62,8 +62,8 @@ Player
    Child of: :class:`wl.bases.PlayerBase`
 
    This class represents one of the players in the editor.
-   Note that you cannot instantiate a class of this type directly, use the
-   :attr:`wl.Editor.players`.
+   Note that you cannot instantiate a class of this type directly, use
+   ``wl.Editor().players``.
 
 */
 const char LuaPlayer::className[] = "Player";
