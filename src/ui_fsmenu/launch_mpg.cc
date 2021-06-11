@@ -91,12 +91,14 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 		}
 	});
 	layout();
+	initialization_complete();
 }
 
 LaunchMPG::~LaunchMPG() {
 	if (game_done_on_cancel_) {
 		InternetGaming::ref().set_game_done();
 	}
+
 	chat_.reset();  // do this early to avoid heap-use-after-free
 }
 

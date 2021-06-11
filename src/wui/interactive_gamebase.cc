@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -636,12 +637,16 @@ bool InteractiveGameBase::try_show_ship_window() {
 }
 
 void InteractiveGameBase::show_game_summary() {
-	if (game_summary_.window) {
-		game_summary_.window->set_visible(true);
-		game_summary_.window->think();
-		return;
-	}
-	new GameSummaryScreen(this, &game_summary_);
+	NoteThreadSafeFunction::instantiate(
+	   [this]() {
+		   if (game_summary_.window) {
+			   game_summary_.window->set_visible(true);
+			   game_summary_.window->think();
+			   return;
+		   }
+		   new GameSummaryScreen(this, &game_summary_);
+	   },
+	   true);
 }
 
 bool InteractiveGameBase::show_game_client_disconnected() {

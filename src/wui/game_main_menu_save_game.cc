@@ -143,6 +143,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	pause_game(true);
 	set_thinks(false);
 	layout();
+
+	initialization_complete();
 }
 
 void GameMainMenuSaveGame::layout() {
@@ -286,7 +288,11 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 		   gs.save();
 	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
-	GenericSaveHandler::Error error = gsh.save();
+	GenericSaveHandler::Error error;
+	{
+		MutexLock m(MutexLock::ID::kLogicFrame, [this]() { stay_responsive(); });
+		error = gsh.save();
+	}
 
 	game.remove_loader_ui();
 

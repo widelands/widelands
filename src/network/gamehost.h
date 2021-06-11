@@ -199,6 +199,9 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
+	std::list<Widelands::PlayerCommand*> pending_player_commands_;
+	void do_send_player_command(Widelands::PlayerCommand*);
+
 	FsMenu::MenuCapsule* capsule_;
 	std::shared_ptr<GameController>&
 	   pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…

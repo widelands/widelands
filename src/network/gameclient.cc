@@ -308,7 +308,13 @@ void GameClient::do_run(RecvPacket& packet) {
 }
 
 void GameClient::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
+
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
 
 	if (d->game) {
 		// TODO(Klaus Halfmann): what kind of time tricks are done here?
@@ -336,12 +342,16 @@ void GameClient::think() {
  * @param pc will always be deleted in the end.
  */
 void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
+	pending_player_commands_.push_back(pc);
+}
+
+void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	assert(d->game);
 
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		verb_log_info("[Client]: send playercommand at time %i", d->game->get_gametime().get());
+		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 

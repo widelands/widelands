@@ -113,6 +113,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 
 	// We always want the current map's data here
 	update_map_options();
+
+	initialization_complete();
 }
 
 /**

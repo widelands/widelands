@@ -100,7 +100,11 @@ void ReplayGameController::set_paused(bool const paused) {
 
 void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb(game.get_ibase(), UI::WindowStyle::kWui, _("End of Replay"),
+
+	// Need to pull this out into a variable to make the includes script happy
+	InteractiveBase* i = game.get_ibase();
+	assert(i);
+	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),
