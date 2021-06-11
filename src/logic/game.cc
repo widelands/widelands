@@ -850,6 +850,7 @@ void Game::full_cleanup() {
 	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
 	next_game_to_load_.clear();
 	list_of_scenarios_.clear();
+	Economy::initialize_serial();
 
 	if (has_loader_ui()) {
 		remove_loader_ui();

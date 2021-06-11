@@ -575,6 +575,7 @@ void EditorGameBase::full_cleanup() {
 	enabled_addons().clear();
 	did_postload_addons_ = false;
 	descriptions_.reset(nullptr);
+	gametime_ = Time(0);
 }
 
 void EditorGameBase::set_road(const FCoords& f,
