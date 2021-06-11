@@ -26,16 +26,19 @@
 #include <list>
 #include <memory>
 
+#include <boost/format.hpp>
 #ifndef _WIN32
 #include <arpa/inet.h>
-#else
-#include <winsock2.h>
-#endif
-#include <boost/format.hpp>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#else
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <iphlpapi.h>
+#include <ws2def.h>
+#endif
 
 #include "base/i18n.h"
 #include "base/log.h"
