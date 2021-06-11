@@ -91,6 +91,7 @@ void CmdQueue::enqueue(Command* const cmd) {
 		ci.serial = 0;
 	}
 
+	assert(cmd->duetime() >= game_.get_gametime());
 	cmds_[cmd->duetime().get() % kCommandQueueBucketSize].push(ci);
 	++ncmds_;
 }

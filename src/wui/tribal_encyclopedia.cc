@@ -58,4 +58,6 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
+
+	initialization_complete();
 }

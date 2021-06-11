@@ -99,6 +99,8 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 	}
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 LoadGame::~LoadGame() {
