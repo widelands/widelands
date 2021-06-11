@@ -1870,7 +1870,7 @@ int LuaTribeDescription::get_builder(lua_State* L) {
       .. versionadded:: 1.1
 
       (RO) An :class:`array` of the internal names of the carrier types that this tribe uses as
-      :class:`string`s.
+      :class:`string`.
 */
 
 int LuaTribeDescription::get_carriers(lua_State* L) {
@@ -1888,7 +1888,7 @@ int LuaTribeDescription::get_carriers(lua_State* L) {
 /* RST
    .. attribute:: carrier
 
-      ..deprecated: 1.1 Use :attr:`carriers` instead.
+      .. deprecated:: 1.1 Use :attr:`carriers` instead.
 
       (RO) The internal name of the carrier type that this tribe uses as
       :class:`string`.
@@ -1902,7 +1902,7 @@ int LuaTribeDescription::get_carrier(lua_State* L) {
 /* RST
    .. attribute:: carrier2
 
-      ..deprecated: 1.1 Use :attr:`carriers` instead.
+      .. deprecated:: 1.1 Use :attr:`carriers` instead.
 
       (RO) The internal name of the secondary carrier type that this tribe uses as
       :class:`string`.
