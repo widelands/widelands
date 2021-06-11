@@ -64,10 +64,6 @@ if not wl.editor then
 
    include "map:scripting/objectives.lua"
    include "map:scripting/messages.lua"
-
-   -- The functionality of UI scripting is identical but we only test it in game
-   -- though as it is cumbersome to make those tests work also in the editor.
-   include "map:scripting/ui.lua"
 else
    include "map:scripting/editor.lua"
    include "map:scripting/eplr_access.lua"

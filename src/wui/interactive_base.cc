@@ -27,6 +27,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -131,6 +132,10 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
+     last_frame_realtime_(0),
+     previous_frame_realtime_(0),
+     last_frame_gametime_(0),
+     previous_frame_gametime_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()),
      cheat_mode_enabled_(false) {
@@ -227,6 +232,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 
 	setDefaultCommand([this](const std::vector<std::string>& str) { cmd_lua(str); });
 	addCommand("mapobject", [this](const std::vector<std::string>& str) { cmd_map_object(str); });
+
+	// Inform panel code that we have logic-related code
+	set_logic_think();
 }
 
 InteractiveBase::~InteractiveBase() {
@@ -315,6 +323,8 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	if (!map) {
 		for (const auto& preview : workarea_previews_) {
 			if (preview->coords == coords) {
@@ -452,12 +462,14 @@ InteractiveBase::road_building_steepness_overlays() const {
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
                                     std::map<Widelands::TCoords<>, uint32_t>& extra_data) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	workarea_previews_.insert(
 	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data}));
 	workareas_cache_.reset(nullptr);
 }
 
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	std::map<Widelands::TCoords<>, uint32_t> empty;
 	show_workarea(workarea_info, coords, empty);
 }
@@ -505,12 +517,15 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	if (!workareas_cache_) {
 		workareas_cache_.reset(new Workareas());
 		for (const auto& preview : workarea_previews_) {
 			workareas_cache_->push_back(get_workarea_overlay(map, *preview));
 		}
 	}
+
 	return Workareas(*workareas_cache_);
 }
 
@@ -625,6 +640,8 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 }
 
 void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_additional) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	for (auto it = workarea_previews_.begin(); it != workarea_previews_.end(); ++it) {
 		if (it->get()->coords == coords && (is_additional ^ it->get()->data.empty())) {
 			workarea_previews_.erase(it);
@@ -644,6 +661,8 @@ void InteractiveBase::postload() {
 }
 
 void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	const auto rpo = road_building_preview_overlays();
 	const auto rinfo = rpo.find(field.fcoords);
 	if (rinfo != rpo.end()) {
@@ -675,15 +694,17 @@ void InteractiveBase::info_panel_fast_forward_message_queue() {
 	info_panel_.fast_forward_message_queue();
 }
 
-/*
-===============
-Called once per frame by the UI code
-===============
-*/
-void InteractiveBase::think() {
-	egbase().think();  // Call game logic here. The game advances.
+// Called one per logic frame by the logic thread's main loop.
+// This is where the actual game logic (and from it, the game
+// controller's and the AI's `think()` functions) are called.
+// Also updates the stats about the logic FPS and real gamespeed.
+void InteractiveBase::game_logic_think() {
+	previous_frame_realtime_ = last_frame_realtime_;
+	previous_frame_gametime_ = last_frame_gametime_;
+	last_frame_realtime_ = SDL_GetTicks();
+	last_frame_gametime_ = egbase().get_gametime();
 
-	UI::Panel::think();
+	egbase().think();  // Call game logic here. The game advances.
 }
 
 double InteractiveBase::average_fps() const {
@@ -743,7 +764,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	std::string node_text;
 	if (game == nullptr || get_display_flag(dfDebug)) {
 		// Blit node information in the editor, and in debug mode also for games
-		static boost::format node_format("(%i, %i, %i)");
+		boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
 	}
@@ -894,6 +915,8 @@ Begin building a road
 void InteractiveBase::start_build_road(Coords road_start,
                                        Widelands::PlayerNumber const player,
                                        RoadBuildingType t) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(!road_building_mode_);
 	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
 
@@ -949,6 +972,8 @@ Stop building the road
 ===============
 */
 void InteractiveBase::abort_build_road() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(road_building_mode_);
 	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 		assert(road_building_mode_->work_area);
@@ -971,6 +996,8 @@ Finally build the road
 ===============
 */
 void InteractiveBase::finish_build_road() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(road_building_mode_);
 
 	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
@@ -1055,6 +1082,8 @@ Otherwise append if possible or return false.
 ===============
 */
 bool InteractiveBase::append_build_road(Coords const field) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(road_building_mode_);
 
 	const Map& map = egbase().map();
@@ -1186,6 +1215,8 @@ Add road building data to the road overlay
 ===============
 */
 void InteractiveBase::road_building_add_overlay() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(road_building_mode_);
 	assert(road_building_mode_->overlay_road_previews.empty());
 	assert(road_building_mode_->overlay_steepness_indicators.empty());
@@ -1298,6 +1329,7 @@ Remove road building data from road overlay
 ===============
 */
 void InteractiveBase::road_building_remove_overlay() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	assert(road_building_mode_);
 	road_building_mode_->overlay_road_previews.clear();
 	road_building_mode_->overlay_steepness_indicators.clear();
@@ -1366,7 +1398,7 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
 		NEVER_HERE();
 	}
-	registry.create();
+	NoteThreadSafeFunction::instantiate([&registry]() { registry.create(); }, true);
 	return registry.window;
 }
 

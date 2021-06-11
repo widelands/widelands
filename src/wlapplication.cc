@@ -39,6 +39,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -347,6 +348,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	init_settings();
 	datadir_ = g_fs->canonicalize_name(datadir_);
 	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
+
+	set_initializer_thread();
 
 	log_info("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
@@ -708,6 +711,8 @@ void WLApplication::init_and_run_game_from_template() {
 // In the future: push the first event on the event queue, then keep
 // dispatching events until it is time to quit.
 void WLApplication::run() {
+	std::thread game_logic_thread(&UI::Panel::logic_thread);
+
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		if (filename_.empty()) {
@@ -779,6 +784,9 @@ void WLApplication::run() {
 	}
 
 	g_sh->stop_music(500);
+
+	should_die_ = true;
+	game_logic_thread.join();
 }
 
 /**

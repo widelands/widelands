@@ -616,7 +616,13 @@ void GameHost::run_callback() {
 }
 
 void GameHost::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
+
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
 
 	if (d->game) {
 		uint32_t curtime = SDL_GetTicks();
@@ -654,6 +660,10 @@ void GameHost::think() {
 }
 
 void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
+	pending_player_commands_.push_back(pc);
+}
+
+void GameHost::do_send_player_command(Widelands::PlayerCommand* pc) {
 	pc->set_duetime(d->committed_networktime + Duration(1));
 
 	SendPacket packet;
@@ -915,7 +925,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
 	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
-	d->chat.receive(msg);
+	NoteThreadSafeFunction::instantiate([this, &msg]() { d->chat.receive(msg); }, true);
 }
 
 Duration GameHost::get_frametime() {
@@ -2212,14 +2222,13 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	}
 	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u", client_num,
+	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
 	              client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(),
 	              time.get());
-	receive_client_time(client_num, time);
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
-	send_player_command(plcmd);
+	do_send_player_command(plcmd);
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {

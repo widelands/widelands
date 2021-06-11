@@ -208,6 +208,8 @@ void SuggestedTeamsEntry::update() {
 	}
 
 	layout();
+
+	initialization_complete();
 }
 
 constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 20;
@@ -477,6 +479,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	name_.focus();
 	center_to_parent();
 	move_to_top();
+
+	initialization_complete();
 }
 
 void MainMenuMapOptions::update_waterway_length_warning() {

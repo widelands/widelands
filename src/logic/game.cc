@@ -33,6 +33,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -787,6 +788,28 @@ bool Game::run(StartGameType const start_game_type,
 void Game::think() {
 	assert(ctrl_);
 
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+
+		PlayerCommand* pc = pending_player_commands_.front();
+		pending_player_commands_.pop_front();
+
+		// At this point, the command has not yet been distributed to the other
+		// clients, nor written to the replay. If multithreading has caused the
+		// command's duetime to lie in the past, we can just safely increase it.
+		if (pc->duetime() <= get_gametime()) {
+			const Time new_time = get_gametime() + Duration(1);
+			if (g_verbose) {
+				log_info_time(get_gametime(),
+				              "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+				              pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
+			}
+			pc->set_duetime(new_time);
+		}
+
+		ctrl_->send_player_command(pc);
+	}
+
 	ctrl_->think();
 
 	if (state_ == gs_running) {
@@ -912,7 +935,8 @@ uint32_t Game::logic_rand() {
  * across the network.
  */
 void Game::send_player_command(PlayerCommand* pc) {
-	ctrl_->send_player_command(pc);
+	MutexLock m(MutexLock::ID::kCommands);
+	pending_player_commands_.push_back(pc);
 }
 
 /**

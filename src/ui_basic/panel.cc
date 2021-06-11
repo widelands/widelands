@@ -23,8 +23,10 @@
 
 #include <SDL_timer.h>
 
+#include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -64,6 +66,7 @@ Panel::Panel(Panel* const nparent,
              const int nh,
              const std::string& tooltip_text)
    : panel_style_(s),
+     initialized_(false),
      parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
@@ -83,7 +86,8 @@ Panel::Panel(Panel* const nparent,
      desired_w_(nw),
      desired_h_(nh),
      running_(false),
-     tooltip_(tooltip_text) {
+     tooltip_(tooltip_text),
+     logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
 	assert(nparent != this);
 	if (parent_) {
 		next_ = parent_->first_child_;
@@ -103,6 +107,8 @@ Panel::Panel(Panel* const nparent,
  * Unlink the panel from the parent's queue
  */
 Panel::~Panel() {
+	initialized_ = false;
+
 	// Release pointers to this object
 	if (mousegrab_ == this) {
 		mousegrab_ = nullptr;
@@ -139,6 +145,13 @@ Panel::~Panel() {
 	}
 }
 
+void Panel::initialization_complete() {
+	for (Panel* child = first_child_; child; child = child->next_) {
+		child->initialization_complete();
+	}
+	initialized_ = true;
+}
+
 /**
  * Free all of the panel's children.
  */
@@ -153,6 +166,74 @@ void Panel::free_children() {
 		first_child_ = next_child;
 	}
 	first_child_ = nullptr;
+}
+
+bool Panel::logic_thread_running_(false);
+constexpr uint32_t kGameLogicDelay = 1000 / 15;
+// static
+void Panel::logic_thread() {
+	logic_thread_running_ = true;
+	WLApplication* const app = WLApplication::get();
+
+	uint32_t next_think_time;
+
+	while (!app->should_die()) {
+		uint32_t time = SDL_GetTicks();
+
+		Panel* m =
+		   modal_;  // copy this because another panel may become modal during a lengthy logic frame
+
+		if (m && (m->flags_ & pf_logic_think)) {
+			switch (m->logic_thread_locked_) {
+			case LogicThreadState::kFree: {
+				MutexLock lock(MutexLock::ID::kLogicFrame);
+
+				m->logic_thread_locked_ = LogicThreadState::kLocked;
+
+				m->game_logic_think();  // actual game logic
+
+				switch (m->logic_thread_locked_) {
+				case LogicThreadState::kLocked:
+					m->logic_thread_locked_ = LogicThreadState::kFree;
+					break;
+				case LogicThreadState::kEndingRequested:
+					m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+					break;
+				default:
+					NEVER_HERE();
+				}
+			} break;
+
+			case LogicThreadState::kEndingRequested:
+				m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+				break;
+			case LogicThreadState::kEndingConfirmed:
+				break;
+			default:
+				NEVER_HERE();
+			}
+		}
+
+		next_think_time = time + kGameLogicDelay;
+		time = SDL_GetTicks();
+		// Always sleep a bit because another thread might want to lock our mutex
+		SDL_Delay(next_think_time < time + 5 ? 5 : next_think_time - time);
+	}
+	logic_thread_running_ = false;
+}
+
+void Panel::handle_notes() {
+	while (!notes_.empty()) {
+		if (handled_notes_.count(notes_.front().id) == 0) {
+			// If there are multiple modal panels, ensure each note is handled only once
+			Notifications::publish(NoteThreadSafeFunctionHandled(notes_.front().id));
+
+			notes_.front().run();
+		} else {
+			handled_notes_.erase(notes_.front().id);
+		}
+		notes_.pop_front();
+	}
 }
 
 struct ModalGuard {
@@ -180,11 +261,27 @@ Panel& Panel::get_topmost_forefather() {
 	return *forefather;
 }
 
-void Panel::do_redraw_now() {
+void Panel::do_redraw_now(const std::string& message) {
+	assert(is_initializer_thread());
+
 	Panel& ff = get_topmost_forefather();
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	ff.do_draw(rt);
+	{
+		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
+		ff.do_draw(rt);
+	}
+
+	if (!message.empty()) {
+		// After the user clicked on Quit, it may sometimes take many seconds
+		// until the logic frame has ended. During this time, we no longer
+		// handle input, and we gray out the user interface to indicate this.
+
+		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
+		        g_image_cache->get(template_dir() + "loadscreens/ending.png"), Vector2i(0, 0));
+
+		draw_game_tip(rt, Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()), message, 2);
+	}
 
 	if (g_mouse_cursor->is_visible()) {
 		WLApplication* const app = WLApplication::get();
@@ -201,6 +298,37 @@ void Panel::do_redraw_now() {
 	g_gr->refresh();
 }
 
+void Panel::stay_responsive() {
+	assert(modal_);
+	if (modal_ != this) {
+		return modal_->stay_responsive();
+	}
+
+	handle_notes();
+	do_redraw_now(_("Please wait…"));
+}
+
+void Panel::wait_for_current_logic_frame() {
+	if (!is_initializer_thread()) {
+		// This is the logic thread, so there would be little
+		// point in waiting for ourself to do something
+		return;
+	}
+
+	assert(modal_);
+	if (modal_ != this) {
+		assert(get_parent());
+		get_parent()->wait_for_current_logic_frame();
+		return;
+	}
+
+	Panel& wait = *modal_;
+	while (wait.logic_thread_locked_ == LogicThreadState::kLocked) {
+		stay_responsive();
+		SDL_Delay(2);
+	}
+}
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -209,20 +337,16 @@ void Panel::do_redraw_now() {
  * clicked the window's close button or similar).
  */
 int Panel::do_run() {
+	assert(initialized_);
+
+	logic_thread_locked_ =
+	   LogicThreadState::kEndingConfirmed;  // don't start the logic thread ere we're ready
+
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
 	ModalGuard prevmodal(*this);
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
-
-	// Loop
-	running_ = true;
-
-	// Panel-specific startup code. This might call end_modal()!
-	start();
-
-	// think() is called at most 15 times per second, that is roughly ever 66ms.
-	const uint32_t kGameLogicDelay = 1000 / 15;
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
@@ -231,38 +355,96 @@ int Panel::do_run() {
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 
-	const uint32_t initial_ticks = SDL_GetTicks();
-	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
-	uint32_t next_draw_time = initial_ticks + draw_delay;
+	const bool is_initializer = is_initializer_thread();
+
+	notes_.clear();
+	handled_notes_.clear();
+	subscriber1_ = is_initializer ?
+	                  Notifications::subscribe<NoteThreadSafeFunction>(
+	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
+	                  nullptr;
+	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
+	                                   [this](const NoteThreadSafeFunctionHandled& note) {
+		                                   assert(!handled_notes_.count(note.id));
+		                                   handled_notes_.insert(note.id);
+	                                   }) :
+	                                nullptr;
+
+	// Loop
+	running_ = true;
+
+	// Panel-specific startup code. This might call end_modal()!
+	start();
+
+	logic_thread_locked_ = LogicThreadState::kFree;  // tell the logic thread we're ready
+
+	uint32_t next_time = SDL_GetTicks();
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
-		app->handle_input(&input_callback);
+		if (modal_ == this) {
+			handle_notes();
+		}
 
-		if (start_time >= next_think_time) {
+		if (is_initializer) {
+			app->handle_input(&input_callback);
+		}
+
+		if (start_time >= next_time) {
 			if (app->should_die()) {
 				end_modal<Returncodes>(Returncodes::kBack);
+				assert(!running_);
 			}
 
-			do_think();
-
-			if (flags_ & pf_child_die) {
-				check_child_death();
+			{
+				MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
+				do_think();
 			}
 
-			next_think_time = start_time + kGameLogicDelay;
+			check_child_death();
+
+			if (is_initializer) {
+				do_redraw_now();
+			}
+
+			next_time = start_time + draw_delay;
 		}
 
-		if (start_time >= next_draw_time) {
-			do_redraw_now();
-			next_draw_time = start_time + draw_delay;
-		}
-
-		int32_t delay = std::min<int32_t>(next_draw_time, next_think_time) - SDL_GetTicks();
-		if (delay > 0) {
+		const int32_t delay = next_time - SDL_GetTicks();
+		if (running_ && delay > 0) {
 			SDL_Delay(delay);
 		}
 	}
+
+	// Wait until the current logic frame ends or there may be segfaults.
+	// This may take quite a while if the game was running at low LOGIC-FPS,
+	// so we continue refreshing the graphics while we wait.
+	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
+		logic_thread_locked_ = LogicThreadState::kEndingRequested;
+		while ((flags_ & pf_logic_think) && logic_thread_running_ &&
+		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
+			const uint32_t start_time = SDL_GetTicks();
+
+			handle_notes();
+
+			if (is_initializer) {
+				do_redraw_now(_("Game ending – please wait…"));
+			}
+
+			next_time = start_time + draw_delay;
+			const int32_t delay = next_time - SDL_GetTicks();
+			if (delay > 0) {
+				SDL_Delay(delay);
+			}
+		}
+	}
+
+	// Unsubscribe from notes, and eliminate old minimap rendering requests and other garbarge
+	subscriber2_.reset();
+	subscriber1_.reset();
+	handle_notes();
+
+	// Panel-specific post-running code
 	end();
 
 	return return_code_;
@@ -591,7 +773,7 @@ void Panel::think() {
  */
 void Panel::do_think() {
 	// No longer think when we are about to die
-	if (is_dying()) {
+	if (is_dying() || !initialized_) {
 		return;
 	}
 
@@ -604,6 +786,11 @@ void Panel::do_think() {
 		if (is_dying()) {
 			return;
 		}
+	}
+
+	// think() may have called die()
+	if (flags_ & pf_die) {
+		return;
 	}
 
 	for (Panel* child = first_child_; child; child = child->next_) {
@@ -881,6 +1068,9 @@ void Panel::set_thinks(bool const yes) {
  * Do NOT use this to delete a hierarchy of panels that have been modal.
  */
 void Panel::die() {
+	initialized_ = false;
+
+	flags_ &= ~pf_visible;
 	flags_ |= pf_die;
 
 	for (Panel* p = parent_; p; p = p->parent_) {
@@ -968,13 +1158,20 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
+#ifdef MUTEX_LOCK_DEBUG
+	if (!initialized_) {
+		dst.fill_rect(Recti(x_, y_, w_, h_), RGBAColor(100, 100, 200, 100), BlendMode::Default);
+		return;
+	}
+#endif
+
+	if (!initialized_ || !is_visible()) {
+		return;
+	}
+
 	// Make sure the panel's size is sane. If it's bigger than 10000 it's likely a bug.
 	assert(desired_w_ <= std::max(10000, g_gr->get_xres()));
 	assert(desired_h_ <= std::max(10000, g_gr->get_yres()));
-
-	if (!is_visible()) {
-		return;
-	}
 
 	Recti outerrc;
 	Vector2i outerofs = Vector2i::zero();
@@ -1058,6 +1255,10 @@ inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Pan
  * window)
  */
 void Panel::do_mousein(bool const inside) {
+	if (!initialized_) {
+		return;
+	}
+
 	if (!inside && mousein_child_) {
 		mousein_child_->do_mousein(false);
 		mousein_child_ = nullptr;
@@ -1082,6 +1283,10 @@ void Panel::do_mousein(bool const inside) {
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (get_can_focus()) {
 		focus();
 	}
@@ -1103,6 +1308,10 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 }
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos) {
+	if (!initialized_) {
+		return false;
+	}
+
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child; child = child->next_) {
 		if (!child->handles_mouse() || !child->is_visible()) {
@@ -1125,6 +1334,10 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 }
 
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
+	if (!initialized_) {
+		return false;
+	}
+
 	x -= lborder_;
 	y -= tborder_;
 	if (mousegrab_ != this) {
@@ -1140,6 +1353,10 @@ bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 
 bool Panel::do_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
+	if (!initialized_) {
+		return false;
+	}
+
 	x -= lborder_;
 	y -= tborder_;
 	if (mousegrab_ != this) {
@@ -1158,6 +1375,10 @@ bool Panel::do_mousemove(
  * If it doesn't process the key, we'll see if we can use the event.
  */
 bool Panel::do_key(bool const down, SDL_Keysym const code) {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (focus_ && focus_->do_key(down, code)) {
 		return true;
 	}
@@ -1203,6 +1424,10 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 }
 
 bool Panel::do_textinput(const std::string& text) {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (focus_ && focus_->do_textinput(text)) {
 		return true;
 	}
@@ -1215,6 +1440,10 @@ bool Panel::do_textinput(const std::string& text) {
 }
 
 bool Panel::do_tooltip() {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (mousein_child_ && mousein_child_->do_tooltip()) {
 		return true;
 	}

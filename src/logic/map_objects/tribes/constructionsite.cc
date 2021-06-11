@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation/animation.h"
@@ -130,7 +131,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		percent -= 100 * animations[i].second;
 	}
 	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-	                    player_color_to_draw, opacity, percent);
+	                    player_color_to_draw, opacity,
+	                    /* fix a race condition in drawing code: */ std::min(percent, 100));
 }
 
 /**
@@ -371,7 +373,13 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		}
 
 		// Open the new building window if needed
-		Notifications::publish(NoteBuilding(b.serial(), NoteBuilding::Action::kFinishWarp));
+		const Serial s = b.serial();
+		NoteThreadSafeFunction::instantiate(
+		   [s]() {
+			   // Do this in a thread-safe way to avoid a deadlock
+			   Notifications::publish(NoteBuilding(s, NoteBuilding::Action::kFinishWarp));
+		   },
+		   false);
 
 	} else if (was_immovable_ && work_completed_ <= 0) {
 		// Reinstate the former immovable
@@ -743,8 +751,9 @@ void ConstructionSite::draw(const Time& gametime,
 	info_.completedtime = kConstructionsiteStepTime * work_completed_;
 
 	if (working_) {
-		assert(work_steptime_ <=
-		       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
+		// This assert causes a race condition with multithreaded logic/drawing code
+		// assert(work_steptime_ <=
+		//       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
 		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
 	}
 

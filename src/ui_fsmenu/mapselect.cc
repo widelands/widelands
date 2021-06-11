@@ -169,6 +169,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
 	layout();
+
+	initialization_complete();
 }
 
 MapSelect::~MapSelect() {

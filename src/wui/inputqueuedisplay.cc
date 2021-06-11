@@ -157,7 +157,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      can_act_(!show_only && ibase_.can_act(bld.owner().player_number())),
      show_only_(show_only),
      has_priority_(has_priority && ww == Widelands::wwWARE),
-     building_(bld),
+     building_(&bld),
      type_(ww),
      index_(idx),
      queue_(q),
@@ -220,7 +220,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                4,
                has_priority_ ?
                   priority_to_index(settings_ ? settings_->ware_queues.at(index_).priority :
-                                                building_.get_priority(type_, index_)) :
+                                                bld.get_priority(type_, index_)) :
                   2,
                UI::SliderStyle::kWuiLight,
                "",
@@ -258,8 +258,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	for (size_t i = 0; i < nr_icons_; ++i) {
 		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
-                                  building_.owner().tribe().get_ware_descr(index_)->icon() :
-                                  building_.owner().tribe().get_worker_descr(index_)->icon());
+		                            bld.owner().tribe().get_ware_descr(index_)->icon() :
+		                            bld.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 
@@ -333,8 +333,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?
-                  building_.owner().tribe().get_ware_descr(index_)->descname() :
-                  building_.owner().tribe().get_worker_descr(index_)->descname());
+	               bld.owner().tribe().get_ware_descr(index_)->descname() :
+	               bld.owner().tribe().get_worker_descr(index_)->descname());
 
 	// Initialize tooltips, icon colours and stuff
 	think();
@@ -383,16 +383,21 @@ bool InputQueueDisplay::handle_mousemove(
 }
 
 void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
+
 	if (!can_act_ || !has_priority_ ||
-	    priority == (queue_ ? building_.get_priority(type_, index_) : get_setting()->priority)) {
+	    priority == (queue_ ? b->get_priority(type_, index_) : get_setting()->priority)) {
 		return;
 	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_ware_priority(building_, type_, index_, priority, settings_ != nullptr);
+		game->send_player_set_ware_priority(*b, type_, index_, priority, settings_ != nullptr);
 	} else {
 		if (queue_) {
-			building_.set_priority(type_, index_, priority);
+			b->set_priority(type_, index_, priority);
 		} else {
 			get_setting()->priority = priority;
 		}
@@ -401,6 +406,10 @@ void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
 
 void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 	assert(delta == 1 || delta == -1);
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
 
 	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
 	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
@@ -414,8 +423,7 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : desired_fill + delta;
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(
-		   building_, index_, type_, new_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr);
 	} else {
 		if (queue_) {
 			queue_->set_max_fill(new_fill);
@@ -426,6 +434,11 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
+
 	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
 	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
 	assert(desired_fill <= max_fill);
@@ -436,8 +449,7 @@ void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
 	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(
-		   building_, index_, type_, new_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr);
 	} else {
 		if (queue_) {
 			queue_->set_max_fill(new_fill);
@@ -450,7 +462,7 @@ void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
 void InputQueueDisplay::clicked_real_fill(const int8_t delta) {
 	assert(delta == 1 || delta == -1);
 
-	if (!queue_ || !ibase_.omnipotent()) {
+	if (!queue_ || !ibase_.omnipotent() || !building_.get(ibase_.egbase())) {
 		return;
 	}
 
@@ -490,6 +502,11 @@ static const RGBAColor kColorComing(127, 127, 127, 191);
 static const RGBAColor kColorMissing(191, 191, 191, 127);
 
 void InputQueueDisplay::think() {
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
+
 	if (queue_ && queue_->get_max_size() == 0) {
 		set_visible(false);
 		return;
@@ -517,8 +534,8 @@ void InputQueueDisplay::think() {
 	}
 
 	if (has_priority_) {
-		const Widelands::WarePriority& p =                                            // NOLINT
-		   queue_ ? building_.get_priority(type_, index_) : get_setting()->priority;  // NOLINT
+		const Widelands::WarePriority& p =                                     // NOLINT
+		   queue_ ? b->get_priority(type_, index_) : get_setting()->priority;  // NOLINT
 		// The purpose of this check is to prevent the slider from snapping back directly after
 		// the user dragged it, because the playercommand is not executed immediately of course
 		if (!slider_was_moved_ || *slider_was_moved_ == p) {
@@ -552,6 +569,11 @@ void InputQueueDisplay::draw(RenderTarget& r) {
 }
 
 void InputQueueDisplay::draw_overlay(RenderTarget& r) {
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
+
 	// Draw max fill indicator
 	if (!show_only_) {
 		assert(nr_icons_);
@@ -583,8 +605,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 	// Draw priority indicator
 	if (has_priority_ && collapsed_) {
-		const size_t p = priority_to_index(queue_ ? building_.get_priority(type_, index_) :
-                                                  get_setting()->priority);
+		const size_t p =
+		   priority_to_index(queue_ ? b->get_priority(type_, index_) : get_setting()->priority);
 		const int w = kButtonSize / 5;
 		const int x = hbox_.get_x() + collapse_.get_x() - w;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);

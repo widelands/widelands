@@ -161,7 +161,13 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		update_worker_table(production_site);
 	}
 	worker_table_selection_changed();
-	think();
+
+	if (production_site->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+		// If this is not a productionsite, then we are a trainingsite window.
+		// The derived class's init() will call initialization_complete().
+		think();
+		initialization_complete();
+	}
 }
 
 void ProductionSiteWindow::clicked_watch() {
