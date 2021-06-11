@@ -185,13 +185,25 @@ void ScenarioSelect::clicked_ok() {
 
 		std::list<std::string> next;
 		bool found = false;
-		for (const ScenarioData& s : scenarios_data_) {
-			if (s.path == selected.path) {
-				assert(!found);
-				found = true;
+		if (campaign_) {
+			for (const auto& s : campaign_->scenarios) {
+				if (s->path == selected.path) {
+					assert(!found);
+					found = true;
+				}
+				if (found && s->playable) {
+					next.push_back(resolve_and_fix_cross_file(s->path));
+				}
 			}
-			if (found) {
-				next.push_back(resolve_and_fix_cross_file(s.path));
+		} else {
+			for (const ScenarioData& s : scenarios_data_) {
+				if (s.path == selected.path) {
+					assert(!found);
+					found = true;
+				}
+				if (found && s.playable) {
+					next.push_back(resolve_and_fix_cross_file(s.path));
+				}
 			}
 		}
 
