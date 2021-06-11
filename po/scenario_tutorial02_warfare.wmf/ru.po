@@ -4,6 +4,7 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015
+# nskdmitry, 2021
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Viktor S <awsswa59@gmail.com>, 2019
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-08 09:16+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,7 +166,7 @@ msgstr "Пока мы ждем завершения строительства �
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid "Battle Arena"
-msgstr ""
+msgstr "Арена поединков"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
@@ -179,7 +180,7 @@ msgstr "Постройте арену поединков. Это большое 
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Строительство займет какое-то время, поэтому вы можете изменить скорость игры, используя клавиши %1$s и %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
@@ -247,7 +248,7 @@ msgstr "Постройте тренировочный лагерь."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Training Camp"
-msgstr ""
+msgstr "Тренировочный лагерь"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
@@ -287,117 +288,117 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Вы должны также иметь в виду, что каждое из трех племен в Widelands имеет свой собственный способ тренировки, поэтому здания и товары также различны. Кроме того, уровни способностей также несравнимы: имперских солдат имеет базовую атаку %1% на уровне 0, а варварский солдат на том же уровне, только %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Хижина разведчика"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Разведка окрестностей"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Большая часть карты нами не изучена. Было бы хорошо разведать направления для расширения нашей империи."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Можно положиться на удачу и расширяться в случайном направлении, но это лишний риск. Куда безопаснее поручить разведчику изучение неизведанных частей карты. Что, если мы найдем золото в тех горах?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Для начала экспедиции нужно построить домик разведчика. Он не займет много места."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Постройте хижину разведчика."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Постройте хижину разведчика"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "Хорошо бы знать, что находится вокруг нас. Разведчик будет изучать окрестности карты для нас."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Постройте домик разведчика."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid "Scout is ready"
-msgstr ""
+msgstr "Разведчик готов"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid "Ready to go!"
-msgstr ""
+msgstr "Поехали!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Отлично! Домик разведчика построен. Пока он занимается делом, запомните пару моментов о нем."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Во-первых, разведчику в дорогу нужна еда. К счастью, у нас есть несколько пайков на складе."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Получив продовольствие, он начнет бродить по окрестностям где ему вздумается. Вы можете следить за этим, но туман войны скроет то, что он увидит."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid "Scout"
-msgstr ""
+msgstr "Разведчик"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Explore the map"
-msgstr ""
+msgstr "Исследование карты"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Ждите, пока разведчик исследует неведомые земли."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr ""
+msgstr "Следите за разведчиком."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
-msgstr ""
+msgstr "Разведчик в пути"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
-msgstr ""
+msgstr "Новые горизонты?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Как вы можете заметить, разведчик может уходить довольно далеко от дома. Хорошие новости: там нет врагов."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "За состоянием исследования вы можете наблюдать на миникарте."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Не забывайте: разведка это тяжелый труд, и она невозможна без обеспечения продовольствием."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
@@ -527,7 +528,7 @@ msgstr "Вы можете также воспользоваться этой в�
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Уволены!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"

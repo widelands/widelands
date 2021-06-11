@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-06 08:32+0000\n"
-"PO-Revision-Date: 2021-06-08 05:24+0000\n"
+"POT-Creation-Date: 2021-06-08 08:24+0000\n"
+"PO-Revision-Date: 2021-06-10 06:40+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -1294,7 +1294,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Пекарня маниоки"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1714,6 +1713,7 @@ msgstr "Каменотесный цех"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:206
@@ -1733,6 +1733,7 @@ msgstr "делает топор дровосека"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:182
@@ -1758,6 +1759,7 @@ msgstr "делает кухонную утварь"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:146
@@ -2009,7 +2011,7 @@ msgid "Barracks"
 msgstr "Казармы"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:56
 msgctxt "atlanteans_building"
 msgid "recruiting soldier"
 msgstr "вербует солдат"
@@ -5429,10 +5431,10 @@ msgstr "Жители джунглей Амазонки. Это племя все
 msgctxt "amazons_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% солдат (+%2%)"
+msgstr[1] "%1% солдата (+%2%)"
+msgstr[2] "%1% солдат (+%2%)"
+msgstr[3] "%1% солдат (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
@@ -5451,10 +5453,10 @@ msgstr[3] "%1% солдат"
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) солдат (+%3%)"
+msgstr[1] "%1%(+%2%) солдата (+%3%)"
+msgstr[2] "%1%(+%2%) солдат (+%3%)"
+msgstr[3] "%1%(+%2%) солдат (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5462,11 +5464,12 @@ msgstr[3] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) солдат"
+msgstr[1] "%1%(+%2%) солдата"
+msgstr[2] "%1%(+%2%) солдат"
+msgstr[3] "%1%(+%2%) солдатов"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -5706,10 +5709,10 @@ msgstr "Это племя известно из древнейших леген�
 msgctxt "atlanteans_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% солдат (+%2%)"
+msgstr[1] "%1% солдата (+%2%)"
+msgstr[2] "%1% солдат (+%2%)"
+msgstr[3] "%1% солдатов (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
@@ -5728,10 +5731,10 @@ msgstr[3] "%1% воина"
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) солдат (+%3%)"
+msgstr[1] "%1%(+%2%) солдатов (+%3%)"
+msgstr[2] "%1%(+%2%) солдат (+%3%)"
+msgstr[3] "%1%(+%2%) солдатов (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
