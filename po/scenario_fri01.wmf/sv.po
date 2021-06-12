@@ -859,9 +859,9 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
-"Vi tränar inte soldaterna att undvika attacker, en riktig krigare kan "
-"blockera motståndarens slag med en skicklig vridning av svärdet istället för"
-" att hoppa undan som en fegis."
+"Vi tränar inte soldaterna att hoppa undan när fienden attackerar, en riktig "
+"krigare kan blockera motståndarens slag med en skicklig vridning av svärdet "
+"istället för att hoppa undan som en fegis."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"

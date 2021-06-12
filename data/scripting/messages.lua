@@ -128,6 +128,9 @@ end
 --                  wait until the player leaves the roadbuilding mode. Be aware that this can be very interruptive.
 --                  Default: :type false:.
 --
+--                  **allow_next_scenario** - If set to ``true``, show a button that allows starting
+--                                            the next scenario at once. Defaults to ``false``.
+--
 --    :arg int sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
 --    Example:

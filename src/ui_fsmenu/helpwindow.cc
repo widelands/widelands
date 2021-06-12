@@ -75,6 +75,8 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
 	set_inner_size(width, height);
 	center_to_parent();
 	focus();
+
+	initialization_complete();
 }
 
 /**

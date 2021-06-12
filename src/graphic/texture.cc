@@ -23,6 +23,7 @@
 #include <SDL_surface.h>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_line_program.h"
@@ -158,6 +159,7 @@ Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int p
 
 Texture::~Texture() {
 	if (owns_texture_) {
+		assert(is_initializer_thread());
 		Gl::State::instance().delete_texture(blit_data_.texture_id);
 	}
 }
@@ -171,6 +173,8 @@ int Texture::height() const {
 }
 
 void Texture::init(uint16_t w, uint16_t h) {
+	assert(is_initializer_thread());
+
 	blit_data_ = {
 	   0,  // initialized below
 	   w,
@@ -195,6 +199,8 @@ void Texture::init(uint16_t w, uint16_t h) {
 }
 
 void Texture::lock() {
+	assert(is_initializer_thread());
+
 	if (blit_data_.texture_id == 0) {
 		return;
 	}
@@ -213,6 +219,8 @@ void Texture::lock() {
 }
 
 void Texture::unlock(UnlockMode mode) {
+	assert(is_initializer_thread());
+
 	if (width() <= 0 || height() <= 0) {
 		return;
 	}
