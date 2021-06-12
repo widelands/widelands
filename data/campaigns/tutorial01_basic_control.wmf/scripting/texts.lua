@@ -607,5 +607,6 @@ conclude_tutorial = {
       p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]]) ..
       h1(p("align=center", u("widelands.org")))
    ),
+   allow_next_scenario = true,
    h = 450
 }
