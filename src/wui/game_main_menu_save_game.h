@@ -35,8 +35,10 @@ struct SaveWarnMessageBox;
 
 /// A window that lets the user save the current game and delete savegames.
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
+	enum class Type { kSave, kLoad };
+
 	friend struct SaveWarnMessageBox;
-	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
+	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry, Type);
 
 	void fill_list();
 	void select_by_name(const std::string& name);
@@ -67,6 +69,8 @@ private:
 
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
+
+	const Type type_;
 
 	UI::Box main_box_;
 	UI::Box info_box_;

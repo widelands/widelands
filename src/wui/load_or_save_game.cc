@@ -53,6 +53,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
+
 	switch (filetype_) {
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);

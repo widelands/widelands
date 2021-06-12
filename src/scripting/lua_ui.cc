@@ -679,7 +679,7 @@ int LuaWindow::get_name(lua_State* L) {
 */
 int LuaWindow::close(lua_State* /* L */) {
 	log_info("Closing window '%s'\n", get()->get_name().c_str());
-	delete panel_;
+	panel_->die();
 	panel_ = nullptr;
 	return 0;
 }

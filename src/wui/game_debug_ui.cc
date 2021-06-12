@@ -91,6 +91,8 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
 	          new MapObjectDebugPanel(tabs_, parent.egbase(), obj));
 
 	set_center_panel(&tabs_);
+
+	initialization_complete();
 }
 
 /*
@@ -151,6 +153,8 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
 	assert(&map_[0] <= coords_.field);
 	assert(coords_.field < &map_[0] + map_.max_index());
 	ui_bobs_.double_clicked.connect([this](uint32_t a) { open_bob(a); });
+
+	initialization_complete();
 }
 
 /*

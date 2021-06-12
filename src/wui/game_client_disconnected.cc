@@ -129,6 +129,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+
+	initialization_complete();
 }
 
 void GameClientDisconnected::die() {
