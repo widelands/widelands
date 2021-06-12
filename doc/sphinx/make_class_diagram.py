@@ -51,31 +51,47 @@ def find_classes(file_name):
     return tmp_classes
 
 
-CHECKFILES = [  # 'src/scripting/lua_map.h',
-    'src/scripting/lua_bases.h',
-    'src/scripting/lua_game.h',
-    # 'src/scripting/lua_root.h'
-]
+CHECKFILES = ['src/scripting/lua_map.h',
+              'src/scripting/lua_bases.h',
+              'src/scripting/lua_game.h',
+              'src/scripting/lua_root.h'
+              ]
 
 all_classes = []
 for f_name in CHECKFILES:
     all_classes.append(find_classes(f_name))
 
-main_cls = []
+main_classes = []
 derived_cls = []
-def split_cls():
+def split_classes():
     for i in all_classes:
         for cls, ancestor in i.items():
-            if ancestor = '':
-                main_cls.append(cls)
+            if ancestor == '':
+                main_classes.append(cls)
             else:
-                derived_cls.append([main.cls, ancestor])
+                derived_cls.append([cls, ancestor])
 
-split_cls()
+split_classes()
 
-print('Main classes:', main_cls)
-print('derived classes:', derived_cls)
+print('Main classes:', main_classes)
+print('Derived classes:', derived_cls)
 
+def make_ancestor_tree(cls, tree=None):
+   if tree is None:
+      # Needed, otherwise the tree will survive between recursive calls
+      tree = []
+   if cls in main_classes:
+      # End recursion
+      tree.append(cls)
+      return tree
+   else:
+      for i in derived_cls:
+         if i[0] == cls:
+            tree.append(cls)
+            make_ancestor_tree(i[1], tree)
+   return tree
+   
+print(make_ancestor_tree('MilitarySite'))
 # graph_directive = """
     # .. graphviz::
 
@@ -85,7 +101,7 @@ print('derived classes:', derived_cls)
     # node [shape=box, style=filled, fillcolor=white]
     # edge [color=white]
     # {cur_cls} [color=green]
-    # {main_cls} [shape=house]
+    # {main_classes} [shape=house]
 
     #{main_cls} -- {child_list}
     # }}""".format(cur_cls='Game',
