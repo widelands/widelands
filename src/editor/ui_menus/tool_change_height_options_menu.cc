@@ -70,6 +70,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	box_.add(&set_to_);
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
+
+	initialization_complete();
 }
 
 void EditorToolChangeHeightOptionsMenu::update_change_by() {
