@@ -90,7 +90,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 
 struct MutexRecord {
 	std::recursive_mutex mutex;
-	std::atomic_uint32_t nr_waiting_threads;
+	std::atomic_uint nr_waiting_threads;
 
 	MutexRecord() : nr_waiting_threads(0) {
 	}
