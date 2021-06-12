@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015
+# nskdmitry, 2021
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -18,8 +19,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-27 19:05+0000\n"
-"Last-Translator: Zme Zzzz <zmey1207@gmail.com>\n"
+"PO-Revision-Date: 2021-06-11 06:21+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,18 +70,18 @@ msgstr "Обработка окна \"Задания\""
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Вы можете открыть и закрыть это окно, нажав кнопку «Задания» на панели инструментов в нижней части экрана."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Как и в любом другом окне, вы также можете закрыть окно, щелкнув по нему правой кнопкой мыши."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Когда вы выполните задание, она исчезнет из списка."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
@@ -89,14 +90,14 @@ msgstr "Показать места строительства"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Запустите показ мест под строительство. Это можно сделать двумя способами:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Нажмите клавишу %s для переключения или выберите пункт \"Показать место под строительство\" в меню \"Скрыть/показать\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
@@ -130,7 +131,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Обычно игра начинается лишь с одним штабом. Это большое здание с синим флагом перед ним. Штаб это хранилище, которое хранит работников и солдат, а также товары. Некоторые товары нужны для строительства зданий, другие — для производства других товаров. Разумеется, запас товаров в штабе не бесконечен, так что необходимо наладить их пополнение. Самые нужные товары в начале игры — основные строительные материалы: брёвна и гранит. Давайте позаботимся о том, чтобы у нас не закончились брёвна. Для этого нам нужен дровосек и хижина дровосека для него."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -142,13 +143,13 @@ msgstr "Мы должны найти подходящее место для Хи
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Я покажу вам, как через меню показывать и скрывать оценку места под строительство."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Теперь, когда вы показали и скрыли места под стройплощадки, пожалуйста, выберите место, где мы разместим наше первое здание."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"
@@ -160,7 +161,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Приступим. Позвольте мне прояснить как поставить хижину дровосека и как соединить ее с дорогой. Лучше всего ставить ее поблизости от деревьев. Я опишу шаги и покажу их на практике."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -170,13 +171,13 @@ msgstr "Постройка хижины лесоруба"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Сперва я щелкну левой кнопкой мышки там, где собираюсь построить хижину дровосека. Появится окно, предлагающие выбрать здание."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "Хижина дровосека - здание маленькое, и я выбираю соответствующую закладку. Затем я выбираю \"хижина дровосека\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -239,7 +240,7 @@ msgstr "А сейчас установите синий флаг посреди�
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "Для установки флага щелкните по желтому значку флага между двумя только что расставленными синими флагами и кликните на соответствующий символ."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:156
 msgid "Placing Another Flag"
@@ -292,11 +293,11 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "Эта кнопка переключает показ рабочей области здания. Когда дровосек пойдет за дровами, он будет искать деревья лишь внутри своей рабочей области. Теперь покажите мне, насколько удачно вы расположили его хижину."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Закройте окно \"Стройплощадка\", когда увидите все, что нужно."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Well done! Let’s wait till the hut is finished."
@@ -306,11 +307,11 @@ msgstr "Хорошо. Давайте дождёмся завершения ст�
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Если хотите ускорить игру, воспользуйтесь кнопкой %1$s. Для замедления используется кнопка %2$s."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Перемены протекают быстрее в %1$s/%2$s раз или медленнее в %3$s/%4$s."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
@@ -325,11 +326,11 @@ msgstr "Великолепно! Хижина лесоруба построена
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Перемещение обзора"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Сдвигайте ваш обзор"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -377,7 +378,7 @@ msgstr "Учимся пользоваться миникартой"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Попробуй осмотреться, кликая по миникарте."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -389,7 +390,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Когда будете готовы продолжить, закройте миникарту, выбрав \"Скрыть миникарту\" в меню \"Виды на карту\" или нажав \"%s\". Также сработает и  щелчок правой кнопки мыши."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
@@ -451,7 +452,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "Каменоломня - малое строение, как и хижина дровосека. Поэтому вы можете построить ее на любом участке с красным, желтым или зеленым домиком, когда значки мест строительства включены (нажмите \"%s\", для этого)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -473,7 +474,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Убедитесь, что вы включили показ мест строительства, затем просто щёлкните на участок, где должно быть строение, выберите его в появившемся окне и оно будет размещено."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -569,7 +570,7 @@ msgstr "Присоедините вашу строительную площад�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Соедините каменоломню и штаб дорогой."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -623,7 +624,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Вашим рабочим не нравится ходить через всю страну. Вы должны построить дорогу от своего штаба до стройплощадки так, чтобы перевозчики могли транспортировать товары."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
@@ -821,7 +822,7 @@ msgstr "Закрытие окон"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Превосходно. Теперь нам нужно рассмотреть кое что еще."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -885,14 +886,14 @@ msgstr "Обеспечьте расширение вашей территори�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Постройте военное здание по вашему вкусу на вашей границе."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "Караульня - единственное военное сооружение, требующее мало места. Если ваш дровосек расчистит достаточно места, вы сможете построить что-нибудь более основательное."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
