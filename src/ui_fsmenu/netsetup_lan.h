@@ -67,7 +67,7 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-	std::unique_ptr<GameController> running_game_;
+	std::shared_ptr<GameController> running_game_;
 
 	// Left Column
 	UI::Textarea label_opengames_;

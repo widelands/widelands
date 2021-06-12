@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/texture_cache.h"
 
@@ -85,8 +86,19 @@ public:
 		const std::string hash = boost::lexical_cast<std::string>(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
 		if (rendered_text == nullptr) {
-			rendered_text =
-			   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
+			// TODO(Nordfriese): There are two possibilities to make this function thread-safe.
+			// The one I chose here is to encapsulate this low-level rendering
+			// in a NoteThreadSafeFunction.
+			// Another way would be to instead encapsulate all high-level functions that render text.
+			// The second way would be much more performance-efficient, but this would clutter
+			// up the high-level UI code a lot with masses of NoteThreadSafeFunction.
+			NoteThreadSafeFunction::instantiate(
+			   [this, &text, &hash, &w]() {
+				   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
+			   },
+			   true);
+			rendered_text = render_cache_->get(hash);
+			assert(rendered_text);
 		}
 		return rendered_text;
 	}
