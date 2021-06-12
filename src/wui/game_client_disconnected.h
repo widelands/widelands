@@ -27,7 +27,7 @@
 #include "ui_basic/unique_window.h"
 
 class InteractiveGameBase;
-struct GameHost;
+class GameHost;
 
 /**
  * Dialog that offers to replace a player with an AI or exit the game.

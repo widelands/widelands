@@ -21,6 +21,9 @@
 #define WL_UI_BASIC_PANEL_H
 
 #include <deque>
+#include <list>
+#include <memory>
+#include <set>
 #include <vector>
 
 #include <SDL_keyboard.h>
@@ -28,6 +31,7 @@
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/styles/panel_styles.h"
@@ -77,6 +81,8 @@ public:
 		pf_handle_textinput = 1024,
 		/// whether widget and its children will handle any key presses
 		pf_handle_keypresses = 2048,
+		// has a non-empty logic_think() implementation
+		pf_logic_think = 4096,
 	};
 
 	Panel(Panel* const nparent,
@@ -238,6 +244,13 @@ public:
 
 	// Events
 	virtual void think();
+	virtual void game_logic_think() {
+		// Overridden only by InteractiveBase
+	}
+
+	void set_logic_think() {
+		flags_ |= pf_logic_think;
+	}
 
 	Vector2i get_mouse_position() const;
 	void set_mouse_pos(Vector2i);
@@ -304,6 +317,16 @@ public:
 	virtual void die();
 	static void register_click();
 
+	static void logic_thread();
+
+	/*
+	 * Every panel that is semantically a toplevel panel needs to call
+	 * this at least once, ideally near the end of the most derived class's
+	 * constructor. This will make this panel and all its children visible
+	 * and allow them to start thinking and handling user input.
+	 */
+	void initialization_complete();
+
 	// Notify this panel's parent of our death, then immediately delete us.
 	void do_delete();
 
@@ -364,14 +387,27 @@ protected:
 	// Convenience functions for overriding focus_overlay_rects()
 	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff);
 
+	// Wait until the current logic frame has ended
+	void wait_for_current_logic_frame();
+	// Can be called during a lengthy wait to ensure that
+	// notes are still handled and the graphics refreshed.
+	// Does _not_ handle user input (this is on purpose!!)
+	void stay_responsive();
+
 	const PanelStyle panel_style_;
 
-	// Never call this function, except when you need Widelands to stay responsive
-	// during a costly operation and you can guarantee that it will not interfere
-	// with the "normal" graphics refreshing done periodically from `Panel::do_run`.
-	void do_redraw_now();
+	/** Never call this function, except when you need Widelands to stay responsive
+	 *  during a costly operation and you can guarantee that it will not interfere
+	 *  with the "normal" graphics refreshing done periodically from `Panel::do_run`.
+	 *  If the argument is not empty, the screen will be greyed out with the
+	 *  provided message to the user drawn in the screen center.
+	 *  May be called only by the initializer thread.
+	 */
+	void do_redraw_now(const std::string& message_to_display = std::string());
 
 private:
+	bool initialized_;
+
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
 	}
@@ -458,6 +494,16 @@ private:
 	static bool allow_user_input_;
 
 	static FxId click_fx_;
+
+	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
+	LogicThreadState logic_thread_locked_;
+	static bool logic_thread_running_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunction>> subscriber1_;
+	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunctionHandled>> subscriber2_;
+	void handle_notes();
+	std::list<NoteThreadSafeFunction> notes_;
+	std::set<uint32_t> handled_notes_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

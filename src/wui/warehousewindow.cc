@@ -302,5 +302,7 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 			}
 		}
 	}
+
 	think();
+	initialization_complete();
 }

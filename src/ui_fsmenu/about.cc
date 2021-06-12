@@ -67,6 +67,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 	layout();
 	tabs_.load_tab_contents();
 	center_to_parent();
+	initialization_complete();
 }
 
 bool About::handle_key(bool down, SDL_Keysym code) {

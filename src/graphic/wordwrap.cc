@@ -38,7 +38,7 @@
 namespace {
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
-	static boost::format f(
+	boost::format f(
 	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
 	f % ptsize;
 	f % clr.hex_value();

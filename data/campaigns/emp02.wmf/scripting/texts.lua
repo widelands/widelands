@@ -279,6 +279,7 @@ seven_days_later = {
 diary_page_11 = {
    title =_ "A Message",
    posy=1,
+   allow_next_scenario = true,
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
       _([[Today a pigeon landed on our island. It brought a message which fills me with dark thoughts and brings back my fears.]])

@@ -165,6 +165,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		ancestor->position_changed.connect([serial] { layout_if_alive(serial); });
 	}
 	layout();
+
+	list_->initialization_complete();
 }
 
 BaseDropdown::~BaseDropdown() {
