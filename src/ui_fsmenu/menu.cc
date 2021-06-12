@@ -313,6 +313,7 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 
 	layout();
 	menu.focus();
+	initialization_complete();
 }
 
 void MenuCapsule::clear_content() {
