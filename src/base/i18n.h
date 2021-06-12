@@ -32,6 +32,7 @@
 #endif
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "config.h"
 
 /// A macro to make i18n more readable and aid in tagging strings for translation
@@ -60,23 +61,22 @@ const std::string& get_homedir();
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct GenericTextdomain {
-	virtual ~GenericTextdomain() = default;
+public:
+	virtual ~GenericTextdomain();
+
+protected:
+	explicit GenericTextdomain();
+
+private:
+	MutexLock lock_;
 };
 struct Textdomain : GenericTextdomain {
 	// For all common purposes
-	explicit Textdomain(const std::string& name) {
-		grab_textdomain(name, get_localedir().c_str());
-	}
-	~Textdomain() override {
-		release_textdomain();
-	}
+	explicit Textdomain(const std::string& name);
 };
 struct AddOnTextdomain : GenericTextdomain {
 	// For strings defined in an add-on
 	explicit AddOnTextdomain(std::string addon, int i18n_version);
-	~AddOnTextdomain() override {
-		release_textdomain();
-	}
 };
 
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };

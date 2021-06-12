@@ -19,6 +19,8 @@
 
 #include "logic/replay_game_controller.h"
 
+#include <memory>
+
 #include <SDL_timer.h>
 
 #include "logic/game.h"
@@ -32,7 +34,7 @@ ReplayGameController::ReplayGameController(Widelands::Game& game, const std::str
      time_(game_.get_gametime()),
      speed_(1000),
      paused_(false) {
-	game_.set_game_controller(this);
+	game_.set_game_controller(std::shared_ptr<ReplayGameController>(this));
 	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
 }
 
@@ -98,7 +100,11 @@ void ReplayGameController::set_paused(bool const paused) {
 
 void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb(game.get_ibase(), UI::WindowStyle::kWui, _("End of Replay"),
+
+	// Need to pull this out into a variable to make the includes script happy
+	InteractiveBase* i = game.get_ibase();
+	assert(i);
+	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),

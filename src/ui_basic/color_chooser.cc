@@ -428,6 +428,7 @@ ColorChooser::ColorChooser(Panel* parent,
 
 	set_center_panel(&main_box_);
 	center_to_parent();
+	initialization_complete();
 }
 
 void ColorChooser::create_palette_button(const unsigned index) {
