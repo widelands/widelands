@@ -145,8 +145,10 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
 	// The Logic Frame mutex's extended sleep time is higher because it's locked much longer.
 	const bool has_priority = (record.nr_waiting_threads.load() == 0 || is_initializer_thread());
-	const uint32_t sleeptime = has_priority ? kMutexPriorityLockInterval :
-			(id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval : kMutexNormalLockInterval;
+	const uint32_t sleeptime =
+	   has_priority ?
+	      kMutexPriorityLockInterval :
+	      (id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval : kMutexNormalLockInterval;
 	++record.nr_waiting_threads;
 	if (!has_priority) {
 		SDL_Delay(sleeptime);
