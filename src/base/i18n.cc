@@ -94,7 +94,15 @@ const std::string& get_homedir() {
 	return homedir;
 }
 
-AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
+GenericTextdomain::GenericTextdomain() : lock_(MutexLock::ID::kI18N) {
+}
+GenericTextdomain::~GenericTextdomain() {
+	release_textdomain();
+}
+Textdomain::Textdomain(const std::string& name) : GenericTextdomain() {
+	grab_textdomain(name, get_localedir().c_str());
+}
+AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) : GenericTextdomain() {
 	addon += '.';
 	addon += std::to_string(i18n_version);
 	grab_textdomain(addon, get_addon_locale_dir().c_str());

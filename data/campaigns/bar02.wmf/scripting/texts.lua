@@ -321,6 +321,7 @@ order_msg_6_build_enhanced_economy_and_training = {
 
 story_msg_7 = {
    posy=1,
+   allow_next_scenario = true,
    title=_"Another Cold Day",
    body= thron(_"Thron looks worried…",
       -- TRANSLATORS: Thron

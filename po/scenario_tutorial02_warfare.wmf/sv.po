@@ -3,6 +3,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2021
 # GunChleoc, 2018
 # Fredrik Pettersson <luno@iaofredde.net>, 2006
 # GunChleoc, 2014
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-11 21:36+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +64,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "Titta på soldaterna som är på väg till våra militärbyggnader. De ser annorlunda ut jämfört med vanliga arbetare: De har en hälsostapel över sitt huvud som visar deras återstående hälsa och de har fyra symboler som symboliserar den individuella soldatens nuvarande nivåer i de fyra kategorierna hälsa, attack, försvar och undvik."
+msgstr "Titta på soldaterna som är på väg till våra militärbyggnader. De ser annorlunda ut jämfört med vanliga arbetare: De har en hälsostapel över sitt huvud som visar deras återstående hälsa och de har fyra symboler som symboliserar den individuella soldatens nuvarande nivåer i de fyra kategorierna hälsa, attack, försvar förmågan att hoppa undan."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
@@ -71,7 +72,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Om en barbarsoldat är fullt tränad har han hälsonivå %1%, attacknivå %2%, försvarsnivå %3% och undviknivå %4%. Då är han en skräckinjagande krigare! De individuella förmågorna har följande betydelse:"
+msgstr "Om en barbarsoldat är fullt tränad har han hälsonivå %1%, attacknivå %2%, försvarsnivå %3% och nivå %4% avseende förmågan att hoppa undan. Då är han en skräckinjagande krigare! De individuella förmågorna har följande betydelse:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
@@ -114,7 +115,7 @@ msgstr "Försvar är en procentnivå som dras av från attackvärdet. Barbarerna
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
 msgid "Evade:"
-msgstr "Undvik:"
+msgstr "Hoppa undan:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -123,7 +124,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "Undvik är möjligheten att soldaten lyckas vika undan från en attack. En nivå 0 barbar har en chans på %1%%% att undvika en attack och detta ökar i steg om %2%%% för varje nivå."
+msgstr "Hoppa undan är möjligheten att soldaten lyckas vika undan från en attack. En nivå 0 barbar har en chans på %1%%% att undvika en attack och detta ökar i steg om %2%%% för varje nivå."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
@@ -146,11 +147,11 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "En av dessa träningsanläggningar är stridsarenan. Det är en stor och dyr byggnad och där tränar soldaterna på att undvika. Eftersom soldater blir mycket hungriga under sin träning behöver denna byggnad mängder av mat och starköl. I ett riktigt spel ska du ha en bra infrastruktur innan du bygger en stridsarena."
+msgstr "En av dessa träningsanläggningar är stridsarenan. Det är en stor och dyr byggnad och där tränar soldaterna på att hoppa undan. Eftersom soldater blir mycket hungriga under sin träning behöver denna byggnad mängder av mat och starköl. I ett riktigt spel ska du ha en bra infrastruktur innan du bygger en stridsarena."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
-msgstr "För att se en pågående undvik-träning, bygg en stridsarena."
+msgstr "För att se en pågående \"hoppa undan\"-träning, bygg en stridsarena."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
 msgid ""
@@ -215,7 +216,7 @@ msgstr "Inga röda prickar betyder att soldaten är otränad, så han har nivå 
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "För varje lyckat träningssteg blir dina soldater starkare. Detta visas med en röd prick. Denna soldat är på nivå 1 i sin undvika-träning."
+msgstr "För varje lyckat träningssteg blir dina soldater starkare. Detta visas med en röd prick. Denna soldat är på nivå 1 i sin förmåga att hoppa undan från motståndarens slag."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
@@ -254,7 +255,7 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Stridsarenan tränar bara soldaterna i att undvika. För att få så starka soldater som möjligt behöver du också bygga ett träningsläger, vilket tränar dem i attack och hälsa."
+msgstr "Stridsarenan tränar bara soldaterna i att hoppa undan. För att få så starka soldater som möjligt behöver du också bygga ett träningsläger, vilket tränar dem i attack och hälsa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""

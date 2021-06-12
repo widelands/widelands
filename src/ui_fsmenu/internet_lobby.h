@@ -71,7 +71,7 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
-	std::unique_ptr<GameController> running_game_;
+	std::shared_ptr<GameController> running_game_;
 
 	// Left Column
 	UI::Textarea label_clients_online_;
