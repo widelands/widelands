@@ -550,5 +550,6 @@ conclusion = {
       p([[]]) ..
       p(_[[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]]) ..
       h1(p("align=center", u("widelands.org"))),
+   allow_next_scenario = true,
    h = 450
 }

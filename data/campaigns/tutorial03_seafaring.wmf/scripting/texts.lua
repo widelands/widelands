@@ -350,5 +350,6 @@ congratulation = {
       p(_[[There is also another island where you can build a port if you wish to try launching another expedition.]]) ..
       p(_[[As always, you can continue playing and practice a bit more on this map if you like, or get your captain’s license ready and try out your new skills in a real game…]])
    ),
+   allow_next_scenario = true,
    h = 250
 }

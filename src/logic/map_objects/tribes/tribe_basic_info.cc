@@ -68,9 +68,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			                     script_table->get_bool("uses_map_starting_position")));
 		}
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition && pair.second) {
+			if (pair.first->category == AddOns::AddOnCategory::kStartingCondition && pair.second) {
 				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
-				                                pair.first.internal_name +
+				                                pair.first->internal_name +
 				                                FileSystem::file_separator() + name + ".lua";
 				if (!g_fs->file_exists(script_path)) {
 					continue;
@@ -105,7 +105,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 	}
 }
 
-AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>* addons_to_consider) {
+AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 	AllTribes tribeinfos;
 	LuaInterface lua;
 
@@ -124,21 +124,21 @@ AllTribes get_all_tribeinfos(const std::vector<AddOns::AddOnInfo>* addons_to_con
 		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 
-	const std::vector<AddOns::AddOnInfo>* addons;
-	std::vector<AddOns::AddOnInfo> enabled_tribe_addons;
+	const AddOns::AddOnsList* addons;
+	AddOns::AddOnsList enabled_tribe_addons;
 	if (addons_to_consider) {
 		addons = addons_to_consider;
 	} else {
 		for (auto& pair : AddOns::g_addons) {
-			if (pair.first.category == AddOns::AddOnCategory::kTribes && pair.second) {
+			if (pair.first->category == AddOns::AddOnCategory::kTribes && pair.second) {
 				enabled_tribe_addons.push_back(pair.first);
 			}
 		}
 		addons = &enabled_tribe_addons;
 	}
 
-	for (const AddOns::AddOnInfo& a : *addons) {
-		const std::string dirname = kAddOnDir + FileSystem::file_separator() + a.internal_name +
+	for (const auto& a : *addons) {
+		const std::string dirname = kAddOnDir + FileSystem::file_separator() + a->internal_name +
 		                            FileSystem::file_separator() + "tribes";
 		if (g_fs->is_directory(dirname)) {
 			for (const std::string& tribe : g_fs->list_directory(dirname)) {

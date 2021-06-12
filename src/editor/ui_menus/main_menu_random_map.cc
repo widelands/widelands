@@ -771,6 +771,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 
 	set_center_panel(&box_);
 	center_to_parent();
+	initialization_complete();
 }
 
 void MainMenuNewRandomMap::clicked_ok() {

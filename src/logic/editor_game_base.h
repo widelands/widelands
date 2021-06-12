@@ -115,6 +115,7 @@ public:
 	virtual void postload();
 	void postload_addons();
 	virtual void cleanup_for_load();
+	virtual void full_cleanup();
 	void delete_world_and_tribes();
 
 	void init_addons(bool world_only);
@@ -131,12 +132,10 @@ public:
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
 
-#ifndef NDEBUG
-	/// Check whether we currently have a loader_ui. Used for asserts only.
+	/// Check whether we currently have a loader_ui.
 	bool has_loader_ui() const {
 		return loader_ui_ != nullptr;
 	}
-#endif
 
 	// Destroy the loader UI and game tips
 	void remove_loader_ui();
@@ -221,10 +220,10 @@ public:
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
-	std::vector<AddOns::AddOnInfo>& enabled_addons() {
+	AddOns::AddOnsList& enabled_addons() {
 		return enabled_addons_;
 	}
-	const std::vector<AddOns::AddOnInfo>& enabled_addons() const {
+	const AddOns::AddOnsList& enabled_addons() const {
 		return enabled_addons_;
 	}
 	const AllTribes& all_tribes() const;
@@ -298,7 +297,7 @@ private:
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
 
-	std::vector<AddOns::AddOnInfo> enabled_addons_;
+	AddOns::AddOnsList enabled_addons_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

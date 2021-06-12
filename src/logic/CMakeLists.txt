@@ -96,6 +96,7 @@ wl_library(logic_addons
   DEPENDS
     base_i18n
     base_exceptions
+    base_macros
     base_log
     build_info
     graphic
@@ -266,6 +267,7 @@ wl_library(logic
     base_log
     base_macros
     base_md5
+    base_multithreading
     base_random
     base_scoped_timer
     base_time_string

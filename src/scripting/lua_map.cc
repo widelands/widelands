@@ -1167,7 +1167,7 @@ workers that do the work, see: :ref:`has_workers`.
    ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
    economy out of thin air.
 
-   :arg which: name of ware/worker or ``{ware/worker_name=amount}`` table
+   :arg which: name of ware/worker or ``{ware/worker_name=amount}`` :class:`table`
    :type which: :class:`string` or :class:`table`
    :arg amount: this many units will be available after the call
    :type amount: :class:`integer`
@@ -2318,10 +2318,10 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
    .. method:: helptexts(tribename)
 
       (RO) Returns a :class:`table` of helptexts if it exists for the given tribe, an
-      empty table otherwise.
+      empty :class:`table` otherwise.
 
       Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
-      optional. The table may contain other keys as well.
+      optional. The :class:`table` may contain other keys as well.
 
       :arg tribename: The tribe for which we want to fetch the helptext.
       :type tribename: :class:`string`
@@ -4984,7 +4984,7 @@ int LuaFlag::get_worker_economy(lua_State* L) {
 
       :returns:  A :class:`table` with directions as keys. Directions can be
          ``"tr"``, ``"r"``, ``"br"``, ``"bl"``, ``"l"`` and ``"tl"``. If this flag has no roads,
-         the table will be empty.
+         the :class:`table` will be empty.
 */
 int LuaFlag::get_roads(lua_State* L) {
 
@@ -6264,7 +6264,7 @@ WH_GET_POLICY(worker)
             -- Returns e.g. "normal"
 
          wh:get_warehouse_policies({"ax", "coal"})
-            -- Returns a table like {"ax"="normal", "coal"="prefer"}
+            -- Returns a :class:`table` like {"ax"="normal", "coal"="prefer"}
 
 
 */
@@ -8215,7 +8215,7 @@ int LuaField::__tostring(lua_State* L) {
          f:region(1)
 
       will return an :class:`array` with the following entries (Note: Ordering of the
-      fields inside the array is not guaranteed):
+      fields inside the :class:`array` is not guaranteed):
 
       .. code-block:: lua
 

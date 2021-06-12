@@ -414,4 +414,5 @@ victory_1 = {
       _([[We have defeated all our enemies! Now no other tribe will ever dare settle here again. We are safe, and we can finally live our lives in peace.]]))
       .. objective_text(_"Congratulations",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+   allow_next_scenario = true,
 }

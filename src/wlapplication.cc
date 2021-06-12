@@ -39,6 +39,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -65,7 +66,6 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
-#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/host_game_settings_provider.h"
@@ -79,6 +79,7 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/options.h"
+#include "wlapplication_messages.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -348,6 +349,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	datadir_ = g_fs->canonicalize_name(datadir_);
 	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
 
+	set_initializer_thread();
+
 	log_info("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
 
@@ -415,6 +418,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
+
+	// Save configuration now. Otherwise, the UUID and sound options
+	// are not saved, when the game crashes
+	write_config();
 }
 
 /**
@@ -590,7 +597,7 @@ void WLApplication::init_and_run_game_from_template() {
 		}
 		bool found = false;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.internal_name == name) {
+			if (pair.first->internal_name == name) {
 				found = true;
 				new_g_addons.push_back(std::make_pair(pair.first, true));
 				break;
@@ -612,7 +619,7 @@ void WLApplication::init_and_run_game_from_template() {
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::unique_ptr<GameHost> host;
 	if (multiplayer) {
-		std::unique_ptr<GameController> ctrl(nullptr);
+		std::shared_ptr<GameController> ctrl(nullptr);
 		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
 		                        Widelands::get_all_tribeinfos(nullptr), false));
 		settings.reset(new HostGameSettingsProvider(host.get()));
@@ -688,8 +695,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
 
-	SinglePlayerGameController ctrl(game, true, playernumber);
-	game.set_game_controller(&ctrl);
+	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
@@ -708,6 +714,8 @@ void WLApplication::init_and_run_game_from_template() {
 // In the future: push the first event on the event queue, then keep
 // dispatching events until it is time to quit.
 void WLApplication::run() {
+	std::thread game_logic_thread(&UI::Panel::logic_thread);
+
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		if (filename_.empty()) {
@@ -725,7 +733,7 @@ void WLApplication::run() {
 				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 				game.set_write_replay(false);
-				ReplayGameController rgc(game, filename_);
+				new ReplayGameController(game, filename_);
 				game.save_handler().set_allow_saving(false);
 				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 			} else {
@@ -760,7 +768,7 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(filename_, script_to_run_);
+			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
@@ -779,6 +787,9 @@ void WLApplication::run() {
 	}
 
 	g_sh->stop_music(500);
+
+	should_die_ = true;
+	game_logic_thread.join();
 }
 
 /**
@@ -1078,98 +1089,22 @@ bool WLApplication::init_settings() {
 
 	set_mouse_swap(get_config_bool("swapmouse", false));
 
-	// TODO(unknown): KLUDGE!
-	// Without this the following config options get dropped by check_used().
-	// Profile needs support for a Syntax definition to solve this in a
-	// sensible way
+	// Without this the config options get dropped by check_used().
+	for (const std::string& conf : get_all_parameters()) {
+		get_config_string(conf, "");
+	}
 
-	// Some of the options listed here are documented in wlapplication_messages.cc
-	get_config_bool("ai_training", false);
-	get_config_bool("auto_roadbuild_mode", false);
-	get_config_bool("auto_speed", false);
-	get_config_bool("dock_windows_to_edges", false);
-	get_config_bool("fullscreen", false);
-	get_config_bool("maximized", false);
-	get_config_bool("sdl_cursor", true);
-	get_config_bool("snap_windows_only_when_overlapping", false);
-	get_config_bool("animate_map_panning", false);
-	get_config_bool("write_syncstreams", false);
-	get_config_bool("nozip", false);
-	get_config_string("theme", "");
-	get_config_int("xres", 0);
-	get_config_int("yres", 0);
-	get_config_int("border_snap_distance", 0);
-	get_config_int("maxfps", 0);
-	get_config_int("panel_snap_distance", 0);
-	get_config_int("autosave", 0);
-	get_config_int("rolling_autosave", 0);
-	get_config_string("language", "");
-	get_config_string("metaserver", "");
-	get_config_natural("metaserverport", 0);
-	get_config_string("addon_server", "");
-	// Undocumented on command line, appears in game options
-	get_config_bool("single_watchwin", false);
-	get_config_bool("ctrl_zoom", false);
-	get_config_bool("game_clock", true);
-	get_config_int("toolbar_pos", 0);
-	get_config_bool("numpad_diagonalscrolling", false);
-	get_config_bool("edge_scrolling", false);
-	get_config_bool("invert_movement", false);
-	get_config_bool("tooltip_accessibility_mode", false);
-#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
-	get_config_bool("training_wheels", true);
-#endif
-	get_config_bool("inputgrab", false);
-	get_config_bool("transparent_chat", false);
-	get_config_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
-	// Undocumented. Unique ID used to allow the metaserver to recognize players
-	get_config_string("uuid", "");
-	// Undocumented, appears in online login box
-	// Whether the used metaserver login is for a registered user
-	get_config_string("registered", "");
-	// Undocumented, appears in online login box and LAN lobby
-	// The nickname used for LAN and online games
-	get_config_string("nickname", "");
-	// Undocumented, appears in online login box. The hashed password for online logins
-	get_config_string("password_sha1", "");
-	// Undocumented, appears in online login box. Whether to automatically use the stored login
-	get_config_string("auto_log", "");
-	// Undocumented, appears in LAN lobby. The last host connected to
-	get_config_string("lasthost", "");
-	// Undocumented, appears in online lobby. The name of the last hosted game
-	get_config_string("servername", "");
-	// Undocumented, appears in editor. Name of map author
-	get_config_string("realname", "");
-	// Undocumented, checkbox appears on "Watch Replay" screen
-	get_config_bool("display_replay_filenames", false);
-	get_config_bool("editor_player_menu_warn_too_many_players", false);
-	get_config_string("addons", "");
-	// Undocumented, on command line, appears in game options
-	get_config_bool("sound", "enable_ambient", true);
-	get_config_bool("sound", "enable_chat", true);
-	get_config_bool("sound", "enable_message", true);
-	get_config_bool("sound", "enable_music", true);
-	get_config_bool("sound", "enable_ui", true);
-	get_config_int("sound", "volume_ambient", 128);
-	get_config_int("sound", "volume_chat", 128);
-	get_config_int("sound", "volume_message", 128);
-	get_config_int("sound", "volume_music", 64);
-	get_config_int("sound", "volume_ui", 128);
 	// Keyboard shortcuts
 	init_shortcuts();
-	// KLUDGE!
 
 	int64_t last_start = get_config_int("last_start", 0);
-	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
+	int64_t now = time(nullptr);
+	if (last_start + 12 * 60 * 60 < now || get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
-		get_config_string("uuid", generate_random_uuid());
+		set_config_string("uuid", generate_random_uuid());
 	}
-	get_config_int("last_start", time(nullptr));
-
-	// Save configuration now. Otherwise, the UUID is not saved
-	// when the game crashes, losing part of its advantage
-	write_config();
+	set_config_int("last_start", now);
 
 	return true;
 }
@@ -1263,20 +1198,23 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 		}
 
 		// Are we looking at an option at all?
-		if (opt.compare(0, 2, "--")) {
+		if (opt.size() < 2 || opt.compare(0, 2, "--")) {
 			if (argc == 2) {
 				// Special case of opening a savegame or replay from file browser
-				if (0 == opt.compare(opt.size() - kSavegameExtension.size(), kSavegameExtension.size(),
+				if (opt.size() > kSavegameExtension.size() &&
+				    0 == opt.compare(opt.size() - kSavegameExtension.size(), kSavegameExtension.size(),
 				                     kSavegameExtension)) {
 					commandline_["loadgame"] = opt;
 					continue;
-				} else if (0 == opt.compare(opt.size() - kReplayExtension.size(),
+				} else if (opt.size() > kReplayExtension.size() &&
+				           0 == opt.compare(opt.size() - kReplayExtension.size(),
 				                            kReplayExtension.size(), kReplayExtension)) {
 					commandline_["replay"] = opt;
 					continue;
 				}
 			}
-			throw ParameterError();
+			commandline_["error"] = opt;
+			break;
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
@@ -1301,11 +1239,21 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 /**
  * Parse the command line given in commandline_
  *
- * \return false if there were errors during parsing \e or if "--help"
- * was given,
- * true otherwise.
+ * \throw a ParameterError if there were errors during parsing \e or if "--help"
  */
 void WLApplication::handle_commandline_parameters() {
+	auto throw_empty_value = [](const std::string& opt) {
+		throw ParameterError(
+		   CmdLineVerbosity::None,
+		   (boost::format(_("Empty value of command line parameter: %s")) % opt).str());
+	};
+
+	auto throw_exclusive = [](const std::string& opt) {
+		throw ParameterError(
+		   CmdLineVerbosity::None,
+		   (boost::format(_("%s can not be combined with other actions")) % opt).str());
+	};
+
 	if (commandline_.count("nosound")) {
 		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
@@ -1352,6 +1300,27 @@ void WLApplication::handle_commandline_parameters() {
 			exit(1);
 		}
 	}
+
+	if (commandline_.count("language")) {
+		const std::string& lang = commandline_["language"];
+		if (!lang.empty()) {
+			set_config_string("language", lang);
+		} else {
+			init_language();
+			throw_empty_value("--language");
+		}
+	}
+	init_language();  // do this now to have translated command line help
+	fill_parameter_vector();
+
+	if (commandline_.count("error")) {
+		throw ParameterError(
+		   CmdLineVerbosity::Normal,
+		   (boost::format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?")) %
+		    commandline_["error"])
+		      .str());
+	}
+
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];
 		commandline_.erase("datadir_for_testing");
@@ -1359,7 +1328,6 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("verbose")) {
 		g_verbose = true;
-
 		commandline_.erase("verbose");
 	}
 
@@ -1374,10 +1342,13 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("replay")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("replay can not be combined with other actions");
+			throw_exclusive("replay");
 		}
 		filename_ = commandline_["replay"];
-		if (!filename_.empty() && *filename_.rbegin() == '/') {
+		if (filename_.empty()) {
+			throw_empty_value("--replay");
+		}
+		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kReplay;
@@ -1386,11 +1357,10 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("new_game_from_template")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("new_game_from_template can not be combined with other actions");
 		}
 		filename_ = commandline_["new_game_from_template"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --new_game_from_template");
+			throw_empty_value("--new_game_from_template");
 		}
 		game_type_ = GameType::kFromTemplate;
 		commandline_.erase("new_game_from_template");
@@ -1398,11 +1368,11 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("loadgame")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("loadgame can not be combined with other actions");
+			throw_exclusive("loadgame");
 		}
 		filename_ = commandline_["loadgame"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --loadgame");
+			throw_empty_value("--loadgame");
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1413,11 +1383,11 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("scenario")) {
 		if (game_type_ != GameType::kNone) {
-			throw wexception("scenario can not be combined with other actions");
+			throw_exclusive("scenario");
 		}
 		filename_ = commandline_["scenario"];
 		if (filename_.empty()) {
-			throw wexception("empty value of command line parameter --scenario");
+			throw_empty_value("--scenario");
 		}
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
@@ -1428,7 +1398,7 @@ void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("script")) {
 		script_to_run_ = commandline_["script"];
 		if (script_to_run_.empty()) {
-			throw wexception("empty value of command line parameter --script");
+			throw_empty_value("--script");
 		}
 		if (*script_to_run_.rbegin() == '/') {
 			script_to_run_.erase(script_to_run_.size() - 1);
@@ -1451,23 +1421,43 @@ void WLApplication::handle_commandline_parameters() {
 		set_config_bool("auto_speed", false);
 	}
 
-	// If it hasn't been handled yet it's probably an attempt to
-	// override a conffile setting
-	// With typos, this will create invalid config settings. They
-	// will be taken care of (==ignored) when saving the options
-
-	const std::map<std::string, std::string>::const_iterator commandline_end = commandline_.end();
-	for (std::map<std::string, std::string>::const_iterator it = commandline_.begin();
-	     it != commandline_end; ++it) {
-		// TODO(unknown): barf here on unknown option; the list of known options
-		// needs to be centralized
-
-		set_config_string(it->first, it->second);
+	if (commandline_.count("version")) {
+		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
 	}
 
-	if (commandline_.count("help") || commandline_.count("version")) {
-		init_language();
-		throw ParameterError();  // No message on purpose
+	if (commandline_.count("help-all")) {
+		throw ParameterError(CmdLineVerbosity::All);  // No message on purpose
+	}
+
+	if (commandline_.count("help")) {
+		throw ParameterError(CmdLineVerbosity::Normal);  // No message on purpose
+	}
+
+	// Override maximized and fullscreen settings for window options
+	uint8_t exclusives = commandline_.count("xres") + commandline_.count("yres") +
+	                     2 * commandline_.count("maximized") + 2 * commandline_.count("fullscreen");
+	if (exclusives > 2) {
+		throw ParameterError(CmdLineVerbosity::None,
+		                     _("--xres/--yres, --maximized and --fullscreen can not be combined"));
+	} else if (exclusives > 0) {
+		set_config_bool("maximized", false);
+		set_config_bool("fullscreen", false);
+	}
+
+	// If it hasn't been handled yet it's probably an attempt to
+	// override a conffile setting
+	for (const auto& pair : commandline_) {
+		if (is_parameter(pair.first)) {
+			if (!pair.second.empty()) {
+				set_config_string(pair.first, pair.second);
+			} else {
+				throw_empty_value(pair.first);
+			}
+		} else {
+			throw ParameterError(
+			   CmdLineVerbosity::Normal,
+			   (boost::format(_("Unknown command line parameter: %s")) % pair.first).str());
+		}
 	}
 }
 
@@ -1540,10 +1530,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	}
 
 	try {
-		std::unique_ptr<GameController> ctrl(
-		   new SinglePlayerGameController(game, true, playernumber));
 		if (replace_ctrl) {
-			game.set_game_controller(ctrl.get());
+			game.set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 		}
 
 		SaveHandler& save_handler = game.save_handler();
