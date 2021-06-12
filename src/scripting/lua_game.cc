@@ -482,6 +482,9 @@ int LuaPlayer::send_to_inbox(lua_State* L) {
       :type posx: :class:`integer`
       :arg posy: y position of window in pixels. Default: centered
       :type posy: :class:`integer`
+      :arg allow_next_scenario: If set to ``true``, show a button that allows starting
+                                the next scenario at once. Defaults to ``false``.
+      :type allow_next_scenario: :class:`boolean`
 
       :returns: :const:`nil`
 */
@@ -499,6 +502,7 @@ int LuaPlayer::message_box(lua_State* L) {
 	int32_t posy = -1;
 	Widelands::Coords coords = Widelands::Coords::null();
 	bool is_modal = true;
+	bool allow_next_scenario = false;
 
 #define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
@@ -525,16 +529,23 @@ int LuaPlayer::message_box(lua_State* L) {
 			is_modal = luaL_checkboolean(L, -1);
 		}
 		lua_pop(L, 1);
+
+		lua_getfield(L, 4, "allow_next_scenario");
+		if (!lua_isnil(L, -1)) {
+			allow_next_scenario = luaL_checkboolean(L, -1);
+		}
+		lua_pop(L, 1);
 	}
 #undef CHECK_UINT
 
 	if (is_modal) {
-		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
-		   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
+		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
+		                                                        luaL_checkstring(L, 3), posx, posy, w,
+		                                                        h, allow_next_scenario));
 		mb->run<UI::Panel::Returncodes>();
 	} else {
-		new StoryMessageBox(
-		   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h);
+		new StoryMessageBox(&game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
+		                    w, h, allow_next_scenario);
 	}
 
 	return 1;

@@ -418,6 +418,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
+
+	// Save configuration now. Otherwise, the UUID and sound options
+	// are not saved, when the game crashes
+	write_config();
 }
 
 /**
@@ -615,7 +619,7 @@ void WLApplication::init_and_run_game_from_template() {
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::unique_ptr<GameHost> host;
 	if (multiplayer) {
-		std::unique_ptr<GameController> ctrl(nullptr);
+		std::shared_ptr<GameController> ctrl(nullptr);
 		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
 		                        Widelands::get_all_tribeinfos(nullptr), false));
 		settings.reset(new HostGameSettingsProvider(host.get()));
@@ -691,8 +695,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
 
-	SinglePlayerGameController ctrl(game, true, playernumber);
-	game.set_game_controller(&ctrl);
+	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
@@ -730,7 +733,7 @@ void WLApplication::run() {
 				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 				game.set_write_replay(false);
-				ReplayGameController rgc(game, filename_);
+				new ReplayGameController(game, filename_);
 				game.save_handler().set_allow_saving(false);
 				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 			} else {
@@ -765,7 +768,7 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(filename_, script_to_run_);
+			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
@@ -1102,10 +1105,6 @@ bool WLApplication::init_settings() {
 		set_config_string("uuid", generate_random_uuid());
 	}
 	set_config_int("last_start", now);
-
-	// Save configuration now. Otherwise, the UUID is not saved
-	// when the game crashes, losing part of its advantage
-	write_config();
 
 	return true;
 }
@@ -1531,10 +1530,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	}
 
 	try {
-		std::unique_ptr<GameController> ctrl(
-		   new SinglePlayerGameController(game, true, playernumber));
 		if (replace_ctrl) {
-			game.set_game_controller(ctrl.get());
+			game.set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 		}
 
 		SaveHandler& save_handler = game.save_handler();

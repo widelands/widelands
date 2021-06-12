@@ -1,6 +1,6 @@
 -- There are more UI test in lua_testsuite.wmf/ui.lua
 
-local function open_and_close_sound_options(dropdown, is_debug_build)
+local function open_and_close_sound_options(dropdown)
    sleep(100)
 
    -- Test out-of-range selection in dropdown
@@ -12,11 +12,7 @@ local function open_and_close_sound_options(dropdown, is_debug_build)
    end)
 
    -- Test selecting an item in the dropdown
-   if (is_debug_build) then
-      dropdown:highlight_item(2)
-   else
-      dropdown:highlight_item(1)
-   end
+   dropdown:highlight_item(dropdown.no_of_items - 4)
    assert_nil(wl.ui.MapView().windows.sound_options_menu, "Sound options window should not have been there yet")
 
    dropdown:select()
@@ -45,26 +41,20 @@ run(function()
    local dropdown = dropdowns["dropdown_menu_main"]
    assert_not_nil(dropdown, "Failed to find main menu dropdown")
 
-   local is_debug_build = dropdown.no_of_items == 4
-
    -- Selecting from closed dropdown should fail silently
    dropdown:select()
 
    -- Validate selection without opening
-   open_and_close_sound_options(dropdown, is_debug_build);
+   open_and_close_sound_options(dropdown);
 
    -- Validate selection with opening
    dropdown:open()
    sleep(100)
-   open_and_close_sound_options(dropdown, is_debug_build);
+   open_and_close_sound_options(dropdown);
 
    -- Exit by dropdown
    local dropdown = dropdowns["dropdown_menu_main"]
-      if (is_debug_build) then
-      dropdown:highlight_item(4)
-   else
-      dropdown:highlight_item(3)
-   end
+   dropdown:highlight_item(dropdown.no_of_items)
    dropdown:select()
 
    local message_box = wl.ui.MapView().windows["message_box"]
