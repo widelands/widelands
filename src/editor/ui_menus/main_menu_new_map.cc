@@ -91,6 +91,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	set_center_panel(&box_);
 	fill_list();
 	center_to_parent();
+
+	initialization_complete();
 }
 
 void MainMenuNewMap::clicked_create_map() {

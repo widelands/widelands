@@ -125,6 +125,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	add_behaviour_to_widgets();
 
 	layout();
+
+	initialization_complete();
 }
 
 LaunchGame::~LaunchGame() {

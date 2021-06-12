@@ -483,6 +483,7 @@ msg_cattlefarm_00 = {
 }
 
 msg_mission_complete = {
+   allow_next_scenario = true,
    title = _"Mission Complete",
    body = thron(_"Thron speaks…",
       -- TRANSLATORS: Thron

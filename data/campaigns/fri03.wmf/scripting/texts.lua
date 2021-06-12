@@ -287,6 +287,7 @@ victory_fight = {
       _([[We have conquered the port! We are already building a ship, and then, we will finally be travelling to the actual far North. Although we still heard no news of Reebaud, I am confident that we will find him soon. Then he will grant us aid, and I will reconquer Föhr from the usurper Atterdag!]]))
       .. objective_text(_"Congratulations",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+   allow_next_scenario = true,
 }
 victory_pay = {
    title =_ "Victory",
@@ -295,6 +296,7 @@ victory_pay = {
       _([[You have paid for the passage with pure gold. Now it is only right that you get it. Our ship is ready, you may embark!]]))
       .. objective_text(_"Congratulations",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+   allow_next_scenario = true,
 }
 timeout_1 = {
    title = _"You Have Lost",
