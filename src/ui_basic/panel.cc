@@ -169,17 +169,15 @@ void Panel::free_children() {
 }
 
 bool Panel::logic_thread_running_(false);
-constexpr uint32_t kGameLogicDelay = 1000 / 15;
+
+constexpr uint32_t kGameLogicDelay = 50;
+
 // static
 void Panel::logic_thread() {
 	logic_thread_running_ = true;
 	WLApplication* const app = WLApplication::get();
 
-	uint32_t next_think_time;
-
 	while (!app->should_die()) {
-		uint32_t time = SDL_GetTicks();
-
 		Panel* m =
 		   modal_;  // copy this because another panel may become modal during a lengthy logic frame
 
@@ -214,10 +212,8 @@ void Panel::logic_thread() {
 			}
 		}
 
-		next_think_time = time + kGameLogicDelay;
-		time = SDL_GetTicks();
 		// Always sleep a bit because another thread might want to lock our mutex
-		SDL_Delay(next_think_time < time + 5 ? 5 : next_think_time - time);
+		SDL_Delay(kGameLogicDelay);
 	}
 	logic_thread_running_ = false;
 }
