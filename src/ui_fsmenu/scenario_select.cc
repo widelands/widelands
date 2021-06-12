@@ -141,6 +141,8 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 	layout();
 
 	table_.cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 void ScenarioSelect::layout() {
@@ -161,13 +163,6 @@ static std::string resolve_and_fix_cross_file(const std::string& path) {
 	}
 }
 
-std::string ScenarioSelect::get_map() {
-	if (set_has_selection()) {
-		return resolve_and_fix_cross_file(scenarios_data_.at(table_.get_selected()).path);
-	}
-	return "";
-}
-
 bool ScenarioSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
@@ -175,7 +170,11 @@ bool ScenarioSelect::set_has_selection() {
 }
 
 void ScenarioSelect::clicked_ok() {
-	if (!table_.has_selection() || !scenarios_data_[table_.get_selected()].playable) {
+	if (!table_.has_selection()) {
+		return;
+	}
+	const ScenarioData& selected = scenarios_data_[table_.get_selected()];
+	if (!selected.playable) {
 		return;
 	}
 
@@ -188,7 +187,29 @@ void ScenarioSelect::clicked_ok() {
 		if (scenario_difficulty_.has_selection()) {
 			game->set_scenario_difficulty(scenario_difficulty_.get_selected());
 		}
-		game->run_splayer_scenario_direct(get_map(), "");
+
+		std::list<std::string> next;
+		bool found = false;
+		auto resolve = [&next, &selected, &found](const ScenarioData& s) {
+			if (s.path == selected.path) {
+				assert(!found);
+				found = true;
+			}
+			if (found && s.playable) {
+				next.push_back(resolve_and_fix_cross_file(s.path));
+			}
+		};
+		if (campaign_) {
+			for (const auto& s : campaign_->scenarios) {
+				resolve(*s);
+			}
+		} else {
+			for (const ScenarioData& s : scenarios_data_) {
+				resolve(s);
+			}
+		}
+
+		game->run_splayer_scenario_direct(next, "");
 	} catch (const std::exception& e) {
 		WLApplication::emergency_save(&capsule_.menu(), *game, e.what());
 	}

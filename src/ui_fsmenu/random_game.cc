@@ -85,6 +85,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 	progress_window_->set_visible(false);
 
 	layout();
+	initialization_complete();
 }
 
 RandomGame::~RandomGame() {

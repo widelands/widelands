@@ -214,6 +214,8 @@ MainMenu::MainMenu(const bool skip_init)
 	focus();
 	set_labels();
 	layout();
+
+	initialization_complete();
 }
 
 Widelands::Game* MainMenu::create_safe_game(const bool show_error) {

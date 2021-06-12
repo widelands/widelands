@@ -15,6 +15,7 @@ wl_library(graphic_animation
     base_log
     base_macros
     base_math
+    base_multithreading
     graphic_color
     graphic_image_cache
     graphic_playercolor

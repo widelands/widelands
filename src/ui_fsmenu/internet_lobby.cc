@@ -186,6 +186,8 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	layout();
 	// set focus to chat input
 	chat_.focus_edit();
+
+	initialization_complete();
 }
 
 InternetLobby::~InternetLobby() {
