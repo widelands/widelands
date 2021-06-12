@@ -282,5 +282,6 @@ conclude_tutorial = {
       p(_[[Thank you for playing this tutorial. I hope you enjoyed it and you learned how to create and train soldiers, how to control where they go and how to defeat an enemy. Did you see how easily you could overwhelm your enemy? Having trained soldiers is a huge advantage.]]) ..
       p(_[[But a war is expensive, and not always the path leading to the goal. When setting up a new game, you can also choose peaceful win conditions. You should definitely try them out, they’re worth it.]]) ..
       p(_[[You are now ready to play the campaigns. They will teach you about the different economies of the tribes. You can also play the remaining tutorials, but they are not crucial for succeeding in the campaigns.]])
-   )
+   ),
+   allow_next_scenario = true,
 }

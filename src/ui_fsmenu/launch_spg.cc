@@ -149,14 +149,12 @@ void LaunchSPG::clicked_ok() {
 	game_.set_ai_training_mode(get_config_bool("ai_training", false));
 	try {
 		if (sp->settings().scenario) {  // scenario
-			game_.run_splayer_scenario_direct(sp->get_map(), "");
+			game_.run_splayer_scenario_direct({sp->get_map()}, "");
 		} else {  // normal singleplayer
 			playernumber = sp->settings().playernum + 1;
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
 			// Game controller needs the ibase pointer to init the chat
 			game_.set_ibase(new InteractivePlayer(game_, get_config_section(), playernumber, false));
-			std::unique_ptr<GameController> ctrl(
-			   new SinglePlayerGameController(game_, true, playernumber));
 
 			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp->has_players_tribe()) {
@@ -167,7 +165,8 @@ void LaunchSPG::clicked_ok() {
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-			game_.set_game_controller(ctrl.get());
+			game_.set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(game_, true, playernumber));
 			game_.init_newgame(sp->settings());
 			game_.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}

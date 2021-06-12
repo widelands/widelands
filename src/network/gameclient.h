@@ -46,7 +46,7 @@ class MenuCapsule;
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(FsMenu::MenuCapsule&,
-	           std::unique_ptr<GameController>&,
+	           std::shared_ptr<GameController>&,
 	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
@@ -54,7 +54,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	~GameClient() override;
 
-	void run(std::unique_ptr<GameController>&);
+	void run();
 
 	// GameController interface
 	void think() override;
@@ -123,6 +123,10 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	void send_cheating_info();
 
+	std::shared_ptr<GameController>& get_pointer() {
+		return pointer_;
+	}
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(GameClient);
 
@@ -165,6 +169,8 @@ private:
 	GameClientImpl* d;
 
 	FsMenu::MenuCapsule& capsule_;
+	std::shared_ptr<GameController>&
+	   pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H
