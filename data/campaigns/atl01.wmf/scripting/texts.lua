@@ -466,6 +466,7 @@ field_flooded_msg = {
 
 scenario_won = {
    {
+      allow_next_scenario = true,
       title = _"Jundlina is Relieved",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina

@@ -179,8 +179,8 @@ InteractivePlayer* Game::get_ipl() {
 	return dynamic_cast<InteractivePlayer*>(get_ibase());
 }
 
-void Game::set_game_controller(GameController* const ctrl) {
-	ctrl_ = ctrl;
+void Game::set_game_controller(std::shared_ptr<GameController> c) {
+	ctrl_ = c;
 }
 
 void Game::set_ai_training_mode(const bool mode) {
@@ -192,7 +192,7 @@ void Game::set_auto_speed(const bool mode) {
 }
 
 GameController* Game::game_controller() {
-	return ctrl_;
+	return ctrl_.get();
 }
 
 void Game::set_write_replay(bool const wr) {
@@ -259,18 +259,21 @@ void Game::check_addons_desync_magic() {
 	postload_addons();
 }
 
-bool Game::run_splayer_scenario_direct(const std::string& mapname,
+bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
                                        const std::string& script_to_run) {
-	enabled_addons().clear();
+	full_cleanup();
+	list_of_scenarios_ = list_of_scenarios;
+	assert(!list_of_scenarios_.empty());
 	// Replays can't handle scenarios
 	set_write_replay(false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_wanted_ = false;
 #endif
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(
+	   mutable_map()->get_correct_loader(list_of_scenarios.front()));
 	if (!maploader) {
-		throw wexception("could not load \"%s\"", mapname.c_str());
+		throw wexception("could not load \"%s\"", list_of_scenarios.front().c_str());
 	}
 
 	// Need to do this first so we can set the theme and background.
@@ -305,16 +308,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
-	set_game_controller(new SinglePlayerGameController(*this, true, 1));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
 		bool const result =
 		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
@@ -463,10 +464,9 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	enabled_addons().clear();  // will be loaded later
+	full_cleanup();  // Reset and cleanup all values
 
 	int8_t player_nr;
-
 	{
 		GameLoader gl(filename, *this);
 
@@ -506,15 +506,13 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, player_nr));
 	try {
 		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
@@ -699,6 +697,8 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
+	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
+
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
@@ -716,7 +716,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_.reset(nullptr);
 		} else {
 			// Just like with scenarios, replays will desync, so we switch them off.
-			writereplay_ = false;
+			set_write_replay(false);
 		}
 	}
 #endif
@@ -776,7 +776,29 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_notrunning;
 
-	return true;
+	if (next_game_to_load_.empty()) {
+		return true;
+	}
+
+	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+	if (FileSystem::filename_ext(load) == kSavegameExtension) {
+		return run_load_game(load, script_to_run);
+	}
+
+	/* Load a scenario. This should be either the current one, or the next one if existent. */
+	assert(!list_of_scenarios_.empty());
+	std::list<std::string> list = list_of_scenarios_;
+	if (list.front() != load) {
+		list.pop_front();
+		assert(!list.empty());
+		assert(list.front() == load);
+	}
+	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+void Game::set_next_game_to_load(const std::string& file) {
+	next_game_to_load_ = file;
 }
 
 /**
@@ -839,6 +861,22 @@ void Game::cleanup_for_load() {
 
 	// Statistics
 	general_stats_.clear();
+}
+
+void Game::full_cleanup() {
+	EditorGameBase::full_cleanup();
+
+	did_check_addons_desync_magic_ = false;
+	ctrl_.reset();
+	replaywriter_.reset();
+	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
+	next_game_to_load_.clear();
+	list_of_scenarios_.clear();
+	Economy::initialize_serial();
+
+	if (has_loader_ui()) {
+		remove_loader_ui();
+	}
 }
 
 /**

@@ -5,7 +5,7 @@
 # Translators:
 # Milan Fašina <matrix17@seznam.cz>, 2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
-# Michal Konecny <michal.konecny@psmail.xyz>, 2021
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # 
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Michal Konecny <michal.konecny@psmail.xyz>, 2021\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1703,12 +1703,12 @@ msgstr "pracuje"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
 msgid "planting wheat"
-msgstr "sází pšenici"
+msgstr "setí pšenice"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
 msgctxt "empire_building"
 msgid "harvesting wheat"
-msgstr "sklízí pšenici"
+msgstr "sklízení pšenice"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1718,7 +1718,7 @@ msgstr "Domek lesníka"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
 msgctxt "empire_building"
 msgid "planting trees"
-msgstr "sází stromy"
+msgstr "sázení stromů"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98

@@ -572,6 +572,15 @@ void EditorGameBase::cleanup_for_load() {
 	delete_tempfile();
 }
 
+/** Cleanup *everything* so we can load a completely new savegame. */
+void EditorGameBase::full_cleanup() {
+	cleanup_for_load();
+	enabled_addons().clear();
+	did_postload_addons_ = false;
+	descriptions_.reset(nullptr);
+	gametime_ = Time(0);
+}
+
 void EditorGameBase::set_road(const FCoords& f,
                               uint8_t const direction,
                               RoadSegment const roadtype) {
