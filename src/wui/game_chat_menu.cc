@@ -45,6 +45,8 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
 	chat_.aborted.connect([this]() { acknowledge(); });
 
 	enter_chat_message(close_on_send_);
+
+	initialization_complete();
 }
 
 GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,

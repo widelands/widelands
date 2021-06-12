@@ -188,7 +188,9 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 		total /= work_steps_;
 	}
 
-	assert(total <= (1 << 16));
+	// This assert is no longer true with a multithreaded race condition
+	// assert(total <= (1 << 16));
+	total = std::min<uint32_t>(total, 1 << 16);
 
 	return total;
 }

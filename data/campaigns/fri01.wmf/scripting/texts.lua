@@ -425,4 +425,5 @@ victory_1 = {
       .. objective_text(_"Congratulations",
       -- TRANSLATORS: Reebaud – victory
       _[[You have completed this mission. You may move on to the next scenario now to help us build a new home, far from the false God’s vengeful reach…]]),
+   allow_next_scenario = true,
 }
