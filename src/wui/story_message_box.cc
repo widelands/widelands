@@ -60,9 +60,15 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                     120,
                     0,
                     UI::ButtonStyle::kWuiPrimary,
-                    game->list_of_scenarios().size() > 1 ? _("Next Mission") : _("Main Menu"),
-                    game->list_of_scenarios().size() > 1 ? _("Start the next mission now") :
-                                                           _("Return to the main menu")),
+                    _("Next Mission"), _("Start the next mission now")),
+     main_menu_(&button_box_,
+                    "mainmenu",
+                    0,
+                    0,
+                    120,
+                    0,
+                    allow_next_scenario && game->list_of_scenarios().size() < 2 ? UI::ButtonStyle::kWuiPrimary : UI::ButtonStyle::kWuiSecondary,
+                    _("Main Menu"), _("Return to the main menu")),
      desired_speed_(game->game_controller()->desired_speed()),
      game_(game) {
 
@@ -85,13 +91,21 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	button_box_.add(&ok_);
 	button_box_.add_inf_space();
 
-	if (allow_next_scenario) {
-		button_box_.add(&next_scenario_);
+	if (allow_next_scenario) {  // End of game
+		button_box_.add(&main_menu_);
 		button_box_.add_inf_space();
-		next_scenario_.sigclicked.connect([this]() { clicked_next_scenario(); });
+		if (game->list_of_scenarios().size() > 1) {  // Next scenario can be started
+			button_box_.add(&next_scenario_);
+			button_box_.add_inf_space();
+			next_scenario_.sigclicked.connect([this]() { clicked_next_scenario(); });
+		} else {  // Last scenario in the campaign
+			next_scenario_.set_visible(false);
+		}
+		main_menu_.sigclicked.connect([this]() { clicked_main_menu(); });
 		ok_.set_tooltip(_("Continue playing this mission"));
-	} else {
+	} else {  // Normal message box, which has only the OK button
 		next_scenario_.set_visible(false);
+		main_menu_.set_visible(false);
 	}
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
@@ -130,12 +144,14 @@ void StoryMessageBox::resume_game() {
 }
 
 void StoryMessageBox::clicked_next_scenario() {
-	if (game_->list_of_scenarios().size() > 1) {
-		auto it = game_->list_of_scenarios().begin();
-		++it;
-		game_->set_next_game_to_load(*it);
-	}
+	assert(game_->list_of_scenarios().size() > 1);
+	auto it = game_->list_of_scenarios().begin();
+	++it;
+	game_->set_next_game_to_load(*it);
 
+	clicked_main_menu();
+}
+void StoryMessageBox::clicked_main_menu() {
 	clicked_ok();
 	get_topmost_forefather().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
@@ -155,6 +171,8 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			if (next_scenario_.is_visible()) {
 				clicked_next_scenario();
+			} else if (main_menu_.is_visible()) {
+				clicked_main_menu();
 			} else {
 				clicked_ok();
 			}

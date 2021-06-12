@@ -59,13 +59,14 @@ private:
 	/// Get the game running again and close the window.
 	void clicked_ok();
 	void clicked_next_scenario();
+	void clicked_main_menu();
 	void resume_game();
 
 	// UI elements
 	UI::Box main_box_;
 	UI::Box button_box_;
 	UI::MultilineTextarea textarea_;
-	UI::Button ok_, next_scenario_;
+	UI::Button ok_, next_scenario_, main_menu_;
 
 	const uint32_t desired_speed_;  // Remember the previous game speed
 	Widelands::Game* game_;         // For controlling the game speed

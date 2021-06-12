@@ -288,7 +288,9 @@ void Panel::do_redraw_now(const std::string& message) {
 		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
 		g_mouse_cursor->draw(rt, app->get_mouse_position());
 
-		if (is_modal()) {
+		if (modal_ != nullptr) {
+			modal_->do_tooltip();
+		} else if (is_modal()) {
 			do_tooltip();
 		} else {
 			ff.do_tooltip();

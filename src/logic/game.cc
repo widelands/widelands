@@ -782,8 +782,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
-	if (load.compare(load.size() - kSavegameExtension.size(), kSavegameExtension.size(),
-	                 kSavegameExtension) == 0) {
+	if (FileSystem::filename_ext(load) == kSavegameExtension) {
 		return run_load_game(load, script_to_run);
 	}
 
