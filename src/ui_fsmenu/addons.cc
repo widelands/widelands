@@ -89,6 +89,7 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
 
 	set_center_panel(&box_);
 	center_to_parent();
+	initialization_complete();
 }
 
 void ProgressIndicatorWindow::think() {
@@ -852,6 +853,8 @@ void AddOnsCtrl::rebuild() {
 		upgrade_all_.set_tooltip(text);
 	}
 	update_dependency_errors();
+
+	initialization_complete();
 }
 
 void AddOnsCtrl::update_dependency_errors() {
@@ -1789,6 +1792,8 @@ public:
 		screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
 
 		main_box_.set_size(get_inner_w(), get_inner_h());
+
+		initialization_complete();
 	}
 
 	void on_resolution_changed_note(const GraphicResolutionChanged& note) override {

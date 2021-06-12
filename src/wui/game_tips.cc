@@ -28,15 +28,12 @@
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/rendertarget.h"
-#include "graphic/style_manager.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-
-constexpr int kTextPadding = 48;
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow,
                    const std::vector<std::string>& names,
@@ -120,15 +117,5 @@ void GameTips::stop() {
 }
 
 void GameTips::show_tip(RenderTarget& rt, const Recti& bounds, int32_t index) {
-	const Image& pic_background = load_safe_template_image("loadscreens/gametips.png");
-	const int w = pic_background.width();
-	const int h = pic_background.height();
-	Vector2i pt(bounds.x + (bounds.w - w) / 2, bounds.y + (bounds.h - h) / 2);
-	rt.blit(pt, &pic_background);
-
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_game_tip(tips_[index].text), w - 2 * kTextPadding);
-	pt = Vector2i(bounds.x + (bounds.w - rendered_text->width()) / 2,
-	              bounds.y + (bounds.h - rendered_text->height()) / 2);
-	rendered_text->draw(rt, pt);
+	draw_game_tip(rt, bounds, tips_[index].text);
 }

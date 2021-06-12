@@ -120,6 +120,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	set_inner_size(width, button_y + ok_button_->get_h() + margin);
 	center_to_parent();
 	focus();
+
+	initialization_complete();
 }
 
 /**
@@ -166,10 +168,7 @@ bool WLMessageBox::handle_key(bool down, SDL_Keysym code) {
 }
 
 void WLMessageBox::clicked_ok() {
-	ok_button_->set_enabled(false);
-	if (cancel_button_) {
-		cancel_button_->set_enabled(false);
-	}
+	set_visible(false);
 	ok();
 	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
@@ -177,8 +176,7 @@ void WLMessageBox::clicked_ok() {
 }
 
 void WLMessageBox::clicked_back() {
-	ok_button_->set_enabled(false);
-	cancel_button_->set_enabled(false);
+	set_visible(false);
 	cancel();
 	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);

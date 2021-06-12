@@ -626,6 +626,7 @@ diary_page_5 = {
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
    posy=1,
    w=550,
+   allow_next_scenario = true,
 }
 
 function diary_page_6(first_message, missing)
