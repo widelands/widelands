@@ -187,7 +187,7 @@ void ScenarioSelect::clicked_ok() {
 
 		std::list<std::string> next;
 		bool found = false;
-		auto resolve = [&next, &selected, &found] (const ScenarioData& s) {
+		auto resolve = [&next, &selected, &found](const ScenarioData& s) {
 			if (s.path == selected.path) {
 				assert(!found);
 				found = true;
