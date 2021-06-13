@@ -400,7 +400,8 @@ int Panel::do_run() {
 			}
 
 			{
-				current_think_mutex_.reset(new MutexLock(MutexLock::ID::kObjects, [this]() { handle_notes(); }));
+				current_think_mutex_.reset(
+				   new MutexLock(MutexLock::ID::kObjects, [this]() { handle_notes(); }));
 				do_think();
 				current_think_mutex_.reset();
 			}
