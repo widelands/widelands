@@ -290,15 +290,6 @@ void Graphic::set_fullscreen(const bool value) {
  * Bring the screen uptodate.
  */
 void Graphic::refresh() {
-	// The backbuffer contains the last frame. If we want a screenshot,
-	// we should better take it now, so the notification is not part of it.
-	if (!screenshot_filename_.empty()) {
-		log_info("Save screenshot to %s\n", screenshot_filename_.c_str());
-		std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(screenshot_filename_));
-		save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
-		screenshot_filename_.clear();
-	}
-
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
 	if (!fullscreen()) {
@@ -314,6 +305,16 @@ void Graphic::refresh() {
 		}
 		// See the comment in set_window_size().
 		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+	}
+
+	// The backbuffer now contains the current frame. If we want a screenshot,
+	// we should better take it now, before this is swapped out to the
+	// frontbuffer and becomes inaccessible to us.
+	if (!screenshot_filename_.empty()) {
+		log_info("Save screenshot to %s\n", screenshot_filename_.c_str());
+		std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(screenshot_filename_));
+		save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
+		screenshot_filename_.clear();
 	}
 
 	SDL_GL_SwapWindow(sdl_window_);

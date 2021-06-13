@@ -867,12 +867,12 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 					continue;
 				}
 				g_gr->screenshot(filename);
-				// Forward key to the game to show a notification
-				return false;
+				return true;
 			}
 			log_warn("Omitting screenshot because 10000 screenshots are already present");
 		}
-		return true;
+		// Screenshot not taken
+		return false;
 	}
 
 	if (matches_shortcut(KeyboardShortcut::kCommonFullscreen, keycode, modifiers)) {

@@ -138,7 +138,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      previous_frame_gametime_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()),
-     cheat_mode_enabled_(false) {
+     cheat_mode_enabled_(false),
+     screenshot_failed_(false) {
 
 	// Load the buildhelp icons.
 	{
@@ -1426,6 +1427,20 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 
+	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, code)) {
+		// Screenshot taken by topmost handler, just show a notification
+		if (down) {
+			log_message(_("Failed saving screenshot!"));
+			screenshot_failed_ = true;
+		} else {
+			if (!screenshot_failed_) {
+				log_message(_("Screenshot saved"));
+			}
+			screenshot_failed_ = false;
+		}
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
 			toggle_buildhelp();
@@ -1433,12 +1448,6 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kCommonMinimap, code)) {
 			toggle_minimap();
-			return true;
-		}
-		if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, code)) {
-			// Screenshot taken by topmost handler, just show a notification
-			// after the screenshot is through
-			log_message(_("Screenshot saved"));
 			return true;
 		}
 
