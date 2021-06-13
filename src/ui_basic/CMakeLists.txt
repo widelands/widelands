@@ -69,11 +69,13 @@ wl_library(ui_basic
     base_i18n
     base_log
     base_macros
+    base_multithreading
     base_utf8
     graphic
     graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_functions
     graphic_image_cache
     graphic_mouse_cursor
     graphic_playercolor

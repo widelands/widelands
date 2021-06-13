@@ -131,6 +131,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->sort();
 
 	set_thinks(false);
+
+	initialization_complete();
 }
 
 bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
