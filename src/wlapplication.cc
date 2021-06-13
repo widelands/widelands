@@ -911,7 +911,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 				handled = handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
 			}
 			if (!handled && cb && cb->key) {
-				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
+				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			break;
 		}
