@@ -66,7 +66,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
+     mpsg_(this, &left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
      chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
      game_(g) {
 

@@ -1292,6 +1292,14 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 	broadcast_setting_player(number);
 }
 
+bool GameHost::remove_player_name(uint8_t const number, const std::string& name) {
+	PlayerSettings& p = d->settings.players.at(number);
+	std::string temp(p.name);
+	temp = temp.erase(p.name.find(name), name.size());
+	set_player_name(number, temp);
+	return temp.empty();
+}
+
 void GameHost::set_player_name(uint8_t const number, const std::string& name) {
 	if (number >= d->settings.players.size()) {
 		return;
@@ -1410,14 +1418,7 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	std::string name = d->settings.users.at(user).name;
 	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
-		PlayerSettings& op = d->settings.players.at(old);
-		std::string temp(" ");
-		temp += name;
-		temp += " ";
-		std::string temp2(op.name);
-		temp2 = temp2.erase(op.name.find(temp), temp.size());
-		set_player_name(old, temp2);
-		if (temp2.empty()) {
+		if (remove_player_name(old, name)) {
 			set_player_state(old, PlayerSettings::State::kOpen);
 		}
 	}
@@ -1427,7 +1428,7 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 		PlayerSettings& op = d->settings.players.at(number);
 		if (op.state == PlayerSettings::State::kOpen) {
 			set_player_state(number, PlayerSettings::State::kHuman);
-			set_player_name(number, " " + name + " ");
+			set_player_name(number, name);
 		} else {
 			set_player_name(number, op.name + " " + name + " ");
 		}
@@ -2448,14 +2449,7 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 	for (const UserSettings& setting : d->settings.users) {
 		if (setting.position == number) {
 			if (!d->game) {
-				// Remove player name
-				PlayerSettings& p = d->settings.players.at(number);
-				std::string temp(" ");
-				temp += name;
-				temp += " ";
-				std::string temp2(p.name);
-				temp2 = temp2.erase(p.name.find(temp), temp.size());
-				set_player_name(number, temp2);
+				remove_player_name(number, name);
 			}
 			return;
 		}
