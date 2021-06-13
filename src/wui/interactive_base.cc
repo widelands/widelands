@@ -903,7 +903,7 @@ void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 		display_flags_ |= flag;
 	}
 	if (old_value != display_flags_) {
-		rebuild_showhide_menu();
+		NoteThreadSafeFunction::instantiate([this]() { rebuild_showhide_menu(); }, false);
 	}
 }
 
