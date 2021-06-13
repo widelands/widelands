@@ -1065,6 +1065,24 @@ void GameHost::set_map(const std::string& mapname,
 	// Map changes are finished here
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
+	// Assign players from savegame
+	if (d->settings.savegame) {
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+			const PlayerSettings& p = d->settings.players.at(i);
+			if (p.name == d->localplayername) {  // host
+				switch_to_player(0, i);
+				continue;
+			}
+			for (const Client& client : d->clients) {
+				const std::string& effective_name = d->settings.users.at(client.usernum).name;
+				if (p.name == effective_name) {
+					switch_to_player(client.usernum, i);
+					break;
+				}
+			}
+		}
+	}
+
 	// If possible, offer the map / saved game as transfer
 	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
 	// in place or such ...
@@ -1384,6 +1402,11 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	}
 
 	uint32_t old = d->settings.users.at(user).position;
+	if (number == old) {
+		// Nothing to do
+		return;
+	}
+
 	std::string name = d->settings.users.at(user).name;
 	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
@@ -1752,8 +1775,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	broadcast_setting_user(client.usernum);
 
 	// Check if there is an unoccupied player left and if, assign.
+	// Assign the slot with the same username for savegames
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
-		if (d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
+		const PlayerSettings& p = d->settings.players.at(i);
+		if (p.state == PlayerSettings::State::kOpen &&
+		    (!d->settings.savegame || p.name == effective_name)) {
 			switch_to_player(client.usernum, i);
 			break;
 		}
