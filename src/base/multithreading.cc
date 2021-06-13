@@ -66,14 +66,15 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 			const std::exception* error = nullptr;
 
 			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error, rethrow_errors]() {
-				if (rethrow_errors) {
-					try {
-						fn();
-					} catch (const std::exception& e) {
-						error = &e;
-					}
-				} else {
+				try {
 					fn();
+				} catch (const std::exception& e) {
+					if (rethrow_errors) {
+						error = &e;
+					} else {
+						done = true;
+						throw;
+					}
 				}
 				done = true;
 			}));
