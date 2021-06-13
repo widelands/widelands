@@ -184,6 +184,7 @@ void Bob::act(Game& game, uint32_t const data) {
  * Perform the actual call to update() as appropriate.
  */
 void Bob::do_act(Game& game) {
+	MutexLock m(MutexLock::ID::kObjects);
 	assert(!in_act_);
 	assert(!stack_.empty());
 
@@ -801,7 +802,6 @@ void Bob::draw(const EditorGameBase& egbase,
 	if (!anim_) {
 		return;
 	}
-
 	auto* const bob_owner = get_owner();
 	Vector2f adjust_field_on_dst = field_on_dst;
 	if (const State* s = get_state(taskIdle)) {

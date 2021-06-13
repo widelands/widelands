@@ -64,6 +64,7 @@ public:
 	void postload() override;
 	void start() override;
 	void toggle_mainmenu();
+	void rebuild_main_menu();
 
 protected:
 	// For referencing the items in showhidemenu_
@@ -95,6 +96,7 @@ protected:
 	struct GameMenuWindows {
 		UI::UniqueWindow::Registry sound_options;
 		UI::UniqueWindow::Registry savegame;
+		UI::UniqueWindow::Registry loadgame;
 
 		GeneralStatisticsMenu::Registry stats_general;
 		UI::UniqueWindow::Registry stats_wares;
@@ -124,6 +126,8 @@ private:
 #endif
 		kOptions,
 		kSaveMap,
+		kLoadMap,
+		kRestartScenario,
 		kExitGame
 	};
 

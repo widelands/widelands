@@ -214,6 +214,8 @@ MainMenu::MainMenu(const bool skip_init)
 	focus();
 	set_labels();
 	layout();
+
+	initialization_complete();
 }
 
 void MainMenu::update_template() {

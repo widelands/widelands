@@ -518,6 +518,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	add_languages_to_list(opt.language);
 	update_language_stats();
 	layout();
+
+	initialization_complete();
 }
 
 void Options::layout() {

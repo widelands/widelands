@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -407,16 +407,16 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr ""
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"
 msgstr ""
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
 msgstr ""
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:241
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"

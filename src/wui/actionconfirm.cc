@@ -43,7 +43,6 @@ struct ActionConfirm : public UI::Window {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
 	}
 
-	void think() override = 0;
 	virtual void ok() = 0;
 
 protected:
@@ -172,6 +171,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 
 	center_to_parent();
 	cancelbtn->center_mouse();
+
+	initialization_complete();
 }
 
 /*

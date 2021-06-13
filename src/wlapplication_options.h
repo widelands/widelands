@@ -151,6 +151,7 @@ enum class KeyboardShortcut : uint16_t {
 
 	kInGame__Begin = kEditor__End + 1,
 	kInGameSave = kInGame__Begin,
+	kInGameLoad,
 	kInGameChat,
 	kInGameMessages,
 	kInGameObjectives,

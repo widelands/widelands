@@ -32,9 +32,21 @@ wl_library(base_i18n
   DEPENDS
     base_log
     base_macros
+    base_multithreading
     io_filesystem
     logic_filesystem_constants
     third_party_gettext
+)
+
+wl_library(base_multithreading
+  SRCS
+    multithreading.h
+    multithreading.cc
+  DEPENDS
+    base_exceptions
+    base_log
+    notifications
+  USES_SDL2
 )
 
 wl_library(base_utf8
