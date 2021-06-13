@@ -327,6 +327,11 @@ void Panel::wait_for_current_logic_frame() {
 	}
 }
 
+void Panel::clear_current_think_mutex() {
+	assert(current_think_mutex_.get() != nullptr);
+	current_think_mutex_.reset();
+}
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -395,8 +400,9 @@ int Panel::do_run() {
 			}
 
 			{
-				MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
+				current_think_mutex_.reset(new MutexLock(MutexLock::ID::kObjects, [this]() { handle_notes(); }));
 				do_think();
+				current_think_mutex_.reset();
 			}
 
 			check_child_death();
