@@ -1435,6 +1435,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, code)) {
+			// Screenshot taken by topmost handler, just show a notification
+			// after the screenshot is through
+			log_message(_("Screenshot saved"));
+			return true;
+		}
 
 		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds

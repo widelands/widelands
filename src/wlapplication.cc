@@ -856,8 +856,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 
 	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, keycode, modifiers)) {
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
-			log_warn("Omitting screenshot because diskspace is lower than %lluMB\n",
-			         kMinimumDiskSpace / (1000 * 1000));
+			log_warn("Omitting screenshot because diskspace is lower than %lluMiB\n",
+			         kMinimumDiskSpace / (1024 * 1024));
 		} else {
 			g_fs->ensure_directory_exists(kScreenshotsDir);
 			for (uint32_t nr = 0; nr < 10000; ++nr) {
@@ -867,7 +867,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 					continue;
 				}
 				g_gr->screenshot(filename);
-				return true;
+				// Forward key to the game to show a notification
+				return false;
 			}
 			log_warn("Omitting screenshot because 10000 screenshots are already present");
 		}
@@ -906,14 +907,14 @@ void WLApplication::handle_input(InputCallback const* cb) {
 				   std::make_pair(std::make_pair(ev.key.keysym.sym, ev.key.keysym.mod), ev.type));
 				handled = true;
 			}
+			if (!handled) {
+				handled = handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
+			}
 			if (!handled && cb && cb->key) {
 				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
-			if (!handled) {
-				handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
-			}
-		} break;
-
+			break;
+		}
 		case SDL_TEXTINPUT:
 			if (cb && cb->textinput) {
 				cb->textinput(ev.text.text);
