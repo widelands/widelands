@@ -323,7 +323,7 @@ void GameClient::do_run(RecvPacket& packet) {
 }
 
 void GameClient::think() {
-	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true, false);
 
 	while (!pending_player_commands_.empty()) {
 		MutexLock m(MutexLock::ID::kCommands);
