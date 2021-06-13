@@ -25,6 +25,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -106,6 +107,7 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		s.set_string("tribe", map.get_scenario_player_tribe(p));
 		s.set_string("ai", map.get_scenario_player_ai(p));
 		s.set_bool("closeable", map.get_scenario_player_closeable(p));
+		s.set_int("team", egbase.get_player(p)->team_number());
 	}
 
 	prof.write("player_names", false, fs);

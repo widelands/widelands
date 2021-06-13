@@ -348,6 +348,7 @@ void LaunchMPG::load_previous_playerdata() {
 	std::string player_save_name[kMaxPlayers];
 	std::string player_save_tribe[kMaxPlayers];
 	std::string player_save_ai[kMaxPlayers];
+	Widelands::TeamNumber player_save_team[kMaxPlayers];
 
 	for (uint8_t i = 1; i <= settings_.settings().players.size(); ++i) {
 		Section* s =
@@ -360,6 +361,7 @@ void LaunchMPG::load_previous_playerdata() {
 		player_save_name[i - 1] = s->get_string("name");
 		player_save_tribe[i - 1] = s->get_string("tribe");
 		player_save_ai[i - 1] = s->get_string("ai");
+		player_save_team[i - 1] = s->get_int("team");
 
 		if (player_save_tribe[i - 1].empty()) {
 			// Close the player
@@ -367,9 +369,7 @@ void LaunchMPG::load_previous_playerdata() {
 			continue;  // if tribe is empty, the player does not exist
 		}
 
-		// Set team to "none" - to get the real team, we would need to load the savegame completely
-		// Do we want that? No! So we just reset teams to not confuse the clients.
-		settings_.set_player_team(i - 1, 0);
+		settings_.set_player_team(i - 1, player_save_team[i - 1]);
 
 		if (player_save_ai[i - 1].empty()) {
 			// Assure that player is open

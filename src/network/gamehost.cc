@@ -1069,6 +1069,11 @@ void GameHost::set_map(const std::string& mapname,
 	if (d->settings.savegame) {
 		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			const PlayerSettings& p = d->settings.players.at(i);
+			if (!p.ai.empty() || p.tribe.empty()) {
+				continue;
+			}
+			// Free player slots for now
+			set_player_state(i, PlayerSettings::State::kOpen);
 			if (p.name == d->localplayername) {  // host
 				switch_to_player(0, i);
 				continue;
@@ -1410,11 +1415,6 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	}
 
 	uint32_t old = d->settings.users.at(user).position;
-	if (number == old) {
-		// Nothing to do
-		return;
-	}
-
 	std::string name = d->settings.users.at(user).name;
 	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
