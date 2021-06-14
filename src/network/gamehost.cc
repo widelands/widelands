@@ -1057,6 +1057,14 @@ void GameHost::set_map(const std::string& mapname,
 		d->promoter->set_map(mapname.c_str());
 	}
 
+	if (d->settings.savegame) {
+		// Free all slots slots for now, so that the scenario data can be loaded properly
+		set_player_number(UserSettings::none());
+		for (const Client& client : d->clients) {
+			switch_to_player(client.usernum, UserSettings::none());
+		}
+	}
+
 	// Broadcast new player settings
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
@@ -1069,11 +1077,10 @@ void GameHost::set_map(const std::string& mapname,
 	if (d->settings.savegame) {
 		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			const PlayerSettings& p = d->settings.players.at(i);
-			if (!p.ai.empty() || p.tribe.empty()) {
+			if (p.tribe.empty()) {
+				// Closed slot
 				continue;
 			}
-			// Free player slots for now
-			set_player_state(i, PlayerSettings::State::kOpen);
 			if (p.name == d->localplayername) {  // host
 				switch_to_player(0, i);
 				continue;

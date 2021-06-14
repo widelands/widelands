@@ -91,7 +91,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		slot_selection_locked_ = true;
 		if (slot_dropdown_.has_selection()) {
 			const uint8_t new_slot = slot_dropdown_.get_selected();
-			if (new_slot != settings.users.at(id_).position) {
+			if (new_slot != UserSettings::none() && new_slot != settings.users.at(id_).position) {
 				const std::string& slotname = settings.players.at(new_slot).name;
 				const std::string& username = settings.users.at(id_).name;
 
