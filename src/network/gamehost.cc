@@ -1093,6 +1093,12 @@ void GameHost::set_map(const std::string& mapname,
 				}
 			}
 		}
+
+		// Broadcast player settings again to sync names in savegame infobox
+		packet.reset();
+		packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
+		write_setting_all_players(packet);
+		broadcast(packet);
 	}
 
 	// If possible, offer the map / saved game as transfer
