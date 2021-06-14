@@ -33,6 +33,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -178,8 +179,8 @@ InteractivePlayer* Game::get_ipl() {
 	return dynamic_cast<InteractivePlayer*>(get_ibase());
 }
 
-void Game::set_game_controller(GameController* const ctrl) {
-	ctrl_ = ctrl;
+void Game::set_game_controller(std::shared_ptr<GameController> c) {
+	ctrl_ = c;
 }
 
 void Game::set_ai_training_mode(const bool mode) {
@@ -191,7 +192,7 @@ void Game::set_auto_speed(const bool mode) {
 }
 
 GameController* Game::game_controller() {
-	return ctrl_;
+	return ctrl_.get();
 }
 
 void Game::set_write_replay(bool const wr) {
@@ -239,9 +240,9 @@ void Game::check_addons_desync_magic() {
 	// to get rid of `DescriptionIndex` entirely in favour of `std::string`.
 
 	bool needed = false;
-	for (const AddOns::AddOnInfo& a : enabled_addons()) {
-		if (a.category == AddOns::AddOnCategory::kWorld ||
-		    a.category == AddOns::AddOnCategory::kTribes) {
+	for (const auto& a : enabled_addons()) {
+		if (a->category == AddOns::AddOnCategory::kWorld ||
+		    a->category == AddOns::AddOnCategory::kTribes) {
 			needed = true;
 			break;
 		}
@@ -258,18 +259,21 @@ void Game::check_addons_desync_magic() {
 	postload_addons();
 }
 
-bool Game::run_splayer_scenario_direct(const std::string& mapname,
+bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
                                        const std::string& script_to_run) {
-	enabled_addons().clear();
+	full_cleanup();
+	list_of_scenarios_ = list_of_scenarios;
+	assert(!list_of_scenarios_.empty());
 	// Replays can't handle scenarios
 	set_write_replay(false);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_wanted_ = false;
 #endif
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(
+	   mutable_map()->get_correct_loader(list_of_scenarios.front()));
 	if (!maploader) {
-		throw wexception("could not load \"%s\"", mapname.c_str());
+		throw wexception("could not load \"%s\"", list_of_scenarios.front().c_str());
 	}
 
 	// Need to do this first so we can set the theme and background.
@@ -304,16 +308,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
-	set_game_controller(new SinglePlayerGameController(*this, true, 1));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
 		bool const result =
 		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
@@ -462,10 +464,9 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	enabled_addons().clear();  // will be loaded later
+	full_cleanup();  // Reset and cleanup all values
 
 	int8_t player_nr;
-
 	{
 		GameLoader gl(filename, *this);
 
@@ -505,15 +506,13 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, player_nr));
 	try {
 		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
@@ -604,8 +603,8 @@ bool Game::run(StartGameType const start_game_type,
 		// Check whether we need to disable replays because of add-ons.
 		// For savegames this has already been done by the game class packet.
 		if (writereplay_) {
-			for (const AddOns::AddOnInfo& a : enabled_addons()) {
-				if (!a.sync_safe) {
+			for (const auto& a : enabled_addons()) {
+				if (!a->sync_safe) {
 					set_write_replay(false);
 					break;
 				}
@@ -614,7 +613,7 @@ bool Game::run(StartGameType const start_game_type,
 				// We need to check all enabled add-ons as well because enabled_addons() does
 				// not contain e.g. desync-prone starting condition or win condition add-ons.
 				for (const auto& pair : AddOns::g_addons) {
-					if (pair.second && !pair.first.sync_safe) {
+					if (pair.second && !pair.first->sync_safe) {
 						set_write_replay(false);
 						break;
 					}
@@ -684,11 +683,11 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 		} else {
 			// Run all selected add-on scripts (not in scenarios)
-			for (const AddOns::AddOnInfo& addon : enabled_addons()) {
-				if (addon.category == AddOns::AddOnCategory::kScript) {
+			for (const auto& addon : enabled_addons()) {
+				if (addon->category == AddOns::AddOnCategory::kScript) {
 					enqueue_command(new CmdLuaScript(
 					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
-					                                    addon.internal_name +
+					                                    addon->internal_name +
 					                                    FileSystem::file_separator() + "init.lua"));
 				}
 			}
@@ -697,6 +696,8 @@ bool Game::run(StartGameType const start_game_type,
 		// Queue first statistics calculation
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
+
+	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
 
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
@@ -715,7 +716,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_.reset(nullptr);
 		} else {
 			// Just like with scenarios, replays will desync, so we switch them off.
-			writereplay_ = false;
+			set_write_replay(false);
 		}
 	}
 #endif
@@ -775,7 +776,29 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_notrunning;
 
-	return true;
+	if (next_game_to_load_.empty()) {
+		return true;
+	}
+
+	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+	if (FileSystem::filename_ext(load) == kSavegameExtension) {
+		return run_load_game(load, script_to_run);
+	}
+
+	/* Load a scenario. This should be either the current one, or the next one if existent. */
+	assert(!list_of_scenarios_.empty());
+	std::list<std::string> list = list_of_scenarios_;
+	if (list.front() != load) {
+		list.pop_front();
+		assert(!list.empty());
+		assert(list.front() == load);
+	}
+	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+void Game::set_next_game_to_load(const std::string& file) {
+	next_game_to_load_ = file;
 }
 
 /**
@@ -786,6 +809,28 @@ bool Game::run(StartGameType const start_game_type,
  */
 void Game::think() {
 	assert(ctrl_);
+
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+
+		PlayerCommand* pc = pending_player_commands_.front();
+		pending_player_commands_.pop_front();
+
+		// At this point, the command has not yet been distributed to the other
+		// clients, nor written to the replay. If multithreading has caused the
+		// command's duetime to lie in the past, we can just safely increase it.
+		if (pc->duetime() <= get_gametime()) {
+			const Time new_time = get_gametime() + Duration(1);
+			if (g_verbose) {
+				log_info_time(get_gametime(),
+				              "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+				              pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
+			}
+			pc->set_duetime(new_time);
+		}
+
+		ctrl_->send_player_command(pc);
+	}
 
 	ctrl_->think();
 
@@ -816,6 +861,22 @@ void Game::cleanup_for_load() {
 
 	// Statistics
 	general_stats_.clear();
+}
+
+void Game::full_cleanup() {
+	EditorGameBase::full_cleanup();
+
+	did_check_addons_desync_magic_ = false;
+	ctrl_.reset();
+	replaywriter_.reset();
+	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
+	next_game_to_load_.clear();
+	list_of_scenarios_.clear();
+	Economy::initialize_serial();
+
+	if (has_loader_ui()) {
+		remove_loader_ui();
+	}
 }
 
 /**
@@ -912,7 +973,8 @@ uint32_t Game::logic_rand() {
  * across the network.
  */
 void Game::send_player_command(PlayerCommand* pc) {
-	ctrl_->send_player_command(pc);
+	MutexLock m(MutexLock::ID::kCommands);
+	pending_player_commands_.push_back(pc);
 }
 
 /**

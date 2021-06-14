@@ -193,29 +193,6 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
  * the constructor.
  */
 void SoundHandler::read_config() {
-	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove
-	// after Build 21.
-	if (get_config_section_ptr("sound") == nullptr) {
-		for (auto& option : sound_options_) {
-			switch (option.first) {
-			case SoundType::kMusic:
-				option.second.volume = get_config_int("music_volume", option.second.volume);
-				option.second.enabled = !get_config_bool("disable_music", !option.second.enabled);
-				break;
-			case SoundType::kChat:
-				option.second.volume = get_config_int("fx_volume", option.second.volume);
-				option.second.enabled = get_config_bool("sound_at_message", option.second.enabled);
-				break;
-			default:
-				option.second.volume = get_config_int("fx_volume", option.second.volume);
-				option.second.enabled = !get_config_bool("disable_fx", !option.second.enabled);
-				break;
-			}
-		}
-		save_config();
-	}
-
-	// This is the code that we want to keep
 	for (auto& option : sound_options_) {
 		option.second.volume =
 		   get_config_int("sound", "volume_" + option.second.name, option.second.volume);

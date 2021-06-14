@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 10:20+0000\n"
+"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"PO-Revision-Date: 2021-06-10 08:34+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -198,6 +198,10 @@ msgstr "Wenn du een sekert Speel of Upteken hest, wat dat Probleem verklaart (to
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Widelands-Översetters"
+
+#: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr "Verwiederns"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"

@@ -129,6 +129,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 		name.set_text(user_setting.name);
 		rebuild_slot_dropdown(settings);
+
+		initialization_complete();
 	}
 
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
@@ -590,6 +592,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 		}
+
+		initialization_complete();
 	}
 
 	void force_new_dimensions(uint32_t height) {

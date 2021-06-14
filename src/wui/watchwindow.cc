@@ -87,6 +87,8 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 	});
+
+	initialization_complete();
 }
 
 void WatchWindow::draw(RenderTarget& dst) {

@@ -353,11 +353,15 @@ struct GameHostImpl {
 };
 
 GameHost::GameHost(FsMenu::MenuCapsule* c,
-                   std::unique_ptr<GameController>& ptr,
+                   std::shared_ptr<GameController>& ptr,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+   : capsule_(c),
+     pointer_(ptr),
+     d(new GameHostImpl(this)),
+     internet_(internet),
+     forced_pause_(false) {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;
@@ -409,7 +413,7 @@ GameHost::GameHost(FsMenu::MenuCapsule* c,
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 
 	if (capsule_) {
-		run(ptr);
+		run();
 	}
 }
 
@@ -485,12 +489,12 @@ void GameHost::init_computer_players() {
 	}
 }
 
-void GameHost::run(std::unique_ptr<GameController>& ptr) {
+void GameHost::run() {
 	game_.reset(new Widelands::Game());
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	new FsMenu::LaunchMPG(
-	   *capsule_, d->hp, *this, d->chat, *game_, ptr, internet_, [this]() { run_callback(); });
+	   *capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
 }
 
 void GameHost::run_direct() {
@@ -520,8 +524,8 @@ void GameHost::run_callback() {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
 	packet.unsigned_32(game_->enabled_addons().size());
-	for (const AddOns::AddOnInfo& a : game_->enabled_addons()) {
-		packet.string(a.internal_name);
+	for (const auto& a : game_->enabled_addons()) {
+		packet.string(a->internal_name);
 	}
 	broadcast(packet);
 
@@ -542,7 +546,7 @@ void GameHost::run_callback() {
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = game_.get();
-		game_->set_game_controller(this);
+		game_->set_game_controller(pointer_);
 		InteractiveGameBase* igb;
 		player_number = d->settings.playernum + 1;
 		game_->save_handler().set_autosave_filename(
@@ -617,7 +621,13 @@ void GameHost::run_callback() {
 }
 
 void GameHost::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
+
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
 
 	if (d->game) {
 		uint32_t curtime = SDL_GetTicks();
@@ -655,6 +665,10 @@ void GameHost::think() {
 }
 
 void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
+	pending_player_commands_.push_back(pc);
+}
+
+void GameHost::do_send_player_command(Widelands::PlayerCommand* pc) {
 	pc->set_duetime(d->committed_networktime + Duration(1));
 
 	SendPacket packet;
@@ -916,7 +930,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
 	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
-	d->chat.receive(msg);
+	NoteThreadSafeFunction::instantiate([this, &msg]() { d->chat.receive(msg); }, true);
 }
 
 Duration GameHost::get_frametime() {
@@ -1665,8 +1679,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && pair.first.category != AddOns::AddOnCategory::kTheme) {
-				enabled_addons.push_back(&pair.first);
+			if (pair.second && pair.first->category != AddOns::AddOnCategory::kTheme) {
+				enabled_addons.push_back(pair.first.get());
 			}
 		}
 		packet.unsigned_32(enabled_addons.size());
@@ -2213,14 +2227,13 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	}
 	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u", client_num,
+	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
 	              client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(),
 	              time.get());
-	receive_client_time(client_num, time);
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
-	send_player_command(plcmd);
+	do_send_player_command(plcmd);
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {

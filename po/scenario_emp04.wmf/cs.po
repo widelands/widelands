@@ -5,6 +5,7 @@
 # Translators:
 # Milan Fašina <matrix17@seznam.cz>, 2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-05-10 10:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,6 +63,8 @@ msgid ""
 "Ensure there are not more than 3 dead ends, nor more than one flag with more"
 " than 4 roads."
 msgstr ""
+"Zajisti, abychom neměli víc než 3 slepé cesty a ne víc než jednu vlajku s "
+"více než 4 připojenými cestami."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
@@ -188,12 +191,15 @@ msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
+"K vycvičení vojáka na cvičišti na nejvyšší level zkus zvážit pozastavení "
+"cvičiště, dokud nebude plně vybaveno vším potřebným jídlem a zbraněmi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
 msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
+"Abys zabránil plýtvání surovinami, omez počet vojáků na cvičišti na jednoho."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -201,6 +207,8 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
+"Cvičiště bude pro trénink vždy preferovat nejvhodnějšího vojáka. Ujisti se, "
+"že tvoji zpola vycvičení vojáci nejsou umístěni ve vojenských stavbách."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
@@ -249,7 +257,7 @@ msgstr "Zamez pronikání Barbarů do tebou kontrolované části světa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
 msgid "Build 2 charcoal kilns"
-msgstr ""
+msgstr "Postav 2 milíře na dřevěné uhlí"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
@@ -1169,6 +1177,8 @@ msgstr ""
 msgid ""
 "I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
+"Myslím, že bychom to měli důkladně prověřit a navštívit jedno z obilných "
+"polí."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 msgid "Amalea’s Restrictions"
@@ -1284,11 +1294,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:608
 msgid "Amalea in a Hurry"
-msgstr ""
+msgstr "Amalea spěchá"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea is very busy…"
-msgstr ""
+msgstr "Amalea je velmi zaměstnaná..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:611
@@ -1297,6 +1307,9 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
+"Bratře, jak můžeš vidět, je v tomto hospodařství spousta věcí špatně. Budu "
+"velmi zaneprázdněn, abych vše prověřil, takže ti nebudu moci podávat tak "
+"podrobné rady jako dříve."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:614
@@ -1305,6 +1318,8 @@ msgid ""
 "yourself. Of course I will report and advise immediately whenever I discover"
 " new problems."
 msgstr ""
+"Ale věřím, že tohle všechno zvládneš hravě sám. Samozřejmě ti vždy podám "
+"zprávu a radu, jakmile objevím nějaké další problémy."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:622
 msgid "Saledus looks very relaxed…"
@@ -1430,7 +1445,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
 msgid "Perhaps we should train them further in the arena as well."
-msgstr ""
+msgstr "Možná bychom je měli dále vycvičit ještě v aréně."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:683
 msgid "Training is Needed"
@@ -1672,38 +1687,38 @@ msgstr "Pivovar"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
 msgctxt "empire_building"
 msgid "brewing beer"
-msgstr ""
+msgstr "vaření piva"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Obilné pole"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
 msgctxt "empire_building"
 msgid "working"
-msgstr ""
+msgstr "pracuje"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
 msgid "planting wheat"
-msgstr ""
+msgstr "setí pšenice"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
 msgctxt "empire_building"
 msgid "harvesting wheat"
-msgstr ""
+msgstr "sklízení pšenice"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Domek lesníka"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
 msgctxt "empire_building"
 msgid "planting trees"
-msgstr ""
+msgstr "sázení stromů"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
@@ -1797,12 +1812,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Domek dřevorubce"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
 msgctxt "empire_building"
 msgid "felling trees"
-msgstr ""
+msgstr "kácí stromy"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1812,7 +1827,7 @@ msgstr "Mlýn"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
 msgctxt "empire_building"
 msgid "grinding wheat"
-msgstr ""
+msgstr "mele pšenice"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
@@ -1823,52 +1838,52 @@ msgstr "Chrám bohyně Vesty"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Výcvikový tábor"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
 msgid "sleeping"
-msgstr ""
+msgstr "spí"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "vylepšení zdraví vojáka z úrovně 1 na úroveň 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "vylepšení zdraví vojáka z úrovně 2 na úroveň 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "vylepšení zdraví vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177

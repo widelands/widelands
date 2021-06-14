@@ -94,7 +94,7 @@ public:
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
 
-	void think() override;
+	void game_logic_think() override;
 	double average_fps() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
@@ -404,12 +404,17 @@ private:
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
 
+	// For measuring actual game speed and how smoothly the game logic runs
+	uint32_t last_frame_realtime_, previous_frame_realtime_;
+	Time last_frame_gametime_, previous_frame_gametime_;
+
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 
 	bool cheat_mode_enabled_;
+	bool screenshot_failed_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

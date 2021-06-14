@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -39,6 +39,13 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 			// TODO(Nordfriese): Savegame compatibility
 			if (packet_version >= 5 && fr.unsigned_8() == 0) {
 				game.set_write_replay(false);
+			}
+
+			game.list_of_scenarios_.clear();
+			if (packet_version >= 6) {
+				for (size_t i = fr.unsigned_32(); i; --i) {
+					game.list_of_scenarios_.push_back(fr.string());
+				}
 			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
@@ -68,6 +75,11 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 
 	fw.unsigned_32(game.scenario_difficulty_);
 	fw.unsigned_8(game.writereplay_ ? 1 : 0);
+
+	fw.unsigned_32(game.list_of_scenarios_.size());
+	for (const std::string& s : game.list_of_scenarios_) {
+		fw.string(s);
+	}
 
 	// TODO(sirver,trading): save/load trade_agreements and related data.
 

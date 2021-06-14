@@ -74,6 +74,7 @@ wl_library(scripting_lua_interface
     build_info
     io_fileread
     io_filesystem
+    logic_addons
     logic_exceptions
     scripting_base
     scripting_errors

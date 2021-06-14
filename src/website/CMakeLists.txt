@@ -9,6 +9,7 @@ wl_library(website_common
     base_exceptions
     base_i18n
     base_log
+    base_multithreading
     graphic
     io_filesystem
 )

@@ -135,6 +135,8 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 
 	joingame_.set_enabled(false);
 	layout();
+
+	initialization_complete();
 }
 
 void NetSetupLAN::layout() {
