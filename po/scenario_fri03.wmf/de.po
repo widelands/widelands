@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -478,7 +478,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
 msgid "Congratulations"
 msgstr "Glückwunsch"
 
@@ -717,12 +717,12 @@ msgstr ""
 "und unseren eigenen bauen. Ich frage mich was besser wäre…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
 msgid "Victory"
 msgstr "Sieg"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 msgid "Victory!"
 msgstr "Sieg!"
 
@@ -741,7 +741,7 @@ msgstr ""
 "von dem Besatzer Atterdag zurückerobern!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
@@ -750,7 +750,7 @@ msgstr ""
 "weiterspielen, ansonsten fahre mit der nächsten Mission fort."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
@@ -758,17 +758,17 @@ msgstr ""
 "Ihr habt die Überfahrt mit purem Gold bezahlt. Nun ist es euer gutes Recht "
 "sie auch zu erhalten. Unser Schiff ist fertig, ihr dürft euch einschiffen!"
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306
 msgid "You Have Lost"
 msgstr "Du hast verloren"
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
 msgid "Goodbye!"
 msgstr "Auf Wiedersehen!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
 msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
@@ -778,7 +778,7 @@ msgstr ""
 "wird der Sturm es euch nicht mehr erlauben die Insel zu verlassen. Es tut "
 "mir leid, aber das Wetter wartet nicht. Auf Wiedersehen."
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."

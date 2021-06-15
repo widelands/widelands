@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -233,7 +233,7 @@ msgstr "故郷への旅路"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
 msgstr "ルティウスの日記"
 
@@ -1071,29 +1071,29 @@ msgid ""
 msgstr "ミッションを完了しました。このまま続けてもいいですし、次のミッションにチャレンジすることもできます。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "ついに、祭壇の破片の一つを発見した。偉大なるネプチューンを讃えよ！"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "祭壇の破片の一つを発見した。偉大なるネプチューンに祈りを捧げよ！"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
 msgstr[0] "まだ %d つの祭壇の破片を見つけなければならない。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr "ついに祭壇の破片の最後の一つを発見した。これで祭壇を復元し、我らが神を讃えることができる。偉大なるネプチューンに祈りを！"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
 msgstr "アーティファクト発見"

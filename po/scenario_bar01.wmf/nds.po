@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-13 12:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -914,25 +914,25 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "Dat sünd baldadige Deerten: De Oss is so fix as een Minsk, aver vööl machtiger un bannig genöögsaam: All wat wi bruken, um se to tüchten, is Weit un Water, un dann warken se troo un toverlatig up de Straten."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "Rutfödderung kumpleet"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "Troon spreckt …"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "Boldreth hett mi jüüst fraggt, of ick mit hüm de nejen Kroog besöken will. He meent, dat maakt mi blieder."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -941,33 +941,33 @@ msgid ""
 msgstr "As ick mi umsehn hebb, hebb ick Gesichten sehn, wat vull vun Toversicht mi trauen, dat ick se in deeser dunkern Tied föhren kann. Aver ehr ick wat vun Dankbaarheid of Tospraak seggen kunn, is een Soldat in de Kroog rannt. He weer eenige Dagen buten in de Wald un ick kunn sehn, wo sluff he weer."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
 msgstr "De Naricht, wat he brocht hett, hett all ännert …"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "Sieg"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Du hest deese Rutfödderung ofsloten. Wenn du willst, kannst du wiederspölen, anners de token Rutfödderung anfangen."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "Eene Lechtmaan-Nacht"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "Eene Nacht, as de Maan hell schien, bün ick to de Topp vun Kaal-Maavrat klettert."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -975,16 +975,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "As ick to de Kimm kiekt hebb, hebb ick bloodrode Lüchten in de Feernte flackern sehn. Dat is nich to faten, mit wo vööl Begeisterung miene Bröörs deesen Krieg föhren. Ick hebb Angst vör de Tied, wenn ick Alltunraan weer seh – is noch wat anners as Aske un Ruinen vun uns’ maal-wunnermojen Höövdstadt över, wenn wi daar hen komen?"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "Noch een koller Dag"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
 msgstr "Troon is besörgt …"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -992,37 +992,37 @@ msgid ""
 msgstr "De Winter is daar. Mennig vun uns’ lieden unner de Koll, aver wi mutten uthollen. De Dag, wenn wi torügg gahn, kann nich mehr feern wesen – ’t düür nich mehr feern wesen."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "Ick hebb beden, dat dat weer warmer word, as ick beden hebb, dat de Krieg uplest ennt."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Bit nu is wull keen Gebedd erhöört worden."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "Een nettes Dörp is uns bitreden!"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "Wi hebben een Dörp mit fründelken, streevsken Lüü funnen, well uns’ Riekdoom, Klookheid un Starkde bewunnern."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "Se hebben slicht aver blied vun Jagen un Buuren leevt. Se hebben noch nie in Strieden kämpt un sünd daar ok nich för klaar."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."

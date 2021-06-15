@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -438,7 +438,7 @@ msgstr "Loftomor e Sidolus chegam."
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina"
 msgstr "Jundlina"
 
@@ -890,12 +890,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "Imediatemente, precisamos de uma casa para Ostur perto do lago e precisamos de tábuas, troncos e tecido de teia para a construção lá. Esqueça todo o resto, precisamos destes bens no topo da montanha antes que nossos armazéns seja engolidos pelo mar."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
 msgid "Jundlina is Relieved"
 msgstr "Jundlina está aliviada"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -905,17 +905,17 @@ msgid ""
 msgstr "Glória a Satul! O jovem construtor de barcos Ostur conseguiu. Nós temos três embarcações – nunca vi embarcações mais magnificas – com espaço o suficiente para carregar todos nós e algumas mercadorias também. E essa ajuda veio bem a tempo: Lutas está prestes a engolir o resto da ilha, e o mar está em um turbilhão no momento. Porém, podemos escapar e recomeçar em alguma terra bem longe daqui..."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr "Eu aguardo uma longa jornada, mas nós vamos encontrar a terra de Satul no final. Isto foi o que eu prometi para o meu povo. E para mim mesmo"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid "Congratulations"
 msgstr "Parabéns!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
@@ -923,11 +923,11 @@ msgstr "Você venceu esta missão. Continue para a próxima ou siga jogando nest
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Edifício perdido!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:487
 msgid "We lost a building to the ocean!"
 msgstr "Nós perdemos uma construção para o oceano!"

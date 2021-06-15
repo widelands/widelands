@@ -15,13 +15,14 @@ run(function()
    wait_for_message("Expedition")
    port:start_expedition()
    wait_for_message("Expedition")
+   game.desired_speed = 2 * 1000
 
    first_ship.island_explore_direction="ccw"
-   sleep(2000)
+   sleep(10000)
    assert_equal("ccw", first_ship.island_explore_direction)
    wait_for_message("Port Space")
    second_ship.island_explore_direction="ccw"
-   sleep(2000)
+   sleep(10000)
    assert_equal("ccw", second_ship.island_explore_direction)
    wait_for_message("Port Space")
 
