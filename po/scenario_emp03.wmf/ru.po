@@ -6,14 +6,15 @@
 # Anton Khabarov <2233009@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
 # 66c17387c1d6640720971b8ab706da27_0feead1, 2019
+# nskdmitry, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: 66c17387c1d6640720971b8ab706da27_0feead1, 2019\n"
+"Last-Translator: nskdmitry, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -256,7 +257,7 @@ msgstr "Путешествие домой"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
 msgstr "Дневник Люциуса"
 
@@ -677,6 +678,10 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Собрав достаточно пшеницы, можно разобрать фермы и построить овцеферму для "
+"получения шерсти. Затем, как овцеферма заработает, нам нужно будет найти "
+"достаточно места под ткацкую фабрику - среднеразмерное здание - чтобы шить "
+"шерстяную одежду. Но прежде нам нужно собрать разумный объем зерна."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -685,6 +690,9 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Мне кажется, что 50 снопов зерна нам для начала хватит. Мы не указывали, "
+"сколько нам нужно пшеницы, так что пахарю не требуются дополнительные "
+"товары. Нам же достаточно лишь смотреть за тем, как зреет пшеница."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -784,6 +792,9 @@ msgid ""
 "possible enemies we should send some soldiers to each new port, until we can"
 " protect them with some military buildings."
 msgstr ""
+"Как бы то ни было, нам нужно беречь наши порты. Пока мы не сможем поставить "
+"рядом с ними несколько военных зданий, пошлите на охрану каждого порта по "
+"несколько солдат."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea Advises"
@@ -800,6 +811,9 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Славься, Люций. Наши славные строители поведали мне за беседой, что все наше"
+" золото уйдет на строительство порта. После его возведения золота у нас не "
+"останется."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
@@ -1246,17 +1260,17 @@ msgstr ""
 "перейти к следующей миссии."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "Наконец-то, мы обнаружили часть нашей святыни. Хвала Нептуну!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Мы обнаружили ещё одну часть нашей святыни. Хвала Нептуну!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1266,7 +1280,7 @@ msgstr[2] "Нам нужно найти ещё %d частей нашей свя
 msgstr[3] "Нам нужно найти ещё %d частей нашей святыни."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1274,6 +1288,6 @@ msgstr ""
 "Наконец-то мы обнаружили последнюю часть нашей святыни. Теперь мы можем "
 "восстановить её, чтобы поклоняться нашему Богу. Хвала Нептуну!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
 msgstr "Найден артефакт"

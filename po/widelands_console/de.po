@@ -8,6 +8,7 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2021
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
+# Thomas Ho <tomohnetom@web.de>, 2021
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015
 msgid ""
@@ -15,8 +16,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 08:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-06-14 19:58+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,22 +27,22 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "Usage:"
-msgstr ""
+msgstr "Verwendung:"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid "widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:52
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:58
 #: ../../src/wlapplication_messages.cc:184
 msgid "DIRNAME"
-msgstr ""
+msgstr "VERZEICHNISNAME"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "Options:"
@@ -49,17 +50,17 @@ msgstr "Optionen:"
 
 #: ../../src/wlapplication_messages.cc:53
 msgid "Use specified directory for the widelands data files"
-msgstr ""
+msgstr "Verwende das angegebene Verzeichnis für die widelands Dateien."
 
 #: ../../src/wlapplication_messages.cc:55
 msgid ""
 "Use specified directory for widelands config files, savegames and replays. "
 "Default is "
-msgstr ""
+msgstr "Verwende das angegebene Verzeichnus für Widelands Konfigurationsdateien, Speicherungen und Replays. Standard ist "
 
 #: ../../src/wlapplication_messages.cc:58
 msgid "Use specified directory for the widelands locale files"
-msgstr ""
+msgstr "Verwende das angegebene Verzeichnis für Widelands Sprachdateien"
 
 #: ../../src/wlapplication_messages.cc:63
 msgid "The locale to use"
@@ -77,65 +78,65 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:72
 #: ../../src/wlapplication_messages.cc:73
 msgid "FILENAME"
-msgstr ""
+msgstr "DATEINAME"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
-msgstr ""
+msgstr "Erstelle direkt ein Alleinspielerspiel das in der gegebenen Datei konfiguriert ist. Ein Beispiel ist in `data/templates/new_game_template` zu finden"
 
 #: ../../src/wlapplication_messages.cc:69
 msgid "Directly starts the map `FILENAME` as scenario map"
-msgstr ""
+msgstr "Startet sofort die Karte `DATEINAME` als Szenario"
 
 #: ../../src/wlapplication_messages.cc:71
 msgid "Directly loads the savegame `FILENAME`"
-msgstr ""
+msgstr "Lädt direkt den Spielstand `DATEINAME`"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Directly loads the replay `FILENAME`"
-msgstr ""
+msgstr "Lädt direkt die Aufzeichnung `DATEINAME`."
 
 #: ../../src/wlapplication_messages.cc:74
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
-msgstr ""
+msgstr "Führt ein Lua-Skript nach der Initialisierung aus. Nur gültig mit --scenario, --loadgame oder --editor"
 
 #: ../../src/wlapplication_messages.cc:78
 msgid ""
 "Directly starts the Widelands editor. You can add a =FILENAME to directly "
 "load the map `FILENAME` in editor"
-msgstr ""
+msgstr "Startet sofort den Widelands-Editor. Du kannst =DATEINAME hinzufügen, um sofort die Karte `DATEINAME` im Editor zu laden"
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Starts the game with sound disabled"
-msgstr ""
+msgstr "Startet das Spiel mit deaktiviertem Ton"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid "Force Widelands to crash when a Lua error occurs"
-msgstr ""
+msgstr "Absturz von Widelands erzwingen wenn ein Lua Fehler auftritt"
 
 #: ../../src/wlapplication_messages.cc:85
 msgid ""
 "Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic"
-msgstr ""
+msgstr "Aktiviert den KI-Trainingsmodus. Siehe https://www.widelands.org/wiki/Ai%20Training/ für eine ausführliche Beschreibung der KI-Trainingslogik"
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr ""
+msgstr "Nur im Mehrspielermodus verfügbar, wird diese Option die Spielgeschwindigkeit automatisch an die FPS anpassen. Sinnvoll in Benutzung mit --ai_training"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Game options:"
-msgstr ""
+msgstr "Spieloptionen:"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Note: New values will be written to config file"
-msgstr ""
+msgstr "Hinweis: Der neue Wert wird in die config-Datei geschrieben"
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:96
@@ -145,12 +146,12 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:189
 #: ../../src/wlapplication_messages.cc:198
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:98
 msgid "Automatically save each `n` minutes"
-msgstr ""
+msgstr "Speichert automatisch alle `n` Minuten"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
@@ -159,7 +160,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Do not save files as binary zip archives"
-msgstr ""
+msgstr "Speichert Dateien nicht als Zip-Archive"
 
 #: ../../src/wlapplication_messages.cc:103
 msgid "Show filenames in replay screen"

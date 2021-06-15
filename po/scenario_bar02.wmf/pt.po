@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
@@ -255,7 +255,7 @@ msgstr "Perto de Casa"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Thron parece preocupado …"
 
@@ -276,7 +276,7 @@ msgstr "Por agora permanecemos junto à fronteira da velha floresta preparando o
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Mais um dia frio"
 
@@ -352,7 +352,7 @@ msgstr "A linha de fronteira das minhas forças expandiu-se para o limite das fl
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Thron diz:"
 
@@ -577,7 +577,7 @@ msgid ""
 msgstr "Os nossos geólogos encontraram mais depósitos de minério de ferro, carvão e até ouro. Temos de melhorar as nossas minas atuais assim que os mineiros ficarem mais experimentados. Devemos construir mais minas, uma infraestrutura de alimentação maior para podermos abastecer os nossos trabalhadores com comida suficiente e podermos avançar a economia. Mas isto não é tudo pois a maioria dos nossos guerreiros é muito jovem e não estão nem bem armados nem estão bem treinados. Temor por isso de construir treinamentos para os preparar para as suas missões futuras."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -586,7 +586,7 @@ msgid ""
 msgstr "Os meus irmãos e os seus guerreiros estão mortos e para trás só deixaram morte e destruição. Ainda não encontrei um homem ou mulher do povo por entre as ruínas e só espero que eles tenham conseguido escapar a toda esta destruição e tenham começado uma vida novo num outro local qualquer."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -596,22 +596,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Não ficou pedra sobre pedra  para me trazer à memória a beleza de outrora, apenas um monte de escombros é o que resta da velha capital. Estou triste e ao mesmo tempo aliviado. Já não tinha esperanças de rever a velha beleza de Al’thunran. Agora a velha cidade está de novo nas minhas mãos e eu e o meu povo não hesitaremos em reconstruí-la. Tenho arrepios só de pensar em poder ver o seu antigo esplendor."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Vitória"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Completaste a última missão do tutorial dos bárbaros. Podes continuar a jogar se desejares, ou então prossegue a próxima campanha."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Assalto militar"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -619,7 +619,7 @@ msgid ""
 msgstr "Assim seja ! Os generais estão a preparar as tropas e o Bolderano irá em pessoa liderar o primeiro ataque. Eu marcharei a seu lado para libertar Al’thunran desta guerra e trazer de novo a paz à capital."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -628,20 +628,20 @@ msgid ""
 msgstr "Quando o sol começar a despontar por entre as árvores, irei ordenar o primeiro assalto. No lusco-fusco do crepúsculo, espero já estar a celebrar a minha vitória no casa do senhor da guerra e, para comemorar esse feito, sacrificarei um cordeiro recém-nascido em honra de meu Pai cujos olhos estão de certo postos em mim neste dia."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Assim seja !"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Transporte mais rápido"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Khantrukh diz:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

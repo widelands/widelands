@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -250,7 +250,7 @@ msgstr "故郷に近づいて"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "スロンは心配そうです……"
 
@@ -271,7 +271,7 @@ msgstr "現在、我々は古い森の端で休息を取り、来たるべき日
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "ある寒い日"
 
@@ -347,7 +347,7 @@ msgstr "我が軍勢の前線は森の端にまで到達した。長く辛い冬
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "スロンは言った、"
 
@@ -572,7 +572,7 @@ msgid ""
 msgstr "地質学者は大量の鉄鉱石、石炭、さらには金鉱石の存在を確認している。鉱夫の経験が十分になり次第、鉱山を拡張するべきだろう。さらには、鉱山の数そのものを増やしたり、食料の生産体制をさらに拡張していくべきだろう。しかし、これで全てでは無い ── 兵士の大部分はまだ若く、大した訓練を受けていないし、良い武器を持っているわけでもない。だから、訓練施設を建設し、彼らにも来たるべき時に備えさせるべきだ。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -581,7 +581,7 @@ msgid ""
 msgstr "兄弟達もその兵士も皆死んだ。後に残るのは炎とガレキのみ。廃墟の中で兵士でない普通の男女は今のところ見かけていない。彼らはこの残虐な戦争が始まる前に逃走し、どこか別の場所で真っ当な生活をしている、私はそうあって欲しいと思う。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -591,22 +591,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "私の記憶にある美しさは何も残されていない。かつての都は今は廃墟。当然悲しいことではあるが、安心した気持ちもあった。なにせ、やっとアル-サンランに帰ってくることができたのだから ── 数ヶ月前、生きてここに戻れるかどうかについて悩んでいたことが少し懐かしくも感じる。今、かつての都は我が手にある。これより我らの力の全てを使い、この街を再建する、それをためらう理由は何も無い。かつての美しい街並みが蘇るその時が待ち遠しくてたまらない。"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "勝利"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "野蛮人のチュートリアルキャンペーンの最後のミッションを達成しました。このままゲームを続けることもできますし、次のキャンペーンを始めることもできます。"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "軍事攻撃"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -614,7 +614,7 @@ msgid ""
 msgstr "ならばそうするしかない。将軍達は軍勢の準備をしている。ボルドレスは自身で最初の攻撃を指揮するつもりだ。私も彼とともに出る。アル-サンランを戦乱から解放し、首都に平和をもたらすため。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -623,20 +623,20 @@ msgid ""
 msgstr "翌朝、まだ若い太陽が木々の合間から姿を見せた時、私が攻撃を命じることになった。その夕暮れ、将軍の集会所で勝利を祝い、父の栄光を讃えるため生まれたての子羊を生贄に捧げる。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "そうなりますように！"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "効率的な輸送"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "カントルークが言いました、"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
