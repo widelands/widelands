@@ -43,7 +43,9 @@ bool is_initializer_thread();
  */
 struct NoteThreadSafeFunction {
 	CAN_BE_SENT_AS_NOTE(NoteId::ThreadSafeFunction)
-	static void instantiate(const std::function<void()>&, bool wait_until_completion);
+	static void instantiate(const std::function<void()>&,
+	                        bool wait_until_completion,
+	                        bool rethrow_errors = true);
 
 	const std::function<void()> run;
 
