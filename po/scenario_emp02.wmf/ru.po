@@ -5,6 +5,7 @@
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
 # Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
+# nskdmitry, 2021
 # GunChleoc, 2016
 # Viktor S <awsswa59@gmail.com>, 2018-2019
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"PO-Revision-Date: 2021-06-15 05:06+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -183,7 +184,7 @@ msgstr "Новый остров"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "Дневник Люциуса"
 
@@ -462,7 +463,7 @@ msgid ""
 msgstr "Очень хорошо. Первое большое военное здание построено, и добывающая инфраструктура становится мощнее. Теперь мы должны думать о подготовке к сражению."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr "Победа"
 
@@ -484,7 +485,7 @@ msgstr "Есть все еще несколько Варваров, скрыва
 msgid ""
 "We have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island. Now we can think about our next steps."
-msgstr ""
+msgstr "Теперь, когда мы наладили экономику, обучили солдат и прогнали варваров с острова, нам нужно подумать о том, что делать дальше."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
@@ -499,14 +500,14 @@ msgid "A Message"
 msgstr "Послание"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Сегодня голубь приземлился на наш остров. Он принес сообщение, которое наполняет меня темными мыслями и возвращает мои страхи."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -514,7 +515,7 @@ msgid ""
 "must do…"
 msgstr "Сообщение было адресовано мне, в нем была просьба вернуться домой, во Фремил. Говорилось, что Империя находится в состоянии войны с Варварами. Они подверглись нападению с севера племенем, на которое мне запретили напасть. Что ж, мне совершенно ясно, что я должен сделать! …"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
