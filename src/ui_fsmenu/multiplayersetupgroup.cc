@@ -110,6 +110,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 					if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 						settings_->set_player_number(new_slot);
+					} else {
+						slot_dropdown_.select(settings.users.at(id_).position);
 					}
 				} else {
 					settings_->set_player_number(new_slot);

@@ -1653,6 +1653,10 @@ bool GameHost::has_user_name(const std::string& name, uint8_t ignoreplayer) {
 		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	}
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i) {
+		if (d->settings.savegame && d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
+			// This might be this users slot from the configured savegame
+			continue;
+		}
 		if (i != ignoreplayer && d->settings.players.at(i).name == name) {
 			return true;
 		}
