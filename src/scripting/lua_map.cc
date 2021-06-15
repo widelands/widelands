@@ -2128,6 +2128,23 @@ int LuaTribeDescription::has_worker(lua_State* L) {
 MapObjectDescription
 --------------------
 
+.. graphviz::                                                                                                                  
+                                                                                                                                  
+   graph MapObjectDescription {                                                                                                   
+                                                                                                                                  
+   bgcolor="transparent"                                                                                                          
+   node [shape=box, style=filled, fillcolor=white]                                                                                
+   edge [color=white]                                                                                                             
+   MapObjectDescription [shape=house]                                                                                             
+   MapObjectDescription [fillcolor=green]                                                                                             
+                                                                                                                                  
+                                                                                                                                  
+   MapObjectDescription -- {ImmovableDescription BuildingDescription WareDescription WorkerDescription ShipDescription}           
+   BuildingDescription -- {ConstructionSiteDescription DismantleSiteDescription ProductionSiteDescription MilitarySiteDescription WarehouseDescription MarketDescription}                                                                                                
+   ProductionSiteDescription -- {TrainingSiteDescription}                                                                         
+   WorkerDescription -- {SoldierDescription}                                                                                      
+   }
+        
 .. class:: MapObjectDescription
 
    A static description of a map object, so it can be used without
@@ -4535,9 +4552,10 @@ MapObject
       MapObject [fillcolor=green, shape=house]
       more [label="…", href="../autogen_wl_map.html#building", target="_parent"]
 
-      MapObject -- {Bob BaseImmovable }
-      Bob -- {Ship Critter Worker}
-      Worker -- Carrier -- Ferry
+      
+      MapObject -- { Bob BaseImmovable }
+      Bob -- {Ship Worker}
+      Worker -- { Soldier}
       BaseImmovable -- {MapImmovable PlayerImmovable}
       PlayerImmovable -- {PortDock Flag "Road/Waterway" Building}
       Building -- more

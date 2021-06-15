@@ -6,6 +6,8 @@ import os
 import os.path as p
 import re
 import sys
+import make_class_diagram as mcd
+
 
 ###################
 # inputs, outputs #
@@ -174,6 +176,10 @@ def replace_tocs(toc_rst_dict):
 
 if __name__ == '__main__':
     def main():
+        print("args",sys.argv)
+        if '-graphs' in sys.argv:
+            mcd.init(cpp_pairs)
+            print("mainclassses", mcd.main_classes)
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 
