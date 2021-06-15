@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-17 08:38+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -917,25 +917,25 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "그들은 놀라운 동물들이오. 소는 인간만큼 빠르고 훨씬 강하며 알뜰합니다. 우리에게 필요한것은 밀과 물을 주어 기르면, 그들은 길에서 충성스럽고 믿을수있게 그들의 일을 할것이오."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "임무 완료"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "쓰론이 말했다…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "어느 날 볼드레쓰는 함께 새로운 술집에 가자고 했다. 그러면 조금은 기운이 날 것이라고 말했다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -944,33 +944,33 @@ msgid ""
 msgstr "내가 주위를 둘러보니, 충직한 얼굴을 보았고, 내가 그들을 이 어두운 날들을 통해 인도할수 있었소. 아직 내가 감사하거나 격려하는 말을 하기 전인데, 내 전사 중 한 명이 여관에 달려들었소.  (번역확인)그는 지난 몇일동안 숲속 멀리 있었고, 그가 얼마나 피곤했는지 알수있었소."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
 msgstr "그가 가져온 소식은 모든 것을 바꿨소…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "승리"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "이 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 임무로 이동하십시오."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "보름달의 밤"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "보름달이 밝게 빛나는 어느 날 밤, 나는 칼'마브라쓰산 정상까지 올라갔다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -978,16 +978,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "내가 지평선을 바라봤을때, 멀리서 나는 여전히 피비린내나는 진홍빛 깜박거림을 보았다. 내 형제들이 이 전쟁에 얼마나 열정을 가지고 싸우는지 나는 믿을 수 없다. 나는 알'쑨란을 다시보게될 순간이 두렵소. –  (번역확인)우리가 거기에 도착했을 때, 우리의 아름다운 수도는 유골과 폐허가 남아있을 것인가?"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "또 다른 추운 날"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
 msgstr "쓰론은 걱정스러워 보입니다…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -995,37 +995,37 @@ msgid ""
 msgstr "겨울이 다가오고있소. 많은 사람들이 추위에 시달릴것이오. 그러나 우리는 견뎌내여하오. 우리가 돌아갈 날이 머지 않았소 – 더는 멀지 않을것이오."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "나는 다시 따뜻해지도록 빌었고 그리고 마침내 전쟁이 끝나기를 빌었소."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "지금까지는 그 어느 쪽의 소원도 이루어지고 있지 않았소."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "우리에게 우호적인 마을이 우리와 합류를 했습니다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "우리에게 우호적이고 생산적인 사람들이 사는 마을을 발견했습니다. 그들은 우리의 풍요로움과, 기술력과 군사력에 좋은 느낌을 받았다고 합니다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "그들은 사냥과 농사를 통해 소박하고 행복하게 살아왔소. 그들은 지금까지 어떠한 충돌에도 관여하지 않았고, 싸울 준비도 되어있지않았소."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."

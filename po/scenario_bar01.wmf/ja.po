@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -915,25 +915,25 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "彼らは素晴らしい動物です。人間と同等の早さで動きつつも、ずっと力持ちでずっと質素な生活に耐えます。小麦と水を与えて育ててあげさえすれば、忠実かつ確実に道で物資の輸送をしてくれます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "任務完了"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "スロンは言いました…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "ある日、ボルドレスが一緒に新しい酒場に行こうと誘ってきた。そうすれば少しは気が晴れるだろう、と彼は言っていた。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -942,33 +942,33 @@ msgid ""
 msgstr "周囲を見渡すと、信頼できる者達の顔があった。私がこの暗鬱たる日々を打破してくれると信じてくれているのだ。感謝や励ましの言葉を言おうとしようとしていると、一人の戦士が酒場に駆け込んできた。彼はしばらくの間遠くの森に行っていたはずだった、そして非常に疲れているように見えた。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
 msgstr "彼の持ち込んだ知らせが全てを変えてしまった…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "勝利"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "このミッションを達成しました。このままプレイを続けることもできますが、終了して次のミッションに挑むこともできます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "ある満月の夜"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "満月が鮮やかに輝くある夜、私はカル-マブラスの頂上まで登った。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -976,16 +976,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "地平線を睨むと、遠くに真紅の光が揺らめく様が見えた。兄弟達は一体どれだけこの戦争に熱をあげているのか。再びアル-サンランを見る時が怖くなっていた ── 我々が帰還する時には、あれだけ美しかった都もすべて灰燼に帰しているのではないだろうか？"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "ある寒い日"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
 msgstr "スロンは心配している…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -993,37 +993,37 @@ msgid ""
 msgstr "冬が近づいている。多くの者が寒さで苦しむだろうが、我々は耐えなければならない。我々が帰還する日はそう遠くはない ── もう遠くはないのだ。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "私はもう少し暖かくなるようにと祈った。そして、戦争が終わるようにと祈った。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "今のところ、どちらの願いも叶えられていない。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "友好的な村が仲間に加わりました！"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "友好的で生産的な人々の住む村を発見しました、我々の豊かさ、技術、そして強さに感銘を受けています。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "彼らは簡素ながらも、狩りや畑仕事をしながら楽しく暮らしています。これまで戦に巻き込まれたことはないようで、戦闘への備えがありません。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-04-29 12:17+0000\n"
 "Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -176,7 +176,7 @@ msgstr "新岛屿"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "卢图斯日记"
 
@@ -455,7 +455,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr ""
 
@@ -492,14 +492,14 @@ msgid "A Message"
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -507,7 +507,7 @@ msgid ""
 "must do…"
 msgstr ""
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
