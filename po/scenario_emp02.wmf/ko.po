@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-25 12:28+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -179,7 +179,7 @@ msgstr "새로운 섬"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "루티우스의 일지"
 
@@ -458,7 +458,7 @@ msgid ""
 msgstr "좋아. 첫번째 큰 군사 건물이 완성되었고 채굴 기반시설들이 점점 개선되고 있어. 이제 우리는 전투를 준비할 때가 되었다."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr "승리"
 
@@ -495,14 +495,14 @@ msgid "A Message"
 msgstr "소식"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "오늘 비둘기가 우리 섬에 내려앉았다. 가져온 소식에는 나를 어두운 생각으로  가득 채우고 공포를 불러일으킨 소식이 있었다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -510,7 +510,7 @@ msgid ""
 "must do…"
 msgstr "그 소식은 프레밀로 돌아올 것을 독촉하기 위해 나에게 전달된 것이었다. 제국은 야만인들과의 전쟁에 돌입했고, 그 야만인들은 내가 공격하는 것을 금지당한 북쪽의 부족들로부터 온 것이었다. 내가 할 일이 무엇인지 확실하다…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."

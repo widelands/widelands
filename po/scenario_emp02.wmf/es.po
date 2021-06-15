@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -184,7 +184,7 @@ msgstr "Una nueva isla"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "Diario de Lutius"
 
@@ -463,7 +463,7 @@ msgid ""
 msgstr "Eso es bueno. El primer edificio militar grande está completo y la infraestructura minera se pone mejor y mejor. Ahora debemos pensar en prepararnos para la batalla."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr "Victoria"
 
@@ -500,14 +500,14 @@ msgid "A Message"
 msgstr "Un Mensaje"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Hoy una paloma ha aterrizado en nuestra isla. Traía un mensaje que me llena de oscuros pensamientos y trae de regreso mis temores."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -515,7 +515,7 @@ msgid ""
 "must do…"
 msgstr "El mensaje fue dirigido a mi, rogándome que regrese a Fremil. Decía que el Emperador estaba en guerra con los Bárbaros. Fueron atacados desde el norte por la tribu que se me prohibió atacar. Está claro para mí lo que tengo que hacer..."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."

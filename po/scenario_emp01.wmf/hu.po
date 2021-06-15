@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-24 00:19+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"PO-Revision-Date: 2021-05-30 15:01+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -422,16 +422,16 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel!"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"
 msgstr "Biztonságos félsziget"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
 msgstr "Saledus így szól:"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:241
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
