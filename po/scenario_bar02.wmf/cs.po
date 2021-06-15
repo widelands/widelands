@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-02-01 19:55+0000\n"
 "Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -253,7 +253,7 @@ msgstr "Blízko k domovu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Thron vypadá zasmušile…"
 
@@ -274,7 +274,7 @@ msgstr "V tuto chvíli táboříme na hranici starého lesa a připravujeme se n
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Další studený den"
 
@@ -350,7 +350,7 @@ msgstr "Hranice mého území se rozšířila až k okraji lesů. Máme za sebou
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Thron říká:"
 
@@ -575,7 +575,7 @@ msgid ""
 msgstr "Naši geologové objevili mnohem více nalezišť železné rudy, uhlí a dokonce zlata. Jakmile naši horníci získají potřebné zkušenosti, měli bychom vylepšit stávající doly. Taky bychom měli postavit nové doly a posílit naši přípravu jídla, aby zvládla všechny zásobovat jídlem, a rozvinout další zpracování surovin. A to pořád není všechno - většina našich vojáků je stále velmi mladá a nemají dobrou zbraň ani dostatečný výcvik. Měli bychom postavit cvičiště, kde by se připravili na své budoucí úkoly."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -584,7 +584,7 @@ msgid ""
 msgstr "Mí bratři a jejich vojáci jsou mrtvi, zanechali za sebou pouze oheň a zkázu. V ruinách jsem naštěstí nenašel žádné civilisty, ani muže ani ženy, a tak doufám, že se před bitvou všichni stihli přesunout někam do bezpečí."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -594,22 +594,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Z té krásy v mých vzpomínkách nezůstalo nic, z hlavního města zbyly jen trosky. Pociťuji nad tím lítost, ale i úlevu. Bylo mi jasné, že Al'thunran v jeho bývalé kráse už nespatřím. Ještě před pár měsíci jsem se trápil otázkou, zda do něj vůbec ještě někdy vkročím. Nyní je však staré město opět v mém náručí a já nebudu váhat ani chvíli a, podpořen silou svých druhů, vrátím mu jeho původní podobu. Nemohu se dočkat, až ho opět uvidím v jeho dřívější kráse."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Vítězství"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "I poslední mise barbarského kmene je splněna. Můžeš pokračovat ve hře, jestli chceš, v opačném případě můžeš zahájit další kampaň."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Vojenský útok"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -617,7 +617,7 @@ msgid ""
 msgstr "Budiž tedy, generálové šikují své jednotky a Boldreth osobně vyrazí v čele první úderné skupiny. Pojedu po jeho boku a společně osvobodíme Al’thunran od války a přineseme do našeho města opět mír."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -626,20 +626,20 @@ msgid ""
 msgstr "Až zítra ráno slunce vystoupá nad vrcholky stromů, dám povel k útoku. A za soumraku oslavím naše vítězství v dřevěných síních válečníků a obětuji novorozené jehně na počest svého otce, který mě dnes bude sledovat."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Staniž se!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Rychlejší přeprava"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Khantrukh hovoří:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

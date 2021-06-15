@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-05-06 19:43+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -1718,8 +1718,6 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:107
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1744,8 +1742,6 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:167
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1771,9 +1767,9 @@ msgstr ""
 msgid "making a chisel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1927,7 +1923,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -5459,7 +5454,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
