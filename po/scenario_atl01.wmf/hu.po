@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-06-01 00:21+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -439,7 +439,7 @@ msgstr "Loftomor és Sidolus megérkezik"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina"
 msgstr "Jundlina"
 
@@ -891,12 +891,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "Hamar építenünk kell egy házat Osturnak a tó mellett, és deszkát, farönköt, valamint pókfonalat kell szállítanunk neki a hajóépítéshez. Minden mást feledve a hegytetőre kell juttatnunk ezeket az anyagokat, még mielőtt elnyeli a tenger a raktárainkat."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
 msgid "Jundlina is Relieved"
 msgstr "Jundlina megkönnyebbült"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -906,17 +906,17 @@ msgid ""
 msgstr "Áldott legyen Satul! Ostur, a fiatal hajóács megcsinálta. Három hajónk van – sosem láttam erősebbeket – amelyeken mindannyian elférünk és még áruknak is jut hely. Éppen időben érkezett a mentő ötlet: Lutas hamarosan elnyeli a sziget többi részét is. A víz óráról-órára gyorsabban emelkedik. De most már elmenekülhetünk, és újrakezdhetjük egy még távolabbi vidéken…"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr "Hosszú utazásra számítok, de végül meg fogjuk találni Satul földjét. Ezt ígértem az embereimnek. És magamnak is."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid "Congratulations"
 msgstr "Gratulálunk!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
@@ -924,11 +924,11 @@ msgstr "Megnyerted ezt a küldetést. Folytathatod a következővel, vagy játsz
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Egy épület elveszett!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:487
 msgid "We lost a building to the ocean!"
 msgstr "Egy épületünket elnyelte az óceán!"
