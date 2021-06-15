@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -258,7 +258,7 @@ msgstr "De Fahrt na Huus"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
 msgstr "Markbook vun Lutjus"
 
@@ -320,10 +320,10 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
-"WI sünd weer up eener frömden Küst uplopen un hebben im Scharren vun "
-"Palmbomen slapen bit de Sünne hoog am Himmel stunn. As wi am Namiddag "
-"upwaakt sünd was nüms würrelk överrascht, dat wi nix as Sand sehn kunnen … "
-"ok wenn de Tahl vun Stenen tegen uns’ Lager baldadig was."
+"Wi sünd weer up eener frömden Küst uplopen un hebben im Scharren vun Palmen "
+"slapen bit de Sünne hoog am Himmel stunn. As wi am Namiddag upwaakt sünd was"
+" nüms würrelk överrascht, dat wi nix as Sand sehn kunnen … ok wenn de Tahl "
+"vun Stenen tegen uns’ Lager baldadig was."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -660,7 +660,7 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
-"WI bruken also mehr Stoff, um ennelk Schippen bauen to könen. Aver ’t gifft "
+"Wi bruken also mehr Stoff, um ennelk Schippen bauen to könen. Aver ’t gifft "
 "nich genoog Rüümte up de Insel, um eene kumpleete Weertskupp, um Stoff to "
 "produzeren, uptobauen. Daarum mutten wi de nödigen Waren Stapp för Stapp "
 "sammeln."
@@ -1272,17 +1272,17 @@ msgstr ""
 " anners de token Rutfödderung anfangen."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "Ennelk hebben wi een Deel vun uns’ Altar funnen. Neptun wees Pries!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Wi hebben noch een Stück vun uns’ Altar funnen. Neptun wees Pries!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1290,7 +1290,7 @@ msgstr[0] "Wi mutten noch %d Deel vun uns’ Altar finnen."
 msgstr[1] "Wi mutten noch %d Delen vun uns’ Altar finnen."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1298,6 +1298,6 @@ msgstr ""
 "Uplest hebben wi dat leste Deel vun uns’ Altar funnen. Nu könen wi ’t weer "
 "tosammendoon, um uns’ Gott hoogtoachten. Neptun wees Pries!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
 msgstr "Künstelk Schatten funnen"

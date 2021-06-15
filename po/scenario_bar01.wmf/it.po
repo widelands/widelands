@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-18 19:53+0000\n"
 "Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -923,25 +923,25 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "Sono animali straordinari: il bue è veloce come un essere umano, ma più forte e spartano: tutto ciò di cui ha bisogno sono grano e acqua e faranno il loro lavoro sulle strade lealmente e correttamente."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "Missione completata"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "Thron parla..."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "L'altro giorno Boldreth mi ha chiesto di accompagnarlo alla nuova locanda. Mi dovrebbe tirare su di morale, ha detto."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -950,33 +950,33 @@ msgid ""
 msgstr "Quando mi sono guardato intorno, ho visto facce fedeli, fidandomi del fatto che sarei riuscito a guidarli attraverso questi giorni oscuri. Ancora prima di poter esprimere qualsiasi parola di gratitudine o incoraggiamento, uno dei miei guerrieri è corso dentro la locanda. È stato lontano nella foresta negli scorsi giorni e riuscivo a vedere la sua stanchezza."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
 msgstr "Le notizie che ha portato hanno cambiato tutto..."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "Vittoria"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Hai completato questa missione. Puoi continuare a giocare, se lo desideri, altrimenti passa alla prossima missione."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "Una notte di luna piena"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "Una notte, quando la luna brillava luminosa, sono salito al picco di Kal'mavrath."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -984,16 +984,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "Quando ho guardato l'orizzonte, Ho visto ancora luci cremisi di lampade in lontananza. È incredibile con quanta passione i miei fratelli combattono questa guerra. Temo il momento in qui vedrò di nuovo Al'thunran - quando ci arriveremo ci sarà qualcosa oltre alle ceneri e alle rovine devastate della nostra capitale una volta bella?"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "Un'altra fredda giornata"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
 msgstr "Thron sembra preoccupato..."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -1001,37 +1001,37 @@ msgid ""
 msgstr "L'inverno è alle porte. Molti di noi stanno soffrendo il freddo, tuttavia dobbiamo resistere. Il giorno in cui potremo tornare non può essere molto lontano - non deve essere lontano."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "Ho pregato affinché facesse più caldo, come ho pregato che la guerra giungesse finalmente alla fine."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Per ora sembra che nessuna delle due preghiere sia stata ascoltata."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "Un villaggio amichevole si unisce a noi!"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "Abbiamo trovato un villaggio con gente amichevole e produttiva, impressionate dalla nostra ricchezza, tecnologia e forza."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "Hanno vissuto semplicemente e con poche preoccupazioni, di caccia e agricoltura. Non sono mai stati coinvolti in una guerra prima d'ora, e non sono pronti a combattere."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."

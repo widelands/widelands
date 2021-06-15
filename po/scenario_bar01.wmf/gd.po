@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-11-11 16:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -917,25 +917,25 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "’S e beathaichean iongantach a th’ annta: Tha an damh cho luath ’s a tha duine ach tha e mòran nas treasa gun fheumalachdan mòra air: chan eil sinn feumach ach air cruithneachd is uisge gus an togail agus nì iad an obair air na rathaidean gu dìleas agus gu h-earbsach."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "Tha am misean coileanta"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "Tha Tron a’ bruidhinn…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "An latha a bha siud, dh’iarr Boldrad orm gun digeadh mi còmhla ris dhan taigh-òil ùr. Thuirt e gun togadh e mo chridhe."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -944,33 +944,33 @@ msgid ""
 msgstr "Nuair a sheall mi timcheall orm, chunnaic mi aodannan dìleas, làn earbsa gun stiùirichinn tro na làithean dorcha seo iad. Ach mus b’ urrainn dhomh facal a ràdh gus taing no brosnachadh a thoirt dhaibh, ruith fear dhe na gaisgich agam a-steach dhan taigh-òil. Bha e air a bhith a-muigh sa choille na làithean sa chaidh agus mhothaich mi air dè cho sgìth ’s a bha e."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
 msgstr "Dh’atharraich an naidheachd a thug e duinn a h-uile rud…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "Buaidh"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a chluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "Oidhche làn-ghealaich"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "An oidhche a bha seo, nuair a bha a’ ghealach a’ deàrrsadh, dhìrich mi gu sgurr Chal’mabhraid."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -978,16 +978,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "Fhad ’s a bha mi a’ sealltainn air an fhàire, chunnaic mi fhathast na solasan ruadha a’ dannsa aig astar. Cha chreid mi dè cho fiadhaich ’s a tha mo bhràithrean a’ sabaid sa chogadh seo. Tha eagal orm ron latha a chì mi Al’tùnran a-rithist – am bi dad air fhàgail dhe ar cathair-bhaile brèagha ach luaithre agus làraichean nuair a ruigeas sinn e?"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "Latha fuar eile"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
 msgstr "Tha dragh air Tron…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -995,37 +995,37 @@ msgid ""
 msgstr "Tha an geamhradh air tighinn oirnn. Tha mòran dhuinn a’ fulang leis an fhuachd, ach feumaidh sinn cumail a’ dol. Cha chreid mi gur ann fada gus an latha as urrainn dhuinn tilleadh – chan fhaod e bhith."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "Rinn mi ùrnaigh gum fàsadh e na bu bhlàithe a-rithist mar a rinn mi ùrnaigh gun digeadh an cogadh gu crìch mu dheireadh thall."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Cha deach aon seach aon dhe na h-ùrnaighean a fhreagairt gu ruige seo."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "Tha baile càirdeach air aontadh rinn!"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "Lorg sinn baile le muinntir càirdeil tarbhach ann agus dhrùidh an t-sealbh, teicneolas agus neart againn orra."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "Fhuair iad beatha simplidh ach aoibhneach on t-sealg agus àiteachadh. Cha robh iad an sàs ann an còmhstri fhathast agus chan eil iad ullamh airson sabaid."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
