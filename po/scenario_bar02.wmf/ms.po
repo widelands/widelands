@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
@@ -251,7 +251,7 @@ msgstr "Hampir dengan Wilayah"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Thron kelihatan risau..."
 
@@ -272,7 +272,7 @@ msgstr "Buat masa ini, kita berhenti rehat di sempadan hutan purba dan bersedia 
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Suatu Hari Yang Sejuk"
 
@@ -348,7 +348,7 @@ msgstr "Bahagian hadapan tentera saya telah berada di hujung hutan. Kita perlu m
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Thron berkata:"
 
@@ -573,7 +573,7 @@ msgid ""
 msgstr "Pakar geologi kita telah menemui mendapan bijih besi, arang batu dan juga emas. Kita perlu tingkatkan pengeluaran lombong kita kerana pelombong kita sudah berpengalaman. Kita patut bina lagi lombong baharu, kemudahan pengeluaran makanan lebih besar untuk menyediakan bekalan makanan kepada pekerja kita dan mempertingkatkan ekonomi pengeluaran kita. Selain itu, kebanyakan tentera kita kurang pengalaman dan muda, mereka memerlukan senjata dan latihan yang lebih baik. Kita perlu bina tapak latihan untuk melatih mereka menjadi tentera yang berpengalaman dan terlatih."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -582,7 +582,7 @@ msgid ""
 msgstr "Abang saya dan tenteranya telah mati dan yang tinggal hanyalah kemusnahan dan kebakaran. Di situ tiada siapa yang masih hidup sama ada lelaki atau perempuan atau orang kebanyakan, jadi saya harap mereka dapat melarikan diri daripada pertempuran tersebut dan memulakan hidup baru ditempat lain yang lebih selamat."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -592,22 +592,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Tiada apa-apa lagi kecantikan yang saya ingati, hanyalah sisa-sisa tinggalan ibu kota lama. Saya rasa sedih tetapi juga berasa lega. Saya harap dapat melihat kecantikan bandar Al'thunran sekali lagi - ia hanya beberapa bulan yang lalu dan saya harap dapat menjejak kaki di bandar ini lagi. Sekarang, bandar ini telah menjadi milik saya, saya akan membinanya semula dengan segala kekuatan yang ada. Di harap kecantikan bandar ini akan menyerlah kembali."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Kemenangan Mutlak!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Anda telah berjaya menyelesaikan misi terakhir kempen tutorial Puak Gasar. Anda boleh terus bermain jika mahu, ataupun beralih ke kempen berikutnya."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Serangan Tentera"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -615,7 +615,7 @@ msgid ""
 msgstr "Baiklah, jeneral sudah pun bertindak dan mengurus pergerakan tentera saya, dan Boldreth sendiri akan memulakan serangan. Saya akan berada di sisi beliau, untuk membebaskan Al’thunran dari malapetaka peperangan dan kembalikan keamanan ibu negeri kami."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -624,20 +624,20 @@ msgid ""
 msgstr "Bila matahari berada tegak diatas pokok pagi esok, Saya akan arahkan serangan. Bila senja menjelma, Saya akan meraikan kemenangan kita di dewan ketua kayu hulubalang dan korbankan seekor anak biri-biri baru lahir untuk menghormati mendiang ayah saya, kerana memilih saya hari ini."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Baiklah!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Pengangkutan Lebih Pantas"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Khantrukh berkata:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
