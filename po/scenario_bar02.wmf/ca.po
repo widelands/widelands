@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -252,7 +252,7 @@ msgstr "A prop de casa"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "En Thron sembla preocupat…"
 
@@ -273,7 +273,7 @@ msgstr "Per ara, ens quedarem a la vora del vell bosc, preparant-nos pels dies q
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Un altre dia fred"
 
@@ -349,7 +349,7 @@ msgstr "La línia fronterera de les meves forces s'ha expandit cap als boscos. T
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "En Thron diu:"
 
@@ -574,7 +574,7 @@ msgid ""
 msgstr "Els geòlegs han trobat més jaciments de carbó, de mineral de ferro i fins i tot d'or. Hem d'ampliar les mines que tenim tan aviat com els miners guanyin experiència. Caldrà construir noves mines, infraestructures per proveir més menjar i millorar les indústries de processat.  Però això no és tot: molts dels nostres soldats són joves i ni tenen bones armes ni estan ben entrenats. Hem de construir llocs d'entrenament per preparar-los."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -583,7 +583,7 @@ msgid ""
 msgstr "Els meus germans i els seus soldats han mort i han deixat foc i destrucció al seu darrere. En cap de les ruïnes hem trobat home o dona de la gent que hi vivia i espero que haguessin fugit del camp de batalla per començar una nova vida en un altre lloc."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -593,22 +593,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Ja no queda res del que era bell. A l'antiga capital només hi queden ruïnes. Estic trist però esperançat. No esperava veure la bellesa de l'antic Al'thunran un altre cop. Ara, l'antic poble ja torna a estar sota les meves mans i no dubtaré en reconstruir-lo amb tota la força de la meva gent. No puc esperar a veure'l reconstruït."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Victòria"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Heu completat l'última missió del tutorial-campanya bàrbar. Podeu continuar jugant si voleu, altrament continueu amb la següent campanya."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Assalt militar"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -616,7 +616,7 @@ msgid ""
 msgstr "Així sigui. Els generals estan fora organitzant les tropes i en Boldreth mateix liderarà el primer cop. Cavalcaré al seu costat, per alliberar l'Al'thunran de la guerra i tornar la pau a la nostra capital."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -625,20 +625,20 @@ msgid ""
 msgstr "Quan el jove sol s'aixequi demà al matí, ordenaré l'assalt. Pel capvespre, celebraré la meva victòria en les sales de fusta del senyor de la guerra i sacrificaré un corder en honor del meu pare, els ulls del qual m'estan mirant avui."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Així sigui!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Transport ràpid"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "En Khantrukh diu:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
