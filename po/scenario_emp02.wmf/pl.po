@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-07 21:27+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -181,7 +181,7 @@ msgstr "Nowa wyspa"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "Dziennik Lucjusza"
 
@@ -460,7 +460,7 @@ msgid ""
 msgstr "Dobra robota. Budowa pierwszego z naszych dużych budynków wojskowych jest ukończona, a infrastruktura górnicza wygląda coraz lepiej. Nadszedł czas, by rozpocząć przygotowania do bitwy."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr "Zwycięstwo"
 
@@ -497,14 +497,14 @@ msgid "A Message"
 msgstr "Wiadomość"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Dzisiaj gołąb wylądował na naszej wyspie. Przyniósł wiadomość, która napełnia mnie mrocznymi myślami i znów budzi moje obawy."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -512,7 +512,7 @@ msgid ""
 "must do…"
 msgstr "Wiadomość zaadresowana była do mnie i błagała, abym wracał do Fremil. Napisano w niej, że Imperium prowadzi wojnę z Barbarzyńcami. Zaatakowani zostali z północy przez to samo plemię, z którym zabroniono mi walczyć. Nie mam wątpliwości, co powinienem teraz zrobić..."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
