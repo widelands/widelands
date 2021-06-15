@@ -19,6 +19,7 @@
 
 #include "base/multithreading.h"
 
+#include <atomic>
 #include <map>
 #include <memory>
 
@@ -46,7 +47,8 @@ bool is_initializer_thread() {
 uint32_t NoteThreadSafeFunction::next_id_(0);
 
 void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
-                                         const bool wait_until_completion) {
+                                         const bool wait_until_completion,
+                                         const bool rethrow_errors) {
 	if (!initializer_thread) {
 		throw wexception("NoteThreadSafeFunction::instantiate: initializer thread was not set yet");
 	} else if (is_initializer_thread()) {
@@ -63,11 +65,16 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 			// Only if the caller waits for completion of course.
 			const std::exception* error = nullptr;
 
-			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error]() {
+			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error, rethrow_errors]() {
 				try {
 					fn();
 				} catch (const std::exception& e) {
-					error = &e;
+					if (rethrow_errors) {
+						error = &e;
+					} else {
+						done = true;
+						throw;
+					}
 				}
 				done = true;
 			}));
@@ -87,7 +94,14 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	}
 }
 
-static std::map<MutexLock::ID, std::recursive_mutex> g_mutex;
+struct MutexRecord {
+	std::recursive_mutex mutex;
+	std::atomic_uint nr_waiting_threads;
+
+	MutexRecord() : nr_waiting_threads(0) {
+	}
+};
+static std::map<MutexLock::ID, MutexRecord> g_mutex;
 
 MutexLock::ID MutexLock::last_custom_mutex_ = MutexLock::ID::kI18N;
 MutexLock::ID MutexLock::create_custom_mutex() {
@@ -99,7 +113,7 @@ MutexLock::ID MutexLock::create_custom_mutex() {
 }
 
 #ifdef MUTEX_LOCK_DEBUG
-static std::string to_string(MutexLock::ID i) {
+static std::string to_string(const MutexLock::ID i) {
 	switch (i) {
 	case MutexLock::ID::kLogicFrame:
 		return "LogicFrame";
@@ -113,42 +127,56 @@ static std::string to_string(MutexLock::ID i) {
 		return "IBaseVisualizations";
 	case MutexLock::ID::kI18N:
 		return "i18n";
-	default:
-		return std::string("Custom lock #") + std::to_string(static_cast<unsigned>(i));
 	}
+	return std::string("Custom lock #") + std::to_string(static_cast<unsigned>(i));
 }
 #endif
 
-MutexLock::MutexLock(ID i) : id_(i) {
+constexpr uint32_t kMutexPriorityLockInterval = 2;
+constexpr uint32_t kMutexNormalLockInterval = 30;
+constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
-#ifdef MUTEX_LOCK_DEBUG
-	uint32_t time = 0;
-	time = SDL_GetTicks();
-	log_dbg("Starting to lock mutex %s ...", to_string(id_).c_str());
-#endif
-
-	g_mutex[id_].lock();
-
-#ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Locking mutex %s took %ums", to_string(id_).c_str(), SDL_GetTicks() - time);
-#endif
+MutexLock::MutexLock(ID i) : MutexLock(i, []() {}) {
 }
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
-
 #ifdef MUTEX_LOCK_DEBUG
-	uint32_t time = 0, counter = 0;
-	time = SDL_GetTicks();
+	const uint32_t time = SDL_GetTicks();
+	uint32_t counter = 0;
 	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
 #endif
 
-	while (!g_mutex[id_].try_lock()) {
-		run_while_waiting();
-		SDL_Delay(2);
+	MutexRecord& record = g_mutex[id_];
+
+	// When several threads are waiting to grab the same mutex, the first one is advantaged
+	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
+	// The Logic Frame mutex's extended sleep time is higher because it's locked much longer.
+	const bool has_priority = (record.nr_waiting_threads.load() == 0 || is_initializer_thread());
+	const uint32_t sleeptime =
+	   has_priority ?
+	      kMutexPriorityLockInterval :
+	      (id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval : kMutexNormalLockInterval;
+	++record.nr_waiting_threads;
+	if (!has_priority) {
+		SDL_Delay(sleeptime);
+	}
+
+	uint32_t last_function_call = 0;
+	while (!record.mutex.try_lock()) {
+		const uint32_t now = SDL_GetTicks();
+		if (now - last_function_call > sleeptime) {
+			run_while_waiting();
+			last_function_call = SDL_GetTicks();
+		} else {
+			SDL_Delay(sleeptime - (now - last_function_call));
+		}
 
 #ifdef MUTEX_LOCK_DEBUG
 		++counter;
 #endif
 	}
+
+	assert(record.nr_waiting_threads > 0);
+	--record.nr_waiting_threads;
 
 #ifdef MUTEX_LOCK_DEBUG
 	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
@@ -161,5 +189,5 @@ MutexLock::~MutexLock() {
 	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
 #endif
 
-	g_mutex.at(id_).unlock();
+	g_mutex.at(id_).mutex.unlock();
 }

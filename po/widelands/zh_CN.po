@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 08:32+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"PO-Revision-Date: 2021-06-12 13:56+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:372
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:380
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -34,7 +34,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:376
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:384
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s or %2$s"
@@ -46,7 +46,7 @@ msgstr "%1$s or %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:380 ../../src/base/i18n.cc:389
+#: ../../src/base/i18n.cc:388 ../../src/base/i18n.cc:397
 #: ../../src/logic/addons.cc:172
 #, c-format
 msgid "%1$s, %2$s"
@@ -55,7 +55,7 @@ msgstr "%1$s,%2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:384
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:392
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s 和 %2$s"
@@ -104,15 +104,15 @@ msgid ""
 msgstr "你的起始位置附近没有树木。因此，你会得到额外的资源来引导你的经济。 "
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:72 ../../src/wui/game_summary.cc:114
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:114
 msgid "Status"
 msgstr "状态"
 
-#: ../../data/scripting/messages.lua:254
+#: ../../data/scripting/messages.lua:257
 msgid "New Objective"
 msgstr "新的目标"
 
-#: ../../data/scripting/messages.lua:256
+#: ../../data/scripting/messages.lua:259
 msgid "New Objectives"
 msgstr "新的一些目标"
 
@@ -132,7 +132,7 @@ msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:337
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:339
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:212
 msgid "No AI"
 msgstr "没有人工智能"
@@ -155,7 +155,7 @@ msgstr "较弱人工智能"
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:399
+#: ../../src/base/i18n.cc:407
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1%%2%"
@@ -270,8 +270,9 @@ msgstr "十二月"
 #. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:184
-#: ../../src/wui/interactive_gamebase.cc:89
+#: ../../src/ui_fsmenu/keyboard_options.cc:185
+#: ../../src/wui/interactive_gamebase.cc:90
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "主菜单"
 
@@ -288,7 +289,7 @@ msgstr "工具"
 #. show/hide
 #. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
-#: ../../src/wui/interactive_gamebase.cc:76
+#: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
 msgstr "显示/隐藏"
 
@@ -307,72 +308,72 @@ msgid "Redo"
 msgstr "重做"
 
 #: ../../src/editor/editorinteractive.cc:166
-#: ../../src/wui/buildingwindow.cc:413 ../../src/wui/interactive_player.cc:224
+#: ../../src/wui/buildingwindow.cc:418 ../../src/wui/interactive_player.cc:225
 msgid "Help"
 msgstr "帮助"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:193
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:41
-#: ../../src/ui_fsmenu/main.cc:372
+#: ../../src/ui_fsmenu/main.cc:374
 msgid "New Map"
 msgstr "新地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:201
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:738
 msgid "New Random Map"
 msgstr "新随机地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:208
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:377 ../../src/wlapplication_options.cc:343
+#: ../../src/ui_fsmenu/main.cc:379 ../../src/wlapplication_options.cc:343
 msgid "Load Map"
 msgstr "加载地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:214
+#: ../../src/editor/editorinteractive.cc:216
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
 #: ../../src/wlapplication_options.cc:339
 msgid "Save Map"
 msgstr "保存地图"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:222
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:225
+#: ../../src/editor/editorinteractive.cc:224
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 msgid "Map Options"
 msgstr "地图选项"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:226
+#: ../../src/editor/editorinteractive.cc:228
 msgid "Exit Editor"
 msgstr "退出编辑器"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:262
+#: ../../src/editor/editorinteractive.cc:264
 msgid "Change height"
 msgstr "改变高度"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:265
+#: ../../src/editor/editorinteractive.cc:267
 msgid "Change the terrain height"
 msgstr "改变地形高度"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:271
+#: ../../src/editor/editorinteractive.cc:273
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Random height"
 msgstr "随机海拔"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:274
+#: ../../src/editor/editorinteractive.cc:276
 msgid "Set the terrain height to random values"
 msgstr " 把地形高度设定为随机值"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:280
+#: ../../src/editor/editorinteractive.cc:282
 #: ../../src/editor/tools/info_tool.cc:112
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../src/wui/minimap.cc:151
@@ -380,99 +381,99 @@ msgid "Terrain"
 msgstr "地形"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:283
+#: ../../src/editor/editorinteractive.cc:285
 msgid "Change the map’s terrain"
 msgstr "改变地图的地形"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:290
+#: ../../src/editor/editorinteractive.cc:292
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:62
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:181
 msgid "Immovables"
 msgstr "固定物"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:293
+#: ../../src/editor/editorinteractive.cc:295
 msgid "Add or remove immovables"
 msgstr "添加或删除固定物"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:299
+#: ../../src/editor/editorinteractive.cc:301
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:47
 msgid "Animals"
 msgstr "动物"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:302
+#: ../../src/editor/editorinteractive.cc:304
 msgid "Add or remove animals"
 msgstr "添加或删除动物"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:309
+#: ../../src/editor/editorinteractive.cc:311
 #: ../../src/editor/tools/info_tool.cc:195
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:97
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
-#: ../../src/map_io/map_saver.cc:156
+#: ../../src/map_io/map_saver.cc:157
 #: ../../src/map_io/widelands_map_loader.cc:263
 msgid "Resources"
 msgstr "资源"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:312
+#: ../../src/editor/editorinteractive.cc:314
 msgid "Set or change resources"
 msgstr "设置或改变资源"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:315
+#: ../../src/editor/editorinteractive.cc:317
 msgid "Port spaces"
 msgstr "港口空间"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:318
+#: ../../src/editor/editorinteractive.cc:320
 msgid "Add or remove port spaces"
 msgstr "添加或删除港口空间"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:324
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:654
+#: ../../src/editor/editorinteractive.cc:326
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:658
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "玩家"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:327
+#: ../../src/editor/editorinteractive.cc:329
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "设置玩家数量和他们的名字，部族和起始位置"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:331
+#: ../../src/editor/editorinteractive.cc:333
 msgid "Map origin"
 msgstr "地图原点"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:334
+#: ../../src/editor/editorinteractive.cc:336
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "设置坐标为(0,0)的位置。将以此生成迷你地图的左上角。"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:341
+#: ../../src/editor/editorinteractive.cc:343
 msgid "Map size"
 msgstr "地图尺寸"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:344
+#: ../../src/editor/editorinteractive.cc:346
 msgid "Change the map’s size"
 msgstr "改变地图的尺寸"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:347
+#: ../../src/editor/editorinteractive.cc:349
 msgid "Information"
 msgstr "信息"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:350
+#: ../../src/editor/editorinteractive.cc:352
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
@@ -482,86 +483,86 @@ msgstr "点击区域以显示与其相关的信息"
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:412
-#: ../../src/wui/interactive_gamebase.cc:187
+#: ../../src/editor/editorinteractive.cc:414
+#: ../../src/wui/interactive_gamebase.cc:225
 msgid "Hide Building Spaces"
 msgstr "隐藏建筑空间"
 
-#: ../../src/editor/editorinteractive.cc:412
+#: ../../src/editor/editorinteractive.cc:414
 #: ../../src/ui_fsmenu/options.cc:246
-#: ../../src/wui/interactive_gamebase.cc:187
+#: ../../src/wui/interactive_gamebase.cc:225
 msgid "Show Building Spaces"
 msgstr "显示建筑空间"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:419
+#: ../../src/editor/editorinteractive.cc:421
 msgid "Hide Grid"
 msgstr "隐藏网格"
 
-#: ../../src/editor/editorinteractive.cc:419
+#: ../../src/editor/editorinteractive.cc:421
 msgid "Show Grid"
 msgstr "显示网格"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
 #. * rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:425
+#: ../../src/editor/editorinteractive.cc:427
 msgid "Hide Immovables"
 msgstr "隐藏固定物"
 
-#: ../../src/editor/editorinteractive.cc:425
+#: ../../src/editor/editorinteractive.cc:427
 msgid "Show Immovables"
 msgstr "显示固定物"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:431
+#: ../../src/editor/editorinteractive.cc:433
 msgid "Hide Animals"
 msgstr "隐藏动物"
 
-#: ../../src/editor/editorinteractive.cc:431
+#: ../../src/editor/editorinteractive.cc:433
 msgid "Show Animals"
 msgstr "显示动物"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:436
+#: ../../src/editor/editorinteractive.cc:438
 msgid "Hide Resources"
 msgstr "隐藏资源"
 
-#: ../../src/editor/editorinteractive.cc:436
+#: ../../src/editor/editorinteractive.cc:438
 msgid "Show Resources"
 msgstr "显示资源"
 
-#: ../../src/editor/editorinteractive.cc:476
+#: ../../src/editor/editorinteractive.cc:478
 msgid "Unsupported Format"
 msgstr "不支持的格式"
 
-#: ../../src/editor/editorinteractive.cc:477 ../../src/wlapplication.cc:736
+#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:744
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands 不能读取文件 “%s\"。文件格式似乎不兼容。"
 
-#: ../../src/editor/editorinteractive.cc:544
+#: ../../src/editor/editorinteractive.cc:546
 msgid "Unsaved Map"
 msgstr "未保存的地图"
 
-#: ../../src/editor/editorinteractive.cc:545
+#: ../../src/editor/editorinteractive.cc:547
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "这个地图没有保存，您确定真的要退出吗？"
 
-#: ../../src/editor/editorinteractive.cc:914 ../../src/logic/addons.cc:47
-#: ../../src/ui_basic/dropdown.cc:351 ../../src/ui_basic/dropdown.cc:353
-#: ../../src/ui_fsmenu/addons.cc:1175 ../../src/ui_fsmenu/addons.cc:1231
-#: ../../src/ui_fsmenu/addons.cc:1352 ../../src/ui_fsmenu/addons.cc:2073
-#: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/wlapplication.cc:1485
+#: ../../src/editor/editorinteractive.cc:916 ../../src/logic/addons.cc:47
+#: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
+#: ../../src/ui_fsmenu/addons.cc:1178 ../../src/ui_fsmenu/addons.cc:1234
+#: ../../src/ui_fsmenu/addons.cc:1355 ../../src/ui_fsmenu/addons.cc:2078
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1492
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/editor/editorinteractive.cc:916 ../../src/wlapplication.cc:1487
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1494
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -572,30 +573,30 @@ msgid ""
 "Please add this information to your report."
 msgstr "发生错误，错误消息是： \n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息 （stdout.txt on Windows）。你正生成%2$s(%3$s)。\n请添加此信息到你的报告中。"
 
-#: ../../src/editor/editorinteractive.cc:952
+#: ../../src/editor/editorinteractive.cc:954
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "载入地图 “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:976
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:109
+#: ../../src/editor/editorinteractive.cc:978
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:140
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:142
 #: ../../src/logic/map.h:233 ../../src/wui/mapdata.cc:51
 msgid "No Name"
 msgstr "新地图"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:979
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:110
+#: ../../src/editor/editorinteractive.cc:981
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:112
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:539
-#: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons_packager.cc:364
+#: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons_packager.cc:366
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../../src/editor/editorinteractive.cc:1003
+#: ../../src/editor/editorinteractive.cc:1005
 msgid "Loading world…"
 msgstr "载入广袤大地…"
 
@@ -646,8 +647,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -732,7 +733,7 @@ msgid "Name: %s"
 msgstr "名字: %s"
 
 #: ../../src/editor/tools/info_tool.cc:209
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:504
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:508
 msgid "Size: %1% x %2%"
 msgstr "大小: %1% x %2%"
 
@@ -752,7 +753,7 @@ msgstr "作者：%s"
 
 #: ../../src/editor/tools/info_tool.cc:223
 #: ../../src/ui_fsmenu/addons_packager_box.cc:151
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:416 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Description: %s"
 msgstr "说明：%s"
@@ -785,39 +786,39 @@ msgstr " 单击以选择项目。使用Ctrl键选择多个项目。 "
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:182
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:153
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:155
 #, c-format
 msgid "Current: %s"
 msgstr "当前：%s"
 
-#: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:239
-#: ../../src/ui_fsmenu/main.cc:988 ../../src/wui/encyclopedia_window.cc:143
+#: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:241
+#: ../../src/ui_fsmenu/main.cc:990 ../../src/wui/encyclopedia_window.cc:143
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "错误！"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:76
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:276
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
 #: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:185
 msgid "My Maps"
 msgstr "我的地图"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:182
 msgid "Multiplayer Scenarios"
 msgstr "多人游戏场景"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
 msgstr "已下载的地图"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:276
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:85
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
 #, c-format
 msgid "Current directory: %s"
 msgstr "当前目录：%s"
@@ -828,24 +829,24 @@ msgid "Display"
 msgstr "显示"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:80
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:248
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
 #: ../../src/ui_basic/messagebox.cc:102 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:202 ../../src/ui_fsmenu/addons.cc:1664
+#: ../../src/ui_fsmenu/addons.cc:203 ../../src/ui_fsmenu/addons.cc:1667
 #: ../../src/ui_fsmenu/addons_packager.cc:109
 #: ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/keyboard_options.cc:132 ../../src/ui_fsmenu/menu.cc:145
+#: ../../src/ui_fsmenu/keyboard_options.cc:133 ../../src/ui_fsmenu/menu.cc:145
 #: ../../src/ui_fsmenu/options.cc:95
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
-#: ../../src/wui/game_main_menu_save_game.cc:85
-#: ../../src/wui/story_message_box.cc:47
+#: ../../src/wui/game_main_menu_save_game.cc:88
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "确认"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:81
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:256
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:258
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:757
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
@@ -854,8 +855,8 @@ msgstr "确认"
 #: ../../src/ui_fsmenu/keyboard_options.cc:49
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
-#: ../../src/wui/economy_options_window.cc:662
-#: ../../src/wui/game_main_menu_save_game.cc:84
+#: ../../src/wui/economy_options_window.cc:665
+#: ../../src/wui/game_main_menu_save_game.cc:87
 msgid "Cancel"
 msgstr "取消"
 
@@ -881,7 +882,7 @@ msgstr "点击玩家以删除"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/ui_fsmenu/addons_packager_box.cc:271
-#: ../../src/wui/economy_options_window.cc:663
+#: ../../src/wui/economy_options_window.cc:666
 #: ../../src/wui/load_or_save_game.cc:52
 msgid "Delete"
 msgstr "删除"
@@ -900,78 +901,78 @@ msgstr "+"
 msgid "Add a player to this team"
 msgstr "添加一个游戏玩家到这个团队"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:320
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:322
 #: ../../src/logic/addons.cc:65
 msgid "Theme"
 msgstr "主题"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:331
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:333
 msgid "Add lineup"
 msgstr "添加阵容"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:332
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:334
 msgid "Add another suggested team lineup"
 msgstr "添加另外一个建议的团队阵容"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:352
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:354
 msgid "Map name:"
 msgstr "地图名："
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:357
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:359
 msgid "Authors:"
 msgstr "作者:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:362
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:364
 #: ../../src/ui_fsmenu/addons_packager.cc:148
 msgid "Description:"
 msgstr "描述："
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:367
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:369
 msgid "Hint (optional):"
 msgstr "提示（可选项）"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:375
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:377
 msgid "Tags:"
 msgstr "标签："
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:387
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgctxt "map_theme"
 msgid "(none)"
 msgstr "（没有）"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:396
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:398
 msgid "Waterway length limit:"
 msgstr "水路长度限制："
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:407
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 msgid "Disabled"
 msgstr "无效的"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:427
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:429
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u 玩家"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:430
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Suggested Teams:"
 msgstr "组队建议："
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:451
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:453
 msgid "Main Options"
 msgstr "主要选项"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:453
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:455
 #: ../../src/wui/mapdetails.cc:184
 msgid "Tags"
 msgstr "标签"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:455
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:457
 msgid "Teams"
 msgstr "团队"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:487
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:491
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr "不建议允许水道的长度大于%u"
@@ -984,7 +985,7 @@ msgstr "创建地图"
 msgid "Terrain:"
 msgstr "地形："
 
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:101
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:103
 msgid "Creating empty map…"
 msgstr "创建空地图......"
 
@@ -1089,7 +1090,7 @@ msgstr "创建随机地图......"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:581
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:608
-#: ../../src/ui_fsmenu/main.cc:374
+#: ../../src/ui_fsmenu/main.cc:376
 msgid "Random Map"
 msgstr "随机地图"
 
@@ -1121,7 +1122,7 @@ msgid "Player"
 msgstr "玩家"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1581
+#: ../../src/network/gamehost.cc:1595
 #, c-format
 msgid "Computer %u"
 msgstr "计算机 %u"
@@ -1131,7 +1132,7 @@ msgid "Generate Map"
 msgstr "创建地图"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
-#: ../../src/wui/game_main_menu_save_game.cc:75
+#: ../../src/wui/game_main_menu_save_game.cc:78
 #: ../../src/wui/gamedetails.cc:203
 msgid "Filename:"
 msgstr "文件名："
@@ -1142,41 +1143,41 @@ msgid "Make Directory"
 msgstr "建立目录"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:159
-#: ../../src/ui_fsmenu/internet_lobby.cc:483
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:161
+#: ../../src/ui_fsmenu/internet_lobby.cc:485
 msgid "unnamed"
 msgstr "未命名"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:168
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:170
 msgid "A file or directory with that name already exists."
 msgstr "相同名称的文件或目录已存在。"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:169
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:184
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:171
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:186
 msgid "Error Creating Directory!"
 msgstr " 创建目录出错！ "
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:183
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:185
 #, c-format
 msgid "Error while creating directory ‘%s’."
 msgstr "创建目录时出错 ‘%s’."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:249
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
+#: ../../src/wui/game_main_menu_save_game.cc:269
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "文件‘%s’已经存在了，要覆盖吗？"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:367
 msgid "Error Saving Map!"
 msgstr "保存地图错误！"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:342
 msgid "Saving the map…"
 msgstr " 正在保存地图… "
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:360
 msgid "Map saved"
 msgstr "地图已保存"
 
@@ -1184,7 +1185,7 @@ msgstr "地图已保存"
 msgid "Enter Directory Name:"
 msgstr "输入目录名："
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:107
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:109
 msgid "This extension is reserved!"
 msgstr "这个扩展已被保留！"
 
@@ -1223,53 +1224,53 @@ msgstr "不要再次提醒我"
 msgid "Abort"
 msgstr "中止"
 
-#: ../../src/editor/ui_menus/player_menu.cc:131
+#: ../../src/editor/ui_menus/player_menu.cc:133
 msgid "Player Options"
 msgstr "玩家选项"
 
-#: ../../src/editor/ui_menus/player_menu.cc:140 ../../src/wui/maptable.cc:32
+#: ../../src/editor/ui_menus/player_menu.cc:142 ../../src/wui/maptable.cc:32
 msgid "Number of players"
 msgstr "玩家数量"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:158
-#: ../../src/editor/ui_menus/player_menu.cc:285
+#: ../../src/editor/ui_menus/player_menu.cc:160
+#: ../../src/editor/ui_menus/player_menu.cc:289
 #: ../../src/logic/single_player_game_settings_provider.cc:110
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:67
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:100
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:111
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:162
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:164
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:50
 #, c-format
 msgid "Player %u"
 msgstr "玩家 %u"
 
 #. * TRANSLATORS: Header for campaign tribe
-#: ../../src/editor/ui_menus/player_menu.cc:183
+#: ../../src/editor/ui_menus/player_menu.cc:185
 #: ../../src/ui_fsmenu/addons_packager_box.cc:314
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 #: ../../src/ui_fsmenu/campaigndetails.cc:58
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:181
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:183
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:57
 msgid "Tribe"
 msgstr "部族"
 
-#: ../../src/editor/ui_menus/player_menu.cc:191
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:421
+#: ../../src/editor/ui_menus/player_menu.cc:193
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:423
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:102
 msgctxt "tribe"
 msgid "Random"
 msgstr "随机"
 
-#: ../../src/editor/ui_menus/player_menu.cc:193
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:423
+#: ../../src/editor/ui_menus/player_menu.cc:195
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:425
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:104
 msgid "The tribe will be selected at random"
 msgstr "随机选择部族"
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
-#: ../../src/editor/ui_menus/player_menu.cc:211
+#: ../../src/editor/ui_menus/player_menu.cc:213
 msgid "Set this player’s starting position"
 msgstr "设置这个玩家的起始位置"
 
@@ -1361,9 +1362,9 @@ msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
-#: ../../src/ui_basic/dropdown.cc:299 ../../src/ui_basic/dropdown.cc:351
-#: ../../src/ui_basic/dropdown.cc:418 ../../src/ui_basic/dropdown.cc:426
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:327
+#: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
+#: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:329
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "%1%: %2%"
 msgstr "%1%:%2%"
@@ -1372,7 +1373,7 @@ msgstr "%1%:%2%"
 msgid "Tool Size"
 msgstr "工具大小"
 
-#: ../../src/editor/ui_menus/toolsize_menu.cc:83
+#: ../../src/editor/ui_menus/toolsize_menu.cc:85
 #, c-format
 msgid "Current Size: %u"
 msgstr "目前大小：%u"
@@ -1383,7 +1384,7 @@ msgid "Loading game: %1$s (%2$u/%3$d)"
 msgstr "载入游戏：%1$s(%2$u%3$d)"
 
 #: ../../src/game_io/game_loader.cc:72 ../../src/game_io/game_saver.cc:59
-#: ../../src/map_io/map_saver.cc:102
+#: ../../src/map_io/map_saver.cc:103
 #: ../../src/map_io/widelands_map_loader.cc:200
 msgid "Elemental data"
 msgstr "基本数据"
@@ -1400,11 +1401,11 @@ msgstr "人工智能"
 msgid "Command queue"
 msgstr "命令队列"
 
-#: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:148
+#: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:149
 #: ../../src/map_io/widelands_map_loader.cc:389
 #: ../../src/wlapplication_options.cc:466
-#: ../../src/wui/interactive_player.cc:215
-#: ../../src/wui/interactive_player.cc:449
+#: ../../src/wui/interactive_player.cc:216
+#: ../../src/wui/interactive_player.cc:454
 msgid "Messages"
 msgstr "消息"
 
@@ -1680,40 +1681,40 @@ msgid "Cleaning up for loading: Map (3/3)"
 msgstr "清理后加载: 地图 (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:153
+#: ../../src/logic/game.cc:154
 msgid "Not set"
 msgstr "未设定"
 
-#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:328
-#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:285 ../../src/logic/game.cc:330
+#: ../../src/logic/game.cc:425 ../../src/logic/game.cc:479
 msgid "Preloading map…"
 msgstr "预加载地图…"
 
-#: ../../src/logic/game.cc:377
+#: ../../src/logic/game.cc:379
 msgid "Initializing game…"
 msgstr "初始化游戏"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:628
+#: ../../src/logic/game.cc:627
 msgid "Creating player infrastructure…"
 msgstr "创建玩家基础设施…"
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:236
+#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:236
 msgid "Missing starting position"
 msgstr "缺少起始位置"
 
-#: ../../src/logic/game.cc:646 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:237
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands不能开始游戏，因为玩家%u缺少起始位置。\n你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
 
-#: ../../src/logic/game.cc:1115
+#: ../../src/logic/game.cc:1177
 msgid "Trade Offer"
 msgstr "交易报价"
 
-#: ../../src/logic/game.cc:1117
+#: ../../src/logic/game.cc:1179
 msgid "This market has received a new trade offer."
 msgstr "这个市场收到了新的交易报价。"
 
@@ -1795,7 +1796,7 @@ msgid "No description defined"
 msgstr "未定义描述"
 
 #: ../../src/logic/map_objects/immovable.cc:503
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:173
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:175
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% 已建造"
@@ -2052,7 +2053,7 @@ msgstr "(已停止)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:443
-#: ../../src/wui/building_statistics_menu.cc:692
+#: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -2131,7 +2132,7 @@ msgstr "一艘探险船正等待着你的命令。"
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
 #: ../../src/logic/map_objects/tribes/ship.cc:1019
-#: ../../src/wui/seafaring_statistics_menu.cc:237
+#: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "航运"
@@ -2140,7 +2141,7 @@ msgstr "航运"
 #. but has
 #. * nothing to do.
 #: ../../src/logic/map_objects/tribes/ship.cc:1022
-#: ../../src/wui/seafaring_statistics_menu.cc:235
+#: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "空的"
@@ -2148,7 +2149,7 @@ msgstr "空的"
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:1026
-#: ../../src/wui/seafaring_statistics_menu.cc:239
+#: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "等待"
@@ -2156,14 +2157,14 @@ msgstr "等待"
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:1030
-#: ../../src/wui/seafaring_statistics_menu.cc:241
+#: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "侦察"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:1034
-#: ../../src/wui/seafaring_statistics_menu.cc:243
+#: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "找到港口空间"
@@ -2194,7 +2195,7 @@ msgstr "船舶"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
 #: ../../src/wui/economy_options_window.cc:72
 #: ../../src/wui/general_statistics_menu.cc:151
-#: ../../src/wui/interactive_player.cc:320
+#: ../../src/wui/interactive_player.cc:323
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:261
 msgid "Wares"
@@ -2213,10 +2214,10 @@ msgstr "劳动者"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:199
-#: ../../src/map_io/map_saver.cc:221
+#: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
 #: ../../src/wui/general_statistics_menu.cc:147
-#: ../../src/wui/interactive_player.cc:315 ../../src/wui/minimap.cc:195
+#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:195
 msgid "Buildings"
 msgstr "建筑物"
 
@@ -2309,11 +2310,11 @@ msgctxt "shipname"
 msgid "Ship %d"
 msgstr "船 %d"
 
-#: ../../src/logic/replay_game_controller.cc:101
+#: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
 msgstr "重播结束"
 
-#: ../../src/logic/replay_game_controller.cc:102
+#: ../../src/logic/replay_game_controller.cc:108
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -2324,104 +2325,104 @@ msgid "Saving game…"
 msgstr "保存游戏…"
 
 #: ../../src/logic/save_handler.cc:178
-#: ../../src/wui/game_main_menu_save_game.cc:298
+#: ../../src/wui/game_main_menu_save_game.cc:322
 msgid "Saving failed!"
 msgstr "保存失败！"
 
 #: ../../src/logic/save_handler.cc:192
-#: ../../src/wui/game_main_menu_save_game.cc:281
+#: ../../src/wui/game_main_menu_save_game.cc:305
 msgid "Game saved"
 msgstr "游戏已经保存"
 
-#: ../../src/map_io/map_saver.cc:87
+#: ../../src/map_io/map_saver.cc:88
 #, c-format
 msgid "Saving map: %1$s (%2$d/%3$d)"
 msgstr "保存地图: %1$s (%2$d/%3$d)"
 
-#: ../../src/map_io/map_saver.cc:89
+#: ../../src/map_io/map_saver.cc:90
 msgid "Autosaving map…"
 msgstr "自动保存地图…"
 
-#: ../../src/map_io/map_saver.cc:122
+#: ../../src/map_io/map_saver.cc:123
 #: ../../src/map_io/widelands_map_loader.cc:225
 msgid "Heights"
 msgstr "高度"
 
-#: ../../src/map_io/map_saver.cc:129
+#: ../../src/map_io/map_saver.cc:130
 #: ../../src/map_io/widelands_map_loader.cc:232
 msgid "Terrains"
 msgstr "地形"
 
-#: ../../src/map_io/map_saver.cc:136
+#: ../../src/map_io/map_saver.cc:137
 #: ../../src/map_io/widelands_map_loader.cc:245
 msgid "Starting positions"
 msgstr "起始位置"
 
-#: ../../src/map_io/map_saver.cc:164
+#: ../../src/map_io/map_saver.cc:165
 #: ../../src/map_io/widelands_map_loader.cc:273
 msgid "Map version"
 msgstr "地图版本"
 
-#: ../../src/map_io/map_saver.cc:176
+#: ../../src/map_io/map_saver.cc:177
 #: ../../src/map_io/widelands_map_loader.cc:279
 msgid "Building restrictions"
 msgstr "建筑限制"
 
-#: ../../src/map_io/map_saver.cc:201
+#: ../../src/map_io/map_saver.cc:202
 #: ../../src/map_io/widelands_map_loader.cc:304 ../../src/wui/minimap.cc:173
 msgid "Flags"
 msgstr "旗帜"
 
-#: ../../src/map_io/map_saver.cc:208
+#: ../../src/map_io/map_saver.cc:209
 #: ../../src/map_io/widelands_map_loader.cc:311
 msgid "Roads and waterways"
 msgstr "道路与水路"
 
-#: ../../src/map_io/map_saver.cc:230
+#: ../../src/map_io/map_saver.cc:231
 #: ../../src/map_io/widelands_map_loader.cc:241
 msgid "Map objects"
 msgstr "地图对象"
 
-#: ../../src/map_io/map_saver.cc:239
+#: ../../src/map_io/map_saver.cc:240
 #: ../../src/map_io/widelands_map_loader.cc:397
 msgid "Win condition"
 msgstr "胜利条件"
 
-#: ../../src/map_io/map_saver.cc:248
+#: ../../src/map_io/map_saver.cc:249
 msgid "Flag details"
 msgstr "旗帜详细信息"
 
-#: ../../src/map_io/map_saver.cc:257
+#: ../../src/map_io/map_saver.cc:258
 msgid "Road and waterway details"
 msgstr "道路与水路详细信息"
 
-#: ../../src/map_io/map_saver.cc:274
+#: ../../src/map_io/map_saver.cc:275
 msgid "Building details"
 msgstr "建筑详细信息"
 
-#: ../../src/map_io/map_saver.cc:282
+#: ../../src/map_io/map_saver.cc:283
 msgid "Territory"
 msgstr "领土"
 
-#: ../../src/map_io/map_saver.cc:289
+#: ../../src/map_io/map_saver.cc:290
 #: ../../src/map_io/widelands_map_loader.cc:379
 msgid "Vision"
 msgstr "视野"
 
-#: ../../src/map_io/map_saver.cc:298
+#: ../../src/map_io/map_saver.cc:299
 #: ../../src/map_io/widelands_map_loader.cc:414
 msgid "Scripting"
 msgstr "脚本"
 
-#: ../../src/map_io/map_saver.cc:305
+#: ../../src/map_io/map_saver.cc:306
 #: ../../src/map_io/widelands_map_loader.cc:407
 #: ../../src/wlapplication_options.cc:462
 #: ../../src/wui/game_objectives_menu.cc:41
-#: ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/interactive_player.cc:208
 msgid "Objectives"
 msgstr "目标"
 
-#: ../../src/map_io/map_saver.cc:309
+#: ../../src/map_io/map_saver.cc:310
 #: ../../src/map_io/widelands_map_loader.cc:421
 msgid "Images"
 msgstr "图像"
@@ -2474,8 +2475,8 @@ msgstr "初始化地图对象"
 msgid "Checking map"
 msgstr "检查地图"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:167 ../../src/wlapplication.cc:687
+#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:546
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
 msgid "Preparing game…"
 msgstr "准备游戏…"
 
@@ -2491,41 +2492,41 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands无法建立到指定地址的连接。如果没有Widelands服务器运行在该端口之上，那么就是在你尝试连接时该服务器已关闭。"
 
-#: ../../src/network/gameclient.cc:726
+#: ../../src/network/gameclient.cc:736
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 
-#: ../../src/network/gameclient.cc:732
+#: ../../src/network/gameclient.cc:742
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:736
+#: ../../src/network/gameclient.cc:746
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:908
+#: ../../src/network/gameclient.cc:918
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:950
+#: ../../src/network/gameclient.cc:960
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me 已检查收到的文件。虽然md5值校验成功，但我无法处理该文件。"
 
-#: ../../src/network/gameclient.cc:1258
+#: ../../src/network/gameclient.cc:1268
 msgid "Disconnected"
 msgstr "未连接"
 
-#: ../../src/network/gameclient.cc:1260
+#: ../../src/network/gameclient.cc:1270
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2626,27 +2627,27 @@ msgstr "没有强制暂停 - 没有什么可结束的。"
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "无效命令！ 输入 /help  获取命令列表。"
 
-#: ../../src/network/gamehost.cc:373
+#: ../../src/network/gamehost.cc:377
 msgid "Failed to host the server!"
 msgstr "服务器创建主机失败！"
 
-#: ../../src/network/gamehost.cc:374
+#: ../../src/network/gamehost.cc:378
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "Widelands不能开始服务器托管。\n 这不应该发生，而且你很可能对此无能为力。 请报告软件错误 "
 
-#: ../../src/network/gamehost.cc:382
+#: ../../src/network/gamehost.cc:386
 msgid "Failed to start the server!"
 msgstr "服务器启动失败！"
 
-#: ../../src/network/gamehost.cc:383
+#: ../../src/network/gamehost.cc:387
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Widelands不能启动服务。\n 可能其它的进程已经在我们的端口上运行服务器了 "
 
-#: ../../src/network/gamehost.cc:1821
+#: ../../src/network/gamehost.cc:1835
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3047,7 +3048,7 @@ msgstr "Widelands无法使用本地网络。可能其他的进程正运行在服
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1321
+#: ../../src/scripting/lua_game.cc:1332
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3096,12 +3097,20 @@ msgid "Select Item"
 msgstr "选择项目"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:411
+#: ../../src/ui_basic/dropdown.cc:413
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "未选定"
 
-#: ../../src/ui_basic/progresswindow.cc:71
+#: ../../src/ui_basic/panel.cc:310
+msgid "Please wait…"
+msgstr ""
+
+#: ../../src/ui_basic/panel.cc:433
+msgid "Game ending – please wait…"
+msgstr ""
+
+#: ../../src/ui_basic/progresswindow.cc:73
 msgid "Loading…"
 msgstr "载入中…"
 
@@ -3155,7 +3164,7 @@ msgstr "最小化"
 msgid "Restore"
 msgstr "还原"
 
-#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:196
+#: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:197
 msgid "Pin"
 msgstr "固定"
 
@@ -3163,7 +3172,7 @@ msgstr "固定"
 msgid "Unpin"
 msgstr "解除固定"
 
-#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:449
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:451
 msgid "About Widelands"
 msgstr "关于Widelands"
 
@@ -3171,72 +3180,72 @@ msgstr "关于Widelands"
 msgid "Lua Error"
 msgstr "Lua错误"
 
-#: ../../src/ui_fsmenu/addons.cc:115
+#: ../../src/ui_fsmenu/addons.cc:116
 msgid "Add-On Manager"
 msgstr "附件管理器"
 
-#: ../../src/ui_fsmenu/addons.cc:156
+#: ../../src/ui_fsmenu/addons.cc:157
 msgid "Verified only"
 msgstr "仅验证"
 
-#: ../../src/ui_fsmenu/addons.cc:157
+#: ../../src/ui_fsmenu/addons.cc:158
 msgid "Show only verified add-ons in the Browse tab"
 msgstr "在浏览选项中仅显示已验证的附件"
 
-#: ../../src/ui_fsmenu/addons.cc:165
+#: ../../src/ui_fsmenu/addons.cc:166
 msgid "Sort by"
 msgstr "排序"
 
-#: ../../src/ui_fsmenu/addons.cc:176
+#: ../../src/ui_fsmenu/addons.cc:177
 #: ../../src/ui_fsmenu/training_wheel_options.cc:120
 msgid "Reset"
 msgstr "复位"
 
-#: ../../src/ui_fsmenu/addons.cc:177
+#: ../../src/ui_fsmenu/addons.cc:178
 msgid "Reset the filters"
 msgstr "重置过滤器"
 
-#: ../../src/ui_fsmenu/addons.cc:193
+#: ../../src/ui_fsmenu/addons.cc:194
 msgid "Refresh"
 msgstr "刷新"
 
-#: ../../src/ui_fsmenu/addons.cc:194
+#: ../../src/ui_fsmenu/addons.cc:195
 msgid "Refresh the list of add-ons available from the server"
 msgstr "刷新服务器上可用的附件列表"
 
-#: ../../src/ui_fsmenu/addons.cc:211
+#: ../../src/ui_fsmenu/addons.cc:212
 msgid "Fix dependencies…"
 msgstr "修复依赖项…"
 
-#: ../../src/ui_fsmenu/addons.cc:212
+#: ../../src/ui_fsmenu/addons.cc:213
 msgid "Try to automatically fix the dependency errors"
 msgstr "尝试自动修复依赖项错误"
 
-#: ../../src/ui_fsmenu/addons.cc:222
+#: ../../src/ui_fsmenu/addons.cc:223
 msgid "Move selected add-on to top"
 msgstr "将选中的附件移到顶部"
 
-#: ../../src/ui_fsmenu/addons.cc:231
+#: ../../src/ui_fsmenu/addons.cc:232
 msgid "Move selected add-on one step up"
 msgstr "将选中的附件上移一步"
 
-#: ../../src/ui_fsmenu/addons.cc:240
+#: ../../src/ui_fsmenu/addons.cc:241
 msgid "Move selected add-on one step down"
 msgstr "将选中的附件下移一步"
 
-#: ../../src/ui_fsmenu/addons.cc:249
+#: ../../src/ui_fsmenu/addons.cc:250
 msgid "Move selected add-on to bottom"
 msgstr "将选中的附件移到底部"
 
-#: ../../src/ui_fsmenu/addons.cc:257
+#: ../../src/ui_fsmenu/addons.cc:258
 msgid "Launch the add-ons packager…"
 msgstr "启动附加组件打包程序…"
 
-#: ../../src/ui_fsmenu/addons.cc:261
+#: ../../src/ui_fsmenu/addons.cc:262
 msgid "Tools for Add-Ons Developers"
 msgstr "附加组件开发者工具"
 
-#: ../../src/ui_fsmenu/addons.cc:269
+#: ../../src/ui_fsmenu/addons.cc:270
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -3244,7 +3253,7 @@ msgid ""
 "having to write a single line of code."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:290
+#: ../../src/ui_fsmenu/addons.cc:291
 #, c-format
 msgid ""
 "Uploading add-ons to the server from within Widelands is not implemented "
@@ -3253,191 +3262,191 @@ msgid ""
 "attach the zip file."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:303
+#: ../../src/ui_fsmenu/addons.cc:304
 msgid "Open Link"
 msgstr "打开链接"
 
-#: ../../src/ui_fsmenu/addons.cc:305
+#: ../../src/ui_fsmenu/addons.cc:306
 msgid "Copy Link"
 msgstr "拷贝链接"
 
-#: ../../src/ui_fsmenu/addons.cc:325
+#: ../../src/ui_fsmenu/addons.cc:326
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:355
+#: ../../src/ui_fsmenu/addons.cc:356
 msgid "Development"
 msgstr "发展"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons.cc:358
+#: ../../src/ui_fsmenu/addons.cc:359
 msgid "Name"
 msgstr "姓名"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons.cc:360
+#: ../../src/ui_fsmenu/addons.cc:361
 msgid "Name (descending)"
 msgstr "姓名 (降序)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:362
+#: ../../src/ui_fsmenu/addons.cc:363
 msgid "Best average rating"
 msgstr "最佳平均评级"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:364
+#: ../../src/ui_fsmenu/addons.cc:365
 msgid "Worst average rating"
 msgstr "最差平均评级"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:366
+#: ../../src/ui_fsmenu/addons.cc:367
 msgid "Most often downloaded"
 msgstr "最常下载"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:368
+#: ../../src/ui_fsmenu/addons.cc:369
 msgid "Least often downloaded"
 msgstr "最少下载"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:370
+#: ../../src/ui_fsmenu/addons.cc:371
 msgid "Oldest"
 msgstr "最老的"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:372
+#: ../../src/ui_fsmenu/addons.cc:373
 msgid "Newest"
 msgstr "最新的"
 
-#: ../../src/ui_fsmenu/addons.cc:375
+#: ../../src/ui_fsmenu/addons.cc:376
 msgid "Filter add-ons by name"
 msgstr "按名称过滤附件"
 
-#: ../../src/ui_fsmenu/addons.cc:385
+#: ../../src/ui_fsmenu/addons.cc:386
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "切换类别'%s'"
 
-#: ../../src/ui_fsmenu/addons.cc:458
+#: ../../src/ui_fsmenu/addons.cc:459
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons.cc:466
+#: ../../src/ui_fsmenu/addons.cc:467
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) by %3$s"
 
-#: ../../src/ui_fsmenu/addons.cc:467 ../../src/ui_fsmenu/addons.cc:2008
-#: ../../src/ui_fsmenu/addons.cc:2033
+#: ../../src/ui_fsmenu/addons.cc:468 ../../src/ui_fsmenu/addons.cc:2013
+#: ../../src/ui_fsmenu/addons.cc:2038
 msgid "NOT VERIFIED"
 msgstr "尚未验证"
 
-#: ../../src/ui_fsmenu/addons.cc:467
+#: ../../src/ui_fsmenu/addons.cc:468
 msgid "verified"
 msgstr "已验证"
 
-#: ../../src/ui_fsmenu/addons.cc:472
+#: ../../src/ui_fsmenu/addons.cc:473
 msgid "Upgrade All"
 msgstr "全部升级"
 
-#: ../../src/ui_fsmenu/addons.cc:664
+#: ../../src/ui_fsmenu/addons.cc:665
 msgid "Server Connection Error"
 msgstr "服务器连接错误"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons.cc:666
+#: ../../src/ui_fsmenu/addons.cc:667
 msgid "a networking bug"
 msgstr "网络程序缺陷"
 
-#: ../../src/ui_fsmenu/addons.cc:667
+#: ../../src/ui_fsmenu/addons.cc:668
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "不能从服务器获取可用的附件列表！ <br> 错误消息： %s"
 
-#: ../../src/ui_fsmenu/addons.cc:748
+#: ../../src/ui_fsmenu/addons.cc:749
 #, c-format
 msgid "Installed (%u)"
 msgstr "已安装 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:826
+#: ../../src/ui_fsmenu/addons.cc:827
 msgid "Browse"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:827
+#: ../../src/ui_fsmenu/addons.cc:828
 #, c-format
 msgid "Browse (%u)"
 msgstr "浏览 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:837
+#: ../../src/ui_fsmenu/addons.cc:838
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "全部升级 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:840
+#: ../../src/ui_fsmenu/addons.cc:841
 msgid "No upgrades are available for your installed add-ons"
 msgstr "你安装的附加组件没有可用的升级"
 
-#: ../../src/ui_fsmenu/addons.cc:843
+#: ../../src/ui_fsmenu/addons.cc:844
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons.cc:849
+#: ../../src/ui_fsmenu/addons.cc:850
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons.cc:878
+#: ../../src/ui_fsmenu/addons.cc:881
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· ‘%1$s’ 需要 ‘%2$s’ 找不到"
 
-#: ../../src/ui_fsmenu/addons.cc:884
+#: ../../src/ui_fsmenu/addons.cc:887
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· ‘%1$s’ 需要 ‘%2$s’ 已禁用"
 
-#: ../../src/ui_fsmenu/addons.cc:891
+#: ../../src/ui_fsmenu/addons.cc:894
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· ‘%1$s’ 需要 ‘%2$s’ 下面列出了所需的附加组件"
 
-#: ../../src/ui_fsmenu/addons.cc:911
+#: ../../src/ui_fsmenu/addons.cc:914
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· ‘%1$s’ 首先需要  ‘%2$s’ 然后需要  ‘%3$s’, 但它们排列顺序不对 "
 
-#: ../../src/ui_fsmenu/addons.cc:937
+#: ../../src/ui_fsmenu/addons.cc:940
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons.cc:942
+#: ../../src/ui_fsmenu/addons.cc:945
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "存在依赖错误的附件可能无法正常工作，或者阻止加载游戏和地图。"
 
-#: ../../src/ui_fsmenu/addons.cc:1137
+#: ../../src/ui_fsmenu/addons.cc:1140
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "正在下载 ‘%s’…"
 
-#: ../../src/ui_fsmenu/addons.cc:1177
+#: ../../src/ui_fsmenu/addons.cc:1180
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3446,12 +3455,12 @@ msgid ""
 "%2$s"
 msgstr "附加组件 ‘%1$s’ 不能从服务器下载， 将跳过安装/升级此附件。 错误信息： %2$s "
 
-#: ../../src/ui_fsmenu/addons.cc:1191
+#: ../../src/ui_fsmenu/addons.cc:1194
 #, c-format
 msgid "Downloading translations for ‘%s’…"
 msgstr "正在下载 ‘%s’ 的翻译…"
 
-#: ../../src/ui_fsmenu/addons.cc:1232
+#: ../../src/ui_fsmenu/addons.cc:1235
 #, c-format
 msgid ""
 "The translation files for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations for this add-on will be skipped.\n"
@@ -3460,12 +3469,12 @@ msgid ""
 "%2$s"
 msgstr "附加组件的翻译文件 ‘%1$s’ 不能从服务器下载， 将跳过安装/升级此附件的翻译文件。 错误信息： %2$s "
 
-#: ../../src/ui_fsmenu/addons.cc:1256 ../../src/ui_fsmenu/addons.cc:1438
-#: ../../src/ui_fsmenu/addons.cc:1906
+#: ../../src/ui_fsmenu/addons.cc:1259 ../../src/ui_fsmenu/addons.cc:1441
+#: ../../src/ui_fsmenu/addons.cc:1911
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../../src/ui_fsmenu/addons.cc:1258
+#: ../../src/ui_fsmenu/addons.cc:1261
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3479,7 +3488,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1265
+#: ../../src/ui_fsmenu/addons.cc:1268
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3491,189 +3500,189 @@ msgid ""
 "%5$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1353
+#: ../../src/ui_fsmenu/addons.cc:1356
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "在服务器上找不到所需的附加组件 ‘%s’ 。"
 
-#: ../../src/ui_fsmenu/addons.cc:1391
+#: ../../src/ui_fsmenu/addons.cc:1394
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1397
+#: ../../src/ui_fsmenu/addons.cc:1400
 #, c-format
 msgid "Requires a Widelands version of at least %s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1402
+#: ../../src/ui_fsmenu/addons.cc:1405
 #, c-format
 msgid "Requires a Widelands version of at most %s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1406
+#: ../../src/ui_fsmenu/addons.cc:1409
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1448 ../../src/ui_fsmenu/addons.cc:1497
+#: ../../src/ui_fsmenu/addons.cc:1451 ../../src/ui_fsmenu/addons.cc:1500
 msgid "Disable"
 msgstr "禁用"
 
-#: ../../src/ui_fsmenu/addons.cc:1448 ../../src/ui_fsmenu/addons.cc:1497
+#: ../../src/ui_fsmenu/addons.cc:1451 ../../src/ui_fsmenu/addons.cc:1500
 msgid "Enable"
 msgstr "启用"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1461 ../../src/ui_fsmenu/addons.cc:1931
+#: ../../src/ui_fsmenu/addons.cc:1464 ../../src/ui_fsmenu/addons.cc:1936
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1474 ../../src/ui_fsmenu/addons.cc:1972
+#: ../../src/ui_fsmenu/addons.cc:1477 ../../src/ui_fsmenu/addons.cc:1977
 #: ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1478 ../../src/ui_fsmenu/addons.cc:1976
+#: ../../src/ui_fsmenu/addons.cc:1481 ../../src/ui_fsmenu/addons.cc:1981
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1481 ../../src/ui_fsmenu/addons.cc:1980
+#: ../../src/ui_fsmenu/addons.cc:1484 ../../src/ui_fsmenu/addons.cc:1985
 #, c-format
 msgid "by %s"
 msgstr "by %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1512 ../../src/ui_fsmenu/addons.cc:2064
+#: ../../src/ui_fsmenu/addons.cc:1515 ../../src/ui_fsmenu/addons.cc:2069
 #, c-format
 msgid "Category: %s"
 msgstr " 类别： %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1517 ../../src/ui_fsmenu/addons.cc:2068
+#: ../../src/ui_fsmenu/addons.cc:1520 ../../src/ui_fsmenu/addons.cc:2073
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "版本： %1$s+%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1569
+#: ../../src/ui_fsmenu/addons.cc:1572
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1571
+#: ../../src/ui_fsmenu/addons.cc:1574
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1573
+#: ../../src/ui_fsmenu/addons.cc:1576
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1575
+#: ../../src/ui_fsmenu/addons.cc:1578
 #, c-format
 msgid "%u bytes"
 msgstr "%u 字节"
 
-#: ../../src/ui_fsmenu/addons.cc:1613
+#: ../../src/ui_fsmenu/addons.cc:1616
 msgid "Your vote"
 msgstr "你的选票"
 
-#: ../../src/ui_fsmenu/addons.cc:1631 ../../src/ui_fsmenu/addons.cc:2089
+#: ../../src/ui_fsmenu/addons.cc:1634 ../../src/ui_fsmenu/addons.cc:2094
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] "平均评级： %1$.3f (%2$u votes)"
 
-#: ../../src/ui_fsmenu/addons.cc:1636 ../../src/ui_fsmenu/addons.cc:2094
+#: ../../src/ui_fsmenu/addons.cc:1639 ../../src/ui_fsmenu/addons.cc:2099
 msgid "No votes yet"
 msgstr "还没有投票"
 
-#: ../../src/ui_fsmenu/addons.cc:1646
+#: ../../src/ui_fsmenu/addons.cc:1649
 msgid "Next screenshot"
 msgstr "下一个屏幕快照"
 
-#: ../../src/ui_fsmenu/addons.cc:1655
+#: ../../src/ui_fsmenu/addons.cc:1658
 msgid "Previous screenshot"
 msgstr "上一个屏幕快照"
 
-#: ../../src/ui_fsmenu/addons.cc:1663
+#: ../../src/ui_fsmenu/addons.cc:1666
 msgid "Submit comment"
 msgstr "提交评论"
 
-#: ../../src/ui_fsmenu/addons.cc:1669
+#: ../../src/ui_fsmenu/addons.cc:1672
 msgid "No comments yet."
 msgstr "还没有评论"
 
-#: ../../src/ui_fsmenu/addons.cc:1671
+#: ../../src/ui_fsmenu/addons.cc:1674
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u 评论："
 
-#: ../../src/ui_fsmenu/addons.cc:1681
+#: ../../src/ui_fsmenu/addons.cc:1684
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "‘%1$s’ 对版本发表了评论 %2$s:"
 
-#: ../../src/ui_fsmenu/addons.cc:1695
+#: ../../src/ui_fsmenu/addons.cc:1698
 msgid "Not voted"
 msgstr "未投票"
 
-#: ../../src/ui_fsmenu/addons.cc:1755
+#: ../../src/ui_fsmenu/addons.cc:1758
 #, c-format
 msgid "Comments (%u)"
 msgstr "注释 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1760
+#: ../../src/ui_fsmenu/addons.cc:1763
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "屏幕快照 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1772
+#: ../../src/ui_fsmenu/addons.cc:1775
 #, c-format
 msgid "Votes (%u)"
 msgstr "投票 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1813
+#: ../../src/ui_fsmenu/addons.cc:1818
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u/%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1849
+#: ../../src/ui_fsmenu/addons.cc:1854
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "由于出现错误，无法从服务器获取此屏幕快照。 "
 
-#: ../../src/ui_fsmenu/addons.cc:1888 ../../src/ui_fsmenu/addons.cc:1999
+#: ../../src/ui_fsmenu/addons.cc:1893 ../../src/ui_fsmenu/addons.cc:2004
 msgid "Install"
 msgstr "安装"
 
-#: ../../src/ui_fsmenu/addons.cc:1897 ../../src/ui_fsmenu/addons.cc:2023
+#: ../../src/ui_fsmenu/addons.cc:1902 ../../src/ui_fsmenu/addons.cc:2028
 msgid "Upgrade"
 msgstr "升级"
 
-#: ../../src/ui_fsmenu/addons.cc:1915
+#: ../../src/ui_fsmenu/addons.cc:1920
 msgid "Comments and Votes"
 msgstr "评论和投票"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1957
+#: ../../src/ui_fsmenu/addons.cc:1962
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s ⬇%2$u  ★ %3$s  “” %4$u ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1981
+#: ../../src/ui_fsmenu/addons.cc:1986
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "by %1$s (由 %2$s 上传)"
 
-#: ../../src/ui_fsmenu/addons.cc:2000
+#: ../../src/ui_fsmenu/addons.cc:2005
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3686,11 +3695,11 @@ msgid ""
 "%6$s\n"
 msgstr "你确定要安装此附件吗？\n\n%1$s\nby %2$s\n%3$s\n版本 %4$s\n类别 ：%5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:2008 ../../src/ui_fsmenu/addons.cc:2033
+#: ../../src/ui_fsmenu/addons.cc:2013 ../../src/ui_fsmenu/addons.cc:2038
 msgid "Verified"
 msgstr "已验证"
 
-#: ../../src/ui_fsmenu/addons.cc:2024
+#: ../../src/ui_fsmenu/addons.cc:2029
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3704,35 +3713,35 @@ msgid ""
 "%7$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:2075
+#: ../../src/ui_fsmenu/addons.cc:2080
 msgid "Verified by the Widelands Development Team"
 msgstr "由Widelands开发团队验证"
 
-#: ../../src/ui_fsmenu/addons.cc:2076
+#: ../../src/ui_fsmenu/addons.cc:2081
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Widelands开发团队尚未检查此附加组件。我们不能保证它不包含有害的或是不礼貌的内容 "
 
-#: ../../src/ui_fsmenu/addons.cc:2083
+#: ../../src/ui_fsmenu/addons.cc:2088
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] "总计： %u 字节"
 
-#: ../../src/ui_fsmenu/addons.cc:2086
+#: ../../src/ui_fsmenu/addons.cc:2091
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] "%u 下载"
 
-#: ../../src/ui_fsmenu/addons.cc:2095
+#: ../../src/ui_fsmenu/addons.cc:2100
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
 msgstr[0] "%u 评论"
 
-#: ../../src/ui_fsmenu/addons.cc:2097
+#: ../../src/ui_fsmenu/addons.cc:2102
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -3783,51 +3792,51 @@ msgstr "作者："
 msgid "Version:"
 msgstr "版本："
 
-#: ../../src/ui_fsmenu/addons_packager.cc:311
+#: ../../src/ui_fsmenu/addons_packager.cc:312
 msgid "New Add-On"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:312
+#: ../../src/ui_fsmenu/addons_packager.cc:313
 msgid "Enter the name for the new add-on."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:314
+#: ../../src/ui_fsmenu/addons_packager.cc:315
 msgid "Category"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:333
-#: ../../src/ui_fsmenu/addons_packager.cc:348
-#: ../../src/ui_fsmenu/addons_packager.cc:353
+#: ../../src/ui_fsmenu/addons_packager.cc:335
+#: ../../src/ui_fsmenu/addons_packager.cc:350
+#: ../../src/ui_fsmenu/addons_packager.cc:355
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "Invalid Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:333
+#: ../../src/ui_fsmenu/addons_packager.cc:335
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid. Please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:348
+#: ../../src/ui_fsmenu/addons_packager.cc:350
 msgid "An add-on with this internal name already exists."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:353
+#: ../../src/ui_fsmenu/addons_packager.cc:355
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:379
+#: ../../src/ui_fsmenu/addons_packager.cc:381
 msgid "Delete Add-on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:381
+#: ../../src/ui_fsmenu/addons_packager.cc:383
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:382
+#: ../../src/ui_fsmenu/addons_packager.cc:384
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -3835,7 +3844,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:403
+#: ../../src/ui_fsmenu/addons_packager.cc:405
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -3845,41 +3854,41 @@ msgid_plural ""
 "be discarded."
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:413
-#: ../../src/ui_fsmenu/addons_packager.cc:442
-#: ../../src/ui_fsmenu/addons_packager.cc:470
+#: ../../src/ui_fsmenu/addons_packager.cc:415
+#: ../../src/ui_fsmenu/addons_packager.cc:444
+#: ../../src/ui_fsmenu/addons_packager.cc:472
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:416
+#: ../../src/ui_fsmenu/addons_packager.cc:418
 msgid "Quit Packager"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:431
+#: ../../src/ui_fsmenu/addons_packager.cc:433
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:436
+#: ../../src/ui_fsmenu/addons_packager.cc:438
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:446
+#: ../../src/ui_fsmenu/addons_packager.cc:448
 msgid "Discard Changes"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:459
+#: ../../src/ui_fsmenu/addons_packager.cc:461
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:464
+#: ../../src/ui_fsmenu/addons_packager.cc:466
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -3888,31 +3897,31 @@ msgid_plural ""
 "disk?"
 msgstr[0] ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:474
+#: ../../src/ui_fsmenu/addons_packager.cc:476
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:477
+#: ../../src/ui_fsmenu/addons_packager.cc:479
 msgid "Confirm Saving"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:531
+#: ../../src/ui_fsmenu/addons_packager.cc:533
 msgid "Invalid Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:533
+#: ../../src/ui_fsmenu/addons_packager.cc:535
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:543
+#: ../../src/ui_fsmenu/addons_packager.cc:545
 msgid "Error Writing Addon"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons_packager.cc:544
+#: ../../src/ui_fsmenu/addons_packager.cc:546
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -3940,25 +3949,25 @@ msgid "Directory Tree"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:138
-#: ../../src/ui_fsmenu/main.cc:400
+#: ../../src/ui_fsmenu/main.cc:402
 #, c-format
 msgid "Name: %s"
 msgstr "名称：%s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:404 ../../src/ui_fsmenu/mapdetailsbox.cc:101
+#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:101
 #, c-format
 msgid "Size: %s"
 msgstr "大小：%s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:406 ../../src/ui_fsmenu/mapdetailsbox.cc:104
+#: ../../src/ui_fsmenu/main.cc:408 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
-#: ../../src/ui_fsmenu/main.cc:344 ../../src/ui_fsmenu/main.cc:410
+#: ../../src/ui_fsmenu/main.cc:346 ../../src/ui_fsmenu/main.cc:412
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "Players: %s"
@@ -4017,6 +4026,7 @@ msgstr "选择战役"
 #: ../../src/ui_fsmenu/campaign_select.cc:39
 #: ../../src/ui_fsmenu/loadgame.cc:80
 #: ../../src/ui_fsmenu/scenario_select.cc:104
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "返回主菜单"
 
@@ -4108,29 +4118,29 @@ msgid "Version"
 msgstr "版本"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:172
-#: ../../src/ui_fsmenu/keyboard_options.cc:185
+#: ../../src/ui_fsmenu/keyboard_options.cc:186
 msgid "Game"
 msgstr "游戏"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:417
+#: ../../src/ui_fsmenu/internet_lobby.cc:419
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "游戏%s已在运行中，请选择其他名称。"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:431
+#: ../../src/ui_fsmenu/internet_lobby.cc:433
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr " Widelands不能及时获取服务器的IP地址。似乎存在一个网络问题，这个问题不在客户端就在服务器端。 \n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:434
+#: ../../src/ui_fsmenu/internet_lobby.cc:436
 msgid "Connection Timed Out"
 msgstr "连接超时 "
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:475
+#: ../../src/ui_fsmenu/internet_lobby.cc:477
 #, c-format
 msgid "unnamed %u"
 msgstr "未命名 %u"
@@ -4143,28 +4153,28 @@ msgstr ""
 msgid "Press the new shortcut or close this window to cancel."
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:113
+#: ../../src/ui_fsmenu/keyboard_options.cc:114
 msgid "Edit Keyboard Shortcuts"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:123
+#: ../../src/ui_fsmenu/keyboard_options.cc:124
 msgid "Reset all"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:124
+#: ../../src/ui_fsmenu/keyboard_options.cc:125
 msgid "Reset all to defaults"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:136
+#: ../../src/ui_fsmenu/keyboard_options.cc:137
 #, c-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:155
+#: ../../src/ui_fsmenu/keyboard_options.cc:156
 msgid "Keyboard Shortcut Conflict"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:156
+#: ../../src/ui_fsmenu/keyboard_options.cc:157
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4173,12 +4183,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:183
-#: ../../src/wui/interactive_player.cc:325
+#: ../../src/ui_fsmenu/keyboard_options.cc:184
+#: ../../src/wui/interactive_player.cc:328
 msgid "General"
 msgstr "常规的"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:186
+#: ../../src/ui_fsmenu/keyboard_options.cc:187
 #: ../../src/wlapplication_options.cc:198
 msgid "Editor"
 msgstr ""
@@ -4216,98 +4226,98 @@ msgstr "更改保存的游戏..."
 msgid "Start game"
 msgstr "开始游戏"
 
-#: ../../src/ui_fsmenu/launch_game.cc:186
+#: ../../src/ui_fsmenu/launch_game.cc:188
 msgid "The relations between players are set by the scenario"
 msgstr "玩家之间的关系由场景决定"
 
-#: ../../src/ui_fsmenu/launch_game.cc:188
+#: ../../src/ui_fsmenu/launch_game.cc:190
 msgid "The relations between players are set by the saved game"
 msgstr "玩家之间的关系由保存的游戏设置"
 
-#: ../../src/ui_fsmenu/launch_game.cc:190
+#: ../../src/ui_fsmenu/launch_game.cc:192
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "所选的胜利条件不允许和平比赛模式"
 
-#: ../../src/ui_fsmenu/launch_game.cc:192
+#: ../../src/ui_fsmenu/launch_game.cc:194
 msgid "Forbid fighting between players"
 msgstr "玩家之间禁止战斗"
 
-#: ../../src/ui_fsmenu/launch_game.cc:219
+#: ../../src/ui_fsmenu/launch_game.cc:221
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:224
+#: ../../src/ui_fsmenu/launch_game.cc:226
 msgid "The starting positions are set by the scenario"
 msgstr "起始位置由场景决定"
 
-#: ../../src/ui_fsmenu/launch_game.cc:226
+#: ../../src/ui_fsmenu/launch_game.cc:228
 msgid "The starting positions are set by the saved game"
 msgstr "起始位置由已保存的游戏设定"
 
-#: ../../src/ui_fsmenu/launch_game.cc:229
+#: ../../src/ui_fsmenu/launch_game.cc:231
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "允许玩家在游戏开始时选择自己的起始位置"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:236
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:466
+#: ../../src/ui_fsmenu/launch_game.cc:238
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:468
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:289
 #: ../../src/wui/map_tags.cc:44 ../../src/wui/mapdetails.cc:141
 msgid "Scenario"
 msgstr "方案"
 
-#: ../../src/ui_fsmenu/launch_game.cc:237
+#: ../../src/ui_fsmenu/launch_game.cc:239
 msgid "Win condition is set through the scenario"
 msgstr "胜利条件由剧本设置"
 
-#: ../../src/ui_fsmenu/launch_game.cc:243
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:470
+#: ../../src/ui_fsmenu/launch_game.cc:245
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:472
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:293
 msgid "Saved Game"
 msgstr "保存游戏"
 
-#: ../../src/ui_fsmenu/launch_game.cc:245
+#: ../../src/ui_fsmenu/launch_game.cc:247
 msgid "The game is a saved game – the win condition was set before."
 msgstr "此游戏是保存的游戏，胜利条件已经设置。"
 
-#: ../../src/ui_fsmenu/launch_game.cc:318
+#: ../../src/ui_fsmenu/launch_game.cc:320
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:69
+#: ../../src/ui_fsmenu/launch_mpg.cc:66
 msgid "Show the help window"
 msgstr "显示帮助窗口"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:80
+#: ../../src/ui_fsmenu/launch_mpg.cc:77
 msgid "Please select a map or saved game."
 msgstr "请选择一张地图或是保存游戏。"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:83
+#: ../../src/ui_fsmenu/launch_mpg.cc:80
 msgid "The host has not yet selected a map or saved game."
 msgstr "主机还未选择地图或游戏存档"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:192
+#: ../../src/ui_fsmenu/launch_mpg.cc:190
 msgid "Saved Game is Directory"
 msgstr "保存的游戏是目录"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:193
+#: ../../src/ui_fsmenu/launch_mpg.cc:191
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "警告：\n你选择的游戏存档是一个文件夹。这种情况在你设置\"nozip\"选项为true或者手工解压缩了游戏存档时会出现。\nWidelands不能传输文件夹到其他客户端，请选择另一个游戏存档或者压缩文件夹内容为zip文件。"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:212 ../../src/ui_fsmenu/launch_spg.cc:126
+#: ../../src/ui_fsmenu/launch_mpg.cc:210 ../../src/ui_fsmenu/launch_spg.cc:127
 msgid "File not found"
 msgstr "文件未找到"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:213 ../../src/ui_fsmenu/launch_spg.cc:127
+#: ../../src/ui_fsmenu/launch_mpg.cc:211 ../../src/ui_fsmenu/launch_spg.cc:128
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -4315,19 +4325,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands用了一个无法找到的文件路径开始游戏。\n此文件是：%s\n如果此情况发生在网络游戏中，游戏创建者可能选择了你没有的文件。通常，此文件将从创建者传输过来，但是可能传输目前还没有完成?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:253
+#: ../../src/ui_fsmenu/launch_mpg.cc:251
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "无法找到选择的文件。如果此文件没有自动下载，请致信游戏创建者说明问题。"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:296
+#: ../../src/ui_fsmenu/launch_mpg.cc:294
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr ""
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:419
+#: ../../src/ui_fsmenu/launch_mpg.cc:417
 msgid "Multiplayer Game Setup"
 msgstr "多人游戏设置"
 
@@ -4359,11 +4369,11 @@ msgstr "返回单人游戏菜单"
 msgid "Load this game"
 msgstr "载入游戏"
 
-#: ../../src/ui_fsmenu/loadgame.cc:161
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Version Mismatch"
 msgstr "版本不匹配"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid ""
 "This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
 "\n"
@@ -4372,12 +4382,12 @@ msgid ""
 "Do you want to load the replay anyway?"
 msgstr "此回放是由不同的Widelands版本创建的。它可能是兼容的，但是很有可能不同步甚至无法加载。 \n\n请不要报告在观看此回放时发生的任何错误。 \n\n你是否还要加载回放文件？"
 
-#: ../../src/ui_fsmenu/login_box.cc:38 ../../src/ui_fsmenu/main.cc:365
+#: ../../src/ui_fsmenu/login_box.cc:38 ../../src/ui_fsmenu/main.cc:367
 msgid "Online Game Settings"
 msgstr "在线游戏设置"
 
 #: ../../src/ui_fsmenu/login_box.cc:45
-#: ../../src/wui/economy_options_window.cc:661
+#: ../../src/wui/economy_options_window.cc:664
 msgid "Save"
 msgstr "保存"
 
@@ -4402,214 +4412,218 @@ msgid ""
 msgstr "为了使用注册帐户，你需要在Widelands的官方网站上注册一个帐号。请登入到%s并在你的个人资料概述页面设置一个在线游戏的密码。"
 
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:127 ../../src/wlapplication.cc:616
+#: ../../src/ui_fsmenu/netsetup_lan.cc:127 ../../src/wlapplication.cc:623
 msgid "nobody"
 msgstr "没有人"
 
-#: ../../src/ui_fsmenu/login_box.cc:204
+#: ../../src/ui_fsmenu/login_box.cc:206
 msgid "Please enter a nickname!"
 msgstr "请键入一个昵称！"
 
-#: ../../src/ui_fsmenu/login_box.cc:208
+#: ../../src/ui_fsmenu/login_box.cc:210
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
 msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成。"
 
-#: ../../src/ui_fsmenu/login_box.cc:214
+#: ../../src/ui_fsmenu/login_box.cc:216
 msgid "Please enter your password!"
 msgstr "请输入你的密码！"
 
-#: ../../src/ui_fsmenu/main.cc:296
+#: ../../src/ui_fsmenu/main.cc:298
 msgid "Begin a new game"
 msgstr "开始新游戏"
 
-#: ../../src/ui_fsmenu/main.cc:296 ../../src/wlapplication_options.cc:162
+#: ../../src/ui_fsmenu/main.cc:298 ../../src/wlapplication_options.cc:162
 msgid "New Game"
 msgstr "新建游戏"
 
-#: ../../src/ui_fsmenu/main.cc:298 ../../src/ui_fsmenu/random_game.cc:30
+#: ../../src/ui_fsmenu/main.cc:300 ../../src/ui_fsmenu/random_game.cc:30
 #: ../../src/wlapplication_options.cc:176
 msgid "New Random Game"
 msgstr "新随机游戏"
 
-#: ../../src/ui_fsmenu/main.cc:299
+#: ../../src/ui_fsmenu/main.cc:301
 msgid "Create a new random match"
 msgstr "创建新的随机比赛"
 
-#: ../../src/ui_fsmenu/main.cc:301 ../../src/wlapplication_options.cc:186
+#: ../../src/ui_fsmenu/main.cc:303 ../../src/wlapplication_options.cc:186
 msgid "Campaigns"
 msgstr "战役"
 
-#: ../../src/ui_fsmenu/main.cc:301
+#: ../../src/ui_fsmenu/main.cc:303
 msgid "Play a campaign"
 msgstr "进入战役游戏模式"
 
-#: ../../src/ui_fsmenu/main.cc:303 ../../src/wlapplication_options.cc:181
+#: ../../src/ui_fsmenu/main.cc:305 ../../src/wlapplication_options.cc:181
 msgid "Tutorials"
 msgstr "教程"
 
-#: ../../src/ui_fsmenu/main.cc:304
+#: ../../src/ui_fsmenu/main.cc:306
 msgid "Play one of our beginners’ tutorials"
 msgstr "进入我们的初学者教程之一"
 
-#: ../../src/ui_fsmenu/main.cc:306 ../../src/wlapplication_options.cc:166
+#. * TRANSLATORS: An entry in the game's main menu
+#: ../../src/ui_fsmenu/main.cc:308 ../../src/wlapplication_options.cc:166
+#: ../../src/wlapplication_options.cc:522
+#: ../../src/wui/game_main_menu_save_game.cc:54
+#: ../../src/wui/interactive_gamebase.cc:154
 msgid "Load Game"
 msgstr "载入游戏"
 
-#: ../../src/ui_fsmenu/main.cc:307
+#: ../../src/ui_fsmenu/main.cc:309
 msgid "Continue a saved game"
 msgstr "从保存的游戏开始继续"
 
-#: ../../src/ui_fsmenu/main.cc:327 ../../src/wlapplication_options.cc:223
+#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:223
 msgid "Continue Playing"
 msgstr "继续游戏"
 
-#: ../../src/ui_fsmenu/main.cc:336
+#: ../../src/ui_fsmenu/main.cc:338
 #, c-format
 msgid "Map: %s"
 msgstr "地图：%s"
 
-#: ../../src/ui_fsmenu/main.cc:340
+#: ../../src/ui_fsmenu/main.cc:342
 #, c-format
 msgid "Win Condition: %s"
 msgstr "胜利条件：%s"
 
-#: ../../src/ui_fsmenu/main.cc:348
+#: ../../src/ui_fsmenu/main.cc:350
 #, c-format
 msgid "Gametime: %s"
 msgstr "游戏时间：%s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. 10:30'
-#: ../../src/ui_fsmenu/main.cc:353
+#: ../../src/ui_fsmenu/main.cc:355
 #, c-format
 msgid "Saved: %s"
 msgstr "保存于：%s"
 
-#: ../../src/ui_fsmenu/main.cc:362
+#: ../../src/ui_fsmenu/main.cc:364
 msgid "Online Game"
 msgstr "在线游戏"
 
-#: ../../src/ui_fsmenu/main.cc:363
+#: ../../src/ui_fsmenu/main.cc:365
 msgid "Join the Widelands lobby"
 msgstr "进入Widelands游戏大厅"
 
-#: ../../src/ui_fsmenu/main.cc:366
+#: ../../src/ui_fsmenu/main.cc:368
 msgid "Log in as a registered user"
 msgstr "登录到注册用户"
 
-#: ../../src/ui_fsmenu/main.cc:368 ../../src/wlapplication_options.cc:240
+#: ../../src/ui_fsmenu/main.cc:370 ../../src/wlapplication_options.cc:240
 msgid "LAN / Direct IP"
 msgstr "局域网/IP直连"
 
-#: ../../src/ui_fsmenu/main.cc:369
+#: ../../src/ui_fsmenu/main.cc:371
 msgid "Play a private online game"
 msgstr "玩一局私人的在线游戏"
 
-#: ../../src/ui_fsmenu/main.cc:372
+#: ../../src/ui_fsmenu/main.cc:374
 msgid "Create a new empty map"
 msgstr "创建一张新的空地图"
 
-#: ../../src/ui_fsmenu/main.cc:375
+#: ../../src/ui_fsmenu/main.cc:377
 msgid "Create a new random map"
 msgstr "创建一张新的随机地图"
 
-#: ../../src/ui_fsmenu/main.cc:377
+#: ../../src/ui_fsmenu/main.cc:379
 msgid "Edit an existing map"
 msgstr "编辑一张现有的地图 "
 
-#: ../../src/ui_fsmenu/main.cc:393 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:395 ../../src/wlapplication_options.cc:218
 msgid "Continue Editing"
 msgstr "继续编辑"
 
-#: ../../src/ui_fsmenu/main.cc:423
+#: ../../src/ui_fsmenu/main.cc:425
 msgid "Single Player…"
 msgstr "单人玩家..."
 
-#: ../../src/ui_fsmenu/main.cc:424
+#: ../../src/ui_fsmenu/main.cc:426
 msgid "Multiplayer…"
 msgstr "多人玩家..."
 
-#: ../../src/ui_fsmenu/main.cc:425
+#: ../../src/ui_fsmenu/main.cc:427
 msgid "Editor…"
 msgstr "编辑器..."
 
-#: ../../src/ui_fsmenu/main.cc:427
+#: ../../src/ui_fsmenu/main.cc:429
 msgid "Begin or load a single-player campaign or free game"
 msgstr "开始或载入单人战役游戏以及自由游戏"
 
-#: ../../src/ui_fsmenu/main.cc:430
+#: ../../src/ui_fsmenu/main.cc:432
 msgid "Play with your friends over the internet"
 msgstr "通过网络和朋友一起游戏"
 
-#: ../../src/ui_fsmenu/main.cc:433
+#: ../../src/ui_fsmenu/main.cc:435
 msgid "Launch the map editor"
 msgstr "启动地图编辑器"
 
-#: ../../src/ui_fsmenu/main.cc:436 ../../src/wlapplication_options.cc:171
+#: ../../src/ui_fsmenu/main.cc:438 ../../src/wlapplication_options.cc:171
 msgid "Watch Replay"
 msgstr "观看回放"
 
-#: ../../src/ui_fsmenu/main.cc:438
+#: ../../src/ui_fsmenu/main.cc:440
 msgid "Watch the replay of an old game"
 msgstr "观看已玩游戏的回放"
 
-#: ../../src/ui_fsmenu/main.cc:441 ../../src/wlapplication_options.cc:236
+#: ../../src/ui_fsmenu/main.cc:443 ../../src/wlapplication_options.cc:236
 msgid "Add-Ons"
 msgstr "附加组件"
 
-#: ../../src/ui_fsmenu/main.cc:443
+#: ../../src/ui_fsmenu/main.cc:445
 msgid "Install and manage add-ons"
 msgstr "安装与管理附件"
 
-#: ../../src/ui_fsmenu/main.cc:445 ../../src/ui_fsmenu/options.cc:89
+#: ../../src/ui_fsmenu/main.cc:447 ../../src/ui_fsmenu/options.cc:89
 #: ../../src/wlapplication_options.cc:253
 msgid "Options"
 msgstr "选项"
 
-#: ../../src/ui_fsmenu/main.cc:447
+#: ../../src/ui_fsmenu/main.cc:449
 msgid "Technical and game-related settings"
 msgstr "技术和游戏相关的设置"
 
-#: ../../src/ui_fsmenu/main.cc:451
+#: ../../src/ui_fsmenu/main.cc:453
 msgid "Readme, License, and Credits"
 msgstr "自述，许可，致谢名单"
 
-#: ../../src/ui_fsmenu/main.cc:453 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:455 ../../src/wlapplication_options.cc:227
 msgid "Exit Widelands"
 msgstr "退出Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:455
+#: ../../src/ui_fsmenu/main.cc:457
 msgid "Quit the game"
 msgstr "离开游戏"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:460
+#: ../../src/ui_fsmenu/main.cc:462
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "版本 %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:463
+#: ../../src/ui_fsmenu/main.cc:465
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C)%1%-%2% Widelands 开发团队。基于GNU  General Public License V2.0 许可。"
 
-#: ../../src/ui_fsmenu/main.cc:796
+#: ../../src/ui_fsmenu/main.cc:798
 msgid "Desyncing Add-On Found"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:797
+#: ../../src/ui_fsmenu/main.cc:799
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:892 ../../src/ui_fsmenu/netsetup_lan.cc:321
+#: ../../src/ui_fsmenu/main.cc:894 ../../src/ui_fsmenu/netsetup_lan.cc:323
 msgid "No tribes found!"
 msgstr "找不到部落！"
 
-#: ../../src/ui_fsmenu/main.cc:893 ../../src/ui_fsmenu/netsetup_lan.cc:322
+#: ../../src/ui_fsmenu/main.cc:895 ../../src/ui_fsmenu/netsetup_lan.cc:324
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
@@ -4677,11 +4691,11 @@ msgstr "官方 & 非官方"
 msgid "Any Teams"
 msgstr "任意团队"
 
-#: ../../src/ui_fsmenu/mapselect.cc:459
+#: ../../src/ui_fsmenu/mapselect.cc:461
 msgid "Balanced & Unbalanced"
 msgstr "平衡的 & 失衡的"
 
-#: ../../src/ui_fsmenu/mapselect.cc:464
+#: ../../src/ui_fsmenu/mapselect.cc:466
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "未指定的"
@@ -4707,74 +4721,74 @@ msgstr "角色"
 msgid "Spectator"
 msgstr "观众"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:170
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:327
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:172
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:329
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:158
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "Type"
 msgstr "类型"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:203
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:205
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:363
 #: ../../src/wui/game_chat_panel.cc:443 ../../src/wui/game_summary.cc:113
 msgid "Team"
 msgstr "小队"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:302
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:303
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:304
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:305
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:184
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:185
 msgid "Random AI"
 msgstr "随机 AI"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:308
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:310
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:312
 msgid "Shared in"
 msgstr "共享给"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:315
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:316
-#: ../../src/ui_fsmenu/netsetup_lan.cc:224
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:317
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:318
+#: ../../src/ui_fsmenu/netsetup_lan.cc:226
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:194
 msgid "Closed"
 msgstr "关闭"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:320
-#: ../../src/ui_fsmenu/netsetup_lan.cc:221
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:322
+#: ../../src/ui_fsmenu/netsetup_lan.cc:223
 msgid "Open"
 msgstr "开放"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:327
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:329
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "Human"
 msgstr "人类"
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:404
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:406
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:88
 #, c-format
 msgid "Shared in Player %u"
 msgstr "共享给玩家 %u"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:467
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:469
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:290
 msgid "Start type is set via the scenario"
 msgstr "起始类型通过场景设置"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:539
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:541
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
 msgid "No Team"
 msgstr "没有团队"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:545
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:547
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:390
 #, c-format
 msgid "Team %d"
 msgstr "团队 %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:645
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:649
 msgid "Clients"
 msgstr "客户端"
 
@@ -4811,27 +4825,27 @@ msgid "State"
 msgstr "状态"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:228
+#: ../../src/ui_fsmenu/netsetup_lan.cc:230
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "不详"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:277
+#: ../../src/ui_fsmenu/netsetup_lan.cc:279
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成，且不能是团队名。"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:298
+#: ../../src/ui_fsmenu/netsetup_lan.cc:300
 msgid "Invalid Address"
 msgstr "无效地址"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:299
+#: ../../src/ui_fsmenu/netsetup_lan.cc:301
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "输入的主机名或地址是无效的，无法进行连接。 "
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:310
-#: ../../src/ui_fsmenu/netsetup_lan.cc:332
+#: ../../src/ui_fsmenu/netsetup_lan.cc:312
+#: ../../src/ui_fsmenu/netsetup_lan.cc:334
 msgid "Network Error"
 msgstr "网络错误"
 
@@ -4904,29 +4918,29 @@ msgid "Write syncstreams in network games to debug desyncs"
 msgstr "在基于网络的游戏中编写同步流来调试desyncs"
 
 #: ../../src/ui_fsmenu/options.cc:247
-#: ../../src/wui/interactive_gamebase.cc:194
+#: ../../src/wui/interactive_gamebase.cc:232
 msgid "Show Census"
 msgstr "显示普查数据"
 
 #: ../../src/ui_fsmenu/options.cc:249
-#: ../../src/wui/interactive_gamebase.cc:203
+#: ../../src/wui/interactive_gamebase.cc:241
 msgid "Show Statistics"
 msgstr "显示统计数据"
 
 #: ../../src/ui_fsmenu/options.cc:251
-#: ../../src/wui/interactive_gamebase.cc:212
+#: ../../src/wui/interactive_gamebase.cc:250
 msgid "Show Soldier Levels"
 msgstr "显示士兵层级"
 
 #: ../../src/ui_fsmenu/options.cc:252
-#: ../../src/wui/interactive_gamebase.cc:221
+#: ../../src/wui/interactive_gamebase.cc:259
 msgid "Show Buildings"
 msgstr "显示建筑"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:254 ../../src/wui/interactive_player.cc:371
+#: ../../src/ui_fsmenu/options.cc:254 ../../src/wui/interactive_player.cc:374
 msgid "Show Workarea Overlaps"
 msgstr "显示叠加的工作区域"
 
@@ -5016,22 +5030,22 @@ msgstr "最大化"
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:567
+#: ../../src/ui_fsmenu/options.cc:569
 msgid "Try system language"
 msgstr "试用系统语言"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:671
+#: ../../src/ui_fsmenu/options.cc:673
 #, c-format
 msgid "The translation into %s is complete."
 msgstr " %s翻译已完成。"
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:674
+#: ../../src/ui_fsmenu/options.cc:676
 msgid "The translation into %1% is %2%%% complete."
 msgstr "%1%翻译已完成%2%%%。"
 
-#: ../../src/ui_fsmenu/options.cc:688
+#: ../../src/ui_fsmenu/options.cc:690
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "如果你想帮助我们翻译，请访问%s"
@@ -5044,11 +5058,11 @@ msgid ""
 "in random matches."
 msgstr ""
 
-#: ../../src/ui_fsmenu/random_game.cc:117
+#: ../../src/ui_fsmenu/random_game.cc:118
 msgid "Map Generation Error"
 msgstr "地图生成错误"
 
-#: ../../src/ui_fsmenu/random_game.cc:118
+#: ../../src/ui_fsmenu/random_game.cc:119
 msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
@@ -5105,7 +5119,7 @@ msgstr "场景名称"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/scenario_select.cc:242
+#: ../../src/ui_fsmenu/scenario_select.cc:263
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
 msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
@@ -5114,18 +5128,18 @@ msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
 msgid "Tutorial"
 msgstr "教程"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "作者"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "作者"
@@ -5149,68 +5163,68 @@ msgstr "教学目标"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
-#: ../../src/ui_fsmenu/training_wheel_options.cc:181
+#: ../../src/ui_fsmenu/training_wheel_options.cc:183
 msgid "Mark All"
 msgstr "标记全部"
 
-#: ../../src/ui_fsmenu/training_wheel_options.cc:181
+#: ../../src/ui_fsmenu/training_wheel_options.cc:183
 msgid "Unmark All"
 msgstr "取消全部"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:740 ../../src/wlapplication.cc:746
-#: ../../src/wlapplication.cc:751 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:748 ../../src/wlapplication.cc:754
+#: ../../src/wlapplication.cc:759 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "错误消息："
 
-#: ../../src/wlapplication.cc:741 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:749 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "游戏数据错误"
 
-#: ../../src/wlapplication.cc:744
+#: ../../src/wlapplication.cc:752
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands 找不到文件 \"%s\"。"
 
-#: ../../src/wlapplication.cc:747
+#: ../../src/wlapplication.cc:755
 msgid "File system error"
 msgstr "文件系统错误"
 
-#: ../../src/wlapplication.cc:1241
+#: ../../src/wlapplication.cc:1248
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1247
+#: ../../src/wlapplication.cc:1254
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1312
+#: ../../src/wlapplication.cc:1319
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1434
+#: ../../src/wlapplication.cc:1441
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1452
+#: ../../src/wlapplication.cc:1459
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1501
+#: ../../src/wlapplication.cc:1508
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1501
+#: ../../src/wlapplication.cc:1508
 msgid "Unexpected error during the game"
 msgstr "游戏中出现意外错误"
 
-#: ../../src/wlapplication.cc:1504
+#: ../../src/wlapplication.cc:1511
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5224,7 +5238,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "游戏时发生错误，错误消息是：\n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息（stdout.txt on Windows）。你正生成%2$s (%3$s)。\n\n请添加此信息到你的报告中。\n\n你希望Widelands尝试创建一个应急游戏存档吗？应急游戏存档通常 – 并不总是 – 可以加载并继续游戏。"
 
-#: ../../src/wlapplication.cc:1514
+#: ../../src/wlapplication.cc:1521
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5234,11 +5248,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1542
+#: ../../src/wlapplication.cc:1548
 msgid "Emergency save failed"
 msgstr "应急保存失败"
 
-#: ../../src/wlapplication.cc:1543
+#: ../../src/wlapplication.cc:1549
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5449,7 +5463,7 @@ msgid "Reset Game Speed"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:505
-#: ../../src/wui/interactive_gamebase.cc:287
+#: ../../src/wui/interactive_gamebase.cc:325
 msgid "Pause"
 msgstr "暂停"
 
@@ -5457,439 +5471,439 @@ msgstr "暂停"
 msgid "Scroll to Starting Field"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:514 ../../src/wui/game_chat_menu.cc:53
-#: ../../src/wui/interactive_gamebase.cc:327
+#: ../../src/wlapplication_options.cc:514 ../../src/wui/game_chat_menu.cc:55
+#: ../../src/wui/interactive_gamebase.cc:365
 msgid "Chat"
 msgstr "聊天"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:518
-#: ../../src/wui/game_main_menu_save_game.cc:53
-#: ../../src/wui/interactive_gamebase.cc:138
+#: ../../src/wui/game_main_menu_save_game.cc:54
+#: ../../src/wui/interactive_gamebase.cc:145
 msgid "Save Game"
 msgstr "保存游戏"
 
-#: ../../src/wlapplication_options.cc:523
+#: ../../src/wlapplication_options.cc:527
 msgid "Messages: Go to Location"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:528
+#: ../../src/wlapplication_options.cc:532
 msgid "Messages: Show "
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:533
+#: ../../src/wlapplication_options.cc:537
 msgid "Messages: Show Geologists’ Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:538
+#: ../../src/wlapplication_options.cc:542
 msgid "Messages: Show Economy Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:543
+#: ../../src/wlapplication_options.cc:547
 msgid "Messages: Show Seafaring Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:548
+#: ../../src/wlapplication_options.cc:552
 msgid "Messages: Show Military Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:553
+#: ../../src/wlapplication_options.cc:557
 msgid "Messages: Show Scenario Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:558
+#: ../../src/wlapplication_options.cc:562
 msgid "Seafaring: Go to Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:563
+#: ../../src/wlapplication_options.cc:567
 msgid "Seafaring: Watch Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:568
+#: ../../src/wlapplication_options.cc:572
 msgid "Seafaring: Open Ship Window"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:573
+#: ../../src/wlapplication_options.cc:577
 msgid "Seafaring: Open Ship Window And Go to Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:578
+#: ../../src/wlapplication_options.cc:582
 msgid "Seafaring: Show All Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:583
+#: ../../src/wlapplication_options.cc:587
 msgid "Seafaring: Show Idle Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:588
+#: ../../src/wlapplication_options.cc:592
 msgid "Seafaring: Show Transport Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:593
+#: ../../src/wlapplication_options.cc:597
 msgid "Seafaring: Show Waiting Expeditions"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:598
+#: ../../src/wlapplication_options.cc:602
 msgid "Seafaring: Show Scouting Expeditions"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:603
+#: ../../src/wlapplication_options.cc:607
 msgid "Seafaring: Show Expeditions with Port Spaces"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:608
+#: ../../src/wlapplication_options.cc:612
 #, c-format
 msgid "Set Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:613
+#: ../../src/wlapplication_options.cc:617
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:753
+#: ../../src/wlapplication_options.cc:757
 msgctxt "hotkey"
 msgid "Space"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:755
+#: ../../src/wlapplication_options.cc:759
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:757
+#: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:759
+#: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:761
+#: ../../src/wlapplication_options.cc:765
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:763
+#: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:765
+#: ../../src/wlapplication_options.cc:769
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:767
+#: ../../src/wlapplication_options.cc:771
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:769
+#: ../../src/wlapplication_options.cc:773
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:771
+#: ../../src/wlapplication_options.cc:775
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:773
+#: ../../src/wlapplication_options.cc:777
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:775
+#: ../../src/wlapplication_options.cc:779
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:777
+#: ../../src/wlapplication_options.cc:781
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:779
+#: ../../src/wlapplication_options.cc:783
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:781
+#: ../../src/wlapplication_options.cc:785
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:783
+#: ../../src/wlapplication_options.cc:787
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:785
+#: ../../src/wlapplication_options.cc:789
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:787
+#: ../../src/wlapplication_options.cc:791
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:789
+#: ../../src/wlapplication_options.cc:793
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:791
+#: ../../src/wlapplication_options.cc:795
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:793
+#: ../../src/wlapplication_options.cc:797
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:795
+#: ../../src/wlapplication_options.cc:799
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:797
+#: ../../src/wlapplication_options.cc:801
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:799
+#: ../../src/wlapplication_options.cc:803
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:801
+#: ../../src/wlapplication_options.cc:805
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:803
+#: ../../src/wlapplication_options.cc:807
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:805
+#: ../../src/wlapplication_options.cc:809
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:807
+#: ../../src/wlapplication_options.cc:811
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:809
+#: ../../src/wlapplication_options.cc:813
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:811
+#: ../../src/wlapplication_options.cc:815
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:813
+#: ../../src/wlapplication_options.cc:817
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:815
+#: ../../src/wlapplication_options.cc:819
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:817
+#: ../../src/wlapplication_options.cc:821
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:819
+#: ../../src/wlapplication_options.cc:823
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:821
+#: ../../src/wlapplication_options.cc:825
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:823
+#: ../../src/wlapplication_options.cc:827
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:833
+#: ../../src/wlapplication_options.cc:837
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:836
+#: ../../src/wlapplication_options.cc:840
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:840
+#: ../../src/wlapplication_options.cc:844
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:842
+#: ../../src/wlapplication_options.cc:846
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:846
+#: ../../src/wlapplication_options.cc:850
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:851
+#: ../../src/wlapplication_options.cc:855
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:186
+#: ../../src/wui/actionconfirm.cc:187
 msgid "Destroy building?"
 msgstr "摧毁建筑？"
 
-#: ../../src/wui/actionconfirm.cc:187
+#: ../../src/wui/actionconfirm.cc:188
 msgid "Do you really want to destroy this building?"
 msgstr "你真的想摧毁这栋建筑吗？ "
 
-#: ../../src/wui/actionconfirm.cc:245
+#: ../../src/wui/actionconfirm.cc:246
 msgid "Dismantle building?"
 msgstr "拆除建筑？"
 
-#: ../../src/wui/actionconfirm.cc:246
+#: ../../src/wui/actionconfirm.cc:247
 msgid "Do you really want to dismantle this building?"
 msgstr "你真的想拆除这栋建筑吗？ "
 
-#: ../../src/wui/actionconfirm.cc:248 ../../src/wui/actionconfirm.cc:307
+#: ../../src/wui/actionconfirm.cc:249 ../../src/wui/actionconfirm.cc:308
 msgid "Preserve wares"
 msgstr "保存物品"
 
-#: ../../src/wui/actionconfirm.cc:250
+#: ../../src/wui/actionconfirm.cc:251
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
 msgstr "建筑者会把留在大楼里的所有物品都扔掉，从而延长拆卸时间"
 
-#: ../../src/wui/actionconfirm.cc:299
+#: ../../src/wui/actionconfirm.cc:300
 msgid "Enhance building?"
 msgstr "升级建筑？"
 
-#: ../../src/wui/actionconfirm.cc:301 ../../src/wui/actionconfirm.cc:305
+#: ../../src/wui/actionconfirm.cc:302 ../../src/wui/actionconfirm.cc:306
 msgid "Do you really want to enhance this building?"
 msgstr "你真的想把这栋建筑升级吗？ "
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:303
+#: ../../src/wui/actionconfirm.cc:304
 msgid "Be careful if the enemy is near!"
 msgstr "敌人在附近的时候一定要小心！"
 
-#: ../../src/wui/actionconfirm.cc:311
+#: ../../src/wui/actionconfirm.cc:312
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
 msgstr "建筑者会把留在大楼里的所有物品都扔掉，从而延长升级时间"
 
-#: ../../src/wui/actionconfirm.cc:361
+#: ../../src/wui/actionconfirm.cc:362
 msgid "Sink the ship?"
 msgstr "沉掉这艘船？"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:363
+#: ../../src/wui/actionconfirm.cc:364
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "你真的想沉掉%s吗？"
 
-#: ../../src/wui/actionconfirm.cc:400
+#: ../../src/wui/actionconfirm.cc:401
 msgid "Cancel expedition?"
 msgstr "取消探险？"
 
-#: ../../src/wui/actionconfirm.cc:401
+#: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to cancel the active expedition?"
 msgstr "你真的想放弃已激活的探险？"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
-#: ../../src/wui/attack_box.cc:113 ../../src/wui/constructionsitewindow.cc:466
-#: ../../src/wui/constructionsitewindow.cc:478
+#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:468
+#: ../../src/wui/constructionsitewindow.cc:480
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u个士兵"
 
-#: ../../src/wui/attack_box.cc:196
+#: ../../src/wui/attack_box.cc:201
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
 msgstr "少派些士兵。按住Ctrl键不派遣士兵 "
 
-#: ../../src/wui/attack_box.cc:205
+#: ../../src/wui/attack_box.cc:210
 msgid "Number of soldiers"
 msgstr "士兵人数"
 
-#: ../../src/wui/attack_box.cc:210
+#: ../../src/wui/attack_box.cc:215
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "多派些士兵。按住Ctrl键派遣尽可能多的士兵"
 
-#: ../../src/wui/attack_box.cc:215
+#: ../../src/wui/attack_box.cc:220
 msgid "Start attack"
 msgstr "发动攻击"
 
-#: ../../src/wui/attack_box.cc:229
+#: ../../src/wui/attack_box.cc:234
 msgid "Attackers:"
 msgstr "攻击者："
 
-#: ../../src/wui/attack_box.cc:235
+#: ../../src/wui/attack_box.cc:240
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr "点击一名士兵，将其从攻击者名单中删除 "
 
-#: ../../src/wui/attack_box.cc:237
+#: ../../src/wui/attack_box.cc:242
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr "按住Ctrl键从列表中删除所有士兵"
 
-#: ../../src/wui/attack_box.cc:238
+#: ../../src/wui/attack_box.cc:243
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "按住Shift键将所有士兵移动到你所指的位置"
 
-#: ../../src/wui/attack_box.cc:246
+#: ../../src/wui/attack_box.cc:251
 msgid "Not attacking:"
 msgstr "不攻击："
 
-#: ../../src/wui/attack_box.cc:251
+#: ../../src/wui/attack_box.cc:256
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr "点击一名士兵，将他添加到攻击者名单中"
 
-#: ../../src/wui/attack_box.cc:253
+#: ../../src/wui/attack_box.cc:258
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr "按住Ctrl键将所有士兵添加到列表中"
 
-#: ../../src/wui/attack_box.cc:254
+#: ../../src/wui/attack_box.cc:259
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr "按住Shift键，将所有士兵添加到你所指的位置"
 
-#: ../../src/wui/attack_box.cc:263
+#: ../../src/wui/attack_box.cc:268
 msgid "Destroy target"
 msgstr "摧毁目标"
 
-#: ../../src/wui/attack_box.cc:264
+#: ../../src/wui/attack_box.cc:269
 msgid "Destroy the target building instead of conquering it"
 msgstr "摧毁目标建筑而不是征服它"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_box.cc:353 ../../src/wui/soldierlist.cc:403
-#: ../../src/wui/soldierlist.cc:466
+#: ../../src/wui/attack_box.cc:358 ../../src/wui/soldierlist.cc:413
+#: ../../src/wui/soldierlist.cc:476
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "健康：%1$u/%2$u 攻击：%3$u/%4$u 防御：%5$u/%6$u  闪避：%7$u/%8$u"
@@ -5948,99 +5962,99 @@ msgstr "矿"
 msgid "Ports"
 msgstr "港口"
 
-#: ../../src/wui/building_statistics_menu.cc:701
+#: ../../src/wui/building_statistics_menu.cc:703
 msgid "Low productivity:"
 msgstr "低生产率："
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:711
-#: ../../src/wui/building_statistics_menu.cc:731
+#. * TRANSLATORS: Buildings: owned / under construction
+#: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:733
-#: ../../src/wui/productionsitewindow.cc:227
+#: ../../src/wui/building_statistics_menu.cc:735
+#: ../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:722
+#: ../../src/wui/building_statistics_menu.cc:724
 msgid "Lacking soldiers:"
 msgstr "缺少士兵："
 
-#: ../../src/wui/buildingwindow.cc:195
+#: ../../src/wui/buildingwindow.cc:200
 msgid "Muted – click to unmute"
 msgstr "静音–单击取消静音"
 
-#: ../../src/wui/buildingwindow.cc:196
+#: ../../src/wui/buildingwindow.cc:201
 msgid "Mute this building’s messages"
 msgstr "把这栋建筑的信息调整为静默状态"
 
-#: ../../src/wui/buildingwindow.cc:201
+#: ../../src/wui/buildingwindow.cc:206
 msgid "All buildings of this type are muted – click to unmute"
 msgstr "此类型的所有建筑都已调整为静默状态 – 单击取消静默"
 
-#: ../../src/wui/buildingwindow.cc:205
+#: ../../src/wui/buildingwindow.cc:210
 msgid "Mute all buildings of this type"
 msgstr "将所有此类建筑调整为静默状态"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:269
+#: ../../src/wui/buildingwindow.cc:274
 msgid "Continue"
 msgstr "继续"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:271
+#: ../../src/wui/buildingwindow.cc:276
 msgid "Stop"
 msgstr "停止"
 
-#: ../../src/wui/buildingwindow.cc:293
+#: ../../src/wui/buildingwindow.cc:298
 #, c-format
 msgid "Enhance to %s"
 msgstr "升级至 %s"
 
-#: ../../src/wui/buildingwindow.cc:297 ../../src/wui/fieldaction.cc:101
+#: ../../src/wui/buildingwindow.cc:302 ../../src/wui/fieldaction.cc:101
 msgid "Construction costs:"
 msgstr "建设成本："
 
-#: ../../src/wui/buildingwindow.cc:315
+#: ../../src/wui/buildingwindow.cc:320
 msgid "Destroy"
 msgstr "摧毁"
 
-#: ../../src/wui/buildingwindow.cc:330
+#: ../../src/wui/buildingwindow.cc:335
 msgid "Dismantle"
 msgstr "拆除"
 
-#: ../../src/wui/buildingwindow.cc:333
+#: ../../src/wui/buildingwindow.cc:338
 msgid "Returns:"
 msgstr "可回收："
 
-#: ../../src/wui/buildingwindow.cc:385 ../../src/wui/fieldaction.cc:522
+#: ../../src/wui/buildingwindow.cc:390 ../../src/wui/fieldaction.cc:524
 #: ../../src/wui/shipwindow.cc:141
 msgid "Show Debug Window"
 msgstr "显示调试窗口"
 
-#: ../../src/wui/buildingwindow.cc:394
+#: ../../src/wui/buildingwindow.cc:399
 msgid "Watch the scout"
 msgstr "观察侦察兵"
 
-#: ../../src/wui/buildingwindow.cc:401
+#: ../../src/wui/buildingwindow.cc:406
 msgid "Center view on this"
 msgstr "以此为视角中心"
 
-#: ../../src/wui/buildingwindow.cc:632
+#: ../../src/wui/buildingwindow.cc:637
 msgid "Hide work area"
 msgstr "隐藏工作区域"
 
-#: ../../src/wui/buildingwindow.cc:635
+#: ../../src/wui/buildingwindow.cc:640
 msgid "Show work area"
 msgstr "显示工作区域"
 
-#: ../../src/wui/buildingwindow.cc:660
+#: ../../src/wui/buildingwindow.cc:665
 #: ../../src/wui/constructionsitewindow.cc:374
 msgid "Start an expedition"
 msgstr "启动一次探险"
 
-#: ../../src/wui/buildingwindow.cc:664
+#: ../../src/wui/buildingwindow.cc:669
 msgid "Cancel the expedition"
 msgstr "取消探险"
 
@@ -6072,12 +6086,12 @@ msgid "Stop this building’s work after completion"
 msgstr "完工后停止这栋建筑的工作"
 
 #: ../../src/wui/constructionsitewindow.cc:300
-#: ../../src/wui/soldierlist.cc:422
+#: ../../src/wui/soldierlist.cc:432
 msgid "Prefer heroes"
 msgstr "较喜欢英雄"
 
 #: ../../src/wui/constructionsitewindow.cc:303
-#: ../../src/wui/soldierlist.cc:419
+#: ../../src/wui/soldierlist.cc:429
 msgid "Prefer rookies"
 msgstr "较喜欢新手"
 
@@ -6150,43 +6164,43 @@ msgid "Save target settings"
 msgstr "保存目标设置"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../src/wui/economy_options_window.cc:299
+#: ../../src/wui/economy_options_window.cc:302
 msgid "∞"
 msgstr "无尽"
 
-#: ../../src/wui/economy_options_window.cc:562
+#: ../../src/wui/economy_options_window.cc:565
 msgid "The profile name cannot be empty"
 msgstr "概述文件名不能为空"
 
-#: ../../src/wui/economy_options_window.cc:563
+#: ../../src/wui/economy_options_window.cc:566
 msgid "The default profile cannot be overwritten"
 msgstr "默认的概述文件不能被覆盖"
 
-#: ../../src/wui/economy_options_window.cc:566
+#: ../../src/wui/economy_options_window.cc:569
 msgid "Save the profile under this name"
 msgstr "使用这个名字保存概述文件"
 
-#: ../../src/wui/economy_options_window.cc:578
+#: ../../src/wui/economy_options_window.cc:581
 msgid "The predefined profiles cannot be deleted"
 msgstr "预定义的概述文件不能被删除"
 
-#: ../../src/wui/economy_options_window.cc:581
+#: ../../src/wui/economy_options_window.cc:584
 msgid "Delete the selected profiles"
 msgstr "删除选中的概述文件"
 
-#: ../../src/wui/economy_options_window.cc:603
+#: ../../src/wui/economy_options_window.cc:606
 msgid "Overwrite?"
 msgstr "覆盖？"
 
-#: ../../src/wui/economy_options_window.cc:604
+#: ../../src/wui/economy_options_window.cc:607
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "同名的概述文件已存在。你想覆盖它吗？"
 
-#: ../../src/wui/economy_options_window.cc:654
+#: ../../src/wui/economy_options_window.cc:657
 msgid "Save Profile"
 msgstr "保存概述文件"
 
-#: ../../src/wui/economy_options_window.cc:664
+#: ../../src/wui/economy_options_window.cc:667
 msgid "Existing Profiles"
 msgstr "现有的概述文件"
 
@@ -6210,109 +6224,109 @@ msgstr "建造港口建筑"
 msgid "Action"
 msgstr "行动"
 
-#: ../../src/wui/fieldaction.cc:393
+#: ../../src/wui/fieldaction.cc:395
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "已标记为由工作人员移除 – 单击取消标记"
 
-#: ../../src/wui/fieldaction.cc:394 ../../src/wui/fieldaction.cc:401
+#: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
 msgid "Immovable Actions"
 msgstr "不可移动的操作"
 
-#: ../../src/wui/fieldaction.cc:400
+#: ../../src/wui/fieldaction.cc:402
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "标记此固定物，以便由合适的工人及时移除"
 
-#: ../../src/wui/fieldaction.cc:421 ../../src/wui/fieldaction.cc:527
+#: ../../src/wui/fieldaction.cc:423 ../../src/wui/fieldaction.cc:529
 msgid "Build road"
 msgstr "修路"
 
-#: ../../src/wui/fieldaction.cc:425
+#: ../../src/wui/fieldaction.cc:427
 msgid "Build waterway"
 msgstr "修建水道"
 
-#: ../../src/wui/fieldaction.cc:432
+#: ../../src/wui/fieldaction.cc:434
 msgid "Destroy this flag"
 msgstr "摧毁这面旗帜"
 
-#: ../../src/wui/fieldaction.cc:439
+#: ../../src/wui/fieldaction.cc:441
 msgid "Configure this flag’s economy"
 msgstr "配置此旗帜的经济"
 
-#: ../../src/wui/fieldaction.cc:442
+#: ../../src/wui/fieldaction.cc:444
 msgid "Send geologist to explore site"
 msgstr "派遣地质专家前去现场踏勘"
 
-#: ../../src/wui/fieldaction.cc:448 ../../src/wui/fieldaction.cc:468
+#: ../../src/wui/fieldaction.cc:450 ../../src/wui/fieldaction.cc:470
 msgid "Send scout to explore surroundings"
 msgstr "派遣侦察兵前去探索周围的环境"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../src/wui/fieldaction.cc:460
+#: ../../src/wui/fieldaction.cc:462
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:489
+#: ../../src/wui/fieldaction.cc:491
 msgid "Place a flag"
 msgstr "插一面旗帜"
 
-#: ../../src/wui/fieldaction.cc:494
+#: ../../src/wui/fieldaction.cc:496
 msgid "Destroy a road"
 msgstr "摧毁一条路"
 
-#: ../../src/wui/fieldaction.cc:499
+#: ../../src/wui/fieldaction.cc:501
 msgid "Destroy a waterway"
 msgstr "摧毁一条水道"
 
-#: ../../src/wui/fieldaction.cc:517
+#: ../../src/wui/fieldaction.cc:519
 msgid "Watch field in a separate window"
 msgstr "在单独的窗口中查看该区域"
 
-#: ../../src/wui/fieldaction.cc:530 ../../src/wui/watchwindow.cc:49
+#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:49
 msgid "Watch"
 msgstr "观察"
 
-#: ../../src/wui/fieldaction.cc:551
+#: ../../src/wui/fieldaction.cc:553
 msgid "Attack"
 msgstr "攻击"
 
-#: ../../src/wui/fieldaction.cc:668
+#: ../../src/wui/fieldaction.cc:670
 msgid "Build mines"
 msgstr "修建矿井"
 
-#: ../../src/wui/fieldaction.cc:682 ../../src/wui/fieldaction.cc:705
+#: ../../src/wui/fieldaction.cc:684 ../../src/wui/fieldaction.cc:707
 msgid "Build flag"
 msgstr "建造旗帜"
 
-#: ../../src/wui/fieldaction.cc:686
+#: ../../src/wui/fieldaction.cc:688
 msgid "Cancel road"
 msgstr "取消路段"
 
-#: ../../src/wui/fieldaction.cc:693
+#: ../../src/wui/fieldaction.cc:695
 msgid "Cancel road and start building waterway"
 msgstr "取消路段并开始修建水道"
 
-#: ../../src/wui/fieldaction.cc:697
+#: ../../src/wui/fieldaction.cc:699
 msgid "Build roads"
 msgstr "修路"
 
-#: ../../src/wui/fieldaction.cc:709
+#: ../../src/wui/fieldaction.cc:711
 msgid "Cancel waterway"
 msgstr "取消水道"
 
-#: ../../src/wui/fieldaction.cc:712
+#: ../../src/wui/fieldaction.cc:714
 msgid "Cancel waterway and start building road"
 msgstr "取消水道并开始修路"
 
-#: ../../src/wui/fieldaction.cc:715
+#: ../../src/wui/fieldaction.cc:717
 msgid "Build waterways"
 msgstr "修建水道"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/game_chat_menu.cc:60
-#: ../../src/wui/interactive_gamebase.cc:119
+#: ../../src/wui/game_chat_menu.cc:62
+#: ../../src/wui/interactive_gamebase.cc:126
 msgid "Script Console"
 msgstr "脚本控制台"
 
@@ -6360,7 +6374,7 @@ msgstr "断开连接的游戏玩家的AI"
 #. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
-#: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:144
+#: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
 msgstr "退出游戏"
 
@@ -6373,34 +6387,34 @@ msgstr "使用%s替换游戏玩家"
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
-#: ../../src/wui/game_debug_ui.cc:134
+#: ../../src/wui/game_debug_ui.cc:136
 msgid "Debug Field"
 msgstr "调试区域"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_exit_confirm_box.cc:29
+#: ../../src/wui/game_exit_confirm_box.cc:28
 msgid "Exit Game Confirmation"
 msgstr "确认退出游戏"
 
-#: ../../src/wui/game_exit_confirm_box.cc:30
+#: ../../src/wui/game_exit_confirm_box.cc:29
 msgid "Are you sure you wish to exit this game?"
 msgstr "你真的想退出这局游戏吗？"
 
-#: ../../src/wui/game_main_menu_save_game.cc:252
-#: ../../src/wui/game_main_menu_save_game.cc:288
+#: ../../src/wui/game_main_menu_save_game.cc:272
+#: ../../src/wui/game_main_menu_save_game.cc:312
 msgid "Error Saving Game!"
 msgstr "游戏保存错误！"
 
 #: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:599
+#: ../../src/wui/game_message_menu.cc:602
 msgid "Messages: Inbox"
 msgstr "消息：收件箱"
 
-#: ../../src/wui/game_message_menu.cc:70
+#: ../../src/wui/game_message_menu.cc:68
 msgid "Title"
 msgstr "标题"
 
-#: ../../src/wui/game_message_menu.cc:71
+#: ../../src/wui/game_message_menu.cc:69
 msgctxt "message"
 msgid "Type"
 msgstr "类型"
@@ -6411,56 +6425,56 @@ msgstr "类型"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
 #. issue if you need more
 #. * space.
-#: ../../src/wui/game_message_menu.cc:77
+#: ../../src/wui/game_message_menu.cc:75
 msgctxt "message"
 msgid "Sent"
 msgstr "发送"
 
-#: ../../src/wui/game_message_menu.cc:127
-#: ../../src/wui/game_message_menu.cc:602
+#: ../../src/wui/game_message_menu.cc:114
+#: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
 msgstr "显示存档"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:136
+#: ../../src/wui/game_message_menu.cc:122
 msgid "Center main mapview on location"
 msgstr "在位置上居中显示主地图视图"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:526
+#: ../../src/wui/game_message_menu.cc:529
 msgid "Show all messages"
 msgstr "显示所有的消息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:540
 msgid "Show geologists’ messages only"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:545
 msgid "Show economy messages only"
 msgstr "仅显示经济信息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:549
 msgid "Show seafaring messages only"
 msgstr "仅显示航海信息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/game_message_menu.cc:553
 msgid "Show warfare messages only"
 msgstr "仅显示战争信息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:554
+#: ../../src/wui/game_message_menu.cc:557
 msgid "Show scenario messages only"
 msgstr "仅显示场景信息"
 
-#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:595
 msgid "Messages: Archive"
 msgstr "消息：存档"
 
-#: ../../src/wui/game_message_menu.cc:595
+#: ../../src/wui/game_message_menu.cc:598
 msgid "Show Inbox"
 msgstr "显示收件箱"
 
@@ -6468,14 +6482,14 @@ msgstr "显示收件箱"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:625
+#: ../../src/wui/game_message_menu.cc:628
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "还原选中的%d消息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:631
+#: ../../src/wui/game_message_menu.cc:634
 msgid "Restore selected message"
 msgstr "还原所选消息"
 
@@ -6483,20 +6497,20 @@ msgstr "还原所选消息"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:641
+#: ../../src/wui/game_message_menu.cc:644
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "存档选中的%d消息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:647
+#: ../../src/wui/game_message_menu.cc:650
 msgid "Archive selected message"
 msgstr "存档所选消息"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_options_sound_menu.cc:35
-#: ../../src/wui/interactive_gamebase.cc:129
+#: ../../src/wui/interactive_gamebase.cc:136
 msgid "Sound Options"
 msgstr "声音选项"
 
@@ -6522,51 +6536,51 @@ msgstr "时间"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:217
+#: ../../src/wui/game_summary.cc:219
 msgid "Lost"
 msgstr "失败"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:221
+#: ../../src/wui/game_summary.cc:223
 msgid "Won"
 msgstr "获胜"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:230
+#: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
 msgstr "辞职"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:235
+#: ../../src/wui/game_summary.cc:237
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../../src/wui/game_summary.cc:245
+#: ../../src/wui/game_summary.cc:247
 msgid "You won!"
 msgstr "你赢了！"
 
-#: ../../src/wui/game_summary.cc:247
+#: ../../src/wui/game_summary.cc:249
 msgid "You lost."
 msgstr "你输了。"
 
-#: ../../src/wui/game_summary.cc:251
+#: ../../src/wui/game_summary.cc:253
 #, c-format
 msgid "%s won!"
 msgstr "%s胜利！"
 
-#: ../../src/wui/game_summary.cc:254
+#: ../../src/wui/game_summary.cc:256
 msgid "Team %|1$u| won!"
 msgstr "团队%|1$u|胜利！"
 
-#: ../../src/wui/game_summary.cc:306
+#: ../../src/wui/game_summary.cc:308
 msgid "Score"
 msgstr "得分"
 
-#: ../../src/wui/game_summary.cc:308
+#: ../../src/wui/game_summary.cc:310
 msgid "Team Score"
 msgstr "团队得分"
 
@@ -6652,39 +6666,39 @@ msgstr "民用建筑损失"
 msgid "Military"
 msgstr "军事"
 
-#: ../../src/wui/info_panel.cc:145
+#: ../../src/wui/info_panel.cc:146
 msgid "Info Panel Visibility"
 msgstr "信息面板可见性"
 
-#: ../../src/wui/info_panel.cc:199
+#: ../../src/wui/info_panel.cc:200
 msgid "Follow mouse"
 msgstr "跟随鼠标"
 
-#: ../../src/wui/info_panel.cc:204
+#: ../../src/wui/info_panel.cc:205
 msgid "Hide"
 msgstr "隐藏"
 
-#: ../../src/wui/info_panel.cc:209
+#: ../../src/wui/info_panel.cc:210
 msgid "Move panel to bottom"
 msgstr "将面板移至底部"
 
-#: ../../src/wui/info_panel.cc:209
+#: ../../src/wui/info_panel.cc:210
 msgid "Move panel to top"
 msgstr "将面板移至顶部"
 
-#: ../../src/wui/info_panel.cc:385
+#: ../../src/wui/info_panel.cc:389
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:435
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:439
+#: ../../src/wui/info_panel.cc:443
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s · %2$s · %3$s"
@@ -6751,161 +6765,171 @@ msgstr "移除物品"
 msgid "Add ware"
 msgstr "添加物品"
 
-#: ../../src/wui/inputqueuedisplay.cc:532
+#: ../../src/wui/inputqueuedisplay.cc:549
 msgid "Hide controls"
 msgstr "隐藏控件"
 
-#: ../../src/wui/inputqueuedisplay.cc:532
+#: ../../src/wui/inputqueuedisplay.cc:549
 msgid "Show controls"
 msgstr "显示控件"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:119
+#: ../../src/wui/interactive_base.cc:120
 msgid "Map View"
 msgstr "地图视图"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:262
+#: ../../src/wui/interactive_base.cc:270
 msgid "Hide Minimap"
 msgstr "隐藏迷你地图"
 
-#: ../../src/wui/interactive_base.cc:262
+#: ../../src/wui/interactive_base.cc:270
 msgid "Show Minimap"
 msgstr "显示迷你地图"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:268
+#: ../../src/wui/interactive_base.cc:276
 msgid "Zoom +"
 msgstr "放大"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:273
+#: ../../src/wui/interactive_base.cc:281
 msgid "Reset zoom"
 msgstr "重置缩放"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:278
+#: ../../src/wui/interactive_base.cc:286
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:711
+#: ../../src/wui/interactive_base.cc:732
 #, c-format
 msgid "Road length: %u"
 msgstr "道路的长度：%u"
 
-#: ../../src/wui/interactive_base.cc:712
+#: ../../src/wui/interactive_base.cc:733
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "水道的长度：%1$u/%2$u"
 
-#: ../../src/wui/interactive_gamebase.cc:53
+#: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
 msgstr "暂停"
 
-#: ../../src/wui/interactive_gamebase.cc:90
+#: ../../src/wui/interactive_gamebase.cc:91
 msgctxt "hotkey"
 msgid "Esc"
 msgstr "Esc键"
 
 #. * TRANSLATORS: Title for a menu button in the game. This menu will show
 #. options o increase/decrease the gamespeed, and to pause the game
-#: ../../src/wui/interactive_gamebase.cc:104
+#: ../../src/wui/interactive_gamebase.cc:105
 msgid "Game Speed"
 msgstr "游戏速度"
 
 #. * TRANSLATORS: Tooltip for Script Console in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:122
+#: ../../src/wui/interactive_gamebase.cc:129
 msgctxt "hotkey"
 msgid "Ctrl+Shift+Space"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:132
+#: ../../src/wui/interactive_gamebase.cc:139
 msgid "Set sound effect and music options"
 msgstr "设置音效和音乐选项"
 
+#. * TRANSLATORS: An entry in the game's main menu
+#: ../../src/wui/interactive_gamebase.cc:161
+#: ../../src/wui/interactive_gamebase.cc:189
+msgid "Restart Scenario"
+msgstr ""
+
+#: ../../src/wui/interactive_gamebase.cc:190
+msgid "Are you sure you wish to restart this scenario?"
+msgstr ""
+
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
-#: ../../src/wui/interactive_gamebase.cc:194
+#: ../../src/wui/interactive_gamebase.cc:232
 msgid "Hide Census"
 msgstr "隐藏普查数据"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building statistics are shown
-#: ../../src/wui/interactive_gamebase.cc:202
+#: ../../src/wui/interactive_gamebase.cc:240
 msgid "Hide Statistics"
 msgstr "隐藏统计数据"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
-#: ../../src/wui/interactive_gamebase.cc:211
+#: ../../src/wui/interactive_gamebase.cc:249
 msgid "Hide Soldier Levels"
 msgstr "隐藏士兵层级"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * buildings are greyed out
-#: ../../src/wui/interactive_gamebase.cc:220
+#: ../../src/wui/interactive_gamebase.cc:258
 msgid "Hide Buildings"
 msgstr "隐藏建筑"
 
-#: ../../src/wui/interactive_gamebase.cc:267
+#: ../../src/wui/interactive_gamebase.cc:305
 msgid "Speed +"
 msgstr "速度 +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:270
+#: ../../src/wui/interactive_gamebase.cc:308
 msgid "Increase the game speed"
 msgstr "加快游戏速度"
 
-#: ../../src/wui/interactive_gamebase.cc:273
+#: ../../src/wui/interactive_gamebase.cc:311
 msgid "Speed -"
 msgstr "速度 -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:276
+#: ../../src/wui/interactive_gamebase.cc:314
 msgid "Decrease the game speed"
 msgstr "减慢游戏速度"
 
-#: ../../src/wui/interactive_gamebase.cc:281
+#: ../../src/wui/interactive_gamebase.cc:319
 msgid "Resume"
 msgstr "重新开始"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:284
+#: ../../src/wui/interactive_gamebase.cc:322
 msgid "Resume the Game"
 msgstr "重新开始游戏"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:290
+#: ../../src/wui/interactive_gamebase.cc:328
 msgid "Pause the Game"
 msgstr "暂停游戏"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:489
+#: ../../src/wui/interactive_gamebase.cc:532
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s(%2$s)"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:179
+#: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "统计"
 
 #. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:299 ../../src/wui/map_tags.cc:38
+#: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "航海"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:305
+#: ../../src/wui/interactive_player.cc:308
 #: ../../src/wui/militarysitewindow.cc:41
 msgid "Soldiers"
 msgstr "士兵"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:310 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:153 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "存货"
@@ -6913,41 +6937,41 @@ msgstr "存货"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:368
+#: ../../src/wui/interactive_player.cc:371
 msgid "Hide Workarea Overlaps"
 msgstr "隐藏工作区重叠"
 
-#: ../../src/wui/interactive_player.cc:374
+#: ../../src/wui/interactive_player.cc:377
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "放置建筑场所时是否切换标识重叠的部分的工作区域"
 
-#: ../../src/wui/interactive_player.cc:454
+#: ../../src/wui/interactive_player.cc:459
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u新消息"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../src/wui/load_or_save_game.cc:152
+#: ../../src/wui/load_or_save_game.cc:153
 msgid "Delete this replay"
 msgstr "删除此回放"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../src/wui/load_or_save_game.cc:154
+#: ../../src/wui/load_or_save_game.cc:155
 msgid "Delete this game"
 msgstr "删除游戏"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../src/wui/load_or_save_game.cc:159
+#: ../../src/wui/load_or_save_game.cc:160
 msgid "Delete these replays"
 msgstr "删除这些回放"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../src/wui/load_or_save_game.cc:162
+#: ../../src/wui/load_or_save_game.cc:163
 msgid "Delete these games"
 msgstr "删除这些游戏"
 
@@ -7173,12 +7197,12 @@ msgstr "以1为单位增加经验"
 msgid "Terminate the employment of the selected worker"
 msgstr "终止与选中工人的雇佣关系"
 
-#: ../../src/wui/productionsitewindow.cc:240
+#: ../../src/wui/productionsitewindow.cc:246
 msgid "(coming)"
 msgstr "(来了)"
 
-#: ../../src/wui/productionsitewindow.cc:240
-#: ../../src/wui/productionsitewindow.cc:302
+#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:308
 msgid "(vacant)"
 msgstr "(空闲)"
 
@@ -7444,32 +7468,32 @@ msgid "Status"
 msgstr "状态"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:499
+#: ../../src/wui/seafaring_statistics_menu.cc:501
 msgid "Show all ships"
 msgstr "显示所有的船只"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:508
+#: ../../src/wui/seafaring_statistics_menu.cc:510
 msgid "Show empty ships"
 msgstr "显示空船只"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:512
+#: ../../src/wui/seafaring_statistics_menu.cc:514
 msgid "Show ships shipping wares and workers"
 msgstr "显示运送物品和工人的船只"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:517
+#: ../../src/wui/seafaring_statistics_menu.cc:519
 msgid "Show waiting expeditions"
 msgstr "显示等待探险的"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:522
+#: ../../src/wui/seafaring_statistics_menu.cc:524
 msgid "Show scouting expeditions"
 msgstr "显示侦察探险的"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:527
+#: ../../src/wui/seafaring_statistics_menu.cc:529
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "显示已经找到港口空间或是正在建立殖民地的探险队"
 
@@ -7526,11 +7550,11 @@ msgid "Go to ship"
 msgstr "前往船只"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:214
+#: ../../src/wui/shipwindow.cc:215
 msgid "Cancel Expedition"
 msgstr "取消探险"
 
-#: ../../src/wui/shipwindow.cc:215
+#: ../../src/wui/shipwindow.cc:216
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
@@ -7568,10 +7592,10 @@ msgstr "纵览"
 msgid "By Attribute"
 msgstr "按属性"
 
-#: ../../src/wui/soldier_statistics_menu.cc:216
-#: ../../src/wui/soldier_statistics_menu.cc:222
-#: ../../src/wui/soldier_statistics_menu.cc:228
-#: ../../src/wui/soldier_statistics_menu.cc:234
+#: ../../src/wui/soldier_statistics_menu.cc:218
+#: ../../src/wui/soldier_statistics_menu.cc:224
+#: ../../src/wui/soldier_statistics_menu.cc:230
+#: ../../src/wui/soldier_statistics_menu.cc:236
 #, c-format
 msgid "×%u"
 msgstr "×%u"
@@ -7580,8 +7604,8 @@ msgstr "×%u"
 msgid "Capacity"
 msgstr "容量"
 
-#: ../../src/wui/soldierlist.cc:387 ../../src/wui/soldierlist.cc:409
-#: ../../src/wui/soldierlist.cc:461
+#: ../../src/wui/soldierlist.cc:397 ../../src/wui/soldierlist.cc:419
+#: ../../src/wui/soldierlist.cc:471
 msgid "Click soldier to send away"
 msgstr "点击送走士兵"
 
@@ -7673,6 +7697,18 @@ msgstr "仓库中的物品"
 #: ../../src/wui/stock_menu.cc:83
 msgid "Workers in warehouses"
 msgstr "仓库中的劳动者"
+
+#: ../../src/wui/story_message_box.cc:63
+msgid "Next Mission"
+msgstr ""
+
+#: ../../src/wui/story_message_box.cc:64
+msgid "Start the next mission now"
+msgstr ""
+
+#: ../../src/wui/story_message_box.cc:109
+msgid "Continue playing this mission"
+msgstr ""
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:85

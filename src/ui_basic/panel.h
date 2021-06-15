@@ -319,6 +319,9 @@ public:
 
 	static void logic_thread();
 
+	// Internal notification to reduce an active mutex lock's scope.
+	void clear_current_think_mutex();
+
 	/*
 	 * Every panel that is semantically a toplevel panel needs to call
 	 * this at least once, ideally near the end of the most derived class's
@@ -515,6 +518,7 @@ private:
 	void handle_notes();
 	std::list<NoteThreadSafeFunction> notes_;
 	std::set<uint32_t> handled_notes_;
+	std::unique_ptr<MutexLock> current_think_mutex_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
