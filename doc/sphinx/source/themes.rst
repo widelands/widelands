@@ -38,6 +38,7 @@ A theme's directory needs to use the following directory structure:
     * loadscreens/
         * logo.png
         * gametips.png
+        * ending.png
         * splash.jpg
         * editor.png
         * mainmenu/
@@ -72,6 +73,10 @@ Required Files
 
 **loadscreens/gametips.png**
     Will be used as background for the tips shown while starting or loading a game.
+
+**loadscreens/ending.png**
+    Will be tiled across the screen during a lengthy operation to indicate that user input is blocked.
+    Introduced in version 1.1.
 
 **loadscreens/splash.png**
     The splash screen shown when starting Widelands.

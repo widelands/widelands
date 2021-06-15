@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-05-30 14:05+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -257,7 +257,7 @@ msgstr "Már közel az otthon"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Thron aggódónak tűnik…"
 
@@ -278,7 +278,7 @@ msgstr "Most az öreg erdő peremén pihenünk, és felkészülünk az elkövetk
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Egy újabb hideg nap"
 
@@ -354,7 +354,7 @@ msgstr "Erőink arcvonala kitolódott az erdő szélére. Magunk mögött hagytu
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Thron:"
 
@@ -579,7 +579,7 @@ msgid ""
 msgstr "Geológusaink rengeteg további tartalékot találtak vasércből, szénből, sőt aranyércből is. Amint bányászaink tapasztaltabbak lesznek, tovább kell fejlesztenünk meglévő bányáinkat. További bányákat is kell építenünk, kibővítenünk az élelemtermelő gazdaságunkat, hogy mindig jusson embereinknek elegendő étel, és bővítenünk kell a feldolgozó gazdaságunkat is. És ez még mindig nem minden – legtöbb katonánk igen fiatal, és sem jó fegyverük, sem jó kiképzésük nincs. Kiképzőhelyeket kell létesítenünk, hogy felkészíthessük őket leendő feladataikra."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -588,7 +588,7 @@ msgid ""
 msgstr "Fivéreim és katonáik halottak, és csak lángok és pusztulás maradt nyomukban. Sehol a romok között nem találtam egy férfit vagy nőt a régiek közül, így csak remélhetem, hogy elmenekültek erről a kegyetlen harcmezőről, és új életet kezdtek valahol máshol."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -598,22 +598,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Semmi sem maradt abból a szépségből, amire emlékszem, csak romok maradtak a fővárosból. Szomorú vagyok, de megkönnyebbült is. Sosem reméltem, hogy még egyszer látom Al'thunran régi szépségét – alig néhány hónapja volt, hogy azon gondolkodtam, hogy vajon egyszer újra betehetem-e oda a lábam. Most az óváros újra a kezeim között van, és nem tétovázom, hogy újjáépítsem a népem erejével. Alig várom, hogy újra a régi szépségében lássam."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Befejezted az utolsó küldetést a Barbár oktatójáték hadjáratban. Ha szeretnéd, folytathatod a játékot, vagy lépj tovább a következő hadjáratra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Ostrom"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -621,7 +621,7 @@ msgid ""
 msgstr "Hát legyen, tábornokaim most állítják össze csapataimat, és maga Boldreth vezeti az első támadást. Vele tartok, hogy megszabadítsuk Al'thunrant ettől a háborútól és visszahozzuk a békét fővárosunkba."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -630,20 +630,20 @@ msgid ""
 msgstr "Amint az ifjú nap a fák fölé hág holnap reggel, elrendelem az ostromot. Napnyugtakor pedig már győzelmemet ünneplem a hadúri facsarnokban, és egy újszülött bárányt áldozok apám tiszteletére, akinek szemei ma rám szegeződnek."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Úgy legyen!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Gyorsabb szállítás"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Khantrukh így szól:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

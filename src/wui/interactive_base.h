@@ -422,6 +422,7 @@ private:
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 
 	bool cheat_mode_enabled_;
+	bool screenshot_failed_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H
