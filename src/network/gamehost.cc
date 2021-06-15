@@ -1081,24 +1081,20 @@ void GameHost::set_map(const std::string& mapname,
 				// Closed slot
 				continue;
 			}
-			if (p.name == d->localplayername) {  // host
-				switch_to_player(0, i);
-				continue;
-			}
-			for (const Client& client : d->clients) {
-				const std::string& effective_name = d->settings.users.at(client.usernum).name;
-				if (p.name == effective_name) {
-					switch_to_player(client.usernum, i);
-					break;
+
+			std::stringstream playerstream(p.name);
+			std::string user_part;
+			while (getline(playerstream, user_part, ' ')) {
+				for (uint8_t usernum = 0; usernum < d->settings.users.size(); ++usernum) {
+					const std::string& username = d->settings.users.at(usernum).name;
+
+					if (user_part == username) {
+						switch_to_player(usernum, i);
+						break;
+					}
 				}
 			}
 		}
-
-		// Broadcast player settings again to sync names in savegame infobox
-		packet.reset();
-		packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
-		write_setting_all_players(packet);
-		broadcast(packet);
 	}
 
 	// If possible, offer the map / saved game as transfer
@@ -1313,7 +1309,12 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 bool GameHost::remove_player_name(uint8_t const number, const std::string& name) {
 	PlayerSettings& p = d->settings.players.at(number);
 	std::string temp(p.name);
-	temp = temp.erase(p.name.find(name), name.size());
+	temp.erase(p.name.find(name), name.size());
+	if (temp.back() == ' ') {
+		temp.erase(temp.end() - 1);
+	} else if (temp.front() == ' ') {
+		temp.erase(temp.begin());
+	}
 	set_player_name(number, temp);
 	return temp.empty();
 }
@@ -1443,7 +1444,7 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 			set_player_state(number, PlayerSettings::State::kHuman);
 			set_player_name(number, name);
 		} else {
-			set_player_name(number, op.name + " " + name + " ");
+			set_player_name(number, op.name + " " + name);
 		}
 	}
 	d->settings.users.at(user).position = number;

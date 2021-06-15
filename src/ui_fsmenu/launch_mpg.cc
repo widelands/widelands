@@ -33,6 +33,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "scripting/lua_interface.h"
@@ -349,6 +350,10 @@ void LaunchMPG::load_previous_playerdata() {
 	std::string player_save_tribe[kMaxPlayers];
 	std::string player_save_ai[kMaxPlayers];
 	Widelands::TeamNumber player_save_team[kMaxPlayers];
+	SinglePlayerGameSettingsProvider saved_settings;
+	// Fill settings only with required data for the map details box
+	saved_settings.set_map(
+	   settings_.settings().mapname, "", "", "", settings_.settings().players.size(), true);
 
 	for (uint8_t i = 1; i <= settings_.settings().players.size(); ++i) {
 		Section* s =
@@ -366,6 +371,7 @@ void LaunchMPG::load_previous_playerdata() {
 		if (player_save_tribe[i - 1].empty()) {
 			// Close the player
 			settings_.set_player_state(i - 1, PlayerSettings::State::kClosed);
+			saved_settings.set_player_state(i - 1, PlayerSettings::State::kClosed);
 			continue;  // if tribe is empty, the player does not exist
 		}
 
@@ -375,17 +381,21 @@ void LaunchMPG::load_previous_playerdata() {
 			// Assure that player is open
 			if (settings_.settings().players.at(i - 1).state != PlayerSettings::State::kHuman) {
 				settings_.set_player_state(i - 1, PlayerSettings::State::kOpen);
+				settings_.set_player_name(i - 1, player_save_name[i - 1]);
 			}
 		} else {
 			settings_.set_player_state(i - 1, PlayerSettings::State::kComputer);
 			settings_.set_player_ai(i - 1, player_save_ai[i - 1]);
+			settings_.set_player_name(i - 1, player_save_name[i - 1]);
 		}
 
 		settings_.set_player_tribe(i - 1, player_save_tribe[i - 1]);
-		settings_.set_player_name(i - 1, player_save_name[i - 1]);
+
+		saved_settings.set_player_name(i - 1, player_save_name[i - 1]);
+		saved_settings.set_player_state(i - 1, settings_.settings().players.at(i - 1).state);
 	}
 
-	map_details_.update_from_savegame(&settings_);
+	map_details_.update_from_savegame(&saved_settings);
 }
 
 /**

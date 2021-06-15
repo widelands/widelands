@@ -107,7 +107,8 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		s.set_string("tribe", map.get_scenario_player_tribe(p));
 		s.set_string("ai", map.get_scenario_player_ai(p));
 		s.set_bool("closeable", map.get_scenario_player_closeable(p));
-		s.set_int("team", egbase.get_player(p)->team_number());
+		// Only read by multiplayer loadgame
+		s.set_int("team", egbase.get_player(p) ? egbase.get_player(p)->team_number() : 0);
 	}
 
 	prof.write("player_names", false, fs);
