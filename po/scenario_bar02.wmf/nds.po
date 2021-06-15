@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-05-31 08:11+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -250,7 +250,7 @@ msgstr "Dicht bi de Heimaad"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Troon is besörgt …"
 
@@ -271,7 +271,7 @@ msgstr "Eerst maal maken wi bi de Grenzen vun de ollen Wald Rüst un maken all k
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Noch een koller Dag"
 
@@ -347,7 +347,7 @@ msgstr "Miene Grenz-Lienje is bit tu de Waldrann vörrückt. Wi hebben eenen lan
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Troon seggt:"
 
@@ -572,7 +572,7 @@ msgid ""
 msgstr "Uns’ Schattsökers hebben bannig völe Aders vun Iesenkluut, Köhl un sogaar Gold funnen. Wi sallen uns’ Bargwarken utbauen, sobold uns’ Bargwarkskeerls mehr Erfahrung hebben. Wi sallen mehr Bargwarken bauen, eene grotere Spiesen-Weertskupp, um uns’ Lüü alltied mit godem Eten to versörgen, un eene Weertskupp, um mit de Kluten to warken. Un dat is noch nich all – de mesten vun uns’ Soldaten sünd jung un hebben keene goden Wapen un keene Erfahrung. Wi mutten Övens-Boen bauen, um se up hör tokomen Upgaven vörtobereiden."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -581,7 +581,7 @@ msgid ""
 msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -591,22 +591,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Nix is mehr över vun de Pracht, wat daar maal weer; vun de ollen Höövdstadt sünd nix as Ruinen över. Dat is trürig, aver verlichtert mi ok. Ick hebb nie hoopt, de olle Pracht vun Alltunraan weer to sehn – noch vör een paar Maanten hebb ick mi fraggt, of ick daar wull jemaals weer löpen düür. Nu is de olle Stadt weer in mienen Hannen, un ick will se natürelk mit all de Kraft vun mienen Lüü weer upbauen. Un bannig bold word se weer in hör ollen Pracht erstrahlen."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Sieg"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Du hest de leste Rutfödderung in deeser Riege ofsloten. Wenn du willst, kannst du wiederspölen, anners de token Rutfödderungs-Riege anfangen."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Soldateree-Angriff"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -614,7 +614,7 @@ msgid ""
 msgstr "Se wees ’t, de Offizeren sünd buten un kümmern sik um de Soldatereem un Boldreth sülvst föhrt de eerste Slacht an. Ick will an siener Sied rieden, um Alltunraan vun deesem Krieg freeitomaken un weer Free to uns’ Höövdstadt to bringen."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -623,20 +623,20 @@ msgid ""
 msgstr "As de jung Sünn mörgen froh över de Bomen upgaht, will ick de Angriff rieden laten. Am Avend wil ick mienen Sieg in de holten Saal vun de Kummandant fieren un een junges Lamm opfern, to de Ehr vun mienem Vader, well siene Oogen vandag up mi sett."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "So wees ’t!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Fixerer Transport"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Kantruusk seggt:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

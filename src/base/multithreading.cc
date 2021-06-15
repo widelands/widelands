@@ -47,7 +47,8 @@ bool is_initializer_thread() {
 uint32_t NoteThreadSafeFunction::next_id_(0);
 
 void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
-                                         const bool wait_until_completion) {
+                                         const bool wait_until_completion,
+                                         const bool rethrow_errors) {
 	if (!initializer_thread) {
 		throw wexception("NoteThreadSafeFunction::instantiate: initializer thread was not set yet");
 	} else if (is_initializer_thread()) {
@@ -64,11 +65,16 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 			// Only if the caller waits for completion of course.
 			const std::exception* error = nullptr;
 
-			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error]() {
+			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error, rethrow_errors]() {
 				try {
 					fn();
 				} catch (const std::exception& e) {
-					error = &e;
+					if (rethrow_errors) {
+						error = &e;
+					} else {
+						done = true;
+						throw;
+					}
 				}
 				done = true;
 			}));
