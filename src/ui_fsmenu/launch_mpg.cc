@@ -346,10 +346,6 @@ void LaunchMPG::load_previous_playerdata() {
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 
-	std::string player_save_name[kMaxPlayers];
-	std::string player_save_tribe[kMaxPlayers];
-	std::string player_save_ai[kMaxPlayers];
-	Widelands::TeamNumber player_save_team[kMaxPlayers];
 	SinglePlayerGameSettingsProvider saved_settings;
 	// Fill settings only with required data for the map details box
 	saved_settings.set_map(
@@ -363,35 +359,36 @@ void LaunchMPG::load_previous_playerdata() {
 			// of players goes down. So, we abort if the section does not exist to prevent crashes.
 			return;
 		}
-		player_save_name[i - 1] = s->get_string("name");
-		player_save_tribe[i - 1] = s->get_string("tribe");
-		player_save_ai[i - 1] = s->get_string("ai");
-		player_save_team[i - 1] = s->get_int("team");
+		std::string player_save_name = s->get_string("name");
+		std::string player_save_tribe = s->get_string("tribe");
+		std::string player_save_ai = s->get_string("ai");
+		Widelands::TeamNumber player_save_team = s->get_int("team");
+		bool player_save_random = s->get_bool("random");
 
-		if (player_save_tribe[i - 1].empty()) {
+		if (player_save_tribe.empty()) {
 			// Close the player
 			settings_.set_player_state(i - 1, PlayerSettings::State::kClosed);
 			saved_settings.set_player_state(i - 1, PlayerSettings::State::kClosed);
 			continue;  // if tribe is empty, the player does not exist
 		}
 
-		settings_.set_player_team(i - 1, player_save_team[i - 1]);
+		settings_.set_player_team(i - 1, player_save_team);
 
-		if (player_save_ai[i - 1].empty()) {
+		if (player_save_ai.empty()) {
 			// Assure that player is open
 			if (settings_.settings().players.at(i - 1).state != PlayerSettings::State::kHuman) {
 				settings_.set_player_state(i - 1, PlayerSettings::State::kOpen);
-				settings_.set_player_name(i - 1, player_save_name[i - 1]);
+				settings_.set_player_name(i - 1, player_save_name);
 			}
 		} else {
 			settings_.set_player_state(i - 1, PlayerSettings::State::kComputer);
-			settings_.set_player_ai(i - 1, player_save_ai[i - 1]);
-			settings_.set_player_name(i - 1, player_save_name[i - 1]);
+			settings_.set_player_ai(i - 1, player_save_ai);
+			settings_.set_player_name(i - 1, player_save_name);
 		}
 
-		settings_.set_player_tribe(i - 1, player_save_tribe[i - 1]);
-
-		saved_settings.set_player_name(i - 1, player_save_name[i - 1]);
+		settings_.set_player_tribe(i - 1, player_save_tribe, player_save_random);
+		saved_settings.set_player_tribe(i - 1, player_save_tribe, player_save_random);
+		saved_settings.set_player_name(i - 1, player_save_name);
 		saved_settings.set_player_state(i - 1, settings_.settings().players.at(i - 1).state);
 	}
 
