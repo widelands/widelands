@@ -5,18 +5,12 @@ import re
 
 FIND_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 
-CHECKFILES = ['src/scripting/lua_map.h',
-              'src/scripting/lua_bases.h',
-              'src/scripting/lua_game.h',
-              'src/scripting/lua_root.h',
-              'src/graphic/text/rt_parse.cc'
-              ]
-
-main_classes = []       # a list of main classes without ancestors
-derived_classes = {}    # a dict with class names as key and his ancestor as value
+main_classes = {}       # a dict with main class names as keys. The value will be outfile
+                        # as given by cpp_pairs in extract_rts.py
+derived_classes = {}    # a dict with derived class names as key and his ancestor as value
 
 
-def find_classes(file_name):
+def fill_data(file_name, outfile):
     """ Find class names in given File.
     Reads out each occurrence of "class x : public y::z" and returns a
     'cleaned' dict of {[class_name]=ancestor, ...}. The 'cleaning' is made
@@ -50,38 +44,35 @@ def find_classes(file_name):
 
             # feed data models
             if parent_cls1 == mod_name:
-                main_classes.append(cls_name)
+                main_classes[cls_name] = outfile
             else:
                 if parent_cls2:
                     # ... : public parent_cls1::parent_cls2
-                    derived_classes[cls_name] = parent_cls2
+                    derived_classes[cls_name] = [parent_cls2, outfile]
                 else:
                     # ... : public parent_cls1
-                    derived_classes[cls_name] = parent_cls1
+                    derived_classes[cls_name] = [parent_cls1, outfile]
 
 
 def init(cpp_files):
-    for cpp_file, out in cpp_files:
+    for cpp_file, outfile in cpp_files:
         header = cpp_file.rpartition('.')[0] + '.h'
-        find_classes(header)
-
-
-for f in CHECKFILES:
-    find_classes(f)
+        fill_data(header, outfile)
 
 
 def get_ancestor(cls):
     # Helperfunction for get_ancestor_tree()
     for key, ancestor in derived_classes.items():
         if cls == key:
-            return ancestor
+            return ancestor[0]
     return False
+
 
 def get_ancestor_tree(cls, tree=None):
     # Recursively find all classes up to the main class 
     if tree is None:
         tree = []
-    if cls in main_classes:
+    if cls in main_classes.keys():
         tree.append(cls)
         return tree
     a = get_ancestor(cls)
@@ -95,7 +86,7 @@ def get_children(cls):
     # Helper function for get_children_tree()
     children = []
     for key, ancestor in derived_classes.items():
-        if cls == ancestor:
+        if cls == ancestor[0]:
             children.append(key)
     return children
 
@@ -104,7 +95,6 @@ def get_children(cls):
 #   {class_name:[list_of_children], class_name1:[list_of_children],…}
 def get_children_tree(cls, tree=None):
     if tree is None:
-        #print("creating new dict", cls)
         tree = {cls: []}
     children = get_children(cls)
 
@@ -117,16 +107,18 @@ def get_children_tree(cls, tree=None):
 
     return tree
 
-
+    
 def get_main_class(cls):
     main_class = get_ancestor_tree(cls)[-1]
-    if main_class in main_classes:
-        return main_class
+    if main_class in main_classes.keys():
+        html_link = '../{}#{}", target="_parent"'.format(
+            main_classes[main_class].replace('.rst', '.html'), main_class.lower())
+        return main_class, html_link
     return ''
 
 
 def format_ancestors(cls):
-    if cls in main_classes:
+    if cls in main_classes.keys():
         return ''
 
     def _make_tooltip():
@@ -155,11 +147,17 @@ def format_ancestors(cls):
     return ret_str
 
 
+def get_child_html_link(cls):
+    f = derived_classes[cls][1]
+    ret_str= 'href="../{}#{}", target="_parent"'.format(f.replace('.rst', '.html'), cls.lower())
+    return ret_str
+
+
 def format_child_lists(cls):
     """Create a formatted list of class(es) with children.
        This returns e.g.:
-       MapObject -- {BaseImmovable Bob}
-       BaseImmovable -- {PlayerImmovable}
+       MapObject -- {BaseImmovable[link] Bob[link]}
+       BaseImmovable -- {PlayerImmovable[link]}
        …
     """
     ret_str = ''
@@ -169,26 +167,20 @@ def format_child_lists(cls):
         # spaces needed to make sphinxdoc happy
         ret_str += '\n    {} -- {{'.format(cl)
         for i, child in enumerate(children):
-            ret_str = '{}{}'.format(ret_str, child)
+            ret_str = '{}{}[{link}]'.format(ret_str, child, link=get_child_html_link(child))
             if i < len(children) - 1:
                 # add space except after last entry
                 ret_str += ' '
         ret_str += '}'
     return ret_str
 
-#for checkfor, v in derived_classes.items():
-    #print("\nDATA FOR:", checkfor)
-    #print('  ancestor_tree:\n   ', get_ancestor_tree(checkfor))
-       
-    #print('  children_tree:')
-    #for cl, ch in get_children_tree(checkfor).items():
-        #print('    class:', cl, ' children:', ch)
 
 def create_directive(cls):
     ancestors=format_ancestors(cls)
     child_list=format_child_lists(cls)
     graph_directive = None
     if ancestors or child_list:
+        main_cls, link=get_main_class(cls)
         graph_directive = """
 .. graphviz::
     
@@ -198,18 +190,32 @@ def create_directive(cls):
     node [shape=box, style=filled, fillcolor=white]
     edge [color=white]
     {cur_cls} [fillcolor=green]
-    {main_cls} [shape=house]
+    {main_cls} [shape=house, href="{link}]
     {ancestors}
     {child_list}
     }}""".format(cur_cls=cls,
                  ancestors=ancestors,
-                 main_cls=get_main_class(cls),
+                 main_cls = main_cls,
+                 link=link,
                  child_list=child_list,
                 )
     return graph_directive
 #href="../autogen_wl_map.html#building", target="_parent"
-#for cls in main_classes:
-#    print("cls", cls, create_directive(cls))
-#
-#for cls in derived_classes.keys():
-#    print("cls", cls, create_directive(cls))
+
+
+def debug_graph():
+    for cls, infile in main_classes.items():
+        print("cls/infile:", cls,"/", infile, create_directive(cls))
+    
+    for cls, data in derived_classes.items():
+        print("cls/infile:", cls,"/", data[1], create_directive(cls))
+
+
+def debug():
+    for checkfor, v in derived_classes.items():
+        print("\nDATA FOR:", checkfor)
+        print('  ancestors of: '+checkfor+'\n   ', get_ancestor_tree(checkfor))
+           
+        print('  children of: ' + checkfor +':')
+        for cl, ch in get_children_tree(checkfor).items():
+            print('    class:', cl, ' children:', ch)

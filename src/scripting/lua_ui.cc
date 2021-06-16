@@ -71,6 +71,20 @@ Module Classes
 Panel
 -----
 
+.. graphviz::                                                                                                                          
+                                                                                                                                       
+    graph Panel {                                                                                                                      
+                                                                                                                                       
+    bgcolor="transparent"                                                                                                              
+    node [shape=box, style=filled, fillcolor=white]                                                                                    
+    edge [color=white]                                                                                                                 
+    Panel [fillcolor=green]                                                                                                            
+    Panel [shape=house, href="../autogen_wl_ui.html#panel", target="_parent"]                                                         
+                                                                                                                                       
+                                                                                                                                       
+    Panel -- {Button[href="../autogen_wl_ui.html#button", target="_parent"] Dropdown Tab Window MapView}                                                                                      
+    }
+
 .. class:: Panel
 
    The Panel is the most basic ui class. Each ui element is a panel.
@@ -691,6 +705,19 @@ int LuaWindow::close(lua_State* /* L */) {
 /* RST
 MapView
 -------
+
+.. graphviz::
+    
+    graph MapView {
+    
+    bgcolor="transparent"
+    node [shape=box, style=filled, fillcolor=white]
+    edge [color=white]
+    MapView [fillcolor=green]
+    Panel [shape=house, href="../autogen_wl_ui.html#panel", target="_parent"]
+    Panel -- MapView
+    
+    }
 
 .. class:: MapView
 
