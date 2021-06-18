@@ -246,7 +246,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
         &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Building Spaces")),
      show_census_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Census")),
      show_statistics_(
-        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Statistics")),
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Status")),
      show_soldier_levels_(
         &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Soldier Levels")),
      show_buildings_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Buildings")),
