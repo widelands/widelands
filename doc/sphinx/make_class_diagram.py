@@ -6,6 +6,7 @@ import os
 
 HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
+MAX_CHILDS = 2
 
 main_classes = {}       # a dict with main class names as keys. The value will be outfile
                         # as given by cpp_pairs in extract_rts.py
@@ -96,17 +97,19 @@ def get_children(cls):
 # Recursively find all children of a class.
 # The returned tree is a dict in form of
 #   {class_name:[list_of_children], class_name1:[list_of_children],…}
-def get_children_tree(cls, tree=None):
+def get_children_tree(cls, max_children=0, tree=None):
     if tree is None:
         tree = {cls: []}
+
     children = get_children(cls)
 
-    if len(children) == 0:
+    if len(children) == 0 or max_children == MAX_CHILDS:
         return tree
     else:
+        max_children += 1
         tree[cls] = children
         for c in children:
-            get_children_tree(c, tree)
+            get_children_tree(c, max_children, tree)
 
     return tree
 
@@ -141,15 +144,15 @@ def format_ancestors(cls):
         ancestor_tree.pop()
 
     ret_str = ''
-    if len(ancestor_tree) > 0:
+    #[BaseImmovable, PlayerImmovable]
+    if len(ancestor_tree) > 0 :
         # show a big dashed edge with tooltip
-        ret_str = """{main_cls} -- {cls} [style=dashed, penwidth=10, edgetooltip="{tooltip}"]
+        ret_str = """{main_cls} -- {cls} [style=tapered, arrowhead=none, arrowtail=none dir=both, penwidth=10, edgetooltip="{tooltip}"]
                   """.format(main_cls=main_cls, cls=cls, tooltip=_make_tooltip())
     else:
         ret_str = """{main_cls} -- {cls}""".format(main_cls=main_cls, cls=cls)
 
     return ret_str
-
 
 def get_child_html_link(cls):
     f = derived_classes[cls][1]
@@ -158,24 +161,36 @@ def get_child_html_link(cls):
 
 
 def format_child_lists(cls):
-    """Create a formatted list of class(es) with children.
+    """Create a graphviz formatted list of class(es) with children.
        This returns e.g.:
-       MapObject -- {BaseImmovable[link] Bob[link]}
-       BaseImmovable -- {PlayerImmovable[link]}
+       MapObject -- {BaseImmovable[options] Bob[options]}
+       BaseImmovable -- {PlayerImmovable[options]]}
        …
     """
     ret_str = ''
+    last_row = 0
     for cl, children in get_children_tree(cls).items():
         if not children:
             return ''
-        # spaces needed to make sphinxdoc happy
-        ret_str += '    {} -- {{'.format(cl)
+
+        ret_str += '{cl} -- {{'.format(cl=cl)
+        last_row += 1
         for i, child in enumerate(children):
-            ret_str = '{}{}[{link}]'.format(ret_str, child, link=get_child_html_link(child))
+            link = get_child_html_link(child)
+            label = '"{}"'.format(child)
+            grandchildren = get_children(child)
+            if grandchildren and last_row >= MAX_CHILDS:
+                # Provide a label which indicates more child classes
+                label = '"{}\\n… more …"'.format(child)
+            ret_str = '{ret_str}{child}[{link}, label={label}]'.format(ret_str=ret_str,
+                                                                       child=child,
+                                                                       link=link,
+                                                                       label=label)
             if i < len(children) - 1:
                 # add space except after last entry
                 ret_str += ' '
         ret_str += '}'
+
     return ret_str
 
 
@@ -184,7 +199,7 @@ def create_directive(cls):
     child_list=format_child_lists(cls)
     graph_directive = None
     if ancestors or child_list:
-        main_cls, link=get_main_class(cls)
+        main_cls, link = get_main_class(cls)
         graph_directive = """
 .. graphviz::
     
@@ -208,18 +223,18 @@ def create_directive(cls):
 
 def debug_graph():
     for cls, infile in main_classes.items():
-        print("cls/infile:", cls,"/", infile, create_directive(cls))
+        print("cls/outfile:", cls,"/", outfile, create_directive(cls))
     
     for cls, data in derived_classes.items():
-        print("cls/infile:", cls,"/", data[1], create_directive(cls))
+        print("cls/outfile:", cls,"/", data[1], create_directive(cls))
 
 
 def debug_global_dicts():
-    for cls, infile in main_classes.items():
-        print("cls/infile:", cls,"/", infile)
+    for cls, outfile in main_classes.items():
+        print("cls/outfile:", cls,"/", outfile)
 
     for cls, data in derived_classes.items():
-        print("cls/infile:", cls,"/", data[1])
+        print("cls/outfile:", cls,"/", data[1])
 
     for checkfor, v in derived_classes.items():
         print("\nDATA FOR:", checkfor)

@@ -7,12 +7,10 @@ import os.path as p
 import re
 import sys
 
-import make_class_diagram as mcd
-
-#if '-graphs' in sys.argv:
-#    from make_class_diagram import insert_graph, init
-#else:
-#    mcd = False
+if '-graphs' in sys.argv:
+   import make_class_diagram as mcd
+else:
+   mcd = False
 
 
 
@@ -192,12 +190,11 @@ def replace_tocs(toc_rst_dict):
 
 if __name__ == '__main__':
     def main():
-        if '-graphs' in sys.argv:
-            if mcd:
-                mcd.init(base_dir, cpp_pairs)
-                #debug_global_dicts()
-                #mcd.debug_graph()
-                #print(mcd.get_children_tree('Panel'))
+        if mcd:
+            mcd.init(base_dir, cpp_pairs)
+            #mcd.debug_global_dicts()
+            #mcd.debug_graph()
+            #print(mcd.get_children_tree('Panel'))
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 
