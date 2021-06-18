@@ -2,8 +2,10 @@
 # encoding: utf-8
 
 import re
+import os
 
-FIND_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
+HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
+RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 
 main_classes = {}       # a dict with main class names as keys. The value will be outfile
                         # as given by cpp_pairs in extract_rts.py
@@ -26,7 +28,7 @@ def fill_data(file_name, outfile):
 
     found_cls = False
     with open(file_name, 'r') as f:
-        found_cls = FIND_CLS_RE.findall(f.read())
+        found_cls = HFILE_CLS_RE.findall(f.read())
 
     if found_cls:
         mod_name = ''
@@ -54,10 +56,11 @@ def fill_data(file_name, outfile):
                     derived_classes[cls_name] = [parent_cls1, outfile]
 
 
-def init(cpp_files):
+def init(base_dir, cpp_files):
     for cpp_file, outfile in cpp_files:
         header = cpp_file.rpartition('.')[0] + '.h'
-        fill_data(header, outfile)
+        h_path = os.path.join(base_dir, header)
+        fill_data(h_path, outfile)
 
 
 def get_ancestor(cls):
@@ -130,10 +133,11 @@ def format_ancestors(cls):
         return via_list
 
     ancestor_tree = list(reversed(get_ancestor_tree(cls)))
-    # pop first
-    main_cls = ancestor_tree.pop(0)
-    # pop last
+    main_cls = ''
     if len(ancestor_tree):
+        # pop first
+        main_cls = ancestor_tree.pop(0)
+        # pop last
         ancestor_tree.pop()
 
     ret_str = ''
@@ -165,7 +169,7 @@ def format_child_lists(cls):
         if not children:
             return ''
         # spaces needed to make sphinxdoc happy
-        ret_str += '\n    {} -- {{'.format(cl)
+        ret_str += '    {} -- {{'.format(cl)
         for i, child in enumerate(children):
             ret_str = '{}{}[{link}]'.format(ret_str, child, link=get_child_html_link(child))
             if i < len(children) - 1:
@@ -187,20 +191,19 @@ def create_directive(cls):
     graph {cur_cls} {{
     
     bgcolor="transparent"
-    node [shape=box, style=filled, fillcolor=white]
+    node [shape=box, style=filled, fillcolor=white, fontsize=10]
     edge [color=white]
-    {cur_cls} [fillcolor=green]
+    {cur_cls} [fillcolor=green, fontcolor=white]
     {main_cls} [shape=house, href="{link}]
     {ancestors}
     {child_list}
-    }}""".format(cur_cls=cls,
-                 ancestors=ancestors,
-                 main_cls = main_cls,
-                 link=link,
-                 child_list=child_list,
-                )
+    }}\n""".format(cur_cls=cls,
+             ancestors=ancestors,
+             main_cls = main_cls,
+             link=link,
+             child_list=child_list,
+            )
     return graph_directive
-#href="../autogen_wl_map.html#building", target="_parent"
 
 
 def debug_graph():
@@ -211,7 +214,13 @@ def debug_graph():
         print("cls/infile:", cls,"/", data[1], create_directive(cls))
 
 
-def debug():
+def debug_global_dicts():
+    for cls, infile in main_classes.items():
+        print("cls/infile:", cls,"/", infile)
+
+    for cls, data in derived_classes.items():
+        print("cls/infile:", cls,"/", data[1])
+
     for checkfor, v in derived_classes.items():
         print("\nDATA FOR:", checkfor)
         print('  ancestors of: '+checkfor+'\n   ', get_ancestor_tree(checkfor))

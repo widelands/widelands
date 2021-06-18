@@ -2128,23 +2128,6 @@ int LuaTribeDescription::has_worker(lua_State* L) {
 MapObjectDescription
 --------------------
 
-.. graphviz::                                                                                                                  
-                                                                                                                                  
-   graph MapObjectDescription {                                                                                                   
-                                                                                                                                  
-   bgcolor="transparent"                                                                                                          
-   node [shape=box, style=filled, fillcolor=white]                                                                                
-   edge [color=white]                                                                                                             
-   MapObjectDescription [shape=house]                                                                                             
-   MapObjectDescription [fillcolor=green]                                                                                             
-                                                                                                                                  
-                                                                                                                                  
-   MapObjectDescription -- {ImmovableDescription BuildingDescription WareDescription WorkerDescription ShipDescription}           
-   BuildingDescription -- {ConstructionSiteDescription DismantleSiteDescription ProductionSiteDescription MilitarySiteDescription WarehouseDescription MarketDescription}                                                                                                
-   ProductionSiteDescription -- {TrainingSiteDescription}                                                                         
-   WorkerDescription -- {SoldierDescription}                                                                                      
-   }
-        
 .. class:: MapObjectDescription
 
    A static description of a map object, so it can be used without
@@ -2366,17 +2349,6 @@ ImmovableDescription
 --------------------
 
 .. class:: ImmovableDescription
-
-   .. graphviz::
-      
-      graph dependency {
-         bgcolor="transparent"
-         node [shape=box, style=filled, fillcolor=white]
-         edge [color=white]
-
-         MapObjectDescription -- ImmovableDescription
-      }
-
 
    Child of: :class:`MapObjectDescription`
 
@@ -4413,7 +4385,7 @@ int LuaTerrainDescription::get_valid_resources(lua_State* L) {
 /* RST
 Economy
 -------
-.. class:: LuaEconomy
+.. class:: Economy
 
    Provides access to an economy. An economy will be created each time a player places a
    flag on the map. As soon this flag is connected to another flag, their two economies will
@@ -4542,26 +4514,6 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 /* RST
 MapObject
 ---------
-
-.. graphviz::                                                                                                                                    
-                                                                                                                                                 
-    graph MapObject {                                                                                                                            
-                                                                                                                                                 
-    bgcolor="transparent"                                                                                                                        
-    node [shape=box, style=filled, fillcolor=white]                                                                                              
-    edge [color=white]                                                                                                                           
-    MapObject [fillcolor=green]                                                                                                                  
-    MapObject [shape=house, href="../autogen_wl_map.html#mapobject", target="_parent"]                                                           
-                                                                                                                                                 
-                                                                                                                                                 
-    MapObject -- {BaseImmovable[href="../autogen_wl_map.html#baseimmovable", target="_parent"] Bob[href="../autogen_wl_map.html#bob", target="_parent"]}                                                                                                                                              
-    BaseImmovable -- {PlayerImmovable[href="../autogen_wl_map.html#playerimmovable", target="_parent"]}                                            
-    PlayerImmovable -- {PortDock[href="../autogen_wl_map.html#portdock", target="_parent"] Building[href="../autogen_wl_map.html#building", target="_parent"] Flag[href="../autogen_wl_map.html#flag", target="_parent"] Road[href="../autogen_wl_map.html#road", target="_parent"]}                      
-    Building -- {ConstructionSite[href="../autogen_wl_map.html#constructionsite", target="_parent"] DismantleSite[href="../autogen_wl_map.html#dismantlesite", target="_parent"] Warehouse[href="../autogen_wl_map.html#warehouse", target="_parent"] Market[href="../autogen_wl_map.html#market", target="_parent"] ProductionSite[href="../autogen_wl_map.html#productionsite", target="_parent"] MilitarySite[href="../autogen_wl_map.html#militarysite", target="_parent"]}                                                                                                                                 
-    ProductionSite -- {TrainingSite[href="../autogen_wl_map.html#trainingsite", target="_parent"]}                                                 
-    Bob -- {Worker[href="../autogen_wl_map.html#worker", target="_parent"] Ship[href="../autogen_wl_map.html#ship", target="_parent"]}               
-    Worker -- {Soldier[href="../autogen_wl_map.html#soldier", target="_parent"]}                                                                   
-    }
 
 .. class:: MapObject
 
@@ -5419,22 +5371,6 @@ const PropertyType<LuaPortDock> LuaPortDock::Properties[] = {
 Building
 --------
 
-.. graphviz::                                                                                                                                    
-                                                                                                                                                 
-    graph Building {                                                                                                                             
-                                                                                                                                                 
-    bgcolor="transparent"                                                                                                                        
-    node [shape=box, style=filled, fillcolor=white]                                                                                              
-    edge [color=white]                                                                                                                           
-    Building [fillcolor=green]                                                                                                                   
-    MapObject [shape=house, href="../autogen_wl_map.html#mapobject", target="_parent"]                                                           
-    MapObject -- Building [style=dashed, penwidth=10, edgetooltip="Via: BaseImmovable → PlayerImmovable"]                                        
-                                                                                                                                                 
-                                                                                                                                                 
-    Building -- {ConstructionSite[href="../autogen_wl_map.html#constructionsite", target="_parent"] DismantleSite[href="../autogen_wl_map.html#dismantlesite", target="_parent"] Warehouse[href="../autogen_wl_map.html#warehouse", target="_parent"] Market[href="../autogen_wl_map.html#market", target="_parent"] ProductionSite[href="../autogen_wl_map.html#productionsite", target="_parent"] MilitarySite[href="../autogen_wl_map.html#militarysite", target="_parent"]}                                                                                                                     
-    ProductionSite -- {TrainingSite[href="../autogen_wl_map.html#trainingsite", target="_parent"]}                                               
-    }
-
 .. class:: Building
 
    Child of: :class:`PlayerImmovable`
@@ -5946,20 +5882,6 @@ int LuaDismantleSite::set_has_builder(lua_State* L) {
 /* RST
 Warehouse
 ---------
-
-.. graphviz::                                                                                                                                    
-                                                                                                                                                 
-    graph Warehouse {                                                                                                                            
-                                                                                                                                                 
-    bgcolor="transparent"                                                                                                                        
-    node [shape=box, style=filled, fillcolor=white]                                                                                              
-    edge [color=white]                                                                                                                           
-    Warehouse [fillcolor=green]                                                                                                                  
-    MapObject [shape=house, href="../autogen_wl_map.html#mapobject", target="_parent"]                                                           
-    MapObject -- Warehouse [style=dashed, penwidth=10, edgetooltip="Via: BaseImmovable → PlayerImmovable → Building"]                            
-                                                                                                                                                 
-                                                                                                                                                 
-    }
 
 .. class:: Warehouse
 

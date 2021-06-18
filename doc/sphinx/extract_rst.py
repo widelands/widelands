@@ -6,7 +6,14 @@ import os
 import os.path as p
 import re
 import sys
+
 import make_class_diagram as mcd
+
+#if '-graphs' in sys.argv:
+#    from make_class_diagram import insert_graph, init
+#else:
+#    mcd = False
+
 
 
 ###################
@@ -113,6 +120,15 @@ def extract_rst_from_cpp(inname, outname=None):
         output += r + '\n'
 
     if output.strip():
+        if mcd:
+            found_cls = mcd.RSTDATA_CLS_RE.findall(output)
+            for cls in found_cls:
+                directive = mcd.create_directive(cls)
+                # For classes without children and ancestors directive is None
+                if directive:
+                    repl_str = '.. class:: {}\n'.format(cls)
+                    directive = '{}\n{}'.format(directive, repl_str)
+                    output = output.replace(repl_str, directive)
         out = sys.stdout
         if outname is not None:
             out = open(p.join(source_dir, outname), 'w')
@@ -177,10 +193,11 @@ def replace_tocs(toc_rst_dict):
 if __name__ == '__main__':
     def main():
         if '-graphs' in sys.argv:
-            mcd.init(cpp_pairs)
-            mcd.debug()
-            mcd.debug_graph()
-            #print(mcd.get_children_tree('Panel'))
+            if mcd:
+                mcd.init(base_dir, cpp_pairs)
+                #debug_global_dicts()
+                #mcd.debug_graph()
+                #print(mcd.get_children_tree('Panel'))
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 
