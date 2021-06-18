@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: GunChleoc, 2021\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -258,7 +258,7 @@ msgstr "An turas dhachaigh"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
 msgstr "An leabhar-latha aig Lutius"
 
@@ -698,6 +698,12 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Nuair a bhios sinn air cruithneachd gu leòr a bhuain, ’s urrainn dhuinn an "
+"tuathanas a thoirt às a chèile agus faing a thogail a dhèanamh clòimhe. "
+"Nuair a bhios an fhaing ag obair, b’ urrainn dhuinn àite a shaoradh airson "
+"tobalach meadhanach ach an tog sinn taigh nam beart air airson clò fhighe às"
+" a’ chlòimh. Co-dhiù no co-dheth, tòisicheamaid le cuid reusanta a "
+"chruithneachd."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -706,6 +712,10 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Saoilidh mi gum foghainn lethcheud raoid cruithneachd an toiseach. Chan eil "
+"uiread-amais againn dhan chruithneachd air sgàth ’s nach fheum an tuathanach"
+" stòras eile gus a saothrachadh. Cha leig sinn a leas ach sùil a chumail air"
+" an stòras againn a’ fàs."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -827,6 +837,10 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Salve, a Lutius. Fhad ’s a bha mi a’ bruidhinn ris an luchd-togail dàna "
+"againn, dh’innis iad dhomh gum feum iad an òr againn uile a chaitheamh "
+"airson am port a thogail. Air an adhbhar sin, cha bhi òr sam bith air "
+"fhàgail againn nuair a bhios am port air a thogail."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
@@ -1287,18 +1301,18 @@ msgstr ""
 "chluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr ""
 "Lorg sinn leac dh’ ar n-altair mu dheireadh thall. Moladh dha Neaptun!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Lorg sinn leac eile dh’ ar n-altair. Moladh dha Neaptun!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1308,7 +1322,7 @@ msgstr[2] "Feumaidh sinn %d leacan dh’ ar n-altair a lorg fhathast."
 msgstr[3] "Feumaidh sinn %d leac dh’ ar n-altair a lorg fhathast."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1317,6 +1331,6 @@ msgstr ""
 "dhuinn a chur ri chèile a-rithist airson ùrnaigh a dhèanamh. Moladh dha "
 "Neaptun!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
 msgstr "Lorg sinn ball-ealain"

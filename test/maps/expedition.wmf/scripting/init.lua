@@ -88,7 +88,7 @@ function check_wares_in_port_are_all_there(args)
 end
 
 function cancel_expedition_in_shipwindow(which_ship)
-   game.desired_speed = 5 * 1000
+   game.desired_speed = 2 * 1000
    click_on_ship(which_ship or first_ship)
    sleep(2000)
    assert_true(click_button("cancel_expedition"))
@@ -203,10 +203,10 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
       create_second_ship()
    end
 
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
    sleep(10000)
 
-   stable_save(game, "ready_to_sail", 10 * 1000)
+   stable_save(game, "ready_to_sail", 2 * 1000)
 
    sleep(10000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
@@ -234,7 +234,7 @@ function test_cancel_started_expedition_underway()
    -- Start a new expedition.
    port:start_expedition()
    wait_for_message("Expedition")
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
    sleep(10000)
 
    if first_ship.state=="exp_waiting" then
@@ -268,7 +268,7 @@ end
 
 function test_cancel_when_port_space_was_reached()
    sleep(100)
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
 
    -- Send expedition to port space.
    port:start_expedition()
@@ -308,7 +308,7 @@ end
 
 function test_transporting_works()
    sleep(100)
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
 
    -- Some optimization. No need to feed the hardener and to wait for logs.
    p1:get_buildings("barbarians_wood_hardener")[1]:remove()

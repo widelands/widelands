@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-05 18:25+0000\n"
+"PO-Revision-Date: 2021-06-14 15:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -510,103 +510,103 @@ msgstr "Eek"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:14
 msgid "Borassus Palm (Sapling)"
-msgstr "Borassus-Palme (Kiensel)"
+msgstr "Borassus-Palm (Kiensel)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:39
 msgid "Borassus Palm (Pole)"
-msgstr "Borassus-Palme (Jung)"
+msgstr "Borassus-Palm (Jung)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:65
 msgid "Borassus Palm (Mature)"
-msgstr "Borassus-Palme (Riep)"
+msgstr "Borassus-Palm (Riep)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:90
 msgid "Borassus Palm (Old)"
-msgstr "Borassus-Palme (Old)"
+msgstr "Borassus-Palm (Old)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:91
 msgid "Borassus Palm"
-msgstr "Borassus-Palme"
+msgstr "Borassus-Palm"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:14
 msgid "Coconut Palm (Sapling)"
-msgstr "Kokospalme (Kiensel)"
+msgstr "Kokospalm (Kiensel)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:39
 msgid "Coconut Palm (Pole)"
-msgstr "Kokospalme (Jung)"
+msgstr "Kokospalm (Jung)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:65
 msgid "Coconut Palm (Mature)"
-msgstr "Kokospalme (Riep)"
+msgstr "Kokospalm (Riep)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:90
 msgid "Coconut Palm (Old)"
-msgstr "Kokospalme (Old)"
+msgstr "Kokospalm (Old)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:91
 msgid "Coconut Palm"
-msgstr "Kokospalme"
+msgstr "Kokospalm"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:14
 msgid "Date Palm (Sapling)"
-msgstr "Datelpalme (Kiensel)"
+msgstr "Datelpalm (Kiensel)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:39
 msgid "Date Palm (Pole)"
-msgstr "Datelpalme (Jung)"
+msgstr "Datelpalm (Jung)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:65
 msgid "Date Palm (Mature)"
-msgstr "Datelpalme (Riep)"
+msgstr "Datelpalm (Riep)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:93
 msgid "Date Palm (Old)"
-msgstr "Datelpalme (Old)"
+msgstr "Datelpalm (Old)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:94
 msgid "Date Palm"
-msgstr "Datelpalme"
+msgstr "Datelpalm"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:14
 msgid "Oil Palm (Sapling)"
-msgstr "Öölpalme (Kiensel)"
+msgstr "Öölpalm (Kiensel)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:39
 msgid "Oil Palm (Pole)"
-msgstr "Öölpalme (Jung)"
+msgstr "Öölpalm (Jung)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:65
 msgid "Oil Palm (Mature)"
-msgstr "Öölpalme (Riep)"
+msgstr "Öölpalm (Riep)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:94
 msgid "Oil Palm (Old)"
-msgstr "Öölpalme (Old)"
+msgstr "Öölpalm (Old)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:95
 msgid "Oil Palm"
-msgstr "Öölpalme"
+msgstr "Öölpalm"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:14
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "Königspalme (Kiensel)"
+msgstr "Königspalm (Kiensel)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
 msgid "Roystonea regia Palm (Pole)"
-msgstr "Königspalme (Jung)"
+msgstr "Königspalm (Jung)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:65
 msgid "Roystonea regia Palm (Mature)"
-msgstr "Königspalme (Riep)"
+msgstr "Königspalm (Riep)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:90
 msgid "Roystonea regia Palm (Old)"
-msgstr "Königspalme (Old)"
+msgstr "Königspalm (Old)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:91
 msgid "Roystonea regia Palm"
-msgstr "Königspalme"
+msgstr "Königspalm"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:14
 msgid "Rowan (Sapling)"
