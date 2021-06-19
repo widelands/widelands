@@ -155,14 +155,13 @@ def format_ancestors(cls):
         if len(ancestor_tree) >= MAX_PARENTS:#> 0:
             # show a big edge with tooltipp
             ret_str = '{main_cls} -- {parent}\
-                      [style=tapered, arrowhead=none, arrowtail=none dir=both,\
-                      penwidth=10, edgetooltip="{tooltip}"]\
-                      '.format(main_cls=main_cls,
-                               parent=parent,
-                               tooltip=_make_tooltip()
-                               )
+[style=tapered, arrowhead=none, arrowtail=none dir=both,\
+penwidth=15, edgetooltip="{tooltip}"]'.format(main_cls=main_cls,
+                                              parent=parent,
+                                              tooltip=_make_tooltip()
+                                              )
             # add connection between parent and child
-            ret_str += '{{{parent}[{link}]}} -- {cls}'.format(
+            ret_str += '\n    {{{parent}[{link}]}} -- {cls}'.format(
                 parent=parent,
                 link=get_child_html_link(parent),
                 cls=cls)
