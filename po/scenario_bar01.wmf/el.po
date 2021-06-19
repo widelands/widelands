@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
@@ -916,25 +916,25 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "Είναι καταπληκτικά ζώα: Τα βόδια είναι γρήγορα σαν άνθρωποι, ενώ είναι πολύ δυνατότερα και πολύ οικονομικά. Το μόνο που χρειαζόμαστε είναι σιτάρι και νερό για την εκτροφή τους, και θα κάνουν τη δουλειά τους στους δρόμους με πιστότητα και αξιοπιστία."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "Αποστολή Εξετελέσθη"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "Ο Θρον παίρνει τον λόγο…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "Την άλλη μέρα ο Μπόλντρεθ μου ζήτησε να τον συνοδεύσω στο νέο πανδοχείο. Είπε ότι θα ενθουσιαστώ."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -943,33 +943,33 @@ msgid ""
 msgstr "Όταν κοίταξα ολόγυρα, είδα πρόσωπα που εμπιστεύονταν ότι θα μπορούσα να τους οδηγήσω μέσα σε αυτές τις σκοτεινές ημέρες. Όμως πριν μπορέσω να αρθρώσω λόγια ευγνωμοσύνης ή ενθάρρυνσης, ένας από τους πολεμιστές μου μπήκε τρέχοντας στο πανδοχείο. Τις προηγούμενες ημέρες είχε πάει μακριά έξω στο δάσος, και μπορούσα να δω πόσο εξαντλημένος ήταν."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
 msgstr "Τα νέα που έφερε άλλαξαν τα πάντα…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "Νίκη"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Ολοκληρώσατε αυτήν την αποστολή. Εάν το επιθυμείτε, μπορείτε να συνεχίσετε να παίζετε, αλλιώς συνεχίστε με την επόμενη αποστολή."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "Μια νύχτα πανσέληνου"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "Μια νύχτα, όταν η σελήνη έλαμπε, σκαρφάλωσα στην κορυφή του Μεγάλου Όρους."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -977,16 +977,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "Όταν ατένισα στον ορίζοντα, ακόμη έβλεπα βαθυκόκκινες λάμψεις να τρεμοπαίζουν μακριά. Είναι απίστευτο με πόσο πάθος τα αδέρφια μου μάχονται σε αυτόν τον πόλεμο. Φοβάμαι τη στιγμή που θα ξαναδώ την πρωτεύουσα – άραγε όταν πάμε εκεί, θα έχει μείνει τίποτα από την κάποτε όμορφη πρωτεύουσά μας, εκτός από στάχτες και ρημαγμένα ερείπια;"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "Μια ακόμη κρύα ημέρα"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
 msgstr "Ο Θρον φαίνεται ανήσυχος…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -994,37 +994,37 @@ msgid ""
 msgstr "Ο χειμώνας είναι μαζί μας. Πολλοί από εμάς υποφέρουμε από το κρύο, όμως πρέπει να αντέξουμε. Η μέρα που θα μπορέσουμε να επιστρέψουμε δεν μπορεί να είναι πια μακριά – δεν γίνεται να είναι πια μακριά."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "Προσευχήθηκα να μπορέσω να ξαναζεσταθώ, όπως προσευχήθηκα ο πόλεμος επιτέλους να σταματήσει."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Μέχρι στιγμής, φαίνεται ότι καμιά από τις προσευχές δεν εκπληρώθηκε."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "Ένα φιλικό χωριό ενώθηκε μαζί μας!"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "Βρήκαμε ένα χωριό με φιλικούς και παραγωγικούς ανθρώπους, εντυπωσιασμένους από τον πλούτο, την τεχνολογία και τη δύναμή μας."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "Ζούνε απλά κι όμως ευτυχισμένα, με το κυνήγι και τη γεωργία. Μέχρι στιγμής δεν έχουν αναμειχθεί σε καμία διαμάχη, ούτε είναι έτοιμοι για κάτι τέτοιο."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."

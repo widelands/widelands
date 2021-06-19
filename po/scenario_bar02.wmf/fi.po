@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-02-21 19:00+0000\n"
 "Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -253,7 +253,7 @@ msgstr "Lähellä kotia"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Thron näyttää huolestuneelta…"
 
@@ -274,7 +274,7 @@ msgstr "Toistaiseksi lepäämme vanhan metsän laidalla ja valmistaudumme tulevi
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Toinen kuulas päivä"
 
@@ -350,7 +350,7 @@ msgstr "Sotajoukkojeni rajalinja on levittäytynyt metsien laitamille. Meillä o
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Thron puhuu:"
 
@@ -575,7 +575,7 @@ msgid ""
 msgstr "Geologimme löysi reilusti lisää rautamalmiesiintymiä, hiiltä ja jopa kultaa. Meidän pitäisi laajentaa meidän nykyisiä kaivoksia heti kun kaivostyöntekijämme ovat kokeneempia. Meidän pitäisi rakentaa lisää kaivoksia, isompi ruokainfrastuktuuri toimittaimaan miehillemme aina sopivaa ruokaa ja myöhemmin prosessointitalous. Mitta se ei ole vielä kaikki mitä tarvitsemme – useimmat sotilaistamme ovat melko nuoria eikä heillä ole hyviä aseita tai ole hyvin koulutettuja. Meidän pitäisi rakentaa koulutuspaikkoja valmistellaksemme heidät tuleviin tehtäviin."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -584,7 +584,7 @@ msgid ""
 msgstr "Veljeni ja heidän sotilaat kuolivat ja jättivät tulipaloja ja tuhoa vain jälkeensä. Kaiken sen tuhon seasta en kyennyt löytämään yhtään tavallista kansanmiestä tai -naista ja siksi toivonkin, että he ovat paenneet tältä julmalta taistelukentältä ja aloittaneet paremman elämän jossakin muualla."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -594,22 +594,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Mitään ei ole jäljellä tuosta muistamastani vanhasta kauneudesta, vain vanhan pääkaupungin tuhot.  En olettanut enää näkeväni Al’thunranin vanhaa kauneutta – se oli vain muutama kuukausi sitten, jolloin ihmettelin tulisinko koskaan edes astumaan jalalloillani sinne uudestaan. Nyt vanha kaupunki on taas käsissäni enkä tule arkailemaan sen uudelleen rakentamista niillä taidoilla, joita kansalaisillamme on. En malta odottaa, että näkisin sen uudelleen, sen vanhassa kauneudessaan."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Voitto"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Olet suorittanut viimeisen Barbaarien opetuspelikampanjan. Voit halutessasi jatkaa pelaamista, tai siirtyä seuraavaan kampanjaan."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Hyökkäys"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -617,7 +617,7 @@ msgid ""
 msgstr "Olkoon niin, kenraalit ovat kaukana ja järjestelevät joukkojani, ja itse Boldreth aikoo johtaa ensimmäisen iskun. Ratsastan hänen vierellään vapauttaaksemme Al’thunranin tästä sodasta ja palauttaaksemme rauhan pääkaupunkiimme."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -626,20 +626,20 @@ msgid ""
 msgstr "Kun nuori aurinko nousee huomenna puiden yläpuolelle, määrään rynnäkön. Iltahämärässä sitten juhlin voitoani sotapäällikön puisissa halleissa ja uhraan karitsan isäni kunniaksi; tänään nuo silmät seuraavat minua."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Olkoon niin!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Nopeampi Kuljetus"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Khantrukh sanoo..."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
