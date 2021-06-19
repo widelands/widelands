@@ -8,23 +8,25 @@ HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 MAX_CHILDS = 2
 
-main_classes = {}       # a dict with main class names as keys. The value will be outfile
-                        # as given by cpp_pairs in extract_rts.py
-derived_classes = {}    # a dict with derived class names as key and his ancestor as value
+
+main_classes = {}       # A dict with main class names as keys. The value
+                        # will be the outfile as given by cpp_pairs in
+                        # extract_rst.py.
+derived_classes = {}    # A dict of derived classes. The key is a class name,
+                        # the value is a list of [ancestor, outfile].
 
 
 def fill_data(file_name, outfile):
     """ Find class names in given File.
-    Reads out each occurrence of "class x : public y::z" and returns a
-    'cleaned' dict of {[class_name]=ancestor, ...}. The 'cleaning' is made
-    in two steps:
+    Reads out each occurrence of "class x : public y::z" and fills
+    main_classes and derived_classes. The values have to be cleaned
+    which is made in two steps:
     - Strip leading 'Lua' from the name of classes.
       In contrast to classes in .h-files the Lua-classes have no leading
-      string 'Lua'.
+      string 'Lua'. Future implementations have to be exactly like this!
     -  The class derived from 'LunaClass'' is the base class for all other
       classes in this file. This class has no meaning for the Lua
-      documentation, so we do not store it's name, either as key nor
-      as value.
+      documentation, so we do not store it's name.
     """
 
     found_cls = False
@@ -73,7 +75,7 @@ def get_ancestor(cls):
 
 
 def get_ancestor_tree(cls, tree=None):
-    # Recursively find all classes up to the main class 
+    # Recursively find all classes up to the main class
     if tree is None:
         tree = []
     if cls in main_classes.keys():
@@ -86,6 +88,7 @@ def get_ancestor_tree(cls, tree=None):
 
     return tree
 
+
 def get_children(cls):
     # Helper function for get_children_tree()
     children = []
@@ -94,10 +97,13 @@ def get_children(cls):
             children.append(key)
     return children
 
-# Recursively find all children of a class.
-# The returned tree is a dict in form of
-#   {class_name:[list_of_children], class_name1:[list_of_children],…}
+
 def get_children_tree(cls, max_children=0, tree=None):
+    """Recursively find all children of a class.
+
+    The returned tree is a dict in form of:
+    {class_name:[list_of_children], class_name1:[list_of_children],…}
+    """
     if tree is None:
         tree = {cls: []}
 
@@ -113,11 +119,11 @@ def get_children_tree(cls, max_children=0, tree=None):
 
     return tree
 
-    
+
 def get_main_class(cls):
     main_class = get_ancestor_tree(cls)[-1]
     if main_class in main_classes.keys():
-        html_link = '../{}#{}", target="_parent"'.format(
+        html_link = '"../{}#{}", target="_parent"'.format(
             main_classes[main_class].replace('.rst', '.html'), main_class.lower())
         return main_class, html_link
     return ''
@@ -138,25 +144,43 @@ def format_ancestors(cls):
     ancestor_tree = list(reversed(get_ancestor_tree(cls)))
     main_cls = ''
     if len(ancestor_tree):
-        # pop first
         main_cls = ancestor_tree.pop(0)
-        # pop last
+        # pop cls
         ancestor_tree.pop()
 
     ret_str = ''
-    #[BaseImmovable, PlayerImmovable]
-    if len(ancestor_tree) > 0 :
-        # show a big dashed edge with tooltip
-        ret_str = """{main_cls} -- {cls} [style=tapered, arrowhead=none, arrowtail=none dir=both, penwidth=10, edgetooltip="{tooltip}"]
-                  """.format(main_cls=main_cls, cls=cls, tooltip=_make_tooltip())
+
+    if len(ancestor_tree) > 0:
+        parent = ancestor_tree.pop()
+        if len(ancestor_tree) > 0:
+            # show a big edge with tooltipp
+            ret_str = '{main_cls} -- {parent}\
+                      [style=tapered, arrowhead=none, arrowtail=none dir=both,\
+                      penwidth=10, edgetooltip="{tooltip}"]\
+                      '.format(main_cls=main_cls,
+                               parent=parent,
+                               tooltip=_make_tooltip()
+                               )
+            ret_str += '{{{parent}[{link}]}} -- {cls}'.format(
+                parent=parent,
+                link=get_child_html_link(parent),
+                cls=cls)
+        else:
+            ret_str = """{main_cls} -- {{{parent}[{link}]}} -- {cls}""".format(
+                main_cls=main_cls,
+                parent=parent,
+                link=get_child_html_link(parent),
+                cls=cls)
     else:
         ret_str = """{main_cls} -- {cls}""".format(main_cls=main_cls, cls=cls)
 
     return ret_str
 
+
 def get_child_html_link(cls):
     f = derived_classes[cls][1]
-    ret_str= 'href="../{}#{}", target="_parent"'.format(f.replace('.rst', '.html'), cls.lower())
+    ret_str = 'href="../{}#{}", target="_parent"'.format(
+        f.replace('.rst', '.html'), cls.lower())
     return ret_str
 
 
@@ -195,8 +219,8 @@ def format_child_lists(cls):
 
 
 def create_directive(cls):
-    ancestors=format_ancestors(cls)
-    child_list=format_child_lists(cls)
+    ancestors = format_ancestors(cls)
+    child_list = format_child_lists(cls)
     graph_directive = None
     if ancestors or child_list:
         main_cls, link = get_main_class(cls)
@@ -206,40 +230,41 @@ def create_directive(cls):
     graph {cur_cls} {{
     
     bgcolor="transparent"
-    node [shape=box, style=filled, fillcolor=white, fontsize=10]
+    node [shape=box, style=filled, fillcolor=white,
+          fontsize=10, margin="0.0, 0.0"]
     edge [color=white]
-    {cur_cls} [fillcolor=green, fontcolor=white]
-    {main_cls} [shape=house, href="{link}]
+    {cur_cls} [fillcolor=green, fontcolor=white, fontsize=12]
+    {main_cls} [shape=house, href={link}]
     {ancestors}
     {child_list}
     }}\n""".format(cur_cls=cls,
-             ancestors=ancestors,
-             main_cls = main_cls,
-             link=link,
-             child_list=child_list,
-            )
+                   ancestors=ancestors,
+                   main_cls=main_cls,
+                   link=link,
+                   child_list=child_list,
+                   )
     return graph_directive
 
 
 def debug_graph():
     for cls, infile in main_classes.items():
-        print("cls/outfile:", cls,"/", outfile, create_directive(cls))
-    
+        print('cls/outfile:', cls, '/', outfile, create_directive(cls))
+
     for cls, data in derived_classes.items():
-        print("cls/outfile:", cls,"/", data[1], create_directive(cls))
+        print('cls/outfile:', cls, '/', data[1], create_directive(cls))
 
 
 def debug_global_dicts():
     for cls, outfile in main_classes.items():
-        print("cls/outfile:", cls,"/", outfile)
+        print('cls/outfile:', cls, '/', outfile)
 
     for cls, data in derived_classes.items():
-        print("cls/outfile:", cls,"/", data[1])
+        print('cls/outfile:', cls, '/', data[1])
 
     for checkfor, v in derived_classes.items():
-        print("\nDATA FOR:", checkfor)
-        print('  ancestors of: '+checkfor+'\n   ', get_ancestor_tree(checkfor))
-           
+        print('\nDATA FOR:', checkfor)
+        print('  ancestors of: '+ checkfor +'\n   ', get_ancestor_tree(checkfor))
+
         print('  children of: ' + checkfor +':')
         for cl, ch in get_children_tree(checkfor).items():
             print('    class:', cl, ' children:', ch)
