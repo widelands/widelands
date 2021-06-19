@@ -8,10 +8,9 @@ import re
 import sys
 
 if '-graphs' in sys.argv:
-   import make_class_diagram as mcd
+    import make_class_diagram as mcd
 else:
-   mcd = False
-
+    mcd = False
 
 
 ###################
@@ -119,6 +118,8 @@ def extract_rst_from_cpp(inname, outname=None):
 
     if output.strip():
         if mcd:
+            # this should be part of make_class_diagram.py but then all
+            # created *.rst-files have to be read and written again
             found_cls = mcd.RSTDATA_CLS_RE.findall(output)
             for cls in found_cls:
                 directive = mcd.create_directive(cls)
@@ -192,9 +193,6 @@ if __name__ == '__main__':
     def main():
         if mcd:
             mcd.init(base_dir, cpp_pairs)
-            #mcd.debug_global_dicts()
-            #mcd.debug_graph()
-            #print(mcd.get_children_tree('Panel'))
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 
