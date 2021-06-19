@@ -6,8 +6,8 @@ import os
 
 HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
-MAX_CHILDS = 2
-
+MAX_CHILDS = 1
+MAX_PARENTS = MAX_CHILDS
 
 main_classes = {}       # A dict with main class names as keys. The value
                         # will be the outfile as given by cpp_pairs in
@@ -150,9 +150,9 @@ def format_ancestors(cls):
 
     ret_str = ''
 
-    if len(ancestor_tree) > 0:
+    if len(ancestor_tree) >= MAX_PARENTS:#> 0:
         parent = ancestor_tree.pop()
-        if len(ancestor_tree) > 0:
+        if len(ancestor_tree) >= MAX_PARENTS:#> 0:
             # show a big edge with tooltipp
             ret_str = '{main_cls} -- {parent}\
                       [style=tapered, arrowhead=none, arrowtail=none dir=both,\
@@ -161,11 +161,13 @@ def format_ancestors(cls):
                                parent=parent,
                                tooltip=_make_tooltip()
                                )
+            # add connection between parent and child
             ret_str += '{{{parent}[{link}]}} -- {cls}'.format(
                 parent=parent,
                 link=get_child_html_link(parent),
                 cls=cls)
         else:
+            # only 2 parent classes
             ret_str = """{main_cls} -- {{{parent}[{link}]}} -- {cls}""".format(
                 main_cls=main_cls,
                 parent=parent,
