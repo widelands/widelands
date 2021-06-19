@@ -22,12 +22,12 @@ function _array_contains(list, string)
 end
 
 function path_test:test_list_files()
-   local dirname = "tribes/buildings/productionsites/barbarians/barracks/"
-   assert_equal(4, #path.list_files(dirname .. "idle_*.png"))
-   assert_equal("tribes/buildings/productionsites/barbarians/barracks/idle_1.png", path.list_files(dirname .. "idle_*.png")[2])
-   assert_equal("tribes/buildings/productionsites/barbarians/barracks/idle_4.png", path.list_files(dirname .. "idle_*.png")[4])
+   local dirname = "tribes/workers/barbarians/soldiers/"
+   assert_equal(20, #path.list_files(dirname .. "idle_ff.png"))
+   assert_equal("tribes/workers/barbarians/soldiers/idle_01.png", path.list_files(dirname .. "idle_ff.png")[2])
+   assert_equal("tribes/workers/barbarians/soldiers/idle_03.png", path.list_files(dirname .. "idle_ff.png")[4])
    assert_equal(1, #path.list_files(dirname .. "menu.png"))
-   assert_equal("tribes/buildings/productionsites/barbarians/barracks/menu.png", path.list_files(dirname .. "menu.png")[1])
+   assert_equal("tribes/workers/barbarians/soldiers/menu.png", path.list_files(dirname .. "menu.png")[1])
    assert_equal(0, #path.list_files(dirname .. "foo.png"))
    assert_equal(1, #path.list_files(dirname .. "init.lua"))
 end
