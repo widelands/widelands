@@ -133,7 +133,6 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
                       _("Soldier Statistics")),
      player_(parent.player()),
      tabs_(this, UI::TabPanelStyle::kWuiDark) {
-	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 
 	tabs_.add("all", _("Overview"),
 	          new SoldierStatisticsPanel(
