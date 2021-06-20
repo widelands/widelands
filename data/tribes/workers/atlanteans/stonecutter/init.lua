@@ -35,17 +35,26 @@ descriptions:new_worker_type {
          hotspot = { 10, 19 },
          fps = 10
       },
+   },
+
+   spritesheets = {
       walk = {
-         hotspot = { 10, 21 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 21 }
       },
       walkload = {
-         hotspot = { 10, 23 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 23 }
+      },
+   },
 }
 
 pop_textdomain()
