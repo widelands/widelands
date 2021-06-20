@@ -68,9 +68,9 @@ public:
 		pf_thinks = 1 << 2,        ///< call think() function during run
 		pf_top_on_click = 1 << 3,  ///< bring panel on top when clicked inside it
 		pf_die = 1 << 4,           ///< this panel needs to die
-		pf_child_die = 1 << 5,    ///< a child needs to die
-		pf_visible = 1 << 6,      ///< render the panel
-		pf_can_focus = 1 << 7,    ///< can receive the keyboard focus
+		pf_child_die = 1 << 5,     ///< a child needs to die
+		pf_visible = 1 << 6,       ///< render the panel
+		pf_can_focus = 1 << 7,     ///< can receive the keyboard focus
 		/// children should snap only when overlapping the snap target
 		pf_snap_windows_only_when_overlapping = 1 << 8,
 		/// children should snap to the edges of this panel
