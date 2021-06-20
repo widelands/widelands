@@ -203,14 +203,21 @@ def format_child_lists(cls):
         for i, child in enumerate(children):
             link = get_child_html_link(child)
             label = '"{}"'.format(child)
+            tooltip = '"{}"'.format(child)
+
             grandchildren = get_children(child)
             if grandchildren and last_row >= MAX_CHILDS:
                 # Provide a label which indicates more child classes
                 label = '"{}\\n… more …"'.format(child)
-            ret_str = '{ret_str}{child}[{link}, label={label}]'.format(ret_str=ret_str,
-                                                                       child=child,
-                                                                       link=link,
-                                                                       label=label)
+                # A tooltip is made from the label, but can't handle '\n'.
+                tooltip = '"{} has more children…"'.format(child)
+
+            ret_str = '{}{child}[{link}, label={label}, tooltip={tt}]'.format(ret_str,
+                                                                              child=child,
+                                                                              link=link,
+                                                                              label=label,
+                                                                              tt=tooltip
+                                                                              )
             if i < len(children) - 1:
                 # add space except after last entry
                 ret_str += ' '
@@ -229,12 +236,12 @@ def create_directive(cls):
 .. graphviz::
     
     graph {cur_cls} {{
-    
+
     bgcolor="transparent"
     node [shape=box, style=filled, fillcolor=white,
-          fontsize=10, margin="0.0, 0.0"]
+          fontsize=12, fontname="Helvetica", margin="0.0, 0.0"]
     edge [color=white]
-    {cur_cls} [fillcolor=green, fontcolor=white, fontsize=12]
+    {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13]
     {main_cls} [shape=house, href={link}]
     {ancestors}
     {child_list}
