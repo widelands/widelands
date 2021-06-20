@@ -6,8 +6,8 @@ import os
 
 HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
-MAX_CHILDS = 1
-MAX_PARENTS = MAX_CHILDS
+MAX_CHILDS = 2
+MAX_PARENTS = 1#MAX_CHILDS
 
 main_classes = {}       # A dict with main class names as keys. The value
                         # will be the outfile as given by cpp_pairs in
@@ -202,14 +202,20 @@ def format_child_lists(cls):
         last_row += 1
         for i, child in enumerate(children):
             link = get_child_html_link(child)
-            label = '"{}"'.format(child)
+            child_name = child
+
+            if len(children) >= 3:
+                # Truncate long words to make the resulting graph smaller in width
+                child_name = child_name[0:15] + '…'
+
+            label = '"{}"'.format(child_name)
             tooltip = '"{}"'.format(child)
 
             grandchildren = get_children(child)
             if grandchildren and last_row >= MAX_CHILDS:
                 # Provide a label which indicates more child classes
-                label = '"{}\\n… more …"'.format(child)
-                # A tooltip is made from the label, but can't handle '\n'.
+                label = '"{}\\n… more …"'.format(child_name)
+                # A tooltip is made from the label, but can't handle '\n'
                 tooltip = '"{} has more children…"'.format(child)
 
             ret_str = '{}{child}[{link}, label={label}, tooltip={tt}]'.format(ret_str,
@@ -236,6 +242,7 @@ def create_directive(cls):
 .. graphviz::
     
     graph {cur_cls} {{
+
 
     bgcolor="transparent"
     node [shape=box, style=filled, fillcolor=white,
