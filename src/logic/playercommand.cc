@@ -103,6 +103,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdFlagAction(des);
 	case QueueCommandTypes::kStartStopBuilding:
 		return new CmdStartStopBuilding(des);
+	case QueueCommandTypes::kToggleInfiniteProduction:
+		return new CmdToggleInfiniteProduction(des);
 	case QueueCommandTypes::kEnhanceBuilding:
 		return new CmdEnhanceBuilding(des);
 
@@ -592,6 +594,48 @@ void CmdStartStopBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
+
+/*** Cmd_ToggleInfiniteProduction ***/
+
+CmdToggleInfiniteProduction::CmdToggleInfiniteProduction(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+}
+
+void CmdToggleInfiniteProduction::execute(Game& game) {
+	if (upcast(ProductionSite, ps, game.objects().get_object(serial_))) {
+		ps->set_infinite_production(!ps->infinite_production());
+	}
+}
+
+void CmdToggleInfiniteProduction::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdToggleInfiniteProduction = 1;
+
+void CmdToggleInfiniteProduction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdToggleInfiniteProduction) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+		} else {
+			throw UnhandledVersionError(
+			   "CmdToggleInfiniteProduction", packet_version, kCurrentPacketVersionCmdToggleInfiniteProduction);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("start/stop building: %s", e.what());
+	}
+}
+void CmdToggleInfiniteProduction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionCmdToggleInfiniteProduction);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+}
+
+/*** Cmd_MilitarySiteSetSoldierPreference ***/
 
 CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {

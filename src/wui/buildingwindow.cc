@@ -277,6 +277,20 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 
+			if (productionsite->descr().is_infinite_production_useful() || productionsite->infinite_production()) {
+				UI::Button* infbtn = new UI::Button(
+				   capsbuttons, productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+				   g_image_cache->get(
+					  (productionsite->infinite_production() ? "images/wui/menus/end_infinity.png" : "images/wui/menus/infinity.png")),
+				   productionsite->infinite_production() ?
+					  /** TRANSLATORS: Infinite Production toggle button for production sites. */
+					  _("Stop producing indefinitely") :
+					  /** TRANSLATORS: Infinite Production toggle button for production sites. */
+					  _("Produce indefinitely regardless of the economy’s needs"));
+				infbtn->sigclicked.connect([this]() { act_produce_infinite(); });
+				capsbuttons->add(infbtn);
+			}
+
 			// Add a fixed width separator rather than infinite space so the
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
@@ -493,6 +507,27 @@ void BuildingWindow::act_start_stop() {
 			game_->send_player_start_stop_building(*building);
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
+	}
+}
+
+/**
+===============
+Callback for toggling the production site's infinite production mode
+===============
+*/
+void BuildingWindow::act_produce_infinite() {
+	Widelands::Building* building = building_.get(parent_->egbase());
+	if (building == nullptr) {
+		return;
+	}
+
+	if (building->descr().type() >= Widelands::MapObjectType::PRODUCTIONSITE) {
+		if (game_) {
+			game_->send_player_toggle_infinite_production(*building);
+		} else {
+			Widelands::ProductionSite& ps = dynamic_cast<Widelands::ProductionSite&>(*building);
+			ps.set_infinite_production(!ps.infinite_production());
 		}
 	}
 }

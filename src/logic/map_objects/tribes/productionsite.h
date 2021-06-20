@@ -188,6 +188,13 @@ public:
 		return programs_;
 	}
 
+	bool is_infinite_production_useful() const {
+		return is_infinite_production_useful_;
+	}
+	void set_infinite_production_useful(const bool u) {
+		is_infinite_production_useful_ = u;
+	}
+
 	const std::string& out_of_resource_title() const {
 		return out_of_resource_title_;
 	}
@@ -295,6 +302,7 @@ private:
 	std::set<std::string> collected_immovables_;
 	std::set<std::string> created_immovables_;
 	Programs programs_;
+	bool is_infinite_production_useful_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;
 	std::string out_of_resource_message_;
@@ -413,6 +421,11 @@ public:
 	// and the force-started program has not terminated yet.
 	bool has_forced_state() const;
 
+	bool infinite_production() const {
+		return infinite_production_;
+	}
+	void set_infinite_production(bool);
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -508,6 +521,7 @@ protected:  // TrainingSite must have access to this stuff
 	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
 	Time last_program_end_time;
 	bool is_stopped_;
+	bool infinite_production_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
 
 private:

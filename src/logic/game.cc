@@ -1030,6 +1030,11 @@ void Game::send_player_start_stop_building(Building& building) {
 	   new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
 }
 
+void Game::send_player_toggle_infinite_production(Building& building) {
+	send_player_command(
+	   new CmdToggleInfiniteProduction(get_gametime(), building.owner().player_number(), building));
+}
+
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
                                                            SoldierPreference my_preference) {
 	send_player_command(new CmdMilitarySiteSetSoldierPreference(

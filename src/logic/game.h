@@ -276,6 +276,7 @@ public:
 	void send_player_build_waterway(int32_t, Path&);
 	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
+	void send_player_toggle_infinite_production(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
