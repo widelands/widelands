@@ -211,7 +211,7 @@ def format_child_lists(cls):
             link = get_child_html_link(child)
             child_name = child
 
-            if len(children) >= 3:
+            if len(children) >= 4 and len(child_name) > 15:
                 # Truncate long words to make the resulting graph smaller in width
                 child_name = child_name[0:15] + '…'
 
@@ -253,7 +253,7 @@ def create_directive(cls):
 
     bgcolor="transparent"
     node [shape=box, style=filled, fillcolor=white,
-          fontsize=12, fontname="Helvetica", margin="0.0, 0.0"]
+          fontsize=12, fontname="Helvetica", margin="0.05, 0.0"]
     edge [color=white]
     {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13, shape=oval]
     {main_cls} [shape=house, href={link}]
