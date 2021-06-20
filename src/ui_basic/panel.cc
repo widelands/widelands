@@ -274,7 +274,7 @@ void Panel::do_redraw_now(const std::string& message) {
 		// handle input, and we gray out the user interface to indicate this.
 
 		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
-		        g_image_cache->get(template_dir() + "loadscreens/ending.png"), Vector2i(0, 0));
+		        &load_safe_template_image("loadscreens/ending.png"), Vector2i(0, 0));
 
 		draw_game_tip(rt, Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()), message, 2);
 	}
@@ -284,12 +284,14 @@ void Panel::do_redraw_now(const std::string& message) {
 		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
 		g_mouse_cursor->draw(rt, app->get_mouse_position());
 
-		if (modal_ != nullptr) {
-			modal_->do_tooltip();
-		} else if (is_modal()) {
-			do_tooltip();
-		} else {
-			ff.do_tooltip();
+		if (message.empty() && (flags_ & pf_hide_all_overlays) == 0) {
+			if (modal_ != nullptr) {
+				modal_->do_tooltip();
+			} else if (is_modal()) {
+				do_tooltip();
+			} else {
+				ff.do_tooltip();
+			}
 		}
 	}
 

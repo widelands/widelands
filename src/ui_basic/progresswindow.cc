@@ -58,6 +58,7 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
                parent ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme) {
+	set_hide_all_overlays();
 
 	if (!parent) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(

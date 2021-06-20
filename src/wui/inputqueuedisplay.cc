@@ -570,6 +570,7 @@ void InputQueueDisplay::draw(RenderTarget& r) {
 }
 
 void InputQueueDisplay::draw_overlay(RenderTarget& r) {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (!b) {
 		return;
