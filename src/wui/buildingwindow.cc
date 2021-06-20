@@ -277,16 +277,20 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 
-			if (productionsite->descr().is_infinite_production_useful() || productionsite->infinite_production()) {
+			if (productionsite->descr().is_infinite_production_useful() ||
+			    productionsite->infinite_production()) {
 				UI::Button* infbtn = new UI::Button(
-				   capsbuttons, productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_image_cache->get(
-					  (productionsite->infinite_production() ? "images/wui/menus/end_infinity.png" : "images/wui/menus/infinity.png")),
+				   capsbuttons,
+				   productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite",
+				   0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+				   g_image_cache->get((productionsite->infinite_production() ?
+				                          "images/wui/menus/end_infinity.png" :
+				                          "images/wui/menus/infinity.png")),
 				   productionsite->infinite_production() ?
-					  /** TRANSLATORS: Infinite Production toggle button for production sites. */
-					  _("Stop producing indefinitely") :
-					  /** TRANSLATORS: Infinite Production toggle button for production sites. */
-					  _("Produce indefinitely regardless of the economy’s needs"));
+				      /** TRANSLATORS: Infinite Production toggle button for production sites. */
+				      _("Stop producing indefinitely") :
+				      /** TRANSLATORS: Infinite Production toggle button for production sites. */
+				      _("Produce indefinitely regardless of the economy’s needs"));
 				infbtn->sigclicked.connect([this]() { act_produce_infinite(); });
 				capsbuttons->add(infbtn);
 			}

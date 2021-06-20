@@ -622,14 +622,16 @@ void CmdToggleInfiniteProduction::read(FileRead& fr, EditorGameBase& egbase, Map
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(
-			   "CmdToggleInfiniteProduction", packet_version, kCurrentPacketVersionCmdToggleInfiniteProduction);
+			throw UnhandledVersionError("CmdToggleInfiniteProduction", packet_version,
+			                            kCurrentPacketVersionCmdToggleInfiniteProduction);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("start/stop building: %s", e.what());
 	}
 }
-void CmdToggleInfiniteProduction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+void CmdToggleInfiniteProduction::write(FileWrite& fw,
+                                        EditorGameBase& egbase,
+                                        MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdToggleInfiniteProduction);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
