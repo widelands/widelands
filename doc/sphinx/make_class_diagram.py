@@ -120,7 +120,7 @@ def get_children_tree(cls, max_children=0, tree=None):
     return tree
 
 
-def get_main_class(cls):
+def format_main_class(cls):
     main_class = get_ancestor_tree(cls)[-1]
     if main_class in main_classes.keys():
         html_link = '"../{}#{}", target="_parent"'.format(
@@ -237,7 +237,7 @@ def create_directive(cls):
     child_list = format_child_lists(cls)
     graph_directive = None
     if ancestors or child_list:
-        main_cls, link = get_main_class(cls)
+        main_cls, link = format_main_class(cls)
         graph_directive = """
 .. graphviz::
     
@@ -248,7 +248,7 @@ def create_directive(cls):
     node [shape=box, style=filled, fillcolor=white,
           fontsize=12, fontname="Helvetica", margin="0.0, 0.0"]
     edge [color=white]
-    {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13]
+    {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13, shape=oval]
     {main_cls} [shape=house, href={link}]
     {ancestors}
     {child_list}
@@ -262,7 +262,7 @@ def create_directive(cls):
 
 
 def debug_graph():
-    for cls, infile in main_classes.items():
+    for cls, outfile in main_classes.items():
         print('cls/outfile:', cls, '/', outfile, create_directive(cls))
 
     for cls, data in derived_classes.items():
