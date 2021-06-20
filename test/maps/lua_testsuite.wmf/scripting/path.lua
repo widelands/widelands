@@ -23,9 +23,9 @@ end
 
 function path_test:test_list_files()
    local dirname = "tribes/workers/barbarians/soldier/"
-   assert_equal(20, #path.list_files(dirname .. "idle_ff.png"))
-   assert_equal("tribes/workers/barbarians/soldier/idle_01.png", path.list_files(dirname .. "idle_ff.png")[2])
-   assert_equal("tribes/workers/barbarians/soldier/idle_03.png", path.list_files(dirname .. "idle_ff.png")[4])
+   assert_equal(20, #path.list_files(dirname .. "idle_??.png"))
+   assert_equal("tribes/workers/barbarians/soldier/idle_01.png", path.list_files(dirname .. "idle_??.png")[2])
+   assert_equal("tribes/workers/barbarians/soldier/idle_03.png", path.list_files(dirname .. "idle_??.png")[4])
    assert_equal(1, #path.list_files(dirname .. "menu.png"))
    assert_equal("tribes/workers/barbarians/soldier/menu.png", path.list_files(dirname .. "menu.png")[1])
    assert_equal(0, #path.list_files(dirname .. "foo.png"))
