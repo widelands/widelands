@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 08:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-06-18 16:28+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,22 +24,22 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "Usage:"
-msgstr ""
+msgstr "사용방법:"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "와이드랜드 <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid "widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "와이드랜드 <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:52
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:58
 #: ../../src/wlapplication_messages.cc:184
 msgid "DIRNAME"
-msgstr ""
+msgstr "번역확인->DIRNAME"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "Options:"
@@ -47,13 +47,13 @@ msgstr "선택사항:"
 
 #: ../../src/wlapplication_messages.cc:53
 msgid "Use specified directory for the widelands data files"
-msgstr ""
+msgstr "와이드랜드 자료 파일에 지정된 디렉토리 사용"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid ""
 "Use specified directory for widelands config files, savegames and replays. "
 "Default is "
-msgstr ""
+msgstr "와이드랜드 구성 파일, 놀이 저장 및 재생을 위해 지정된 디렉토리를 사용합니다. 기본값은"
 
 #: ../../src/wlapplication_messages.cc:58
 msgid "Use specified directory for the widelands locale files"
@@ -67,7 +67,7 @@ msgstr ""
 #. monospaced terminals
 #: ../../src/wlapplication_messages.cc:63
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../src/wlapplication_messages.cc:65
 #: ../../src/wlapplication_messages.cc:69
@@ -75,7 +75,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:72
 #: ../../src/wlapplication_messages.cc:73
 msgid "FILENAME"
-msgstr ""
+msgstr "번역확인->FILENAME"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
@@ -129,7 +129,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Game options:"
-msgstr ""
+msgstr "놀이 선택사항:"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Note: New values will be written to config file"
@@ -143,12 +143,12 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:189
 #: ../../src/wlapplication_messages.cc:198
 msgid "n"
-msgstr ""
+msgstr "번역확인->n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:98
 msgid "Automatically save each `n` minutes"
-msgstr ""
+msgstr "`n` 분마다 자동으로 저장"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
