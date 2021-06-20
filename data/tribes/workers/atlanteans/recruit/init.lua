@@ -12,17 +12,23 @@ descriptions:new_worker_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 10, 30 },
-         fps = 5
+         fps = 5,
+         frames = 40,
+         rows = 7,
+         columns = 6,
+         hotspot = { 0, 26 }
       },
       walk = {
-         hotspot = { 20, 30 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 11, 25 }
+      },
+   },
 }
 
 pop_textdomain()
