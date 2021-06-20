@@ -6,7 +6,7 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2020
-# Markus Hällfors <markus@hallfors.com>, 2015
+# Markus <markus@hallfors.com>, 2015
 # Max Ihalempia, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007,2015
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-12 13:56+0000\n"
+"POT-Creation-Date: 2021-06-15 08:42+0000\n"
+"PO-Revision-Date: 2021-06-15 08:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -269,8 +269,8 @@ msgstr "Mar"
 msgid "Dec"
 msgstr "Jou"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -284,12 +284,12 @@ msgstr "Päävalikko"
 msgid "Tools"
 msgstr "Työkalut"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Tietoa"
 msgid "Click on a field to show information about it"
 msgstr "Napsauta maastoa saadaksesi tietoa siitä"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -560,11 +560,11 @@ msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
 #: ../../src/ui_fsmenu/addons.cc:1178 ../../src/ui_fsmenu/addons.cc:1234
 #: ../../src/ui_fsmenu/addons.cc:1355 ../../src/ui_fsmenu/addons.cc:2078
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1492
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1493
 msgid "Error"
 msgstr "Virhe"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1494
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1495
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1362,8 +1362,8 @@ msgid ""
 "location."
 msgstr "Valitse uusi kartta, minkä jälkeen klikkaa karttaa jakaaksesi sen halutusta kohdata. Kartan kokoa kasvatettaessa, uusi sarake/rivi sijoitetaan valittusta kohdasta itään/etelään. Kartan kokoa pienennettäessä, haluttu määrä sarakkeita/rivejä poistetaan jakokohdasta itään/etelään."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -2489,59 +2489,59 @@ msgstr "Alustan karttakohteita"
 msgid "Checking map"
 msgstr "Tarkistan kartan"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:546
+#: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
 #: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
 msgid "Preparing game…"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:116
 msgid "Could not establish connection to host"
 msgstr "Yhteyttä koneeseen ei voitu muodostaa"
 
-#: ../../src/network/gameclient.cc:214
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands ei kyennyt muodostamaan yhteyttä annettuun osoitteeseen. Joko oletetussa portissa ei ole käynnissä Widelands-palvelinta tai palvelin sulkeutui, kun yritit ottaa yhteyttä."
 
-#: ../../src/network/gameclient.cc:736
+#: ../../src/network/gameclient.cc:751
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/gameclient.cc:742
+#: ../../src/network/gameclient.cc:757
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:746
+#: ../../src/network/gameclient.cc:761
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:918
+#: ../../src/network/gameclient.cc:933
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:960
+#: ../../src/network/gameclient.cc:975
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-tarkistus onnistui."
 
-#: ../../src/network/gameclient.cc:1268
+#: ../../src/network/gameclient.cc:1283
 msgid "Disconnected"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1270
+#: ../../src/network/gameclient.cc:1285
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3119,11 +3119,11 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Ei Valittu"
 
-#: ../../src/ui_basic/panel.cc:310
+#: ../../src/ui_basic/panel.cc:306
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:433
+#: ../../src/ui_basic/panel.cc:436
 msgid "Game ending – please wait…"
 msgstr ""
 
@@ -5222,41 +5222,41 @@ msgstr ""
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1249
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1254
+#: ../../src/wlapplication.cc:1255
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1320
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1442
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1460
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1511
+#: ../../src/wlapplication.cc:1512
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5270,7 +5270,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1521
+#: ../../src/wlapplication.cc:1522
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5280,11 +5280,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1548
+#: ../../src/wlapplication.cc:1549
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1549
+#: ../../src/wlapplication.cc:1550
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5999,9 +5999,9 @@ msgstr "Satamat"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:733
 #: ../../src/wui/building_statistics_menu.cc:735
@@ -6404,8 +6404,8 @@ msgstr "Korvaa poistunut pelaaja tekoälyllä ja jatka pelaamista"
 msgid "AI for the disconnected player"
 msgstr "Poistuneen pelaajan korvaava tekoäly"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6816,37 +6816,45 @@ msgid "Map View"
 msgstr "karttanäkymä"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Hide Minimap"
 msgstr "Piiloita pienkartta"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Show Minimap"
 msgstr "Näytä pienkartta"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:276
+#: ../../src/wui/interactive_base.cc:277
 msgid "Zoom +"
 msgstr "Zoom +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:281
+#: ../../src/wui/interactive_base.cc:282
 msgid "Reset zoom"
 msgstr "Resetoi suurennus"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:286
+#: ../../src/wui/interactive_base.cc:287
 msgid "Zoom –"
-msgstr ""
-
-#: ../../src/wui/interactive_base.cc:732
-#, c-format
-msgid "Road length: %u"
 msgstr ""
 
 #: ../../src/wui/interactive_base.cc:733
 #, c-format
+msgid "Road length: %u"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:734
+#, c-format
 msgid "Waterway length: %1$u/%2$u"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:1433
+msgid "Failed saving screenshot!"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:1437
+msgid "Screenshot saved"
 msgstr ""
 
 #: ../../src/wui/interactive_gamebase.cc:54
@@ -6953,8 +6961,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Tilastot"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Merenkäynti"
