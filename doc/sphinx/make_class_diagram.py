@@ -9,6 +9,10 @@ RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 MAX_CHILDS = 2
 MAX_PARENTS = 1#MAX_CHILDS
 
+EXCLUDE_CLASSES = ['Market',
+                   'MarketDescription',
+                   ]
+
 main_classes = {}       # A dict with main class names as keys. The value
                         # will be the outfile as given by cpp_pairs in
                         # extract_rst.py.
@@ -41,6 +45,9 @@ def fill_data(file_name, outfile):
             cls_name = cls_name.replace('Lua', '')
             parent_cls1 = parent_cls1.replace('Lua', '')
             parent_cls2 = parent_cls2.replace('Lua', '')
+
+            if cls_name in EXCLUDE_CLASSES:
+                continue
 
             # find main lua class (module name)
             if parent_cls1 == 'LunaClass':
