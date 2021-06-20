@@ -930,9 +930,11 @@ void AddOnsCtrl::update_dependency_errors() {
 			Widelands::Game game;
 			game.descriptions();
 		} catch (const std::exception& e) {
-			warn_requirements_.set_text((boost::format(
-					_("An enabled add-on is defective. No games can be started with the current configuration.\nError message:\n%s"))
-					% e.what()).str());
+			warn_requirements_.set_text(
+			   (boost::format(_("An enabled add-on is defective. No games can be started with the "
+			                    "current configuration.\nError message:\n%s")) %
+			    e.what())
+			      .str());
 		}
 	} else {
 		const unsigned nr_warnings = warn_requirements.size();
