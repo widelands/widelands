@@ -31,13 +31,16 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 7, 20 }
       },
-      hacking = {
-         hotspot = { 10, 19 },
-         fps = 10
-      },
    },
 
    spritesheets = {
+      hacking = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 10, 19 }
+      },
       walk = {
          fps = 10,
          frames = 10,
