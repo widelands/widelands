@@ -876,13 +876,15 @@ void MainMenu::action(const MenuTarget t) {
 
 	case MenuTarget::kContinueLastsave:
 		if (!filename_for_continue_playing_.empty()) {
-			Widelands::Game game;
-			game.set_ai_training_mode(get_config_bool("ai_training", false));
-			SinglePlayerGameSettingsProvider sp;
-			try {
-				game.run_load_game(filename_for_continue_playing_, "");
-			} catch (const std::exception& e) {
-				WLApplication::emergency_save(this, game, e.what());
+			std::unique_ptr<Widelands::Game> game(create_safe_game(true));
+			if (game.get()) {
+				game->set_ai_training_mode(get_config_bool("ai_training", false));
+				SinglePlayerGameSettingsProvider sp;
+				try {
+					game->run_load_game(filename_for_continue_playing_, "");
+				} catch (const std::exception& e) {
+					WLApplication::emergency_save(this, *game, e.what());
+				}
 			}
 			// Update the Continue button in case a new savegame was created
 			set_labels();
