@@ -1284,7 +1284,7 @@ void WLApplication::handle_commandline_parameters() {
 			std::string text(static_cast<char*>(textptr), len);
 			free(textptr);
 
-			size_t sep_pos = text.find('\n');
+			size_t sep_pos = text.find_first_of("\n\r");
 			if (sep_pos == std::string::npos) {
 				return std::string("Malformed one-liner version string");
 			}
@@ -1293,8 +1293,8 @@ void WLApplication::handle_commandline_parameters() {
 				return std::string("Incorrect version string part");
 			}
 
-			text = text.substr(sep_pos + 1);
-			sep_pos = text.find('\n');
+			text = text.substr(sep_pos + (text.at(sep_pos) == '\r' ? 2 : 1));
+			sep_pos = text.find_first_of("\n\r");
 			if (sep_pos == std::string::npos) {
 				return std::string("Malformed two-liner version string");
 			}
