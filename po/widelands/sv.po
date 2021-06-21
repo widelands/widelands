@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-12 13:56+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-15 08:42+0000\n"
+"PO-Revision-Date: 2021-06-16 17:19+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -265,8 +265,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -280,12 +280,12 @@ msgstr "Huvudmeny"
 msgid "Tools"
 msgstr "Verktyg"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -475,10 +475,10 @@ msgstr "Information"
 msgid "Click on a field to show information about it"
 msgstr "Klicka på ett fält för att visa information om det"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -556,11 +556,11 @@ msgstr "Kartann är ändrad, vill du verkligen avsluta?"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
 #: ../../src/ui_fsmenu/addons.cc:1178 ../../src/ui_fsmenu/addons.cc:1234
 #: ../../src/ui_fsmenu/addons.cc:1355 ../../src/ui_fsmenu/addons.cc:2078
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1492
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1493
 msgid "Error"
 msgstr "Fel"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1494
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1495
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1358,8 +1358,8 @@ msgid ""
 "location."
 msgstr "Välj den nya kartstorleken och klicka sedan på kartan för att dela den i vald position. När kartstorleken ökas kommer nya rader och kolumner att läggas till öster/söder om vald position. När kartstorleken minskas kommer det valda antalet kolumner och rader att tas bort öster/söder om delningspunkten."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -2028,7 +2028,7 @@ msgstr "Ingen soldat hittades för denna träningsnivå!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1875
 #, c-format
 msgid "Completed %s"
-msgstr "Färdig med %s"
+msgstr "Färdig med att %s"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
@@ -2485,59 +2485,59 @@ msgstr "Initialiserar kartobjekt"
 msgid "Checking map"
 msgstr "Kontrollerar kartan"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:546
+#: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
 #: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
 msgid "Preparing game…"
 msgstr "Förbereder spel..."
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:116
 msgid "Could not establish connection to host"
 msgstr "Kunde ej upprätta anslutning till värd"
 
-#: ../../src/network/gameclient.cc:214
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands kunde inte etablera en anslutning till den angivna adressen. Antingen var ingen Widelandsserver igång på den förväntade porten eller stängde servern av när du försökte ansluta."
 
-#: ../../src/network/gameclient.cc:736
+#: ../../src/network/gameclient.cc:751
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u felaktighet i tillägg upptäckt:\n"
 msgstr[1] "%u felaktigheter i tillägg upptäckta:\n"
 
-#: ../../src/network/gameclient.cc:742
+#: ../../src/network/gameclient.cc:757
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n·\"%2$s\" som krävs av värden kunde inte hittas"
 
-#: ../../src/network/gameclient.cc:746
+#: ../../src/network/gameclient.cc:761
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n·\"%2$s\" installerad med version %3$s men värden använder version %4$s"
 
-#: ../../src/network/gameclient.cc:918
+#: ../../src/network/gameclient.cc:933
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me ’s fil misslyckades med md5 kontrollsummering"
 
-#: ../../src/network/gameclient.cc:960
+#: ../../src/network/gameclient.cc:975
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me kontrollerade mottagen fil. Trots att md5s kontrollsumma lyckades kan inte filen hanteras.."
 
-#: ../../src/network/gameclient.cc:1268
+#: ../../src/network/gameclient.cc:1283
 msgid "Disconnected"
 msgstr "Nedkopplad"
 
-#: ../../src/network/gameclient.cc:1270
+#: ../../src/network/gameclient.cc:1285
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3115,13 +3115,13 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Inte vald"
 
-#: ../../src/ui_basic/panel.cc:310
+#: ../../src/ui_basic/panel.cc:306
 msgid "Please wait…"
-msgstr ""
+msgstr "Var vänlig och vänta..."
 
-#: ../../src/ui_basic/panel.cc:433
+#: ../../src/ui_basic/panel.cc:436
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Spel avslutas – var vänlig och vänta..."
 
 #: ../../src/ui_basic/progresswindow.cc:73
 msgid "Loading…"
@@ -5218,41 +5218,41 @@ msgstr "Widelands kunde inte hitta filen \"%s \"."
 msgid "File system error"
 msgstr "Fel i filsystemet"
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1249
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Värde för kommandoradparameter saknas: %s"
 
-#: ../../src/wlapplication.cc:1254
+#: ../../src/wlapplication.cc:1255
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s kan inte kombineras med andra funktioner"
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1320
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Okänd kommandoradparameter: %s\nKanske ett \"=\" saknas?"
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1442
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized och --fullscreen kan inte kombineras"
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1460
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Okänd kommandoradsparameter: %s"
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Game ended unexpectedly"
 msgstr "Spelet avslutades oväntat"
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Unexpected error during the game"
 msgstr "Oväntat fel under spelets gång"
 
-#: ../../src/wlapplication.cc:1511
+#: ../../src/wlapplication.cc:1512
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5266,7 +5266,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Ett fel uppstod under spelets gång. Felmeddelandet är:\n\n%1$s\n\nVar vänlig och rapportera detta problem för att hjälpa oss förbättra Widelands. Du kan hitta relaterade meddelanden i standard output (stdout.txt i Windows). Du använder build %2$s (%3$s).\n\nVar vänlig och bifoga denna information till din rapport.\n\nVill du att Widelands ska försöka skapa en nödlägessparning av ditt spel? Det är ofta – men inte alltid – möjligt att ladda den och fortsätta spela."
 
-#: ../../src/wlapplication.cc:1521
+#: ../../src/wlapplication.cc:1522
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5276,11 +5276,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Spelet avslutades oväntat av följande anledning:\n\n%s\n\nVill du att Widelands ska försöka skapa en nödlägessparning av ditt spel? Det är ofta – men inte alltid – möjligt att ladda den och fortsätta spela."
 
-#: ../../src/wlapplication.cc:1548
+#: ../../src/wlapplication.cc:1549
 msgid "Emergency save failed"
 msgstr "Nödlägessparning misslyckades"
 
-#: ../../src/wlapplication.cc:1549
+#: ../../src/wlapplication.cc:1550
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5995,9 +5995,9 @@ msgstr "Hamnar"
 msgid "Low productivity:"
 msgstr "Låg produktivitet:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:733
 #: ../../src/wui/building_statistics_menu.cc:735
@@ -6400,8 +6400,8 @@ msgstr "Ersätt den frånkopplade spelaren med vald AI-spelare och fortsätt spe
 msgid "AI for the disconnected player"
 msgstr "AI-spelare för den frånkopplade spelaren"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6812,38 +6812,46 @@ msgid "Map View"
 msgstr "Kartvy"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Hide Minimap"
 msgstr "Dölj minikartan"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Show Minimap"
 msgstr "Visa minikartan"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:276
+#: ../../src/wui/interactive_base.cc:277
 msgid "Zoom +"
 msgstr "Zoom +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:281
+#: ../../src/wui/interactive_base.cc:282
 msgid "Reset zoom"
 msgstr "Återställ zoom"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:286
+#: ../../src/wui/interactive_base.cc:287
 msgid "Zoom –"
 msgstr "Zoom –"
 
-#: ../../src/wui/interactive_base.cc:732
+#: ../../src/wui/interactive_base.cc:733
 #, c-format
 msgid "Road length: %u"
 msgstr "Väglängd: %u"
 
-#: ../../src/wui/interactive_base.cc:733
+#: ../../src/wui/interactive_base.cc:734
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Vattänväglängd: %1$u/%2$u"
+
+#: ../../src/wui/interactive_base.cc:1433
+msgid "Failed saving screenshot!"
+msgstr "Misslyckades med att spara skärmdump!"
+
+#: ../../src/wui/interactive_base.cc:1437
+msgid "Screenshot saved"
+msgstr "Skärmdump sparad"
 
 #: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
@@ -6875,11 +6883,11 @@ msgstr "Inställningar för ljudeffekter och musik"
 #: ../../src/wui/interactive_gamebase.cc:161
 #: ../../src/wui/interactive_gamebase.cc:189
 msgid "Restart Scenario"
-msgstr ""
+msgstr "Återstarta scenario"
 
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "Är du säker på att du vill återstarta detta scenario?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
@@ -6949,8 +6957,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistik"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Sjöfart"
@@ -7741,15 +7749,15 @@ msgstr "Arbetare i lager"
 
 #: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
-msgstr ""
+msgstr "Nästa uppdrag"
 
 #: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
-msgstr ""
+msgstr "Påbörja nästa uppdrag nu"
 
 #: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
-msgstr ""
+msgstr "Fortsätt spela detta uppdrag"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:85

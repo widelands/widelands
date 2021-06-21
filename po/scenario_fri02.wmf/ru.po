@@ -114,7 +114,7 @@ msgstr "Решите, в чем вы будите сотрудничать с И
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "СОберите товары для дара или разрушьте имперский склад"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
@@ -224,7 +224,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:343
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "Кто тут может указывать тебе!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
@@ -236,7 +236,7 @@ msgstr "Истребите дикарей"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
-msgstr ""
+msgstr "Победите враждебное племя к северо-западу от имперских застав!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
@@ -251,10 +251,12 @@ msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
+"Единственное, что положит конец поползновениям Империи, так это разрушение "
+"ее застав и полная утрата территорий."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Захватите все оставшиеся владения Маврикия."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
@@ -278,6 +280,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Я уже начинаю верить, что этому путешествию не будет конца. Не имею ни "
+"малейшего понятия, как долго нам странствовать по морю, терзаемые "
+"штормами... может быть, месяцы."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -304,6 +309,8 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"И все-таки мы выжили. Наконец, мы добрались до устья спокойного фьерда. "
+"Поднявшись по реке, мы разбили здесь лагерь."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:145
@@ -323,6 +330,8 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
+"Здесь жила кучка чужаков. Они приветствовали нас взмахами топоров, крича "
+"что-то на своем бессвязном языке."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:151
@@ -331,6 +340,9 @@ msgid ""
 "took their land. I just hope there aren’t more of them, so we can live in "
 "peace."
 msgstr ""
+"Наш кораблю больше не мог продолжать идти под парусом, и потому мы перебили "
+"местных и заняли их землю. Надеюсь, что это было последний раз и что "
+"настала, наконец, мирная жизнь."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:157
@@ -347,6 +359,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Разведчики больше не сообщали о признаках обитаемости на острове. И тогда мы"
+" начали строить наш новый дом."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:163
@@ -429,7 +443,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
-msgstr ""
+msgstr "Новый металл"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:200
@@ -572,7 +586,7 @@ msgstr "Мне не одни"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Salvete peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -583,6 +597,8 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
+"sum. Vos nominate!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:275
