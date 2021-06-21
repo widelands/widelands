@@ -40,31 +40,34 @@ def fill_data(file_name, outfile):
 
     if found_cls:
         mod_name = ''
-        for cls_name, parent_cls1, parent_cls2 in found_cls:
+        for cls_name, namespace_or_parent, parent_cls in found_cls:
+            # the variables refer to definition:
+            # cls_name : public namespace_or_parent::parent_cls
+
             # strip out leading 'Lua'; this can't be done in the regexp
             # because we need 'LunaClass' to get the parent class of all classes
             cls_name = cls_name.replace('Lua', '')
-            parent_cls1 = parent_cls1.replace('Lua', '')
-            parent_cls2 = parent_cls2.replace('Lua', '')
+            namespace_or_parent = namespace_or_parent.replace('Lua', '')
+            parent_cls = parent_cls.replace('Lua', '')
 
             if cls_name in EXCLUDE_CLASSES:
                 continue
 
             # find main lua class (module name)
-            if parent_cls1 == 'LunaClass':
+            if namespace_or_parent == 'LunaClass':
                 mod_name = cls_name
                 continue
 
             # feed data models
-            if parent_cls1 == mod_name:
+            if namespace_or_parent == mod_name:
                 main_classes[cls_name] = outfile
             else:
-                if parent_cls2:
-                    # ... : public parent_cls1::parent_cls2
-                    derived_classes[cls_name] = [parent_cls2, outfile]
+                if parent_cls:
+                    # ... : public namespace_or_parent::parent_cls
+                    derived_classes[cls_name] = [parent_cls, outfile]
                 else:
-                    # ... : public parent_cls1
-                    derived_classes[cls_name] = [parent_cls1, outfile]
+                    # ... : public namespace_or_parent
+                    derived_classes[cls_name] = [namespace_or_parent, outfile]
 
 
 def init(base_dir, cpp_files):
@@ -248,7 +251,8 @@ def create_directive(cls):
         main_cls, link = format_main_class(cls)
         graph_directive = """
 .. graphviz::
-    
+    :alt: Dependency graph for class: {cur_cls}
+
     graph {cur_cls} {{
 
 
