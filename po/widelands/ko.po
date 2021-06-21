@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-12 17:44+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2021-06-15 08:42+0000\n"
+"PO-Revision-Date: 2021-06-15 08:46+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -268,8 +268,8 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -283,12 +283,12 @@ msgstr "주 메뉴"
 msgid "Tools"
 msgstr "도구"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -478,10 +478,10 @@ msgstr "정보"
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -559,11 +559,11 @@ msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
 #: ../../src/ui_fsmenu/addons.cc:1178 ../../src/ui_fsmenu/addons.cc:1234
 #: ../../src/ui_fsmenu/addons.cc:1355 ../../src/ui_fsmenu/addons.cc:2078
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1492
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1493
 msgid "Error"
 msgstr "오류"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1494
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1495
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1360,8 +1360,8 @@ msgid ""
 "location."
 msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -2476,58 +2476,58 @@ msgstr "지도 객체를 초기화하고 있음"
 msgid "Checking map"
 msgstr "지도를 검사하고 있음"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:546
+#: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
 #: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
 msgid "Preparing game…"
 msgstr "놀이를 준비하고 있음…"
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:116
 msgid "Could not establish connection to host"
 msgstr "호스트에 연결할 수 없습니다"
 
-#: ../../src/network/gameclient.cc:214
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands 가 주어진 주소에 연결할 수 없습니다. 가정된 포트에서 Widelands 서버가 실행 중이지 않거나 연결할 때 서버가 종료되었을것입니다."
 
-#: ../../src/network/gameclient.cc:736
+#: ../../src/network/gameclient.cc:751
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u 추가기능 불일치가 감지됨:\n"
 
-#: ../../src/network/gameclient.cc:742
+#: ../../src/network/gameclient.cc:757
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "번역확인-> %1$s\n· ‘%2$s’ 호스트에 필요한 것 찾을 수 없습니다"
 
-#: ../../src/network/gameclient.cc:746
+#: ../../src/network/gameclient.cc:761
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n· ‘%2$s’ 에 설치된 버전 %3$s 그러나 호스트는 버전 %4$s 을 사용함"
 
-#: ../../src/network/gameclient.cc:918
+#: ../../src/network/gameclient.cc:933
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me 나의 파일이 md5 체크섬에 실패했습니다."
 
-#: ../../src/network/gameclient.cc:960
+#: ../../src/network/gameclient.cc:975
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me 확보한 파일을 체크했습니다. 비록 md5 체크섬이 성공했을지라도 파일을 다룰 수 없습니다."
 
-#: ../../src/network/gameclient.cc:1268
+#: ../../src/network/gameclient.cc:1283
 msgid "Disconnected"
 msgstr "연결 끊김"
 
-#: ../../src/network/gameclient.cc:1270
+#: ../../src/network/gameclient.cc:1285
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3103,11 +3103,11 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "선택 안됨"
 
-#: ../../src/ui_basic/panel.cc:310
+#: ../../src/ui_basic/panel.cc:306
 msgid "Please wait…"
 msgstr "잠시 기다리십시오… "
 
-#: ../../src/ui_basic/panel.cc:433
+#: ../../src/ui_basic/panel.cc:436
 msgid "Game ending – please wait…"
 msgstr "게임 종료 – 잠시 기다십시오… "
 
@@ -5191,41 +5191,41 @@ msgstr ""
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1249
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1254
+#: ../../src/wlapplication.cc:1255
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1320
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1442
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1460
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1511
+#: ../../src/wlapplication.cc:1512
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5239,7 +5239,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1521
+#: ../../src/wlapplication.cc:1522
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5249,11 +5249,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1548
+#: ../../src/wlapplication.cc:1549
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1549
+#: ../../src/wlapplication.cc:1550
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5967,9 +5967,9 @@ msgstr "항구"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:733
 #: ../../src/wui/building_statistics_menu.cc:735
@@ -6372,8 +6372,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6780,38 +6780,46 @@ msgid "Map View"
 msgstr "지도 보기"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Hide Minimap"
 msgstr "작은 지도 숨김"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Show Minimap"
 msgstr "작은 지도 표시"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:276
+#: ../../src/wui/interactive_base.cc:277
 msgid "Zoom +"
 msgstr "확대"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:281
+#: ../../src/wui/interactive_base.cc:282
 msgid "Reset zoom"
 msgstr "기본 배율 전환"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:286
+#: ../../src/wui/interactive_base.cc:287
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:732
+#: ../../src/wui/interactive_base.cc:733
 #, c-format
 msgid "Road length: %u"
 msgstr "땅길 길이: %u"
 
-#: ../../src/wui/interactive_base.cc:733
+#: ../../src/wui/interactive_base.cc:734
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "물길 길이: %1$u/%2$u"
+
+#: ../../src/wui/interactive_base.cc:1433
+msgid "Failed saving screenshot!"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:1437
+msgid "Screenshot saved"
+msgstr ""
 
 #: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
@@ -6917,8 +6925,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "항해"
