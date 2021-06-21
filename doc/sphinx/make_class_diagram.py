@@ -6,6 +6,7 @@ import os
 
 HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
+
 MAX_CHILDS = 2
 MAX_PARENTS = 1#MAX_CHILDS
 

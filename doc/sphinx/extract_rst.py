@@ -118,16 +118,26 @@ def extract_rst_from_cpp(inname, outname=None):
 
     if output.strip():
         if mcd:
-            # this should be part of make_class_diagram.py but then all
-            # created *.rst-files have to be read and written again
+            # TODO: This should be part of make_class_diagram.py.
             found_cls = mcd.RSTDATA_CLS_RE.findall(output)
             for cls in found_cls:
                 directive = mcd.create_directive(cls)
                 # For classes without children and ancestors directive is None
                 if directive:
+                    child_str = ''
+                    ancestors = mcd.get_ancestor_tree(cls)
+                    ancestors.pop(0)
+                    if ancestors:
+                        child_str = '   Child of (inserted): '
+                        for i, ancestor in enumerate(ancestors):
+                            child_str += ' :class:`{a}`'.format(child_str, a=ancestor)
+                            if i < len(ancestors) - 1:
+                                # add space except after last entry
+                                child_str += ', '
                     repl_str = '.. class:: {}\n'.format(cls)
-                    directive = '{}\n{}'.format(directive, repl_str)
+                    directive = '{}\n{}\n{}\n'.format(directive, repl_str, child_str)
                     output = output.replace(repl_str, directive)
+
         out = sys.stdout
         if outname is not None:
             out = open(p.join(source_dir, outname), 'w')
