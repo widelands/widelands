@@ -153,7 +153,7 @@ function wait_for_message(title)
    archive_messages()
    sleep(5000)
    local old_speed = game.desired_speed
-   game.desired_speed = 100 * 1000
+   game.desired_speed = 50 * 1000
    sleep(5000)
    while true do
       while #p1.inbox == 0 do
@@ -318,6 +318,9 @@ function test_transporting_works()
    port:start_expedition()
    wait_for_message("Expedition")
 
+   game.desired_speed = 2 * 1000
+   sleep(20000)
+
    if first_ship.state=="exp_waiting" then
       expedition_ship=first_ship
    elseif second_ship.state=="exp_waiting" then
@@ -327,7 +330,7 @@ function test_transporting_works()
    end
 
    expedition_ship.island_explore_direction="ccw"
-   sleep(2000)
+   sleep(5000)
    assert_equal("ccw",expedition_ship.island_explore_direction)
    wait_for_message("Port Space")
    expedition_ship:build_colonization_port()
