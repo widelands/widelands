@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-11 06:21+0000\n"
+"PO-Revision-Date: 2021-06-18 07:37+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -411,7 +411,7 @@ msgstr "Очень хорошо. Теперь о миникарте."
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Для этого вы можете выбрать пункт \"Показать миникарту\" в меню \"Виды карты\" внизу экрана, или нажать клавишу \"%s\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -511,7 +511,7 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr ""
+msgstr "Если вы решите, что не хотите строить дорогу прямо сейчас, то можете отменить строительство дороги, щёлкнув начальный флаг дороги и значок отмены."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
@@ -525,13 +525,13 @@ msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr ""
+msgstr "Превосходно! Сразу после размещения здания, вы были переключены в режим дорожного строительства. Новая дорога начнется от флага с лица новой строительной площадки."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "Чтобы войти в режим дорожного строительства для любого флага, щелкните левой кнопкой мыши на флаге и выберите символ дорожного строительства."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -635,7 +635,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Похоже, вы снесли стройплощадку под каменоломню, а она нам нужна. Хорошо еще, что у нас еще достаточно бревен и можно возобновить стройку."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -643,7 +643,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "Вы можете загрузить игру из последнего сохранения. К счастью, игра автоматически сохраняется время от времени. Для этого вам нужно выйти в главное меню и выбрать \"Одиночная игра\" → \"Загрузить игру\". И, пожалуйста, в следующий раз будьте осторожнее."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
@@ -682,7 +682,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Пока мы ждем, я покажу вам другую полезную функцию. Бывает сложно отличить здания друг от друга. Widelands предоставляет функцию показа текстовых ярлыков над постройками, так называемые \"описи\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -690,7 +690,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Показать или скрыть опись здания вы можете, выбрав \"Показать опись\" в меню \"Показать/скрыть\" внизу или нажав \"%s\" на клавиатуре."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -707,20 +707,20 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Показать или скрыть надписи статистики построек, вы можете выбрав \"Показать статистику\" в меню \"Показать/Скрыть\" внизу или нажав \"%s\" на клавиатуре."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "Было бы неплохо узнать степень готовности каменоломни, не открывая это окно, верно?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
 "In addition to the buildings’ census, you can also activate statistics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
-msgstr ""
+msgstr "Помимо описи зданий, вы можете включить показ статистических данных. Они сообщат о производительности зданий и этапах строительства."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -749,7 +749,7 @@ msgstr "Продолжайте нажимать кнопку \"Архивиро�
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Вы также можете зажать Ctrl или Shift для выбора нескольких сообщений, или нажать %s для выбора всех сразу."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #, lua-format
@@ -757,7 +757,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Чтобы сделать это, откройте окно сообщений, нажав \"%s\" или щелкнув по второй справа кнопке на панели внизу экрана. Новейшее сообщение будет отмечено для вас автоматически."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -809,7 +809,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Все окна в Widelands (кроме сценарных окон с кнопкой \"ОК\") могут быть закрыты, если щелкнуть ПКМ на них. Некоторые окна могут также быть переключены кнопками на панели в самой нижней части экрана."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -925,7 +925,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Для расширения просто постройте военное здание на краю вашей территории. Варвары могут выбрать различные военные здания: караульные, форпосты, башни и крепости. Чем крупнее здание, тем более дорогим будет его строительство, в тоже время больше территории вокруг него будет захвачено и в нём может быть размещено больше солдат. Здания также отличаются пределами видимости: постройки с башнями позволяют видеть дальше, чем другие."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""

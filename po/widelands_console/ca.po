@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-14 20:58+0000\n"
+"PO-Revision-Date: 2021-06-15 13:59+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -349,7 +349,7 @@ msgstr "Determina si usar el cursor del ratolí proveït per l'SDL."
 
 #: ../../src/wlapplication_messages.cc:179
 msgid "Whether to use sticky tooltips"
-msgstr ""
+msgstr "Estableix si els indicadors de funció són apegalosos."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:183
@@ -373,7 +373,7 @@ msgstr "Determina si els moviments automàtics del mapa s'han d'animar."
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
-msgstr ""
+msgstr "Mou una finestra a la vora de la pantalla quan la vora estigui a una distància `n`."
 
 #: ../../src/wlapplication_messages.cc:195
 msgid ""
@@ -386,7 +386,7 @@ msgstr "Habilita/deshabilita l'acoblament a la vora de la pantalla quan la vora 
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
-msgstr ""
+msgstr "Mou una finestra a la vora del panell quan la vora estigui a una distància `n`."
 
 #: ../../src/wlapplication_messages.cc:204
 msgid ""
