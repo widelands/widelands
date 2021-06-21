@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-18 17:05+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-18 14:15+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,14 +112,14 @@ msgstr "Odstranit prvky z mapy nebo snížit počet prvků o hodnotu v \"Zvýši
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "Shift + Klik"
+msgstr "Shift + klik"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:47
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr "Ctrl + Klik"
+msgstr "Ctrl + klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Set map elements to the value selected by ‘Set Value’"
