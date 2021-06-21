@@ -335,6 +335,11 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
+"Hem acabat en una illa estranya. El terra és dur, negre i empinat. L'aire fa"
+" olor a cremat i la platja està plena de cendres de colors. Difícilment puc "
+"posar en paraules la meva aprensió. No sé si hi ha alguna cosa a témer, però"
+" hem de ser molt cautelosos per si en trobem alguna. Amb una mica de sort, "
+"arribarem a l'altre extrem de l'illa aviat."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:154
@@ -394,6 +399,10 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
+"Pau, rei Angadthur! Sóc en Claus Lembeck i aquest és el meu fill Henneke. "
+"Estem buscant el meu vell amic Reebaud, que va deixar el nostre país fa uns "
+"anys per buscar una llar nova al nord. Si puc preguntar, heu sentit a "
+"parlar-ne i ens podríeu dir on el podem trobar?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:179
@@ -596,6 +605,11 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Estic content de sentir que voleu pau. Em sap greu però no he sentit el nom "
+"Reebaud mai en la meva vida. Si voleu anar cap al nord, tenim el mateix "
+"destí, ja que també hi vaig cap allí per viatge oficial des de la capital. "
+"Estem preparant un vaixell per navegar. Us podem portar amb nosaltres si "
+"voleu, sempre que pagueu pel passatge."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
@@ -691,6 +705,10 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"Hem conquerit el port! Ja estem construint un vaixell i, quan el tinguem "
+"acabat, podrem viatjar al nord. Encara no hem sentit notícies del Reebaud. "
+"Crec que el trobarem aviat i ens ajudarà a reconquerir Föhr de l'Atteredat "
+"l'usurpador!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
