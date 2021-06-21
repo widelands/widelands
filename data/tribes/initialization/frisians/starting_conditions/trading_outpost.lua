@@ -169,6 +169,10 @@ init = {
             wh:set_wares("granite", wh:get_wares("granite") + 5)
             added = added + 1
          end
+         if wh:get_wares("reed") < 100 then
+            wh:set_wares("reed", wh:get_wares("reed") + 5)
+            added = added + 1
+         end
          if wh:get_wares("coal") < 100 then
             wh:set_wares("coal", wh:get_wares("coal") + 10)
             added = added + 1
