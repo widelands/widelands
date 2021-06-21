@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-12 13:56+0000\n"
+"POT-Creation-Date: 2021-06-15 08:42+0000\n"
+"PO-Revision-Date: 2021-06-15 08:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -277,8 +277,8 @@ msgstr "lis"
 msgid "Dec"
 msgstr "gru"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -292,12 +292,12 @@ msgstr "Menu główne"
 msgid "Tools"
 msgstr "Narzędzia"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -487,10 +487,10 @@ msgstr "Informacja"
 msgid "Click on a field to show information about it"
 msgstr "Kliknij pole, by pokazać informacje o nim"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -568,11 +568,11 @@ msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
 #: ../../src/ui_fsmenu/addons.cc:1178 ../../src/ui_fsmenu/addons.cc:1234
 #: ../../src/ui_fsmenu/addons.cc:1355 ../../src/ui_fsmenu/addons.cc:2078
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1492
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/wlapplication.cc:1493
 msgid "Error"
 msgstr "Błąd"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1494
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1495
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1372,8 +1372,8 @@ msgid ""
 "location."
 msgstr "Wybierz nowy rozmiar mapy, po czym kliknij na mapę, aby podzielić ją w wybranym miejscu. Przy powiększaniu mapy nowe kolumny/rzędy zostaną wstawione na wschód/południe od wybranego punktu. Przy zmniejszaniu mapy odpowiednia ilość kolumn/rzędów zostanie usunięta na wschód/południe od wybranego punktu."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -2521,24 +2521,24 @@ msgstr "Inicjalizacja obiektów na mapie"
 msgid "Checking map"
 msgstr "Sprawdzanie mapy"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:546
+#: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
 #: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
 msgid "Preparing game…"
 msgstr "Przygotowywanie gry..."
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:116
 msgid "Could not establish connection to host"
 msgstr "Nie udało się ustanowić połączenia z hostem"
 
-#: ../../src/network/gameclient.cc:214
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands nie mógł połączyć się ze wskazanym adresem. Albo serwer Widelands nie był uruchomiony pod tym adresem, albo serwer zakończył działanie podczas próby nawiązania połączenia."
 
-#: ../../src/network/gameclient.cc:736
+#: ../../src/network/gameclient.cc:751
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2547,35 +2547,35 @@ msgstr[1] "%u wykryto niezgodności dodatków:\n"
 msgstr[2] "%u wykryto niezgodności dodatków:\n"
 msgstr[3] "%u wykryto niezgodności dodatków:\n"
 
-#: ../../src/network/gameclient.cc:742
+#: ../../src/network/gameclient.cc:757
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n. '%2$s' wymagany przez hosta nie został znaleziony"
 
-#: ../../src/network/gameclient.cc:746
+#: ../../src/network/gameclient.cc:761
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n. '%2$s' zainstalowano wersję %3$s, gdy host używa wersji %4$s"
 
-#: ../../src/network/gameclient.cc:918
+#: ../../src/network/gameclient.cc:933
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me nie przeszedł testu md5 swojego pliku."
 
-#: ../../src/network/gameclient.cc:960
+#: ../../src/network/gameclient.cc:975
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me sprawdził odebrany plik. Pomimo, że suma md5 się zgadza, nie mogę obsłużyć pliku."
 
-#: ../../src/network/gameclient.cc:1268
+#: ../../src/network/gameclient.cc:1283
 msgid "Disconnected"
 msgstr "Rozłączony"
 
-#: ../../src/network/gameclient.cc:1270
+#: ../../src/network/gameclient.cc:1285
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3157,11 +3157,11 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nie wybrano"
 
-#: ../../src/ui_basic/panel.cc:310
+#: ../../src/ui_basic/panel.cc:306
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:433
+#: ../../src/ui_basic/panel.cc:436
 msgid "Game ending – please wait…"
 msgstr ""
 
@@ -5290,41 +5290,41 @@ msgstr "Widelands nie znalazło pliku \"%s\"."
 msgid "File system error"
 msgstr "Błąd systemu plików"
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1249
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1254
+#: ../../src/wlapplication.cc:1255
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1320
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1442
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1459
+#: ../../src/wlapplication.cc:1460
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Game ended unexpectedly"
 msgstr "Gra zakończyła się nieoczekiwanie"
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1509
 msgid "Unexpected error during the game"
 msgstr "Niespodziewany błąd podczas gry"
 
-#: ../../src/wlapplication.cc:1511
+#: ../../src/wlapplication.cc:1512
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5338,7 +5338,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Wystąpił błąd. Wiadomość o błędzie:\n\n%1$s\n\nProsimy o zgłoszenie błędu, by pomóc nam ulepszać Widelands. Informacje o błędzie znajdziesz na standardowym wyjściu (stdout.txt na Windows). Używasz wersji %2$s (%3$s).\nProsimy o dodanie tej informacji do zgłoszenia.\nCzy chcesz, aby Widelands spróbowało utworzyć awaryjny stan gry? Często – choć nie zawsze – można go załadować i kontynuować grę."
 
-#: ../../src/wlapplication.cc:1521
+#: ../../src/wlapplication.cc:1522
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5348,11 +5348,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Gra zakończyła się nieoczekiwanie z następującego powodu:\n\n%s\n\nCzy chcesz, aby Widelands spróbowało utworzyć awaryjny stan gry? Często – choć nie zawsze – można go załadować i kontynuować grę."
 
-#: ../../src/wlapplication.cc:1548
+#: ../../src/wlapplication.cc:1549
 msgid "Emergency save failed"
 msgstr "Awaryjne zapisywanie nie powiodło się"
 
-#: ../../src/wlapplication.cc:1549
+#: ../../src/wlapplication.cc:1550
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6069,9 +6069,9 @@ msgstr "Porty"
 msgid "Low productivity:"
 msgstr "Niska produktywność:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:733
 #: ../../src/wui/building_statistics_menu.cc:735
@@ -6474,8 +6474,8 @@ msgstr "Zastąp odłączonego gracza wybraną SI i kontynuuj grę"
 msgid "AI for the disconnected player"
 msgstr "SI dla rozłączonego gracza"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6894,37 +6894,45 @@ msgid "Map View"
 msgstr "Widok Mapy"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Hide Minimap"
 msgstr "Ukryj Minimapę"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:271
 msgid "Show Minimap"
 msgstr "Pokaż Minimapę"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:276
+#: ../../src/wui/interactive_base.cc:277
 msgid "Zoom +"
 msgstr "Zoom +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:281
+#: ../../src/wui/interactive_base.cc:282
 msgid "Reset zoom"
 msgstr "Zresetuj przybliżenie"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:286
+#: ../../src/wui/interactive_base.cc:287
 msgid "Zoom –"
 msgstr "Zoom –"
 
-#: ../../src/wui/interactive_base.cc:732
+#: ../../src/wui/interactive_base.cc:733
 #, c-format
 msgid "Road length: %u"
 msgstr "Długość drogi: %u"
 
-#: ../../src/wui/interactive_base.cc:733
+#: ../../src/wui/interactive_base.cc:734
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:1433
+msgid "Failed saving screenshot!"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:1437
+msgid "Screenshot saved"
 msgstr ""
 
 #: ../../src/wui/interactive_gamebase.cc:54
@@ -7031,8 +7039,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statystyki"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Z żeglarstwem"

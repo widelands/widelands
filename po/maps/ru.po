@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-08 08:56+0000\n"
+"PO-Revision-Date: 2021-06-16 08:28+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -997,7 +997,7 @@ msgstr "Множество прекрасных зеленых островов 
 msgid ""
 "Take care not to build your ships in the lagoons. They cannot pass through "
 "the reefs to the main ocean, where your ports are located."
-msgstr ""
+msgstr "Нежелательно строить корабли в лагунах: они не смогут выйти в океан из-за рифов, а значит, попасть в ваши порты."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
