@@ -34,7 +34,7 @@ msgstr "Нам надо выделить место под производст�
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "Итак, давайте найдем под них место."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
@@ -46,7 +46,7 @@ msgstr "Выберите \"Показать место под стройку\"."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "Теперь мы можем видеть, где можно ставить здания и флаги."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -59,7 +59,7 @@ msgstr "Флаги"
 #: ../../data/scripting/training_wheels/flags.lua:63
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
-msgstr ""
+msgstr "Наши носильщики будут перемещать товары быстрее по цепочке."
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
@@ -71,7 +71,7 @@ msgstr "Щелкните по кнопке с флагом."
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "Теперь проверьте, можно ли разбить дороги флагами."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -127,6 +127,8 @@ msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"Зажав \"Ctrl\" при щелчке по второму флагу, вы расставите между ними все "
+"возможные флаги."
 
 #: ../../data/scripting/training_wheels/logs.lua:125
 #: ../../data/scripting/training_wheels/logs.lua:175
@@ -138,6 +140,7 @@ msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
+"Вам нужно снабжать племя бревнами. Для этого поставьте следующие здания:"
 
 #: ../../data/scripting/training_wheels/logs.lua:138
 #: ../../data/scripting/training_wheels/logs.lua:149
@@ -151,17 +154,18 @@ msgstr "Дороги"
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "Щелкните по кнопке строительства…"
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "…затем щелкните по флагу перед нужным зданием."
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
+"Хорошо! Мы начали добычу бревен, а это нужно для дальнейшего строительства."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
@@ -193,6 +197,8 @@ msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
+"Как и в любом другом окне, вы также можете закрыть окно «Задания», щелкнув "
+"по нему правой кнопкой мыши."
 
 #: ../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
@@ -203,18 +209,26 @@ msgstr ""
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
+"Здесь местность ровная. Ваши носильщики будут двигаться очень быстро в этой "
+"местности."
 
 #: ../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"Здесь есть небольшой уклон и нужно подниматься в горку, чтобы достичь этого "
+"поля. Это означает, что ваши рабочие будут быстрее идти вниз, нежели "
+"подниматься в горку."
 
 #: ../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Здесь дорога между участками с очень крутым подъемом. Скорость сильно "
+"повышается в одном направлении, но сильно снижается в другом, также очень "
+"существенно."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176
@@ -226,6 +240,7 @@ msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr ""
+"Вам нужно снабжать племя гранитом. Для этого постройте следующее здание:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
