@@ -1313,7 +1313,8 @@ void WLApplication::handle_commandline_parameters() {
 
 		const std::string err = checkdatadirversion(datadir_);
 		if (!err.empty()) {
-			throw wexception("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
+			log_err("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
+			exit(2);
 		}
 	} else {
 		bool found = false;
