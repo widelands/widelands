@@ -127,6 +127,11 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return pointer_;
 	}
 
+	void game_setup_aborted() override {
+		GameController::game_setup_aborted();
+		pointer_.reset();
+	}
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(GameClient);
 

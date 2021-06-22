@@ -412,7 +412,7 @@ void LaunchMPG::load_map_info() {
 
 /// Show help
 void LaunchMPG::help_clicked() {
-	HelpWindow help(&capsule_.menu(), lua_, "txts/help/multiplayer_help.lua",
+	HelpWindow help(&capsule_.menu(), lua_.get(), "txts/help/multiplayer_help.lua",
 	                /** TRANSLATORS: This is a heading for a help window */
 	                _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();
