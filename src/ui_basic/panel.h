@@ -63,28 +63,29 @@ namespace UI {
  */
 class Panel : public boost::signals2::trackable {
 public:
+	// Panel flags. The `Panel::flags_` attribute is a bitset of these flags.
 	enum {
-		pf_handle_mouse = 1 << 1,  ///< receive mouse events
-		pf_thinks = 1 << 2,        ///< call think() function during run
-		pf_top_on_click = 1 << 3,  ///< bring panel on top when clicked inside it
-		pf_die = 1 << 4,           ///< this panel needs to die
-		pf_child_die = 1 << 5,     ///< a child needs to die
-		pf_visible = 1 << 6,       ///< render the panel
-		pf_can_focus = 1 << 7,     ///< can receive the keyboard focus
+		pf_handle_mouse = 1 << 0,  ///< receive mouse events
+		pf_thinks = 1 << 1,        ///< call think() function during run
+		pf_top_on_click = 1 << 2,  ///< bring panel on top when clicked inside it
+		pf_die = 1 << 3,           ///< this panel needs to die
+		pf_child_die = 1 << 4,     ///< a child needs to die
+		pf_visible = 1 << 5,       ///< render the panel
+		pf_can_focus = 1 << 6,     ///< can receive the keyboard focus
 		/// children should snap only when overlapping the snap target
-		pf_snap_windows_only_when_overlapping = 1 << 8,
+		pf_snap_windows_only_when_overlapping = 1 << 7,
 		/// children should snap to the edges of this panel
-		pf_dock_windows_to_edges = 1 << 9,
+		pf_dock_windows_to_edges = 1 << 8,
 		/// whether any change in the desired size should propagate to the actual size
-		pf_layout_toplevel = 1 << 10,
+		pf_layout_toplevel = 1 << 9,
 		/// whether widget wants to receive unicode textinput messages
-		pf_handle_textinput = 1 << 11,
+		pf_handle_textinput = 1 << 10,
 		/// whether widget and its children will handle any key presses
-		pf_handle_keypresses = 1 << 12,
+		pf_handle_keypresses = 1 << 11,
 		// has a non-empty logic_think() implementation
-		pf_logic_think = 1 << 13,
+		pf_logic_think = 1 << 12,
 		// Do not draw any tooltips and stuff
-		pf_hide_all_overlays = 1 << 14,
+		pf_hide_all_overlays = 1 << 13,
 	};
 
 	Panel(Panel* const nparent,

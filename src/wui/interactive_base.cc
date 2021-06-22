@@ -712,12 +712,11 @@ void InteractiveBase::game_logic_think() {
 void InteractiveBase::think() {
 	UI::Panel::think();
 	if (in_road_building_mode()) {
-		set_tooltip(
-		   in_road_building_mode(RoadBuildingType::kRoad) ?
-		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
-		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
-		       egbase().map().get_waterway_max_length())
-		         .str());
+		if (in_road_building_mode(RoadBuildingType::kRoad)) {
+			set_tooltip((boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str());
+		} else {
+			set_tooltip((boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() % egbase().map().get_waterway_max_length()).str());
+		}
 	}
 }
 

@@ -284,6 +284,10 @@ void Panel::do_redraw_now(const std::string& message) {
 		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
 		g_mouse_cursor->draw(rt, app->get_mouse_position());
 
+		// Tooltip magic. Some panels never want to show a tooltip, and if the display an
+		// overlay message we ignore user input and don't draw tooltips any more either.
+		// When deciding which panel gets to draw a tooltip (if allowed), modal panels and
+		// their children take precedence over a (potentially non-modal) toplevel panel.
 		if (message.empty() && (flags_ & pf_hide_all_overlays) == 0) {
 			if (modal_ != nullptr) {
 				modal_->do_tooltip();
