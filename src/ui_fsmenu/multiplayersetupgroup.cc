@@ -103,7 +103,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					   menu_parent_, UI::WindowStyle::kFsMenu, _("Divergent Player Name"),
 					   (boost::format(
 					       _("The player name of the selected slot (%1%) does not match your own (%2%). "
-					         "Are you sure, that you want to occupy this slot?")) %
+					         "Are you sure that you want to occupy this slot?")) %
 					    slotname % username)
 					      .str(),
 					   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);

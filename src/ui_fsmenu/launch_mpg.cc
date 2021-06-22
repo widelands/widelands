@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
-#include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "logic/game.h"
