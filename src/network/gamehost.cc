@@ -1306,6 +1306,11 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 	broadcast_setting_player(number);
 }
 
+/**
+ * Removes one player from a combined slot, where the name consists
+ * of all players in this slot separated by spaces, i.e. "Player1 Player2"
+ * \return true if the name has no players left
+ */
 bool GameHost::remove_player_name(uint8_t const number, const std::string& name) {
 	PlayerSettings& p = d->settings.players.at(number);
 	std::string temp(p.name);

@@ -104,12 +104,13 @@ void HostGameSettingsProvider::set_player_tribe(uint8_t number,
 }
 
 void HostGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
-	const GameSettings& settings = HostGameSettingsProvider::settings();
-	if (number >= settings.players.size()) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (number >= host_settings.players.size()) {
 		return;
 	}
-	if (number == settings.playernum ||
-	    settings.players.at(number).state == PlayerSettings::State::kComputer || settings.savegame) {
+	if (number == host_settings.playernum ||
+	    host_settings.players.at(number).state == PlayerSettings::State::kComputer ||
+	    host_settings.savegame) {
 		host_->set_player_team(number, team);
 	}
 }

@@ -89,7 +89,6 @@ public:
 	void set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe = false);
 	void set_player_init(uint8_t number, uint8_t index);
 	void set_player_ai(uint8_t number, const std::string& name, bool const random_ai = false);
-	bool remove_player_name(uint8_t number, const std::string& name);
 	void set_player_name(uint8_t number, const std::string& name);
 	void set_player(uint8_t number, const PlayerSettings&);
 	void set_player_number(uint8_t number);
@@ -150,6 +149,7 @@ private:
 	void clear_computer_players();
 	void init_computer_player(Widelands::PlayerNumber p);
 	void init_computer_players();
+	bool remove_player_name(uint8_t number, const std::string& name);
 
 	void handle_disconnect(uint32_t client_num, RecvPacket& r);
 	void handle_ping(Client& client);

@@ -174,10 +174,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
-	                       NetworkPlayerSettingsBackend* const npsb_)
+	                       NetworkPlayerSettingsBackend* const npsb)
 	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 	     settings_(settings),
-	     n(npsb_),
+	     n(npsb),
 	     id_(id),
 	     player_(this,
 	             "player",
