@@ -21,7 +21,7 @@ descriptions:new_worker_type {
       },
    },
 
-   spritsheets = {
+   spritesheets = {
       walk = {
          fps = 10,
          frames = 10,
