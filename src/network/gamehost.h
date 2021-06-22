@@ -134,6 +134,11 @@ public:
 		return forced_pause_;
 	}
 
+	void game_setup_aborted() override {
+		GameController::game_setup_aborted();
+		pointer_.reset();
+	}
+
 	void send_system_message_code(const std::string&,
 	                              const std::string& a = "",
 	                              const std::string& b = "",
