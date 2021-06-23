@@ -102,6 +102,10 @@ public:
 	                           Widelands::PlayerEndResult /*result*/,
 	                           const std::string& /* info */) {
 	}
+
+	/** Callback when the game setup UI is closed before a game was started. */
+	virtual void game_setup_aborted() {
+	}
 };
 
 #endif  // end of include guard: WL_LOGIC_GAME_CONTROLLER_H
