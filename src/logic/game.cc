@@ -353,6 +353,7 @@ void Game::init_newgame(const GameSettings& settings) {
 
 		add_player(i + 1, playersettings.initialization_index, playersettings.color,
 		           playersettings.tribe, playersettings.name, playersettings.team);
+		get_player(i + 1)->set_random_tribe(playersettings.random_tribe);
 		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 

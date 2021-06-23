@@ -412,6 +412,9 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Хорошо! Теперь производство всех строительных материалов налажено. Подождем,"
+" пока не накопится ощутимое их количество. Мы можем и дальше расширять "
+"владения, так мы узнаем, что еще есть на этом острове."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
@@ -429,6 +432,10 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"Смотри, уже некоторое время нам не хватает тростника. А для строительства "
+"его нам нужно немало. Нам нужна еще парочка тростниковых ферм. К тому же он "
+"идет на изготовление неводов и некоторых инструментов. Следовательно, этим "
+"мы должны заняться в первую очередь."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
@@ -486,6 +493,9 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"У нас кончаются кирпичи, и это сильно замедляет темп строительства. Кирпичей"
+" нам нужно немало, так что поставь еще печь по обжигу и задай этой стройке "
+"повышенный приоритет."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
@@ -512,6 +522,10 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Мы расширяемся все дальше и дальше на восток, пути поставки товаров "
+"удлиняются. Нам нужен склад поближе к нашей восточной границе для сокращения"
+" путей, да и стройматериалы желательно хранить там же . Наш штаб уж больно "
+"далеко на западе, чтобы выполнять роль склада. "
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
@@ -598,6 +612,10 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
+"С ростом опыта наших работников пекарня и пивоварня должны быть расширены. "
+"Тогда они будут варить медовуху и печь пряники. Построй пасеку рядом с "
+"ягодником, чтобы начать получать мёд. Мы будем его копить, пока он не "
+"понадобится."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
@@ -653,6 +671,10 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
+"Этим оружием мы могли бы вооружить наших новобранцев. Надеюсь, мы не "
+"встретим тут врагов, но лучше быть к этому готовым. Новобранцев набирают в "
+"казармах, где вооружают саксами и одевают в меховую одежду, как и каждого "
+"нашего славного воина."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -662,6 +684,9 @@ msgid ""
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
 msgstr ""
+"Разумеется, нам нужны казармы. Олений выгон будет давать нам мех, из "
+"которого швеи будут шить одежду. К тому же, олени идут и на мясо, а также "
+"используются как вьючные животные."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -670,6 +695,9 @@ msgid ""
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
+"Лучше всего разместить эти здания неподалеку друг от друга и дополнить "
+"парочкой складов: в одном будем хранить обмундирование солдат, руду, металл "
+"и уголь; второй отдадим под стройматериалы."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -679,6 +707,9 @@ msgid ""
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
 msgstr ""
+"Также этот комплекс должен включать в себя литейную, несколько колодцев с "
+"фермами для снабжения оленьего выгула. Так мы оптимизируем работу нашей "
+"военной промышленности, сократив время поставки товаров. "
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
@@ -700,6 +731,8 @@ msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
 msgstr ""
+"У нас нет уверенности, что мы здесь одни. Нам надо расширяться и дальше на "
+"восток, чтобы выяснить это."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -707,6 +740,8 @@ msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
+"Расширение владений даст нам больше места под поля. Мы могли бы засеять "
+"больше ячменя - нам нужно больше оленей из-за возросшей нагрузки на дороги."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
@@ -765,6 +800,8 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
+"В тренировочном лагере солдат обучат основам владения оружием, поднимут "
+"здоровье и уровень защиты. Завершить обучение они должны на арене поединков."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
@@ -777,6 +814,9 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"Солдатам повышают защиту и здоровье в два этапа. На первом они получают "
+"позолоченные стальные доспехи с подбоем, защищающие тело. на втором им "
+"выдают позолоченые стальные шлемы для сохранения здоровья в бою."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -787,6 +827,10 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"Их учат сражаться длинным, широким и обоюдоострым мечами. Два последних, "
+"помимо железа, стоят и золото. Тренированных солдат обучают бою на двух "
+"мечах: помимо обоюдоострого, они наносят удары другой рукой и другим мечом. "
+"Весь курс состоит из шести этапов."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -795,6 +839,8 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"Мы не учим солдат уклоняться. В конце концов, они же не трусы, чтобы "
+"скакать, да и на что тогда им два меча?"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
@@ -809,6 +855,12 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"Нам нужно построить заведение портного для пошива лучшей одежды, и еще один "
+"швейный цех для производства простой меховой одежды. Также следует "
+"перестроить малую бронную для изготовления оружия и шлемов качественнее, а "
+"также построить новую бронную, чтобы не лишиться основного типа оружия. "
+"Теперь нам понадобятся золотые шахты, так как прекрасные доспехи отделывают "
+"золотом."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -819,6 +871,11 @@ msgid ""
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
+"Эти строения следует разместить поблизости от казарм, поскольку, как я и "
+"говорил, гораздо удобнее централизовать наш военно-промышленный и "
+"тренировочный комплекс, нежели потом собирать все необходимое из разных "
+"мест. Постройте и третий склад, его мы будем набивать необходимой для "
+"обучения солдат едой."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -827,6 +884,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Пока солдаты учатся владеть новым оружием, их старое оружие остается не у "
+"дел. Обрати внимание, что это оружие надо убирать на склады, чтобы оно не "
+"загромождало дороги."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -834,6 +894,9 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"Пока у нас нет хотя бы одного солдата с максимально прокаченым здоровьем, "
+"защитой и оружием, враг будет превосходить нас в силе. Советую доводить "
+"учение до конца."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
@@ -856,6 +919,9 @@ msgid ""
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
 msgstr ""
+"Не спеши, о великий вождь! Враг слишком силен, я не уверен, что сейчас мы "
+"можем их победить. Не спеши посылать воинов в безнадёжный бой. Уж лучше "
+"подождать еще, чтобы потом разгромить врага с минимальными потерями."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
@@ -869,6 +935,9 @@ msgid ""
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
+"Конечно, потерь не миновать. Такова судьба воина - погибнуть однажды в бою. "
+"Осторожность не должно путать с трусостью и нерешительностью: не давайте "
+"врагу воспользоваться нашей слабостью."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
@@ -899,6 +968,9 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"Разведчики сообщают, что враг не ставит башни. Мы могли бы построить "
+"крепость, это серьезно пододвинуло бы нашу границу на восток. А враг сможет "
+"узнать об этом, только построив крепость на самой своей границе."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -908,6 +980,9 @@ msgid ""
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
 msgstr ""
+"Лесники могли бы сажать деревья прямо на границе, не давая ему построить "
+"крепость. Ему придется срубить их, чтобы расчистить место.  Так мы сможем "
+"выиграть какое-то время."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
@@ -933,6 +1008,8 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"Я молюсь о том, чтобы Бог услышал мои последние слова. Не дайте лжепророку "
+"торжествовать! Накажите их за подобное непотребство!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
@@ -960,6 +1037,9 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"Без паники, у нас есть надежда! Восточная оконечность острова и место возле "
+"снесенного штаба тех мерзавцев подходят для строительства порта. Если нам "
+"удастся построить корабль и набить его товаром, мы, считай, спасены."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -970,6 +1050,10 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"Шторм гонит воду с запада. Мы еще можем успеть, если поторопимся. Нам нужны "
+"порт и верфь... ах, да, ткацкая фабрика для шитья парусов из тростника и "
+"шерсти. Затем мы отправимся в экспедицию из порта. Помните о богах, но и "
+"сами не плошайте!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
@@ -999,15 +1083,45 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"Я чуть не забыл из-за спешки! – Куда бы мы ни приплыли, нам понадобятся "
+"стройматериалы для начала, а также солдаты для охраны и расширения колонии. "
+"Даже после погрузки всех на кораблю нам понадобится место под товары и "
+"рабочих. Вдобавок ко всему, там должно быть место и для %d солдата. В "
+"тесноте да не в обиде, как говорится. Давайте отправим часть стройматериалов"
+" и наших лучших людей в порт по его завершению, чтобы быть готовыми сразу же"
+" сесть на корабль!"
 msgstr[1] ""
+"Я чуть не забыл из-за спешки! – Куда бы мы ни приплыли, нам понадобятся "
+"стройматериалы для начала, а также солдаты для охраны и расширения колонии. "
+"Даже после погрузки всех на кораблю нам понадобится место под товары и "
+"рабочих. Вдобавок ко всему, там должно быть место и для %d солдат. В тесноте"
+" да не в обиде, как говорится. Давайте отправим часть стройматериалов и "
+"наших лучших людей в порт по его завершению, чтобы быть готовыми сразу же "
+"сесть на корабль!"
 msgstr[2] ""
+"Я чуть не забыл из-за спешки! – Куда бы мы ни приплыли, нам понадобятся "
+"стройматериалы для начала, а также солдаты для охраны и расширения колонии. "
+"Даже после погрузки всех на кораблю нам понадобится место под товары и "
+"рабочих. Вдобавок ко всему, там должно быть место и для %d солдат. В тесноте"
+" да не в обиде, как говорится. Давайте отправим часть стройматериалов и "
+"наших лучших людей в порт по его завершению, чтобы быть готовыми сразу же "
+"сесть на корабль!"
 msgstr[3] ""
+"Я чуть не забыл из-за спешки! – Куда бы мы ни приплыли, нам понадобятся "
+"стройматериалы для начала, а также солдаты для охраны и расширения колонии. "
+"Даже после погрузки всех на кораблю нам понадобится место под товары и "
+"рабочих. Вдобавок ко всему, там должно быть место и для %d солдата. В "
+"тесноте да не в обиде, как говорится. Давайте отправим часть стройматериалов"
+" и наших лучших людей в порт по его завершению, чтобы быть готовыми сразу же"
+" сесть на корабль!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"Все  товары, рабочие и солдаты, что отправятся в экспедицию, будут доступны "
+"в следующем сценарии."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
