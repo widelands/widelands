@@ -185,11 +185,16 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
+"Увы, ему это удалось – к моему прискорбию. Месяц длилась война, и каждые "
+"утро и вечер прибывал корабль из Дании с очередным отрядом солдат. Разве у "
+"нас была надежда отбить такое? Под конец я не видел иного выхода, как вместе"
+" со своим сыном Хеннеком и кучкой самых верных людей бежать с Фёра, который "
+"Аттердаг теперь называет новыми завоеваниями своей растущей империи."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:103
 msgid "But I will not accept defeat!"
-msgstr ""
+msgstr "И всё же ещё ничего не кончено!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
@@ -211,6 +216,11 @@ msgid ""
 "toying with us. No, if I am to stand a chance of winning against him I need "
 "to find a greater force to aid my cause."
 msgstr ""
+"Очевидно, что против столь мощного врага у нас не было шансов. Никто из тех,"
+" с кем я сражался бок-о-бок, не смогли бы мне помочь, учитывая силу всех его"
+" нападений. И лишь тогда он взялся за нас всерьез, а до этого просто играл с"
+" нами. Нет, для победы над ним мне нужен ещё более мощный союзник, без этого"
+" война с Аттердагом обречена."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:112
@@ -220,6 +230,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
+"За этим я и отправился в путь. Ребо, вождь небольшого, но сильного племени "
+"фризов, с коим я когда-то сдружился; его мастерство меча не уступает его "
+"гордыня, а более гордого человека нет в известном мире. Уж если кто и "
+"справится с Аттердагом, так это он."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -230,6 +244,10 @@ msgid ""
 "settle before. The bravery for so bold an undertaking is also something I "
 "would expect from nobody but him."
 msgstr ""
+"Как оказалось, он покинул северную Фризию к тому времени, как я отправился "
+"на его поиски. Он отправился на дальний север, основывать новое поселение, "
+"там, где никто не осмеливался селиться. Да, узнаю Ребо, нет второго такого "
+"храбреца."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -239,11 +257,14 @@ msgid ""
 "Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
 " the evil Dane."
 msgstr ""
+"Нам понадобится не меньшая смелость, дабы повторить его подвиг. Мы пойдем на"
+" север на корабле и найдем старину Ребо, дабы испросить у него солдат для "
+"освободения милого Фера из-под власти проклятой Дании."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:124
 msgid "We must not fail. The future of my people depends on me."
-msgstr ""
+msgstr "Мы ещё живы. И будущее моих людей зависит от меня."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
@@ -262,6 +283,10 @@ msgid ""
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
 msgstr ""
+"Этот островок слишком мал для нас. Среди моих людей есть опытный плотник, он"
+" предложил построить из бревен ряд волнорезов, чтобы урвать немного земли у "
+"моря. Это медленное, тяжелое занятие, и я надеюсь, что мы не задержимся тут "
+"надолго."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:135
 msgid "Port Space Found"
@@ -280,6 +305,10 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"Солдаты сообщили о подходящем месте для порта! Нам нужно построить порт и "
+"отправиться в экспедицию. Конечно, перед этим надо наладить отрасль "
+"кораблестроения, с верфями и ткацкими станками. Но не следует с этим "
+"заморачиваться – для нас важно лишь то, что мы поплывем на север."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
@@ -300,6 +329,12 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
+"Высадились мы на странном острове. Земля обожжена и изрыта, воздух полон "
+"гари. Пляж словно покрыт пеплом, а сам песок кажется зловещим, будто под ним"
+" таится готовящийся к броску длинночервь, готовый сожрать всякое живое "
+"существо, по глупости ступившие на остров. Я с трудом могу объяснить свои "
+"ощущения. Не знаю, чего нам здесь бояться, но буду бдителен и надеюсь, что "
+"мы вскоре покинем это место."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:154
@@ -359,6 +394,10 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
+"Мир тебе, король Ангадтур! Я – Клаус Лембук, а это мой сын, Хеннек. Мы "
+"ищеммоего старого друга Ребо, он покинул родину несколько лет назад в "
+"поисках нового дома на далеком севере. Позволь спросить, доводилось ли тебе "
+"слышать о нем и о том, где мне искать его?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:179
@@ -395,6 +434,9 @@ msgid ""
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
 msgstr ""
+"Жаль расстраивать вас, сэр Лембек, но я не слышал этого имени ранее и ничего"
+" не могу вам поведать. Что касается вашего пути на север, то здесь есть "
+"только одно место, пригодное для порта, и это – земля под моим дворцом."
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:184
@@ -405,6 +447,10 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"Так уж вышло, что мои солдаты измаялись от безделья. Не откажетесь от "
+"сражения? Пошлите солдат уничтожить мой дворец. Я уверен в своих воинах и "
+"укреплениях, и потому благословлю ваше плавание, если вам удастся одолеть "
+"меня."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
@@ -424,6 +470,10 @@ msgid ""
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
 msgstr ""
+"Вас не остановили мои лучшие стражи и вы сожгли мой дворец, что я считал "
+"невозможным. Вы, должно быть, очень могущественны и хранимы богами. Победа "
+"ваша по праву. Я поздравляю вас и желаю успеха на вашем пути. Да хранит вас "
+"Сатул!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
@@ -443,6 +493,8 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
+"Мы приближаемся к северу. Ледяная пустыня! Сомневаюсь, что ту можно жить. "
+"Боюсь, мы ничего не найдем на этом острове."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
@@ -450,6 +502,8 @@ msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
 msgstr ""
+"Это не важно. Просто быстрее найдите место под новый порт, чтобы мы могли "
+"продолжить поход."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
@@ -499,6 +553,8 @@ msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
+"Снова солдаты заметили чужаков. Имеют ли те отношение к тому странному "
+"королю, что поздравил нас с разрушением его дворца?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
@@ -511,6 +567,9 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
+"Приветствую, незнакомцы! Я Марк Кай Иниукуд, имперский легат. Этот остров "
+"ваш? Если не возражаете, мы пересечем его.  Мы не будем причинять "
+"неудобства."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
@@ -525,6 +584,10 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
+"Мир вам, сэр Иникуд! Я Клаус Лембек, а это мой сын, Хеннек. Мы тоже здесь "
+"проездом. Вы легат, говорите? Должно быть, вы много путешествуете. нет у вас"
+" вестей о моём старом друге Ребо? Я знаю только, что он поселился на севере."
+" Можете сказать, где мне искать его?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:250
@@ -535,6 +598,9 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Рад слышать о мире. Увы, но я не слышал имени Ребо ранее. Раз вы едите на "
+"север, значит, нам по пути, именно туда меня направили из столицы. Сейчас мы"
+" готовим корабль к отплытию. Заплатите, и мы возьмем вас с собой."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
@@ -542,17 +608,17 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
-"Мы рады заключить сделку! Какова ваша цена? И не сочтите за дерзость, но что"
-" вас сюда привело?"
+"Мы рады такому предложению! Какова ваша цена? И не сочтите за дерзость, но "
+"что вас сюда привело?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d брусок золота."
+msgstr[1] "%d бруска золота."
+msgstr[2] "%d брусков золота."
+msgstr[3] "%d бруска золота."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -560,6 +626,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Возможно, я прошу слишком многого, но сенат выделил очень мало золота на мою"
+" экспедицию и я очень в нем нуждаюсь."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -572,6 +640,10 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"Цель моего путешествия - добраться до проконсула северной провинции, от него"
+" давно не приходили налоги. Моя задача - отсчитать Мюрилия, и если он не "
+"платил налоги из жадности, привезти его в столицу, закованным в цепи. Я рад "
+"тому, что это поручили мне, ведь это дает мне шанс занять его место."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -584,6 +656,11 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"Но вернемся к теме вашего путешествия. На северном побережье только одно "
+"место, пригодное для строительства порта. Так что выбора у вас и нет. Но "
+"наши астрологи пророчат  ужасный шторм, который сделает навигацию "
+"невозможной ещё очень долго. У нас только два часа на погрузку, и мы не "
+"сможем вернуться за оставшимися ещё очень долго."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
@@ -596,6 +673,8 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Он рад предложить нам, но цена непомерна. С тем же успехом мы можем "
+"разрушить порт и построить собственный. Интересно, что лучше…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
@@ -615,6 +694,9 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"Порт захвачен! Мы готовы построить корабль, дабы завершить хождение на "
+"север. Пусть мы не получили сведений о Ребо, я не сомневаюсь, что мы его "
+"скоро отыщем. С его помощью мы отвоюем Фёр у Аттердага!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
@@ -622,6 +704,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ваша миссия завершена. Если хотите, можете продолжить игру, или перейти к "
+"следующей миссии."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
@@ -629,6 +713,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Всё честно: с вас золото, с нас проезд. Корабль готов, добро пожаловать на "
+"борт!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:302
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306
@@ -646,12 +732,16 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"Вы слишком промедлили. Мы не можем ждать, а шторм не даст вас выйти в море. "
+"Простите, но погода не ждёт. Прощайте."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Вы проиграли, игра завершена. Попробуйте попытать счастья ещё раз. Нажмите "
+"ОК ,чтобы вернуться в главное меню."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
@@ -679,13 +769,13 @@ msgstr "Порт"
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Расположите волнорезы рядом, чтобы отбить у моря новую землю."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Возведите волнорезы для отвоевания новой земли от моря."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -694,3 +784,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Служит базой для колонизации и морской торговли. А также может служить домом"
+" для солдат и складом товаров и инструментов."

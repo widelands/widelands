@@ -24,10 +24,17 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 53, 58 },
       },
+
+   },
+
+   spritesheets = {
       working = {
-         hotspot = { 53, 68 },
-         fps = 20
-      }
+         fps = 20,
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 53, 68 }
+      },
    },
 
    aihints = {

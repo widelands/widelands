@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr "Заметка"
+msgstr "Заметим"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -30,6 +30,9 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Кажется, вы не прошли предыдущий сценарий. Если продолжите, стартовые "
+"условия у вас будут хуже, чем могли бы быть. Советуем завершить предыдущий "
+"сценарий и потом уже взяться за этот."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
@@ -114,13 +117,15 @@ msgstr "Решите, в чем вы будите сотрудничать с И
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "СОберите товары для дара или разрушьте имперский склад"
+msgstr "Соберите товары для дара или разрушьте имперский склад"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Решите, хотите ли вы помочь Маврикию против дикарей. Если да, заполните его "
+"склады следующими товарами:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
@@ -179,10 +184,12 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
+"Ну, или разрушьте склад, став врагом Маврикия. Он воспретил вам расширяться "
+"до передачи товаров."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr "Следите за Мюрилеем"
+msgstr "Следите за Маврикием"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
@@ -218,7 +225,7 @@ msgstr "Много где крепости земли держат,"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:340
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "И пусть они неведомо где,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
@@ -240,7 +247,7 @@ msgstr "Победите враждебное племя к северо-зап�
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
-msgstr "Разбейте Мюрилея!"
+msgstr "Разбейте Маврикия!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
@@ -260,11 +267,11 @@ msgstr "Захватите все оставшиеся владения Мавр
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr "Разбейте и Мюрилея, и дикарей!"
+msgstr "Разбейте и Маврикия, и дикарей!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr "Разбейте дикарей и колонию Империи"
+msgstr "Разгромите дикарей и колонию Империи"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
@@ -293,6 +300,10 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Штормы не оставляли кораблю в покое в течение всего плавания. Что ни день мы"
+" задавались вопросом: не станет ли он для нас последним? Нам пришлось отдать"
+" весь драгоценный металл морю, дабы придать кораблю немного плавучести. "
+"Жалкая жертва богам, возможно, продлившая наши жизни на несколько часов."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -302,6 +313,9 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Те немногие инструменты, что мы спасли от Лангинесса, плохо переносили "
+"поездку. Кирки оказались столь сильно изъедены солью, что стали бесполезны "
+"для шахтеров, и мы выбросили их в океан. "
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -371,6 +385,10 @@ msgid ""
 "wood. Our neighbors used to envy us for this clever technique, which they "
 "couldn’t copy."
 msgstr ""
+"Надо начать строить наши основные здания. Поскольку я не вижу гор, в которых"
+" мы могли бы добывать уголь. Нам нужна печь углежога, будем добывать уголь "
+"из брёвен. Смазав печь глиной, мы уменьшим затраты древесины. Эта технология"
+" - наша гордость!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
@@ -386,6 +404,8 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"Мы обретем дом в этом прекрасном месте. Однако скоро племя разрастется, нам "
+"понадобится больше места. Нам надо уже расширять владения."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:174
@@ -394,6 +414,8 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Разведчики докладывают, что север представляет собой изрезанные холмы, "
+"красивые, но не пригодные для строительства. Надо исследовать юг."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:188
@@ -413,6 +435,8 @@ msgid ""
 "where we might be able to start mining coal and iron, but we have no miners,"
 " nor any picks to equip them with."
 msgstr ""
+"Вождь Ребо! У нас серьёзные трудности. Мы нашли гору, где можем добывать и "
+"уголь, и руду, но у нас нет ни шахтеров, ни кирок для их снаряжения."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:185
@@ -420,11 +444,14 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
+"К тому же, у нас совсем не осталось железа. Нам нужно добыть немного железа,"
+" без него мы не сможем изготовить кирки. Увы, у меня нет идей, как это "
+"сделать."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
-msgstr "Достаньте металл"
+msgstr "Добудьте металл"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:191
@@ -432,6 +459,8 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
+"Это ужасные новости! Без железа и инструментов мы навеки здесь заперты! "
+"Придумайте что-нибудь."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:194
@@ -440,6 +469,9 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"У нас было несколько усиленных мечей на складе. Мы могли бы их переплавить "
+"обратно в металл? Но, с другой стороны, переводить на это благородные "
+"мечи..."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
@@ -452,6 +484,9 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
+"Знаете, у меня идея. Когда наши солдаты тренируются, им выдают новое оружие,"
+" а старое забирают. Оно уже не будет использоваться, а значит, мы можем его "
+"свободно переплавить."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:203
@@ -460,6 +495,9 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"Это мысль. Вооружим наших солдат лучшим оружием, а хлам переплавим на "
+"металлы. И наши кузнецы смогут отковать кирки для наших шахтеров. Я "
+"немедленно этим займусь!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:210
@@ -470,6 +508,10 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
+"Не спеши! На постройку тренировочного лагеря нужно золото, а его у нас уже "
+"нет. Нам придется разобрать порт, но мы получим достаточно золота на "
+"тренировочный лагерь. Мне это не нравится, но выхода у нас нет. И надо будет"
+" разнести по складам товары с порта перед тем, как его разобрать."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
@@ -485,6 +527,8 @@ msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
 msgstr ""
+"Шахты начали добычу. Теперь можно ставить литейную и можно будет выдохнуть: "
+"производство металла наладится."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:220
@@ -494,6 +538,9 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"У нас уже есть олений выгон? Нам обязательно нужен олений выгон. Олени будут"
+" перевозить товары, а также у нас появится мех для пошива формы для новых "
+"солдат. Быть может, нам еще придется сражаться?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:233
@@ -512,6 +559,9 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"Вождь Ребо, снова плохие новости. В ближайших водах кончилась рыба. Мы можем"
+" готовить пайки только из фруктов или хлеба, но тренировка солдат требует "
+"копченого мяса или рыбы. Отходов оленьих выгонов для этого недостаточно."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -521,6 +571,9 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"К счастью, один наш рыбак нашел решение. После глиняных карьеров остаются "
+"большие ямы. Рыбак мог сделать из них рыбные пруды. Нужно только немного "
+"воды да фруктов для кормления рыбы."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "We have fish again"
@@ -533,6 +586,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Славно. У нас появилась акваферма, и наш горно-перерабатывающий комплекс "
+"отлажен. Однако, шахтеры говорят о постепенном обеднении руды, так что "
+"вскоре шахты могут закрыться."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:239
@@ -541,10 +597,13 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Нам нужно будет углубить шахты, но на добычу что руды, что угля будет "
+"уходить в десять–двенадцать раз больше времени. Вам надо будет подготовиться"
+" к росту потребления еды."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
-msgstr "Найм"
+msgstr "Новобранцы"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
@@ -556,6 +615,8 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Ты прав – нам нужно больше ягодников, собирателей и расширенных до питейных "
+"залов таверн, а также улучшенных пекарен и пивоварен."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:248
@@ -565,6 +626,9 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
+"С другой стороны, мы можем начать уже сбор и тренировку армии. У нас сейчас "
+"достаточно металла для ковки оружия, шлемов и доспехов. Предлагаю сейчас же "
+"начать постройку оружейной, казарм, арены поединков и ателье."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -625,8 +689,8 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
-"Чужаки! Я, проконсул северной провинции Мюрилей, хочу знать, кто вы такие и "
-"за каким бесом вы появились на наших землях!"
+"Чужаки! Я, проконсул северной провинции Маврикий, хочу знать, кто вы такие и"
+" что вас привело на наши земли!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. frisian greeting, nothing more.
@@ -648,6 +712,8 @@ msgid ""
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"В этом случае, Ребо, я должен уведомить тебя о враждебном племени дикарей в "
+"окрестностях этой самой имперской заставы."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -656,6 +722,7 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Если хотите мирной жизни, у вас нет выбора – помогите Империи изгнать их."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:292
@@ -665,6 +732,9 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"Кроме того, продемонстрируйте добрую волю и сделайте подарок Империи. Как вы"
+" можете заметить, я подарил вам новый склад. Заполните его затребованными "
+"дарами, а мы их передадим. Я ожидаю от вас следующего:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:295
@@ -673,6 +743,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 бревен, 40 блоков гранита, 30 бочек пива, 150 вёдер воды, 40 пайков, 10 "
+"сытных пайков, 30 мер угля, 40 мер железной руды, 20 слитков железа, 20 мер "
+"золотой руды и 10 слитков золота."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:301
@@ -682,6 +755,9 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"– Вождь, что этот надменный проконсул о себе возомнил? Он что, счел нас "
+"прислугой? Да и товаров он требует очень уж много. Предлагаю разрушить "
+"склад, и пусть он сам воюет."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:307
@@ -691,6 +767,9 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Если вы не поставите нам товары, Империя будет считать вас своим врагом. Я "
+"запрещаю вам отныне расширять свои владения, пока не выполните наши условия."
+" За неподчинение Империя поступит с вами как с врагами."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
@@ -701,6 +780,10 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Вам придется воевать с дикарями, если хотите ту жить. Надо ли говорить, что "
+"вместе с Империей это будет проще? Вам не нужно, чтобы Империя считала вас "
+"врагом. Даже варвары вроде вас, при здравом размышлении, могут понять "
+"истинность моих слов."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -709,6 +792,9 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Это переходит всякие границы. С какой стати он приказывает нам не "
+"расширяться, когда мы хотим лишь построить новый дом? И он еще угрожает нам "
+"войной, если мы откажемся быть его рабами?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:320
@@ -718,6 +804,9 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"Мне очень хочется напасть на него прямо сейчас, но, боюсь, у нас не хватит "
+"сил победить его в битве. Нам надо ускорить тренировку солдат, а пока "
+"сделаем вид, что собираем для него дары. Это даст нам фору."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:323
@@ -725,6 +814,8 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"А насчет расширения – хотелось бы знать, сможет ли он нас контролировать. "
+"Пожалуй, нам надо послать разведчика, пусть шпионит за ним…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:328
 msgid "The Scout Discovered Something"
@@ -742,6 +833,9 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Вождь Ребо! Разведик только что вернулся. Он добыл какой-то стих на языке "
+"этого проконсула. Мне удалось перевести его. Если я не ошибаюсь, звучит оно "
+"так:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:346
@@ -749,6 +843,8 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"Не знаю, что и думать, но это явно важно. Может, тебе удастся вникнуть в его"
+" смысл."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:351
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:361
@@ -769,6 +865,8 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
+"Дикари! Вы укусили протянутую руку дружбы, когда разрушили прекрасное "
+"здание, построенное для вас!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:358
@@ -800,6 +898,8 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Маврикий дал понять, что не оставит нас в покое. Боюсь, нам надо одолеть его"
+" и разрушить колонию, если хотим жить в мире."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:376
@@ -808,6 +908,9 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
+"Племя дикарей, о котором он говорил - еще одна угроза. Мне не нужны "
+"конфликты на почве дележа земли, как это было в старом доме, так что нам "
+"надо будет разбить варваров."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:380
 msgid "The Empire is Grateful"
@@ -826,6 +929,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Чужаки! Я вижу, вы держите свое слово. Империя награждает дружбу, и я "
+"объявляю вас друзьями Империи."
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -837,6 +942,9 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Теперь можете расширяться вдоль северной оконечности гор, чтобы встретить "
+"дикарей и помочь нам, я разрешаю. Как встретите варваров в защищенной долине"
+" – смело вступайте в бой! Мы же будем сдерживать их волны."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:391
 msgid "The Reward For Your Service"
@@ -854,6 +962,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"Вы справились, чужаки! Как я и говорил, я награждаю вас тем, что объявляю "
+"друзьями Империи!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:398
@@ -864,6 +974,10 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Думаю, нам надо уже начать отправлять легатов в капитул, чтобы узнать "
+"последние новости. Там мы получим указания для вас от сената. А также, сенат"
+" определит возлагаемую на вас дань и, конечно, того, кто будет королем "
+"вашего племени."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:401
 msgid "Another Enemy"
@@ -881,6 +995,9 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"Я правильно его понимаю: после всего, что мы для него сделали, после смерти "
+"стольких наших солдат ради него, он хочет сделать из нас рабов Империи и "
+"лишить меня власти? Этот лицемер ещё и называет это наградой?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:407
@@ -889,6 +1006,9 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Я отплачу этому выскочке-проконсулу за подобное предательство! Я сожгу всю "
+"его колонию и убью каждого, кого там встречу. Он горько пожалеет о том, что "
+"оскорбил меня и моё племя!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:411
 msgid "Victory"
@@ -904,6 +1024,8 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Мы перебили всех врагов! Ни одно племя больше не оспорит наше здесь "
+"нахождение. Мы в безопасности и, наконец-то, можем жить в мире."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
 msgid "Congratulations"

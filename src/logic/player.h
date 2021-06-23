@@ -600,6 +600,13 @@ public:
 	void set_ai(const std::string&);
 	const std::string& get_ai() const;
 
+	void set_random_tribe(bool random) {
+		random_tribe_ = random;
+	}
+	bool has_random_tribe() const {
+		return random_tribe_;
+	}
+
 	// used in shared kingdom mode
 	void add_further_starting_position(uint8_t plr, uint8_t init) {
 		further_shared_in_player_.push_back(plr);
@@ -678,6 +685,7 @@ private:
 	bool see_all_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
+	bool random_tribe_;
 	uint32_t casualties_, kills_;
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;

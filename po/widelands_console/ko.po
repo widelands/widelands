@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-18 16:28+0000\n"
+"PO-Revision-Date: 2021-06-21 04:15+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -57,11 +57,11 @@ msgstr "와이드랜드 구성 파일, 놀이 저장 및 재생을 위해 지정
 
 #: ../../src/wlapplication_messages.cc:58
 msgid "Use specified directory for the widelands locale files"
-msgstr ""
+msgstr "와이드랜드 언어 파일에 지정된 디렉토리 사용"
 
 #: ../../src/wlapplication_messages.cc:63
 msgid "The locale to use"
-msgstr ""
+msgstr "사용할 언어"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
@@ -81,51 +81,51 @@ msgstr "번역확인->FILENAME"
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
-msgstr ""
+msgstr " 주어진 파일에 구성된 새로운 단일 선수 게임을 직접 만듭니다. 예는 `data/templates/new_game_template` 에서 찾을 수 있습니다"
 
 #: ../../src/wlapplication_messages.cc:69
 msgid "Directly starts the map `FILENAME` as scenario map"
-msgstr ""
+msgstr "시나리오 지도로 `파일이름` 지도를 직접 시작합니다"
 
 #: ../../src/wlapplication_messages.cc:71
 msgid "Directly loads the savegame `FILENAME`"
-msgstr ""
+msgstr "`파일이름` 저장 자료를 직접 불러옵니다"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Directly loads the replay `FILENAME`"
-msgstr ""
+msgstr "`파일이름` 재생 자료를 직접 불러옵니다"
 
 #: ../../src/wlapplication_messages.cc:74
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
-msgstr ""
+msgstr "초기화 후 지정된 루아 스크립트를 실행합니다. --scenario 이나, --loadgame 이나, --editor 에서만 유효합니다"
 
 #: ../../src/wlapplication_messages.cc:78
 msgid ""
 "Directly starts the Widelands editor. You can add a =FILENAME to directly "
 "load the map `FILENAME` in editor"
-msgstr ""
+msgstr "와이드랜드 편집기를 직접 시작합니다. 편집기에서  `파일이름` 지도를 직접 불러오기 위해 =FILENAME 을 직접 추가할 수 있습니다"
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Starts the game with sound disabled"
-msgstr ""
+msgstr "소리를 끄고 놀이를 시작합니다"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid "Force Widelands to crash when a Lua error occurs"
-msgstr ""
+msgstr "루아 오류가 발생할 때 와이드랜드를 강제로 종료시킵니다"
 
 #: ../../src/wlapplication_messages.cc:85
 msgid ""
 "Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic"
-msgstr ""
+msgstr "인공지능 훈련 모드를 활성화합니다. 이 모드에 대한 자세한 내용은 다음 페이지를 봐 주십시오. https://www.widelands.org/wiki/Ai%20Training/"
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr ""
+msgstr "멀티플레이어 게임에서만 FPS에 따라 자동으로 게임 속도를 조정합니다. --ai_training과 함께 사용하면 유용합니다"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Game options:"
@@ -133,7 +133,7 @@ msgstr "놀이 선택사항:"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Note: New values will be written to config file"
-msgstr ""
+msgstr "참고: 새로운 값은 구성 파일에 기록됩니다"
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:96
@@ -153,15 +153,15 @@ msgstr "`n` 분마다 자동으로 저장"
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
 msgid "Use `n` files for rolling autosaves"
-msgstr ""
+msgstr "자동 저장을 롤링할 때 `n` 파일을 사용합니다"
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Do not save files as binary zip archives"
-msgstr ""
+msgstr "저장 파일을 집파일로 압축하지 않습니다"
 
 #: ../../src/wlapplication_messages.cc:103
 msgid "Show filenames in replay screen"
-msgstr ""
+msgstr "재생 화면에 파일 이름을 표시"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -176,21 +176,21 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:177
 #: ../../src/wlapplication_messages.cc:187
 msgid "[true*|false]"
-msgstr ""
+msgstr "[true*|false]"
 
 #: ../../src/wlapplication_messages.cc:106
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
-msgstr ""
+msgstr "선수가 너무 많은 경우 편집기에 경고를 표시할지 여부"
 
 #: ../../src/wlapplication_messages.cc:108
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "깃발 설치 후에 땅길 건설"
 
 #: ../../src/wlapplication_messages.cc:113
 msgid "Bitmask of display flags to set for new games"
-msgstr ""
+msgstr "새로운 게임에 설정할 표시 플래그의 비트 마스크"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -203,11 +203,11 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:155
 #: ../../src/wlapplication_messages.cc:158
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:126
 msgid "Scroll when the mouse cursor is near the screen edge"
-msgstr ""
+msgstr "마우스 커서가 화면 가장자리 근처에 있을 때 스크롤"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -227,39 +227,39 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:194
 #: ../../src/wlapplication_messages.cc:203
 msgid "[true|false*]"
-msgstr ""
+msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Invert click-and-drag map movement direction"
-msgstr ""
+msgstr "누르고 끌어서 지도 이동 방향을 반전"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "숫자 키패드로 대각선 스크롤을 허용"
 
 #: ../../src/wlapplication_messages.cc:131
 msgid "Display system time in the info panel"
-msgstr ""
+msgstr "정보 판에 시스템 시간을 표시"
 
 #: ../../src/wlapplication_messages.cc:132
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Ctrl 키를 누른 경우에만 확대/축소"
 
 #: ../../src/wlapplication_messages.cc:133
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "단일 주시화면 모드 사용"
 
 #: ../../src/wlapplication_messages.cc:135
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "투명한 배경에 놀이내에 대화를 표시"
 
 #: ../../src/wlapplication_messages.cc:136
 msgid "Bitmask to set the toolbar location and mode"
-msgstr ""
+msgstr "연장 막대 위치 및 모드를 설정하는 비트 가리개"
 
 #: ../../src/wlapplication_messages.cc:138
 msgid "Networking:"
-msgstr ""
+msgstr "네트워킹:"
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in multiplayer
@@ -267,50 +267,50 @@ msgstr ""
 #. players.
 #: ../../src/wlapplication_messages.cc:146
 msgid "Create syncstream dump files to help debug network games"
-msgstr ""
+msgstr "함께 놀기를 디버깅하는 데 도움이 되는 동기화 스트림 떠붓기 파일을 만듭니다"
 
 #: ../../src/wlapplication_messages.cc:147
 msgid "Connect to a different metaserver for internet gaming"
-msgstr ""
+msgstr "함께 놀기를 할때 지정한 메타서버에 연결합니다"
 
 #: ../../src/wlapplication_messages.cc:147
 #: ../../src/wlapplication_messages.cc:159
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:151
 msgid "Port number `n` of the metaserver for internet gaming"
-msgstr ""
+msgstr "함께놀기용 메타서버 `n` 번 포트번호를 지정합니다"
 
 #: ../../src/wlapplication_messages.cc:152
 msgid "The name of the last hosted game"
-msgstr ""
+msgstr "마지막으로 호스팅된 놀이의 이름"
 
 #: ../../src/wlapplication_messages.cc:153
 msgid "The nickname used for LAN and online games"
-msgstr ""
+msgstr "LAN 및 온라인 게임에 사용되는 별명"
 
 #: ../../src/wlapplication_messages.cc:154
 msgid "Name of map author"
-msgstr ""
+msgstr "지도 작성자 이름"
 
 #: ../../src/wlapplication_messages.cc:155
 msgid "The last host connected to"
-msgstr ""
+msgstr "마지막으로 연결된 호스트"
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Whether the used metaserver login is for a registered user"
-msgstr ""
+msgstr "사용된 메타 서버 로그인이 등록된 사용자에 대한 것인지 여부"
 
 #: ../../src/wlapplication_messages.cc:158
 msgid "The hashed password for online logins"
-msgstr ""
+msgstr "온라인 로그인을 위한 해시된 암호"
 
 #: ../../src/wlapplication_messages.cc:160
 msgid ""
 "Connect to a different github repository and branch from the add-ons manager"
-msgstr ""
+msgstr "다른 깃허브 저장소에 연결하고 추가 기능 관리자에서 분기합니다"
 
 #: ../../src/wlapplication_messages.cc:162
 msgid "Graphic options:"
@@ -318,52 +318,52 @@ msgstr "그래픽 선택사항:"
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "Whether to use the whole display for the game screen"
-msgstr ""
+msgstr "게임 화면 전체 표시 사용할지 여부"
 
 #: ../../src/wlapplication_messages.cc:164
 msgid "Whether to start the game in a maximized window"
-msgstr ""
+msgstr "최대화된 창에서 게임을 시작할지 여부"
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:168
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../src/wlapplication_messages.cc:170
 msgid "Width `x` of the window in pixel"
-msgstr ""
+msgstr "픽셀 단위의 창의 너비 `x`"
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../src/wlapplication_messages.cc:173
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:175
 msgid "Height `y` of the window in pixel"
-msgstr ""
+msgstr " 픽셀 단위의 창의 높이 `y`"
 
 #: ../../src/wlapplication_messages.cc:176
 msgid "Whether to grab the mouse input"
-msgstr ""
+msgstr "마우스 입력을 잡을지 여부"
 
 #: ../../src/wlapplication_messages.cc:177
 msgid "Whether to use the mouse cursor provided by SDL"
-msgstr ""
+msgstr "SDL에서 제공하는 마우스 커서 사용 여부"
 
 #: ../../src/wlapplication_messages.cc:179
 msgid "Whether to use sticky tooltips"
-msgstr ""
+msgstr "고정 연장 요령 사용 여부 "
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:183
 msgid "Maximal optical framerate `n` of the game"
-msgstr ""
+msgstr "놀이의 최대 광학 프레임 속도 `n`"
 
 #: ../../src/wlapplication_messages.cc:184
 msgid "The path to the active UI theme relative to the homedir"
-msgstr ""
+msgstr "홈디렉토리에 상대적인 활성 UI 테마의 경로"
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "Options for the internal window manager:"
@@ -371,70 +371,70 @@ msgstr "내부 창 관리자 선택사항:"
 
 #: ../../src/wlapplication_messages.cc:188
 msgid "Should automatic map movements be animated"
-msgstr ""
+msgstr "지도에서 자동 이동을 애니메이션 시킬지 여부를 설정"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:191
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
-msgstr ""
+msgstr "창의 가장자리가 화면 가장자리에서 `n` 거리 이내에 오면 창을 화면 가장자리로 이동"
 
 #: ../../src/wlapplication_messages.cc:195
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
-msgstr ""
+msgstr "창 가장자리가 화면 가장자리 옆에 있을 때 창 가장자리의 테두리를 제거합니다"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:200
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
-msgstr ""
+msgstr "창의 가장자리가 판 가장자리에서  `n` 거리 내에 들어오면 창을 판 가장자리로 이동"
 
 #: ../../src/wlapplication_messages.cc:204
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
-msgstr ""
+msgstr "창이 판과 겹치는 경우에만 창을 판 가장자리로 이동"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "디버그 메시지를 사용 설정"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid "Others:"
-msgstr ""
+msgstr "기타:"
 
 #: ../../src/wlapplication_messages.cc:208
 msgid "Only print version and exit"
-msgstr ""
+msgstr "버전만 인쇄하고 끝냅니다"
 
 #: ../../src/wlapplication_messages.cc:209
 msgid "Show this help"
-msgstr ""
+msgstr "도움말을 표시"
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Show this help with all available config options"
-msgstr ""
+msgstr "사용 가능한 모든 구성 선택사항에 대해 이 도움말을 표시"
 
 #: ../../src/wlapplication_messages.cc:211
 msgid "<save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:212
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay"
-msgstr ""
+msgstr "주어진 저장 게임 또는 재생을 직접 불러오기 합니다. .wgf/.wrpl 파일 확장자 연결에 유용합니다. 다른 선택사항과 함께 작동하지 않습니다. --loadgame/--replay도 참조하십시오"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:241
 #, c-format
 msgid "This is Widelands Version %s"
-msgstr ""
+msgstr "이것은 와이드랜드 버전 %s 입니다"
 
 #: ../../src/wlapplication_messages.cc:302
 msgid ""
