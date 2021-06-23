@@ -409,6 +409,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 
 void InteractiveBase::unset_sel_picture() {
 	set_sel_picture(g_image_cache->get("images/ui_basic/fsel.png"));
+	set_tooltip("");
 }
 
 bool InteractiveBase::buildhelp() const {
@@ -708,6 +709,20 @@ void InteractiveBase::game_logic_think() {
 	egbase().think();  // Call game logic here. The game advances.
 }
 
+void InteractiveBase::think() {
+	UI::Panel::think();
+	if (in_road_building_mode()) {
+		if (in_road_building_mode(RoadBuildingType::kRoad)) {
+			set_tooltip(
+			   (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str());
+		} else {
+			set_tooltip((boost::format(_("Waterway length: %1$u/%2$u")) %
+			             get_build_road_path().get_nsteps() % egbase().map().get_waterway_max_length())
+			               .str());
+		}
+	}
+}
+
 double InteractiveBase::average_fps() const {
 	return 1000.0 * 1000.0 / avg_usframetime_;
 }
@@ -726,16 +741,6 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	lastframe_ = curframe;
 
 	Game* game = dynamic_cast<Game*>(&egbase());
-
-	if (in_road_building_mode() && tooltip().empty()) {
-		draw_tooltip(
-		   in_road_building_mode(RoadBuildingType::kRoad) ?
-            (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
-            (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
-		       egbase().map().get_waterway_max_length())
-		         .str(),
-		   UI::PanelStyle::kWui);
-	}
 
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI

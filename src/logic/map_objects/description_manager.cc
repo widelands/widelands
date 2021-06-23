@@ -89,14 +89,41 @@ void DescriptionManager::register_description(const std::string& description_nam
                                               const std::string& script_path,
                                               const std::vector<std::string>& attributes,
                                               const RegistryCaller caller) {
-	auto it = registered_descriptions_.find(description_name);
-	if (it != registered_descriptions_.end()) {
-		if (caller == RegistryCaller::kWorldAddon || caller == RegistryCaller::kTribeAddon) {
-			// TODO(Nordfriese): Minimal-invasive fix for #4759, replace with #4760 after v1.0
-			log_warn("Overwriting existing registry for '%s':", description_name.c_str());
-			log_warn("  Old path: %s", it->second.script_path.c_str());
-			log_warn("  New path: %s", script_path.c_str());
-			registered_descriptions_.erase(it);
+	const bool skip =
+	   std::find(attributes.begin(), attributes.end(), "__skip_if_exists") != attributes.end();
+	const bool replace =
+	   std::find(attributes.begin(), attributes.end(), "__replace_if_exists") != attributes.end();
+	if (skip && replace) {
+		throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and "
+		                    "'__replace_if_exists' are mutually exclusive",
+		                    description_name.c_str());
+	}
+	switch (caller) {
+	case RegistryCaller::kDefault:
+	case RegistryCaller::kScenario:
+		if (skip || replace) {
+			throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and "
+			                    "'__replace_if_exists' may be used only by add-ons",
+			                    description_name.c_str());
+		}
+		break;
+	case RegistryCaller::kTribeAddon:
+	case RegistryCaller::kWorldAddon:
+		if (!skip && !replace) {
+			throw GameDataError("DescriptionManager::register_description %s: add-on entities must "
+			                    "define either '__skip_if_exists' or '__replace_if_exists'",
+			                    description_name.c_str());
+		}
+		break;
+	}
+
+	if (registered_descriptions_.count(description_name) == 1) {
+		if (skip) {
+			log_info("Skipped registering '%s'\n", description_name.c_str());
+			return;
+		} else if (replace) {
+			log_info("Replacing registry entry '%s'\n", description_name.c_str());
+			registered_descriptions_.erase(registered_descriptions_.find(description_name));
 		} else {
 			throw GameDataError(
 			   "DescriptionManager::register_description: Attempt to register description\n"

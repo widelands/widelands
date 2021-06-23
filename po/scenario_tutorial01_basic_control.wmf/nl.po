@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-16 16:44+0000\n"
+"PO-Revision-Date: 2021-06-22 00:09+0000\n"
 "Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -302,11 +302,11 @@ msgstr "Goed zo!  Nu moeten we wachten tot de hut klaar is."
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Als je wilt dat alles sneller gaat hoef je alleen toets %1$s te gebruiken om de spel snelheid op te voeren. Je kan %2$s gebruiken om weer langzamer te spelen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Verandering is snel met %1$s/%2$s en geleidelijk met %3$s/%4$s"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
@@ -321,11 +321,11 @@ msgstr "Perfect, de houthakkershut is gebouwd.  Een houthakker zal er zijn intre
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Verplaats de Weergave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Verplaats jouw Weergave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -390,7 +390,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Moving Your View"
-msgstr "Verplaats de Weergave"
+msgstr "Het Verplaatsen van jouw Weergave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:272
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287

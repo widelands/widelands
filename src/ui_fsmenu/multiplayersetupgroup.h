@@ -39,7 +39,8 @@ struct MultiPlayerPlayerGroup;
  *
  */
 struct MultiPlayerSetupGroup : public UI::Box {
-	MultiPlayerSetupGroup(UI::Panel* parent,
+	MultiPlayerSetupGroup(UI::Panel* launchgame,
+	                      UI::Panel* parent,
 	                      int32_t x,
 	                      int32_t y,
 	                      int32_t w,
@@ -57,12 +58,13 @@ private:
 	void draw(RenderTarget& dst) override;
 
 	GameSettingsProvider* const settings_;
-	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
-	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
-	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
+	std::unique_ptr<NetworkPlayerSettingsBackend> npsb_;
+	std::vector<MultiPlayerClientGroup*> multi_player_client_groups_;  // not owned
+	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups_;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	UI::Box clientbox, playerbox, scrollable_playerbox;
+	UI::Panel* launchgame_;
+	UI::Box clientbox_, playerbox_, scrollable_playerbox_;
 	UI::Textarea clients_, players_;
 	int32_t buth_;
 

@@ -383,6 +383,7 @@ bool InputQueueDisplay::handle_mousemove(
 }
 
 void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (!b) {
 		return;
@@ -406,6 +407,7 @@ void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
 
 void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 	assert(delta == 1 || delta == -1);
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (!b) {
 		return;
@@ -434,6 +436,7 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (!b) {
 		return;
@@ -461,6 +464,7 @@ void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
 
 void InputQueueDisplay::clicked_real_fill(const int8_t delta) {
 	assert(delta == 1 || delta == -1);
+	MutexLock m(MutexLock::ID::kObjects);
 
 	if (!queue_ || !ibase_.omnipotent() || !building_.get(ibase_.egbase())) {
 		return;
@@ -502,6 +506,7 @@ static const RGBAColor kColorComing(127, 127, 127, 191);
 static const RGBAColor kColorMissing(191, 191, 191, 127);
 
 void InputQueueDisplay::think() {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (!b) {
 		return;
@@ -569,6 +574,7 @@ void InputQueueDisplay::draw(RenderTarget& r) {
 }
 
 void InputQueueDisplay::draw_overlay(RenderTarget& r) {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (!b) {
 		return;
