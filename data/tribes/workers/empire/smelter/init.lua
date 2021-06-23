@@ -19,16 +19,25 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 4, 23 }
       },
+   },
+
+   spritesheets = {
       walk = {
-         hotspot = { 18, 25 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 18, 25 }
       },
       walkload = {
-         hotspot = { 8, 22 },
          fps = 10,
-         directional = true
-      }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 22 }
+      },
    }
 }
 

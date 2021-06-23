@@ -37,21 +37,30 @@
 --
 --       buildcost = {}, -- This will give the worker the property "buildable"
 --
---       animations = {
+--       spritesheets = {
 --          idle = {
---             hotspot = { 13, 24 },
---             fps = 10
+--             fps = 10,
+--             frames = 50,
+--             rows = 8,
+--             columns = 7,
+--             hotspot = { 13, 24 }
 --          },
 --          walk = {
---             hotspot = { 8, 25 },
 --             fps = 10,
---             directional = true
+--             frames = 10,
+--             rows = 4,
+--             columns = 3,
+--             directional = true,
+--             hotspot = { 8, 25 }
 --          },
 --          walkload = {
---             hotspot = { 8, 25 },
 --             fps = 10,
---             directional = true
---          }
+--             frames = 10,
+--             rows = 4,
+--             columns = 3,
+--             directional = true,
+--             hotspot = { 8, 25 }
+--          },
 --       }
 --    }
 --
@@ -71,21 +80,30 @@ descriptions:new_carrier_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 13, 24 },
-         fps = 10
+         fps = 10,
+         frames = 50,
+         rows = 8,
+         columns = 7,
+         hotspot = { 13, 24 }
       },
       walk = {
-         hotspot = { 8, 25 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 25 }
       },
       walkload = {
-         hotspot = { 8, 25 },
          fps = 10,
-         directional = true
-      }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 25 }
+      },
    }
 }
 
