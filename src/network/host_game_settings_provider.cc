@@ -32,15 +32,14 @@ bool HostGameSettingsProvider::can_change_map() {
 }
 
 bool HostGameSettingsProvider::can_change_player_state(uint8_t const number) {
-	if (number >= HostGameSettingsProvider::settings().players.size()) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (number >= host_settings.players.size()) {
 		return false;
 	}
-	if (settings().savegame) {
-		return HostGameSettingsProvider::settings().players.at(number).state !=
-		       PlayerSettings::State::kClosed;
-	} else if (settings().scenario) {
-		return HostGameSettingsProvider::settings().players.at(number).state !=
-		       PlayerSettings::State::kComputer;
+	if (host_settings.savegame) {
+		return host_settings.players.at(number).state != PlayerSettings::State::kClosed;
+	} else if (host_settings.scenario) {
+		return host_settings.players.at(number).state != PlayerSettings::State::kComputer;
 	}
 	return true;
 }
@@ -50,23 +49,24 @@ bool HostGameSettingsProvider::can_change_player_tribe(uint8_t const number) {
 }
 
 bool HostGameSettingsProvider::can_change_player_init(uint8_t const number) {
-	if (settings().scenario || HostGameSettingsProvider::settings().savegame) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (host_settings.scenario || host_settings.savegame) {
 		return false;
 	}
-	return number < HostGameSettingsProvider::settings().players.size();
+	return number < host_settings.players.size();
 }
 bool HostGameSettingsProvider::can_change_player_team(uint8_t number) {
-	if (settings().scenario || HostGameSettingsProvider::settings().savegame) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (host_settings.scenario || host_settings.savegame) {
 		return false;
 	}
-	if (number >= HostGameSettingsProvider::settings().players.size()) {
+	if (number >= host_settings.players.size()) {
 		return false;
 	}
-	if (number == HostGameSettingsProvider::settings().playernum) {
+	if (number == host_settings.playernum) {
 		return true;
 	}
-	return HostGameSettingsProvider::settings().players.at(number).state ==
-	       PlayerSettings::State::kComputer;
+	return host_settings.players.at(number).state == PlayerSettings::State::kComputer;
 }
 
 bool HostGameSettingsProvider::can_launch() {
@@ -91,40 +91,44 @@ void HostGameSettingsProvider::set_player_state(uint8_t number, PlayerSettings::
 void HostGameSettingsProvider::set_player_tribe(uint8_t number,
                                                 const std::string& tribe,
                                                 bool const random_tribe) {
-	if (number >= host_->settings().players.size()) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (number >= host_settings.players.size()) {
 		return;
 	}
-	if (number == HostGameSettingsProvider::settings().playernum ||
-	    settings().players.at(number).state == PlayerSettings::State::kComputer ||
-	    settings().players.at(number).state == PlayerSettings::State::kShared ||
-	    settings().players.at(number).state ==
+	if (number == host_settings.playernum ||
+	    host_settings.players.at(number).state == PlayerSettings::State::kComputer ||
+	    host_settings.players.at(number).state == PlayerSettings::State::kShared ||
+	    host_settings.players.at(number).state ==
 	       PlayerSettings::State::kOpen) {  // For savegame loading
 		host_->set_player_tribe(number, tribe, random_tribe);
 	}
 }
 
 void HostGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
-	if (number >= host_->settings().players.size()) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (number >= host_settings.players.size()) {
 		return;
 	}
-	if (number == HostGameSettingsProvider::settings().playernum ||
-	    settings().players.at(number).state == PlayerSettings::State::kComputer) {
+	if (number == host_settings.playernum ||
+	    host_settings.players.at(number).state == PlayerSettings::State::kComputer ||
+	    host_settings.savegame) {
 		host_->set_player_team(number, team);
 	}
 }
 
 void HostGameSettingsProvider::set_player_color(const uint8_t number, const RGBColor& col) {
-	if (number >= host_->settings().players.size()) {
+	const GameSettings& host_settings = HostGameSettingsProvider::settings();
+	if (number >= host_settings.players.size()) {
 		return;
 	}
-	if (number == HostGameSettingsProvider::settings().playernum ||
-	    settings().players.at(number).state == PlayerSettings::State::kComputer) {
+	if (number == host_settings.playernum ||
+	    host_settings.players.at(number).state == PlayerSettings::State::kComputer) {
 		host_->set_player_color(number, col);
 	}
 }
 
 void HostGameSettingsProvider::set_player_closeable(uint8_t number, bool closeable) {
-	if (number >= host_->settings().players.size()) {
+	if (number >= HostGameSettingsProvider::settings().players.size()) {
 		return;
 	}
 	host_->set_player_closeable(number, closeable);
@@ -132,14 +136,14 @@ void HostGameSettingsProvider::set_player_closeable(uint8_t number, bool closeab
 
 void HostGameSettingsProvider::set_player_shared(PlayerSlot number,
                                                  Widelands::PlayerNumber shared) {
-	if (number >= host_->settings().players.size()) {
+	if (number >= HostGameSettingsProvider::settings().players.size()) {
 		return;
 	}
 	host_->set_player_shared(number, shared);
 }
 
 void HostGameSettingsProvider::set_player_init(uint8_t const number, uint8_t const index) {
-	if (number >= host_->settings().players.size()) {
+	if (number >= HostGameSettingsProvider::settings().players.size()) {
 		return;
 	}
 	host_->set_player_init(number, index);
@@ -152,21 +156,22 @@ void HostGameSettingsProvider::set_player_ai(uint8_t number,
 }
 
 void HostGameSettingsProvider::set_player_name(uint8_t const number, const std::string& name) {
-	if (number >= host_->settings().players.size()) {
+	if (number >= HostGameSettingsProvider::settings().players.size()) {
 		return;
 	}
 	host_->set_player_name(number, name);
 }
 
 void HostGameSettingsProvider::set_player(uint8_t const number, const PlayerSettings& ps) {
-	if (number >= host_->settings().players.size()) {
+	if (number >= HostGameSettingsProvider::settings().players.size()) {
 		return;
 	}
 	host_->set_player(number, ps);
 }
 
 void HostGameSettingsProvider::set_player_number(uint8_t const number) {
-	if (number == UserSettings::none() || number < host_->settings().players.size()) {
+	if (number == UserSettings::none() ||
+	    number < HostGameSettingsProvider::settings().players.size()) {
 		host_->set_player_number(number);
 	}
 }
@@ -184,7 +189,7 @@ void HostGameSettingsProvider::set_peaceful_mode(bool peace) {
 }
 
 bool HostGameSettingsProvider::is_peaceful_mode() {
-	return host_->settings().peaceful;
+	return HostGameSettingsProvider::settings().peaceful;
 }
 
 void HostGameSettingsProvider::set_custom_starting_positions(bool c) {
@@ -192,5 +197,5 @@ void HostGameSettingsProvider::set_custom_starting_positions(bool c) {
 }
 
 bool HostGameSettingsProvider::get_custom_starting_positions() {
-	return host_->settings().custom_starting_positions;
+	return HostGameSettingsProvider::settings().custom_starting_positions;
 }

@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-15 05:04+0000\n"
+"PO-Revision-Date: 2021-06-21 06:18+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -335,7 +335,7 @@ msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "и многие, многие другие (спасибо за все, что вы сделали)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -433,7 +433,7 @@ msgstr "Переключить миникарту"
 #: ../../data/txts/help/common_helptexts.lua:84
 #: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -618,13 +618,13 @@ msgstr "Удерживая ALT переключает на второй альт
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "Клавиши %1% позволяют задать размер области выделения вокруг курсора мыши."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "Клавиша %1% ведет себя также, как и в обычной игре, переключая показ мест под стройки."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -723,7 +723,7 @@ msgstr "Используйте меню «настроить экономику�
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Управляйте своими сообщениями более эффективно: нажмите %1% чтобы попасть в окно сообщений, %2% для перехода, и %3% для архивации сообщений."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -750,7 +750,7 @@ msgstr "Если вы любите риск, удерживайте клавиш
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Нажмите %s чтобы переключится на просмотр ваших запасов."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -767,19 +767,19 @@ msgstr "Некоторые здания, например фермы, имеют
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Изменить масштаб можно колесом мыши или %1%/%2%. Нажмите %3%, чтобы сбросить масштаб."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Используйте клавиши \"%1$s\" и \"%2$s\" для быстрого перехода между недавно посещенными местами."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Ускорьте или замедлите игру с помощью %1%/%2%. Используйте %3%/%4% для ускорения, %5%/%6% для замедления."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
