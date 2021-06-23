@@ -5,14 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020
 # Tachionas <tachionexas@gmail.com>, 2020
-# Tachionas <tachionexas@gmail.com>, 2020
+# Tachionas <tachionexas@gmail.com>, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-15 08:42+0000\n"
-"PO-Revision-Date: 2021-06-15 08:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-19 09:51+0000\n"
+"PO-Revision-Date: 2021-06-20 16:30+0000\n"
+"Last-Translator: Tachionas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,8 +264,8 @@ msgstr "Lap"
 msgid "Dec"
 msgstr "Gruo"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -279,12 +279,12 @@ msgstr "Pagrindinis meniu"
 msgid "Tools"
 msgstr "Įrankiai"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -474,10 +474,10 @@ msgstr "Informacija"
 msgid "Click on a field to show information about it"
 msgstr "Paspausk ant laukelio, kad būtų rodoma informacija apie jį"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -644,8 +644,8 @@ msgstr "kasykla"
 msgid "port"
 msgstr "uostas"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -660,7 +660,7 @@ msgstr "praplaukiamas"
 #: ../../src/editor/tools/info_tool.cc:97
 #, c-format
 msgid "Caps: %s"
-msgstr ""
+msgstr "Galimybės: %s"
 
 #: ../../src/editor/tools/info_tool.cc:104
 #, c-format
@@ -684,7 +684,7 @@ msgstr "Vardas: %s"
 #: ../../src/editor/tools/info_tool.cc:129
 #, c-format
 msgid "Is: %s"
-msgstr ""
+msgstr "Yra: %s"
 
 #. * TRANSLATORS: Heading for immovables and animals in editor info tool
 #: ../../src/editor/tools/info_tool.cc:139
@@ -758,17 +758,17 @@ msgstr "Aprašymas: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/tools/info_tool.cc:231
 msgid "(none)"
-msgstr ""
+msgstr "(nėra)"
 
 #: ../../src/editor/tools/info_tool.cc:237
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/tools/info_tool.cc:244
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Galimi priedai: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
@@ -811,7 +811,7 @@ msgstr "Kelių žaidėjų scenarijai"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
-msgstr ""
+msgstr "Atsisiųsti žemėlapiai"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
@@ -823,7 +823,7 @@ msgstr "Dabartinis katalogas: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 msgid "Display"
-msgstr ""
+msgstr "Rodyti"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:80
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
@@ -859,19 +859,19 @@ msgstr "Atsisakyti"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:109
 msgid "File names"
-msgstr ""
+msgstr "Failo pavadinimai"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Map names"
-msgstr ""
+msgstr "Žemėlapio pavadinimai"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Original map names"
-msgstr ""
+msgstr "Originalūs žemėlapio pavadinimai"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
 msgid "Translated map names"
-msgstr ""
+msgstr "Išversti žemėlapio pavadinimai"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
@@ -882,7 +882,7 @@ msgstr ""
 #: ../../src/wui/economy_options_window.cc:666
 #: ../../src/wui/load_or_save_game.cc:52
 msgid "Delete"
-msgstr ""
+msgstr "Ištrinti"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 msgid "Delete this suggested team lineup"
@@ -892,16 +892,16 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager.cc:75
 #: ../../src/ui_fsmenu/addons_packager_box.cc:56
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
-msgstr ""
+msgstr "Pridėti žaidėją į šią komandą"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:322
 #: ../../src/logic/addons.cc:65
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:333
 msgid "Add lineup"
@@ -944,7 +944,7 @@ msgstr "Vandens kelio ilgio riba:"
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 msgid "Disabled"
-msgstr ""
+msgstr "Išjungti"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:429
 #, c-format
@@ -1014,11 +1014,11 @@ msgstr "Aukštas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:85
 msgid "Climate"
-msgstr ""
+msgstr "Klimatas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Reljefo pasiskirstymas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:129
 msgid "Water:"
@@ -1059,13 +1059,13 @@ msgstr "Žemėlapio ID:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:210
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Random"
-msgstr ""
+msgstr "Atsitiktinis"
 
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:240
 #: ../../src/ui_fsmenu/campaigns.cc:54
 msgid "Default"
-msgstr ""
+msgstr "Numatytas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:241
 msgid "Alpine"
@@ -1073,7 +1073,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:242
 msgid "Atoll"
-msgstr ""
+msgstr "Atolas"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:243
@@ -1109,12 +1109,12 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:609
 msgid "The Widelands Random Map Generator"
-msgstr ""
+msgstr "Widelands atsitiktinio žemėlapio generatorius"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:611
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr ""
+msgstr "Šis žemėlapis buvo automatiškai sugeneruotas Widelands atsitiktinio žemėlapio generatoriaus."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:622
 #: ../../src/wui/game_summary.cc:112
@@ -1175,7 +1175,7 @@ msgstr "Klaida išsaugojant žemėlapį!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:342
 msgid "Saving the map…"
-msgstr ""
+msgstr "Žemėlapio išsaugojimas..."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:360
 msgid "Map saved"
@@ -1187,7 +1187,7 @@ msgstr "Įvesk katalogo pavadinimą:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:109
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "Šis plėtinys rezervuotas! "
 
 #: ../../src/editor/ui_menus/map_size_box.cc:39
 msgid "Width"
@@ -1302,11 +1302,11 @@ msgstr "Norėdamas nustatyti reljefo aukštį paspausk Ctrl klavišą ir spustel
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 msgid "Increase/Decrease amount by:"
-msgstr ""
+msgstr "Padidinti/Sumažinti kiekį:"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:65
 msgid "Set amount to:"
-msgstr ""
+msgstr "Nustatyti kiekį:"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
@@ -1324,7 +1324,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:33
 msgid "Random Height Options"
-msgstr ""
+msgstr "Atsitiktinio aukščio parinktis"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:45
 msgid "Minimum height:"
@@ -1344,7 +1344,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Fixed height"
-msgstr ""
+msgstr "Nekintamas aukštis"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:35
 msgid "Resize"
@@ -1371,7 +1371,7 @@ msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:36
 msgid "Tool Size"
-msgstr ""
+msgstr "Įrankių dydis"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:85
 #, c-format
@@ -1412,16 +1412,16 @@ msgstr "Pranešimai"
 #: ../../src/game_io/game_loader.cc:191
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
 msgid "Finishing"
-msgstr ""
+msgstr "Baigimas"
 
 #: ../../src/game_io/game_saver.cc:52
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Žaidimo išsaugojimas: %1$s (%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:54
 msgid "Autosaving game…"
-msgstr ""
+msgstr "Automatinis žaidimo išsaugojimas..."
 
 #: ../../src/game_io/game_saver.cc:105
 msgid "Interactive player"
@@ -1483,7 +1483,7 @@ msgstr ""
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
@@ -1495,7 +1495,7 @@ msgstr ""
 #: ../../src/io/filesystem/filesystem.cc:248
 msgctxt "illegal_filename_characters"
 msgid "blank space"
-msgstr ""
+msgstr "tuščia vieta"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
@@ -1518,14 +1518,14 @@ msgstr "%s bet kurioje failo pavadinimo vietoje"
 #: ../../src/io/filesystem/filesystem.cc:272
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
-msgstr ""
+msgstr "Šie ženklai neleidžiami:"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/io/profile.cc:40
 msgid "true"
-msgstr ""
+msgstr "teisinga"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1539,14 +1539,14 @@ msgstr "taip"
 #. console
 #: ../../src/io/profile.cc:46
 msgid "on"
-msgstr ""
+msgstr "įjungti"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/io/profile.cc:52
 msgid "false"
-msgstr ""
+msgstr "neteisinga"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1560,15 +1560,15 @@ msgstr "Kuriami žaidėjai...  "
 #. console
 #: ../../src/io/profile.cc:58
 msgid "off"
-msgstr ""
+msgstr "išjungti"
 
 #: ../../src/logic/addons.cc:48
 msgid "Tribes"
-msgstr ""
+msgstr "Gentys"
 
 #: ../../src/logic/addons.cc:50
 msgid "World"
-msgstr ""
+msgstr "Pasaulis"
 
 #: ../../src/logic/addons.cc:53
 msgid "Script"
@@ -1581,7 +1581,7 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:56 ../../src/ui_fsmenu/campaigndetails.cc:49
 msgid "Campaign"
-msgstr ""
+msgstr "Kampanija"
 
 #: ../../src/logic/addons.cc:60
 msgid "Win Condition"
@@ -1598,7 +1598,7 @@ msgstr ""
 
 #: ../../src/logic/addons.cc:142
 msgid "No conflicts"
-msgstr ""
+msgstr "Konfliktų nėra"
 
 #: ../../src/logic/addons.cc:147
 #, c-format
@@ -2331,7 +2331,7 @@ msgstr ""
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Žemėlapio failas yra neteisingas:\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
@@ -4100,7 +4100,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:359
 msgid "The campaigns difficulty. One word."
-msgstr ""
+msgstr "Kampanijos sudėtingumas. Vienas žodis."
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:360
 msgid "Short description, which will be appended to the difficulty."
@@ -4108,7 +4108,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:34
 msgid "Choose Campaign"
-msgstr ""
+msgstr "Pasirinkti kampaniją"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:39
 #: ../../src/ui_fsmenu/loadgame.cc:80
@@ -4119,7 +4119,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:40
 msgid "Play this campaign"
-msgstr ""
+msgstr "Žaisti šią kampaniją"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:48
@@ -4132,7 +4132,7 @@ msgstr "Genties pavadinimas"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:51
 msgid "Campaign Name"
-msgstr ""
+msgstr "Kampanijos pavadinimas"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:71
@@ -4536,11 +4536,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:303 ../../src/wlapplication_options.cc:186
 msgid "Campaigns"
-msgstr ""
+msgstr "Kampanijos"
 
 #: ../../src/ui_fsmenu/main.cc:303
 msgid "Play a campaign"
-msgstr ""
+msgstr "Žaisti kampaniją"
 
 #: ../../src/ui_fsmenu/main.cc:305 ../../src/wlapplication_options.cc:181
 msgid "Tutorials"
@@ -4638,7 +4638,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:429
 msgid "Begin or load a single-player campaign or free game"
-msgstr ""
+msgstr "Pradėti arba paleisti vieno žaidėjo kampaniją ar laisvą žaidimą"
 
 #: ../../src/ui_fsmenu/main.cc:432
 msgid "Play with your friends over the internet"
@@ -5175,7 +5175,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:105
 msgid "Return to campaign selection"
-msgstr ""
+msgstr "Grįžti į kampanijos pasirinkimą"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:106
 msgid "Play this scenario"
@@ -5275,7 +5275,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:755
 msgid "File system error"
-msgstr ""
+msgstr "Failų išdėstymo sistemos klaida"
 
 #: ../../src/wlapplication.cc:1249
 #, c-format
@@ -6247,7 +6247,7 @@ msgstr ""
 
 #: ../../src/wui/economy_options_window.cc:117
 msgid "Profile to apply to the selected items"
-msgstr ""
+msgstr "Profilį pritaikyti pažymėtiems vienetams"
 
 #: ../../src/wui/economy_options_window.cc:128
 msgid "Save target settings"
@@ -6288,11 +6288,11 @@ msgstr ""
 
 #: ../../src/wui/economy_options_window.cc:657
 msgid "Save Profile"
-msgstr ""
+msgstr "Išsaugoti profilį"
 
 #: ../../src/wui/economy_options_window.cc:667
 msgid "Existing Profiles"
-msgstr ""
+msgstr "Esami profiliai"
 
 #: ../../src/wui/fieldaction.cc:234
 msgid "Build small building"
@@ -6446,7 +6446,7 @@ msgstr ""
 #. * TRANSLATORS: Button text
 #: ../../src/wui/game_client_disconnected.cc:78
 msgid "Continue game"
-msgstr ""
+msgstr "Tęsti žaidimą"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:80
@@ -6461,12 +6461,12 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
-msgstr ""
+msgstr "Išeiti iš žaidimo"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
@@ -6484,16 +6484,16 @@ msgstr ""
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:28
 msgid "Exit Game Confirmation"
-msgstr ""
+msgstr "Išėjimo iš žaidimo patvirtinimas"
 
 #: ../../src/wui/game_exit_confirm_box.cc:29
 msgid "Are you sure you wish to exit this game?"
-msgstr ""
+msgstr "Ar tu tikrai nori išeiti iš šio žaidimo?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #: ../../src/wui/game_main_menu_save_game.cc:312
 msgid "Error Saving Game!"
-msgstr ""
+msgstr "Klaida išsaugojant žaidimą!"
 
 #: ../../src/wui/game_message_menu.cc:53
 #: ../../src/wui/game_message_menu.cc:602
@@ -6538,7 +6538,7 @@ msgstr "Rodyti visas žinutes. "
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:540
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Rodyti tik geologų pranešimus"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:545
@@ -6548,17 +6548,17 @@ msgstr "Rodyti tik ekonomikos žinutes."
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:549
 msgid "Show seafaring messages only"
-msgstr ""
+msgstr "Rodyti tik jūreivių pranešimus"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:553
 msgid "Show warfare messages only"
-msgstr ""
+msgstr "Rodyti tik karo pranešimus"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:557
 msgid "Show scenario messages only"
-msgstr ""
+msgstr "Rodyti tik scenarijaus pranešimus"
 
 #: ../../src/wui/game_message_menu.cc:595
 msgid "Messages: Archive"
@@ -6576,15 +6576,15 @@ msgstr "Rodyti gautus"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Atkurti pažymėtą%d pranešimą"
+msgstr[1] "Atkurti pažymėtus %d pranešimus"
+msgstr[2] "Atkurti pažymėtus %d pranešimus"
+msgstr[3] "Atkurti pažymėtus %d pranešimus"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:634
 msgid "Restore selected message"
-msgstr ""
+msgstr "Atkurti pažymėtą pranešimą"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
@@ -6594,15 +6594,15 @@ msgstr ""
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Archyvuoti pažymėtą %d pranešimą"
+msgstr[1] "Archyvuoti pažymėtus %d pranešimus"
+msgstr[2] "Archyvuoti pažymėtus %d pranešimus"
+msgstr[3] "Archyvuoti pažymėtus %d pranešimus"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:650
 msgid "Archive selected message"
-msgstr ""
+msgstr "Archyvuoti pažymėtą pranešimą"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_options_sound_menu.cc:35
@@ -6616,15 +6616,15 @@ msgstr "Žaidimas baigtas"
 
 #: ../../src/wui/game_summary.cc:56
 msgid "Player Info:"
-msgstr ""
+msgstr "Žaidėjo informacija:"
 
 #: ../../src/wui/game_summary.cc:88
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Praėjęs laikas:"
 
 #: ../../src/wui/game_summary.cc:99
 msgid "Continue playing"
-msgstr ""
+msgstr "Tęsti žaidimą"
 
 #: ../../src/wui/game_summary.cc:115
 msgid "Time"
@@ -6634,19 +6634,19 @@ msgstr "Laikas"
 #. lost.
 #: ../../src/wui/game_summary.cc:219
 msgid "Lost"
-msgstr ""
+msgstr "Pralaimėjo"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
 #: ../../src/wui/game_summary.cc:223
 msgid "Won"
-msgstr ""
+msgstr "Laimėjo"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
 #: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
-msgstr ""
+msgstr "Pasidavė"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
@@ -7026,8 +7026,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Statistika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
@@ -7751,7 +7751,7 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:136
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Muzika"
 
 #: ../../src/wui/sound_options.cc:138
 msgctxt "sound_options"

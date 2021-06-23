@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Gregers K-Hansen <gregers86@me.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2017-09-21 23:34+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-22 19:54+0000\n"
+"Last-Translator: Gregers K-Hansen <gregers86@me.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +42,7 @@ msgstr "Regler"
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
@@ -52,7 +53,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
+msgstr "Smuglere er et gøyalt kart for 4 spillere. Du og din partner starter diagonalt fra hverandre på en punktsymetrisk øy. Det er mange smuglertunneler på øyen. alle bestående av en mottagende og en givende ende."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -60,7 +61,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "For å etablere en smuglerrute, må du bygge et varehus på et sendings-/mottaks-punkt mens din spillpartner må bygge det samme i motsatt ende. En vare blir så transportert hvert 10. sekund."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -68,26 +69,26 @@ msgstr ""
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
+msgstr "For vanskeligere å forsvare smuglerruter, får du 2 eller 3 poeng per vare smuglet. Det første laget som samler %s vinner."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
-msgstr ""
+msgstr "Et sendingspunkt"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
-msgstr ""
+msgstr "Et mottakspunkt"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
-msgstr ""
+msgstr "Notater"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
+msgstr "Husk at kartet har rasjonell symetri. For eksempel, når du har funnet et punkt øverst til venstre for ditt hovedkvarter, vil det korresponderende punktet være nederst til høyre for hovedkvarteret til din medspiller."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
@@ -109,7 +110,7 @@ msgstr "En ny smuglerrute fra %1$s til %2$s har blitt etablert! Hver vare de smu
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "Din medspiller har etablert en ny smugglerrute. Du har et sendingspunkt i varehuset. Hver vare som smuggles her er verdt %s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -117,7 +118,7 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "Din medspiller har etablert en ny smugglerrute. Du har et mottakspunkt i varehuset. Hver vare som smuggles her er verdt %s."
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
@@ -127,7 +128,7 @@ msgstr "Smuglerruten verdt %1$s fra %2$s til %3$s har blitt brutt!"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
-msgstr ""
+msgstr "Spill er over!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'

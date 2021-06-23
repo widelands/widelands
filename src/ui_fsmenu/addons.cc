@@ -33,6 +33,7 @@
 #include "graphic/text_layout.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
@@ -585,6 +586,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 	}
 	set_config_string("addons", text);
 	write_config();
+	fsmm_.set_labels();
 }
 
 inline std::shared_ptr<AddOns::AddOnInfo> AddOnsCtrl::selected_installed_addon() const {
@@ -925,6 +927,16 @@ void AddOnsCtrl::update_dependency_errors() {
 	if (warn_requirements.empty()) {
 		warn_requirements_.set_text("");
 		warn_requirements_.set_tooltip("");
+		try {
+			Widelands::Game game;
+			game.descriptions();
+		} catch (const std::exception& e) {
+			warn_requirements_.set_text(
+			   (boost::format(_("An enabled add-on is defective. No games can be started with the "
+			                    "current configuration.\nError message:\n%s")) %
+			    e.what())
+			      .str());
+		}
 	} else {
 		const unsigned nr_warnings = warn_requirements.size();
 		std::string list;
