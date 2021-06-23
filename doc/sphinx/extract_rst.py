@@ -130,7 +130,7 @@ def extract_rst_from_cpp(inname, outname=None):
                     if ancestors:
                         child_str = '   Child of (inserted): '
                         for i, ancestor in enumerate(ancestors):
-                            # using :any:`xy` to get linking between files
+                            # using :any:`xy` to make linking between files work
                             child_str += ' :any:`{a}`'.format(child_str, a=ancestor)
                             if i < len(ancestors) - 1:
                                 # add space except after last entry

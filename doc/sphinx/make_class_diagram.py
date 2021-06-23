@@ -161,9 +161,9 @@ def format_ancestors(cls):
 
     ret_str = ''
 
-    if len(ancestor_tree) >= MAX_PARENTS:#> 0:
+    if len(ancestor_tree) >= MAX_PARENTS:
         parent = ancestor_tree.pop()
-        if len(ancestor_tree) >= MAX_PARENTS:#> 0:
+        if len(ancestor_tree) >= MAX_PARENTS:
             # show a big edge with tooltipp
             ret_str = '{main_cls} -- {parent}\
 [style=tapered, arrowhead=none, arrowtail=none dir=both,\
@@ -178,13 +178,13 @@ penwidth=15, edgetooltip="{tooltip}"]'.format(main_cls=main_cls,
                 cls=cls)
         else:
             # only 2 parent classes
-            ret_str = """{main_cls} -- {{{parent}[{link}]}} -- {cls}""".format(
+            ret_str = '{main_cls} -- {{{parent}[{link}]}} -- {cls}'.format(
                 main_cls=main_cls,
                 parent=parent,
                 link=get_child_html_link(parent),
                 cls=cls)
     else:
-        ret_str = """{main_cls} -- {cls}""".format(main_cls=main_cls, cls=cls)
+        ret_str = '{main_cls} -- {cls}'.format(main_cls=main_cls, cls=cls)
 
     return ret_str
 
