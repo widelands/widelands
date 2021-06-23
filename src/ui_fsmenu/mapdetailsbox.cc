@@ -27,6 +27,9 @@
 // Helper functions for localizable assembly of info strings
 
 static std::string tribe_of(const GameSettings& game_settings, const PlayerSettings& p) {
+	if (p.random_tribe) {
+		return pgettext("tribe", "Random");
+	}
 	for (const Widelands::TribeBasicInfo& tribeinfo : game_settings.tribes) {
 		if (tribeinfo.name == p.tribe) {
 			return tribeinfo.descname;
