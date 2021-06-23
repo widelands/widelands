@@ -18,19 +18,28 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 12, 24 }
       },
+   },
+
+   spritesheets = {
       walk = {
-         hotspot = { 12, 24 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 12, 24 }
       },
       walkload = {
-         -- TODO(GunChleoc): Needs a walkload animation
+         -- TODO(hessenfarmer): Needs a walkload animation
          basename = "walk",
-         hotspot = { 12, 24 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 12, 24 }
+      },
+   },
 }
 
 pop_textdomain()
