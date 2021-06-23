@@ -177,6 +177,8 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
+"Нажмите на кнопку, на которую указывает стрелка, или нажмите кнопку \"%s\" "
+"чтобы увидеть цели игры."
 
 #: ../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
@@ -191,6 +193,8 @@ msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
 msgstr ""
+"Кнопка \"Цели\" внизу экрана позволяет как открывать, так и закрывать это "
+"окно."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
@@ -204,6 +208,7 @@ msgstr ""
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
+"В процессе следите за маркерами, чтобы сделать дорогу как можно ровнее:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
@@ -247,12 +252,16 @@ msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"…затем щелкните по цветным маркерам для прокладки дороги, пока не проложите "
+"ее до флага перед нужным зданием."
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
+"Хорошая работа! Мы начали добычу гранита, а он нам понадобится для "
+"строительства множества зданий."
 
 #: ../../data/scripting/training_wheels/welcome.lua:20
 #: ../../data/scripting/training_wheels/welcome.lua:24
@@ -261,4 +270,4 @@ msgstr "Добро пожаловать в «Widelands»!"
 
 #: ../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr ""
+msgstr "Следуйте за стрелками, чтобы получить пояснения."
