@@ -1057,6 +1057,14 @@ void GameHost::set_map(const std::string& mapname,
 		d->promoter->set_map(mapname.c_str());
 	}
 
+	if (d->settings.savegame) {
+		// Free all slots slots for now, so that the scenario data can be loaded properly
+		set_player_number(UserSettings::none());
+		for (const Client& client : d->clients) {
+			switch_to_player(client.usernum, UserSettings::none());
+		}
+	}
+
 	// Broadcast new player settings
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
@@ -1064,6 +1072,30 @@ void GameHost::set_map(const std::string& mapname,
 	broadcast(packet);
 	// Map changes are finished here
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+
+	// Assign players from savegame
+	if (d->settings.savegame) {
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+			const PlayerSettings& p = d->settings.players.at(i);
+			if (p.tribe.empty()) {
+				// Closed slot
+				continue;
+			}
+
+			std::stringstream playerstream(p.name);
+			std::string user_part;
+			while (getline(playerstream, user_part, ' ')) {
+				for (uint8_t usernum = 0; usernum < d->settings.users.size(); ++usernum) {
+					const std::string& username = d->settings.users.at(usernum).name;
+
+					if (user_part == username) {
+						switch_to_player(usernum, i);
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	// If possible, offer the map / saved game as transfer
 	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
@@ -1205,7 +1237,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 	std::string actual_tribe = tribe;
 	player.random_tribe = random_tribe;
 
-	while (random_tribe) {
+	while (!d->settings.savegame && random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
 		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
@@ -1272,6 +1304,24 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 
 	// Broadcast changes
 	broadcast_setting_player(number);
+}
+
+/**
+ * Removes one player from a combined slot, where the name consists
+ * of all players in this slot separated by spaces, i.e. "Player1 Player2"
+ * \return true if the name has no players left
+ */
+bool GameHost::remove_player_name(uint8_t const number, const std::string& name) {
+	PlayerSettings& p = d->settings.players.at(number);
+	std::string temp(p.name);
+	temp.erase(p.name.find(name), name.size());
+	if (temp.back() == ' ') {
+		temp.erase(temp.end() - 1);
+	} else if (temp.front() == ' ') {
+		temp.erase(temp.begin());
+	}
+	set_player_name(number, temp);
+	return temp.empty();
 }
 
 void GameHost::set_player_name(uint8_t const number, const std::string& name) {
@@ -1387,14 +1437,7 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	std::string name = d->settings.users.at(user).name;
 	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
-		PlayerSettings& op = d->settings.players.at(old);
-		std::string temp(" ");
-		temp += name;
-		temp += " ";
-		std::string temp2(op.name);
-		temp2 = temp2.erase(op.name.find(temp), temp.size());
-		set_player_name(old, temp2);
-		if (temp2.empty()) {
+		if (remove_player_name(old, name)) {
 			set_player_state(old, PlayerSettings::State::kOpen);
 		}
 	}
@@ -1404,9 +1447,9 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 		PlayerSettings& op = d->settings.players.at(number);
 		if (op.state == PlayerSettings::State::kOpen) {
 			set_player_state(number, PlayerSettings::State::kHuman);
-			set_player_name(number, " " + name + " ");
+			set_player_name(number, name);
 		} else {
-			set_player_name(number, op.name + " " + name + " ");
+			set_player_name(number, op.name + " " + name);
 		}
 	}
 	d->settings.users.at(user).position = number;
@@ -1616,6 +1659,10 @@ bool GameHost::has_user_name(const std::string& name, uint8_t ignoreplayer) {
 		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	}
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i) {
+		if (d->settings.savegame && d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
+			// This might be this users slot from the configured savegame
+			continue;
+		}
 		if (i != ignoreplayer && d->settings.players.at(i).name == name) {
 			return true;
 		}
@@ -1752,8 +1799,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	broadcast_setting_user(client.usernum);
 
 	// Check if there is an unoccupied player left and if, assign.
+	// Assign the slot with the same username for savegames
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
-		if (d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
+		const PlayerSettings& p = d->settings.players.at(i);
+		if (p.state == PlayerSettings::State::kOpen &&
+		    (!d->settings.savegame || p.name == effective_name)) {
 			switch_to_player(client.usernum, i);
 			break;
 		}
@@ -2422,14 +2472,7 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 	for (const UserSettings& setting : d->settings.users) {
 		if (setting.position == number) {
 			if (!d->game) {
-				// Remove player name
-				PlayerSettings& p = d->settings.players.at(number);
-				std::string temp(" ");
-				temp += name;
-				temp += " ";
-				std::string temp2(p.name);
-				temp2 = temp2.erase(p.name.find(temp), temp.size());
-				set_player_name(number, temp2);
+				remove_player_name(number, name);
 			}
 			return;
 		}
