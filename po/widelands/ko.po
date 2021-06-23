@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-15 08:42+0000\n"
-"PO-Revision-Date: 2021-06-15 08:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-19 09:51+0000\n"
+"PO-Revision-Date: 2021-06-23 05:25+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -268,8 +268,8 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -283,12 +283,12 @@ msgstr "주 메뉴"
 msgid "Tools"
 msgstr "도구"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, statistics
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -478,10 +478,10 @@ msgstr "정보"
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -648,8 +648,8 @@ msgstr "광산"
 msgid "port"
 msgstr "항구"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -3261,191 +3261,191 @@ msgid ""
 "yet. To upload your add-ons, please zip the add-on directory in your file "
 "browser, then open our add-on submission website %s in your browser and "
 "attach the zip file."
-msgstr ""
+msgstr "와이드랜드 내에서 서버에 추가 기능을 업로드하는 것은 아직 구현되지 않았습니다. 추가 기능을 업로드하려면 파일 브라우저에서 추가 기능 디렉토리의 압축한 다음 브라우저에서 추가 기능 제출 웹 사이트 %s 를 열고 zip 파일을 첨부하십시오."
 
 #: ../../src/ui_fsmenu/addons.cc:304
 msgid "Open Link"
-msgstr ""
+msgstr "고리 열기"
 
 #: ../../src/ui_fsmenu/addons.cc:306
 msgid "Copy Link"
-msgstr ""
+msgstr "고리 복사"
 
 #: ../../src/ui_fsmenu/addons.cc:326
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "사용자 자신의 추가 기능을 개발하고 꾸러미 쌓는 법에 대한 자세한 내용은 %s 를 참조하십시오."
 
 #: ../../src/ui_fsmenu/addons.cc:356
 msgid "Development"
-msgstr ""
+msgstr "개발"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons.cc:359
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../src/ui_fsmenu/addons.cc:361
 msgid "Name (descending)"
-msgstr ""
+msgstr "이름 (내림차순)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:363
 msgid "Best average rating"
-msgstr ""
+msgstr "최고 평균 등급"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons.cc:365
 msgid "Worst average rating"
-msgstr ""
+msgstr "최저 평균 등급"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons.cc:367
 msgid "Most often downloaded"
-msgstr ""
+msgstr "가장 자주 내려받기됨"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons.cc:369
 msgid "Least often downloaded"
-msgstr ""
+msgstr "다운로드 빈도가 가장 낮음"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons.cc:371
 msgid "Oldest"
-msgstr ""
+msgstr "가장 오래됨"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons.cc:373
 msgid "Newest"
-msgstr ""
+msgstr "가장 최신"
 
 #: ../../src/ui_fsmenu/addons.cc:376
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "이름별로 추가 기능 거르개"
 
 #: ../../src/ui_fsmenu/addons.cc:386
 #, c-format
 msgid "Toggle category ‘%s’"
-msgstr ""
+msgstr "범주 ‘%s’ 을 전환"
 
 #: ../../src/ui_fsmenu/addons.cc:459
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
+msgstr[0] "이 %u 개의 추가 기능을 판올림 하겠습니까?"
 
 #: ../../src/ui_fsmenu/addons.cc:467
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s)  %3$s에 의해"
 
 #: ../../src/ui_fsmenu/addons.cc:468 ../../src/ui_fsmenu/addons.cc:2013
 #: ../../src/ui_fsmenu/addons.cc:2038
 msgid "NOT VERIFIED"
-msgstr ""
+msgstr "확인되지 않음"
 
 #: ../../src/ui_fsmenu/addons.cc:468
 msgid "verified"
-msgstr ""
+msgstr "확인됨"
 
 #: ../../src/ui_fsmenu/addons.cc:473
 msgid "Upgrade All"
-msgstr ""
+msgstr "모두 판올림"
 
 #: ../../src/ui_fsmenu/addons.cc:665
 msgid "Server Connection Error"
-msgstr ""
+msgstr "서버 연결 오류"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
 #: ../../src/ui_fsmenu/addons.cc:667
 msgid "a networking bug"
-msgstr ""
+msgstr "네트워킹 버그"
 
 #: ../../src/ui_fsmenu/addons.cc:668
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
-msgstr ""
+msgstr "서버에서 사용 가능한 추가 기능 목록을 가져올 수 없습니다!<br>오류 메시지: %s"
 
 #: ../../src/ui_fsmenu/addons.cc:749
 #, c-format
 msgid "Installed (%u)"
-msgstr ""
+msgstr "설치됨 (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:827
 msgid "Browse"
-msgstr ""
+msgstr "찾아보기"
 
 #: ../../src/ui_fsmenu/addons.cc:828
 #, c-format
 msgid "Browse (%u)"
-msgstr ""
+msgstr "찾아보기 (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:838
 #, c-format
 msgid "Upgrade all (%u)"
-msgstr ""
+msgstr "모두 판올림 (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:841
 msgid "No upgrades are available for your installed add-ons"
-msgstr ""
+msgstr "설치된 추가 기능에 사용할 수 있는 판올림이 없습니다"
 
 #: ../../src/ui_fsmenu/addons.cc:844
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
-msgstr[0] ""
+msgstr[0] "다음 %u 개의 추가 기능을 판올림하십시오:"
 
 #: ../../src/ui_fsmenu/addons.cc:850
 #, c-format
 msgid "· %s"
-msgstr ""
+msgstr "· %s"
 
 #: ../../src/ui_fsmenu/addons.cc:881
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "· ‘%1$s’ 에는 찾을 수 없는  ‘%2$s’ 가 필요합니다"
 
 #: ../../src/ui_fsmenu/addons.cc:887
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "· ‘%1$s’ 에는 비활성화된 ‘%2$s’ 가 필요합니다"
 
 #: ../../src/ui_fsmenu/addons.cc:894
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "· ‘%1$s’ 에는 ‘%2$s’  필요하며, 이는 필요한 추가 기능 아래에 나열되어 있습니다"
 
 #: ../../src/ui_fsmenu/addons.cc:914
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "· ‘%1$s’ 은 처음 ‘%2$s’ 와 ‘%3$s’ 을 차례로 입력해야 하지만 순서가 잘못되었습니다"
 
 #: ../../src/ui_fsmenu/addons.cc:940
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
-msgstr[0] ""
+msgstr[0] "%u 개의 종속성 오류"
 
 #: ../../src/ui_fsmenu/addons.cc:945
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr ""
+msgstr "종속성 오류가 있는 추가 기능이 제대로 작동하지 않거나 게임 및 지도가 불러오기되지 않을 수 있습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1140
 #, c-format
 msgid "Downloading ‘%s’…"
-msgstr ""
+msgstr "‘%s’ 을 내려받고 있습니다…"
 
 #: ../../src/ui_fsmenu/addons.cc:1180
 #, c-format
@@ -3454,12 +3454,12 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "서버에서 추가 기능 ‘%1$s’ 을 내려받기할 수 없습니다. 이 추가 기능의 설치/판올림은 건너 뜁니다.\n\n오류 메시지:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1194
 #, c-format
 msgid "Downloading translations for ‘%s’…"
-msgstr ""
+msgstr "‘%s’ 에 대한 번역을 내려받고 있습니다…"
 
 #: ../../src/ui_fsmenu/addons.cc:1235
 #, c-format
@@ -3468,12 +3468,12 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "추가 기능 '%1$s'의 번역 파일을 서버에서 내려받을 수 없습니다. 이 추가 기능에 대한 번역 설치/판올림은 건너뜁니다.\n\n오류 메시지:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1259 ../../src/ui_fsmenu/addons.cc:1441
 #: ../../src/ui_fsmenu/addons.cc:1911
 msgid "Uninstall"
-msgstr ""
+msgstr "제거"
 
 #: ../../src/ui_fsmenu/addons.cc:1261
 #, c-format
@@ -3487,7 +3487,7 @@ msgid ""
 "%5$s\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "이 추가 기능을 제거하겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n버전 %3$s\n범주: %4$s\n%5$s\n\n이 추가 기능은 서버에서 다시 내려받기할 수 없습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1268
 #, c-format
@@ -3499,46 +3499,46 @@ msgid ""
 "Version %3$s\n"
 "Category: %4$s\n"
 "%5$s"
-msgstr ""
+msgstr "이 추가 기능을 제거하겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n버전 %3$s\n범주: %4$s\n%5$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1356
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
-msgstr ""
+msgstr "서버에서 필요한 추가 기능 ‘%s’ 을 찾을 수 없습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1394
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
-msgstr ""
+msgstr "이 추가 기능은 여러 선수 놀이 및 재생에서 비 동기화를 일으키는 것으로 알려져 있습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1400
 #, c-format
 msgid "Requires a Widelands version of at least %s."
-msgstr ""
+msgstr "적어도 %s의 와이드랜드 버전이 필요합니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1405
 #, c-format
 msgid "Requires a Widelands version of at most %s."
-msgstr ""
+msgstr "최대 %s 의 와이드랜드 버전이 필요합니다. "
 
 #: ../../src/ui_fsmenu/addons.cc:1409
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
-msgstr ""
+msgstr "적어도 %1$s 에서 최대 %2$s의 와이드랜드 버전이 필요합니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1451 ../../src/ui_fsmenu/addons.cc:1500
 msgid "Disable"
-msgstr ""
+msgstr "사용 안 함"
 
 #: ../../src/ui_fsmenu/addons.cc:1451 ../../src/ui_fsmenu/addons.cc:1500
 msgid "Enable"
-msgstr ""
+msgstr "사용 설정"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons.cc:1464 ../../src/ui_fsmenu/addons.cc:1936
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -3546,98 +3546,98 @@ msgstr ""
 #: ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1481 ../../src/ui_fsmenu/addons.cc:1981
 #, c-format
 msgid "(%s)"
-msgstr ""
+msgstr "(%s)"
 
 #: ../../src/ui_fsmenu/addons.cc:1484 ../../src/ui_fsmenu/addons.cc:1985
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "번역확인-> 만든이: %s"
 
 #: ../../src/ui_fsmenu/addons.cc:1515 ../../src/ui_fsmenu/addons.cc:2069
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "분류: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons.cc:1520 ../../src/ui_fsmenu/addons.cc:2073
 #, c-format
 msgid "Version: %1$s+%2$u"
-msgstr ""
+msgstr "버전: %1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons.cc:1572
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f GB"
 
 #: ../../src/ui_fsmenu/addons.cc:1574
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: ../../src/ui_fsmenu/addons.cc:1576
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../src/ui_fsmenu/addons.cc:1578
 #, c-format
 msgid "%u bytes"
-msgstr ""
+msgstr "%u 바이트"
 
 #: ../../src/ui_fsmenu/addons.cc:1616
 msgid "Your vote"
-msgstr ""
+msgstr "당신의 투표"
 
 #: ../../src/ui_fsmenu/addons.cc:1634 ../../src/ui_fsmenu/addons.cc:2094
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] ""
+msgstr[0] "평균 등급: %1$.3f표 (%2$u 표)"
 
 #: ../../src/ui_fsmenu/addons.cc:1639 ../../src/ui_fsmenu/addons.cc:2099
 msgid "No votes yet"
-msgstr ""
+msgstr "아직 투표가 없습니다"
 
 #: ../../src/ui_fsmenu/addons.cc:1649
 msgid "Next screenshot"
-msgstr ""
+msgstr "다음 화면 갈무리"
 
 #: ../../src/ui_fsmenu/addons.cc:1658
 msgid "Previous screenshot"
-msgstr ""
+msgstr "이전 화면 갈무리"
 
 #: ../../src/ui_fsmenu/addons.cc:1666
 msgid "Submit comment"
-msgstr ""
+msgstr "댓글 제출"
 
 #: ../../src/ui_fsmenu/addons.cc:1672
 msgid "No comments yet."
-msgstr ""
+msgstr "아직 댓글이 없습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1674
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
-msgstr[0] ""
+msgstr[0] "%u 개의 댓글:"
 
 #: ../../src/ui_fsmenu/addons.cc:1684
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
-msgstr ""
+msgstr "‘%1$s’ 이 버전 %2$s에 댓글을 달았습니다:"
 
 #: ../../src/ui_fsmenu/addons.cc:1698
 msgid "Not voted"
-msgstr ""
+msgstr "투표하지 않음"
 
 #: ../../src/ui_fsmenu/addons.cc:1758
 #, c-format
 msgid "Comments (%u)"
-msgstr ""
+msgstr "댓글 (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:1763
 #, c-format
@@ -3647,7 +3647,7 @@ msgstr "겨를찍기 (%u)"
 #: ../../src/ui_fsmenu/addons.cc:1775
 #, c-format
 msgid "Votes (%u)"
-msgstr ""
+msgstr "투표 (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:1818
 #, c-format
@@ -3656,19 +3656,19 @@ msgstr "%1$u / %2$u"
 
 #: ../../src/ui_fsmenu/addons.cc:1854
 msgid "This screenshot could not be fetched from the server due to an error."
-msgstr ""
+msgstr "오류로 인해 서버에서 이 화면 갈무리를 가져올 수 없습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:1893 ../../src/ui_fsmenu/addons.cc:2004
 msgid "Install"
-msgstr ""
+msgstr "설치"
 
 #: ../../src/ui_fsmenu/addons.cc:1902 ../../src/ui_fsmenu/addons.cc:2028
 msgid "Upgrade"
-msgstr ""
+msgstr "판올림"
 
 #: ../../src/ui_fsmenu/addons.cc:1920
 msgid "Comments and Votes"
-msgstr ""
+msgstr "댓글 및 투표"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
@@ -3676,12 +3676,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1962
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
-msgstr ""
+msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
 #: ../../src/ui_fsmenu/addons.cc:1986
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
-msgstr ""
+msgstr "만든이 %1$s (%2$s이 올려넣기 함)"
 
 #: ../../src/ui_fsmenu/addons.cc:2005
 #, c-format
@@ -3694,11 +3694,11 @@ msgid ""
 "Version %4$s\n"
 "Category: %5$s\n"
 "%6$s\n"
-msgstr ""
+msgstr "이 추가 기능을 설치하시겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n%3$s\n버전 %4$s\n범주: %5$s\n%6$s\n"
 
 #: ../../src/ui_fsmenu/addons.cc:2013 ../../src/ui_fsmenu/addons.cc:2038
 msgid "Verified"
-msgstr ""
+msgstr "확인됨"
 
 #: ../../src/ui_fsmenu/addons.cc:2029
 #, c-format
@@ -3712,98 +3712,98 @@ msgid ""
 "Available version: %5$s\n"
 "Category: %6$s\n"
 "%7$s"
-msgstr ""
+msgstr "이 추가 기능을 판올림하겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n%3$s\n설치된 버전: %4$s\n사용가능한 버전: %5$s\n분류: %6$s\n%7$s"
 
 #: ../../src/ui_fsmenu/addons.cc:2080
 msgid "Verified by the Widelands Development Team"
-msgstr ""
+msgstr "와이드랜드 개발 팀에서 검증됨"
 
 #: ../../src/ui_fsmenu/addons.cc:2081
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
-msgstr ""
+msgstr "이 추가 기능은 아직 와이드랜드 개발 팀이 확인하지 않았습니다. 우리는 그것이 유해하거나 모욕적인 내용을 포함하고 있지 않다고 보장할 수 없습니다."
 
 #: ../../src/ui_fsmenu/addons.cc:2088
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
-msgstr[0] ""
+msgstr[0] "총 크기: %u 바이트"
 
 #: ../../src/ui_fsmenu/addons.cc:2091
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
-msgstr[0] ""
+msgstr[0] "%u 회 내려받음"
 
 #: ../../src/ui_fsmenu/addons.cc:2100
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
-msgstr[0] ""
+msgstr[0] "댓글 %u 개"
 
 #: ../../src/ui_fsmenu/addons.cc:2102
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
-msgstr[0] ""
+msgstr[0] "화면 갈무리 %u 개"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:49
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "추가 기능 꾸러미 연장"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:76
 msgid "New add-on"
-msgstr ""
+msgstr "새로운 추가 기능"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:84
 #: ../../src/ui_fsmenu/addons_packager_box.cc:74
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:85
 msgid "Delete this add-on"
-msgstr ""
+msgstr "이 추가 기능을 삭제"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:93
 msgid "Discard changes"
-msgstr ""
+msgstr "변경 사항을 취소"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:101
 msgid "Save changes"
-msgstr ""
+msgstr "번역확인->변경 사항을 저장or 저장 변경 사항"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:112
 msgid "Writing Add-Ons…"
-msgstr ""
+msgstr "추가 기능을 쓰고 있음.."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:114
 msgid "Please be patient while your changes are written."
-msgstr ""
+msgstr "변경 사항이 기록되는 동안 잠시 기다리십시오."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:133
 msgid "Name:"
-msgstr ""
+msgstr "이름:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:138
 msgid "Author:"
-msgstr ""
+msgstr "작성자:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:143
 msgid "Version:"
-msgstr ""
+msgstr "버전:"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:312
 msgid "New Add-On"
-msgstr ""
+msgstr "새로운 추가 기능"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:313
 msgid "Enter the name for the new add-on."
-msgstr ""
+msgstr "새로운 추가 기능의 이름을 입력하십시오."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:315
 msgid "Category"
-msgstr ""
+msgstr "범주"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:335
 #: ../../src/ui_fsmenu/addons_packager.cc:350
@@ -3811,31 +3811,31 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 #: ../../src/ui_fsmenu/addons_packager_box.cc:257
 msgid "Invalid Name"
-msgstr ""
+msgstr "잘못된 이름"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:335
 #: ../../src/ui_fsmenu/addons_packager_box.cc:251
 msgid "This name is invalid. Please choose a different name."
-msgstr ""
+msgstr "이 이름이 올바르지 않습니다. 다른 이름을 선택하십시오."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:350
 msgid "An add-on with this internal name already exists."
-msgstr ""
+msgstr "이 내부 이름을 가진 추가 기능이 이미 있습니다."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:355
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr ""
+msgstr "이 내부 이름을 가진 추가 기능이 최근에 삭제되었습니다. 이 이름을 다시 사용하기 전에 변경 사항을 커밋하십시오."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:381
 msgid "Delete Add-on"
-msgstr ""
+msgstr "추가 기능을 삭제"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:383
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
-msgstr ""
+msgstr "추가 기능 ‘%s’ 를 정말 삭제 하겠습니까?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:384
 #, c-format
@@ -3843,7 +3843,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "지역 추가 기능 ‘%s’을 삭제하시겠습니까?\n\n이 추가 기능은 서버에서 다시 내려받기할 수 없습니다."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:405
 #, c-format
@@ -3853,7 +3853,7 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
+msgstr[0] "지금 꾸러미 연장을 끝내면 다음 %u개의 추가 기능에 대한 모든 변경 내용이 삭제됩니다."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:415
 #: ../../src/ui_fsmenu/addons_packager.cc:444
@@ -3862,32 +3862,32 @@ msgstr[0] ""
 msgid ""
 "%1$s\n"
 "· %2$s"
-msgstr ""
+msgstr "%1$s\n· %2$s"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:418
 msgid "Quit Packager"
-msgstr ""
+msgstr "꾸러미 연장을 끝내기"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:433
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr ""
+msgstr "추가 기능 ‘%s’ 에 대한 모든 변경 사항을 정말로 취소하겠습니까?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:438
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
-msgstr[0] ""
+msgstr[0] "다음 %u 개의 추가 기능에 대한 모든 변경 사항을 정말로 취소하겠습니까?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:448
 msgid "Discard Changes"
-msgstr ""
+msgstr "변경 사항을 취소"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:461
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr ""
+msgstr "추가 기능  ‘%s’ 에 대한 모든 변경 사항을 디스크에 적용(커밋) 하겠습니까?"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:466
 #, c-format
@@ -4572,11 +4572,11 @@ msgstr "오래된 놀이의 다시놀기를 보기"
 
 #: ../../src/ui_fsmenu/main.cc:443 ../../src/wlapplication_options.cc:236
 msgid "Add-Ons"
-msgstr "추가기능"
+msgstr "추가 기능"
 
 #: ../../src/ui_fsmenu/main.cc:445
 msgid "Install and manage add-ons"
-msgstr ""
+msgstr "추가 기능 설치 및 관리"
 
 #: ../../src/ui_fsmenu/main.cc:447 ../../src/ui_fsmenu/options.cc:89
 #: ../../src/wlapplication_options.cc:253
@@ -4610,7 +4610,7 @@ msgstr "버전 %1$s (%2$s)"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) 2010 - 2022년 와이드랜드 개발 팀에 의해 GNU 일반 공중 사용 허가서 V2.0에 따라 사용허가가 부여되었습니다"
+msgstr "(C) %1%-%2% by the Widelands 개발 팀 · GNU 일반 공중 사용 허가서 V2.0 라이센스 적용"
 
 #: ../../src/ui_fsmenu/main.cc:798
 msgid "Desyncing Add-On Found"
@@ -6372,8 +6372,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6925,8 +6925,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "항해"
