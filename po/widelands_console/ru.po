@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-16 08:43+0000\n"
+"PO-Revision-Date: 2021-06-21 07:47+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr "Загружает повтор \"FILENAME\""
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
-msgstr ""
+msgstr "Запускает указанный сценарий Lua после старта. Использовать только вместе с параметрами --scenario, --loadgame или --editor"
 
 #: ../../src/wlapplication_messages.cc:78
 msgid ""
@@ -129,7 +129,7 @@ msgstr "Запустить ИИ в режиме самообучения. \nЗа
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr ""
+msgstr "Только для мультиплеера, автоматически настраивает скорость игры, приводя в зависимость от FPS. Полезно в сочетании с --ai_training"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Game options:"
@@ -194,7 +194,7 @@ msgstr "Начинать постройку дороги после устано
 
 #: ../../src/wlapplication_messages.cc:113
 msgid "Bitmask of display flags to set for new games"
-msgstr ""
+msgstr "Карта флагов для настройки новых игр"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -259,7 +259,7 @@ msgstr "Использовать полупрозрачный фон для вн
 
 #: ../../src/wlapplication_messages.cc:136
 msgid "Bitmask to set the toolbar location and mode"
-msgstr ""
+msgstr "Карта флагов для установки расположения панели инструментов и модов"
 
 #: ../../src/wlapplication_messages.cc:138
 msgid "Networking:"
@@ -271,11 +271,11 @@ msgstr "Сеть:"
 #. players.
 #: ../../src/wlapplication_messages.cc:146
 msgid "Create syncstream dump files to help debug network games"
-msgstr ""
+msgstr "Ведение снимков памяти в сетевых играх для отладки"
 
 #: ../../src/wlapplication_messages.cc:147
 msgid "Connect to a different metaserver for internet gaming"
-msgstr ""
+msgstr "Подключаться к другому серверу для сетевой игры"
 
 #: ../../src/wlapplication_messages.cc:147
 #: ../../src/wlapplication_messages.cc:159
@@ -301,11 +301,11 @@ msgstr "Имя автора карты"
 
 #: ../../src/wlapplication_messages.cc:155
 msgid "The last host connected to"
-msgstr ""
+msgstr "Сервер, к которому подключались последний раз"
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Whether the used metaserver login is for a registered user"
-msgstr ""
+msgstr "Использовать ли логин на сервере для регистрации игрока"
 
 #: ../../src/wlapplication_messages.cc:158
 msgid "The hashed password for online logins"
@@ -375,37 +375,37 @@ msgstr "Настройки внутреннего оконного менедж�
 
 #: ../../src/wlapplication_messages.cc:188
 msgid "Should automatic map movements be animated"
-msgstr ""
+msgstr "Анимировать ли перемещение по карте"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:191
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
-msgstr ""
+msgstr "Прилипание окна к границе экрана с расстояния в `n` пикселях"
 
 #: ../../src/wlapplication_messages.cc:195
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
-msgstr ""
+msgstr "Прятать рамку окна, когда она находится недалеко от границы экрана"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:200
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
-msgstr ""
+msgstr "Прилипание окна к границе панели с расстояния в `n` пикселей"
 
 #: ../../src/wlapplication_messages.cc:204
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
-msgstr ""
+msgstr "Прилипание окна к границам панели в случае, если окно нависает над панелью"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "Включить подробные отладочные сообщения"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid "Others:"
@@ -432,7 +432,7 @@ msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay"
-msgstr ""
+msgstr "Загрузить сохранение или повтор. Соответственно,  файлы с расширением .wgf или .wrpl. Не работает с другими опциями. См. также --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:241
