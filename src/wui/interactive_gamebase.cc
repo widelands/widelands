@@ -235,10 +235,10 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus));
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
-	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * building status labels are shown */
-	                     _("Hide Status") :
-	                     _("Show Status"),
+                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+                          * building status labels are shown */
+                         _("Hide Status") :
+                         _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats));
