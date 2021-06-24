@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -253,7 +253,7 @@ msgstr "Faisg air an taigh"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Tha dragh air Tron…"
 
@@ -274,7 +274,7 @@ msgstr "Tha sinn a’ gabhail fois an-dràsta aig crìochan na seann-choille agu
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Latha fuar eile"
 
@@ -350,7 +350,7 @@ msgstr "Leudaich crìoch an airm agam gu ruige oir nan coilltean. Thàinig sinn 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Tha Tron a’ bruidhinn:"
 
@@ -575,7 +575,7 @@ msgid ""
 msgstr "Tha na clach-eòlaichean againn air barrachd stòrais dhe chlach-iarainn, gual is òr a lorg. Bu chòir dhuinn na mèinnean a th’ againn a leasachadh cho luath ’s a bhios barrachd eòlais air na mèinnearan againn. Bu chòir dhuinn barrachd mhèinnean a thogail agus bun-structar bìdh nas motha ach am biodh gu leòr ri ithe ann an-còmhnaidh, cho math ri eaconamaidh giullachd nas motha. Ach chan e seo a h-uile rud a tha a dhìth – tha a’ mhòrchuid dhe na saighdearan againn caran òg is chan eil airm mhath aca ’s cha d’ fhuair iad oideachadh. Bu chòir dhuinn ionadan-oideachaidh a thogail gus an ullachadh airson na h-obrach tha romhpa."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -584,7 +584,7 @@ msgid ""
 msgstr "Fhuair mo bhràithrean agus na saighdearan aca bàs agus cha do dh’fhàg iad ach teintean is milleadh againn. Cha do lorg mi duine cumanta beò am measg nam fuigheall. Tha mi ’n dòchas gun do theich iad on bhlàr chruaidh seo is gun do thòisich iad beatha na b’ fheàrr àiteigin eile."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -594,22 +594,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Chan eil dad air fhàgail dhen bhòidhchead a tha ’nam chuimhne. Chan eil ach fuighill air fhàgail dhen t-seann chathair-bhaile. Tha mi brònach ach fhuair mi faochadh cuideachd. Cha robh mi ’n dùil gum faicinn seann bhòidhchead Al’tùnrain a-rithist - ’s ann beagan mhìosan air ais a bha mi a’ cnuasadh air co-dhiù an rachadh leam tilleadh ann gu bràth gus nach rachadh. Nise, tha an seann bhaile fo mo làmh a-rithist agus cha dèan mi maille gus a thogail às ùr leis a h-uile neart a tha aig mo mhuinntir. Tha mi airson fhaicinn cho bòidheach ’s mar a bha e."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Buaidh"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Choilean thu am misean mu dheireadh aig iomairt oideachaidh nan tùsanach. Faodaidh tu leantainn air adhart a’ cluiche ma thogras tu no gluasad air adhart dhan ath-oideachadh."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Ionnsaigh an airm"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -617,7 +617,7 @@ msgid ""
 msgstr "Mar sin bitheadh, tha na cinn-armailt trang a’ cur rian air an fheachd agam agus stiùirichidh Boldrad fhèin a’ chiad ionnsaigh. Marcaichidh mi ri a thaobh gus Al’tùnran a shaoradh on chogadh seo is an t-sìth a thilleadh dhan chathair-bhaile againn."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -626,20 +626,20 @@ msgid ""
 msgstr "Nuair a dh’èireas a’ ghrian òg os cionn nan craobhan an làrna-mhàireach, cuiridh mi an t-òrdan airson na h-ionnsaighe. Comharraichidh sinn mo bhuaidh ann an tallachan fiodha a’ cheannaird-chogaidh ciaradh an anmoich is ìobraidh sinn uan gus urram a thoirt dha m’ athair ’s a dhà shùil orm an-diugh."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Mar sin bitheadh!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Giùlan nas luaithe"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Tha Kantrach ag ràdh:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

@@ -197,7 +197,7 @@
       Je bent de leider van een kleine stam. Het is jouw taak een bloeiende nederzetting uit te bouwen. Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
     </p>
     <p xml:lang="nl">
-      Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun worstelingen in het Widelandsuniversum.  Maar je kunt je pas echt vestigen door met je vrienden te verbinden, over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten.  Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
+      Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun worstelingen in het Widelands universum.  Maar je kunt je pas echt vestigen door met je vrienden te verbinden, over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten. Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
     </p>
     <p xml:lang="pl">
       Stoisz na czele małego plemiona. Twoim zadaniem jest zbudować prosperującą osadę. Każdy członek plemiona pomagać ci będzie w produkcji surowców niezbędnych do tego celu.
@@ -310,6 +310,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   </provides>
   <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
   <releases>
+    <release date="2021-06-15" version="1.0"/>
     <release date="2020-07-18" version="Build 21"/>
     <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>

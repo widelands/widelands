@@ -516,6 +516,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         keysym(SDLK_s, kDefaultCtrlModifier),
                                                         "game_save",
                                                         []() { return _("Save Game"); })},
+   {KeyboardShortcut::kInGameLoad, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_l, kDefaultCtrlModifier),
+                                                        "game_load",
+                                                        []() { return _("Load Game"); })},
    {KeyboardShortcut::kInGameMessagesGoto,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_g),
@@ -747,6 +751,85 @@ std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape)
 	return shortcut_string_for(get_shortcut(id), rt_escape);
 }
 
+static std::string key_name(const SDL_Keycode k) {
+	switch (k) {
+	case SDLK_SPACE:
+		return pgettext("hotkey", "Space");
+	case SDLK_RETURN:
+		return pgettext("hotkey", "Enter");
+	case SDLK_ESCAPE:
+		return pgettext("hotkey", "Escape");
+	case SDLK_TAB:
+		return pgettext("hotkey", "Tab");
+	case SDLK_MENU:
+		return pgettext("hotkey", "Menu");
+	case SDLK_PAUSE:
+		return pgettext("hotkey", "Pause");
+	case SDLK_PAGEUP:
+		return pgettext("hotkey", "Page Up");
+	case SDLK_PAGEDOWN:
+		return pgettext("hotkey", "Page Down");
+	case SDLK_HOME:
+		return pgettext("hotkey", "Home");
+	case SDLK_END:
+		return pgettext("hotkey", "End");
+	case SDLK_LEFT:
+		return pgettext("hotkey", "Left Arrow Key");
+	case SDLK_RIGHT:
+		return pgettext("hotkey", "Right Arrow Key");
+	case SDLK_UP:
+		return pgettext("hotkey", "Up Arrow Key");
+	case SDLK_DOWN:
+		return pgettext("hotkey", "Down Arrow Key");
+	case SDLK_INSERT:
+		return pgettext("hotkey", "Insert");
+	case SDLK_DELETE:
+		return pgettext("hotkey", "Delete");
+	case SDLK_BACKSPACE:
+		return pgettext("hotkey", "Backspace");
+	case SDLK_CAPSLOCK:
+		return pgettext("hotkey", "Caps Lock");
+	case SDLK_NUMLOCKCLEAR:
+		return pgettext("hotkey", "Numpad Lock");
+	case SDLK_SCROLLLOCK:
+		return pgettext("hotkey", "Scroll Lock");
+	case SDLK_KP_1:
+		return pgettext("hotkey", "Keypad 1");
+	case SDLK_KP_2:
+		return pgettext("hotkey", "Keypad 2");
+	case SDLK_KP_3:
+		return pgettext("hotkey", "Keypad 3");
+	case SDLK_KP_4:
+		return pgettext("hotkey", "Keypad 4");
+	case SDLK_KP_5:
+		return pgettext("hotkey", "Keypad 5");
+	case SDLK_KP_6:
+		return pgettext("hotkey", "Keypad 6");
+	case SDLK_KP_7:
+		return pgettext("hotkey", "Keypad 7");
+	case SDLK_KP_8:
+		return pgettext("hotkey", "Keypad 8");
+	case SDLK_KP_9:
+		return pgettext("hotkey", "Keypad 9");
+	case SDLK_KP_0:
+		return pgettext("hotkey", "Keypad 0");
+	case SDLK_KP_PERIOD:
+		return pgettext("hotkey", "Keypad .");
+	case SDLK_KP_PLUS:
+		return pgettext("hotkey", "Keypad +");
+	case SDLK_KP_MINUS:
+		return pgettext("hotkey", "Keypad -");
+	case SDLK_KP_MULTIPLY:
+		return pgettext("hotkey", "Keypad *");
+	case SDLK_KP_DIVIDE:
+		return pgettext("hotkey", "Keypad /");
+	case SDLK_KP_ENTER:
+		return pgettext("hotkey", "Keypad Enter");
+	default:
+		return SDL_GetKeyName(k);
+	}
+}
+
 std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 	i18n::Textdomain textdomain("widelands");
 	std::vector<std::string> mods;
@@ -767,7 +850,7 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 		mods.push_back(pgettext("hotkey", "Ctrl"));
 	}
 
-	std::string result = SDL_GetKeyName(sym.sym);
+	std::string result = key_name(sym.sym);
 	for (const std::string& m : mods) {
 		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
 	}

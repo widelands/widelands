@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Markus <markus@hallfors.com>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Markus <markus@hallfors.com>, 2021\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,33 +21,37 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:31
 msgid "Get to the North"
-msgstr ""
+msgstr "Mene pohjoiseen"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
-msgstr ""
+msgstr "Mene pohjoiseen"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
 msgstr ""
+"Purjehdi pohjoiseen niin pitkälle kuin mahdollista ja niin nopeasti kuin "
+"pystyt."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:40
 msgid "Destroy Angadthur’s Palace"
-msgstr ""
+msgstr "Tuhoa Angadthurin palatsi"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
-msgstr ""
+msgstr "Tuhoa Atlantean päämaja ja rakenna satama"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:43
 msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
 msgstr ""
+"Rakenna satama saaren pohjoisrannalle. Satamapaikka sijaitsee Angadthurin "
+"päämajan alla."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:50
 msgid "Pay or Fight"
-msgstr ""
+msgstr "Maksa tai taistele"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:52
 msgid "Pay the Empire or Destroy Their Port"
@@ -65,6 +73,8 @@ msgid ""
 "Alternatively, you can destroy his port to build one of your own in it’s "
 "place."
 msgstr ""
+"Vaihtoehtoisesti voit tuhota hänen satamansa ja rakentaa tilalle oman "
+"satamasi."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:57
 msgid ""
@@ -74,15 +84,15 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:58
 msgid "You have two hours to accomplish this objective."
-msgstr ""
+msgstr "Sinulla on kaksi tuntia aikaa saavuttaa tämä tavoite."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:68
 msgid "Introduction"
-msgstr ""
+msgstr "Esittely"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:69
 msgid "Welcome back!"
-msgstr ""
+msgstr "Tervetuloa takaisin!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:71
@@ -110,13 +120,13 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:100
 msgid "Eight Weeks Ago"
-msgstr ""
+msgstr "Kahdeksan viikkoa sitten"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:83
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:101
 msgid "An unfair fight"
-msgstr ""
+msgstr "Epäreilu taistelu"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
@@ -157,17 +167,17 @@ msgstr ""
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:103
 msgid "But I will not accept defeat!"
-msgstr ""
+msgstr "Mutta minä en hyväksy tappiota!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid "Dark Future"
-msgstr ""
+msgstr "Synkkä tulevaisuus"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:116
 msgid "Reconquest"
-msgstr ""
+msgstr "Takaisinvalloitus"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:109
@@ -211,7 +221,7 @@ msgstr ""
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:124
 msgid "We must not fail. The future of my people depends on me."
-msgstr ""
+msgstr "Emme saa epäonnistua. Kansani tulevaisuus riippuu minusta."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
@@ -237,7 +247,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
 msgid "One step closer to the North"
-msgstr ""
+msgstr "Askel lähempänä pohjoista"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
@@ -288,7 +298,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:230
 msgid "Who are they?"
-msgstr ""
+msgstr "Keitä he ovat?"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:151
@@ -299,7 +309,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:155
 msgid "Who are you?"
-msgstr ""
+msgstr "Kuka sinä olet?"
 
 #. TRANSLATORS: Angadthur – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:157
@@ -312,7 +322,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:173
 msgid "Greetings to the King!"
-msgstr ""
+msgstr "Tervehdys Kuninkaalle!"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:163
@@ -328,7 +338,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:248
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:261
 msgid "Greetings"
-msgstr ""
+msgstr "Tervehdys"
 
 #. TRANSLATORS: Angadthur – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:169
@@ -336,6 +346,7 @@ msgid ""
 "Of course you may ask. Ask whatever you like. Why do you ask whether you may"
 " ask?"
 msgstr ""
+"Tietenkin voitte kysyä. Kysykää mitä haluatte. Miksi kysytte, saako kysyä?"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:175
@@ -367,13 +378,13 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
 msgid "Congratulations"
-msgstr ""
+msgstr "Onneksi olkoon"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
-msgstr ""
+msgstr "Siunatkoon Satul teitä"
 
 #. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:191
@@ -393,7 +404,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
 msgid "The next island"
-msgstr ""
+msgstr "Seuraava saari"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:198
@@ -409,6 +420,8 @@ msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
 msgstr ""
+"Sillä ei ole väliä. Etsitään vain nopeasti seuraava satamapaikka, jotta "
+"voimme jatkaa matkaamme."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
@@ -424,12 +437,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
 msgid "The North"
-msgstr ""
+msgstr "Pohjoinen"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:222
 msgid "In the North"
-msgstr ""
+msgstr "Pohjoisessa"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
@@ -547,14 +560,14 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 msgid "Victory!"
-msgstr ""
+msgstr "Voitto!"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:287
@@ -566,37 +579,37 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
 
 #. TRANSLATORS: M. C. Iniucundus – victory
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306
 msgid "You Have Lost"
-msgstr ""
+msgstr "Hävisit"
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
 msgid "Goodbye!"
 msgstr ""
 
 #. TRANSLATORS: M. C. Iniucundus – victory
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
 msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
@@ -622,7 +635,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Satama"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11

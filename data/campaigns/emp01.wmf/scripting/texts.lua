@@ -230,6 +230,7 @@ diary_page_4 = {
       _([[I still wonder if we will ever see Fremil again.]]))
       .. objective_text(_"Victory",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+   allow_next_scenario = true,
    posy=1
 }
 

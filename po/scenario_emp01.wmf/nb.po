@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
@@ -412,16 +412,16 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr "Du har fullført dette oppdraget. Du kan fortsette å spille hvis du vil, eller gå videre til neste oppdrag."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"
 msgstr "Trygg halvøy"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
 msgstr "Saledus sier:"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:241
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"

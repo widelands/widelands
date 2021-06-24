@@ -30,6 +30,10 @@
 #include "ui_fsmenu/menu.h"
 #include "wui/mapdata.h"
 
+namespace Widelands {
+class Game;
+}
+
 namespace FsMenu {
 
 enum class MenuTarget {
@@ -96,6 +100,8 @@ public:
 
 	using MapEntry = std::pair<MapData, Widelands::MapVersion>;
 	static void find_maps(const std::string& directory, std::vector<MapEntry>& results);
+
+	Widelands::Game* create_safe_game(bool show_error = true);
 
 protected:
 	void update_template() override;

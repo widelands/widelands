@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2020-08-25 12:29+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -434,7 +434,7 @@ msgstr "로프토머와 시도루스가 도착한다"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina"
 msgstr "준드리나"
 
@@ -886,12 +886,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "빨리합시다, 우리는 호숫가 옆에 있는 오스투르를 위한 집이 필요하며, 그곳에 짓기 위해서는 판자와 통나무 그리고 거미줄이 필요합니다. 다른 건 다 잊어버리세요, 창고가 바다에 삼켜지기 전에 산꼭대기에 있는 물건들이 필요합니다."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
 msgid "Jundlina is Relieved"
 msgstr "준들리나는 안심했다"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -901,17 +901,17 @@ msgid ""
 msgstr "사툴을 칭찬하세요! 젊은 배만드는 사람 오스터가 해냈습니다. 우리에게는 3 척의 배가 있습니다. – 결코 더 튼튼한 배는 본 적이 없습니다. – 우리 모두와 몇 가지 물품을 실어 나르기에 충분한 공간이 있습니다. 그리고 이 구조물은 때맞춰 찾아왔습니다: 루타스는 이 섬의 나머지 부분을 삼키려 합니다. 물은 시간이 지나면서 물이 더 빨리 올라갑니다. 하지만 우리는 지금 탈출해서 더 먼 나라에서 다시 시작할 수 있습니다…"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr "나는 긴 여행을 기대하지만 결국 사툴님의 땅을 찾을 것입니다. 이것이 제가 사람들에게 약속 한 것입니다. 그리고 나 자신도요."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid "Congratulations"
 msgstr "축하합니다"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
@@ -919,11 +919,11 @@ msgstr "당신은 이 미션에서 승리했습니다. 다음 중 하나를 계�
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "잃어버린 건물!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:487
 msgid "We lost a building to the ocean!"
 msgstr "우리는 바다에 건물을 잃었다!"

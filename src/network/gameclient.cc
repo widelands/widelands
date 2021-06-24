@@ -74,6 +74,7 @@ struct GameClientImpl {
 
 	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel* modal;
+	UI::Panel* panel_whose_mutex_needs_resetting_on_game_start;
 
 	/// Current game. Only non-null if a game is actually running.
 	Widelands::Game* game;
@@ -141,7 +142,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-	game->set_game_controller(parent);
+	game->set_game_controller(parent->get_pointer());
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
@@ -185,12 +186,12 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 }
 
 GameClient::GameClient(FsMenu::MenuCapsule& c,
-                       std::unique_ptr<GameController>& ptr,
+                       std::shared_ptr<GameController>& ptr,
                        const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl), capsule_(c) {
+   : d(new GameClientImpl), capsule_(c), pointer_(ptr) {
 
 	d->internet_ = internet;
 
@@ -219,6 +220,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	d->settings.usernum = -2;
 	d->localplayername = playername;
 	d->modal = nullptr;
+	d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
 	d->game = nullptr;
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
@@ -231,7 +233,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
 
-	run(ptr);
+	run();
 }
 
 GameClient::~GameClient() {
@@ -243,14 +245,23 @@ GameClient::~GameClient() {
 	delete d;
 }
 
-void GameClient::run(std::unique_ptr<GameController>& ptr) {
+void GameClient::run() {
 	d->send_hello();
 	d->settings.multiplayer = true;
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, ptr, d->internet_);
+	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
+	// The main menu's think() loop creates a mutex lock that would permanently block the Game
+	// from locking this mutex. So when the game starts we'll need to break the lock by force.
+	for (UI::Panel* p = d->modal; p; p = p->get_parent()) {
+		if (p->is_modal()) {
+			d->panel_whose_mutex_needs_resetting_on_game_start = p;
+			return;
+		}
+	}
+	NEVER_HERE();
 }
 
 void GameClient::do_run(RecvPacket& packet) {
@@ -286,6 +297,10 @@ void GameClient::do_run(RecvPacket& packet) {
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
+		if (d->panel_whose_mutex_needs_resetting_on_game_start) {
+			d->panel_whose_mutex_needs_resetting_on_game_start->clear_current_think_mutex();
+			d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
+		}
 		d->run_game(igb);
 
 	} catch (const WLWarning& e) {
@@ -307,7 +322,13 @@ void GameClient::do_run(RecvPacket& packet) {
 }
 
 void GameClient::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true, false);
+
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
 
 	if (d->game) {
 		// TODO(Klaus Halfmann): what kind of time tricks are done here?
@@ -335,12 +356,16 @@ void GameClient::think() {
  * @param pc will always be deleted in the end.
  */
 void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
+	pending_player_commands_.push_back(pc);
+}
+
+void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	assert(d->game);
 
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		verb_log_info("[Client]: send playercommand at time %i", d->game->get_gametime().get());
+		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 

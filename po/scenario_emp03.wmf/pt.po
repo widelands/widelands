@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-29 14:02+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2020\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
@@ -256,7 +256,7 @@ msgstr "A Viagem de Regresso"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
 msgstr "Diário do Lucius"
 
@@ -1234,18 +1234,18 @@ msgstr ""
 " dirige-te para a próxima missão."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr ""
 "Finalmente, descobrimos uma peça do nosso relicário. Louvado seja Neptuno!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Descobrimos outra peça do nosso relicário. Louvado seja Neptuno!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1253,7 +1253,7 @@ msgstr[0] "Ainda precisamos de descobrir %d peça do nosso relicário."
 msgstr[1] "Ainda precisamos de descobrir %d peças do nosso relicário."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1261,6 +1261,6 @@ msgstr ""
 "Finalmente descobrimos a última peça do nosso relicário. Agora podemos "
 "tornar a juntá-lo para adorar o nosso deus. Louvado seja Neptuno!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
 msgstr "Artefacto Encontrado"

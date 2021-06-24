@@ -33,6 +33,8 @@ RandomGame::RandomGame(MenuCapsule& m)
            UI::PanelStyle::kFsMenu,
            g_image_cache->get("images/logos/wl-ico-128.png")),
      progress_window_(nullptr) {
+	m.set_visible(false);
+
 	{  // Do this first to prevent crashes with incompatible add-on types
 		std::vector<AddOns::AddOnState> new_g_addons;
 		for (const AddOns::AddOnState& s : AddOns::g_addons) {
@@ -44,8 +46,14 @@ RandomGame::RandomGame(MenuCapsule& m)
 		}
 		AddOns::g_addons = new_g_addons;
 	}
+
 	settings_.reset(new SinglePlayerGameSettingsProvider());
-	game_.reset(new Widelands::Game());
+	game_.reset(m.menu().create_safe_game());
+	if (!game_.get()) {
+		die();
+		return;
+	}
+	m.set_visible(true);
 
 	left_column_box_.add_inf_space();
 	left_column_box_.add(&menu_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -77,10 +85,13 @@ RandomGame::RandomGame(MenuCapsule& m)
 	progress_window_->set_visible(false);
 
 	layout();
+	initialization_complete();
 }
 
 RandomGame::~RandomGame() {
-	game_->cleanup_objects();
+	if (game_.get()) {
+		game_->cleanup_objects();
+	}
 	if (progress_window_) {
 		game_->release_loader_ui();
 		progress_window_ = nullptr;

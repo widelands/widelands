@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 29;
+constexpr uint16_t kCurrentPacketVersion = 30;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -71,6 +71,10 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					player->set_see_all(see_all);
 
 					player->set_ai(fr.c_string());
+
+					if (packet_version >= 30) {
+						player->set_random_tribe(fr.unsigned_8());
+					}
 
 					if (packet_version >= 23) {
 						player->forbid_attack_.clear();
@@ -158,6 +162,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 
 		fw.c_string(plr->name_.c_str());
 		fw.c_string(plr->ai_.c_str());
+		fw.unsigned_8(plr->has_random_tribe() ? 1 : 0);
 
 		fw.unsigned_8(plr->forbid_attack_.size());
 		for (const auto& it : plr->forbid_attack_) {

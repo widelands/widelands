@@ -99,6 +99,8 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 	}
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 LoadGame::~LoadGame() {
@@ -179,7 +181,7 @@ void LoadGame::clicked_ok() {
 					game_.set_ibase(new InteractiveSpectator(game_, get_config_section()));
 					game_.set_write_replay(false);
 
-					ReplayGameController rgc(game_, gamedata->filename);
+					new ReplayGameController(game_, gamedata->filename);
 					game_.save_handler().set_allow_saving(false);
 
 					game_.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");

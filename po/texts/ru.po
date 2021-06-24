@@ -5,6 +5,7 @@
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
+# nskdmitry, 2021
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor S <awsswa59@gmail.com>, 2018-2020
@@ -18,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 10:18+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"PO-Revision-Date: 2021-06-21 06:18+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,6 +210,10 @@ msgid "Widelands Translators"
 msgstr "Переводчики Widelands"
 
 #: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr "Дополнения"
+
+#: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
 msgstr "Атланты"
 
@@ -330,7 +335,7 @@ msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "и многие, многие другие (спасибо за все, что вы сделали)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -428,7 +433,7 @@ msgstr "Переключить миникарту"
 #: ../../data/txts/help/common_helptexts.lua:84
 #: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -519,24 +524,24 @@ msgstr "Вы можете видеть информацию о выбранно�
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Амазонки предпочитают леса. Ставьте достаточно хижин джунглесажателя, чтобы их сохранить."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Редкие деревья являются хребтом экономики амазонок. Сажайте плантации для обеспечения себя необходимой древесиной."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Чем реже дерево, тем опытнее должен быть лесоруб. С другой стороны, опытный лесоруб не станет рубить простые деревья. Подходите к вопросу их расположения грамотно."
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Еда готовится на древесном угле. Обеспечьте его бесперебойную добычу."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -613,13 +618,13 @@ msgstr "Удерживая ALT переключает на второй альт
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "Клавиши %1% позволяют задать размер области выделения вокруг курсора мыши."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "Клавиша %1% ведет себя также, как и в обычной игре, переключая показ мест под стройки."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -706,7 +711,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Используйте ползунки приоритетов для управления объемом поставок товаров в здания. Зажатый Shift позволяет изменять приоритет сразу у всех товаров."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -718,7 +723,7 @@ msgstr "Используйте меню «настроить экономику�
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Управляйте своими сообщениями более эффективно: нажмите %1% чтобы попасть в окно сообщений, %2% для перехода, и %3% для архивации сообщений."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -745,7 +750,7 @@ msgstr "Если вы любите риск, удерживайте клавиш
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Нажмите %s чтобы переключится на просмотр ваших запасов."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -762,19 +767,19 @@ msgstr "Некоторые здания, например фермы, имеют
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Изменить масштаб можно колесом мыши или %1%/%2%. Нажмите %3%, чтобы сбросить масштаб."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Используйте клавиши \"%1$s\" и \"%2$s\" для быстрого перехода между недавно посещенными местами."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Ускорьте или замедлите игру с помощью %1%/%2%. Используйте %3%/%4% для ускорения, %5%/%6% для замедления."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
@@ -784,7 +789,7 @@ msgstr "Клавиши со стрелками"
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + стрелка"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgid ""
@@ -794,7 +799,7 @@ msgstr "Перемешаться по карте, используя %1%. %2% б
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + стрелка"
 
 #: ../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -826,7 +831,7 @@ msgstr "Чтобы послать сообщение в чате только о
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Не беспокойтесь, если игра вдруг полетела! Игры сохраняются автоматически, чтобы вы могли загрузить и продолжить их."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

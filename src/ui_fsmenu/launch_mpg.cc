@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
-#include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "logic/game.h"
@@ -33,6 +32,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "scripting/lua_interface.h"
@@ -50,14 +50,11 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                      GameController& ctrl,
                      ChatProvider& chat,
                      Widelands::Game& g,
-                     std::unique_ptr<GameController>& delete_on_cancel,
                      bool game_done_on_cancel,
                      const std::function<void()>& c)
    : LaunchGame(fsmm, settings, &ctrl, false, true),
      callback_(c),
      game_done_on_cancel_(game_done_on_cancel),
-     delete_on_cancel_(delete_on_cancel),
-
      help_button_(this,
                   "help",
                   0,
@@ -69,7 +66,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
+     mpsg_(this, &left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
      chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
      game_(g) {
 
@@ -94,14 +91,15 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 		}
 	});
 	layout();
+	initialization_complete();
 }
 
 LaunchMPG::~LaunchMPG() {
 	if (game_done_on_cancel_) {
 		InternetGaming::ref().set_game_done();
 	}
+
 	chat_.reset();  // do this early to avoid heap-use-after-free
-	delete_on_cancel_.reset();
 }
 
 void LaunchMPG::layout() {
@@ -347,9 +345,10 @@ void LaunchMPG::load_previous_playerdata() {
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 
-	std::string player_save_name[kMaxPlayers];
-	std::string player_save_tribe[kMaxPlayers];
-	std::string player_save_ai[kMaxPlayers];
+	SinglePlayerGameSettingsProvider saved_settings;
+	// Fill settings only with required data for the map details box
+	saved_settings.set_map(
+	   settings_.settings().mapname, "", "", "", settings_.settings().players.size(), true);
 
 	for (uint8_t i = 1; i <= settings_.settings().players.size(); ++i) {
 		Section* s =
@@ -359,35 +358,40 @@ void LaunchMPG::load_previous_playerdata() {
 			// of players goes down. So, we abort if the section does not exist to prevent crashes.
 			return;
 		}
-		player_save_name[i - 1] = s->get_string("name");
-		player_save_tribe[i - 1] = s->get_string("tribe");
-		player_save_ai[i - 1] = s->get_string("ai");
+		std::string player_save_name = s->get_string("name");
+		std::string player_save_tribe = s->get_string("tribe");
+		std::string player_save_ai = s->get_string("ai");
+		Widelands::TeamNumber player_save_team = s->get_int("team");
+		bool player_save_random = s->get_bool("random");
 
-		if (player_save_tribe[i - 1].empty()) {
+		if (player_save_tribe.empty()) {
 			// Close the player
 			settings_.set_player_state(i - 1, PlayerSettings::State::kClosed);
+			saved_settings.set_player_state(i - 1, PlayerSettings::State::kClosed);
 			continue;  // if tribe is empty, the player does not exist
 		}
 
-		// Set team to "none" - to get the real team, we would need to load the savegame completely
-		// Do we want that? No! So we just reset teams to not confuse the clients.
-		settings_.set_player_team(i - 1, 0);
+		settings_.set_player_team(i - 1, player_save_team);
 
-		if (player_save_ai[i - 1].empty()) {
+		if (player_save_ai.empty()) {
 			// Assure that player is open
 			if (settings_.settings().players.at(i - 1).state != PlayerSettings::State::kHuman) {
 				settings_.set_player_state(i - 1, PlayerSettings::State::kOpen);
+				settings_.set_player_name(i - 1, player_save_name);
 			}
 		} else {
 			settings_.set_player_state(i - 1, PlayerSettings::State::kComputer);
-			settings_.set_player_ai(i - 1, player_save_ai[i - 1]);
+			settings_.set_player_ai(i - 1, player_save_ai);
+			settings_.set_player_name(i - 1, player_save_name);
 		}
 
-		settings_.set_player_tribe(i - 1, player_save_tribe[i - 1]);
-		settings_.set_player_name(i - 1, player_save_name[i - 1]);
+		settings_.set_player_tribe(i - 1, player_save_tribe, player_save_random);
+		saved_settings.set_player_tribe(i - 1, player_save_tribe, player_save_random);
+		saved_settings.set_player_name(i - 1, player_save_name);
+		saved_settings.set_player_state(i - 1, settings_.settings().players.at(i - 1).state);
 	}
 
-	map_details_.update_from_savegame(&settings_);
+	map_details_.update_from_savegame(&saved_settings);
 }
 
 /**
@@ -414,7 +418,7 @@ void LaunchMPG::load_map_info() {
 
 /// Show help
 void LaunchMPG::help_clicked() {
-	HelpWindow help(&capsule_.menu(), lua_, "txts/help/multiplayer_help.lua",
+	HelpWindow help(&capsule_.menu(), lua_.get(), "txts/help/multiplayer_help.lua",
 	                /** TRANSLATORS: This is a heading for a help window */
 	                _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();

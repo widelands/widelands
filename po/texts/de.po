@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 11:38+0000\n"
+"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"PO-Revision-Date: 2021-06-14 19:46+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -204,6 +204,10 @@ msgstr "Hast du ein gespeichertes Spiel oder eine Aufzeichnung, in dem der Fehle
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Widelands-Übersetzer"
+
+#: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr "Erweiterungen"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"

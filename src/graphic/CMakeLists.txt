@@ -81,6 +81,7 @@ wl_library(graphic_image_cache
     image_cache.h
   DEPENDS
     base_macros
+    base_multithreading
     graphic_image_io
     graphic_surface
 )
@@ -128,6 +129,7 @@ wl_library(graphic_surface
     base_exceptions
     base_geometry
     base_macros
+    base_multithreading
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
@@ -263,6 +265,7 @@ wl_library(graphic_fonthandler
     font_handler.h
   DEPENDS
     base_macros
+    base_multithreading
     graphic_image_cache
     graphic_text
 )
@@ -313,6 +316,18 @@ wl_library(graphic_mouse_cursor
     io_filesystem
 )
 
+
+# Misc high-level helper and convenience functions
+
+wl_library(graphic_functions
+  SRCS
+    graphic_functions.cc
+    graphic_functions.h
+  DEPENDS
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+)
 
 # Base library
 
