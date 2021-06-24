@@ -32,27 +32,39 @@ descriptions:new_worker_type {
       }
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 9, 21 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 9, 21 }
       },
       hacking = {
-         hotspot = { 11, 18 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 11, 18 }
       },
       walk = {
-         hotspot = { 9, 21 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 21 }
       },
       walkload = {
          basename = "walk",
-         hotspot = { 9, 21 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 21 }
+      },
+   },
 }
 
 pop_textdomain()

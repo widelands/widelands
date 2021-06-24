@@ -15,32 +15,43 @@ descriptions:new_worker_type {
       hammer = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         basename = "waiting",
-         hotspot = { 16, 23 },
          fps = 10,
+         frames = 150,
+         rows = 13,
+         columns = 12,
+         hotspot = { 13, 23 }
       },
       work = {
          sound_effect = {
             path = "sound/hammering/hammering",
             priority = "50%"
          },
-         hotspot = { 6, 22 },
          fps = 10,
+         frames = 92,
+         rows = 11,
+         columns = 9,
+         hotspot = { 5, 21 }
       },
       walk = {
-         hotspot = { 8, 24 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 24 }
       },
       walkload = {
          basename = "walk",
-         hotspot = { 8, 24 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 24 }
+      },
+   },
 }
 
 pop_textdomain()

@@ -14,12 +14,20 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 57, 88 },
       },
-      build = {
-         hotspot = { 57, 88 },
-      },
+   },
+   spritesheets = {
       working = {
-         hotspot = { 57, 88 },
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 81 }
       },
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 57, 67 }
+      }
    },
 
    aihints = {
