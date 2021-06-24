@@ -120,15 +120,19 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	}
 	ok_.set_title(_("Start game"));
 
-	lua_ = new LuaInterface();
+	lua_.reset(new LuaInterface());
 	add_all_widgets();
 	add_behaviour_to_widgets();
 
 	layout();
+
+	initialization_complete();
 }
 
 LaunchGame::~LaunchGame() {
-	delete lua_;
+	if (ctrl_) {
+		ctrl_->game_setup_aborted();
+	}
 }
 
 void LaunchGame::add_all_widgets() {

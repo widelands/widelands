@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# CrisiusXIII <chris@cborn.nl>, 2021
 # FvZ, 2020
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-09 23:00+0000\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +112,7 @@ msgstr "Kies daarna ‘Gebouwen’."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 #, lua-format
 msgid "You can also use the hotkey ‘%s’."
-msgstr ""
+msgstr "Je kan ook de sneltoets '%s' gebruiken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -257,7 +258,7 @@ msgstr "Kies daarna ‘Voorraad’."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
-msgstr ""
+msgstr "Je kan ook de sneltoets '%s' gebruiken voor snelle toegang tot dit venster."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -421,7 +422,7 @@ msgstr "Open de encyclopedie.  Daarvoor moet je op deze knop onderaan het scherm
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "Als alternatief kan je er ook direct bij met de '%s' toets"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -572,7 +573,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "Op dit moment zijn alle mijnen voorzien van rantsoen. Als je de prioriteit voor een bepaalde mijn wilt verhogen open je simpel het venster. In de voorraden-tab, achter iedere stuksgoed, vindt je een schuif."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -580,7 +581,7 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "Indien je de schuif naar het blauwe deel aan de linkerkant beweegt (lage prioriteit), worden de corresponderende goederen minder aangeleverd. Rood (rechterkant) betekent dat zoveel mogelijk goederen moeten worden aangeleverd, er wordt hier mogelijk iets belangrijks gemaakt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""

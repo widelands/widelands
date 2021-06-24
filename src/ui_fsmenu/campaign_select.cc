@@ -57,6 +57,8 @@ CampaignSelect::CampaignSelect(MenuCapsule& fsmm)
 	layout();
 
 	table_.cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 /**

@@ -34,6 +34,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/color_chooser.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/mouse_constants.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
@@ -42,7 +43,8 @@ constexpr int kPadding = 4;
 
 /// Holds the info and dropdown menu for a connected client
 struct MultiPlayerClientGroup : public UI::Box {
-	MultiPlayerClientGroup(UI::Panel* const parent,
+	MultiPlayerClientGroup(UI::Panel* const grand_parent,
+	                       UI::Panel* const parent,
 	                       int32_t const,
 	                       int32_t const h,
 	                       PlayerSlot id,
@@ -64,7 +66,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     name(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
-	     slot_selection_locked_(false) {
+	     slot_selection_locked_(false),
+	     menu_parent_(grand_parent) {
 		add(&slot_dropdown_);
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -89,7 +92,30 @@ struct MultiPlayerClientGroup : public UI::Box {
 		if (slot_dropdown_.has_selection()) {
 			const uint8_t new_slot = slot_dropdown_.get_selected();
 			if (new_slot != settings.users.at(id_).position) {
-				settings_->set_player_number(slot_dropdown_.get_selected());
+				const std::string& slotname =
+				   new_slot == UserSettings::none() ? "" : settings.players.at(new_slot).name;
+				const std::string& username = settings.users.at(id_).name;
+
+				if (new_slot != UserSettings::none() && settings.savegame && !slotname.empty() &&
+				    slotname != username) {
+					slot_dropdown_.toggle();
+					UI::WLMessageBox m(
+					   menu_parent_, UI::WindowStyle::kFsMenu, _("Divergent Player Name"),
+					   (boost::format(
+					       _("The player name of the selected slot (%1%) does not match your own (%2%). "
+					         "Are you sure that you want to occupy this slot?")) %
+					    slotname % username)
+					      .str(),
+					   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+
+					if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+						settings_->set_player_number(new_slot);
+					} else {
+						slot_dropdown_.select(settings.users.at(id_).position);
+					}
+				} else {
+					settings_->set_player_number(new_slot);
+				}
 			}
 		}
 		slot_selection_locked_ = false;
@@ -129,6 +155,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 		name.set_text(user_setting.name);
 		rebuild_slot_dropdown(settings);
+
+		initialization_complete();
 	}
 
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
@@ -136,6 +164,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	GameSettingsProvider* const settings_;
 	uint8_t const id_;            /// User number
 	bool slot_selection_locked_;  // Ensure that dropdowns will close on selection.
+	UI::Panel* menu_parent_;
 };
 
 /// Holds the dropdown menus for a player slot
@@ -590,6 +619,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 		}
+
+		initialization_complete();
 	}
 
 	void force_new_dimensions(uint32_t height) {
@@ -622,7 +653,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
-MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
+MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
+                                             UI::Panel* const parent,
                                              int32_t const x,
                                              int32_t const y,
                                              int32_t const,
@@ -631,11 +663,12 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              uint32_t buth)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, x, y, UI::Box::Horizontal),
      settings_(settings),
-     npsb(new NetworkPlayerSettingsBackend(settings_)),
-     clientbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     playerbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     scrollable_playerbox(&playerbox, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     clients_(&clientbox,
+     npsb_(new NetworkPlayerSettingsBackend(settings_)),
+     launchgame_(launchgame),
+     clientbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     playerbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     scrollable_playerbox_(&playerbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     clients_(&clientbox_,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsGameSetupHeadings,
               0,
@@ -644,7 +677,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               0,
               _("Clients"),
               UI::Align::kCenter),
-     players_(&playerbox,
+     players_(&playerbox_,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsGameSetupHeadings,
               0,
@@ -654,18 +687,18 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               _("Players"),
               UI::Align::kCenter),
      buth_(buth) {
-	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
-	clientbox.add_space(3 * kPadding);
-	clientbox.set_scrolling(true);
+	clientbox_.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
+	clientbox_.add_space(3 * kPadding);
+	clientbox_.set_scrolling(true);
 
-	add(&clientbox);
+	add(&clientbox_);
 	add_space(8 * kPadding);
-	add(&playerbox, Resizing::kExpandBoth);
-	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
-	scrollable_playerbox.set_scrolling(true);
-	playerbox.add_space(kPadding);
+	add(&playerbox_, Resizing::kExpandBoth);
+	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
+	scrollable_playerbox_.set_scrolling(true);
+	playerbox_.add_space(kPadding);
 
-	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
+	playerbox_.add(&scrollable_playerbox_, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
@@ -680,26 +713,26 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() = default;
 
 /// Update which slots are available based on current settings.
 void MultiPlayerSetupGroup::reset() {
-	for (auto& p : multi_player_player_groups) {
+	for (auto& p : multi_player_player_groups_) {
 		p->die();
 	}
-	multi_player_player_groups.clear();
-	for (auto& c : multi_player_client_groups) {
+	multi_player_player_groups_.clear();
+	for (auto& c : multi_player_client_groups_) {
 		c->die();
 	}
-	multi_player_client_groups.clear();
+	multi_player_client_groups_.clear();
 }
 void MultiPlayerSetupGroup::update_players() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
-	for (PlayerSlot i = multi_player_player_groups.size(); i < number_of_players; ++i) {
-		multi_player_player_groups.push_back(
-		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
-		                              buth_, i, settings_, npsb.get()));
-		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
+	for (PlayerSlot i = multi_player_player_groups_.size(); i < number_of_players; ++i) {
+		multi_player_player_groups_.push_back(new MultiPlayerPlayerGroup(
+		   &scrollable_playerbox_, playerbox_.get_w() - UI::Scrollbar::kSize, buth_, i, settings_,
+		   npsb_.get()));
+		scrollable_playerbox_.add(multi_player_player_groups_.at(i), Resizing::kFullSize);
 	}
-	for (auto& p : multi_player_player_groups) {
+	for (auto& p : multi_player_player_groups_) {
 		p->update();
 	}
 }
@@ -707,34 +740,34 @@ void MultiPlayerSetupGroup::update_clients() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_users = settings.users.size();
 
-	if (number_of_users > multi_player_client_groups.size()) {
-		for (uint32_t i = multi_player_client_groups.size(); i < number_of_users; ++i) {
-			multi_player_client_groups.push_back(
-			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_));
-			clientbox.add(multi_player_client_groups.at(i), Resizing::kFullSize);
+	if (number_of_users > multi_player_client_groups_.size()) {
+		for (uint32_t i = multi_player_client_groups_.size(); i < number_of_users; ++i) {
+			multi_player_client_groups_.push_back(new MultiPlayerClientGroup(
+			   launchgame_, &clientbox_, clientbox_.get_w(), buth_, i, settings_));
+			clientbox_.add(multi_player_client_groups_.at(i), Resizing::kFullSize);
 		}
 	}
-	for (auto& c : multi_player_client_groups) {
+	for (auto& c : multi_player_client_groups_) {
 		c->update();
 	}
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
-	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
+	const int32_t total_box_height = scrollable_playerbox_.get_y() + scrollable_playerbox_.get_h();
 
-	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
+	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups_) {
 		if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
 			dst.brighten_rect(
-			   Recti(playerbox.get_x(), scrollable_playerbox.get_y(), scrollable_playerbox.get_w(),
+			   Recti(playerbox_.get_x(), scrollable_playerbox_.get_y(), scrollable_playerbox_.get_w(),
 			         current_player->get_h() + current_player->get_y()),
 			   -MOUSE_OVER_BRIGHT_FACTOR);
 		} else if (current_player->get_y() >= 0) {
 			auto rect_height =
-			   std::min(total_box_height - (scrollable_playerbox.get_y() + current_player->get_y()),
+			   std::min(total_box_height - (scrollable_playerbox_.get_y() + current_player->get_y()),
 			            current_player->get_h());
 			dst.brighten_rect(
-			   Recti(playerbox.get_x(), scrollable_playerbox.get_y() + current_player->get_y(),
-			         scrollable_playerbox.get_w(), rect_height < 0 ? 0 : rect_height),
+			   Recti(playerbox_.get_x(), scrollable_playerbox_.get_y() + current_player->get_y(),
+			         scrollable_playerbox_.get_w(), rect_height < 0 ? 0 : rect_height),
 			   -MOUSE_OVER_BRIGHT_FACTOR);
 		}
 	}
@@ -744,16 +777,16 @@ void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
                                                  uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
-	clientbox.set_min_desired_breadth(max_width / 3);
-	clientbox.set_max_size(max_width / 3, max_height);
-	playerbox.set_max_size(max_width / 2, max_height);
-	scrollable_playerbox.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
+	clientbox_.set_min_desired_breadth(max_width / 3);
+	clientbox_.set_max_size(max_width / 3, max_height);
+	playerbox_.set_max_size(max_width / 2, max_height);
+	scrollable_playerbox_.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
 
-	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
+	for (auto& multiPlayerClientGroup : multi_player_client_groups_) {
 		multiPlayerClientGroup->force_new_dimensions(standard_element_height);
 	}
 
-	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
+	for (auto& multiPlayerPlayerGroup : multi_player_player_groups_) {
 		multiPlayerPlayerGroup->force_new_dimensions(standard_element_height);
 	}
 }

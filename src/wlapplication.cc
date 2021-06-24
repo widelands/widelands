@@ -39,6 +39,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -348,6 +349,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	datadir_ = g_fs->canonicalize_name(datadir_);
 	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
 
+	set_initializer_thread();
+
 	log_info("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
 
@@ -415,6 +418,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
+
+	// Save configuration now. Otherwise, the UUID and sound options
+	// are not saved, when the game crashes
+	write_config();
 }
 
 /**
@@ -612,7 +619,7 @@ void WLApplication::init_and_run_game_from_template() {
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::unique_ptr<GameHost> host;
 	if (multiplayer) {
-		std::unique_ptr<GameController> ctrl(nullptr);
+		std::shared_ptr<GameController> ctrl(nullptr);
 		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
 		                        Widelands::get_all_tribeinfos(nullptr), false));
 		settings.reset(new HostGameSettingsProvider(host.get()));
@@ -688,8 +695,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
 
-	SinglePlayerGameController ctrl(game, true, playernumber);
-	game.set_game_controller(&ctrl);
+	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
@@ -708,6 +714,8 @@ void WLApplication::init_and_run_game_from_template() {
 // In the future: push the first event on the event queue, then keep
 // dispatching events until it is time to quit.
 void WLApplication::run() {
+	std::thread game_logic_thread(&UI::Panel::logic_thread);
+
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		if (filename_.empty()) {
@@ -725,7 +733,7 @@ void WLApplication::run() {
 				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 				game.set_write_replay(false);
-				ReplayGameController rgc(game, filename_);
+				new ReplayGameController(game, filename_);
 				game.save_handler().set_allow_saving(false);
 				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 			} else {
@@ -760,7 +768,7 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(filename_, script_to_run_);
+			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
@@ -779,6 +787,9 @@ void WLApplication::run() {
 	}
 
 	g_sh->stop_music(500);
+
+	should_die_ = true;
+	game_logic_thread.join();
 }
 
 /**
@@ -845,8 +856,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 
 	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, keycode, modifiers)) {
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
-			log_warn("Omitting screenshot because diskspace is lower than %lluMB\n",
-			         kMinimumDiskSpace / (1000 * 1000));
+			log_warn("Omitting screenshot because diskspace is lower than %lluMiB\n",
+			         kMinimumDiskSpace / (1024 * 1024));
 		} else {
 			g_fs->ensure_directory_exists(kScreenshotsDir);
 			for (uint32_t nr = 0; nr < 10000; ++nr) {
@@ -860,7 +871,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 			}
 			log_warn("Omitting screenshot because 10000 screenshots are already present");
 		}
-		return true;
+		// Screenshot not taken
+		return false;
 	}
 
 	if (matches_shortcut(KeyboardShortcut::kCommonFullscreen, keycode, modifiers)) {
@@ -895,14 +907,14 @@ void WLApplication::handle_input(InputCallback const* cb) {
 				   std::make_pair(std::make_pair(ev.key.keysym.sym, ev.key.keysym.mod), ev.type));
 				handled = true;
 			}
-			if (!handled && cb && cb->key) {
-				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
-			}
 			if (!handled) {
-				handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
+				handled = handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
 			}
-		} break;
-
+			if (!handled && cb && cb->key) {
+				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
+			}
+			break;
+		}
 		case SDL_TEXTINPUT:
 			if (cb && cb->textinput) {
 				cb->textinput(ev.text.text);
@@ -1094,10 +1106,6 @@ bool WLApplication::init_settings() {
 		set_config_string("uuid", generate_random_uuid());
 	}
 	set_config_int("last_start", now);
-
-	// Save configuration now. Otherwise, the UUID is not saved
-	// when the game crashes, losing part of its advantage
-	write_config();
 
 	return true;
 }
@@ -1523,10 +1531,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	}
 
 	try {
-		std::unique_ptr<GameController> ctrl(
-		   new SinglePlayerGameController(game, true, playernumber));
 		if (replace_ctrl) {
-			game.set_game_controller(ctrl.get());
+			game.set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 		}
 
 		SaveHandler& save_handler = game.save_handler();

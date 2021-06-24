@@ -39,5 +39,7 @@ void MilitarySiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_military),
 	                create_soldier_list(*get_tabs(), *ibase(), *military_site), _("Soldiers"));
+
 	think();
+	initialization_complete();
 }

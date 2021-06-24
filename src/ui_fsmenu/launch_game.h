@@ -50,7 +50,7 @@ public:
 	void update_custom_starting_positions();
 
 protected:
-	LuaInterface* lua_;
+	std::unique_ptr<LuaInterface> lua_;
 
 	virtual void clicked_select_map() = 0;
 	virtual void clicked_select_savegame() = 0;

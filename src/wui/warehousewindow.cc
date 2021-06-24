@@ -20,11 +20,13 @@
 #include "wui/warehousewindow.h"
 
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "wui/buildingwindow.h"
 #include "wui/economy_options_window.h"
 #include "wui/portdockwaresdisplay.h"
+#include "wui/soldier_statistics_menu.h"
 #include "wui/waresdisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
@@ -32,6 +34,7 @@ static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png
 static const char pic_tab_dock_wares[] = "images/wui/buildings/menu_tab_wares_dock.png";
 static const char pic_tab_dock_workers[] = "images/wui/buildings/menu_tab_workers_dock.png";
 static const char pic_tab_expedition[] = "images/wui/buildings/start_expedition.png";
+static const char pic_tab_soldiers[] = "images/wui/buildings/menu_tab_military.png";
 
 static const char pic_policy_prefer[] = "images/wui/buildings/stock_policy_prefer.png";
 static const char pic_policy_dontstock[] = "images/wui/buildings/stock_policy_dontstock.png";
@@ -255,6 +258,7 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::Warehouse* warehouse = warehouse_.get(ibase()->egbase());
 	assert(warehouse != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
+
 	get_tabs()->add(
 	   "wares", g_image_cache->get(pic_tab_wares),
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWARE),
@@ -263,6 +267,25 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   "workers", g_image_cache->get(pic_tab_workers),
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
+
+	get_tabs()->add(
+	   "soldiers", g_image_cache->get(pic_tab_soldiers),
+	   new SoldierStatisticsPanel(
+	      *get_tabs(), warehouse->owner(),
+	      [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
+		      uint32_t n = 0;
+		      if (Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase())) {
+			      assert(wh->soldier_control() != nullptr);
+			      for (const Widelands::Soldier* s : wh->soldier_control()->present_soldiers()) {
+				      if (s->get_health_level() == h && s->get_attack_level() == a &&
+				          s->get_defense_level() == d && s->get_evade_level() == e) {
+					      ++n;
+				      }
+			      }
+		      }
+		      return n;
+	      }),
+	   _("Soldiers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_image_cache->get(pic_tab_dock_wares),
@@ -279,5 +302,7 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 			}
 		}
 	}
+
 	think();
+	initialization_complete();
 }

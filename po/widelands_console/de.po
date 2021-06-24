@@ -8,14 +8,15 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2021
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
+# Thomas Ho <tomohnetom@web.de>, 2021
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:46+0000\n"
+"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"PO-Revision-Date: 2021-06-14 19:58+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -24,288 +25,421 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:37
-#, c-format
-msgid "This is Widelands Build %s"
-msgstr "Das ist Widelands Version %s"
+#: ../../src/wlapplication_messages.cc:49
+msgid "Usage:"
+msgstr "Verwendung:"
 
-#: ../../src/wlapplication_messages.cc:42
-msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Verwendung: widelands <option0>=<value0> … <optionN>=<valueN>"
+#: ../../src/wlapplication_messages.cc:49
+msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
-#: ../../src/wlapplication_messages.cc:43
-msgid "       widelands <save.wgf>/<replay.wrpl>"
-msgstr "       widelands <save.wgf>/<replay.wrpl>"
+#: ../../src/wlapplication_messages.cc:50
+msgid "widelands <save.wgf>/<replay.wrpl>"
+msgstr "widelands <save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:44
+#: ../../src/wlapplication_messages.cc:52
+#: ../../src/wlapplication_messages.cc:54
+#: ../../src/wlapplication_messages.cc:58
+#: ../../src/wlapplication_messages.cc:184
+msgid "DIRNAME"
+msgstr "VERZEICHNISNAME"
+
+#: ../../src/wlapplication_messages.cc:52
 msgid "Options:"
 msgstr "Optionen:"
 
-#: ../../src/wlapplication_messages.cc:45
-msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-Eintrag>=Wert überschreibt den bisherigen Wert des config-Eintrags"
-
-#: ../../src/wlapplication_messages.cc:46
-msgid "                      Note: New value will be written to config file"
-msgstr "Hinweis: Der neue Wert wird in die config-Datei geschrieben"
-
-#: ../../src/wlapplication_messages.cc:48
-msgid ""
-" --datadir=DIRNAME    Use specified directory for the widelands\n"
-"                      data files"
-msgstr " --datadir=VERZEICHNISNAME Verwendet ein angepasstes Verzeichnis für die\n                      Widelands-Daten"
-
-#: ../../src/wlapplication_messages.cc:51
-msgid ""
-" --homedir=DIRNAME    Use specified directory for widelands config\n"
-"                      files, savegames and replays"
-msgstr " --homedir=VERZEICHNISNAME Verwendet das angegebene Verzeichnis für die Widelands-Config-Dateien, Spielstände und Aufzeichnungen"
+#: ../../src/wlapplication_messages.cc:53
+msgid "Use specified directory for the widelands data files"
+msgstr "Verwende das angegebene Verzeichnis für die widelands Dateien."
 
 #: ../../src/wlapplication_messages.cc:55
-msgid "                      Default is ~/.widelands"
-msgstr "                      Standard ist ~/.widelands"
-
-#: ../../src/wlapplication_messages.cc:57
-msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr "                      Standard ist %USERPROFILE%\\.widelands"
-
-#: ../../src/wlapplication_messages.cc:59
 msgid ""
-" --localedir=DIRNAME  Use specified directory for the widelands\n"
-"                      locale files"
-msgstr " --localedir=VERZEICHNISNAME Verwendet ein angepasstes Verzeichnis für die\n                      Widelands-Sprachdateien"
+"Use specified directory for widelands config files, savegames and replays. "
+"Default is "
+msgstr "Verwende das angegebene Verzeichnus für Widelands Konfigurationsdateien, Speicherungen und Replays. Standard ist "
 
-#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
-#. widelands
-#. textdomain
+#: ../../src/wlapplication_messages.cc:58
+msgid "Use specified directory for the widelands locale files"
+msgstr "Verwende das angegebene Verzeichnis für Widelands Sprachdateien"
+
+#: ../../src/wlapplication_messages.cc:63
+msgid "The locale to use"
+msgstr ""
+
+#. * TRANSLATORS: The … is not used on purpose to increase readability on
+#. monospaced terminals
+#: ../../src/wlapplication_messages.cc:63
+msgid "[de_DE|sv_SE|...]"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:65
+#: ../../src/wlapplication_messages.cc:69
+#: ../../src/wlapplication_messages.cc:71
+#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:73
+msgid "FILENAME"
+msgstr "DATEINAME"
+
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
-" --coredump=[true|false]\n"
-"                      Generates a core dump on segfaults instead of\n"
-"                      using the SDL"
-msgstr " --coredump=[true|false]\n                     Erzeugt ein Speicherabbild bei Speicherzugriffsfehlern anstatt\n                     SDL zu verwenden."
+"Directly create a new singleplayer game configured in the given file. An "
+"example can be found in `data/templates/new_game_template`"
+msgstr "Erstelle direkt ein Alleinspielerspiel das in der gegebenen Datei konfiguriert ist. Ein Beispiel ist in `data/templates/new_game_template` zu finden"
 
-#: ../../src/wlapplication_messages.cc:70
-msgid ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|…]\n                      Die verwendete Übersetzung."
+#: ../../src/wlapplication_messages.cc:69
+msgid "Directly starts the map `FILENAME` as scenario map"
+msgstr "Startet sofort die Karte `DATEINAME` als Szenario"
 
-#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
-#. widelands
-#. textdomain.
-#. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
-#. used in
-#. multiplayer
-#. * TRANSLATORS: games to make sure that there is no mismatch between the
-#. players.
-#: ../../src/wlapplication_messages.cc:79
+#: ../../src/wlapplication_messages.cc:71
+msgid "Directly loads the savegame `FILENAME`"
+msgstr "Lädt direkt den Spielstand `DATEINAME`"
+
+#: ../../src/wlapplication_messages.cc:72
+msgid "Directly loads the replay `FILENAME`"
+msgstr "Lädt direkt die Aufzeichnung `DATEINAME`."
+
+#: ../../src/wlapplication_messages.cc:74
 msgid ""
-" --write_syncstreams=[true|false]\n"
-"                      Create syncstream dump files to help debug network games."
-msgstr "--write_syncstream=[true|false]\nErstelle Syncstream-Speicherauszüge zum Debuggen von Netzwerkspielen."
+"Run the given Lua script after initialization. Only valid with --scenario, "
+"--loadgame, or --editor"
+msgstr "Führt ein Lua-Skript nach der Initialisierung aus. Nur gültig mit --scenario, --loadgame oder --editor"
+
+#: ../../src/wlapplication_messages.cc:78
+msgid ""
+"Directly starts the Widelands editor. You can add a =FILENAME to directly "
+"load the map `FILENAME` in editor"
+msgstr "Startet sofort den Widelands-Editor. Du kannst =DATEINAME hinzufügen, um sofort die Karte `DATEINAME` im Editor zu laden"
 
 #: ../../src/wlapplication_messages.cc:82
-msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr " --autosave=[…] Speichert automatisch alle n Minuten"
+msgid "Starts the game with sound disabled"
+msgstr "Startet das Spiel mit deaktiviertem Ton"
 
 #: ../../src/wlapplication_messages.cc:83
-msgid ""
-" --rolling_autosave=[...]\n"
-"                      Use this many files for rolling autosaves"
-msgstr "--rolling_autosave=[…]\nVerwendet diese Anzahl an Dateien für fortlaufende automatisch gespeicherte Spielstände"
+msgid "Force Widelands to crash when a Lua error occurs"
+msgstr "Absturz von Widelands erzwingen wenn ein Lua Fehler auftritt"
 
-#: ../../src/wlapplication_messages.cc:86
+#: ../../src/wlapplication_messages.cc:85
 msgid ""
-" --metaserver=[...]\n"
-"                      Connect to a different metaserver for internet gaming."
-msgstr "--metaserver=[…]\nVerbindet zu einem alternativen Metaserver für ein Internetspiel."
+"Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
+"for a full description of the AI training logic"
+msgstr "Aktiviert den KI-Trainingsmodus. Siehe https://www.widelands.org/wiki/Ai%20Training/ für eine ausführliche Beschreibung der KI-Trainingslogik"
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
-" --metaserverport=[...]\n"
-"                      Port number of the metaserver for internet gaming."
-msgstr "--metaserverport=[…]\nPortnummer des Metaservers für das Internetspiel."
+"In multiplayer games only, this will keep adjusting the game speed "
+"automatically, depending on FPS. Useful in conjunction with --ai_training"
+msgstr "Nur im Mehrspielermodus verfügbar, wird diese Option die Spielgeschwindigkeit automatisch an die FPS anpassen. Sinnvoll in Benutzung mit --ai_training"
 
-#: ../../src/wlapplication_messages.cc:92
-msgid ""
-" --addon_server=[...]\n"
-"                      Connect to a different github repository\n"
-"                      and branch from the add-ons manager."
-msgstr " --addon_server=[...]\n                      verbindet zu einem alternativen Github Repository\n                      und Zweig vom Erweiterungsmanager."
+#: ../../src/wlapplication_messages.cc:93
+msgid "Game options:"
+msgstr "Spieloptionen:"
 
-#: ../../src/wlapplication_messages.cc:97
-msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Startet das Spiel mit deaktiviertem Ton."
+#: ../../src/wlapplication_messages.cc:93
+msgid "Note: New values will be written to config file"
+msgstr "Hinweis: Der neue Wert wird in die config-Datei geschrieben"
 
+#. * TRANSLATORS: A placeholder for a numerical value
+#: ../../src/wlapplication_messages.cc:96
 #: ../../src/wlapplication_messages.cc:99
-msgid ""
-" --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr " --fail-on-lua-error  Absturz von Widelands erzwingen wenn ein Lua Fehler auftritt"
+#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:181
+#: ../../src/wlapplication_messages.cc:189
+#: ../../src/wlapplication_messages.cc:198
+msgid "n"
+msgstr "n"
 
+#. * TRANSLATORS: `n` references a numerical placeholder
+#: ../../src/wlapplication_messages.cc:98
+msgid "Automatically save each `n` minutes"
+msgstr "Speichert automatisch alle `n` Minuten"
+
+#. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
-msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip              Speichert Dateien nicht als Zip-Archive."
+msgid "Use `n` files for rolling autosaves"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:102
+msgid "Do not save files as binary zip archives"
+msgstr "Speichert Dateien nicht als Zip-Archive"
 
 #: ../../src/wlapplication_messages.cc:103
-msgid ""
-" --editor             Directly starts the Widelands editor.\n"
-"                      You can add a =FILENAME to directly load\n"
-"                      the map FILENAME in editor."
-msgstr " --editor             Startet sofort den Widelands-Editor.\n                      Du kannst =DATEINAME hinzufügen, um sofort\n                      die Karte DATEINAME zu laden."
-
-#: ../../src/wlapplication_messages.cc:107
-msgid ""
-" --ai_training        Enables AI training mode. See\n"
-"                      https://www.widelands.org/wiki/Ai%20Training/\n"
-"                      for a full description of the AI training logic."
-msgstr "--ai_training        Aktiviert den KI-Trainingsmodus. Siehe\n                        https://www.widelands.org/wiki/Ai%20Training/\n                        für eine ausführliche Beschreibung der KI-Trainingslogik."
-
-#: ../../src/wlapplication_messages.cc:111
-msgid ""
-" --auto_speed         In multiplayer games only, this will keep\n"
-"                      adjusting the game speed automatically,\n"
-"                      depending on FPS. Useful in conjunction with\n"
-"                      --ai_training."
-msgstr "--auto_speed        Nur im Mehrspielermodus verfügbar,\n                        wird diese Option die Spielgeschwindigkeit\n                        automatisch an die FPS anpassen. Sinnvoll\n                        in Benutzung mit --ai_training."
-
-#: ../../src/wlapplication_messages.cc:116
-msgid ""
-" --new_game_from_template=FILENAME\n"
-"                      Directly create a new singleplayer game\n"
-"                      configured in the given file. An example can\n"
-"                      be found in `data/templates/new_game_template`."
-msgstr " --new_game_from_template=DATEINAME\n                      Erstelle direkt ein Alleinspielerspiel\n                      das in DATEINAME konfiguriert ist. Ein Beispiel ist\n                      in `data/templates/new_game_template` zu finden."
-
-#: ../../src/wlapplication_messages.cc:122
-msgid ""
-" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-"                      map."
-msgstr " --scenario=DATEINAME Startet sofort die Karte DATEINAME als Szenario."
-
-#: ../../src/wlapplication_messages.cc:125
-msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=DATEINAME Lädt direkt den Spielstand DATEINAME."
-
-#: ../../src/wlapplication_messages.cc:126
-msgid " --replay=FILENAME    Directly loads the replay FILENAME."
-msgstr " --replay=DATEINAME Lädt direkt die Aufzeichnung DATEINAME."
-
-#: ../../src/wlapplication_messages.cc:127
-msgid ""
-" --script=FILENAME    Run the given Lua script after initialization.\n"
-"                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=FILENAME    Führt ein Lua-Skript nach der Initialisierung aus.\n                      Nur gültig mit --scenario, --loadgame oder --editor."
+msgid "Show filenames in replay screen"
+msgstr ""
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
-#. widelands
-#. textdomain
-#: ../../src/wlapplication_messages.cc:133
-msgid ""
-" --auto_roadbuild_mode=[true|false]\n"
-"                      Whether to enter roadbuilding mode\n"
-"                      automatically after placing a flag that is\n"
-"                      not connected to a road."
-msgstr " --auto_roadbuild_mode=[true|false]\n                      Ob automatisch in den Straßenbaumodus\n                      geschaltet wird, wenn eine Flagge platziert\n                      wurde, die mit keiner Straße verbunden ist."
+#. widelands textdomain.
+#. * TRANSLATORS: * marks the default value
+#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:105
+#: ../../src/wlapplication_messages.cc:108
+#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:177
+#: ../../src/wlapplication_messages.cc:187
+msgid "[true*|false]"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:139
+#: ../../src/wlapplication_messages.cc:106
+msgid ""
+"Whether a warning should be shown in the editor if there are too many "
+"players"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:108
+msgid "Start building road after placing a flag"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:113
+msgid "Bitmask of display flags to set for new games"
+msgstr ""
+
+#. * TRANSLATORS: The … character is not used on purpose to increase
+#. readability on monospaced
+#. terminals
+#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:152
+#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:154
+#: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:158
+msgid "[...]"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:126
+msgid "Scroll when the mouse cursor is near the screen edge"
+msgstr ""
+
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain.
+#. * TRANSLATORS: * marks the default value
+#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:129
+#: ../../src/wlapplication_messages.cc:131
+#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:156
+#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:164
+#: ../../src/wlapplication_messages.cc:176
+#: ../../src/wlapplication_messages.cc:179
+#: ../../src/wlapplication_messages.cc:194
+#: ../../src/wlapplication_messages.cc:203
+msgid "[true|false*]"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:127
+msgid "Invert click-and-drag map movement direction"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:130
+msgid "Allow diagonal scrolling with the numeric keypad"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:131
+msgid "Display system time in the info panel"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:132
+msgid "Zoom only when Ctrl is pressed"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:133
+msgid "Use single watchwindow mode"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:135
+msgid "Show in-game chat with transparent background"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:136
+msgid "Bitmask to set the toolbar location and mode"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:138
+msgid "Networking:"
+msgstr ""
+
+#. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
+#. used in multiplayer
+#. * TRANSLATORS: games to make sure that there is no mismatch between the
+#. players.
+#: ../../src/wlapplication_messages.cc:146
+msgid "Create syncstream dump files to help debug network games"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:147
+msgid "Connect to a different metaserver for internet gaming"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:147
+#: ../../src/wlapplication_messages.cc:159
+msgid "URI"
+msgstr ""
+
+#. * TRANSLATORS: `n` references a numerical placeholder
+#: ../../src/wlapplication_messages.cc:151
+msgid "Port number `n` of the metaserver for internet gaming"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:152
+msgid "The name of the last hosted game"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:153
+msgid "The nickname used for LAN and online games"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:154
+msgid "Name of map author"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:155
+msgid "The last host connected to"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:157
+msgid "Whether the used metaserver login is for a registered user"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:158
+msgid "The hashed password for online logins"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:160
+msgid ""
+"Connect to a different github repository and branch from the add-ons manager"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:162
 msgid "Graphic options:"
 msgstr "Grafik-Optionen:"
 
-#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
-#. widelands
-#. textdomain
-#: ../../src/wlapplication_messages.cc:144
-msgid ""
-" --fullscreen=[true|false]\n"
-"                      Whether to use the whole display for the\n"
-"                      game screen."
-msgstr " --fullscreen=[true|false]\n                      Ob der ganze Bildschirm für die Anzeige\n                      des Spiels verwendet wird."
+#: ../../src/wlapplication_messages.cc:163
+msgid "Whether to use the whole display for the game screen"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:148
-msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[…]         Breite des Fensters in Pixeln."
+#: ../../src/wlapplication_messages.cc:164
+msgid "Whether to start the game in a maximized window"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:149
-msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[…]         Höhe des Fensters in Pixeln."
+#. * TRANSLATORS: A placeholder for window width
+#: ../../src/wlapplication_messages.cc:168
+msgid "x"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:150
-msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr "--maxfps=[5 …]\nMaximale optische Bildwiederholrate des Spiels."
+#. * TRANSLATORS: `x` references a window width placeholder
+#: ../../src/wlapplication_messages.cc:170
+msgid "Width `x` of the window in pixel"
+msgstr ""
 
-#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
-#. widelands
-#. textdomain
-#: ../../src/wlapplication_messages.cc:155
+#. * TRANSLATORS: A placeholder for window height
+#: ../../src/wlapplication_messages.cc:173
+msgid "y"
+msgstr ""
+
+#. * TRANSLATORS: `y` references a window height placeholder
+#: ../../src/wlapplication_messages.cc:175
+msgid "Height `y` of the window in pixel"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:176
+msgid "Whether to grab the mouse input"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:177
+msgid "Whether to use the mouse cursor provided by SDL"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:179
+msgid "Whether to use sticky tooltips"
+msgstr ""
+
+#. * TRANSLATORS: `n` references a numerical placeholder
+#: ../../src/wlapplication_messages.cc:183
+msgid "Maximal optical framerate `n` of the game"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:184
+msgid "The path to the active UI theme relative to the homedir"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:187
 msgid "Options for the internal window manager:"
 msgstr "Einstellungen für den internen Fenstermanager:"
 
-#: ../../src/wlapplication_messages.cc:156
+#: ../../src/wlapplication_messages.cc:188
+msgid "Should automatic map movements be animated"
+msgstr ""
+
+#. * TRANSLATORS: `n` references a numerical placeholder
+#: ../../src/wlapplication_messages.cc:191
 msgid ""
-" --animate_map_panning=[yes|no]\n"
-"                      Should automatic map movements be animated."
-msgstr "--animate_map_panning=[yes|no]\n                     Animation von automatischen Kartenbewegungen an|aus."
+"Move a window to the edge of the screen when the edge of the window comes "
+"within a distance `n` from the edge of the screen"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:195
 msgid ""
-" --border_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the screen\n"
-"                      when the edge of the window comes within\n"
-"                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 …]\n                      Fenster in eine Bildschirmecke verschieben,\n                      wenn die Fensterecke in diese Entfernung\n                      von der Bildschirmecke kommt."
+"Eliminate a window’s border towards the edge of the screen when the edge of "
+"the window is next to the edge of the screen"
+msgstr ""
 
-#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
-#. widelands
-#. textdomain
-#: ../../src/wlapplication_messages.cc:167
+#. * TRANSLATORS: `n` references a numerical placeholder
+#: ../../src/wlapplication_messages.cc:200
 msgid ""
-" --dock_windows_to_edges=[true|false]\n"
-"                      Eliminate a window’s border towards the\n"
-"                      edge of the screen when the edge of the\n"
-"                      window is next to the edge of the screen."
-msgstr " --dock_windows_to_edges=[true|false]\n                      Lässt den Fensterrand verschwinden,\n                      wenn sich das Fenster nahe dem\n                      Bildschirmrand befindet."
+"Move a window to the edge of the panel when the edge of the window comes "
+"within a distance of `n` from the edge of the panel"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:172
+#: ../../src/wlapplication_messages.cc:204
 msgid ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the panel when\n"
-"                      the edge of the window comes within this\n"
-"                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 …]\n                      Verschiebe ein Fenster in eine Ecke des\n                      Panels, wenn die Ecke des Fensters in diese\n                      Entfernung von der Ecke des Panels kommt."
+"Only move a window to the edge of a panel if the window is overlapping with "
+"the panel"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:177
+#: ../../src/wlapplication_messages.cc:207
+msgid "Enable verbose debug messages"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:207
+msgid "Others:"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:208
+msgid "Only print version and exit"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:209
+msgid "Show this help"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:210
+msgid "Show this help with all available config options"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:211
+msgid "<save.wgf>/<replay.wrpl>"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:212
 msgid ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Only move a window to the edge of a panel\n"
-"                      if the window is overlapping with the\n"
-"                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Ein Fenster nur zur Ecke eines anderen\n                      verschieben, wenn es sich mit diesem\n                      überschneidet."
+"Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
+"extension association. Does not work with other options. Also see "
+"--loadgame/--replay"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:183
-msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Verwendet ausführliche Debugmeldungen"
+#. * TRANSLATORS: %s = version information
+#: ../../src/wlapplication_messages.cc:241
+#, c-format
+msgid "This is Widelands Version %s"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:184
-msgid " --help               Show this help"
-msgstr " --help               Zeigt diese Hilfe"
-
-#: ../../src/wlapplication_messages.cc:186
-msgid ""
-" <save.wgf>/<replay.wrpl> \n"
-"                      Directly loads the given savegame or replay. Useful for\n"
-"                      .wgf/.wrpl file extension association. Does not work with\n"
-"                      other options. Also see --loadgame/--replay."
-msgstr " <save.wgf>/<replay.wrpl> \n                     Lädt direkt das gegebene gespeicherte Spiel oder die gegebene Aufzeichnung . nützlich für die Zuordnung der .wgf/.wrpl Dateinamenerweiterung. Funktioniert nicht mit anderen Optionen. siehe auch --loadgame/--replay."
-
-#: ../../src/wlapplication_messages.cc:192
+#: ../../src/wlapplication_messages.cc:302
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

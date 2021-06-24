@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-01 23:19+0000\n"
+"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"PO-Revision-Date: 2021-06-19 17:31+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -203,6 +203,10 @@ msgstr "게임을 저장하거나 문제를 시연하는 경우 (예를 들어, 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "와이드랜드 번역자"
+
+#: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr "추가 기능"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"

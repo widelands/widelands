@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-04-13 10:18+0000\n"
+"POT-Creation-Date: 2021-06-10 08:29+0000\n"
+"PO-Revision-Date: 2021-06-10 08:32+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -198,6 +198,10 @@ msgstr "إذا إمتلكت لعبة محفوظة او مَقطع إعادة ي�
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "مترجمو \"الأرض الواسعة\""
+
+#: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"

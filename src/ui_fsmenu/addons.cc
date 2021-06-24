@@ -32,6 +32,7 @@
 #include "graphic/style_manager.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
@@ -88,6 +89,7 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
 
 	set_center_panel(&box_);
 	center_to_parent();
+	initialization_complete();
 }
 
 void ProgressIndicatorWindow::think() {
@@ -583,6 +585,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 	}
 	set_config_string("addons", text);
 	write_config();
+	fsmm_.set_labels();
 }
 
 inline std::shared_ptr<AddOns::AddOnInfo> AddOnsCtrl::selected_installed_addon() const {
@@ -851,6 +854,8 @@ void AddOnsCtrl::rebuild() {
 		upgrade_all_.set_tooltip(text);
 	}
 	update_dependency_errors();
+
+	initialization_complete();
 }
 
 void AddOnsCtrl::update_dependency_errors() {
@@ -921,6 +926,16 @@ void AddOnsCtrl::update_dependency_errors() {
 	if (warn_requirements.empty()) {
 		warn_requirements_.set_text("");
 		warn_requirements_.set_tooltip("");
+		try {
+			Widelands::Game game;
+			game.descriptions();
+		} catch (const std::exception& e) {
+			warn_requirements_.set_text(
+			   (boost::format(_("An enabled add-on is defective. No games can be started with the "
+			                    "current configuration.\nError message:\n%s")) %
+			    e.what())
+			      .str());
+		}
 	} else {
 		const unsigned nr_warnings = warn_requirements.size();
 		std::string list;
@@ -1782,6 +1797,8 @@ public:
 		screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
 
 		main_box_.set_size(get_inner_w(), get_inner_h());
+
+		initialization_complete();
 	}
 
 	void on_resolution_changed_note(const GraphicResolutionChanged& note) override {

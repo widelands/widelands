@@ -49,13 +49,13 @@ public:
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
 	GameHost(FsMenu::MenuCapsule*,
-	         std::unique_ptr<GameController>&,
+	         std::shared_ptr<GameController>&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
 	~GameHost() override;
 
-	void run(std::unique_ptr<GameController>&);
+	void run();
 	void run_direct();
 	void run_callback();
 	const std::string& get_local_playername() const;
@@ -134,6 +134,11 @@ public:
 		return forced_pause_;
 	}
 
+	void game_setup_aborted() override {
+		GameController::game_setup_aborted();
+		pointer_.reset();
+	}
+
 	void send_system_message_code(const std::string&,
 	                              const std::string& a = "",
 	                              const std::string& b = "",
@@ -149,6 +154,7 @@ private:
 	void clear_computer_players();
 	void init_computer_player(Widelands::PlayerNumber p);
 	void init_computer_players();
+	bool remove_player_name(uint8_t number, const std::string& name);
 
 	void handle_disconnect(uint32_t client_num, RecvPacket& r);
 	void handle_ping(Client& client);
@@ -199,7 +205,12 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
+	std::list<Widelands::PlayerCommand*> pending_player_commands_;
+	void do_send_player_command(Widelands::PlayerCommand*);
+
 	FsMenu::MenuCapsule* capsule_;
+	std::shared_ptr<GameController>&
+	   pointer_;  // This is a reference – a shared_ptr to `this` would be a bad idea…
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;

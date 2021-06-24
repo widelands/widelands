@@ -29,16 +29,25 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 8, 22 }
       },
+   },
+
+   spritesheets = {
       freeing = {
-         hotspot = { 10, 19 },
-         fps = 10
+         fps = 10,
+         frames = 30,
+         rows = 6,
+         columns = 5,
+         hotspot = { 10, 19 }
       },
       walk = {
-         hotspot = { 11, 23 },
          fps = 20,
-         directional = true
-      }
-   }
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 11, 23 }
+      },
+   },
 }
 
 pop_textdomain()
