@@ -1527,7 +1527,7 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian warehouse: Port
             purpose = pgettext("frisians_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
-            -- TRANSLATORS: Note helptext for an frisian warehouse: Port
+            -- TRANSLATORS: Note helptext for a frisian warehouse: Port
             note = pgettext("frisians_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
          }
       },
@@ -2179,6 +2179,17 @@ descriptions:new_tribe {
          }
       }
    },
+
+   -- Productionsite status strings
+
+   -- TRANSLATORS: Productivity label on a frisian building if there is 1 worker missing
+   productionsite_worker_missing = pgettext("frisians", "Worker missing"),
+   -- TRANSLATORS: Productivity label on a frisian building if there is 1 worker coming
+   productionsite_worker_coming = pgettext("frisians", "Worker is coming"),
+   -- TRANSLATORS: Productivity label on a frisian building if there is more than 1 worker missing. If you need plural forms here, please let us know.
+   productionsite_workers_missing = pgettext("frisians", "Workers missing"),
+   -- TRANSLATORS: Productivity label on a frisian building if there is more than 1 worker coming. If you need plural forms here, please let us know.
+   productionsite_workers_coming = pgettext("frisians", "Workers are coming"),
 
    -- Special types
    builder = "frisians_builder",

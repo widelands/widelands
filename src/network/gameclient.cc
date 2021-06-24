@@ -172,10 +172,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	modal = igb;
 
-	game->run(settings.savegame ?
-	             Widelands::Game::StartGameType::kSaveGame :
-	             settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-	                                 Widelands::Game::StartGameType::kMap,
+	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
+	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+                                 Widelands::Game::StartGameType::kMap,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.
@@ -1273,18 +1272,18 @@ void GameClient::disconnect(const std::string& reason,
 			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
 				throw WLWarning("", "%s",
 				                arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-				                              NetworkGamingMessages::get_message(reason, arg).c_str());
+                                          NetworkGamingMessages::get_message(reason, arg).c_str());
 			}
 			throw wexception("%s", arg.empty() ?
-			                          NetworkGamingMessages::get_message(reason).c_str() :
-			                          NetworkGamingMessages::get_message(reason, arg).c_str());
+                                   NetworkGamingMessages::get_message(reason).c_str() :
+                                   NetworkGamingMessages::get_message(reason, arg).c_str());
 		} else {
 			capsule_.menu().show_messagebox(
 			   _("Disconnected"),
 			   (boost::format(
 			       _("The connection with the host was lost for the following reason:\n%s")) %
 			    (arg.empty() ? NetworkGamingMessages::get_message(reason) :
-			                   NetworkGamingMessages::get_message(reason, arg)))
+                            NetworkGamingMessages::get_message(reason, arg)))
 			      .str());
 		}
 	}

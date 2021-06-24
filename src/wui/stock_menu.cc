@@ -148,7 +148,7 @@ void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
 		if (economy.second->type() == type) {
 			for (const auto* warehouse : economy.second->warehouses()) {
 				waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
-				                                                       warehouse->get_workers());
+                                                                   warehouse->get_workers());
 			}
 		}
 	}

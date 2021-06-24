@@ -38,26 +38,35 @@ descriptions:new_worker_type {
       },
    },
 
-   animations = {
-      idle = {
+   spritesheets = {
+        idle = {
          sound_effect = {
             path = "sound/hammering/hammering",
             priority = "50%"
          },
-         hotspot = { 12, 28 },
-         fps = 10
-      },
-      walk = {
-         hotspot = { 12, 28 },
          fps = 10,
-         directional = true
+         frames = 92,
+         rows = 11,
+         columns = 9,
+         hotspot = { 11, 27 }
+      },
+        walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 25 }
       },
       walkload = {
-         hotspot = { 12, 28 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 24 }
+      },
+   },
 }
 
 pop_textdomain()

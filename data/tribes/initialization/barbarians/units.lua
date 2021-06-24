@@ -1807,6 +1807,17 @@ descriptions:new_tribe {
       },
    },
 
+   -- Productionsite status strings
+
+   -- TRANSLATORS: Productivity label on a barbarian building if there is 1 worker missing
+   productionsite_worker_missing = pgettext("barbarians", "Worker missing"),
+   -- TRANSLATORS: Productivity label on a barbarian building if there is 1 worker coming
+   productionsite_worker_coming = pgettext("barbarians", "Worker is coming"),
+   -- TRANSLATORS: Productivity label on a barbarian building if there is more than 1 worker missing. If you need plural forms here, please let us know.
+   productionsite_workers_missing = pgettext("barbarians", "Workers missing"),
+   -- TRANSLATORS: Productivity label on a barbarian building if there is more than 1 worker coming. If you need plural forms here, please let us know.
+   productionsite_workers_coming = pgettext("barbarians", "Workers are coming"),
+
    -- Special types
    builder = "barbarians_builder",
    carrier = "barbarians_carrier",
