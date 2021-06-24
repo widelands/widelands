@@ -136,7 +136,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 						for (uint16_t i = 0; i < nr_jobs; ++i) {
 							FlagJob f;
 							f.type = packet_version < 6 ? FlagJob::Type::kGeologist :
-							                              static_cast<FlagJob::Type>(fr.unsigned_8());
+                                                   static_cast<FlagJob::Type>(fr.unsigned_8());
 							if (fr.unsigned_8()) {
 								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
 								f.request->read(fr, dynamic_cast<Game&>(egbase), mol);
