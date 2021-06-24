@@ -140,22 +140,22 @@ public:
 		for (uint32_t c = 0; c < capacity_; ++c) {
 			const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(c);
 			assert(!iq || (iq->get_max_size() == 1 && iq->get_max_fill() == 1));
-			icons_[c]->set_icon(g_image_cache->get(
-			   iq ? iq->get_filled() ? kPicWarePresent :
-			                           iq->get_missing() ? kPicWareMissing : kPicWareComing :
-			        kNoWare));
+			icons_[c]->set_icon(g_image_cache->get(iq ? iq->get_filled()  ? kPicWarePresent :
+			                                            iq->get_missing() ? kPicWareMissing :
+                                                                         kPicWareComing :
+                                                     kNoWare));
 			icons_[c]->set_tooltip(
 			   iq ? iq->get_filled() ?
-			        /** TRANSLATORS: Tooltip for a ware that is present in the building */
-			           _("Present") :
+                    /** TRANSLATORS: Tooltip for a ware that is present in the building */
+                    _("Present") :
 			           iq->get_missing() ?
-			           /** TRANSLATORS: Tooltip for a ware that is neither present in the
-			              building nor being transported there */
-			              _("Missing") :
-			              /** TRANSLATORS: Tooltip for a ware that is not present in the
-			                 building, but already being transported there */
-			              _("Coming") :
-			        "");
+                          /** TRANSLATORS: Tooltip for a ware that is neither present in the
+                             building nor being transported there */
+                          _("Missing") :
+                          /** TRANSLATORS: Tooltip for a ware that is not present in the
+                             building, but already being transported there */
+                          _("Coming") :
+                 "");
 		}
 	}
 
