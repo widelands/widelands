@@ -168,11 +168,11 @@ void GameDetails::show(const SavegameData& gamedata) {
 void GameDetails::show_game_description(const SavegameData& gamedata) {
 	std::string description = as_heading_with_content(
 	   mode_ == Mode::kReplay ?
-	      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
-	      _("Start of Replay:") :
-	      /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
-	         loading screens. */
-	      _("Game Time:"),
+            /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
+            _("Start of Replay:") :
+            /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
+               loading screens. */
+            _("Game Time:"),
 	   gamedata.gametime, panel_style_);
 
 	description = (boost::format("%s%s") % description %

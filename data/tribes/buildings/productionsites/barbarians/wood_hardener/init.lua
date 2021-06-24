@@ -18,33 +18,26 @@ descriptions:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = { 52, 64 },
       }
    },
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          frames = 20,
          columns = 4,
          rows = 5,
          hotspot = { 50, 65 }
       },
       build = {
-         directory = dirname,
-         basename = "build",
          frames = 4,
          columns = 2,
          rows = 2,
          hotspot = { 50, 61 }
       },
       working = {
-         directory = dirname,
-         basename = "working",
          frames = 20,
          columns = 4,
          rows = 5,

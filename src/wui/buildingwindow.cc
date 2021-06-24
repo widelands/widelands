@@ -198,7 +198,7 @@ void BuildingWindow::think() {
 		mute_this_->set_pic(
 		   g_image_cache->get(building->mute_messages() ? kImgUnmuteThis : kImgMuteThis));
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
-		                                                    _("Mute this building’s messages"));
+                                                          _("Mute this building’s messages"));
 		if (building->owner().is_muted(
 		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
@@ -270,10 +270,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			   g_image_cache->get(
 			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
 			   is_stopped ?
-			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-			      _("Continue") :
-			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-			      _("Stop"));
+               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+               _("Continue") :
+               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+               _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 

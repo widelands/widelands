@@ -36,25 +36,37 @@ descriptions:new_worker_type {
       }
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 9, 23 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 9, 23 }
       },
       hacking = {
-         hotspot = { 8, 23 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 8, 23 }
       },
       walk = {
-         hotspot = { 9, 22 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 22 }
       },
       walkload = {
-         hotspot = { 8, 25 },
          fps = 10,
-         directional = true
-      }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 25 }
+      },
    }
 }
 
