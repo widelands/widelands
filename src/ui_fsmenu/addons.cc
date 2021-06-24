@@ -2418,7 +2418,7 @@ public:
 		                                                      info_->number_of_votes())) %
 		                               info_->average_rating() % info_->number_of_votes())
 		                                 .str() :
-		                              _("No votes yet"));
+                                    _("No votes yet"));
 
 		uint32_t most_votes = 1;
 		for (uint32_t v : info_->votes) {
@@ -2435,8 +2435,8 @@ public:
 		std::string text = "<rt><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(info_->user_comments.empty() ?
-		                           _("No comments yet.") :
-		                           (boost::format(ngettext(
+                                 _("No comments yet.") :
+                                 (boost::format(ngettext(
 		                               "%u comment:", "%u comments:", info_->user_comments.size())) %
 		                            info_->user_comments.size())
 		                              .str());
