@@ -25,10 +25,16 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 58, 61 },
       },
+   },
+
+   spritesheets = {
       working = {
-         hotspot = { 58, 61 },
-         fps = 25
-      }
+         fps = 25,
+         frames = 19,
+         rows = 5,
+         columns = 4,
+         hotspot = { 58, 61 }
+      },
    },
 
    aihints = {

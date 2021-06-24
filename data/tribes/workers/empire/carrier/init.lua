@@ -12,21 +12,30 @@ descriptions:new_carrier_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 7, 22 },
-         fps = 10
+         fps = 10,
+         frames = 95,
+         rows = 11,
+         columns = 9,
+         hotspot = { 7, 22 }
       },
       walk = {
-         hotspot = { 7, 20 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 7, 20 }
       },
       walkload = {
-         hotspot = { 8, 22 },
          fps = 10,
-         directional = true
-      }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 21 }
+      },
    },
 }
 
