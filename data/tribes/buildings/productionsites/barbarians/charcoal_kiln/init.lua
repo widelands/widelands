@@ -24,11 +24,20 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 50, 71 },
       },
+   },
+
+   spritesheets = {
       build = {
-         hotspot = { 50, 71 },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 50, 51 }
       },
       working = {
-         hotspot = { 50, 71 },
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 50, 71 }
       },
    },
 

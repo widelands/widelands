@@ -1015,11 +1015,11 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kTransport):
 			statistics_string =
 			   destination_ && fleet_->get_schedule().is_busy(*this) ?
-			      /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-			      pgettext("ship_state", "Shipping") :
-			      /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
-			       * nothing to do. */
-			      pgettext("ship_state", "Empty");
+                /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
+                pgettext("ship_state", "Shipping") :
+                /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
+                 * nothing to do. */
+                pgettext("ship_state", "Empty");
 			break;
 		case (ShipStates::kExpeditionWaiting):
 			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
@@ -1060,7 +1060,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	                                .str()
 	                                .c_str() :
-	                             "-");
+                                "-");
 	if (destination_) {
 		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d)\n", destination_->serial(),
 		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y);
@@ -1082,12 +1082,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
 		      shipping_item.object_.get(egbase)->descr().name().c_str(),
 		      (shipping_item.destination_dock_.is_set()) ?
-		         (boost::format("%u (%d x %d)") % shipping_item.destination_dock_.serial() %
+               (boost::format("%u (%d x %d)") % shipping_item.destination_dock_.serial() %
 		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x %
 		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y)
 		            .str()
 		            .c_str() :
-		         "-");
+               "-");
 	}
 }
 

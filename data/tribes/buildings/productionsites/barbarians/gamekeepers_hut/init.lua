@@ -20,14 +20,23 @@ descriptions:new_productionsite_type {
 
    animation_directory = dirname,
    animations = {
-      idle = {
-         hotspot = { 44, 43 },
-      },
-      build = {
-         hotspot = { 44, 43 },
-      },
       unoccupied = {
          hotspot = { 44, 43 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 44, 43 }
+      },
+      idle = {
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 44, 43 }
       },
    },
 
