@@ -6,17 +6,23 @@ on:
     branches: [ master ]
 
 jobs:
-  includes:
+  # This job runs multiple smaller checks where having several jobs would be overkill.
+  misc_sanity_checks:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
+    - name: Validate JSON files
+      run: |
+        python3 utils/validate_json.py data/txts/
+        python3 utils/update_authors.py
     - name: Check for superfluous includes and forward declarations
       run: |
-        cd src
+        pushd src
         ../utils/find_unused_includes.py
+        popd
 
   codecheck:
     runs-on: ubuntu-latest
@@ -110,7 +116,7 @@ jobs:
       run: ./utils/lua_style_checker.py
 
   testsuite:
-    needs: [clang_tidy, documentation, codecheck, includes]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       fail-fast: false
       matrix:
@@ -185,9 +191,7 @@ jobs:
 
 
   windows:
-    # Skip this job on master branch
-    if: github.ref != 'refs/heads/master'
-    needs: [clang_tidy, documentation, codecheck, includes]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
@@ -265,7 +269,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    needs: [clang_tidy, documentation, codecheck, includes]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:

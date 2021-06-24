@@ -25,22 +25,31 @@ descriptions:new_worker_type {
       }
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 10, 21 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 21 }
       },
       walk = {
-         hotspot = { 9, 32 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 32 }
       },
       walkload = {
-         hotspot = { 9, 32 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 32 }
+      },
+   },
 }
 
 pop_textdomain()
