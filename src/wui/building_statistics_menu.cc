@@ -821,7 +821,7 @@ void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) con
 	fw.unsigned_8(tab_panel_.active());
 	fw.string(
 	   current_building_type_ == Widelands::INVALID_INDEX ?
-	      "" :
-	      iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
+         "" :
+         iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
 }
