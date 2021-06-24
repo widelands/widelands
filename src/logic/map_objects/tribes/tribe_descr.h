@@ -257,7 +257,8 @@ private:
 	WaresOrder workers_order_;
 	std::vector<std::pair<std::string, int>> collectors_points_table_;
 
-	std::string productionsite_worker_missing_, productionsite_workers_missing_, productionsite_worker_coming_, productionsite_workers_coming_;
+	std::string productionsite_worker_missing_, productionsite_workers_missing_,
+	   productionsite_worker_coming_, productionsite_workers_coming_;
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;

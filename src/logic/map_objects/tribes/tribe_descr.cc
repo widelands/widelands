@@ -213,26 +213,34 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		}
 
 		// TODO(Nordfriese): Require these strings after v1.1
-		auto load_productionsite_string = [this, &table](std::string& target, const std::string& key, const std::string& default_value) {
+		auto load_productionsite_string = [this, &table](std::string& target, const std::string& key,
+		                                                 const std::string& default_value) {
 			if (table.has_key(key)) {
 				target = table.get_string(key);
 			} else {
-				log_warn("Tribe '%s' defines no productionsite string '%s'", name().c_str(), key.c_str());
+				log_warn(
+				   "Tribe '%s' defines no productionsite string '%s'", name().c_str(), key.c_str());
 				target = default_value;
 			}
 		};
-		load_productionsite_string(productionsite_worker_missing_, "productionsite_worker_missing",
-				/** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-				_("Worker missing"));
-		load_productionsite_string(productionsite_workers_missing_, "productionsite_workers_missing",
-				/** TRANSLATORS: Productivity label on a building if there is more than 1 worker missing. If you need plural forms here, please let us know. */
-				_("Workers missing"));
-		load_productionsite_string(productionsite_worker_coming_, "productionsite_worker_coming",
-				/** TRANSLATORS: Productivity label on a building if there is 1 worker coming */
-				_("Worker is coming"));
-		load_productionsite_string(productionsite_workers_coming_, "productionsite_workers_coming",
-				/** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If you need plural forms here, please let us know. */
-				_("Workers are coming"));
+		load_productionsite_string(
+		   productionsite_worker_missing_, "productionsite_worker_missing",
+		   /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		   _("Worker missing"));
+		load_productionsite_string(
+		   productionsite_workers_missing_, "productionsite_workers_missing",
+		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker missing.
+		      If you need plural forms here, please let us know. */
+		   _("Workers missing"));
+		load_productionsite_string(
+		   productionsite_worker_coming_, "productionsite_worker_coming",
+		   /** TRANSLATORS: Productivity label on a building if there is 1 worker coming */
+		   _("Worker is coming"));
+		load_productionsite_string(
+		   productionsite_workers_coming_, "productionsite_workers_coming",
+		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If
+		      you need plural forms here, please let us know. */
+		   _("Workers are coming"));
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");
