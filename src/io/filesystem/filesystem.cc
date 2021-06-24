@@ -394,8 +394,8 @@ std::vector<std::string> FileSystem::get_xdgdatadirs() {
 	environment_char = getenv("XDG_DATA_DIRS");
 #endif
 	std::string environment(environment_char == nullptr || *environment_char == 0 ?
-	                           "/usr/local/share:/usr/share" :
-	                           environment_char);
+                              "/usr/local/share:/usr/share" :
+                              environment_char);
 
 	// https://stackoverflow.com/a/14266139
 	std::string token;

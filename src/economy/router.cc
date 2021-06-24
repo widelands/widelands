@@ -75,7 +75,7 @@ bool Router::find_route(RoutingNode& start,
 
 	while (RoutingNode* current = astar.step()) {
 		if (cost_cutoff >= 0 && (type == wwWARE ? current->mpf_realcost_ware :
-		                                          current->mpf_realcost_worker) > cost_cutoff) {
+                                                current->mpf_realcost_worker) > cost_cutoff) {
 			return false;
 		}
 

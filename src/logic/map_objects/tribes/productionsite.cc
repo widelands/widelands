@@ -333,25 +333,17 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 	if (nr_requests > 0) {
 		*s = StyleManager::color_tag(
-		   (nr_requests == 1 ?
-		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-		       _("Worker missing") :
-		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-		          missing. If you need plural forms here, please let us know. */
-		       _("Workers missing")),
+		   (nr_requests == 1 ? owner().tribe().get_productionsite_worker_missing_string() :
+                             owner().tribe().get_productionsite_workers_missing_string()),
 		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
 
 	if (nr_coming > 0) {
 		*s = StyleManager::color_tag(
-		   (nr_coming == 1 ?
-		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-		       _("Worker is coming") :
-		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-		          missing. If you need plural forms here, please let us know. */
-		       _("Workers are coming")),
-		   g_style_manager->building_statistics_style().low_color());
+		   (nr_coming == 1 ? owner().tribe().get_productionsite_worker_coming_string() :
+                           owner().tribe().get_productionsite_workers_coming_string()),
+		   g_style_manager->building_statistics_style().medium_color());
 		return;
 	}
 
@@ -425,8 +417,8 @@ ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, con
 	throw wexception("%s (%u) has no InputQueue for %s %u: %s", descr().name().c_str(), serial(),
 	                 type == WareWorker::wwWARE ? "ware" : "worker", wi,
 	                 type == WareWorker::wwWARE ?
-	                    owner().tribe().get_ware_descr(wi)->name().c_str() :
-	                    owner().tribe().get_worker_descr(wi)->name().c_str());
+                       owner().tribe().get_ware_descr(wi)->name().c_str() :
+                       owner().tribe().get_worker_descr(wi)->name().c_str());
 }
 
 /**
@@ -441,10 +433,9 @@ void ProductionSite::format_statistics_string() {
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = StyleManager::color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
-	   (percent < 33) ?
-	      g_style_manager->building_statistics_style().low_color() :
-	      (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
-	                       g_style_manager->building_statistics_style().high_color());
+	   (percent < 33) ? g_style_manager->building_statistics_style().low_color() :
+	   (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
+                       g_style_manager->building_statistics_style().high_color());
 
 	if (0 < percent && percent < 100) {
 		RGBColor color = g_style_manager->building_statistics_style().high_color();

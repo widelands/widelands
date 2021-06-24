@@ -540,12 +540,14 @@ bool MapView::handle_mousemove(
 		}
 	}
 
-	is_scrolling_x_ = edge_scrolling_ ?
-	                     x < kEdgeScrollingMargin ? -1 : x > get_w() - kEdgeScrollingMargin ? 1 : 0 :
-	                     0;
-	is_scrolling_y_ = edge_scrolling_ ?
-	                     y < kEdgeScrollingMargin ? -1 : y > get_h() - kEdgeScrollingMargin ? 1 : 0 :
-	                     0;
+	is_scrolling_x_ = edge_scrolling_ ? x < kEdgeScrollingMargin           ? -1 :
+	                                    x > get_w() - kEdgeScrollingMargin ? 1 :
+                                                                            0 :
+                                       0;
+	is_scrolling_y_ = edge_scrolling_ ? y < kEdgeScrollingMargin           ? -1 :
+	                                    y > get_h() - kEdgeScrollingMargin ? 1 :
+                                                                            0 :
+                                       0;
 
 	track_sel(Vector2i(x, y));
 
@@ -569,10 +571,9 @@ void MapView::think() {
 			return;
 		}
 
-		const int16_t speed =
-		   (SDL_GetModState() & KMOD_CTRL) ?
-		      kEdgeScrollingSpeedFast :
-		      (SDL_GetModState() & KMOD_SHIFT) ? kEdgeScrollingSpeedSlow : kEdgeScrollingSpeedNormal;
+		const int16_t speed = (SDL_GetModState() & KMOD_CTRL)  ? kEdgeScrollingSpeedFast :
+		                      (SDL_GetModState() & KMOD_SHIFT) ? kEdgeScrollingSpeedSlow :
+                                                               kEdgeScrollingSpeedNormal;
 		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
 	}
 }
@@ -678,8 +679,9 @@ bool MapView::scroll_map() {
 #undef kNP
 
 	   // set the scrolling distance
-	   const uint8_t denominator =
-	      ((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
+	   const uint8_t denominator = ((SDL_GetModState() & KMOD_CTRL)  ? 4 :
+	                                (SDL_GetModState() & KMOD_SHIFT) ? 16 :
+                                                                      8);
 	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
 	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
 	int32_t distance_to_scroll_x = 0;

@@ -94,9 +94,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      "dropdown_label",
                      0,
                      0,
-                     type == DropdownType::kTextual ?
-                        w - button_dimension :
-                        type == DropdownType::kTextualNarrow ? w : button_dimension,
+                     type == DropdownType::kTextual       ? w - button_dimension :
+                     type == DropdownType::kTextualNarrow ? w :
+                                                            button_dimension,
                      get_h(),
                      type == DropdownType::kTextual ?
                         (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
@@ -408,9 +408,9 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-	                            list_->get_selected_name() :
-	                            /** TRANSLATORS: Selection in Dropdown menus. */
-	                            pgettext("dropdown", "Not Selected");
+                               list_->get_selected_name() :
+                               /** TRANSLATORS: Selection in Dropdown menus. */
+                               pgettext("dropdown", "Not Selected");
 
 	if (type_ != DropdownType::kPictorial) {
 		if (label_.empty()) {
@@ -420,11 +420,11 @@ void BaseDropdown::update() {
 			display_button_.set_title((boost::format(_("%1%: %2%")) % label_ % (name)).str());
 		}
 		display_button_.set_tooltip(list_->has_selection() ? list_->get_selected_tooltip() :
-		                                                     tooltip_);
+                                                           tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-		                           list_->get_selected_image() :
-		                           g_image_cache->get("images/ui_basic/different.png"));
+                                 list_->get_selected_image() :
+                                 g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
 }

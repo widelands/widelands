@@ -22,9 +22,15 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 41, 44 },
       },
+   },
+
+   spritesheets = {
       build = {
-         hotspot = { 41, 44 },
-      }
+         frames = 3,
+         rows = 3,
+         columns = 1,
+         hotspot = { 40, 44 }
+      },
    },
 
    aihints = {},
