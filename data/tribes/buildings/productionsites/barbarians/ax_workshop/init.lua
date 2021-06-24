@@ -30,16 +30,24 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 57, 76 },
       },
-      build = {
-         hotspot = { 57, 76 },
-      },
       unoccupied = {
          hotspot = { 57, 76 },
       },
-      working = {
-         hotspot = { 57, 76 },
-         fps = 10
+   },
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 57, 64 }
       },
+      working = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 75 }
+      }
    },
 
    aihints = {
