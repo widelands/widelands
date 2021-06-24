@@ -177,8 +177,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 			// TODO(GunChleoc): When all animations have been converted, require that
 			// animation_directory is not empty.
 			add_available_scales(basename, animation_directory.empty() ?
-			                                  table.get_string("directory") :
-			                                  animation_directory);
+                                           table.get_string("directory") :
+                                           animation_directory);
 		}
 
 		// Frames
@@ -228,8 +228,8 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	assert(!mipmap.image_files.empty());
 	const std::string& image_filename = mipmap.image_files[representative_frame()];
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
-	                        playercolor_image(*clr, image_filename) :
-	                        g_image_cache->get(image_filename);
+                           playercolor_image(*clr, image_filename) :
+                           g_image_cache->get(image_filename);
 
 	const int w = image->width();
 	const int h = image->height();

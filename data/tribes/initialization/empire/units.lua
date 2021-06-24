@@ -1584,6 +1584,17 @@ descriptions:new_tribe {
       }
    },
 
+   -- Productionsite status strings
+
+   -- TRANSLATORS: Productivity label on an empire building if there is 1 worker missing
+   productionsite_worker_missing = pgettext("empire", "Worker missing"),
+   -- TRANSLATORS: Productivity label on an empire building if there is 1 worker coming
+   productionsite_worker_coming = pgettext("empire", "Worker is coming"),
+   -- TRANSLATORS: Productivity label on an empire building if there is more than 1 worker missing. If you need plural forms here, please let us know.
+   productionsite_workers_missing = pgettext("empire", "Workers missing"),
+   -- TRANSLATORS: Productivity label on an empire building if there is more than 1 worker coming. If you need plural forms here, please let us know.
+   productionsite_workers_coming = pgettext("empire", "Workers are coming"),
+
    -- Special types
    builder = "empire_builder",
    carriers = {"empire_carrier", "empire_donkey"},

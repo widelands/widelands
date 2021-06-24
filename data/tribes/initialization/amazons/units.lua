@@ -1607,6 +1607,17 @@ descriptions:new_tribe {
       }
    },
 
+   -- Productionsite status strings
+
+   -- TRANSLATORS: Productivity label on an amazon building if there is 1 worker missing
+   productionsite_worker_missing = pgettext("amazons", "Worker missing"),
+   -- TRANSLATORS: Productivity label on an amazon building if there is 1 worker coming
+   productionsite_worker_coming = pgettext("amazons", "Worker is coming"),
+   -- TRANSLATORS: Productivity label on an amazon building if there is more than 1 worker missing. If you need plural forms here, please let us know.
+   productionsite_workers_missing = pgettext("amazons", "Workers missing"),
+   -- TRANSLATORS: Productivity label on an amazon building if there is more than 1 worker coming. If you need plural forms here, please let us know.
+   productionsite_workers_coming = pgettext("amazons", "Workers are coming"),
+
    -- Special types
    builder = "amazons_builder",
    carriers = {"amazons_carrier", "amazons_tapir"},

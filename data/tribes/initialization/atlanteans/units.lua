@@ -192,6 +192,14 @@
 --
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
+--    **productionsite_worker_missing**: The string to display over this tribe's productionsites when 1 worker is missing.
+--
+--    **productionsite_worker_coming**: The string to display over this tribe's productionsites when 1 worker is coming.
+--
+--    **productionsite_workers_missing**: The string to display over this tribe's productionsites when more than 1 worker is missing.
+--
+--    **productionsite_workers_coming**: The string to display over this tribe's productionsites when more than 1 worker is coming.
+--
 --    .. code-block:: lua
 --
 --       toolbar = {
@@ -1734,6 +1742,17 @@ descriptions:new_tribe {
          }
       }
    },
+
+   -- Productionsite status strings
+
+   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 worker missing
+   productionsite_worker_missing = pgettext("atlanteans", "Worker missing"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 worker coming
+   productionsite_worker_coming = pgettext("atlanteans", "Worker is coming"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker missing. If you need plural forms here, please let us know.
+   productionsite_workers_missing = pgettext("atlanteans", "Workers missing"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker coming. If you need plural forms here, please let us know.
+   productionsite_workers_coming = pgettext("atlanteans", "Workers are coming"),
 
    -- Special types
    builder = "atlanteans_builder",

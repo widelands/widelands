@@ -280,10 +280,10 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
 	return req.get_type() == wwWORKER ?
-	          warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
+             warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
 	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
-	                                                             Warehouse::Match::kCompatible)) :
-	          wares_.stock(req.get_index());
+                                                                Warehouse::Match::kCompatible)) :
+             wares_.stock(req.get_index());
 }
 
 /// Launch a ware.
@@ -1432,7 +1432,7 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return r ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-	           portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+              portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
