@@ -1284,7 +1284,7 @@ static void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info,
 		                    "Category: %4$s\n"
 		                    "%5$s\n\n"
 		                    "Note that this add-on can not be downloaded again from the server.") :
-		                  _("Are you certain that you want to uninstall this add-on?\n\n"
+                        _("Are you certain that you want to uninstall this add-on?\n\n"
 		                    "%1$s\n"
 		                    "by %2$s\n"
 		                    "Version %3$s\n"
