@@ -12,24 +12,33 @@ descriptions:new_carrier_type {
 
    ware_hotspot = {-2, 12},
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 18, 23 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 18, 23 }
       },
       walk = {
-         hotspot = { 19, 33 },
          fps = 10,
-         directional = true
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 19, 33 }
       },
       walkload = {
-         -- TODO(GunChleoc): Make animation
+         -- TODO(hessenfarmer): Make animation
          basename = "walk",
-         hotspot = { 19, 33 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 19, 33 }
+      },
+   },
 }
 
 pop_textdomain()

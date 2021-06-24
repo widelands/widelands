@@ -380,8 +380,8 @@ void AddOnsPackager::clicked_delete_addon() {
 	UI::WLMessageBox m(
 	   get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"),
 	   (boost::format(ctrl_.is_remote(name) ?
-	                     _("Do you really want to delete the add-on ‘%s’?") :
-	                     _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
+                        _("Do you really want to delete the add-on ‘%s’?") :
+                        _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
 	                       "add-on can not be downloaded again from the server.")) %
 	    name)
 	      .str(),

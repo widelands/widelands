@@ -26,23 +26,31 @@ descriptions:new_worker_type {
       }
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         basename = "shooting",
-         hotspot = { 6, 29 },
-         fps = 10
+         fps = 10,
+         frames = 15,
+         rows = 5,
+         columns = 3,
+         hotspot = { 6, 29 }
       },
       walk = {
-         hotspot = { 14, 22 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 14, 22 }
       },
       walkload = {
-         hotspot = { 13, 23 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 13, 23 }
+      },
+   },
 }
 
 pop_textdomain()

@@ -40,30 +40,46 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 4, 23 }
       },
+   },
+
+   spritesheets = {
       dig = {
-         hotspot = { 8, 24 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 8, 24 }
       },
       planting = {
-         basename = "plant",
-         hotspot = { 15, 23 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 23 }
       },
       gathering = {
-         basename = "gather",
-         hotspot = { 9, 22 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 9, 22 }
       },
       walk = {
-         hotspot = { 8, 23 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 23 }
       },
       walkload = {
-         hotspot = { 8, 24 },
          fps = 10,
-         directional = true
-      }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 24 }
+      },
    }
 }
 
