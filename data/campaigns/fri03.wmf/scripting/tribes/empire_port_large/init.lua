@@ -11,9 +11,9 @@ descriptions:new_warehouse_type {
    destructible = false,
    map_check = {"seafaring"},
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 74, 96 },
          fps = 10
       },
