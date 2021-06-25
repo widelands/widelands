@@ -135,6 +135,8 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 
 	joingame_.set_enabled(false);
 	layout();
+
+	initialization_complete();
 }
 
 void NetSetupLAN::layout() {
@@ -326,7 +328,7 @@ void NetSetupLAN::clicked_hostgame() {
 	}
 
 	try {
-		running_game_.reset(new GameHost(capsule_, running_game_, playername_.text(), tribeinfos));
+		running_game_.reset(new GameHost(&capsule_, running_game_, playername_.text(), tribeinfos));
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),

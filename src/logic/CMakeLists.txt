@@ -96,14 +96,17 @@ wl_library(logic_addons
   DEPENDS
     base_i18n
     base_exceptions
+    base_macros
     base_log
     build_info
+    graphic
     io_fileread
     io_filesystem
     io_profile
     logic_filesystem_constants
     logic_map
     map_io
+    widelands_options
 )
 
 wl_library(logic_objectives
@@ -264,6 +267,7 @@ wl_library(logic
     base_log
     base_macros
     base_md5
+    base_multithreading
     base_random
     base_scoped_timer
     base_time_string

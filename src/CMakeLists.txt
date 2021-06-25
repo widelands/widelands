@@ -1,5 +1,6 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAKE_CURRENT_SOURCE_DIR}/../data/datadirversion)
 
 # Catchall target to codecheck all files.
 add_custom_target(codecheck)
@@ -105,6 +106,7 @@ wl_library(widelands_ball_of_mud
     base_geometry
     base_i18n
     base_log
+    base_multithreading
     base_random
     base_time_string
     build_info

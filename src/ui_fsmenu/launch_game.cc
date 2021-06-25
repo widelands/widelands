@@ -120,15 +120,19 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	}
 	ok_.set_title(_("Start game"));
 
-	lua_ = new LuaInterface();
+	lua_.reset(new LuaInterface());
 	add_all_widgets();
 	add_behaviour_to_widgets();
 
 	layout();
+
+	initialization_complete();
 }
 
 LaunchGame::~LaunchGame() {
-	delete lua_;
+	if (ctrl_) {
+		ctrl_->game_setup_aborted();
+	}
 }
 
 void LaunchGame::add_all_widgets() {
@@ -167,7 +171,7 @@ void LaunchGame::layout() {
 
 void LaunchGame::update_warn_desyncing_addon() {
 	for (const auto& pair : AddOns::g_addons) {
-		if (pair.second && !pair.first.sync_safe) {
+		if (pair.second && !pair.first->sync_safe) {
 			warn_desyncing_addon_.set_visible(true);
 			return;
 		}
@@ -295,7 +299,9 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 					std::string name, desc;
 					// Prevent propagation of the textdomain
 					if (t->has_key("textdomain")) {
-						i18n::AddOnTextdomain td(t->get_string("textdomain"));
+						i18n::AddOnTextdomain td(
+						   t->get_string("textdomain"),
+						   AddOns::find_addon(t->get_string("textdomain")).i18n_version);
 						name = _(t->get_string("name"));
 						desc = t->get_string("description");
 					} else {

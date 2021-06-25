@@ -19,18 +19,25 @@ descriptions:new_productionsite_type {
       grout = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 71 },
       },
+   },
+
+   spritesheets = {
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 50, 71 },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 50, 51 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 50, 71 },
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 50, 71 }
       },
    },
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -246,7 +246,7 @@ msgstr "우리는 실패해서는 안됩니다. 우리 민족의 미래는 나�
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
-msgstr "디킹"
+msgstr "제방을 쌓고 있음"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:129
 msgid "Gaining Land"
@@ -420,9 +420,9 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
 msgid "Congratulations"
-msgstr ""
+msgstr "축하합니다"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:189
 msgid "May Satul bless you"
@@ -623,12 +623,12 @@ msgstr ""
 "나을 수도 있습니다. 뭐가 더 좋을까요…"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
 msgid "Victory"
 msgstr "이김"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:285
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 msgid "Victory!"
 msgstr "이겼습니다!"
 
@@ -645,75 +645,80 @@ msgstr ""
 "아트테르다그로부터 훼르를 되찾을 것이다!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "이 임무를 완료했습니다. 원하는 경우 계속 놀 수도 있고, 그렇지 않으면 다음 임무로 넘어갈 수 있습니다."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:295
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
 msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"당신은 통행료를 순금으로 지불했습니다. 이제 당신이 그것을 얻는 것이 옳습니다. 우리 배가 준비되었습니다. 당신은 승선해도 좋습니다!"
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:300
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306
 msgid "You Have Lost"
-msgstr ""
+msgstr "졌습니다"
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
 msgid "Goodbye!"
-msgstr ""
+msgstr "안녕히 계세요!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
 msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"너무 오래 걸렸어요. 우리는 지금 출항해야 합니다. 그러면 폭풍우가 당신이 이 섬을 떠나는 것을 허락하지 않을 것입니다. 당신에게는 "
+"미안하지만, 날씨가 기다려지지 않아요. 안녕히 계세요."
 
-#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"당신은 졌으므로 계속 플레이 할 수 없습니다. 이 시나리오를 다시 시도 할 때 행운이 있기를 바랍니다. 확인을 눌러 기본 메뉴로 "
+"돌아가십시오."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "제방꾼"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "제방꾼의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "제방을 쌓고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "항구"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "바다에서 새로운 땅을 얻기 위해 근처에 방파제를 건설합니다."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "바다에서 새로운 땅을 얻기 위해 방파제를 건설합니다."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -721,4 +726,4 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "해외 식민지화 및 무역의 기반 역할을 합니다. 또한 군인, 물품 및 도구도 저장합니다."

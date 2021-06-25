@@ -30,22 +30,28 @@ descriptions:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 36 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 21, 36 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 21, 36 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
          hotspot = { 21, 36 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 21, 36 }
+      },
+      working = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 21, 36 }
       },
    },
 

@@ -29,17 +29,17 @@ We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GC
 
 You will need to install the following dependencies:
 
-*  [libSDL](http://www.libsdl.org/) >=2.0
-*  [libSDL_image](http://www.libsdl.org/projects/SDL_image)
-*  [libSDL_mixer](http://www.libsdl.org/projects/SDL_mixer) >= 2.0
-*  [libSDL_ttf](http://www.libsdl.org/projects/SDL_ttf) >= 2.0
-*  [gettext](http://www.gnu.org/software/gettext/gettext.html)
+*  [libSDL](https://www.libsdl.org/) >=2.0
+*  [libSDL_image](https://www.libsdl.org/projects/SDL_image)
+*  [libSDL_mixer](https://www.libsdl.org/projects/SDL_mixer) >= 2.0
+*  [libSDL_ttf](https://www.libsdl.org/projects/SDL_ttf) >= 2.0
+*  [gettext](https://www.gnu.org/software/gettext/gettext.html)
 * libiconv (on same mirrors as gettext)
-*  [zlib](http://www.zlib.net/)
+*  [zlib](https://www.zlib.net/)
 *  [libpng](http://www.libpng.org/pub/png/libpng.html)
 *  [libcurl](https://curl.se/)
-*  [Boost](http://www.boost.org/) >= 1.48
-*  [Python](http://www.python.org) >= 1.5.2
+*  [Boost](https://www.boost.org/) >= 1.48
+*  [Python](https://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
 
 

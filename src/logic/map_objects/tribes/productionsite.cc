@@ -333,25 +333,17 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 	if (nr_requests > 0) {
 		*s = StyleManager::color_tag(
-		   (nr_requests == 1 ?
-                /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-                _("Worker missing") :
-                /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-                   missing. If you need plural forms here, please let us know. */
-                _("Workers missing")),
+		   (nr_requests == 1 ? owner().tribe().get_productionsite_worker_missing_string() :
+                             owner().tribe().get_productionsite_workers_missing_string()),
 		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
 
 	if (nr_coming > 0) {
 		*s = StyleManager::color_tag(
-		   (nr_coming == 1 ?
-                /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-                _("Worker is coming") :
-                /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-                   missing. If you need plural forms here, please let us know. */
-                _("Workers are coming")),
-		   g_style_manager->building_statistics_style().low_color());
+		   (nr_coming == 1 ? owner().tribe().get_productionsite_worker_coming_string() :
+                           owner().tribe().get_productionsite_workers_coming_string()),
+		   g_style_manager->building_statistics_style().medium_color());
 		return;
 	}
 

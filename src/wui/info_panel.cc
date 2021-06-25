@@ -56,6 +56,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std:
 	set_thinks(true);
 	set_handle_mouse(true);
 	set_tooltip(tooltip);
+	initialization_complete();
 }
 
 MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widelands::MessageId id)
@@ -332,7 +333,10 @@ size_t InfoPanel::index_of(const MessagePreview* mp) const {
 		}
 		++i;
 	}
-	NEVER_HERE();
+
+	// Not found. Does not happen except in a race condition after message
+	// preview deletion, in which case the result is not of importance.
+	return 0;
 }
 
 void InfoPanel::log_message(const std::string& message) {

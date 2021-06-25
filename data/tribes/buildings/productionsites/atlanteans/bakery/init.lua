@@ -19,16 +19,21 @@ descriptions:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 52, 63 },
       },
+   },
+
+   spritesheets = {
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 52, 75 },
-         fps = 20
-      }
+         fps = 20,
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 52, 75 }
+      },
    },
 
    aihints = {

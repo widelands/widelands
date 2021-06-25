@@ -40,33 +40,48 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 10, 23 },
       },
+   },
+
+   spritesheets = {
       planting = {
-         basename = "plant",
-         hotspot = { 13, 32 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 13, 32 }
       },
       harvesting = {
-         basename = "harvest",
-         hotspot = { 18, 32 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 18, 32 }
       },
       gathering = {
-         basename = "gather",
-         hotspot = { 10, 34 },
-         fps = 5
+         fps = 5,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 34 }
       },
       walk = {
-         hotspot = { 18, 23 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 18, 23 }
       },
       walkload = {
          basename = "walk",
-         hotspot = { 18, 23 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 18, 23 }
+      },
+   },
 }
 
 pop_textdomain()

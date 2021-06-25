@@ -31,32 +31,48 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 8, 23 },
       },
+   },
+
+   spritesheets = {
       dig = {
-         hotspot = { 5, 23 },
-         fps = 5
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 5, 23 }
       },
       planting = {
-         basename = "plant",
-         pictures = path.list_files(dirname .. "plant_??.png"),
-         hotspot = { 17, 21 },
-         fps = 10
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 17, 21 }
       },
       water = {
-         hotspot = { 18, 25 },
-         fps = 5
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 18, 25 }
       },
       walk = {
-         hotspot = { 10, 23 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 23 }
       },
       walkload = {
          basename = "walk",
-         hotspot = { 10, 23 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 23 }
+      },
+   },
 }
 
 pop_textdomain()

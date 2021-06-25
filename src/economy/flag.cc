@@ -128,6 +128,8 @@ Flag::Flag(EditorGameBase& egbase,
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr),
      act_pending_(false) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 
 	set_owner(owning_player);
@@ -612,7 +614,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 	memmove(&wares_[best_index], &wares_[best_index + 1],
 	        sizeof(wares_[0]) * (ware_filled_ - best_index));
 
-	ware->set_location(game, nullptr);
+	ware->set_location(game, nullptr);  // Ware has no location while in transit
 
 	// wake up capacity wait queue
 	wake_up_capacity_queue(game);

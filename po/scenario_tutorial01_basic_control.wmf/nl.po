@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# CrisiusXIII <chris@cborn.nl>, 2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # FvZ, 2020
 # GunChleoc, 2014
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-22 00:09+0000\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,36 +47,36 @@ msgstr "Welkom bij Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands is een strategie spel dat met een langzaam stappenplan de voorkeur heeft om op te bouwen in plaats van te vernietigen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Je wordt in deze speluitleg door doelstellingen danwel opdrachten begeleid."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Doelstellingen en hoe ermee om te gaan."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Het gebruik van het \"Doelstellingen\" venster"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Je kan het \"Doelstellingen\" venster openen en sluiten door op de \"Doelstellingen\" knop te klikken in de toolbar onderaan het scherm."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Zoals met de meeste vensters kan je ook dit venster sluiten door met de rechtermuis knop er op te klikken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Wanneer je een doelstelling hebt bereikt, zal het van de lijst verdwijnen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
@@ -84,14 +85,14 @@ msgstr "Toon bouwlocaties"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Activeer \"Toon Bouwlocaties\". Er zijn twee manieren om dit te doen:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Toets %s  om ze om te wisselen, of delecteer 'Toon Bouwlocaties' in het 'Toon / Verberg' menu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
@@ -113,7 +114,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have a different "
 "economy, strength and weaknesses, but the general gameplay is the same for "
 "all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Er zijn vijf verschillende stammen in Widelands, de Barbaren, het Imperium, de Atlantiërs, de Friezen en de Amazones. Alle stammen hebben eenandere economie, sterkte en zwaktes, maar het normale spel is voor allemaal het zelfde. We zullen voorlopig met de Barbaren spelen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -125,7 +126,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Normaal begin je een spel met een enkel hoofdkwartier. Dit is het grote gebouw met de blauwe flag voor de deur. Het hoofdkwartier slaat spullen op, maar ook werkers en soldaten. Sommige goederen zijn nodig om huizen te bouwen, andere juist om nog meer spullen te maken. Vanzelfsprekend blijven de spullen waarmee je begint niet voor altijd liggen, dus moet je ze aanvullen. De meest belangrijke goederen in een net gestart spel zijn zijn de basis bouwmaterialen: boomstammen en graniet. Laten we er voor zorgen dat we niet zonder boomstammen zitten. Daarom hebben we een houthakker nodig en een hut om in te verblijven."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -137,13 +138,13 @@ msgstr "We moeten een mooie plek vinden voor de houthakkershut. Om dit te vergem
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Ik laat je zien waar het menu is en waar je de bouwplaatsen kan laten zien en verbergen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Nu ik je heb laten zien waar je de gebouwen kan laten zien en verbergen, kan je deze nu 'aan' zetten zodat we ons eerste gebouw kunnen neer zetten?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"
@@ -155,7 +156,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Goedzo. Nu zal ik je laten zien hoe je een houthakkershut maakt en die verbindt met een weg. Er is een mooie plek voor een houthakker precies naast die bomen. Ik zal de stappen die je nodig hebt beschrijven en ze daarna voordoen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -165,13 +166,13 @@ msgstr "De Houthakkershut Bouwen"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Eerst klik ik met links op het symbool waar ik de houthakkerhut wil bouwen. Een venster zal verschijnen zodat ik kan kiezen tussen de verschillende gebouwen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "De houthakkershut is maar een klein gebouw dus kies ik voor de tab met de kleine gebouwen. Daar kies ik dan de houthakkershut."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -301,11 +302,11 @@ msgstr "Goed zo!  Nu moeten we wachten tot de hut klaar is."
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Als je wilt dat alles sneller gaat hoef je alleen toets %1$s te gebruiken om de spel snelheid op te voeren. Je kan %2$s gebruiken om weer langzamer te spelen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Verandering is snel met %1$s/%2$s en geleidelijk met %3$s/%4$s"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
@@ -320,11 +321,11 @@ msgstr "Perfect, de houthakkershut is gebouwd.  Een houthakker zal er zijn intre
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Verplaats de Weergave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Verplaats jouw Weergave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -389,7 +390,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Moving Your View"
-msgstr "Verplaats de Weergave"
+msgstr "Het Verplaatsen van jouw Weergave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:272
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
@@ -701,7 +702,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Om de gebouwen statistiek labels te laten zien of te verbergen kan je de \"Toon Statistieken\" selecteren van het \"Toon / Verberg \" menu onderaan het scherm of druk op toets %sop het toetsenbord. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""

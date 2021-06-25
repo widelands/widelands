@@ -23,23 +23,29 @@ descriptions:new_productionsite_type {
       reed = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 65, 83 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 65, 83 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 65, 83 },
       },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 65, 83 }
+      },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 65, 83 },
-         fps = 20
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 65, 83 }
       },
    },
 

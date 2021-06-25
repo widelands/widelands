@@ -6,6 +6,7 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015,2017
+# nskdmitry, 2021
 # GunChleoc, 2016,2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-04 09:30+0000\n"
-"PO-Revision-Date: 2021-05-06 19:43+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-23 08:06+0000\n"
+"PO-Revision-Date: 2021-06-25 09:44+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,9 +30,9 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Log, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
@@ -54,9 +55,9 @@ msgid ""
 "logs to produce charcoal."
 msgstr "Лесорубы Амазонки повалили деревья, и хранители джунглей посадят их. Полученные бревна используются резчиком по камню. Печь для обжига древесного угля также нуждается в бревнах для производства древесного угля."
 
+#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
@@ -90,7 +91,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
 " tools and weapons. It is cut by a very experienced woodcutter."
-msgstr ""
+msgstr "Древесина этих деревьев по твердости сравнима с железом. Оно используется в строительстве, изготовлении инструментов и оружия. Лишь очень опытный дровосек может рубить их."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rubber
 #: ../../data/tribes/initialization/amazons/units.lua:136
@@ -98,13 +99,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
 "collected by experienced woodcutters."
-msgstr ""
+msgstr "Каучук крайне важен при изготовлении доспехов и отделке судна. Каучуконосы добываются опытными лесорубами."
 
 #. TRANSLATORS: Helptext for an amazon ware: Liana
 #: ../../data/tribes/initialization/amazons/units.lua:146
 msgctxt "amazons_ware"
 msgid "Lianas grow on trees. Very durable ropes are made out of them."
-msgstr ""
+msgstr "Лианы растут на деревьях. Из них получаются весьма крепкие веревки."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rope
 #: ../../data/tribes/initialization/amazons/units.lua:156
@@ -112,11 +113,11 @@ msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
 "construct buildings and ships."
-msgstr ""
+msgstr "Веревки делают из лиан. Их используют в изготовлении доспехов и при строительстве зданий и кораблей."
 
+#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Water, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
@@ -134,7 +135,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
 "digger and the tapir farm."
-msgstr ""
+msgstr "Воду используют для приготовления корней маниоки, варки шоколада, ее пьют золотодобытчики и на тапировых фермах."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cassava Root
 #: ../../data/tribes/initialization/amazons/units.lua:181
@@ -143,7 +144,7 @@ msgid ""
 "Cassava roots are a special kind of root produced at cassava plantations. "
 "The Amazons like their strong taste for making bread and they also feed "
 "their tapirs with them."
-msgstr ""
+msgstr "Корни маниоки — особый культивируемый корнеплод. Амазонкам нравится острый вкус приготовленного из него хлеба, а также им кормят тапиров."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
 #: ../../data/tribes/initialization/amazons/units.lua:191
@@ -151,7 +152,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr ""
+msgstr "Какао бобы растут на особых плантациях. Являются сырьем для шоколада."
 
 #. TRANSLATORS: Helptext for an amazon ware: Bread
 #: ../../data/tribes/initialization/amazons/units.lua:202
@@ -160,14 +161,14 @@ msgid ""
 "This tasty bread is made in cassava root cookeries out of cassava root and "
 "water. It is the basic ingredient of a ration that is made by a food "
 "preserver. Soldiers like it too."
-msgstr ""
+msgstr "Этот острый хлеб готовят из молотых корней маниоки и воды. Это - основа продзапаса. Солдатам он тоже нравится."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chocolate
 #: ../../data/tribes/initialization/amazons/units.lua:213
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
-msgstr ""
+msgstr "Шоколад готовят из какао-бобов и поят им солдат."
 
 #. TRANSLATORS: Helptext for an amazon ware: Fish
 #: ../../data/tribes/initialization/amazons/units.lua:223
@@ -177,7 +178,7 @@ msgid ""
 "the food preserver to prepare rations for the workers digging for gold dust "
 "and granite. It is also consumed at the training sites (training glade and "
 "warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Рыба это один из важнейших источников пищи для амазонок. Она идет на изготовление пайков для старателей и каменщиков по граниту. Помимо этого, оно идет в тренировочные центры (поляну-полигон и плац), а также на найм новых солдат."
 
 #. TRANSLATORS: Helptext for an amazon ware: Meat, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:233
@@ -185,7 +186,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunter-gatherers."
-msgstr ""
+msgstr "Мясо - калорийное питание, добываемое из дичи охотником-собирателем."
 
 #. TRANSLATORS: Helptext for an amazon ware: Meat, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:235
@@ -194,7 +195,7 @@ msgid ""
 "Meat is used by the food preserver to prepare rations for the workers "
 "digging for gold dust and granite. It is also consumed at the training sites"
 " (training glade and warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Мясо идет на припасы для приготовления пайков старателей и камнетесов. Помимо этого, оно идет в тренировочные центры (поляну-полигон и плац), а также на найм новых солдат."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:246
@@ -202,7 +203,7 @@ msgctxt "amazons_ware"
 msgid ""
 "A small bite to keep the workers digging for gold dust and granite strong "
 "and working. The scout also consumes rations on her scouting trips."
-msgstr ""
+msgstr "Чтобы старатели и каменотесы были сильны и хорошо работали, они должны иметь возможность перекусить. Разведчикам, во время длительных переходов, также необходимы пайки."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:248
@@ -210,13 +211,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rations are produced by the food preserver out of fish or meat and bread. "
 "They are dried using a charcoal fire."
-msgstr ""
+msgstr "Пайки готовят из продовольственных припасов, таких как рыба или хлеб и мясо.  При готовке жгут древесный уголь."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:262
 msgctxt "amazons_ware"
 msgid "Gold dust is washed in a gold digger dwelling."
-msgstr ""
+msgstr "В домиках старатели промывают глину в поисках золота."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:264
@@ -224,13 +225,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce armor."
-msgstr ""
+msgstr "В литейной ее переплавляют в золото, которое потом будет использоваться в строительстве и отделке доспехов."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:275
 msgctxt "amazons_ware"
 msgid "Gold is the most valuable of all metals."
-msgstr ""
+msgstr "Золото является ценнейшим металлом из всех."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:277
@@ -238,7 +239,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is smelted out of gold dust by the furnace and used by the dressmaker and"
 " for special buildings."
-msgstr ""
+msgstr "Выплавляется из золотого песка в литейной и используется в пошиве одежды и при строительстве особых зданий."
 
 #. TRANSLATORS: Helptext for an amazon ware: Charcoal, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:288
@@ -246,17 +247,17 @@ msgctxt "amazons_ware"
 msgid ""
 "Charcoal is produced out of logs by a charcoal burner. The Amazons use "
 "charcoal for drying their food and for smelting gold."
-msgstr ""
+msgstr "Древесный уголь добывает из бревен углежог. Амазонки жгут уголь при готовке пищи и для плавки золота."
 
 #. TRANSLATORS: Helptext for an amazon ware: Pick
 #: ../../data/tribes/initialization/amazons/units.lua:302
 msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
-msgstr ""
+msgstr "Кирки используются каменотесами для колки гранита в скалах или шахтах."
 
+#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
@@ -264,17 +265,17 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:409
 msgctxt "ware"
 msgid "The felling ax is the tool to chop down trees."
-msgstr ""
+msgstr "Топорами дровосеки валят деревья."
 
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:315
 msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
-msgstr ""
+msgstr "Используется лесорубами и изготавливается камнерезом."
 
+#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
@@ -292,11 +293,11 @@ msgctxt "amazons_ware"
 msgid ""
 "Therefore the jungle preservers, the cassava farmers and the cocoa farmers "
 "use them. They are produced by the stone carver."
-msgstr ""
+msgstr "Именно поэтому джунглесажатели, маниоководы и какао-плантаторы пользуются им. Изготавливается камнерезом."
 
+#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
@@ -315,13 +316,13 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr ""
+msgstr "Геологи, строители, корабелы, мастера по камню - всем им нужен молоток. Всегда имейте их про запас! Изготавливаются они камнерезом."
 
 #. TRANSLATORS: Helptext for an amazon ware: Machete
 #: ../../data/tribes/initialization/amazons/units.lua:352
 msgctxt "amazons_ware"
 msgid "The machete is the tool of the liana cutters."
-msgstr ""
+msgstr "Мачете это средство срубания лиан."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:363
@@ -330,19 +331,19 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr ""
+msgstr "Основное оружие амазонок это копье. Изготавливает копья камнерез. В паре с туникой входит в оснащение ваших солдат."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:365
 msgctxt "amazons_ware"
 msgid "It is used by the amazon hunter-gatherers as well."
-msgstr ""
+msgstr "Успешно применяется охотниками-собирателями."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chisel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:376
 msgctxt "ware"
 msgid "The chisel is an essential tool."
-msgstr ""
+msgstr "Зубило просто необходимо."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chisel, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:378
@@ -350,7 +351,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Stone carvers need a chisel. Make sure you’ve always got some in reserve! "
 "They are produced by the stone carvers themselves."
-msgstr ""
+msgstr "Камнерезу необходимо зубило. У вас обязательно должен быть небольшой запас! Изготавливаются камнерезами же."
 
 #. TRANSLATORS: Helptext for an amazon ware: Kitchen Tools
 #: ../../data/tribes/initialization/amazons/units.lua:389
@@ -359,7 +360,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, baking cassava bread and "
 "brewing chocolate. Be sure to have a stone carver to produce this basic "
 "tool."
-msgstr ""
+msgstr "Кухонная утварь нужна для готовки пайков, выпечки хлеба и варки шоколада. Вам нужен камнерез для изготовления этих инструментов."
 
 #. TRANSLATORS: Helptext for an amazon ware: Needles
 #: ../../data/tribes/initialization/amazons/units.lua:400
@@ -367,13 +368,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Needles are used by dressmakers to make dresses, boots and armor for the "
 "soldiers."
-msgstr ""
+msgstr "Портные пользуются иглами для пошива одежды, обуви и доспехов для солдат."
 
 #. TRANSLATORS: Helptext for an amazon ware: Stone Bowl
 #: ../../data/tribes/initialization/amazons/units.lua:411
 msgctxt "amazons_ware"
 msgid "Stone bowls are used to wash gold and to smelt gold dust."
-msgstr ""
+msgstr "В каменных чашах как намывают, так и плавят золото."
 
 #. TRANSLATORS: Helptext for an amazon ware: Stone Tipped Spear
 #: ../../data/tribes/initialization/amazons/units.lua:425
@@ -382,7 +383,7 @@ msgid ""
 "This spear has a stone spike. It is produced in a stone workshop and used in"
 " a warriors’ gathering – together with food – to train soldiers from attack "
 "level 0 to attack level 1."
-msgstr ""
+msgstr "Это копье с каменным наконечником. Изготавливается оно в мастерской по камню и используется на плацу – равно как и еда, – для тренировки уровня атаки солдат с 0 до 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hardened Spear
 #: ../../data/tribes/initialization/amazons/units.lua:436
@@ -391,7 +392,7 @@ msgid ""
 "This is a hardened spear with a stone tip. It is produced in a stone "
 "workshop and used in a warriors’ gathering – together with food – to train "
 "soldiers from attack level 1 to level 2."
-msgstr ""
+msgstr "Это закаленное копье с каменным наконечником. Изготавливается оно в мастерской по камню и используется на плацу – как и еда – для повышения уровня атаки солдат с 1 до 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Armor
 #: ../../data/tribes/initialization/amazons/units.lua:447
@@ -400,7 +401,7 @@ msgid ""
 "This light wooden armor is a basic piece of armor for the Amazons’ soldiers."
 " It is produced by a dressmaker and used in a training glade – together with"
 " food – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Легкий деревянный доспех дает начальную защиту воинам амазонок. Собирается швеей и используется в тренировочном лагере – наравне с едой – для повышения уровня живучести солдат с 0 до 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wodden Helmet
 #: ../../data/tribes/initialization/amazons/units.lua:458
@@ -409,7 +410,7 @@ msgid ""
 "A wooden helmet is a basic piece of equipment for protecting soldiers. It is"
 " produced by the dressmaker and used to train soldiers from health level 1 "
 "to level 2."
-msgstr ""
+msgstr "Деревянный шлем дает начальную защиту солдат. Собирается швеей и используется в тренировочном лагере – наравне с едой – для повышения уровня живучести солдат с 1 до 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Warrior's Coat
 #: ../../data/tribes/initialization/amazons/units.lua:469
@@ -417,7 +418,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Ordinary tunics can be decorated and reinforced with gold and wood chunks. "
 "Such tunics are the best armor."
-msgstr ""
+msgstr "Обычная туника может быть украшена золотыми и деревянными вставками. Такая туника является лучшей броней."
 
 #. TRANSLATORS: Helptext for an amazon ware: Tunic
 #: ../../data/tribes/initialization/amazons/units.lua:480
@@ -425,7 +426,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber can be bound into a tunic, which is used as basic armor. All new "
 "soldiers are clothed in a tunic."
-msgstr ""
+msgstr "Каучук может быть пущен на шитье туники, базового доспеха. Всех новобранцев одевают в туники."
 
 #. TRANSLATORS: Helptext for an amazon ware: Padded Vest
 #: ../../data/tribes/initialization/amazons/units.lua:491
@@ -433,7 +434,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Padded vests are light but durable armor. They are produced by the "
 "dressmaker and used to train soldiers’ defence from level 0 to level 1."
-msgstr ""
+msgstr "Подбитые мехом жилеты это легкая, но долговечная броня. Шьются они швеями и используются для повышения уровня защиты солдат с 0 до 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Padded Protector
 #: ../../data/tribes/initialization/amazons/units.lua:502
@@ -441,7 +442,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Padded protectors are strong and durable armor. They are produced by the "
 "dressmaker and used to train soldiers’ defence from level 1 to level 2."
-msgstr ""
+msgstr "Подбитые мехом куртки это прочная и долговечная броня. Шьются швеями и используются для повышения уровня защиты солдат с 1 до 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Sturdy Boots
 #: ../../data/tribes/initialization/amazons/units.lua:513
@@ -450,7 +451,7 @@ msgid ""
 "Sturdy boots are excellent footwear for soldiers to be quicker on their "
 "feet. They are produced by the dressmaker and used to train soldiers’ evade "
 "from level 0 to level 1."
-msgstr ""
+msgstr "Прочные ботинки - отличная солдатская обувь, облегчающая шаг. Шьются швеями и используются для повышения уровня Уклонения солдат с 0 до 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Swift Boots
 #: ../../data/tribes/initialization/amazons/units.lua:524
@@ -459,7 +460,7 @@ msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
 "their feet. They are produced by the dressmaker and used to train soldiers’ "
 "evade from level 1 to level 2."
-msgstr ""
+msgstr "Мягкие ботинки это легкая и долговечная солдатская обувь, облегчающая шаг. Шьются швеей и используются для повышения уровня уклонения солдат с 1 до 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hero Boots
 #: ../../data/tribes/initialization/amazons/units.lua:535
@@ -467,19 +468,19 @@ msgctxt "amazons_ware"
 msgid ""
 "Hero boots! The only suitable footwear for a real hero. They are produced by"
 " the dressmaker and used to train soldiers’ evade from level 2 to level 3."
-msgstr ""
+msgstr "Ботинки П-класса! Только для настоящих героев. Шьются швеями и служат для повышения уклонения солдат с 2 до 3."
 
 #. TRANSLATORS: Helptext for an amazon worker: Carrier
 #: ../../data/tribes/initialization/amazons/units.lua:552
 msgctxt "amazons_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Переносит грузы по вашим дорогам."
 
 #. TRANSLATORS: Helptext for an amazon worker: Ferry
 #: ../../data/tribes/initialization/amazons/units.lua:559
 msgctxt "amazons_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Перевозит товары через реку."
 
 #. TRANSLATORS: Helptext for an amazon worker: Tapir
 #: ../../data/tribes/initialization/amazons/units.lua:568
@@ -487,97 +488,97 @@ msgctxt "amazons_worker"
 msgid ""
 "Tapirs help to carry items along busy roads. They are reared in a tapir "
 "farm."
-msgstr ""
+msgstr "Тапиров используют как вьючных животных. Разводятся фермерами."
 
 #. TRANSLATORS: Helptext for an amazon worker: Tapir Breeder
 #: ../../data/tribes/initialization/amazons/units.lua:575
 msgctxt "amazons_worker"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Выращивает тапиров для усовершенствования транспортной системы."
 
 #. TRANSLATORS: Helptext for an amazon worker: Stonecutter
 #: ../../data/tribes/initialization/amazons/units.lua:585
 msgctxt "amazons_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Высекает блоки гранита из скальных месторождений."
 
 #. TRANSLATORS: Helptext for an amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:592
 msgctxt "amazons_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Рубит деревья."
 
 #. TRANSLATORS: Helptext for an amazon worker: Master Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:599
 msgctxt "amazons_worker"
 msgid "Harvests special trees: ironwood, rubber and balsa."
-msgstr ""
+msgstr "Собирает особую древесину: железное дерево, каучук и бальзамин."
 
 #. TRANSLATORS: Helptext for an amazon worker: Jungle Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:606
 msgctxt "amazons_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Сажает деревья."
 
 #. TRANSLATORS: Helptext for an amazon worker: Jungle Master
 #: ../../data/tribes/initialization/amazons/units.lua:613
 msgctxt "amazons_worker"
 msgid "Plants special trees: ironwood, rubber and balsa."
-msgstr ""
+msgstr "Сажает особые деревья: железное, каучуконосы и бальзамин."
 
 #. TRANSLATORS: Helptext for an amazon worker: Liana Cutter
 #: ../../data/tribes/initialization/amazons/units.lua:620
 msgctxt "amazons_worker"
 msgid "Cuts lianas from trees."
-msgstr ""
+msgstr "Срезает лианы с деревьев."
 
 #. TRANSLATORS: Helptext for an amazon worker: Builder
 #: ../../data/tribes/initialization/amazons/units.lua:627
 msgctxt "amazons_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Работает на строительных площадках, возводя новые здания."
 
 #. TRANSLATORS: Helptext for an amazon worker: Shipwright
 #: ../../data/tribes/initialization/amazons/units.lua:634
 msgctxt "amazons_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Работает на верфи и строит новые корабли."
 
 #. TRANSLATORS: Helptext for an amazon worker: Hunter-Gatherer
 #: ../../data/tribes/initialization/amazons/units.lua:644
 msgctxt "amazons_worker"
 msgid "The hunter-gatherer gets fresh fish and raw meat for the tribe."
-msgstr ""
+msgstr "Охотник-собиратель добывает свежую рыбу и сырое мясо для племени."
 
 #. TRANSLATORS: Helptext for an amazon worker: Cassava Farmer
 #: ../../data/tribes/initialization/amazons/units.lua:651
 msgctxt "amazons_worker"
 msgid "Grows cassava."
-msgstr ""
+msgstr "Растит маниоку."
 
 #. TRANSLATORS: Helptext for an amazon worker: Cocoa Farmer
 #: ../../data/tribes/initialization/amazons/units.lua:658
 msgctxt "amazons_worker"
 msgid "Grows cocoa."
-msgstr ""
+msgstr "Выращивает какао."
 
 #. TRANSLATORS: Helptext for an amazon worker: Cook
 #: ../../data/tribes/initialization/amazons/units.lua:665
 msgctxt "amazons_worker"
 msgid "Prepares rations, bakes cassava bread and brews chocolate."
-msgstr ""
+msgstr "Готовит пайки из шоколада и маниокового хлеба."
 
 #. TRANSLATORS: Helptext for an amazon worker: Wilderness Keeper
 #: ../../data/tribes/initialization/amazons/units.lua:672
 msgctxt "amazons_worker"
 msgid "Breeds game or fish."
-msgstr ""
+msgstr "Разводит дичь или рыбу."
 
 #. TRANSLATORS: Helptext for an amazon worker: Geologist
 #: ../../data/tribes/initialization/amazons/units.lua:682
 msgctxt "amazons_worker"
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Ищет ресурсы для добычи шахтерами."
 
 #. TRANSLATORS: Helptext for an amazon worker: Gold Digger
 #: ../../data/tribes/initialization/amazons/units.lua:689
@@ -585,56 +586,56 @@ msgctxt "amazons_worker"
 msgid ""
 "Works hard in the gold dwellings in mountains to obtain gold by washing it "
 "from gravel."
-msgstr ""
+msgstr "Тяжело трудится в горах, вымывая из глины крупицы золота."
 
 #. TRANSLATORS: Helptext for an amazon worker: Charcoal Burner
 #: ../../data/tribes/initialization/amazons/units.lua:696
 msgctxt "amazons_worker"
 msgid "Burns logs to produce charcoal."
-msgstr ""
+msgstr "Производит уголь путем обжига бревен."
 
 #. TRANSLATORS: Helptext for an amazon worker: Gold Smelter
 #: ../../data/tribes/initialization/amazons/units.lua:703
 msgctxt "amazons_worker"
 msgid "Smelts gold at furnaces."
-msgstr ""
+msgstr "Плавит золото в домне."
 
 #. TRANSLATORS: Helptext for an amazon worker: Stone Carver
 #: ../../data/tribes/initialization/amazons/units.lua:713
 msgctxt "amazons_worker"
 msgid "Produces spears for soldiers and tools for workers."
-msgstr ""
+msgstr "Производит копья для солдат и инструменты для рабочих."
 
 #. TRANSLATORS: Helptext for an amazon worker: Soldier
 #: ../../data/tribes/initialization/amazons/units.lua:725
 msgctxt "amazons_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Защищать и покорять!"
 
 #. TRANSLATORS: Helptext for an amazon worker: Trainer
 #: ../../data/tribes/initialization/amazons/units.lua:732
 msgctxt "amazons_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Тренирует солдат."
 
 #. TRANSLATORS: Helptext for an amazon worker: Dressmaker
 #: ../../data/tribes/initialization/amazons/units.lua:739
 msgctxt "amazons_worker"
 msgid "Produces all kinds of dresses, boots and armor."
-msgstr ""
+msgstr "Шьет все виды одежды, обуви и доспехов."
 
 #. TRANSLATORS: Helptext for an amazon worker: Scout
 #: ../../data/tribes/initialization/amazons/units.lua:746
 msgctxt "amazons_worker"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Разведывает незнакомую территорию."
 
+#. TRANSLATORS: Helptext for a frisian immovable: Ashes
+#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a frisian immovable: Ashes
-#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an atlantean immovable: Ashes
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
@@ -652,10 +653,10 @@ msgstr ""
 msgid "The remains of a destroyed building."
 msgstr "Останки разрушенного здания."
 
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
@@ -665,7 +666,7 @@ msgstr "Останки разрушенного здания."
 #: ../../data/tribes/initialization/empire/units.lua:1031
 #: ../../data/tribes/initialization/frisians/units.lua:1417
 msgid "The remains of an old tree."
-msgstr ""
+msgstr "Останки старого дерева."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:778
@@ -673,7 +674,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:834
 #: ../../data/tribes/initialization/amazons/units.lua:862
 msgid "This balsa tree has just been planted."
-msgstr ""
+msgstr "Бальзамин посажен."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:785
@@ -681,7 +682,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:841
 #: ../../data/tribes/initialization/amazons/units.lua:869
 msgid "This balsa tree is growing."
-msgstr ""
+msgstr "Бальзамин растет."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:792
@@ -689,7 +690,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:848
 #: ../../data/tribes/initialization/amazons/units.lua:876
 msgid "This balsa tree is fully grown. Lianas can be gathered from it."
-msgstr ""
+msgstr "Бальзамин созрел. Можно собирать с него лианы."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:799
@@ -699,7 +700,7 @@ msgstr ""
 msgid ""
 "This balsa tree is ready for harvesting balsa wood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Получить бальзаминовую древесину может только мастер-лесоруб амазонок. Прочие племена получат обычные бревна."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:890
@@ -707,7 +708,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:946
 #: ../../data/tribes/initialization/amazons/units.lua:974
 msgid "This ironwood tree has just been planted."
-msgstr ""
+msgstr "Железное дерево посажено."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:897
@@ -715,7 +716,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:953
 #: ../../data/tribes/initialization/amazons/units.lua:981
 msgid "This ironwood tree is growing."
-msgstr ""
+msgstr "Железное дерево растет."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:904
@@ -723,7 +724,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:960
 #: ../../data/tribes/initialization/amazons/units.lua:988
 msgid "This ironwood tree is fully grown. Lianas can be gathered from it."
-msgstr ""
+msgstr "Железное дерево созрело. Можно собирать с него лианы."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:911
@@ -733,7 +734,7 @@ msgstr ""
 msgid ""
 "This ironwood tree is ready for harvesting ironwood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Получить железную древесину может только мастер-лесоруб амазонок. Прочие племена могут рубить только простые деревья на бревна."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:1002
@@ -741,7 +742,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1058
 #: ../../data/tribes/initialization/amazons/units.lua:1086
 msgid "This rubber tree has just been planted."
-msgstr ""
+msgstr "Каучуконос посажен."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:1009
@@ -749,7 +750,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1065
 #: ../../data/tribes/initialization/amazons/units.lua:1093
 msgid "This rubber tree is growing."
-msgstr ""
+msgstr "Каучуконос растет."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:1016
@@ -757,7 +758,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1072
 #: ../../data/tribes/initialization/amazons/units.lua:1100
 msgid "This rubber tree is fully grown. Lianas can be gathered from it."
-msgstr ""
+msgstr "Каучуконос созрел. Можно собирать с него лианы."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:1023
@@ -767,11 +768,11 @@ msgstr ""
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Собирать каучук может только мастер-лесоруб амазонок. Прочие племена получат только обычные бревна."
 
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
@@ -784,9 +785,9 @@ msgstr ""
 msgid "This field has just been planted."
 msgstr "Это поле засажено."
 
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
@@ -804,9 +805,9 @@ msgstr "Это поле засажено."
 msgid "This field is growing."
 msgstr "Это поле растет."
 
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
@@ -819,9 +820,9 @@ msgstr "Это поле растет."
 msgid "This field is ready for harvesting."
 msgstr "Поле готово к уборке."
 
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
@@ -837,26 +838,26 @@ msgstr "Урожай с этого поля собран."
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:1149
 msgid "This cocoa tree has just been planted."
-msgstr ""
+msgstr "Какао-дерево посажено."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:1156
 msgid "This cocoa tree is growing."
-msgstr ""
+msgstr "Какао-дерево растет."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:1163
 msgid "This cocoa tree is fully grown."
-msgstr ""
+msgstr "Какао-дерево созрело."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:1170
 msgid "The beans on this cocoa tree are ready for harvesting."
-msgstr ""
+msgstr "Какао-бобы готовы к сбору."
 
+#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for an amazon resource indicator: No resources
-#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
@@ -865,18 +866,18 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:921
 #: ../../data/tribes/initialization/frisians/units.lua:1262
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "Здесь нет ресурсов."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:1185
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at digger "
 "dwellings."
-msgstr ""
+msgstr "Золотая жила содержит богатую золотом руду, добываемую в домиках старателей."
 
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
@@ -885,34 +886,34 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:960
 #: ../../data/tribes/initialization/frisians/units.lua:1301
 msgid "There is only a little bit of gold here."
-msgstr ""
+msgstr "Здесь есть немного золота."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:1196
 #: ../../data/tribes/initialization/amazons/units.lua:1218
 msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
-msgstr ""
+msgstr "Гранит - это основной строительный материал. Он может быть добыт в гранитной шахте."
 
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
 #: ../../data/tribes/initialization/frisians/units.lua:1312
 msgid "There is only a little bit of granite here."
-msgstr ""
+msgstr "Здесь есть немного гранита"
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:1207
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at gold "
 "digger dwellings."
-msgstr ""
+msgstr "Золотая жила содержит богатую золотом руду, добываемую в домиках старателей промыванием глины."
 
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
@@ -921,20 +922,20 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1004
 #: ../../data/tribes/initialization/frisians/units.lua:1345
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Здесь много золота."
 
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
 #: ../../data/tribes/initialization/frisians/units.lua:1356
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "Здесь много гранита."
 
+#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
@@ -949,13 +950,13 @@ msgstr "На этом участке строится корабль."
 #: ../../data/tribes/initialization/amazons/units.lua:1240
 msgctxt "amazons_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
-msgstr ""
+msgstr "Помещение для ваших людей. Также хранит ваши товары и инструменты."
 
 #. TRANSLATORS: Note helptext for an amazon warehouse: Headquarters
 #: ../../data/tribes/initialization/amazons/units.lua:1242
 msgctxt "amazons_building"
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Штаб — это ваше главное здание."
 
 #. TRANSLATORS: Purpose helptext for an amazon warehouse: Warehouse
 #: ../../data/tribes/initialization/amazons/units.lua:1249
@@ -963,7 +964,7 @@ msgctxt "amazons_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Ваши рабочие и солдаты могут здесь укрыться, а также хранить здесь товары и инструмент."
 
 #. TRANSLATORS: Purpose helptext for an amazon warehouse: Port
 #: ../../data/tribes/initialization/amazons/units.lua:1256
@@ -971,7 +972,7 @@ msgctxt "amazons_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Служит базой для заморской колонизации и торговли. Также хранит ваших солдат, товары и инструменты."
 
 #. TRANSLATORS: Note helptext for an amazon warehouse: Port
 #: ../../data/tribes/initialization/amazons/units.lua:1258
@@ -979,40 +980,40 @@ msgctxt "amazons_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Как и штаб, порт может быть атакован и разрушен врагом. Советуем послать солдат на его охрану."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stonecutter's
 #. Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1268
 msgctxt "amazons_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Высекает грубые куски гранита из близлежащих скал."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Stonecutter's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1270
 msgctxt "amazons_building"
 msgid "The stonecutter’s hut needs rocks to cut within the work area."
-msgstr ""
+msgstr "Каменоломне для работы нужны скалы в рабочей области."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Woodcutter's
 #. Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1277
 msgctxt "amazons_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "Валит деревья поблизости и перерабатывает их в брёвна."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Woodcutter's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1279
 msgctxt "amazons_building"
 msgid "The woodcutter’s hut needs trees to fell within the work area."
-msgstr ""
+msgstr "Домику лесоруба нужны деревья для рубки в рабочей области."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Jungle
 #. Preserver's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1286
 msgctxt "amazons_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Сажает деревья в ближайших окрестностях."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Jungle
 #. Preserver's Hut
@@ -1021,14 +1022,14 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver’s hut needs free space within the work area to plant "
 "the trees."
-msgstr ""
+msgstr "Хранителю джунглей нужно свободное пространство в рабочей области под посадку деревьев."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Hunter-
 #. Gatherer's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1295
 msgctxt "amazons_building"
 msgid "Hunts animals to produce meat. Catches fish in the waters."
-msgstr ""
+msgstr "Охотится на зверей для производства мяса. Ловит рыбу в водоемах."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Hunter-Gatherer's
 #. Hut
@@ -1037,7 +1038,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the "
 "work area."
-msgstr ""
+msgstr "Охотнику-собирателю нужна животные или рыба для охоты и ловли в его рабочей области."
 
 #: ../../data/tribes/initialization/amazons/units.lua:1299
 #: ../../data/tribes/initialization/amazons/units.lua:1342
@@ -1110,21 +1111,21 @@ msgstr[3] "%d секунд"
 #, lua-format
 msgctxt "amazons_building"
 msgid "The hunter-gatherer pauses %s before going to work again."
-msgstr ""
+msgstr "Охотник-собиратель делает перерыв в работе на %s."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's
 #. Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1307
 msgctxt "amazons_building"
 msgid "Home of the liana cutter who cuts lianas for making ropes."
-msgstr ""
+msgstr "Домик собирателя лиан, в котором вьют веревки."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Water
 #. Gatherer's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1314
 msgctxt "amazons_building"
 msgid "Draws water out of the rivers and lakes."
-msgstr ""
+msgstr "Черпает воду из недр."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Water Gatherer's
 #. Hut
@@ -1133,7 +1134,7 @@ msgctxt "amazons_building"
 msgid ""
 "The water gatherer’s hut needs open water within the work area. Your workers"
 " cannot dig up water from the ground!"
-msgstr ""
+msgstr "В рабочей области хижины водовоза должны быть открытые источники. Эти рабочие не будут выкапывать ее из под земли!"
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1142,34 +1143,34 @@ msgctxt "amazons_building"
 msgid ""
 "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and "
 "rubber."
-msgstr ""
+msgstr "Собирает древесину редких пород в окрестностях. Ищет железное дерево, бальзамин и каучуконосы."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Wilderness
 #. Keeper's Tent
 #: ../../data/tribes/initialization/amazons/units.lua:1330
 msgctxt "amazons_building"
 msgid "Breeds fish and game to renew food resources."
-msgstr ""
+msgstr "Готовит рыбу и дичь."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Wilderness
 #. Keeper's Tent
 #: ../../data/tribes/initialization/amazons/units.lua:1332
 msgctxt "amazons_building"
 msgid "The wilderness keeper will only release new game at a nearby tree."
-msgstr ""
+msgstr "Дичезаводчик выпускает дичь рядом с ближайшим деревом."
 
 #: ../../data/tribes/initialization/amazons/units.lua:1338
 msgctxt "amazons_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
 "here."
-msgstr ""
+msgstr "Соедините узел со штабом разведки, чтобы выслать разведчика."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Scout's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1340
 msgctxt "amazons_building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Разведывает незнакомую территорию."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Scout's
 #. Hut
@@ -1177,20 +1178,20 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The scout pauses %s before going to work again."
-msgstr ""
+msgstr "Разведчик делает перерыв в работе на %s."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rope Weaver's
 #. Booth
 #: ../../data/tribes/initialization/amazons/units.lua:1351
 msgctxt "amazons_building"
 msgid "Makes ropes from lianas."
-msgstr ""
+msgstr "Вьет веревки из лиан."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Furnace
 #: ../../data/tribes/initialization/amazons/units.lua:1358
 msgctxt "amazons_building"
 msgid "Smelts gold dust into gold ingots using charcoal."
-msgstr ""
+msgstr "Плавит золото из песка в домне."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Furnace
 #: ../../data/tribes/initialization/amazons/units.lua:1360
@@ -1199,7 +1200,7 @@ msgctxt "amazons_building"
 msgid ""
 "The furnace can produce one gold ingot in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Золотоплавильня выпускает в среднем 1 золотой слиток в %s, и то при полном обеспечении."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree
 #. Plantation
@@ -1208,25 +1209,25 @@ msgctxt "amazons_building"
 msgid ""
 "Plants rare trees which are needed by the amazons, like balsa, rubber and "
 "ironwood."
-msgstr ""
+msgstr "Деревья редких пород , нужных амазонкам, такие как бальзамин, каучуконос и железное дерево."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stone Workshop
 #: ../../data/tribes/initialization/amazons/units.lua:1374
 msgctxt "amazons_building"
 msgid "Makes tools and spears for our soldiers."
-msgstr ""
+msgstr "Делает копья для солдат и инструменты."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1381
 msgctxt "amazons_building"
 msgid "Sews all dresses, boots and armor for our soldiers."
-msgstr ""
+msgstr "Шьет любые одежду, обувь и доспехи для ваших солдат."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1388
 msgctxt "amazons_building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Производит уголь путем обжига бревен."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Charcoal
 #. Kiln
@@ -1234,21 +1235,21 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The charcoal kiln needs %s on average to produce one lump of coal."
-msgstr ""
+msgstr "Угольная печь нуждается %s в среднем для производства одной партии угля."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cassava Root
 #. Cooker
 #: ../../data/tribes/initialization/amazons/units.lua:1397
 msgctxt "amazons_building"
 msgid "Bakes bread from cassava root."
-msgstr ""
+msgstr "Печет хлеб из корня маниоки."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Chocolate
 #. Brewery
 #: ../../data/tribes/initialization/amazons/units.lua:1404
 msgctxt "amazons_building"
 msgid "Brews chocolate for soldier training."
-msgstr ""
+msgstr "Варит шоколад для обучающихся солдат."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Chocolate
 #. Brewery
@@ -1257,7 +1258,7 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "The chocolate brewery needs %s on average to brew one mug of chocolate."
-msgstr ""
+msgstr "Шоколадной фабрике требуется в среднем %s чтобы произвести одну кружку шоколада."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:1413
@@ -1265,7 +1266,7 @@ msgctxt "amazons_building"
 msgid ""
 "Prepares rations to feed the scouts and the workers digging for gold dust "
 "and granite."
-msgstr ""
+msgstr "Готовит пайки для питания скаутов, старателей и камнетесов."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Food
 #. Preserver
@@ -1275,14 +1276,14 @@ msgctxt "amazons_building"
 msgid ""
 "The food preserver can produce one ration in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Заготовитель пищи тратит в среднем %s на производство пайка, если поставка сырья налажена."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Initiation
 #. Site
 #: ../../data/tribes/initialization/amazons/units.lua:1422
 msgctxt "amazons_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Снаряжает новобранцев и тренирует их до солдат."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Initiation
 #. Site
@@ -1290,33 +1291,33 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "На превращение новобранца в солдата в месте сбора уходит в среднем %s секунд."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gardening
 #. Center
 #: ../../data/tribes/initialization/amazons/units.lua:1431
 msgctxt "amazons_building"
 msgid "Enhances the fertility of the landscape for trees."
-msgstr ""
+msgstr "Удобряет землю для лучшего роста деревьев."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1440
 msgctxt "amazons_building"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Выращивает тапиров для усовершенствования транспортной системы."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1442
 msgctxt "amazons_building"
 msgid "Tapirs help to prevent traffic jams on highly used roads."
-msgstr ""
+msgstr "Тапиры помогают уменьшить трафик при высокой нагруженности дорог."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cassava
 #. Plantation
 #: ../../data/tribes/initialization/amazons/units.lua:1449
 msgctxt "amazons_building"
 msgid "Sows and harvests cassava."
-msgstr ""
+msgstr "Сажает и собирает маниоку."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Cassava
 #. Plantation
@@ -1324,25 +1325,25 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs free space within the work area to plant seeds."
-msgstr ""
+msgstr "Плантации маниоки требуется место под посадки."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1458
 msgctxt "amazons_building"
 msgid "Cultivates cocoa that is needed to brew chocolate drinks."
-msgstr ""
+msgstr "Выращивает какао-деревья, необходимые для приготовления шоколада."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1460
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training amazon soldiers."
-msgstr ""
+msgstr "Шоколад незаменим в обучении солдат."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1469
 msgctxt "amazons_building"
 msgid "Digs granite out of the ground in mountain terrain."
-msgstr ""
+msgstr "Выкапывает золотую руду из-под земли в горной местности."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1471
@@ -1351,14 +1352,14 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of granite in %s on average if the "
 "supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "В среднем каменоломне нужно %s для получения 1 каменного блока при полном обеспечении пайками и стабильности жилы."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gold Digger
 #. Dwelling
 #: ../../data/tribes/initialization/amazons/units.lua:1478
 msgctxt "amazons_building"
 msgid "Washes gold dust out of the ground in mountain terrain."
-msgstr ""
+msgstr "Добывает золотой песок из глины в горной местности."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Warriors’
 #. Gathering
@@ -1367,7 +1368,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Attack up to level 2. Equips the soldiers with all "
 "necessary weapons."
-msgstr ""
+msgstr "Обучает солдат атаке 2го уровня. Снабжает солдат соответствующим оружием."
 
 #. TRANSLATORS: Note helptext for an amazon training site: Warriors’ Gathering
 #. TRANSLATORS: Note helptext for an amazon training site: Training Glade
@@ -1375,7 +1376,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1498
 msgctxt "amazons_building"
 msgid "Amazon soldiers need chocolate to train properly."
-msgstr ""
+msgstr "Солдатам амазонки для обучения обязателен шоколад."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Training Glade
 #: ../../data/tribes/initialization/amazons/units.lua:1496
@@ -1383,7 +1384,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all "
 "necessary equipment and armor parts."
-msgstr ""
+msgstr "Повышает Уклонение, Защиту и Здоровье солдат. Оснащает солдат всем необходимым оружием и частями доспехов."
 
 #. TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an amazon military site: Treetop Sentry
@@ -1403,7 +1404,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1561
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Используйте солдат, для того чтобы расширить вашу территорию."
 
 #. TRANSLATORS: Note helptext for an amazon military site: Patrol Post
 #. TRANSLATORS: Note helptext for an amazon military site: Warriors’ Dwelling
@@ -1422,25 +1423,25 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send her away."
-msgstr ""
+msgstr "Если у вас мало солдат для захвата военных зданий, используйте кнопку \"стрелка вниз\", чтобы уменьшить их численность. Кроме того, можно щёлкнуть по солдату, чтобы выгнать его."
 
 #. TRANSLATORS: Note helptext for an amazon military site: Treetop Sentry
 #: ../../data/tribes/initialization/amazons/units.lua:1518
 msgctxt "amazons_building"
 msgid "You can only build this building on top of a tree."
-msgstr ""
+msgstr "Только вы можете строить дома в кронах деревьев."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Ferry Yard
 #: ../../data/tribes/initialization/amazons/units.lua:1572
 msgctxt "amazons_building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Строит паромы."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Ferry Yard
 #: ../../data/tribes/initialization/amazons/units.lua:1574
 msgctxt "amazons_building"
 msgid "Needs water nearby."
-msgstr ""
+msgstr "Поблизости нет деревьев"
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Shipyard
 #: ../../data/tribes/initialization/amazons/units.lua:1581
@@ -1448,11 +1449,11 @@ msgctxt "amazons_building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
 "between ports."
-msgstr ""
+msgstr "Стройте корабли для колонизации заморских территорий и обслуживания торговых путей между портами."
 
+#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for an amazon building: Construction Site
-#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1590
@@ -1462,12 +1463,12 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2163
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
-msgstr ""
+msgstr "\"Не ругайте строителя, когда у него нет стройматериалов.\""
 
+#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
@@ -1478,11 +1479,11 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2165
 msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
-msgstr ""
+msgstr "Так говорят, когда от кого-то требуют невополнимого."
 
+#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1594
@@ -1494,9 +1495,9 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Новое здание строится на этой строительной площадке."
 
+#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1601
@@ -1506,11 +1507,11 @@ msgstr "Новое здание строится на этой строител�
 #: ../../data/tribes/initialization/frisians/units.lua:2174
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
-msgstr ""
+msgstr "\"Отказ от старых путей ведет к открытию новых\""
 
+#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1603
@@ -1520,11 +1521,11 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2176
 msgctxt "building"
 msgid "Proverb"
-msgstr ""
+msgstr "Пословица"
 
+#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1605
@@ -1566,7 +1567,7 @@ msgstr "Доски - важный строительный материал."
 #: ../../data/tribes/initialization/atlanteans/units.lua:383
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Они производятся из брёвен на лесопилке."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
 #: ../../data/tribes/initialization/atlanteans/units.lua:385
@@ -1610,8 +1611,8 @@ msgid ""
 "way to make it edible."
 msgstr "Поскольку атланты не любят сырую рыбу, они коптят ее в коптильнях; это самый доступный способ сделать её съедобной."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:433
@@ -1706,8 +1707,8 @@ msgid ""
 "are mined in a crystal mine."
 msgstr "Эти удивительные алмазы используются для постройки некоторых уникальных зданий. Они добываются в Кристальных шахтах."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:531
@@ -1727,8 +1728,8 @@ msgid ""
 "are fed with coal."
 msgstr "Углем, атланты поддерживают огонь в литейной, бронной и оружейной."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:544
@@ -1737,16 +1738,16 @@ msgstr "Углем, атланты поддерживают огонь в лит
 #: ../../data/tribes/initialization/frisians/units.lua:321
 msgctxt "default_ware"
 msgid "Iron ore is mined in iron mines."
-msgstr ""
+msgstr "Железная руда добывается на железных же шахтах."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:546
 msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Из нее в литейной выплавляют железо."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:557
@@ -1755,7 +1756,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:334
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
-msgstr ""
+msgstr "Железо плавят из железной руды."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:559
@@ -1763,10 +1764,10 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used in the toolsmithy, armor "
 "smithy and weapon smithy."
-msgstr ""
+msgstr "Железо получают в литейной и используют в инструментальной мастерской, бронной и оружейной."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:570
@@ -1775,7 +1776,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:347
 msgctxt "ware"
 msgid "Gold ore is mined in a gold mine."
-msgstr ""
+msgstr "Златоносную руду добывают в золотых шахтах."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:572
@@ -1783,10 +1784,10 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Она переплавляется в литейной в золото, которое используется как ценнейший строительный материал, а также при производстве оружия и доспехов."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:583
@@ -1796,7 +1797,7 @@ msgstr ""
 msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is smelted out of gold ore."
-msgstr ""
+msgstr "Золото - наиболее полезный из всех металлов, его плавят из золотой руды."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:585
@@ -1804,7 +1805,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used by the armor smithy, the "
 "weapon smithy and the gold spinning mill."
-msgstr ""
+msgstr "Получают его в литейной и используют в бронной, оружейной и на золотопрядильной фабрике."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Pick
 #: ../../data/tribes/initialization/atlanteans/units.lua:598
@@ -1873,8 +1874,8 @@ msgid ""
 "the top of the smokery. It is created by the toolsmith."
 msgstr "Багор нужен коптильщику, чтобы подвешивать мясо и рыбу в коптильне. Он производится инструментальщиком."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:688
@@ -1891,8 +1892,8 @@ msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
 msgstr "Косы производятся инструментальщиком."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:701
@@ -1909,8 +1910,8 @@ msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
 msgstr "Садник для выпечки производится инструментальщиком."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:714
@@ -1919,13 +1920,13 @@ msgstr "Садник для выпечки производится инстру
 #: ../../data/tribes/initialization/frisians/units.lua:505
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
-msgstr ""
+msgstr "Клещи используются при плавке руды."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:716
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Используется в литейной, куется в мастерской."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Light Trident
 #: ../../data/tribes/initialization/atlanteans/units.lua:729
@@ -2025,7 +2026,7 @@ msgstr "Переносит грузы по вашим дорогам."
 #: ../../data/tribes/initialization/atlanteans/units.lua:833
 msgctxt "atlanteans_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Суда перевозит товары через реку."
 
 #. TRANSLATORS: Helptext for an atlantean worker: Horse
 #: ../../data/tribes/initialization/atlanteans/units.lua:842
@@ -2208,8 +2209,8 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "Разведчики, такие как разведчик Ерофей Павлович Разведчиков, разведывательно разведывают неразведанные земли с стиле разведчиков."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1158
@@ -2217,10 +2218,10 @@ msgstr "Разведчики, такие как разведчик Ерофей 
 #: ../../data/tribes/initialization/empire/units.lua:928
 #: ../../data/tribes/initialization/frisians/units.lua:1269
 msgid "There is water in the ground here that can be pulled up by a well."
-msgstr ""
+msgstr "Здесь есть подземные воды. Воду можно получить, построив здесь колодец."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1166
@@ -2232,10 +2233,10 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1277
 #: ../../data/tribes/initialization/frisians/units.lua:1321
 msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
+msgstr "Угольная жила содержит уголь, который может быть выкопан в угольной шахте."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1168
@@ -2243,10 +2244,10 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:938
 #: ../../data/tribes/initialization/frisians/units.lua:1279
 msgid "There is only a little bit of coal here."
-msgstr ""
+msgstr "Здесь есть немного угля."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1177
@@ -2258,10 +2259,10 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1288
 #: ../../data/tribes/initialization/frisians/units.lua:1332
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
+msgstr "Железная жила содержит железную руду, которая может быть добыта в железной шахте."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1179
@@ -2269,10 +2270,10 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:949
 #: ../../data/tribes/initialization/frisians/units.lua:1290
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "Здесь есть немного железа."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1188
@@ -2284,7 +2285,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1299
 #: ../../data/tribes/initialization/frisians/units.lua:1343
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
+msgstr "Золотая жила содержит золото, которое может быть выкопано в золотой шахте."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1199
@@ -2292,15 +2293,15 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "Драгоценные камни используются в строительстве больших зданий. Они могут быть добыты в кристальных шахтах. Также вы получите гранит из этой шахты."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1201
 msgid "There are only a few precious stones here."
-msgstr ""
+msgstr "Здесь всего несколько драгоценных камней."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
@@ -2308,10 +2309,10 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:982
 #: ../../data/tribes/initialization/frisians/units.lua:1323
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "Здесь много угля."
 
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1223
@@ -2319,13 +2320,19 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:993
 #: ../../data/tribes/initialization/frisians/units.lua:1334
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Здесь много железа."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1245
 msgid "There are many precious stones here."
-msgstr ""
+msgstr "Здесь много драгоценных камней."
 
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
+#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
@@ -2335,12 +2342,6 @@ msgstr ""
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
 #. Ironwood Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
 #. Tree
@@ -2404,7 +2405,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1501
 msgid ""
 "This tree is only planted by the amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Эти деревья могут быть посажены только амазонками, но могут быть пущены на бревна."
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Headquarters
 #: ../../data/tribes/initialization/atlanteans/units.lua:1357
@@ -2424,7 +2425,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Ваши рабочие и солдаты могут здесь укрыться, а также хранить здесь товары и инструмент."
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1373
@@ -2440,7 +2441,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Как и штаб, порт может быть атакован и разрушен врагом. Советуем послать солдат на его охрану."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
 #: ../../data/tribes/initialization/atlanteans/units.lua:1384
@@ -2454,10 +2455,10 @@ msgctxt "atlanteans_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr "Каменоломне для работы нужны скалы в рабочей области."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
-#. Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
+#. Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site:
 #. Woodcutter's House
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
@@ -2477,9 +2478,9 @@ msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
 msgstr "Домику лесоруба нужны деревья для рубки в рабочей области."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
@@ -2532,14 +2533,14 @@ msgid ""
 "‘Only after the last duck has been shot down<br>Only after the last deer has"
 " been put to death<br>Only after the last fish has been caught<br>Then will "
 "you find that spiders are not to be eaten.’"
-msgstr ""
+msgstr "\"Паука и захочешь – не съешь\""
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Fish
 #. Breeder's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1429
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fish breeders"
-msgstr ""
+msgstr "Рыбоводческая пословица"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Fish
 #. Breeder's House
@@ -2548,8 +2549,8 @@ msgctxt "building"
 msgid "Breeds fish."
 msgstr "Разводит рыбу."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
@@ -2567,8 +2568,8 @@ msgctxt "atlanteans_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "Домику охотника нужны звери в его рабочей области."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1447
@@ -2591,10 +2592,10 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Прежде чем отправить туда разведчика, соедините флаг с его домиком."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
@@ -2636,7 +2637,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "When no cornmeal is required, the mill will try to produce blackroot flour "
 "even when there is no demand for it."
-msgstr ""
+msgstr "Без затребования кукурузной муки мельница будет молоть козельцовую муку, если ей не запретить."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1494
@@ -2644,11 +2645,11 @@ msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Печёт хлеб, чтобы накормить разведчиков и шахтеров и тренировать солдат."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
+#. Kiln
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
@@ -2766,11 +2767,11 @@ msgctxt "atlanteans_building"
 msgid "Carves precious stones out of the rock in mountain terrain."
 msgstr "Высекает ценные камни из скал в горной местности."
 
+#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
@@ -2786,13 +2787,13 @@ msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Выкапывает уголь из-под земли в горной местности."
 
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
@@ -2808,11 +2809,11 @@ msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "Выкапывает железную руду из-под земли, в горной местности."
 
+#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
@@ -2866,7 +2867,7 @@ msgstr "Тренирует солдат в навыках Защиты, Укло
 #: ../../data/tribes/initialization/atlanteans/units.lua:1685
 msgctxt "atlanteans_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Солдаты гарнизона расширяют ваши владения."
 
 #. TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
 #. TRANSLATORS: Note helptext for an atlantean military site: Guardhall
@@ -2885,10 +2886,10 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Если у вас не достаточно солдат для контроля военных зданий, используйте стрелку, направленную вниз, чтобы уменьшить численность солдат в гарнизоне. Кроме того, можно просто выгнать солдата щелчком мыши."
 
-#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1696
@@ -2897,10 +2898,10 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2128
 msgctxt "building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Строит паромы."
 
-#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
@@ -2909,10 +2910,10 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2130
 msgctxt "building"
 msgid "Needs water nearby."
-msgstr ""
+msgstr "Нет воды поблизости."
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1705
@@ -2963,13 +2964,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Reed is produced in a reed yard and used to make the roofs of buildings "
 "waterproof."
-msgstr ""
+msgstr "Тростник растет на тростниковых фермах, им выстилают крыши зданий для защиты от воды."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Cloth
 #: ../../data/tribes/initialization/barbarians/units.lua:150
 msgctxt "barbarians_ware"
 msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
-msgstr ""
+msgstr "Для судов варваров необходимо сукно. Делают его из тростника."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Fish
 #: ../../data/tribes/initialization/barbarians/units.lua:161
@@ -3041,8 +3042,8 @@ msgid ""
 "inns to prepare meals."
 msgstr "Воины с арены поединков признают только это пиво. Некоторые даже считают, что в этом пиве кроется вся сила Варваров. Оно помогает тренировке солдат уклонению с 0 до 1 и до 2 уровней. Крепкое пиво также используется для приготовления обедов в гостиницах."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:234
 #: ../../data/tribes/initialization/empire/units.lua:242
@@ -3090,7 +3091,7 @@ msgstr "Обычно варвары пользуются углем для по�
 #: ../../data/tribes/initialization/barbarians/units.lua:283
 msgctxt "barbarians_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Из нее в литейной выплавляют железо."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:296
@@ -3098,7 +3099,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr ""
+msgstr "Железо получают в литейной и используют в кузнице, топорной мастерской, военной фабрике и шлемной мастерской."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:309
@@ -3106,7 +3107,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Она переплавляется в литейной в золото, которое используется как ценнейший строительный материал, а также в производстве оружия и доспехов."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:322
@@ -3116,7 +3117,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr ""
+msgstr "Только самые важные вещи украшают золотом. Его выплавляют в литейной и используются как драгоценный строительный материал, в ковке разных топоров (на военной фабрике) и разных частей доспехов (в шлемной мастерской)."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Pick
 #: ../../data/tribes/initialization/barbarians/units.lua:335
@@ -3134,7 +3135,7 @@ msgid ""
 "Felling axes are used by lumberjacks and produced in the metal workshop (but"
 " cease to be produced by the building if it is enhanced to an ax workshop "
 "and war mill)."
-msgstr ""
+msgstr "Топоры по дереву используются дровосеками и производятся в кузнице (но производство прекращается при улучшении кузницы до топорной мастерской или военной фабрики)."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:360
@@ -3172,8 +3173,8 @@ msgid ""
 "mill)."
 msgstr "Это один из основных инструментов, производящихся в кузнице (но производство прекращается при улучшении здания до топорной мастерской или военной фабрики)."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:397
 #: ../../data/tribes/initialization/empire/units.lua:423
@@ -3216,7 +3217,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, snacks and meals. Be sure to"
 " have a metal workshop to produce this basic tool (but it ceases to be "
 "produced by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Кухонная утварь нужна для приготовления пайков, закуски и обедов. Убедитесь, что кузница производит эти базовые вещи (до перестройки кузницы в топорную мастерскую и военную фабрику)."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:447
@@ -3225,7 +3226,7 @@ msgid ""
 "They are used in the smelting works and produced by the metal workshop (but "
 "they cease to be produced by the building if it is enhanced to an ax "
 "workshop and war mill)."
-msgstr ""
+msgstr "Используются в литейной, производятся в кузнице (до ее перестройки в топорную мастерскую и военную фабрику)."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Ax
 #: ../../data/tribes/initialization/barbarians/units.lua:460
@@ -3300,7 +3301,7 @@ msgid ""
 "A mask is an enhanced armor for Barbarian soldiers. It is produced in the "
 "helm smithy and used in the training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Забрало дает лучшую защиту воинам варваров. Производятся в шлемной мастерской и используются в тренировочном лагере – вместе с едой – для повышения уровня живучести солдат с 1 до 2."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Warhelm
 #: ../../data/tribes/initialization/barbarians/units.lua:532
@@ -3309,7 +3310,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in a helm smithy "
 "and used in a training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
-msgstr ""
+msgstr "Самый лучший из всех шлемов варваров. Производится в шлемной мастерской и используется, вместе с едой, в тренировочном лагере для тренировки солдат здоровью со 2 до 3 уровня."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Carrier
 #: ../../data/tribes/initialization/barbarians/units.lua:548
@@ -3321,7 +3322,7 @@ msgstr "Переносит грузы по Вашим дорогам."
 #: ../../data/tribes/initialization/barbarians/units.lua:555
 msgctxt "barbarians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Суда перевозит товары через реку."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Ox
 #: ../../data/tribes/initialization/barbarians/units.lua:564
@@ -3370,7 +3371,7 @@ msgstr "Замешивает цемент из гранита, воды и уг�
 #: ../../data/tribes/initialization/barbarians/units.lua:616
 msgctxt "barbarians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Сажает и собирает тростник с полей."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Weaver
 #: ../../data/tribes/initialization/barbarians/units.lua:623
@@ -3414,7 +3415,7 @@ msgstr "Засеивает поля."
 #: ../../data/tribes/initialization/barbarians/units.lua:668
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Печет лепешки для шахтеров, солдат и разведчиков."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Brewer
 #: ../../data/tribes/initialization/barbarians/units.lua:675
@@ -3502,34 +3503,34 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "Разведчики, такие как разведчик Ерофей Павлович Разведчиков, разведывательно разведывают неразведанные земли с стиле разведчиков."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:852
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid "This reed field has just been planted."
-msgstr ""
+msgstr "Тростниковое поле засеено."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/barbarians/units.lua:866
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is growing."
-msgstr ""
+msgstr "Тростник растет."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:873
 #: ../../data/tribes/initialization/frisians/units.lua:1255
 msgid "This reed field is ready for harvesting."
-msgstr ""
+msgstr "Тростник убран с поля."
 
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:928
 #: ../../data/tribes/initialization/barbarians/units.lua:972
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
+msgstr "Гранит - это основной строительный материал. Он может быть добыт в гранитной шахте."
 
 #. TRANSLATORS: Lore helptext for a barbarian warehouse: Headquarters
 #: ../../data/tribes/initialization/barbarians/units.lua:1086
@@ -3538,7 +3539,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr ""
+msgstr "\"Высотой со склоны Кал'маврата, красивее самых искусных доспехов и надежная, как наши предки, таким представлялся нам дворец Чат'Карута.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian warehouse: Headquarters
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Barrier
@@ -3548,7 +3549,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1716
 msgctxt "barbarians_building"
 msgid "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"
-msgstr ""
+msgstr "Баллада \"Битва за Кал'маврат\", за авторством барда Хакора."
 
 #. TRANSLATORS: Purpose helptext for a barbarian warehouse: Headquarters
 #: ../../data/tribes/initialization/barbarians/units.lua:1090
@@ -3568,7 +3569,7 @@ msgstr "Штаб — это ваше главное здание."
 #: ../../data/tribes/initialization/barbarians/units.lua:1108
 msgctxt "barbarians_building"
 msgid "‘Who still owns a warehouse is not yet defeated!’"
-msgstr ""
+msgstr "\"У кого есть склад, то еще не побежден!\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian warehouse: Warehouse
 #: ../../data/tribes/initialization/barbarians/units.lua:1110
@@ -3576,7 +3577,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
 "headquarters in the battle around the heights of Kal’Megarath"
-msgstr ""
+msgstr "Бертран, маршал Чат'Карута,<br>об утрате штаба в битве за высоты Кал‘Мегарат"
 
 #. TRANSLATORS: Purpose helptext for a barbarian warehouse: Warehouse
 #: ../../data/tribes/initialization/barbarians/units.lua:1112
@@ -3584,14 +3585,14 @@ msgctxt "barbarians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Это укрытие для ваших работников и солдат. Также хранит ваши товары и инструменты."
 
 #. TRANSLATORS: Lore helptext for a barbarian warehouse: Port
 #: ../../data/tribes/initialization/barbarians/units.lua:1119
 msgctxt "barbarians_building"
 msgid ""
 "‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
-msgstr ""
+msgstr "\"Я предпочту корабельные доски любой, сколь угодно надежной крепости.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian warehouse: Port
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Shipyard
@@ -3599,7 +3600,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1767
 msgctxt "barbarians_building"
 msgid "Captain Thanlas the Elder,<br>Explorer"
-msgstr ""
+msgstr "Капитан Старый Танлас,<br> исследователь"
 
 #. TRANSLATORS: Purpose helptext for a barbarian warehouse: Port
 #: ../../data/tribes/initialization/barbarians/units.lua:1123
@@ -3615,19 +3616,19 @@ msgctxt "barbarians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Как и штаб, порт может быть атакован и разрушен врагом. Советуем послать солдат на его охрану."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Quarry
 #: ../../data/tribes/initialization/barbarians/units.lua:1134
 msgctxt "barbarians_building"
 msgid "‘We open up roads and make houses from mountains.’"
-msgstr ""
+msgstr "\"Открываем пути и горы обращаем в дома.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Quarry
 #: ../../data/tribes/initialization/barbarians/units.lua:1136
 msgctxt "barbarians_building"
 msgid "Slogan of the stonemasons’ guild"
-msgstr ""
+msgstr "Девиз гильдии каменщиков"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
 #: ../../data/tribes/initialization/barbarians/units.lua:1138
@@ -3727,7 +3728,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "Частый ответ рыбака-варвара,<br> за которым следует веселая драка."
 
 #. TRANSLATORS: Purpose helptext for production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1184
@@ -3783,7 +3784,7 @@ msgstr "Охотник делает перерыв в работе на %s."
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
-msgstr ""
+msgstr "\"Животных любит он, растит, и бережет<br>Мы тоже любим — и спешим мясцом набить живот\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
@@ -3818,7 +3819,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21ˢᵗ year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Песня барда Сигурда, сочиненная им во время первого дождя после Великой Засухи на 21-й год правления Чат'Карута."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/barbarians/units.lua:1229
@@ -3832,7 +3833,7 @@ msgctxt "barbarians_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
 "here."
-msgstr ""
+msgstr "Соедините узел со штабом разведки, чтобы выслать разведчика."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1237
@@ -3840,14 +3841,14 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Behind the next hill there might be wealth and happiness but also hostility"
 " and doom.<br>He who will not explore it commits the crime of stupidity.’"
-msgstr ""
+msgstr "\"За тем холмом нас равно ждут как богатство, так и гибель.<br> Так чего тут ждать?\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Scout's
 #. Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1239
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Чат'Карут<br>на церемонии посвящения первого разведчика"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1250
@@ -3855,7 +3856,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
 "but the shaft of the ax burst into a thousand pieces.’"
-msgstr ""
+msgstr "\"Когда он рубанул дверь топором, <br>дверь лишь зазвенела, а рукоять его топора разлетелась в щепки.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Wood
 #. Hardener
@@ -3864,7 +3865,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr ""
+msgstr "Легенда о ссоре между Хатором и его братом Мантором,<br>который, по слухам, изобрел балки."
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Wood
 #. Hardener
@@ -3901,7 +3902,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Reed is the traditional material for roofing, and it is woven into the "
 "extremely durable cloth that they use for their ships’ sails."
-msgstr ""
+msgstr "Тростник - традиционный кровельный материал, а также из него плетут чрезвычайно прочное сукно, идущее на изготовление парусов."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Reed
 #. Yard
@@ -3909,7 +3910,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of reed in about %s on average."
-msgstr ""
+msgstr "Плантация может производить сноп кровельного тростника примерно за %s, в среднем."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Lime Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1277
@@ -3958,7 +3959,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who has enough bread will never be too tired to dig the ore and wield "
 "the ax.’"
-msgstr ""
+msgstr "\"Запасись хлебом, и ни копка руды, ни махание топором не утомит тебя.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Bakery
 #: ../../data/tribes/initialization/barbarians/units.lua:1294
@@ -3966,7 +3967,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr ""
+msgstr "Кантарак, \"Современная варварская экономика\",<br>издание 3е, воловья кожа, глава \"Ремесла и торговля\""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Bakery
 #: ../../data/tribes/initialization/barbarians/units.lua:1296
@@ -4024,13 +4025,13 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr ""
+msgstr "‘Когда был варвар сотворен, <br>первым вот что молвил он:<br> \"Чтоб ничего мне не бояться, <br>пивом надо бы ужраться!\"’"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1323
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
-msgstr ""
+msgstr "Первая версия застольной песни \"Путь варвара\""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Brewery
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
@@ -4044,16 +4045,16 @@ msgstr "Производит пиво, чтобы поддерживать ша�
 #: ../../data/tribes/initialization/barbarians/units.lua:1332
 msgctxt "barbarians_building"
 msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
-msgstr ""
+msgstr "\"Свежие поставки с деревни: хлеб, рыба и дичь.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1334
 msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
-msgstr ""
+msgstr "Меню таверны \"Старый бронзовый топор\""
 
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1336
 #: ../../data/tribes/initialization/empire/units.lua:1280
@@ -4066,13 +4067,13 @@ msgstr "Готовит пайки для питания разведчиков �
 #: ../../data/tribes/initialization/barbarians/units.lua:1343
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
-msgstr ""
+msgstr "\"Рацион шахтера: лепешка с мясом или рыбой, сверху кружка пива.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1345
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
-msgstr ""
+msgstr "Совет поварам из книги \"Песни старшего шахтера\""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1347
@@ -4088,13 +4089,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr ""
+msgstr "\"Сезонная рыба и дичь особо хороши к лепешкам.<br> Всегда лучшее пиво от местных самоваров.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1356
 msgctxt "barbarians_building"
 msgid "Menu of ‘The Laughing Barbarian’"
-msgstr ""
+msgstr "Меню \"Гогочущего варвара\""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1358
@@ -4113,14 +4114,14 @@ msgid ""
 "sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
 "shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
 "burner’s soul.’"
-msgstr ""
+msgstr "\"Чем же занят углежог?<br>На племя труд его тяжел. <br>Складается костер его высоко, <br>под небо печь вздымает огонь. <br>Он возжигает пламя, <br>Что бревна опаляя<br> Душу углежога закаляет <br>и дает его племени угля.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Charcoal
 #. Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1374
 msgctxt "barbarians_building"
 msgid "Song of the charcoal burners"
-msgstr ""
+msgstr "Песня углежогов"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Smelting Works
 #: ../../data/tribes/initialization/barbarians/units.lua:1383
@@ -4128,14 +4129,14 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr ""
+msgstr "\"Из ничтожных камешков они образуют чистое золото и блестящее железо.<br>Литейщики настоящие кудесники нашего племени.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Smelting
 #. Works
 #: ../../data/tribes/initialization/barbarians/units.lua:1386
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
-msgstr ""
+msgstr "Чат'Карут,<br>5я конференция ремесленников."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1395
@@ -4258,13 +4259,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don’t ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr ""
+msgstr "\"Не спрашивай, что племя может тебе дать. Спрашивай, что ты можешь дать племени!\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Barracks
 #: ../../data/tribes/initialization/barbarians/units.lua:1450
 msgctxt "barbarians_building"
 msgid "Famous barbarian recruitment poster"
-msgstr ""
+msgstr "Известный плакат, призывающий солдат в армию"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Barracks
 #: ../../data/tribes/initialization/barbarians/units.lua:1452
@@ -4277,7 +4278,7 @@ msgstr "Снаряжает новобранцев и тренирует их д�
 msgctxt "barbarians_building"
 msgid ""
 "‘The smart leader builds roads, while the really wise leader breeds cattle.’"
-msgstr ""
+msgstr "\"Умный лидер строит дороги. Мудрый же лидер строит замки.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Cattle
 #. Farm
@@ -4286,7 +4287,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr ""
+msgstr "Кантарак, \"Современная варварская экономика\",<br> издание 5ое, воловья кожа, глава \"Транспорт и логистика\""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Cattle Farm
 #: ../../data/tribes/initialization/barbarians/units.lua:1465
@@ -4311,13 +4312,13 @@ msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
 "golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
 "warriors!’"
-msgstr ""
+msgstr "\"Отсюда и за горизонт уходят поля – огромное, колосящееся, золотое море.<br>О пшеница, источник богатство, пива душа, сила наших воинов!\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Farm
 #: ../../data/tribes/initialization/barbarians/units.lua:1477
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
-msgstr ""
+msgstr "Строка из песни жнецов \"Богатство полей\""
 
 #. TRANSLATORS: Purpose helptext for production site: Farm
 #. TRANSLATORS: Purpose helptext for an empire production site: Farm
@@ -4345,7 +4346,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1490
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Девиз \"Шлемной манифактуры Харрата\" в Ал'тунране"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Helm Smithy
 #: ../../data/tribes/initialization/barbarians/units.lua:1492
@@ -4663,13 +4664,13 @@ msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
 "were young and carefree. We just relished our freedom and the responsibility"
 " as an outpost.’"
-msgstr ""
+msgstr "\"Мы едва помещались вдвоем в тесном бревенчатом срубе. Но мы были молоды и беззаботны. Мы наслаждались свободой и ответственностью заставы.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Sentry
 #: ../../data/tribes/initialization/barbarians/units.lua:1689
 msgctxt "barbarians_building"
 msgid "Boldreth,<br>about his time as young soldier"
-msgstr ""
+msgstr "Болдрет,<br>о своем бытии салагой"
 
 #. TRANSLATORS: Purpose helptext for a barbarian military site: Sentry
 #. TRANSLATORS: Purpose helptext for a barbarian military site: Barrier
@@ -4683,7 +4684,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1744
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Солдаты гарнизона расширяют ваши владения."
 
 #. TRANSLATORS: Note helptext for a barbarian military site: Sentry
 #. TRANSLATORS: Note helptext for a barbarian military site: Barrier
@@ -4700,7 +4701,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Если у вас не достаточно солдат для контроля военных зданий, используйте стрелку, направленную вниз, чтобы уменьшить численность солдат в гарнизоне. Кроме того, можно просто выгнать солдата щелчком мыши."
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Barrier
 #: ../../data/tribes/initialization/barbarians/units.lua:1700
@@ -4708,7 +4709,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘When we looked down to the valley from our newly established barrier, we "
 "felt that the spirit of our fathers was with us.’"
-msgstr ""
+msgstr "\"Смотря на долину из нового форпоста, мы чувствовали единение с душами наших предков.\""
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Tower
 #: ../../data/tribes/initialization/barbarians/units.lua:1714
@@ -4717,7 +4718,7 @@ msgid ""
 "‘From the height of our tower we could see far into enemy territory. The "
 "enemy was well prepared, but we also noticed some weak points in their "
 "defense.’"
-msgstr ""
+msgstr "\"С нашей башни мы видели немало вражеской земли. Как бы ни был враг подготовлен, мы заметили ряд уязвимостей.\""
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Fortress
 #: ../../data/tribes/initialization/barbarians/units.lua:1727
@@ -4725,13 +4726,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘This stronghold made from blackwood and stones will be a hard nut to crack "
 "for them.’"
-msgstr ""
+msgstr "\"Оплот из балок и камня может оказаться и не по зубам.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Fortress
 #: ../../data/tribes/initialization/barbarians/units.lua:1729
 msgctxt "barbarians_building"
 msgid "Berthron,<br>chief military adviser of Chat’Karuth"
-msgstr ""
+msgstr "Бертрон, <br>маршал Чат'Карута."
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Citadel
 #: ../../data/tribes/initialization/barbarians/units.lua:1740
@@ -4740,14 +4741,14 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr ""
+msgstr "\"Цитадель Адлена есть вершина варварского зодчества. Никто не возводил столь мощные, большие и красивые укрепления за столь короткое время.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Citadel
 #: ../../data/tribes/initialization/barbarians/units.lua:1742
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr ""
+msgstr "Колинтан, главный архитектор цитадели Адлена,<br>на церемонии открытия"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Shipyard
 #: ../../data/tribes/initialization/barbarians/units.lua:1764
@@ -4756,7 +4757,7 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr ""
+msgstr "Когда я впервые увидел Сакснот, её величественная голова уже смотрела в небеса, а корабел ставил квадратный парус. <br>Это был благороднейший из виденных мной кораблей.\""
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Weaving Mill
 #: ../../data/tribes/initialization/barbarians/units.lua:1776
@@ -4764,7 +4765,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr ""
+msgstr "\"Прекрасные ткани и драгоценные камни не производят на варваров особого впечатления.<br>А благородный парус радует их глаза.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Weaving
 #. Mill
@@ -4773,13 +4774,13 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr ""
+msgstr "Кантарак, \"Современная варварская экономика\",<br> пергамент 9й \"Мореходство и Завоевание\""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Weaving Mill
 #: ../../data/tribes/initialization/barbarians/units.lua:1781
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of reed."
-msgstr ""
+msgstr "Плетет сукно из тростника."
 
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:95
@@ -4800,7 +4801,7 @@ msgstr "Варварские дровосеки валят деревья; ле�
 #: ../../data/tribes/initialization/empire/units.lua:120
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Они производятся из брёвен на лесопилке."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 3
 #: ../../data/tribes/initialization/empire/units.lua:122
@@ -4853,7 +4854,7 @@ msgctxt "empire_ware"
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Пшеница прастет на ферме и используется на мельнице и в пекарне. Ослиной ферме, овцеферме и свиноферме также требуются поставки пшеницы."
 
 #. TRANSLATORS: Helptext for an empire ware: Flour
 #: ../../data/tribes/initialization/empire/units.lua:198
@@ -4940,7 +4941,7 @@ msgstr "Углем, имперцы поддерживают огонь в лит
 #: ../../data/tribes/initialization/empire/units.lua:300
 msgctxt "empire_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Из нее в литейной выплавляют железо."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 2
 #: ../../data/tribes/initialization/empire/units.lua:313
@@ -4948,7 +4949,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Weapons, armor and tools are made of "
 "iron."
-msgstr ""
+msgstr "Производится в литейной. Оружие, доспехи и инструменты делаются из железа."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/empire/units.lua:326
@@ -4956,7 +4957,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Она переплавляется в литейной в золото, которое используется как ценнейший строительный материал, а также при производстве оружия и доспехов."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 2
 #: ../../data/tribes/initialization/empire/units.lua:339
@@ -4964,7 +4965,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
 " gold in the armor smithy and the weapon smithy."
-msgstr ""
+msgstr "Выплавляется в литейной. В бронной и оружейной золотом украшают оружие и доспехи."
 
 #. TRANSLATORS: Helptext for an empire ware: Pick
 #: ../../data/tribes/initialization/empire/units.lua:352
@@ -4978,7 +4979,7 @@ msgstr "Кирки используются камнетесами и шахтё
 #: ../../data/tribes/initialization/empire/units.lua:364
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
-msgstr ""
+msgstr "Эти топоры используются дровосеками, куется в кузнице."
 
 #. TRANSLATORS: Helptext for an empire ware: Saw
 #: ../../data/tribes/initialization/empire/units.lua:374
@@ -5008,7 +5009,7 @@ msgstr "Геологи, строители, оружейники и бронни
 #: ../../data/tribes/initialization/empire/units.lua:425
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Производятся инструментальщиком."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 2
 #: ../../data/tribes/initialization/empire/units.lua:438
@@ -5036,13 +5037,13 @@ msgctxt "empire_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. They are produced "
 "in a toolsmithy and used in taverns and inns."
-msgstr ""
+msgstr "Кухонная утварь нужна для готовки пайков и обедов. Поставляется кузницей в таверны и трактиры."
 
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/empire/units.lua:482
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Используется в литейной, куется в мастерской."
 
 #. TRANSLATORS: Helptext for an empire ware: Wooden Spear
 #: ../../data/tribes/initialization/empire/units.lua:495
@@ -5136,7 +5137,7 @@ msgstr "Переносит грузы по Вашим дорогам."
 #: ../../data/tribes/initialization/empire/units.lua:589
 msgctxt "empire_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Суда перевозит товары через реку."
 
 #. TRANSLATORS: Helptext for an empire worker: Donkey
 #: ../../data/tribes/initialization/empire/units.lua:598
@@ -5355,17 +5356,17 @@ msgstr "Виноград готов к сбору."
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
-msgstr ""
+msgstr "Мрамор – это основной строительный материал. Он может быть добыт в мраморной шахте. Там же вы будете добывать гранит."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/empire/units.lua:971
 msgid "There is only a little bit of marble here."
-msgstr ""
+msgstr "Здесь есть немного мрамора."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/empire/units.lua:1015
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "Здесь много мрамора."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
 #: ../../data/tribes/initialization/empire/units.lua:1127
@@ -5400,7 +5401,7 @@ msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Ваши рабочие и солдаты могут здесь укрыться, а также хранить здесь товары и инструмент."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/tribes/initialization/empire/units.lua:1152
@@ -5416,7 +5417,7 @@ msgctxt "empire_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Как и штаб, порт может быть атакован и разрушен врагом. Советуем послать солдат на его охрану."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Quarry
 #: ../../data/tribes/initialization/empire/units.lua:1163
@@ -5435,7 +5436,7 @@ msgstr "Каменоломне для работы нужны скалы в ра
 #: ../../data/tribes/initialization/empire/units.lua:1174
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Лесорубу требуются деревья под рубку в рабочей области."
 
 #. TRANSLATORS: Note helptext for an empire production site: Forester's House
 #: ../../data/tribes/initialization/empire/units.lua:1183
@@ -5468,7 +5469,7 @@ msgctxt "empire_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Прежде чем отправить туда разведчика, соедините флаг с его домиком."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Stonemason's
 #. House
@@ -5531,7 +5532,7 @@ msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Готовит пайки для разведчиков, и пайки, закуски для питания шахтеров во всех видах шахт."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Inn
 #: ../../data/tribes/initialization/empire/units.lua:1291
@@ -5673,7 +5674,7 @@ msgstr "Снаряжает солдат всем необходимым оруж
 #: ../../data/tribes/initialization/empire/units.lua:1538
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Используйте солдат, для того чтобы расширить вашу территорию."
 
 #. TRANSLATORS: Note helptext for an empire military site: Blockhouse
 #. TRANSLATORS: Note helptext for an empire military site: Sentry
@@ -5694,7 +5695,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Если у вас не достаточно солдат для контроля военных зданий, используйте стрелку, направленную вниз, чтобы уменьшить численность солдат в гарнизоне. Кроме того, можно просто выгнать солдата щелчком мыши."
 
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:101
@@ -5704,7 +5705,7 @@ msgid ""
 " are also used in the blacksmithy to build basic tools, and in the charcoal "
 "kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
 " and fish."
-msgstr ""
+msgstr "Лесорубы валят деревья; егери сохраняют деревья. Брёвна также используются в кузнице для  создания основных инструментов и в печи углежога для производства угля. Коптильня коптит мясо и рыбу на огне с бревен."
 
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:114
@@ -5720,7 +5721,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Clay is made out of water and mud to be turned into bricks, used in ship "
 "construction and to improve the charcoal kiln."
-msgstr ""
+msgstr "Глину месят из воды и грязи, превращают в кирпичи, используют в постройке судов и для улучшения печей углежога."
 
 #. TRANSLATORS: Helptext for a frisian ware: Brick
 #: ../../data/tribes/initialization/frisians/units.lua:133
@@ -5728,7 +5729,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bricks are the best and most important building material. They are made out "
 "of a mix of clay and granite dried in a coal fire."
-msgstr ""
+msgstr "Кирпичи - самый лучший и самый важный стройматериал. Получаются при обжиге смеси глины и гранитной крошки в печи."
 
 #. TRANSLATORS: Helptext for a frisian ware: Reed
 #: ../../data/tribes/initialization/frisians/units.lua:141
@@ -5745,14 +5746,14 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur is won from reindeer in a reindeer farm. It is woven into cloth or "
 "turned into fur garments for soldiers."
-msgstr ""
+msgstr "Мех состригают с оленей на оленьих выгонах. Из него шьют меховую одежду для солдат."
 
 #. TRANSLATORS: Helptext for a frisian ware: Cloth
 #: ../../data/tribes/initialization/frisians/units.lua:159
 msgctxt "frisians_ware"
 msgid ""
 "Cloth is needed for ships. It is produced out of reindeer fur and reed."
-msgstr ""
+msgstr "Для судов необходимо сукно. Плетут его из оленьего пуха и тростника."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fruit
 #: ../../data/tribes/initialization/frisians/units.lua:170
@@ -5760,7 +5761,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
 "used for rations and for feeding the fish at the aqua farms."
-msgstr ""
+msgstr "Фрукты собирает с ягодных кустов сборщик. Их используют для приготовления пайков и для кормления рыб в аквафермах."
 
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:181
@@ -5768,7 +5769,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Water is used to bake bread and brew beer. Reindeer farms and aqua farms "
 "also consume it."
-msgstr ""
+msgstr "Воду используют в хлебопечении и варке пива. Оленьи выгулы и рыбные пруды в ней также нуждаются."
 
 #. TRANSLATORS: Helptext for a frisian ware: Barley
 #: ../../data/tribes/initialization/frisians/units.lua:190
@@ -5776,7 +5777,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Barley is a slow-growing grain that is used for baking bread and brewing "
 "beer. It is also eaten by reindeer."
-msgstr ""
+msgstr "Ячмень это долго растущая культура, используемая в выпечке хлеба и варке пива. Также его едят олени."
 
 #. TRANSLATORS: Helptext for a frisian ware: Honey
 #: ../../data/tribes/initialization/frisians/units.lua:198
@@ -5784,7 +5785,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Honey is produced by bees belonging to a beekeeper. It is used to bake honey"
 " bread and brew mead."
-msgstr ""
+msgstr "Мед поставляется с пасек. Используется для выпечки пряников и варки медовухи."
 
 #. TRANSLATORS: Helptext for a frisian ware: Bread
 #: ../../data/tribes/initialization/frisians/units.lua:207
@@ -5792,7 +5793,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bread is made out of barley and water and is used in the taverns to prepare "
 "rations. It is also consumed by training soldiers."
-msgstr ""
+msgstr "Хлеб готовят из воды и ячменя и поставляют в таверны для приготовления пайков. Котируется солдатами на тренировках."
 
 #. TRANSLATORS: Helptext for a frisian ware: Honey Bread
 #: ../../data/tribes/initialization/frisians/units.lua:216
@@ -5800,7 +5801,7 @@ msgctxt "frisians_ware"
 msgid ""
 "This bread is sweetened with honey. It is consumed by the most experienced "
 "miners and in advanced soldier training."
-msgstr ""
+msgstr "Хлеб, подслащенный медом. Поставляется опытнейшим шахтерам и для  глубоко обучаемых солдат."
 
 #. TRANSLATORS: Helptext for a frisian ware: Beer
 #: ../../data/tribes/initialization/frisians/units.lua:225
@@ -5808,7 +5809,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Beer is produced in breweries and used in drinking halls to produce meals. "
 "Soldiers drink beer while receiving basic training."
-msgstr ""
+msgstr "Пиво варят из ячменя и воды, и используют в питейных залах для приготовления пайков. Солдаты пьют пиво после базовой тренировки."
 
 #. TRANSLATORS: Helptext for a frisian ware: Mead
 #: ../../data/tribes/initialization/frisians/units.lua:234
@@ -5816,7 +5817,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Mead is produced by mead breweries. Soldiers drink mead during advanced "
 "training."
-msgstr ""
+msgstr "Медовуху варят на медоварнях. Пьется солдатами на учениях повышенной сложности."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fish
 #: ../../data/tribes/initialization/frisians/units.lua:243
@@ -5832,7 +5833,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to taverns, "
 "drinking halls and training sites."
-msgstr ""
+msgstr "Мясо коптят в коптильнях перед тем, как отправить в таверны, питьевые залы и тренировочные центры."
 
 #. TRANSLATORS: Helptext for a frisian ware: Smoked Fish
 #: ../../data/tribes/initialization/frisians/units.lua:264
@@ -5848,7 +5849,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Рыбу коптят в коптильне. Копченая рыба потребляется солдатами на тренировках или превращается в пайки и обеды для шахтеров и разведчиков."
 
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:285
@@ -5856,7 +5857,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Rations are produced in taverns and drinking halls out of something to eat: "
 "Fruit, bread or smoked meat or fish."
-msgstr ""
+msgstr "Пайки готовят в тавернах и питейных залах из различной снеди: ягод, хлеба и/или копченостей вроде рыбы или мяса."
 
 #. TRANSLATORS: Helptext for a frisian ware: Meal
 #: ../../data/tribes/initialization/frisians/units.lua:295
@@ -5864,20 +5865,20 @@ msgctxt "frisians_ware"
 msgid ""
 "A meal is made out of honey bread and beer and either smoked fish or meat. "
 "It is consumed by miners in deep mines."
-msgstr ""
+msgstr "Обед готовят из пряников и пива с добавлением копченой рыбы или мяса. Их едят шахтеры в углубленных шахтах."
 
 #. TRANSLATORS: Helptext for a frisian ware: Coal, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:310
 msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr ""
+msgstr "Уголь обжигают углежоги, топят им горны в литейной и бронной."
 
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:323
 msgctxt "frisians_ware"
 msgid "It is smelted in a furnace to retrieve the iron."
-msgstr ""
+msgstr "Из нее в литейной выплавляют железо."
 
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:336
@@ -5885,7 +5886,7 @@ msgctxt "frisians_ware"
 msgid ""
 "It is produced by the furnace. Tools and weapons are made of iron. It is "
 "also used as jewellery for fur garment armor to give it a silver shine."
-msgstr ""
+msgstr "Плавят в литейной. Из железа куют инструменты и оружие. Его также используют для придания блеска меховым доспехам."
 
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:349
@@ -5893,7 +5894,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "В литейной ее переплавляют в золото, которое потом будет использоваться в строительстве и отделке оружия и доспехов."
 
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:362
@@ -5902,7 +5903,7 @@ msgid ""
 "Only very important things are embellished with gold. It is produced by the "
 "furnace and is used to produce better swords and the best helmets. The best "
 "armor is also decorated with gold."
-msgstr ""
+msgstr "Только самые важные вещи украшают золотом. Его выплавляют в литейной и используются для отделки лучших мечей и шлемов. Также золотом украшают и лучшие доспехи."
 
 #. TRANSLATORS: Helptext for a frisian ware: Scrap Iron
 #. TRANSLATORS: Helptext for a frisian ware: Scrap metal (mixed)
@@ -5912,25 +5913,25 @@ msgctxt "frisians_ware"
 msgid ""
 "Discarded weapons and armor can be recycled in a recycling center to produce"
 " new tools, weapon and armor."
-msgstr ""
+msgstr "Снятое оружие и доспехи могут быть переплавлены в центре переработки, чтобы затем пустить металл на изготовление инструментов, оружия и доспехов."
 
 #. TRANSLATORS: Helptext for a frisian ware: Old Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:387
 msgctxt "frisians_ware"
 msgid "Old garments can be turned into fur in a recycling center."
-msgstr ""
+msgstr "Старую одежку можно пустить на мех в центре переработки."
 
 #. TRANSLATORS: Helptext for a frisian ware: Pick
 #: ../../data/tribes/initialization/frisians/units.lua:399
 msgctxt "frisians_ware"
 msgid "Picks are used by stonemasons and miners."
-msgstr ""
+msgstr "Кирки используются камнетесами и шахтёрами."
 
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:411
 msgctxt "frisians_ware"
 msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
-msgstr ""
+msgstr "Эти топоры используются дровосеками, куется в кузнице."
 
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:424
@@ -5938,7 +5939,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
-msgstr ""
+msgstr "Лопаты используют в садах, тростниковых фермах и лесники. Глинокопатели также нуждаются в них для копания почвы."
 
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:437
@@ -5946,31 +5947,31 @@ msgctxt "frisians_ware"
 msgid ""
 "Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
 "always got some in reserve! They are produced by the blacksmithy."
-msgstr ""
+msgstr "Геологи, строители, оружейники и бронники - всем нужен молоток. Убедитесь, что у вас всегда есть небольшой резерв! Он изготавливается кузнецом."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fishing Net
 #: ../../data/tribes/initialization/frisians/units.lua:447
 msgctxt "frisians_ware"
 msgid "Fishing nets are the tool used by fishers."
-msgstr ""
+msgstr "Невод - это рыбацкая сеть."
 
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:459
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr ""
+msgstr "Охотничьи копья производятся инструментальщиком."
 
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:472
 msgctxt "frisians_ware"
 msgid "Scythes are produced by the blacksmithy."
-msgstr ""
+msgstr "Косы производятся инструментальщиком."
 
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:485
 msgctxt "frisians_ware"
 msgid "Bread paddles are produced by the blacksmithy."
-msgstr ""
+msgstr "Хлебные поддоны изготавливаются инструментальщиком."
 
 #. TRANSLATORS: Helptext for a frisian ware: Kitchen Tools
 #: ../../data/tribes/initialization/frisians/units.lua:495
@@ -5978,7 +5979,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. The smoker also "
 "needs them."
-msgstr ""
+msgstr "Кухонная утварь нужна для готовки пайков и обедов. А также в коптильне."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:507
@@ -5986,7 +5987,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used in the furnace and the brick kiln and produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Клещи используются сталеваром и углежогом, куются в кузнице."
 
 #. TRANSLATORS: Helptext for a frisian ware: Basket
 #: ../../data/tribes/initialization/frisians/units.lua:517
@@ -5994,13 +5995,13 @@ msgctxt "frisians_ware"
 msgid ""
 "Baskets are needed by the fruit collector to gather berries. They are woven "
 "from reed and wood by the blacksmith."
-msgstr ""
+msgstr "Корзины используются сборщиком фруктов. Плетут их из тростника и дерева инструментальщики."
 
 #. TRANSLATORS: Helptext for a frisian ware: Needles
 #: ../../data/tribes/initialization/frisians/units.lua:526
 msgctxt "frisians_ware"
 msgid "Needles are used by seamstresses to sew cloth and fur garments."
-msgstr ""
+msgstr "Иглами швеи шьют полотно и меховую одежду."
 
 #. TRANSLATORS: Helptext for a frisian ware: Short sword
 #: ../../data/tribes/initialization/frisians/units.lua:538
@@ -6009,7 +6010,7 @@ msgid ""
 "This is the basic weapon of the Frisian soldiers. Together with a fur "
 "garment, it makes up the equipment of young soldiers. Short swords are "
 "produced by the small armor smithy."
-msgstr ""
+msgstr "Основное оружие солдат фризов. Наряду с меховой одеждой является базовым снаряжением новобранцев. Короткий меч куется в малой оружейной."
 
 #. TRANSLATORS: Helptext for a frisian ware: Long Sword
 #: ../../data/tribes/initialization/frisians/units.lua:547
@@ -6017,7 +6018,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
 "equipped with a long and a double-edged sword."
-msgstr ""
+msgstr "Длинным мечом вооружают солдат 1го уровня. На 4м уровне солдат вооружают еще и обоюдоострым мечом."
 
 #. TRANSLATORS: Helptext for a frisian ware: Broadsword
 #: ../../data/tribes/initialization/frisians/units.lua:556
@@ -6025,7 +6026,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
 "equipped with a broadsword and a double-edged sword."
-msgstr ""
+msgstr "Широкий меч - оружие солдат 2го уровня. На 5м уровне солдат вооружают еще и обоюдоострым мечом."
 
 #. TRANSLATORS: Helptext for a frisian ware: Double-edged Sword
 #: ../../data/tribes/initialization/frisians/units.lua:565
@@ -6033,7 +6034,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The double-edged sword is the weapon used by level 3 soldiers. Level 6 "
 "soldiers are equipped with two of these ferocious swords."
-msgstr ""
+msgstr "Обоюдоострый меч - оружие солдат 3го уровня. На 6м уровне их вооружают двумя такими грозными мечами."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:574
@@ -6041,7 +6042,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur can be sewn into garments. They are used as basic armor. All new "
 "soldiers are clothed in a fur garment."
-msgstr ""
+msgstr "Мех можно пустить на шитье одежды, которая дает базовую защиту. Все новобранцы одеты в меховую одежду."
 
 #. TRANSLATORS: Helptext for a frisian ware: Studded Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:583
@@ -6049,7 +6050,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Ordinary fur garments can be decorated with iron to give them a silvery "
 "shine. These clothes make good armor."
-msgstr ""
+msgstr "Украшенная железом меховая одежда, серебрится на солнце. Уже неплохая броня."
 
 #. TRANSLATORS: Helptext for a frisian ware: Golden Fur Garment
 #: ../../data/tribes/initialization/frisians/units.lua:592
@@ -6057,7 +6058,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Ordinary fur garments can be decorated with iron and gold. Such clothes are "
 "the best armor."
-msgstr ""
+msgstr "Украшенная железом и золотом меховая одежда. Отличная броня."
 
 #. TRANSLATORS: Helptext for a frisian ware: Helmet
 #: ../../data/tribes/initialization/frisians/units.lua:601
@@ -6065,7 +6066,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the small "
 "armor smithy and used to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Шлем — это базовый доспех. Куется в малой бронной и используется для повышения уровня здоровья солдат с 0 до 1."
 
 #. TRANSLATORS: Helptext for a frisian ware: Golden Helmet
 #: ../../data/tribes/initialization/frisians/units.lua:610
@@ -6073,7 +6074,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A golden helmet protects soldiers. It is produced in the large armor smithy "
 "and used to train soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Позолоченный шлем защищает голову солдата. Его куют в большой бронной и используют для повышения уровня здоровья солдат с 1 до 2."
 
 #. TRANSLATORS: Helptext for a frisian worker: Carrier
 #: ../../data/tribes/initialization/frisians/units.lua:626
@@ -6085,7 +6086,7 @@ msgstr "Переносит грузы по вашим дорогам."
 #: ../../data/tribes/initialization/frisians/units.lua:633
 msgctxt "frisians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Суда перевозит товары через реку."
 
 #. TRANSLATORS: Helptext for a frisian worker: Reindeer
 #: ../../data/tribes/initialization/frisians/units.lua:642
@@ -6093,19 +6094,19 @@ msgctxt "frisians_worker"
 msgid ""
 "Reindeer help to carry items along busy roads. They are reared in a reindeer"
 " farm."
-msgstr ""
+msgstr "Северный олень - гужевой транспорт на забитых дорогах. Выращиваются на оленьих выгулах."
 
 #. TRANSLATORS: Helptext for a frisian worker: Reindeer Breeder
 #: ../../data/tribes/initialization/frisians/units.lua:649
 msgctxt "frisians_worker"
 msgid "Breeds reindeer as carriers and for their fur."
-msgstr ""
+msgstr "Разводит северных оленей и стрижет с них мех."
 
 #. TRANSLATORS: Helptext for a frisian worker: Stonemason
 #: ../../data/tribes/initialization/frisians/units.lua:659
 msgctxt "frisians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Высекает грубые куски гранита из близлежащих скал."
 
 #. TRANSLATORS: Helptext for a frisian worker: Woodcutter
 #: ../../data/tribes/initialization/frisians/units.lua:666
@@ -6123,43 +6124,43 @@ msgstr "Сажает деревья."
 #: ../../data/tribes/initialization/frisians/units.lua:680
 msgctxt "frisians_worker"
 msgid "Makes clay out of mud and water."
-msgstr ""
+msgstr "Месит глину из грязи и воды."
 
 #. TRANSLATORS: Helptext for a frisian worker: Brickmaker
 #: ../../data/tribes/initialization/frisians/units.lua:687
 msgctxt "frisians_worker"
 msgid "Burns bricks out of clay and granite."
-msgstr ""
+msgstr "Обжигает кирпичи из глины и гранитной крошки."
 
 #. TRANSLATORS: Helptext for a frisian worker: Builder
 #: ../../data/tribes/initialization/frisians/units.lua:694
 msgctxt "frisians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Работает на строительных площадках, возводя новые здания."
 
 #. TRANSLATORS: Helptext for a frisian worker: Gardener
 #: ../../data/tribes/initialization/frisians/units.lua:701
 msgctxt "frisians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Сажает и собирает тростник с полей."
 
 #. TRANSLATORS: Helptext for a frisian worker: Seamstress
 #: ../../data/tribes/initialization/frisians/units.lua:708
 msgctxt "frisians_worker"
 msgid "Produces cloth and sews fur garments."
-msgstr ""
+msgstr "Производит сукно и шьет меховую одежду."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Seamstress
 #: ../../data/tribes/initialization/frisians/units.lua:715
 msgctxt "frisians_worker"
 msgid "Sews armor out of fur garments and metal."
-msgstr ""
+msgstr "Шьет тканную броню из меха и металла."
 
 #. TRANSLATORS: Helptext for a frisian worker: Shipwright
 #: ../../data/tribes/initialization/frisians/units.lua:722
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Работает на верфи и строит новые корабли."
 
 #. TRANSLATORS: Helptext for a frisian worker: Fisher
 #: ../../data/tribes/initialization/frisians/units.lua:732
@@ -6171,7 +6172,7 @@ msgstr "Ловит рыбу в море."
 #: ../../data/tribes/initialization/frisians/units.lua:739
 msgctxt "frisians_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr ""
+msgstr "Охотник добывает свежее сырое мясо для колонистов."
 
 #. TRANSLATORS: Helptext for a frisian worker: Farmer
 #: ../../data/tribes/initialization/frisians/units.lua:746
@@ -6183,7 +6184,7 @@ msgstr "Засеивает поля."
 #: ../../data/tribes/initialization/frisians/units.lua:753
 msgctxt "frisians_worker"
 msgid "Plants berry bushes."
-msgstr ""
+msgstr "Сажает ягодник."
 
 #. TRANSLATORS: Helptext for a frisian worker: Fruit Collector
 #: ../../data/tribes/initialization/frisians/units.lua:760
@@ -6195,43 +6196,43 @@ msgstr "Собирает ягоды"
 #: ../../data/tribes/initialization/frisians/units.lua:767
 msgctxt "frisians_worker"
 msgid "Refines meat and fish by smoking them."
-msgstr ""
+msgstr "Готовит мясо и рыбу путем копчения."
 
 #. TRANSLATORS: Helptext for a frisian worker: Beekeeper
 #: ../../data/tribes/initialization/frisians/units.lua:774
 msgctxt "frisians_worker"
 msgid "Lets bees swarm over flowers, then gathers the honey."
-msgstr ""
+msgstr "Выпускает рой пчел на поля для сбора меда."
 
 #. TRANSLATORS: Helptext for a frisian worker: Baker
 #: ../../data/tribes/initialization/frisians/units.lua:781
 msgctxt "frisians_worker"
 msgid "Bakes bread for miners and soldiers."
-msgstr ""
+msgstr "Печет хлеб для шахтеров и солдат."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Baker
 #: ../../data/tribes/initialization/frisians/units.lua:788
 msgctxt "frisians_worker"
 msgid "This baker is skilled enough to bake bread sweetened with honey."
-msgstr ""
+msgstr "Достаточно опытен, чтобы печь пряники, подслащая хлеб медом."
 
 #. TRANSLATORS: Helptext for a frisian worker: Brewer
 #: ../../data/tribes/initialization/frisians/units.lua:795
 msgctxt "frisians_worker"
 msgid "Brews beer."
-msgstr ""
+msgstr "Варит пиво."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Brewer
 #: ../../data/tribes/initialization/frisians/units.lua:802
 msgctxt "frisians_worker"
 msgid "Brews beer and mead."
-msgstr ""
+msgstr "Варит пиво и медовуху."
 
 #. TRANSLATORS: Helptext for a frisian worker: Landlady
 #: ../../data/tribes/initialization/frisians/units.lua:809
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Готовит пайки и обеды для шахтеров и разведчиков."
 
 #. TRANSLATORS: Helptext for a frisian worker: Geologist
 #: ../../data/tribes/initialization/frisians/units.lua:819
@@ -6245,38 +6246,38 @@ msgstr "Ищет ресурсы для добычи шахтерами."
 #: ../../data/tribes/initialization/frisians/units.lua:833
 msgctxt "frisians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Работает глубоко в шахтах, добывая уголь, железо, золото или гранит."
 
 #. TRANSLATORS: Helptext for a frisian worker: Charcoal Burner
 #: ../../data/tribes/initialization/frisians/units.lua:840
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
-msgstr ""
+msgstr "Обжигает бревна, получая уголь."
 
 #. TRANSLATORS: Helptext for a frisian worker: Smelter
 #: ../../data/tribes/initialization/frisians/units.lua:847
 msgctxt "frisians_worker"
 msgid "Smelts iron and gold at furnaces or recycling centers."
-msgstr ""
+msgstr "Плавит железо и золото в домне или центре по переработке."
 
 #. TRANSLATORS: Helptext for a frisian worker: Blacksmith
 #: ../../data/tribes/initialization/frisians/units.lua:854
 msgctxt "frisians_worker"
 msgid "Produces weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Производит оружие и доспехи для солдат и инструменты для рабочих."
 
 #. TRANSLATORS: Helptext for a frisian worker: Master Blacksmith
 #: ../../data/tribes/initialization/frisians/units.lua:861
 msgctxt "frisians_worker"
 msgid ""
 "Produces the best weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Производит лучшие оружие, доспехи и инструменты."
 
 #. TRANSLATORS: Helptext for a frisian worker: Soldier
 #: ../../data/tribes/initialization/frisians/units.lua:873
 msgctxt "frisians_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Оборона и завоевание!"
 
 #. TRANSLATORS: Helptext for a frisian worker: Trainer
 #: ../../data/tribes/initialization/frisians/units.lua:880
@@ -6288,7 +6289,7 @@ msgstr "Тренирует солдат."
 #: ../../data/tribes/initialization/frisians/units.lua:887
 msgctxt "frisians_worker"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Изучает незнакомые земли."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:912
@@ -6301,7 +6302,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1108
 #: ../../data/tribes/initialization/frisians/units.lua:1136
 msgid "This berry bush has just been planted."
-msgstr ""
+msgstr "Этот куст только что посажен."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:919
@@ -6314,7 +6315,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1115
 #: ../../data/tribes/initialization/frisians/units.lua:1143
 msgid "This berry bush is growing."
-msgstr ""
+msgstr "Этот куст растет."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:926
@@ -6328,7 +6329,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1150
 msgid ""
 "This berry bush is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Этот плодовый куст зацвел. Пчелы могут собирать с него нектар."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:933
@@ -6341,7 +6342,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1129
 #: ../../data/tribes/initialization/frisians/units.lua:1157
 msgid "This berry bush is ready for harvesting."
-msgstr ""
+msgstr "Этот плодовый куст обобран."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an empire/barbarian immovable usable by frisians:
@@ -6358,7 +6359,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1387
 #: ../../data/tribes/initialization/frisians/units.lua:1401
 msgid "This field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Это поле цветет. Пчелы могут собирать с него нектар."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1199
@@ -6373,14 +6374,14 @@ msgstr ""
 msgid ""
 "Fish are maturing in this pond. A fisher working from an aqua farm will be "
 "able to catch them when they are bigger."
-msgstr ""
+msgstr "В прудах созревает рыба. Рыбак с округи аквафермы будет ловить ее по моменту созревания."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1213
 msgid ""
 "Fish are living in this pond. A fisher working from an aqua farm can catch "
 "them as food."
-msgstr ""
+msgstr "В прудах разводят рыбу. Рыбаки с округи могут ловить ее."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1220
@@ -6400,31 +6401,31 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1248
 msgid ""
 "This reed field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Тростник на этом поле зацвел. Пчелы могут собирать с него нектар."
 
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/frisians/units.lua:1310
 #: ../../data/tribes/initialization/frisians/units.lua:1354
 msgid "Granite is a basic building material and can be dug up by a rock mine."
-msgstr ""
+msgstr "Гранит - это основной строительный материал. Он может быть добыт в гранитной шахте."
 
 #. TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
 #: ../../data/tribes/initialization/frisians/units.lua:1394
 msgid ""
 "This grapevine is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Виноград зацвел. Пчелы могут собирать с него нектар."
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Headquarters
 #: ../../data/tribes/initialization/frisians/units.lua:1513
 msgctxt "frisians_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
-msgstr ""
+msgstr "Жилище для людей. А также хранилище товаров и инструментов."
 
 #. TRANSLATORS: Note helptext for a frisian warehouse: Headquarters
 #: ../../data/tribes/initialization/frisians/units.lua:1515
 msgctxt "frisians_building"
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Нет здания важнее штаба."
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Warehouse
 #: ../../data/tribes/initialization/frisians/units.lua:1522
@@ -6432,7 +6433,7 @@ msgctxt "frisians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Ваши рабочие и солдаты могут здесь укрыться, а также хранить здесь товары и инструмент."
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Port
 #: ../../data/tribes/initialization/frisians/units.lua:1529
@@ -6440,7 +6441,7 @@ msgctxt "frisians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Служит базой для колонизации и морской торговли. А также может служить домом для солдат и складом товаров и инструментов."
 
 #. TRANSLATORS: Note helptext for an frisian warehouse: Port
 #: ../../data/tribes/initialization/frisians/units.lua:1531
@@ -6448,13 +6449,13 @@ msgctxt "frisians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Как и штаб, порт может быть атакован и разрушен врагом. Советуем послать солдат на его охрану."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1540
 msgctxt "frisians_building"
 msgid "When I swing my pick, whole mountains fall before me!"
-msgstr ""
+msgstr "Под ударами моей кирки не устоят и горы!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1542
@@ -6466,20 +6467,20 @@ msgstr "Каменщик"
 #: ../../data/tribes/initialization/frisians/units.lua:1544
 msgctxt "frisians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Высекает грубые куски гранита из близлежащих скал."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1546
 msgctxt "frisians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Каменоломне для работы нужны скалы в рабочей области."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1548
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
-msgstr ""
+msgstr "Камнетес делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Woodcutter's
 #. House
@@ -6488,21 +6489,21 @@ msgctxt "frisians_building"
 msgid ""
 "I cannot see a tree without imagining what it would look like in terms of "
 "furniture."
-msgstr ""
+msgstr "Когда я смотрю на дерево, я уже вижу, какую мебель из него можно сделать."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site:
 #. Woodcutter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1557
 msgctxt "frisians_building"
 msgid "An over-enthusiastic woodcutter"
-msgstr ""
+msgstr "Чрезмерно увлеченный дровосек"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Woodcutter's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1561
 msgctxt "frisians_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "В рабочей области вокруг домика лесоруба должны быть деревья."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1568
@@ -6510,14 +6511,14 @@ msgctxt "frisians_building"
 msgid ""
 "What can ever be more beautiful than the brilliant sun’s beams shining "
 "through the glistering canopy of leaves?"
-msgstr ""
+msgstr "Что может быть прекраснее нежели лучи солнца, пробивающиеся сквозь полог листьев?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Forester's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1570
 msgctxt "frisians_building"
 msgid "A forester explaining his choice of profession"
-msgstr ""
+msgstr "Как лесник объясняет выбор профессии"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1574
@@ -6525,7 +6526,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Вокруг домика лесника должно быть свободное место под посадку деревьев."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Forester's
 #. House
@@ -6533,7 +6534,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The forester pauses %s before going to work again."
-msgstr ""
+msgstr "Лесник делает перерыв в работе на %s."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1585
@@ -6555,14 +6556,14 @@ msgctxt "frisians_building"
 msgid ""
 "Hunters can’t sell anything on a Friday, but fishers don’t have such "
 "problems."
-msgstr ""
+msgstr "В пятницу охотник ничего не сможет продать. А у рыболова такой проблемы нет."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Fisher's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1596
 msgctxt "frisians_building"
 msgid "A hunter admiring a fisher"
-msgstr ""
+msgstr "Наблюдение охотника о рыболовах"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1598
@@ -6589,13 +6590,13 @@ msgstr "Рыбак останавливается %s, прежде чем сно
 msgctxt "frisians_building"
 msgid ""
 "No worse fortune can befall a reed farmer than to see his roof leaking."
-msgstr ""
+msgstr "Позор заготовщику тростника, у которого течет крыша дома."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1611
 msgctxt "frisians_building"
 msgid "Anonymous reed farmer"
-msgstr ""
+msgstr "Безымянный заготовщик тростника"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1613
@@ -6610,13 +6611,13 @@ msgid ""
 "Reed is the traditional material for roofing. It is also needed to produce "
 "baskets and fishing nets, and it is woven – together with reindeer fur – "
 "into the cloth used for ships’ sails."
-msgstr ""
+msgstr "Тростник - традиционный кровельный материал, а также из него плетут корзины и рыболовные сети. Еще он – наравне с пухом – идет на сукно для корабельных парусов."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1622
 msgctxt "frisians_building"
 msgid "We love the sea so much that we don’t want to drink it empty!"
-msgstr ""
+msgstr "Мы очень любим море и не хотим его выпить!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1624
@@ -6624,20 +6625,20 @@ msgctxt "frisians_building"
 msgid ""
 "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt "
 "water"
-msgstr ""
+msgstr "Вождь Альдор о том, почему его племя не пьет соленую воду"
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1628
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
-msgstr ""
+msgstr "Колодцу требуется %s прежде чем наберется на ведро воды."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1635
 msgctxt "frisians_building"
 msgid "You think you can build a house without my help?"
-msgstr ""
+msgstr "Ты думаешь, что без меня сможешь построить себе дом?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1637
@@ -6661,7 +6662,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "No other tribe has ever mastered the art of charcoal burning as we have!"
-msgstr ""
+msgstr "Наши углежоги - самые углежгучие среди всех!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Charcoal
 #. Burner's House
@@ -6671,7 +6672,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1831
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr ""
+msgstr "Изобретатель фризовской печи углежога"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's
 #. House
@@ -6688,7 +6689,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner’s house needs %s on average to produce one coal."
-msgstr ""
+msgstr "Уголежогу нуждается %s в среднем для производства одной меры угля."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1661
@@ -6696,7 +6697,7 @@ msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
 "likes to eat bark!"
-msgstr ""
+msgstr "Может, эти кусты и не величественны, как древа, но я не знаю никого, кто любил бы грызть кору!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1663
@@ -6736,7 +6737,7 @@ msgstr "Мясо не растет на кустах. Делай Фрукты."
 #: ../../data/tribes/initialization/frisians/units.lua:1678
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
-msgstr ""
+msgstr "СБорщик фруктов бахвалится перед землевладелицей"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Fruit
 #. Collector's House
@@ -6750,7 +6751,7 @@ msgstr "Собирает ягоды из близлежащих кустов."
 #: ../../data/tribes/initialization/frisians/units.lua:1682
 msgctxt "frisians_building"
 msgid "The fruit collector needs bushes full of berries within the work area."
-msgstr ""
+msgstr "Сборщику фруктов нужны плодоносящие кусты в рабочей области."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Fruit
 #. Collector's House
@@ -6788,7 +6789,7 @@ msgctxt "frisians_building"
 msgid ""
 "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
 " (berry bushes or grapevines) nearby."
-msgstr ""
+msgstr "Для пасеку нужны поля (ячменные, пшеничные, тростниковые или козельцовые) или кусты (ягодники, виноградники) поблизости."
 
 #. TRANSLATORS: Performance helptext for a frisian production site:
 #. Beekeeper's House
@@ -6814,7 +6815,7 @@ msgstr "Рыбак, что изобрел рыбоводные акваферм�
 #: ../../data/tribes/initialization/frisians/units.lua:1710
 msgctxt "frisians_building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Разводил рыбу, чтобы накормить солдат и шахтеров."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Aqua Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1712
@@ -6831,21 +6832,21 @@ msgid ""
 "Everyone has their own ideas on how exactly we should explore the enemy’s "
 "territory… One more ‘improvement’ suggestion and we’ll demand meals instead "
 "of rations!"
-msgstr ""
+msgstr "Каждый знает, как лучше проводить разведку в стане врага... Еще один \"совет\", и мы будем требовать полноценные обеды вместо пайков!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Scout's
 #. House
 #: ../../data/tribes/initialization/frisians/units.lua:1721
 msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
-msgstr ""
+msgstr "Представитель союза разведчиков"
 
 #: ../../data/tribes/initialization/frisians/units.lua:1722
 msgctxt "frisians_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Прежде чем отправить туда разведчика, соедините флаг с его домиком."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Scout's
 #. House
@@ -6861,13 +6862,13 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "Лишь полный кретин станет обирать кирпичника при нехватке угля."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1737
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
-msgstr ""
+msgstr "Кирпичник спорит с вождем о методах решения проблем"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1739
@@ -6875,14 +6876,14 @@ msgctxt "building"
 msgid ""
 "Burns bricks using granite and clay, and coal as fuel. Bricks are the most "
 "important building material."
-msgstr ""
+msgstr "Обжигает уголь из гранита и глины, топится углем. Кирпичи - важнейший стройматериал."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1741
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce three bricks."
-msgstr ""
+msgstr "Печи для обжига кирпича нужно %s в среднем для производства трех кирпичей."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Furnace
 #: ../../data/tribes/initialization/frisians/units.lua:1748
@@ -6902,7 +6903,7 @@ msgstr "Девиз гильдии литейщиков"
 #: ../../data/tribes/initialization/frisians/units.lua:1752
 msgctxt "building"
 msgid "Smelts iron ore and gold ore into iron and gold ingots using coal."
-msgstr ""
+msgstr "Выплавляет железо из железной руды и золото из золотой, топит углем ."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1759
@@ -6911,14 +6912,14 @@ msgid ""
 "Of course these weapons could be used by other soldiers again without being "
 "smelted down first! The only drawback is that they’d break in two at the "
 "first blow."
-msgstr ""
+msgstr "Да, этим оружием можно вооружить других солдат и без переработки! Вот только оно придет в негодность при первом же ударе."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Recycling
 #. Center
 #: ../../data/tribes/initialization/frisians/units.lua:1761
 msgctxt "frisians_building"
 msgid "A smelter explaining the need for recycling to his impatient chieftain"
-msgstr ""
+msgstr "Литейщик растолковывает необходимость переплавки нетерпеливому вождю"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Recycling
 #. Center
@@ -6940,7 +6941,7 @@ msgstr "Если у вас нет железа, смените имя кузне
 #: ../../data/tribes/initialization/frisians/units.lua:1772
 msgctxt "frisians_building"
 msgid "Irritated chieftain during a metal shortage"
-msgstr ""
+msgstr "Раздраженный вождь о нехватке металла"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1774
@@ -6963,7 +6964,7 @@ msgctxt "frisians_building"
 msgid ""
 "I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
 " I forge ’em."
-msgstr ""
+msgstr "Я кую мечи не птому что они нужны солдатам. Солдаты имеют их птому, что я их кую."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Small
 #. Armor Smithy
@@ -6977,7 +6978,7 @@ msgstr "Кузнец оказывает свое влияние на подго�
 #: ../../data/tribes/initialization/frisians/units.lua:1787
 msgctxt "frisians_building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "Производит основное оружие и шлемы для солдат."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Large Armor
 #. Smithy
@@ -6995,14 +6996,14 @@ msgctxt "frisians_building"
 msgid ""
 "A master blacksmith refusing to forge anything but the most sophisticated "
 "helmets and weapons"
-msgstr ""
+msgstr "Мастер-кузнец, отказывающийся ковать что-то помимо высококачественных шлемов и оружия"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Large Armor
 #. Smithy
 #: ../../data/tribes/initialization/frisians/units.lua:1798
 msgctxt "frisians_building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
-msgstr ""
+msgstr "Изготавливает улучшенное вооружение и золотые шлемы для ваших солдат."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1805
@@ -7017,7 +7018,7 @@ msgstr "Вы, солдаты, думаете, что хороший меч - э�
 #: ../../data/tribes/initialization/frisians/units.lua:1807
 msgctxt "frisians_building"
 msgid "A seamstress scolding a soldier for disrespecting her profession"
-msgstr ""
+msgstr "Швея ругает солдата за неуважение к ее профессии"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1809
@@ -7068,13 +7069,13 @@ msgctxt "frisians_building"
 msgid ""
 "Miners and soldiers are so picky… But who am I to complain, as I make my "
 "living from it?"
-msgstr ""
+msgstr "Шахтеры и солдаты так прожорливы... Но я зарабатываю этим на жизнь, к чему жалобы?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1844
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
-msgstr ""
+msgstr "Коптильщик о своей профессии"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1846
@@ -7158,7 +7159,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1883
 msgctxt "frisians_building"
 msgid "Brews beer for miners and soldier training."
-msgstr ""
+msgstr "Варит пиво для шахтеров и тренировки солдат."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1885
@@ -7178,7 +7179,7 @@ msgstr "Если вам нравится пиво, вы просто никог�
 #: ../../data/tribes/initialization/frisians/units.lua:1894
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
-msgstr ""
+msgstr "Слоган медоваров"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1896
@@ -7241,7 +7242,7 @@ msgid ""
 "alone! You’d better pay close attention to me in order to make the most of "
 "it. Now here is your new short sword, forged just for you by our best "
 "blacksmiths. Time’s up everyone, now go occupy your sentinels!"
-msgstr ""
+msgstr "У тебя тридцать секунд на то, чтобы выучить основы фехтования и выживания в бою. Три уже потрачены на вводную! Внимательнее надо быть к тому, что я говорю и показываю, внимательнее! Вот твое оружие, короткий меч, выкованный нашими лучшими кузнецами. Все, время вышло, топай в свою сторожку!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1929
@@ -7267,7 +7268,7 @@ msgstr "Казармы нуждаются %s в среднем чтобы нан
 msgctxt "frisians_building"
 msgid ""
 "Who says a beast of burden cannot be useful for other things than transport?"
-msgstr ""
+msgstr "Кто сказал, что вьючные животные больше ни для чего не пригодны?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reindeer
 #. Farm
@@ -7275,7 +7276,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The reindeer breeder who first proposed using reindeer fur for clothing"
-msgstr ""
+msgstr "Оленевод, первым предложивший использовать мех для пошива одежды."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1946
@@ -7283,7 +7284,7 @@ msgctxt "frisians_building"
 msgid ""
 "Breeds strong reindeer for adding them to the transportation system. Also "
 "keeps them for their fur, which is turned into armor and cloth."
-msgstr ""
+msgstr "Разводит крепких оленей для перевозки грузов по дорогам. Также стрижет с них пух, который потом идет на доспехи и сукно."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1948
@@ -7299,7 +7300,7 @@ msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no drought; no rats, no locusts; naught can "
 "destroy my harvest."
-msgstr ""
+msgstr "Ни мороз, ни зной; ни дождь, ни засуха; ни крысы, ни саранча; ничто не сможет уничтожить мой урожай."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1957
@@ -7307,7 +7308,7 @@ msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
 "slow-growing grain."
-msgstr ""
+msgstr "Ответ землепашца вождю на вопрос, почему его посадки так долго растут."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1959
@@ -7327,7 +7328,7 @@ msgstr "Ферме требуется свободное пространств�
 #: ../../data/tribes/initialization/frisians/units.lua:1979
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
-msgstr ""
+msgstr "Выкапывает гранит из-под земли в горной местности."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Rock Mine
 #: ../../data/tribes/initialization/frisians/units.lua:1972
@@ -7479,7 +7480,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2117
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Используйте солдат, для того чтобы расширить вашу территорию."
 
 #. TRANSLATORS: Note helptext for a frisian military site: Wooden Tower
 #. TRANSLATORS: Note helptext for a frisian military site: High Wooden Tower
@@ -7498,7 +7499,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Если у вас не достаточно солдат для контроля военных зданий, используйте стрелку, направленную вниз, чтобы уменьшить численность солдат в гарнизоне. Кроме того, можно просто выгнать солдата щелчком мыши."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Shipyard
 #: ../../data/tribes/initialization/frisians/units.lua:2137
@@ -7506,7 +7507,7 @@ msgctxt "frisians_building"
 msgid ""
 "This house may be called a shipyard, but my ships are rather longer than one"
 " yard!"
-msgstr ""
+msgstr "Можете звать это место корабельным двором, вот только мои корабли будут побольше иного двора!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Shipyard
 #: ../../data/tribes/initialization/frisians/units.lua:2139
@@ -7529,13 +7530,13 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2150
 msgctxt "frisians_building"
 msgid "A seamstress’ work song"
-msgstr ""
+msgstr "Рабочая песня портных"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Weaving Mill
 #: ../../data/tribes/initialization/frisians/units.lua:2152
 msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
-msgstr ""
+msgstr "Шьет сукно из тростника и оленьего мена на пошив парусов."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Weaving
 #. Mill
@@ -7655,7 +7656,7 @@ msgstr "Собирает:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:509
 msgid "Creates:"
-msgstr ""
+msgstr "Создано:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:514
 msgid "Produces:"
@@ -7789,13 +7790,13 @@ msgstr "%s или выше"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:859
 msgid "Worker uses:"
-msgstr ""
+msgstr "Работник использует:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
 #: ../../data/tribes/scripting/help/building_help.lua:862
 msgid "Workers use:"
-msgstr ""
+msgstr "Работники используют:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
@@ -7934,25 +7935,25 @@ msgstr "Уменьшить скорость игры"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:46
 msgid "Increase game speed by 10x"
-msgstr ""
+msgstr "Ускорить игру в 10× раз"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Decrease game speed by 10x"
-msgstr ""
+msgstr "Замедлить игру в 10× раз"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Increase game speed by 0.25x"
-msgstr ""
+msgstr "Ускорить игру на 0.25×"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Decrease game speed by 0.25x"
-msgstr ""
+msgstr "Замедлить игру на 0.25×"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -7973,17 +7974,17 @@ msgstr "Переключить показ статистики"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'l'
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Toggle soldier health bars and level icons"
-msgstr ""
+msgstr "Показать/скрыть полоски здоровья солдат и значки уровней"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'u'
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Toggle building visibility"
-msgstr ""
+msgstr "Переключение видимости зданий"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'w'
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Toggle workarea overlap indicators"
-msgstr ""
+msgstr "Переключение индикаторов слоев рабочей области"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
 #: ../../data/tribes/scripting/help/controls.lua:68
@@ -8026,33 +8027,33 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Клавиши со стрелками"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Move the map"
-msgstr ""
+msgstr "Смещение карты"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + клавиши со стрелками"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Move the map fast"
-msgstr ""
+msgstr "Быстрое смещение карты"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Медленное смещение карты"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + стрелка"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -8074,13 +8075,13 @@ msgstr "Перейти к предыдущему запомненному рас
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Go to previous location"
-msgstr ""
+msgstr "Вернуться к прежнему месту"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Go to next location"
-msgstr ""
+msgstr "Перейти к следующему месту"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -8110,7 +8111,7 @@ msgstr "Сделать скриншот"
 #: ../../data/tribes/scripting/help/controls.lua:106
 msgctxt "hotkey"
 msgid "Ctrl + Shift + Space"
-msgstr ""
+msgstr "Ctrl + Shift + Space"
 
 #: ../../data/tribes/scripting/help/controls.lua:106
 msgid "Show the debug console (only in debug-builds)"
@@ -8180,7 +8181,7 @@ msgstr "Показать бездействующие корабли"
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:138
 msgid "Show ships shipping wares and workers"
-msgstr ""
+msgstr "Показать корабли, перевозящие товары и работников"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:140
@@ -8190,32 +8191,32 @@ msgstr "Показать ждущих экспедиции"
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:142
 msgid "Show scouting expeditions"
-msgstr ""
+msgstr "Показать действующие экспедиции"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:144
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr ""
+msgstr "Показать экспедиции, которые нашли место для постройки гавани"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:146
 msgid "Center the map on the selected ship"
-msgstr ""
+msgstr "Центрировать камеру на выбранном судне"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:148
 msgid "Open the selected ship’s window"
-msgstr ""
+msgstr "Открыть окно состояния выбранного корабля"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:150
 msgid "Go to the selected ship and open its window"
-msgstr ""
+msgstr "Перейти к выбранному кораблю и открыть его окно состояния"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:152
 msgid "Watch the selected ship"
-msgstr ""
+msgstr "Наблюдать за выбранным кораблем"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../data/tribes/scripting/help/format_help.lua:54
@@ -8294,7 +8295,7 @@ msgstr "Требования"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:60
 msgid "Becomes"
-msgstr ""
+msgstr "Прибыло"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:80
 msgid "Preferred Terrains"
@@ -8337,8 +8338,8 @@ msgstr "Один игрок"
 msgid "Multiplayer"
 msgstr "Многопользовательская игра"
 
-#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
+#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../data/tribes/scripting/help/ware_help.lua:50
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
@@ -8347,13 +8348,13 @@ msgstr "Производитель"
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:120
 msgid "Ware produced:"
-msgstr ""
+msgstr "Товара произведено:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:123
 msgid "Wares produced:"
-msgstr ""
+msgstr "Товаров произведено:"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
@@ -8370,13 +8371,13 @@ msgstr ""
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Нанято работников:"
 
 #. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
 #. productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:82
 msgid "Workers recruited:"
-msgstr ""
+msgstr "Всего нанято работников:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -8384,7 +8385,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:112
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Работает в"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -8392,19 +8393,19 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:116
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Работают в"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../data/tribes/scripting/help/worker_help.lua:132
 msgctxt "workerhelp_one_building"
 msgid "Can also work at"
-msgstr ""
+msgstr "Может работать и в"
 
 #. TRANSLATORS: You can also translate this as 'additional workplaces'
 #: ../../data/tribes/scripting/help/worker_help.lua:136
 msgctxt "workerhelp_multiple_buildings"
 msgid "Can also work at"
-msgstr ""
+msgstr "Могут работать и в"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:181

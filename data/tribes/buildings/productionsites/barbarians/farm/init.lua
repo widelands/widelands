@@ -20,22 +20,31 @@ descriptions:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
+      unoccupied = {
          hotspot = { 69, 76 },
+      },
+   },
+
+   spritesheets = {
+      idle = {
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 69, 76 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 69, 76 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 69, 76 },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 69, 76 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 69, 76 },
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 69, 76 }
       },
    },
 

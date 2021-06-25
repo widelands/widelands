@@ -205,9 +205,9 @@ wl_library(wui_game_tips
   DEPENDS
     base_i18n
     base_log
+    graphic_functions
     graphic
     graphic_fonthandler
-    graphic_text_layout
     io_filesystem
     logic_filesystem_constants
     logic_tribe_basic_info
@@ -318,6 +318,7 @@ wl_library(wui
     base_log
     base_macros
     base_math
+    base_multithreading
     base_time_string
     chat
     economy

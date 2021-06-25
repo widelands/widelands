@@ -172,7 +172,7 @@ public:
 	}
 
 	// life cycle
-	void set_game_controller(GameController*);
+	void set_game_controller(std::shared_ptr<GameController>);
 	GameController* game_controller();
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
@@ -192,8 +192,11 @@ public:
 
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
+	// `list_of_scenarios` is list of this scenario and – if applicable –
+	// all the subsequent scenarios in the campaign.
 	// Returns the result of run().
-	bool run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run);
+	bool run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
+	                                 const std::string& script_to_run);
 
 	// Run a single player loaded game directly via --loadgame on the cmdline. Will
 	// run the 'script_to_run' directly after the game was loaded.
@@ -229,6 +232,7 @@ public:
 	}
 
 	void cleanup_for_load() override;
+	void full_cleanup() override;
 
 	// in-game logic
 	const CmdQueue& cmdqueue() const {
@@ -344,6 +348,17 @@ public:
 
 	void set_auto_speed(bool);
 
+	/**
+	 * Cause the game to proceed with this file directly after the current game ends.
+	 * A .wgf file will be loaded as a singleplayer savegame this way;
+	 * a map file will be loaded as a singleplayer scenario.
+	 */
+	void set_next_game_to_load(const std::string& file);
+
+	const std::list<std::string>& list_of_scenarios() const {
+		return list_of_scenarios_;
+	}
+
 	// TODO(sirver,trading): document these functions once the interface settles.
 	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
@@ -401,7 +416,7 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
-	GameController* ctrl_;
+	std::shared_ptr<GameController> ctrl_;
 
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back
@@ -421,6 +436,7 @@ private:
 	RNG rng_;
 
 	CmdQueue cmdqueue_;
+	std::list<PlayerCommand*> pending_player_commands_;
 
 	SaveHandler savehandler_;
 
@@ -442,6 +458,9 @@ private:
 #endif
 
 	bool replay_;
+
+	std::string next_game_to_load_;
+	std::list<std::string> list_of_scenarios_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

@@ -571,6 +571,10 @@ void Window::die() {
 	}
 }
 
+Window::~Window() {
+	set_visible(false);
+}
+
 void Window::restore() {
 	assert(is_minimal_);
 	is_minimal_ = false;

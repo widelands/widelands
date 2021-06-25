@@ -9,18 +9,16 @@ descriptions:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 102, 102 },
          fps = 10
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 102, 102 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 102, 102 }
       }
    },

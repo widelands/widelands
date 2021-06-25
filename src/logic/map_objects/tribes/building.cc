@@ -25,6 +25,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
@@ -457,6 +458,8 @@ derived class' init.
 ===============
 */
 bool Building::init(EditorGameBase& egbase) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map
@@ -839,6 +842,8 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	// Builders should make partially finished building see, but not finished buildings.
 	// So we prevent builders from seeing here and override this in PartiallyFinishedBuilding.
 	if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
@@ -849,6 +854,8 @@ void Building::add_worker(Worker& worker) {
 }
 
 void Building::remove_worker(Worker& worker) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	PlayerImmovable::remove_worker(worker);
 	if (get_workers().empty() && descr().type() != MapObjectType::WAREHOUSE) {
 		set_seeing(false);

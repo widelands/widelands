@@ -3,15 +3,16 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2021
 # GunChleoc, 2014
 # Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-11 23:10+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -267,14 +268,14 @@ msgstr "Reebaud och hans stam har anlänt till Norden. Men deras ankomst mellan 
 
 #: ../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Vänner i nöd"
 
 #: ../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Reebaud och hans stam lever lyckligt uppe i norr. Samtidigt är länderna de har lämnat bakom sig allt annat än fridfulla och en gammal vän är i desperat behov av deras hjälp..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -341,15 +342,15 @@ msgstr "Stora byggnadsplatser är sällsynta på dessa små öar. Prioritera att
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – editerad av Nordfriese"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Långt ekonomiskt spel i vackert landskap. Testa alla spelare!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -423,7 +424,7 @@ msgstr "Korsa horisonten"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – editerad av 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -435,7 +436,7 @@ msgstr "Denna karta går inte att vinna i med 'Autocrat' satt som vinnande mål.
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomiterna 3.0"
 
 #: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
@@ -444,7 +445,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Alpernas juvel, Dolomiternas bergskedja, har utnämnts som världsarv för sin ursprungliga skönhet. Denna karta är en lika trovärdig som rimlig rekonstruktion av detta område, begränsat av Cortina d’Ampezzo i nordost och Canazei i sydväst. Om du måste kämpa i en duell in i döden mot dina fiender, kan det lika väl ske på en vacker plats."
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -453,7 +454,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Bergen har ett överflöd att platt yta. Tyvärr är det mesta vertikalt – använd den lilla mark du har till ditt förfogande klokt. En fästning vid mynningen till ett smalt bergspass kan vara ett formidabelt hinder för en avancerande fiendearmé – använd terrängen till din fördel. Hugg ner alla träd och expandera varhelst du kan – det är det enda sättet att få plats med ovärderliga farmer."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -467,7 +468,7 @@ msgstr "Den hisnande skönheten i dessa smaragdfärgade marker har lockat många
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher_gås_fisk"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
@@ -680,7 +681,7 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "En rättvis karta för 8 spelare med naturliga geografiska formationer som delar upp landet. De geografiska formationerna är tänkta att i någon mån vara realistiska, med floder som flyter från glaciärer i bergen, genom kuperade och flackare landskap och ut i havet. Guld är en mycket ovanligare resurs jämfört med kol och järn. Olika resurser hittas ofta med ett visst avstånd sinsemellan."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -748,7 +749,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Denna karta är avsedd som en soloutmaning för de riktigt skickliga spelare som tycker 1 mot 6 AI är för lätt. Blå spelare har ingen metall (förutom lite järn för att få igång ekonomin) utan måste förlita sig på de 5% en tom gruva producerar. Och du spelar fortfarande 1 mot 6 (men kan förstås ta bort några AI-spelare för att göra det lite lättare). Lycka till!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

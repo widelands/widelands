@@ -19,19 +19,26 @@ descriptions:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 42, 65 },
       },
+   },
+
+   spritesheets = {
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 42, 65 },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 42, 65 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 43, 65 },
-         fps = 2
+         fps = 2,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 43, 65 }
       },
    },
 
@@ -58,8 +65,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs empire_bread",
             "consume=flour water",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:20s",
+            "animate=working duration:10s",
             "produce=empire_bread"
          }
       },

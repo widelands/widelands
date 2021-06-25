@@ -9,23 +9,29 @@ descriptions:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 76 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 57, 76 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 57, 76 },
       },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 57, 76 }
+      },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 76 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 76 }
       },
    },
 

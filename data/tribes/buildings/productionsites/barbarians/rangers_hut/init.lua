@@ -16,18 +16,25 @@ descriptions:new_productionsite_type {
       log = 3
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 45, 49 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 45, 49 },
-      },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 45, 49 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 45, 49 }
+      },
+      idle = {
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 45, 49 }
       },
    },
 

@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
@@ -168,9 +169,11 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	// Destruction happens in correct order after this dirty quickie.
 	// Run at the end of game, algorithmic efficiency may be what it is.
 	const static std::vector<MapObjectType> killusfirst{
-	   MapObjectType::WATERWAY, MapObjectType::FERRY,      MapObjectType::FERRY_FLEET,
-	   MapObjectType::SHIP,     MapObjectType::SHIP_FLEET, MapObjectType::PORTDOCK,
-	   MapObjectType::WORKER};
+	   MapObjectType::WARE,        MapObjectType::WATERWAY, MapObjectType::FERRY,
+	   MapObjectType::FERRY_FLEET, MapObjectType::SHIP,     MapObjectType::SHIP_FLEET,
+	   MapObjectType::PORTDOCK,    MapObjectType::WORKER,   MapObjectType::CARRIER,
+	   MapObjectType::SOLDIER,
+	};
 	for (auto moi : killusfirst) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
@@ -536,6 +539,8 @@ MapObject::MapObject(const MapObjectDescr* const the_descr)
  * any effects.
  */
 void MapObject::remove(EditorGameBase& egbase) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	removed(serial_);  // Signal call
 	cleanup(egbase);
 	delete this;

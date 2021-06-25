@@ -13,13 +13,14 @@
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
+# Stron Zios <danielekeb@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-16 23:13+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"PO-Revision-Date: 2021-06-06 09:37+0000\n"
+"Last-Translator: Stron Zios <danielekeb@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -186,7 +187,7 @@ msgstr "Una nuova isola"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "Diario di Lutius"
 
@@ -465,7 +466,7 @@ msgid ""
 msgstr "Ottimo. Il primo grande edificio militare è stato completato e l'infrastruttura mineraria sta migliorando sempre di più. Ora dovremmo pensare a prepararci alla battaglia."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr "Vittoria"
 
@@ -487,7 +488,7 @@ msgstr "Ci sono ancora alcuni Barbari che si nascondono sulla nostra isola, ma s
 msgid ""
 "We have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island. Now we can think about our next steps."
-msgstr ""
+msgstr "Abbiamo stabilito un'economia funzionante, addestrato nuovi soldati e cacciato i Barbari dall'isola. Ora possiamo pensare ai nostri prossimi passi."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
@@ -502,14 +503,14 @@ msgid "A Message"
 msgstr "Un messaggio"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Oggi un piccione è atterrato sulla nostra isola. Ha portato un messaggio che mi riempie di pensieri scuri e riporta le mie paure."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -517,7 +518,7 @@ msgid ""
 "must do…"
 msgstr "Il messaggio è stato indirizzato a me, pregandomi di tornare a Fremil. Si dice che l'Impero è in guerra con i barbari. Sono stati attaccati da nord da parte della tribù che mi era proibito di attaccare. E 'chiaro per me che cosa devo fare..."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."

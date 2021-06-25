@@ -53,12 +53,6 @@
 --
 --            size = "small",
 --
---    **attributes**
---        *Optional*. Attributes can be used by other programs to identify a class
---        of immovables, e.g.::
---
---            attributes = { "tree" }, -- This is a tree, so it can be felled
---
 --    **programs**
 --        *Mandatory*. Every immovable has an automatic default program,
 --        which will simply play the ``idle`` animation. Leave the table empty if
@@ -173,9 +167,9 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Artifact",
    size = "small",
    programs = {},
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 14, 20 },
       },
    }

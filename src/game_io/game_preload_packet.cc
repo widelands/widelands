@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -147,13 +148,13 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 #endif
 
 	std::string addons;
-	for (const AddOns::AddOnInfo& addon : game.enabled_addons()) {
-		if (addon.category == AddOns::AddOnCategory::kTribes ||
-		    addon.category == AddOns::AddOnCategory::kWorld) {
+	for (const auto& addon : game.enabled_addons()) {
+		if (addon->category == AddOns::AddOnCategory::kTribes ||
+		    addon->category == AddOns::AddOnCategory::kWorld) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
-			addons += addon.internal_name + ':' + AddOns::version_to_string(addon.version, false);
+			addons += addon->internal_name + ':' + AddOns::version_to_string(addon->version, false);
 		}
 	}
 	s.set_string("addons", addons);
@@ -165,20 +166,24 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		return;
 	}
 
-	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
-	if (sw != nullptr) {
-		const MiniMapLayer layers =
-		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
-		std::unique_ptr<Texture> texture;
-		if (ipl != nullptr) {  // Player
-			texture = draw_minimap(game, &ipl->player(), ipl->map_view()->view_area().rect(),
-			                       MiniMapType::kStaticViewWindow, layers);
-		} else {  // Observer
-			texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
-		}
-		assert(texture != nullptr);
-		save_to_png(texture.get(), sw.get(), ColorType::RGBA);
-		sw->flush();
-	}
+	NoteThreadSafeFunction::instantiate(
+	   [&game, &fs, ipl]() {
+		   std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
+		   if (sw != nullptr) {
+			   const MiniMapLayer layers =
+			      MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+			   std::unique_ptr<Texture> texture;
+			   if (ipl != nullptr) {  // Player
+				   texture = draw_minimap(game, &ipl->player(), ipl->map_view()->view_area().rect(),
+				                          MiniMapType::kStaticViewWindow, layers);
+			   } else {  // Observer
+				   texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
+			   }
+			   assert(texture != nullptr);
+			   save_to_png(texture.get(), sw.get(), ColorType::RGBA);
+			   sw->flush();
+		   }
+	   },
+	   true);
 }
 }  // namespace Widelands

@@ -4,13 +4,14 @@
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005
 # D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-23 08:06+0000\n"
+"PO-Revision-Date: 2021-06-11 22:33+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:124
+#: ../../data/world/critters/badger/init.lua:119
 msgid "Badger"
 msgstr "Grävling"
 
@@ -56,7 +57,7 @@ msgstr "Mård"
 
 #: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
-msgstr ""
+msgstr "Älg"
 
 #: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
@@ -82,7 +83,7 @@ msgstr "Visent"
 msgid "Wolf"
 msgstr "Varg"
 
-#: ../../data/world/immovables/artifacts/artifact00/init.lua:173
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:167
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7
@@ -347,7 +348,7 @@ msgstr "Dött träd"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:5
 msgid "Felled Tree"
-msgstr ""
+msgstr "Fällt träd"
 
 #: ../../data/world/immovables/trees/larch/init.lua:14
 msgid "Larch (Sapling)"

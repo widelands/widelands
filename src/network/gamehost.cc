@@ -48,6 +48,7 @@
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "network/constants.h"
+#include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
 #include "network/nethost.h"
 #include "network/nethostproxy.h"
@@ -63,181 +64,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-struct HostGameSettingsProvider : public GameSettingsProvider {
-	explicit HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
-	}
-	~HostGameSettingsProvider() override = default;
-
-	void set_scenario(bool is_scenario) override {
-		host_->set_scenario(is_scenario);
-	}
-
-	const GameSettings& settings() override {
-		return host_->settings();
-	}
-
-	bool can_change_map() override {
-		return true;
-	}
-	bool can_change_player_state(uint8_t const number) override {
-		if (number >= settings().players.size()) {
-			return false;
-		}
-		if (settings().savegame) {
-			return settings().players.at(number).state != PlayerSettings::State::kClosed;
-		} else if (settings().scenario) {
-			return settings().players.at(number).state != PlayerSettings::State::kComputer;
-		}
-		return true;
-	}
-	bool can_change_player_tribe(uint8_t const number) override {
-		return can_change_player_team(number);
-	}
-	bool can_change_player_init(uint8_t const number) override {
-		if (settings().scenario || settings().savegame) {
-			return false;
-		}
-		return number < settings().players.size();
-	}
-	bool can_change_player_team(uint8_t number) override {
-		if (settings().scenario || settings().savegame) {
-			return false;
-		}
-		if (number >= settings().players.size()) {
-			return false;
-		}
-		if (number == settings().playernum) {
-			return true;
-		}
-		return settings().players.at(number).state == PlayerSettings::State::kComputer;
-	}
-
-	bool can_launch() override {
-		return host_->can_launch();
-	}
-
-	void set_map(const std::string& mapname,
-	             const std::string& mapfilename,
-	             const std::string& theme,
-	             const std::string& bg,
-	             uint32_t const maxplayers,
-	             bool const savegame = false) override {
-		host_->set_map(mapname, mapfilename, theme, bg, maxplayers, savegame);
-	}
-	void set_player_state(uint8_t number, PlayerSettings::State const state) override {
-		if (number >= settings().players.size()) {
-			return;
-		}
-		host_->set_player_state(number, state);
-	}
-
-	void
-	set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::State::kComputer ||
-		    settings().players.at(number).state == PlayerSettings::State::kShared ||
-		    settings().players.at(number).state ==
-		       PlayerSettings::State::kOpen) {  // For savegame loading
-			host_->set_player_tribe(number, tribe, random_tribe);
-		}
-	}
-
-	void set_player_team(uint8_t number, Widelands::TeamNumber team) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::State::kComputer) {
-			host_->set_player_team(number, team);
-		}
-	}
-
-	void set_player_color(const uint8_t number, const RGBColor& col) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::State::kComputer) {
-			host_->set_player_color(number, col);
-		}
-	}
-
-	void set_player_closeable(uint8_t number, bool closeable) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		host_->set_player_closeable(number, closeable);
-	}
-
-	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		host_->set_player_shared(number, shared);
-	}
-
-	void set_player_init(uint8_t const number, uint8_t const index) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		host_->set_player_init(number, index);
-	}
-
-	void
-	set_player_ai(uint8_t number, const std::string& name, bool const random_ai = false) override {
-		host_->set_player_ai(number, name, random_ai);
-	}
-
-	void set_player_name(uint8_t const number, const std::string& name) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		host_->set_player_name(number, name);
-	}
-
-	void set_player(uint8_t const number, const PlayerSettings& ps) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		host_->set_player(number, ps);
-	}
-
-	void set_player_number(uint8_t const number) override {
-		if (number == UserSettings::none() || number < host_->settings().players.size()) {
-			host_->set_player_number(number);
-		}
-	}
-
-	std::string get_win_condition_script() override {
-		return host_->settings().win_condition_script;
-	}
-
-	void set_win_condition_script(const std::string& wc) override {
-		host_->set_win_condition_script(wc);
-	}
-
-	void set_peaceful_mode(bool peace) override {
-		host_->set_peaceful_mode(peace);
-	}
-	bool is_peaceful_mode() override {
-		return host_->settings().peaceful;
-	}
-
-	void set_custom_starting_positions(bool c) override {
-		host_->set_custom_starting_positions(c);
-	}
-	bool get_custom_starting_positions() override {
-		return host_->settings().custom_starting_positions;
-	}
-
-private:
-	GameHost* host_;
-	std::vector<std::string> wincondition_scripts_;
-};
 
 struct HostChatProvider : public ChatProvider {
 	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
@@ -526,12 +352,16 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(FsMenu::MenuCapsule& c,
-                   std::unique_ptr<GameController>& ptr,
+GameHost::GameHost(FsMenu::MenuCapsule* c,
+                   std::shared_ptr<GameController>& ptr,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+   : capsule_(c),
+     pointer_(ptr),
+     d(new GameHostImpl(this)),
+     internet_(internet),
+     forced_pause_(false) {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;
@@ -582,7 +412,9 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 
-	run(ptr);
+	if (capsule_) {
+		run();
+	}
 }
 
 GameHost::~GameHost() {
@@ -657,12 +489,19 @@ void GameHost::init_computer_players() {
 	}
 }
 
-void GameHost::run(std::unique_ptr<GameController>& ptr) {
+void GameHost::run() {
 	game_.reset(new Widelands::Game());
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	new FsMenu::LaunchMPG(
-	   capsule_, d->hp, *this, d->chat, *game_, ptr, internet_, [this]() { run_callback(); });
+	   *capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+}
+
+void GameHost::run_direct() {
+	game_.reset(new Widelands::Game());
+	// Fill the list of possible system messages
+	NetworkGamingMessages::fill_map();
+	run_callback();
 }
 
 // TODO(k.halfmann): refactor into smaller functions
@@ -685,8 +524,8 @@ void GameHost::run_callback() {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
 	packet.unsigned_32(game_->enabled_addons().size());
-	for (const AddOns::AddOnInfo& a : game_->enabled_addons()) {
-		packet.string(a.internal_name);
+	for (const auto& a : game_->enabled_addons()) {
+		packet.string(a->internal_name);
 	}
 	broadcast(packet);
 
@@ -694,7 +533,9 @@ void GameHost::run_callback() {
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
 	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
 
-	capsule_.set_visible(false);
+	if (capsule_) {
+		capsule_->set_visible(false);
+	}
 	uint8_t player_number = 1;
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
@@ -705,7 +546,7 @@ void GameHost::run_callback() {
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = game_.get();
-		game_->set_game_controller(this);
+		game_->set_game_controller(pointer_);
 		InteractiveGameBase* igb;
 		player_number = d->settings.playernum + 1;
 		game_->save_handler().set_autosave_filename(
@@ -760,8 +601,9 @@ void GameHost::run_callback() {
 		}
 		clear_computer_players();
 	} catch (const std::exception& e) {
-		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
-		WLApplication::emergency_save(&parent, *game_, e.what(), player_number);
+		FsMenu::MainMenu* parent =
+		   capsule_ ? &capsule_->menu() : nullptr;  // make includes script happy
+		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
 		clear_computer_players();
 
 		while (!d->clients.empty()) {
@@ -778,7 +620,13 @@ void GameHost::run_callback() {
 }
 
 void GameHost::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
+
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
 
 	if (d->game) {
 		uint32_t curtime = SDL_GetTicks();
@@ -816,6 +664,10 @@ void GameHost::think() {
 }
 
 void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
+	pending_player_commands_.push_back(pc);
+}
+
+void GameHost::do_send_player_command(Widelands::PlayerCommand* pc) {
 	pc->set_duetime(d->committed_networktime + Duration(1));
 
 	SendPacket packet;
@@ -1077,7 +929,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
 	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
-	d->chat.receive(msg);
+	NoteThreadSafeFunction::instantiate([this, &msg]() { d->chat.receive(msg); }, true);
 }
 
 Duration GameHost::get_frametime() {
@@ -1204,6 +1056,14 @@ void GameHost::set_map(const std::string& mapname,
 		d->promoter->set_map(mapname.c_str());
 	}
 
+	if (d->settings.savegame) {
+		// Free all slots slots for now, so that the scenario data can be loaded properly
+		set_player_number(UserSettings::none());
+		for (const Client& client : d->clients) {
+			switch_to_player(client.usernum, UserSettings::none());
+		}
+	}
+
 	// Broadcast new player settings
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
@@ -1211,6 +1071,30 @@ void GameHost::set_map(const std::string& mapname,
 	broadcast(packet);
 	// Map changes are finished here
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+
+	// Assign players from savegame
+	if (d->settings.savegame) {
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+			const PlayerSettings& p = d->settings.players.at(i);
+			if (p.tribe.empty()) {
+				// Closed slot
+				continue;
+			}
+
+			std::stringstream playerstream(p.name);
+			std::string user_part;
+			while (getline(playerstream, user_part, ' ')) {
+				for (uint8_t usernum = 0; usernum < d->settings.users.size(); ++usernum) {
+					const std::string& username = d->settings.users.at(usernum).name;
+
+					if (user_part == username) {
+						switch_to_player(usernum, i);
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	// If possible, offer the map / saved game as transfer
 	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
@@ -1352,7 +1236,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 	std::string actual_tribe = tribe;
 	player.random_tribe = random_tribe;
 
-	while (random_tribe) {
+	while (!d->settings.savegame && random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
 		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
@@ -1419,6 +1303,24 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 
 	// Broadcast changes
 	broadcast_setting_player(number);
+}
+
+/**
+ * Removes one player from a combined slot, where the name consists
+ * of all players in this slot separated by spaces, i.e. "Player1 Player2"
+ * \return true if the name has no players left
+ */
+bool GameHost::remove_player_name(uint8_t const number, const std::string& name) {
+	PlayerSettings& p = d->settings.players.at(number);
+	std::string temp(p.name);
+	temp.erase(p.name.find(name), name.size());
+	if (temp.back() == ' ') {
+		temp.erase(temp.end() - 1);
+	} else if (temp.front() == ' ') {
+		temp.erase(temp.begin());
+	}
+	set_player_name(number, temp);
+	return temp.empty();
 }
 
 void GameHost::set_player_name(uint8_t const number, const std::string& name) {
@@ -1534,14 +1436,7 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	std::string name = d->settings.users.at(user).name;
 	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
-		PlayerSettings& op = d->settings.players.at(old);
-		std::string temp(" ");
-		temp += name;
-		temp += " ";
-		std::string temp2(op.name);
-		temp2 = temp2.erase(op.name.find(temp), temp.size());
-		set_player_name(old, temp2);
-		if (temp2.empty()) {
+		if (remove_player_name(old, name)) {
 			set_player_state(old, PlayerSettings::State::kOpen);
 		}
 	}
@@ -1551,9 +1446,9 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 		PlayerSettings& op = d->settings.players.at(number);
 		if (op.state == PlayerSettings::State::kOpen) {
 			set_player_state(number, PlayerSettings::State::kHuman);
-			set_player_name(number, " " + name + " ");
+			set_player_name(number, name);
 		} else {
-			set_player_name(number, op.name + " " + name + " ");
+			set_player_name(number, op.name + " " + name);
 		}
 	}
 	d->settings.users.at(user).position = number;
@@ -1763,6 +1658,10 @@ bool GameHost::has_user_name(const std::string& name, uint8_t ignoreplayer) {
 		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	}
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i) {
+		if (d->settings.savegame && d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
+			// This might be this users slot from the configured savegame
+			continue;
+		}
 		if (i != ignoreplayer && d->settings.players.at(i).name == name) {
 			return true;
 		}
@@ -1826,8 +1725,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && pair.first.category != AddOns::AddOnCategory::kTheme) {
-				enabled_addons.push_back(&pair.first);
+			if (pair.second && pair.first->category != AddOns::AddOnCategory::kTheme) {
+				enabled_addons.push_back(pair.first.get());
 			}
 		}
 		packet.unsigned_32(enabled_addons.size());
@@ -1899,8 +1798,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	broadcast_setting_user(client.usernum);
 
 	// Check if there is an unoccupied player left and if, assign.
+	// Assign the slot with the same username for savegames
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
-		if (d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
+		const PlayerSettings& p = d->settings.players.at(i);
+		if (p.state == PlayerSettings::State::kOpen &&
+		    (!d->settings.savegame || p.name == effective_name)) {
 			switch_to_player(client.usernum, i);
 			break;
 		}
@@ -2374,14 +2276,13 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	}
 	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u", client_num,
+	verb_log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
 	              client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(),
 	              time.get());
-	receive_client_time(client_num, time);
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
-	send_player_command(plcmd);
+	do_send_player_command(plcmd);
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {
@@ -2570,14 +2471,7 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 	for (const UserSettings& setting : d->settings.users) {
 		if (setting.position == number) {
 			if (!d->game) {
-				// Remove player name
-				PlayerSettings& p = d->settings.players.at(number);
-				std::string temp(" ");
-				temp += name;
-				temp += " ";
-				std::string temp2(p.name);
-				temp2 = temp2.erase(p.name.find(temp), temp.size());
-				set_player_name(number, temp2);
+				remove_player_name(number, name);
 			}
 			return;
 		}

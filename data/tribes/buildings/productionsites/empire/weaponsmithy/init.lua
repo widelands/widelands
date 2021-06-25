@@ -22,19 +22,26 @@ descriptions:new_productionsite_type {
       marble_column = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 44, 61 },
       },
+   },
+
+   spritesheets = {
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 44, 61 },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 44, 61 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 44, 61 },
-         fps = 2
+         fps = 2,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 44, 61 }
       },
    },
 

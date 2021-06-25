@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-04 13:23+0000\n"
+"PO-Revision-Date: 2021-06-20 08:36+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -101,7 +101,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Чат'Карут скончался стариком, отцом трех сильных и амбициозных сыновей, и предводителем армии, способной противостоять любому врагу, решившемуся нарушить покой древних лесов. Хотя в конце своего славного царствования, Чат'Карут избрал своего старшего сына, Трона, в качестве наследника и военачальника, это решение оставило его братьев неудовлетворенными. Старый военачальник знал это. Следуя воле своего отца Трон покинул столицу – Аль'Тунран, дом Трона среди Древ, и привел свои войска к высоким холмам, где и похоронил тело своего отца. Там он поклялся богам и духу своего отца, вернуться и восстановить порядок. Не смотря на то, что его братья развязали нелепую войну против Трона и поставленных им  для охраны Аль'Тунрана малочисленных подразделений, молодой военачальник стремится воссоединить своих амбициозных братьев и принудить племена вновь встать под общее знамя."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -126,7 +126,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Шесть месяцев назад, Люций – молодой имперский генерал – был послан с 150 солдатами на границу за северными лесами, где варварские племена кочевали по землям подконтрольным империи. Его задачей было защитить землю Империи. Сперва все было спокойно. Он даже общался с детьми варваров и думал о мирной жизни бок о бок с этим примитивным народом. Он почувствовал себя в безопасности, а его солдаты ослабили наблюдение за потенциальным противником. Это было фатальной ошибкой. В одну из мартовских ночей его армия была атакована армией варваров в 100 человек и полностью рассеяна. Люцию и горстке солдат едва удалось сохранить свои жизни."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -146,7 +146,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Когда Бог атлантов разочаровался в своем народе и потопил их остров, началась ставшая легендой борьба одной женщины за справедливость и второй шанс для своего народа. Джандлина стала самым могущественным человеком своей эпохи: она повела уцелевших атлантов к новому будущему в новом мире, но расплатится за это ей пришлось своей человечностью и душой."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
@@ -182,7 +182,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Жизнь у океана - постоянная борьба, и тем более для жителей фризского побережья Северного моря. Было ли последнее наводнение самым разрушительным в человеческой памяти? На самом деле это не более чем еще один пример трудностей, с которыми сталкиваются все Фризы. Или это послание богов – из-за которого племя, только что поселившееся здесь, должно искать новое пристанище?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -223,7 +223,7 @@ msgstr "Наконец корабль был отремонтирован, и Л
 
 #: ../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Месть Нептуна"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -280,7 +280,7 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Ребаунд и его племя счастливо жило на севере. Тем временем, на материке осталось практически все, кроме мира. Да к тому же, его старый друг отчаянно нуждается в помощи…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -347,15 +347,15 @@ msgstr "Большие строительные площадки редки на
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Астория 2.R"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – в редакции Nordfriese"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Долгое развитие экономики на прекрасном острове. Пусть попробует каждый!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -429,7 +429,7 @@ msgstr "Пересекая горизонт"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Кристина – в редакции 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -437,11 +437,11 @@ msgstr "Снарядите корабль и плывите к горизонт�
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr ""
+msgstr "На данной карте тирания не сделает вас победителем."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Доломиты 3.0"
 
 #: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
@@ -450,7 +450,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Жемчужина Альп - доломитовый горный хребет - был объявлен памятником мирового наследия за его девственную красоту. Эта карта представляет собой первозданно воссозданную реконструкцию приграничной области Италии от Кортина д'Ампеццо на северо-востоке и Канацеи на юго-западе. Если вам предстоит помериться силами в поединке на смерть против своих врагов, это лучше сделать в этом прекрасном месте."
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -459,7 +459,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "В горах часто встречается ровные места. Часто, увы, это обрывы. Мудро пользуйтесь каждым пятачком для строительства. Крепость на выходе из ущелья может стать надежным оплотом – рельеф вам в помощь. Рубите деревья и расширяйтесь как можно быстрее – только так у вас будет достаточно места под поля."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -473,25 +473,25 @@ msgstr "Захватывающая дух красота этих изумруд
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Лебедь, рак и щука"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Три игрока в равных условиях."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "Европа 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Большая карта Европы. Швеция = синие, Италия = крас, Испания = жел, Россия = чер, Англия = ор, Франция = фиол, Польша = бел"
 
 #: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -677,7 +677,7 @@ msgstr "Четыре племени дерутся за доминировани
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Малое кольцо 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -686,17 +686,17 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "Сбалансированная карта для 8ми игроков с правдоподобным рельефом. Реки здесь стекают с ледников, с гор и холмов, пока не достигают моря. Золото встречается существенно реже угля и железа. Ресурсы часто удалены друг от друга."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Долгий, долгий путь v2"
 
 #: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr ">Где победа? В тысячах миль отсюда.< [Porgy и Bess] Вам предстоит долгий-долгий путь к завоеванию всех островов. Удачи!"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -754,7 +754,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Если вы щёлкаете 6 ИИ как орешки, эта карта бросит Вам достойный вызов. Синий игрок лишен металла (если не считать необходимых для раскачки крох), а вся добыча  - 5% с одной шахты. Все также 1 против 6 ИИ игроков (возможно, вы захотите убрать некоторых, чтобы было полегче). Успехов вам!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -997,7 +997,7 @@ msgstr "Множество прекрасных зеленых островов 
 msgid ""
 "Take care not to build your ships in the lagoons. They cannot pass through "
 "the reefs to the main ocean, where your ports are located."
-msgstr ""
+msgstr "Нежелательно строить корабли в лагунах: они не смогут выйти в океан из-за рифов, а значит, попасть в ваши порты."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
