@@ -99,7 +99,7 @@ void EditorGameBase::init_addons(bool world_only) {
 	enabled_addons_.clear();
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && (world_only ? pair.first->category == AddOns::AddOnCategory::kWorld :
-		                                 addon_initially_enabled(pair.first->category))) {
+                                       addon_initially_enabled(pair.first->category))) {
 			enabled_addons_.push_back(pair.first);
 		}
 	}

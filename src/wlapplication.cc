@@ -564,8 +564,8 @@ static void init_one_player_from_template(unsigned p,
 	const Widelands::TribeBasicInfo t = settings->settings().get_tribeinfo(tribe);
 	for (unsigned i = 0; i < t.initializations.size(); ++i) {
 		if (addon.empty() ?
-		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
-		       addon == t.initializations[i].script) {
+             init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+             addon == t.initializations[i].script) {
 			settings->set_player_init(p, i);
 			found_init = true;
 			break;

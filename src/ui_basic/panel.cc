@@ -369,15 +369,15 @@ int Panel::do_run() {
 	notes_.clear();
 	handled_notes_.clear();
 	subscriber1_ = is_initializer ?
-	                  Notifications::subscribe<NoteThreadSafeFunction>(
+                     Notifications::subscribe<NoteThreadSafeFunction>(
 	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
-	                  nullptr;
+                     nullptr;
 	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
 	                                   [this](const NoteThreadSafeFunctionHandled& note) {
 		                                   assert(!handled_notes_.count(note.id));
 		                                   handled_notes_.insert(note.id);
 	                                   }) :
-	                                nullptr;
+                                   nullptr;
 
 	// Loop
 	running_ = true;
