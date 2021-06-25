@@ -24,13 +24,16 @@ descriptions:new_warehouse_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   Spritesheets = {
       idle = {
-         hotspot = { 60, 78 },
+         hotspot = { 60, 78 }
       },
       build = {
-         hotspot = { 60, 78 },
-      }
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 60, 78 }
+      },
    },
 
    aihints = {},
