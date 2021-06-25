@@ -32,21 +32,33 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 2, 20 },
       },
+   },
+
+   spritesheets = {
       fishing = {
-         hotspot = { 10, 21 },
-         fps = 10
+         fps = 10,
+         frames = 30,
+         rows = 6,
+         columns = 5,
+         hotspot = { 10, 21 }
       },
       walk = {
-         hotspot = { 8, 21 },
          fps = 20,
-         directional = true
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 8, 21 }
       },
       walkload = {
-         hotspot = { 8, 20 },
          fps = 10,
-         directional = true
-      }
-   }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 20 }
+      },
+   },
 }
 
 pop_textdomain()

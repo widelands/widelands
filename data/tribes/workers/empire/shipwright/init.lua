@@ -41,24 +41,36 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 13, 24 },
       },
+   },
+
+   spritesheets = {
       work = {
          sound_effect = {
             path = "sound/hammering/hammering",
             priority = "50%"
          },
-         hotspot = { 12, 27 },
-         fps = 10
+         fps = 10,
+         frames = 92,
+         rows = 11,
+         columns = 9,
+         hotspot = { 12, 27 }
       },
       walk = {
-         hotspot = { 11, 24 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 11, 24 }
       },
       walkload = {
-         hotspot = { 9, 22 },
          fps = 10,
-         directional = true
-      }
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 22 }
+      },
    }
 }
 
