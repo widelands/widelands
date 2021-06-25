@@ -12,10 +12,13 @@ descriptions:new_warehouse_type {
    map_check = {"seafaring"},
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 74, 96 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 74, 96 }
       },
    },
 
@@ -26,3 +29,4 @@ descriptions:new_warehouse_type {
 }
 
 pop_textdomain()
+d:
