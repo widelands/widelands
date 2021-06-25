@@ -115,7 +115,7 @@ SpinBox::SpinBox(Panel* const parent,
 
 	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_height_,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-	                                                           UI::ButtonStyle::kWuiSecondary,
+                                                              UI::ButtonStyle::kWuiSecondary,
 	                            "");
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);

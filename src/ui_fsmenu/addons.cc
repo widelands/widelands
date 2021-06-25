@@ -1424,7 +1424,7 @@ required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::AddOnInfo> in
 		}
 		result += g_style_manager
 		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
-		                                                              UI::FontStyle::kWarning)
+                                                                    UI::FontStyle::kWarning)
 		             .as_font_tag(str);
 	}
 	return result;
@@ -1512,7 +1512,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
-					                                      AddOns::UpdateThemeAction::kAutodetect,
+                                                     AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
 					ctrl->rebuild();
@@ -1644,7 +1644,7 @@ public:
 	                           UI::PanelStyle::kFsMenu,
 	                           UI::FontStyle::kFsMenuLabel,
 	                           info->number_of_votes() ?
-	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+                                 (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                                                      "Average rating: %1$.3f (%2$u votes)",
 	                                                      info->number_of_votes())) %
 	                               info->average_rating() % info->number_of_votes())
@@ -1682,8 +1682,8 @@ public:
 		std::string text = "<rt><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(info->user_comments.empty() ?
-		                           _("No comments yet.") :
-		                           (boost::format(ngettext(
+                                 _("No comments yet.") :
+                                 (boost::format(ngettext(
 		                               "%u comment:", "%u comments:", info->user_comments.size())) %
 		                            info->user_comments.size())
 		                              .str());
@@ -2088,15 +2088,15 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	      .str());
 	verified_.set_tooltip(
 	   info->internal_name.empty() ?
-	      _("Error") :
-	      info->verified ?
-	      _("Verified by the Widelands Development Team") :
-	      _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
+         _("Error") :
+	   info->verified ?
+         _("Verified by the Widelands Development Team") :
+         _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
-	      "" :
-	      (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+         "" :
+         (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
 	       (boost::format(
 	           ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size)) %
 	        info->total_file_size)
@@ -2109,7 +2109,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	                                                          info->number_of_votes())) %
 	                                   info->average_rating() % info->number_of_votes())
 	                                     .str() :
-	                                  _("No votes yet")) %
+                                     _("No votes yet")) %
 	       (boost::format(ngettext("%u comment", "%u comments", info->user_comments.size())) %
 	        info->user_comments.size()) %
 	       (boost::format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size())) %
