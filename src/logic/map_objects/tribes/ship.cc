@@ -1537,12 +1537,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
 		      shipping_item.object_.get(egbase)->descr().name().c_str(),
 		      (shipping_item.destination_dock_.is_set()) ?
-		         (boost::format("%u (%d x %d)") % shipping_item.destination_dock_.serial() %
+               (boost::format("%u (%d x %d)") % shipping_item.destination_dock_.serial() %
 		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x %
 		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y)
 		            .str()
 		            .c_str() :
-		         "-");
+               "-");
 	}
 }
 

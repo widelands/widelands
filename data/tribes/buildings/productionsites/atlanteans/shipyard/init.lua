@@ -28,9 +28,6 @@ descriptions:new_productionsite_type {
       idle = {
          hotspot = { 53, 66 },
       },
-      build = {
-         hotspot = { 53, 66 },
-      },
       working = {
          basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 53, 66 },
@@ -39,6 +36,15 @@ descriptions:new_productionsite_type {
          basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 53, 66 },
       }
+   },
+
+   spritesheets = {
+      build = {
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 52, 66 }
+      },
    },
 
    aihints = {

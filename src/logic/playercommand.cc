@@ -525,7 +525,7 @@ void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 			// TODO(Nordfriese): Savegame compatibility
 			type_ = packet_version < 3 ? FlagJob::Type::kGeologist :
-			                             static_cast<FlagJob::Type>(fr.unsigned_8());
+                                      static_cast<FlagJob::Type>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFlagAction", packet_version, kCurrentPacketVersionCmdFlagAction);

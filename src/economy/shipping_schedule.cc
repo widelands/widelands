@@ -394,7 +394,7 @@ struct ScoredShip {
 	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
 		// This needs to use uint64_t because the intermediate results will overflow uint32_t
 		return eta > kHorriblyLongDuration ? 0 :
-		                                     capacity * kMinScoreForImmediateAcceptFactor *
+                                           capacity * kMinScoreForImmediateAcceptFactor *
 		                                        kHorriblyLongDuration * kHorriblyLongDuration /
 		                                        (std::max(eta, kWonderfullyShortDuration) *
 		                                         std::max(detour, kWonderfullyShortDuration));
