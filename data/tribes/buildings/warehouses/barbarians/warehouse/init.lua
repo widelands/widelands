@@ -24,8 +24,11 @@ descriptions:new_warehouse_type {
    },
 
    animation_directory = dirname,
-   Spritesheets = {
+   spritesheets = {
       idle = {
+         frames = 1,
+         rows = 1,
+         columns = 1,
          hotspot = { 60, 78 }
       },
       build = {
