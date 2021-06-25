@@ -259,7 +259,7 @@ def create_directive(cls):
     bgcolor="transparent"
     node [shape=box, style=filled, fillcolor=white,
           fontsize=12, fontname="Helvetica", margin="0.05, 0.0"]
-    edge [color=white]
+    edge [color=gray]
     {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13, shape=oval]
     {main_cls} [shape=house, href={link}]
     {ancestors}
