@@ -29,4 +29,3 @@ descriptions:new_warehouse_type {
 }
 
 pop_textdomain()
-d:
