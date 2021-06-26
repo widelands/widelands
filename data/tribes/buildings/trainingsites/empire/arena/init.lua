@@ -48,9 +48,15 @@ descriptions:new_trainingsite_type {
       idle = {
          hotspot = { 81, 82 }
       },
+   },
+
+   spritesheets = {
       build = {
-         hotspot = { 82, 83 },
-      }
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 81, 83 }
+      },
    },
 
    aihints = {
