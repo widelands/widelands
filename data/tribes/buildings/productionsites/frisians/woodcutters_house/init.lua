@@ -19,21 +19,24 @@ descriptions:new_productionsite_type {
       brick = 1
    },
 
+   animation_directory = dirname,
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {40, 69},
          frames = 10,
          columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {40, 52},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {40, 52}
       }
    },
