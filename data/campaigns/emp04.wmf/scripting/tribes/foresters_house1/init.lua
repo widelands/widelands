@@ -17,15 +17,14 @@ descriptions:new_productionsite_type {
    return_on_dismantle = {
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 52, 54 },
       },
    },
 
    aihints = {
-
    },
 
    working_positions = {
