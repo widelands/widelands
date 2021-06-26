@@ -41,21 +41,21 @@ void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 		const uint16_t packet_version = fr.unsigned_16();
 		// We need to keep support for older versions around forever!!
 		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
-			int32_t const nr_res = fr.unsigned_16();
+			uint32_t const nr_res = (packet_version >= 2) ? fr.unsigned_32() : fr.unsigned_16();
 
 			// construct ids and map
-			std::map<uint8_t, uint8_t> smap;
-			for (uint8_t i = 0; i < nr_res; ++i) {
-				uint8_t const id = fr.unsigned_16();
+			std::map<uint32_t, uint32_t> smap;
+			for (uint32_t i = 0; i < nr_res; ++i) {
+				uint32_t const id = fr.unsigned_32();
 				smap[id] = egbase.mutable_descriptions()->load_resource(fr.c_string());
 			}
 
 			for (uint16_t y = 0; y < map->get_height(); ++y) {
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					const uint32_t id = (packet_version >= 2) ? fr.unsigned_32() : fr.unsigned_8();
-					const uint16_t amount = (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
-					const uint16_t start_amount =
-					   (packet_version >= 2) ? fr.unsigned_16() : fr.unsigned_8();
+					const uint32_t amount = (packet_version >= 2) ? fr.unsigned_32() : fr.unsigned_8();
+					const uint32_t start_amount =
+					   (packet_version >= 2) ? fr.unsigned_32() : fr.unsigned_8();
 					const FCoords& fcoords = map->get_fcoords(Coords(x, y));
 					const auto it = smap.find(id);
 					map->initialize_resources(
@@ -89,19 +89,16 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	// Write the number of resources
 	const Map& map = egbase.map();
 	const Descriptions& descriptions = egbase.descriptions();
-	uint8_t const nr_res = descriptions.nr_resources();
-	fw.unsigned_16(nr_res);
+	const uint32_t nr_res = descriptions.nr_resources();
+	fw.unsigned_32(nr_res);
 
 	//  write all resources names and their id's
-	for (int32_t i = 0; i < nr_res; ++i) {
+	for (uint32_t i = 0; i < nr_res; ++i) {
 		const ResourceDescription& res = *descriptions.get_resource_descr(i);
-		fw.unsigned_16(i);
+		fw.unsigned_32(i);
 		fw.c_string(res.name().c_str());
 	}
 
-	//  Now, all resouces as uint8_ts in order
-	//  - resource id
-	//  - amount
 	for (uint16_t y = 0; y < map.get_height(); ++y) {
 		for (uint16_t x = 0; x < map.get_width(); ++x) {
 			const Field& f = map[Coords(x, y)];
@@ -109,8 +106,8 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			ResourceAmount const amount = f.get_resources_amount();
 			ResourceAmount const start_amount = f.get_initial_res_amount();
 			fw.unsigned_32(res);
-			fw.unsigned_16(amount);
-			fw.unsigned_16(start_amount);
+			fw.unsigned_32(amount);
+			fw.unsigned_32(start_amount);
 		}
 	}
 
