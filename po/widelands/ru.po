@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-23 08:06+0000\n"
+"POT-Creation-Date: 2021-06-25 15:36+0000\n"
 "PO-Revision-Date: 2021-06-23 13:18+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -277,8 +277,8 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -292,12 +292,12 @@ msgstr "Главное меню"
 msgid "Tools"
 msgstr "Инструменты"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, statistics
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, statistics
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -487,10 +487,10 @@ msgstr "Информация"
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -567,7 +567,7 @@ msgstr "Карта не была сохранена, вы действитель
 #: ../../src/editor/editorinteractive.cc:916 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
 #: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
-#: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2090
+#: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
 #: ../../src/wlapplication.cc:1493
 msgid "Error"
@@ -658,8 +658,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -844,8 +844,8 @@ msgstr "Экран"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
-#: ../../src/ui_basic/messagebox.cc:102 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:204 ../../src/ui_fsmenu/addons.cc:1679
+#: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_basic/text_prompt.cc:47
+#: ../../src/ui_fsmenu/addons.cc:204 ../../src/ui_fsmenu/addons.cc:1680
 #: ../../src/ui_fsmenu/addons_packager.cc:109
 #: ../../src/ui_fsmenu/helpwindow.cc:57
 #: ../../src/ui_fsmenu/keyboard_options.cc:133 ../../src/ui_fsmenu/menu.cc:145
@@ -862,7 +862,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:757
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
 #: ../../src/ui_basic/color_chooser.cc:271
-#: ../../src/ui_basic/messagebox.cc:111 ../../src/ui_basic/text_prompt.cc:56
+#: ../../src/ui_basic/messagebox.cc:112 ../../src/ui_basic/text_prompt.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:49
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
@@ -1136,7 +1136,7 @@ msgid "Player"
 msgstr "Игрок"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:623
-#: ../../src/network/gamehost.cc:1638
+#: ../../src/network/gamehost.cc:1637
 #, c-format
 msgid "Computer %u"
 msgstr "Компьютер %u"
@@ -1374,8 +1374,8 @@ msgid ""
 "location."
 msgstr "Выберите размер карты, затем кликните по желательному местоположению. При увеличении ширины/высоты карты будут прирастать расстояния на восток/юг от выбранной точки. При укорачивании карты будут сокращаться расстояния на восток/юг, убирая число гексов."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -2068,45 +2068,19 @@ msgstr "Нет солдат для этого уровня тренировки!
 msgid "Completed %s"
 msgstr "Завершено %s"
 
-#. * TRANSLATORS: Productivity label on a building if there is 1 worker
-#. missing
-#: ../../src/logic/map_objects/tribes/productionsite.cc:338
-msgid "Worker missing"
-msgstr "Не хватает работника"
-
-#. * TRANSLATORS: Productivity label on a building if there is more than 1
-#. worker
-#. missing. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/productionsite.cc:341
-msgid "Workers missing"
-msgstr "Не хватает работников"
-
-#. * TRANSLATORS: Productivity label on a building if there is 1 worker
-#. missing
-#: ../../src/logic/map_objects/tribes/productionsite.cc:350
-msgid "Worker is coming"
-msgstr "Рабочий идет на свое место"
-
-#. * TRANSLATORS: Productivity label on a building if there is more than 1
-#. worker
-#. missing. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/productionsite.cc:353
-msgid "Workers are coming"
-msgstr "Рабочий прибыл"
-
-#: ../../src/logic/map_objects/tribes/productionsite.cc:360
+#: ../../src/logic/map_objects/tribes/productionsite.cc:352
 msgid "(stopped)"
 msgstr "(остановлено)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:443
-#: ../../src/wui/building_statistics_menu.cc:694
+#: ../../src/logic/map_objects/tribes/productionsite.cc:435
+#: ../../src/wui/building_statistics_menu.cc:693
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1095
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1086
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
@@ -2269,6 +2243,31 @@ msgstr "Работники"
 msgid "Buildings"
 msgstr "Строения"
 
+#. * TRANSLATORS: Productivity label on a building if there is 1 worker
+#. missing
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:229
+msgid "Worker missing"
+msgstr "Не хватает работника"
+
+#. * TRANSLATORS: Productivity label on a building if there is more than 1
+#. worker missing.
+#. If you need plural forms here, please let us know.
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:234
+msgid "Workers missing"
+msgstr "Не хватает работников"
+
+#. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:238
+msgid "Worker is coming"
+msgstr "Рабочий идет на свое место"
+
+#. * TRANSLATORS: Productivity label on a building if there is more than 1
+#. worker coming. If
+#. you need plural forms here, please let us know.
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:243
+msgid "Workers are coming"
+msgstr "Рабочий прибыл"
+
 #: ../../src/logic/map_objects/tribes/warehouse.cc:557
 msgid "A new port was added to your economy."
 msgstr "Новый порт присоединился к экономике."
@@ -2300,19 +2299,19 @@ msgstr "Фарватер был уничтожен чтобы освободит
 msgid "A geologist found resources."
 msgstr "Геолог нашел полезные ископаемые."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2064
+#: ../../src/logic/map_objects/tribes/worker.cc:2063
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Ваш %s не нашел пути домой. Похоже, ему крышка."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2071
+#: ../../src/logic/map_objects/tribes/worker.cc:2070
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr "Работник"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2072
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 msgid "Worker got lost!"
 msgstr "Работник потерян!"
 
@@ -2528,19 +2527,19 @@ msgstr "Проверка карты"
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
 
-#: ../../src/network/gameclient.cc:214
+#: ../../src/network/gameclient.cc:213
 #: ../../src/network/internet_gaming.cc:116
 msgid "Could not establish connection to host"
 msgstr "Невозможно установить соединение с хостом"
 
-#: ../../src/network/gameclient.cc:215
+#: ../../src/network/gameclient.cc:214
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands не может осуществить соединение по указанному адресу. Возможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз."
 
-#: ../../src/network/gameclient.cc:751
+#: ../../src/network/gameclient.cc:750
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2549,35 +2548,35 @@ msgstr[1] "%u конфликта дополнений:\n"
 msgstr[2] "%u конфликтов дополнений:\n"
 msgstr[3] "%u конфликтов дополнений:\n"
 
-#: ../../src/network/gameclient.cc:757
+#: ../../src/network/gameclient.cc:756
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n. Требования  \"%2$s\" не выполнены"
 
-#: ../../src/network/gameclient.cc:761
+#: ../../src/network/gameclient.cc:760
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n. Установлено дополнение \"%2$s\" версии %3$s, тогда как на сервере запущена версия %4$s"
 
-#: ../../src/network/gameclient.cc:933
+#: ../../src/network/gameclient.cc:932
 msgid "/me ’s file failed md5 checksumming."
 msgstr "Файл /me не прошел проверку контрольной суммы MD5."
 
-#: ../../src/network/gameclient.cc:975
+#: ../../src/network/gameclient.cc:974
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me проверка полученного файла. Хотя проверка md5 суммы успешна, файл не доступен."
 
-#: ../../src/network/gameclient.cc:1283
+#: ../../src/network/gameclient.cc:1282
 msgid "Disconnected"
 msgstr "Отвалилась сеть"
 
-#: ../../src/network/gameclient.cc:1285
+#: ../../src/network/gameclient.cc:1284
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2698,7 +2697,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands не удалось запустить сервер.\nВероятно, какой-то другой процесс уже запустил сервер на нашем порту."
 
-#: ../../src/network/gamehost.cc:1885
+#: ../../src/network/gamehost.cc:1884
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3105,7 +3104,7 @@ msgstr "Widelands не удалось использовать локальну�
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1332
+#: ../../src/scripting/lua_game.cc:1331
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3412,8 +3411,8 @@ msgid ""
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s)  от %3$s"
 
-#: ../../src/ui_fsmenu/addons.cc:469 ../../src/ui_fsmenu/addons.cc:2025
-#: ../../src/ui_fsmenu/addons.cc:2050
+#: ../../src/ui_fsmenu/addons.cc:469 ../../src/ui_fsmenu/addons.cc:2026
+#: ../../src/ui_fsmenu/addons.cc:2051
 msgid "NOT VERIFIED"
 msgstr "Не проверено"
 
@@ -3553,7 +3552,7 @@ msgid ""
 msgstr "Локализация дополнения \"%1$s\" недоступна для загрузки с сервера. Установка/обновление локализации пропущена.\n\nОшибка:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1271 ../../src/ui_fsmenu/addons.cc:1453
-#: ../../src/ui_fsmenu/addons.cc:1923
+#: ../../src/ui_fsmenu/addons.cc:1924
 msgid "Uninstall"
 msgstr "Удалить"
 
@@ -3617,65 +3616,65 @@ msgid "Enable"
 msgstr "Доступно"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1476 ../../src/ui_fsmenu/addons.cc:1948
+#: ../../src/ui_fsmenu/addons.cc:1476 ../../src/ui_fsmenu/addons.cc:1949
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1489 ../../src/ui_fsmenu/addons.cc:1989
+#: ../../src/ui_fsmenu/addons.cc:1489 ../../src/ui_fsmenu/addons.cc:1990
 #: ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1493 ../../src/ui_fsmenu/addons.cc:1993
+#: ../../src/ui_fsmenu/addons.cc:1493 ../../src/ui_fsmenu/addons.cc:1994
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1496 ../../src/ui_fsmenu/addons.cc:1997
+#: ../../src/ui_fsmenu/addons.cc:1496 ../../src/ui_fsmenu/addons.cc:1998
 #, c-format
 msgid "by %s"
 msgstr "от %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1527 ../../src/ui_fsmenu/addons.cc:2081
+#: ../../src/ui_fsmenu/addons.cc:1527 ../../src/ui_fsmenu/addons.cc:2082
 #, c-format
 msgid "Category: %s"
 msgstr "Категория: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1532 ../../src/ui_fsmenu/addons.cc:2085
+#: ../../src/ui_fsmenu/addons.cc:1532 ../../src/ui_fsmenu/addons.cc:2086
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "Версия %1$s+%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1584
+#: ../../src/ui_fsmenu/addons.cc:1585
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1586
+#: ../../src/ui_fsmenu/addons.cc:1587
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1588
+#: ../../src/ui_fsmenu/addons.cc:1589
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1590
+#: ../../src/ui_fsmenu/addons.cc:1591
 #, c-format
 msgid "%u bytes"
 msgstr "%u байт"
 
-#: ../../src/ui_fsmenu/addons.cc:1628
+#: ../../src/ui_fsmenu/addons.cc:1629
 msgid "Your vote"
 msgstr "Вы проголосовали за"
 
-#: ../../src/ui_fsmenu/addons.cc:1646 ../../src/ui_fsmenu/addons.cc:2106
+#: ../../src/ui_fsmenu/addons.cc:1647 ../../src/ui_fsmenu/addons.cc:2107
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
@@ -3684,27 +3683,27 @@ msgstr[1] "Средняя оценка: %1$.3f (проголосовало %2$u 
 msgstr[2] "Средняя оценка: %1$.3f (проголосовало %2$u человек)"
 msgstr[3] "Средняя оценка: %1$.3f (проголосовало %2$u человек)"
 
-#: ../../src/ui_fsmenu/addons.cc:1651 ../../src/ui_fsmenu/addons.cc:2111
+#: ../../src/ui_fsmenu/addons.cc:1652 ../../src/ui_fsmenu/addons.cc:2112
 msgid "No votes yet"
 msgstr "Никто не голосовал"
 
-#: ../../src/ui_fsmenu/addons.cc:1661
+#: ../../src/ui_fsmenu/addons.cc:1662
 msgid "Next screenshot"
 msgstr "Следующий снимок"
 
-#: ../../src/ui_fsmenu/addons.cc:1670
+#: ../../src/ui_fsmenu/addons.cc:1671
 msgid "Previous screenshot"
 msgstr "Предыдущий снимок"
 
-#: ../../src/ui_fsmenu/addons.cc:1678
+#: ../../src/ui_fsmenu/addons.cc:1679
 msgid "Submit comment"
 msgstr "Прокомментировать"
 
-#: ../../src/ui_fsmenu/addons.cc:1684
+#: ../../src/ui_fsmenu/addons.cc:1685
 msgid "No comments yet."
 msgstr "Комментариев нет."
 
-#: ../../src/ui_fsmenu/addons.cc:1686
+#: ../../src/ui_fsmenu/addons.cc:1687
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
@@ -3713,65 +3712,65 @@ msgstr[1] "%u комментария:"
 msgstr[2] "%u комментариев:"
 msgstr[3] "%u комментариев:"
 
-#: ../../src/ui_fsmenu/addons.cc:1696
+#: ../../src/ui_fsmenu/addons.cc:1697
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "\"%1$s\" прокомментировал версию %2$s:"
 
-#: ../../src/ui_fsmenu/addons.cc:1710
+#: ../../src/ui_fsmenu/addons.cc:1711
 msgid "Not voted"
 msgstr "Не голосовали"
 
-#: ../../src/ui_fsmenu/addons.cc:1770
+#: ../../src/ui_fsmenu/addons.cc:1771
 #, c-format
 msgid "Comments (%u)"
 msgstr "Комментарии (%u шт.)"
 
-#: ../../src/ui_fsmenu/addons.cc:1775
+#: ../../src/ui_fsmenu/addons.cc:1776
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Снимков (%u шт.)"
 
-#: ../../src/ui_fsmenu/addons.cc:1787
+#: ../../src/ui_fsmenu/addons.cc:1788
 #, c-format
 msgid "Votes (%u)"
 msgstr "Голосование (%u раз)"
 
-#: ../../src/ui_fsmenu/addons.cc:1830
+#: ../../src/ui_fsmenu/addons.cc:1831
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1866
+#: ../../src/ui_fsmenu/addons.cc:1867
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Из-за ошибки не удалось получить снимок с сервера."
 
-#: ../../src/ui_fsmenu/addons.cc:1905 ../../src/ui_fsmenu/addons.cc:2016
+#: ../../src/ui_fsmenu/addons.cc:1906 ../../src/ui_fsmenu/addons.cc:2017
 msgid "Install"
 msgstr "Установить"
 
-#: ../../src/ui_fsmenu/addons.cc:1914 ../../src/ui_fsmenu/addons.cc:2040
+#: ../../src/ui_fsmenu/addons.cc:1915 ../../src/ui_fsmenu/addons.cc:2041
 msgid "Upgrade"
 msgstr "Обновить"
 
-#: ../../src/ui_fsmenu/addons.cc:1932
+#: ../../src/ui_fsmenu/addons.cc:1933
 msgid "Comments and Votes"
 msgstr "Комментарии и голосование"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1974
+#: ../../src/ui_fsmenu/addons.cc:1975
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1998
+#: ../../src/ui_fsmenu/addons.cc:1999
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "от %1$s (обновлено до %2$s)"
 
-#: ../../src/ui_fsmenu/addons.cc:2017
+#: ../../src/ui_fsmenu/addons.cc:2018
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3784,11 +3783,11 @@ msgid ""
 "%6$s\n"
 msgstr "Всё же установить дополнение?\n\n%1$s\nот %2$s\n%3$s\nВерсии %4$s\nКатегория: %5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:2025 ../../src/ui_fsmenu/addons.cc:2050
+#: ../../src/ui_fsmenu/addons.cc:2026 ../../src/ui_fsmenu/addons.cc:2051
 msgid "Verified"
 msgstr "Проверено"
 
-#: ../../src/ui_fsmenu/addons.cc:2041
+#: ../../src/ui_fsmenu/addons.cc:2042
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3802,17 +3801,17 @@ msgid ""
 "%7$s"
 msgstr "Рискнёте обновить это дополнение?\n\n%1$s\nот %2$s\n%3$s\nУстановлена версия %4$s\nДоступна версия %5$s\nКатегория: %6$s\n%7$s"
 
-#: ../../src/ui_fsmenu/addons.cc:2092
+#: ../../src/ui_fsmenu/addons.cc:2093
 msgid "Verified by the Widelands Development Team"
 msgstr "Проверено командой разработчиков Widelands"
 
-#: ../../src/ui_fsmenu/addons.cc:2093
+#: ../../src/ui_fsmenu/addons.cc:2094
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Это дополнение не было проверено разработчиками игры. Они не отвечают за его полноту."
 
-#: ../../src/ui_fsmenu/addons.cc:2100
+#: ../../src/ui_fsmenu/addons.cc:2101
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
@@ -3821,7 +3820,7 @@ msgstr[1] "Всего занимает %uбайта"
 msgstr[2] "Всего занимает %u байт"
 msgstr[3] "Всего занимает %uбайт"
 
-#: ../../src/ui_fsmenu/addons.cc:2103
+#: ../../src/ui_fsmenu/addons.cc:2104
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
@@ -3830,7 +3829,7 @@ msgstr[1] "Загружено %uраза "
 msgstr[2] "Загружено %uраз"
 msgstr[3] "Загружено %uраз"
 
-#: ../../src/ui_fsmenu/addons.cc:2112
+#: ../../src/ui_fsmenu/addons.cc:2113
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
@@ -3839,7 +3838,7 @@ msgstr[1] "%uкомментария "
 msgstr[2] "%uкомментариев"
 msgstr[3] "%u комментариев"
 
-#: ../../src/ui_fsmenu/addons.cc:2114
+#: ../../src/ui_fsmenu/addons.cc:2115
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -6095,22 +6094,22 @@ msgstr "Шахты"
 msgid "Ports"
 msgstr "Порты"
 
-#: ../../src/wui/building_statistics_menu.cc:703
+#: ../../src/wui/building_statistics_menu.cc:702
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS: Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:713
+#: ../../src/wui/building_statistics_menu.cc:711
+#: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
-#: ../../src/wui/building_statistics_menu.cc:735
 #: ../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:724
+#: ../../src/wui/building_statistics_menu.cc:722
 msgid "Lacking soldiers:"
 msgstr "Не занято солдатами:"
 
@@ -6504,8 +6503,8 @@ msgstr "Замените отключенного игрока выбранны�
 msgid "AI for the disconnected player"
 msgstr "Искусственный Интеллект для отключенного игрока"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6910,11 +6909,11 @@ msgstr "Убрать товар"
 msgid "Add ware"
 msgstr "Добавить товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:554
+#: ../../src/wui/inputqueuedisplay.cc:553
 msgid "Hide controls"
 msgstr "Скрыть панель"
 
-#: ../../src/wui/inputqueuedisplay.cc:554
+#: ../../src/wui/inputqueuedisplay.cc:553
 msgid "Show controls"
 msgstr "Показать панель"
 
@@ -7963,14 +7962,14 @@ msgstr "%1$s%2$s"
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:597
+#: ../../src/wui/waresdisplay.cc:596
 msgid "%1%k"
 msgstr "%1%тысяч"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:600
+#: ../../src/wui/waresdisplay.cc:599
 msgid "%1%M"
 msgstr "%1%Мн"
 
@@ -7978,7 +7977,7 @@ msgstr "%1%Мн"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:603
+#: ../../src/wui/waresdisplay.cc:602
 msgid "%1%G"
 msgstr "%1%Мд"
 
