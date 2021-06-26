@@ -299,7 +299,8 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 					std::string name, desc;
 					// Prevent propagation of the textdomain
 					if (t->has_key("textdomain")) {
-						std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(t->get_string("textdomain")));
+						std::unique_ptr<i18n::GenericTextdomain> td(
+						   AddOns::create_textdomain_for_addon(t->get_string("textdomain")));
 						name = _(t->get_string("name"));
 						desc = t->get_string("description");
 					} else {
