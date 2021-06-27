@@ -14,10 +14,13 @@ descriptions:new_warehouse_type {
    -- Building, fortified base and some towers made of blackwood. Some flags
    -- in the player colors may be present
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 90, 96 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 90, 96 }
       },
    },
 

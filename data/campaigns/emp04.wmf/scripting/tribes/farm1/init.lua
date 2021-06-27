@@ -23,9 +23,9 @@ descriptions:new_productionsite_type {
       }
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 82, 74 },
       },
    },

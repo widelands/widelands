@@ -1182,7 +1182,7 @@ descriptions:new_tribe {
          helptexts = {
             purpose = {
                -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
-               _("Gold veins contain gold ore that can be washed from the gravel at digger dwellings."),
+               _("Gold veins contain gold ore that can be washed from the gravel at gold digger dwellings."),
                -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
                _("There is only a little bit of gold here.")
             }

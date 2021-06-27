@@ -199,7 +199,7 @@ soldier_capacity = {
       h1(_"Adjusting the number of soldiers") ..
       p(_[[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every building has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
       p(_[[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]]) ..
-      p(_[[Let me also describe what the numbers in the statistics string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
+      p(_[[Let me also describe what the numbers in the status string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
       li(_[[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left inside (each military building is always guarded by at least one soldier).]]) ..
       li(_[[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers may be attacking an enemy. They will return when they have been successful.]]) ..
       li(_[[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two may have died. They will be replaced by new soldiers from your warehouse, if possible.]])

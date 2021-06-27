@@ -133,6 +133,10 @@ terrains_
 	{"schnee", "summer_snow"},
 	{"wasser", "summer_water"},
 	{"ashes", "ashes1"},
+	{"taiga", "winter_tundra"},
+	{"tundra", "winter_taiga1"},
+	{"tundra2", "winter_taiga2"},
+	{"tundra3", "winter_taiga3"},
 }
 {
 }
@@ -185,6 +189,10 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"strand", "summer_beach"},
                           {"schnee", "summer_snow"},
                           {"wasser", "summer_water"},
+                          {"taiga", "winter_tundra"},
+                          {"tundra", "winter_taiga1"},
+                          {"tundra2", "winter_taiga2"},
+                          {"tundra3", "winter_taiga3"},
                        }),
         std::make_pair("blackland",
                        std::map<std::string, std::string>{
@@ -195,6 +203,10 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"mountain4", "wasteland_mountain4"},
                           {"strand", "wasteland_beach"},
                           {"water", "wasteland_water"},
+                          {"taiga", "winter_tundra"},
+                          {"tundra", "winter_taiga1"},
+                          {"tundra2", "winter_taiga2"},
+                          {"tundra3", "winter_taiga3"},
                        }),
         std::make_pair("winterland",
                        std::map<std::string, std::string>{
@@ -207,6 +219,10 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"mountain4", "winter_mountain4"},
                           {"strand", "winter_beach"},
                           {"water", "winter_water"},
+                          {"taiga", "winter_tundra"},
+                          {"tundra", "winter_taiga1"},
+                          {"tundra2", "winter_taiga2"},
+                          {"tundra3", "winter_taiga3"},
                        }),
         std::make_pair("desert",
                        std::map<std::string, std::string>{
@@ -214,6 +230,10 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"beach", "desert_beach"},
                           {"steppe", "desert_steppe"},
                           {"wasser", "desert_water"},
+                          {"taiga", "winter_tundra"},
+                          {"tundra", "winter_taiga1"},
+                          {"tundra2", "winter_taiga2"},
+                          {"tundra3", "winter_taiga3"},
                        }),
      },
 
