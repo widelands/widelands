@@ -31,7 +31,8 @@ print_help () {
     echo " "
     echo "You can override the defaults locally by creating a file"
     echo "called '$LOCAL_DEFAULTS_FILE' listing your desired command"
-    echo "line options in a single line."
+    echo "line options in a single line. Only the first line of the"
+    echo "file is read."
     echo " "
     echo "The following options are available:"
     echo " "
@@ -107,6 +108,12 @@ print_help () {
     echo " "
     echo "    https://clang.llvm.org/docs/AddressSanitizer.html"
     echo " "
+    echo " "
+    echo "CMake options:"
+    echo " "
+    echo "-D...                 Any option starting with -D will be passed to cmake"
+    echo "                      unchanged before the above options."
+    echo " "
     return
   }
 
@@ -119,6 +126,7 @@ USE_FLTO="yes"
 USE_ASAN="ON"
 COMPILER="default"
 USE_XDG="ON"
+EXTRA_OPTS=""
 
 if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
   read LOCAL_DEFAULTS <$LOCAL_DEFAULTS_FILE
@@ -238,11 +246,15 @@ do
     shift
     ;;
     -x|--without-xdg)
-        USE_XDG="OFF"
+      USE_XDG="OFF"
     shift
     ;;
     +x|--with-xdg)
-        USE_XDG="ON"
+      USE_XDG="ON"
+    shift
+    ;;
+    -D*)
+      EXTRA_OPTS="$EXTRA_OPTS $1"
     shift
     ;;
     *)
@@ -256,6 +268,12 @@ done
 
 echo "Using ${CORES} core(s)."
 echo ""
+
+if [ -n "$EXTRA_OPTS" ]; then
+  echo "Extra CMake options used:"
+  echo "$EXTRA_OPTS"
+  echo " "
+fi
 
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "A complete build will be created."
@@ -371,9 +389,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+      cmake -G Ninja .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+      cmake .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
     fi
 
     $buildtool -j $CORES
