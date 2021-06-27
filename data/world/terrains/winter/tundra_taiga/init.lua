@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "tundra_taiga",
-   descname = _ "Tundra Taiga",
+   descname = _("Tundra Taiga"),
    is = "arable",
    valid_resources = { "resource_water" },
    default_resource = "resource_water",
@@ -13,7 +13,7 @@ wl.Descriptions():new_terrain_type{
    humidity = 750,
    fertility = 400,
 
-   enhancement = { amazons = "tundra2" }
+   enhancement = { amazons = "winter_taiga2" }
 }
 
 pop_textdomain()
