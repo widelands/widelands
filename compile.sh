@@ -137,11 +137,16 @@ do
           exit 1
         ;;
       esac
+      if [ "$2" -lt 1 ]; then
+        echo "Invalid number of cores was specified: $2"
+        exit 1
+      fi
       if [ "$MAXCORES" -ge "$2" ]; then
         CORES="$2"
       else
-        echo "Maximum number of supported cores is $MAXCORES."
-        CORES="$MAXCORES"
+        echo "Cannot set number of cores to $2, because the maximum number"
+        echo "of supported cores is $MAXCORES."
+        exit 1
       fi
     shift 2 # past argument and value
     ;;
