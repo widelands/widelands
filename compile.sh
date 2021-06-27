@@ -140,9 +140,6 @@ if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
   set -- $LOCAL_DEFAULTS "$@"
 fi
 
-## Get command and options to use in update.sh
-COMMANDLINE="$0 $@"
-
 if [ "$(uname)" = "Darwin" ]; then
   CORES="$(expr $(sysctl -n hw.ncpu) - 1)"
 else
@@ -230,6 +227,7 @@ do
     ;;
     --gcc)
       if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
+        COMPILER=gcc
         export CC=/usr/bin/gcc
         export CXX=/usr/bin/g++
       fi
@@ -237,12 +235,14 @@ do
     ;;
     --clang)
       if [ -f /usr/bin/clang -a /usr/bin/clang++ ]; then
+        COMPILER=clang
         export CC=/usr/bin/clang
         export CXX=/usr/bin/clang++
       fi
     shift
     ;;
     --default-compiler)
+      COMPILER=default
       unset CC
       unset CXX
     shift
@@ -268,58 +268,94 @@ do
   esac
 done
 
-echo "Using ${CORES} core(s)."
-echo ""
+## Get command and options to use in update.sh
+COMMANDLINE="$0"
+CMD_ADD () {
+  COMMANDLINE="$COMMANDLINE $@"
+}
 
 if [ -n "$EXTRA_OPTS" ]; then
-  echo "Extra CMake options used:"
-  echo "$EXTRA_OPTS"
+  echo "Extra CMake options used: $EXTRA_OPTS"
   echo " "
+  CMD_ADD "$EXTRA_OPTS"
 fi
+
+echo "Using ${CORES} core(s)."
+echo ""
+CMD_ADD "--cores ${CORES}"
+
+echo -n "Using compiler: "
+if [ $COMPILER = default ]; then
+  echo "system default"
+  CMD_ADD "--default-compiler"
+else
+  echo "$COMPILER"
+  CMD_ADD "--$COMPILER"
+fi
+echo " "
+
+if [ $USE_FLTO = "yes" ]; then
+  echo "Using cross compile unit optimization if available."
+  CMD_ADD "--with-cross-opt"
+else
+  echo "Not using cross compile unit optimization."
+  CMD_ADD "--no-cross-opt"
+fi
+echo " "
 
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "A complete build will be created."
   echo "You can use -w or --no-website to omit building and"
   echo "linking website-related executables."
+  CMD_ADD "--with-website"
 else
   echo "Any website-related code will be OMITTED in the build."
   echo "Make sure that you have created and tested a full"
   echo "build before submitting code to the repository!"
   echo "You can use +w or --with-website to build and link"
   echo "website-related executables."
+  CMD_ADD "--no-website"
 fi
 echo " "
 if [ $BUILD_TRANSLATIONS = "ON" ]; then
   echo "Translations will be built."
   echo "You can use -t or --no-translations to omit building them."
+  CMD_ADD "--with-translations"
 else
   echo "Translations will not be built."
   echo "You can use +t or --with-translations to build them."
+  CMD_ADD "--no-translations"
 fi
 echo " "
 if [ $BUILD_TESTS = "ON" ]; then
   echo "Tests will be built."
   echo "You can use -s or --skip-tests to omit building them."
+  CMD_ADD "--do-tests"
 else
   echo "Tests will not be built."
   echo "You can use +s or --do-tests to build them."
+  CMD_ADD "--skip-tests"
 fi
 echo " "
 echo "###########################################################"
 echo " "
 if [ $BUILD_TYPE = "Release" ]; then
   echo "Creating a Release build. Use -d to create a Debug build."
+  CMD_ADD "--release"
 else
   echo "Creating a Debug build. Use -r to create a Release build."
+  CMD_ADD "--debug"
 fi
 echo " "
 if [ $USE_ASAN = "ON" ]; then
   echo "Will build with AddressSanitizer."
   echo "https://clang.llvm.org/docs/AddressSanitizer.html"
   echo "You can use -a or --no-asan to switch it off."
+  CMD_ADD "--with-asan"
 else
   echo "Will build without AddressSanitizer."
   echo "You can use +a or --with-asan to switch it on."
+  CMD_ADD "--no-asan"
 fi
 if [ $USE_XDG = "ON" ]; then
   echo " "
@@ -332,6 +368,9 @@ if [ $USE_XDG = "ON" ]; then
   echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
   echo "for more information."
   echo " "
+  CMD_ADD "--with-xdg"
+else
+  CMD_ADD "--without-xdg"
 fi
 echo " "
 echo "###########################################################"
