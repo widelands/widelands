@@ -118,19 +118,19 @@ do
     ;;
     -j|--cores)
       MAXCORES=$((CORES + 1))
-      if [ "$2" ]; then
-        if [ "$MAXCORES" -ge "$2" ]; then
-          CORES="$2"
-        else
-          echo "Maximum number of supported cores is $MAXCORES."
-          CORES="$MAXCORES"
-        fi
+      case $2 in
+        *[^0-9]*|'')
+          echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
+          exit 1
+        ;;
+      esac
+      if [ "$MAXCORES" -ge "$2" ]; then
+        CORES="$2"
       else
-        echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
-        exit 1
+        echo "Maximum number of supported cores is $MAXCORES."
+        CORES="$MAXCORES"
       fi
-    shift # past argument
-    shift # past value
+    shift 2 # past argument and value
     ;;
     -r|--release)
       BUILD_TYPE="Release"
