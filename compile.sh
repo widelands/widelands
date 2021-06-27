@@ -20,11 +20,18 @@ echo "  https://github.com/widelands/widelands/issues"
 echo " "
 echo "###########################################################"
 echo " "
+
+LOCAL_DEFAULTS_FILE=compile_local_defaults
+
 print_help () {
     # Print help for our options
     echo "Per default, this script will create a full debug build."
     echo "Unless explicitly switched off, AddressSanitizer will"
     echo "be used as well with debug builds."
+    echo " "
+    echo "You can override the defaults locally by creating a file"
+    echo "called '$LOCAL_DEFAULTS_FILE' listing your desired command"
+    echo "line options in a single line."
     echo " "
     echo "The following options are available:"
     echo " "
@@ -84,10 +91,6 @@ print_help () {
     return
   }
 
-
-## Get command and options to use in update.sh
-COMMANDLINE="$0 $@"
-
 ## Options to control the build.
 BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
@@ -97,6 +100,16 @@ USE_FLTO="yes"
 USE_ASAN="ON"
 COMPILER="default"
 USE_XDG="ON"
+
+if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
+  read LOCAL_DEFAULTS <$LOCAL_DEFAULTS_FILE
+
+  # We want $LOCAL_DEFAULTS to be split, so no "" for it
+  set -- $LOCAL_DEFAULTS "$@"
+fi
+
+## Get command and options to use in update.sh
+COMMANDLINE="$0 $@"
 
 if [ "$(uname)" = "Darwin" ]; then
   CORES="$(expr $(sysctl -n hw.ncpu) - 1)"
