@@ -52,7 +52,7 @@ msgid ""
 "get some valuable resources."
 msgstr ""
 "Postav lom v místě, kde je hodně skal, aby se uvolnil prostor pro stavbu "
-"budov a aby byl dostatek surovin."
+"budov a abychom získali dostatek surovin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -438,8 +438,8 @@ msgid ""
 "comfortable?"
 msgstr ""
 "I když je to krok správným směrem, není tu moc místa na budovy. Celý ostrov "
-"je posetý skalami. Jak takto budeme kdy schopni postavit novou loď, nebo "
-"alespoň základní zázemí, abychom si usnadnili život?"
+"je posetý skalami. Jak takto budeme schopni postavit novou loď, nebo alespoň"
+" základní zázemí, abychom si usnadnili život?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
@@ -670,9 +670,9 @@ msgid ""
 "farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
-"Takže mohlo by to být asi takto. Na tkaní látky potřebujeme vlnu z ovčince. "
-"Ovčinec sám potřebuje na svůj provoz obilí a vodu. Proto najděme nejprve "
-"velké stavební místo a postavme obilné pole."
+"Takže si to projdeme. Na tkaní látky potřebujeme vlnu z ovčince. Ovčinec sám"
+" potřebuje na svůj provoz obilí a vodu. Takže se nejprve podívejme po velkém"
+" stavebním místě a postavme obilné pole."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -881,7 +881,7 @@ msgstr "Skoncujeme s Barbary a přispějme cézarovi naší říše pěknou kolo
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
-msgstr "Amalea v sedmém nebi"
+msgstr "Amaleino štěstí"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
@@ -904,8 +904,7 @@ msgid ""
 "building an arena and other buildings to train our soldiers."
 msgstr ""
 "Ale ne, to byl jen takový žert. Všem nám je jasné, že ho musíme, jak jen "
-"bude možné, pošetřit na stavbu arény, dalších budov a na výcvik našich "
-"vojáků."
+"bude možné, šetřit na stavbu arény, dalších budov a na výcvik našich vojáků."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
@@ -913,7 +912,7 @@ msgstr "Amalea je potěšena"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
-msgstr "Amalea je spokojená, že překonáme všechny naše problémy"
+msgstr "Amalea je přesvědčená, že překonáme všechny naše problémy"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:486
@@ -1055,9 +1054,9 @@ msgid ""
 "it to build some of the training buildings for our soldiers. And most "
 "important and most imminent of all, we need it to send out expeditions."
 msgstr ""
-"Látku potřebujeme také na výrobu zbroje v platnéřství. Potřebujeme postavit "
-"nějaká cvičiště pro naše vojáky. A to nejdůležitější a nejnaléhavější pro "
-"nás nyní je, že látku potřebujeme na vyslání výprav."
+"Nějakou látku potřebujeme také na výrobu zbroje v platnéřství. Potřebujeme "
+"ji také pro stavbu výcvikových budov pro naše vojáky. A to nejdůležitější a "
+"nejnaléhavější pro nás nyní je, že látku potřebujeme na vyslání výprav."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid ""
@@ -1134,8 +1133,8 @@ msgid ""
 "To ease the search, I have crafted some models of the pieces as you can see."
 " You can give them to our soldiers and sailors to look for them."
 msgstr ""
-"Pro ulehčení hledání jsem vytvořil modely dílů, jak je tu vidíš. Můžeme je "
-"dát naším vojákům a námořníkům, aby po nich pátrali."
+"Pro ulehčení hledání jsem, jak vidíš, vytvořil modely dílů. Můžeme je dát "
+"naším vojákům a námořníkům, aby věděli, co hledáme."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid "Praise, Praise, Praise"
@@ -1152,7 +1151,7 @@ msgid ""
 "protection for our journey."
 msgstr ""
 "Pane, získali jsme posvátnou Neptunovu relikvii. Nyní budeme na našich "
-"cestách moci spoléhat na její ochranu."
+"cestách moci spoléhat na jeho ochranu."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid ""
@@ -1237,7 +1236,7 @@ msgid ""
 " or a colosseum."
 msgstr ""
 "Proto bychom měli vybudovat všechny výcvikové budovy navzdory tomu, že máme "
-"málo místa. Potřebujeme kasárna, výcvikový tábor a arénu, nebo koloseum."
+"málo místa. Potřebujeme kasárna, výcvikový tábor a arénu nebo koloseum."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid "Time to get Home Again"
