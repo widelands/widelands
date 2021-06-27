@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-28 18:28+0000\n"
+"PO-Revision-Date: 2021-06-25 12:16+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -826,11 +826,11 @@ msgstr "잘 하셨습니다. 실제 게임에서 어떻게 메시지가 작동�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:539
 msgid "Destroy the two quarries"
-msgstr "두 채석장을 파괴하십시오"
+msgstr "채석장 두 곳을 파괴"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:541
 msgid "Destroy the Quarries"
-msgstr "채석장을 파괴하기"
+msgstr "채석장을 파괴"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:542
 msgid ""
