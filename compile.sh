@@ -172,7 +172,9 @@ do
     shift
     ;;
     *)
-          # unknown option
+      # unknown option
+      print_help
+      exit 1
     ;;
   esac
 done
