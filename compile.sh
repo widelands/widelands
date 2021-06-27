@@ -38,21 +38,31 @@ print_help () {
     echo "-h or --help          Print this help."
     echo " "
     echo " "
-    echo "Omission options:"
+    echo "Omission options and their overrides:"
     echo " "
     echo "-w or --no-website    Omit building of website binaries."
+    echo "+w or --with-website  Enable building of website binaries."
     echo " "
     echo "-t or --no-translations"
     echo "                      Omit building translations."
+    echo "+t or --with-translations"
+    echo "                      Enable building translations."
     echo " "
-    echo "-s or --skip-tests"
-    echo "                      Skip linking and executing the tests."
+    echo "-s or --skip-tests    Skip linking and executing the tests."
+    echo "+s or --do-tests      Link and execute the tests."
     echo " "
     echo "-a or --no-asan       If in debug mode, switch off the AddressSanitizer."
     echo "                      Release builds are created without AddressSanitizer"
     echo "                      by default."
+    echo "+a or --with-asan     If in release mode, switch on the AddressSanitizer."
+    echo "                      Debug builds are created with AddressSanitizer by"
+    echo "                      default."
     echo " "
-    echo "--without-xdg         Disable support for the XDG Base Directory Specification."
+    echo "     Note: The ASan setting is overridden by setting the build type, so these"
+    echo "           options should be given after the build type option, when needed."
+    echo " "
+    echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
+    echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
     echo " "
     echo "Compiler options:"
     echo " "
@@ -63,10 +73,14 @@ print_help () {
     echo " "
     echo "-r or --release       Create a release build. If this is not set,"
     echo "                      a debug build will be created."
+    echo "-d or --debug         Create a debug build. This is the default,"
+    echo "                      unless overridden locally."
     echo " "
     if which g++ >/dev/null; then # gcc specific
     echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
     echo "                      even if available."
+    echo "+c or --with-cross-opt"
+    echo "                      Use cross compile unit optimization if available."
     echo " "
     fi
     echo "--gcc                 Try to build with GCC rather than the system default."
@@ -78,6 +92,11 @@ print_help () {
     echo "                      If you built with GCC before, you will have to clean"
     echo "                      your build directory before switching compilers."
     echo "                      Expects that the compiler is in '/usr/bin/'."
+    echo " "
+    echo "--default-compiler    Use the system default compiler."
+    echo "                      If you built with a different compiler before, you will"
+    echo "                      have to clean your build directory before switching"
+    echo "                      compilers."
     echo " "
     echo "For the AddressSanitizer output to be useful, some systems (e.g. Ubuntu Linux)"
     echo "require that you set a symlink to the symbolizer. For example:"
@@ -103,6 +122,9 @@ USE_XDG="ON"
 
 if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
   read LOCAL_DEFAULTS <$LOCAL_DEFAULTS_FILE
+  echo "Using default compile options from '$LOCAL_DEFAULTS_FILE':"
+  echo "   $LOCAL_DEFAULTS"
+  echo " "
 
   # We want $LOCAL_DEFAULTS to be split, so no "" for it
   set -- $LOCAL_DEFAULTS "$@"
@@ -122,6 +144,10 @@ do
   case $1 in
     -a|--no-asan)
       USE_ASAN="OFF"
+    shift
+    ;;
+    +a|--with-asan)
+      USE_ASAN="ON"
     shift
     ;;
     -h|--help)
@@ -155,20 +181,41 @@ do
       USE_ASAN="OFF"
     shift
     ;;
+    -d|--debug)
+      BUILD_TYPE="Debug"
+      USE_ASAN="ON"
+    shift
+    ;;
     -t|--no-translations)
       BUILD_TRANSLATIONS="OFF"
+    shift
+    ;;
+    +t|--with-translations)
+      BUILD_TRANSLATIONS="ON"
     shift
     ;;
     -c|--no-cross-opt)
       USE_FLTO="no"
     shift
     ;;
+    +c|--with-cross-opt)
+      USE_FLTO="yes"
+    shift
+    ;;
     -s|--skip-tests)
       BUILD_TESTS="OFF"
     shift
     ;;
+    +s|--do-tests)
+      BUILD_TESTS="ON"
+    shift
+    ;;
     -w|--no-website)
       BUILD_WEBSITE="OFF"
+    shift
+    ;;
+    +w|--with-website)
+      BUILD_WEBSITE="ON"
     shift
     ;;
     --gcc)
@@ -185,8 +232,17 @@ do
       fi
     shift
     ;;
-    --without-xdg)
+    --default-compiler)
+      unset CC
+      unset CXX
+    shift
+    ;;
+    -x|--without-xdg)
         USE_XDG="OFF"
+    shift
+    ;;
+    +x|--with-xdg)
+        USE_XDG="ON"
     shift
     ;;
     *)
@@ -209,26 +265,30 @@ else
   echo "Any website-related code will be OMITTED in the build."
   echo "Make sure that you have created and tested a full"
   echo "build before submitting code to the repository!"
+  echo "You can use +w or --with-website to build and link"
+  echo "website-related executables."
 fi
 echo " "
 if [ $BUILD_TRANSLATIONS = "ON" ]; then
   echo "Translations will be built."
   echo "You can use -t or --no-translations to omit building them."
 else
-	echo "Translations will not be built."
+  echo "Translations will not be built."
+  echo "You can use +t or --with-translations to build them."
 fi
 echo " "
 if [ $BUILD_TESTS = "ON" ]; then
   echo "Tests will be built."
   echo "You can use -s or --skip-tests to omit building them."
 else
-	echo "Tests will not be built."
+  echo "Tests will not be built."
+  echo "You can use +s or --do-tests to build them."
 fi
 echo " "
 echo "###########################################################"
 echo " "
 if [ $BUILD_TYPE = "Release" ]; then
-  echo "Creating a Release build."
+  echo "Creating a Release build. Use -d to create a Debug build."
 else
   echo "Creating a Debug build. Use -r to create a Release build."
 fi
@@ -239,6 +299,7 @@ if [ $USE_ASAN = "ON" ]; then
   echo "You can use -a or --no-asan to switch it off."
 else
   echo "Will build without AddressSanitizer."
+  echo "You can use +a or --with-asan to switch it on."
 fi
 if [ $USE_XDG = "ON" ]; then
   echo " "
