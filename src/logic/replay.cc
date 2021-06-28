@@ -25,6 +25,7 @@
 #include "base/md5.h"
 #include "base/random.h"
 #include "base/wexception.h"
+#include "build_info.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/filesystem.h"
@@ -37,6 +38,8 @@
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
 #include "logic/save_handler.h"
+#include "ui_basic/messagebox.h"
+#include "wui/interactive_base.h"
 
 namespace Widelands {
 
@@ -59,9 +62,15 @@ public:
 	}
 
 	void execute(Game& game) override {
+		if (reported_desync_for_ == &game) {
+			// We already know there was a desync
+			return;
+		}
+
 		const Md5Checksum myhash = game.get_sync_hash();
 
 		if (hash_ != myhash) {
+			reported_desync_for_ = &game;
 			log_err_time(game.get_gametime(),
 			             "REPLAY: Lost synchronization at time %u\n"
 			             "I have:     %s\n"
@@ -73,12 +82,30 @@ public:
 
 			// There has to be a better way to do this.
 			game.game_controller()->set_desired_speed(0);
+
+			UI::WLMessageBox m(
+			   game.get_ibase(), UI::WindowStyle::kWui, _("Desync"),
+			   (boost::format(_("The replay has desynced and the game was paused.\n"
+			                    "You are probably watching a replay created with another version of "
+			                    "Widelands, which is not supported.\n\n"
+			                    "If you are certain that the replay was created with the same version "
+			                    "of Widelands, %1$s (%2$s), "
+			                    "please report this problem as a bug.\n"
+			                    "You will find related messages in the standard output (stdout.txt on "
+			                    "Windows). Please add this information to your report.")) %
+			    build_id() % build_type())
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
 		}
 	}
 
 private:
 	Md5Checksum hash_;
+
+	static const Game* reported_desync_for_;
 };
+const Game* CmdReplaySyncRead::reported_desync_for_(nullptr);
 
 /**
  * Load the savegame part of the given replay and open the command log.

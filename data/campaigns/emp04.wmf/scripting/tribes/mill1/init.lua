@@ -29,15 +29,20 @@ descriptions:new_productionsite_type {
       marble = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 41, 87 },
       },
+   },
+
+   spritesheets = {
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 41, 87 },
-         fps = 25
+         fps = 25,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 41, 87 }
       },
    },
 

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 21:10+0000\n"
+"PO-Revision-Date: 2021-06-24 21:00+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "FILENAME"
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
-msgstr "Vytvoří hru jednoho hráče podle nastavení, které je definováno pomocí souboru s názvem FILENAME. Příklad lze nalézt v `data/templates/new_game_template`."
+msgstr "Vytvoří hru jednoho hráče podle nastavení, které je definováno v poskytnutém souboru. Příklad lze nalézt v `data/templates/new_game_template`."
 
 #: ../../src/wlapplication_messages.cc:69
 msgid "Directly starts the map `FILENAME` as scenario map"
@@ -183,7 +183,7 @@ msgstr "[ano*|ne]"
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
-msgstr "Zda by mělo být v editoru zobrazeno varování, pokud je zde příliš mnoho hráčů"
+msgstr "Zda by mělo být v editoru zobrazeno varování o velkém množství hráčů"
 
 #: ../../src/wlapplication_messages.cc:108
 msgid "Start building road after placing a flag"
@@ -191,7 +191,7 @@ msgstr "Začít budovat cestu po umístění vlajky"
 
 #: ../../src/wlapplication_messages.cc:113
 msgid "Bitmask of display flags to set for new games"
-msgstr "Bitová maska přepínačů pro novou hru"
+msgstr "Bitová maska zobrazovacích přepínačů pro novou hru"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -282,7 +282,7 @@ msgstr "URI"
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:151
 msgid "Port number `n` of the metaserver for internet gaming"
-msgstr "Číslo portu `n` metaserveru pro hru přes internet."
+msgstr "Číslo portu `n` metaserveru pro hru přes internet"
 
 #: ../../src/wlapplication_messages.cc:152
 msgid "The name of the last hosted game"
@@ -414,11 +414,11 @@ msgstr "Pouze vytiskne verzi a ukončí se"
 
 #: ../../src/wlapplication_messages.cc:209
 msgid "Show this help"
-msgstr "Zobrazit tuto nápovědu"
+msgstr "Zobrazí tuto nápovědu"
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Show this help with all available config options"
-msgstr "Zobrazit tuto nápovědu se všemi dostupnými konfiguračními nastavenímí"
+msgstr "Zobrazí tuto nápovědu se všemi dostupnými konfiguračními nastaveními"
 
 #: ../../src/wlapplication_messages.cc:211
 msgid "<save.wgf>/<replay.wrpl>"
