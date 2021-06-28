@@ -1,3 +1,3 @@
 return {
-   tundra = {}
+   winter_tundra = {}
 }
