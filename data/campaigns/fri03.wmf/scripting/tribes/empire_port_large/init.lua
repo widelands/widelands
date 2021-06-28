@@ -11,11 +11,14 @@ descriptions:new_warehouse_type {
    destructible = false,
    map_check = {"seafaring"},
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 74, 96 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 74, 96 }
       },
    },
 

@@ -124,6 +124,8 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	loadlasthost_.sigclicked.connect([this]() { clicked_lasthost(); });
 
 	hostname_.changed.connect([this]() { change_hostname(); });
+	/** TRANSLATORS: This string may contain only English letters, numbers, and @ . + - _ characters
+	 * and must not be "team". */
 	playername_.set_text(get_config_string("nickname", (_("nobody"))));
 	playername_.changed.connect([this]() { change_playername(); });
 	table_.add_column(190, _("Host"));

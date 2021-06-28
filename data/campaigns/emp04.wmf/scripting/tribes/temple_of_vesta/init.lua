@@ -16,11 +16,11 @@ descriptions:new_warehouse_type {
       marble_column = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 58, 55  },
-      },
+         hotspot = { 58, 55 }
+      }
    },
 
    aihints = {},
