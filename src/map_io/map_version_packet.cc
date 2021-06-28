@@ -30,7 +30,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 // Map compatibility information for the website
-constexpr const char* const kCurrentMinimumRequiredWidelandsVersion = "1.0";
+constexpr const char* const kCurrentMinimumRequiredWidelandsVersion = "1.1";
 
 void MapVersionPacket::read(FileSystem& fs,
                             EditorGameBase& egbase,

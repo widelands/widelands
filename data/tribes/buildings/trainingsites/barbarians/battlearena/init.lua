@@ -26,20 +26,32 @@ descriptions:new_trainingsite_type {
 
    animation_directory = dirname,
    animations = {
-      idle = {
-         hotspot = { 110, 72 },
-         fps = 10
-      },
-      build = {
-         hotspot = { 110, 72 },
-      },
       unoccupied = {
          hotspot = { 110, 72 }
       },
+   },
+
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 110, 72 }
+      },
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 110, 72 }
+      },
       working = {
-         hotspot = { 110, 72 },
-         fps = 1
-      }
+         fps = 1,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 110, 72 }
+      },
    },
 
    aihints = {
