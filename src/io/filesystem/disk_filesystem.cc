@@ -561,6 +561,7 @@ StreamWrite* RealFSImpl::open_stream_write(const std::string& fname) {
 unsigned long long RealFSImpl::disk_space() {  // NOLINT
 #ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
+
 	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, 0, 0) ?
              // If more than 2G free space report that much
              freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT

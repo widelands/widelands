@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-14 19:58+0000\n"
+"PO-Revision-Date: 2021-06-26 16:45+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -64,13 +64,13 @@ msgstr "Verwende das angegebene Verzeichnis für Widelands Sprachdateien"
 
 #: ../../src/wlapplication_messages.cc:63
 msgid "The locale to use"
-msgstr ""
+msgstr "Die zu benutzende lokale Sprache"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
 #: ../../src/wlapplication_messages.cc:63
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../src/wlapplication_messages.cc:65
 #: ../../src/wlapplication_messages.cc:69
@@ -156,7 +156,7 @@ msgstr "Speichert automatisch alle `n` Minuten"
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
 msgid "Use `n` files for rolling autosaves"
-msgstr ""
+msgstr "Benutze `n` Dateien für das rollierende Autospeichern"
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Do not save files as binary zip archives"
@@ -164,7 +164,7 @@ msgstr "Speichert Dateien nicht als Zip-Archive"
 
 #: ../../src/wlapplication_messages.cc:103
 msgid "Show filenames in replay screen"
-msgstr ""
+msgstr "Zeige die Dateinamen im Aufzeichnungsmenü"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -179,21 +179,21 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:177
 #: ../../src/wlapplication_messages.cc:187
 msgid "[true*|false]"
-msgstr ""
+msgstr "[true*|false]"
 
 #: ../../src/wlapplication_messages.cc:106
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
-msgstr ""
+msgstr "Ob eine Warnung im Editor bei zu vielen Spielern gezeigt wird "
 
 #: ../../src/wlapplication_messages.cc:108
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Beginne mit dem Straßenbau nach dem Flaggensetzen"
 
 #: ../../src/wlapplication_messages.cc:113
 msgid "Bitmask of display flags to set for new games"
-msgstr ""
+msgstr "Bitmaske für zu setzende Anzeigebits neuer Spiele"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -206,11 +206,11 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:155
 #: ../../src/wlapplication_messages.cc:158
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:126
 msgid "Scroll when the mouse cursor is near the screen edge"
-msgstr ""
+msgstr "Ansicht verschieben wenn der Mauszeiger in der Nähe des Bildschirmrands ist"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -230,39 +230,39 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:194
 #: ../../src/wlapplication_messages.cc:203
 msgid "[true|false*]"
-msgstr ""
+msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Invert click-and-drag map movement direction"
-msgstr ""
+msgstr "Invertiere die Kartenbewegungsrichtung beim geklickten Ziehen der Karte"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Diagonalen Bildlauf mit Nummernblocktasten erlauben"
 
 #: ../../src/wlapplication_messages.cc:131
 msgid "Display system time in the info panel"
-msgstr ""
+msgstr "Zeige die Systemzeit in der Infotafel"
 
 #: ../../src/wlapplication_messages.cc:132
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Zoome nur wenn STRG gedrückt"
 
 #: ../../src/wlapplication_messages.cc:133
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "Zeige nur ein Beobachtungsfenster"
 
 #: ../../src/wlapplication_messages.cc:135
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Zeige den Chat im Spiel mit transparentem Hintergrund"
 
 #: ../../src/wlapplication_messages.cc:136
 msgid "Bitmask to set the toolbar location and mode"
-msgstr ""
+msgstr "Bitmaske zum Setzen von Modus und Ort der Werkzeugleiste"
 
 #: ../../src/wlapplication_messages.cc:138
 msgid "Networking:"
-msgstr ""
+msgstr "Netzwerkoptionen:"
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in multiplayer
@@ -270,50 +270,50 @@ msgstr ""
 #. players.
 #: ../../src/wlapplication_messages.cc:146
 msgid "Create syncstream dump files to help debug network games"
-msgstr ""
+msgstr "Erstelle Syncstream-Speicherauszüge zum Debuggen von Netzwerkspielen"
 
 #: ../../src/wlapplication_messages.cc:147
 msgid "Connect to a different metaserver for internet gaming"
-msgstr ""
+msgstr "Stelle die Verbindung zu einem alternativen Metaserver für ein Internetspiel her"
 
 #: ../../src/wlapplication_messages.cc:147
 #: ../../src/wlapplication_messages.cc:159
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:151
 msgid "Port number `n` of the metaserver for internet gaming"
-msgstr ""
+msgstr "Portnummer `n` des Metaservers für das Internetspiel"
 
 #: ../../src/wlapplication_messages.cc:152
 msgid "The name of the last hosted game"
-msgstr ""
+msgstr "Der Name des letzten bereitgestellten Spiels"
 
 #: ../../src/wlapplication_messages.cc:153
 msgid "The nickname used for LAN and online games"
-msgstr ""
+msgstr "Der Spielername für Netzwerk und Internetspiele"
 
 #: ../../src/wlapplication_messages.cc:154
 msgid "Name of map author"
-msgstr ""
+msgstr "Der Name des Kartenautors"
 
 #: ../../src/wlapplication_messages.cc:155
 msgid "The last host connected to"
-msgstr ""
+msgstr "Der letzte Host zu dem verbunden wurde"
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Whether the used metaserver login is for a registered user"
-msgstr ""
+msgstr "Ob die benutzte Anmeldung im Metaserver zu einem registrierten Nutzer gehört"
 
 #: ../../src/wlapplication_messages.cc:158
 msgid "The hashed password for online logins"
-msgstr ""
+msgstr "Das mit einem Hashwert verschlüsselte Passwort für die Anmeldung im Internetspiel"
 
 #: ../../src/wlapplication_messages.cc:160
 msgid ""
 "Connect to a different github repository and branch from the add-ons manager"
-msgstr ""
+msgstr "Stelle die Verbindung zu einem alternativen Github Repository und Zweig vom Erweiterungsmanager her"
 
 #: ../../src/wlapplication_messages.cc:162
 msgid "Graphic options:"
@@ -321,52 +321,52 @@ msgstr "Grafik-Optionen:"
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "Whether to use the whole display for the game screen"
-msgstr ""
+msgstr "Ob der Vollbildmodus für das Spiel genutzt wird"
 
 #: ../../src/wlapplication_messages.cc:164
 msgid "Whether to start the game in a maximized window"
-msgstr ""
+msgstr "Ob das Spiel in einem maximierten Fenster startet"
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:168
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../src/wlapplication_messages.cc:170
 msgid "Width `x` of the window in pixel"
-msgstr ""
+msgstr "Breite `x` des Fensters in Pixeln"
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../src/wlapplication_messages.cc:173
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:175
 msgid "Height `y` of the window in pixel"
-msgstr ""
+msgstr "Höhe `y` des Fensters in Pixeln"
 
 #: ../../src/wlapplication_messages.cc:176
 msgid "Whether to grab the mouse input"
-msgstr ""
+msgstr "Ob die Mauseingabe verwendet wird"
 
 #: ../../src/wlapplication_messages.cc:177
 msgid "Whether to use the mouse cursor provided by SDL"
-msgstr ""
+msgstr "Ob der Mauszeiger von SDL benutzt wird"
 
 #: ../../src/wlapplication_messages.cc:179
 msgid "Whether to use sticky tooltips"
-msgstr ""
+msgstr "Ob die Kurzhilfe festgestellt werden soll"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:183
 msgid "Maximal optical framerate `n` of the game"
-msgstr ""
+msgstr "Maximale optische Bildwiederholrate `n` des Spiels"
 
 #: ../../src/wlapplication_messages.cc:184
 msgid "The path to the active UI theme relative to the homedir"
-msgstr ""
+msgstr "Der Pfad zum aktuellen Thema der Nutzerschnittstelle, relativ zum Heimverzeichnis"
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "Options for the internal window manager:"
@@ -374,70 +374,70 @@ msgstr "Einstellungen für den internen Fenstermanager:"
 
 #: ../../src/wlapplication_messages.cc:188
 msgid "Should automatic map movements be animated"
-msgstr ""
+msgstr "Animation von automatischen Kartenbewegungen an|aus."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:191
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
-msgstr ""
+msgstr "Verschiebe ein Fenster zum Bildschirmrand, wenn der Rand des Fensters in eine Entfernung von `n` zum Bildschirmrand kommt."
 
 #: ../../src/wlapplication_messages.cc:195
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
-msgstr ""
+msgstr "Lässt den Fensterrand verschwinden, wenn sich das Fenster nahe dem Bildschirmrand befindet"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:200
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
-msgstr ""
+msgstr "Verschiebe ein Fenster zum Rand des Panels wenn der Rand des Fensters in eine Entfernung von `n` zum Rand des Panels kommt"
 
 #: ../../src/wlapplication_messages.cc:204
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
-msgstr ""
+msgstr "Verschiebe ein Fenster nur zum Rand des Panels wenn das Fenster mit dem Panel überlappt"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "Verwendet ausführliche Debugmeldungen"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid "Others:"
-msgstr ""
+msgstr "Sonstige:"
 
 #: ../../src/wlapplication_messages.cc:208
 msgid "Only print version and exit"
-msgstr ""
+msgstr "Nur die Version ausgeben und verlassen"
 
 #: ../../src/wlapplication_messages.cc:209
 msgid "Show this help"
-msgstr ""
+msgstr "Zeige diese Hilfe"
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Show this help with all available config options"
-msgstr ""
+msgstr "Zeige diese Hilfe mit allen Konfigurationsoptionen"
 
 #: ../../src/wlapplication_messages.cc:211
 msgid "<save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:212
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay"
-msgstr ""
+msgstr "Lädt direkt das gegebene gespeicherte Spiel oder die gegebene Aufzeichnung. Nützlich für die Zuordnung der .wgf/.wrpl Dateinamenerweiterung. Funktioniert nicht mit anderen Optionen. siehe auch --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:241
 #, c-format
 msgid "This is Widelands Version %s"
-msgstr ""
+msgstr "Das ist Widelands Version %s"
 
 #: ../../src/wlapplication_messages.cc:302
 msgid ""

@@ -27,19 +27,18 @@ descriptions:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 62 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(hessenfarmer): No animation yet.
          hotspot = { 39, 62 },
       },
    },
 
    aihints = {
-
    },
 
    working_positions = {
