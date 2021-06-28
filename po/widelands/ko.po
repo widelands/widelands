@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-25 15:36+0000\n"
-"PO-Revision-Date: 2021-06-25 15:49+0000\n"
+"POT-Creation-Date: 2021-06-26 02:44+0000\n"
+"PO-Revision-Date: 2021-06-26 09:03+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -560,11 +560,11 @@ msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 #: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
 #: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1493
+#: ../../src/wlapplication.cc:1573
 msgid "Error"
 msgstr "오류"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1495
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1575
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -649,8 +649,8 @@ msgstr "광산"
 msgid "port"
 msgstr "항구"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -3225,7 +3225,7 @@ msgstr "종속성 오류를 자동으로 수정 시도"
 
 #: ../../src/ui_fsmenu/addons.cc:224
 msgid "Move selected add-on to top"
-msgstr "선택한 추가 기능을 맨 위로 이동"
+msgstr "선택한 추가 기능을 위쪽으로 이동"
 
 #: ../../src/ui_fsmenu/addons.cc:233
 msgid "Move selected add-on one step up"
@@ -3237,7 +3237,7 @@ msgstr "선택한 추가 기능을 한 단계 아래로 이동"
 
 #: ../../src/ui_fsmenu/addons.cc:251
 msgid "Move selected add-on to bottom"
-msgstr "선택한 추가 기능을 맨 아래로 이동"
+msgstr "선택한 추가 기능을 아래쪽으로 이동"
 
 #: ../../src/ui_fsmenu/addons.cc:259
 msgid "Launch the add-ons packager…"
@@ -3618,7 +3618,7 @@ msgstr "다음 화면 갈무리"
 
 #: ../../src/ui_fsmenu/addons.cc:1671
 msgid "Previous screenshot"
-msgstr "이전 화면 갈무리"
+msgstr "지난 화면 갈무리"
 
 #: ../../src/ui_fsmenu/addons.cc:1679
 msgid "Submit comment"
@@ -5158,18 +5158,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "제작자들"
@@ -5230,31 +5230,31 @@ msgstr "명령 줄 매개 변수의 빈 값: %s"
 msgid "%s can not be combined with other actions"
 msgstr "%s 은 다른 작업과 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1320
+#: ../../src/wlapplication.cc:1400
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "알 수 없는 명령 줄 매개 변수: %s\n혹시 '='가 없는 건 아닌가요?"
 
-#: ../../src/wlapplication.cc:1442
+#: ../../src/wlapplication.cc:1522
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized 과 --fullscreen 은 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1460
+#: ../../src/wlapplication.cc:1540
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "알 수 없는 명령 줄 매개 변수: %s"
 
-#: ../../src/wlapplication.cc:1509
+#: ../../src/wlapplication.cc:1589
 msgid "Game ended unexpectedly"
 msgstr "놀이가 예기치 않게 종료되었습니다"
 
-#: ../../src/wlapplication.cc:1509
+#: ../../src/wlapplication.cc:1589
 msgid "Unexpected error during the game"
 msgstr "게임 중 예상치 못한 오류가 발생"
 
-#: ../../src/wlapplication.cc:1512
+#: ../../src/wlapplication.cc:1592
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5268,7 +5268,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "놀이 중에 오류가 발생했습니다. 오류 메시지는 다음과 같습니다:\n\n%1$s\n\n이 문제를 보고하여 와이드랜드 개선에 도움을 주십시오. 표준 출력 (윈도우즈에서는 stdout.txt) 에서 관련 메시지를 찾을 수 있습니다. 빌드 %2$s (%3$s)를 사용 중입니다.\n\n이 정보를 보고서에 추가하십시오.\n\n와이드랜드가 긴급 저장 놀이를 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기와 계속 놀기는 것이 종종 가능합니다."
 
-#: ../../src/wlapplication.cc:1522
+#: ../../src/wlapplication.cc:1602
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5278,11 +5278,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "다음과 같은 이유로 게임이 예기치 않게 종료되었습니다:\n\n%s\n\n와이드랜드가 긴급 저장 게임을 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기하고 계속 플레이하는 것이 가능합니다."
 
-#: ../../src/wlapplication.cc:1549
+#: ../../src/wlapplication.cc:1629
 msgid "Emergency save failed"
 msgstr "긴급 저장 실패"
 
-#: ../../src/wlapplication.cc:1550
+#: ../../src/wlapplication.cc:1630
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5360,7 +5360,7 @@ msgstr "전체 화면을 켜기/끄기"
 
 #: ../../src/wlapplication_options.cc:305
 msgid "Take Screenshot"
-msgstr "화면을 갈무리하기"
+msgstr "화면을 갈무리"
 
 #: ../../src/wlapplication_options.cc:310
 msgid "Zoom In"
@@ -6710,15 +6710,15 @@ msgstr "숨김"
 
 #: ../../src/wui/info_panel.cc:210
 msgid "Move panel to bottom"
-msgstr "판을 아래로 이동"
+msgstr "판을 아래쪽으로 이동"
 
 #: ../../src/wui/info_panel.cc:210
 msgid "Move panel to top"
-msgstr ""
+msgstr "판을 위쪽으로 이동"
 
 #: ../../src/wui/info_panel.cc:389
 msgid "Cheat mode enabled"
-msgstr ""
+msgstr "치트 모드 사용 설정됨"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
@@ -6735,23 +6735,23 @@ msgstr "%1$s · %2$s · %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "우선 순위: 매우 낮음"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "우선 순위: 낮음"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "우선 순위: 보통"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "우선순위: 높음"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "우선순위: 매우 높음"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:124
@@ -6797,11 +6797,11 @@ msgstr "물품을 추가"
 
 #: ../../src/wui/inputqueuedisplay.cc:553
 msgid "Hide controls"
-msgstr ""
+msgstr "제어를 숨김"
 
 #: ../../src/wui/inputqueuedisplay.cc:553
 msgid "Show controls"
-msgstr ""
+msgstr "제어를 표시"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:120
@@ -6830,7 +6830,7 @@ msgstr "기본 배율 전환"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:287
 msgid "Zoom –"
-msgstr ""
+msgstr "축소"
 
 #: ../../src/wui/interactive_base.cc:717
 #, c-format
@@ -6844,11 +6844,11 @@ msgstr "물길 길이: %1$u/%2$u"
 
 #: ../../src/wui/interactive_base.cc:1438
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "화면 갈무리를 저장하지 못했습니다!"
 
 #: ../../src/wui/interactive_base.cc:1442
 msgid "Screenshot saved"
-msgstr ""
+msgstr "화면 갈무리가 저장됨"
 
 #: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
@@ -6869,7 +6869,7 @@ msgstr "놀이 속도"
 #: ../../src/wui/interactive_gamebase.cc:129
 msgctxt "hotkey"
 msgid "Ctrl+Shift+Space"
-msgstr ""
+msgstr "Ctrl+Shift+Space"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:139
@@ -6880,11 +6880,11 @@ msgstr "소리 효과와 음악 옵션 설정"
 #: ../../src/wui/interactive_gamebase.cc:161
 #: ../../src/wui/interactive_gamebase.cc:189
 msgid "Restart Scenario"
-msgstr ""
+msgstr "시나리오 다시 시작"
 
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "이 시나리오를 다시 시작하시겠습니까?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
@@ -6954,8 +6954,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "항해"
@@ -7354,7 +7354,7 @@ msgstr "%3% %1% %2%"
 #: ../../src/wui/savegameloader.cc:172
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "%3$u %2$u %1$s 때에 저장됨"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:30
@@ -7690,11 +7690,11 @@ msgstr "소리 드라이버에 문제가 있거나 명령줄에서 스위치가 
 #. lower than the economy target setting. Very little space is available.
 #: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
-msgstr ""
+msgstr "번역확인->계산하기"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "재고량과 경제 목표 수량을 비교"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Red:"
@@ -7702,7 +7702,7 @@ msgstr "빨강:"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Stock is lower than the target"
-msgstr ""
+msgstr "재고가 목표보다 낮음"
 
 #: ../../src/wui/stock_menu.cc:61
 msgid "Yellow:"
