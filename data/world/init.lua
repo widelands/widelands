@@ -544,11 +544,11 @@ local result = {
          picture = "world/pics/editor_terrain_category_winter.png",
          items_per_row = 6,
          items = {
-            "tundra",
-            "tundra2",
-            "tundra3",
+            "winter_taiga1",
+            "winter_taiga2",
+            "winter_taiga3",
             "tundra_taiga",
-            "taiga",
+            "winter_tundra",
             "snow",
 
             "winter_forested_mountain1",
