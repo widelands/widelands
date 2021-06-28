@@ -30,14 +30,20 @@ descriptions:new_warehouse_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 67, 80 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 66, 80 }
       },
       build = {
-         hotspot = { 67, 80 },
-      }
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 59, 77 }
+      },
    },
 
    aihints = {

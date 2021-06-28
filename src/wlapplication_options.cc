@@ -411,7 +411,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_s),
                          "game_showhide_stats",
-                         []() { return _("Toggle Statistics Labels"); })},
+                         []() { return _("Toggle Status Labels"); })},
    {KeyboardShortcut::kInGameShowhideSoldiers,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_l),
