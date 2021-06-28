@@ -5,6 +5,7 @@
 
 # the compile.sh file creates some files, links and directories
 /build
+/data/datadirversion
 update.sh
 /widelands
 wl_map*_info

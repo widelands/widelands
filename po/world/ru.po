@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2021-06-23 08:06+0000\n"
 "PO-Revision-Date: 2021-04-27 19:10+0000\n"
 "Last-Translator: Zme Zzzz <zmey1207@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../../data/world/critters/badger/init.lua:124
+#: ../../data/world/critters/badger/init.lua:119
 msgid "Badger"
 msgstr "Барсук"
 
@@ -91,7 +91,7 @@ msgstr "Зубр"
 msgid "Wolf"
 msgstr "Волк"
 
-#: ../../data/world/immovables/artifacts/artifact00/init.lua:173
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:167
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7

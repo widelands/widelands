@@ -424,6 +424,14 @@ add_subdirectory(src)
 
 # install files to the correct locations here
 install(
+  FILES
+    data/datadirversion
+  DESTINATION ${WL_INSTALL_DATADIR}
+  CONFIGURATIONS Debug;Release
+  COMPONENT VersionFile
+)
+
+install(
   DIRECTORY
     data/ai
     data/campaigns
