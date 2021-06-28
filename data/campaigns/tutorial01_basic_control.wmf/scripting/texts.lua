@@ -434,7 +434,7 @@ build_second_quarry = {
 -- ===================
 
 census_and_statistics_00 = {
-   title = _"Census and Statistics",
+   title = _"Census and Status",
    body = (
       li_image("images/wui/menus/toggle_census.png", _[[While we wait, I’ll quickly show you another useful feature. It is sometimes hard to tell all the buildings apart. Widelands offers a feature to show label texts called the ‘census’ over the buildings.]]) ..
       li_arrow(_([[In order to show or hide the building census labels, you can select the ‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘%s’ key on the keyboard.]]):bformat(wl.ui.get_shortcut("game_showhide_census"))) ..
@@ -447,18 +447,18 @@ census_and_statistics_00 = {
 
 obj_show_statistics = {
    name = "show_statistics",
-   title=_"Show the building statistics",
+   title=_"Show the building status",
    number = 1,
-   body = objective_text(_"Show the building statistics",
-      li_arrow(_([[In order to show or hide the building statistics labels, you can select the ‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘%s’ key on the keyboard.]]):bformat(wl.ui.get_shortcut("game_showhide_stats")))
+   body = objective_text(_"Show the building status",
+      li_arrow(_([[In order to show or hide the building status labels, you can select the ‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘%s’ key on the keyboard.]]):bformat(wl.ui.get_shortcut("game_showhide_stats")))
    )
 }
 census_and_statistics_01 = {
-   title = _"Census and Statistics",
+   title = _"Census and Status",
    body = (
       li_image("images/wui/menus/toggle_statistics.png",
          p(_[[Now, wouldn’t it be nice to check on our quarries’ progress without having to open their windows?]]) ..
-         p(_[[In addition to the buildings’ census, you can also activate statistics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
+         p(_[[In addition to the buildings’ census, you can also activate status labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
    ),
    position = "topright",
    h = 400,
@@ -466,7 +466,7 @@ census_and_statistics_01 = {
 }
 
 census_and_statistics_02 = {
-   title = _"Census and Statistics",
+   title = _"Census and Status",
    body = (
       li_object("barbarians_quarry", _[[Now we know what’s going on. Let’s wait for the quarries to finish.]], plr.color)
    ),

@@ -73,7 +73,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    10,
                    MainToolbar::kButtonSize,
                    /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide
-                      building spaces, census, statistics */
+                      building spaces, census, status, etc. */
                    _("Show / Hide"),
                    UI::DropdownType::kPictorialMenu,
                    UI::PanelStyle::kWui,
@@ -236,9 +236,9 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
                          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * building statistics are shown */
-                         _("Hide Statistics") :
-                         _("Show Statistics"),
+                          * building status labels are shown */
+                         _("Hide Status") :
+                         _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats));
