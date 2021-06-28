@@ -146,6 +146,8 @@ else
   CORES="$(nproc --ignore=1)"
 fi
 
+MAXCORES=$((CORES + 1))
+
 while [ $# -gt 0 ]
 do
   case $1 in
@@ -163,7 +165,6 @@ do
     shift
     ;;
     -j|--cores)
-      MAXCORES=$((CORES + 1))
       case $2 in
         *[^0-9]*|'')
           echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
