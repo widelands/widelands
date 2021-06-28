@@ -44,7 +44,7 @@ obj_dismantle_buildings = {
    number = 1,
    body = objective_text(_"Dismantle Buildings",
       li(_[[Dismantle all unproductive small buildings to get some resources for new buildings.]]) ..
-      li_arrow(_[[Remember to check the messages and the building statistics for unproductive buildings.]])
+      li_arrow(_[[Remember to check the messages and the building status labels for unproductive buildings.]])
    ),
 }
 

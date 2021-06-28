@@ -8,12 +8,14 @@ descriptions:new_warehouse_type {
    descname = pgettext("frisians_building", "Empire Warehouse"),
    icon = dirname .. "menu.png",
    size = "medium",
+
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 58, 55 },
       },
    },
+
    aihints = {},
    heal_per_second = 170,
 }
