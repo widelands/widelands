@@ -5,7 +5,7 @@ echo "#     Script to simplify the compilation of Widelands     #"
 echo "###########################################################"
 echo " "
 
-if [ -z $COMPILE_DEFAULTS ]; then
+if [ -z "$COMPILE_DEFAULTS" ]; then
   COMPILE_DEFAULTS=.compile_defaults
 fi
 
@@ -135,8 +135,8 @@ COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
 
-if [ -f $COMPILE_DEFAULTS -a -r $COMPILE_DEFAULTS ]; then
-  read LOCAL_DEFAULTS <$COMPILE_DEFAULTS
+if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
+  read LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
   echo "Using default compile options from '$COMPILE_DEFAULTS':"
   echo "   $LOCAL_DEFAULTS"
   echo " "
