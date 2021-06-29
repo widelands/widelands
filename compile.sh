@@ -135,6 +135,9 @@ if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
   echo "Using default compile options from '$LOCAL_DEFAULTS_FILE':"
   echo "   $LOCAL_DEFAULTS"
   echo " "
+  echo "Command line options:"
+  echo "   $@"
+  echo " "
 
   # We want $LOCAL_DEFAULTS to be split, so no "" for it
   set -- $LOCAL_DEFAULTS "$@"
