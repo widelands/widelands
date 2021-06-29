@@ -6,6 +6,7 @@ import os
 import os.path as p
 import re
 import sys
+import documentation_enhancements as doc_enh
 
 ###################
 # inputs, outputs #
@@ -13,20 +14,20 @@ import sys
 # These files are known to have rst comments; cpp files
 # Meaning: (src_file, file_name_to_generate_rst)
 cpp_pairs = (
-    ('src/ai/ai_hints.cc', 'autogen_ai_hints.rst'),
-    ('src/graphic/text/rt_parse.cc', 'autogen_rt_tags.rst'),
+    #('src/ai/ai_hints.cc', 'autogen_ai_hints.rst'),
+    #('src/graphic/text/rt_parse.cc', 'autogen_rt_tags.rst'),
     ('src/scripting/lua_root.cc', 'autogen_wl.rst'),
     ('src/scripting/lua_bases.cc', 'autogen_wl_bases.rst'),
     ('src/scripting/lua_editor.cc', 'autogen_wl_editor.rst'),
     ('src/scripting/lua_map.cc', 'autogen_wl_map.rst'),
     ('src/scripting/lua_game.cc', 'autogen_wl_game.rst'),
-    ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
-    ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
-    ('src/scripting/lua_path.cc', 'autogen_path.rst'),
-    ('src/logic/map_objects/map_object_program.cc', 'autogen_map_object_programs.rst'),
-    ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
-    ('src/logic/map_objects/immovable_program.cc', 'autogen_immovable_programs.rst'),
-    ('src/logic/map_objects/tribes/production_program.cc', 'autogen_tribes_productionsite_programs.rst'),
+    #('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
+    #('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
+    #('src/scripting/lua_path.cc', 'autogen_path.rst'),
+    #('src/logic/map_objects/map_object_program.cc', 'autogen_map_object_programs.rst'),
+    #('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
+    #('src/logic/map_objects/immovable_program.cc', 'autogen_immovable_programs.rst'),
+    #('src/logic/map_objects/tribes/production_program.cc', 'autogen_tribes_productionsite_programs.rst'),
 )
 
 # These directories are scanned without knowing which file
@@ -109,7 +110,8 @@ def extract_rst_from_cpp(inname, outname=None):
     for r in res:
         r = r.expandtabs(4)
         output += r + '\n'
-
+    output = doc_enh.add_child_of(output, outname)
+    #print("after change: ", output)
     if output.strip():
         out = sys.stdout
         if outname is not None:
@@ -174,6 +176,8 @@ def replace_tocs(toc_rst_dict):
 
 if __name__ == '__main__':
     def main():
+        doc_enh.init(base_dir, cpp_pairs)
+        doc_enh.debug_classes_dict()
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 
