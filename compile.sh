@@ -34,7 +34,7 @@ print_help () {
     echo "You can override the defaults locally by creating a file"
     echo "called '$LOCAL_DEFAULTS_FILE' listing your desired command"
     echo "line options in a single line. Only the first line of the"
-    echo "file is read."
+    echo "file is read, further lines can be used as comments."
     echo " "
     echo "The following options are available:"
     echo " "
