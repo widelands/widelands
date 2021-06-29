@@ -5,7 +5,9 @@ echo "#     Script to simplify the compilation of Widelands     #"
 echo "###########################################################"
 echo " "
 
-LOCAL_DEFAULTS_FILE=compile_local_defaults
+if [ -z $COMPILE_DEFAULTS ]; then
+  COMPILE_DEFAULTS=.compile_defaults
+fi
 
 print_help () {
     # Print help for our options
@@ -32,9 +34,12 @@ print_help () {
     echo "be used as well with debug builds."
     echo " "
     echo "You can override the defaults locally by creating a file"
-    echo "called '$LOCAL_DEFAULTS_FILE' listing your desired command"
+    echo "called '.compile_defaults' listing your desired command"
     echo "line options in a single line. Only the first line of the"
     echo "file is read, further lines can be used as comments."
+    echo "The 'COMPILE_DEFAULTS' environment variable can be set to"
+    echo "the name of a different file to use, or if set to a"
+    echo "non-existent name, to use the built-in defaults."
     echo " "
     echo "The following options are available:"
     echo " "
@@ -130,9 +135,9 @@ COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
 
-if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
-  read LOCAL_DEFAULTS <$LOCAL_DEFAULTS_FILE
-  echo "Using default compile options from '$LOCAL_DEFAULTS_FILE':"
+if [ -f $COMPILE_DEFAULTS -a -r $COMPILE_DEFAULTS ]; then
+  read LOCAL_DEFAULTS <$COMPILE_DEFAULTS
+  echo "Using default compile options from '$COMPILE_DEFAULTS':"
   echo "   $LOCAL_DEFAULTS"
   echo " "
   echo "Command line options:"

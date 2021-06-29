@@ -4,7 +4,7 @@
 /doc/sphinx/source/auxiliary.rst
 
 # Local defaults for compile.sh
-compile_local_defaults
+.compile*
 
 # the compile.sh file creates some files, links and directories
 /build
