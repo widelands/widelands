@@ -140,13 +140,37 @@ if [ -f $LOCAL_DEFAULTS_FILE -a -r $LOCAL_DEFAULTS_FILE ]; then
   set -- $LOCAL_DEFAULTS "$@"
 fi
 
-if [ "$(uname)" = "Darwin" ]; then
-  CORES="$(expr $(sysctl -n hw.ncpu) - 1)"
+
+# try to set default number of cores automatically
+
+# nproc is a GNU tool, may not be available everywhere, but it is preferable,
+# when it is available
+if hash nproc 2>/dev/null ; then
+  MAXCORES="$(nproc)"
 else
-  CORES="$(nproc --ignore=1)"
+  # try BSD / OS X
+  if hash sysctl 2>/dev/null ; then
+    MAXCORES="$(sysctl -n hw.ncpu)" 2>/dev/null
+    # we will check result later
+  fi
 fi
 
-MAXCORES=$((CORES + 1))
+# this has the marginally useful side-effect that MAXCORES can be set in the
+# environment when neither method works...
+if [ $MAXCORES -gt 0 ] 2>/dev/null ; then
+  if [ $MAXCORES -gt 1 ]; then
+    CORES=$((MAXCORES - 1))
+  else
+    CORES=1
+  fi
+else
+  echo "Cannot determine number of available CPU cores. Only one core will be"
+  echo "used by default. User provided -j will be trusted."
+  echo " "
+  MAXCORES=0
+  CORES=1
+fi
+
 
 while [ $# -gt 0 ]
 do
@@ -175,7 +199,7 @@ do
         echo "Invalid number of cores was specified: $2"
         exit 1
       fi
-      if [ "$MAXCORES" -ge "$2" ]; then
+      if [ "$MAXCORES" -ge "$2" -o "$MAXCORES" -eq 0 ]; then
         CORES="$2"
       else
         echo "Cannot set number of cores to $2, because the maximum number"
