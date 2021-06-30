@@ -208,7 +208,7 @@ def add_child_of(rst_data, outfile):
     for cls in found_classes:
         parents = classes.get_parent_tree(cls)[1:]
         if parents:
-            child_str = '   Child of (inserted): '
+            child_str = '   Child of: '
             for i, parent in enumerate(parents):
                 #if are_in_diff_files(cls, parent):
                     #parent = format_cls(parent)
@@ -217,7 +217,7 @@ def add_child_of(rst_data, outfile):
                     # add separator except after last entry
                     child_str += ', '
             repl_str = '.. class:: {}\n\n'.format(cls)
-            child_str = '{}{}\n'.format(repl_str, child_str)
+            child_str = '{}{}\n\n'.format(repl_str, child_str)
             rst_data = rst_data.replace(repl_str, child_str)
     return rst_data
 

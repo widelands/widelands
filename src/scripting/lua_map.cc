@@ -2350,8 +2350,6 @@ ImmovableDescription
 
 .. class:: ImmovableDescription
 
-   Child of: :class:`MapObjectDescription`
-
    A static description of a :class:`base immovable <BaseImmovable>`. See also
    :class:`MapObjectDescription` for more properties.
 */
@@ -2536,8 +2534,6 @@ BuildingDescription
 -------------------
 
 .. class:: BuildingDescription
-
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`
 
    A static description of a tribe's building.
    This class contains the properties that are common to all buildings.
@@ -2768,9 +2764,6 @@ ConstructionSiteDescription
 
 .. class:: ConstructionSiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`
-
    A static description of a tribe's constructionsite. See the parent classes for more properties.
 */
 const char LuaConstructionSiteDescription::className[] = "ConstructionSiteDescription";
@@ -2787,9 +2780,6 @@ DismantleSiteDescription
 
 .. class:: DismantleSiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`
-
    A static description of a tribe's dismantlesite. See the parent classes for more properties.
 */
 const char LuaDismantleSiteDescription::className[] = "DismantleSiteDescription";
@@ -2805,9 +2795,6 @@ ProductionSiteDescription
 -------------------------
 
 .. class:: ProductionSiteDescription
-
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`
 
    A static description of a tribe's productionsite.
 
@@ -3261,9 +3248,6 @@ MilitarySiteDescription
 
 .. class:: MilitarySiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`
-
    A static description of a tribe's militarysite.
 
    A militarysite can garrison and heal soldiers, and it will expand your territory.
@@ -3310,9 +3294,6 @@ TrainingSiteDescription
 -----------------------
 
 .. class:: TrainingSiteDescription
-
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`, :class:`ProductionSiteDescription`
 
    A static description of a tribe's trainingsite.
 
@@ -3590,9 +3571,6 @@ WarehouseDescription
 
 .. class:: WarehouseDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`
-
    A static description of a tribe's warehouse. Note that headquarters are also warehouses.
    A warehouse keeps people, animals and wares. See the parent classes for more properties.
 */
@@ -3628,9 +3606,6 @@ MarketDescription
 
 .. class:: MarketDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-   :class:`BuildingDescription`
-
    A static description of a tribe's market. A Market is used for
    trading over land with other players. See the parent classes for more
    properties.
@@ -3656,8 +3631,6 @@ ShipDescription
 -----------------
 
 .. class:: ShipDescription
-
-   Child of: :class:`MapObjectDescription`
 
    A static description of a tribe's ship. See also
    :class:`MapObjectDescription` for more properties.
@@ -3694,8 +3667,6 @@ WareDescription
 ---------------
 
 .. class:: WareDescription
-
-   Child of: :class:`MapObjectDescription`
 
    A static description of a ware. See the parent class for more properties.
 */
@@ -3816,8 +3787,6 @@ WorkerDescription
 
 .. class:: WorkerDescription
 
-   Child of: :class:`MapObjectDescription`
-
    A static description of a tribe's worker. See the parent class for more properties.
 */
 const char LuaWorkerDescription::className[] = "WorkerDescription";
@@ -3927,8 +3896,6 @@ SoldierDescription
 --------------------
 
 .. class:: SoldierDescription
-
-   Child of: :class:`MapObjectDescription`, :class:`WorkerDescription`
 
    A static description of a tribe's soldier, so it can be used in help files
    without having to access an actual instance of the worker on the map.
@@ -4767,8 +4734,6 @@ BaseImmovable
 
 .. class:: BaseImmovable
 
-   Child of: :class:`MapObject`
-
    This is the base class for all immovables in Widelands.
 
    More properties are available through this object's
@@ -4829,8 +4794,6 @@ PlayerImmovable
 
 .. class:: PlayerImmovable
 
-   Child of: :class:`BaseImmovable`
-
    All Immovables that belong to a Player (Buildings, Flags, ...) are based on
    this Class.
 
@@ -4890,8 +4853,6 @@ Flag
 --------
 
 .. class:: Flag
-
-   Child of: :class:`PlayerImmovable`
 
    One flag in the economy of this Player.
 
@@ -5173,8 +5134,6 @@ Road
 
 .. class:: Road
 
-   Child of: :class:`PlayerImmovable`
-
    A road connecting two flags in the economy of this Player.
    Waterways are currently treated like roads in scripts; however,
    there are significant differences. You can check whether an
@@ -5331,8 +5290,6 @@ PortDock
 
 .. class:: PortDock
 
-   Child of: :class:`PlayerImmovable`
-
    Each :class:`Warehouse` that is a port has a dock attached to
    it. The PortDock is an immovable that also occupies a field on
    the water near the port.
@@ -5372,8 +5329,6 @@ Building
 --------
 
 .. class:: Building
-
-   Child of: :class:`PlayerImmovable`
 
    This represents a building owned by a player.
 
@@ -5454,8 +5409,6 @@ ConstructionSite
 -----------------
 
 .. class:: ConstructionSite
-
-   Child of: :class:`Building`
 
    A construction site as it appears in the game.
 
@@ -5806,8 +5759,6 @@ DismantleSite
 
 .. class:: DismantleSite
 
-   Child of: :class:`Building`
-
    A dismantle site as it appears in the game.
 
    More properties are available through this object's
@@ -5884,8 +5835,6 @@ Warehouse
 ---------
 
 .. class:: Warehouse
-
-   Child of: :class:`Building`
 
    Every Headquarter, Port or Warehouse on the Map is of this type.
 
@@ -6345,8 +6294,6 @@ ProductionSite
 
 .. class:: ProductionSite
 
-   Child of: :class:`Building`
-
    Every building that produces anything.
 
    See also:
@@ -6605,8 +6552,6 @@ Market
 
 .. class:: Market
 
-   Child of: :class:`Building`
-
    A Market used for trading with other players.
 
    For functions see:
@@ -6684,8 +6629,6 @@ MilitarySite
 --------------
 
 .. class:: MilitarySite
-
-   Child of: :class:`Building`
 
    Military buildings with stationed soldiers.
 
@@ -6783,8 +6726,6 @@ TrainingSite
 
 .. class:: TrainingSite
 
-   Child of: :class:`ProductionSite`
-
    A specialized production site for training soldiers.
 
    See also: :ref:`has_soldiers`
@@ -6859,8 +6800,6 @@ Bob
 ---
 
 .. class:: Bob
-
-   Child of: :class:`MapObject`
 
    This is the base class for all Bobs in widelands.
 
@@ -7453,8 +7392,6 @@ Worker
 
 .. class:: Worker
 
-   Child of: :class:`Bob`
-
    All workers that are visible on the map are of this kind.
 
    More properties are available through this object's
@@ -7522,8 +7459,6 @@ Soldier
 -------
 
 .. class:: Soldier
-
-   Child of: :class:`Worker`
 
    All soldiers that are on the map are represented by this class.
 

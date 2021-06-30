@@ -337,8 +337,6 @@ Button
 
 .. class:: Button
 
-   Child of: :class:`Panel`
-
    This represents a simple push button.
 */
 const char LuaButton::className[] = "Button";
@@ -400,8 +398,6 @@ Dropdown
 --------
 
 .. class:: Dropdown
-
-   Child of: :class:`Panel`
 
    This represents a dropdown menu.
 */
@@ -584,8 +580,6 @@ Tab
 
 .. class:: Tab
 
-   Child of: :class:`Panel`
-
    A tab button.
 */
 const char LuaTab::className[] = "Tab";
@@ -642,8 +636,6 @@ Window
 ------
 
 .. class:: Window
-
-   Child of: :class:`Panel`
 
    This represents a Window.
 */
