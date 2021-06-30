@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "snow",
-   descname = _ "Snow",
+   descname = _("Snow"),
    is = "arable",
    valid_resources = { "resource_water" },
    default_resource = "",
@@ -13,7 +13,7 @@ wl.Descriptions():new_terrain_type{
    humidity = 800,
    fertility = 100,
 
-   enhancement = { amazons = "taiga" }
+   enhancement = { amazons = "winter_tundra" }
 }
 
 pop_textdomain()

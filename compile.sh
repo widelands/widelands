@@ -104,9 +104,9 @@ else
   CORES="$(nproc --ignore=1)"
 fi
 
-for opt in "$@"
+while [ $# -gt 0 ]
 do
-  case $opt in
+  case $1 in
     -a|--no-asan)
       USE_ASAN="OFF"
     shift
@@ -172,7 +172,10 @@ do
     shift
     ;;
     *)
-          # unknown option
+      # unknown option
+      echo "Unknown option:" $1
+      echo "Use -h or --help for list of available options"
+      exit 1
     ;;
   esac
 done

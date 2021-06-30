@@ -1,8 +1,8 @@
 push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
-   name = "tundra2",
-   descname = _ "Tundra 2",
+   name = "winter_taiga2",
+   descname = _("Taiga 2"),
    is = "arable",
    valid_resources = { "resource_water" },
    default_resource = "resource_water",
