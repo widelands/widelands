@@ -85,6 +85,32 @@ class LuaClasses:
         return tree
 
 
+    def get_children(self, cls):
+        """Returns the children of cls."""
+        children = []
+        for name, parent in self.get_name_parent():
+            if parent == cls:
+                children.append(name)
+        return children
+
+
+    def get_children_tree(self, cls, max_children=0, tree=None):
+        """Recursively find all children of cls."""
+        if tree is None:
+            tree = {cls: []} #tree = []
+        children = self.get_children(cls)
+        print("children of:", cls)
+        print(children)
+        if not children or max_children == MAX_CHILDS:
+            return tree
+        else:
+            max_children += 1
+            tree[cls] = children #tree.append(children)
+            for c in children:
+                self.get_children_tree(c, max_children, tree)
+        return tree
+
+    
     def print_classes(self):
         print("Main classes:")
         for x in self.bases:
@@ -152,6 +178,7 @@ def init(base_dir, cpp_files):
         h_path = os.path.join(base_dir, header)
         fill_data(h_path, outfile)
     classes.print_classes()
+    classes.get_children_tree('MapObjectDescription')
 
 
 def are_in_diff_files(cls1, cls2):
