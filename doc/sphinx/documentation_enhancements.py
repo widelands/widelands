@@ -24,6 +24,11 @@ class LuaClass:
 
 
     def get_prefixed_name(self):
+        """Returns a string assembled form outfile and classname.
+
+        E.g. if outfile = autogen_wl_map.rst and classname = MapObjectDescription
+        the returned value is 'wl.map.MapObjectDescription'.
+        """
         prefix = '.'.join(self.outfile.rpartition('.')[0].split('_')[1:])
         return '{}.{}'.format(prefix, self.name)
 
@@ -34,7 +39,7 @@ class LuaClass:
 # End of LuaClass
 
 class LuaClasses:
-    """Handling of base and derived class lists."""
+    """Handles lists of base and derived classes."""
 
     def __init__(self):
         self.bases = []
@@ -42,9 +47,7 @@ class LuaClasses:
 
 
     def add_class(self, name, outfile, is_base=False, parent=None):
-        if is_base and parent:
-            raise("Error: Base class can't have a parent class!")
-        elif not is_base and not parent:
+        if not is_base and not parent:
             raise("Error: Derived class needs a parent class!")
 
         if is_base:
@@ -99,13 +102,11 @@ class LuaClasses:
         if tree is None:
             tree = {cls: []} #tree = []
         children = self.get_children(cls)
-        print("children of:", cls)
-        print(children)
         if not children or max_children == MAX_CHILDS:
             return tree
         else:
             max_children += 1
-            tree[cls] = children #tree.append(children)
+            tree[cls] = children
             for c in children:
                 self.get_children_tree(c, max_children, tree)
         return tree
@@ -113,11 +114,11 @@ class LuaClasses:
     
     def print_classes(self):
         print("Main classes:")
-        for x in self.bases:
-            x.print_data()
+        for c in self.bases:
+            c.print_data()
         print("Derived classes:")
-        for x in self.derived:
-            x.print_data()
+        for c in self.derived:
+            c.print_data()
 
 
 classes = LuaClasses()
@@ -143,11 +144,11 @@ def fill_data(file_name, outfile):
     if found_cls:
         mod_name = ''
         for cls_name, namespace_or_parent, parent_cls in found_cls:
-            # the variables refer to definition:
+            # The variables refer to definition:
             # cls_name : public namespace_or_parent::parent_cls
 
-            # strip out leading 'Lua'; this can't be done in the regexp
-            # because we need 'LunaClass' to get the parent class of all classes
+            # Strip out leading 'Lua'. This can't be done in the regexp
+            # because we need 'LunaClass' to get the parent class of all classes.
             cls_name = cls_name.replace('Lua', '')
             namespace_or_parent = namespace_or_parent.replace('Lua', '')
             parent_cls = parent_cls.replace('Lua', '')
@@ -165,7 +166,7 @@ def fill_data(file_name, outfile):
                 classes.add_class(cls_name, outfile, is_base=True)
             else:
                 if parent_cls:
-                    # ... : public namespace_or_parent::parent_cls
+                    # ... : public ...::parent_cls
                     classes.add_class(cls_name, outfile, parent=parent_cls)
                 else:
                     # ... : public namespace_or_parent
@@ -178,7 +179,6 @@ def init(base_dir, cpp_files):
         h_path = os.path.join(base_dir, header)
         fill_data(h_path, outfile)
     classes.print_classes()
-    classes.get_children_tree('MapObjectDescription')
 
 
 def are_in_diff_files(cls1, cls2):
@@ -222,5 +222,8 @@ def add_child_of(rst_data, outfile):
     return rst_data
 
 
-def add_dep_graph():
-    pass
+def add_dependency_graph(rst_data, outfile):
+    found_cls = RSTDATA_CLS_RE.findall(rst_data)
+    for cls in found_cls:
+        children = classes.get_children_tree(cls)
+        print(children)
