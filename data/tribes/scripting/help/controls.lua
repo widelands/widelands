@@ -55,7 +55,7 @@ local r = {
                -- TRANSLATORS: This is an access key combination. The hotkey is 'c'
                dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_census")), _"Toggle census") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 's'
-               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_stats")), _"Toggle statistics") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_stats")), _"Toggle status") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'l'
                dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_soldiers")), _"Toggle soldier health bars and level icons") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'u'

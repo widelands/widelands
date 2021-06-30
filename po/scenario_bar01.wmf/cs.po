@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-24 22:17+0000\n"
+"PO-Revision-Date: 2021-06-27 21:23+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -704,7 +704,7 @@ msgstr "Mohlo by to být dost..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:360
 msgid "Khantrukh interrupts…"
-msgstr "Khantrukh přerušuje…"
+msgstr "Khantrukh skočí do řeči…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
@@ -713,7 +713,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr "Přestože to všechno je pravda, budeme se tím muset zabývat později, nyní máme před sebou jiné výzvy. Horníci budou jistě za práci ve štiplavé zimě vysokých hor požadovat více malých svačin. A zabezpečit jejich zásobování nemusí být zcela snadné."
+msgstr "Přestože je to všechno pěkné, budeme se tím muset zabývat později, nyní máme před sebou jiné výzvy. Horníci budou jistě za práci ve štiplavé zimě vysokých hor požadovat více malých svačin. A zabezpečit jejich zásobování nemusí být zcela snadné."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
@@ -730,11 +730,11 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Vypadá to, že tu po lesích běhá celkem dost zvěře, můžeme ji zkusit lovit. A potom, každý určitě bude nadšený z nové hospody. Hele, co jí tak říkat \"Thronova chlouba\" nebo tak nějak!"
+msgstr "Vypadá to, že tu po lesích běhá celkem dost zvěře, můžeme ji zkusit začít lovit ve větším. A potom, každý určitě bude nadšený z nové hospody. Hele, co jí tak říkat \"Thronova chlouba\" nebo tak nějak!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
-msgstr "Starší skočí do vzduchu..."
+msgstr "Starší vyskočí ze židle..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:381
@@ -751,7 +751,7 @@ msgstr "Severně od velké hory je rozlehlá pláň. Proč nevyužít místo, kt
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
-msgstr "Boldreth povzbuzuje…"
+msgstr "Boldreth je nadšen…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:392
@@ -763,7 +763,7 @@ msgstr "Naši lovci jsou v lesích, Throne."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Slibuji ti, že než dnes slunce zapadne, budeš mít připravenu hostinu tak bohatou, že by jí nepohrdl ani velitel všech klanů!"
+msgstr "Slibuji ti, že než dnes slunce zapadne, budeš mít připravenu hostinu tak bohatou, že by jí nepohrdl ani náčelník všech klanů!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
@@ -783,7 +783,7 @@ msgstr "Nádherné ráno"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
-msgstr "Thron uznává…"
+msgstr "Thron si uvědomuje…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:409
@@ -897,7 +897,7 @@ msgstr "Khantrukhovi spadl kámen ze srdce…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Báječné! Střechy už netečou a máme dostatek materiálu, na jakoukoli budovu si jen zamaneme!"
+msgstr "Báječné! Střechy už netečou a máme dostatek materiálu na jakoukoli budovu, kterou si jen zamaneme!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
@@ -944,7 +944,7 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr "Když jsem se rozhlédl, uviděl jsem tváře svých věrných druhů, kteří věří, že je dokážu provést těmito temnými dny. Avšak předtím než jsem mohl vyslovit slova vděčnosti a povzbuzení, vběhl do hostince jeden z mých bojovníků. Byl v těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil."
+msgstr "Když jsem se rozhlédl, uviděl jsem tváře svých věrných druhů, kteří věří, že je dokážu provést těmito temnými dny. Avšak předtím, než jsem mohl vyslovit slova vděčnosti a povzbuzení, vběhl do hostince jeden z mých bojovníků. Byl v těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
@@ -979,7 +979,7 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr "Když jsem se zahleděl k horizontu, stále jsem v dálce viděl purpurové záblesky. Je až neuvěřitelné, s jakým zápalem mí bratři bojují a prodlužují tuto válku. Děsím se chvíle, kdy opět spatřím Al'thunran - bude tam ještě něco kromě popela a zbořených zdí? Na místě, kde kdysi bývalo naše nádherné město?"
+msgstr "Když jsem se zahleděl k horizontu, stále jsem v dálce viděl purpurové záblesky. Je až neuvěřitelné, s jakým zápalem mí bratři bojují a prodlužují tuto válku. Děsím se chvíle, kdy opět spatřím Al'thunran - bude tam, kde kdysi bývalo naše nádherné město, ještě něco kromě popela a zbořených zdí?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"

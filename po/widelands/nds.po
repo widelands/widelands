@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-25 15:36+0000\n"
+"POT-Creation-Date: 2021-06-26 02:44+0000\n"
 "PO-Revision-Date: 2021-06-25 14:10+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -558,11 +558,11 @@ msgstr "De Kaart is nich sekert worden. Willst du würrelk ofbreken?"
 #: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
 #: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1493
+#: ../../src/wlapplication.cc:1573
 msgid "Error"
 msgstr "Fehler"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1495
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1575
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -647,8 +647,8 @@ msgstr "Bargwark"
 msgid "port"
 msgstr "Muu"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -5186,18 +5186,18 @@ msgstr "De Datei-Padd »%s« in de campaigns.lua för Inföhrens is ungültig."
 msgid "Tutorial"
 msgstr "Inföhren"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Schriever"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Schrievers"
@@ -5258,31 +5258,31 @@ msgstr "Oorderreeg-Angaav för »%s« is leeg"
 msgid "%s can not be combined with other actions"
 msgstr "»%s« kann nich tosamen mit anner Dingen bruukt worden"
 
-#: ../../src/wlapplication.cc:1320
+#: ../../src/wlapplication.cc:1400
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt.\nVillicht föhlt een »=«?"
 
-#: ../../src/wlapplication.cc:1442
+#: ../../src/wlapplication.cc:1522
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized un --fullscreen könen nich tosamen bruukt worden"
 
-#: ../../src/wlapplication.cc:1460
+#: ../../src/wlapplication.cc:1540
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt"
 
-#: ../../src/wlapplication.cc:1509
+#: ../../src/wlapplication.cc:1589
 msgid "Game ended unexpectedly"
 msgstr "Speel ennt unverwacht"
 
-#: ../../src/wlapplication.cc:1509
+#: ../../src/wlapplication.cc:1589
 msgid "Unexpected error during the game"
 msgstr "Unverwachter Fehler bi’m Spölen"
 
-#: ../../src/wlapplication.cc:1512
+#: ../../src/wlapplication.cc:1592
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5296,7 +5296,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s (%3$s).\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1522
+#: ../../src/wlapplication.cc:1602
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5306,11 +5306,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Dat Speel hett um dat unverwacht ennt:\n\n%s\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1549
+#: ../../src/wlapplication.cc:1629
 msgid "Emergency save failed"
 msgstr "Noodfall-Sekern fehlslaan"
 
-#: ../../src/wlapplication.cc:1550
+#: ../../src/wlapplication.cc:1630
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6987,8 +6987,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Tahlen över alls"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seefahrt"

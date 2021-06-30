@@ -580,8 +580,8 @@ winterland = {
             name = "land",
             weight = 1,
             coast_terrains = { "winter_beach" },
-            land_terrains = { "tundra", "tundra2", "tundra3" },
-            upper_terrains = { "tundra", "tundra2", "tundra3" },
+            land_terrains = { "winter_taiga1", "winter_taiga2", "winter_taiga3" },
+            upper_terrains = { "winter_taiga1", "winter_taiga2", "winter_taiga3" },
          },
       },
       wasteland = {
@@ -589,7 +589,7 @@ winterland = {
             name = "wasteland",
             weight = 1,
             inner_terrains = { "tundra_taiga" },
-            outer_terrains = { "tundra", "snow" },
+            outer_terrains = { "winter_tundra", "snow" },
          },
       },
       mountains = {
