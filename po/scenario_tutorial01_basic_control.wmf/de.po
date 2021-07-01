@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-18 08:28+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 18:08+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -674,8 +674,8 @@ msgstr "Wenn es viele Felsen gibt, kannst du einen weiteren Steinbruch bauen. Da
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "Gebäudenamen und -statistiken"
+msgid "Census and Status"
+msgstr "Gebäudenamen und -status"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -698,16 +698,16 @@ msgstr "Lass mich die Gebäudenamen für dich aktivieren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "Die Gebäudestatisitk anzeigen"
+msgid "Show the building status"
+msgstr "Den Gebäudestatus anzeigen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "Um die Gebäudestatistik anzuzeigen oder auszublenden, kannst du den ‘Statistik Anzeigen’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr "Um den Gebäudestatus anzuzeigen oder auszublenden, kannst du den ‘Status Anzeigen’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -717,10 +717,10 @@ msgstr "Nun, wäre es nicht schön, den Fortschritt unserer Steinbrüche zu verf
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
-msgstr "Zusätzlich zu den Gebäudenamen kannst du auch noch Statistikanzeigen für sie aktivieren. Es werden damit Informationen über die Produktivität des Gebäudes oder über den Fortschritt einer Baustelle angezeigt."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
+msgstr "Zusätzlich zu den Gebäudenamen kannst du auch noch Statusanzeigen für sie aktivieren. Es werden damit Informationen über die Produktivität des Gebäudes oder über den Fortschritt einer Baustelle angezeigt."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."

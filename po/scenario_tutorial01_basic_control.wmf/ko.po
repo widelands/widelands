@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-25 12:16+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-30 10:23+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -666,8 +666,8 @@ msgstr "바위들이 많이 있다면, 또다른 채석장을 짓는것을 생�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "실태 조사와 통계"
+msgid "Census and Status"
+msgstr "실태 조사 및 상태"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -690,16 +690,16 @@ msgstr "제가 실태 조사를 할 수 있게 하겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "건물 통계 표시"
+msgid "Show the building status"
+msgstr "건물 상태를 표시"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "건물 통계 딱지를 표시하거나 숨기려면 아래쪽에 ‘표시 / 숨김’차림표에서 ‘통계 표시’ 항목을 선택하거나 키보드에서 ‘%s’ 키를 누르십시오."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr "건물 상태 딱지를 표시하거나 숨기려면 아래쪽에 ‘표시 / 숨김’ 차림표에서 ‘상태를 표시’ 항목을 선택하거나 키보드에서 ‘%s’ 키를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -709,10 +709,10 @@ msgstr "이제, 창문을 열지 않고도 우리 채석장의 진행 상황을 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
-msgstr "건물 실태 조사 외에도 건물의 통계 딱지를 활성화 할 수도 있습니다. 이것은 건물의 생산성 또는 건설 현장의 진행 상황에 대한 정보가 표시됩니다."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
+msgstr "건물 실태 조사 외에도 건물의 상태 딱지를 활성화할 수도 있습니다. 이것은 건물의 생산성 또는 건설 현장의 진행 상황에 대한 정보가 표시됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."

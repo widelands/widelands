@@ -61,6 +61,9 @@ void fill_parameter_vector() {
 		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
 		 */
 		_("[de_DE|sv_SE|...]"), _("The locale to use"), false},
+	  {"", "skip_check_datadir_version", "",
+		_("Do not check whether the data directory to use is compatible with this Widelands version"),
+		true},
 	  /// Game setup
 	  {"", "new_game_from_template", _("FILENAME"),
 		_("Directly create a new singleplayer game configured in the given file. An example can be "

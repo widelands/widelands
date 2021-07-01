@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-18 08:22+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 02:47+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -457,9 +457,9 @@ msgstr "Możesz odesłać konkretnego żołnierza klikając na nim. Inny zajmie 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
-"Let me also describe what the numbers in the statistics string mean. This "
-"string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr "Wypada mi też wyjaśnić, jak przedstawiany jest stan osobowy budynku. Zapis może używać do trzech liczb, np. \"1 (+5) żołnierz (+2)\"."
+"Let me also describe what the numbers in the status string mean. This string"
+" can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
