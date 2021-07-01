@@ -111,7 +111,28 @@ class LuaClasses:
                 self.get_children_tree(c, max_children, tree)
         return tree
 
-    
+
+    def get_instance(self, cls):
+        for c in self.bases:
+            if c.name == cls:
+                return c
+        for c in self.derived:
+            if c.name == cls:
+                return c
+        raise("Error: There is no class named:", cls)
+
+
+    def format_cls(self, cls_to_format, cls_to_compare):
+        """Returns a formatted name of cls_to_format if 
+        cls_to_compare is in a different file.
+        """
+        inst1 = self.get_instance(cls_to_format)
+        inst2 = self.get_instance(cls_to_compare)
+        if inst1.outfile != inst2.outfile:
+            return inst1.get_prefixed_name()
+        return cls_to_format
+
+
     def print_classes(self):
         print("Main classes:")
         for c in self.bases:
@@ -144,7 +165,7 @@ def fill_data(file_name, outfile):
     if found_cls:
         mod_name = ''
         for cls_name, namespace_or_parent, parent_cls in found_cls:
-            # The variables refer to definition:
+            # The variables refer to a definition:
             # cls_name : public namespace_or_parent::parent_cls
 
             # Strip out leading 'Lua'. This can't be done in the regexp
@@ -156,12 +177,12 @@ def fill_data(file_name, outfile):
             if cls_name in EXCLUDE_CLASSES:
                 continue
 
-            # find main lua class (module name)
+            # Find main lua class (module name)
             if namespace_or_parent == 'LunaClass':
                 mod_name = cls_name
                 continue
 
-            # feed data models
+            # Feed data models
             if namespace_or_parent == mod_name:
                 classes.add_class(cls_name, outfile, is_base=True)
             else:
@@ -181,44 +202,25 @@ def init(base_dir, cpp_files):
     classes.print_classes()
 
 
-def are_in_diff_files(cls1, cls2):
-    """Check if cls1 and cls2 are in different files."""
-    cls1_outf = None
-    cls2_outf = None
-    for c,f in classes['Main']:
-        if c == cls1:
-            cls1_outf = f
-        if c == cls2:
-            cls2_outf = f
-    if not cls1_outf or not cls2_outf:
-        for c, p, f in classes['Derived']:
-            if c == cls1:
-                cls1_outf = f
-            if c == cls2:
-                cls2_outf = f
-    if cls1_outf != cls2_outf:
-        #print(cls1, cls2, cls1_outf, cls2_outf)
-        return True
-    return False
-
-
 def add_child_of(rst_data, outfile):
     """Adds the String 'Child of: …' to rst_data."""
+
     found_classes = RSTDATA_CLS_RE.findall(rst_data)
     for cls in found_classes:
         parents = classes.get_parent_tree(cls)[1:]
         if parents:
-            child_str = '   Child of: '
+            child_str = '   Child of:'
             for i, parent in enumerate(parents):
-                #if are_in_diff_files(cls, parent):
-                    #parent = format_cls(parent)
+                parent = classes.format_cls(parent, cls)
                 child_str += ' :class:`{}`'.format(parent)
                 if i < len(parents) - 1:
                     # add separator except after last entry
                     child_str += ', '
+
             repl_str = '.. class:: {}\n\n'.format(cls)
             child_str = '{}{}\n\n'.format(repl_str, child_str)
             rst_data = rst_data.replace(repl_str, child_str)
+
     return rst_data
 
 

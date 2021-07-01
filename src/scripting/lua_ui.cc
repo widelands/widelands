@@ -686,8 +686,6 @@ MapView
 
 .. class:: MapView
 
-   Child of :class:`Panel`
-
    The map view is the main widget and the root of all panels. It is the big
    view of the map that is visible at all times while playing.
 */
