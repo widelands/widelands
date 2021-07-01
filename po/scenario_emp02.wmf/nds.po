@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-03-13 12:50+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -162,7 +162,7 @@ msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
-msgstr "Bau eene Schanz up de Uthamm (waar vördeem dat Wille Raadhuus stunn). Dann laten sük keene annern Völker in deese Gegend daal."
+msgstr "Bau eene Schanz up de Uthamm (waar vördeem dat Wille Raadhuus stunn). Dann laten sik keene annern Völker in deese Gegend daal."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -377,7 +377,7 @@ msgid ""
 "more comfortable life, but the people working in the mines are unhappy with "
 "the current situation. They have to do hard work and have no time for making"
 " their own food."
-msgstr "’t is nett un natürelk klook, Bargwarken to bauen, un ’t maakt uns’ Leven liesamer, aver de Bargwarkskeerls sünd jüüst nich tofree. Se mutten sük placken un hebben keene Tied um Spiesen to maken."
+msgstr "’t is nett un natürelk klook, Bargwarken to bauen, un ’t maakt uns’ Leven liesamer, aver de Bargwarkskeerls sünd jüüst nich tofree. Se mutten sik placken un hebben keene Tied um Spiesen to maken."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
@@ -471,7 +471,7 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr "’t gifft noch een paar Wille Lüü, de sük up uns’ Insel versteken, aver wiss finnen wi se bold. All Willen, de uns nich angriepen, setten wi in een Schipp mit de annern freedsamen un schicken se in hör Land torügg."
+msgstr "’t gifft noch een paar Wille Lüü, de sik up uns’ Insel versteken, aver wiss finnen wi se bold. All Willen, de uns nich angriepen, setten wi in een Schipp mit de annern freedsamen un schicken se in hör Land torügg."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 10:00+0000\n"
+"PO-Revision-Date: 2021-06-28 07:08+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -262,7 +262,7 @@ msgstr "Netwark:"
 #. players.
 #: ../../src/wlapplication_messages.cc:146
 msgid "Create syncstream dump files to help debug network games"
-msgstr "Sync-Streamen in Internett-Speelen schrieven, um Verschievens to unnersöken"
+msgstr "Sync-Streamen in Internett-Speelen schrieven, um Verschuvens to unnersöken"
 
 #: ../../src/wlapplication_messages.cc:147
 msgid "Connect to a different metaserver for internet gaming"

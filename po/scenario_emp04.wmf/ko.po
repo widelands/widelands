@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -35,9 +35,9 @@ msgstr "새로운 건물에 필요한 자원을 얻기 위해 모든 생산하�
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
-"Remember to check the messages and the building statistics for unproductive "
-"buildings."
-msgstr "생산하지 않는 건물에 대한 메시지와 건물 통계를 확인하는 것을 기억하십시오."
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
+msgstr "생산하지 않는 건물에 대한 메시지와 건물 상태 딱지를 확인하는 것을 잊지 마십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -1511,7 +1511,7 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr "양조장"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
 msgstr "보리 술 만들고 있음"
@@ -1542,7 +1542,7 @@ msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "숲꾼의 집"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
 msgstr "나무를 심고 있음"
@@ -1635,7 +1635,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "벌목꾼의 집"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
 msgstr "나무를 베고 있음"
@@ -1645,7 +1645,7 @@ msgctxt "empire_building"
 msgid "Mill"
 msgstr "방앗간"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
 msgstr "밀을 빻고 있음"

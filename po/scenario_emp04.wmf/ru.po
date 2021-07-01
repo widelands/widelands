@@ -3,7 +3,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2018
 # Anton Khabarov <2233009@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2019
 # Viktor S <awsswa59@gmail.com>, 2019
@@ -14,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: nskdmitry, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -42,8 +41,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
-"Remember to check the messages and the building statistics for unproductive "
-"buildings."
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
 msgstr ""
 "Не забудьте проверять сообщения и статистику построек для обнаружения "
 "неработающих зданий."
@@ -1676,7 +1675,7 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr "Пивоварня"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
 msgstr "варит пиво"
@@ -1707,7 +1706,7 @@ msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "Домик лесника"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
 msgstr "сажает деревья"
@@ -1802,7 +1801,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Домик дровосека"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
 msgstr "рубит деревья"
@@ -1812,7 +1811,7 @@ msgctxt "empire_building"
 msgid "Mill"
 msgstr "Мельница"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
 msgstr "мелет пшеницу"

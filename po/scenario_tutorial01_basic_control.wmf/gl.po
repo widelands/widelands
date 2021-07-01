@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 02:47+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -665,8 +665,8 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "Censo e estatísticas"
+msgid "Census and Status"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -689,15 +689,15 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
+msgid "Show the building status"
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
@@ -708,9 +708,9 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471

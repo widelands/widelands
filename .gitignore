@@ -3,6 +3,9 @@
 /doc/sphinx/source/autogen*
 /doc/sphinx/source/auxiliary.rst
 
+# Local defaults for compile.sh
+.compile*
+
 # the compile.sh file creates some files, links and directories
 /build
 /data/datadirversion
