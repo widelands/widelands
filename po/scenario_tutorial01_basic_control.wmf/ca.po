@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-05 21:14+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 02:47+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -663,8 +663,8 @@ msgstr "Quan hi ha moltes roques, podeu considerar construir una altra pedrera. 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "Cens i estadístiques"
+msgid "Census and Status"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -687,16 +687,16 @@ msgstr "Deixeu-me activar-vos el cens."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "Mostra les estadístiques dels edificis"
+msgid "Show the building status"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "Per tal de mostrar o amagar les etiquetes d'estadístiques de construcció, podeu seleccionar l'entrada «Mostra estadístiques» del menú «Mostra amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -706,10 +706,10 @@ msgstr "I ara, no seria fantàstic poder comprovar el progrés de les pedreres s
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
-msgstr "A més a més del cens dels edificis, també podeu activar les etiquetes d'estadístiques. Mostren informació de la productivitat dels edificis o del progrés de construcció."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
