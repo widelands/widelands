@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -37,11 +37,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
-"Remember to check the messages and the building statistics for unproductive "
-"buildings."
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
 msgstr ""
-"Vergeet nich, in de Narichten un Tahlen över Husen natokieken, um unnütze "
-"Husen to finnen."
+"Vergeet nich, in de Narichten un Husen-Tostand-Texten natokieken, um unnütze"
+" Husen to finnen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -540,7 +540,7 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
-"Kiek blot de Weertskupp an. ’t gifft haast keene Wöörde. Well ok immer sük "
+"Kiek blot de Weertskupp an. ’t gifft haast keene Wöörde. Well ok immer sik "
 "um uns’ Land kümmert hett, as wi nich hier weren, hett ’t heel un dall in "
 "een Kuddelmuddel verwannelt. Ick weet nich, wo wi dat ofhelpen könen, wenn "
 "dat överhoopt gaht."
@@ -880,7 +880,7 @@ msgstr "Amalee’ tuckt de Achsels"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:445
 msgid "Amalea is getting used to bad news…"
-msgstr "Amalee’ wennt sük an slimme Narichten …"
+msgstr "Amalee’ wennt sik an slimme Narichten …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:447
@@ -1420,7 +1420,7 @@ msgstr "Wi mutten Öven"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:685
 msgid "Saledus still has security concerns…"
-msgstr "Saledus sörgt sük immer noch um de Sekerheid …"
+msgstr "Saledus sörgt sik immer noch um de Sekerheid …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:687
@@ -1566,7 +1566,7 @@ msgstr "De Feind is nah"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:745
 msgid "Saledus is alerted…"
-msgstr "Saledus sörgt sük …"
+msgstr "Saledus sörgt sik …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:747
@@ -1649,7 +1649,7 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr "Broeree"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
 msgstr "Beer to broen"
@@ -1680,7 +1680,7 @@ msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "Förster-Huus"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
 msgstr "Bomen to planten"
@@ -1779,7 +1779,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Boomhaueree"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
 msgstr "Bomen to slagen"
@@ -1789,7 +1789,7 @@ msgctxt "empire_building"
 msgid "Mill"
 msgstr "Möhlen"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
 msgstr "Weit to mahlen"

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-22 00:09+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 17:56+0000\n"
 "Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -385,7 +385,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Ben je klaar om door te gaan? Sluit de minikaart met ‘Verberg Minikaart’ in het menu ‘Kaartweergave’ of druk op ‘%s’. Uiteraard kan het ook met de rechtermuisknop."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
@@ -406,7 +406,7 @@ msgstr "Heel goed. En nu iets over de minikaart."
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Openen kan met de optie ‘Toon Minikaart’ in het menu ‘Kaartweergave’ onderin het scherm, of met de sneltoets ‘%s’ op het toetsenbord."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -447,7 +447,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "De steengroeve is net als de houthakkershut een klein gebouw.  Je kan ze daarom op elk veld bouwen waar een rood, geel of groen huis te zien is als de bouwlocaties zichtbaar zijn (druk daarvoor op '%s')"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
@@ -469,7 +469,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Zorg er voor dat de bouwlocaties zichtbaar zijn en klik dan op de plaats waar je het gebouw wilt hebben, kies het in het venster dat verschijnt, en het is geplaatst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -565,7 +565,7 @@ msgstr "Verbind je Bouwplaats"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Verbind de bouwplaats van je steengroeve met je hoofdkwartier met een weg."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -619,7 +619,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Je werkers houden er niet van om dwars door het land te lopen. Je moet een weg aanleggen van je hoofdkwartier naar de bouwplaats zodat de dragers goederen kunnen transporteren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
@@ -669,7 +669,7 @@ msgstr "Als er veel stenen zijn kan je overwegen om een extra steengroeve te bou
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
+msgid "Census and Status"
 msgstr "Namen en Statistieken"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
@@ -677,7 +677,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Terwijl we wachten laat ik je snel nog een handige functie zien. Het is soms moeilijk om gebouwen van elkaar te onderscheiden. Widelands heeft de mogelijkheid het gebouwnaam boven het gebouw te laten zien."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -685,7 +685,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Gebouwnamen kun je tonen en verbergen via het menu ‘Toon / Verberg’ onderin het scherm, of met de toets ‘%s’ op je toetsenbord."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -693,16 +693,16 @@ msgstr "Ik zal de gebouwnamen voor je aanzetten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "Toon de gebouwstatistieken"
+msgid "Show the building status"
+msgstr "Toon de toestand van het gebouw"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "Om de gebouwen statistiek labels te laten zien of te verbergen kan je de \"Toon Statistieken\" selecteren van het \"Toon / Verberg \" menu onderaan het scherm of druk op toets %sop het toetsenbord. "
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -712,9 +712,9 @@ msgstr "Zou het niet prettig zijn als we de voortgang van de steengroeves konden
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
@@ -744,7 +744,7 @@ msgstr "Blijf klikken op de knop ‘Archiveer geselecteerd bericht’ totdat all
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Je kan ook \"Ctrl\" of \"Shift\" ingedrukt houden om meerdere berichten te selecteren, of toets %s om ze allemaal te selecteren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #, lua-format
@@ -817,7 +817,7 @@ msgstr "Vensters Sluiten"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Prima. Nu moeten we onze blik op andere zaken richten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -881,14 +881,14 @@ msgstr "Laat je Grondgebied Groeien"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Bouw een militair gebouw aan je grens. Kies welke je het leukst vindt."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "De wachtpost is het enige militaire gebouw dat op een kleine bouwlocatie past.  Als je houthakker al voldoende ruimte heeft vrijgemaakt kan je ook een groter militair gebouw neerzetten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
@@ -920,7 +920,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Om uit te breiden hoef je niet meer doen dan aan de grens van je grondgebied een militair gebouw optrekken.  De Barbaren hebben de keuze tussen een vier militaire gebouwen: wachtposten, barrières, torens en vestingen.  Hoe groter het gebouw zal hoe meer het zal kosten kosten,  maar zal ook meer grondgebied rond zich veroveren en meer soldaten kunnen huisvesten.  De gebouwen verschillen ook in zichtbereik, gebouwen met een toren kunnen verder kijken dan andere."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""
