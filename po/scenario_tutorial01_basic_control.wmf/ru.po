@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-18 07:37+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 03:03+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -674,15 +674,15 @@ msgstr "Когда вокруг много скал, можно подумать
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "Наименования и статистика"
+msgid "Census and Status"
+msgstr "Наименования и состояние"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr "Пока мы ждем, я покажу вам другую полезную функцию. Бывает сложно отличить здания друг от друга. Widelands предоставляет функцию показа текстовых ярлыков над постройками, так называемые \"описи\"."
+msgstr "Пока мы ждем, я покажу вам другую полезную функцию. Бывает сложно отличить здания друг от друга. Widelands предоставляет функцию показа текстовых ярлыков над постройками, так называемые \"наименования\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -690,7 +690,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr "Показать или скрыть опись здания вы можете, выбрав \"Показать опись\" в меню \"Показать/скрыть\" внизу или нажав \"%s\" на клавиатуре."
+msgstr "Показать или скрыть наименования зданий вы можете, выбрав \"Показать наименования\"/\"Скрыть наименования\" в меню \"Показать/скрыть\" внизу или нажав \"%s\" на клавиатуре."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -698,16 +698,16 @@ msgstr "Позвольте мне включить перепись для ва�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "Показать статистику построек"
+msgid "Show the building status"
+msgstr "Показать состояние стройки"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "Показать или скрыть надписи статистики построек, вы можете выбрав \"Показать статистику\" в меню \"Показать/Скрыть\" внизу или нажав \"%s\" на клавиатуре."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr "Показать или скрыть метки состояния строек вы можете, выбрав \"Состояние\" в меню \"Показать/Скрыть\" внизу или нажав \"%s\" на клавиатуре."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -717,10 +717,10 @@ msgstr "Было бы неплохо узнать степень готовно�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
-msgstr "Помимо описи зданий, вы можете включить показ статистических данных. Они сообщат о производительности зданий и этапах строительства."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
+msgstr "Помимо наименований зданий, вы можете включить показ меток состояния зданий. Они сообщат о производстве в здании или об этапе строительства."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."

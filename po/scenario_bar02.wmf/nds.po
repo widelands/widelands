@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-05-31 08:11+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -232,7 +232,7 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Um eenen Feind antogriepen, klick de Döör vun eenem Soldateree-Boo vun dienem Feind an. Een Fenster kummt lett sük sehn, waar du utkören sallst, wo völe Soldaten angriepen sallen. Wenn du de Tahl sett hest, klick dat Krüüz (»Angriepen«) an."
+msgstr "Um eenen Feind antogriepen, klick de Döör vun eenem Soldateree-Boo vun dienem Feind an. Een Fenster kummt lett sik sehn, waar du utkören sallst, wo völe Soldaten angriepen sallen. Wenn du de Tahl sett hest, klick dat Krüüz (»Angriepen«) an."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:146

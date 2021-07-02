@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
@@ -36,8 +36,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
-"Remember to check the messages and the building statistics for unproductive "
-"buildings."
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
@@ -1382,7 +1382,7 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
 msgstr ""
@@ -1413,7 +1413,7 @@ msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
 msgstr ""
@@ -1506,7 +1506,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
 msgstr ""
@@ -1516,7 +1516,7 @@ msgctxt "empire_building"
 msgid "Mill"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
 msgstr ""
