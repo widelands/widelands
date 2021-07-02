@@ -4352,7 +4352,7 @@ int LuaTerrainDescription::get_valid_resources(lua_State* L) {
 /* RST
 Economy
 -------
-.. class:: LuaEconomy
+.. class:: Economy
 
    Provides access to an economy. An economy will be created each time a player places a
    flag on the map. As soon this flag is connected to another flag, their two economies will
