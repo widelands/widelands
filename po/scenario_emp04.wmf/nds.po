@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -1675,6 +1675,24 @@ msgctxt "empire_building"
 msgid "harvesting wheat"
 msgstr "Weit to arnten"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr "Keene Meedjes"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr "Hebb keene Medjes mehr"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"De Buur dat warkt bi deese Buurderee hett keen Meedland wo he wat anplanten "
+"kann."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
@@ -1784,6 +1802,27 @@ msgctxt "empire_building"
 msgid "felling trees"
 msgstr "Bomen to slagen"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr "Keene Bomen"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr "Hebb keene Bomen mehr"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
+"De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Ofslaan. "
+"Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een "
+"Försterhuus."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
@@ -1867,3 +1906,19 @@ msgstr "Keen Soldat för deese Lehre is funden worden!"
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Well"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr "Keen Water"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr "Hebb keen Water mehr"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr ""
+"De Arbeider, de bi deese Well warkt, hett keen Water in de Quell mehr."

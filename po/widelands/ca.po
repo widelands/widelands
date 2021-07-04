@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
+"PO-Revision-Date: 2021-07-03 17:27+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1359,8 +1359,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -2322,7 +2322,7 @@ msgstr "Vaixell %d"
 
 #: ../../src/logic/replay.cc:87
 msgid "Desync"
-msgstr ""
+msgstr "Dessincronització"
 
 #: ../../src/logic/replay.cc:88
 #, c-format
@@ -2332,7 +2332,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "La repetició s'ha dessincronitzat i la partida s'ha posat en pausa.\nProbablement esteu mirant una repetició creada amb una altra versió del Widelands i que no és compatible amb la versió actual.\n\nSi esteu segur que la repetició es va crear amb aquesta mateixa versió, %1$s (%2$s), informeu d'aquest problema.\nTrobareu missatges relacionats a la sortida estàndard (stdout.txt en Windows). Si us plau, afegiu-los al vostre informe."
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -4998,7 +4998,7 @@ msgstr "Mostra el cens"
 #: ../../src/ui_fsmenu/options.cc:248
 #: ../../src/wui/interactive_gamebase.cc:241
 msgid "Show Status"
-msgstr ""
+msgstr "Mostra l'estat"
 
 #: ../../src/ui_fsmenu/options.cc:250
 #: ../../src/wui/interactive_gamebase.cc:250
@@ -5201,18 +5201,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autors"
@@ -5464,7 +5464,7 @@ msgstr "Commuta la finestra del cens"
 
 #: ../../src/wlapplication_options.cc:413
 msgid "Toggle Status Labels"
-msgstr ""
+msgstr "Commuta les etiquetes d'estat"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
@@ -6944,7 +6944,7 @@ msgstr "Amaga el cens"
 #. * building status labels are shown
 #: ../../src/wui/interactive_gamebase.cc:240
 msgid "Hide Status"
-msgstr ""
+msgstr "Amaga l'estat"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
@@ -7002,8 +7002,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Navegació"
