@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Madkat Here, 2020
-# Gontzal M. Pujana <juchuf@gmail.com>, 2021
+# Thadah D. Denyse <juchuf@gmail.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # 
 msgid ""
@@ -68,7 +68,7 @@ msgstr "Haz clic en el símbolo de bandera."
 
 #: ../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "Haz clic en el botón de la bandera."
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
