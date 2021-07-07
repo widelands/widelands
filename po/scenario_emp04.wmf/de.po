@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1733,6 +1733,23 @@ msgctxt "empire_building"
 msgid "harvesting wheat"
 msgstr "Das Ernten von Weizen"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr "Keine Felder"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr "Keine Felder"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
@@ -1843,6 +1860,27 @@ msgctxt "empire_building"
 msgid "felling trees"
 msgstr "Das Fällen von Bäumen"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr "Keine Bäume"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr "Keine Bäume"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
+"Der Holzfäller in diesem Holzfällerhaus kann keine Bäume in seinem "
+"Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören "
+"oder ein Forsthaus bauen."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
@@ -1926,3 +1964,18 @@ msgstr "Kein Soldat für diese Ausbildungsstufe gefunden!"
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Brunnen"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr "Kein Wasser"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr "Kein Wasser"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "Der Träger an diesem Brunnen kann kein Wasser mehr finden."

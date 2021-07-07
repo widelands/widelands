@@ -7,9 +7,9 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016,2019
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
 # GunChleoc, 2016
-# Gontzal M. Pujana <juchuf@gmail.com>, 2018,2021
+# Thadah D. Denyse <juchuf@gmail.com>, 2018,2021
 # Javier Mora <morehash@gmail.com>, 2015
-# Gontzal M. Pujana <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Kiibakun, 2021
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
@@ -17,15 +17,15 @@
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
-# Gontzal M. Pujana <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Walter Benkel <tromaster@gmail.com>, 2020-2021
 # X Bello <xbello@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-07-04 02:35+0000\n"
 "PO-Revision-Date: 2021-06-05 18:13+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -1302,6 +1302,7 @@ msgstr "Cocinera de raíz de mandioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1933,8 +1934,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Cabaña de Guarda de Naturaleza\n\n "
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66

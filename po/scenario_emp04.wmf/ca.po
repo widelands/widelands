@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Juanjo, 2021\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -41,6 +41,7 @@ msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
+"Recordeu comprovar els missatges i l'estat dels edificis per trobar-los."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -1698,6 +1699,24 @@ msgctxt "empire_building"
 msgid "harvesting wheat"
 msgstr "recol·lectar el blat"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr "No hi ha camps lliures"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr "No hi ha camps disponibles"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"L'agricultor d'aquesta masoveria de blat no té terreny lliure per sembrar-hi"
+" llavors."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
@@ -1809,6 +1828,27 @@ msgctxt "empire_building"
 msgid "felling trees"
 msgstr "talar arbres"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr "No hi ha arbres"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr "No queden arbres"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
+"El llenyataire d'aquesta casa no pot trobar més arbres en la seva àrea de "
+"treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una "
+"casa de guarda forestal."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
@@ -1892,3 +1932,18 @@ msgstr "No s'ha trobat cap soldat per entrenar aquest nivell."
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Pou"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr "No hi ha aigua"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr "No hi ha aigua"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "El treballador d'aquest pou no pot trobar-hi aigua."
