@@ -6,20 +6,20 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
 # GunChleoc, 2016
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
-# Gontzal M. Pujana <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-07-01 05:27+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1020,19 +1020,19 @@ msgstr "Témpanos de hielo 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Taiga 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Taiga 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Taiga 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

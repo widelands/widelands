@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-21 07:47+0000\n"
+"POT-Creation-Date: 2021-07-04 02:35+0000\n"
+"PO-Revision-Date: 2021-07-05 05:29+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr "widelands <save.wgf>/<replay.wrpl>"
 #: ../../src/wlapplication_messages.cc:52
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:58
-#: ../../src/wlapplication_messages.cc:184
+#: ../../src/wlapplication_messages.cc:187
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
@@ -74,96 +74,102 @@ msgid "[de_DE|sv_SE|...]"
 msgstr "[de_DE|sv_SE|...]"
 
 #: ../../src/wlapplication_messages.cc:65
-#: ../../src/wlapplication_messages.cc:69
-#: ../../src/wlapplication_messages.cc:71
+msgid ""
+"Do not check whether the data directory to use is compatible with this "
+"Widelands version"
+msgstr "Не делать проверку на то, что каталог содержит данные, совместимые с данной версией Widelands"
+
+#: ../../src/wlapplication_messages.cc:68
 #: ../../src/wlapplication_messages.cc:72
-#: ../../src/wlapplication_messages.cc:73
+#: ../../src/wlapplication_messages.cc:74
+#: ../../src/wlapplication_messages.cc:75
+#: ../../src/wlapplication_messages.cc:76
 msgid "FILENAME"
 msgstr "FILENAME"
 
-#: ../../src/wlapplication_messages.cc:66
+#: ../../src/wlapplication_messages.cc:69
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
 msgstr "Создает новую игру для одного игрока-человека, с настройками из указанного файла. За примерами обратитесь к папке `data/templates/new_game_template`"
 
-#: ../../src/wlapplication_messages.cc:69
+#: ../../src/wlapplication_messages.cc:72
 msgid "Directly starts the map `FILENAME` as scenario map"
 msgstr "Запускает карту \"FILENAME\" как сценарий"
 
-#: ../../src/wlapplication_messages.cc:71
+#: ../../src/wlapplication_messages.cc:74
 msgid "Directly loads the savegame `FILENAME`"
 msgstr "Загрузить сохранение \"FILENAME\""
 
-#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:75
 msgid "Directly loads the replay `FILENAME`"
 msgstr "Загружает повтор \"FILENAME\""
 
-#: ../../src/wlapplication_messages.cc:74
+#: ../../src/wlapplication_messages.cc:77
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
 msgstr "Запускает указанный сценарий Lua после старта. Использовать только вместе с параметрами --scenario, --loadgame или --editor"
 
-#: ../../src/wlapplication_messages.cc:78
+#: ../../src/wlapplication_messages.cc:81
 msgid ""
 "Directly starts the Widelands editor. You can add a =FILENAME to directly "
 "load the map `FILENAME` in editor"
 msgstr "Открывает редактор карт и сценариев. Добавьте =FILENAME, чтобы открыть в редакторе карту \"FILENAME\""
 
-#: ../../src/wlapplication_messages.cc:82
+#: ../../src/wlapplication_messages.cc:85
 msgid "Starts the game with sound disabled"
 msgstr "Запустить игру без звука"
 
-#: ../../src/wlapplication_messages.cc:83
+#: ../../src/wlapplication_messages.cc:86
 msgid "Force Widelands to crash when a Lua error occurs"
 msgstr "Принудительно закрывать игру, если в сценариях проскочат баги"
 
-#: ../../src/wlapplication_messages.cc:85
+#: ../../src/wlapplication_messages.cc:88
 msgid ""
 "Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic"
 msgstr "Запустить ИИ в режиме самообучения. \nЗа полным описанием того, как ИИ учится, вам сюда: https://www.widelands.org/wiki/Ai%20Training/"
 
-#: ../../src/wlapplication_messages.cc:89
+#: ../../src/wlapplication_messages.cc:92
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
 msgstr "Только для мультиплеера, автоматически настраивает скорость игры, приводя в зависимость от FPS. Полезно в сочетании с --ai_training"
 
-#: ../../src/wlapplication_messages.cc:93
+#: ../../src/wlapplication_messages.cc:96
 msgid "Game options:"
 msgstr "Настройка игры:"
 
-#: ../../src/wlapplication_messages.cc:93
+#: ../../src/wlapplication_messages.cc:96
 msgid "Note: New values will be written to config file"
 msgstr "Замечание: новые значения будут занесены в файл настроек"
 
 #. * TRANSLATORS: A placeholder for a numerical value
-#: ../../src/wlapplication_messages.cc:96
 #: ../../src/wlapplication_messages.cc:99
-#: ../../src/wlapplication_messages.cc:149
-#: ../../src/wlapplication_messages.cc:181
-#: ../../src/wlapplication_messages.cc:189
-#: ../../src/wlapplication_messages.cc:198
+#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:152
+#: ../../src/wlapplication_messages.cc:184
+#: ../../src/wlapplication_messages.cc:192
+#: ../../src/wlapplication_messages.cc:201
 msgid "n"
 msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:101
 msgid "Automatically save each `n` minutes"
 msgstr "Автоматически сохраняться каждые n минут"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:104
 msgid "Use `n` files for rolling autosaves"
 msgstr "Для хранения автосохранений использовать \"n\" файлов"
 
-#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:105
 msgid "Do not save files as binary zip archives"
 msgstr "Не сохранять файлы в zip-архивах"
 
-#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:106
 msgid "Show filenames in replay screen"
 msgstr "Показывать имена файлов в окне повтора"
 
@@ -171,45 +177,45 @@ msgstr "Показывать имена файлов в окне повтора"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain.
 #. * TRANSLATORS: * marks the default value
-#: ../../src/wlapplication_messages.cc:103
-#: ../../src/wlapplication_messages.cc:105
+#: ../../src/wlapplication_messages.cc:106
 #: ../../src/wlapplication_messages.cc:108
-#: ../../src/wlapplication_messages.cc:117
-#: ../../src/wlapplication_messages.cc:134
-#: ../../src/wlapplication_messages.cc:142
-#: ../../src/wlapplication_messages.cc:177
-#: ../../src/wlapplication_messages.cc:187
+#: ../../src/wlapplication_messages.cc:111
+#: ../../src/wlapplication_messages.cc:120
+#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:145
+#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:190
 msgid "[true*|false]"
 msgstr "[true*|false]"
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:109
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
 msgstr "Показывать предупреждение об избытке игроков"
 
-#: ../../src/wlapplication_messages.cc:108
+#: ../../src/wlapplication_messages.cc:111
 msgid "Start building road after placing a flag"
 msgstr "Начинать постройку дороги после установки флага"
 
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:116
 msgid "Bitmask of display flags to set for new games"
 msgstr "Карта флагов для настройки новых игр"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
 #. terminals
-#: ../../src/wlapplication_messages.cc:113
-#: ../../src/wlapplication_messages.cc:136
-#: ../../src/wlapplication_messages.cc:152
-#: ../../src/wlapplication_messages.cc:153
-#: ../../src/wlapplication_messages.cc:154
+#: ../../src/wlapplication_messages.cc:116
+#: ../../src/wlapplication_messages.cc:139
 #: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:156
+#: ../../src/wlapplication_messages.cc:157
 #: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:161
 msgid "[...]"
 msgstr "[...]"
 
-#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:129
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr "Прокручивать, когда стрелка курсора уперлась в границу экрана"
 
@@ -217,51 +223,51 @@ msgstr "Прокручивать, когда стрелка курсора уп�
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain.
 #. * TRANSLATORS: * marks the default value
-#: ../../src/wlapplication_messages.cc:126
-#: ../../src/wlapplication_messages.cc:127
 #: ../../src/wlapplication_messages.cc:129
-#: ../../src/wlapplication_messages.cc:131
+#: ../../src/wlapplication_messages.cc:130
 #: ../../src/wlapplication_messages.cc:132
-#: ../../src/wlapplication_messages.cc:133
-#: ../../src/wlapplication_messages.cc:156
-#: ../../src/wlapplication_messages.cc:162
-#: ../../src/wlapplication_messages.cc:164
-#: ../../src/wlapplication_messages.cc:176
+#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:165
+#: ../../src/wlapplication_messages.cc:167
 #: ../../src/wlapplication_messages.cc:179
-#: ../../src/wlapplication_messages.cc:194
-#: ../../src/wlapplication_messages.cc:203
+#: ../../src/wlapplication_messages.cc:182
+#: ../../src/wlapplication_messages.cc:197
+#: ../../src/wlapplication_messages.cc:206
 msgid "[true|false*]"
 msgstr "[true|false*]"
 
-#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:130
 msgid "Invert click-and-drag map movement direction"
 msgstr "Обратить направления перетаскивания"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:133
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr "Включить прокрутку по диагонали для цифровой части клавиатуры"
 
-#: ../../src/wlapplication_messages.cc:131
+#: ../../src/wlapplication_messages.cc:134
 msgid "Display system time in the info panel"
 msgstr "Показывать системное время на панели информирования"
 
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:135
 msgid "Zoom only when Ctrl is pressed"
 msgstr "Масштабировать только при нажатом Ctrl"
 
-#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:136
 msgid "Use single watchwindow mode"
 msgstr "Включить однооконный режим \"Наблюдение\""
 
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:138
 msgid "Show in-game chat with transparent background"
 msgstr "Использовать полупрозрачный фон для внутриигрового чата"
 
-#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:139
 msgid "Bitmask to set the toolbar location and mode"
 msgstr "Карта флагов для установки расположения панели инструментов и модов"
 
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:141
 msgid "Networking:"
 msgstr "Сеть:"
 
@@ -269,165 +275,165 @@ msgstr "Сеть:"
 #. used in multiplayer
 #. * TRANSLATORS: games to make sure that there is no mismatch between the
 #. players.
-#: ../../src/wlapplication_messages.cc:146
+#: ../../src/wlapplication_messages.cc:149
 msgid "Create syncstream dump files to help debug network games"
 msgstr "Ведение снимков памяти в сетевых играх для отладки"
 
-#: ../../src/wlapplication_messages.cc:147
+#: ../../src/wlapplication_messages.cc:150
 msgid "Connect to a different metaserver for internet gaming"
 msgstr "Подключаться к другому серверу для сетевой игры"
 
-#: ../../src/wlapplication_messages.cc:147
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:162
 msgid "URI"
 msgstr "URI"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:151
+#: ../../src/wlapplication_messages.cc:154
 msgid "Port number `n` of the metaserver for internet gaming"
 msgstr "Использовать порт \"n\" для игрового подключения к серверу"
 
-#: ../../src/wlapplication_messages.cc:152
+#: ../../src/wlapplication_messages.cc:155
 msgid "The name of the last hosted game"
 msgstr "Название последней игры, расположенной на этом сервере"
 
-#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:156
 msgid "The nickname used for LAN and online games"
 msgstr "Использовать ник в игре по локалке и в интернет-игре"
 
-#: ../../src/wlapplication_messages.cc:154
+#: ../../src/wlapplication_messages.cc:157
 msgid "Name of map author"
 msgstr "Имя автора карты"
 
-#: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:158
 msgid "The last host connected to"
 msgstr "Сервер, к которому подключались последний раз"
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:160
 msgid "Whether the used metaserver login is for a registered user"
 msgstr "Использовать ли логин на сервере для регистрации игрока"
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:161
 msgid "The hashed password for online logins"
 msgstr "Использовать хэш пароля для сетевой игры"
 
-#: ../../src/wlapplication_messages.cc:160
+#: ../../src/wlapplication_messages.cc:163
 msgid ""
 "Connect to a different github repository and branch from the add-ons manager"
 msgstr "Подключить менеджер дополнений к гдругому GitHub репозиторию и/или ветви"
 
-#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:165
 msgid "Graphic options:"
 msgstr "Настройки графики:"
 
-#: ../../src/wlapplication_messages.cc:163
+#: ../../src/wlapplication_messages.cc:166
 msgid "Whether to use the whole display for the game screen"
 msgstr "Делать снимок всего экрана"
 
-#: ../../src/wlapplication_messages.cc:164
+#: ../../src/wlapplication_messages.cc:167
 msgid "Whether to start the game in a maximized window"
 msgstr "Разворачивать окно на старте игры"
 
 #. * TRANSLATORS: A placeholder for window width
-#: ../../src/wlapplication_messages.cc:168
+#: ../../src/wlapplication_messages.cc:171
 msgid "x"
 msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
-#: ../../src/wlapplication_messages.cc:170
+#: ../../src/wlapplication_messages.cc:173
 msgid "Width `x` of the window in pixel"
 msgstr "Ширина окна в \"x\" пикселей"
 
 #. * TRANSLATORS: A placeholder for window height
-#: ../../src/wlapplication_messages.cc:173
+#: ../../src/wlapplication_messages.cc:176
 msgid "y"
 msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
-#: ../../src/wlapplication_messages.cc:175
+#: ../../src/wlapplication_messages.cc:178
 msgid "Height `y` of the window in pixel"
 msgstr "Высота окна в \"y\" пикселей"
 
-#: ../../src/wlapplication_messages.cc:176
+#: ../../src/wlapplication_messages.cc:179
 msgid "Whether to grab the mouse input"
 msgstr "Перехватывать ли все сигналы от мышки"
 
-#: ../../src/wlapplication_messages.cc:177
+#: ../../src/wlapplication_messages.cc:180
 msgid "Whether to use the mouse cursor provided by SDL"
 msgstr "Проводить ли эмуляцию курсора мыши в SDL"
 
-#: ../../src/wlapplication_messages.cc:179
+#: ../../src/wlapplication_messages.cc:182
 msgid "Whether to use sticky tooltips"
 msgstr "Задействовать ли \"липучие подсказки\""
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:183
+#: ../../src/wlapplication_messages.cc:186
 msgid "Maximal optical framerate `n` of the game"
 msgstr "Частота кадров в игре ограничена \"n\" FPS"
 
-#: ../../src/wlapplication_messages.cc:184
+#: ../../src/wlapplication_messages.cc:187
 msgid "The path to the active UI theme relative to the homedir"
 msgstr "Путь к теме интерфейса относительно основной папки"
 
-#: ../../src/wlapplication_messages.cc:187
+#: ../../src/wlapplication_messages.cc:190
 msgid "Options for the internal window manager:"
 msgstr "Настройки внутреннего оконного менеджера:"
 
-#: ../../src/wlapplication_messages.cc:188
+#: ../../src/wlapplication_messages.cc:191
 msgid "Should automatic map movements be animated"
 msgstr "Анимировать ли перемещение по карте"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:191
+#: ../../src/wlapplication_messages.cc:194
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
 msgstr "Прилипание окна к границе экрана с расстояния в `n` пикселях"
 
-#: ../../src/wlapplication_messages.cc:195
+#: ../../src/wlapplication_messages.cc:198
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
 msgstr "Прятать рамку окна, когда она находится недалеко от границы экрана"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:200
+#: ../../src/wlapplication_messages.cc:203
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
 msgstr "Прилипание окна к границе панели с расстояния в `n` пикселей"
 
-#: ../../src/wlapplication_messages.cc:204
+#: ../../src/wlapplication_messages.cc:207
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
 msgstr "Прилипание окна к границам панели в случае, если окно нависает над панелью"
 
-#: ../../src/wlapplication_messages.cc:207
+#: ../../src/wlapplication_messages.cc:210
 msgid "Enable verbose debug messages"
 msgstr "Включить подробные отладочные сообщения"
 
-#: ../../src/wlapplication_messages.cc:207
+#: ../../src/wlapplication_messages.cc:210
 msgid "Others:"
 msgstr "Прочее:"
 
-#: ../../src/wlapplication_messages.cc:208
+#: ../../src/wlapplication_messages.cc:211
 msgid "Only print version and exit"
 msgstr "Только лишь вывести версию и выйти"
 
-#: ../../src/wlapplication_messages.cc:209
+#: ../../src/wlapplication_messages.cc:212
 msgid "Show this help"
 msgstr "Показать справку"
 
-#: ../../src/wlapplication_messages.cc:210
+#: ../../src/wlapplication_messages.cc:213
 msgid "Show this help with all available config options"
 msgstr "Показать справку с доступными настройками"
 
-#: ../../src/wlapplication_messages.cc:211
+#: ../../src/wlapplication_messages.cc:214
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:215
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -435,12 +441,12 @@ msgid ""
 msgstr "Загрузить сохранение или повтор. Соответственно,  файлы с расширением .wgf или .wrpl. Не работает с другими опциями. См. также --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:241
+#: ../../src/wlapplication_messages.cc:244
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Это Widelands версии %s"
 
-#: ../../src/wlapplication_messages.cc:302
+#: ../../src/wlapplication_messages.cc:305
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
