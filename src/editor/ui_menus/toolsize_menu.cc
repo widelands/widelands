@@ -33,38 +33,22 @@ inline EditorInteractive& EditorToolsizeMenu::eia() const {
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
-        &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-     textarea_(this,
-               UI::PanelStyle::kWui,
-               UI::FontStyle::kWuiLabel,
+        &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 30, _("Tool Size")),
+     toolsize_spinbox_(this,
                5,
-               10,
-               240,
-               10,
-               std::string(),
-               UI::Align::kCenter),
-     increase_(this,
-               "incr",
-               get_inner_w() / 2 - 10,
-               25,
-               20,
-               20,
-               UI::ButtonStyle::kWuiSecondary,
-               g_image_cache->get("images/ui_basic/scrollbar_up.png")),
-     decrease_(this,
-               "decr",
-               get_inner_w() / 2 + 10,
-               25,
-               20,
-               20,
-               UI::ButtonStyle::kWuiSecondary,
-               g_image_cache->get("images/ui_basic/scrollbar_down.png")),
+               5,
+               get_inner_w() - 2 * 5,
+               80,
+               1,
+               1,
+               MAX_TOOL_AREA + 1,
+               UI::PanelStyle::kWui,
+               _("Current size:"),
+               UI::SpinBox::Units::kNone,
+               UI::SpinBox::Type::kSmall),
      value_(0) {
-	increase_.sigclicked.connect([this]() { increase_radius(); });
-	decrease_.sigclicked.connect([this]() { decrease_radius(); });
+	toolsize_spinbox_.changed.connect([this]() { changed_(); });
 
-	increase_.set_repeating(true);
-	decrease_.set_repeating(true);
 	update(parent.get_sel_radius());
 
 	if (eia().tools()->current().has_size_one()) {
@@ -78,23 +62,23 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 	initialization_complete();
 }
 
+void EditorToolsizeMenu::changed_() {
+	value_ = toolsize_spinbox_.get_value() - 1;
+	eia().set_sel_radius(value_);
+}
+
 void EditorToolsizeMenu::update(uint32_t const val) {
 	value_ = val;
-	eia().set_sel_radius(val);
 	set_buttons_enabled(true);
-	textarea_.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
-	decrease_.set_enabled(enable && 0 < value_);
-	increase_.set_enabled(enable && value_ < MAX_TOOL_AREA);
-}
-
-void EditorToolsizeMenu::decrease_radius() {
-	assert(0 < eia().get_sel_radius());
-	update(eia().get_sel_radius() - 1);
-}
-void EditorToolsizeMenu::increase_radius() {
-	assert(eia().get_sel_radius() < MAX_TOOL_AREA);
-	update(eia().get_sel_radius() + 1);
+	if (enable) {
+		toolsize_spinbox_.set_interval(1, MAX_TOOL_AREA + 1);
+		toolsize_spinbox_.set_value(value_ + 1);
+		eia().set_sel_radius(value_);
+	} else {
+		toolsize_spinbox_.set_interval(1, 1);
+		toolsize_spinbox_.set_value(value_ + 1);
+	}
 }
