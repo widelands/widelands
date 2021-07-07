@@ -20,8 +20,8 @@
 #ifndef WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
 #define WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
 
-#include "ui_basic/unique_window.h"
 #include "ui_basic/spinbox.h"
+#include "ui_basic/unique_window.h"
 
 class EditorInteractive;
 
