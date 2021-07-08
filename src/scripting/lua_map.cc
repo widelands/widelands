@@ -5447,6 +5447,8 @@ int LuaBuilding::dismantle(lua_State* L) {
 /* RST
    .. method:: enhance([keep_wares = false])
 
+      versionadded:: 1.1
+
       Instantly enhance this building if there is an enhancement.
 
       :arg keep_wares: Optional: If :const:`false` (default) the wares in this buildings stock
