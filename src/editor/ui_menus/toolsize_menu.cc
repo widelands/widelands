@@ -47,10 +47,10 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
               UI::SpinBox::Units::kNone,
               UI::SpinBox::Type::kSmall),
      value_(0) {
-	spinbox_.changed.connect([this]() { changed_(); });
+	spinbox_.changed.connect([this]() { changed(); });
 
-	set_inner_size(spinbox_.get_w() + 2 * margin, spinbox_.get_h() + 2 * margin);
-	spinbox_.set_pos(Vector2i(margin, margin));
+	set_inner_size(spinbox_.get_w() + 2 * kMargin, spinbox_.get_h() + 2 * kMargin);
+	spinbox_.set_pos(Vector2i(kMargin, kMargin));
 
 	update(parent.get_sel_radius());
 
@@ -65,7 +65,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 	initialization_complete();
 }
 
-void EditorToolsizeMenu::changed_() {
+void EditorToolsizeMenu::changed() {
 	value_ = spinbox_.get_value() - 1;
 	eia().set_sel_radius(value_);
 }

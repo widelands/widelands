@@ -38,8 +38,8 @@ private:
 	EditorInteractive& eia() const;
 	UI::SpinBox spinbox_;
 	uint32_t value_;
-	void changed_();
-	const uint32_t margin = 5;
+	void changed();
+	static constexpr uint32_t kMargin = 5;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
