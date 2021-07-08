@@ -49,8 +49,8 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
      value_(0) {
 	spinbox_.changed.connect([this]() { changed_(); });
 
-        set_inner_size(spinbox_.get_w() + 2 * margin, spinbox_.get_h() + 2 * margin);
-        spinbox_.set_pos(Vector2i(margin, margin));
+	set_inner_size(spinbox_.get_w() + 2 * margin, spinbox_.get_h() + 2 * margin);
+	spinbox_.set_pos(Vector2i(margin, margin));
 
 	update(parent.get_sel_radius());
 
