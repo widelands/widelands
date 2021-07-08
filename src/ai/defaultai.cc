@@ -3035,7 +3035,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					if (bo.is(BuildingAttribute::kRanger)) {
 
-					 //	assert(bo.new_building == BuildingNecessity::kNeeded);
+					// assert(bo.new_building == BuildingNecessity::kNeeded);
 
 						if (bo.total_count() == 0) {
 							prio += 200;
