@@ -36,9 +36,10 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 
 private:
 	EditorInteractive& eia() const;
-	UI::SpinBox toolsize_spinbox_;
+	UI::SpinBox spinbox_;
 	uint32_t value_;
 	void changed_();
+	const uint32_t margin = 5;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H

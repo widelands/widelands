@@ -34,20 +34,23 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 30, _("Tool Size")),
-     toolsize_spinbox_(this,
-               5,
-               5,
-               get_inner_w() - 2 * 5,
+     spinbox_(this,
+               margin,
+               margin,
+               get_inner_w() - 2 * margin,
                80,
                1,
                1,
                MAX_TOOL_AREA + 1,
                UI::PanelStyle::kWui,
-               _("Current size:"),
+               _("Current Size:"),
                UI::SpinBox::Units::kNone,
                UI::SpinBox::Type::kSmall),
      value_(0) {
-	toolsize_spinbox_.changed.connect([this]() { changed_(); });
+	spinbox_.changed.connect([this]() { changed_(); });
+
+        set_inner_size(spinbox_.get_w() + 2 * margin, spinbox_.get_h() + 2 * margin);
+        spinbox_.set_pos(Vector2i(margin, margin));
 
 	update(parent.get_sel_radius());
 
@@ -63,7 +66,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 }
 
 void EditorToolsizeMenu::changed_() {
-	value_ = toolsize_spinbox_.get_value() - 1;
+	value_ = spinbox_.get_value() - 1;
 	eia().set_sel_radius(value_);
 }
 
@@ -73,12 +76,12 @@ void EditorToolsizeMenu::update(uint32_t const val) {
 }
 
 void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
+	int32_t sbval = value_ + 1;
 	if (enable) {
-		toolsize_spinbox_.set_interval(1, MAX_TOOL_AREA + 1);
-		toolsize_spinbox_.set_value(value_ + 1);
+		spinbox_.set_interval(1, MAX_TOOL_AREA + 1);
+		spinbox_.set_value(sbval);
 		eia().set_sel_radius(value_);
 	} else {
-		toolsize_spinbox_.set_interval(1, 1);
-		toolsize_spinbox_.set_value(value_ + 1);
+		spinbox_.set_interval(sbval, sbval);
 	}
 }
