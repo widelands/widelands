@@ -5447,7 +5447,7 @@ int LuaBuilding::dismantle(lua_State* L) {
 /* RST
    .. method:: enhance([keep_wares = false])
 
-      versionadded:: 1.1
+      .. versionadded:: 1.1
 
       Instantly enhance this building if there is an enhancement.
 
