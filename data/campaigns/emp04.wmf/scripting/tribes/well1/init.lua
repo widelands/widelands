@@ -49,9 +49,9 @@ descriptions:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = "No Water",
-      heading = "Out of Water",
-      message = "The carrier working at this well can’t find any water in his well.",
+      title = pgettext("empire_building", "No Water"),
+      heading = pgettext("empire_building", "Out of Water"),
+      message = pgettext("empire_building", "The carrier working at this well can’t find any water in his well."),
       productivity_threshold = 15
    },
 }

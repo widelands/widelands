@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-03-13 12:50+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Een Jäger kann Deerten jagen, een Deertentüchter kümmert sük daarum, dat se nich kanpp worden. Dat Fleesk word vun eener Kneipe to Happen för de Bargwarkskeerls verarbeidt."
+msgstr "Een Jäger kann Deerten jagen, een Deertentüchter kümmert sik daarum, dat se nich kanpp worden. Dat Fleesk word vun eener Kneipe to Happen för de Bargwarkskeerls verarbeidt."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -411,7 +411,7 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr "Vandaag hebben miene Jägers Mannen, Froen un lütte Kinners vör mi brocht, de sük in de Walden verstoken hebben, versöökt hebben, vör de Krieg to flüchten un vör de Haat un Hitz, wat tüsken de Völkers regeert, de tegen nanner kämpen as in de ollen Tieden, as wi nix as wille Deerten waren, de vun hör Dreven kuntrolleert worden. Keener vun mienen Bröörs kann jemaals de Kuntroll över de holten Throon kriegen un behollen, keens vun de Völkers kann machtig genoog wesen, um de annern unnertokriegen. ’t kann keen Enn to deesen Slachten geven, wenn nich … is ’t so? As Vader mi seggt hett?"
+msgstr "Vandaag hebben miene Jägers Mannen, Froen un lütte Kinners vör mi brocht, de sik in de Walden verstoken hebben, versöökt hebben, vör de Krieg to flüchten un vör de Haat un Hitz, wat tüsken de Völkers regeert, de tegen nanner kämpen as in de ollen Tieden, as wi nix as wille Deerten waren, de vun hör Dreven kuntrolleert worden. Keener vun mienen Bröörs kann jemaals de Kuntroll över de holten Throon kriegen un behollen, keens vun de Völkers kann machtig genoog wesen, um de annern unnertokriegen. ’t kann keen Enn to deesen Slachten geven, wenn nich … is ’t so? As Vader mi seggt hett?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
@@ -432,7 +432,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "As de Dagen vörbigahn, kummt mi Boldreth mehr un mehr rumrieten vör. Miene Kameraden verlesen hör Mood as de kolle Tied nahder kummt, un wi leven immer noch in nix as Kaaten un Brattsen. Ick harr nooit vörhatt, so lang in de Wildernis to blieven – aver ick hett ok nooit docht, dat se sük so lang mit deesem unnützen Krieg befaten."
+msgstr "As de Dagen vörbigahn, kummt mi Boldreth mehr un mehr rumrieten vör. Miene Kameraden verlesen hör Mood as de kolle Tied nahder kummt, un wi leven immer noch in nix as Kaaten un Brattsen. Ick harr nooit vörhatt, so lang in de Wildernis to blieven – aver ick hett ok nooit docht, dat se sik so lang mit deesem unnützen Krieg befaten."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217

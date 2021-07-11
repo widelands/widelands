@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-27 22:08+0000\n"
+"PO-Revision-Date: 2021-06-28 19:21+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -418,7 +418,7 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr "Na tento ostrov jsme dorazili v pořádku. Dalším krokem bude se na tomto ostrově dobře zabydlet. Hádám, že musíme vybudovat udržitelné hospodářství a prozkoumat své okolí. Povolala jsem odborníky a budu se řídit jejich radami."
+msgstr "Na tento ostrov jsme dorazili v pořádku. Dalším krokem bude udělat z něj domov. Hádám, že musíme vybudovat udržitelné hospodářství a prozkoumat své okolí. Povolala jsem odborníky a budu se řídit jejich radami."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
@@ -496,7 +496,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "Infrastruktura je vybudována a strávila jsem několik dní ujišťováním se, že vše pracuje, tak jak má. Nyní vyvstaly další naléhavé problémy. Předvolala jsem Coliondera, svého osobního kuchaře, aby mi pomohl, dát tyto problémy do pořádku."
+msgstr "Infrastruktura je vybudována a strávila jsem několik dní ujišťováním se, že vše pracuje, tak jak má. Nyní vyvstaly další naléhavé problémy. Předvolala jsem Coliondera, svého osobního kuchaře, aby mi s nimi pomohl."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
@@ -506,7 +506,7 @@ msgstr "Colionder dorazil"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr "Nechť vás Satul hřeje, Jundlino. Jak mohu být k službám vašim nebo bohovi?"
+msgstr "Nechť vás Satul hřeje, Jundlino. Jak mohu posloužit vám nebo našemu bohu?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:226
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
@@ -695,7 +695,7 @@ msgid ""
 "misbehaving and bullying the common folk. What is this nonsense all about? "
 "They are servants for the common good and must not misuse their powers. This"
 " is inexcusable! Explain this, if you will!"
-msgstr "Co se děje, Sidole? Doslechla jsem se, že se tví vojáci veřejnosti dělají ostudu a tyranizují obyčejné lidi. Co je to za nepřístojnosti? Měli by sloužit lidem a pro obecné dobro a nesmí zneužívat svou moc. To je neomluvitelné - vysvětli mi to, jestli můžeš!"
+msgstr "Co se děje, Sidole? Doslechla jsem se, že tví vojáci dělají na veřejnosti ostudu a tyranizují obyčejné lidi. Co je to za nepřístojnosti? Měli by sloužit lidem a pro obecné dobro a nesmí zneužívat svou moc. To je neomluvitelné - vysvětli mi to, jestli můžeš!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
 msgid "Sidolus Seems Contrite"
@@ -719,7 +719,7 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr "Nebojím se nákladů ani práce, pokud to udrží tvé lidi na uzdě. Dostaneš své budovy. Ale pamatuj si, že nebudu tolerovat žádné hrubé vojáky. Mělo by se něco podobného ještě opakovat, poneseš za to plnou zodpovědnost. Jdi."
+msgstr "Nebojím se nákladů ani práce, pokud to udrží tvé lidi na uzdě. Dostaneš své budovy. Ale pamatuj si, že nebudu tolerovat žádné hrubé vojáky. Bude-li se něco podobného ještě opakovat, poneseš za to plnou zodpovědnost. Jdi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:355
 msgid "Jundlina Received a Letter"
@@ -733,7 +733,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nově dokončeném labyrintu. Kobky jsou také dokončeny a brzy se v nich začne trénovat. Nemůžu se dočkat zítřka. Způsob výcviku našich vojáků mě velmi zajímá. Jsem zvědavá, jestli jim další výcvik vyžene z hlavy to bavení se ponižováním civilního obyvatelstva."
+msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nově dokončeném labyrintu. Kobky jsou také dokončeny a brzy se v nich začne trénovat. Nemůžu se dočkat zítřka. Způsob výcviku našich vojáků mě velmi zajímá. Jsem zvědavá, jestli jim další výcvik vyžene z hlavy to šikanování civilního obyvatelstva."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
 msgid "Jundlina Considers the Economy"
@@ -753,7 +753,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Dalším způsobem jak ulehčit dopravě je postavit sklad. Když jsme nyní zabrali horu, zdá se být rozumné, postavit sklad na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
+msgstr "Dalším způsobem, jak ulehčit dopravě, je postavit sklad. Když jsme nyní zabrali horu, zdá se být rozumné, postavit sklad na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid "A Dangerous Discovery"
@@ -907,7 +907,7 @@ msgstr "Chvála Satulovi! Ostur, náš mladý lodník, to dokázal. Máme tři l
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr "Očekávám dlouhou cesta, ale na jejím konci najdeme Satulovu zemi. To jsem slíbila, svým lidem i sobě."
+msgstr "Očekávám dlouhou cestu, ale na jejím konci najdeme Satulovu zemi. To jsem slíbila, svým lidem i sobě."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid "Congratulations"

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-03-13 12:50+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sük daarum, dat de Fisse nich all fiskt worden, indeem he welke tücht. Pass up, dat immer een paar Fisse övrig sünd, anners kann de Fisstüchter keene mehr tüchten. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
+msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sik daarum, dat de Fisse nich all fiskt worden, indeem he welke tücht. Pass up, dat immer een paar Fisse övrig sünd, anners kann de Fisstüchter keene mehr tüchten. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -293,7 +293,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Up de verbargen un verlesen Insel Atlantis hett sük, as de Welt leep jung weer, een stoltes Volk daallaten. Vun de Stamm vun König Ajanthul – de eersten Minsk, de de Seegott Luutas de Macht geven hett, boven Water to amen – un de wiesen Pastoren, well de Verbinnen to Luutas weren, regeert, sünd se groot un kultüürriek worden."
+msgstr "Up de verbargen un verlesen Insel Atlantis hett sik, as de Welt leep jung weer, een stoltes Volk daallaten. Vun de Stamm vun König Ajanthul – de eersten Minsk, de de Seegott Luutas de Macht geven hett, boven Water to amen – un de wiesen Pastoren, well de Verbinnen to Luutas weren, regeert, sünd se groot un kultüürriek worden."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:148
@@ -321,7 +321,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Aver all sach good ut. Blot de Peer hebben sük een bietje komisk benohmen. In de Nacht weren se ganz dördreiht un rappelig. Na körter Tied hett de Peertüchter Skied’ utfunnen, wat löss weer: De See tegen hör Stallen leep immer gauer up."
+msgstr "Aver all sach good ut. Blot de Peer hebben sik een bietje komisk benohmen. In de Nacht weren se ganz dördreiht un rappelig. Na körter Tied hett de Peertüchter Skied’ utfunnen, wat löss weer: De See tegen hör Stallen leep immer gauer up."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:158
@@ -348,7 +348,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr "Vör luter Schuld hett de König sük sülven doodstoken. Sünner Baas hebben de Lüü to de Pastoren kiekt, aver de kunnen ok nich hülpen. De meesten hebben hör Schicksaal annohmen, anner wullten in de Tempel Deerten opfern, um de Gott anners to stimmen. Dat hett aver nix brocht …"
+msgstr "Vör luter Schuld hett de König sik sülven doodstoken. Sünner Baas hebben de Lüü to de Pastoren kiekt, aver de kunnen ok nich hülpen. De meesten hebben hör Schicksaal annohmen, anner wullten in de Tempel Deerten opfern, um de Gott anners to stimmen. Dat hett aver nix brocht …"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:168
