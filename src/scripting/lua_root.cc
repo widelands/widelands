@@ -621,6 +621,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 	return 0;
 }
 
+// clang-format off
 /* RST
    .. method:: modify_unit(type, name, property … , value …)
 
@@ -645,45 +646,167 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
       Supported types and properties are:
 
-      ===========================  ========================  ====================================
-      Type                            Property descriptor                Values
-      ===========================  ========================  ====================================
-      :const:`"resource"`          :const:`"max_amount"`     **amount**         (*int*)
-      :const:`"terrain"`           :const:`"enhancement"`    **terrain_name**   (*string*)
-      :const:`"worker"`            :const:`"experience"`     **experience**     (*int*)
-      :const:`"worker"`            :const:`"becomes"`        **worker_name**    (*string*)
-      :const:`"worker"`            :const:`"programs"`       **program_name**   (*string*),
-                                   :const:`"set"`            **actions_table**  (*table*)
-      :const:`"productionsite"`    :const:`"enhancement"`    **building_name**  (*string*)
-      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*),
-                                   :const:`"add_ware"`       **amount**         (*int*)
-      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*),
-                                   :const:`"modify_ware"`    **new_amount**     (*int*)
-      :const:`"productionsite"`    :const:`"input"`          **ware_name**      (*string*)
-                                   :const:`"remove_ware"`
-      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*),
-                                   :const:`"add_worker"`     **amount**         (*int*)
-      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*),
-                                   :const:`"modify_worker"`  **new_amount**     (*int*)
-      :const:`"productionsite"`    :const:`"input"`          **worker_name**    (*string*)
-                                   :const:`"remove_worker"`
-      :const:`"productionsite"`    :const:`"programs"`       **program_name**   (*string*),
-                                   :const:`"set"`            **program_table**  (*table*)
-      :const:`"tribe"`             :const:`"add_ware"`       **ware_name**      (*string*),
-                                                             **menu_column**    (*int*),
-                                                             **target_quan**    (*int* or *nil*),
-                                                             **preciousness**   (*int*),
-                                                             **helptexts**      (*table*)
-      :const:`"tribe"`             :const:`"add_worker"`     **worker_name**    (*string*),
-                                                             **menu_column**    (*int*),
-                                                             **target_quan**    (*int* or *nil*),
-                                                             **preciousness**   (*int* or *nil*),
-                                                             **helptexts**      (*table*)
-      :const:`"tribe"`             :const:`"add_building"`   **building_name**  (*string*),
-                                                             **helptexts**      (*table*)
-      :const:`"tribe"`             :const:`"add_immovable"`  **immovable_name** (*string*),
-                                                             **helptexts**      (*table*)
-      ===========================  ========================  ====================================
+      - Resource_
+      - Terrain_
+      - Worker_
+      - Building_
+      - Productionsite_
+      - Trainingsite_
+      - Militarysite_
+      - Warehouse_
+      - Tribe_
+
+      .. table:: ``"resource"``
+         :name: resource
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"max_amount"`                         **amount**         (*int*)               1.0
+         ============================================  =======================================  =============
+
+      .. table:: ``"terrain"``
+         :name: terrain
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"enhancement"`                        **terrain_name**     (*string*)          1.0
+         :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
+         ============================================  =======================================  =============
+
+      .. table:: ``"worker"``
+         :name: worker
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"experience"`                         **experience**     (*int*)               1.0
+         :const:`"becomes"`                            **worker_name**    (*string*)            1.0
+         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
+                                                       **actions_table**  (*table*)
+         ============================================  =======================================  =============
+
+      .. table:: ``"building"``
+         :name: building
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ==============================================================  =======================================  =============
+         Property descriptor                                             Values                                   Since version
+         ==============================================================  =======================================  =============
+         :const:`"enhancement"`                                          **building_name**  (*string*)            1.1
+         :const:`"buildcost"`, :const:`"remove"`                         **ware_name**      (*string*)            1.1
+         :const:`"buildcost"`, :const:`"set"`                            **ware_name**      (*string*),           1.1
+                                                                         **amount**         (*int*)
+         :const:`"return_on_dismantle"`, :const:`"remove"`               **ware_name**      (*string*)            1.1
+         :const:`"return_on_dismantle"`, :const:`"set"`                  **ware_name**      (*string*),           1.1
+                                                                         **amount**         (*int*)
+         :const:`"enhancement_cost"`, :const:`"remove"`                  **ware_name**      (*string*)            1.1
+         :const:`"enhancement_cost"`, :const:`"set"`                     **ware_name**      (*string*),           1.1
+                                                                         **amount**         (*int*)
+         :const:`"enhancement_return_on_dismantle"`, :const:`"remove"`   **ware_name**      (*string*)            1.1
+         :const:`"enhancement_return_on_dismantle"`, :const:`"set"`      **ware_name**      (*string*),           1.1
+                                                                         **amount**         (*int*)
+         ==============================================================  =======================================  =============
+
+      .. table:: ``"productionsite"``
+         :name: productionsite
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"input"`, :const:`"add_ware"`         **ware_name**      (*string*),           1.0
+                                                       **amount**         (*int*)
+         :const:`"input"`, :const:`"modify_ware"`      **ware_name**      (*string*),           1.0
+                                                       **new_amount**     (*int*)
+         :const:`"input"`, :const:`"remove_ware"`      **ware_name**      (*string*)            1.0
+         :const:`"input"`, :const:`"add_worker"`       **worker_name**    (*string*),           1.0
+                                                       **amount**         (*int*)
+         :const:`"input"`, :const:`"modify_worker"`    **worker_name**    (*string*),           1.0
+                                                       **new_amount**     (*int*)
+         :const:`"input"`, :const:`"remove_worker"`    **worker_name**    (*string*)            1.0
+         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
+                                                       **program_table**  (*table*)
+         ============================================  =======================================  =============
+
+      .. table:: ``"trainingsite"``
+         :name: trainingsite
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"soldier_capacity"`                   **capacity**       (*int*)               1.1
+         :const:`"trainer_patience"`                   **patience**       (*int*)               1.1
+         ============================================  =======================================  =============
+
+      .. table:: ``"militarysite"``
+         :name: militarysite
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"conquers"`                           **radius**         (*int*)               1.1
+         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
+         :const:`"max_soldiers"`                       **amount**         (*int*)               1.1
+         ============================================  =======================================  =============
+
+      .. table:: ``"warehouse"``
+         :name: warehouse
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
+         :const:`"conquers"`                           **radius**         (*int*)               1.1
+         ============================================  =======================================  =============
+
+      .. table:: ``"tribe"``
+         :name: tribe
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"add_ware"`                           **ware_name**       (*string*),          1.0
+                                                       **menu_column**     (*int*),
+                                                       **target_quantity** (*int* or *nil*),
+                                                       **preciousness**    (*int*),
+                                                       **helptexts**       (*table*)
+         :const:`"add_worker"`                         **worker_name**     (*string*),          1.0
+                                                       **menu_column**     (*int*),
+                                                       **target_quantity** (*int* or *nil*),
+                                                       **preciousness**    (*int* or *nil*),
+                                                       **helptexts**       (*table*)
+         :const:`"add_building"`                       **building_name**   (*string*),          1.0
+                                                       **helptexts**       (*table*)
+         :const:`"add_immovable"`                      **immovable_name**  (*string*),          1.0
+                                                       **helptexts**       (*table*)
+         ============================================  =======================================  =============
 
       Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
       column in the workers displays (stock menu, warehouse window, economy options), and have
@@ -731,6 +854,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
                      "call=smoke_meat"
                }})
 */
+// clang-format on
 int LuaDescriptions::modify_unit(lua_State* L) {
 	const std::string type = luaL_checkstring(L, 2);
 	const std::string unit = luaL_checkstring(L, 3);
@@ -756,6 +880,8 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 		do_modify_worker(L, unit, property);
 	} else if (type == "ware") {
 		do_modify_ware(L, unit, property);
+	} else if (type == "building") {
+		do_modify_building(L, unit, property);
 	} else if (type == "trainingsite") {
 		do_modify_trainingsite(L, unit, property);
 	} else if (type == "productionsite") {
@@ -788,7 +914,7 @@ void LuaDescriptions::do_modify_resource(lua_State* L,
 	if (property == "max_amount") {
 		resource_descr.set_max_amount(luaL_checkuint32(L, 5));
 	} else {
-		report_error(L, "modify_unit not supported yet for resource property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid resource property '%s'", property.c_str());
 	}
 }
 
@@ -886,7 +1012,7 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		tribe_descr.load_helptexts(
 		   descrs.get_mutable_immovable_descr(descrs.safe_immovable_index(immo_name)), t);
 	} else {
-		report_error(L, "modify_unit not supported yet for tribe property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid tribe property '%s'", property.c_str());
 	}
 }
 
@@ -913,7 +1039,78 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 			report_error(L, "modify_unit - worker - programs: invalid command '%s'", cmd.c_str());
 		}
 	} else {
-		report_error(L, "modify_unit not supported yet for worker property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid worker property '%s'", property.c_str());
+	}
+}
+
+void LuaDescriptions::do_modify_building(lua_State* L,
+                                         const std::string& unit_name,
+                                         const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	const Widelands::DescriptionIndex bldindex = descrs.safe_building_index(unit_name);
+	Widelands::BuildingDescr& bld = *descrs.get_mutable_building_descr(bldindex);
+
+	if (property == "enhancement") {
+		std::unique_ptr<LuaTable> tbl(new LuaTable(L));
+		bld.set_enhancement(descrs, *tbl);
+		descrs.get_mutable_building_descr(bld.enhancement())->set_enhanced_from(bldindex);
+	} else if (property == "vision_range") {
+		bld.set_vision_range(luaL_checkuint32(L, 5));
+	} else if (property == "buildcost") {
+		Widelands::Buildcost& bc = bld.mutable_buildcost();
+		const std::string cmd = luaL_checkstring(L, 5);
+		const std::string warename = luaL_checkstring(L, 6);
+		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		if (cmd == "remove") {
+			bc.erase(wi);
+		} else if (cmd == "set") {
+			bc[wi] = luaL_checkuint32(L, 7);
+		} else {
+			report_error(L, "modify_unit - building - buildcost: invalid command '%s'", cmd.c_str());
+		}
+	} else if (property == "return_on_dismantle") {
+		Widelands::Buildcost& bc = bld.mutable_returns_on_dismantle();
+		const std::string cmd = luaL_checkstring(L, 5);
+		const std::string warename = luaL_checkstring(L, 6);
+		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		if (cmd == "remove") {
+			bc.erase(wi);
+		} else if (cmd == "set") {
+			bc[wi] = luaL_checkuint32(L, 7);
+		} else {
+			report_error(
+			   L, "modify_unit - building - return_on_dismantle: invalid command '%s'", cmd.c_str());
+		}
+	} else if (property == "enhancement_cost") {
+		Widelands::Buildcost& bc = bld.mutable_enhancement_cost();
+		const std::string cmd = luaL_checkstring(L, 5);
+		const std::string warename = luaL_checkstring(L, 6);
+		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		if (cmd == "remove") {
+			bc.erase(wi);
+		} else if (cmd == "set") {
+			bc[wi] = luaL_checkuint32(L, 7);
+		} else {
+			report_error(
+			   L, "modify_unit - building - enhancement_cost: invalid command '%s'", cmd.c_str());
+		}
+	} else if (property == "enhancement_return_on_dismantle") {
+		Widelands::Buildcost& bc = bld.mutable_enhancement_returns_on_dismantle();
+		const std::string cmd = luaL_checkstring(L, 5);
+		const std::string warename = luaL_checkstring(L, 6);
+		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		if (cmd == "remove") {
+			bc.erase(wi);
+		} else if (cmd == "set") {
+			bc[wi] = luaL_checkuint32(L, 7);
+		} else {
+			report_error(
+			   L, "modify_unit - building - enhancement_return_on_dismantle: invalid command '%s'",
+			   cmd.c_str());
+		}
+	} else {
+		report_error(L, "modify_unit: invalid building property '%s'", property.c_str());
 	}
 }
 
@@ -1003,21 +1200,21 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			   L, "modify_unit - productionsite - programs: invalid command '%s'", cmd.c_str());
 		}
 	} else if (property == "enhancement") {
-		std::unique_ptr<LuaTable> tbl(new LuaTable(L));
-		psdescr.set_enhancement(descrs, *tbl);
-		descrs.get_mutable_building_descr(psdescr.enhancement())->set_enhanced_from(psindex);
+		// Needs to stay around for backward compatibility
+		return do_modify_building(L, unit_name, property);
 	} else {
-		report_error(
-		   L, "modify_unit not supported yet for productionsite property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid productionsite property '%s'", property.c_str());
 	}
 }
 
 void LuaDescriptions::do_modify_ship(lua_State* L, const std::string&, const std::string&) {
 	report_error(L, "modify_unit for ships not yet supported");
 }
+
 void LuaDescriptions::do_modify_critter(lua_State* L, const std::string&, const std::string&) {
 	report_error(L, "modify_unit for critters not yet supported");
 }
+
 void LuaDescriptions::do_modify_terrain(lua_State* L,
                                         const std::string& unit_name,
                                         const std::string& property) {
@@ -1028,24 +1225,76 @@ void LuaDescriptions::do_modify_terrain(lua_State* L,
 
 	if (property == "enhancement") {
 		terrain.set_enhancement(luaL_checkstring(L, 5), luaL_checkstring(L, 6));
+	} else if (property == "textures") {
+		LuaTable t(L);
+		terrain.replace_textures(t);
 	} else {
-		report_error(L, "modify_unit not supported yet for terrain property '%s'", property.c_str());
+		report_error(L, "modify_unit: invalid terrain property '%s'", property.c_str());
 	}
 }
+
 void LuaDescriptions::do_modify_immovable(lua_State* L, const std::string&, const std::string&) {
 	report_error(L, "modify_unit for immovables not yet supported");
 }
+
 void LuaDescriptions::do_modify_ware(lua_State* L, const std::string&, const std::string&) {
 	report_error(L, "modify_unit for wares not yet supported");
 }
-void LuaDescriptions::do_modify_trainingsite(lua_State* L, const std::string&, const std::string&) {
-	report_error(L, "modify_unit for trainingsites not yet supported");
+
+void LuaDescriptions::do_modify_trainingsite(lua_State* L,
+                                             const std::string& unit_name,
+                                             const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	const Widelands::DescriptionIndex tsindex = descrs.safe_building_index(unit_name);
+	Widelands::TrainingSiteDescr& tsdescr =
+	   dynamic_cast<Widelands::TrainingSiteDescr&>(*descrs.get_mutable_building_descr(tsindex));
+
+	if (property == "soldier_capacity") {
+		tsdescr.set_max_number_of_soldiers(luaL_checkuint32(L, 5));
+	} else if (property == "trainer_patience") {
+		tsdescr.set_max_stall(luaL_checkuint32(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid trainingsite property '%s'", property.c_str());
+	}
 }
-void LuaDescriptions::do_modify_militarysite(lua_State* L, const std::string&, const std::string&) {
-	report_error(L, "modify_unit for militarysites not yet supported");
+
+void LuaDescriptions::do_modify_militarysite(lua_State* L,
+                                             const std::string& unit_name,
+                                             const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	const Widelands::DescriptionIndex msindex = descrs.safe_building_index(unit_name);
+	Widelands::MilitarySiteDescr& msdescr =
+	   dynamic_cast<Widelands::MilitarySiteDescr&>(*descrs.get_mutable_building_descr(msindex));
+
+	if (property == "conquers") {
+		msdescr.set_conquers(luaL_checkuint32(L, 5));
+	} else if (property == "heal_per_second") {
+		msdescr.set_heal_per_second(luaL_checkuint32(L, 5));
+	} else if (property == "max_soldiers") {
+		msdescr.set_max_number_of_soldiers(luaL_checkuint32(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid militarysite property '%s'", property.c_str());
+	}
 }
-void LuaDescriptions::do_modify_warehouse(lua_State* L, const std::string&, const std::string&) {
-	report_error(L, "modify_unit for warehouses not yet supported");
+
+void LuaDescriptions::do_modify_warehouse(lua_State* L,
+                                          const std::string& unit_name,
+                                          const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	const Widelands::DescriptionIndex whindex = descrs.safe_building_index(unit_name);
+	Widelands::WarehouseDescr& whdescr =
+	   dynamic_cast<Widelands::WarehouseDescr&>(*descrs.get_mutable_building_descr(whindex));
+
+	if (property == "conquers") {
+		whdescr.set_conquers(luaL_checkuint32(L, 5));
+	} else if (property == "heal_per_second") {
+		whdescr.set_heal_per_second(luaL_checkuint32(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid warehouse property '%s'", property.c_str());
+	}
 }
 
 const static struct luaL_Reg wlroot[] = {{nullptr, nullptr}};

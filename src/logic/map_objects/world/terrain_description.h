@@ -119,6 +119,8 @@ public:
 	std::string enhancement(const std::string& category) const;
 	void set_enhancement(const std::string& category, const std::string& terrain);
 
+	void replace_textures(const LuaTable&);
+
 private:
 	const std::string name_;
 	const std::string descname_;

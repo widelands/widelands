@@ -44,6 +44,9 @@ public:
 	Quantity get_max_number_of_soldiers() const {
 		return num_soldiers_;
 	}
+	void set_max_number_of_soldiers(Quantity q) {
+		num_soldiers_ = q;
+	}
 	bool get_train_health() const {
 		return train_health_;
 	}
@@ -59,7 +62,12 @@ public:
 
 	unsigned get_min_level(TrainingAttribute) const;
 	unsigned get_max_level(TrainingAttribute) const;
-	int32_t get_max_stall() const;
+	int32_t get_max_stall() const {
+		return max_stall_;
+	}
+	void set_max_stall(int32_t trainer_patience) {
+		max_stall_ = trainer_patience;
+	}
 
 	const std::vector<std::vector<std::string>>& get_food_health() const {
 		return food_health_;

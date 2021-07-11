@@ -246,10 +246,6 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	return rtv;
 }
 
-int32_t TrainingSiteDescr::get_max_stall() const {
-	return max_stall_;
-}
-
 void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
                                             std::vector<std::vector<std::string>>* food,
                                             std::vector<std::string>* weapons) {

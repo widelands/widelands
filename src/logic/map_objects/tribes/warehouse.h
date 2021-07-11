@@ -50,9 +50,15 @@ public:
 	uint32_t get_conquers() const override {
 		return conquers_;
 	}
+	void set_conquers(uint32_t c) {
+		conquers_ = c;
+	}
 
 	unsigned get_heal_per_second() const {
 		return heal_per_second_;
+	}
+	void set_heal_per_second(unsigned h) {
+		heal_per_second_ = h;
 	}
 
 private:
