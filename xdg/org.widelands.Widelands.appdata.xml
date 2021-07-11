@@ -13,6 +13,7 @@
   <summary xml:lang="cs">Real-time budovatelská strategická hra</summary>
   <summary xml:lang="da">Et realtids opbygningsstrategispil</summary>
   <summary xml:lang="de">Echtzeitbasiertes Aufbau-Strategiespiel</summary>
+  <summary xml:lang="eo">Realtempa konstruada strategia ludo</summary>
   <summary xml:lang="es">Un juego de estrategia y construcción en tiempo real</summary>
   <summary xml:lang="eu">Denbora errealeko eraikuntza eta estrategia jokoa</summary>
   <summary xml:lang="fi">Reaaliaikainen strategiapeli</summary>
@@ -102,6 +103,12 @@
     </p>
     <p xml:lang="en_US">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. Settling, However, really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+    <p xml:lang="eo">
+      Vi estas registo de malgranda gento. Via tasko estas konstrui kreskantan kolonion. Ĉiuj anoj de via gento prenos sian parton por produkti pli da materialoj por subteni tiun kreskadon.
+    </p>
+    <p xml:lang="eo">
+      Widelands havas reĝimon por unu ludanto per kampanjoj kiuj temas pri gentoj kaj siaj batalojen la mondo de Widelands. Tamen, la vera koloniado komenciĝas nur kiam vi kuniĝas kun viaj amikoj per la interreto aŭ per Loka reto (LAN) por konstrui novajn imperiojn kune - aŭ por detrui unu la alian pe la fajro de milito. Widelands eĉ havas artefaritan intelekton por defii vin.
     </p>
     <p xml:lang="es">
       Eres el regente de un pequeño clan. Tu tarea es construir un asentamiento cada vez mayor. Todos los miembros de tu clan van a hacer su parte para producir más recursos para promover este crecimiento.

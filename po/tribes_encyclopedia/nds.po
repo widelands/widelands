@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-26 02:44+0000\n"
-"PO-Revision-Date: 2021-06-25 15:50+0000\n"
+"POT-Creation-Date: 2021-07-07 02:38+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -23,8 +23,8 @@ msgstr ""
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Log, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:376
 #: ../../data/tribes/initialization/barbarians/units.lua:112
@@ -48,8 +48,8 @@ msgstr "Amazoonsk Boomslagersken kappen Bomen; Waldwahrdersken planten welke. De
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:364
 #: ../../data/tribes/initialization/barbarians/units.lua:100
@@ -108,8 +108,8 @@ msgstr "Deeses Tau is ut Boomreep maakt. Daarut maakt man Wapenrock-Umhangens un
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Water, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:462
 #: ../../data/tribes/initialization/barbarians/units.lua:182
@@ -247,8 +247,8 @@ msgstr "Flinthauersken bruken Pickhacken, um Flint ut Stenen of in Bargwarken of
 
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
 #: ../../data/tribes/initialization/empire/units.lua:362
@@ -266,8 +266,8 @@ msgstr "’t word vun de Boomslagerske bruukt un vun de Flintbeitelske produzeer
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:625
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -275,7 +275,7 @@ msgstr "’t word vun de Boomslagerske bruukt un vun de Flintbeitelske produzeer
 #: ../../data/tribes/initialization/frisians/units.lua:422
 msgctxt "ware"
 msgid "Shovels are needed for the proper handling of plants."
-msgstr "Man bruukt Schüppen, um sük recht um Planten to kümmern."
+msgstr "Man bruukt Schüppen, um sik recht um Planten to kümmern."
 
 #. TRANSLATORS: Helptext for an amazon ware: Shovel, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:328
@@ -288,8 +288,8 @@ msgstr "Daarum bruken de Waldwahrdersken, de Maniok-Buursken un de Kakao-Buurske
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:638
 #: ../../data/tribes/initialization/barbarians/units.lua:371
@@ -626,10 +626,10 @@ msgstr "Förskt frömde Geweste ut."
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a frisian immovable: Ashes
-#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
+#. TRANSLATORS: Helptext for a frisian immovable: Ashes
+#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/amazons/units.lua:764
 #: ../../data/tribes/initialization/atlanteans/units.lua:1075
@@ -648,8 +648,8 @@ msgstr "Wat vun eenem verneelten Huus över blievt."
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1269
 #: ../../data/tribes/initialization/barbarians/units.lua:990
@@ -764,8 +764,8 @@ msgstr "Deeser Gummiboom is klaar tum Arnten vun Gummi elasticum dör eene Meist
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1082
 #: ../../data/tribes/initialization/atlanteans/units.lua:1117
@@ -779,8 +779,8 @@ msgstr "Deeses Feld is jüüst plant worden."
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1089
@@ -799,8 +799,8 @@ msgstr "Deeses Feld wasst."
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1103
 #: ../../data/tribes/initialization/atlanteans/units.lua:1138
@@ -814,8 +814,8 @@ msgstr "Deeses Feld is klaar tum arnten."
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1110
 #: ../../data/tribes/initialization/atlanteans/units.lua:1145
@@ -848,8 +848,8 @@ msgstr "De Bohnen up deesem Kakaoboom sünd klaar tum arnten."
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
-#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for an amazon resource indicator: No resources
+#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1159
 #: ../../data/tribes/initialization/barbarians/units.lua:880
@@ -860,16 +860,17 @@ msgstr "Hier sünd keene Mineraale im Grund."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:1185
+#: ../../data/tribes/initialization/amazons/units.lua:1207
 msgid ""
-"Gold veins contain gold ore that can be washed from the gravel at digger "
-"dwellings."
+"Gold veins contain gold ore that can be washed from the gravel at gold "
+"digger dwellings."
 msgstr "In Gold-Aders is Goldkluut, dat vun Goldwaschersken ut de Stoff wascht worden worden kann."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:919
@@ -886,26 +887,19 @@ msgid ""
 msgstr "Flint is een wichtiges Baumaterial un kann vun Steen-Bargwarken ofboot worden."
 
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
 #: ../../data/tribes/initialization/frisians/units.lua:1312
 msgid "There is only a little bit of granite here."
 msgstr "Hier is bedröövt minn Flint."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:1207
-msgid ""
-"Gold veins contain gold ore that can be washed from the gravel at gold "
-"digger dwellings."
-msgstr "In Gold-Aders is Goldkluut, dat vun Goldwaschersken ut de Stoff wascht worden worden kann."
-
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1242
 #: ../../data/tribes/initialization/barbarians/units.lua:963
@@ -915,8 +909,8 @@ msgid "There is a lot of gold here."
 msgstr "Hier is een Bült vun Gold."
 
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
 #: ../../data/tribes/initialization/frisians/units.lua:1356
@@ -926,8 +920,8 @@ msgstr "Hier is een Bült vun Flint."
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1261
 #: ../../data/tribes/initialization/barbarians/units.lua:982
@@ -1442,8 +1436,8 @@ msgstr "Baut Schippen, de för tum Hanneln tüsken Muden un tum Gründen vun nej
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
-#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1590
 #: ../../data/tribes/initialization/atlanteans/units.lua:1722
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
@@ -1458,8 +1452,8 @@ msgstr "»Schimp nich tegen de Baukeerl, well keene Baumaterialien hett.«"
 #. Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1592
 #: ../../data/tribes/initialization/atlanteans/units.lua:1724
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
@@ -1472,8 +1466,8 @@ msgstr "Seggwies, wat över all Aarden vun unmögelken Upgaven seggt word"
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1594
 #: ../../data/tribes/initialization/atlanteans/units.lua:1726
 #: ../../data/tribes/initialization/barbarians/units.lua:1794
@@ -1486,8 +1480,8 @@ msgstr "An deeser Baustee word een nejes Huus baut."
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1601
 #: ../../data/tribes/initialization/atlanteans/units.lua:1733
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
@@ -1500,8 +1494,8 @@ msgstr "»Neje Padden kummen ut, wenn du de ollen ok mal plattrietst.«"
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1603
 #: ../../data/tribes/initialization/atlanteans/units.lua:1735
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
@@ -1514,8 +1508,8 @@ msgstr "Seggwies"
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1605
 #: ../../data/tribes/initialization/atlanteans/units.lua:1737
 #: ../../data/tribes/initialization/barbarians/units.lua:1805
@@ -1726,11 +1720,9 @@ msgstr "Deese wunnermojen Edelstenen worden för eenige besünners gode Husen br
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:539
 #: ../../data/tribes/initialization/barbarians/units.lua:268
 #: ../../data/tribes/initialization/empire/units.lua:285
-#: ../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
@@ -2984,7 +2976,7 @@ msgid ""
 "trees. Logs are also used in the metal workshop to build basic tools, and in"
 " the charcoal kiln for the production of coal. The wood hardener refines "
 "logs into blackwood by hardening them with fire."
-msgstr "Wille Boomhauers kappen de Bomen of; Boomplanters kümmern sük um de Versörgung mit Bomen. Boomstammen worden ok in de Metalldreihbank för Warktüüg un im Holtköhl-Branneree för Köhl bruukt. De Holtharderee verbetert Boomstammen to Haartholt, indeem se mit Füür hardt worden."
+msgstr "Wille Boomhauers kappen de Bomen of; Boomplanters kümmern sik um de Versörgung mit Bomen. Boomstammen worden ok in de Metalldreihbank för Warktüüg un im Holtköhl-Branneree för Köhl bruukt. De Holtharderee verbetert Boomstammen to Haartholt, indeem se mit Füür hardt worden."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Blackwood
 #: ../../data/tribes/initialization/barbarians/units.lua:124
@@ -4865,7 +4857,7 @@ msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
 "trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
 "sawmill."
-msgstr "Rieks-Boomhauers kappen de Bomen of; Försters kümmern sük um de Versörgung mit Bomen. Boomstammen worden ok in de Holtköhl-Branneree, de Warktüügsmee un de Saagmöhlen bruukt."
+msgstr "Rieks-Boomhauers kappen de Bomen of; Försters kümmern sik um de Versörgung mit Bomen. Boomstammen worden ok in de Holtköhl-Branneree, de Warktüügsmee un de Saagmöhlen bruukt."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 2
 #: ../../data/tribes/initialization/empire/units.lua:120
@@ -5803,7 +5795,7 @@ msgid ""
 " are also used in the blacksmithy to build basic tools, and in the charcoal "
 "kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
 " and fish."
-msgstr "Boomslagers kappen de Bomen of; Försters kümmern sük um de Versörgung mit Bomen. Boomstammen worden ok in de Smede för Warktüüg un im Holtköhl-Branneree för Köhl bruukt. Rökelkamers bruken Boomstammen, um Fleesk un Fiss to rökeln."
+msgstr "Boomslagers kappen de Bomen of; Försters kümmern sik um de Versörgung mit Bomen. Boomstammen worden ok in de Smede för Warktüüg un im Holtköhl-Branneree för Köhl bruukt. Rökelkamers bruken Boomstammen, um Fleesk un Fiss to rökeln."
 
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:114
@@ -5964,6 +5956,14 @@ msgid ""
 "A meal is made out of honey bread and beer and either smoked fish or meat. "
 "It is consumed by miners in deep mines."
 msgstr "Een Mahl word ut Hönnigbrood un Beer un of Rökelfiss of Rökelfleesk maakt. De Bargwarkskeerls in Deepen Bargwarken bruken ’t."
+
+#. TRANSLATORS: Helptext for a frisian ware: Coal, part 1
+#: ../../data/tribes/initialization/frisians/units.lua:308
+msgctxt "ware"
+msgid ""
+"Coal is mined in coal mines or produced out of logs by a charcoal burner in "
+"a charcoal kiln or charcoal burner’s house."
+msgstr "Köhle word in Köhle-Bargwarken ofboot of vun eenem Holtköhlbranner in eener Holtköhl-Branneree of Köhleree ut Boomstammen produzeert."
 
 #. TRANSLATORS: Helptext for a frisian ware: Coal, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:310
@@ -6742,7 +6742,7 @@ msgstr "Du gloovst wull, du kannst een Huus sünner miene Hülp bauen?"
 #: ../../data/tribes/initialization/frisians/units.lua:1637
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr "Een Lehmgraver striddt sük mit eenem Baukeerl"
+msgstr "Een Lehmgraver striddt sik mit eenem Baukeerl"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1639
@@ -6966,7 +6966,7 @@ msgstr "Wenn ’t nich genoog Köhle gifft, kann blot de dösigste vun allen Anf
 #: ../../data/tribes/initialization/frisians/units.lua:1737
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
-msgstr "Een Backsteenbranner striddt sük mit sienem Anföhrer, de jüüst dat doot"
+msgstr "Een Backsteenbranner striddt sik mit sienem Anföhrer, de jüüst dat doot"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1739
@@ -7251,7 +7251,7 @@ msgstr "Ick weet nich eenen eenzigen Meister-Bargwarkskeerl, de jemaals sünner 
 #: ../../data/tribes/initialization/frisians/units.lua:1881
 msgctxt "frisians_building"
 msgid "A brewer boasting about the importance of his profession"
-msgstr "Een Broer doot sük mit de Wichtigkeid vun sienem Beroop dick"
+msgstr "Een Broer doot sik mit de Wichtigkeid vun sienem Beroop dick"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1883
@@ -8092,8 +8092,8 @@ msgstr "Namen vun Husen wiesen of verbargen"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:58
-msgid "Toggle statistics"
-msgstr "Tahlen över Husen wiesen of verbargen"
+msgid "Toggle status"
+msgstr "Tostand wiesen of verbargen"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'l'
 #: ../../data/tribes/scripting/help/controls.lua:60
