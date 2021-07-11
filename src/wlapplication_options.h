@@ -212,18 +212,24 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto9,
 	kInGame__End = kInGameQuicknavGoto9,
 
-	k__End = kInGame__End
+	kFastplace__Begin = kInGame__End + 1,
+	kFastplace__End = kFastplace__Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
+
+	k__End = kFastplace__End
 };
 bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
 SDL_Keysym get_shortcut(KeyboardShortcut);
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
+std::string matching_fastplace_shortcut(SDL_Keysym);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
 KeyboardShortcut shortcut_from_string(const std::string&);
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
+void set_fastplace_shortcut(KeyboardShortcut, const std::string& building);
+const std::string& get_fastplace_shortcut(KeyboardShortcut);
 
 /*
  * Sets the directory where to read/write kConfigFile.

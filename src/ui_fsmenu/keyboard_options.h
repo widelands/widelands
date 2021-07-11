@@ -20,6 +20,9 @@
 #ifndef WL_UI_FSMENU_KEYBOARD_OPTIONS_H
 #define WL_UI_FSMENU_KEYBOARD_OPTIONS_H
 
+#include <memory>
+
+#include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
@@ -42,6 +45,8 @@ private:
 	UI::TabPanel tabs_;
 	UI::Button reset_, ok_;
 	std::vector<UI::Box*> boxes_;
+
+	std::unique_ptr<Widelands::Game> game_;
 };
 }  // namespace FsMenu
 

@@ -80,6 +80,7 @@ wl_library(ui_fsmenu
     logic_game_settings
     logic_game_controller
     logic_map
+    logic_map_objects
     logic_single_player_game_settings
     logic_training_wheels
     logic_tribe_basic_info
