@@ -4,15 +4,16 @@
 # Translators:
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-23 08:06+0000\n"
-"PO-Revision-Date: 2021-03-02 14:12+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 18:38+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -868,7 +869,7 @@ msgstr "Poušť 4"
 
 #: ../../data/world/terrains/desert/drysoil/init.lua:5
 msgid "Dry Soil"
-msgstr "Vysušená země"
+msgstr "Suchá země"
 
 #: ../../data/world/terrains/desert/forested_mountain1/init.lua:5
 #: ../../data/world/terrains/summer/forested_mountain1/init.lua:5
@@ -993,11 +994,11 @@ msgstr "Magmatická hornina"
 
 #: ../../data/world/terrains/wasteland/lava_stone1/init.lua:5
 msgid "Lava Rocks 1"
-msgstr "Lávové kameny 1"
+msgstr "Lávové skály 1"
 
 #: ../../data/world/terrains/wasteland/lava_stone2/init.lua:5
 msgid "Lava Rocks 2"
-msgstr "Lávové kameny 2"
+msgstr "Lávové skály 2"
 
 #: ../../data/world/terrains/winter/ice/init.lua:5
 msgid "Ice"
@@ -1011,21 +1012,21 @@ msgstr "Kry 1"
 msgid "Ice Floes 2"
 msgstr "Kry 2"
 
-#: ../../data/world/terrains/winter/taiga/init.lua:5
-msgid "Taiga"
-msgstr "Tajga"
+#: ../../data/world/terrains/winter/taiga1/init.lua:5
+msgid "Taiga 1"
+msgstr "Tajga 1"
+
+#: ../../data/world/terrains/winter/taiga2/init.lua:5
+msgid "Taiga 2"
+msgstr "Tajga 2"
+
+#: ../../data/world/terrains/winter/taiga3/init.lua:5
+msgid "Taiga 3"
+msgstr "Tajga 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
-msgid "Tundra 1"
-msgstr "Tundra 1"
-
-#: ../../data/world/terrains/winter/tundra2/init.lua:5
-msgid "Tundra 2"
-msgstr "Tundra 2"
-
-#: ../../data/world/terrains/winter/tundra3/init.lua:5
-msgid "Tundra 3"
-msgstr "Tundra 3"
+msgid "Tundra"
+msgstr "Tundra"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

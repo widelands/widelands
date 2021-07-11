@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-26 02:44+0000\n"
-"PO-Revision-Date: 2021-06-23 11:19+0000\n"
+"POT-Creation-Date: 2021-07-07 02:38+0000\n"
+"PO-Revision-Date: 2021-06-28 17:55+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -289,7 +289,7 @@ msgstr "Nástroje"
 #. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
-#. building spaces, census, statistics
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -561,11 +561,11 @@ msgstr "Mapa nebyla uložena, opravdu chceš ukončit editor?"
 #: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
 #: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1573
+#: ../../src/wlapplication.cc:1578
 msgid "Error"
 msgstr "Chyba"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1575
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1580
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -650,8 +650,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -724,7 +724,7 @@ msgstr "%1% x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:204
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:143
-#: ../../src/ui_fsmenu/netsetup_lan.cc:130 ../../src/wui/mapdetails.cc:141
+#: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:141
 #: ../../src/wui/minimap.cc:140
 msgid "Map"
 msgstr "Mapa"
@@ -2348,6 +2348,20 @@ msgstr "Tento úkol nemá popis."
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Loď %d"
+
+#: ../../src/logic/replay.cc:87
+msgid "Desync"
+msgstr "Desynchronizováno"
+
+#: ../../src/logic/replay.cc:88
+#, c-format
+msgid ""
+"The replay has desynced and the game was paused.\n"
+"You are probably watching a replay created with another version of Widelands, which is not supported.\n"
+"\n"
+"If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
+"You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
+msgstr "Záznam byl desynchronizován a hra byla pozastavena.\nPravděpodobně sledujete záznam vytvořený v jiné verzi Widelands, což není podporováno.\n\nPokud jste si jisti, že záznam byl vytvořen ve stejné verzi Widelands, %1$s (%2$s), nahlaste prosím tento problém jako chybu.\nZprávy týkající se tohoto problému uvidíte na standardním výstupu (stdout.txt na Windows). Prosím přiložte tuto informaci k nahlášené chybě."
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -4241,8 +4255,8 @@ msgstr "Čas spojení vypršel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:462
 #: ../../src/ui_fsmenu/internet_lobby.cc:521
-#: ../../src/ui_fsmenu/netsetup_lan.cc:312
-#: ../../src/ui_fsmenu/netsetup_lan.cc:334
+#: ../../src/ui_fsmenu/netsetup_lan.cc:314
+#: ../../src/ui_fsmenu/netsetup_lan.cc:336
 msgid "Network Error"
 msgstr "Chyba sítě"
 
@@ -4519,8 +4533,11 @@ msgid ""
 "profile page."
 msgstr "Aby bylo možné použít registrovaný účet, je potřeba mít účet na internetové stránce Widelands. Prosím přihlas se na %s a nastav si online hrací heslo na své profilové stránce."
 
+#. * TRANSLATORS: This string may contain only English letters, numbers, and @
+#. . + - _ characters
+#. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:127 ../../src/wlapplication.cc:623
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:623
 msgid "nobody"
 msgstr "bezejmena"
 
@@ -4735,11 +4752,11 @@ msgstr "Detekováno rozšíření způsobující desynchronizaci"
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Je povoleno rozšíření způsobující desynchronizaci. Je nutné přijmout možná rizika."
 
-#: ../../src/ui_fsmenu/main.cc:919 ../../src/ui_fsmenu/netsetup_lan.cc:323
+#: ../../src/ui_fsmenu/main.cc:919 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found!"
 msgstr "Nenalezeny žádné kmeny!"
 
-#: ../../src/ui_fsmenu/main.cc:920 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:920 ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Nenalezeny žádné kmeny v rámci data/tribes/initialization/[tribename]/init.lua."
 
@@ -4875,13 +4892,13 @@ msgstr "Sdíleno"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:344
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:345
-#: ../../src/ui_fsmenu/netsetup_lan.cc:226
+#: ../../src/ui_fsmenu/netsetup_lan.cc:228
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:194
 msgid "Closed"
 msgstr "Neobsazeno"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
-#: ../../src/ui_fsmenu/netsetup_lan.cc:223
+#: ../../src/ui_fsmenu/netsetup_lan.cc:225
 msgid "Open"
 msgstr "Otevřené"
 
@@ -4942,31 +4959,31 @@ msgstr "Nahrát předchozího hostitele"
 msgid "Host a new game"
 msgstr "Hostit novou hru"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129
+#: ../../src/ui_fsmenu/netsetup_lan.cc:131
 msgid "Host"
 msgstr "Hostitel"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:131
+#: ../../src/ui_fsmenu/netsetup_lan.cc:133
 msgid "State"
 msgstr "Status"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:230
+#: ../../src/ui_fsmenu/netsetup_lan.cc:232
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:279
+#: ../../src/ui_fsmenu/netsetup_lan.cc:281
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "Volba platné přezdívky. Musí obsahovat pouze písmena anglické abecedy, čísla a znaky @ . + - _ a nesmí být \"team\"."
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:300
+#: ../../src/ui_fsmenu/netsetup_lan.cc:302
 msgid "Invalid Address"
 msgstr "Neplatná adresa"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:301
+#: ../../src/ui_fsmenu/netsetup_lan.cc:303
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Zadané jméno hostitele nebo adresa nejsou platné a nelze se tak připojit."
 
@@ -5043,17 +5060,17 @@ msgstr "Zápis do syncstreamu v síťové hře pro ladění desyncu"
 msgid "Show Census"
 msgstr "Zobrazit popisy budov"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:248
 #: ../../src/wui/interactive_gamebase.cc:241
-msgid "Show Statistics"
-msgstr "Zobrazit statistiky budov"
+msgid "Show Status"
+msgstr "Zobrazit stav"
 
-#: ../../src/ui_fsmenu/options.cc:251
+#: ../../src/ui_fsmenu/options.cc:250
 #: ../../src/wui/interactive_gamebase.cc:250
 msgid "Show Soldier Levels"
 msgstr "Zobrazit úrovně vojáků"
 
-#: ../../src/ui_fsmenu/options.cc:252
+#: ../../src/ui_fsmenu/options.cc:251
 #: ../../src/wui/interactive_gamebase.cc:259
 msgid "Show Buildings"
 msgstr "Zobrazit budovy"
@@ -5061,112 +5078,112 @@ msgstr "Zobrazit budovy"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:254 ../../src/wui/interactive_player.cc:374
+#: ../../src/ui_fsmenu/options.cc:253 ../../src/wui/interactive_player.cc:374
 msgid "Show Workarea Overlaps"
 msgstr "Zobrazit překryvy pracovních oblastí"
 
-#: ../../src/ui_fsmenu/options.cc:260
+#: ../../src/ui_fsmenu/options.cc:259
 msgid "Start building road after placing a flag"
 msgstr "Začít budovat cestu po umístění vlajky"
 
-#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/ui_fsmenu/options.cc:263
 msgid "Show in-game chat with transparent background"
 msgstr "Zobrazit ve hře chat s průhledným pozadím"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:274
+#: ../../src/ui_fsmenu/options.cc:273
 msgid "Use single watchwindow mode"
 msgstr "Použít mód jednoduchého pohledového okna"
 
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
-#: ../../src/ui_fsmenu/options.cc:279
+#: ../../src/ui_fsmenu/options.cc:278
 msgid "Zoom only when Ctrl is pressed"
 msgstr "Změna přiblížení pouze při stisku Ctrl"
 
-#: ../../src/ui_fsmenu/options.cc:283
+#: ../../src/ui_fsmenu/options.cc:282
 msgid "Display system time in the info panel"
 msgstr "Zobrazit na informačním panelu místní čas systému"
 
-#: ../../src/ui_fsmenu/options.cc:287
+#: ../../src/ui_fsmenu/options.cc:286
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr "Dovolit diagonální posun prostřednictvím numerické klávesnice"
 
-#: ../../src/ui_fsmenu/options.cc:291
+#: ../../src/ui_fsmenu/options.cc:290
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr "Posunovat pohled, pokud se kurzor myši přiblíží okraji obrazovky"
 
-#: ../../src/ui_fsmenu/options.cc:295
+#: ../../src/ui_fsmenu/options.cc:294
 msgid "Invert click-and-drag map movement direction"
 msgstr "Otoč pohyb mapy při kliknutí a táhnutí"
 
-#: ../../src/ui_fsmenu/options.cc:301
+#: ../../src/ui_fsmenu/options.cc:300
 msgid "Teach me how to play"
 msgstr "Nauč mě hru"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
-#: ../../src/ui_fsmenu/options.cc:311
+#: ../../src/ui_fsmenu/options.cc:310
 msgid "Progress…"
 msgstr "Pokroky…"
 
-#: ../../src/ui_fsmenu/options.cc:327
+#: ../../src/ui_fsmenu/options.cc:326
 msgid "Interface"
 msgstr "Rozhraní"
 
-#: ../../src/ui_fsmenu/options.cc:328
+#: ../../src/ui_fsmenu/options.cc:327
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../../src/ui_fsmenu/options.cc:329
+#: ../../src/ui_fsmenu/options.cc:328
 msgid "Saving"
 msgstr "Ukládání"
 
-#: ../../src/ui_fsmenu/options.cc:330
+#: ../../src/ui_fsmenu/options.cc:329
 msgid "New Games"
 msgstr "Nová hra"
 
-#: ../../src/ui_fsmenu/options.cc:331
+#: ../../src/ui_fsmenu/options.cc:330
 msgid "In-Game"
 msgstr "Hra obecně"
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:430
+#: ../../src/ui_fsmenu/options.cc:429
 msgid "Off"
 msgstr "Vypnuto"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:455
+#: ../../src/ui_fsmenu/options.cc:454
 msgid "Fullscreen"
 msgstr "Celá obrazovka"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:458
+#: ../../src/ui_fsmenu/options.cc:457
 msgid "Maximized"
 msgstr "Maximalizované okno"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:468 ../../src/ui_fsmenu/options.cc:479
+#: ../../src/ui_fsmenu/options.cc:467 ../../src/ui_fsmenu/options.cc:478
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:569
+#: ../../src/ui_fsmenu/options.cc:568
 msgid "Try system language"
 msgstr "Zkus jazyk systému"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:673
+#: ../../src/ui_fsmenu/options.cc:672
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Zvolena jazyková mutace: %s. Text je plně přeložen."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:676
+#: ../../src/ui_fsmenu/options.cc:675
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Zvolena jazyková mutace: %1%. Překlad do toho jazyka je úplný z %2%%%."
 
-#: ../../src/ui_fsmenu/options.cc:690
+#: ../../src/ui_fsmenu/options.cc:689
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Chceš-li pomoci s překladem, prosím navštiv %s"
@@ -5249,18 +5266,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autoři"
@@ -5321,31 +5338,31 @@ msgstr "Prázdná hodnota parametru: %s"
 msgid "%s can not be combined with other actions"
 msgstr "%s nemůže být kombinováno s dalšími akcemi"
 
-#: ../../src/wlapplication.cc:1400
+#: ../../src/wlapplication.cc:1405
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Neznámý parameter: %s\nMožná chybí '='?"
 
-#: ../../src/wlapplication.cc:1522
+#: ../../src/wlapplication.cc:1527
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized a --fullscreen nejdou kombinovat"
 
-#: ../../src/wlapplication.cc:1540
+#: ../../src/wlapplication.cc:1545
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Neznámý parameter: %s"
 
-#: ../../src/wlapplication.cc:1589
+#: ../../src/wlapplication.cc:1594
 msgid "Game ended unexpectedly"
 msgstr "Hra byla neočekávaně ukončena"
 
-#: ../../src/wlapplication.cc:1589
+#: ../../src/wlapplication.cc:1594
 msgid "Unexpected error during the game"
 msgstr "V průběhu hry se vyskytla neočekávaná chyba"
 
-#: ../../src/wlapplication.cc:1592
+#: ../../src/wlapplication.cc:1597
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5359,7 +5376,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "V průběhu hry se vyskytla chyba. Chybová hláška:\n\n%1$s\n\nProsím nahlas tento problém, aby mohl být odstraněn. Doprovodné informace lze nalézt ve standardním výstupu (stdout.txt pro Windows). Používáš verzi build %2$s (%3$s).\n\nProsím uveď tuto informaci v hlášení.\n\nPřeješ si, aby se hra Widelands pokusila o nouzové uložení? Často (bohužel ne vždy) je pak možné hru nově nahrát a pokračovat v ní."
 
-#: ../../src/wlapplication.cc:1602
+#: ../../src/wlapplication.cc:1607
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5369,11 +5386,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hra byla neočekávaně ukončena:\n\n%s\n\nMá být proveden pokus o nouzové uložení hry? Nouzové uložení nemusí být vždy úspěšné."
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1634
 msgid "Emergency save failed"
 msgstr "Nouzové ukládání selhalo"
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1635
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5511,8 +5528,8 @@ msgid "Toggle Census"
 msgstr "Přepnout zobrazení popisů budov"
 
 #: ../../src/wlapplication_options.cc:413
-msgid "Toggle Statistics Labels"
-msgstr "Přepnout zobrazení statistiky budov"
+msgid "Toggle Status Labels"
+msgstr "Přepni popisy stavů"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
@@ -6090,9 +6107,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6999,10 +7016,10 @@ msgid "Hide Census"
 msgstr "Skrýt popisy budov"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-#. * building statistics are shown
+#. * building status labels are shown
 #: ../../src/wui/interactive_gamebase.cc:240
-msgid "Hide Statistics"
-msgstr "Skrýt statistiky budov"
+msgid "Hide Status"
+msgstr "Skrýt stav"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
