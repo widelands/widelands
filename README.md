@@ -37,7 +37,6 @@ You will need to install the following dependencies:
 * libiconv (on same mirrors as gettext)
 *  [zlib](https://www.zlib.net/)
 *  [libpng](http://www.libpng.org/pub/png/libpng.html)
-*  [libcurl](https://curl.se/)
 *  [Boost](https://www.boost.org/) >= 1.48
 *  [Python](https://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)

@@ -44,6 +44,13 @@ struct MultilineEditbox : public Panel {
 
 	void layout() override;
 
+	bool has_selection() const;
+	std::string get_selected_text();
+	void replace_selected_text(const std::string&);
+	size_t get_caret_pos() const;
+	void set_caret_pos(size_t) const;
+	void select_until(uint32_t end) const;
+
 protected:
 	void draw(RenderTarget&) override;
 
@@ -56,7 +63,6 @@ private:
 	void scrollpos_changed(int32_t);
 	void delete_selected_text() const;
 	void copy_selected_text() const;
-	void select_until(uint32_t end) const;
 	struct Data;
 	std::unique_ptr<Data> d_;
 	void set_caret_to_cursor_pos(int32_t x, int32_t y);

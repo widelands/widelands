@@ -20,53 +20,83 @@
 #ifndef WL_NETWORK_NET_ADDONS_H
 #define WL_NETWORK_NET_ADDONS_H
 
-#define CURL_STATICLIB
-
 #include <set>
-
-#include <curl/curl.h>
 
 #include "logic/addons.h"
 
 namespace AddOns {
 
-// The add-on related networking functions defined here use the CURL lib.
-// Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
-// Con: Additional dependency – this is the only place in our code where libcurl is used
-
 struct NetAddons {
-	NetAddons() : curl_(nullptr) {
+	NetAddons() : initialized_(false), network_active_(false), client_socket_(0), is_admin_(false) {
 	}
 	~NetAddons();
 
+	bool is_admin() const {
+		return is_admin_;
+	}
+
 	// Fetch the list of all available add-ons from the server
 	AddOnsList refresh_remotes();
+	AddOnInfo fetch_one_remote(const std::string& name);
 
-	// Requests the file with the given name (e.g. "cool_feature.wad/init.lua")
+	using CallbackFn = std::function<void(const std::string&, int64_t)>;
+
+	// Downloads the add-on with the given name (e.g. "cool_feature.wad")
 	// from the server and downloads it to the given canonical location.
-	// Verifies file integrity by calculating the file's checksum.
-	void download_addon_file(const std::string& name,
-	                         const std::string& checksum,
-	                         const std::string& save_as);
+	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn&);
 
-	// Requests the MO file for the given add-on (cool_feature.wad) and locale ("nds.mo") from the
-	// server, downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp), and
-	// returns the canonical path to the downloaded file. The temp file's filename is guaranteed to
-	// be in the format "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	std::string
-	download_i18n(const std::string& addon, const std::string& checksum, const std::string& locale);
+	// Requests the MO files for the given add-on (cool_feature.wad) from the server and
+	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
+	// The filename of the created MO files is guaranteed to be in the format
+	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
+	void download_i18n(const std::string& addon,
+	                   const std::string& directory,
+	                   const CallbackFn& progress,
+	                   const CallbackFn& init_fn);
 
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
 
+	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
+	int get_vote(const std::string& addon);
+	void vote(const std::string& addon, unsigned vote);
+
+	// Write a new comment or edit an existing one. Negative `index_to_edit` indicates a new comment
+	// should be written.
+	void comment(const AddOnInfo& addon, std::string message, int64_t index_to_edit = -1);
+
+	void
+	upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
+	void upload_screenshot(const std::string& addon,
+	                       const std::string& image,
+	                       const std::string& description);
+
+	void contact(std::string enquiry);
+
+	void set_login(const std::string& username, const std::string& password);
+
 private:
+	friend struct CrashGuard;
+
 	// Open the connection if it was not open yet; throws an error if this fails
-	void init();
+	void init(std::string username = std::string(), std::string password = std::string());
+	void quit_connection();
 
 	// Set the URL (whitespace-safe) and adjust the timeout values.
-	void set_url_and_timeout(std::string);
+	// void set_url_and_timeout(std::string);
 
-	CURL* curl_;
+	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
+	std::string read_line();
+	void read_file(int64_t length, const std::string& out);
+	void check_endofstream();
+	void write_to_server(const std::string&);
+	void write_to_server(const char*, size_t);
+
+	std::string last_username_, last_password_;
+	bool initialized_;
+	bool network_active_;
+	int client_socket_;
+	bool is_admin_;
 };
 
 }  // namespace AddOns

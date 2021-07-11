@@ -30,7 +30,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
+        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -79,7 +79,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev clang-tidy python-yaml -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev clang-tidy python-yaml -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -136,7 +136,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -197,20 +197,7 @@ jobs:
         } else {
           $env:archname = "i686"
         }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost mingw-w64-$env:archname-curl unzip
-    - name: Fix CURL
-      # Replace libcurl.a with proper static version
-      run: |
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:bits = "64"
-        } else {
-          $env:bits = "32"
-        }
-        $env:curl = "7.74.0"
-        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
-        curl -Lo curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
-        unzip curl.zip
-        mv -Force curl-$env:curl-win$env:bits-mingw/lib/libcurl.a C:/msys64/mingw$env:bits/lib/
+        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -268,7 +255,7 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost curl ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:

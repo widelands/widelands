@@ -1,7 +1,7 @@
 Add-Ons
 =======
 
-The Widelands add-on system is still under development. In particular, Widelands does not yet have a server where add-ons can be up- and downloaded. This document describes how to create and package your own add-ons.
+This document describes how to create and package your own add-ons.
 
 Structure
 ---------
@@ -40,6 +40,8 @@ Example:
    requires=
 
 .. highlight:: default
+
+The add-on directory may additionally contain an optional PNG file ``icon.png`` which will be shown in the add-ons manager. This image should be square and not larger than 64×64 pixels. If it is not present, the add-on’s category’s representative icon will be used instead.
 
 Categories
 ----------
@@ -104,7 +106,7 @@ win_condition
 ~~~~~~~~~~~~~
 A win condition script.
 
-The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-on’s internal name (see `Translating`_).
+The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-on’s internal name (see `Internationalisation`_).
 
 
 starting_condition
@@ -144,14 +146,45 @@ Add-on upgrades may break compatibility between versions; therefore, savegames a
 Verification
 ------------
 
-Add-ons can potentially contain harmful or offensive content. The Widelands development team moderates add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The moderators also decide which add-ons may be marked as ``sync_safe``. The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-on manager’s Filter tab.
+Add-ons can potentially contain harmful or offensive content. The Widelands development team moderates add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The moderators also decide which add-ons may be marked as ``sync_safe``. The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-ons manager’s Filter tab.
 
 
-Translating
------------
+Internationalisation
+--------------------
+
+For Add-On Developers
+~~~~~~~~~~~~~~~~~~~~~
+
+The name of the textdomain for an add-on is identical to the add-on’s internal name (e.g. ``fishy.wad``). The strings in the add-on config file, as well as map elemental data for Map Set add-ons, are fetched from this textdomain. All Lua scripts shipped with the add-on need to explicitly set the said textdomain. Note that you need to use ``push_textdomain("internal-addon-name.wad", true)`` to ensure that the textdomain is looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
+
+Please keep the following guidelines in mind to ensure your add-on is well translatable:
+
+- Do not concatenate sentence snippets (use placeholders instead).
+- Always use ``ngettext`` when working with plural forms.
+- Use translation markup wisely. All strings meant to be translated should be fetched with ``_("Translate me")`` or  ``pgettext("context", "Translate me")``. Richtext format characters and other strings not meant to be translated should not be marked for translation.
+- Map files should never be zipped so as to ensure that all translatable strings they contain are picked up by the translations update scripts.
+- When any strings might be unclear (e.g. sentence snippets, placeholders), please add a ``TRANSLATORS`` comment above the string.
+
+The Widelands Development Team may occasionally contact add-on developers to inform them about any questions or feedback from the translators.
+
+Technical Info
+~~~~~~~~~~~~~~
 
 In order to not have to release a new version whenever translations change, translation files are provided by the server independently from the add-ons. The "Widelands Add-Ons" Transifex project contains one resource for every add-on present on the server. The Transifex catalogue for each add-on is updated automatically whenever a new version is uploaded to the server.
 
-The textdomain for an add-on is called ``internal-addon-name.wad``. The strings in the add-on config file, as well as map elemental data for Map Set add-ons, are fetched from this textdomain. All Lua scripts shipped with the add-on need to explicitly set the said textdomain. Note that you need to use ``push_textdomain("internal-addon-name.wad", true)`` to ensure that the textdomain is looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
-
 The server keeps a repository of all add-on ``*.mo`` files which are automatically compiled from the latest Transifex translations regularly. Downloading or upgrading an add-on automatically downloads and installs the latest translations files for this add-on for all languages. Each add-on has a translations version number in addition to the add-on version number; this allows the game to determine whether the translations for an installed add-on can be upgraded.
+
+Uploading
+---------
+
+The recommended way to upload an add-on is to use the in-game add-ons manager. Log in with your Widelands website user profile and online gaming password (i.e., the same credentials as for the metaserver), and use the Upload section in the add-ons manager’s third tab. If you previously submitted an add-on with the same name and lower version number, the new upload will be made available as an upgrade. You can upload screenshots for your add-ons in the same way.
+
+When providing an upgrade, always ensure that your modifications are based on the version that was downloaded from the server rather than your original sources, as the maintainers may make minor maintenance modifications to the versions stored there.
+
+Please note that up- or downloading few large files is several orders of magnitude faster than up- or downloading many small files. If your add-on contains new graphics for units, it is therefore recommended to use spritesheets instead of sprite files.
+
+By uploading, you agree to publish your creation under the terms of the GNU General Public License (GPL) version 2 (the same license under which Widelands itself is distributed). For more information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the Widelands main menu. It is forbidden to upload add-ons containing harmful or malicious content or spam. By uploading an add-on, you assert that the add-on is of your own creation or you have the add-on’s author(s) permission to submit it in their stead. The Widelands Development Team will review your add-on soon after uploading. In case they have further inquiries, they will contact you via a PM on the Widelands website; therefore please check the inbox of your online user profile page frequently.
+
+You can only upload upgrades and screenshots for your own add-ons (unless you are a server administrator).
+
+If you run into problems (e.g. the server refuses to accept an upload) or have advanced needs such as deletion of your add-ons or collaborating on someone else’s add-on, you can also ask in the Widelands forum under https://www.widelands.org/forum/topic/5073/.

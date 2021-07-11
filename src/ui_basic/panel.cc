@@ -168,6 +168,16 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
+Panel::ModalGuard::ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+	Panel::modal_ = &top_panel_;
+}
+Panel::ModalGuard::~ModalGuard() {
+	Panel::modal_ = bottom_panel_;
+	if (bottom_panel_) {
+		bottom_panel_->become_modal_again(top_panel_);
+	}
+}
+
 bool Panel::logic_thread_running_(false);
 
 constexpr uint32_t kGameLogicDelay = 50;
@@ -232,23 +242,6 @@ void Panel::handle_notes() {
 	}
 }
 
-struct ModalGuard {
-	explicit ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
-		Panel::modal_ = &top_panel_;
-	}
-	~ModalGuard() {
-		Panel::modal_ = bottom_panel_;
-		if (bottom_panel_) {
-			bottom_panel_->become_modal_again(top_panel_);
-		}
-	}
-
-private:
-	Panel* bottom_panel_;
-	Panel& top_panel_;
-	DISALLOW_COPY_AND_ASSIGN(ModalGuard);
-};
-
 Panel& Panel::get_topmost_forefather() {
 	Panel* forefather = this;
 	while (forefather->parent_ != nullptr) {
@@ -257,11 +250,19 @@ Panel& Panel::get_topmost_forefather() {
 	return *forefather;
 }
 
-void Panel::do_redraw_now(const std::string& message) {
+void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	assert(is_initializer_thread());
 
 	Panel& ff = get_topmost_forefather();
 	RenderTarget& rt = *g_gr->get_render_target();
+	WLApplication* const app = WLApplication::get();
+
+	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
+	                                       Panel::ui_mousemove,  Panel::ui_key,
+	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
+	if (handle_input) {
+		app->handle_input(&input_callback);
+	}
 
 	{
 		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
@@ -280,7 +281,6 @@ void Panel::do_redraw_now(const std::string& message) {
 	}
 
 	if (g_mouse_cursor->is_visible()) {
-		WLApplication* const app = WLApplication::get();
 		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
 		g_mouse_cursor->draw(rt, app->get_mouse_position());
 
@@ -309,7 +309,7 @@ void Panel::stay_responsive() {
 	}
 
 	handle_notes();
-	do_redraw_now(_("Please wait…"));
+	do_redraw_now(true, _("Please wait…"));
 }
 
 void Panel::wait_for_current_logic_frame() {
@@ -439,7 +439,7 @@ int Panel::do_run() {
 			handle_notes();
 
 			if (is_initializer) {
-				do_redraw_now(_("Game ending – please wait…"));
+				do_redraw_now(true, _("Game ending – please wait…"));
 			}
 
 			next_time = start_time + draw_delay;

@@ -348,6 +348,16 @@ public:
 
 	Panel& get_topmost_forefather();
 
+	struct ModalGuard {
+		explicit ModalGuard(Panel& p);
+		~ModalGuard();
+
+	private:
+		Panel* bottom_panel_;
+		Panel& top_panel_;
+		DISALLOW_COPY_AND_ASSIGN(ModalGuard);
+	};
+
 	// Call this on the topmost panel after you changed the template directory
 	void template_directory_changed();
 
@@ -412,7 +422,8 @@ protected:
 	 *  provided message to the user drawn in the screen center.
 	 *  May be called only by the initializer thread.
 	 */
-	void do_redraw_now(const std::string& message_to_display = std::string());
+	void do_redraw_now(bool handle_input = true,
+	                   const std::string& message_to_display = std::string());
 
 private:
 	bool initialized_;
