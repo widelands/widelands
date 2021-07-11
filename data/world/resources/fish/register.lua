@@ -1,0 +1,1 @@
+return { resource_fish = {}}

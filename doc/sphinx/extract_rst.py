@@ -76,7 +76,7 @@ lua_dirs = (
      'critters', 'lua_world_units'),
      ('data/world/immovables/artifacts/artifact00',
      'immovables', 'lua_world_units'),
-     ('data/world/resources',
+     ('data/world/resources/coal',
      'resources', 'lua_world_units'),
      ('data/world/terrains/desert/beach',
      'terrains', 'lua_world_units'),

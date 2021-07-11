@@ -43,30 +43,30 @@ function test_terrains_resource_descr:test_resource_max_amount()
 end
 
 function test_terrains_resource_descr:test_resource_representative_image()
-   assert_equal("world/resources/pics/coal4.png",
+   assert_equal("world/resources/coal/../pics/coal4.png",
       egbase:get_resource_description("resource_coal").representative_image)
-   assert_equal("world/resources/pics/stones4.png",
+   assert_equal("world/resources/stones/../pics/stones4.png",
       egbase:get_resource_description("resource_stones").representative_image)
-   assert_equal("world/resources/pics/water4.png",
+   assert_equal("world/resources/water/../pics/water4.png",
       egbase:get_resource_description("resource_water").representative_image)
-   assert_equal("world/resources/pics/fish.png",
+   assert_equal("world/resources/fish/../pics/fish.png",
       egbase:get_resource_description("resource_fish").representative_image)
 end
 
 function test_terrains_resource_descr:test_resource_editor_image()
-   assert_equal("world/resources/pics/coal1.png",
+   assert_equal("world/resources/coal/../pics/coal1.png",
       egbase:get_resource_description("resource_coal"):editor_image(0))
-   assert_equal("world/resources/pics/coal1.png",
+   assert_equal("world/resources/coal/../pics/coal1.png",
       egbase:get_resource_description("resource_coal"):editor_image(5))
-   assert_equal("world/resources/pics/coal2.png",
+   assert_equal("world/resources/coal/../pics/coal2.png",
       egbase:get_resource_description("resource_coal"):editor_image(6))
-   assert_equal("world/resources/pics/coal2.png",
+   assert_equal("world/resources/coal/../pics/coal2.png",
       egbase:get_resource_description("resource_coal"):editor_image(10))
-   assert_equal("world/resources/pics/coal3.png",
+   assert_equal("world/resources/coal/../pics/coal3.png",
       egbase:get_resource_description("resource_coal"):editor_image(15))
-   assert_equal("world/resources/pics/coal4.png",
+   assert_equal("world/resources/coal/../pics/coal4.png",
       egbase:get_resource_description("resource_coal"):editor_image(16))
-   assert_equal("world/resources/pics/coal4.png",
+   assert_equal("world/resources/coal/../pics/coal4.png",
       egbase:get_resource_description("resource_coal"):editor_image(1000))
 end
 
