@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-03-13 12:50+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Wat is blot ut uns’ Latiensken Riek worden? Dat fraag ick würrelk – waarum hett min König mi unnerseggt, mit deesem verfuterten Willen Volk to fechten, dat sük eerst as Fründ upspöölt hett, um miene Soldaten dann um Middernacht antogriepen?"
+msgstr "Wat is blot ut uns’ Latiensken Riek worden? Dat fraag ick würrelk – waarum hett min König mi unnerseggt, mit deesem verfuterten Willen Volk to fechten, dat sik eerst as Fründ upspöölt hett, um miene Soldaten dann um Middernacht antogriepen?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -174,7 +174,7 @@ msgstr "Överlevers"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
-msgstr "De Gotten hebben sük uns’ verbarmt!"
+msgstr "De Gotten hebben sik uns’ verbarmt!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -198,7 +198,7 @@ msgstr "Een banges Vörgeföhl"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
-msgstr "Saledus kiekt nervöös um sük …"
+msgstr "Saledus kiekt nervöös um sik …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126

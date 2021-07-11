@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-13 12:50+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -432,7 +432,7 @@ msgstr "Wo du Hülp kriggst"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr "Natürelk is ’t nich licht, sük all dat marken, wat ick hier vertell un anraad. To ’n Bispööl fraagst du di villicht: »Waarum bruken wi Happen, um Soldaten to kriegen?«"
+msgstr "Natürelk is ’t nich licht, sik all dat marken, wat ick hier vertell un anraad. To ’n Bispööl fraagst du di villicht: »Waarum bruken wi Happen, um Soldaten to kriegen?«"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -646,7 +646,7 @@ msgstr "Wenn du genoog sehn hest, köör de darden Listenwessler (»Weertskupp-U
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr "In deesem Fenster kannst du Waren utkören, um to sehn, wo sük hör Produzeren un Verbruuk över de Tied ännert. Versöök ’t mit een paar Waren."
+msgstr "In deesem Fenster kannst du Waren utkören, um to sehn, wo sik hör Produzeren un Verbruuk över de Tied ännert. Versöök ’t mit een paar Waren."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
@@ -928,7 +928,7 @@ msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
-msgstr "Hunnert. Wi hebben nu genoog Marmelpielers, dat wi mennig Schanzen bauen könen, wenn sük een Feind sehn lett. Ick gloov aver nich, dat dat passeren word. Bit nu is ’t ok nich passeert."
+msgstr "Hunnert. Wi hebben nu genoog Marmelpielers, dat wi mennig Schanzen bauen könen, wenn sik een Feind sehn lett. Ick gloov aver nich, dat dat passeren word. Bit nu is ’t ok nich passeert."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
 msgid ""

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:25+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -449,9 +449,9 @@ msgstr "Wenn du eenen wissen Soldat wegstüren willst, klick hüm an. He word da
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
-"Let me also describe what the numbers in the statistics string mean. This "
-"string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr "Laat mi de Tahlen in de »Tahlen över«-Text verklaaren. Deese Text kann bit to dree Tahlen hebben, to ’mn Bispööl »1 (+5) Soldaten (+2)«."
+"Let me also describe what the numbers in the status string mean. This string"
+" can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
+msgstr "Laat mi de Tahlen in de Tostand-Text verklaaren. Deese Text kann bit to dree Tahlen hebben, to ’mn Bispööl »1 (+5) Soldaten (+2)«."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
@@ -609,7 +609,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Hunnert, de Kasteel is beschickt. Aver wat is dat? Een Feind hett sük tegen uns daallaten as de Kasteel baut wurr! Süchst du, dat se eenen Part vun uns’ Land ofgrapst hebben? Un uns’ Boomhauer hett nu keen Huus mehr. Dat hebb ick meent. Laat uns uns’ Land torügghalen un de Feind manntjen!"
+msgstr "Hunnert, de Kasteel is beschickt. Aver wat is dat? Een Feind hett sik tegen uns daallaten as de Kasteel baut wurr! Süchst du, dat se eenen Part vun uns’ Land ofgrapst hebben? Un uns’ Boomhauer hett nu keen Huus mehr. Dat hebb ick meent. Laat uns uns’ Land torügghalen un de Feind manntjen!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
@@ -623,7 +623,7 @@ msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr "Diene Soldaten komen vun all dienen Soldateree-Boen in de Naberskupp. Vun all Soldateree-Boen in de Naberskupp, de tum Feind hören, komen siene Soldaten un verdedigen sük tegen diene Soldateree."
+msgstr "Diene Soldaten komen vun all dienen Soldateree-Boen in de Naberskupp. Vun all Soldateree-Boen in de Naberskupp, de tum Feind hören, komen siene Soldaten un verdedigen sik tegen diene Soldateree."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid ""
