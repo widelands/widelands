@@ -1551,7 +1551,7 @@ msgstr "밭이 부족함"
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1588,7 +1588,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr "숲꾼의 집은 작업 영역 내에 나무를 심을 자유로운 공간이 필요합니다."
+msgstr "숲꾼의 집은 작업 영역 내에 나무를 심을 여유 공간이 필요합니다."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
@@ -1659,12 +1659,12 @@ msgstr "나무를 베고 있음"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "나무 없음"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "Out of Trees"
-msgstr ""
+msgstr "나무 부족"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
@@ -1673,6 +1673,8 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"벌목꾼의 집에서 일하는 벌목꾼은 작업 영역 내에 어떤 나무도 찾을 수 없습니다. 건물을 해체 또는 파괴하거나 숲꾼의 집을 건설하는 것을 "
+"고려하십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1761,14 +1763,14 @@ msgstr "우물"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
 msgid "No Water"
-msgstr ""
+msgstr "물 없음"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
 msgctxt "empire_building"
 msgid "Out of Water"
-msgstr ""
+msgstr "물 부족"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "해당 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."

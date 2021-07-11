@@ -20,8 +20,7 @@
 #ifndef WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
 #define WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
 
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/unique_window.h"
 
 class EditorInteractive;
@@ -37,12 +36,10 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 
 private:
 	EditorInteractive& eia() const;
-	void decrease_radius();
-	void increase_radius();
-
-	UI::Textarea textarea_;
-	UI::Button increase_, decrease_;
+	UI::SpinBox spinbox_;
 	uint32_t value_;
+	void changed();
+	static constexpr uint32_t kMargin = 5;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
