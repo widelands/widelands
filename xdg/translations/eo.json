@@ -1,9 +1,9 @@
 {
 	"name": "Widelands",
-	"category": "Strategy Game",
-	"tagline": "A real-time build-up strategy game",
+	"category": "Strategia Ludo",
+	"tagline": "Realtempa konstruada strategia ludo",
 	"description":[
-		"You are the regent of a small clan. Your task is to build an ever growing settlement. Every member of your clan will do his or her part to produce more resources to further this growth.",
-		"Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you."
+		"Vi estas registo de malgranda gento. Via tasko estas konstrui kreskantan kolonion. Ĉiuj anoj de via gento prenos sian parton por produkti pli da materialoj por subteni tiun kreskadon.",
+		"Widelands havas reĝimon por unu ludanto per kampanjoj kiuj temas pri gentoj kaj siaj batalojen la mondo de Widelands. Tamen, la vera koloniado komenciĝas nur kiam vi kuniĝas kun viaj amikoj per la interreto aŭ per Loka reto (LAN) por konstrui novajn imperiojn kune - aŭ por detrui unu la alian pe la fajro de milito. Widelands eĉ havas artefaritan intelekton por defii vin."
 	]
 }
