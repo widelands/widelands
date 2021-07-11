@@ -243,6 +243,29 @@ private:
 	Serial serial;
 };
 
+struct CmdToggleInfiniteProduction : public PlayerCommand {
+	CmdToggleInfiniteProduction() : PlayerCommand(), serial_(0) {
+	}  // For savegame loading
+	CmdToggleInfiniteProduction(const Time& t, const PlayerNumber p, Building& b)
+	   : PlayerCommand(t, p), serial_(b.serial()) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kToggleInfiniteProduction;
+	}
+
+	explicit CmdToggleInfiniteProduction(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_;
+};
+
 struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
 	CmdMilitarySiteSetSoldierPreference()
 	   : PlayerCommand(), serial(0), preference(SoldierPreference::kRookies) {

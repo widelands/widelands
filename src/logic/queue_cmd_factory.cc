@@ -43,6 +43,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdFlagAction();
 	case QueueCommandTypes::kStartStopBuilding:
 		return *new CmdStartStopBuilding();
+	case QueueCommandTypes::kToggleInfiniteProduction:
+		return *new CmdToggleInfiniteProduction();
 	case QueueCommandTypes::kEnhanceBuilding:
 		return *new CmdEnhanceBuilding();
 	case QueueCommandTypes::kBulldoze:

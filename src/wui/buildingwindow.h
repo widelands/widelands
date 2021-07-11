@@ -82,6 +82,7 @@ protected:
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
+	void act_produce_infinite();
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();

@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 10;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -642,7 +642,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
                                                 MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionProductionsite) {
+		if (packet_version >= 9 && packet_version <= kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
 			const BillOfMaterials& working_positions = pr_descr.working_positions();
@@ -805,6 +805,9 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					productionsite.input_queues_.push_back(wq);
 				}
 			}
+
+			// TODO(Nordfriese): Savegame compatibility
+			productionsite.infinite_production_ = packet_version >= 10 && fr.unsigned_8();
 
 			productionsite.actual_percent_ = fr.unsigned_32();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
@@ -1355,6 +1358,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		}
 	}
 
+	fw.unsigned_8(productionsite.infinite_production_ ? 1 : 0);
 	fw.unsigned_32(productionsite.actual_percent_);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());

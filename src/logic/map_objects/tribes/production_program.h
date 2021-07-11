@@ -159,7 +159,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
 		ActReturn(const std::vector<std::string>& arguments,
-		          const ProductionSiteDescr&,
+		          ProductionSiteDescr&,
 		          const Descriptions& descriptions);
 		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
@@ -173,14 +173,14 @@ struct ProductionProgram : public MapObjectProgram {
 		static Condition* create_condition(const std::vector<std::string>& arguments,
 		                                   std::vector<std::string>::const_iterator& begin,
 		                                   std::vector<std::string>::const_iterator& end,
-		                                   const ProductionSiteDescr&,
+		                                   ProductionSiteDescr&,
 		                                   const Descriptions& descriptions);
 
 		struct Negation : public Condition {
 			Negation(const std::vector<std::string>& arguments,
 			         std::vector<std::string>::const_iterator& begin,
 			         std::vector<std::string>::const_iterator& end,
-			         const ProductionSiteDescr& descr,
+			         ProductionSiteDescr& descr,
 			         const Descriptions& descriptions);
 			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;

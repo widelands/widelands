@@ -104,7 +104,8 @@ enum class QueueCommandTypes : uint8_t {
 
 	kDeleteMessage,
 	kToggleMuteMessages,
-	kMarkMapObjectForRemoval,  // 203
+	kMarkMapObjectForRemoval,
+	kToggleInfiniteProduction,  // 204
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,
