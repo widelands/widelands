@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-26 02:44+0000\n"
-"PO-Revision-Date: 2021-05-06 20:46+0000\n"
+"POT-Creation-Date: 2021-07-07 02:38+0000\n"
+"PO-Revision-Date: 2021-07-01 08:37+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr "Der Feind hat deine Kriegerinnen an der starken Festung besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:40
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortification."
-msgstr "Deine Kriegerinnen haben den Feind an der starken Festung besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor der starken Festung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
@@ -102,7 +102,7 @@ msgstr "Der Feind hat deine Kriegerinnen an der Festung besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:67
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Deine Kriegerinnen haben den Feind an der Festung besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor der Festung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
@@ -138,7 +138,7 @@ msgstr "Der Feind hat deine Kriegerinnen am Überwachungsturm besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the observation tower."
-msgstr "Deine Kriegerinnen haben den Feind am Überwachungsturm besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor dem Überwachungsturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
@@ -174,7 +174,7 @@ msgstr "Der Feind hat deine Kriegerinnen am Patrouillenposten besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr "Deine Kriegerinnen haben den Feind am Patrouillenposten besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor dem Patrouillenposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
@@ -210,7 +210,7 @@ msgstr "Der Feind hat deine Kriegerinnen am Wachturm besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:66
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Deine Kriegerinnen haben den Feind am Wachturm besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor dem Wachturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
@@ -246,7 +246,7 @@ msgstr "Der Feind hat deine Kriegerinnen am Baumwipfelposten besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the treetop sentry."
-msgstr "Deine Kriegerinnen haben den Feind am Baumwipfelposten besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor dem Baumwipfelposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
@@ -282,7 +282,7 @@ msgstr "Der Feind hat deine Kriegerinnen an der Kriegerinnenbehausung besiegt."
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:50
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the warriors’ dwelling."
-msgstr "Deine Kriegerinnen haben den Feind an der Kriegerinnenbehausung besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor der Kriegerinnenbehausung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
@@ -318,7 +318,7 @@ msgstr "Der Feind hat deine Soldaten an der Burg besiegt."
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Deine Soldaten haben den Feind an der Burg besiegt."
+msgstr "Deine Soldaten haben den Feind vor der Burg besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
@@ -354,7 +354,7 @@ msgstr "Der Feind hat deine Soldaten an der Wächterhalle besiegt."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "Deine Soldaten haben den Feind an der Wächterhalle besiegt."
+msgstr "Deine Soldaten haben den Feind vor der Wächterhalle besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
@@ -390,7 +390,7 @@ msgstr "Der Feind hat deine Soldaten am Wachhaus besiegt."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr "Deine Soldaten haben den Feind am Wachhaus besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Wachhaus besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:8
@@ -426,7 +426,7 @@ msgstr "Der Feind hat deine Soldaten am Wachturm besiegt."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Deine Soldaten haben den Feind am Wachturm besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Wachturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -462,7 +462,7 @@ msgstr "Der Feind hat deine Soldaten am Bergfried besiegt."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr "Deine Soldaten haben den Feind am Bergfried besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Bergfried besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:8
@@ -498,7 +498,7 @@ msgstr "Der Feind hat deine Soldaten am Spähturm besiegt."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr "Deine Soldaten haben den Feind am Spähturm besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Spähturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
@@ -534,7 +534,7 @@ msgstr "Der Feind hat deine Krieger an der Barriere besiegt."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Deine Krieger haben den Feind an der Barriere besiegt."
+msgstr "Deine Krieger haben den Feind vor der Barriere besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:8
@@ -570,7 +570,7 @@ msgstr "Der Feind hat deine Krieger an der Zitadelle besiegt."
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:43
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr "Deine Krieger haben den Feind an der Zitadelle besiegt."
+msgstr "Deine Krieger haben den Feind vor der Zitadelle besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:8
@@ -606,7 +606,7 @@ msgstr "Der Feind hat deine Krieger an der Festung besiegt."
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:77
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Deine Krieger haben den Feind an der Festung besiegt."
+msgstr "Deine Krieger haben den Feind vor der Festung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -642,7 +642,7 @@ msgstr "Der Feind hat deine Krieger am Wachposten besiegt."
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Deine Krieger haben den Feind am Wachposten besiegt."
+msgstr "Deine Krieger haben den Feind vor dem Wachposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:8
@@ -678,7 +678,7 @@ msgstr "Der Feind hat deine Krieger am Wachturm besiegt."
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:59
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Deine Krieger haben den Feind am Wachturm besiegt."
+msgstr "Deine Krieger haben den Feind vor dem Wachturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -714,7 +714,7 @@ msgstr "Der Feind hat deine Soldaten an der Barriere besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Deine Soldaten haben den Feind an der Barriere besiegt."
+msgstr "Deine Soldaten haben den Feind vor der Barriere besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:8
@@ -750,7 +750,7 @@ msgstr "Der Feind hat deine Soldaten an der Baracke besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:55
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr "Deine Soldaten haben den Feind an der Baracke besiegt."
+msgstr "Deine Soldaten haben den Feind vor der Baracke besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:8
@@ -786,7 +786,7 @@ msgstr "Der Feind hat deine Soldaten an der Burg besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:36
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Deine Soldaten haben den Feind an der Burg besiegt."
+msgstr "Deine Soldaten haben den Feind vor der Burg besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:8
@@ -822,7 +822,7 @@ msgstr "Der Feind hat deine Soldaten an der Festung besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Deine Soldaten haben den Feind an der Festung besiegt."
+msgstr "Deine Soldaten haben den Feind vor der Festung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:8
@@ -858,7 +858,7 @@ msgstr "Der Feind hat deine Soldaten am Außenposten besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:64
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Deine Soldaten haben den Feind am Außenposten besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Außenposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:8
@@ -894,7 +894,7 @@ msgstr "Der Feind hat deine Soldaten am Wachposten besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Deine Soldaten haben den Feind am Wachposten besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Wachposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:8
@@ -930,7 +930,7 @@ msgstr "Der Feind hat deine Soldaten am Wachturm besiegt."
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Deine Soldaten haben den Feind am Wachturm besiegt."
+msgstr "Deine Soldaten haben den Feind vor dem Wachturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
@@ -966,7 +966,7 @@ msgstr "Der Feind hat deine Krieger an der Festung besiegt."
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Deine Krieger haben den Feind an der Festung besiegt."
+msgstr "Deine Krieger haben den Feind vor der Festung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
@@ -1002,7 +1002,7 @@ msgstr "Der Feind hat deine Krieger am Außenposten besiegt."
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Deine Krieger haben den Feind am Außenposten besiegt."
+msgstr "Deine Krieger haben den Feind vor dem Außenposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
@@ -1038,7 +1038,7 @@ msgstr "Der Feind hat deine Krieger am Vorposten besiegt."
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr "Deine Krieger haben den Feind am Vorposten besiegt."
+msgstr "Deine Krieger haben den Feind vor dem Vorposten besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1074,7 +1074,7 @@ msgstr "Der Feind hat deine Krieger am Wachturm besiegt."
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Deine Krieger haben den Feind am Wachturm besiegt."
+msgstr "Deine Krieger haben den Feind vor dem Wachturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
@@ -1110,7 +1110,7 @@ msgstr "Der Feind hat deine Krieger am Holzturm besiegt."
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:71
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
-msgstr "Deine Krieger haben den Feind am Holzturm besiegt."
+msgstr "Deine Krieger haben den Feind vor dem Holzturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
@@ -1146,7 +1146,7 @@ msgstr "Der Feind hat deine Krieger am hohen Holzturm besiegt."
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the high wooden tower."
-msgstr "Deine Krieger haben den Feind am hohen Holzturm besiegt."
+msgstr "Deine Krieger haben den Feind vor dem hohen Holzturm besiegt."
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
@@ -1299,7 +1299,6 @@ msgstr "Cassavawurzelküche"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1735,7 +1734,6 @@ msgstr "Das Herstellen einer Schaufel"
 msgid "making a felling ax"
 msgstr "Das Herstellen einer Holzfälleraxt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -4201,9 +4199,9 @@ msgstr "Ausbildungslichtung"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:80
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:74
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:92
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:84
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:46
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
@@ -4381,29 +4379,29 @@ msgid "Battle Arena"
 msgstr "Arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:82
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:94
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "Das Verbessern des Ausweichens eines Kriegers von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:97
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "Das Verbessern des Ausweichens eines Kriegers von Stufe 1 auf 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:117
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:216
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:129
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:225
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
 msgstr "Kein Krieger zur Ausbildung vorhanden!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:119
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:218
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:131
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:227
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
 msgstr "Kein Krieger für diese Ausbildungsstufe gefunden!"
@@ -4415,49 +4413,49 @@ msgid "Training Camp"
 msgstr "Ausbildungslager"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:100
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:114
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:128
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:137
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 2 auf 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:142
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:151
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 3 auf 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 4 auf 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:170
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "Das Verbessern der Lebenspunkte eines Kriegers von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:183
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:192
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Das Verbessern der Lebenspunkte eines Kriegers von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:197
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "Das Verbessern der Lebenspunkte eines Kriegers von Stufe 2 auf 3"
@@ -4469,14 +4467,14 @@ msgid "Arena"
 msgstr "Arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:92
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:98
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:54
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "Das Verbessern des Ausweichens eines Soldaten von Stufe 0 auf 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:116
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
 msgctxt "empire_building"
@@ -4485,7 +4483,7 @@ msgstr "Kein Soldat zur Ausbildung vorhanden!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:112
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:118
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
 msgctxt "empire_building"
@@ -5467,6 +5465,7 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) Kriegerin"
 msgstr[1] "%1%(+%2%) Kriegerinnen"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

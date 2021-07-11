@@ -1272,7 +1272,12 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("localedir");
 	}
 
-	auto checkdatadirversion = [](const std::string& dd) {
+	const bool skip_check_datadir_version = commandline_.count("skip_check_datadir_version");
+	commandline_.erase("skip_check_datadir_version");
+	auto checkdatadirversion = [skip_check_datadir_version](const std::string& dd) {
+		if (skip_check_datadir_version) {
+			return std::string();
+		}
 		try {
 			std::unique_ptr<FileSystem> fs(&FileSystem::create(dd));
 			if (!fs.get()) {

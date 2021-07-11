@@ -61,9 +61,9 @@ descriptions:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = "No Fields",
-      heading = "Out of Fields",
-      message = "The farmer working at this farm has no cleared soil to plant his seeds.",
+      title = pgettext("empire_building", "No Fields"),
+      heading = pgettext("empire_building", "Out of Fields"),
+      message = pgettext("empire_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }
