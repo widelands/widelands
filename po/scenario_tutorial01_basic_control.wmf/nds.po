@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-03 19:41+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -275,7 +275,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr "Wenn du de Baustee anklickst, deit sük een Fenster open. De Waren, de noch hapern, sehn grau ut. Du süchst ok, wo vööl vun de Baustee al beschickt is."
+msgstr "Wenn du de Baustee anklickst, deit sik een Fenster open. De Waren, de noch hapern, sehn grau ut. Du süchst ok, wo vööl vun de Baustee al beschickt is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
 msgid ""
@@ -336,7 +336,7 @@ msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr "Över de anner Kant kannst du de rechte Muustaste enerwegens up de Kaart drücken un hollen un dann diene Muus bewegen, un de Sicht verschuuvt sük. Dat is handig un gang un geve."
+msgstr "Över de anner Kant kannst du de rechte Muustaste enerwegens up de Kaart drücken un hollen un dann diene Muus bewegen, un de Sicht verschuuvt sik. Dat is handig un gang un geve."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:246
 msgid ""
@@ -663,8 +663,8 @@ msgstr "Waar mennig Stenen sünd, kannst du noch een Flintslagerhuus bauen. Dann
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "»Namen vun Husen« un »Tahlen över«"
+msgid "Census and Status"
+msgstr "»Namen vun Husen« un »Tostand«"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -687,16 +687,16 @@ msgstr "Laat mi de Namen vun Husen för di anknipsen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "Wies de Tahlen över Husen"
+msgid "Show the building status"
+msgstr "Wies de Husen-Tostand"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "Um de Tahlen över Husen to wiesen of verbargen, kannst du de Indrag »Tahlen över Husen wiesen« / »Tahlen över Husen verbargen« im »Wiesen / Verbargen«-Menü am unnern Rand utkören, of de Handigtast »%s« up de Knöppboord bruken."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr "Um de Tahlen över Husen to wiesen of verbargen, kannst du de Indrag »Husen-Tostand wiesen« / »Husen-Tostand verbargen« im »Wiesen / Verbargen«-Menü am unnern Rand utkören, of de Handigtast »%s« up de Knöppboord bruken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -706,10 +706,10 @@ msgstr "Aver is dat nich beter, wenn wi dat Wiederkomen vun uns’ Bausteden ank
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
-msgstr "To de Namen vun Husen daarto kannst du ok Tahlen över se anknipsen. Dat wiest Informatioon över de Wöörde vun Husen of dat Wiederkomen vun Bausteden."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
+msgstr "To de Namen vun Husen daarto kannst du ok Tostand-Texten över se anknipsen. Dat wiest Informatioon över de Wöörde vun Husen of dat Wiederkomen vun Bausteden."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -862,7 +862,7 @@ msgstr "Neje Narichten!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr "Du hest een paar Narichten kregen. Hest du spitzkregen, wo sük de Knoop an de unnern Rand vum Billschirm verännert hett?"
+msgstr "Du hest een paar Narichten kregen. Hest du spitzkregen, wo sik de Knoop an de unnern Rand vum Billschirm verännert hett?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Expand your territory"

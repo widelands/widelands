@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -44,11 +44,9 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
-"Remember to check the messages and the building statistics for unproductive "
-"buildings."
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
 msgstr ""
-"Souvenez vous de vérifier les messages et les statistiques des bâtiments "
-"pour ceux qui sont devenus improductifs."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -1677,7 +1675,7 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr "Brasserie"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
 msgstr "brasse de la bière"
@@ -1703,12 +1701,28 @@ msgctxt "empire_building"
 msgid "harvesting wheat"
 msgstr "récolte le blé"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "Maison de garde forestier"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
 msgstr "plante des arbres"
@@ -1809,17 +1823,35 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Maison de bûcheron"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
 msgstr "Abat des arbres"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
 msgstr "Moulin"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
 msgstr "moud du blé"
@@ -1897,3 +1929,18 @@ msgstr "Aucun soldat trouvé pour ce niveau d’entraînement !"
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Puits"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr ""
