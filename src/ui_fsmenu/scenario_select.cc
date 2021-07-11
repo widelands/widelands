@@ -270,7 +270,7 @@ void ScenarioSelect::fill_table() {
 		ml->preload_map(true, nullptr);
 
 		{
-			std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_correct_textdomain(full_path));
+			std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_map(full_path));
 			scenario_data->authors.set_authors(map.get_author());
 			scenario_data->descname = _(map.get_name());
 			scenario_data->description = _(map.get_description());

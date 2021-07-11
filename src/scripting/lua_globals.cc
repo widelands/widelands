@@ -233,7 +233,8 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 static int L__(lua_State* L) {
 	if (const TextdomainInfo* td = current_textdomain(L)) {
 		if (td->second) {
-			i18n::AddOnTextdomain dom(td->first, AddOns::find_addon(td->first).i18n_version);
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
 			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 		} else {
 			i18n::Textdomain dom(td->first);
@@ -271,7 +272,8 @@ static int L_ngettext(lua_State* L) {
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
 		if (td->second) {
-			i18n::AddOnTextdomain dom(td->first, AddOns::find_addon(td->first).i18n_version);
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
 			lua_pushstring(L, dngettext(td->first.c_str(), msgid, msgid_plural, n));
 		} else {
 			i18n::Textdomain dom(td->first);
@@ -303,7 +305,8 @@ static int L_pgettext(lua_State* L) {
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
 		if (td->second) {
-			i18n::AddOnTextdomain dom(td->first, AddOns::find_addon(td->first).i18n_version);
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
 			lua_pushstring(L, dpgettext_expr(td->first.c_str(), msgctxt, msgid));
 		} else {
 			i18n::Textdomain dom(td->first);
@@ -344,7 +347,8 @@ static int L_npgettext(lua_State* L) {
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
 		if (td->second) {
-			i18n::AddOnTextdomain dom(td->first, AddOns::find_addon(td->first).i18n_version);
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
 			lua_pushstring(L, dnpgettext_expr(td->first.c_str(), msgctxt, msgid, msgid_plural, n));
 		} else {
 			i18n::Textdomain dom(td->first);

@@ -1024,7 +1024,8 @@ static void install_translation(const std::string& temp_locale_path,
 	assert(!g_fs->is_directory(new_locale_path));
 	// Delete outdated translations if present.
 	for (const std::string& mo : g_fs->list_directory(new_locale_dir)) {
-		if (mo.compare(0, addon_name.size(), addon_name)) {
+		if (strncmp(FileSystem::fs_filename(mo.c_str()), addon_name.c_str(), addon_name.size()) ==
+		    0) {
 			g_fs->fs_unlink(mo);
 		}
 	}

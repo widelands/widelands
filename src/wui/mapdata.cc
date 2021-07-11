@@ -53,7 +53,7 @@ MapData::MapData(const Widelands::Map& map,
              init_maptype,
              init_displaytype) {
 
-	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_correct_textdomain(init_filename));
+	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_map(init_filename));
 	if (!map.get_name().empty()) {
 		name = map.get_name();
 		localized_name = _(name);
@@ -189,7 +189,7 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (directory.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
 		std::string addon = directory.substr(kAddOnDir.size() + 1);
 		addon = addon.substr(0, addon.find('/'));
-		i18n::AddOnTextdomain td(addon, AddOns::find_addon(addon).i18n_version);
+		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(addon));
 		std::string profilepath = kAddOnDir;
 		profilepath += FileSystem::file_separator();
 		profilepath += addon;
