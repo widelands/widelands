@@ -4,14 +4,15 @@
 # 
 # Translators:
 # FvZ, 2020
+# CrisiusXIII <chris@cborn.nl>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: FvZ, 2020\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr ""
+msgstr "Aantekening"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -174,7 +175,7 @@ msgstr "20 × IJzer"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 x Gouderts"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
@@ -295,6 +296,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Ik begon te geloven dat de reis oneindig was. Ik heb geen idee hoelang we op"
+" zee ware, heen en weer geslingerd door minachtende stormen ... het moet "
+"maanden geweest zijn."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -305,6 +309,11 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"De stormen hielden een stevige greep op het schip gedurende de hele reis. Er"
+" was nauwelijks een dag dat we ons niet afvroegen of het onze laatste zou "
+"zijn. We waren genoodzaakt onze kostbare metalen overboord te gooien om zo "
+"het schip stabiel te houden, met het gevoel dat het een tevergeefse "
+"offerande aan de goden was om een paar uur langer te leven."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -314,6 +323,10 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Het weinige gereedschap dat we opdoken van de Langeness hield het niet lang."
+" Juist de houwelen van de mijnwerkers bleken breekbaar geworden en we konden"
+" ze in de oceaan gooien toen het duidelijk werd dat ze door het zoute water "
+"zo erg waren verweerd dat we ze nooit meer in de mijnen konden gebruiken."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -1071,6 +1084,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Je hebt deze missie voltooid. Je mag verder spelen als je dat wilt, ga "
+"anders verder met de volgende missie."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
@@ -1079,9 +1094,11 @@ msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr ""
+"Je werkers en soldaten zullen hier onderdak vinden. Slaat ook je waren en "
+"gereedschappen op."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Imperiaal Magazijn"

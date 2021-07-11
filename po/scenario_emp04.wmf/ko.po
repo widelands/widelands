@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -35,9 +35,9 @@ msgstr "새로운 건물에 필요한 자원을 얻기 위해 모든 생산하�
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
-"Remember to check the messages and the building statistics for unproductive "
-"buildings."
-msgstr "생산하지 않는 건물에 대한 메시지와 건물 통계를 확인하는 것을 기억하십시오."
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
+msgstr "생산하지 않는 건물에 대한 메시지와 건물 상태 딱지를 확인하는 것을 잊지 마십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -1511,7 +1511,7 @@ msgctxt "empire_building"
 msgid "Brewery"
 msgstr "양조장"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
 msgstr "보리 술 만들고 있음"
@@ -1537,12 +1537,28 @@ msgctxt "empire_building"
 msgid "harvesting wheat"
 msgstr "밀을 베고 있음"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr "밭이 없음"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr "밭이 부족함"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "숲꾼의 집"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:37
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
 msgstr "나무를 심고 있음"
@@ -1572,7 +1588,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr "숲꾼의 집은 작업 영역 내에 나무를 심을 자유로운 공간이 필요합니다."
+msgstr "숲꾼의 집은 작업 영역 내에 나무를 심을 여유 공간이 필요합니다."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
@@ -1635,17 +1651,37 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "벌목꾼의 집"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:38
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
 msgstr "나무를 베고 있음"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr "나무 없음"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr "나무 부족"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
+"벌목꾼의 집에서 일하는 벌목꾼은 작업 영역 내에 어떤 나무도 찾을 수 없습니다. 건물을 해체 또는 파괴하거나 숲꾼의 집을 건설하는 것을 "
+"고려하십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
 msgstr "방앗간"
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:57
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
 msgstr "밀을 빻고 있음"
@@ -1723,3 +1759,18 @@ msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 msgctxt "empire_building"
 msgid "Well"
 msgstr "우물"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr "물 없음"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr "물 부족"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "해당 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
