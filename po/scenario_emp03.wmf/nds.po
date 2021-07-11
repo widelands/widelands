@@ -360,7 +360,7 @@ msgstr "Keene Utsicht"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
-msgstr "Saledus kiekt nervöös um sük …"
+msgstr "Saledus kiekt nervöös um sik …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
@@ -718,7 +718,7 @@ msgstr "Amalee’ is stolt"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
-msgstr "Amalee’ freit sük …"
+msgstr "Amalee’ freit sik …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
@@ -792,7 +792,7 @@ msgid ""
 msgstr ""
 "Ick gloov, de Noordwind hett komiske aver leep bekannte Luden herdragen. "
 "Wenn ick nich ganz un gaar falsk ligg, hebb ick de Kriegstrummels vun Willen"
-" Lüü höört. Wi sallen uns beter upmaken un nakieken, wat daar boven vör sük "
+" Lüü höört. Wi sallen uns beter upmaken un nakieken, wat daar boven vör sik "
 "gaht."
 
 #. TRANSLATORS: Saledus
@@ -989,7 +989,7 @@ msgstr "Amalee’ is wösig"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:511
 msgid "Amalea is looking forward to the exploration…"
-msgstr "Amalee’ freit sük up de Söök …"
+msgstr "Amalee’ freit sik up de Söök …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
@@ -1220,7 +1220,7 @@ msgstr "Wi bruken eene Övens-Weertskupp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
-msgstr "Saledus sörgt sük um de Sekerheid"
+msgstr "Saledus sörgt sik um de Sekerheid"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:611

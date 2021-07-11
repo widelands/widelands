@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-31 10:20+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-29 23:06+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -457,8 +457,8 @@ msgstr "Ha el szeretnél küldeni egy katonát, csak rá kell kattintanod. Ekkor
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
-"Let me also describe what the numbers in the statistics string mean. This "
-"string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
+"Let me also describe what the numbers in the status string mean. This string"
+" can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
 msgstr "Elmagyarázom azt is, hogy mit jelentenek a számok az állapotsorban. A felirat akár 3 számot is tartalmazhat, pl. „1 (+5) katona (+2)”."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203

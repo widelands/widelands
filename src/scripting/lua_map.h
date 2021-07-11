@@ -1016,6 +1016,7 @@ public:
 	 * Lua Methods
 	 */
 	int dismantle(lua_State* L);
+	int enhance(lua_State* L);
 
 	/*
 	 * C Methods

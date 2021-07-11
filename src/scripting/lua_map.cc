@@ -5383,6 +5383,7 @@ Building
 const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
    METHOD(LuaBuilding, dismantle),
+   METHOD(LuaBuilding, enhance),
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
@@ -5440,6 +5441,27 @@ int LuaBuilding::set_destruction_blocked(lua_State* L) {
 int LuaBuilding::dismantle(lua_State* L) {
 	Widelands::Building* bld = get(L, get_egbase(L));
 	bld->get_owner()->dismantle_building(bld, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: enhance([keep_wares = false])
+
+      .. versionadded:: 1.1
+
+      Instantly enhance this building if there is an enhancement.
+
+      :arg keep_wares: Optional: If :const:`false` (default) the wares in this buildings stock
+         get destroyed. If :const:`true` the wares in this buildings stock will be preserved.
+      :type keep_wares: :const:`bool`
+*/
+int LuaBuilding::enhance(lua_State* L) {
+	Widelands::Building* bld = get(L, get_egbase(L));
+	const Widelands::DescriptionIndex enhancement = bld->descr().enhancement();
+	if (enhancement == Widelands::INVALID_INDEX) {
+		return 0;
+	}
+	bld->get_owner()->enhance_building(bld, enhancement, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
 }
 

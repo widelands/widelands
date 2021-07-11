@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-26 16:06+0000\n"
+"PO-Revision-Date: 2021-06-28 07:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Vun Nemesis na Genesis"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Nadeem se up eener wunnerliken Insel in de Naberskupp vun Atlantis lannden, rackern sük de övern Atlantinger of, sük eene neje Heimaad to bauen."
+msgstr "Nadeem se up eener wunnerliken Insel in de Naberskupp vun Atlantis lannden, rackern sik de övern Atlantinger of, sik eene neje Heimaad to bauen."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -97,7 +97,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sik mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sik siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -178,7 +178,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Weer de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – of een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
+msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Weer de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – of een Teken vun de Gotten, dat een Volk, wat sik even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -370,7 +370,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "’t is düll, sük in deese mojen Gegend ut eener Spoor an de annern daaltolaten. Aver de Wegen, deese groten Geweste to umfaten, sünd lang un vull mit Bogen, un ’t is licht, in dat Land vun eenem frömden Volk to ströpen."
+msgstr "’t is düll, sik in deese mojen Gegend ut eener Spoor an de annern daaltolaten. Aver de Wegen, deese groten Geweste to umfaten, sünd lang un vull mit Bogen, un ’t is licht, in dat Land vun eenem frömden Volk to ströpen."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -465,7 +465,7 @@ msgstr "Hexen-Walden"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr "De unbannige Mooigheid vun deesen smaragdgrönen Lannen hett mennig Völker versöken laten, se för sük sülvst intonehmen."
+msgstr "De unbannige Mooigheid vun deesen smaragdgrönen Lannen hett mennig Völker versöken laten, se för sik sülvst intonehmen."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -581,7 +581,7 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr "Dien Volk hett lange Tied bi deesem mojen un eensamen Meer im Ies leevt. Nüms hett jo stöört un de Mineraale weren genoog för dien ganzes Volk, aver vör een paar Maanten is een anner Volk över de Bargen komen un hett sük daallaten. Un du büst wiss, dat de Rüümte blot för een Volk langt."
+msgstr "Dien Volk hett lange Tied bi deesem mojen un eensamen Meer im Ies leevt. Nüms hett jo stöört un de Mineraale weren genoog för dien ganzes Volk, aver vör een paar Maanten is een anner Volk över de Bargen komen un hett sik daallaten. Un du büst wiss, dat de Rüümte blot för een Volk langt."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
@@ -750,7 +750,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr "Deese Kaart is as Enkelt-Speler-Rutfödderung dacht för so bannig gode Spelers, dat alleen tegen 6 künstelk Spelers to licht is. De blaue Speler hett keen Metall (as een bietje Iesen, um de Weertskupp in Gang to kriegen) un mutt sük up de 5%-Kans verlaten, waar een leges Bargwark mit wat finnt. Un du spöölst 1 tegen 6 (du kannst aver ok een paar künstelk Spelers weglaten, um dat lichter to maken). Vööl Glück!"
+msgstr "Deese Kaart is as Enkelt-Speler-Rutfödderung dacht för so bannig gode Spelers, dat alleen tegen 6 künstelk Spelers to licht is. De blaue Speler hett keen Metall (as een bietje Iesen, um de Weertskupp in Gang to kriegen) un mutt sik up de 5%-Kans verlaten, waar een leges Bargwark mit wat finnt. Un du spöölst 1 tegen 6 (du kannst aver ok een paar künstelk Spelers weglaten, um dat lichter to maken). Vööl Glück!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -914,7 +914,7 @@ msgstr "De Pass dör de Bargen"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "In deeser Barg-Kuntrei hebben sük twee Königssöhnen daallaten. Nu vergrotern se hör Gewesten, un se weten nich, dat se nich alleen sünd!"
+msgstr "In deeser Barg-Kuntrei hebben sik twee Königssöhnen daallaten. Nu vergrotern se hör Gewesten, un se weten nich, dat se nich alleen sünd!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
