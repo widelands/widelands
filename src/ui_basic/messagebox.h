@@ -56,10 +56,9 @@ struct WLMessageBox : public Window {
 	WLMessageBox(Panel* parent,
 	             WindowStyle,
 	             const std::string& caption,
-	             const std::string& text,
+	             std::string text,
 	             MBoxType,
-	             Align = UI::Align::kCenter,
-	             bool needs_richtext_escape = false);
+	             Align = UI::Align::kCenter);
 
 	boost::signals2::signal<void()> ok;
 	boost::signals2::signal<void()> cancel;
