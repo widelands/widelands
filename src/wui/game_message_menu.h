@@ -31,6 +31,7 @@
 namespace Widelands {
 class Game;
 }  // namespace Widelands
+class InteractiveBase;
 class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
@@ -47,6 +48,12 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	enum class Mode { kInbox, kArchive };
 	void think() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kMessages;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
 	enum Cols { ColTitle, ColType, ColStatus, ColTimeSent };

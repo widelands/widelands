@@ -35,6 +35,12 @@ class InteractivePlayer;
 struct SeafaringStatisticsMenu : public UI::UniqueWindow {
 	SeafaringStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kSeafaringStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	/// For identifying the columns in the table.
 	enum Cols { ColName, ColStatus };

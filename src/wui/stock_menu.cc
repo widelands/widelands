@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "economy/economy.h"
 #include "graphic/style_manager.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
@@ -151,4 +152,33 @@ void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
 			}
 		}
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_stock;
+			r.create();
+			assert(r.window);
+			StockMenu& sm = dynamic_cast<StockMenu&>(*r.window);
+
+			sm.tabs_.activate(fr.unsigned_8());
+			sm.solid_icon_backgrounds_.set_state(fr.unsigned_8());
+
+			return sm;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Stock Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("stock menu: %s", e.what());
+	}
+}
+void StockMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(tabs_.active());
+	fw.unsigned_8(solid_icon_backgrounds_.get_state() ? 1 : 0);
 }

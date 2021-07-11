@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/player.h"
@@ -102,6 +103,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                       kPlotWidth + 2 * kSpacing,
                       270,
                       _("Ware Statistics")),
+     iplayer_(parent),
      main_box_(nullptr),
      tab_panel_(nullptr),
      display_(nullptr),
@@ -223,12 +225,14 @@ void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what
 		plot_economy_->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		plot_stock_->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 
+		active_indices_.push_back(id);
 	} else {  // Deactivate ware
 		uint8_t old_color = color_map_[static_cast<size_t>(id)];
 		if (old_color != kInactiveColorIndex) {
 			active_colors_[old_color - 1] = false;
 			color_map_[static_cast<size_t>(id)] = kInactiveColorIndex;
 		}
+		active_indices_.erase(std::find(active_indices_.begin(), active_indices_.end(), id));
 	}
 
 	plot_production_->show_plot(static_cast<size_t>(id), what);
@@ -269,4 +273,38 @@ void WareStatisticsMenu::set_time(int32_t timescale) {
 	plot_consumption_->set_time_id(timescale);
 	plot_economy_->set_time_id(timescale);
 	plot_stock_->set_time_id(timescale);
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& WareStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_wares;
+			r.create();
+			assert(r.window);
+			WareStatisticsMenu& m = dynamic_cast<WareStatisticsMenu&>(*r.window);
+			m.tab_panel_->activate(fr.unsigned_8());
+			m.slider_->get_slider().set_value(fr.signed_32());
+			for (size_t i = fr.unsigned_32(); i; --i) {
+				m.display_->select_ware(ib.egbase().descriptions().safe_ware_index(fr.string()));
+			}
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Wares Statistics Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("wares statistics menu: %s", e.what());
+	}
+}
+void WareStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(tab_panel_->active());
+	fw.signed_32(slider_->get_slider().get_value());
+	fw.unsigned_32(active_indices_.size());
+	for (const Widelands::DescriptionIndex& di : active_indices_) {
+		fw.string(iplayer_.egbase().descriptions().get_ware_descr(di)->name());
+	}
 }

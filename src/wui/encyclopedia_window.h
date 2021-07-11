@@ -38,6 +38,12 @@ namespace UI {
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kEncyclopedia;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 protected:
 	void init(InteractiveBase& parent, std::unique_ptr<LuaTable> table);
 

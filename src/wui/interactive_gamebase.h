@@ -92,6 +92,7 @@ protected:
 
 	void draw_overlay(RenderTarget&) override;
 
+public:
 	// All unique menu windows
 	struct GameMenuWindows {
 		UI::UniqueWindow::Registry sound_options;
@@ -108,6 +109,7 @@ protected:
 		UI::UniqueWindow::Registry help;
 	} menu_windows_;
 
+protected:
 	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 

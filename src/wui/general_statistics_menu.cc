@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "scripting/lua_interface.h"
@@ -198,9 +199,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
-	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
-	slider->changedto.connect([this](int32_t i) { plot_.set_time_id(i); });
-	box_.add(slider, UI::Box::Resizing::kFullSize);
+	slider_ = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
+	slider_->changedto.connect([this](int32_t i) { plot_.set_time_id(i); });
+	box_.add(slider_, UI::Box::Resizing::kFullSize);
 
 	initialization_complete();
 }
@@ -219,6 +220,9 @@ void GeneralStatisticsMenu::create_player_buttons() {
 		self = &ipl->player();
 	}
 
+	for (unsigned i = 0; i < kMaxPlayers; i++) {
+		cbs_[i] = nullptr;
+	}
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		if (player != self && !show_all_players && player->is_hidden_from_general_statistics()) {
 			// Hide player from stats
@@ -240,10 +244,6 @@ void GeneralStatisticsMenu::create_player_buttons() {
 		show_or_hide_plot(p, my_registry_->selected_players[p - 1]);
 
 		player_buttons_box_.add(&cb, UI::Box::Resizing::kFillSpace);
-	}
-	else {  //  player nr p does not exist
-		cbs_[p - 1] = nullptr;
-		show_or_hide_plot(p, false);
 	}
 }
 
@@ -290,4 +290,40 @@ void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 		}
 	}
 	selected_information_ = id;
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_general;
+			r.create();
+			assert(r.window);
+			GeneralStatisticsMenu& m = dynamic_cast<GeneralStatisticsMenu&>(*r.window);
+			m.radiogroup_.set_state(fr.unsigned_8(), true);
+			for (unsigned i = 0; i < kMaxPlayers; ++i) {
+				if (fr.unsigned_8()) {
+					m.cb_changed_to(i + 1);
+				}
+			}
+			m.slider_->get_slider().set_value(fr.signed_32());
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "General Statistics Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("general statistics menu: %s", e.what());
+	}
+}
+void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(radiogroup_.get_state());
+	for (unsigned i = 0; i < kMaxPlayers; ++i) {
+		// The saved value indicates whether we explicitly need to toggle this button
+		fw.unsigned_8((cbs_[i] && cbs_[i]->style() != UI::Button::VisualState::kPermpressed) ? 1 : 0);
+	}
+	fw.signed_32(slider_->get_slider().get_value());
 }

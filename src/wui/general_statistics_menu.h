@@ -51,6 +51,12 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 	GeneralStatisticsMenu(InteractiveGameBase&, Registry&);
 	~GeneralStatisticsMenu() override;
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kGeneralStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	Registry* my_registry_;
 	UI::Box box_, player_buttons_box_;
@@ -58,6 +64,7 @@ private:
 	UI::Radiogroup radiogroup_;
 	int32_t selected_information_;
 	UI::Button* cbs_[kMaxPlayers];
+	WuiPlotAreaSlider* slider_;
 	uint32_t ndatasets_;
 	Widelands::Game& game_;
 

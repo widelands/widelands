@@ -19,6 +19,7 @@
 
 #include "wui/game_objectives_menu.h"
 
+#include "logic/game_data_error.h"
 #include "logic/objective.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
@@ -93,4 +94,29 @@ void GameObjectivesMenu::think() {
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
 	objectivetext.set_text(t == ListType::no_selection_index() ? "" : list[t].descr());
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& GameObjectivesMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).objectives_;
+			r.create();
+			assert(r.window);
+			GameObjectivesMenu& m = dynamic_cast<GameObjectivesMenu&>(*r.window);
+			m.think();  // Fills the list
+			m.list.select(fr.unsigned_32());
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Objectives Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("objectives menu: %s", e.what());
+	}
+}
+void GameObjectivesMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_32(list.selection_index());
 }

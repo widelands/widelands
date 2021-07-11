@@ -26,10 +26,11 @@
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "scripting/lua_coroutine.h"
 #include "ui_basic/messagebox.h"
-#include "wui/interactive_base.h"
+#include "wui/interactive_player.h"
 
 namespace {
 
@@ -51,6 +52,8 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
      lua_(lua),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
+
+static const std::string kTabNamePrefix = "encyclopedia_";
 
 void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
 
@@ -98,9 +101,9 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			wrapper_boxes_.at(tab_name)->add(boxes_.at(tab_name).get());
 
 			if (tab_icon.empty()) {
-				tabs_.add("encyclopedia_" + tab_name, tab_title, wrapper_boxes_.at(tab_name).get());
+				tabs_.add(kTabNamePrefix + tab_name, tab_title, wrapper_boxes_.at(tab_name).get());
 			} else if (g_fs->file_exists(tab_icon)) {
-				tabs_.add("encyclopedia_" + tab_name, g_image_cache->get(tab_icon),
+				tabs_.add(kTabNamePrefix + tab_name, g_image_cache->get(tab_icon),
 				          wrapper_boxes_.at(tab_name).get(), tab_title);
 			} else {
 				throw wexception(
@@ -177,6 +180,56 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 		contents_.at(tab_name)->set_text(err.what());
 	}
 	contents_.at(tab_name)->scroll_to_top();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).encyclopedia_;
+			r.create();
+			assert(r.window);
+			EncyclopediaWindow& m = dynamic_cast<EncyclopediaWindow&>(*r.window);
+			const std::string tab = fr.string();
+			m.tabs_.activate(kTabNamePrefix + tab);
+
+			const std::string entry_path = fr.string();
+			std::vector<std::string> entry_params;
+			for (size_t i = fr.unsigned_32(); i; --i) {
+				entry_params.push_back(fr.string());
+			}
+			const size_t nr_entries = m.lists_.at(tab)->size();
+			for (size_t i = 0; i < nr_entries; ++i) {
+				if ((*m.lists_.at(tab))[i].script_path == entry_path &&
+				    (*m.lists_.at(tab))[i].script_parameters == entry_params) {
+					m.lists_.at(tab)->select(i);
+					return m;
+				}
+			}
+			log_warn("EncyclopediaWindow::load: could not find a suitable list entry for '%s' in '%s'",
+			         entry_path.c_str(), tab.c_str());
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Encyclopedia", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("encyclopedia: %s", e.what());
+	}
+}
+void EncyclopediaWindow::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+
+	const std::string tab = tabs_.tabs()[tabs_.active()]->get_name().substr(kTabNamePrefix.size());
+	fw.string(tab);
+
+	const EncyclopediaEntry& e = lists_.at(tab)->get_selected();
+	fw.string(e.script_path);
+	fw.unsigned_32(e.script_parameters.size());
+	for (const std::string& str : e.script_parameters) {
+		fw.string(str);
+	}
 }
 
 }  // namespace UI

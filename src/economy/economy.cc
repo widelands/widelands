@@ -104,12 +104,21 @@ Economy::~Economy() {
 /**
  * \return an arbitrary flag in this economy.
  */
-Flag* Economy::get_arbitrary_flag() {
+Flag* Economy::get_arbitrary_flag(const Economy* other) {
 	if (flags_.empty()) {
 		return nullptr;
 	}
 
-	return flags_[0];
+	if (!other) {
+		return flags_[0];
+	}
+
+	for (Flag* f : flags_) {
+		if (f->get_economy(other->type()) == other) {
+			return f;
+		}
+	}
+	return nullptr;
 }
 
 /**

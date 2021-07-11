@@ -54,6 +54,12 @@ public:
 	}
 	void check_boundaries();
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kMinimap;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;

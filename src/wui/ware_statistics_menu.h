@@ -24,6 +24,8 @@
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 
+class FileRead;
+class InteractiveBase;
 class InteractivePlayer;
 struct StatisticWaresDisplay;
 
@@ -37,10 +39,17 @@ public:
 	WareStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	void set_time(int32_t);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kWareStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 protected:
 	void layout() override;
 
 private:
+	InteractivePlayer& iplayer_;
 	UI::Box* main_box_;
 	UI::TabPanel* tab_panel_;
 	StatisticWaresDisplay* display_;
@@ -52,6 +61,7 @@ private:
 	DifferentialPlotArea* plot_economy_;
 	std::map<Widelands::DescriptionIndex, uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
+	std::list<Widelands::DescriptionIndex> active_indices_;
 
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };

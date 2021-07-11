@@ -27,6 +27,7 @@
 #include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "wui/interactive_player.h"
 
@@ -277,4 +278,30 @@ void MiniMap::check_boundaries() {
 	} else {
 		resize();
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = ib.minimap_registry_;
+			r.create();
+			assert(r.window);
+			MiniMap& m = dynamic_cast<MiniMap&>(*r.window);
+			*m.view_.minimap_layers_ = static_cast<MiniMapLayer>(fr.unsigned_32());
+			m.view_.reset();
+			m.resize();
+			m.update_button_permpressed();
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError("Minimap", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("minimap: %s", e.what());
+	}
+}
+void MiniMap::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_32(static_cast<uint32_t>(*view_.minimap_layers_));
 }
