@@ -168,7 +168,12 @@ void Carrier::transport_update(Game& game, State& state) {
 		// If we don't carry something, walk to the flag
 		pickup_from_flag(game, state);
 	} else {
-		RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
+        MapObject* location = get_location(game);
+        // Maybe null in rare cases (locaton.m.serial == 0)
+        if (nullptr == location) {
+            return; // TODO(Klaus Halfmann): Fix for #4988 please advice a better solution
+        }
+		RoadBase& road = dynamic_cast<RoadBase&>(*location);
 		// If the ware should go to the building attached to our flag, walk
 		// directly into said building
 		Flag& flag = road.get_flag(static_cast<RoadBase::FlagId>(state.ivar1 ^ 1));

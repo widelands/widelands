@@ -73,6 +73,7 @@ private:
 	// internal task stuff
 	void road_update(Game&, State&);
 	void road_pop(Game&, State&);
+    // TODO(Klaus Halfmann): This is called to ...
 	void transport_update(Game&, State&);
 
 	static Task const taskTransport;
