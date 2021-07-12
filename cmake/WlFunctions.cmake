@@ -162,7 +162,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_TTF)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF freetype bz2 graphite2 usp10 harfbuzz zstd freetype rpcrt4)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF freetype bz2 graphite2 usp10 dwrite harfbuzz zstd freetype rpcrt4)
     else()
       target_link_libraries(${NAME} SDL2::TTF)
     endif()
