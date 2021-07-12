@@ -2193,8 +2193,7 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "frisians_builder",
-   carrier = "frisians_carrier",
-   carrier2 = "frisians_reindeer",
+   carriers = {"frisians_carrier", "frisians_reindeer"},
    geologist = "frisians_geologist",
    scouts_house = "frisians_scouts_house",
    soldier = "frisians_soldier",
