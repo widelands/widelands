@@ -220,7 +220,7 @@ msgstr "Försk mehr Land in de Naberskupp ut un bau so völe Muden as gaht."
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:157
 msgid "Recover the shrine"
-msgstr "Söök de Altar weer tosammen"
+msgstr "Söök de Altar weer tosamen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Find the Holy Shrine"
@@ -1296,7 +1296,7 @@ msgid ""
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
 "Uplest hebben wi dat leste Deel vun uns’ Altar funnen. Nu könen wi ’t weer "
-"tosammendoon, um uns’ Gott hoogtoachten. Neptun wees Pries!"
+"tosamendoon, um uns’ Gott hoogtoachten. Neptun wees Pries!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
