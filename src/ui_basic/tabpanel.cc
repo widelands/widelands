@@ -211,6 +211,7 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 
 			case SDLK_KP_7:
 				if (code.mod & KMOD_NUM) {
+					handle = false;
 					break;
 				}  // else
 				FALLS_THROUGH;
@@ -219,6 +220,7 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 				break;
 			case SDLK_KP_1:
 				if (code.mod & KMOD_NUM) {
+					handle = false;
 					break;
 				}  // else
 				FALLS_THROUGH;
