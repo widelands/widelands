@@ -117,7 +117,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr "Entschee di, of du mit de Latiensken Riek tosammenarbeiden willst"
+msgstr "Entschee di, of du mit de Latiensken Riek tosamen arbeiden willst"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
@@ -128,7 +128,7 @@ msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
-"Entschee di, of du mit Murilius tegen de Willen Lüü tosammenarbeiden willst."
+"Entschee di, of du mit Murilius tegen de Willen Lüü tosamen arbeiden willst."
 " Wenn ja, doo deese Waren in sien Kraamhuus:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
@@ -810,7 +810,7 @@ msgid ""
 "some consideration."
 msgstr ""
 "Ji muttst tegen deese Willen kämpen, wenn ji in deese Kuntrei leven wullt; "
-"ji köönt wiss sehn, dat ’t lichter is, tosammen mit de Riek tegen se to "
+"ji köönt wiss sehn, dat ’t lichter is, tosamen mit de Riek tegen se to "
 "fechten as alleen? Un ji wullt dat Riek würrelk nich as jo Feind. Wull sünd "
 "ji Wille Lüü, aver ick bün wiss, dat ji verstaht, dat ick Klookheid segg, "
 "nadeem ji daar een bietje över nadacht hebbt."
