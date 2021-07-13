@@ -212,7 +212,7 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 			case SDLK_KP_7:
 				if (code.mod & KMOD_NUM) {
 					break;
-				} // else
+				}  // else
 				FALLS_THROUGH;
 			case SDLK_HOME:
 				selected_idx = 0;
@@ -220,7 +220,7 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 			case SDLK_KP_1:
 				if (code.mod & KMOD_NUM) {
 					break;
-				} // else
+				}  // else
 				FALLS_THROUGH;
 			case SDLK_END:
 				selected_idx = max;
