@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-29 23:17+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"PO-Revision-Date: 2021-07-12 00:09+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -563,11 +563,11 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 #: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
 #: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1573
+#: ../../src/wlapplication.cc:1578
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1575
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1580
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1331,7 +1331,7 @@ msgstr "Ctrl + kattintás a térképre a kiválasztott nyersanyag mennyiségéne
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:33
 msgid "Random Height Options"
-msgstr "Véletlenszerű magassági beállítások"
+msgstr "Véletlenszerű magasság beállításai"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:45
 msgid "Minimum height:"
@@ -2329,7 +2329,7 @@ msgstr "%d. hajó"
 
 #: ../../src/logic/replay.cc:87
 msgid "Desync"
-msgstr ""
+msgstr "Szinkronizációs hiba"
 
 #: ../../src/logic/replay.cc:88
 #, c-format
@@ -2339,7 +2339,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "A visszajátszás kiesett a szinkronból, ezért le lett állítva.\nValószínűleg a Widelands eltérő verziójával készült visszajátszást nézel, ami nem támogatott.\n\nA Widelands verziója: %1$s (%2$s). Ha biztos vagy benne, hogy a visszajátszás ugyanezzel a verzióval készült, kérjük jelentsd a hibát.\nKérjük csatold a hibabejelentéshez a standard kimeneten található kapcsolódó üzeneteket. (Windowson az stdout.txt-ben találod.)"
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -3138,11 +3138,11 @@ msgstr "Nincs kiválasztva"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
-msgstr ""
+msgstr "Kérjük várj…"
 
 #: ../../src/ui_basic/panel.cc:442
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Játék befejezése – kérjük várj…"
 
 #: ../../src/ui_basic/progresswindow.cc:75
 msgid "Loading…"
@@ -3474,7 +3474,7 @@ msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Az egyik aktív bővítmény hibás. Nem indítható játék a jelenlegi beállításokkal.\nA hibaüzenet:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:952
 #, c-format
@@ -5058,7 +5058,7 @@ msgstr "Térkép mozgatása amikor az egérmutató a kép szélén van"
 
 #: ../../src/ui_fsmenu/options.cc:294
 msgid "Invert click-and-drag map movement direction"
-msgstr ""
+msgstr "Jobb egérgombos térképmozgatás irányának megfordítása"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Teach me how to play"
@@ -5280,31 +5280,31 @@ msgstr ""
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1400
+#: ../../src/wlapplication.cc:1405
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1522
+#: ../../src/wlapplication.cc:1527
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1540
+#: ../../src/wlapplication.cc:1545
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1589
+#: ../../src/wlapplication.cc:1594
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1589
+#: ../../src/wlapplication.cc:1594
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1592
+#: ../../src/wlapplication.cc:1597
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5318,7 +5318,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1602
+#: ../../src/wlapplication.cc:1607
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5328,11 +5328,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1634
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1635
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5649,77 +5649,77 @@ msgstr "Szóköz"
 #: ../../src/wlapplication_options.cc:759
 msgctxt "hotkey"
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 #: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Escape"
-msgstr ""
+msgstr "Esc"
 
 #: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "Tab"
-msgstr ""
+msgstr "Tab"
 
 #: ../../src/wlapplication_options.cc:765
 msgctxt "hotkey"
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../src/wlapplication_options.cc:769
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../src/wlapplication_options.cc:771
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../src/wlapplication_options.cc:773
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: ../../src/wlapplication_options.cc:775
 msgctxt "hotkey"
 msgid "End"
-msgstr ""
+msgstr "End"
 
 #: ../../src/wlapplication_options.cc:777
 msgctxt "hotkey"
 msgid "Left Arrow Key"
-msgstr ""
+msgstr "Kurzor balra"
 
 #: ../../src/wlapplication_options.cc:779
 msgctxt "hotkey"
 msgid "Right Arrow Key"
-msgstr ""
+msgstr "Kurzor jobbra"
 
 #: ../../src/wlapplication_options.cc:781
 msgctxt "hotkey"
 msgid "Up Arrow Key"
-msgstr ""
+msgstr "Kurzor fel"
 
 #: ../../src/wlapplication_options.cc:783
 msgctxt "hotkey"
 msgid "Down Arrow Key"
-msgstr ""
+msgstr "Kurzor le"
 
 #: ../../src/wlapplication_options.cc:785
 msgctxt "hotkey"
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 #: ../../src/wlapplication_options.cc:787
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ../../src/wlapplication_options.cc:789
 msgctxt "hotkey"
@@ -5734,12 +5734,12 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:793
 msgctxt "hotkey"
 msgid "Numpad Lock"
-msgstr ""
+msgstr "NumLock"
 
 #: ../../src/wlapplication_options.cc:795
 msgctxt "hotkey"
 msgid "Scroll Lock"
-msgstr ""
+msgstr "Scroll Lock"
 
 #: ../../src/wlapplication_options.cc:797
 msgctxt "hotkey"
@@ -6047,9 +6047,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6899,11 +6899,11 @@ msgstr "Vízi út hossza: %1$u/%2$u"
 
 #: ../../src/wui/interactive_base.cc:1438
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "Nem sikerült elmenteni a képernyőképet!"
 
 #: ../../src/wui/interactive_base.cc:1442
 msgid "Screenshot saved"
-msgstr ""
+msgstr "Képernyőkép elmentve"
 
 #: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
@@ -6935,11 +6935,11 @@ msgstr "Hanghatások és zenebeállítások megadása"
 #: ../../src/wui/interactive_gamebase.cc:161
 #: ../../src/wui/interactive_gamebase.cc:189
 msgid "Restart Scenario"
-msgstr ""
+msgstr "Küldetés újraindítása"
 
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "Valóban újra szeretnéd indítani ezt a küldetést?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
@@ -7009,8 +7009,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Hajózás"
@@ -7801,15 +7801,15 @@ msgstr "Munkások a raktárakban"
 
 #: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
-msgstr ""
+msgstr "Következő küldetés"
 
 #: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
-msgstr ""
+msgstr "A következő küldetés elindítása"
 
 #: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
-msgstr ""
+msgstr "Játék folytatása a jelenlegi küldetéssel"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:85

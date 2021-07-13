@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# CrisiusXIII <chris@cborn.nl>, 2021
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -601,6 +605,9 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Je hebt verloren en mag niet verder spelen. Misschien heb je meer geluk als "
+"je dit scenario opnieuw probeert. Klik op OK om terug te keren naar het "
+"hoofdmenu."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8

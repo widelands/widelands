@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -559,11 +559,11 @@ msgstr "这个地图没有保存，您确定真的要退出吗？"
 #: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
 #: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1573
+#: ../../src/wlapplication.cc:1578
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1575
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1580
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -5246,31 +5246,31 @@ msgstr ""
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1400
+#: ../../src/wlapplication.cc:1405
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1522
+#: ../../src/wlapplication.cc:1527
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1540
+#: ../../src/wlapplication.cc:1545
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1589
+#: ../../src/wlapplication.cc:1594
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1589
+#: ../../src/wlapplication.cc:1594
 msgid "Unexpected error during the game"
 msgstr "游戏中出现意外错误"
 
-#: ../../src/wlapplication.cc:1592
+#: ../../src/wlapplication.cc:1597
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5284,7 +5284,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "游戏时发生错误，错误消息是：\n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息（stdout.txt on Windows）。你正生成%2$s (%3$s)。\n\n请添加此信息到你的报告中。\n\n你希望Widelands尝试创建一个应急游戏存档吗？应急游戏存档通常 – 并不总是 – 可以加载并继续游戏。"
 
-#: ../../src/wlapplication.cc:1602
+#: ../../src/wlapplication.cc:1607
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5294,11 +5294,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1634
 msgid "Emergency save failed"
 msgstr "应急保存失败"
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1635
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6012,9 +6012,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6970,8 +6970,8 @@ msgstr "%1$s(%2$s)"
 msgid "Statistics"
 msgstr "统计"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "航海"

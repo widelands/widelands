@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -1701,6 +1701,22 @@ msgctxt "empire_building"
 msgid "harvesting wheat"
 msgstr "récolte le blé"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
@@ -1812,6 +1828,24 @@ msgctxt "empire_building"
 msgid "felling trees"
 msgstr "Abat des arbres"
 
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
+
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
@@ -1895,3 +1929,18 @@ msgstr "Aucun soldat trouvé pour ce niveau d’entraînement !"
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Puits"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr ""
