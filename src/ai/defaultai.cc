@@ -5624,8 +5624,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 		} else if (bo.is(BuildingAttribute::kRanger)) {
 
-			// making sure we have one completed lumberjack
-			if (get_building_observer(BuildingAttribute::kLumberjack).cnt_built < 1) {
+			// making sure we have one completed supported lumberjack
+			uint8_t supported_lumberjack_built = 0;
+			for (const auto& supported_building : bo.supported_producers) {
+				supported_lumberjack_built += get_building_observer(supported_building.first).cnt_built;
+			}
+			if (supported_lumberjack_built < 1) {
 				return BuildingNecessity::kForbidden;
 			}
 
