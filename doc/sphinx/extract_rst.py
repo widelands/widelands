@@ -115,7 +115,7 @@ def extract_rst_from_cpp(inname, outname=None):
     output = doc_enh.add_child_of(output)
     #if '-graphs' in sys.argv:
     # Add dependency graph
-    #doc_enh.add_dependency_graph(output, outname)
+    output = doc_enh.add_dependency_graph(output)
 
     if output.strip():
         out = sys.stdout

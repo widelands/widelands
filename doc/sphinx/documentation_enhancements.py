@@ -31,6 +31,12 @@ class LuaClass:
         prefix = '.'.join(self.outfile.rpartition('.')[0].split('_')[1:])
         return '{}.{}'.format(prefix, self.name)
 
+    def get_graphviz_link(self):
+        html_link = 'href="../{}#{}", target="_parent"'.format(
+            self.outfile.replace('.rst', '.html'), self.name.lower())
+        return html_link
+
+
     def print_data(self):
         print('  ', self.name, '|', self.parent, '|', self.outfile, '|',
               self.get_prefixed_name())
@@ -70,9 +76,9 @@ class LuaClasses:
         return [c.name for c in self.bases]
 
     def get_parent_tree(self, cli, tree=None):
-        """Recursively find all parents of cli up to the base class."""
+        """Recursively find all parent instances of cli up to the base class."""
         if not isinstance(cli, LuaClass):
-            raise Exception("Class must be an instance of LuaClass but got:", cli)
+            raise Exception("Class must be an instance of LuaClass but got:", type(cli))
 
         if tree is None:
             tree = []
@@ -110,7 +116,6 @@ class LuaClasses:
             for c in children:
                 self.get_children_tree(c, max_children, tree)
         return tree
-
 
     def format_cls(self, cli_to_format, cli_to_compare):
         """Returns a formatted name of cli_to_format if 
@@ -212,19 +217,44 @@ def add_child_of(rst_data):
 
     return rst_data
 
+def format_graphviz_parents(cur_cls):
+
+    def _make_tooltip():
+        via_list = 'Via: '
+        for i, c in enumerate(parents):
+            via_list += c.name
+            if i < len(parents)-1:
+                via_list += ' → '
+        return via_list
+
+    cli = classes.get_instance(cur_cls)
+    parents = list(reversed(classes.get_parent_tree(cli)))
+    ret_str = ''
+    base_name = ''
+    base_link = ''
+    if parents:
+        base = parents.pop(0)
+        base_link = base.get_graphviz_link()
+        base_name = base.name
+        if parents:
+            ret_str += '{base} -- {cur} [style=tapered, arrowhead=none, arrowtail=none dir=both,\
+penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
+                                                cur=cur_cls,
+                                                tooltip=_make_tooltip()
+                                              )
+        else:
+            # Only one parent -> no big edge
+            ret_str = '{base} -- {cur}'.format(base=base_name,
+                                               cur=cur_cls
+                                               )
+    return base_name, base_link, ret_str
+
 
 def create_directive(cls):
     children = (classes.get_children_tree(cls))
-    parents = (classes.get_parent_tree(cls))
-    print('Children of: ', cls,'\n  ', children)
-    print('  Parents:', list(reversed(parents)))
-
-    def _format_parents():
-        pass
-
+    base_cls, base_link, parents = format_graphviz_parents(cls)
     graph_directive = None
-    if parents or children:
-        main_cls, link = format_main_class(cls)
+    if parents:# or children:
         graph_directive = """
 .. graphviz::
     :alt: Dependency graph for class: {cur_cls}
@@ -237,20 +267,27 @@ def create_directive(cls):
           fontsize=12, fontname="Helvetica", margin="0.05, 0.0"]
     edge [color=gray]
     {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13, shape=oval]
-    {base_cls} [shape=house, href={link}]
+    {base_cls} [shape=house, {link}]
     {parents}
     {child_list}
     }}\n""".format(cur_cls=cls,
-                   parents=_format_parents,
-                   base_cls=parents[1],
-                   #link=link,
-                   #child_list=child_list,
+                   base_cls=base_cls,
+                   parents=parents,
+                   link=base_link,
+                   child_list='' #children,
                    )
+    print(graph_directive)
     return graph_directive
 
 
-def add_dependency_graph(rst_data, outfile):
+def add_dependency_graph(rst_data):
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
     for cls in found_cls:
+        cli = classes.get_instance(cls)
         directive = create_directive(cls)
-        print(directive)
+        if directive:
+            repl_str = '.. class:: {}\n\n'.format(cli.name)
+            directive_str = '{}\n{}'.format(directive, repl_str)
+            rst_data = rst_data.replace(repl_str, directive_str)
+
+    return rst_data
