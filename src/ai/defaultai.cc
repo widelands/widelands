@@ -5648,8 +5648,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[9] = (persistent_data->trees_around_cutters < 200) * 1;
 			inputs[10] = (persistent_data->trees_around_cutters < 300) * 1;
 			inputs[11] = (persistent_data->trees_around_cutters < 400) * 1;
-			inputs[12] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
-			inputs[13] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+			inputs[12] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
+			inputs[13] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
 			inputs[14] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[15] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[16] = (get_stocklevel(bo, gametime) < 2) * 1;
@@ -5664,13 +5664,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[22] = (basic_economy_established) ? -1 : 1;
 			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
 			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
-			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) * -1;
 			if (gametime > Time(90 * 60)) {
-				inputs[26] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+				inputs[26] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
 				inputs[27] = (persistent_data->trees_around_cutters < 20) * 1;
 			}
 			if (gametime > Time(45 * 60)) {
-				inputs[28] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+				inputs[28] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
 				inputs[29] = (persistent_data->trees_around_cutters < 20) * 1;
 				inputs[30] = (get_stocklevel(bo, gametime) > 30) * -1;
 			}
