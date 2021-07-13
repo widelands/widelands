@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-07 02:38+0000\n"
-"PO-Revision-Date: 2021-06-30 10:33+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"PO-Revision-Date: 2021-07-13 01:54+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -659,13 +659,13 @@ msgstr "당신의 탑이 공격받고 있습니다."
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:57
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "적이 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:59
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "당신의 군인들이 탑에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -677,31 +677,31 @@ msgstr "장벽"
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:42
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "당신의 군인들이 당신의 장벽에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:44
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "당신의 장벽이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:46
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "당신의 장벽이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:48
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "적이 장벽에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "당신의 군인들이 장벽에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:8
@@ -713,31 +713,31 @@ msgstr "사각 요새"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "군인들이 사각 요새에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
-msgstr ""
+msgstr "사각 요새에서 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:51
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
-msgstr ""
+msgstr "사각 요새가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:53
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr ""
+msgstr "적이 사각 요새에 있는 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:55
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr ""
+msgstr "군인들이 사각 요새에 있는 적을 패배시켰습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:8
@@ -749,31 +749,31 @@ msgstr "성"
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:28
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "당신의 군인들이 당신의 성에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:30
 msgctxt "empire_building"
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "당신의 성이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:32
 msgctxt "empire_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "당신의 성이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:34
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "적이 성에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:36
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "당신의 군인들이 성에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:8
@@ -785,31 +785,31 @@ msgstr "요새"
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:67
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "당신의 군인들이 당신의 요새에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:69
 msgctxt "empire_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "당신의 요새가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:71
 msgctxt "empire_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "당신의 요새가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:73
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "적이 요새에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "당신의 군인들이 요새에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:8
@@ -821,31 +821,31 @@ msgstr "감시 초소"
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:56
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "당신의 군인들이 감시 초소에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:58
 msgctxt "empire_building"
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "감시 초소가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:60
 msgctxt "empire_building"
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "감시 초소가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:62
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "적이 감시 초소에 있는 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:64
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "군인들이 감시 초소에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:8
@@ -857,31 +857,31 @@ msgstr "초소"
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:42
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "당신의 군인들이 초소에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:44
 msgctxt "empire_building"
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "당신의 초소가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:46
 msgctxt "empire_building"
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "당신의 초소가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:48
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "적이 초소에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "당신의 군인들이 초소에 있는 적을 무찔렀습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:8
@@ -893,31 +893,31 @@ msgstr "탑"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:47
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "당신의 군인들이 당신의 탑에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:49
 msgctxt "empire_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "당신의 탑이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:51
 msgctxt "empire_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "당신의 탑이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:53
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "적이 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "당신의 군인들이 탑에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
@@ -929,31 +929,31 @@ msgstr "요새"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "당신의 군인들이 당신의 요새에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "당신의 요새가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:62
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "당신의 요새가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:64
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "적이 요새에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "당신의 군인들이 요새에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
@@ -965,31 +965,31 @@ msgstr "전선 기지"
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:56
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "당신의 군인들이 감시 초소에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:58
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "당신의 감시 초소가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:60
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "당신의 감시 초소가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "적이 감시 초소에 있는 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "당신의 군인들이 감시 초소에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
@@ -1001,31 +1001,31 @@ msgstr "감시 초소"
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:54
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "당신의 군인들이 감시 초소에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:56
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr ""
+msgstr "당신의 감시 초소가 침략자를 발견했습니다"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:58
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "당신의 감시 초소가 공격 받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:60
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr ""
+msgstr "적이 감시 초소에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr ""
+msgstr "당신의 군인들이 감시 탑에 있는 적을 패배시켰습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1037,31 +1037,31 @@ msgstr "탑"
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "당신의 군인들이 당신의 탑에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "당신의 탑이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:63
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "당신의 탑이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:65
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "적이 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "당신의 군인들이 탑에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
@@ -1073,31 +1073,31 @@ msgstr "목재 탑"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:63
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your wooden tower."
-msgstr ""
+msgstr "당신의 군인들이 목재 탑에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:65
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
-msgstr ""
+msgstr "당신의 목재 탑이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
-msgstr ""
+msgstr "당신의 목재 탑이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:69
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
-msgstr ""
+msgstr "적이 목재 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:71
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
-msgstr ""
+msgstr "당신의 군인들이 목재 탑에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
@@ -1109,31 +1109,31 @@ msgstr "높은 목재 탑"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your high wooden tower."
-msgstr ""
+msgstr "당신의 군인들이 높은 목재 탑에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
 msgctxt "frisians_building"
 msgid "Your high wooden tower discovered an aggressor."
-msgstr ""
+msgstr "당신의 높은 목재 탑이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:47
 msgctxt "frisians_building"
 msgid "Your high wooden tower is under attack."
-msgstr ""
+msgstr "당신의 높은 목재 탑이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:49
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the high wooden tower."
-msgstr ""
+msgstr "적이 높은 목재 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the high wooden tower."
-msgstr ""
+msgstr "당신의 군인들이 높은 목재 탑에 있는 적을 물리쳤습니다."
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
@@ -1153,7 +1153,7 @@ msgstr "해체 현장"
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "카사바 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1238,12 +1238,12 @@ msgstr "일하고 있음"
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 msgid "planting cassava"
-msgstr ""
+msgstr "카사바를 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
 msgid "harvesting cassava"
-msgstr ""
+msgstr "카사바를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1276,16 +1276,17 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "이 카사바 농장에서 일하는 열음지기는 그녀의 씨앗을 심을 깨끗한 흙이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
-msgstr ""
+msgstr "카사바 뿌리 요리사"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1296,39 +1297,39 @@ msgstr "빵 굽는 중"
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
 msgctxt "amazons_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "숯 가마"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
 msgid "producing charcoal"
-msgstr ""
+msgstr "숯을 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr ""
+msgstr "초콜릿 양조장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
 msgid "brewing chocolate"
-msgstr ""
+msgstr "초콜릿을 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Cocoa Farm"
-msgstr ""
+msgstr "코코아 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
 msgid "planting cocoa"
-msgstr ""
+msgstr "코코아를 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:63
 msgid "harvesting cocoa"
-msgstr ""
+msgstr "코코아를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgctxt "amazons_building"
@@ -1341,69 +1342,69 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr ""
+msgstr "옷가게"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
 msgid "sewing a tunic"
-msgstr ""
+msgstr "튜닉을 바느질 하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
 msgid "making a light wooden armor"
-msgstr ""
+msgstr "가벼운 목재 갑옷을 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
 msgid "making a wooden helmet"
-msgstr ""
+msgstr "나무 투구를 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "전사의 외투를 바느질 하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:117
 msgid "making sturdy boots"
-msgstr ""
+msgstr "튼튼한 장화를 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:128
 msgid "making swift boots"
-msgstr ""
+msgstr "날쌘 장화를 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
 msgid "making hero boots"
-msgstr ""
+msgstr "영웅의 장화를 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
 msgid "making a padded vest"
-msgstr ""
+msgstr "속채움 조끼를 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:161
 msgid "making a padded protector"
-msgstr ""
+msgstr "속채움 보호대를 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "연락선 뜰"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
 msgctxt "amazons_building"
 msgid "Food Preserver"
-msgstr ""
+msgstr "식량 보존소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
@@ -1420,7 +1421,7 @@ msgstr "야전식량을 준비하고 있음"
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
 msgctxt "amazons_building"
 msgid "Furnace"
-msgstr ""
+msgstr "용광로"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
@@ -1435,7 +1436,7 @@ msgstr "금 녹이고 있음"
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
 msgctxt "amazons_building"
 msgid "Gardening Center"
-msgstr ""
+msgstr "원예 시설"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
@@ -1700,7 +1701,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1735,8 +1735,6 @@ msgstr "곡괭이 만들고 있음"
 msgid "making a machete"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1747,7 +1745,6 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "부엌 도구 만들고 있음"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1765,9 +1762,9 @@ msgstr "망치 만들고 있음"
 msgid "making a chisel"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1923,6 +1920,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2016,13 +2014,13 @@ msgstr "검은뿌리 농장"
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:52
 msgid "planting blackroot"
-msgstr "검은뿌리 씨앗을 뿌리고 있음"
+msgstr "검은뿌리를 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:60
 msgid "harvesting blackroot"
-msgstr "검은뿌리 수확하고 있음"
+msgstr "검은뿌리를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
 msgctxt "atlanteans_building"
@@ -2043,7 +2041,7 @@ msgstr "숯 가마"
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:49
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:68
 msgid "producing coal"
-msgstr "석탄 만들고 있음"
+msgstr "석탄을 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:8
@@ -2069,7 +2067,7 @@ msgstr "석탄 광산"
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:79
 msgid "mining coal"
-msgstr "석탄 파고 있음"
+msgstr "석탄을 파고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:102
@@ -2091,7 +2089,7 @@ msgstr "석탄 없음"
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
 msgid "Main Coal Vein Exhausted"
-msgstr "알짜 석탄 광맥 고갈됨"
+msgstr "알짜 석탄 광맥이 고갈됨"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:97
 msgctxt "atlanteans_building"
@@ -2142,7 +2140,7 @@ msgstr "농장"
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:56
 msgid "planting corn"
-msgstr "옥수수 씨뿌리고 있음"
+msgstr "옥수수를 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:64
@@ -2752,7 +2750,7 @@ msgstr "밀을 심고 있음"
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:63
 msgid "harvesting wheat"
-msgstr "밀을 베고 있음"
+msgstr "밀을 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 msgctxt "barbarians_building"
@@ -3005,7 +3003,7 @@ msgstr "갈대 심고 있음"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:72
 msgid "harvesting reed"
-msgstr "갈대 걷고 있음"
+msgstr "갈대를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:67
 msgctxt "barbarians_building"
@@ -3487,7 +3485,7 @@ msgstr "포도 덩굴 씨뿌리고 있음"
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:62
 msgid "harvesting grapes"
-msgstr "포도 거두고 있음"
+msgstr "포도를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
 msgctxt "empire_building"
@@ -3848,7 +3846,7 @@ msgstr "보리 심고 있음"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
 msgid "harvesting barley"
-msgstr "보리 거두고 있음"
+msgstr "보리를 수확하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
 msgctxt "frisians_building"

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-07 02:38+0000\n"
-"PO-Revision-Date: 2021-06-30 10:19+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"PO-Revision-Date: 2021-07-11 06:48+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -268,8 +268,8 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -283,12 +283,12 @@ msgstr "주 메뉴"
 msgid "Tools"
 msgstr "도구"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -478,10 +478,10 @@ msgstr "정보"
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -6168,7 +6168,7 @@ msgstr "시공 후 적용할 물품 설정"
 
 #: ../../src/wui/constructionsitewindow.cc:367
 msgid "Worker settings to apply after construction"
-msgstr "시공 후 적용할 작업자 설정"
+msgstr "시공 후 적용할 일꾼 설정"
 
 #: ../../src/wui/constructionsitewindow.cc:375
 msgid "Start an expedition from this port after completion"
@@ -6273,7 +6273,7 @@ msgstr "행동"
 
 #: ../../src/wui/fieldaction.cc:395
 msgid "Marked for removal by a worker – click to unmark"
-msgstr "작업자가 제거하도록 표시했습니다 – 표시를 해제하려면 클릭하십시오"
+msgstr "일꾼이 제거하도록 표시했습니다 – 표시를 해제하려면 클릭하십시오"
 
 #: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
 msgid "Immovable Actions"
@@ -6281,7 +6281,7 @@ msgstr "부동산 행동"
 
 #: ../../src/wui/fieldaction.cc:402
 msgid "Mark this immovable for timely removal by a suited worker"
-msgstr "적합한 작업자가 적시에 제거할 수 있도록 이 부동 상태를 표시하십시오"
+msgstr "적합한 일꾼이 제때에 제거할 수 있도록 이 부동 상태를 표시하십시오"
 
 #: ../../src/wui/fieldaction.cc:423 ../../src/wui/fieldaction.cc:529
 msgid "Build road"
@@ -6418,8 +6418,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
