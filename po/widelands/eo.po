@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-07 02:38+0000\n"
-"PO-Revision-Date: 2021-07-10 02:35+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"PO-Revision-Date: 2021-07-10 02:53+0000\n"
 "Last-Translator: Peter Garami <petro.garami@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -265,8 +265,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -280,12 +280,12 @@ msgstr "Ĉefa menuo"
 msgid "Tools"
 msgstr "Iloj"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -475,10 +475,10 @@ msgstr "Informo"
 msgid "Click on a field to show information about it"
 msgstr "Klaku sur la kampon por montri informon pri ĝi"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -1105,7 +1105,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "La mapo estis generita. Pli bone certigu, ke la komencaj pozicioj de la ludantoj ne malbonas; ekz. komenca pozicio ne estu sur insuleto aŭ ĉe la pinto de monto."
+msgstr "La mapo estis generita. Certigu, ke la komencaj pozicioj de la ludantoj ne estas malbonaj; ekz. komenca pozicio ne estu sur insuleto aŭ sur la pinto de monto."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:609
 msgid "The Widelands Random Map Generator"
@@ -1202,7 +1202,7 @@ msgstr ""
 #. recommended number of players
 #: ../../src/editor/ui_menus/player_menu.cc:54
 msgid "Too Many Players"
-msgstr ""
+msgstr "Tro multe da ludantoj"
 
 #. * TRANSLATORS: Info text in editor player menu when a player has selected
 #. more than the
@@ -1382,7 +1382,7 @@ msgstr "Nuna amplekso: %u"
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Ŝargante ludon: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:72 ../../src/game_io/game_saver.cc:59
 #: ../../src/map_io/map_saver.cc:103
@@ -1418,7 +1418,7 @@ msgstr ""
 #: ../../src/game_io/game_saver.cc:52
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Konservante ludon: %1$s (%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:54
 msgid "Autosaving game…"
@@ -1484,7 +1484,7 @@ msgstr ""
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
@@ -1565,11 +1565,11 @@ msgstr "malŝaltita"
 
 #: ../../src/logic/addons.cc:48
 msgid "Tribes"
-msgstr ""
+msgstr "Gentoj"
 
 #: ../../src/logic/addons.cc:50
 msgid "World"
-msgstr ""
+msgstr "Mondo"
 
 #: ../../src/logic/addons.cc:53
 msgid "Script"
@@ -1582,7 +1582,7 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:56 ../../src/ui_fsmenu/campaigndetails.cc:49
 msgid "Campaign"
-msgstr ""
+msgstr "Kampanjo"
 
 #: ../../src/logic/addons.cc:60
 msgid "Win Condition"
@@ -1815,7 +1815,7 @@ msgstr "%u%% malkonstruita"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:250
 msgctxt "building"
 msgid "Lost!"
-msgstr "Malvenkita!"
+msgstr "Vi malvenkis!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:251
 msgid "Militarysite lost!"
@@ -2171,11 +2171,11 @@ msgstr "Logika eraro"
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:172
 msgid "Loading %1%: %2% (%3%/%4%)"
-msgstr ""
+msgstr "Ŝargante %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:177
 msgid "Ships"
-msgstr ""
+msgstr "Ŝipoj"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
@@ -2205,7 +2205,7 @@ msgstr "Laboristoj"
 #: ../../src/wui/general_statistics_menu.cc:147
 #: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:195
 msgid "Buildings"
-msgstr ""
+msgstr "Konstruaĵoj"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
@@ -2297,12 +2297,12 @@ msgstr "neatingebla"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
-msgstr "ekspluatebla"
+msgstr "minebla"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:96
 msgid "unwalkable"
-msgstr "nesurkurebla"
+msgstr "neirebla"
 
 #: ../../src/logic/mutable_addon.cc:211
 #, c-format
@@ -2347,12 +2347,12 @@ msgstr ""
 
 #: ../../src/logic/save_handler.cc:131
 msgid "Saving game…"
-msgstr ""
+msgstr "Konservante ludon..."
 
 #: ../../src/logic/save_handler.cc:178
 #: ../../src/wui/game_main_menu_save_game.cc:322
 msgid "Saving failed!"
-msgstr "Konservado fiaskis!"
+msgstr "Konservado ne sukcesis!"
 
 #: ../../src/logic/save_handler.cc:192
 #: ../../src/wui/game_main_menu_save_game.cc:305
@@ -6446,8 +6446,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"

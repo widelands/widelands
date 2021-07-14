@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-04 02:37+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-07-11 23:41+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,11 +31,11 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "Usage:"
-msgstr ""
+msgstr "Használat:"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <beállítás0>=<érték0> ... <beállításN>=<értékN>"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid "widelands <save.wgf>/<replay.wrpl>"
@@ -46,7 +46,7 @@ msgstr "widelands <mentés.wgf>/<visszajátszás.wrpl>"
 #: ../../src/wlapplication_messages.cc:58
 #: ../../src/wlapplication_messages.cc:187
 msgid "DIRNAME"
-msgstr ""
+msgstr "KÖNYVTÁR"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "Options:"
@@ -54,33 +54,33 @@ msgstr "Beállítások:"
 
 #: ../../src/wlapplication_messages.cc:53
 msgid "Use specified directory for the widelands data files"
-msgstr ""
+msgstr "A megadott könyvtár használata a Widelands adatfájlok betöltéséhez"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid ""
 "Use specified directory for widelands config files, savegames and replays. "
 "Default is "
-msgstr ""
+msgstr "A megadott könyvtár használata a Widelands beállító fájlok, mentett játékok és visszajátszások tárolására. Alapértelmezett: "
 
 #: ../../src/wlapplication_messages.cc:58
 msgid "Use specified directory for the widelands locale files"
-msgstr ""
+msgstr "A megadott könyvtár használata a Widelands nyelvi fájlokhoz"
 
 #: ../../src/wlapplication_messages.cc:63
 msgid "The locale to use"
-msgstr ""
+msgstr "Használandó nyelv beállítása"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
 #: ../../src/wlapplication_messages.cc:63
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|hu_HU|...]"
 
 #: ../../src/wlapplication_messages.cc:65
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version"
-msgstr ""
+msgstr "A használt adatkönyvtár és a Widelands verzió kompatibilitás-vizsgálatának kihagyása"
 
 #: ../../src/wlapplication_messages.cc:68
 #: ../../src/wlapplication_messages.cc:72
@@ -88,65 +88,65 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:75
 #: ../../src/wlapplication_messages.cc:76
 msgid "FILENAME"
-msgstr ""
+msgstr "FÁJLNÉV"
 
 #: ../../src/wlapplication_messages.cc:69
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
-msgstr ""
+msgstr "Új egyszemélyes játék közvetlen indítása a megadott fájl alapján. Minta: `data/templates/new_game_template`"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Directly starts the map `FILENAME` as scenario map"
-msgstr ""
+msgstr "A `FÁJLNÉV` térkép közvetlen indítása küldetésként"
 
 #: ../../src/wlapplication_messages.cc:74
 msgid "Directly loads the savegame `FILENAME`"
-msgstr ""
+msgstr "Játék indítása a `FÁJLNÉV` mentett állás közvetlen betöltésével"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Directly loads the replay `FILENAME`"
-msgstr ""
+msgstr "A `FÁJLNÉV` visszajátszás közvetlen indítása"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
-msgstr ""
+msgstr "A megadott Lua parancsfájl futtatása betöltés után. Csak a --scenario, --loadgame vagy --editor kapcsolókkal együtt használható."
 
 #: ../../src/wlapplication_messages.cc:81
 msgid ""
 "Directly starts the Widelands editor. You can add a =FILENAME to directly "
 "load the map `FILENAME` in editor"
-msgstr ""
+msgstr "A Widelands térképszerkesztő közvetlen indítása. Megadható az indításkor betöltendő térkép is =FÁJLNÉV hozzáfűzésével"
 
 #: ../../src/wlapplication_messages.cc:85
 msgid "Starts the game with sound disabled"
-msgstr ""
+msgstr "Hang kikapcsolása"
 
 #: ../../src/wlapplication_messages.cc:86
 msgid "Force Widelands to crash when a Lua error occurs"
-msgstr ""
+msgstr "A Widelands összeomlásra kényszerítése Lua hiba esetén"
 
 #: ../../src/wlapplication_messages.cc:88
 msgid ""
 "Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic"
-msgstr ""
+msgstr "Mesterséges intelligencia oktatómód bekapcsolása. Részletes leírás: https://www.widelands.org/wiki/Ai%20Training/"
 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr ""
+msgstr "A többjátékosos játékokban a játéksebesség automatikus módosítása a képfrissítési sebesség függvényében. Hasznos lehet az --ai_training kapcsolóval együtt."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid "Game options:"
-msgstr ""
+msgstr "Játék beállítások:"
 
 #: ../../src/wlapplication_messages.cc:96
 msgid "Note: New values will be written to config file"
-msgstr ""
+msgstr "Megjegyzés: Az új érték el lesz mentve a beállító fájlba"
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:99
@@ -156,25 +156,25 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:192
 #: ../../src/wlapplication_messages.cc:201
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
 msgid "Automatically save each `n` minutes"
-msgstr ""
+msgstr "Automatikus mentés `n` percenként"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:104
 msgid "Use `n` files for rolling autosaves"
-msgstr ""
+msgstr "Megőrzendő automatikus mentések számának beállítása"
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Do not save files as binary zip archives"
-msgstr ""
+msgstr "A mentések zip formátumba való tömörítésének kikapcsolása"
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Show filenames in replay screen"
-msgstr ""
+msgstr "Fájlnevek megjelenítése visszajátszás kiválasztásakor (igen/nem)"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -189,7 +189,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:180
 #: ../../src/wlapplication_messages.cc:190
 msgid "[true*|false]"
-msgstr ""
+msgstr "[true*|false]"
 
 #: ../../src/wlapplication_messages.cc:109
 msgid ""
@@ -199,7 +199,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:111
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Útépítés megkezdése zászló elhelyezése után"
 
 #: ../../src/wlapplication_messages.cc:116
 msgid "Bitmask of display flags to set for new games"
@@ -216,11 +216,11 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:158
 #: ../../src/wlapplication_messages.cc:161
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:129
 msgid "Scroll when the mouse cursor is near the screen edge"
-msgstr ""
+msgstr "Térkép mozgatása amikor az egérmutató a kép szélén van"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -240,7 +240,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:197
 #: ../../src/wlapplication_messages.cc:206
 msgid "[true|false*]"
-msgstr ""
+msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Invert click-and-drag map movement direction"
@@ -264,7 +264,7 @@ msgstr "Egy figyelőablakos mód"
 
 #: ../../src/wlapplication_messages.cc:138
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Játék közbeni csevegés átlátszó háttérrel mutatása"
 
 #: ../../src/wlapplication_messages.cc:139
 msgid "Bitmask to set the toolbar location and mode"
@@ -272,7 +272,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:141
 msgid "Networking:"
-msgstr ""
+msgstr "Hálózat:"
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in multiplayer
@@ -280,37 +280,37 @@ msgstr ""
 #. players.
 #: ../../src/wlapplication_messages.cc:149
 msgid "Create syncstream dump files to help debug network games"
-msgstr ""
+msgstr "Szinkronizációs naplófájlok létrehozása a hálózati játékok hibakeresésének megkönnyítésére"
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Connect to a different metaserver for internet gaming"
-msgstr ""
+msgstr "Az internetes játékokhoz használandó metakiszolgáló beállítása"
 
 #: ../../src/wlapplication_messages.cc:150
 #: ../../src/wlapplication_messages.cc:162
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:154
 msgid "Port number `n` of the metaserver for internet gaming"
-msgstr ""
+msgstr "Az internetes játékokhoz használt metakiszolgáló portjának beállítása"
 
 #: ../../src/wlapplication_messages.cc:155
 msgid "The name of the last hosted game"
-msgstr ""
+msgstr "Az utolsó létrehozott hálózati játék neve"
 
 #: ../../src/wlapplication_messages.cc:156
 msgid "The nickname used for LAN and online games"
-msgstr ""
+msgstr "A helyi és internetes hálózati játékokban használt becenév"
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Name of map author"
-msgstr ""
+msgstr "A térkép szerzője"
 
 #: ../../src/wlapplication_messages.cc:158
 msgid "The last host connected to"
-msgstr ""
+msgstr "Az utoljára használt gazdagép"
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "Whether the used metaserver login is for a registered user"
@@ -323,7 +323,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:163
 msgid ""
 "Connect to a different github repository and branch from the add-ons manager"
-msgstr ""
+msgstr "A bővítménykezelő által használandó github tároló („repository”) és ág („branch”) beállítása"
 
 #: ../../src/wlapplication_messages.cc:165
 msgid "Graphic options:"
@@ -331,31 +331,31 @@ msgstr "Grafikai kapcsolók:"
 
 #: ../../src/wlapplication_messages.cc:166
 msgid "Whether to use the whole display for the game screen"
-msgstr ""
+msgstr "Teljes képernyős üzemmód használata (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:167
 msgid "Whether to start the game in a maximized window"
-msgstr ""
+msgstr "Játék indítása kinagyított ablakban (igen/nem)"
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:171
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../src/wlapplication_messages.cc:173
 msgid "Width `x` of the window in pixel"
-msgstr ""
+msgstr "A programablak szélessége képpontokban"
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../src/wlapplication_messages.cc:176
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:178
 msgid "Height `y` of the window in pixel"
-msgstr ""
+msgstr "A programablak magassága képpontokban"
 
 #: ../../src/wlapplication_messages.cc:179
 msgid "Whether to grab the mouse input"
@@ -372,7 +372,7 @@ msgstr ""
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:186
 msgid "Maximal optical framerate `n` of the game"
-msgstr ""
+msgstr "A játék megengedett legmagasabb képfrissítési sebessége"
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "The path to the active UI theme relative to the homedir"
@@ -384,70 +384,70 @@ msgstr "Kapcsolók a belső ablakkezelőhöz:"
 
 #: ../../src/wlapplication_messages.cc:191
 msgid "Should automatic map movements be animated"
-msgstr ""
+msgstr "Automatikus térképmozgások animálása (igen/nem)"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:194
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
-msgstr ""
+msgstr "Ablakok képernyő széléhez igazítása a megadott távolságon belül"
 
 #: ../../src/wlapplication_messages.cc:198
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
-msgstr ""
+msgstr "Ablakok keretének elrejtése, ahol hozzáérnek a képernyő széléhez (igen/nem)"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:203
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
-msgstr ""
+msgstr "Ablakok tálcához igazítása a megadott távolságon belül"
 
 #: ../../src/wlapplication_messages.cc:207
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
-msgstr ""
+msgstr "Ablakok tálcához igazítása csak átfedés esetén (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "Bővebb hibakeresési üzenetek"
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Others:"
-msgstr ""
+msgstr "Egyéb:"
 
 #: ../../src/wlapplication_messages.cc:211
 msgid "Only print version and exit"
-msgstr ""
+msgstr "Csak a verzió kiírása"
 
 #: ../../src/wlapplication_messages.cc:212
 msgid "Show this help"
-msgstr ""
+msgstr "Ennek a súgónak a megjelenítése"
 
 #: ../../src/wlapplication_messages.cc:213
 msgid "Show this help with all available config options"
-msgstr ""
+msgstr "Súgó megjelenítése minden elérhető beállítással"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "<save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "<mentés.wgf>/<visszajátszás.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:215
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay"
-msgstr ""
+msgstr "A megadott mentés vagy visszajátszás közvetlen betöltése. A .wgf/.wrpl fájltípus hozzárendeléséhez használható. Más beállításokkal együtt nem működik. Lásd még: --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:244
 #, c-format
 msgid "This is Widelands Version %s"
-msgstr ""
+msgstr "Ez a Widelans %s verziója"
 
 #: ../../src/wlapplication_messages.cc:305
 msgid ""
