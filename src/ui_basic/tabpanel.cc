@@ -169,9 +169,11 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 		uint32_t selected_idx = active();
 		const uint32_t max = tabs_.size() - 1;
 
-		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
-		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
-			// Keys 1-9 directly address the 1st through 9th item in tabpanels with less than 10 tabs
+		if ((code.mod & KMOD_CTRL) &&
+		    ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
+		     (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM)))) {
+			// Keys CTRL + 1-9 directly address the 1st through 9th item in tabpanels with less than 10
+			// tabs
 			if (max < 9) {
 				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
 					selected_idx = code.sym - SDLK_1;
@@ -208,10 +210,20 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 				break;
 
 			case SDLK_KP_7:
+				if (code.mod & KMOD_NUM) {
+					handle = false;
+					break;
+				}  // else
+				FALLS_THROUGH;
 			case SDLK_HOME:
 				selected_idx = 0;
 				break;
 			case SDLK_KP_1:
+				if (code.mod & KMOD_NUM) {
+					handle = false;
+					break;
+				}  // else
+				FALLS_THROUGH;
 			case SDLK_END:
 				selected_idx = max;
 				break;
