@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-27 05:10+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-30 10:10+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -454,9 +454,9 @@ msgstr "특정한 군인을 치우려면, 그냥 클릭하십시오. 그러면 �
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
-"Let me also describe what the numbers in the statistics string mean. This "
-"string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr "또한 통계 문자열의 숫자들이 의미하는 것에 대해 설명해드리겠습니다. 예를 들어, 이 문자열은 세 개의 숫자를 포함합니다. '1 (+5) 군인들 (+2)'."
+"Let me also describe what the numbers in the status string mean. This string"
+" can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
+msgstr "또한 통계 문자열의 숫자들이 의미하는 것에 대해 설명해드리겠습니다. 이 문자열은 세 개의 숫자를 포함합니다. 예를 들면, ‘1 (+5) 명의 군인들 (+2)’."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
