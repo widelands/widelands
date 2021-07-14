@@ -1688,18 +1688,20 @@ msgstr "búza aratása"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
 msgctxt "empire_building"
 msgid "No Fields"
-msgstr ""
+msgstr "Nincs mező"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
 msgctxt "empire_building"
 msgid "Out of Fields"
-msgstr ""
+msgstr "A mezők kifogytak"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"A földbirtokon dolgozó földművesnek nincs üres termőtalaja a magok "
+"elvetéséhez."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1813,12 +1815,12 @@ msgstr "fa kivágása"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "Nincs fa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "Out of Trees"
-msgstr ""
+msgstr "Kifogyott a fa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
@@ -1827,6 +1829,8 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Az itt dolgozó favágó nem talál fát a munkaterületén. Fontold meg a "
+"favágóház lebontását vagy megsemmisítését, vagy egy erdészház építését."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1915,14 +1919,14 @@ msgstr "Kút"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
 msgid "No Water"
-msgstr ""
+msgstr "Nincs víz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
 msgctxt "empire_building"
 msgid "Out of Water"
-msgstr ""
+msgstr "Kifogyott a víz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "A kútnál dolgozó hordár nem talál vizet a kútjában."
