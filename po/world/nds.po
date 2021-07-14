@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-23 08:06+0000\n"
-"PO-Revision-Date: 2021-06-14 15:17+0000\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 07:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1008,22 +1008,22 @@ msgstr "Flaken 1"
 msgid "Ice Floes 2"
 msgstr "Flaken 2"
 
-#: ../../data/world/terrains/winter/taiga/init.lua:5
-msgid "Taiga"
-msgstr "Fröstsneei"
-
-#: ../../data/world/terrains/winter/tundra/init.lua:5
-msgid "Tundra 1"
+#: ../../data/world/terrains/winter/taiga1/init.lua:5
+msgid "Taiga 1"
 msgstr "Fröstklei 1"
 
-#: ../../data/world/terrains/winter/tundra2/init.lua:5
-msgid "Tundra 2"
+#: ../../data/world/terrains/winter/taiga2/init.lua:5
+msgid "Taiga 2"
 msgstr "Fröstklei 2"
 
-#: ../../data/world/terrains/winter/tundra3/init.lua:5
-msgid "Tundra 3"
+#: ../../data/world/terrains/winter/taiga3/init.lua:5
+msgid "Taiga 3"
 msgstr "Fröstklei 3"
+
+#: ../../data/world/terrains/winter/tundra/init.lua:5
+msgid "Tundra"
+msgstr "Iessneei"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"
-msgstr "Iessneei"
+msgstr "Fröstsneei"
