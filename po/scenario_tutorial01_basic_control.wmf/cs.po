@@ -6,15 +6,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Matej Svrcek <mmatej@yahoo.com>, 2015
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-29 11:09+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"PO-Revision-Date: 2021-06-28 18:33+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,7 +156,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr "A je to. Te ti ukážu, jak postavit chatu dřevorubce a jak ji napojit na cestu. Hned vedle těch stromů je krásné místečko pro dřevorubce. V následujícím panelu ti vysvětlím všechny kroky a pak ti je předvedu."
+msgstr "A je to. Teď ti ukážu, jak postavit chatu dřevorubce a jak ji napojit na cestu. Hned vedle těch stromů je krásné místečko pro dřevorubce. Vysvětlím ti to krok po kroku a pak ti je předvedu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -200,7 +201,7 @@ msgstr "To ještě není všechno. Stále je potřeba napojit chatu dřevorubce 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:212
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr "Čekání než se postaví dřevorubec"
+msgstr "Čekání na dostavení dřevorubce"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:137
 msgid ""
@@ -668,8 +669,8 @@ msgstr "Když už tu je tolik skal, můžeš zvážit stavbu dalšího lomu. To 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
-msgid "Census and Statistics"
-msgstr "Popisy budov a statistiky"
+msgid "Census and Status"
+msgstr "Popisy budov a stav"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -692,16 +693,16 @@ msgstr "Dovol mi, abych ti zapnul popisy budov."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
-msgid "Show the building statistics"
-msgstr "Zobraz statistiky budov"
+msgid "Show the building status"
+msgstr "Zobrazit stav budovy"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
 msgid ""
-"In order to show or hide the building statistics labels, you can select the "
-"‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
-"the ‘%s’ key on the keyboard."
-msgstr "Pro zobrazení a skrytí popisků se statistikou budov můžeš zvolit „Zobrazit/Skrýt statistiky budov“ v nabídce „Zobrazit / Skrýt“ ve spodní části obrazovky nebo můžeš stisknout „%s“ pro přepnutí pomocí klávesnice."
+"In order to show or hide the building status labels, you can select the "
+"‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
+"‘%s’ key on the keyboard."
+msgstr "Pro zobrazení a skrytí popisků se stavem budov můžeš zvolit „Zobrazit/Skrýt stav“ v nabídce „Zobrazit / Skrýt“ ve spodní části obrazovky nebo můžeš stisknout „%s“ pro přepnutí pomocí klávesnice."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -711,10 +712,10 @@ msgstr "A teď, nebylo by praktické, kdybychom mohli zkontrolovat průběh stav
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
-"In addition to the buildings’ census, you can also activate statistics "
-"labels on them. This will display information about the productivity of "
-"buildings or the progress of construction sites."
-msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich statistik. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
+"In addition to the buildings’ census, you can also activate status labels on"
+" them. This will display information about the productivity of buildings or "
+"the progress of construction sites."
+msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich stav. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -803,7 +804,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr "Všechna okna ve Widelands, s výjimkou příběhových oken s tlačítkem „OK“, mohou být zavřena tak, že se na ně klikne pravým tlačítkem. Zobrazení některých oken lze také přepínat pomocí tlačítek nabídky ve spodní části obrazovky."
+msgstr "Všechna okna ve Widelands (s výjimkou příběhových oken s tlačítkem „OK“) mohou být zavřena tak, že se na ně klikne pravým tlačítkem. Zobrazení některých oken lze také přepínat pomocí tlačítek nabídky ve spodní části obrazovky."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -816,7 +817,7 @@ msgstr "Zavírání oken"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr "Výborně. Teď se můžeme pokročit dál."
+msgstr "Výborně. Teď se můžeme soustředit na další úkoly."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -875,7 +876,7 @@ msgstr "Rozšiř své území"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
 msgid "Make your Territory Grow"
-msgstr "Zvětši své území"
+msgstr "Rozšiř své území"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
@@ -929,7 +930,7 @@ msgstr "Jakmile je vojenská budova obsazena posádkou, rozšíří tvé území
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:583
 msgid "Military Site Occupied"
-msgstr "Vojenská základna obsazena"
+msgstr "Vojenská budova obsazena"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Your territory has just grown!"

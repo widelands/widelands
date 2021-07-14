@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-26 02:44+0000\n"
+"POT-Creation-Date: 2021-07-07 02:38+0000\n"
 "PO-Revision-Date: 2021-05-11 21:14+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -1302,7 +1302,6 @@ msgstr "Cuisinier de racines de Manioc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1738,7 +1737,6 @@ msgstr "construit une pelle"
 msgid "making a felling ax"
 msgstr "construit une cognée"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -4204,9 +4202,9 @@ msgstr "Clairière d'entraînement"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:80
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:74
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:92
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:84
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:46
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
@@ -4384,29 +4382,29 @@ msgid "Battle Arena"
 msgstr "Arène de combat"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:82
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:94
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "améliore un soldat en esquive du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:97
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "améliore un soldat en esquive du niveau 1 au niveau 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:117
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:216
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:129
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:225
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
 msgstr "Pas de soldat à entraîner !"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:119
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:218
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:131
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:227
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
 msgstr "Aucun soldat trouvé pour ce niveau d’entraînement !"
@@ -4418,49 +4416,49 @@ msgid "Training Camp"
 msgstr "Camp d'entraînement"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:100
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "améliore un soldat en attaque du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:114
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "améliore un soldat en attaque du niveau 1 au niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:128
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:137
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "améliore un soldat en attaque du niveau 2 au niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:142
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:151
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "améliore un soldat en attaque du niveau 3 au niveau 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "améliore un soldat en attaque du niveau 4 au niveau 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:170
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "améliore un soldat en santé du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:183
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:192
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "améliore un soldat en santé du niveau 1 au niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:197
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "améliore un soldat en santé du niveau 2 au niveau 3"
@@ -4472,14 +4470,14 @@ msgid "Arena"
 msgstr "Arène"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:92
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:98
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:54
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "améliore un soldat en esquive du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:116
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
 msgctxt "empire_building"
@@ -4488,7 +4486,7 @@ msgstr "Pas de soldat à entraîner !"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:112
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:118
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
 msgctxt "empire_building"
@@ -5470,6 +5468,7 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldat"
 msgstr[1] "%1%(+%2%) soldats"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
