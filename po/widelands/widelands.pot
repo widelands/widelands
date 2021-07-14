@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"POT-Creation-Date: 2021-07-13 02:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -243,8 +243,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -258,10 +258,10 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -451,9 +451,9 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
+#. * shown
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
 #: ../../src/wui/interactive_gamebase.cc:225
@@ -618,8 +618,8 @@ msgstr ""
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1320,8 +1320,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1334,9 +1334,8 @@ msgstr ""
 msgid "Tool Size"
 msgstr ""
 
-#: ../../src/editor/ui_menus/toolsize_menu.cc:85
-#, c-format
-msgid "Current Size: %u"
+#: ../../src/editor/ui_menus/toolsize_menu.cc:46
+msgid "Current Size:"
 msgstr ""
 
 #: ../../src/game_io/game_loader.cc:70
@@ -5956,9 +5955,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6357,8 +6356,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6904,8 +6903,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""

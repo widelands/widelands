@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-04 23:17+0000\n"
+"PO-Revision-Date: 2021-07-11 22:44+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -603,7 +603,7 @@ msgstr "Jégháborúk"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr "Az ősz télbe váltott. Néhány dolog megfagyott, de a háború nem."
+msgstr "Az ősz télbe váltott. Sok minden befagyott, de a háború nem."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 msgid "Start positions are clockwise"
