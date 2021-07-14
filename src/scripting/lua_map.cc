@@ -5461,7 +5461,8 @@ int LuaBuilding::enhance(lua_State* L) {
 	if (enhancement == Widelands::INVALID_INDEX) {
 		return 0;
 	}
-	bld->get_owner()->enhance_building(bld, enhancement, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
+	bld->get_owner()->enhance_building(
+	   bld, enhancement, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
 }
 

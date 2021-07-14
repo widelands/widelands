@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-07 02:38+0000\n"
-"PO-Revision-Date: 2021-07-06 23:24+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"PO-Revision-Date: 2021-07-11 15:17+0000\n"
 "Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -269,8 +269,8 @@ msgstr "nov."
 msgid "Dec"
 msgstr "dec."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -284,12 +284,12 @@ msgstr "Hoofdmenu"
 msgid "Tools"
 msgstr "Gereedschap"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Informatie"
 msgid "Click on a field to show information about it"
 msgstr "Klik op een veld om er informatie over te tonen"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -4310,7 +4310,7 @@ msgstr "Alle geslecteerde startposities negeren de startposities van de kaart"
 
 #: ../../src/ui_fsmenu/launch_game.cc:228
 msgid "The starting positions are set by the scenario"
-msgstr "De start posities zijn door het verhaal ingesteld"
+msgstr "De start posities zijn door het scenario ingesteld"
 
 #: ../../src/ui_fsmenu/launch_game.cc:230
 msgid "The starting positions are set by the saved game"
@@ -4726,7 +4726,7 @@ msgstr "Kaart Details"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:100
 msgid "Scenario Details"
-msgstr "Verhaal Details"
+msgstr "Scenario Details"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:122
 #, c-format
@@ -5149,7 +5149,7 @@ msgstr "De willekeurige kaart ontwerper kon geen bruikbare kaart maken. Dit gebe
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
-msgstr "Kies Verhaallijn"
+msgstr "Kies Scenario"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
@@ -5469,7 +5469,7 @@ msgstr "Wissel Gebouwnamen"
 
 #: ../../src/wlapplication_options.cc:413
 msgid "Toggle Status Labels"
-msgstr ""
+msgstr "Schakel Status aan/uit"
 
 #: ../../src/wlapplication_options.cc:418
 msgid "Toggle Soldier Levels"
@@ -5587,7 +5587,7 @@ msgstr "Berichten: Toon Militaire Berichten"
 
 #: ../../src/wlapplication_options.cc:557
 msgid "Messages: Show Scenario Messages"
-msgstr "Berichten: Toon Verhaal Berichten"
+msgstr "Berichten: Toon Scenario Berichten"
 
 #: ../../src/wlapplication_options.cc:562
 msgid "Seafaring: Go to Ship"
@@ -5712,17 +5712,17 @@ msgstr "Pijltjestoets Beneden"
 #: ../../src/wlapplication_options.cc:785
 msgctxt "hotkey"
 msgid "Insert"
-msgstr ""
+msgstr "Invoegen"
 
 #: ../../src/wlapplication_options.cc:787
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 #: ../../src/wlapplication_options.cc:789
 msgctxt "hotkey"
 msgid "Backspace"
-msgstr ""
+msgstr "Terugtoets"
 
 #: ../../src/wlapplication_options.cc:791
 msgctxt "hotkey"
@@ -6450,8 +6450,8 @@ msgstr "Een AI uitkiezen om de speler te vervangen en voortspelen"
 msgid "AI for the disconnected player"
 msgstr "AI ter vervanging van de speler"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6897,11 +6897,11 @@ msgstr "Waterweg lengte: %1$u/%2$u"
 
 #: ../../src/wui/interactive_base.cc:1438
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "Schermafbeelding opslaan is mislukt!"
 
 #: ../../src/wui/interactive_base.cc:1442
 msgid "Screenshot saved"
-msgstr ""
+msgstr "Schermafbeelding opgeslagen"
 
 #: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
@@ -6933,11 +6933,11 @@ msgstr "Pas geluids- en muziekinstellingen aan"
 #: ../../src/wui/interactive_gamebase.cc:161
 #: ../../src/wui/interactive_gamebase.cc:189
 msgid "Restart Scenario"
-msgstr ""
+msgstr "Herstart Scenario"
 
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "Weet je zeker dat je dit scenario opnieuw wilt beginnen?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
@@ -6949,7 +6949,7 @@ msgstr "Verberg gebouwnamen"
 #. * building status labels are shown
 #: ../../src/wui/interactive_gamebase.cc:240
 msgid "Hide Status"
-msgstr ""
+msgstr "Verberg Status"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
@@ -7799,15 +7799,15 @@ msgstr "Werkers in magazijnen"
 
 #: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
-msgstr ""
+msgstr "Volgende Missie"
 
 #: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
-msgstr ""
+msgstr "Begin nu met de volgende missie"
 
 #: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
-msgstr ""
+msgstr "Ga door met het spelen van deze missie"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:85

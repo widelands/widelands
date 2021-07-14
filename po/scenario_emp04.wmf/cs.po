@@ -1715,18 +1715,19 @@ msgstr "sklízení pšenice"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
 msgctxt "empire_building"
 msgid "No Fields"
-msgstr ""
+msgstr "Žádná pole"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
 msgctxt "empire_building"
 msgid "Out of Fields"
-msgstr ""
+msgstr "Došla pole"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Sedlák pracující na tomto obilném poli nemá žádnou volnou půdu na osev."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1840,12 +1841,12 @@ msgstr "kácení stromů"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "Žádné stromy"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "Out of Trees"
-msgstr ""
+msgstr "Došly stromy"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
@@ -1854,6 +1855,8 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Dřevorubec pracující v tomto domku dřevorubce nemůže ve svém okolí najít "
+"žádné stromy. Zvaž jeho rozebrání, zničení nebo postavení domku lesníka."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1942,14 +1945,14 @@ msgstr "Studna"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
 msgid "No Water"
-msgstr ""
+msgstr "Žádná voda"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
 msgctxt "empire_building"
 msgid "Out of Water"
-msgstr ""
+msgstr "Došla voda"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "Nosič pracující u této studny nemá ve studni žádnou vodu."
