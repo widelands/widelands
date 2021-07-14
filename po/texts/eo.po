@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-07-10 00:05+0000\n"
+"PO-Revision-Date: 2021-07-10 03:10+0000\n"
 "Last-Translator: Peter Garami <petro.garami@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -268,7 +268,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr "Ĉefpaĝo"
+msgstr "Retpaĝo"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"

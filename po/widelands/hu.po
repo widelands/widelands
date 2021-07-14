@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-07 02:38+0000\n"
-"PO-Revision-Date: 2021-07-07 18:30+0000\n"
+"POT-Creation-Date: 2021-07-10 02:46+0000\n"
+"PO-Revision-Date: 2021-07-12 00:09+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -271,8 +271,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -286,12 +286,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -481,10 +481,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -2329,7 +2329,7 @@ msgstr "%d. hajó"
 
 #: ../../src/logic/replay.cc:87
 msgid "Desync"
-msgstr ""
+msgstr "Szinkronizációs hiba"
 
 #: ../../src/logic/replay.cc:88
 #, c-format
@@ -2339,7 +2339,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "A visszajátszás kiesett a szinkronból, ezért le lett állítva.\nValószínűleg a Widelands eltérő verziójával készült visszajátszást nézel, ami nem támogatott.\n\nA Widelands verziója: %1$s (%2$s). Ha biztos vagy benne, hogy a visszajátszás ugyanezzel a verzióval készült, kérjük jelentsd a hibát.\nKérjük csatold a hibabejelentéshez a standard kimeneten található kapcsolódó üzeneteket. (Windowson az stdout.txt-ben találod.)"
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -3138,11 +3138,11 @@ msgstr "Nincs kiválasztva"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
-msgstr ""
+msgstr "Kérjük várj…"
 
 #: ../../src/ui_basic/panel.cc:442
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Játék befejezése – kérjük várj…"
 
 #: ../../src/ui_basic/progresswindow.cc:75
 msgid "Loading…"
@@ -3474,7 +3474,7 @@ msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Az egyik aktív bővítmény hibás. Nem indítható játék a jelenlegi beállításokkal.\nA hibaüzenet:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:952
 #, c-format
@@ -5058,7 +5058,7 @@ msgstr "Térkép mozgatása amikor az egérmutató a kép szélén van"
 
 #: ../../src/ui_fsmenu/options.cc:294
 msgid "Invert click-and-drag map movement direction"
-msgstr ""
+msgstr "Jobb egérgombos térképmozgatás irányának megfordítása"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Teach me how to play"
@@ -5649,77 +5649,77 @@ msgstr "Szóköz"
 #: ../../src/wlapplication_options.cc:759
 msgctxt "hotkey"
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 #: ../../src/wlapplication_options.cc:761
 msgctxt "hotkey"
 msgid "Escape"
-msgstr ""
+msgstr "Esc"
 
 #: ../../src/wlapplication_options.cc:763
 msgctxt "hotkey"
 msgid "Tab"
-msgstr ""
+msgstr "Tab"
 
 #: ../../src/wlapplication_options.cc:765
 msgctxt "hotkey"
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: ../../src/wlapplication_options.cc:767
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../src/wlapplication_options.cc:769
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../src/wlapplication_options.cc:771
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../src/wlapplication_options.cc:773
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: ../../src/wlapplication_options.cc:775
 msgctxt "hotkey"
 msgid "End"
-msgstr ""
+msgstr "End"
 
 #: ../../src/wlapplication_options.cc:777
 msgctxt "hotkey"
 msgid "Left Arrow Key"
-msgstr ""
+msgstr "Kurzor balra"
 
 #: ../../src/wlapplication_options.cc:779
 msgctxt "hotkey"
 msgid "Right Arrow Key"
-msgstr ""
+msgstr "Kurzor jobbra"
 
 #: ../../src/wlapplication_options.cc:781
 msgctxt "hotkey"
 msgid "Up Arrow Key"
-msgstr ""
+msgstr "Kurzor fel"
 
 #: ../../src/wlapplication_options.cc:783
 msgctxt "hotkey"
 msgid "Down Arrow Key"
-msgstr ""
+msgstr "Kurzor le"
 
 #: ../../src/wlapplication_options.cc:785
 msgctxt "hotkey"
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 #: ../../src/wlapplication_options.cc:787
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ../../src/wlapplication_options.cc:789
 msgctxt "hotkey"
@@ -5734,12 +5734,12 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:793
 msgctxt "hotkey"
 msgid "Numpad Lock"
-msgstr ""
+msgstr "NumLock"
 
 #: ../../src/wlapplication_options.cc:795
 msgctxt "hotkey"
 msgid "Scroll Lock"
-msgstr ""
+msgstr "Scroll Lock"
 
 #: ../../src/wlapplication_options.cc:797
 msgctxt "hotkey"
@@ -6452,8 +6452,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6899,11 +6899,11 @@ msgstr "Vízi út hossza: %1$u/%2$u"
 
 #: ../../src/wui/interactive_base.cc:1438
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "Nem sikerült elmenteni a képernyőképet!"
 
 #: ../../src/wui/interactive_base.cc:1442
 msgid "Screenshot saved"
-msgstr ""
+msgstr "Képernyőkép elmentve"
 
 #: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
@@ -6935,11 +6935,11 @@ msgstr "Hanghatások és zenebeállítások megadása"
 #: ../../src/wui/interactive_gamebase.cc:161
 #: ../../src/wui/interactive_gamebase.cc:189
 msgid "Restart Scenario"
-msgstr ""
+msgstr "Küldetés újraindítása"
 
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "Valóban újra szeretnéd indítani ezt a küldetést?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
@@ -7801,15 +7801,15 @@ msgstr "Munkások a raktárakban"
 
 #: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
-msgstr ""
+msgstr "Következő küldetés"
 
 #: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
-msgstr ""
+msgstr "A következő küldetés elindítása"
 
 #: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
-msgstr ""
+msgstr "Játék folytatása a jelenlegi küldetéssel"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:85

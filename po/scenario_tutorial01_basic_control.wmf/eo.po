@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
+# Peter Garami <petro.garami@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-07-10 03:06+0000\n"
+"Last-Translator: Peter Garami <petro.garami@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,36 +43,36 @@ msgstr "Bonvenon al Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands estas malrapida kunstruada stertegia ludo, kies fokuso estas en konstruado ol detruo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Vi estos gvidata per taskoj en tiu ĉi instrua misio."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Taskoj kaj kiel trakti ilin"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Trakti la 'Taskoj' fenestron"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Vi povas malfermi kaj fermi la 'Taskoj\" fenestron per klako sur la 'Taskoj' butonon sur la ilobreto en la suba parto de la ekrano."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Kiel aliajn fenestrojn, vi povas ĝin fermi per dekstra klako sur ĝi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Se  vi sukcese finis taskon, ĝi malaperos de la listo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50

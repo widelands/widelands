@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-28 07:16+0000\n"
+"PO-Revision-Date: 2021-07-11 18:32+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -307,7 +307,7 @@ msgstr "Wenn du de Happen ankiekst, süchst du, dat du blot fiev in ’t Geheel 
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr "De twede Listenwessler wiest all de Arbeiders, weer all up Straten un in Husen tosammen."
+msgstr "De twede Listenwessler wiest all de Arbeiders, weer all up Straten un in Husen tosamen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:168
 msgid ""
@@ -700,7 +700,7 @@ msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr "De leste Listenwessler wiest de Bestand all tosammen. Wenn de Weertskupp-Utglekenheid groter as null is, word he groter, anners lütter. Vergliek de beiden Berichten!"
+msgstr "De leste Listenwessler wiest de Bestand all tosamen. Wenn de Weertskupp-Utglekenheid groter as null is, word he groter, anners lütter. Vergliek de beiden Berichten!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
