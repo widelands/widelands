@@ -862,45 +862,31 @@ void DefaultAI::late_initialization() {
 			// Some important buildings are identified
 			if (prod.input_wares().empty() && !prod.output_ware_types().empty() &&
 			    prod.created_immovables().empty() && !prod.collected_immovables().empty()) {
-				bool produces_construction_material = false;
-				bool produces_non_construction_material = false;
-				for (Widelands::DescriptionIndex output_idx : prod.output_ware_types()) {
-					if (tribe_->is_construction_material(output_idx)) {
-						produces_construction_material = true;
-					} else {
-						produces_non_construction_material = true;
-					}
-				}
-				if (produces_construction_material) {
-					// TODO(GunChleoc): We should lose the hard distinction between quarry and
-					// lumberjack, so that a building can be both
-					if (prod.supported_by_productionsites().empty()) {
+				for (const auto& attribute : prod.collected_attributes()) {
+					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("rocks")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected quarry: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
-						for (const auto& attribute : prod.collected_attributes()) {
-							buildings_immovable_attributes_[attribute.second].insert(
-							   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
-						}
-					} else {
+						buildings_immovable_attributes_[attribute.second].insert(
+						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
+					} else if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree") ||
+					           attribute.second == Widelands::MapObjectDescr::get_attribute_id("normal_tree") ||
+							   attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree_balsa")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
-						for (const auto& attribute : prod.collected_attributes()) {
-							buildings_immovable_attributes_[attribute.second].insert(
-							   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
-						}
-						lumberjacks.insert(&prod);
-					}
-				}
-				if (produces_non_construction_material) {
-					verb_log_dbg_time(
-					   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kNeedsBerry);
-					for (const auto& attribute : prod.collected_attributes()) {
+						buildings_immovable_attributes_[attribute.second].insert(
+						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
+					} else if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
+						verb_log_dbg_time(
+						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kNeedsBerry);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsBerry));
 					}
+				}
+				if (bo.is(BuildingAttribute::kLumberjack)) {
+					lumberjacks.insert(&prod);
 				}
 			}
 
