@@ -733,7 +733,7 @@ void DefaultAI::late_initialization() {
 				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {
 					bo.set_is(BuildingAttribute::kRecruitment);
 					verb_log_dbg_time(
-						   gametime, "AI %d detected recruitment site: %s", player_number(), bo.name);
+					   gametime, "AI %d detected recruitment site: %s", player_number(), bo.name);
 				}
 			}
 
@@ -874,15 +874,18 @@ void DefaultAI::late_initialization() {
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
 						break;
 					} else if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree") ||
-					           attribute.second == Widelands::MapObjectDescr::get_attribute_id("normal_tree") ||
-							   attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree_balsa")) {
+					           attribute.second ==
+					              Widelands::MapObjectDescr::get_attribute_id("normal_tree") ||
+					           attribute.second ==
+					              Widelands::MapObjectDescr::get_attribute_id("tree_balsa")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
 						break;
-					} else if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
+					} else if (attribute.second ==
+					           Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsBerry);
@@ -3026,7 +3029,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					if (bo.is(BuildingAttribute::kRanger)) {
 
-						assert(bo.new_building == BuildingNecessity::kNeeded || bo.new_building == BuildingNecessity::kForced);
+						assert(bo.new_building == BuildingNecessity::kNeeded ||
+						       bo.new_building == BuildingNecessity::kForced);
 
 						if (bo.total_count() == 0) {
 							prio += 200;
