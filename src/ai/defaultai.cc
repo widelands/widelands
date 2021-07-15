@@ -732,6 +732,8 @@ void DefaultAI::late_initialization() {
 				}
 				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {
 					bo.set_is(BuildingAttribute::kRecruitment);
+					verb_log_dbg_time(
+						   gametime, "AI %d detected recruitment site: %s", player_number(), bo.name);
 				}
 			}
 
@@ -862,6 +864,7 @@ void DefaultAI::late_initialization() {
 			// Some important buildings are identified
 			if (prod.input_wares().empty() && !prod.output_ware_types().empty() &&
 			    prod.created_immovables().empty() && !prod.collected_immovables().empty()) {
+				// TODO(hessenfarmer): hardcoded strings should be parsed from a definition file
 				for (const auto& attribute : prod.collected_attributes()) {
 					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("rocks")) {
 						verb_log_dbg_time(
@@ -869,6 +872,7 @@ void DefaultAI::late_initialization() {
 						bo.set_is(BuildingAttribute::kNeedsRocks);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
+						break;
 					} else if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree") ||
 					           attribute.second == Widelands::MapObjectDescr::get_attribute_id("normal_tree") ||
 							   attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree_balsa")) {
@@ -877,6 +881,7 @@ void DefaultAI::late_initialization() {
 						bo.set_is(BuildingAttribute::kLumberjack);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
+						break;
 					} else if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
