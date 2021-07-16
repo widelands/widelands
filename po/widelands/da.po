@@ -5,15 +5,15 @@
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # Esben Aaberg <esben_aaberg@yahoo.com>, 2015
 # GunChleoc, 2016,2018
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2021
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-07-13 02:46+0000\n"
+"PO-Revision-Date: 2021-07-13 18:30+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -265,8 +265,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -280,12 +280,12 @@ msgstr "Hovedmenu"
 msgid "Tools"
 msgstr "Værktøjer"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -475,10 +475,10 @@ msgstr "Information"
 msgid "Click on a field to show information about it"
 msgstr "Klik på et felt for at vise information om det"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -646,8 +646,8 @@ msgstr "mine"
 msgid "port"
 msgstr "havn"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -813,7 +813,7 @@ msgstr "Scenarier for flere spillere"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/wui/mapdata.cc:188
 msgid "Downloaded Maps"
-msgstr ""
+msgstr "Hentede kort"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
@@ -825,7 +825,7 @@ msgstr "Nuværende mappe: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 msgid "Display"
-msgstr ""
+msgstr "Vis"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:80
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
@@ -861,23 +861,23 @@ msgstr "Annuller"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:109
 msgid "File names"
-msgstr ""
+msgstr "Filnavne"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Map names"
-msgstr ""
+msgstr "Kortnavne"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Original map names"
-msgstr ""
+msgstr "Oprindelige kortnavne"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
 msgid "Translated map names"
-msgstr ""
+msgstr "Oversatte kortnavne"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
-msgstr ""
+msgstr "Klik på spiller for at fjerne"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/ui_fsmenu/addons_packager_box.cc:271
@@ -888,26 +888,26 @@ msgstr "Slet"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 msgid "Delete this suggested team lineup"
-msgstr ""
+msgstr "Slet den foreslåede holdopsætning"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons_packager.cc:75
 #: ../../src/ui_fsmenu/addons_packager_box.cc:56
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
-msgstr ""
+msgstr "Tilføj en spiller til dette hold"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:322
 #: ../../src/logic/addons.cc:65
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:333
 msgid "Add lineup"
-msgstr ""
+msgstr "Tilføj opsætning"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:334
 msgid "Add another suggested team lineup"
@@ -937,7 +937,7 @@ msgstr "Mærkater:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(ingen)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:398
 msgid "Waterway length limit:"
@@ -1014,7 +1014,7 @@ msgstr "Høj"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:85
 msgid "Climate"
-msgstr ""
+msgstr "Klima"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Terrain Distribution"
@@ -1175,7 +1175,7 @@ msgstr "Kunne ikke gemme kort!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:342
 msgid "Saving the map…"
-msgstr ""
+msgstr "Gemmer kortet …"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:360
 msgid "Map saved"
@@ -1360,8 +1360,8 @@ msgid ""
 "location."
 msgstr "Vælg den nye kortstørrelse, klik så på kortet for at opdele det på den ønskede placering. Når kortstørrelsen øges vil nye kolonner/rækker blive indsat mod øst/syd for det valgte punkt. Når kortet mindskes vil det ønskede antal kolonner/rækker blive fjernet fra øst/syd for opdelingspunktet."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1374,10 +1374,9 @@ msgstr "%1%: %2%"
 msgid "Tool Size"
 msgstr "Værktøjsstørrelse"
 
-#: ../../src/editor/ui_menus/toolsize_menu.cc:85
-#, c-format
-msgid "Current Size: %u"
-msgstr "Aktuel størrelse: %u"
+#: ../../src/editor/ui_menus/toolsize_menu.cc:46
+msgid "Current Size:"
+msgstr ""
 
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
@@ -1569,11 +1568,11 @@ msgstr ""
 
 #: ../../src/logic/addons.cc:50
 msgid "World"
-msgstr ""
+msgstr "Verden"
 
 #: ../../src/logic/addons.cc:53
 msgid "Script"
-msgstr ""
+msgstr "Skript"
 
 #: ../../src/logic/addons.cc:54
 msgid "Map Set"
@@ -1644,8 +1643,8 @@ msgstr ""
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u manglende udvidelse"
+msgstr[1] "%u manglende udvidelser"
 
 #: ../../src/logic/addons.cc:202
 #, c-format
@@ -1657,7 +1656,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:217
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: ../../src/logic/addons.cc:221
 #, c-format
@@ -1667,7 +1666,7 @@ msgstr ""
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
 msgid "Creating player %d…"
-msgstr ""
+msgstr "Opretter spiller %d…"
 
 #: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
@@ -2130,7 +2129,7 @@ msgstr "Fragter"
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2171,11 +2170,11 @@ msgstr "Logikfejl"
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:172
 msgid "Loading %1%: %2% (%3%/%4%)"
-msgstr ""
+msgstr "Indlæser %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:177
 msgid "Ships"
-msgstr ""
+msgstr "Skibe"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
@@ -2249,15 +2248,15 @@ msgstr "Et nyt lager blev en del af din økonomi."
 #. * available)
 #: ../../src/logic/map_objects/tribes/warehouse.cc:644
 msgid "Waterway"
-msgstr ""
+msgstr "Vandvej"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:645
 msgid "Waterway destroyed"
-msgstr ""
+msgstr "Vandvej ødelagt"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:646
 msgid "A waterway had to be destroyed to make room for your new port dock."
-msgstr ""
+msgstr "En vandvej måtte nedlægges for at give plads til din nye havnedok."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1109
 msgid "A geologist found resources."
@@ -2503,7 +2502,7 @@ msgstr "Kontrollerer kort"
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
 #: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
 msgid "Preparing game…"
-msgstr ""
+msgstr "Forbereder spil …"
 
 #: ../../src/network/gameclient.cc:213
 #: ../../src/network/internet_gaming.cc:116
@@ -3209,11 +3208,11 @@ msgstr "Om Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:49 ../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
-msgstr ""
+msgstr "Lua-fejl"
 
 #: ../../src/ui_fsmenu/addons.cc:117
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Håndtering af udvidelser"
 
 #: ../../src/ui_fsmenu/addons.cc:158
 msgid "Verified only"
@@ -3266,7 +3265,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:251
 msgid "Move selected add-on to bottom"
-msgstr ""
+msgstr "Flyt valgt udvidelse til bunden"
 
 #: ../../src/ui_fsmenu/addons.cc:259
 msgid "Launch the add-ons packager…"
@@ -3386,17 +3385,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:474
 msgid "Upgrade All"
-msgstr ""
+msgstr "Opgrader alle"
 
 #: ../../src/ui_fsmenu/addons.cc:667
 msgid "Server Connection Error"
-msgstr ""
+msgstr "Serverforbindelsesfejl"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
 #: ../../src/ui_fsmenu/addons.cc:669
 msgid "a networking bug"
-msgstr ""
+msgstr "en netværksfejl"
 
 #: ../../src/ui_fsmenu/addons.cc:670
 #, c-format
@@ -3474,8 +3473,8 @@ msgstr ""
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Afhængighedsfejl"
+msgstr[1] "%u Afhængighedsfejl"
 
 #: ../../src/ui_fsmenu/addons.cc:957
 msgid ""
@@ -3500,7 +3499,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1206
 #, c-format
 msgid "Downloading translations for ‘%s’…"
-msgstr ""
+msgstr "Henter oversættelser for »%s« …"
 
 #: ../../src/ui_fsmenu/addons.cc:1247
 #, c-format
@@ -3623,7 +3622,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons.cc:1589
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../src/ui_fsmenu/addons.cc:1591
 #, c-format
@@ -3655,7 +3654,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons.cc:1679
 msgid "Submit comment"
-msgstr ""
+msgstr "Indsend kommentar"
 
 #: ../../src/ui_fsmenu/addons.cc:1685
 msgid "No comments yet."
@@ -4003,26 +4002,26 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:422
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Navn: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:142
 #: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:104
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "Størrelse: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:145
 #: ../../src/ui_fsmenu/main.cc:428 ../../src/ui_fsmenu/mapdetailsbox.cc:107
 #, c-format
 msgid "%1$u×%2$u"
-msgstr ""
+msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:147
 #: ../../src/ui_fsmenu/main.cc:364 ../../src/ui_fsmenu/main.cc:432
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:110
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Spillere: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:175
 msgid "Top-level directory"
@@ -4072,7 +4071,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:34
 msgid "Choose Campaign"
-msgstr ""
+msgstr "Vælg kampagne"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:39
 #: ../../src/ui_fsmenu/loadgame.cc:80
@@ -4253,11 +4252,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
-msgstr ""
+msgstr "Start spil"
 
 #: ../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
-msgstr ""
+msgstr "Konfigurer dette spil"
 
 #: ../../src/ui_fsmenu/launch_game.cc:65
 msgid ""
@@ -4310,13 +4309,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:230
 msgid "The starting positions are set by the saved game"
-msgstr ""
+msgstr "Startpositionerne angives af det gemte spil"
 
 #: ../../src/ui_fsmenu/launch_game.cc:233
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
-msgstr ""
+msgstr "Tillader spillerne at vælge deres egne startpositioner i begyndelsen af spillet"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:240
@@ -4401,11 +4400,11 @@ msgstr "Flerdeltager-spil"
 
 #: ../../src/ui_fsmenu/loadgame.cc:43
 msgid "Choose Game"
-msgstr ""
+msgstr "Vælg spil"
 
 #: ../../src/ui_fsmenu/loadgame.cc:43
 msgid "Choose Replay"
-msgstr ""
+msgstr "Vælg genafspilning"
 
 #: ../../src/ui_fsmenu/loadgame.cc:66
 msgid "Show Filenames"
@@ -4501,7 +4500,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:315
 msgid "Begin a new game"
-msgstr ""
+msgstr "Begynd et nyt spil"
 
 #: ../../src/ui_fsmenu/main.cc:315 ../../src/wlapplication_options.cc:162
 msgid "New Game"
@@ -4510,11 +4509,11 @@ msgstr "Nyt spil"
 #: ../../src/ui_fsmenu/main.cc:317 ../../src/ui_fsmenu/random_game.cc:30
 #: ../../src/wlapplication_options.cc:176
 msgid "New Random Game"
-msgstr ""
+msgstr "Nyt vilkårligt spil"
 
 #: ../../src/ui_fsmenu/main.cc:318
 msgid "Create a new random match"
-msgstr ""
+msgstr "Opret en ny vilkårlig match"
 
 #: ../../src/ui_fsmenu/main.cc:320 ../../src/wlapplication_options.cc:186
 msgid "Campaigns"
@@ -4522,7 +4521,7 @@ msgstr "Kampagner"
 
 #: ../../src/ui_fsmenu/main.cc:320
 msgid "Play a campaign"
-msgstr ""
+msgstr "Spil en kampagne"
 
 #: ../../src/ui_fsmenu/main.cc:322 ../../src/wlapplication_options.cc:181
 msgid "Tutorials"
@@ -4542,33 +4541,33 @@ msgstr "Hent spil"
 
 #: ../../src/ui_fsmenu/main.cc:326
 msgid "Continue a saved game"
-msgstr ""
+msgstr "Fortsæt et gemt spil"
 
 #: ../../src/ui_fsmenu/main.cc:347 ../../src/wlapplication_options.cc:223
 msgid "Continue Playing"
-msgstr ""
+msgstr "Fortsæt med at spille"
 
 #: ../../src/ui_fsmenu/main.cc:356
 #, c-format
 msgid "Map: %s"
-msgstr ""
+msgstr "Kort: %s"
 
 #: ../../src/ui_fsmenu/main.cc:360
 #, c-format
 msgid "Win Condition: %s"
-msgstr ""
+msgstr "Sejrsbetingelse: %s"
 
 #: ../../src/ui_fsmenu/main.cc:368
 #, c-format
 msgid "Gametime: %s"
-msgstr ""
+msgstr "Spiltid: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. 10:30'
 #: ../../src/ui_fsmenu/main.cc:374
 #, c-format
 msgid "Saved: %s"
-msgstr ""
+msgstr "Gemt: %s"
 
 #: ../../src/ui_fsmenu/main.cc:384
 msgid "Online Game"
@@ -4580,7 +4579,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:388
 msgid "Log in as a registered user"
-msgstr ""
+msgstr "Log ind som en registreret bruger"
 
 #: ../../src/ui_fsmenu/main.cc:390 ../../src/wlapplication_options.cc:240
 msgid "LAN / Direct IP"
@@ -4588,11 +4587,11 @@ msgstr "LAN / direkte IP"
 
 #: ../../src/ui_fsmenu/main.cc:391
 msgid "Play a private online game"
-msgstr ""
+msgstr "Spil et privat internetspil"
 
 #: ../../src/ui_fsmenu/main.cc:394
 msgid "Create a new empty map"
-msgstr ""
+msgstr "Opret et nyt tomt kort"
 
 #: ../../src/ui_fsmenu/main.cc:397
 msgid "Create a new random map"
@@ -4600,35 +4599,35 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:399
 msgid "Edit an existing map"
-msgstr ""
+msgstr "Rediger et eksisterende kort"
 
 #: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:218
 msgid "Continue Editing"
-msgstr ""
+msgstr "Fortsæt redigering"
 
 #: ../../src/ui_fsmenu/main.cc:445
 msgid "Single Player…"
-msgstr ""
+msgstr "Spil mod computeren ..."
 
 #: ../../src/ui_fsmenu/main.cc:446
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Spil mod andre ..."
 
 #: ../../src/ui_fsmenu/main.cc:447
 msgid "Editor…"
-msgstr ""
+msgstr "Redigeringsprogram ..."
 
 #: ../../src/ui_fsmenu/main.cc:449
 msgid "Begin or load a single-player campaign or free game"
-msgstr ""
+msgstr "Begynd eller indlæs en kampagne mod computeren eller et frit spil"
 
 #: ../../src/ui_fsmenu/main.cc:452
 msgid "Play with your friends over the internet"
-msgstr ""
+msgstr "Spil med dine venner over internettet"
 
 #: ../../src/ui_fsmenu/main.cc:455
 msgid "Launch the map editor"
-msgstr ""
+msgstr "Start kortredigeringsprogrammet"
 
 #: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:171
 msgid "Watch Replay"
@@ -4636,15 +4635,15 @@ msgstr "Se genafspilning"
 
 #: ../../src/ui_fsmenu/main.cc:460
 msgid "Watch the replay of an old game"
-msgstr ""
+msgstr "Se genafspilningen af et gammelt spil"
 
 #: ../../src/ui_fsmenu/main.cc:463 ../../src/wlapplication_options.cc:236
 msgid "Add-Ons"
-msgstr ""
+msgstr "Udvidelser"
 
 #: ../../src/ui_fsmenu/main.cc:465
 msgid "Install and manage add-ons"
-msgstr ""
+msgstr "Installer og håndter udvidelser"
 
 #: ../../src/ui_fsmenu/main.cc:467 ../../src/ui_fsmenu/options.cc:89
 #: ../../src/wlapplication_options.cc:253
@@ -4653,7 +4652,7 @@ msgstr "Indstillinger"
 
 #: ../../src/ui_fsmenu/main.cc:469
 msgid "Technical and game-related settings"
-msgstr ""
+msgstr "Tekniske og spilrelaterede indstillinger"
 
 #: ../../src/ui_fsmenu/main.cc:473
 msgid "Readme, License, and Credits"
@@ -4665,7 +4664,7 @@ msgstr "Afslut Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:477
 msgid "Quit the game"
-msgstr ""
+msgstr "Afslut spillet"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
 #: ../../src/ui_fsmenu/main.cc:482
@@ -4678,7 +4677,7 @@ msgstr "Version %1$s (%2$s)"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "%1%-%2% af Widelands Development Team · Licens GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:818
 msgid "Desyncing Add-On Found"
@@ -4690,48 +4689,48 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:919 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found!"
-msgstr ""
+msgstr "Ingen stammer fundet!"
 
 #: ../../src/ui_fsmenu/main.cc:920 ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
-msgstr ""
+msgstr "Ingen stammer fundet i data/tribes/initialization/[tribename]/init.lua."
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:39
 #, c-format
 msgid "invalid tribe ‘%s’"
-msgstr ""
+msgstr "ugyldig stamme »%s«"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:51
 msgid "Saved Players"
-msgstr ""
+msgstr "Gemte spillere"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:58
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Spiller %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:81
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Spiller %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:100
 msgid "Map Details"
-msgstr ""
+msgstr "Kortdetaljer"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:100
 msgid "Scenario Details"
-msgstr ""
+msgstr "Scenariedetaljer"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:122
 #, c-format
 msgid "Hint: %s"
-msgstr ""
+msgstr "Fif: %s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:154
 msgid "No map selected"
-msgstr ""
+msgstr "Intet kort valgt"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:198
 msgid "(no map)"
@@ -4739,7 +4738,7 @@ msgstr "(intet kort)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:50
 msgid "Choose Map"
-msgstr ""
+msgstr "Vælg kort"
 
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "Show all maps"
@@ -4873,7 +4872,7 @@ msgstr "Klienter"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:36
 msgid "Begin LAN Game"
-msgstr ""
+msgstr "Begynd LAN-spil"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
@@ -5009,7 +5008,7 @@ msgstr "Vis soldaterniveau"
 #: ../../src/ui_fsmenu/options.cc:251
 #: ../../src/wui/interactive_gamebase.cc:259
 msgid "Show Buildings"
-msgstr ""
+msgstr "Vis bygninger"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
@@ -5044,7 +5043,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:286
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Tillad diagonal rulning med det numeriske tastatur"
 
 #: ../../src/ui_fsmenu/options.cc:290
 msgid "Scroll when the mouse cursor is near the screen edge"
@@ -5056,7 +5055,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Teach me how to play"
-msgstr ""
+msgstr "Lær mig hvordan man spiller"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
@@ -5078,11 +5077,11 @@ msgstr "Gemmer"
 
 #: ../../src/ui_fsmenu/options.cc:329
 msgid "New Games"
-msgstr ""
+msgstr "Nye spil"
 
 #: ../../src/ui_fsmenu/options.cc:330
 msgid "In-Game"
-msgstr ""
+msgstr "I spillet"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:429
@@ -5145,11 +5144,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
-msgstr ""
+msgstr "Vælg scenarie"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
-msgstr ""
+msgstr "Vælg introduktionsspil"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:85
 msgid "Pick a tutorial from the list, then hit “OK”."
@@ -5221,7 +5220,7 @@ msgstr "Forfattere"
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:189
 msgid "You"
-msgstr ""
+msgstr "Dig"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:43
@@ -5501,7 +5500,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:453
 #: ../../src/wui/soldier_statistics_menu.cc:133
 msgid "Soldier Statistics"
-msgstr ""
+msgstr "Soldaterstatistik"
 
 #: ../../src/wlapplication_options.cc:458
 #: ../../src/wui/seafaring_statistics_menu.cc:49
@@ -5985,7 +5984,7 @@ msgstr "L: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 
 #: ../../src/wui/building_statistics_menu.cc:67
 msgid "(no building selected)"
-msgstr ""
+msgstr "(ingen bygning valgt)"
 
 #: ../../src/wui/building_statistics_menu.cc:72
 msgid "Owned:"
@@ -5993,11 +5992,11 @@ msgstr "Ejet:"
 
 #: ../../src/wui/building_statistics_menu.cc:77
 msgid "Under construction:"
-msgstr ""
+msgstr "Under konstruktion:"
 
 #: ../../src/wui/building_statistics_menu.cc:93
 msgid "Low productivity threshold:"
-msgstr ""
+msgstr "Lav produktivitet-tærskel:"
 
 #: ../../src/wui/building_statistics_menu.cc:104
 #: ../../src/wui/building_statistics_menu.cc:123
@@ -6015,7 +6014,7 @@ msgstr "Vis næste bygning"
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
-msgstr ""
+msgstr "Bygninger anses for uproduktive, hvis deres produktivitet falder under denne procent."
 
 #: ../../src/wui/building_statistics_menu.cc:338
 msgid "Small buildings"
@@ -6041,9 +6040,9 @@ msgstr "Havne"
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6058,7 +6057,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:200
 msgid "Muted – click to unmute"
-msgstr ""
+msgstr "Slukket - klik for at tænde"
 
 #: ../../src/wui/buildingwindow.cc:201
 msgid "Mute this building’s messages"
@@ -6066,11 +6065,11 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:206
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Alle bygninger af denne type er slukket – klik for at tænde"
 
 #: ../../src/wui/buildingwindow.cc:210
 msgid "Mute all buildings of this type"
-msgstr ""
+msgstr "Sluk for alle bygninger af denne type"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:274
@@ -6325,7 +6324,7 @@ msgstr "Nedlæg dette flag"
 
 #: ../../src/wui/fieldaction.cc:441
 msgid "Configure this flag’s economy"
-msgstr ""
+msgstr "Konfigurer dette flags økonomi"
 
 #: ../../src/wui/fieldaction.cc:444
 msgid "Send geologist to explore site"
@@ -6446,8 +6445,8 @@ msgstr "Erstat den afbrudte spille med den valgte kunstige intelligens og forts�
 msgid "AI for the disconnected player"
 msgstr "Kunstig intelligens for den afbrudte spiller"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6667,16 +6666,16 @@ msgstr "Holdpoint"
 #, c-format
 msgid "%d file"
 msgid_plural "%d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d fil"
+msgstr[1] "%d filer"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:126
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valgt %1% mappe og %2%:"
+msgstr[1] "Valgt %1% mapper og %2%:"
 
 #: ../../src/wui/gamedetails.cc:145
 msgid "Directory Name:"
@@ -6838,11 +6837,11 @@ msgstr "Hold Ctrl nede for ikke at tillade denne vare"
 
 #: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
-msgstr ""
+msgstr "Fjern vare"
 
 #: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
-msgstr ""
+msgstr "Tilføj vare"
 
 #: ../../src/wui/inputqueuedisplay.cc:553
 msgid "Hide controls"
@@ -6884,12 +6883,12 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:717
 #, c-format
 msgid "Road length: %u"
-msgstr ""
+msgstr "Vejlængde: %u"
 
 #: ../../src/wui/interactive_base.cc:719
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
-msgstr ""
+msgstr "Længde på vandveje: %1$u/%2$u"
 
 #: ../../src/wui/interactive_base.cc:1438
 msgid "Failed saving screenshot!"
@@ -6957,7 +6956,7 @@ msgstr "Skjul soldaterniveau"
 #. * buildings are greyed out
 #: ../../src/wui/interactive_gamebase.cc:258
 msgid "Hide Buildings"
-msgstr ""
+msgstr "Skjul bygninger"
 
 #: ../../src/wui/interactive_gamebase.cc:305
 msgid "Speed +"
@@ -7003,8 +7002,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistik"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Søfart"
@@ -7278,11 +7277,11 @@ msgstr "Næste niveau"
 
 #: ../../src/wui/productionsitewindow.cc:131
 msgid "Decrease experience by 1"
-msgstr ""
+msgstr "Sænk erfaring med 1"
 
 #: ../../src/wui/productionsitewindow.cc:134
 msgid "Increase experience by 1"
-msgstr ""
+msgstr "Øg erfaring med 1"
 
 #: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
@@ -7570,7 +7569,7 @@ msgstr "Vis alle skibe"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:510
 msgid "Show empty ships"
-msgstr ""
+msgstr "Vis tomme skibe"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:514
@@ -7659,33 +7658,33 @@ msgstr "Denne ekspedition kan ikke afbrydes, da skibet ikke har en havn at retur
 #: ../../src/wui/soldier_statistics_menu.cc:166
 #, c-format
 msgid "Health: %u"
-msgstr ""
+msgstr "Helbred: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:74
 #: ../../src/wui/soldier_statistics_menu.cc:181
 #, c-format
 msgid "Attack: %u"
-msgstr ""
+msgstr "Angreb: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:75
 #: ../../src/wui/soldier_statistics_menu.cc:196
 #, c-format
 msgid "Defense: %u"
-msgstr ""
+msgstr "Forsvar: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:76
 #: ../../src/wui/soldier_statistics_menu.cc:211
 #, c-format
 msgid "Evade: %u"
-msgstr ""
+msgstr "Undvig: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:137
 msgid "Overview"
-msgstr ""
+msgstr "Oversigt"
 
 #: ../../src/wui/soldier_statistics_menu.cc:222
 msgid "By Attribute"
-msgstr ""
+msgstr "Efter attribut"
 
 #: ../../src/wui/soldier_statistics_menu.cc:240
 #: ../../src/wui/soldier_statistics_menu.cc:246
@@ -7693,7 +7692,7 @@ msgstr ""
 #: ../../src/wui/soldier_statistics_menu.cc:258
 #, c-format
 msgid "×%u"
-msgstr ""
+msgstr "×%u"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:82
 msgid "Capacity"
@@ -7828,23 +7827,23 @@ msgstr "Økonomiens tilstand"
 
 #: ../../src/wui/warehousewindow.cc:158
 msgid "Remove 10 wares"
-msgstr ""
+msgstr "Fjern 10 varer"
 
 #: ../../src/wui/warehousewindow.cc:165
 msgid "Remove a ware"
-msgstr ""
+msgstr "Fjern en vare"
 
 #: ../../src/wui/warehousewindow.cc:172
 msgid "Add a ware"
-msgstr ""
+msgstr "Tilføj en vare"
 
 #: ../../src/wui/warehousewindow.cc:179
 msgid "Add 10 wares"
-msgstr ""
+msgstr "Tilføj 10 varer"
 
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Configure this building’s economy"
-msgstr ""
+msgstr "Konfigurer denne bygnings økonomi"
 
 #: ../../src/wui/warehousewindow.cc:293
 msgid "Wares waiting to be shipped"
