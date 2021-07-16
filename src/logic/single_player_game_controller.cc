@@ -67,16 +67,17 @@ void SinglePlayerGameController::think() {
 	if (use_ai_ && game_.is_loaded()) {
 		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, game_, plr) if (p != local_) {
-
 			if (p > computerplayers_.size()) {
 				computerplayers_.resize(p);
 			}
 			if (!computerplayers_[p - 1]) {
 				computerplayers_[p - 1] =
 				   AI::ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
+				computerplayers_[p - 1]->start_thread();
 			}
-			computerplayers_[p - 1]->think();
 		}
+		// Initialization of the AIs is complete, no need to repeat it in future think() cycles.
+		use_ai_ = false;
 	}
 }
 

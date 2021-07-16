@@ -19,12 +19,39 @@
 
 #include "ai/computer_player.h"
 
+#include <SDL_timer.h>
+
 #include "ai/defaultai.h"
 
 namespace AI {
 
+constexpr uint32_t kMinAIThinkDelay = 80;  ///< Minimum delay between two think() calls by the same AI instance in milliseconds realtime.
+
 ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
-   : game_(g), player_number_(pid) {
+   : game_(g), player_number_(pid), thread_running_(false) {
+}
+
+ComputerPlayer::~ComputerPlayer() {
+	thread_running_ = false;
+	if (thread_.get() != nullptr) {
+		thread_->join();
+		thread_.reset(nullptr);
+	}
+}
+
+void ComputerPlayer::start_thread() {
+	if (thread_.get() != nullptr) {
+		throw wexception("Thread for AI #%u already running", static_cast<unsigned>(player_number_));
+	}
+	thread_running_ = true;
+	thread_.reset(new std::thread(&ComputerPlayer::thread_function, this));
+}
+
+void ComputerPlayer::thread_function() {
+	while (thread_running_) {
+		think();
+		SDL_Delay(kMinAIThinkDelay);
+	}
 }
 
 struct EmptyAI : ComputerPlayer {

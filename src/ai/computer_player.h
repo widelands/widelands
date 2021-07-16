@@ -20,6 +20,9 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
+#include <memory>
+#include <thread>
+
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/macros.h"
@@ -43,9 +46,11 @@ namespace AI {
  */
 struct ComputerPlayer {
 	ComputerPlayer(Widelands::Game&, const Widelands::PlayerNumber);
-	virtual ~ComputerPlayer() = default;
+	virtual ~ComputerPlayer();
 
 	virtual void think() = 0;
+	/** Start this AI's thinking thread. */
+	void start_thread();
 
 	Widelands::Game& game() const {
 		return game_;
@@ -96,6 +101,10 @@ struct ComputerPlayer {
 private:
 	Widelands::Game& game_;
 	Widelands::PlayerNumber const player_number_;
+
+	bool thread_running_;
+	std::unique_ptr<std::thread> thread_;
+	void thread_function();
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
