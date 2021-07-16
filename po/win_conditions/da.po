@@ -5,15 +5,15 @@
 # Esben Aaberg <esben_aaberg@yahoo.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2021
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-07-13 11:37+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +59,7 @@ msgstr "Dit hold har fundet en ny artefakt."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Du fandt en ny artefakt."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -72,7 +72,7 @@ msgstr "Et af dit holds artefakter blev stjålet af en fjende."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "En af dine artefakter blev stjålet af en fjende."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -85,7 +85,7 @@ msgstr "Dit hold stjal en artefakt fra en fjende."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Du stjal en artefakt fra en fjende."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -161,7 +161,7 @@ msgstr "Autokrat"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Stammen eller holdet der kan besejre alle andre vinder spillet! Dette indebærer at modstanderne ikke har nogen hovedkvarterer, havne eller lagre tilbage."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -258,7 +258,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Hver spiller eller hold forsøger at erobre mere end halvdelen af kortets areal. Vinderen vil være den spiller eller det hold som kan holde området i mindst 20 minutter, eller den som som har størst territorium efter 4 timer, alt efter hvad der opnås først. Hvis den fredelige spiltilstand er valgt, så slutter spillet hvis en spiller har mere land end nogen anden spiller kan opnå."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
-"PO-Revision-Date: 2021-07-13 01:54+0000\n"
+"POT-Creation-Date: 2021-07-13 02:46+0000\n"
+"PO-Revision-Date: 2021-07-14 09:53+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -1284,7 +1284,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "카사바 뿌리 요리사"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1500,23 +1499,23 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr ""
+msgstr "이 금광 거주지의 주요 정맥이 소진되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr ""
+msgstr "수렵 채집자의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
 msgid "gathering"
-msgstr ""
+msgstr "수집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:48
 msgid "gathering meat"
-msgstr ""
+msgstr "고기를 수집하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:56
@@ -1918,7 +1917,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
