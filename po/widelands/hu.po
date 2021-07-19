@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-13 02:46+0000\n"
-"PO-Revision-Date: 2021-07-13 02:48+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-07-16 02:39+0000\n"
+"PO-Revision-Date: 2021-07-18 21:44+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,8 +271,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -286,12 +286,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -481,10 +481,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -652,8 +652,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1382,7 +1382,7 @@ msgstr "Eszköz méret"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:46
 msgid "Current Size:"
-msgstr ""
+msgstr "Jelenlegi méret:"
 
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
@@ -5743,82 +5743,82 @@ msgstr "Scroll Lock"
 #: ../../src/wlapplication_options.cc:797
 msgctxt "hotkey"
 msgid "Keypad 1"
-msgstr ""
+msgstr "Numerikus 1"
 
 #: ../../src/wlapplication_options.cc:799
 msgctxt "hotkey"
 msgid "Keypad 2"
-msgstr ""
+msgstr "Numerikus 2"
 
 #: ../../src/wlapplication_options.cc:801
 msgctxt "hotkey"
 msgid "Keypad 3"
-msgstr ""
+msgstr "Numerikus 3"
 
 #: ../../src/wlapplication_options.cc:803
 msgctxt "hotkey"
 msgid "Keypad 4"
-msgstr ""
+msgstr "Numerikus 4"
 
 #: ../../src/wlapplication_options.cc:805
 msgctxt "hotkey"
 msgid "Keypad 5"
-msgstr ""
+msgstr "Numerikus 5"
 
 #: ../../src/wlapplication_options.cc:807
 msgctxt "hotkey"
 msgid "Keypad 6"
-msgstr ""
+msgstr "Numerikus 6"
 
 #: ../../src/wlapplication_options.cc:809
 msgctxt "hotkey"
 msgid "Keypad 7"
-msgstr ""
+msgstr "Numerikus 7"
 
 #: ../../src/wlapplication_options.cc:811
 msgctxt "hotkey"
 msgid "Keypad 8"
-msgstr ""
+msgstr "Numerikus 8"
 
 #: ../../src/wlapplication_options.cc:813
 msgctxt "hotkey"
 msgid "Keypad 9"
-msgstr ""
+msgstr "Numerikus 9"
 
 #: ../../src/wlapplication_options.cc:815
 msgctxt "hotkey"
 msgid "Keypad 0"
-msgstr ""
+msgstr "Numerikus 0"
 
 #: ../../src/wlapplication_options.cc:817
 msgctxt "hotkey"
 msgid "Keypad ."
-msgstr ""
+msgstr "Numerikus ,"
 
 #: ../../src/wlapplication_options.cc:819
 msgctxt "hotkey"
 msgid "Keypad +"
-msgstr ""
+msgstr "Numerikus +"
 
 #: ../../src/wlapplication_options.cc:821
 msgctxt "hotkey"
 msgid "Keypad -"
-msgstr ""
+msgstr "Numerikus -"
 
 #: ../../src/wlapplication_options.cc:823
 msgctxt "hotkey"
 msgid "Keypad *"
-msgstr ""
+msgstr "Numerikus *"
 
 #: ../../src/wlapplication_options.cc:825
 msgctxt "hotkey"
 msgid "Keypad /"
-msgstr ""
+msgstr "Numerikus /"
 
 #: ../../src/wlapplication_options.cc:827
 msgctxt "hotkey"
 msgid "Keypad Enter"
-msgstr ""
+msgstr "Numerikus Enter"
 
 #: ../../src/wlapplication_options.cc:837
 msgctxt "hotkey"
@@ -6046,9 +6046,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6451,8 +6451,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-13 02:46+0000\n"
-"PO-Revision-Date: 2021-07-14 09:44+0000\n"
+"POT-Creation-Date: 2021-07-16 02:39+0000\n"
+"PO-Revision-Date: 2021-07-18 14:27+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -268,14 +268,14 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
-msgstr "주 메뉴"
+msgstr "기본 차림표"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #: ../../src/editor/editorinteractive.cc:108
@@ -283,12 +283,12 @@ msgstr "주 메뉴"
 msgid "Tools"
 msgstr "도구"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -449,7 +449,7 @@ msgstr "선수의 수, 이름, 부족, 시작 위치 설정"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:333
 msgid "Map origin"
-msgstr "번역확인 -> 지도 출발지?"
+msgstr "번역확인 -> 지도 출발지"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:336
@@ -478,10 +478,10 @@ msgstr "정보"
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -649,8 +649,8 @@ msgstr "광산"
 msgid "port"
 msgstr "항구"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1835,13 +1835,13 @@ msgstr "해당 적이 패배하였습니다!"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:420
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% 군인들 (+%2%)"
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
 #: ../../src/logic/map_objects/tribes/militarysite.cc:428
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "군인 %1% 명"
+msgstr[0] "%1% 명 군인"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently open soldier slots in the building. %3% is the maximum number of
@@ -1849,7 +1849,7 @@ msgstr[0] "군인 %1% 명"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:440
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) 군인들 (+%3%)"
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently
@@ -1857,7 +1857,7 @@ msgstr[0] "%1%(+%2%) 군인들 (+%3%)"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:449
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) 군인들"
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../src/logic/map_objects/tribes/militarysite.cc:952
@@ -2323,7 +2323,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr "재생이 동기화되지 않아 놀이가 일시 중지되었습니다.\n지원되지 않는 다른 버전의 와이드랜드로 만든 재생을 보고 있을 겁니다.\n\n 리플레이가 같은 버전의 와이드랜드, %1$s (%2$s)로 만든것이 확실하면, 이 문제를 버그로 보고하십시오.\n 표준 출력 (원도우즈에서는 stdout.txt 파일)에서 관련 메시지를 찾을 수 있습니다. 이 정보를 보고서에 추가하십시오. "
+msgstr "재생이 동기화되지 않아 놀이가 일시 중지되었습니다.\n지원되지 않는 다른 버전의 와이드랜드로 만든 재생을 보고 있을 겁니다.\n\n 리플레이가 같은 버전의 와이드랜드, %1$s (%2$s)로 만든것이 확실하면, 이 문제를 버그로 보고하십시오.\n 표준 출력 (원도우즈에서는 stdout.txt 파일)에서 관련 메시지를 찾을 수 있습니다. 이 정보를 보고서에 추가하십시오."
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -3119,7 +3119,7 @@ msgstr "선택 안됨"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
-msgstr "잠시 기다리십시오… "
+msgstr "잠시 기다리십시오…"
 
 #: ../../src/ui_basic/panel.cc:442
 msgid "Game ending – please wait…"
@@ -5535,7 +5535,7 @@ msgstr "알릴말: 위치로 이동"
 
 #: ../../src/wlapplication_options.cc:532
 msgid "Messages: Show "
-msgstr "알릴말: 표시"
+msgstr "알릴말: 표시 "
 
 #: ../../src/wlapplication_options.cc:537
 msgid "Messages: Show Geologists’ Messages"
@@ -5583,7 +5583,7 @@ msgstr "항해: 놀고있는 배를 표시"
 
 #: ../../src/wlapplication_options.cc:592
 msgid "Seafaring: Show Transport Ships"
-msgstr "항해: 수송선을 표시 "
+msgstr "항해: 수송선을 표시"
 
 #: ../../src/wlapplication_options.cc:597
 msgid "Seafaring: Show Waiting Expeditions"
@@ -5887,7 +5887,7 @@ msgstr "정말 활성화된 탐험을 취소합니까?"
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] "%u 군인들"
+msgstr[0] "%u 명 군인"
 
 #: ../../src/wui/attack_box.cc:201
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -6012,9 +6012,9 @@ msgstr "항구"
 msgid "Low productivity:"
 msgstr "낮은 생산성:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6417,8 +6417,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"

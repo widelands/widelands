@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-13 02:46+0000\n"
-"PO-Revision-Date: 2021-07-15 21:05+0000\n"
+"POT-Creation-Date: 2021-07-16 02:39+0000\n"
+"PO-Revision-Date: 2021-07-18 21:19+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -269,8 +269,8 @@ msgstr "listopad"
 msgid "Dec"
 msgstr "prosinec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:185
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -284,12 +284,12 @@ msgstr "Hlavní nabídka"
 msgid "Tools"
 msgstr "Nástroje"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Informace"
 msgid "Click on a field to show information about it"
 msgstr "Kliknutím na pole mapy se zobrazí jeho popis"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -650,8 +650,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1975,7 +1975,7 @@ msgstr "dělník potřebuje zkušenosti"
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:591
 msgid "the workers need no experience"
-msgstr "dělník nepotřebuje další zkušenosti"
+msgstr "dělníci nepotřebuje další zkušenosti"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -2446,7 +2446,7 @@ msgstr "Podrobnosti vlajky"
 
 #: ../../src/map_io/map_saver.cc:258
 msgid "Road and waterway details"
-msgstr "Podrobnosti cesy / vodní cesty"
+msgstr "Podrobnosti cesty / vodní cesty"
 
 #: ../../src/map_io/map_saver.cc:275
 msgid "Building details"
@@ -2509,19 +2509,19 @@ msgstr "Území"
 
 #: ../../src/map_io/widelands_map_loader.cc:332
 msgid "Initializing flags"
-msgstr "Spouštění vlajek"
+msgstr "Příprava vlajek"
 
 #: ../../src/map_io/widelands_map_loader.cc:339
 msgid "Initializing roads and waterways"
-msgstr "Spouštění cest a vodních cest"
+msgstr "Příprava cest a vodních cest"
 
 #: ../../src/map_io/widelands_map_loader.cc:352
 msgid "Initializing buildings"
-msgstr "Spouštění budov"
+msgstr "Příprava budov"
 
 #: ../../src/map_io/widelands_map_loader.cc:359
 msgid "Initializing map objects"
-msgstr "Spouštění prvků mapy"
+msgstr "Příprava prvků mapy"
 
 #: ../../src/map_io/widelands_map_loader.cc:424
 msgid "Checking map"
@@ -2575,7 +2575,7 @@ msgstr "/me soubor neprošel kontrolním součtem md5."
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me zkontroloval jsem přijatý soubor. Přestože kontrolní součet md5 souhlasí, nemohu se souborem pracovat."
+msgstr "/me zkontroloval přijatý soubor. Přestože kontrolní součet md5 souhlasí, nemohu se souborem pracovat."
 
 #: ../../src/network/gameclient.cc:1282
 msgid "Disconnected"
@@ -2590,7 +2590,7 @@ msgstr "Spojení s hostitelem bylo přerušeno z důvodu:\n%s"
 
 #: ../../src/network/gamehost.cc:117
 msgid "Available host commands are:"
-msgstr "Příkazy k dispozici jsou:"
+msgstr "K dispozici jsou příkazy hostitele:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:119
@@ -2605,12 +2605,12 @@ msgstr "/announce <msg>  -  pošle zprávu přes chat jako oznámení (systémov
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:123
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr "/warn <jméno> <důvod>  -  varování uživatele <jméno> z důvodu <důvod>"
+msgstr "/warn <name> <reason>  -  varování uživatele <name> z důvodu <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:125
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
-msgstr "/kick <jméno> <důvod>  -  vyhození uživatele <jméno> z důvodu <důvod>"
+msgstr "/kick <name> <reason>  -  vyhození uživatele <name> z důvodu <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:127
@@ -2624,11 +2624,11 @@ msgstr "/endForcedPause        -  znovu nastaví normální rychlost hry."
 
 #: ../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Špatné použití, mělo by být: /announce <zpráva>"
+msgstr "Špatné použití, mělo by být: /announce <message>"
 
 #: ../../src/network/gamehost.cc:148
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Špatné použití, mělo by být: /warn <jméno> <důvod>"
+msgstr "Špatné použití, mělo by být: /warn <name> <reason>"
 
 #: ../../src/network/gamehost.cc:152 ../../src/network/gamehost.cc:176
 #, c-format
@@ -2637,7 +2637,7 @@ msgstr "Klient %s nebyl nalezen."
 
 #: ../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Špatné použití, mělo by být: /kick <jméno> <důvod>"
+msgstr "Špatné použití, mělo by být: /kick <name> <reason>"
 
 #: ../../src/network/gamehost.cc:174
 msgid "You can not kick yourself!"
@@ -2664,7 +2664,7 @@ msgstr "Potvrzení vyhození bylo zrušeno. Nebylo zadáno žádné jméno!"
 
 #: ../../src/network/gamehost.cc:193
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Špatné použití, mělo by být: /ack_kick <jméno>"
+msgstr "Špatné použití, mělo by být: /ack_kick <name>"
 
 #: ../../src/network/gamehost.cc:199
 msgid "Kick acknowledgement cancelled: Wrong name given!"
@@ -2672,11 +2672,11 @@ msgstr "Potvrzení vyhození bylo zrušeno. Bylo zadáno špatné jméno!"
 
 #: ../../src/network/gamehost.cc:209
 msgid "Pause was already forced - game should be paused."
-msgstr "Pozastavení bylo již vnuceno - hra by měla být pozastavena."
+msgstr "Pozastavení bylo již vynuceno - hra by měla být pozastavena."
 
 #: ../../src/network/gamehost.cc:219
 msgid "There is no forced pause - nothing to end."
-msgstr "Není zde vynucené pozastavení - není co ukončit."
+msgstr "Hra není vynuceně pozastavena - není co ukončit."
 
 #: ../../src/network/gamehost.cc:228
 msgid "Invalid command! Type /help for a list of commands."
@@ -2734,7 +2734,7 @@ msgstr "Něco se pokazilo: %s"
 
 #: ../../src/network/internet_gaming.cc:430
 msgid "Welcome to the Widelands Metaserver!"
-msgstr "Vítej na MetaServeru Widelands!"
+msgstr "Vítej na Metaserveru Widelands!"
 
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
@@ -2749,7 +2749,7 @@ msgstr "Naše diskusní fóra nalezneš na:"
 
 #: ../../src/network/internet_gaming.cc:449
 msgid "For reporting bugs, visit:"
-msgstr "Pro nahlášení nečekaných závad navštiv:"
+msgstr "Pro nahlášení chyb navštiv:"
 
 #: ../../src/network/internet_gaming.cc:472
 msgid "Mixed up"
@@ -2807,12 +2807,12 @@ msgstr "Hra %s byla uzavřena"
 #: ../../src/network/internet_gaming.cc:618
 #, c-format
 msgid "%s joined the lobby"
-msgstr "%s se připojuje k lobby"
+msgstr "%s se připojil k lobby"
 
 #: ../../src/network/internet_gaming.cc:630
 #, c-format
 msgid "%s left the lobby"
-msgstr "%s opouští lobby"
+msgstr "%s opustil lobby"
 
 #: ../../src/network/internet_gaming.cc:687
 msgid "Chat message could not be sent."
@@ -2847,7 +2847,7 @@ msgstr "Zpráva nemohla být odeslána: Měla to být privátní zpráva?"
 
 #: ../../src/network/internet_gaming.cc:927
 msgid "Supported admin commands:"
-msgstr "Podpůrné příkazy správy:"
+msgstr "Podporované příkazy správce:"
 
 #: ../../src/network/internet_gaming.cc:928
 msgid "/motd <msg> - Set a permanent greeting message"
@@ -2917,7 +2917,7 @@ msgstr "Byl jsi odpojen, protože jsi poslal superuser příkaz bez superuser op
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Connection was closed by the client normally."
-msgstr "Spojení bylo klientem normálně ukončeno."
+msgstr "Spojení bylo klientem ukončeno normálně."
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "The connection to the metaserver was lost."
@@ -2939,7 +2939,7 @@ msgstr "Klient opustil hru."
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr "Klient havaroval a provedl nouzové uložení hry."
+msgstr "Klient spadl a provedl nouzové uložení hry."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
@@ -6106,9 +6106,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6511,8 +6511,8 @@ msgstr "Nahradit odpojeného hráče vybranou UI a pokračovat ve hře"
 msgid "AI for the disconnected player"
 msgstr "UI místo odpojeného hráče"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
