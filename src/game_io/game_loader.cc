@@ -67,7 +67,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	assert(game_.has_loader_ui());
 	auto set_progress_message = [](const std::string& text, unsigned step) {
 		Notifications::publish(UI::NoteLoadingMessage(
-		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str()));
+		   bformat(_("Loading game: %1$s (%2$u/%3$d)"), text, step, 6)));
 	};
 	set_progress_message(_("Elemental data"), 1);
 	verb_log_info("Game: Reading Preload Data ... ");

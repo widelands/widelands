@@ -1,7 +1,6 @@
 #include "wui/savegametable.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/image_cache.h"

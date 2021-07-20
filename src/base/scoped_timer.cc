@@ -20,7 +20,6 @@
 #include "base/scoped_timer.h"
 
 #include <SDL_timer.h>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 

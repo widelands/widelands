@@ -27,8 +27,7 @@
 #include <ctime>
 #include <memory>
 
-#include <boost/format.hpp>
-
+#include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"
@@ -417,7 +416,7 @@ void* ZipFilesystem::load(const std::string& fname, size_t& length) {
 		}
 		if (len < 0) {
 			unzCloseCurrentFile(zip_file_->read_handle());
-			const std::string errormessage = (boost::format("read error %i") % len).str();
+			const std::string errormessage = bformat("read error %i", len);
 			throw ZipOperationError("ZipFilesystem::load", fname, zip_file_->path(), errormessage);
 		}
 
@@ -472,10 +471,10 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, size
 	case ZIP_ERRNO:
 		throw FileError(
 		   "ZipFilesystem::write", complete_filename,
-		   (boost::format("in path '%s'', Error") % zip_file_->path() % strerror(errno)).str());
+		   bformat("in path '%s'', Error", zip_file_->path(), strerror(errno)));
 	default:
 		throw FileError("ZipFilesystem::write", complete_filename,
-		                (boost::format("in path '%s'") % zip_file_->path()).str());
+		                bformat("in path '%s'", zip_file_->path()));
 	}
 
 	zipCloseFileInZip(zip_file_->write_handle());

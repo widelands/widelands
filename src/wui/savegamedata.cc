@@ -1,9 +1,9 @@
 #include "wui/savegamedata.h"
 
-#include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/time_string.h"
 #include "graphic/text_layout.h"
 
@@ -124,17 +124,17 @@ SavegameData SavegameData::create_sub_dir(const std::string& directory) {
 }
 
 const std::string as_filename_list(const std::vector<SavegameData>& savefiles) {
-	boost::format message;
+	std::string message;
 	for (const SavegameData& gamedata : savefiles) {
 		if (gamedata.is_directory() || !gamedata.errormessage.empty()) {
-			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
+			message = bformat("%s\n%s", message, richtext_escape(gamedata.filename));
 		} else if (gamedata.errormessage.empty()) {
 			std::vector<std::string> listme;
 			listme.push_back(richtext_escape(gamedata.mapname));
 			listme.push_back(gamedata.savedonstring);
-			message = (boost::format("%s\n%s") % message %
+			message = bformat("%s\n%s", message,
 			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
 		}
 	}
-	return message.str();
+	return message;
 }

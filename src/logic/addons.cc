@@ -23,8 +23,6 @@
 #include <memory>
 #include <set>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"

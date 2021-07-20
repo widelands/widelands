@@ -19,9 +19,8 @@
 
 #include "ui_fsmenu/keyboard_options.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/log.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wlapplication_options.h"
@@ -134,8 +133,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
 	auto generate_title = [](const KeyboardShortcut key) {
-		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key, false))
-		   .str();
+		return bformat(_("%1$s: %2$s"), to_string(key), shortcut_string_for(key, false))
+		   ;
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -154,11 +153,11 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 				} else {
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
-					   (boost::format(_("The shortcut you selected (‘%1$s’) is already in use for the "
+					   bformat(_("The shortcut you selected (‘%1$s’) is already in use for the "
 					                    "following action: ‘%2$s’. Please select a different shortcut "
-					                    "or change the conflicting shortcut first.")) %
-					    shortcut_string_for(c.key, false) % to_string(conflict))
-					      .str(),
+					                    "or change the conflicting shortcut first."),
+					    shortcut_string_for(c.key, false), to_string(conflict))
+					      ,
 					   UI::WLMessageBox::MBoxType::kOk, UI::Align::kCenter, true);
 					warning.run<UI::Panel::Returncodes>();
 				}

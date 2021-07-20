@@ -70,7 +70,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				}
 				try {
 					Section& s = prof.get_safe_section(
-					   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
+					   bformat("player_%u", static_cast<unsigned int>(p)));
 
 					bool allowed;
 					while (const char* const name = s.get_next_bool(nullptr, &allowed)) {
@@ -104,7 +104,7 @@ void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		const TribeDescr& tribe = player->tribe();
 		const std::string section_key =
-		   (boost::format("player_%u") % static_cast<unsigned int>(p)).str();
+		   bformat("player_%u", static_cast<unsigned int>(p));
 		Section& section = prof.create_section(section_key.c_str());
 
 		//  Write for all buildings if it is enabled.

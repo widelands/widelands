@@ -23,8 +23,7 @@
 #include <iostream>
 #include <regex>
 
-#include <boost/format.hpp>
-
+#include "base/log.h"
 #include "base/i18n.h"
 
 constexpr size_t kIndent = 23;
@@ -241,9 +240,7 @@ void show_usage(const std::string& build_id,
 	std::cout << std::string(kIndent + kTextWidth, '=')
 	          << std::endl
 	          /** TRANSLATORS: %s = version information */
-	          << (boost::format(_("This is Widelands Version %s")) %
-	              (boost::format("%s(%s)") % build_id % build_type).str())
-	                .str()
+	          << bformat(_("This is Widelands Version %s"), bformat("%s(%s)", build_id, build_type))
 	          << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {

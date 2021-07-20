@@ -20,6 +20,7 @@
 #include "editor/ui_menus/main_menu_load_map.h"
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"
@@ -82,7 +83,7 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		boost::replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Current directory: %s")) % display_dir).str());
+	directory_info_.set_text(bformat(_("Current directory: %s"), display_dir));
 }
 
 /**

@@ -26,8 +26,6 @@
 #include <set>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/text_layout.h"
@@ -387,7 +385,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
 		   KeyboardShortcutInfo(                                                                     \
 		      {KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key), "editor_toolsize" #radius, \
-		      []() { return (boost::format(_("Set Toolsize to %d")) % radius).str(); })              \
+		      []() { return bformat(_("Set Toolsize to %d"), radius); })              \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -609,12 +607,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      []() { return (boost::format(_("Set Landmark #%d")) % i).str(); })},      \
+	                      []() { return bformat(_("Set Landmark #%d"), i); })},      \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
 		                        "game_quicknav_goto_" #i,                                            \
-		                        []() { return (boost::format(_("Go To Landmark #%d")) % i).str(); }) \
+		                        []() { return bformat(_("Go To Landmark #%d"), i); }) \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -852,7 +850,7 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 
 	std::string result = key_name(sym.sym);
 	for (const std::string& m : mods) {
-		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
+		result = bformat(_("%1$s+%2$s"), m, result);
 	}
 
 	return rt_escape ? richtext_escape(result) : result;

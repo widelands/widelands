@@ -49,7 +49,7 @@ void GameSaver::save() {
 	auto set_progress_message = [](std::string text, int step) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   step < 0 ? text :
-                    (boost::format(_("Saving game: %1$s (%2$d/%3$d)")) % text % step % 5).str()));
+                    bformat(_("Saving game: %1$s (%2$d/%3$d)"), text, step, 5)));
 	};
 	set_progress_message(_("Autosaving game…"), -1);
 

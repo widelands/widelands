@@ -26,8 +26,6 @@
 #include <cstdlib>
 #include <map>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "config.h"
 #include "io/filesystem/layered_filesystem.h"
