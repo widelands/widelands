@@ -1283,6 +1283,10 @@ void WLApplication::handle_commandline_parameters() {
 		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
 	}
+	if (commandline_.count("verbose-i18n")) {
+		i18n::enable_verbose_i18n();
+		commandline_.erase("verbose-i18n");
+	}
 	if (commandline_.count("fail-on-lua-error")) {
 		g_fail_on_lua_error = true;
 		commandline_.erase("fail-on-lua-error");
