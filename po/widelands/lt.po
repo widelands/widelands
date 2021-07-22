@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-16 02:39+0000\n"
-"PO-Revision-Date: 2021-07-13 02:48+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-07-19 02:40+0000\n"
+"PO-Revision-Date: 2021-07-19 20:03+0000\n"
+"Last-Translator: Tachionas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -445,7 +445,7 @@ msgstr "Nustatyti žaidėjų skaičių ir jų vardus, gentis ir pradines padėti
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:333
 msgid "Map origin"
-msgstr ""
+msgstr "Žemėlapio kilmė"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:336
@@ -608,7 +608,7 @@ msgstr "Laukelio informacija"
 
 #: ../../src/editor/tools/info_tool.cc:50
 msgid "Node"
-msgstr ""
+msgstr "Mazgas "
 
 #: ../../src/editor/tools/info_tool.cc:52
 #, c-format
@@ -645,8 +645,8 @@ msgstr "kasykla"
 msgid "port"
 msgstr "uostas"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -876,7 +876,7 @@ msgstr "Išversti žemėlapio pavadinimai"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
-msgstr ""
+msgstr "Pašalinimui paspauskite žaidėją"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/ui_fsmenu/addons_packager_box.cc:271
@@ -887,7 +887,7 @@ msgstr "Ištrinti"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 msgid "Delete this suggested team lineup"
-msgstr ""
+msgstr "Ištrinti šią pasiūlytą komandos rikiuotę"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons_packager.cc:75
@@ -906,11 +906,11 @@ msgstr "Tema"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:333
 msgid "Add lineup"
-msgstr ""
+msgstr "Pridėti rikiuotę"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:334
 msgid "Add another suggested team lineup"
-msgstr ""
+msgstr "Pridėti kitą pasiūlytą komandos rikiuotę"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:354
 msgid "Map name:"
@@ -936,7 +936,7 @@ msgstr "Žymės:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(nėra)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:398
 msgid "Waterway length limit:"
@@ -958,7 +958,7 @@ msgstr[3] "%u žaidėjai"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Suggested Teams:"
-msgstr ""
+msgstr "Siūlomos komandos:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:453
 msgid "Main Options"
@@ -1070,7 +1070,7 @@ msgstr "Numatytas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:241
 msgid "Alpine"
-msgstr ""
+msgstr "Viršūkalnės"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:242
 msgid "Atoll"
@@ -1106,7 +1106,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "Buvo sukurtas žemėlapis. Prašome pakartotinai patikrinti žaidėjų pradines padėtis, įsitikinant, kad jūsų nešikai nepaskęs, neįstrigs saloje ar kalno viršūnėje."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:609
 msgid "The Widelands Random Map Generator"
@@ -1212,7 +1212,7 @@ msgstr "Per daug žaidėjų"
 msgid ""
 "We do not recommend setting more than 8 players except for testing purposes."
 " Are you sure that you want more than 8 players?"
-msgstr ""
+msgstr "Mes nerekomenduojame nustatyti daugiau kaip 8 žaidėjų išskyrus testavimo tikslams. Ar jūs įsitikinęs, kad norite daugiau nei 8 žaidėjų?"
 
 #. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
 #. players except
@@ -1322,7 +1322,7 @@ msgstr "Norėdamas padidinti pažymėtų išteklių kiekį spustelėk ant žemė
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr ""
+msgstr "Norėdamas nustatyti pažymėtų išteklių kiekį paspausk Ctrl klavišą ir spustelėk ant žemėlapio. Tai pakeis jau nustatytus išteklius."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:33
 msgid "Random Height Options"
@@ -1342,7 +1342,7 @@ msgstr "Didžiausias aukštis:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr ""
+msgstr "Norėdamas nustatyti atsitiktinę reljefo aukščio vertę nurodytame diapazone spustelėk ant žemėlapio. "
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Fixed height"
@@ -1361,8 +1361,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1632,17 +1632,17 @@ msgstr[3] ""
 #: ../../src/logic/addons.cc:185
 #, c-format
 msgid "%s (missing)"
-msgstr ""
+msgstr "%s (trūkstamas)"
 
 #: ../../src/logic/addons.cc:187
 #, c-format
 msgid "%1$s, %2$s (missing)"
-msgstr ""
+msgstr "%1$s, %2$s (trūkstamas)"
 
 #: ../../src/logic/addons.cc:197
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s ir %2$s: %3$s"
 
 #: ../../src/logic/addons.cc:199
 #, c-format
@@ -1665,17 +1665,17 @@ msgstr[3] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:217
 msgid "None"
-msgstr ""
+msgstr "Nėra"
 
 #: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s <br>· %2$s (versija %3$s)"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
 msgid "Creating player %d…"
-msgstr ""
+msgstr "Žaidėjo %d sukūrimas ..."
 
 #: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
@@ -6118,7 +6118,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:200
 msgid "Muted – click to unmute"
-msgstr ""
+msgstr "Nutildyta. Norėdamas atšaukti nutildymą, paspausk."
 
 #: ../../src/wui/buildingwindow.cc:201
 msgid "Mute this building’s messages"
@@ -6126,7 +6126,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:206
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Visi šio tipo statiniai yra nutildyti. Norėdamas atšaukti nutildymą, paspausk."
 
 #: ../../src/wui/buildingwindow.cc:210
 msgid "Mute all buildings of this type"
@@ -6361,7 +6361,7 @@ msgstr "Veiksmas"
 
 #: ../../src/wui/fieldaction.cc:395
 msgid "Marked for removal by a worker – click to unmark"
-msgstr ""
+msgstr "Darbininkas pažymėtas pašalinimui. Norėdamas atžymėti, paspausk."
 
 #: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
 msgid "Immovable Actions"
@@ -7071,8 +7071,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Statistika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
@@ -7791,7 +7791,7 @@ msgstr "Spustelėk kareivį, kad išsiųstum"
 #. * TRANSLATORS: Tooltip for volume slider in sound options
 #: ../../src/wui/sound_options.cc:66
 msgid "Changes the volume. Click to hear a sample."
-msgstr ""
+msgstr "Garsumo keitimas. Norėdamas išgirsti pavyzdį, paspausk. "
 
 #: ../../src/wui/sound_options.cc:136
 msgctxt "sound_options"

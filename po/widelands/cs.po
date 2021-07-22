@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-16 02:39+0000\n"
-"PO-Revision-Date: 2021-07-18 21:19+0000\n"
+"POT-Creation-Date: 2021-07-19 02:40+0000\n"
+"PO-Revision-Date: 2021-07-21 19:37+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -650,8 +650,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1366,8 +1366,8 @@ msgid ""
 "location."
 msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa rozdělena. Pokud se rozměr zvětšuje, nové sloupce/řádky budou vloženy doprava a dolů od místa rozdělení, tzn. na jih a východ od místa rozdělení. Pokud se mapa zmenšuje bude odebrán požadovaný počet sloupců/řádků, které jsou taktéž ve směru vpravo a dolů od místa rozdělení."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -3017,11 +3017,11 @@ msgstr "Přišel příkaz číslo %s, který je v tomto stavu zakázán."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client reports time to host that is running backwards."
-msgstr "Klient hlásí hostiteli čas, který nemá dopřednou kontinuitu."
+msgstr "Klient hlásí hostiteli čas, který běží pozpátku."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr "Hra klienta překračuje čas odehraný hostitelem."
+msgstr "Hra klienta překračuje čas nastavený hostitelem."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client did not submit sync report in time."
@@ -3045,7 +3045,7 @@ msgstr "Klient poslal příkaz TIME přestože hra neběží."
 
 #: ../../src/network/network_gaming_messages.cc:157
 msgid "Client sent a PLAYERCOMMAND for another player."
-msgstr "Klient odeslal playercommand za jiného hráče."
+msgstr "Klient odeslal PLAYERCOMMAND za jiného hráče."
 
 #: ../../src/network/network_gaming_messages.cc:158
 msgid "Client sent unexpected synchronization report."
@@ -3068,7 +3068,7 @@ msgstr "VAROVÁNÍ: %1$s používá verzi: %2$s, zatímco Hostitel používá ve
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s se připojuje ke hře"
+msgstr "%s se připojil ke hře"
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
@@ -3124,21 +3124,21 @@ msgstr "Výchozí barva"
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgid "R"
-msgstr "R(Č)"
+msgstr "Č"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgid "G"
-msgstr "G(Z)"
+msgstr "Z"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgid "B"
-msgstr "B(M)"
+msgstr "M"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
-msgstr "Přednastavená barva"
+msgstr "Výchozí barva"
 
 #: ../../src/ui_basic/color_chooser.cc:328
 msgid "Red"
@@ -3277,11 +3277,11 @@ msgstr "Vymazat filtry"
 
 #: ../../src/ui_fsmenu/addons.cc:195
 msgid "Refresh"
-msgstr "Přenačíst"
+msgstr "Obnovit"
 
 #: ../../src/ui_fsmenu/addons.cc:196
 msgid "Refresh the list of add-ons available from the server"
-msgstr "Aktualizuj seznam rozšíření dostupných na tomto serveru"
+msgstr "Obnov seznam rozšíření dostupných na tomto serveru"
 
 #: ../../src/ui_fsmenu/addons.cc:213
 msgid "Fix dependencies…"
@@ -3309,7 +3309,7 @@ msgstr "Přesuň vybrané rozšíření dolů"
 
 #: ../../src/ui_fsmenu/addons.cc:259
 msgid "Launch the add-ons packager…"
-msgstr "Spustit Add-Ons Packager…"
+msgstr "Spustit správce rozšíření…"
 
 #: ../../src/ui_fsmenu/addons.cc:263
 msgid "Tools for Add-Ons Developers"
@@ -3321,7 +3321,7 @@ msgid ""
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr "Interaktivní Add-Ons Packager umožňuje vytváření, úpravy a mazání herních rozšíření, sestavování souborů map, vytvořených v Editoru map, a jejich sdílení s ostatními hráči prostřednictvím grafického uživatelského rozhraní bez toho, aby bylo nutné napsat jediný řádek skriptu."
+msgstr "Interaktivní správce rozšíření umožňuje vytváření, úpravy a mazání herních rozšíření, sestavování souborů map, vytvořených v Editoru map, a jejich sdílení s ostatními hráči prostřednictvím grafického uživatelského rozhraní bez toho, aby bylo nutné napsat jediný řádek skriptu."
 
 #: ../../src/ui_fsmenu/addons.cc:292
 #, c-format
@@ -3431,7 +3431,7 @@ msgstr "Aktualizovat vše"
 
 #: ../../src/ui_fsmenu/addons.cc:667
 msgid "Server Connection Error"
-msgstr "Chyba serverového připojení"
+msgstr "Chyba připojení k serveru"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
@@ -3453,12 +3453,12 @@ msgstr "Instalováno (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:829
 msgid "Browse"
-msgstr "Procházet dostupné"
+msgstr "Procházet"
 
 #: ../../src/ui_fsmenu/addons.cc:830
 #, c-format
 msgid "Browse (%u)"
-msgstr "Dostupné (%u)"
+msgstr "Procházet (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:840
 #, c-format
@@ -3724,7 +3724,7 @@ msgstr "‘%1$s’ okomentoval(a) verzi %2$s:"
 
 #: ../../src/ui_fsmenu/addons.cc:1711
 msgid "Not voted"
-msgstr "Nehlasováno"
+msgstr "Bez hodnocení"
 
 #: ../../src/ui_fsmenu/addons.cc:1771
 #, c-format
@@ -3739,7 +3739,7 @@ msgstr "Snímky obrazovky (%u)"
 #: ../../src/ui_fsmenu/addons.cc:1788
 #, c-format
 msgid "Votes (%u)"
-msgstr "Hlasy (%u)"
+msgstr "Hodnocení (%u)"
 
 #: ../../src/ui_fsmenu/addons.cc:1831
 #, c-format
@@ -3854,7 +3854,7 @@ msgstr[3] "%u snímků obrazovky"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:49
 msgid "Add-Ons Packager"
-msgstr "Add-Ons Packager"
+msgstr "Správce rozšíření"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:76
 msgid "New add-on"
@@ -7076,8 +7076,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Námořní"
