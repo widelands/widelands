@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2016-2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2016-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-04 02:37+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-07-13 11:32+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,22 +19,22 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "Usage:"
-msgstr ""
+msgstr "Brug:"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid "widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:52
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:58
 #: ../../src/wlapplication_messages.cc:187
 msgid "DIRNAME"
-msgstr ""
+msgstr "MAPPENAVN"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "Options:"
@@ -42,33 +42,33 @@ msgstr "Tilvalg:"
 
 #: ../../src/wlapplication_messages.cc:53
 msgid "Use specified directory for the widelands data files"
-msgstr ""
+msgstr "Brug angivet mappe for Widelands' datafiler"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid ""
 "Use specified directory for widelands config files, savegames and replays. "
 "Default is "
-msgstr ""
+msgstr "Brug angivet mappe for widelands-konfigurationsfiler, gemte spil og genafspilninger. Standard er"
 
 #: ../../src/wlapplication_messages.cc:58
 msgid "Use specified directory for the widelands locale files"
-msgstr ""
+msgstr "Brug angivet mappe for widelands' sprogfiler"
 
 #: ../../src/wlapplication_messages.cc:63
 msgid "The locale to use"
-msgstr ""
+msgstr "Sprog"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
 #: ../../src/wlapplication_messages.cc:63
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../src/wlapplication_messages.cc:65
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version"
-msgstr ""
+msgstr "Tjek ikke om datamappen er kompatibel med denne Widelands-version."
 
 #: ../../src/wlapplication_messages.cc:68
 #: ../../src/wlapplication_messages.cc:72
@@ -76,65 +76,65 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:75
 #: ../../src/wlapplication_messages.cc:76
 msgid "FILENAME"
-msgstr ""
+msgstr "FILNAVN"
 
 #: ../../src/wlapplication_messages.cc:69
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
-msgstr ""
+msgstr "Opret direkte et nyt spil for en spiller konfigureret i den givne fil. Et eksempel kan findes i »data/templates/new_game_template«"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Directly starts the map `FILENAME` as scenario map"
-msgstr ""
+msgstr "Starter direkte kortet »FILNAVN« som scenariekort"
 
 #: ../../src/wlapplication_messages.cc:74
 msgid "Directly loads the savegame `FILENAME`"
-msgstr ""
+msgstr "Indlæser direkte det gemte spil »FILNAVN«"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Directly loads the replay `FILENAME`"
-msgstr ""
+msgstr "Indlæser direkte genafspilningen »FILNAVN«"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
-msgstr ""
+msgstr "Afvikl den givne Lua-skript efter initalisering. Kun gyldig med --scenario, --loadgame eller --editor"
 
 #: ../../src/wlapplication_messages.cc:81
 msgid ""
 "Directly starts the Widelands editor. You can add a =FILENAME to directly "
 "load the map `FILENAME` in editor"
-msgstr ""
+msgstr "Starter direkte Widelands-redigeringsprogrammet. Du kan tilføj et =FILNAVN for direkte at indlæse kortet »FILNAVN« i redigeringsprogrammet"
 
 #: ../../src/wlapplication_messages.cc:85
 msgid "Starts the game with sound disabled"
-msgstr ""
+msgstr "Starter spillet med lyd deaktiveret"
 
 #: ../../src/wlapplication_messages.cc:86
 msgid "Force Widelands to crash when a Lua error occurs"
-msgstr ""
+msgstr "Tving Widelands til et nedbrud når en Lua-fejl opstår"
 
 #: ../../src/wlapplication_messages.cc:88
 msgid ""
 "Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic"
-msgstr ""
+msgstr "Aktiverer AI-træningstilstand. Se https://www.widelands.org/wiki/Ai%20Training/ for en fuld beskrivelse af AI-træningslogikken"
 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr ""
+msgstr "I spil for flere vil denne indstilling justere spilhastigheden automatisk afhængig af FPS. Nyttig sammen med --ai_training"
 
 #: ../../src/wlapplication_messages.cc:96
 msgid "Game options:"
-msgstr ""
+msgstr "Spilindstillinger:"
 
 #: ../../src/wlapplication_messages.cc:96
 msgid "Note: New values will be written to config file"
-msgstr ""
+msgstr "Bemærk: Nye værdier vil blive skrevet til konfigurationsfil"
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:99
@@ -144,25 +144,25 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:192
 #: ../../src/wlapplication_messages.cc:201
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:101
 msgid "Automatically save each `n` minutes"
-msgstr ""
+msgstr "Gem automatisk hvert n. minut"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:104
 msgid "Use `n` files for rolling autosaves"
-msgstr ""
+msgstr "Brug n filer for rullende automatisk gem"
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Do not save files as binary zip archives"
-msgstr ""
+msgstr "Gem ikke filer som binære zip-arkiver"
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Show filenames in replay screen"
-msgstr ""
+msgstr "Vis filnavne i skærm for genafspilning"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -177,21 +177,21 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:180
 #: ../../src/wlapplication_messages.cc:190
 msgid "[true*|false]"
-msgstr ""
+msgstr "[sand*|falsk]"
 
 #: ../../src/wlapplication_messages.cc:109
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
-msgstr ""
+msgstr "Om en advarsel skal vises i redigeringsprogrammet, hvis der er for mange spillere"
 
 #: ../../src/wlapplication_messages.cc:111
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Start bygning af vej efter placering af et flag"
 
 #: ../../src/wlapplication_messages.cc:116
 msgid "Bitmask of display flags to set for new games"
-msgstr ""
+msgstr "Bitmaske for skærmflag at angive for nye spil"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -204,11 +204,11 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:158
 #: ../../src/wlapplication_messages.cc:161
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:129
 msgid "Scroll when the mouse cursor is near the screen edge"
-msgstr ""
+msgstr "Rul når musemarkøren er nær skærmkanten"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -228,39 +228,39 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:197
 #: ../../src/wlapplication_messages.cc:206
 msgid "[true|false*]"
-msgstr ""
+msgstr "[sand|falsk*]"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Invert click-and-drag map movement direction"
-msgstr ""
+msgstr "Vend klik og træk-kortbevægelsesretning om"
 
 #: ../../src/wlapplication_messages.cc:133
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Tillad diagonal rulning med det numeriske tastatur"
 
 #: ../../src/wlapplication_messages.cc:134
 msgid "Display system time in the info panel"
-msgstr ""
+msgstr "Vis systemtid i informationspanelet"
 
 #: ../../src/wlapplication_messages.cc:135
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Zoom kun når Ctrl presses ned"
 
 #: ../../src/wlapplication_messages.cc:136
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "Brug enkelt watchwindow-tilstand"
 
 #: ../../src/wlapplication_messages.cc:138
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Vis samtale i spillet med gennemsigtig baggrund"
 
 #: ../../src/wlapplication_messages.cc:139
 msgid "Bitmask to set the toolbar location and mode"
-msgstr ""
+msgstr "Bitmaske til at angive værktøjslinjens placering og tilstand"
 
 #: ../../src/wlapplication_messages.cc:141
 msgid "Networking:"
-msgstr ""
+msgstr "Netværk:"
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in multiplayer
@@ -268,16 +268,16 @@ msgstr ""
 #. players.
 #: ../../src/wlapplication_messages.cc:149
 msgid "Create syncstream dump files to help debug network games"
-msgstr ""
+msgstr "Opret syncstream-dumpfiler til at hjælpe med at søge efter fejl i netværksspil"
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Connect to a different metaserver for internet gaming"
-msgstr ""
+msgstr "Forbind til en anden metaserver for internetspil"
 
 #: ../../src/wlapplication_messages.cc:150
 #: ../../src/wlapplication_messages.cc:162
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:154
@@ -294,15 +294,15 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Name of map author"
-msgstr ""
+msgstr "Navn på kortforfatteren"
 
 #: ../../src/wlapplication_messages.cc:158
 msgid "The last host connected to"
-msgstr ""
+msgstr "Den sidste vært forbundet til"
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "Whether the used metaserver login is for a registered user"
-msgstr ""
+msgstr "Om det brugte metaserverlogind er for en registreret bruger"
 
 #: ../../src/wlapplication_messages.cc:161
 msgid "The hashed password for online logins"
@@ -328,22 +328,22 @@ msgstr ""
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:171
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../src/wlapplication_messages.cc:173
 msgid "Width `x` of the window in pixel"
-msgstr ""
+msgstr "Bredden x for vinduet i billedpunkter"
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../src/wlapplication_messages.cc:176
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:178
 msgid "Height `y` of the window in pixel"
-msgstr ""
+msgstr "Højden y for vinduet i billedpunkter"
 
 #: ../../src/wlapplication_messages.cc:179
 msgid "Whether to grab the mouse input"
@@ -355,16 +355,16 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:182
 msgid "Whether to use sticky tooltips"
-msgstr ""
+msgstr "Om der skal bruges klæbende værktøjsfif"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:186
 msgid "Maximal optical framerate `n` of the game"
-msgstr ""
+msgstr "Maksimal optisk billedhastighed n for spillet"
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "The path to the active UI theme relative to the homedir"
-msgstr ""
+msgstr "Stien til det aktive brugerfladetema relativt til hjemmemappen"
 
 #: ../../src/wlapplication_messages.cc:190
 msgid "Options for the internal window manager:"
@@ -372,14 +372,14 @@ msgstr "Indstillinger for den interne vindueshåndtering:"
 
 #: ../../src/wlapplication_messages.cc:191
 msgid "Should automatic map movements be animated"
-msgstr ""
+msgstr "Skal automatiske kortbevægelser animeres"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:194
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
-msgstr ""
+msgstr "Flyt et vindue til kanten af skærmen, når kanten af vinduet er i afstanden n fra skærmkanten"
 
 #: ../../src/wlapplication_messages.cc:198
 msgid ""
@@ -402,40 +402,40 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "Aktiver uddybende fejlsøgningsbeskeder"
 
 #: ../../src/wlapplication_messages.cc:210
 msgid "Others:"
-msgstr ""
+msgstr "Andre:"
 
 #: ../../src/wlapplication_messages.cc:211
 msgid "Only print version and exit"
-msgstr ""
+msgstr "Vis kun version og afslut"
 
 #: ../../src/wlapplication_messages.cc:212
 msgid "Show this help"
-msgstr ""
+msgstr "Vis denne hjælpetekst"
 
 #: ../../src/wlapplication_messages.cc:213
 msgid "Show this help with all available config options"
-msgstr ""
+msgstr "Vis denne hjælpetekst med alle tilgængelige konfigurationstilvalg"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "<save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:215
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay"
-msgstr ""
+msgstr "Indlæser direkte det angivne gemte spil eller genafspilning. Nyttig for .wgf/.wrpl-filendelseassociation. Fungerer ikke med andre tilvalg. Se også --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:244
 #, c-format
 msgid "This is Widelands Version %s"
-msgstr ""
+msgstr "Dette er Widelands-version %s"
 
 #: ../../src/wlapplication_messages.cc:305
 msgid ""

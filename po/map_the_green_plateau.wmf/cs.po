@@ -4,15 +4,16 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-01-02 22:02+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-07-15 20:28+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,12 +69,12 @@ msgstr "Poraz Joma. Stará se o dodávky jídla pro vojáky."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:52
 msgid "First Briefing"
-msgstr "První informace"
+msgstr "První instrukce"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:62
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:73
 msgid "Second Briefing"
-msgstr "Druhé informace"
+msgstr "Druhé instrukce"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:66
 msgid "An Ancient Castle"
@@ -121,7 +122,7 @@ msgstr "Je úžasné, jak daleko lze dohlédnout z nejvyšší věže hradu. Mů
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:84
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid "Another Briefing"
-msgstr "Další informace"
+msgstr "Další instrukce"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:88
 msgid "Erwyn Defeated"
@@ -145,7 +146,7 @@ msgstr "Při pohledu na doutnající zbytky poslední ze svých budov se Jomo vz
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid "Last Briefing"
-msgstr "Poslední informace"
+msgstr "Poslední instrukce"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Victory!"

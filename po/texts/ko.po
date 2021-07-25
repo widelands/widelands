@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-24 13:29+0000\n"
+"PO-Revision-Date: 2021-07-18 14:22+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Widelands 허가서 정보"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "저작권 2002 - %1% 와이드랜드 개발 팀"
+msgstr "저작권 2002 - %1% 와이드랜드 개발 팀."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
@@ -458,7 +458,7 @@ msgstr "깃발의 색깔을 가진 선수. 둘 이상의 클라이언트가 동�
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "관전자 모드, 모든 것을 볼 수 있지만 플레이어를 제어 할 수 없음을 의미합니다."
+msgstr "관전자 모드, 모든 것을 볼 수 있지만 플레이어를 제어 할 수 없음을 의미합니다"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
