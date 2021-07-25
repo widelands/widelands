@@ -77,6 +77,8 @@ std::string as_mapobject_message(const std::string& image,
                                  const RGBColor* player_color = nullptr);
 std::string as_message(const std::string& heading, const std::string& body);
 
+void newlines_to_richtext(std::string&);
+
 /**
 
   * Render 'text' with the given font style. If 'width' > 0 and the rendered image is too

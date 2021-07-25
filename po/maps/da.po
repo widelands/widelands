@@ -3,15 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2021
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-07-13 16:09+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -217,7 +217,7 @@ msgstr "Endelig blev skibet repareret, så Lutius og hans folk kunne genoptage m
 
 #: ../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptuns hævn"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -349,7 +349,7 @@ msgstr "pbuczny@gmail.com – redigeret af Nordfriese"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Langt, økonomisk spil i et smukt land, prøv alle spillerne!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -423,7 +423,7 @@ msgstr "Krydser horisonten"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – redigeret af 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -431,7 +431,7 @@ msgstr "Bemand dit skib og sejl ud mod horisonten."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr ""
+msgstr "Dette kort kan ikke vindes med sejrsbetingelsen »Autokrat«."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
@@ -485,7 +485,7 @@ msgstr ""
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Et stort Europakort. Blå = Sverige, rød = Italien, gul = Spanien, grøn = Tyrkiet, sort = Rusland, orange = England, lilla = Frankrig, hvid = Polen"
 
 #: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
