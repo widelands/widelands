@@ -223,13 +223,14 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
 			                        key <= KeyboardShortcut::kFastplace__End);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
-			if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
 				if (set_shortcut(key, c.key, &conflict)) {
 					if (fastplace) {
 						set_fastplace_shortcut(key, c.fastplace);
 					}
 					b->set_title(generate_title(key));
+					break;
 				} else {
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
