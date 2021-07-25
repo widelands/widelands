@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-19 02:40+0000\n"
-"PO-Revision-Date: 2021-06-12 21:03+0000\n"
+"POT-Creation-Date: 2021-07-22 02:51+0000\n"
+"PO-Revision-Date: 2021-07-23 18:06+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1928,8 +1928,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Stan ochránkyně fauny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2465,7 +2465,7 @@ msgstr "Pavoučí farma"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Dílna"
+msgstr "Kovárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -3470,7 +3470,7 @@ msgstr "Hospoda"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "Dílna"
+msgstr "Kovárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:80
@@ -8251,7 +8251,7 @@ msgstr "Kameník"
 #: ../../data/tribes/workers/atlanteans/toolsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "Nástrojář"
+msgstr "Kovář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/trainer/init.lua:8
@@ -8647,7 +8647,7 @@ msgstr "Kameník"
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr "Nástrojář"
+msgstr "Kovář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/trainer/init.lua:8
