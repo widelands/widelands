@@ -17,10 +17,18 @@ EXCLUDE_CLASSES = ['Market',
 
 class LuaClass:
 
-    def __init__(self, name, outfile, parent=None):
+    def __init__(self, name, outfile, parent=None, is_base=False):
+
+        def _prefix_name():
+            prefix = '.'.join(outfile.rpartition('.')[0].split('_')[1:])
+            return '{}.{}'.format(prefix, name)
+
+        self.p_name = _prefix_name()
         self.name = name
         self.outfile = outfile
         self.parent = parent
+        self.is_base = is_base
+        self.children = []
 
     def get_prefixed_name(self):
         """Returns a string assembled form outfile and classname.
@@ -31,6 +39,27 @@ class LuaClass:
         prefix = '.'.join(self.outfile.rpartition('.')[0].split('_')[1:])
         return '{}.{}'.format(prefix, self.name)
 
+    def get_name(self, prop):
+        if isinstance(prop, LuaClass):
+            return prop.name
+        return prop
+
+    def get_parent_name(self):
+        found = False
+        if self.children:
+            for c in self.children:
+                if self.outfile != c.outfile:
+                    found = True
+        if found:
+            return self.p_name #get_prefixed_name()
+        return self.name
+
+    def get_child_name(self):
+        if self.parent:
+            if self.parent.outfile != self.outfile:
+                return self.p_name #get_prefixed_name()
+        return self.name
+
     def get_graphviz_link(self):
         html_link = 'href="../{}#{}", target="_parent"'.format(
             self.outfile.replace('.rst', '.html'), self.name.lower())
@@ -38,8 +67,13 @@ class LuaClass:
 
 
     def print_data(self):
-        print('  ', self.name, '|', self.parent, '|', self.outfile, '|',
-              self.get_prefixed_name())
+        print('p_Name:', self.p_name,
+              '\n  Name:', self.name,
+              '\n  Parent:', self.get_name(self.parent),
+              '\n  Outfile:', self.outfile, 
+              '\n  is_base:', self.is_base,
+              '\n  prefixed_name:', self.get_prefixed_name())
+        print('  Children:', [x.get_prefixed_name() for x in self.children])
 # End of LuaClass
 
 
@@ -52,15 +86,40 @@ class LuaClasses:
     def __init__(self):
         self.bases = []
         self.derived = []
+        self.all_cls = []
 
-    def add_class(self, name, outfile, is_base=False, parent=None):
+    def add_class(self, name, outfile, parent=None, is_base=False):
         if not is_base and not parent:
             raise Exception('Error: Derived class needs a parent class!')
 
+        new_cls = LuaClass(name, outfile, parent, is_base)
+        self.all_cls.append(new_cls)
+
         if is_base:
+            # Append base class
             self.bases.append(LuaClass(name, outfile))
         else:
+            # Append child class
             self.derived.append(LuaClass(name, outfile, parent=parent))
+
+    def create_inherintances(self):
+        for c in self.all_cls:
+            if c.parent:
+                parent = self.get_instance_new(c.parent)
+                c.parent = parent
+                c.parent.children.append(c)
+
+    def get_instance_new(self, cls_name):
+        c_list = []
+        for c in self.all_cls:
+            if c.name == cls_name:
+                c_list.append(c)
+        if len(c_list) == 0:
+            raise Exception('Error: There is no class named:', cls_name)
+        elif len(c_list) > 1:
+            raise Exception('Error: Two classes of same name', cls_name)
+        return c_list[0]
+
 
     def get_instance(self, cls_name):
         for c in self.bases:
@@ -74,6 +133,37 @@ class LuaClasses:
     def get_base_names(self):
         """Returns a list of base class names."""
         return [c.name for c in self.bases]
+
+    def get_parents(self, cls, tree=None):
+        if tree == None:
+            tree = []
+        for c in self.all_cls:
+            if c.name == cls:
+                if c.parent:
+                    if not c.parent in tree:
+                        # This is only needed for double defined class Player.
+                        tree.append(c.parent)
+                    self.get_parents(c.parent, tree)
+                else:
+                    # No parent anymore, end of recursion
+                    return tree
+        return tree
+
+    def get_children(self, cls, tree=None):
+        if tree == None:
+            tree = []
+        for c in self.all_cls:
+            if c.name == cls:
+                if c.children:
+                    l=[]
+                    l.append(c)
+                    l.append([x for x in c.children])
+                    tree.append(l)
+                    for child in c.children:
+                        self.get_children(child.name, tree)
+                else:
+                    return tree
+        return tree
 
     def get_parent_tree(self, cli, tree=None):
         """Recursively find all parent instances of cli up to the base class."""
@@ -90,33 +180,6 @@ class LuaClasses:
             self.get_parent_tree(parent, tree)
         return tree
 
-    def get_name_parent(self):
-        """Returns a list of (name, parent) pairs from all derived classes."""
-        return [(c.name, c.parent) for c in self.derived]
-
-    def get_children(self, cls):
-        """Returns the children of cls."""
-        children = []
-        for name, parent in self.get_name_parent():
-            if parent == cls:
-                children.append(name)
-        return children
-
-    def get_children_tree(self, cls, max_children=0, tree=None):
-        """Recursively find all children of cls."""
-
-        if tree is None:
-            tree = {cls: []}
-        children = self.get_children(cls)
-        if not children or max_children == MAX_CHILDS:
-            return tree
-        else:
-            max_children += 1
-            tree[cls] = children
-            for c in children:
-                self.get_children_tree(c, max_children, tree)
-        return tree
-
     def format_cls(self, cli_to_format, cli_to_compare):
         """Returns a formatted name of cli_to_format if 
         cli_to_compare is in a different file.
@@ -126,11 +189,8 @@ class LuaClasses:
         return cli_to_format.name
 
     def print_classes(self):
-        print("Base classes:")
-        for c in self.bases:
-            c.print_data()
-        print("Derived classes:")
-        for c in self.derived:
+        print('all classes:')
+        for c in self.all_cls:
             c.print_data()
 # End of LuaClasses
 
@@ -188,10 +248,14 @@ def fill_data(file_name, outfile):
 
 
 def init(base_dir, cpp_files):
+    # Read all class definitions
     for cpp_file, outfile in cpp_files:
         header = cpp_file.rpartition('.')[0] + '.h'
         h_path = os.path.join(base_dir, header)
         fill_data(h_path, outfile)
+    # Apply inheritances. This can only be done after all classes are created because
+    # some children are in different files.
+    classes.create_inherintances()
     classes.print_classes()
 
 
@@ -200,14 +264,12 @@ def add_child_of(rst_data):
 
     found_classes = RSTDATA_CLS_RE.findall(rst_data)
     for cls in found_classes:
-        cli = classes.get_instance(cls)
-        parents = classes.get_parent_tree(cli)
+        parents = classes.get_parents(cls)
         if parents:
-            repl_str = '.. class:: {}\n\n'.format(cli.name)
+            repl_str = '.. class:: {}\n\n'.format(cls)
             child_str = '{}   Child of:'.format(repl_str)
-            for i, parent_inst in enumerate(parents):
-                parent_name = classes.format_cls(parent_inst, cli)
-                child_str += ' :class:`{}`'.format(parent_name)
+            for i, parent in enumerate(parents):
+                child_str += ' :class:`{}`'.format(parent.get_parent_name())
                 if i < len(parents) - 1:
                     # add separator except after last entry
                     child_str += ','
@@ -249,12 +311,34 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                                                )
     return base_name, base_link, ret_str
 
+def format_graphviz_children(cls):
+    children = classes.get_children(cls)
+    ret_str = ''
+    last_row = 0
+
+    if children:
+        for child in children:
+            last_row += 1
+            ret_str += '{} -- {{'.format(child[0].name)
+            for i, grandchild in enumerate(child[1]):
+                ret_str += '"{name}"[{link}]'.format(
+                    name=grandchild.get_child_name(),
+                    link=grandchild.get_graphviz_link(),
+                    )
+                if i < len(child[1]) - 1:
+                    # add space except after last entry
+                    ret_str += ' '
+            ret_str += '}\n    '
+            if last_row >= MAX_CHILDS:
+                break
+
+    return ret_str
 
 def create_directive(cls):
-    children = (classes.get_children_tree(cls))
+    children = format_graphviz_children(cls)
     base_cls, base_link, parents = format_graphviz_parents(cls)
     graph_directive = None
-    if parents:# or children:
+    if parents or children:
         graph_directive = """
 .. graphviz::
     :alt: Dependency graph for class: {cur_cls}
@@ -272,11 +356,11 @@ def create_directive(cls):
     {child_list}
     }}\n""".format(cur_cls=cls,
                    base_cls=base_cls,
-                   parents=parents,
                    link=base_link,
-                   child_list='' #children,
+                   parents=parents,
+                   child_list=children,
                    )
-    print(graph_directive)
+    #print(graph_directive)
     return graph_directive
 
 
