@@ -112,7 +112,7 @@ msgstr "당신이 제국과 협력 할 것인지 결정하십시오"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "선물로 물품을 모으거나 제국의 창고를 파괴하십시오."
+msgstr "선물로 물품을 모으거나 제국의 창고를 파괴하십시오"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
@@ -692,7 +692,7 @@ msgid ""
 "to give us these wares:"
 msgstr ""
 "또한, 당신의 선의의 표시로, 우리는 제국에게 우정의 선물을 요구합니다. 당신도 알다시피, 나는 당신에게 새 창고를 선물했소. "
-"번역확인-> 그것들을 건네기위해 필요한 선물들로 그것을 채우시오. 당신이 이 물품들을 우리에게 줄 수 있도록 허락하겠소."
+"번역확인-> 그것들을 건네기위해 필요한 선물들로 그것을 채우시오. 당신이 이 물품들을 우리에게 줄 수 있도록 허락하겠소:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:295
@@ -980,7 +980,7 @@ msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr "당신의 일꾼들과 군인들이 여기서 거주할 것입니다. 또한 당신의 물품들과 도구들을 저장합니다."
+msgstr "당신의 일꾼들과 군인들이 여기서 거주할 것입니다. 또한 당신의 물품들과 연장들을 저장합니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
