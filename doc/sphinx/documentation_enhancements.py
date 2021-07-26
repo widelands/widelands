@@ -8,7 +8,8 @@ HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 
 MAX_CHILDS = 2
-MAX_PARENTS = 1#MAX_CHILDS
+MAX_PARENTS = 2
+MAX_NAME_LENGTH = 15
 
 EXCLUDE_CLASSES = ['Market',
                    'MarketDescription',
@@ -23,26 +24,12 @@ class LuaClass:
             prefix = '.'.join(outfile.rpartition('.')[0].split('_')[1:])
             return '{}.{}'.format(prefix, name)
 
-        self.p_name = _prefix_name()
+        self.long_name = _prefix_name()
         self.name = name
         self.outfile = outfile
         self.parent = parent
         self.is_base = is_base
         self.children = []
-
-    def get_prefixed_name(self):
-        """Returns a string assembled form outfile and classname.
-
-        E.g. if outfile = autogen_wl_map.rst and classname = MapObjectDescription
-        the returned value is 'wl.map.MapObjectDescription'.
-        """
-        prefix = '.'.join(self.outfile.rpartition('.')[0].split('_')[1:])
-        return '{}.{}'.format(prefix, self.name)
-
-    def get_name(self, prop):
-        if isinstance(prop, LuaClass):
-            return prop.name
-        return prop
 
     def get_parent_name(self):
         found = False
@@ -51,13 +38,13 @@ class LuaClass:
                 if self.outfile != c.outfile:
                     found = True
         if found:
-            return self.p_name #get_prefixed_name()
+            return self.long_name
         return self.name
 
     def get_child_name(self):
         if self.parent:
             if self.parent.outfile != self.outfile:
-                return self.p_name #get_prefixed_name()
+                return self.long_name
         return self.name
 
     def get_graphviz_link(self):
@@ -67,13 +54,16 @@ class LuaClass:
 
 
     def print_data(self):
-        print('p_Name:', self.p_name,
+        parent = ''
+        if self.parent:
+            parent = self.parent.long_name
+
+        print('long_name:', self.long_name,
               '\n  Name:', self.name,
-              '\n  Parent:', self.get_name(self.parent),
+              '\n  Parent:', parent, "type:", type(self.parent),
               '\n  Outfile:', self.outfile, 
               '\n  is_base:', self.is_base,
-              '\n  prefixed_name:', self.get_prefixed_name())
-        print('  Children:', [x.get_prefixed_name() for x in self.children])
+              '\n  children:', [x.long_name for x in self.children])
 # End of LuaClass
 
 
@@ -132,7 +122,7 @@ class LuaClasses:
 
     def get_base_names(self):
         """Returns a list of base class names."""
-        return [c.name for c in self.bases]
+        return [c.name for c in self.all_cls if c.is_base]
 
     def get_parents(self, cls, tree=None):
         if tree == None:
@@ -143,7 +133,7 @@ class LuaClasses:
                     if not c.parent in tree:
                         # This is only needed for double defined class Player.
                         tree.append(c.parent)
-                    self.get_parents(c.parent, tree)
+                    self.get_parents(c.parent.name, tree)
                 else:
                     # No parent anymore, end of recursion
                     return tree
@@ -164,29 +154,6 @@ class LuaClasses:
                 else:
                     return tree
         return tree
-
-    def get_parent_tree(self, cli, tree=None):
-        """Recursively find all parent instances of cli up to the base class."""
-        if not isinstance(cli, LuaClass):
-            raise Exception("Class must be an instance of LuaClass but got:", type(cli))
-
-        if tree is None:
-            tree = []
-        if cli.name in self.get_base_names():
-            return tree
-        parent = classes.get_instance(cli.parent)
-        if parent:
-            tree.append(parent)
-            self.get_parent_tree(parent, tree)
-        return tree
-
-    def format_cls(self, cli_to_format, cli_to_compare):
-        """Returns a formatted name of cli_to_format if 
-        cli_to_compare is in a different file.
-        """
-        if cli_to_format.outfile != cli_to_compare.outfile:
-            return cli_to_format.get_prefixed_name()
-        return cli_to_format.name
 
     def print_classes(self):
         print('all classes:')
@@ -289,8 +256,7 @@ def format_graphviz_parents(cur_cls):
                 via_list += ' → '
         return via_list
 
-    cli = classes.get_instance(cur_cls)
-    parents = list(reversed(classes.get_parent_tree(cli)))
+    parents = list(reversed(classes.get_parents(cur_cls)))
     ret_str = ''
     base_name = ''
     base_link = ''
@@ -333,6 +299,7 @@ def format_graphviz_children(cls):
                 break
 
     return ret_str
+
 
 def create_directive(cls):
     children = format_graphviz_children(cls)
