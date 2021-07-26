@@ -112,7 +112,7 @@ msgid ""
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
 "내 오랜 친구 리바우드를 최대한 빨리 찾고 싶습니다. 아트테르다그가 그의 무서운 발 아래에서 내 훼르의 녹색 늪을 즐겁게 짓밟는 것을 "
-"상상할 때 매 순간의 게으름이 나를 괴롭 힙니다... 서둘러 갑시다. "
+"상상할 때 매 순간의 게으름이 나를 괴롭 힙니다... 서둘러 갑시다."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
@@ -567,7 +567,7 @@ msgstr "당신의 제안에 감사드립니다! 당신이 요구하는 가격은
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] "금조각 %d개 입니다. "
+msgstr[0] "금조각 %d개 입니다."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -726,4 +726,4 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "해외 식민지화 및 무역의 기반 역할을 합니다. 또한 군인, 물품 및 도구도 저장합니다."
+msgstr "해외 식민지화 및 교역의 기지로 운용됩니다. 또한 당신의 군인들, 물품들 그리고 연장들을 저장합니다."

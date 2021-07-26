@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-30 10:23+0000\n"
+"PO-Revision-Date: 2021-07-18 14:26+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "'목표' 창 다루기"
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "화면 하단의 도구 막대에서 ‘목표’ 단추를 눌러서 ‘목표’ 창을 열고 닫을 수 있습니다."
+msgstr " 화면 하단의 도구 막대에서 ‘목표’ 단추를 눌러서 ‘목표’ 창을 열고 닫을 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -153,7 +153,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr "됐습니다. 이제 나무꾼 오두막을 만드는 방법과 땅길과 연결하는 방법을 보여 주겠습니다. 그 나무 바로 옆에 나무꾼을 위한 좋은 장소가 있습니다. 제가 취할 단계를 설명한 다음 시연하겠습니다. "
+msgstr "됐습니다. 이제 나무꾼 오두막을 만드는 방법과 땅길과 연결하는 방법을 보여 주겠습니다. 그 나무 바로 옆에 나무꾼을 위한 좋은 장소가 있습니다. 제가 취할 단계를 설명한 다음 시연하겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -396,7 +396,7 @@ msgstr "작은 지도를 사용하기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
 msgid "Very good. And now about the minimap. "
-msgstr "아주 좋아요. 이제 작은 지도에 대해 알아보겠습니다."
+msgstr "아주 좋아요. 이제 작은 지도에 대해 알아보겠습니다. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format
@@ -537,7 +537,7 @@ msgstr "이제, 땅길을 살펴 봅시다. 기억하십시오: 우리는 채석
 msgid ""
 " Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr "잘 했습니다! 깃발에 대한 땅길 건설 모드로 들어가려면 깃발을 마우스 왼쪽 단추로 클릭하고 땅길 건설 기호를 선택하십시오."
+msgstr " 잘 했습니다! 깃발에 대한 땅길 건설 모드로 들어가려면 깃발을 마우스 왼쪽 단추로 클릭하고 땅길 건설 기호를 선택하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:357
 msgid ""
@@ -786,7 +786,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr "현재 두 개의 메시지가 있습니다. 현재 읽고 있는 이 책과 새로운 본부가 여러분의 경제에 추가되었음을 알려주는 내용입니다. 메시지를 보관하는 방법에 대해 알아봅니다."
+msgstr "현재 두 개의 메시지가 있습니다. 현재 읽고 있는 이 책과 새로운 본부가 여러분의 경제에 추가되었음을 알려주는 내용입니다. 메시지를 보관하는 방법에 대해 알아봅니다:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid "Close the messages window"
@@ -869,7 +869,7 @@ msgstr "몇 가지 메시지를 받았습니다. 화면 하단에 있는 단추 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Expand your territory"
-msgstr "영토를 확장하십시오."
+msgstr "영토를 확장하십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
 msgid "Make your Territory Grow"
@@ -975,4 +975,4 @@ msgstr "그런 다음 ‘놀이 끝내기’ 항목을 누르십시오."
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr "자습서를 실행 해주셔서 감사합니다. 와이드랜드를 즐기시고 한 번 방문해 주세요."
+msgstr "자습서를 실행 해주셔서 감사합니다. 와이드랜드를 즐기시고 한 번 방문해 주세요"
