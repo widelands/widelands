@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2020-06-24 05:31+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-07-18 14:23+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -95,7 +95,7 @@ msgstr "– 그 성을 지배하고 있는 군벌인 – 라니싸가 아직 우
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Ancient Castle Captured"
-msgstr "고대 성이 함락되었습니다."
+msgstr "고대 성이 함락되었습니다"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid ""
