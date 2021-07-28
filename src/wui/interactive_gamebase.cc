@@ -235,28 +235,28 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus));
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
-	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * building status labels are shown */
-	                     _("Hide Status") :
-	                     _("Show Status"),
+                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+                          * building status labels are shown */
+                         _("Hide Status") :
+                         _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats));
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
-	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * level information is shown above soldiers' heads */
-	                     _("Hide Soldier Levels") :
-	                     _("Show Soldier Levels"),
+                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+                          * level information is shown above soldiers' heads */
+                         _("Hide Soldier Levels") :
+                         _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers));
 
 	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
-	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * buildings are greyed out */
-	                     _("Hide Buildings") :
-	                     _("Show Buildings"),
+                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+                          * buildings are greyed out */
+                         _("Hide Buildings") :
+                         _("Show Buildings"),
 	                  ShowHideEntry::kBuildings,
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings));
@@ -336,16 +336,16 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	switch (entry) {
 	case GameSpeedEntry::kIncrease: {
-		increase_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
-		                      kSpeedSlow :
-		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+		increase_gamespeed(SDL_GetModState() & KMOD_SHIFT ? kSpeedSlow :
+		                   SDL_GetModState() & KMOD_CTRL  ? kSpeedFast :
+                                                          kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
-		decrease_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
-		                      kSpeedSlow :
-		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+		decrease_gamespeed(SDL_GetModState() & KMOD_SHIFT ? kSpeedSlow :
+		                   SDL_GetModState() & KMOD_CTRL  ? kSpeedFast :
+                                                          kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
