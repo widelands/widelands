@@ -891,7 +891,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number(),
 	                     lua_gettop(L) > 2 && luaL_checkboolean(L, 3) ? RoadBuildingType::kWaterway :
-                                                                       RoadBuildingType::kRoad);
+	                                                                    RoadBuildingType::kRoad);
 
 	return 0;
 }

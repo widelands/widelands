@@ -931,8 +931,8 @@ int LuaPlayerBase::place_building(lua_State* L) {
 		}
 		if (!b) {
 			const std::string tempname(force ? constructionsite ? "force constructionsite" :
-                                                               "force building" :
-                                            "place building");
+			                                                      "force building" :
+			                                   "place building");
 			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
 			             c->coords().x, c->coords().y);
 		}

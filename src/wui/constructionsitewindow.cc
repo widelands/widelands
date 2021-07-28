@@ -308,7 +308,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 						game_->send_player_militarysite_set_soldier_preference(
 						   *construction_site_.get(ibase()->egbase()),
 						   state ? Widelands::SoldierPreference::kRookies :
-                             Widelands::SoldierPreference::kHeroes);
+						           Widelands::SoldierPreference::kHeroes);
 					} else {
 						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 					}

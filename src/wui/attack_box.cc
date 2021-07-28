@@ -282,12 +282,12 @@ void AttackBox::init() {
 void AttackBox::send_less_soldiers() {
 	assert(soldiers_slider_.get());
 	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? 0 :
-                                                                 soldiers_slider_->get_value() - 1);
+	                                                              soldiers_slider_->get_value() - 1);
 }
 
 void AttackBox::send_more_soldiers() {
 	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? soldiers_slider_->get_max_value() :
-                                                                 soldiers_slider_->get_value() + 1);
+	                                                              soldiers_slider_->get_value() + 1);
 }
 
 size_t AttackBox::count_soldiers() const {
