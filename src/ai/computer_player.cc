@@ -76,13 +76,13 @@ struct EmptyAI : ComputerPlayer {
 		}
 	};
 
-	EmptyAIImpl implementation;
+	static EmptyAIImpl implementation;
 };
 
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 
 const ComputerPlayer::ImplementationVector& ComputerPlayer::get_implementations() {
-	std::vector<ComputerPlayer::Implementation const*> impls;
+	static std::vector<ComputerPlayer::Implementation const*> impls;
 
 	if (impls.empty()) {
 		impls.push_back(&DefaultAI::normal_impl);
