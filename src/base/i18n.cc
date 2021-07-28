@@ -65,7 +65,7 @@ std::string homedir;
 char* (*gettext_)(const char*) = gettext;
 
 char* verbose_gettext(const char* s) {
-	log_info("gettext: %s\n", s);
+	log_dbg("gettext: %s\n", s);
 	return gettext(s);
 }
 
@@ -83,7 +83,7 @@ char const* translate(char const* const str) {
 	return gettext_(str);
 }
 char const* translate(const std::string& str) {
-	return gettext(str.c_str());
+	return gettext_(str.c_str());
 }
 
 /**
