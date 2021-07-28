@@ -65,7 +65,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 		Widelands::FCoords f = map.get_fcoords(ms->get_position());
 
 		// get list of immovable around this our military site
-		static std::vector<Widelands::ImmovableFound> immovables;
+		std::vector<Widelands::ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
 		map.find_immovables(
@@ -106,7 +106,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	uint8_t best_score = 0;
 	uint32_t count = 0;
 	// sites that were either conquered or destroyed
-	static std::vector<uint32_t> disappeared_sites;
+	std::vector<uint32_t> disappeared_sites;
 	disappeared_sites.clear();
 	disappeared_sites.reserve(6);
 
@@ -271,10 +271,10 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 					                   player_statistics.get_old60_player_land(pn);
 				}
 
-				static std::vector<Widelands::ImmovableFound> immovables;
+				std::vector<Widelands::ImmovableFound> immovables;
 				immovables.reserve(50);
 				immovables.clear();
-				static std::set<uint32_t> unique_serials;
+				std::set<uint32_t> unique_serials;
 				unique_serials.clear();
 				// find militarysites near our target (radius 10) to check enemies power in region
 				map.find_immovables(game(),
@@ -314,7 +314,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				observer.second.enemy_military_presence_in_region = enemy_military_presence_in_region_;
 				observer.second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
 
-				static int16_t inputs[4 * kFNeuronBitSize] = {0};
+				int16_t inputs[4 * kFNeuronBitSize] = {0};
 				// Resetting values as the variable is static
 				std::fill(std::begin(inputs), std::end(inputs), 0);
 				inputs[0] =
@@ -1122,7 +1122,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	                         3)};
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
-	static int32_t inputs[4 * kFNeuronBitSize] = {0};
+	int32_t inputs[4 * kFNeuronBitSize] = {0};
 	// Resetting values as the variable is static
 	std::fill(std::begin(inputs), std::end(inputs), 0);
 	inputs[0] = (msites_total < 1) ? 1 : 0;

@@ -76,7 +76,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	// here we check for surface rocks + trees
-	static std::vector<Widelands::ImmovableFound> immovables;
+	std::vector<Widelands::ImmovableFound> immovables;
 	immovables.clear();
 	immovables.reserve(50);
 	// Search in a radius of range
@@ -564,11 +564,11 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 
 	// Determine swimmable directions first:
 	// This vector contains directions that lead to unexplored sea
-	static std::vector<Widelands::Direction> new_teritory_directions;
+	std::vector<Widelands::Direction> new_teritory_directions;
 	new_teritory_directions.clear();
 	new_teritory_directions.reserve(6);
 	// This one contains any directions with open sea (superset of above one)
-	static std::vector<Widelands::Direction> possible_directions;
+	std::vector<Widelands::Direction> possible_directions;
 	possible_directions.clear();
 	possible_directions.reserve(6);
 	for (Widelands::Direction dir = Widelands::FIRST_DIRECTION; dir <= Widelands::LAST_DIRECTION;

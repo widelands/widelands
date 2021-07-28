@@ -1551,7 +1551,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	// are we going to count resources now?
-	static bool resource_count_now = false;
+	bool resource_count_now = false;
 	resource_count_now = false;
 	// Testing in first 10 seconds or if last testing was more then 60 sec ago
 	if (field.last_resources_check_time < Time(10000) ||
@@ -1680,7 +1680,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (field.water_nearby > 0 &&
 	    (field.fish_nearby == kUncalculated || (resource_count_now && gametime.get() % 10 == 0))) {
 		Widelands::CheckStepWalkOn fisher_cstep(Widelands::MOVECAPS_WALK, true);
-		static std::vector<Widelands::Coords> fish_fields_list;  // pity this contains duplicates
+		std::vector<Widelands::Coords> fish_fields_list;  // pity this contains duplicates
 		fish_fields_list.clear();
 		map.find_reachable_fields(
 		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
@@ -1688,7 +1688,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   Widelands::FindNodeResource(descriptions.resource_index("resource_fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
-		static std::set<Widelands::Coords> counted_fields;
+		std::set<Widelands::Coords> counted_fields;
 		counted_fields.clear();
 		field.fish_nearby = 0;
 		for (auto fish_coords : fish_fields_list) {
@@ -1771,7 +1771,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
-	static std::vector<Widelands::ImmovableFound> immovables;
+	std::vector<Widelands::ImmovableFound> immovables;
 	immovables.reserve(50);
 	immovables.clear();
 	// Search in a radius of range
@@ -1779,7 +1779,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2), &immovables);
 
 	// function seems to return duplicates, so we will use serial numbers to filter them out
-	static std::set<uint32_t> unique_serials;
+	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
 
 	for (const Widelands::ImmovableFound& imm_found : immovables) {
@@ -1817,9 +1817,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                    &immovables);
 
 	// We are interested in unconnected immovables, but we must be also close to connected ones
-	static bool any_connected_imm = false;
+	bool any_connected_imm = false;
 	any_connected_imm = false;
-	static bool any_unconnected_imm = false;
+	bool any_unconnected_imm = false;
 	any_unconnected_imm = false;
 	unique_serials.clear();
 
@@ -2160,7 +2160,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// is new site allowed at all here?
 	field.defense_msite_allowed = false;
-	static int16_t multiplicator = 10;
+	int16_t multiplicator = 10;
 	multiplicator = 10;
 	if (soldier_status_ == SoldiersStatus::kBadShortage) {
 		multiplicator = 4;
@@ -2338,9 +2338,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	// Just used for easy checking whether a mine or something else was built.
-	static bool mine = false;
+	bool mine = false;
 	mine = false;
-	static uint32_t consumers_nearby_count = 0;
+	uint32_t consumers_nearby_count = 0;
 	consumers_nearby_count = 0;
 
 	const Widelands::Map& map = game().map();
@@ -2371,7 +2371,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	// the proportion depends on size of economy
 	// this proportion defines how dense the buildings will be
 	// it is degressive (allows high density on the beginning)
-	static int32_t needed_spots = 0;
+	int32_t needed_spots = 0;
 	if (productionsites.size() < 50) {
 		needed_spots = productionsites.size();
 	} else if (productionsites.size() < 100) {
@@ -2417,7 +2417,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	const Widelands::PlayerNumber pn = player_number();
 
 	// Genetic algorithm is used here
-	static bool inputs[2 * kFNeuronBitSize] = {false};
+	bool inputs[2 * kFNeuronBitSize] = {false};
 	// Resetting values as the variable is static
 	std::fill(std::begin(inputs), std::end(inputs), false);
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
@@ -2512,9 +2512,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	inputs[57] = (mine_fields_stat.has_critical_ore_fields());
 	inputs[58] = (!mine_fields_stat.has_critical_ore_fields());
 
-	static int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
+	int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
 	needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
-	static int16_t increase_score_limit_score = 0;
+	int16_t increase_score_limit_score = 0;
 	increase_score_limit_score = 0;
 
 	for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
@@ -2553,9 +2553,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	const bool increase_least_score_limit =
 	   (increase_score_limit_score > management_data.get_military_number_at(45) / 5);
 
-	static uint16_t concurent_ms_in_constr_no_enemy = 1;
+	uint16_t concurent_ms_in_constr_no_enemy = 1;
 	concurent_ms_in_constr_no_enemy = 1;
-	static uint16_t concurent_ms_in_constr_enemy_nearby = 2;
+	uint16_t concurent_ms_in_constr_enemy_nearby = 2;
 	concurent_ms_in_constr_enemy_nearby = 2;
 
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
@@ -5269,7 +5269,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const Time& gametime) {
 	bo.primary_priority = 0;
 
-	static BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
+	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
 	site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
 	if (gametime > Time(2 * 60 * 1000) && gametime < Time(120 * 60 * 1000) &&
 	    !basic_economy_established) {
@@ -5532,7 +5532,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 
-			static int16_t inputs[kFNeuronBitSize] = {0};
+			int16_t inputs[kFNeuronBitSize] = {0};
 			// Resetting values as the variable is static
 			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
@@ -5630,9 +5630,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			// genetic algorithm to decide whether new rangers are needed
-			static int16_t tmp_target = 2;
+			int16_t tmp_target = 2;
 			tmp_target = 2;
-			static int16_t inputs[2 * kFNeuronBitSize] = {0};
+			int16_t inputs[2 * kFNeuronBitSize] = {0};
 			// Resetting values as the variable is static
 			std::fill(std::begin(inputs), std::end(inputs), 0);
 
@@ -5877,7 +5877,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 
-			static int16_t inputs[kFNeuronBitSize] = {0};
+			int16_t inputs[kFNeuronBitSize] = {0};
 			// Resetting values as the variable is static
 			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (gametime < Time(15 * 60 * 1000)) ? -2 : 0;
@@ -5942,7 +5942,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		} else if (bo.max_needed_preciousness > 0) {
 
-			static int16_t inputs[4 * kFNeuronBitSize] = {0};
+			int16_t inputs[4 * kFNeuronBitSize] = {0};
 			// Resetting values as the variable is static
 			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (bo.total_count() <= 1) ?
