@@ -8,7 +8,7 @@ HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 
 MAX_CHILDS = 2
-MAX_PARENTS = 2
+MAX_PARENTS = 1
 MAX_NAME_LENGTH = 15
 
 EXCLUDE_CLASSES = ['Market',
@@ -18,7 +18,7 @@ EXCLUDE_CLASSES = ['Market',
 
 class LuaClass:
 
-    def __init__(self, name, outfile, parent=None, is_base=False):
+    def __init__(self, name, outfile, parent, is_base):
 
         def _prefix_name():
             prefix = '.'.join(outfile.rpartition('.')[0].split('_')[1:])
@@ -79,23 +79,28 @@ class LuaClasses:
         new_cls = LuaClass(name, outfile, parent, is_base)
         self.all_classes.append(new_cls)
 
-    def create_inherintances(self):
+    def create_inheritances(self):
+        """Modify some LuaClass attributes.
+
+        - Parent is just a name, apply the LuaClass instance instead
+        - Add all children to the parent class
+        """
+        def _get_parent_instance(cls_name):
+            c_list = []
+            for c in self.all_classes:
+                if c.name == cls_name:
+                    c_list.append(c)
+            if len(c_list) == 0:
+                raise Exception('Error: There is no parent class named:', cls_name)
+            elif len(c_list) > 1:
+                raise Exception('Error: Two parent classes with name:', cls_name)
+            return c_list[0]
+
         for c in self.all_classes:
             if c.parent:
-                parent = self.get_instance(c.parent)
+                parent = _get_parent_instance(c.parent)
                 c.parent = parent
                 c.parent.children.append(c)
-
-    def get_instance(self, cls_name):
-        c_list = []
-        for c in self.all_classes:
-            if c.name == cls_name:
-                c_list.append(c)
-        if len(c_list) == 0:
-            raise Exception('Error: There is no class named:', cls_name)
-        elif len(c_list) > 1:
-            raise Exception('Error: Two classes of same name', cls_name)
-        return c_list[0]
 
     def get_base_names(self):
         """Returns a list of base class names."""
@@ -104,7 +109,7 @@ class LuaClasses:
     def get_parents(self, cls, tree=None):
         """Recursively find all parents of cls.
 
-        cls is of type string. Returns a list of LuaClass instances.
+        Returns a list of LuaClass instances.
         """
         if tree == None:
             tree = []
@@ -123,7 +128,7 @@ class LuaClasses:
     def get_children(self, cls, tree=None):
         """Recursively find all children of cls.
 
-        cls is of type string. Returns a list of LuaClass instances.
+        Returns a list of LuaClass instances.
         """
         if tree == None:
             tree = []
@@ -188,7 +193,7 @@ def fill_data(file_name, outfile):
                 mod_name = cls_name
                 continue
 
-            # Feed data models
+            # Store found classes
             if namespace_or_parent == mod_name:
                 classes.add_class(cls_name, outfile, is_base=True)
             else:
@@ -208,9 +213,9 @@ def init(base_dir, cpp_files):
         h_path = os.path.join(base_dir, header)
         fill_data(h_path, outfile)
     # Apply inheritances. This can only be done after all classes are created because
-    # some children are in different files.
-    classes.create_inherintances()
-    classes.print_classes()
+    # some class definitions are in different files.
+    classes.create_inheritances()
+    #classes.print_classes()
 
 
 def add_child_of(rst_data):
@@ -226,7 +231,7 @@ def add_child_of(rst_data):
                 child_str += ' :class:`{}`'.format(parent.get_parent_name())
                 if i < len(parents) - 1:
                     # add separator except after last entry
-                    child_str += ','
+                    child_str += ', '
 
             child_str += '\n\n'
             rst_data = rst_data.replace(repl_str, child_str)
@@ -236,11 +241,14 @@ def add_child_of(rst_data):
 
 def format_graphviz_parents(cur_cls):
 
-    def _make_tooltip():
+    if cur_cls in classes.get_base_names():
+        return cur_cls, '', ''
+
+    def _make_tooltip(p_list):
         via_list = 'Via: '
-        for i, c in enumerate(parents):
+        for i, c in enumerate(p_list):
             via_list += c.name
-            if i < len(parents)-1:
+            if i < len(p_list)-1:
                 via_list += ' → '
         return via_list
 
@@ -249,18 +257,41 @@ def format_graphviz_parents(cur_cls):
     base_name = ''
     base_link = ''
     if parents:
-        nr_parents = 0
         base = parents.pop(0)
         base_link = base.get_graphviz_link()
         base_name = base.name
         if parents:
-            ret_str += '{base} -- {cur} [style=tapered, arrowhead=none, arrowtail=none dir=both,\
+            # Split parents into two lists depending on MAX_PARENTS
+            tt_list = parents[:-MAX_PARENTS]
+            show_list = parents[-MAX_PARENTS:]
+            if tt_list:
+                # Show big edge with tooltip.
+                ret_str += '{base} -- {n} [style=tapered, arrowhead=none, arrowtail=none dir=both,\
 penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
-                                                cur=cur_cls,
-                                                tooltip=_make_tooltip()
+                                                n=show_list[-1].name,
+                                                tooltip=_make_tooltip(tt_list)
                                                 )
+            else:
+                # No tooltip, normal edge
+                ret_str += '{base} -- {n}\n'.format(base=base_name,
+                                                n=show_list[-1].name,
+                                                )
+            for i, p in enumerate(show_list):
+                # Create the connections between the other parents
+                try:
+                    ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
+                        a=show_list[i+1].name,
+                        link=show_list[i+1].get_graphviz_link(),
+                        b=show_list[i].name
+                        )
+                except:
+                    ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
+                        a=show_list[i-1].name,
+                        link=show_list[i-1].get_graphviz_link(),
+                        b=cur_cls
+                        )
         else:
-            # Only one parent -> no big edge
+            # No parents
             ret_str = '{base} -- {cur}'.format(base=base_name,
                                                cur=cur_cls
                                                )
