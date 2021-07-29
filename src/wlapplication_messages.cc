@@ -210,7 +210,7 @@ void fill_parameter_vector() {
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "verbose-i18n", "",
 		_("Print all strings as they are translated. "
-                  "This helps with tracing down bugs with internationalization."),
+		  "This helps with tracing down bugs with internationalization."),
 		true},
 	  {"", "version", "", _("Only print version and exit"), false},
 	  {"", "help", "", _("Show this help"), false},
