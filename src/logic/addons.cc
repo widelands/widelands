@@ -400,7 +400,8 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
 	Section* i18n_section = i18n_profile.get_section("global");
 
-	std::shared_ptr<AddOnInfo> i = std::make_shared<AddOnInfo>();
+	AddOnInfo* i = new AddOnInfo();
+	std::shared_ptr<AddOnInfo> pointer(i);
 	i->internal_name = name;
 	i->unlocalized_descname = s.get_safe_untranslated_string("name");
 	i->unlocalized_description = s.get_safe_untranslated_string("description");
@@ -446,7 +447,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		}
 	}
 
-	return i;
+	return pointer;
 }
 
 }  // namespace AddOns
