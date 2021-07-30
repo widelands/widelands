@@ -182,7 +182,6 @@ def replace_tocs(toc_rst_dict):
 if __name__ == '__main__':
     def main():
         doc_enh.init(base_dir, cpp_pairs)
-        #doc_enh.debug_classes_dict()
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 

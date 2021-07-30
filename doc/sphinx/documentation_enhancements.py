@@ -32,12 +32,12 @@ class LuaClass:
         self.children = []
 
     def get_parent_name(self):
-        found = False
+        diff = False
         if self.children:
             for c in self.children:
                 if self.outfile != c.outfile:
-                    found = True
-        if found:
+                    diff = True
+        if diff:
             return self.long_name
         return self.name
 
@@ -82,8 +82,8 @@ class LuaClasses:
     def create_inheritances(self):
         """Modify some LuaClass attributes.
 
-        - Parent is just a name, apply the LuaClass instance instead
-        - Add all children to the parent class
+        - Parent is just a name, we apply the LuaClass instance instead
+        - Add all children instances to the parent class
         """
         def _get_parent_instance(cls_name):
             c_list = []
@@ -106,15 +106,15 @@ class LuaClasses:
         """Returns a list of base class names."""
         return [c.name for c in self.all_classes if c.is_base]
 
-    def get_parents(self, cls, tree=None):
-        """Recursively find all parents of cls.
+    def get_parents(self, c_name, tree=None):
+        """Recursively find all parents of c_name.
 
         Returns a list of LuaClass instances.
         """
         if tree == None:
             tree = []
         for c in self.all_classes:
-            if c.name == cls:
+            if c.name == c_name:
                 if c.parent:
                     if not c.parent in tree:
                         # This is only needed for double defined class Player.
@@ -125,15 +125,23 @@ class LuaClasses:
                     return tree
         return tree
 
-    def get_children(self, cls, tree=None):
-        """Recursively find all children of cls.
+    def get_instances(self, c_name):
+        # Because some classes have the same name, we have to gather all.
+        l = []
+        for c in self.all_classes:
+            if c.name == c_name:
+                l.append(c)
+        return l
+
+    def get_children(self, c_name, tree=None):
+        """Recursively find all children of c_name.
 
         Returns a list of LuaClass instances.
         """
         if tree == None:
             tree = []
         for c in self.all_classes:
-            if c.name == cls:
+            if c.name == c_name:
                 if c.children:
                     l = []
                     l.append(c)
@@ -209,9 +217,11 @@ def fill_data(file_name, outfile):
 def init(base_dir, cpp_files):
     # Read all class definitions
     for cpp_file, outfile in cpp_files:
+        # Assuming each .cc file has a corresponding .h file
         header = cpp_file.rpartition('.')[0] + '.h'
         h_path = os.path.join(base_dir, header)
         fill_data(h_path, outfile)
+
     # Apply inheritances. This can only be done after all classes are created because
     # some class definitions are in different files.
     classes.create_inheritances()
@@ -222,10 +232,10 @@ def add_child_of(rst_data):
     """Adds the String 'Child of: …' to rst_data."""
 
     found_classes = RSTDATA_CLS_RE.findall(rst_data)
-    for cls in found_classes:
-        parents = classes.get_parents(cls)
+    for c_name in found_classes:
+        parents = classes.get_parents(c_name)
         if parents:
-            repl_str = '.. class:: {}\n\n'.format(cls)
+            repl_str = '.. class:: {}\n\n'.format(c_name)
             child_str = '{}   Child of:'.format(repl_str)
             for i, parent in enumerate(parents):
                 child_str += ' :class:`{}`'.format(parent.get_parent_name())
@@ -277,7 +287,7 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                                                 n=show_list[-1].name,
                                                 )
             for i, p in enumerate(show_list):
-                # Create the connections between the other parents
+                # Create the connections between parents
                 try:
                     ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
                         a=show_list[i+1].name,
@@ -298,13 +308,15 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
     return base_name, base_link, ret_str
 
 
-def format_graphviz_children(cls):
-    children = classes.get_children(cls)
+def format_graphviz_children(c_name):
+
+    children = classes.get_children(c_name)
     ret_str = ''
     last_row = 0
 
     if children:
         for child in children:
+            #print(child[0].name, [x.name for x in child[1]])
             last_row += 1
             ret_str += '{} -- {{'.format(child[0].name)
 
@@ -324,9 +336,9 @@ def format_graphviz_children(cls):
     return ret_str
 
 
-def create_directive(cls):
-    children = format_graphviz_children(cls)
-    base_cls, base_link, parents = format_graphviz_parents(cls)
+def create_directive(c_name):
+    children = format_graphviz_children(c_name)
+    base_cls, base_link, parents = format_graphviz_parents(c_name)
     graph_directive = None
 
     if parents or children:
@@ -345,7 +357,7 @@ def create_directive(cls):
     {base_cls} [shape=house, {link}]
     {parents}
     {child_list}
-    }}\n""".format(cur_cls=cls,
+    }}\n""".format(cur_cls=c_name,
                    base_cls=base_cls,
                    link=base_link,
                    parents=parents,
@@ -357,10 +369,10 @@ def create_directive(cls):
 
 def add_dependency_graph(rst_data):
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
-    for cls in found_cls:
-        directive = create_directive(cls)
+    for c_name in found_cls:
+        directive = create_directive(c_name)
         if directive:
-            repl_str = '.. class:: {}\n\n'.format(cls)
+            repl_str = '.. class:: {}\n\n'.format(c_name)
             directive_str = '{}\n{}'.format(directive, repl_str)
             rst_data = rst_data.replace(repl_str, directive_str)
 
