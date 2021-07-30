@@ -1716,6 +1716,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		if (r.get() != nullptr) {
 			*r = net().fetch_one_remote(r->internal_name);
 		}
+		rebuild();
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
 	} catch (const std::exception& e) {
@@ -2480,9 +2481,10 @@ public:
 			CommentRow* cr = new CommentRow(parent_, info_, *this, box_comment_rows_, text, index);
 			comment_rows_.push_back(std::unique_ptr<CommentRow>(cr));
 			box_comment_rows_.add_space(kRowButtonSize);
-			box_comment_rows_.add(cr, UI::Box::Resizing::kExpandBoth);
+			box_comment_rows_.add(cr, UI::Box::Resizing::kFullSize);
 			++index;
 		}
+		// layout();
 	}
 
 private:
@@ -2838,6 +2840,7 @@ private:
 			});
 			layout();
 			update_edit_enabled();
+			initialization_complete();
 		}
 		void update_edit_enabled() {
 			/* Admins can edit all posts; normal users only their own posts and only if the post was
