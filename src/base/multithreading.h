@@ -28,7 +28,7 @@
 #include "notifications/notifications.h"
 
 // Uncomment this to get masses of log output to debug hangs and deadlocks
-#define MUTEX_LOCK_DEBUG
+// #define MUTEX_LOCK_DEBUG
 
 // Remember that the current thread is the thread that initialized the graphics system.
 // This function needs to be called exactly once when Widelands starts.

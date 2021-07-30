@@ -953,7 +953,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	Widelands::FCoords f = game().map().get_fcoords(ms->get_position());
 
 	BuildableField bf(f);
-	update_buildable_field(bf);
+	update_buildable_field_military_aspects(bf);
 
 	Widelands::Quantity const total_capacity = ms->soldier_control()->max_soldier_capacity();
 	Widelands::Quantity const current_target = ms->soldier_control()->soldier_capacity();

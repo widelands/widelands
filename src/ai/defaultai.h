@@ -172,6 +172,7 @@ private:
 	void update_all_mineable_fields(const Time&);
 	void update_all_not_buildable_fields();
 	void update_buildable_field(BuildableField&);
+	void update_buildable_field_military_aspects(BuildableField&);
 	void update_mineable_field(MineableField&);
 	void update_productionsite_stats();
 	unsigned find_immovables_nearby(

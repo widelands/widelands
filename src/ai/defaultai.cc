@@ -1279,6 +1279,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 				continue;
 			}
 
+			update_buildable_field_military_aspects(bf);
 			update_buildable_field(bf);
 			if (non_small_needed > 0) {
 				int32_t const maxsize =
@@ -1352,6 +1353,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		}
 
 		// and finnaly update the buildable field
+		update_buildable_field_military_aspects(*buildable_fields[j]);
 		update_buildable_field(*buildable_fields[j]);
 		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 	}
@@ -1444,6 +1446,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_SIZEMASK) {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
+			update_buildable_field_military_aspects(*buildable_fields.back());
 			update_buildable_field(*buildable_fields.back());
 			continue;
 		}
@@ -1472,32 +1475,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_resource_id);
 	FindNodeAllyOwned find_ally(player_, game(), player_number());
 	Widelands::PlayerNumber const pn = player_->player_number();
-	const Widelands::Descriptions& descriptions = game().descriptions();
 
 	constexpr uint16_t kProductionArea = 6;
 	constexpr uint16_t kBuildableSpotsCheckArea = 10;
-	constexpr uint16_t kEnemyCheckArea = 16;
-	const uint16_t ms_enemy_check_area =
-	   kEnemyCheckArea + std::abs(management_data.get_military_number_at(75)) / 10;
 	constexpr uint16_t kDistantResourcesArea = 20;
-
-	uint16_t actual_enemy_check_area = kEnemyCheckArea;
-	field.is_militarysite = false;
-	if (field.coords.field->get_immovable()) {
-		if (field.coords.field->get_immovable()->descr().type() ==
-		    Widelands::MapObjectType::MILITARYSITE) {
-			field.is_militarysite = true;
-			actual_enemy_check_area = ms_enemy_check_area;
-		}
-	}
-
-	field.unowned_land_nearby = map.find_fields(
-	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
-	   find_unowned_walkable);
-
-	field.enemy_owned_land_nearby = map.find_fields(
-	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
-	   find_enemy_owned_walkable);
 
 	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();
 	field.unowned_buildable_spots_nearby = 0;
@@ -1685,7 +1666,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		map.find_reachable_fields(
 		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
 		   &fish_fields_list, fisher_cstep,
-		   Widelands::FindNodeResource(descriptions.resource_index("resource_fish")));
+		   Widelands::FindNodeResource(game().descriptions().resource_index("resource_fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		std::set<Widelands::Coords> counted_fields;
@@ -1740,27 +1721,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 	}
 
-	// resetting some values
-	field.enemy_nearby =
-	   field.enemy_owned_land_nearby > std::abs(management_data.get_military_number_at(41) / 4);
-	if (field.enemy_owned_land_nearby == 0) {
-		assert(!field.enemy_nearby);
-	}
-
 	// resetting a bunch of values for the field
-	field.ally_military_presence = 0;
-	field.area_military_capacity = 0;
 	field.consumers_nearby.clear();
 	field.consumers_nearby.resize(wares.size());
-	field.enemy_military_presence = 0;
-	field.enemy_military_sites = 0;
-	field.enemy_wh_nearby = false;
-	field.military_in_constr_nearby = 0;
-	field.military_loneliness = 1000;
-	field.military_stationed = 0;
-	field.military_unstationed = 0;
-	field.own_military_presence = 0;
-	field.own_non_military_nearby = 0;
 	field.producers_nearby.clear();
 	field.supported_producers_nearby.clear();
 	field.buildings_nearby.clear();
@@ -1768,7 +1731,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.rangers_nearby = 0;
 	field.space_consumers_nearby = 0;
 	field.supporters_nearby.clear();
-	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
 	std::vector<Widelands::ImmovableFound> immovables;
@@ -1809,9 +1771,66 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			}
 		}
 	}
+}
 
-	// Now testing military aspects
+/// Updates military aspects of one buildable field
+void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
+	
+	const Widelands::Map& map = game().map();
+	const Time& gametime = game().get_gametime();
+	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
+	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
+	FindNodeAllyOwned find_ally(player_, game(), player_number());
+	Widelands::PlayerNumber const pn = player_->player_number();
+
+	constexpr uint16_t kEnemyCheckArea = 16;
+	const uint16_t ms_enemy_check_area =
+	   kEnemyCheckArea + std::abs(management_data.get_military_number_at(75)) / 10;
+
+	uint16_t actual_enemy_check_area = kEnemyCheckArea;
+	field.is_militarysite = false;
+	if (field.coords.field->get_immovable()) {
+		if (field.coords.field->get_immovable()->descr().type() ==
+		    Widelands::MapObjectType::MILITARYSITE) {
+			field.is_militarysite = true;
+			actual_enemy_check_area = ms_enemy_check_area;
+		}
+	}
+
+	field.unowned_land_nearby = map.find_fields(
+	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
+	   find_unowned_walkable);
+
+	field.enemy_owned_land_nearby = map.find_fields(
+	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
+	   find_enemy_owned_walkable);
+	   
+	// resetting some values
+	field.enemy_nearby =
+	   field.enemy_owned_land_nearby > std::abs(management_data.get_military_number_at(41) / 4);
+	if (field.enemy_owned_land_nearby == 0) {
+		assert(!field.enemy_nearby);
+	}
+	// resetting a bunch of values for the field
+	field.ally_military_presence = 0;
+	field.area_military_capacity = 0;
+	field.enemy_military_presence = 0;
+	field.enemy_military_sites = 0;
+	field.enemy_wh_nearby = false;
+	field.military_in_constr_nearby = 0;
+	field.military_loneliness = 1000;
+	field.military_stationed = 0;
+	field.military_unstationed = 0;
+	field.own_military_presence = 0;
+	field.own_non_military_nearby = 0;
+	field.unconnected_nearby = false;
+	
+	std::vector<Widelands::ImmovableFound> immovables;
+	immovables.reserve(50);
 	immovables.clear();
+	// function seems to return duplicates, so we will use serial numbers to filter them out
+	std::set<uint32_t> unique_serials;
+	unique_serials.clear();
 	map.find_immovables(game(),
 	                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
 	                    &immovables);
@@ -1821,7 +1840,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	any_connected_imm = false;
 	bool any_unconnected_imm = false;
 	any_unconnected_imm = false;
-	unique_serials.clear();
 
 	for (const Widelands::ImmovableFound& imm_found : immovables) {
 		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
