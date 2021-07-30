@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-24 21:19+0000\n"
+"PO-Revision-Date: 2021-07-18 14:15+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgstr "이 편집기는 와이드랜드에서 사용할 자신만의 지도를 
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "[번역확인]보다시피, 편집기는 점점 나아지고 있지만 아직 개발이 필요합니다. 글자도 더 길게 하면서 여러 요소를 제대로 설명해야 합니다"
+msgstr "번역확인->보다시피, 편집기는 점점 나아지고 있지만 아직 개발이 필요합니다. 글자도 더 길게 하면서 여러 요소를 제대로 설명해야 합니다."
 
 #: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
@@ -177,7 +177,7 @@ msgstr "자원"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr "있는 자원 :"
+msgstr "있는 자원:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
@@ -192,7 +192,7 @@ msgstr "기본:"
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr "[플레이해보고 수정할것]%1%x %2%"
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:55

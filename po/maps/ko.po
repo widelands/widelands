@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# ks k, 2017
+# ks k, 2017-2018,2020
 # ks k, 2017-2018,2020-2021
 # TaeMin An, 2017
 # TaeMin An, 2017
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-31 02:13+0000\n"
+"PO-Revision-Date: 2021-07-18 14:21+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -633,7 +633,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr "가장 오래된 고대의 숲 깊은곳에 있는 이 호수는 아름답고 신성하고 소박하고 평화로우며 서정적으로 알려져 있습니다. 그러나 적대적인 두부족이 해안에 도착한 지금, 그 신성함은 방해 받고있습니다."
+msgstr "가장 오래된 고대의 숲 깊은곳에 있는 이 호수는 아름답고 신성하고 소박하고 평화로우며 서정적으로 알려져 있습니다. 그러나 적대적인 두부족이 해안에 도착한 지금, 그 신성함은 방해 받고있습니다…"
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
@@ -672,7 +672,7 @@ msgstr "삭막한 지역에서 지배를 위해 싸우고 있는 4개의 부족.
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr "작은 반지 "
+msgstr "번역확인-> 하급or 작은 반지 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -766,7 +766,7 @@ msgstr "지도의 중심에 있는 작은 언덕만이 4 개의 경쟁 부족을
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr "중심에는 오직 하나의 요새를 지을만한 공간 밖에 없습니다. 물은 어디에서나 발견 할 수 있으므로 지질학자를 보낼 필요가 없습니다. "
+msgstr "중심에는 오직 하나의 요새를 지을만한 공간 밖에 없습니다. 물은 어디에서나 발견 할 수 있으므로 지질학자를 보낼 필요가 없습니다."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
@@ -779,7 +779,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "각 플레이어는 확장에 있어 서로 다른 장애물을 가지고 있고 항상 그것을 극복 할 수있는 방법에는 여러 가지가 있습니다. 인공 지능은 하나의 배를 건설하지 않고서도 여기에서 패배 할 수 있지만, 선수들은 항구와 조선소를 최우선 순위로 삼는 것이 좋습니다 - 원정대는 보편적으로 유용하며 종종 금광상으로 가는 가장 빠른 길입니다. "
+msgstr "각 플레이어는 확장에 있어 서로 다른 장애물을 가지고 있고 항상 그것을 극복 할 수있는 방법에는 여러 가지가 있습니다. 인공 지능은 하나의 배를 건설하지 않고서도 여기에서 패배 할 수 있지만, 선수들은 항구와 조선소를 최우선 순위로 삼는 것이 좋습니다 - 원정대는 보편적으로 유용하며 종종 금광상으로 가는 가장 빠른 길입니다."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
