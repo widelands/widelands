@@ -131,7 +131,8 @@ void NetAddons::init(std::string username, std::string password) {
 		NetAddress addr;
 		// TODO(Nordfriese): inet_addr can't handle IPv6 addresses
 		if (!NetAddress::resolve_to_v4(&addr, target_ip, target_port)) {
-			throw WLWarning("", "Unable to resolve host name and port '%s' / %d", target_ip.c_str(), target_port);
+			throw WLWarning(
+			   "", "Unable to resolve host name and port '%s' / %d", target_ip.c_str(), target_port);
 		}
 		std::ostringstream oss("");
 		oss << addr.ip;
