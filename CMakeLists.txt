@@ -209,6 +209,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
   endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
   option(OPTION_ASAN "Build with AddressSanitizer" ON)
+elseif(CMAKE_BUILD_TYPE STREQUAL "None")
+  message(STATUS "Not setting any default flags.")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
@@ -416,7 +418,7 @@ endif (OPTION_BUILD_TESTS)
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
   DESTINATION ${WL_INSTALL_BASEDIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreVersionFile
 )
 
@@ -432,7 +434,7 @@ install(
   FILES
     data/datadirversion
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT VersionFile
 )
 
@@ -449,7 +451,7 @@ install(
     data/txts
     data/world
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreDataFiles
 )
 
@@ -457,7 +459,7 @@ install(
   DIRECTORY
     data/maps
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT MapFiles
 )
 
@@ -466,7 +468,7 @@ install(
     data/music
     data/sound
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT MusicFiles
 )
 
@@ -476,7 +478,7 @@ install(
     CREDITS
     ChangeLog
   DESTINATION ${WL_INSTALL_BASEDIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreLicenseFiles
 )
 
@@ -495,7 +497,7 @@ install(
   DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/locale/
   DESTINATION ${WL_INSTALL_DATADIR}/locale
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreLanguageFiles
 )
 
