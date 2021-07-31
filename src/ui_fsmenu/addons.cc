@@ -2387,7 +2387,6 @@ public:
 		login_changed();
 
 		update_data();
-		main_box_.set_size(get_inner_w(), get_inner_h());
 		layout();
 
 		initialization_complete();
@@ -2404,6 +2403,7 @@ public:
 
 	void layout() override {
 		if (!is_minimal()) {
+			main_box_.set_size(get_inner_w(), get_inner_h());
 			login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 			login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
 			box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
