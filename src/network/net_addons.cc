@@ -27,15 +27,14 @@
 #include <memory>
 
 #include <boost/format.hpp>
-#include <unistd.h>
 #ifndef _WIN32
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <unistd.h>
 #else
-#include <iphlpapi.h>
 #include <winsock2.h>
 #include <ws2def.h>
 #include <ws2tcpip.h>
@@ -62,13 +61,31 @@ namespace AddOns {
  * repo (widelands/wl_addons_server) in `Server.java`.
  */
 
-static inline void check_string_validity(const std::string& str) {
+namespace {
+
+inline int portable_write(const int socket, const char* buffer, const size_t length) {
+#ifdef _WIN32
+	return send(socket, buffer, length, 0);
+#else
+	return write(socket, buffer, length);
+#endif
+}
+inline int portable_read(const int socket, char* buffer, const size_t length) {
+#ifdef _WIN32
+	return recv(socket, buffer, length, 0);
+#else
+	return read(socket, buffer, length);
+#endif
+}
+
+inline void check_string_validity(const std::string& str) {
 	if (str.find(' ') != std::string::npos) {
 		throw WLWarning("", "String '%s' may not contain whitespaces", str.c_str());
 	}
 	if (str.find('\n') != std::string::npos) {
 		throw WLWarning("", "String '%s' may not contain newlines", str.c_str());
 	}
+}
 }
 
 constexpr unsigned kCurrentProtocolVersion = 4;
@@ -155,7 +172,11 @@ void NetAddons::quit_connection() {
 		return;
 	}
 	initialized_ = false;
+#ifdef _WIN32
+	closesocket(client_socket_);
+#else
 	close(client_socket_);
+#endif
 
 #ifdef SIGPIPE
 	signal(SIGPIPE, SIG_DFL);
@@ -179,7 +200,7 @@ inline void NetAddons::write_to_server(const std::string& send) {
 	write_to_server(send.c_str(), send.size());
 }
 void NetAddons::write_to_server(const char* send, const size_t length) {
-	if (write(client_socket_, send, length) >= 0) {
+	if (portable_write(client_socket_, send, length) >= 0) {
 		return;
 	}
 
@@ -204,7 +225,7 @@ std::string NetAddons::read_line() {
 	char c;
 	int n;
 	for (;;) {
-		n = read(client_socket_, &c, 1);
+		n = portable_read(client_socket_, &c, 1);
 		if (n != 1 || c == '\n') {
 			break;
 		}
@@ -218,7 +239,7 @@ void NetAddons::read_file(const int64_t length, const std::string& out) {
 	std::unique_ptr<char[]> buffer(new char[length]);
 	int64_t nr_bytes_read = 0;
 	do {
-		int64_t l = read(client_socket_, buffer.get(), length - nr_bytes_read);
+		int64_t l = portable_read(client_socket_, buffer.get(), length - nr_bytes_read);
 		if (l < 1) {
 			throw WLWarning("", "Connection interrupted");
 		}
@@ -448,7 +469,7 @@ void NetAddons::download_addon(const std::string& name,
 			int64_t nr_bytes_read = 0;
 			do {
 				progress(relative_path, progress_state);
-				int64_t l = read(client_socket_, buffer.get(), length - nr_bytes_read);
+				int64_t l = portable_read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
 					throw WLWarning("", "Connection interrupted");
 				}
