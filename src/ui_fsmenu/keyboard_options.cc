@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wlapplication_options.h"
@@ -153,12 +154,13 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 				} else {
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
-					   bformat(_("The shortcut you selected (‘%1$s’) is already in use for the "
-					                    "following action: ‘%2$s’. Please select a different shortcut "
-					                    "or change the conflicting shortcut first."),
-					    shortcut_string_for(c.key, false), to_string(conflict))
-					      ,
-					   UI::WLMessageBox::MBoxType::kOk, UI::Align::kCenter, true);
+					   as_richtext_paragraph(bformat(
+					          _("The shortcut you selected (‘%1$s’) is already in use for the "
+					            "following action: ‘%2$s’. Please select a different shortcut "
+					            "or change the conflicting shortcut first."),
+					       shortcut_string_for(c.key, true), to_string(conflict)),
+					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+					   UI::WLMessageBox::MBoxType::kOk);
 					warning.run<UI::Panel::Returncodes>();
 				}
 			}
