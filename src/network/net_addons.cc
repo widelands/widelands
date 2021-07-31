@@ -49,6 +49,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
+#include "network/network.h"
 #include "wlapplication_options.h"
 
 namespace AddOns {
@@ -121,11 +122,22 @@ void NetAddons::init(std::string username, std::string password) {
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		throw WLWarning("", "Unable to create socket");
 	}
+
+	const std::string target_ip = get_config_string("addon_server_ip", "widelands.org");
+	const int target_port = get_config_int("addon_server_port", 7388);
 	sockaddr_in server;
 	server.sin_family = AF_INET;
-	server.sin_port = htons(get_config_int("addon_server_port", 7399));
-	server.sin_addr.s_addr =
-	   inet_addr(get_config_string("addon_server_ip", "127.0.0.1" /* NOCOM */).c_str());
+	{
+		NetAddress addr;
+		// TODO(Nordfriese): inet_addr can't handle IPv6 addresses
+		if (!NetAddress::resolve_to_v4(&addr, target_ip, target_port)) {
+			throw WLWarning("", "Unable to resolve host name and port '%s' / %d", target_ip.c_str(), target_port);
+		}
+		std::ostringstream oss("");
+		oss << addr.ip;
+		server.sin_addr.s_addr = inet_addr(oss.str().c_str());
+		server.sin_port = htons(addr.port);
+	}
 	if (connect(client_socket_, reinterpret_cast<sockaddr*>(&server), sizeof(server)) < 0) {
 		throw WLWarning("", "Unable to connect to the server");
 	}
