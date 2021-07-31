@@ -86,7 +86,7 @@ inline void check_string_validity(const std::string& str) {
 		throw WLWarning("", "String '%s' may not contain newlines", str.c_str());
 	}
 }
-}
+}  // namespace
 
 constexpr unsigned kCurrentProtocolVersion = 4;
 
