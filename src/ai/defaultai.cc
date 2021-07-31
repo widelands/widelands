@@ -1831,6 +1831,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	// function seems to return duplicates, so we will use serial numbers to filter them out
 	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
+	MutexLock m(MutexLock::ID::kObjects);
 	map.find_immovables(game(),
 	                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
 	                    &immovables);
@@ -1850,7 +1851,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 
 		// testing if immovable is owned by someone else and collecting some statistics
 		if (upcast(Widelands::Building const, building, &base_immovable)) {
-			MutexLock m(MutexLock::ID::kObjects);
 			const Widelands::PlayerNumber bpn = building->owner().player_number();
 			if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
 				assert(!player_statistics.players_in_same_team(bpn, pn));
