@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
-"PO-Revision-Date: 2021-06-28 17:55+0000\n"
+"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"PO-Revision-Date: 2021-07-22 21:39+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,7 @@ msgstr "prosinec"
 #. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:185
+#: ../../src/ui_fsmenu/keyboard_options.cc:189
 #: ../../src/wui/interactive_gamebase.cc:90
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
@@ -558,8 +558,8 @@ msgstr "Mapa nebyla uložena, opravdu chceš ukončit editor?"
 
 #: ../../src/editor/editorinteractive.cc:916 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
-#: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
-#: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
+#: ../../src/ui_fsmenu/addons.cc:1191 ../../src/ui_fsmenu/addons.cc:1247
+#: ../../src/ui_fsmenu/addons.cc:1374 ../../src/ui_fsmenu/addons.cc:2100
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
 #: ../../src/wlapplication.cc:1578
 msgid "Error"
@@ -650,8 +650,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -836,11 +836,11 @@ msgstr "Zobrazení"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
-#: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:204 ../../src/ui_fsmenu/addons.cc:1680
+#: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:47
+#: ../../src/ui_fsmenu/addons.cc:205 ../../src/ui_fsmenu/addons.cc:1687
 #: ../../src/ui_fsmenu/addons_packager.cc:109
 #: ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/keyboard_options.cc:133 ../../src/ui_fsmenu/menu.cc:145
+#: ../../src/ui_fsmenu/keyboard_options.cc:134 ../../src/ui_fsmenu/menu.cc:145
 #: ../../src/ui_fsmenu/options.cc:95
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
 #: ../../src/wui/game_main_menu_save_game.cc:88
@@ -854,8 +854,8 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:757
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
 #: ../../src/ui_basic/color_chooser.cc:271
-#: ../../src/ui_basic/messagebox.cc:112 ../../src/ui_basic/text_prompt.cc:56
-#: ../../src/ui_fsmenu/keyboard_options.cc:49
+#: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:56
+#: ../../src/ui_fsmenu/keyboard_options.cc:50
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
 #: ../../src/wui/economy_options_window.cc:665
@@ -1366,8 +1366,8 @@ msgid ""
 "location."
 msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa rozdělena. Pokud se rozměr zvětšuje, nové sloupce/řádky budou vloženy doprava a dolů od místa rozdělení, tzn. na jih a východ od místa rozdělení. Pokud se mapa zmenšuje bude odebrán požadovaný počet sloupců/řádků, které jsou taktéž ve směru vpravo a dolů od místa rozdělení."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1380,10 +1380,9 @@ msgstr "%1%: %2%"
 msgid "Tool Size"
 msgstr "Velikost nástroje"
 
-#: ../../src/editor/ui_menus/toolsize_menu.cc:85
-#, c-format
-msgid "Current Size: %u"
-msgstr "Současná velikost: %u"
+#: ../../src/editor/ui_menus/toolsize_menu.cc:46
+msgid "Current Size:"
+msgstr "Současná velikost:"
 
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
@@ -1976,7 +1975,7 @@ msgstr "dělník potřebuje zkušenosti"
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:591
 msgid "the workers need no experience"
-msgstr "dělník nepotřebuje další zkušenosti"
+msgstr "dělníci nepotřebuje další zkušenosti"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -2447,7 +2446,7 @@ msgstr "Podrobnosti vlajky"
 
 #: ../../src/map_io/map_saver.cc:258
 msgid "Road and waterway details"
-msgstr "Podrobnosti cesy / vodní cesty"
+msgstr "Podrobnosti cesty / vodní cesty"
 
 #: ../../src/map_io/map_saver.cc:275
 msgid "Building details"
@@ -2510,19 +2509,19 @@ msgstr "Území"
 
 #: ../../src/map_io/widelands_map_loader.cc:332
 msgid "Initializing flags"
-msgstr "Spouštění vlajek"
+msgstr "Příprava vlajek"
 
 #: ../../src/map_io/widelands_map_loader.cc:339
 msgid "Initializing roads and waterways"
-msgstr "Spouštění cest a vodních cest"
+msgstr "Příprava cest a vodních cest"
 
 #: ../../src/map_io/widelands_map_loader.cc:352
 msgid "Initializing buildings"
-msgstr "Spouštění budov"
+msgstr "Příprava budov"
 
 #: ../../src/map_io/widelands_map_loader.cc:359
 msgid "Initializing map objects"
-msgstr "Spouštění prvků mapy"
+msgstr "Příprava prvků mapy"
 
 #: ../../src/map_io/widelands_map_loader.cc:424
 msgid "Checking map"
@@ -2576,7 +2575,7 @@ msgstr "/me soubor neprošel kontrolním součtem md5."
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me zkontroloval jsem přijatý soubor. Přestože kontrolní součet md5 souhlasí, nemohu se souborem pracovat."
+msgstr "/me zkontroloval přijatý soubor. Přestože kontrolní součet md5 souhlasí, nemohu se souborem pracovat."
 
 #: ../../src/network/gameclient.cc:1282
 msgid "Disconnected"
@@ -2591,7 +2590,7 @@ msgstr "Spojení s hostitelem bylo přerušeno z důvodu:\n%s"
 
 #: ../../src/network/gamehost.cc:117
 msgid "Available host commands are:"
-msgstr "Příkazy k dispozici jsou:"
+msgstr "K dispozici jsou příkazy hostitele:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:119
@@ -2606,12 +2605,12 @@ msgstr "/announce <msg>  -  pošle zprávu přes chat jako oznámení (systémov
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:123
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr "/warn <jméno> <důvod>  -  varování uživatele <jméno> z důvodu <důvod>"
+msgstr "/warn <name> <reason>  -  varování uživatele <name> z důvodu <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:125
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
-msgstr "/kick <jméno> <důvod>  -  vyhození uživatele <jméno> z důvodu <důvod>"
+msgstr "/kick <name> <reason>  -  vyhození uživatele <name> z důvodu <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:127
@@ -2625,11 +2624,11 @@ msgstr "/endForcedPause        -  znovu nastaví normální rychlost hry."
 
 #: ../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Špatné použití, mělo by být: /announce <zpráva>"
+msgstr "Špatné použití, mělo by být: /announce <message>"
 
 #: ../../src/network/gamehost.cc:148
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Špatné použití, mělo by být: /warn <jméno> <důvod>"
+msgstr "Špatné použití, mělo by být: /warn <name> <reason>"
 
 #: ../../src/network/gamehost.cc:152 ../../src/network/gamehost.cc:176
 #, c-format
@@ -2638,7 +2637,7 @@ msgstr "Klient %s nebyl nalezen."
 
 #: ../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Špatné použití, mělo by být: /kick <jméno> <důvod>"
+msgstr "Špatné použití, mělo by být: /kick <name> <reason>"
 
 #: ../../src/network/gamehost.cc:174
 msgid "You can not kick yourself!"
@@ -2665,7 +2664,7 @@ msgstr "Potvrzení vyhození bylo zrušeno. Nebylo zadáno žádné jméno!"
 
 #: ../../src/network/gamehost.cc:193
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Špatné použití, mělo by být: /ack_kick <jméno>"
+msgstr "Špatné použití, mělo by být: /ack_kick <name>"
 
 #: ../../src/network/gamehost.cc:199
 msgid "Kick acknowledgement cancelled: Wrong name given!"
@@ -2673,11 +2672,11 @@ msgstr "Potvrzení vyhození bylo zrušeno. Bylo zadáno špatné jméno!"
 
 #: ../../src/network/gamehost.cc:209
 msgid "Pause was already forced - game should be paused."
-msgstr "Pozastavení bylo již vnuceno - hra by měla být pozastavena."
+msgstr "Pozastavení bylo již vynuceno - hra by měla být pozastavena."
 
 #: ../../src/network/gamehost.cc:219
 msgid "There is no forced pause - nothing to end."
-msgstr "Není zde vynucené pozastavení - není co ukončit."
+msgstr "Hra není vynuceně pozastavena - není co ukončit."
 
 #: ../../src/network/gamehost.cc:228
 msgid "Invalid command! Type /help for a list of commands."
@@ -2735,7 +2734,7 @@ msgstr "Něco se pokazilo: %s"
 
 #: ../../src/network/internet_gaming.cc:430
 msgid "Welcome to the Widelands Metaserver!"
-msgstr "Vítej na MetaServeru Widelands!"
+msgstr "Vítej na Metaserveru Widelands!"
 
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
@@ -2750,7 +2749,7 @@ msgstr "Naše diskusní fóra nalezneš na:"
 
 #: ../../src/network/internet_gaming.cc:449
 msgid "For reporting bugs, visit:"
-msgstr "Pro nahlášení nečekaných závad navštiv:"
+msgstr "Pro nahlášení chyb navštiv:"
 
 #: ../../src/network/internet_gaming.cc:472
 msgid "Mixed up"
@@ -2808,12 +2807,12 @@ msgstr "Hra %s byla uzavřena"
 #: ../../src/network/internet_gaming.cc:618
 #, c-format
 msgid "%s joined the lobby"
-msgstr "%s se připojuje k lobby"
+msgstr "%s se připojil k lobby"
 
 #: ../../src/network/internet_gaming.cc:630
 #, c-format
 msgid "%s left the lobby"
-msgstr "%s opouští lobby"
+msgstr "%s opustil lobby"
 
 #: ../../src/network/internet_gaming.cc:687
 msgid "Chat message could not be sent."
@@ -2848,7 +2847,7 @@ msgstr "Zpráva nemohla být odeslána: Měla to být privátní zpráva?"
 
 #: ../../src/network/internet_gaming.cc:927
 msgid "Supported admin commands:"
-msgstr "Podpůrné příkazy správy:"
+msgstr "Podporované příkazy správce:"
 
 #: ../../src/network/internet_gaming.cc:928
 msgid "/motd <msg> - Set a permanent greeting message"
@@ -2918,7 +2917,7 @@ msgstr "Byl jsi odpojen, protože jsi poslal superuser příkaz bez superuser op
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Connection was closed by the client normally."
-msgstr "Spojení bylo klientem normálně ukončeno."
+msgstr "Spojení bylo klientem ukončeno normálně."
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "The connection to the metaserver was lost."
@@ -2940,7 +2939,7 @@ msgstr "Klient opustil hru."
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr "Klient havaroval a provedl nouzové uložení hry."
+msgstr "Klient spadl a provedl nouzové uložení hry."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
@@ -3018,11 +3017,11 @@ msgstr "Přišel příkaz číslo %s, který je v tomto stavu zakázán."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client reports time to host that is running backwards."
-msgstr "Klient hlásí hostiteli čas, který nemá dopřednou kontinuitu."
+msgstr "Klient hlásí hostiteli čas, který běží pozpátku."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr "Hra klienta překračuje čas odehraný hostitelem."
+msgstr "Hra klienta překračuje čas nastavený hostitelem."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client did not submit sync report in time."
@@ -3046,7 +3045,7 @@ msgstr "Klient poslal příkaz TIME přestože hra neběží."
 
 #: ../../src/network/network_gaming_messages.cc:157
 msgid "Client sent a PLAYERCOMMAND for another player."
-msgstr "Klient odeslal playercommand za jiného hráče."
+msgstr "Klient odeslal PLAYERCOMMAND za jiného hráče."
 
 #: ../../src/network/network_gaming_messages.cc:158
 msgid "Client sent unexpected synchronization report."
@@ -3069,7 +3068,7 @@ msgstr "VAROVÁNÍ: %1$s používá verzi: %2$s, zatímco Hostitel používá ve
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s se připojuje ke hře"
+msgstr "%s se připojil ke hře"
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
@@ -3125,21 +3124,21 @@ msgstr "Výchozí barva"
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgid "R"
-msgstr "R(Č)"
+msgstr "Č"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgid "G"
-msgstr "G(Z)"
+msgstr "Z"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgid "B"
-msgstr "B(M)"
+msgstr "M"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
-msgstr "Přednastavená barva"
+msgstr "Výchozí barva"
 
 #: ../../src/ui_basic/color_chooser.cc:328
 msgid "Red"
@@ -3251,80 +3250,80 @@ msgstr "O Widelands"
 msgid "Lua Error"
 msgstr "Chyba Lua"
 
-#: ../../src/ui_fsmenu/addons.cc:117
+#: ../../src/ui_fsmenu/addons.cc:118
 msgid "Add-On Manager"
 msgstr "Správce rozšíření (Add-ons)"
 
-#: ../../src/ui_fsmenu/addons.cc:158
+#: ../../src/ui_fsmenu/addons.cc:159
 msgid "Verified only"
 msgstr "Pouze ověřené"
 
-#: ../../src/ui_fsmenu/addons.cc:159
+#: ../../src/ui_fsmenu/addons.cc:160
 msgid "Show only verified add-ons in the Browse tab"
 msgstr "Zobrazuj v náhledu pouze ověřená rozšíření"
 
-#: ../../src/ui_fsmenu/addons.cc:167
+#: ../../src/ui_fsmenu/addons.cc:168
 msgid "Sort by"
 msgstr "Řadit podle"
 
-#: ../../src/ui_fsmenu/addons.cc:178
+#: ../../src/ui_fsmenu/addons.cc:179
 #: ../../src/ui_fsmenu/training_wheel_options.cc:120
 msgid "Reset"
 msgstr "Vymazat"
 
-#: ../../src/ui_fsmenu/addons.cc:179
+#: ../../src/ui_fsmenu/addons.cc:180
 msgid "Reset the filters"
 msgstr "Vymazat filtry"
 
-#: ../../src/ui_fsmenu/addons.cc:195
-msgid "Refresh"
-msgstr "Přenačíst"
-
 #: ../../src/ui_fsmenu/addons.cc:196
-msgid "Refresh the list of add-ons available from the server"
-msgstr "Aktualizuj seznam rozšíření dostupných na tomto serveru"
+msgid "Refresh"
+msgstr "Obnovit"
 
-#: ../../src/ui_fsmenu/addons.cc:213
+#: ../../src/ui_fsmenu/addons.cc:197
+msgid "Refresh the list of add-ons available from the server"
+msgstr "Obnov seznam rozšíření dostupných na tomto serveru"
+
+#: ../../src/ui_fsmenu/addons.cc:214
 msgid "Fix dependencies…"
 msgstr "Oprav závislosti…"
 
-#: ../../src/ui_fsmenu/addons.cc:214
+#: ../../src/ui_fsmenu/addons.cc:215
 msgid "Try to automatically fix the dependency errors"
 msgstr "Zkus opravit chyby závislostí automaticky"
 
-#: ../../src/ui_fsmenu/addons.cc:224
+#: ../../src/ui_fsmenu/addons.cc:225
 msgid "Move selected add-on to top"
 msgstr "Přesuň vybrané rozšíření nahoru"
 
-#: ../../src/ui_fsmenu/addons.cc:233
+#: ../../src/ui_fsmenu/addons.cc:234
 msgid "Move selected add-on one step up"
 msgstr "Přesuň vybrané rozšíření o jedno místo výše"
 
-#: ../../src/ui_fsmenu/addons.cc:242
+#: ../../src/ui_fsmenu/addons.cc:243
 msgid "Move selected add-on one step down"
 msgstr "Přesuň vybrané rozšíření o jedno místo níže"
 
-#: ../../src/ui_fsmenu/addons.cc:251
+#: ../../src/ui_fsmenu/addons.cc:252
 msgid "Move selected add-on to bottom"
 msgstr "Přesuň vybrané rozšíření dolů"
 
-#: ../../src/ui_fsmenu/addons.cc:259
+#: ../../src/ui_fsmenu/addons.cc:260
 msgid "Launch the add-ons packager…"
-msgstr "Spustit Add-Ons Packager…"
+msgstr "Spustit správce rozšíření…"
 
-#: ../../src/ui_fsmenu/addons.cc:263
+#: ../../src/ui_fsmenu/addons.cc:264
 msgid "Tools for Add-Ons Developers"
 msgstr "Nástroj pro vývojáře herních rozšíření"
 
-#: ../../src/ui_fsmenu/addons.cc:271
+#: ../../src/ui_fsmenu/addons.cc:272
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr "Interaktivní Add-Ons Packager umožňuje vytváření, úpravy a mazání herních rozšíření, sestavování souborů map, vytvořených v Editoru map, a jejich sdílení s ostatními hráči prostřednictvím grafického uživatelského rozhraní bez toho, aby bylo nutné napsat jediný řádek skriptu."
+msgstr "Interaktivní správce rozšíření umožňuje vytváření, úpravy a mazání herních rozšíření, sestavování souborů map, vytvořených v Editoru map, a jejich sdílení s ostatními hráči prostřednictvím grafického uživatelského rozhraní bez toho, aby bylo nutné napsat jediný řádek skriptu."
 
-#: ../../src/ui_fsmenu/addons.cc:292
+#: ../../src/ui_fsmenu/addons.cc:293
 #, c-format
 msgid ""
 "Uploading add-ons to the server from within Widelands is not implemented "
@@ -3333,75 +3332,75 @@ msgid ""
 "attach the zip file."
 msgstr "Nahrávání herních rozšíření na server přímo z Widelands zatím není možné. Pro nahrání rozšíření je nutné zazipovat adresář s uloženým rozšířením ve tvém správci souborů, otevřít stránku pro nahrávání %s v prohlížeči a vložit zazipovaný soubor."
 
-#: ../../src/ui_fsmenu/addons.cc:305
+#: ../../src/ui_fsmenu/addons.cc:306
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
-#: ../../src/ui_fsmenu/addons.cc:307
+#: ../../src/ui_fsmenu/addons.cc:308
 msgid "Copy Link"
 msgstr "Zkopírovat odkaz"
 
-#: ../../src/ui_fsmenu/addons.cc:327
+#: ../../src/ui_fsmenu/addons.cc:328
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "Více informací o vytváření a publikování vlastních rozšíření lze nalézt na %s."
 
-#: ../../src/ui_fsmenu/addons.cc:357
+#: ../../src/ui_fsmenu/addons.cc:358
 msgid "Development"
 msgstr "Vývoj"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons.cc:360
+#: ../../src/ui_fsmenu/addons.cc:361
 msgid "Name"
 msgstr "Jméno (A-Z)"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons.cc:362
+#: ../../src/ui_fsmenu/addons.cc:363
 msgid "Name (descending)"
 msgstr "Jméno (Z-A)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:364
+#: ../../src/ui_fsmenu/addons.cc:365
 msgid "Best average rating"
 msgstr "Nejlepší průměrné hodnocení"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:366
+#: ../../src/ui_fsmenu/addons.cc:367
 msgid "Worst average rating"
 msgstr "Nejhorší průměrné hodnocení"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:368
+#: ../../src/ui_fsmenu/addons.cc:369
 msgid "Most often downloaded"
 msgstr "Nejčastěji stahované"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:370
+#: ../../src/ui_fsmenu/addons.cc:371
 msgid "Least often downloaded"
 msgstr "Nejméně stahované"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:372
+#: ../../src/ui_fsmenu/addons.cc:373
 msgid "Oldest"
 msgstr "Nejstarší"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:374
+#: ../../src/ui_fsmenu/addons.cc:375
 msgid "Newest"
 msgstr "Nejnovější"
 
-#: ../../src/ui_fsmenu/addons.cc:377
+#: ../../src/ui_fsmenu/addons.cc:378
 msgid "Filter add-ons by name"
 msgstr "Filtruj rozšíření pomocí jména"
 
-#: ../../src/ui_fsmenu/addons.cc:387
+#: ../../src/ui_fsmenu/addons.cc:388
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Přepnout zobrazení pro „%s“"
 
-#: ../../src/ui_fsmenu/addons.cc:460
+#: ../../src/ui_fsmenu/addons.cc:461
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
@@ -3410,67 +3409,67 @@ msgstr[1] "Opravdu chceš aktualizovat tato %u rozšíření?"
 msgstr[2] "Opravdu chceš aktualizovat těchto %u rozšíření?"
 msgstr[3] "Opravdu chceš aktualizovat těchto %u rozšíření?"
 
-#: ../../src/ui_fsmenu/addons.cc:468
+#: ../../src/ui_fsmenu/addons.cc:469
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) od %3$s"
 
-#: ../../src/ui_fsmenu/addons.cc:469 ../../src/ui_fsmenu/addons.cc:2026
-#: ../../src/ui_fsmenu/addons.cc:2051
+#: ../../src/ui_fsmenu/addons.cc:470 ../../src/ui_fsmenu/addons.cc:2034
+#: ../../src/ui_fsmenu/addons.cc:2060
 msgid "NOT VERIFIED"
 msgstr "NEOVĚŘENO"
 
-#: ../../src/ui_fsmenu/addons.cc:469
+#: ../../src/ui_fsmenu/addons.cc:470
 msgid "verified"
 msgstr "ověřeno"
 
-#: ../../src/ui_fsmenu/addons.cc:474
+#: ../../src/ui_fsmenu/addons.cc:475
 msgid "Upgrade All"
 msgstr "Aktualizovat vše"
 
-#: ../../src/ui_fsmenu/addons.cc:667
+#: ../../src/ui_fsmenu/addons.cc:668
 msgid "Server Connection Error"
-msgstr "Chyba serverového připojení"
+msgstr "Chyba připojení k serveru"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons.cc:669
+#: ../../src/ui_fsmenu/addons.cc:670
 msgid "a networking bug"
 msgstr "chyba síťového připojení"
 
-#: ../../src/ui_fsmenu/addons.cc:670
+#: ../../src/ui_fsmenu/addons.cc:671
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Seznam rozšíření dostupných na tomto serveru není přístupný!<br>Chybová zpráva: %s"
 
-#: ../../src/ui_fsmenu/addons.cc:751
+#: ../../src/ui_fsmenu/addons.cc:752
 #, c-format
 msgid "Installed (%u)"
 msgstr "Instalováno (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:829
-msgid "Browse"
-msgstr "Procházet dostupné"
-
 #: ../../src/ui_fsmenu/addons.cc:830
+msgid "Browse"
+msgstr "Procházet"
+
+#: ../../src/ui_fsmenu/addons.cc:831
 #, c-format
 msgid "Browse (%u)"
-msgstr "Dostupné (%u)"
+msgstr "Procházet (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:840
+#: ../../src/ui_fsmenu/addons.cc:841
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Aktualizovat vše (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:843
+#: ../../src/ui_fsmenu/addons.cc:844
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Pro nainstalovaná rozšíření nejsou k dispozici žádné aktualizace"
 
-#: ../../src/ui_fsmenu/addons.cc:846
+#: ../../src/ui_fsmenu/addons.cc:847
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
@@ -3479,34 +3478,34 @@ msgstr[1] "Aktualizovat tato %u rozšíření:"
 msgstr[2] "Aktualizovat těchto %u rozšíření:"
 msgstr[3] "Aktualizovat těchto %u rozšíření:"
 
-#: ../../src/ui_fsmenu/addons.cc:852
+#: ../../src/ui_fsmenu/addons.cc:853
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons.cc:883
+#: ../../src/ui_fsmenu/addons.cc:884
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· „%1$s“ vyžaduje rozšíření „%2$s“, které nelze nalézt"
 
-#: ../../src/ui_fsmenu/addons.cc:889
+#: ../../src/ui_fsmenu/addons.cc:890
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· „%1$s“ vyžaduje rozšíření „%2$s“, které je vypnuto."
 
-#: ../../src/ui_fsmenu/addons.cc:896
+#: ../../src/ui_fsmenu/addons.cc:897
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· „%1$s“ vyžaduje rozšíření „%2$s“, to je v seznamu až pod požadovaným rozšířením"
 
-#: ../../src/ui_fsmenu/addons.cc:916
+#: ../../src/ui_fsmenu/addons.cc:917
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· „%1$s“ vyžaduje nejprve rozšíření „%2$s“ a pak „%3$s“, ale v seznamu jsou uvedena ve špatném pořadí"
 
-#: ../../src/ui_fsmenu/addons.cc:934
+#: ../../src/ui_fsmenu/addons.cc:935
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -3514,7 +3513,7 @@ msgid ""
 "%s"
 msgstr "Zapnuté rozšíření je poškozené. Se současným nastavením nelze spustit žádnou hru.\nChybová zpráva:\n%s"
 
-#: ../../src/ui_fsmenu/addons.cc:952
+#: ../../src/ui_fsmenu/addons.cc:953
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
@@ -3523,18 +3522,18 @@ msgstr[1] "%u chyby závislostí"
 msgstr[2] "%u chyb závislostí"
 msgstr[3] "%u chyb závislostí"
 
-#: ../../src/ui_fsmenu/addons.cc:957
+#: ../../src/ui_fsmenu/addons.cc:958
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Rozšíření, která způsobují chyby závislostí, nemusí pracovat správně nebo mohou bránit načtení her nebo map."
 
-#: ../../src/ui_fsmenu/addons.cc:1152
+#: ../../src/ui_fsmenu/addons.cc:1153
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Stahuji „%s“…"
 
-#: ../../src/ui_fsmenu/addons.cc:1192
+#: ../../src/ui_fsmenu/addons.cc:1193
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3543,12 +3542,12 @@ msgid ""
 "%2$s"
 msgstr "Rozšíření „%1$s“ se nepodařilo ze serveru stáhnout. Instalace/aktualizace tohoto rozšíření bude přeskočena.\n\nChybové hlášení:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1206
+#: ../../src/ui_fsmenu/addons.cc:1207
 #, c-format
 msgid "Downloading translations for ‘%s’…"
 msgstr "Stahuji překlad k „%s“…"
 
-#: ../../src/ui_fsmenu/addons.cc:1247
+#: ../../src/ui_fsmenu/addons.cc:1248
 #, c-format
 msgid ""
 "The translation files for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations for this add-on will be skipped.\n"
@@ -3557,12 +3556,12 @@ msgid ""
 "%2$s"
 msgstr "Soubory s překladem k rozšíření „%1$s“ se nepodařilo ze serveru stáhnout. Instalace/aktualizace překladu pro toto rozšíření bude přeskočena.\n\nChybové hlášení:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1271 ../../src/ui_fsmenu/addons.cc:1453
-#: ../../src/ui_fsmenu/addons.cc:1924
+#: ../../src/ui_fsmenu/addons.cc:1277 ../../src/ui_fsmenu/addons.cc:1460
+#: ../../src/ui_fsmenu/addons.cc:1931
 msgid "Uninstall"
 msgstr "Odinstalovat"
 
-#: ../../src/ui_fsmenu/addons.cc:1273
+#: ../../src/ui_fsmenu/addons.cc:1280
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3576,7 +3575,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Opravdu chceš odinstalovat toto rozšíření?\n\n%1$s\nOd %2$s\nVerze %3$s\nKategorie: %4$s\n%5$s\n\nToto rozšíření není možné ze serveru znovu stáhnout."
 
-#: ../../src/ui_fsmenu/addons.cc:1280
+#: ../../src/ui_fsmenu/addons.cc:1287
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3588,99 +3587,99 @@ msgid ""
 "%5$s"
 msgstr "Opravdu chceš odinstalovat toto rozšíření?\n\n%1$s\nOd %2$s\nVerze %3$s\nKategorie: %4$s\n%5$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1368
+#: ../../src/ui_fsmenu/addons.cc:1375
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Požadované rozšíření „%s“ nelze na serveru nalézt."
 
-#: ../../src/ui_fsmenu/addons.cc:1406
+#: ../../src/ui_fsmenu/addons.cc:1413
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
 msgstr "Toto rozšíření způsobuje desynchronizaci při hře více hráčů a při přehrávání záznamů."
 
-#: ../../src/ui_fsmenu/addons.cc:1412
+#: ../../src/ui_fsmenu/addons.cc:1419
 #, c-format
 msgid "Requires a Widelands version of at least %s."
 msgstr "Vyžaduje verzi Widelands %s nebo novější."
 
-#: ../../src/ui_fsmenu/addons.cc:1417
+#: ../../src/ui_fsmenu/addons.cc:1424
 #, c-format
 msgid "Requires a Widelands version of at most %s."
 msgstr "Vyžaduje verzi Widelands %s nebo starší."
 
-#: ../../src/ui_fsmenu/addons.cc:1421
+#: ../../src/ui_fsmenu/addons.cc:1428
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
 msgstr "Vyžaduje verzi Widelands ne starší než %1$s a ne novější než %2$s."
 
-#: ../../src/ui_fsmenu/addons.cc:1463 ../../src/ui_fsmenu/addons.cc:1512
+#: ../../src/ui_fsmenu/addons.cc:1470 ../../src/ui_fsmenu/addons.cc:1519
 msgid "Disable"
 msgstr "Deaktivovat"
 
-#: ../../src/ui_fsmenu/addons.cc:1463 ../../src/ui_fsmenu/addons.cc:1512
+#: ../../src/ui_fsmenu/addons.cc:1470 ../../src/ui_fsmenu/addons.cc:1519
 msgid "Enable"
 msgstr "Aktivovat"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1476 ../../src/ui_fsmenu/addons.cc:1949
+#: ../../src/ui_fsmenu/addons.cc:1483 ../../src/ui_fsmenu/addons.cc:1956
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1489 ../../src/ui_fsmenu/addons.cc:1990
+#: ../../src/ui_fsmenu/addons.cc:1496 ../../src/ui_fsmenu/addons.cc:1997
 #: ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1493 ../../src/ui_fsmenu/addons.cc:1994
+#: ../../src/ui_fsmenu/addons.cc:1500 ../../src/ui_fsmenu/addons.cc:2001
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1496 ../../src/ui_fsmenu/addons.cc:1998
+#: ../../src/ui_fsmenu/addons.cc:1503 ../../src/ui_fsmenu/addons.cc:2005
 #, c-format
 msgid "by %s"
 msgstr "od %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1527 ../../src/ui_fsmenu/addons.cc:2082
+#: ../../src/ui_fsmenu/addons.cc:1534 ../../src/ui_fsmenu/addons.cc:2091
 #, c-format
 msgid "Category: %s"
 msgstr "Kategorie: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1532 ../../src/ui_fsmenu/addons.cc:2086
+#: ../../src/ui_fsmenu/addons.cc:1539 ../../src/ui_fsmenu/addons.cc:2095
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "Verze: %1$s+%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1585
+#: ../../src/ui_fsmenu/addons.cc:1592
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1587
+#: ../../src/ui_fsmenu/addons.cc:1594
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1589
+#: ../../src/ui_fsmenu/addons.cc:1596
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1591
+#: ../../src/ui_fsmenu/addons.cc:1598
 #, c-format
 msgid "%u bytes"
 msgstr "%u B"
 
-#: ../../src/ui_fsmenu/addons.cc:1629
+#: ../../src/ui_fsmenu/addons.cc:1636
 msgid "Your vote"
 msgstr "Tvé hodnocení"
 
-#: ../../src/ui_fsmenu/addons.cc:1647 ../../src/ui_fsmenu/addons.cc:2107
+#: ../../src/ui_fsmenu/addons.cc:1654 ../../src/ui_fsmenu/addons.cc:2116
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
@@ -3689,27 +3688,27 @@ msgstr[1] "Průměrné hodnocení: %1$.3f (z %2$u hlasů)"
 msgstr[2] "Průměrné hodnocení: %1$.3f (z %2$u hlasů)"
 msgstr[3] "Průměrné hodnocení: %1$.3f (z %2$u hlasů)"
 
-#: ../../src/ui_fsmenu/addons.cc:1652 ../../src/ui_fsmenu/addons.cc:2112
+#: ../../src/ui_fsmenu/addons.cc:1659 ../../src/ui_fsmenu/addons.cc:2121
 msgid "No votes yet"
 msgstr "Zatím nehodnoceno"
 
-#: ../../src/ui_fsmenu/addons.cc:1662
+#: ../../src/ui_fsmenu/addons.cc:1669
 msgid "Next screenshot"
 msgstr "Následující snímek"
 
-#: ../../src/ui_fsmenu/addons.cc:1671
+#: ../../src/ui_fsmenu/addons.cc:1678
 msgid "Previous screenshot"
 msgstr "Předchozí snímek"
 
-#: ../../src/ui_fsmenu/addons.cc:1679
+#: ../../src/ui_fsmenu/addons.cc:1686
 msgid "Submit comment"
 msgstr "Potvrdit komentář"
 
-#: ../../src/ui_fsmenu/addons.cc:1685
+#: ../../src/ui_fsmenu/addons.cc:1692
 msgid "No comments yet."
 msgstr "Zatím bez komentáře"
 
-#: ../../src/ui_fsmenu/addons.cc:1687
+#: ../../src/ui_fsmenu/addons.cc:1694
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
@@ -3718,65 +3717,65 @@ msgstr[1] "%u komentáře:"
 msgstr[2] "%u komentářů:"
 msgstr[3] "%u komentářů:"
 
-#: ../../src/ui_fsmenu/addons.cc:1697
+#: ../../src/ui_fsmenu/addons.cc:1704
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "‘%1$s’ okomentoval(a) verzi %2$s:"
 
-#: ../../src/ui_fsmenu/addons.cc:1711
+#: ../../src/ui_fsmenu/addons.cc:1718
 msgid "Not voted"
-msgstr "Nehlasováno"
+msgstr "Bez hodnocení"
 
-#: ../../src/ui_fsmenu/addons.cc:1771
+#: ../../src/ui_fsmenu/addons.cc:1778
 #, c-format
 msgid "Comments (%u)"
 msgstr "Komentáře (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1776
+#: ../../src/ui_fsmenu/addons.cc:1783
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Snímky obrazovky (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1788
+#: ../../src/ui_fsmenu/addons.cc:1795
 #, c-format
 msgid "Votes (%u)"
-msgstr "Hlasy (%u)"
+msgstr "Hodnocení (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:1831
+#: ../../src/ui_fsmenu/addons.cc:1838
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1867
+#: ../../src/ui_fsmenu/addons.cc:1874
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Tento snímek se nepodařilo ze serveru načíst. Došlo k chybě."
 
-#: ../../src/ui_fsmenu/addons.cc:1906 ../../src/ui_fsmenu/addons.cc:2017
+#: ../../src/ui_fsmenu/addons.cc:1913 ../../src/ui_fsmenu/addons.cc:2024
 msgid "Install"
 msgstr "Instalovat"
 
-#: ../../src/ui_fsmenu/addons.cc:1915 ../../src/ui_fsmenu/addons.cc:2041
+#: ../../src/ui_fsmenu/addons.cc:1922 ../../src/ui_fsmenu/addons.cc:2049
 msgid "Upgrade"
 msgstr "Aktualizovat"
 
-#: ../../src/ui_fsmenu/addons.cc:1933
+#: ../../src/ui_fsmenu/addons.cc:1940
 msgid "Comments and Votes"
 msgstr "Komentáře a hodnocení"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1975
+#: ../../src/ui_fsmenu/addons.cc:1982
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s   ⬇ %2$u   ★ %3$s   \"...\" %4$u   ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1999
+#: ../../src/ui_fsmenu/addons.cc:2006
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "od %1$s (nahráno %2$s)"
 
-#: ../../src/ui_fsmenu/addons.cc:2018
+#: ../../src/ui_fsmenu/addons.cc:2026
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3789,11 +3788,11 @@ msgid ""
 "%6$s\n"
 msgstr "Opravdu chceš nainstalovat toto rozšíření?\n\n%1$s\nOd %2$s\n%3$s\nVerze %4$s\nKategorie: %5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:2026 ../../src/ui_fsmenu/addons.cc:2051
+#: ../../src/ui_fsmenu/addons.cc:2034 ../../src/ui_fsmenu/addons.cc:2060
 msgid "Verified"
 msgstr "Ověřeno"
 
-#: ../../src/ui_fsmenu/addons.cc:2042
+#: ../../src/ui_fsmenu/addons.cc:2051
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3807,17 +3806,17 @@ msgid ""
 "%7$s"
 msgstr "Opravdu chceš aktualizovat toto rozšíření?\n\n%1$s\nod %2$s\n%3$s\nNainstalovaná verze: %4$s\nDostupná verze: %5$s\nKategorie: %6$s\n%7$s"
 
-#: ../../src/ui_fsmenu/addons.cc:2093
+#: ../../src/ui_fsmenu/addons.cc:2102
 msgid "Verified by the Widelands Development Team"
 msgstr "Ověřeno týmem vývojářů Widelands"
 
-#: ../../src/ui_fsmenu/addons.cc:2094
+#: ../../src/ui_fsmenu/addons.cc:2103
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Toto rozšíření ještě nebylo zkontrolováno týmem vývojářů Widelands. Nelze zaručit, že neobsahuje škodlivý nebo nevhodný obsah."
 
-#: ../../src/ui_fsmenu/addons.cc:2101
+#: ../../src/ui_fsmenu/addons.cc:2110
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
@@ -3826,7 +3825,7 @@ msgstr[1] "Celková velikost: %u B"
 msgstr[2] "Celková velikost: %u B"
 msgstr[3] "Celková velikost: %u B"
 
-#: ../../src/ui_fsmenu/addons.cc:2104
+#: ../../src/ui_fsmenu/addons.cc:2113
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
@@ -3835,7 +3834,7 @@ msgstr[1] "%u stažení"
 msgstr[2] "%u stažení"
 msgstr[3] "%u stažení"
 
-#: ../../src/ui_fsmenu/addons.cc:2113
+#: ../../src/ui_fsmenu/addons.cc:2122
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
@@ -3844,7 +3843,7 @@ msgstr[1] "%u komentáře"
 msgstr[2] "%u komentářů"
 msgstr[3] "%u komentářů"
 
-#: ../../src/ui_fsmenu/addons.cc:2115
+#: ../../src/ui_fsmenu/addons.cc:2124
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -3855,7 +3854,7 @@ msgstr[3] "%u snímků obrazovky"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:49
 msgid "Add-Ons Packager"
-msgstr "Add-Ons Packager"
+msgstr "Správce rozšíření"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:76
 msgid "New add-on"
@@ -3948,7 +3947,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr "Opravdu chceš smazat nesdílené rozšíření „%s“?\n\nToto rozšíření není možné znovu stáhnout ze sdíleného uložiště."
+msgstr "Opravdu chceš smazat lokální rozšíření „%s“?\n\nToto rozšíření nebude možné ze serveru znovu stáhnout."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:405
 #, c-format
@@ -3958,10 +3957,10 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] "Pokud nyní opustíš Packager, všechny změny provedené v následujícím %u rozšíření budou ztraceny."
-msgstr[1] "Pokud nyní opustíš Packager, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
-msgstr[2] "Pokud nyní opustíš Packager, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
-msgstr[3] "Pokud nyní opustíš Packager, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
+msgstr[0] "Pokud nyní opustíš správce rozšíření, všechny změny provedené v následujícím %u rozšíření budou ztraceny."
+msgstr[1] "Pokud nyní opustíš správce rozšíření, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
+msgstr[2] "Pokud nyní opustíš správce rozšíření, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
+msgstr[3] "Pokud nyní opustíš správce rozšíření, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
 
 #: ../../src/ui_fsmenu/addons_packager.cc:415
 #: ../../src/ui_fsmenu/addons_packager.cc:444
@@ -3974,7 +3973,7 @@ msgstr "%1$s\n· %2$s"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:418
 msgid "Quit Packager"
-msgstr "Opustit Packager"
+msgstr "Opustit správce rozšíření"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:433
 #, c-format
@@ -4020,7 +4019,7 @@ msgstr "Varování: Dojde-li k manuální úpravě souborů tohoto rozšíření
 
 #: ../../src/ui_fsmenu/addons_packager.cc:479
 msgid "Confirm Saving"
-msgstr "Potvrzení uložení"
+msgstr "Potvrdit uložení"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:533
 msgid "Invalid Version"
@@ -4034,7 +4033,7 @@ msgstr "„%1$s“ není platným označením verze. Rozšíření „%2$s“ ne
 
 #: ../../src/ui_fsmenu/addons_packager.cc:545
 msgid "Error Writing Addon"
-msgstr "Chyba zápisování rozšíření"
+msgstr "Chyba ukládání rozšíření"
 
 #: ../../src/ui_fsmenu/addons_packager.cc:546
 #, c-format
@@ -4053,7 +4052,7 @@ msgstr "*"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:66
 msgid "Create subdirectory"
-msgstr "Vytvořit novou složku"
+msgstr "Vytvořit novou podadresář"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:75
 msgid "Remove selected map or directory"
@@ -4090,7 +4089,7 @@ msgstr "Hráči: %s"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:175
 msgid "Top-level directory"
-msgstr "Nejvyšší adresář"
+msgstr "Kořenový adresář"
 
 #: ../../src/ui_fsmenu/addons_packager_box.cc:237
 msgid "New Directory"
@@ -4233,7 +4232,7 @@ msgid "Version"
 msgstr "Verze"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:186
+#: ../../src/ui_fsmenu/keyboard_options.cc:190
 msgid "Game"
 msgstr "Hra"
 
@@ -4267,36 +4266,36 @@ msgstr "Chyba sítě"
 msgid "unnamed %u"
 msgstr "neznámý %u"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:42
+#: ../../src/ui_fsmenu/keyboard_options.cc:43
 msgid "Reset to default"
 msgstr "Obnovit výchozí"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:55
+#: ../../src/ui_fsmenu/keyboard_options.cc:56
 msgid "Press the new shortcut or close this window to cancel."
 msgstr "Stiskni novou klávesovou zkratku, nebo zruš akci zavřením tohoto okna."
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:114
+#: ../../src/ui_fsmenu/keyboard_options.cc:115
 msgid "Edit Keyboard Shortcuts"
 msgstr "Upravit klávesové zkratky"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:124
+#: ../../src/ui_fsmenu/keyboard_options.cc:125
 msgid "Reset all"
 msgstr "Obnovit vše"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:125
+#: ../../src/ui_fsmenu/keyboard_options.cc:126
 msgid "Reset all to defaults"
 msgstr "Obnovit všechna výchozí nastavení"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:137
+#: ../../src/ui_fsmenu/keyboard_options.cc:138
 #, c-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:156
+#: ../../src/ui_fsmenu/keyboard_options.cc:157
 msgid "Keyboard Shortcut Conflict"
 msgstr "Nesoulad klávesových zkratek"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:157
+#: ../../src/ui_fsmenu/keyboard_options.cc:160
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4305,12 +4304,12 @@ msgid ""
 msgstr "Zvolená klávesová zkratka (%1$s) již existuje a je k ní přiřazen tento úkon: „%2$s“. Prosím zvol jinou zkratku, nebo změň zkratku pro činnost, pro kterou je nyní požadovaná zkratka použita."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:184
+#: ../../src/ui_fsmenu/keyboard_options.cc:188
 #: ../../src/wui/interactive_player.cc:328
 msgid "General"
 msgstr "Obecné"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:187
+#: ../../src/ui_fsmenu/keyboard_options.cc:191
 #: ../../src/wlapplication_options.cc:198
 msgid "Editor"
 msgstr "Editor"
@@ -4418,7 +4417,7 @@ msgstr "Zobrazit okno nápovědy"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:77
 msgid "Please select a map or saved game."
-msgstr "Prosím vyber mapu, nebo uloženou hru."
+msgstr "Prosím vyber mapu nebo uloženou hru."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:80
 msgid "The host has not yet selected a map or saved game."
@@ -4485,7 +4484,7 @@ msgstr "Návrat do nastavení hry pro více hráčů"
 
 #: ../../src/ui_fsmenu/loadgame.cc:84 ../../src/ui_fsmenu/mapselect.cc:69
 msgid "Return to the single player menu"
-msgstr "Návrat do nastavení hry jednoho hráče"
+msgstr "Návrat do nabídky hry jednoho hráče"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Load this game"
@@ -4539,7 +4538,7 @@ msgstr "Aby bylo možné použít registrovaný účet, je potřeba mít účet 
 #: ../../src/ui_fsmenu/login_box.cc:109
 #: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:623
 msgid "nobody"
-msgstr "bezejmena"
+msgstr "bezejména"
 
 #: ../../src/ui_fsmenu/login_box.cc:206
 msgid "Please enter a nickname!"
@@ -4713,7 +4712,7 @@ msgstr "Instalace a správa rozšíření"
 #: ../../src/ui_fsmenu/main.cc:467 ../../src/ui_fsmenu/options.cc:89
 #: ../../src/wlapplication_options.cc:253
 msgid "Options"
-msgstr "Volby"
+msgstr "Nastavení"
 
 #: ../../src/ui_fsmenu/main.cc:469
 msgid "Technical and game-related settings"
@@ -4750,7 +4749,7 @@ msgstr "Detekováno rozšíření způsobující desynchronizaci"
 
 #: ../../src/ui_fsmenu/main.cc:819
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr "Je povoleno rozšíření způsobující desynchronizaci. Je nutné přijmout možná rizika."
+msgstr "Je povoleno rozšíření způsobující desynchronizaci. Pokračuj na vlastní riziko."
 
 #: ../../src/ui_fsmenu/main.cc:919 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found!"
@@ -4957,7 +4956,7 @@ msgstr "Nahrát předchozího hostitele"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:95
 msgid "Host a new game"
-msgstr "Hostit novou hru"
+msgstr "Hostovat novou hru"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:131
 msgid "Host"
@@ -5005,7 +5004,7 @@ msgstr "Kurzor neopouští okno aplikace"
 
 #: ../../src/ui_fsmenu/options.cc:138
 msgid "Use system mouse cursor"
-msgstr "Používej kurzor myši místního systému"
+msgstr "Používej systémový kurzor myši"
 
 #: ../../src/ui_fsmenu/options.cc:142
 msgid "Maximum FPS:"
@@ -5013,7 +5012,7 @@ msgstr "Maximální FPS:"
 
 #: ../../src/ui_fsmenu/options.cc:146
 msgid "Accessibility mode for tooltips"
-msgstr "Zamrznutí informací poskytovaných při pohybu kurzorem"
+msgstr "Zamrznutí popisků při pohybu kurzorem"
 
 #: ../../src/ui_fsmenu/options.cc:153
 msgid "Snap windows only when overlapping"
@@ -5053,7 +5052,7 @@ msgstr "Komprimovat datové soubory widelands (mapy, záznamy a uložené hry)"
 
 #: ../../src/ui_fsmenu/options.cc:241
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr "Zápis do syncstreamu v síťové hře pro ladění desyncu"
+msgstr "Zápis do syncstreamu v síťové hře pro ladění desynchronizací"
 
 #: ../../src/ui_fsmenu/options.cc:247
 #: ../../src/wui/interactive_gamebase.cc:232
@@ -5120,7 +5119,7 @@ msgstr "Otoč pohyb mapy při kliknutí a táhnutí"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Teach me how to play"
-msgstr "Nauč mě hru"
+msgstr "Nauč mě hrát"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
@@ -5266,18 +5265,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autoři"
@@ -5291,13 +5290,13 @@ msgstr "Já"
 #: ../../src/ui_fsmenu/training_wheel_options.cc:43
 msgctxt "teaching_progress"
 msgid "Edit Teaching Progress"
-msgstr "Aktualizace učebních pokroků"
+msgstr "Nastavit pokrok v učení"
 
 #. * TRANSLATORS: Title above a list
 #: ../../src/ui_fsmenu/training_wheel_options.cc:66
 msgctxt "teaching_progress"
 msgid "Teaching objectives"
-msgstr "Učební cíle"
+msgstr "Cíle učení"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
@@ -5460,7 +5459,7 @@ msgstr "Odstranit položku"
 
 #: ../../src/wlapplication_options.cc:295
 msgid "Tooltip Accessibility Mode Key"
-msgstr "Zrušit zamrzlé informační pole"
+msgstr "Zrušit zamrzlé popisky"
 
 #: ../../src/wlapplication_options.cc:300
 msgid "Toggle Fullscreen"
@@ -5496,7 +5495,7 @@ msgstr "Nabídka"
 
 #: ../../src/wlapplication_options.cc:359
 msgid "Info Tool"
-msgstr "Nástroj zobrazení informací"
+msgstr "Nástroj pro zobrazení informací"
 
 #: ../../src/wlapplication_options.cc:363
 msgid "Players Menu"
@@ -5570,7 +5569,7 @@ msgstr "Vojenské statistiky"
 #: ../../src/wlapplication_options.cc:458
 #: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
-msgstr "Statistiky lodí"
+msgstr "Statistiky mořeplavby"
 
 #: ../../src/wlapplication_options.cc:471
 msgid "Decrease Game Speed by 1×"
@@ -6016,7 +6015,7 @@ msgstr "Při současném přidržení Ctrl budou odebráni všichni vojáci ze s
 #: ../../src/wui/attack_box.cc:243
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr "Při současném přidržení Shift budou odebráni všichni vojáci od prvního až po šipkou označeného"
+msgstr "Při současném přidržení Shift budou odebráni všichni vojáci od prvního až po vojáka, na kterého ukazuješ"
 
 #: ../../src/wui/attack_box.cc:251
 msgid "Not attacking:"
@@ -6032,7 +6031,7 @@ msgstr "Při současném přidržení Ctrl budou přesunuti všichni vojáci ve 
 
 #: ../../src/wui/attack_box.cc:259
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr "Při současném přidržení Shift budou přesunuti všichni vojáci od prvního až po šipkou označeného"
+msgstr "Při současném přidržení Shift budou přesunuti všichni vojáci od prvního až po vojáka, na kterého ukazuješ"
 
 #: ../../src/wui/attack_box.cc:268
 msgid "Destroy target"
@@ -6124,7 +6123,7 @@ msgstr "Chybějící vojáci:"
 
 #: ../../src/wui/buildingwindow.cc:200
 msgid "Muted – click to unmute"
-msgstr "Ztišeno – ozvučí se kliknutím"
+msgstr "Ztlumeno – ozvučí se kliknutím"
 
 #: ../../src/wui/buildingwindow.cc:201
 msgid "Mute this building’s messages"
@@ -6419,7 +6418,7 @@ msgstr "Zničit cestu"
 
 #: ../../src/wui/fieldaction.cc:501
 msgid "Destroy a waterway"
-msgstr "Zrušit vodní cestu"
+msgstr "Zničit vodní cestu"
 
 #: ../../src/wui/fieldaction.cc:519
 msgid "Watch field in a separate window"
@@ -7077,8 +7076,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Námořní"
@@ -7152,12 +7151,12 @@ msgstr "Neoficiální"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Balanced"
-msgstr "Vyvážené"
+msgstr "Vyvážená"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:36
 msgid "Unbalanced"
-msgstr "Nevyvážené"
+msgstr "Nevyvážená"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
@@ -7270,7 +7269,7 @@ msgstr "Cesty"
 
 #: ../../src/wui/minimap.cc:206
 msgid "Zoom"
-msgstr "Lupa"
+msgstr "Přiblížení"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:106
@@ -7506,12 +7505,12 @@ msgstr "uloženo %2$u. %1$s %3$u"
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:30
 msgid "Autosave: %1%"
-msgstr "Autosave: %1%"
+msgstr "Automatické uložení: %1%"
 
 #. * TRANSLATORS: %1% is a number, %2% a map's name.
 #: ../../src/wui/savegametable.cc:33
 msgid "Autosave %1%: %2%"
-msgstr "Autosave: %1%: %2%"
+msgstr "Automatické uložení: %1%: %2%"
 
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #: ../../src/wui/savegametable.cc:37
@@ -7688,7 +7687,7 @@ msgstr "Prozkoumat severozápadním směrem"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Explore the island’s coast clockwise"
-msgstr "Prozkoumat pobřeží ostrova ve směru chodu hodinových ručiček"
+msgstr "Prozkoumat pobřeží ostrova ve směru hodinových ručiček"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Scout towards the north east"
@@ -7712,7 +7711,7 @@ msgstr "Prozkoumat jihozápadním směrem"
 
 #: ../../src/wui/shipwindow.cc:114
 msgid "Explore the island’s coast counter clockwise"
-msgstr "Prozkoumat pobřeží ostrova proti směru chodu hodinových ručiček"
+msgstr "Prozkoumat pobřeží ostrova proti směru hodinových ručiček"
 
 #: ../../src/wui/shipwindow.cc:119
 msgid "Scout towards the south east"
@@ -7807,12 +7806,12 @@ msgstr "Hudba"
 #: ../../src/wui/sound_options.cc:138
 msgctxt "sound_options"
 msgid "Chat Messages"
-msgstr "Upozornění na zprávy hráčů"
+msgstr "Zprávy hráčů"
 
 #: ../../src/wui/sound_options.cc:141
 msgctxt "sound_options"
 msgid "Game Messages"
-msgstr "Upozornění herních oznámení"
+msgstr "Herní oznámení"
 
 #: ../../src/wui/sound_options.cc:145
 msgctxt "sound_options"
@@ -7822,13 +7821,13 @@ msgstr "Uživatelské rozhraní"
 #: ../../src/wui/sound_options.cc:148
 msgctxt "sound_options"
 msgid "Ambient Sounds"
-msgstr "Ozvučení hry"
+msgstr "Zvuky v pozadí"
 
 #: ../../src/wui/sound_options.cc:161
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr "Hra není ozvučena. Buďto se vyskytl problém v komunikaci se zvukovou kartou, nebo byl zvuk potlačen pomocí příkazového řádku."
+msgstr "Zvuk je vypnut. Buďto se vyskytl problém v komunikaci se zvukovou kartou, nebo byl zvuk potlačen pomocí příkazového řádku."
 
 #. * TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
 #. drawn with

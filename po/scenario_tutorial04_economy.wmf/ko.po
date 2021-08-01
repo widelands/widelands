@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-27 04:40+0000\n"
+"PO-Revision-Date: 2021-07-18 14:27+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -132,7 +132,7 @@ msgstr "먼저, 우리는 우리가 현재 보유한 선술집이 얼마나 많�
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
 msgid "Look up how many taverns you have"
-msgstr "당신이 소유한 주점을 찾아보십시오."
+msgstr "당신이 소유한 주점을 찾아보십시오"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
@@ -494,7 +494,7 @@ msgstr "백과사전 범주"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr "이 백과사전에는 다음과 같은 5가지 탭이 있습니다."
+msgstr "이 백과사전에는 다음과 같은 5가지 탭이 있습니다:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
@@ -574,7 +574,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr "현재 모든 광산에는 야전식량이 제공되고 있습니다. 특별한 광산의에우선 순위를 지정하려면 해당 창을 열면됩니다. 상품 탭에서 모든 상품 뒤에 미끄럼이가 있습니다. "
+msgstr "현재 모든 광산에는 야전식량이 제공되고 있습니다. 특별한 광산의에우선 순위를 지정하려면 해당 창을 열면됩니다. 상품 탭에서 모든 상품 뒤에 미끄럼이가 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""

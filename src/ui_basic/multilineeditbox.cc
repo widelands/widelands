@@ -180,6 +180,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		return;
 	}
 
+	d_->reset_selection();
 	d_->text = text;
 	while (d_->text.size() > d_->maxbytes) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
@@ -333,6 +334,37 @@ int MultilineEditbox::approximate_cursor(std::string& line,
 int MultilineEditbox::calculate_text_width(std::string& text, int pos) const {
 	std::string prefix = text.substr(0, d_->snap_to_char(text, pos));
 	return d_->ww.text_width_of(prefix);
+}
+
+bool MultilineEditbox::has_selection() const {
+	return (d_->mode == Data::Mode::kSelection);
+}
+
+std::string MultilineEditbox::get_selected_text() {
+	assert(d_->mode == Data::Mode::kSelection);
+	uint32_t start, end;
+	d_->calculate_selection_boundaries(start, end);
+	return d_->text.substr(start, end - start);
+}
+
+void MultilineEditbox::replace_selected_text(const std::string& text) {
+	assert(d_->mode == Data::Mode::kSelection);
+	uint32_t start, end;
+	d_->calculate_selection_boundaries(start, end);
+	std::string str = d_->text.substr(0, start);
+	str += text;
+	str += d_->text.substr(end);
+	set_text(str);
+	set_caret_pos(start);
+	select_until(get_caret_pos() + text.size());
+}
+
+size_t MultilineEditbox::get_caret_pos() const {
+	return d_->cursor_pos;
+}
+
+void MultilineEditbox::set_caret_pos(const size_t caret) const {
+	d_->set_cursor_pos(d_->snap_to_char(caret));
 }
 
 /**

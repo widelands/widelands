@@ -84,6 +84,18 @@ std::string richtext_escape(const std::string& given_text) {
 	return text;
 }
 
+/** Converts all newlines in the given string to <br> and &nbsp; tags. */
+void newlines_to_richtext(std::string& text) {
+	// Double paragraphs should generate an empty line.
+	// We do this here rather than in the font renderer, because a single \n
+	// should only create a new line without any added space.
+	// \n\n or \n\n\n will give us 1 blank line,
+	// \n\n\n or \n\n\n\” will give us 2 blank lines etc.
+	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
+	boost::replace_all(text, "\n\n", "<br>&nbsp;<br>");
+	boost::replace_all(text, "\n", "<br>");
+}
+
 /// Bullet list item
 std::string as_listitem(const std::string& txt, UI::FontStyle style) {
 	boost::format f("<div width=100%%><div><p><font size=%d "
