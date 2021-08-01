@@ -96,10 +96,10 @@ wl_library(logic_addons
   DEPENDS
     base_i18n
     base_exceptions
-    base_macros
     base_log
     build_info
     graphic
+    graphic_image_cache
     io_fileread
     io_filesystem
     io_profile
