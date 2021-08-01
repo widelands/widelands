@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2020-08-25 12:29+0000\n"
+"PO-Revision-Date: 2021-07-18 14:13+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "건물 물품 공급 체제를 정비하십시오."
+msgstr "건물 물품 공급 체제를 정비하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
@@ -35,19 +35,19 @@ msgstr "경제를 위한 기초 건축 자재 공급:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
-msgstr "채석장을 지으십시오."
+msgstr "채석장을 지으"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
-msgstr "나무꾼의 집 2 곳을 지으십시오."
+msgstr "나무꾼의 집 2 곳을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr "숲꾼의 집 2 곳을 지으십시오."
+msgstr "숲꾼의 집 2 곳을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
-msgstr "제제소를 지으십시오."
+msgstr "제제소를 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:42
 msgid "Expand your territory and explore"
@@ -66,11 +66,11 @@ msgstr "그 섬은 거대하고 우리가 여기 혼자 있는지 확신 할 수
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr "영토 확장을 위한 군사기지를 지으십시오."
+msgstr "영토 확장을 위한 군사기지를 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
-msgstr "식량 생산 체제를 확보하십시오."
+msgstr "식량 생산 체제를 확보하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Food Production"
@@ -104,11 +104,11 @@ msgstr "옥수수 가루와 냉초 가루를 만들기 위해 방앗간을 만�
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
-msgstr "우물을 지으십시오."
+msgstr "우물을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "옥수수 밭, 검은 뿌리 및 물로 빵을 굽기위한 제과점을 지으십시오."
+msgstr "옥수수 밭, 검은 뿌리 및 물로 빵을 굽기위한 제과점을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
@@ -494,7 +494,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "우리 건물의 기반 시설이 완성 되었고 나는 모두가 서로 확실하게 잘 일하도록 하기 위해 몇 일을 보냈습니다.\n이제, 다른 긴급한 문제가 있습니다. 나는 나의 개인 요리사인 Colionder 를 뭔가를 정리하는 일에 도움을 얻으려고  불렀습니다. "
+msgstr "우리 건물의 기반 시설이 완성 되었고 나는 모두가 서로 확실하게 잘 일하도록 하기 위해 몇 일을 보냈습니다.\n이제, 다른 긴급한 문제가 있습니다. 나는 나의 개인 요리사인 Colionder 를 뭔가를 정리하는 일에 도움을 얻으려고  불렀습니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"

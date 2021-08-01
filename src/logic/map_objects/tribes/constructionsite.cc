@@ -399,6 +399,7 @@ Start building the next enhancement even before the base building is completed.
 ===============
 */
 void ConstructionSite::enhance(const Game& game) {
+	MutexLock m(MutexLock::ID::kObjects);
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 

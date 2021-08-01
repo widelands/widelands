@@ -168,10 +168,15 @@ void Carrier::transport_update(Game& game, State& state) {
 		// If we don't carry something, walk to the flag
 		pickup_from_flag(game, state);
 	} else {
-		RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
+		RoadBase* road = dynamic_cast<RoadBase*>(get_location(game));
+		if (road == nullptr) {
+			molog(game.get_gametime(), "[transport]: Road was deleted, cancel");
+			send_signal(game, "cancel");
+			return pop_task(game);
+		}
 		// If the ware should go to the building attached to our flag, walk
 		// directly into said building
-		Flag& flag = road.get_flag(static_cast<RoadBase::FlagId>(state.ivar1 ^ 1));
+		Flag& flag = road->get_flag(static_cast<RoadBase::FlagId>(state.ivar1 ^ 1));
 
 		WareInstance& ware = *get_carried_ware(game);
 		assert(ware.get_location(game) == this);
@@ -180,12 +185,12 @@ void Carrier::transport_update(Game& game, State& state) {
 		PlayerImmovable* const next = ware.get_next_move_step(game);
 
 		if (next && next != &flag && &next->base_flag() == &flag &&
-		    road.descr().type() == MapObjectType::ROAD) {
+		    road->descr().type() == MapObjectType::ROAD) {
 			// Pay some coins before entering the building,
 			// to compensate for the time to be spent in its street-segment.
 			// Ferries cannot enter buildings, so they lave the ware at the flag
 			// for the building's worker to fetch it.
-			if (upcast(Road, r, &road)) {
+			if (upcast(Road, r, road)) {
 				r->pay_for_building();
 			}
 			enter_building(game, state);

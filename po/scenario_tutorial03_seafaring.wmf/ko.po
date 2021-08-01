@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-05-27 05:08+0000\n"
+"PO-Revision-Date: 2021-07-18 14:27+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,7 @@ msgstr "어떻게 항구를 건설하는가"
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr "항구는 대형 건물이지만, 특별한 위치에서만 건설됩니다:"
+msgstr "항구는 큰 건물이지만, 다음의 표시가 있는 특별한 위치에서만 건설됩니다"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
@@ -123,7 +123,7 @@ msgstr "항구를 건설하십시오"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr "당신의 캠프의 북쪽에 항구를 지으십시오."
+msgstr "당신의 캠프의 북쪽에 항구를 지으십시오"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
@@ -327,11 +327,11 @@ msgstr "당신 항구 중 아무데로나 탐험을 시작하십시오."
 #. TRANSLATORS: This refers to a memory game
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr "나는 가방을 싸서 그 안 내가..."
+msgstr "나는 가방을 싸서 그 안 내가…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
-msgstr "추가 항목 "
+msgstr "추가 항목"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
@@ -560,7 +560,7 @@ msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "연락선은 연락선 뜰에 지어지며, 한 척의 노 젓는 배에는 2 개의 통나무와 1 개의 헝겊이 필요하며 빠르게 지어집니다. 연락선 뜰은 해안 가까이에 지을 필요가 있는 가운데 크기의 건물입니다."
+msgstr " 연락선은 연락선 뜰에 지어지며, 한 척의 노 젓는 배에는 2 개의 통나무와 1 개의 헝겊이 필요하며 빠르게 지어집니다. 연락선 뜰은 해안 가까이에 지을 필요가 있는 가운데 크기의 건물입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."
