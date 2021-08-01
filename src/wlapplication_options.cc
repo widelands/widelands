@@ -893,24 +893,28 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 	return rt_escape ? richtext_escape(result) : result;
 }
 
+static void init_fastplace_shortcuts(const bool force_defaults) {
+	for (KeyboardShortcut k = KeyboardShortcut::kFastplace__Begin; k <= KeyboardShortcut::kFastplace__End;
+			k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+		if (force_defaults) {
+			shortcuts_.erase(k);
+		}
+		if (shortcuts_.count(k) == 0) {
+			const int off =
+			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
+			shortcuts_.emplace(
+			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
+			                           (boost::format("fastplace_%i") % off).str(), [off]() {
+				                           return (boost::format(_("Fastplace #%i")) % off).str();
+			                           }));
+		}
+	}
+}
+
 void init_shortcuts(const bool force_defaults) {
+	init_fastplace_shortcuts(force_defaults);
 	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
-		if (k >= KeyboardShortcut::kFastplace__Begin && k <= KeyboardShortcut::kFastplace__End) {
-			if (force_defaults) {
-				shortcuts_.erase(k);
-			}
-			if (shortcuts_.count(k) == 0) {
-				const int off =
-				   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
-				shortcuts_.emplace(
-				   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
-				                           (boost::format("fastplace_%i") % off).str(), [off]() {
-					                           return (boost::format(_("Fastplace #%i")) % off).str();
-				                           }));
-			}
-		}
-
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {
 			write_shortcut(k, shortcuts_.at(k).current_shortcut);
