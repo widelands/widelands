@@ -41,7 +41,6 @@ wl_library(network
     participantlist.cc
     participantlist.h
   USES_BOOST_LIBRARIES
-  USES_CURL
   USES_SDL2
   DEPENDS
     ai
@@ -54,6 +53,7 @@ wl_library(network
     build_info
     chat
     game_io
+    graphic_image_cache
     io_fileread
     io_filesystem
     io_stream
