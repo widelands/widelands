@@ -408,8 +408,6 @@ struct BuildableField {
 	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
-	// unconnected buildings nearby
-	bool unconnected_nearby;
 	int16_t military_unstationed;
 	int16_t own_non_military_nearby;
 	bool defense_msite_allowed;

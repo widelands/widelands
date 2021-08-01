@@ -1823,7 +1823,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	field.military_unstationed = 0;
 	field.own_military_presence = 0;
 	field.own_non_military_nearby = 0;
-	field.unconnected_nearby = false;
 	
 	std::vector<Widelands::ImmovableFound> immovables;
 	immovables.reserve(50);
@@ -1837,10 +1836,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	                    &immovables);
 
 	// We are interested in unconnected immovables, but we must be also close to connected ones
-	bool any_connected_imm = false;
-	any_connected_imm = false;
 	bool any_unconnected_imm = false;
-	any_unconnected_imm = false;
 
 	for (const Widelands::ImmovableFound& imm_found : immovables) {
 		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
@@ -1892,9 +1888,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 			// ferries
 			bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty();
-			if (connected) {
-				any_connected_imm = true;
-			}
 
 			if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
 				const Widelands::BuildingDescr& target_descr = constructionsite->building();
@@ -1943,10 +1936,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	}
 
 	assert(field.military_loneliness <= 1000);
-
-	if (any_unconnected_imm && any_connected_imm && field.military_in_constr_nearby == 0) {
-		field.unconnected_nearby = true;
-	}
 
 	// if there is a militarysite on the field, we try to walk to enemy
 	field.enemy_accessible_ = false;

@@ -355,7 +355,6 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      enemy_military_sites(0),
      ally_military_presence(0),
      military_stationed(0),
-     unconnected_nearby(false),
      military_unstationed(0),
      own_non_military_nearby(0),
      defense_msite_allowed(false),
