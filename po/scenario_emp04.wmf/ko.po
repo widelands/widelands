@@ -165,7 +165,7 @@ msgstr "영웅을 양성하십시오"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:133
 msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
-msgstr "당신의 자원을 현명하게 사용하여 적어도 3명의 완전히 승진한 영웅들을 양성하십시오"
+msgstr "당신의 자원을 현명하게 사용하여 적어도 3명의 완전히 승진한 영웅들을 양성하십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:134
 msgid ""
@@ -231,7 +231,7 @@ msgstr "야만인의 침입을 세상의 일부로 막으십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
 msgid "Build 2 charcoal kilns"
-msgstr "숯가마 2기 건설 "
+msgstr "숯가마 2기 건설"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
@@ -1364,7 +1364,7 @@ msgid ""
 "can. I really would consider them heroes after that."
 msgstr ""
 "장군님, 이제 강화된 훈련 시설 외에 더 좋은 맥주가 더 많이 마실 수 있게 되었으니, 완전히 승진할만한 군인들을 최대한 많이 훈련시켜야"
-" 합니다. 그 이후에는 정말 그들을 영웅으로 생각하겠습니다"
+" 합니다. 그 이후에는 정말 그들을 영웅으로 생각하겠습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:713
 msgid ""
@@ -1504,7 +1504,7 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 "젠장, 베스타 여신의 평화로운 종들을 죽인 루티우스! 너의 삶과 땅이 저주를 받고 여신의 분노가 이 세상에서 당신의 일족들을 괴롭혀 "
-"줄것이다."
+"줄것이다!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
@@ -1551,7 +1551,7 @@ msgstr "밭이 부족함"
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 농장에서 일하는 농부는 그의 씨를 뿌릴 깨끗한 땅이 없습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1705,42 +1705,42 @@ msgstr "잠을 자고 있음"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "군인 공격력 훈련하고 있음: 0→1"
+msgstr "군인의 공격력 훈련시키고 있음: 수준 0 → 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "군인 공격력 훈련하고 있음: 1→2"
+msgstr "군인의 공격력 훈련시키고 있음: 수준 1 → 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "군인이 공격력을 훈련하고 있음: 2→3"
+msgstr "군인의 공격력을 훈련시키고 있음: 수준 2 → 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "군인이 공격력을 훈련하고 있음: 3→4"
+msgstr "군인의 공격력을 훈련시키고 있음: 수준 3 → 4"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "군인이 체력을 훈련하고 있음: 0→1"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "군인이 체력을 훈련하고 있음: 1→2"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 1 → 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "군인이 체력을 훈련하고 있음: 2→3"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 2 → 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "군인이 체력을 훈련하고 있음: 3→4"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 3 → 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177

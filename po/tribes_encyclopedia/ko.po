@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
-"PO-Revision-Date: 2021-07-12 12:02+0000\n"
+"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"PO-Revision-Date: 2021-07-18 14:25+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,11 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:376
 #: ../../data/tribes/initialization/barbarians/units.lua:112
@@ -49,11 +49,11 @@ msgid ""
 "logs to produce charcoal."
 msgstr "아마존의 나무꾼들은 나무를 쓰러 뜨리고 정글 보호자들이 나무를 심습니다. 잘려진 통나무는 석재 조각가가 사용합니다. 숯 가마 또한 숯을 만들기 위해 통나무가 필요합니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:364
 #: ../../data/tribes/initialization/barbarians/units.lua:100
@@ -109,11 +109,11 @@ msgid ""
 "construct buildings and ships."
 msgstr "이 밧줄은 덩굴나무로 만들어졌습니다. 그것은 갑옷과 건물과 배를 만드는데 사용됩니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:462
 #: ../../data/tribes/initialization/barbarians/units.lua:182
@@ -249,10 +249,10 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr "곡괭이는 돌장이들에 의해 바위나 광산에서 화강암을 잘라내는데 사용됩니다."
 
-#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
 #: ../../data/tribes/initialization/empire/units.lua:362
@@ -267,11 +267,11 @@ msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr "그것은 나무꾼이 사용하고 돌 조각가가 만듭니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:625
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -289,11 +289,11 @@ msgid ""
 "use them. They are produced by the stone carver."
 msgstr "따라서 정글 보호자, 카사바 농부 및 코코아 농부가 사용합니다. 그것들은 돌 조각가에 의해 생산됩니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:638
 #: ../../data/tribes/initialization/barbarians/units.lua:371
@@ -368,7 +368,7 @@ msgstr "바늘은 재봉사들이 군복, 부츠 및 갑옷을 만드는 데 사
 #: ../../data/tribes/initialization/amazons/units.lua:411
 msgctxt "amazons_ware"
 msgid "Stone bowls are used to wash gold and to smelt gold dust."
-msgstr "돌 그릇은 금을 씻고 금가루를 제련하는데 사용됩니다. "
+msgstr "돌 그릇은 금을 씻고 금가루를 제련하는데 사용됩니다."
 
 #. TRANSLATORS: Helptext for an amazon ware: Stone Tipped Spear
 #: ../../data/tribes/initialization/amazons/units.lua:425
@@ -624,16 +624,16 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr "알려지지 않은 땅을 탐험합니다."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Ashes
+#. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a frisian immovable: Ashes
 #. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an atlantean immovable: Ashes
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a barbarian immovable: Ashes
-#. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/amazons/units.lua:764
 #: ../../data/tribes/initialization/atlanteans/units.lua:1075
@@ -647,13 +647,13 @@ msgstr "알려지지 않은 땅을 탐험합니다."
 msgid "The remains of a destroyed building."
 msgstr "파괴된 건물의 잔해입니다."
 
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
+#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
-#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1269
 #: ../../data/tribes/initialization/barbarians/units.lua:990
@@ -764,12 +764,12 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr "이 고무 나무는 으뜸 나무꾼이 고무 나무 목재로 수확할 준비가 되었습니다. 다른 부족들은 일반 통나무를 위해 그것을 수확 할 수 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1082
 #: ../../data/tribes/initialization/atlanteans/units.lua:1117
@@ -779,12 +779,12 @@ msgstr "이 고무 나무는 으뜸 나무꾼이 고무 나무 목재로 수확�
 msgid "This field has just been planted."
 msgstr "이 밭은 방금 심었습니다."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1089
@@ -799,12 +799,12 @@ msgstr "이 밭은 방금 심었습니다."
 msgid "This field is growing."
 msgstr "이 밭은 자라고 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1103
 #: ../../data/tribes/initialization/atlanteans/units.lua:1138
@@ -814,12 +814,12 @@ msgstr "이 밭은 자라고 있습니다."
 msgid "This field is ready for harvesting."
 msgstr "이 밭은 거둘 준비가 되었습니다."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1110
 #: ../../data/tribes/initialization/atlanteans/units.lua:1145
@@ -849,11 +849,11 @@ msgstr "이 코코아 나무는 다 자랐습니다."
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr "이 코코아 나무의 콩는 수확할 준비가 되었습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
-#. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1159
 #: ../../data/tribes/initialization/barbarians/units.lua:880
@@ -870,11 +870,11 @@ msgid ""
 "digger dwellings."
 msgstr "금 광맥에는 금 캐는 이의 주거지의 자갈에서 씻어낼 수 있는 금 광석이 들어 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:919
@@ -890,20 +890,20 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr "화강암은 기본적인 건축 자재이며 석재 광산에서 캐낼 수 있습니다."
 
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
 #: ../../data/tribes/initialization/frisians/units.lua:1312
 msgid "There is only a little bit of granite here."
 msgstr "여기는 화강암이 조금밖에 없습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1242
 #: ../../data/tribes/initialization/barbarians/units.lua:963
@@ -912,20 +912,20 @@ msgstr "여기는 화강암이 조금밖에 없습니다."
 msgid "There is a lot of gold here."
 msgstr "여기는 금이 많이 있습니다."
 
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
 #: ../../data/tribes/initialization/frisians/units.lua:1356
 msgid "There is a lot of granite here."
 msgstr "여기는 화강암이 많이 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1261
 #: ../../data/tribes/initialization/barbarians/units.lua:982
@@ -1128,7 +1128,7 @@ msgctxt "amazons_building"
 msgid ""
 "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and "
 "rubber."
-msgstr "주변 지역에서 희귀한 나무를 수확합니다. 철재 나무, 발사 및 고무를 제공합니다."
+msgstr "주변 지역에서 희귀 나무를 수확합니다. 철재 나무, 발사 및 고무를 제공합니다."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Wilderness
 #. Keeper's Tent
@@ -1194,7 +1194,7 @@ msgctxt "amazons_building"
 msgid ""
 "Plants rare trees which are needed by the amazons, like balsa, rubber and "
 "ironwood."
-msgstr "발사, 고무, 철 나무 등 아마존에 필요한 희귀한 나무들을 심습니다."
+msgstr "발사, 고무, 철 나무 등 아마존에 필요한 희귀 나무들을 심습니다."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stone Workshop
 #: ../../data/tribes/initialization/amazons/units.lua:1374
@@ -1316,7 +1316,7 @@ msgstr "카사바 농장은 씨앗을 심을 수 있는 작업 영역 내에 여
 #: ../../data/tribes/initialization/amazons/units.lua:1458
 msgctxt "amazons_building"
 msgid "Cultivates cocoa that is needed to brew chocolate drinks."
-msgstr "초콜릿 음료를 만드는데 필요한 코코아를 재배합니다. "
+msgstr "초콜릿 음료를 만드는데 필요한 코코아를 재배합니다."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1460
@@ -1344,7 +1344,7 @@ msgstr "돌감 광산은 식량 공급이 안정적이고 광산이 마모되지
 #: ../../data/tribes/initialization/amazons/units.lua:1478
 msgctxt "amazons_building"
 msgid "Washes gold dust out of the ground in mountain terrain."
-msgstr "산악 지형의 땅에서 금가루를 씻어냅니다. "
+msgstr "산악 지형의 땅에서 금가루를 씻어냅니다."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Warriors’
 #. Gathering
@@ -1436,11 +1436,11 @@ msgid ""
 "between ports."
 msgstr "해외 식민지와 항구 간 교역에 사용될 배를 만드십시오."
 
+#. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1590
 #: ../../data/tribes/initialization/atlanteans/units.lua:1722
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
@@ -1450,13 +1450,13 @@ msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr "‘건축 자재들이 부족한 건축업자에게 욕하지 마십시오.’"
 
+#. TRANSLATORS: Lore author helptext for a barbarian building: Construction
+#. Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore author helptext for a barbarian building: Construction
-#. Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1592
 #: ../../data/tribes/initialization/atlanteans/units.lua:1724
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
@@ -1466,11 +1466,11 @@ msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr "속담은 어떤 종류의 불가능한 일에도 널리 사용됩니다"
 
+#. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
-#. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1594
 #: ../../data/tribes/initialization/atlanteans/units.lua:1726
 #: ../../data/tribes/initialization/barbarians/units.lua:1794
@@ -1480,11 +1480,11 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "새로운 건물이 해당 건설현장에서 건설되고 있습니다."
 
+#. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1601
 #: ../../data/tribes/initialization/atlanteans/units.lua:1733
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
@@ -1494,11 +1494,11 @@ msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr "‘옛것을 허물어 버릴 때 새로운 길이 나타날 것입니다.’"
 
+#. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1603
 #: ../../data/tribes/initialization/atlanteans/units.lua:1735
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
@@ -1508,11 +1508,11 @@ msgctxt "building"
 msgid "Proverb"
 msgstr "속담"
 
+#. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1605
 #: ../../data/tribes/initialization/atlanteans/units.lua:1737
 #: ../../data/tribes/initialization/barbarians/units.lua:1805
@@ -1624,10 +1624,10 @@ msgid ""
 "way to make it edible."
 msgstr "어떤 아틀란티스인도 날생선을 안 좋아하므로, 훈제소에서 훈제하는 것은 그걸 먹을 수 있게 하는 가장 일반 적인 방법입니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:441
 #: ../../data/tribes/initialization/barbarians/units.lua:170
 #: ../../data/tribes/initialization/empire/units.lua:162
@@ -1720,9 +1720,9 @@ msgid ""
 "are mined in a crystal mine."
 msgstr "이 아름다운 다이아몬드는 몇 전문적인 건물을 건설하는데 사용됩니다. 광물광에서 채굴됩니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:539
 #: ../../data/tribes/initialization/barbarians/units.lua:268
 #: ../../data/tribes/initialization/empire/units.lua:285
@@ -1739,10 +1739,10 @@ msgid ""
 "are fed with coal."
 msgstr "아틀란티스인은 제련소들, 갑옷 제작소들, 무기 제작소들은 공급된 석탄으로 불을 피웁니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:552
 #: ../../data/tribes/initialization/barbarians/units.lua:281
 #: ../../data/tribes/initialization/empire/units.lua:298
@@ -1757,10 +1757,10 @@ msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr "그것은 철을 회수하기 위해 제련소에서 제련됩니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:565
 #: ../../data/tribes/initialization/barbarians/units.lua:294
 #: ../../data/tribes/initialization/empire/units.lua:311
@@ -1777,10 +1777,10 @@ msgid ""
 "smithy and weapon smithy."
 msgstr "제련소에서 만들어지고 도구 제작소, 갑옷 제작소, 무기 제작소에서 사용됩니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:578
 #: ../../data/tribes/initialization/barbarians/units.lua:307
 #: ../../data/tribes/initialization/empire/units.lua:324
@@ -1797,10 +1797,10 @@ msgid ""
 "building material and to produce weapons and armor."
 msgstr "제련소에서 제련된 이 물품은 금으로 바뀌어 귀중한 건축 자재로 쓰이며 무기와 갑옷을 생산합니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:591
 #: ../../data/tribes/initialization/barbarians/units.lua:320
 #: ../../data/tribes/initialization/empire/units.lua:337
@@ -1885,10 +1885,10 @@ msgid ""
 "the top of the smokery. It is created by the toolsmith."
 msgstr "갈고리 장대는 훈제공이 훈제소 꼭대기에 모든 고기와 물고기를 매다는데 사용합니다. 도구 대장장이가 만듭니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:696
 #: ../../data/tribes/initialization/barbarians/units.lua:410
 #: ../../data/tribes/initialization/empire/units.lua:436
@@ -1903,10 +1903,10 @@ msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
 msgstr "큰 낫은 도구 대장장이가 만듭니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 #: ../../data/tribes/initialization/barbarians/units.lua:423
 #: ../../data/tribes/initialization/empire/units.lua:449
@@ -1921,10 +1921,10 @@ msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
 msgstr "빵 주걱은 도구 대장장이가 만듭니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:722
 #: ../../data/tribes/initialization/barbarians/units.lua:445
 #: ../../data/tribes/initialization/empire/units.lua:480
@@ -2220,10 +2220,10 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "미정찰 지역을 정찰병 차림으로 정찰하고 있는 정찰하는 정찰병 같은 정찰병. 언어유희..."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1166
 #: ../../data/tribes/initialization/barbarians/units.lua:887
 #: ../../data/tribes/initialization/empire/units.lua:928
@@ -2231,10 +2231,10 @@ msgstr "미정찰 지역을 정찰병 차림으로 정찰하고 있는 정찰하
 msgid "There is water in the ground here that can be pulled up by a well."
 msgstr "이곳 땅에는 우물로 끌어올릴 수 있는 물이 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1174
 #: ../../data/tribes/initialization/atlanteans/units.lua:1218
 #: ../../data/tribes/initialization/barbarians/units.lua:895
@@ -2246,10 +2246,10 @@ msgstr "이곳 땅에는 우물로 끌어올릴 수 있는 물이 있습니다."
 msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr "석탄 광맥에는 탄광으로 파낼 수 있는 석탄이 들어 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1176
 #: ../../data/tribes/initialization/barbarians/units.lua:897
 #: ../../data/tribes/initialization/empire/units.lua:938
@@ -2257,10 +2257,10 @@ msgstr "석탄 광맥에는 탄광으로 파낼 수 있는 석탄이 들어 있�
 msgid "There is only a little bit of coal here."
 msgstr "여기는 석탄이 조금밖에 없습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1185
 #: ../../data/tribes/initialization/atlanteans/units.lua:1229
 #: ../../data/tribes/initialization/barbarians/units.lua:906
@@ -2272,10 +2272,10 @@ msgstr "여기는 석탄이 조금밖에 없습니다."
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr "철 광맥에는 철광으로 파낼 수 있는 철광석이 들어 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1187
 #: ../../data/tribes/initialization/barbarians/units.lua:908
 #: ../../data/tribes/initialization/empire/units.lua:949
@@ -2283,10 +2283,10 @@ msgstr "철 광맥에는 철광으로 파낼 수 있는 철광석이 들어 있�
 msgid "There is only a little bit of iron here."
 msgstr "여기는 철이 조금밖에 없습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1196
 #: ../../data/tribes/initialization/atlanteans/units.lua:1240
 #: ../../data/tribes/initialization/barbarians/units.lua:917
@@ -2311,10 +2311,10 @@ msgstr "보석원석들은 큰 건물들을 지을때 사용됩니다. 그것들
 msgid "There are only a few precious stones here."
 msgstr "여기는 보석원석들이 몇 개밖에 없습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:941
 #: ../../data/tribes/initialization/empire/units.lua:982
@@ -2322,10 +2322,10 @@ msgstr "여기는 보석원석들이 몇 개밖에 없습니다."
 msgid "There is a lot of coal here."
 msgstr "여기는 석탄이 많이 있습니다."
 
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1231
 #: ../../data/tribes/initialization/barbarians/units.lua:952
 #: ../../data/tribes/initialization/empire/units.lua:993
@@ -2338,6 +2338,16 @@ msgstr "여기는 철이 많이 있습니다."
 msgid "There are many precious stones here."
 msgstr "여기는 보석원석들이 많이 있습니다."
 
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
+#. Blackroot Field
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
+#. Ironwood Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
+#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
@@ -2356,16 +2366,6 @@ msgstr "여기는 보석원석들이 많이 있습니다."
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
-#. Blackroot Field
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
-#. Ironwood Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
-#. Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1276
 #: ../../data/tribes/initialization/atlanteans/units.lua:1283
 #: ../../data/tribes/initialization/atlanteans/units.lua:1290
@@ -2466,14 +2466,14 @@ msgctxt "atlanteans_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr "채석장은 작업 영역 내에 잘라낼 바위가 필요합니다."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
+#. Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
 #. House
 #. TRANSLATORS: Purpose helptext for an atlantean production site:
 #. Woodcutter's House
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
-#. Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1401
 #: ../../data/tribes/initialization/barbarians/units.lua:1153
 #: ../../data/tribes/initialization/empire/units.lua:1172
@@ -2489,13 +2489,13 @@ msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
 msgstr "나무꾼의 집은 작업 영역 내에 베어낼 나무가 필요합니다."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1410
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
 #: ../../data/tribes/initialization/empire/units.lua:1181
@@ -2560,11 +2560,11 @@ msgctxt "building"
 msgid "Breeds fish."
 msgstr "물고기를 양식하십시오."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1446
 #: ../../data/tribes/initialization/barbarians/units.lua:1199
 #: ../../data/tribes/initialization/empire/units.lua:1199
@@ -2579,10 +2579,10 @@ msgctxt "atlanteans_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "사냥꾼의 집은 작업 영역 내에 사냥할 동물들이 필요합니다."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1455
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
 #: ../../data/tribes/initialization/empire/units.lua:1208
@@ -2605,11 +2605,11 @@ msgid ""
 " here."
 msgstr "여기에 정찰대를 보내려면 먼저 이 깃발을 정찰대의 집에 연결해야 합니다."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1470
 #: ../../data/tribes/initialization/barbarians/units.lua:1241
 #: ../../data/tribes/initialization/empire/units.lua:1216
@@ -2656,14 +2656,14 @@ msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "정찰병과 광부들을 먹이고 군인들을 훈련시킬 빵을 구우십시오."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
+#. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1509
 #: ../../data/tribes/initialization/barbarians/units.lua:1376
 #: ../../data/tribes/initialization/empire/units.lua:1298
@@ -2673,11 +2673,11 @@ msgctxt "building"
 msgid "Burns logs into charcoal."
 msgstr "통나무를 태워 숯을 만드십시오."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
+#. Works
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
 #. Works
 #. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
-#. Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1516
 #: ../../data/tribes/initialization/barbarians/units.lua:1388
 #: ../../data/tribes/initialization/empire/units.lua:1305
@@ -2685,10 +2685,10 @@ msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
 msgstr "철광석을 철괴로, 금광석을 금괴로 제련하십시오."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-#. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Metal
 #. Workshop
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+#. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1523
 #: ../../data/tribes/initialization/barbarians/units.lua:1399
 #: ../../data/tribes/initialization/empire/units.lua:1312
@@ -2778,14 +2778,14 @@ msgctxt "atlanteans_building"
 msgid "Carves precious stones out of the rock in mountain terrain."
 msgstr "산악 지형의 바위에서 보석원석들을 깎아냅니다."
 
+#. TRANSLATORS: Purpose helptext for production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
-#. TRANSLATORS: Purpose helptext for production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
-#. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1601
 #: ../../data/tribes/initialization/barbarians/units.lua:1528
 #: ../../data/tribes/initialization/barbarians/units.lua:1543
@@ -2798,16 +2798,16 @@ msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "산악 지형의 땅에서 석탄을 캐냅니다."
 
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1608
 #: ../../data/tribes/initialization/barbarians/units.lua:1571
 #: ../../data/tribes/initialization/barbarians/units.lua:1584
@@ -2820,14 +2820,14 @@ msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "산악 지형의 땅에서 철광석을 캐냅니다."
 
+#. TRANSLATORS: Purpose helptext for production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
-#. TRANSLATORS: Purpose helptext for production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
-#. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1615
 #: ../../data/tribes/initialization/barbarians/units.lua:1610
 #: ../../data/tribes/initialization/barbarians/units.lua:1623
@@ -2899,10 +2899,10 @@ msgid ""
 "send him away."
 msgstr "새로운 군사 지역을 차지할 군인이 부족하다면, 아래쪽 화살표 버튼을 사용하여 주둔 병력을 줄이십시오. 또한 군인을 클릭하여 그를 다른 곳으로 보낼 수 있습니다."
 
+#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1704
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
 #: ../../data/tribes/initialization/empire/units.lua:1549
@@ -2911,10 +2911,10 @@ msgctxt "building"
 msgid "Builds ferries."
 msgstr "연락선을 세웁니다."
 
+#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1706
 #: ../../data/tribes/initialization/barbarians/units.lua:1757
 #: ../../data/tribes/initialization/empire/units.lua:1551
@@ -2923,10 +2923,10 @@ msgctxt "building"
 msgid "Needs water nearby."
 msgstr "근처에 물이 필요합니다."
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1713
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
 #: ../../data/tribes/initialization/empire/units.lua:1558
@@ -3037,8 +3037,8 @@ msgid ""
 "kiln and the cattle farm also need to be supplied with water."
 msgstr "물은 제과점, 소형 양조장과 양조장에서 사용합니다. 석회 가마와 소 농장도 또한 물 공급이 필요합니다."
 
-#. TRANSLATORS: Helptext for an empire ware: Wheat, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Wheat, part 1
+#. TRANSLATORS: Helptext for an empire ware: Wheat, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:194
 #: ../../data/tribes/initialization/empire/units.lua:186
 msgctxt "ware"
@@ -3081,9 +3081,9 @@ msgid ""
 "inns to prepare meals."
 msgstr "오직 이 맥주만이 전투 경기장의 군인들에게 허용됩니다. 누군가는 야만인의 모든 힘이 이 맥주에서 비롯된다고 말합니다. 군인의 회피력 수준을 0 에서 1 로 2 로 훈련시키는데 도움이 됩니다. 또한 고도 맥주는 큰 여관에서 식사를 준비하는데 사용됩니다."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:234
 #: ../../data/tribes/initialization/empire/units.lua:242
 #: ../../data/tribes/initialization/frisians/units.lua:283
@@ -3195,8 +3195,8 @@ msgid ""
 "it is enhanced to an ax workshop and war mill)."
 msgstr "지질학자들, 건축업자들, 대장장이들, 투구 대장장이들 모두 망치가 필요합니다. 언제나 여분의 것을 남기는 것을 명심하십시오! 금속 제작소에서 생산하는 기본적인 도구 중 하나입니다(하지만 도끼 제작소와 전쟁 공장으로 향상되면 생산을 중지합니다)."
 
-#. TRANSLATORS: Helptext for an empire ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Fishing Rod, part 1
+#. TRANSLATORS: Helptext for an empire ware: Fishing Rod, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:384
 #: ../../data/tribes/initialization/empire/units.lua:410
 msgctxt "ware"
@@ -3212,9 +3212,9 @@ msgid ""
 "mill)."
 msgstr "금속 제작소에서 생산하는 기본적인 도구 중 하나입니다(하지만 도끼 제작소와 전쟁 공장으로 향상되면 생산을 중지합니다)."
 
+#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:397
 #: ../../data/tribes/initialization/empire/units.lua:423
 #: ../../data/tribes/initialization/frisians/units.lua:457
@@ -3542,23 +3542,23 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "미정찰 지역을 정찰병 차림으로 정찰하고 있는 정찰하는 정찰병 같은 정찰병. 언어유희..."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:852
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid "This reed field has just been planted."
 msgstr "이 갈대밭은 막 심었습니다."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/barbarians/units.lua:866
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is growing."
 msgstr "이 갈대밭은 자라고 있습니다."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:873
 #: ../../data/tribes/initialization/frisians/units.lua:1255
 msgid "This reed field is ready for harvesting."
@@ -3667,7 +3667,7 @@ msgstr "‘우리는 땅길을 열고 산으로 집을 짓습니다.’"
 #: ../../data/tribes/initialization/barbarians/units.lua:1136
 msgctxt "barbarians_building"
 msgid "Slogan of the stonemasons’ guild"
-msgstr "석공 길드의 구호"
+msgstr "석공 패의 구호"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
 #: ../../data/tribes/initialization/barbarians/units.lua:1138
@@ -3926,7 +3926,7 @@ msgstr "‘우리는 지붕을 엮는다’"
 #: ../../data/tribes/initialization/barbarians/units.lua:1264
 msgctxt "barbarians_building"
 msgid "Slogan of the Guild of Gardeners"
-msgstr "정원사 연합의 구호"
+msgstr "정원사 패의 구호"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Reed Yard
 #: ../../data/tribes/initialization/barbarians/units.lua:1266
@@ -4072,8 +4072,8 @@ msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
 msgstr "술자리 노래 ‘야만인의 길’의 1절"
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Brewery
+#. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1325
 #: ../../data/tribes/initialization/empire/units.lua:1257
 msgctxt "building"
@@ -4092,9 +4092,9 @@ msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr "‘예 올의 청동 도끼’ 라는 선술집의 차림표"
 
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1336
 #: ../../data/tribes/initialization/empire/units.lua:1280
 #: ../../data/tribes/initialization/frisians/units.lua:1907
@@ -4168,7 +4168,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr "‘하찮해 보이는 돌무더기에서 반짝이는 금과 빛나는 쇠를 만든다.<br>제련소는 우리 장인들 사이에서 진정한 마술사이다.’"
+msgstr "‘하찮해 보이는 돌무더기에서 반짝이는 금과 빛나는 쇠를 만든다.<br>쇠부리꾼은 우리 장인들 사이에서 진정한 마술사이다.’"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Smelting
 #. Works
@@ -4359,8 +4359,8 @@ msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
 msgstr "수확할때 노래 ‘밭의 부’에 나오는 대사"
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Farm
 #. TRANSLATORS: Purpose helptext for production site: Farm
+#. TRANSLATORS: Purpose helptext for an empire production site: Farm
 #: ../../data/tribes/initialization/barbarians/units.lua:1479
 #: ../../data/tribes/initialization/empire/units.lua:1342
 msgctxt "building"
@@ -5665,7 +5665,7 @@ msgctxt "empire_building"
 msgid ""
 "Forges spears to equip the soldiers and to train their attack in the "
 "training camp."
-msgstr "군인들을 무장시키고 훈련소에서 공격을 훈련시킬 창을 단조하십시오"
+msgstr "군인들을 무장시키고 훈련소에서 공격을 훈련시킬 창을 단조하십시오."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Marble
@@ -6059,7 +6059,7 @@ msgstr "고기잡이 그물은 어부들이 사용하는 도구입니다."
 #: ../../data/tribes/initialization/frisians/units.lua:459
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr "사냥용 창은 대장간에서 만듭니다."
+msgstr "사냥용 창은 대장간에서 만듭니다"
 
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:472
@@ -6580,7 +6580,7 @@ msgstr "채석장은 작업 영역 내에 잘라낼 바위가 필요합니다."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
-msgstr "번역확인:쉽니다 멈춥니다 -> 석공은 다시 일하기 전에 %s 초간 쉽니다. 멈춥니다"
+msgstr "번역확인:쉽니다 멈춥니다 -> 석공은 다시 일하기 전에 %s 초간 쉽니다. 멈춥니다."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Woodcutter's
 #. House
@@ -6611,7 +6611,7 @@ msgctxt "frisians_building"
 msgid ""
 "What can ever be more beautiful than the brilliant sun’s beams shining "
 "through the glistering canopy of leaves?"
-msgstr "나뭇잎들의 사이사이로 빛나는 눈부신 햇빛, 이보다 더 아름다운 것이 세상에 존재 하는가? "
+msgstr "나뭇잎들의 사이사이로 빛나는 눈부신 햇빛, 이보다 더 아름다운 것이 세상에 존재 하는가?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Forester's
 #. House
@@ -6772,7 +6772,7 @@ msgstr "우리처럼 숯 굽기를 숙련한 다른 부족은 없습니다!"
 #: ../../data/tribes/initialization/frisians/units.lua:1831
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr "프리지아인은 숯 가마를 처음 발명한 사람들입니다."
+msgstr "프리지아인은 숯 가마를 처음 발명한 사람들입니다"
 
 #. TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's
 #. House
@@ -6859,7 +6859,7 @@ msgstr "과일 따는 이는 작업 구역 내에 딸기 열매가 가득한 덤
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fruit collector pauses %s before going to work again."
-msgstr " 과일 따는 이는 다시 일하러 가기 전에 %s초 동안 멈춥니다."
+msgstr "과일 따는 이는 다시 일하러 가기 전에 %s초 동안 멈춥니다."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Beekeeper's House
 #: ../../data/tribes/initialization/frisians/units.lua:1691
@@ -6968,7 +6968,7 @@ msgstr "만약 석탄이 충분하지 않다면, 가장 어리석은 지도자�
 #: ../../data/tribes/initialization/frisians/units.lua:1737
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
-msgstr "벽돌공 한 명이 바로 그 일을 하고 있던 그의 족장과 말다툼을 하고 있습니다."
+msgstr "벽돌공 한 명이 바로 그 일을 하고 있던 그의 족장과 말다툼을 하고 있습니다"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1739
@@ -6997,7 +6997,7 @@ msgstr "광부들은 언덕 속 깊은 곳에서 광석을 얻는다. 그러나 
 #: ../../data/tribes/initialization/frisians/units.lua:1750
 msgctxt "frisians_building"
 msgid "Slogan of the Smelters’ Guild"
-msgstr "쇠녹이는 이 연합의 구호"
+msgstr "쇠부리꾼 패의 구호"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Furnace
 #: ../../data/tribes/initialization/frisians/units.lua:1752
@@ -7019,7 +7019,7 @@ msgstr "번역확인->물론 이 무기들은 다른 군인들이 먼저 제련�
 #: ../../data/tribes/initialization/frisians/units.lua:1761
 msgctxt "frisians_building"
 msgid "A smelter explaining the need for recycling to his impatient chieftain"
-msgstr "참을성 없는 족장에게 재활용해야 할 필요성을 설명하는 쇠부리장이"
+msgstr "참을성 없는 족장에게 재활용해야 할 필요성을 설명하는 쇠부리꾼"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Recycling
 #. Center
@@ -7494,7 +7494,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr "??만약 식량 공급이 중단된다면, 금광은 평균 %s 개의 금광석을 금광석을 생산할 수 있다.?? 숫자가 개수인가???"
+msgstr "만약 식량 공급이 중단된다면, 금광은 평균 %s 개의 금광석을 금광석을 생산할 수 있습니다."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Gold
 #. Mine
