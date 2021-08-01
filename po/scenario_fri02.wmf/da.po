@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1045,6 +1045,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Du har fuldført denne mission. Du kan fortsætte med at spille, hvis du "
+"ønsker det, eller gå til den næste mission."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
@@ -1053,6 +1055,8 @@ msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr ""
+"Dine arbejdere og soldater kan finde ly her. Opbevarer også varer og "
+"værktøj."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
