@@ -1634,14 +1634,12 @@ CmdChangeSoldierCapacity::CmdChangeSoldierCapacity(StreamRead& des)
 void CmdChangeSoldierCapacity::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial);
 	if (upcast(ConstructionSite, cs, mo)) {
-		assert(val >= 0);
-		uint32_t capacity = static_cast<uint32_t>(val);
+		// Clamp the capacity between the minimum and maximum value because the player may
+		// have sent multiple decrease/increase commands at the same time (bug #5006).
 		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
-			assert(ms->max_capacity >= capacity);
-			ms->desired_capacity = capacity;
+			ms->desired_capacity = std::max(1, std::min<int32_t>(ms->max_capacity, val));
 		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
-			assert(ts->max_capacity >= capacity);
-			ts->desired_capacity = capacity;
+			ts->desired_capacity = std::max(0, std::min<int32_t>(ts->max_capacity, val));
 		}
 	} else if (upcast(Building, building, mo)) {
 		if (building->get_owner() == game.get_player(sender()) &&
