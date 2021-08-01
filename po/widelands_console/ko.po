@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-07 12:00+0000\n"
+"PO-Revision-Date: 2021-07-18 14:14+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "와이드랜드 자료 파일에 지정된 디렉토리 사용"
 msgid ""
 "Use specified directory for widelands config files, savegames and replays. "
 "Default is "
-msgstr "와이드랜드 구성 파일, 놀이 저장 및 재생을 위해 지정된 디렉토리를 사용합니다. 기본값은"
+msgstr "와이드랜드 구성 파일, 놀이 저장 및 재생을 위해 지정된 디렉토리를 사용합니다. 기본값은 "
 
 #: ../../src/wlapplication_messages.cc:58
 msgid "Use specified directory for the widelands locale files"
@@ -87,7 +87,7 @@ msgstr "번역확인->FILENAME"
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
-msgstr " 주어진 파일에 구성된 새로운 단일 선수 게임을 직접 만듭니다. 예는 `data/templates/new_game_template` 에서 찾을 수 있습니다"
+msgstr "주어진 파일에 구성된 새로운 단일 선수 게임을 직접 만듭니다. 예는 `data/templates/new_game_template` 에서 찾을 수 있습니다"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Directly starts the map `FILENAME` as scenario map"
@@ -348,7 +348,7 @@ msgstr "y"
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:178
 msgid "Height `y` of the window in pixel"
-msgstr " 픽셀 단위의 창의 높이 `y`"
+msgstr "픽셀 단위의 창의 높이 `y`"
 
 #: ../../src/wlapplication_messages.cc:179
 msgid "Whether to grab the mouse input"
@@ -360,7 +360,7 @@ msgstr "SDL에서 제공하는 마우스 커서 사용 여부"
 
 #: ../../src/wlapplication_messages.cc:182
 msgid "Whether to use sticky tooltips"
-msgstr "고정 연장 요령 사용 여부 "
+msgstr "고정 연장 요령 사용 여부"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:186

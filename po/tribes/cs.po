@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
-"PO-Revision-Date: 2021-06-12 21:03+0000\n"
+"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"PO-Revision-Date: 2021-07-23 18:06+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1705,6 +1705,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kamenická dílna"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1716,6 +1717,8 @@ msgstr "Kamenická dílna"
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1725,6 +1728,7 @@ msgstr "vyrábění lopaty"
 msgid "making a felling ax"
 msgstr "vyrábění těžební sekery"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1739,6 +1743,8 @@ msgstr "vyrábění krumpáče"
 msgid "making a machete"
 msgstr "vyrábění mačety"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1749,6 +1755,7 @@ msgstr "vyrábění mačety"
 msgid "making kitchen tools"
 msgstr "vyrábění kuchyňského náčiní"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1766,9 +1773,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1922,7 +1929,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Stan ochránkyně fauny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -2460,7 +2466,7 @@ msgstr "Pavoučí farma"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Dílna"
+msgstr "Kovárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -3465,7 +3471,7 @@ msgstr "Hospoda"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "Dílna"
+msgstr "Kovárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:80
@@ -8246,7 +8252,7 @@ msgstr "Kameník"
 #: ../../data/tribes/workers/atlanteans/toolsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "Nástrojář"
+msgstr "Kovář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/trainer/init.lua:8
@@ -8642,7 +8648,7 @@ msgstr "Kameník"
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr "Nástrojář"
+msgstr "Kovář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/trainer/init.lua:8

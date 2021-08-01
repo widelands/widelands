@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-10 02:46+0000\n"
-"PO-Revision-Date: 2021-07-13 01:54+0000\n"
+"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"PO-Revision-Date: 2021-07-18 14:24+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr "당신의 군인들이 당신의 감시탑을 점령했습니다."
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr "감시 탑에서 침략자를 발견했습니다"
+msgstr "감시 탑에서 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
@@ -1007,7 +1007,7 @@ msgstr "당신의 군인들이 감시 초소에 주둔했습니다."
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:56
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr "당신의 감시 초소가 침략자를 발견했습니다"
+msgstr "당신의 감시 초소가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:58
@@ -1276,7 +1276,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr "이 카사바 농장에서 일하는 열음지기는 그녀의 씨앗을 심을 깨끗한 흙이 없습니다."
+msgstr "이 카사바 농장에서 일하는 농부는 그녀의 씨앗을 심을 깨끗한 흙이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
@@ -1336,7 +1336,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "이 코코아 농장에서 일하는 코코아 농부는 그녀의 씨앗을 심을 깨끗한 흙이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
@@ -1443,13 +1443,13 @@ msgstr "원예 시설"
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
 msgid "enhancing the fertility of land"
-msgstr ""
+msgstr "땅의 비옥도를 향상"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Gold Digger Dwelling"
-msgstr ""
+msgstr "금 채취꾼이 사는곳"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
@@ -1500,37 +1500,37 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr ""
+msgstr "이 금광 거주지의 주요 정맥이 소진되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr ""
+msgstr "수렵 채집자의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
 msgid "gathering"
-msgstr ""
+msgstr "수집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:48
 msgid "gathering meat"
-msgstr ""
+msgstr "고기를 채집하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:56
 msgid "gathering fish"
-msgstr ""
+msgstr "물고기를 채집하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:65
 msgid "No Game, No Fish"
-msgstr ""
+msgstr "사냥감이 없음, 물고기 없음"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:67
 msgid "Out of Game and Fish"
-msgstr ""
+msgstr "사냥감과 물고기가 없음"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:69
@@ -1538,25 +1538,25 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr ""
+msgstr "이 수렵 채집꾼의 오두막에서 일하는 수렵 채집꾼은 그녀의 작업 구역에서 어떤 사냥감이나 물고기도 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
 msgctxt "amazons_building"
 msgid "Initiation Site"
-msgstr ""
+msgstr "입문 현장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
 msgctxt "amazons_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "군인을 모집하고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Jungle Preserver’s Hut"
-msgstr ""
+msgstr "정글 보호자의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
@@ -1571,12 +1571,12 @@ msgstr "나무를 심고 있음"
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr ""
+msgstr "덩굴나무 나무꾼의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
 msgid "cutting lianas"
-msgstr ""
+msgstr "덩굴 나무를 자르고 있음"
 
 #. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
@@ -1590,7 +1590,7 @@ msgstr "나무 없음"
 
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
 msgid "No Tree to Cut Lianas"
-msgstr ""
+msgstr "자를 덩굴 나무가 없음"
 
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
 msgctxt "amazons_building"
@@ -1598,72 +1598,72 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr ""
+msgstr "이 현장에서 일하는 덩굴 나무 나무꾼은 그녀의 작업 영역에서 나무를 찾을 수 없습니다 당신은 건물을 해체하거나 파괴하거나 정글 보호자의 오두막을 짓는 것을 고려해야 합니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr ""
+msgstr "희귀한 나무 나무꾼의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:39
 msgid "harvesting balsa"
-msgstr ""
+msgstr "발사를 수확하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:48
 msgid "harvesting rubber"
-msgstr ""
+msgstr "고무를 수확하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:57
 msgid "harvesting ironwood"
-msgstr ""
+msgstr "쇠 나무를 수확하고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Plantation"
-msgstr ""
+msgstr "희귀한 나무 재배지"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:56
 msgid "planting balsa tree"
-msgstr ""
+msgstr "발사 나무를 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:66
 msgid "planting rubber tree"
-msgstr ""
+msgstr "고무 나무를 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:76
 msgid "planting ironwood tree"
-msgstr ""
+msgstr "쇠 나무를 심고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
 msgctxt "amazons_building"
 msgid "Rope Weaver Booth"
-msgstr ""
+msgstr "밧줄 짜는 칸막이 가게"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
 msgid "making a rope"
-msgstr ""
+msgstr "밧줄을 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "정찰대의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
@@ -1683,7 +1683,7 @@ msgstr "정찰하고 있음"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
 msgctxt "amazons_building"
 msgid "Shipyard"
-msgstr ""
+msgstr "조선소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
@@ -1699,8 +1699,9 @@ msgstr "배 만들고 있음"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "돌 제작소"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1712,6 +1713,8 @@ msgstr ""
 msgid "making a shovel"
 msgstr "삽 만들고 있음"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1721,6 +1724,7 @@ msgstr "삽 만들고 있음"
 msgid "making a felling ax"
 msgstr "벌목 도끼 만들고 있음"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1733,8 +1737,10 @@ msgstr "곡괭이 만들고 있음"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
 msgid "making a machete"
-msgstr ""
+msgstr "마체테를 만들고 있음"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1745,6 +1751,7 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "부엌 도구 만들고 있음"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1760,11 +1767,11 @@ msgstr "망치 만들고 있음"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "끌을 만들고 있음"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1774,36 +1781,36 @@ msgstr "바느질용 바늘을 만들고 있음"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 msgid "making a stone bowl"
-msgstr ""
+msgstr "돌 그릇을 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
 msgid "making a wooden spear"
-msgstr ""
+msgstr "나무 창을 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
 msgid "making a stone-tipped spear"
-msgstr ""
+msgstr "돌날 창을 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
 msgid "making a hardened spear"
-msgstr ""
+msgstr "단단한 창을 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
-msgstr ""
+msgstr "돌장이의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr ""
+msgstr "화강암 자르고 있음"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
@@ -1826,13 +1833,13 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "이 돌장이의 오두막에서 일하는 돌장이는 그녀의 작업 영역 내에 어떤 바위도 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr ""
+msgstr "돌감 광산"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1869,25 +1876,25 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "돌감 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Tapir Farm"
-msgstr ""
+msgstr "맥 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
 msgctxt "amazons_building"
 msgid "breeding tapir"
-msgstr ""
+msgstr "맥을 키우고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
-msgstr ""
+msgstr "물쟁이의 오두막"
 
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
@@ -1910,33 +1917,32 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr ""
+msgstr "이 물쟁이의 오두막에서 일하는 짐꾼은 근처에서 물을 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr ""
+msgstr "야생 지킴이의 천막"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
 msgid "breeding fish"
-msgstr "물고기 키우고 있음"
+msgstr "물고기를 키우고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:58
 msgid "releasing game"
-msgstr ""
+msgstr "사냥감을 풀어주고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Woodcutter’s Hut"
-msgstr ""
+msgstr "나무꾼의 오두막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:47
@@ -1961,7 +1967,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr ""
+msgstr "이 나무꾼의 오두막에서 일하는 나무꾼은 그녀의 작업 영역에서 어떤 나무도 찾을 수 없습니다. 당신은 건물을 해체하거나 파괴하거나 정글 보호자의 오두막을 짓는 것을 고려해야 합니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2027,7 +2033,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr "해당 검은뿌리 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 검은뿌리 농장에서 일하는 검은 뿌리 농부는 그의 씨앗을 뿌릴 깨끗한 땅이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
@@ -2151,7 +2157,7 @@ msgstr "옥수수를 수확하고 있음"
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 농장에서 일하는 농부는 그의 씨를 뿌릴 깨끗한 땅이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
@@ -2191,7 +2197,7 @@ msgstr "물고기 키우는 이의 집에서 일하는 사람은 자기 일터�
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
-msgstr "여기 물고기 키우는 곳에 물고기가 가득합니다."
+msgstr "여기 물고기 키우는 곳에 물고기가 가득합니다"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
@@ -2256,7 +2262,7 @@ msgstr "말 농장"
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:49
 msgctxt "atlanteans_building"
 msgid "breeding horses"
-msgstr "말 키우고 있음"
+msgstr "말을 키우고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:8
@@ -2293,7 +2299,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "사냥꾼의 집에서 일하는 사냥꾼은 작업 영역 내에 어떤 사냥감도 찾을 수 없습니다."
+msgstr "이 사냥꾼의 집에서 일하는 사냥꾼은 작업 영역 내에 어떤 사냥감도 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
@@ -2383,7 +2389,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr "채석장의 석공은 작업 영역 내에 어떤 바위도 찾을 수 없습니다."
+msgstr "이 채석장에서 일하는 돌장이는 그의 작업 영역에서 바위를 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:8
@@ -2395,7 +2401,7 @@ msgstr "나무 물건 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:50
 msgid "sawing logs"
-msgstr "통나무 자르고 있음"
+msgstr "통나무를 자르고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:8
@@ -2587,7 +2593,7 @@ msgstr "우물"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "해당 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
+msgstr "이 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:8
@@ -2756,7 +2762,7 @@ msgstr "밀을 수확하고 있음"
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 농장에서 일하는 농부는 그의 씨를 뿌릴 깨끗한 땅이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
@@ -3010,7 +3016,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "해당 갈대 농장에서 일하는 정원사들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 갈대밭에서 일하는 정원사는 씨를 뿌릴 깨끗한 땅이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
@@ -3081,7 +3087,7 @@ msgstr "우물"
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:66
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "해당 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
+msgstr "이 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:8
@@ -3269,7 +3275,7 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "사냥꾼의 집에서 일하는 사냥꾼은 작업 영역 내에 어떤 사냥감도 찾을 수 없습니다."
+msgstr "이 사냥꾼의 집에서 일하는 사냥꾼은 작업 영역 내에 어떤 사냥감도 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
@@ -3425,7 +3431,7 @@ msgstr "양 농장"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:51
 msgid "breeding sheep"
-msgstr "양 키우고 있음"
+msgstr "양을 키우고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:8
@@ -3492,7 +3498,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr "해당 포도원에서 일하는 포도 열음지기들이 포도 덩굴을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 포도원에서 일하는 포도원 농부는 포도 넝쿨을 심을 깨끗한 땅이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:8
@@ -3544,7 +3550,7 @@ msgstr "우물"
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "해당 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
+msgstr "이 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:8
@@ -3852,7 +3858,7 @@ msgstr "보리를 수확하고 있음"
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
+msgstr "이 농장에서 일하는 농부는 그의 씨를 뿌릴 깨끗한 땅이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
@@ -3936,7 +3942,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "이 사냥꾼의 집에서 일하는 이는 그의 작업장에서 어떤 야생동물도 찾지 못했습니다."
+msgstr "이 사냥꾼의 집에서 일하는 사냥꾼은 작업 영역 내에 어떤 사냥감도 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
@@ -3987,7 +3993,7 @@ msgstr "채석장"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "채석장의 석공은 작업 영역 내에 어떤 바위도 찾을 수 없습니다."
+msgstr "이 채석장에서 일하는 석공은 그의 작업 영역에서 바위를 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4025,7 +4031,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr "이 갈대 심는 집에서 일하는 이가 갈대 심을 땅을 찾을 수 없습니다."
+msgstr "이 갈대 농장에서 일하는 갈대 농부는 그의 씨를 심을 수 있는 깨끗한 흙이 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
@@ -4157,7 +4163,7 @@ msgstr "우물"
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "해당 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
+msgstr "이 우물에서 일하는 짐꾼은 우물에서 물을 찾을 수 없습니다."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:8
@@ -4216,25 +4222,25 @@ msgstr "군인이 회피력을 훈련하고 있음: 2→3"
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "군인의 체력을 훈련시키고 있음: 수준 1 → 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "군인의 체력을 훈련시키고 있음: 수준 2 → 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "군인의 방어력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
@@ -4247,7 +4253,7 @@ msgstr "군인이 방어력을 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
 msgctxt "amazons_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "훈련할 군인이 없습니다!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4255,25 +4261,25 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "전사들의 모임"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "군인의 공격력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "군인의 공격력을 훈련시키고 있음: 수준 1 → 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
@@ -4311,7 +4317,7 @@ msgstr "군인이 공격력을 훈련하고 있음: 3→4"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "훈련할 군인이 없습니다!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4319,7 +4325,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4343,7 +4349,7 @@ msgstr "군인 방어력 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:119
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "군인 체력 훈련하고 있음: 0→1"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:132
@@ -4381,7 +4387,7 @@ msgstr "군인 회피력 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:225
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "훈련할 군인이 없습니다!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4389,7 +4395,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:227
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -4431,13 +4437,13 @@ msgstr "군인 공격력 훈련하고 있음: 4→5"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "군인 체력 훈련하고 있음: 0→1"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:192
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "군인이 체력을 훈련하고 있음: 1→2"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 1 → 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
@@ -4464,7 +4470,7 @@ msgstr "군인 회피력 훈련하고 있음: 0→1"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "훈련할 군인이 없습니다!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
@@ -4473,7 +4479,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4521,13 +4527,13 @@ msgstr "군인 공격력 훈련하고 있음: 3→4"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:152
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "군인 체력 훈련하고 있음: 0→1"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:165
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "군인 체력 훈련하고 있음: 1→2"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 1 → 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:179
@@ -4582,7 +4588,7 @@ msgstr "군인 체력 훈련하고 있음: 1→2"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
 msgctxt "frisians_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "훈련할 군인이 없습니다!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
@@ -4590,7 +4596,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -4620,7 +4626,7 @@ msgstr "군인이 공격력을 훈련하고 있음: 2→3"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "군인 체력 훈련하고 있음: 0→1"
+msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
@@ -4632,19 +4638,19 @@ msgstr "군인 방어력 훈련하고 있음: 0→1"
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "본부"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
 msgctxt "amazons_building"
 msgid "Port"
-msgstr ""
+msgstr "항구"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "창고"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -4955,31 +4961,31 @@ msgstr "검은뿌리 밭 (새싹)"
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (harvested)"
-msgstr ""
+msgstr "카사바 밭 (수확됨)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (medium)"
-msgstr ""
+msgstr "카사바 밭 (중간)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (ripe)"
-msgstr ""
+msgstr "카사바 밭 (익음)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (small)"
-msgstr ""
+msgstr "카사바 밭 (작음)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (tiny)"
-msgstr ""
+msgstr "카사바 밭 (새싹)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5227,7 +5233,7 @@ msgstr "건조 중인 선박"
 #: ../../data/tribes/immovables/trees/balsa/init.lua:236
 #: ../../data/tribes/immovables/trees/balsa/init.lua:314
 msgid "Balsa Tree (Sapling)"
-msgstr ""
+msgstr "발사 나무 (어린 나무)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:98
@@ -5235,7 +5241,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:254
 #: ../../data/tribes/immovables/trees/balsa/init.lua:332
 msgid "Balsa Tree (Pole)"
-msgstr ""
+msgstr "발사 나무 (다 자람)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:116
@@ -5243,7 +5249,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:272
 #: ../../data/tribes/immovables/trees/balsa/init.lua:350
 msgid "Balsa Tree (Mature)"
-msgstr ""
+msgstr "발사 나무 (원숙 나무)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:134
@@ -5251,7 +5257,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:290
 #: ../../data/tribes/immovables/trees/balsa/init.lua:368
 msgid "Balsa Tree (Old)"
-msgstr ""
+msgstr "발사 나무 (늙은 나무)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/init.lua:136
@@ -5259,32 +5265,32 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/init.lua:292
 #: ../../data/tribes/immovables/trees/balsa/init.lua:370
 msgid "Balsa Tree"
-msgstr ""
+msgstr "발사 나무"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:8
 msgid "Cocoa Tree (sapling)"
-msgstr ""
+msgstr "코코아 나무 (어린 나무)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:32
 msgid "Cocoa Tree (pole)"
-msgstr ""
+msgstr "코코아 나무 (다 자람)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:56
 msgid "Cocoa Tree (mature)"
-msgstr ""
+msgstr "코코아 나무 (성숙함)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:80
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "코코아 나무 (늙음)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "죽은 나무"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:80
@@ -5292,7 +5298,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:236
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:314
 msgid "Ironwood Tree (Sapling)"
-msgstr ""
+msgstr "쇠 나무 (어림)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:98
@@ -5300,7 +5306,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:254
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:332
 msgid "Ironwood Tree (Pole)"
-msgstr ""
+msgstr "쇠 나무 (다 자람)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:116
@@ -5308,7 +5314,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:272
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:350
 msgid "Ironwood Tree (Mature)"
-msgstr ""
+msgstr "쇠 나무 (성숙함)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:134
@@ -5316,7 +5322,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:290
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:368
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr "쇠 나무 (늙음)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:136
@@ -5324,7 +5330,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:292
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:370
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "쇠 나무"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:80
@@ -5332,7 +5338,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:236
 #: ../../data/tribes/immovables/trees/rubber/init.lua:314
 msgid "Rubber Tree (Sapling)"
-msgstr ""
+msgstr "고무 나무 (어림)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:98
@@ -5340,7 +5346,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:254
 #: ../../data/tribes/immovables/trees/rubber/init.lua:332
 msgid "Rubber Tree (Pole)"
-msgstr ""
+msgstr "고무 나무 (다 자람)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:116
@@ -5348,7 +5354,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:272
 #: ../../data/tribes/immovables/trees/rubber/init.lua:350
 msgid "Rubber Tree (Mature)"
-msgstr ""
+msgstr "고무 나무 (성숙함)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:134
@@ -5356,7 +5362,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:290
 #: ../../data/tribes/immovables/trees/rubber/init.lua:368
 msgid "Rubber Tree (Old)"
-msgstr ""
+msgstr "고무 나무 (늙음)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/init.lua:136
@@ -5364,7 +5370,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/init.lua:292
 #: ../../data/tribes/immovables/trees/rubber/init.lua:370
 msgid "Rubber Tree"
-msgstr ""
+msgstr "고무 나무"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -5407,12 +5413,12 @@ msgstr "와이드랜드 개발 팀"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons (experimental)"
-msgstr ""
+msgstr "아마존 (실험적)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid ""
 "The people of the amazonian jungle. This tribe is still under development."
-msgstr ""
+msgstr "아마존 정글의 사람들입니다. 이 부족은 아직 개발 하고 있습니다."
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -5420,14 +5426,14 @@ msgstr ""
 msgctxt "amazons_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
 msgctxt "amazons_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5436,7 +5442,7 @@ msgstr[0] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5444,7 +5450,7 @@ msgstr[0] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5593,7 +5599,7 @@ msgstr "불쌍한 햄릿"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "경제 성장을 위한 최소한의 창고와 최소 비용으로 게임을 시작할 수 있습니다. 경고: 여기는 인공지능이 원활하게 시작되지 않습니다."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5607,7 +5613,7 @@ msgstr "조심하십시오"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "당신은 경제를 시작하는 데 필요한 각 연장에 대한 용품만 정확하게 보유하고 있습니다. 불필요한 연장이 생성되지 않았는지 확인하십시오."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5628,7 +5634,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr ""
+msgstr "본부와 경제 성장을 위한 몇 가지 제품만으로 게임을 시작하십시오. 경고 : 인공지능은 여기서부터 성공적으로 시작할 수 없습니다."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5649,7 +5655,7 @@ msgstr "교역 기지"
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr "플레이어에게 중요한 물품이 부족하다면, 공짜로 재충전될 것입니다."
+msgstr "플레이어에게 중요한 물품이 부족하다면, 공짜로 재충전될 것입니다"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5686,14 +5692,14 @@ msgstr "오래된 이야기로 전해진 부족. 아틀란티스의 아들딸들
 msgctxt "atlanteans_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5702,7 +5708,7 @@ msgstr[0] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5710,7 +5716,7 @@ msgstr[0] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5736,14 +5742,14 @@ msgstr "동부 지대의 강력한 부족들."
 msgctxt "barbarians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
 msgctxt "barbarians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5752,7 +5758,7 @@ msgstr[0] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5760,7 +5766,7 @@ msgstr[0] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5777,14 +5783,14 @@ msgstr "로마 제국의 문화."
 msgctxt "empire_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
 msgctxt "empire_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5793,7 +5799,7 @@ msgstr[0] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5801,7 +5807,7 @@ msgstr[0] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5818,14 +5824,14 @@ msgstr "거친 북해 연안의 주민들입니다."
 msgctxt "frisians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
 msgctxt "frisians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
+msgstr[0] "%1% 명 군인"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5834,7 +5840,7 @@ msgstr[0] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5842,7 +5848,7 @@ msgstr[0] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -5883,49 +5889,49 @@ msgstr "고정물"
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "배"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:41
 msgctxt "shipname"
 msgid "Orinoco"
-msgstr ""
+msgstr "오리노코"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:43
 msgctxt "shipname"
 msgid "Amazonas"
-msgstr ""
+msgstr "아마존인"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:45
 msgctxt "shipname"
 msgid "Abacaxis"
-msgstr ""
+msgstr "아바카시스"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:47
 msgctxt "shipname"
 msgid "Anchicayá"
-msgstr ""
+msgstr "안치카야"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:49
 msgctxt "shipname"
 msgid "Guáitara"
-msgstr ""
+msgstr "과이타라"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:51
 msgctxt "shipname"
 msgid "Iscuandé"
-msgstr ""
+msgstr "이스쿠안데"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:53
 msgctxt "shipname"
 msgid "Putumayo"
-msgstr ""
+msgstr "푸투마요"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:83
@@ -7058,7 +7064,7 @@ msgstr "투구"
 #: ../../data/tribes/wares/armor_wooden/init.lua:8
 msgctxt "ware"
 msgid "Light Wooden Armor"
-msgstr ""
+msgstr "가벼운 나무 갑옷"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
@@ -7094,13 +7100,13 @@ msgstr "날카로운 도끼"
 #: ../../data/tribes/wares/ax_warriors/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Ax"
-msgstr "전사 도끼"
+msgstr "전사의 도끼"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr ""
+msgstr "발사"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/barley/init.lua:8
@@ -7148,25 +7154,25 @@ msgstr "흑목"
 #: ../../data/tribes/wares/boots_hero/init.lua:8
 msgctxt "ware"
 msgid "Hero Boots"
-msgstr ""
+msgstr "영웅의 장화"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_sturdy/init.lua:8
 msgctxt "ware"
 msgid "Sturdy Boots"
-msgstr ""
+msgstr "튼튼한 장화"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_swift/init.lua:8
 msgctxt "ware"
 msgid "Swift Boots"
-msgstr ""
+msgstr "날쌘 장화"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "빵"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -7214,19 +7220,19 @@ msgstr "양동이들"
 #: ../../data/tribes/wares/cassavaroot/init.lua:8
 msgctxt "ware"
 msgid "Cassava Root"
-msgstr ""
+msgstr "카사바 뿌리"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chisel/init.lua:8
 msgctxt "ware"
 msgid "Chisel"
-msgstr ""
+msgstr "끌"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "초콜릿"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
@@ -7250,7 +7256,7 @@ msgstr "석탄"
 #: ../../data/tribes/wares/cocoa_beans/init.lua:8
 msgctxt "ware"
 msgid "Cocoa Beans"
-msgstr ""
+msgstr "코코아 콩"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/corn/init.lua:8
@@ -7352,7 +7358,7 @@ msgstr "금"
 #: ../../data/tribes/wares/gold_dust/init.lua:8
 msgctxt "ware"
 msgid "Gold Dust"
-msgstr ""
+msgstr "금 가루"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_ore/init.lua:8
@@ -7418,7 +7424,7 @@ msgstr "전쟁 투구"
 #: ../../data/tribes/wares/helmet_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Helmet"
-msgstr ""
+msgstr "나무 투구"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
@@ -7466,7 +7472,7 @@ msgstr "철 광석"
 #: ../../data/tribes/wares/ironwood/init.lua:8
 msgctxt "ware"
 msgid "Ironwood"
-msgstr ""
+msgstr "쇠 나무"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:8
@@ -7479,7 +7485,7 @@ msgstr "부엌 도구"
 #: ../../data/tribes/wares/liana/init.lua:8
 msgctxt "ware"
 msgid "Liana"
-msgstr ""
+msgstr "덩굴나무"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/log/init.lua:8
@@ -7491,7 +7497,7 @@ msgstr "통나무"
 #: ../../data/tribes/wares/machete/init.lua:8
 msgctxt "ware"
 msgid "Machete"
-msgstr ""
+msgstr "마체테"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble/init.lua:8
@@ -7551,7 +7557,7 @@ msgstr "널빤지"
 #: ../../data/tribes/wares/protector_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Protector"
-msgstr ""
+msgstr "속채움 보호대"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:8
@@ -7576,13 +7582,13 @@ msgstr "갈대"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "밧줄"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr ""
+msgstr "고무"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8
@@ -7660,7 +7666,7 @@ msgstr "고급 창"
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "단단한 창"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
@@ -7672,7 +7678,7 @@ msgstr "대형 창"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "돌날 창"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -7702,7 +7708,7 @@ msgstr "거미천"
 #: ../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "돌 그릇"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -7774,19 +7780,19 @@ msgstr "강철 삼지창"
 #: ../../data/tribes/wares/tunic/init.lua:8
 msgctxt "ware"
 msgid "Tunic"
-msgstr ""
+msgstr "튜닉"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/vest_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Vest"
-msgstr ""
+msgstr "속채움 조끼"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Coat"
-msgstr ""
+msgstr "전사의 외투"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/water/init.lua:8
@@ -7816,157 +7822,157 @@ msgstr "양털"
 #: ../../data/tribes/workers/amazons/builder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Builder"
-msgstr ""
+msgstr "건축가"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/carrier/init.lua:8
 msgctxt "amazons_worker"
 msgid "Carrier"
-msgstr ""
+msgstr "짐꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cassava Farmer"
-msgstr ""
+msgstr "카사바 농부"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
 msgctxt "amazons_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "숯쟁이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cocoa Farmer"
-msgstr ""
+msgstr "코코아 농부"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cook/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cook"
-msgstr ""
+msgstr "요리사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/dressmaker/init.lua:8
 msgctxt "amazons_worker"
 msgid "Dressmaker"
-msgstr ""
+msgstr "재봉사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "나룻배"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
 msgctxt "amazons_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "지질학자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_digger/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Digger"
-msgstr ""
+msgstr "금 채취꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr ""
+msgstr "금 쇠부리꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Hunter-Gatherer"
-msgstr ""
+msgstr "수렵 채집꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr ""
+msgstr "으뜸 정글"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr ""
+msgstr "정글 보호자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "덩굴나무 나무꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
 msgctxt "amazons_worker"
 msgid "Scout"
-msgstr ""
+msgstr "정찰대"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8
 msgctxt "amazons_worker"
 msgid "Shipwright"
-msgstr ""
+msgstr "조선공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "군인"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "돌 조각가"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "돌장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir"
-msgstr ""
+msgstr "맥"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir Breeder"
-msgstr ""
+msgstr "맥 사육사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "훈련 교관"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
 msgctxt "amazons_worker"
 msgid "Wilderness Keeper"
-msgstr ""
+msgstr "야생 지킴이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "나무꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr ""
+msgstr "으뜸 나무꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #. descname = pgettext("empire_worker", "Fisher"),
@@ -8788,7 +8794,7 @@ msgstr "달인 재봉사"
 #: ../../data/tribes/workers/frisians/shipwright/init.lua:8
 msgctxt "frisians_worker"
 msgid "Shipwright"
-msgstr "배 만드는 이"
+msgstr "조선공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/smelter/init.lua:8

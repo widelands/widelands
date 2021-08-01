@@ -32,7 +32,7 @@ msgstr "첫번째 전초기지"
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
-msgstr "임시 본부 동쪽에 있는 노란 집 기호에 전초기지를 지으십시오"
+msgstr "임시 본부 동쪽에 있는 노란 집 기호에 전초기지를 지으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
@@ -491,7 +491,7 @@ msgid ""
 "sufficient for the moment being."
 msgstr ""
 "하지만 문제가 있는데, 만약 우리가 대리석을 모두 기둥을 깎는데 사용하면, 다 떨어지겠지요. 그래서 우리는 경제 구성에서 대리석 기둥의 "
-"구성을 더 적은 양으로 낮춰야만 해요. 제 생각에는 네 개의 기둥이 여분으로 확보되면 거의 다 될 것 같아요. "
+"구성을 더 적은 양으로 낮춰야만 해요. 제 생각에는 네 개의 기둥이 여분으로 확보되면 거의 다 될 것 같아요."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
