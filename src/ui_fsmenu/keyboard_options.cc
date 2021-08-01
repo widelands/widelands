@@ -47,8 +47,8 @@ struct ShortcutChooser : public UI::Window {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		});
 
-		UI::Button* const cancel =
-		   new UI::Button(&box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+		UI::Button* const cancel = new UI::Button(
+		   &box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
 		cancel->sigclicked.connect(
 		   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 
@@ -89,8 +89,7 @@ protected:
 		   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 		dd->add(_("(unused)"), "", nullptr, fastplace.empty());
 
-		std::map<std::pair<Widelands::DescriptionIndex, std::string>,
-		         const Widelands::BuildingDescr*>
+		std::map<std::pair<Widelands::DescriptionIndex, std::string>, const Widelands::BuildingDescr*>
 		   all_building_sorted;
 		for (Widelands::DescriptionIndex di = 0;
 		     di < game_for_fastplace->descriptions().nr_buildings(); ++di) {
@@ -103,14 +102,13 @@ protected:
 			}
 		}
 		for (const auto& pair : all_building_sorted) {
-			dd->add(
-			   (boost::format(
-			       /** TRANSLATORS: [Tribe Name] Building Name */
-			       _("[%1$s] %2$s")) %
-			    game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname() %
-			    pair.second->descname())
-			      .str(),
-			   pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
+			dd->add((boost::format(
+			            /** TRANSLATORS: [Tribe Name] Building Name */
+			            _("[%1$s] %2$s")) %
+			         game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname() %
+			         pair.second->descname())
+			           .str(),
+			        pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
 		}
 
 		if (!dd->has_selection()) {
@@ -201,8 +199,11 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
 		    game_.get() == nullptr) {
 			return (boost::format(
-			/** TRANSLATORS: This is a button label for a keyboard shortcut in the form "Action: Key" */
-			_("%1$s: %2$s")) % to_string(key) % shortcut).str();
+			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
+			              "Action: Key" */
+			           _("%1$s: %2$s")) %
+			        to_string(key) % shortcut)
+			   .str();
 		}
 
 		const std::string& fp = get_fastplace_shortcut(key);

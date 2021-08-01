@@ -894,8 +894,9 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 }
 
 static void init_fastplace_shortcuts(const bool force_defaults) {
-	for (KeyboardShortcut k = KeyboardShortcut::kFastplace__Begin; k <= KeyboardShortcut::kFastplace__End;
-			k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+	for (KeyboardShortcut k = KeyboardShortcut::kFastplace__Begin;
+	     k <= KeyboardShortcut::kFastplace__End;
+	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		if (force_defaults) {
 			shortcuts_.erase(k);
 		}
