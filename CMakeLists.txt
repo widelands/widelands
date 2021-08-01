@@ -92,7 +92,7 @@ if (WIN32)
   link_libraries(wsock32 ws2_32 bcrypt)
 endif()
 if (OPTION_BUILD_WINSTATIC)
-  add_definitions(-DGLBINDING_STATIC_DEFINE -DCURL_STATICLIB -DNGHTTP2_STATICLIB)
+  add_definitions(-DGLBINDING_STATIC_DEFINE -DNGHTTP2_STATICLIB)
   if(NOT MSVC)
     if (CMAKE_SIZEOF_VOID_P EQUAL 8)
       set(PNG_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libpng.a" CACHE INTERNAL "")
@@ -105,7 +105,6 @@ if (OPTION_BUILD_WINSTATIC)
       set(ICU_UC_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libicuuc.a" CACHE INTERNAL "")
       set(ICU_DT_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libicudt.a" CACHE INTERNAL "")
       set(Intl_LIBRARY "C:/msys64/mingw64/lib/libintl.a" CACHE INTERNAL "")
-      set(CURL_LIBRARY "C:/msys64/mingw64/lib/libcurl.a" CACHE INTERNAL "")
     else()
       set(PNG_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libpng.a" CACHE INTERNAL "")
       set(SDL2_IMAGE_LIBRARY "C:/msys64/mingw32/lib/libSDL2_image.a" CACHE INTERNAL "")
@@ -117,7 +116,6 @@ if (OPTION_BUILD_WINSTATIC)
       set(ICU_UC_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libicuuc.a" CACHE INTERNAL "")
       set(ICU_DT_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libicudt.a" CACHE INTERNAL "")
       set(Intl_LIBRARY "C:/msys64/mingw32/lib/libintl.a" CACHE INTERNAL "")
-      set(CURL_LIBRARY "C:/msys64/mingw32/lib/libcurl.a" CACHE INTERNAL "")
     endif()
   endif()
   set (OPTION_GLEW_STATIC ON)
@@ -135,7 +133,6 @@ find_package (PythonInterp REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
-find_package(CURL REQUIRED)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -209,6 +206,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
   endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
   option(OPTION_ASAN "Build with AddressSanitizer" ON)
+elseif(CMAKE_BUILD_TYPE STREQUAL "None")
+  message(STATUS "Not setting any default flags.")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
@@ -363,7 +362,6 @@ IF (WIN32)
     # Fix static library dependencies
     set(SDL_MIXER_EXTRA_LIBS ssp)    
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
-    set(CURL_EXTRA_LIBS unistring idn2 ssh2 ws2_32 psl ssl crypto)
     set(SDL_IMG_EXTRA_LIBS jbig deflate)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
@@ -416,7 +414,7 @@ endif (OPTION_BUILD_TESTS)
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
   DESTINATION ${WL_INSTALL_BASEDIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreVersionFile
 )
 
@@ -432,7 +430,7 @@ install(
   FILES
     data/datadirversion
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT VersionFile
 )
 
@@ -449,7 +447,7 @@ install(
     data/txts
     data/world
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreDataFiles
 )
 
@@ -457,7 +455,7 @@ install(
   DIRECTORY
     data/maps
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT MapFiles
 )
 
@@ -466,7 +464,7 @@ install(
     data/music
     data/sound
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT MusicFiles
 )
 
@@ -476,7 +474,7 @@ install(
     CREDITS
     ChangeLog
   DESTINATION ${WL_INSTALL_BASEDIR}
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreLicenseFiles
 )
 
@@ -495,7 +493,7 @@ install(
   DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/locale/
   DESTINATION ${WL_INSTALL_DATADIR}/locale
-  CONFIGURATIONS Debug;Release
+  CONFIGURATIONS Debug;Release;None
   COMPONENT CoreLanguageFiles
 )
 
