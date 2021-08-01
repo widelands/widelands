@@ -69,27 +69,27 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
             kRowButtonSize,
             UI::ButtonStyle::kFsMenuSecondary,
             _("Reset")) {
-	UI::MultilineTextarea* m = new UI::MultilineTextarea(
-	   &box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
-	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	UI::MultilineTextarea* m =
+	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "",
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 	m->set_text(
-	   (boost::format(_(
-	       "In order to use a registered account, you need an account on the Widelands website. "
-	       "Please log in at %s and set an online gaming password on your profile page.")) %
+	   (boost::format(
+	       _("In order to use a registered account, you need an account on the Widelands website. "
+	         "Please log in at %s and set an online gaming password on your profile page.")) %
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
 	      .str());
 
 	left_box_.add_inf_space();
-	left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu,
-	                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Username:"),
-	                               UI::Align::kRight),
-	              UI::Box::Resizing::kFullSize);
+	left_box_.add(
+	   new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Username:"), UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
-	left_box_.add(new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu,
-	                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Password:"),
-	                               UI::Align::kRight),
-	              UI::Box::Resizing::kFullSize);
+	left_box_.add(
+	   new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Password:"), UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
 
 	right_box_.add(&username_, UI::Box::Resizing::kExpandBoth);
@@ -165,7 +165,6 @@ void AddOnsLoginBox::think() {
 		password_.set_text("");
 	}
 }
-
 
 void AddOnsLoginBox::ok() {
 	if (!username_.text().empty() && !password_.text().empty()) {

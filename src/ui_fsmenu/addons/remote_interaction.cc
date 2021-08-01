@@ -41,11 +41,11 @@ std::map<std::pair<std::string, std::string>, std::string>
 /* CommentRow implementation */
 
 CommentRow::CommentRow(AddOnsCtrl& ctrl,
-           std::shared_ptr<AddOns::AddOnInfo> info,
-           RemoteInteractionWindow& r,
-           UI::Panel& parent,
-           const std::string& text,
-           const int64_t index)
+                       std::shared_ptr<AddOns::AddOnInfo> info,
+                       RemoteInteractionWindow& r,
+                       UI::Panel& parent,
+                       const std::string& text,
+                       const int64_t index)
    : UI::MultilineTextarea(&parent,
                            0,
                            0,
@@ -76,11 +76,11 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 void CommentRow::update_edit_enabled() {
 	/* Admins can edit all posts; normal users only their own posts and only if the post was
 	 * never edited by an admin yet. */
-	edit_.set_visible(!ctrl_.username().empty() &&
-	                  (ctrl_.net().is_admin() ||
-	                   (info_->user_comments[index_].username == ctrl_.username() &&
-	                    (info_->user_comments[index_].editor.empty() ||
-	                     info_->user_comments[index_].editor == ctrl_.username()))));
+	edit_.set_visible(
+	   !ctrl_.username().empty() &&
+	   (ctrl_.net().is_admin() || (info_->user_comments[index_].username == ctrl_.username() &&
+	                               (info_->user_comments[index_].editor.empty() ||
+	                                info_->user_comments[index_].editor == ctrl_.username()))));
 }
 
 void CommentRow::layout() {
@@ -90,7 +90,9 @@ void CommentRow::layout() {
 
 /* CommentEditor implementation */
 
-CommentEditor::CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const int64_t index)
+CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
+                             std::shared_ptr<AddOns::AddOnInfo> info,
+                             const int64_t index)
    : UI::Window(&ctrl.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "write_comment",
@@ -224,8 +226,8 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo
 			*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		} catch (const std::exception& e) {
-			log_err("Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(),
-			        e.what());
+			log_err(
+			   "Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(), e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
@@ -260,8 +262,7 @@ void CommentEditor::think() {
 		message = message.replace(pos, 1, "<br>");
 	}
 
-	p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	        .as_font_tag(message);
+	p += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(message);
 	p += "</p></rt>";
 
 	ok_.set_enabled(!message.empty());
@@ -285,7 +286,6 @@ void CommentEditor::think() {
 		preview_.set_text(p);
 	}
 }
-
 
 void CommentEditor::apply_format(const std::string& open_tag, const std::string& close_tag) {
 	const size_t caret = text_->get_caret_pos();
@@ -312,7 +312,8 @@ void CommentEditor::reset_text() {
 
 /* RemoteInteractionWindow implementation */
 
-RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent, std::shared_ptr<AddOns::AddOnInfo> info)
+RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
+                                                 std::shared_ptr<AddOns::AddOnInfo> info)
    : UI::Window(parent.get_parent(),
                 UI::WindowStyle::kFsMenu,
                 info->internal_name,
@@ -367,11 +368,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent, std::shared
                        UI::FontStyle::kFsMenuLabel,
                        "",
                        UI::Align::kCenter),
-     voting_stats_summary_(&box_votes_,
-                           UI::PanelStyle::kFsMenu,
-                           UI::FontStyle::kFsMenuLabel,
-                           "",
-                           UI::Align::kCenter),
+     voting_stats_summary_(
+        &box_votes_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
      screenshot_next_(&box_screenies_buttons_,
                       "next_screenshot",
                       0,
@@ -415,8 +413,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent, std::shared
 		} catch (const std::exception& e) {
 			UI::WLMessageBox w(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what())
-			      .str(),
+			   (boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 			return;
@@ -452,11 +449,9 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent, std::shared
 
 	voting_stats_.add_inf_space();
 	for (unsigned i = 0; i < AddOns::kMaxRating; ++i) {
-		UI::Box* box =
-		   new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
-		voting_bars_[i] =
-		   new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0,
-		                       UI::ProgressBar::Vertical);
+		UI::Box* box = new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
+		voting_bars_[i] = new UI::ProgressBar(
+		   box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0, UI::ProgressBar::Vertical);
 		voting_bars_[i]->set_show_percent(false);
 		voting_txt_[i] = new UI::Textarea(
 		   box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter);
@@ -517,8 +512,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent, std::shared
 void RemoteInteractionWindow::on_resolution_changed_note(const GraphicResolutionChanged& note) {
 	UI::Window::on_resolution_changed_note(note);
 
-	set_size(
-	   parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
+	set_size(parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
 	set_pos(Vector2i(parent_.get_x() + kRowButtonSize, parent_.get_y() + kRowButtonSize));
 	main_box_.set_size(get_inner_w(), get_inner_h());
 }
@@ -542,12 +536,12 @@ void RemoteInteractionWindow::update_data() {
 	   ->set_title((boost::format(_("Votes (%u)")) % info_->number_of_votes()).str());
 
 	voting_stats_summary_.set_text(
-	   info_->number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                                      "Average rating: %1$.3f (%2$u votes)",
-	                                                      info_->number_of_votes())) %
-	                               info_->average_rating() % info_->number_of_votes())
-	                                 .str() :
-                                _("No votes yet"));
+	   info_->number_of_votes() ?
+         (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                              "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes())) %
+	       info_->average_rating() % info_->number_of_votes())
+	         .str() :
+         _("No votes yet"));
 
 	uint32_t most_votes = 1;
 	for (uint32_t v : info_->votes) {
@@ -564,8 +558,8 @@ void RemoteInteractionWindow::update_data() {
 	std::string text = "<rt><p>";
 	text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	           .as_font_tag(info_->user_comments.empty() ?
-                             _("No comments yet.") :
-                             (boost::format(ngettext(
+                              _("No comments yet.") :
+                              (boost::format(ngettext(
 	                               "%u comment:", "%u comments:", info_->user_comments.size())) %
 	                            info_->user_comments.size())
 	                              .str());
@@ -578,11 +572,11 @@ void RemoteInteractionWindow::update_data() {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag(time_string(comment.timestamp));
 		} else if (comment.editor == comment.username) {
-			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
-			                         time_string(comment.timestamp) %
-			                         time_string(comment.edit_timestamp))
-			                           .str());
+			text +=
+			   g_style_manager->font_style(UI::FontStyle::kItalic)
+			      .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
+			                    time_string(comment.timestamp) % time_string(comment.edit_timestamp))
+			                      .str());
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)")) %

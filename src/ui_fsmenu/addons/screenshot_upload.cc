@@ -33,8 +33,8 @@ namespace FsMenu {
 namespace AddOnsUI {
 
 ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
-                                std::shared_ptr<AddOns::AddOnInfo> info,
-                                std::shared_ptr<AddOns::AddOnInfo> remote)
+                                               std::shared_ptr<AddOns::AddOnInfo> info,
+                                               std::shared_ptr<AddOns::AddOnInfo> remote)
    : UI::Window(&ctrl.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "upload_screenshot",
@@ -76,10 +76,10 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 	buttons_box_.add(&progress_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
 
-	descrbox_.add(new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu,
-	                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
-	                               UI::Align::kRight),
-	              UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	descrbox_.add(
+	   new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Description:"), UI::Align::kRight),
+	   UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	descrbox_.add_space(kRowButtonSpacing);
 	descrbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
 
@@ -120,8 +120,8 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 			}
 			die();
 		} catch (const std::exception& e) {
-			log_err("Upload screenshot %s for %s: %s", sel.c_str(), info->internal_name.c_str(),
-			        e.what());
+			log_err(
+			   "Upload screenshot %s for %s: %s", sel.c_str(), info->internal_name.c_str(), e.what());
 			progress_.set_text("");
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
