@@ -159,8 +159,11 @@ void fill_parameter_vector() {
 	  {"", "registered", _("[true|false*]"),
 		_("Whether the used metaserver login is for a registered user"), true},
 	  {"", "password_sha1", _("[...]"), _("The hashed password for online logins"), true},
-	  {"", "addon_server", _("URI"),
-		_("Connect to a different github repository and branch from the add-ons manager"), false},
+	  {"", "addon_server_ip", _("IP"),
+		_("Connect to a different server address from the add-ons manager"), false},
+	  {"", "addon_server_port", _("n"),
+		_("Connect to a different server port from the add-ons manager"), false},
+
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
 		_("Whether to use the whole display for the game screen"), false},
@@ -208,6 +211,10 @@ void fill_parameter_vector() {
 		true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
+	  {"", "verbose-i18n", "",
+		_("Print all strings as they are translated. "
+		  "This helps with tracing down bugs with internationalization."),
+		true},
 	  {"", "version", "", _("Only print version and exit"), false},
 	  {"", "help", "", _("Show this help"), false},
 	  {"", "help-all", "", _("Show this help with all available config options"), false},
