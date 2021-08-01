@@ -39,6 +39,10 @@
 #define _(str) i18n::translate(str)
 
 namespace i18n {
+
+// Make every call to translate log the string for debugging.
+void enable_verbose_i18n();
+
 char const* translate(char const*) __attribute__((format_arg(1)));
 char const* translate(const std::string&);
 
