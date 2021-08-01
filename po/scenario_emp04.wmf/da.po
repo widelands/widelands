@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2021
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-07-01 02:39+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -663,6 +663,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
 " all of the unproductive buildings though."
 msgstr ""
+"Først skal vi bruge nogle konstruktionsmaterialer. Så vi bør bygge mindst "
+"tre skovhuggerhuse og to stenbrud. Sikr dig først, at du har revet alle "
+"uproduktive bygninger ned."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:358
@@ -827,6 +830,9 @@ msgid ""
 "eventually destroy the old one or at least expel the forester to change "
 "houses."
 msgstr ""
+"Den eneste løsning er at bygge to nye skovfogedhuse nær vores skovhuggere. "
+"Sikr dig at der først bygges et nyt skovfogedhus og nedlæg så det gamle "
+"eller i det mindste tvinge skovfogeden til at skifte hus."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:433
 msgid "Amalea Laughs Sarcastically"
@@ -1618,7 +1624,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Bryggeri"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
@@ -1676,20 +1682,20 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Brygger øl for at holde minearbejderne i godt humør."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Farm
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
 msgctxt "empire_building"
 msgid "Sows and harvests wheat."
-msgstr ""
+msgstr "Sår og høster hvede."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Planter træer i det omkringliggende område."
 
 #. TRANSLATORS: Note helptext for an empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
@@ -1698,6 +1704,8 @@ msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
+"Skovfogedhuset kræver ledig plads indenfor arbejdsradiussen for at plante "
+"træerne."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
 #. House
@@ -1705,6 +1713,7 @@ msgstr ""
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr ""
+"Fælder træer i det omkringliggende område og laver dem til træstammer."
 
 #. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
 #. House
@@ -1717,21 +1726,21 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
 msgctxt "empire_building"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Maler hvede til mel."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 1
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Træner soldater i »angreb« og »helbred«."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 2
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Udstyrer soldaterne med alle de nødvendige våben og rustningsdele."
 
 #. TRANSLATORS: Note helptext for an empire training site: Training Camp
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
@@ -1740,12 +1749,14 @@ msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
+"Imperiets soldater kan ikke trænes i »Forsvar« og vil forblive på det "
+"niveau, de starter på."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
 msgctxt "empire_building"
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Trækker vand ud af undergrunden."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
@@ -1754,6 +1765,8 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
+"I templet Vesta lagres gaverne til ceremonier. Det er hjem for præstinderne "
+"og vogterne af gudinden."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
@@ -1786,7 +1799,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Mølle"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
@@ -1853,7 +1866,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Ingen soldater at træne!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
@@ -1865,7 +1878,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Brønd"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
