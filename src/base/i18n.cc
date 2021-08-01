@@ -62,17 +62,28 @@ std::string locale;
 std::string localedir;
 std::string homedir;
 
+char* (*gettext_)(const char*) = gettext;
+
+char* verbose_gettext(const char* s) {
+	log_dbg("gettext: %s\n", s);
+	return gettext(s);
+}
+
 }  // namespace
+
+void enable_verbose_i18n() {
+	gettext_ = verbose_gettext;
+}
 
 /**
  * Translate a string with gettext
  */
 // TODO(unknown): Implement a workaround if gettext was not found
 char const* translate(char const* const str) {
-	return gettext(str);
+	return gettext_(str);
 }
 char const* translate(const std::string& str) {
-	return gettext(str.c_str());
+	return gettext_(str.c_str());
 }
 
 /**
