@@ -3,15 +3,15 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
-# Joe Hansen <joedalton2@yahoo.dk>, 2016-2017,2019-2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2016-2017,2019-2021
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-07-13 09:17+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,7 +174,7 @@ msgstr "Byg en kamparena. Det er en stor bygning."
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Da konstruktionen vil tage noget tid, så kan du ændre spillets hastighed via %1$s og %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
@@ -282,7 +282,7 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Du skal også huske på, at hver af stammerne i Widelands har deres egne måder at træne på, så bygningerne og varerne er forskellige. Desuden kan niveauerne på evnerne ikke sammenlignes: en imperiesoldat har et grundangreb på %1% på niveau 0, mens en barbarsoldat på samme niveau kun har et grundangreb på %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
@@ -340,7 +340,7 @@ msgstr "Klar!"
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Godt gjort! din spejderhytte er blevet bygget. Mens vores spejder flytter ind, så lad os lære lidt mere om ham."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -453,7 +453,7 @@ msgstr "Hvis du ønsker at sende en bestemt soldat væk, så kan du bare klikke 
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Lad mig beskrive hvad tallene i statistikstrengen betyder. Denne streng kan indeholde op til tre tal, f.eks. »1 (+5) soldat (+2)«."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""

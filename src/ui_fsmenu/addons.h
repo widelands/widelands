@@ -43,6 +43,9 @@ namespace FsMenu {
 
 class AddOnsCtrl;
 
+// TODO(Nordfriese): All classes defined in addons.h and addons.cc except AddOnsCtrl should
+// be moved to one or more new file pairs. Also put them all in a new sub-namespace.
+
 struct ProgressIndicatorWindow : public UI::Window {
 	ProgressIndicatorWindow(UI::Panel* parent, const std::string& title);
 	~ProgressIndicatorWindow() override = default;
@@ -53,20 +56,17 @@ struct ProgressIndicatorWindow : public UI::Window {
 	void set_message_2(const std::string& msg) {
 		txt2_.set_text(msg);
 	}
+	void set_message_3(const std::string& msg) {
+		txt3_.set_text(msg);
+	}
 	UI::ProgressBar& progressbar() {
 		return progress_;
 	}
 
-	// Bit complex design for the two download_xxx functions to ensure the
-	// progress indicator window stays responsive during downloading
-	std::function<void(const std::string&)> action_when_thinking;
-	std::vector<std::string> action_params;
-	bool die_after_last_action;
-	void think() override;
-
 private:
-	UI::Box box_;
-	UI::Textarea txt1_, txt2_;
+	UI::Panel::ModalGuard modal_;
+	UI::Box box_, hbox_;
+	UI::Textarea txt1_, txt2_, txt3_;
 	UI::ProgressBar progress_;
 };
 
@@ -84,7 +84,7 @@ private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	bool enabled_;
 	UI::Button uninstall_, toggle_enabled_;
-	UI::Icon category_;
+	UI::Icon icon_, category_;
 	UI::Textarea version_;
 	UI::MultilineTextarea txt_;
 };
@@ -109,7 +109,7 @@ struct RemoteAddOnRow : public UI::Panel {
 private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
-	UI::Icon category_, verified_;
+	UI::Icon icon_, category_, verified_;
 	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
 	UI::MultilineTextarea txt_;
 
@@ -124,8 +124,8 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install(std::shared_ptr<AddOns::AddOnInfo>);
-	void upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool full_upgrade);
+	void install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool only_translations);
+	void upload_addon(std::shared_ptr<AddOns::AddOnInfo>);
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -140,7 +140,15 @@ public:
 	const AddOns::AddOnsList& get_remotes() const {
 		return remotes_;
 	}
+	std::shared_ptr<AddOns::AddOnInfo> find_remote(const std::string& name);
 	bool is_remote(const std::string& name) const;
+
+	const std::string& username() const {
+		return username_;
+	}
+	void set_login(const std::string& username, const std::string& password, bool show_error);
+	void update_login_button(UI::Button*);
+	void login_button_clicked();
 
 protected:
 	void layout() override;
@@ -172,8 +180,10 @@ private:
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
-	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, /* autofix_dependencies_,*/ move_top_,
-	   move_up_, move_down_, move_bottom_, launch_packager_;
+	UI::Dropdown<std::shared_ptr<AddOns::AddOnInfo>> upload_addon_, upload_screenshot_;
+	UI::Checkbox upload_addon_accept_;
+	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, /* autofix_dependencies_, */ move_top_,
+	   move_up_, move_down_, move_bottom_, launch_packager_, login_button_, contact_;
 
 	void category_filter_changed(AddOns::AddOnCategory);
 	void check_enable_move_buttons();
@@ -187,12 +197,9 @@ private:
 
 	AddOns::AddOnsList remotes_;
 	void refresh_remotes();
-
 	bool matches_filter(std::shared_ptr<AddOns::AddOnInfo>);
 
-	std::string download_addon(ProgressIndicatorWindow&, std::shared_ptr<AddOns::AddOnInfo>);
-	std::set<std::string> download_i18n(ProgressIndicatorWindow&,
-	                                    std::shared_ptr<AddOns::AddOnInfo>);
+	std::string username_, password_;
 };
 }  // namespace FsMenu
 
