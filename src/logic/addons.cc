@@ -28,6 +28,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
@@ -400,6 +401,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	Section* i18n_section = i18n_profile.get_section("global");
 
 	AddOnInfo* i = new AddOnInfo();
+	std::shared_ptr<AddOnInfo> pointer(i);
 	i->internal_name = name;
 	i->unlocalized_descname = s.get_safe_untranslated_string("name");
 	i->unlocalized_description = s.get_safe_untranslated_string("description");
@@ -422,6 +424,10 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
 		return i18n::translate(i->unlocalized_author);
 	};
+	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
+                                   kAddOnDir + FileSystem::file_separator() + name +
+	                                   FileSystem::file_separator() + kAddOnIconFile :
+                                   kAddOnCategories.at(i->category).icon);
 
 	if (i->category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());
@@ -441,7 +447,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		}
 	}
 
-	return std::shared_ptr<AddOnInfo>(i);
+	return pointer;
 }
 
 }  // namespace AddOns

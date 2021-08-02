@@ -23,6 +23,8 @@
 
 #include "base/i18n.h"
 #include "graphic/text_layout.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wlapplication_options.h"
@@ -32,38 +34,91 @@ namespace FsMenu {
 constexpr int16_t kPadding = 4;
 
 struct ShortcutChooser : public UI::Window {
-	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c)
+	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c, Widelands::Game* game_for_fastplace)
 	   : UI::Window(
 	        &parent, UI::WindowStyle::kFsMenu, "choose_shortcut", 0, 0, 300, 200, to_string(c)),
-	     key(get_shortcut(c)) {
-		UI::Box* const box =
-		   new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
-
+	     code_(c),
+	     key(get_shortcut(code_)),
+	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
 		UI::Button* const reset = new UI::Button(
-		   box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
-		reset->sigclicked.connect([this, c]() {
-			key = get_default_shortcut(c);
+		   &box_, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
+		reset->sigclicked.connect([this]() {
+			key = get_default_shortcut(code_);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		});
 
-		UI::Button* const cancel =
-		   new UI::Button(box, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+		UI::Button* const cancel = new UI::Button(
+		   &box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
 		cancel->sigclicked.connect(
 		   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 
+		UI::Button* const ok =
+		   new UI::Button(&box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
+		ok->sigclicked.connect(
+		   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
+
 		UI::MultilineTextarea* const txt = new UI::MultilineTextarea(
-		   box, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
+		   &box_, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
 		   _("Press the new shortcut or close this window to cancel."), UI::Align::kCenter);
 
-		box->add(txt, UI::Box::Resizing::kExpandBoth);
-		box->add(reset, UI::Box::Resizing::kFullSize);
-		box->add(cancel, UI::Box::Resizing::kFullSize);
-		set_center_panel(box);
+		box_.add(txt, UI::Box::Resizing::kExpandBoth);
+
+		if (game_for_fastplace != nullptr) {
+			create_fastplace_dropdown(game_for_fastplace, ok->get_h());
+		}
+
+		box_.add(reset, UI::Box::Resizing::kFullSize);
+		box_.add(cancel, UI::Box::Resizing::kFullSize);
+		box_.add(ok, UI::Box::Resizing::kFullSize);
+		set_center_panel(&box_);
 		center_to_parent();
 		initialization_complete();
 	}
 
+	const KeyboardShortcut code_;
 	SDL_Keysym key;
+	std::string fastplace;
+
+protected:
+	UI::Box box_;
+
+	void create_fastplace_dropdown(Widelands::Game* game_for_fastplace, const int height) {
+		fastplace = get_fastplace_shortcut(code_);
+		UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(
+		   &box_, "choose_fastplace", 0, 0, 100, 8, height, "", UI::DropdownType::kTextual,
+		   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+		dd->add(_("(unused)"), "", nullptr, fastplace.empty());
+
+		std::map<std::pair<Widelands::DescriptionIndex, std::string>, const Widelands::BuildingDescr*>
+		   all_building_sorted;
+		for (Widelands::DescriptionIndex di = 0;
+		     di < game_for_fastplace->descriptions().nr_buildings(); ++di) {
+			const Widelands::BuildingDescr* bld =
+			   game_for_fastplace->descriptions().get_building_descr(di);
+			if (bld->is_buildable()) {
+				all_building_sorted[std::make_pair(
+				   game_for_fastplace->descriptions().safe_tribe_index(bld->get_owning_tribe()),
+				   bld->descname())] = bld;
+			}
+		}
+		for (const auto& pair : all_building_sorted) {
+			dd->add((boost::format(
+			            /** TRANSLATORS: [Tribe Name] Building Name */
+			            _("[%1$s] %2$s")) %
+			         game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname() %
+			         pair.second->descname())
+			           .str(),
+			        pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
+		}
+
+		if (!dd->has_selection()) {
+			// The assigned building is defined by a currently disabled add-on.
+			dd->add(fastplace, fastplace, nullptr, true);
+		}
+
+		dd->selected.connect([this, dd]() { fastplace = dd->get_selected(); });
+		box_.add(dd, UI::Box::Resizing::kFullSize);
+	}
 
 	bool handle_key(const bool down, const SDL_Keysym code) override {
 		if (!down) {
@@ -105,12 +160,17 @@ struct ShortcutChooser : public UI::Window {
 };
 
 KeyboardOptions::KeyboardOptions(Panel& parent)
-   : UI::Window(parent.get_parent(),
+   : UI::Window(&parent.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "keyboard_options",
                 0,
                 0,
-                parent.get_w() * 3 / 4,
+                // This window's height is set relative to the parent window (i.e. the
+                // Options dialog) because setting it relative to the whole game window
+                // would make the window look too big and cluttered. The width has to
+                // be set relative to the game window though, because we need lots of
+                // horizontal space for the fastplace tab's button labels.
+                parent.get_topmost_forefather().get_w() * 3 / 4,
                 parent.get_h() * 3 / 4,
                 _("Edit Keyboard Shortcuts")),
      buttons_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
@@ -134,8 +194,36 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
          _("OK")) {
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
-	auto generate_title = [](const KeyboardShortcut key) {
-		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key, false))
+	auto generate_title = [this](const KeyboardShortcut key) {
+		const std::string shortcut = shortcut_string_for(key, false);
+		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
+		    game_.get() == nullptr) {
+			return (boost::format(
+			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
+			              "Action: Key" */
+			           _("%1$s: %2$s")) %
+			        to_string(key) % shortcut)
+			   .str();
+		}
+
+		const std::string& fp = get_fastplace_shortcut(key);
+		if (shortcut.empty() || fp.empty()) {
+			return std::string(_("(unused)"));
+		}
+
+		const Widelands::BuildingDescr* bld =
+		   game_->descriptions().get_building_descr(game_->descriptions().building_index(fp));
+		if (bld == nullptr) {
+			return (boost::format(_("%1$s: %2$s")) % fp % shortcut).str();
+		}
+
+		return (boost::format(
+		           /** TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut */
+		           _("[%1$s] %2$s: %3$s")) %
+		        game_->descriptions()
+		           .get_tribe_descr(game_->descriptions().safe_tribe_index(bld->get_owning_tribe()))
+		           ->descname() %
+		        bld->descname() % shortcut)
 		   .str();
 	};
 
@@ -147,11 +235,17 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
-			ShortcutChooser c(*get_parent(), key);
-			if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
+			                        key <= KeyboardShortcut::kFastplace__End);
+			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
+			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
 				if (set_shortcut(key, c.key, &conflict)) {
+					if (fastplace) {
+						set_fastplace_shortcut(key, c.fastplace);
+					}
 					b->set_title(generate_title(key));
+					break;
 				} else {
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
@@ -187,8 +281,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	};
 	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End);
 	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
-	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
 	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
+	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
+
+	const size_t fastplace_tab_index = tabs_.tabs().size();
+	create_tab(
+	   _("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End);
 
 	buttons_box_.add_inf_space();
 	buttons_box_.add(&reset_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -196,6 +294,18 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	buttons_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	buttons_box_.add_inf_space();
 
+	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title, fastplace_tab_index]() {
+		if (tabs_.active() == fastplace_tab_index && game_.get() == nullptr) {
+			game_.reset(new Widelands::Game());
+			game_->create_loader_ui({}, false, "", "", this);
+			game_->load_all_tribes();
+			game_->postload_addons();
+			for (auto& pair : all_keyboard_buttons) {
+				pair.second->set_title(generate_title(pair.first));
+			}
+			game_->remove_loader_ui();
+		}
+	});
 	reset_.sigclicked.connect([all_keyboard_buttons, generate_title]() {
 		init_shortcuts(true);
 		for (auto& pair : all_keyboard_buttons) {
