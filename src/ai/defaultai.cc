@@ -1830,7 +1830,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	// function seems to return duplicates, so we will use serial numbers to filter them out
 	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
-	MutexLock m(MutexLock::ID::kObjects);
 	map.find_immovables(game(),
 	                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
 	                    &immovables);
@@ -1840,6 +1839,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 
 	for (const Widelands::ImmovableFound& imm_found : immovables) {
 		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
+		const Widelands::FCoords imm_fcoords = map.get_fcoords(imm_found.coords);
 
 		if (!unique_serials.insert(base_immovable.serial()).second) {
 			continue;  // serial was not inserted in the set, so this is duplicate
@@ -1884,10 +1884,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 			// if we are here, the immovable is ours
 			assert(building->owner().player_number() == pn);
 
-			// connected to a warehouse
-			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
-			// ferries
-			bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty();
 
 			if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
 				const Widelands::BuildingDescr& target_descr = constructionsite->building();
@@ -1904,8 +1900,12 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 						++field.military_in_constr_nearby;
 					}
 				}
-			} else if (!connected) {
-				// we don't care about unconnected constructionsites
+			// not connected to a warehouse
+			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+			// ferries
+			// but we don't care about unconnected constructionsites
+			} else if (imm_fcoords.field->get_immovable() &&
+			           building->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				any_unconnected_imm = true;
 			}
 
