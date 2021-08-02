@@ -1775,7 +1775,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 /// Updates military aspects of one buildable field
 void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
-	
+
 	const Widelands::Map& map = game().map();
 	const Time& gametime = game().get_gametime();
 	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
@@ -1804,7 +1804,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	field.enemy_owned_land_nearby = map.find_fields(
 	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
 	   find_enemy_owned_walkable);
-	   
+
 	// resetting some values
 	field.enemy_nearby =
 	   field.enemy_owned_land_nearby > std::abs(management_data.get_military_number_at(41) / 4);
@@ -1823,7 +1823,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	field.military_unstationed = 0;
 	field.own_military_presence = 0;
 	field.own_non_military_nearby = 0;
-	
+
 	std::vector<Widelands::ImmovableFound> immovables;
 	immovables.reserve(50);
 	immovables.clear();
@@ -1884,7 +1884,6 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 			// if we are here, the immovable is ours
 			assert(building->owner().player_number() == pn);
 
-
 			if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
 				const Widelands::BuildingDescr& target_descr = constructionsite->building();
 
@@ -1900,10 +1899,9 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 						++field.military_in_constr_nearby;
 					}
 				}
-			// not connected to a warehouse
-			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
-			// ferries
-			// but we don't care about unconnected constructionsites
+				// not connected to a warehouse
+				// TODO(Nordfriese): Someone should update the code since the big economy splitting for
+				// the ferries but we don't care about unconnected constructionsites
 			} else if (imm_fcoords.field->get_immovable() &&
 			           building->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				any_unconnected_imm = true;
