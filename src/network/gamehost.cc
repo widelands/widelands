@@ -447,9 +447,8 @@ void GameHost::clear_computer_players() {
 }
 
 void GameHost::init_computer_player(Widelands::PlayerNumber p) {
-	AI::ComputerPlayer* ai =
-	   AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
-	      ->instantiate(*d->game, p);
+	AI::ComputerPlayer* ai = AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
+	                            ->instantiate(*d->game, p);
 	d->computerplayers.push_back(ai);
 	ai->start_thread();
 }

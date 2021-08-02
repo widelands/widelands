@@ -25,7 +25,8 @@
 
 namespace AI {
 
-constexpr uint32_t kMinAIThinkDelay = 80;  ///< Minimum delay between two think() calls by the same AI instance in milliseconds realtime.
+constexpr uint32_t kMinAIThinkDelay = 80;  ///< Minimum delay between two think() calls by the same
+                                           ///< AI instance in milliseconds realtime.
 
 ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
    : game_(g), player_number_(pid), thread_running_(false) {
