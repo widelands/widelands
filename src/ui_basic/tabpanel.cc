@@ -156,9 +156,17 @@ std::vector<Recti> TabPanel::focus_overlay_rects() {
 }
 
 bool TabPanel::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	if (y != 0) {
-		activate(std::max<int>(0, std::min<int>(active() - y, tabs_.size() - 1)));
-		return true;
+	Vector2i mousepos = get_mouse_position();
+	size_t id = find_tab(mousepos.x, mousepos.y);
+	if ((id != kNotFound) && !SDL_GetModState()) {
+		if (y != 0) {
+			activate(std::max<int>(0, std::min<int>(active() - y, tabs_.size() - 1)));
+			return true;
+		}
+		if (x != 0) {
+			activate(std::max<int>(0, std::min<int>(active() - x, tabs_.size() - 1)));
+			return true;
+		}
 	}
 	return Panel::handle_mousewheel(which, x, y);
 }
