@@ -5647,12 +5647,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[9] = (persistent_data->trees_around_cutters < 200) * 1;
 			inputs[10] = (persistent_data->trees_around_cutters < 300) * 1;
 			inputs[11] = (persistent_data->trees_around_cutters < 400) * 1;
-			inputs[12] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
-			inputs[13] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
+			inputs[12] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[13] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
 			inputs[14] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[15] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[16] = (get_stocklevel(bo, gametime) < 2) * 1;
-			if (gametime > Time(15 * 60)) {
+			if (gametime > Time(15 * 60 * 1000)) {
 				inputs[17] = (get_stocklevel(bo, gametime) > 30) * -1;
 				inputs[18] = (get_stocklevel(bo, gametime) > 20) * -1;
 				inputs[19] = (get_stocklevel(bo, gametime) > 10) * -1;
@@ -5663,13 +5663,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[22] = (basic_economy_established) ? -1 : 1;
 			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
 			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
-			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) * -1;
-			if (gametime > Time(90 * 60)) {
-				inputs[26] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
+			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) ? 1 : 0;
+			if (gametime > Time(90 * 60 * 1000)) {
+				inputs[26] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
 				inputs[27] = (persistent_data->trees_around_cutters < 20) * 1;
 			}
-			if (gametime > Time(45 * 60)) {
-				inputs[28] = (wood_policy_ == WoodPolicy::kAllowRangers) * 1;
+			if (gametime > Time(45 * 60 * 1000)) {
+				inputs[28] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
 				inputs[29] = (persistent_data->trees_around_cutters < 20) * 1;
 				inputs[30] = (get_stocklevel(bo, gametime) > 30) * -1;
 			}
@@ -5714,10 +5714,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[53] = (bo.last_building_built.is_valid() &&
 			              bo.last_building_built + Duration(6 * 60 * 100) > gametime) *
 			             -2;
-			inputs[54] = (Time(5 * 60 * 100) > gametime) * -2;
-			inputs[55] = (Time(6 * 60 * 100) > gametime) * -2;
-			inputs[56] = (Time(8 * 60 * 100) > gametime) * -2;
-			inputs[57] = (Time(10 * 60 * 100) > gametime) * -2;
+			inputs[54] = (Time(5 * 60 * 1000) > gametime) * -2;
+			inputs[55] = (Time(6 * 60 * 1000) > gametime) * -2;
+			inputs[56] = (Time(8 * 60 * 1000) > gametime) * -2;
+			inputs[57] = (Time(10 * 60 * 1000) > gametime) * -2;
 			inputs[58] = (spots_ < kSpotsEnough) ? -2 : 0;
 			inputs[59] = (spots_ < kSpotsTooLittle) ? -2 : 0;
 			inputs[60] = (spots_ < kSpotsTooLittle) ? -2 : 0;
