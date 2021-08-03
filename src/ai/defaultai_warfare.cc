@@ -315,8 +315,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				observer.second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
 
 				int16_t inputs[4 * kFNeuronBitSize] = {0};
-				// Resetting values as the variable is static
-				std::fill(std::begin(inputs), std::end(inputs), 0);
+
 				inputs[0] =
 				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(114)) / 10;
@@ -1123,8 +1122,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
 	int32_t inputs[4 * kFNeuronBitSize] = {0};
-	// Resetting values as the variable is static
-	std::fill(std::begin(inputs), std::end(inputs), 0);
+
 	inputs[0] = (msites_total < 1) ? 1 : 0;
 	inputs[1] = (msites_total < 2) ? 1 : 0;
 	inputs[2] = (msites_total < 3) ? 1 : 0;

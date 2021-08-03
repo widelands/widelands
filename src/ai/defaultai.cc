@@ -1533,7 +1533,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// are we going to count resources now?
 	bool resource_count_now = false;
-	resource_count_now = false;
 	// Testing in first 10 seconds or if last testing was more then 60 sec ago
 	if (field.last_resources_check_time < Time(10000) ||
 	    field.last_resources_check_time > gametime + Duration(60 * 1000)) {
@@ -2166,7 +2165,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 	// is new site allowed at all here?
 	field.defense_msite_allowed = false;
 	int16_t multiplicator = 10;
-	multiplicator = 10;
+
 	if (soldier_status_ == SoldiersStatus::kBadShortage) {
 		multiplicator = 4;
 	} else if (soldier_status_ == SoldiersStatus::kShortage) {
@@ -2344,9 +2343,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	// Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
-	// mine = false;
 	uint32_t consumers_nearby_count = 0;
-	// consumers_nearby_count = 0;
 
 	const Widelands::Map& map = game().map();
 
@@ -2423,8 +2420,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	// Genetic algorithm is used here
 	bool inputs[2 * kFNeuronBitSize] = {false};
-	// Resetting values as the variable is static
-	// std::fill(std::begin(inputs), std::end(inputs), false);
+
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] =
@@ -2518,9 +2514,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	inputs[58] = (!mine_fields_stat.has_critical_ore_fields());
 
 	int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
-	// needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
 	int16_t increase_score_limit_score = 0;
-	// increase_score_limit_score = 0;
 
 	for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 		if (management_data.f_neuron_pool[51].get_position(i)) {
@@ -2559,9 +2553,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	   (increase_score_limit_score > management_data.get_military_number_at(45) / 5);
 
 	uint16_t concurent_ms_in_constr_no_enemy = 1;
-	concurent_ms_in_constr_no_enemy = 1;
 	uint16_t concurent_ms_in_constr_enemy_nearby = 2;
-	concurent_ms_in_constr_enemy_nearby = 2;
 
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
@@ -5275,7 +5267,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	bo.primary_priority = 0;
 
 	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
-	site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
+
 	if (gametime > Time(2 * 60 * 1000) && gametime < Time(120 * 60 * 1000) &&
 	    !basic_economy_established) {
 		if (persistent_data->remaining_basic_buildings.count(bo.id) &&
@@ -5538,8 +5530,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			int16_t inputs[kFNeuronBitSize] = {0};
-			// Resetting values as the variable is static
-			std::fill(std::begin(inputs), std::end(inputs), 0);
+
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
 			inputs[1] = (bo.max_needed_preciousness > 0) ? 2 : 0;
 			inputs[2] = (bo.max_needed_preciousness == 0) ? -3 : 0;
@@ -5636,10 +5627,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// genetic algorithm to decide whether new rangers are needed
 			int16_t tmp_target = 2;
-			tmp_target = 2;
 			int16_t inputs[2 * kFNeuronBitSize] = {0};
-			// Resetting values as the variable is static
-			std::fill(std::begin(inputs), std::end(inputs), 0);
 
 			inputs[0] = (persistent_data->trees_around_cutters < 10) * 2;
 			inputs[1] = (persistent_data->trees_around_cutters < 20) * 2;
@@ -5883,8 +5871,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			int16_t inputs[kFNeuronBitSize] = {0};
-			// Resetting values as the variable is static
-			std::fill(std::begin(inputs), std::end(inputs), 0);
+
 			inputs[0] = (gametime < Time(15 * 60 * 1000)) ? -2 : 0;
 			inputs[1] = (gametime < Time(30 * 60 * 1000)) ? -2 : 0;
 			inputs[2] = (gametime < Time(45 * 60 * 1000)) ? -2 : 0;
@@ -5948,8 +5935,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.max_needed_preciousness > 0) {
 
 			int16_t inputs[4 * kFNeuronBitSize] = {0};
-			// Resetting values as the variable is static
-			std::fill(std::begin(inputs), std::end(inputs), 0);
+
 			inputs[0] = (bo.total_count() <= 1) ?
                         std::abs(management_data.get_military_number_at(110)) / 10 :
                         0;
