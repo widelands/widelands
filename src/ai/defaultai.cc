@@ -2344,9 +2344,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	// Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
-	mine = false;
+	// mine = false;
 	uint32_t consumers_nearby_count = 0;
-	consumers_nearby_count = 0;
+	// consumers_nearby_count = 0;
 
 	const Widelands::Map& map = game().map();
 
@@ -2424,7 +2424,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	// Genetic algorithm is used here
 	bool inputs[2 * kFNeuronBitSize] = {false};
 	// Resetting values as the variable is static
-	std::fill(std::begin(inputs), std::end(inputs), false);
+	// std::fill(std::begin(inputs), std::end(inputs), false);
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] =
@@ -2518,9 +2518,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	inputs[58] = (!mine_fields_stat.has_critical_ore_fields());
 
 	int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
-	needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
+	// needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
 	int16_t increase_score_limit_score = 0;
-	increase_score_limit_score = 0;
+	// increase_score_limit_score = 0;
 
 	for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 		if (management_data.f_neuron_pool[51].get_position(i)) {
