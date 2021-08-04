@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-06 22:46+0000\n"
-"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
+"POT-Creation-Date: 2021-08-01 02:42+0000\n"
+"PO-Revision-Date: 2021-08-01 02:43+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -412,23 +412,29 @@ msgstr "Activeer uitgebreide debug berichten"
 msgid "Others:"
 msgstr "Overige:"
 
-#: ../../src/wlapplication_messages.cc:211
-msgid "Only print version and exit"
-msgstr "Toon alleen de versie en sluit af"
-
 #: ../../src/wlapplication_messages.cc:212
-msgid "Show this help"
-msgstr "Toont deze hulp"
-
-#: ../../src/wlapplication_messages.cc:213
-msgid "Show this help with all available config options"
-msgstr "Laat deze helppagina zien met alle beschikbare configuratie mogelijkheden"
-
-#: ../../src/wlapplication_messages.cc:214
-msgid "<save.wgf>/<replay.wrpl>"
+msgid ""
+"Print all strings as they are translated. This helps with tracing down bugs "
+"with internationalization."
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:215
+msgid "Only print version and exit"
+msgstr "Toon alleen de versie en sluit af"
+
+#: ../../src/wlapplication_messages.cc:216
+msgid "Show this help"
+msgstr "Toont deze hulp"
+
+#: ../../src/wlapplication_messages.cc:217
+msgid "Show this help with all available config options"
+msgstr "Laat deze helppagina zien met alle beschikbare configuratie mogelijkheden"
+
+#: ../../src/wlapplication_messages.cc:218
+msgid "<save.wgf>/<replay.wrpl>"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:219
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -436,12 +442,12 @@ msgid ""
 msgstr "Laadt het opgegeven spel of de replay direct. Handig voor .wgf/.wrpl bestandsassociatie. Dit werkt niet met andere opties. Zie ook --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:244
+#: ../../src/wlapplication_messages.cc:248
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Dit is Widelands Versie %s"
 
-#: ../../src/wlapplication_messages.cc:305
+#: ../../src/wlapplication_messages.cc:309
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

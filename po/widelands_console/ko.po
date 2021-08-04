@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-18 14:14+0000\n"
+"POT-Creation-Date: 2021-08-01 02:42+0000\n"
+"PO-Revision-Date: 2021-08-01 10:26+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -413,23 +413,29 @@ msgstr "디버그 메시지를 사용 설정"
 msgid "Others:"
 msgstr "기타:"
 
-#: ../../src/wlapplication_messages.cc:211
+#: ../../src/wlapplication_messages.cc:212
+msgid ""
+"Print all strings as they are translated. This helps with tracing down bugs "
+"with internationalization."
+msgstr "번역된 모든 문자열을 인쇄합니다. 이것은 국제화(번역)로 버그를 추적하는 데 도움이 됩니다."
+
+#: ../../src/wlapplication_messages.cc:215
 msgid "Only print version and exit"
 msgstr "버전만 인쇄하고 끝냅니다"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:216
 msgid "Show this help"
 msgstr "도움말을 표시"
 
-#: ../../src/wlapplication_messages.cc:213
+#: ../../src/wlapplication_messages.cc:217
 msgid "Show this help with all available config options"
 msgstr "사용 가능한 모든 구성 선택사항에 대해 이 도움말을 표시"
 
-#: ../../src/wlapplication_messages.cc:214
+#: ../../src/wlapplication_messages.cc:218
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:215
+#: ../../src/wlapplication_messages.cc:219
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -437,12 +443,12 @@ msgid ""
 msgstr "주어진 저장 게임 또는 재생을 직접 불러오기 합니다. .wgf/.wrpl 파일 확장자 연결에 유용합니다. 다른 선택사항과 함께 작동하지 않습니다. --loadgame/--replay도 참조하십시오"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:244
+#: ../../src/wlapplication_messages.cc:248
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "이것은 와이드랜드 버전 %s 입니다"
 
-#: ../../src/wlapplication_messages.cc:305
+#: ../../src/wlapplication_messages.cc:309
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

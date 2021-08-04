@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-16 08:09+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-08-01 02:42+0000\n"
+"PO-Revision-Date: 2021-08-01 02:43+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -412,23 +412,29 @@ msgstr "Cuir teachdaireachdan dì-bhugachaidh briathrach an comas"
 msgid "Others:"
 msgstr "Roghainnean eile:"
 
-#: ../../src/wlapplication_messages.cc:211
+#: ../../src/wlapplication_messages.cc:212
+msgid ""
+"Print all strings as they are translated. This helps with tracing down bugs "
+"with internationalization."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:215
 msgid "Only print version and exit"
 msgstr "Seall an tionndadh agus fàg sa bhad"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:216
 msgid "Show this help"
 msgstr "Seall a’ chobhair seo"
 
-#: ../../src/wlapplication_messages.cc:213
+#: ../../src/wlapplication_messages.cc:217
 msgid "Show this help with all available config options"
 msgstr "Seall a’ chobhair seo leis a h-uile roghainn rèiteachaidh"
 
-#: ../../src/wlapplication_messages.cc:214
+#: ../../src/wlapplication_messages.cc:218
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<sàbhaladh.wgf>/<ath-chluiche.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:215
+#: ../../src/wlapplication_messages.cc:219
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -436,12 +442,12 @@ msgid ""
 msgstr "Luchdaidh seo an seama air a shàbhaladh no an ath-chluiche a shònraicheas tu sa bhad. Tha seo feumail airson co-cheangal le leudachan faidhle .wgf/.wrpl. Chan obraich seo le roghainnean eile. Faic --loadgame/--replay cuideachd"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:244
+#: ../../src/wlapplication_messages.cc:248
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Seo Widelands tionndadh %s"
 
-#: ../../src/wlapplication_messages.cc:305
+#: ../../src/wlapplication_messages.cc:309
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
