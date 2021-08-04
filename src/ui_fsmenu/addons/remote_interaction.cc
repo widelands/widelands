@@ -187,23 +187,23 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_tiny", "<font size=8>", "</font>",
 	                              /** TRANSLATORS: Short for Tiny text markup */
-	                              _("1"), _("Tiny")));
+	                              pgettext("markup", "1"), _("Tiny")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_small", "<font size=11>", "</font>",
 	                              /** TRANSLATORS: Short for Small text markup */
-	                              _("2"), _("Small")));
+	                              pgettext("markup", "2"), _("Small")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_normal", "<font size=14>", "</font>",
 	                              /** TRANSLATORS: Short for Medium text markup */
-	                              _("3"), _("Medium")));
+	                              pgettext("markup", "3"), _("Medium")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_large", "<font size=18>", "</font>",
 	                              /** TRANSLATORS: Short for Large text markup */
-	                              _("4"), _("Large")));
+	                              pgettext("markup", "4"), _("Large")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_huge", "<font size=24>", "</font>",
 	                              /** TRANSLATORS: Short for Huge text markup */
-	                              _("5"), _("Huge")));
+	                              pgettext("markup", "5"), _("Huge")));
 	markup_box_.add_space(kRowButtonSpacing);
 
 	main_box_.add(&markup_box_, UI::Box::Resizing::kAlign, UI::Align::kRight);
