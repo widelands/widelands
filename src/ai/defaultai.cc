@@ -1037,7 +1037,8 @@ void DefaultAI::late_initialization() {
 
 	// atlanteans they consider water as a resource
 	// (together with mines, rocks and wood)
-	if (tribe_->name() == "atlanteans") {
+	// TODO(hessenfarmer): this should be moved from hardcoded to configurable / detectable 
+	if (tribe_->name() == "atlanteans" || tribe_->name() == "amazons") {
 		resource_necessity_water_needed_ = true;
 	}
 
@@ -2883,7 +2884,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				uint8_t number_of_supporters_nearby = 0;
 				if (bo.requires_supporters) {
 					if (bf->supporters_nearby.count(bo.name) == 0) {
-						continue;
+						prio -= 100 + std::abs(management_data.get_military_number_at(18)) * 3;
 					}
 					number_of_supporters_nearby += bf->supporters_nearby.at(bo.desc->name());
 				}
