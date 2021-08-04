@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-05 05:29+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2021-08-01 02:42+0000\n"
+"PO-Revision-Date: 2021-08-01 02:43+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -417,23 +417,29 @@ msgstr "Включить подробные отладочные сообщен�
 msgid "Others:"
 msgstr "Прочее:"
 
-#: ../../src/wlapplication_messages.cc:211
+#: ../../src/wlapplication_messages.cc:212
+msgid ""
+"Print all strings as they are translated. This helps with tracing down bugs "
+"with internationalization."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:215
 msgid "Only print version and exit"
 msgstr "Только лишь вывести версию и выйти"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:216
 msgid "Show this help"
 msgstr "Показать справку"
 
-#: ../../src/wlapplication_messages.cc:213
+#: ../../src/wlapplication_messages.cc:217
 msgid "Show this help with all available config options"
 msgstr "Показать справку с доступными настройками"
 
-#: ../../src/wlapplication_messages.cc:214
+#: ../../src/wlapplication_messages.cc:218
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:215
+#: ../../src/wlapplication_messages.cc:219
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -441,12 +447,12 @@ msgid ""
 msgstr "Загрузить сохранение или повтор. Соответственно,  файлы с расширением .wgf или .wrpl. Не работает с другими опциями. См. также --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:244
+#: ../../src/wlapplication_messages.cc:248
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Это Widelands версии %s"
 
-#: ../../src/wlapplication_messages.cc:305
+#: ../../src/wlapplication_messages.cc:309
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

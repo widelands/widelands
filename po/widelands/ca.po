@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"POT-Creation-Date: 2021-08-01 02:42+0000\n"
 "PO-Revision-Date: 2021-07-13 07:47+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:380
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:391
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s i %2$s"
@@ -31,7 +31,7 @@ msgstr "%1$s i %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:384
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:395
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s o %2$s"
@@ -43,7 +43,7 @@ msgstr "%1$s o %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:388 ../../src/base/i18n.cc:397
+#: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
 #: ../../src/logic/addons.cc:172
 #, c-format
 msgid "%1$s, %2$s"
@@ -52,7 +52,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:392
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:403
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s i %2$s"
@@ -152,7 +152,7 @@ msgstr "IA molt dèbil"
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:407
+#: ../../src/base/i18n.cc:418
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -536,7 +536,7 @@ msgstr "Mostra recursos"
 msgid "Unsupported Format"
 msgstr "Format no compatible"
 
-#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:744
+#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:771
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -556,11 +556,11 @@ msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 #: ../../src/ui_fsmenu/addons.cc:1191 ../../src/ui_fsmenu/addons.cc:1247
 #: ../../src/ui_fsmenu/addons.cc:1374 ../../src/ui_fsmenu/addons.cc:2100
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1578
+#: ../../src/wlapplication.cc:1608
 msgid "Error"
 msgstr "S'ha produït un error."
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1580
+#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1610
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -2499,7 +2499,7 @@ msgid "Checking map"
 msgstr "S'està comprovant el mapa."
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
-#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:721
 msgid "Preparing game…"
 msgstr "S'està preparant la partida…"
 
@@ -4471,7 +4471,7 @@ msgstr "Per tal d'emprar un compte registrat, necessiteu un compte del lloc web 
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:623
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:650
 msgid "nobody"
 msgstr "sense àlies"
 
@@ -5244,59 +5244,59 @@ msgid "Unmark All"
 msgstr "Desmarca-ho tot"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:748 ../../src/wlapplication.cc:754
-#: ../../src/wlapplication.cc:759 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:775 ../../src/wlapplication.cc:781
+#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "Missatge d'error:"
 
-#: ../../src/wlapplication.cc:749 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:776 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "Error en les dades de la partida"
 
-#: ../../src/wlapplication.cc:752
+#: ../../src/wlapplication.cc:779
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "El Widelands no ha pogut trobar el fitxer «%s»."
 
-#: ../../src/wlapplication.cc:755
+#: ../../src/wlapplication.cc:782
 msgid "File system error"
 msgstr "S'ha produït un error en el sistema de fitxers."
 
-#: ../../src/wlapplication.cc:1249
+#: ../../src/wlapplication.cc:1275
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Valor buit del paràmetre de la línia d'ordre: %s"
 
-#: ../../src/wlapplication.cc:1255
+#: ../../src/wlapplication.cc:1281
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "No es pot combinar %s amb altres accions."
 
-#: ../../src/wlapplication.cc:1405
+#: ../../src/wlapplication.cc:1435
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paràmetre de línia d'ordre desconegut: %s\nPotser falta un signe d'igual? "
 
-#: ../../src/wlapplication.cc:1527
+#: ../../src/wlapplication.cc:1557
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized i --fullscreen no es poden combinar."
 
-#: ../../src/wlapplication.cc:1545
+#: ../../src/wlapplication.cc:1575
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paràmetre de la línia d'ordre desconegut: %s"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1624
 msgid "Game ended unexpectedly"
 msgstr "La partida ha acabat de manera inesperada."
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1624
 msgid "Unexpected error during the game"
 msgstr "S'ha produït un error inesperat durant la partida."
 
-#: ../../src/wlapplication.cc:1597
+#: ../../src/wlapplication.cc:1627
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5310,7 +5310,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "S'ha produït un error durant la partida amb el següent missatge d'error:\n\n%1$s\n\nSi us plau, informeu d'aquest problema per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt al Windows). Esteu usant la versió %2$s (%3$s).\n\nSi us plau, afegiu aquestes dades a l'informe.\n\nVoleu que el Widelands intenti crear una desada d'emergència? Sovint – encara que no sempre – és possible carregar-la i continuar jugant."
 
-#: ../../src/wlapplication.cc:1607
+#: ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5320,11 +5320,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "La partida ha acabat inesperadament pel següent motiu:\n\n%s\n\nVoleu que el Widelands provi de crear una desada d'emergència de la partida? A vegades –tot i que no sempre– és possible carregar-la i continuar jugant."
 
-#: ../../src/wlapplication.cc:1634
+#: ../../src/wlapplication.cc:1664
 msgid "Emergency save failed"
 msgstr "La desada d'emergència ha fallat."
 
-#: ../../src/wlapplication.cc:1635
+#: ../../src/wlapplication.cc:1665
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7001,8 +7001,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Navegació"

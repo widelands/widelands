@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-11 23:41+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
+"POT-Creation-Date: 2021-08-01 02:42+0000\n"
+"PO-Revision-Date: 2021-08-01 02:43+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -420,23 +420,29 @@ msgstr "Bővebb hibakeresési üzenetek"
 msgid "Others:"
 msgstr "Egyéb:"
 
-#: ../../src/wlapplication_messages.cc:211
+#: ../../src/wlapplication_messages.cc:212
+msgid ""
+"Print all strings as they are translated. This helps with tracing down bugs "
+"with internationalization."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:215
 msgid "Only print version and exit"
 msgstr "Csak a verzió kiírása"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:216
 msgid "Show this help"
 msgstr "Ennek a súgónak a megjelenítése"
 
-#: ../../src/wlapplication_messages.cc:213
+#: ../../src/wlapplication_messages.cc:217
 msgid "Show this help with all available config options"
 msgstr "Súgó megjelenítése minden elérhető beállítással"
 
-#: ../../src/wlapplication_messages.cc:214
+#: ../../src/wlapplication_messages.cc:218
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<mentés.wgf>/<visszajátszás.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:215
+#: ../../src/wlapplication_messages.cc:219
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -444,12 +450,12 @@ msgid ""
 msgstr "A megadott mentés vagy visszajátszás közvetlen betöltése. A .wgf/.wrpl fájltípus hozzárendeléséhez használható. Más beállításokkal együtt nem működik. Lásd még: --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:244
+#: ../../src/wlapplication_messages.cc:248
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Ez a Widelans %s verziója"
 
-#: ../../src/wlapplication_messages.cc:305
+#: ../../src/wlapplication_messages.cc:309
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
