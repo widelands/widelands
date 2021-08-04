@@ -153,25 +153,25 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 	};
 	markup_box_.add(markup_button("markup_bold", "<font bold=true>", "</font>",
 	                              /** TRANSLATORS: Short for Bold text markup */
-	                              _("B"), _("Bold")));
+	                              pgettext("markup", "B"), _("Bold")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_italic", "<font italic=true>", "</font>",
 	                              /** TRANSLATORS: Short for Italic text markup */
-	                              _("I"), _("Italic")));
+	                              pgettext("markup", "I"), _("Italic")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_line", "<font underline=true>", "</font>",
 	                              /** TRANSLATORS: Short for Underline text markup */
-	                              _("_"), _("Underline")));
+	                              pgettext("markup", "_"), _("Underline")));
 	markup_box_.add_space(kRowButtonSpacing);
 	markup_box_.add(markup_button("markup_shadow", "<font shadow=true>", "</font>",
 	                              /** TRANSLATORS: Short for Shadow text markup */
-	                              _("S"), _("Shadow")));
+	                              pgettext("markup", "S"), _("Shadow")));
 	markup_box_.add_space(kRowButtonSpacing);
 	{
 		UI::Button* b = new UI::Button(&markup_box_, "markup_color", 0, 0, kRowButtonSize,
 		                               kRowButtonSize, UI::ButtonStyle::kFsMenuMenu,
 		                               /** TRANSLATORS: Short for Color text markup */
-		                               _("C"), _("Color…"));
+		                               pgettext("markup", "C"), _("Color…"));
 		b->sigclicked.connect([this]() {
 			UI::ColorChooser c(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, RGBColor(0xffffff), nullptr);
