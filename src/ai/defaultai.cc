@@ -1037,7 +1037,7 @@ void DefaultAI::late_initialization() {
 
 	// atlanteans they consider water as a resource
 	// (together with mines, rocks and wood)
-	// TODO(hessenfarmer): this should be moved from hardcoded to configurable / detectable 
+	// TODO(hessenfarmer): this should be moved from hardcoded to configurable / detectable
 	if (tribe_->name() == "atlanteans" || tribe_->name() == "amazons") {
 		resource_necessity_water_needed_ = true;
 	}
