@@ -2885,8 +2885,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				if (bo.requires_supporters) {
 					if (bf->supporters_nearby.count(bo.name) == 0) {
 						prio -= 100 + std::abs(management_data.get_military_number_at(18)) * 3;
+					} else {
+						number_of_supporters_nearby += bf->supporters_nearby.at(bo.desc->name());
 					}
-					number_of_supporters_nearby += bf->supporters_nearby.at(bo.desc->name());
 				}
 
 				// Priorities will be adjusted according to nearby buildings needing support
