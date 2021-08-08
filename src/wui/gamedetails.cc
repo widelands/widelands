@@ -226,17 +226,21 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_icon(minimap->second.get());
 			minimap_icon_.set_visible(true);
 		} else {
-			egbase_.cleanup_for_load();
-			std::string filename(last_game_);
-			filename.append(kSavegameExtension);
-			std::unique_ptr<Widelands::MapLoader> ml(
-			   egbase_.mutable_map()->get_correct_loader(filename));
-			if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
-				minimap_cache_[last_game_] =
-				   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-				                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
-				minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
-				minimap_icon_.set_visible(true);
+			try {
+				egbase_.cleanup_for_load();
+				std::string filename(last_game_);
+				filename.append(kSavegameExtension);
+				std::unique_ptr<Widelands::MapLoader> ml(
+				   egbase_.mutable_map()->get_correct_loader(filename));
+				if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
+					minimap_cache_[last_game_] =
+					   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+						            MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
+					minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
+					minimap_icon_.set_visible(true);
+				}
+			} catch (const std::exception& e) {
+				log_err("Failed to load the minimap image: %s", e.what());
 			}
 		}
 	}
