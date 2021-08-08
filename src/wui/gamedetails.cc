@@ -235,7 +235,7 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 				if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
 					minimap_cache_[last_game_] =
 					   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-						            MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
+					                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
 					minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
 					minimap_icon_.set_visible(true);
 				}
