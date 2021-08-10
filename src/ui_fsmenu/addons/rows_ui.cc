@@ -86,7 +86,7 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
-			return ctrl->rebuild();
+			return ctrl->rebuild(true);
 		}
 	}
 	NEVER_HERE();
@@ -213,9 +213,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                                      AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
-					ctrl->rebuild();
 				}
-				return ctrl->update_dependency_errors();
+				return ctrl->rebuild(true);
 			}
 		}
 		NEVER_HERE();
@@ -418,7 +417,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			}
 		}
 		ctrl->install_or_upgrade(info_, false);
-		ctrl->rebuild();
+		ctrl->rebuild(true);
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
 		if (!info->verified || !(SDL_GetModState() & KMOD_CTRL)) {
@@ -445,7 +444,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			}
 		}
 		ctrl->install_or_upgrade(info, !full_upgrade_possible_);
-		ctrl->rebuild();
+		ctrl->rebuild(true);
 	});
 	if (info->internal_name.empty()) {
 		install_.set_enabled(false);

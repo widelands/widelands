@@ -53,7 +53,7 @@ public:
 	AddOnsCtrl(MainMenu&, UI::UniqueWindow::Registry&);
 	~AddOnsCtrl() override;
 
-	void rebuild();
+	void rebuild(bool need_to_update_dependency_errors);
 	void update_dependency_errors();
 
 	void install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool only_translations);

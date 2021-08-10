@@ -499,13 +499,13 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	filter_reset_.set_enabled(false);
 	filter_name_.changed.connect([this]() {
 		filter_reset_.set_enabled(true);
-		rebuild();
+		rebuild(false);
 	});
 	filter_verified_.changed.connect([this]() {
 		filter_reset_.set_enabled(true);
-		rebuild();
+		rebuild(false);
 	});
-	sort_order_.selected.connect([this]() { rebuild(); });
+	sort_order_.selected.connect([this]() { rebuild(false); });
 
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
@@ -527,7 +527,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		for (auto& pair : filter_category_) {
 			pair.second->set_state(true);
 		}
-		rebuild();
+		rebuild(false);
 		filter_reset_.set_enabled(false);
 	});
 	upgrade_all_.sigclicked.connect([this]() {
@@ -571,7 +571,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		for (const auto& pair : upgrades) {
 			install_or_upgrade(pair.first, !pair.second);
 		}
-		rebuild();
+		rebuild(true);
 	});
 
 	move_up_.sigclicked.connect([this]() {
@@ -584,7 +584,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		it = AddOns::g_addons.erase(it);
 		--it;
 		AddOns::g_addons.insert(it, std::make_pair(info, state));
-		rebuild();
+		rebuild(true);
 		focus_installed_addon_row(info);
 	});
 	move_down_.sigclicked.connect([this]() {
@@ -597,7 +597,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		it = AddOns::g_addons.erase(it);
 		++it;
 		AddOns::g_addons.insert(it, std::make_pair(info, state));
-		rebuild();
+		rebuild(true);
 		focus_installed_addon_row(info);
 	});
 	move_top_.sigclicked.connect([this]() {
@@ -609,7 +609,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		const bool state = it->second;
 		it = AddOns::g_addons.erase(it);
 		AddOns::g_addons.insert(AddOns::g_addons.begin(), std::make_pair(info, state));
-		rebuild();
+		rebuild(true);
 		focus_installed_addon_row(info);
 	});
 	move_bottom_.sigclicked.connect([this]() {
@@ -621,7 +621,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		const bool state = it->second;
 		it = AddOns::g_addons.erase(it);
 		AddOns::g_addons.push_back(std::make_pair(info, state));
-		rebuild();
+		rebuild(true);
 		focus_installed_addon_row(info);
 	});
 
@@ -630,7 +630,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		a.run<int>();
 
 		// Perhaps add-ons were created or deleted
-		rebuild();
+		rebuild(true);
 	});
 
 	buttons_box_.add_space(kRowButtonSpacing);
@@ -669,7 +669,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	do_not_layout_on_resolution_change();
 	center_to_parent();
-	rebuild();
+	rebuild(true);
 }
 
 AddOnsCtrl::~AddOnsCtrl() {
@@ -812,7 +812,7 @@ void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
 	}
 
 	filter_reset_.set_enabled(true);
-	rebuild();
+	rebuild(false);
 	category_filter_changing = false;
 }
 
@@ -900,7 +900,7 @@ void AddOnsCtrl::refresh_remotes() {
 	}
 
 	progress.step(_("Done"));
-	rebuild();
+	rebuild(false);
 }
 
 bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
@@ -934,7 +934,7 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 	return false;
 }
 
-void AddOnsCtrl::rebuild() {
+void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	const uint32_t scrollpos_i =
 	   installed_addons_inner_wrapper_.get_scrollbar() ?
          installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
@@ -1073,7 +1073,11 @@ void AddOnsCtrl::rebuild() {
 		upgrade_all_.set_tooltip(text);
 	}
 
-	update_dependency_errors();
+	if (need_to_update_dependency_errors) {
+		update_dependency_errors();
+	} else {
+		layout();
+	}
 
 	initialization_complete();
 }
@@ -1306,7 +1310,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		if (r.get() != nullptr) {
 			*r = net().fetch_one_remote(r->internal_name);
 		}
-		rebuild();
+		rebuild(false);
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
 	} catch (const std::exception& e) {
@@ -1460,7 +1464,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote->internal_name);
 		get_topmost_forefather().template_directory_changed();
 	}
-	rebuild();
+	rebuild(true);
 }
 
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
@@ -1540,7 +1544,7 @@ step1:
 		AddOns::g_addons.push_back(AddOns::AddOnState(pair.second));
 	}
 
-	rebuild();
+	rebuild(true);
 }
 #endif
 

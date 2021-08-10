@@ -419,13 +419,13 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			return;
 		}
 		update_data();
-		parent_.rebuild();
+		parent_.rebuild(false);
 	});
 	write_comment_.sigclicked.connect([this]() {
 		CommentEditor m(parent_, info_, -1);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
-			parent_.rebuild();
+			parent_.rebuild(false);
 		}
 	});
 
