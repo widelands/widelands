@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-04 02:39+0000\n"
-"PO-Revision-Date: 2021-08-07 23:36+0000\n"
+"POT-Creation-Date: 2021-08-08 16:03+0000\n"
+"PO-Revision-Date: 2021-08-09 20:00+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -652,8 +652,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1374,8 +1374,8 @@ msgid ""
 "location."
 msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa rozdělena. Pokud se rozměr zvětšuje, nové sloupce/řádky budou vloženy doprava a dolů od místa rozdělení, tzn. na jih a východ od místa rozdělení. Pokud se mapa zmenšuje bude odebrán požadovaný počet sloupců/řádků, které jsou taktéž ve směru vpravo a dolů od místa rozdělení."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -3361,14 +3361,14 @@ msgstr "Nepodařilo se odeslat váš dotaz.\nChybová zpráva:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:444
 msgid "Sent"
-msgstr ""
+msgstr "Odeslat"
 
 #: ../../src/ui_fsmenu/addons.cc:445
 msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr ""
+msgstr "Vaše zpráva byla odeslána vývojářskému týmu Widelands, budeme se snažit odpovědět co nejdříve. Nezapomeňte kontrolovat příchozí poštu."
 
 #: ../../src/ui_fsmenu/addons.cc:531
 msgid "Add-On Manager"
@@ -3388,21 +3388,21 @@ msgstr "Řadit podle"
 
 #: ../../src/ui_fsmenu/addons.cc:592
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Zvolte rozšíření k nahrání..."
 
 #: ../../src/ui_fsmenu/addons.cc:603
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Nahrát snímek obrazovky..."
 
 #: ../../src/ui_fsmenu/addons.cc:610
 msgid "Understood and confirmed"
-msgstr ""
+msgstr "Rozumím a potvrzuji"
 
 #: ../../src/ui_fsmenu/addons.cc:611
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr ""
+msgstr "Zaškrtnutím tohoto políčka potvrzujete, že jste četl/a uvedené podmínky a souhlasíte s nimi."
 
 #: ../../src/ui_fsmenu/addons.cc:621
 msgid "Reset the filters"
@@ -3449,7 +3449,7 @@ msgstr "Spustit správce rozšíření…"
 #. Development Team
 #: ../../src/ui_fsmenu/addons.cc:712
 msgid "Contact us…"
-msgstr ""
+msgstr "Kontaktujte nás..."
 
 #: ../../src/ui_fsmenu/addons.cc:717
 msgid "Tools for Add-Ons Developers"
@@ -3485,7 +3485,7 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr ""
+msgstr "Zde můžete nahrát svoje rozšíření na server, aby bylo dostupné pro ostatní hráče. Nahráním souhlasíte se zveřejněním své tvorby pod GNU General Public Licence (GPL) verze 2 (stejná licence, pod kterou se distribuuje samotný Widelands). Pro další informace o GPL viz 'O Widelands' → 'Licence' v hlavní nabídce."
 
 #: ../../src/ui_fsmenu/addons.cc:783
 msgid ""
@@ -3493,7 +3493,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "Je zakázáno nahrávat rozšíření, která obsahují nebezpečný nebo škodlivý obsah či spam. Nahráním rozšíření potvrzujete, že jste autorem rozšíření nebo máte souhlas autora(ů) k nahrání."
 
 #: ../../src/ui_fsmenu/addons.cc:788
 msgid ""
@@ -3501,7 +3501,7 @@ msgid ""
 " further above before submitting content. Since the documentation is subject"
 " to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr ""
+msgstr "Před nahráním obsahu je vyžadováno přečtení dokumentace k rozšířením na odkazu uvedeném výše. Protože se dokumentace často mění, přesvědčte se, že jste četl(a) nejnovější verzi a následoval(a) jste uvedené kroky."
 
 #: ../../src/ui_fsmenu/addons.cc:793
 msgid ""
@@ -3509,7 +3509,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "Vývojářsky tým Widelands zkontroluje tvé rozšíření brzy po jeho nahraní. Pokud budou mít další požadavky, budou tě kontaktovat pomocí soukromé zprávy na webu Widelands, proto prosím průběžně kontroluj příchozí zprávy na svém uživatelském profilu."
 
 #: ../../src/ui_fsmenu/addons.cc:824
 #, c-format
@@ -3518,7 +3518,7 @@ msgid ""
 "of an add-on or collaborating with another add-on designer? Please visit our"
 " forums at %s, explain your needs, and the Widelands Development Team will "
 "be happy to help."
-msgstr ""
+msgstr "Technický problém? Nejasná dokumentace? Pokročilé požadavky jako smazání rozšíření či spolupráce s jiným tvůrcem rozšíření? Navštiv prosím naše fórum na %s, upřesni, co potřebuješ, a vývojářský tým Widelands ti rád pomůže."
 
 #: ../../src/ui_fsmenu/addons.cc:842
 msgid ""
@@ -3529,7 +3529,7 @@ msgid ""
 "use this way of communication only if there is a reason why your concern is "
 "not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
 " website user profile page."
-msgstr ""
+msgstr "Také můžeš poslat zprávu přímo vývojářskému týmu Widelands a my se pokusíme vyřídit tvůj požadavek, co nejdříve to bude možné. Pouze správci serveru mohou vidět zprávy poslané tímto způsobem. Protože i ostatní tvůrci rozšíření by mohli těžit z těchto otázek a odpovědí, používej, prosím, tento způsob komunikace jen v případě, že je zde pádný důvod k tomu, aby se daná informace nedostala k ostatním tvůrcům rozšíření. Naši odpověď obdržíš pomocí soukromé zprávy ve svém uživatelském profilu na stránkách Widelands."
 
 #: ../../src/ui_fsmenu/addons.cc:880
 msgid "Development"
@@ -3615,51 +3615,51 @@ msgstr "Aktualizovat vše"
 
 #: ../../src/ui_fsmenu/addons.cc:1139
 msgid "Not logged in"
-msgstr ""
+msgstr "Nejsi přihlášen"
 
 #: ../../src/ui_fsmenu/addons.cc:1140
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Klikni pro přihlášení. Poté budeš moci komentovat, hlasovat na rozšířeních a nahrát své vlastní rozšíření."
 
 #: ../../src/ui_fsmenu/addons.cc:1144
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "K nahrání rozšíření se, prosím, přihlaš "
 
 #: ../../src/ui_fsmenu/addons.cc:1146
 msgid "Please log in to upload content"
-msgstr ""
+msgstr "K nahrání obsahu se, prosím, přihlaš"
 
 #: ../../src/ui_fsmenu/addons.cc:1148
 msgid "Please log in to send an enquiry"
-msgstr ""
+msgstr "K odeslání požadavku se, prosím, přihlaš"
 
 #: ../../src/ui_fsmenu/addons.cc:1153
 #, c-format
 msgid "Logged in as %s"
-msgstr ""
+msgstr "Přihlášen jako %s"
 
 #: ../../src/ui_fsmenu/addons.cc:1153
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Přihlášen jako %s (správce)"
 
 #: ../../src/ui_fsmenu/addons.cc:1156
 msgid "Click to log out"
-msgstr ""
+msgstr "Kliknutím se odhlasíš"
 
 #: ../../src/ui_fsmenu/addons.cc:1161
 msgid "Please tick the confirmation checkbox to upload add-ons"
-msgstr ""
+msgstr "Prosím, zaškrtni potvrzovací pole k nahrání rozšíření"
 
 #: ../../src/ui_fsmenu/addons.cc:1164
 msgid "Please tick the confirmation checkbox to upload content"
-msgstr ""
+msgstr "Prosím, zaškrtni potvrzovací pole k nahrání obsahu"
 
 #: ../../src/ui_fsmenu/addons.cc:1191
 msgid "Server Error"
-msgstr ""
+msgstr "Chyba serveru"
 
 #: ../../src/ui_fsmenu/addons.cc:1192
 #, c-format
@@ -3667,18 +3667,18 @@ msgid ""
 "Unable to connect to the server.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Nepodařilo se připojit k serveru.\nChybová zpráva:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:1201
 msgid "Wrong Password"
-msgstr ""
+msgstr "Nesprávné heslo"
 
 #: ../../src/ui_fsmenu/addons.cc:1202
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Vložené uživatelské jméno nebo heslo jsou nesprávné:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:1288
 msgid "Server Connection Error"
@@ -3782,17 +3782,17 @@ msgstr "Rozšíření, která způsobují chyby závislostí, nemusí pracovat s
 #: ../../src/ui_fsmenu/addons.cc:1688
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "Opravdu chceš nahrát rozšíření „%s“ na server?"
 
 #: ../../src/ui_fsmenu/addons.cc:1697
 #, c-format
 msgid "Uploading ‘%s’…"
-msgstr ""
+msgstr "Nahrávám „%s“..."
 
 #: ../../src/ui_fsmenu/addons.cc:1704 ../../src/ui_fsmenu/addons.cc:1761
 #: ../../src/ui_fsmenu/addons.cc:1825
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../src/ui_fsmenu/addons.cc:1728
 #, c-format
@@ -3801,7 +3801,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Rozšíření '%1$s' nemohlo být nahráno na server.\n\nChybová zpráva:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1741
 #, c-format
@@ -3824,7 +3824,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Soubory s překladem k rozšíření „%1$s“ se nepodařilo ze serveru stáhnout. Instalace/aktualizace překladu pro toto rozšíření bude přeskočena.\n\nChybové hlášení:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons.cc:1884 ../../src/ui_fsmenu/addons.cc:2067
 #: ../../src/ui_fsmenu/addons.cc:2911
@@ -3939,7 +3939,7 @@ msgstr "Předchozí snímek"
 
 #: ../../src/ui_fsmenu/addons.cc:2278
 msgid "Write a comment…"
-msgstr ""
+msgstr "Napsat komentář..."
 
 #: ../../src/ui_fsmenu/addons.cc:2284
 msgid "Not voted"
@@ -3950,7 +3950,7 @@ msgstr "Bez hodnocení"
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Hlas nemohl být odeslán.\nKód chyby: %s"
 
 #: ../../src/ui_fsmenu/addons.cc:2359
 #, c-format
@@ -3996,12 +3996,12 @@ msgstr[3] "%u komentářů:"
 #: ../../src/ui_fsmenu/addons.cc:2460
 #, c-format
 msgid "%1$s (edited on %2$s)"
-msgstr ""
+msgstr "%1$s (upraveno %2$s)"
 
 #: ../../src/ui_fsmenu/addons.cc:2466
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
-msgstr ""
+msgstr "%1$s (upravil '%2$s', čas %3$s)"
 
 #: ../../src/ui_fsmenu/addons.cc:2473
 #, c-format
@@ -4019,100 +4019,100 @@ msgstr "Tento snímek se nepodařilo ze serveru načíst. Došlo k chybě."
 
 #: ../../src/ui_fsmenu/addons.cc:2551
 msgid "Please log in to comment"
-msgstr ""
+msgstr "K přidání komentáře se, prosím, přihlaš"
 
 #: ../../src/ui_fsmenu/addons.cc:2553
 msgid "Please log in to vote"
-msgstr ""
+msgstr "K hlasování se, prosím, přihlaš"
 
 #: ../../src/ui_fsmenu/addons.cc:2590
 msgid "Edit Comment"
-msgstr ""
+msgstr "Upravit komentář"
 
 #: ../../src/ui_fsmenu/addons.cc:2590
 msgid "Write Comment"
-msgstr ""
+msgstr "Napsat komentář"
 
 #: ../../src/ui_fsmenu/addons.cc:2643
 msgid "Bold"
-msgstr ""
+msgstr "Tučné"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../src/ui_fsmenu/addons.cc:2647
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #: ../../src/ui_fsmenu/addons.cc:2647
 msgid "Italic"
-msgstr ""
+msgstr "Kurzíva"
 
 #: ../../src/ui_fsmenu/addons.cc:2651
 msgid "Underline"
-msgstr ""
+msgstr "Podtržení"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../src/ui_fsmenu/addons.cc:2651
 msgid "_"
-msgstr ""
+msgstr "_"
 
 #. * TRANSLATORS: Short for Shadow text markup
 #: ../../src/ui_fsmenu/addons.cc:2655
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: ../../src/ui_fsmenu/addons.cc:2655
 msgid "Shadow"
-msgstr ""
+msgstr "Stín"
 
 #. * TRANSLATORS: Short for Color text markup
 #: ../../src/ui_fsmenu/addons.cc:2661
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: ../../src/ui_fsmenu/addons.cc:2661
 msgid "Color…"
-msgstr ""
+msgstr "Barva..."
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../src/ui_fsmenu/addons.cc:2677
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: ../../src/ui_fsmenu/addons.cc:2677
 msgid "Tiny"
-msgstr ""
+msgstr "Drobné"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../src/ui_fsmenu/addons.cc:2681
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../../src/ui_fsmenu/addons.cc:2681
 msgid "Small"
-msgstr ""
+msgstr "Malé"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../src/ui_fsmenu/addons.cc:2685
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. * TRANSLATORS: Short for Large text markup
 #: ../../src/ui_fsmenu/addons.cc:2689
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: ../../src/ui_fsmenu/addons.cc:2689
 msgid "Large"
-msgstr ""
+msgstr "Velké"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../src/ui_fsmenu/addons.cc:2693
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: ../../src/ui_fsmenu/addons.cc:2693
 msgid "Huge"
-msgstr ""
+msgstr "Obrovské"
 
 #: ../../src/ui_fsmenu/addons.cc:2720
 #, c-format
@@ -4121,19 +4121,19 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "Komentář nemohl být odeslán.\n\nChybová zpráva:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:2740
 msgid "Preview:"
-msgstr ""
+msgstr "Náhled:"
 
 #: ../../src/ui_fsmenu/addons.cc:2766
 msgid "The comment contains invalid richtext markup:"
-msgstr ""
+msgstr "Komentář obsahuje neplatný richtext:"
 
 #: ../../src/ui_fsmenu/addons.cc:2831
 msgid "Edit…"
-msgstr ""
+msgstr "Upravit..."
 
 #: ../../src/ui_fsmenu/addons.cc:2893 ../../src/ui_fsmenu/addons.cc:3005
 msgid "Install"
@@ -4654,13 +4654,13 @@ msgstr "Stiskni novou klávesovou zkratku, nebo zruš akci zavřením tohoto okn
 #: ../../src/ui_fsmenu/keyboard_options.cc:90
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "(unused)"
-msgstr ""
+msgstr "(nevyužito)"
 
 #. * TRANSLATORS: [Tribe Name] Building Name
 #: ../../src/ui_fsmenu/keyboard_options.cc:107
 #, c-format
 msgid "[%1$s] %2$s"
-msgstr ""
+msgstr "[%1$s] %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:175
 msgid "Edit Keyboard Shortcuts"
@@ -4686,7 +4686,7 @@ msgstr "%1$s: %2$s"
 #: ../../src/ui_fsmenu/keyboard_options.cc:222
 #, c-format
 msgid "[%1$s] %2$s: %3$s"
-msgstr ""
+msgstr "[%1$s] %2$s: %3$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:251
 msgid "Keyboard Shortcut Conflict"
@@ -4713,7 +4713,7 @@ msgstr "Editor"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:289
 msgid "Fastplace"
-msgstr ""
+msgstr "Rychlé umístění"
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -6300,7 +6300,7 @@ msgstr "%1$s+%2$s"
 #: ../../src/wlapplication_options.cc:909
 #, c-format
 msgid "Fastplace #%i"
-msgstr ""
+msgstr "Rychlé umístění #%i"
 
 #: ../../src/wui/actionconfirm.cc:187
 msgid "Destroy building?"
@@ -6500,9 +6500,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
