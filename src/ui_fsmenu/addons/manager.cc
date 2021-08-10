@@ -803,8 +803,9 @@ void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
 	}
 	category_filter_changing = true;
 
-	// CTRL enables the selected category and disables all others
-	if (SDL_GetModState() & KMOD_CTRL) {
+	// Normal click enables the selected category and disables all others,
+	// Ctrl+Click disables this behaviour.
+	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		for (auto& pair : filter_category_) {
 			pair.second->set_state(pair.first == which);
 		}
@@ -850,8 +851,32 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 }
 
 void AddOnsCtrl::refresh_remotes() {
+	UI::ProgressWindow progress(this, "", "");
 	try {
-		remotes_ = net().refresh_remotes();
+		progress.step(_("Connecting to the server…"));
+
+		std::vector<std::string> names = net().refresh_remotes();
+
+		int64_t nr_addons = names.size();
+		remotes_.resize(nr_addons);
+
+		for (int64_t i = 0; i < nr_addons; ++i) {
+			progress.step((boost::format(_("Fetching ‘%1$s’ (%2$d / %3$d)")) % names[i] % i % nr_addons).str());
+			try {
+				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
+
+				if (!remotes_[i]->matches_widelands_version()) {
+					throw WLWarning("", "incompatible Widelands version");
+				}
+			} catch (const std::exception& e) {
+				log_err("Skip add-on %s because: %s", remotes_[i]->internal_name.c_str(), e.what());
+				names[i] = names.back();
+				names.pop_back();
+				remotes_.pop_back();
+				--i;
+				--nr_addons;
+			}
+		}
 	} catch (const std::exception& e) {
 		const std::string title = _("Server Connection Error");
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
@@ -873,6 +898,8 @@ void AddOnsCtrl::refresh_remotes() {
 		i->sync_safe = true;  // suppress useless warning
 		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(i)};
 	}
+
+	progress.step(_("Done"));
 	rebuild();
 }
 
@@ -880,11 +907,6 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 	if (info->internal_name.empty()) {
 		// always show error messages
 		return true;
-	}
-
-	if (!info->matches_widelands_version()) {
-		// incompatible
-		return false;
 	}
 
 	if (!filter_category_.at(info->category)->get_state()) {

@@ -69,9 +69,6 @@ public:
 		return network_handler_;
 	}
 
-	const AddOns::AddOnsList& get_remotes() const {
-		return remotes_;
-	}
 	std::shared_ptr<AddOns::AddOnInfo> find_remote(const std::string& name);
 	bool is_remote(const std::string& name) const;
 

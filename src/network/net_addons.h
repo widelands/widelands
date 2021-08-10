@@ -36,7 +36,7 @@ struct NetAddons {
 	}
 
 	// Fetch the list of all available add-ons from the server
-	AddOnsList refresh_remotes();
+	std::vector<std::string> refresh_remotes();
 	AddOnInfo fetch_one_remote(const std::string& name);
 
 	using CallbackFn = std::function<void(const std::string&, int64_t)>;
