@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Matej Svrcek <mmatej@yahoo.com>, 2016
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-01 11:36+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-08-02 17:39+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -806,7 +807,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš obilné pole, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Nástrojář tedy začne vyrábět novou."
+msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Kovář tedy začne vyrábět novou."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -814,7 +815,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr "Pokud postavíš dvě obilná pole, pouze jedno začne fungovat okamžitě. Druhé bude muset počkat na dělníka, kterému chybí kosa. Kdyby bylo cílové množství nastaveno na 2, byly by ve skladišti dvě kosy a obě pole by mohla začít fungovat ihned."
+msgstr "Pokud postavíš dva statky, pouze jeden začne fungovat okamžitě. Druhý bude muset počkat na dělníka, kterému chybí kosa. Kdyby bylo cílové množství nastaveno na 2, byly by ve skladišti dvě kosy a oba statky by mohly začít fungovat ihned."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
@@ -857,7 +858,7 @@ msgstr "Změnou cílového množství můžeš rozhodnout, na výrobu kterých s
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Toto nastavení ovlivňuje pouze budovy, které spotřebovávají suroviny. Budovy, které suroviny vyrábí zadarmo (jako třeba studny), budou fungovat pořád."
+msgstr "Toto nastavení ovlivňuje pouze budovy, které spotřebovávají suroviny. Budovy, které suroviny vyrábí zadarmo (jako třeba statky nebo studny), budou fungovat pořád."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
 msgid ""
