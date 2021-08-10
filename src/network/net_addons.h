@@ -57,7 +57,7 @@ struct NetAddons {
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
 
-	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
+	// How the user voted the add-on (1-10). Returns 0 for not voted, <0 for access denied.
 	int get_vote(const std::string& addon);
 	void vote(const std::string& addon, unsigned vote);
 
@@ -81,9 +81,6 @@ private:
 	// Open the connection if it was not open yet; throws an error if this fails
 	void init(std::string username = std::string(), std::string password = std::string());
 	void quit_connection();
-
-	// Set the URL (whitespace-safe) and adjust the timeout values.
-	// void set_url_and_timeout(std::string);
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
 	std::string read_line();

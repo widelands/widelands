@@ -58,7 +58,7 @@ namespace AddOns {
  * https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
  *
  * The communication protocol is documented in the server
- * repo (widelands/wl_addons_server) in `Server.java`.
+ * repo (widelands/wl_addons_server) in `wl.server.Command`.
  */
 
 namespace {
