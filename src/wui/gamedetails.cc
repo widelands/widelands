@@ -204,9 +204,10 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	const std::string err = show_minimap(gamedata);
 	if (!err.empty()) {
 		// Critical error, put this on top
-		description = (boost::format("%s%s") %
-			           as_heading_with_content(_("Game data error:"), err, panel_style_) % description)
-			             .str();
+		description =
+		   (boost::format("%s%s") %
+		    as_heading_with_content(_("Game data error:"), err, panel_style_) % description)
+		      .str();
 	}
 
 	descr_.set_text(as_richtext(description));
