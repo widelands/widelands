@@ -160,8 +160,6 @@ void GameDetails::show(const SavegameData& gamedata) {
 
 	show_game_description(gamedata);
 
-	show_minimap(gamedata);
-
 	layout();
 }
 
@@ -203,10 +201,18 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	               as_heading_with_content(_("Filename:"), filename, panel_style_))
 	                 .str();
 
+	const std::string err = show_minimap(gamedata);
+	if (!err.empty()) {
+		// Critical error, put this on top
+		description = (boost::format("%s%s") %
+			           as_heading_with_content(_("Game data error:"), err, panel_style_) % description)
+			             .str();
+	}
+
 	descr_.set_text(as_richtext(description));
 }
 
-void GameDetails::show_minimap(const SavegameData& gamedata) {
+std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 	std::string minimap_path = gamedata.minimap_path;
 	if (!minimap_path.empty()) {
 		try {
@@ -241,9 +247,12 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 				}
 			} catch (const std::exception& e) {
 				log_err("Failed to load the minimap image: %s", e.what());
+				has_conflicts_ = true;
+				return e.what();
 			}
 		}
 	}
+	return std::string();
 }
 
 void GameDetails::layout() {
