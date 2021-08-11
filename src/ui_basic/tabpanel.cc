@@ -200,16 +200,16 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 			case SDLK_TAB:
 				if (code.mod & KMOD_CTRL) {
 					if (code.mod & KMOD_SHIFT) {
-						if (selected_idx > max) {
-							selected_idx = max;
-						} else if (selected_idx > 0) {
+						if (selected_idx > 0) {
 							--selected_idx;
+						} else {
+							selected_idx = 0;
 						}
 					} else {
 						if (selected_idx < max) {
 							++selected_idx;
-						} else if (selected_idx > max) {
-							selected_idx = 0;
+						} else {
+							selected_idx = max;
 						}
 					}
 				} else {
