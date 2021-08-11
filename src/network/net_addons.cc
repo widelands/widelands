@@ -229,7 +229,7 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	if (message.empty()) {
 		throw WLWarning("", "Connection interrupted (%s)", strerror(errno));
 	}
-	throw WLWarning("", "Connection interrupted (%s). Reason:%s", strerror(errno), message.c_str());
+	throw WLWarning("", "Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str());
 }
 
 std::string NetAddons::read_line() {
