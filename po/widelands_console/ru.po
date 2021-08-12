@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-04 02:35+0000\n"
-"PO-Revision-Date: 2021-07-05 05:29+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2021-08-04 02:39+0000\n"
+"PO-Revision-Date: 2021-08-04 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgstr "widelands <save.wgf>/<replay.wrpl>"
 #: ../../src/wlapplication_messages.cc:52
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:58
-#: ../../src/wlapplication_messages.cc:187
+#: ../../src/wlapplication_messages.cc:190
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
@@ -149,9 +149,10 @@ msgstr "Замечание: новые значения будут занесе�
 #: ../../src/wlapplication_messages.cc:99
 #: ../../src/wlapplication_messages.cc:102
 #: ../../src/wlapplication_messages.cc:152
-#: ../../src/wlapplication_messages.cc:184
-#: ../../src/wlapplication_messages.cc:192
-#: ../../src/wlapplication_messages.cc:201
+#: ../../src/wlapplication_messages.cc:164
+#: ../../src/wlapplication_messages.cc:187
+#: ../../src/wlapplication_messages.cc:195
+#: ../../src/wlapplication_messages.cc:204
 msgid "n"
 msgstr "n"
 
@@ -183,8 +184,8 @@ msgstr "Показывать имена файлов в окне повтора"
 #: ../../src/wlapplication_messages.cc:120
 #: ../../src/wlapplication_messages.cc:137
 #: ../../src/wlapplication_messages.cc:145
-#: ../../src/wlapplication_messages.cc:180
-#: ../../src/wlapplication_messages.cc:190
+#: ../../src/wlapplication_messages.cc:183
+#: ../../src/wlapplication_messages.cc:193
 msgid "[true*|false]"
 msgstr "[true*|false]"
 
@@ -230,12 +231,12 @@ msgstr "Прокручивать, когда стрелка курсора уп�
 #: ../../src/wlapplication_messages.cc:135
 #: ../../src/wlapplication_messages.cc:136
 #: ../../src/wlapplication_messages.cc:159
-#: ../../src/wlapplication_messages.cc:165
-#: ../../src/wlapplication_messages.cc:167
-#: ../../src/wlapplication_messages.cc:179
+#: ../../src/wlapplication_messages.cc:168
+#: ../../src/wlapplication_messages.cc:170
 #: ../../src/wlapplication_messages.cc:182
-#: ../../src/wlapplication_messages.cc:197
-#: ../../src/wlapplication_messages.cc:206
+#: ../../src/wlapplication_messages.cc:185
+#: ../../src/wlapplication_messages.cc:200
+#: ../../src/wlapplication_messages.cc:209
 msgid "[true|false*]"
 msgstr "[true|false*]"
 
@@ -284,7 +285,6 @@ msgid "Connect to a different metaserver for internet gaming"
 msgstr "Подключаться к другому серверу для сетевой игры"
 
 #: ../../src/wlapplication_messages.cc:150
-#: ../../src/wlapplication_messages.cc:162
 msgid "URI"
 msgstr "URI"
 
@@ -317,123 +317,136 @@ msgstr "Использовать ли логин на сервере для ре
 msgid "The hashed password for online logins"
 msgstr "Использовать хэш пароля для сетевой игры"
 
+#: ../../src/wlapplication_messages.cc:162
+msgid "IP"
+msgstr ""
+
 #: ../../src/wlapplication_messages.cc:163
-msgid ""
-"Connect to a different github repository and branch from the add-ons manager"
-msgstr "Подключить менеджер дополнений к гдругому GitHub репозиторию и/или ветви"
+msgid "Connect to a different server address from the add-ons manager"
+msgstr ""
 
 #: ../../src/wlapplication_messages.cc:165
+msgid "Connect to a different server port from the add-ons manager"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:168
 msgid "Graphic options:"
 msgstr "Настройки графики:"
 
-#: ../../src/wlapplication_messages.cc:166
+#: ../../src/wlapplication_messages.cc:169
 msgid "Whether to use the whole display for the game screen"
 msgstr "Делать снимок всего экрана"
 
-#: ../../src/wlapplication_messages.cc:167
+#: ../../src/wlapplication_messages.cc:170
 msgid "Whether to start the game in a maximized window"
 msgstr "Разворачивать окно на старте игры"
 
 #. * TRANSLATORS: A placeholder for window width
-#: ../../src/wlapplication_messages.cc:171
+#: ../../src/wlapplication_messages.cc:174
 msgid "x"
 msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
-#: ../../src/wlapplication_messages.cc:173
+#: ../../src/wlapplication_messages.cc:176
 msgid "Width `x` of the window in pixel"
 msgstr "Ширина окна в \"x\" пикселей"
 
 #. * TRANSLATORS: A placeholder for window height
-#: ../../src/wlapplication_messages.cc:176
+#: ../../src/wlapplication_messages.cc:179
 msgid "y"
 msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
-#: ../../src/wlapplication_messages.cc:178
+#: ../../src/wlapplication_messages.cc:181
 msgid "Height `y` of the window in pixel"
 msgstr "Высота окна в \"y\" пикселей"
 
-#: ../../src/wlapplication_messages.cc:179
+#: ../../src/wlapplication_messages.cc:182
 msgid "Whether to grab the mouse input"
 msgstr "Перехватывать ли все сигналы от мышки"
 
-#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:183
 msgid "Whether to use the mouse cursor provided by SDL"
 msgstr "Проводить ли эмуляцию курсора мыши в SDL"
 
-#: ../../src/wlapplication_messages.cc:182
+#: ../../src/wlapplication_messages.cc:185
 msgid "Whether to use sticky tooltips"
 msgstr "Задействовать ли \"липучие подсказки\""
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:186
+#: ../../src/wlapplication_messages.cc:189
 msgid "Maximal optical framerate `n` of the game"
 msgstr "Частота кадров в игре ограничена \"n\" FPS"
 
-#: ../../src/wlapplication_messages.cc:187
+#: ../../src/wlapplication_messages.cc:190
 msgid "The path to the active UI theme relative to the homedir"
 msgstr "Путь к теме интерфейса относительно основной папки"
 
-#: ../../src/wlapplication_messages.cc:190
+#: ../../src/wlapplication_messages.cc:193
 msgid "Options for the internal window manager:"
 msgstr "Настройки внутреннего оконного менеджера:"
 
-#: ../../src/wlapplication_messages.cc:191
+#: ../../src/wlapplication_messages.cc:194
 msgid "Should automatic map movements be animated"
 msgstr "Анимировать ли перемещение по карте"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:194
+#: ../../src/wlapplication_messages.cc:197
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
 msgstr "Прилипание окна к границе экрана с расстояния в `n` пикселях"
 
-#: ../../src/wlapplication_messages.cc:198
+#: ../../src/wlapplication_messages.cc:201
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
 msgstr "Прятать рамку окна, когда она находится недалеко от границы экрана"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:203
+#: ../../src/wlapplication_messages.cc:206
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
 msgstr "Прилипание окна к границе панели с расстояния в `n` пикселей"
 
-#: ../../src/wlapplication_messages.cc:207
+#: ../../src/wlapplication_messages.cc:210
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
 msgstr "Прилипание окна к границам панели в случае, если окно нависает над панелью"
 
-#: ../../src/wlapplication_messages.cc:210
+#: ../../src/wlapplication_messages.cc:213
 msgid "Enable verbose debug messages"
 msgstr "Включить подробные отладочные сообщения"
 
-#: ../../src/wlapplication_messages.cc:210
+#: ../../src/wlapplication_messages.cc:213
 msgid "Others:"
 msgstr "Прочее:"
 
-#: ../../src/wlapplication_messages.cc:211
+#: ../../src/wlapplication_messages.cc:215
+msgid ""
+"Print all strings as they are translated. This helps with tracing down bugs "
+"with internationalization."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:218
 msgid "Only print version and exit"
 msgstr "Только лишь вывести версию и выйти"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:219
 msgid "Show this help"
 msgstr "Показать справку"
 
-#: ../../src/wlapplication_messages.cc:213
+#: ../../src/wlapplication_messages.cc:220
 msgid "Show this help with all available config options"
 msgstr "Показать справку с доступными настройками"
 
-#: ../../src/wlapplication_messages.cc:214
+#: ../../src/wlapplication_messages.cc:221
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:215
+#: ../../src/wlapplication_messages.cc:222
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -441,12 +454,12 @@ msgid ""
 msgstr "Загрузить сохранение или повтор. Соответственно,  файлы с расширением .wgf или .wrpl. Не работает с другими опциями. См. также --loadgame/--replay"
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:244
+#: ../../src/wlapplication_messages.cc:251
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Это Widelands версии %s"
 
-#: ../../src/wlapplication_messages.cc:305
+#: ../../src/wlapplication_messages.cc:312
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

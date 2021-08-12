@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-27 21:23+0000\n"
+"PO-Revision-Date: 2021-08-02 17:37+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +155,7 @@ msgstr "Upeč chléb"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr "Postav studnu, obilné pole a pekárnu"
+msgstr "Postav studnu, statek a pekárnu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -164,7 +164,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Jiným způsobem, jak získat jídlo, respektive jiné suroviny, které slouží jako potrava, je pomocí rybářů a obilných polí. Pšenice pěstovaná na obilném poli se společně s vodou zpracuje v pekárně, teprve pak je poživatelná. Vodu získáš postavením studny. Pro dosažení dobré produktivity, by měla být postavena na místě, kde geologové naleznou podzemní zdroj vody."
+msgstr "Jiným způsobem, jak získat jídlo – různé druhy jídla – je pomocí rybářů a statků. Pšenice pěstovaná na statku se společně s vodou zpracuje v pekárně, teprve pak je poživatelná. Vodu získáš postavením studny. Pro dosažení dobré produktivity, by měla být postavena na místě, kde geologové naleznou podzemní zdroj vody."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -304,7 +304,7 @@ msgstr "Třetím materiálem potřebným pro stavbu pokročilejších budov je r
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr "Postav statek"
+msgstr "Postav dobytčí farmu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -316,7 +316,7 @@ msgstr "Pokud jsou cesty dlouhodobě zatíženy přepravou, nemusí jeden nosič
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Voli jsou chováni na statcích, které potřebují pšenici a vodu."
+msgstr "Voli jsou chováni na dobytčích farmách, které potřebují pšenici a vodu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:153
@@ -747,7 +747,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "Severně od velké hory je rozlehlá pláň. Proč nevyužít místo, které nám matka příroda poskytla, a nepostavit tam obilné pole? Já bych si pro zpestření jídelníčku na čerstvě upečené chlebové placce určitě pochutnal..."
+msgstr "Severně od velké hory je rozlehlá pláň. Proč nevyužít místo, které nám matka příroda poskytla, a nepostavit tam statek? Já bych si pro zpestření jídelníčku na čerstvě upečené chlebové placce určitě pochutnal..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
