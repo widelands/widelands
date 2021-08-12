@@ -678,12 +678,22 @@ bool MapView::scroll_map() {
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
 
-	   // set the scrolling distance
-	   const uint8_t denominator = ((SDL_GetModState() & KMOD_CTRL)  ? 4 :
-	                                (SDL_GetModState() & KMOD_SHIFT) ? 16 :
-                                                                      8);
-	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
-	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	// set the scrolling distance
+	const uint16_t xres = g_gr->get_xres();
+	const uint16_t yres = g_gr->get_yres();
+
+	uint16_t scroll_distance_x = xres / 8;
+	uint16_t scroll_distance_y = yres / 8;
+
+	SDL_Keymod modstate = SDL_GetModState();
+	if (modstate & KMOD_CTRL) {
+		scroll_distance_x = xres - scroll_distance_x;
+		scroll_distance_y = yres - scroll_distance_y;
+	} else if (modstate & KMOD_SHIFT) {
+		scroll_distance_x = std::min(kTriangleWidth / view_.zoom, scroll_distance_x / 3.f);
+		scroll_distance_y = std::min(kTriangleHeight / view_.zoom, scroll_distance_y / 3.f);
+	}
+
 	int32_t distance_to_scroll_x = 0;
 	int32_t distance_to_scroll_y = 0;
 
