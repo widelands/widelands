@@ -7,6 +7,7 @@
 - Fix some "deprecated pictures parameter" warnings (#4908)
 - Create spritesheets (#4935)
 - Spritesheet cleanup & campaigns (#4974)
+- Updated barbarian barracks graphics by DragonAtma (#4977)
 
 
 ### Sounds and Music
@@ -21,7 +22,7 @@
 
 ### Scripting
 
-- replenish reed in Frisian trading outpost (#4955)
+- Replenish reed in Frisian trading outpost (#4955)
 - Add enhancement method for buildings to Lua (#4989)
 
 
@@ -113,7 +114,7 @@
 ### Build System
 
 - Autogenerate and compare datadir version file (#4853)
-- make `compile.sh` show help for invalid arguments (#4979)
+- Make `compile.sh` show help for invalid arguments (#4979)
 - `compile.sh` improvements (#4980)
     - Implement local default options for `compile.sh`
     - Argument checking for `-j`
@@ -121,7 +122,7 @@
     - Support custom `-D` options to CMake
 - Add option to skip datadir version check (#4987)
 - Modify compiler static dependencies (#4991, #4992)
-- linux: only enable backtrace when using glibc (#5011)
+- Linux: only enable backtrace when using glibc (#5011)
 - cmake: add support for None build type (#5010)
 
 
