@@ -203,7 +203,7 @@ msgstr "Poraž nepřítele"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr "Osvoboď tuto část světa od barbarského jha"
+msgstr "Osvoboď tuto část světa od barbarů."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
@@ -683,8 +683,8 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
-"Poté, až budeme mít dost pšenice, rozebereme obilné pole a postavíme ovčinec"
-" na vlnu. Poté, co začne ovčinec produkovat vlnu, můžeme najít nebo uvolnit "
+"Poté, až budeme mít dost pšenice, rozebereme statek a postavíme ovčinec na "
+"vlnu. Poté, co začne ovčinec produkovat vlnu, můžeme najít nebo uvolnit "
 "nějaké místo pro střední stavbu a postavit tkalcovnu, abychom ze získané "
 "vlny utkali látku. Ale pro tuto chvíli začněme s pěstováním dostatečného "
 "množství pšenice."
@@ -724,8 +724,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
-"Zatím to jde dobře. Máme dostatek pšenice. Teď rozeber obilné pole a postav "
-"další budovu ve výrobním řetězci."
+"Zatím to jde dobře. Máme dostatek pšenice. Teď rozeber statek a postav další"
+" budovu ve výrobním řetězci."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:401

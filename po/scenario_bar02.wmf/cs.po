@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-27 21:44+0000\n"
+"PO-Revision-Date: 2021-08-01 16:26+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "Postav studnu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr "Postav obilné pole"
+msgstr "Postav statek"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
@@ -85,12 +85,12 @@ msgstr "Postav pekárnu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr "Postav statek"
+msgstr "Postav dobytčí farmu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr "Nezapomeň postavit statek"
+msgstr "Nezapomeň postavit dobytčí farmu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
