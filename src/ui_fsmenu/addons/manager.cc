@@ -852,16 +852,20 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 
 void AddOnsCtrl::refresh_remotes() {
 	UI::ProgressWindow progress(this, "", "");
+	const std::string step_message = _("Fetching add-ons (%.1f%%)");
+
 	try {
 		progress.step(_("Connecting to the server…"));
 
 		std::vector<std::string> names = net().refresh_remotes();
 
-		int64_t nr_addons = names.size();
+		const int64_t nr_orig_entries = names.size();
+		int64_t nr_addons = nr_orig_entries;
 		remotes_.resize(nr_addons);
 
-		for (int64_t i = 0; i < nr_addons; ++i) {
-			progress.step((boost::format(_("Fetching ‘%1$s’ (%2$d / %3$d)")) % names[i] % i % nr_addons).str());
+		for (int64_t i = 0, counter = 0; i < nr_addons; ++i, ++counter) {
+			progress.step((boost::format(step_message) % (100.0 * counter / nr_orig_entries)).str());
+
 			try {
 				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
 
@@ -899,7 +903,7 @@ void AddOnsCtrl::refresh_remotes() {
 		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(i)};
 	}
 
-	progress.step(_("Done"));
+	progress.step((boost::format(step_message) % 100).str());
 	rebuild(false);
 }
 
