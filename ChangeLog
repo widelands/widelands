@@ -1,5 +1,141 @@
 [TOC]
 
+## post-1.0 until [git 5b6e9ba63d4b083015f5c8f7360b96e38f607a04](https://github.com/widelands/widelands/commit/5b6e9ba63d4b083015f5c8f7360b96e38f607a04)
+
+### Animations, Icons and Overlays
+
+- Fix some "deprecated pictures parameter" warnings (#4908)
+- Create spritesheets (#4935)
+- Spritesheet cleanup & campaigns (#4974)
+- Updated barbarian barracks graphics by DragonAtma (#4977)
+
+
+### Sounds and Music
+
+- Write config after sound initialization (#4940)
+
+
+### Tutorials and Campaigns
+
+
+
+
+### Scripting
+
+- Replenish reed in Frisian trading outpost (#4955)
+- Add enhancement method for buildings to Lua (#4989)
+
+
+### Maps
+
+
+
+
+### Saveloading
+
+- In-game game/scenario loading (#4843)
+    - Adds a Load Game button to the in-game menu (singleplayer only) to allow loading a new game in-game
+    - Adds a Restart Scenario button to the in-game menu in singleplayer scenarios
+    - Adds a Next Mission button to the Victory message box in singleplayer campaigns and tutorials
+    - GameController is now handled by `shared_ptr`
+- Reset Lua interface when loading games in-game (#4954)
+- Fix invalid resource loading (#4918)
+- Fix replay writing in savegames created from replays (#4972)
+
+
+### AI
+
+
+
+
+### Gameplay
+
+- Fixed the `SupplyList::remove_supply` crash (#4913)
+- Multiplayer template game (#4884)
+- Fix duplicate description registries by add-ons (#4760)
+- Fix constructionsite enhancement race condition (#5002)
+- Catch invalid cast in `Carrier::transport_update` (#5009)
+- Fix race condition when changing military-constructionsite soldier capacity (#5007)
+
+
+### User Interface
+
+- Add Spinbox background (#4859)
+- Blinking caret for EditBox and MultilineEditBox (#4860)
+- Remove invisible scrollbar in dropdown (#4883)
+- Option to invert map movement (#4831)
+- Automatically enable themes after installing (#4734)
+- Screenshot notification (#4949)
+- Add soldiers overview tab to WarehouseWindow (#4901)
+- Multiplayer savegame setup UI improvements (#4968)
+- Show message box when a replay desyncs (#4896)
+- Change tab panel hotkeys to `CTRL+<num>` (#4993)
+- Fix richtext escape issues in message boxes (#4879)
+- Fastplace Shortcuts (#4849)
+
+
+### Internationalization
+
+- Localize certain hotkeys (#4784)
+- Disambiguate productionsites' worker(s) missing/coming strings (#4971)
+- Some renamings and string fixes (#4956)
+    - Renamed tundra/taiga terrains
+    - Renaming the “Statistics” labels to “Status”
+    - Some helptext fixes
+- More missing gettext calls in emp04 (#4983)
+- Improved exception reporting (#5003)
+    - Fix exception reporting in the game logic thread.
+    - Adds `--verbose-i18n` flag.
+
+### Help and Documentation
+
+- Fix documentation wl (#4920)
+- Add theme image `ending.png` to themes documentation (#4945)
+
+
+### Editor
+
+- Editor toolsize menu: use spinbox instead of custom dialog (#4990)
+
+
+### Graphics Engine
+
+
+
+
+### Networking
+
+- Use shared_ptr for AddOnInfo (#4747)
+- Break mutex deadlock in GameClient (#4948)
+- Fix game client deletion crash (#4970)
+- Add-Ons Webserver (#4934)
+
+
+### Build System
+
+- Autogenerate and compare datadir version file (#4853)
+- Make `compile.sh` show help for invalid arguments (#4979)
+- `compile.sh` improvements (#4980)
+    - Implement local default options for `compile.sh`
+    - Argument checking for `-j`
+    - Add an override for every switch
+    - Support custom `-D` options to CMake
+- Add option to skip datadir version check (#4987)
+- Modify compiler static dependencies (#4991, #4992)
+- Linux: only enable backtrace when using glibc (#5011)
+- cmake: add support for None build type (#5010)
+
+
+### Other Issues
+
+- Command line overhaul (#4806)
+- Multithreading (#4319)
+- Resolve threading race conditions by assigning mutex locking priorities (#4943)
+- Fix more threading-related issues (#4966)
+- Set Windows logging dir in all website main functions (#4973)
+
+
+
 ## Release 1.0
 
 ### Animations, Icons and Overlays
