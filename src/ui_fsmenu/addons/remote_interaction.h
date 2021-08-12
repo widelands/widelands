@@ -83,8 +83,8 @@ class RemoteInteractionWindow : public UI::Window {
 public:
 	RemoteInteractionWindow(AddOnsCtrl& parent, std::shared_ptr<AddOns::AddOnInfo> info);
 
-	void on_resolution_changed_note(const GraphicResolutionChanged& note);
-	void layout();
+	void on_resolution_changed_note(const GraphicResolutionChanged& note) override;
+	void layout() override;
 	void update_data();
 
 private:

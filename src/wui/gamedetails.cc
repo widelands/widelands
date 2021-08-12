@@ -160,8 +160,6 @@ void GameDetails::show(const SavegameData& gamedata) {
 
 	show_game_description(gamedata);
 
-	show_minimap(gamedata);
-
 	layout();
 }
 
@@ -203,10 +201,19 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	               as_heading_with_content(_("Filename:"), filename, panel_style_))
 	                 .str();
 
+	const std::string err = show_minimap(gamedata);
+	if (!err.empty()) {
+		// Critical error, put this on top
+		description =
+		   (boost::format("%s%s") %
+		    as_heading_with_content(_("Game data error:"), err, panel_style_) % description)
+		      .str();
+	}
+
 	descr_.set_text(as_richtext(description));
 }
 
-void GameDetails::show_minimap(const SavegameData& gamedata) {
+std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 	std::string minimap_path = gamedata.minimap_path;
 	if (!minimap_path.empty()) {
 		try {
@@ -226,20 +233,27 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_icon(minimap->second.get());
 			minimap_icon_.set_visible(true);
 		} else {
-			egbase_.cleanup_for_load();
-			std::string filename(last_game_);
-			filename.append(kSavegameExtension);
-			std::unique_ptr<Widelands::MapLoader> ml(
-			   egbase_.mutable_map()->get_correct_loader(filename));
-			if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
-				minimap_cache_[last_game_] =
-				   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-				                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
-				minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
-				minimap_icon_.set_visible(true);
+			try {
+				egbase_.cleanup_for_load();
+				std::string filename(last_game_);
+				filename.append(kSavegameExtension);
+				std::unique_ptr<Widelands::MapLoader> ml(
+				   egbase_.mutable_map()->get_correct_loader(filename));
+				if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
+					minimap_cache_[last_game_] =
+					   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+					                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
+					minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
+					minimap_icon_.set_visible(true);
+				}
+			} catch (const std::exception& e) {
+				log_err("Failed to load the minimap image: %s", e.what());
+				has_conflicts_ = true;
+				return e.what();
 			}
 		}
 	}
+	return std::string();
 }
 
 void GameDetails::layout() {
