@@ -26,10 +26,12 @@
 #include "logic/mutable_addon.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_fsmenu/addons.h"
-#include "ui_fsmenu/addons_packager_box.h"
+#include "ui_fsmenu/addons/manager.h"
+#include "ui_fsmenu/addons/packager_box.h"
+#include "ui_fsmenu/addons/progress.h"
 
 namespace FsMenu {
+namespace AddOnsUI {
 
 class AddOnsPackager : public UI::Window {
 public:
@@ -83,6 +85,7 @@ private:
 	ProgressIndicatorWindow progress_window_;
 };
 
+}  // namespace AddOnsUI
 }  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_H
