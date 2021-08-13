@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 18:23+0000\n"
+"PO-Revision-Date: 2021-08-03 20:27+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -658,7 +658,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Na výrobu cihel potřebuješ žulu; na získání žuly potřebuješ lom, nebo kamenný důl; na postavení těchto budov jsou třeba cihly. Dávej si pozor, ať se nedostaneš do bezvýchodné situace!"
+msgstr "Na výrobu cihel potřebuješ žulu; na získání žuly potřebuješ lom, nebo důl na kámen; na postavení těchto budov jsou třeba cihly. Dávej si pozor, ať se nedostaneš do bezvýchodné situace!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
@@ -756,7 +756,7 @@ msgstr "Hospodářství se skládá ze staveb a vlajek propojených cestami. Zá
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Některé budovy, jako například obilné pole, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
+msgstr "Některé budovy, jako například statek, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -778,7 +778,7 @@ msgstr "Zrychluj nebo zpomaluj tempo hry pomocí %1%/%2%. Použij %3%/%4% pro v�
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr "Kurzorové šipky na klávesnici"
+msgstr "Klávesy šipek"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"

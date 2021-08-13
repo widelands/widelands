@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_ADDONS_H
-#define WL_UI_FSMENU_ADDONS_H
+#ifndef WL_UI_FSMENU_ADDONS_MANAGER_H
+#define WL_UI_FSMENU_ADDONS_MANAGER_H
 
 #include <memory>
 #include <set>
@@ -31,90 +31,22 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
-#include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
+namespace AddOnsUI {
 
-class AddOnsCtrl;
+class RemoteAddOnRow;
 
-// TODO(Nordfriese): All classes defined in addons.h and addons.cc except AddOnsCtrl should
-// be moved to one or more new file pairs. Also put them all in a new sub-namespace.
+constexpr int16_t kRowButtonSize = 32;
+constexpr int16_t kRowButtonSpacing = 4;
 
-struct ProgressIndicatorWindow : public UI::Window {
-	ProgressIndicatorWindow(UI::Panel* parent, const std::string& title);
-	~ProgressIndicatorWindow() override = default;
-
-	void set_message_1(const std::string& msg) {
-		txt1_.set_text(msg);
-	}
-	void set_message_2(const std::string& msg) {
-		txt2_.set_text(msg);
-	}
-	void set_message_3(const std::string& msg) {
-		txt3_.set_text(msg);
-	}
-	UI::ProgressBar& progressbar() {
-		return progress_;
-	}
-
-private:
-	UI::Panel::ModalGuard modal_;
-	UI::Box box_, hbox_;
-	UI::Textarea txt1_, txt2_, txt3_;
-	UI::ProgressBar progress_;
-};
-
-struct InstalledAddOnRow : public UI::Panel {
-	InstalledAddOnRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool enabled);
-	~InstalledAddOnRow() override {
-	}
-	const std::shared_ptr<AddOns::AddOnInfo> info() const {
-		return info_;
-	}
-	void layout() override;
-	void draw(RenderTarget&) override;
-
-private:
-	std::shared_ptr<AddOns::AddOnInfo> info_;
-	bool enabled_;
-	UI::Button uninstall_, toggle_enabled_;
-	UI::Icon icon_, category_;
-	UI::Textarea version_;
-	UI::MultilineTextarea txt_;
-};
-struct RemoteAddOnRow : public UI::Panel {
-	RemoteAddOnRow(Panel*,
-	               AddOnsCtrl*,
-	               const std::shared_ptr<AddOns::AddOnInfo>,
-	               const AddOns::AddOnVersion& installed_version,
-	               uint32_t installed_i18n_version);
-	~RemoteAddOnRow() override {
-	}
-	void layout() override;
-	void draw(RenderTarget&) override;
-	const std::shared_ptr<AddOns::AddOnInfo> info() const {
-		return info_;
-	}
-	bool upgradeable() const;
-	bool full_upgrade_possible() const {
-		return full_upgrade_possible_;
-	}
-
-private:
-	std::shared_ptr<AddOns::AddOnInfo> info_;
-	UI::Button install_, upgrade_, uninstall_, interact_;
-	UI::Icon icon_, category_, verified_;
-	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
-	UI::MultilineTextarea txt_;
-
-	const bool full_upgrade_possible_;
-};
+std::string time_string(const std::time_t& time);
+std::string filesize_string(uint32_t bytes);
 
 class AddOnsCtrl : public UI::UniqueWindow {
 public:
@@ -201,6 +133,8 @@ private:
 
 	std::string username_, password_;
 };
+
+}  // namespace AddOnsUI
 }  // namespace FsMenu
 
-#endif  // end of include guard: WL_UI_FSMENU_ADDONS_H
+#endif  // end of include guard: WL_UI_FSMENU_ADDONS_MANAGER_H
