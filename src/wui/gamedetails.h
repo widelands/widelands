@@ -61,7 +61,7 @@ private:
 	void show(const SavegameData& gamedata);
 	void show(const std::vector<SavegameData>& gamedata);
 	void show_game_description(const SavegameData& gamedata);
-	void show_minimap(const SavegameData& gamedata);
+	std::string show_minimap(const SavegameData& gamedata);
 
 	const Mode mode_;
 	const int padding_;
