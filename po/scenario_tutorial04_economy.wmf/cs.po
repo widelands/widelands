@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Matej Svrcek <mmatej@yahoo.com>, 2016
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-01 11:36+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-08-11 18:09+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,7 +150,7 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr "Pod každou budovou jsou dva řádky. První ukazuje, kolik budov daného typu máš a kolik se jich staví. Druhý ukazuje průměrnou produktivitu v případě výrobní budovy nebo cvičiště, nebo ukazuje počet umístěných a poptávaných vojáků v případě, že jde o vojenskou budovu."
+msgstr "Pod každou budovou jsou dva řádky. První ukazuje, kolik budov daného typu máš a kolik se jich staví. Druhý ukazuje průměrnou produktivitu v případě výrobní budovy nebo cvičiště, nebo ukazuje počet umístěných a požadovaných vojáků v případě, že jde o vojenskou budovu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
@@ -344,7 +345,7 @@ msgstr "Okno zásob bylo zavřeno, ale já jsem ještě nevysvětlil vše. Můž
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr "Znovuotevření okna zásob"
+msgstr "Otevři znovu okno zásob"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -352,12 +353,12 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr "Okno zásob bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Prosím, snaž se respektovat postup v tutoriálu."
+msgstr "Okno zásob bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr "Prosím otevři okno zásob a pokračuj v prohlížení jeho záložek."
+msgstr "Jinak, prosím, otevři znovu okno zásob a pokračuj v prohlížení jeho záložek."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
@@ -546,12 +547,12 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr "Encyklopedie byla zavřena bez dohledání potřebné informace. Prosím, snaž se respektovat postup v tutoriálu."
+msgstr "Encyklopedie byla zavřena bez dohledání potřebné informace. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr "Prosím otevři encyklopedii znovu a vyber druhou záložku."
+msgstr "Jinak, prosím, otevři encyklopedii znovu a vyber druhou záložku."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -623,7 +624,7 @@ msgstr "Zvol položku \"Suroviny\" v nabídce \"Statistiky\"."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr "Statistiky surovin"
+msgstr "Statistika surovin"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
@@ -732,7 +733,7 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr "Okno statistiky surovin bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Prosím, snaž se respektovat postup v tutoriálu."
+msgstr "Okno statistiky surovin bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
@@ -806,7 +807,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš obilné pole, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Nástrojář tedy začne vyrábět novou."
+msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Kovář tedy začne vyrábět novou."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -814,7 +815,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr "Pokud postavíš dvě obilná pole, pouze jedno začne fungovat okamžitě. Druhé bude muset počkat na dělníka, kterému chybí kosa. Kdyby bylo cílové množství nastaveno na 2, byly by ve skladišti dvě kosy a obě pole by mohla začít fungovat ihned."
+msgstr "Pokud postavíš dva statky, pouze jeden začne fungovat okamžitě. Druhý bude muset počkat na dělníka, kterému chybí kosa. Kdyby bylo cílové množství nastaveno na 2, byly by ve skladišti dvě kosy a oba statky by mohly začít fungovat ihned."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
@@ -837,13 +838,13 @@ msgstr "Tvůj kameník nebude vyrábět mramorové sloupy, když po nich není p
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr "Proto je třeba kliknou na libovolnou vlajku a zvolit \"Nastavení hospodářství\". V zobrazeném okně pak navolíš, jaké množství jednotlivých surovin chceš mít skladem."
+msgstr "Proto je třeba kliknout na libovolnou vlajku a zvolit \"Nastavení hospodářství\". V zobrazeném okně pak zvolíš, jaké množství jednotlivých surovin chceš mít skladem."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr "Občas se stane, že potřebuješ v jednu chvíli rychle hodně surovin – a to rychleji, než se dají vyrobit. Pro tento případ je dobré mít zásoby."
+msgstr "Občas se stane, že potřebuješ v jednu chvíli rychle získat hodně surovin – a to rychleji, než se dají vyrobit. Pro tento případ je dobré mít zásoby."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -857,7 +858,7 @@ msgstr "Změnou cílového množství můžeš rozhodnout, na výrobu kterých s
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Toto nastavení ovlivňuje pouze budovy, které spotřebovávají suroviny. Budovy, které suroviny vyrábí zadarmo (jako třeba studny), budou fungovat pořád."
+msgstr "Toto nastavení ovlivňuje pouze budovy, které spotřebovávají suroviny. Budovy, které suroviny vyrábí zadarmo (jako třeba statky nebo studny), budou fungovat pořád."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
 msgid ""
@@ -895,7 +896,7 @@ msgstr "Nastavení skladu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
 msgid "Bring the marble columns to the front line"
-msgstr "Přeprav mramorové sloupy na frontovou linii."
+msgstr "Přeprav mramorové sloupy na frontovou linii"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
 msgid ""

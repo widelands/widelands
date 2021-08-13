@@ -41,7 +41,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/about.h"
-#include "ui_fsmenu/addons.h"
+#include "ui_fsmenu/addons/manager.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/loadgame.h"
@@ -209,7 +209,7 @@ MainMenu::MainMenu(const bool skip_init)
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
 	r_about_.open_window = [this]() { new About(*this, r_about_); };
-	r_addons_.open_window = [this]() { new AddOnsCtrl(*this, r_about_); };
+	r_addons_.open_window = [this]() { new AddOnsUI::AddOnsCtrl(*this, r_about_); };
 
 	focus();
 	set_labels();
