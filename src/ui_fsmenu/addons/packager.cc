@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/addons_packager.h"
+#include "ui_fsmenu/addons/packager.h"
 
 #include <memory>
 
@@ -34,6 +34,7 @@
 #include "wlapplication_options.h"
 
 namespace FsMenu {
+namespace AddOnsUI {
 
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
@@ -549,4 +550,5 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 }
 
+}  // namespace AddOnsUI
 }  // namespace FsMenu
