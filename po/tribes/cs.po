@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-31 02:39+0000\n"
-"PO-Revision-Date: 2021-07-23 18:06+0000\n"
+"POT-Creation-Date: 2021-08-10 02:41+0000\n"
+"PO-Revision-Date: 2021-08-03 19:51+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -207,37 +207,37 @@ msgstr "Věž nepřítele dobyta."
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
 msgctxt "amazons_building"
 msgid "Treetop Sentry"
-msgstr "Korunová strážnice"
+msgstr "Strážnice na stromě"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your treetop sentry."
-msgstr "Korunová strážnice obydlena tvou posádkou."
+msgstr "Strážnice na stromě obydlena tvou posádkou."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
 msgctxt "amazons_building"
 msgid "Your treetop sentry discovered an aggressor."
-msgstr "Korunová strážnice objevila nepřítele."
+msgstr "Strážnice na stromě objevila nepřítele."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
 msgctxt "amazons_building"
 msgid "Your treetop sentry is under attack."
-msgstr "Nepřítel napadl tvoji korunovou strážnici."
+msgstr "Nepřítel napadl tvoji strážnici na stromě."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr "Nepřítel dobyl tvoji korunovou strážnici."
+msgstr "Nepřítel dobyl tvoji strážnici na stromě"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the treetop sentry."
-msgstr "Korunová strážnice nepřítele dobyta."
+msgstr "Strážnice na stromě nepřítele dobyta."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
@@ -1504,7 +1504,7 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr "Hlavní žíla chýše zlatokopky je vyčerpaná. Očekávej významný pokles návratnosti těžby. Zvaž její rozebrání, nebo zničení."
+msgstr "Hlavní žíla této chýše zlatokopky je vyčerpaná. Očekávej významný pokles návratnosti těžby. Zvaž její rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
@@ -1548,7 +1548,7 @@ msgstr "Lovkyně-sběračka pracující z této chaty nemůže najít žádnou z
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
 msgctxt "amazons_building"
 msgid "Initiation Site"
-msgstr "Dorostenecký tábor"
+msgstr "Iniciační tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
@@ -1705,7 +1705,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kamenická dílna"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1717,8 +1716,6 @@ msgstr "Kamenická dílna"
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1728,7 +1725,6 @@ msgstr "vyrábění lopaty"
 msgid "making a felling ax"
 msgstr "vyrábění těžební sekery"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1743,8 +1739,6 @@ msgstr "vyrábění krumpáče"
 msgid "making a machete"
 msgstr "vyrábění mačety"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1755,7 +1749,6 @@ msgstr "vyrábění mačety"
 msgid "making kitchen tools"
 msgstr "vyrábění kuchyňského náčiní"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1773,9 +1766,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1843,7 +1836,7 @@ msgstr "Kamenice pracující v této chatě nemůže najít žádné skály ve s
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr "Kamenný důl"
+msgstr "Důl na kámen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1880,7 +1873,7 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto kamenného dolu je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Zvaž jeho rozebrání, nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na kámen je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Zvaž jeho rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -1929,8 +1922,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Stan ochránkyně fauny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2037,7 +2030,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr "Pěstitel rozrazilu nemůže sázet rozrazil, protože nemá kam sázet."
+msgstr "Pěstitel rozrazilu nemůže sázet rozrazil, protože nemá žádnou volnou půdu na osev."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
@@ -2139,7 +2132,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto dolu na křišťál je vyčerpaná. Očekávej znatelně snížené výnosy. Zvaž jeho rozebrání nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na křišťál je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Zvaž jeho rozebrání nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:8
@@ -2197,7 +2190,7 @@ msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
 "fish in his work area. Remember that you can only regenerate your fish "
 "resources if there are some fish left to breed."
-msgstr "Porybnému pracujícímu v tomto domku porybného, se nedaří ve svém okolí najít žádné ryby. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud nějaké ryby stále zbývají."
+msgstr "Porybnému, pracujícímu v tomto domku porybného, se nedaří ve svém okolí najít žádné ryby. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud nějaké ryby stále zbývají."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2224,7 +2217,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "Rybář pracující v tomto domku rybáře nemůže ve své pracovní oblasti najít žádné ryby. Pamatuj, že na udržení rybí populace je potřeba postavit domek porybného."
+msgstr "Rybář, pracující v tomto domku rybáře, nemůže ve své pracovní oblasti najít žádné ryby. Pamatuj, že na udržení rybí populace je potřeba postavit domek porybného."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2696,7 +2689,7 @@ msgstr "vaření silného piva"
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr "Statek"
+msgstr "Dobytčí farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:49
@@ -2742,13 +2735,13 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto uhelného dolu je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Tento důl již nelze vylepšit, proto zvaž jeho rozebrání, nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na uhlí je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Tento důl již nelze vylepšit, proto zvaž jeho rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Farm"
-msgstr "Obilné pole"
+msgstr "Statek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
@@ -2766,7 +2759,7 @@ msgstr "sklízení pšenice"
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "Sedlák pracující na tomto obilném poli nemá žádnou volnou půdu na osev."
+msgstr "Sedlák pracující na tomto statku nemá žádnou volnou půdu na osev."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
@@ -2942,7 +2935,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "Dřevorubec pracující v této chatě dřevorubce nemůže ve svém okolí najít žádné stromy. Zvaž její rozebrání, zničení nebo postavení chaty lesníka."
+msgstr "Dřevorubec, pracující v této chatě dřevorubce, nemůže ve svém okolí najít žádné stromy. Zvaž její rozebrání, zničení nebo postavení chaty lesníka."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -3189,7 +3182,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto uhelného dolu je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Tento důl již nelze vylepšit, proto zvaž jeho rozebrání, nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na uhlí je vyčerpaná. Očekávej významný pokles v návratnosti těžby. Tento důl již nelze vylepšit, proto zvaž jeho rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
@@ -3207,13 +3200,13 @@ msgstr "chování oslů"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:8
 msgctxt "empire_building"
 msgid "Farm"
-msgstr "Obilné pole"
+msgstr "Statek"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "Sedlák pracující na tomto obilném poli nemá žádnou volnou půdu na osev."
+msgstr "Sedlák pracující na tomto statku nemá žádnou volnou půdu na osev."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
@@ -3326,7 +3319,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Dřevorubec pracující v tomto domku dřevorubce nemůže ve svém okolí najít žádné stromy. Zvaž jeho rozebrání, zničení nebo postavení domku lesníka."
+msgstr "Dřevorubec, pracující v tomto domku dřevorubce, nemůže ve svém okolí najít žádné stromy. Zvaž jeho rozebrání, zničení nebo postavení domku lesníka."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3589,7 +3582,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Rybář pracující na této rybí sádce nemůže ve své pracovní oblasti najít žádné rybníčky. Prosím zajisti, aby byl v blízkosti aktivní jámový výkop a rybí sádka měla dostatek potřebných surovin, nebo zvaž rozebrání, nebo zničení budovy."
+msgstr "Rybář pracující na této rybí sádce nemůže ve své pracovní oblasti najít žádné rybníčky. Prosím zajisti, aby byl v blízkosti aktivní jámový výkop a rybí sádka měla dostatek potřebných surovin nebo zvaž rozebrání či zničení budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3786,7 +3779,7 @@ msgstr "Kopáč hlíny pracující na tomto jámovém výkopu nemůže ve své p
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Coal Mine"
-msgstr "Uhelný důl"
+msgstr "Důl na uhlí"
 
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:121
 msgctxt "frisians_building"
@@ -3807,7 +3800,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto uhelného dolu je vyčerpaná. Očekávej významný pokles návratnosti těžby. Tento důl již nelze vylepšit, zvaž proto jeho rozebrání, nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na uhlí je vyčerpaná. Očekávej významný pokles návratnosti těžby. Tento důl již nelze vylepšit, zvaž proto jeho rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
@@ -3840,13 +3833,13 @@ msgstr "Sběrač ovoce pracující v tomto domku nemůže ve své pracovní obla
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
 msgctxt "frisians_building"
 msgid "Drinking Hall"
-msgstr "Velká výčepna"
+msgstr "Hodovní síň"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr "Statek"
+msgstr "Obilná farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:81
@@ -3952,7 +3945,7 @@ msgstr "Lovec pracující v tomto domku lovce nemůže ve svém okolí najít ž
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Iron Mine"
-msgstr "Železnorudný důl"
+msgstr "Důl na železo"
 
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
 msgctxt "frisians_building"
@@ -3965,7 +3958,7 @@ msgstr "Hlavní žíla tohoto železorudného dolu je vyčerpaná. Očekávej v�
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Iron Mine"
-msgstr "Hlubinný železorudný důl"
+msgstr "Hlubinný důl na železo"
 
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
 msgctxt "frisians_building"
@@ -3973,7 +3966,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto železorudného dolu je vyčerpaná. Očekávej významný pokles návratnosti těžby. Tento důl již nelze vylepšit, zvaž proto jeho rozebrání, nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na železo je vyčerpaná. Očekávej významný pokles návratnosti těžby. Tento důl již nelze vylepšit, zvaž proto jeho rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:8
@@ -4060,7 +4053,7 @@ msgstr "vyrábění kožešiny"
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Rock Mine"
-msgstr "Kamenný důl"
+msgstr "Důl na kámen"
 
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:124
 msgctxt "frisians_building"
@@ -4073,7 +4066,7 @@ msgstr "Hlavní žíla tohoto kamenného dolu je vyčerpaná. Očekávej význam
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Rock Mine"
-msgstr "Hlubinný kamenný důl"
+msgstr "Hlubinný důl na kámen"
 
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:101
 msgctxt "frisians_building"
@@ -4081,7 +4074,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Hlavní žíla tohoto kamenného dolu je vyčerpaná. Očekávej významný pokles návratnosti těžby. Tento důl již nelze vylepšit, zvaž proto jeho rozebrání, nebo zničení."
+msgstr "Hlavní žíla tohoto dolu na kámen je vyčerpaná. Očekávej významný pokles návratnosti těžby. Tento důl již nelze vylepšit, zvaž proto jeho rozebrání, nebo zničení."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
@@ -4134,7 +4127,7 @@ msgstr "šití zlatem kovaného kožichu"
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:8
 msgctxt "frisians_building"
 msgid "Tavern"
-msgstr "Taverna"
+msgstr "Hospoda"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -5417,7 +5410,7 @@ msgstr "Vývojový tým Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons (experimental)"
-msgstr "Amazonky (testovací)"
+msgstr "Amazonky (experimentální)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid ""
@@ -6055,7 +6048,7 @@ msgstr "Akvamarín"
 #: ../../data/tribes/ships/atlanteans/init.lua:123
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr "Mořská hvězdice"
+msgstr "Atlantská pevnost"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:125
@@ -6385,7 +6378,7 @@ msgstr "Medvěd"
 #: ../../data/tribes/ships/barbarians/init.lua:36
 msgctxt "shipname"
 msgid "Beowulf"
-msgstr "Frigg"
+msgstr "Beowulf"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:38
@@ -6697,7 +6690,7 @@ msgstr "Domitianus"
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Empire Glory"
-msgstr "Imperia"
+msgstr "Chlouba impéria"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
@@ -7982,7 +7975,7 @@ msgstr "Průzkumnice"
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8
 msgctxt "amazons_worker"
 msgid "Shipwright"
-msgstr "Loďařka"
+msgstr "Stavitelka lodí"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
@@ -8216,7 +8209,7 @@ msgstr "Průzkumník"
 #: ../../data/tribes/workers/atlanteans/shipwright/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Shipwright"
-msgstr "Loďař"
+msgstr "Stavitel lodí"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/smelter/init.lua:8
@@ -8444,7 +8437,7 @@ msgstr "Průzkumník"
 #: ../../data/tribes/workers/barbarians/shipwright/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Shipwright"
-msgstr "Loďař"
+msgstr "Stavitel lodí"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/smelter/init.lua:8
@@ -8624,7 +8617,7 @@ msgstr "Pastýř"
 #: ../../data/tribes/workers/empire/shipwright/init.lua:8
 msgctxt "empire_worker"
 msgid "Shipwright"
-msgstr "Loďař"
+msgstr "Stavitel lodí"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/smelter/init.lua:8
@@ -8858,7 +8851,7 @@ msgstr "Vrchní švadlena"
 #: ../../data/tribes/workers/frisians/shipwright/init.lua:8
 msgctxt "frisians_worker"
 msgid "Shipwright"
-msgstr "Loďař"
+msgstr "Stavitel lodí"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/smelter/init.lua:8

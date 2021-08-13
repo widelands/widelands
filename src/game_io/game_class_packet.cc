@@ -74,7 +74,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	game.gametime_.save(fw);
 
 	fw.unsigned_32(game.scenario_difficulty_);
-	fw.unsigned_8(game.writereplay_ ? 1 : 0);
+	fw.unsigned_8((game.writereplay_ || game.is_replay()) ? 1 : 0);
 
 	fw.unsigned_32(game.list_of_scenarios_.size());
 	for (const std::string& s : game.list_of_scenarios_) {
