@@ -28,6 +28,7 @@
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
+namespace AddOnsUI {
 
 class AddOnsPackagerBox : public UI::Box {
 public:
@@ -105,6 +106,7 @@ private:
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 
+}  // namespace AddOnsUI
 }  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_BOX_H
