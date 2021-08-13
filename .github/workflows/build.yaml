@@ -198,6 +198,7 @@ jobs:
           $env:archname = "i686"
         }
         pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost
+        pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
     - name: Checkout
       uses: actions/checkout@v2
       with:
