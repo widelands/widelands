@@ -47,14 +47,14 @@ msgstr "Zahájení výroby cihel"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr "Cihlárenství"
+msgstr "Cihelné hospodářství"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
-"Postav cihlárnu, důl na uhlí, kamenný důl a také jámový výkop, aby byla "
+"Postav cihlárnu, důl na uhlí, kamenný důl, hliniště a studnu, aby byla "
 "zajištěna výroba cihel."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
@@ -109,7 +109,7 @@ msgstr "Zajisti produkci jídla pro horníky"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr "Potravinové hospodářství"
+msgstr "Produkce potravin"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
@@ -121,11 +121,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr "Zlepši úroveň svého potravinového hospodářství"
+msgstr "Vylepši produkci potravin"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr "Vylepši potravinové hospodářství"
+msgstr "Vylepši produkci potravin"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
@@ -137,11 +137,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr "Postav důl na železo a kovodělné hospodářství"
+msgstr "Postav důl na železo a těžební infrastrukturu"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr "Stavba dolů a kovodělného hospodářství"
+msgstr "Stavba dolů a těžební infrastruktury"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
@@ -151,11 +151,11 @@ msgstr "Postav důl na železo, pec, kovárnu a malé zbrojířství."
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr "Začni rekrutovat vojáky"
+msgstr "Začni verbovat vojáky"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr "Rekrut vojáků"
+msgstr "Verbování vojáků"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
@@ -175,7 +175,7 @@ msgstr "Zvětši své území a prozkoumej další části ostrova."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr "Cvič své vojáky"
+msgstr "Vycvič své vojáky"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -185,7 +185,7 @@ msgstr "Cvič své vojáky"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr "Cvičení vojáků"
+msgstr "Výcvik vojáků"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -304,7 +304,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr "První stavení"
+msgstr "První budovy"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
 #. greeting
