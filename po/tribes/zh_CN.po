@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"POT-Creation-Date: 2021-08-10 02:41+0000\n"
 "PO-Revision-Date: 2021-06-23 05:22+0000\n"
 "Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -1700,7 +1700,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "石材车间"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1712,8 +1711,6 @@ msgstr "石材车间"
 msgid "making a shovel"
 msgstr "打造铁铲"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1723,7 +1720,6 @@ msgstr "打造铁铲"
 msgid "making a felling ax"
 msgstr "打造伐木斧"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1738,8 +1734,6 @@ msgstr "打造鹤嘴镐"
 msgid "making a machete"
 msgstr "打造弯刀"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1750,7 +1744,6 @@ msgstr "打造弯刀"
 msgid "making kitchen tools"
 msgstr "打造厨房用具"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1768,9 +1761,9 @@ msgstr "打造锤子"
 msgid "making a chisel"
 msgstr "打造凿刀"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1924,8 +1917,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "荒野守护者帐篷"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66

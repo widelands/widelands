@@ -4,6 +4,7 @@
 # 
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -811,5 +812,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
-"Slouží jako výchozí bod pro zámořskou kolonizaci a obchod. Dále skladuje tvé"
-" vojáky, dělníky, suroviny a nástroje."
+"Slouží jako základna pro zámořské plavby a obchod. Také skladuje suroviny, "
+"nástroje a poskytuje přístřeší vojákům."

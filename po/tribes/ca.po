@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-31 02:39+0000\n"
+"POT-Creation-Date: 2021-08-10 02:41+0000\n"
 "PO-Revision-Date: 2021-05-23 09:22+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1701,7 +1701,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Taller de pedra"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1713,8 +1712,6 @@ msgstr "Taller de pedra"
 msgid "making a shovel"
 msgstr "fabricar una pala"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1724,7 +1721,6 @@ msgstr "fabricar una pala"
 msgid "making a felling ax"
 msgstr "fer una destral d'arbres"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1739,8 +1735,6 @@ msgstr "fabricar un pic"
 msgid "making a machete"
 msgstr "fer un matxet"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1751,7 +1745,6 @@ msgstr "fer un matxet"
 msgid "making kitchen tools"
 msgstr "fabricar estris de cuina"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1769,9 +1762,9 @@ msgstr "fabricar un martell"
 msgid "making a chisel"
 msgstr "fer un cisell"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1925,8 +1918,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Tenda del cuidador de la jungla"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
