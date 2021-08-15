@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-08 16:03+0000\n"
-"PO-Revision-Date: 2021-08-04 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-08-10 02:41+0000\n"
+"PO-Revision-Date: 2021-08-11 00:31+0000\n"
+"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -269,8 +269,8 @@ msgstr "nov."
 msgid "Dec"
 msgstr "dec."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -284,12 +284,12 @@ msgstr "Hoofdmenu"
 msgid "Tools"
 msgstr "Gereedschap"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Informatie"
 msgid "Click on a field to show information about it"
 msgstr "Klik op een veld om er informatie over te tonen"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -1372,8 +1372,8 @@ msgid ""
 "location."
 msgstr "Selecteer het nieuwe formaat van de kaart, klik dan op de kaart om deze te splitsen op de gewenste locatie. Wanneer de kaart wordt vergroot, zullen nieuwe kolommen/rijen worden ingevoegd ten oosten/zuiden van het geselcteerde punt. Wanneer de kaart wordt verkleind, wordt het gewenste aantal kolommen/rijen verwijderd ten oosten/zuiden van de splitsingslocatie."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1388,7 +1388,7 @@ msgstr "Gereedschapsgrootte"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:46
 msgid "Current Size:"
-msgstr ""
+msgstr "Huidige Grote:"
 
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
@@ -3245,7 +3245,7 @@ msgstr "%u bytes"
 
 #: ../../src/ui_fsmenu/addons.cc:100
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: ../../src/ui_fsmenu/addons.cc:132 ../../src/ui_fsmenu/addons.cc:620
 #: ../../src/ui_fsmenu/addons.cc:2613
@@ -3263,7 +3263,7 @@ msgstr "Om een geregistreerd account te gebruiken, heb je een account nodig op d
 
 #: ../../src/ui_fsmenu/addons.cc:146
 msgid "Username:"
-msgstr ""
+msgstr "Gebruikersnaam:"
 
 #: ../../src/ui_fsmenu/addons.cc:151 ../../src/ui_fsmenu/login_box.cc:53
 msgid "Password:"
@@ -3272,11 +3272,11 @@ msgstr "Wachtwoord:"
 #: ../../src/ui_fsmenu/addons.cc:264
 #, c-format
 msgid "Upload Screenshot for ‘%s’"
-msgstr ""
+msgstr "Zend Schermafbeelding voor '%s'"
 
 #: ../../src/ui_fsmenu/addons.cc:277 ../../src/ui_fsmenu/addons.cc:1687
 msgid "Upload"
-msgstr ""
+msgstr "Zend"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons.cc:317 ../../src/ui_fsmenu/campaigndetails.cc:71
@@ -3288,7 +3288,7 @@ msgstr "Beschrijving"
 
 #: ../../src/ui_fsmenu/addons.cc:330
 msgid "Uploading…"
-msgstr ""
+msgstr "Zenden..."
 
 #: ../../src/ui_fsmenu/addons.cc:347
 #, c-format
@@ -3297,23 +3297,23 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%3$s"
-msgstr ""
+msgstr "De schermafbeelding '%1$s' voor de uitbreiding '%2$s' kon niet worden verzonden naar de server.\n\nFoutmelding:\n%3$s"
 
 #: ../../src/ui_fsmenu/addons.cc:388
 msgid "Contact Form"
-msgstr ""
+msgstr "Contact Formulier"
 
 #: ../../src/ui_fsmenu/addons.cc:400
 msgid "Send message"
-msgstr ""
+msgstr "Zend bericht"
 
 #: ../../src/ui_fsmenu/addons.cc:424
 msgid "Send Message"
-msgstr ""
+msgstr "Zend Bericht"
 
 #: ../../src/ui_fsmenu/addons.cc:425
 msgid "Send this message now?"
-msgstr ""
+msgstr "Dit bericht nu zenden?"
 
 #: ../../src/ui_fsmenu/addons.cc:435
 #, c-format
@@ -3321,11 +3321,11 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Het is onmogelijk om je verzoek in te dienen.\nFoutmelding:\n%s"
 
 #: ../../src/ui_fsmenu/addons.cc:444
 msgid "Sent"
-msgstr ""
+msgstr "Zend"
 
 #: ../../src/ui_fsmenu/addons.cc:445
 msgid ""
@@ -5594,18 +5594,18 @@ msgstr "Ongeldig pad naar bestand in 'veldtocht' campaigns.lua van tutorials.lua
 msgid "Tutorial"
 msgstr "Oefencampagne"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Auteurs"
@@ -6438,9 +6438,9 @@ msgstr "Havens"
 msgid "Low productivity:"
 msgstr "Lage productiviteit:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
