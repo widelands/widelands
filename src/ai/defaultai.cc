@@ -1550,7 +1550,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	resource_count_now = false;
 	// Testing in first 10 seconds or if last testing was more then 60 sec ago
 	if (field.last_resources_check_time < Time(10000) ||
-	    field.last_resources_check_time > gametime + Duration(60 * 1000)) {
+	    gametime > field.last_resources_check_time + Duration(60 * 1000)) {
 		resource_count_now = true;
 		field.last_resources_check_time = gametime;
 	}
@@ -1713,7 +1713,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 						continue;
 					}
 				}
-				uint8_t amount = map.find_immovables(
+				uint8_t amount = 0;
+				amount = map.find_immovables(
 				   game(),
 				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
 				   nullptr, Widelands::FindImmovableAttribute(attribute_category.first));
