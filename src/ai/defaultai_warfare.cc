@@ -714,19 +714,30 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 
 	const Widelands::DescriptionIndex enhancement = ts->descr().enhancement();
 
-	if (enhancement != Widelands::INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
+	if (enhancement != Widelands::INVALID_INDEX && ts_without_trainers_ == 0 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
 		// Make sure that:
 		// 1. Building is allowed
 		// 2. AI limit for weaker AI is not to be exceeded
+		// 3. We have enough material to construct it
 		BuildingObserver& en_bo =
 		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
 		uint16_t current_proportion =
 		   en_bo.total_count() * 100 / (ts_finished_count_ + ts_in_const_count_);
+		en_bo.build_material_shortage = false;
+		uint8_t shortage_counter = 0;
+		// checking we have enough critical material on stock
+		for (uint32_t m = 0; m < en_bo.critical_building_material.size(); ++m) {
+			Widelands::DescriptionIndex wt(static_cast<size_t>(en_bo.critical_building_material.at(m)));
+			if (calculate_stocklevel(wt) <= std::abs(management_data.get_military_number_at(19)) / 20){
+				shortage_counter++;
+				en_bo.build_material_shortage = true;
+			}
+		}
 		if (player_->is_building_type_allowed(enhancement) &&
 		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed &&
-		    en_bo.max_trainingsites_proportion > current_proportion) {
+		    en_bo.max_trainingsites_proportion > current_proportion && shortage_counter < std::abs(management_data.get_military_number_at(11)) / 25) {
 			game().send_player_enhance_building(*tso.site, enhancement, true);
 		}
 	}

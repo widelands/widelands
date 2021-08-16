@@ -975,6 +975,12 @@ void DefaultAI::late_initialization() {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
+			for (const auto& temp_buildcosts : train.enhancement_cost()) {
+				// building material except for trivial material
+				if (wares.at(temp_buildcosts.first).refined_build_material) {
+					bo.critical_building_material.push_back(temp_buildcosts.first);
+				}
+			}
 			continue;
 		}
 
