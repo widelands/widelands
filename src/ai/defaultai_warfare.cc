@@ -729,15 +729,18 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 		uint8_t shortage_counter = 0;
 		// checking we have enough critical material on stock
 		for (uint32_t m = 0; m < en_bo.critical_building_material.size(); ++m) {
-			Widelands::DescriptionIndex wt(static_cast<size_t>(en_bo.critical_building_material.at(m)));
-			if (calculate_stocklevel(wt) <= std::abs(management_data.get_military_number_at(19)) / 20){
+			Widelands::DescriptionIndex wt(
+			   static_cast<size_t>(en_bo.critical_building_material.at(m)));
+			if (calculate_stocklevel(wt) <=
+			    std::abs(management_data.get_military_number_at(19)) / 20) {
 				shortage_counter++;
 				en_bo.build_material_shortage = true;
 			}
 		}
 		if (player_->is_building_type_allowed(enhancement) &&
 		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed &&
-		    en_bo.max_trainingsites_proportion > current_proportion && shortage_counter < std::abs(management_data.get_military_number_at(11)) / 25) {
+		    en_bo.max_trainingsites_proportion > current_proportion &&
+		    shortage_counter < std::abs(management_data.get_military_number_at(11)) / 25) {
 			game().send_player_enhance_building(*tso.site, enhancement, true);
 		}
 	}
