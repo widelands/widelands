@@ -732,7 +732,7 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 			Widelands::DescriptionIndex wt(
 			   static_cast<size_t>(en_bo.critical_building_material.at(m)));
 			if (calculate_stocklevel(wt) <=
-			    std::abs(management_data.get_military_number_at(19)) / 20) {
+			    static_cast<unsigned int>(std::abs(management_data.get_military_number_at(19)) / 20)) {
 				shortage_counter++;
 				en_bo.build_material_shortage = true;
 			}
