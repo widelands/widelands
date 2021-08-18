@@ -109,6 +109,8 @@ struct BaseListselect : public Panel {
 
 	int calculate_desired_width();
 
+	void clear_filter();
+
 	void layout() override;
 
 	// Drawing and event handling
@@ -118,6 +120,7 @@ struct BaseListselect : public Panel {
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_textinput(const std::string& text) ;
 
 	void set_notify_on_delete(UI::BaseDropdown* d) {
 		notify_on_delete_ = d;
@@ -153,6 +156,7 @@ private:
 	int widest_hotkey_;
 
 	std::deque<EntryRecord*> entry_records_;
+	std::deque<EntryRecord*> entry_records_unfiltered_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
@@ -166,8 +170,10 @@ private:
 
 	int lineheight_;
 	std::string current_tooltip_;
+	std::string current_filter_;
 
 	UI::BaseDropdown* notify_on_delete_;
+
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {

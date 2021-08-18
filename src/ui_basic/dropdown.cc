@@ -18,6 +18,7 @@
  */
 
 #include "ui_basic/dropdown.h"
+#include <base/log.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -108,6 +109,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      is_enabled_(true),
      button_style_(button_style),
      autoexpand_display_button_(false) {
+	set_handle_textinput();
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -385,7 +387,7 @@ void BaseDropdown::set_pos(Vector2i point) {
 void BaseDropdown::clear() {
 	list_->clear();
 	current_selection_ = list_->selection_index();
-	list_->set_size(list_->get_w(), 0);
+//	list_->set_size(list_->get_w(), 0);
 }
 
 void BaseDropdown::think() {
@@ -408,7 +410,7 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
+	                            list_->get_selected_name() :
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
@@ -423,7 +425,7 @@ void BaseDropdown::update() {
                                                            tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
+		                           list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
@@ -436,8 +438,11 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle() {
+	list_->clear_filter();
 	set_list_visibility(!list_->is_visible());
 }
+
+
 
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	if (!open) {
@@ -470,6 +475,7 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 }
 
 void BaseDropdown::toggle_list() {
+	list_->clear_filter();
 	set_list_visibility(!list_->is_visible(), false);
 }
 
@@ -521,5 +527,13 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	}
 	return NamedPanel::handle_key(down, code);
 }
+
+//bool BaseDropdown::handle_textinput(const std::string& input_text) {
+//	//	list_->handle_textinput(input_text);
+//
+//
+//	layout();
+//	return true;
+//}
 
 }  // namespace UI
