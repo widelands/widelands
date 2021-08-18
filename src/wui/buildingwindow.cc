@@ -94,7 +94,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 					   init(true, showing_workarea_);
 					   tabs_->activate(active_tab);
 				   },
-				   false);
+				   true);
 			}
 			break;
 		// The building is no more. Next think() will call die().
