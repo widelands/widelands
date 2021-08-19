@@ -8,6 +8,7 @@
 # Elisabeth Jäger, 2016-2019
 # wl-zocker, 2014
 # GunChleoc, 2016,2018
+# Florian Klappan <transifex@fklappan.de>, 2021
 # 11432e78848bb4940138532ffe479e21, 2015
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # gamag, 2015
@@ -26,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-13 02:45+0000\n"
-"PO-Revision-Date: 2021-08-13 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-08-16 02:36+0000\n"
+"PO-Revision-Date: 2021-08-18 20:21+0000\n"
+"Last-Translator: Florian Klappan <transifex@fklappan.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -280,8 +281,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Dez."
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -295,12 +296,12 @@ msgstr "Hauptmenü"
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -490,10 +491,10 @@ msgstr "Information"
 msgid "Click on a field to show information about it"
 msgstr "Klicke ein Feld an, um die Informationen darüber anzuzeigen"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -1392,8 +1393,8 @@ msgid ""
 "location."
 msgstr "Wähle die neue Kartengröße, dann klicke in die Karte um sie an der gewählten Position zu ändern. Wenn die Karte vergrößert wird, werden neue Spalten und Zeilen im Osten und Süden des gewählten Punktes angefügt. Wenn die Karte verkleinert wird, wird die gewünschte Anzahl der Spalten und Zeilen von Osten und Süden des Trennungspunktes gelöscht.  "
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -3123,19 +3124,19 @@ msgstr "Ursprüngliche Farbe"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
@@ -3247,19 +3248,19 @@ msgstr "Lua Fehler"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:39
 msgid "Contact Form"
-msgstr ""
+msgstr "Kontaktformular"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:51
 msgid "Send message"
-msgstr ""
+msgstr "Nachricht senden"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:75
 msgid "Send Message"
-msgstr ""
+msgstr "Nachricht senden"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:76
 msgid "Send this message now?"
-msgstr ""
+msgstr "Nachricht jetzt senden?"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:86
 #, c-format
@@ -3267,18 +3268,18 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Deine Anfrage konnte nicht gesendet werden.\nFehlermeldung: %s"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:95
 msgid "Sent"
-msgstr ""
+msgstr "Gesendet"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:96
 msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr ""
+msgstr "Deine Nachricht wurde an das Widelands Entwicklungsteam geschickt und wir werden schnellstmöglich antworten. Vergiss nicht deinen Posteingang regelmäßig zu prüfen."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:39
 msgid "Login"
@@ -3302,7 +3303,7 @@ msgstr "Um ein registriertes Konto zu verwenden, brauchst du ein Konto auf der W
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:86
 msgid "Username:"
-msgstr ""
+msgstr "Benutzername:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:91
 #: ../../src/ui_fsmenu/login_box.cc:53
@@ -3347,21 +3348,21 @@ msgstr "Sortieren nach"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:160
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Erweiterung zum Upload auswählen..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:171
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Bildschirmfoto hochladen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:178
 msgid "Understood and confirmed"
-msgstr ""
+msgstr "Verstanden und bestätigt"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:179
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr ""
+msgstr "Mit dem Häckchen bestätigst du dass du die obigen Bedingungen gelesen hast und akzeptierst."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:189
 msgid "Reset the filters"
@@ -3408,7 +3409,7 @@ msgstr "Die Erweiterungspaketierung starten…"
 #. Development Team
 #: ../../src/ui_fsmenu/addons/manager.cc:280
 msgid "Contact us…"
-msgstr ""
+msgstr "Schreib uns..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:285
 msgid "Tools for Add-Ons Developers"
@@ -3444,7 +3445,7 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr ""
+msgstr "Du kannst hier deine Erweiterungen zum Server hochladen und damit anderen Spielern verfügbar machen. Mit dem Hochladen bestätigst du, dein Werk unter den Bedingungen der GNU General Public License (GPL) Version 2 zu veröffentlichen. Dies ist die gleiche Lizenz mit der Widelands veröffentlicht wird. Wähle im Hauptmenü 'Über Widelands' → 'Lizenz' für weitere Informationen über die GPL."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:351
 msgid ""
@@ -3452,7 +3453,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "Es ist verboten Erweiterungen mit schädlichem oder bösartigem Inhalt oder Spam hochzuladen. Mit dem Hochladen versicherst du dass die Erweiterung dein eigenes Werk ist oder du die Erlaubnis des Authors hast, die Erweiterung für sie oder ihn zu veröffentlichen."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:356
 msgid ""
@@ -3460,7 +3461,7 @@ msgid ""
 " further above before submitting content. Since the documentation is subject"
 " to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr ""
+msgstr "Bevor du Inhalte einreichen darfst, musst du die Erweiterungs-Dokumentation gelesen haben. Diese erreichst du über den obigen Link. Da die Dokumentation einem ständigen Wandel unterliegt, stelle bitte sicher dass du die aktuelle Version gelesen und die Richtlinien beachtet hast."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:361
 msgid ""
@@ -3468,7 +3469,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "Deine Erweiterung wird nach dem Hochladen durch das Widelands Entwicklungsteam überprüft. Sollten Fragen auftreten wirst du per PM über die Widelands Webseite kontaktiert. Bitte überprüfe den Posteingang deines Profils daher regelmäßig."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:392
 #, c-format
@@ -3477,7 +3478,7 @@ msgid ""
 "of an add-on or collaborating with another add-on designer? Please visit our"
 " forums at %s, explain your needs, and the Widelands Development Team will "
 "be happy to help."
-msgstr ""
+msgstr "Technische Probleme? Fragen zur Dokumentation? Weitere Anliegen wie zB. die Löschung einer Erweiterung oder die Zusammenarbeit mit einem anderen Designer einer Erweiterung? Das Widelands Team hilft dir gerne! Besuche unser Forum unter %s und beschreibe dein Problem."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:410
 msgid ""
@@ -3488,7 +3489,7 @@ msgid ""
 "use this way of communication only if there is a reason why your concern is "
 "not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
 " website user profile page."
-msgstr ""
+msgstr "Du kannst auch eine Nachricht an das Widelands Entwicklungsteam senden und wir versuchen dir so schnell wie möglich bei deinem Anliegen zu helfen. Nur Server Administratoren können diese Nachrichten lesen. Andere Designer von Erweiterungen profitieren in der Regel auch von den Antworten auf öffentlich gestellte Fragen. Bitte verwende diesen Kommunikationskanal daher nur wenn es konkrete Gründe gibt, die Unterhaltung privat zu halten. Du erhältst die Antwort als PM in deinem Benutzerprofil auf der Widelands Webseite."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:448
 msgid "Development"
@@ -3573,51 +3574,51 @@ msgstr "Alle aktualisieren"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:707
 msgid "Not logged in"
-msgstr ""
+msgstr "Nicht eingeloggt"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:708
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Klick zum Einloggen. Danach kannst du kommentieren, über Erweiterungen abstimmen und eigene Erweiterungen hochladen."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:712
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "Zum Hochladen von Erweiterungen bitte einloggen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:714
 msgid "Please log in to upload content"
-msgstr ""
+msgstr "Zum Hochladen von Inhalten bitte einloggen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:716
 msgid "Please log in to send an enquiry"
-msgstr ""
+msgstr "Zum Senden einer Anfrage bitte einloggen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:721
 #, c-format
 msgid "Logged in as %s"
-msgstr ""
+msgstr "Eingeloggt als %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:721
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Eingeloggt als %s (admin)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:724
 msgid "Click to log out"
-msgstr ""
+msgstr "Klicken zum Ausloggen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:729
 msgid "Please tick the confirmation checkbox to upload add-ons"
-msgstr ""
+msgstr "Bitte das Bestätigungshäckchen setzen, um Erweiterungen hochzuladen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:732
 msgid "Please tick the confirmation checkbox to upload content"
-msgstr ""
+msgstr "Bitte das Bestätigungshäckchen setzen, um Inhalte hochzuladen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:759
 msgid "Server Error"
-msgstr ""
+msgstr "Serverfehler"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:760
 #, c-format
@@ -3625,18 +3626,18 @@ msgid ""
 "Unable to connect to the server.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Keine Verbindung zum Server möglich.\nFehlermeldung:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:769
 msgid "Wrong Password"
-msgstr ""
+msgstr "Falsches Passwort"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:770
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Benutzername oder Passwort ist falsch: %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:856
 msgid "Server Connection Error"
@@ -3736,23 +3737,23 @@ msgstr "Erweiterungen mit Fehlern in den Abhängigkeiten können fehlerhaft funk
 #: ../../src/ui_fsmenu/addons/manager.cc:1255
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:58
 msgid "Upload"
-msgstr ""
+msgstr "Hochladen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1256
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "Möchtest du die Erweiterung \"%s\" wirklich hochladen?"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1265
 #, c-format
 msgid "Uploading ‘%s’…"
-msgstr ""
+msgstr "Lade \"%s\" hoch..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1272
 #: ../../src/ui_fsmenu/addons/manager.cc:1329
 #: ../../src/ui_fsmenu/addons/manager.cc:1393
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1296
 #, c-format
@@ -3761,7 +3762,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Fehler beim Hochladen der Erweiterung \"%1$s\".\n\nFehlermeldung:\n%2$s "
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1309
 #, c-format
@@ -3784,7 +3785,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Die Übersetzungsdateien für die Erweiterung „%1$s“ konnten nicht heruntergeladen werden. Die Installation/Aktualisierung der Erweiterung wird übersprungen.\n\nFehlermeldung:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1494
 #, c-format
@@ -4068,45 +4069,45 @@ msgstr "Kurze Beschreibung, welche an den Schwierigkeitsgrad angehängt wird."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:61
 msgid "Edit…"
-msgstr ""
+msgstr "Bearbeiten..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 msgid "Edit Comment"
-msgstr ""
+msgstr "Kommentar bearbeiten"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 msgid "Write Comment"
-msgstr ""
+msgstr "Kommentieren"
 
 #. * TRANSLATORS: Short for Bold text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:156
 msgctxt "markup"
 msgid "B"
-msgstr ""
+msgstr "F"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:156
 msgid "Bold"
-msgstr ""
+msgstr "Fett"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:160
 msgctxt "markup"
 msgid "I"
-msgstr ""
+msgstr "K"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:160
 msgid "Italic"
-msgstr ""
+msgstr "Kursiv"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:164
 msgid "Underline"
-msgstr ""
+msgstr "Unterstrichen"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:164
 msgctxt "markup"
 msgid "_"
-msgstr ""
+msgstr "_"
 
 #. * TRANSLATORS: Short for Shadow text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
@@ -4116,7 +4117,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
 msgid "Shadow"
-msgstr ""
+msgstr "Schatten"
 
 #. * TRANSLATORS: Short for Color text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
@@ -4126,7 +4127,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
 msgid "Color…"
-msgstr ""
+msgstr "Farbe..."
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
@@ -4136,7 +4137,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
 msgid "Tiny"
-msgstr ""
+msgstr "Winzig"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:194
@@ -4146,7 +4147,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:194
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:198
@@ -4162,7 +4163,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:202
 msgid "Large"
-msgstr ""
+msgstr "Groß"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:206
@@ -4172,7 +4173,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:206
 msgid "Huge"
-msgstr ""
+msgstr "Riesig"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:233
 #, c-format
@@ -4181,15 +4182,15 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "Kommentar konnte nicht gesendet werden.\n\nFehlermeldung:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:253
 msgid "Preview:"
-msgstr ""
+msgstr "Vorschau:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:278
 msgid "The comment contains invalid richtext markup:"
-msgstr ""
+msgstr "Kommentar enthält ungültige Formatierung:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:357
 msgid "Your vote"
@@ -4205,7 +4206,7 @@ msgstr "Vorheriges Bildschirmfoto"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:398
 msgid "Write a comment…"
-msgstr ""
+msgstr "Schreibe ein Kommentar..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:404
 msgid "Not voted"
@@ -4216,7 +4217,7 @@ msgstr "Nicht bewertet"
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Stimme konnte nicht gesendet werden.\nFehlermeldung: %s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:476
 #, c-format
@@ -4283,11 +4284,11 @@ msgstr "Das Bildschirmfoto konnte nicht vom Server geladen werden."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:661
 msgid "Please log in to comment"
-msgstr ""
+msgstr "Zum Kommentieren bitte einloggen"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:663
 msgid "Please log in to vote"
-msgstr ""
+msgstr "Zum Bewerten bitte einloggen"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:47
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
@@ -4491,7 +4492,7 @@ msgstr[1] "%u Bildschirmfotos"
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:45
 #, c-format
 msgid "Upload Screenshot for ‘%s’"
-msgstr ""
+msgstr "Bildschirmfoto für \"%s\" hochladen."
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:98
@@ -4504,7 +4505,7 @@ msgstr "Beschreibung"
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:111
 msgid "Uploading…"
-msgstr ""
+msgstr "Lade hoch..."
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:128
 #, c-format
@@ -4513,7 +4514,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%3$s"
-msgstr ""
+msgstr "Fehler beim Hochladen des Bildschirmfotos \"%1$s\" für die Erweiterung \"%2$s\".\n\nFehlermeldung:\n%3$s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:34
 msgid "Choose Campaign"
@@ -4651,7 +4652,7 @@ msgstr "Drücke den neuen Tastaturbefehl oder schließe dieses Fenster zum Abbre
 #: ../../src/ui_fsmenu/keyboard_options.cc:90
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "(unused)"
-msgstr ""
+msgstr "(unbenutzt)"
 
 #. * TRANSLATORS: [Tribe Name] Building Name
 #: ../../src/ui_fsmenu/keyboard_options.cc:107
@@ -5651,18 +5652,18 @@ msgstr "Falscher Pfad zur Datei in \"campaigns.lua\" aus \"tutorials.lua\": %s"
 msgid "Tutorial"
 msgstr "Einführungsspiel"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autoren"
@@ -6495,9 +6496,9 @@ msgstr "Häfen"
 msgid "Low productivity:"
 msgstr "Geringe Produktivität:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -7169,7 +7170,7 @@ msgstr "Erweiterungen:"
 
 #: ../../src/wui/gamedetails.cc:209
 msgid "Game data error:"
-msgstr ""
+msgstr "Spieldatenfehler:"
 
 #: ../../src/wui/general_statistics_menu.cc:136
 msgid "Land"
