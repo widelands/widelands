@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-13 02:45+0000\n"
+"POT-Creation-Date: 2021-08-19 02:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:602
 #: ../../data/scripting/richtext.lua:607 ../../src/base/i18n.cc:399
-#: ../../src/base/i18n.cc:408 ../../src/logic/addons.cc:173
+#: ../../src/base/i18n.cc:408 ../../src/logic/addons.cc:191
 #, c-format
 msgid "%1$s, %2$s"
 msgstr ""
@@ -243,8 +243,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -258,10 +258,10 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -451,9 +451,9 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
+#. * shown
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
 #: ../../src/wui/interactive_gamebase.cc:225
@@ -1554,62 +1554,62 @@ msgstr ""
 msgid "Starting Condition"
 msgstr ""
 
-#: ../../src/logic/addons.cc:88
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr ""
 
-#: ../../src/logic/addons.cc:143
+#: ../../src/logic/addons.cc:161
 msgid "No conflicts"
 msgstr ""
 
-#: ../../src/logic/addons.cc:148
+#: ../../src/logic/addons.cc:166
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr ""
 
-#: ../../src/logic/addons.cc:153 ../../src/logic/addons.cc:193
+#: ../../src/logic/addons.cc:171 ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr ""
 
-#: ../../src/logic/addons.cc:159
+#: ../../src/logic/addons.cc:177
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/addons.cc:178
+#: ../../src/logic/addons.cc:196
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%s (missing)"
 msgstr ""
 
-#: ../../src/logic/addons.cc:188
+#: ../../src/logic/addons.cc:206
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr ""
 
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:216
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr ""
 
-#: ../../src/logic/addons.cc:200
+#: ../../src/logic/addons.cc:218
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1617,11 +1617,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:218
+#: ../../src/logic/addons.cc:236
 msgid "None"
 msgstr ""
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr ""
@@ -4704,7 +4704,7 @@ msgstr ""
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:322
+#: ../../src/ui_fsmenu/launch_game.cc:321
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5551,16 +5551,16 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1 author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -6795,8 +6795,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -7346,8 +7346,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
