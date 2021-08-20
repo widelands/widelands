@@ -445,6 +445,7 @@ void BaseDropdown::toggle() {
 
 
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
+	clear_filter();
 	if (!open) {
 		list_->select(current_selection_);
 	}

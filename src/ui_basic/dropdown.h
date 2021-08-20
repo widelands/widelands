@@ -197,6 +197,7 @@ protected:
 private:
 	static void layout_if_alive(int);
 	void layout() override;
+	virtual void clear_filter() = 0;
 
 	/// Updates the buttons
 	void update();
@@ -211,7 +212,6 @@ private:
 
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
-
 
 	/// Give each dropdown a unique ID
 	static int next_id_;
@@ -286,6 +286,18 @@ public:
 		entry_cache_.clear();
 	}
 
+	void clear_filter() override {
+		if (current_filter_.empty()) {
+			return;
+		}
+		log_dbg("clearing filter");
+		special_clear();
+		current_filter_.clear();
+		for (unsigned x = 0; x < entry_cache_unfiltered_.size(); x++) {
+			special_add(entry_cache_unfiltered_.at(x), *entry_cache2_.at(x));
+		}
+	}
+
 	bool handle_textinput(const std::string& input_text) override {
 		log_dbg("text handled %s", input_text.c_str());
 		std::string lower = std::string(input_text);
@@ -327,11 +339,11 @@ public:
 	}
 
 	void special_add(const std::string& name,
-				Entry value,
-				const Image* pic = nullptr,
-				const bool select_this = false,
-				const std::string& tooltip_text = std::string(),
-				const std::string& hotkey = std::string()) {
+	                 Entry value,
+	                 const Image* pic = nullptr,
+	                 const bool select_this = false,
+	                 const std::string& tooltip_text = std::string(),
+	                 const std::string& hotkey = std::string()) {
 		entry_cache_.push_back(std::unique_ptr<Entry>(new Entry(value)));
 		entry_cache2_.push_back(std::unique_ptr<Entry>(new Entry(value)));
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
