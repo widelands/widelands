@@ -111,7 +111,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						}
 					}
 				}
-				if (packet_version >= 6 && ipl && fr.unsigned_8()) {
+				if (packet_version >= 6 && fr.unsigned_8() && ipl) {
 					ibase->load_windows(fr, *mol);
 				}
 			}
@@ -179,9 +179,16 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	} else {
 		fw.unsigned_8(0);
 	}
-	// ====================================================
-	// Nothing may be saved after `iplayer->save_windows`!!
-	// ====================================================
+
+	/*
+	 * Important:
+	 * The number of bytes written by `iplayer->save_windows` can not be
+	 * determined in advance, so any loading code that does not wish to
+	 * load the windows will not be able to access any data saved beyond
+	 * this call. Therefore, do not save any further data after this
+	 * function call which is not intended to be read exclusively by
+	 * loading callers that also read the window data.
+	 */
 
 	fw.write(fs, "binary/interactive_player");
 }
