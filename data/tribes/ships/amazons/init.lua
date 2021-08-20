@@ -68,10 +68,6 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Amapá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Amazon"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Andirá"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Andirá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Antimary"),
@@ -85,10 +81,6 @@ descriptions:new_ship_type {
       pgettext("shipname", "Arara"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Ararirá"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Arauá"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Arauá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Arauã"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -136,8 +128,6 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Cuieiras"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Cuieiras"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Cuini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Cuniuá"),
@@ -156,6 +146,8 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Demini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Dos Marmelos"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Eiru"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Endimari"),
@@ -163,8 +155,6 @@ descriptions:new_ship_type {
       pgettext("shipname", "Envira"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Gregório"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Guariba"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Guaribe"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -177,10 +167,6 @@ descriptions:new_ship_type {
       pgettext("shipname", "Içana"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Inauini"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Ipixuna"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Ipixuna"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Ipixuna"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -274,8 +260,6 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Marimari"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Dos Marmelos"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Mataurá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Matupiri"),
@@ -290,8 +274,6 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Mutum"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Rio Negro"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Nhamundá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Paciá"),
@@ -304,17 +286,11 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Paraconi"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Paracori"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Paraná Urariá"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Parauari"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Pardo"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Pati"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Pauini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Pauini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -325,8 +301,6 @@ descriptions:new_ship_type {
       pgettext("shipname", "Piratucu"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Pitinga"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Preto"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Preto"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -344,9 +318,9 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Quixito"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Riozinho"),
+      pgettext("shipname", "Rio Negro"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Roosevelt"),
+      pgettext("shipname", "Riozinho"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Sepatini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
