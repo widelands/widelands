@@ -65,19 +65,37 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kTheme,
     AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
 
-i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename) {
+std::vector<AddOnState> g_addons;
+
+static const AddOnInfo* find_addon(const std::string& name) {
+	for (const auto& pair : g_addons) {
+		if (pair.first->internal_name == name) {
+			return pair.first.get();
+		}
+	}
+	return nullptr;
+}
+
+i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon) {
+	if (const AddOnInfo* a = find_addon(addon)) {
+		return new i18n::AddOnTextdomain(addon, a->i18n_version);
+	}
+	return nullptr;
+}
+
+i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename) {
 	if (mapfilename.compare(0, kAddOnDir.size(), kAddOnDir) != 0) {
 		return new i18n::Textdomain("maps");
 	}
+
 	mapfilename = mapfilename.substr(kAddOnDir.size() + 1);
 	const size_t pos = std::min(mapfilename.find('/'), mapfilename.find('\\'));
 	if (pos != std::string::npos) {
 		mapfilename = mapfilename.substr(0, pos);
 	}
-	return new i18n::AddOnTextdomain(mapfilename, find_addon(mapfilename).i18n_version);
-}
 
-std::vector<AddOnState> g_addons;
+	return create_textdomain_for_addon(mapfilename);
+}
 
 std::string version_to_string(const AddOnVersion& version, const bool localize) {
 	std::string s;
@@ -379,15 +397,6 @@ bool AddOnInfo::matches_widelands_version() const {
 		}
 	}
 	return true;
-}
-
-const AddOnInfo& find_addon(const std::string& name) {
-	for (const auto& pair : g_addons) {
-		if (pair.first->internal_name == name) {
-			return *pair.first;
-		}
-	}
-	throw wexception("Add-on %s is not installed", name.c_str());
 }
 
 std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
