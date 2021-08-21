@@ -27,6 +27,7 @@
 namespace Widelands {
 class Objective;
 }
+class InteractiveBase;
 class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
@@ -34,6 +35,12 @@ class GameObjectivesMenu : public UI::UniqueWindow {
 public:
 	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry&);
 	void think() override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kObjectives;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
 	InteractivePlayer& iplayer() const;

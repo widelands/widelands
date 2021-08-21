@@ -120,7 +120,7 @@ struct TabPanel : public Panel {
 	const TabList& tabs() const;
 	void activate(uint32_t idx);
 	void activate(const std::string&);
-	uint32_t active() {
+	uint32_t active() const {
 		return active_;
 	}
 	// Removes the last tab if the 'tabname' matches. Returns whether a tab was removed.
