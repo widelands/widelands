@@ -27,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-16 02:36+0000\n"
-"PO-Revision-Date: 2021-08-18 20:21+0000\n"
-"Last-Translator: Florian Klappan <transifex@fklappan.de>\n"
+"POT-Creation-Date: 2021-08-19 02:34+0000\n"
+"PO-Revision-Date: 2021-08-19 18:42+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr "%1$s oder %2$s"
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
-#: ../../src/logic/addons.cc:173
+#: ../../src/logic/addons.cc:191
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -1393,8 +1393,8 @@ msgid ""
 "location."
 msgstr "Wähle die neue Kartengröße, dann klicke in die Karte um sie an der gewählten Position zu ändern. Wenn die Karte vergrößert wird, werden neue Spalten und Zeilen im Osten und Süden des gewählten Punktes angefügt. Wenn die Karte verkleinert wird, wird die gewünschte Anzahl der Spalten und Zeilen von Osten und Süden des Trennungspunktes gelöscht.  "
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1624,62 +1624,62 @@ msgstr "Siegbedingung"
 msgid "Starting Condition"
 msgstr "Startbedingung"
 
-#: ../../src/logic/addons.cc:88
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:143
+#: ../../src/logic/addons.cc:161
 msgid "No conflicts"
 msgstr "Keine Konflikte"
 
-#: ../../src/logic/addons.cc:148
+#: ../../src/logic/addons.cc:166
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (erwartete Version %2$s, gefunden %3$s)"
 
-#: ../../src/logic/addons.cc:153 ../../src/logic/addons.cc:193
+#: ../../src/logic/addons.cc:171 ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (erwartete Version %3$s, gefunden %4$s)"
 
-#: ../../src/logic/addons.cc:159
+#: ../../src/logic/addons.cc:177
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u Erweiterung mit falscher Version: %2$s"
 msgstr[1] "%1$u Erweiterungen mit falscher Version: %2$s"
 
-#: ../../src/logic/addons.cc:178
+#: ../../src/logic/addons.cc:196
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$u fehlende Erweiterung: %2$s"
 msgstr[1] "%1$u fehlende Erweiterungen: %2$s"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (fehlt)"
 
-#: ../../src/logic/addons.cc:188
+#: ../../src/logic/addons.cc:206
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (fehlen)"
 
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:216
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s und %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:200
+#: ../../src/logic/addons.cc:218
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u fehlende Erweiterung"
 msgstr[1] "%u fehlende Erweiterungen"
 
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1687,11 +1687,11 @@ msgstr[0] "%u Erweiterung mit falscher Version"
 msgstr[1] "%u Erweiterungen mit falscher Version"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:218
+#: ../../src/logic/addons.cc:236
 msgid "None"
 msgstr "Keine"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (Version %3$s)"
@@ -3362,7 +3362,7 @@ msgstr "Verstanden und bestätigt"
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr "Mit dem Häckchen bestätigst du dass du die obigen Bedingungen gelesen hast und akzeptierst."
+msgstr "Mit dem Häckchen bestätigst du dass du die obigen Bedingungen gelesen hast und sie akzeptierst."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:189
 msgid "Reset the filters"
@@ -3453,7 +3453,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr "Es ist verboten Erweiterungen mit schädlichem oder bösartigem Inhalt oder Spam hochzuladen. Mit dem Hochladen versicherst du dass die Erweiterung dein eigenes Werk ist oder du die Erlaubnis des Authors hast, die Erweiterung für sie oder ihn zu veröffentlichen."
+msgstr "Es ist verboten Erweiterungen mit schädlichem oder bösartigem Inhalt oder Spam hochzuladen. Mit dem Hochladen versicherst du, dass die Erweiterung dein eigenes Werk ist, oder du die Erlaubnis des Authors hast, die Erweiterung für sie oder ihn zu veröffentlichen."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:356
 msgid ""
@@ -3610,11 +3610,11 @@ msgstr "Klicken zum Ausloggen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:729
 msgid "Please tick the confirmation checkbox to upload add-ons"
-msgstr "Bitte das Bestätigungshäckchen setzen, um Erweiterungen hochzuladen"
+msgstr "Bitte das Bestätigungshäkchen setzen, um Erweiterungen hochzuladen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:732
 msgid "Please tick the confirmation checkbox to upload content"
-msgstr "Bitte das Bestätigungshäckchen setzen, um Inhalte hochzuladen"
+msgstr "Bitte das Bestätigungshäkchen setzen, um Inhalte hochzuladen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:759
 msgid "Server Error"
@@ -4113,27 +4113,27 @@ msgstr "_"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
 msgctxt "markup"
 msgid "S"
-msgstr ""
+msgstr "H"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
 msgid "Shadow"
-msgstr "Schatten"
+msgstr "Hintergrund"
 
 #. * TRANSLATORS: Short for Color text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
 msgctxt "markup"
 msgid "C"
-msgstr ""
+msgstr "S"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
 msgid "Color…"
-msgstr "Farbe..."
+msgstr "Schriftfarbe..."
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
 msgctxt "markup"
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
 msgid "Tiny"
@@ -4143,7 +4143,7 @@ msgstr "Winzig"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:194
 msgctxt "markup"
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:194
 msgid "Small"
@@ -4153,13 +4153,13 @@ msgstr "Klein"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:198
 msgctxt "markup"
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. * TRANSLATORS: Short for Large text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:202
 msgctxt "markup"
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:202
 msgid "Large"
@@ -4169,7 +4169,7 @@ msgstr "Groß"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:206
 msgctxt "markup"
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:206
 msgid "Huge"
@@ -4261,12 +4261,12 @@ msgstr[1] "%u Kommentare:"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:577
 #, c-format
 msgid "%1$s (edited on %2$s)"
-msgstr ""
+msgstr "%1$s (bearbeitet am %2$s)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:582
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
-msgstr ""
+msgstr "%1$s (bearbeitet von ‘%2$s’ am %3$s)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:589
 #, c-format
@@ -4658,7 +4658,7 @@ msgstr "(unbenutzt)"
 #: ../../src/ui_fsmenu/keyboard_options.cc:107
 #, c-format
 msgid "[%1$s] %2$s"
-msgstr ""
+msgstr "[%1$s] %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:175
 msgid "Edit Keyboard Shortcuts"
@@ -4684,7 +4684,7 @@ msgstr "%1$s: %2$s"
 #: ../../src/ui_fsmenu/keyboard_options.cc:222
 #, c-format
 msgid "[%1$s] %2$s: %3$s"
-msgstr ""
+msgstr "[%1$s] %2$s: %3$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:251
 msgid "Keyboard Shortcut Conflict"
@@ -4711,7 +4711,7 @@ msgstr "Editor"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:289
 msgid "Fastplace"
-msgstr ""
+msgstr "Schnellbau"
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -4803,7 +4803,7 @@ msgstr "Gesp. Spiel"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Dies ist ein gespeichertes Spiel – die Siegbedingung wurde bereits festgelegt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:322
+#: ../../src/ui_fsmenu/launch_game.cc:321
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6298,7 +6298,7 @@ msgstr "%1$s+%2$s"
 #: ../../src/wlapplication_options.cc:909
 #, c-format
 msgid "Fastplace #%i"
-msgstr ""
+msgstr "Schnellbau #%i"
 
 #: ../../src/wui/actionconfirm.cc:187
 msgid "Destroy building?"
@@ -6496,9 +6496,9 @@ msgstr "Häfen"
 msgid "Low productivity:"
 msgstr "Geringe Produktivität:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6901,8 +6901,8 @@ msgstr "Ersetze den Spieler durch die ausgewählte KI und setze das Spiel fort"
 msgid "AI for the disconnected player"
 msgstr "Ersatz-KI für den Spieler"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -7462,8 +7462,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiken"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seefahrt"

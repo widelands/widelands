@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-16 02:36+0000\n"
+"POT-Creation-Date: 2021-08-19 02:34+0000\n"
 "PO-Revision-Date: 2021-08-18 22:40+0000\n"
 "Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
@@ -46,7 +46,7 @@ msgstr "%1$s eller %2$s"
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
-#: ../../src/logic/addons.cc:173
+#: ../../src/logic/addons.cc:191
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -1378,8 +1378,8 @@ msgid ""
 "location."
 msgstr "Välj den nya storleken på kartan, och klicka sedan på kartan för att dela den i vald position. När kartstorleken ökas kommer nya rader och kolumner att läggas till öster/söder om vald position. När kartstorleken minskas kommer det valda antalet kolumner och rader att tas bort öster/söder om delningspunkten."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1609,62 +1609,62 @@ msgstr "Segervillkor"
 msgid "Starting Condition"
 msgstr "Ursprungligt förhållande"
 
-#: ../../src/logic/addons.cc:88
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:143
+#: ../../src/logic/addons.cc:161
 msgid "No conflicts"
 msgstr "Inga konflikter"
 
-#: ../../src/logic/addons.cc:148
+#: ../../src/logic/addons.cc:166
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (förväntad version %2$s, hittade %3$s)"
 
-#: ../../src/logic/addons.cc:153 ../../src/logic/addons.cc:193
+#: ../../src/logic/addons.cc:171 ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (förväntad version %3$s, hittade %4$s)"
 
-#: ../../src/logic/addons.cc:159
+#: ../../src/logic/addons.cc:177
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u tillägg med fel version: %2$s"
 msgstr[1] "%1$u tillägg med fel version: %2$s"
 
-#: ../../src/logic/addons.cc:178
+#: ../../src/logic/addons.cc:196
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$usaknat tillägg: %2$s"
 msgstr[1] "%1$usaknade tillägg: %2$s"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (saknas)"
 
-#: ../../src/logic/addons.cc:188
+#: ../../src/logic/addons.cc:206
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (saknas)"
 
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:216
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s och %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:200
+#: ../../src/logic/addons.cc:218
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u saknat tillägg"
 msgstr[1] "%u saknade tillägg"
 
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1672,11 +1672,11 @@ msgstr[0] "%u tillägg med fel version"
 msgstr[1] "%u tillägg med fel version"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:218
+#: ../../src/logic/addons.cc:236
 msgid "None"
 msgstr "Inga"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (version %3$s)"
@@ -4788,7 +4788,7 @@ msgstr "Sparat spel"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Spelet är ett sparat spel - vinstvillkoret valdes förut."
 
-#: ../../src/ui_fsmenu/launch_game.cc:322
+#: ../../src/ui_fsmenu/launch_game.cc:321
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6481,9 +6481,9 @@ msgstr "Hamnar"
 msgid "Low productivity:"
 msgstr "Låg produktivitet:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:711
 #: ../../src/wui/building_statistics_menu.cc:731
 #: ../../src/wui/building_statistics_menu.cc:733
@@ -6886,8 +6886,8 @@ msgstr "Ersätt den frånkopplade spelaren med vald AI-spelare och fortsätt spe
 msgid "AI for the disconnected player"
 msgstr "AI-spelare för den frånkopplade spelaren"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -7447,8 +7447,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistik"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Sjöfart"
