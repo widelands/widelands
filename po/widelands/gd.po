@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-13 02:45+0000\n"
-"PO-Revision-Date: 2021-08-13 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-08-19 02:34+0000\n"
+"PO-Revision-Date: 2021-08-18 07:08+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +45,7 @@ msgstr "%1$s no %2$s"
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
-#: ../../src/logic/addons.cc:173
+#: ../../src/logic/addons.cc:191
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -265,8 +265,8 @@ msgstr "Samh"
 msgid "Dec"
 msgstr "Dùbh"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -280,12 +280,12 @@ msgstr "Am prìomh chlàr-taice"
 msgid "Tools"
 msgstr "Innealan"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -475,10 +475,10 @@ msgstr "Fiosrachadh"
 msgid "Click on a field to show information about it"
 msgstr "Briog air raon a dh’fhaighinn fiosrachadh mu dhèidhinn"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -1610,26 +1610,26 @@ msgstr "Cumha buaidhe"
 msgid "Starting Condition"
 msgstr "Cumha tòiseachaidh"
 
-#: ../../src/logic/addons.cc:88
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:143
+#: ../../src/logic/addons.cc:161
 msgid "No conflicts"
 msgstr "Gun chòmhstri"
 
-#: ../../src/logic/addons.cc:148
+#: ../../src/logic/addons.cc:166
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (an dùil air tionndadh %2$s, chaidh %3$s a lorg)"
 
-#: ../../src/logic/addons.cc:153 ../../src/logic/addons.cc:193
+#: ../../src/logic/addons.cc:171 ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (an dùil air tionndadh %3$s, chaidh %4$s a lorg)"
 
-#: ../../src/logic/addons.cc:159
+#: ../../src/logic/addons.cc:177
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
@@ -1638,7 +1638,7 @@ msgstr[1] "Tha an tionndadh ceàrr aig %1$u thuilleadan: %2$s"
 msgstr[2] "Tha an tionndadh ceàrr aig %1$u tuilleadain: %2$s"
 msgstr[3] "Tha an tionndadh ceàrr aig %1$u tuilleadan: %2$s"
 
-#: ../../src/logic/addons.cc:178
+#: ../../src/logic/addons.cc:196
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
@@ -1647,22 +1647,22 @@ msgstr[1] "Tha %1$u thuilleadan a dhìth: %2$s"
 msgstr[2] "Tha %1$u tuilleadain a dhìth: %2$s"
 msgstr[3] "Tha %1$u tuilleadan a dhìth: %2$s"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (a dhìth)"
 
-#: ../../src/logic/addons.cc:188
+#: ../../src/logic/addons.cc:206
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (a dhìth)"
 
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:216
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s ’s %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:200
+#: ../../src/logic/addons.cc:218
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
@@ -1671,7 +1671,7 @@ msgstr[1] "Tha %u thuilleadan a dhìth"
 msgstr[2] "Tha %u tuilleadain a dhìth"
 msgstr[3] "Tha %u tuilleadan a dhìth"
 
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1681,11 +1681,11 @@ msgstr[2] "Tha an tionndadh ceàrr aig %u tuilleadain"
 msgstr[3] "Tha an tionndadh ceàrr aig %u tuilleadan"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:218
+#: ../../src/logic/addons.cc:236
 msgid "None"
 msgstr "Chan eil gin"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (tionndadh %3$s)"
@@ -3154,7 +3154,7 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
-msgstr "An dath tùsail"
+msgstr "An dath bunaiteach"
 
 #: ../../src/ui_basic/color_chooser.cc:328
 msgid "Red"
@@ -4847,7 +4847,7 @@ msgstr "Geama air a shàbhaladh"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "’S e geama air a shàbhaladh a tha sa gheama – chaidh cumha na buaidhe a shuidheachadh mar-thà."
 
-#: ../../src/ui_fsmenu/launch_game.cc:322
+#: ../../src/ui_fsmenu/launch_game.cc:321
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5696,18 +5696,18 @@ msgstr "Slighe mhì-dhligheach dhan fhaidhle ann an campaigns.lua no tutorials.l
 msgid "Tutorial"
 msgstr "Oideachadh"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Ùghdar"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Ùghdaran"
@@ -6750,7 +6750,7 @@ msgstr "Chan fhaod ainm na pròifil a bhith falamh"
 
 #: ../../src/wui/economy_options_window.cc:566
 msgid "The default profile cannot be overwritten"
-msgstr "Cha ghabh sgrìobhadh thairis air a’ phròifil thùsail"
+msgstr "Cha ghabh sgrìobhadh thairis air a’ phròifil bunaiteach"
 
 #: ../../src/wui/economy_options_window.cc:569
 msgid "Save the profile under this name"
@@ -6947,8 +6947,8 @@ msgstr "Cuir an IF a chaidh a thaghadh an àite a’ chluicheadair a dh’fhalbh
 msgid "AI for the disconnected player"
 msgstr "IF dhan chluicheadair a dh’fhalbh"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -7516,8 +7516,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Stadastaireachd"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seòladaireachd"

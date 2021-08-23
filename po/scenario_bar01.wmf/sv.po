@@ -4,6 +4,7 @@
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
 # Fredrik Pettersson <luno@iaofredde.net>, 2006
+# Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-02-24 20:25+0000\n"
-"Last-Translator: Martin Eriksson <nils.martin.andreas@gmail.com>\n"
+"PO-Revision-Date: 2021-08-19 22:16+0000\n"
+"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,17 +25,17 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr "Bygg två skogsvaktarkojor"
+msgstr "Bygg två skogvaktarkojor"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Bygg en skogsvaktarkoja bredvid varje skogshuggarkoja."
+msgstr "Bygg en skogvaktarkoja bredvid varje skogshuggarkoja"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Naturligt växer träd endast i långsam takt. För att säkerställa att du har nog med stockar behöver du skogsvaktare."
+msgstr "Naturligt växer träd endast i långsam takt. För att säkerställa att du har tillräckligt med stockar så behöver du skogvaktare."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
@@ -48,11 +49,11 @@ msgstr "Expandera åt nordost mot klipporna"
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Bygg militärbyggnader (som vaktposter och fort) för att expandera ditt territorium."
+msgstr "Bygg militärbyggnader (till exempel vaktposter och fort) för att utöka ditt territorium"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Ta dig till klipporna åt nordost och bygg ett stenbrott där."
+msgstr "Ta dig till klipporna åt nordost och bygg ett stenbrott där"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
@@ -64,7 +65,7 @@ msgstr "Bygg kolgruvor och järngruvor"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr "Bygg en kolgruva och en järngruva."
+msgstr "Bygg en kolgruva och en järngruva"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -74,7 +75,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr "För att göra det, placera en flagga på bergets östra sida (i bergsterräng, inte på en bergsäng). När du klickar på flaggan kan du skicka geologer dit. Eftersom flaggan är placerad på ett berg kommer geologerna att söka efter malm, i annat fall söker de efter vatten. Bygg sedan en gruva för varje resurstyp som hittas. Se till att bygga rätt gruvtyp:"
+msgstr "För att göra det så placerar du en flagga på bergets östra sida (i bergsterräng, inte på en bergsäng). När du klickar på flaggan kan du skicka geologer dit. Eftersom flaggan är placerad på ett berg så kommer geologerna att söka efter malm, i annat fall skulle de söka efter vatten. Bygg sedan en gruva för varje typ av resurs som de hittar. Se till att bygga rätt sorts gruva:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
@@ -120,7 +121,7 @@ msgstr "ingenting hittades här"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Gruvor kan bara byggas i bergsterräng. Passande platser för gruvor visas som orange gruvsymboler."
+msgstr "Gruvor kan bara byggas i bergsterräng. Lämpliga platser för gruvor visas som orange gruvsymboler."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
@@ -132,7 +133,7 @@ msgstr "Bygg en jaktkoja, en viltvårdarkoja och en krog"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr "För att kunna arbeta måste dina gruvarbetare ha mat."
+msgstr "För att kunna arbeta måste dina gruvarbetare ha mat"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -162,7 +163,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Andra sätt att producera mat – olika typer av mat – är fiskare och bondgårdar. Vetet från bondgårdarna måste förädlas tillsammans med vatten i ett bageri innan det blir ätbart. Du kan skaffa vatten genom att bygga en brunn på en plats där dina geologer har hittat en vattenkälla."
+msgstr "Andra sätt att producera mat – olika typer av mat – är fiskeri och bondgårdar. Vetet från bondgårdarna måste bearbetas tillsammans med vatten i ett bageri innan det blir ätbart. Du kan skaffa vatten genom att bygga en brunn. För bästa resultat, bygg brunnen på en plats där dina geologer har hittat en vattenkälla."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -176,25 +177,25 @@ msgstr "Bygg ett smältverk"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Järnmalmen som dina gruvarbetare bryter kan ännu inte användas - den måste smältas till järn först."
+msgstr "Järnmalmen som dina gruvarbetare bryter kan ännu inte användas – den måste smältas till järn först"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Bygg ut byggnader och bygg ett mikrobryggeri"
+msgstr "Uppgradera byggnader och bygg en bryggstuga"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Bygg ut en gruva och krogen och bygg en bryggstuga."
+msgstr "Uppgradera en gruva och krogen, och bygg en bryggstuga"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Bygg ut kolgruvan eller järngruvan till en djup gruva och bygg ut krogen till ett värdshus."
+msgstr "Uppgradera kolgruvan eller järngruvan till en djup gruva, och uppgradera krogen till ett värdshus"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
-msgstr "Bygg också en bryggstuga."
+msgstr "Bygg också en bryggstuga"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -202,7 +203,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "En normal gruva kan bara bryta ungefär en tredjedel av resurserna som finns under den. Sedan måste den byggas ut till en djup gruva för att kunna jobba vidare ordentligt. För att bygga ut en byggnad, klicka på den och sedan på rätt knapp i fönstret som kommer upp."
+msgstr "En normal gruva kan bara bryta ungefär en tredjedel av resurserna som finns under den. Sedan måste den uppgraderas till en djup gruva så att den ska kunna fortsätta fungera som den ska. För att uppgradera en byggnad så klickar du på den och sedan på rätt knapp i fönstret som kommer upp."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -240,7 +241,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Större och bättre byggnader – inklusive militärbyggnader – kräver bättre byggnadsmaterial. De kan inte byggas av enkla stockar – stockarna måste först förädlas till härdat trä av en trähärdare. Kom alltid ihåg att bygga en trähärdare innan ditt härdade trä tar slut eftersom du   inte kan expandera utan det."
+msgstr "Större och bättre byggnader – inklusive militärbyggnader – kräver bättre byggnadsmaterial. De kan inte byggas av enkla stockar – stockarna måste först förädlas till härdat trä av en trähärdare. Kom alltid ihåg att bygga en trähärdare innan du får slut på härdat trä, eftersom du inte kan utöka ditt område utan det."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -263,27 +264,27 @@ msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr "Du kan skaffa vatten genom att bygga en brunn över en vattenkälla, vilken dina geologer kan leta upp när du skickar dem till valfri flagga som inte är placerad i bergsterräng."
+msgstr "Du kan skaffa vatten genom att bygga en brunn över en vattenkälla, vilken dina geologer kan hitta när du skickar dem till valfri flagga som inte är placerad i bergsterräng."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "För att beordra en geolog att söka efter vatten, klicka på en flagga i området där du vill att han söker och klicka sedan på knappen 'Skicka geolog för att undersöka platsen'."
+msgstr "För att beordra en geolog att söka efter vatten så klickar du på en flagga i området där du vill att han ska söka, och klickar sedan på knappen 'Skicka geolog för att undersöka platsen'."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "Kol kan skaffas genom att bygga en kolmila eller en kolgruva. Att omvandla stockar till kol går långsamt så du bör bara bygga en kolmila när inga kolfyndigheter finns tillgängliga."
+msgstr "Kol kan skaffas genom att bygga en kolmila eller en kolgruva. Att omvandla stockar till kol går långsamt, så du bör bara bygga en kolmila när det inte finns några kolfyndigheter tillgängliga."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Bygg ett kalkbränneri och en brunn. Bygg dessutom antingen en kolmila eller en kolgruva för kolleveranser."
+msgstr "Bygg ett kalkbränneri och en brunn. Bygg dessutom antingen en kolmila eller en kolgruva för leveranser av kol."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
@@ -296,7 +297,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr "Det tredje materialet som behövs till förbättrade byggnader är vass, vilket används för att täcka taken. Vass planteras på vassfält av trädgårdsmästare runtom sin byggnad."
+msgstr "Det tredje materialet som behövs för att förbättra byggnader är vass, vilket används för att täcka taken. Vass planteras på vassfält av en trädgårdsmästare runtom sin byggnad."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -332,14 +333,14 @@ msgstr "Thron suckar..."
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr "Månader har gått och vi gömmer oss fortfarande där skogen är gammal och mörk."
+msgstr "Månader har gått och vi gömmer oss fortfarande där skogarna är gamla och mörka."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr "Mina krigare jagar om dagen och vakar om natten - de lyssnar efter ljudet av den grymma slakt som ekar från fjärran mellan de urgamla träden."
+msgstr "Mina krigare jagar om dagen och vakar om natten – de lyssnar efter ljudet av den grymma slakt som ekar från fjärran bland de urgamla träden."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
@@ -360,7 +361,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr "Min faders ben vilar fridfullt i marken, på vilken han en gång i tiden avslutade den sanslösa blodspillan som hade uppstått bland oss. Det plågar mig att hans fred bara varade en generation."
+msgstr "Min faders ben vilar fridfullt i jorden där han en gång i tiden fick slut på den sanslösa blodspillan som hade uppstått bland oss. Det plågar mig att hans fred bara varade en generation."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -377,7 +378,7 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr "Som far sa till mig, det finns tider för strid och tider för väntan, när man försöker att inte somna eller dö innan rätt tid kommer. Så nu väntar jag."
+msgstr "Som far sa till mig, det finns tider för strid och tider för väntan, där man försöker att inte somna eller dö innan rätt tid kommer. Så nu väntar jag."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
@@ -393,7 +394,7 @@ msgstr "Thron skakar på huvudet..."
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr "Ja kriget fortsätter. Fler och fler av våra bröder och systrar flyr från det brutala krig som rasar i huvudstaden under träden."
+msgstr "Och ännu fortsätter kriget. Fler och fler av våra bröder och systrar flyr från det brutala krig som rasar i huvudstaden under träden."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -403,7 +404,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "Historierna de berättar om vår ätts dåd är sorgliga. Jag har legat vaken flera nätter, rastlös och tröttare än jag någonsin tidigare trodde var möjligt. Varje gång jag sluter mina ögon ser jag fästningen min fader byggt förgås i lågor. Tronen bland träden, symbolen för enighet och fred bland vårt folk, blev kilen som drev oss isär."
+msgstr "Historierna de berättar om vår ätts dåd är sorgliga. Jag har legat vaken flera nätter, rastlös, tröttare än jag någonsin tidigare trodde var möjligt. Varje gång jag sluter mina ögon ser jag fästningen som min fader byggt förgås i lågor. Tronen bland träden, symbolen för enighet och fred bland vårt folk, blev kilen som driver oss isär."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:202
@@ -415,14 +416,14 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr "Idag tog mina jägare med sig män, kvinnor och små barn till mig. De hade gömt sig i skogen och försökt undkomma kriget, hatet och hämnden som rasar bland stammarna som slåss mot varandra som i gamla tider, när vi inte var något annat än vilda odjur drivna av instinkter. Ingen av mina bröder kommer någonsin att få och hålla kontrollen över trätronen. Ingen av stammarna kommer att vara stark nog att kuva den andra. Denna slakt har inget slut, om inte... Var det detta som far pratade med mig om?"
+msgstr "Idag tog mina jägare med sig män, kvinnor och små barn till mig. De hade gömt sig i skogen och försökt undkomma kriget, hatet och hämnden som rasar bland stammarna som slåss mot varandra som i gamla tider, när vi inte var något annat än vilda odjur drivna av instinkter. Ingen av mina bröder kommer någonsin att ta och hålla kontrollen över trätronen, och ingen av stammarna kommer att vara stark nog att kuva den andra. Denna slakt har inget slut, om inte... Var det detta som far pratade med mig om?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr "Att resa sig upp mot vem som helst som hotar vår existens, även om det är någon av ditt eget kött och blod?"
+msgstr "Att resa sig upp mot den som hotar vår existens, även om det skulle vara någon av ditt eget kött och blod?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
@@ -436,7 +437,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Boldreth verkar mer och mer delad för var dag som går. Mina kamraters moral falnar allt eftersom den kalla årstiden nalkas och vi bor fortfarande i knappt mer än hyddor och kaserner. Jag tänkte aldrig stanna här ute i vildmarken så här länge - men jag trodde heller aldrig att mina bröder skulle fortsätta med sin idiotiska strid så länge."
+msgstr "Boldreth verkar mer och mer sliten för var dag som går. Mina kamraters moral falnar allt eftersom den kalla årstiden nalkas, och vi bor fortfarande inte i mer än hyddor och kaserner. Jag tänkte aldrig stanna här ute i vildmarken så här länge – men jag trodde heller aldrig att mina bröder skulle fortsätta med sin meningslösa strid så här länge."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -445,7 +446,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr "Kanske är det dags att göra oss lite mer bekväma här? Kanske är det dags att ge dem som fortfarande lever här ett nytt hem och ersätta vad vi nu har förlorat, fram tills den tid då vi kan återvända till platsen som vi en gång i tiden kallade för hemma..."
+msgstr "Kanske är det dags att göra oss lite mer bekväma här. Kanske är det dags att ge dem som ännu lever och håller oss samman ett nytt hem och ersätta det vi nu har förlorat, fram tills den tid då vi kan återvända till den plats som vi en gång i tiden kallade vårt hem..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
@@ -468,7 +469,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr "Bara gudarna vet hur länge vi måste gömma oss här. Krigarna hoppas att vi kan marschera tillbaka ärofullt vilken dag som helst nu, men jag betvivlar att det kommer att ske inom den närmaste tiden. Dagarna är korta och kalla..."
+msgstr "Bara gudarna vet hur länge vi måste fortsätta gömma oss här. Krigarna hoppas att vi kan marschera tillbaka ärofullt vilken dag som helst nu, men jag betvivlar att det kommer att ske inom den närmaste tiden. Och dagarna är korta och kalla..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -500,14 +501,14 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr "Men glöm aldrig - de här skogarna är vårt arv, anförtrodda åt oss av våra anfäder. Vi måste alltid ha respekt för och vårda dem. Det vi tar måste vi ge tillbaka."
+msgstr "Men glöm aldrig – de här skogarna är vårt arv, anförtrodda åt oss av våra anfäder. Vi måste alltid ha respekt för och vårda dem. Det vi tar måste vi ge tillbaka."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "För att ersätta träden vi hugger ner borde vi bygga några skogsvaktarkojor, helst i närheten av skogshuggarkojorna."
+msgstr "Så för att ersätta träden vi hugger ner skulle vi kunna bygga några skogsvaktarkojor, helst i närheten av skogshuggarkojorna."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
@@ -524,14 +525,14 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr "Under ännu en sömnlös natt gick jag uppför kullen och blickade norrut. Eldarna brinner fortfarande, tillfredsställer deras hunger efter min faders arv."
+msgstr "Under ännu en sömnlös natt gick jag uppför kullen och blickade norrut. Eldarna brinner fortfarande, tillfredsställer sin hunger efter min faders arv."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr "De är en ständig påminnelse om varför vi måste gömma oss här...och varför vi slutligen måste återvända."
+msgstr "De är en ständig påminnelse om varför vi måste gömma oss här... och varför vi slutligen ska återvända!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
@@ -543,7 +544,7 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr "Ytterligare en gång gick jag till min faders grav, i en helig dunge vid foten av Kal’mavraths höga topp. Jag stod bara där och jag kände varken att timmarna gick eller att regnet föll från den mörka skyn..."
+msgstr "Än en gång gick jag till min faders grav, i en helig dunge vid foten av Kal’mavraths höga topp. Jag bara stod där och kände varken att timmarna gick eller att regnet föll från skyn, som blev allt mörkare..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:269
@@ -565,7 +566,7 @@ msgstr "Thron säger eftertänksamt..."
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr "För ett tag sedan kom Boldreth till mig. Hans råd var att flytta till en plats närmare hemma – för att slå mot första tecken av tvekan i min broders styrkor."
+msgstr "För ett tag sedan kom Boldreth till mig. Hans råd var att flytta till en plats närmare vårt hem – för att slå till vid det första tecknet på tvekan hos mina brödrars styrkor."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -574,7 +575,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr "Men när jag ser ut över skogarna kan jag fortfarande se svart rök som stiger mot skyn. Jag vet att det fortfarande är för tidigt och att det han hoppas på inte kommer att hända inom den närmaste tiden. Han kan ha rätt, men den blodspillan det skulle leda till för båda sidor om vi återvänder för snabbt skrämmer mig..."
+msgstr "Men när jag ser ut över skogarna kan jag fortfarande se svart rök som stiger mot skyn. Jag vet: det är fortfarande är för tidigt, och det han hoppas på kommer inte hända inom den närmaste tiden. Han kan ha rätt, men jag fruktar den blodspillan det skulle leda till hos båda sidor om vi återvänder för hastigt..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
@@ -595,7 +596,7 @@ msgstr "Idag tog mina krigare med sig en gammal man, som sjuk och sårad vandrad
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:294
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
-msgstr "Härmed förnyar jag min ed – jag ska stoppa denna galenskap, kosta vad det kosta vill!"
+msgstr "Härmed förnyar jag min ed – jag ska få ett slut på denna galenskap, kosta vad det kosta vill!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:299
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:314
@@ -620,7 +621,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr "Så du vill förbereda oss inför en lång vistelse i dessa skogar, Thron? Jag kan se klokheten i att göra det, även om mitt hjärta längtar efter ett ärofyllt återvändande till Al’thunran. Vi har väntat för länge medan våra bröder har slagits på slagfältet och våra yxor och svärd har rostat under tiden."
+msgstr "Så du vill förbereda oss inför en lång vistelse i dessa skogar, Thron? Ja, jag kan se klokheten i att göra det, även om mitt hjärta längtar efter ett ärofyllt återvändande till Al’thunran. Vi har väntat för länge medan våra bröder har slagits på slagfältet, och våra yxor och svärd har rostat under tidens gång."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
@@ -632,7 +633,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr "Jag ber om ursäkt, hövding, men jag har ett allvarligt problem att prata med dig om. Klipporna vid vårt läger krymper snabbt under våra arbetares verktyg och det är bara en tidsfråga innan de helt försvinner."
+msgstr "Jag ber om ursäkt, hövding, men jag har ett allvarligt problem att tala med dig om. Klipporna i närheten av vårt läger krymper snabbt under våra arbetares verktyg, och det är bara en tidsfråga innan de helt försvinner."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
@@ -645,7 +646,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr "Även om det inte är ett värdigt uppdrag för en krigare så är det i alla fall någonting att göra! Thron, vad säger du om att jag tar med mig några av våra mest otåliga krigare och vågar oss lite närmare det mäktiga berget Kal’mavrath. Kanske kan vi hitta några fler stora klippor som kan glädja den gamla gubben."
+msgstr "Även om det inte är ett värdigt uppdrag för en krigare så är det åtminstone någonting att göra! Thron, vad säger du om att jag tar med mig några av våra mest otåliga krigare och vågar oss lite närmare det mäktiga berget Kal’mavrath? Vi kanske kan hitta några fler stora klippor, det skulle glädja den gamla gubben."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
@@ -654,7 +655,7 @@ msgstr "Khantrukh knorrar..."
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
-msgstr "Gammal gubbe? Respektlösa ungdom!"
+msgstr "Gammal gubbe? Din ohyfsade ungdom!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:333
@@ -674,7 +675,7 @@ msgstr "Boldreth utbrister..."
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr "Titta! I öster ligger det stora berget Kal'mavrath! Jag undrar vilka skatter naturen kan ha gömt under dess mäktiga berssidor!"
+msgstr "Titta där borta! I öster ligger det stora berget Kal'mavrath! Jag undrar vilka skatter naturen kan ha gömt under dess mäktiga bergssidor!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:344
@@ -682,7 +683,7 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr "Låt oss expandera österut. Det finns allt en chans för de gamla att göra nytta då och då! Låt oss skicka iväg några av de som förstår stenens tungomål för att avslöja bergets hemligheter!"
+msgstr "Vi borde utvidga vårt område österut. Det finns en chans för de gamla att göra nytta då och då! Låt oss skicka iväg några av de som förstår stenens tungomål för att avslöja bergets hemligheter!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:350
 msgid "Boldreth laughs…"
@@ -711,7 +712,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr "Det är förstås sant, men vi får tänka på det senare, för nu finns andra problem att ta itu med. Gruvarbetarna kommer helt säkert att kräva bättre mat för att jobba uppe på berget i den bistra kylan, och att hålla dem med förnödenheter kan bli besvärligt."
+msgstr "Det är förstås sant, men vi får tänka på det senare, för nu finns andra problem att ta itu med. Gruvarbetarna kommer helt säkert att kräva mer mat för att kunna arbeta uppe på berget i den här bistra kylan, och det kan bli besvärligt att hålla dem med förnödenheter."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
@@ -728,7 +729,7 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Det verkar finnas många djur i skogen här - vi kan ju alltid jaga fler av dem. Och folket skulle så klart hurra högt för en ny krog - vi kan ju kalla den 'Throns stolthet' om du så önskar!"
+msgstr "Det verkar finnas många djur i skogarma här – vi kan ju alltid jaga fler av dem. Och folket skulle så klart hurra högt för en ny krog – ja, vi kan ju kalla den 'Throns stolthet' om du så önskar!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
@@ -737,7 +738,7 @@ msgstr "Den gamle hoppar upp i luften..."
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:381
 msgid "Wisdom commands to seek variety."
-msgstr "Visdom är att söka efter variation."
+msgstr "Visdom är att söka variation."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:384
@@ -745,11 +746,11 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "Norr om det mäktiga berget finns en stor slätt. Borde vi inte nyttja platsen som naturen gav oss för att bygga en bondgård? Jag skulle definitivt uppskatta ett nybakt pitabröd för omväxlings skull..."
+msgstr "Norr om det mäktiga berget finns en stor slätt. Skulle vi inte kunna nyttja den plats som Moder Jord gav oss och bygga en bondgård? Jag skulle definitivt uppskatta ett nybakat pitabröd för omväxlings skull..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
-msgstr "Boldreth muntrar upp..."
+msgstr "Boldreth muntrar upp sig..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:392
@@ -761,7 +762,7 @@ msgstr "Våra jägare är ute i skogen, Thron."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Jag lovar dig att innan solen går ner ikväll kommer du att äta en fantastisk måltid, passande för vilken stamhövding som helst!"
+msgstr "Jag lovar dig att innan solen går ner ikväll kommer du att äta en fantastisk måltid, passande för alla klaners stamhövding!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
@@ -790,13 +791,13 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr "En krog öppnade för vårt folk igår. Även om jag inte känner för att fira märkte jag hur mycket den här lilla känslan av hemtrevnad betydde för folket. Deras sånger fyllde luften långt in i natten, och de var fortfarande på bättre humör dagen efter."
+msgstr "En krog öppnade för vårt folk igår. Även om jag inte känner för att fira märkte jag hur mycket den här lilla känslan av hemtrevnad betydde för folket. Deras sånger fyllde luften långt in på natten, och de var fortfarande på bättre humör dagen efter."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr "Kanske skapar vi så sakta en plats här som vi kan... kalla hemma."
+msgstr "Kanske skapar vi verkligen sakta men säkert en plats här som vi kan... kalla vårt hem."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
@@ -809,7 +810,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "Nu när vi har både gruvor och nog med mat för att hålla dem igång borde vi ta vara på vad gruvarbetarna producerar och göra något mer användbart av det. Järnmalmen måste smältas till järn, som kan gjutas till vad vi vill. Kolet behövs för att hålla smältverkets eldar brinnande."
+msgstr "Nu när vi har både gruvor och nog med mat för att hålla dem igång borde vi ta vara på det som våra tappra gruvarbetare ger oss, och göra något mer användbart av det. Järnmalmen måste smältas till järn så att den kan gjutas till vad vi vill. Och vi behöver kol för att hålla smältverkets eldar brinnande."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:476
@@ -829,7 +830,7 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr "Det är förstås mörkt och kallt på sådana djup och bara ett fåtal går dit frivilligt. Vi borde belöna deras mod med bättre mat. En sejdel öl eller två skulle också hjälpa till att hålla dem på gott humör."
+msgstr "Det är förstås mörkt och kallt nere i sådana djup, och bara ett fåtal går dit frivilligt. Vi borde belöna dem för deras mod genom att ge dem bättre mat. Och en sejdel öl eller två skulle också kunna hjälpa dem att hålla sig på gott humör."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"
@@ -857,7 +858,7 @@ msgstr "Boldreth ler..."
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr "Nå, gamle vän, det här borde räcka till så att våra befästningar inte rasar för våra fienders första stridsrop! Nu kan vi expandera i trygghet!"
+msgstr "Nå, gamle vän, det här borde fastställa att våra befästningar inte rasar för våra fienders första stridsrop! Nu kan vi utvidga vårt område i trygghet!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:452
@@ -879,7 +880,7 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr "Hövding, det är så man skäms! Låt gå för att vi kan tillverka murbruk till mäktiga befästningar och byggnader nu - men det täpper inte till springorna i våra tak! Kanske de unga finner sig i att tillbringa nätterna i regnet, men jag kan bara inte sova när det droppar i mitt ansikte!"
+msgstr "Hövding, det är så man skäms! Låt gå för att vi kan tillverka murbruk till mäktiga befästningar och byggnader nu – men det hindrar inte våra tak från att börja läcka vatten! De unga kanske finner sig i att tillbringa nätterna i regnet, men jag kan bara inte sova när det droppar i mitt ansikte!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:463
@@ -895,7 +896,7 @@ msgstr "Khantrukh verkar lättad..."
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Härligt! Våra tak läcker inte längre och vi har allt material vi kan behöva för... ja vilka monumentala byggnader vi än kan vilja bygga!"
+msgstr "Härligt! Våra tak läcker inte längre och vi har allt material vi behöver till... ja, vilka storslagna byggnader vi än har lust att bygga!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
@@ -908,7 +909,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr "Allt eftersom våra domäner växer sig större, ökar trycket på våra vägar. Våra stackars bärare kan inte längre transportera varorna så snabbt som vi behöver. Jag föreslår att vi underlättar för dem genom att avla oxar."
+msgstr "Allt eftersom vårt rike växer sig större och större, så ökar trycket på våra vägar. Våra stackars bärare kan inte längre transportera varorna så snabbt som vi behöver. Jag föreslår att vi underlättar för dem genom att avla oxar."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:481
@@ -920,7 +921,7 @@ msgstr "De är fantastiska djur. Oxen är lika snabb som en människa, medan den
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
-msgstr "Uppdrag Slutfört"
+msgstr "Uppdrag slutfört"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
@@ -942,7 +943,7 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr "När jag såg mig omkring såg jag ansikten fyllda av tro, som litade på att jag skulle kunna vägleda dem genom dessa mörka tider. Just innan jag skulle yttra några ord av tacksamhet och uppmuntran sprang en av mina krigare in i värdshuset. Han hade varit långt ute i skogen de senaste dagarna, och jag kunde se hur trött han var."
+msgstr "När jag såg mig omkring såg jag ansikten fyllda av tro, som litade på att jag skulle kunna vägleda dem genom dessa mörka tider. Men innan jag hann yttra några ord av tacksamhet och uppmuntran så rusade en av mina krigare in i värdshuset. Han hade varit långt borta i skogen de senaste dagarna, och jag kunde se hur trött han var."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
@@ -977,7 +978,7 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr "När jag såg mot horisonten såg jag ett rött sken i fjärran. Det är otroligt hur mycket passion mina bröder lägger ner i sitt krig. Jag bävar för stunden då jag får återse Al'thunran – finns det då kvar något mer än aska och sönderfallande ruiner av vår vackra huvudstad?"
+msgstr "När jag blickade mot horisonten såg jag fortfarande ett rött sken glimta i fjärran. Det är otroligt vilken passion mina bröder slåss med i det här kriget. Jag bävar för stunden då jag får återse Al'thunran – tänk om det inte finns kvar något mer än aska och sönderfallna ruiner av vår vackra huvudstad när vi anländer?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
@@ -993,7 +994,7 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr "Vintern är över oss. Många av oss lider av kylan, men vi måste härda ut. Dagen för vårt återvändande kan inte vara långt borta nu – det får den inte vara."
+msgstr "Vintern är över oss. Många av oss lider av kylan, men vi måste härda ut. Dagen för vår återvändo kan inte vara långt borta nu – den får inte vara långt borta nu."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
@@ -1023,11 +1024,11 @@ msgstr "Vi har funnit en by med vänligt och produktivt folk, imponerade av vår
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr "De har levt enkelt, men muntert, av jakt och jordbruk. De har inte varit inblandade i några konflikter än så länge och de är inte redo för strid."
+msgstr "De har levt enkelt, men ändå bekymmerslöst, av jakt och jordbruk. De har inte varit inblandade i några konflikter än så länge, och de är inte redo för strid."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr "Men de är rädda för att kriget runt Al’thunran kommer att sätta stopp för det här livet. Därför har de bestämt sig för att ansluta sig till oss, med förhoppningen att vi kan hjälpa varandra."
+msgstr "Men de fruktar att kriget runt Al’thunran kommer att sätta stopp för deras sätt att leva. Därför har de bestämt sig för att ansluta sig till oss, med förhoppningen att vi kan hjälpa varandra."

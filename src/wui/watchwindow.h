@@ -45,6 +45,12 @@ struct WatchWindow : public UI::Window {
 	void add_view(Widelands::Coords);
 	void follow(Widelands::Bob* bob);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kWatchWindow;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
+
 private:
 	static constexpr size_t kViews = 5;
 

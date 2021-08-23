@@ -144,7 +144,7 @@ public:
 
 	// Returns an arbitrary flag or nullptr if this is an economy without flags
 	// (i.e. an Expedition ship).
-	Flag* get_arbitrary_flag();
+	Flag* get_arbitrary_flag(const Economy* other = nullptr);
 
 	void set_target_quantity(WareWorker economy_type, DescriptionIndex, Quantity, Time);
 
