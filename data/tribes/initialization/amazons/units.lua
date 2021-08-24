@@ -1303,9 +1303,17 @@ descriptions:new_tribe {
       {
          name = "amazons_liana_cutters_hut",
          helptexts = {
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Liana Cutter's Hut
+            lore = pgettext("amazons_building", "‘My mother taught me to ply rope from lianas, allowing sunlight to smile upon us and our Ancestors while we worked to clear it from the trees.’"),
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Liana Cutter's Hut
+            lore_author = pgettext("amazons_building", "From ‘Interviews with Mistress WeaverSong’, recorded in the journals of explorer Daezy Baytes."),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's Hut
-            purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes.")
-         }
+            purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Liana Cutter's Hut
+            note = pgettext("amazons_building", "The cutter harvests liana from fully matured trees within the work area."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Liana Cutter's Hut
+            performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 34):bformat(34))
+         }     
       },
       {
          name = "amazons_water_gatherers_hut",
@@ -1380,7 +1388,11 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore for helptext an amazon production site: Dressmakery
             lore = pgettext("amazons_building", "‘A skilled maker crafts garments of unsurpassed defence, with each stitch imbued with conscious intent.’"),
             -- TRANSLATORS: Lore author helptext for an amazon production site: Dressmakery
+<<<<<<< Updated upstream
             lore_author = pgettext("amazons_building", "Adapted by the Dressmakers’ Guild from the oral history volume ‘Father Jungle’s Wisdom: Song on Mindfulness.’"),
+=======
+            lore_author = pgettext("amazons_building", "Adapted by the Dressmakers’ guild from the oral history volume ‘Father Jungle’s wisdom: Song on Mindfulness.’"),
+>>>>>>> Stashed changes
             -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
             purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
          }
