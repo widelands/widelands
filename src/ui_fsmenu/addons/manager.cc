@@ -87,7 +87,7 @@ std::string time_string(const std::time_t& time) {
 	return oss.str();
 }
 
-const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {
+const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {  // NOLINT
    {0,
     []() {
 	    return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"), _("Any"),
