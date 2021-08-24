@@ -78,13 +78,26 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 		if (ctrl_.username().empty()) {
 			return;
 		}
-		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Delete"),
-				_("Are you sure you want to delete this comment?"), UI::WLMessageBox::MBoxType::kOkCancel);
-		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-			return;
+		{
+			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Delete"),
+					_("Are you sure you want to delete this comment?"), UI::WLMessageBox::MBoxType::kOkCancel);
+			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return;
+			}
 		}
-		ctrl_.net().comment(*info_, "", index_.c_str());
-		*info_ = ctrl_.net().fetch_one_remote(info_->internal_name);
+		try {
+			ctrl_.net().comment(*info_, "", index_.c_str());
+			*info_ = ctrl_.net().fetch_one_remote(info_->internal_name);
+		} catch (const std::exception& e) {
+			log_err("Delete comment '%s' for %s: %s", index_.c_str(), info_->internal_name.c_str(), e.what());
+			UI::WLMessageBox m(
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			   (boost::format(_("The comment could not be deleted.\n\nError Message:\n%s")) %
+			    e.what())
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
 		r.update_data();
 	});
 
@@ -333,6 +346,99 @@ void CommentEditor::reset_text() {
 	think();
 }
 
+/* AdminDialog implementation */
+
+AdminDialog::AdminDialog(AddOnsCtrl& parent, RemoteInteractionWindow& riw, std::shared_ptr<AddOns::AddOnInfo> info, AddOns::NetAddons::AdminAction a)
+   : UI::Window(parent.get_parent(),
+                UI::WindowStyle::kFsMenu,
+                info->internal_name,
+                0, 0, 0, 0,
+                info->descname()),
+	main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+	cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+	list_(nullptr),
+	text_(nullptr)
+{
+	if (a == AddOns::NetAddons::AdminAction::kDelete) {
+		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
+		text_->focus();
+
+		main_box_.add(
+		   new UI::Textarea(&main_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+			                _("Please explain why you are deleting this add-on."), UI::Align::kCenter),
+		   UI::Box::Resizing::kFullSize);
+		main_box_.add_space(kRowButtonSpacing);
+		main_box_.add(text_, UI::Box::Resizing::kExpandBoth);
+	} else {
+		list_ = new UI::Listselect<std::string>(&main_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu);
+
+		switch (a) {
+		case AddOns::NetAddons::AdminAction::kVerify:
+			/** TRANSLATORS: This add-on has not yet been verified */
+			list_->add(_("Unchecked"), "0", nullptr, !info->verified);
+			/** TRANSLATORS: This add-on has been verified */
+			list_->add(_("Verified"), "1", nullptr, info->verified);
+			break;
+		case AddOns::NetAddons::AdminAction::kSyncSafe:
+			/** TRANSLATORS: This add-on is known to cause desyncs */
+			list_->add(_("Desyncs"), "false", nullptr, !info->sync_safe);
+			/** TRANSLATORS: This add-on will not cause desyncs */
+			list_->add(_("Sync-safe"), "true", nullptr, info->sync_safe);
+			break;
+		case AddOns::NetAddons::AdminAction::kQuality:
+			for (const auto& pair : AddOnQuality::kQualities) {
+				const AddOnQuality q = pair.second();
+				list_->add(q.name, std::to_string(pair.first), q.icon, pair.first == info->quality, q.description);
+			}
+			break;
+		default: NEVER_HERE();
+		}
+
+		list_->set_desired_size(300, list_->get_lineheight() * (list_->size() + 1));
+		main_box_.add(list_, UI::Box::Resizing::kExpandBoth);
+	}
+
+	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+
+	cancel_.sigclicked.connect([this]() { die(); });
+	ok_.sigclicked.connect([this, info, a, &parent, &riw]() {
+		try {
+			if (a == AddOns::NetAddons::AdminAction::kDelete) {
+				parent.net().admin_action(a, *info, text_->get_text());
+				riw.die();
+				parent.erase_remote(info);
+			} else {
+				parent.net().admin_action(a, *info, list_->get_selected());
+				*info = parent.net().fetch_one_remote(info->internal_name);
+				riw.update_data();
+			}
+
+			parent.rebuild(false);
+			die();
+		} catch (const std::exception& e) {
+			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+	});
+
+	set_center_panel(&main_box_);
+	center_to_parent();
+	initialization_complete();
+}
+
+void AdminDialog::think() {
+	UI::Window::think();
+	if (text_) {
+		ok_.set_enabled(!text_->get_text().empty());
+	}
+}
+
 /* RemoteInteractionWindow implementation */
 
 RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
@@ -420,7 +526,18 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                     UI::ButtonStyle::kFsMenuSecondary,
                     _("Write a comment…")),
      ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-     login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "") {
+     login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, ""),
+     admin_action_(this,
+                 "admin",
+                 0,
+                 0,
+                 0,
+                 10,
+                 login_button_.get_h(),
+                 _("Administrator actions"),
+                 UI::DropdownType::kPictorialMenu,
+                 UI::PanelStyle::kFsMenu,
+                 UI::ButtonStyle::kFsMenuSecondary) {
 
 	ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
@@ -518,6 +635,35 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	screenshot_next_.sigclicked.connect([this]() { next_screenshot(1); });
 	screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
 
+	admin_action_.set_image(g_image_cache->get("images/wui/editor/menus/tools.png"));
+	admin_action_.add(_("Change verification status…"), AddOns::NetAddons::AdminAction::kVerify);
+	admin_action_.add(_("Change quality rating…"), AddOns::NetAddons::AdminAction::kQuality);
+	admin_action_.add(_("Change sync-safety status…"), AddOns::NetAddons::AdminAction::kSyncSafe);
+	admin_action_.add(_("Enable Transifex integration"), AddOns::NetAddons::AdminAction::kSetupTx);
+	admin_action_.add(_("Delete this add-on"), AddOns::NetAddons::AdminAction::kDelete);
+	admin_action_.selected.connect([this]() {
+		const AddOns::NetAddons::AdminAction action = admin_action_.get_selected();
+		admin_action_.set_list_visibility(false);
+		if (action == AddOns::NetAddons::AdminAction::kSetupTx) {
+			{
+				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
+					_("Are you sure you want to enable Transifex integration for this add-on?"), UI::WLMessageBox::MBoxType::kOkCancel);
+				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+					return;
+				}
+			}
+			try {
+				parent_.net().admin_action(action, *info_, "" /* ignored */);
+			} catch (const std::exception& e) {
+				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+			}
+		} else {
+			AdminDialog ar(parent_, *this, info_, action);
+			ar.run<UI::Panel::Returncodes>();
+		}
+	});
+
 	login_button_.sigclicked.connect([this]() {
 		parent_.login_button_clicked();
 		parent_.update_login_button(&login_button_);
@@ -543,8 +689,14 @@ void RemoteInteractionWindow::on_resolution_changed_note(const GraphicResolution
 void RemoteInteractionWindow::layout() {
 	if (!is_minimal()) {
 		main_box_.set_size(get_inner_w(), get_inner_h());
+
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
+
+		admin_action_.set_visible(parent_.net().is_admin());
+		admin_action_.set_size(login_button_.get_h(), login_button_.get_h());
+		admin_action_.set_pos(Vector2i(login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
+
 		box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
 		box_comment_rows_.set_size(
 		   box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());

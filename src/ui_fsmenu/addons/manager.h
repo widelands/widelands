@@ -52,7 +52,7 @@ struct AddOnQuality {
 	const Image* icon;
 	const std::string name, description;
 
-	static const std::map<uint8_t, std::function<AddOnQuality()>> kQualities;
+	static const std::map<unsigned, std::function<AddOnQuality()>> kQualities;
 
 private:
 	AddOnQuality(const Image* i, const std::string& n, const std::string& d) : icon(i), name(n), description(d) {
@@ -82,6 +82,7 @@ public:
 
 	std::shared_ptr<AddOns::AddOnInfo> find_remote(const std::string& name);
 	bool is_remote(const std::string& name) const;
+	void erase_remote(std::shared_ptr<AddOns::AddOnInfo>);
 
 	const std::string& username() const {
 		return username_;

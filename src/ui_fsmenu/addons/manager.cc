@@ -87,7 +87,7 @@ std::string time_string(const std::time_t& time) {
 	return oss.str();
 }
 
-const std::map<uint8_t, std::function<AddOnQuality()>> AddOnQuality::kQualities = {
+const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {
 	{0, []() { return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"), _("Any"), _("Quality not yet evaluated")); }},
 	{1, []() { return AddOnQuality(playercolor_image(RGBColor(0xcd7f32), "images/players/team.png"),
 			/** TRANSLATORS: This is an add-on code quality rating */
@@ -889,6 +889,17 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 		}
 	}
 	return UI::Window::handle_key(down, code);
+}
+
+void AddOnsCtrl::erase_remote(std::shared_ptr<AddOns::AddOnInfo> a) {
+	for (auto& pointer : remotes_) {
+		if (pointer == a) {
+			pointer = remotes_.back();
+			remotes_.pop_back();
+			return;
+		}
+	}
+	NEVER_HERE();
 }
 
 void AddOnsCtrl::refresh_remotes() {

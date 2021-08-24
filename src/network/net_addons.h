@@ -71,9 +71,8 @@ struct NetAddons {
 	                       const std::string& image,
 	                       const std::string& description);
 
-	enum class AdminAction { kVerify, kQuality, kSyncSafe };
+	enum class AdminAction { kVerify, kQuality, kSyncSafe, kSetupTx, kDelete };
 	void admin_action(AdminAction, const AddOnInfo& addon, const std::string& value);
-	void delete_addon(const AddOnInfo& addon, const std::string& reason);
 
 	void contact(const std::string& enquiry);
 

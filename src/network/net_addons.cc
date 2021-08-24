@@ -666,32 +666,24 @@ void NetAddons::admin_action(const AdminAction a, const AddOnInfo& addon, const 
 
 	std::string send;
 	switch (a) {
+		case AdminAction::kSetupTx: send = "CMD_SETUP_TX "; break;
 		case AdminAction::kVerify: send = "CMD_ADMIN_VERIFY "; break;
 		case AdminAction::kQuality: send = "CMD_ADMIN_QUALITY "; break;
 		case AdminAction::kSyncSafe: send = "CMD_ADMIN_SYNC_SAFE "; break;
+		case AdminAction::kDelete: send = "CMD_ADMIN_DELETE "; break;
 	}
 	send += addon.internal_name;
-	send += ' ';
-	send += value;
-	send += '\n';
-	write_to_server(send);
-
-	check_endofstream();
-	guard.ok();
-}
-
-void NetAddons::delete_addon(const AddOnInfo& addon, const std::string& reason) {
-	if (!is_admin()) {
-		throw WLWarning("", "Only admins can delete add-ons");
+	if (a == AdminAction::kSetupTx) {
+		send += '\n';
+	} else {
+		send += ' ';
+		if (a == AdminAction::kDelete) {
+			append_multiline_message(send, value);
+		} else {
+			send += value;
+			send += '\n';
+		}
 	}
-	check_string_validity(addon.internal_name);
-	init();
-	CrashGuard guard(*this);
-
-	std::string send = "CMD_ADMIN_DELETE ";
-	send += addon.internal_name;
-	send += ' ';
-	append_multiline_message(send, reason);
 	write_to_server(send);
 
 	check_endofstream();

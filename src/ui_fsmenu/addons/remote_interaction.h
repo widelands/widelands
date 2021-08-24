@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "logic/addons.h"
+#include "network/net_addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -80,6 +81,18 @@ private:
 	void reset_text();
 };
 
+class AdminDialog : public UI::Window {
+public:
+	AdminDialog(AddOnsCtrl&, RemoteInteractionWindow&, std::shared_ptr<AddOns::AddOnInfo>, AddOns::NetAddons::AdminAction);
+	void think() override;
+
+private:
+	UI::Box main_box_, buttons_box_;
+	UI::Button ok_, cancel_;
+	UI::Listselect<std::string>* list_;
+	UI::MultilineEditbox* text_;
+};
+
 class RemoteInteractionWindow : public UI::Window {
 public:
 	RemoteInteractionWindow(AddOnsCtrl& parent, std::shared_ptr<AddOns::AddOnInfo> info);
@@ -87,6 +100,9 @@ public:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note) override;
 	void layout() override;
 	void update_data();
+	void die() override {
+		UI::Window::die();
+	}
 
 private:
 	static std::map<std::pair<std::string /* add-on */, std::string /* screenshot */>,
@@ -119,6 +135,7 @@ private:
 	UI::Textarea* voting_txt_[AddOns::kMaxRating];
 	UI::Textarea screenshot_stats_, screenshot_descr_, voting_stats_summary_;
 	UI::Button screenshot_next_, screenshot_prev_, write_comment_, ok_, login_button_;
+	UI::Dropdown<AddOns::NetAddons::AdminAction> admin_action_;
 };
 
 }  // namespace AddOnsUI
