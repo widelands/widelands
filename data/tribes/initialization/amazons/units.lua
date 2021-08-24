@@ -1313,7 +1313,7 @@ descriptions:new_tribe {
             note = pgettext("amazons_building", "The cutter harvests liana from fully matured trees within the work area."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Liana Cutter's Hut
             performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 34):bformat(34))
-         }     
+         }
       },
       {
          name = "amazons_water_gatherers_hut",
