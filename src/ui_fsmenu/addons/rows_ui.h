@@ -75,7 +75,7 @@ public:
 private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
-	UI::Icon icon_, category_, verified_;
+	UI::Icon icon_, category_, verified_, quality_;
 	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
 	UI::MultilineTextarea txt_;
 

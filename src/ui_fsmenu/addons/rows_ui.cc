@@ -321,6 +321,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(info->verified ? "images/ui_basic/list_selected.png" :
                                                    "images/ui_basic/stop.png")),
+     quality_(this,
+               UI::PanelStyle::kFsMenu,
+               AddOnQuality::kQualities.at(info->quality)().icon),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -460,7 +463,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	}
 
 	for (UI::Panel* p :
-	     std::vector<UI::Panel*>{&category_, &version_, &verified_, &bottom_row_right_}) {
+	     std::vector<UI::Panel*>{&category_, &version_, &verified_, &quality_, &bottom_row_right_}) {
 		p->set_handle_mouse(true);
 	}
 	category_.set_tooltip(
@@ -478,6 +481,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
          _("Verified by the Widelands Development Team") :
          _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
+	quality_.set_tooltip(info->internal_name.empty() ? _("Error")
+			: AddOnQuality::kQualities.at(info->quality)().description);
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
          "" :
@@ -513,12 +518,12 @@ void RemoteAddOnRow::layout() {
 	}
 	set_desired_size(get_w(), 4 * kRowButtonSize);
 	for (UI::Panel* p : std::vector<UI::Panel*>{
-	        &install_, &uninstall_, &interact_, &upgrade_, &category_, &version_, &verified_}) {
+	        &install_, &uninstall_, &upgrade_, &category_, &version_, &verified_, &quality_}) {
 		p->set_size(kRowButtonSize, kRowButtonSize);
 	}
-	const int icon_size = 2 * kRowButtonSize + kRowButtonSpacing;
+	const int icon_size = 2 * kRowButtonSize;
 	icon_.set_size(icon_size, icon_size);
-	icon_.set_pos(Vector2i(0, kRowButtonSpacing));
+	icon_.set_pos(Vector2i(0, 0));
 	version_.set_size(
 	   3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize - kRowButtonSpacing);
 	version_.set_pos(Vector2i(
@@ -526,11 +531,12 @@ void RemoteAddOnRow::layout() {
 	uninstall_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
 	upgrade_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	install_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
-	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 2 * kRowButtonSize));
+	interact_.set_size(2 * kRowButtonSize + kRowButtonSpacing, kRowButtonSize);
+	interact_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
 	category_.set_pos(
 	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
-	verified_.set_pos(
-	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
+	verified_.set_pos(Vector2i(0, 2 * kRowButtonSize));
+	quality_.set_pos(Vector2i(kRowButtonSize, 2 * kRowButtonSize));
 	txt_.set_size(
 	   get_w() - icon_size - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
 	txt_.set_pos(Vector2i(icon_size, 0));

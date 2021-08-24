@@ -87,6 +87,19 @@ std::string time_string(const std::time_t& time) {
 	return oss.str();
 }
 
+const std::map<uint8_t, std::function<AddOnQuality()>> AddOnQuality::kQualities = {
+	{0, []() { return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"), _("Any"), _("Quality not yet evaluated")); }},
+	{1, []() { return AddOnQuality(playercolor_image(RGBColor(0xcd7f32), "images/players/team.png"),
+			/** TRANSLATORS: This is an add-on code quality rating */
+			_("Poor"), _("This add-on may cause major glitches and errors.")); }},
+	{2, []() { return AddOnQuality(playercolor_image(RGBColor(0xC0C0C0), "images/players/team.png"),
+			/** TRANSLATORS: This is an add-on code quality rating */
+			_("Good"), _("This add-on works as advertised.")); }},
+	{3, []() { return AddOnQuality(playercolor_image(RGBColor(0xFFD700), "images/players/team.png"),
+			/** TRANSLATORS: This is an add-on code quality rating */
+			_("Excellent"), _("This add-on has been decorated for its remarkably high quality.")); }}
+};
+
 struct OperationCancelledByUserException : std::exception {};
 
 AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
@@ -119,12 +132,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
      browse_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      browse_addons_inner_wrapper_(
         &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     browse_addons_buttons_box_(
-        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     browse_addons_buttons_inner_box_1_(
-        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     browse_addons_buttons_inner_box_2_(
-        &browse_addons_buttons_inner_box_1_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+browse_addons_buttons_box_(&browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+browse_addons_buttons_box_lvbox_(&browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+browse_addons_buttons_box_rvbox_(&browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+browse_addons_buttons_box_category_box_(&browse_addons_buttons_box_lvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+browse_addons_buttons_box_right_hbox_(&browse_addons_buttons_box_rvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      browse_addons_box_(&browse_addons_inner_wrapper_,
                         UI::PanelStyle::kFsMenu,
                         0,
@@ -133,13 +145,13 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         kHugeSize,
                         kHugeSize),
      dev_box_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     filter_verified_(&browse_addons_buttons_inner_box_2_,
+     filter_name_(&browse_addons_buttons_box_rvbox_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     filter_verified_(&browse_addons_buttons_box_right_hbox_,
                       UI::PanelStyle::kFsMenu,
                       Vector2i(0, 0),
                       _("Verified only"),
                       _("Show only verified add-ons in the Browse tab")),
-     sort_order_(&browse_addons_buttons_inner_box_1_,
+     sort_order_(&browse_addons_buttons_box_rvbox_,
                  "sort",
                  0,
                  0,
@@ -147,6 +159,17 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                  10,
                  filter_name_.get_h(),
                  _("Sort by"),
+                 UI::DropdownType::kTextual,
+                 UI::PanelStyle::kFsMenu,
+                 UI::ButtonStyle::kFsMenuSecondary),
+     filter_quality_(&browse_addons_buttons_box_right_hbox_,
+                 "quality",
+                 0,
+                 0,
+                 0,
+                 10,
+                 filter_name_.get_h(),
+                 _("Minimum quality"),
                  UI::DropdownType::kTextual,
                  UI::PanelStyle::kFsMenu,
                  UI::ButtonStyle::kFsMenuSecondary),
@@ -178,7 +201,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                           _("Understood and confirmed"),
                           _("By ticking this checkbox, you confirm that you have read and agree to "
                             "the above terms.")),
-     filter_reset_(&browse_addons_buttons_inner_box_2_,
+     filter_reset_(&browse_addons_buttons_box_lvbox_,
                    "f_reset",
                    0,
                    0,
@@ -452,9 +475,9 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	/** TRANSLATORS: Sort add-ons alphabetically by name (inverted) */
 	sort_order_.add(_("Name (descending)"), AddOnSortingCriteria::kNameCBA);
 	/** TRANSLATORS: Sort add-ons by average rating */
-	sort_order_.add(_("Best average rating"), AddOnSortingCriteria::kHighestRating, nullptr, true);
+	sort_order_.add(_("Most popular"), AddOnSortingCriteria::kHighestRating, nullptr, true);
 	/** TRANSLATORS: Sort add-ons by average rating */
-	sort_order_.add(_("Worst average rating"), AddOnSortingCriteria::kLowestRating);
+	sort_order_.add(_("Least popular"), AddOnSortingCriteria::kLowestRating);
 	/** TRANSLATORS: Sort add-ons by how often they were downloaded */
 	sort_order_.add(_("Most often downloaded"), AddOnSortingCriteria::kMostDownloads);
 	/** TRANSLATORS: Sort add-ons by how often they were downloaded */
@@ -463,6 +486,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	sort_order_.add(_("Oldest"), AddOnSortingCriteria::kOldest);
 	/** TRANSLATORS: Sort add-ons by upload date/time */
 	sort_order_.add(_("Newest"), AddOnSortingCriteria::kNewest);
+
+	for (const auto& pair : AddOnQuality::kQualities) {
+		const AddOnQuality q = pair.second();
+		filter_quality_.add(q.name, pair.first, q.icon, pair.first == 2, q.description);
+	}
 
 	filter_verified_.set_state(true);
 	filter_name_.set_tooltip(_("Filter add-ons by name"));
@@ -473,28 +501,36 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 				continue;
 			}
 			UI::Checkbox* c = new UI::Checkbox(
-			   &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0),
+			   &browse_addons_buttons_box_category_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0),
 			   g_image_cache->get(pair.second.icon),
 			   (boost::format(_("Toggle category ‘%s’")) % pair.second.descname()).str());
 			filter_category_[pair.first] = c;
 			c->set_state(true);
 			c->changed.connect([this, &pair]() { category_filter_changed(pair.first); });
 			c->set_desired_size(kRowButtonSize, kRowButtonSize);
-			browse_addons_buttons_box_.add(c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			browse_addons_buttons_box_.add_space(kRowButtonSpacing);
+			if (index > 0) {
+				browse_addons_buttons_box_category_box_.add_space(kRowButtonSpacing);
+			}
+			browse_addons_buttons_box_category_box_.add(c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			++index;
 		}
 	}
-	browse_addons_buttons_inner_box_2_.add(&filter_verified_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_inner_box_2_.add(&filter_reset_, UI::Box::Resizing::kExpandBoth);
-	browse_addons_buttons_inner_box_1_.add(
-	   &browse_addons_buttons_inner_box_2_, UI::Box::Resizing::kExpandBoth);
-	browse_addons_buttons_inner_box_1_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_inner_box_1_.add(&filter_name_, UI::Box::Resizing::kExpandBoth);
-	browse_addons_buttons_inner_box_1_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_inner_box_1_.add(&sort_order_, UI::Box::Resizing::kExpandBoth);
-	browse_addons_buttons_box_.add(
-	   &browse_addons_buttons_inner_box_1_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_box_right_hbox_.add(&filter_verified_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	browse_addons_buttons_box_right_hbox_.add(&filter_quality_, UI::Box::Resizing::kExpandBoth);
+
+	browse_addons_buttons_box_rvbox_.add(&browse_addons_buttons_box_right_hbox_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_box_rvbox_.add(&filter_name_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_box_rvbox_.add(&sort_order_, UI::Box::Resizing::kFullSize);
+
+	browse_addons_buttons_box_lvbox_.add(&browse_addons_buttons_box_category_box_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_box_lvbox_.add_inf_space();
+	browse_addons_buttons_box_lvbox_.add(&filter_reset_, UI::Box::Resizing::kFullSize);
+
+	browse_addons_buttons_box_.add(&browse_addons_buttons_box_lvbox_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_box_.add(&browse_addons_buttons_box_rvbox_, UI::Box::Resizing::kExpandBoth);
 
 	filter_reset_.set_enabled(false);
 	filter_name_.changed.connect([this]() {
@@ -506,6 +542,10 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		rebuild(false);
 	});
 	sort_order_.selected.connect([this]() { rebuild(false); });
+	filter_quality_.selected.connect([this]() {
+		filter_reset_.set_enabled(true);
+		rebuild(false);
+	});
 
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
@@ -523,9 +563,10 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	filter_reset_.sigclicked.connect([this]() {
 		filter_name_.set_text("");
-		filter_verified_.set_state(true);
+		filter_verified_.set_state(true, false);
+		filter_quality_.select(2);
 		for (auto& pair : filter_category_) {
-			pair.second->set_state(true);
+			pair.second->set_state(true, false);
 		}
 		rebuild(false);
 		filter_reset_.set_enabled(false);
@@ -804,8 +845,8 @@ void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
 	category_filter_changing = true;
 
 	// Normal click enables the selected category and disables all others,
-	// Ctrl+Click disables this behaviour.
-	if (!(SDL_GetModState() & KMOD_CTRL)) {
+	// Ctrl+Click or Shift+Click disables this behaviour.
+	if (!(SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT))) {
 		for (auto& pair : filter_category_) {
 			pair.second->set_state(pair.first == which);
 		}
@@ -857,7 +898,7 @@ void AddOnsCtrl::refresh_remotes() {
 	try {
 		progress.step(_("Connecting to the server…"));
 
-		std::vector<std::string> names = net().refresh_remotes();
+		std::vector<std::string> names = net().refresh_remotes(net().is_admin());
 
 		const int64_t nr_orig_entries = names.size();
 		int64_t nr_addons = nr_orig_entries;
@@ -920,6 +961,11 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 
 	if (filter_verified_.get_state() && !info->verified) {
 		// not verified
+		return false;
+	}
+
+	if (filter_quality_.get_selected() > info->quality) {
+		// too low quality
 		return false;
 	}
 

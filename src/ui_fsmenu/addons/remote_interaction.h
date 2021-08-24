@@ -47,7 +47,7 @@ public:
 	           RemoteInteractionWindow& r,
 	           UI::Panel& parent,
 	           const std::string& text,
-	           const int64_t index);
+	           const std::string& index);
 
 	void update_edit_enabled();
 	void layout() override;
@@ -55,19 +55,19 @@ public:
 private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	const int64_t index_;
+	const std::string index_;
 	UI::Button edit_;
 };
 
 class CommentEditor : public UI::Window {
 public:
-	CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const int64_t index);
+	CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const char* index);
 
 	void think() override;
 
 private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	const int64_t index_;
+	const char* index_;
 
 	UI::Box main_box_, markup_box_, buttons_box_;
 	UI::MultilineTextarea preview_;

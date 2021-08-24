@@ -45,7 +45,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
                        RemoteInteractionWindow& r,
                        UI::Panel& parent,
                        const std::string& text,
-                       const int64_t index)
+                       const std::string& index)
    : UI::MultilineTextarea(&parent,
                            0,
                            0,
@@ -63,7 +63,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 		if (ctrl_.username().empty()) {
 			return;
 		}
-		CommentEditor m(ctrl_, info_, index_);
+		CommentEditor m(ctrl_, info_, index_.c_str());
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			r.update_data();
 		}
@@ -78,9 +78,9 @@ void CommentRow::update_edit_enabled() {
 	 * never edited by an admin yet. */
 	edit_.set_visible(
 	   !ctrl_.username().empty() &&
-	   (ctrl_.net().is_admin() || (info_->user_comments[index_].username == ctrl_.username() &&
-	                               (info_->user_comments[index_].editor.empty() ||
-	                                info_->user_comments[index_].editor == ctrl_.username()))));
+	   (ctrl_.net().is_admin() || (info_->user_comments.at(index_).username == ctrl_.username() &&
+	                               (info_->user_comments.at(index_).editor.empty() ||
+	                                info_->user_comments.at(index_).editor == ctrl_.username()))));
 }
 
 void CommentRow::layout() {
@@ -92,7 +92,7 @@ void CommentRow::layout() {
 
 CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
                              std::shared_ptr<AddOns::AddOnInfo> info,
-                             const int64_t index)
+                             const char* index)
    : UI::Window(&ctrl.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "write_comment",
@@ -100,7 +100,7 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
                 0,
                 100,
                 100,
-                index < 0 ? _("Write Comment") : _("Edit Comment")),
+                index == nullptr ? _("Write Comment") : _("Edit Comment")),
      info_(info),
      index_(index),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -226,8 +226,7 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 			*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		} catch (const std::exception& e) {
-			log_err(
-			   "Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(), e.what());
+			log_err("Edit comment '%s' for %s: %s", index_ ? index_ : "<new>", info_->internal_name.c_str(), e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
@@ -306,7 +305,7 @@ void CommentEditor::apply_format(const std::string& open_tag, const std::string&
 }
 
 void CommentEditor::reset_text() {
-	text_->set_text(index_ < 0 ? "" : info_->user_comments[index_].message);
+	text_->set_text(index_ == nullptr ? "" : info_->user_comments.at(index_).message);
 	think();
 }
 
@@ -422,7 +421,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 		parent_.rebuild(false);
 	});
 	write_comment_.sigclicked.connect([this]() {
-		CommentEditor m(parent_, info_, -1);
+		CommentEditor m(parent_, info_, nullptr);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
 			parent_.rebuild(false);
@@ -565,40 +564,38 @@ void RemoteInteractionWindow::update_data() {
 	                              .str());
 	text += "</p></rt>";
 	comments_header_.set_text(text);
-	int64_t index = 0;
 	for (const auto& comment : info_->user_comments) {
 		text = "<rt><p>";
-		if (comment.editor.empty()) {
+		if (comment.second.editor.empty()) {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag(time_string(comment.timestamp));
-		} else if (comment.editor == comment.username) {
+			           .as_font_tag(time_string(comment.second.timestamp));
+		} else if (comment.second.editor == comment.second.username) {
 			text +=
 			   g_style_manager->font_style(UI::FontStyle::kItalic)
 			      .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
-			                    time_string(comment.timestamp) % time_string(comment.edit_timestamp))
+			                    time_string(comment.second.timestamp) % time_string(comment.second.edit_timestamp))
 			                      .str());
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)")) %
-			                         time_string(comment.timestamp) % comment.editor %
-			                         time_string(comment.edit_timestamp))
+			                         time_string(comment.second.timestamp) % comment.second.editor %
+			                         time_string(comment.second.edit_timestamp))
 			                           .str());
 		}
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kItalic)
 		           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$s:")) %
-		                         comment.username % AddOns::version_to_string(comment.version))
+		                         comment.second.username % AddOns::version_to_string(comment.second.version))
 		                           .str());
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		           .as_font_tag(comment.message);
+		           .as_font_tag(comment.second.message);
 		text += "</p></rt>";
 
-		CommentRow* cr = new CommentRow(parent_, info_, *this, box_comment_rows_, text, index);
+		CommentRow* cr = new CommentRow(parent_, info_, *this, box_comment_rows_, text, comment.first);
 		comment_rows_.push_back(std::unique_ptr<CommentRow>(cr));
 		box_comment_rows_.add_space(kRowButtonSize);
 		box_comment_rows_.add(cr, UI::Box::Resizing::kFullSize);
-		++index;
 	}
 }
 
