@@ -56,7 +56,8 @@ private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const std::string index_;
-	UI::Button edit_;
+	UI::Box buttons_;
+	UI::Button edit_, delete_;
 };
 
 class CommentEditor : public UI::Window {

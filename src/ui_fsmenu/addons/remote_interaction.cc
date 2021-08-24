@@ -58,7 +58,13 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      ctrl_(ctrl),
      info_(info),
      index_(index),
-     edit_(this, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Edit…")) {
+     buttons_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     edit_(&buttons_, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Edit…")),
+     delete_(&buttons_, "delete", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Delete")) {
+	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
+	buttons_.add_space(kRowButtonSpacing);
+	buttons_.add(&delete_, UI::Box::Resizing::kFullSize);
+
 	edit_.sigclicked.connect([this, &r]() {
 		if (ctrl_.username().empty()) {
 			return;
@@ -68,6 +74,20 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 			r.update_data();
 		}
 	});
+	delete_.sigclicked.connect([this, &r]() {
+		if (ctrl_.username().empty()) {
+			return;
+		}
+		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Delete"),
+				_("Are you sure you want to delete this comment?"), UI::WLMessageBox::MBoxType::kOkCancel);
+		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			return;
+		}
+		ctrl_.net().comment(*info_, "", index_.c_str());
+		*info_ = ctrl_.net().fetch_one_remote(info_->internal_name);
+		r.update_data();
+	});
+
 	layout();
 	update_edit_enabled();
 	initialization_complete();
@@ -76,7 +96,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 void CommentRow::update_edit_enabled() {
 	/* Admins can edit all posts; normal users only their own posts and only if the post was
 	 * never edited by an admin yet. */
-	edit_.set_visible(
+	buttons_.set_visible(
 	   !ctrl_.username().empty() &&
 	   (ctrl_.net().is_admin() || (info_->user_comments.at(index_).username == ctrl_.username() &&
 	                               (info_->user_comments.at(index_).editor.empty() ||
@@ -85,7 +105,11 @@ void CommentRow::update_edit_enabled() {
 
 void CommentRow::layout() {
 	UI::MultilineTextarea::layout();
-	edit_.set_pos(Vector2i(get_w() - edit_.get_w(), 0));
+
+	int w, h;
+	buttons_.get_desired_size(&w, &h);
+	buttons_.set_size(w, h);
+	buttons_.set_pos(Vector2i(get_w() - w, 0));
 }
 
 /* CommentEditor implementation */
