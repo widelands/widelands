@@ -83,7 +83,10 @@ private:
 
 class AdminDialog : public UI::Window {
 public:
-	AdminDialog(AddOnsCtrl&, RemoteInteractionWindow&, std::shared_ptr<AddOns::AddOnInfo>, AddOns::NetAddons::AdminAction);
+	AdminDialog(AddOnsCtrl&,
+	            RemoteInteractionWindow&,
+	            std::shared_ptr<AddOns::AddOnInfo>,
+	            AddOns::NetAddons::AdminAction);
 	void think() override;
 
 private:

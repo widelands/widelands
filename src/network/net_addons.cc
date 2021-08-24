@@ -105,8 +105,8 @@ void check_checksum(const std::string& path, const std::string& checksum) {
 }
 
 size_t gather_addon_content(const std::string& current_dir,
-                                   const std::string& prefix,
-                                   std::map<std::string, std::set<std::string>>& result) {
+                            const std::string& prefix,
+                            std::map<std::string, std::set<std::string>>& result) {
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
@@ -633,7 +633,9 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	guard.ok();
 }
 
-void NetAddons::comment(const AddOnInfo& addon, const std::string& message, const char* index_to_edit) {
+void NetAddons::comment(const AddOnInfo& addon,
+                        const std::string& message,
+                        const char* index_to_edit) {
 	check_string_validity(addon.internal_name);
 	init();
 	CrashGuard guard(*this);
@@ -656,7 +658,9 @@ void NetAddons::comment(const AddOnInfo& addon, const std::string& message, cons
 	guard.ok();
 }
 
-void NetAddons::admin_action(const AdminAction a, const AddOnInfo& addon, const std::string& value) {
+void NetAddons::admin_action(const AdminAction a,
+                             const AddOnInfo& addon,
+                             const std::string& value) {
 	if (!is_admin()) {
 		throw WLWarning("", "Only admins can send admin actions");
 	}
@@ -666,11 +670,21 @@ void NetAddons::admin_action(const AdminAction a, const AddOnInfo& addon, const 
 
 	std::string send;
 	switch (a) {
-		case AdminAction::kSetupTx: send = "CMD_SETUP_TX "; break;
-		case AdminAction::kVerify: send = "CMD_ADMIN_VERIFY "; break;
-		case AdminAction::kQuality: send = "CMD_ADMIN_QUALITY "; break;
-		case AdminAction::kSyncSafe: send = "CMD_ADMIN_SYNC_SAFE "; break;
-		case AdminAction::kDelete: send = "CMD_ADMIN_DELETE "; break;
+	case AdminAction::kSetupTx:
+		send = "CMD_SETUP_TX ";
+		break;
+	case AdminAction::kVerify:
+		send = "CMD_ADMIN_VERIFY ";
+		break;
+	case AdminAction::kQuality:
+		send = "CMD_ADMIN_QUALITY ";
+		break;
+	case AdminAction::kSyncSafe:
+		send = "CMD_ADMIN_SYNC_SAFE ";
+		break;
+	case AdminAction::kDelete:
+		send = "CMD_ADMIN_DELETE ";
+		break;
 	}
 	send += addon.internal_name;
 	if (a == AdminAction::kSetupTx) {

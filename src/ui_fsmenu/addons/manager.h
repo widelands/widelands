@@ -55,7 +55,8 @@ struct AddOnQuality {
 	static const std::map<unsigned, std::function<AddOnQuality()>> kQualities;
 
 private:
-	AddOnQuality(const Image* i, const std::string& n, const std::string& d) : icon(i), name(n), description(d) {
+	AddOnQuality(const Image* i, const std::string& n, const std::string& d)
+	   : icon(i), name(n), description(d) {
 	}
 };
 
@@ -114,13 +115,9 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_,
 	   installed_addons_buttons_box_, installed_addons_box_, browse_addons_outer_wrapper_,
-	   browse_addons_inner_wrapper_,
-	   browse_addons_buttons_box_,
-	   browse_addons_buttons_box_lvbox_,
-	   browse_addons_buttons_box_rvbox_,
-	   browse_addons_buttons_box_category_box_,
-	   browse_addons_buttons_box_right_hbox_,
-	   browse_addons_box_, dev_box_;
+	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_box_lvbox_,
+	   browse_addons_buttons_box_rvbox_, browse_addons_buttons_box_category_box_,
+	   browse_addons_buttons_box_right_hbox_, browse_addons_box_, dev_box_;
 	std::map<AddOns::AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;

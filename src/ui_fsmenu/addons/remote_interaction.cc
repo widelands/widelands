@@ -80,7 +80,8 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 		}
 		{
 			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Delete"),
-					_("Are you sure you want to delete this comment?"), UI::WLMessageBox::MBoxType::kOkCancel);
+			                   _("Are you sure you want to delete this comment?"),
+			                   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
@@ -89,11 +90,11 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 			ctrl_.net().comment(*info_, "", index_.c_str());
 			*info_ = ctrl_.net().fetch_one_remote(info_->internal_name);
 		} catch (const std::exception& e) {
-			log_err("Delete comment '%s' for %s: %s", index_.c_str(), info_->internal_name.c_str(), e.what());
+			log_err("Delete comment '%s' for %s: %s", index_.c_str(), info_->internal_name.c_str(),
+			        e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The comment could not be deleted.\n\nError Message:\n%s")) %
-			    e.what())
+			   (boost::format(_("The comment could not be deleted.\n\nError Message:\n%s")) % e.what())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
@@ -263,7 +264,8 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 			*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		} catch (const std::exception& e) {
-			log_err("Edit comment '%s' for %s: %s", index_ ? index_ : "<new>", info_->internal_name.c_str(), e.what());
+			log_err("Edit comment '%s' for %s: %s", index_ ? index_ : "<new>",
+			        info_->internal_name.c_str(), e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
@@ -348,27 +350,39 @@ void CommentEditor::reset_text() {
 
 /* AdminDialog implementation */
 
-AdminDialog::AdminDialog(AddOnsCtrl& parent, RemoteInteractionWindow& riw, std::shared_ptr<AddOns::AddOnInfo> info, AddOns::NetAddons::AdminAction a)
+AdminDialog::AdminDialog(AddOnsCtrl& parent,
+                         RemoteInteractionWindow& riw,
+                         std::shared_ptr<AddOns::AddOnInfo> info,
+                         AddOns::NetAddons::AdminAction a)
    : UI::Window(parent.get_parent(),
                 UI::WindowStyle::kFsMenu,
                 info->internal_name,
-                0, 0, 0, 0,
+                0,
+                0,
+                0,
+                0,
                 info->descname()),
-	main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-	ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-	cancel_(&buttons_box_, "cancel", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
-	list_(nullptr),
-	text_(nullptr)
-{
+     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     cancel_(&buttons_box_,
+             "cancel",
+             0,
+             0,
+             kRowButtonSize,
+             0,
+             UI::ButtonStyle::kFsMenuSecondary,
+             _("Cancel")),
+     list_(nullptr),
+     text_(nullptr) {
 	if (a == AddOns::NetAddons::AdminAction::kDelete) {
 		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
 		text_->focus();
 
-		main_box_.add(
-		   new UI::Textarea(&main_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-			                _("Please explain why you are deleting this add-on."), UI::Align::kCenter),
-		   UI::Box::Resizing::kFullSize);
+		main_box_.add(new UI::Textarea(
+		                 &main_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                 _("Please explain why you are deleting this add-on."), UI::Align::kCenter),
+		              UI::Box::Resizing::kFullSize);
 		main_box_.add_space(kRowButtonSpacing);
 		main_box_.add(text_, UI::Box::Resizing::kExpandBoth);
 	} else {
@@ -390,10 +404,12 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent, RemoteInteractionWindow& riw, std::
 		case AddOns::NetAddons::AdminAction::kQuality:
 			for (const auto& pair : AddOnQuality::kQualities) {
 				const AddOnQuality q = pair.second();
-				list_->add(q.name, std::to_string(pair.first), q.icon, pair.first == info->quality, q.description);
+				list_->add(q.name, std::to_string(pair.first), q.icon, pair.first == info->quality,
+				           q.description);
 			}
 			break;
-		default: NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 
 		list_->set_desired_size(300, list_->get_lineheight() * (list_->size() + 1));
@@ -422,7 +438,8 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent, RemoteInteractionWindow& riw, std::
 			parent.rebuild(false);
 			die();
 		} catch (const std::exception& e) {
-			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			                   e.what(), UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
 	});
@@ -528,16 +545,16 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
      ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
      login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, ""),
      admin_action_(this,
-                 "admin",
-                 0,
-                 0,
-                 0,
-                 10,
-                 login_button_.get_h(),
-                 _("Administrator actions"),
-                 UI::DropdownType::kPictorialMenu,
-                 UI::PanelStyle::kFsMenu,
-                 UI::ButtonStyle::kFsMenuSecondary) {
+                   "admin",
+                   0,
+                   0,
+                   0,
+                   10,
+                   login_button_.get_h(),
+                   _("Administrator actions"),
+                   UI::DropdownType::kPictorialMenu,
+                   UI::PanelStyle::kFsMenu,
+                   UI::ButtonStyle::kFsMenuSecondary) {
 
 	ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
@@ -646,8 +663,10 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 		admin_action_.set_list_visibility(false);
 		if (action == AddOns::NetAddons::AdminAction::kSetupTx) {
 			{
-				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
-					_("Are you sure you want to enable Transifex integration for this add-on?"), UI::WLMessageBox::MBoxType::kOkCancel);
+				UI::WLMessageBox m(
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
+				   _("Are you sure you want to enable Transifex integration for this add-on?"),
+				   UI::WLMessageBox::MBoxType::kOkCancel);
 				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 					return;
 				}
@@ -655,7 +674,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			try {
 				parent_.net().admin_action(action, *info_, "" /* ignored */);
 			} catch (const std::exception& e) {
-				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
+				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+				                   e.what(), UI::WLMessageBox::MBoxType::kOk);
 				m.run<UI::Panel::Returncodes>();
 			}
 		} else {
@@ -695,7 +715,8 @@ void RemoteInteractionWindow::layout() {
 
 		admin_action_.set_visible(parent_.net().is_admin());
 		admin_action_.set_size(login_button_.get_h(), login_button_.get_h());
-		admin_action_.set_pos(Vector2i(login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
+		admin_action_.set_pos(Vector2i(
+		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
 
 		box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
 		box_comment_rows_.set_size(
@@ -746,11 +767,11 @@ void RemoteInteractionWindow::update_data() {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag(time_string(comment.second.timestamp));
 		} else if (comment.second.editor == comment.second.username) {
-			text +=
-			   g_style_manager->font_style(UI::FontStyle::kItalic)
-			      .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
-			                    time_string(comment.second.timestamp) % time_string(comment.second.edit_timestamp))
-			                      .str());
+			text += g_style_manager->font_style(UI::FontStyle::kItalic)
+			           .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
+			                         time_string(comment.second.timestamp) %
+			                         time_string(comment.second.edit_timestamp))
+			                           .str());
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)")) %
@@ -761,14 +782,16 @@ void RemoteInteractionWindow::update_data() {
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kItalic)
 		           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$s:")) %
-		                         comment.second.username % AddOns::version_to_string(comment.second.version))
+		                         comment.second.username %
+		                         AddOns::version_to_string(comment.second.version))
 		                           .str());
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(comment.second.message);
 		text += "</p></rt>";
 
-		CommentRow* cr = new CommentRow(parent_, info_, *this, box_comment_rows_, text, comment.first);
+		CommentRow* cr =
+		   new CommentRow(parent_, info_, *this, box_comment_rows_, text, comment.first);
 		comment_rows_.push_back(std::unique_ptr<CommentRow>(cr));
 		box_comment_rows_.add_space(kRowButtonSize);
 		box_comment_rows_.add(cr, UI::Box::Resizing::kFullSize);

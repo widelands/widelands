@@ -88,17 +88,29 @@ std::string time_string(const std::time_t& time) {
 }
 
 const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {
-	{0, []() { return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"), _("Any"), _("Quality not yet evaluated")); }},
-	{1, []() { return AddOnQuality(playercolor_image(RGBColor(0xcd7f32), "images/players/team.png"),
-			/** TRANSLATORS: This is an add-on code quality rating */
-			_("Poor"), _("This add-on may cause major glitches and errors.")); }},
-	{2, []() { return AddOnQuality(playercolor_image(RGBColor(0xC0C0C0), "images/players/team.png"),
-			/** TRANSLATORS: This is an add-on code quality rating */
-			_("Good"), _("This add-on works as advertised.")); }},
-	{3, []() { return AddOnQuality(playercolor_image(RGBColor(0xFFD700), "images/players/team.png"),
-			/** TRANSLATORS: This is an add-on code quality rating */
-			_("Excellent"), _("This add-on has been decorated for its remarkably high quality.")); }}
-};
+   {0,
+    []() {
+	    return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"), _("Any"),
+	                        _("Quality not yet evaluated"));
+    }},
+   {1,
+    []() {
+	    return AddOnQuality(playercolor_image(RGBColor(0xcd7f32), "images/players/team.png"),
+	                        /** TRANSLATORS: This is an add-on code quality rating */
+	                        _("Poor"), _("This add-on may cause major glitches and errors."));
+    }},
+   {2,
+    []() {
+	    return AddOnQuality(playercolor_image(RGBColor(0xC0C0C0), "images/players/team.png"),
+	                        /** TRANSLATORS: This is an add-on code quality rating */
+	                        _("Good"), _("This add-on works as advertised."));
+    }},
+   {3, []() {
+	    return AddOnQuality(playercolor_image(RGBColor(0xFFD700), "images/players/team.png"),
+	                        /** TRANSLATORS: This is an add-on code quality rating */
+	                        _("Excellent"),
+	                        _("This add-on has been decorated for its remarkably high quality."));
+    }}};
 
 struct OperationCancelledByUserException : std::exception {};
 
@@ -132,11 +144,16 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
      browse_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      browse_addons_inner_wrapper_(
         &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-browse_addons_buttons_box_(&browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-browse_addons_buttons_box_lvbox_(&browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-browse_addons_buttons_box_rvbox_(&browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-browse_addons_buttons_box_category_box_(&browse_addons_buttons_box_lvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-browse_addons_buttons_box_right_hbox_(&browse_addons_buttons_box_rvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     browse_addons_buttons_box_(
+        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     browse_addons_buttons_box_lvbox_(
+        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     browse_addons_buttons_box_rvbox_(
+        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     browse_addons_buttons_box_category_box_(
+        &browse_addons_buttons_box_lvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     browse_addons_buttons_box_right_hbox_(
+        &browse_addons_buttons_box_rvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      browse_addons_box_(&browse_addons_inner_wrapper_,
                         UI::PanelStyle::kFsMenu,
                         0,
@@ -163,16 +180,16 @@ browse_addons_buttons_box_right_hbox_(&browse_addons_buttons_box_rvbox_, UI::Pan
                  UI::PanelStyle::kFsMenu,
                  UI::ButtonStyle::kFsMenuSecondary),
      filter_quality_(&browse_addons_buttons_box_right_hbox_,
-                 "quality",
-                 0,
-                 0,
-                 0,
-                 10,
-                 filter_name_.get_h(),
-                 _("Minimum quality"),
-                 UI::DropdownType::kTextual,
-                 UI::PanelStyle::kFsMenu,
-                 UI::ButtonStyle::kFsMenuSecondary),
+                     "quality",
+                     0,
+                     0,
+                     0,
+                     10,
+                     filter_name_.get_h(),
+                     _("Minimum quality"),
+                     UI::DropdownType::kTextual,
+                     UI::PanelStyle::kFsMenu,
+                     UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_(&dev_box_,
                    "upload_addon",
                    0,
@@ -511,26 +528,31 @@ browse_addons_buttons_box_right_hbox_(&browse_addons_buttons_box_rvbox_, UI::Pan
 			if (index > 0) {
 				browse_addons_buttons_box_category_box_.add_space(kRowButtonSpacing);
 			}
-			browse_addons_buttons_box_category_box_.add(c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			browse_addons_buttons_box_category_box_.add(
+			   c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			++index;
 		}
 	}
-	browse_addons_buttons_box_right_hbox_.add(&filter_verified_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	browse_addons_buttons_box_right_hbox_.add(
+	   &filter_verified_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	browse_addons_buttons_box_right_hbox_.add(&filter_quality_, UI::Box::Resizing::kExpandBoth);
 
-	browse_addons_buttons_box_rvbox_.add(&browse_addons_buttons_box_right_hbox_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_rvbox_.add(
+	   &browse_addons_buttons_box_right_hbox_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
 	browse_addons_buttons_box_rvbox_.add(&filter_name_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
 	browse_addons_buttons_box_rvbox_.add(&sort_order_, UI::Box::Resizing::kFullSize);
 
-	browse_addons_buttons_box_lvbox_.add(&browse_addons_buttons_box_category_box_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_box_lvbox_.add(
+	   &browse_addons_buttons_box_category_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_buttons_box_lvbox_.add_inf_space();
 	browse_addons_buttons_box_lvbox_.add(&filter_reset_, UI::Box::Resizing::kFullSize);
 
 	browse_addons_buttons_box_.add(&browse_addons_buttons_box_lvbox_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_box_.add(&browse_addons_buttons_box_rvbox_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_box_.add(
+	   &browse_addons_buttons_box_rvbox_, UI::Box::Resizing::kExpandBoth);
 
 	filter_reset_.set_enabled(false);
 	filter_name_.changed.connect([this]() {

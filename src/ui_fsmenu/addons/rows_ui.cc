@@ -321,9 +321,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(info->verified ? "images/ui_basic/list_selected.png" :
                                                    "images/ui_basic/stop.png")),
-     quality_(this,
-               UI::PanelStyle::kFsMenu,
-               AddOnQuality::kQualities.at(info->quality)().icon),
+     quality_(this, UI::PanelStyle::kFsMenu, AddOnQuality::kQualities.at(info->quality)().icon),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -481,8 +479,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
          _("Verified by the Widelands Development Team") :
          _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
-	quality_.set_tooltip(info->internal_name.empty() ? _("Error")
-			: AddOnQuality::kQualities.at(info->quality)().description);
+	quality_.set_tooltip(info->internal_name.empty() ?
+                           _("Error") :
+                           AddOnQuality::kQualities.at(info->quality)().description);
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
          "" :
@@ -532,7 +531,8 @@ void RemoteAddOnRow::layout() {
 	upgrade_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	install_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
 	interact_.set_size(2 * kRowButtonSize + kRowButtonSpacing, kRowButtonSize);
-	interact_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
+	interact_.set_pos(
+	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
 	category_.set_pos(
 	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
 	verified_.set_pos(Vector2i(0, 2 * kRowButtonSize));
