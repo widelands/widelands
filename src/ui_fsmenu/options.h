@@ -128,19 +128,6 @@ private:
 	// Restores old options when canceled
 	void clicked_cancel();
 
-	class ScreenResolution {
-	public:
-		int32_t xres;
-		int32_t yres;
-		int32_t depth;
-		inline bool operator==(const ScreenResolution& x) const {
-			return xres == x.xres && yres == x.yres;
-		}
-		inline bool operator!=(const ScreenResolution& x) const {
-			return !(*this == x);
-		}
-	};
-
 	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
 
@@ -204,8 +191,19 @@ private:
 
 	OptionsCtrl::OptionsStruct os_;
 
-	/// All supported screen resolutions.
-	// std::vector<ScreenResolution> resolutions_;
+	//Data model for the screen resolution dropdown
+	class ScreenResolution {
+	public:
+		int32_t xres;
+		int32_t yres;
+		int32_t depth;
+		inline bool operator==(const ScreenResolution& x) const {
+			return xres == x.xres && yres == x.yres;
+		}
+		inline bool operator!=(const ScreenResolution& x) const {
+			return !(*this == x);
+		}
+	};
 
 	// Data model for the entries in the language selection list.
 	struct LanguageEntry {
@@ -218,8 +216,7 @@ private:
 		std::string descname;    // Native language name
 	};
 	std::map<std::string, LanguageEntry> language_entries_;
-
-};
+}
 
 }  // namespace FsMenu
 

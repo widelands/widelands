@@ -441,8 +441,6 @@ void BaseDropdown::toggle() {
 	set_list_visibility(!list_->is_visible());
 }
 
-
-
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	if (!open) {
 		list_->select(current_selection_);
@@ -526,13 +524,5 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	}
 	return NamedPanel::handle_key(down, code);
 }
-
-//bool BaseDropdown::handle_textinput(const std::string& input_text) {
-//	//	list_->handle_textinput(input_text);
-//
-//
-//	layout();
-//	return true;
-//}
 
 }  // namespace UI

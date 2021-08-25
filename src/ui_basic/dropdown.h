@@ -128,7 +128,6 @@ public:
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
-	//	bool handle_textinput(const std::string& text) override;
 
 	/// Set maximum available height in the UI
 	void set_height(int height);
