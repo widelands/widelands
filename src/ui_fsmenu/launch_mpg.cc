@@ -409,7 +409,7 @@ void LaunchMPG::load_map_info() {
 	map.set_filename(settings_.settings().mapfilename);
 	{
 		std::unique_ptr<i18n::GenericTextdomain> td(
-		   AddOns::create_correct_textdomain(settings_.settings().mapfilename));
+		   AddOns::create_textdomain_for_map(settings_.settings().mapfilename));
 		ml->preload_map(true, nullptr);
 	}
 

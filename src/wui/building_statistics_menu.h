@@ -48,6 +48,12 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	/// Update state of current building buttons
 	void update();
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kBuildingStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	/// Array indices for the tabs
 	enum BuildingTab { Small, Medium, Big, Mines, Ports };
