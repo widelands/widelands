@@ -1388,11 +1388,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore for helptext an amazon production site: Dressmakery
             lore = pgettext("amazons_building", "‘A skilled maker crafts garments of unsurpassed defence, with each stitch imbued with conscious intent.’"),
             -- TRANSLATORS: Lore author helptext for an amazon production site: Dressmakery
-<<<<<<< Updated upstream
-            lore_author = pgettext("amazons_building", "Adapted by the Dressmakers’ Guild from the oral history volume ‘Father Jungle’s Wisdom: Song on Mindfulness.’"),
-=======
             lore_author = pgettext("amazons_building", "Adapted by the Dressmakers’ guild from the oral history volume ‘Father Jungle’s wisdom: Song on Mindfulness.’"),
->>>>>>> Stashed changes
             -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
             purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
          }
