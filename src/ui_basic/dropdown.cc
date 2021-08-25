@@ -18,7 +18,6 @@
  */
 
 #include "ui_basic/dropdown.h"
-#include <base/log.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -147,6 +146,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_->clicked.connect([this]() {
 		set_value();
 		close();
+		clear_filter();
 	});
 
 	if (push_button_) {
@@ -387,7 +387,7 @@ void BaseDropdown::set_pos(Vector2i point) {
 void BaseDropdown::clear() {
 	list_->clear();
 	current_selection_ = list_->selection_index();
-//	list_->set_size(list_->get_w(), 0);
+	list_->set_size(list_->get_w(), 0);
 }
 
 void BaseDropdown::think() {
@@ -438,16 +438,15 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle() {
-	list_->clear_filter();
 	set_list_visibility(!list_->is_visible());
 }
 
 
 
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
-	clear_filter();
 	if (!open) {
 		list_->select(current_selection_);
+		clear_filter();
 	}
 	if (!is_enabled_) {
 		list_->set_visible(false);
@@ -476,7 +475,6 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 }
 
 void BaseDropdown::toggle_list() {
-	list_->clear_filter();
 	set_list_visibility(!list_->is_visible(), false);
 }
 

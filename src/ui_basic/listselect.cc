@@ -21,7 +21,6 @@
 
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
-#include <base/log.h>
 
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
@@ -86,7 +85,6 @@ BaseListselect::BaseListselect(Panel* const parent,
      lineheight_(text_height(table_style().enabled()) + kMargin),
      notify_on_delete_(nullptr) {
 	set_thinks(false);
-	set_handle_textinput();
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
@@ -119,7 +117,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
 	return selection_mode_ == ListselectLayout::kDropdown ?
-	          g_style_manager->dropdown_style(panel_style_) :
+             g_style_manager->dropdown_style(panel_style_) :
              nullptr;
 }
 
@@ -131,7 +129,6 @@ void BaseListselect::clear() {
 		delete entry;
 	}
 	entry_records_.clear();
-	entry_records_unfiltered_.clear();
 
 	scrollbar_.set_steps(1);
 	scrollpos_ = 0;
@@ -171,7 +168,6 @@ void BaseListselect::add(const std::string& name,
 	}
 
 	entry_records_.push_back(er);
-	entry_records_unfiltered_.push_back(er);
 
 	layout();
 
@@ -203,8 +199,6 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End) {
 				}
 				entry_records_[i] = erj;
 				entry_records_[j] = eri;
-				entry_records_unfiltered_[i] = erj;
-				entry_records_unfiltered_[j] = eri;
 			}
 		}
 	}
@@ -383,7 +377,6 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-
 		const int txt_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
 		int lineheight = std::max(get_lineheight(), txt_height);
@@ -422,7 +415,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-			                     get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
@@ -627,26 +620,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-bool BaseListselect::handle_textinput(const std::string& input_text) {
-//	log_dbg("text handled %s", input_text.c_str());
-//	std::string lower = std::string(input_text);
-//	lower[0] = std::tolower(lower[0]);
-//	current_filter_ = current_filter_.append(lower);
-//	log_dbg("searching with filter %s", current_filter_.c_str());
-//	entry_records_.clear();
-//	for (auto& x : entry_records_unfiltered_) {
-//		std::string lowerName = std::string(x->name);
-//		transform(lowerName.begin(), lowerName.end(), lowerName.begin(),
-//		          [](unsigned char c) { return std::tolower(c); });
-//		if (lowerName.find(current_filter_) != std::string::npos) {
-//			log_dbg("found match: %s", x->name.c_str());
-//			entry_records_.push_back(x);
-//		}
-//	}
-//	layout();
-	return true;
-}
-
 /**
  * Remove entry
  */
@@ -674,18 +647,5 @@ void BaseListselect::remove(const char* const str) {
 			return;
 		}
 	}
-}
-void BaseListselect::clear_filter() {
-	if (current_filter_.empty()) {
-		return;
-	}
-	log_dbg("clearing filter");
-	entry_records_.clear();
-	current_filter_.clear();
-	for (auto& i : entry_records_unfiltered_) {
-		entry_records_.push_back(i);
-	}
-	log_dbg("entry records: %d", entry_records_.size());
-	layout();
 }
 }  // namespace UI

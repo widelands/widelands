@@ -121,10 +121,25 @@ private:
 	void add_languages_to_list(const std::string& current_locale);
 	void update_language_stats();
 
+	void add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt);
+
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 	// Restores old options when canceled
 	void clicked_cancel();
+
+	class ScreenResolution {
+	public:
+		int32_t xres;
+		int32_t yres;
+		int32_t depth;
+		inline bool operator==(const ScreenResolution& x) const {
+			return xres == x.xres && yres == x.yres;
+		}
+		inline bool operator!=(const ScreenResolution& x) const {
+			return !(*this == x);
+		}
+	};
 
 	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
@@ -139,7 +154,7 @@ private:
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
-	UI::Dropdown<int> resolution_dropdown_;
+	UI::Dropdown<ScreenResolution> resolution_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
@@ -189,15 +204,8 @@ private:
 
 	OptionsCtrl::OptionsStruct os_;
 
-	class ScreenResolution {
-	public:
-		int32_t xres;
-		int32_t yres;
-		int32_t depth;
-	};
-
 	/// All supported screen resolutions.
-	std::vector<ScreenResolution> resolutions_;
+	// std::vector<ScreenResolution> resolutions_;
 
 	// Data model for the entries in the language selection list.
 	struct LanguageEntry {
@@ -210,6 +218,7 @@ private:
 		std::string descname;    // Native language name
 	};
 	std::map<std::string, LanguageEntry> language_entries_;
+
 };
 
 }  // namespace FsMenu
