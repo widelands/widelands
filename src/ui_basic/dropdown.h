@@ -291,7 +291,7 @@ public:
 			return;
 		}
 		if (has_selection()) {
-			 Entry selected_entry = get_selected();
+			Entry selected_entry = get_selected();
 			restore_filtered_list();
 			select(selected_entry);
 		} else {
@@ -310,6 +310,13 @@ public:
 		std::string lower = std::string(input_text);
 		lower[0] = std::tolower(lower[0]);
 		current_filter_ = current_filter_.append(lower);
+
+		Entry selected_entry{};
+		bool reselect = false;
+		if (has_selection()) {
+			reselect = true;
+			selected_entry = get_selected();
+		}
 		clear_filtered_list();
 		for (auto& x : unfiltered_entries) {
 			std::string lowerName = std::string(x.name);
@@ -319,6 +326,10 @@ public:
 				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
 			}
 		}
+		if (reselect) {
+			select(selected_entry);
+		}
+
 		return true;
 	}
 
