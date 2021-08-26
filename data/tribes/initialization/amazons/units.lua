@@ -1378,7 +1378,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore for helptext an amazon production site: Rare Tree Plantation
             lore = pgettext("amazons_building", "‘If properly harvested, cured and stored, ironwood becomes almost indestructible, and will not rust in damp conditions.’"),
             -- TRANSLATORS: Lore author helptext for an amazon production site: Rare Tree Plantation
-            lore_author = pgettext("amazons_building", "Jungle Master Abraxisi"),
+            lore_author = pgettext("amazons_building", "Jungle Master Abacaxis"),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree Plantation
             purpose = pgettext("amazons_building", "Plants rare trees which are needed by the Amazons, like balsa, rubber and ironwood."),
             -- TRANSLATORS: Note helptext for an amazon production site: Rare Tree Plantation
@@ -1398,7 +1398,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore for helptext an amazon production site: Dressmakery
             lore = pgettext("amazons_building", "‘A skilled maker crafts garments of unsurpassed defence,<br> with each stitch imbued with conscious intent.’"),
             -- TRANSLATORS: Lore author helptext for an amazon production site: Dressmakery
-            lore_author = pgettext("amazons_building", "Dressmakers’ ethos, adapted from the traditional verse ‘Father Jungle’s wisdom: Song of the Conscientious.’"),
+            lore_author = pgettext("amazons_building", "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s wisdom: Song of the Conscientious.’"),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
             purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
          }
