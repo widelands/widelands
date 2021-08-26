@@ -1371,8 +1371,14 @@ descriptions:new_tribe {
       {
          name = "amazons_rare_tree_plantation",
          helptexts = {
+            -- TRANSLATORS: Lore for helptext an amazon production site: Rare Tree Plantation
+            lore = pgettext("amazons_building", "‘If properly harvested, cured and stored, ironwood becomes almost indestructible, and (unlike its metal namesake) will not rust in damp conditions.’"),
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Rare Tree Plantation
+            lore_author = pgettext("amazons_building", "Jungle Master Abraxisi"),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree Plantation
-            purpose = pgettext("amazons_building", "Plants rare trees which are needed by the amazons, like balsa, rubber and ironwood.")
+            purpose = pgettext("amazons_building", "Plants rare trees which are needed by the Amazons, like balsa, rubber and ironwood. Rare trees are planted according to the economy requirements."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Rare Tree Plantation
+            note = pgettext("amazons_building", "Keep roads connected to rare tree plantations so they adhere to economy targets.")
          }
       },
       {
