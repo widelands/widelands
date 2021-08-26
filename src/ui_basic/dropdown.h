@@ -156,6 +156,9 @@ public:
 		list_ = nullptr;
 	}
 
+	virtual void clear_filter() = 0;
+	void delete_last_of_filter();
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -195,7 +198,6 @@ protected:
 private:
 	static void layout_if_alive(int);
 	void layout() override;
-	virtual void clear_filter() = 0;
 
 	/// Updates the buttons
 	void update();
@@ -210,6 +212,8 @@ private:
 
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
+
+	virtual void apply_filter() = 0;
 
 	/// Give each dropdown a unique ID
 	static int next_id_;
@@ -310,6 +314,11 @@ public:
 		lower[0] = std::tolower(lower[0]);
 		current_filter_ = current_filter_.append(lower);
 
+		apply_filter();
+
+		return true;
+	}
+	void apply_filter() override {
 		Entry selected_entry{};
 		bool reselect = false;
 		if (has_selection()) {
@@ -328,8 +337,6 @@ public:
 		if (reselect) {
 			select(selected_entry);
 		}
-
-		return true;
 	}
 
 	/// Add an element to the list

@@ -83,7 +83,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
      lineheight_(text_height(table_style().enabled()) + kMargin),
-     notify_on_delete_(nullptr) {
+     linked_dropdown(nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
@@ -107,8 +107,8 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (notify_on_delete_) {
-		notify_on_delete_->notify_list_deleted();
+	if (linked_dropdown) {
+		linked_dropdown->notify_list_deleted();
 	}
 }
 
@@ -117,7 +117,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
 	return selection_mode_ == ListselectLayout::kDropdown ?
-             g_style_manager->dropdown_style(panel_style_) :
+	          g_style_manager->dropdown_style(panel_style_) :
              nullptr;
 }
 
@@ -415,7 +415,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+			                     get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
@@ -614,6 +614,18 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				scrollbar_.set_scrollpos(scrollpos_);
 			}
 			return true;
+		}
+	}
+	if (down) {
+		switch (code.sym) {
+		case SDLK_BACKSPACE:
+			linked_dropdown->delete_last_of_filter();
+			return true;
+		case SDLK_ESCAPE:
+			linked_dropdown->clear_filter();
+			return true;
+		default:
+			break;
 		}
 	}
 

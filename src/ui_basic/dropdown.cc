@@ -18,6 +18,7 @@
  */
 
 #include "ui_basic/dropdown.h"
+#include <base/log.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -132,7 +133,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 	list_ =
 	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
-	list_->set_notify_on_delete(this);
+	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
@@ -175,7 +176,7 @@ BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
 	if (list_) {
-		list_->set_notify_on_delete(nullptr);
+		list_->set_linked_dropdown(nullptr);
 		list_->die();
 	}
 
@@ -510,11 +511,19 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			}
 			return true;
 		case SDLK_ESCAPE:
+			log_dbg("esc");
+			clear_filter();
 			if (list_->is_visible()) {
 				toggle_list();
 				return true;
 			}
 			break;
+		case SDLK_BACKSPACE:
+			delete_last_of_filter();
+			log_dbg("backspace, new filter: %s", current_filter_.c_str());
+			apply_filter();
+			return true;
+			//			break;
 		default:
 			break;  // not handled
 		}
@@ -523,6 +532,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		return list_->handle_key(down, code);
 	}
 	return NamedPanel::handle_key(down, code);
+}
+void BaseDropdown::delete_last_of_filter() {
+	if (!current_filter_.empty()) {
+		current_filter_ = current_filter_.substr(0, current_filter_.size() - 1);
+		apply_filter();
+	}
 }
 
 }  // namespace UI
