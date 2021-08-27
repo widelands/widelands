@@ -947,7 +947,7 @@ void AddOnsCtrl::refresh_remotes() {
 					throw WLWarning("", "incompatible Widelands version");
 				}
 			} catch (const std::exception& e) {
-				log_err("Skip add-on %s because: %s", remotes_[i]->internal_name.c_str(), e.what());
+				log_err("Skip add-on %s because: %s", names[i].c_str(), e.what());
 				names[i] = names.back();
 				names.pop_back();
 				remotes_.pop_back();
