@@ -34,7 +34,7 @@ namespace Widelands {
 
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 }  // namespace
 
@@ -71,6 +71,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 
 			uint32_t display_flags = fr.unsigned_32();
 
+			InteractivePlayer* ipl = game.get_ipl();
 			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
 #ifndef NDEBUG
@@ -80,7 +81,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 #endif
 				ibase->set_display_flags(display_flags);
 			}
-			if (InteractivePlayer* const ipl = game.get_ipl()) {
+			if (ipl) {
 				ipl->set_player_number(player_number);
 			}
 
@@ -98,17 +99,20 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					}
 				}
 
-				if (packet_version == kCurrentPacketVersion) {
+				if (packet_version >= 5) {
 					size_t nr_port_spaces = fr.unsigned_32();
 					for (size_t i = 0; i < nr_port_spaces; ++i) {
 						uint32_t serial = fr.unsigned_32();
 						int16_t x = fr.signed_16();
 						int16_t y = fr.signed_16();
-						if (InteractivePlayer* const ipl = game.get_ipl()) {
+						if (ipl) {
 							ipl->get_expedition_port_spaces().emplace(
 							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
 						}
 					}
+				}
+				if (packet_version >= 6 && fr.unsigned_8() && ipl) {
+					ibase->load_windows(fr, *mol);
 				}
 			}
 		} else {
@@ -168,6 +172,23 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.unsigned_32(0);
 		}
 	}
+
+	if (iplayer) {
+		fw.unsigned_8(1);
+		iplayer->save_windows(fw, *mos);
+	} else {
+		fw.unsigned_8(0);
+	}
+
+	/*
+	 * Important:
+	 * The number of bytes written by `iplayer->save_windows` can not be
+	 * determined in advance, so any loading code that does not wish to
+	 * load the windows will not be able to access any data saved beyond
+	 * this call. Therefore, do not save any further data after this
+	 * function call which is not intended to be read exclusively by
+	 * loading callers that also read the window data.
+	 */
 
 	fw.write(fs, "binary/interactive_player");
 }

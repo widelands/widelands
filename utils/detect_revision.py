@@ -119,7 +119,7 @@ def detect_bzr_revision():
             # 1.0~bzr9876[abc0123@trunk]
             return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
                 nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
-        except (OSError, subprocess.CalledProcessError):
+        except (OSError, subprocess.CalledProcessError, IndexError):
             return None
     return None
 
