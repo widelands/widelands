@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-07-13 02:46+0000\n"
-"PO-Revision-Date: 2021-07-14 09:44+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2021-08-22 02:35+0000\n"
+"PO-Revision-Date: 2021-08-13 02:47+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:380
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:391
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -35,7 +35,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:384
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:395
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s 또는 %2$s"
@@ -47,8 +47,8 @@ msgstr "%1$s 또는 %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:388 ../../src/base/i18n.cc:397
-#: ../../src/logic/addons.cc:172
+#: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
+#: ../../src/logic/addons.cc:191
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -56,7 +56,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:392
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:403
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s 그리고 %2$s"
@@ -105,7 +105,7 @@ msgid ""
 msgstr "당신의 출발 위치 근처에 나무가 없습니다. 따라서 경제 성장하는데 필요한 추가 자원이 제공됩니다."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:114
+#: ../../src/wui/game_message_menu.cc:71 ../../src/wui/game_summary.cc:114
 msgid "Status"
 msgstr "상태"
 
@@ -156,7 +156,7 @@ msgstr "매우 약한 AI"
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:407
+#: ../../src/base/i18n.cc:418
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -268,27 +268,27 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:185
+#: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
-msgstr "주 메뉴"
+msgstr "기본 차림표"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #: ../../src/editor/editorinteractive.cc:108
-#: ../../src/wlapplication_options.cc:355
+#: ../../src/wlapplication_options.cc:356
 msgid "Tools"
 msgstr "도구"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -299,17 +299,17 @@ msgid "Tool size"
 msgstr "도구 크기"
 
 #: ../../src/editor/editorinteractive.cc:151
-#: ../../src/wlapplication_options.cc:347
+#: ../../src/wlapplication_options.cc:348
 msgid "Undo"
 msgstr "되돌리기"
 
 #: ../../src/editor/editorinteractive.cc:155
-#: ../../src/wlapplication_options.cc:351
+#: ../../src/wlapplication_options.cc:352
 msgid "Redo"
 msgstr "재실행하기"
 
 #: ../../src/editor/editorinteractive.cc:166
-#: ../../src/wui/buildingwindow.cc:418 ../../src/wui/interactive_player.cc:225
+#: ../../src/wui/buildingwindow.cc:419 ../../src/wui/interactive_player.cc:225
 msgid "Help"
 msgstr "도움말"
 
@@ -329,14 +329,14 @@ msgstr "새로운 무작위 지도"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:208
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:399 ../../src/wlapplication_options.cc:343
+#: ../../src/ui_fsmenu/main.cc:399 ../../src/wlapplication_options.cc:344
 msgid "Load Map"
 msgstr "지도 불러오기"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:216
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
-#: ../../src/wlapplication_options.cc:339
+#: ../../src/wlapplication_options.cc:340
 msgid "Save Map"
 msgstr "지도 저장"
 
@@ -377,7 +377,7 @@ msgstr "지형 높이를 아무런 값으로 설정"
 #: ../../src/editor/editorinteractive.cc:282
 #: ../../src/editor/tools/info_tool.cc:112
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
-#: ../../src/wui/minimap.cc:151
+#: ../../src/wui/minimap.cc:152
 msgid "Terrain"
 msgstr "지형"
 
@@ -449,7 +449,7 @@ msgstr "선수의 수, 이름, 부족, 시작 위치 설정"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:333
 msgid "Map origin"
-msgstr "번역확인 -> 지도 출발지?"
+msgstr "번역확인 -> 지도 출발지"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:336
@@ -478,10 +478,10 @@ msgstr "정보"
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -540,31 +540,38 @@ msgstr "자원 표시"
 msgid "Unsupported Format"
 msgstr "지원되지 않는 형식"
 
-#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:744
+#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:771
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "와이드랜드는 파일 \"%s\"를 불러올 수 없습니다. 파일 형식이 적합하지 않습니다."
 
-#: ../../src/editor/editorinteractive.cc:546
+#: ../../src/editor/editorinteractive.cc:553
 msgid "Unsaved Map"
 msgstr "저장되지 않은 지도"
 
-#: ../../src/editor/editorinteractive.cc:547
+#: ../../src/editor/editorinteractive.cc:554
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 
-#: ../../src/editor/editorinteractive.cc:916 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:923 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
-#: ../../src/ui_fsmenu/addons.cc:1190 ../../src/ui_fsmenu/addons.cc:1246
-#: ../../src/ui_fsmenu/addons.cc:1367 ../../src/ui_fsmenu/addons.cc:2091
+#: ../../src/ui_fsmenu/addons/contact.cc:85
+#: ../../src/ui_fsmenu/addons/manager.cc:1294
+#: ../../src/ui_fsmenu/addons/manager.cc:1343
+#: ../../src/ui_fsmenu/addons/manager.cc:1423
+#: ../../src/ui_fsmenu/addons/manager.cc:1493
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:232
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:415
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:477
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1578
+#: ../../src/wlapplication.cc:1608
 msgid "Error"
 msgstr "오류"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1580
+#: ../../src/editor/editorinteractive.cc:925 ../../src/wlapplication.cc:1610
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -575,13 +582,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "오류가 발생했습니다. 오류 메시지는 다음과 같습니다.\n\n%1$s\n\n와이드랜드를 개선하는데 도움이 되도록 이 문제를 보고해주십시오. 표준 출력 (윈도우즈에서는 stdout.txt)에서 관련 메시지를 찾을 수 있습니다. 빌드 %2$s (%3$s)를 사용하고 있습니다.\n이 정보를 보고서에 추가하십시오."
 
-#: ../../src/editor/editorinteractive.cc:954
+#: ../../src/editor/editorinteractive.cc:961
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "지도 “%s”를 불러오고 있음…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:978
+#: ../../src/editor/editorinteractive.cc:985
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:142
@@ -590,15 +597,15 @@ msgid "No Name"
 msgstr "이름 없음"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:981
+#: ../../src/editor/editorinteractive.cc:988
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:112
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:539
-#: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons_packager.cc:366
+#: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons/packager.cc:367
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../src/editor/editorinteractive.cc:1005
+#: ../../src/editor/editorinteractive.cc:1012
 msgid "Loading world…"
 msgstr "세계를 불러오고 있음…"
 
@@ -724,7 +731,7 @@ msgstr "%1%x %2%"
 #: ../../src/editor/tools/info_tool.cc:204
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:143
 #: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:141
-#: ../../src/wui/minimap.cc:140
+#: ../../src/wui/minimap.cc:141
 msgid "Map"
 msgstr "지도"
 
@@ -754,7 +761,7 @@ msgid "Author: %s"
 msgstr "제작자: %s"
 
 #: ../../src/editor/tools/info_tool.cc:223
-#: ../../src/ui_fsmenu/addons_packager_box.cc:151
+#: ../../src/ui_fsmenu/addons/packager_box.cc:152
 #: ../../src/ui_fsmenu/main.cc:436 ../../src/ui_fsmenu/mapdetailsbox.cc:115
 #, c-format
 msgid "Description: %s"
@@ -794,15 +801,15 @@ msgid "Current: %s"
 msgstr "현재: %s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:241
-#: ../../src/ui_fsmenu/main.cc:1015 ../../src/wui/encyclopedia_window.cc:143
-#: ../../src/wui/tribal_encyclopedia.cc:56
+#: ../../src/ui_fsmenu/main.cc:1015 ../../src/wui/encyclopedia_window.cc:146
+#: ../../src/wui/tribal_encyclopedia.cc:57
 msgid "Error!"
 msgstr "오류!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:278
-#: ../../src/ui_fsmenu/addons_packager_box.cc:95 ../../src/wui/mapdata.cc:185
+#: ../../src/ui_fsmenu/addons/packager_box.cc:96 ../../src/wui/mapdata.cc:185
 msgid "My Maps"
 msgstr "내 지도"
 
@@ -835,11 +842,15 @@ msgstr "표시"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:262
-#: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_basic/text_prompt.cc:47
-#: ../../src/ui_fsmenu/addons.cc:204 ../../src/ui_fsmenu/addons.cc:1680
-#: ../../src/ui_fsmenu/addons_packager.cc:109
+#: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:47
+#: ../../src/ui_fsmenu/addons/login_box.cc:55
+#: ../../src/ui_fsmenu/addons/manager.cc:214
+#: ../../src/ui_fsmenu/addons/packager.cc:110
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:118
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:399
 #: ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/keyboard_options.cc:133 ../../src/ui_fsmenu/menu.cc:145
+#: ../../src/ui_fsmenu/keyboard_options.cc:56
+#: ../../src/ui_fsmenu/keyboard_options.cc:194 ../../src/ui_fsmenu/menu.cc:145
 #: ../../src/ui_fsmenu/options.cc:95
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
 #: ../../src/wui/game_main_menu_save_game.cc:88
@@ -853,11 +864,15 @@ msgstr "확인"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:757
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
 #: ../../src/ui_basic/color_chooser.cc:271
-#: ../../src/ui_basic/messagebox.cc:112 ../../src/ui_basic/text_prompt.cc:56
-#: ../../src/ui_fsmenu/keyboard_options.cc:49
+#: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:56
+#: ../../src/ui_fsmenu/addons/contact.cc:59
+#: ../../src/ui_fsmenu/addons/login_box.cc:63
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:134
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:66
+#: ../../src/ui_fsmenu/keyboard_options.cc:51
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
-#: ../../src/wui/economy_options_window.cc:665
+#: ../../src/wui/economy_options_window.cc:672
 #: ../../src/wui/game_main_menu_save_game.cc:87
 msgid "Cancel"
 msgstr "취소"
@@ -883,8 +898,8 @@ msgid "Click player to remove"
 msgstr "제거할 선수를 누르십시오"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons_packager_box.cc:271
-#: ../../src/wui/economy_options_window.cc:666
+#: ../../src/ui_fsmenu/addons/packager_box.cc:272
+#: ../../src/wui/economy_options_window.cc:673
 #: ../../src/wui/load_or_save_game.cc:52
 msgid "Delete"
 msgstr "삭제"
@@ -894,8 +909,8 @@ msgid "Delete this suggested team lineup"
 msgstr "제안된 팀 라인업을 삭제"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
-#: ../../src/ui_fsmenu/addons_packager.cc:75
-#: ../../src/ui_fsmenu/addons_packager_box.cc:56
+#: ../../src/ui_fsmenu/addons/packager.cc:76
+#: ../../src/ui_fsmenu/addons/packager_box.cc:57
 msgid "+"
 msgstr "+"
 
@@ -904,7 +919,7 @@ msgid "Add a player to this team"
 msgstr "이 팀에 선수를 추가"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:322
-#: ../../src/logic/addons.cc:65
+#: ../../src/logic/addons.cc:66
 msgid "Theme"
 msgstr "테마"
 
@@ -925,7 +940,8 @@ msgid "Authors:"
 msgstr "제작자:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:364
-#: ../../src/ui_fsmenu/addons_packager.cc:148
+#: ../../src/ui_fsmenu/addons/packager.cc:149
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:81
 msgid "Description:"
 msgstr "설명:"
 
@@ -992,7 +1008,7 @@ msgid "Creating empty map…"
 msgstr "빈 지도를 만들고 있음…"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:64
-#: ../../src/wui/gamedetails.cc:179
+#: ../../src/wui/gamedetails.cc:177
 msgid "Players:"
 msgstr "선수:"
 
@@ -1005,6 +1021,7 @@ msgstr "저지대"
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:73
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:198
 msgid "Medium"
 msgstr "중간"
 
@@ -1135,7 +1152,7 @@ msgstr "지도 생성"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 #: ../../src/wui/game_main_menu_save_game.cc:78
-#: ../../src/wui/gamedetails.cc:203
+#: ../../src/wui/gamedetails.cc:201
 msgid "Filename:"
 msgstr "파일 이름:"
 
@@ -1249,7 +1266,7 @@ msgstr "선수 %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:185
-#: ../../src/ui_fsmenu/addons_packager_box.cc:314
+#: ../../src/ui_fsmenu/addons/packager_box.cc:315
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 #: ../../src/ui_fsmenu/campaigndetails.cc:58
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:210
@@ -1405,7 +1422,7 @@ msgstr "명령 대기열"
 
 #: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:149
 #: ../../src/map_io/widelands_map_loader.cc:389
-#: ../../src/wlapplication_options.cc:466
+#: ../../src/wlapplication_options.cc:467
 #: ../../src/wui/interactive_player.cc:216
 #: ../../src/wui/interactive_player.cc:454
 msgid "Messages"
@@ -1564,99 +1581,99 @@ msgstr "불가"
 msgid "off"
 msgstr "비활성"
 
-#: ../../src/logic/addons.cc:48
+#: ../../src/logic/addons.cc:49
 msgid "Tribes"
 msgstr "부족"
 
-#: ../../src/logic/addons.cc:50
+#: ../../src/logic/addons.cc:51
 msgid "World"
 msgstr "세계"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:54
 msgid "Script"
 msgstr "스크립트"
 
-#: ../../src/logic/addons.cc:54
+#: ../../src/logic/addons.cc:55
 msgid "Map Set"
 msgstr "지도 설정"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:56 ../../src/ui_fsmenu/campaigndetails.cc:49
+#: ../../src/logic/addons.cc:57 ../../src/ui_fsmenu/campaigndetails.cc:49
 msgid "Campaign"
 msgstr "작전 수행"
 
-#: ../../src/logic/addons.cc:60
+#: ../../src/logic/addons.cc:61
 msgid "Win Condition"
 msgstr "승리 조건"
 
-#: ../../src/logic/addons.cc:62
+#: ../../src/logic/addons.cc:63
 msgid "Starting Condition"
 msgstr "시작 조건"
 
-#: ../../src/logic/addons.cc:87
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:142
+#: ../../src/logic/addons.cc:161
 msgid "No conflicts"
 msgstr "충돌 없음"
 
-#: ../../src/logic/addons.cc:147
+#: ../../src/logic/addons.cc:166
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (예상 버전 %2$s, 찾음 %3$s)"
 
-#: ../../src/logic/addons.cc:152 ../../src/logic/addons.cc:192
+#: ../../src/logic/addons.cc:171 ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (예상 버전 %3$s, 찾음 %4$s)"
 
-#: ../../src/logic/addons.cc:158
+#: ../../src/logic/addons.cc:177
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u 잘못된 버전의 추가 기능: %2$s"
 
-#: ../../src/logic/addons.cc:177
+#: ../../src/logic/addons.cc:196
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$u 빠진 추가 기능: %2$s"
 
-#: ../../src/logic/addons.cc:185
+#: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (빠짐)"
 
-#: ../../src/logic/addons.cc:187
+#: ../../src/logic/addons.cc:206
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (빠짐)"
 
-#: ../../src/logic/addons.cc:197
+#: ../../src/logic/addons.cc:216
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s 및 %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:199
+#: ../../src/logic/addons.cc:218
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u 빠진 추가 기능"
 
-#: ../../src/logic/addons.cc:202
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
 msgstr[0] "%u 잘못된 버전의 추가 기능"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:217
+#: ../../src/logic/addons.cc:236
 msgid "None"
 msgstr "없음"
 
-#: ../../src/logic/addons.cc:221
+#: ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (버전 %3$s)"
@@ -1674,11 +1691,11 @@ msgstr "세계와 부족등을 다음 불러오기를 하고 있음…"
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "불러오기 위해 정리작업: 지도 객체 (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:563
+#: ../../src/logic/editor_game_base.cc:566
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "불러오기 위해 정리작업: 선수들 (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:566
+#: ../../src/logic/editor_game_base.cc:569
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "불러오기 위해 정리작업: 지도 (3/3)"
 
@@ -1835,13 +1852,13 @@ msgstr "해당 적이 패배하였습니다!"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:420
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% 군인들 (+%2%)"
+msgstr[0] "%1% 명 군인 (+%2%)"
 
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
 #: ../../src/logic/map_objects/tribes/militarysite.cc:428
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "군인 %1% 명"
+msgstr[0] "%1% 명 군인"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently open soldier slots in the building. %3% is the maximum number of
@@ -1849,7 +1866,7 @@ msgstr[0] "군인 %1% 명"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:440
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) 군인들 (+%3%)"
+msgstr[0] "%1%(+%2%) 명 군인 (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently
@@ -1857,7 +1874,7 @@ msgstr[0] "%1%(+%2%) 군인들 (+%3%)"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:449
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) 군인들"
+msgstr[0] "%1%(+%2%) 명 군인"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../src/logic/map_objects/tribes/militarysite.cc:952
@@ -2029,7 +2046,7 @@ msgstr "(중지됨)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:435
-#: ../../src/wui/building_statistics_menu.cc:693
+#: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -2108,7 +2125,7 @@ msgstr "탐험선이 당신의 명령을 기다리고 있습니다."
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
 #: ../../src/logic/map_objects/tribes/ship.cc:1019
-#: ../../src/wui/seafaring_statistics_menu.cc:239
+#: ../../src/wui/seafaring_statistics_menu.cc:240
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "선적하고 있음"
@@ -2117,7 +2134,7 @@ msgstr "선적하고 있음"
 #. but has
 #. * nothing to do.
 #: ../../src/logic/map_objects/tribes/ship.cc:1022
-#: ../../src/wui/seafaring_statistics_menu.cc:237
+#: ../../src/wui/seafaring_statistics_menu.cc:238
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "비어있음"
@@ -2125,7 +2142,7 @@ msgstr "비어있음"
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:1026
-#: ../../src/wui/seafaring_statistics_menu.cc:241
+#: ../../src/wui/seafaring_statistics_menu.cc:242
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "대기하고 있음"
@@ -2133,14 +2150,14 @@ msgstr "대기하고 있음"
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:1030
-#: ../../src/wui/seafaring_statistics_menu.cc:243
+#: ../../src/wui/seafaring_statistics_menu.cc:244
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "정찰하고 있음"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:1034
-#: ../../src/wui/seafaring_statistics_menu.cc:245
+#: ../../src/wui/seafaring_statistics_menu.cc:246
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "항구 공간 발견"
@@ -2169,8 +2186,8 @@ msgstr "배들"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
-#: ../../src/wui/economy_options_window.cc:72
-#: ../../src/wui/general_statistics_menu.cc:151
+#: ../../src/wui/economy_options_window.cc:77
+#: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:323
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:265
@@ -2181,8 +2198,8 @@ msgstr "물품"
 #. worker. If you
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:192
-#: ../../src/wui/economy_options_window.cc:73
-#: ../../src/wui/general_statistics_menu.cc:142
+#: ../../src/wui/economy_options_window.cc:78
+#: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:112
 #: ../../src/wui/warehousewindow.cc:269
 msgid "Workers"
@@ -2192,8 +2209,8 @@ msgstr "일꾼들"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:199
 #: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
-#: ../../src/wui/general_statistics_menu.cc:147
-#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:195
+#: ../../src/wui/general_statistics_menu.cc:148
+#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:196
 msgid "Buildings"
 msgstr "건물"
 
@@ -2305,7 +2322,7 @@ msgstr "지도 파일이 잘못되었습니다:\n%s"
 msgid "This objective has no description."
 msgstr "이 목표는 설명이 없습니다."
 
-#: ../../src/logic/player.cc:1918
+#: ../../src/logic/player.cc:1921
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2323,7 +2340,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr "재생이 동기화되지 않아 놀이가 일시 중지되었습니다.\n지원되지 않는 다른 버전의 와이드랜드로 만든 재생을 보고 있을 겁니다.\n\n 리플레이가 같은 버전의 와이드랜드, %1$s (%2$s)로 만든것이 확실하면, 이 문제를 버그로 보고하십시오.\n 표준 출력 (원도우즈에서는 stdout.txt 파일)에서 관련 메시지를 찾을 수 있습니다. 이 정보를 보고서에 추가하십시오. "
+msgstr "재생이 동기화되지 않아 놀이가 일시 중지되었습니다.\n지원되지 않는 다른 버전의 와이드랜드로 만든 재생을 보고 있을 겁니다.\n\n 리플레이가 같은 버전의 와이드랜드, %1$s (%2$s)로 만든것이 확실하면, 이 문제를 버그로 보고하십시오.\n 표준 출력 (원도우즈에서는 stdout.txt 파일)에서 관련 메시지를 찾을 수 있습니다. 이 정보를 보고서에 추가하십시오."
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -2384,7 +2401,7 @@ msgid "Building restrictions"
 msgstr "건물 구역"
 
 #: ../../src/map_io/map_saver.cc:202
-#: ../../src/map_io/widelands_map_loader.cc:304 ../../src/wui/minimap.cc:173
+#: ../../src/map_io/widelands_map_loader.cc:304 ../../src/wui/minimap.cc:174
 msgid "Flags"
 msgstr "깃발"
 
@@ -2431,8 +2448,8 @@ msgstr "스크립트를 하고 있음"
 
 #: ../../src/map_io/map_saver.cc:306
 #: ../../src/map_io/widelands_map_loader.cc:407
-#: ../../src/wlapplication_options.cc:462
-#: ../../src/wui/game_objectives_menu.cc:41
+#: ../../src/wlapplication_options.cc:463
+#: ../../src/wui/game_objectives_menu.cc:42
 #: ../../src/wui/interactive_player.cc:208
 msgid "Objectives"
 msgstr "목표"
@@ -2491,7 +2508,7 @@ msgid "Checking map"
 msgstr "지도를 검사하고 있음"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
-#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:694
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:721
 msgid "Preparing game…"
 msgstr "놀이를 준비하고 있음…"
 
@@ -3077,18 +3094,21 @@ msgstr "초기 색상"
 
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:289
+msgctxt "color"
 msgid "R"
-msgstr "R"
+msgstr ""
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
+msgctxt "color"
 msgid "G"
-msgstr "G"
+msgstr ""
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
+msgctxt "color"
 msgid "B"
-msgstr "B"
+msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
@@ -3119,7 +3139,7 @@ msgstr "선택 안됨"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
-msgstr "잠시 기다리십시오… "
+msgstr "잠시 기다리십시오…"
 
 #: ../../src/ui_basic/panel.cc:442
 msgid "Game ending – please wait…"
@@ -3167,7 +3187,7 @@ msgid_plural "%d fields"
 msgstr[0] "%d 입력란"
 
 #: ../../src/ui_basic/window.cc:108 ../../src/ui_fsmenu/about.cc:41
-#: ../../src/wui/watchwindow.cc:74
+#: ../../src/wui/watchwindow.cc:77
 msgid "Close"
 msgstr "종료"
 
@@ -3195,72 +3215,176 @@ msgstr "와이드랜드에 대하여"
 msgid "Lua Error"
 msgstr "루아 오류"
 
-#: ../../src/ui_fsmenu/addons.cc:117
-msgid "Add-On Manager"
-msgstr "추가 기능 관리자"
+#: ../../src/ui_fsmenu/addons/contact.cc:39
+msgid "Contact Form"
+msgstr "문의 양식"
 
-#: ../../src/ui_fsmenu/addons.cc:158
-msgid "Verified only"
-msgstr "확인 전용"
+#: ../../src/ui_fsmenu/addons/contact.cc:51
+msgid "Send message"
+msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:159
-msgid "Show only verified add-ons in the Browse tab"
-msgstr "찾아보기 탭에 확인된 추가 기능만 표시"
+#: ../../src/ui_fsmenu/addons/contact.cc:75
+msgid "Send Message"
+msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:167
-msgid "Sort by"
-msgstr "정렬 기준"
+#: ../../src/ui_fsmenu/addons/contact.cc:76
+msgid "Send this message now?"
+msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:178
+#: ../../src/ui_fsmenu/addons/contact.cc:86
+#, c-format
+msgid ""
+"Unable to submit your enquiry.\n"
+"Error message:\n"
+"%s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/contact.cc:95
+msgid "Sent"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/contact.cc:96
+msgid ""
+"Your message has been sent to the Widelands Development Team, and we will "
+"respond as soon as we can. Don’t forget to check your website inbox "
+"frequently."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/login_box.cc:39
+msgid "Login"
+msgstr "로그인"
+
+#: ../../src/ui_fsmenu/addons/login_box.cc:71
+#: ../../src/ui_fsmenu/addons/manager.cc:188
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:126
 #: ../../src/ui_fsmenu/training_wheel_options.cc:120
 msgid "Reset"
 msgstr "다시 설정"
 
-#: ../../src/ui_fsmenu/addons.cc:179
+#: ../../src/ui_fsmenu/addons/login_box.cc:78
+#: ../../src/ui_fsmenu/login_box.cc:60
+#, c-format
+msgid ""
+"In order to use a registered account, you need an account on the Widelands "
+"website. Please log in at %s and set an online gaming password on your "
+"profile page."
+msgstr "등록 된 계정을 사용하려면 와이드랜드 누리집의 계정이 있어야 합니다. %s 에 로그인하여 프로필 페이지에서 온라인 게임 암호를 설정하십시오."
+
+#: ../../src/ui_fsmenu/addons/login_box.cc:86
+msgid "Username:"
+msgstr "사용자이름:"
+
+#: ../../src/ui_fsmenu/addons/login_box.cc:91
+#: ../../src/ui_fsmenu/login_box.cc:53
+msgid "Password:"
+msgstr "암호:"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:69
+#, c-format
+msgid "%.2f GB"
+msgstr "%.2f GB"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:71
+#, c-format
+msgid "%.2f MB"
+msgstr "%.2f MB"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:73
+#, c-format
+msgid "%.2f kB"
+msgstr "%.2f kB"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:75
+#, c-format
+msgid "%u bytes"
+msgstr "%u 바이트"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:99
+msgid "Add-On Manager"
+msgstr "추가 기능 관리자"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:140
+msgid "Verified only"
+msgstr "확인 전용"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:141
+msgid "Show only verified add-ons in the Browse tab"
+msgstr "찾아보기 탭에 확인된 추가 기능만 표시"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:149
+msgid "Sort by"
+msgstr "정렬 기준"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:160
+msgid "Choose add-on to upload…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:171
+msgid "Upload a screenshot…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:178
+msgid "Understood and confirmed"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:179
+msgid ""
+"By ticking this checkbox, you confirm that you have read and agree to the "
+"above terms."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:189
 msgid "Reset the filters"
 msgstr "거르개를 다시 설정"
 
-#: ../../src/ui_fsmenu/addons.cc:195
+#: ../../src/ui_fsmenu/addons/manager.cc:205
 msgid "Refresh"
 msgstr "새로고침"
 
-#: ../../src/ui_fsmenu/addons.cc:196
+#: ../../src/ui_fsmenu/addons/manager.cc:206
 msgid "Refresh the list of add-ons available from the server"
 msgstr "서버에서 사용 가능한 추가 기능 목록을 새로 고침"
 
-#: ../../src/ui_fsmenu/addons.cc:213
+#: ../../src/ui_fsmenu/addons/manager.cc:223
 msgid "Fix dependencies…"
 msgstr "종속성 수정…"
 
-#: ../../src/ui_fsmenu/addons.cc:214
+#: ../../src/ui_fsmenu/addons/manager.cc:224
 msgid "Try to automatically fix the dependency errors"
 msgstr "종속성 오류를 자동으로 수정 시도"
 
-#: ../../src/ui_fsmenu/addons.cc:224
+#: ../../src/ui_fsmenu/addons/manager.cc:234
 msgid "Move selected add-on to top"
 msgstr "선택한 추가 기능을 위쪽으로 이동"
 
-#: ../../src/ui_fsmenu/addons.cc:233
+#: ../../src/ui_fsmenu/addons/manager.cc:243
 msgid "Move selected add-on one step up"
 msgstr "선택한 추가 기능을 한 단계 위로 이동"
 
-#: ../../src/ui_fsmenu/addons.cc:242
+#: ../../src/ui_fsmenu/addons/manager.cc:252
 msgid "Move selected add-on one step down"
 msgstr "선택한 추가 기능을 한 단계 아래로 이동"
 
-#: ../../src/ui_fsmenu/addons.cc:251
+#: ../../src/ui_fsmenu/addons/manager.cc:261
 msgid "Move selected add-on to bottom"
 msgstr "선택한 추가 기능을 아래쪽으로 이동"
 
-#: ../../src/ui_fsmenu/addons.cc:259
+#: ../../src/ui_fsmenu/addons/manager.cc:269
 msgid "Launch the add-ons packager…"
 msgstr "추가 기능 꾸러미 관리자 실행…"
 
-#: ../../src/ui_fsmenu/addons.cc:263
+#. * TRANSLATORS: This button allows the user to send a message to the
+#. Widelands
+#. Development Team
+#: ../../src/ui_fsmenu/addons/manager.cc:280
+msgid "Contact us…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:285
 msgid "Tools for Add-Ons Developers"
 msgstr "추가 기능 개발자용 도구"
 
-#: ../../src/ui_fsmenu/addons.cc:271
+#: ../../src/ui_fsmenu/addons/manager.cc:293
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -3268,183 +3392,295 @@ msgid ""
 "having to write a single line of code."
 msgstr "대화형 추가 기능 꾸러미 연장은 추가 기능을 생성, 편집 및 삭제할 수 있습니다. 와이드랜드 지도 편집 연장으로 그려진 지도를 그래픽 인터페이스를 사용하는 추가 기능으로 묶어 코드를 한 줄도 작성하지 않아도 다른 플레이어와 공유 할 수 있습니다."
 
-#: ../../src/ui_fsmenu/addons.cc:292
-#, c-format
-msgid ""
-"Uploading add-ons to the server from within Widelands is not implemented "
-"yet. To upload your add-ons, please zip the add-on directory in your file "
-"browser, then open our add-on submission website %s in your browser and "
-"attach the zip file."
-msgstr "와이드랜드 내에서 서버에 추가 기능을 업로드하는 것은 아직 구현되지 않았습니다. 추가 기능을 업로드하려면 파일 브라우저에서 추가 기능 디렉토리의 압축한 다음 브라우저에서 추가 기능 제출 웹 사이트 %s 를 열고 zip 파일을 첨부하십시오."
-
-#: ../../src/ui_fsmenu/addons.cc:305
-msgid "Open Link"
-msgstr "고리 열기"
-
-#: ../../src/ui_fsmenu/addons.cc:307
-msgid "Copy Link"
-msgstr "고리 복사"
-
-#: ../../src/ui_fsmenu/addons.cc:327
+#: ../../src/ui_fsmenu/addons/manager.cc:309
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "사용자 자신의 추가 기능을 개발하고 꾸러미 쌓는 법에 대한 자세한 내용은 %s 를 참조하십시오."
 
-#: ../../src/ui_fsmenu/addons.cc:357
+#: ../../src/ui_fsmenu/addons/manager.cc:320
+msgid "Open Link"
+msgstr "고리 열기"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:322
+msgid "Copy Link"
+msgstr "고리 복사"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:344
+msgid ""
+"Here, you can upload your add-ons to the server to make them available to "
+"other players. By uploading, you agree to publish your creation under the "
+"terms of the GNU General Public License (GPL) version 2 (the same license "
+"under which Widelands itself is distributed). For more information on the "
+"GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:351
+msgid ""
+"It is forbidden to upload add-ons containing harmful or malicious content or"
+" spam. By uploading an add-on, you assert that the add-on is of your own "
+"creation or you have the add-on’s author(s) permission to submit it in their"
+" stead."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:356
+msgid ""
+"You are required to have read the add-ons documentation under the link given"
+" further above before submitting content. Since the documentation is subject"
+" to frequent changes, ensure that you have read it recently and that you "
+"followed all guidelines stated there."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:361
+msgid ""
+"The Widelands Development Team will review your add-on soon after uploading."
+" In case they have further inquiries, they will contact you via a PM on the "
+"Widelands website; therefore please check the inbox of your online user "
+"profile page frequently."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:392
+#, c-format
+msgid ""
+"Technical problems? Unclear documentation? Advanced needs such as deletion "
+"of an add-on or collaborating with another add-on designer? Please visit our"
+" forums at %s, explain your needs, and the Widelands Development Team will "
+"be happy to help."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:410
+msgid ""
+"Alternatively you can also send a message to the Widelands Development Team "
+"and we’ll try to help you with your enquiry as soon as we can. Only the "
+"server administrators can read messages sent in this way. Since other add-on"
+" designers can usually benefit from others’ questions and answers, please "
+"use this way of communication only if there is a reason why your concern is "
+"not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
+" website user profile page."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:448
 msgid "Development"
 msgstr "개발"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons.cc:360
+#: ../../src/ui_fsmenu/addons/manager.cc:451
 msgid "Name"
 msgstr "이름"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons.cc:362
+#: ../../src/ui_fsmenu/addons/manager.cc:453
 msgid "Name (descending)"
 msgstr "이름 (내림차순)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:364
+#: ../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Best average rating"
 msgstr "최고 평균 등급"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:366
+#: ../../src/ui_fsmenu/addons/manager.cc:457
 msgid "Worst average rating"
 msgstr "최저 평균 등급"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:368
+#: ../../src/ui_fsmenu/addons/manager.cc:459
 msgid "Most often downloaded"
 msgstr "가장 자주 내려받기됨"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:370
+#: ../../src/ui_fsmenu/addons/manager.cc:461
 msgid "Least often downloaded"
 msgstr "다운로드 빈도가 가장 낮음"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:372
+#: ../../src/ui_fsmenu/addons/manager.cc:463
 msgid "Oldest"
 msgstr "가장 오래됨"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:374
+#: ../../src/ui_fsmenu/addons/manager.cc:465
 msgid "Newest"
 msgstr "가장 최신"
 
-#: ../../src/ui_fsmenu/addons.cc:377
+#: ../../src/ui_fsmenu/addons/manager.cc:468
 msgid "Filter add-ons by name"
 msgstr "이름별로 추가 기능 거르개"
 
-#: ../../src/ui_fsmenu/addons.cc:387
+#: ../../src/ui_fsmenu/addons/manager.cc:478
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "범주 ‘%s’ 을 전환"
 
-#: ../../src/ui_fsmenu/addons.cc:460
+#: ../../src/ui_fsmenu/addons/manager.cc:551
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "이 %u 개의 추가 기능을 판올림 하겠습니까?"
 
-#: ../../src/ui_fsmenu/addons.cc:468
+#: ../../src/ui_fsmenu/addons/manager.cc:559
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s)  %3$s에 의해"
 
-#: ../../src/ui_fsmenu/addons.cc:469 ../../src/ui_fsmenu/addons.cc:2026
-#: ../../src/ui_fsmenu/addons.cc:2051
+#: ../../src/ui_fsmenu/addons/manager.cc:560
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:411
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:437
 msgid "NOT VERIFIED"
 msgstr "확인되지 않음"
 
-#: ../../src/ui_fsmenu/addons.cc:469
+#: ../../src/ui_fsmenu/addons/manager.cc:560
 msgid "verified"
 msgstr "확인됨"
 
-#: ../../src/ui_fsmenu/addons.cc:474
+#: ../../src/ui_fsmenu/addons/manager.cc:565
 msgid "Upgrade All"
 msgstr "모두 판올림"
 
-#: ../../src/ui_fsmenu/addons.cc:667
+#: ../../src/ui_fsmenu/addons/manager.cc:707
+msgid "Not logged in"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:708
+msgid ""
+"Click to log in. You can then comment and vote on add-ons and upload your "
+"own add-ons."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:712
+msgid "Please log in to upload add-ons"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:714
+msgid "Please log in to upload content"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:716
+msgid "Please log in to send an enquiry"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:721
+#, c-format
+msgid "Logged in as %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:721
+#, c-format
+msgid "Logged in as %s (admin)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:724
+msgid "Click to log out"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:729
+msgid "Please tick the confirmation checkbox to upload add-ons"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:732
+msgid "Please tick the confirmation checkbox to upload content"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:759
+msgid "Server Error"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:760
+#, c-format
+msgid ""
+"Unable to connect to the server.\n"
+"Error message:\n"
+"%s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:769
+msgid "Wrong Password"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:770
+#, c-format
+msgid ""
+"The entered username or password is invalid:\n"
+"%s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:856
 msgid "Server Connection Error"
 msgstr "서버 연결 오류"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons.cc:669
+#: ../../src/ui_fsmenu/addons/manager.cc:858
 msgid "a networking bug"
 msgstr "네트워킹 버그"
 
-#: ../../src/ui_fsmenu/addons.cc:670
+#: ../../src/ui_fsmenu/addons/manager.cc:859
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "서버에서 사용 가능한 추가 기능 목록을 가져올 수 없습니다!<br>오류 메시지: %s"
 
-#: ../../src/ui_fsmenu/addons.cc:751
+#: ../../src/ui_fsmenu/addons/manager.cc:948
 #, c-format
 msgid "Installed (%u)"
 msgstr "설치됨 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:829
+#: ../../src/ui_fsmenu/addons/manager.cc:1026
 msgid "Browse"
 msgstr "찾아보기"
 
-#: ../../src/ui_fsmenu/addons.cc:830
+#: ../../src/ui_fsmenu/addons/manager.cc:1027
 #, c-format
 msgid "Browse (%u)"
 msgstr "찾아보기 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:840
+#: ../../src/ui_fsmenu/addons/manager.cc:1037
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "모두 판올림 (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:843
+#: ../../src/ui_fsmenu/addons/manager.cc:1040
 msgid "No upgrades are available for your installed add-ons"
 msgstr "설치된 추가 기능에 사용할 수 있는 판올림이 없습니다"
 
-#: ../../src/ui_fsmenu/addons.cc:846
+#: ../../src/ui_fsmenu/addons/manager.cc:1043
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "다음 %u 개의 추가 기능을 판올림하십시오:"
 
-#: ../../src/ui_fsmenu/addons.cc:852
+#: ../../src/ui_fsmenu/addons/manager.cc:1049
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons.cc:883
+#: ../../src/ui_fsmenu/addons/manager.cc:1081
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· ‘%1$s’ 에는 찾을 수 없는  ‘%2$s’ 가 필요합니다"
 
-#: ../../src/ui_fsmenu/addons.cc:889
+#: ../../src/ui_fsmenu/addons/manager.cc:1087
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· ‘%1$s’ 에는 비활성화된 ‘%2$s’ 가 필요합니다"
 
-#: ../../src/ui_fsmenu/addons.cc:896
+#: ../../src/ui_fsmenu/addons/manager.cc:1094
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· ‘%1$s’ 에는 ‘%2$s’  필요하며, 이는 필요한 추가 기능 아래에 나열되어 있습니다"
 
-#: ../../src/ui_fsmenu/addons.cc:916
+#: ../../src/ui_fsmenu/addons/manager.cc:1114
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· ‘%1$s’ 은 처음 ‘%2$s’ 와 ‘%3$s’ 을 차례로 입력해야 하지만 순서가 잘못되었습니다"
 
-#: ../../src/ui_fsmenu/addons.cc:934
+#: ../../src/ui_fsmenu/addons/manager.cc:1132
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -3452,24 +3688,54 @@ msgid ""
 "%s"
 msgstr "활성화된 추가 기능에 결함이 있습니다. 현재 구성으로는 게임을 시작할 수 없습니다.\n오류 메시지:\n%s"
 
-#: ../../src/ui_fsmenu/addons.cc:952
+#: ../../src/ui_fsmenu/addons/manager.cc:1150
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u 개의 종속성 오류"
 
-#: ../../src/ui_fsmenu/addons.cc:957
+#: ../../src/ui_fsmenu/addons/manager.cc:1155
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "종속성 오류가 있는 추가 기능이 제대로 작동하지 않거나 게임 및 지도가 불러오기되지 않을 수 있습니다."
 
-#: ../../src/ui_fsmenu/addons.cc:1152
+#: ../../src/ui_fsmenu/addons/manager.cc:1255
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:58
+msgid "Upload"
+msgstr "올려주기"
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1256
+#, c-format
+msgid "Do you really want to upload the add-on ‘%s’ to the server?"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1265
+#, c-format
+msgid "Uploading ‘%s’…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1272
+#: ../../src/ui_fsmenu/addons/manager.cc:1329
+#: ../../src/ui_fsmenu/addons/manager.cc:1393
+msgid "%1% / %2%"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1296
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ could not be uploaded to the server.\n"
+"\n"
+"Error Message:\n"
+"%2$s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1309
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "‘%s’ 을 내려받고 있습니다…"
 
-#: ../../src/ui_fsmenu/addons.cc:1192
+#: ../../src/ui_fsmenu/addons/manager.cc:1345
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3478,26 +3744,520 @@ msgid ""
 "%2$s"
 msgstr "서버에서 추가 기능 ‘%1$s’ 을 내려받기할 수 없습니다. 이 추가 기능의 설치/판올림은 건너 뜁니다.\n\n오류 메시지:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1206
-#, c-format
-msgid "Downloading translations for ‘%s’…"
-msgstr "‘%s’ 에 대한 번역을 내려받고 있습니다…"
-
-#: ../../src/ui_fsmenu/addons.cc:1247
+#: ../../src/ui_fsmenu/addons/manager.cc:1424
 #, c-format
 msgid ""
-"The translation files for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations for this add-on will be skipped.\n"
+"The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "추가 기능 '%1$s'의 번역 파일을 서버에서 내려받을 수 없습니다. 이 추가 기능에 대한 번역 설치/판올림은 건너뜁니다.\n\n오류 메시지:\n%2$s"
+msgstr ""
 
-#: ../../src/ui_fsmenu/addons.cc:1271 ../../src/ui_fsmenu/addons.cc:1453
-#: ../../src/ui_fsmenu/addons.cc:1924
+#: ../../src/ui_fsmenu/addons/manager.cc:1494
+#, c-format
+msgid "The required add-on ‘%s’ could not be found on the server."
+msgstr "서버에서 필요한 추가 기능 ‘%s’ 을 찾을 수 없습니다."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:50
+msgid "Add-Ons Packager"
+msgstr "추가 기능 꾸러미 연장"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:77
+msgid "New add-on"
+msgstr "새로운 추가 기능"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:85
+#: ../../src/ui_fsmenu/addons/packager_box.cc:75
+msgid "–"
+msgstr "–"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:86
+msgid "Delete this add-on"
+msgstr "이 추가 기능을 삭제"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:94
+msgid "Discard changes"
+msgstr "변경 사항을 취소"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:102
+msgid "Save changes"
+msgstr "번역확인->변경 사항을 저장or 저장 변경 사항"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:113
+msgid "Writing Add-Ons…"
+msgstr "추가 기능을 쓰고 있음…"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:115
+msgid "Please be patient while your changes are written."
+msgstr "변경 사항이 기록되는 동안 잠시 기다리십시오."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:134
+msgid "Name:"
+msgstr "이름:"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:139
+msgid "Author:"
+msgstr "작성자:"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:144
+msgid "Version:"
+msgstr "버전:"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:313
+msgid "New Add-On"
+msgstr "새로운 추가 기능"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:314
+msgid "Enter the name for the new add-on."
+msgstr "새로운 추가 기능의 이름을 입력하십시오."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:316
+msgid "Category"
+msgstr "범주"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:336
+#: ../../src/ui_fsmenu/addons/packager.cc:351
+#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager_box.cc:252
+#: ../../src/ui_fsmenu/addons/packager_box.cc:258
+msgid "Invalid Name"
+msgstr "잘못된 이름"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:336
+#: ../../src/ui_fsmenu/addons/packager_box.cc:252
+msgid "This name is invalid. Please choose a different name."
+msgstr "이 이름이 올바르지 않습니다. 다른 이름을 선택하십시오."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:351
+msgid "An add-on with this internal name already exists."
+msgstr "이 내부 이름을 가진 추가 기능이 이미 있습니다."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:356
+msgid ""
+"An add-on with this internal name was deleted recently. Please commit your "
+"changes before using this name again."
+msgstr "이 내부 이름을 가진 추가 기능이 최근에 삭제되었습니다. 이 이름을 다시 사용하기 전에 변경 사항을 커밋하십시오."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:382
+msgid "Delete Add-on"
+msgstr "추가 기능을 삭제"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:384
+#, c-format
+msgid "Do you really want to delete the add-on ‘%s’?"
+msgstr "추가 기능 ‘%s’ 를 정말 삭제 하겠습니까?"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:385
+#, c-format
+msgid ""
+"Do you really want to delete the local add-on ‘%s’?\n"
+"\n"
+"Note that this add-on can not be downloaded again from the server."
+msgstr "지역 추가 기능 ‘%s’을 삭제하시겠습니까?\n\n이 추가 기능은 서버에서 다시 내려받기할 수 없습니다."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:406
+#, c-format
+msgid ""
+"If you quit the packager now, all changes to the following %u add-on will be"
+" discarded."
+msgid_plural ""
+"If you quit the packager now, all changes to the following %u add-ons will "
+"be discarded."
+msgstr[0] "지금 꾸러미 연장을 끝내면 다음 %u개의 추가 기능에 대한 모든 변경 내용이 삭제됩니다."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:416
+#: ../../src/ui_fsmenu/addons/packager.cc:445
+#: ../../src/ui_fsmenu/addons/packager.cc:473
+#, c-format
+msgid ""
+"%1$s\n"
+"· %2$s"
+msgstr "%1$s\n· %2$s"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:419
+msgid "Quit Packager"
+msgstr "꾸러미 연장을 끝내기"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:434
+#, c-format
+msgid "Do you really want to discard all changes to the add-on ‘%s’?"
+msgstr "추가 기능 ‘%s’ 에 대한 모든 변경 사항을 정말로 취소하겠습니까?"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:439
+#, c-format
+msgid "Do you really want to discard all changes to the following %u add-on?"
+msgid_plural ""
+"Do you really want to discard all changes to the following %u add-ons?"
+msgstr[0] "다음 %u 개의 추가 기능에 대한 모든 변경 사항을 정말로 취소하겠습니까?"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:449
+msgid "Discard Changes"
+msgstr "변경 사항을 취소"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:462
+#, c-format
+msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
+msgstr "추가 기능  ‘%s’ 에 대한 모든 변경 사항을 디스크에 적용(커밋) 하겠습니까?"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:467
+#, c-format
+msgid ""
+"Do you really want to commit all changes to the following %u add-on to disk?"
+msgid_plural ""
+"Do you really want to commit all changes to the following %u add-ons to "
+"disk?"
+msgstr[0] "번역확인-> 다음 %u 개의 추가 기능에 대한 모든 변경 사항을 디스크에 적용(커밋) 하겠습니까?"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:477
+msgid ""
+"Warning: If you manually edited any files in this add-on, your changes may "
+"be overwritten!"
+msgstr "경고: 이 추가 기능에서 파일을 수동으로 편집한 경우 변경 사항을 덮어쓸 수 있습니다!"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:480
+msgid "Confirm Saving"
+msgstr "저장 확인"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:534
+msgid "Invalid Version"
+msgstr "잘못된 버전"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:536
+#, c-format
+msgid ""
+"‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
+msgstr "‘%1$s’ 은(는) 올바른 버전 문자열이 아닙니다. 추가 기능 ‘%2$s’ 은(는) 저장되지 않습니다."
+
+#: ../../src/ui_fsmenu/addons/packager.cc:546
+msgid "Error Writing Addon"
+msgstr "추가 기능 쓰기 오류"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:547
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ can not be saved to disk:\n"
+"%2$s"
+msgstr "추가 기능 ‘%1$s’을 (를) 디스크에 저장할 수 없습니다:\n%2$s"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:58
+msgid "Add selected map"
+msgstr "선택한 지도를 추가"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:66
+msgid "*"
+msgstr "*"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:67
+msgid "Create subdirectory"
+msgstr "하위 디렉토리를 만들기"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:76
+msgid "Remove selected map or directory"
+msgstr "선택한 지도 또는 디렉토리를 삭제"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:88
+msgid "Directory Tree"
+msgstr "디렉토리 트리"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:139
+#: ../../src/ui_fsmenu/main.cc:422
+#, c-format
+msgid "Name: %s"
+msgstr "이름: %s"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:143
+#: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:104
+#, c-format
+msgid "Size: %s"
+msgstr "크기: %s"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:146
+#: ../../src/ui_fsmenu/main.cc:428 ../../src/ui_fsmenu/mapdetailsbox.cc:107
+#, c-format
+msgid "%1$u×%2$u"
+msgstr "%1$u×%2$u"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:148
+#: ../../src/ui_fsmenu/main.cc:364 ../../src/ui_fsmenu/main.cc:432
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:110
+#, c-format
+msgid "Players: %s"
+msgstr "선수들: %s"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:176
+msgid "Top-level directory"
+msgstr "최상위 디렉토리"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:238
+msgid "New Directory"
+msgstr "새로운 디렉토리"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:239
+msgid "Enter the name for the new directory."
+msgstr "새로운 디렉토리의 이름을 입력하십시오."
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:258
+msgid "A directory with this name already exists."
+msgstr "이 이름을 가진 디렉토리가 이미 있습니다."
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:275
+#, c-format
+msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
+msgstr "디렉토리 ‘%s’ 과(와) 디렉토리의 모든 내용을 삭제하겠습니까?"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:278
+#, c-format
+msgid "Do you really want to delete the map ‘%s’?"
+msgstr "지도 ‘%s’ 를 정말 삭제 하겠습니까?"
+
+#. * TRANSLATORS: Header for campaign difficulty
+#: ../../src/ui_fsmenu/addons/packager_box.cc:326
+#: ../../src/ui_fsmenu/campaign_select.cc:48
+#: ../../src/ui_fsmenu/campaigndetails.cc:63
+#: ../../src/ui_fsmenu/scenario_select.cc:68
+msgid "Difficulty"
+msgstr "난이도"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:335
+msgid "Difficulty:"
+msgstr "난이도:"
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:360
+msgid "The campaigns difficulty. One word."
+msgstr "번역확인-> 캠페인 난이도입니다. 한 낱말로."
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:361
+msgid "Short description, which will be appended to the difficulty."
+msgstr "난이도에 추가될 간단한 설명입니다."
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:61
+msgid "Edit…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
+msgid "Edit Comment"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
+msgid "Write Comment"
+msgstr ""
+
+#. * TRANSLATORS: Short for Bold text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:156
+msgctxt "markup"
+msgid "B"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:156
+msgid "Bold"
+msgstr ""
+
+#. * TRANSLATORS: Short for Italic text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:160
+msgctxt "markup"
+msgid "I"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:160
+msgid "Italic"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:164
+msgid "Underline"
+msgstr ""
+
+#. * TRANSLATORS: Short for Underline text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:164
+msgctxt "markup"
+msgid "_"
+msgstr ""
+
+#. * TRANSLATORS: Short for Shadow text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
+msgctxt "markup"
+msgid "S"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
+msgid "Shadow"
+msgstr ""
+
+#. * TRANSLATORS: Short for Color text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
+msgctxt "markup"
+msgid "C"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
+msgid "Color…"
+msgstr ""
+
+#. * TRANSLATORS: Short for Tiny text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
+msgctxt "markup"
+msgid "1"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
+msgid "Tiny"
+msgstr ""
+
+#. * TRANSLATORS: Short for Small text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:194
+msgctxt "markup"
+msgid "2"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:194
+msgid "Small"
+msgstr ""
+
+#. * TRANSLATORS: Short for Medium text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:198
+msgctxt "markup"
+msgid "3"
+msgstr ""
+
+#. * TRANSLATORS: Short for Large text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:202
+msgctxt "markup"
+msgid "4"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:202
+msgid "Large"
+msgstr ""
+
+#. * TRANSLATORS: Short for Huge text markup
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:206
+msgctxt "markup"
+msgid "5"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:206
+msgid "Huge"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:233
+#, c-format
+msgid ""
+"The comment could not be submitted.\n"
+"\n"
+"Error Message:\n"
+"%s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:253
+msgid "Preview:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:278
+msgid "The comment contains invalid richtext markup:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:357
+msgid "Your vote"
+msgstr "당신의 투표"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
+msgid "Next screenshot"
+msgstr "다음 화면 갈무리"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
+msgid "Previous screenshot"
+msgstr "지난 화면 갈무리"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:398
+msgid "Write a comment…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:404
+msgid "Not voted"
+msgstr "투표하지 않음"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:416
+#, c-format
+msgid ""
+"The vote could not be submitted.\n"
+"Error code: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:476
+#, c-format
+msgid "Screenshots (%u)"
+msgstr "겨를찍기 (%u)"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:534
+#, c-format
+msgid "Comments (%u)"
+msgstr "댓글 (%u)"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:536
+#, c-format
+msgid "Votes (%u)"
+msgstr "투표 (%u)"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:540
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:493
+#, c-format
+msgid "Average rating: %1$.3f (%2$u vote)"
+msgid_plural "Average rating: %1$.3f (%2$u votes)"
+msgstr[0] "평균 등급: %1$.3f표 (%2$u 표)"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:544
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:498
+msgid "No votes yet"
+msgstr "아직 투표가 없습니다"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:561
+msgid "No comments yet."
+msgstr "아직 댓글이 없습니다."
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:563
+#, c-format
+msgid "%u comment:"
+msgid_plural "%u comments:"
+msgstr[0] "%u 개의 댓글:"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:577
+#, c-format
+msgid "%1$s (edited on %2$s)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:582
+#, c-format
+msgid "%1$s (edited by ‘%2$s’ on %3$s)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:589
+#, c-format
+msgid "‘%1$s’ commented on version %2$s:"
+msgstr "‘%1$s’ 이 버전 %2$s에 댓글을 달았습니다:"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:617
+#, c-format
+msgid "%1$u / %2$u"
+msgstr "%1$u / %2$u"
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:653
+msgid "This screenshot could not be fetched from the server due to an error."
+msgstr "오류로 인해 서버에서 이 화면 갈무리를 가져올 수 없습니다."
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:661
+msgid "Please log in to comment"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:663
+msgid "Please log in to vote"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:47
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:150
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:307
 msgid "Uninstall"
 msgstr "제거"
 
-#: ../../src/ui_fsmenu/addons.cc:1273
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:50
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3511,7 +4271,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "이 추가 기능을 제거하겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n버전 %3$s\n범주: %4$s\n%5$s\n\n이 추가 기능은 서버에서 다시 내려받기할 수 없습니다."
 
-#: ../../src/ui_fsmenu/addons.cc:1280
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:57
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3523,189 +4283,104 @@ msgid ""
 "%5$s"
 msgstr "이 추가 기능을 제거하겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n버전 %3$s\n범주: %4$s\n%5$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1368
-#, c-format
-msgid "The required add-on ‘%s’ could not be found on the server."
-msgstr "서버에서 필요한 추가 기능 ‘%s’ 을 찾을 수 없습니다."
-
-#: ../../src/ui_fsmenu/addons.cc:1406
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:101
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
 msgstr "이 추가 기능은 여러 선수 놀이 및 재생에서 비 동기화를 일으키는 것으로 알려져 있습니다."
 
-#: ../../src/ui_fsmenu/addons.cc:1412
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:107
 #, c-format
 msgid "Requires a Widelands version of at least %s."
 msgstr "적어도 %s의 와이드랜드 버전이 필요합니다."
 
-#: ../../src/ui_fsmenu/addons.cc:1417
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:112
 #, c-format
 msgid "Requires a Widelands version of at most %s."
 msgstr "최대 %s 의 와이드랜드 버전이 필요합니다."
 
-#: ../../src/ui_fsmenu/addons.cc:1421
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:116
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
 msgstr "적어도 %1$s 에서 최대 %2$s의 와이드랜드 버전이 필요합니다."
 
-#: ../../src/ui_fsmenu/addons.cc:1463 ../../src/ui_fsmenu/addons.cc:1512
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:160
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:210
 msgid "Disable"
 msgstr "사용 안 함"
 
-#: ../../src/ui_fsmenu/addons.cc:1463 ../../src/ui_fsmenu/addons.cc:1512
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:160
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:210
 msgid "Enable"
 msgstr "사용 설정"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1476 ../../src/ui_fsmenu/addons.cc:1949
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:174
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:333
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1489 ../../src/ui_fsmenu/addons.cc:1990
-#: ../../src/wui/stock_menu.cc:36
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:187
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:374 ../../src/wui/stock_menu.cc:37
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1493 ../../src/ui_fsmenu/addons.cc:1994
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:191
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:378
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1496 ../../src/ui_fsmenu/addons.cc:1998
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:194
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:382
 #, c-format
 msgid "by %s"
 msgstr "번역확인-> 만든이: %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1527 ../../src/ui_fsmenu/addons.cc:2082
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:225
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:468
 #, c-format
 msgid "Category: %s"
 msgstr "분류: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1532 ../../src/ui_fsmenu/addons.cc:2086
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:230
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:472
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "버전: %1$s+%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1585
-#, c-format
-msgid "%.2f GB"
-msgstr "%.2f GB"
-
-#: ../../src/ui_fsmenu/addons.cc:1587
-#, c-format
-msgid "%.2f MB"
-msgstr "%.2f MB"
-
-#: ../../src/ui_fsmenu/addons.cc:1589
-#, c-format
-msgid "%.2f kB"
-msgstr "%.2f kB"
-
-#: ../../src/ui_fsmenu/addons.cc:1591
-#, c-format
-msgid "%u bytes"
-msgstr "%u 바이트"
-
-#: ../../src/ui_fsmenu/addons.cc:1629
-msgid "Your vote"
-msgstr "당신의 투표"
-
-#: ../../src/ui_fsmenu/addons.cc:1647 ../../src/ui_fsmenu/addons.cc:2107
-#, c-format
-msgid "Average rating: %1$.3f (%2$u vote)"
-msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] "평균 등급: %1$.3f표 (%2$u 표)"
-
-#: ../../src/ui_fsmenu/addons.cc:1652 ../../src/ui_fsmenu/addons.cc:2112
-msgid "No votes yet"
-msgstr "아직 투표가 없습니다"
-
-#: ../../src/ui_fsmenu/addons.cc:1662
-msgid "Next screenshot"
-msgstr "다음 화면 갈무리"
-
-#: ../../src/ui_fsmenu/addons.cc:1671
-msgid "Previous screenshot"
-msgstr "지난 화면 갈무리"
-
-#: ../../src/ui_fsmenu/addons.cc:1679
-msgid "Submit comment"
-msgstr "댓글 제출"
-
-#: ../../src/ui_fsmenu/addons.cc:1685
-msgid "No comments yet."
-msgstr "아직 댓글이 없습니다."
-
-#: ../../src/ui_fsmenu/addons.cc:1687
-#, c-format
-msgid "%u comment:"
-msgid_plural "%u comments:"
-msgstr[0] "%u 개의 댓글:"
-
-#: ../../src/ui_fsmenu/addons.cc:1697
-#, c-format
-msgid "‘%1$s’ commented on version %2$s:"
-msgstr "‘%1$s’ 이 버전 %2$s에 댓글을 달았습니다:"
-
-#: ../../src/ui_fsmenu/addons.cc:1711
-msgid "Not voted"
-msgstr "투표하지 않음"
-
-#: ../../src/ui_fsmenu/addons.cc:1771
-#, c-format
-msgid "Comments (%u)"
-msgstr "댓글 (%u)"
-
-#: ../../src/ui_fsmenu/addons.cc:1776
-#, c-format
-msgid "Screenshots (%u)"
-msgstr "겨를찍기 (%u)"
-
-#: ../../src/ui_fsmenu/addons.cc:1788
-#, c-format
-msgid "Votes (%u)"
-msgstr "투표 (%u)"
-
-#: ../../src/ui_fsmenu/addons.cc:1831
-#, c-format
-msgid "%1$u / %2$u"
-msgstr "%1$u / %2$u"
-
-#: ../../src/ui_fsmenu/addons.cc:1867
-msgid "This screenshot could not be fetched from the server due to an error."
-msgstr "오류로 인해 서버에서 이 화면 갈무리를 가져올 수 없습니다."
-
-#: ../../src/ui_fsmenu/addons.cc:1906 ../../src/ui_fsmenu/addons.cc:2017
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:289
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:401
 msgid "Install"
 msgstr "설치"
 
-#: ../../src/ui_fsmenu/addons.cc:1915 ../../src/ui_fsmenu/addons.cc:2041
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:298
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:426
 msgid "Upgrade"
 msgstr "판올림"
 
-#: ../../src/ui_fsmenu/addons.cc:1933
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:316
 msgid "Comments and Votes"
 msgstr "댓글 및 투표"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
 #. Number of screenshots
-#: ../../src/ui_fsmenu/addons.cc:1975
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:359
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1999
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:383
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "만든이 %1$s (%2$s이 올려넣기 함)"
 
-#: ../../src/ui_fsmenu/addons.cc:2018
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:403
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3718,11 +4393,12 @@ msgid ""
 "%6$s\n"
 msgstr "이 추가 기능을 설치하시겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n%3$s\n버전 %4$s\n범주: %5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:2026 ../../src/ui_fsmenu/addons.cc:2051
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:411
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:437
 msgid "Verified"
 msgstr "확인됨"
 
-#: ../../src/ui_fsmenu/addons.cc:2042
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:428
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3736,311 +4412,66 @@ msgid ""
 "%7$s"
 msgstr "이 추가 기능을 판올림하겠습니까?\n\n%1$s\n번역확인-> 만든이: %2$s\n%3$s\n설치된 버전: %4$s\n사용가능한 버전: %5$s\n분류: %6$s\n%7$s"
 
-#: ../../src/ui_fsmenu/addons.cc:2093
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:479
 msgid "Verified by the Widelands Development Team"
 msgstr "와이드랜드 개발 팀에서 검증됨"
 
-#: ../../src/ui_fsmenu/addons.cc:2094
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "이 추가 기능은 아직 와이드랜드 개발 팀이 확인하지 않았습니다. 우리는 그것이 유해하거나 모욕적인 내용을 포함하고 있지 않다고 보장할 수 없습니다."
 
-#: ../../src/ui_fsmenu/addons.cc:2101
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:487
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] "총 크기: %u 바이트"
 
-#: ../../src/ui_fsmenu/addons.cc:2104
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:490
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] "%u 회 내려받음"
 
-#: ../../src/ui_fsmenu/addons.cc:2113
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:499
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
 msgstr[0] "댓글 %u 개"
 
-#: ../../src/ui_fsmenu/addons.cc:2115
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:501
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
 msgstr[0] "화면 갈무리 %u 개"
 
-#: ../../src/ui_fsmenu/addons_packager.cc:49
-msgid "Add-Ons Packager"
-msgstr "추가 기능 꾸러미 연장"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:76
-msgid "New add-on"
-msgstr "새로운 추가 기능"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:84
-#: ../../src/ui_fsmenu/addons_packager_box.cc:74
-msgid "–"
-msgstr "–"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:85
-msgid "Delete this add-on"
-msgstr "이 추가 기능을 삭제"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:93
-msgid "Discard changes"
-msgstr "변경 사항을 취소"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:101
-msgid "Save changes"
-msgstr "번역확인->변경 사항을 저장or 저장 변경 사항"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:112
-msgid "Writing Add-Ons…"
-msgstr "추가 기능을 쓰고 있음…"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:114
-msgid "Please be patient while your changes are written."
-msgstr "변경 사항이 기록되는 동안 잠시 기다리십시오."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:133
-msgid "Name:"
-msgstr "이름:"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:138
-msgid "Author:"
-msgstr "작성자:"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:143
-msgid "Version:"
-msgstr "버전:"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:312
-msgid "New Add-On"
-msgstr "새로운 추가 기능"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:313
-msgid "Enter the name for the new add-on."
-msgstr "새로운 추가 기능의 이름을 입력하십시오."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:315
-msgid "Category"
-msgstr "범주"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:335
-#: ../../src/ui_fsmenu/addons_packager.cc:350
-#: ../../src/ui_fsmenu/addons_packager.cc:355
-#: ../../src/ui_fsmenu/addons_packager_box.cc:251
-#: ../../src/ui_fsmenu/addons_packager_box.cc:257
-msgid "Invalid Name"
-msgstr "잘못된 이름"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:335
-#: ../../src/ui_fsmenu/addons_packager_box.cc:251
-msgid "This name is invalid. Please choose a different name."
-msgstr "이 이름이 올바르지 않습니다. 다른 이름을 선택하십시오."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:350
-msgid "An add-on with this internal name already exists."
-msgstr "이 내부 이름을 가진 추가 기능이 이미 있습니다."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:355
-msgid ""
-"An add-on with this internal name was deleted recently. Please commit your "
-"changes before using this name again."
-msgstr "이 내부 이름을 가진 추가 기능이 최근에 삭제되었습니다. 이 이름을 다시 사용하기 전에 변경 사항을 커밋하십시오."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:381
-msgid "Delete Add-on"
-msgstr "추가 기능을 삭제"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:383
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:45
 #, c-format
-msgid "Do you really want to delete the add-on ‘%s’?"
-msgstr "추가 기능 ‘%s’ 를 정말 삭제 하겠습니까?"
+msgid "Upload Screenshot for ‘%s’"
+msgstr "‘%s’ 의 화면 갈무리를 올려주기"
 
-#: ../../src/ui_fsmenu/addons_packager.cc:384
+#. * TRANSLATORS: Header for campaign description
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:98
+#: ../../src/ui_fsmenu/campaigndetails.cc:71
+#: ../../src/ui_fsmenu/scenariodetails.cc:67 ../../src/wui/mapdetails.cc:197
+#: ../../src/wui/savegametable.cc:132 ../../src/wui/savegametable.cc:184
+#: ../../src/wui/savegametable.cc:244
+msgid "Description"
+msgstr "설명"
+
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:111
+msgid "Uploading…"
+msgstr "올려주고 있음…"
+
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:128
 #, c-format
 msgid ""
-"Do you really want to delete the local add-on ‘%s’?\n"
+"The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the server.\n"
 "\n"
-"Note that this add-on can not be downloaded again from the server."
-msgstr "지역 추가 기능 ‘%s’을 삭제하시겠습니까?\n\n이 추가 기능은 서버에서 다시 내려받기할 수 없습니다."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:405
-#, c-format
-msgid ""
-"If you quit the packager now, all changes to the following %u add-on will be"
-" discarded."
-msgid_plural ""
-"If you quit the packager now, all changes to the following %u add-ons will "
-"be discarded."
-msgstr[0] "지금 꾸러미 연장을 끝내면 다음 %u개의 추가 기능에 대한 모든 변경 내용이 삭제됩니다."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:415
-#: ../../src/ui_fsmenu/addons_packager.cc:444
-#: ../../src/ui_fsmenu/addons_packager.cc:472
-#, c-format
-msgid ""
-"%1$s\n"
-"· %2$s"
-msgstr "%1$s\n· %2$s"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:418
-msgid "Quit Packager"
-msgstr "꾸러미 연장을 끝내기"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:433
-#, c-format
-msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr "추가 기능 ‘%s’ 에 대한 모든 변경 사항을 정말로 취소하겠습니까?"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:438
-#, c-format
-msgid "Do you really want to discard all changes to the following %u add-on?"
-msgid_plural ""
-"Do you really want to discard all changes to the following %u add-ons?"
-msgstr[0] "다음 %u 개의 추가 기능에 대한 모든 변경 사항을 정말로 취소하겠습니까?"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:448
-msgid "Discard Changes"
-msgstr "변경 사항을 취소"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:461
-#, c-format
-msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr "추가 기능  ‘%s’ 에 대한 모든 변경 사항을 디스크에 적용(커밋) 하겠습니까?"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:466
-#, c-format
-msgid ""
-"Do you really want to commit all changes to the following %u add-on to disk?"
-msgid_plural ""
-"Do you really want to commit all changes to the following %u add-ons to "
-"disk?"
-msgstr[0] "번역확인-> 다음 %u 개의 추가 기능에 대한 모든 변경 사항을 디스크에 적용(커밋) 하겠습니까?"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:476
-msgid ""
-"Warning: If you manually edited any files in this add-on, your changes may "
-"be overwritten!"
-msgstr "경고: 이 추가 기능에서 파일을 수동으로 편집한 경우 변경 사항을 덮어쓸 수 있습니다!"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:479
-msgid "Confirm Saving"
-msgstr "저장 확인"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:533
-msgid "Invalid Version"
-msgstr "잘못된 버전"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:535
-#, c-format
-msgid ""
-"‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
-msgstr "‘%1$s’ 은(는) 올바른 버전 문자열이 아닙니다. 추가 기능 ‘%2$s’ 은(는) 저장되지 않습니다."
-
-#: ../../src/ui_fsmenu/addons_packager.cc:545
-msgid "Error Writing Addon"
-msgstr "추가 기능 쓰기 오류"
-
-#: ../../src/ui_fsmenu/addons_packager.cc:546
-#, c-format
-msgid ""
-"The add-on ‘%1$s’ can not be saved to disk:\n"
-"%2$s"
-msgstr "추가 기능 ‘%1$s’을 (를) 디스크에 저장할 수 없습니다:\n%2$s"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:57
-msgid "Add selected map"
-msgstr "선택한 지도를 추가"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:65
-msgid "*"
-msgstr "*"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:66
-msgid "Create subdirectory"
-msgstr "하위 디렉토리를 만들기"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:75
-msgid "Remove selected map or directory"
-msgstr "선택한 지도 또는 디렉토리를 삭제"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:87
-msgid "Directory Tree"
-msgstr "디렉토리 트리"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:138
-#: ../../src/ui_fsmenu/main.cc:422
-#, c-format
-msgid "Name: %s"
-msgstr "이름: %s"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:142
-#: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:104
-#, c-format
-msgid "Size: %s"
-msgstr "크기: %s"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:145
-#: ../../src/ui_fsmenu/main.cc:428 ../../src/ui_fsmenu/mapdetailsbox.cc:107
-#, c-format
-msgid "%1$u×%2$u"
-msgstr "%1$u×%2$u"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:147
-#: ../../src/ui_fsmenu/main.cc:364 ../../src/ui_fsmenu/main.cc:432
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:110
-#, c-format
-msgid "Players: %s"
-msgstr "선수들: %s"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:175
-msgid "Top-level directory"
-msgstr "최상위 디렉토리"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:237
-msgid "New Directory"
-msgstr "새로운 디렉토리"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:238
-msgid "Enter the name for the new directory."
-msgstr "새로운 디렉토리의 이름을 입력하십시오."
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:257
-msgid "A directory with this name already exists."
-msgstr "이 이름을 가진 디렉토리가 이미 있습니다."
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:274
-#, c-format
-msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
-msgstr "디렉토리 ‘%s’ 과(와) 디렉토리의 모든 내용을 삭제하겠습니까?"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:277
-#, c-format
-msgid "Do you really want to delete the map ‘%s’?"
-msgstr "지도 ‘%s’ 를 정말 삭제 하겠습니까?"
-
-#. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons_packager_box.cc:325
-#: ../../src/ui_fsmenu/campaign_select.cc:48
-#: ../../src/ui_fsmenu/campaigndetails.cc:63
-#: ../../src/ui_fsmenu/scenario_select.cc:68
-msgid "Difficulty"
-msgstr "난이도"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:334
-msgid "Difficulty:"
-msgstr "난이도:"
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:359
-msgid "The campaigns difficulty. One word."
-msgstr "번역확인-> 캠페인 난이도입니다. 한 낱말로."
-
-#: ../../src/ui_fsmenu/addons_packager_box.cc:360
-msgid "Short description, which will be appended to the difficulty."
-msgstr "난이도에 추가될 간단한 설명입니다."
+"Error Message:\n"
+"%3$s"
+msgstr "추가 기능 ‘%1$s’ 에 대한 화면 갈무리 ‘%2$s’ 을 서버에 올려주기 수 없습니다.\n\n오류 메시지:\n%3$s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:34
 msgid "Choose Campaign"
@@ -4070,21 +4501,13 @@ msgstr "부족 이름"
 msgid "Campaign Name"
 msgstr "캠페인 이름"
 
-#. * TRANSLATORS: Header for campaign description
-#: ../../src/ui_fsmenu/campaigndetails.cc:71
-#: ../../src/ui_fsmenu/scenariodetails.cc:67 ../../src/wui/mapdetails.cc:197
-#: ../../src/wui/savegametable.cc:132 ../../src/wui/savegametable.cc:184
-#: ../../src/wui/savegametable.cc:244
-msgid "Description"
-msgstr "설명"
-
 #: ../../src/ui_fsmenu/helpwindow.cc:47 ../../src/wui/helpwindow.cc:45
 #, c-format
 msgid "Help: %s"
 msgstr "도움말: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:56
-#: ../../src/wlapplication_options.cc:244
+#: ../../src/wlapplication_options.cc:245
 msgid "Metaserver Lobby"
 msgstr "메타서버 앞마당"
 
@@ -4141,7 +4564,7 @@ msgid "Version"
 msgstr "버전"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:186
+#: ../../src/ui_fsmenu/keyboard_options.cc:285
 msgid "Game"
 msgstr "게임"
 
@@ -4175,36 +4598,56 @@ msgstr "네트워크 오류"
 msgid "unnamed %u"
 msgstr "이름 없는 %u"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:42
+#: ../../src/ui_fsmenu/keyboard_options.cc:44
 msgid "Reset to default"
 msgstr "기본값으로 다시 설정"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:55
+#: ../../src/ui_fsmenu/keyboard_options.cc:62
 msgid "Press the new shortcut or close this window to cancel."
 msgstr "취소하려면 새로운 바로가기를 누르거나 이 창을 닫으십시오."
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:114
+#: ../../src/ui_fsmenu/keyboard_options.cc:90
+#: ../../src/ui_fsmenu/keyboard_options.cc:211
+msgid "(unused)"
+msgstr ""
+
+#. * TRANSLATORS: [Tribe Name] Building Name
+#: ../../src/ui_fsmenu/keyboard_options.cc:107
+#, c-format
+msgid "[%1$s] %2$s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/keyboard_options.cc:175
 msgid "Edit Keyboard Shortcuts"
 msgstr "키보드 바로가기 키를 편집"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:124
+#: ../../src/ui_fsmenu/keyboard_options.cc:185
 msgid "Reset all"
 msgstr "모두 다시 설정"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:125
+#: ../../src/ui_fsmenu/keyboard_options.cc:186
 msgid "Reset all to defaults"
 msgstr "모두 기본값으로 다시 설정"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:137
+#. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
+#. "Action: Key"
+#: ../../src/ui_fsmenu/keyboard_options.cc:204
+#: ../../src/ui_fsmenu/keyboard_options.cc:217
 #, c-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:156
+#. * TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut
+#: ../../src/ui_fsmenu/keyboard_options.cc:222
+#, c-format
+msgid "[%1$s] %2$s: %3$s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/keyboard_options.cc:251
 msgid "Keyboard Shortcut Conflict"
 msgstr "키보드 바로가기 키 충돌"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:157
+#: ../../src/ui_fsmenu/keyboard_options.cc:254
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4213,15 +4656,19 @@ msgid ""
 msgstr "선택한 바로 가기 (‘%1$s’) 는 이미 작업 : ‘%2$s’ 에 사용되고 있습니다. 먼저 다른 바로 가기를 선택하거나 충돌하는 바로 가기를 변경하십시오."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:184
+#: ../../src/ui_fsmenu/keyboard_options.cc:282
 #: ../../src/wui/interactive_player.cc:328
 msgid "General"
 msgstr "일반"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:187
-#: ../../src/wlapplication_options.cc:198
+#: ../../src/ui_fsmenu/keyboard_options.cc:284
+#: ../../src/wlapplication_options.cc:199
 msgid "Editor"
 msgstr "편집기"
+
+#: ../../src/ui_fsmenu/keyboard_options.cc:289
+msgid "Fastplace"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -4313,7 +4760,7 @@ msgstr "저장된 게임"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "이 게임은 저장된 게임입니다 - 승리 조건이 이전에 설정되었습니다."
 
-#: ../../src/ui_fsmenu/launch_game.cc:322
+#: ../../src/ui_fsmenu/launch_game.cc:321
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -4417,7 +4864,7 @@ msgid "Online Game Settings"
 msgstr "통신 놀이 설정"
 
 #: ../../src/ui_fsmenu/login_box.cc:45
-#: ../../src/wui/economy_options_window.cc:664
+#: ../../src/wui/economy_options_window.cc:671
 msgid "Save"
 msgstr "저장"
 
@@ -4429,23 +4876,11 @@ msgstr "등록된 계정으로 로그인하십시오."
 msgid "Nickname:"
 msgstr "별명:"
 
-#: ../../src/ui_fsmenu/login_box.cc:53
-msgid "Password:"
-msgstr "암호:"
-
-#: ../../src/ui_fsmenu/login_box.cc:60
-#, c-format
-msgid ""
-"In order to use a registered account, you need an account on the Widelands "
-"website. Please log in at %s and set an online gaming password on your "
-"profile page."
-msgstr "등록 된 계정을 사용하려면 와이드랜드 누리집의 계정이 있어야 합니다. %s 에 로그인하여 프로필 페이지에서 온라인 게임 암호를 설정하십시오."
-
 #. * TRANSLATORS: This string may contain only English letters, numbers, and @
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:623
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:650
 msgid "nobody"
 msgstr "아무도 없음"
 
@@ -4475,12 +4910,12 @@ msgstr "게임 인스턴스를 만들 수 없습니다!\n오류 메시지:\n%s"
 msgid "Begin a new game"
 msgstr "새로운 놀이 시작"
 
-#: ../../src/ui_fsmenu/main.cc:315 ../../src/wlapplication_options.cc:162
+#: ../../src/ui_fsmenu/main.cc:315 ../../src/wlapplication_options.cc:163
 msgid "New Game"
 msgstr "새로운 놀이"
 
 #: ../../src/ui_fsmenu/main.cc:317 ../../src/ui_fsmenu/random_game.cc:30
-#: ../../src/wlapplication_options.cc:176
+#: ../../src/wlapplication_options.cc:177
 msgid "New Random Game"
 msgstr "새로운 아무런 놀이"
 
@@ -4488,7 +4923,7 @@ msgstr "새로운 아무런 놀이"
 msgid "Create a new random match"
 msgstr "새로운 아무 경기를 만듬"
 
-#: ../../src/ui_fsmenu/main.cc:320 ../../src/wlapplication_options.cc:186
+#: ../../src/ui_fsmenu/main.cc:320 ../../src/wlapplication_options.cc:187
 msgid "Campaigns"
 msgstr "캠페인"
 
@@ -4496,7 +4931,7 @@ msgstr "캠페인"
 msgid "Play a campaign"
 msgstr "켐페인을 시작"
 
-#: ../../src/ui_fsmenu/main.cc:322 ../../src/wlapplication_options.cc:181
+#: ../../src/ui_fsmenu/main.cc:322 ../../src/wlapplication_options.cc:182
 msgid "Tutorials"
 msgstr "자습서"
 
@@ -4505,8 +4940,8 @@ msgid "Play one of our beginners’ tutorials"
 msgstr "초보자의 자습서의 하나를 시작"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:325 ../../src/wlapplication_options.cc:166
-#: ../../src/wlapplication_options.cc:522
+#: ../../src/ui_fsmenu/main.cc:325 ../../src/wlapplication_options.cc:167
+#: ../../src/wlapplication_options.cc:523
 #: ../../src/wui/game_main_menu_save_game.cc:54
 #: ../../src/wui/interactive_gamebase.cc:154
 msgid "Load Game"
@@ -4516,7 +4951,7 @@ msgstr "게임 불러오기"
 msgid "Continue a saved game"
 msgstr "저장된 놀이 계속하기"
 
-#: ../../src/ui_fsmenu/main.cc:347 ../../src/wlapplication_options.cc:223
+#: ../../src/ui_fsmenu/main.cc:347 ../../src/wlapplication_options.cc:224
 msgid "Continue Playing"
 msgstr "계속 놀고 있음"
 
@@ -4554,7 +4989,7 @@ msgstr "와이드랜드 앞마당 들어가기"
 msgid "Log in as a registered user"
 msgstr "등록된 사용자로 로그인"
 
-#: ../../src/ui_fsmenu/main.cc:390 ../../src/wlapplication_options.cc:240
+#: ../../src/ui_fsmenu/main.cc:390 ../../src/wlapplication_options.cc:241
 msgid "LAN / Direct IP"
 msgstr "랜 / 다이렉트 IP"
 
@@ -4574,7 +5009,7 @@ msgstr "새로운 아무런 지도를 만듬"
 msgid "Edit an existing map"
 msgstr "있는 지도를 편집"
 
-#: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:219
 msgid "Continue Editing"
 msgstr "계속 편집"
 
@@ -4602,7 +5037,7 @@ msgstr "인터넷을 통해 친구들과 놀기"
 msgid "Launch the map editor"
 msgstr "지도 편집기를 실행"
 
-#: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:171
+#: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:172
 msgid "Watch Replay"
 msgstr "다시보기 감상"
 
@@ -4610,7 +5045,7 @@ msgstr "다시보기 감상"
 msgid "Watch the replay of an old game"
 msgstr "오래된 놀이의 다시놀기를 보기"
 
-#: ../../src/ui_fsmenu/main.cc:463 ../../src/wlapplication_options.cc:236
+#: ../../src/ui_fsmenu/main.cc:463 ../../src/wlapplication_options.cc:237
 msgid "Add-Ons"
 msgstr "추가 기능"
 
@@ -4619,7 +5054,7 @@ msgid "Install and manage add-ons"
 msgstr "추가 기능 설치 및 관리"
 
 #: ../../src/ui_fsmenu/main.cc:467 ../../src/ui_fsmenu/options.cc:89
-#: ../../src/wlapplication_options.cc:253
+#: ../../src/wlapplication_options.cc:254
 msgid "Options"
 msgstr "선택사항"
 
@@ -4631,7 +5066,7 @@ msgstr "기술 및 놀이 관련 설정"
 msgid "Readme, License, and Credits"
 msgstr "읽어보기, 허가서 및 크레딧"
 
-#: ../../src/ui_fsmenu/main.cc:475 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:475 ../../src/wlapplication_options.cc:228
 msgid "Exit Widelands"
 msgstr "와이드랜드 종료"
 
@@ -5174,18 +5609,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "제작자들"
@@ -5218,59 +5653,59 @@ msgid "Unmark All"
 msgstr "모두 자국 표시 해제"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:748 ../../src/wlapplication.cc:754
-#: ../../src/wlapplication.cc:759 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:775 ../../src/wlapplication.cc:781
+#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "오류 메시지:"
 
-#: ../../src/wlapplication.cc:749 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:776 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "게임 데이터 오류"
 
-#: ../../src/wlapplication.cc:752
+#: ../../src/wlapplication.cc:779
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "와이드랜드가 \"%s\" 파일을 찾을 수 없습니다."
 
-#: ../../src/wlapplication.cc:755
+#: ../../src/wlapplication.cc:782
 msgid "File system error"
 msgstr "파일 시스템 오류"
 
-#: ../../src/wlapplication.cc:1249
+#: ../../src/wlapplication.cc:1275
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "명령 줄 매개 변수의 빈 값: %s"
 
-#: ../../src/wlapplication.cc:1255
+#: ../../src/wlapplication.cc:1281
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s 은 다른 작업과 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1405
+#: ../../src/wlapplication.cc:1435
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "알 수 없는 명령 줄 매개 변수: %s\n혹시 '='가 없는 건 아닌가요?"
 
-#: ../../src/wlapplication.cc:1527
+#: ../../src/wlapplication.cc:1557
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized 과 --fullscreen 은 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1545
+#: ../../src/wlapplication.cc:1575
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "알 수 없는 명령 줄 매개 변수: %s"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1624
 msgid "Game ended unexpectedly"
 msgstr "놀이가 예기치 않게 종료되었습니다"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1624
 msgid "Unexpected error during the game"
 msgstr "게임 중 예상치 못한 오류가 발생"
 
-#: ../../src/wlapplication.cc:1597
+#: ../../src/wlapplication.cc:1627
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5284,7 +5719,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "놀이 중에 오류가 발생했습니다. 오류 메시지는 다음과 같습니다:\n\n%1$s\n\n이 문제를 보고하여 와이드랜드 개선에 도움을 주십시오. 표준 출력 (윈도우즈에서는 stdout.txt) 에서 관련 메시지를 찾을 수 있습니다. 빌드 %2$s (%3$s)를 사용 중입니다.\n\n이 정보를 보고서에 추가하십시오.\n\n와이드랜드가 긴급 저장 놀이를 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기와 계속 놀기는 것이 종종 가능합니다."
 
-#: ../../src/wlapplication.cc:1607
+#: ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5294,11 +5729,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "다음과 같은 이유로 게임이 예기치 않게 종료되었습니다:\n\n%s\n\n와이드랜드가 긴급 저장 게임을 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기하고 계속 플레이하는 것이 가능합니다."
 
-#: ../../src/wlapplication.cc:1634
+#: ../../src/wlapplication.cc:1664
 msgid "Emergency save failed"
 msgstr "긴급 저장 실패"
 
-#: ../../src/wlapplication.cc:1635
+#: ../../src/wlapplication.cc:1665
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -5306,516 +5741,521 @@ msgid ""
 "%s"
 msgstr "죄송합니다. 와이드랜드는 다음과 같은 이유로 긴급 저장 게임을 만들 수 없습니다:\n\n%s"
 
-#: ../../src/wlapplication_options.cc:190
+#: ../../src/wlapplication_options.cc:191
 msgid "Singleplayer"
 msgstr "단일 선수"
 
-#: ../../src/wlapplication_options.cc:194
+#: ../../src/wlapplication_options.cc:195
 msgid "Multiplayer"
 msgstr "여러 선수"
 
-#: ../../src/wlapplication_options.cc:203
+#: ../../src/wlapplication_options.cc:204
 msgid "Editor – Load Map"
 msgstr "편집기 – 지도를 불러오기"
 
-#: ../../src/wlapplication_options.cc:208
+#: ../../src/wlapplication_options.cc:209
 msgid "Editor – New Map"
 msgstr "편집기 – 새로운 지도"
 
-#: ../../src/wlapplication_options.cc:213
+#: ../../src/wlapplication_options.cc:214
 msgid "Editor – New Random Map"
 msgstr "편집기 – 아무런 새로운 지도"
 
-#: ../../src/wlapplication_options.cc:231
+#: ../../src/wlapplication_options.cc:232
 msgid "About"
 msgstr "프로그램 정보"
 
-#: ../../src/wlapplication_options.cc:248
+#: ../../src/wlapplication_options.cc:249
 msgid "Internet Login"
 msgstr "인터넷 로그인"
 
-#: ../../src/wlapplication_options.cc:259
+#: ../../src/wlapplication_options.cc:260
 msgid "Toggle Building Spaces"
 msgstr "건물 공간 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:264
+#: ../../src/wlapplication_options.cc:265
 msgid "Toggle Minimap"
 msgstr "작은 지도 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:269
+#: ../../src/wlapplication_options.cc:270
 msgid "Encyclopedia"
 msgstr "백과사전"
 
-#: ../../src/wlapplication_options.cc:273
+#: ../../src/wlapplication_options.cc:274
 msgid "Cut Text"
 msgstr "글자를 잘라내기"
 
-#: ../../src/wlapplication_options.cc:277
+#: ../../src/wlapplication_options.cc:278
 msgid "Copy Text"
 msgstr "글자를 복사"
 
-#: ../../src/wlapplication_options.cc:281
+#: ../../src/wlapplication_options.cc:282
 msgid "Paste Text"
 msgstr "글자를 붙여넣기"
 
-#: ../../src/wlapplication_options.cc:285
+#: ../../src/wlapplication_options.cc:286
 msgid "Select All"
 msgstr "모두 선택"
 
-#: ../../src/wlapplication_options.cc:290
+#: ../../src/wlapplication_options.cc:291
 msgid "Delete Item"
 msgstr "항목을 삭제"
 
-#: ../../src/wlapplication_options.cc:295
+#: ../../src/wlapplication_options.cc:296
 msgid "Tooltip Accessibility Mode Key"
 msgstr "연장 설명 접근성 모드 키"
 
-#: ../../src/wlapplication_options.cc:300
+#: ../../src/wlapplication_options.cc:301
 msgid "Toggle Fullscreen"
 msgstr "전체 화면을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:305
+#: ../../src/wlapplication_options.cc:306
 msgid "Take Screenshot"
 msgstr "화면을 갈무리"
 
-#: ../../src/wlapplication_options.cc:310
+#: ../../src/wlapplication_options.cc:311
 msgid "Zoom In"
 msgstr "확대"
 
-#: ../../src/wlapplication_options.cc:315
+#: ../../src/wlapplication_options.cc:316
 msgid "Zoom Out"
 msgstr "축소"
 
-#: ../../src/wlapplication_options.cc:320
+#: ../../src/wlapplication_options.cc:321
 msgid "Reset Zoom"
 msgstr "확대/축소 다시 설정"
 
-#: ../../src/wlapplication_options.cc:325
+#: ../../src/wlapplication_options.cc:326
 msgid "Jump to Next Location"
 msgstr "다음 위치로 뛰기"
 
-#: ../../src/wlapplication_options.cc:330
+#: ../../src/wlapplication_options.cc:331
 msgid "Jump to Previous Location"
 msgstr "지난 위치로 뛰기"
 
-#: ../../src/wlapplication_options.cc:335
+#: ../../src/wlapplication_options.cc:336
 msgid "Menu"
 msgstr "차림표"
 
-#: ../../src/wlapplication_options.cc:359
+#: ../../src/wlapplication_options.cc:360
 msgid "Info Tool"
 msgstr "정보 연장"
 
-#: ../../src/wlapplication_options.cc:363
+#: ../../src/wlapplication_options.cc:364
 msgid "Players Menu"
 msgstr "선수들 차림표"
 
-#: ../../src/wlapplication_options.cc:368
+#: ../../src/wlapplication_options.cc:369
 msgid "Toggle Grid"
 msgstr "격자 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:373
+#: ../../src/wlapplication_options.cc:374
 msgid "Toggle Immovables"
 msgstr "부동산 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:378
+#: ../../src/wlapplication_options.cc:379
 msgid "Toggle Animals"
 msgstr "동물들 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:383
+#: ../../src/wlapplication_options.cc:384
 msgid "Toggle Resources"
 msgstr "자원들을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:390
+#: ../../src/wlapplication_options.cc:391
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr "연장 크기를 %d 로 설정"
 
-#: ../../src/wlapplication_options.cc:408
+#: ../../src/wlapplication_options.cc:409
 msgid "Toggle Census"
 msgstr "인구 조사를 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:413
+#: ../../src/wlapplication_options.cc:414
 msgid "Toggle Status Labels"
 msgstr "상태 딱지를 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:418
+#: ../../src/wlapplication_options.cc:419
 msgid "Toggle Soldier Levels"
 msgstr "군인 수준을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:423
+#: ../../src/wlapplication_options.cc:424
 msgid "Toggle Buildings Visibility"
 msgstr "건물 가시성을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:428
+#: ../../src/wlapplication_options.cc:429
 msgid "Toggle Overlapping Workareas"
 msgstr "겹치는 작업 영역을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:433
-#: ../../src/wui/general_statistics_menu.cc:47
+#: ../../src/wlapplication_options.cc:434
+#: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
 msgstr "일반 통계"
 
-#: ../../src/wlapplication_options.cc:438
-#: ../../src/wui/ware_statistics_menu.cc:104
+#: ../../src/wlapplication_options.cc:439
+#: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "물품 통계"
 
-#: ../../src/wlapplication_options.cc:443
-#: ../../src/wui/building_statistics_menu.cc:54
+#: ../../src/wlapplication_options.cc:444
+#: ../../src/wui/building_statistics_menu.cc:55
 msgid "Building Statistics"
 msgstr "건물 통계"
 
-#: ../../src/wlapplication_options.cc:448
+#: ../../src/wlapplication_options.cc:449
 msgid "Stock Inventory"
 msgstr "재고품 목록"
 
-#: ../../src/wlapplication_options.cc:453
+#: ../../src/wlapplication_options.cc:454
 #: ../../src/wui/soldier_statistics_menu.cc:133
 msgid "Soldier Statistics"
 msgstr "군인 통계"
 
-#: ../../src/wlapplication_options.cc:458
-#: ../../src/wui/seafaring_statistics_menu.cc:49
+#: ../../src/wlapplication_options.cc:459
+#: ../../src/wui/seafaring_statistics_menu.cc:50
 msgid "Seafaring Statistics"
 msgstr "항해 통계"
 
-#: ../../src/wlapplication_options.cc:471
+#: ../../src/wlapplication_options.cc:472
 msgid "Decrease Game Speed by 1×"
 msgstr "놀이 속도를 1배 낮춤"
 
-#: ../../src/wlapplication_options.cc:476
+#: ../../src/wlapplication_options.cc:477
 msgid "Decrease Game Speed by 0.25×"
 msgstr "놀이 속도를 0.25배 낮춤"
 
-#: ../../src/wlapplication_options.cc:481
+#: ../../src/wlapplication_options.cc:482
 msgid "Decrease Game Speed by 10×"
 msgstr "놀이 속도를 10배 낮춤"
 
-#: ../../src/wlapplication_options.cc:486
+#: ../../src/wlapplication_options.cc:487
 msgid "Increase Game Speed by 1×"
 msgstr "놀이 속도를 1배 높임"
 
-#: ../../src/wlapplication_options.cc:491
+#: ../../src/wlapplication_options.cc:492
 msgid "Increase Game Speed by 0.25×"
 msgstr "놀이 속도를 0.25배 높임"
 
-#: ../../src/wlapplication_options.cc:496
+#: ../../src/wlapplication_options.cc:497
 msgid "Increase Game Speed by 10×"
 msgstr "놀이 속도를 10배 높임"
 
-#: ../../src/wlapplication_options.cc:501
+#: ../../src/wlapplication_options.cc:502
 msgid "Reset Game Speed"
 msgstr "놀이 속도를 다시 설정"
 
-#: ../../src/wlapplication_options.cc:505
+#: ../../src/wlapplication_options.cc:506
 #: ../../src/wui/interactive_gamebase.cc:325
 msgid "Pause"
 msgstr "일시정지"
 
-#: ../../src/wlapplication_options.cc:510
+#: ../../src/wlapplication_options.cc:511
 msgid "Scroll to Starting Field"
 msgstr "번역확인 -> 시작 입력란으로 스크롤"
 
-#: ../../src/wlapplication_options.cc:514 ../../src/wui/game_chat_menu.cc:55
+#: ../../src/wlapplication_options.cc:515 ../../src/wui/game_chat_menu.cc:55
 #: ../../src/wui/interactive_gamebase.cc:365
 msgid "Chat"
 msgstr "채팅"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:518
+#: ../../src/wlapplication_options.cc:519
 #: ../../src/wui/game_main_menu_save_game.cc:54
 #: ../../src/wui/interactive_gamebase.cc:145
 msgid "Save Game"
 msgstr "게임 저장"
 
-#: ../../src/wlapplication_options.cc:527
+#: ../../src/wlapplication_options.cc:528
 msgid "Messages: Go to Location"
 msgstr "알릴말: 위치로 이동"
 
-#: ../../src/wlapplication_options.cc:532
+#: ../../src/wlapplication_options.cc:533
 msgid "Messages: Show "
-msgstr "알릴말: 표시"
+msgstr "알릴말: 표시 "
 
-#: ../../src/wlapplication_options.cc:537
+#: ../../src/wlapplication_options.cc:538
 msgid "Messages: Show Geologists’ Messages"
 msgstr "알릴말: 지질학자의 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:542
+#: ../../src/wlapplication_options.cc:543
 msgid "Messages: Show Economy Messages"
 msgstr "알릴말: 경제 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:547
+#: ../../src/wlapplication_options.cc:548
 msgid "Messages: Show Seafaring Messages"
 msgstr "알릴말: 항해 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:552
+#: ../../src/wlapplication_options.cc:553
 msgid "Messages: Show Military Messages"
 msgstr "알릴말: 군사 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:557
+#: ../../src/wlapplication_options.cc:558
 msgid "Messages: Show Scenario Messages"
 msgstr "알릴말: 시나리오 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:562
+#: ../../src/wlapplication_options.cc:563
 msgid "Seafaring: Go to Ship"
 msgstr "항해: 배로 이동"
 
-#: ../../src/wlapplication_options.cc:567
+#: ../../src/wlapplication_options.cc:568
 msgid "Seafaring: Watch Ship"
 msgstr "항해: 배를 감시"
 
-#: ../../src/wlapplication_options.cc:572
+#: ../../src/wlapplication_options.cc:573
 msgid "Seafaring: Open Ship Window"
 msgstr "항해: 배 창을 열기"
 
-#: ../../src/wlapplication_options.cc:577
+#: ../../src/wlapplication_options.cc:578
 msgid "Seafaring: Open Ship Window And Go to Ship"
 msgstr "항해: 배 창을 열고 배로 이동"
 
-#: ../../src/wlapplication_options.cc:582
+#: ../../src/wlapplication_options.cc:583
 msgid "Seafaring: Show All Ships"
 msgstr "항해: 모든 배를 표시"
 
-#: ../../src/wlapplication_options.cc:587
+#: ../../src/wlapplication_options.cc:588
 msgid "Seafaring: Show Idle Ships"
 msgstr "항해: 놀고있는 배를 표시"
 
-#: ../../src/wlapplication_options.cc:592
+#: ../../src/wlapplication_options.cc:593
 msgid "Seafaring: Show Transport Ships"
-msgstr "항해: 수송선을 표시 "
+msgstr "항해: 수송선을 표시"
 
-#: ../../src/wlapplication_options.cc:597
+#: ../../src/wlapplication_options.cc:598
 msgid "Seafaring: Show Waiting Expeditions"
 msgstr "항해: 기다리고 있는 탐험대를 표시"
 
-#: ../../src/wlapplication_options.cc:602
+#: ../../src/wlapplication_options.cc:603
 msgid "Seafaring: Show Scouting Expeditions"
 msgstr "항해: 정찰하고 있는 탐험대 표시"
 
-#: ../../src/wlapplication_options.cc:607
+#: ../../src/wlapplication_options.cc:608
 msgid "Seafaring: Show Expeditions with Port Spaces"
 msgstr "항해: 항구공간과 탐험대를 표시"
 
-#: ../../src/wlapplication_options.cc:612
+#: ../../src/wlapplication_options.cc:613
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "주요 지형물 #%d를 설정"
 
-#: ../../src/wlapplication_options.cc:617
+#: ../../src/wlapplication_options.cc:618
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "주요 지형물 #%d로 이동"
 
-#: ../../src/wlapplication_options.cc:757
+#: ../../src/wlapplication_options.cc:789
 msgctxt "hotkey"
 msgid "Space"
 msgstr "공백"
 
-#: ../../src/wlapplication_options.cc:759
+#: ../../src/wlapplication_options.cc:791
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "엔터"
 
-#: ../../src/wlapplication_options.cc:761
+#: ../../src/wlapplication_options.cc:793
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "탈출"
 
-#: ../../src/wlapplication_options.cc:763
+#: ../../src/wlapplication_options.cc:795
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "탭"
 
-#: ../../src/wlapplication_options.cc:765
+#: ../../src/wlapplication_options.cc:797
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "차림표"
 
-#: ../../src/wlapplication_options.cc:767
+#: ../../src/wlapplication_options.cc:799
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "일시 중지"
 
-#: ../../src/wlapplication_options.cc:769
+#: ../../src/wlapplication_options.cc:801
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "페이지 업"
 
-#: ../../src/wlapplication_options.cc:771
+#: ../../src/wlapplication_options.cc:803
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "페이지 다운"
 
-#: ../../src/wlapplication_options.cc:773
+#: ../../src/wlapplication_options.cc:805
 msgctxt "hotkey"
 msgid "Home"
 msgstr "홈"
 
-#: ../../src/wlapplication_options.cc:775
+#: ../../src/wlapplication_options.cc:807
 msgctxt "hotkey"
 msgid "End"
 msgstr "엔드"
 
-#: ../../src/wlapplication_options.cc:777
+#: ../../src/wlapplication_options.cc:809
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "왼쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:779
+#: ../../src/wlapplication_options.cc:811
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "오른쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:781
+#: ../../src/wlapplication_options.cc:813
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "위쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:783
+#: ../../src/wlapplication_options.cc:815
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "아래쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:785
+#: ../../src/wlapplication_options.cc:817
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "인서트"
 
-#: ../../src/wlapplication_options.cc:787
+#: ../../src/wlapplication_options.cc:819
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "딜리트"
 
-#: ../../src/wlapplication_options.cc:789
+#: ../../src/wlapplication_options.cc:821
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "백스페이스"
 
-#: ../../src/wlapplication_options.cc:791
+#: ../../src/wlapplication_options.cc:823
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "캡스 록"
 
-#: ../../src/wlapplication_options.cc:793
+#: ../../src/wlapplication_options.cc:825
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "넘 록"
 
-#: ../../src/wlapplication_options.cc:795
+#: ../../src/wlapplication_options.cc:827
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "스크롤 록"
 
-#: ../../src/wlapplication_options.cc:797
+#: ../../src/wlapplication_options.cc:829
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "키패드 1"
 
-#: ../../src/wlapplication_options.cc:799
+#: ../../src/wlapplication_options.cc:831
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "키패드 2"
 
-#: ../../src/wlapplication_options.cc:801
+#: ../../src/wlapplication_options.cc:833
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "키패드 3"
 
-#: ../../src/wlapplication_options.cc:803
+#: ../../src/wlapplication_options.cc:835
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "키패드 4"
 
-#: ../../src/wlapplication_options.cc:805
+#: ../../src/wlapplication_options.cc:837
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "키패드 5"
 
-#: ../../src/wlapplication_options.cc:807
+#: ../../src/wlapplication_options.cc:839
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "키패드 6"
 
-#: ../../src/wlapplication_options.cc:809
+#: ../../src/wlapplication_options.cc:841
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "키패드 7"
 
-#: ../../src/wlapplication_options.cc:811
+#: ../../src/wlapplication_options.cc:843
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "키패드 8"
 
-#: ../../src/wlapplication_options.cc:813
+#: ../../src/wlapplication_options.cc:845
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "키패드 9"
 
-#: ../../src/wlapplication_options.cc:815
+#: ../../src/wlapplication_options.cc:847
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "키패드 0"
 
-#: ../../src/wlapplication_options.cc:817
+#: ../../src/wlapplication_options.cc:849
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "키패드 ."
 
-#: ../../src/wlapplication_options.cc:819
+#: ../../src/wlapplication_options.cc:851
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "키패드 +"
 
-#: ../../src/wlapplication_options.cc:821
+#: ../../src/wlapplication_options.cc:853
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "키패드 -"
 
-#: ../../src/wlapplication_options.cc:823
+#: ../../src/wlapplication_options.cc:855
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "키패드 *"
 
-#: ../../src/wlapplication_options.cc:825
+#: ../../src/wlapplication_options.cc:857
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "키패드 /"
 
-#: ../../src/wlapplication_options.cc:827
+#: ../../src/wlapplication_options.cc:859
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "키패드 엔터"
 
-#: ../../src/wlapplication_options.cc:837
+#: ../../src/wlapplication_options.cc:872
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "쉬프트"
 
-#: ../../src/wlapplication_options.cc:840
+#: ../../src/wlapplication_options.cc:875
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "알트"
 
-#: ../../src/wlapplication_options.cc:844
+#: ../../src/wlapplication_options.cc:879
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "CMD"
 
-#: ../../src/wlapplication_options.cc:846
+#: ../../src/wlapplication_options.cc:881
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:850
+#: ../../src/wlapplication_options.cc:885
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:855
+#: ../../src/wlapplication_options.cc:890
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
+
+#: ../../src/wlapplication_options.cc:909
+#, c-format
+msgid "Fastplace #%i"
+msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:187
 msgid "Destroy building?"
@@ -5887,7 +6327,7 @@ msgstr "정말 활성화된 탐험을 취소합니까?"
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] "%u 군인들"
+msgstr[0] "%u 명 군인"
 
 #: ../../src/wui/attack_box.cc:201
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -5954,153 +6394,153 @@ msgstr "목표 건물을 정복하는 대신 파괴"
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "체력: %1$u/%2$u 공격: %3$u/%4$u 방어: %5$u/%6$u 회피: %7$u/%8$u"
 
-#: ../../src/wui/building_statistics_menu.cc:67
+#: ../../src/wui/building_statistics_menu.cc:68
 msgid "(no building selected)"
 msgstr "(선택된 건물이 없습니다)"
 
-#: ../../src/wui/building_statistics_menu.cc:72
+#: ../../src/wui/building_statistics_menu.cc:73
 msgid "Owned:"
 msgstr "소유:"
 
-#: ../../src/wui/building_statistics_menu.cc:77
+#: ../../src/wui/building_statistics_menu.cc:78
 msgid "Under construction:"
 msgstr "공사를 하고 있음:"
 
-#: ../../src/wui/building_statistics_menu.cc:93
+#: ../../src/wui/building_statistics_menu.cc:94
 msgid "Low productivity threshold:"
 msgstr "낮은 생산성 임계값:"
 
-#: ../../src/wui/building_statistics_menu.cc:104
-#: ../../src/wui/building_statistics_menu.cc:123
-#: ../../src/wui/building_statistics_menu.cc:142
+#: ../../src/wui/building_statistics_menu.cc:105
+#: ../../src/wui/building_statistics_menu.cc:124
+#: ../../src/wui/building_statistics_menu.cc:143
 msgid "Show previous building"
 msgstr "이전 건물 표시"
 
-#: ../../src/wui/building_statistics_menu.cc:113
-#: ../../src/wui/building_statistics_menu.cc:132
-#: ../../src/wui/building_statistics_menu.cc:151
+#: ../../src/wui/building_statistics_menu.cc:114
+#: ../../src/wui/building_statistics_menu.cc:133
+#: ../../src/wui/building_statistics_menu.cc:152
 msgid "Show next building"
 msgstr "다음 건물 표시"
 
-#: ../../src/wui/building_statistics_menu.cc:207
+#: ../../src/wui/building_statistics_menu.cc:208
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
 msgstr "건물 생산성이 이 백분율 아래로 떨어지면 건물은 비생산적인 것으로 간주됩니다"
 
-#: ../../src/wui/building_statistics_menu.cc:338
+#: ../../src/wui/building_statistics_menu.cc:339
 msgid "Small buildings"
 msgstr "작은 건물"
 
-#: ../../src/wui/building_statistics_menu.cc:340
+#: ../../src/wui/building_statistics_menu.cc:341
 msgid "Medium buildings"
 msgstr "중간 건물"
 
-#: ../../src/wui/building_statistics_menu.cc:342
+#: ../../src/wui/building_statistics_menu.cc:343
 msgid "Big buildings"
 msgstr "큰 건물"
 
-#: ../../src/wui/building_statistics_menu.cc:344
+#: ../../src/wui/building_statistics_menu.cc:345
 msgid "Mines"
 msgstr "광산"
 
-#: ../../src/wui/building_statistics_menu.cc:346
+#: ../../src/wui/building_statistics_menu.cc:347
 msgid "Ports"
 msgstr "항구"
 
-#: ../../src/wui/building_statistics_menu.cc:702
+#: ../../src/wui/building_statistics_menu.cc:703
 msgid "Low productivity:"
 msgstr "낮은 생산성:"
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS: Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:711
-#: ../../src/wui/building_statistics_menu.cc:731
-#: ../../src/wui/building_statistics_menu.cc:733
+#: ../../src/wui/building_statistics_menu.cc:712
+#: ../../src/wui/building_statistics_menu.cc:732
+#: ../../src/wui/building_statistics_menu.cc:734
 #: ../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:722
+#: ../../src/wui/building_statistics_menu.cc:723
 msgid "Lacking soldiers:"
 msgstr "부족한 군인 수:"
 
-#: ../../src/wui/buildingwindow.cc:200
+#: ../../src/wui/buildingwindow.cc:201
 msgid "Muted – click to unmute"
 msgstr "음소거됨 - 음소거를 해제하려면 클릭하십시오"
 
-#: ../../src/wui/buildingwindow.cc:201
+#: ../../src/wui/buildingwindow.cc:202
 msgid "Mute this building’s messages"
 msgstr "이 건물의 메시지를 음소거"
 
-#: ../../src/wui/buildingwindow.cc:206
+#: ../../src/wui/buildingwindow.cc:207
 msgid "All buildings of this type are muted – click to unmute"
 msgstr "이 유형의 모든 건물이 음소거됩니다 – 음소거를 해제하려면 클릭하십시오"
 
-#: ../../src/wui/buildingwindow.cc:210
+#: ../../src/wui/buildingwindow.cc:211
 msgid "Mute all buildings of this type"
 msgstr "이 유형의 모든 건물을 음소거"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:274
+#: ../../src/wui/buildingwindow.cc:275
 msgid "Continue"
 msgstr "계속하기"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:276
+#: ../../src/wui/buildingwindow.cc:277
 msgid "Stop"
 msgstr "중지"
 
-#: ../../src/wui/buildingwindow.cc:298
+#: ../../src/wui/buildingwindow.cc:299
 #, c-format
 msgid "Enhance to %s"
 msgstr "%s 로 향상"
 
-#: ../../src/wui/buildingwindow.cc:302 ../../src/wui/fieldaction.cc:101
+#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/fieldaction.cc:101
 msgid "Construction costs:"
 msgstr "건설 비용:"
 
-#: ../../src/wui/buildingwindow.cc:320
+#: ../../src/wui/buildingwindow.cc:321
 msgid "Destroy"
 msgstr "파괴"
 
-#: ../../src/wui/buildingwindow.cc:335
+#: ../../src/wui/buildingwindow.cc:336
 msgid "Dismantle"
 msgstr "해체"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:339
 msgid "Returns:"
 msgstr "반납:"
 
-#: ../../src/wui/buildingwindow.cc:390 ../../src/wui/fieldaction.cc:524
-#: ../../src/wui/shipwindow.cc:141
+#: ../../src/wui/buildingwindow.cc:391 ../../src/wui/fieldaction.cc:524
+#: ../../src/wui/shipwindow.cc:144
 msgid "Show Debug Window"
 msgstr "디버그 창 확인"
 
-#: ../../src/wui/buildingwindow.cc:399
+#: ../../src/wui/buildingwindow.cc:400
 msgid "Watch the scout"
 msgstr "정찰을 감시"
 
-#: ../../src/wui/buildingwindow.cc:406
+#: ../../src/wui/buildingwindow.cc:407
 msgid "Center view on this"
 msgstr "중앙 시야로 이동"
 
-#: ../../src/wui/buildingwindow.cc:637
+#: ../../src/wui/buildingwindow.cc:638
 msgid "Hide work area"
 msgstr "작업 범위 숨김"
 
-#: ../../src/wui/buildingwindow.cc:640
+#: ../../src/wui/buildingwindow.cc:641
 msgid "Show work area"
 msgstr "작업 범위 표시"
 
-#: ../../src/wui/buildingwindow.cc:665
+#: ../../src/wui/buildingwindow.cc:666
 #: ../../src/wui/constructionsitewindow.cc:374
 msgid "Start an expedition"
 msgstr "탐험 시작"
 
-#: ../../src/wui/buildingwindow.cc:669
+#: ../../src/wui/buildingwindow.cc:670
 msgid "Cancel the expedition"
 msgstr "탐험 취소"
 
@@ -6177,76 +6617,76 @@ msgstr "완료 후 이 항구에서 탐험을 시작합니다"
 msgid "Settings to apply after construction"
 msgstr "시공 후 적용할 설정"
 
-#: ../../src/wui/economy_options_window.cc:45
+#: ../../src/wui/economy_options_window.cc:50
 msgid "Economy options"
 msgstr "경제 옵션"
 
-#: ../../src/wui/economy_options_window.cc:78
+#: ../../src/wui/economy_options_window.cc:83
 msgid "Decrease target by 10"
 msgstr "목표를 10으로 줄입니다"
 
-#: ../../src/wui/economy_options_window.cc:86
+#: ../../src/wui/economy_options_window.cc:91
 msgid "Decrease target"
 msgstr "목표 감소"
 
-#: ../../src/wui/economy_options_window.cc:95
+#: ../../src/wui/economy_options_window.cc:100
 msgid "Toggle infinite target"
 msgstr "무한 대상으로 전환합니다"
 
-#: ../../src/wui/economy_options_window.cc:103
+#: ../../src/wui/economy_options_window.cc:108
 msgid "Increase target"
 msgstr "목표 증가"
 
-#: ../../src/wui/economy_options_window.cc:111
+#: ../../src/wui/economy_options_window.cc:116
 msgid "Increase target by 10"
 msgstr "목표를 10으로 늘립니다"
 
-#: ../../src/wui/economy_options_window.cc:117
+#: ../../src/wui/economy_options_window.cc:122
 msgid "Profile to apply to the selected items"
 msgstr "선택한 항목에 적용할 프로파일입니다"
 
-#: ../../src/wui/economy_options_window.cc:128
+#: ../../src/wui/economy_options_window.cc:133
 msgid "Save target settings"
 msgstr "대상 설정을 저장"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../src/wui/economy_options_window.cc:302
+#: ../../src/wui/economy_options_window.cc:309
 msgid "∞"
 msgstr "∞"
 
-#: ../../src/wui/economy_options_window.cc:565
+#: ../../src/wui/economy_options_window.cc:572
 msgid "The profile name cannot be empty"
 msgstr "프로필 이름은 비워 둘 수 없습니다"
 
-#: ../../src/wui/economy_options_window.cc:566
+#: ../../src/wui/economy_options_window.cc:573
 msgid "The default profile cannot be overwritten"
 msgstr "기본 프로필을 덮어 쓸 수 없습니다"
 
-#: ../../src/wui/economy_options_window.cc:569
+#: ../../src/wui/economy_options_window.cc:576
 msgid "Save the profile under this name"
 msgstr "이 이름으로 프로필을 저장하십시오"
 
-#: ../../src/wui/economy_options_window.cc:581
+#: ../../src/wui/economy_options_window.cc:588
 msgid "The predefined profiles cannot be deleted"
 msgstr "미리 정의된 프로파일은 삭제할 수 없습니다"
 
-#: ../../src/wui/economy_options_window.cc:584
+#: ../../src/wui/economy_options_window.cc:591
 msgid "Delete the selected profiles"
 msgstr "선택한 프로파일을 삭제합니다"
 
-#: ../../src/wui/economy_options_window.cc:606
+#: ../../src/wui/economy_options_window.cc:613
 msgid "Overwrite?"
 msgstr "덮어쓰겠습니까?"
 
-#: ../../src/wui/economy_options_window.cc:607
+#: ../../src/wui/economy_options_window.cc:614
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "이 이름을 가진 프로파일이 이미 있습니다. 교체하겠습니까?"
 
-#: ../../src/wui/economy_options_window.cc:657
+#: ../../src/wui/economy_options_window.cc:664
 msgid "Save Profile"
 msgstr "프로필 저장"
 
-#: ../../src/wui/economy_options_window.cc:667
+#: ../../src/wui/economy_options_window.cc:674
 msgid "Existing Profiles"
 msgstr "이미 있는 프로필"
 
@@ -6330,7 +6770,7 @@ msgstr "물길을 파괴"
 msgid "Watch field in a separate window"
 msgstr "분리된 창에 지역 주시하기"
 
-#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:49
+#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:52
 msgid "Watch"
 msgstr "주시하기"
 
@@ -6417,8 +6857,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -6451,16 +6891,16 @@ msgstr "정말 해당 게임을 종료합니까?"
 msgid "Error Saving Game!"
 msgstr "놀이를 저장하다 오류 발생!"
 
-#: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:602
+#: ../../src/wui/game_message_menu.cc:54
+#: ../../src/wui/game_message_menu.cc:603
 msgid "Messages: Inbox"
 msgstr "메시지: 수신함"
 
-#: ../../src/wui/game_message_menu.cc:68
+#: ../../src/wui/game_message_menu.cc:69
 msgid "Title"
 msgstr "제목"
 
-#: ../../src/wui/game_message_menu.cc:69
+#: ../../src/wui/game_message_menu.cc:70
 msgctxt "message"
 msgid "Type"
 msgstr "유형"
@@ -6471,56 +6911,56 @@ msgstr "유형"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
 #. issue if you need more
 #. * space.
-#: ../../src/wui/game_message_menu.cc:75
+#: ../../src/wui/game_message_menu.cc:76
 msgctxt "message"
 msgid "Sent"
 msgstr "시간"
 
-#: ../../src/wui/game_message_menu.cc:114
-#: ../../src/wui/game_message_menu.cc:605
+#: ../../src/wui/game_message_menu.cc:115
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Show Archive"
 msgstr "기록 보기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:122
+#: ../../src/wui/game_message_menu.cc:123
 msgid "Center main mapview on location"
 msgstr "해당 위치의 주 지도시야를 중앙으로"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:529
+#: ../../src/wui/game_message_menu.cc:530
 msgid "Show all messages"
 msgstr "모든 메시지 확인"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:541
 msgid "Show geologists’ messages only"
 msgstr "지질학자의 메시지만 표기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:546
 msgid "Show economy messages only"
 msgstr "경제 메시지만 표시"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:550
 msgid "Show seafaring messages only"
 msgstr "항해 메시지만 표기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:554
 msgid "Show warfare messages only"
 msgstr "전투 메시지만 표기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:557
+#: ../../src/wui/game_message_menu.cc:558
 msgid "Show scenario messages only"
 msgstr "시나리오 메시지만 표기"
 
-#: ../../src/wui/game_message_menu.cc:595
+#: ../../src/wui/game_message_menu.cc:596
 msgid "Messages: Archive"
 msgstr "메시지: 보관함"
 
-#: ../../src/wui/game_message_menu.cc:598
+#: ../../src/wui/game_message_menu.cc:599
 msgid "Show Inbox"
 msgstr "수신함 확인"
 
@@ -6528,14 +6968,14 @@ msgstr "수신함 확인"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:628
+#: ../../src/wui/game_message_menu.cc:629
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "선택된 %d 메시지 회복"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:634
+#: ../../src/wui/game_message_menu.cc:635
 msgid "Restore selected message"
 msgstr "선택된 메시지 회복"
 
@@ -6543,14 +6983,14 @@ msgstr "선택된 메시지 회복"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:645
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "선택된 %d 메시지 보관"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:650
+#: ../../src/wui/game_message_menu.cc:651
 msgid "Archive selected message"
 msgstr "선택된 메시지 보관"
 
@@ -6658,57 +7098,61 @@ msgid "Map Name:"
 msgstr "지도 이름:"
 
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
-#: ../../src/wui/gamedetails.cc:172
+#: ../../src/wui/gamedetails.cc:170
 msgid "Start of Replay:"
 msgstr "다시보기 시작:"
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
-#: ../../src/wui/gamedetails.cc:175
+#: ../../src/wui/gamedetails.cc:173
 msgid "Game Time:"
 msgstr "게임 시간:"
 
-#: ../../src/wui/gamedetails.cc:183
+#: ../../src/wui/gamedetails.cc:181
 msgid "Widelands Version:"
 msgstr "와이드랜드 버전:"
 
-#: ../../src/wui/gamedetails.cc:187
+#: ../../src/wui/gamedetails.cc:185
 msgid "Win Condition:"
 msgstr "승리 조건:"
 
-#: ../../src/wui/gamedetails.cc:194 ../../src/wui/mapdetails.cc:193
+#: ../../src/wui/gamedetails.cc:192 ../../src/wui/mapdetails.cc:193
 msgid "Add-Ons:"
 msgstr "추가 기능:"
 
-#: ../../src/wui/general_statistics_menu.cc:136
+#: ../../src/wui/gamedetails.cc:209
+msgid "Game data error:"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:137
 msgid "Land"
 msgstr "땅"
 
-#: ../../src/wui/general_statistics_menu.cc:157
+#: ../../src/wui/general_statistics_menu.cc:158
 msgid "Productivity"
 msgstr "생산성"
 
-#: ../../src/wui/general_statistics_menu.cc:162
+#: ../../src/wui/general_statistics_menu.cc:163
 msgid "Casualties"
 msgstr "피해"
 
-#: ../../src/wui/general_statistics_menu.cc:166
+#: ../../src/wui/general_statistics_menu.cc:167
 msgid "Kills"
 msgstr "살해"
 
-#: ../../src/wui/general_statistics_menu.cc:172
+#: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings lost"
 msgstr "군사 건물 잃음"
 
-#: ../../src/wui/general_statistics_menu.cc:177
+#: ../../src/wui/general_statistics_menu.cc:178
 msgid "Military buildings defeated"
 msgstr "군사 건물 파괴"
 
-#: ../../src/wui/general_statistics_menu.cc:182
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Civilian buildings lost"
 msgstr "민간 건물 잃음"
 
-#: ../../src/wui/general_statistics_menu.cc:187
+#: ../../src/wui/general_statistics_menu.cc:188
 msgid "Military"
 msgstr "군사"
 
@@ -6820,49 +7264,49 @@ msgid "Show controls"
 msgstr "제어를 표시"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:120
+#: ../../src/wui/interactive_base.cc:131
 msgid "Map View"
 msgstr "지도 보기"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:271
+#: ../../src/wui/interactive_base.cc:282
 msgid "Hide Minimap"
 msgstr "작은 지도 숨김"
 
-#: ../../src/wui/interactive_base.cc:271
+#: ../../src/wui/interactive_base.cc:282
 msgid "Show Minimap"
 msgstr "작은 지도 표시"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:277
+#: ../../src/wui/interactive_base.cc:288
 msgid "Zoom +"
 msgstr "확대"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:293
 msgid "Reset zoom"
 msgstr "기본 배율 전환"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:287
+#: ../../src/wui/interactive_base.cc:298
 msgid "Zoom –"
 msgstr "축소"
 
-#: ../../src/wui/interactive_base.cc:717
+#: ../../src/wui/interactive_base.cc:728
 #, c-format
 msgid "Road length: %u"
 msgstr "땅길 길이: %u"
 
-#: ../../src/wui/interactive_base.cc:719
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "물길 길이: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1438
+#: ../../src/wui/interactive_base.cc:1562
 msgid "Failed saving screenshot!"
 msgstr "화면 갈무리를 저장하지 못했습니다!"
 
-#: ../../src/wui/interactive_base.cc:1442
+#: ../../src/wui/interactive_base.cc:1566
 msgid "Screenshot saved"
 msgstr "화면 갈무리가 저장됨"
 
@@ -6983,8 +7427,8 @@ msgid "Soldiers"
 msgstr "군인"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:153 ../../src/wui/waresdisplay.cc:82
+#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:41
+#: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "재고"
 
@@ -7150,15 +7594,15 @@ msgstr "지도 크기 (너비 x 높이)"
 msgid "Map Name"
 msgstr "지도 이름"
 
-#: ../../src/wui/minimap.cc:162
+#: ../../src/wui/minimap.cc:163
 msgid "Owner"
 msgstr "소유자"
 
-#: ../../src/wui/minimap.cc:184
+#: ../../src/wui/minimap.cc:185
 msgid "Roads"
 msgstr "땅길"
 
-#: ../../src/wui/minimap.cc:206
+#: ../../src/wui/minimap.cc:207
 msgid "Zoom"
 msgstr "배율"
 
@@ -7492,123 +7936,123 @@ msgid "Map name (start of replay)"
 msgstr "지도 이름 (리플레이 시작)"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:125
+#: ../../src/wui/seafaring_statistics_menu.cc:126
 msgid "Watch the selected ship"
 msgstr "선택한 배를 감시"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:140
+#: ../../src/wui/seafaring_statistics_menu.cc:141
 msgid "Open the selected ship’s window"
 msgstr "선택한 배의 창 열기"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:145
+#: ../../src/wui/seafaring_statistics_menu.cc:146
 msgid "Go to the selected ship and open its window"
 msgstr "선택한 배으로 이동하여 해당 창을 열기"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:159
+#: ../../src/wui/seafaring_statistics_menu.cc:160
 msgid "Center the map on the selected ship"
 msgstr "선택한 배를 지도 가운데에 배치"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:202
+#: ../../src/wui/seafaring_statistics_menu.cc:203
 msgctxt "ship"
 msgid "Name"
 msgstr "이름"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:203
+#: ../../src/wui/seafaring_statistics_menu.cc:204
 msgctxt "ship"
 msgid "Status"
 msgstr "상태"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:501
+#: ../../src/wui/seafaring_statistics_menu.cc:502
 msgid "Show all ships"
 msgstr "모든 배 표시"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:510
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgid "Show empty ships"
 msgstr "빈 배 표시"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:514
+#: ../../src/wui/seafaring_statistics_menu.cc:515
 msgid "Show ships shipping wares and workers"
 msgstr "배송 물품들과 일꾼들을 표시"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:519
+#: ../../src/wui/seafaring_statistics_menu.cc:520
 msgid "Show waiting expeditions"
 msgstr "대기중인 탐험 표시"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgid "Show scouting expeditions"
 msgstr "정찰중인 탐험 표시"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:529
+#: ../../src/wui/seafaring_statistics_menu.cc:530
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "항구 자리를 찾았거나 식민지를 세우고있는 탐험대를 표시"
 
-#: ../../src/wui/shipwindow.cc:79
+#: ../../src/wui/shipwindow.cc:82
 msgid "Scout towards the north west"
 msgstr "북서쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:84
+#: ../../src/wui/shipwindow.cc:87
 msgid "Explore the island’s coast clockwise"
 msgstr "섬의 해안을 시계 방향으로 탐험"
 
-#: ../../src/wui/shipwindow.cc:89
+#: ../../src/wui/shipwindow.cc:92
 msgid "Scout towards the north east"
 msgstr "북동쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:94
+#: ../../src/wui/shipwindow.cc:97
 msgid "Scout towards the west"
 msgstr "서쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:99
+#: ../../src/wui/shipwindow.cc:102
 msgid "Construct a port at the current location"
 msgstr "항구를 현재 위치에 건설"
 
-#: ../../src/wui/shipwindow.cc:104
+#: ../../src/wui/shipwindow.cc:107
 msgid "Scout towards the east"
 msgstr "동쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:109
+#: ../../src/wui/shipwindow.cc:112
 msgid "Scout towards the south west"
 msgstr "남서쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:114
+#: ../../src/wui/shipwindow.cc:117
 msgid "Explore the island’s coast counter clockwise"
 msgstr "섬의 해안을 반시계 방향으로 탐험"
 
-#: ../../src/wui/shipwindow.cc:119
+#: ../../src/wui/shipwindow.cc:122
 msgid "Scout towards the south east"
 msgstr "남동쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:129
+#: ../../src/wui/shipwindow.cc:132
 msgid "Sink the ship"
 msgstr "자침"
 
-#: ../../src/wui/shipwindow.cc:133
+#: ../../src/wui/shipwindow.cc:136
 msgid "Cancel the Expedition"
 msgstr "탐험 취소"
 
-#: ../../src/wui/shipwindow.cc:146
+#: ../../src/wui/shipwindow.cc:149
 msgid "Go to destination"
 msgstr "목적지로 이동"
 
-#: ../../src/wui/shipwindow.cc:151
+#: ../../src/wui/shipwindow.cc:154
 msgid "Go to ship"
 msgstr "배로 이동"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:215
+#: ../../src/wui/shipwindow.cc:218
 msgid "Cancel Expedition"
 msgstr "탐험 취소"
 
-#: ../../src/wui/shipwindow.cc:216
+#: ../../src/wui/shipwindow.cc:219
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
@@ -7704,51 +8148,51 @@ msgstr "소리 드라이버에 문제가 있거나 명령줄에서 스위치가 
 #. different background colors; each icon's color indicates whether the stock
 #. is higher or
 #. lower than the economy target setting. Very little space is available.
-#: ../../src/wui/stock_menu.cc:52
+#: ../../src/wui/stock_menu.cc:53
 msgid "Evaluate"
 msgstr "번역확인->계산하기"
 
-#: ../../src/wui/stock_menu.cc:55
+#: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
 msgstr "재고량과 경제 목표 수량을 비교"
 
-#: ../../src/wui/stock_menu.cc:58
+#: ../../src/wui/stock_menu.cc:59
 msgid "Red:"
 msgstr "빨강:"
 
-#: ../../src/wui/stock_menu.cc:58
+#: ../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
 msgstr "재고가 목표보다 낮음"
 
-#: ../../src/wui/stock_menu.cc:61
+#: ../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
 msgstr "노랑:"
 
-#: ../../src/wui/stock_menu.cc:62
+#: ../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
 msgstr "재고가 목표와 같습니다"
 
-#: ../../src/wui/stock_menu.cc:65
+#: ../../src/wui/stock_menu.cc:66
 msgid "Green:"
 msgstr "초록:"
 
-#: ../../src/wui/stock_menu.cc:66
+#: ../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
 msgstr "재고가 목표치보다 높습니다"
 
-#: ../../src/wui/stock_menu.cc:71
+#: ../../src/wui/stock_menu.cc:72
 msgid "Wares (total)"
 msgstr "물품들 (전체)"
 
-#: ../../src/wui/stock_menu.cc:75
+#: ../../src/wui/stock_menu.cc:76
 msgid "Workers (total)"
 msgstr "일꾼들 (전체)"
 
-#: ../../src/wui/stock_menu.cc:79
+#: ../../src/wui/stock_menu.cc:80
 msgid "Wares in warehouses"
 msgstr "창고에 있는 물품들"
 
-#: ../../src/wui/stock_menu.cc:83
+#: ../../src/wui/stock_menu.cc:84
 msgid "Workers in warehouses"
 msgstr "창고에 있는 일꾼들"
 
@@ -7773,15 +8217,15 @@ msgstr "추천한 편"
 msgid "Soldiers in training"
 msgstr "훈련중인 군인들"
 
-#: ../../src/wui/ware_statistics_menu.cc:133
+#: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Production"
 msgstr "생산"
 
-#: ../../src/wui/ware_statistics_menu.cc:140
+#: ../../src/wui/ware_statistics_menu.cc:142
 msgid "Consumption"
 msgstr "소모"
 
-#: ../../src/wui/ware_statistics_menu.cc:147
+#: ../../src/wui/ware_statistics_menu.cc:149
 msgid "Economy health"
 msgstr "경제 활력"
 
@@ -7859,10 +8303,10 @@ msgstr "%1%M"
 msgid "%1%G"
 msgstr "%1%G"
 
-#: ../../src/wui/watchwindow.cc:57
+#: ../../src/wui/watchwindow.cc:60
 msgid "Follow"
 msgstr "지켜보기"
 
-#: ../../src/wui/watchwindow.cc:62
+#: ../../src/wui/watchwindow.cc:65
 msgid "Center the main view on this"
 msgstr "주 시야를 중앙에 위치"

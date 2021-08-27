@@ -743,7 +743,10 @@ Building& Player::force_csite(Coords const location,
 }
 
 bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) const {
-	if (!descr.is_buildable()) {
+	if (!descr.is_buildable() ||
+	    !is_building_type_allowed(egbase().descriptions().safe_building_index(descr.name())) ||
+	    !descr.is_useful_on_map(
+	       egbase().map().allows_seafaring(), egbase().map().get_waterway_max_length() >= 2)) {
 		return false;
 	}
 

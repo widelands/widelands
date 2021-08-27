@@ -34,10 +34,15 @@
 #include "base/multithreading.h"
 #include "base/rect.h"
 #include "base/vector.h"
+#include "base/wexception.h"
 #include "graphic/styles/panel_styles.h"
 #include "sound/constants.h"
 
+class FileWrite;
 class RenderTarget;
+namespace Widelands {
+class MapObjectSaver;
+}
 
 namespace UI {
 
@@ -348,8 +353,42 @@ public:
 
 	Panel& get_topmost_forefather();
 
+	struct ModalGuard {
+		explicit ModalGuard(Panel& p);
+		~ModalGuard();
+
+	private:
+		Panel* bottom_panel_;
+		Panel& top_panel_;
+		DISALLOW_COPY_AND_ASSIGN(ModalGuard);
+	};
+
 	// Call this on the topmost panel after you changed the template directory
 	void template_directory_changed();
+
+	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
+		kNone = 0,          ///< This panel is not saveable.
+		kBuildingWindow,
+		kWatchWindow,
+		kConfigureEconomy,
+		kStockMenu,
+		kGeneralStats,
+		kWareStats,
+		kBuildingStats,
+		kSoldierStats,
+		kSeafaringStats,
+		kMessages,
+		kObjectives,
+		kMinimap,
+		kEncyclopedia,
+		kShipWindow,
+	};
+	virtual SaveType save_type() const {
+		return SaveType::kNone;
+	}
+	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
+		NEVER_HERE();
+	}
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -412,7 +451,8 @@ protected:
 	 *  provided message to the user drawn in the screen center.
 	 *  May be called only by the initializer thread.
 	 */
-	void do_redraw_now(const std::string& message_to_display = std::string());
+	void do_redraw_now(bool handle_input = true,
+	                   const std::string& message_to_display = std::string());
 
 private:
 	bool initialized_;

@@ -28,6 +28,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
@@ -64,19 +65,37 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kTheme,
     AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
 
-i18n::GenericTextdomain* create_correct_textdomain(std::string mapfilename) {
+std::vector<AddOnState> g_addons;
+
+static const AddOnInfo* find_addon(const std::string& name) {
+	for (const auto& pair : g_addons) {
+		if (pair.first->internal_name == name) {
+			return pair.first.get();
+		}
+	}
+	return nullptr;
+}
+
+i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon) {
+	if (const AddOnInfo* a = find_addon(addon)) {
+		return new i18n::AddOnTextdomain(addon, a->i18n_version);
+	}
+	return nullptr;
+}
+
+i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename) {
 	if (mapfilename.compare(0, kAddOnDir.size(), kAddOnDir) != 0) {
 		return new i18n::Textdomain("maps");
 	}
+
 	mapfilename = mapfilename.substr(kAddOnDir.size() + 1);
 	const size_t pos = std::min(mapfilename.find('/'), mapfilename.find('\\'));
 	if (pos != std::string::npos) {
 		mapfilename = mapfilename.substr(0, pos);
 	}
-	return new i18n::AddOnTextdomain(mapfilename, find_addon(mapfilename).i18n_version);
-}
 
-std::vector<AddOnState> g_addons;
+	return create_textdomain_for_addon(mapfilename);
+}
 
 std::string version_to_string(const AddOnVersion& version, const bool localize) {
 	std::string s;
@@ -380,15 +399,6 @@ bool AddOnInfo::matches_widelands_version() const {
 	return true;
 }
 
-const AddOnInfo& find_addon(const std::string& name) {
-	for (const auto& pair : g_addons) {
-		if (pair.first->internal_name == name) {
-			return *pair.first;
-		}
-	}
-	throw wexception("Add-on %s is not installed", name.c_str());
-}
-
 std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(
 	   g_fs->make_sub_file_system(kAddOnDir + FileSystem::file_separator() + name));
@@ -400,6 +410,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	Section* i18n_section = i18n_profile.get_section("global");
 
 	AddOnInfo* i = new AddOnInfo();
+	std::shared_ptr<AddOnInfo> pointer(i);
 	i->internal_name = name;
 	i->unlocalized_descname = s.get_safe_untranslated_string("name");
 	i->unlocalized_description = s.get_safe_untranslated_string("description");
@@ -422,6 +433,10 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
 		return i18n::translate(i->unlocalized_author);
 	};
+	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
+                                   kAddOnDir + FileSystem::file_separator() + name +
+	                                   FileSystem::file_separator() + kAddOnIconFile :
+                                   kAddOnCategories.at(i->category).icon);
 
 	if (i->category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());
@@ -441,7 +456,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		}
 	}
 
-	return std::shared_ptr<AddOnInfo>(i);
+	return pointer;
 }
 
 }  // namespace AddOns

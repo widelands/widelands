@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/addons_packager_box.h"
+#include "ui_fsmenu/addons/packager_box.h"
 
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
@@ -30,6 +30,7 @@
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
+namespace AddOnsUI {
 
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
@@ -447,4 +448,5 @@ void CampaignAddOnsPackagerBox::layout() {
 	AddOnsPackagerBox::layout();
 }
 
+}  // namespace AddOnsUI
 }  // namespace FsMenu
