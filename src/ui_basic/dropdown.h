@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_DROPDOWN_H
 #define WL_UI_BASIC_DROPDOWN_H
 
+#include <base/log.h>
 #include <deque>
 #include <memory>
 
@@ -290,6 +291,7 @@ public:
 	}
 
 	void clear_filter() override {
+		first_time_filter = true;
 		if (current_filter_.empty()) {
 			return;
 		}
@@ -319,23 +321,40 @@ public:
 		return true;
 	}
 	void apply_filter() override {
-		Entry selected_entry{};
-		bool reselect = false;
-		if (has_selection()) {
-			reselect = true;
-			selected_entry = get_selected();
+		//		bool reselect = false;
+
+		if (first_time_filter) {
+			log_dbg("first time filter");
+			first_time_filter = false;
+			selected_entry_ = get_selected();
 		}
+
 		clear_filtered_list();
+
+		add_matching_entries();
+		if (filtered_entries.empty()) {
+			add_no_match_entry();
+		}
+//		else {
+//			select(selected_entry_);
+//		}
+	}
+	void add_no_match_entry() {
+		for (auto& x : unfiltered_entries) {
+			if (x.value == selected_entry_) {
+				log_dbg("added no match");
+				add_to_filtered_list("Nothing matches the filter.", x.value, x.img, false, x.tooltip, x.hotkey);
+			}
+		}
+	}
+	void add_matching_entries() {
 		for (auto& x : unfiltered_entries) {
 			std::string lowerName = std::string(x.name);
 			transform(lowerName.begin(), lowerName.end(), lowerName.begin(),
-			          [](unsigned char c) { return std::tolower(c); });
+			          [](unsigned char c) { return tolower(c); });
 			if (lowerName.find(current_filter_) != std::string::npos) {
 				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
 			}
-		}
-		if (reselect) {
-			select(selected_entry);
 		}
 	}
 
@@ -368,6 +387,7 @@ public:
 	void select(const Entry& entry) {
 		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
 			if (entry == *filtered_entries[i]) {
+				log_dbg("selecting entry %d", i);
 				BaseDropdown::select(i);
 			}
 		}
@@ -409,6 +429,8 @@ private:
 	std::deque<std::unique_ptr<Entry>> filtered_entries;
 	// Contains all the elements.
 	std::deque<ExtendedEntry> unfiltered_entries;
+	bool first_time_filter = true;
+	Entry selected_entry_{};
 };
 
 }  // namespace UI
