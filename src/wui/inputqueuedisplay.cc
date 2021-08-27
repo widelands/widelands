@@ -336,8 +336,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                   bld.owner().tribe().get_ware_descr(index_)->descname() :
                   bld.owner().tribe().get_worker_descr(index_)->descname());
 
-	// Initialize tooltips, icon colours and stuff
-	think();
+	// Do not call think() yet, it might deadlock
 }
 
 void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& functor) {
