@@ -538,5 +538,4 @@ void BaseDropdown::delete_last_of_filter() {
 	}
 }
 
-
 }  // namespace UI

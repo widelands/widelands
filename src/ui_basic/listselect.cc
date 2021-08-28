@@ -117,7 +117,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
 	return selection_mode_ == ListselectLayout::kDropdown ?
-	          g_style_manager->dropdown_style(panel_style_) :
+             g_style_manager->dropdown_style(panel_style_) :
              nullptr;
 }
 
@@ -415,7 +415,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-			                     get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);

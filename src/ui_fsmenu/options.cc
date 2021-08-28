@@ -477,7 +477,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres(), 0};
 
 	resolution_dropdown_.add(
-		/** TRANSLATORS: Entry in the window size dropdown*/
+	   /** TRANSLATORS: Entry in the window size dropdown*/
 	   _("Fullscreen"), {kDropdownFullscreen, kDropdownFullscreen, 32}, nullptr, opt.fullscreen);
 #ifdef RESIZABLE_WINDOW
 	/** TRANSLATORS: Entry in the window size dropdown*/
