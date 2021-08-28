@@ -20,10 +20,10 @@
 #ifndef WL_UI_BASIC_DROPDOWN_H
 #define WL_UI_BASIC_DROPDOWN_H
 
-#include <base/log.h>
 #include <deque>
 #include <memory>
 
+#include "base/i18n.h"
 #include "graphic/image.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "notifications/note_ids.h"
@@ -215,6 +215,7 @@ private:
 	bool is_mouse_away() const;
 
 	virtual void apply_filter() = 0;
+	virtual void save_selected_entry(uint32_t){};
 
 	/// Give each dropdown a unique ID
 	static int next_id_;
@@ -291,10 +292,10 @@ public:
 	}
 
 	void clear_filter() override {
-		first_time_filter = true;
 		if (current_filter_.empty()) {
 			return;
 		}
+		current_filter_.clear();
 		if (has_selection()) {
 			Entry selected_entry = get_selected();
 			restore_filtered_list();
@@ -305,10 +306,13 @@ public:
 	}
 	void restore_filtered_list() {
 		clear_filtered_list();
-		current_filter_.clear();
 		for (auto& ee : unfiltered_entries) {
 			add_to_filtered_list(ee.name, ee.value, ee.img, false, ee.tooltip, ee.hotkey);
 		}
+	}
+
+	void save_selected_entry(uint32_t index) override {
+		selected_entry_ = index < filtered_entries.size() ? *filtered_entries[index] : Entry{};
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
@@ -320,33 +324,29 @@ public:
 
 		return true;
 	}
+
 	void apply_filter() override {
-		//		bool reselect = false;
-
-		if (first_time_filter) {
-			log_dbg("first time filter");
-			first_time_filter = false;
-			selected_entry_ = get_selected();
-		}
-
 		clear_filtered_list();
-
 		add_matching_entries();
+
 		if (filtered_entries.empty()) {
 			add_no_match_entry();
 		}
-//		else {
-//			select(selected_entry_);
-//		}
+		// force list to stay open even if mouse is now away due to smaller
+		// dropdown list because of applied filter
+		set_list_visibility(true);
 	}
+
 	void add_no_match_entry() {
+		// re-add initially selected entry with adapted texts to inform user
 		for (auto& x : unfiltered_entries) {
 			if (x.value == selected_entry_) {
-				log_dbg("added no match");
-				add_to_filtered_list("Nothing matches the filter.", x.value, x.img, false, x.tooltip, x.hotkey);
+				add_to_filtered_list(_("No matches"), x.value, x.img, false,
+				                     _("Previously selected entry will be selected again"), x.hotkey);
 			}
 		}
 	}
+
 	void add_matching_entries() {
 		for (auto& x : unfiltered_entries) {
 			std::string lowerName = std::string(x.name);
@@ -387,7 +387,7 @@ public:
 	void select(const Entry& entry) {
 		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
 			if (entry == *filtered_entries[i]) {
-				log_dbg("selecting entry %d", i);
+				selected_entry_ = entry;
 				BaseDropdown::select(i);
 			}
 		}
@@ -429,7 +429,8 @@ private:
 	std::deque<std::unique_ptr<Entry>> filtered_entries;
 	// Contains all the elements.
 	std::deque<ExtendedEntry> unfiltered_entries;
-	bool first_time_filter = true;
+	// remember the initial selected element to select it again
+	// when filter yields no matches
 	Entry selected_entry_{};
 };
 

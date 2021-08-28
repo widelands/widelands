@@ -18,7 +18,6 @@
  */
 
 #include "ui_basic/dropdown.h"
-#include <base/log.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -137,11 +136,17 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
-	display_button_.sigclicked.connect([this]() { toggle_list(); });
+	display_button_.sigclicked.connect([this]() {
+		toggle_list();
+		clear_filter();
+	});
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
 		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
-		push_button_->sigclicked.connect([this]() { toggle_list(); });
+		push_button_->sigclicked.connect([this]() {
+			toggle_list();
+			clear_filter();
+		});
 	}
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() {
@@ -434,6 +439,7 @@ void BaseDropdown::update() {
 
 void BaseDropdown::set_value() {
 	current_selection_ = list_->selection_index();
+	save_selected_entry(current_selection_);
 	update();
 	selected();
 }
@@ -498,7 +504,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
-				// Check list visibility again, set_value() might has toggled it
+				// Check list visibility again, set_value() might have toggled it
 				if ((list_->is_visible() && code.sym != SDLK_SPACE) ||
 				    (!list_->is_visible() && code.sym == SDLK_SPACE)) {
 					toggle_list();
@@ -511,19 +517,11 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			}
 			return true;
 		case SDLK_ESCAPE:
-			log_dbg("esc");
-			clear_filter();
 			if (list_->is_visible()) {
 				toggle_list();
 				return true;
 			}
 			break;
-		case SDLK_BACKSPACE:
-			delete_last_of_filter();
-			log_dbg("backspace, new filter: %s", current_filter_.c_str());
-			apply_filter();
-			return true;
-			//			break;
 		default:
 			break;  // not handled
 		}
@@ -539,5 +537,6 @@ void BaseDropdown::delete_last_of_filter() {
 		apply_filter();
 	}
 }
+
 
 }  // namespace UI
