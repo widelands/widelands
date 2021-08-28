@@ -22,9 +22,12 @@
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "ui_basic/box.h"
 #include "ui_basic/messagebox.h"
 #include "wui/actionconfirm.h"
@@ -415,4 +418,23 @@ void ShipWindow::act_explore_island(Widelands::IslandExploreDirection direction)
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& ShipWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			return ib.show_ship_window(&mol.get<Widelands::Ship>(fr.unsigned_32()));
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Ship Window", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("ship window: %s", e.what());
+	}
+}
+void ShipWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_32(mos.get_object_file_index(*ship_.get(ibase_.egbase())));
 }
