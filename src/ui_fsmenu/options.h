@@ -128,7 +128,7 @@ private:
 	// Restores old options when canceled
 	void clicked_cancel();
 
-	//Data model for the screen resolution dropdown
+	// Data model for the screen resolution dropdown
 	class ScreenResolution {
 	public:
 		int32_t xres;
