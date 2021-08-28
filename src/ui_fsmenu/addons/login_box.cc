@@ -74,11 +74,11 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
 	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 	m->set_text(
-	   (boost::format(
+	   bformat(
 	       _("In order to use a registered account, you need an account on the Widelands website. "
-	         "Please log in at %s and set an online gaming password on your profile page.")) %
+	         "Please log in at %s and set an online gaming password on your profile page.") ,
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
-	      .str());
+	      );
 
 	left_box_.add_inf_space();
 	left_box_.add(

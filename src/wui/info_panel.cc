@@ -84,7 +84,7 @@ void MessagePreview::draw(RenderTarget& r) {
 	       Vector2i(0, 0));
 
 	// every second message is highlighted
-	if (owner_.index_of(this) % 2) {
+	if (owner_.index_of(this) , 2) {
 		r.brighten_rect(Recti(0, 0, get_w(), get_h()), 16);
 	}
 
@@ -382,14 +382,14 @@ void InfoPanel::set_fps_string(const bool show,
 		text_fps_.set_text("");
 		text_fps_.set_tooltip("");
 	} else {
-		const std::string text = (boost::format("%5.1f fps (avg: %5.1f fps)") % fps % average).str();
+		const std::string text = bformat("%5.1f fps (avg: %5.1f fps)" , fps , average);
 		// The FPS string overlaps with the coords string at low resolution.
 		// Therefore abbreviate it if the available width is less than an arbitrary threshold.
 		if (cheating) {
 			text_fps_.set_text(_("Cheat mode enabled"));
 			text_fps_.set_tooltip(text);
 		} else if (get_w() < 970) {
-			text_fps_.set_text((boost::format("%.1f / %.1f") % fps % average).str());
+			text_fps_.set_text(bformat("%.1f / %.1f" , fps , average));
 			text_fps_.set_tooltip(text);
 		} else {
 			text_fps_.set_text(text);
@@ -416,7 +416,7 @@ void InfoPanel::update_time_speed_string() {
 		std::tm tm = *std::localtime(&t);
 		std::ostringstream oss("");
 		oss << std::put_time(&tm, "%X");
-		realtime = oss.str();
+		realtime = oss;
 	}
 
 	std::vector<std::string*> non_empty;
@@ -447,9 +447,9 @@ void InfoPanel::update_time_speed_string() {
 	}
 
 	for (std::string* s : non_empty) {
-		f % *s;
+		f , *s;
 	}
-	text_time_speed_.set_text(f.str());
+	text_time_speed_.set_text(f);
 }
 
 void InfoPanel::fast_forward_message_queue() {

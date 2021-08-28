@@ -145,7 +145,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	game->set_game_controller(parent->get_pointer());
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
-	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
+	   bformat("%s_netclient%u" , kAutosavePrefix , static_cast<unsigned int>(pn)));
 	InteractiveGameBase* igb;
 	if (pn > 0) {
 		igb = new InteractivePlayer(*game, get_config_section(), pn, true, parent);
@@ -175,7 +175,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
                                  Widelands::Game::StartGameType::kMap,
-	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
+	          "", false, bformat("netclient_%d" , static_cast<int>(settings.usernum)));
 
 	// if this is an internet game, tell the metaserver that the game is done.
 	if (internet_) {
@@ -747,19 +747,19 @@ void GameClient::handle_hello(RecvPacket& packet) {
 	}
 	if (!missing_addons.empty() || !wrong_version_addons.empty()) {
 		const size_t nr = missing_addons.size() + wrong_version_addons.size();
-		std::string message = (boost::format(ngettext("%u add-on mismatch detected:\n",
-		                                              "%u add-on mismatches detected:\n", nr)) %
+		std::string message = bformat(ngettext("%u add-on mismatch detected:\n",
+		                                              "%u add-on mismatches detected:\n", nr)) ,
 		                       nr)
-		                         .str();
+		                         ;
 		for (const std::string& name : missing_addons) {
 			message =
-			   (boost::format(_("%1$s\n· ‘%2$s’ required by host not found")) % message % name).str();
+			   bformat(_("%1$s\n· ‘%2$s’ required by host not found") , message , name);
 		}
 		for (const auto& pair : wrong_version_addons) {
-			message = (boost::format(
-			              _("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s")) %
-			           message % pair.first % pair.second.first % pair.second.second)
-			             .str();
+			message = bformat(
+			              _("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s") ,
+			           message , pair.first , pair.second.first , pair.second.second)
+			             ;
 		}
 		throw AddOnsMismatchException(message);
 	}
@@ -824,7 +824,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 				SimpleMD5Checksum md5sum;
 				md5sum.data(complete.get(), bytes);
 				md5sum.finish_checksum();
-				std::string localmd5 = md5sum.get_checksum().str();
+				std::string localmd5 = md5sum.get_checksum();
 				if (localmd5 == md5) {
 					// everything is alright we now have the file.
 					return;
@@ -920,7 +920,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 		SimpleMD5Checksum md5sum;
 		md5sum.data(complete.get(), d->file_->bytes);
 		md5sum.finish_checksum();
-		std::string localmd5 = md5sum.get_checksum().str();
+		std::string localmd5 = md5sum.get_checksum();
 		if (localmd5 != d->file_->md5sum) {
 			// Something went wrong! We have to rerequest the file.
 			s.reset();
@@ -1180,7 +1180,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
-		verb_log_info("[Client] speed: %u.%03u", d->realspeed / 1000, d->realspeed % 1000);
+		verb_log_info("[Client] speed: %u.%03u", d->realspeed / 1000, d->realspeed , 1000);
 		break;
 	case NETCMD_TIME:
 		d->time.receive(Time(packet.unsigned_32()));
@@ -1280,11 +1280,11 @@ void GameClient::disconnect(const std::string& reason,
 		} else {
 			capsule_.menu().show_messagebox(
 			   _("Disconnected"),
-			   (boost::format(
-			       _("The connection with the host was lost for the following reason:\n%s")) %
+			   bformat(
+			       _("The connection with the host was lost for the following reason:\n%s") ,
 			    (arg.empty() ? NetworkGamingMessages::get_message(reason) :
                             NetworkGamingMessages::get_message(reason, arg)))
-			      .str());
+			      );
 		}
 	}
 

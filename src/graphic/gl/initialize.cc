@@ -167,30 +167,30 @@ SDL_GLContext initialize(
 		show_opengl_error_and_exit(
 		   "Widelands won't work because we were unable to detect the shading language version.\n"
 		   "There is an unknown problem with reading the information from the graphics driver.",
-		   (boost::format("%s\n%s") %
+		   bformat("%s\n%s" ,
 		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 		       support is limited here, so do not use advanced typography **/
 		    _("Widelands won't work because we were unable to detect the shading language "
-		      "version.") %
+		      "version.") ,
 		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 		       support is limited here, so do not use advanced typography **/
 		    _("There is an unknown problem with reading the information from the graphics "
-		      "driver."))
-		      .str());
+		      "driver.")
+		      ));
 	};
 	auto handle_unreadable_opengl_version = [show_opengl_error_and_exit]() {
 		show_opengl_error_and_exit(
 		   "Widelands won't work because we were unable to detect the OpenGL version.\n"
 		   "There is an unknown problem with reading the information from the graphics driver.",
-		   (boost::format("%s\n%s") %
+		   bformat("%s\n%s" ,
 		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 		       support is limited here, so do not use advanced typography **/
-		    _("Widelands won't work because we were unable to detect the OpenGL version.") %
+		    _("Widelands won't work because we were unable to detect the OpenGL version.") ,
 		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 		       support is limited here, so do not use advanced typography **/
 		    _("There is an unknown problem with reading the information from the graphics "
-		      "driver."))
-		      .str());
+		      "driver.")
+		      ));
 	};
 	auto check_version = [show_opengl_error_and_exit](
 	                        const std::string& version_string, const std::string& name,
@@ -210,20 +210,20 @@ SDL_GLContext initialize(
 			if (major_version < required_major_version ||
 			    (major_version == required_major_version && minor_version < required_minor_version)) {
 				show_opengl_error_and_exit(
-				   (boost::format("Widelands won’t work because your graphics driver is too old.\n"
-				                  "The %u version needs to be version %u.%u or newer.") %
-				    name % required_major_version % required_minor_version)
-				      .str(),
-				   (boost::format("%s\n%s") %
+				   bformat("Widelands won’t work because your graphics driver is too old.\n"
+				                  "The %u version needs to be version %u.%u or newer." ,
+				    name , required_major_version , required_minor_version)
+				      ,
+				   bformat("%s\n%s" ,
 				    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 				       support is limited here, so do not use advanced typography **/
-				    _("Widelands won’t work because your graphics driver is too old.") %
+				    _("Widelands won’t work because your graphics driver is too old.") ,
 				    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 				       support is limited here, so do not use advanced typography **/
-				    (boost::format(_("The %1$u version needs to be version %2$u.%3$u or newer.")) %
-				     descname % required_major_version % required_minor_version)
-				       .str())
-				      .str());
+				    bformat(_("The %1$u version needs to be version %2$u.%3$u or newer.") ,
+				     descname , required_major_version , required_minor_version)
+				       )
+				      );
 			}
 		} else {
 			// We don't have a minor version. Ensure that the string to compare is a valid integer
@@ -232,20 +232,20 @@ SDL_GLContext initialize(
 			if (std::regex_match(version_string, re)) {
 				if (std::stol(version_string) < required_major_version + 1) {
 					show_opengl_error_and_exit(
-					   (boost::format("Widelands won’t work because your graphics driver is too old.\n"
-					                  "The %s needs to be version %u.%u or newer.") %
-					    name % required_major_version % required_minor_version)
-					      .str(),
-					   (boost::format("%s\n%s") %
+					   bformat("Widelands won’t work because your graphics driver is too old.\n"
+					                  "The %s needs to be version %u.%u or newer." ,
+					    name , required_major_version , required_minor_version)
+					      ,
+					   bformat("%s\n%s" ,
 					    /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
 					       Font support is limited here, so do not use advanced typography **/
-					    _("Widelands won’t work because your graphics driver is too old.") %
+					    _("Widelands won’t work because your graphics driver is too old." ,
 					    /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
 					       Font support is limited here, so do not use advanced typography **/
-					    (boost::format(_("The %1$s needs to be version %2$u.%3$u or newer.")) %
-					     descname % required_major_version % required_minor_version)
-					       .str())
-					      .str());
+					    bformat(_("The %1$s needs to be version %2$u.%3$u or newer.") ,
+					     descname , required_major_version , required_minor_version)
+					       )
+					      );
 				}
 			} else {
 				// We don't know how to interpret the version info

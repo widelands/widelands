@@ -30,7 +30,7 @@
  */
 class ScopedTimer {
 public:
-	// Takes the output message that will be boost::format() with the total time
+	// Takes the output message that will be bformat()ted with the total time
 	// this object existed (in ms, use %u).
 	explicit ScopedTimer(const std::string& message, bool only_verbose = false);
 

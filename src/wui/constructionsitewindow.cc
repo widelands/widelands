@@ -400,7 +400,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		}
 	}
 
-	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
+	set_title(bformat("(%s)" , construction_site->building().descname()));
 
 	think();
 	initialization_complete();
@@ -465,9 +465,9 @@ void ConstructionSiteWindow::think() {
 		assert(cs_soldier_capacity_increase_);
 		assert(cs_soldier_capacity_display_);
 		cs_soldier_capacity_display_->set_text(
-		   (boost::format(ngettext("%u soldier", "%u soldiers", ts->desired_capacity)) %
+		   bformat(ngettext("%u soldier", "%u soldiers", ts->desired_capacity)) ,
 		    ts->desired_capacity)
-		      .str());
+		      );
 		cs_soldier_capacity_decrease_->set_enabled(can_act && ts->desired_capacity > 0);
 		cs_soldier_capacity_increase_->set_enabled(can_act &&
 		                                           ts->desired_capacity < ts->max_capacity);
@@ -477,9 +477,9 @@ void ConstructionSiteWindow::think() {
 		assert(cs_soldier_capacity_display_);
 		assert(cs_prefer_heroes_rookies_);
 		cs_soldier_capacity_display_->set_text(
-		   (boost::format(ngettext("%u soldier", "%u soldiers", ms->desired_capacity)) %
+		   bformat(ngettext("%u soldier", "%u soldiers", ms->desired_capacity)) ,
 		    ms->desired_capacity)
-		      .str());
+		      );
 		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
 		cs_soldier_capacity_increase_->set_enabled(can_act &&
 		                                           ms->desired_capacity < ms->max_capacity);

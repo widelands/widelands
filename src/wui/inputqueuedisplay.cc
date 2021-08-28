@@ -116,14 +116,14 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 }
 
 static inline std::string create_tooltip(const bool increase) {
-	return (boost::format("<p>%s%s%s</p>") %
+	return bformat("<p>%s%s%s</p>" ,
 	        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	           .as_font_tag(
 	              increase ?
                     /** TRANSLATORS: Button tooltip in in a building's wares input queue */
                     _("Increase the number of wares you want to be stored here") :
                     /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                    _("Decrease the number of wares you want to be stored here")) %
+                    _("Decrease the number of wares you want to be stored here") ,
 	        as_listitem(increase ?
                              /** TRANSLATORS: Button tooltip in in a building's wares input queue -
                                 option explanation */
@@ -131,7 +131,7 @@ static inline std::string create_tooltip(const bool increase) {
                              /** TRANSLATORS: Button tooltip in in a building's wares input queue -
                                 option explanation */
                              _("Hold down Shift to decrease all ware types at the same time"),
-	                    UI::FontStyle::kWuiTooltip) %
+	                    UI::FontStyle::kWuiTooltip) ,
 	        as_listitem(increase ?
                              /** TRANSLATORS: Button tooltip in in a building's wares input queue -
                                 option explanation */
@@ -140,7 +140,7 @@ static inline std::string create_tooltip(const bool increase) {
                                 option explanation */
                              _("Hold down Ctrl to allow none of this ware"),
 	                    UI::FontStyle::kWuiTooltip))
-	   .str();
+	   ;
 }
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,

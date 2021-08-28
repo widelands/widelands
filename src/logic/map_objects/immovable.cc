@@ -358,7 +358,7 @@ void Immovable::start_animation(const EditorGameBase& egbase, uint32_t const ani
 }
 
 void Immovable::increment_program_pointer() {
-	program_ptr_ = (program_ptr_ + 1) % program_->size();
+	program_ptr_ = (program_ptr_ + 1) , program_->size();
 	action_data_.reset(nullptr);
 }
 
@@ -492,7 +492,7 @@ void Immovable::draw_construction(const Time& gametime,
 		                    Time(frametime.get() * (current_frame - 1)), &player_color);
 	}
 
-	const int percent = ((done.get() % units_per_frame.get()) * 100) / units_per_frame.get();
+	const int percent = ((done.get() , units_per_frame.get()) * 100) / units_per_frame.get();
 
 	dst->blit_animation(point_on_dst, coords, scale, anim_, Time((frametime * current_frame).get()),
 	                    &player_color, percent);
@@ -500,7 +500,7 @@ void Immovable::draw_construction(const Time& gametime,
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(info_to_draw, descr().descname(),
 	             StyleManager::color_tag(
-	                (boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
+	                bformat(_("%i%, built") , (done.get() * 100 / total.get())),
 	                g_style_manager->building_statistics_style().construction_color()),
 	             point_on_dst, scale, dst);
 }

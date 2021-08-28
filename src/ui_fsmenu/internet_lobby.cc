@@ -155,15 +155,15 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 
 	// Prepare the lists
 	const std::string t_tip =
-	   (boost::format("<rt padding=2><p align=center spacing=3>%s</p>"
+	   bformat("<rt padding=2><p align=center spacing=3>%s</p>"
 	                  "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
-	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>") %
-	    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader).as_font_tag(_("User Status")) %
-	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Administrator")) %
-	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Registered")) %
+	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>" ,
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader).as_font_tag(_("User Status") ,
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Administrator") ,
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Registered") ,
 	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Unregistered")))
-	      .str();
+	      ;
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
 	clientsonline_table_.add_column(180, pgettext("player", "Name"));
@@ -416,10 +416,10 @@ void InternetLobby::change_servername() {
 				hostgame_.set_enabled(false);
 				servername_.set_warning(true);
 				servername_.set_tooltip(
-				   (boost::format(
-				       _("The game %s is already running. Please choose a different name.")) %
+				   bformat(
+				       _("The game %s is already running. Please choose a different name.") ,
 				    g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(game.name))
-				      .str());
+				      );
 			}
 		}
 	}
@@ -483,7 +483,7 @@ void InternetLobby::clicked_hostgame() {
 				do {
 					/** TRANSLATORS: This is shown for multiplayer games when no host */
 					/** TRANSLATORS: server to connect to has been specified yet. */
-					servername_ui = (boost::format(_("unnamed %u")) % i++).str();
+					servername_ui = bformat(_("unnamed %u") , i++);
 				} while (servername_ui == game.name);
 			} else if (game.name == servername_ui) {
 				change_servername();

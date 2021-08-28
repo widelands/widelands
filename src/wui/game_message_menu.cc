@@ -524,7 +524,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		button.set_perm_pressed(true);
 		message_filter_ = msgtype;
 
-		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
+		/** TRANSLATORS: %1, is a tooltip, %2, is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
 		   _("Show all messages"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll),
@@ -626,10 +626,10 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * message.
 			    * DO NOT omit the placeholder in your translation.
 			    */
-			   (boost::format(ngettext("Restore the selected %d message",
-			                           "Restore the selected %d messages", no_selections)) %
+			   bformat(ngettext("Restore the selected %d message",
+			                           "Restore the selected %d messages", no_selections)) ,
 			    no_selections)
-			      .str();
+			      ;
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Restore selected message");
@@ -642,10 +642,10 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * message.
 			    * DO NOT omit the placeholder in your translation.
 			    */
-			   (boost::format(ngettext("Archive the selected %d message",
-			                           "Archive the selected %d messages", no_selections)) %
+			   bformat(ngettext("Archive the selected %d message",
+			                           "Archive the selected %d messages", no_selections)) ,
 			    no_selections)
-			      .str();
+			      ;
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Archive selected message");

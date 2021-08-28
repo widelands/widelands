@@ -237,7 +237,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game,
 	if (nr_animations < 1) {
 		throw GameDataError("No battle animations for %s found!", animation_name.c_str());
 	}
-	uint32_t i = game.logic_rand() % nr_animations;
+	uint32_t i = game.logic_rand() , nr_animations;
 	for (const auto& pair : *animations) {
 		if (pair.second.matches(soldier)) {
 			if (i == 0) {
@@ -1492,23 +1492,23 @@ void Soldier::battle_update(Game& game, State&) {
 				BaseImmovable const* const immovable_dest = map[dest].get_immovable();
 
 				const std::string messagetext =
-				   (boost::format("The game engine has encountered a logic error. The %s "
+				   bformat("The game engine has encountered a logic error. The %s "
 				                  "#%u of player %u could not find a way from (%i, %i) "
 				                  "(with %s immovable) to the opponent (%s #%u of player "
 				                  "%u) at (%i, %i) (with %s immovable). The %s will now "
 				                  "desert (but will not be executed). Strange things may "
 				                  "happen. No solution for this problem has been "
 				                  "implemented yet. (bug #536066) (The game has been "
-				                  "paused.)") %
-				    descr().descname().c_str() % serial() %
-				    static_cast<unsigned int>(owner().player_number()) % get_position().x %
-				    get_position().y %
-				    (immovable_position ? immovable_position->descr().descname().c_str() : ("no")) %
-				    opponent.descr().descname().c_str() % opponent.serial() %
-				    static_cast<unsigned int>(opponent.owner().player_number()) % dest.x % dest.y %
-				    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no")) %
+				                  "paused.)" ,
+				    descr().descname().c_str() , serial() ,
+				    static_cast<unsigned int>(owner().player_number()) , get_position().x ,
+				    get_position().y ,
+				    (immovable_position ? immovable_position->descr().descname().c_str() : ("no") ,
+				    opponent.descr().descname().c_str() , opponent.serial() ,
+				    static_cast<unsigned int>(opponent.owner().player_number()) , dest.x , dest.y ,
+				    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no") ,
 				    descr().descname().c_str())
-				      .str();
+				      ;
 				get_owner()->add_message(
 				   game, std::unique_ptr<Message>(
 				            new Message(Message::Type::kGameLogic, game.get_gametime(),

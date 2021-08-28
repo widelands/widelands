@@ -429,10 +429,10 @@ void ProductionSite::format_statistics_string() {
 	// as a string and persists them into a string for reuse when the class is
 	// asked for the statistics string. However this string should only then be constructed.
 
-	// boost::format would treat uint8_t as char
+	// bformat would treat uint8_t as char
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = StyleManager::color_tag(
-	   (boost::format(_("%i%%")) % percent).str(),
+	   bformat(_("%i%%") , percent),
 	   (percent < 33) ? g_style_manager->building_statistics_style().low_color() :
 	   (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
                        g_style_manager->building_statistics_style().high_color());
@@ -456,7 +456,7 @@ void ProductionSite::format_statistics_string() {
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % StyleManager::color_tag(trend, color)).str();
+		   bformat("%s\u2009%s" , perc_str , StyleManager::color_tag(trend, color));
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
@@ -1168,7 +1168,7 @@ void ProductionSite::update_actual_statistics(Duration duration, const bool prod
 	const Duration past_duration = kStatsEntireDuration - duration;
 	actual_percent_ = (actual_percent_ * past_duration.get() + produced * duration.get() * 1000) /
 	                  kStatsEntireDuration.get();
-	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
+	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 ,
 }
 
 }  // namespace Widelands

@@ -31,8 +31,7 @@ ScopedTimer::ScopedTimer(const std::string& message, bool v) : message_(message)
 ScopedTimer::~ScopedTimer() {
 	if ((!only_verbose_ || g_verbose) && !message_.empty()) {
 		uint32_t ms_in_existance = SDL_GetTicks() - startime_;
-		const std::string logmessage = (boost::format(message_) % ms_in_existance).str();
-		log_info("%s\n", logmessage.c_str());
+		log_info("%s", bformat(message_, ms_in_existance).c_str());
 	}
 }
 

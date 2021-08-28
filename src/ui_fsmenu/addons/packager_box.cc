@@ -133,27 +133,27 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			}
 			my_maps_.add(
 			   entry.first.localized_name, entry.first.filename, nullptr, false,
-			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+			   bformat("%s<br>%s<br>%s<br>%s<br>%s" ,
 			    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			       .as_font_tag(entry.first.filename) %
-			    (boost::format(_("Name: %s")) %
+			       .as_font_tag(entry.first.filename) ,
+			    bformat(_("Name: %s") ,
 			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(entry.first.localized_name))
-			       .str() %
-			    (boost::format(_("Size: %s")) %
+			        ,
+			    bformat(_("Size: %s") ,
 			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(
-			           (boost::format(_("%1$u×%2$u")) % entry.first.width % entry.first.height).str()))
-			       .str() %
-			    (boost::format(_("Players: %s")) %
+			           bformat(_("%1$u×%2$u") , entry.first.width , entry.first.height)))
+			        ,
+			    bformat(_("Players: %s") ,
 			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(std::to_string(entry.first.nrplayers)))
-			       .str() %
-			    (boost::format(_("Description: %s")) %
+			        ,
+			    bformat(_("Description: %s") ,
 			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(entry.first.description))
-			       .str())
-			      .str());
+			       )
+			      );
 		}
 	}
 	rebuild_dirstruct(dynamic_cast<AddOns::MapsAddon*>(a));
@@ -271,11 +271,11 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		UI::WLMessageBox mbox(
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
-            (boost::format(
-		          _("Do you really want to delete the directory ‘%s’ and all its contents?")) %
+            bformat(
+		          _("Do you really want to delete the directory ‘%s’ and all its contents?") ,
 		       select.back())
-		         .str() :
-            (boost::format(_("Do you really want to delete the map ‘%s’?")) % selected_map).str(),
+		          :
+            bformat(_("Do you really want to delete the map ‘%s’?") , selected_map),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

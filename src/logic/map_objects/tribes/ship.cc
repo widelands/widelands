@@ -493,7 +493,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 				if (dir > 0) {
 					unsigned int delta =
-					   std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
+					   std::min(prob[dir], dirs[(dir , 6) + 1] + dirs[1 + ((dir - 1) , 6)]);
 					prob[dir] -= delta;
 				}
 
@@ -505,7 +505,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				return;
 			}
 
-			unsigned int rnd = game.logic_rand() % totalprob;
+			unsigned int rnd = game.logic_rand() , totalprob;
 			Direction dir = 0;
 			while (rnd >= prob[dir]) {
 				rnd -= prob[dir];
@@ -1055,10 +1055,10 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
-	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
+	      (lastdock_.is_set()) ? bformat("%u (%d x %d)" , lastdock_.serial() ,
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].x ,
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	                                .str()
+	                                
 	                                .c_str() :
                                 "-");
 	if (destination_) {
@@ -1082,10 +1082,10 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
 		      shipping_item.object_.get(egbase)->descr().name().c_str(),
 		      (shipping_item.destination_dock_.is_set()) ?
-               (boost::format("%u (%d x %d)") % shipping_item.destination_dock_.serial() %
-		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x %
+               bformat("%u (%d x %d)" , shipping_item.destination_dock_.serial() ,
+		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x ,
 		          shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y)
-		            .str()
+		            
 		            .c_str() :
                "-");
 	}

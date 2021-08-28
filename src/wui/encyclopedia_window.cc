@@ -144,7 +144,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 		             err.what());
 		UI::WLMessageBox wmb(
 		   &parent, UI::WindowStyle::kWui, _("Error!"),
-		   (boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),
+		   bformat("Error loading script for encyclopedia:\n%s" , err.what()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}

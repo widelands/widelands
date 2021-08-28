@@ -903,8 +903,8 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
 			shortcuts_.emplace(
 			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
-			                           (boost::format("fastplace_%i") % off).str(), [off]() {
-				                           return (boost::format(_("Fastplace #%i")) % off).str();
+			                           bformat("fastplace_%i" , off), [off]() {
+				                           return bformat(_("Fastplace #%i") , off);
 			                           }));
 		}
 	}

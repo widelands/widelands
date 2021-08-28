@@ -921,13 +921,13 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		// during winter time freeze. We can consider rephrasing it after v1.0.
 		UI::WLMessageBox m(
 		   error_message_parent, UI::WindowStyle::kFsMenu, _("Error"),
-		   (boost::format(
+		   bformat(
 		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
 		         "this problem to help us improve Widelands. You will find related messages in the "
 		         "standard output (stdout.txt on Windows). You are using build %2$s "
-		         "(%3$s).\nPlease add this information to your report.")) %
-		    e.what() % build_id() % build_type())
-		      .str(),
+		         "(%3$s).\nPlease add this information to your report.") ,
+		    e.what() , build_id() , build_type())
+		      ,
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
@@ -958,7 +958,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		}
 
 		Notifications::publish(
-		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+		   UI::NoteLoadingMessage(bformat(_("Loading map “%s”…") , filename)));
 		eia.load(filename);
 
 		egbase.postload_addons();

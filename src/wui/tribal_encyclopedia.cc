@@ -55,7 +55,7 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
 		   &parent, UI::WindowStyle::kWui, _("Error!"),
-		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
+		   bformat("Error loading script for tribal encyclopedia:\n%s" , err.what()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}

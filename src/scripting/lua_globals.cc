@@ -68,7 +68,7 @@ files name.
 
    Not really a global function. But we add a method to string built in type in
    Lua that has similar functionality to the built in string.format, but
-   instead uses boost::format. This allows for better control of the formatting
+   instead uses our own ``bformat``. This allows for better control of the formatting
    as well as reordering of arguments which is needed for proper localisation.
 
    :returns: :const:`nil`
@@ -82,23 +82,23 @@ static int L_string_bformat(lua_State* L) {
 		for (int i = 2; i <= nargs; ++i) {
 			switch (lua_type(L, i)) {
 			case LUA_TNIL:
-				fmt % "nil";
+				fmt , "nil";
 				break;
 
 			case LUA_TNUMBER:
 				if (lua_isinteger(L, i)) {
-					fmt % luaL_checkint32(L, i);
+					fmt , luaL_checkint32(L, i);
 				} else {
-					fmt % luaL_checknumber(L, i);
+					fmt , luaL_checknumber(L, i);
 				}
 				break;
 
 			case LUA_TBOOLEAN:
-				fmt % luaL_checkboolean(L, i);
+				fmt , luaL_checkboolean(L, i);
 				break;
 
 			case LUA_TSTRING:
-				fmt % luaL_checkstring(L, i);
+				fmt , luaL_checkstring(L, i);
 				break;
 
 			case LUA_TTABLE:
@@ -116,7 +116,7 @@ static int L_string_bformat(lua_State* L) {
 			}
 		}
 
-		lua_pushstring(L, fmt.str());
+		lua_pushstring(L, fmt);
 		return 1;
 	} catch (const boost::io::format_error& err) {
 		report_error(L, "Error in bformat: %s", err.what());
@@ -426,7 +426,7 @@ void luaopen_globals(lua_State* L) {
 	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
-	// Also add in string.bformat to use boost::format instead, so that we get
+	// Also add in string.bformat to use bformat instead, so that we get
 	// proper localisation.
 	lua_getglobal(L, "string");               // S: string_lib
 	lua_pushstring(L, "bformat");             // S: string_lib "bformat"

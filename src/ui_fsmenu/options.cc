@@ -464,7 +464,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		                      resolutions_[i].yres == cur_win_res_y;
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
+		   bformat(_("%1, x %2%") , resolutions_[i].xres , resolutions_[i].yres), i,
 		   nullptr, selected);
 	}
 
@@ -475,7 +475,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		resolutions_[entry].yres = cur_win_res_y;
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr,
+		   bformat(_("%1, x %2%") , cur_win_res_x , cur_win_res_y), entry, nullptr,
 		   true);
 	}
 
@@ -669,12 +669,12 @@ void Options::update_language_stats() {
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */
-					   (boost::format(_("The translation into %s is complete.")) % entry.descname).str();
+					   bformat(_("The translation into %s is complete.") , entry.descname);
 				} else {
-					/** TRANSLATORS: %1% = language name, %2% = percentage */
-					message = (boost::format(_("The translation into %1% is %2%%% complete.")) %
-					           entry.descname % percent)
-					             .str();
+					/** TRANSLATORS: %1, = language name, %2, = percentage */
+					message = bformat(_("The translation into %1, is %2%%, complete.") ,
+					           entry.descname , percent)
+					             ;
 				}
 			} catch (...) {
 			}
@@ -686,9 +686,9 @@ void Options::update_language_stats() {
 	// will catch up with the work later.
 	if (percent <= 90) {
 		message = message + " " +
-		          (boost::format(_("If you wish to help us translate, please visit %s")) %
+		          bformat(_("If you wish to help us translate, please visit %s") ,
 		           "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>")
-		             .str();
+		             ;
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
 	translation_info_.set_text(

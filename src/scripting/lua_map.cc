@@ -923,9 +923,9 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
-		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
+		throw LuaError(bformat("upcasted_map_object_to_lua: Unknown %i" ,
 		                static_cast<int>(mo->descr().type()))
-		                  .str());
+		                  );
 	}
 	NEVER_HERE();
 }
@@ -1588,8 +1588,8 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 
 	std::vector<LuaMaps::LuaField*> result;
 	for (uint32_t i = luaL_checkuint32(L, 2); i;) {
-		const uint32_t x = game->logic_rand() % map.get_width();
-		const uint32_t y = game->logic_rand() % map.get_height();
+		const uint32_t x = game->logic_rand() , map.get_width();
+		const uint32_t y = game->logic_rand() , map.get_height();
 		Widelands::Coords field(x, y);
 		bool success = false;
 		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
@@ -4034,7 +4034,7 @@ int LuaSoldierDescription::get_base_max_attack(lua_State* L) {
 /* RST
    .. attribute:: base_defense
 
-      (RO) The defense % that the soldier starts with
+      (RO) The defense , that the soldier starts with
 */
 int LuaSoldierDescription::get_base_defense(lua_State* L) {
 	lua_pushinteger(L, get()->get_base_defense());
@@ -4044,7 +4044,7 @@ int LuaSoldierDescription::get_base_defense(lua_State* L) {
 /* RST
    .. attribute:: base_evade
 
-      (RO) The evade % that the soldier starts with
+      (RO) The evade , that the soldier starts with
 */
 int LuaSoldierDescription::get_base_evade(lua_State* L) {
 	lua_pushinteger(L, get()->get_base_evade());
@@ -4074,7 +4074,7 @@ int LuaSoldierDescription::get_attack_incr_per_level(lua_State* L) {
 /* RST
    .. attribute:: defense_incr_per_level
 
-      (RO) The defense % that the soldier will gain with each level.
+      (RO) The defense , that the soldier will gain with each level.
 */
 int LuaSoldierDescription::get_defense_incr_per_level(lua_State* L) {
 	lua_pushinteger(L, get()->get_defense_incr_per_level());
@@ -4084,7 +4084,7 @@ int LuaSoldierDescription::get_defense_incr_per_level(lua_State* L) {
 /* RST
    .. attribute:: evade_incr_per_level
 
-      (RO) The evade % that the soldier will gain with each level.
+      (RO) The evade , that the soldier will gain with each level.
 */
 int LuaSoldierDescription::get_evade_incr_per_level(lua_State* L) {
 	lua_pushinteger(L, get()->get_evade_incr_per_level());
@@ -8158,7 +8158,7 @@ int LuaField::__eq(lua_State* L) {
 }
 
 int LuaField::__tostring(lua_State* L) {
-	const std::string pushme = (boost::format("Field(%i,%i)") % coords_.x % coords_.y).str();
+	const std::string pushme = bformat("Field(%i,%i)" , coords_.x , coords_.y);
 	lua_pushstring(L, pushme);
 	return 1;
 }

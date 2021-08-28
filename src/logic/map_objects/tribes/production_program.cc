@@ -454,18 +454,18 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
 	 * '%s' */
-	std::string result = (boost::format(_("the economy needs the ware ‘%s’")) %
+	std::string result = bformat(_("the economy needs the ware ‘%s’") ,
 	                      descriptions.get_ware_descr(ware_type)->descname())
-	                        .str();
+	                        ;
 	return result;
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(
    const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
 	 * ware '%s' */
-	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’")) %
+	std::string result = bformat(_("the economy doesn’t need the ware ‘%s’") ,
 	                      descriptions.get_ware_descr(ware_type)->descname())
-	                        .str();
+	                        ;
 	return result;
 }
 
@@ -476,9 +476,9 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
 	 * '%s' */
-	std::string result = (boost::format(_("the economy needs the worker ‘%s’")) %
+	std::string result = bformat(_("the economy needs the worker ‘%s’") ,
 	                      descriptions.get_worker_descr(worker_type)->descname())
-	                        .str();
+	                        ;
 	return result;
 }
 
@@ -486,9 +486,9 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negati
    const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... */
 	/** TRANSLATORS:      ... because the economy doesn’t need the worker '%s' */
-	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’")) %
+	std::string result = bformat(_("the economy doesn’t need the worker ‘%s’") ,
 	                      descriptions.get_worker_descr(worker_type)->descname())
-	                        .str();
+	                        ;
 	return result;
 }
 
@@ -536,13 +536,13 @@ ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descripti
 		   /** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
 		   /** TRANSLATORS:    %1$i = "3" */
 		   /** TRANSLATORS:    %2$s = "water" */
-		   (boost::format(_("%1$ix %2$s")) % static_cast<unsigned int>(group.second) % condition)
-		      .str();
+		   bformat(_("%1$ix %2$s") , static_cast<unsigned int>(group.second) , condition)
+		      ;
 	}
 
 	std::string result =
 	   /** TRANSLATORS: %s is a list of wares*/
-	   (boost::format(_("the building has the following wares: %s")) % condition).str();
+	   bformat(_("the building has the following wares: %s") , condition);
 	return result;
 }
 
@@ -560,13 +560,13 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation(
 		   /** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
 		   /** TRANSLATORS:    %1$i = "3" */
 		   /** TRANSLATORS:    %2$s = "water" */
-		   (boost::format(_("%1$ix %2$s")) % static_cast<unsigned int>(group.second) % condition)
-		      .str();
+		   bformat(_("%1$ix %2$s") , static_cast<unsigned int>(group.second) , condition)
+		      ;
 	}
 
 	std::string result =
 	   /** TRANSLATORS: %s is a list of wares*/
-	   (boost::format(_("the building doesn’t have the following wares: %s")) % condition).str();
+	   bformat(_("the building doesn’t have the following wares: %s") , condition);
 	return result;
 }
 
@@ -721,27 +721,27 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		switch (result_) {
 		case ProgramResult::kFailed: {
 			/** TRANSLATORS: "Did not start working because the economy needs the ware '%s'" */
-			result_string = (boost::format(_("Did not start %1$s because %2$s")) %
-			                 ps.top_state().program->descname() % condition_string)
-			                   .str();
+			result_string = bformat(_("Did not start %1$s because %2$s") ,
+			                 ps.top_state().program->descname() , condition_string)
+			                   ;
 		} break;
 		case ProgramResult::kCompleted: {
 			/** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
-			result_string = (boost::format(_("Completed %1$s because %2$s")) %
-			                 ps.top_state().program->descname() % condition_string)
-			                   .str();
+			result_string = bformat(_("Completed %1$s because %2$s") ,
+			                 ps.top_state().program->descname() , condition_string)
+			                   ;
 		} break;
 		case ProgramResult::kSkipped: {
 			/** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
-			result_string = (boost::format(_("Skipped %1$s because %2$s")) %
-			                 ps.top_state().program->descname() % condition_string)
-			                   .str();
+			result_string = bformat(_("Skipped %1$s because %2$s") ,
+			                 ps.top_state().program->descname() , condition_string)
+			                   ;
 		} break;
 		case ProgramResult::kNone: {
 			// TODO(GunChleoc): Same as skipped - is this on purpose?
-			result_string = (boost::format(_("Skipped %1$s because %2$s")) %
-			                 ps.top_state().program->descname() % condition_string)
-			                   .str();
+			result_string = bformat(_("Skipped %1$s because %2$s") ,
+			                 ps.top_state().program->descname() , condition_string)
+			                   ;
 		}
 		}
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
@@ -914,7 +914,7 @@ Calls a program of the productionsite's main worker. Example:
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm/scythe priority:70% allow_multiple",
+         "playsound=sound/farm/scythe priority:70, allow_multiple",
          "animate=harvest duration:10s",
          "callobject=harvest",
          "animate=gather duration:4s",
@@ -972,7 +972,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		descr->add_created_attribute(attribute_info);
 	}
 	for (const std::string& resourcename : workerprogram->collected_resources()) {
-		// Workers always collect 100% of the resource, and then find no more
+		// Workers always collect 100, of the resource, and then find no more
 		descr->add_collected_resource(resourcename, 100, 0);
 	}
 	for (const std::string& resourcename : workerprogram->created_resources()) {
@@ -1211,8 +1211,8 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				   /** TRANSLATORS: For this example, this is what's in the place holders: */
 				   /** TRANSLATORS:    %1$i = "3" */
 				   /** TRANSLATORS:    %2$s = "water" */
-				   (boost::format(_("%1$ix %2$s")) % static_cast<unsigned int>(count) % ware_string)
-				      .str();
+				   bformat(_("%1$ix %2$s") , static_cast<unsigned int>(count) , ware_string)
+				      ;
 			}
 			group_list.push_back(ware_string);
 		}
@@ -1221,9 +1221,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   /** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 		   /** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
 		    */
-		   (boost::format(ngettext("%s is missing", "%s are missing", nr_missing_groups)) %
+		   bformat(ngettext("%s is missing", "%s are missing", nr_missing_groups)) ,
 		    i18n::localize_list(group_list, i18n::ConcatenateWith::AND))
-		      .str();
+		      ;
 
 		std::string result_string =
 		   /** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
@@ -1235,9 +1235,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   /** TRANSLATORS: on a development build if you can, and let us know if there are any issues
 		    */
 		   /** TRANSLATORS: we need to address for your language. */
-		   (boost::format(_("Did not start %1$s because %2$s")) % ps.top_state().program->descname() %
+		   bformat(_("Did not start %1$s because %2$s") , ps.top_state().program->descname() ,
 		    is_missing_string)
-		      .str();
+		      ;
 
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {
@@ -1318,9 +1318,9 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
 			/** TRANSLATORS:    %%1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Coal" */
-			ware_descname = (boost::format(_("%1$ix %2$s")) %
-			                 static_cast<unsigned int>(item_pair.second) % ware_descname)
-			                   .str();
+			ware_descname = bformat(_("%1$ix %2$s") ,
+			                 static_cast<unsigned int>(item_pair.second) , ware_descname)
+			                   ;
 		}
 		ware_descnames.push_back(ware_descname);
 	}
@@ -1329,7 +1329,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	const std::string result_string =
 	   /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 	      wares. */
-	   (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
+	   bformat(ngettext("Produced %s", "Produced %s", count)) , ware_list);
 	if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 	    ps.descr().out_of_resource_heading().empty()) {
 		ps.set_production_result(result_string);
@@ -1365,7 +1365,7 @@ then leave the site looking for employment. The produced workers are of the type
          "return=skipped unless economy needs atlanteans_horse",
          "consume=corn water",
          "sleep=duration:15s",
-         "playsound=sound/farm/horse priority:50% allow_multiple",
+         "playsound=sound/farm/horse priority:50, allow_multiple",
          "animate=working duration:15s",
          -- Create 2 horses
          "recruit=atlanteans_horse:2"
@@ -1401,9 +1401,9 @@ void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) cons
 			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
 			/** TRANSLATORS:    %1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Ox" */
-			worker_descname = (boost::format(_("%1$ix %2$s")) %
-			                   static_cast<unsigned int>(item_pair.second) % worker_descname)
-			                     .str();
+			worker_descname = bformat(_("%1$ix %2$s") ,
+			                   static_cast<unsigned int>(item_pair.second) , worker_descname)
+			                     ;
 		}
 		worker_descnames.push_back(worker_descname);
 	}
@@ -1412,7 +1412,7 @@ void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) cons
 	const std::string result_string =
 	   /** TRANSLATORS: %s is a list of workers. String is fetched according to total amount of
 	      workers. */
-	   (boost::format(ngettext("Recruited %s", "Recruited %s", count)) % unit_string).str();
+	   bformat(ngettext("Recruited %s", "Recruited %s", count)) , unit_string);
 	ps.set_production_result(result_string);
 }
 
@@ -1452,19 +1452,19 @@ mine
          "consume=ration",
          "sleep=duration:45s",
          "animate=working duration:20s",
-          -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
-          -- After that, there's still a chance of 5% for finding iron.
-          -- If this fails, the workers still have a chance of 17% of gaining experience.
-         "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+          -- Search radius of 2 for iron. Will always find iron until 33.33, of it has been dug up.
+          -- After that, there's still a chance of 5, for finding iron.
+          -- If this fails, the workers still have a chance of 17, of gaining experience.
+         "mine=resource_iron radius:2 yield:33.33, when_empty:5, experience_on_fail:17%",
          "produce=iron_ore"
      }
 
      actions = {
          "sleep=duration:20s",
          "animate=working duration:20s",
-          -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
-          -- After that, there's still a chance of 65% for finding water.
-         "mine=resource_water radius:1 yield:100% when_empty:65%",
+          -- Search radius of 1 for water. Will always find water until 100, of it has been drawn.
+          -- After that, there's still a chance of 65, for finding water.
+         "mine=resource_water radius:1 yield:100, when_empty:65%",
          "produce=water"
      }
 */
@@ -1576,7 +1576,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		//  second pass through nodes
 		assert(totalchance);
-		int32_t pick = game.logic_rand() % totalchance;
+		int32_t pick = game.logic_rand() , totalchance;
 
 		{
 			MapRegion<Area<FCoords>> mr(
@@ -1618,11 +1618,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (depleted_chance_ <= game.logic_rand() % math::k100PercentAsInt) {
+		if (depleted_chance_ <= game.logic_rand() , math::k100PercentAsInt) {
 
 			// Gain experience
 			if (experience_chance_ > 0 &&
-			    experience_chance_ >= game.logic_rand() % math::k100PercentAsInt) {
+			    experience_chance_ >= game.logic_rand() , math::k100PercentAsInt) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1872,7 +1872,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	ps.set_production_result(
 	   /** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
 	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
-	   (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
+	   bformat(_("Completed %s") , ps.top_state().program->descname()));
 
 	ts.training_successful(training_.attribute, current_level);
 
@@ -1924,7 +1924,7 @@ an immovable. Example:
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:barbarians_shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "playsound=sound/sawmill/sawmill priority:80, allow_multiple",
          "animate=work duration:500ms",
          "construct",
          "animate=work duration:5s",

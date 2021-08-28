@@ -165,7 +165,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                 0,
                 inner_w / 3,
                 mountains_label_.get_h(),
-                (boost::format(_("%i %%")) % mountainsval_).str(),
+                bformat(_("%i %%") , mountainsval_),
                 UI::Align::kCenter),
      island_mode_(this, panel_style_, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
@@ -368,7 +368,7 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 	nr_edit_box_changed();  // Update ID String
 }
 
-// If the the sum of our landmass is < 0% or > 100% change the mountain value.
+// If the the sum of our landmass is < 0, or > 100, change the mountain value.
 // If the mountain value gets out of range, change the other values.
 void MainMenuNewRandomMapPanel::normalize_landmass(ButtonId clicked_button) {
 	int32_t sum_without_mountainsval = waterval_ + landval_ + wastelandval_;
@@ -381,7 +381,7 @@ void MainMenuNewRandomMapPanel::normalize_landmass(ButtonId clicked_button) {
 		++mountainsval_;
 	}
 
-	// Compensate if mountainsval got above 100% / below 0%
+	// Compensate if mountainsval got above 100, / below 0,
 	while (mountainsval_ < 0) {
 		if (clicked_button != ButtonId::kWasteland && wastelandval_ > 0) {
 			wastelandval_ -= 5;
@@ -415,7 +415,7 @@ void MainMenuNewRandomMapPanel::normalize_landmass(ButtonId clicked_button) {
 	water_.set_value(waterval_);
 	land_.set_value(landval_);
 	wasteland_.set_value(wastelandval_);
-	mountains_.set_text((boost::format(_("%i %%")) % mountainsval_).str());
+	mountains_.set_text(bformat(_("%i %%") , mountainsval_));
 }
 
 void MainMenuNewRandomMapPanel::select_terrains_distribution() {
@@ -620,7 +620,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			for (unsigned p = 0; p < nr_players; ++p) {
 				sp->set_player_name(
 				   p, p == plnum ? _("Player") :
-                               (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
+                               bformat(_("Computer %u") , (p > plnum ? p : p + 1)));
 				sp->set_player_tribe(p, "", true);
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);

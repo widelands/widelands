@@ -57,12 +57,12 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
                        0,
                        180,
                        UI::PanelStyle::kFsMenu,
-                       (boost::format(_("In order to use a registered "
+                       bformat(_("In order to use a registered "
                                         "account, you need an account on the Widelands website. "
                                         "Please log in at %s and set an online "
-                                        "gaming password on your profile page.")) %
+                                        "gaming password on your profile page.") ,
                         "\n\nhttps://widelands.org/accounts/register/\n\n")
-                          .str()) {
+                          ) {
 	vbox1_.add_space(kMargin);
 	vbox1_.add(&ta_nickname_, UI::Box::Resizing::kExpandBoth);
 	vbox1_.add_space(kMargin);

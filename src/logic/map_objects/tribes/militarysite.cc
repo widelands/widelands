@@ -415,40 +415,40 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		if (capacity_ > stationed) {
 			*s = read_capacity_string(present, stationed, 0);
 			if (s->empty()) {
-				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
+				/** TRANSLATORS: %1, is the number of soldiers the plural refers to. %2, is the maximum
 				 * number of soldier slots in the building */
-				*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
-				      stationed % (capacity_ - stationed))
-				        .str();
+				*s = bformat(ngettext("%1, soldier (+%2%)", "%1, soldiers (+%2%)", stationed)) ,
+				      stationed , (capacity_ - stationed))
+				        ;
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 1);
 			if (s->empty()) {
 				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed)
-				        .str();
+				*s = bformat(ngettext("%1, soldier", "%1, soldiers", stationed)) , stationed)
+				        ;
 			}
 		}
 	} else {
 		if (capacity_ > stationed) {
 			*s = read_capacity_string(present, stationed, 2);
 			if (s->empty()) {
-				*s = (boost::format(
-				         /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-				            currently open soldier slots in the building. %3% is the maximum number of
+				*s = bformat(
+				         /** TRANSLATORS: %1, is the number of soldiers the plural refers to. %2, are
+				            currently open soldier slots in the building. %3, is the maximum number of
 				            soldier slots in the building */
-				         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
-				      present % (stationed - present) % (capacity_ - stationed))
-				        .str();
+				         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) ,
+				      present , (stationed - present) , (capacity_ - stationed))
+				        ;
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 3);
 			if (s->empty()) {
-				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
+				/** TRANSLATORS: %1, is the number of soldiers the plural refers to. %2, are currently
 				 * open soldier slots in the building */
-				*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
-				      present % (stationed - present))
-				        .str();
+				*s = bformat(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) ,
+				      present , (stationed - present))
+				        ;
 			}
 		}
 	}
