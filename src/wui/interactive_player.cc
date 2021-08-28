@@ -799,13 +799,6 @@ void InteractivePlayer::set_player_number(uint32_t const n) {
 	player_number_ = n;
 }
 
-/**
- * Cleanup any game-related data before loading a new game
- * while a game is currently playing.
- */
-void InteractivePlayer::cleanup_for_load() {
-}
-
 void InteractivePlayer::postload() {
 	InteractiveGameBase::postload();
 

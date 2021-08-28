@@ -1597,8 +1597,7 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "empire_builder",
-   carrier = "empire_carrier",
-   carrier2 = "empire_donkey",
+   carriers = {"empire_carrier", "empire_donkey"},
    geologist = "empire_geologist",
    scouts_house = "empire_scouts_house",
    soldier = "empire_soldier",

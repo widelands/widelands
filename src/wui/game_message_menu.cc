@@ -22,6 +22,7 @@
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "graphic/text_layout.h"
+#include "logic/game_data_error.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
@@ -654,4 +655,48 @@ void GameMessageMenu::update_archive_button_tooltip() {
 	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem),
 	   UI::PanelStyle::kWui));
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).message_menu_;
+			r.create();
+			assert(r.window);
+			GameMessageMenu& m = dynamic_cast<GameMessageMenu&>(*r.window);
+			m.think();  // Fills the list
+			if ((m.mode == Mode::kInbox) ^ (fr.unsigned_8() == 1)) {
+				m.toggle_mode();
+			}
+			m.filter_messages(static_cast<Widelands::Message::Type>(fr.unsigned_8()));
+			size_t nr_sel = fr.unsigned_32();
+			if (nr_sel) {
+				for (; nr_sel; --nr_sel) {
+					m.list->multiselect(fr.unsigned_32(), true);
+				}
+				m.list->multiselect(fr.unsigned_32(), true);
+			}
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Messages Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("messages menu: %s", e.what());
+	}
+}
+void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(mode == Mode::kInbox ? 1 : 0);
+	fw.unsigned_8(static_cast<uint8_t>(message_filter_));
+	const size_t nr_sel = list->selections().size();
+	fw.unsigned_32(nr_sel);
+	if (nr_sel) {
+		for (const uint32_t& s : list->selections()) {
+			fw.unsigned_32(s);
+		}
+		fw.unsigned_32(list->selection_index());
+	}
 }
