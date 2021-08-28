@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-16 02:36+0000\n"
+"POT-Creation-Date: 2021-08-25 02:35+0000\n"
 "PO-Revision-Date: 2021-08-13 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -47,7 +47,7 @@ msgstr "%1$s or %2$s"
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
-#: ../../src/logic/addons.cc:173
+#: ../../src/logic/addons.cc:191
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s,%2$s"
@@ -104,7 +104,7 @@ msgid ""
 msgstr "你的起始位置附近没有树木。因此，你会得到额外的资源来引导你的经济。 "
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:114
+#: ../../src/wui/game_message_menu.cc:71 ../../src/wui/game_summary.cc:114
 msgid "Status"
 msgstr "状态"
 
@@ -267,8 +267,8 @@ msgstr "十一月"
 msgid "Dec"
 msgstr "十二月"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -282,12 +282,12 @@ msgstr "主菜单"
 msgid "Tools"
 msgstr "工具"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -308,7 +308,7 @@ msgid "Redo"
 msgstr "重做"
 
 #: ../../src/editor/editorinteractive.cc:166
-#: ../../src/wui/buildingwindow.cc:418 ../../src/wui/interactive_player.cc:225
+#: ../../src/wui/buildingwindow.cc:419 ../../src/wui/interactive_player.cc:225
 msgid "Help"
 msgstr "帮助"
 
@@ -376,7 +376,7 @@ msgstr " 把地形高度设定为随机值"
 #: ../../src/editor/editorinteractive.cc:282
 #: ../../src/editor/tools/info_tool.cc:112
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
-#: ../../src/wui/minimap.cc:151
+#: ../../src/wui/minimap.cc:152
 msgid "Terrain"
 msgstr "地形"
 
@@ -477,10 +477,10 @@ msgstr "信息"
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -546,15 +546,15 @@ msgid ""
 "incompatible."
 msgstr "Widelands 不能读取文件 “%s\"。文件格式似乎不兼容。"
 
-#: ../../src/editor/editorinteractive.cc:546
+#: ../../src/editor/editorinteractive.cc:553
 msgid "Unsaved Map"
 msgstr "未保存的地图"
 
-#: ../../src/editor/editorinteractive.cc:547
+#: ../../src/editor/editorinteractive.cc:554
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "这个地图没有保存，您确定真的要退出吗？"
 
-#: ../../src/editor/editorinteractive.cc:916 ../../src/logic/addons.cc:48
+#: ../../src/editor/editorinteractive.cc:923 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
 #: ../../src/ui_fsmenu/addons/contact.cc:85
 #: ../../src/ui_fsmenu/addons/manager.cc:1294
@@ -570,7 +570,7 @@ msgstr "这个地图没有保存，您确定真的要退出吗？"
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/editor/editorinteractive.cc:918 ../../src/wlapplication.cc:1610
+#: ../../src/editor/editorinteractive.cc:925 ../../src/wlapplication.cc:1610
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -581,13 +581,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "发生错误，错误消息是： \n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息 （stdout.txt on Windows）。你正生成%2$s(%3$s)。\n请添加此信息到你的报告中。"
 
-#: ../../src/editor/editorinteractive.cc:954
+#: ../../src/editor/editorinteractive.cc:961
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "载入地图 “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:978
+#: ../../src/editor/editorinteractive.cc:985
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:142
@@ -596,7 +596,7 @@ msgid "No Name"
 msgstr "新地图"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:981
+#: ../../src/editor/editorinteractive.cc:988
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:112
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:539
 #: ../../src/logic/map.h:234 ../../src/ui_fsmenu/addons/packager.cc:367
@@ -604,7 +604,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../../src/editor/editorinteractive.cc:1005
+#: ../../src/editor/editorinteractive.cc:1012
 msgid "Loading world…"
 msgstr "载入广袤大地…"
 
@@ -655,8 +655,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -730,7 +730,7 @@ msgstr "%1%x%2%"
 #: ../../src/editor/tools/info_tool.cc:204
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:143
 #: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:141
-#: ../../src/wui/minimap.cc:140
+#: ../../src/wui/minimap.cc:141
 msgid "Map"
 msgstr "地图"
 
@@ -800,8 +800,8 @@ msgid "Current: %s"
 msgstr "当前：%s"
 
 #: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:241
-#: ../../src/ui_fsmenu/main.cc:1015 ../../src/wui/encyclopedia_window.cc:143
-#: ../../src/wui/tribal_encyclopedia.cc:56
+#: ../../src/ui_fsmenu/main.cc:1015 ../../src/wui/encyclopedia_window.cc:146
+#: ../../src/wui/tribal_encyclopedia.cc:57
 msgid "Error!"
 msgstr "错误！"
 
@@ -871,7 +871,7 @@ msgstr "确认"
 #: ../../src/ui_fsmenu/keyboard_options.cc:51
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
-#: ../../src/wui/economy_options_window.cc:665
+#: ../../src/wui/economy_options_window.cc:672
 #: ../../src/wui/game_main_menu_save_game.cc:87
 msgid "Cancel"
 msgstr "取消"
@@ -898,7 +898,7 @@ msgstr "点击玩家以删除"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/ui_fsmenu/addons/packager_box.cc:272
-#: ../../src/wui/economy_options_window.cc:666
+#: ../../src/wui/economy_options_window.cc:673
 #: ../../src/wui/load_or_save_game.cc:52
 msgid "Delete"
 msgstr "删除"
@@ -1378,8 +1378,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1609,70 +1609,70 @@ msgstr "胜利条件"
 msgid "Starting Condition"
 msgstr "起始条件"
 
-#: ../../src/logic/addons.cc:88
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:143
+#: ../../src/logic/addons.cc:161
 msgid "No conflicts"
 msgstr "没有冲突"
 
-#: ../../src/logic/addons.cc:148
+#: ../../src/logic/addons.cc:166
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (预期版本 %2$s, 找到 %3$s)"
 
-#: ../../src/logic/addons.cc:153 ../../src/logic/addons.cc:193
+#: ../../src/logic/addons.cc:171 ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (预期版本 %3$s,找到 %4$s)"
 
-#: ../../src/logic/addons.cc:159
+#: ../../src/logic/addons.cc:177
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u 错误的附件版本: %2$s"
 
-#: ../../src/logic/addons.cc:178
+#: ../../src/logic/addons.cc:196
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$u 缺少附件: %2$s"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (缺少)"
 
-#: ../../src/logic/addons.cc:188
+#: ../../src/logic/addons.cc:206
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (缺少)"
 
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:216
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s 和 %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:200
+#: ../../src/logic/addons.cc:218
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] ""
 
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
 msgstr[0] ""
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:218
+#: ../../src/logic/addons.cc:236
 msgid "None"
 msgstr "没有"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (版本 %3$s)"
@@ -1690,11 +1690,11 @@ msgstr "正在加载世界和部落…"
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "清理后加载: 地图对象 (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:563
+#: ../../src/logic/editor_game_base.cc:566
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "清理后加载: 玩家 (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:566
+#: ../../src/logic/editor_game_base.cc:569
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "清理后加载: 地图 (3/3)"
 
@@ -2045,7 +2045,7 @@ msgstr "(已停止)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:435
-#: ../../src/wui/building_statistics_menu.cc:693
+#: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -2124,7 +2124,7 @@ msgstr "一艘探险船正等待着你的命令。"
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
 #: ../../src/logic/map_objects/tribes/ship.cc:1019
-#: ../../src/wui/seafaring_statistics_menu.cc:239
+#: ../../src/wui/seafaring_statistics_menu.cc:240
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "航运"
@@ -2133,7 +2133,7 @@ msgstr "航运"
 #. but has
 #. * nothing to do.
 #: ../../src/logic/map_objects/tribes/ship.cc:1022
-#: ../../src/wui/seafaring_statistics_menu.cc:237
+#: ../../src/wui/seafaring_statistics_menu.cc:238
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "空的"
@@ -2141,7 +2141,7 @@ msgstr "空的"
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:1026
-#: ../../src/wui/seafaring_statistics_menu.cc:241
+#: ../../src/wui/seafaring_statistics_menu.cc:242
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "等待"
@@ -2149,14 +2149,14 @@ msgstr "等待"
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:1030
-#: ../../src/wui/seafaring_statistics_menu.cc:243
+#: ../../src/wui/seafaring_statistics_menu.cc:244
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "侦察"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:1034
-#: ../../src/wui/seafaring_statistics_menu.cc:245
+#: ../../src/wui/seafaring_statistics_menu.cc:246
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "找到港口空间"
@@ -2185,8 +2185,8 @@ msgstr "船舶"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
-#: ../../src/wui/economy_options_window.cc:72
-#: ../../src/wui/general_statistics_menu.cc:151
+#: ../../src/wui/economy_options_window.cc:77
+#: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:323
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:265
@@ -2197,8 +2197,8 @@ msgstr "物品"
 #. worker. If you
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:192
-#: ../../src/wui/economy_options_window.cc:73
-#: ../../src/wui/general_statistics_menu.cc:142
+#: ../../src/wui/economy_options_window.cc:78
+#: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:112
 #: ../../src/wui/warehousewindow.cc:269
 msgid "Workers"
@@ -2208,8 +2208,8 @@ msgstr "劳动者"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:199
 #: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
-#: ../../src/wui/general_statistics_menu.cc:147
-#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:195
+#: ../../src/wui/general_statistics_menu.cc:148
+#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:196
 msgid "Buildings"
 msgstr "建筑物"
 
@@ -2400,7 +2400,7 @@ msgid "Building restrictions"
 msgstr "建筑限制"
 
 #: ../../src/map_io/map_saver.cc:202
-#: ../../src/map_io/widelands_map_loader.cc:304 ../../src/wui/minimap.cc:173
+#: ../../src/map_io/widelands_map_loader.cc:304 ../../src/wui/minimap.cc:174
 msgid "Flags"
 msgstr "旗帜"
 
@@ -2448,7 +2448,7 @@ msgstr "脚本"
 #: ../../src/map_io/map_saver.cc:306
 #: ../../src/map_io/widelands_map_loader.cc:407
 #: ../../src/wlapplication_options.cc:463
-#: ../../src/wui/game_objectives_menu.cc:41
+#: ../../src/wui/game_objectives_menu.cc:42
 #: ../../src/wui/interactive_player.cc:208
 msgid "Objectives"
 msgstr "目标"
@@ -3186,7 +3186,7 @@ msgid_plural "%d fields"
 msgstr[0] "%d 领域"
 
 #: ../../src/ui_basic/window.cc:108 ../../src/ui_fsmenu/about.cc:41
-#: ../../src/wui/watchwindow.cc:74
+#: ../../src/wui/watchwindow.cc:77
 msgid "Close"
 msgstr "关闭"
 
@@ -4322,7 +4322,7 @@ msgstr "%1$s+%2$u"
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:187
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:374 ../../src/wui/stock_menu.cc:36
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:374 ../../src/wui/stock_menu.cc:37
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
@@ -4759,7 +4759,7 @@ msgstr "保存游戏"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "此游戏是保存的游戏，胜利条件已经设置。"
 
-#: ../../src/ui_fsmenu/launch_game.cc:322
+#: ../../src/ui_fsmenu/launch_game.cc:321
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -4863,7 +4863,7 @@ msgid "Online Game Settings"
 msgstr "在线游戏设置"
 
 #: ../../src/ui_fsmenu/login_box.cc:45
-#: ../../src/wui/economy_options_window.cc:664
+#: ../../src/wui/economy_options_window.cc:671
 msgid "Save"
 msgstr "保存"
 
@@ -5608,18 +5608,18 @@ msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
 msgid "Tutorial"
 msgstr "教程"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "作者"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "作者"
@@ -5886,17 +5886,17 @@ msgid "Toggle Overlapping Workareas"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:434
-#: ../../src/wui/general_statistics_menu.cc:47
+#: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
 msgstr "常规统计"
 
 #: ../../src/wlapplication_options.cc:439
-#: ../../src/wui/ware_statistics_menu.cc:104
+#: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "物品统计"
 
 #: ../../src/wlapplication_options.cc:444
-#: ../../src/wui/building_statistics_menu.cc:54
+#: ../../src/wui/building_statistics_menu.cc:55
 msgid "Building Statistics"
 msgstr "建筑统计"
 
@@ -5910,7 +5910,7 @@ msgid "Soldier Statistics"
 msgstr "士兵统计"
 
 #: ../../src/wlapplication_options.cc:459
-#: ../../src/wui/seafaring_statistics_menu.cc:49
+#: ../../src/wui/seafaring_statistics_menu.cc:50
 msgid "Seafaring Statistics"
 msgstr "航海统计数据"
 
@@ -6393,153 +6393,153 @@ msgstr "摧毁目标建筑而不是征服它"
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "健康：%1$u/%2$u 攻击：%3$u/%4$u 防御：%5$u/%6$u  闪避：%7$u/%8$u"
 
-#: ../../src/wui/building_statistics_menu.cc:67
+#: ../../src/wui/building_statistics_menu.cc:68
 msgid "(no building selected)"
 msgstr "（没有选中建筑）"
 
-#: ../../src/wui/building_statistics_menu.cc:72
+#: ../../src/wui/building_statistics_menu.cc:73
 msgid "Owned:"
 msgstr "拥有："
 
-#: ../../src/wui/building_statistics_menu.cc:77
+#: ../../src/wui/building_statistics_menu.cc:78
 msgid "Under construction:"
 msgstr "建设之中："
 
-#: ../../src/wui/building_statistics_menu.cc:93
+#: ../../src/wui/building_statistics_menu.cc:94
 msgid "Low productivity threshold:"
 msgstr "低生产率阈值："
 
-#: ../../src/wui/building_statistics_menu.cc:104
-#: ../../src/wui/building_statistics_menu.cc:123
-#: ../../src/wui/building_statistics_menu.cc:142
+#: ../../src/wui/building_statistics_menu.cc:105
+#: ../../src/wui/building_statistics_menu.cc:124
+#: ../../src/wui/building_statistics_menu.cc:143
 msgid "Show previous building"
 msgstr "显示上一栋建筑"
 
-#: ../../src/wui/building_statistics_menu.cc:113
-#: ../../src/wui/building_statistics_menu.cc:132
-#: ../../src/wui/building_statistics_menu.cc:151
+#: ../../src/wui/building_statistics_menu.cc:114
+#: ../../src/wui/building_statistics_menu.cc:133
+#: ../../src/wui/building_statistics_menu.cc:152
 msgid "Show next building"
 msgstr "显示下一栋建筑"
 
-#: ../../src/wui/building_statistics_menu.cc:207
+#: ../../src/wui/building_statistics_menu.cc:208
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
 msgstr "如果建筑物的生产率低于这个百分比，将被视为无产出的建筑物"
 
-#: ../../src/wui/building_statistics_menu.cc:338
+#: ../../src/wui/building_statistics_menu.cc:339
 msgid "Small buildings"
 msgstr "小型建筑"
 
-#: ../../src/wui/building_statistics_menu.cc:340
+#: ../../src/wui/building_statistics_menu.cc:341
 msgid "Medium buildings"
 msgstr "中型建筑"
 
-#: ../../src/wui/building_statistics_menu.cc:342
+#: ../../src/wui/building_statistics_menu.cc:343
 msgid "Big buildings"
 msgstr "大型建筑"
 
-#: ../../src/wui/building_statistics_menu.cc:344
+#: ../../src/wui/building_statistics_menu.cc:345
 msgid "Mines"
 msgstr "矿"
 
-#: ../../src/wui/building_statistics_menu.cc:346
+#: ../../src/wui/building_statistics_menu.cc:347
 msgid "Ports"
 msgstr "港口"
 
-#: ../../src/wui/building_statistics_menu.cc:702
+#: ../../src/wui/building_statistics_menu.cc:703
 msgid "Low productivity:"
 msgstr "低生产率："
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS: Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:711
-#: ../../src/wui/building_statistics_menu.cc:731
-#: ../../src/wui/building_statistics_menu.cc:733
+#: ../../src/wui/building_statistics_menu.cc:712
+#: ../../src/wui/building_statistics_menu.cc:732
+#: ../../src/wui/building_statistics_menu.cc:734
 #: ../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:722
+#: ../../src/wui/building_statistics_menu.cc:723
 msgid "Lacking soldiers:"
 msgstr "缺少士兵："
 
-#: ../../src/wui/buildingwindow.cc:200
+#: ../../src/wui/buildingwindow.cc:201
 msgid "Muted – click to unmute"
 msgstr "静音–单击取消静音"
 
-#: ../../src/wui/buildingwindow.cc:201
+#: ../../src/wui/buildingwindow.cc:202
 msgid "Mute this building’s messages"
 msgstr "把这栋建筑的信息调整为静默状态"
 
-#: ../../src/wui/buildingwindow.cc:206
+#: ../../src/wui/buildingwindow.cc:207
 msgid "All buildings of this type are muted – click to unmute"
 msgstr "此类型的所有建筑都已调整为静默状态 – 单击取消静默"
 
-#: ../../src/wui/buildingwindow.cc:210
+#: ../../src/wui/buildingwindow.cc:211
 msgid "Mute all buildings of this type"
 msgstr "将所有此类建筑调整为静默状态"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:274
+#: ../../src/wui/buildingwindow.cc:275
 msgid "Continue"
 msgstr "继续"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:276
+#: ../../src/wui/buildingwindow.cc:277
 msgid "Stop"
 msgstr "停止"
 
-#: ../../src/wui/buildingwindow.cc:298
+#: ../../src/wui/buildingwindow.cc:299
 #, c-format
 msgid "Enhance to %s"
 msgstr "升级至 %s"
 
-#: ../../src/wui/buildingwindow.cc:302 ../../src/wui/fieldaction.cc:101
+#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/fieldaction.cc:101
 msgid "Construction costs:"
 msgstr "建设成本："
 
-#: ../../src/wui/buildingwindow.cc:320
+#: ../../src/wui/buildingwindow.cc:321
 msgid "Destroy"
 msgstr "摧毁"
 
-#: ../../src/wui/buildingwindow.cc:335
+#: ../../src/wui/buildingwindow.cc:336
 msgid "Dismantle"
 msgstr "拆除"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:339
 msgid "Returns:"
 msgstr "可回收："
 
-#: ../../src/wui/buildingwindow.cc:390 ../../src/wui/fieldaction.cc:524
-#: ../../src/wui/shipwindow.cc:141
+#: ../../src/wui/buildingwindow.cc:391 ../../src/wui/fieldaction.cc:524
+#: ../../src/wui/shipwindow.cc:144
 msgid "Show Debug Window"
 msgstr "显示调试窗口"
 
-#: ../../src/wui/buildingwindow.cc:399
+#: ../../src/wui/buildingwindow.cc:400
 msgid "Watch the scout"
 msgstr "观察侦察兵"
 
-#: ../../src/wui/buildingwindow.cc:406
+#: ../../src/wui/buildingwindow.cc:407
 msgid "Center view on this"
 msgstr "以此为视角中心"
 
-#: ../../src/wui/buildingwindow.cc:637
+#: ../../src/wui/buildingwindow.cc:638
 msgid "Hide work area"
 msgstr "隐藏工作区域"
 
-#: ../../src/wui/buildingwindow.cc:640
+#: ../../src/wui/buildingwindow.cc:641
 msgid "Show work area"
 msgstr "显示工作区域"
 
-#: ../../src/wui/buildingwindow.cc:665
+#: ../../src/wui/buildingwindow.cc:666
 #: ../../src/wui/constructionsitewindow.cc:374
 msgid "Start an expedition"
 msgstr "启动一次探险"
 
-#: ../../src/wui/buildingwindow.cc:669
+#: ../../src/wui/buildingwindow.cc:670
 msgid "Cancel the expedition"
 msgstr "取消探险"
 
@@ -6616,76 +6616,76 @@ msgstr "建设完毕之后从这个港口启动一次探险"
 msgid "Settings to apply after construction"
 msgstr "建设完毕之后执行设置"
 
-#: ../../src/wui/economy_options_window.cc:45
+#: ../../src/wui/economy_options_window.cc:50
 msgid "Economy options"
 msgstr "经济选项"
 
-#: ../../src/wui/economy_options_window.cc:78
+#: ../../src/wui/economy_options_window.cc:83
 msgid "Decrease target by 10"
 msgstr "以10为单位减少目标"
 
-#: ../../src/wui/economy_options_window.cc:86
+#: ../../src/wui/economy_options_window.cc:91
 msgid "Decrease target"
 msgstr "减少目标"
 
-#: ../../src/wui/economy_options_window.cc:95
+#: ../../src/wui/economy_options_window.cc:100
 msgid "Toggle infinite target"
 msgstr "切换无限目标"
 
-#: ../../src/wui/economy_options_window.cc:103
+#: ../../src/wui/economy_options_window.cc:108
 msgid "Increase target"
 msgstr "增大目标"
 
-#: ../../src/wui/economy_options_window.cc:111
+#: ../../src/wui/economy_options_window.cc:116
 msgid "Increase target by 10"
 msgstr "以10为单位增大目标"
 
-#: ../../src/wui/economy_options_window.cc:117
+#: ../../src/wui/economy_options_window.cc:122
 msgid "Profile to apply to the selected items"
 msgstr "在所选项目上应用概述文件"
 
-#: ../../src/wui/economy_options_window.cc:128
+#: ../../src/wui/economy_options_window.cc:133
 msgid "Save target settings"
 msgstr "保存目标设置"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../src/wui/economy_options_window.cc:302
+#: ../../src/wui/economy_options_window.cc:309
 msgid "∞"
 msgstr "无尽"
 
-#: ../../src/wui/economy_options_window.cc:565
+#: ../../src/wui/economy_options_window.cc:572
 msgid "The profile name cannot be empty"
 msgstr "概述文件名不能为空"
 
-#: ../../src/wui/economy_options_window.cc:566
+#: ../../src/wui/economy_options_window.cc:573
 msgid "The default profile cannot be overwritten"
 msgstr "默认的概述文件不能被覆盖"
 
-#: ../../src/wui/economy_options_window.cc:569
+#: ../../src/wui/economy_options_window.cc:576
 msgid "Save the profile under this name"
 msgstr "使用这个名字保存概述文件"
 
-#: ../../src/wui/economy_options_window.cc:581
+#: ../../src/wui/economy_options_window.cc:588
 msgid "The predefined profiles cannot be deleted"
 msgstr "预定义的概述文件不能被删除"
 
-#: ../../src/wui/economy_options_window.cc:584
+#: ../../src/wui/economy_options_window.cc:591
 msgid "Delete the selected profiles"
 msgstr "删除选中的概述文件"
 
-#: ../../src/wui/economy_options_window.cc:606
+#: ../../src/wui/economy_options_window.cc:613
 msgid "Overwrite?"
 msgstr "覆盖？"
 
-#: ../../src/wui/economy_options_window.cc:607
+#: ../../src/wui/economy_options_window.cc:614
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "同名的概述文件已存在。你想覆盖它吗？"
 
-#: ../../src/wui/economy_options_window.cc:657
+#: ../../src/wui/economy_options_window.cc:664
 msgid "Save Profile"
 msgstr "保存概述文件"
 
-#: ../../src/wui/economy_options_window.cc:667
+#: ../../src/wui/economy_options_window.cc:674
 msgid "Existing Profiles"
 msgstr "现有的概述文件"
 
@@ -6769,7 +6769,7 @@ msgstr "摧毁一条水道"
 msgid "Watch field in a separate window"
 msgstr "在单独的窗口中查看该区域"
 
-#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:49
+#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:52
 msgid "Watch"
 msgstr "观察"
 
@@ -6890,16 +6890,16 @@ msgstr "你真的想退出这局游戏吗？"
 msgid "Error Saving Game!"
 msgstr "游戏保存错误！"
 
-#: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:602
+#: ../../src/wui/game_message_menu.cc:54
+#: ../../src/wui/game_message_menu.cc:603
 msgid "Messages: Inbox"
 msgstr "消息：收件箱"
 
-#: ../../src/wui/game_message_menu.cc:68
+#: ../../src/wui/game_message_menu.cc:69
 msgid "Title"
 msgstr "标题"
 
-#: ../../src/wui/game_message_menu.cc:69
+#: ../../src/wui/game_message_menu.cc:70
 msgctxt "message"
 msgid "Type"
 msgstr "类型"
@@ -6910,56 +6910,56 @@ msgstr "类型"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
 #. issue if you need more
 #. * space.
-#: ../../src/wui/game_message_menu.cc:75
+#: ../../src/wui/game_message_menu.cc:76
 msgctxt "message"
 msgid "Sent"
 msgstr "发送"
 
-#: ../../src/wui/game_message_menu.cc:114
-#: ../../src/wui/game_message_menu.cc:605
+#: ../../src/wui/game_message_menu.cc:115
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Show Archive"
 msgstr "显示存档"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:122
+#: ../../src/wui/game_message_menu.cc:123
 msgid "Center main mapview on location"
 msgstr "在位置上居中显示主地图视图"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:529
+#: ../../src/wui/game_message_menu.cc:530
 msgid "Show all messages"
 msgstr "显示所有的消息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:541
 msgid "Show geologists’ messages only"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:546
 msgid "Show economy messages only"
 msgstr "仅显示经济信息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:550
 msgid "Show seafaring messages only"
 msgstr "仅显示航海信息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:554
 msgid "Show warfare messages only"
 msgstr "仅显示战争信息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:557
+#: ../../src/wui/game_message_menu.cc:558
 msgid "Show scenario messages only"
 msgstr "仅显示场景信息"
 
-#: ../../src/wui/game_message_menu.cc:595
+#: ../../src/wui/game_message_menu.cc:596
 msgid "Messages: Archive"
 msgstr "消息：存档"
 
-#: ../../src/wui/game_message_menu.cc:598
+#: ../../src/wui/game_message_menu.cc:599
 msgid "Show Inbox"
 msgstr "显示收件箱"
 
@@ -6967,14 +6967,14 @@ msgstr "显示收件箱"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:628
+#: ../../src/wui/game_message_menu.cc:629
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "还原选中的%d消息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:634
+#: ../../src/wui/game_message_menu.cc:635
 msgid "Restore selected message"
 msgstr "还原所选消息"
 
@@ -6982,14 +6982,14 @@ msgstr "还原所选消息"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:645
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "存档选中的%d消息"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:650
+#: ../../src/wui/game_message_menu.cc:651
 msgid "Archive selected message"
 msgstr "存档所选消息"
 
@@ -7123,35 +7123,35 @@ msgstr "附加组件"
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:136
+#: ../../src/wui/general_statistics_menu.cc:137
 msgid "Land"
 msgstr "土地"
 
-#: ../../src/wui/general_statistics_menu.cc:157
+#: ../../src/wui/general_statistics_menu.cc:158
 msgid "Productivity"
 msgstr "生产率"
 
-#: ../../src/wui/general_statistics_menu.cc:162
+#: ../../src/wui/general_statistics_menu.cc:163
 msgid "Casualties"
 msgstr "人员伤亡"
 
-#: ../../src/wui/general_statistics_menu.cc:166
+#: ../../src/wui/general_statistics_menu.cc:167
 msgid "Kills"
 msgstr "杀敌"
 
-#: ../../src/wui/general_statistics_menu.cc:172
+#: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings lost"
 msgstr "军事建筑丢失"
 
-#: ../../src/wui/general_statistics_menu.cc:177
+#: ../../src/wui/general_statistics_menu.cc:178
 msgid "Military buildings defeated"
 msgstr "军事建筑战败"
 
-#: ../../src/wui/general_statistics_menu.cc:182
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Civilian buildings lost"
 msgstr "民用建筑损失"
 
-#: ../../src/wui/general_statistics_menu.cc:187
+#: ../../src/wui/general_statistics_menu.cc:188
 msgid "Military"
 msgstr "军事"
 
@@ -7263,49 +7263,49 @@ msgid "Show controls"
 msgstr "显示控件"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:120
+#: ../../src/wui/interactive_base.cc:131
 msgid "Map View"
 msgstr "地图视图"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:271
+#: ../../src/wui/interactive_base.cc:282
 msgid "Hide Minimap"
 msgstr "隐藏迷你地图"
 
-#: ../../src/wui/interactive_base.cc:271
+#: ../../src/wui/interactive_base.cc:282
 msgid "Show Minimap"
 msgstr "显示迷你地图"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:277
+#: ../../src/wui/interactive_base.cc:288
 msgid "Zoom +"
 msgstr "放大"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:293
 msgid "Reset zoom"
 msgstr "重置缩放"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:287
+#: ../../src/wui/interactive_base.cc:298
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:717
+#: ../../src/wui/interactive_base.cc:728
 #, c-format
 msgid "Road length: %u"
 msgstr "道路的长度：%u"
 
-#: ../../src/wui/interactive_base.cc:719
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "水道的长度：%1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1438
+#: ../../src/wui/interactive_base.cc:1562
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1442
+#: ../../src/wui/interactive_base.cc:1566
 msgid "Screenshot saved"
 msgstr ""
 
@@ -7426,8 +7426,8 @@ msgid "Soldiers"
 msgstr "士兵"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:153 ../../src/wui/waresdisplay.cc:82
+#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:41
+#: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "存货"
 
@@ -7593,15 +7593,15 @@ msgstr "地图的大小(宽 x 高)"
 msgid "Map Name"
 msgstr "地图名称"
 
-#: ../../src/wui/minimap.cc:162
+#: ../../src/wui/minimap.cc:163
 msgid "Owner"
 msgstr "所有者"
 
-#: ../../src/wui/minimap.cc:184
+#: ../../src/wui/minimap.cc:185
 msgid "Roads"
 msgstr "道路"
 
-#: ../../src/wui/minimap.cc:206
+#: ../../src/wui/minimap.cc:207
 msgid "Zoom"
 msgstr "缩放"
 
@@ -7935,123 +7935,123 @@ msgid "Map name (start of replay)"
 msgstr "地图名(回放起始)"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:125
+#: ../../src/wui/seafaring_statistics_menu.cc:126
 msgid "Watch the selected ship"
 msgstr "观看选中的船只"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:140
+#: ../../src/wui/seafaring_statistics_menu.cc:141
 msgid "Open the selected ship’s window"
 msgstr "打开选中船只的窗口"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:145
+#: ../../src/wui/seafaring_statistics_menu.cc:146
 msgid "Go to the selected ship and open its window"
 msgstr "转到选中的船只并打开它的窗口"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:159
+#: ../../src/wui/seafaring_statistics_menu.cc:160
 msgid "Center the map on the selected ship"
 msgstr "把选中船只的位置作为为地图的中心"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:202
+#: ../../src/wui/seafaring_statistics_menu.cc:203
 msgctxt "ship"
 msgid "Name"
 msgstr "名字"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:203
+#: ../../src/wui/seafaring_statistics_menu.cc:204
 msgctxt "ship"
 msgid "Status"
 msgstr "状态"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:501
+#: ../../src/wui/seafaring_statistics_menu.cc:502
 msgid "Show all ships"
 msgstr "显示所有的船只"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:510
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgid "Show empty ships"
 msgstr "显示空船只"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:514
+#: ../../src/wui/seafaring_statistics_menu.cc:515
 msgid "Show ships shipping wares and workers"
 msgstr "显示运送物品和工人的船只"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:519
+#: ../../src/wui/seafaring_statistics_menu.cc:520
 msgid "Show waiting expeditions"
 msgstr "显示等待探险的"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgid "Show scouting expeditions"
 msgstr "显示侦察探险的"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:529
+#: ../../src/wui/seafaring_statistics_menu.cc:530
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "显示已经找到港口空间或是正在建立殖民地的探险队"
 
-#: ../../src/wui/shipwindow.cc:79
+#: ../../src/wui/shipwindow.cc:82
 msgid "Scout towards the north west"
 msgstr "向西北侦察"
 
-#: ../../src/wui/shipwindow.cc:84
+#: ../../src/wui/shipwindow.cc:87
 msgid "Explore the island’s coast clockwise"
 msgstr "顺时针沿岛探索海岸"
 
-#: ../../src/wui/shipwindow.cc:89
+#: ../../src/wui/shipwindow.cc:92
 msgid "Scout towards the north east"
 msgstr "向北侦察"
 
-#: ../../src/wui/shipwindow.cc:94
+#: ../../src/wui/shipwindow.cc:97
 msgid "Scout towards the west"
 msgstr "向西侦察"
 
-#: ../../src/wui/shipwindow.cc:99
+#: ../../src/wui/shipwindow.cc:102
 msgid "Construct a port at the current location"
 msgstr "在当前位置修建一个港口"
 
-#: ../../src/wui/shipwindow.cc:104
+#: ../../src/wui/shipwindow.cc:107
 msgid "Scout towards the east"
 msgstr "向东侦察"
 
-#: ../../src/wui/shipwindow.cc:109
+#: ../../src/wui/shipwindow.cc:112
 msgid "Scout towards the south west"
 msgstr "向西南侦察"
 
-#: ../../src/wui/shipwindow.cc:114
+#: ../../src/wui/shipwindow.cc:117
 msgid "Explore the island’s coast counter clockwise"
 msgstr "逆时针沿岛探索海岸"
 
-#: ../../src/wui/shipwindow.cc:119
+#: ../../src/wui/shipwindow.cc:122
 msgid "Scout towards the south east"
 msgstr "向东南侦察"
 
-#: ../../src/wui/shipwindow.cc:129
+#: ../../src/wui/shipwindow.cc:132
 msgid "Sink the ship"
 msgstr "沉掉这艘船"
 
-#: ../../src/wui/shipwindow.cc:133
+#: ../../src/wui/shipwindow.cc:136
 msgid "Cancel the Expedition"
 msgstr "取消探险"
 
-#: ../../src/wui/shipwindow.cc:146
+#: ../../src/wui/shipwindow.cc:149
 msgid "Go to destination"
 msgstr "前往目的地"
 
-#: ../../src/wui/shipwindow.cc:151
+#: ../../src/wui/shipwindow.cc:154
 msgid "Go to ship"
 msgstr "前往船只"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:215
+#: ../../src/wui/shipwindow.cc:218
 msgid "Cancel Expedition"
 msgstr "取消探险"
 
-#: ../../src/wui/shipwindow.cc:216
+#: ../../src/wui/shipwindow.cc:219
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
@@ -8147,51 +8147,51 @@ msgstr "声音被禁用的原因可能是由于声卡驱动程序有问题，也
 #. different background colors; each icon's color indicates whether the stock
 #. is higher or
 #. lower than the economy target setting. Very little space is available.
-#: ../../src/wui/stock_menu.cc:52
+#: ../../src/wui/stock_menu.cc:53
 msgid "Evaluate"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:55
+#: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:58
+#: ../../src/wui/stock_menu.cc:59
 msgid "Red:"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:58
+#: ../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:61
+#: ../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
 msgstr "黄色："
 
-#: ../../src/wui/stock_menu.cc:62
+#: ../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:65
+#: ../../src/wui/stock_menu.cc:66
 msgid "Green:"
 msgstr "绿色："
 
-#: ../../src/wui/stock_menu.cc:66
+#: ../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
 msgstr "库存高于目标"
 
-#: ../../src/wui/stock_menu.cc:71
+#: ../../src/wui/stock_menu.cc:72
 msgid "Wares (total)"
 msgstr "物品(全部)"
 
-#: ../../src/wui/stock_menu.cc:75
+#: ../../src/wui/stock_menu.cc:76
 msgid "Workers (total)"
 msgstr "劳动者(全部)"
 
-#: ../../src/wui/stock_menu.cc:79
+#: ../../src/wui/stock_menu.cc:80
 msgid "Wares in warehouses"
 msgstr "仓库中的物品"
 
-#: ../../src/wui/stock_menu.cc:83
+#: ../../src/wui/stock_menu.cc:84
 msgid "Workers in warehouses"
 msgstr "仓库中的劳动者"
 
@@ -8216,15 +8216,15 @@ msgstr "组队建议"
 msgid "Soldiers in training"
 msgstr "训练中的士兵"
 
-#: ../../src/wui/ware_statistics_menu.cc:133
+#: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Production"
 msgstr "生产"
 
-#: ../../src/wui/ware_statistics_menu.cc:140
+#: ../../src/wui/ware_statistics_menu.cc:142
 msgid "Consumption"
 msgstr "消费"
 
-#: ../../src/wui/ware_statistics_menu.cc:147
+#: ../../src/wui/ware_statistics_menu.cc:149
 msgid "Economy health"
 msgstr "经济健康"
 
@@ -8302,10 +8302,10 @@ msgstr "%1%M"
 msgid "%1%G"
 msgstr "%1%G"
 
-#: ../../src/wui/watchwindow.cc:57
+#: ../../src/wui/watchwindow.cc:60
 msgid "Follow"
 msgstr "跟随"
 
-#: ../../src/wui/watchwindow.cc:62
+#: ../../src/wui/watchwindow.cc:65
 msgid "Center the main view on this"
 msgstr "主视图居中于此"

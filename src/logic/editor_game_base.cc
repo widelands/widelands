@@ -558,6 +558,9 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  */
 void EditorGameBase::cleanup_for_load() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map objects (1/3)")));
+	if (InteractiveBase* i = get_ibase()) {
+		i->cleanup_for_load();
+	}
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Players (2/3)")));

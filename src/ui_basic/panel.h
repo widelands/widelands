@@ -34,10 +34,15 @@
 #include "base/multithreading.h"
 #include "base/rect.h"
 #include "base/vector.h"
+#include "base/wexception.h"
 #include "graphic/styles/panel_styles.h"
 #include "sound/constants.h"
 
+class FileWrite;
 class RenderTarget;
+namespace Widelands {
+class MapObjectSaver;
+}
 
 namespace UI {
 
@@ -360,6 +365,30 @@ public:
 
 	// Call this on the topmost panel after you changed the template directory
 	void template_directory_changed();
+
+	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
+		kNone = 0,          ///< This panel is not saveable.
+		kBuildingWindow,
+		kWatchWindow,
+		kConfigureEconomy,
+		kStockMenu,
+		kGeneralStats,
+		kWareStats,
+		kBuildingStats,
+		kSoldierStats,
+		kSeafaringStats,
+		kMessages,
+		kObjectives,
+		kMinimap,
+		kEncyclopedia,
+		kShipWindow,
+	};
+	virtual SaveType save_type() const {
+		return SaveType::kNone;
+	}
+	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
+		NEVER_HERE();
+	}
 
 protected:
 	// This panel will never receive keypresses (do_key), instead

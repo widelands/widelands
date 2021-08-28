@@ -42,6 +42,12 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kBuildingWindow;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 protected:
 	// This constructor allows setting a building description for the help button independent of the
 	// base building
