@@ -580,10 +580,6 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 void InteractiveGameBase::postload() {
 	// Recalc whole map for changed owner stuff
 	egbase().mutable_map()->recalc_whole_map(egbase());
-
-	// Close game-relevant UI windows (but keep main menu open)
-	fieldaction_.destroy();
-	hide_minimap();
 }
 
 void InteractiveGameBase::start() {
