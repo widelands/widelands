@@ -665,22 +665,22 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			{
 				UI::WLMessageBox m(
 				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
-				   (boost::format("<rt><p>%1$s<br>&nbsp;<br>%2$s<br>&nbsp;<br>%3$s</p></rt>")
-						% g_style_manager->font_style(UI::FontStyle::kFsMenuLabel).as_font_tag(
-							_("Are you sure you want to enable Transifex integration for this add-on?")
-							)
-						% g_style_manager->font_style(UI::FontStyle::kFsMenuLabel).as_font_tag(
-							(boost::format(
-							/** TRANSLATORS: The placeholder is an URL */
-							_("Don’t forget to configure the new resources at %1% afterwards."))
-								% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
-									underline_tag("https://www.transifex.com/widelands/widelands-addons/content/"))
-								).str()
-							)
-						% g_style_manager->font_style(UI::FontStyle::kFsMenuLabel).as_font_tag(
-							_("This may take several minutes, please be patient.")
-							)
-					).str(),
+				   (boost::format("<rt><p>%1$s<br>&nbsp;<br>%2$s<br>&nbsp;<br>%3$s</p></rt>") %
+				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				       .as_font_tag(
+				          _("Are you sure you want to enable Transifex integration for this add-on?")) %
+				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				       .as_font_tag(
+				          (boost::format(
+				              /** TRANSLATORS: The placeholder is an URL */
+				              _("Don’t forget to configure the new resources at %1% afterwards.")) %
+				           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				              .as_font_tag(underline_tag(
+				                 "https://www.transifex.com/widelands/widelands-addons/content/")))
+				             .str()) %
+				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				       .as_font_tag(_("This may take several minutes, please be patient.")))
+				      .str(),
 				   UI::WLMessageBox::MBoxType::kOkCancel);
 				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 					return;
