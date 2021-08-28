@@ -16,7 +16,7 @@ descriptions:new_immovable_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
          fps = 10,
          frames = 5,
