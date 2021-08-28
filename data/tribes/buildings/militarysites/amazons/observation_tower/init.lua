@@ -23,7 +23,7 @@ descriptions:new_militarysite_type {
    max_soldiers = 5,
    heal_per_second = 150,
    conquers = 9,
-   prefer_heroes = false,
+   prefer_heroes = true,
 
    messages = {
       -- TRANSLATORS: Message sent by an Amazon military site
