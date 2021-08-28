@@ -264,6 +264,7 @@ private:
 	bool draw_bobs_ = true;
 	bool draw_grid_ = true;
 
+	bool cleaning_up_ = false;
 	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
 };
 
