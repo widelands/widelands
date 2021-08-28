@@ -1303,8 +1303,16 @@ descriptions:new_tribe {
       {
          name = "amazons_liana_cutters_hut",
          helptexts = {
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Liana Cutter's Hut
+            lore = pgettext("amazons_building", "‘Sunlight smiled upon us and our Ancestors while we worked to clear liana from the trees. I was not as efficient as my aunt and sisters, and so I learned to ply rope.’"),
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Liana Cutter's Hut
+            lore_author = pgettext("amazons_building", "Mistress WeaverSong, recollecting her early years as a liana cutter."),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's Hut
-            purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes.")
+            purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Liana Cutter's Hut
+            note = pgettext("amazons_building", "The cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Liana Cutter's Hut
+            performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(34))
          }
       },
       {
@@ -1329,7 +1337,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Wilderness Keeper's Tent
             purpose = pgettext("amazons_building", "Breeds fish and game to renew food resources."),
             -- TRANSLATORS: Note helptext for an amazon production site: Wilderness Keeper's Tent
-            note = pgettext("amazons_building", "The wilderness keeper will only release new game at a nearby tree.")
+            note = pgettext("amazons_building", "The wilderness keeper will only release new game at a nearby tree which is not being used as a lookout.")
          }
       },
       {
@@ -1347,6 +1355,10 @@ descriptions:new_tribe {
       {
          name = "amazons_rope_weaver_booth",
          helptexts = {
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Rope Weaver's Booth
+            lore = pgettext("amazons_building", "‘My mother taught me to ply the ropes from Liana, how to choose the strongest cuttings and parts of the harvest, how to trim away flaws. I bless her wisdom in every length I use.’"),
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Rope Weaver's Booth
+            lore_author = pgettext("amazons_building", "Mistress WeaverSong, reflecting on training."),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Rope Weaver's Booth
             purpose = pgettext("amazons_building", "Makes ropes from lianas.")
          }
@@ -1363,8 +1375,14 @@ descriptions:new_tribe {
       {
          name = "amazons_rare_tree_plantation",
          helptexts = {
+            -- TRANSLATORS: Lore for helptext an amazon production site: Rare Tree Plantation
+            lore = pgettext("amazons_building", "‘If properly harvested, cured and stored, ironwood becomes almost indestructible, and will not rust in damp conditions.’"),
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Rare Tree Plantation
+            lore_author = pgettext("amazons_building", "Jungle Master Abacaxis"),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree Plantation
-            purpose = pgettext("amazons_building", "Plants rare trees which are needed by the amazons, like balsa, rubber and ironwood.")
+            purpose = pgettext("amazons_building", "Plants rare trees which are needed by the Amazons, like balsa, rubber and ironwood."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Rare Tree Plantation
+            note = pgettext("amazons_building", "Rare trees are planted according to the economy requirements. Keep roads connected to rare tree plantations so they adhere to economy targets.")
          }
       },
       {
@@ -1377,6 +1395,10 @@ descriptions:new_tribe {
       {
          name = "amazons_dressmakery",
          helptexts = {
+            -- TRANSLATORS: Lore for helptext an amazon production site: Dressmakery
+            lore = pgettext("amazons_building", "‘A skilled maker crafts garments of unsurpassed defence,<br> with each stitch imbued with conscious intent.’"),
+            -- TRANSLATORS: Lore author helptext for an amazon production site: Dressmakery
+            lore_author = pgettext("amazons_building", "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s wisdom: Song of the Conscientious.’"),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
             purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
          }
@@ -1428,7 +1450,9 @@ descriptions:new_tribe {
          name = "amazons_gardening_center",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Gardening Center
-            purpose = pgettext("amazons_building", "Enhances the fertility of the landscape for trees.")
+            purpose = pgettext("amazons_building", "Enhances the fertility of the landscape for trees."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Gardening Center
+            note = pgettext ("amazons_building", "Only a Jungle Master has the necessary experience to coax more growth from land.")
          }
       },
 
@@ -1620,8 +1644,7 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "amazons_builder",
-   carrier = "amazons_carrier",
-   carrier2 = "amazons_tapir",
+   carriers = {"amazons_carrier", "amazons_tapir"},
    geologist = "amazons_geologist",
    scouts_house = "amazons_scouts_hut",
    soldier = "amazons_soldier",

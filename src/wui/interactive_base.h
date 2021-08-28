@@ -39,6 +39,9 @@
 class InfoPanel;
 class MainToolbar;
 class UniqueWindowHandler;
+namespace Widelands {
+class MapObjectLoader;
+}
 
 struct WorkareaPreview {
 	Widelands::Coords coords;
@@ -100,6 +103,9 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
+	void load_windows(FileRead&, Widelands::MapObjectLoader&);
+	void save_windows(FileWrite&, Widelands::MapObjectSaver&);
+
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
 	}
@@ -151,8 +157,7 @@ public:
 	Widelands::Coords get_build_road_end() const;
 	Widelands::CoordPath get_build_road_path() const;
 
-	virtual void cleanup_for_load() {
-	}
+	virtual void cleanup_for_load();
 
 	/**
 	 * Log a message to be displayed on screen
@@ -179,7 +184,7 @@ public:
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
-	void show_ship_window(Widelands::Ship* ship);
+	UI::UniqueWindow& show_ship_window(Widelands::Ship* ship);
 
 	MapView* map_view() {
 		return &map_view_;
@@ -389,9 +394,12 @@ private:
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
-	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 
+public:
+	MiniMap::Registry minimap_registry_;
+
+private:
 	// The currently enabled work area previews
 	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
 	std::unique_ptr<Workareas> workareas_cache_;

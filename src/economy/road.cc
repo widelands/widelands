@@ -45,18 +45,15 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 }
 
 Road::CarrierSlot::CarrierSlot()
-   : carrier(nullptr), carrier_request(nullptr), second_carrier(false) {
+   : carrier(nullptr),
+     carrier_request(nullptr),
+     carrier_type_id(std::numeric_limits<uint8_t>::max()) {
 }
 
 /**
  * Most of the actual work is done in init.
  */
 Road::Road() : RoadBase(g_road_descr), busy_(false), wallet_(0), last_wallet_charge_(0) {
-	CarrierSlot slot;
-	carrier_slots_.push_back(slot);
-	carrier_slots_.push_back(slot);
-	carrier_slots_[0].second_carrier = false;
-	carrier_slots_[1].second_carrier = true;
 }
 
 /**
@@ -66,6 +63,18 @@ Road::~Road() {
 	for (CarrierSlot& slot : carrier_slots_) {
 		delete slot.carrier_request;
 	}
+}
+
+bool Road::init(EditorGameBase& egbase) {
+	if (get_owner()) {  // Skip during loading
+		const size_t nr_slots = owner().tribe().carriers().size();
+		for (size_t i = 0; i < nr_slots; ++i) {
+			carrier_slots_.emplace_back();
+			carrier_slots_.back().carrier_type_id = i;
+		}
+	}
+
+	return RoadBase::init(egbase);
 }
 
 /**
@@ -116,7 +125,7 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 				// This happens after a road split. Tell the carrier what's going on.
 				carrier->set_location(this);
 				carrier->update_task_road(*game);
-			} else if (!slot.carrier_request && (!slot.second_carrier || busy_)) {
+			} else if (!slot.carrier_request && (slot.carrier_type_id == 0 || busy_)) {
 				// Normal carriers are requested at once, second carriers only for busy roads
 				request_carrier(slot);
 			}
@@ -150,8 +159,7 @@ void Road::set_economy(Economy* const e, WareWorker type) {
  */
 void Road::request_carrier(CarrierSlot& slot) {
 	slot.carrier_request = new Request(
-	   *this, slot.second_carrier ? owner().tribe().carrier2() : owner().tribe().carrier(),
-	   request_carrier_callback, wwWORKER);
+	   *this, owner().tribe().carriers()[slot.carrier_type_id], request_carrier_callback, wwWORKER);
 }
 
 /**
@@ -212,7 +220,7 @@ void Road::remove_worker(Worker& w) {
  * and should now be assigned to this road.
  */
 void Road::assign_carrier(Carrier& c, uint8_t slot) {
-	assert(slot <= 1);
+	assert(slot <= carrier_slots_.size());
 
 	// Send the worker home if it occupies our slot
 	CarrierSlot& s = carrier_slots_[slot];
@@ -320,7 +328,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 					old_slot.carrier = nullptr;
 					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
 						if (!new_slot.carrier.get(game) && !new_slot.carrier_request &&
-						    new_slot.second_carrier == old_slot.second_carrier) {
+						    new_slot.carrier_type_id == old_slot.carrier_type_id) {
 							upcast(Carrier, new_carrier, w);
 							new_slot.carrier = new_carrier;
 							break;
@@ -348,7 +356,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
 	for (CarrierSlot& slot : carrier_slots_) {
-		if (!slot.carrier.get(game) && !slot.carrier_request && (!slot.second_carrier || busy_)) {
+		if (!slot.carrier.get(game) && !slot.carrier_request &&
+		    (slot.carrier_type_id == 0 || busy_)) {
 			request_carrier(slot);
 		}
 	}
@@ -456,14 +465,25 @@ void Road::charge_wallet(Game& game) {
 		wallet_ = 0;
 		if (busy_) {
 			// Demote the road
-			Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
-			if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
-				second_carrier->send_signal(game, "cancel");
-				// This signal is not handled in any special way. It will simply pop the task off the
-				// stack. The string "cancel" has been used to clarify the final goal we want to
-				// achieve, ie: cancelling the current task.
-				carrier_slots_[1].carrier = nullptr;
-				carrier_slots_[1].carrier_request = nullptr;
+			bool all_dismissed = true;
+			for (CarrierSlot& slot : carrier_slots_) {
+				if (slot.carrier_type_id == 0) {
+					continue;
+				}
+				if (Carrier* const c = slot.carrier.get(game)) {
+					if (c->top_state().task == &Carrier::taskRoad) {
+						c->send_signal(game, "cancel");
+						// This signal is not handled in any special way. It will simply pop the task off
+						// the stack. The string "cancel" has been used to clarify the final goal we want
+						// to achieve, ie: cancelling the current task.
+						slot.carrier = nullptr;
+						slot.carrier_request = nullptr;
+					} else {
+						all_dismissed = false;
+					}
+				}
+			}
+			if (all_dismissed) {
 				busy_ = false;
 				mark_map(game);
 			}
@@ -494,7 +514,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
 		for (CarrierSlot& slot : carrier_slots_) {
-			if (!slot.carrier.get(game) && !slot.carrier_request && slot.second_carrier) {
+			if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type_id > 0) {
 				request_carrier(slot);
 			}
 		}
