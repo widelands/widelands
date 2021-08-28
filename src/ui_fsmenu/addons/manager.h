@@ -47,6 +47,7 @@ constexpr int16_t kRowButtonSpacing = 4;
 
 std::string time_string(const std::time_t& time);
 std::string filesize_string(uint32_t bytes);
+std::string underline_tag(const std::string& text);
 
 struct AddOnQuality {
 	const Image* icon;

@@ -57,7 +57,7 @@ constexpr const char* const kForumURL = "https://www.widelands.org/forum/17/";
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
-static std::string underline_tag(const std::string& text) {
+std::string underline_tag(const std::string& text) {
 	std::string str = "<font underline=true>";
 	str += text;
 	str += "</font>";
