@@ -1644,8 +1644,7 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "amazons_builder",
-   carrier = "amazons_carrier",
-   carrier2 = "amazons_tapir",
+   carriers = {"amazons_carrier", "amazons_tapir"},
    geologist = "amazons_geologist",
    scouts_house = "amazons_scouts_hut",
    soldier = "amazons_soldier",
