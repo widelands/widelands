@@ -902,7 +902,7 @@ void Warehouse::remove_workers(DescriptionIndex const id, uint32_t const count) 
 
 /// Launch a carrier to fetch an ware from our flag.
 bool Warehouse::fetch_from_flag(Game& game) {
-	DescriptionIndex const carrierid = owner().tribe().carrier();
+	DescriptionIndex const carrierid = owner().tribe().carriers()[0];
 
 	if (!supply_->stock_workers(carrierid)) {
 		if (can_create_worker(game, carrierid)) {
@@ -1057,7 +1057,7 @@ WareInstance& Warehouse::launch_ware(Game& game, DescriptionIndex const ware_ind
 /// Get a carrier to actually move this ware out of the warehouse.
 bool Warehouse::do_launch_ware(Game& game, WareInstance& ware) {
 	// Create a carrier
-	const DescriptionIndex carrierid = owner().tribe().carrier();
+	const DescriptionIndex carrierid = owner().tribe().carriers()[0];
 
 	if (!supply_->stock_workers(carrierid)) {
 		if (can_create_worker(game, carrierid)) {
