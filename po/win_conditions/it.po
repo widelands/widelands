@@ -10,15 +10,15 @@
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
-# Samuele Battarra <battarsa@email.it>, 2020
+# Samuele Battarra <battarsa@email.it>, 2020-2021
 # Stron Zios <danielekeb@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-06-06 09:55+0000\n"
-"Last-Translator: Stron Zios <danielekeb@gmail.com>\n"
+"PO-Revision-Date: 2021-08-27 12:32+0000\n"
+"Last-Translator: Samuele Battarra <battarsa@email.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
-msgstr "Artefatti"
+msgstr "Manufatti"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:17
 msgid ""
@@ -38,11 +38,11 @@ msgstr "Cerca gli antichi artefatti. Nel momento in cui tutti gli artefatti veng
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
-msgstr "Artefatti posseduti"
+msgstr "Manufatti posseduti"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:76
 msgid "No Artifacts"
-msgstr "Nessun artefatto"
+msgstr "Nessun manufatto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:76
 #, lua-format
