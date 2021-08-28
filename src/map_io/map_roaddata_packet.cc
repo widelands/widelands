@@ -122,6 +122,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					}
 
 					for (uint32_t i = 0; i < count; ++i) {
+						road.carrier_slots_.emplace_back();
 						Carrier* carrier = nullptr;
 						Request* carrier_request = nullptr;
 
@@ -142,22 +143,16 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						} else {
 							carrier_request = nullptr;
 						}
-						bool const carrier_type = fr.unsigned_32() == 2;
 
-						if (i < road.carrier_slots_.size() &&
-						    road.carrier_slots_[i].second_carrier == carrier_type) {
-							assert(!road.carrier_slots_[i].carrier.get(egbase));
+						const uint32_t carrier_type_id = fr.unsigned_32();
+						assert(carrier_type_id > 0);
+						road.carrier_slots_[i].carrier_type_id = carrier_type_id - 1;
 
-							road.carrier_slots_[i].carrier = carrier;
-							if (carrier || carrier_request) {
-								delete road.carrier_slots_[i].carrier_request;
-								road.carrier_slots_[i].carrier_request = carrier_request;
-							}
-						} else {
-							delete carrier_request;
-							if (carrier) {
-								carrier->reset_tasks(dynamic_cast<Game&>(egbase));
-							}
+						assert(!road.carrier_slots_[i].carrier.get(egbase));
+						road.carrier_slots_[i].carrier = carrier;
+						if (carrier || carrier_request) {
+							delete road.carrier_slots_[i].carrier_request;
+							road.carrier_slots_[i].carrier_request = carrier_request;
 						}
 					}
 
@@ -232,7 +227,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 					} else {
 						fw.unsigned_8(0);
 					}
-					fw.unsigned_32(temp_slot.second_carrier ? 2 : 1);
+					fw.unsigned_32(1u + temp_slot.carrier_type_id);
 				}
 				mos.mark_object_as_saved(*r);
 			}
