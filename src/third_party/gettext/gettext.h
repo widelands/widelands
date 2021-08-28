@@ -140,11 +140,11 @@ CLANG_DIAG_ON("-Wreserved-id-macro")
    short and rarely need to change.
    The letter 'p' stands for 'particular' or 'special'.  */
 #ifdef DEFAULT_TEXT_DOMAIN
-#define pgettext(Msgctxt, Msgid)                                                                   \
-	pgettext_aux(DEFAULT_TEXT_DOMAIN, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
+#define original_pgettext(Msgctxt, Msgid, functor)                                                 \
+	pgettext_aux(DEFAULT_TEXT_DOMAIN, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES, functor)
 #else
-#define pgettext(Msgctxt, Msgid)                                                                   \
-	pgettext_aux(NULL, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
+#define original_pgettext(Msgctxt, Msgid, functor)                                                 \
+	pgettext_aux(NULL, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES, functor)
 #endif
 #define dpgettext(Domainname, Msgctxt, Msgid)                                                      \
 	pgettext_aux(Domainname, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
@@ -164,7 +164,8 @@ CLANG_DIAG_ON("-Wreserved-id-macro")
 	npgettext_aux(Domainname, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, MsgidPlural, N, Category)
 
 inline static const char*
-pgettext_aux(const char* domain, const char* msg_ctxt_id, const char* msgid, int category) {
+pgettext_aux(const char* domain, const char* msg_ctxt_id, const char* msgid, int category, void(*const logger)(const char*, const char*) = nullptr) {
+	if (logger) logger("pgettext", msgid);
 	const char* translation = dcgettext(domain, msg_ctxt_id, category);
 	if (translation == msg_ctxt_id)
 		return msgid;

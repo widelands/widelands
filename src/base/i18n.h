@@ -26,7 +26,7 @@
 #include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
 
 // prevent defining snprintf to libintl_snprintf in libintl.h
-// libintl.h is included by getext.h
+// libintl.h is included by gettext.h
 #ifdef snprintf
 #undef snprintf
 #endif
@@ -35,8 +35,16 @@
 #include "base/multithreading.h"
 #include "config.h"
 
-/// A macro to make i18n more readable and aid in tagging strings for translation
+/// Some macros to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)
+
+#undef pgettext
+#define pgettext(context, message) original_pgettext(context, message, i18n::log_i18n_if_desired_)
+
+#ifndef BASE_I18N_CC
+#undef ngettext
+#define ngettext(s, p, n) i18n::ngettext_wrapper(s, p, n)
+#endif
 
 namespace i18n {
 
@@ -45,6 +53,8 @@ void enable_verbose_i18n();
 
 char const* translate(char const*) __attribute__((format_arg(1)));
 char const* translate(const std::string&);
+char const* ngettext_wrapper(const char* singular, const char* plural, int n);
+extern void (*log_i18n_if_desired_)(const char*, const char*);
 
 void grab_textdomain(const std::string&, const char* localedir);
 void release_textdomain();

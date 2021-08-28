@@ -17,6 +17,8 @@
  *
  */
 
+#define BASE_I18N_CC
+
 #include "base/i18n.h"
 
 #ifdef __FreeBSD__
@@ -60,17 +62,18 @@ std::string locale;
 std::string localedir;
 std::string homedir;
 
-char* (*gettext_)(const char*) = gettext;
-
-char* verbose_gettext(const char* s) {
-	log_dbg("gettext: %s\n", s);
-	return gettext(s);
+void log_i18n_off(const char*, const char*) {
+}
+void log_i18n_on(const char* type, const char* msg) {
+	log_dbg("%s: %s", type, msg);
 }
 
 }  // namespace
 
+void (*log_i18n_if_desired_)(const char*, const char*) = log_i18n_off;
+
 void enable_verbose_i18n() {
-	gettext_ = verbose_gettext;
+	log_i18n_if_desired_ = log_i18n_on;
 }
 
 /**
@@ -78,10 +81,16 @@ void enable_verbose_i18n() {
  */
 // TODO(unknown): Implement a workaround if gettext was not found
 char const* translate(char const* const str) {
-	return gettext_(str);
+	log_i18n_if_desired_("gettext", str);
+	return gettext(str);
 }
 char const* translate(const std::string& str) {
-	return gettext_(str.c_str());
+	return translate(str.c_str());
+}
+
+char const* ngettext_wrapper(const char* singular, const char* plural, const int n) {
+	log_i18n_if_desired_("ngettext", singular);
+	return ngettext(singular, plural, n);
 }
 
 /**
@@ -386,24 +395,24 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 			if (listtype == ConcatenateWith::AMPERSAND) {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s & %2$s")) % result % (*it)).str();
+				result = bformat(_("%1$s & %2$s"), result, (*it));
 			} else if (listtype == ConcatenateWith::OR) {
 				/** TRANSLATORS: Join the last 2 items on a list with "or". */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s or %2$s")) % result % (*it)).str();
+				result = bformat(_("%1$s or %2$s"), result, (*it));
 			} else if (listtype == ConcatenateWith::COMMA) {
 				/** TRANSLATORS: Join the last 2 items on a list with a comma. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+				result = bformat(_("%1$s, %2$s"), result, (*it));
 			} else {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();
+				result = bformat(_("%1$s and %2$s"), result, (*it));
 			}
 		} else {
 			/** TRANSLATORS: Concatenate 2 items at in the middle of a list. */
 			/** TRANSLATORS: RTL languages might want to change the word order here. */
-			result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+			result = bformat(_("%1$s, %2$s"), result, (*it));
 		}
 	}
 	return result;
@@ -413,7 +422,7 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	i18n::Textdomain td("widelands");
 	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 	 * want to lose the blank space here. */
-	return (boost::format(pgettext("sentence_separator", "%1% %2%")) % sentence1 % sentence2).str();
+	return bformat(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
 }
 
 }  // namespace i18n
