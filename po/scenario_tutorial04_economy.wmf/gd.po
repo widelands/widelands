@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2019,2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-13 10:04+0000\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-08-18 07:08+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -807,7 +807,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Seo eisimpleir: ’s e 1 a tha san luach tùsail airson fàil. Ma thogas tu tuathanas, gabhaidh giùlanair greim air fàl ach an dèid e ’na thuathanach. Cha bhi fàl air fhàgail dhut an uairsin ach ’s e 1 a th’ anns an uiread-amais, mar sin tòisichidh an ceàrd air fear eile a dhèanamh."
+msgstr "Seo eisimpleir: ’s e 1 a tha san luach bhunaiteach airson fàil. Ma thogas tu tuathanas, gabhaidh giùlanair greim air fàl ach an dèid e ’na thuathanach. Cha bhi fàl air fhàgail dhut an uairsin ach ’s e 1 a th’ anns an uiread-amais, mar sin tòisichidh an ceàrd air fear eile a dhèanamh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""

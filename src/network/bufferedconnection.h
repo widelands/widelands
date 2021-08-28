@@ -20,6 +20,7 @@
 #ifndef WL_NETWORK_BUFFEREDCONNECTION_H
 #define WL_NETWORK_BUFFEREDCONNECTION_H
 
+#include <map>
 #include <memory>
 #include <mutex>
 #include <thread>

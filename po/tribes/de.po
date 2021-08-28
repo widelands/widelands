@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-10 02:41+0000\n"
-"PO-Revision-Date: 2021-07-01 08:37+0000\n"
+"POT-Creation-Date: 2021-08-25 02:35+0000\n"
+"PO-Revision-Date: 2021-08-22 19:55+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1297,7 +1297,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Cassavawurzelküche"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1714,6 +1713,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Steinwerkstatt"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1725,6 +1725,8 @@ msgstr "Steinwerkstatt"
 msgid "making a shovel"
 msgstr "Das Herstellen einer Schaufel"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1734,6 +1736,7 @@ msgstr "Das Herstellen einer Schaufel"
 msgid "making a felling ax"
 msgstr "Das Herstellen einer Holzfälleraxt"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1748,6 +1751,8 @@ msgstr "Das Herstellen einer Spitzhacke"
 msgid "making a machete"
 msgstr "Das Schleifen eines Buschmessers"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1758,6 +1763,7 @@ msgstr "Das Schleifen eines Buschmessers"
 msgid "making kitchen tools"
 msgstr "Das Herstellen von Küchengeräten"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1775,9 +1781,9 @@ msgstr "Das Herstellen eines Hammers"
 msgid "making a chisel"
 msgstr "Das Schleifen eines Meißels"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1933,6 +1939,7 @@ msgstr "Wildnishüterinnenzelt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5958,6 +5965,1002 @@ msgstr "Iscuandé"
 msgctxt "shipname"
 msgid "Putumayo"
 msgstr "Putumayo"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:55
+msgctxt "shipname"
+msgid "Acari"
+msgstr "Acari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:57
+msgctxt "shipname"
+msgid "Acre"
+msgstr "Acre"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:59
+msgctxt "shipname"
+msgid "Açuã"
+msgstr "Açuã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:61
+msgctxt "shipname"
+msgid "Acurauá"
+msgstr "Acurauá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:63
+msgctxt "shipname"
+msgid "Aiari"
+msgstr "Aiari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:65
+msgctxt "shipname"
+msgid "Alalaú"
+msgstr "Alalaú"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:67
+msgctxt "shipname"
+msgid "Amanã"
+msgstr "Amanã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:69
+msgctxt "shipname"
+msgid "Amapá"
+msgstr "Amapá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:71
+msgctxt "shipname"
+msgid "Andirá"
+msgstr "Andirá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:73
+msgctxt "shipname"
+msgid "Antimary"
+msgstr "Antimary"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:75
+msgctxt "shipname"
+msgid "Apoquitaua"
+msgstr "Apoquitaua"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:77
+msgctxt "shipname"
+msgid "Apuaú"
+msgstr "Apuaú"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:79
+msgctxt "shipname"
+msgid "Araçá"
+msgstr "Araçá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:81
+msgctxt "shipname"
+msgid "Arara"
+msgstr "Arara"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:83
+msgctxt "shipname"
+msgid "Ararirá"
+msgstr "Ararirá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:85
+msgctxt "shipname"
+msgid "Arauã"
+msgstr "Arauã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:87
+msgctxt "shipname"
+msgid "Aripuanã"
+msgstr "Aripuanã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:89
+msgctxt "shipname"
+msgid "Arrojo"
+msgstr "Arrojo"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:91
+msgctxt "shipname"
+msgid "Atiparaná"
+msgstr "Atiparaná"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:93
+msgctxt "shipname"
+msgid "Atucatiquini"
+msgstr "Atucatiquini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:95
+msgctxt "shipname"
+msgid "Autaz-mirim"
+msgstr "Autaz-mirim"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:97
+msgctxt "shipname"
+msgid "Badajós"
+msgstr "Badajós"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:99
+msgctxt "shipname"
+msgid "Bararati"
+msgstr "Bararati"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:101
+msgctxt "shipname"
+msgid "Biá"
+msgstr "Biá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:103
+msgctxt "shipname"
+msgid "Camaiú"
+msgstr "Camaiú"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:105
+msgctxt "shipname"
+msgid "Camanaú"
+msgstr "Camanaú"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:107
+msgctxt "shipname"
+msgid "Canumã"
+msgstr "Canumã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:109
+msgctxt "shipname"
+msgid "Capucapu"
+msgstr "Capucapu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:111
+msgctxt "shipname"
+msgid "Carabinani"
+msgstr "Carabinani"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:113
+msgctxt "shipname"
+msgid "Cauaburi"
+msgstr "Cauaburi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:115
+msgctxt "shipname"
+msgid "Caurés"
+msgstr "Caurés"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:117
+msgctxt "shipname"
+msgid "Ciriquiri"
+msgstr "Ciriquiri"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:119
+msgctxt "shipname"
+msgid "Coari"
+msgstr "Coari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:121
+msgctxt "shipname"
+msgid "Copatana"
+msgstr "Copatana"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:123
+msgctxt "shipname"
+msgid "Coti"
+msgstr "Coti"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:125
+msgctxt "shipname"
+msgid "Cubate"
+msgstr "Cubate"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:127
+msgctxt "shipname"
+msgid "Cuiari"
+msgstr "Cuiari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:129
+msgctxt "shipname"
+msgid "Cuieiras"
+msgstr "Cuieiras"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:131
+msgctxt "shipname"
+msgid "Cuini"
+msgstr "Cuini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:133
+msgctxt "shipname"
+msgid "Cuniuá"
+msgstr "Cuniuá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:135
+msgctxt "shipname"
+msgid "Curicuriari"
+msgstr "Curicuriari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:137
+msgctxt "shipname"
+msgid "Curiuaú"
+msgstr "Curiuaú"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:139
+msgctxt "shipname"
+msgid "Curuçá"
+msgstr "Curuçá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:141
+msgctxt "shipname"
+msgid "Curuduri"
+msgstr "Curuduri"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:143
+msgctxt "shipname"
+msgid "Curuquetê"
+msgstr "Curuquetê"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:145
+msgctxt "shipname"
+msgid "Daraá"
+msgstr "Daraá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:147
+msgctxt "shipname"
+msgid "Demini"
+msgstr "Demini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:149
+msgctxt "shipname"
+msgid "Dos Marmelos"
+msgstr "Dos Marmelos"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:151
+msgctxt "shipname"
+msgid "Eiru"
+msgstr "Eiru"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:153
+msgctxt "shipname"
+msgid "Endimari"
+msgstr "Endimari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:155
+msgctxt "shipname"
+msgid "Envira"
+msgstr "Envira"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:157
+msgctxt "shipname"
+msgid "Gregório"
+msgstr "Gregório"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:159
+msgctxt "shipname"
+msgid "Guaribe"
+msgstr "Guaribe"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:161
+msgctxt "shipname"
+msgid "Iá"
+msgstr "Iá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:163
+msgctxt "shipname"
+msgid "Iaco"
+msgstr "Iaco"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:165
+msgctxt "shipname"
+msgid "Içá"
+msgstr "Içá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:167
+msgctxt "shipname"
+msgid "Içana"
+msgstr "Içana"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:169
+msgctxt "shipname"
+msgid "Inauini"
+msgstr "Inauini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:171
+msgctxt "shipname"
+msgid "Ipixuna"
+msgstr "Ipixuna"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:173
+msgctxt "shipname"
+msgid "Itanhauá"
+msgstr "Itanhauá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:175
+msgctxt "shipname"
+msgid "Itaparaná"
+msgstr "Itaparaná"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:177
+msgctxt "shipname"
+msgid "Itaquai"
+msgstr "Itaquai"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:179
+msgctxt "shipname"
+msgid "Itucumã"
+msgstr "Itucumã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:181
+msgctxt "shipname"
+msgid "Ituí"
+msgstr "Ituí"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:183
+msgctxt "shipname"
+msgid "Ituxi"
+msgstr "Ituxi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:185
+msgctxt "shipname"
+msgid "Jacaré"
+msgstr "Jacaré"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:187
+msgctxt "shipname"
+msgid "Jamicia"
+msgstr "Jamicia"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:189
+msgctxt "shipname"
+msgid "Jandiatuba"
+msgstr "Jandiatuba"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:191
+msgctxt "shipname"
+msgid "Japurá"
+msgstr "Japurá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:193
+msgctxt "shipname"
+msgid "Jaquirana"
+msgstr "Jaquirana"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:195
+msgctxt "shipname"
+msgid "Jari"
+msgstr "Jari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:197
+msgctxt "shipname"
+msgid "Jatapu"
+msgstr "Jatapu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:199
+msgctxt "shipname"
+msgid "Jatuarana"
+msgstr "Jatuarana"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:201
+msgctxt "shipname"
+msgid "Jaú"
+msgstr "Jaú"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:203
+msgctxt "shipname"
+msgid "Jauaperi"
+msgstr "Jauaperi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:205
+msgctxt "shipname"
+msgid "Javary"
+msgstr "Javary"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:207
+msgctxt "shipname"
+msgid "Juami"
+msgstr "Juami"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:209
+msgctxt "shipname"
+msgid "Jufari"
+msgstr "Jufari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:211
+msgctxt "shipname"
+msgid "Juma"
+msgstr "Juma"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:213
+msgctxt "shipname"
+msgid "Juruá"
+msgstr "Juruá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:215
+msgctxt "shipname"
+msgid "Juruena"
+msgstr "Juruena"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:217
+msgctxt "shipname"
+msgid "Jurupari"
+msgstr "Jurupari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:219
+msgctxt "shipname"
+msgid "Jutai"
+msgstr "Jutai"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:221
+msgctxt "shipname"
+msgid "Jutaizinho"
+msgstr "Jutaizinho"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:223
+msgctxt "shipname"
+msgid "Liberdade"
+msgstr "Liberdade"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:225
+msgctxt "shipname"
+msgid "Luna"
+msgstr "Luna"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:227
+msgctxt "shipname"
+msgid "Madeira"
+msgstr "Madeira"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:229
+msgctxt "shipname"
+msgid "Madeirinha"
+msgstr "Madeirinha"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:231
+msgctxt "shipname"
+msgid "Maiá"
+msgstr "Maiá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:233
+msgctxt "shipname"
+msgid "Maici"
+msgstr "Maici"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:235
+msgctxt "shipname"
+msgid "Mamiá"
+msgstr "Mamiá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:237
+msgctxt "shipname"
+msgid "Mamoriá"
+msgstr "Mamoriá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:239
+msgctxt "shipname"
+msgid "Mamuru"
+msgstr "Mamuru"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:241
+msgctxt "shipname"
+msgid "Manacapuru"
+msgstr "Manacapuru"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:243
+msgctxt "shipname"
+msgid "Manicoré"
+msgstr "Manicoré"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:245
+msgctxt "shipname"
+msgid "Manicorezinho"
+msgstr "Manicorezinho"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:247
+msgctxt "shipname"
+msgid "Mapari"
+msgstr "Mapari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:249
+msgctxt "shipname"
+msgid "Mapiá Grande"
+msgstr "Mapiá Grande"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:251
+msgctxt "shipname"
+msgid "Maracanã"
+msgstr "Maracanã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:253
+msgctxt "shipname"
+msgid "Marari"
+msgstr "Marari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:255
+msgctxt "shipname"
+msgid "Marauiá"
+msgstr "Marauiá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:257
+msgctxt "shipname"
+msgid "Marié"
+msgstr "Marié"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:259
+msgctxt "shipname"
+msgid "Mariepauá"
+msgstr "Mariepauá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:261
+msgctxt "shipname"
+msgid "Marimari"
+msgstr "Marimari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:263
+msgctxt "shipname"
+msgid "Mataurá"
+msgstr "Mataurá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:265
+msgctxt "shipname"
+msgid "Matupiri"
+msgstr "Matupiri"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:267
+msgctxt "shipname"
+msgid "Maués Açu"
+msgstr "Maués Açu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:269
+msgctxt "shipname"
+msgid "Mineruázinho"
+msgstr "Mineruázinho"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:271
+msgctxt "shipname"
+msgid "Muaco"
+msgstr "Muaco"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:273
+msgctxt "shipname"
+msgid "Mucum"
+msgstr "Mucum"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:275
+msgctxt "shipname"
+msgid "Mutum"
+msgstr "Mutum"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:277
+msgctxt "shipname"
+msgid "Nhamundá"
+msgstr "Nhamundá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:279
+msgctxt "shipname"
+msgid "Paciá"
+msgstr "Paciá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:281
+msgctxt "shipname"
+msgid "Padauari"
+msgstr "Padauari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:283
+msgctxt "shipname"
+msgid "Papagaio"
+msgstr "Papagaio"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:285
+msgctxt "shipname"
+msgid "Papuri"
+msgstr "Papuri"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:287
+msgctxt "shipname"
+msgid "Paraconi"
+msgstr "Paraconi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:289
+msgctxt "shipname"
+msgid "Parauari"
+msgstr "Parauari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:291
+msgctxt "shipname"
+msgid "Pardo"
+msgstr "Pardo"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:293
+msgctxt "shipname"
+msgid "Pati"
+msgstr "Pati"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:295
+msgctxt "shipname"
+msgid "Pauini"
+msgstr "Pauini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:297
+msgctxt "shipname"
+msgid "Pinhuã"
+msgstr "Pinhuã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:299
+msgctxt "shipname"
+msgid "Piorini"
+msgstr "Piorini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:301
+msgctxt "shipname"
+msgid "Piratucu"
+msgstr "Piratucu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:303
+msgctxt "shipname"
+msgid "Pitinga"
+msgstr "Pitinga"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:305
+msgctxt "shipname"
+msgid "Preto"
+msgstr "Preto"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:307
+msgctxt "shipname"
+msgid "Preto da Eva"
+msgstr "Preto da Eva"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:309
+msgctxt "shipname"
+msgid "Prêto do Igapó-Açu"
+msgstr "Prêto do Igapó-Açu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:311
+msgctxt "shipname"
+msgid "Puduari"
+msgstr "Puduari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:313
+msgctxt "shipname"
+msgid "Pureté"
+msgstr "Pureté"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:315
+msgctxt "shipname"
+msgid "Puruê"
+msgstr "Puruê"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:317
+msgctxt "shipname"
+msgid "Purus"
+msgstr "Purus"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:319
+msgctxt "shipname"
+msgid "Quixito"
+msgstr "Quixito"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:321
+msgctxt "shipname"
+msgid "Rio Negro"
+msgstr "Rio Negro"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:323
+msgctxt "shipname"
+msgid "Riozinho"
+msgstr "Riozinho"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:325
+msgctxt "shipname"
+msgid "Sepatini"
+msgstr "Sepatini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:327
+msgctxt "shipname"
+msgid "Sepoti"
+msgstr "Sepoti"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:329
+msgctxt "shipname"
+msgid "Seruini"
+msgstr "Seruini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:331
+msgctxt "shipname"
+msgid "Sucunduri"
+msgstr "Sucunduri"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:333
+msgctxt "shipname"
+msgid "Tapajós"
+msgstr "Tapajós"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:335
+msgctxt "shipname"
+msgid "Tapauá"
+msgstr "Tapauá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:337
+msgctxt "shipname"
+msgid "Tarauacá"
+msgstr "Tarauacá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:339
+msgctxt "shipname"
+msgid "Tarumã Açu"
+msgstr "Tarumã Açu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:341
+msgctxt "shipname"
+msgid "Tarumã Mirim"
+msgstr "Tarumã Mirim"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:343
+msgctxt "shipname"
+msgid "Tea"
+msgstr "Tea"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:345
+msgctxt "shipname"
+msgid "Tefé"
+msgstr "Tefé"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:347
+msgctxt "shipname"
+msgid "Tonantins"
+msgstr "Tonantins"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:349
+msgctxt "shipname"
+msgid "Toototobi"
+msgstr "Toototobi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:351
+msgctxt "shipname"
+msgid "Traira"
+msgstr "Traira"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:353
+msgctxt "shipname"
+msgid "Tumiã"
+msgstr "Tumiã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:355
+msgctxt "shipname"
+msgid "Tupana"
+msgstr "Tupana"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:357
+msgctxt "shipname"
+msgid "Uaicurapa"
+msgstr "Uaicurapa"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:359
+msgctxt "shipname"
+msgid "Uarini"
+msgstr "Uarini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:361
+msgctxt "shipname"
+msgid "Uatumã"
+msgstr "Uatumã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:363
+msgctxt "shipname"
+msgid "Uaupés"
+msgstr "Uaupés"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:365
+msgctxt "shipname"
+msgid "Umari"
+msgstr "Umari"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:367
+msgctxt "shipname"
+msgid "Uneiuxi"
+msgstr "Uneiuxi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:369
+msgctxt "shipname"
+msgid "Unini"
+msgstr "Unini"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:371
+msgctxt "shipname"
+msgid "Uruá"
+msgstr "Uruá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:373
+msgctxt "shipname"
+msgid "Urubaxi"
+msgstr "Urubaxi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:375
+msgctxt "shipname"
+msgid "Urubu"
+msgstr "Urubu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:377
+msgctxt "shipname"
+msgid "Urucu"
+msgstr "Urucu"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:379
+msgctxt "shipname"
+msgid "Urupadi"
+msgstr "Urupadi"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:381
+msgctxt "shipname"
+msgid "Xeruã"
+msgstr "Xeruã"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:383
+msgctxt "shipname"
+msgid "Xie"
+msgstr "Xie"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:385
+msgctxt "shipname"
+msgid "Zinho"
+msgstr "Zinho"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:83
