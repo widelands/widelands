@@ -474,28 +474,24 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	initialization_complete();
 }
 void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
-	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres(), 0};
+	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres()};
 
 	resolution_dropdown_.add(
 	   /** TRANSLATORS: Entry in the window size dropdown*/
-	   _("Fullscreen"), {kDropdownFullscreen, kDropdownFullscreen, 32}, nullptr, opt.fullscreen);
+	   _("Fullscreen"), {kDropdownFullscreen, kDropdownFullscreen}, nullptr, opt.fullscreen);
 #ifdef RESIZABLE_WINDOW
 	/** TRANSLATORS: Entry in the window size dropdown*/
-	resolution_dropdown_.add(_("Maximized"), {kDropdownMaximized, kDropdownMaximized, 32}, nullptr,
+	resolution_dropdown_.add(_("Maximized"), {kDropdownMaximized, kDropdownMaximized}, nullptr,
 	                         !resolution_dropdown_.has_selection() && opt.maximized);
 #endif
 
-	ScreenResolution previous{0, 0, 0};
+	ScreenResolution previous{0, 0};
 	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
 		SDL_DisplayMode mode;
 		SDL_GetDisplayMode(0, modes, &mode);
 		if (kMinimumResolutionW <= mode.w && kMinimumResolutionH <= mode.h &&
 		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
-			ScreenResolution this_res = {
-			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
-			if (this_res.depth == 24) {
-				this_res.depth = 32;
-			}
+			ScreenResolution this_res = {mode.w, mode.h};
 			if (this_res != previous) {
 				previous = this_res;
 				const bool selected = !resolution_dropdown_.has_selection() && this_res == current_res;

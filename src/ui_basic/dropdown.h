@@ -344,8 +344,7 @@ public:
 		// re-add initially selected entry with adapted texts to inform user
 		for (auto& x : unfiltered_entries) {
 			if (x.value == selected_entry_) {
-				add_to_filtered_list(_("No matches"), x.value, x.img, false,
-				                     _("Previously selected entry will be selected again"), x.hotkey);
+				add_to_filtered_list("", x.value, x.img, false, _("No matches"), x.hotkey);
 			}
 		}
 	}
@@ -408,7 +407,7 @@ private:
 	public:
 		const std::string name;
 		const Entry value;
-		const Image* img = nullptr;
+		const Image* img;
 		const std::string tooltip;
 		const std::string hotkey;
 	};

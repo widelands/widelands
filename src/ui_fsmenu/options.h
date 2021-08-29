@@ -133,7 +133,6 @@ private:
 	public:
 		int32_t xres;
 		int32_t yres;
-		int32_t depth;
 		inline bool operator==(const ScreenResolution& x) const {
 			return xres == x.xres && yres == x.yres;
 		}
