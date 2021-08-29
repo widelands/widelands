@@ -109,7 +109,6 @@ descriptions:new_soldier_type {
    vision_range = 2,
 
    animation_directory = dirname,
-   animations = animations,
    spritesheets = spritesheets,
 
    -- Battle attributes - initial values and per level increase
