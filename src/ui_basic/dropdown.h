@@ -408,7 +408,7 @@ private:
 	public:
 		const std::string name;
 		const Entry value;
-		const Image* img;
+		const Image* img = nullptr;
 		const std::string tooltip;
 		const std::string hotkey;
 	};
