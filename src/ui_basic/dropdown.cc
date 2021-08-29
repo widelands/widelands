@@ -533,7 +533,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (!current_filter_.empty()) {
-		current_filter_ = current_filter_.substr(0, current_filter_.size() - 1);
+		current_filter_.pop_back();
 		apply_filter();
 	}
 }
