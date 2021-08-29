@@ -21,6 +21,15 @@ descriptions:new_tribe {
       bridge_normal_sw = { hotspot = {36, 3} },
       bridge_busy_sw = { hotspot = {36, 3} }
    },
+   spritesheets = {
+      flag = {
+         fps = 10,
+         frames = 16,
+         rows = 4,
+         columns = 4,
+         hotspot = { 48, 45 }
+      },
+   }
 
    bridge_height = 8,
 
