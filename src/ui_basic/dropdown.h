@@ -215,7 +215,9 @@ private:
 	bool is_mouse_away() const;
 
 	virtual void apply_filter() = 0;
-	virtual void save_selected_entry(uint32_t) {};
+	virtual void save_selected_entry(uint32_t) {
+	   // cannot pure because it is called from constructor
+	};
 
 	/// Give each dropdown a unique ID
 	static int next_id_;
