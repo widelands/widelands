@@ -319,8 +319,9 @@ public:
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
-		std::string lower = std::string(input_text);
-		lower[0] = std::tolower(lower[0]);
+		std::string lower = input_text;
+		transform(
+		   lower.begin(), lower.end(), lower.begin(), [](unsigned char c) { return tolower(c); });
 		current_filter_ = current_filter_.append(lower);
 
 		apply_filter();
