@@ -91,11 +91,22 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
     *Mandatory*. The location of the animation png files.
 
 **animations**
-    *Mandatory*. A table containing all animations for this building. Every building
+    *Optional*. A table containing all file animations for this building. Every building
     needs to have an ``idle`` animation. Other animations that a building
     can have are ``build``, ``working``, ``unoccupied``. Mines also have
-    an ``unoccupied`` animation.
-    See :doc:`animations` for a detailed description of the animation format.
+    an ``empty`` animation.
+    Animations can either be defined as file animations in this table or as spritesheet animations
+    as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
+    See :doc:`animations` for a detailed description of the animation formats.
+
+**spritesheets**
+    *Optional*. A table containing all spritesheet animations for this building. Every building
+    needs to have an ``idle`` animation. Other animations that a building
+    can have are ``build``, ``working``, ``unoccupied``. Mines also have
+    an ``empty`` animation.
+    Animations can either be defined as spritesheet animations in this table or as file animations
+    as defined in table ``animations``. A mixture of the two animation formats is allowed.
+    See :doc:`animations` for a detailed description of the animation formats.
 
 **needs_seafaring**
     *Optional. Default:* ``false``. Set to ``true`` if this building will only be available on seafaring maps.
