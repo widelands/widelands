@@ -241,21 +241,72 @@ void Slider::set_highlighted(bool highlighted) {
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
 		switch (code.sym) {
+		case SDLK_KP_2:
+		case SDLK_KP_4:
+			if (code.mod & KMOD_NUM) {
+				// numbers are handled later
+				break;
+			}  // else
+			FALLS_THROUGH;
+		case SDLK_DOWN:
+		case SDLK_LEFT:
 		case SDLK_MINUS:
 		case SDLK_KP_MINUS:
 			set_value((code.mod & KMOD_CTRL) ? 0 : get_value() - 1);
 			return true;
+		case SDLK_KP_8:
+		case SDLK_KP_6:
+			if (code.mod & KMOD_NUM) {
+				// numbers are handled later
+				break;
+			}  // else
+			FALLS_THROUGH;
+		case SDLK_UP:
+		case SDLK_RIGHT:
 		case SDLK_PLUS:
 		case SDLK_KP_PLUS:
 			set_value((code.mod & KMOD_CTRL) ? get_max_value() : get_value() + 1);
 			return true;
-		default:
-			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
-				set_value(get_min_value() + code.sym - SDLK_1);
-			} else if (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && !(code.mod & KMOD_NUM)) {
-				set_value(get_min_value() + code.sym - SDLK_KP_1);
-			} else {
+		case SDLK_KP_7:
+			if (code.mod & KMOD_NUM) {
+				// numbers are handled later
 				break;
+			}  // else
+			FALLS_THROUGH;
+		case SDLK_HOME:
+			set_value(0);
+			return true;
+		case SDLK_KP_1:
+			if (code.mod & KMOD_NUM) {
+				// numbers are handled later
+				break;
+			}  // else
+			FALLS_THROUGH;
+		case SDLK_END:
+			set_value(get_max_value());
+			return true;
+		default:
+			break;
+		}
+		int32_t num = -1;
+		if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
+			num = code.sym - SDLK_1;
+		} else if (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM)) {
+			num = code.sym - SDLK_KP_1;
+		}
+		if (num >= 0) {
+			constexpr int32_t max_num = 9 - 1;
+			int32_t min = get_min_value();
+			int32_t max = get_max_value();
+
+			if (num == 0) {
+				set_value(min);
+			} else if (num == max_num) {
+				set_value(max);
+			} else if (max - min <= max_num) {
+				set_value(min + num);
+			} else {
+				set_value(min + ((max - min) * num) / max_num);
 			}
 			return true;
 		}

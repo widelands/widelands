@@ -200,6 +200,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			FALLS_THROUGH;
 		case SDLK_UP:
 		case SDLK_RIGHT:
+		case SDLK_PLUS:
+		case SDLK_KP_PLUS:
 			if (sbi_->button_plus) {
 				change_value(sbi_->step_size);
 				return true;
@@ -215,6 +217,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			FALLS_THROUGH;
 		case SDLK_DOWN:
 		case SDLK_LEFT:
+		case SDLK_MINUS:
+		case SDLK_KP_MINUS:
 			if (sbi_->button_minus) {
 				change_value(-sbi_->step_size);
 				return true;
