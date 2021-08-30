@@ -681,8 +681,8 @@ bool MapView::scroll_map() {
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
 
-	// set the scrolling distance
-	const uint16_t xres = g_gr->get_xres();
+	   // set the scrolling distance
+	   const uint16_t xres = g_gr->get_xres();
 	const uint16_t yres = g_gr->get_yres();
 
 	uint16_t scroll_distance_x = xres / 8;
