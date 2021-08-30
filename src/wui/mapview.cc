@@ -637,15 +637,18 @@ void MapView::zoom_around(float new_zoom,
 }
 
 void MapView::reset_zoom() {
-	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::increase_zoom() {
 	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::decrease_zoom() {
 	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 
 bool MapView::is_dragging() const {
@@ -728,15 +731,21 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomIn, code)) {
-		increase_zoom();
+		if (!is_animating()) {
+			increase_zoom();
+		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomOut, code)) {
-		decrease_zoom();
+		if (!is_animating()) {
+			decrease_zoom();
+		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomReset, code)) {
-		reset_zoom();
+		if (!is_animating()) {
+			reset_zoom();
+		}
 		return true;
 	}
 
