@@ -343,10 +343,11 @@ public:
 	}
 
 	void add_no_match_entry() {
-		const Image* empty_icon = g_image_cache->get("images/wui/editor/no_ware.png");
 		// re-add initially selected entry with adapted texts to inform user
 		for (auto& x : unfiltered_entries) {
 			if (x.value == selected_entry_) {
+				const Image* empty_icon =
+				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
 				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"), x.hotkey);
 			}
 		}
