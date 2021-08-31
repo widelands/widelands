@@ -19,10 +19,11 @@ function stable_save(game, savename, desired_speed)
 
    -- Give the loaded game a chance to catch up
    local counter = 0
-   while mapview.average_fps < 20 and counter < 100 do
-      sleep(200)
-      counter = counter + 1
-   end
+   -- while mapview.average_fps < 20 and counter < 100 do
+      -- sleep(200)
+      -- counter = counter + 1
+   -- end
+   sleep(5000)
 
    game.desired_speed = desired_speed
    sleep(100)
