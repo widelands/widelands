@@ -147,27 +147,27 @@ wl.Descriptions():new_critter_type{
 
    spritesheets = {
       idle = {
---          fps = 20,
---          frames = 7,
---          rows = 4,
---          columns = 2,
---          hotspot = { 9, 12 }
+         fps = 20,
+         frames = 7,
+         rows = 4,
+         columns = 2,
+         hotspot = { 9, 12 }
       },
       eating = {
---          basename = "idle", -- TODO(Nordfriese): Make animation
---          fps = 20,
---          frames = 7,
---          rows = 4,
---          columns = 2,
---          hotspot = { 9, 12 }
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         fps = 20,
+         frames = 7,
+         rows = 4,
+         columns = 2,
+         hotspot = { 9, 12 }
       },
       walk = {
---          fps = 20,
---          frames = 20,
---          rows = 5,
---          columns = 4,
---          directional = true,
---          hotspot = { 13, 15 }
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 13, 15 }
       },
    },
 
