@@ -2,7 +2,7 @@
 -- .. _lua_world_critters:
 --
 -- Critters (Animals)
--- ----------
+-- ------------------
 --
 -- Critters are entities owned by the world that will move around the map at random, usually animals. On how to add fish to the map, see :ref:`lua_world_resources`.
 --
