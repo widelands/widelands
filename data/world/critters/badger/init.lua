@@ -2,7 +2,7 @@
 -- .. _lua_world_critters:
 --
 -- Critters (Animals)
--- ------------------
+-- ----------
 --
 -- Critters are entities owned by the world that will move around the map at random, usually animals. On how to add fish to the map, see :ref:`lua_world_resources`.
 --
@@ -18,12 +18,12 @@
 --    **name**
 --        *Mandatory*. A string containing the internal name of this critter, e.g.::
 --
-----             name = "badger",
+--             name = "badger",
 --
 --    **descname**
 --        *Mandatory*. The translatable display name, e.g.::
 --
-----             descname = _"Badger",
+--             descname = _"Badger",
 --
 --    **animation_directory**
 --        *Mandatory*. The location of the animation png files.
@@ -31,39 +31,39 @@
 --    **editor_category**
 --        *Deprecated*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
 --
-----             editor_category = "critters_carnivores",
+--             editor_category = "critters_carnivores",
 --
 --    **size**
 --        *Mandatory*. This critter's size in relative units (bigger values mean larger and stronger), within range 1..10, e.g.::
 --
-----             size = 5,
+--             size = 5,
 --
 --    **reproduction_rate**
 --        *Mandatory*. How likely this critter is to consider reproducing when it finds a mating partner, in %, e.g.::
 --
-----             reproduction_rate = 10,
+--             reproduction_rate = 10,
 --
 --    **herbivore**
 --        *Optional*. An array of attribute names. If given, this critter considers any immovable with one of these attributes food. E.g.::
 --
-----             herbivore = { "field" },
+--             herbivore = { "field" },
 --
 --    **carnivore**
 --        *Optional*. Whether this critter considers all other critter types food. E.g.::
 --
-----             carnivore = true,
+--             carnivore = true,
 --
 --    **appetite**
 --        *Mandatory* if ``herbivore`` or ``carnivore`` is given. How likely this critter is to eat when it finds food, in %, e.g.::
 --
-----             appetite = 20,
+--             appetite = 20,
 --
 --    **programs**
 --        *Mandatory*. Every critter has an automatic default program, which is to move around the map at random. Additional programs can be defined that other map objects can then call in their programs, e.g.::
 --
-----             programs = {
-----                remove = { "remove" }, -- A hunter will call this after catching this animal
-----             },
+--             programs = {
+--                remove = { "remove" }, -- A hunter will call this after catching this animal
+--             },
 --
 --    **animations**
 --        *Optional*. A table containing all file animations for this critter. Every critter
@@ -92,7 +92,7 @@
 --       descname = _ "Badger",
 --       animation_directory = path.dirname(__file__),
 --       programs = {
-----           remove = { "remove" },
+--           remove = { "remove" },
 --       },
 --       size = 4,
 --       reproduction_rate = 70,
