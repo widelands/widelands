@@ -32,6 +32,7 @@ wl.Descriptions():new_critter_type{
          hotspot = { 21, 16 }
       },
       walk = {
+         fps = 20,
          frames = 20,
          rows = 5,
          columns = 4,
