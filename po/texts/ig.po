@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 08:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2021-08-28 02:36+0000\n"
+"PO-Revision-Date: 2021-08-28 02:37+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Igbo (http://www.transifex.com/widelands/widelands/language/ig/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,7 +515,7 @@ msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
-"Rare woods are the backbone of an amazon economy. Build rare tree "
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
 msgstr ""
 
@@ -528,6 +528,48 @@ msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
+"only released near trees uninhabited by sentries."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
+"lashing canoes together to form ships."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
 msgstr ""
 
 #: ../../data/txts/tips/atlanteans.lua:4
