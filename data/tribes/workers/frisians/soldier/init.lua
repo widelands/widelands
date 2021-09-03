@@ -27,7 +27,6 @@ spritesheets = {
    -- Rookie
    idle = {
       directory = dirname .. "rookie",
-      basename = "idle",
       fps = 10,
       frames = 50,
       rows = 8,
@@ -36,7 +35,6 @@ spritesheets = {
    },
    walk = {
       directory = dirname .. "rookie",
-      basename = "walk",
       fps = 15,
       frames = 10,
       rows = 4,
@@ -46,7 +44,6 @@ spritesheets = {
    },
    atk_ok_1_e = {
       directory = dirname .. "rookie",
-      basename = "atk_ok_1_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -55,7 +52,7 @@ spritesheets = {
    },
    atk_ok_1_w = {
       directory = dirname .. "rookie",
-      basename = "atk_ok_1_w",fps = 10,
+      fps = 10,
       frames = 10,
       rows = 4,
       columns = 3,
@@ -63,7 +60,6 @@ spritesheets = {
    },
    atk_ok_2_e = {
       directory = dirname .. "rookie",
-      basename = "atk_ok_2_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -72,7 +68,6 @@ spritesheets = {
    },
    atk_ok_2_w = {
       directory = dirname .. "rookie",
-      basename = "atk_ok_2_w",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -81,7 +76,6 @@ spritesheets = {
    },
    atk_fail_1_e = {
       directory = dirname .. "rookie",
-      basename = "atk_fail_1_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -90,7 +84,6 @@ spritesheets = {
    },
    atk_fail_1_w = {
       directory = dirname .. "rookie",
-      basename = "atk_fail_1_w",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -99,7 +92,6 @@ spritesheets = {
    },
    atk_fail_2_e = {
       directory = dirname .. "rookie",
-      basename = "atk_fail_2_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -108,7 +100,6 @@ spritesheets = {
    },
    atk_fail_2_w = {
       directory = dirname .. "rookie",
-      basename = "atk_fail_2_w",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -117,7 +108,6 @@ spritesheets = {
    },
    eva_fail_e = {
       directory = dirname .. "rookie",
-      basename = "eva_fail_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -126,7 +116,6 @@ spritesheets = {
    },
    eva_fail_w = {
       directory = dirname .. "rookie",
-      basename = "eva_fail_w",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -135,7 +124,6 @@ spritesheets = {
    },
    eva_ok_e = {
       directory = dirname .. "rookie",
-      basename = "eva_ok_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -144,7 +132,6 @@ spritesheets = {
    },
    eva_ok_w = {
       directory = dirname .. "rookie",
-      basename = "eva_ok_w",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -153,7 +140,6 @@ spritesheets = {
    },
    die_e = {
       directory = dirname .. "rookie",
-      basename = "die_e",
       fps = 10,
       frames = 10,
       rows = 4,
@@ -162,30 +148,34 @@ spritesheets = {
    },
    die_w = {
       directory = dirname .. "rookie",
-      basename = "die_w",
       fps = 10,
       frames = 10,
       rows = 4,
       columns = 3,
       hotspot = { 15, 25 }
    },
+   -- Health upgrade only
+   health_idle = {
+      directory = dirname .. "helm",
+      fps = 10,
+      frames = 50,
+      rows = 8,
+      columns = 7,
+      hotspot = { 7, 25 }
+   },
+   health_walk = {
+      directory = dirname .. "helm",
+      fps = 15,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 7, 25 }
+   },
 }
 
 animations = {
    -- Health upgrade only
-   health_idle = {
-      directory = dirname .. "helm",
-      basename = "idle",
-      hotspot = {20, 25},
-      fps = 10
-   },
-   health_walk = {
-      directory = dirname .. "helm",
-      basename = "walk",
-      hotspot = {7, 25},
-      fps = 15,
-      directional = true
-   },
    health_atk_ok_1_e = {
       directory = dirname .. "helm",
       basename = "atk_ok_1_e",
