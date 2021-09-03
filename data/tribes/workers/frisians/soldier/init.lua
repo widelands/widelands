@@ -23,106 +23,155 @@ dirname = path.dirname (__file__)
 -- The above explanation refers only to frisian soldiers. Other tribes's soldiers
 -- may follow other conventions described in their respective init.lua's.
 
-animations = {
+spritesheets = {
    -- Rookie
    idle = {
       directory = dirname .. "rookie",
       basename = "idle",
-      hotspot = {20, 24},
-      fps = 10
+      fps = 10,
+      frames = 50,
+      rows = 8,
+      columns = 7,
+      hotspot = { 7, 23 }
    },
    walk = {
       directory = dirname .. "rookie",
       basename = "walk",
-      hotspot = {7, 24},
       fps = 15,
-      directional = true
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 7, 24 }
    },
    atk_ok_1_e = {
       directory = dirname .. "rookie",
       basename = "atk_ok_1_e",
-      hotspot = {23, 24},
-      fps = 10
-   },
-   atk_fail_1_e = {
-      directory = dirname .. "rookie",
-      basename = "atk_fail_1_e",
-      hotspot = {23, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
    },
    atk_ok_1_w = {
       directory = dirname .. "rookie",
-      basename = "atk_ok_1_w",
-      hotspot = {-1, 22},
-      fps = 10
-   },
-   atk_fail_1_w = {
-      directory = dirname .. "rookie",
-      basename = "atk_fail_1_w",
-      hotspot = {-1, 22},
-      fps = 10
+      basename = "atk_ok_1_w",fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 22 }
    },
    atk_ok_2_e = {
       directory = dirname .. "rookie",
       basename = "atk_ok_2_e",
-      hotspot = {23, 23},
-      fps = 10
-   },
-   atk_fail_2_e = {
-      directory = dirname .. "rookie",
-      basename = "atk_fail_2_e",
-      hotspot = {23, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 23 }
    },
    atk_ok_2_w = {
       directory = dirname .. "rookie",
       basename = "atk_ok_2_w",
-      hotspot = {-1, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 23 }
+   },
+   atk_fail_1_e = {
+      directory = dirname .. "rookie",
+      basename = "atk_fail_1_e",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 23 }
+   },
+   atk_fail_1_w = {
+      directory = dirname .. "rookie",
+      basename = "atk_fail_1_w",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 22 }
+   },
+   atk_fail_2_e = {
+      directory = dirname .. "rookie",
+      basename = "atk_fail_2_e",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 23 }
    },
    atk_fail_2_w = {
       directory = dirname .. "rookie",
       basename = "atk_fail_2_w",
-      hotspot = {-1, 23},
-      fps = 10
-   },
-   eva_ok_e = {
-      directory = dirname .. "rookie",
-      basename = "eva_ok_e",
-      hotspot = {11, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 23 }
    },
    eva_fail_e = {
       directory = dirname .. "rookie",
       basename = "eva_fail_e",
-      hotspot = {12, 23},
-      fps = 10
-   },
-   eva_ok_w = {
-      directory = dirname .. "rookie",
-      basename = "eva_ok_w",
-      hotspot = {-1, 22},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 12, 23 }
    },
    eva_fail_w = {
       directory = dirname .. "rookie",
       basename = "eva_fail_w",
-      hotspot = {-1, 22},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 22 }
    },
-   die_w = {
+   eva_ok_e = {
       directory = dirname .. "rookie",
-      basename = "die_w",
-      hotspot = {15, 25},
-      fps = 10
+      basename = "eva_ok_e",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 11, 23 }
+   },
+   eva_ok_w = {
+      directory = dirname .. "rookie",
+      basename = "eva_ok_w",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 22 }
    },
    die_e = {
       directory = dirname .. "rookie",
       basename = "die_e",
-      hotspot = {12, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 12, 23 }
    },
+   die_w = {
+      directory = dirname .. "rookie",
+      basename = "die_w",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 15, 25 }
+   },
+}
 
+animations = {
    -- Health upgrade only
    health_idle = {
       directory = dirname .. "helm",
@@ -495,6 +544,7 @@ descriptions:new_soldier_type {
    vision_range = 2,
 
    animations = animations,
+   spritesheets = spritesheets,
 
    -- Battle attributes - initial values and per level increase
    health = {
