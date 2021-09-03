@@ -517,8 +517,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			}
 			return true;
 		case SDLK_ESCAPE:
-			if (list_->is_visible()) {
-				toggle_list();
+			if (is_expanded()) {
+				if (is_filtered()) {
+					clear_filter();
+				} else {
+					set_list_visibility(false);
+				}
 				return true;
 			}
 			break;
@@ -526,16 +530,19 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	if (list_->is_visible()) {
+	if (is_expanded()) {
 		return list_->handle_key(down, code);
 	}
 	return NamedPanel::handle_key(down, code);
 }
 void BaseDropdown::delete_last_of_filter() {
-	if (!current_filter_.empty()) {
+	if (is_filtered()) {
 		current_filter_.pop_back();
 		apply_filter();
 	}
+}
+bool BaseDropdown::is_filtered() {
+	return !current_filter_.empty();
 }
 
 }  // namespace UI

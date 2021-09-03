@@ -161,6 +161,8 @@ public:
 	virtual void clear_filter() = 0;
 	void delete_last_of_filter();
 
+	bool is_filtered();
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry

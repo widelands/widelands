@@ -622,8 +622,11 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			linked_dropdown->delete_last_of_filter();
 			return true;
 		case SDLK_ESCAPE:
-			linked_dropdown->clear_filter();
-			linked_dropdown->set_list_visibility(false);
+			if (linked_dropdown->is_filtered()) {
+				linked_dropdown->clear_filter();
+			} else {
+				linked_dropdown->set_list_visibility(false);
+			}
 			return true;
 		default:
 			break;
