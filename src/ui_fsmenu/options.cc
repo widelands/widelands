@@ -505,8 +505,8 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 
 	if (!resolution_dropdown_.has_selection()) {
 		resolution_dropdown_.add(
-		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		   (boost::format(_("%1% x %2%")) % current_res.xres % current_res.yres).str(), current_res,
+		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
+		   (boost::format(_("%1% × %2%")) % current_res.xres % current_res.yres).str(), current_res,
 		   nullptr, true);
 	}
 }
