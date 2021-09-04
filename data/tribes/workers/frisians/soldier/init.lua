@@ -433,118 +433,150 @@ spritesheets = {
    },
 
    -- Sword upgrade only
-}
-
-animations = {
-   -- Sword upgrade only
    attack_idle = {
       directory = dirname .. "sword",
-      basename = "idle",
-      hotspot = {20, 25},
-      fps = 10
+      fps = 10,
+      frames = 50,
+      rows = 8,
+      columns = 7,
+      hotspot = { 8, 23 }
    },
    attack_walk = {
       directory = dirname .. "sword",
-      basename = "walk",
-      hotspot = {8, 24},
       fps = 15,
-      directional = true
-   },
-   attack_atk_ok_1_e = {
-      directory = dirname .. "sword",
-      basename = "atk_ok_1_e",
-      hotspot = {23, 24},
-      fps = 10
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 8, 24 }
    },
    attack_atk_fail_1_e = {
       directory = dirname .. "sword",
-      basename = "atk_fail_1_e",
-      hotspot = {23, 24},
-      fps = 10
-   },
-   attack_atk_ok_1_w = {
-      directory = dirname .. "sword",
-      basename = "atk_ok_1_w",
-      hotspot = {0, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
    },
    attack_atk_fail_1_w = {
       directory = dirname .. "sword",
-      basename = "atk_fail_1_w",
-      hotspot = {0, 23},
-      fps = 10
-   },
-   attack_atk_ok_2_e = {
-      directory = dirname .. "sword",
-      basename = "atk_ok_2_e",
-      hotspot = {23, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 23 }
    },
    attack_atk_fail_2_e = {
       directory = dirname .. "sword",
-      basename = "atk_fail_2_e",
-      hotspot = {23, 23},
-      fps = 10
-   },
-   attack_atk_ok_2_w = {
-      directory = dirname .. "sword",
-      basename = "atk_ok_2_w",
-      hotspot = {0, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 23 }
    },
    attack_atk_fail_2_w = {
       directory = dirname .. "sword",
-      basename = "atk_fail_2_w",
-      hotspot = {0, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 23 }
    },
-   attack_eva_ok_e = {
+   attack_atk_ok_1_e = {
       directory = dirname .. "sword",
-      basename = "eva_ok_e",
-      hotspot = {13, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
+   },
+   attack_atk_ok_1_w = {
+      directory = dirname .. "sword",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 23 }
+   },
+   attack_atk_ok_2_e = {
+      directory = dirname .. "sword",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 23 }
+   },
+   attack_atk_ok_2_w = {
+      directory = dirname .. "sword",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 23 }
    },
    attack_eva_fail_e = {
       directory = dirname .. "sword",
-      basename = "eva_fail_e",
-      hotspot = {13, 23},
-      fps = 10
-   },
-   attack_eva_ok_w = {
-      directory = dirname .. "sword",
-      basename = "eva_ok_w",
-      hotspot = {0, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 23 }
    },
    attack_eva_fail_w = {
       directory = dirname .. "sword",
-      basename = "eva_fail_w",
-      hotspot = {0, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 23 }
    },
-   attack_die_f_w = {
+   attack_eva_ok_e = {
       directory = dirname .. "sword",
-      basename = "die_f_w",
-      hotspot = {-1, 21},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 23 }
    },
-   attack_die_f_e = {
+   attack_eva_ok_w = {
       directory = dirname .. "sword",
-      basename = "die_f_e",
-      hotspot = {19, 22},
-      fps = 10
-   },
-   attack_die_b_w = {
-      directory = dirname .. "sword",
-      basename = "die_b_w",
-      hotspot = {17, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 24 }
    },
    attack_die_b_e = {
       directory = dirname .. "sword",
-      basename = "die_b_e",
-      hotspot = {13, 23},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 23 }
+   },
+   attack_die_b_w = {
+      directory = dirname .. "sword",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 17, 25 }
+   },
+   attack_die_f_e = {
+      directory = dirname .. "sword",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 19, 22 }
+   },
+   attack_die_f_w = {
+      directory = dirname .. "sword",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 21 }
    },
 }
 
@@ -597,7 +629,6 @@ descriptions:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   animations = animations,
    spritesheets = spritesheets,
 
    -- Battle attributes - initial values and per level increase
