@@ -322,14 +322,26 @@ public:
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
+		if (!is_expanded()) {
+			if (input_text == " ") {
+				//	open the DD if space was pressed and do NOT add space to the filter
+				set_list_visibility(true);
+				return true;
+			} else {
+				// only allow filtering when dropdown is open
+				return BaseDropdown::handle_textinput(input_text);
+			}
+		}
+
+		update_filter(input_text);
+		apply_filter();
+		return true;
+	}
+	void update_filter(const std::string& input_text) {
 		std::string lower = input_text;
 		transform(
 		   lower.begin(), lower.end(), lower.begin(), [](unsigned char c) { return tolower(c); });
 		current_filter_ = current_filter_.append(lower);
-
-		apply_filter();
-
-		return true;
 	}
 
 	void apply_filter() override {

@@ -416,7 +416,7 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
+	                            list_->get_selected_name() :
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
@@ -431,7 +431,7 @@ void BaseDropdown::update() {
                                                            tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
+		                           list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
@@ -501,16 +501,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
 				// Check list visibility again, set_value() might have toggled it
-				if ((list_->is_visible() && code.sym != SDLK_SPACE) ||
-				    (!list_->is_visible() && code.sym == SDLK_SPACE)) {
+				if (list_->is_visible()) {
 					toggle_list();
 				}
-			} else if (code.sym == SDLK_SPACE) {
-				set_list_visibility(true);
 			} else {
 				// Handle Enter only if the list is open
 				return false;
