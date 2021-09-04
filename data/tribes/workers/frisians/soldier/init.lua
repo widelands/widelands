@@ -302,109 +302,140 @@ spritesheets = {
    },
 
    -- Health and attack upgrade
-   
-}
-
-animations = {
-   -- Health and attack upgrade
    hero_idle = {
       directory = dirname .. "hero",
-      basename = "idle",
-      hotspot = {20, 25},
-      fps = 10
+      fps = 10,
+      frames = 50,
+      rows = 8,
+      columns = 7,
+      hotspot = { 8, 25 }
    },
    hero_walk = {
       directory = dirname .. "hero",
-      basename = "walk",
-      hotspot = {8, 25},
       fps = 15,
-      directional = true
-   },
-   hero_atk_ok_1_e = {
-      directory = dirname .. "hero",
-      basename = "atk_ok_1_e",
-      hotspot = {23, 25},
-      fps = 10
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 8, 25 }
    },
    hero_atk_fail_1_e = {
       directory = dirname .. "hero",
-      basename = "atk_fail_1_e",
-      hotspot = {22, 25},
-      fps = 10
-   },
-   hero_atk_ok_1_w = {
-      directory = dirname .. "hero",
-      basename = "atk_ok_1_w",
-      hotspot = {0, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 22, 25 }
    },
    hero_atk_fail_1_w = {
       directory = dirname .. "hero",
-      basename = "atk_fail_1_w",
-      hotspot = {0, 25},
-      fps = 10
-   },
-   hero_atk_ok_2_e = {
-      directory = dirname .. "hero",
-      basename = "atk_ok_2_e",
-      hotspot = {23, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 25 }
    },
    hero_atk_fail_2_e = {
       directory = dirname .. "hero",
-      basename = "atk_fail_2_e",
-      hotspot = {23, 25},
-      fps = 10
-   },
-   hero_atk_ok_2_w = {
-      directory = dirname .. "hero",
-      basename = "atk_ok_2_w",
-      hotspot = {0, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 25 }
    },
    hero_atk_fail_2_w = {
       directory = dirname .. "hero",
-      basename = "atk_fail_2_w",
-      hotspot = {0, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 25 }
    },
-   hero_eva_ok_e = {
+   hero_atk_ok_1_e = {
       directory = dirname .. "hero",
-      basename = "eva_ok_e",
-      hotspot = {13, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 25 }
+   },
+   hero_atk_ok_1_w = {
+      directory = dirname .. "hero",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 25 }
+   },
+   hero_atk_ok_2_e = {
+      directory = dirname .. "hero",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 25 }
+   },
+   hero_atk_ok_2_w = {
+      directory = dirname .. "hero",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 25 }
    },
    hero_eva_fail_e = {
       directory = dirname .. "hero",
-      basename = "eva_fail_e",
-      hotspot = {13, 25},
-      fps = 10
-   },
-   hero_eva_ok_w = {
-      directory = dirname .. "hero",
-      basename = "eva_ok_w",
-      hotspot = {0, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 25 }
    },
    hero_eva_fail_w = {
       directory = dirname .. "hero",
-      basename = "eva_fail_w",
-      hotspot = {0, 25},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 25 }
    },
-   hero_die_w = {
+   hero_eva_ok_e = {
       directory = dirname .. "hero",
-      basename = "die_w",
-      hotspot = {-1, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 25 }
+   },
+   hero_eva_ok_w = {
+      directory = dirname .. "hero",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 0, 25 }
    },
    hero_die_e = {
       directory = dirname .. "hero",
-      basename = "die_e",
-      hotspot = {19, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 19, 24 }
+   },
+   hero_die_w = {
+      directory = dirname .. "hero",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
    },
 
+   -- Sword upgrade only
+}
+
+animations = {
    -- Sword upgrade only
    attack_idle = {
       directory = dirname .. "sword",
