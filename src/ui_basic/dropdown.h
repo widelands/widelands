@@ -21,11 +21,11 @@
 #define WL_UI_BASIC_DROPDOWN_H
 
 #include <deque>
-#include <graphic/image_cache.h>
 #include <memory>
 
 #include "base/i18n.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
