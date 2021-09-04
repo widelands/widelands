@@ -172,107 +172,140 @@ spritesheets = {
       directional = true,
       hotspot = { 7, 25 }
    },
-}
-
-animations = {
-   -- Health upgrade only
    health_atk_ok_1_e = {
       directory = dirname .. "helm",
-      basename = "atk_ok_1_e",
-      hotspot = {23, 24},
-      fps = 10
-   },
-   health_atk_fail_1_e = {
-      directory = dirname .. "helm",
-      basename = "atk_fail_1_e",
-      hotspot = {23, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
    },
    health_atk_ok_1_w = {
       directory = dirname .. "helm",
-      basename = "atk_ok_1_w",
-      hotspot = {-1, 24},
-      fps = 10
-   },
-   health_atk_fail_1_w = {
-      directory = dirname .. "helm",
-      basename = "atk_fail_1_w",
-      hotspot = {-1, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
    },
    health_atk_ok_2_e = {
       directory = dirname .. "helm",
-      basename = "atk_ok_2_e",
-      hotspot = {23, 24},
-      fps = 10
-   },
-   health_atk_fail_2_e = {
-      directory = dirname .. "helm",
-      basename = "atk_fail_2_e",
-      hotspot = {23, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
    },
    health_atk_ok_2_w = {
       directory = dirname .. "helm",
-      basename = "atk_ok_2_w",
-      hotspot = {-1, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
+   },
+   health_atk_fail_1_e = {
+      directory = dirname .. "helm",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
+   },
+   health_atk_fail_1_w = {
+      directory = dirname .. "helm",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
+   },
+   health_atk_fail_2_e = {
+      directory = dirname .. "helm",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 23, 24 }
    },
    health_atk_fail_2_w = {
       directory = dirname .. "helm",
-      basename = "atk_fail_2_w",
-      hotspot = {-1, 24},
-      fps = 10
-   },
-   health_eva_ok_e = {
-      directory = dirname .. "helm",
-      basename = "eva_ok_e",
-      hotspot = {11, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
    },
    health_eva_fail_e = {
       directory = dirname .. "helm",
-      basename = "eva_fail_e",
-      hotspot = {12, 24},
-      fps = 10
-   },
-   health_eva_ok_w = {
-      directory = dirname .. "helm",
-      basename = "eva_ok_w",
-      hotspot = {-1, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 12, 24 }
    },
    health_eva_fail_w = {
       directory = dirname .. "helm",
-      basename = "eva_fail_w",
-      hotspot = {-1, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
    },
-   health_die_f_w = {
+   health_eva_ok_e = {
       directory = dirname .. "helm",
-      basename = "die_f_w",
-      hotspot = {-1, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 11, 24 }
+   },
+   health_eva_ok_w = {
+      directory = dirname .. "helm",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
    },
    health_die_f_e = {
       directory = dirname .. "helm",
-      basename = "die_f_e",
-      hotspot = {19, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 19, 24 }
    },
-   health_die_b_w = {
+   health_die_f_w = {
       directory = dirname .. "helm",
-      basename = "die_b_w",
-      hotspot = {15, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { -1, 24 }
    },
    health_die_b_e = {
       directory = dirname .. "helm",
-      basename = "die_b_e",
-      hotspot = {12, 24},
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 12, 24 }
+   },
+   health_die_b_w = {
+      directory = dirname .. "helm",
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 15, 24 }
    },
 
+   -- Health and attack upgrade
+   
+}
+
+animations = {
    -- Health and attack upgrade
    hero_idle = {
       directory = dirname .. "hero",
