@@ -324,7 +324,7 @@ public:
 	bool handle_textinput(const std::string& input_text) override {
 		if (!is_expanded()) {
 			if (input_text == " ") {
-				//	open the DD if space was pressed and do NOT add space to the filter
+				// open the DD if space was pressed and do NOT add space to the filter
 				set_list_visibility(true);
 				return true;
 			} else {
