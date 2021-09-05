@@ -150,8 +150,20 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->button_ten_minus->set_can_focus(false);
 		sbi_->button_ten_plus->set_can_focus(false);
 
-		sbi_->button_ten_plus->sigclicked.connect([this]() { change_value(sbi_->big_step_size); });
-		sbi_->button_ten_minus->sigclicked.connect([this]() { change_value(-sbi_->big_step_size); });
+		sbi_->button_ten_plus->sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_CTRL) {
+				set_value(sbi_->max);
+			} else {
+				change_value(sbi_->big_step_size);
+			}
+		});
+		sbi_->button_ten_minus->sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_CTRL) {
+				set_value(sbi_->min);
+			} else {
+				change_value(-sbi_->big_step_size);
+			}
+		});
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -170,8 +182,20 @@ SpinBox::SpinBox(Panel* const parent,
 		box_->add(sbi_->button_plus);
 	}
 
-	sbi_->button_plus->sigclicked.connect([this]() { change_value(sbi_->step_size); });
-	sbi_->button_minus->sigclicked.connect([this]() { change_value(-sbi_->step_size); });
+	sbi_->button_plus->sigclicked.connect([this]() {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			set_value(sbi_->max);
+		} else {
+			change_value(sbi_->step_size);
+		}
+	});
+	sbi_->button_minus->sigclicked.connect([this]() {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			set_value(sbi_->min);
+		} else {
+			change_value(-sbi_->step_size);
+		}
+	});
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
@@ -203,7 +227,11 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_PLUS:
 		case SDLK_KP_PLUS:
 			if (sbi_->button_plus) {
-				change_value(sbi_->step_size);
+				if (code.mod & KMOD_CTRL) {
+					set_value(sbi_->max);
+				} else {
+					change_value(sbi_->step_size);
+				}
 				return true;
 			}
 			break;
@@ -220,7 +248,11 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_MINUS:
 		case SDLK_KP_MINUS:
 			if (sbi_->button_minus) {
-				change_value(-sbi_->step_size);
+				if (code.mod & KMOD_CTRL) {
+					set_value(sbi_->min);
+				} else {
+					change_value(-sbi_->step_size);
+				}
 				return true;
 			}
 			break;
@@ -232,7 +264,10 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_PAGEUP:
-			if (sbi_->button_ten_plus) {
+			if (code.mod & KMOD_CTRL) {
+				set_value(sbi_->max);
+				return true;
+			} else if (sbi_->button_ten_plus) {
 				change_value(sbi_->big_step_size);
 				return true;
 			}
@@ -245,11 +280,34 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
-			if (sbi_->button_ten_minus) {
+			if (code.mod & KMOD_CTRL) {
+				set_value(sbi_->min);
+				return true;
+			} else if (sbi_->button_ten_minus) {
 				change_value(-sbi_->big_step_size);
 				return true;
 			}
 			break;
+
+		// Home sets to minimum
+		case SDLK_KP_7:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_HOME:
+			set_value(sbi_->min);
+			return true;
+
+		// End sets to maximum
+		case SDLK_KP_1:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_END:
+			set_value(sbi_->max);
+			return true;
 
 		default:
 			break;
