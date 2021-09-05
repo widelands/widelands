@@ -38,6 +38,12 @@ class ShipWindow : public UI::UniqueWindow {
 public:
 	ShipWindow(InteractiveBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kShipWindow;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
+
 private:
 	void think() override;
 

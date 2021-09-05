@@ -34,7 +34,7 @@ descriptions:new_militarysite_type {
    max_soldiers = 3,
    heal_per_second = 100,
    conquers = 5,
-   prefer_heroes = true,
+   prefer_heroes = false,
 
    messages = {
       -- TRANSLATORS: Message sent by an Atlantean military site

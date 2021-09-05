@@ -238,6 +238,10 @@ struct DiscreteSlider : public Panel {
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;
 
+	Slider& get_slider() {
+		return slider;
+	}
+
 protected:
 	void draw(RenderTarget& dst) override;
 	void layout() override;
