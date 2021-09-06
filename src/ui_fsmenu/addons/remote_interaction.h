@@ -41,7 +41,7 @@ namespace AddOnsUI {
 class AddOnsCtrl;
 class RemoteInteractionWindow;
 
-class CommentRow : public UI::MultilineTextarea {
+class CommentRow : public UI::Box {
 public:
 	CommentRow(AddOnsCtrl& ctrl,
 	           std::shared_ptr<AddOns::AddOnInfo> info,
@@ -51,12 +51,12 @@ public:
 	           const std::string& index);
 
 	void update_edit_enabled();
-	void layout() override;
 
 private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const std::string index_;
+	UI::MultilineTextarea text_;
 	UI::Box buttons_;
 	UI::Button edit_, delete_;
 };

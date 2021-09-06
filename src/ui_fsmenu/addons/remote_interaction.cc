@@ -46,7 +46,11 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
                        UI::Panel& parent,
                        const std::string& text,
                        const std::string& index)
-   : UI::MultilineTextarea(&parent,
+   : UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     ctrl_(ctrl),
+     info_(info),
+     index_(index),
+     text_(this,
                            0,
                            0,
                            0,
@@ -55,15 +59,16 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
                            text,
                            UI::Align::kLeft,
                            UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     ctrl_(ctrl),
-     info_(info),
-     index_(index),
      buttons_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      edit_(&buttons_, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Edit…")),
      delete_(&buttons_, "delete", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Delete")) {
 	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
 	buttons_.add_space(kRowButtonSpacing);
 	buttons_.add(&delete_, UI::Box::Resizing::kFullSize);
+
+	add(&text_, UI::Box::Resizing::kExpandBoth);
+	buttons_.add_space(kRowButtonSpacing);
+	add(&buttons_, UI::Box::Resizing::kFullSize);
 
 	edit_.sigclicked.connect([this, &r]() {
 		if (ctrl_.username().empty()) {
@@ -115,15 +120,6 @@ void CommentRow::update_edit_enabled() {
 	   (ctrl_.net().is_admin() || (info_->user_comments.at(index_).username == ctrl_.username() &&
 	                               (info_->user_comments.at(index_).editor.empty() ||
 	                                info_->user_comments.at(index_).editor == ctrl_.username()))));
-}
-
-void CommentRow::layout() {
-	UI::MultilineTextarea::layout();
-
-	int w, h;
-	buttons_.get_desired_size(&w, &h);
-	buttons_.set_size(w, h);
-	buttons_.set_pos(Vector2i(get_w() - w, 0));
 }
 
 /* CommentEditor implementation */
