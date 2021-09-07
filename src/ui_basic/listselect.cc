@@ -117,7 +117,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
 	return selection_mode_ == ListselectLayout::kDropdown ?
-             g_style_manager->dropdown_style(panel_style_) :
+	          g_style_manager->dropdown_style(panel_style_) :
              nullptr;
 }
 
@@ -415,7 +415,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+			                     get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
@@ -539,6 +539,22 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_BACKSPACE:
+			linked_dropdown->delete_last_of_filter();
+			return true;
+		case SDLK_ESCAPE:
+			if (linked_dropdown->is_filtered()) {
+				linked_dropdown->clear_filter();
+			} else {
+				linked_dropdown->set_list_visibility(false);
+			}
+			return true;
+		default:
+			break;
+		}
+	}
 	if (down && size() > 1) {
 		bool handle = true;
 		uint32_t selected_idx = selection_index();
@@ -614,22 +630,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				scrollbar_.set_scrollpos(scrollpos_);
 			}
 			return true;
-		}
-	}
-	if (down) {
-		switch (code.sym) {
-		case SDLK_BACKSPACE:
-			linked_dropdown->delete_last_of_filter();
-			return true;
-		case SDLK_ESCAPE:
-			if (linked_dropdown->is_filtered()) {
-				linked_dropdown->clear_filter();
-			} else {
-				linked_dropdown->set_list_visibility(false);
-			}
-			return true;
-		default:
-			break;
 		}
 	}
 

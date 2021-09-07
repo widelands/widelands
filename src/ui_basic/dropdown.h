@@ -302,13 +302,9 @@ public:
 			return;
 		}
 		current_filter_.clear();
-		if (has_selection()) {
-			Entry selected_entry = get_selected();
-			restore_filtered_list();
-			select(selected_entry);
-		} else {
-			restore_filtered_list();
-		}
+
+		restore_filtered_list();
+		select(selected_entry_);
 	}
 	void restore_filtered_list() {
 		clear_filtered_list();
