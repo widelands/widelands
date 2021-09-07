@@ -554,85 +554,85 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
-	}
-	if (down && size() > 1) {
-		bool handle = true;
-		uint32_t selected_idx = selection_index();
-		const uint32_t max = size() - 1;
-		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
 
-		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
-		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
-			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
-			if (max < 9) {
-				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
-					selected_idx = code.sym - SDLK_1;
-				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
-					selected_idx = code.sym - SDLK_KP_1;
+		if (size() > 1) {
+			bool handle = true;
+			uint32_t selected_idx = selection_index();
+			const uint32_t max = size() - 1;
+			const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+
+			if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
+			    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+				// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
+				if (max < 9) {
+					if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
+						selected_idx = code.sym - SDLK_1;
+					} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
+						selected_idx = code.sym - SDLK_KP_1;
+					} else {
+						// don't handle the '9' when there are less than 9 items
+						handle = false;
+					}
 				} else {
-					// don't handle the '9' when there are less than 9 items
+					// 10 or more items – ignore number keys
 					handle = false;
 				}
 			} else {
-				// 10 or more items – ignore number keys
-				handle = false;
-			}
-		} else {
-			// Up, Down, PageUp, PageDown, Home, End
-			switch (code.sym) {
-			case SDLK_KP_2:
-			case SDLK_DOWN:
-				if (!has_selection()) {
+				// Up, Down, PageUp, PageDown, Home, End
+				switch (code.sym) {
+				case SDLK_KP_2:
+				case SDLK_DOWN:
+					if (!has_selection()) {
+						selected_idx = 0;
+					} else if (selected_idx < max) {
+						++selected_idx;
+					}
+					break;
+				case SDLK_KP_8:
+				case SDLK_UP:
+					if (!has_selection()) {
+						selected_idx = max;
+					} else if (selected_idx > 0) {
+						--selected_idx;
+					}
+					break;
+				case SDLK_KP_7:
+				case SDLK_HOME:
 					selected_idx = 0;
-				} else if (selected_idx < max) {
-					++selected_idx;
-				}
-				break;
-			case SDLK_KP_8:
-			case SDLK_UP:
-				if (!has_selection()) {
+					break;
+				case SDLK_KP_1:
+				case SDLK_END:
 					selected_idx = max;
-				} else if (selected_idx > 0) {
-					--selected_idx;
+					break;
+				case SDLK_KP_3:
+				case SDLK_PAGEDOWN:
+					selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+					break;
+				case SDLK_KP_9:
+				case SDLK_PAGEUP:
+					selected_idx =
+					   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+					break;
+				default:
+					handle = false;
+					break;  // not handled
 				}
-				break;
-			case SDLK_KP_7:
-			case SDLK_HOME:
-				selected_idx = 0;
-				break;
-			case SDLK_KP_1:
-			case SDLK_END:
-				selected_idx = max;
-				break;
-			case SDLK_KP_3:
-			case SDLK_PAGEDOWN:
-				selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
-				break;
-			case SDLK_KP_9:
-			case SDLK_PAGEUP:
-				selected_idx =
-				   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
-				break;
-			default:
-				handle = false;
-				break;  // not handled
 			}
-		}
-		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
-		if (handle) {
-			select(selected_idx);
-			if (selection_index() * get_lineheight() < scrollpos_) {
-				scrollpos_ = selection_index() * get_lineheight();
-				scrollbar_.set_scrollpos(scrollpos_);
-			} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
-				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
-				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
-				scrollbar_.set_scrollpos(scrollpos_);
+			assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
+			if (handle) {
+				select(selected_idx);
+				if (selection_index() * get_lineheight() < scrollpos_) {
+					scrollpos_ = selection_index() * get_lineheight();
+					scrollbar_.set_scrollpos(scrollpos_);
+				} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+					int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
+					scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
+					scrollbar_.set_scrollpos(scrollpos_);
+				}
+				return true;
 			}
-			return true;
 		}
 	}
-
 	return UI::Panel::handle_key(down, code);
 }
 
