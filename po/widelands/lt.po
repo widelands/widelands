@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-25 02:35+0000\n"
-"PO-Revision-Date: 2021-08-13 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-09-04 02:48+0000\n"
+"PO-Revision-Date: 2021-09-01 19:44+0000\n"
+"Last-Translator: Tachionas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -385,7 +385,7 @@ msgstr "Pakeisti žemėlapio reljefą"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:292
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:62
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:181
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:179
 msgid "Immovables"
 msgstr "Nekilnojami objektai"
 
@@ -1378,8 +1378,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
 #: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
@@ -1428,7 +1428,7 @@ msgid "Messages"
 msgstr "Pranešimai"
 
 #: ../../src/game_io/game_loader.cc:191
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:203
 msgid "Finishing"
 msgstr "Baigimas"
 
@@ -1767,7 +1767,7 @@ msgstr "Atsarginės failo ‘%s’ kopijos nepavyko ištrinti. "
 #: ../../src/logic/generic_save_handler.cc:240
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "Katalogo '%s' sukūrimas negalimas! "
 
 #: ../../src/logic/generic_save_handler.cc:244
 #, c-format
@@ -1776,7 +1776,7 @@ msgstr "Failo ‘%s’  nepavyko pašalinti!"
 
 #: ../../src/logic/generic_save_handler.cc:246
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Bandyti išsaugoti kitu pavadinimu!"
 
 #: ../../src/logic/generic_save_handler.cc:252
 #, c-format
@@ -2208,16 +2208,16 @@ msgid "Logic error"
 msgstr ""
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:172
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:170
 msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:177
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:175
 msgid "Ships"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:183
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:323
@@ -2229,7 +2229,7 @@ msgstr "Gaminiai"
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
 #. need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:192
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:190
 #: ../../src/wui/economy_options_window.cc:78
 #: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:112
@@ -2238,7 +2238,7 @@ msgid "Workers"
 msgstr "Darbininkai"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:199
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:197
 #: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
 #: ../../src/wui/general_statistics_menu.cc:148
@@ -2248,26 +2248,26 @@ msgstr "Statiniai"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:229
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:227
 msgid "Worker missing"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:234
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:232
 msgid "Workers missing"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:238
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:236
 msgid "Worker is coming"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:243
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers are coming"
 msgstr ""
 
@@ -3322,7 +3322,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:86
 msgid "Username:"
-msgstr ""
+msgstr "Vartotojo vardas:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:91
 #: ../../src/ui_fsmenu/login_box.cc:53
@@ -3517,12 +3517,12 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons/manager.cc:451
 msgid "Name"
-msgstr ""
+msgstr "Pavadinimas"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../src/ui_fsmenu/addons/manager.cc:453
 msgid "Name (descending)"
-msgstr ""
+msgstr "Pavadinimas (mažėjančia)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:455
@@ -3552,11 +3552,11 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons/manager.cc:465
 msgid "Newest"
-msgstr ""
+msgstr "Naujausias"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:468
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Atrinkti priedus pagal pavadinimą"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:478
 #, c-format
@@ -3658,7 +3658,7 @@ msgstr ""
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Įvestas vartotojo vardas ar slaptažodis yra neteisingas:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:856
 msgid "Server Connection Error"
@@ -3823,7 +3823,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:77
 msgid "New add-on"
-msgstr ""
+msgstr "Naujas priedas"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:85
 #: ../../src/ui_fsmenu/addons/packager_box.cc:75
@@ -3852,7 +3852,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:134
 msgid "Name:"
-msgstr ""
+msgstr "Pavadinimas:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:139
 msgid "Author:"
@@ -3864,11 +3864,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:313
 msgid "New Add-On"
-msgstr ""
+msgstr "Naujas priedas"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:314
 msgid "Enter the name for the new add-on."
-msgstr ""
+msgstr "Įvesti pavadinimą naujam priedui"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:316
 msgid "Category"
@@ -3880,16 +3880,16 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager_box.cc:252
 #: ../../src/ui_fsmenu/addons/packager_box.cc:258
 msgid "Invalid Name"
-msgstr ""
+msgstr "Neteisingas pavadinimas"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:336
 #: ../../src/ui_fsmenu/addons/packager_box.cc:252
 msgid "This name is invalid. Please choose a different name."
-msgstr ""
+msgstr "Šis pavadinimas neteisingas. Prašau įvesti kitą pavadinimą."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:351
 msgid "An add-on with this internal name already exists."
-msgstr ""
+msgstr "Priedas yra su šiuo vidiniu pavadinimu jau."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid ""
@@ -4017,21 +4017,21 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:67
 msgid "Create subdirectory"
-msgstr ""
+msgstr "Sukurti pakatalogį"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:76
 msgid "Remove selected map or directory"
-msgstr ""
+msgstr "Pašalinti pažymėtą žemėlapį arba katalogą"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:88
 msgid "Directory Tree"
-msgstr ""
+msgstr "Katalogo medis"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:139
 #: ../../src/ui_fsmenu/main.cc:422
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Pavadinimas: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:143
 #: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:104
@@ -4054,24 +4054,24 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:176
 msgid "Top-level directory"
-msgstr ""
+msgstr "Aukščiausio lygio katalogas"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:238
 msgid "New Directory"
-msgstr ""
+msgstr "Naujas katalogas"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:239
 msgid "Enter the name for the new directory."
-msgstr ""
+msgstr "Įvesti naujo katalogo pavadinimą."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:258
 msgid "A directory with this name already exists."
-msgstr ""
+msgstr "Katalogas yra su šiuo vardu jau."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:275
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
-msgstr ""
+msgstr "Ar tikrai nori ištrinti katalogą '%s' su visu jo turiniu?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:278
 #, c-format
@@ -4612,7 +4612,7 @@ msgstr "Prisijungti prie šio žaidimo"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:94
 msgid "Name of your server:"
-msgstr ""
+msgstr "Tavo serverio pavadinimas:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:103
 msgid "Open a new game"
@@ -4642,7 +4642,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/internet_lobby.cc:169
 msgctxt "player"
 msgid "Name"
-msgstr ""
+msgstr "Vardas"
 
 #. * TRANSLATORS: Widelands version
 #: ../../src/ui_fsmenu/internet_lobby.cc:171
@@ -4690,7 +4690,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:62
 msgid "Press the new shortcut or close this window to cancel."
-msgstr ""
+msgstr "Paspausti naują trumpinį arba uždaryti šį langą norint atšaukti"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:90
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
@@ -4821,7 +4821,7 @@ msgstr ""
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
-msgstr ""
+msgstr "Leisti žaidimo pradžioje žaidėjams pasirinkti jų pradinę poziciją "
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:240
@@ -4867,7 +4867,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:190
 msgid "Saved Game is Directory"
-msgstr ""
+msgstr "Išsaugotas žaidimas yra katalogas"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:191
 msgid ""
@@ -4902,7 +4902,7 @@ msgstr ""
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../src/ui_fsmenu/launch_mpg.cc:423
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Kelių žaidėjų žaidimo nustatymai"
 
 #: ../../src/ui_fsmenu/loadgame.cc:43
 msgid "Choose Game"
@@ -4922,11 +4922,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:83 ../../src/ui_fsmenu/mapselect.cc:67
 msgid "Return to the multiplayer game setup"
-msgstr ""
+msgstr "Grįžti į kelių žaidėjų žaidimo nustatymus"
 
 #: ../../src/ui_fsmenu/loadgame.cc:84 ../../src/ui_fsmenu/mapselect.cc:69
 msgid "Return to the single player menu"
-msgstr ""
+msgstr "Grįžti į vieno žaidėjo meniu"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Load this game"
@@ -4972,7 +4972,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/login_box.cc:206
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Prašau įvesti slapyvardį!"
 
 #: ../../src/ui_fsmenu/login_box.cc:210
 msgid ""
@@ -4994,7 +4994,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:315
 msgid "Begin a new game"
-msgstr ""
+msgstr "Pradėti naują žaidimą"
 
 #: ../../src/ui_fsmenu/main.cc:315 ../../src/wlapplication_options.cc:163
 msgid "New Game"
@@ -5023,7 +5023,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:323
 msgid "Play one of our beginners’ tutorials"
-msgstr ""
+msgstr "Žaisti vieną iš mūsų pradedantiesiems skirtą pamoką "
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:325 ../../src/wlapplication_options.cc:167
@@ -5101,11 +5101,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:445
 msgid "Single Player…"
-msgstr ""
+msgstr "Vieno žaidėjo ..."
 
 #: ../../src/ui_fsmenu/main.cc:446
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Kelių žaidėjų ..."
 
 #: ../../src/ui_fsmenu/main.cc:447
 msgid "Editor…"
@@ -5281,7 +5281,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:103
 msgid "Divergent Player Name"
-msgstr ""
+msgstr "Skirtingas žaidėjo vardas"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:105
 msgid ""
@@ -5366,7 +5366,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:36
 msgid "Begin LAN Game"
-msgstr ""
+msgstr "Pradėti LAN žaidimą"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
@@ -5374,7 +5374,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:57
 msgid "Your nickname:"
-msgstr ""
+msgstr "Tavo slapyvardis:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:66
 msgid "Host to connect:"
@@ -5671,7 +5671,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:128
 msgid "Tutorial Name"
-msgstr ""
+msgstr "Pamokos pavadinimas"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:130
 msgid "The number of this scenario in the campaign"
@@ -5679,7 +5679,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:131
 msgid "Scenario Name"
-msgstr ""
+msgstr "Scenarijaus pavadinimas"
 
 #. * TRANSLATORS: Campaign scenario number table header
 #: ../../src/ui_fsmenu/scenario_select.cc:135
@@ -5695,18 +5695,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -5829,11 +5829,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:191
 msgid "Singleplayer"
-msgstr ""
+msgstr "Vieno žaidėjo"
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Multiplayer"
-msgstr ""
+msgstr "Keli žaidėjai"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Editor – Load Map"
@@ -6745,7 +6745,7 @@ msgstr ""
 
 #: ../../src/wui/economy_options_window.cc:572
 msgid "The profile name cannot be empty"
-msgstr ""
+msgstr "Profilio vardas negali būti tuščias"
 
 #: ../../src/wui/economy_options_window.cc:573
 msgid "The default profile cannot be overwritten"
@@ -6753,7 +6753,7 @@ msgstr ""
 
 #: ../../src/wui/economy_options_window.cc:576
 msgid "Save the profile under this name"
-msgstr ""
+msgstr "Išsaugoti profilį šiuo vardu"
 
 #: ../../src/wui/economy_options_window.cc:588
 msgid "The predefined profiles cannot be deleted"
@@ -6946,8 +6946,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -7181,10 +7181,10 @@ msgstr[3] ""
 #: ../../src/wui/gamedetails.cc:126
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Pažymėtas %1% katalogas ir %2%:"
+msgstr[1] "Pažymėti %1% katalogai ir %2%:"
+msgstr[2] "Pažymėti %1% katalogai ir %2%:"
+msgstr[3] "Pažymėti %1% katalogai ir %2%:"
 
 #: ../../src/wui/gamedetails.cc:145
 msgid "Directory Name:"
@@ -7356,11 +7356,11 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:553
+#: ../../src/wui/inputqueuedisplay.cc:552
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:553
+#: ../../src/wui/inputqueuedisplay.cc:552
 msgid "Show controls"
 msgstr ""
 
@@ -7648,7 +7648,7 @@ msgstr ""
 
 #: ../../src/wui/mapdetails.cc:133
 msgid "Directory"
-msgstr ""
+msgstr "Katalogas"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
@@ -7684,7 +7684,7 @@ msgstr "Failo pavadimas"
 
 #: ../../src/wui/maptable.cc:33
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "Žemėlapio arba scenarijaus pavadinimas"
 
 #: ../../src/wui/maptable.cc:35
 msgid "Size"
@@ -8020,21 +8020,21 @@ msgstr ""
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:167
 msgid "SP = Single Player"
-msgstr ""
+msgstr "SP = Vieno žaidėjo "
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:171 ../../src/wui/savegametable.cc:231
 msgid "MP = Multiplayer"
-msgstr ""
+msgstr "MP = Keli žaidėjai"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:174 ../../src/wui/savegametable.cc:234
 msgid "H = Multiplayer (Host)"
-msgstr ""
+msgstr "H = Kelių žaidėjų (Šeimininkas)"
 
 #: ../../src/wui/savegametable.cc:177 ../../src/wui/savegametable.cc:237
 msgid "Numbers are the number of players."
@@ -8083,7 +8083,7 @@ msgstr ""
 #: ../../src/wui/seafaring_statistics_menu.cc:203
 msgctxt "ship"
 msgid "Name"
-msgstr ""
+msgstr "Pavadinimas"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:204
 msgctxt "ship"
