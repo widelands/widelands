@@ -720,22 +720,16 @@ void normalize_numpad(SDL_Keysym& keysym) {
 	}  // Not else, because '/', '*', '-' and '+' are not affected by NumLock state
 
 	if (get_config_bool("numpad_diagonalscrolling", false)) {
-		// If this option is enabled and one of the numpad keys 1,3,7,9 was pressed,
-		// ignore any shortcuts assigned to PageUp/PageDown/Home/End and move the map instead
-		switch (keysym.sym) {
-		case SDLK_KP_1:
-		case SDLK_KP_3:
-		case SDLK_KP_7:
-		case SDLK_KP_9:
-			return;
-		case SDLK_KP_5:
+		// If this option is enabled, reserve numpad movement keys for map scrolling
+		if (keysym.sym == SDLK_KP_5) {
 			// Allow going back to HQ
 			keysym.sym = SDLK_HOME;
 			return;
-		default:
-			break;
 		}
-	}
+		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
+			return;
+		}
+	}  // Not else, because there are 7 more keys which are not affected
 
 	keysym.sym = search->second;
 }
@@ -799,16 +793,10 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 		}
 	}
 
-	if (get_config_bool("numpad_diagonalscrolling", false)) {
-		// Allow it to work
-		switch (code) {
-		case SDLK_KP_1:
-		case SDLK_KP_3:
-		case SDLK_KP_7:
-		case SDLK_KP_9:
+	if (get_config_bool("numpad_diagonalscrolling", false) &&
+	    (code >= SDLK_KP_1 && code <= SDLK_KP_9)) {
+		// Reserve numpad movement keys for map scrolling
 			return false;
-		default:
-			break;
 		}
 	}
 
