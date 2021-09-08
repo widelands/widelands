@@ -694,15 +694,14 @@ SDL_Keysym get_shortcut(const KeyboardShortcut id) {
 }
 
 static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
-   {SDLK_KP_9, SDLK_PAGEUP},     {SDLK_KP_8, SDLK_UP},          {SDLK_KP_7, SDLK_HOME},
-   {SDLK_KP_6, SDLK_RIGHT},      {SDLK_KP_5, SDLK_UNKNOWN},     {SDLK_KP_4, SDLK_LEFT},
-   {SDLK_KP_3, SDLK_PAGEDOWN},   {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},
-   {SDLK_KP_0, SDLK_INSERT},     {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN},
-   {SDLK_KP_MINUS, SDLK_MINUS},  {SDLK_KP_PLUS, SDLK_PLUS},     {SDLK_KP_DIVIDE, SDLK_SLASH},
-   {SDLK_KP_MULTIPLY, SDLK_ASTERISK}
-};
+   {SDLK_KP_9, SDLK_PAGEUP},         {SDLK_KP_8, SDLK_UP},          {SDLK_KP_7, SDLK_HOME},
+   {SDLK_KP_6, SDLK_RIGHT},          {SDLK_KP_5, SDLK_UNKNOWN},     {SDLK_KP_4, SDLK_LEFT},
+   {SDLK_KP_3, SDLK_PAGEDOWN},       {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},
+   {SDLK_KP_0, SDLK_INSERT},         {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN},
+   {SDLK_KP_MINUS, SDLK_MINUS},      {SDLK_KP_PLUS, SDLK_PLUS},     {SDLK_KP_DIVIDE, SDLK_SLASH},
+   {SDLK_KP_MULTIPLY, SDLK_ASTERISK}};
 
-void normalize_numpad(SDL_Keysym &keysym) {
+void normalize_numpad(SDL_Keysym& keysym) {
 	auto search = kNumpadIdentifications.find(keysym.sym);
 	if (search == kNumpadIdentifications.end()) {
 		return;

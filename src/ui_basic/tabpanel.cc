@@ -177,8 +177,7 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 		uint32_t selected_idx = active();
 		const uint32_t max = tabs_.size() - 1;
 
-		if ((code.mod & KMOD_CTRL) &&
-		    (code.sym >= SDLK_1 && code.sym <= SDLK_9)) {
+		if ((code.mod & KMOD_CTRL) && (code.sym >= SDLK_1 && code.sym <= SDLK_9)) {
 			// Keys CTRL + 1-9 directly address the 1st through 9th item in tabpanels with less than 10
 			// tabs
 			if (max < 9) {

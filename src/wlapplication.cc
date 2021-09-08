@@ -81,7 +81,6 @@
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/options.h"
 #include "wlapplication_messages.h"
-#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -1125,9 +1124,6 @@ bool WLApplication::init_settings() {
 
 	// Keyboard shortcuts
 	init_shortcuts();
-
-	// Mousewheel options
-	init_mousewheel_settings();
 
 	int64_t last_start = get_config_int("last_start", 0);
 	int64_t now = time(nullptr);
