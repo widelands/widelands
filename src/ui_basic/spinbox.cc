@@ -29,6 +29,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -213,104 +214,27 @@ SpinBox::~SpinBox() {
 
 bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		switch (code.sym) {
-
-		// Up and Right behave like clicking the Increase button
-		case SDLK_KP_6:
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_UP:
-		case SDLK_RIGHT:
-		case SDLK_PLUS:
-		case SDLK_KP_PLUS:
-			if (sbi_->button_plus) {
-				if (code.mod & KMOD_CTRL) {
-					set_value(sbi_->max);
-				} else {
-					change_value(sbi_->step_size);
-				}
-				return true;
-			}
+		switch (get_keyboard_change(code, type_ == SpinBox::Type::kBig)) {
+		case kChangeValue::kNone:
 			break;
-
-		// Down and Left behave like clicking the Decrease button
-		case SDLK_KP_2:
-		case SDLK_KP_4:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_DOWN:
-		case SDLK_LEFT:
-		case SDLK_MINUS:
-		case SDLK_KP_MINUS:
-			if (sbi_->button_minus) {
-				if (code.mod & KMOD_CTRL) {
-					set_value(sbi_->min);
-				} else {
-					change_value(-sbi_->step_size);
-				}
-				return true;
-			}
-			break;
-
-		// PageUp behaves like clicking the IncreaseFast button (if any)
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEUP:
-			if (code.mod & KMOD_CTRL) {
-				set_value(sbi_->max);
-				return true;
-			} else if (sbi_->button_ten_plus) {
-				change_value(sbi_->big_step_size);
-				return true;
-			}
-			break;
-
-		// PageDown behaves like clicking the DecreaseFast button (if any)
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			if (code.mod & KMOD_CTRL) {
-				set_value(sbi_->min);
-				return true;
-			} else if (sbi_->button_ten_minus) {
-				change_value(-sbi_->big_step_size);
-				return true;
-			}
-			break;
-
-		// Home sets to minimum
-		case SDLK_KP_7:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_HOME:
-			set_value(sbi_->min);
+		case kChangeValue::kPlus:
+			change_value(sbi_->step_size);
 			return true;
-
-		// End sets to maximum
-		case SDLK_KP_1:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_END:
+		case kChangeValue::kMinus:
+			change_value(-sbi_->step_size);
+			return true;
+		case kChangeValue::kBigPlus:
+			change_value(sbi_->big_step_size);
+			return true;
+		case kChangeValue::kBigMinus:
+			change_value(-sbi_->big_step_size);
+			return true;
+		case kChangeValue::kSetMax:
 			set_value(sbi_->max);
 			return true;
-
-		default:
-			break;
+		case kChangeValue::kSetMin:
+			set_value(sbi_->min);
+			return true;
 		}
 	}
 	return Panel::handle_key(down, code);

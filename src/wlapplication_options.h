@@ -220,6 +220,8 @@ enum class KeyboardShortcut : uint16_t {
 bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
 SDL_Keysym get_shortcut(KeyboardShortcut);
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
+void normalize_numpad(SDL_Keysym&);
+bool matches_keymod(uint16_t, uint16_t);
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
 std::string matching_fastplace_shortcut(SDL_Keysym);
@@ -230,6 +232,20 @@ std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 void set_fastplace_shortcut(KeyboardShortcut, const std::string& building);
 const std::string& get_fastplace_shortcut(KeyboardShortcut);
+
+// Return values for changing value of spinbox, slider, etc.
+enum class kChangeValue : int32_t {
+	kSetMin = INT32_MIN,  // set value to minimum -- keys: Home, Ctrl + decrease keys
+	kBigMinus = -10,      // decrease by big step -- key: PageDown
+	kMinus = -1,          // decrease  -- keys: Left, Down, Minus
+	kNone = 0,            // no change -- all other keys
+	kPlus = 1,            // increase  -- keys: Right, Up, Plus
+	kBigPlus = 10,        // increase by big step -- key: PageUp
+	kSetMax = INT32_MAX   // set value to minimum -- keys: Home, Ctrl + increase keys
+};
+
+// Helper function for spinbox, slider, etc. handle_key(...)
+kChangeValue get_keyboard_change(SDL_Keysym, bool enable_big_step);
 
 /*
  * Sets the directory where to read/write kConfigFile.
