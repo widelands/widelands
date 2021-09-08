@@ -550,14 +550,11 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		const uint32_t max = size() - 1;
 		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
 
-		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
-		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+		if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
 			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
 			if (max < 9) {
 				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
 					selected_idx = code.sym - SDLK_1;
-				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
-					selected_idx = code.sym - SDLK_KP_1;
 				} else {
 					// don't handle the '9' when there are less than 9 items
 					handle = false;
@@ -569,7 +566,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		} else {
 			// Up, Down, PageUp, PageDown, Home, End
 			switch (code.sym) {
-			case SDLK_KP_2:
 			case SDLK_DOWN:
 				if (!has_selection()) {
 					selected_idx = 0;
@@ -577,7 +573,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 					++selected_idx;
 				}
 				break;
-			case SDLK_KP_8:
 			case SDLK_UP:
 				if (!has_selection()) {
 					selected_idx = max;
@@ -585,19 +580,15 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 					--selected_idx;
 				}
 				break;
-			case SDLK_KP_7:
 			case SDLK_HOME:
 				selected_idx = 0;
 				break;
-			case SDLK_KP_1:
 			case SDLK_END:
 				selected_idx = max;
 				break;
-			case SDLK_KP_3:
 			case SDLK_PAGEDOWN:
 				selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
 				break;
-			case SDLK_KP_9:
 			case SDLK_PAGEUP:
 				selected_idx =
 				   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;

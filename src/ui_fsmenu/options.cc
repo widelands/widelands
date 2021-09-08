@@ -707,7 +707,6 @@ void Options::clicked_cancel() {
 bool Options::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			end_modal<MenuTarget>(MenuTarget::kOk);
 			return true;
