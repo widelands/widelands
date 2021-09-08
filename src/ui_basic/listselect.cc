@@ -83,7 +83,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
      lineheight_(text_height(table_style().enabled()) + kMargin),
-     notify_on_delete_(nullptr) {
+     linked_dropdown(nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
@@ -107,8 +107,8 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (notify_on_delete_) {
-		notify_on_delete_->notify_list_deleted();
+	if (linked_dropdown) {
+		linked_dropdown->notify_list_deleted();
 	}
 }
 
@@ -544,75 +544,91 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
-	if (down && size() > 1) {
-		bool handle = true;
-		uint32_t selected_idx = selection_index();
-		const uint32_t max = size() - 1;
-		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+	if (down) {
+		switch (code.sym) {
+		case SDLK_BACKSPACE:
+			linked_dropdown->delete_last_of_filter();
+			return true;
+		case SDLK_ESCAPE:
+			if (linked_dropdown->is_filtered()) {
+				linked_dropdown->clear_filter();
+			} else {
+				linked_dropdown->set_list_visibility(false);
+			}
+			return true;
+		default:
+			break;
+		}
 
-		if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
-			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
-			if (max < 9) {
-				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
-					selected_idx = code.sym - SDLK_1;
+		if (size() > 1) {
+			bool handle = true;
+			uint32_t selected_idx = selection_index();
+			const uint32_t max = size() - 1;
+			const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+
+			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
+				// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
+				if (max < 9) {
+					if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
+						selected_idx = code.sym - SDLK_1;
+					} else {
+						// don't handle the '9' when there are less than 9 items
+						handle = false;
+					}
 				} else {
-					// don't handle the '9' when there are less than 9 items
+					// 10 or more items – ignore number keys
 					handle = false;
 				}
 			} else {
-				// 10 or more items – ignore number keys
-				handle = false;
-			}
-		} else {
-			// Up, Down, PageUp, PageDown, Home, End
-			switch (code.sym) {
-			case SDLK_DOWN:
-				if (!has_selection()) {
+				// Up, Down, PageUp, PageDown, Home, End
+				switch (code.sym) {
+				case SDLK_DOWN:
+					if (!has_selection()) {
+						selected_idx = 0;
+					} else if (selected_idx < max) {
+						++selected_idx;
+					}
+					break;
+				case SDLK_UP:
+					if (!has_selection()) {
+						selected_idx = max;
+					} else if (selected_idx > 0) {
+						--selected_idx;
+					}
+					break;
+				case SDLK_HOME:
 					selected_idx = 0;
-				} else if (selected_idx < max) {
-					++selected_idx;
-				}
-				break;
-			case SDLK_UP:
-				if (!has_selection()) {
+					break;
+				case SDLK_END:
 					selected_idx = max;
-				} else if (selected_idx > 0) {
-					--selected_idx;
+					break;
+				case SDLK_PAGEDOWN:
+					selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+					break;
+				case SDLK_PAGEUP:
+					selected_idx =
+					   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+					break;
+				default:
+					handle = false;
+					break;  // not handled
 				}
-				break;
-			case SDLK_HOME:
-				selected_idx = 0;
-				break;
-			case SDLK_END:
-				selected_idx = max;
-				break;
-			case SDLK_PAGEDOWN:
-				selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
-				break;
-			case SDLK_PAGEUP:
-				selected_idx =
-				   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
-				break;
-			default:
-				handle = false;
-				break;  // not handled
 			}
-		}
-		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
-		if (handle) {
-			select(selected_idx);
-			if (selection_index() * get_lineheight() < scrollpos_) {
-				scrollpos_ = selection_index() * get_lineheight();
-				scrollbar_.set_scrollpos(scrollpos_);
-			} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
-				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
-				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
-				scrollbar_.set_scrollpos(scrollpos_);
+			assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
+			if (handle) {
+				select(selected_idx);
+				if (selection_index() * get_lineheight() < scrollpos_) {
+					scrollpos_ = selection_index() * get_lineheight();
+					scrollbar_.set_scrollpos(scrollpos_);
+				} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+					int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
+					scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
+					scrollbar_.set_scrollpos(scrollpos_);
+				}
+				return true;
 			}
-			return true;
 		}
 	}
-
 	return UI::Panel::handle_key(down, code);
 }
 

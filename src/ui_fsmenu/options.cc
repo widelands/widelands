@@ -430,54 +430,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	// Fill in data
 	// Interface options
-	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
-		SDL_DisplayMode mode;
-		SDL_GetDisplayMode(0, modes, &mode);
-		if (kMinimumResolutionW <= mode.w && kMinimumResolutionH <= mode.h &&
-		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
-			ScreenResolution this_res = {
-			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
-			if (this_res.depth == 24) {
-				this_res.depth = 32;
-			}
-			if (resolutions_.empty() || this_res.xres != resolutions_.rbegin()->xres ||
-			    this_res.yres != resolutions_.rbegin()->yres) {
-				resolutions_.push_back(this_res);
-			}
-		}
-	}
-
-	int cur_win_res_x = g_gr->get_window_mode_xres();
-	int cur_win_res_y = g_gr->get_window_mode_yres();
-
-	/** TRANSLATORS: Entry in the window size dropdown*/
-	resolution_dropdown_.add(_("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
-#ifdef RESIZABLE_WINDOW
-	/** TRANSLATORS: Entry in the window size dropdown*/
-	resolution_dropdown_.add(_("Maximized"), kDropdownMaximized, nullptr,
-	                         !resolution_dropdown_.has_selection() && opt.maximized);
-#endif
-
-	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
-		const bool selected = !resolution_dropdown_.has_selection() &&
-		                      resolutions_[i].xres == cur_win_res_x &&
-		                      resolutions_[i].yres == cur_win_res_y;
-		resolution_dropdown_.add(
-		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
-		   nullptr, selected);
-	}
-
-	if (!resolution_dropdown_.has_selection()) {
-		int entry = resolutions_.size();
-		resolutions_.resize(entry + 1);
-		resolutions_[entry].xres = cur_win_res_x;
-		resolutions_[entry].yres = cur_win_res_y;
-		resolution_dropdown_.add(
-		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr,
-		   true);
-	}
+	add_screen_resolutions(opt);
 
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
@@ -519,6 +472,43 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	layout();
 
 	initialization_complete();
+}
+void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
+	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres()};
+
+	resolution_dropdown_.add(
+	   /** TRANSLATORS: Entry in the window size dropdown*/
+	   _("Fullscreen"), {kDropdownFullscreen, kDropdownFullscreen}, nullptr, opt.fullscreen);
+#ifdef RESIZABLE_WINDOW
+	/** TRANSLATORS: Entry in the window size dropdown*/
+	resolution_dropdown_.add(_("Maximized"), {kDropdownMaximized, kDropdownMaximized}, nullptr,
+	                         !resolution_dropdown_.has_selection() && opt.maximized);
+#endif
+
+	ScreenResolution previous{0, 0};
+	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
+		SDL_DisplayMode mode;
+		SDL_GetDisplayMode(0, modes, &mode);
+		if (kMinimumResolutionW <= mode.w && kMinimumResolutionH <= mode.h &&
+		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
+			ScreenResolution this_res = {mode.w, mode.h};
+			if (this_res != previous) {
+				previous = this_res;
+				const bool selected = !resolution_dropdown_.has_selection() && this_res == current_res;
+				resolution_dropdown_.add(
+				   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
+				   (boost::format(_("%1% × %2%")) % this_res.xres % this_res.yres).str(), this_res,
+				   nullptr, selected);
+			}
+		}
+	}
+
+	if (!resolution_dropdown_.has_selection()) {
+		resolution_dropdown_.add(
+		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
+		   (boost::format(_("%1% × %2%")) % current_res.xres % current_res.yres).str(), current_res,
+		   nullptr, true);
+	}
 }
 
 void Options::layout() {
@@ -727,12 +717,12 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 		os_.language = language_dropdown_.get_selected();
 	}
 	if (resolution_dropdown_.has_selection()) {
-		const int res_index = resolution_dropdown_.get_selected();
-		os_.fullscreen = res_index == kDropdownFullscreen;
-		os_.maximized = res_index == kDropdownMaximized;
-		if (res_index != kDropdownFullscreen && res_index != kDropdownMaximized) {
-			os_.xres = resolutions_[res_index].xres;
-			os_.yres = resolutions_[res_index].yres;
+		const ScreenResolution& res = resolution_dropdown_.get_selected();
+		os_.fullscreen = res.xres == kDropdownFullscreen;
+		os_.maximized = res.xres == kDropdownMaximized;
+		if (!os_.fullscreen && !os_.maximized) {
+			os_.xres = res.xres;
+			os_.yres = res.yres;
 		}
 	}
 	os_.inputgrab = inputgrab_.get_state();
