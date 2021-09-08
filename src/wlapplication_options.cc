@@ -796,18 +796,18 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	if (get_config_bool("numpad_diagonalscrolling", false) &&
 	    (code >= SDLK_KP_1 && code <= SDLK_KP_9)) {
 		// Reserve numpad movement keys for map scrolling
-			return false;
-		}
+		return false;
 	}
+}
 
-	for (const auto& pair : kNumpadIdentifications) {
-		if ((code == pair.first && key.sym == pair.second) ||
-		    (code == pair.second && key.sym == pair.first)) {
-			return true;
-		}
+for (const auto& pair : kNumpadIdentifications) {
+	if ((code == pair.first && key.sym == pair.second) ||
+	    (code == pair.second && key.sym == pair.first)) {
+		return true;
 	}
+}
 
-	return false;
+return false;
 }
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key) {
