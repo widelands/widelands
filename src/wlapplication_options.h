@@ -242,7 +242,7 @@ enum class ChangeType : int32_t {
 	kNone = 0,                                      // no change -- all other keys
 	kPlus = 1,                                      // increase  -- keys: Right, Up, Plus
 	kBigPlus = 10,                                  // increase by big step -- key: PageUp
-	kSetMax = std::numeric_limits<int32_t>::max()   // set value to minimum
+	kSetMax = std::numeric_limits<int32_t>::max()   // set value to maximum
 	                                                //     -- keys: End, Ctrl + increase keys
 };
 

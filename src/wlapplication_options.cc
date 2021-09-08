@@ -721,11 +721,7 @@ void normalize_numpad(SDL_Keysym& keysym) {
 
 	if (get_config_bool("numpad_diagonalscrolling", false)) {
 		// If this option is enabled, reserve numpad movement keys for map scrolling
-		if (keysym.sym == SDLK_KP_5) {
-			// Allow going back to HQ
-			keysym.sym = SDLK_HOME;
-			return;
-		}
+		// Numpad 5 becomes go to HQ
 		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
 			return;
 		}
