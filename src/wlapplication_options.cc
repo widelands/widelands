@@ -1034,40 +1034,40 @@ void init_shortcuts(const bool force_defaults) {
 	}
 }
 
-kChangeValue get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
+ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
 	bool to_limit = false;
 	if (matches_keymod(keysym.mod, KMOD_CTRL)) {
 		to_limit = true;
 	} else if (keysym.mod != KMOD_NONE) {
-		return kChangeValue::kNone;
+		return ChangeType::kNone;
 	}
 	switch (keysym.sym) {
 	case SDLK_HOME:
-		return kChangeValue::kSetMin;
+		return ChangeType::kSetMin;
 	case SDLK_END:
-		return kChangeValue::kSetMax;
+		return ChangeType::kSetMax;
 	case SDLK_MINUS:
 	case SDLK_DOWN:
 	case SDLK_LEFT:
-		return to_limit ? kChangeValue::kSetMin : kChangeValue::kMinus;
+		return to_limit ? ChangeType::kSetMin : ChangeType::kMinus;
 	case SDLK_PLUS:
 	case SDLK_UP:
 	case SDLK_RIGHT:
-		return to_limit ? kChangeValue::kSetMax : kChangeValue::kPlus;
+		return to_limit ? ChangeType::kSetMax : ChangeType::kPlus;
 	case SDLK_PAGEDOWN:
 		if (enable_big_step) {
-			return to_limit ? kChangeValue::kSetMin : kChangeValue::kBigMinus;
+			return to_limit ? ChangeType::kSetMin : ChangeType::kBigMinus;
 		} else {
-			return kChangeValue::kNone;
+			return ChangeType::kNone;
 		}
 	case SDLK_PAGEUP:
 		if (enable_big_step) {
-			return to_limit ? kChangeValue::kSetMax : kChangeValue::kBigPlus;
+			return to_limit ? ChangeType::kSetMax : ChangeType::kBigPlus;
 		} else {
-			return kChangeValue::kNone;
+			return ChangeType::kNone;
 		}
 	default:
-		return kChangeValue::kNone;
+		return ChangeType::kNone;
 	}
 }
 

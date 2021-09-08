@@ -215,24 +215,24 @@ SpinBox::~SpinBox() {
 bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (get_keyboard_change(code, type_ == SpinBox::Type::kBig)) {
-		case kChangeValue::kNone:
+		case ChangeType::kNone:
 			break;
-		case kChangeValue::kPlus:
+		case ChangeType::kPlus:
 			change_value(sbi_->step_size);
 			return true;
-		case kChangeValue::kMinus:
+		case ChangeType::kMinus:
 			change_value(-sbi_->step_size);
 			return true;
-		case kChangeValue::kBigPlus:
+		case ChangeType::kBigPlus:
 			change_value(sbi_->big_step_size);
 			return true;
-		case kChangeValue::kBigMinus:
+		case ChangeType::kBigMinus:
 			change_value(-sbi_->big_step_size);
 			return true;
-		case kChangeValue::kSetMax:
+		case ChangeType::kSetMax:
 			set_value(sbi_->max);
 			return true;
-		case kChangeValue::kSetMin:
+		case ChangeType::kSetMin:
 			set_value(sbi_->min);
 			return true;
 		}

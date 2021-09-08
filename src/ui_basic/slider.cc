@@ -242,16 +242,16 @@ void Slider::set_highlighted(bool highlighted) {
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
 		switch (get_keyboard_change(code, false)) {
-		case kChangeValue::kPlus:
+		case ChangeType::kPlus:
 			set_value(get_value() + 1);
 			return true;
-		case kChangeValue::kMinus:
+		case ChangeType::kMinus:
 			set_value(get_value() - 1);
 			return true;
-		case kChangeValue::kSetMax:
+		case ChangeType::kSetMax:
 			set_value(get_max_value());
 			return true;
-		case kChangeValue::kSetMin:
+		case ChangeType::kSetMin:
 			set_value(0);
 			return true;
 		default:
