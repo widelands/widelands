@@ -2,58 +2,92 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      hotspot = { 10, 36 },
-      fps = 5
-   },
+spritesheets = {
    atk_ok_e = {
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   atk_fail_e = {
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   eva_ok_e = {
-      hotspot = { 30, 36 },
-      fps = 20
-   },
-   eva_fail_e = {
-      hotspot = { 30, 36 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 3, 32 }
    },
    atk_ok_w = {
-      hotspot = { 30, 36 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 30, 36 }
+   },
+   atk_fail_e = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 3, 32 }
    },
    atk_fail_w = {
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   eva_ok_w = {
-      hotspot = { 30, 36 },
-      fps = 20
-   },
-   eva_fail_w = {
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   die_w = {
-      basename = "die",
-      hotspot = { 10, 36 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 30, 36 }
    },
    die_e = {
-      basename = "die",
-      hotspot = { 10, 36 },
-      fps = 10
+      fps = 10,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 9, 36 }
+   },
+   die_w = {
+      fps = 10,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 9, 36 }
+   },
+   eva_fail_e = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 6, 24 }
+   },
+   eva_fail_w = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 29, 22 }
+   },
+   eva_ok_e = {
+      fps = 20,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 14, 27 }
+   },
+   eva_ok_w = {
+      fps = 20,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 25, 27 }
+   },
+   idle = {
+      fps = 5,
+      frames = 40,
+      rows = 7,
+      columns = 6,
+      hotspot = { 5, 34 }
    },
    walk = {
-      hotspot = { 10, 36 },
       fps = 10,
-      directional = true
-   }
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 9, 35 }
+   },
 }
 
 all_levels_emp = {
@@ -75,7 +109,7 @@ descriptions:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   animations = animations,
+   spritesheets = spritesheets,
 
    -- Battle attributes - initial values and per level increase
    health = {

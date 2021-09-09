@@ -284,7 +284,7 @@ explain_encyclopedia = {
       div("width=100%", div("float=left padding_r=18 padding_t=15 padding_b=15 padding_l=4",p(img("images/wui/buildings/menu_tab_wares.png"))) .. p(_[[The ‘Wares’ tab shows information about the wares that your tribe needs, including a short help text, a list of buildings that produce each ware, the needed wares to produce it and where the ware is consumed.]])) ..
       div("width=100%", div("float=left padding_r=16",p(img("images/wui/buildings/menu_tab_workers.png"))) .. p(_[[The ‘Workers’ tab shows information about your tribe’s workers in a similar manner to the wares in the second tab.]])) ..
       div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("images/wui/stats/genstats_nrbuildings.png"))) .. p(_[[The ‘Buildings’ tab contains all the necessary information about the buildings of your tribe.]])) ..
-      div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("tribes/immovables/wheatfield/ripe/idle_00.png"))) .. p(_[[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]]))
+      div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("tribes/immovables/wheatfield/ripe/menu.png"))) .. p(_[[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]]))
    ),
    h = 500,
    show_instantly = true,
