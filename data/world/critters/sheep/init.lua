@@ -15,26 +15,35 @@ wl.Descriptions():new_critter_type{
    appetite = 90,
    herbivore = {"field"},
 
-   animations = {
+   spritesheets = {
       idle = {
          sound_effect = {
             path = "sound/farm/sheep",
             priority = "0.01%"
          },
-         hotspot = { 8, 16 },
          fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 8, 16 }
       },
       eating = {
          basename = "idle", -- TODO(Nordfriese): Make animation
-         hotspot = { 8, 16 },
          fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 8, 16 }
       },
       walk = {
-         hotspot = { 15, 25 },
          fps = 20,
-         directional = true
-      }
-   }
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 11, 21 }
+      },
+   },
 }
 
 pop_textdomain()

@@ -170,9 +170,13 @@
 --
 --    **builder**:  The internal name of the tribe's builder. This unit needs to be defined in the ``workers_order`` table too.
 --
---    **carrier**:  The internal name of the tribe's carrier. This unit needs to be defined in the ``workers_order`` table too.
+--    **carriers**:  An :class:`array` with the internal names of the tribe's carrier and beasts of burden. Must have at least two entries,
+--                   the first of which is used as the tribe's primary carrier and the second of which as the tribe's secondary carrier.
+--                   These units need to be defined in the ``workers_order`` table too.
 --
---    **carrier2**:  The internal name of the tribe's beast of burden. This unit needs to be defined in the ``workers_order`` table too.
+--    **carrier**:  **Deprecated**. Replaced by **carriers**.
+--
+--    **carrier2**:  **Deprecated**. Replaced by **carriers**.
 --
 --    **geologist**:  The internal name of the tribe's geologist. This unit needs to be defined in the ``workers_order`` table too.
 --
@@ -285,13 +289,21 @@ descriptions:new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {3, 12} },
-      flag = { hotspot = {15, 35}, fps = 10 },
       bridge_normal_e = { hotspot = {-2, 11} },
       bridge_busy_e = { hotspot = {-2, 11} },
       bridge_normal_se = { hotspot = {5, 2} },
       bridge_busy_se = { hotspot = {5, 2} },
       bridge_normal_sw = { hotspot = {36, 6} },
       bridge_busy_sw = { hotspot = {36, 6} }
+   },
+   spritesheets = {
+      flag = {
+         fps = 10,
+         frames = 15,
+         rows = 5,
+         columns = 3,
+         hotspot = { 11, 35 }
+      },
    },
 
    bridge_height = 8,
@@ -1752,8 +1764,7 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "atlanteans_builder",
-   carrier = "atlanteans_carrier",
-   carrier2 = "atlanteans_horse",
+   carriers = {"atlanteans_carrier", "atlanteans_horse"},
    geologist = "atlanteans_geologist",
    scouts_house = "atlanteans_scouts_house",
    soldier = "atlanteans_soldier",

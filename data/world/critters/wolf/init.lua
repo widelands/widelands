@@ -15,27 +15,36 @@ wl.Descriptions():new_critter_type{
    appetite = 100,
    carnivore = true,
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 8, 15 },
-         fps = 10,
          sound_effect = {
             -- Sound files with numbers starting from 10 are generating silence.
             path = "sound/animals/wolf",
             priority = "3%"
          },
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 8, 15 }
       },
       eating = {
          basename = "idle", -- TODO(Nordfriese): Make animation
-         hotspot = { 8, 15 },
          fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 8, 15 }
       },
       walk = {
-         hotspot = { 19, 19 },
          fps = 20,
-         directional = true
-      }
-   }
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 19, 19 }
+      },
+   },
 }
 
 pop_textdomain()

@@ -20,16 +20,24 @@ descriptions:new_militarysite_type {
 
    animation_directory = dirname,
    animations = {
-      idle = {
-         hotspot = { 44, 62 },
-         fps = 10
-      },
-      build = {
-         hotspot = { 44, 62 },
-      },
       unoccupied = {
          hotspot = { 44, 62 },
       }
+   },
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 44, 62 }
+      },
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 44, 62 }
+      },
    },
 
    aihints = {},
