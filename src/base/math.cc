@@ -26,14 +26,14 @@
 
 namespace math {
 
-#define TO_NUMBER(identifier, type, function) \
-type identifier(const std::string& str) { \
-	try { \
-		return function(str); \
-	} catch (...) { \
-		throw WLWarning("", "Expected a " #type ", received: %s", str.c_str()); \
-	} \
-}
+#define TO_NUMBER(identifier, type, function)                                                      \
+	type identifier(const std::string& str) {                                                       \
+		try {                                                                                        \
+			return function(str);                                                                     \
+		} catch (...) {                                                                              \
+			throw WLWarning("", "Expected a " #type ", received: %s", str.c_str());                   \
+		}                                                                                            \
+	}
 
 TO_NUMBER(to_int, int, stoi)
 TO_NUMBER(to_long, long long, stoll)

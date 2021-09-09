@@ -263,7 +263,8 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 			if (index_ == nullptr) {
 				log_err("Create new comment for %s: %s", info_->internal_name.c_str(), e.what());
 			} else {
-				log_err("Edit comment #%" PRIuS " for %s: %s", *index_, info_->internal_name.c_str(), e.what());
+				log_err("Edit comment #%" PRIuS " for %s: %s", *index_, info_->internal_name.c_str(),
+				        e.what());
 			}
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
