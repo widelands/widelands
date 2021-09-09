@@ -221,7 +221,7 @@ private:
 
 	virtual void
 	   save_selected_entry(uint32_t)  // cannot be pure virtual because it is called from constructor
-	   {};
+	   {}
 
 	/// Give each dropdown a unique ID
 	static int next_id_;
