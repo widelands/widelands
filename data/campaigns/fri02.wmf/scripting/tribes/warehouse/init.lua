@@ -1,4 +1,4 @@
-dirname = "tribes/buildings/warehouses/empire/warehouse/"
+dirname = "campaigns/fri02.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_fri02.wmf")
 

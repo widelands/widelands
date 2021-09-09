@@ -27,9 +27,14 @@ descriptions:new_militarysite_type {
       idle = {
          hotspot = { 53, 81 }
       },
+   },
+   spritesheets = {
       build = {
-         hotspot = { 53, 81 },
-      }
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 53, 81 }
+      },
    },
 
    aihints = {

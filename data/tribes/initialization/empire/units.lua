@@ -13,13 +13,21 @@ descriptions:new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
-      flag = { hotspot = {14, 38}, fps = 10 },
       bridge_normal_e = { hotspot = {-2, 12} },
       bridge_busy_e = { hotspot = {-2, 12} },
       bridge_normal_se = { hotspot = {5, 2} },
       bridge_busy_se = { hotspot = {5, 2} },
       bridge_normal_sw = { hotspot = {36, 3} },
       bridge_busy_sw = { hotspot = {36, 3} }
+   },
+   spritesheets = {
+      flag = {
+         fps = 10,
+         frames = 16,
+         rows = 4,
+         columns = 4,
+         hotspot = { 11, 35 }
+      },
    },
 
    bridge_height = 8,

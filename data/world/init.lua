@@ -55,7 +55,7 @@
 --          {
 --             name = "critters_herbivores",
 --             descname = _"Herbivores",
---             picture = "world/critters/sheep/idle_00.png",
+--             picture = "world/critters/sheep/menu.png",
 --             items_per_row = 10,
 --             items = {
 --                "bunny",
@@ -65,7 +65,7 @@
 --          {
 --             name = "critters_carnivores",
 --             descname = _"Carnivores",
---             picture = "world/critters/fox/idle_00.png",
+--             picture = "world/critters/fox/menu.png",
 --             items_per_row = 10,
 --             items = {
 --                "marten",
@@ -119,7 +119,7 @@ local result = {
          name = "critters_herbivores",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
          descname = _"Herbivores",
-         picture = "world/critters/sheep/idle_00.png",
+         picture = "world/critters/sheep/menu.png",
          items_per_row = 10,
          items = {
             "bunny",
@@ -137,7 +137,7 @@ local result = {
          name = "critters_carnivores",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
          descname = _"Carnivores",
-         picture = "world/critters/fox/idle_00.png",
+         picture = "world/critters/fox/menu.png",
          items_per_row = 10,
          items = {
             "marten",
@@ -152,7 +152,7 @@ local result = {
          name = "critters_aquatic",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
          descname = _"Aquatic",
-         picture = "world/critters/duck/idle_00.png",
+         picture = "world/critters/duck/menu.png",
          items_per_row = 10,
          items = {
             "duck",
