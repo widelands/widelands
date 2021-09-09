@@ -27,8 +27,17 @@
 --
 --    **vision_range**: How far the ship can see.
 --
---    **animations**: A table containing all animations for this ship.
+--    **animations**: A table containing all file animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
+--    Animations can either be defined as file animations in this table or as spritesheet animations
+--    as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
+--    See :doc:`animations` for a detailed description of the animation format.
+--
+--    **spritesheets**: A table containing all spritesheet animations for this ship.
+--    Ships have an "idle", a "sinking" and a directional "sail" animation.
+--    Animations can either be defined as spritesheet animations in this table or as file animations
+--    as defined in table ``animations``. A mixture of the two animation formats is allowed.
+--    See :doc:`animations` for a detailed description of the animation format.
 --
 --    **names**: A list of strings with ship names presented to the user - be creative :)
 --
@@ -50,20 +59,29 @@
 --       capacity = 30,
 --       vision_range = 4,
 --
---       animations = {
+--       spritesheets = {
 --          idle = {
---             hotspot = { 89, 86 },
---             fps = 10
---          },
---          sinking = {
---             hotspot = { 89, 86 },
---             fps = 7
+--             fps = 10,
+--             frames = 39,
+--             rows = 7,
+--             columns = 6,
+--             hotspot = { 58, 55 }
 --          },
 --          sail = {
---             hotspot = { 89, 86 },
 --             fps = 10,
---             directional = true
---          }
+--             frames = 40,
+--             rows = 7,
+--             columns = 6,
+--             directional = true,
+--             hotspot = { 86, 85 }
+--          },
+--          sinking = {
+--             fps = 7,
+--             frames = 22,
+--             rows = 6,
+--             columns = 4,
+--             hotspot = { 58, 54 }
+--          },
 --       },
 --       names = {
 --          pgettext("shipname", "Abaco"),
@@ -86,20 +104,29 @@ descriptions:new_ship_type {
    capacity = 30,
    vision_range = 4,
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 89, 86 },
-         fps = 10
-      },
-      sinking = {
-         hotspot = { 89, 86 },
-         fps = 7
+         fps = 10,
+         frames = 39,
+         rows = 7,
+         columns = 6,
+         hotspot = { 58, 55 }
       },
       sail = {
-         hotspot = { 89, 86 },
          fps = 10,
-         directional = true
-      }
+         frames = 40,
+         rows = 7,
+         columns = 6,
+         directional = true,
+         hotspot = { 86, 85 }
+      },
+      sinking = {
+         fps = 7,
+         frames = 22,
+         rows = 6,
+         columns = 4,
+         hotspot = { 58, 54 }
+      },
    },
 
    names = {

@@ -15,9 +15,12 @@ descriptions:new_immovable_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 33, 22 },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 33, 22 }
       },
    }
 }

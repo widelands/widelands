@@ -15,22 +15,31 @@ wl.Descriptions():new_critter_type{
    appetite = 10,
    carnivore = true,
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 8, 14 },
          fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 8, 14 }
       },
       eating = {
          basename = "idle", -- TODO(Nordfriese): Make animation
-         hotspot = { 8, 14 },
          fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 8, 14 }
       },
       walk = {
-         hotspot = { 11, 21 },
          fps = 20,
-         directional = true
-      }
-   }
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 11, 21 }
+      },
+   },
 }
 
 pop_textdomain()
