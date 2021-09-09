@@ -121,7 +121,7 @@ struct AddOnInfo {
 
 	uint32_t download_count = 0;       ///< Total times downloaded.
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
-	std::map<std::string, AddOnComment> user_comments;
+	std::map<size_t, AddOnComment> user_comments;
 
 	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;

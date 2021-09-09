@@ -45,7 +45,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
                        RemoteInteractionWindow& r,
                        UI::Panel& parent,
                        const std::string& text,
-                       const std::string& index)
+                       const size_t& index)
    : UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      ctrl_(ctrl),
      info_(info),
@@ -74,7 +74,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 		if (ctrl_.username().empty()) {
 			return;
 		}
-		CommentEditor m(ctrl_, info_, index_.c_str());
+		CommentEditor m(ctrl_, info_, &index_);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			r.update_data();
 		}
@@ -92,10 +92,10 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 			}
 		}
 		try {
-			ctrl_.net().comment(*info_, "", index_.c_str());
+			ctrl_.net().comment(*info_, "", &index_);
 			*info_ = ctrl_.net().fetch_one_remote(info_->internal_name);
 		} catch (const std::exception& e) {
-			log_err("Delete comment '%s' for %s: %s", index_.c_str(), info_->internal_name.c_str(),
+			log_err("Delete comment #%" PRIuS " for %s: %s", index_, info_->internal_name.c_str(),
 			        e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
@@ -126,7 +126,7 @@ void CommentRow::update_edit_enabled() {
 
 CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
                              std::shared_ptr<AddOns::AddOnInfo> info,
-                             const char* index)
+                             const size_t* index)
    : UI::Window(&ctrl.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "write_comment",
@@ -260,8 +260,11 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 			*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		} catch (const std::exception& e) {
-			log_err("Edit comment '%s' for %s: %s", index_ ? index_ : "<new>",
-			        info_->internal_name.c_str(), e.what());
+			if (index_ == nullptr) {
+				log_err("Create new comment for %s: %s", info_->internal_name.c_str(), e.what());
+			} else {
+				log_err("Edit comment #%" PRIuS " for %s: %s", *index_, info_->internal_name.c_str(), e.what());
+			}
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
@@ -340,7 +343,7 @@ void CommentEditor::apply_format(const std::string& open_tag, const std::string&
 }
 
 void CommentEditor::reset_text() {
-	text_->set_text(index_ == nullptr ? "" : info_->user_comments.at(index_).message);
+	text_->set_text(index_ == nullptr ? "" : info_->user_comments.at(*index_).message);
 	think();
 }
 

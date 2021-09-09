@@ -63,7 +63,7 @@ struct NetAddons {
 
 	// Write a new comment or edit an existing one. If `index_to_edit` is `nullptr`,
 	// a new comment will be written. An empty message causes the comment to be deleted.
-	void comment(const AddOnInfo& addon, const std::string& message, const char* index_to_edit);
+	void comment(const AddOnInfo& addon, const std::string& message, const size_t* index_to_edit);
 
 	void
 	upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);

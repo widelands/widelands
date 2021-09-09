@@ -90,25 +90,27 @@ std::string time_string(const std::time_t& time) {
 const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {  // NOLINT
    {0,
     []() {
-	    return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"), _("Any"),
-	                        _("Quality not yet evaluated"));
+	    return AddOnQuality(g_image_cache->get("images/ui_basic/different.png"),
+	                        /** TRANSLATORS: This is an add-on code quality rating */
+	                        pgettext("quality", "Any"), _("Quality not yet evaluated"));
     }},
    {1,
     []() {
 	    return AddOnQuality(playercolor_image(RGBColor(0xcd7f32), "images/players/team.png"),
 	                        /** TRANSLATORS: This is an add-on code quality rating */
-	                        _("Poor"), _("This add-on may cause major glitches and errors."));
+	                        pgettext("quality", "Poor"),
+	                        _("This add-on may cause major glitches and errors."));
     }},
    {2,
     []() {
 	    return AddOnQuality(playercolor_image(RGBColor(0xC0C0C0), "images/players/team.png"),
 	                        /** TRANSLATORS: This is an add-on code quality rating */
-	                        _("Good"), _("This add-on works as advertised."));
+	                        pgettext("quality", "Good"), _("This add-on works as advertised."));
     }},
    {3, []() {
 	    return AddOnQuality(playercolor_image(RGBColor(0xFFD700), "images/players/team.png"),
 	                        /** TRANSLATORS: This is an add-on code quality rating */
-	                        _("Excellent"),
+	                        pgettext("quality", "Excellent"),
 	                        _("This add-on has been decorated for its remarkably high quality."));
     }}};
 
@@ -167,7 +169,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                       UI::PanelStyle::kFsMenu,
                       Vector2i(0, 0),
                       _("Verified only"),
-                      _("Show only verified add-ons in the Browse tab")),
+                      _("Show only verified add-ons")),
      sort_order_(&browse_addons_buttons_box_rvbox_,
                  "sort",
                  0,
@@ -571,12 +573,12 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
-		refresh_remotes();
+		refresh_remotes(SDL_GetModState() & KMOD_CTRL);
 		tabs_.activate(1);
 	});
 	tabs_.sigclicked.connect([this]() {
 		if (tabs_.active() == 1 && remotes_.size() <= 1) {
-			refresh_remotes();
+			refresh_remotes(false);
 		}
 	});
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
@@ -924,14 +926,14 @@ void AddOnsCtrl::erase_remote(std::shared_ptr<AddOns::AddOnInfo> a) {
 	NEVER_HERE();
 }
 
-void AddOnsCtrl::refresh_remotes() {
+void AddOnsCtrl::refresh_remotes(const bool showall) {
 	UI::ProgressWindow progress(this, "", "");
 	const std::string step_message = _("Fetching add-ons (%.1f%%)");
 
 	try {
 		progress.step(_("Connecting to the server…"));
 
-		std::vector<std::string> names = net().refresh_remotes(net().is_admin());
+		std::vector<std::string> names = net().refresh_remotes(showall);
 
 		const int64_t nr_orig_entries = names.size();
 		int64_t nr_addons = nr_orig_entries;
@@ -942,10 +944,6 @@ void AddOnsCtrl::refresh_remotes() {
 
 			try {
 				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
-
-				if (!remotes_[i]->matches_widelands_version()) {
-					throw WLWarning("", "incompatible Widelands version");
-				}
 			} catch (const std::exception& e) {
 				log_err("Skip add-on %s because: %s", names[i].c_str(), e.what());
 				names[i] = names.back();

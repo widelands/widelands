@@ -41,6 +41,7 @@
 #endif
 
 #include "base/i18n.h"
+#include "base/math.h"
 #include "base/md5.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -123,33 +124,14 @@ size_t gather_addon_content(const std::string& current_dir,
 	return nr_files;
 }
 
-void append_multiline_message(std::string& send, std::string message) {
+void append_multiline_message(std::string& send, const std::string& message) {
 	if (message.empty()) {
 		send += "0\nENDOFSTREAM\n";
 		return;
 	}
 
-	unsigned nr_lines = 1;
-	size_t pos = 0;
-	for (;;) {
-		pos = message.find('\n', pos);
-		if (pos == std::string::npos) {
-			break;
-		}
-		++nr_lines;
-		++pos;
-	}
-
-	send += std::to_string(nr_lines);
+	send += std::to_string(std::count(message.begin(), message.end(), '\n') + 1);
 	send += '\n';
-
-	for (; nr_lines > 1; --nr_lines) {
-		pos = message.find('\n');
-		assert(pos < std::string::npos);
-		++pos;
-		send += message.substr(0, pos);
-		message = message.substr(pos);
-	}
 	send += message;
 	send += "\nENDOFSTREAM\n";
 }
@@ -378,7 +360,7 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 	send += '\n';
 	write_to_server(send);
 
-	const int64_t nr_addons = std::stol(read_line());
+	const int64_t nr_addons = math::to_long(read_line());
 	std::vector<std::string> result_vector(nr_addons);
 	for (int64_t i = 0; i < nr_addons; ++i) {
 		result_vector[i] = read_line();
@@ -428,7 +410,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	}
 
 	a.version = string_to_version(read_line());
-	a.i18n_version = std::stol(read_line());
+	a.i18n_version = math::to_long(read_line());
 	a.category = get_category(read_line());
 
 	std::string req = read_line();
@@ -447,28 +429,28 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	a.max_wl_version = read_line();
 	a.sync_safe = (read_line() == "true");
 
-	for (int j = std::stoi(read_line()); j > 0; --j) {
+	for (int j = math::to_int(read_line()); j > 0; --j) {
 		const std::string s1 = read_line();
 		const std::string s2 = read_line();
 		a.screenshots[s1] = s2;
 	}
-	a.total_file_size = std::stol(read_line());
-	a.upload_timestamp = std::stol(read_line());
-	a.download_count = std::stol(read_line());
+	a.total_file_size = math::to_long(read_line());
+	a.upload_timestamp = math::to_long(read_line());
+	a.download_count = math::to_long(read_line());
 	for (int j = 0; j < kMaxRating; ++j) {
-		a.votes[j] = std::stol(read_line());
+		a.votes[j] = math::to_long(read_line());
 	}
 
-	const int comments = std::stoi(read_line());
+	const int comments = math::to_int(read_line());
 	for (int j = 0; j < comments; ++j) {
-		const std::string id = read_line();
+		const size_t id = stoul(read_line());
 		AddOnComment comment;
 		comment.username = read_line();
-		comment.timestamp = std::stol(read_line());
+		comment.timestamp = math::to_long(read_line());
 		comment.editor = read_line();
-		comment.edit_timestamp = std::stol(read_line());
+		comment.edit_timestamp = math::to_long(read_line());
 		comment.version = string_to_version(read_line());
-		int newlines = std::stoi(read_line());
+		int newlines = math::to_int(read_line());
 		comment.message = read_line();
 		for (; newlines > 0; --newlines) {
 			comment.message += "<br>";
@@ -477,10 +459,10 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		a.user_comments.emplace(id, comment);
 	}
 	a.verified = read_line() == "verified";
-	a.quality = std::stoi(read_line());
+	a.quality = math::to_int(read_line());
 
 	const std::string icon_checksum = read_line();
-	const int64_t icon_file_size = std::stol(read_line());
+	const int64_t icon_file_size = math::to_long(read_line());
 	if (icon_file_size <= 0) {
 		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
 	} else {
@@ -513,7 +495,7 @@ void NetAddons::download_addon(const std::string& name,
 	}
 	g_fs->ensure_directory_exists(save_as);
 
-	const int64_t nr_dirs = std::stol(read_line());
+	const int64_t nr_dirs = math::to_long(read_line());
 	std::unique_ptr<std::string[]> dirnames(new std::string[nr_dirs]);
 	for (int64_t i = 0; i < nr_dirs; ++i) {
 		dirnames[i] = read_line();
@@ -521,10 +503,10 @@ void NetAddons::download_addon(const std::string& name,
 	}
 	int64_t progress_state = 0;
 	for (int64_t i = -1 /* top-level directory is not counted */; i < nr_dirs; ++i) {
-		for (int64_t j = std::stol(read_line()); j > 0; --j) {
+		for (int64_t j = math::to_long(read_line()); j > 0; --j) {
 			const std::string filename = read_line();
 			const std::string checksum = read_line();
-			const int64_t length = std::stol(read_line());
+			const int64_t length = math::to_long(read_line());
 			std::string relative_path;
 			if (i >= 0) {
 				relative_path += dirnames[i];
@@ -571,13 +553,13 @@ void NetAddons::download_i18n(const std::string& name,
 	}
 	g_fs->ensure_directory_exists(directory);
 
-	const int64_t nr_translations = std::stol(read_line());
+	const int64_t nr_translations = math::to_long(read_line());
 	init_fn("", nr_translations);
 	for (int64_t i = 0; i < nr_translations; ++i) {
 		const std::string filename = read_line();
 		const std::string checksum = read_line();
 		progress(filename.substr(0, filename.find('.')), i);
-		const int64_t length = std::stol(read_line());
+		const int64_t length = math::to_long(read_line());
 
 		std::string out = directory;
 		out += FileSystem::file_separator();
@@ -607,7 +589,7 @@ int NetAddons::get_vote(const std::string& addon) {
 			guard.ok();
 			return -1;
 		}
-		v = stoi(line);
+		v = math::to_int(line);
 		assert(v >= 0);
 		assert(v <= kMaxRating);
 
@@ -635,7 +617,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 
 void NetAddons::comment(const AddOnInfo& addon,
                         const std::string& message,
-                        const char* index_to_edit) {
+                        const size_t* index_to_edit) {
 	check_string_validity(addon.internal_name);
 	init();
 	CrashGuard guard(*this);
@@ -648,7 +630,7 @@ void NetAddons::comment(const AddOnInfo& addon,
 		send += version_to_string(addon.version, false);
 	} else {
 		send = "CMD_EDIT_COMMENT ";
-		send += index_to_edit;
+		send += std::to_string(*index_to_edit);
 	}
 	send += ' ';
 	append_multiline_message(send, message);
@@ -799,18 +781,7 @@ void NetAddons::upload_screenshot(const std::string& addon,
 	send += ' ';
 	send += md5sum.get_checksum().str();
 	send += ' ';
-
-	unsigned whitespace = 0;
-	size_t pos = 0;
-	for (;;) {
-		pos = description.find(' ', pos);
-		if (pos == std::string::npos) {
-			break;
-		}
-		++whitespace;
-		++pos;
-	}
-	send += std::to_string(whitespace);
+	send += std::to_string(std::count(description.begin(), description.end(), ' '));
 	send += ' ';
 	send += description;
 	send += '\n';
@@ -842,7 +813,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 
 		const std::string checksum = read_line();
-		const int64_t filesize = stoi(read_line());
+		const int64_t filesize = math::to_int(read_line());
 		read_file(filesize, output);
 		check_checksum(output, checksum);
 

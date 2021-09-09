@@ -141,7 +141,7 @@ private:
 	AddOns::NetAddons network_handler_;
 
 	AddOns::AddOnsList remotes_;
-	void refresh_remotes();
+	void refresh_remotes(bool showall);
 	bool matches_filter(std::shared_ptr<AddOns::AddOnInfo>);
 
 	std::string username_, password_;
