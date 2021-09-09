@@ -54,11 +54,22 @@ Workers are defined with Lua functions called ``new_<worker_type>_type{table}``.
     *Mandatory*. The location of the animation png files.
 
 **animations**:
-     A table containing all animations for this worker.
+     A table containing all file animations for this worker.
      Workers have an "idle" animation. They also have directional animations
-     called "walk" and "walkload" which are defined with the help of
-     :func:`add_walking_animations`, plus additional :ref:`animations` used in their
+     called "walk" and "walkload", plus additional animations used in their
      worker programs. The "idle" and "walk" animations are mandatory.
+     Animations can either be defined as file animations in this table or as spritesheet animations
+     as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
+     See :doc:`animations` for a detailed description of the animation formats.
+
+**spritesheets**:
+     A table containing all spritesheet animations for this worker.
+     Workers have an "idle" animation. They also have directional animations
+     called "walk" and "walkload", plus additional animations used in their
+     worker programs. The "idle" and "walk" animations are mandatory.
+     Animations can either be defined as spritesheet animations in this table or as file animations
+     as defined in table ``animations``. A mixture of the two animation formats is allowed.
+     See :doc:`animations` for a detailed description of the animation formats.
 
 **programs**:
     *Optional*. If the worker leaves the building to do his work, the

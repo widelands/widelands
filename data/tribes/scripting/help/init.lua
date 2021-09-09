@@ -104,7 +104,7 @@ return {
                name = "immovables",
                -- TRANSLATORS Tab title: immovable help
                title = _"Immovables",
-               icon = "tribes/immovables/wheatfield/ripe/idle_00.png",
+               icon = "images/wui/encyclopedia_immovables.png",
                entries = immovable_entries(tribename)
             },
          }

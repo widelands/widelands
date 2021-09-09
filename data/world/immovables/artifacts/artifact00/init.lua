@@ -88,8 +88,17 @@
 --          }
 --
 --    **animations**
---        *Mandatory*. A table containing all animations for this immovable.
+--        *Optional*. A table containing all file animations for this immovable.
 --        Every immovable needs to have at least an ``idle`` animation.
+--        Animations can either be defined as file animations in this table or as spritesheet animations
+--        as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
+--        See :doc:`animations` for a detailed description of the animation format.
+--
+--    **spritesheets**
+--        *Optional*. A table containing all spritesheet animations for this immovable.
+--        Every immovable needs to have at least an ``idle`` animation.
+--        Animations can either be defined as spritesheet animations in this table or as file animations
+--        as defined in table ``animations``. A mixture of the two animation formats is allowed.
 --        See :doc:`animations` for a detailed description of the animation format.
 --
 -- For making the UI texts translateable, we also need to push/pop the correct textdomain.
