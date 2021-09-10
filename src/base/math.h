@@ -54,6 +54,10 @@ static constexpr unsigned k100PercentAsInt = 10000U;
  * */
 unsigned read_percent_to_int(const std::string& input);
 
+// Wrappers around stoi/stoll with more verbose exceptions
+int to_int(const std::string&);
+long long to_long(const std::string&);
+
 }  // namespace math
 
 #endif  // end of include guard: WL_BASE_MATH_H
