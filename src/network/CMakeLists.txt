@@ -48,6 +48,7 @@ wl_library(network
     base_i18n
     base_log
     base_macros
+    base_math
     base_md5
     base_random
     build_info

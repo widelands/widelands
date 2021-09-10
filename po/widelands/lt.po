@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-04 02:48+0000\n"
-"PO-Revision-Date: 2021-09-01 19:44+0000\n"
+"POT-Creation-Date: 2021-09-07 02:36+0000\n"
+"PO-Revision-Date: 2021-09-07 19:49+0000\n"
 "Last-Translator: Tachionas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -264,8 +264,8 @@ msgstr "Lap"
 msgid "Dec"
 msgstr "Gruo"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -279,12 +279,12 @@ msgstr "Pagrindinis meniu"
 msgid "Tools"
 msgstr "Įrankiai"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -474,10 +474,10 @@ msgstr "Informacija"
 msgid "Click on a field to show information about it"
 msgstr "Paspausk ant laukelio, kad būtų rodoma informacija apie jį"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -1915,7 +1915,7 @@ msgstr "Tu užpultas"
 #: ../../src/logic/map_objects/tribes/production_program.cc:457
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "ekonomikai reikalingi '%s' gaminiai"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -1923,7 +1923,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:466
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "ekonomikai nereikalingi '%s' gaminiai"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1969,13 +1969,13 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:545
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "statinys turi šiuos gaminius: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/map_objects/tribes/production_program.cc:569
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "statinys neturi šių gaminių:%s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
@@ -2138,7 +2138,7 @@ msgstr ""
 
 #: ../../src/logic/map_objects/tribes/ship.cc:677
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Gaminių išgabenimas nepavyko, ekspedicija nutraukiama dabar."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:858
@@ -2281,7 +2281,7 @@ msgstr ""
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:563
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Naujas sandėlis pridėtas prie tavo ekonomikos."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
@@ -5502,7 +5502,7 @@ msgstr "Rodyti kareivio lygius"
 #: ../../src/ui_fsmenu/options.cc:251
 #: ../../src/wui/interactive_gamebase.cc:259
 msgid "Show Buildings"
-msgstr ""
+msgstr "Parodyti statinius"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
@@ -5980,12 +5980,12 @@ msgstr "Bendra statistika"
 #: ../../src/wlapplication_options.cc:439
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Gaminių statistika"
 
 #: ../../src/wlapplication_options.cc:444
 #: ../../src/wui/building_statistics_menu.cc:55
 msgid "Building Statistics"
-msgstr ""
+msgstr "Statinių statistika"
 
 #: ../../src/wlapplication_options.cc:449
 msgid "Stock Inventory"
@@ -6353,29 +6353,29 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:246
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Išmontuoti statinį?"
 
 #: ../../src/wui/actionconfirm.cc:247
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Ar tikrai nori išmontuoti šį statinį? "
 
 #: ../../src/wui/actionconfirm.cc:249 ../../src/wui/actionconfirm.cc:308
 msgid "Preserve wares"
-msgstr ""
+msgstr "Saugomi gaminiai"
 
 #: ../../src/wui/actionconfirm.cc:251
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr ""
+msgstr "Visi statinyje likę gaminiai bus išnešti statybininko, dėl to pailgės išmontavimo laikas"
 
 #: ../../src/wui/actionconfirm.cc:300
 msgid "Enhance building?"
-msgstr ""
+msgstr "Pagerinti statinį?"
 
 #: ../../src/wui/actionconfirm.cc:302 ../../src/wui/actionconfirm.cc:306
 msgid "Do you really want to enhance this building?"
-msgstr ""
+msgstr "Ar tikrai nori pagerinti šį statinį?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
@@ -6387,7 +6387,7 @@ msgstr ""
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr ""
+msgstr "Visi statinyje likę gaminiai bus išnešti statybininko, dėl to pailgės pagerinimo laikas"
 
 #: ../../src/wui/actionconfirm.cc:362
 msgid "Sink the ship?"
@@ -6485,7 +6485,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:68
 msgid "(no building selected)"
-msgstr ""
+msgstr "(nėra pažymėtų statinių)"
 
 #: ../../src/wui/building_statistics_menu.cc:73
 msgid "Owned:"
@@ -6503,13 +6503,13 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:124
 #: ../../src/wui/building_statistics_menu.cc:143
 msgid "Show previous building"
-msgstr ""
+msgstr "Rodyti ankstesnį statinį"
 
 #: ../../src/wui/building_statistics_menu.cc:114
 #: ../../src/wui/building_statistics_menu.cc:133
 #: ../../src/wui/building_statistics_menu.cc:152
 msgid "Show next building"
-msgstr ""
+msgstr "Rodyti kitą statinį"
 
 #: ../../src/wui/building_statistics_menu.cc:208
 msgid ""
@@ -6519,15 +6519,15 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:339
 msgid "Small buildings"
-msgstr ""
+msgstr "Maži statiniai"
 
 #: ../../src/wui/building_statistics_menu.cc:341
 msgid "Medium buildings"
-msgstr ""
+msgstr "Vidutiniai statiniai"
 
 #: ../../src/wui/building_statistics_menu.cc:343
 msgid "Big buildings"
-msgstr ""
+msgstr "Dideli statiniai"
 
 #: ../../src/wui/building_statistics_menu.cc:345
 msgid "Mines"
@@ -6562,15 +6562,15 @@ msgstr "Nutildyta. Norėdamas atšaukti nutildymą, paspausk."
 
 #: ../../src/wui/buildingwindow.cc:202
 msgid "Mute this building’s messages"
-msgstr ""
+msgstr "Nutildyti šio statinio pranešimus"
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "All buildings of this type are muted – click to unmute"
-msgstr "Visi šio tipo statiniai yra nutildyti. Norėdamas atšaukti nutildymą, paspausk."
+msgstr "Visi šio tipo statiniai yra nutildyti – norėdamas atšaukti nutildymą, paspausk."
 
 #: ../../src/wui/buildingwindow.cc:211
 msgid "Mute all buildings of this type"
-msgstr ""
+msgstr "Nutildyti visus šio tipo statinius"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:275
@@ -6636,7 +6636,7 @@ msgstr ""
 #: ../../src/wui/constructionsitewindow.cc:153
 #: ../../src/wui/dismantlesitewindow.cc:65
 msgid "Building materials"
-msgstr ""
+msgstr "Statybinės medžiagos"
 
 #: ../../src/wui/constructionsitewindow.cc:192
 #: ../../src/wui/constructionsitewindow.cc:254
@@ -6678,7 +6678,7 @@ msgstr ""
 #: ../../src/wui/constructionsitewindow.cc:337
 #: ../../src/wui/warehousewindow.cc:151
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Pageidautina čia saugoti pasirinktus gaminius "
 
 #: ../../src/wui/constructionsitewindow.cc:341
 #: ../../src/wui/warehousewindow.cc:152
@@ -6692,7 +6692,7 @@ msgstr "Pašalinti iš čia pažymėtus gaminius"
 
 #: ../../src/wui/constructionsitewindow.cc:364
 msgid "Ware settings to apply after construction"
-msgstr ""
+msgstr "Gaminio nustatymai, taikomi po pastatymo"
 
 #: ../../src/wui/constructionsitewindow.cc:367
 msgid "Worker settings to apply after construction"
@@ -6781,11 +6781,11 @@ msgstr "Esami profiliai"
 
 #: ../../src/wui/fieldaction.cc:234
 msgid "Build small building"
-msgstr "Statyti nedidelį statinį"
+msgstr "Statyti mažą statinį"
 
 #: ../../src/wui/fieldaction.cc:235
 msgid "Build big building"
-msgstr ""
+msgstr "Statyti didelį statinį"
 
 #: ../../src/wui/fieldaction.cc:235
 msgid "Build medium building"
@@ -6793,7 +6793,7 @@ msgstr "Statyti vidutinį statinį"
 
 #: ../../src/wui/fieldaction.cc:236
 msgid "Build port building"
-msgstr ""
+msgstr "Statyti uosto statinį"
 
 #: ../../src/wui/fieldaction.cc:267
 msgid "Action"
@@ -6946,8 +6946,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
@@ -7328,33 +7328,33 @@ msgstr "Sumažinti gaminių kiekį, kurį norite čia saugoti"
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:130
 msgid "Hold down Shift to increase all ware types at the same time"
-msgstr ""
+msgstr "Laikyti paspaudus Shift norint padidinti visų tipų gaminius vienu metu"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:133
 msgid "Hold down Shift to decrease all ware types at the same time"
-msgstr ""
+msgstr "Laikyti paspaudus Shift norint sumažinti visų tipų gaminius vienu metu"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:138
 msgid "Hold down Ctrl to allow all of this ware"
-msgstr ""
+msgstr "Laikyti paspaudus Ctrl norint leisti visą šį gaminį"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:141
 msgid "Hold down Ctrl to allow none of this ware"
-msgstr ""
+msgstr "Laikyti paspaudus Ctrl nenorint leisti šį gaminį"
 
 #: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
-msgstr ""
+msgstr "Pašalinti gaminį"
 
 #: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
-msgstr ""
+msgstr "Pridėti gaminį"
 
 #: ../../src/wui/inputqueuedisplay.cc:552
 msgid "Hide controls"
@@ -7515,8 +7515,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Statistika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
@@ -8103,7 +8103,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:515
 msgid "Show ships shipping wares and workers"
-msgstr ""
+msgstr "Rodyti laivus gabenančius gaminius ir darbininkus"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:520
@@ -8356,19 +8356,19 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:158
 msgid "Remove 10 wares"
-msgstr ""
+msgstr "Pašalinti 10 gaminių"
 
 #: ../../src/wui/warehousewindow.cc:165
 msgid "Remove a ware"
-msgstr ""
+msgstr "Pašalinti 1 gaminį"
 
 #: ../../src/wui/warehousewindow.cc:172
 msgid "Add a ware"
-msgstr ""
+msgstr "Pridėti 1 gaminį"
 
 #: ../../src/wui/warehousewindow.cc:179
 msgid "Add 10 wares"
-msgstr ""
+msgstr "Pridėti 10 vnt. gaminių"
 
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Configure this building’s economy"
@@ -8376,7 +8376,7 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:293
 msgid "Wares waiting to be shipped"
-msgstr ""
+msgstr "Gaminiai laukia išgabenimo"
 
 #: ../../src/wui/warehousewindow.cc:296
 msgid "Workers waiting to embark"
@@ -8388,15 +8388,15 @@ msgstr ""
 
 #: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
-msgstr ""
+msgstr "↓"
 
 #: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
-msgstr ""
+msgstr "↑"
 
 #: ../../src/wui/waresdisplay.cc:554
 msgid "="
-msgstr ""
+msgstr "="
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
@@ -8404,21 +8404,21 @@ msgstr ""
 #: ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
 #: ../../src/wui/waresdisplay.cc:596
 msgid "%1%k"
-msgstr ""
+msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
 #: ../../src/wui/waresdisplay.cc:599
 msgid "%1%M"
-msgstr ""
+msgstr "%1%M"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5G =
 #. 5,000,000,000).
@@ -8426,7 +8426,7 @@ msgstr ""
 #. whitespace.
 #: ../../src/wui/waresdisplay.cc:602
 msgid "%1%G"
-msgstr ""
+msgstr "%1%G"
 
 #: ../../src/wui/watchwindow.cc:60
 msgid "Follow"
