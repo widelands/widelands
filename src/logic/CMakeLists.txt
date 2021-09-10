@@ -97,6 +97,7 @@ wl_library(logic_addons
     base_i18n
     base_exceptions
     base_log
+    base_math
     build_info
     graphic
     graphic_image_cache

@@ -47,13 +47,26 @@ constexpr int16_t kRowButtonSpacing = 4;
 
 std::string time_string(const std::time_t& time);
 std::string filesize_string(uint32_t bytes);
+std::string underline_tag(const std::string& text);
+
+struct AddOnQuality {
+	const Image* icon;
+	const std::string name, description;
+
+	static const std::map<unsigned, std::function<AddOnQuality()>> kQualities;
+
+private:
+	AddOnQuality(const Image* i, const std::string& n, const std::string& d)
+	   : icon(i), name(n), description(d) {
+	}
+};
 
 class AddOnsCtrl : public UI::UniqueWindow {
 public:
 	AddOnsCtrl(MainMenu&, UI::UniqueWindow::Registry&);
 	~AddOnsCtrl() override;
 
-	void rebuild();
+	void rebuild(bool need_to_update_dependency_errors);
 	void update_dependency_errors();
 
 	void install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool only_translations);
@@ -69,11 +82,9 @@ public:
 		return network_handler_;
 	}
 
-	const AddOns::AddOnsList& get_remotes() const {
-		return remotes_;
-	}
 	std::shared_ptr<AddOns::AddOnInfo> find_remote(const std::string& name);
 	bool is_remote(const std::string& name) const;
+	void erase_remote(std::shared_ptr<AddOns::AddOnInfo>);
 
 	const std::string& username() const {
 		return username_;
@@ -105,13 +116,15 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_,
 	   installed_addons_buttons_box_, installed_addons_box_, browse_addons_outer_wrapper_,
-	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_inner_box_1_,
-	   browse_addons_buttons_inner_box_2_, browse_addons_box_, dev_box_;
+	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_box_lvbox_,
+	   browse_addons_buttons_box_rvbox_, browse_addons_buttons_box_category_box_,
+	   browse_addons_buttons_box_right_hbox_, browse_addons_box_, dev_box_;
 	std::map<AddOns::AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
+	UI::Dropdown<uint8_t> filter_quality_;
 	UI::Dropdown<std::shared_ptr<AddOns::AddOnInfo>> upload_addon_, upload_screenshot_;
 	UI::Checkbox upload_addon_accept_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, /* autofix_dependencies_, */ move_top_,
@@ -128,7 +141,7 @@ private:
 	AddOns::NetAddons network_handler_;
 
 	AddOns::AddOnsList remotes_;
-	void refresh_remotes();
+	void refresh_remotes(bool showall);
 	bool matches_filter(std::shared_ptr<AddOns::AddOnInfo>);
 
 	std::string username_, password_;
