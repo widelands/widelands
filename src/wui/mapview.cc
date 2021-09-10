@@ -677,7 +677,7 @@ bool MapView::scroll_map() {
 
 	// numpad keys
 	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
-#define kNP(x) \
+#define kNP(x)                                                                                     \
 	const bool kNP##x = kNumlockOff && get_key_state(SDL_GetScancodeFromKey(SDLK_KP_##x));
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
