@@ -119,8 +119,8 @@ struct BaseListselect : public Panel {
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	void set_notify_on_delete(UI::BaseDropdown* d) {
-		notify_on_delete_ = d;
+	void set_linked_dropdown(UI::BaseDropdown* d) {
+		linked_dropdown = d;
 	}
 
 private:
@@ -167,7 +167,7 @@ private:
 	int lineheight_;
 	std::string current_tooltip_;
 
-	UI::BaseDropdown* notify_on_delete_;
+	UI::BaseDropdown* linked_dropdown;
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {

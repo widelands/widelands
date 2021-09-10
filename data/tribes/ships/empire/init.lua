@@ -11,16 +11,22 @@ descriptions:new_ship_type {
    capacity = 30,
    vision_range = 4,
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 115, 100 },
-         fps = 10
+         fps = 10,
+         frames = 40,
+         rows = 7,
+         columns = 6,
+         hotspot = { 88, 90 }
       },
       sail = {
-         hotspot = { 115, 100 },
          fps = 10,
-         directional = true
-      }
+         frames = 40,
+         rows = 7,
+         columns = 6,
+         directional = true,
+         hotspot = { 111, 92 }
+      },
    },
 
    names = {

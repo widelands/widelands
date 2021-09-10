@@ -65,7 +65,7 @@ struct Statebox : public Panel {
 	bool get_state() const {
 		return flags_ & Is_Checked;
 	}
-	void set_state(bool on);
+	void set_state(bool on, bool send_signal = true);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;

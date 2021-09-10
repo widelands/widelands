@@ -637,15 +637,18 @@ void MapView::zoom_around(float new_zoom,
 }
 
 void MapView::reset_zoom() {
-	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::increase_zoom() {
 	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::decrease_zoom() {
 	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 
 bool MapView::is_dragging() const {
@@ -679,11 +682,21 @@ bool MapView::scroll_map() {
 #undef kNP
 
 	   // set the scrolling distance
-	   const uint8_t denominator = ((SDL_GetModState() & KMOD_CTRL)  ? 4 :
-	                                (SDL_GetModState() & KMOD_SHIFT) ? 16 :
-                                                                      8);
-	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
-	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	   const uint16_t xres = g_gr->get_xres();
+	const uint16_t yres = g_gr->get_yres();
+
+	uint16_t scroll_distance_x = xres / 8;
+	uint16_t scroll_distance_y = yres / 8;
+
+	SDL_Keymod modstate = SDL_GetModState();
+	if (modstate & KMOD_CTRL) {
+		scroll_distance_x = xres - scroll_distance_x;
+		scroll_distance_y = yres - scroll_distance_y;
+	} else if (modstate & KMOD_SHIFT) {
+		scroll_distance_x = std::min(kTriangleWidth / view_.zoom, scroll_distance_x / 3.f);
+		scroll_distance_y = std::min(kTriangleHeight / view_.zoom, scroll_distance_y / 3.f);
+	}
+
 	int32_t distance_to_scroll_x = 0;
 	int32_t distance_to_scroll_y = 0;
 
@@ -718,15 +731,21 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomIn, code)) {
-		increase_zoom();
+		if (!is_animating()) {
+			increase_zoom();
+		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomOut, code)) {
-		decrease_zoom();
+		if (!is_animating()) {
+			decrease_zoom();
+		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomReset, code)) {
-		reset_zoom();
+		if (!is_animating()) {
+			reset_zoom();
+		}
 		return true;
 	}
 
