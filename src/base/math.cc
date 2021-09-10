@@ -21,9 +21,23 @@
 
 #include <regex>
 
+#include "base/warning.h"
 #include "base/wexception.h"
 
 namespace math {
+
+#define TO_NUMBER(identifier, type, function)                                                      \
+	type identifier(const std::string& str) {                                                       \
+		try {                                                                                        \
+			return function(str);                                                                     \
+		} catch (...) {                                                                              \
+			throw WLWarning("", "Expected a " #type ", received: %s", str.c_str());                   \
+		}                                                                                            \
+	}
+
+TO_NUMBER(to_int, int, stoi)
+TO_NUMBER(to_long, long long, stoll)
+#undef TO_NUMBER
 
 // This function has RST documentation in logic/map_objects/map_object_program
 unsigned read_percent_to_int(const std::string& input) {
