@@ -670,14 +670,15 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 bool MapView::scroll_map() {
 	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 	// arrow keys
-	const bool kUP = get_key_state(SDL_SCANCODE_UP);
-	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
-	const bool kLEFT = get_key_state(SDL_SCANCODE_LEFT);
-	const bool kRIGHT = get_key_state(SDL_SCANCODE_RIGHT);
+	const bool kUP = get_key_state(SDL_GetScancodeFromKey(SDLK_UP));
+	const bool kDOWN = get_key_state(SDL_GetScancodeFromKey(SDLK_DOWN));
+	const bool kLEFT = get_key_state(SDL_GetScancodeFromKey(SDLK_LEFT));
+	const bool kRIGHT = get_key_state(SDL_GetScancodeFromKey(SDLK_RIGHT));
 
 	// numpad keys
 	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
-#define kNP(x) const bool kNP##x = kNumlockOff && get_key_state(SDL_SCANCODE_KP_##x);
+#define kNP(x)
+	const bool kNP##x = kNumlockOff && get_key_state(SDL_GetScancodeFromKey(SDLK_KP_##x));
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
 

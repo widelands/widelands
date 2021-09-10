@@ -775,8 +775,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameScrollToHQ, code) ||
-		    (get_config_bool("numpad_diagonalscrolling", false) &&
-		     code.scancode == SDL_SCANCODE_KP_5)) {
+		    (get_config_bool("numpad_diagonalscrolling", false) && code.sym == SDLK_KP_5 &&
+		     matches_keymod(code.mod, KMOD_NONE))) {
 			map_view()->scroll_to_field(
 			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
