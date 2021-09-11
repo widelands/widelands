@@ -73,7 +73,6 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 bool About::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
 			die();
