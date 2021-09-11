@@ -178,6 +178,9 @@ struct WLApplication {
 	// Handle the given pressed key. Returns true when key was
 	// handled.
 	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
+	void enable_handle_key(bool enable_) {
+		handle_key_enabled = enable_;
+	}
 
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
@@ -246,6 +249,9 @@ private:
 	/// If the mouse needs to be moved in warp_mouse(), this Vector2i is
 	/// used to cancel the resulting SDL_MouseMotionEvent.
 	Vector2i mouse_compensate_warp_;
+
+	/// Makes it possible to disable the fullscreen and screenshot shortcuts
+	bool handle_key_enabled;
 
 	/// true if an external entity wants us to quit
 	bool should_die_;
