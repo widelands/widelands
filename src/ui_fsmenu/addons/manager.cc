@@ -1226,11 +1226,9 @@ void AddOnsCtrl::update_dependency_errors() {
 				assert(!too_late || next != nullptr);
 				if (too_late && AddOns::order_matters(prev->category, next->category)) {
 					warn_requirements.push_back(
-					   (boost::format(
-					       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-					         "listed in the wrong order")) %
-					    addon->first->descname() % prev->descname() %
-					    search_result->first->descname())
+					   (boost::format(_("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+					                    "listed in the wrong order")) %
+					    addon->first->descname() % prev->descname() % search_result->first->descname())
 					      .str());
 				}
 			}
