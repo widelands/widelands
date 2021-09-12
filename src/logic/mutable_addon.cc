@@ -273,6 +273,7 @@ size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& 
 		assert(source_path.compare(source_path.size() - kWidelandsMapExtension.size(),
 		                           kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0);
 
+		// NOCOM always unpack the maps
 		do_recursively_copy_file_or_directory(
 		   source_path, dir + FileSystem::file_separator() + pair.first, dry_run);
 	}
