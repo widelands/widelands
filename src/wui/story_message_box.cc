@@ -171,7 +171,6 @@ bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t m
 bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (next_scenario_.is_visible()) {
 				clicked_next_scenario();
