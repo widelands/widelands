@@ -1194,7 +1194,8 @@ void AddOnsCtrl::update_dependency_errors() {
 					    addon->first->descname() % search_result->first->descname())
 					      .str());
 				}
-				if (too_late && AddOns::order_matters(addon->first->category, search_result->first->category)) {
+				if (too_late &&
+				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(
 					   (boost::format(
 					       _("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on")) %
@@ -1216,12 +1217,13 @@ void AddOnsCtrl::update_dependency_errors() {
 						break;
 					} else if (a.first->internal_name == requirement) {
 						if (AddOns::order_matters(prev->category, a.first->category)) {
-						warn_requirements.push_back(
-						   (boost::format(
-						       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-						         "listed in the wrong order")) %
-						    addon->first->descname() % prev->descname() % search_result->first->descname())
-						      .str());
+							warn_requirements.push_back(
+							   (boost::format(
+							       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+							         "listed in the wrong order")) %
+							    addon->first->descname() % prev->descname() %
+							    search_result->first->descname())
+							      .str());
 						}
 						break;
 					}

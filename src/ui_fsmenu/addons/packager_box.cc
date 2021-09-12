@@ -246,11 +246,14 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		const std::string filename = FileSystem::fs_filename(map.c_str());
 		if (!g_fs->is_directory(map)) {
 			UI::WLMessageBox mbox(
-			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"), (boost::format(
-_("The map ‘%s’ is not a directory. "
-"Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor."
-"\n\nDo you want to add this map anyway?"
-)) % filename).str(), UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
+			   (boost::format(_("The map ‘%s’ is not a directory. "
+			                    "Please consider disabling the ‘Compress widelands data files’ option "
+			                    "in the options menu and resaving the map in the editor."
+			                    "\n\nDo you want to add this map anyway?")) %
+			    filename)
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}

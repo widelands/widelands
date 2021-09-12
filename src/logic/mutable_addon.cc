@@ -199,7 +199,9 @@ bool MutableAddOn::write_to_disk() {
 MapsAddon::MapsAddon(const AddOnInfo& a) : MutableAddOn(a) {
 	recursively_initialize_tree_from_disk(directory_, tree_);
 	if (tree_.subdirectories.empty() && tree_.maps.empty()) {
-		tree_.subdirectories.emplace(a.internal_name.substr(0, a.internal_name.size() - kAddOnExtension.size()), DirectoryTree());
+		tree_.subdirectories.emplace(
+		   a.internal_name.substr(0, a.internal_name.size() - kAddOnExtension.size()),
+		   DirectoryTree());
 	}
 }
 

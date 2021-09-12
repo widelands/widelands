@@ -125,11 +125,10 @@ void CommentRow::update_edit_enabled() {
 
 	buttons_.set_visible(
 	   !ctrl_.username().empty() &&
-	   (ctrl_.net().is_admin() || (comment.username == ctrl_.username() &&
-	                               (comment.editor.empty() ||
-	                                comment.editor == ctrl_.username()) &&
-	                               (now < comment.timestamp ||
-	                                now - comment.timestamp < kCommentEditTimeout))));
+	   (ctrl_.net().is_admin() ||
+	    (comment.username == ctrl_.username() &&
+	     (comment.editor.empty() || comment.editor == ctrl_.username()) &&
+	     (now < comment.timestamp || now - comment.timestamp < kCommentEditTimeout))));
 	layout();
 }
 
