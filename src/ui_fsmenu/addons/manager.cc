@@ -1211,21 +1211,27 @@ void AddOnsCtrl::update_dependency_errors() {
 				}
 				// check if `previous_requirement` comes before `requirement`
 				const AddOns::AddOnInfo* prev = nullptr;
+				const AddOns::AddOnInfo* next = nullptr;
+				too_late = false;
 				for (const AddOns::AddOnState& a : AddOns::g_addons) {
 					if (a.first->internal_name == previous_requirement) {
 						prev = a.first.get();
-					} else if (a.first->internal_name == requirement) {
-						if (AddOns::order_matters(prev->category, a.first->category)) {
-							warn_requirements.push_back(
-							   (boost::format(
-							       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-							         "listed in the wrong order")) %
-							    addon->first->descname() % prev->descname() %
-							    search_result->first->descname())
-							      .str());
-						}
 						break;
+					} else if (a.first->internal_name == requirement) {
+						next = a.first.get();
+						too_late = true;
 					}
+				}
+				assert(prev != nullptr);
+				assert(!too_late || next != nullptr);
+				if (too_late && AddOns::order_matters(prev->category, next->category)) {
+					warn_requirements.push_back(
+					   (boost::format(
+					       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+					         "listed in the wrong order")) %
+					    addon->first->descname() % prev->descname() %
+					    search_result->first->descname())
+					      .str());
 				}
 			}
 		}
