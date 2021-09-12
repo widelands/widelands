@@ -1213,15 +1213,14 @@ void AddOnsCtrl::update_dependency_errors() {
 				const AddOns::AddOnInfo* prev = nullptr;
 				for (const AddOns::AddOnState& a : AddOns::g_addons) {
 					if (a.first->internal_name == previous_requirement) {
-						prev = a.first.get();  // NOLINT
-						break;
+						prev = a.first.get();
 					} else if (a.first->internal_name == requirement) {
-						if (AddOns::order_matters(prev->category, a.first->category)) {  // NOLINT
+						if (AddOns::order_matters(prev->category, a.first->category)) {
 							warn_requirements.push_back(
 							   (boost::format(
 							       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 							         "listed in the wrong order")) %
-							    addon->first->descname() % prev->descname() %  // NOLINT
+							    addon->first->descname() % prev->descname() %
 							    search_result->first->descname())
 							      .str());
 						}
