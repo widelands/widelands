@@ -181,7 +181,7 @@ private:
 		void update_save_enabled();
 		void table_selection_changed();
 		void update_table();
-		void save();
+		void save_profile();
 		void delete_selected();
 
 		void unset_parent();

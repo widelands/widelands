@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-25 02:35+0000\n"
-"PO-Revision-Date: 2021-08-18 07:08+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-09-10 02:39+0000\n"
+"PO-Revision-Date: 2021-09-10 02:40+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -265,8 +265,8 @@ msgstr "Samh"
 msgid "Dec"
 msgstr "Dùbh"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:283
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -280,12 +280,12 @@ msgstr "Am prìomh chlàr-taice"
 msgid "Tools"
 msgstr "Innealan"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -386,7 +386,7 @@ msgstr "Atharraich cruth-tìre a’ mhapa"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:292
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:62
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:181
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:179
 msgid "Immovables"
 msgstr "Nithean do-ghluasad"
 
@@ -475,10 +475,10 @@ msgstr "Fiosrachadh"
 msgid "Click on a field to show information about it"
 msgstr "Briog air raon a dh’fhaighinn fiosrachadh mu dhèidhinn"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -553,7 +553,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson fàgail?"
 
 #: ../../src/editor/editorinteractive.cc:923 ../../src/logic/addons.cc:48
-#: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
+#: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_fsmenu/addons/contact.cc:85
 #: ../../src/ui_fsmenu/addons/manager.cc:1294
 #: ../../src/ui_fsmenu/addons/manager.cc:1343
@@ -1382,8 +1382,8 @@ msgstr "Tagh meud a’ mhapa is briog air a’ mhapa an uairsin ’ga sgoltadh a
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
-#: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
-#: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
+#: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:356
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "%1%: %2%"
@@ -1429,7 +1429,7 @@ msgid "Messages"
 msgstr "Teachdaireachdan"
 
 #: ../../src/game_io/game_loader.cc:191
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:205
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:203
 msgid "Finishing"
 msgstr "’Ga choileanadh"
 
@@ -2209,16 +2209,16 @@ msgid "Logic error"
 msgstr "Mearachd na loidsig"
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:172
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:170
 msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "A’ luchdadh %1%: %2% (%3%/%4%)"
 
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:177
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:175
 msgid "Ships"
 msgstr "Longan"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:185
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:183
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:323
@@ -2230,7 +2230,7 @@ msgstr "Bathar"
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
 #. need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:192
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:190
 #: ../../src/wui/economy_options_window.cc:78
 #: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:112
@@ -2239,7 +2239,7 @@ msgid "Workers"
 msgstr "Luchd-obrach"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:199
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:197
 #: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
 #: ../../src/wui/general_statistics_menu.cc:148
@@ -2249,26 +2249,26 @@ msgstr "Togalaichean"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:229
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:227
 msgid "Worker missing"
 msgstr "Tha neach-obrach a dhìth"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:234
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:232
 msgid "Workers missing"
 msgstr "Tha luchd-obrach a dhìth"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:238
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:236
 msgid "Worker is coming"
 msgstr "Tha neach-obrach a’ tighinn"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:243
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers are coming"
 msgstr "Tha luchd-obrach a’ tighinn"
 
@@ -3168,16 +3168,20 @@ msgstr "Uaine"
 msgid "Blue"
 msgstr "Gorm"
 
-#: ../../src/ui_basic/dropdown.cc:112
+#: ../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Tagh nì"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:413
+#: ../../src/ui_basic/dropdown.cc:421
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Cha deach nì a thaghadh"
+
+#: ../../src/ui_basic/dropdown.h:361
+msgid "No matches"
+msgstr ""
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
@@ -5584,36 +5588,36 @@ msgid "Off"
 msgstr "Dheth"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:454
+#: ../../src/ui_fsmenu/options.cc:481
 msgid "Fullscreen"
 msgstr "Làn-sgrìn"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:457
+#: ../../src/ui_fsmenu/options.cc:484
 msgid "Maximized"
 msgstr "Làn-mheudaichte"
 
-#. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:467 ../../src/ui_fsmenu/options.cc:478
-msgid "%1% x %2%"
-msgstr "%1% x %2%"
+#. * TRANSLATORS: Screen resolution, e.g. 800 × 600
+#: ../../src/ui_fsmenu/options.cc:500 ../../src/ui_fsmenu/options.cc:509
+msgid "%1% × %2%"
+msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:568
+#: ../../src/ui_fsmenu/options.cc:558
 msgid "Try system language"
 msgstr "Feuch cànan an t-siostaim"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:672
+#: ../../src/ui_fsmenu/options.cc:662
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Tha an t-eadar-theangachadh gu %s coileanta."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:675
+#: ../../src/ui_fsmenu/options.cc:665
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Chaidh %2%%% dheth eadar-theangachadh gu %1%."
 
-#: ../../src/ui_fsmenu/options.cc:689
+#: ../../src/ui_fsmenu/options.cc:679
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Nam bu toigh leat taic a thoirt dhuinn leis an eadar-theangachadh, tadhail air %s"
@@ -5696,18 +5700,18 @@ msgstr "Slighe mhì-dhligheach dhan fhaidhle ann an campaigns.lua no tutorials.l
 msgid "Tutorial"
 msgstr "Oideachadh"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Ùghdar"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Ùghdaran"
@@ -6542,9 +6546,9 @@ msgstr "Puirt"
 msgid "Low productivity:"
 msgstr "Cinneasachadh gann:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
@@ -7357,11 +7361,11 @@ msgstr "Thoir am bathar air falbh"
 msgid "Add ware"
 msgstr "Cuir bathar ris"
 
-#: ../../src/wui/inputqueuedisplay.cc:553
+#: ../../src/wui/inputqueuedisplay.cc:552
 msgid "Hide controls"
 msgstr "Falaich na h-uidheaman-smachd"
 
-#: ../../src/wui/inputqueuedisplay.cc:553
+#: ../../src/wui/inputqueuedisplay.cc:552
 msgid "Show controls"
 msgstr "Seall na h-uidheaman-smachd"
 
@@ -7516,8 +7520,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Stadastaireachd"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seòladaireachd"

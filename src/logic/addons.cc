@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
@@ -116,10 +117,10 @@ AddOnVersion string_to_version(std::string input) {
 	for (;;) {
 		const size_t pos = input.find('.');
 		if (pos == std::string::npos) {
-			result.push_back(std::stol(input));
+			result.push_back(math::to_long(input));
 			return result;
 		}
-		result.push_back(std::stol(input.substr(0, pos)));
+		result.push_back(math::to_long(input.substr(0, pos)));
 		input = input.substr(pos + 1);
 	}
 	NEVER_HERE();
