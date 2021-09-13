@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-09-10 02:39+0000\n"
 "PO-Revision-Date: 2021-07-03 17:21+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:119
+#: ../../data/world/critters/badger/init.lua:137
 msgid "Badger"
 msgstr "Teixó"
 
@@ -82,7 +82,7 @@ msgstr "Bisó europeu"
 msgid "Wolf"
 msgstr "Llop"
 
-#: ../../data/world/immovables/artifacts/artifact00/init.lua:167
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:176
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7

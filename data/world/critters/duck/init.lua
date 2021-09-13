@@ -14,19 +14,24 @@ wl.Descriptions():new_critter_type{
    reproduction_rate = 10,
 
    animations = {
+      walk = {
+         hotspot = { 5, 10 },
+         directional = true
+      }
+   },
+   spritesheets = {
       idle = {
          sound_effect = {
             path = dirname .. "duck",
             priority = "0.01%"
          },
-         hotspot = { 5, 7 },
          fps = 4,
+         frames = 8,
+         rows = 4,
+         columns = 2,
+         hotspot = { 5, 7 }
       },
-      walk = {
-         hotspot = { 5, 10 },
-         directional = true
-      }
-   }
+   },
 }
 
 pop_textdomain()
