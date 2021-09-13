@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-07 02:36+0000\n"
-"PO-Revision-Date: 2021-08-13 02:47+0000\n"
+"POT-Creation-Date: 2021-09-10 02:39+0000\n"
+"PO-Revision-Date: 2021-09-10 02:40+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -556,7 +556,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "O mapa não foi salvo, você tem certeza que quer sair?"
 
 #: ../../src/editor/editorinteractive.cc:923 ../../src/logic/addons.cc:48
-#: ../../src/ui_basic/dropdown.cc:353 ../../src/ui_basic/dropdown.cc:355
+#: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_fsmenu/addons/contact.cc:85
 #: ../../src/ui_fsmenu/addons/manager.cc:1294
 #: ../../src/ui_fsmenu/addons/manager.cc:1343
@@ -1380,11 +1380,11 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
-#: ../../src/ui_basic/dropdown.cc:301 ../../src/ui_basic/dropdown.cc:353
-#: ../../src/ui_basic/dropdown.cc:420 ../../src/ui_basic/dropdown.cc:428
+#: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:356
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:203
 msgid "%1%: %2%"
@@ -3141,15 +3141,19 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.cc:112
+#: ../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr ""
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:413
+#: ../../src/ui_basic/dropdown.cc:421
 msgctxt "dropdown"
 msgid "Not Selected"
+msgstr ""
+
+#: ../../src/ui_basic/dropdown.h:361
+msgid "No matches"
 msgstr ""
 
 #: ../../src/ui_basic/panel.cc:312
@@ -5527,36 +5531,36 @@ msgid "Off"
 msgstr "Desligado"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:454
+#: ../../src/ui_fsmenu/options.cc:481
 msgid "Fullscreen"
 msgstr "Tela cheia"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:457
+#: ../../src/ui_fsmenu/options.cc:484
 msgid "Maximized"
 msgstr ""
 
-#. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:467 ../../src/ui_fsmenu/options.cc:478
-msgid "%1% x %2%"
+#. * TRANSLATORS: Screen resolution, e.g. 800 × 600
+#: ../../src/ui_fsmenu/options.cc:500 ../../src/ui_fsmenu/options.cc:509
+msgid "%1% × %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:568
+#: ../../src/ui_fsmenu/options.cc:558
 msgid "Try system language"
 msgstr "Tente o idioma do sistema"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:672
+#: ../../src/ui_fsmenu/options.cc:662
 #, c-format
 msgid "The translation into %s is complete."
 msgstr ""
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:675
+#: ../../src/ui_fsmenu/options.cc:665
 msgid "The translation into %1% is %2%%% complete."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:689
+#: ../../src/ui_fsmenu/options.cc:679
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -6483,9 +6487,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
