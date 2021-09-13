@@ -248,7 +248,7 @@ function barbarians_thread()
       sleep(2343)
    end
    campaign_message_box(diary_page_9)
-   p1:allow_buildings{"empire_barracks", "empire_fortress"}
+   p1:allow_buildings{"empire_barracks", "empire_fortress", "empire_sheepfarm", "empire_weaving_mill"}
 
    o = add_campaign_objective(obj_remove_the_barbarians)
    -- Wait for the fortress to come up

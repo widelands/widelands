@@ -36,7 +36,7 @@ struct NetAddons {
 	}
 
 	// Fetch the list of all available add-ons from the server
-	AddOnsList refresh_remotes();
+	std::vector<std::string> refresh_remotes(bool all);
 	AddOnInfo fetch_one_remote(const std::string& name);
 
 	using CallbackFn = std::function<void(const std::string&, int64_t)>;
@@ -57,13 +57,13 @@ struct NetAddons {
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
 
-	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
+	// How the user voted the add-on (1-10). Returns 0 for not voted, <0 for access denied.
 	int get_vote(const std::string& addon);
 	void vote(const std::string& addon, unsigned vote);
 
-	// Write a new comment or edit an existing one. Negative `index_to_edit` indicates a new comment
-	// should be written.
-	void comment(const AddOnInfo& addon, std::string message, int64_t index_to_edit = -1);
+	// Write a new comment or edit an existing one. If `index_to_edit` is `nullptr`,
+	// a new comment will be written. An empty message causes the comment to be deleted.
+	void comment(const AddOnInfo& addon, const std::string& message, const size_t* index_to_edit);
 
 	void
 	upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
@@ -71,7 +71,10 @@ struct NetAddons {
 	                       const std::string& image,
 	                       const std::string& description);
 
-	void contact(std::string enquiry);
+	enum class AdminAction { kVerify, kQuality, kSyncSafe, kSetupTx, kDelete };
+	void admin_action(AdminAction, const AddOnInfo& addon, const std::string& value);
+
+	void contact(const std::string& enquiry);
 
 	void set_login(const std::string& username, const std::string& password);
 
@@ -81,9 +84,6 @@ private:
 	// Open the connection if it was not open yet; throws an error if this fails
 	void init(std::string username = std::string(), std::string password = std::string());
 	void quit_connection();
-
-	// Set the URL (whitespace-safe) and adjust the timeout values.
-	// void set_url_and_timeout(std::string);
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
 	std::string read_line();
