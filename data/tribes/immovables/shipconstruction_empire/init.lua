@@ -21,12 +21,14 @@ descriptions:new_immovable_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         basename = "build",
-         hotspot = { 115, 78 },
          fps = 1,
-         representative_frame = 5
+         frames = 7,
+         rows = 4,
+         columns = 2,
+         representative_frame = 5,
+         hotspot = { 115, 78 }
       },
    }
 }

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-28 07:16+0000\n"
+"PO-Revision-Date: 2021-08-28 07:30+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -395,7 +395,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr "Wi hebben Atlantis verlaten un sünd na Oosten seilt. Am sessten Dag hebben wi de verseggten Seen betreden, sünner vun Atlantis verfolgt to worden of dat Luutas uns’ Schipp verneelt hett. Nu sünd wi achter siener Macht. Eenen Dag daarna hebben wi eene Insel to sehn kregen, wat utsücht, as of daar Bargen up sünd, wat Füür spejen. Dat is, gloov ik, en Teken vun de Füürgott, also sünd wi daar up de Küst lannt."
+msgstr "Wi hebben Atlantis verlaten un sünd na Oosten seilt. Am sessten Dag hebben wi de verseggten Seen betreden, sünner vun Atlantis verfolgt to worden of dat Luutas uns’ Schipp verneelt hett. Nu sünd wi achter siener Macht. Eenen Dag daarna hebben wi eene Insel to sehn kregen, wat utsücht, as of daar Bargen up sünd, wat Füür spejen. Dat is, gloov ick, en Teken vun de Füürgott, also sünd wi daar up de Küst lannt."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:185

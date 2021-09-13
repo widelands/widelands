@@ -23,12 +23,16 @@ wl.Descriptions():new_critter_type{
          basename = "idle", -- TODO(Nordfriese): Make animation
          hotspot = { 4, 9 },
       },
+   },
+   spritesheets = {
       walk = {
-         hotspot = { 5, 9 },
-         fps = 4,
-         directional = true
-      }
-   }
+         frames = 2,
+         rows = 2,
+         columns = 1,
+         directional = true,
+         hotspot = { 5, 9 }
+      },
+   },
 }
 
 pop_textdomain()
