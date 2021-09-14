@@ -32,7 +32,7 @@ end
 -- =======================================================================
 
 function immovable_has_name(immovable, name)
-   return (immovable ~= nil and immovable.descr.name == name) 
+   return (immovable ~= nil and immovable.descr.name == name)
 end
 
 -- =======================================================================

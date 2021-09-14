@@ -176,7 +176,7 @@ function mission_thread()
    -- Bring shovels and remove the swamps.
    -- =======================================================================
 
-   -- Wait for shovels in warehouse and hand them (done in "wares_collected_at_field" function)out. 
+   -- Wait for shovels in warehouse and hand them (done in "wares_collected_at_field" function)out.
    run(function()
       scroll_to_field(warehouse)
       campaign_message_box(briefing_bring_shovels_1)
@@ -192,7 +192,7 @@ function mission_thread()
       send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"4 more shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
       remove_swamps(p1)
       sleep(198000)
-      -- After the work is done the shovels are returned to the Wh. 
+      -- After the work is done the shovels are returned to the Wh.
       transport_wares(p1, warehouse, "shovel", 8, true, "tribes/buildings/warehouses/barbarians/warehouse/menu.png")
       o_bring_shovels_2.done = true
    end)
