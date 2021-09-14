@@ -78,6 +78,8 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		boost::replace_first(display_dir, "My_Maps", _("My Maps"));
 	} else if (boost::starts_with(display_dir, "MP_Scenarios")) {
 		boost::replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	} else if (boost::starts_with(display_dir, "SP_Scenarios")) {
+		boost::replace_first(display_dir, "SP_Scenarios", _("Singleplayer Scenarios"));
 	} else if (boost::starts_with(display_dir, "Downloaded")) {
 		boost::replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
