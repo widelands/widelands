@@ -2,7 +2,7 @@
 --                             Along The River
 -- =======================================================================
 
-push_textdomain("along_the_river.wmf")
+push_textdomain("map_along_the_river.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/field_animations.lua"
