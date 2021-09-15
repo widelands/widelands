@@ -147,20 +147,27 @@ function mission_thread()
 
    -- Conquer pirate barbarians_sentry and build warehouse.
    run(function()
-      local pirate_barbarians_sentry = map:get_field(59, 89)
-      while not p1:seen_field(pirate_barbarians_sentry) do sleep(2011) end
-      scroll_to_field(pirate_barbarians_sentry)
+      local pirate_sentry = map:get_field(59, 89)
+      while not p1:seen_field(pirate_sentry) do
+         sleep(2011)
+         -- Ai will dismantle sentry cause it can't be connected to a WH so check and rebuild
+         local sentry_immovable = pirate_sentry.immovable
+         if not sentry_immovable or sentry_immovable.descr.name ~= "barbarians_sentry" then
+            prefilled_buildings(p5, {"barbarians_sentry", 59, 89, soldiers = {[{0,2,0,2}] = 2 }})
+         end
+      end
+      scroll_to_field(pirate_sentry)
       campaign_message_box(briefing_conquer_pirate_sentry)
-      local o_conquer_pirate_barbarians_sentry = add_campaign_objective(obj_conquer_pirate_sentry)
+      local o_conquer_pirate_sentry = add_campaign_objective(obj_conquer_pirate_sentry)
 
-      while pirate_barbarians_sentry.owner == p5 do sleep(997) end
+      while pirate_sentry.owner == p5 do sleep(997) end
       p1:place_flag(map:get_field(53, 87), true)
       map:get_field(53, 87).immovable:remove()
       p1:reveal_fields(warehouse:region(6))
       scroll_to_field(warehouse)
       campaign_message_box(briefing_found_pirate_treasure)
       o_build_warehouse = add_campaign_objective(obj_build_warehouse)
-      o_conquer_pirate_barbarians_sentry.done = true
+      o_conquer_pirate_sentry.done = true
       run(function()
          sleep(30000)
          p1:hide_fields(warehouse:region(6))
@@ -182,14 +189,14 @@ function mission_thread()
       campaign_message_box(briefing_bring_shovels_1)
       o_bring_shovels_1 = add_campaign_objective(obj_bring_shovels_1)
       while wares_collected_at_field(warehouse, "shovel", 4) == false do sleep(2027) end
-      send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"4 shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
+      send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
       o_bring_shovels_1.done = true
       sleep(180000)
       scroll_to_field(warehouse)
       campaign_message_box(briefing_bring_shovels_2)
       o_bring_shovels_2 = add_campaign_objective(obj_bring_shovels_2)
       while wares_collected_at_field(warehouse, "shovel", 4) == false do sleep(2027) end
-      send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"4 more shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
+      send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four more shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
       remove_swamps(p1)
       sleep(198000)
       -- After the work is done the shovels are returned to the Wh.
