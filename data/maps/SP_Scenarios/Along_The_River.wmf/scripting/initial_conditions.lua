@@ -345,7 +345,7 @@ p5:allow_buildings{
    "barbarians_gamekeepers_hut",
    "barbarians_well"
 }
-
+p5:conquer(wl.Game().map:get_field(60, 69), 5)
 prefilled_buildings(p5,
    { "barbarians_headquarters_interim", 87, 65,
       wares = {
