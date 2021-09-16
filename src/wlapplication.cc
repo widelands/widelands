@@ -925,6 +925,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		switch (ev.type) {
 		case SDL_KEYUP:
 		case SDL_KEYDOWN: {
+			normalize_numpad(ev.key.keysym);
 			bool handled = false;
 			// Workaround for duplicate triggering of the Alt key in Ubuntu:
 			// Don't accept the same key twice, so we use a map to squash them and handle them later.

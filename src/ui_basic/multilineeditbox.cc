@@ -401,11 +401,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_TAB:
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
-		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_DELETE:
 			if (d_->mode == Data::Mode::kSelection) {
 				delete_selected_text();
@@ -606,7 +601,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			d_->insert(d_->cursor_pos, "\n");
 			d_->update();

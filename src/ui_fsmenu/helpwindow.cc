@@ -96,7 +96,6 @@ bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 bool HelpWindow::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;

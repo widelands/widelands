@@ -140,7 +140,6 @@ protected:
 
 		// Also ignore reserved system keys
 		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
 		case SDLK_SPACE:
 		case SDLK_ESCAPE:
 		case SDLK_UP:
@@ -320,7 +319,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 }
 
 bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
-	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+	if (down && code.sym == SDLK_RETURN) {
 		die();
 		return true;
 	}
