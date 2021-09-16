@@ -25,10 +25,13 @@
 
 #include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
 
-// prevent defining snprintf to libintl_snprintf in libintl.h
+// prevent defining snprintf / vsnprintf to libintl_snprintf / libintl_vsnprintf in libintl.h
 // libintl.h is included by getext.h
 #ifdef snprintf
 #undef snprintf
+#endif
+#ifdef vsnprintf
+#undef vsnprintf
 #endif
 
 #include "base/macros.h"

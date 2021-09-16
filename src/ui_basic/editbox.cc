@@ -305,7 +305,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
 
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (history_active_) {
@@ -320,11 +319,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			ok();
 			return true;
 
-		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_DELETE:
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
