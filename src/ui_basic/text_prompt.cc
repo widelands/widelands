@@ -85,7 +85,7 @@ TextPrompt::TextPrompt(UI::Panel& parent,
 }
 
 bool TextPrompt::handle_key(const bool down, const SDL_Keysym code) {
-	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+	if (down && code.sym == SDLK_RETURN) {
 		end_modal<Panel::Returncodes>(Panel::Returncodes::kOk);
 		return true;
 	}

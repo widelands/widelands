@@ -784,7 +784,6 @@ bool MainMenuNewRandomMap::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
 			clicked_ok();
 			return true;
 		default:
