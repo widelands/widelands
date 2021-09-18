@@ -25,7 +25,7 @@ briefing_intro = {
 briefing_warn_for_red = {
    title = _"Your advisor",
    body = advisor(_"Our northern enemy",
-      _([[Sire, although our soldiers would face any enemy without the slightest fear, our rival in the north is still stronger than all our armies combined. We should avoid to have a conflict until we are able to defeat it.]])
+      _([[Sire, although our soldiers would face any enemy without the slightest fear, our rival in the north is still stronger than all our armies combined. We should avoid a conflict until we are able to defeat them.]])
       .. paragraphdivider() ..
       _([[Be patient and recognize that a strong army is indispensable in this situation. Törver has a very bad reputation.]]))
 }
