@@ -56,6 +56,15 @@ obj_bring_shovels_2 = {
    ),
 }
 
+obj_defeat_pirates = {
+   name = "defeat_pirates",
+   title = _"Defeat the pirates",
+   number = 1,
+   body = objective_text(_"Free our neighbourhood from the pirate menace.",
+      li_image("map:banner_plr_05.png", _[[The pirates are fighting under the grey banner.]])
+   ),
+}
+
 obj_free_scout = {
    name = "free_scout",
    title = _"Free our scout from the pirates",

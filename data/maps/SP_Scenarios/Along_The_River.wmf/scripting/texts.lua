@@ -88,6 +88,19 @@ briefing_bring_shovels_2 = {
       .. new_objectives(obj_bring_shovels_2),
 }
 
+briefing_defeat_pirates = {
+   title = _"Your advisor",
+   body = advisor(_"Defeat the pirates",
+      _([[Sire, now that we have access to the pirates hideout, we should conquer it and finish them off. Maybe there are even more treasures hidden in their territory.]]))
+      .. new_objectives(obj_defeat_pirates),
+}
+
+briefing_pirates_defeated = {
+   title = _"Your advisor",
+   body = advisor(_"The pirates were defeated.",
+      _([[Sire, we have defeated the pirates. The have hidden some gold in their last bastion whic is now transferred to our Headquarters.]]))
+}
+
 briefing_pirates_regrouping = {
    title = _"Your advisor",
    body = advisor(_"Pirates are regrouping",

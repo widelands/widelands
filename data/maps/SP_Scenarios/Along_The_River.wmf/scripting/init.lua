@@ -205,6 +205,8 @@ function mission_thread()
    end)
 
    while not obj_done(o_bring_shovels_2) do sleep(2029) end
+   campaign_message_box(briefing_defeat_pirates)
+   o_defeat_pirates = add_campaign_objective(obj_defeat_pirates)
 
    -- =======================================================================
    -- Allow Hjalmar to build military sites when Runar is defeated.
@@ -219,15 +221,26 @@ function mission_thread()
    end)
 
    -- =======================================================================
+   -- Check if the pirates have been defeated.
+   -- =======================================================================
+
+   run(function()
+      while not p5.defeated do sleep(2089) end
+      o_defeat_pirates.done = true
+      campaign_message_box(briefing_pirates_defeated)
+      transport_wares(p1, hq, "gold", 10, true, "tribes/buildings/warehouses/barbarians/warehouse/menu.png")
+   end)
+
+   -- =======================================================================
    -- Now the swamps have been removed, we have to conquer part of p5.
    -- =======================================================================
 
    sleep(1200000)
 
    -- Wait till part of p5 has been conquered.
-   while map:get_field(81,63).owner == p5 and
-            map:get_field(88,71).owner == p5 and
-            map:get_field(88,91).owner == p5 do sleep(2081)
+   while map:get_field(78,65).owner == p5 and
+            map:get_field(80,71).owner == p5 and
+            map:get_field(80,91).owner == p5 do sleep(2081)
    end
    campaign_message_box(briefing_pirates_regrouping)
    run(function() spawn_soldiers(map:get_field( 87, 65), {0,2,0,2}, 12, 5021) end)   -- HQ p5 I
