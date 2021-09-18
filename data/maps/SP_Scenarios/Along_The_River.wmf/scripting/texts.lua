@@ -110,7 +110,7 @@ briefing_pirates_regrouping = {
 briefing_pirates_on_the_run = {
    title = _"Your advisor",
    body = advisor(_"Pirates on the run",
-      _([[Sire, thanks to our successful efforts to drive out the pirates, lots of them have fled and moved away in small boats. It is unknown in what direction they have escaped.]]))
+      _([[Sire, thanks to our successful efforts to drive out the pirates, lots of them have fled and moved away in small boats. It is unknown in which direction they have escaped.]]))
 }
 
 briefing_shipyard = {
