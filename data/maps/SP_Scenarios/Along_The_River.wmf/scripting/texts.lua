@@ -35,7 +35,7 @@ briefing_defeat_red = {
    body = advisor(_"Peril from the north",
       _([[Sire, We received an alarming message from one of our explorers. Törver is expanding his front line and approaching our territory.]])
       .. paragraphdivider() ..
-      _([[We cannot avoid to attack their armies forever. If we can conquer our northern enemy then we will enlarge our territory and find more resources to strengthen our armies.]])
+      _([[We cannot avoid attacking their armies forever. If we manage to conquer our northern enemy, we will enlarge our territory and find more resources to strengthen our armies.]])
       .. paragraphdivider() ..
       _([[We can then also use their access to the lake in order to explore more land.]]))
       .. new_objectives(obj_defeat_red),
