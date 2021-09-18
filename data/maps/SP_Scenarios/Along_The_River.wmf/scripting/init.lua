@@ -250,7 +250,7 @@ function mission_thread()
    prefilled_buildings(p5,
       { "barbarians_sentry",          80, 27, soldiers = { [{0,3,0,2}] = 2 } },
       { "barbarians_barrier",    82, 29, soldiers = { [{0,3,0,2}] = 3 } },
-      { "barbarians_scouts_hut",    80, 30, wares = {ration = 2} }
+      { "barbarians_scouts_hut",    80, 30, inputs = {ration = 2} }
    )
 
    campaign_message_box(briefing_barbarians_shipyard)
