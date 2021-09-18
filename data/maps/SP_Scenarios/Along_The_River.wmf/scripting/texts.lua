@@ -116,7 +116,7 @@ briefing_pirates_on_the_run = {
 briefing_shipyard = {
    title = _"Your advisor",
    body = advisor(_"Ability to build shipyards",
-      _([[Sire, after long study and research our wise men have finally managed to decipher the strange language in Törver's descriptions that we had found in his headquarters. From now on we are able to build shipyards.]]))
+      _([[Sire, after long study and research our wise men have finally managed to decipher the strange language in Törver’s descriptions that we had found in his headquarters. From now on we are able to build shipyards.]]))
 }
 
 briefing_free_scout = {
