@@ -15,7 +15,7 @@ briefing_intro = {
       .. paragraphdivider() ..
       _([[A large area to the north-east is agonized by a wild horde of unfettered pirates, led by their insane Arvid. Their presence blocks our ways to other tribes.]])
       .. paragraphdivider() ..
-      _([[Over the river lies the prosperous land of the mysterious king Runar. We have been in war with him before the pirates occupied the eastern area. His strenth is based on his vaste industries and large armies.]])
+      _([[Over the river lies the prosperous land of the mysterious king Runar. We have been in war with him before the pirates occupied the eastern area. His strength is based on his vast industry and large armies.]])
       .. paragraphdivider() ..
       _([[The area beyond the pirates belongs to a developed tribe led by their mighty chieftain Hjalmar. They have had a long time of preparement to build up their deterring armies.]])
       .. paragraphdivider() ..
