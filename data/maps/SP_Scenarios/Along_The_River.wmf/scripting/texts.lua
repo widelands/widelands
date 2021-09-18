@@ -104,7 +104,7 @@ briefing_pirates_defeated = {
 briefing_pirates_regrouping = {
    title = _"Your advisor",
    body = advisor(_"Pirates are regrouping",
-      _([[Sire, as a result of our attacks on the pirates they have started to regroup with pirates from other tribes. They could regain much of their previously lost strength. Our dwindling resources can become a problem with such a large enemy in front of us.]])),
+      _([[Sire, as a result of our attacks on the pirates they have started to regroup with pirates from other tribes. They could regain much of their previously lost strength. Our dwindling resources can become a problem with such a mighty enemy in front of us.]])),
 }
 
 briefing_pirates_on_the_run = {
