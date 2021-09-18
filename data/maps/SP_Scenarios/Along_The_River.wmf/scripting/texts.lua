@@ -33,7 +33,7 @@ briefing_warn_for_red = {
 briefing_defeat_red = {
    title = _"Your advisor",
    body = advisor(_"Peril from the north",
-      _([[Sire, We received an alarming message from one of our explorers. Törver is expanding his front line and approaching our territory.]])
+      _([[Sire, we received an alarming message from one of our explorers. Törver is expanding his front line and approaching our territory.]])
       .. paragraphdivider() ..
       _([[We cannot avoid attacking their armies forever. If we manage to conquer our northern enemy, we will enlarge our territory and find more resources to strengthen our armies.]])
       .. paragraphdivider() ..
