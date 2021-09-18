@@ -52,7 +52,7 @@ briefing_build_port = {
    body = advisor(_"The great lake",
       _([[Sire, now that we have conquered the land of Törver, we can make use of their excellent access to the adjacent great lake. A port in the north will give us better opportunities to have contact with other tribes.]])
       .. paragraphdivider() ..
-      _([[In Törver's headquarters we found papers that describe the construction of ships. Unfortunately, the texts are written in a language that is unknown to us. Our wise men will try to translate these descriptions.]]))
+      _([[In Törver’s headquarters we found papers describing the construction of ships. Unfortunately, the texts are written in a language that is unknown to us. Our wise men will try to translate these descriptions.]]))
       .. new_objectives(obj_build_port),
 }
 
