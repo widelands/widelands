@@ -228,7 +228,7 @@ function mission_thread()
       while not p5.defeated do sleep(2089) end
       o_defeat_pirates.done = true
       campaign_message_box(briefing_pirates_defeated)
-      transport_wares(p1, hq, "gold", 10, true, "tribes/buildings/warehouses/barbarians/warehouse/menu.png")
+      transport_wares(p1, hq, "gold", 10, true, "tribes/buildings/warehouses/barbarians/headquarters_interim/idle_00.png")
    end)
 
    -- =======================================================================
