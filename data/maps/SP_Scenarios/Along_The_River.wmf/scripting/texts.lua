@@ -137,7 +137,7 @@ briefing_island_conquered = {
 briefing_scout = {
    title = _"Your advisor",
    body = advisor(_"The scout returns",
-      _([[Sire, our  scout has returned to our territorium and he has shown us the road through the swamps towards Hjalmar.]])
+      _([[Sire, our scout has returned to our territory, and he has shown us the road through the swamps towards Hjalmar.]])
       .. paragraphdivider() ..
       _([[He noticed that we can also move along the other side of the mountain, in case we might fail here, but it will be much more difficult to do.]]))
       .. new_objectives(obj_defeat_green),
