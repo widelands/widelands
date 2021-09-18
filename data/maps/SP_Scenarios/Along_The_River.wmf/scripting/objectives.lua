@@ -34,7 +34,7 @@ obj_build_warehouse = {
    title = _"Build warehouse",
    number = 1,
    body = objective_text(_"Build a warehouse close to the pirate sentry near the brook.",
-      li_image("tribes/buildings/warehouses/barbarians/warehouse/menu.png", _[[We need storage for the gold to be mined.]])
+      li_image("tribes/buildings/warehouses/barbarians/warehouse/menu.png", _[[We will need it as a basis for further exploitation. Furthermore we could use it to store some gold that we will mine from the surrounding hills.]])
    ),
 }
 

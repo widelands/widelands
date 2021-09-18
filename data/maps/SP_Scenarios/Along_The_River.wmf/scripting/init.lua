@@ -150,7 +150,7 @@ function mission_thread()
       local pirate_sentry = map:get_field(59, 89)
       while not p1:seen_field(pirate_sentry) do
          sleep(2011)
-         -- Ai will dismantle sentry cause it can't be connected to a WH so check and rebuild
+         -- Ai will dismantle sentry cause it can’t be connected to a WH so check and rebuild
          local sentry_immovable = pirate_sentry.immovable
          if not sentry_immovable or sentry_immovable.descr.name ~= "barbarians_sentry" then
             prefilled_buildings(p5, {"barbarians_sentry", 59, 89, soldiers = {[{0,2,0,2}] = 2 }})
@@ -315,7 +315,7 @@ function mission_thread()
    local f
    f = p1:place_flag(map:get_field(92, 50), true)
    p1:place_road(f, "bl","bl","l","bl","bl","br","bl","bl","br","br", true)
-   map:get_field(140,36).terd = "wiese2"
+   map:get_field(140,36).terd = "summer_meadow2"
    scroll_to_field(map:get_field(91,49))
    campaign_message_box(briefing_scout)
    o_defeat_green = add_campaign_objective(obj_defeat_green)

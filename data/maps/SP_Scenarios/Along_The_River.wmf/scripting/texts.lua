@@ -68,7 +68,7 @@ briefing_conquer_pirate_sentry = {
 briefing_found_pirate_treasure = {
    title = _"Your advisor",
    body = advisor(_"Found a treasure",
-      _([[Sire, we have found 25 units of gold ore inside the pirate sentry. They may have been looted from the gold digger's huts nearby. This gold ore will be transported to our headquarters.]])
+      _([[Sire, we have found 25 units of gold ore inside the pirate sentry. They may have been looted from the gold digger’s huts nearby. This gold ore will be transported to our headquarters.]])
       .. paragraphdivider() ..
       _([[With our successful expansion into this area we should consider building a warehouse to the direct southwest of the sentry in order to further exploit this area. There is a good building spot only three steps away from the sentry.]]))
       .. new_objectives(obj_build_warehouse),
