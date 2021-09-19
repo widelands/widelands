@@ -34,30 +34,21 @@ end
 
 -- =======================================================================
 
-function add_wares(point, ware, amount)
-   local immovable = point.immovable
-   if immovable then
-      if immovable.descr.type_name == "flag" or immovable.descr.type_name == "warehouse" or immovable.descr.type_name == "productionsite" then
-         immovable:set_wares(ware, immovable:get_wares(ware) + amount)
-      end
+function add_wares(immovable, ware, amount)
+   if immovable and (immovable.descr.type_name == "flag" or immovable.descr.type_name == "warehouse" or immovable.descr.type_name == "productionsite") then
+      immovable:set_wares(ware, immovable:get_wares(ware) + amount)
    end
 end
 
 -- =======================================================================
 
 -- Transports wares to flag, warehouse or productionsite.
--- Waits if the building does not exist.
 function transport_wares(player, point, ware, amount, alert, image)
    local count = amount
    while count > 0 do
       sleep(499)
-      local immovable = point.immovable
-      if immovable then
-         if immovable.descr.type_name == "flag" or immovable.descr.type_name == "warehouse" or immovable.descr.type_name == "productionsite" then
-            immovable:set_wares(ware, immovable:get_wares(ware) + 1)
-            count = count - 1
-         end
-      end
+      add_wares(point.immovable, ware, 1)
+      count = count - 1
    end
    if (alert) then
       local ware_name =  wl.Game():get_ware_description(ware).descname
