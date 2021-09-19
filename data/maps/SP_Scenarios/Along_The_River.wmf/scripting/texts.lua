@@ -157,7 +157,7 @@ briefing_victory = {
    body = advisor(_"Victory!",
       _([[Sire, my congratulations!]])
       .. paragraphdivider() ..
-      _([[You have completed all goals and defeated all our enemies. You have not only conquered our rivaling tribes, but you have also captured the hearts of your beloving people.]])
+      _([[You have completed all goals and defeated all our enemies. You have not only conquered our rivalling tribes, but you have also captured the hearts of your loving people.]])
       .. paragraphdivider() ..
       _([[Your name will be remembered forever.]]))
 }
