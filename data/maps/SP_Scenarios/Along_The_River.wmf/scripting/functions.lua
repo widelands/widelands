@@ -21,11 +21,8 @@ end
 -- =======================================================================
 
 function remove_type(point, _type)
-   local immovable = point.immovable
-   if immovable then
-      if immovable.descr.type_name == _type then
-         immovable:remove()
-      end
+   if point.immovable and point.immovable.descr.type_name == _type then
+      immovable:remove()
    end
 end
 
