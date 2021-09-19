@@ -77,7 +77,15 @@ function spawn_soldiers(point, ranking, count, interval)
       if immovable then
          if immovable.descr.type_name == "warehouse" or immovable.descr.type_name == "militarysite" or immovable.descr.type_name == "trainingsite" then
             local soldiers = immovable:get_soldiers("all")
-            soldiers[ranking] = immovable:get_soldiers(ranking) + 1
+            local did_set = false
+            for key,value in pairs(soldiers) do
+               if key[1] == ranking[1] and key[2] == ranking[2] and key[3] == ranking[3] and key[4] == ranking[4] then
+                  soldiers[key] = value + 1
+                  did_set = true
+                  break
+               end
+            end
+            if not did_set then soldiers[ranking] = 1 end
             immovable:set_soldiers(soldiers)
          else
             break
