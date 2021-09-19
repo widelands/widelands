@@ -59,7 +59,7 @@ function transport_wares(player, point, ware, amount, alert, image)
          end
       end
    end
-   if(alert) then
+   if (alert) then
       local ware_name =  wl.Game():get_ware_description(ware).descname
       local immovable = point.immovable
       if immovable then
