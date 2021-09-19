@@ -195,7 +195,7 @@ function mission_thread()
       scroll_to_field(warehouse)
       campaign_message_box(briefing_bring_shovels_2)
       o_bring_shovels_2 = add_campaign_objective(obj_bring_shovels_2)
-      while wares_collected_at_field(warehouse, "shovel", 4) == false do sleep(2027) end
+      while not wares_collected_at_field(warehouse, "shovel", 4) do sleep(2027) end
       send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four more shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
       remove_swamps(p1)
       sleep(198000)
