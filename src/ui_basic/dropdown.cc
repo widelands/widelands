@@ -108,7 +108,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      is_enabled_(true),
      button_style_(button_style),
      autoexpand_display_button_(false) {
-	set_handle_textinput();
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -416,7 +415,7 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
+	                            list_->get_selected_name() :
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
@@ -431,7 +430,7 @@ void BaseDropdown::update() {
                                                            tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
+		                           list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
@@ -459,6 +458,7 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	}
 	list_->set_visible(open);
 	if (list_->is_visible()) {
+		enable_textinput();
 		list_->move_to_top();
 		focus();
 		Notifications::publish(NoteDropdown(id_));
@@ -471,6 +471,8 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 		    !has_selection() && !list_->empty()) {
 			select(0);
 		}
+	} else {
+		disable_textinput();
 	}
 	if (type_ != DropdownType::kTextual) {
 		display_button_.set_perm_pressed(list_->is_visible());
@@ -538,6 +540,13 @@ void BaseDropdown::delete_last_of_filter() {
 }
 bool BaseDropdown::is_filtered() {
 	return !current_filter_.empty();
+}
+void BaseDropdown::disable_textinput() {
+	set_handle_textinput(false);
+}
+
+void BaseDropdown::enable_textinput() {
+	set_handle_textinput(true);
 }
 
 }  // namespace UI

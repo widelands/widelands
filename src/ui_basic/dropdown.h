@@ -149,6 +149,8 @@ public:
 
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
+	void enable_textinput();
+	void disable_textinput();
 
 	/// Expand display button to make enough room for each entry's text. Call this before adding any
 	/// entries.
@@ -291,7 +293,6 @@ public:
 	                  type,
 	                  style,
 	                  button_style) {
-		set_handle_textinput();
 	}
 	~Dropdown() override {
 		filtered_entries.clear();
