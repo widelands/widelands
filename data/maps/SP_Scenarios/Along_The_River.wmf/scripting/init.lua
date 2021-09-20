@@ -314,7 +314,7 @@ function mission_thread()
    p1:conquer(map:get_field(91,49),2)
    local f
    f = p1:place_flag(map:get_field(92, 50), true)
-   p1:place_road(f, "bl","bl","l","bl","bl","br","bl","bl","br","br", true)
+   p1:place_road("normal", f, "bl","bl","l","bl","bl","br","bl","bl","br","br", true)
    map:get_field(140,36).terd = "summer_meadow2"
    scroll_to_field(map:get_field(91,49))
    campaign_message_box(briefing_scout)
@@ -329,7 +329,7 @@ function mission_thread()
          if #claimers == 0 and map:get_field(91,49).owner ~= p1 then
             p1:conquer(map:get_field(91,49),2)
             flag = p1:place_flag(map:get_field(92, 50), true)
-            p1:place_road(flag, "bl","bl","l","bl","bl","br","bl","bl","br","br", true)
+            p1:place_road("normal", flag, "bl","bl","l","bl","bl","br","bl","bl","br","br", true)
          end
       end
    end)
