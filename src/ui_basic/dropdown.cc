@@ -522,6 +522,11 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 				}
 				return true;
 			}
+		case SDLK_SPACE:
+			if (!is_expanded()) {
+				enable_textinput();
+				return true;
+			}
 			break;
 		default:
 			break;  // not handled
