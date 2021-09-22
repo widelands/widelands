@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-13 02:47+0000\n"
+"POT-Creation-Date: 2021-09-19 11:58+0000\n"
 "PO-Revision-Date: 2021-09-13 02:49+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/widelands/widelands/language/sl/)\n"
@@ -1386,8 +1386,8 @@ msgid ""
 "location."
 msgstr "Izberite novo velikost zemljevida, nato kliknite na zemljevid, da ga razdelite na želeni lokaciji. Pri povečanju velikosti zemljevida bodo novi stolpci/vrstice vstavljene vzhodno/južno od izbrane točke. Ob krčenju zemljevida bo želeno število stolpcev/vrstic odstranjenih na vzhodu/jugu od izbrane točke."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -3186,7 +3186,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Ni izbrano"
 
-#: ../../src/ui_basic/dropdown.h:361
+#: ../../src/ui_basic/dropdown.h:362
 msgid "No matches"
 msgstr ""
 
@@ -6674,9 +6674,9 @@ msgstr "Pristanišča"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
@@ -7648,8 +7648,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistika"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Pomorstvo"
