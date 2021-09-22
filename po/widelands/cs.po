@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-16 02:42+0000\n"
-"PO-Revision-Date: 2021-09-13 02:49+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-09-19 11:58+0000\n"
+"PO-Revision-Date: 2021-09-19 17:02+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -269,8 +269,8 @@ msgstr "listopad"
 msgid "Dec"
 msgstr "prosinec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:282
 #: ../../src/wui/interactive_gamebase.cc:90
@@ -284,12 +284,12 @@ msgstr "Hlavní nabídka"
 msgid "Tools"
 msgstr "Nástroje"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Informace"
 msgid "Click on a field to show information about it"
 msgstr "Kliknutím na pole mapy se zobrazí jeho popis"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -661,8 +661,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1391,8 +1391,8 @@ msgid ""
 "location."
 msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa rozdělena. Pokud se rozměr zvětšuje, nové sloupce/řádky budou vloženy doprava a dolů od místa rozdělení, tzn. na jih a východ od místa rozdělení. Pokud se mapa zmenšuje bude odebrán požadovaný počet sloupců/řádků, které jsou taktéž ve směru vpravo a dolů od místa rozdělení."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -3370,41 +3370,41 @@ msgstr "%u B"
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Jakákoli"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Kvalita zatím nebyla vypočtena"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:101
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Špatná"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Toto rozšíření může způsobit kritické problémy a chyby."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Dobrá"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Tohle rozšíření funguje, jak má."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:113
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Skvělá"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:114
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Toto rozšíření bylo vyznamenáno pro velmi vysokou kvalitu."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:126
 msgid "Add-On Manager"
@@ -3416,7 +3416,7 @@ msgstr "Pouze ověřené"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Zobraz pouze ověřená rozšíření"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:180
 msgid "Sort by"
@@ -3424,7 +3424,7 @@ msgstr "Řadit podle"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:191
 msgid "Minimum quality"
-msgstr ""
+msgstr "Minimální kvalita"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:202
 msgid "Choose add-on to upload…"
@@ -3588,12 +3588,12 @@ msgstr "Jméno (Z-A)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:497
 msgid "Most popular"
-msgstr ""
+msgstr "Nejpopulárnější"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:499
 msgid "Least popular"
-msgstr ""
+msgstr "Nejméně populární"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:501
@@ -3724,11 +3724,11 @@ msgstr "Vložené uživatelské jméno nebo heslo jsou nesprávné:\n%s"
 #: ../../src/ui_fsmenu/addons/manager.cc:930
 #, c-format
 msgid "Fetching add-ons (%.1f%%)"
-msgstr ""
+msgstr "Získávám rozšíření (%.1f%%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:933
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Připojuji se k serveru..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 msgid "Server Connection Error"
@@ -4175,7 +4175,7 @@ msgstr "Upravit..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:88
 msgid "Are you sure you want to delete this comment?"
-msgstr ""
+msgstr "Opravdu chceš smazat tento komentář?"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:102
 #, c-format
@@ -4184,7 +4184,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "Komentář nemohl být smazán.\n\nChybová zpráva:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:137
 msgid "Edit Comment"
@@ -4309,12 +4309,12 @@ msgstr "Komentář obsahuje neplatný richtext:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:384
 msgid "Please explain why you are deleting this add-on."
-msgstr ""
+msgstr "Prosím, vysvětli, proč mažeš toto rozšíření."
 
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:394
 msgid "Unchecked"
-msgstr ""
+msgstr "Neověřeno"
 
 #. * TRANSLATORS: This add-on has been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:396
@@ -4326,12 +4326,12 @@ msgstr "Ověřeno"
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:400
 msgid "Desyncs"
-msgstr ""
+msgstr "Desynchronizace"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:402
 msgid "Sync-safe"
-msgstr ""
+msgstr "Synchronizace bez problémů"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:503
 msgid "Your vote"
@@ -4351,7 +4351,7 @@ msgstr "Napsat komentář..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:554
 msgid "Administrator actions"
-msgstr ""
+msgstr "Akce administrátora"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:561
 msgid "Not voted"
@@ -4371,32 +4371,32 @@ msgstr "Snímky obrazovky (%u)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:656
 msgid "Change verification status…"
-msgstr ""
+msgstr "Změnit stav ověření..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
 msgid "Change quality rating…"
-msgstr ""
+msgstr "Změnit hodnocení kvality..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:658
 msgid "Change sync-safety status…"
-msgstr ""
+msgstr "Změnit stav bezpečnosti synchronizace..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:659
 msgid "Enable Transifex integration"
-msgstr ""
+msgstr "Povolit integraci s Transifex"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Are you sure you want to enable Transifex integration for this add-on?"
-msgstr ""
+msgstr "Jsi si jistý, že chceš pro toto rozšíření povolit integraci s Transifex?"
 
 #. * TRANSLATORS: The placeholder is an URL
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:676
 msgid "Don’t forget to configure the new resources at %1% afterwards."
-msgstr ""
+msgstr "Nezapomeň následně nastavit nové zdrojové soubory na %1%."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
 msgid "This may take several minutes, please be patient."
-msgstr ""
+msgstr "Prosím strpení, tohle může trvat několik minut."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:745
 #, c-format
@@ -5833,18 +5833,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autoři"
@@ -6679,9 +6679,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
@@ -7084,8 +7084,8 @@ msgstr "Nahradit odpojeného hráče vybranou UI a pokračovat ve hře"
 msgid "AI for the disconnected player"
 msgstr "UI místo odpojeného hráče"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:167
 msgid "Exit Game"
