@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-19 11:58+0000\n"
+"POT-Creation-Date: 2021-09-22 02:51+0000\n"
 "PO-Revision-Date: 2021-09-13 02:49+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -672,8 +672,8 @@ msgstr "mine"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1400,8 +1400,8 @@ msgid ""
 "location."
 msgstr "Sélectionnez la nouvelle taille de la carte, puis cliquez sur la carte pour la diviser à l'emplacement souhaité. Lorsque vous augmentez la taille de la carte, de nouvelles colonnes / lignes seront insérées à l'est / sud du point sélectionné. Lorsque vous réduisez la carte, le nombre souhaité de colonnes / lignes sera supprimé de l'est / sud de l'emplacement de fractionnement."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -5784,18 +5784,18 @@ msgstr "Chemin de fichier tutorial.lua invalide dans campaigns.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriel"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Auteurs"
