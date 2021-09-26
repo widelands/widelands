@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_DROPDOWN_H
 #define WL_UI_BASIC_DROPDOWN_H
 
+#include <base/log.h>
 #include <deque>
 #include <memory>
 
@@ -320,17 +321,6 @@ public:
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
-		if (!is_expanded()) {
-			if (input_text == " ") {
-				// open the DD if space was pressed and do NOT add space to the filter
-				set_list_visibility(true);
-				return true;
-			} else {
-				// only allow filtering when dropdown is open
-				return BaseDropdown::handle_textinput(input_text);
-			}
-		}
-
 		update_filter(input_text);
 		apply_filter();
 		return true;

@@ -415,7 +415,7 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
+	                            list_->get_selected_name() :
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
@@ -430,7 +430,7 @@ void BaseDropdown::update() {
                                                            tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
+		                           list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
@@ -522,9 +522,10 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 				}
 				return true;
 			}
+			break;
 		case SDLK_SPACE:
 			if (!is_expanded()) {
-				enable_textinput();
+				set_list_visibility(true);
 				return true;
 			}
 			break;
