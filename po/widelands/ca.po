@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-22 02:51+0000\n"
-"PO-Revision-Date: 2021-09-13 02:49+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-09-25 02:43+0000\n"
+"PO-Revision-Date: 2021-09-25 08:57+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,10 +264,10 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:282
+#: ../../src/ui_fsmenu/keyboard_options.cc:286
 #: ../../src/wui/interactive_gamebase.cc:90
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
@@ -279,12 +279,12 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Eines"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:77
 msgid "Show / Hide"
@@ -474,10 +474,10 @@ msgstr "Informació"
 msgid "Click on a field to show information about it"
 msgstr "Feu clic en un camp per mostrar-ne informació"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:414
@@ -536,7 +536,7 @@ msgstr "Mostra recursos"
 msgid "Unsupported Format"
 msgstr "Format no compatible"
 
-#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:771
+#: ../../src/editor/editorinteractive.cc:479 ../../src/wlapplication.cc:772
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -567,11 +567,11 @@ msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:228
-#: ../../src/wlapplication.cc:1609
+#: ../../src/wlapplication.cc:1610
 msgid "Error"
 msgstr "S'ha produït un error."
 
-#: ../../src/editor/editorinteractive.cc:925 ../../src/wlapplication.cc:1611
+#: ../../src/editor/editorinteractive.cc:925 ../../src/wlapplication.cc:1612
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -656,8 +656,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -850,8 +850,8 @@ msgstr "Mostra"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:367
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:545
 #: ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/keyboard_options.cc:56
-#: ../../src/ui_fsmenu/keyboard_options.cc:193 ../../src/ui_fsmenu/menu.cc:145
+#: ../../src/ui_fsmenu/keyboard_options.cc:57
+#: ../../src/ui_fsmenu/keyboard_options.cc:194 ../../src/ui_fsmenu/menu.cc:145
 #: ../../src/ui_fsmenu/options.cc:95
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
 #: ../../src/wui/game_main_menu_save_game.cc:88
@@ -871,7 +871,7 @@ msgstr "D'acord"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:168
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:375
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:66
-#: ../../src/ui_fsmenu/keyboard_options.cc:51
+#: ../../src/ui_fsmenu/keyboard_options.cc:52
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
 #: ../../src/wui/economy_options_window.cc:672
@@ -1384,8 +1384,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -2524,7 +2524,7 @@ msgid "Checking map"
 msgstr "S'està comprovant el mapa."
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
-#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:721
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:722
 msgid "Preparing game…"
 msgstr "S'està preparant la partida…"
 
@@ -3158,7 +3158,7 @@ msgstr "No seleccionat"
 
 #: ../../src/ui_basic/dropdown.h:362
 msgid "No matches"
-msgstr ""
+msgstr "Sense coincidències"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
@@ -3329,41 +3329,41 @@ msgstr "%u bytes"
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Qualsevol"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Encara no se n'ha avaluat la qualitat."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:101
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Pobra"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Aquest complement pot provocar errors en les partides."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Bona"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Aquest complement funciona tal com indica la descripció."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:113
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Excel·lent"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:114
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Aquest complement té una qualitat altament remarcable."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:126
 msgid "Add-On Manager"
@@ -3375,7 +3375,7 @@ msgstr "Només els verificats"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Mostra només els complements verificats."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:180
 msgid "Sort by"
@@ -3383,7 +3383,7 @@ msgstr "Ordena per"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:191
 msgid "Minimum quality"
-msgstr ""
+msgstr "Qualitat mínima"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:202
 msgid "Choose add-on to upload…"
@@ -3547,12 +3547,12 @@ msgstr "Nom (descendent)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:497
 msgid "Most popular"
-msgstr ""
+msgstr "Més populars"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:499
 msgid "Least popular"
-msgstr ""
+msgstr "Menys populars"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:501
@@ -3681,11 +3681,11 @@ msgstr "El nom d'usuari o la contrasenya no són vàlids:\n%s"
 #: ../../src/ui_fsmenu/addons/manager.cc:930
 #, c-format
 msgid "Fetching add-ons (%.1f%%)"
-msgstr ""
+msgstr "S'estan carregant els complements (%.1f%%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:933
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "S'està connectant al servidor…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 msgid "Server Connection Error"
@@ -4122,7 +4122,7 @@ msgstr "Edita"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:88
 msgid "Are you sure you want to delete this comment?"
-msgstr ""
+msgstr "Esteu segur que voleu esborrar aquest comentari?"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:102
 #, c-format
@@ -4131,7 +4131,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "El comentari no s'ha pogut esborrar.\n\nMissatge d'error:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:137
 msgid "Edit Comment"
@@ -4256,12 +4256,12 @@ msgstr "El comentari conté una marca de text enriquit no vàlida:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:384
 msgid "Please explain why you are deleting this add-on."
-msgstr ""
+msgstr "Si us plau, expliqueu per què esborreu aquest complement."
 
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:394
 msgid "Unchecked"
-msgstr ""
+msgstr "Sense comprovar"
 
 #. * TRANSLATORS: This add-on has been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:396
@@ -4273,12 +4273,12 @@ msgstr "Verificat"
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:400
 msgid "Desyncs"
-msgstr ""
+msgstr "Dessincronitzacions"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:402
 msgid "Sync-safe"
-msgstr ""
+msgstr "Segur contra dessincronitzacions"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:503
 msgid "Your vote"
@@ -4298,7 +4298,7 @@ msgstr "Escriu un comentari"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:554
 msgid "Administrator actions"
-msgstr ""
+msgstr "Accions d'administrador"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:561
 msgid "Not voted"
@@ -4318,32 +4318,32 @@ msgstr "Captures de pantalla (%u)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:656
 msgid "Change verification status…"
-msgstr ""
+msgstr "Canvia l'estat de verificació…"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
 msgid "Change quality rating…"
-msgstr ""
+msgstr "Canvia la qualificació…"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:658
 msgid "Change sync-safety status…"
-msgstr ""
+msgstr "Canvia l'estat de seguretat contra dessincronitzacions…"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:659
 msgid "Enable Transifex integration"
-msgstr ""
+msgstr "Activa la integració a Transifex"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Are you sure you want to enable Transifex integration for this add-on?"
-msgstr ""
+msgstr "Esteu segur que voleu activar la integració a Transifex d'aquest complement?"
 
 #. * TRANSLATORS: The placeholder is an URL
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:676
 msgid "Don’t forget to configure the new resources at %1% afterwards."
-msgstr ""
+msgstr "No us oblideu de configurar després els nous recursos de %1%."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
 msgid "This may take several minutes, please be patient."
-msgstr ""
+msgstr "Pot trigar uns quants minuts. Sigueu pacient."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:745
 #, c-format
@@ -4723,7 +4723,7 @@ msgid "Version"
 msgstr "Versió"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:284
+#: ../../src/ui_fsmenu/keyboard_options.cc:288
 msgid "Game"
 msgstr "Partida"
 
@@ -4757,56 +4757,56 @@ msgstr "Error de xarxa"
 msgid "unnamed %u"
 msgstr "sense nom %u"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:44
+#: ../../src/ui_fsmenu/keyboard_options.cc:45
 msgid "Reset to default"
 msgstr "Restableix per defecte"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:62
+#: ../../src/ui_fsmenu/keyboard_options.cc:63
 msgid "Press the new shortcut or close this window to cancel."
 msgstr "Premeu la nova drecera o tanqueu aquesta finestra per cancel·lar-ho."
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:90
-#: ../../src/ui_fsmenu/keyboard_options.cc:210
+#: ../../src/ui_fsmenu/keyboard_options.cc:91
+#: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "(unused)"
 msgstr "(sense usar)"
 
 #. * TRANSLATORS: [Tribe Name] Building Name
-#: ../../src/ui_fsmenu/keyboard_options.cc:107
+#: ../../src/ui_fsmenu/keyboard_options.cc:108
 #, c-format
 msgid "[%1$s] %2$s"
 msgstr "[%1$s] %2$s"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:174
+#: ../../src/ui_fsmenu/keyboard_options.cc:175
 msgid "Edit Keyboard Shortcuts"
 msgstr "Edita les dreceres de teclat"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:184
+#: ../../src/ui_fsmenu/keyboard_options.cc:185
 msgid "Reset all"
 msgstr "Reinicia tot"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:185
+#: ../../src/ui_fsmenu/keyboard_options.cc:186
 msgid "Reset all to defaults"
 msgstr "Restableix tots al valor per defecte"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
-#: ../../src/ui_fsmenu/keyboard_options.cc:203
-#: ../../src/ui_fsmenu/keyboard_options.cc:216
+#: ../../src/ui_fsmenu/keyboard_options.cc:204
+#: ../../src/ui_fsmenu/keyboard_options.cc:217
 #, c-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
 #. * TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut
-#: ../../src/ui_fsmenu/keyboard_options.cc:221
+#: ../../src/ui_fsmenu/keyboard_options.cc:222
 #, c-format
 msgid "[%1$s] %2$s: %3$s"
 msgstr "[%1$s] %2$s: %3$s"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:250
+#: ../../src/ui_fsmenu/keyboard_options.cc:253
 msgid "Keyboard Shortcut Conflict"
 msgstr "Conflicte de drecera de teclat"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:253
+#: ../../src/ui_fsmenu/keyboard_options.cc:256
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4815,17 +4815,17 @@ msgid ""
 msgstr "La drecera que heu seleccionat («%1$s») ja s'usa per a l'acció «%2$s». Si us plau seleccioneu una altra drecera o canvieu abans la de l'altra acció."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:281
+#: ../../src/ui_fsmenu/keyboard_options.cc:285
 #: ../../src/wui/interactive_player.cc:328
 msgid "General"
 msgstr "General"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:283
+#: ../../src/ui_fsmenu/keyboard_options.cc:287
 #: ../../src/wlapplication_options.cc:199
 msgid "Editor"
 msgstr "Editor"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:288
+#: ../../src/ui_fsmenu/keyboard_options.cc:292
 msgid "Fastplace"
 msgstr "Posaràpìd"
 
@@ -5039,7 +5039,7 @@ msgstr "Àlies:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:650
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:651
 msgid "nobody"
 msgstr "sense àlies"
 
@@ -5668,7 +5668,7 @@ msgstr "Maximitzat"
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
 #: ../../src/ui_fsmenu/options.cc:500 ../../src/ui_fsmenu/options.cc:509
 msgid "%1% × %2%"
-msgstr ""
+msgstr "%1% × %2%"
 
 #: ../../src/ui_fsmenu/options.cc:558
 msgid "Try system language"
@@ -5812,59 +5812,59 @@ msgid "Unmark All"
 msgstr "Desmarca-ho tot"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:775 ../../src/wlapplication.cc:781
-#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:776 ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:787 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "Missatge d'error:"
 
-#: ../../src/wlapplication.cc:776 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:777 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "Error en les dades de la partida"
 
-#: ../../src/wlapplication.cc:779
+#: ../../src/wlapplication.cc:780
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "El Widelands no ha pogut trobar el fitxer «%s»."
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:783
 msgid "File system error"
 msgstr "S'ha produït un error en el sistema de fitxers."
 
-#: ../../src/wlapplication.cc:1276
+#: ../../src/wlapplication.cc:1277
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Valor buit del paràmetre de la línia d'ordre: %s"
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1283
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "No es pot combinar %s amb altres accions."
 
-#: ../../src/wlapplication.cc:1436
+#: ../../src/wlapplication.cc:1437
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paràmetre de línia d'ordre desconegut: %s\nPotser falta un signe d'igual? "
 
-#: ../../src/wlapplication.cc:1558
+#: ../../src/wlapplication.cc:1559
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized i --fullscreen no es poden combinar."
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1577
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paràmetre de la línia d'ordre desconegut: %s"
 
-#: ../../src/wlapplication.cc:1625
+#: ../../src/wlapplication.cc:1626
 msgid "Game ended unexpectedly"
 msgstr "La partida ha acabat de manera inesperada."
 
-#: ../../src/wlapplication.cc:1625
+#: ../../src/wlapplication.cc:1626
 msgid "Unexpected error during the game"
 msgstr "S'ha produït un error inesperat durant la partida."
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1629
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -5878,7 +5878,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "S'ha produït un error durant la partida amb el següent missatge d'error:\n\n%1$s\n\nSi us plau, informeu d'aquest problema per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt al Windows). Esteu usant la versió %2$s (%3$s).\n\nSi us plau, afegiu aquestes dades a l'informe.\n\nVoleu que el Widelands intenti crear una desada d'emergència? Sovint – encara que no sempre – és possible carregar-la i continuar jugant."
 
-#: ../../src/wlapplication.cc:1638
+#: ../../src/wlapplication.cc:1639
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -5888,11 +5888,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "La partida ha acabat inesperadament pel següent motiu:\n\n%s\n\nVoleu que el Widelands provi de crear una desada d'emergència de la partida? A vegades –tot i que no sempre– és possible carregar-la i continuar jugant."
 
-#: ../../src/wlapplication.cc:1665
+#: ../../src/wlapplication.cc:1666
 msgid "Emergency save failed"
 msgstr "La desada d'emergència ha fallat."
 
-#: ../../src/wlapplication.cc:1666
+#: ../../src/wlapplication.cc:1667
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6612,9 +6612,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
