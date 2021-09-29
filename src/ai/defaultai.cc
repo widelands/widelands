@@ -106,7 +106,6 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
      // to load custom units/buildings at gametime 0
      next_ai_think_(1),
      scheduler_delay_counter_(0),
-     wood_policy_(WoodPolicy::kAllowRangers),
      numof_psites_in_constr(0),
      num_ports(0),
      numof_warehouses_(0),
@@ -991,6 +990,7 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Forester/Ranger
+	rangers_.clear();
 	for (BuildingObserver& bo : buildings_) {
 		if (bo.type != BuildingObserver::Type::kProductionsite) {
 			continue;
@@ -1004,6 +1004,8 @@ void DefaultAI::late_initialization() {
 					verb_log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(),
 					                  bo.name, lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
+					rangers_.push_back(bo);
+					wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
 					for (const auto& attribute : prodsite->created_attributes()) {
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kRanger));
@@ -2622,22 +2624,25 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 	assert(persistent_data->target_military_score >= persistent_data->least_military_score);
 
-	// we must calculate wood policy
-	const Widelands::DescriptionIndex wood_index = tribe_->safe_ware_index("log");
-	// stocked wood is to be in some propotion to productionsites and
-	// constructionsites (this proportion is bit artifical, or we can say
-	// it is proportion to the size of economy). Plus some positive 'margin'
-	const int32_t stocked_wood_margin = calculate_stocklevel(wood_index) -
-	                                    productionsites.size() * 2 - numof_psites_in_constr +
-	                                    management_data.get_military_number_at(87) / 5;
-	if (gametime < Time(15 * 60 * 1000)) {
-		wood_policy_ = WoodPolicy::kAllowRangers;
-	} else if (stocked_wood_margin > 80) {
-		wood_policy_ = WoodPolicy::kDismantleRangers;
-	} else if (stocked_wood_margin > 25) {
-		wood_policy_ = WoodPolicy::kStopRangers;
-	} else {
-		wood_policy_ = WoodPolicy::kAllowRangers;
+	// we must calculate wood policy for each type of rangers
+	for (BuildingObserver& bo : rangers_) {
+		// stocked level of supported wares (only lowest counts) is to be in some proportion to
+		// productionsites and constructionsites (this proportion is bit artifical, or we can say
+		// it is proportion to the size of economy). Plus some positive 'margin'.
+		const int32_t stocked_wood_margin = get_stocklevel(bo, gametime) -
+											productionsites.size() * 2 - numof_psites_in_constr +
+											management_data.get_military_number_at(87) / 5;
+		if (gametime < Time(15 * 60 * 1000)) {
+			wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
+		} else if (stocked_wood_margin > 80) {
+			wood_policy_[bo.id] = WoodPolicy::kDismantleRangers;
+		} else if (stocked_wood_margin > 25) {
+			wood_policy_[bo.id] = WoodPolicy::kStopRangers;
+		} else {
+			wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
+		}
+		verb_log_dbg_time(gametime, "Name: %-30s id:%d stock: %d actual policy: %hhu policies(allow, stop, dismantle): %hhu, %hhu, %hhu \n",
+			                  bo.name, bo.id, stocked_wood_margin, wood_policy_[bo.id], WoodPolicy::kAllowRangers, WoodPolicy::kStopRangers, WoodPolicy::kDismantleRangers);
 	}
 
 	BuildingObserver* best_building = nullptr;
@@ -4949,7 +4954,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		}
 
 		// dismantling the rangers hut, but only if we have them above a target
-		if (wood_policy_ == WoodPolicy::kDismantleRangers &&
+		if (wood_policy_[site.bo->id] == WoodPolicy::kDismantleRangers &&
 		    site.bo->cnt_built > site.bo->cnt_target) {
 
 			site.bo->last_dismantle_time = game().get_gametime();
@@ -4963,8 +4968,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 		// stopping a ranger (sometimes the policy can be kDismantleRangers,
 		// but we still preserve some rangers for sure)
-		if ((wood_policy_ == WoodPolicy::kStopRangers ||
-		     wood_policy_ == WoodPolicy::kDismantleRangers) &&
+		if ((wood_policy_[site.bo->id] == WoodPolicy::kStopRangers ||
+		     wood_policy_[site.bo->id] == WoodPolicy::kDismantleRangers) &&
 		    !site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
@@ -4984,7 +4989,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 				game().send_player_start_stop_building(*site.site);
 			}
 			// if not enough trees nearby, we can start them if required
-		} else if ((wood_policy_ == WoodPolicy::kAllowRangers) && site.site->is_stopped()) {
+		} else if ((wood_policy_[site.bo->id] == WoodPolicy::kAllowRangers) && site.site->is_stopped()) {
 			game().send_player_start_stop_building(*site.site);
 		}
 	}
@@ -5656,8 +5661,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[9] = (persistent_data->trees_around_cutters < 200) * 1;
 			inputs[10] = (persistent_data->trees_around_cutters < 300) * 1;
 			inputs[11] = (persistent_data->trees_around_cutters < 400) * 1;
-			inputs[12] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
-			inputs[13] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[12] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[13] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
 			inputs[14] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[15] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[16] = (get_stocklevel(bo, gametime) < 2) * 1;
@@ -5672,13 +5677,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[22] = (basic_economy_established) ? -1 : 1;
 			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
 			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
-			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[25] = (wood_policy_[bo.id] != WoodPolicy::kAllowRangers) ? 1 : 0;
 			if (gametime > Time(90 * 60 * 1000)) {
-				inputs[26] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
+				inputs[26] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
 				inputs[27] = (persistent_data->trees_around_cutters < 20) * 1;
 			}
 			if (gametime > Time(45 * 60 * 1000)) {
-				inputs[28] = (wood_policy_ == WoodPolicy::kAllowRangers) ? 1 : 0;
+				inputs[28] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
 				inputs[29] = (persistent_data->trees_around_cutters < 20) * 1;
 				inputs[30] = (get_stocklevel(bo, gametime) > 30) * -1;
 			}
@@ -5763,7 +5768,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 
-			if (wood_policy_ != WoodPolicy::kAllowRangers) {
+			if (wood_policy_[bo.id] != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
 			}
 
@@ -5950,6 +5955,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		} else if (bo.max_needed_preciousness > 0) {
 
+			// help variable to determine wood availability in the economy
+			const int32_t stocked_wood_level = calculate_stocklevel(tribe_->safe_ware_index("log")) -
+											productionsites.size() * 2 - numof_psites_in_constr +
+											management_data.get_military_number_at(87) / 5;
 			static int16_t inputs[4 * kFNeuronBitSize] = {0};
 			// Resetting values as the variable is static
 			std::fill(std::begin(inputs), std::end(inputs), 0);
@@ -5983,8 +5992,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                         0;
 			inputs[10] =
 			   (bo.build_material_shortage) ? -management_data.get_military_number_at(39) / 10 : 0;
-			inputs[11] = (wood_policy_ == WoodPolicy::kDismantleRangers ||
-			              wood_policy_ == WoodPolicy::kStopRangers) ?
+			inputs[11] = stocked_wood_level > 25 ?
                          std::abs(management_data.get_military_number_at(15)) / 10 :
                          0;
 			inputs[12] = (gametime >= Time(15 * 60 * 1000)) ?
@@ -6023,10 +6031,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[25] =
 			   (bo.total_count() == 0 && bo.is(BuildingAttribute::kBuildingMatProducer)) ? 4 : 0;
 			inputs[26] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? 2 : 0;
-			inputs[27] = (wood_policy_ == WoodPolicy::kDismantleRangers ||
-			              wood_policy_ == WoodPolicy::kStopRangers) ?
-                         4 :
-                         0;
+			inputs[27] = stocked_wood_level >25 ? 4 : 0;
 			inputs[28] = (bo.max_needed_preciousness >= 10) ? 4 : 0;
 			inputs[29] = (bo.inputs.empty() && bo.max_needed_preciousness >= 10) ? 3 : 0;
 			inputs[30] = bo.max_needed_preciousness / 2;
@@ -6134,10 +6139,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[93] = (numof_psites_in_constr < 8) ? 3 : 0;
 			inputs[94] = (bo.inputs.empty()) ? 5 : 0;
 			inputs[95] = (bo.inputs.empty()) ? 3 : 0;
-			inputs[96] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -2 : 0;
-			inputs[97] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -8 : 0;
-			inputs[98] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -4 : 0;
-			inputs[99] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 : 0;
+			inputs[96] = stocked_wood_level < 25 ? -2 : 0;
+			inputs[97] = stocked_wood_level < 25 ? -8 : 0;
+			inputs[98] = stocked_wood_level < 25 ? -4 : 0;
+			inputs[99] = stocked_wood_level < 25 ? -1 : 0;
 			inputs[100] = (bo.total_count() == 0) ? 3 : 0;
 			inputs[101] = (bo.total_count() == 0) ? 6 : 0;
 			if (bo.is(BuildingAttribute::kSupportingProducer)) {

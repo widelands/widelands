@@ -298,10 +298,11 @@ private:
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
-	WoodPolicy wood_policy_;
+	std::map<Widelands::DescriptionIndex, WoodPolicy> wood_policy_;
 	uint16_t trees_nearby_treshold_;
 
 	std::vector<BuildingObserver> buildings_;
+	std::vector<BuildingObserver> rangers_;
 	std::deque<Widelands::FCoords> unusable_fields;
 	std::deque<BuildableField*> buildable_fields;
 	BlockedFields blocked_fields;

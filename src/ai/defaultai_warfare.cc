@@ -1136,6 +1136,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	                         3)};
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
+	// help variable to determine wood availability in the economy
+	const int32_t stocked_wood_level = calculate_stocklevel(tribe_->safe_ware_index("log")) -
+									productionsites.size() * 2 - numof_psites_in_constr +
+									management_data.get_military_number_at(87) / 5;
+
 	static int32_t inputs[4 * kFNeuronBitSize] = {0};
 	// Resetting values as the variable is static
 	std::fill(std::begin(inputs), std::end(inputs), 0);
@@ -1372,10 +1377,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
                     -3 :
                     0;
 	inputs[105] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -1 : 0;
-	inputs[106] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 * (size - 1) : 0;
-	inputs[107] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -3 * (size - 1) : 0;
-	inputs[108] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * size : 0;
-	inputs[109] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * (size - 1) : 0;
+	inputs[106] = stocked_wood_level < 25 ? -1 * (size - 1) : 0;
+	inputs[107] = stocked_wood_level < 25 ? -3 * (size - 1) : 0;
+	inputs[108] = stocked_wood_level < 25 ? -5 * size : 0;
+	inputs[109] = stocked_wood_level < 25 ? -5 * (size - 1) : 0;
 	if (!bo.critical_building_material.empty() && buil_material_mines_count == 0) {
 		inputs[110] = -5;
 		inputs[111] = -2;
