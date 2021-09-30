@@ -2642,7 +2642,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 			wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
 		}
 		verb_log_dbg_time(gametime, "Name: %-30s id:%d stock: %d actual policy: %hhu policies(allow, stop, dismantle): %hhu, %hhu, %hhu \n",
-			                  bo.name, bo.id, stocked_wood_margin, wood_policy_[bo.id], WoodPolicy::kAllowRangers, WoodPolicy::kStopRangers, WoodPolicy::kDismantleRangers);
+			                  bo.name, bo.id, stocked_wood_margin, wood_policy_.at(bo.id), WoodPolicy::kAllowRangers, WoodPolicy::kStopRangers, WoodPolicy::kDismantleRangers);
 	}
 
 	BuildingObserver* best_building = nullptr;
@@ -4954,7 +4954,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		}
 
 		// dismantling the rangers hut, but only if we have them above a target
-		if (wood_policy_[site.bo->id] == WoodPolicy::kDismantleRangers &&
+		if (wood_policy_.at(site.bo->id) == WoodPolicy::kDismantleRangers &&
 		    site.bo->cnt_built > site.bo->cnt_target) {
 
 			site.bo->last_dismantle_time = game().get_gametime();
@@ -4968,8 +4968,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 		// stopping a ranger (sometimes the policy can be kDismantleRangers,
 		// but we still preserve some rangers for sure)
-		if ((wood_policy_[site.bo->id] == WoodPolicy::kStopRangers ||
-		     wood_policy_[site.bo->id] == WoodPolicy::kDismantleRangers) &&
+		if ((wood_policy_.at(site.bo->id) == WoodPolicy::kStopRangers ||
+		     wood_policy_.at(site.bo->id) == WoodPolicy::kDismantleRangers) &&
 		    !site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
@@ -4989,7 +4989,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 				game().send_player_start_stop_building(*site.site);
 			}
 			// if not enough trees nearby, we can start them if required
-		} else if ((wood_policy_[site.bo->id] == WoodPolicy::kAllowRangers) && site.site->is_stopped()) {
+		} else if ((wood_policy_.at(site.bo->id) == WoodPolicy::kAllowRangers) && site.site->is_stopped()) {
 			game().send_player_start_stop_building(*site.site);
 		}
 	}
@@ -5661,8 +5661,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[9] = (persistent_data->trees_around_cutters < 200) * 1;
 			inputs[10] = (persistent_data->trees_around_cutters < 300) * 1;
 			inputs[11] = (persistent_data->trees_around_cutters < 400) * 1;
-			inputs[12] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
-			inputs[13] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[12] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[13] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
 			inputs[14] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[15] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[16] = (get_stocklevel(bo, gametime) < 2) * 1;
@@ -5677,13 +5677,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[22] = (basic_economy_established) ? -1 : 1;
 			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
 			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
-			inputs[25] = (wood_policy_[bo.id] != WoodPolicy::kAllowRangers) ? 1 : 0;
+			inputs[25] = (wood_policy_.at(bo.id) != WoodPolicy::kAllowRangers) ? 1 : 0;
 			if (gametime > Time(90 * 60 * 1000)) {
-				inputs[26] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
+				inputs[26] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
 				inputs[27] = (persistent_data->trees_around_cutters < 20) * 1;
 			}
 			if (gametime > Time(45 * 60 * 1000)) {
-				inputs[28] = (wood_policy_[bo.id] == WoodPolicy::kAllowRangers) ? 1 : 0;
+				inputs[28] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
 				inputs[29] = (persistent_data->trees_around_cutters < 20) * 1;
 				inputs[30] = (get_stocklevel(bo, gametime) > 30) * -1;
 			}
@@ -5768,7 +5768,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 
-			if (wood_policy_[bo.id] != WoodPolicy::kAllowRangers) {
+			if (wood_policy_.at(bo.id) != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
 			}
 
