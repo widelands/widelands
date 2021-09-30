@@ -2630,8 +2630,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		// productionsites and constructionsites (this proportion is bit artifical, or we can say
 		// it is proportion to the size of economy). Plus some positive 'margin'.
 		const int32_t stocked_wood_margin = get_stocklevel(bo, gametime) -
-											productionsites.size() * 2 - numof_psites_in_constr +
-											management_data.get_military_number_at(87) / 5;
+		                                    productionsites.size() * 2 - numof_psites_in_constr +
+		                                    management_data.get_military_number_at(87) / 5;
 		if (gametime < Time(15 * 60 * 1000)) {
 			wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
 		} else if (stocked_wood_margin > 80) {
@@ -2641,8 +2641,12 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		} else {
 			wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
 		}
-		verb_log_dbg_time(gametime, "Name: %-30s id:%d stock: %d actual policy: %hhu policies(allow, stop, dismantle): %hhu, %hhu, %hhu \n",
-			                  bo.name, bo.id, stocked_wood_margin, wood_policy_.at(bo.id), WoodPolicy::kAllowRangers, WoodPolicy::kStopRangers, WoodPolicy::kDismantleRangers);
+		verb_log_dbg_time(gametime,
+		                  "Name: %-30s id:%d stock: %d actual policy: %hhu policies(allow, stop, "
+		                  "dismantle): %hhu, %hhu, %hhu \n",
+		                  bo.name, bo.id, stocked_wood_margin, wood_policy_.at(bo.id),
+		                  WoodPolicy::kAllowRangers, WoodPolicy::kStopRangers,
+		                  WoodPolicy::kDismantleRangers);
 	}
 
 	BuildingObserver* best_building = nullptr;
@@ -4989,7 +4993,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 				game().send_player_start_stop_building(*site.site);
 			}
 			// if not enough trees nearby, we can start them if required
-		} else if ((wood_policy_.at(site.bo->id) == WoodPolicy::kAllowRangers) && site.site->is_stopped()) {
+		} else if ((wood_policy_.at(site.bo->id) == WoodPolicy::kAllowRangers) &&
+		           site.site->is_stopped()) {
 			game().send_player_start_stop_building(*site.site);
 		}
 	}
@@ -5957,8 +5962,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// help variable to determine wood availability in the economy
 			const int32_t stocked_wood_level = calculate_stocklevel(tribe_->safe_ware_index("log")) -
-											productionsites.size() * 2 - numof_psites_in_constr +
-											management_data.get_military_number_at(87) / 5;
+			                                   productionsites.size() * 2 - numof_psites_in_constr +
+			                                   management_data.get_military_number_at(87) / 5;
 			static int16_t inputs[4 * kFNeuronBitSize] = {0};
 			// Resetting values as the variable is static
 			std::fill(std::begin(inputs), std::end(inputs), 0);
@@ -5992,9 +5997,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                         0;
 			inputs[10] =
 			   (bo.build_material_shortage) ? -management_data.get_military_number_at(39) / 10 : 0;
-			inputs[11] = stocked_wood_level > 25 ?
-                         std::abs(management_data.get_military_number_at(15)) / 10 :
-                         0;
+			inputs[11] =
+			   stocked_wood_level > 25 ? std::abs(management_data.get_military_number_at(15)) / 10 : 0;
 			inputs[12] = (gametime >= Time(15 * 60 * 1000)) ?
                          std::abs(management_data.get_military_number_at(94)) / 10 :
                          0;
@@ -6031,7 +6035,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[25] =
 			   (bo.total_count() == 0 && bo.is(BuildingAttribute::kBuildingMatProducer)) ? 4 : 0;
 			inputs[26] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? 2 : 0;
-			inputs[27] = stocked_wood_level >25 ? 4 : 0;
+			inputs[27] = stocked_wood_level > 25 ? 4 : 0;
 			inputs[28] = (bo.max_needed_preciousness >= 10) ? 4 : 0;
 			inputs[29] = (bo.inputs.empty() && bo.max_needed_preciousness >= 10) ? 3 : 0;
 			inputs[30] = bo.max_needed_preciousness / 2;
