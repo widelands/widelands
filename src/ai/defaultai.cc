@@ -1612,7 +1612,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.portspace_nearby = ExtendedBool::kFalse;
 	}
 
-		// testing if shipyard should be buildable
+	// testing if shipyard should be buildable
 	if (ports_shipyard_region.count(field.coords.hash()) > 0) {
 		field.shipyard_preferred = ExtendedBool::kTrue;
 	} else {
@@ -3250,16 +3250,17 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// considering neededness depending on stocklevel
 					const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
 					if (current_stocklevel > 50 &&
-						persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+					    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
 						continue;
 					}
-					if (current_stocklevel < 40 && !bo.is(BuildingAttribute::kShipyard)){
+					if (current_stocklevel < 40 && !bo.is(BuildingAttribute::kShipyard)) {
 						prio += 5 * management_data.neuron_pool[23].get_result_safe(
-									   (40 - current_stocklevel) / 2, kAbsValue);
+						               (40 - current_stocklevel) / 2, kAbsValue);
 					}
 					// This considers supporters nearby
 					prio += management_data.neuron_pool[52].get_result_safe(
-							   number_of_supporters_nearby * 5, kAbsValue) / 2;
+					           number_of_supporters_nearby * 5, kAbsValue) /
+					        2;
 
 					// Overdue priority here
 					prio += bo.primary_priority;
@@ -3315,7 +3316,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 3 && map_allows_seafaring_ && bf->shipyard_preferred == ExtendedBool::kTrue) {
+						if (bf->open_water_nearby > 3 && map_allows_seafaring_ &&
+						    bf->shipyard_preferred == ExtendedBool::kTrue) {
 							prio += productionsites.size() * 5 +
 							        bf->open_water_nearby *
 							           std::abs(management_data.get_military_number_at(109)) / 10;
@@ -3660,8 +3662,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	if (best_building->is(BuildingAttribute::kShipyard)) {
-		verb_log_info_time(gametime, "AI %2d: Building a shipyard site: %s Prio:%d \n", player_number(),
-		                   best_building->name, proposed_priority);
+		verb_log_info_time(gametime, "AI %2d: Building a shipyard site: %s Prio:%d \n",
+		                   player_number(), best_building->name, proposed_priority);
 	}
 
 	if (!(best_building->type == BuildingObserver::Type::kMilitarysite)) {
