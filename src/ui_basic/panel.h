@@ -271,7 +271,7 @@ public:
 	virtual bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	virtual bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	virtual bool handle_key(bool down, SDL_Keysym);
 	virtual bool handle_textinput(const std::string& text);
 	virtual bool handle_tooltip();
@@ -490,7 +490,7 @@ private:
 	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos);
+	bool do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();
@@ -503,7 +503,7 @@ private:
 	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
 	static bool
 	ui_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static bool ui_mousewheel(uint32_t which, int32_t x, int32_t y);
+	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
 

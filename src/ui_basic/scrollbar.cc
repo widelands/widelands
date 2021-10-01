@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -409,13 +410,16 @@ void Scrollbar::think() {
 	}
 }
 
-bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
-	if (y < 0) {
-		action(Area::Plus);
-	} else {
-		action(Area::Minus);
+bool Scrollbar::handle_mousewheel(int32_t, int32_t y, uint16_t modstate) {
+	if (matches_keymod(modstate, KMOD_NONE) && y != 0) {
+		if (y < 0) {
+			action(Area::Plus);
+		} else {
+			action(Area::Minus);
+		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
 bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {

@@ -30,6 +30,7 @@
 #include "graphic/text_layout.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 constexpr int kMargin = 2;
 constexpr int kHotkeyGap = 16;
@@ -472,7 +473,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 /**
  * Handle mouse wheel events
  */
-bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	const uint32_t selected_idx = selection_index();
 	uint32_t max = size();
 	if (max > 0) {
@@ -480,13 +481,15 @@ bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	} else {
 		return false;
 	}
-	if (y > 0 && selected_idx > 0) {
-		select(selected_idx - 1);
-	} else if (y < 0 && selected_idx < max) {
-		select(selected_idx + 1);
+	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
+		if (y > 0 && selected_idx > 0) {
+			select(selected_idx - 1);
+		} else if (y < 0 && selected_idx < max) {
+			select(selected_idx + 1);
+		}
+		return scrollbar_.handle_mousewheel(x, y, modstate);
 	}
-
-	return scrollbar_.handle_mousewheel(which, x, y);
+	return false;
 }
 
 /**
