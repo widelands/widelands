@@ -29,6 +29,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
 namespace UI {
@@ -238,6 +239,20 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 		}
 	}
 	return Panel::handle_key(down, code);
+}
+
+bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if ((change > 0) && (sbi_->button_plus)) {
+		change_value(change * sbi_->step_size);
+	}
+	if ((change < 0) && (sbi_->button_minus)) {
+		change_value(change * sbi_->step_size);
+	}
+	return true;
 }
 
 void SpinBox::layout() {

@@ -77,6 +77,7 @@ public:
 	void set_enabled(bool enabled);
 
 	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 	void set_cursor_fixed_height(int32_t h) {
 		cursor_fixed_height_ = h;
