@@ -253,16 +253,16 @@ Panel& Panel::get_topmost_forefather() {
 void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	assert(is_initializer_thread());
 
-	Panel& ff = get_topmost_forefather();
-	RenderTarget& rt = *g_gr->get_render_target();
 	WLApplication* const app = WLApplication::get();
-
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 	if (handle_input) {
 		app->handle_input(&input_callback);
 	}
+
+	Panel& ff = get_topmost_forefather();
+	RenderTarget& rt = *g_gr->get_render_target();
 
 	{
 		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
