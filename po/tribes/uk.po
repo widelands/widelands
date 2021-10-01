@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-25 02:43+0000\n"
+"POT-Creation-Date: 2021-09-28 02:42+0000\n"
 "PO-Revision-Date: 2021-08-22 02:37+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
@@ -5458,6 +5458,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

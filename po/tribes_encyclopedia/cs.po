@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-25 02:43+0000\n"
+"POT-Creation-Date: 2021-09-28 02:42+0000\n"
 "PO-Revision-Date: 2021-09-17 19:13+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -26,8 +26,8 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:388
@@ -51,8 +51,8 @@ msgstr "Amazonky dřevorubkyně kácí stromy a ochránkyně džungle je sází.
 
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:376
@@ -111,8 +111,8 @@ msgstr "Toto lano se vyrábí z lián. Využívá se na vojenské oděvy, při s
 
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:474
@@ -250,8 +250,8 @@ msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr "Krumpáče používají kamenice na těžbu žuly ze skal a nebo v dolech."
 
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:345
@@ -269,8 +269,8 @@ msgstr "Používá ji dřevorubkyně a vyrábí ji brusička kamene."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:637
@@ -291,8 +291,8 @@ msgstr "Proto je používají ochránkyně džungle, pěstitelka manioku a pěst
 
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:650
@@ -628,10 +628,10 @@ msgstr "Prozkoumává neznámá území."
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a barbarian immovable: Ashes
-#. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a frisian immovable: Ashes
 #. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for a barbarian immovable: Ashes
+#. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
@@ -650,9 +650,9 @@ msgstr "Pozůstatky zničené budovy."
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1281
@@ -767,8 +767,8 @@ msgstr "Tento kaučukovník je připraven na sběr kaučuku a pokácení dřevor
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1094
@@ -782,8 +782,8 @@ msgstr "Toto je právě oseté pole."
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
@@ -802,8 +802,8 @@ msgstr "Toto je rostoucí pole."
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1115
@@ -817,8 +817,8 @@ msgstr "Toto pole je připraveno ke sklizni."
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1122
@@ -851,8 +851,8 @@ msgstr "Boby na tomto kakaovníku jsou zralé ke sběru."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
-#. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
+#. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1171
@@ -872,8 +872,8 @@ msgstr "Zlaté žíly obsahují zlatou rudu, která je promývána od štěrku v
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1210
@@ -890,8 +890,8 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr "Žula je základním stavebním materiálem a je dolována v kamenném dole."
 
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:930
@@ -901,8 +901,8 @@ msgstr "Zde je malé ložisko žuly."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1254
@@ -912,8 +912,8 @@ msgstr "Zde je malé ložisko žuly."
 msgid "There is a lot of gold here."
 msgstr "Zde je velké ložisko zlata."
 
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:974
@@ -923,8 +923,8 @@ msgstr "Zde se nachází hodně žuly."
 
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1273
@@ -1545,8 +1545,8 @@ msgstr "Staví lodě, které se užívají pro zámořskou kolonizaci a na obcho
 
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1614
 #: ../../data/tribes/initialization/atlanteans/units.lua:1734
@@ -1560,9 +1560,9 @@ msgstr "\"Nenadávej stavaři, který nemá všechen stavební materiál.\""
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1616
 #: ../../data/tribes/initialization/atlanteans/units.lua:1736
@@ -1575,8 +1575,8 @@ msgstr "Často užívané přísloví používané pro nesplnitelné úkoly vše
 
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
-#. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
+#. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1618
 #: ../../data/tribes/initialization/atlanteans/units.lua:1738
@@ -1589,8 +1589,8 @@ msgstr "Na tomto místě začala stavba nové budovy."
 
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1625
 #: ../../data/tribes/initialization/atlanteans/units.lua:1745
@@ -1603,8 +1603,8 @@ msgstr "\"Vždy najdeš novou cestu, za předpokladu, že jsi ochotný opustit t
 
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1627
 #: ../../data/tribes/initialization/atlanteans/units.lua:1747
@@ -1617,8 +1617,8 @@ msgstr "přísloví"
 
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1629
 #: ../../data/tribes/initialization/atlanteans/units.lua:1749
@@ -1733,8 +1733,8 @@ msgstr "Protože Atlanťané nejedí ryby syrové, nejběžnějším způsobem j
 
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:453
 #: ../../data/tribes/initialization/barbarians/units.lua:170
 #: ../../data/tribes/initialization/empire/units.lua:170
@@ -1848,8 +1848,8 @@ msgstr "Atlantské ohně ve slévárně, platnéřství a zbrojířství jsou ud
 
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:564
 #: ../../data/tribes/initialization/barbarians/units.lua:281
 #: ../../data/tribes/initialization/empire/units.lua:306
@@ -1866,8 +1866,8 @@ msgstr "Je tavena ve slévárnách na železo."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:577
 #: ../../data/tribes/initialization/barbarians/units.lua:294
 #: ../../data/tribes/initialization/empire/units.lua:319
@@ -1886,8 +1886,8 @@ msgstr "Je produkováno slévárnami a používá se v kovárně, platnéřství
 
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:590
 #: ../../data/tribes/initialization/barbarians/units.lua:307
 #: ../../data/tribes/initialization/empire/units.lua:332
@@ -1906,8 +1906,8 @@ msgstr "Tavením ve slévárnách vzniká zlato, které má využití jako vzác
 
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:603
 #: ../../data/tribes/initialization/barbarians/units.lua:320
 #: ../../data/tribes/initialization/empire/units.lua:345
@@ -1994,8 +1994,8 @@ msgstr "Tento hák na tyči používají uzenáři k vytahování veškerého ma
 
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:708
 #: ../../data/tribes/initialization/barbarians/units.lua:410
 #: ../../data/tribes/initialization/empire/units.lua:444
@@ -2012,8 +2012,8 @@ msgstr "Kosy se vyrábí v kovárně."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:721
 #: ../../data/tribes/initialization/barbarians/units.lua:423
 #: ../../data/tribes/initialization/empire/units.lua:457
@@ -2030,8 +2030,8 @@ msgstr "Lopaty na chléb vyrábí kovář."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:734
 #: ../../data/tribes/initialization/barbarians/units.lua:445
 #: ../../data/tribes/initialization/empire/units.lua:488
@@ -2329,8 +2329,8 @@ msgstr "Průzkumníci, jako průzkumník Zdenda, zvídavě šmejdí neprozkouman
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1178
 #: ../../data/tribes/initialization/barbarians/units.lua:887
 #: ../../data/tribes/initialization/empire/units.lua:936
@@ -2340,8 +2340,8 @@ msgstr "Zde se nachází podzemní voda, lze ji čerpat postavením studny."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1186
 #: ../../data/tribes/initialization/atlanteans/units.lua:1230
 #: ../../data/tribes/initialization/barbarians/units.lua:895
@@ -2355,8 +2355,8 @@ msgstr "Ložiska uhlí obsahují uhlí, které lze těžit pomocí dolů na uhl�
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1188
 #: ../../data/tribes/initialization/barbarians/units.lua:897
 #: ../../data/tribes/initialization/empire/units.lua:946
@@ -2366,8 +2366,8 @@ msgstr "Zde se dá najít něco málo uhlí."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1197
 #: ../../data/tribes/initialization/atlanteans/units.lua:1241
 #: ../../data/tribes/initialization/barbarians/units.lua:906
@@ -2381,8 +2381,8 @@ msgstr "Železná žíla obsahuje železnou rudu, kterou lze těžit pomocí dol
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1199
 #: ../../data/tribes/initialization/barbarians/units.lua:908
 #: ../../data/tribes/initialization/empire/units.lua:957
@@ -2392,8 +2392,8 @@ msgstr "Zde se dá najít něco málo železa."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1208
 #: ../../data/tribes/initialization/atlanteans/units.lua:1252
 #: ../../data/tribes/initialization/barbarians/units.lua:917
@@ -2420,8 +2420,8 @@ msgstr "Zde se dá najít něco málo drahého kamení."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1232
 #: ../../data/tribes/initialization/barbarians/units.lua:941
 #: ../../data/tribes/initialization/empire/units.lua:990
@@ -2431,8 +2431,8 @@ msgstr "Zde je velké ložisko uhlí."
 
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1243
 #: ../../data/tribes/initialization/barbarians/units.lua:952
 #: ../../data/tribes/initialization/empire/units.lua:1001
@@ -2457,6 +2457,12 @@ msgstr "Zde je bohaté naleziště drahého kamení."
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
+#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
@@ -2466,12 +2472,6 @@ msgstr "Zde je bohaté naleziště drahého kamení."
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
 #. Ironwood Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
 #. Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1288
 #: ../../data/tribes/initialization/atlanteans/units.lua:1295
@@ -2577,10 +2577,10 @@ msgstr "Lom potřebuje ve své pracovní oblasti skály, které lze těžit."
 #. Woodcutter's House
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
-#. Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
+#. Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1413
 #: ../../data/tribes/initialization/barbarians/units.lua:1153
 #: ../../data/tribes/initialization/empire/units.lua:1180
@@ -2600,9 +2600,9 @@ msgstr "Domek dřevorubce potřebuje ve svém okolí stromy."
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1422
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
 #: ../../data/tribes/initialization/empire/units.lua:1189
@@ -2670,8 +2670,8 @@ msgstr "Chová ryby."
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1458
 #: ../../data/tribes/initialization/barbarians/units.lua:1199
 #: ../../data/tribes/initialization/empire/units.lua:1207
@@ -2688,8 +2688,8 @@ msgstr "Domek lovce musí mít ve své pracovní oblasti volně pobíhající zv
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1467
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
 #: ../../data/tribes/initialization/empire/units.lua:1216
@@ -2715,8 +2715,8 @@ msgstr "Než bude možné poslat na toto místo průzkumníka, je třeba napojit
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1482
 #: ../../data/tribes/initialization/barbarians/units.lua:1241
 #: ../../data/tribes/initialization/empire/units.lua:1224
@@ -2766,11 +2766,11 @@ msgstr "Peče chléb pro průzkumníky, horníky a vojáky ve výcviku."
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
+#. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1521
 #: ../../data/tribes/initialization/barbarians/units.lua:1376
 #: ../../data/tribes/initialization/empire/units.lua:1306
@@ -2888,11 +2888,11 @@ msgstr "Dobývá drahé kameny ze skal v horském terénu."
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1613
 #: ../../data/tribes/initialization/barbarians/units.lua:1528
 #: ../../data/tribes/initialization/barbarians/units.lua:1543
@@ -2908,13 +2908,13 @@ msgstr "Doluje uhlí v horském terénu."
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1620
 #: ../../data/tribes/initialization/barbarians/units.lua:1571
 #: ../../data/tribes/initialization/barbarians/units.lua:1584
@@ -2930,11 +2930,11 @@ msgstr "Doluje železnou rudu v horském terénu."
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1627
 #: ../../data/tribes/initialization/barbarians/units.lua:1610
 #: ../../data/tribes/initialization/barbarians/units.lua:1623
@@ -3008,8 +3008,8 @@ msgstr "Pokud máš nedostatek vojáků pro obsazení nové vojenské budovy, po
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1716
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
 #: ../../data/tribes/initialization/empire/units.lua:1557
@@ -3020,8 +3020,8 @@ msgstr "Staví přívozy."
 
 #. TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Note helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1718
 #: ../../data/tribes/initialization/barbarians/units.lua:1757
 #: ../../data/tribes/initialization/empire/units.lua:1559
@@ -3032,8 +3032,8 @@ msgstr "Musí stát poblíž vody."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1725
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
 #: ../../data/tribes/initialization/empire/units.lua:1566
@@ -3189,8 +3189,8 @@ msgid ""
 msgstr "Jedině tohle pivo je přijatelné pro vojáky v bitevní aréně. Někteří říkají, že všechna síla barbarů spočívá v tomto pivu. Pomáhá trénovat vojáky v úhybu z úrovně 0 na úroveň 1 až 2. Silné pivo se také používá ve velkých hostincích na přípravu jídel."
 
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:234
 #: ../../data/tribes/initialization/empire/units.lua:250
 #: ../../data/tribes/initialization/frisians/units.lua:283
@@ -3320,8 +3320,8 @@ msgid ""
 msgstr "Je to jeden z základních nástrojů, který se vyrábí v dílně na železo (ale pozor, přestává se zde vyrábět, jakmile je budova vylepšena na dílnu na sekery, nebo válečnou akademii)."
 
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:397
 #: ../../data/tribes/initialization/empire/units.lua:431
 #: ../../data/tribes/initialization/frisians/units.lua:457
@@ -3649,23 +3649,23 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "Průzkumníci, jako průzkumník Zdenda, zvídavě šmejdí neprozkoumanou krajinou."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:852
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid "This reed field has just been planted."
 msgstr "Toto je právě oseté rákosové pole."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/barbarians/units.lua:866
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is growing."
 msgstr "Toto je dorůstající rákosové pole."
 
-#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
+#. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:873
 #: ../../data/tribes/initialization/frisians/units.lua:1255
 msgid "This reed field is ready for harvesting."
@@ -4200,8 +4200,8 @@ msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr "Nabídka hospody \"Stará dobrá bronzová sekerka\""
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1336
 #: ../../data/tribes/initialization/empire/units.lua:1288
 #: ../../data/tribes/initialization/frisians/units.lua:1907
@@ -8576,8 +8576,8 @@ msgstr "Hra jednoho hráče"
 msgid "Multiplayer"
 msgstr "Hra více hráčů"
 
-#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
+#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../data/tribes/scripting/help/ware_help.lua:50
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
