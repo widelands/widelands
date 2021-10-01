@@ -307,6 +307,7 @@ private:
 	std::deque<BuildableField*> buildable_fields;
 	BlockedFields blocked_fields;
 	std::unordered_set<uint32_t> ports_vicinity;
+	std::unordered_set<uint32_t> ports_shipyard_region;
 	PlayersStrengths player_statistics;
 	ManagementData management_data;
 	ExpansionType expansion_type;
