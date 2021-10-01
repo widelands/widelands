@@ -32,6 +32,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
+#include "ui_fsmenu/mousewheel_options.h"
 #include "wui/sound_options.h"
 
 class Section;
@@ -70,7 +71,6 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
-		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
@@ -123,6 +123,8 @@ private:
 
 	void add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt);
 
+	// Saves the options and closes the window
+	void clicked_ok();
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 	// Restores old options when canceled
@@ -151,6 +153,7 @@ private:
 	UI::Box box_saving_;
 	UI::Box box_newgame_;
 	UI::Box box_ingame_;
+	MousewheelOptionsDialog mousewheel_options_;
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
@@ -190,7 +193,6 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
-	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
