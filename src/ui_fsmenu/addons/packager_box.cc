@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "ui_basic/messagebox.h"
@@ -106,10 +107,13 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 
 	MainMenu::find_maps("maps/My_Maps", maps_list_);
 
-	map_add_.set_enabled(false);
 	my_maps_.selected.connect([this](uint32_t) { map_add_.set_enabled(true); });
+	map_add_.set_enabled(false);
 	map_delete_.set_enabled(false);
-	dirstruct_.selected.connect([this](uint32_t i) { map_delete_.set_enabled(i > 0); });
+	dirstruct_.selected.connect([this](uint32_t i) {
+		map_add_.set_enabled(i > 0);
+		map_delete_.set_enabled(i > 0);
+	});
 
 	map_add_.sigclicked.connect(
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
@@ -156,7 +160,13 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			      .str());
 		}
 	}
-	rebuild_dirstruct(dynamic_cast<AddOns::MapsAddon*>(a));
+
+	AddOns::MapsAddon* ma = dynamic_cast<AddOns::MapsAddon*>(a);
+	std::vector<std::string> select;
+	if (ma->get_tree()->maps.empty() && ma->get_tree()->subdirectories.size() == 1) {
+		select.push_back(ma->get_tree()->subdirectories.begin()->first);
+	}
+	rebuild_dirstruct(ma, select);
 }
 
 void MapsAddOnsPackagerBox::rebuild_dirstruct(AddOns::MapsAddon* a,
@@ -175,6 +185,10 @@ void MapsAddOnsPackagerBox::rebuild_dirstruct(AddOns::MapsAddon* a,
 	               g_image_cache->get("images/ui_basic/ls_wlscenario.png"), toplevel_entry == select,
 	               _("Top-level directory"));
 	do_recursively_rebuild_dirstruct(a->get_tree(), 1, path, toplevel_entry, select);
+
+	if (!dirstruct_.has_selection()) {
+		dirstruct_.select(0);
+	}
 }
 
 void MapsAddOnsPackagerBox::do_recursively_rebuild_dirstruct(
@@ -230,6 +244,20 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 	case ModifyAction::kAddMap: {
 		const std::string& map = my_maps_.get_selected();
 		const std::string filename = FileSystem::fs_filename(map.c_str());
+		if (!g_fs->is_directory(map)) {
+			UI::WLMessageBox mbox(
+			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
+			   (boost::format(_("The map ‘%s’ is not a directory. "
+			                    "Please consider disabling the ‘Compress widelands data files’ option "
+			                    "in the options menu and resaving the map in the editor."
+			                    "\n\nDo you want to add this map anyway?")) %
+			    filename)
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return;
+			}
+		}
 		tree->maps[filename] = map;
 		select.push_back(filename);
 		break;
