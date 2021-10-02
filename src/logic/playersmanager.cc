@@ -42,6 +42,7 @@ void PlayersManager::cleanup() {
 		*p = nullptr;
 	}
 	number_of_players_ = 0;
+	players_end_status_.clear();
 }
 
 void PlayersManager::remove_player(PlayerNumber plnum) {
