@@ -30,6 +30,11 @@
 namespace FsMenu {
 namespace AddOnsUI {
 
+/** Check whether the filename is valid. Returns the reason why it's invalid, or "" if valid. */
+std::string check_addon_filename_validity(const std::string&);
+/** Turn a filename into a filename that may be used in an add-on. */
+void make_valid_addon_filename(std::string&, const std::map<std::string, std::string>& names_already_in_use);
+
 class AddOnsPackagerBox : public UI::Box {
 public:
 	AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation);
