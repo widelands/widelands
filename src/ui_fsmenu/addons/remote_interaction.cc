@@ -50,6 +50,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      ctrl_(ctrl),
      info_(info),
      index_(index),
+     layouting_(false),
      text_(this,
            0,
            0,
@@ -107,19 +108,41 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 		r.update_data();
 	});
 
-	layout();
 	update_edit_enabled();
 	initialization_complete();
 }
 
+/** The server disallows editing a comment more than 24 hours after posting. */
+constexpr std::time_t kCommentEditTimeout = 24 * 60 * 60;
+
 void CommentRow::update_edit_enabled() {
-	/* Admins can edit all posts; normal users only their own posts and only if the post was
-	 * never edited by an admin yet. */
+	/* Admins can edit all posts at all times;
+	 * normal users can edit only their own posts and only if the post was never edited
+	 * by an admin yet and only within the server-defined timeout after posting.
+	 */
+	const AddOns::AddOnComment& comment = info_->user_comments.at(index_);
+	const std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+
 	buttons_.set_visible(
 	   !ctrl_.username().empty() &&
-	   (ctrl_.net().is_admin() || (info_->user_comments.at(index_).username == ctrl_.username() &&
-	                               (info_->user_comments.at(index_).editor.empty() ||
-	                                info_->user_comments.at(index_).editor == ctrl_.username()))));
+	   (ctrl_.net().is_admin() ||
+	    (comment.username == ctrl_.username() &&
+	     (comment.editor.empty() || comment.editor == ctrl_.username()) &&
+	     (now < comment.timestamp || now - comment.timestamp < kCommentEditTimeout))));
+	layout();
+}
+
+void CommentRow::layout() {
+	if (layouting_) {
+		return;
+	}
+	layouting_ = true;
+
+	text_.set_visible(false);  // Prevent the text from taking up all available space
+	UI::Box::layout();
+	text_.set_visible(true);
+
+	layouting_ = false;
 }
 
 /* CommentEditor implementation */

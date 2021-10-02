@@ -51,11 +51,13 @@ public:
 	           const size_t& index);
 
 	void update_edit_enabled();
+	void layout() override;
 
 private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const size_t& index_;
+	bool layouting_;
 	UI::MultilineTextarea text_;
 	UI::Box buttons_;
 	UI::Button edit_, delete_;
