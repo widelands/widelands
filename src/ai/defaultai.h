@@ -79,6 +79,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };
 	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };
 	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
+	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
 	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged, kNeutral, kNone };
 
@@ -370,7 +371,7 @@ private:
 
 	int16_t productionsites_ratio_;
 
-	bool resource_necessity_water_needed_;  // unless atlanteans
+	bool resource_necessity_water_needed_;  // unless atlanteans or amazons
 
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
@@ -394,10 +395,11 @@ private:
 	   "trident", "tabard", "shield", "mask",    "spear", "warrior"};
 
 	// seafaring related
-	enum { kReprioritize, kStopShipyard, kStapShipyard };
+	enum { kReprioritize, kStopShipyard, kStartShipyard };
 	static Time last_seafaring_check_;
 	// False by default, until Map::allows_seafaring() is true
 	static bool map_allows_seafaring_;
+	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
