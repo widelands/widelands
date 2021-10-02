@@ -141,6 +141,7 @@ wl_library(widelands_options
     wlapplication_mousewheel_options.cc
     wlapplication_mousewheel_options.h
   DEPENDS
+    base_geometry
     base_i18n
     base_log
     graphic_text_layout
