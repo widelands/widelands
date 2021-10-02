@@ -153,6 +153,12 @@ AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
+/**
+ * If an add-on of type `base` requires an add-on of type `dependency`, this function
+ * tells whether the dependency must necessarily be listed after the requiring add-on.
+ */
+bool order_matters(AddOnCategory base, AddOnCategory dependency);
+
 std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 
 i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon);
