@@ -610,7 +610,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 		}
-		//		}
 	}
 	return UI::Panel::handle_key(down, code);
 }

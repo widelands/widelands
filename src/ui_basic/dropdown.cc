@@ -440,10 +440,12 @@ void BaseDropdown::update() {
 }
 
 void BaseDropdown::set_value() {
-	current_selection_ = list_->selection_index();
-	save_selected_entry(current_selection_);
-	update();
-	selected();
+	if (list_->has_selection()) {
+		current_selection_ = list_->selection_index();
+		save_selected_entry(current_selection_);
+		update();
+		selected();
+	}
 }
 
 void BaseDropdown::toggle() {
