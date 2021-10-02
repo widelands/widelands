@@ -20,7 +20,6 @@
 #ifndef WL_UI_BASIC_DROPDOWN_H
 #define WL_UI_BASIC_DROPDOWN_H
 
-#include <base/log.h>
 #include <deque>
 #include <memory>
 
@@ -202,6 +201,10 @@ protected:
 
 	std::string current_filter_;
 
+	/// needed for filter workaround (handle_key/handle_textinput with space key)
+	bool ignore_space_;
+	bool was_open_already_;
+
 private:
 	static void layout_if_alive(int);
 	void layout() override;
@@ -321,6 +324,10 @@ public:
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
+		if (ignore_space_ && !input_text.empty() && input_text.front() == ' ') {
+			ignore_space_ = false;
+			return true;
+		}
 		update_filter(input_text);
 		apply_filter();
 		return true;

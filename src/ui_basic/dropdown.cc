@@ -72,6 +72,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                        w,
                     // Height only to fit the button, so we can use this in Box layout.
                     base_height(button_dimension, style)),
+     ignore_space_(false),
+     was_open_already_(false),
      id_(next_id_++),
      max_list_items_(max_list_items),
      max_list_height_(std::numeric_limits<uint32_t>::max()),
@@ -107,6 +109,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      type_(type),
      is_enabled_(true),
      button_style_(button_style),
+
      autoexpand_display_button_(false) {
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
@@ -415,7 +418,7 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
+	                            list_->get_selected_name() :
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
@@ -430,7 +433,7 @@ void BaseDropdown::update() {
                                                            tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
+		                           list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
@@ -458,6 +461,7 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	}
 	list_->set_visible(open);
 	if (list_->is_visible()) {
+		was_open_already_ = true;
 		enable_textinput();
 		list_->move_to_top();
 		focus();
@@ -525,6 +529,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			break;
 		case SDLK_SPACE:
 			if (!is_expanded()) {
+				ignore_space_ = was_open_already_;
 				set_list_visibility(true);
 				return true;
 			}
