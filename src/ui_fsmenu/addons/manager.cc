@@ -1194,7 +1194,8 @@ void AddOnsCtrl::update_dependency_errors() {
 					    addon->first->descname() % search_result->first->descname())
 					      .str());
 				}
-				if (too_late) {
+				if (too_late &&
+				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(
 					   (boost::format(
 					       _("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on")) %
@@ -1209,20 +1210,26 @@ void AddOnsCtrl::update_dependency_errors() {
 					break;
 				}
 				// check if `previous_requirement` comes before `requirement`
-				std::string prev_descname;
+				const AddOns::AddOnInfo* prev = nullptr;
+				const AddOns::AddOnInfo* next = nullptr;
+				too_late = false;
 				for (const AddOns::AddOnState& a : AddOns::g_addons) {
 					if (a.first->internal_name == previous_requirement) {
-						prev_descname = a.first->descname();
+						prev = a.first.get();
 						break;
 					} else if (a.first->internal_name == requirement) {
-						warn_requirements.push_back(
-						   (boost::format(
-						       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-						         "listed in the wrong order")) %
-						    addon->first->descname() % prev_descname % search_result->first->descname())
-						      .str());
-						break;
+						next = a.first.get();
+						too_late = true;
 					}
+				}
+				assert(prev != nullptr);
+				assert(!too_late || next != nullptr);
+				if (too_late && AddOns::order_matters(prev->category, next->category)) {
+					warn_requirements.push_back(
+					   (boost::format(_("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+					                    "listed in the wrong order")) %
+					    addon->first->descname() % prev->descname() % search_result->first->descname())
+					      .str());
 				}
 			}
 		}
