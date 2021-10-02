@@ -29,7 +29,7 @@
 #include "base/wexception.h"
 
 static const std::thread::id kNoThread;
-static std::thread::id initializer_thread;
+static std::thread::id initializer_thread(kNoThread);
 
 void set_initializer_thread() {
 	log_info("Setting initializer thread.");
