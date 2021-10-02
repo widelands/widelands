@@ -102,7 +102,7 @@ struct MutexRecord {
 	   nr_waiting_threads;  ///< How many threads are currently trying to lock this mutex.
 	std::thread::id
 	   current_owner;  ///< The thread that has currently locked this mutex (may be #kNoThread).
-	size_t ownership_count;  ///< How many times this mutex was locked.
+	unsigned ownership_count;  ///< How many times this mutex was locked.
 
 	MutexRecord() : nr_waiting_threads(0), current_owner(kNoThread), ownership_count(0) {
 	}
