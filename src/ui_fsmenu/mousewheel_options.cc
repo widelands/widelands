@@ -72,8 +72,8 @@ static const std::string sd_names[] = {gettext_noop("Disabled"), gettext_noop("V
 void MousewheelConfigSettings::def2d_update() {
 	enable_map_scroll_ =
 	   (get_mousewheel_option_bool(MousewheelOptionID::kMapScroll, use_2d_defaults_) ?
-	   SD::kAny :
-	   SD::kDisabled);
+          SD::kAny :
+          SD::kDisabled);
 	zoom_mod_ = READ_MOD(kMapZoom);
 	map_scroll_mod_ = READ_MOD(kMapScroll);
 	speed_mod_ = READ_MOD(kGameSpeed);
