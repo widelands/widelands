@@ -27,7 +27,6 @@
 #include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
 #include "wlapplication_mousewheel_options.h"
-#include "wlapplication_options.h"
 
 namespace UI {
 
