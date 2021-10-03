@@ -20,9 +20,7 @@
 #ifndef WL_BUILD_INFO_H
 #define WL_BUILD_INFO_H
 
-#include <boost/format.hpp>
-
-#include "base/i18n.h"
+#include <string>
 
 constexpr uint16_t kWidelandsCopyrightStart = 2002;
 // If the following line is changed, the corresponding regex in 'utils/update_copyright.py' will
@@ -36,9 +34,5 @@ const std::string& build_id();
 /// \return the build type, which is set during compile time (either manually
 /// or to a default value)
 const std::string& build_type();
-
-inline std::string version_string() {
-	return (boost::format(_("Version %1$s (%2$s)")) % build_id() % build_type()).str();
-}
 
 #endif  // end of include guard: WL_BUILD_INFO_H
