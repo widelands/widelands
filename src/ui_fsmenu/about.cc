@@ -65,37 +65,43 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 	}
 
 	{
-		struct ContentT { std::string label, localized_label, value, localized_value; };
+		struct ContentT {
+			std::string label, localized_label, value, localized_value;
+		};
 		const std::vector<ContentT> content = {
-			{ "Version:", _("Version:"), (boost::format("%1$s (%2$s)") % build_id() % build_type()).str(), (boost::format(_("%1$s (%2$s)")) % build_id() % build_type()).str() },
-			{ "Operating System:", _("Operating System:"),
+		   {"Version:", _("Version:"),
+		    (boost::format("%1$s (%2$s)") % build_id() % build_type()).str(),
+		    (boost::format(_("%1$s (%2$s)")) % build_id() % build_type()).str()},
+		   {"Operating System:", _("Operating System:"),
 #if defined(__APPLE__) || defined(__MACH__)
-			"MacOS", _("MacOS")
+		    "MacOS", _("MacOS")
 #elif defined(_WIN64)
-			"Windows (64 bit)", _("Windows (64 bit)")
+		    "Windows (64 bit)", _("Windows (64 bit)")
 #elif defined(_WIN32)
-			"Windows (32 bit)", _("Windows (32 bit)")
+		    "Windows (32 bit)", _("Windows (32 bit)")
 #elif defined(__linux__)
-			"Linux", _("Linux")
+		    "Linux", _("Linux")
 #elif defined(__FreeBSD__)
-			"FreeBSD", _("FreeBSD")
+		    "FreeBSD", _("FreeBSD")
 #elif defined(__unix) || defined(__unix__)
-			"Unix", _("Unix")
+		    "Unix", _("Unix")
 #else
-			"Unknown", _("Unknown")
+		    "Unknown", _("Unknown")
 #endif
-			},
-			{ "Locale:", _("Locale:"), i18n::get_locale(), "" },
-			{ "Home Directory:", _("Home Directory:"), i18n::get_homedir(), "" },
-			{ "Configuration File:", _("Configuration File:"), get_config_file(), "" },
-			{ "Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), "" },
-			{ "Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "" },
+		   },
+		   {"Locale:", _("Locale:"), i18n::get_locale(), ""},
+		   {"Home Directory:", _("Home Directory:"), i18n::get_homedir(), ""},
+		   {"Configuration File:", _("Configuration File:"), get_config_file(), ""},
+		   {"Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), ""},
+		   {"Executable Directory:", _("Executable Directory:"), get_executable_directory(false), ""},
 		};
 		const bool mirror = UI::g_fh->fontset()->is_rtl();
 		UI::Box* infobox = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
 		infobox->add_space(kSpacing);
-		infobox->add(new UI::Textarea(infobox, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings,
-				_("Technical Info"), UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+		infobox->add(
+		   new UI::Textarea(infobox, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings,
+		                    _("Technical Info"), UI::Align::kCenter),
+		   UI::Box::Resizing::kFullSize);
 		infobox->add_space(2 * kSpacing);
 
 		UI::Box* hbox1 = new UI::Box(infobox, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
@@ -111,13 +117,20 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 			report += "  \n";
 			vbox1->add_space(kSpacing);
 			vbox2->add_space(kSpacing);
-			vbox1->add(new UI::Textarea(vbox1, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-					c.localized_label, UI::mirror_alignment(UI::Align::kLeft, mirror)), UI::Box::Resizing::kExpandBoth);
-			vbox2->add(new UI::Textarea(vbox2, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph,
-					c.localized_value.empty() ? c.value : c.localized_value, UI::mirror_alignment(UI::Align::kRight, mirror)), UI::Box::Resizing::kExpandBoth);
+			vbox1->add(
+			   new UI::Textarea(vbox1, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+			                    c.localized_label, UI::mirror_alignment(UI::Align::kLeft, mirror)),
+			   UI::Box::Resizing::kExpandBoth);
+			vbox2->add(new UI::Textarea(vbox2, UI::PanelStyle::kFsMenu,
+			                            UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                            c.localized_value.empty() ? c.value : c.localized_value,
+			                            UI::mirror_alignment(UI::Align::kRight, mirror)),
+			           UI::Box::Resizing::kExpandBoth);
 		}
 
-		UI::Button* copy = new UI::Button(hbox2, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"), _("Copy the technical report to the clipboard"));
+		UI::Button* copy =
+		   new UI::Button(hbox2, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"),
+		                  _("Copy the technical report to the clipboard"));
 		copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
 
 		hbox1->add_space(kSpacing);
