@@ -65,14 +65,31 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 	}
 
 	{
-		struct ContentT { std::string label, localized_label, value; };
+		struct ContentT { std::string label, localized_label, value, localized_value; };
 		const std::vector<ContentT> content = {
-			{ "Version:", _("Version:"), version_string() },
-			{ "Home Directory:", _("Home Directory:"), i18n::get_homedir() },
-			{ "Configuration File:", _("Configuration File:"), get_config_file() },
-			{ "Locale Directory:", _("Locale Directory:"), i18n::get_localedir() },
-			{ "Executable Directory:", _("Executable Directory:"), get_executable_directory(false) },
-			{ "Locale:", _("Locale:"), i18n::get_locale() }
+			{ "Version:", _("Version:"), version_string(), "" },
+			{ "Operating System:", _("Operating System:"),
+#if defined(__APPLE__) || defined(__MACH__)
+			"MacOS", _("MacOS")
+#elif defined(_WIN64)
+			"Windows (64 bit)", _("Windows (64 bit)")
+#elif defined(_WIN32)
+			"Windows (32 bit)", _("Windows (32 bit)")
+#elif defined(__linux__)
+			"Linux", _("Linux")
+#elif defined(__FreeBSD__)
+			"FreeBSD", _("FreeBSD")
+#elif defined(__unix) || defined(__unix__)
+			"Unix", _("Unix")
+#else
+			"Unknown", _("Unknown")
+#endif
+			},
+			{ "Home Directory:", _("Home Directory:"), i18n::get_homedir(), "" },
+			{ "Configuration File:", _("Configuration File:"), get_config_file(), "" },
+			{ "Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), "" },
+			{ "Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "" },
+			{ "Locale:", _("Locale:"), i18n::get_locale(), "" }
 		};
 		const bool mirror = UI::g_fh->fontset()->is_rtl();
 		UI::Box* infobox = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
@@ -96,7 +113,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 			vbox1->add(new UI::Textarea(vbox1, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
 					c.localized_label, UI::mirror_alignment(UI::Align::kLeft, mirror)), UI::Box::Resizing::kExpandBoth);
 			vbox2->add(new UI::Textarea(vbox2, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph,
-					c.value, UI::mirror_alignment(UI::Align::kRight, mirror)), UI::Box::Resizing::kExpandBoth);
+					c.localized_value.empty() ? c.value : c.localized_value, UI::mirror_alignment(UI::Align::kRight, mirror)), UI::Box::Resizing::kExpandBoth);
 		}
 
 		UI::Button* copy = new UI::Button(hbox2, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"), _("Copy the technical report to the clipboard"));
