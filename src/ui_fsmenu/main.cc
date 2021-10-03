@@ -477,9 +477,7 @@ void MainMenu::set_labels() {
 	   _("Quit the game"), shortcut_string_for(KeyboardShortcut::kMainMenuQuit),
 	   UI::PanelStyle::kFsMenu));
 
-	version_.set_text(
-	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
-	   (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str());
+	version_.set_text(version_string());
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
 	   (boost::format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "

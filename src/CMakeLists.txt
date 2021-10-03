@@ -28,6 +28,8 @@ wl_library(build_info
   SRCS
     build_info.cc
     build_info.h
+  DEPENDS
+    base_i18n
 )
 
 if (WIN32)

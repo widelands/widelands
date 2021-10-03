@@ -47,6 +47,9 @@ namespace Widelands {
 class Game;
 }
 
+/** Returns the widelands executable path. */
+std::string get_executable_directory(bool logdir = true);
+
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
 	explicit ParameterError(CmdLineVerbosity level, const std::string& text = "")
