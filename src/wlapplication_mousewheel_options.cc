@@ -145,10 +145,8 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
 
    {MousewheelOptionID::kMapZoomMod,
     MousewheelOption("zoom_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
-   {MousewheelOptionID::kMapZoomX,
-    MousewheelOption("zoom_x", MousewheelOptionType::kBool, true)},
-   {MousewheelOptionID::kMapZoomY,
-    MousewheelOption("zoom_y", MousewheelOptionType::kBool, true)},
+   {MousewheelOptionID::kMapZoomX, MousewheelOption("zoom_x", MousewheelOptionType::kBool, true)},
+   {MousewheelOptionID::kMapZoomY, MousewheelOption("zoom_y", MousewheelOptionType::kBool, true)},
    {MousewheelOptionID::kMapZoomInvertX,
     MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, false)},
    {MousewheelOptionID::kMapZoomInvertY,
@@ -167,8 +165,7 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
     MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, true)},
 
    {MousewheelOptionID::kEditorToolsizeMod,
-    MousewheelOption(
-       "editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
+    MousewheelOption("editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
    {MousewheelOptionID::kEditorToolsizeX,
     MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, true)},
    {MousewheelOptionID::kEditorToolsizeY,

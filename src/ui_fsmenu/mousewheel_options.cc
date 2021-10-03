@@ -59,13 +59,12 @@ static const std::string sd_names[] = {gettext_noop("Disabled"), gettext_noop("V
                                        gettext_noop("Horizontal scroll"),
                                        gettext_noop("Any scroll")};
 
-#define READ_MOD(option)                                                                           \
-	normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod))
+#define READ_MOD(option) normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod))
 
 #define DIR_COMBINE(x, y)                                                                          \
 	((x ? SD::kHorizontal : SD::kDisabled) | (y ? SD::kVertical : SD::kDisabled))
 #define READ_DIR(option)                                                                           \
-	DIR_COMBINE(get_mousewheel_option_bool(MousewheelOptionID::option##X),                         \
+	DIR_COMBINE(get_mousewheel_option_bool(MousewheelOptionID::option##X),                          \
 	            get_mousewheel_option_bool(MousewheelOptionID::option##Y))
 
 void MousewheelConfigSettings::read() {
