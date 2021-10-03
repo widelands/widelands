@@ -64,10 +64,10 @@ struct PrioritySlider : public HorizontalSlider {
 public:
 	bool handle_mousewheel(int32_t, int32_t, uint16_t) override {
 		return false;
-	};
+	}
 	void change_value_by(int32_t change) {
 		set_value(get_value() + change);
-	};
+	}
 };
 
 }  // namespace UI

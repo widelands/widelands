@@ -61,7 +61,7 @@ struct MousewheelConfigSettings {
 
 	MousewheelConfigSettings() {
 		read();
-	};
+	}
 };
 
 class MousewheelOptionsDialog;

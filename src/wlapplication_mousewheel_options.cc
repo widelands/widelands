@@ -71,7 +71,7 @@ struct MousewheelOption {
 	}
 };
 
-using Sign2D = std::pair<int32_t, int32_t>;
+using Sign2D = Vector2i;
 
 struct MousewheelHandlerOptions {
 	const MousewheelOptionID keymod_id_;
@@ -94,10 +94,10 @@ struct MousewheelHandlerOptions {
 	   : keymod_id_(keymod_id),
 	     use_x_(use_x),
 	     invert_x_(invert_x),
-	     default_sign_x_(def_signs.first),
+	     default_sign_x_(def_signs.x),
 	     use_y_(use_y),
 	     invert_y_(invert_y),
-	     default_sign_y_(def_signs.second) {
+	     default_sign_y_(def_signs.y) {
 	}
 
 	void update_settings() {
@@ -180,15 +180,17 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
 };
 
 // Default signs
-constexpr int32_t kSignIncreaseRight = -1;
-constexpr int32_t kSignIncreaseUp = 1;
-constexpr int32_t kSignNextRight = -1;
-constexpr int32_t kSignNextDown = -1;
-constexpr int32_t kSignScroll = -1;
+constexpr int32_t            //
+   kSignIncreaseRight = -1,  //
+   kSignIncreaseUp = 1,      //
+   kSignNextRight = -1,      //
+   kSignNextDown = -1,       //
+   kSignScroll = -1;
 
-constexpr Sign2D kDefaultSignValue(kSignIncreaseRight, kSignIncreaseUp);
-constexpr Sign2D kDefaultSignMove(kSignNextRight, kSignNextDown);
-constexpr Sign2D kDefaultSignScroll(kSignScroll, kSignScroll);
+static const Sign2D  //
+   kDefaultSignValue(kSignIncreaseRight, kSignIncreaseUp),
+   kDefaultSignMove(kSignNextRight, kSignNextDown),
+   kDefaultSignScroll(kSignScroll, kSignScroll);
 
 static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_handlers = {
    {MousewheelHandlerConfigID::kChangeValue,

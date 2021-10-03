@@ -37,13 +37,11 @@
 
 namespace FsMenu {
 
-// clang-format off
-constexpr int
-	kButtonSize = 24,
-	kDividerSpace = 8,
-	kDirDdMaxW = 200,
-	kResetBtnMaxW = 300;
-// clang-format on
+constexpr int          //
+   kButtonSize = 24,   //
+   kDividerSpace = 8,  //
+   kDirDdMaxW = 200,   //
+   kResetBtnMaxW = 300;
 
 // Scroll Directions
 enum SD : uint8_t {
