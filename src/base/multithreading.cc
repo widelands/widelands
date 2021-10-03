@@ -98,14 +98,9 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 /** Wrapper around a STL recursive mutex plus some metadata. */
 struct MutexRecord {
 	std::recursive_mutex mutex;  ///< The actual mutex.
-	std::atomic_uint
-	   nr_waiting_threads;  ///< How many threads are currently trying to lock this mutex.
-	std::thread::id
-	   current_owner;  ///< The thread that has currently locked this mutex (may be #kNoThread).
-	unsigned ownership_count;  ///< How many times this mutex was locked.
-
-	MutexRecord() : nr_waiting_threads(0), current_owner(kNoThread), ownership_count(0) {
-	}
+	std::atomic_uint nr_waiting_threads = {0};  ///< How many threads are currently trying to lock this mutex.
+	std::thread::id current_owner = kNoThread;  ///< The thread that has currently locked this mutex (may be #kNoThread).
+	size_t ownership_count = 0;  ///< How many times this mutex was locked.
 };
 static std::map<MutexLock::ID, MutexRecord> g_mutex;
 
