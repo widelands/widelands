@@ -85,11 +85,11 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 			"Unknown", _("Unknown")
 #endif
 			},
+			{ "Locale:", _("Locale:"), i18n::get_locale(), "" },
 			{ "Home Directory:", _("Home Directory:"), i18n::get_homedir(), "" },
 			{ "Configuration File:", _("Configuration File:"), get_config_file(), "" },
 			{ "Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), "" },
 			{ "Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "" },
-			{ "Locale:", _("Locale:"), i18n::get_locale(), "" }
 		};
 		const bool mirror = UI::g_fh->fontset()->is_rtl();
 		UI::Box* infobox = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
@@ -104,10 +104,11 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		UI::Box* vbox2 = new UI::Box(hbox1, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
 		std::string report;
 		for (const ContentT& c : content) {
+			report += "> ";
 			report += c.label;
 			report += ' ';
 			report += c.value;
-			report += '\n';
+			report += "  \n";
 			vbox1->add_space(kSpacing);
 			vbox2->add_space(kSpacing);
 			vbox1->add(new UI::Textarea(vbox1, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
