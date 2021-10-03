@@ -32,8 +32,6 @@
 namespace FsMenu {
 
 struct MousewheelConfigSettings {
-	bool use_2d_defaults_;
-
 	// Handling of mousewheel events works on the focus follows mouse
 	// basis, see: ui_basic/panel.cc, so there's not much room for
 	// changing its behaviour for UI widgets. They can't even be passed
@@ -45,7 +43,7 @@ struct MousewheelConfigSettings {
 	uint16_t zoom_mod_, map_scroll_mod_, speed_mod_, toolsize_mod_;
 	uint8_t zoom_dir_, speed_dir_, toolsize_dir_;
 
-	// Will be static_casted from/to bool to allow common handler
+	// Will be converted from/to bool to allow common handler
 	uint8_t enable_map_scroll_;
 
 	// We suppose that the user set the system configuration for
@@ -58,7 +56,6 @@ struct MousewheelConfigSettings {
 	// direction to movement in the orthogonal direction.
 	uint8_t value_invert_, tab_invert_, zoom_invert_;
 
-	void def2d_update();
 	void read();
 	void apply();
 
@@ -129,12 +126,9 @@ private:
 };
 
 struct DefaultsBox : public UI::Box {
-	DefaultsBox(MousewheelOptionsDialog* parent, bool* use_2d_defaults);
-
-	void set_width(int w);
+	DefaultsBox(MousewheelOptionsDialog* parent);
 
 private:
-	UI::Dropdown<bool> use_2d_defaults_dd_;
 	UI::Button reset_button_;
 };
 
@@ -146,7 +140,6 @@ public:
 	MousewheelOptionsDialog(UI::Panel* parent);
 
 	void update_settings();
-	void reread_settings();
 	void apply_settings();
 	void set_width(int w);
 
@@ -154,7 +147,6 @@ private:
 	MousewheelConfigSettings settings_;
 
 	// Option controls
-	DefaultsBox defaults_box_;
 	KeymodAndDirBox zoom_box_;
 	KeymodAndDirBox mapscroll_box_;
 	KeymodAndDirBox speed_box_;
@@ -162,6 +154,7 @@ private:
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
+	DefaultsBox defaults_box_;
 };
 
 }  // namespace FsMenu

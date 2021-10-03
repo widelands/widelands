@@ -25,41 +25,31 @@
 
 #include "wlapplication_options.h"
 
-static bool mousewheel_use_2d_defaults_cache = false;
-
 enum class MousewheelOptionType { kBool, kKeymod };
 
 struct MousewheelOption {
 	const std::string internal_name_;
 	const MousewheelOptionType type_;
 	const uint16_t default_;
-	const uint16_t default_2D_;
 
-	MousewheelOption(std::string n, MousewheelOptionType t, uint16_t def, uint16_t def2D)
-	   : internal_name_(n), type_(t), default_(def), default_2D_(def2D) {
+	MousewheelOption(std::string n, MousewheelOptionType t, uint16_t def)
+	   : internal_name_(n), type_(t), default_(def) {
 	}
 
-	bool get_bool(bool use_2d_default) const {
+	bool get_bool() const {
 		assert(type_ == MousewheelOptionType::kBool);
-		const bool def = static_cast<bool>(use_2d_default ? default_2D_ : default_);
+		const bool def = (default_ != 0);
 		if (internal_name_.empty()) {
 			return def;
 		}
 		return get_config_bool("mousewheel", internal_name_, def);
 	}
-	bool get_bool() const {
-		return get_bool(mousewheel_use_2d_defaults_cache);
-	}
-	uint16_t get_keymod(bool use_2d_default) const {
-		assert(type_ == MousewheelOptionType::kKeymod);
-		const uint16_t def = use_2d_default ? default_2D_ : default_;
-		if (internal_name_.empty()) {
-			return def;
-		}
-		return get_config_int("mousewheel", internal_name_, def);
-	}
 	uint16_t get_keymod() const {
-		return get_keymod(mousewheel_use_2d_defaults_cache);
+		assert(type_ == MousewheelOptionType::kKeymod);
+		if (internal_name_.empty()) {
+			return default_;
+		}
+		return get_config_int("mousewheel", internal_name_, default_);
 	}
 	void set_bool(bool value) const {
 		assert((type_ == MousewheelOptionType::kBool) && !(internal_name_.empty()));
@@ -69,21 +59,19 @@ struct MousewheelOption {
 		assert((type_ == MousewheelOptionType::kKeymod) && !(internal_name_.empty()));
 		set_config_int("mousewheel", internal_name_, value);
 	}
-	void reset(bool use_2d_default) const {
+	void reset() const {
 		if (!(internal_name_.empty())) {
-			const uint16_t def = use_2d_default ? default_2D_ : default_;
 			if (type_ == MousewheelOptionType::kBool) {
-				set_bool(static_cast<bool>(def));
+				set_bool(default_ != 0);
 			} else {
 				assert(type_ == MousewheelOptionType::kKeymod);
-				set_keymod(def);
+				set_keymod(default_);
 			}
 		}
 	}
-	void reset() const {
-		reset(mousewheel_use_2d_defaults_cache);
-	}
 };
+
+using Sign2D = std::pair<int32_t, int32_t>;
 
 struct MousewheelHandlerOptions {
 	const MousewheelOptionID keymod_id_;
@@ -102,15 +90,14 @@ struct MousewheelHandlerOptions {
 	                         MousewheelOptionID invert_x,
 	                         MousewheelOptionID use_y,
 	                         MousewheelOptionID invert_y,
-	                         int32_t def_sign_x,
-	                         int32_t def_sign_y)
+	                         Sign2D def_signs)
 	   : keymod_id_(keymod_id),
 	     use_x_(use_x),
 	     invert_x_(invert_x),
-	     default_sign_x_(def_sign_x),
+	     default_sign_x_(def_signs.first),
 	     use_y_(use_y),
 	     invert_y_(invert_y),
-	     default_sign_y_(def_sign_y) {
+	     default_sign_y_(def_signs.second) {
 	}
 
 	void update_settings() {
@@ -147,66 +134,62 @@ struct MousewheelHandlerOptions {
 
 static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options = {
    {MousewheelOptionID::kUIChangeValueInvertX,
-    MousewheelOption("change_value_x_invert", MousewheelOptionType::kBool, false, false)},
+    MousewheelOption("change_value_x_invert", MousewheelOptionType::kBool, false)},
    {MousewheelOptionID::kUIChangeValueInvertY,
-    MousewheelOption("change_value_y_invert", MousewheelOptionType::kBool, false, false)},
+    MousewheelOption("change_value_y_invert", MousewheelOptionType::kBool, false)},
 
    {MousewheelOptionID::kUITabInvertX,
-    MousewheelOption("tabpanel_x_invert", MousewheelOptionType::kBool, false, false)},
+    MousewheelOption("tabpanel_x_invert", MousewheelOptionType::kBool, false)},
    {MousewheelOptionID::kUITabInvertY,
-    MousewheelOption("tabpanel_y_invert", MousewheelOptionType::kBool, false, false)},
+    MousewheelOption("tabpanel_y_invert", MousewheelOptionType::kBool, false)},
 
    {MousewheelOptionID::kMapZoomMod,
-    MousewheelOption("zoom_modifier", MousewheelOptionType::kKeymod, KMOD_NONE, KMOD_CTRL)},
+    MousewheelOption("zoom_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
    {MousewheelOptionID::kMapZoomX,
-    MousewheelOption("zoom_x", MousewheelOptionType::kBool, true, true)},
+    MousewheelOption("zoom_x", MousewheelOptionType::kBool, true)},
    {MousewheelOptionID::kMapZoomY,
-    MousewheelOption("zoom_y", MousewheelOptionType::kBool, true, true)},
+    MousewheelOption("zoom_y", MousewheelOptionType::kBool, true)},
    {MousewheelOptionID::kMapZoomInvertX,
-    MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, false, false)},
+    MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, false)},
    {MousewheelOptionID::kMapZoomInvertY,
-    MousewheelOption("zoom_y_invert", MousewheelOptionType::kBool, false, false)},
+    MousewheelOption("zoom_y_invert", MousewheelOptionType::kBool, false)},
 
    {MousewheelOptionID::kMapScrollMod,
-    MousewheelOption("move_map_modifier", MousewheelOptionType::kKeymod, KMOD_NONE, KMOD_NONE)},
+    MousewheelOption("move_map_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
    {MousewheelOptionID::kMapScroll,
-    MousewheelOption("move_map", MousewheelOptionType::kBool, false, true)},
+    MousewheelOption("move_map", MousewheelOptionType::kBool, false)},
 
    {MousewheelOptionID::kGameSpeedMod,
-    MousewheelOption("gamespeed_modifier", MousewheelOptionType::kKeymod, KMOD_ALT, KMOD_ALT)},
+    MousewheelOption("gamespeed_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
    {MousewheelOptionID::kGameSpeedX,
-    MousewheelOption("gamespeed_x", MousewheelOptionType::kBool, true, true)},
+    MousewheelOption("gamespeed_x", MousewheelOptionType::kBool, true)},
    {MousewheelOptionID::kGameSpeedY,
-    MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, true, true)},
+    MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, true)},
 
    {MousewheelOptionID::kEditorToolsizeMod,
     MousewheelOption(
-       "editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT, KMOD_ALT)},
+       "editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
    {MousewheelOptionID::kEditorToolsizeX,
-    MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, true, true)},
+    MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, true)},
    {MousewheelOptionID::kEditorToolsizeY,
-    MousewheelOption("editor_toolsize_y", MousewheelOptionType::kBool, true, true)},
+    MousewheelOption("editor_toolsize_y", MousewheelOptionType::kBool, true)},
 
-   {MousewheelOptionID::kAlwaysOn, MousewheelOption("", MousewheelOptionType::kBool, true, true)},
-   {MousewheelOptionID::kDisabled, MousewheelOption("", MousewheelOptionType::kBool, false, false)},
-   {MousewheelOptionID::kNoMod,
-    MousewheelOption("", MousewheelOptionType::kKeymod, KMOD_NONE, KMOD_NONE)},
-
-   {MousewheelOptionID::kUse2Ddefaults,
-    MousewheelOption("use_2d_defaults", MousewheelOptionType::kBool, false, true)},
+   {MousewheelOptionID::kAlwaysOn, MousewheelOption("", MousewheelOptionType::kBool, true)},
+   {MousewheelOptionID::kDisabled, MousewheelOption("", MousewheelOptionType::kBool, false)},
+   {MousewheelOptionID::kNoMod, MousewheelOption("", MousewheelOptionType::kKeymod, KMOD_NONE)},
 
 };
 
 // Default signs
-#define SIGN_INCREASE_RIGHT -1
-#define SIGN_INCREASE_UP 1
-#define SIGN_NEXT_RIGHT -1
-#define SIGN_NEXT_DOWN -1
-#define SIGN_SCROLL -1
+constexpr int32_t kSignIncreaseRight = -1;
+constexpr int32_t kSignIncreaseUp = 1;
+constexpr int32_t kSignNextRight = -1;
+constexpr int32_t kSignNextDown = -1;
+constexpr int32_t kSignScroll = -1;
 
-#define DEFAULT_SIGN_VALUE SIGN_INCREASE_RIGHT, SIGN_INCREASE_UP
-#define DEFAULT_SIGN_MOVE SIGN_NEXT_RIGHT, SIGN_NEXT_DOWN
-#define DEFAULT_SIGN_SCROLL SIGN_SCROLL, SIGN_SCROLL
+constexpr Sign2D kDefaultSignValue(kSignIncreaseRight, kSignIncreaseUp);
+constexpr Sign2D kDefaultSignMove(kSignNextRight, kSignNextDown);
+constexpr Sign2D kDefaultSignScroll(kSignScroll, kSignScroll);
 
 static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_handlers = {
    {MousewheelHandlerConfigID::kChangeValue,
@@ -215,53 +198,51 @@ static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_
                              MousewheelOptionID::kUIChangeValueInvertX,
                              MousewheelOptionID::kAlwaysOn,
                              MousewheelOptionID::kUIChangeValueInvertY,
-                             DEFAULT_SIGN_VALUE)},
+                             kDefaultSignValue)},
    {MousewheelHandlerConfigID::kTabBar,  //
     MousewheelHandlerOptions(MousewheelOptionID::kNoMod,
                              MousewheelOptionID::kAlwaysOn,
                              MousewheelOptionID::kUITabInvertX,
                              MousewheelOptionID::kAlwaysOn,
                              MousewheelOptionID::kUITabInvertY,
-                             DEFAULT_SIGN_MOVE)},
+                             kDefaultSignMove)},
    {MousewheelHandlerConfigID::kZoom,  //
     MousewheelHandlerOptions(MousewheelOptionID::kMapZoomMod,
                              MousewheelOptionID::kMapZoomX,
                              MousewheelOptionID::kMapZoomInvertX,
                              MousewheelOptionID::kMapZoomY,
                              MousewheelOptionID::kMapZoomInvertY,
-                             DEFAULT_SIGN_VALUE)},
+                             kDefaultSignValue)},
    {MousewheelHandlerConfigID::kMapScroll,  //
     MousewheelHandlerOptions(MousewheelOptionID::kMapScrollMod,
                              MousewheelOptionID::kMapScroll,
                              MousewheelOptionID::kDisabled,  // always use system scroll direction
                              MousewheelOptionID::kMapScroll,
                              MousewheelOptionID::kDisabled,  // always use system scroll direction
-                             DEFAULT_SIGN_SCROLL)},
+                             kDefaultSignScroll)},
    {MousewheelHandlerConfigID::kGameSpeed,  //
     MousewheelHandlerOptions(MousewheelOptionID::kGameSpeedMod,
                              MousewheelOptionID::kGameSpeedX,
                              MousewheelOptionID::kUIChangeValueInvertX,
                              MousewheelOptionID::kGameSpeedY,
                              MousewheelOptionID::kUIChangeValueInvertY,
-                             DEFAULT_SIGN_VALUE)},
+                             kDefaultSignValue)},
    {MousewheelHandlerConfigID::kEditorToolsize,
     MousewheelHandlerOptions(MousewheelOptionID::kEditorToolsizeMod,
                              MousewheelOptionID::kEditorToolsizeX,
                              MousewheelOptionID::kUIChangeValueInvertX,
                              MousewheelOptionID::kEditorToolsizeY,
                              MousewheelOptionID::kUIChangeValueInvertY,
-                             DEFAULT_SIGN_VALUE)}
+                             kDefaultSignValue)},
+   {MousewheelHandlerConfigID::kScrollbarVertical,  //
+    MousewheelHandlerOptions(MousewheelOptionID::kNoMod,
+                             MousewheelOptionID::kDisabled,
+                             MousewheelOptionID::kDisabled,  // always use system scroll direction
+                             MousewheelOptionID::kAlwaysOn,
+                             MousewheelOptionID::kDisabled,  // always use system scroll direction
+                             kDefaultSignScroll)}
 
 };
-
-#undef DEFAULT_SIGN_VALUE
-#undef DEFAULT_SIGN_MOVE
-#undef DEFAULT_SIGN_SCROLL
-#undef SIGN_INCREASE_RIGHT
-#undef SIGN_INCREASE_UP
-#undef SIGN_NEXT_RIGHT
-#undef SIGN_NEXT_DOWN
-#undef SIGN_SCROLL
 
 void set_mousewheel_option_bool(const MousewheelOptionID opt_id, bool value) {
 	assert(mousewheel_options.at(opt_id).type_ == MousewheelOptionType::kBool);
@@ -271,10 +252,6 @@ bool get_mousewheel_option_bool(const MousewheelOptionID opt_id) {
 	assert(mousewheel_options.at(opt_id).type_ == MousewheelOptionType::kBool);
 	return mousewheel_options.at(opt_id).get_bool();
 }
-bool get_mousewheel_option_bool(const MousewheelOptionID opt_id, bool use_2d_default) {
-	assert(mousewheel_options.at(opt_id).type_ == MousewheelOptionType::kBool);
-	return mousewheel_options.at(opt_id).get_bool(use_2d_default);
-}
 
 void set_mousewheel_keymod(const MousewheelOptionID opt_id, uint16_t keymod) {
 	assert(mousewheel_options.at(opt_id).type_ == MousewheelOptionType::kKeymod);
@@ -283,10 +260,6 @@ void set_mousewheel_keymod(const MousewheelOptionID opt_id, uint16_t keymod) {
 uint16_t get_mousewheel_keymod(const MousewheelOptionID opt_id) {
 	assert(mousewheel_options.at(opt_id).type_ == MousewheelOptionType::kKeymod);
 	return mousewheel_options.at(opt_id).get_keymod();
-}
-uint16_t get_mousewheel_keymod(const MousewheelOptionID opt_id, bool use_2d_default) {
-	assert(mousewheel_options.at(opt_id).type_ == MousewheelOptionType::kKeymod);
-	return mousewheel_options.at(opt_id).get_keymod(use_2d_default);
 }
 
 int32_t get_mousewheel_change(MousewheelHandlerConfigID handler_id,
@@ -304,8 +277,6 @@ Vector2i get_mousewheel_change_2D(MousewheelHandlerConfigID handler_id,
 }
 
 void update_mousewheel_settings() {
-	mousewheel_use_2d_defaults_cache =
-	   get_mousewheel_option_bool(MousewheelOptionID::kUse2Ddefaults);
 	for (MousewheelHandlerConfigID i = MousewheelHandlerConfigID::k__Begin;
 	     i <= MousewheelHandlerConfigID::k__End;
 	     i = static_cast<MousewheelHandlerConfigID>(static_cast<uint16_t>(i) + 1)) {
@@ -313,11 +284,10 @@ void update_mousewheel_settings() {
 	}
 }
 
-void reset_mousewheel_settings(const bool use_2d_defaults) {
-	set_mousewheel_option_bool(MousewheelOptionID::kUse2Ddefaults, use_2d_defaults);
+void reset_mousewheel_settings() {
 	for (MousewheelOptionID i = MousewheelOptionID::k__Begin; i <= MousewheelOptionID::k__End;
 	     i = static_cast<MousewheelOptionID>(static_cast<uint16_t>(i) + 1)) {
-		mousewheel_options.at(i).reset(use_2d_defaults);
+		mousewheel_options.at(i).reset();
 	}
 	update_mousewheel_settings();
 }

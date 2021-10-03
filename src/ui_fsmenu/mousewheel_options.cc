@@ -42,8 +42,7 @@ constexpr int
 	kButtonSize = 24,
 	kDividerSpace = 8,
 	kDirDdMaxW = 200,
-	kDef2dMaxW = 400,
-	kResetBtnMaxW = 250;
+	kResetBtnMaxW = 300;
 // clang-format on
 
 // Scroll Directions
@@ -61,19 +60,17 @@ static const std::string sd_names[] = {gettext_noop("Disabled"), gettext_noop("V
                                        gettext_noop("Any scroll")};
 
 #define READ_MOD(option)                                                                           \
-	normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod, use_2d_defaults_))
+	normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod))
 
 #define DIR_COMBINE(x, y)                                                                          \
 	((x ? SD::kHorizontal : SD::kDisabled) | (y ? SD::kVertical : SD::kDisabled))
 #define READ_DIR(option)                                                                           \
-	DIR_COMBINE(get_mousewheel_option_bool(MousewheelOptionID::option##X, use_2d_defaults_),        \
-	            get_mousewheel_option_bool(MousewheelOptionID::option##Y, use_2d_defaults_))
+	DIR_COMBINE(get_mousewheel_option_bool(MousewheelOptionID::option##X),                         \
+	            get_mousewheel_option_bool(MousewheelOptionID::option##Y))
 
-void MousewheelConfigSettings::def2d_update() {
+void MousewheelConfigSettings::read() {
 	enable_map_scroll_ =
-	   (get_mousewheel_option_bool(MousewheelOptionID::kMapScroll, use_2d_defaults_) ?
-          SD::kAny :
-          SD::kDisabled);
+	   (get_mousewheel_option_bool(MousewheelOptionID::kMapScroll) ? SD::kAny : SD::kDisabled);
 	zoom_mod_ = READ_MOD(kMapZoom);
 	map_scroll_mod_ = READ_MOD(kMapScroll);
 	speed_mod_ = READ_MOD(kGameSpeed);
@@ -86,25 +83,18 @@ void MousewheelConfigSettings::def2d_update() {
 	zoom_invert_ = READ_DIR(kMapZoomInvert);
 }
 
-void MousewheelConfigSettings::read() {
-	use_2d_defaults_ = get_mousewheel_option_bool(MousewheelOptionID::kUse2Ddefaults);
-	def2d_update();
-}
-
 #undef READ_MOD
 #undef READ_DIR
 #undef DIR_COMBINE
 
-#define DIR_X(dir) static_cast<bool>(dir & SD::kHorizontal)
-#define DIR_Y(dir) static_cast<bool>(dir & SD::kVertical)
+#define DIR_X(dir) ((dir & SD::kHorizontal) != 0)
+#define DIR_Y(dir) ((dir & SD::kVertical) != 0)
 #define APPLY_DIR(option, dir)                                                                     \
 	set_mousewheel_option_bool(MousewheelOptionID::option##X, DIR_X(dir));                          \
 	set_mousewheel_option_bool(MousewheelOptionID::option##Y, DIR_Y(dir));
 
 void MousewheelConfigSettings::apply() {
-	set_mousewheel_option_bool(MousewheelOptionID::kUse2Ddefaults, use_2d_defaults_);
-	set_mousewheel_option_bool(
-	   MousewheelOptionID::kMapScroll, static_cast<bool>(enable_map_scroll_));
+	set_mousewheel_option_bool(MousewheelOptionID::kMapScroll, enable_map_scroll_ != 0);
 	set_mousewheel_keymod(MousewheelOptionID::kMapZoomMod, zoom_mod_);
 	set_mousewheel_keymod(MousewheelOptionID::kMapScrollMod, map_scroll_mod_);
 	set_mousewheel_keymod(MousewheelOptionID::kGameSpeedMod, speed_mod_);
@@ -304,19 +294,8 @@ void InvertDirBox::set_width(int w) {
 	set_desired_size(w, kButtonSize);
 }
 
-DefaultsBox::DefaultsBox(MousewheelOptionsDialog* parent, bool* use_2d_defaults)
+DefaultsBox::DefaultsBox(MousewheelOptionsDialog* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
-     use_2d_defaults_dd_(this,
-                         std::string(),
-                         0,
-                         0,
-                         kDef2dMaxW,
-                         2,
-                         kButtonSize,
-                         _("Pointing Device"),
-                         UI::DropdownType::kTextual,
-                         UI::PanelStyle::kFsMenu,
-                         UI::ButtonStyle::kFsMenuMenu),
      reset_button_(this,
                    std::string(),
                    0,
@@ -325,38 +304,18 @@ DefaultsBox::DefaultsBox(MousewheelOptionsDialog* parent, bool* use_2d_defaults)
                    kButtonSize,
                    UI::ButtonStyle::kFsMenuSecondary,
                    _("Reset all")) {
-	use_2d_defaults_dd_.add(_("Desktop mouse"), false);
-	use_2d_defaults_dd_.add(_("Touchpad"), true);
-	use_2d_defaults_dd_.select(*use_2d_defaults);
-
-	add(&use_2d_defaults_dd_);
 	add_inf_space();
-	add(&reset_button_, Resizing::kAlign, UI::Align::kRight);
+	add(&reset_button_, Resizing::kAlign, UI::Align::kCenter);
 
-	use_2d_defaults_dd_.selected.connect([this, use_2d_defaults, parent]() {
-		*use_2d_defaults = use_2d_defaults_dd_.get_selected();
+	reset_button_.sigclicked.connect([parent]() {
+		reset_mousewheel_settings();
 		parent->update_settings();
 	});
-
-	reset_button_.sigclicked.connect([use_2d_defaults, parent]() {
-		reset_mousewheel_settings(*use_2d_defaults);
-		parent->reread_settings();
-	});
-}
-void DefaultsBox::set_width(int w) {
-	if (w > 10 * kPadding) {
-		use_2d_defaults_dd_.set_desired_size(
-		   std::min(kDef2dMaxW, 3 * w / 5 - 2 * kPadding), kButtonSize);
-		reset_button_.set_desired_size(
-		   std::min(kResetBtnMaxW, 2 * w / 5 - 2 * kPadding), kButtonSize);
-	}
-	set_desired_size(w, kButtonSize);
 }
 
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      settings_(),
-     defaults_box_(this, &(settings_.use_2d_defaults_)),
      zoom_box_(this,
                _("Zoom Map"),
                {&mapscroll_box_, &speed_box_, &toolsize_box_},
@@ -383,9 +342,8 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
      tab_invert_box_(
         this, _("Invert scroll direction for tab switching:"), &(settings_.tab_invert_)),
      value_invert_box_(
-        this, _("Invert scroll direction for increase/decrease:"), &(settings_.value_invert_)) {
-	add(&defaults_box_);
-	add_space(kDividerSpace);
+        this, _("Invert scroll direction for increase/decrease:"), &(settings_.value_invert_)),
+     defaults_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
 	add(&speed_box_);
@@ -394,9 +352,11 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&zoom_invert_box_);
 	add(&tab_invert_box_);
 	add(&value_invert_box_);
+	add_space(kDividerSpace);
+	add(&defaults_box_);
 }
 void MousewheelOptionsDialog::update_settings() {
-	settings_.def2d_update();
+	settings_.read();
 	zoom_box_.update_sel();
 	mapscroll_box_.update_sel();
 	speed_box_.update_sel();
@@ -405,16 +365,11 @@ void MousewheelOptionsDialog::update_settings() {
 	tab_invert_box_.update_sel();
 	value_invert_box_.update_sel();
 }
-void MousewheelOptionsDialog::reread_settings() {
-	settings_.read();
-	update_settings();
-}
 void MousewheelOptionsDialog::apply_settings() {
 	settings_.apply();
 }
 void MousewheelOptionsDialog::set_width(int w) {
 	if ((w > 0) && (w != get_w())) {
-		defaults_box_.set_width(w);
 		zoom_box_.set_width(w);
 		mapscroll_box_.set_width(w);
 		speed_box_.set_width(w);
