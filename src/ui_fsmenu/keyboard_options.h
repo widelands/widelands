@@ -29,7 +29,6 @@
 #include "ui_basic/window.h"
 #include "ui_fsmenu/mousewheel_options.h"
 
-
 namespace FsMenu {
 
 class KeyboardOptions : public UI::Window {

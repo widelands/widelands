@@ -306,9 +306,7 @@ ApplyBox::ApplyBox(MousewheelOptionsDialog* parent)
 	add(&apply_button_, Resizing::kAlign, UI::Align::kCenter);
 	add_inf_space();
 
-	apply_button_.sigclicked.connect([parent]() {
-		parent->apply_settings();
-	});
+	apply_button_.sigclicked.connect([parent]() { parent->apply_settings(); });
 }
 
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
@@ -344,8 +342,8 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
      apply_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
-	mapscroll_box_.set_tooltip(
-	   _("Recommended for touchpad. Don't forget to set a modifier for ‘Zoom Map’ before turning on."));
+	mapscroll_box_.set_tooltip(_("Recommended for touchpad. Don't forget to set a modifier for "
+	                             "‘Zoom Map’ before turning on."));
 	add(&speed_box_);
 	add(&toolsize_box_);
 	add_space(kDividerSpace);
