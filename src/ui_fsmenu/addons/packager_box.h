@@ -25,6 +25,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
@@ -85,9 +86,11 @@ private:
 	std::vector<MainMenu::MapEntry> maps_list_;
 	AddOns::AddOnCategory last_category_;
 
-	UI::Box box_maps_list_, box_buttonsbox_;
+	UI::Box box_maps_list_, box_buttonsbox_, box_dirstruct_displayname_;
 	UI::Button map_add_, map_add_dir_, map_delete_;
 	UI::Listselect<std::string> dirstruct_, my_maps_;
+	UI::EditBox dirstruct_displayname_;
+	UI::MultilineTextarea displayname_duplicate_;
 	AddOns::MapsAddon* selected_;  // Not owned
 };
 

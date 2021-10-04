@@ -43,6 +43,15 @@ static const std::string kValidAddOnFilenameChars = "abcdefghijklmnopqrstuvwxyz"
 constexpr uint16_t kAddOnFileNameLengthLimit = 80;
 static const std::string kInvalidAddOnFilenameSequences[] = {".."};
 
+namespace {
+inline bool selection_is_map(const std::vector<std::string>& select) {
+	return !select.empty() &&
+		select.back().size() >= kWidelandsMapExtension.size() &&
+		select.back().compare(select.back().size() - kWidelandsMapExtension.size(),
+			kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0;
+}
+}
+
 std::string check_addon_filename_validity(const std::string& name) {
 	if (name.empty() || !FileSystem::is_legal_filename(name)) {
 		return _("Invalid filename");
@@ -127,6 +136,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
      last_category_(AddOns::AddOnCategory::kNone),
      box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      map_add_(&box_buttonsbox_,
               "map_add",
               0,
@@ -155,7 +165,9 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
                  _("–"),
                  _("Remove selected map or directory")),
      dirstruct_(&box_dirstruct_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
-     my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu) {
+     my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
+     dirstruct_displayname_(&box_dirstruct_displayname_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     displayname_duplicate_(&box_dirstruct_displayname_, 0, 0, 100, 100 /* kNoScrolling does not work in this situation! */, UI::PanelStyle::kFsMenu) {
 	box_buttonsbox_.add_inf_space();
 	box_buttonsbox_.add(&map_add_);
 	box_buttonsbox_.add_space(kSpacing);
@@ -164,13 +176,27 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 	box_buttonsbox_.add(&map_add_dir_);
 	box_buttonsbox_.add_inf_space();
 
+	displayname_duplicate_.set_style(UI::FontStyle::kItalic);
+	displayname_duplicate_.set_text(
+		_("The selected internal directory name is used multiple times. All directories with the same internal name will also share the same display name."));
+
+	box_dirstruct_displayname_.add(new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu,
+	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Display Name"),
+	                                    UI::Align::kCenter),
+	                   UI::Box::Resizing::kFullSize);
+	box_dirstruct_displayname_.add_space(kSpacing);
+	box_dirstruct_displayname_.add(&dirstruct_displayname_, UI::Box::Resizing::kFullSize);
+	box_dirstruct_displayname_.add_space(kSpacing);
+	box_dirstruct_displayname_.add(&displayname_duplicate_, UI::Box::Resizing::kFullSize);
+
 	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu,
 	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
 	                                    UI::Align::kCenter),
 	                   UI::Box::Resizing::kFullSize);
 	box_dirstruct_.add_space(kSpacing);
 	box_dirstruct_.add(&dirstruct_, UI::Box::Resizing::kExpandBoth);
-
+	box_dirstruct_.add_space(kSpacing);
+	box_dirstruct_.add(&box_dirstruct_displayname_, UI::Box::Resizing::kFullSize);
 	box_maps_list_.add(
 	   new UI::Textarea(&box_maps_list_, UI::PanelStyle::kFsMenu,
 	                    UI::FontStyle::kFsGameSetupHeadings, _("My Maps"), UI::Align::kCenter),
@@ -190,10 +216,23 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 	map_add_.set_enabled(false);
 	map_delete_.set_enabled(false);
 	dirstruct_.selected.connect([this](uint32_t i) {
-		map_add_.set_enabled(i > 0);
+		map_add_.set_enabled(i > 0 && my_maps_.has_selection());
 		map_delete_.set_enabled(i > 0);
+		if (i > 0 && !selection_is_map(dirstruct_to_tree_map_[i])) {
+			box_dirstruct_displayname_.set_visible(true);
+			const std::string& internal_dirname = dirstruct_to_tree_map_[i].back();
+			const auto map = selected_->count_all_dirnames();
+			const auto it = map.find(internal_dirname);
+			displayname_duplicate_.set_visible(it != map.end() && it->second > 1);
+			dirstruct_displayname_.set_text(selected_->get_dirname(internal_dirname));
+		} else {
+			box_dirstruct_displayname_.set_visible(false);
+		}
 	});
 
+	dirstruct_displayname_.changed.connect([this]() {
+		selected_->set_dirname(dirstruct_to_tree_map_[dirstruct_.selection_index()].back(), dirstruct_displayname_.text());
+	});
 	map_add_.sigclicked.connect(
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
 	map_add_dir_.sigclicked.connect(
@@ -307,9 +346,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 	std::vector<std::string> select = dirstruct_to_tree_map_[dirstruct_.selection_index()];
 
 	std::string selected_map;
-	if (!select.empty() && select.back().size() >= kWidelandsMapExtension.size() &&
-	    select.back().compare(select.back().size() - kWidelandsMapExtension.size(),
-	                          kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0) {
+	if (selection_is_map(select)) {
 		// Last entry is a map – pop it, we care only about directories here
 		selected_map = select.back();
 		select.pop_back();
