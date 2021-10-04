@@ -34,9 +34,8 @@
 
 namespace FsMenu {
 
-constexpr int16_t  //
-   kPadding = 4,   //
-   kButtonHeight = 28;
+constexpr int16_t kPadding = 4;
+constexpr int16_t kButtonHeight = 28;
 
 struct ShortcutChooser : public UI::Window {
 	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c, Widelands::Game* game_for_fastplace)

@@ -37,12 +37,11 @@
 
 namespace FsMenu {
 
-constexpr int          //
-   kButtonSize = 24,   //
-   kDividerSpace = 8,  //
-   kMwDdMaxW = 200,    //
-   kApplyBtnW = 400,   //
-   kMwBoxMaxW = 700;
+constexpr int kButtonSize = 24;
+constexpr int kDividerSpace = 8;
+constexpr int kModDirDropdownMaxWidth = 200;
+constexpr int kApplyButtonWidth = 400;
+constexpr int kMousewheelBoxMaxWidth = 700;
 
 // Scroll Directions
 enum SD : uint8_t {
@@ -116,7 +115,7 @@ KeymodDropdown::KeymodDropdown(UI::Panel* parent)
                             std::string(),
                             0,
                             0,
-                            kMwDdMaxW,
+                            kModDirDropdownMaxWidth,
                             20,
                             kButtonSize,
                             std::string(),
@@ -152,7 +151,7 @@ DirDropdown::DirDropdown(UI::Panel* parent, bool two_d)
                            std::string(),
                            0,
                            0,
-                           kMwDdMaxW,
+                           kModDirDropdownMaxWidth,
                            4,
                            kButtonSize,
                            std::string(),
@@ -174,7 +173,7 @@ InvertDirDropdown::InvertDirDropdown(UI::Panel* parent)
                            std::string(),
                            0,
                            0,
-                           kMwDdMaxW,
+                           kModDirDropdownMaxWidth,
                            4,
                            kButtonSize,
                            std::string(),
@@ -264,7 +263,7 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 }
 void KeymodAndDirBox::set_width(int w) {
 	if (w > 3 * kPadding) {
-		const int butt_w = std::min(kMwDdMaxW, w / 3 - kPadding);
+		const int butt_w = std::min(kModDirDropdownMaxWidth, w / 3 - kPadding);
 		keymod_dropdown_.set_desired_size(butt_w, kButtonSize);
 		dir_dropdown_.set_desired_size(butt_w, kButtonSize);
 	}
@@ -286,7 +285,7 @@ void InvertDirBox::update_sel() {
 }
 void InvertDirBox::set_width(int w) {
 	if (w > 3 * kPadding) {
-		const int butt_w = std::min(kMwDdMaxW, w / 3 - kPadding);
+		const int butt_w = std::min(kModDirDropdownMaxWidth, w / 3 - kPadding);
 		dir_dropdown_.set_desired_size(butt_w, kButtonSize);
 	}
 	set_desired_size(w, kButtonSize);
@@ -298,7 +297,7 @@ ApplyBox::ApplyBox(MousewheelOptionsDialog* parent)
                    std::string(),
                    0,
                    0,
-                   kApplyBtnW,
+                   kApplyButtonWidth,
                    kButtonSize,
                    UI::ButtonStyle::kFsMenuSecondary,
                    _("Apply Mouse Scroll Settings")) {
@@ -370,7 +369,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 	if (w <= 0 || h <= 0) {
 		return;
 	}
-	const int w_real = std::min(w, kMwBoxMaxW);
+	const int w_real = std::min(w, kMousewheelBoxMaxWidth);
 	set_pos(Vector2i((w - w_real) / 2, get_y()));
 	if (w_real != get_w()) {
 		UI::Panel::set_size(w_real, h);
