@@ -369,7 +369,7 @@ amalea_4 = {
       _([[So, we need more cloth to finally be able to build ships. But there is no space on the island for building a whole economy to produce cloth. Therefore, we need to build the necessary wares step by step.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, let’s think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So, let’s find a space for a big building and build a farm first.]])
+      _([[So, let’s think this over. To weave cloth we need some wool from a sheep farm. The sheep farm itself needs wheat and water to work. So, let’s find a space for a big building and build a farm first.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. When the sheep farm starts working, we could find or free up space for a medium building to build a weaving mill to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
