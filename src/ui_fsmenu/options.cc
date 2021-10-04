@@ -106,7 +106,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     mousewheel_options_(&tabs_),
 
      // Interface options
      language_dropdown_(&box_interface_vbox_,
@@ -198,7 +197,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          0,
                          0,
                          UI::ButtonStyle::kFsMenuSecondary,
-                         _("Edit keyboard shortcuts…")),
+                         _("Edit keyboard and mouse actions…")),
 
      // Sound options
      sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
@@ -324,7 +323,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_newgame", _("New Games"), &box_newgame_, "");
 	tabs_.add("options_ingame", _("In-Game"), &box_ingame_, "");
-	tabs_.add("options_scroll", _("Scrolling"), &mousewheel_options_, "");
 
 	// We want the last active tab when "Apply" was clicked.
 	if (os_.active_tab < tabs_.tabs().size()) {
@@ -543,9 +541,6 @@ void Options::layout() {
 		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
 		sb_rolling_autosave_.set_unit_width(250);
 		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
-
-		// Mousewheel options
-		mousewheel_options_.set_width(tab_panel_width);
 	}
 	UI::Window::layout();
 }
@@ -684,12 +679,10 @@ void Options::update_language_stats() {
 }
 
 void Options::clicked_ok() {
-	mousewheel_options_.apply_settings();
 	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
 void Options::clicked_apply() {
-	mousewheel_options_.apply_settings();
 	end_modal<MenuTarget>(MenuTarget::kApplyOptions);
 }
 

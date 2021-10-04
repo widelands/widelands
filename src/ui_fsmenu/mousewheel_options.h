@@ -125,11 +125,11 @@ private:
 	uint8_t* dir_;
 };
 
-struct DefaultsBox : public UI::Box {
-	DefaultsBox(MousewheelOptionsDialog* parent);
+struct ApplyBox : public UI::Box {
+	ApplyBox(MousewheelOptionsDialog* parent);
 
 private:
-	UI::Button reset_button_;
+	UI::Button apply_button_;
 };
 
 /*****
@@ -141,7 +141,7 @@ public:
 
 	void update_settings();
 	void apply_settings();
-	void set_width(int w);
+	void set_size(int w, int h) override;
 
 private:
 	MousewheelConfigSettings settings_;
@@ -154,7 +154,8 @@ private:
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
-	DefaultsBox defaults_box_;
+
+	ApplyBox apply_box_;
 };
 
 }  // namespace FsMenu
