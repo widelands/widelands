@@ -375,6 +375,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 	const int w_real = std::min(w, kMwBoxMaxW);
 	set_pos(Vector2i((w - w_real) / 2, get_y()));
 	if (w_real != get_w()) {
+		UI::Panel::set_size(w_real, h);
 		const int w_hbox = w_real - 3 * kPadding;
 		zoom_box_.set_width(w_hbox);
 		mapscroll_box_.set_width(w_hbox);
@@ -384,7 +385,6 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
 		apply_box_.set_size(w_hbox, kButtonSize);
-		UI::Panel::set_size(w_real, h);
 	}
 }
 }  // namespace FsMenu
