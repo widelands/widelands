@@ -408,20 +408,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		return false;
 	}
 
-	if (get_config_bool("numpad_diagonalscrolling", false)) {
-		// If this option is enabled and one of the numpad keys 1,3,7,9 was pressed,
-		// ignore any shortcuts assigned to PageUp/PageDown/Home/End and move the map instead
-		switch (code.sym) {
-		case SDLK_KP_1:
-		case SDLK_KP_3:
-		case SDLK_KP_7:
-		case SDLK_KP_9:
-			return false;
-		default:
-			break;
-		}
-	}
-
 	if (matches_shortcut(KeyboardShortcut::kInGameSpeedReset, code)) {
 		reset_gamespeed();
 		return true;

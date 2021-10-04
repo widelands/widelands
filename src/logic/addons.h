@@ -114,13 +114,14 @@ struct AddOnInfo {
 	std::map<std::string /* name */, std::string /* description */> screenshots;
 
 	bool verified = false;             ///< Only valid for Remote add-ons.
+	uint8_t quality = 0;               ///< Quality rating.
 	uint32_t total_file_size = 0;      ///< Total size of all files, in bytes.
 	std::string upload_username;       ///< Who uploaded (may be different from author).
 	std::time_t upload_timestamp = 0;  ///< Date and time when this version was uploaded.
 
 	uint32_t download_count = 0;       ///< Total times downloaded.
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
-	std::vector<AddOnComment> user_comments;
+	std::map<size_t, AddOnComment> user_comments;
 
 	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
@@ -151,6 +152,12 @@ AddOnCategory get_category(const std::string&);
 AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
+
+/**
+ * If an add-on of type `base` requires an add-on of type `dependency`, this function
+ * tells whether the dependency must necessarily be listed after the requiring add-on.
+ */
+bool order_matters(AddOnCategory base, AddOnCategory dependency);
 
 std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 

@@ -146,7 +146,7 @@ Add-on upgrades may break compatibility between versions; therefore, savegames a
 Verification
 ------------
 
-Add-ons can potentially contain harmful or offensive content. The Widelands development team moderates add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The moderators also decide which add-ons may be marked as ``sync_safe``. The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-ons manager’s Filter tab.
+Add-ons can potentially contain harmful or offensive content. The Widelands development team moderates add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The moderators also decide which add-ons may be marked as ``sync_safe`` and assign every add-on a code quality rating. The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet and what quality rating it received. By default, only verified add-ons with Good or better quality are displayed; users can change this behaviour in the add-ons manager’s filter settings.
 
 
 Internationalisation
@@ -177,7 +177,7 @@ The server keeps a repository of all add-on ``*.mo`` files which are automatical
 Uploading
 ---------
 
-The recommended way to upload an add-on is to use the in-game add-ons manager. Log in with your Widelands website user profile and online gaming password (i.e., the same credentials as for the metaserver), and use the Upload section in the add-ons manager’s third tab. If you previously submitted an add-on with the same name and lower version number, the new upload will be made available as an upgrade. You can upload screenshots for your add-ons in the same way.
+The only supported way to upload an add-on is to use the in-game add-ons manager. Log in with your Widelands website user profile and online gaming password (i.e., the same credentials as for the metaserver), and use the Upload section in the add-ons manager’s third tab. If you previously submitted an add-on with the same name and lower version number, the new upload will be made available as an upgrade. You can upload screenshots for your add-ons in the same way.
 
 When providing an upgrade, always ensure that your modifications are based on the version that was downloaded from the server rather than your original sources, as the maintainers may make minor maintenance modifications to the versions stored there.
 

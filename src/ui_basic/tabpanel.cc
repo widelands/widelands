@@ -156,9 +156,17 @@ std::vector<Recti> TabPanel::focus_overlay_rects() {
 }
 
 bool TabPanel::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	if (y != 0) {
-		activate(std::max<int>(0, std::min<int>(active() - y, tabs_.size() - 1)));
-		return true;
+	Vector2i mousepos = get_mouse_position();
+	size_t id = find_tab(mousepos.x, mousepos.y);
+	if ((id != kNotFound) && !SDL_GetModState()) {
+		if (y != 0) {
+			activate(std::max<int>(0, std::min<int>(active() - y, tabs_.size() - 1)));
+			return true;
+		}
+		if (x != 0) {
+			activate(std::max<int>(0, std::min<int>(active() - x, tabs_.size() - 1)));
+			return true;
+		}
 	}
 	return Panel::handle_mousewheel(which, x, y);
 }
@@ -169,16 +177,12 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 		uint32_t selected_idx = active();
 		const uint32_t max = tabs_.size() - 1;
 
-		if ((code.mod & KMOD_CTRL) &&
-		    ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
-		     (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM)))) {
+		if ((code.mod & KMOD_CTRL) && (code.sym >= SDLK_1 && code.sym <= SDLK_9)) {
 			// Keys CTRL + 1-9 directly address the 1st through 9th item in tabpanels with less than 10
 			// tabs
 			if (max < 9) {
 				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
 					selected_idx = code.sym - SDLK_1;
-				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
-					selected_idx = code.sym - SDLK_KP_1;
 				} else {
 					// don't handle the '9' when there are less than 9 tabs
 					handle = false;
@@ -192,16 +196,16 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 			case SDLK_TAB:
 				if (code.mod & KMOD_CTRL) {
 					if (code.mod & KMOD_SHIFT) {
-						if (selected_idx > max) {
-							selected_idx = max;
-						} else if (selected_idx > 0) {
+						if (selected_idx > 0) {
 							--selected_idx;
+						} else {
+							selected_idx = 0;
 						}
 					} else {
 						if (selected_idx < max) {
 							++selected_idx;
-						} else if (selected_idx > max) {
-							selected_idx = 0;
+						} else {
+							selected_idx = max;
 						}
 					}
 				} else {
@@ -209,21 +213,9 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 				}
 				break;
 
-			case SDLK_KP_7:
-				if (code.mod & KMOD_NUM) {
-					handle = false;
-					break;
-				}  // else
-				FALLS_THROUGH;
 			case SDLK_HOME:
 				selected_idx = 0;
 				break;
-			case SDLK_KP_1:
-				if (code.mod & KMOD_NUM) {
-					handle = false;
-					break;
-				}  // else
-				FALLS_THROUGH;
 			case SDLK_END:
 				selected_idx = max;
 				break;

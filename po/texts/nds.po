@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-28 07:16+0000\n"
+"POT-Creation-Date: 2021-08-28 02:36+0000\n"
+"PO-Revision-Date: 2021-08-28 07:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -518,7 +518,7 @@ msgstr "Amazonen leven Bomen. Bau mennig Waldwahrderske-Katen, um genoog daarvun
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
-"Rare woods are the backbone of an amazon economy. Build rare tree "
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
 msgstr "Edelholten sünd de wichtigsten Waren in de amazoonsk Weertskupp. Bau Edelholt-Plantereen, um deese besünneren Bomen to planten."
 
@@ -532,6 +532,48 @@ msgstr "Edenholten worden vun erfahrenen Boomslagersken kappt, wat in Boomslager
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
 msgstr "Spiesen worden mit Holtköhl-Füür dröögt. Maak seker, dat de Versörgung good genoog is."
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "Boomreep-Slagersken arnten Boomreep vun Bomen in de Naberskupp. De Bomen dreihen daar heel keen Nack na."
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "Water is Leven för de Amazonen. Water-Pottjersken brengen eenen wichtigen Deenst för hör Volk bi."
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "Um na Gold to schören, bruukt man eene stadige Versörgung mit Water, wat am besten vun so dicht bi as mögelk haalt word."
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
+"only released near trees uninhabited by sentries."
+msgstr "Fauna-Wahrdersken passen up, dat 't alltieden Deerten tum Jagen un Fisken gifft. Deerten worden blot bi Bomen freeilaten, waar keene Postjes stationeert sünd."
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "De Bestand an Edelholten word vun Edelholt-Plantereen överwacht. De Meister-Waldwahrdersken planten blot dat, wat de Weertskupp bruukt."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
+"lashing canoes together to form ships."
+msgstr "Taue bruukt man vun Nood, um stevige Husen to bauen, faste Kluften to naihen un Boten to Schippen tosamentobinnen."
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "Meister-Waldwahrderske lehren för Kunst, indeem se as Waldwahrdersken warken, ehr se in Gaardnereen of Edelholt-Plantereen warken könen."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""

@@ -704,12 +704,58 @@ SDL_Keysym get_shortcut(const KeyboardShortcut id) {
 }
 
 static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
-   {SDLK_KP_9, SDLK_PAGEUP},      {SDLK_KP_8, SDLK_UP},         {SDLK_KP_7, SDLK_HOME},
-   {SDLK_KP_6, SDLK_RIGHT},       {SDLK_KP_4, SDLK_LEFT},       {SDLK_KP_3, SDLK_PAGEDOWN},
-   {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},        {SDLK_KP_0, SDLK_INSERT},
-   {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN}, {SDLK_KP_MINUS, SDLK_MINUS},
-   {SDLK_KP_PLUS, SDLK_PLUS},
-};
+   {SDLK_KP_9, SDLK_PAGEUP},         {SDLK_KP_8, SDLK_UP},          {SDLK_KP_7, SDLK_HOME},
+   {SDLK_KP_6, SDLK_RIGHT},          {SDLK_KP_5, SDLK_UNKNOWN},     {SDLK_KP_4, SDLK_LEFT},
+   {SDLK_KP_3, SDLK_PAGEDOWN},       {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},
+   {SDLK_KP_0, SDLK_INSERT},         {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN},
+   {SDLK_KP_MINUS, SDLK_MINUS},      {SDLK_KP_PLUS, SDLK_PLUS},     {SDLK_KP_DIVIDE, SDLK_SLASH},
+   {SDLK_KP_MULTIPLY, SDLK_ASTERISK}};
+
+void normalize_numpad(SDL_Keysym& keysym) {
+	auto search = kNumpadIdentifications.find(keysym.sym);
+	if (search == kNumpadIdentifications.end()) {
+		return;
+	}
+	if (keysym.mod & KMOD_NUM) {
+		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
+			keysym.sym = keysym.sym - SDLK_KP_1 + SDLK_1;
+			return;
+		} else if (keysym.sym == SDLK_KP_0) {
+			keysym.sym = SDLK_0;
+			return;
+		} else if (keysym.sym == SDLK_KP_PERIOD) {
+			keysym.sym = SDLK_PERIOD;
+			return;
+		}
+	}  // Not else, because '/', '*', '-' and '+' are not affected by NumLock state
+
+	if (get_config_bool("numpad_diagonalscrolling", false)) {
+		// If this option is enabled, reserve numpad movement keys for map scrolling
+		// Numpad 5 becomes go to HQ
+		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
+			return;
+		}
+	}  // Not else, because there are 7 more keys which are not affected
+
+	keysym.sym = search->second;
+}
+
+bool matches_keymod(const uint16_t mod1, const uint16_t mod2) {
+	const bool ctrl1 = mod1 & KMOD_CTRL;
+	const bool shift1 = mod1 & KMOD_SHIFT;
+	const bool alt1 = mod1 & KMOD_ALT;
+	const bool gui1 = mod1 & KMOD_GUI;
+	const bool ctrl2 = mod2 & KMOD_CTRL;
+	const bool shift2 = mod2 & KMOD_SHIFT;
+	const bool alt2 = mod2 & KMOD_ALT;
+	const bool gui2 = mod2 & KMOD_GUI;
+
+	if (ctrl1 != ctrl2 || shift1 != shift2 || alt1 != alt2 || gui1 != gui2) {
+		return false;
+	}
+
+	return true;
+}
 
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 	return matches_shortcut(id, code.sym, code.mod);
@@ -720,16 +766,7 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 		return false;
 	}
 
-	const bool ctrl1 = key.mod & KMOD_CTRL;
-	const bool shift1 = key.mod & KMOD_SHIFT;
-	const bool alt1 = key.mod & KMOD_ALT;
-	const bool gui1 = key.mod & KMOD_GUI;
-	const bool ctrl2 = mod & KMOD_CTRL;
-	const bool shift2 = mod & KMOD_SHIFT;
-	const bool alt2 = mod & KMOD_ALT;
-	const bool gui2 = mod & KMOD_GUI;
-
-	if (ctrl1 != ctrl2 || shift1 != shift2 || alt1 != alt2 || gui1 != gui2) {
+	if (!matches_keymod(key.mod, mod)) {
 		return false;
 	}
 
@@ -739,6 +776,10 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 
 	// Some extra checks so we can identify keypad keys with their "normal" equivalents,
 	// e.g. pressing '+' or numpad_'+' should always have the same effect
+
+	// This is now only required for config file backward compatibility, as all keyboard
+	// events get converted to "normal" keys (except for the numpad keys used for diagonal
+	// scrolling if it is enabled)
 
 	if (mod & KMOD_NUM) {
 		// If numlock is on and a number was pressed, only compare the entered number value.
@@ -756,6 +797,12 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 		if (code >= SDLK_KP_1 && code <= SDLK_KP_9) {
 			return key.sym == code + SDLK_1 - SDLK_KP_1;
 		}
+	}
+
+	if (get_config_bool("numpad_diagonalscrolling", false) &&
+	    (code >= SDLK_KP_1 && code <= SDLK_KP_9)) {
+		// Reserve numpad movement keys for map scrolling
+		return false;
 	}
 
 	for (const auto& pair : kNumpadIdentifications) {
@@ -977,6 +1024,43 @@ void init_shortcuts(const bool force_defaults) {
 				break;
 			}
 		}
+	}
+}
+
+ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
+	bool to_limit = false;
+	if (matches_keymod(keysym.mod, KMOD_CTRL)) {
+		to_limit = true;
+	} else if (keysym.mod != KMOD_NONE) {
+		return ChangeType::kNone;
+	}
+	switch (keysym.sym) {
+	case SDLK_HOME:
+		return ChangeType::kSetMin;
+	case SDLK_END:
+		return ChangeType::kSetMax;
+	case SDLK_MINUS:
+	case SDLK_DOWN:
+	case SDLK_LEFT:
+		return to_limit ? ChangeType::kSetMin : ChangeType::kMinus;
+	case SDLK_PLUS:
+	case SDLK_UP:
+	case SDLK_RIGHT:
+		return to_limit ? ChangeType::kSetMax : ChangeType::kPlus;
+	case SDLK_PAGEDOWN:
+		if (enable_big_step) {
+			return to_limit ? ChangeType::kSetMin : ChangeType::kBigMinus;
+		} else {
+			return ChangeType::kNone;
+		}
+	case SDLK_PAGEUP:
+		if (enable_big_step) {
+			return to_limit ? ChangeType::kSetMax : ChangeType::kBigPlus;
+		} else {
+			return ChangeType::kNone;
+		}
+	default:
+		return ChangeType::kNone;
 	}
 }
 
