@@ -235,17 +235,16 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
-			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
-			                        key <= KeyboardShortcut::kFastplace__End);
+			const bool fastplace = is_fastplace(key);
 			WLApplication* const app = WLApplication::get();
 			app->enable_handle_key(false);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
-				if (set_shortcut(key, c.key, &conflict)) {
-					if (fastplace) {
-						set_fastplace_shortcut(key, c.fastplace);
-					}
+				if (set_shortcut(key, c.key, &conflict, fastplace ? &c.fastplace : nullptr,
+						[this](const std::string& name) {
+							return game_->descriptions().get_building_descr(game_->descriptions().safe_building_index(name))->get_owning_tribe();
+						})) {
 					b->set_title(generate_title(key));
 					break;
 				} else {

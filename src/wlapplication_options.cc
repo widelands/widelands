@@ -629,16 +629,6 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
-void set_fastplace_shortcut(const KeyboardShortcut id, const std::string& building) {
-	assert(id >= KeyboardShortcut::kFastplace__Begin && id <= KeyboardShortcut::kFastplace__End);
-	KeyboardShortcutInfo& info = shortcuts_.at(id);
-	info.fastplace_name = building;
-	set_config_string("keyboard_fastplace", info.internal_name, building);
-	if (building.empty()) {
-		set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
-	}
-}
-
 const std::string& get_fastplace_shortcut(const KeyboardShortcut id) {
 	return shortcuts_.at(id).fastplace_name;
 }
@@ -671,20 +661,47 @@ static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
 	return false;
 }
 
-bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShortcut* conflict) {
-	const std::set<KeyboardShortcutInfo::Scope>& scopes = shortcuts_.at(id).scopes;
+bool set_shortcut(KeyboardShortcut id,
+                  SDL_Keysym code,
+                  KeyboardShortcut* conflict,
+                  const std::string* fastplace_building,
+                  const std::function<std::string(const std::string&)>& building_to_tribename) {
+	const bool is_fp = is_fastplace(id);
+	assert(is_fp == (fastplace_building != nullptr));
+	KeyboardShortcutInfo& info = shortcuts_.at(id);
 
-	for (auto& pair : shortcuts_) {
-		if (pair.first != id && shared_scope(scopes, pair.second) &&
-		    matches_shortcut(pair.first, code)) {
-			if (conflict != nullptr) {
-				*conflict = pair.first;
+	if (fastplace_building == nullptr || !fastplace_building->empty()) {
+		for (auto& pair : shortcuts_) {
+			if (pair.first != id && shared_scope(info.scopes, pair.second) &&
+				matches_shortcut(pair.first, code)) {
+				if (is_fp && is_fastplace(pair.first)) {
+					if (pair.second.fastplace_name.empty()) {
+						// It's a disabled fastplace shortcut
+						continue;
+					}
+					if (building_to_tribename(pair.second.fastplace_name) != building_to_tribename(*fastplace_building)) {
+						// Assigned to different tribes
+						continue;
+					}
+				}
+
+				if (conflict != nullptr) {
+					*conflict = pair.first;
+				}
+				return false;
 			}
-			return false;
 		}
 	}
 
-	shortcuts_.at(id).current_shortcut = code;
+	if (fastplace_building != nullptr) {
+		info.fastplace_name = *fastplace_building;
+		set_config_string("keyboard_fastplace", info.internal_name, *fastplace_building);
+		if (fastplace_building->empty()) {
+			code = keysym(SDLK_UNKNOWN);
+		}
+	}
+
+	info.current_shortcut = code;
 	write_shortcut(id, code);
 	return true;
 }
@@ -805,16 +822,17 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	return false;
 }
 
-std::string matching_fastplace_shortcut(const SDL_Keysym key) {
+std::set<std::string> matching_fastplace_shortcut(const SDL_Keysym key) {
+	std::set<std::string> result;
 	for (int i = static_cast<int>(KeyboardShortcut::kFastplace__Begin);
 	     i < static_cast<int>(KeyboardShortcut::kFastplace__End); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
 		const std::string& str = shortcuts_.at(id).fastplace_name;
 		if (!str.empty() && matches_shortcut(id, key)) {
-			return str;
+			result.insert(str);
 		}
 	}
-	return "";
+	return result;
 }
 
 KeyboardShortcut shortcut_from_string(const std::string& name) {
