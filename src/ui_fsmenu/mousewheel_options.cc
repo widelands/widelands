@@ -53,9 +53,16 @@ enum SD : uint8_t {
 	kBoth = kAny
 };
 
-static const std::string sd_names[] = {gettext_noop("Disabled"), gettext_noop("Vertical scroll"),
-                                       gettext_noop("Horizontal scroll"),
-                                       gettext_noop("Any scroll")};
+static const std::string sd_names[] = {
+   /** TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel */
+   gettext_noop("Disabled"),
+   /** TRANSLATORS: e.g. Ctrl+Vertical scroll */
+   gettext_noop("Vertical scroll"),
+   /** TRANSLATORS: e.g. Ctrl+Horizontal scroll */
+   gettext_noop("Horizontal scroll"),
+   /** TRANSLATORS: Used when a function works with either vertical or horizontal scrolling.
+       It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll" */
+   gettext_noop("Any scroll")};
 
 #define READ_MOD(option) normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod))
 
@@ -127,6 +134,7 @@ KeymodDropdown::KeymodDropdown(UI::Panel* parent)
 	int nmods = 4;
 	uint16_t combo;
 	uint16_t allfour = KMOD_CTRL | KMOD_GUI | KMOD_ALT | KMOD_SHIFT;
+	/** TRANSLATORS: A placeholder when no modifier key is used, e.g. "(plain) Horizontal scroll" */
 	add(_("(plain)"), KMOD_NONE);
 	for (int i = 0; i < nmods; ++i) {
 		add(keymod_string_for(mods[i]), mods[i]);
@@ -180,9 +188,13 @@ InvertDirDropdown::InvertDirDropdown(UI::Panel* parent)
                            UI::DropdownType::kTextual,
                            UI::PanelStyle::kFsMenu,
                            UI::ButtonStyle::kFsMenuMenu) {
+	/** TRANSLATORS: Used as: "Invert scroll direction: Neither" */
 	add(_("Neither"), SD::kNeither);
+	/** TRANSLATORS: Used as: "Invert scroll direction: Vertical" */
 	add(_("Vertical"), SD::kVertical);
+	/** TRANSLATORS: Used as: "Invert scroll direction: Horizontal" */
 	add(_("Horizontal"), SD::kHorizontal);
+	/** TRANSLATORS: Used as: "Invert scroll direction: Both" */
 	add(_("Both"), SD::kBoth);
 }
 
@@ -248,6 +260,9 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 			UI::WLMessageBox warning(
 			   get_parent(), UI::WindowStyle::kFsMenu, _("Scroll Setting Conflict"),
 			   as_richtext_paragraph(
+			      /** TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
+			                         empty if none is used. %2 is scrolling direction.
+			                         %3 is the name of the conflicting function. */
 			      (boost::format(_("‘%1$s%2$s’ conflicts with ‘%3$s’. "
 			                       "Please select a different combination or "
 			                       "change the conflicting setting first.")) %
@@ -312,35 +327,57 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      settings_(),
      zoom_box_(this,
+               /** TRANSLATORS: Name of a function for the scroll wheel.
+                   Used as e.g.: "Zoom Map: Ctrl+Any scroll"
+                   The ':' will be added by another format string. */
                _("Zoom Map"),
                {&mapscroll_box_, &speed_box_, &toolsize_box_},
                &(settings_.zoom_mod_),
                &(settings_.zoom_dir_)),
      mapscroll_box_(this,
+                    /** TRANSLATORS: Name of a function for the scroll wheel.
+                        Used as e.g.: "Scroll Map: Ctrl+Any scroll"
+                        The ':' will be added by another format string. */
                     _("Scroll Map"),
                     {&zoom_box_, &speed_box_, &toolsize_box_},
                     &(settings_.map_scroll_mod_),
                     &(settings_.enable_map_scroll_),
                     true),
      speed_box_(this,
+                /** TRANSLATORS: Name of a function for the scroll wheel.
+                    Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
+                    The ':' will be added by another format string. */
                 _("Change Game Speed"),
                 {&zoom_box_, &mapscroll_box_},
                 &(settings_.speed_mod_),
                 &(settings_.speed_dir_)),
      toolsize_box_(this,
+                   /** TRANSLATORS: Name of a function for the scroll wheel.
+                       Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
+                       The ':' will be added by another format string. */
                    _("Change Editor Toolsize"),
                    {&zoom_box_, &mapscroll_box_},
                    &(settings_.toolsize_mod_),
                    &(settings_.toolsize_dir_)),
      zoom_invert_box_(
-        this, _("Invert scroll direction for map zooming:"), &(settings_.zoom_invert_)),
+        this,
+        /** TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming: Vertical" */
+        _("Invert scroll direction for map zooming:"),
+        &(settings_.zoom_invert_)),
      tab_invert_box_(
-        this, _("Invert scroll direction for tab switching:"), &(settings_.tab_invert_)),
+        this,
+        /** TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching: Vertical" */
+        _("Invert scroll direction for tab switching:"),
+        &(settings_.tab_invert_)),
      value_invert_box_(
-        this, _("Invert scroll direction for increase/decrease:"), &(settings_.value_invert_)),
+        this,
+        /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
+        _("Invert scroll direction for increase/decrease:"),
+        &(settings_.value_invert_)),
      apply_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
+	/** TRANSLATORS: Tooltip for the "Scroll Map" scroll wheel function setting. */
 	mapscroll_box_.set_tooltip(_("Recommended for touchpad. Don't forget to set a modifier for "
 	                             "‘Zoom Map’ before turning on."));
 	add(&speed_box_);
