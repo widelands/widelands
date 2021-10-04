@@ -1,6 +1,6 @@
-push_textdomain("tribes")
+push_textdomain("scenario_fri03.wmf")
 
-dirname = "tribes/buildings/warehouses/empire/port/"
+dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
 
 descriptions:new_warehouse_type {
    name = "empire_port_large",

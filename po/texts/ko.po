@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-07-18 14:22+0000\n"
+"POT-Creation-Date: 2021-08-28 02:36+0000\n"
+"PO-Revision-Date: 2021-09-16 17:46+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -523,7 +523,7 @@ msgstr "아마존은 나무를 좋아합니다. 정글 보호자의 오두막을
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
-"Rare woods are the backbone of an amazon economy. Build rare tree "
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
 msgstr "희귀한 숲은 아마존 경제의 중추입니다. 희귀한 나무 농장을 건설하여 이 숲을위한 특별한 나무를 심으십시오."
 
@@ -537,6 +537,48 @@ msgstr "희귀한 나무는 희귀 나무 벌목공의 오두막으로 개선된
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
 msgstr "음식은 숯불로 말립니다. 꾸준한 공급을 보장하십시오."
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "덩굴나무 나무꾼은 근처 나무에서 덩굴을 수확하지만 이 과정에서 나무는 해를 입지 않습니다. "
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "물은 아마존에게 생명입니다. 물을 모으는 사람들은 부족에 중요한 봉사를 수행합니다. "
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "사금 캐기는 효율성과 신선도를 위해 가능한 한 가까운 곳에서 더 잘 공급되는 꾸준한 물의 흐름을 필요로 합니다."
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
+"only released near trees uninhabited by sentries."
+msgstr "야생 사육사는 사냥과 낚시를 위한 신선한 사냥감을 보장합니다. 동물들은 보초가 살지 않는 나무 근처에서만 풀려납니다."
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "희귀 나무 농장의 재고 수준은 희귀 나무 농장에 의해 감시되고, 정글 달인들은 경제적 필요에 따라 심을 것입니다."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
+"lashing canoes together to form ships."
+msgstr "밧줄는 튼튼한 건물을 보장하고, 튼튼한 옷을 꿰매고, 카누를 묶어 배를 만드는 데 필수적입니다. "
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "정글 달인들은 정원 가꾸기 가게나 희귀한 나무 농장에서 일하기 전에 정글을 지키는 사람으로 일하면서 그들의 기술을 배웁니다."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""

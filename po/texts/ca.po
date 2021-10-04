@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-11 04:49+0000\n"
+"POT-Creation-Date: 2021-08-28 02:36+0000\n"
+"PO-Revision-Date: 2021-09-25 08:38+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -518,9 +518,9 @@ msgstr "Les amazones estimen els arbres. Construïu prou cabanes de les conserva
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
-"Rare woods are the backbone of an amazon economy. Build rare tree "
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr "Els boscos exòtics són el moll de l'os de l'economia amazona. Construïu plantacions d'aquests arbres rars per aconseguir-ne."
+msgstr "Els arbres exòtics són el moll de l'os de l'economia amazona. Construïu plantacions d'arbres exòtics per plantar arbres especials que produeixen aquests tipus de fusta."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
@@ -532,6 +532,48 @@ msgstr "Els arbres exòtics els tallen llenyataires amb experiència que viuen e
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
 msgstr "El menjar es seca gràcies al foc de carbó. Assegureu-vos un bon subministrament."
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "Les talladores de lianes recullen lianes dels arbres propers, però sense danyar-los en aquest procés."
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "L'aigua és vida per les amazones. Les recol·lectores d'aigua realitzen un servei important a la seva tribu."
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "Per garbellar or cal un flux constant d'aigua, millor com més a prop possible per tal de millorar el rendiment."
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
+"only released near trees uninhabited by sentries."
+msgstr "Les cuidadores de la jungla poblen la zona d'animals per caçar i pescar. Els animals només s'alliberen prop d'arbres no habitats per guardes sentinelles."
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "L'estoc de fusta d'arbres exòtics es regula a les plantacions d'arbres exòtics i les mestres de la jungla plantaran determinats tipus d'arbres d'acord amb les necessitats de l'economia."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
+"lashing canoes together to form ships."
+msgstr "Les cordes són essencials per assegurar edificis segurs, roba ben cosida i l'amarratge de canoes per formar vaixells."
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "La  mestra de la jungla aprèn les seves habilitats treballant com a conservadora abans de treballar en centres de jardineria o en plantacions d'arbres exòtics."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""

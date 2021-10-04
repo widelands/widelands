@@ -150,7 +150,6 @@ bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t) {
 bool WLMessageBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;

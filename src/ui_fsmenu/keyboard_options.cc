@@ -27,6 +27,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
+#include "wlapplication.h"
 #include "wlapplication_options.h"
 
 namespace FsMenu {
@@ -140,7 +141,6 @@ protected:
 
 		// Also ignore reserved system keys
 		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
 		case SDLK_SPACE:
 		case SDLK_ESCAPE:
 		case SDLK_UP:
@@ -237,6 +237,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		b->sigclicked.connect([this, b, key, generate_title]() {
 			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
 			                        key <= KeyboardShortcut::kFastplace__End);
+			WLApplication* const app = WLApplication::get();
+			app->enable_handle_key(false);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
@@ -261,6 +263,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					warning.run<UI::Panel::Returncodes>();
 				}
 			}
+			app->enable_handle_key(true);
 		});
 	};
 
@@ -320,7 +323,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 }
 
 bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
-	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+	if (down && code.sym == SDLK_RETURN) {
 		die();
 		return true;
 	}

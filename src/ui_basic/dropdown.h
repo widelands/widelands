@@ -23,7 +23,9 @@
 #include <deque>
 #include <memory>
 
+#include "base/i18n.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -147,6 +149,8 @@ public:
 
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
+	void enable_textinput();
+	void disable_textinput();
 
 	/// Expand display button to make enough room for each entry's text. Call this before adding any
 	/// entries.
@@ -155,6 +159,11 @@ public:
 	void notify_list_deleted() {
 		list_ = nullptr;
 	}
+
+	virtual void clear_filter() = 0;
+	void delete_last_of_filter();
+
+	bool is_filtered();
 
 protected:
 	/// Add an element to the list
@@ -190,6 +199,12 @@ protected:
 
 	std::vector<Recti> focus_overlay_rects() override;
 
+	std::string current_filter_;
+
+	/// needed for filter workaround (handle_key/handle_textinput with space key)
+	bool ignore_space_;
+	bool was_open_already_;
+
 private:
 	static void layout_if_alive(int);
 	void layout() override;
@@ -207,6 +222,13 @@ private:
 
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
+
+	virtual void apply_filter() = 0;
+
+	virtual void
+	save_selected_entry(uint32_t)  // cannot be pure virtual because it is called from constructor
+	{
+	}
 
 	/// Give each dropdown a unique ID
 	static int next_id_;
@@ -277,7 +299,78 @@ public:
 	                  button_style) {
 	}
 	~Dropdown() override {
-		entry_cache_.clear();
+		filtered_entries.clear();
+		unfiltered_entries.clear();
+	}
+
+	void clear_filter() override {
+		if (current_filter_.empty()) {
+			return;
+		}
+		current_filter_.clear();
+
+		restore_filtered_list();
+		select(selected_entry_);
+	}
+	void restore_filtered_list() {
+		clear_filtered_list();
+		for (auto& ee : unfiltered_entries) {
+			add_to_filtered_list(ee.name, ee.value, ee.img, false, ee.tooltip, ee.hotkey);
+		}
+	}
+
+	void save_selected_entry(uint32_t index) override {
+		selected_entry_ = index < filtered_entries.size() ? *filtered_entries[index] : Entry{};
+	}
+
+	bool handle_textinput(const std::string& input_text) override {
+		if (ignore_space_ && !input_text.empty() && input_text.front() == ' ') {
+			ignore_space_ = false;
+			return true;
+		}
+		update_filter(input_text);
+		apply_filter();
+		return true;
+	}
+	void update_filter(const std::string& input_text) {
+		std::string lower = input_text;
+		transform(
+		   lower.begin(), lower.end(), lower.begin(), [](unsigned char c) { return tolower(c); });
+		current_filter_ = current_filter_.append(lower);
+	}
+
+	void apply_filter() override {
+		clear_filtered_list();
+		add_matching_entries();
+
+		if (filtered_entries.empty()) {
+			add_no_match_entry();
+		}
+		// force list to stay open even if mouse is now away due to smaller
+		// dropdown list because of applied filter
+		set_list_visibility(true);
+	}
+
+	void add_no_match_entry() {
+		// re-add initially selected entry with adapted texts to inform user
+		for (auto& x : unfiltered_entries) {
+			if (x.value == selected_entry_) {
+				const Image* empty_icon =
+				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
+				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"), x.hotkey);
+			}
+		}
+	}
+
+	void add_matching_entries() {
+		for (auto& x : unfiltered_entries) {
+			std::string lowerName = std::string(x.name);
+			transform(lowerName.begin(), lowerName.end(), lowerName.begin(),
+			          [](unsigned char c) { return tolower(c); });
+			if (lowerName.find(current_filter_) != std::string::npos) {
+				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
+			}
+		}
 	}
 
 	/// Add an element to the list
@@ -294,20 +387,22 @@ public:
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
 	         const std::string& hotkey = std::string()) {
-		entry_cache_.push_back(std::unique_ptr<Entry>(new Entry(value)));
+		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
+		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey});
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}
 
 	/// \return the selected element
 	const Entry& get_selected() const {
 		assert(BaseDropdown::has_selection());
-		return *entry_cache_[BaseDropdown::get_selected()];
+		return *filtered_entries[BaseDropdown::get_selected()];
 	}
 
 	/// Select the entry if it exists. Does not trigger the 'selected' signal.
 	void select(const Entry& entry) {
-		for (uint32_t i = 0; i < entry_cache_.size(); ++i) {
-			if (entry == *entry_cache_[i]) {
+		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
+			if (entry == *filtered_entries[i]) {
+				selected_entry_ = entry;
 				BaseDropdown::select(i);
 			}
 		}
@@ -316,12 +411,42 @@ public:
 	/// Removes all elements from the list.
 	void clear() {
 		BaseDropdown::clear();
-		entry_cache_.clear();
+		filtered_entries.clear();
+		unfiltered_entries.clear();
 	}
 
 private:
-	// Contains the actual elements. The BaseDropdown registers the indices only.
-	std::deque<std::unique_ptr<Entry>> entry_cache_;
+	class ExtendedEntry {
+	public:
+		const std::string name;
+		const Entry value;
+		const Image* img;
+		const std::string tooltip;
+		const std::string hotkey;
+	};
+
+	void clear_filtered_list() {
+		BaseDropdown::clear();
+		filtered_entries.clear();
+	}
+	// adds an element to the filtered list which is actually displayed
+	void add_to_filtered_list(const std::string& name,
+	                          Entry value,
+	                          const Image* pic = nullptr,
+	                          const bool select_this = false,
+	                          const std::string& tooltip_text = std::string(),
+	                          const std::string& hotkey = std::string()) {
+		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
+	}
+	// Contains the currently displayed (maybe filtered) elements. The BaseDropdown registers the
+	// indices only.
+	std::deque<std::unique_ptr<Entry>> filtered_entries;
+	// Contains all the elements.
+	std::deque<ExtendedEntry> unfiltered_entries;
+	// remember the initial selected element to select it again
+	// when filter yields no matches
+	Entry selected_entry_{};
 };
 
 }  // namespace UI

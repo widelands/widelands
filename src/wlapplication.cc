@@ -354,6 +354,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      mouse_position_(Vector2i::zero()),
      mouse_locked_(false),
      mouse_compensate_warp_(Vector2i::zero()),
+     handle_key_enabled_(true),
      should_die_(false),
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands"),
@@ -876,7 +877,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 }
 
 bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int modifiers) {
-	if (!down) {
+	if (!down || !handle_key_enabled_) {
 		return false;
 	}
 
@@ -925,6 +926,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		switch (ev.type) {
 		case SDL_KEYUP:
 		case SDL_KEYDOWN: {
+			normalize_numpad(ev.key.keysym);
 			bool handled = false;
 			// Workaround for duplicate triggering of the Alt key in Ubuntu:
 			// Don't accept the same key twice, so we use a map to squash them and handle them later.
