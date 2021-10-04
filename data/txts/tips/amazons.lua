@@ -29,7 +29,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _"Wilderness keepers ensure fresh game for hunting and fish for fishing. Terrestrial animals are only released near trees uninhabited by sentries.",
+      text = _"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game is only released near trees uninhabited by sentries.",
       seconds = 4
    },
    {
