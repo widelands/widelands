@@ -673,13 +673,14 @@ bool set_shortcut(KeyboardShortcut id,
 	if (fastplace_building == nullptr || !fastplace_building->empty()) {
 		for (auto& pair : shortcuts_) {
 			if (pair.first != id && shared_scope(info.scopes, pair.second) &&
-				matches_shortcut(pair.first, code)) {
+			    matches_shortcut(pair.first, code)) {
 				if (is_fp && is_fastplace(pair.first)) {
 					if (pair.second.fastplace_name.empty()) {
 						// It's a disabled fastplace shortcut
 						continue;
 					}
-					if (building_to_tribename(pair.second.fastplace_name) != building_to_tribename(*fastplace_building)) {
+					if (building_to_tribename(pair.second.fastplace_name) !=
+					    building_to_tribename(*fastplace_building)) {
 						// Assigned to different tribes
 						continue;
 					}

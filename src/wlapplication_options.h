@@ -238,8 +238,11 @@ inline bool is_fastplace(const KeyboardShortcut id) {
  *                              tribe name for a given building name.
  * @return The shortcut was changed successfully. If \c false, #conflict will contain the reason.
  */
-bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* conflict,
-		const std::string* fastplace_building, const std::function<std::string(const std::string&)>& building_to_tribename);
+bool set_shortcut(KeyboardShortcut id,
+                  SDL_Keysym code,
+                  KeyboardShortcut* conflict,
+                  const std::string* fastplace_building,
+                  const std::function<std::string(const std::string&)>& building_to_tribename);
 
 /** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);

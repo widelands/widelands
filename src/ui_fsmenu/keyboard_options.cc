@@ -242,9 +242,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
 				if (set_shortcut(key, c.key, &conflict, fastplace ? &c.fastplace : nullptr,
-						[this](const std::string& name) {
-							return game_->descriptions().get_building_descr(game_->descriptions().safe_building_index(name))->get_owning_tribe();
-						})) {
+				                 [this](const std::string& name) {
+					                 return game_->descriptions()
+					                    .get_building_descr(
+					                       game_->descriptions().safe_building_index(name))
+					                    ->get_owning_tribe();
+				                 })) {
 					b->set_title(generate_title(key));
 					break;
 				} else {
