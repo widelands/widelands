@@ -353,7 +353,8 @@ bool MapsAddon::write_to_disk() {
 	Section& s = dirnames.pull_section("global");
 	for (const std::string& dir : all_dirnames) {
 		const auto it = dirnames_.find(dir);
-		s.set_translated_string(dir.c_str(), (it != dirnames_.end() && !it->second.empty()) ? it->second : dir);
+		s.set_translated_string(
+		   dir.c_str(), (it != dirnames_.end() && !it->second.empty()) ? it->second : dir);
 	}
 	std::string path = directory_;
 	path += FileSystem::file_separator();

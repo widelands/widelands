@@ -45,12 +45,11 @@ static const std::string kInvalidAddOnFilenameSequences[] = {".."};
 
 namespace {
 inline bool selection_is_map(const std::vector<std::string>& select) {
-	return !select.empty() &&
-		select.back().size() >= kWidelandsMapExtension.size() &&
-		select.back().compare(select.back().size() - kWidelandsMapExtension.size(),
-			kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0;
+	return !select.empty() && select.back().size() >= kWidelandsMapExtension.size() &&
+	       select.back().compare(select.back().size() - kWidelandsMapExtension.size(),
+	                             kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0;
 }
-}
+}  // namespace
 
 std::string check_addon_filename_validity(const std::string& name) {
 	if (name.empty() || !FileSystem::is_legal_filename(name)) {
@@ -74,7 +73,8 @@ std::string check_addon_filename_validity(const std::string& name) {
 	return std::string();
 }
 
-void make_valid_addon_filename(std::string& name, const std::map<std::string, std::string>& names_already_in_use) {
+void make_valid_addon_filename(std::string& name,
+                               const std::map<std::string, std::string>& names_already_in_use) {
 	if (name.empty()) {
 		name = "unnamed";
 	}
@@ -167,7 +167,12 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
      dirstruct_(&box_dirstruct_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
      my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
      dirstruct_displayname_(&box_dirstruct_displayname_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     displayname_duplicate_(&box_dirstruct_displayname_, 0, 0, 100, 100 /* kNoScrolling does not work in this situation! */, UI::PanelStyle::kFsMenu) {
+     displayname_duplicate_(&box_dirstruct_displayname_,
+                            0,
+                            0,
+                            100,
+                            100 /* kNoScrolling does not work in this situation! */,
+                            UI::PanelStyle::kFsMenu) {
 	box_buttonsbox_.add_inf_space();
 	box_buttonsbox_.add(&map_add_);
 	box_buttonsbox_.add_space(kSpacing);
@@ -178,12 +183,14 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 
 	displayname_duplicate_.set_style(UI::FontStyle::kItalic);
 	displayname_duplicate_.set_text(
-		_("The selected internal directory name is used multiple times. All directories with the same internal name will also share the same display name."));
+	   _("The selected internal directory name is used multiple times. All directories with the "
+	     "same internal name will also share the same display name."));
 
-	box_dirstruct_displayname_.add(new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu,
-	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Display Name"),
-	                                    UI::Align::kCenter),
-	                   UI::Box::Resizing::kFullSize);
+	box_dirstruct_displayname_.add(
+	   new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Display Name"),
+	                    UI::Align::kCenter),
+	   UI::Box::Resizing::kFullSize);
 	box_dirstruct_displayname_.add_space(kSpacing);
 	box_dirstruct_displayname_.add(&dirstruct_displayname_, UI::Box::Resizing::kFullSize);
 	box_dirstruct_displayname_.add_space(kSpacing);
@@ -212,7 +219,8 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 
 	MainMenu::find_maps("maps/My_Maps", maps_list_);
 
-	my_maps_.selected.connect([this](uint32_t) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
+	my_maps_.selected.connect(
+	   [this](uint32_t) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
 	map_add_.set_enabled(false);
 	map_delete_.set_enabled(false);
 	dirstruct_.selected.connect([this](uint32_t i) {
@@ -231,7 +239,8 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 	});
 
 	dirstruct_displayname_.changed.connect([this]() {
-		selected_->set_dirname(dirstruct_to_tree_map_[dirstruct_.selection_index()].back(), dirstruct_displayname_.text());
+		selected_->set_dirname(dirstruct_to_tree_map_[dirstruct_.selection_index()].back(),
+		                       dirstruct_displayname_.text());
 	});
 	map_add_.sigclicked.connect(
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
@@ -392,12 +401,21 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			std::string err = check_addon_filename_validity(name);
 			if (!err.empty()) {
 				main_menu_.show_messagebox(
-				   _("Invalid Name"), (boost::format(_("This name is invalid. Reason: %s\n\nPlease choose a different name.")) % err).str());
-					continue;
+				   _("Invalid Name"),
+				   (boost::format(
+				       _("This name is invalid. Reason: %s\n\nPlease choose a different name.")) %
+				    err)
+				      .str());
+				continue;
 			}
-			for (const std::string& ext : {kWidelandsMapExtension, kS2MapExtension1, kS2MapExtension2}) {
-				if (name.size() >= ext.size() && name.compare(name.size() - ext.size(), ext.size(), ext) == 0) {
-					err = (boost::format(_("Directories may not use the extension ‘%s’.\n\nPlease choose a different name.")) % ext).str();
+			for (const std::string& ext :
+			     {kWidelandsMapExtension, kS2MapExtension1, kS2MapExtension2}) {
+				if (name.size() >= ext.size() &&
+				    name.compare(name.size() - ext.size(), ext.size(), ext) == 0) {
+					err = (boost::format(_("Directories may not use the extension ‘%s’.\n\nPlease "
+					                       "choose a different name.")) %
+					       ext)
+					         .str();
 					break;
 				}
 			}

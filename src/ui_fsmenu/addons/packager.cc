@@ -334,7 +334,11 @@ void AddOnsPackager::clicked_new_addon() {
 		const std::string err = check_addon_filename_validity(name);
 		if (!err.empty()) {
 			main_menu_.show_messagebox(
-			   _("Invalid Name"), (boost::format(_("This name is invalid. Reason: %s\n\nPlease choose a different name.")) % err).str());
+			   _("Invalid Name"),
+			   (boost::format(
+			       _("This name is invalid. Reason: %s\n\nPlease choose a different name.")) %
+			    err)
+			      .str());
 			continue;
 		}
 
