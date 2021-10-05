@@ -92,6 +92,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		   {"Locale:", _("Locale:"), i18n::get_locale(), ""},
 		   {"Home Directory:", _("Home Directory:"), i18n::get_homedir(), ""},
 		   {"Configuration File:", _("Configuration File:"), get_config_file(), ""},
+		   {"Data Directory:", _("Data Directory:"), WLApplication::get()->get_datadir(), ""},
 		   {"Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), ""},
 		   {"Executable Directory:", _("Executable Directory:"), get_executable_directory(false), ""},
 		};

@@ -178,6 +178,10 @@ struct WLApplication {
 	void set_mouse_lock(bool locked);
 	// @}
 
+	const std::string& get_datadir() const {
+		return datadir_;
+	}
+
 	// Handle the given pressed key. Returns true when key was
 	// handled.
 	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
