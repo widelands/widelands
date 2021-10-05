@@ -111,8 +111,8 @@ jobs:
           - ubuntu-20.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
-          - clang-13
           - clang-12
+          - clang-11
           - clang-7
           - clang-6.0
           - g++-11
