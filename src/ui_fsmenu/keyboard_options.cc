@@ -29,7 +29,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/mousewheel_options.h"
 #include "wlapplication.h"
-#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
 namespace FsMenu {
