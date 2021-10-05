@@ -494,8 +494,8 @@ void MousewheelOptionsDialog::set_touchpad() {
 	settings_.zoom_mod_ = KMOD_CTRL;
 	settings_.zoom_dir_ = (speed_box_.conflicts(KMOD_CTRL, SD::kHorizontal) ||
 	                       toolsize_box_.conflicts(KMOD_CTRL, SD::kHorizontal)) ?
-	                         SD::kVertical :
-	                         SD::kAny;
+                            SD::kVertical :
+                            SD::kAny;
 	zoom_box_.update_sel();
 }
 
