@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -215,12 +216,19 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
      shared_scope_list_(shared_scope_list),
      keymod_(keymod),
      dir_(dir) {
-	add(&title_area_, Resizing::kFillSpace);
-	add(&keymod_dropdown_, Resizing::kAlign, UI::Align::kRight);
-	add(&dir_dropdown_, Resizing::kAlign, UI::Align::kRight);
+	if (UI::g_fh->fontset()->is_rtl()) {
+		add(&dir_dropdown_, Resizing::kAlign, UI::Align::kLeft);
+		add(&keymod_dropdown_, Resizing::kAlign, UI::Align::kLeft);
+		add_inf_space();
+		add(&title_area_, Resizing::kAlign, UI::Align::kRight);
+	} else {
+		add(&title_area_, Resizing::kFillSpace, UI::Align::kLeft);
+		add(&keymod_dropdown_, Resizing::kAlign, UI::Align::kRight);
+		add(&dir_dropdown_, Resizing::kAlign, UI::Align::kRight);
+	}
 	update_sel();
 	keymod_dropdown_.selected.connect([this]() {
-		// Doesn't close before the selected signal. Bug?
+		// Doesn't close before sending the selected signal. Bug?
 		keymod_dropdown_.set_list_visibility(false);
 		if (check_available(keymod_dropdown_.get_selected(), *dir_)) {
 			*keymod_ = keymod_dropdown_.get_selected();
@@ -229,7 +237,7 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
 		}
 	});
 	dir_dropdown_.selected.connect([this]() {
-		// Doesn't close before the selected signal. Bug?
+		// Doesn't close before sending the selected signal. Bug?
 		dir_dropdown_.set_list_visibility(false);
 		if (check_available(*keymod_, dir_dropdown_.get_selected())) {
 			*dir_ = dir_dropdown_.get_selected();
@@ -290,8 +298,14 @@ InvertDirBox::InvertDirBox(UI::Panel* parent, const std::string& title, uint8_t*
      title_area_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, title),
      dir_dropdown_(this),
      dir_(dir) {
-	add(&title_area_, Resizing::kFillSpace);
-	add(&dir_dropdown_, Resizing::kAlign, UI::Align::kRight);
+	if (UI::g_fh->fontset()->is_rtl()) {
+		add(&dir_dropdown_, Resizing::kAlign, UI::Align::kLeft);
+		add_inf_space();
+		add(&title_area_, Resizing::kAlign, UI::Align::kRight);
+	} else {
+		add(&title_area_, Resizing::kFillSpace, UI::Align::kLeft);
+		add(&dir_dropdown_, Resizing::kAlign, UI::Align::kRight);
+	}
 	update_sel();
 	dir_dropdown_.selected.connect([this, dir]() { *dir = dir_dropdown_.get_selected(); });
 }
