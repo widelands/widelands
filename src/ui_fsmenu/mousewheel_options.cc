@@ -67,10 +67,12 @@ static const std::string sd_names[] = {
 
 #define READ_MOD(option) normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod))
 
-#define DIR_COMBINE(x, y)                                                                          \
-	((x ? SD::kHorizontal : SD::kDisabled) | (y ? SD::kVertical : SD::kDisabled))
+inline uint8_t dir_combine(const bool x, const bool y) {
+	return ((x ? SD::kHorizontal : SD::kDisabled) | (y ? SD::kVertical : SD::kDisabled));
+}
+
 #define READ_DIR(option)                                                                           \
-	DIR_COMBINE(get_mousewheel_option_bool(MousewheelOptionID::option##X),                          \
+	dir_combine(get_mousewheel_option_bool(MousewheelOptionID::option##X),                          \
 	            get_mousewheel_option_bool(MousewheelOptionID::option##Y))
 
 void MousewheelConfigSettings::read() {
@@ -90,13 +92,17 @@ void MousewheelConfigSettings::read() {
 
 #undef READ_MOD
 #undef READ_DIR
-#undef DIR_COMBINE
 
-#define DIR_X(dir) ((dir & SD::kHorizontal) != 0)
-#define DIR_Y(dir) ((dir & SD::kVertical) != 0)
+inline bool dir_x(const uint8_t dir) {
+	return (dir & SD::kHorizontal) != 0;
+}
+inline bool dir_y(const uint8_t dir) {
+	return (dir & SD::kVertical) != 0;
+}
+
 #define APPLY_DIR(option, dir)                                                                     \
-	set_mousewheel_option_bool(MousewheelOptionID::option##X, DIR_X(dir));                          \
-	set_mousewheel_option_bool(MousewheelOptionID::option##Y, DIR_Y(dir));
+	set_mousewheel_option_bool(MousewheelOptionID::option##X, dir_x(dir));                          \
+	set_mousewheel_option_bool(MousewheelOptionID::option##Y, dir_y(dir));
 
 void MousewheelConfigSettings::apply() {
 	set_mousewheel_option_bool(MousewheelOptionID::kMapScroll, enable_map_scroll_ != 0);
@@ -115,8 +121,6 @@ void MousewheelConfigSettings::apply() {
 }
 
 #undef APPLY_DIR
-#undef DIR_X
-#undef DIR_Y
 
 KeymodDropdown::KeymodDropdown(UI::Panel* parent)
    : UI::Dropdown<uint16_t>(parent,
@@ -135,7 +139,7 @@ KeymodDropdown::KeymodDropdown(UI::Panel* parent)
 	int nmods = 4;
 	uint16_t combo;
 	uint16_t allfour = KMOD_CTRL | KMOD_GUI | KMOD_ALT | KMOD_SHIFT;
-	/** TRANSLATORS: A placeholder when no modifier key is used, e.g. "(plain) Horizontal scroll" */
+	/** TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain) Horizontal scroll" */
 	add(_("(plain)"), KMOD_NONE);
 	for (int i = 0; i < nmods; ++i) {
 		add(keymod_string_for(mods[i]), mods[i]);
