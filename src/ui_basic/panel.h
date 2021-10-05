@@ -393,8 +393,12 @@ public:
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
-	void set_handle_textinput() {
-		flags_ |= pf_handle_textinput;
+	void set_handle_textinput(bool const on = true) {
+		if (on) {
+			flags_ |= pf_handle_textinput;
+		} else {
+			flags_ &= ~pf_handle_textinput;
+		}
 	}
 
 	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
