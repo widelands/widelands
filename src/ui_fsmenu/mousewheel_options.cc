@@ -40,6 +40,7 @@ namespace FsMenu {
 
 constexpr int kButtonSize = 24;
 constexpr int kDividerSpace = 8;
+constexpr int kSmallDividerSpace = 1;
 constexpr int kModDirDropdownMaxWidth = 200;
 constexpr int kMousewheelBoxMaxWidth = 700;
 
@@ -351,6 +352,26 @@ ResetAndApplyBox::ResetAndApplyBox(MousewheelOptionsDialog* parent)
 	apply_button_.sigclicked.connect([parent]() { parent->apply_settings(); });
 }
 
+TouchpadBox::TouchpadBox(MousewheelOptionsDialog* parent)
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+     touchpad_button_(this,
+                      std::string(),
+                      0,
+                      0,
+                      0,
+                      0,
+                      UI::ButtonStyle::kFsMenuSecondary,
+                      _("Set Recommended Map Settings for Touchpad"),
+                      _("Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended default settings if "
+                        "you want to use the scrolling capability of your touchpad or other "
+                        "device that can scroll in both the vertical and horizontal directions.")) {
+	add_inf_space();
+	add(&touchpad_button_, Resizing::kAlign, UI::Align::kCenter);
+	add_inf_space();
+
+	touchpad_button_.sigclicked.connect([parent]() { parent->set_touchpad(); });
+}
+
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      settings_(),
@@ -402,13 +423,14 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
+     touchpad_box_(this),
      button_box_(this) {
+	add(&touchpad_box_);
 	add(&zoom_box_);
 	add(&mapscroll_box_);
-	/** TRANSLATORS: Tooltip for the "Scroll Map" scroll wheel function setting. */
-	mapscroll_box_.set_tooltip(_("Recommended for touchpad. Don't forget to set a modifier for "
-	                             "‘Zoom Map’ before turning on."));
+	add_space(kSmallDividerSpace);
 	add(&speed_box_);
+	add_space(kSmallDividerSpace);
 	add(&toolsize_box_);
 	add_space(kDividerSpace);
 	add(&zoom_invert_box_);
@@ -417,6 +439,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add_space(kDividerSpace);
 	add(&button_box_);
 }
+
 void MousewheelOptionsDialog::update_settings() {
 	settings_.read();
 	zoom_box_.update_sel();
@@ -434,6 +457,49 @@ void MousewheelOptionsDialog::reset() {
 	reset_mousewheel_settings();
 	update_settings();
 }
+
+// Touchpad recommended settings
+void MousewheelOptionsDialog::set_touchpad() {
+	const bool conflict_speed =
+	   speed_box_.conflicts(KMOD_NONE, SD::kAny) || speed_box_.conflicts(KMOD_CTRL, SD::kVertical);
+	const bool conflict_toolsize = toolsize_box_.conflicts(KMOD_NONE, SD::kAny) ||
+	                               toolsize_box_.conflicts(KMOD_CTRL, SD::kVertical);
+	if (conflict_speed || conflict_toolsize) {
+		UI::WLMessageBox warning(
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Settings Conflict"),
+		   as_richtext_paragraph(
+		      (boost::format(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
+		                       "settings. Change the conflicting setting(s) too?")) %
+		       speed_box_.get_title() % toolsize_box_.get_title())
+		         .str(),
+		      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+		   UI::WLMessageBox::MBoxType::kOkCancel);
+		if (warning.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			return;
+		}
+		if (conflict_speed) {
+			settings_.speed_mod_ = KMOD_ALT;
+			speed_box_.update_sel();
+		}
+		if (conflict_toolsize) {
+			settings_.toolsize_mod_ = KMOD_ALT;
+			toolsize_box_.update_sel();
+		}
+	}
+
+	// Set recommended values
+	settings_.map_scroll_mod_ = KMOD_NONE;
+	settings_.enable_map_scroll_ = SD::kAny;
+	mapscroll_box_.update_sel();
+	settings_.zoom_mod_ = KMOD_CTRL;
+	settings_.zoom_dir_ = (speed_box_.conflicts(KMOD_CTRL, SD::kHorizontal) ||
+	                       toolsize_box_.conflicts(KMOD_CTRL, SD::kHorizontal)) ?
+	                         SD::kVertical :
+	                         SD::kAny;
+	zoom_box_.update_sel();
+}
+
+// Set sizes for layouting
 void MousewheelOptionsDialog::set_size(int w, int h) {
 	if (w <= 0 || h <= 0) {
 		return;
@@ -450,6 +516,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
+		touchpad_box_.set_size(w_hbox, kButtonSize);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
 }

@@ -125,6 +125,13 @@ private:
 	uint8_t* dir_;
 };
 
+struct TouchpadBox : public UI::Box {
+	TouchpadBox(MousewheelOptionsDialog* parent);
+
+private:
+	UI::Button touchpad_button_;
+};
+
 struct ResetAndApplyBox : public UI::Box {
 	ResetAndApplyBox(MousewheelOptionsDialog* parent);
 
@@ -143,6 +150,7 @@ public:
 	void update_settings();
 	void apply_settings();
 	void reset();
+	void set_touchpad();
 
 	void set_size(int w, int h) override;
 
@@ -157,7 +165,7 @@ private:
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
-
+	TouchpadBox touchpad_box_;
 	ResetAndApplyBox button_box_;
 };
 
