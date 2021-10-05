@@ -125,10 +125,11 @@ private:
 	uint8_t* dir_;
 };
 
-struct ApplyBox : public UI::Box {
-	ApplyBox(MousewheelOptionsDialog* parent);
+struct ResetAndApplyBox : public UI::Box {
+	ResetAndApplyBox(MousewheelOptionsDialog* parent);
 
 private:
+	UI::Button reset_button_;
 	UI::Button apply_button_;
 };
 
@@ -141,6 +142,8 @@ public:
 
 	void update_settings();
 	void apply_settings();
+	void reset();
+
 	void set_size(int w, int h) override;
 
 private:
@@ -155,7 +158,7 @@ private:
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
 
-	ApplyBox apply_box_;
+	ResetAndApplyBox button_box_;
 };
 
 }  // namespace FsMenu

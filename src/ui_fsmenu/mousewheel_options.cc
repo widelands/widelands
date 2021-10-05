@@ -41,7 +41,6 @@ namespace FsMenu {
 constexpr int kButtonSize = 24;
 constexpr int kDividerSpace = 8;
 constexpr int kModDirDropdownMaxWidth = 200;
-constexpr int kApplyButtonWidth = 400;
 constexpr int kMousewheelBoxMaxWidth = 700;
 
 // Scroll Directions
@@ -324,20 +323,31 @@ void InvertDirBox::set_width(int w) {
 	set_desired_size(w, kButtonSize);
 }
 
-ApplyBox::ApplyBox(MousewheelOptionsDialog* parent)
+ResetAndApplyBox::ResetAndApplyBox(MousewheelOptionsDialog* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+     reset_button_(this,
+                   std::string(),
+                   0,
+                   0,
+                   0,
+                   0,
+                   UI::ButtonStyle::kFsMenuSecondary,
+                   _("Reset Scroll Settings")),
      apply_button_(this,
                    std::string(),
                    0,
                    0,
-                   kApplyButtonWidth,
-                   kButtonSize,
+                   0,
+                   0,
                    UI::ButtonStyle::kFsMenuSecondary,
-                   _("Apply Mouse Scroll Settings")) {
+                   _("Apply Scroll Settings")) {
+	add_inf_space();
+	add(&reset_button_, Resizing::kAlign, UI::Align::kCenter);
 	add_inf_space();
 	add(&apply_button_, Resizing::kAlign, UI::Align::kCenter);
 	add_inf_space();
 
+	reset_button_.sigclicked.connect([parent]() { parent->reset(); });
 	apply_button_.sigclicked.connect([parent]() { parent->apply_settings(); });
 }
 
@@ -392,7 +402,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
-     apply_box_(this) {
+     button_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
 	/** TRANSLATORS: Tooltip for the "Scroll Map" scroll wheel function setting. */
@@ -405,7 +415,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&tab_invert_box_);
 	add(&value_invert_box_);
 	add_space(kDividerSpace);
-	add(&apply_box_);
+	add(&button_box_);
 }
 void MousewheelOptionsDialog::update_settings() {
 	settings_.read();
@@ -419,6 +429,10 @@ void MousewheelOptionsDialog::update_settings() {
 }
 void MousewheelOptionsDialog::apply_settings() {
 	settings_.apply();
+}
+void MousewheelOptionsDialog::reset() {
+	reset_mousewheel_settings();
+	update_settings();
 }
 void MousewheelOptionsDialog::set_size(int w, int h) {
 	if (w <= 0 || h <= 0) {
@@ -436,7 +450,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
-		apply_box_.set_size(w_hbox, kButtonSize);
+		button_box_.set_size(w_hbox, kButtonSize);
 	}
 }
 }  // namespace FsMenu

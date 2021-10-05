@@ -321,8 +321,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		for (auto& pair : all_keyboard_buttons) {
 			pair.second->set_title(generate_title(pair.first));
 		}
-		reset_mousewheel_settings();
-		mousewheel_options_.update_settings();
+		mousewheel_options_.reset();
 	});
 	ok_.sigclicked.connect([this]() {
 		mousewheel_options_.apply_settings();
