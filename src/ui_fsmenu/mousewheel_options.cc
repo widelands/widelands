@@ -269,7 +269,7 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 	for (KeymodAndDirBox* other : shared_scope_list_) {
 		if (other->conflicts(keymod, dir)) {
 			UI::WLMessageBox warning(
-			   get_parent(), UI::WindowStyle::kFsMenu, _("Scroll Setting Conflict"),
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Setting Conflict"),
 			   as_richtext_paragraph(
 			      /** TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 			                         empty if none is used. %2 is scrolling direction.
