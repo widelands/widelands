@@ -85,25 +85,7 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-namespace {
-
-/**
- * Shut the hardware down: stop graphics mode, stop sound handler
- */
-#ifndef _WIN32
-void terminate(int) {
-	// The logger can already be shut down, so we use cout
-	std::cout
-	   << "Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-	      " Update your sound driver and/or SDL to fix this problem\n";
-	raise(SIGKILL);
-}
-#endif
-
-/**
- * Returns the widelands executable path.
- */
-std::string get_executable_directory() {
+std::string get_executable_directory(const bool logdir) {
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
@@ -131,9 +113,26 @@ std::string get_executable_directory() {
 	executabledir = filename;
 	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
 #endif
-	log_info("Widelands executable directory: %s\n", executabledir.c_str());
+	if (logdir) {
+		log_info("Widelands executable directory: %s\n", executabledir.c_str());
+	}
 	return executabledir;
 }
+
+namespace {
+
+/**
+ * Shut the hardware down: stop graphics mode, stop sound handler
+ */
+#ifndef _WIN32
+void terminate(int) {
+	// The logger can already be shut down, so we use cout
+	std::cout
+	   << "Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
+	      " Update your sound driver and/or SDL to fix this problem\n";
+	raise(SIGKILL);
+}
+#endif
 
 bool is_absolute_path(const std::string& path) {
 	std::regex re("^/|\\w:");
