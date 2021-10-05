@@ -1310,7 +1310,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's Hut
             purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes."),
             -- TRANSLATORS: Note helptext for an amazon production site: Liana Cutter's Hut
-            note = pgettext("amazons_building", "The cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
+            note = pgettext("amazons_building", "The liana cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Liana Cutter's Hut
             performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(34))
          }
