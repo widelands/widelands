@@ -702,7 +702,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 				                 "https://www.transifex.com/widelands/widelands-addons/content/")))
 				             .str()) %
 				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(_("This may take several minutes, please be patient.")))
+				       .as_font_tag(_("This may take several minutes. Please be patient.")))
 				      .str(),
 				   UI::WLMessageBox::MBoxType::kOkCancel);
 				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
