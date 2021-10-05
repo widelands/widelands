@@ -1,9 +1,4 @@
 #!/bin/sh
-echo " "
-echo "###########################################################"
-echo "#     Script to simplify the compilation of Widelands     #"
-echo "###########################################################"
-echo " "
 
 print_help () {
     # Print help for our options
@@ -40,7 +35,8 @@ print_help () {
     echo "The following options are available:"
     echo " "
     echo "-h or --help          Print this help."
-    echo " "
+    echo "-q or --quiet         Suppress most of compile.sh's output."
+    echo "-v or --verbose       Make compile.sh's output verbose."
     echo " "
     echo "Omission options and their overrides:"
     echo " "
@@ -130,24 +126,12 @@ USE_ASAN="ON"
 COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
+# Option for this script itself
+QUIET=0
 
 if [ -z "$COMPILE_DEFAULTS" ]; then
   COMPILE_DEFAULTS=.compile_defaults
 fi
-
-if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
-  read LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
-  echo "Using default compile options from '$COMPILE_DEFAULTS':"
-  echo "   $LOCAL_DEFAULTS"
-  echo " "
-  echo "Command line options:"
-  echo "   $@"
-  echo " "
-
-  # We want $LOCAL_DEFAULTS to be split, so no "" for it
-  set -- $LOCAL_DEFAULTS "$@"
-fi
-
 
 # try to set default number of cores automatically
 
@@ -179,6 +163,12 @@ else
   CORES=1
 fi
 
+OLD_CLI_ARGS="$@"
+if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
+  read LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
+  # We want $LOCAL_DEFAULTS to be split, so no "" for it
+  set -- $LOCAL_DEFAULTS "$@"
+fi
 
 while [ $# -gt 0 ]
 do
@@ -258,6 +248,14 @@ do
       BUILD_WEBSITE="ON"
     shift
     ;;
+    -q|--quiet)
+      QUIET=1
+    shift
+    ;;
+    -v|--verbose)
+      QUIET=0
+    shift
+    ;;
     --gcc)
       if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
         COMPILER=gcc
@@ -301,17 +299,36 @@ do
   esac
 done
 
+if [ $QUIET -eq 0 ]; then
+  echo " "
+  echo "###########################################################"
+  echo "#     Script to simplify the compilation of Widelands     #"
+  echo "###########################################################"
+  echo " "
+
+  if [ -n "$LOCAL_DEFAULTS" ]; then
+    echo "Using default compile options from '$COMPILE_DEFAULTS':"
+    echo "   $LOCAL_DEFAULTS"
+    echo " "
+    echo "Command line options:"
+    echo "   $OLD_CLI_ARGS"
+    echo " "
+  fi
+fi
+
 ## Get command and options to use in update.sh
 COMMANDLINE="$0"
 CMD_ADD () {
   COMMANDLINE="$COMMANDLINE $@"
 }
 
-if [ -n "$EXTRA_OPTS" ]; then
+if [ -n "$EXTRA_OPTS" ] && [ $QUIET -eq 0 ]; then
   echo "Extra CMake options used: $EXTRA_OPTS"
   echo " "
   CMD_ADD "$EXTRA_OPTS"
 fi
+
+if [ $QUIET -eq 0 ]; then  # Start of verbose output section
 
 echo "Using ${CORES} core(s)."
 echo ""
@@ -417,6 +434,8 @@ echo " "
 echo "###########################################################"
 echo " "
 
+fi  # End of verbose output section
+
 ######################################
 # Definition of some local variables #
 ######################################
@@ -496,8 +515,10 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     # First check if this is an git checkout at all - only in that case,
     # creation of a script makes any sense.
     if [ -n "$(git status -s)" ]; then
-      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created"
-      git status
+      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created."
+      if [ $QUIET -eq 0 ]; then
+        git status
+      fi
       return 0
     fi
       rm -f update.sh || true
@@ -528,7 +549,9 @@ echo "# You should be able to run it via ./widelands #"
 echo "################################################"
 END_SCRIPT
       chmod +x ./update.sh
-      echo "  -> The update script has successfully been created."
+      if [ $QUIET -eq 0 ]; then
+        echo "The update script has successfully been created."
+      fi
   }
 ######################################
 
@@ -553,6 +576,9 @@ compile_widelands
 move_built_files
 cd ..
 create_update_script
+
+if [ $QUIET -eq 0 ]; then  # Start of verbose output section
+
 echo " "
 echo "###########################################################"
 echo "# Congratulations! Widelands has been built successfully  #"
@@ -592,4 +618,8 @@ echo "#                                                         #"
 echo "# You can update Widelands via running ./update.sh        #"
 echo "# in the same directory that you ran this script in.      #"
 echo "###########################################################"
+
+else
+  echo "Widelands has been built successfully."
+fi  # End of verbose output section
 ######################################
