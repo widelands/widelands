@@ -241,6 +241,9 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 	dirstruct_displayname_.changed.connect([this]() {
 		selected_->set_dirname(dirstruct_to_tree_map_[dirstruct_.selection_index()].back(),
 		                       dirstruct_displayname_.text());
+		if (modified_) {
+			modified_();
+		}
 	});
 	map_add_.sigclicked.connect(
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
