@@ -253,6 +253,7 @@ ChangeType get_keyboard_change(SDL_Keysym, bool enable_big_step = false);
  * Sets the directory where to read/write kConfigFile.
  */
 void set_config_directory(const std::string& userconfigdir);
+const std::string& get_config_file();
 
 /*
  * Reads the configuration from kConfigFile.

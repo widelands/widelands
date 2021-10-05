@@ -480,7 +480,9 @@ bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	} else {
 		return false;
 	}
-	if (y > 0 && selected_idx > 0) {
+	if (selected_idx > max) {
+		select(y < 0 ? 0 : max);
+	} else if (y > 0 && selected_idx > 0) {
 		select(selected_idx - 1);
 	} else if (y < 0 && selected_idx < max) {
 		select(selected_idx + 1);
