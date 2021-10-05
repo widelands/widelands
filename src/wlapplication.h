@@ -47,6 +47,9 @@ namespace Widelands {
 class Game;
 }
 
+/** Returns the widelands executable path. */
+std::string get_executable_directory(bool logdir = true);
+
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
 	explicit ParameterError(CmdLineVerbosity level, const std::string& text = "")
@@ -176,6 +179,10 @@ struct WLApplication {
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(bool locked);
 	// @}
+
+	const std::string& get_datadir() const {
+		return datadir_;
+	}
 
 	// Handle the given pressed key. Returns true when key was
 	// handled.

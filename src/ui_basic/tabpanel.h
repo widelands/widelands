@@ -40,6 +40,7 @@ constexpr int kTabPanelButtonHeight = 34;
 struct TabPanel;
 struct Tab : public NamedPanel {
 	friend struct TabPanel;
+	friend class FileViewPanel;
 
 	/** If title is not empty, this will be a textual tab.
 	 *  In that case, pic will need to be the rendered title

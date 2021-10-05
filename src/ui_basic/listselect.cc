@@ -482,7 +482,9 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 		return false;
 	}
 	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
-		if (y > 0 && selected_idx > 0) {
+		if (selected_idx > max) {
+			select(y < 0 ? 0 : max);
+		} else if (y > 0 && selected_idx > 0) {
 			select(selected_idx - 1);
 		} else if (y < 0 && selected_idx < max) {
 			select(selected_idx + 1);

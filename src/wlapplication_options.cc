@@ -36,6 +36,7 @@
 
 static Profile g_options(Profile::err_log);
 
+static std::string config_file;
 static std::unique_ptr<FileSystem> config_dir = nullptr;
 
 void check_config_used() {
@@ -1064,7 +1065,15 @@ ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
 void set_config_directory(const std::string& userconfigdir) {
 	config_dir.reset(new RealFSImpl(userconfigdir));
 	config_dir->ensure_directory_exists(".");
-	log_info("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
+
+	config_file = userconfigdir;
+	config_file += FileSystem::file_separator();
+	config_file += kConfigFile;
+	log_info("Set configuration file: %s", config_file.c_str());
+}
+
+const std::string& get_config_file() {
+	return config_file;
 }
 
 void read_config() {
