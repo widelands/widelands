@@ -220,7 +220,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
 				idle_shipyard_stocked = true;
 			}
-			
+
 			if (expeditions_ready > 0 && idle_shipyard_stocked && allships.size() - ports_count == 0) {
 				if (potential_wrong_shipyard_) {
 					if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
