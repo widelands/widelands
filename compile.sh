@@ -322,13 +322,17 @@ CMD_ADD () {
   COMMANDLINE="$COMMANDLINE $@"
 }
 
-if [ -n "$EXTRA_OPTS" ] && [ $QUIET -eq 0 ]; then
+if [ $QUIET -ne 0 ]; then
+
+  CMD_ADD "$LOCAL_DEFAULTS $OLD_CLI_ARGS"
+
+else  # Start of verbose output section
+
+if [ -n "$EXTRA_OPTS" ]; then
   echo "Extra CMake options used: $EXTRA_OPTS"
   echo " "
   CMD_ADD "$EXTRA_OPTS"
 fi
-
-if [ $QUIET -eq 0 ]; then  # Start of verbose output section
 
 echo "Using ${CORES} core(s)."
 echo ""
@@ -458,12 +462,15 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   }
 
   set_buildtool () {
+    GENERATOR=""
     #Defaults to ninja, but if that is not found, we use make instead
     if [ `command -v ninja` ] ; then
       buildtool="ninja"
+      GENERATOR="-G Ninja"
     #On some systems (most notably Fedora), the binary is called ninja-build
     elif [ `command -v ninja-build` ] ; then
       buildtool="ninja-build"
+      GENERATOR="-G Ninja"
     #... and some systems refer to GNU make as gmake
     elif [ `command -v gmake` ] ; then
       buildtool="gmake"
@@ -481,11 +488,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
-    else
-      cmake .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
-    fi
+    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $buildtool -j $CORES
 
