@@ -892,7 +892,8 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 }
 
 void RemoteInteractionWindow::update_current_vote_on_demand() {
-	if (current_vote_ < 0 && !parent_.username().empty() && tabs_.tabs()[tabs_.active()]->get_name() == kVotingTabName) {
+	if (current_vote_ < 0 && !parent_.username().empty() &&
+	    tabs_.tabs()[tabs_.active()]->get_name() == kVotingTabName) {
 		current_vote_ = parent_.net().get_vote(info_->internal_name);
 	}
 	own_voting_.select(std::max(0, current_vote_));
