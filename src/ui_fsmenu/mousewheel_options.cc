@@ -40,7 +40,6 @@ namespace FsMenu {
 
 constexpr int kButtonSize = 24;
 constexpr int kDividerSpace = 8;
-constexpr int kSmallDividerSpace = 1;
 constexpr int kModDirDropdownMaxWidth = 200;
 constexpr int kMousewheelBoxMaxWidth = 700;
 
@@ -351,8 +350,8 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
                       0,
                       UI::ButtonStyle::kFsMenuSecondary,
                       _("Set for Touchpad"),
-                      _("Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended default settings for "
-                        "a touchpad or other pointing device that can scroll horizontally as well "
+                      _("Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a "
+                        "touchpad or other pointing device that can scroll horizontally as well "
                         "as vertically.")),
      apply_button_(this,
                    std::string(),
@@ -433,9 +432,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
      button_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
-	add_space(kSmallDividerSpace);
 	add(&speed_box_);
-	add_space(kSmallDividerSpace);
 	add(&toolsize_box_);
 	add_space(kDividerSpace);
 	add(&zoom_invert_box_);
