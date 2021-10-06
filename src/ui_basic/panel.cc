@@ -878,7 +878,7 @@ bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousewheel(uint32_t, int32_t, int32_t) {
+bool Panel::handle_mousewheel(int32_t, int32_t, uint16_t) {
 	return false;
 }
 
@@ -1318,7 +1318,7 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	return handle_mousepress(btn, x, y);
 }
 
-bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos) {
+bool Panel::do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_mouse_pos) {
 	if (!initialized_) {
 		return false;
 	}
@@ -1335,13 +1335,13 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(which, x, y,
+		if (child->do_mousewheel(x, y, modstate,
 		                         rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
 		                                                  child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 	}
-	return handle_mousewheel(which, x, y);
+	return handle_mousewheel(x, y, modstate);
 }
 
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
@@ -1598,7 +1598,7 @@ bool Panel::ui_mousemove(
  * Input callback function. Pass the mousewheel event to the currently modal
  * panel.
  */
-bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool Panel::ui_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (!allow_user_input_) {
 		return true;
 	}
@@ -1614,7 +1614,7 @@ bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!p) {
 		return false;
 	}
-	return p->do_mousewheel(which, x, y, p->get_mouse_position());
+	return p->do_mousewheel(x, y, modstate, p->get_mouse_position());
 }
 
 /**
