@@ -89,6 +89,7 @@ protected:
 	void add_chat_ui();
 
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 	void draw_overlay(RenderTarget&) override;
 

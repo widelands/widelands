@@ -27,6 +27,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
 namespace UI {
@@ -280,6 +281,20 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 		}
 	}
 	return Panel::handle_key(down, code);
+}
+
+bool Slider::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (!enabled_) {
+		return false;
+	}
+
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
+	if (change != 0) {
+		set_value(get_value() + change);
+		return true;
+	}
+
+	return false;
 }
 
 /**

@@ -47,6 +47,9 @@ namespace Widelands {
 class Game;
 }
 
+/** Returns the widelands executable path. */
+std::string get_executable_directory(bool logdir = true);
+
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
 	explicit ParameterError(CmdLineVerbosity level, const std::string& text = "")
@@ -68,7 +71,9 @@ struct InputCallback {
 	bool (*mouse_move)(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool (*key)(bool down, SDL_Keysym code);
 	bool (*textinput)(const std::string& text);
-	bool (*mouse_wheel)(uint32_t which, int32_t x, int32_t y);
+	bool (*mouse_wheel)(const int32_t x,           // The number of horizontal scroll ticks
+	                    const int32_t y,           // The number of vertical scroll ticks
+	                    const uint16_t modstate);  // Modifier keys pressed at the time of the event
 };
 
 /// You know main functions, of course. This is the main struct.
@@ -174,6 +179,10 @@ struct WLApplication {
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(bool locked);
 	// @}
+
+	const std::string& get_datadir() const {
+		return datadir_;
+	}
 
 	// Handle the given pressed key. Returns true when key was
 	// handled.
