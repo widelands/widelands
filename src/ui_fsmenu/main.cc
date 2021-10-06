@@ -72,7 +72,7 @@ int16_t MainMenu::calc_desired_window_width(const UI::Window::WindowLayoutID id)
 	case UI::Window::WindowLayoutID::kFsMenuAbout:
 		return std::max(600, get_w() / 2);
 	case UI::Window::WindowLayoutID::kFsMenuKeyboardOptions:
-		return get_w() * 3 / 4;
+		return std::max(720, get_w() * 3 / 4);
 	default:
 		NEVER_HERE();
 	}
@@ -87,7 +87,7 @@ int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
 		return std::max(450, get_h() / 2);
 	case UI::Window::WindowLayoutID::kFsMenuKeyboardOptions:
-		return std::max(370, get_h() * 3 / 8);
+		return std::max(360, get_h() * 3 / 8);
 	default:
 		NEVER_HERE();
 	}

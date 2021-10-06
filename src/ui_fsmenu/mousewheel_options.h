@@ -64,6 +64,8 @@ struct MousewheelConfigSettings {
 	}
 };
 
+/**********************************************************/
+
 class MousewheelOptionsDialog;
 
 struct KeymodDropdown : public UI::Dropdown<uint16_t> {
@@ -125,24 +127,18 @@ private:
 	uint8_t* dir_;
 };
 
-struct TouchpadBox : public UI::Box {
-	TouchpadBox(MousewheelOptionsDialog* parent);
-
-private:
-	UI::Button touchpad_button_;
-};
-
-struct ResetAndApplyBox : public UI::Box {
-	ResetAndApplyBox(MousewheelOptionsDialog* parent);
+struct ScrollOptionsButtonBox : public UI::Box {
+	ScrollOptionsButtonBox(MousewheelOptionsDialog* parent);
 
 private:
 	UI::Button reset_button_;
+	UI::Button touchpad_button_;
 	UI::Button apply_button_;
 };
 
-/*****
- * Box for setting mousewheel options
- *****/
+/**********************************************************/
+
+// Main dialog box
 class MousewheelOptionsDialog : public UI::Box {
 public:
 	MousewheelOptionsDialog(UI::Panel* parent);
@@ -165,8 +161,7 @@ private:
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
-	TouchpadBox touchpad_box_;
-	ResetAndApplyBox button_box_;
+	ScrollOptionsButtonBox button_box_;
 };
 
 }  // namespace FsMenu

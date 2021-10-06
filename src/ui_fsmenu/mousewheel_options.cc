@@ -65,6 +65,8 @@ static const std::string sd_names[] = {
        It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll" */
    gettext_noop("Any scroll")};
 
+/**********************************************************/
+
 #define READ_MOD(option) normalize_keymod(get_mousewheel_keymod(MousewheelOptionID::option##Mod))
 
 inline uint8_t dir_combine(const bool x, const bool y) {
@@ -121,6 +123,8 @@ void MousewheelConfigSettings::apply() {
 }
 
 #undef APPLY_DIR
+
+/**********************************************************/
 
 KeymodDropdown::KeymodDropdown(UI::Panel* parent)
    : UI::Dropdown<uint16_t>(parent,
@@ -202,6 +206,8 @@ InvertDirDropdown::InvertDirDropdown(UI::Panel* parent)
 	/** TRANSLATORS: Used as: "Invert scroll direction: Both" */
 	add(_("Both"), SD::kBoth);
 }
+
+/**********************************************************/
 
 KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
                                  const std::string& title,
@@ -296,6 +302,7 @@ void KeymodAndDirBox::set_width(int w) {
 	}
 	set_desired_size(w, kButtonSize);
 }
+/***** End of KeymodAndDirBox members *****/
 
 InvertDirBox::InvertDirBox(UI::Panel* parent, const std::string& title, uint8_t* dir)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
@@ -324,7 +331,7 @@ void InvertDirBox::set_width(int w) {
 	set_desired_size(w, kButtonSize);
 }
 
-ResetAndApplyBox::ResetAndApplyBox(MousewheelOptionsDialog* parent)
+ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      reset_button_(this,
                    std::string(),
@@ -333,27 +340,9 @@ ResetAndApplyBox::ResetAndApplyBox(MousewheelOptionsDialog* parent)
                    0,
                    0,
                    UI::ButtonStyle::kFsMenuSecondary,
-                   _("Reset Scroll Settings")),
-     apply_button_(this,
-                   std::string(),
-                   0,
-                   0,
-                   0,
-                   0,
-                   UI::ButtonStyle::kFsMenuSecondary,
-                   _("Apply Scroll Settings")) {
-	add_inf_space();
-	add(&reset_button_, Resizing::kAlign, UI::Align::kCenter);
-	add_inf_space();
-	add(&apply_button_, Resizing::kAlign, UI::Align::kCenter);
-	add_inf_space();
-
-	reset_button_.sigclicked.connect([parent]() { parent->reset(); });
-	apply_button_.sigclicked.connect([parent]() { parent->apply_settings(); });
-}
-
-TouchpadBox::TouchpadBox(MousewheelOptionsDialog* parent)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+                   _("Reset Scrolling"),
+                   _("Reset scroll settings to the defaults recommended for a standard single "
+                     "wheel mouse")),
      touchpad_button_(this,
                       std::string(),
                       0,
@@ -361,17 +350,35 @@ TouchpadBox::TouchpadBox(MousewheelOptionsDialog* parent)
                       0,
                       0,
                       UI::ButtonStyle::kFsMenuSecondary,
-                      _("Set Recommended Map Settings for Touchpad"),
-                      _("Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended default settings if "
-                        "you want to use the scrolling capability of your touchpad or other "
-                        "device that can scroll in both the vertical and horizontal directions.")) {
+                      _("Set for Touchpad"),
+                      _("Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended default settings for "
+                        "a touchpad or other pointing device that can scroll horizontally as well "
+                        "as vertically.")),
+     apply_button_(this,
+                   std::string(),
+                   0,
+                   0,
+                   0,
+                   0,
+                   UI::ButtonStyle::kFsMenuSecondary,
+                   _("Apply Scrolling"),
+                   _("Apply scroll settings")) {
+	add_inf_space();
+	add(&reset_button_, Resizing::kAlign, UI::Align::kCenter);
 	add_inf_space();
 	add(&touchpad_button_, Resizing::kAlign, UI::Align::kCenter);
 	add_inf_space();
+	add(&apply_button_, Resizing::kAlign, UI::Align::kCenter);
+	add_inf_space();
 
+	reset_button_.sigclicked.connect([parent]() { parent->reset(); });
 	touchpad_button_.sigclicked.connect([parent]() { parent->set_touchpad(); });
+	apply_button_.sigclicked.connect([parent]() { parent->apply_settings(); });
 }
 
+/**********************************************************/
+
+// The main scrolling options dialog box
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      settings_(),
@@ -423,9 +430,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
-     touchpad_box_(this),
      button_box_(this) {
-	add(&touchpad_box_);
 	add(&zoom_box_);
 	add(&mapscroll_box_);
 	add_space(kSmallDividerSpace);
@@ -440,6 +445,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&button_box_);
 }
 
+// Functions for handling settings_
 void MousewheelOptionsDialog::update_settings() {
 	settings_.read();
 	zoom_box_.update_sel();
@@ -497,6 +503,8 @@ void MousewheelOptionsDialog::set_touchpad() {
                             SD::kVertical :
                             SD::kAny;
 	zoom_box_.update_sel();
+	apply_settings();
+	update_settings();
 }
 
 // Set sizes for layouting
@@ -516,8 +524,8 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
-		touchpad_box_.set_size(w_hbox, kButtonSize);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
 }
+
 }  // namespace FsMenu
