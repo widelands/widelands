@@ -29,7 +29,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _"Wilderness keepers ensure fresh game for hunting and fishing. Animals are only released near trees uninhabited by sentries.",
+      text = _"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game is only released near trees uninhabited by sentries.",
       seconds = 4
    },
    {
@@ -37,7 +37,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and lashing canoes together to form ships.",
+      text = _"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, and lashing canoes together to form ships.",
       seconds = 4
    },   {
       text = _"Jungle masters learn their skills by working as jungle preservers before working in gardening centres or rare tree plantations.",

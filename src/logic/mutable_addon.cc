@@ -198,6 +198,26 @@ bool MutableAddOn::write_to_disk() {
 
 MapsAddon::MapsAddon(const AddOnInfo& a) : MutableAddOn(a) {
 	recursively_initialize_tree_from_disk(directory_, tree_);
+	if (tree_.subdirectories.empty() && tree_.maps.empty()) {
+		tree_.subdirectories.emplace(
+		   a.internal_name.substr(0, a.internal_name.size() - kAddOnExtension.size()),
+		   DirectoryTree());
+	}
+
+	Profile profile;
+	std::string profile_path = directory_;
+	profile_path += FileSystem::file_separator();
+	profile_path += "dirnames";
+	profile.read(profile_path.c_str());
+	if (Section* s = profile.get_section("global")) {
+		for (;;) {
+			const Section::Value* v = s->get_next_val();
+			if (v == nullptr) {
+				break;
+			}
+			dirnames_[v->get_name()] = v->get_untranslated_string();
+		}
+	}
 }
 
 std::string MapsAddon::parse_requirements() {
@@ -241,6 +261,30 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 			}
 		}
 	}
+}
+
+std::map<std::string, unsigned> MapsAddon::count_all_dirnames(const DirectoryTree* start) const {
+	if (start == nullptr) {
+		return count_all_dirnames(&tree_);
+	}
+
+	std::map<std::string, unsigned> result;
+	auto increment = [&result](const std::string& s, unsigned delta) {
+		auto it = result.find(s);
+		if (it == result.end()) {
+			result[s] = delta;
+		} else {
+			it->second += delta;
+		}
+	};
+
+	for (const auto& pair : start->subdirectories) {
+		increment(pair.first, 1);
+		for (const auto& subdir : count_all_dirnames(&pair.second)) {
+			increment(subdir.first, subdir.second);
+		}
+	}
+	return result;
 }
 
 size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
@@ -305,27 +349,17 @@ bool MapsAddon::write_to_disk() {
 	do_recursively_create_filesystem_structure(directory_, tree_, nullptr, false);
 
 	// Create dirnames profile
-	Profile old_dirnames, new_dirnames;
-	if (!backup_path_.empty()) {
-		std::string path = backup_path_;
-		path += FileSystem::file_separator();
-		path += "dirnames";
-		old_dirnames.read(path.c_str());
-	}
-	Section* old_section = old_dirnames.get_section("global");
-	Section& new_section = new_dirnames.pull_section("global");
+	Profile dirnames;
+	Section& s = dirnames.pull_section("global");
 	for (const std::string& dir : all_dirnames) {
-		if (old_section && old_section->has_val(dir.c_str())) {
-			new_section.set_translated_string(
-			   dir.c_str(), old_section->get_safe_untranslated_string(dir.c_str()));
-		} else {
-			new_section.set_translated_string(dir.c_str(), dir);
-		}
+		const auto it = dirnames_.find(dir);
+		s.set_translated_string(
+		   dir.c_str(), (it != dirnames_.end() && !it->second.empty()) ? it->second : dir);
 	}
 	std::string path = directory_;
 	path += FileSystem::file_separator();
 	path += "dirnames";
-	new_dirnames.write(path.c_str());
+	dirnames.write(path.c_str());
 
 	cleanup_temp_dir();
 

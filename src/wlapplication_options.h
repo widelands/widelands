@@ -221,6 +221,7 @@ bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
 SDL_Keysym get_shortcut(KeyboardShortcut);
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
 void normalize_numpad(SDL_Keysym&);
+uint16_t normalize_keymod(uint16_t keymod);
 bool matches_keymod(uint16_t, uint16_t);
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
@@ -228,6 +229,10 @@ std::string matching_fastplace_shortcut(SDL_Keysym);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
 KeyboardShortcut shortcut_from_string(const std::string&);
+
+// Return value will either be an empty string or have a trailing "+"
+std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
+
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 void set_fastplace_shortcut(KeyboardShortcut, const std::string& building);
@@ -253,6 +258,7 @@ ChangeType get_keyboard_change(SDL_Keysym, bool enable_big_step = false);
  * Sets the directory where to read/write kConfigFile.
  */
 void set_config_directory(const std::string& userconfigdir);
+const std::string& get_config_file();
 
 /*
  * Reads the configuration from kConfigFile.

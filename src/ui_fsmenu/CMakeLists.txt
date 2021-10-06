@@ -50,6 +50,8 @@ wl_library(ui_fsmenu
     main.h
     menu.h
     menu.cc
+    mousewheel_options.cc
+    mousewheel_options.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
     netsetup_lan.cc
