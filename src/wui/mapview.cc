@@ -30,6 +30,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -578,20 +579,33 @@ void MapView::think() {
 	}
 }
 
-bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
-	if (which != 0) {
-		return false;
-	}
-	if ((get_config_bool("ctrl_zoom", false)) && !(SDL_GetModState() & KMOD_CTRL)) {
-		return false;
-	}
-	if (is_animating()) {
+bool MapView::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	Vector2i change_2d =
+	   get_mousewheel_change_2D(MousewheelHandlerConfigID::kMapScroll, x, y, modstate);
+	if (change_2d != Vector2i::zero()) {
+		if (is_animating()) {
+			return true;
+		}
+		const uint16_t scroll_distance_y = g_gr->get_yres() / 20;
+		const uint16_t scroll_distance_x = g_gr->get_xres() / 20;
+		pan_by(Vector2i(change_2d.x * scroll_distance_x, change_2d.y * scroll_distance_y),
+		       Transition::Jump);
 		return true;
 	}
-	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, y));
-	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
-	return true;
+
+	int32_t zoom_step = get_mousewheel_change(MousewheelHandlerConfigID::kZoom, x, y, modstate);
+	if (zoom_step) {
+		if (is_animating()) {
+			return true;
+		}
+		static constexpr float kPercentPerMouseWheelTick = 0.02f;
+		float zoom =
+		   view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, zoom_step));
+		zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
+		return true;
+	}
+
+	return false;
 }
 
 void MapView::zoom_around(float new_zoom,
