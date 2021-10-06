@@ -149,6 +149,8 @@ public:
 
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
+	void enable_textinput();
+	void disable_textinput();
 
 	/// Expand display button to make enough room for each entry's text. Call this before adding any
 	/// entries.
@@ -198,6 +200,10 @@ protected:
 	std::vector<Recti> focus_overlay_rects() override;
 
 	std::string current_filter_;
+
+	/// needed for filter workaround (handle_key/handle_textinput with space key)
+	bool ignore_space_;
+	bool was_open_already_;
 
 private:
 	static void layout_if_alive(int);
@@ -291,7 +297,6 @@ public:
 	                  type,
 	                  style,
 	                  button_style) {
-		set_handle_textinput();
 	}
 	~Dropdown() override {
 		filtered_entries.clear();
@@ -319,17 +324,10 @@ public:
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
-		if (!is_expanded()) {
-			if (input_text == " ") {
-				// open the DD if space was pressed and do NOT add space to the filter
-				set_list_visibility(true);
-				return true;
-			} else {
-				// only allow filtering when dropdown is open
-				return BaseDropdown::handle_textinput(input_text);
-			}
+		if (ignore_space_ && !input_text.empty() && input_text.front() == ' ') {
+			ignore_space_ = false;
+			return true;
 		}
-
 		update_filter(input_text);
 		apply_filter();
 		return true;

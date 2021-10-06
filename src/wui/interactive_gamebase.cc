@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
@@ -483,6 +484,19 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	return false;
+}
+
+bool InteractiveGameBase::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kGameSpeed, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if (change < 0) {
+		decrease_gamespeed(-kSpeedSlow * change);
+	} else {
+		increase_gamespeed(kSpeedSlow * change);
+	}
+	return true;
 }
 
 /// \return a pointer to the running \ref Game instance.

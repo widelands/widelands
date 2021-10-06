@@ -51,11 +51,13 @@ public:
 	           const size_t& index);
 
 	void update_edit_enabled();
+	void layout() override;
 
 private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const size_t& index_;
+	bool layouting_;
 	UI::MultilineTextarea text_;
 	UI::Box buttons_;
 	UI::Button edit_, delete_;
@@ -121,7 +123,10 @@ private:
 	int32_t current_screenshot_, nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
+	/** How the user voted the current add-on (1-10; 0 for not voted; -1 for unknown). */
 	int current_vote_;
+
+	void update_current_vote_on_demand();
 
 	UI::Box main_box_;
 	UI::TabPanel tabs_;

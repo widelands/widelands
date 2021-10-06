@@ -25,10 +25,17 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
 namespace AddOnsUI {
+
+/** Check whether the filename is valid. Returns the reason why it's invalid, or "" if valid. */
+std::string check_addon_filename_validity(const std::string&);
+/** Turn a filename into a filename that may be used in an add-on. */
+void make_valid_addon_filename(std::string&,
+                               const std::map<std::string, std::string>& names_already_in_use);
 
 class AddOnsPackagerBox : public UI::Box {
 public:
@@ -64,7 +71,7 @@ protected:
 private:
 	enum class ModifyAction { kAddMap, kAddDir, kDeleteMapOrDir };
 
-	void rebuild_dirstruct(AddOns::MapsAddon*, const std::vector<std::string>& select = {});
+	void rebuild_dirstruct(AddOns::MapsAddon*, const std::vector<std::string>& select);
 	void do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree* tree,
 	                                      const unsigned level,
 	                                      const std::string& path,
@@ -80,9 +87,11 @@ private:
 	std::vector<MainMenu::MapEntry> maps_list_;
 	AddOns::AddOnCategory last_category_;
 
-	UI::Box box_maps_list_, box_buttonsbox_;
+	UI::Box box_maps_list_, box_buttonsbox_, box_dirstruct_displayname_;
 	UI::Button map_add_, map_add_dir_, map_delete_;
 	UI::Listselect<std::string> dirstruct_, my_maps_;
+	UI::EditBox dirstruct_displayname_;
+	UI::MultilineTextarea displayname_duplicate_;
 	AddOns::MapsAddon* selected_;  // Not owned
 };
 

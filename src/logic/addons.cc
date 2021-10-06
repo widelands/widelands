@@ -137,6 +137,18 @@ bool is_newer_version(const AddOnVersion& a, const AddOnVersion& b) {
 	return s_a < s_b;
 }
 
+bool order_matters(AddOnCategory base, AddOnCategory dependency) {
+	switch (base) {
+	case AddOnCategory::kScript:
+		return dependency == AddOnCategory::kScript;
+	case AddOnCategory::kWorld:
+	case AddOnCategory::kTribes:
+		return dependency == AddOnCategory::kWorld || dependency == AddOnCategory::kTribes;
+	default:
+		return false;
+	}
+}
+
 static AddOnConflict check_requirements_conflicts(const AddOnRequirements& required_addons) {
 	std::set<std::string> addons_missing;
 	std::map<std::string, std::pair<AddOnVersion, AddOnVersion>> addons_wrong_version;
