@@ -123,7 +123,10 @@ private:
 	int32_t current_screenshot_, nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
+	/** How the user voted the current add-on (1-10; 0 for not voted; -1 for unknown). */
 	int current_vote_;
+
+	void update_current_vote_on_demand();
 
 	UI::Box main_box_;
 	UI::TabPanel tabs_;
