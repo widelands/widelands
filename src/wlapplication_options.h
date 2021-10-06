@@ -252,6 +252,7 @@ SDL_Keysym get_default_shortcut(KeyboardShortcut);
 
 /** Replace numpad keysyms with their non-numpad equivalents. */
 void normalize_numpad(SDL_Keysym&);
+uint16_t normalize_keymod(uint16_t keymod);
 
 /** Check if the two modifier bitsets match each other. */
 bool matches_keymod(uint16_t, uint16_t);
@@ -273,7 +274,12 @@ std::string to_string(KeyboardShortcut);
 /** Get the shortcut ID from an internal shortcut name. Throws an exception for invalid names. */
 KeyboardShortcut shortcut_from_string(const std::string&);
 
-/** Generate a human-readable description of a keyboard shortcut. */
+/**
+ * Generate a human-readable description of a keyboard shortcut.
+ * Return value will either be an empty string or have a trailing "+".
+ */
+std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
+
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 
@@ -297,6 +303,7 @@ ChangeType get_keyboard_change(SDL_Keysym, bool enable_big_step = false);
  * Sets the directory where to read/write kConfigFile.
  */
 void set_config_directory(const std::string& userconfigdir);
+const std::string& get_config_file();
 
 /*
  * Reads the configuration from kConfigFile.

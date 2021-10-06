@@ -77,6 +77,7 @@ public:
 	void set_unit_width(uint32_t width);
 
 	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 private:
 	void layout() override;

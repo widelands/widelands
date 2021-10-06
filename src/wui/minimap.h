@@ -54,6 +54,8 @@ public:
 	}
 	void check_boundaries();
 
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kMinimap;
 	}
@@ -119,6 +121,7 @@ private:
 	uint32_t but_w() const;
 	uint32_t but_h() const;
 
+	InteractiveBase& ibase_;
 	View view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;

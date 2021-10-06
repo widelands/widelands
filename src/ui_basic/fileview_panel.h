@@ -42,6 +42,11 @@ public:
 	/// 'lua_script' must return a table that contains 1 string.
 	void add_tab(const std::string& title, const std::string& lua_script);
 
+	void add_tab_without_script(const std::string& name,
+	                            const std::string& title,
+	                            Panel* panel,
+	                            const std::string& tooltip = std::string());
+
 private:
 	void update_tab_size(size_t index);
 	void layout() override;
