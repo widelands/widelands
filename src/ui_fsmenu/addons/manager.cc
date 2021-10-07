@@ -960,7 +960,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		                                         "the server!<br>Error Message: %s")) %
 		                         e.what())
 		                           .str();
-		AddOns::AddOnInfo* i = new AddOns::AddOnInfo();
+		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
 		i->unlocalized_descname = title;
 		i->unlocalized_description = err;
 		i->unlocalized_author = bug;
@@ -971,7 +971,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		i->upload_timestamp = std::time(nullptr);
 		i->icon = g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon);
 		i->sync_safe = true;  // suppress useless warning
-		remotes_ = {std::shared_ptr<AddOns::AddOnInfo>(i)};
+		remotes_ = {i};
 	}
 
 	progress.step((boost::format(step_message) % 100).str());

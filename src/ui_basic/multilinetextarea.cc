@@ -179,8 +179,8 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	                           rendered_text_->height() - scrollbar_.get_scrollpos()));
 }
 
-bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return scrollbar_.is_enabled() && scrollbar_.handle_mousewheel(which, x, y);
+bool MultilineTextarea::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	return scrollbar_.is_enabled() && scrollbar_.handle_mousewheel(x, y, modstate);
 }
 bool MultilineTextarea::handle_key(bool down, SDL_Keysym code) {
 	return scrollbar_.handle_key(down, code);
