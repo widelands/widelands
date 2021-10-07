@@ -62,9 +62,6 @@ print_help () {
     echo "                      Debug builds are created with AddressSanitizer by"
     echo "                      default."
     echo " "
-    echo "     Note: The ASan setting is overridden by setting the build type, so these"
-    echo "           options should be given after the build type option, when needed."
-    echo " "
     echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
     echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
     echo " "
@@ -126,7 +123,8 @@ BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_FLTO="yes"
-USE_ASAN="ON"
+USE_ASAN="default"
+USE_ASAN_DEFAULT="ON"
 COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
@@ -218,12 +216,16 @@ do
     ;;
     -r|--release)
       BUILD_TYPE="Release"
-      USE_ASAN="OFF"
+      if [ "${USE_ASAN}" = "default" ]; then
+        USE_ASAN="OFF"
+      fi
     shift
     ;;
     -d|--debug)
       BUILD_TYPE="Debug"
-      USE_ASAN="ON"
+      if [ "${USE_ASAN}" = "default" ]; then
+        USE_ASAN="ON"
+      fi
     shift
     ;;
     -t|--no-translations)
@@ -300,6 +302,10 @@ do
     ;;
   esac
 done
+
+if [ "${USE_ASAN}" = "default" ]; then
+  USE_ASAN="${USE_ASAN_DEFAULT}"
+fi
 
 ## Get command and options to use in update.sh
 COMMANDLINE="$0"
