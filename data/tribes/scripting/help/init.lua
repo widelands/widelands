@@ -46,6 +46,39 @@ function immovable_entries(tribename)
    return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", tribe.immovables)
 end
 
+-- Returns help entries for all the immovables of the world that all tribes can use
+function world_immovable_entries(tribename)
+   --local tribe = wl.Game():get_tribe_description(tribename)
+   local all_immovables = wl.Descriptions().immovable_descriptions
+   local tribes = {
+      "amazons",
+      "atlanteans",
+      "barbarians",
+      "empire",
+      "frisians", }
+   local tribes_immovables = {}
+   local world_immovables = {}
+   for i, tribename in ipairs(tribes) do
+      local tribe = wl.Game():get_tribe_description(tribename)
+      for i, t_immo in ipairs(tribe.immovables) do
+         table.insert(tribes_immovables, t_immo)
+      end
+   end
+   for i, immo in ipairs(all_immovables) do
+      local world_immo = true
+      for j, tribe_immo in ipairs(tribes_immovables) do
+         if tribe_immo.name == immo.name then
+            world_immo = false
+            break
+         end
+      end
+      if world_immo then
+         table.insert(world_immovables, immo)
+      end
+   end
+   return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", world_immovables)
+end
+
 -- Main function
 return {
    func = function(tribename, game_type)
@@ -101,11 +134,18 @@ return {
                entries = building_entries(tribename)
             },
             {
-               name = "immovables",
+               name = "immovables_tribe",
                -- TRANSLATORS Tab title: immovable help
                title = _"Immovables",
                icon = "images/wui/encyclopedia_immovables.png",
                entries = immovable_entries(tribename)
+            },
+            {
+               name = "immovables_world",
+               -- TRANSLATORS Tab title: world immovable help
+               title = _"World Immovables",
+               icon = "images/wui/encyclopedia_world.png",
+               entries = world_immovable_entries(tribename)
             },
          }
       }

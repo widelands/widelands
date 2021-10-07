@@ -30,11 +30,15 @@ include "tribes/scripting/help/format_help.lua"
 function immovable_help_string(tribe, immovable_description)
    local helptexts = immovable_description:helptexts(tribe.name)
    local result = ""
-   if helptexts["purpose"] ~= nil then
+   local purpose = helptexts["purpose"]
+   local image = immovable_description.icon_name
+   if purpose ~= nil then
       result = h2(_"Purpose") ..
-         li_object(immovable_description.name, helptexts["purpose"])
-   else
+         li_object(immovable_description.name, purpose)
+   elseif image ~= "" then
       result = img(immovable_description.icon_name)
+   else
+      result = result
    end
 
    -- Build cost
@@ -68,7 +72,13 @@ function immovable_help_string(tribe, immovable_description)
             target_description = wl.Game():get_ship_description(target)
          end
          if (target_description ~= nil) then
-            result = result .. li_image(target_description.icon_name, target_description.descname)
+            local icon = target_description.icon_name
+            if (icon ~= "") then
+               result = result ..
+                  li_image(icon, target_description.descname)
+            else
+               result = result .. li(target_description.descname)
+            end
          end
       end
    end
