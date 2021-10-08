@@ -120,6 +120,7 @@ public:
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	void draw(RenderTarget&) override;
 
 	void select_tool(EditorTool&, EditorTool::ToolIndex);
