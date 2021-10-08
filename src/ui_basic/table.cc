@@ -482,8 +482,8 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return scrollbar_->handle_mousewheel(which, x, y);
+bool Table<void*>::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	return scrollbar_->handle_mousewheel(x, y, modstate);
 }
 
 /**
