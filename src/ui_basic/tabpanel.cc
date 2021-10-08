@@ -26,6 +26,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_mousewheel_options.h"
 
 namespace UI {
 
@@ -155,20 +156,17 @@ std::vector<Recti> TabPanel::focus_overlay_rects() {
 	return {Recti(x, y, w, f), Recti(x, y + f, f, h - f), Recti(x + w - f, y + f, f, h - f)};
 }
 
-bool TabPanel::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool TabPanel::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	Vector2i mousepos = get_mouse_position();
 	size_t id = find_tab(mousepos.x, mousepos.y);
-	if ((id != kNotFound) && !SDL_GetModState()) {
-		if (y != 0) {
-			activate(std::max<int>(0, std::min<int>(active() - y, tabs_.size() - 1)));
-			return true;
-		}
-		if (x != 0) {
-			activate(std::max<int>(0, std::min<int>(active() - x, tabs_.size() - 1)));
+	if (id != kNotFound) {
+		int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kTabBar, x, y, modstate);
+		if (change != 0) {
+			activate(std::max<int>(0, std::min<int>(active() + change, tabs_.size() - 1)));
 			return true;
 		}
 	}
-	return Panel::handle_mousewheel(which, x, y);
+	return Panel::handle_mousewheel(x, y, modstate);
 }
 
 bool TabPanel::handle_key(bool down, SDL_Keysym code) {

@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_mousewheel_options.h"
 
 namespace UI {
 
@@ -409,8 +410,14 @@ void Scrollbar::think() {
 	}
 }
 
-bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
-	if (y < 0) {
+bool Scrollbar::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	// Only vertical scrollbars are used currently
+	int32_t change =
+	   get_mousewheel_change(MousewheelHandlerConfigID::kScrollbarVertical, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if (change > 0) {
 		action(Area::Plus);
 	} else {
 		action(Area::Minus);

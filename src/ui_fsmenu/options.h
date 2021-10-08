@@ -70,7 +70,6 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
-		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
@@ -123,6 +122,8 @@ private:
 
 	void add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt);
 
+	// Saves the options and closes the window
+	void clicked_ok();
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 	// Restores old options when canceled
@@ -190,7 +191,6 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
-	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;

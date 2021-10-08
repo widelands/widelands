@@ -29,6 +29,49 @@
 #include "ui_basic/icon.h"
 #include "ui_basic/slider.h"
 
+namespace UI {
+
+/**
+ * \brief This class delegates handling of the wheel in the priority slider to the parent.
+ */
+struct PrioritySlider : public HorizontalSlider {
+	PrioritySlider(Panel* const parent,
+	               const int32_t x,
+	               const int32_t y,
+	               const uint32_t w,
+	               const uint32_t h,
+	               const int32_t min_value,
+	               const int32_t max_value,
+	               const int32_t value,
+	               UI::SliderStyle style,
+	               const std::string& tooltip_text = std::string(),
+	               const uint32_t cursor_size = 20,
+	               const bool enabled = true)
+	   : HorizontalSlider(parent,
+	                      x,
+	                      y,
+	                      w,
+	                      h,
+	                      min_value,
+	                      max_value,
+	                      value,
+	                      style,
+	                      tooltip_text,
+	                      cursor_size,
+	                      enabled) {
+	}
+
+public:
+	bool handle_mousewheel(int32_t, int32_t, uint16_t) override {
+		return false;
+	}
+	void change_value_by(int32_t change) {
+		set_value(get_value() + change);
+	}
+};
+
+}  // namespace UI
+
 class InteractiveBase;
 
 // Make the given box scrolling and set its scrollbar style and max size.
@@ -60,6 +103,7 @@ protected:
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 private:
 	// Common constructor
@@ -91,6 +135,7 @@ private:
 	void recurse(const std::function<void(InputQueueDisplay&)>&);
 
 	void clicked_desired_fill(int8_t delta);
+	void change_desired_fill(int8_t delta);
 	void set_desired_fill(unsigned fill);
 	void clicked_real_fill(int8_t delta);
 	void set_priority(const Widelands::WarePriority&);
@@ -101,7 +146,7 @@ private:
 	UI::Box vbox_, hbox_;
 	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_,
 	   b_increase_real_fill_, collapse_;
-	UI::HorizontalSlider priority_;
+	UI::PrioritySlider priority_;
 	UI::Panel spacer_;
 	const Widelands::WarePriority* slider_was_moved_;
 
