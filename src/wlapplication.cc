@@ -81,6 +81,7 @@
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/options.h"
 #include "wlapplication_messages.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -953,7 +954,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			break;
 		case SDL_MOUSEWHEEL:
 			if (cb && cb->mouse_wheel) {
-				cb->mouse_wheel(ev.wheel.which, ev.wheel.x, ev.wheel.y);
+				cb->mouse_wheel(ev.wheel.x, ev.wheel.y, SDL_GetModState());
 			}
 			break;
 		case SDL_MOUSEMOTION:
@@ -1124,6 +1125,9 @@ bool WLApplication::init_settings() {
 
 	// Keyboard shortcuts
 	init_shortcuts();
+
+	// Mousewheel options
+	update_mousewheel_settings();
 
 	int64_t last_start = get_config_int("last_start", 0);
 	int64_t now = time(nullptr);
