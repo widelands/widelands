@@ -240,21 +240,39 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
 			const bool fastplace = is_fastplace(key);
+			auto get_building_descr = [this](const std::string& bld) {
+				return game_.get() == nullptr ? nullptr :
+					game_->descriptions().get_building_descr(game_->descriptions().building_index(bld));
+			};
+
 			WLApplication* const app = WLApplication::get();
 			app->enable_handle_key(false);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
 				if (set_shortcut(key, c.key, &conflict, fastplace ? &c.fastplace : nullptr,
-				                 [this](const std::string& name) {
-					                 return game_->descriptions()
-					                    .get_building_descr(
-					                       game_->descriptions().safe_building_index(name))
-					                    ->get_owning_tribe();
+				                 [get_building_descr](const std::string& name) {
+					                 const Widelands::BuildingDescr* d = get_building_descr(name);
+					                 return d == nullptr ? "" : get_building_descr(name)->get_owning_tribe();
 				                 })) {
 					b->set_title(generate_title(key));
 					break;
 				} else {
+					const std::string& conflict_fp = get_fastplace_shortcut(conflict);
+					std::string conflict_name = to_string(conflict);
+					if (!conflict_fp.empty()) {
+						const Widelands::BuildingDescr* d = get_building_descr(conflict_fp);
+						if (d == nullptr) {
+							conflict_name = (boost::format(_("%1$s (%2$s)")) % conflict_name % conflict_fp).str();
+						} else {
+							conflict_name = (boost::format(
+								/** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
+								_("%1$s ([%2$s] %3$s)"))
+									% conflict_name
+									% game_->descriptions().get_tribe_descr(game_->descriptions().safe_tribe_index(d->get_owning_tribe()))->descname()
+									% d->descname()).str();
+						}
+					}
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
 					   as_richtext_paragraph(
@@ -262,7 +280,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					          _("The shortcut you selected (‘%1$s’) is already in use for the "
 					            "following action: ‘%2$s’. Please select a different shortcut "
 					            "or change the conflicting shortcut first.")) %
-					       shortcut_string_for(c.key, true) % to_string(conflict))
+					       shortcut_string_for(c.key, true) % conflict_name)
 					         .str(),
 					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 					   UI::WLMessageBox::MBoxType::kOk);

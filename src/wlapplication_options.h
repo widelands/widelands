@@ -236,6 +236,7 @@ inline bool is_fastplace(const KeyboardShortcut id) {
  *                           Must be \c nullptr for non-fastplace shortcuts.
  * @param building_to_tribename A lookup function that returns the internal
  *                              tribe name for a given building name.
+ *                              \c "" means the tribe is not known.
  * @return The shortcut was changed successfully. If \c false, #conflict will contain the reason.
  */
 bool set_shortcut(KeyboardShortcut id,

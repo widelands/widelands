@@ -680,8 +680,9 @@ bool set_shortcut(KeyboardShortcut id,
 						// It's a disabled fastplace shortcut
 						continue;
 					}
-					if (building_to_tribename(pair.second.fastplace_name) !=
-					    building_to_tribename(*fastplace_building)) {
+					const std::string t1 = building_to_tribename(pair.second.fastplace_name);
+					const std::string t2 = building_to_tribename(*fastplace_building);
+					if (!t1.empty() && !t2.empty() && t1 != t2) {
 						// Assigned to different tribes
 						continue;
 					}
