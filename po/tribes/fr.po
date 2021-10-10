@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-01 02:56+0000\n"
-"PO-Revision-Date: 2021-08-22 02:37+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-07 04:31+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -1302,7 +1302,6 @@ msgstr "Cuisinier de racines de Manioc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -2208,9 +2207,10 @@ msgstr "Plus de poisson"
 msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
-"fish in his work area. Remember that you can only regenerate your fish "
-"resources if there are some fish left to breed."
-msgstr "Le pisciculteur qui travaille dans cette maison ne peut trouver de poissons dans sa zone d’activité. Rappelez vous que vous ne pouvez régénérer de poissons que si il en reste à reproduire."
+"water where he can breed fish in his work area. Remember that you can only "
+"regenerate your fish resources if there ever were some fish in the vicinity "
+"in the first place."
+msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
