@@ -44,6 +44,7 @@ end
 
 -- Transports wares to flag, warehouse or productionsite.
 function transport_wares(player, point, ware, amount, alert, image)
+   push_textdomain("map_along_the_river.wmf")
    local count = amount
    while count > 0 do
       sleep(499)
@@ -63,6 +64,7 @@ function transport_wares(player, point, ware, amount, alert, image)
          end
       end
    end
+   pop_textdomain()
 end
 
 -- =======================================================================

@@ -194,6 +194,7 @@ function mission_thread()
 
    -- Wait for shovels in warehouse and hand them (done in "wares_collected_at_field" function)out.
    run(function()
+      push_textdomain("map_along_the_river.wmf")
       scroll_to_field(warehouse)
       campaign_message_box(briefing_bring_shovels_1)
       o_bring_shovels_1 = add_campaign_objective(obj_bring_shovels_1)
@@ -211,6 +212,7 @@ function mission_thread()
       -- After the work is done the shovels are returned to the Wh.
       transport_wares(p1, warehouse, "shovel", 8, true, "tribes/buildings/warehouses/barbarians/warehouse/menu.png")
       o_bring_shovels_2.done = true
+      pop_textdomain()
    end)
 
    while not obj_done(o_bring_shovels_2) do sleep(2029) end
