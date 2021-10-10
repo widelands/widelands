@@ -242,7 +242,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			const bool fastplace = is_fastplace(key);
 			auto get_building_descr = [this](const std::string& bld) {
 				return game_.get() == nullptr ? nullptr :
-					game_->descriptions().get_building_descr(game_->descriptions().building_index(bld));
+                                            game_->descriptions().get_building_descr(
+				                                   game_->descriptions().building_index(bld));
 			};
 
 			WLApplication* const app = WLApplication::get();
@@ -253,7 +254,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 				if (set_shortcut(key, c.key, &conflict, fastplace ? &c.fastplace : nullptr,
 				                 [get_building_descr](const std::string& name) {
 					                 const Widelands::BuildingDescr* d = get_building_descr(name);
-					                 return d == nullptr ? "" : get_building_descr(name)->get_owning_tribe();
+					                 return d == nullptr ? "" :
+                                                      get_building_descr(name)->get_owning_tribe();
 				                 })) {
 					b->set_title(generate_title(key));
 					break;
@@ -263,14 +265,20 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					if (!conflict_fp.empty()) {
 						const Widelands::BuildingDescr* d = get_building_descr(conflict_fp);
 						if (d == nullptr) {
-							conflict_name = (boost::format(_("%1$s (%2$s)")) % conflict_name % conflict_fp).str();
+							conflict_name =
+							   (boost::format(_("%1$s (%2$s)")) % conflict_name % conflict_fp).str();
 						} else {
-							conflict_name = (boost::format(
-								/** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
-								_("%1$s ([%2$s] %3$s)"))
-									% conflict_name
-									% game_->descriptions().get_tribe_descr(game_->descriptions().safe_tribe_index(d->get_owning_tribe()))->descname()
-									% d->descname()).str();
+							conflict_name =
+							   (boost::format(
+							       /** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
+							       _("%1$s ([%2$s] %3$s)")) %
+							    conflict_name %
+							    game_->descriptions()
+							       .get_tribe_descr(
+							          game_->descriptions().safe_tribe_index(d->get_owning_tribe()))
+							       ->descname() %
+							    d->descname())
+							      .str();
 						}
 					}
 					UI::WLMessageBox warning(
