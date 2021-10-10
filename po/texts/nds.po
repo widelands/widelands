@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-28 02:36+0000\n"
-"PO-Revision-Date: 2021-08-28 07:15+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-07 08:02+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -553,9 +553,9 @@ msgstr "Um na Gold to schören, bruukt man eene stadige Versörgung mit Water, w
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
-"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
-"only released near trees uninhabited by sentries."
-msgstr "Fauna-Wahrdersken passen up, dat 't alltieden Deerten tum Jagen un Fisken gifft. Deerten worden blot bi Bomen freeilaten, waar keene Postjes stationeert sünd."
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "Fauna-Wahrdersken passen up, dat 't alltieden Deerten tum Jagen un Fisse tum Fisken gifft. Deerten worden blot bi Bomen freeilaten, waar keene Postjes stationeert sünd."
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
@@ -565,8 +565,8 @@ msgstr "De Bestand an Edelholten word vun Edelholt-Plantereen överwacht. De Mei
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
-"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
-"lashing canoes together to form ships."
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
 msgstr "Taue bruukt man vun Nood, um stevige Husen to bauen, faste Kluften to naihen un Boten to Schippen tosamentobinnen."
 
 #: ../../data/txts/tips/amazons.lua:43
