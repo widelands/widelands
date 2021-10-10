@@ -782,11 +782,13 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-		const Widelands::DescriptionIndex fastplace =
-		   egbase().descriptions().building_index(matching_fastplace_shortcut(code));
-		if (player().tribe().has_building(fastplace)) {
-			game().send_player_build(player_number(), get_sel_pos().node, fastplace);
-			set_flag_to_connect(game().map().br_n(get_sel_pos().node));
+		for (const std::string& fp : matching_fastplace_shortcut(code)) {
+			const Widelands::DescriptionIndex fastplace = egbase().descriptions().building_index(fp);
+			if (player().tribe().has_building(fastplace)) {
+				game().send_player_build(player_number(), get_sel_pos().node, fastplace);
+				set_flag_to_connect(game().map().br_n(get_sel_pos().node));
+				break;
+			}
 		}
 	}
 
