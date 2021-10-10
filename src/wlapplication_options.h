@@ -252,6 +252,8 @@ SDL_Keysym get_default_shortcut(KeyboardShortcut);
 
 /** Replace numpad keysyms with their non-numpad equivalents. */
 void normalize_numpad(SDL_Keysym&);
+
+/** Filter out all modifiers we are not interested in. */
 uint16_t normalize_keymod(uint16_t keymod);
 
 /** Check if the two modifier bitsets match each other. */
